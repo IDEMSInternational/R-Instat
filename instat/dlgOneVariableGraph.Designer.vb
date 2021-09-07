@@ -104,6 +104,7 @@ Partial Class dlgOneVariableGraph
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
+        Me.ucrChkFlip.ForeColor = System.Drawing.SystemColors.ControlText
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
         '
@@ -138,7 +139,6 @@ Partial Class dlgOneVariableGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.cmdGraphOptions)
@@ -146,6 +146,7 @@ Partial Class dlgOneVariableGraph
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrReceiverOneVarGraph)
         Me.Controls.Add(Me.ucrSelectorOneVarGraph)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

@@ -275,6 +275,16 @@
     <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.sw-KE.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.sw-KE.resx</DependentUpon>
+    </Compile>
     <Compile Include="dlgCopySpecial.Designer.vb">
       <DependentUpon>dlgCopySpecial.vb</DependentUpon>
     </Compile>
@@ -285,6 +295,12 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDisplayTopN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.Designer.vb">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
@@ -2796,6 +2812,9 @@
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimsoft.resx">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>

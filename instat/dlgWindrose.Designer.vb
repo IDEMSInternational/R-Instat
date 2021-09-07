@@ -238,7 +238,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 413)
+        Me.ClientSize = New System.Drawing.Size(420, 406)
         Me.Controls.Add(Me.lblGraphCaption)
         Me.Controls.Add(Me.lblGraphSubtitle)
         Me.Controls.Add(Me.lblGraphTitle)

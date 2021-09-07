@@ -154,10 +154,12 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
+
     <value>287, 487</value>
+
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>104, 23</value>
   </data>
   <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -208,7 +210,7 @@
     <value>6</value>
   </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 49</value>
+    <value>124, 49</value>
   </data>
   <data name="ucrNudColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -283,7 +285,7 @@
     <value>11, 97</value>
   </data>
   <data name="ucrChkDisplayVariablesAsRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 20</value>
+    <value>227, 20</value>
   </data>
   <data name="ucrChkDisplayVariablesAsRows.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -322,7 +324,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 22</value>
+    <value>124, 23</value>
   </data>
   <data name="ucrNudSigFigs.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -343,10 +345,12 @@
     <value>5</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
+
     <value>114, 357</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 124</value>
+
   </data>
   <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -365,6 +369,78 @@
   </data>
   <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="&gt;&gt;rdoBoth.Name" xml:space="preserve">
+    <value>rdoBoth</value>
+  </data>
+  <data name="&gt;&gt;rdoBoth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBoth.Parent" xml:space="preserve">
+    <value>grpMargin</value>
+  </data>
+  <data name="&gt;&gt;rdoBoth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoSummary.Name" xml:space="preserve">
+    <value>rdoSummary</value>
+  </data>
+  <data name="&gt;&gt;rdoSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSummary.Parent" xml:space="preserve">
+    <value>grpMargin</value>
+  </data>
+  <data name="&gt;&gt;rdoSummary.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoOuter.Name" xml:space="preserve">
+    <value>rdoOuter</value>
+  </data>
+  <data name="&gt;&gt;rdoOuter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoOuter.Parent" xml:space="preserve">
+    <value>grpMargin</value>
+  </data>
+  <data name="&gt;&gt;rdoOuter.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMargin.Name" xml:space="preserve">
+    <value>ucrPnlMargin</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMargin.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMargin.Parent" xml:space="preserve">
+    <value>grpMargin</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMargin.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpMargin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 354</value>
+  </data>
+  <data name="grpMargin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 91</value>
+  </data>
+  <data name="grpMargin.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="grpMargin.Text" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="&gt;&gt;grpMargin.Name" xml:space="preserve">
+    <value>grpMargin</value>
+  </data>
+  <data name="&gt;&gt;grpMargin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpMargin.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpMargin.ZOrder" xml:space="preserve">
+    <value>17</value>
   </data>
   <data name="rdoBoth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -477,6 +553,7 @@
   <data name="&gt;&gt;ucrPnlMargin.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+
   <data name="grpMargin.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 354</value>
   </data>
@@ -501,6 +578,7 @@
   <data name="&gt;&gt;grpMargin.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+
   <data name="lblMarginName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -610,7 +688,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>313, 24</value>
   </data>
   <data name="ucrSaveTable.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -631,7 +709,7 @@
     <value>10, 279</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>271, 20</value>
   </data>
   <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -833,9 +911,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorSummaryTables.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
