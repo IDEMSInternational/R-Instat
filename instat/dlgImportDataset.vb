@@ -19,7 +19,7 @@ Public Class dlgImportDataset
     Private bFirstLoad As Boolean = True
     Public bFromLibrary As Boolean = False
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath & "\Library")
-    Private strFileExtension As String
+    Private strFileExtension As String = ""
     Private bCanImport As Boolean = False
     Private bReset As Boolean = True
     Public bStartOpenDialog As Boolean = True
@@ -31,7 +31,7 @@ Public Class dlgImportDataset
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
     Public strFileToOpenOn As String = ""
-    Private bDialogLoaded As Boolean
+    Private bDialogLoaded As Boolean = False
     Private iDataFrameCount As Integer
     Private bSupressCheckAllSheets As Boolean = False
     Private bSupressSheetChange As Boolean = False
@@ -530,7 +530,7 @@ Public Class dlgImportDataset
         strFilePathSystem = ""
         strFilePathR = ""
 
-        If strFileOrFolderPath <> "" Then
+        If Not String.IsNullOrEmpty(strFileOrFolderPath) Then
             If bFromLibrary Then
                 'store what was there temporarily first 
                 strFilePathSystemTemp = strFilePathSystem
