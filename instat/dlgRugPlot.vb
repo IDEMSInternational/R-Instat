@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgHeatMap
+Public Class dlgRugPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_TileFunction As New RFunction
     Private clsRaesFunction As New RFunction

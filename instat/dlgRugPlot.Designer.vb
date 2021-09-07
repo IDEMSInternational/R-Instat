@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgHeatMap
+Partial Class dlgRugPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgHeatMap
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHeatMap))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRugPlot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdHeatMapOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
@@ -123,7 +123,7 @@ Partial Class dlgHeatMap
         Me.ucrReceiverFill.strNcFilePath = ""
         Me.ucrReceiverFill.ucrSelector = Nothing
         '
-        'dlgHeatMap
+        'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -140,7 +140,7 @@ Partial Class dlgHeatMap
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgHeatMap"
+        Me.Name = "dlgRugPlot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
