@@ -207,31 +207,31 @@
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="cmdScatterPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdPointOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdScatterPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdPointOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 198</value>
   </data>
-  <data name="cmdScatterPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdPointOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 25</value>
   </data>
-  <data name="cmdScatterPlotOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdPointOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="cmdScatterPlotOptions.Text" xml:space="preserve">
+  <data name="cmdPointOptions.Text" xml:space="preserve">
     <value>Point Options</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Name" xml:space="preserve">
-    <value>cmdScatterPlotOptions</value>
+  <data name="&gt;&gt;cmdPointOptions.Name" xml:space="preserve">
+    <value>cmdPointOptions</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="lblVariable.AutoSize" type="System.Boolean, mscorlib">

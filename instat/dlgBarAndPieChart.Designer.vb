@@ -50,6 +50,11 @@ Partial Class dlgBarAndPieChart
         Me.lblXvariable = New System.Windows.Forms.Label()
         Me.rdoPie = New System.Windows.Forms.RadioButton()
         Me.rdoDonut = New System.Windows.Forms.RadioButton()
+        Me.lblLabelPosition = New System.Windows.Forms.Label()
+        Me.lblLabelColour = New System.Windows.Forms.Label()
+        Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
+        Me.ucrInputLabelColour = New instat.ucrInputComboBox()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrChkPolarCoordinates = New instat.ucrCheck()
         Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrChkBacktoback = New instat.ucrCheck()
@@ -62,6 +67,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputLabelSize = New instat.ucrInputComboBox()
+        Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -146,6 +153,38 @@ Partial Class dlgBarAndPieChart
         Me.rdoDonut.TabStop = True
         Me.rdoDonut.UseVisualStyleBackColor = True
         '
+        'lblLabelPosition
+        '
+        resources.ApplyResources(Me.lblLabelPosition, "lblLabelPosition")
+        Me.lblLabelPosition.Name = "lblLabelPosition"
+        '
+        'lblLabelColour
+        '
+        resources.ApplyResources(Me.lblLabelColour, "lblLabelColour")
+        Me.lblLabelColour.Name = "lblLabelColour"
+        '
+        'ucrInputLabelPosition
+        '
+        Me.ucrInputLabelPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLabelPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelPosition, "ucrInputLabelPosition")
+        Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
+        '
+        'ucrInputLabelColour
+        '
+        Me.ucrInputLabelColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelColour.GetSetSelectedIndex = -1
+        Me.ucrInputLabelColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelColour, "ucrInputLabelColour")
+        Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        '
         'ucrChkPolarCoordinates
         '
         Me.ucrChkPolarCoordinates.Checked = False
@@ -228,10 +267,30 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrInputLabelSize
+        '
+        Me.ucrInputLabelSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelSize.GetSetSelectedIndex = -1
+        Me.ucrInputLabelSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelSize, "ucrInputLabelSize")
+        Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
+        '
+        'lblLabelSize
+        '
+        resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
+        Me.lblLabelSize.Name = "lblLabelSize"
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblLabelSize)
+        Me.Controls.Add(Me.ucrInputLabelSize)
+        Me.Controls.Add(Me.lblLabelColour)
+        Me.Controls.Add(Me.lblLabelPosition)
+        Me.Controls.Add(Me.ucrInputLabelPosition)
+        Me.Controls.Add(Me.ucrInputLabelColour)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.rdoDonut)
         Me.Controls.Add(Me.rdoPie)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
@@ -288,4 +347,11 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrPnlPolar As UcrPanel
     Friend WithEvents rdoDonut As RadioButton
     Friend WithEvents rdoPie As RadioButton
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents lblLabelColour As Label
+    Friend WithEvents lblLabelPosition As Label
+    Friend WithEvents ucrInputLabelPosition As ucrInputComboBox
+    Friend WithEvents ucrInputLabelColour As ucrInputComboBox
+    Friend WithEvents lblLabelSize As Label
+    Friend WithEvents ucrInputLabelSize As ucrInputComboBox
 End Class
