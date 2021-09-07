@@ -137,4 +137,8 @@ Public Class dlgAddKey
     Private Sub AllControls_ControlContentsChanged() Handles ucrSaveKey.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrInputCheckInput_Load(sender As Object, e As EventArgs) Handles ucrInputCheckInput.Load
+
+    End Sub
 End Class
