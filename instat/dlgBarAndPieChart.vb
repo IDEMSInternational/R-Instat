@@ -534,7 +534,6 @@ Public Class dlgBarAndPieChart
             cmdBarChartOptions.Text = "Bar Chart Options"
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
         End If
-
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged
@@ -636,6 +635,18 @@ Public Class dlgBarAndPieChart
         Else
             clsGeomTextFunction.RemoveParameterByName("stat")
             clsLabelAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkAddLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlContentsChanged
+        If ucrChkAddLabels.Checked Then
+            ucrChkLollipop.Checked = False
+        End If
+    End Sub
+
+    Private Sub ucrChkLollipop_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLollipop.ControlContentsChanged
+        If ucrChkLollipop.Checked Then
+            ucrChkAddLabels.Checked = False
         End If
     End Sub
 
