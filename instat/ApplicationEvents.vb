@@ -24,7 +24,7 @@
 
             If e.CommandLine.Count > 0 Then
                 If Application.OpenForms.OfType(Of dlgImportDataset).Any Then
-                    dlgImportDataset.SetControlsFromFile(e.CommandLine(0).ToString)
+                    dlgImportDataset.SetDialogStateFromFile(e.CommandLine(0).ToString)
                 Else
                     dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
                     dlgImportDataset.bStartOpenDialog = False
