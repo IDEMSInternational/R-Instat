@@ -29,6 +29,7 @@ Public Class dlgOptions
     Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
+    Private strCurrLang As String
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
@@ -36,13 +37,13 @@ Public Class dlgOptions
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
         LoadInstatOptions()
         ApplyEnabled(False)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -65,10 +66,6 @@ Public Class dlgOptions
         rtbOutputPreview.Text = strPreviewText
         SetView()
 
-        'temp disabled as not functioning yet
-        rdoSpanish.Enabled = False
-        rdoKiswahili.Enabled = False
-
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewStructuredMenu.SetText("Show Structured Menu")
@@ -86,13 +83,14 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
-        ucrPnlLanguage.AddRadioButton(rdoKiswahili)
-        ucrPnlLanguage.AddRadioButton(rdoEnglish)
-        ucrPnlLanguage.AddRadioButton(rdoSpanish)
-        ucrPnlLanguage.AddRadioButton(rdoFrench)
+        ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
+        ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
+        ucrInputLanguage.SetDropDownStyleAsNonEditable()
+
+        SetVisibleLanButton()
     End Sub
 
-    Private Sub LoadInstatOptions()
+     Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
@@ -122,17 +120,15 @@ Public Class dlgOptions
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("English")
             Case "fr-FR"
-                rdoFrench.Checked = True
+                ucrInputLanguage.SetText("French")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portuguese")
             Case "sw-KE"
-                rdoKiswahili.Checked = True
-                ' temp disabled as not functioning
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
-            Case Else
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("Kiswahili")
         End Select
+
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
 
         If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
@@ -240,33 +236,39 @@ Public Class dlgOptions
         cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
+        SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
+
+        frmMain.SetLanButtonVisibility(frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB")
+
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
         cmdCancel.Enabled = True
         cmdHelp.Enabled = True
         ApplyEnabled(False)
+        SetVisibleLanButton()
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
-        If rdoKiswahili.Checked Then
-            strCurrLanguageCulture = "sw-KE"
-        ElseIf rdoFrench.Checked Then
-            strCurrLanguageCulture = "fr-FR"
-        ElseIf rdoEnglish.Checked Then
-            strCurrLanguageCulture = "en-GB"
-        ElseIf rdoSpanish.Checked Then
-            strCurrLanguageCulture = "es-ES"
-        End If
+    Private Sub ucrInputLanguage_ControlValueChanged() Handles ucrInputLanguage.ControlValueChanged
+        Select Case ucrInputLanguage.GetText
+            Case "English"
+                strCurrLanguageCulture = "en-GB"
+            Case "French"
+                strCurrLanguageCulture = "fr-FR"
+            Case "Portuguese"
+                strCurrLanguageCulture = "pt-PT"
+            Case "Kiswahili"
+                strCurrLanguageCulture = "sw-KE"
+        End Select
         ApplyEnabled(True)
     End Sub
-
+  
     Private Sub cmdScriptChange_Click(sender As Object, e As EventArgs) Handles cmdCommandFormat.Click
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
@@ -360,8 +362,18 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
 
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me)
+        SetView()
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
@@ -374,6 +386,18 @@ Public Class dlgOptions
         End If
         ApplyEnabled(True)
     End Sub
+
+    Private Sub SetVisibleLanButton()
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdLanguage.Visible = True
+            Else
+                cmdLanguage.Visible = False
+            End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+    End Sub
+
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew

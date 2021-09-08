@@ -39,33 +39,12 @@ Partial Class dlgColourbyProperty
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgColourbyProperty))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorColourByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverMetadataProperty = New instat.ucrReceiverSingle()
         Me.lblMetadataProp = New System.Windows.Forms.Label()
         Me.ucrChkRemoveColours = New instat.ucrCheck()
+        Me.ucrReceiverMetadataProperty = New instat.ucrReceiverSingle()
+        Me.ucrSelectorColourByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorColourByMetadata
-        '
-        Me.ucrSelectorColourByMetadata.bShowHiddenColumns = False
-        Me.ucrSelectorColourByMetadata.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorColourByMetadata, "ucrSelectorColourByMetadata")
-        Me.ucrSelectorColourByMetadata.Name = "ucrSelectorColourByMetadata"
-        '
-        'ucrReceiverMetadataProperty
-        '
-        Me.ucrReceiverMetadataProperty.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMetadataProperty, "ucrReceiverMetadataProperty")
-        Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
-        Me.ucrReceiverMetadataProperty.Selector = Nothing
-        Me.ucrReceiverMetadataProperty.strNcFilePath = ""
-        Me.ucrReceiverMetadataProperty.ucrSelector = Nothing
         '
         'lblMetadataProp
         '
@@ -77,6 +56,28 @@ Partial Class dlgColourbyProperty
         Me.ucrChkRemoveColours.Checked = False
         resources.ApplyResources(Me.ucrChkRemoveColours, "ucrChkRemoveColours")
         Me.ucrChkRemoveColours.Name = "ucrChkRemoveColours"
+        '
+        'ucrReceiverMetadataProperty
+        '
+        Me.ucrReceiverMetadataProperty.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMetadataProperty, "ucrReceiverMetadataProperty")
+        Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
+        Me.ucrReceiverMetadataProperty.Selector = Nothing
+        Me.ucrReceiverMetadataProperty.strNcFilePath = ""
+        Me.ucrReceiverMetadataProperty.ucrSelector = Nothing
+        '
+        'ucrSelectorColourByMetadata
+        '
+        Me.ucrSelectorColourByMetadata.bDropUnusedFilterLevels = False
+        Me.ucrSelectorColourByMetadata.bShowHiddenColumns = False
+        Me.ucrSelectorColourByMetadata.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorColourByMetadata, "ucrSelectorColourByMetadata")
+        Me.ucrSelectorColourByMetadata.Name = "ucrSelectorColourByMetadata"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgColourbyProperty
         '

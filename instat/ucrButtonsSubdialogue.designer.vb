@@ -42,6 +42,7 @@ Partial Class ucrButtonsSubdialogue
         Me.cmdReturn = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdReturn
@@ -65,10 +66,18 @@ Partial Class ucrButtonsSubdialogue
         Me.cmdCancel.Tag = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
         'ucrButtonsSubdialogue
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdReturn)
@@ -80,4 +89,5 @@ Partial Class ucrButtonsSubdialogue
     Friend WithEvents cmdReturn As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents cmdCancel As Button
+    Friend WithEvents cmdLanguage As Button
 End Class

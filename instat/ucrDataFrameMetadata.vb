@@ -139,6 +139,36 @@ Public Class ucrDataFrameMetadata
     Public Sub CopyRange()
         Try
             grdMetaData.CurrentWorksheet.Copy()
+
+            Dim clsCopyValues As New RFunction
+            Dim strAllContent As String = ""
+            Dim iEndRow As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndCol
+            Dim iStartCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Col
+
+            'construct the copied range data
+            For iRowIndex As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To iEndRow
+                Dim strRowContent As String = ""
+                For iColIndex As Integer = iStartCol To iEndCol
+                    Dim strCellContent As String = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    If strCellContent = "NA" Then
+                        strCellContent = ""
+                    End If
+                    If iColIndex = iStartCol Then
+                        strRowContent = strCellContent
+                    Else
+                        strRowContent &= vbTab & strCellContent
+                    End If
+                Next
+                strAllContent &= strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent &= Environment.NewLine
+                End If
+            Next
+
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
+            RunScriptFromDataFrameMetadata(clsCopyValues.ToScript(), strComment:="Copy data frame metadata values to clipboard")
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
@@ -213,5 +243,10 @@ Public Class ucrDataFrameMetadata
 
     Private Sub rowRightClickMenu_Opening(sender As Object, e As EventArgs) Handles rowRightClickMenu.Opening
         hideSheet.Enabled = (grdMetaData.CurrentWorksheet.RowCount > 1)
+    End Sub
+
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
     End Sub
 End Class

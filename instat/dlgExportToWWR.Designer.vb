@@ -22,17 +22,6 @@ Partial Class dlgExportToWWR
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorExportToWWR = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanRelativeHumidity = New instat.ucrReceiverSingle()
-        Me.ucrReceiverPrecipitation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanSeaLevelPressure = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanMonthlyAirTemperature = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanDailyMaxAirTemperature = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanDailyMinAirTemperature = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMeanStationPressure = New instat.ucrReceiverSingle()
         Me.lblStationIdentifier = New System.Windows.Forms.Label()
         Me.lblMeanDailyMinAirTemperature = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
@@ -44,146 +33,31 @@ Partial Class dlgExportToWWR
         Me.lblMeanDailyMaxAirTemperature = New System.Windows.Forms.Label()
         Me.lblMeanRelativeHumidity = New System.Windows.Forms.Label()
         Me.cmdStationMetadata = New System.Windows.Forms.Button()
-        Me.ucrInputLinkby = New instat.ucrInputComboBox()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.lblSaveFile = New System.Windows.Forms.Label()
-        Me.ucrReceiverStationIdentifier = New instat.ucrReceiverSingle()
         Me.lblType = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverMeanRelativeHumidity = New instat.ucrReceiverSingle()
+        Me.ucrReceiverPrecipitation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMeanMonthlyAirTemperature = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMeanSeaLevelPressure = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMeanDailyMinAirTemperature = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMeanDailyMaxAirTemperature = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMeanStationPressure = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationIdentifier = New instat.ucrReceiverSingle()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrInputLinkby = New instat.ucrInputComboBox()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrSelectorExportToWWR = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 409)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 27
-        '
-        'ucrSelectorExportToWWR
-        '
-        Me.ucrSelectorExportToWWR.bDropUnusedFilterLevels = False
-        Me.ucrSelectorExportToWWR.bShowHiddenColumns = False
-        Me.ucrSelectorExportToWWR.bUseCurrentFilter = True
-        Me.ucrSelectorExportToWWR.Location = New System.Drawing.Point(9, 3)
-        Me.ucrSelectorExportToWWR.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorExportToWWR.Name = "ucrSelectorExportToWWR"
-        Me.ucrSelectorExportToWWR.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorExportToWWR.TabIndex = 0
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(258, 119)
-        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 7
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanRelativeHumidity
-        '
-        Me.ucrReceiverMeanRelativeHumidity.frmParent = Me
-        Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(193, 114)
-        Me.ucrReceiverMeanRelativeHumidity.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanRelativeHumidity.Name = "ucrReceiverMeanRelativeHumidity"
-        Me.ucrReceiverMeanRelativeHumidity.Selector = Nothing
-        Me.ucrReceiverMeanRelativeHumidity.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanRelativeHumidity.strNcFilePath = ""
-        Me.ucrReceiverMeanRelativeHumidity.TabIndex = 24
-        Me.ucrReceiverMeanRelativeHumidity.ucrSelector = Nothing
-        '
-        'ucrReceiverPrecipitation
-        '
-        Me.ucrReceiverPrecipitation.frmParent = Me
-        Me.ucrReceiverPrecipitation.Location = New System.Drawing.Point(9, 155)
-        Me.ucrReceiverPrecipitation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPrecipitation.Name = "ucrReceiverPrecipitation"
-        Me.ucrReceiverPrecipitation.Selector = Nothing
-        Me.ucrReceiverPrecipitation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPrecipitation.strNcFilePath = ""
-        Me.ucrReceiverPrecipitation.TabIndex = 18
-        Me.ucrReceiverPrecipitation.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanSeaLevelPressure
-        '
-        Me.ucrReceiverMeanSeaLevelPressure.frmParent = Me
-        Me.ucrReceiverMeanSeaLevelPressure.Location = New System.Drawing.Point(9, 73)
-        Me.ucrReceiverMeanSeaLevelPressure.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanSeaLevelPressure.Name = "ucrReceiverMeanSeaLevelPressure"
-        Me.ucrReceiverMeanSeaLevelPressure.Selector = Nothing
-        Me.ucrReceiverMeanSeaLevelPressure.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanSeaLevelPressure.strNcFilePath = ""
-        Me.ucrReceiverMeanSeaLevelPressure.TabIndex = 14
-        Me.ucrReceiverMeanSeaLevelPressure.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanMonthlyAirTemperature
-        '
-        Me.ucrReceiverMeanMonthlyAirTemperature.frmParent = Me
-        Me.ucrReceiverMeanMonthlyAirTemperature.Location = New System.Drawing.Point(9, 114)
-        Me.ucrReceiverMeanMonthlyAirTemperature.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanMonthlyAirTemperature.Name = "ucrReceiverMeanMonthlyAirTemperature"
-        Me.ucrReceiverMeanMonthlyAirTemperature.Selector = Nothing
-        Me.ucrReceiverMeanMonthlyAirTemperature.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanMonthlyAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanMonthlyAirTemperature.TabIndex = 16
-        Me.ucrReceiverMeanMonthlyAirTemperature.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanDailyMaxAirTemperature
-        '
-        Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Me
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(193, 32)
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Name = "ucrReceiverMeanDailyMaxAirTemperature"
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Selector = Nothing
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanDailyMaxAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanDailyMaxAirTemperature.TabIndex = 20
-        Me.ucrReceiverMeanDailyMaxAirTemperature.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanDailyMinAirTemperature
-        '
-        Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Me
-        Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(193, 73)
-        Me.ucrReceiverMeanDailyMinAirTemperature.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanDailyMinAirTemperature.Name = "ucrReceiverMeanDailyMinAirTemperature"
-        Me.ucrReceiverMeanDailyMinAirTemperature.Selector = Nothing
-        Me.ucrReceiverMeanDailyMinAirTemperature.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanDailyMinAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanDailyMinAirTemperature.TabIndex = 22
-        Me.ucrReceiverMeanDailyMinAirTemperature.ucrSelector = Nothing
-        '
-        'ucrReceiverMonth
-        '
-        Me.ucrReceiverMonth.frmParent = Me
-        Me.ucrReceiverMonth.Location = New System.Drawing.Point(258, 159)
-        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
-        Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 9
-        Me.ucrReceiverMonth.ucrSelector = Nothing
-        '
-        'ucrReceiverMeanStationPressure
-        '
-        Me.ucrReceiverMeanStationPressure.frmParent = Me
-        Me.ucrReceiverMeanStationPressure.Location = New System.Drawing.Point(9, 32)
-        Me.ucrReceiverMeanStationPressure.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMeanStationPressure.Name = "ucrReceiverMeanStationPressure"
-        Me.ucrReceiverMeanStationPressure.Selector = Nothing
-        Me.ucrReceiverMeanStationPressure.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMeanStationPressure.strNcFilePath = ""
-        Me.ucrReceiverMeanStationPressure.TabIndex = 12
-        Me.ucrReceiverMeanStationPressure.ucrSelector = Nothing
         '
         'lblStationIdentifier
         '
         Me.lblStationIdentifier.AutoSize = True
-        Me.lblStationIdentifier.Location = New System.Drawing.Point(254, 26)
+        Me.lblStationIdentifier.Location = New System.Drawing.Point(238, 26)
         Me.lblStationIdentifier.Name = "lblStationIdentifier"
         Me.lblStationIdentifier.Size = New System.Drawing.Size(86, 13)
         Me.lblStationIdentifier.TabIndex = 1
@@ -192,7 +66,7 @@ Partial Class dlgExportToWWR
         'lblMeanDailyMinAirTemperature
         '
         Me.lblMeanDailyMinAirTemperature.AutoSize = True
-        Me.lblMeanDailyMinAirTemperature.Location = New System.Drawing.Point(190, 57)
+        Me.lblMeanDailyMinAirTemperature.Location = New System.Drawing.Point(225, 57)
         Me.lblMeanDailyMinAirTemperature.Name = "lblMeanDailyMinAirTemperature"
         Me.lblMeanDailyMinAirTemperature.Size = New System.Drawing.Size(173, 13)
         Me.lblMeanDailyMinAirTemperature.TabIndex = 21
@@ -248,14 +122,14 @@ Partial Class dlgExportToWWR
         Me.lblPrecipitation.AutoSize = True
         Me.lblPrecipitation.Location = New System.Drawing.Point(6, 139)
         Me.lblPrecipitation.Name = "lblPrecipitation"
-        Me.lblPrecipitation.Size = New System.Drawing.Size(110, 13)
+        Me.lblPrecipitation.Size = New System.Drawing.Size(107, 13)
         Me.lblPrecipitation.TabIndex = 17
-        Me.lblPrecipitation.Text = " 5. Total Precipitation:"
+        Me.lblPrecipitation.Text = "5. Total Precipitation:"
         '
         'lblMeanDailyMaxAirTemperature
         '
         Me.lblMeanDailyMaxAirTemperature.AutoSize = True
-        Me.lblMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(190, 16)
+        Me.lblMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(225, 16)
         Me.lblMeanDailyMaxAirTemperature.Name = "lblMeanDailyMaxAirTemperature"
         Me.lblMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(176, 13)
         Me.lblMeanDailyMaxAirTemperature.TabIndex = 19
@@ -264,7 +138,7 @@ Partial Class dlgExportToWWR
         'lblMeanRelativeHumidity
         '
         Me.lblMeanRelativeHumidity.AutoSize = True
-        Me.lblMeanRelativeHumidity.Location = New System.Drawing.Point(190, 98)
+        Me.lblMeanRelativeHumidity.Location = New System.Drawing.Point(225, 98)
         Me.lblMeanRelativeHumidity.Name = "lblMeanRelativeHumidity"
         Me.lblMeanRelativeHumidity.Size = New System.Drawing.Size(160, 13)
         Me.lblMeanRelativeHumidity.TabIndex = 23
@@ -272,69 +146,36 @@ Partial Class dlgExportToWWR
         '
         'cmdStationMetadata
         '
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(258, 72)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(242, 72)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(141, 23)
         Me.cmdStationMetadata.TabIndex = 5
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
         '
-        'ucrInputLinkby
-        '
-        Me.ucrInputLinkby.AddQuotesIfUnrecognised = True
-        Me.ucrInputLinkby.GetSetSelectedIndex = -1
-        Me.ucrInputLinkby.IsReadOnly = False
-        Me.ucrInputLinkby.Location = New System.Drawing.Point(389, 41)
-        Me.ucrInputLinkby.Name = "ucrInputLinkby"
-        Me.ucrInputLinkby.Size = New System.Drawing.Size(96, 21)
-        Me.ucrInputLinkby.TabIndex = 4
-        '
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(311, 379)
+        Me.cmdBrowse.Location = New System.Drawing.Point(397, 377)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(97, 23)
         Me.cmdBrowse.TabIndex = 26
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'ucrInputFilePath
-        '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(90, 380)
-        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(220, 21)
-        Me.ucrInputFilePath.TabIndex = 25
-        '
         'lblSaveFile
         '
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(13, 382)
+        Me.lblSaveFile.Location = New System.Drawing.Point(7, 382)
         Me.lblSaveFile.Name = "lblSaveFile"
-        Me.lblSaveFile.Size = New System.Drawing.Size(75, 17)
+        Me.lblSaveFile.Size = New System.Drawing.Size(164, 17)
         Me.lblSaveFile.TabIndex = 24
         Me.lblSaveFile.Text = "Save file(s) to:"
-        '
-        'ucrReceiverStationIdentifier
-        '
-        Me.ucrReceiverStationIdentifier.frmParent = Me
-        Me.ucrReceiverStationIdentifier.Location = New System.Drawing.Point(258, 42)
-        Me.ucrReceiverStationIdentifier.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStationIdentifier.Name = "ucrReceiverStationIdentifier"
-        Me.ucrReceiverStationIdentifier.Selector = Nothing
-        Me.ucrReceiverStationIdentifier.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStationIdentifier.strNcFilePath = ""
-        Me.ucrReceiverStationIdentifier.TabIndex = 2
-        Me.ucrReceiverStationIdentifier.ucrSelector = Nothing
         '
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(387, 25)
+        Me.lblType.Location = New System.Drawing.Point(368, 25)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(34, 13)
         Me.lblType.TabIndex = 3
@@ -356,18 +197,177 @@ Partial Class dlgExportToWWR
         Me.grpElements.Controls.Add(Me.lblPrecipitation)
         Me.grpElements.Controls.Add(Me.lblMeanSeaLevelPressure)
         Me.grpElements.Controls.Add(Me.lblMeanMonthlyAirTemperature)
-        Me.grpElements.Location = New System.Drawing.Point(9, 190)
+        Me.grpElements.Location = New System.Drawing.Point(3, 190)
         Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(399, 180)
+        Me.grpElements.Size = New System.Drawing.Size(494, 180)
         Me.grpElements.TabIndex = 10
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements"
+        '
+        'ucrReceiverMeanRelativeHumidity
+        '
+        Me.ucrReceiverMeanRelativeHumidity.frmParent = Me
+        Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(228, 114)
+        Me.ucrReceiverMeanRelativeHumidity.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanRelativeHumidity.Name = "ucrReceiverMeanRelativeHumidity"
+        Me.ucrReceiverMeanRelativeHumidity.Selector = Nothing
+        Me.ucrReceiverMeanRelativeHumidity.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanRelativeHumidity.strNcFilePath = ""
+        Me.ucrReceiverMeanRelativeHumidity.TabIndex = 24
+        Me.ucrReceiverMeanRelativeHumidity.ucrSelector = Nothing
+        '
+        'ucrReceiverPrecipitation
+        '
+        Me.ucrReceiverPrecipitation.frmParent = Me
+        Me.ucrReceiverPrecipitation.Location = New System.Drawing.Point(9, 155)
+        Me.ucrReceiverPrecipitation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPrecipitation.Name = "ucrReceiverPrecipitation"
+        Me.ucrReceiverPrecipitation.Selector = Nothing
+        Me.ucrReceiverPrecipitation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPrecipitation.strNcFilePath = ""
+        Me.ucrReceiverPrecipitation.TabIndex = 18
+        Me.ucrReceiverPrecipitation.ucrSelector = Nothing
+        '
+        'ucrReceiverMeanMonthlyAirTemperature
+        '
+        Me.ucrReceiverMeanMonthlyAirTemperature.frmParent = Me
+        Me.ucrReceiverMeanMonthlyAirTemperature.Location = New System.Drawing.Point(9, 114)
+        Me.ucrReceiverMeanMonthlyAirTemperature.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanMonthlyAirTemperature.Name = "ucrReceiverMeanMonthlyAirTemperature"
+        Me.ucrReceiverMeanMonthlyAirTemperature.Selector = Nothing
+        Me.ucrReceiverMeanMonthlyAirTemperature.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanMonthlyAirTemperature.strNcFilePath = ""
+        Me.ucrReceiverMeanMonthlyAirTemperature.TabIndex = 16
+        Me.ucrReceiverMeanMonthlyAirTemperature.ucrSelector = Nothing
+        '
+        'ucrReceiverMeanSeaLevelPressure
+        '
+        Me.ucrReceiverMeanSeaLevelPressure.frmParent = Me
+        Me.ucrReceiverMeanSeaLevelPressure.Location = New System.Drawing.Point(9, 73)
+        Me.ucrReceiverMeanSeaLevelPressure.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanSeaLevelPressure.Name = "ucrReceiverMeanSeaLevelPressure"
+        Me.ucrReceiverMeanSeaLevelPressure.Selector = Nothing
+        Me.ucrReceiverMeanSeaLevelPressure.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanSeaLevelPressure.strNcFilePath = ""
+        Me.ucrReceiverMeanSeaLevelPressure.TabIndex = 14
+        Me.ucrReceiverMeanSeaLevelPressure.ucrSelector = Nothing
+        '
+        'ucrReceiverMeanDailyMinAirTemperature
+        '
+        Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Me
+        Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(228, 73)
+        Me.ucrReceiverMeanDailyMinAirTemperature.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanDailyMinAirTemperature.Name = "ucrReceiverMeanDailyMinAirTemperature"
+        Me.ucrReceiverMeanDailyMinAirTemperature.Selector = Nothing
+        Me.ucrReceiverMeanDailyMinAirTemperature.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanDailyMinAirTemperature.strNcFilePath = ""
+        Me.ucrReceiverMeanDailyMinAirTemperature.TabIndex = 22
+        Me.ucrReceiverMeanDailyMinAirTemperature.ucrSelector = Nothing
+        '
+        'ucrReceiverMeanDailyMaxAirTemperature
+        '
+        Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Me
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(228, 32)
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Name = "ucrReceiverMeanDailyMaxAirTemperature"
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Selector = Nothing
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanDailyMaxAirTemperature.strNcFilePath = ""
+        Me.ucrReceiverMeanDailyMaxAirTemperature.TabIndex = 20
+        Me.ucrReceiverMeanDailyMaxAirTemperature.ucrSelector = Nothing
+        '
+        'ucrReceiverMeanStationPressure
+        '
+        Me.ucrReceiverMeanStationPressure.frmParent = Me
+        Me.ucrReceiverMeanStationPressure.Location = New System.Drawing.Point(9, 32)
+        Me.ucrReceiverMeanStationPressure.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMeanStationPressure.Name = "ucrReceiverMeanStationPressure"
+        Me.ucrReceiverMeanStationPressure.Selector = Nothing
+        Me.ucrReceiverMeanStationPressure.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMeanStationPressure.strNcFilePath = ""
+        Me.ucrReceiverMeanStationPressure.TabIndex = 12
+        Me.ucrReceiverMeanStationPressure.ucrSelector = Nothing
+        '
+        'ucrReceiverStationIdentifier
+        '
+        Me.ucrReceiverStationIdentifier.frmParent = Me
+        Me.ucrReceiverStationIdentifier.Location = New System.Drawing.Point(242, 42)
+        Me.ucrReceiverStationIdentifier.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationIdentifier.Name = "ucrReceiverStationIdentifier"
+        Me.ucrReceiverStationIdentifier.Selector = Nothing
+        Me.ucrReceiverStationIdentifier.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStationIdentifier.strNcFilePath = ""
+        Me.ucrReceiverStationIdentifier.TabIndex = 2
+        Me.ucrReceiverStationIdentifier.ucrSelector = Nothing
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(176, 378)
+        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(220, 21)
+        Me.ucrInputFilePath.TabIndex = 25
+        '
+        'ucrInputLinkby
+        '
+        Me.ucrInputLinkby.AddQuotesIfUnrecognised = True
+        Me.ucrInputLinkby.GetSetSelectedIndex = -1
+        Me.ucrInputLinkby.IsReadOnly = False
+        Me.ucrInputLinkby.Location = New System.Drawing.Point(370, 41)
+        Me.ucrInputLinkby.Name = "ucrInputLinkby"
+        Me.ucrInputLinkby.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputLinkby.TabIndex = 4
+        '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        Me.ucrReceiverMonth.Location = New System.Drawing.Point(242, 159)
+        Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.TabIndex = 9
+        Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(242, 119)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 7
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrSelectorExportToWWR
+        '
+        Me.ucrSelectorExportToWWR.bDropUnusedFilterLevels = False
+        Me.ucrSelectorExportToWWR.bShowHiddenColumns = False
+        Me.ucrSelectorExportToWWR.bUseCurrentFilter = True
+        Me.ucrSelectorExportToWWR.Location = New System.Drawing.Point(3, 3)
+        Me.ucrSelectorExportToWWR.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorExportToWWR.Name = "ucrSelectorExportToWWR"
+        Me.ucrSelectorExportToWWR.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorExportToWWR.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(5, 409)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 27
         '
         'dlgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(490, 465)
+        Me.ClientSize = New System.Drawing.Size(502, 465)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.ucrReceiverStationIdentifier)

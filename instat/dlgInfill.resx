@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 15</value>
+    <value>278, 15</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblByFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 66</value>
+    <value>278, 66</value>
   </data>
   <data name="lblByFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLimits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 23</value>
+    <value>5, 23</value>
   </data>
   <data name="lblLimits.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -208,7 +208,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblLimits.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblStartingFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStartingFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 50</value>
+    <value>218, 49</value>
   </data>
   <data name="lblStartingFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -240,32 +240,11 @@
   <data name="&gt;&gt;lblStartingFrom.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 47</value>
-  </data>
-  <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
-  </data>
-  <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
-    <value>ucrChkCompleteYears</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 19</value>
+    <value>176, 21</value>
   </data>
   <data name="ucrChkResort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 20</value>
+    <value>250, 20</value>
   </data>
   <data name="ucrChkResort.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -280,10 +259,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkResort.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrInputComboMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 46</value>
+    <value>293, 46</value>
   </data>
   <data name="ucrInputComboMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
@@ -301,13 +280,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputComboMonth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrInputLimitOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 19</value>
+    <value>44, 19</value>
   </data>
   <data name="ucrInputLimitOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
+    <value>127, 21</value>
   </data>
   <data name="ucrInputLimitOptions.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -322,10 +301,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputLimitOptions.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 72</value>
+    <value>102, 73</value>
   </data>
   <data name="ucrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -343,7 +322,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrDtpEndDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -373,7 +352,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="lblStartDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,10 +382,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 45</value>
+    <value>102, 47</value>
   </data>
   <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -424,13 +403,34 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 47</value>
+  </data>
+  <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 20</value>
+  </data>
+  <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
+    <value>ucrChkCompleteYears</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 196</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 104</value>
+    <value>429, 104</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -457,10 +457,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>417, 363</value>
+    <value>450, 363</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 31</value>
+    <value>278, 31</value>
   </data>
   <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -528,9 +528,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -544,7 +541,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 83</value>
+    <value>278, 83</value>
   </data>
   <data name="ucrReceiverFactors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

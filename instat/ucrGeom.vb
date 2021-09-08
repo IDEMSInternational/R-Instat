@@ -35,7 +35,7 @@ Public Class ucrGeom
     Dim strLineType As String() = {Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)}
     Dim strShapePoint As String() = {Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
     Dim strBoxShapePoint As String() = {Chr(34) & "NA" & Chr(34), Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
-
+    Private bResetGlobal As Boolean = False
     Public Sub New()
 
         ' This call is required by the designer.
@@ -56,7 +56,9 @@ Public Class ucrGeom
                 iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsTempFunc.strRCommand)
                 If iGeomIndex <> -1 Then
                     clsCurrGeom = lstAllGeoms(iGeomIndex)
+                    bResetGlobal = bReset
                     ucrInputGeoms.SetName(clsCurrGeom.strGeomName)
+                    bResetGlobal = False
                 Else
                     MsgBox("Developer error: Function set for " & Name & " is not a recognised geom.")
                 End If
@@ -82,7 +84,7 @@ Public Class ucrGeom
 
     Public Overridable Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
-        'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
+        'These functions are called all together in the ucrAddLayers when a Layer is added or edited, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
 
         'Question to be discussed: Never went back to this... don't understand what's happening...
@@ -95,7 +97,7 @@ Public Class ucrGeom
             End If
         Next
         'Next, the clsGeomFunction is set. Either this one is empty, or it has already been setup on the dialogue that is calling Setup...
-        SetGeomFunction(clsNewGeomFunc)
+        SetGeomFunction(clsNewGeomFunc, bReset)
         ucrInputGeoms.Enabled = Not bFixGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
         clsLocalAesFunction = clsNewLocalAes
@@ -134,6 +136,7 @@ Public Class ucrGeom
         Dim clsgeom_errorbar As New Geoms
         Dim clsgeom_errorbarh As New Geoms
         Dim clsgeom_freqpoly As New Geoms
+        Dim clsgeom_function As New Geoms
         Dim clsgeom_hex As New Geoms
         Dim clsgeom_histogram As New Geoms
         Dim clsgeom_hline As New Geoms
@@ -148,6 +151,7 @@ Public Class ucrGeom
         Dim clsgeom_pointrange As New Geoms
         Dim clsgeom_polygon As New Geoms
         Dim clsgeom_qq As New Geoms
+        Dim clsgeom_qq_line As New Geoms
         Dim clsgeom_quantile As New Geoms
         Dim clsgeom_raster As New Geoms
         Dim clsgeom_rect As New Geoms
@@ -159,14 +163,61 @@ Public Class ucrGeom
         Dim clsgeom_spoke As New Geoms
         Dim clsgeom_step As New Geoms
         Dim clsgeom_text As New Geoms
+        Dim clsgeom_text_repel As New Geoms
         Dim clsgeom_tile As New Geoms
         Dim clsgeom_treemap As New Geoms
         Dim clsgeom_treemap_text As New Geoms
         Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
-
+        Dim clsgeom_label_repel As New Geoms
+        Dim clsgeom_lollipop As New Geoms
+        Dim clsgeom_dumbbell As New Geoms
+        Dim clsgeom_stat_density_ridges As New Geoms
         Dim clsgeom_statECDF As New Geoms
+        Dim clsscale_fill_viridis_c As New Geoms
+
+        clsscale_fill_viridis_c.SetGeomPackage("ggplot2")
+        clsscale_fill_viridis_c.strGeomName = "scale_fill_viridis_c"
+        'Other Aesthetics
+        clsscale_fill_viridis_c.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsscale_fill_viridis_c.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        'adding layer parameters
+        clsscale_fill_viridis_c.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
+        clsscale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("values", "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("guide", "list", Chr(34) & "colourbar" & Chr(34), lstParameterStrings:={Chr(34) & "colourbar" & Chr(34)})
+
+        lstAllGeoms.Add(clsscale_fill_viridis_c)
+
+
+        clsgeom_stat_density_ridges.SetGeomPackage("ggridges")
+        clsgeom_stat_density_ridges.strGeomName = "stat_density_ridges"
+        'Mandatory Aesthetics
+        clsgeom_stat_density_ridges.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_stat_density_ridges.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_stat_density_ridges.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+
+        'adding layer parameters
+        clsgeom_stat_density_ridges.AddLayerParameter("geom", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "density_ridges_gradient" & Chr(34)})
+        clsgeom_stat_density_ridges.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_stat_density_ridges.AddLayerParameter("bandwidth", "numeric", "0.1", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("jittered_points", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("quantile_lines", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("calc_ecdf", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("quantiles", "numeric", "1.0", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("quantile_fun", "list", "quantile", lstParameterStrings:={"quantile"})
+        clsgeom_stat_density_ridges.AddLayerParameter("alpha", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("n", "numeric", "512", lstParameterStrings:={0, 0}) ' This should be a power of 2 - Not sure how to restrict this. 40.
+        clsgeom_stat_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_stat_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_stat_density_ridges)
+
 
         clsgeom_statECDF.SetGeomName("stat_ecdf")
         'mandatory
@@ -199,7 +250,7 @@ Public Class ucrGeom
         clsgeom_statsummary.AddLayerParameter("fun.ymin", "editablelist", Chr(34) & "min" & Chr(34), lstParameterStrings:={Chr(34) & "min" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("fun.ymax", "editablelist", Chr(34) & "max" & Chr(34), lstParameterStrings:={Chr(34) & "max" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
-        'TO DO what other positons can go here?
+        'TO DO what other positions can go here?
         clsgeom_statsummary.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_statsummary.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0})
@@ -261,14 +312,13 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_statvalleys)
 
-
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
         'Warning: cannot use default values like NULL in the specification of our aesthetics as parameters (fill, colour, ...) as running a command like "ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(colour = NULL)" will give an error (Error: Aesthetics must be either length 1 or the same as the data (4): colour). 
         '           however, NULL is still valid as parameter value for outlier.colour for example ( ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(outlier.colour = NULL) runs ok).
         'Warning: Concerning the global parameter position: 
-        '           We haven't implemented position_jitterdodge yet. It is seems to be mainly usefull in presence of a dodged layer, on top of which we want to display the points of the events (see explanation http://docs.ggplot2.org/current/position_jitterdodge.html). However it doesn't seem to work as the others when specified as position = "jitterdodge" (get errors). Works fine when specified by position = position_jitterdodge(), for geoms such as point, but also bar (and produces outputs that are not completely silly), ...
-        '           Could add the possiility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example... Then need to specify position as -position=position_jitter([parameters])- instead of -position = "jitter". This is also required for position_jitterdodge (see below). Seems necessary to specify x and y parameters in position_nudge as well in order to obtain any result (see below).
+        '           We haven't implemented position_jitterdodge yet. It is seems to be mainly useful in presence of a dodged layer, on top of which we want to display the points of the events (see explanation http://docs.ggplot2.org/current/position_jitterdodge.html). However it doesn't seem to work as the others when specified as position = "jitterdodge" (get errors). Works fine when specified by position = position_jitterdodge(), for geoms such as point, but also bar (and produces outputs that are not completely silly), ...
+        '           Could add the possibility to adjust the height and width parameters in the position function position_jitter, also width for dodge... Sometimes useful to only jitter in one direction for example... Then need to specify position as -position=position_jitter([parameters])- instead of -position = "jitter". This is also required for position_jitterdodge (see below). Seems necessary to specify x and y parameters in position_nudge as well in order to obtain any result (see below).
         '           Another option that is not yet available is position_nudge, which makes it possible to move a whole layer by a given (x,y) value. It doesn't seem to do anything by default i.e. when not specifying any argument (position = "nudge" or position = position_nudge()), just uses (x=0,y=0). When x or y is assigned to a factor, each factor corresponds to one unit along the axis (e.g. if x is a factor, position_nudge(x=2) would shift the layer by two factors along the x axis). While testing what happens when x = "" in boxplot case, a weird error was identified: "y aesthetics required", even when both x and y aesthetics are in use.
         '           Dodge requires a factor to dodge by, if none, just doesn't dodge. However, gives a warning in the geom_point case for instance.
         'Warning: About the show.legend layer parameter, the default value in R is NA, which only shows legend for that layer if aesthetics are mapped.
@@ -284,7 +334,7 @@ Public Class ucrGeom
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
         'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
         'Task: add warning message to user...
-        'Adding aesthetics parametters
+        'Adding aesthetics parameters
         'Mandatory Aesthetics
         clsgeom_abline.AddAesParameter("slope", strIncludedDataTypes:={"numeric"})
         clsgeom_abline.AddAesParameter("intercept", strIncludedDataTypes:={"numeric"}) '(required) intercept with the y axis of the line (the "b" in "y=ax+b") 
@@ -309,44 +359,43 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_abline)
 
-        'clsgeom_area.SetGeomName("geom_area")
+        clsgeom_area.SetGeomName("geom_area")
         'Mandatory Aesthetics 
-        'clsgeom_area.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=TRUE)
-        'clsgeom_area.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=TRUE) ' y is not mandatory when stat = "bin". We also have the option to assign y = ..density.. when stat = "bin"
+        clsgeom_area.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_area.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}) ' y is not mandatory when stat = "bin". We also have the option to assign y = ..density.. when stat = "bin"
 
-        'Optional Aesthetics 
-        ' geom_area is a special case of geom_ribbon where ymin is fixed to 0
-        'clsgeom_area.AddAesParameter("ymax", strIncludedDataTypes:={"factor", "numeric"})
-        'clsgeom_area.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        'clsgeom_area.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        'clsgeom_area.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        'clsgeom_area.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        'clsgeom_area.AddAesParameter("size", strIncludedDataTypes:={"factor"}) 'factor not advised and cannot be continuous, this error message appears in R "Error in f(...) : Aesthetics can not vary with a ribbon"
-        'clsgeom_area.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+        ' Optional Aesthetics 
+        'geom_area Is a special case of geom_ribbon where ymin Is fixed to 0
+        clsgeom_area.AddAesParameter("ymax", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_area.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_area.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        clsgeom_area.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_area.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_area.AddAesParameter("size", strIncludedDataTypes:={"factor"}) 'factor not advised and cannot be continuous, this error message appears in R "Error in f(...) : Aesthetics can not vary with a ribbon"
+        clsgeom_area.AddAesParameter("group", strIncludedDataTypes:={"factor"})
 
         'Global Layer Parameters 
-        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34),Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
-        'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
-        'clsgeom_area.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
-        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
-        'clsgeom_area.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
-        'clsgeom_area.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'we can use position adjustment functions here As well. For "dodge" Option, R gives a warning: Width Not defined.Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
+        clsgeom_area.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
+        '' revise the options here since identity And unique seem to return the plot to the original scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        clsgeom_area.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_area.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
-        'Aesthetics as layer parameters  
-        'clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        'clsgeom_area.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        'clsgeom_area.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
-        'clsgeom_area.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
-        'clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
-
-        'lstAllGeoms.Add(clsgeom_area)
+        ''Aesthetics as layer parameters  
+        clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_area.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_area.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_area.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        lstAllGeoms.Add(clsgeom_area)
 
 
         clsgeom_bar.SetGeomName("geom_bar")
         'Mandatory Aesthetics
         clsgeom_bar.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
-        'All datatypes work as x aesthetics although the most common one is factor.
+        'All data types work as x aesthetics although the most common one is factor.
         'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
 
         'Optional aesthetics
@@ -380,20 +429,33 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_bar)
 
 
-        'clsgeom_bin2d.SetGeomName("geom_bin2d")
-        ''mandatory
-        'clsgeom_bin2d.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_bin2d.AddAesParameter("fill")
-        ''adding layer parameters
-        'clsgeom_bin2d.AddLayerParameter("stat", "list", Chr(34) & "bin2d" & Chr(34))
-        'clsgeom_bin2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_bin2d.AddLayerParameter("na.rm", "boolean", "FALSE")
-        'clsgeom_bin2d.AddLayerParameter("bins", "numeric", "30")
-        'clsgeom_bin2d.AddLayerParameter("binwidth", "numeric", "0.1")
+        clsgeom_bin2d.SetGeomName("geom_bin2d")
+        'mandatory
+        clsgeom_bin2d.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_bin2d.AddAesParameter("fill")
+        clsgeom_bin2d.AddAesParameter("group")
+        'adding layer parameters
+        clsgeom_bin2d.AddLayerParameter("stat", "list", Chr(34) & "bin2d" & Chr(34), lstParameterStrings:={Chr(34) & "bin2d" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_bin2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_bin2d.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_bin2d.AddLayerParameter("bins", "numeric", "30")
+        clsgeom_bin2d.AddLayerParameter("binwidth", "numeric", "0.1")
+        clsgeom_bin2d.AddLayerParameter("drop", "boolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_bin2d)
 
-        'lstAllGeoms.Add(clsgeom_bin2d)
+
+        clsgeom_blank.SetGeomName("geom_blank")
+        'mandatory
+        clsgeom_blank.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_blank.AddAesParameter("y", bIsMandatory:=True)
+        'adding layer parameters
+        clsgeom_blank.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_blank.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_blank.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_blank)
+
 
 
         clsgeom_boxplot.SetGeomName("geom_boxplot")
@@ -428,6 +490,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strBoxShapePoint) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
         clsgeom_boxplot.AddLayerParameter("fatten", "numeric", "2", lstParameterStrings:={0, 1, 5})
         'Global Layer parameters
@@ -522,7 +585,7 @@ Public Class ucrGeom
         'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
         clsgeom_count.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
-        'revise the options here since identitiy and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
+        'revise the options here since identity and unique seem to return the plot to the orginal scatter plot. Summary option defaults to `mean_se() since no summary function supplied
         clsgeom_count.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_count.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
@@ -535,21 +598,31 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_count)
 
-        'clsgeom_crossbar.strGeomName = "geom_crossbar"
+        clsgeom_crossbar.strGeomName = "geom_crossbar"
         'Mandatory
-        'clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=TRUE)
-        'clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=TRUE)
-        ''Optional
-        'clsgeom_crossbar.AddAesParameter("alpha")
-        'clsgeom_crossbar.AddAesParameter("colour")
-        'clsgeom_crossbar.AddAesParameter("linetype")
-        'clsgeom_crossbar.AddAesParameter("size")
+        clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_crossbar.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=True)
+        clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=True)
+        'Optional
+        clsgeom_crossbar.AddAesParameter("alpha")
+        clsgeom_crossbar.AddAesParameter("colour")
+        clsgeom_crossbar.AddAesParameter("linetype")
+        clsgeom_crossbar.AddAesParameter("size")
+        clsgeom_crossbar.AddAesParameter("fill")
+        clsgeom_crossbar.AddAesParameter("group")
+        clsgeom_crossbar.AddAesParameter("type")
 
-        ''adding layer parameters
-        'clsgeom_crossbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_crossbar)
+
+
+        'adding layer parameters
+        clsgeom_crossbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        clsgeom_crossbar.AddLayerParameter("fatten", "numeric", "2.5", lstParameterStrings:={1, 1})
+        clsgeom_crossbar.AddLayerParameter("width", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_crossbar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_crossbar.AddLayerParameter("na.rm", "boolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_crossbar)
 
         clsgeom_curve.strGeomName = "geom_curve"
         'Mandatory Aesthetics  
@@ -647,7 +720,7 @@ Public Class ucrGeom
         clsgeom_density2d.AddAesParameter("size")
 
         ''Adding layer parameters
-        'not sure of other stats and positons here
+        'not sure of other stats and positions here
         clsgeom_density2d.AddLayerParameter("stat", "editablelist", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
@@ -679,6 +752,122 @@ Public Class ucrGeom
         ''linemitre should 1 or a number >1
         'clsgeom_density2d.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_density_2d)
+
+        Dim clsgeom_density_ridges As New Geoms
+
+        clsgeom_density_ridges.SetGeomPackage("ggridges")
+        clsgeom_density_ridges.strGeomName = "geom_density_ridges"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        'Other Aesthetics
+        clsgeom_density_ridges.AddAesParameter("height")
+        clsgeom_density_ridges.AddAesParameter("group")
+        clsgeom_density_ridges.AddAesParameter("scale")
+        clsgeom_density_ridges.AddAesParameter("min_height")
+        'Aesthetics for colour, fill, group, alpha, linetype, Size, as in geom_ridgeline.
+        clsgeom_density_ridges.AddAesParameter("colour")
+        clsgeom_density_ridges.AddAesParameter("fill")
+        'clsgeom_density_ridges.AddAesParameter("group")
+        clsgeom_density_ridges.AddAesParameter("alpha")
+        clsgeom_density_ridges.AddAesParameter("linetype")
+        'clsgeom_density_ridges.AddAesParameter("Size")
+        'Aesthetics for point_shape, point_colour, point_size, point_fill, point_alpha, point_stroke
+        'clsgeom_density_ridges.AddAesParameter("point_shape")
+        clsgeom_density_ridges.AddAesParameter("point_colour")
+        'clsgeom_density_ridges.AddAesParameter("point_size")
+        'clsgeom_density_ridges.AddAesParameter("point_fill")
+        'clsgeom_density_ridges.AddAesParameter("point_alpha")
+        'clsgeom_density_ridges.AddAesParameter("point_stroke")
+
+        'adding layer parameters
+        clsgeom_density_ridges.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34), Chr(34) & "points_jitter" & Chr(34), Chr(34) & "raincloud" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("jittered_points", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges.AddLayerParameter("scale", "numeric", "1")
+        clsgeom_density_ridges.AddLayerParameter("point_shape", "editablelist", "|", lstParameterStrings:={"|", "/", "$", "#", "*", "?", "!"})
+        clsgeom_density_ridges.AddLayerParameter("point_size", "numeric", "3")
+        clsgeom_density_ridges.AddLayerParameter("point_alpha", "numeric", "1", lstParameterStrings:={1, 0})
+        lstAllGeoms.Add(clsgeom_density_ridges)
+
+        Dim clsgeom_density_ridges2 As New Geoms
+
+        clsgeom_density_ridges2.SetGeomPackage("ggridges")
+        clsgeom_density_ridges2.strGeomName = "geom_density_ridges2"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges2.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges2.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_density_ridges2.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_density_ridges2.AddAesParameter("height")
+        clsgeom_density_ridges2.AddAesParameter("group")
+        clsgeom_density_ridges2.AddAesParameter("scale")
+        clsgeom_density_ridges2.AddAesParameter("min_height")
+        'Aesthetics for colour, fill, group, alpha, linetype, Size, as in geom_ridgeline.
+        clsgeom_density_ridges2.AddAesParameter("colour")
+        'clsgeom_density_ridges2.AddAesParameter("group")
+        clsgeom_density_ridges2.AddAesParameter("alpha")
+        clsgeom_density_ridges2.AddAesParameter("linetype")
+        'clsgeom_density_ridges2.AddAesParameter("Size")
+        'Aesthetics for point_shape, point_colour, point_size, point_fill, point_alpha, point_stroke
+        'clsgeom_density_ridges2.AddAesParameter("point_shape")
+        clsgeom_density_ridges2.AddAesParameter("point_colour")
+        'clsgeom_density_ridges2.AddAesParameter("point_size")
+        'clsgeom_density_ridges2.AddAesParameter("point_fill")
+        'clsgeom_density_ridges2.AddAesParameter("point_alpha")
+        'clsgeom_density_ridges2.AddAesParameter("point_stroke")
+
+        'adding layer parameters
+        clsgeom_density_ridges2.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges2.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34)})
+        clsgeom_density_ridges2.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_density_ridges2)
+
+        Dim clsgeom_density_ridges_gradient As New Geoms
+
+        clsgeom_density_ridges_gradient.SetGeomPackage("ggridges")
+        clsgeom_density_ridges_gradient.strGeomName = "geom_density_ridges_gradient"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges_gradient.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges_gradient.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        'Other Aesthetics
+        clsgeom_density_ridges_gradient.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_density_ridges_gradient.AddAesParameter("height")
+        clsgeom_density_ridges_gradient.AddAesParameter("group")
+        clsgeom_density_ridges_gradient.AddAesParameter("scale")
+        clsgeom_density_ridges_gradient.AddAesParameter("min_height")
+        'Aesthetics for colour, fill, group, alpha, linetype, Size, as in geom_ridgeline.
+        clsgeom_density_ridges_gradient.AddAesParameter("colour")
+        'clsgeom_density_ridges_gradient.AddAesParameter("group")
+        clsgeom_density_ridges_gradient.AddAesParameter("alpha")
+        clsgeom_density_ridges_gradient.AddAesParameter("linetype")
+        'clsgeom_density_ridges_gradient.AddAesParameter("Size")
+        'Aesthetics for point_shape, point_colour, point_size, point_fill, point_alpha, point_stroke
+        'clsgeom_density_ridges_gradient.AddAesParameter("point_shape")
+        clsgeom_density_ridges_gradient.AddAesParameter("point_colour")
+        'clsgeom_density_ridges_gradient.AddAesParameter("point_size")
+        'clsgeom_density_ridges_gradient.AddAesParameter("point_fill")
+        'clsgeom_density_ridges_gradient.AddAesParameter("point_alpha")
+        'clsgeom_density_ridges_gradient.AddAesParameter("point_stroke")
+
+        'adding layer parameters
+        clsgeom_density_ridges_gradient.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges_gradient.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34)})
+        clsgeom_density_ridges_gradient.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_density_ridges_gradient)
+
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
 
@@ -726,12 +915,45 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_dotplot)
 
+
+        clsgeom_dumbbell.SetGeomName("geom_dumbbell")
+        clsgeom_dumbbell.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_dumbbell.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("xend", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        'In the geom_dimbbell, yend is given as a mandatory aesthetic but in running the function it is not mandatory so am including it under optional aesthetics
+        clsgeom_dumbbell.AddAesParameter("yend", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("linetype", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_dumbbell.AddLayerParameter("colour_x", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("colour_xend", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("size_x", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("size_xend", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("dot_guide", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'If True Then, a leading dotted line will be placed before the left-most dumbbell point.
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_dumbbell)
+
+
         clsgeom_encircle.SetGeomPackage("ggalt")
         clsgeom_encircle.SetGeomName("geom_encircle")
 
         'Mandatory Aesthetics 
         clsgeom_encircle.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
-        ' will want to be able to take a subset of the data here, so the encircle circles points with those requirments
+        ' will want to be able to take a subset of the data here, so the encircle circles points with those requirements
         clsgeom_encircle.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
 
         'Optional Aesthetics 
@@ -757,46 +979,55 @@ Public Class ucrGeom
 
         'Aesthetics as layer parameters 
         clsgeom_encircle.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_encircle.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'alpha changes the transparaty of line. When fill parameter is used alpha changes the transparaty of the fill
+        clsgeom_encircle.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'alpha changes the transparency of line. When fill parameter is used alpha changes the transparaty of the fill
         clsgeom_encircle.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 0})
         clsgeom_encircle.AddLayerParameter("linetype", "list", Chr(34) & "solid" & Chr(34), lstParameterStrings:=strLineType)
-        clsgeom_encircle.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
+        clsgeom_encircle.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minority of shapes can be filled.
 
         lstAllGeoms.Add(clsgeom_encircle)
 
-        'clsgeom_errorbar.strGeomName = "geom_errorbar"
-        'Mandatory
-        'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=TRUE)
-        'clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=TRUE)
-        'Optional
-        'clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
-        'clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        'clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        'clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        'clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
-        ''adding layer parameters
-        'clsgeom_errorbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_errorbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_errorbar)
+        clsgeom_errorbar.strGeomName = "geom_errorbar"
+        '' Mandatory
+        clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        ''Optional
+        clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
+        'adding layer parameters
+        clsgeom_errorbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_errorbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_errorbar.AddLayerParameter("orienatation", "list", "NA", lstParameterStrings:={"NA", "x", "y"})
+        clsgeom_errorbar.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_errorbar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
 
-        'clsgeom_errorbarh.strGeomName = "geom_errorbarh"
-        ''mandatory
-        'clsgeom_errorbarh.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_errorbarh.AddAesParameter("xmax", bIsMandatory:=TRUE)
-        'clsgeom_errorbarh.AddAesParameter("xmin", bIsMandatory:=TRUE)
-        'clsgeom_errorbarh.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_errorbarh.AddAesParameter("alpha")
-        'clsgeom_errorbarh.AddAesParameter("colour")
-        'clsgeom_errorbarh.AddAesParameter("height")
-        'clsgeom_errorbarh.AddAesParameter("linetype")
-        'clsgeom_errorbarh.AddAesParameter("size")
+        lstAllGeoms.Add(clsgeom_errorbar)
 
-        'add layer parameters
-        'clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_errorbarh)
+        clsgeom_errorbarh.strGeomName = "geom_errorbarh"
+        'mandatory
+        clsgeom_errorbarh.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_errorbarh.AddAesParameter("xmax", bIsMandatory:=True)
+        clsgeom_errorbarh.AddAesParameter("xmin", bIsMandatory:=True)
+        clsgeom_errorbarh.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_errorbarh.AddAesParameter("alpha")
+        clsgeom_errorbarh.AddAesParameter("colour")
+        clsgeom_errorbarh.AddAesParameter("height")
+        clsgeom_errorbarh.AddAesParameter("linetype")
+        clsgeom_errorbarh.AddAesParameter("size")
+
+        ''add layer parameters
+        clsgeom_errorbarh.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_errorbarh.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_errorbarh.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={0, 0})
+        clsgeom_errorbarh.AddLayerParameter("height", "numeric", "0.2", lstParameterStrings:={1, 0})
+        clsgeom_errorbarh.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_errorbarh.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         'Adding aesthetics parameters.
@@ -831,26 +1062,51 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_freqpoly)
 
-        'clsgeom_hex.strGeomName = "geom_hex"
-        ''mandatory
-        'clsgeom_hex.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_hex.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_hex.AddAesParameter("alpha")
-        'clsgeom_hex.AddAesParameter("colour")
-        'clsgeom_hex.AddAesParameter("fill")
-        'clsgeom_hex.AddAesParameter("size")
 
-        ''add layer parameter 
-        'clsgeom_hex.AddLayerParameter("stat", "list", Chr(34) & "binhex" & Chr(34))
-        'clsgeom_hex.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_hex)
+        clsgeom_function.strGeomName = "geom_function"
+        'mandatory
+        clsgeom_function.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_function.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_function.AddAesParameter("alpha")
+        clsgeom_function.AddAesParameter("colour")
+        clsgeom_function.AddAesParameter("group")
+        clsgeom_function.AddAesParameter("height")
+        clsgeom_function.AddAesParameter("linetype")
+        clsgeom_function.AddAesParameter("size")
+
+        ''add layer parameters
+        clsgeom_function.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_function.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_function.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_function.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_function.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_function.AddLayerParameter("fun", "list", "dnorm", lstParameterStrings:={"dnorm"})
+        clsgeom_function.AddLayerParameter("n", "numeric", "10", lstParameterStrings:={0, 0})
+        lstAllGeoms.Add(clsgeom_function)
+
+        clsgeom_hex.strGeomName = "geom_hex"
+        'mandatory
+        clsgeom_hex.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_hex.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_hex.AddAesParameter("alpha")
+        clsgeom_hex.AddAesParameter("colour")
+        clsgeom_hex.AddAesParameter("fill")
+        clsgeom_hex.AddAesParameter("size")
+
+        'add layer parameter 
+        clsgeom_hex.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_hex.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_hex.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_hex.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_hline.SetGeomName("geom_hline") 'Warning: this geom never inherits global aesthetics ! It also doesn't affect the x and y scales. Can specify yintercept either with aes, or with parameter (second one overwrites). If want to vary with facets, need to mention as aes.
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
         'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
         'Task: add warning message to user...
-        'Adding aesthetics parametters
+        'Adding aesthetics parameters
         'Mandatory Aesthetics
         clsgeom_hline.AddAesParameter("yintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
@@ -938,7 +1194,7 @@ Public Class ucrGeom
         clsgeom_jitter.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
         clsgeom_jitter.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
         clsgeom_jitter.AddLayerParameter("stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Use the stroke aes to change the width of the outline of the shapes. When no outline stroke overrides size. 'Warning: sometimes negative values give errors...
-        clsgeom_jitter.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
+        clsgeom_jitter.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minority of shapes can be filled.
 
         lstAllGeoms.Add(clsgeom_jitter)
 
@@ -953,7 +1209,7 @@ Public Class ucrGeom
         clsgeom_label.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"}) 'Note: for the text
         clsgeom_label.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"}) 'size of the font
         clsgeom_label.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
-        'The following aesthetics are arguably more relevant relevant as parameters. Setting them as parameters overwrites the aes mapping.
+        'The following aesthetics are arguably more relevant as parameters. Setting them as parameters overwrites the aes mapping.
         clsgeom_label.AddAesParameter("family", strIncludedDataTypes:={"factor"})
         clsgeom_label.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
         clsgeom_label.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
@@ -972,8 +1228,8 @@ Public Class ucrGeom
         clsgeom_label.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
         clsgeom_label.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_label.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
-        'Warning: cnnot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
+        clsgeom_label.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        'Warning: cannot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         clsgeom_label.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
         'Aesthetics as layer parameters.
         clsgeom_label.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
@@ -988,6 +1244,44 @@ Public Class ucrGeom
         clsgeom_label.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_label)
 
+        clsgeom_label_repel.SetGeomPackage("ggrepel")
+        clsgeom_label_repel.SetGeomName("geom_label_repel")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_label_repel.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label_repel.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label_repel.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "Date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_label_repel.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'Further aestheticscould be
+        clsgeom_label_repel.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_label_repel.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_label_repel.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_label_repel.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_label_repel.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_text_repel Parameters
+        clsgeom_label_repel.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_label_repel.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_label_repel.AddLayerParameter("box.padding", "numeric", "0.25", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("point.padding", "numeric", "0", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("label.size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_label_repel.AddLayerParameter("label.r", "numeric", "0.15", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_label_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        clsgeom_label_repel.AddLayerParameter("max.time", "numeric", "0.5")
+        clsgeom_label_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_label_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
+        clsgeom_label_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_label_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_label_repel)
 
         clsgeom_line.SetGeomName("geom_line")
         'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
@@ -1016,21 +1310,24 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_line)
 
 
-        'clsgeom_linerange.strGeomName = "geom_linerange"
-        ''mandatory
-        'clsgeom_linerange.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_linerange.AddAesParameter("ymax", bIsMandatory:=TRUE)
-        'clsgeom_linerange.AddAesParameter("ymin", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_linerange.AddAesParameter("alpha")
-        'clsgeom_linerange.AddAesParameter("colour")
-        'clsgeom_linerange.AddAesParameter("linetype")
-        'clsgeom_linerange.AddAesParameter("size")
+        clsgeom_linerange.strGeomName = "geom_linerange"
+        'mandatory
+        clsgeom_linerange.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_linerange.AddAesParameter("ymax", bIsMandatory:=True)
+        clsgeom_linerange.AddAesParameter("ymin", bIsMandatory:=True)
+        'optional
+        clsgeom_linerange.AddAesParameter("alpha")
+        clsgeom_linerange.AddAesParameter("colour")
+        clsgeom_linerange.AddAesParameter("linetype")
+        clsgeom_linerange.AddAesParameter("size")
 
-        ''adding layer parameters
-        'clsgeom_linerange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_linerange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_linerange)
+        'adding layer parameters
+        clsgeom_linerange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_linerange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_errorbar.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "x", "y"})
+        clsgeom_linerange.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_linerange.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_linerange)
 
         'clsgeom_map.strGeomName = "geom_map"
         ''mandatory
@@ -1046,23 +1343,51 @@ Public Class ucrGeom
         'clsgeom_map.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_map)
 
-        'clsgeom_path.strGeomName = "geom_path"
-        ''mandatory
-        'clsgeom_path.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_path.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_path.AddAesParameter("alpha")
-        'clsgeom_path.AddAesParameter("colour")
-        'clsgeom_path.AddAesParameter("linetype")
-        'clsgeom_path.AddAesParameter("size")
-        ''add layer parameters 
-        'clsgeom_path.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
-        'clsgeom_path.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_path.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
-        ''linemitre should 1 or a number >1
-        'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_path)
+
+        clsgeom_lollipop.SetGeomName("geom_lollipop")
+        clsgeom_lollipop.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_lollipop.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_lollipop.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        clsgeom_lollipop.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_lollipop.AddLayerParameter("horizontal", "boolean", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("point.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_lollipop.AddLayerParameter("point.size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_lollipop.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_lollipop)
+
+        clsgeom_path.strGeomName = "geom_path"
+        'mandatory
+        clsgeom_path.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_path.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_path.AddAesParameter("alpha")
+        clsgeom_path.AddAesParameter("colour")
+        clsgeom_path.AddAesParameter("linetype")
+        clsgeom_path.AddAesParameter("size")
+        'add layer parameters 
+
+        clsgeom_path.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_path.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_path.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'linemitre should 1 or a number >1
+        clsgeom_path.AddLayerParameter("linemitre", "numeric", "1", lstParameterStrings:={0, 1})
+        clsgeom_path.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_mosaic.SetGeomPackage("ggmosaic")
         clsgeom_mosaic.strGeomName = "geom_mosaic"
@@ -1156,66 +1481,98 @@ Public Class ucrGeom
         clsgeom_polygon.AddLayerParameter("direction", "list", Chr(34) & "vh" & Chr(34), lstParameterStrings:={Chr(34) & "vh" & Chr(34), Chr(34) & "hv" & Chr(34)})
         lstAllGeoms.Add(clsgeom_polygon)
 
-        ''clsgeom_qq.strGeomName = "geom_qq"
-        ''clsgeom_qq.AddAesParameter("sample", bIsMandatory:=TRUE)
+        clsgeom_qq.strGeomName = "geom_qq"
+        clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
+        '' optional
+        clsgeom_qq.AddAesParameter("x")
+        clsgeom_qq.AddAesParameter("y")
+
+        ''layer params 
+        clsgeom_qq.AddLayerParameter("distribution", "list", "stats::qnorm", lstParameterStrings:={"stats::qnorm"})
+        clsgeom_qq.AddLayerParameter("dparams", "editablelist", "list()", lstParameterStrings:={"list()"})
+        clsgeom_qq.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_qq.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_qq)
+
+
+        clsgeom_qq_line.strGeomName = "geom_qq_line"
+        clsgeom_qq_line.AddAesParameter("sample", bIsMandatory:=True)
+        '' optional
+        clsgeom_qq_line.AddAesParameter("x")
+        clsgeom_qq_line.AddAesParameter("y")
+
+        ''layer params 
+        clsgeom_qq_line.AddLayerParameter("distribution", "list", "stats::qnorm", lstParameterStrings:={"stats::qnorm"})
+        clsgeom_qq_line.AddLayerParameter("dparams", "editablelist", "list()", lstParameterStrings:={"list()"})
+        clsgeom_qq_line.AddLayerParameter("fullrange", "boolean", "FALSE")
+        clsgeom_qq_line.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_qq_line.AddLayerParameter("line.p", "editablelist", "c(0.25, 0.75)", lstParameterStrings:={"c(0.25, 0.75)"})
+        clsgeom_qq_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_qq_line)
+
+
+        clsgeom_quantile.strGeomName = "geom_quantile"
+        clsgeom_quantile.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_quantile.AddAesParameter("y", bIsMandatory:=True)
         'optional
-        ''clsgeom_qq.AddAesParameter("x")
-        ''clsgeom_qq.AddAesParameter("y")
-        ''lstAllGeoms.Add(clsgeom_qq)
+        clsgeom_quantile.AddAesParameter("alpha")
+        clsgeom_quantile.AddAesParameter("colour")
+        clsgeom_quantile.AddAesParameter("linetype")
+        clsgeom_quantile.AddAesParameter("size")
+        clsgeom_quantile.AddAesParameter("weight")
 
-        'clsgeom_quantile.strGeomName = "geom_quantile"
-        'clsgeom_quantile.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_quantile.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_quantile.AddAesParameter("alpha")
-        'clsgeom_quantile.AddAesParameter("colour")
-        'clsgeom_quantile.AddAesParameter("linetype")
-        'clsgeom_quantile.AddAesParameter("size")
-        'clsgeom_quantile.AddAesParameter("weight")
+        'adding layer parameter
+        clsgeom_quantile.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
+        clsgeom_quantile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_quantile.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_quantile.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'linemitre should 1 or a number >1
+        clsgeom_quantile.AddLayerParameter("linemitre", "numeric", "1")
+        lstAllGeoms.Add(clsgeom_quantile)
 
-        ''adding layer parameter
-        'clsgeom_quantile.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
-        'clsgeom_quantile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_quantile.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_quantile.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
-        ''linemitre should 1 or a number >1
-        'clsgeom_quantile.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_quantile)
+        clsgeom_raster.strGeomName = "geom_raster"
+        'mandatory
+        clsgeom_raster.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_raster.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_raster.AddAesParameter("alpha")
+        clsgeom_raster.AddAesParameter("colour")
+        clsgeom_raster.AddAesParameter("fill")
+        clsgeom_raster.AddAesParameter("linetype")
+        clsgeom_raster.AddAesParameter("size")
 
-        'clsgeom_raster.strGeomName = "geom_raster"
-        ''mandatory
-        'clsgeom_raster.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_raster.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_raster.AddAesParameter("alpha")
-        'clsgeom_raster.AddAesParameter("colour")
-        'clsgeom_raster.AddAesParameter("fill")
-        'clsgeom_raster.AddAesParameter("linetype")
-        'clsgeom_raster.AddAesParameter("size")
+        'add layer parameter
+        clsgeom_quantile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_quantile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_raster.AddLayerParameter("hjust", "numeric", "0.5")
+        clsgeom_raster.AddLayerParameter("vjust", "numeric", "0.5")
+        clsgeom_raster.AddLayerParameter("interpolate ", "boolean", "FALSE")
+        clsgeom_raster.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_raster.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
 
-        ''add layer parameter
-        'clsgeom_raster.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_raster.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_raster.AddLayerParameter("hjust", "numeric", "0.5")
-        'clsgeom_raster.AddLayerParameter("vjust", "numeric", "0.5")
+        lstAllGeoms.Add(clsgeom_raster)
 
-        'lstAllGeoms.Add(clsgeom_raster)
+        clsgeom_rect.strGeomName = "geom_rect"
+        'mandatory
+        clsgeom_rect.AddAesParameter("xmin", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("xmax", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("ymin", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("ymax ", bIsMandatory:=True)
+        'optional
+        clsgeom_rect.AddAesParameter("alpha")
+        clsgeom_rect.AddAesParameter("colour")
+        clsgeom_rect.AddAesParameter("fill")
+        clsgeom_rect.AddAesParameter("linetype")
+        clsgeom_rect.AddAesParameter("size")
 
-        'clsgeom_rect.strGeomName = "geom_rect"
-        ''mandatory
-        'clsgeom_rect.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_rect.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_rect.AddAesParameter("alpha")
-        'clsgeom_rect.AddAesParameter("colour")
-        'clsgeom_rect.AddAesParameter("fill")
-        'clsgeom_rect.AddAesParameter("linetype")
-        'clsgeom_rect.AddAesParameter("size")
-
-        ''clsgeom_raster.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_rect.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_rect.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_rect)
+        clsgeom_rect.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_rect.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_raster.AddLayerParameter("size", "numeric", "0.5")
+        clsgeom_rect.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_rect.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_rect.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_rect)
 
         clsgeom_ribbon.strGeomName = "geom_ribbon"
         'mandatory aes are s or y or ymax or y min 
@@ -1241,10 +1598,81 @@ Public Class ucrGeom
         clsgeom_ribbon.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_ribbon)
 
+        Dim clsgeom_ridgeline As New Geoms
+
+        clsgeom_ridgeline.SetGeomPackage("ggridges")
+        clsgeom_ridgeline.strGeomName = "geom_ridgeline"
+        'Mandatory Aesthetics
+        clsgeom_ridgeline.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_ridgeline.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        'Other Aesthetics
+        clsgeom_ridgeline.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_ridgeline.AddAesParameter("height")
+        clsgeom_ridgeline.AddAesParameter("group")
+        clsgeom_ridgeline.AddAesParameter("scale")
+        clsgeom_ridgeline.AddAesParameter("min_height")
+        'Aesthetics for colour, fill, group, alpha, linetype, Size, as in geom_ridgeline.
+        clsgeom_ridgeline.AddAesParameter("colour")
+        'clsgeom_ridgeline.AddAesParameter("group")
+        clsgeom_ridgeline.AddAesParameter("alpha")
+        clsgeom_ridgeline.AddAesParameter("linetype")
+        'clsgeom_ridgeline.AddAesParameter("Size")
+        'Aesthetics for point_shape, point_colour, point_size, point_fill, point_alpha, point_stroke
+        'clsgeom_ridgeline.AddAesParameter("point_shape")
+        clsgeom_ridgeline.AddAesParameter("point_colour")
+        'clsgeom_ridgeline.AddAesParameter("point_size")
+        'clsgeom_ridgeline.AddAesParameter("point_fill")
+        'clsgeom_ridgeline.AddAesParameter("point_alpha")
+        'clsgeom_ridgeline.AddAesParameter("point_stroke")
+
+        'adding layer parameters
+        clsgeom_ridgeline.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_ridgeline.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "points_sina" & Chr(34), Chr(34) & "points_jitter" & Chr(34), Chr(34) & "raincloud" & Chr(34)})
+        clsgeom_ridgeline.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_ridgeline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_ridgeline.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_ridgeline)
+
+        Dim clsgeom_ridgeline_gradient As New Geoms
+
+        clsgeom_ridgeline_gradient.SetGeomPackage("ggridges")
+        clsgeom_ridgeline_gradient.strGeomName = "geom_ridgeline_gradient"
+        'Mandatory Aesthetics
+        clsgeom_ridgeline_gradient.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_ridgeline_gradient.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        'Other Aesthetics
+        clsgeom_ridgeline_gradient.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_ridgeline_gradient.AddAesParameter("height")
+        clsgeom_ridgeline_gradient.AddAesParameter("group")
+        clsgeom_ridgeline_gradient.AddAesParameter("scale")
+        clsgeom_ridgeline_gradient.AddAesParameter("min_height")
+        'Aesthetics for colour, fill, group, alpha, linetype, Size, as in geom_ridgeline.
+        clsgeom_ridgeline_gradient.AddAesParameter("colour")
+        'clsgeom_ridgeline_gradient.AddAesParameter("group")
+        clsgeom_ridgeline_gradient.AddAesParameter("alpha")
+        clsgeom_ridgeline_gradient.AddAesParameter("linetype")
+        'clsgeom_ridgeline_gradient.AddAesParameter("Size")
+        'Aesthetics for point_shape, point_colour, point_size, point_fill, point_alpha, point_stroke
+        'clsgeom_ridgeline_gradient.AddAesParameter("point_shape")
+        clsgeom_ridgeline_gradient.AddAesParameter("point_colour")
+        'clsgeom_ridgeline_gradient.AddAesParameter("point_size")
+        'clsgeom_ridgeline_gradient.AddAesParameter("point_fill")
+        'clsgeom_ridgeline_gradient.AddAesParameter("point_alpha")
+        'clsgeom_ridgeline_gradient.AddAesParameter("point_stroke")
+
+        'adding layer parameters
+        clsgeom_ridgeline_gradient.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_ridgeline_gradient.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_ridgeline_gradient.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_ridgeline_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_ridgeline_gradient.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_ridgeline_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_ridgeline_gradient)
+
         clsgeom_rug.SetGeomName("geom_rug")
         clsgeom_rug.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_rug.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
-        'These two are not made mendatory as we want to be able to choose only one, and could be either.
+        'These two are not made mandatory as we want to be able to choose only one, and could be either.
         clsgeom_rug.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_rug.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_rug.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
@@ -1293,7 +1721,7 @@ Public Class ucrGeom
         'sum and summary only work when x and y parameters are set within aes(). Summary option defaults to `mean_se() since no summary function supplied
         'think it's okay to have this greyed out for now because we only tend to use stat = "identity"
         clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        'other options for position are ignored when using geom segement on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
+        'other options for position are ignored when using geom segment on a scatter plot (geom_point) - R gives the following warning: "Ignoring unknown parameters: identity"
         clsgeom_segment.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_segment.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
@@ -1328,10 +1756,10 @@ Public Class ucrGeom
 
 
         clsgeom_smooth.strGeomName = "geom_smooth"
-        ' mandatory
+        'Mandatory Aesthetics 
         clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        ' optional 
+        'Optional Aesthetics 
         clsgeom_smooth.AddAesParameter("alpha")
         clsgeom_smooth.AddAesParameter("colour")
         clsgeom_smooth.AddAesParameter("fill")
@@ -1340,24 +1768,28 @@ Public Class ucrGeom
         clsgeom_smooth.AddAesParameter("size")
         clsgeom_smooth.AddAesParameter("weight")
 
-        'add  layer parameter
+        'Add  layer parameters
         ''****Not sure how many positions exist for geom_smooth
         clsgeom_smooth.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         'Can we have  stack, DoDragDrop, fill positions here)
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
-        clsgeom_smooth.AddLayerParameter("formula", "editablelist", Chr(34) & "y ~ x" & Chr(34), lstParameterStrings:={Chr(34) & "y ~ x" & Chr(34), Chr(34) & "y ~ poly(x, 2)" & Chr(34), Chr(34) & "y ~ log(x)" & Chr(34), Chr(34) & " y ~ splines::bs(x,3)" & Chr(34)})
-        clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        clsgeom_smooth.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
+        clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
+        clsgeom_smooth.AddLayerParameter("method.args", "editablelist", "list()", lstParameterStrings:={"list()"})
         clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
         clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'geom and stat are missing here as we dont know how to override the default connection between geom_smooth and stat_smooth
         'you can have stat_smooth or geom_smooth. I am not sure how we can do that from here, changing the smothing function
 
         clsgeom_smooth.AddLayerParameter("n", "numeric", "0")
-        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0.3", lstParameterStrings:={2, 0, 1})
         clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+        clsgeom_smooth.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        clsgeom_smooth.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
 
         'method.args is a list of methods passed into the moddeling function
         'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
@@ -1365,40 +1797,43 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_smooth)
 
-        'clsgeom_spoke.strGeomName = "geom_spoke"
-        ''mandatory
-        'clsgeom_spoke.AddAesParameter("angle", bIsMandatory:=TRUE)
-        'clsgeom_spoke.AddAesParameter("radius", bIsMandatory:=TRUE)
-        'clsgeom_spoke.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_spoke.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_spoke.AddAesParameter("alpha")
-        'clsgeom_spoke.AddAesParameter("colour")
-        'clsgeom_spoke.AddAesParameter("linetype")
-        'clsgeom_spoke.AddAesParameter("size")
+        clsgeom_spoke.strGeomName = "geom_spoke"
+        'mandatory
+        clsgeom_spoke.AddAesParameter("angle", bIsMandatory:=True)
+        clsgeom_spoke.AddAesParameter("radius", bIsMandatory:=True)
+        clsgeom_spoke.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_spoke.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_spoke.AddAesParameter("alpha")
+        clsgeom_spoke.AddAesParameter("colour")
+        clsgeom_spoke.AddAesParameter("linetype")
+        clsgeom_spoke.AddAesParameter("size")
 
-        ''add layer parameter
-        'clsgeom_spoke.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_spoke.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_spoke)
+        'add layer parameter
+        clsgeom_spoke.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_spoke.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_spoke.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_spoke.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_spoke)
 
-        'clsgeom_step.strGeomName = "geom_step"
-        'clsgeom_step.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_step.AddAesParameter("y", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_step.AddAesParameter("alpha")
-        'clsgeom_step.AddAesParameter("colour")
-        'clsgeom_step.AddAesParameter("linetype")
-        'clsgeom_step.AddAesParameter("size")
+        clsgeom_step.strGeomName = "geom_step"
+        clsgeom_step.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_step.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_step.AddAesParameter("alpha")
+        clsgeom_step.AddAesParameter("colour")
+        clsgeom_step.AddAesParameter("linetype")
+        clsgeom_step.AddAesParameter("size")
 
-        ''adding layer parameter
-        'clsgeom_step.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
-        'clsgeom_step.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_step.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_step.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
-        ''linemitre should 1 or a number >1
-        'clsgeom_step.AddLayerParameter("linemitre", "numeric", "1")
-        'lstAllGeoms.Add(clsgeom_step)
+        'adding layer parameter
+        clsgeom_step.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
+        clsgeom_step.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_step.AddLayerParameter("direction", "list", Chr(34) & "hv" & Chr(34), lstParameterStrings:={Chr(34) & "hv" & Chr(34), Chr(34) & "vh" & Chr(34)})
+        clsgeom_step.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_step.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'linemitre should 1 or a number >1
+        clsgeom_step.AddLayerParameter("linemitre", "numeric", "1")
+        lstAllGeoms.Add(clsgeom_step)
 
         clsgeom_text.SetGeomName("geom_text") 'Note: can also add text on the graph via annotate (to be added on sdgplots).
         'Adding aesthetics parameters
@@ -1425,9 +1860,9 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
         clsgeom_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
-        'Warning: cnnot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
-        clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
+        clsgeom_text.AddLayerParameter("position", "editablelist", "position_identity()", lstParameterStrings:={"position_identity()", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        'Warning: cannot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
+        clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
         'Aesthetics as layer parameters.
         clsgeom_text.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
         clsgeom_text.AddLayerParameter("fontface", "list", Chr(34) & "plain" & Chr(34), lstParameterStrings:={Chr(34) & "plain" & Chr(34), Chr(34) & "bold" & Chr(34), Chr(34) & "italic" & Chr(34), Chr(34) & "bold.italic" & Chr(34)})
@@ -1439,6 +1874,45 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_text)
+
+        clsgeom_text_repel.SetGeomPackage("ggrepel")
+        clsgeom_text_repel.SetGeomName("geom_text_repel")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_text_repel.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text_repel.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text_repel.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "Date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_text_repel.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'Further aesthetics include
+        clsgeom_text_repel.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_text_repel.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_text_repel.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_text_repel.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_text_repel.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_text_repel Parameters
+        clsgeom_text_repel.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_text_repel.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_text_repel.AddLayerParameter("box.padding", "numeric", "0.25", lstParameterStrings:={2, 0})
+        clsgeom_text_repel.AddLayerParameter("point.padding", "numeric", "0", lstParameterStrings:={2, 0})
+        clsgeom_text_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_text_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        clsgeom_text_repel.AddLayerParameter("max.time", "numeric", "0.5")
+        clsgeom_text_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_text_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
+        clsgeom_text_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_text_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_text_repel.AddLayerParameter("force", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("force_pull", "numeric", "1", lstParameterStrings:={2})
+        lstAllGeoms.Add(clsgeom_text_repel)
 
         clsgeom_tile.strGeomName = "geom_tile"
 
@@ -1543,10 +2017,11 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
-        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "fivenumber" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
-        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("voffset", "numeric", "0.01", lstParameterStrings:={2, 0})
@@ -1560,7 +2035,6 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
         lstAllGeoms.Add(clsgeom_tufteboxplot)
-
 
 
         clsgeom_violin.strGeomName = "geom_violin"
@@ -1608,7 +2082,7 @@ Public Class ucrGeom
         'Warning: it does not have position or stat, neither inherit.aes parameters. However, when mentioned, these are simply ignored... 
         'Task: untick and disable IgnoreGlobalAes and ApplyOnAllLayers for this geom.
         'Task: add warning message to user...
-        'Adding aesthetics parametters
+        'Adding aesthetics parameters
         'Mandatory Aesthetics
         clsgeom_vline.AddAesParameter("xintercept", strIncludedDataTypes:={"numeric"})
         'Warning/to be discussed: when this is set as parameter, it is not really mandatory... should we introduce a partially mandatory method nbr 2 ? For now I think it can be left like this...
@@ -1651,9 +2125,12 @@ Public Class ucrGeom
             If iNewGeomIndex <> -1 Then
                 clsCurrGeom = lstAllGeoms(iNewGeomIndex)
                 If iNewGeomIndex <> iCurrentGeomIndex Then
-                    For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
-                        clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
-                    Next
+                    'TODO Why do we have to remove the parameters here?
+                    If Not bResetGlobal Then
+                        For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
+                            clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
+                        Next
+                    End If
                     clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
                     clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
                     iCurrentGeomIndex = iNewGeomIndex

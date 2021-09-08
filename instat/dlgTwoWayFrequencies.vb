@@ -28,7 +28,6 @@ Public Class dlgTwoWayFrequencies
     Private iTableTypeMaxX As Integer
 
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -45,6 +44,7 @@ Public Class dlgTwoWayFrequencies
         'temp needed because of show/hiding bug
         SetLocations()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

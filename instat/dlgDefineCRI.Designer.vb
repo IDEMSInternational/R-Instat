@@ -93,6 +93,7 @@ Partial Class dlgCorruptionDefineCRI
         'lstIndexComponents
         '
         Me.lstIndexComponents.FullRowSelect = True
+        Me.lstIndexComponents.HideSelection = False
         resources.ApplyResources(Me.lstIndexComponents, "lstIndexComponents")
         Me.lstIndexComponents.Name = "lstIndexComponents"
         Me.lstIndexComponents.UseCompatibleStateImageBehavior = False

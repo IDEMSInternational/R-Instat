@@ -96,9 +96,9 @@ Partial Class dlgWindrose
         '
         'cmdWindroseOptions
         '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 201)
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(105, 23)
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdWindroseOptions.TabIndex = 11
         Me.cmdWindroseOptions.Text = "Windrose Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
@@ -135,7 +135,7 @@ Partial Class dlgWindrose
         Me.ucrInputCaption.AddQuotesIfUnrecognised = True
         Me.ucrInputCaption.IsMultiline = False
         Me.ucrInputCaption.IsReadOnly = False
-        Me.ucrInputCaption.Location = New System.Drawing.Point(99, 287)
+        Me.ucrInputCaption.Location = New System.Drawing.Point(155, 287)
         Me.ucrInputCaption.Name = "ucrInputCaption"
         Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputCaption.TabIndex = 17
@@ -145,7 +145,7 @@ Partial Class dlgWindrose
         Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputSubTitle.IsMultiline = False
         Me.ucrInputSubTitle.IsReadOnly = False
-        Me.ucrInputSubTitle.Location = New System.Drawing.Point(99, 260)
+        Me.ucrInputSubTitle.Location = New System.Drawing.Point(155, 260)
         Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
         Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputSubTitle.TabIndex = 16
@@ -155,7 +155,7 @@ Partial Class dlgWindrose
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(99, 230)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(155, 230)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputTitle.TabIndex = 15
@@ -175,8 +175,9 @@ Partial Class dlgWindrose
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns
@@ -237,7 +238,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 413)
+        Me.ClientSize = New System.Drawing.Size(420, 406)
         Me.Controls.Add(Me.lblGraphCaption)
         Me.Controls.Add(Me.lblGraphSubtitle)
         Me.Controls.Add(Me.lblGraphTitle)

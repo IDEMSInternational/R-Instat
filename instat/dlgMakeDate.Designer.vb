@@ -148,6 +148,7 @@ Partial Class dlgMakeDate
         'ucrInputComboBoxMonthTwo
         '
         Me.ucrInputComboBoxMonthTwo.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxMonthTwo.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxMonthTwo.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboBoxMonthTwo, "ucrInputComboBoxMonthTwo")
         Me.ucrInputComboBoxMonthTwo.Name = "ucrInputComboBoxMonthTwo"
@@ -217,6 +218,8 @@ Partial Class dlgMakeDate
         '
         'ucrDtpSpecifyOrigin
         '
+        Me.ucrDtpSpecifyOrigin.DateValue = New Date(2021, 5, 19, 13, 56, 22, 794)
+        Me.ucrDtpSpecifyOrigin.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
         Me.ucrDtpSpecifyOrigin.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpSpecifyOrigin.MinDate = New Date(1753, 2, 1, 0, 0, 0, 0)
@@ -225,6 +228,7 @@ Partial Class dlgMakeDate
         'ucrInputUnits
         '
         Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.GetSetSelectedIndex = -1
         Me.ucrInputUnits.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
         Me.ucrInputUnits.Name = "ucrInputUnits"
@@ -266,6 +270,7 @@ Partial Class dlgMakeDate
         'UcrInputComboBox1
         '
         Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.GetSetSelectedIndex = -1
         Me.UcrInputComboBox1.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox1, "UcrInputComboBox1")
         Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
@@ -273,6 +278,7 @@ Partial Class dlgMakeDate
         'UcrInputComboBox2
         '
         Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox2.GetSetSelectedIndex = -1
         Me.UcrInputComboBox2.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox2, "UcrInputComboBox2")
         Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
@@ -280,6 +286,7 @@ Partial Class dlgMakeDate
         'UcrInputComboBox3
         '
         Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox3.GetSetSelectedIndex = -1
         Me.UcrInputComboBox3.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox3, "UcrInputComboBox3")
         Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
@@ -287,6 +294,7 @@ Partial Class dlgMakeDate
         'UcrInputComboBox4
         '
         Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox4.GetSetSelectedIndex = -1
         Me.UcrInputComboBox4.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox4, "UcrInputComboBox4")
         Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
@@ -329,6 +337,7 @@ Partial Class dlgMakeDate
         'ucrInputFormat
         '
         Me.ucrInputFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormat.GetSetSelectedIndex = -1
         Me.ucrInputFormat.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
         Me.ucrInputFormat.Name = "ucrInputFormat"
@@ -336,6 +345,7 @@ Partial Class dlgMakeDate
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrigin.GetSetSelectedIndex = -1
         Me.ucrInputOrigin.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOrigin, "ucrInputOrigin")
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
@@ -470,6 +480,7 @@ Partial Class dlgMakeDate
         'ucrInputMonthOption
         '
         Me.ucrInputMonthOption.AddQuotesIfUnrecognised = True
+        Me.ucrInputMonthOption.GetSetSelectedIndex = -1
         Me.ucrInputMonthOption.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMonthOption, "ucrInputMonthOption")
         Me.ucrInputMonthOption.Name = "ucrInputMonthOption"
@@ -477,6 +488,7 @@ Partial Class dlgMakeDate
         'ucrInputYearOption
         '
         Me.ucrInputYearOption.AddQuotesIfUnrecognised = True
+        Me.ucrInputYearOption.GetSetSelectedIndex = -1
         Me.ucrInputYearOption.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYearOption, "ucrInputYearOption")
         Me.ucrInputYearOption.Name = "ucrInputYearOption"
@@ -593,8 +605,6 @@ Partial Class dlgMakeDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpSingleColumn)
-        Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.rdoThreeColumns)
         Me.Controls.Add(Me.rdoTwoColumns)
@@ -604,6 +614,8 @@ Partial Class dlgMakeDate
         Me.Controls.Add(Me.grpTwoColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorMakeDate)
+        Me.Controls.Add(Me.grpSingleColumn)
+        Me.Controls.Add(Me.grpThreeColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

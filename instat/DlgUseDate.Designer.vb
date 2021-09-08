@@ -42,32 +42,16 @@ Partial Class dlgUseDate
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseDate))
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.ttYearNumeric = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkShiftYearName = New instat.ucrCheck()
         Me.lblDayinYear366 = New System.Windows.Forms.Label()
-        Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
         Me.lblShiftYear = New System.Windows.Forms.Label()
-        Me.ucrChkShiftYearNum = New instat.ucrCheck()
         Me.lblShiftMonth = New System.Windows.Forms.Label()
-        Me.ucrChkShiftDekadAbbr = New instat.ucrCheck()
         Me.lblShiftPentad = New System.Windows.Forms.Label()
         Me.lblDayInYear = New System.Windows.Forms.Label()
-        Me.ucrChkShiftMonthAbbr = New instat.ucrCheck()
         Me.lblShiftNumeric = New System.Windows.Forms.Label()
         Me.lblShiftQuarter = New System.Windows.Forms.Label()
-        Me.ucrChkShiftMonthName = New instat.ucrCheck()
-        Me.ucrChkShiftQuarterAbbr = New instat.ucrCheck()
         Me.lblShiftAbbr = New System.Windows.Forms.Label()
         Me.lblShiftDekad = New System.Windows.Forms.Label()
-        Me.ucrChkShiftDekadNum = New instat.ucrCheck()
-        Me.ucrChkShiftQuarterNum = New instat.ucrCheck()
-        Me.ucrChkDayInYearNum = New instat.ucrCheck()
-        Me.ucrChkShiftMonthNum = New instat.ucrCheck()
         Me.lblShift = New System.Windows.Forms.Label()
-        Me.ucrChkShiftDayInYearNum366 = New instat.ucrCheck()
-        Me.ucrChkShiftPentadNum = New instat.ucrCheck()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ucrChkDaysInMonthNum = New instat.ucrCheck()
         Me.lblDaysInMonth = New System.Windows.Forms.Label()
@@ -90,6 +74,22 @@ Partial Class dlgUseDate
         Me.lblShifted = New System.Windows.Forms.Label()
         Me.ucrInputComboBoxStartingMonth = New instat.ucrInputComboBox()
         Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
+        Me.ucrChkShiftYearName = New instat.ucrCheck()
+        Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
+        Me.ucrChkShiftYearNum = New instat.ucrCheck()
+        Me.ucrChkShiftDekadAbbr = New instat.ucrCheck()
+        Me.ucrChkShiftMonthAbbr = New instat.ucrCheck()
+        Me.ucrChkShiftMonthName = New instat.ucrCheck()
+        Me.ucrChkShiftQuarterAbbr = New instat.ucrCheck()
+        Me.ucrChkShiftDekadNum = New instat.ucrCheck()
+        Me.ucrChkShiftQuarterNum = New instat.ucrCheck()
+        Me.ucrChkDayInYearNum = New instat.ucrCheck()
+        Me.ucrChkShiftMonthNum = New instat.ucrCheck()
+        Me.ucrChkShiftDayInYearNum366 = New instat.ucrCheck()
+        Me.ucrChkShiftPentadNum = New instat.ucrCheck()
+        Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -99,66 +99,20 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.lblDateVariable, "lblDateVariable")
         Me.lblDateVariable.Name = "lblDateVariable"
         '
-        'ucrReceiverUseDate
-        '
-        Me.ucrReceiverUseDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverUseDate, "ucrReceiverUseDate")
-        Me.ucrReceiverUseDate.Name = "ucrReceiverUseDate"
-        Me.ucrReceiverUseDate.Selector = Nothing
-        Me.ucrReceiverUseDate.strNcFilePath = ""
-        Me.ucrReceiverUseDate.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorUseDate
-        '
-        Me.ucrSelectorUseDate.bDropUnusedFilterLevels = False
-        Me.ucrSelectorUseDate.bShowHiddenColumns = False
-        Me.ucrSelectorUseDate.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
-        Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
-        '
-        'ucrChkShiftYearName
-        '
-        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
-        Me.ucrChkShiftYearName.Checked = False
-        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
-        '
         'lblDayinYear366
         '
         resources.ApplyResources(Me.lblDayinYear366, "lblDayinYear366")
         Me.lblDayinYear366.Name = "lblDayinYear366"
-        '
-        'ucrChkShiftPentadAbbr
-        '
-        resources.ApplyResources(Me.ucrChkShiftPentadAbbr, "ucrChkShiftPentadAbbr")
-        Me.ucrChkShiftPentadAbbr.Checked = False
-        Me.ucrChkShiftPentadAbbr.Name = "ucrChkShiftPentadAbbr"
         '
         'lblShiftYear
         '
         resources.ApplyResources(Me.lblShiftYear, "lblShiftYear")
         Me.lblShiftYear.Name = "lblShiftYear"
         '
-        'ucrChkShiftYearNum
-        '
-        resources.ApplyResources(Me.ucrChkShiftYearNum, "ucrChkShiftYearNum")
-        Me.ucrChkShiftYearNum.Checked = False
-        Me.ucrChkShiftYearNum.Name = "ucrChkShiftYearNum"
-        '
         'lblShiftMonth
         '
         resources.ApplyResources(Me.lblShiftMonth, "lblShiftMonth")
         Me.lblShiftMonth.Name = "lblShiftMonth"
-        '
-        'ucrChkShiftDekadAbbr
-        '
-        resources.ApplyResources(Me.ucrChkShiftDekadAbbr, "ucrChkShiftDekadAbbr")
-        Me.ucrChkShiftDekadAbbr.Checked = False
-        Me.ucrChkShiftDekadAbbr.Name = "ucrChkShiftDekadAbbr"
         '
         'lblShiftPentad
         '
@@ -170,12 +124,6 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.lblDayInYear, "lblDayInYear")
         Me.lblDayInYear.Name = "lblDayInYear"
         '
-        'ucrChkShiftMonthAbbr
-        '
-        resources.ApplyResources(Me.ucrChkShiftMonthAbbr, "ucrChkShiftMonthAbbr")
-        Me.ucrChkShiftMonthAbbr.Checked = False
-        Me.ucrChkShiftMonthAbbr.Name = "ucrChkShiftMonthAbbr"
-        '
         'lblShiftNumeric
         '
         resources.ApplyResources(Me.lblShiftNumeric, "lblShiftNumeric")
@@ -185,18 +133,6 @@ Partial Class dlgUseDate
         '
         resources.ApplyResources(Me.lblShiftQuarter, "lblShiftQuarter")
         Me.lblShiftQuarter.Name = "lblShiftQuarter"
-        '
-        'ucrChkShiftMonthName
-        '
-        resources.ApplyResources(Me.ucrChkShiftMonthName, "ucrChkShiftMonthName")
-        Me.ucrChkShiftMonthName.Checked = False
-        Me.ucrChkShiftMonthName.Name = "ucrChkShiftMonthName"
-        '
-        'ucrChkShiftQuarterAbbr
-        '
-        resources.ApplyResources(Me.ucrChkShiftQuarterAbbr, "ucrChkShiftQuarterAbbr")
-        Me.ucrChkShiftQuarterAbbr.Checked = False
-        Me.ucrChkShiftQuarterAbbr.Name = "ucrChkShiftQuarterAbbr"
         '
         'lblShiftAbbr
         '
@@ -208,46 +144,10 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.lblShiftDekad, "lblShiftDekad")
         Me.lblShiftDekad.Name = "lblShiftDekad"
         '
-        'ucrChkShiftDekadNum
-        '
-        resources.ApplyResources(Me.ucrChkShiftDekadNum, "ucrChkShiftDekadNum")
-        Me.ucrChkShiftDekadNum.Checked = False
-        Me.ucrChkShiftDekadNum.Name = "ucrChkShiftDekadNum"
-        '
-        'ucrChkShiftQuarterNum
-        '
-        resources.ApplyResources(Me.ucrChkShiftQuarterNum, "ucrChkShiftQuarterNum")
-        Me.ucrChkShiftQuarterNum.Checked = False
-        Me.ucrChkShiftQuarterNum.Name = "ucrChkShiftQuarterNum"
-        '
-        'ucrChkDayInYearNum
-        '
-        resources.ApplyResources(Me.ucrChkDayInYearNum, "ucrChkDayInYearNum")
-        Me.ucrChkDayInYearNum.Checked = False
-        Me.ucrChkDayInYearNum.Name = "ucrChkDayInYearNum"
-        '
-        'ucrChkShiftMonthNum
-        '
-        resources.ApplyResources(Me.ucrChkShiftMonthNum, "ucrChkShiftMonthNum")
-        Me.ucrChkShiftMonthNum.Checked = False
-        Me.ucrChkShiftMonthNum.Name = "ucrChkShiftMonthNum"
-        '
         'lblShift
         '
         resources.ApplyResources(Me.lblShift, "lblShift")
         Me.lblShift.Name = "lblShift"
-        '
-        'ucrChkShiftDayInYearNum366
-        '
-        resources.ApplyResources(Me.ucrChkShiftDayInYearNum366, "ucrChkShiftDayInYearNum366")
-        Me.ucrChkShiftDayInYearNum366.Checked = False
-        Me.ucrChkShiftDayInYearNum366.Name = "ucrChkShiftDayInYearNum366"
-        '
-        'ucrChkShiftPentadNum
-        '
-        resources.ApplyResources(Me.ucrChkShiftPentadNum, "ucrChkShiftPentadNum")
-        Me.ucrChkShiftPentadNum.Checked = False
-        Me.ucrChkShiftPentadNum.Name = "ucrChkShiftPentadNum"
         '
         'GroupBox2
         '
@@ -383,6 +283,7 @@ Partial Class dlgUseDate
         'ucrInputComboBoxStartingMonth
         '
         Me.ucrInputComboBoxStartingMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxStartingMonth.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxStartingMonth.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboBoxStartingMonth, "ucrInputComboBoxStartingMonth")
         Me.ucrInputComboBoxStartingMonth.Name = "ucrInputComboBoxStartingMonth"
@@ -391,6 +292,106 @@ Partial Class dlgUseDate
         '
         resources.ApplyResources(Me.lblShiftStartingMonth, "lblShiftStartingMonth")
         Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
+        '
+        'ucrChkShiftYearName
+        '
+        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
+        Me.ucrChkShiftYearName.Checked = False
+        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
+        '
+        'ucrChkShiftPentadAbbr
+        '
+        resources.ApplyResources(Me.ucrChkShiftPentadAbbr, "ucrChkShiftPentadAbbr")
+        Me.ucrChkShiftPentadAbbr.Checked = False
+        Me.ucrChkShiftPentadAbbr.Name = "ucrChkShiftPentadAbbr"
+        '
+        'ucrChkShiftYearNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftYearNum, "ucrChkShiftYearNum")
+        Me.ucrChkShiftYearNum.Checked = False
+        Me.ucrChkShiftYearNum.Name = "ucrChkShiftYearNum"
+        '
+        'ucrChkShiftDekadAbbr
+        '
+        resources.ApplyResources(Me.ucrChkShiftDekadAbbr, "ucrChkShiftDekadAbbr")
+        Me.ucrChkShiftDekadAbbr.Checked = False
+        Me.ucrChkShiftDekadAbbr.Name = "ucrChkShiftDekadAbbr"
+        '
+        'ucrChkShiftMonthAbbr
+        '
+        resources.ApplyResources(Me.ucrChkShiftMonthAbbr, "ucrChkShiftMonthAbbr")
+        Me.ucrChkShiftMonthAbbr.Checked = False
+        Me.ucrChkShiftMonthAbbr.Name = "ucrChkShiftMonthAbbr"
+        '
+        'ucrChkShiftMonthName
+        '
+        resources.ApplyResources(Me.ucrChkShiftMonthName, "ucrChkShiftMonthName")
+        Me.ucrChkShiftMonthName.Checked = False
+        Me.ucrChkShiftMonthName.Name = "ucrChkShiftMonthName"
+        '
+        'ucrChkShiftQuarterAbbr
+        '
+        resources.ApplyResources(Me.ucrChkShiftQuarterAbbr, "ucrChkShiftQuarterAbbr")
+        Me.ucrChkShiftQuarterAbbr.Checked = False
+        Me.ucrChkShiftQuarterAbbr.Name = "ucrChkShiftQuarterAbbr"
+        '
+        'ucrChkShiftDekadNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftDekadNum, "ucrChkShiftDekadNum")
+        Me.ucrChkShiftDekadNum.Checked = False
+        Me.ucrChkShiftDekadNum.Name = "ucrChkShiftDekadNum"
+        '
+        'ucrChkShiftQuarterNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftQuarterNum, "ucrChkShiftQuarterNum")
+        Me.ucrChkShiftQuarterNum.Checked = False
+        Me.ucrChkShiftQuarterNum.Name = "ucrChkShiftQuarterNum"
+        '
+        'ucrChkDayInYearNum
+        '
+        resources.ApplyResources(Me.ucrChkDayInYearNum, "ucrChkDayInYearNum")
+        Me.ucrChkDayInYearNum.Checked = False
+        Me.ucrChkDayInYearNum.Name = "ucrChkDayInYearNum"
+        '
+        'ucrChkShiftMonthNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftMonthNum, "ucrChkShiftMonthNum")
+        Me.ucrChkShiftMonthNum.Checked = False
+        Me.ucrChkShiftMonthNum.Name = "ucrChkShiftMonthNum"
+        '
+        'ucrChkShiftDayInYearNum366
+        '
+        resources.ApplyResources(Me.ucrChkShiftDayInYearNum366, "ucrChkShiftDayInYearNum366")
+        Me.ucrChkShiftDayInYearNum366.Checked = False
+        Me.ucrChkShiftDayInYearNum366.Name = "ucrChkShiftDayInYearNum366"
+        '
+        'ucrChkShiftPentadNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftPentadNum, "ucrChkShiftPentadNum")
+        Me.ucrChkShiftPentadNum.Checked = False
+        Me.ucrChkShiftPentadNum.Name = "ucrChkShiftPentadNum"
+        '
+        'ucrReceiverUseDate
+        '
+        Me.ucrReceiverUseDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverUseDate, "ucrReceiverUseDate")
+        Me.ucrReceiverUseDate.Name = "ucrReceiverUseDate"
+        Me.ucrReceiverUseDate.Selector = Nothing
+        Me.ucrReceiverUseDate.strNcFilePath = ""
+        Me.ucrReceiverUseDate.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSelectorUseDate
+        '
+        Me.ucrSelectorUseDate.bDropUnusedFilterLevels = False
+        Me.ucrSelectorUseDate.bShowHiddenColumns = False
+        Me.ucrSelectorUseDate.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
+        Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
         '
         'dlgUseDate
         '

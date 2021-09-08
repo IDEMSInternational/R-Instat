@@ -49,7 +49,6 @@ Partial Class dlgTransformClimatic
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
         Me.lblSumRows = New System.Windows.Forms.Label()
         Me.lblSumOver = New System.Windows.Forms.Label()
-        Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
@@ -77,7 +76,7 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.ucrInputColName = New instat.ucrInputTextBox()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -160,12 +159,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.lblSumOver, "lblSumOver")
         Me.lblSumOver.Name = "lblSumOver"
         Me.lblSumOver.Tag = "Over"
-        '
-        'lblNewColName
-        '
-        resources.ApplyResources(Me.lblNewColName, "lblNewColName")
-        Me.lblNewColName.Name = "lblNewColName"
-        Me.lblNewColName.Tag = "New Column Name:"
         '
         'lblCountOver
         '
@@ -250,6 +243,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCumulative
         '
         Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        Me.ucrInputCumulative.GetSetSelectedIndex = -1
         Me.ucrInputCumulative.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
         Me.ucrInputCumulative.Name = "ucrInputCumulative"
@@ -257,6 +251,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCircularPosition
         '
         Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCircularPosition.GetSetSelectedIndex = -1
         Me.ucrInputCircularPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
         Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
@@ -269,6 +264,7 @@ Partial Class dlgTransformClimatic
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.Name = "ucrInputPosition"
@@ -306,6 +302,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCondition
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
         Me.ucrInputCondition.Name = "ucrInputCondition"
@@ -359,6 +356,7 @@ Partial Class dlgTransformClimatic
         'ucrInputSum
         '
         Me.ucrInputSum.AddQuotesIfUnrecognised = True
+        Me.ucrInputSum.GetSetSelectedIndex = -1
         Me.ucrInputSum.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSum, "ucrInputSum")
         Me.ucrInputSum.Name = "ucrInputSum"
@@ -393,13 +391,10 @@ Partial Class dlgTransformClimatic
         Me.rdoCumulative.Name = "rdoCumulative"
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
-        'ucrInputColName
+        'ucrSaveColumn
         '
-        Me.ucrInputColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputColName.IsMultiline = False
-        Me.ucrInputColName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColName, "ucrInputColName")
-        Me.ucrInputColName.Name = "ucrInputColName"
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
         '
         'ucrPnlTransform
         '
@@ -459,11 +454,10 @@ Partial Class dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.rdoMultSpells)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.lblNewColName)
-        Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.rdoWaterBalance)
         Me.Controls.Add(Me.rdoSpell)
         Me.Controls.Add(Me.rdoMoving)
@@ -509,8 +503,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrNudSumOver As ucrNud
     Friend WithEvents lblSumOver As Label
     Friend WithEvents ucrInputSum As ucrInputComboBox
-    Friend WithEvents ucrInputColName As ucrInputTextBox
-    Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrNudCountOver As ucrNud
     Friend WithEvents lblCountOver As Label
     Friend WithEvents lblWBEvaporation As Label
@@ -536,4 +528,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputCircularPosition As ucrInputComboBox
     Friend WithEvents rdoCumulative As RadioButton
     Friend WithEvents ucrInputCumulative As ucrInputComboBox
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class

@@ -186,9 +186,9 @@ Partial Class sdgExtremesDisplayOptions
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(72, 191)
+        Me.ucrBase.Location = New System.Drawing.Point(66, 193)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(157, 30)
         Me.ucrBase.TabIndex = 2
         '
         'sdgExtremesDisplayOptions

@@ -121,6 +121,10 @@
   <data name="lblColumnsToConvert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblColumnsToConvert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumnsToConvert.Location" type="System.Drawing.Point, System.Drawing">
     <value>247, 45</value>
@@ -144,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumnsToConvert.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;rdoLogical.Name" xml:space="preserve">
     <value>rdoLogical</value>
@@ -252,10 +256,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpConvertTo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="rdoLogical.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoLogical.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoLogical.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 66</value>
@@ -284,6 +291,9 @@
   <data name="rdoCharacter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoCharacter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoCharacter.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 66</value>
   </data>
@@ -310,6 +320,9 @@
   </data>
   <data name="rdoInteger.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoInteger.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoInteger.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 43</value>
@@ -338,6 +351,9 @@
   <data name="rdoNumeric.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoNumeric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoNumeric.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 21</value>
   </data>
@@ -365,6 +381,9 @@
   <data name="rdoOrderedFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoOrderedFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 43</value>
   </data>
@@ -391,6 +410,9 @@
   </data>
   <data name="rdoFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 21</value>
@@ -437,14 +459,14 @@
   <data name="&gt;&gt;ucrPnlConvertTo.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="rdoConvertOrdinals.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="rdoConvertOrdinals.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoConvertOrdinals.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 66</value>
   </data>
   <data name="rdoConvertOrdinals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
+    <value>195, 17</value>
   </data>
   <data name="rdoConvertOrdinals.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -501,10 +523,10 @@
     <value>3</value>
   </data>
   <data name="grpFactorToNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 312</value>
+    <value>10, 316</value>
   </data>
   <data name="grpFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 92</value>
+    <value>213, 92</value>
   </data>
   <data name="grpFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -522,10 +544,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFactorToNumericOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>10</value>
   </data>
   <data name="rdoDefault.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoDefault.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoDefault.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 22</value>
@@ -551,14 +576,14 @@
   <data name="&gt;&gt;rdoDefault.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoConvertLevels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="rdoConvertLevels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoConvertLevels.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 44</value>
   </data>
   <data name="rdoConvertLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 17</value>
+    <value>195, 17</value>
   </data>
   <data name="rdoConvertLevels.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -582,7 +607,7 @@
     <value>3, 21</value>
   </data>
   <data name="ucrPnlFactorToNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 65</value>
+    <value>203, 65</value>
   </data>
   <data name="ucrPnlFactorToNumericOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -599,108 +624,11 @@
   <data name="&gt;&gt;ucrPnlFactorToNumericOptions.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkKeepAttributes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 290</value>
-  </data>
-  <data name="ucrChkKeepAttributes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 20</value>
-  </data>
-  <data name="ucrChkKeepAttributes.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepAttributes.Name" xml:space="preserve">
-    <value>ucrChkKeepAttributes</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepAttributes.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepAttributes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepAttributes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrNudDisplayDecimals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 316</value>
-  </data>
-  <data name="ucrNudDisplayDecimals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudDisplayDecimals.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDisplayDecimals.Name" xml:space="preserve">
-    <value>ucrNudDisplayDecimals</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDisplayDecimals.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDisplayDecimals.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDisplayDecimals.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrChkSpecifyDecimalsToDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 316</value>
-  </data>
-  <data name="ucrChkSpecifyDecimalsToDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 20</value>
-  </data>
-  <data name="ucrChkSpecifyDecimalsToDisplay.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Name" xml:space="preserve">
-    <value>ucrChkSpecifyDecimalsToDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrSelectorDataFrameColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrSelectorDataFrameColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorDataFrameColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
-  </data>
-  <data name="ucrSelectorDataFrameColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Name" xml:space="preserve">
-    <value>ucrSelectorDataFrameColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorDataFrameColumns.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 463</value>
-  </data>
   <data name="ucrChkIgnoreLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 290</value>
+    <value>307, 290</value>
   </data>
   <data name="ucrChkIgnoreLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>138, 20</value>
   </data>
   <data name="ucrChkIgnoreLabels.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -718,10 +646,10 @@
     <value>0</value>
   </data>
   <data name="ucrChkCreateLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 317</value>
+    <value>307, 317</value>
   </data>
   <data name="ucrChkCreateLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>138, 20</value>
   </data>
   <data name="ucrChkCreateLabels.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -737,6 +665,102 @@
   </data>
   <data name="&gt;&gt;ucrChkCreateLabels.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrChkKeepAttributes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 290</value>
+  </data>
+  <data name="ucrChkKeepAttributes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 20</value>
+  </data>
+  <data name="ucrChkKeepAttributes.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepAttributes.Name" xml:space="preserve">
+    <value>ucrChkKeepAttributes</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepAttributes.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepAttributes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkKeepAttributes.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrNudDisplayDecimals.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 316</value>
+  </data>
+  <data name="ucrNudDisplayDecimals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudDisplayDecimals.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDisplayDecimals.Name" xml:space="preserve">
+    <value>ucrNudDisplayDecimals</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDisplayDecimals.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDisplayDecimals.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDisplayDecimals.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkSpecifyDecimalsToDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 316</value>
+  </data>
+  <data name="ucrChkSpecifyDecimalsToDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 23</value>
+  </data>
+  <data name="ucrChkSpecifyDecimalsToDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Name" xml:space="preserve">
+    <value>ucrChkSpecifyDecimalsToDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDecimalsToDisplay.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrSelectorDataFrameColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrSelectorDataFrameColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorDataFrameColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 180</value>
+  </data>
+  <data name="ucrSelectorDataFrameColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Name" xml:space="preserve">
+    <value>ucrSelectorDataFrameColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrameColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrameColumns.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>449, 463</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 410</value>
@@ -757,7 +781,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -793,6 +817,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumnsToConvert.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
 </root>

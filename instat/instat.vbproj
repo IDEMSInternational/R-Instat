@@ -35,6 +35,8 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -113,6 +115,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="DynamicInterop, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicInterop.0.9.1\lib\netstandard2.0\DynamicInterop.dll</HintPath>
     </Reference>
@@ -130,6 +135,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
@@ -146,9 +154,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TranslateWinForm, Version=0.1.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TranslateWinForm.1.1.3\lib\net461\TranslateWinForm.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
-    <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\unvell.ReoGrid.dll.2.1.0.0\lib\20\unvell.ReoGrid.dll</HintPath>
+    <Reference Include="unvell.ReoGrid, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\unvell.ReoGrid.dll.3.0.0\lib\net40\unvell.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -179,6 +190,7 @@
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
@@ -201,6 +213,12 @@
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
@@ -257,10 +275,32 @@
     <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.sw-KE.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.sw-KE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.Designer.vb">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDisplayTopN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.Designer.vb">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
@@ -275,10 +315,22 @@
     <Compile Include="dlgHomogenization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportERA5Data.Designer.vb">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportERA5Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInfillMissingValues.Designer.vb">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInfillMissingValues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.Designer.vb">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
@@ -299,34 +351,34 @@
     <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPolarAnnulus.Designer.vb">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    <Compile Include="dlgPasteSpecial.Designer.vb">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPolarAnnulus.vb">
+    <Compile Include="dlgPasteSpecial.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPolarCluster.Designer.vb">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
+    <Compile Include="dlgPivotTable.Designer.vb">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPolarCluster.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.Designer.vb">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarPlot.Designer.vb">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarPlot.vb">
+    <Compile Include="dlgPivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSeasonalPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSelectColumns.Designer.vb">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSelectColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.Designer.vb">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
@@ -347,10 +399,39 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmConvertToNumeric.Designer.vb">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.Designer.vb">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -441,6 +522,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMissingOptions.Designer.vb">
@@ -2408,11 +2495,6 @@
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -2694,6 +2776,9 @@
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </EmbeddedResource>
@@ -2721,9 +2806,15 @@
     <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
       <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySpecial.resx">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimsoft.resx">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
@@ -2731,8 +2822,14 @@
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportERA5Data.resx">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -2743,20 +2840,20 @@
     <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
       <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarAnnulus.resx">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPasteSpecial.resx">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarCluster.resx">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarFrequency.resx">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarPlot.resx">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPivotTable.resx">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSelectColumns.resx">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSetupForDataEntry.resx">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
@@ -2767,8 +2864,20 @@
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmConvertToNumeric.resx">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntryOptions.resx">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCommentForDataEntry.resx">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
@@ -2814,6 +2923,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
@@ -4495,9 +4607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
       <SubType>Designer</SubType>
@@ -4685,6 +4797,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
@@ -4928,6 +5041,7 @@
     <None Include="Resources\reset3.png" />
     <None Include="Resources\help2.png" />
     <None Include="Resources\lastgraph.png" />
+    <None Include="Resources\lan_btn.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5248,6 +5362,9 @@
     <Content Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="translations\rInstatTranslations.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
@@ -5289,6 +5406,13 @@
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

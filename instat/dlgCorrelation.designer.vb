@@ -54,6 +54,7 @@ Partial Class dlgCorrelation
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
@@ -63,7 +64,6 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -182,6 +182,12 @@ Partial Class dlgCorrelation
         Me.rdoMultipleColumns.TabStop = True
         Me.rdoMultipleColumns.UseVisualStyleBackColor = True
         '
+        'lblSelectedVariables
+        '
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Tag = ""
+        '
         'ucrSaveModel
         '
         resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
@@ -248,18 +254,11 @@ Partial Class dlgCorrelation
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblSelectedVariables
-        '
-        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Tag = ""
-        '
         'dlgCorrelation
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblSelectedVariables)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkCorrelationMatrix)
         Me.Controls.Add(Me.rdoTwoColumns)
@@ -276,6 +275,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrReceiverFirstColumn)
         Me.Controls.Add(Me.ucrSelectorCorrelation)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

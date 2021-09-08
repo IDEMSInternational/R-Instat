@@ -33,7 +33,6 @@ Public Class dlgCorruptionFitModel
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgFitCorruptionModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -46,6 +45,7 @@ Public Class dlgCorruptionFitModel
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

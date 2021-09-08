@@ -224,6 +224,27 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>526, 369</value>
   </data>
+  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 258</value>
+  </data>
+  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 21</value>
+  </data>
+  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
+    <value>ucrInputDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblInputColumnPrefix.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 289</value>
   </data>
@@ -246,10 +267,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInputColumnPrefix.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 286</value>
+    <value>235, 285</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
@@ -267,10 +288,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputPrefixForNewColumn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrNudNumberOfColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 233</value>
+    <value>235, 232</value>
   </data>
   <data name="ucrNudNumberOfColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -288,7 +309,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberOfColumns.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoInsertRows.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
@@ -298,10 +319,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoInsertRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 12</value>
+    <value>269, 12</value>
   </data>
   <data name="rdoInsertRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="rdoInsertRows.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -322,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoInsertRows.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="rdoInsertColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -331,10 +352,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoInsertColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 12</value>
+    <value>134, 12</value>
   </data>
   <data name="rdoInsertColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>135, 28</value>
   </data>
   <data name="rdoInsertColumns.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -355,13 +376,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoInsertColumns.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrPnlColumnsOrRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 12</value>
+    <value>128, 12</value>
   </data>
   <data name="ucrPnlColumnsOrRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 37</value>
+    <value>292, 37</value>
   </data>
   <data name="ucrPnlColumnsOrRows.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -376,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlColumnsOrRows.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoAfter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -475,27 +496,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 259</value>
-  </data>
-  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 21</value>
-  </data>
-  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
-    <value>ucrInputDefaultValue</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="lblDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
@@ -638,6 +638,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Insert Columns/Rows</value>
+  </data>
+  <data name="&gt;&gt;ttColumnDefaultValue.Name" xml:space="preserve">
+    <value>ttColumnDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;ttColumnDefaultValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgInsertColumn</value>
@@ -795,4 +801,7 @@
   <data name="&gt;&gt;grpInsert.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <metadata name="ttColumnDefaultValue.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

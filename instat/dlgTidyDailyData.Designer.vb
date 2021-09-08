@@ -45,6 +45,7 @@ Partial Class dlgTidyDailyData
         Me.ucrChkSilent = New instat.ucrCheck()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.ttReshapeType = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblNColumns = New System.Windows.Forms.Label()
         Me.ucrInputNewDataFrame = New instat.ucrInputTextBox()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
@@ -54,7 +55,6 @@ Partial Class dlgTidyDailyData
         Me.ucrSelectorTidyDailyData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblNColumns = New System.Windows.Forms.Label()
         Me.grpElements.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -194,6 +194,12 @@ Partial Class dlgTidyDailyData
         resources.ApplyResources(Me.lblNewDataFrameName, "lblNewDataFrameName")
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         '
+        'lblNColumns
+        '
+        resources.ApplyResources(Me.lblNColumns, "lblNColumns")
+        Me.lblNColumns.ForeColor = System.Drawing.Color.Red
+        Me.lblNColumns.Name = "lblNColumns"
+        '
         'ucrInputNewDataFrame
         '
         Me.ucrInputNewDataFrame.AddQuotesIfUnrecognised = True
@@ -264,12 +270,6 @@ Partial Class dlgTidyDailyData
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblNColumns
-        '
-        resources.ApplyResources(Me.lblNColumns, "lblNColumns")
-        Me.lblNColumns.ForeColor = System.Drawing.Color.Red
-        Me.lblNColumns.Name = "lblNColumns"
         '
         'dlgTidyDailyData
         '

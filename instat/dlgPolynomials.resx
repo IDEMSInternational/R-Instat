@@ -310,7 +310,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSavePoly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 24</value>
+    <value>358, 22</value>
   </data>
   <data name="ucrSavePoly.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

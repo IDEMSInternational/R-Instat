@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
+
 Public Class ucrElementLineControl
     Private bInitialiseControls As Boolean = False
     Public strAxisLine As String
@@ -106,7 +108,7 @@ Public Class ucrElementLineControl
     End Sub
 
     Public Sub SetLabel(strlabel As String)
-        grpTickMarks.Text = strlabel
+        grpTickMarks.Text = GetTranslation(strlabel)
     End Sub
 
 End Class

@@ -28,6 +28,26 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsScaleColorViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_colour_viridis")
+            Return clsTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsScaleFillViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_fill_viridis")
+            Return clsTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsDefaultThemeParameter As RParameter
         Get
             Dim clsTempParam As New RParameter
@@ -125,6 +145,18 @@ Public Class GgplotDefaults
             clsFacetTempFunc.AddParameter("dir", Chr(34) & "h" & Chr(34))
             clsFacetTempFunc.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOp)
             Return clsFacetTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsAnnotateFunction As RFunction
+        Get
+            Dim clsAnnotateTempFunc As New RFunction
+
+            clsAnnotateTempFunc.SetPackageName("ggplot2")
+            clsAnnotateTempFunc.SetRCommand("annotate")
+            clsAnnotateTempFunc.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=15)
+
+            Return clsAnnotateTempFunc
         End Get
     End Property
 

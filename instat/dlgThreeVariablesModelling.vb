@@ -40,7 +40,6 @@ Public Class dlgThreeVariableModelling
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -51,6 +50,7 @@ Public Class dlgThreeVariableModelling
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -129,6 +129,7 @@ Public Class dlgThreeVariableModelling
 
         ucrSelectorThreeVariableModelling.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
+        ucrChkConvertToNumeric.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
 

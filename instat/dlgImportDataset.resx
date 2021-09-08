@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTextFilePreview.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="lblDataFrame.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDataFrame.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="lblEncodingCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -325,7 +325,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtTextFilePreview.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="grdDataPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 251</value>
@@ -346,7 +346,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="lblFileOpenPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -373,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFileOpenPath.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="lblLinesToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -409,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 16</value>
+    <value>408, 18</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 23</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxRowsCSV.Name" xml:space="preserve">
     <value>ucrNudMaxRowsCSV</value>
@@ -577,7 +577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>17</value>
   </data>
   <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 237</value>
@@ -1030,7 +1030,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1525,7 +1525,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 175</value>
@@ -1733,7 +1733,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCannotImport.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="lblNoPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1802,7 +1802,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLinesToPreview.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdRefreshPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1829,7 +1829,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxRowsText.Name" xml:space="preserve">
     <value>ucrNudMaxRowsText</value>
@@ -1940,7 +1940,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 104</value>
@@ -2156,7 +2156,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSeparatortext.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="rdoFixedWidthText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2192,7 +2192,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthText.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2229,7 +2229,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="clbSheets.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2253,7 +2253,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clbSheets.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblSelectSheets.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2283,7 +2283,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectSheets.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblImportingSheets.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -2316,7 +2316,55 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblImportingSheets.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkMultipleFiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrChkMultipleFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 20</value>
+  </data>
+  <data name="ucrChkMultipleFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="ucrChkMultipleFiles.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultipleFiles.Name" xml:space="preserve">
+    <value>ucrChkMultipleFiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultipleFiles.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultipleFiles.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultipleFiles.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 412</value>
+  </data>
+  <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 22</value>
+  </data>
+  <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Name" xml:space="preserve">
+    <value>ucrSaveFile</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 66</value>
@@ -2340,7 +2388,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkSheetsCheckAll.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrNudPreviewLines.Location" type="System.Drawing.Point, System.Drawing">
     <value>555, 227</value>
@@ -2364,7 +2412,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudPreviewLines.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrPanelFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 47</value>
@@ -2385,31 +2433,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPanelFixedWidthText.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 411</value>
-  </data>
-  <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 24</value>
-  </data>
-  <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Name" xml:space="preserve">
-    <value>ucrSaveFile</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 17</value>
@@ -2421,7 +2445,7 @@ white spaces</value>
     <value>Yes</value>
   </data>
   <data name="ucrInputFilePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 21</value>
+    <value>352, 21</value>
   </data>
   <data name="ucrInputFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2436,7 +2460,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilePath.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 445</value>
@@ -2460,7 +2484,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2469,7 +2493,7 @@ white spaces</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>617, 502</value>
+    <value>673, 502</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

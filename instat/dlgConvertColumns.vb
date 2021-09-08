@@ -26,7 +26,6 @@ Public Class dlgConvertColumns
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -41,6 +40,7 @@ Public Class dlgConvertColumns
         End If
         ReopenDialog()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()
@@ -81,7 +81,7 @@ Public Class dlgConvertColumns
         ucrPnlFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
         ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
-        ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
+        ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (if Numeric)")
         ucrChkSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSpecifyDecimalsToDisplay.SetRDefault("FALSE")
         ucrChkSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -177,4 +177,5 @@ Public Class dlgConvertColumns
             ucrChkIgnoreLabels.SetText("Ignore Labels")
         End If
     End Sub
+
 End Class

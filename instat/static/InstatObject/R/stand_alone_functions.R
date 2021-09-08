@@ -32,7 +32,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
   return(out)
 }
 
-next_default_item = function(prefix, existing_names = c(), include_index = TRUE, start_index = 1) {
+next_default_item = function(prefix, existing_names = c(), include_index = FALSE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
   
   if(!include_index) {
@@ -393,9 +393,9 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_count[2]  <- 1
       curr_dim_values[[y_var]] <- curr_dim_values[[y_var]][y_ind]
       if(show_requested_points) {
-        curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
-        curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
-        if(!is.null(id_points)) curr_dim_values[["requested_id"]] <- id_points[i]
+        curr_dim_values[[paste0(x_var, "_point")]] <- lon_points[i]
+        curr_dim_values[[paste0(y_var, "_point")]] <- lat_points[i]
+        if(!is.null(id_points)) curr_dim_values[["station"]] <- id_points[i]
         requested_points_added <- TRUE
       }
       
@@ -444,14 +444,14 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         time_ind <- which(raw_time_full %in% raw_time)
         units <- ncdf4::ncatt_get(nc, time_var, "units")
         if(units$hasatt && units$value == "julian_day") {
-          time_df[[paste0(time_var, "_date")]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
+          time_df[["date"]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
         }
         else {
           pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
           pcict_time <- pcict_time[time_ind]
           posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-          time_df[[paste0(time_var, "_full")]] <- posixct_time
-          time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+          time_df[["date"]] <- as.Date(posixct_time)
+          time_df[["datetime"]] <- posixct_time
         }
       })
       if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
@@ -2278,4 +2278,85 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
       obj %>% ggplot2::ggplot(xlab = xlab, ylab = ylab)
     }
   }
+}
+
+#This function creates a wrapper around functions from openair package
+other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name, wd_col_name, ws_col_name, main_method, single_pollutant, multiple_pollutant, ...) {
+  type <- "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
+  }
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- type2_col_name
+  }
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
+    type <- type1_col_name
+  }
+  if (!main_method %in% c("percentile_rose", "polar_plot", "polar_annulus", "polar_cluster", "polar_frequency")) stop("Method must be either percentile_rose, polar_plot, polar_annulus, polar_cluster or polar_frequency.")
+  if (missing(data)) stop("Data is missing with no default.")
+  col_names <- colnames(data)
+  fun_col_names <- c(date_col_name, wd_col_name)
+  if (!all(fun_col_names %in% col_names)) stop(paste(fun_col_names[!fun_col_names %in% col_names], ","), " column(s) missing in the dataframe.")
+  if (!"date" %in% col_names) data <- dplyr::rename(data, date = !!date_col_name)
+  if (!"wd" %in% col_names) data <- dplyr::rename(data, wd = !!wd_col_name)
+  if (main_method == "percentile_rose") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::percentileRose(mydata = data, type = type, pollutant = multiple_pollutant, ...)
+  } else if (main_method == "polar_plot") {
+    openair::polarPlot(mydata = data, type = type, pollutant = multiple_pollutant,  ...)
+  } else if (main_method == "polar_annulus") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarAnnulus(mydata = data, type = type, pollutant = multiple_pollutant,  ...)
+  } else if (main_method == "polar_cluster") {
+    openair::polarCluster(mydata = data, type = type, pollutant = single_pollutant, ...)
+  } else if (main_method == "polar_frequency") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarFreq(mydata = data, type = type, pollutant = single_pollutant, ...)
+  }
+}
+
+#This function creates a wrapper around windRose and pollutionRose functions from openair package
+wind_pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, type2_col_name, ...) {
+  type <-  "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
+  }
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- type2_col_name
+  }
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
+    type <- type1_col_name
+  }
+  if (!("date" %in% colnames(mydata))) {
+    mydata <- dplyr::rename(mydata, date = !!date_name)
+  }
+  if (missing(pollutant)) {
+    openair::windRose(mydata = mydata, type = type, ...)
+  } else {
+    openair::pollutionRose(mydata = mydata, type = type, pollutant, ...)
+  }
+}
+
+n_non_numeric <- function(x) {
+  x <- as.character(x)
+  sum(is.na(x) != is.na(suppressWarnings(as.numeric(x))))
+}
+
+# This function creates a wrapper around grDevices::recordPlot() to enable non-ggplot graphs to be saved as recorded_plot objects.
+# It also handles graphics devices carefully.
+record_graph <- function(x) {
+  # store current device, which could be png
+  d <- dev.cur()
+  # create a new device, to ensure graph is displayed in device that recordPlot() can capture
+  dev.new()
+  # store the new device, so it can be turned off later
+  d2 <- dev.cur()
+  # Display graph to be captured by recordPlot()
+  x
+  y <- grDevices::recordPlot()
+  # set device back to current, to ensure code after this run correctly
+  dev.set(d)
+  # turn off the new graphics device
+  dev.off(which = d2)
+  return(y)
 }

@@ -102,12 +102,14 @@ Partial Class dlgExportRWorkspace
         '
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
         Me.ucrFilePath.FilePathDialogFilter = "Saved R Objects (*.RData)|*.RData"
         Me.ucrFilePath.FilePathDialogTitle = "Export R Workspace"
-        Me.ucrFilePath.FilePathLabel = "Export File:"
+        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FolderBrowse = False
         resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
         Me.ucrFilePath.Name = "ucrFilePath"
+        Me.ucrFilePath.SelectedFileFilterIndex = 1
         '
         'dlgExportRWorkspace
         '

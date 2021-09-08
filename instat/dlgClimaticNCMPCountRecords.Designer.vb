@@ -40,7 +40,7 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.ucrSaveCountRecords.Location = New System.Drawing.Point(10, 251)
         Me.ucrSaveCountRecords.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveCountRecords.Name = "ucrSaveCountRecords"
-        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveCountRecords.TabIndex = 10
         '
         'ucrSelectorForA4
@@ -56,9 +56,9 @@ Partial Class dlgClimaticNCMPCountRecords
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(254, 181)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(241, 181)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(149, 23)
         Me.cmdStationMetadata.TabIndex = 7
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True

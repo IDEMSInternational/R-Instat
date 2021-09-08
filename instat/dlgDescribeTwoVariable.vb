@@ -233,6 +233,7 @@ Public Class dlgDescribeTwoVariable
             lblSummaryName.Text = "__________"
             lblSummaryName.ForeColor = SystemColors.ControlText
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged, ucrReceiverSecondVar.ControlContentsChanged

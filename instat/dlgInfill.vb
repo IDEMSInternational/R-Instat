@@ -50,7 +50,6 @@ Public Class dlgInfill
         ucrReceiverFactors.strSelectorHeading = "Factors"
         ucrReceiverFactors.SetParameter(New RParameter("factors", 5))
         ucrReceiverFactors.SetParameterIsString()
-        ucrReceiverFactors.strSelectorHeading = "Factors"
 
         'Set data frame parameter
         ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
@@ -61,7 +60,7 @@ Public Class dlgInfill
         ucrChkResort.SetRDefault("TRUE")
         ucrChkResort.SetText("Sort Data after filling gaps")
 
-        ucrInputLimitOptions.SetItems({"Data Limits", "Fixed Limits"})
+        ucrInputLimitOptions.SetItems({"Data Limits", "Fixed Limits", "Fixed Start Limit", "Fixed End Limit"})
         ucrInputLimitOptions.AddParameterPresentCondition("Fixed Limits", {"start_date", "end_date"})
         ucrInputLimitOptions.AddParameterPresentCondition("Data Limits", {"start_date", "end_date"}, False)
         ucrInputLimitOptions.SetDropDownStyleAsNonEditable()
@@ -84,19 +83,13 @@ Public Class dlgInfill
         ucrInputComboMonth.SetDropDownStyleAsNonEditable()
         ucrInputComboMonth.SetLinkedDisplayControl(lblStartingFrom)
 
-        ucrDtpStartDate.SetParameter(New RParameter("start_date", 3))
-        ucrDtpStartDate.SetParameterIsRDate()
-
-        ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
-        ucrDtpEndDate.SetParameterIsRDate()
-
         ucrChkCompleteYears.SetText("Ensure complete years")
         ucrChkCompleteYears.AddParameterPresentCondition(True, "start_month")
         ucrChkCompleteYears.AddParameterPresentCondition(False, "start_month", False)
 
         ucrInputLimitOptions.AddToLinkedControls(ucrChkCompleteYears, {"Data Limits"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputLimitOptions.AddToLinkedControls(ucrDtpEndDate, {"Fixed Limits"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputLimitOptions.AddToLinkedControls(ucrDtpStartDate, {"Fixed Limits"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLimitOptions.AddToLinkedControls(ucrDtpStartDate, {"Fixed Start Limit", "Fixed Limits"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLimitOptions.AddToLinkedControls(ucrDtpEndDate, {"Fixed End Limit", "Fixed Limits"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCompleteYears.AddToLinkedControls(ucrInputComboMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="January")
         ucrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
         ucrDtpStartDate.SetLinkedDisplayControl(lblStartDate)
@@ -120,11 +113,7 @@ Public Class dlgInfill
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not (ucrReceiverDate.IsEmpty) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -132,18 +121,19 @@ Public Class dlgInfill
         SetRCodeforControls(True)
         TestOkEnabled()
     End Sub
-    'Temporary fix::Date pickers do not work automatically by setting Rcode. Need to check why?
-    Private Sub ucrDtpStartDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpStartDate.ControlValueChanged, ucrDtpEndDate.ControlValueChanged, ucrInputLimitOptions.ControlValueChanged
-        If ucrInputLimitOptions.GetText = "Fixed Limits" Then
-            clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate(), iPosition:=3)
-            clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate(), iPosition:=4)
-        Else
-            clsDefaultFunction.RemoveParameterByName("start_date")
-            clsDefaultFunction.RemoveParameterByName("end_date")
-        End If
+
+    Private Sub ucrInputLimitOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLimitOptions.ControlValueChanged, ucrDtpStartDate.ControlValueChanged, ucrDtpEndDate.ControlValueChanged
+        clsDefaultFunction.RemoveParameterByName("start_date")
+        clsDefaultFunction.RemoveParameterByName("end_date")
+        Select Case ucrInputLimitOptions.GetText
+            Case "Fixed Limits", "Fixed Start Limit"
+                clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
+            Case "Fixed Limits", "Fixed End Limit"
+                clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
+        End Select
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

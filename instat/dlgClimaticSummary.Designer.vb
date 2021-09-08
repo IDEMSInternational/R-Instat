@@ -57,6 +57,9 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.lblYear = New System.Windows.Forms.Label()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
+        Me.rdoDaily = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
@@ -66,8 +69,6 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
-        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
-        Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -194,6 +195,35 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.lblYear, "lblYear")
         Me.lblYear.Name = "lblYear"
         '
+        'rdoStation
+        '
+        resources.ApplyResources(Me.rdoStation, "rdoStation")
+        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatAppearance.BorderSize = 2
+        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.Name = "rdoStation"
+        Me.rdoStation.TabStop = True
+        Me.rdoStation.UseVisualStyleBackColor = True
+        '
+        'rdoDaily
+        '
+        resources.ApplyResources(Me.rdoDaily, "rdoDaily")
+        Me.rdoDaily.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDaily.FlatAppearance.BorderSize = 2
+        Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDaily.Name = "rdoDaily"
+        Me.rdoDaily.TabStop = True
+        Me.rdoDaily.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverElements
+        '
+        Me.ucrReceiverElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElements, "ucrReceiverElements")
+        Me.ucrReceiverElements.Name = "ucrReceiverElements"
+        Me.ucrReceiverElements.Selector = Nothing
+        Me.ucrReceiverElements.strNcFilePath = ""
+        Me.ucrReceiverElements.ucrSelector = Nothing
+        '
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
@@ -265,29 +295,11 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.ucrPnlAnnualWithin, "ucrPnlAnnualWithin")
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
         '
-        'ucrReceiverElements
-        '
-        Me.ucrReceiverElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElements, "ucrReceiverElements")
-        Me.ucrReceiverElements.Name = "ucrReceiverElements"
-        Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.ucrSelector = Nothing
-        '
-        'rdoStation
-        '
-        resources.ApplyResources(Me.rdoStation, "rdoStation")
-        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStation.FlatAppearance.BorderSize = 2
-        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStation.Name = "rdoStation"
-        Me.rdoStation.TabStop = True
-        Me.rdoStation.UseVisualStyleBackColor = True
-        '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrInputFilterPreview)
@@ -350,4 +362,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents rdoStation As RadioButton
+    Friend WithEvents rdoDaily As RadioButton
 End Class

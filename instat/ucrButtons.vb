@@ -198,16 +198,12 @@ Public Class ucrButtons
         If frmMain.clsRecentItems IsNot Nothing Then
             frmMain.clsRecentItems.addToMenu(Me.Parent)
         End If
-        translateEach(Controls, Me)
         If bFirstLoad Then
             'TODO. Temp this could be done on the designer
             txtComment.Multiline = True
             AddButtonInCommentTextbox()
             SetDefaults()
             bFirstLoad = False
-            If frmMain.clsInstatOptions IsNot Nothing Then
-                strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
-            End If
         End If
         If frmMain.clsInstatOptions IsNot Nothing Then
             If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
@@ -217,6 +213,7 @@ Public Class ucrButtons
                 cmdHelp.Width = cmdOk.Width
                 cmdLanguage.Visible = False
             End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
 
     End Sub
@@ -269,12 +266,11 @@ Public Class ucrButtons
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
 
-        Try
-            Dim CultureInfo As New Globalization.CultureInfo(strCurrLang)
-            autoTranslate(Me.ParentForm, CultureInfo)
-        Catch ex As Exception
-            autoTranslate(Me.ParentForm)
-        End Try
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me.ParentForm)
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+
         If cmdLanguage.FlatStyle = FlatStyle.Popup Then
             cmdLanguage.FlatStyle = FlatStyle.Flat
         Else
@@ -282,14 +278,12 @@ Public Class ucrButtons
         End If
     End Sub
 
-    Private iMyCode As Integer = 0
-
     Private Sub AddButtonInCommentTextbox()
         Dim btnMoreComment As New Button
         'add the button to the comment textbox first
         txtComment.Controls.Clear()
         txtComment.Controls.Add(btnMoreComment)
-        
+
         'then set the  button properties
         btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
         'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")

@@ -174,11 +174,21 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrFilePath.FilePathBrowseText" xml:space="preserve">
+    <value>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+A problem occured attempting to translate string 'Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+A problem occured attempting to translate string 'Browse' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\translations\rInstatTranslations.db.' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\translations\rInstatTranslations.db.</value>
+  </data>
+  <data name="ucrFilePath.FilePathLabel" xml:space="preserve">
+    <value>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+A problem occured attempting to translate string 'Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+A problem occured attempting to translate string 'Save Data To:' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\translations\rInstatTranslations.db.' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\translations\rInstatTranslations.db.</value>
+  </data>
   <data name="ucrFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 9</value>
+    <value>1, 11</value>
   </data>
   <data name="ucrFilePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 26</value>
+    <value>429, 26</value>
   </data>
   <data name="ucrFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -202,7 +212,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>430, 124</value>
+    <value>434, 124</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -45,6 +45,10 @@ Partial Class dlgLinePlot
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblGroupLine = New System.Windows.Forms.Label()
+        Me.rdoPath = New System.Windows.Forms.RadioButton()
+        Me.rdoStep = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStepOrPath = New instat.UcrPanel()
+        Me.ucrChkPathOrStep = New instat.ucrCheck()
         Me.ucrChkValley = New instat.ucrCheck()
         Me.ucrChkPeak = New instat.ucrCheck()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
@@ -94,6 +98,31 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me.lblGroupLine, "lblGroupLine")
         Me.lblGroupLine.Name = "lblGroupLine"
+        '
+        'rdoPath
+        '
+        resources.ApplyResources(Me.rdoPath, "rdoPath")
+        Me.rdoPath.Name = "rdoPath"
+        Me.rdoPath.TabStop = True
+        Me.rdoPath.UseVisualStyleBackColor = True
+        '
+        'rdoStep
+        '
+        resources.ApplyResources(Me.rdoStep, "rdoStep")
+        Me.rdoStep.Name = "rdoStep"
+        Me.rdoStep.TabStop = True
+        Me.rdoStep.UseVisualStyleBackColor = True
+        '
+        'ucrPnlStepOrPath
+        '
+        resources.ApplyResources(Me.ucrPnlStepOrPath, "ucrPnlStepOrPath")
+        Me.ucrPnlStepOrPath.Name = "ucrPnlStepOrPath"
+        '
+        'ucrChkPathOrStep
+        '
+        Me.ucrChkPathOrStep.Checked = False
+        resources.ApplyResources(Me.ucrChkPathOrStep, "ucrChkPathOrStep")
+        Me.ucrChkPathOrStep.Name = "ucrChkPathOrStep"
         '
         'ucrChkValley
         '
@@ -184,6 +213,10 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoStep)
+        Me.Controls.Add(Me.rdoPath)
+        Me.Controls.Add(Me.ucrPnlStepOrPath)
+        Me.Controls.Add(Me.ucrChkPathOrStep)
         Me.Controls.Add(Me.lblGroupLine)
         Me.Controls.Add(Me.ucrChkValley)
         Me.Controls.Add(Me.ucrChkPeak)
@@ -229,4 +262,8 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkValley As ucrCheck
     Friend WithEvents ucrChkPeak As ucrCheck
     Friend WithEvents lblGroupLine As Label
+    Friend WithEvents ucrChkPathOrStep As ucrCheck
+    Friend WithEvents ucrPnlStepOrPath As UcrPanel
+    Friend WithEvents rdoStep As RadioButton
+    Friend WithEvents rdoPath As RadioButton
 End Class

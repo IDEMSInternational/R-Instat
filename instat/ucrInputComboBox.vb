@@ -88,11 +88,26 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsKeys()
+        strItemsType = "Keys"
+        FillItemTypes()
+    End Sub
+
+    Public Sub SetItemsTypeAsLinks()
+        strItemsType = "Links"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
+                End If
+            Case "Keys"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetKeyNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
             Case "Data Frames"
                 'TODO not yet implemented
@@ -198,14 +213,14 @@ Public Class ucrInputComboBox
         End If
     End Sub
 
-    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetConditions As Boolean = True)
         Dim kvpTemp As KeyValuePair(Of String, String)
 
         If bClearExisting Then
             cboInput.Items.Clear()
             dctDisplayParameterValues.Clear()
         End If
-        If bSetCondtions Then
+        If bSetConditions Then
             If GetParameter() Is Nothing Then
                 MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
             End If
@@ -213,7 +228,7 @@ Public Class ucrInputComboBox
         For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
-            If bSetCondtions Then
+            If bSetConditions AndAlso GetParameter() IsNot Nothing Then
                 AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
             End If
         Next

@@ -24,14 +24,19 @@ Public Class sdgOpenNetCDF
     Private clsBoundaryListFunction, clsYLimitsFunction, clsXLimitsFunction, clsZLimitsFunction, clsSLimitsFunction, clsTLimitsFunction As New RFunction
     Private clsAsDateMin, clsAsDateMax As New RFunction
     Public bControlsInitialised As Boolean = False
-    Private lstMinTextBoxes As List(Of ucrInputTextBox)
-    Private lstMaxTextBoxes As List(Of ucrInputTextBox)
-    Private lstAxesLabels As List(Of Label)
-    Private lstMinLabels As List(Of Label)
-    Private lstMaxLabels As List(Of Label)
-    Private lstDims As List(Of String)
-    Private lstAxesDetected As List(Of Boolean)
-    Private lstFunctions As List(Of RFunction)
+
+    'We need to initialise the lists to be empty lists.
+    ' If we don't do this then, when we build the translations database, a null reference exception 
+    ' is triggered in `sdgOpenNetCDF_Closing()`.
+    Private lstMinTextBoxes = New List(Of ucrInputTextBox)
+    Private lstMaxTextBoxes = New List(Of ucrInputTextBox)
+    Private lstAxesLabels = New List(Of Label)
+    Private lstMinLabels = New List(Of Label)
+    Private lstMaxLabels = New List(Of Label)
+    Private lstDims = New List(Of String)
+    Private lstAxesDetected = New List(Of Boolean)
+    Private lstFunctions = New List(Of RFunction)
+
     Private strFilePath As String
     Private dctAxesNames As New Dictionary(Of String, String)
     Private bUpdating As Boolean = False
@@ -252,7 +257,7 @@ Public Class sdgOpenNetCDF
                                 dtpMaxT.Value = dtMax
                             Catch ex As Exception
                                 bShowDimension = False
-                                lstAxesLabels(i).Text = "Could not read time dimension dates from file."
+                                lstAxesLabels(i).Text = GetTranslation("Could not read time dimension dates from file.")
                                 lstAxesDetected(i) = False
                             End Try
                             If bShowDimension Then
@@ -293,9 +298,9 @@ Public Class sdgOpenNetCDF
                         lstFunctions(i).AddParameter("max", dcmMax, bIncludeArgumentName:=False)
                         clsBoundaryListFunction.AddParameter(lstDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
                         If lstDimNames(iIndex).ToLower = "x" Then
-                            lstAxesLabels(i).Text = lstDimNames(iIndex) & " (lon) " & ":"
+                            lstAxesLabels(i).Text = lstDimNames(iIndex) & GetTranslation(" (lon) ") & ":"
                         ElseIf lstDimNames(iIndex).ToLower = "y" Then
-                            lstAxesLabels(i).Text = lstDimNames(iIndex) & " (lat) " & ":"
+                            lstAxesLabels(i).Text = lstDimNames(iIndex) & GetTranslation(" (lat) ") & ":"
                         Else
                             lstAxesLabels(i).Text = lstDimNames(iIndex) & ":"
                         End If

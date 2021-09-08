@@ -166,6 +166,8 @@ Partial Class dlgImportGriddedData
         '
         'ucrDtpMinDate
         '
+        Me.ucrDtpMinDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 901)
+        Me.ucrDtpMinDate.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDtpMinDate, "ucrDtpMinDate")
         Me.ucrDtpMinDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpMinDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
@@ -173,6 +175,8 @@ Partial Class dlgImportGriddedData
         '
         'ucrDtpMaxDate
         '
+        Me.ucrDtpMaxDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 931)
+        Me.ucrDtpMaxDate.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDtpMaxDate, "ucrDtpMaxDate")
         Me.ucrDtpMaxDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpMaxDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)

@@ -55,6 +55,19 @@ Public Class ucrColumnMetadata
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
     End Sub
 
+    ''' <summary>
+    ''' Run any R operation/command from the grid by passing a Function which will run the R operation/command.
+    ''' This wrapper ensures consistency in what is done before and after running an R command.
+    ''' </summary>
+    ''' <param name="action">A function that will run an R operation/command, usually from GridROperations.</param>
+    Private Sub RunRCommand(action As Action)
+        Cursor = Cursors.WaitCursor
+        grdVariables.Enabled = False
+        action()
+        grdVariables.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub SetRFunctions()
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
@@ -223,7 +236,35 @@ Public Class ucrColumnMetadata
 
     Public Sub CopyRange()
         Try
-            grdVariables.CurrentWorksheet.Copy()
+            Dim clsCopyValues As New RFunction
+            Dim strAllContent As String = ""
+            Dim iEndRow As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndCol
+            Dim iStartCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.Col
+
+            'construct the copied range data
+            For iRowIndex As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To iEndRow
+                Dim strRowContent As String = ""
+                For iColIndex As Integer = iStartCol To iEndCol
+                    Dim strCellContent As String = grdVariables.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    If strCellContent = "NA" Then
+                        strCellContent = ""
+                    End If
+                    If iColIndex = iStartCol Then
+                        strRowContent = strCellContent
+                    Else
+                        strRowContent &= vbTab & strCellContent
+                    End If
+                Next
+                strAllContent &= strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent &= Environment.NewLine
+                End If
+            Next
+
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
+            RunScriptFromColumnMetadata(clsCopyValues.ToScript(), strComment:="Copy column metadata values to clipboard")
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
@@ -264,9 +305,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+        RunRCommand(Sub() GridROperations.ConvertToNumeric(grdCurrSheet.Name, GetSelectedVariableNamesAsArray, frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False)))
     End Sub
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
@@ -447,12 +486,12 @@ Public Class ucrColumnMetadata
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLevelsLabels.Enabled = (strType.Contains("factor"))
-            mnuDeleteCol.Text = "Delete Column"
-            mnuInsertColsBefore.Text = "Insert 1 Column Before"
-            mnuInsertColsAfter.Text = "Insert 1 Column After"
+            mnuDeleteCol.Text = GetTranslation("Delete Column")
+            mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
+            mnuInsertColsAfter.Text = GetTranslation("Insert 1 Column After")
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = GetTranslation("Delete Columns")
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
@@ -524,5 +563,15 @@ Public Class ucrColumnMetadata
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
         hideSheet.Enabled = (grdVariables.Worksheets.Count > 1)
+    End Sub
+
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name, strColumn:=GetSelectedVariableNamesAsArray()(0))
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
     End Sub
 End Class

@@ -72,9 +72,9 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.grpOptions.Controls.Add(Me.lblUNCode)
         Me.grpOptions.Controls.Add(Me.ucrNudNYE)
         Me.grpOptions.Controls.Add(Me.lblNYER)
-        Me.grpOptions.Location = New System.Drawing.Point(181, 216)
+        Me.grpOptions.Location = New System.Drawing.Point(162, 216)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(228, 124)
+        Me.grpOptions.Size = New System.Drawing.Size(286, 124)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -84,7 +84,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrInputResolution.AddQuotesIfUnrecognised = True
         Me.ucrInputResolution.GetSetSelectedIndex = -1
         Me.ucrInputResolution.IsReadOnly = False
-        Me.ucrInputResolution.Location = New System.Drawing.Point(89, 71)
+        Me.ucrInputResolution.Location = New System.Drawing.Point(158, 71)
         Me.ucrInputResolution.Name = "ucrInputResolution"
         Me.ucrInputResolution.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputResolution.TabIndex = 7
@@ -94,7 +94,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrInputUNCode.AddQuotesIfUnrecognised = True
         Me.ucrInputUNCode.IsMultiline = False
         Me.ucrInputUNCode.IsReadOnly = False
-        Me.ucrInputUNCode.Location = New System.Drawing.Point(89, 44)
+        Me.ucrInputUNCode.Location = New System.Drawing.Point(158, 44)
         Me.ucrInputUNCode.Name = "ucrInputUNCode"
         Me.ucrInputUNCode.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputUNCode.TabIndex = 5
@@ -104,7 +104,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrChkOutputGridSquareData.Checked = False
         Me.ucrChkOutputGridSquareData.Location = New System.Drawing.Point(8, 98)
         Me.ucrChkOutputGridSquareData.Name = "ucrChkOutputGridSquareData"
-        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(187, 20)
+        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(276, 20)
         Me.ucrChkOutputGridSquareData.TabIndex = 8
         '
         'lblRes
@@ -131,7 +131,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYE.Location = New System.Drawing.Point(161, 18)
+        Me.ucrNudNYE.Location = New System.Drawing.Point(230, 18)
         Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYE.Name = "ucrNudNYE"
@@ -237,7 +237,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 403)
+        Me.ClientSize = New System.Drawing.Size(453, 403)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorForA3)
         Me.Controls.Add(Me.cmdStationMetadata)

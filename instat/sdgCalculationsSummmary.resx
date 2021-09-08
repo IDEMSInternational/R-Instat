@@ -877,7 +877,7 @@
     <value>332, 533</value>
   </data>
   <data name="ucrBaseSubDialog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>155, 30</value>
   </data>
   <data name="ucrBaseSubDialog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

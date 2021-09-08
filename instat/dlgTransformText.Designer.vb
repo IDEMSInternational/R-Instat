@@ -125,10 +125,8 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.lblToSubstring)
         Me.grpParameters.Controls.Add(Me.lblLastWord)
         Me.grpParameters.Controls.Add(Me.lblPad)
-        Me.grpParameters.Controls.Add(Me.ucrNudTo)
         Me.grpParameters.Controls.Add(Me.ucrReceiverFirstWord)
         Me.grpParameters.Controls.Add(Me.rdoBothPad)
-        Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
         Me.grpParameters.Controls.Add(Me.ucrNudFrom)
         Me.grpParameters.Controls.Add(Me.rdoRightPad)
         Me.grpParameters.Controls.Add(Me.rdoLeftPad)
@@ -139,6 +137,8 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.ucrInputTo)
         Me.grpParameters.Controls.Add(Me.lblWidth)
         Me.grpParameters.Controls.Add(Me.lblTo)
+        Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
+        Me.grpParameters.Controls.Add(Me.ucrNudTo)
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
@@ -146,6 +146,7 @@ Partial Class dlgTransformText
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
@@ -184,6 +185,7 @@ Partial Class dlgTransformText
         'ucrInputPad
         '
         Me.ucrInputPad.AddQuotesIfUnrecognised = True
+        Me.ucrInputPad.GetSetSelectedIndex = -1
         Me.ucrInputPad.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPad, "ucrInputPad")
         Me.ucrInputPad.Name = "ucrInputPad"
@@ -271,6 +273,7 @@ Partial Class dlgTransformText
         'ucrInputTo
         '
         Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.GetSetSelectedIndex = -1
         Me.ucrInputTo.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
         Me.ucrInputTo.Name = "ucrInputTo"

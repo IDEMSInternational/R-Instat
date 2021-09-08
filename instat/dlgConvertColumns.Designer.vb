@@ -53,14 +53,14 @@ Partial Class dlgConvertColumns
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
+        Me.ucrChkIgnoreLabels = New instat.ucrCheck()
+        Me.ucrChkCreateLabels = New instat.ucrCheck()
         Me.ucrChkKeepAttributes = New instat.ucrCheck()
         Me.ucrNudDisplayDecimals = New instat.ucrNud()
         Me.ucrChkSpecifyDecimalsToDisplay = New instat.ucrCheck()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkCreateLabels = New instat.ucrCheck()
-        Me.ucrChkIgnoreLabels = New instat.ucrCheck()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -167,6 +167,18 @@ Partial Class dlgConvertColumns
         resources.ApplyResources(Me.ucrPnlFactorToNumericOptions, "ucrPnlFactorToNumericOptions")
         Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
         '
+        'ucrChkIgnoreLabels
+        '
+        Me.ucrChkIgnoreLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreLabels, "ucrChkIgnoreLabels")
+        Me.ucrChkIgnoreLabels.Name = "ucrChkIgnoreLabels"
+        '
+        'ucrChkCreateLabels
+        '
+        Me.ucrChkCreateLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkCreateLabels, "ucrChkCreateLabels")
+        Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
+        '
         'ucrChkKeepAttributes
         '
         Me.ucrChkKeepAttributes.Checked = False
@@ -211,25 +223,12 @@ Partial Class dlgConvertColumns
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkCreateLabels
-        '
-        Me.ucrChkCreateLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkCreateLabels, "ucrChkCreateLabels")
-        Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
-        '
-        'ucrChkIgnoreLabels
-        '
-        Me.ucrChkIgnoreLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreLabels, "ucrChkIgnoreLabels")
-        Me.ucrChkIgnoreLabels.Name = "ucrChkIgnoreLabels"
-        '
         'dlgConvertColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkIgnoreLabels)
         Me.Controls.Add(Me.ucrChkCreateLabels)
-        Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.ucrChkKeepAttributes)
         Me.Controls.Add(Me.ucrNudDisplayDecimals)
         Me.Controls.Add(Me.ucrChkSpecifyDecimalsToDisplay)
@@ -238,6 +237,7 @@ Partial Class dlgConvertColumns
         Me.Controls.Add(Me.lblColumnsToConvert)
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

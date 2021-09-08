@@ -143,18 +143,6 @@
   <data name="&gt;&gt;cmdLibraryCollection.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="clmDatasets.Text" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="clmDatasets.Width" type="System.Int32, mscorlib">
-    <value>142</value>
-  </data>
-  <data name="clmDesc.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="clmDesc.Width" type="System.Int32, mscorlib">
-    <value>266</value>
-  </data>
   <data name="lstCollection.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 79</value>
   </data>
@@ -175,6 +163,18 @@
   </data>
   <data name="&gt;&gt;lstCollection.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="clmDatasets.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="clmDatasets.Width" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="clmDesc.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="clmDesc.Width" type="System.Int32, mscorlib">
+    <value>266</value>
   </data>
   <data name="lblFromPackage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -235,10 +235,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoDefaultDatasets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 12</value>
+    <value>71, 2</value>
   </data>
   <data name="rdoDefaultDatasets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 28</value>
+    <value>145, 44</value>
   </data>
   <data name="rdoDefaultDatasets.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -268,10 +268,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoInstatCollection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 12</value>
+    <value>214, 2</value>
   </data>
   <data name="rdoInstatCollection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 28</value>
+    <value>145, 44</value>
   </data>
   <data name="rdoInstatCollection.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -295,7 +295,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputPackages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 52</value>
+    <value>108, 51</value>
   </data>
   <data name="ucrInputPackages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -376,7 +376,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 24</value>
+    <value>315, 24</value>
   </data>
   <data name="ucrNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

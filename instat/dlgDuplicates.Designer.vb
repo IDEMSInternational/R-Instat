@@ -32,14 +32,15 @@ Partial Class dlgDuplicates
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.ucrInputOmitValues = New instat.ucrInputTextBox()
         Me.ucrInputTolerance = New instat.ucrInputTextBox()
         Me.ucrChkTolerance = New instat.ucrCheck()
         Me.ucrChkOmitValues = New instat.ucrCheck()
         Me.ucrInputConditions = New instat.ucrInputComboBox()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
         Me.ucrInputComboType = New instat.ucrInputComboBox()
         Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
@@ -113,6 +114,29 @@ Partial Class dlgDuplicates
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'lblSelectedVariable
+        '
+        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Tag = ""
+        '
+        'lblVariablesToDuplicate
+        '
+        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
+        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
+        Me.lblVariablesToDuplicate.Tag = ""
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'ucrChkIncludeSummary
+        '
+        Me.ucrChkIncludeSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeSummary, "ucrChkIncludeSummary")
+        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
+        '
         'ucrInputOmitValues
         '
         Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
@@ -144,30 +168,15 @@ Partial Class dlgDuplicates
         'ucrInputConditions
         '
         Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.GetSetSelectedIndex = -1
         Me.ucrInputConditions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
         Me.ucrInputConditions.Name = "ucrInputConditions"
         '
-        'lblSelectedVariable
-        '
-        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Tag = ""
-        '
-        'lblVariablesToDuplicate
-        '
-        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
-        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
-        Me.lblVariablesToDuplicate.Tag = ""
-        '
-        'lblType
-        '
-        resources.ApplyResources(Me.lblType, "lblType")
-        Me.lblType.Name = "lblType"
-        '
         'ucrInputComboType
         '
         Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
         Me.ucrInputComboType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
         Me.ucrInputComboType.Name = "ucrInputComboType"
@@ -222,6 +231,7 @@ Partial Class dlgDuplicates
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIncludeSummary)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblVariablesToDuplicate)
@@ -274,4 +284,5 @@ Partial Class dlgDuplicates
     Friend WithEvents ucrInputOmitValues As ucrInputTextBox
     Friend WithEvents lblType As Label
     Friend WithEvents ucrInputComboType As ucrInputComboBox
+    Friend WithEvents ucrChkIncludeSummary As ucrCheck
 End Class

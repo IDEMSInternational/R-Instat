@@ -27,7 +27,6 @@ Public Class dlgTransformText
     Private iNewColMaxY As Integer
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iFullHeight = Me.Height
@@ -42,6 +41,7 @@ Public Class dlgTransformText
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -174,10 +174,11 @@ Public Class dlgTransformText
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
 
         'ucrNewColName
-        ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetIsComboBox()
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
-        ucrNewColName.SetLabelText("Column Name:")
+        ucrNewColName.SetLabelText("New Column:")
+        ucrNewColName.setLinkedReceiver(ucrReceiverTransformText)
     End Sub
 
     Private Sub SetDefaults()

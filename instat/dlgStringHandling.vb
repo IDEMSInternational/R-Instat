@@ -78,8 +78,8 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
-        ucrSaveStringHandling.SetIsTextBox()
-        ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+        ucrSaveStringHandling.SetIsComboBox()
+        ucrSaveStringHandling.SetLabelText("New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
         'ucrChkIncludeRegularExpressions

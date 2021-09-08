@@ -39,10 +39,10 @@ Partial Class dlgClimaticNCMPIndices
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudNYBR = New instat.ucrNud()
         Me.lblNYBR = New System.Windows.Forms.Label()
+        Me.lblNYER = New System.Windows.Forms.Label()
+        Me.ucrNudNYER = New instat.ucrNud()
         Me.ucrNudQCPR = New instat.ucrNud()
         Me.lblQCPR = New System.Windows.Forms.Label()
-        Me.ucrNudNYER = New instat.ucrNud()
-        Me.lblNYER = New System.Windows.Forms.Label()
         Me.ucrSaveIndices = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
@@ -172,9 +172,9 @@ Partial Class dlgClimaticNCMPIndices
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(267, 245)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(248, 239)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(155, 23)
         Me.cmdStationMetadata.TabIndex = 11
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
@@ -240,6 +240,28 @@ Partial Class dlgClimaticNCMPIndices
         Me.lblNYBR.TabIndex = 4
         Me.lblNYBR.Text = "Start Year for Climatological Period:"
         '
+        'lblNYER
+        '
+        Me.lblNYER.AutoSize = True
+        Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNYER.Location = New System.Drawing.Point(4, 102)
+        Me.lblNYER.Name = "lblNYER"
+        Me.lblNYER.Size = New System.Drawing.Size(169, 13)
+        Me.lblNYER.TabIndex = 14
+        Me.lblNYER.Text = "End Year for Climatological Period:"
+        '
+        'ucrNudNYER
+        '
+        Me.ucrNudNYER.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYER.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNYER.Location = New System.Drawing.Point(191, 100)
+        Me.ucrNudNYER.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNYER.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYER.Name = "ucrNudNYER"
+        Me.ucrNudNYER.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNYER.TabIndex = 15
+        Me.ucrNudNYER.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudQCPR
         '
         Me.ucrNudQCPR.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -262,34 +284,12 @@ Partial Class dlgClimaticNCMPIndices
         Me.lblQCPR.TabIndex = 2
         Me.lblQCPR.Text = "Quality Control Level for Rain:"
         '
-        'ucrNudNYER
-        '
-        Me.ucrNudNYER.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYER.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYER.Location = New System.Drawing.Point(191, 100)
-        Me.ucrNudNYER.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYER.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYER.Name = "ucrNudNYER"
-        Me.ucrNudNYER.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYER.TabIndex = 15
-        Me.ucrNudNYER.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblNYER
-        '
-        Me.lblNYER.AutoSize = True
-        Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYER.Location = New System.Drawing.Point(4, 102)
-        Me.lblNYER.Name = "lblNYER"
-        Me.lblNYER.Size = New System.Drawing.Size(169, 13)
-        Me.lblNYER.TabIndex = 14
-        Me.lblNYER.Text = "End Year for Climatological Period:"
-        '
         'ucrSaveIndices
         '
         Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 276)
         Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveIndices.Name = "ucrSaveIndices"
-        Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveIndices.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveIndices.TabIndex = 1
         '
         'ucrBase

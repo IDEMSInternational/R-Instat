@@ -106,6 +106,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrInputCategoricalByCategorical
         '
         Me.ucrInputCategoricalByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByCategorical.GetSetSelectedIndex = -1
         Me.ucrInputCategoricalByCategorical.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCategoricalByCategorical, "ucrInputCategoricalByCategorical")
         Me.ucrInputCategoricalByCategorical.Name = "ucrInputCategoricalByCategorical"
@@ -113,6 +114,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrInputCategoricalByNumeric
         '
         Me.ucrInputCategoricalByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByNumeric.GetSetSelectedIndex = -1
         Me.ucrInputCategoricalByNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCategoricalByNumeric, "ucrInputCategoricalByNumeric")
         Me.ucrInputCategoricalByNumeric.Name = "ucrInputCategoricalByNumeric"
@@ -120,6 +122,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrInputNumericByCategorical
         '
         Me.ucrInputNumericByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByCategorical.GetSetSelectedIndex = -1
         Me.ucrInputNumericByCategorical.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNumericByCategorical, "ucrInputNumericByCategorical")
         Me.ucrInputNumericByCategorical.Name = "ucrInputNumericByCategorical"
@@ -127,6 +130,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrInputNumericByNumeric
         '
         Me.ucrInputNumericByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByNumeric.GetSetSelectedIndex = -1
         Me.ucrInputNumericByNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNumericByNumeric, "ucrInputNumericByNumeric")
         Me.ucrInputNumericByNumeric.Name = "ucrInputNumericByNumeric"
@@ -174,6 +178,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.Name = "ucrInputPosition"

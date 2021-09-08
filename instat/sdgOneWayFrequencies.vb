@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
     Public bControlsInitialised As Boolean = False
-    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid As New RFunction
+    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid, clsOneWayListPlot As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -27,6 +27,7 @@ Public Class sdgOneWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
         Dim dctOmitZero As New Dictionary(Of String, String)
+        Dim dctColors As New Dictionary(Of String, String)
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
@@ -42,6 +43,10 @@ Public Class sdgOneWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoBoxplot, Chr(34) & "boxplot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoHistogram, Chr(34) & "histogram" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoDensity, Chr(34) & "density" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoViolin, Chr(34) & "violin" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.bUpdateRCodeFromControl = False
 
@@ -85,17 +90,36 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
+
+        ucrInputColor.SetParameter(New RParameter("geom.colors", 13))
+        dctColors.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctColors.Add("Black", Chr(34) & "black" & Chr(34))
+        dctColors.Add("Red", Chr(34) & "red" & Chr(34))
+        dctColors.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctColors.Add("Green", Chr(34) & "green" & Chr(34))
+        dctColors.Add("Violet", Chr(34) & "violet" & Chr(34))
+        dctColors.Add("White", Chr(34) & "white" & Chr(34))
+        ucrInputColor.SetItems(dctColors)
+        ucrInputColor.SetRDefault(Chr(34) & "blue" & Chr(34))
+        ucrInputColor.bAllowNonConditionValues = True
+
+        ucrNudSize.SetParameter(New RParameter("geom.size", 14))
+        ucrNudSize.DecimalPlaces = 1
+        ucrNudSize.Increment = 0.1
+        ucrNudSize.SetMinMax(iNewMin:=0, iNewMax:=Integer.MaxValue)
+
         InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, clsNewPlotGrid As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, clsNewPlotGrid As RFunction, clsNewSjPlotList As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsOneWayTableFreq = clsNewSjtFreq
         clsOneWayGraphFreq = clsNewSjpFrq
         clsOneWayPlotGrid = clsNewPlotGrid
+        clsOneWayListPlot = clsNewSjPlotList
 
         ucrChkShowStrings.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         ucrInputTitle.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
@@ -106,7 +130,8 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
-
+        ucrInputColor.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrNudSize.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         If bReset Then
             tbpOneWayFrequencies.SelectedIndex = 0
         End If

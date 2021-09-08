@@ -51,7 +51,6 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub dlgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -68,6 +67,7 @@ Public Class dlgOpenNetCDF
         End If
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub OpenFile()
@@ -200,6 +200,9 @@ Public Class dlgOpenNetCDF
                     End If
                 Else
                     MsgBox("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
+                    strShort = ""
+                    strMedium = ""
+                    strLong = ""
                 End If
             End If
         End Using
@@ -239,15 +242,21 @@ Public Class dlgOpenNetCDF
                     clsNcOpenFunction.ToScript(strTemp)
                     frmMain.clsRLink.RunScript(strTemp, strComment:="Opening connection to first NetCDF file", bUpdateGrids:=False)
                     bCloseFile = True
+                    clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFiles(0), "\", "/") & Chr(34), iPosition:=1)
                     clsImportNetcdfFunction.AddParameter("path", Chr(34) & Replace(strPath, "\", "/") & Chr(34))
                     ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileName(strPath.TrimEnd(Path.DirectorySeparatorChar))))
+                    FileDetails()
                     clsImportNetcdfFunction.RemoveParameterByName("boundary")
                     clsBoundaryListFunction.ClearParameters()
                 Else
                     clsNcOpenFunction.RemoveParameterByName("filename")
+                    strShort = ""
+                    strMedium = ""
+                    strLong = ""
                 End If
             End If
         End Using
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetNFilesInFolder(strPath As String)
@@ -277,9 +286,10 @@ Public Class dlgOpenNetCDF
             Me.Size = New Size(iExpandedWidth, Me.Height)
             cmdDetails.Text = "Hide Details <<"
         Else
-            Me.Size = New Size(iExpandedWidth / 1.8, Me.Height)
+            Me.Size = New Size(iExpandedWidth / 1.7, Me.Height)
             cmdDetails.Text = "Show Details >>"
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub FileDetails()
@@ -324,6 +334,7 @@ Public Class dlgOpenNetCDF
             ucrInputFileDetails.Text = strLong
         Else
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub DescriptionButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoShort.CheckedChanged, rdoMedium.CheckedChanged, rdoLong.CheckedChanged

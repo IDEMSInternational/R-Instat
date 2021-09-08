@@ -39,11 +39,18 @@ Partial Class dlgGeneralForGraphics
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
+        '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrAdditionalLayers
         '
@@ -60,21 +67,14 @@ Partial Class dlgGeneralForGraphics
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
         'dlgGeneralForGraphics
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
