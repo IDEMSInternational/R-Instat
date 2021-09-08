@@ -46,8 +46,8 @@ Partial Class dlgDummyVariables
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.ucrChkWithXVariable = New instat.ucrCheck()
         Me.ucrPnlLevelOmitted = New instat.UcrPanel()
+        Me.ucrChkWithXVariable = New instat.ucrCheck()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -111,16 +111,16 @@ Partial Class dlgDummyVariables
         Me.rdoNone.Tag = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
+        'ucrPnlLevelOmitted
+        '
+        resources.ApplyResources(Me.ucrPnlLevelOmitted, "ucrPnlLevelOmitted")
+        Me.ucrPnlLevelOmitted.Name = "ucrPnlLevelOmitted"
+        '
         'ucrChkWithXVariable
         '
         Me.ucrChkWithXVariable.Checked = False
         resources.ApplyResources(Me.ucrChkWithXVariable, "ucrChkWithXVariable")
         Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
-        '
-        'ucrPnlLevelOmitted
-        '
-        resources.ApplyResources(Me.ucrPnlLevelOmitted, "ucrPnlLevelOmitted")
-        Me.ucrPnlLevelOmitted.Name = "ucrPnlLevelOmitted"
         '
         'ucrSelectorDummyVariable
         '
@@ -170,7 +170,6 @@ Partial Class dlgDummyVariables
         Me.MinimizeBox = False
         Me.Name = "dlgDummyVariables"
         Me.Tag = "Dummy_Variables"
-        Me.TopMost = True
         Me.grpLevelOmitted.ResumeLayout(False)
         Me.grpLevelOmitted.PerformLayout()
         Me.ResumeLayout(False)

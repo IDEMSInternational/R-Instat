@@ -45,6 +45,7 @@ Public Class dlgScatterPlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsGeomRugFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
@@ -66,6 +67,9 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim clsGeomRugParameter As New RParameter
+        Dim dctSidesOptions As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 433
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -97,7 +101,6 @@ Public Class dlgScatterPlot
         ucrReceiverLabel.Selector = ucrSelectorForScatter
         ucrReceiverLabel.strSelectorHeading = "Variables"
 
-
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.SetParameterIsString()
         ucrFactorOptionalReceiver.bWithQuotes = False
@@ -119,12 +122,47 @@ Public Class dlgScatterPlot
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
+        clsGeomRugFunction.SetPackageName("ggplot2")
+        clsGeomRugFunction.SetRCommand("geom_rug")
+        clsGeomRugParameter.SetArgumentName("geom_rug")
+        clsGeomRugParameter.SetArgument(clsGeomRugFunction)
+        clsGeomRugParameter.Position = 3
+        ucrChkAddRugPlot.SetText("Add Rug Plot")
+        ucrChkAddRugPlot.SetParameter(clsGeomRugParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
         ucrSaveScatterPlot.SetIsComboBox()
         ucrSaveScatterPlot.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrNudSize.SetParameter(New RParameter("size", 0))
+        ucrNudSize.Increment = 0.1
+        ucrNudSize.DecimalPlaces = 1
+
+        ucrInputSides.SetParameter(New RParameter("sides", 1))
+        dctSidesOptions.Add("Bottom and left", Chr(34) & "bl" & Chr(34))
+        dctSidesOptions.Add("Top, right and bottom", Chr(34) & "trb" & Chr(34))
+        dctSidesOptions.Add("Top, right and left", Chr(34) & "trl" & Chr(34))
+        dctSidesOptions.Add("Top, bottom and left", Chr(34) & "tbl" & Chr(34))
+        dctSidesOptions.Add("Right, bottom and left", Chr(34) & "rbl" & Chr(34))
+        dctSidesOptions.Add("Top and right", Chr(34) & "tr" & Chr(34))
+        dctSidesOptions.Add("Top and bottom", Chr(34) & "tb" & Chr(34))
+        dctSidesOptions.Add("Top and left", Chr(34) & "tl" & Chr(34))
+        dctSidesOptions.Add("Right and bottom", Chr(34) & "rb" & Chr(34))
+        dctSidesOptions.Add("Right and left", Chr(34) & "rl" & Chr(34))
+        dctSidesOptions.Add("Top", Chr(34) & "t" & Chr(34))
+        dctSidesOptions.Add("Right", Chr(34) & "r" & Chr(34))
+        dctSidesOptions.Add("Bottom", Chr(34) & "b" & Chr(34))
+        dctSidesOptions.Add("Left", Chr(34) & "l" & Chr(34))
+        ucrInputSides.SetItems(dctSidesOptions)
+        ucrInputSides.SetRDefault(Chr(34) & "bl" & Chr(34))
+        ucrInputSides.SetDropDownStyleAsNonEditable()
+
+        ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrInputSides.SetLinkedDisplayControl(lblSides)
     End Sub
 
     Private Sub SetDefaults()
@@ -154,10 +192,10 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
+        clsGeomRugFunction.AddParameter("size", 0.5, iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -192,6 +230,9 @@ Public Class dlgScatterPlot
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrSaveScatterPlot.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
+        ucrChkAddRugPlot.SetRCode(clsBaseOperator, bReset)
+        ucrNudSize.SetRCode(clsGeomRugFunction, bReset)
+        ucrInputSides.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -248,9 +289,6 @@ Public Class dlgScatterPlot
             End If
         Next
     End Sub
-    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
 
     Private Sub CheckIfNumeric()
         'strReceiverXVarType = ucrReceiverX.strCurrDataType
@@ -274,5 +312,9 @@ Public Class dlgScatterPlot
 
     Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         ' CheckIfNumeric()
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
