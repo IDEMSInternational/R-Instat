@@ -71,14 +71,11 @@ Public Class dlgRugPlot
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrHeatMapSelector
         ucrReceiverX.bWithQuotes = False
-        ucrReceiverX.SetIncludedDataTypes({"factor"})
 
         ucrVariableAsFactorForHeatMap.SetParameter(New RParameter("y", 1))
         ucrVariableAsFactorForHeatMap.Selector = ucrHeatMapSelector
-        ucrVariableAsFactorForHeatMap.strSelectorHeading = "Varibles"
         ucrVariableAsFactorForHeatMap.SetParameterIsString()
         ucrVariableAsFactorForHeatMap.bWithQuotes = False
-        ucrVariableAsFactorForHeatMap.SetIncludedDataTypes({"factor"})
         ucrVariableAsFactorForHeatMap.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariableAsFactorForHeatMap.bAddParameterIfEmpty = True
 
@@ -86,7 +83,6 @@ Public Class dlgRugPlot
         ucrReceiverFill.SetParameterIsString()
         ucrReceiverFill.Selector = ucrHeatMapSelector
         ucrReceiverFill.bWithQuotes = False
-        ucrReceiverFill.SetIncludedDataTypes({"numeric"})
 
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
