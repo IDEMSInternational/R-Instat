@@ -746,12 +746,9 @@ Public Class dlgImportDataset
         'clone the base function to be used for data frame preview and also add the correct maximum number of lines to preview
         clsTempImport = ucrBase.clsRsyntax.clsBaseFunction.Clone()
         'determine the correct maximum number of lines to preview 
-        If clsTempImport.ContainsParameter(strRowMaxParamName) Then
-            If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
-                clsTempImport.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
-            Else
-                clsTempImport.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
-            End If
+        If clsTempImport.ContainsParameter(strRowMaxParamName) _
+            AndAlso Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
+            clsTempImport.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
         Else
             clsTempImport.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
         End If
