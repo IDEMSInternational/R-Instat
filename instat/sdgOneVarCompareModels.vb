@@ -21,7 +21,7 @@ Public Class sdgOneVarCompareModels
     Private clsChisqtableOperator, clsChisqbreaksOperator As New ROperator
     Private clsRSyntax As RSyntax
 
-    Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
