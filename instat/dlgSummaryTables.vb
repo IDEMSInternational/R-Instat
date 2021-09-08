@@ -328,15 +328,15 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub FillListView()
-        Dim iposition As Integer = 0
+        Dim iPosition As Integer = 0
         If clsSummariesList.clsParameters.Count > 0 Then
             ucrReorderSummary.lstAvailableData.Clear()
             ucrReorderSummary.lstAvailableData.Columns.Add("Summaries")
             ucrReorderSummary.lstAvailableData.Columns(0).Width = -2
             For i = 0 To clsSummariesList.clsParameters.Count - 1
-                clsSummariesList.clsParameters(i).Position = 0
+                clsSummariesList.clsParameters(i).Position = iPosition
                 ucrReorderSummary.lstAvailableData.Items.Add(clsSummariesList.clsParameters(i).strArgumentName)
-                iposition = iposition + 1
+                iPosition = iPosition + 1
             Next
         Else
             ucrReorderSummary.lstAvailableData.Items.Clear()
@@ -345,7 +345,7 @@ Public Class dlgSummaryTables
 
     Private Sub ucrReorderSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReorderSummary.ControlValueChanged
         Dim lstOrderedSummaries As New List(Of RParameter)
-        Dim iposition As Integer = 0
+        Dim iPosition As Integer = 0
         For i = 0 To ucrReorderSummary.lstAvailableData.Items.Count - 1
             lstOrderedSummaries.Add(clsSummariesList.GetParameter(ucrReorderSummary.lstAvailableData.Items(i).Text))
         Next
@@ -353,9 +353,9 @@ Public Class dlgSummaryTables
         clsSummariesList.ClearParameters()
         'Changing the parameter positions
         For Each clsParameter In lstOrderedSummaries
-            clsParameter.Position = iposition
+            clsParameter.Position = iPosition
             clsSummariesList.AddParameter(clsParameter)
-            iposition = iposition + 1
+            iPosition = iPosition + 1
         Next
     End Sub
 End Class
