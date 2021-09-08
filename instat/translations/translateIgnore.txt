@@ -64,9 +64,14 @@
 # Fixes issue 6519
 %_txtReceiverSingle
 
-# In the 'New data Frame' Dialog, the user may enter the 'New Data Frame Name'. 
+# In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.
 # Fixes issue #6581
 # TODO Can we assume that the name the user specifies for saving should never be translated 
 #      in any dialog (e.g. '%_ucrInputTextSave%')?
 dlgNewDataFrame_%_ucrInputTextSave%
+
+# In the 'Split Text' dialog, the user may specify how to split the column (by space, comma, 
+# period etc.). This string should not be translated.
+# Fixes issue #6532
+dlgSplitText_ucrInputPattern%
