@@ -70,8 +70,8 @@ Partial Class frmMain
         Me.mnuDescribeSpecificMapPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
@@ -870,15 +870,15 @@ Partial Class frmMain
         Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
         resources.ApplyResources(Me.ToolStripSeparator27, "ToolStripSeparator27")
         '
-        'mnuDescribeSpecificCummulativeDistribution
-        '
-        Me.mnuDescribeSpecificCummulativeDistribution.Name = "mnuDescribeSpecificCummulativeDistribution"
-        resources.ApplyResources(Me.mnuDescribeSpecificCummulativeDistribution, "mnuDescribeSpecificCummulativeDistribution")
-        '
         'mnuDescribeSpecificMosaic
         '
         Me.mnuDescribeSpecificMosaic.Name = "mnuDescribeSpecificMosaic"
         resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
+        '
+        'mnuDescribeSpecificCummulativeDistribution
+        '
+        Me.mnuDescribeSpecificCummulativeDistribution.Name = "mnuDescribeSpecificCummulativeDistribution"
+        resources.ApplyResources(Me.mnuDescribeSpecificCummulativeDistribution, "mnuDescribeSpecificCummulativeDistribution")
         '
         'mnuDescribeSpecificParallelCoordinatePlot
         '
