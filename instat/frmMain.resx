@@ -146,7 +146,7 @@
     <value>Rating Data...</value>
   </data>
   <data name="mnuDescribeOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariable.Text" xml:space="preserve">
     <value>One Variable</value>
@@ -179,7 +179,7 @@
     <value>Pivot Table...</value>
   </data>
   <data name="mnuDescribeTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariables.Text" xml:space="preserve">
     <value>Two Variables</value>
@@ -213,19 +213,19 @@
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeThreeVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariable.Text" xml:space="preserve">
     <value>Three Variables</value>
   </data>
   <data name="mnuDescribeSpecificFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificFrequency.Text" xml:space="preserve">
     <value>Frequency Tables...</value>
   </data>
   <data name="mnuDescribeSpecificSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificSummary.Text" xml:space="preserve">
     <value>Summary Tables...</value>
@@ -234,7 +234,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeSpecificMultipleResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificMultipleResponse.Text" xml:space="preserve">
     <value>Multiple Response...</value>
@@ -243,49 +243,49 @@
     <value>False</value>
   </data>
   <data name="ToolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 6</value>
+    <value>296, 6</value>
   </data>
   <data name="mnuDescribeSpecificBarPieChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificBarPieChart.Text" xml:space="preserve">
-    <value>Bar/Pie Chart...</value>
+    <value>Bar Chart...</value>
   </data>
   <data name="mnuDescribeSpecificBoxplotJitterViolinPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificBoxplotJitterViolinPlot.Text" xml:space="preserve">
     <value>Boxplot/Jitter/Violin Plot...</value>
   </data>
   <data name="mnuDescribeSpecificHistogramDensityFrequencyPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificHistogramDensityFrequencyPlot.Text" xml:space="preserve">
     <value>Histogram/Density/Frequency Plot...</value>
   </data>
   <data name="mnuDescribeSpecificPointPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificPointPlot.Text" xml:space="preserve">
-    <value>Point Plot...</value>
+    <value>Point (Scatter) Plot...</value>
   </data>
-  <data name="mnuDescribeSpecificLinePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+  <data name="mnuDescribeSpecificLineSmoothPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 22</value>
   </data>
-  <data name="mnuDescribeSpecificLinePlot.Text" xml:space="preserve">
-    <value>Line Plot...</value>
+  <data name="mnuDescribeSpecificLineSmoothPlot.Text" xml:space="preserve">
+    <value>Line/Smooth/Dumbbell/Slope Plot...</value>
   </data>
-  <data name="mnuDescribeSpecificRugPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+  <data name="mnuDescribeSpecificMapPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 22</value>
   </data>
-  <data name="mnuDescribeSpecificRugPlot.Text" xml:space="preserve">
-    <value>Rug Plot...</value>
+  <data name="mnuDescribeSpecificMapPlot.Text" xml:space="preserve">
+    <value>Map/Choropleth/Contour/Heatmap Plot...</value>
   </data>
   <data name="mnuDescribeSpecificDotPlot.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuDescribeSpecificDotPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificDotPlot.Text" xml:space="preserve">
     <value>Dot Plot...</value>
@@ -294,28 +294,28 @@
     <value>False</value>
   </data>
   <data name="ToolStripSeparator27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 6</value>
-  </data>
-  <data name="mnuDescribeSpecificCummulativeDistribution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
-  </data>
-  <data name="mnuDescribeSpecificCummulativeDistribution.Text" xml:space="preserve">
-    <value>Cumulative Distribution...</value>
+    <value>296, 6</value>
   </data>
   <data name="mnuDescribeSpecificMosaic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificMosaic.Text" xml:space="preserve">
     <value>Mosaic Plot...</value>
   </data>
+  <data name="mnuDescribeSpecificCummulativeDistribution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 22</value>
+  </data>
+  <data name="mnuDescribeSpecificCummulativeDistribution.Text" xml:space="preserve">
+    <value>Cumulative Distribution...</value>
+  </data>
   <data name="mnuDescribeSpecificParallelCoordinatePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 22</value>
+    <value>299, 22</value>
   </data>
   <data name="mnuDescribeSpecificParallelCoordinatePlot.Text" xml:space="preserve">
     <value>Parallel Coordinate Plot...</value>
   </data>
   <data name="mnuDescribeSpecific.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeSpecific.Text" xml:space="preserve">
     <value>Specific</value>
@@ -354,13 +354,13 @@
     <value>Use Summaries...</value>
   </data>
   <data name="mnuDescribeGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeGeneral.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeMultivariateCorrelations.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 22</value>
@@ -381,22 +381,22 @@
     <value>Canonical Correlations...</value>
   </data>
   <data name="mnuDescribeMultivariate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeMultivariate.Text" xml:space="preserve">
     <value>Multivariate</value>
   </data>
   <data name="ToolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeUseGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeUseGraph.Text" xml:space="preserve">
     <value>Use Graph...</value>
   </data>
   <data name="mnuDescribeCombineGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeCombineGraph.Text" xml:space="preserve">
     <value>Combine Graphs...</value>
@@ -405,7 +405,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeThemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThemes.Text" xml:space="preserve">
     <value>Themes...</value>
@@ -414,7 +414,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeViewGraph.Text" xml:space="preserve">
     <value>View Graph...</value>
@@ -6663,22 +6663,10 @@
   <data name="&gt;&gt;ToolStripSeparator26.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificPointPlot.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificPointPlot</value>
+  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificBarPieChart</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificPointPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificLinePlot.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificLinePlot</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificLinePlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificHistogramDensityFrequencyPlot.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificHistogramDensityFrequencyPlot</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificHistogramDensityFrequencyPlot.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificBoxplotJitterViolinPlot.Name" xml:space="preserve">
@@ -6687,22 +6675,46 @@
   <data name="&gt;&gt;mnuDescribeSpecificBoxplotJitterViolinPlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuDescribeSpecificHistogramDensityFrequencyPlot.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificHistogramDensityFrequencyPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificHistogramDensityFrequencyPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificPointPlot.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificPointPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificPointPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificLineSmoothPlot.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificLineSmoothPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificLineSmoothPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificMapPlot.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificMapPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeSpecificMapPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuDescribeSpecificDotPlot.Name" xml:space="preserve">
     <value>mnuDescribeSpecificDotPlot</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificDotPlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificRugPlot.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificRugPlot</value>
+  <data name="&gt;&gt;ToolStripSeparator27.Name" xml:space="preserve">
+    <value>ToolStripSeparator27</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificRugPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripSeparator27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificBarPieChart</value>
+  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificMosaic</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificCummulativeDistribution.Name" xml:space="preserve">
@@ -6715,12 +6727,6 @@
     <value>mnuDescribeSpecificParallelCoordinatePlot</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificParallelCoordinatePlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificMosaic</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeSpecificMosaic.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeGeneral.Name" xml:space="preserve">
@@ -10196,12 +10202,6 @@
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator27.Name" xml:space="preserve">
-    <value>ToolStripSeparator27</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>
