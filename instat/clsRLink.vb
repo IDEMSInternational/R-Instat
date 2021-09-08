@@ -394,8 +394,8 @@ Public Class RLink
     End Function
 
     ''' <summary>
-    ''' extracts all the complete runnable R commands from the passed script R command string
-    ''' the command lines returned are re-formatted in a format that the R.Net engine can execute
+    ''' Extracts all the complete runnable R commands from <paramref name="strScript"/>.
+    ''' The command lines returned are re-formatted in a format that the R.Net engine can execute.
     ''' </summary>
     ''' <param name="strScript">R script command. Can be a multiline script command</param>
     ''' <returns>an array that contains individual complete runnable R scripts</returns>
@@ -417,7 +417,7 @@ Public Class RLink
     End Function
 
     ''' <summary>
-    ''' checks if the script passed is complete valid R script that can be run without an error
+    ''' checks if <paramref name="strNewScript"/> is complete valid R script that can be run without an error
     ''' </summary>
     ''' <param name="strNewScript">R script command. Can be a multiline script command</param>
     ''' <returns>true, if can be run without an error, and false otherwise</returns>
