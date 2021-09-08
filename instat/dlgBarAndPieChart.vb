@@ -636,18 +636,6 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrChkAddLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlContentsChanged
-        If ucrChkAddLabels.Checked Then
-            ucrChkLollipop.Checked = False
-        End If
-    End Sub
-
-    Private Sub ucrChkLollipop_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLollipop.ControlContentsChanged
-        If ucrChkLollipop.Checked Then
-            ucrChkAddLabels.Checked = False
-        End If
-    End Sub
-
     Private Sub ucrInputBarChartPositions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBarChartPositions.ControlValueChanged
         SetGeomTextOptions()
     End Sub
