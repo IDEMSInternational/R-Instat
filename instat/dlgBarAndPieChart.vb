@@ -203,7 +203,6 @@ Public Class dlgBarAndPieChart
         dctLollipopColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         ucrInputLollipopColour.SetItems(dctLollipopColours)
         ucrInputLollipopColour.bAllowNonConditionValues = True
-        ucrInputLollipopColour.SetRDefault(Chr(34) & "blue" & Chr(34))
 
         ucrNudLollipopSize.SetParameter(New RParameter("point.size", 1))
         ucrNudLollipopSize.DecimalPlaces = 0
@@ -214,7 +213,7 @@ Public Class dlgBarAndPieChart
         ucrChkLollipop.SetText("Lollipop")
         ucrChkLollipop.AddParameterPresentCondition(True, "geom_lollipop")
         ucrChkLollipop.AddParameterPresentCondition(False, "geom_lollipop", False)
-        ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize, ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize, ucrInputLollipopColour}, {True},  bNewLinkedHideIfParameterMissing:=True)
         ucrNudLollipopSize.SetLinkedDisplayControl(lblLollipopSize)
         ucrInputLollipopColour.SetLinkedDisplayControl(lblLollipopColour)
     End Sub
@@ -277,6 +276,7 @@ Public Class dlgBarAndPieChart
 
         clsGeomLollipopFunction.SetPackageName("ggalt")
         clsGeomLollipopFunction.SetRCommand("geom_lollipop")
+        clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
         clsGeomLollipopFunction.AddParameter("point.size", "1", iPosition:=1)
 
         clsBarAesFunction.SetPackageName("ggplot2")
@@ -384,7 +384,7 @@ Public Class dlgBarAndPieChart
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
         ucrNudLollipopSize.SetRCode(clsGeomLollipopFunction, bReset)
         ucrInputLollipopColour.SetRCode(clsGeomLollipopFunction, bReset)
-        ucrChkLollipop.SetRCode(clsGeomLollipopFunction, bReset)
+        ucrChkLollipop.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -419,10 +419,6 @@ Public Class dlgBarAndPieChart
         sdgPlots.ShowDialog()
         bResetSubdialog = False
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
-
-        'this syncs the coordflip in sdgplots and this main dlg
-        'ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
-
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
@@ -476,6 +472,8 @@ Public Class dlgBarAndPieChart
         clsBarAesFunction.RemoveParameterByName("y")
         clsPieAesFunction.RemoveParameterByName("x")
         clsPieAesFunction.RemoveParameterByName("y")
+        clsBaseOperator.RemoveParameterByName("geom_lollipop")
+        clsBaseOperator.RemoveParameterByName("geom_bar")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
@@ -529,7 +527,7 @@ Public Class dlgBarAndPieChart
 
         If ucrChkLollipop.Checked Then
             cmdBarChartOptions.Text = "Lollipop Options"
-            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
         Else
             cmdBarChartOptions.Text = "Bar Chart Options"
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
