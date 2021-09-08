@@ -90,7 +90,7 @@ Public Class dlgRowNamesOrNumbers
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
-        ucrNewColumnName.SetPrefix("row_names")
+        ucrNewColumnName.SetPrefix("row")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
