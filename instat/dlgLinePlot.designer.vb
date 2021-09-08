@@ -50,9 +50,9 @@ Partial Class dlgLinePlot
         Me.rdoLine = New System.Windows.Forms.RadioButton()
         Me.rdoSmoothing = New System.Windows.Forms.RadioButton()
         Me.lblMethod = New System.Windows.Forms.Label()
-        Me.lblSpan = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
-        Me.lblFormula = New System.Windows.Forms.Label()
+        Me.ucrChkSpan = New instat.ucrCheck()
+        Me.ucrChkFormula = New instat.ucrCheck()
         Me.ucrInputFormula = New instat.ucrInputComboBox()
         Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrNudSpan = New instat.ucrNud()
@@ -74,6 +74,8 @@ Partial Class dlgLinePlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
+        Me.grpSmoothOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -155,20 +157,22 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.lblMethod, "lblMethod")
         Me.lblMethod.Name = "lblMethod"
         '
-        'lblSpan
-        '
-        resources.ApplyResources(Me.lblSpan, "lblSpan")
-        Me.lblSpan.Name = "lblSpan"
-        '
         'lblFamily
         '
         resources.ApplyResources(Me.lblFamily, "lblFamily")
         Me.lblFamily.Name = "lblFamily"
         '
-        'lblFormula
+        'ucrChkSpan
         '
-        resources.ApplyResources(Me.lblFormula, "lblFormula")
-        Me.lblFormula.Name = "lblFormula"
+        Me.ucrChkSpan.Checked = False
+        resources.ApplyResources(Me.ucrChkSpan, "ucrChkSpan")
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.Checked = False
+        resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
+        Me.ucrChkFormula.Name = "ucrChkFormula"
         '
         'ucrInputFormula
         '
@@ -317,21 +321,28 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
+        'grpSmoothOptions
+        '
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputFormula)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkSpan)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkFormula)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrNudSpan)
+        Me.grpSmoothOptions.Controls.Add(Me.lblFamily)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
+        Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
+        resources.ApplyResources(Me.grpSmoothOptions, "grpSmoothOptions")
+        Me.grpSmoothOptions.Name = "grpSmoothOptions"
+        Me.grpSmoothOptions.TabStop = False
+        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblFormula)
-        Me.Controls.Add(Me.ucrInputFormula)
-        Me.Controls.Add(Me.lblFamily)
-        Me.Controls.Add(Me.ucrFamilyInput)
-        Me.Controls.Add(Me.lblSpan)
-        Me.Controls.Add(Me.ucrNudSpan)
+        Me.Controls.Add(Me.grpSmoothOptions)
         Me.Controls.Add(Me.ucrChkAddLine)
         Me.Controls.Add(Me.ucrChkAddPoints)
-        Me.Controls.Add(Me.lblMethod)
-        Me.Controls.Add(Me.ucrInputMethod)
-        Me.Controls.Add(Me.ucrChkAddSE)
         Me.Controls.Add(Me.rdoSmoothing)
         Me.Controls.Add(Me.rdoLine)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -361,6 +372,8 @@ Partial Class dlgLinePlot
         Me.MinimizeBox = False
         Me.Name = "dlgLinePlot"
         Me.Tag = "Line_Plot"
+        Me.grpSmoothOptions.ResumeLayout(False)
+        Me.grpSmoothOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -394,10 +407,11 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkAddSE As ucrCheck
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
-    Friend WithEvents lblSpan As Label
     Friend WithEvents ucrNudSpan As ucrNud
     Friend WithEvents ucrFamilyInput As ucrInputComboBox
     Friend WithEvents lblFamily As Label
-    Friend WithEvents lblFormula As Label
     Friend WithEvents ucrInputFormula As ucrInputComboBox
+    Friend WithEvents ucrChkFormula As ucrCheck
+    Friend WithEvents ucrChkSpan As ucrCheck
+    Friend WithEvents grpSmoothOptions As GroupBox
 End Class

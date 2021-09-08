@@ -205,11 +205,15 @@ Public Class dlgLinePlot
         ucrNudSpan.Increment = 0.05
         ucrNudSpan.DecimalPlaces = 2
 
-        ucrInputMethod.AddToLinkedControls(ucrNudSpan, {"loess"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudSpan.SetLinkedDisplayControl(lblSpan)
+        ucrInputMethod.AddToLinkedControls(ucrChkSpan, {"loess"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpan.SetText("Span")
+        ucrChkSpan.AddToLinkedControls(ucrNudSpan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.75)
 
         ucrInputFormula.SetParameter(New RParameter("formula", 3))
         ucrInputFormula.SetItems({"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
+        ucrChkFormula.SetText("Formula")
+        ucrChkFormula.AddToLinkedControls(ucrInputFormula, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrFamilyInput.SetParameter(New RParameter("family", 4))
         dctFamilyOptions.Add("Binomial", Chr(34) & "binomial" & Chr(34))
@@ -229,9 +233,9 @@ Public Class dlgLinePlot
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrChkAddSE, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
-        ucrInputFormula.SetLinkedDisplayControl(lblFormula)
+        ucrChkFormula.SetLinkedDisplayControl(grpSmoothOptions)
     End Sub
 
     Private Sub SetDefaults()
@@ -266,7 +270,7 @@ Public Class dlgLinePlot
 
         clsOptionsFunction.SetPackageName("ggplot2")
         clsOptionsFunction.SetRCommand("geom_line")
-        clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
+        'clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
         clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -315,6 +319,7 @@ Public Class dlgLinePlot
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
         ucrFamilyInput.SetRCode(clsListFunction, bReset)
+        ucrChkFormula.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -460,8 +465,8 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged
-        If ucrInputFormula.GetText <> "" Then
+    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged, ucrChkFormula.ControlValueChanged
+        If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
             clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
         Else
             clsOptionsFunction.RemoveParameterByName("formula")
