@@ -424,7 +424,7 @@ Public Class dlgBarAndPieChart
             Else
                 ucrBase.OKEnabled(False)
             End If
-            If ucrSaveBar.IsComplete AndAlso ucrChkAddReorder.Checked AndAlso (ucrVariablesAsFactorForBarChart.IsEmpty OrElse ucrReceiverX.IsEmpty) Then
+            If ucrSaveBar.IsComplete AndAlso ucrChkAddReorder.Checked AndAlso (ucrVariablesAsFactorForBarChart.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse ucrReceiverByFactor.IsEmpty) Then
                 ucrBase.OKEnabled(False)
             End If
         End If
@@ -497,10 +497,10 @@ Public Class dlgBarAndPieChart
             Select Case strChangedText
                 Case strAscending
                     clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                    clsReorderFunction.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                    clsReorderFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
                 Case strDescending
                     clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                    clsReorderFunction.AddParameter("X", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                    clsReorderFunction.AddParameter("y", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
             End Select
         ElseIf strChangedText = strReverse Then
             clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=2)
