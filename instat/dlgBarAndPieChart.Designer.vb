@@ -55,8 +55,8 @@ Partial Class dlgBarAndPieChart
         Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.lblLollipopSize = New System.Windows.Forms.Label()
         Me.lblLollipopColour = New System.Windows.Forms.Label()
+        Me.lblReorder = New System.Windows.Forms.Label()
         Me.ucrInputAddReorder = New instat.ucrInputComboBox()
-        Me.ucrChkAddReorder = New instat.ucrCheck()
         Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
         Me.ucrNudLollipopSize = New instat.ucrNud()
         Me.ucrChkLollipop = New instat.ucrCheck()
@@ -185,6 +185,11 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblLollipopColour, "lblLollipopColour")
         Me.lblLollipopColour.Name = "lblLollipopColour"
         '
+        'lblReorder
+        '
+        resources.ApplyResources(Me.lblReorder, "lblReorder")
+        Me.lblReorder.Name = "lblReorder"
+        '
         'ucrInputAddReorder
         '
         Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
@@ -192,12 +197,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputAddReorder.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
-        '
-        'ucrChkAddReorder
-        '
-        Me.ucrChkAddReorder.Checked = False
-        resources.ApplyResources(Me.ucrChkAddReorder, "ucrChkAddReorder")
-        Me.ucrChkAddReorder.Name = "ucrChkAddReorder"
         '
         'ucrInputLollipopColour
         '
@@ -339,8 +338,8 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblReorder)
         Me.Controls.Add(Me.ucrInputAddReorder)
-        Me.Controls.Add(Me.ucrChkAddReorder)
         Me.Controls.Add(Me.ucrInputLollipopColour)
         Me.Controls.Add(Me.lblLollipopColour)
         Me.Controls.Add(Me.ucrNudLollipopSize)
@@ -422,5 +421,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblLollipopSize As Label
     Friend WithEvents ucrChkLollipop As ucrCheck
     Friend WithEvents ucrInputAddReorder As ucrInputComboBox
-    Friend WithEvents ucrChkAddReorder As ucrCheck
+    Friend WithEvents lblReorder As Label
 End Class

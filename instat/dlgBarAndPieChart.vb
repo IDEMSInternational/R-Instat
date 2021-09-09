@@ -102,7 +102,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "coordpolar")
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkAddReorder, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverX, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
@@ -226,9 +226,6 @@ Public Class dlgBarAndPieChart
 
         ucrInputAddReorder.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputAddReorder.SetDropDownStyleAsNonEditable()
-
-        ucrChkAddReorder.SetText("Add Reorder")
-        ucrChkAddReorder.AddToLinkedControls({ucrInputAddReorder}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -424,9 +421,6 @@ Public Class dlgBarAndPieChart
             Else
                 ucrBase.OKEnabled(False)
             End If
-            If ucrSaveBar.IsComplete AndAlso ucrChkAddReorder.Checked AndAlso (ucrVariablesAsFactorForBarChart.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse ucrReceiverByFactor.IsEmpty) Then
-                ucrBase.OKEnabled(False)
-            End If
         End If
     End Sub
 
@@ -492,7 +486,7 @@ Public Class dlgBarAndPieChart
 
     Private Sub UpdateParameter()
         Dim strChangedText As String = ucrInputAddReorder.GetText()
-        If ucrChkAddReorder.Checked AndAlso (strChangedText = strAscending OrElse strChangedText = strDescending) Then
+        If strChangedText = strAscending OrElse strChangedText = strDescending Then
             clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
             Select Case strChangedText
                 Case strAscending
@@ -503,10 +497,19 @@ Public Class dlgBarAndPieChart
                     clsReorderFunction.AddParameter("y", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
             End Select
         ElseIf strChangedText = strReverse Then
-            clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=2)
+            If rdoFrequency.Checked Then
+                clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=1)
+            Else
+                clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=2)
+            End If
         Else
-            clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-            clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            If rdoFrequency.Checked Then
+                clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
+                clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+            Else
+                clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            End If
         End If
     End Sub
 
@@ -543,7 +546,8 @@ Public Class dlgBarAndPieChart
             If ucrVariablesAsFactorForBarChart.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-            ElseIf ucrReceiverByFactor.IsEmpty Then
+            End If
+            If ucrReceiverByFactor.IsEmpty Then
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
             End If
@@ -554,18 +558,6 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
             clsRgeomBarFunction2.RemoveParameterByName("stat")
-        End If
-
-        If Not ucrVariablesAsFactorForBarChart.bSingleVariable Then
-            If rdoFrequency.Checked Then
-                clsBarAesFunction.AddParameter("x", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
-                clsPieAesFunction.AddParameter("x", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
-                clsBarAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-                clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-            Else
-                clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-                clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-            End If
         End If
 
         If ucrChkLollipop.Checked Then
@@ -579,11 +571,9 @@ Public Class dlgBarAndPieChart
         UpdateParameter()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrChkAddLabels.ControlValueChanged, ucrChkAddReorder.ControlValueChanged, ucrInputAddReorder.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrChkAddLabels.ControlValueChanged, ucrInputAddReorder.ControlValueChanged
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
-        ucrChkAddReorder.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
-            ucrChkAddReorder.Checked = False
             ucrChkLollipop.Checked = False
         End If
         SetDialogOptions()
@@ -689,7 +679,7 @@ Public Class dlgBarAndPieChart
         SetGeomTextOptions()
     End Sub
 
-    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged, ucrChkAddReorder.ControlContentsChanged
+    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
