@@ -127,6 +127,7 @@ Public Class dlgStack
         ucrReceiverTextColumn.SetLinkedDisplayControl(lblVariable)
         ucrReceiverTextColumn.SetParameter(New RParameter("input", 0))
         ucrReceiverTextColumn.strCurrDataType = "character"
+        ucrReceiverTextColumn.SetDataType("character")
 
         ucrPnlStack.AddRadioButton(rdoUnnest)
         ucrPnlStack.AddRadioButton(rdoPivotLonger)
