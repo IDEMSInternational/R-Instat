@@ -535,18 +535,17 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
         Dim strReconstructed As String = ""
-        Dim strParts As String()
+        Dim arrScriptParts As String()
         If Not String.IsNullOrEmpty(strTemp) Then
-            'if string contains more than one line, then divide it up into an array of separate lines
-            strParts = strTemp.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            If strParts.Length > 1 Then
+            'if string contains more than one line, assign the last line of the multi-line string
+            arrScriptParts = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+            If arrScriptParts.Length > 1 Then
                 're-assemble the string, apart from the last line
-                For i As Integer = 0 To strParts.Length - 2
-                    strReconstructed = strReconstructed & strParts(i) & Environment.NewLine
-                Next
-                'assign just the last line of the multi-line string
-                strReconstructed = strReconstructed & strAssignTo & " <- " & strParts.Last
-            Else 'else if string has only one line, then assign to the whole string
+                strReconstructed = String.Join(Environment.NewLine, arrScriptParts, 0, arrScriptParts.Length - 1)
+                'assign the last line of the multi-line string
+                strReconstructed = strReconstructed & Environment.NewLine & strAssignTo & " <- " & arrScriptParts.Last
+            Else
+                'else if string has only one line, then assign to the whole string
                 strReconstructed = strAssignTo & " <- " & strTemp
             End If
         End If
