@@ -44,6 +44,10 @@ Partial Class dlgReorderLevels
         Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReorderFactor = New instat.ucrReorder()
+        Me.rdoByHand = New System.Windows.Forms.RadioButton()
+        Me.rdoProperty = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -63,6 +67,7 @@ Partial Class dlgReorderLevels
         '
         'ucrSelectorFactorLevelsToReorder
         '
+        Me.ucrSelectorFactorLevelsToReorder.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactorLevelsToReorder.bShowHiddenColumns = False
         Me.ucrSelectorFactorLevelsToReorder.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
@@ -80,10 +85,55 @@ Partial Class dlgReorderLevels
         Me.ucrReorderFactor.ucrDataFrameList = Nothing
         Me.ucrReorderFactor.ucrReceiver = Nothing
         '
+        'rdoByHand
+        '
+        resources.ApplyResources(Me.rdoByHand, "rdoByHand")
+        Me.rdoByHand.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoByHand.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByHand.FlatAppearance.BorderSize = 2
+        Me.rdoByHand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByHand.Name = "rdoByHand"
+        Me.rdoByHand.TabStop = True
+        Me.rdoByHand.Tag = "By_Hand"
+        Me.rdoByHand.UseVisualStyleBackColor = False
+        '
+        'rdoProperty
+        '
+        resources.ApplyResources(Me.rdoProperty, "rdoProperty")
+        Me.rdoProperty.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoProperty.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoProperty.FlatAppearance.BorderSize = 2
+        Me.rdoProperty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoProperty.Name = "rdoProperty"
+        Me.rdoProperty.TabStop = True
+        Me.rdoProperty.Tag = "Property"
+        Me.rdoProperty.UseVisualStyleBackColor = False
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'rdoVariable
+        '
+        resources.ApplyResources(Me.rdoVariable, "rdoVariable")
+        Me.rdoVariable.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoVariable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariable.FlatAppearance.BorderSize = 2
+        Me.rdoVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.TabStop = True
+        Me.rdoVariable.Tag = "Variable"
+        Me.rdoVariable.UseVisualStyleBackColor = False
+        '
         'dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoVariable)
+        Me.Controls.Add(Me.rdoByHand)
+        Me.Controls.Add(Me.rdoProperty)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.ucrBase)
@@ -104,4 +154,8 @@ Partial Class dlgReorderLevels
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrReorderFactor As ucrReorder
+    Friend WithEvents rdoVariable As RadioButton
+    Friend WithEvents rdoByHand As RadioButton
+    Friend WithEvents rdoProperty As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class

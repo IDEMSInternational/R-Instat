@@ -36,6 +36,13 @@ Public Class dlgReorderLevels
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 36
 
+        ucrPnlOptions.AddRadioButton(rdoByHand)
+        ucrPnlOptions.AddRadioButton(rdoProperty)
+        ucrPnlOptions.AddRadioButton(rdoVariable)
+        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition({rdoByHand, rdoProperty, rdoVariable}, {frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels"})
+
+        ucrPnlOptions.AddToLinkedControls(ucrReorderFactor, {rdoByHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         'Set data frame paramater
         ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
