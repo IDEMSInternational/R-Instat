@@ -123,13 +123,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 75</value>
+    <value>247, 75</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
   </data>
   <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblFactor.Text" xml:space="preserve">
     <value>Factor Selected:</value>
@@ -175,7 +175,7 @@
     <value>87, 28</value>
   </data>
   <data name="rdoVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="rdoVariable.Text" xml:space="preserve">
     <value>Variable</value>
@@ -211,7 +211,7 @@
     <value>70, 28</value>
   </data>
   <data name="rdoByHand.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="rdoByHand.Text" xml:space="preserve">
     <value>By: Hand</value>
@@ -247,7 +247,7 @@
     <value>84, 28</value>
   </data>
   <data name="rdoProperty.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="rdoProperty.Text" xml:space="preserve">
     <value>Property</value>
@@ -310,7 +310,7 @@
     <value>6</value>
   </data>
   <data name="ucrReorderFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 119</value>
+    <value>248, 119</value>
   </data>
   <data name="ucrReorderFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 180</value>
@@ -340,7 +340,7 @@
     <value>242, 193</value>
   </data>
   <data name="ucrSelectorFactorLevelsToReorder.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrSelectorFactorLevelsToReorder.Name" xml:space="preserve">
     <value>ucrSelectorFactorLevelsToReorder</value>
@@ -367,7 +367,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 90</value>
+    <value>248, 90</value>
   </data>
   <data name="ucrReceiverFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -376,7 +376,7 @@
     <value>134, 26</value>
   </data>
   <data name="ucrReceiverFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.Name" xml:space="preserve">
     <value>ucrReceiverFactor</value>
