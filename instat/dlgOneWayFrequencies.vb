@@ -76,7 +76,7 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddRadioButton(rdoBoth)
 
         'setting rdoGraph and rdoTable
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "frq")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, {"frq", "as.data.frame"})
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "as.ggplot")
         'TODO be able to have conditions across multiple functions
 
@@ -95,7 +95,7 @@ Public Class dlgOneWayFrequencies
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Save Table")
         ucrSaveDataFrame.SetIsComboBox()
-        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_table")
+        'ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_table")
 
         ucrNudGroups.SetParameter(New RParameter("auto.grp", 9))
         ucrNudGroups.SetMinMax(2, 100)
@@ -230,27 +230,6 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strGraph As String
-        Dim strTempScript As String = ""
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-
-        If rdoBoth.Checked Then
-            bIsAssigned = clsAsGGplot.bIsAssigned
-            bToBeAssigned = clsAsGGplot.bToBeAssigned
-            strAssignTo = clsAsGGplot.strAssignTo
-
-            strGraph = clsAsGGplot.ToScript(strTempScript)
-            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
-
-            clsAsGGplot.bIsAssigned = bIsAssigned
-            clsAsGGplot.bToBeAssigned = bToBeAssigned
-            clsAsGGplot.strAssignTo = strAssignTo
-        End If
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -277,12 +256,19 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub SetBaseFunction()
-        If rdoTable.Checked OrElse rdoBoth.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(If(ucrSaveDataFrame.IsComplete, clsAsDataFrame, clsSjMiscFrq))
-            ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoGraph.Checked Then
+        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
+        If rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
             ucrBase.clsRsyntax.iCallType = 3
+        Else
+            If rdoBoth.Checked Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(If(ucrSaveDataFrame.ucrChkSave.Checked AndAlso ucrSaveDataFrame.IsComplete, clsAsDataFrame, clsSjMiscFrq))
+                ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
+                ucrBase.clsRsyntax.iCallType = 3
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(If(ucrSaveDataFrame.ucrChkSave.Checked AndAlso ucrSaveDataFrame.IsComplete, clsAsDataFrame, clsSjMiscFrq))
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
         End If
 
     End Sub
