@@ -230,6 +230,7 @@ Public Class dlgStack
         End If
 
         'comparing the list of colums to avoid duplication
+        clsSelectFunction.ClearParameters()
         Dim iPosition As Integer = 0
         For Each strColumn In ucrReceiverColumnsToBeStack.GetVariableNamesAsList
             If Not ucrReceiverColumnsToCarry.GetVariableNamesAsList.Contains(strColumn) Then
