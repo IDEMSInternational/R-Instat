@@ -40,6 +40,8 @@ Public Class dlgRugPlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    'Private clsLabelAesFunction As New RFunction
+    'Private clsGeomTextFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
     Private strGeomParameterNames() As String = {strFirstParameterName}
@@ -52,7 +54,6 @@ Public Class dlgRugPlot
         If bReset Then
             SetDefaults()
         End If
-
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -60,6 +61,11 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctStatOptions As New Dictionary(Of String, String)
+        Dim dctLabelColours As New Dictionary(Of String, String)
+        Dim dctLabelPositions As New Dictionary(Of String, String)
+        Dim dctLabelSizes As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -90,6 +96,33 @@ Public Class dlgRugPlot
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrHeatMapSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrInputPosition.SetParameter(New RParameter("vjust", 2))
+        dctLabelPositions.Add("Out", "-0.25")
+        dctLabelPositions.Add("In", "5")
+        ucrInputPosition.SetItems(dctLabelPositions)
+        ucrInputPosition.SetDropDownStyleAsNonEditable()
+
+        ucrInputColour.SetParameter(New RParameter("colour", 4))
+        dctLabelColours.Add("Black", Chr(34) & "black" & Chr(34))
+        dctLabelColours.Add("White", Chr(34) & "white" & Chr(34))
+        ucrInputColour.SetItems(dctLabelColours)
+        ucrInputColour.bAllowNonConditionValues = True
+
+        ucrInputSize.SetParameter(New RParameter("size", 5))
+        dctLabelSizes.Add("Default", "4")
+        dctLabelSizes.Add("Small", "3")
+        dctLabelSizes.Add("Big", "7")
+        ucrInputSize.SetItems(dctLabelSizes)
+        ucrInputSize.SetDropDownStyleAsNonEditable()
+
+        ucrChkAddLabels.SetText("Add Labels")
+        ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
+        ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
+        ucrChkAddLabels.AddToLinkedControls({ucrInputPosition, ucrInputSize, ucrInputColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputColour.SetLinkedDisplayControl(lblColour)
+        ucrInputPosition.SetLinkedDisplayControl(lblPosition)
+        ucrInputSize.SetLinkedDisplayControl(lblSize)
     End Sub
 
     Private Sub SetDefaults()
@@ -97,6 +130,9 @@ Public Class dlgRugPlot
         clsRggplotFunction = New RFunction
         clsRgeom_TileFunction = New RFunction
         clsBaseOperator = New ROperator
+        'clsGeomTextFunction = New RFunction
+        'clsLabelAesFunction = New RFunction
+
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -113,11 +149,25 @@ Public Class dlgRugPlot
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
+        'clsGeomTextFunction.SetPackageName("ggplot2")
+        'clsGeomTextFunction.SetRCommand("geom_text")
+        'clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+        'clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
+        'clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
+        'clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
+
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
+        'clsLabelAesFunction.SetPackageName("ggplot2")
+        'clsLabelAesFunction.SetRCommand("aes")
+
+
         clsRgeom_TileFunction.SetPackageName("ggplot2")
         clsRgeom_TileFunction.SetRCommand("geom_tile")
+
+        'clsGeomTextFunction.RemoveParameterByName("stat")
+        'clsLabelAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -142,12 +192,20 @@ Public Class dlgRugPlot
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        'ucrReceiverX.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        'ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
+        'ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("fill", 2), iAdditionalPairNo:=1)
+
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
 
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrVariableAsFactorForHeatMap.SetRCode(clsRaesFunction, bReset)
         ucrReceiverFill.SetRCode(clsRaesFunction, bReset)
+        ' ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
+        ucrChkAddLabels.SetRCode(clsBaseOperator, bReset)
+        'ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
+        'ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -167,7 +225,13 @@ Public Class dlgRugPlot
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
+    'Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+    '    If ucrChkAddLabels.Checked Then
+    '        clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
+    '    Else
+    '        clsBaseOperator.RemoveParameterByName("geom_text")
+    '    End If
+    'End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                           clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,

@@ -42,13 +42,20 @@ Partial Class dlgRugPlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdHeatMapOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.lblColour = New System.Windows.Forms.Label()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrInputSize = New instat.ucrInputComboBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
+        Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
-        Me.lblFill = New System.Windows.Forms.Label()
-        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -70,6 +77,76 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.lblXVariable, "lblXVariable")
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Tag = "X_Variable:"
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Tag = "fill"
+        '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'lblColour
+        '
+        resources.ApplyResources(Me.lblColour, "lblColour")
+        Me.lblColour.Name = "lblColour"
+        '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Name = "lblSize"
+        '
+        'ucrInputSize
+        '
+        Me.ucrInputSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputSize.GetSetSelectedIndex = -1
+        Me.ucrInputSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSize, "ucrInputSize")
+        Me.ucrInputSize.Name = "ucrInputSize"
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
+        Me.ucrInputColour.Name = "ucrInputColour"
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        '
+        'ucrVariableAsFactorForHeatMap
+        '
+        Me.ucrVariableAsFactorForHeatMap.frmParent = Me
+        resources.ApplyResources(Me.ucrVariableAsFactorForHeatMap, "ucrVariableAsFactorForHeatMap")
+        Me.ucrVariableAsFactorForHeatMap.Name = "ucrVariableAsFactorForHeatMap"
+        Me.ucrVariableAsFactorForHeatMap.Selector = Nothing
+        Me.ucrVariableAsFactorForHeatMap.strNcFilePath = ""
+        Me.ucrVariableAsFactorForHeatMap.ucrSelector = Nothing
+        Me.ucrVariableAsFactorForHeatMap.ucrVariableSelector = Nothing
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
@@ -98,35 +175,17 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrVariableAsFactorForHeatMap
-        '
-        Me.ucrVariableAsFactorForHeatMap.frmParent = Me
-        resources.ApplyResources(Me.ucrVariableAsFactorForHeatMap, "ucrVariableAsFactorForHeatMap")
-        Me.ucrVariableAsFactorForHeatMap.Name = "ucrVariableAsFactorForHeatMap"
-        Me.ucrVariableAsFactorForHeatMap.Selector = Nothing
-        Me.ucrVariableAsFactorForHeatMap.strNcFilePath = ""
-        Me.ucrVariableAsFactorForHeatMap.ucrSelector = Nothing
-        Me.ucrVariableAsFactorForHeatMap.ucrVariableSelector = Nothing
-        '
-        'lblFill
-        '
-        resources.ApplyResources(Me.lblFill, "lblFill")
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Tag = "fill"
-        '
-        'ucrReceiverFill
-        '
-        Me.ucrReceiverFill.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
-        Me.ucrReceiverFill.Name = "ucrReceiverFill"
-        Me.ucrReceiverFill.Selector = Nothing
-        Me.ucrReceiverFill.strNcFilePath = ""
-        Me.ucrReceiverFill.ucrSelector = Nothing
-        '
         'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputSize)
+        Me.Controls.Add(Me.lblSize)
+        Me.Controls.Add(Me.ucrInputColour)
+        Me.Controls.Add(Me.lblColour)
+        Me.Controls.Add(Me.ucrInputPosition)
+        Me.Controls.Add(Me.lblPosition)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.ucrVariableAsFactorForHeatMap)
         Me.Controls.Add(Me.lblFill)
         Me.Controls.Add(Me.ucrReceiverFill)
@@ -155,4 +214,11 @@ Partial Class dlgRugPlot
     Friend WithEvents ucrVariableAsFactorForHeatMap As ucrVariablesAsFactor
     Friend WithEvents lblFill As Label
     Friend WithEvents ucrReceiverFill As ucrReceiverSingle
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents lblColour As Label
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents ucrInputSize As ucrInputComboBox
+    Friend WithEvents lblSize As Label
 End Class
