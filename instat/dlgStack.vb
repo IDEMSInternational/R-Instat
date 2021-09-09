@@ -46,10 +46,8 @@ Public Class dlgStack
         ucrSelectorStack.SetParameter(New RParameter("tbl", 0))
         ucrSelectorStack.SetParameterIsrfunction()
 
-        ucrReceiverColumnsToCarry.SetParameter(New RParameter("id.vars", 1))
         ucrReceiverColumnsToCarry.Selector = ucrSelectorStack
         ucrReceiverColumnsToCarry.SetParameterIsString()
-        ucrReceiverColumnsToCarry.bAddRemoveParameter = False
         ucrReceiverColumnsToCarry.SetValuesToIgnore({"NULL"})
 
         ucrReceiverColumnsToBeStack.SetParameter(New RParameter("cols", 2))
@@ -61,7 +59,7 @@ Public Class dlgStack
         ucrInputNamesTo.SetRDefault(Chr(34) & "names" & Chr(34))
         ucrInputNamesTo.SetLinkedDisplayControl(lblNamesTo)
 
-        ucrChkCarryColumns.SetText("Columns To Carry")
+        ucrChkCarryColumns.SetText("Columns to carry")
         ucrChkCarryColumns.AddParameterIsROperatorCondition(True, "data")
         ucrChkCarryColumns.AddParameterIsROperatorCondition(False, "data", False)
 
@@ -73,27 +71,27 @@ Public Class dlgStack
 
         ucrInputToken.SetLinkedDisplayControl(lblToken)
         ucrInputToken.SetParameter(New RParameter("token", 3))
-        dctToken.Add("words", Chr(34) & "words" & Chr(34))
-        dctToken.Add("characters", Chr(34) & " characters" & (34))
-        dctToken.Add("character_shingles", Chr(34) & "character_shingles" & Chr(34))
-        dctToken.Add("ngrams", Chr(34) & "ngrams" & Chr(34))
-        dctToken.Add("skip_ngrams", Chr(34) & "skip_ngrams" & Chr(34))
-        dctToken.Add("sentences", Chr(34) & "sentences" & Chr(34))
-        dctToken.Add("lines", Chr(34) & "lines" & Chr(34))
-        dctToken.Add("paragraphs", Chr(34) & "paragraphs" & Chr(34))
-        dctToken.Add("regex", Chr(34) & "regex" & Chr(34))
-        dctToken.Add("tweets", Chr(34) & "tweets" & Chr(34))
-        dctToken.Add("ptb", Chr(34) & "ptb" & Chr(34))
+        dctToken.Add("Words", Chr(34) & "words" & Chr(34))
+        dctToken.Add("Characters", Chr(34) & " characters" & (34))
+        dctToken.Add("Character_shingles", Chr(34) & "character_shingles" & Chr(34))
+        dctToken.Add("Ngrams", Chr(34) & "ngrams" & Chr(34))
+        dctToken.Add("Skip_ngrams", Chr(34) & "skip_ngrams" & Chr(34))
+        dctToken.Add("Sentences", Chr(34) & "sentences" & Chr(34))
+        dctToken.Add("Lines", Chr(34) & "lines" & Chr(34))
+        dctToken.Add("Paragraphs", Chr(34) & "paragraphs" & Chr(34))
+        dctToken.Add("Regex", Chr(34) & "regex" & Chr(34))
+        dctToken.Add("Tweets", Chr(34) & "tweets" & Chr(34))
+        dctToken.Add("Penn treebank", Chr(34) & "ptb" & Chr(34))
         ucrInputToken.SetItems(dctToken)
         ucrInputToken.SetRDefault(Chr(34) & "words" & Chr(34))
 
         ucrInputFormat.SetParameter(New RParameter("format", 4))
         ucrInputFormat.SetLinkedDisplayControl(lblFormat)
-        dctFormat.Add("text", Chr(34) & "text" & Chr(34))
-        dctFormat.Add("man", Chr(34) & "man" & Chr(34))
-        dctFormat.Add("latex", Chr(34) & "latex" & Chr(34))
-        dctFormat.Add("html", Chr(34) & "html" & Chr(34))
-        dctFormat.Add("xml", Chr(34) & "xml" & Chr(34))
+        dctFormat.Add("Text", Chr(34) & "text" & Chr(34))
+        dctFormat.Add("Man", Chr(34) & "man" & Chr(34))
+        dctFormat.Add("Latex", Chr(34) & "latex" & Chr(34))
+        dctFormat.Add("Html", Chr(34) & "html" & Chr(34))
+        dctFormat.Add("Xml", Chr(34) & "xml" & Chr(34))
         ucrInputFormat.SetItems(dctFormat)
         ucrInputFormat.SetRDefault(Chr(34) & "text" & Chr(34))
         ucrInputFormat.bAllowNonConditionValues = False
@@ -113,7 +111,7 @@ Public Class dlgStack
         ucrChkUrl.SetRDefault("TRUE")
         ucrChkUrl.SetText("URL")
 
-        ucrChkToLowerCase.SetText("To Lower Case")
+        ucrChkToLowerCase.SetText("To lower case")
         ucrChkToLowerCase.SetParameter(New RParameter("to_lower ", 5))
         ucrChkToLowerCase.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkToLowerCase.SetRDefault("TRUE")
@@ -134,9 +132,9 @@ Public Class dlgStack
         ucrPnlStack.AddFunctionNamesCondition(rdoUnnest, "unnest_tokens")
         ucrPnlStack.AddFunctionNamesCondition(rdoPivotLonger, "pivot_longer")
 
-        ucrInputToken.AddToLinkedControls(ucrInputPattern, {"regex"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputToken.AddToLinkedControls(ucrChkPunctuation, {"words", "tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputToken.AddToLinkedControls(ucrChkUrl, {"tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputToken.AddToLinkedControls(ucrInputPattern, {"Regex"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputToken.AddToLinkedControls(ucrChkPunctuation, {"Words", "Tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputToken.AddToLinkedControls(ucrChkUrl, {"Tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls(ucrChkCarryColumns, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlStack.AddToLinkedControls({ucrReceiverTextColumn, ucrInputOutput, ucrInputToken, ucrInputFormat, ucrChkToLowerCase}, {rdoUnnest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -167,6 +165,7 @@ Public Class dlgStack
         clsUnnestTokensFunction.SetRCommand("unnest_tokens")
 
         clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.SetPackageName("dplyr")
 
         clsPipeOperator.SetOperation(" %>% ")
         clsPipeOperator.AddParameter("one", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -263,12 +262,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
-        If rdoPivotLonger.Checked Then
-            If ucrChkCarryColumns.Checked Then
-                ucrReceiverColumnsToCarry.SetMeAsReceiver()
-            Else
-                ucrReceiverColumnsToBeStack.SetMeAsReceiver()
-            End If
+        If rdoPivotLonger.Checked AndAlso ucrChkCarryColumns.Checked Then
+            ucrReceiverColumnsToCarry.SetMeAsReceiver()
+        Else
+            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
 
         AddColumnsSelected()
