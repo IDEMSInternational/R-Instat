@@ -40,14 +40,15 @@ Partial Class dlgReorderLevels
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
-        Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReorderFactor = New instat.ucrReorder()
         Me.rdoByHand = New System.Windows.Forms.RadioButton()
         Me.rdoProperty = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReorderFactor = New instat.ucrReorder()
+        Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -55,35 +56,6 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Tag = "Factor_Selected:"
-        '
-        'ucrReceiverFactor
-        '
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
-        Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.ucrSelector = Nothing
-        '
-        'ucrSelectorFactorLevelsToReorder
-        '
-        Me.ucrSelectorFactorLevelsToReorder.bDropUnusedFilterLevels = False
-        Me.ucrSelectorFactorLevelsToReorder.bShowHiddenColumns = False
-        Me.ucrSelectorFactorLevelsToReorder.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
-        Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrReorderFactor
-        '
-        resources.ApplyResources(Me.ucrReorderFactor, "ucrReorderFactor")
-        Me.ucrReorderFactor.Name = "ucrReorderFactor"
-        Me.ucrReorderFactor.ucrDataFrameList = Nothing
-        Me.ucrReorderFactor.ucrReceiver = Nothing
         '
         'rdoByHand
         '
@@ -109,11 +81,6 @@ Partial Class dlgReorderLevels
         Me.rdoProperty.Tag = "Property"
         Me.rdoProperty.UseVisualStyleBackColor = False
         '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
         'rdoVariable
         '
         resources.ApplyResources(Me.rdoVariable, "rdoVariable")
@@ -126,10 +93,50 @@ Partial Class dlgReorderLevels
         Me.rdoVariable.Tag = "Variable"
         Me.rdoVariable.UseVisualStyleBackColor = False
         '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrReceiverFactor
+        '
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrReorderFactor
+        '
+        resources.ApplyResources(Me.ucrReorderFactor, "ucrReorderFactor")
+        Me.ucrReorderFactor.Name = "ucrReorderFactor"
+        Me.ucrReorderFactor.ucrDataFrameList = Nothing
+        Me.ucrReorderFactor.ucrReceiver = Nothing
+        '
+        'ucrSelectorFactorLevelsToReorder
+        '
+        Me.ucrSelectorFactorLevelsToReorder.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFactorLevelsToReorder.bShowHiddenColumns = False
+        Me.ucrSelectorFactorLevelsToReorder.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
+        Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
         'dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoVariable)
         Me.Controls.Add(Me.rdoByHand)
         Me.Controls.Add(Me.rdoProperty)
@@ -158,4 +165,5 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoByHand As RadioButton
     Friend WithEvents rdoProperty As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

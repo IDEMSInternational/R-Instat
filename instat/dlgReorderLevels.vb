@@ -59,19 +59,33 @@ Public Class dlgReorderLevels
         ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
         ucrReorderFactor.setDataType("factor")
+
+
+        ucrSaveGraph.SetPrefix("Reorder")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
         clsReorder = New RFunction
         'reset
         ucrSelectorFactorLevelsToReorder.Reset()
+        ucrSaveGraph.Reset()
         ' Set default function
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
+        ucrReceiverFactor.SetRCode(clsReorder, bReset)
+        ucrReorderFactor.SetRCode(clsReorder, bReset)
+        ucrSaveGraph.SetRCode(clsReorder, bReset)
+        ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
