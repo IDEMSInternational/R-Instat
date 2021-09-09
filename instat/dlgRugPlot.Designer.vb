@@ -56,6 +56,8 @@ Partial Class dlgRugPlot
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblColourPalette = New System.Windows.Forms.Label()
+        Me.ucrInputColourPalette = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -175,10 +177,26 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblColourPalette
+        '
+        resources.ApplyResources(Me.lblColourPalette, "lblColourPalette")
+        Me.lblColourPalette.Name = "lblColourPalette"
+        Me.lblColourPalette.Tag = "fill"
+        '
+        'ucrInputColourPalette
+        '
+        Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourPalette.GetSetSelectedIndex = -1
+        Me.ucrInputColourPalette.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
+        Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
+        '
         'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputColourPalette)
+        Me.Controls.Add(Me.lblColourPalette)
         Me.Controls.Add(Me.ucrInputSize)
         Me.Controls.Add(Me.lblSize)
         Me.Controls.Add(Me.ucrInputColour)
@@ -221,4 +239,6 @@ Partial Class dlgRugPlot
     Friend WithEvents ucrInputColour As ucrInputComboBox
     Friend WithEvents ucrInputSize As ucrInputComboBox
     Friend WithEvents lblSize As Label
+    Friend WithEvents ucrInputColourPalette As ucrInputComboBox
+    Friend WithEvents lblColourPalette As Label
 End Class

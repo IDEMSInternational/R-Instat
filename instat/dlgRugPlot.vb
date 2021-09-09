@@ -42,6 +42,8 @@ Public Class dlgRugPlot
     Private clsAnnotateFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
     Private clsLabelAesFunction As New RFunction
+    Private clsColourPaletteFunction As New RFunction
+
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
     Private strGeomParameterNames() As String = {strFirstParameterName}
@@ -64,6 +66,8 @@ Public Class dlgRugPlot
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
+        Dim dctColourPallette As New Dictionary(Of String, String)
+
 
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -116,6 +120,15 @@ Public Class dlgRugPlot
         ucrInputSize.SetItems(dctLabelSizes)
         ucrInputSize.SetDropDownStyleAsNonEditable()
 
+        ucrInputColourPalette.SetParameter(New RParameter("option", 0))
+        dctColourPallette.Add("Viridis", Chr(34) & "viridis" & Chr(34))
+        dctColourPallette.Add("Magma", Chr(34) & "magma" & Chr(34))
+        dctColourPallette.Add("Inferno", Chr(34) & "inferno" & Chr(34))
+        dctColourPallette.Add("Plasma", Chr(34) & "plasma" & Chr(34))
+        dctColourPallette.Add("Cividis", Chr(34) & "cividis" & Chr(34))
+        ucrInputColourPalette.SetItems(dctColourPallette)
+        ucrInputColourPalette.SetDropDownStyleAsNonEditable()
+
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
@@ -164,6 +177,12 @@ Public Class dlgRugPlot
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
 
+        clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
+
+        clsColourPaletteFunction.SetPackageName("viridis")
+        clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
+        clsColourPaletteFunction.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
+
         clsLabelAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -201,6 +220,7 @@ Public Class dlgRugPlot
         ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
+        ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
