@@ -72,12 +72,16 @@ Public Class dlgScript
         clsGetDataFrameFunction = New RFunction
         clsImportNewDataFrame = New RFunction
 
+        ucrComboGetPackage.Reset()
+        ucrDataFrameGet.Reset()
         ucrInputNewDataFrame.SetName("")
+        ucrInputCommand.SetName("")
 
         clsLibraryFunction.SetRCommand("library")
         clsLibraryFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
 
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrDataFrameGet.strCurrDataFrame & Chr(34))
 
         clsImportNewDataFrame.SetRCommand("data_book$import_data")
 
@@ -104,13 +108,15 @@ Public Class dlgScript
         TestOKEnabled()
     End Sub
 
-
     Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
         ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & clsLibraryFunction.ToScript)
     End Sub
 
     Private Sub btnGetDataFrame_Click(sender As Object, e As EventArgs) Handles btnGetDataFrame.Click
-        ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & clsGetDataFrameFunction.ToScript)
+        clsGetDataFrameFunction.SetAssignTo(ucrDataFrameGet.cboAvailableDataFrames.Text)
+        Dim strAssignedScript As String = ""
+        clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
+        ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & strAssignedScript)
     End Sub
 
     Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputNewDataFrame.ContentsChanged
