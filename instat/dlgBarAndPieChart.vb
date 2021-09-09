@@ -487,15 +487,20 @@ Public Class dlgBarAndPieChart
     Private Sub UpdateParameter()
         Dim strChangedText As String = ucrInputAddReorder.GetText()
         If strChangedText = strAscending OrElse strChangedText = strDescending Then
-            clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
-            Select Case strChangedText
-                Case strAscending
-                    clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                    clsReorderFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
-                Case strDescending
-                    clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                    clsReorderFunction.AddParameter("y", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
-            End Select
+            If rdoValue.Checked Then
+                clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                Select Case strChangedText
+                    Case strAscending
+                        clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                        clsReorderFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                    Case strDescending
+                        clsReorderFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                        clsReorderFunction.AddParameter("y", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                End Select
+            Else
+
+            End If
+
         ElseIf strChangedText = strReverse Then
             If rdoFrequency.Checked Then
                 clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=1)
