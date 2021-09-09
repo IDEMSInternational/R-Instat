@@ -499,8 +499,10 @@ Public Class dlgBarAndPieChart
         ElseIf strChangedText = strReverse Then
             If rdoFrequency.Checked Then
                 clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=1)
+                clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
             Else
                 clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForcatsFunction, iPosition:=2)
+                clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             End If
         Else
             If rdoFrequency.Checked Then
