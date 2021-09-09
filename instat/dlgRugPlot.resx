@@ -217,7 +217,7 @@
     <value>22, 13</value>
   </data>
   <data name="lblFill.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>4</value>
   </data>
   <data name="lblFill.Text" xml:space="preserve">
     <value>Fill:</value>
@@ -247,7 +247,7 @@
     <value>47, 13</value>
   </data>
   <data name="lblPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>10</value>
   </data>
   <data name="lblPosition.Text" xml:space="preserve">
     <value>Position:</value>
@@ -277,7 +277,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblColour.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>12</value>
   </data>
   <data name="lblColour.Text" xml:space="preserve">
     <value>Colour:</value>
@@ -307,7 +307,7 @@
     <value>30, 13</value>
   </data>
   <data name="lblSize.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>14</value>
   </data>
   <data name="lblSize.Text" xml:space="preserve">
     <value>Size:</value>
@@ -331,7 +331,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputSize.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrInputSize.Name" xml:space="preserve">
     <value>ucrInputSize</value>
@@ -352,7 +352,7 @@
     <value>60, 21</value>
   </data>
   <data name="ucrInputColour.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrInputColour.Name" xml:space="preserve">
     <value>ucrInputColour</value>
@@ -373,7 +373,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrInputPosition.Name" xml:space="preserve">
     <value>ucrInputPosition</value>
@@ -394,7 +394,7 @@
     <value>82, 20</value>
   </data>
   <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
     <value>ucrChkAddLabels</value>
@@ -427,7 +427,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrReceiverFill.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFill.Name" xml:space="preserve">
     <value>ucrReceiverFill</value>
@@ -520,7 +520,7 @@
     <value>410, 58</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -553,7 +553,7 @@
     <value>125, 136</value>
   </data>
   <data name="ucrVariableAsFactorForHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrVariableAsFactorForHeatMap.Name" xml:space="preserve">
     <value>ucrVariableAsFactorForHeatMap</value>
