@@ -74,6 +74,9 @@ Public Class dlgNewDataFrame
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
 
+        ucrTryNewDataFrame.SetIsCommand()
+        ucrTryNewDataFrame.RunCommandAsMultipleLines = True
+
     End Sub
 
     Private Sub SetDefaults()
@@ -84,6 +87,7 @@ Public Class dlgNewDataFrame
 
         'reset the controls
         ucrNewDFName.Reset()
+        ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -208,10 +212,8 @@ Public Class dlgNewDataFrame
             lblCommand.Visible = True
             btnExample.Visible = True
             dataGridView.Visible = True
-            btnTry.Visible = True
-            ucrInputTryMessage.Visible = True
-            ucrInputTryMessage.SetText("")
-            ucrInputTryMessage.txtInput.BackColor = Color.White
+            ucrTryNewDataFrame.Visible = True
+            ucrTryNewDataFrame.ClearTryText()
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
             If rdoCommand.Checked Then
@@ -228,18 +230,15 @@ Public Class dlgNewDataFrame
             lblCommand.Visible = True 'this is being done here cause of the datagridview. We don't have its custom control
             btnExample.Visible = True
             dataGridView.Visible = False
-            btnTry.Visible = True
-            ucrInputTryMessage.Visible = True
-            ucrInputTryMessage.SetText("")
-            ucrInputTryMessage.txtInput.BackColor = Color.White
+            ucrTryNewDataFrame.Visible = True
+            ucrTryNewDataFrame.ClearTryText()
+
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-
         ElseIf rdoEmpty.Checked Then
             lblCommand.Visible = False 'this is being done here cause of the datagridview. We don't have its custom control
             btnExample.Visible = False
-            btnTry.Visible = False
-            ucrInputTryMessage.Visible = False
+            ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
@@ -253,8 +252,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
-        ucrInputTryMessage.SetText("")
-        ucrInputTryMessage.txtInput.BackColor = Color.White
+        ucrTryNewDataFrame.ClearTryText()
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
@@ -272,8 +270,7 @@ Public Class dlgNewDataFrame
             End If
         Next
 
-        ucrInputTryMessage.SetText("")
-        ucrInputTryMessage.txtInput.BackColor = Color.White
+        ucrTryNewDataFrame.ClearTryText()
         TestOKEnabled()
     End Sub
 
@@ -420,54 +417,6 @@ Public Class dlgNewDataFrame
         frm.StartPosition = FormStartPosition.Manual 'set it to manual
         frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
         frm.Show()
-    End Sub
-
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
-        Dim bValid As Boolean = False
-        Dim vecOutput As CharacterVector
-        Dim strScript As String
-        Dim lstScriptCommands As New List(Of String)
-        Dim clsTempConstructFunction As RFunction
-        Try
-            If rdoConstruct.Checked Then
-                clsTempConstructFunction = clsConstructFunction.Clone
-                clsTempConstructFunction.bToBeAssigned = False
-                clsTempConstructFunction.bIsAssigned = False
-                strScript = clsTempConstructFunction.ToScript()
-                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
-            ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
-                strScript = ucrInputCommand.GetText
-                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
-            End If
-
-            'always run line by line. The last line should produuce a dataframe
-            For Each str As String In lstScriptCommands
-                If Not String.IsNullOrWhiteSpace(str) Then
-                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
-                    If vecOutput Is Nothing Then
-                        bValid = False
-                        Exit For
-                    ElseIf vecOutput.Length > 0 Then
-                        bValid = True
-                        'don't break the if, we probably want to loop through to the last command checking validity? 
-                    End If
-                End If
-            Next
-
-
-            If ucrBase.cmdOk.Enabled AndAlso bValid Then
-                ucrInputTryMessage.SetText("Command Ok.")
-                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-            Else
-                ucrInputTryMessage.SetText("Command produced an error or no output to display.")
-                ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-            End If
-
-
-        Catch ex As Exception
-            ucrInputTryMessage.SetText("Command produced an error.")
-            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        End Try
     End Sub
 
 End Class
