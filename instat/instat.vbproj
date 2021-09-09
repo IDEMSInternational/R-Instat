@@ -363,6 +363,12 @@
     <Compile Include="dlgPivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgScript.Designer.vb">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -2845,6 +2851,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPivotTable.resx">
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScript.resx">
+      <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
