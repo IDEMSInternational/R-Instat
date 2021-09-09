@@ -78,7 +78,7 @@ Public Class dlgOneWayFrequencies
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, {"frq", "as.data.frame"})
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "as.ggplot")
-        'TODO be able to have conditions across multiple functions
+        'TODO. the both options can be added here when we are able to have panels conditions across multiple functions
 
         ucrPnlOutput.SetParameter(New RParameter("out", 7))
         ucrPnlOutput.AddRadioButton(rdoAsText, Chr(34) & "txt" & Chr(34))
@@ -143,7 +143,6 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSaveDataFrame.Reset()
-
 
         clsAsDataFrame.SetRCommand("as.data.frame")
         clsAsDataFrame.AddParameter("x", clsRFunctionParameter:=clsSjMiscFrq, iPosition:=0)
@@ -251,7 +250,7 @@ Public Class dlgOneWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlFrequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencies.ControlValueChanged
+    Private Sub ucrPnlFrequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencies.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
         SetBaseFunction()
     End Sub
 
