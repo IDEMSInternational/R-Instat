@@ -26,6 +26,7 @@ Public Class ucrTry
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
     Private arrAssociatedControls As ucrCore()
+    Public Property RunCommandAsMultipleLines As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -58,7 +59,12 @@ Public Class ucrTry
         bIsCommand = True
     End Sub
 
-    Private Sub setToCommandOrModel()
+    Public Sub ClearTryText()
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+    End Sub
+
+    Private Sub SetToCommandOrModel()
         If bIsCommand Then
             CommandModel = "Command"
         ElseIf bIsModel Then
@@ -78,32 +84,21 @@ Public Class ucrTry
 
 
     Private Sub TryScript()
-        Dim strTempScript As String = ""
         Dim strErrorDetail As String = ""
-        Dim strVecOutput As CharacterVector
-
         Dim lstScripts As New List(Of String)
-        Dim strBeforeAfterScript As String
-        Dim strBeforeAfterTemp As String
-        Dim clsCodeClone As RCodeStructure
-
-        Dim strTemp As String = ""
-        Dim strScript As String = ""
-        Dim clsMainCode As RCodeStructure = Nothing
 
         ucrInputTryMessage.txtInput.Controls.Clear()
-
         Try
-            setToCommandOrModel()
+            SetToCommandOrModel()
             If Not IsNothing(ucrReceiverScript) AndAlso ucrReceiverScript.IsEmpty() Then
                 ucrInputTryMessage.SetName("")
-            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl Then
+            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl() Then
                 ucrInputTryMessage.SetName("")
             Else
                 For Each clsTempCode In clsRSyntax.lstBeforeCodes
-                    clsCodeClone = clsTempCode.Clone()
-                    strBeforeAfterScript = ""
-                    strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
+                    Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
+                    Dim strBeforeAfterScript As String = ""
+                    Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
                     'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
                     If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
                         lstScripts.Add(strBeforeAfterScript)
@@ -112,35 +107,53 @@ Public Class ucrTry
                     End If
                 Next
                 If lstScripts.Count > 0 Then
-                    strTempScript = String.Join(vbNewLine, lstScripts)
-                    frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
+                    frmMain.clsRLink.RunInternalScript(String.Join(Environment.NewLine, lstScripts), bSilent:=True)
                 End If
 
+                Dim clsMainCode As RCodeStructure = Nothing
+                Dim strCommandString As String = ""
                 If clsRSyntax.bUseBaseFunction Then
                     clsMainCode = clsRSyntax.clsBaseFunction.Clone()
                 ElseIf clsRSyntax.bUseBaseOperator Then
                     clsMainCode = clsRSyntax.clsBaseOperator.Clone()
                 ElseIf clsRSyntax.bUseCommandString Then
                     clsMainCode = clsRSyntax.clsBaseCommandString.Clone()
+                    strCommandString = clsRSyntax.strCommandString
                 End If
                 If clsMainCode IsNot Nothing Then
                     clsMainCode.RemoveAssignTo()
-                    strTemp = clsMainCode.ToScript(strScript, clsRSyntax.strCommandString)
-                    strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
-                    If strVecOutput IsNot Nothing Then
-                        If bstrVecOutput Then
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                            Else
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                    Dim vecOutput As CharacterVector = Nothing
+                    Dim strTemp As String = clsMainCode.ToScript(strScript:="", strTemp:=strCommandString)
+                    Dim bValid As Boolean = False
+                    If RunCommandAsMultipleLines Then
+                        Dim arrScriptCommandLines As String() = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+                        For Each str As String In arrScriptCommandLines
+                            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True, strError:=strErrorDetail)
+                            'any command line that throws an error means the entire script code is not valid
+                            If vecOutput Is Nothing Then
+                                bValid = False
+                                Exit For
                             End If
-                        Else
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(CommandModel & " runs without error")
-                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                            End If
-                        End If
 
+                            'todo. for data frames output, length is expected to be > 0(even though that is a bonus check)
+                            'todo SJL. not sure if other output types will have length > 0
+                            'todo. as at 07/08/2021. this block is only being used by dlgNewDataframe ONLY
+                            bValid = vecOutput.Length > 0
+                            'don't break the if, we probably want to loop through to the last command checking validity? 
+                        Next
+                    Else
+                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
+                        bValid = vecOutput IsNot Nothing
+                    End If
+
+                    If bValid Then
+                        If bstrVecOutput Then
+                            ucrInputTryMessage.SetName(If(vecOutput.Length > 1, Mid(vecOutput(0), 5) & "...", Mid(vecOutput(0), 5)))
+                            ucrInputTryMessage.txtInput.BackColor = Color.White
+                        Else
+                            ucrInputTryMessage.SetName(CommandModel & " runs without error")
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                        End If
                     Else
                         ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
                         ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
@@ -157,9 +170,9 @@ Public Class ucrTry
         Finally
             lstScripts = New List(Of String)
             For Each clsTempCode In clsRSyntax.lstAfterCodes
-                clsCodeClone = clsTempCode.Clone()
-                strBeforeAfterScript = ""
-                strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
+                Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
+                Dim strBeforeAfterScript As String = ""
+                Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
                 'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
                 If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
                     lstScripts.Add(strBeforeAfterScript)
@@ -168,8 +181,7 @@ Public Class ucrTry
                 End If
             Next
             If lstScripts.Count > 0 Then
-                strTempScript = String.Join(vbNewLine, lstScripts)
-                frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript, bSilent:=True)
+                frmMain.clsRLink.RunInternalScriptGetOutput(String.Join(Environment.NewLine, lstScripts), bSilent:=True)
             End If
         End Try
     End Sub
