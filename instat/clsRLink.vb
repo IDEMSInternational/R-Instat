@@ -393,6 +393,80 @@ Public Class RLink
         Return strScriptCmd
     End Function
 
+    ''' <summary>
+    ''' Extracts all the complete runnable R commands from <paramref name="strScript"/>.
+    ''' The command lines returned are re-formatted in a format that the R.Net engine can execute.
+    ''' </summary>
+    ''' <param name="strScript">R script command. Can be a multiline script command</param>
+    ''' <returns>an array that contains individual complete runnable R scripts</returns>
+    Public Function GetRunnableCommandLines(strScript As String) As String()
+        Dim lstRunnableCommandLines As New List(Of String)
+        Dim arrScriptCommands As String() = strScript.Split(New String() {Environment.NewLine, vbLf}, StringSplitOptions.RemoveEmptyEntries)
+        Dim strSplitScriptCmd As String = ""
+
+        For Each str As String In arrScriptCommands
+            'trim the script command parts (for nice formatting)
+            strSplitScriptCmd &= str.Trim()
+            If Not IsRunnableScript(strSplitScriptCmd) Then
+                Continue For
+            End If
+            lstRunnableCommandLines.Add(strSplitScriptCmd)
+            strSplitScriptCmd = ""
+        Next
+        Return lstRunnableCommandLines.ToArray
+    End Function
+
+    ''' <summary>
+    ''' checks if <paramref name="strNewScript"/> is complete valid R script that can be run without an error
+    ''' </summary>
+    ''' <param name="strNewScript">R script command. Can be a multiline script command</param>
+    ''' <returns>true, if can be run without an error, and false otherwise</returns>
+    Private Function IsRunnableScript(strNewScript As String) As Boolean
+        Dim strScriptCmd As String = ""
+        Dim bRunnable As Boolean = False
+
+        'for each line in script(after removing empty lines)
+        For Each strScriptLine As String In strNewScript.Split(New String() {Environment.NewLine, vbLf}, StringSplitOptions.RemoveEmptyEntries)
+            'remove any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
+            End Select
+
+            'if line is only whitespace then ignore line
+            Dim strTrimmedLine As String = strScriptLine.Trim()
+            If strTrimmedLine.Length <= 0 Then
+                Continue For
+            End If
+
+            'else append line of script to command
+            strScriptCmd &= strScriptLine
+
+            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
+            Dim strLast3Chars As String = ""
+            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies OrElse iNumDoubleQuotes Mod 2 Then
+                bRunnable = False
+                Continue For
+            End If
+
+            bRunnable = True
+        Next
+
+        Return bRunnable
+    End Function
+
+
     ''' <summary>   Closes down the R engine (which encapsulates the R environment). </summary>
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
