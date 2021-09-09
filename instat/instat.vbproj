@@ -363,6 +363,12 @@
     <Compile Include="dlgPivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgScript.Designer.vb">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -409,6 +415,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Pivot Table.Designer.vb">
+      <DependentUpon>Pivot Table.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pivot Table.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
@@ -2846,6 +2858,9 @@
     <EmbeddedResource Include="dlgPivotTable.resx">
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgScript.resx">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2866,6 +2881,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pivot Table.resx">
+      <DependentUpon>Pivot Table.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
