@@ -224,7 +224,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub AddRemoveParameter()
+    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
         Else
@@ -240,10 +240,6 @@ Public Class dlgGeneralForGraphics
         Else
             clsGlobalAesFunction.RemoveParameterByName("colour")
         End If
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
-        AddRemoveParameter()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged
