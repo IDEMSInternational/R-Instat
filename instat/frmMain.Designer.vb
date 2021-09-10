@@ -368,6 +368,8 @@ Partial Class frmMain
         Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -666,8 +668,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2501,6 +2501,16 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuEditSelectAll, "mnuEditSelectAll")
         Me.mnuEditSelectAll.Tag = "Select_All"
         '
+        'ToolStripSeparator71
+        '
+        Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
+        resources.ApplyResources(Me.ToolStripSeparator71, "ToolStripSeparator71")
+        '
+        'mnuEditScript
+        '
+        resources.ApplyResources(Me.mnuEditScript, "mnuEditScript")
+        Me.mnuEditScript.Name = "mnuEditScript"
+        '
         'stsStrip
         '
         Me.stsStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -4220,16 +4230,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'ToolStripSeparator71
-        '
-        Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
-        resources.ApplyResources(Me.ToolStripSeparator71, "ToolStripSeparator71")
-        '
-        'mnuEditScript
-        '
-        Me.mnuEditScript.Name = "mnuEditScript"
-        resources.ApplyResources(Me.mnuEditScript, "mnuEditScript")
         '
         'frmMain
         '
