@@ -129,13 +129,20 @@ Public Class dlgRugPlot
         ucrInputColourPalette.SetItems(dctColourPallette)
         ucrInputColourPalette.SetDropDownStyleAsNonEditable()
 
+        ucrChkColourPalette.SetText("Colour Palette")
+        ucrChkColourPalette.AddParameterPresentCondition(True, "option")
+        ucrChkColourPalette.AddParameterPresentCondition(False, "option", False)
+
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
+
         ucrChkAddLabels.AddToLinkedControls({ucrInputPosition, ucrInputSize, ucrInputColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourPalette.AddToLinkedControls({ucrInputColourPalette}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
         ucrInputColour.SetLinkedDisplayControl(lblColour)
         ucrInputPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputSize.SetLinkedDisplayControl(lblSize)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -145,6 +152,7 @@ Public Class dlgRugPlot
         clsBaseOperator = New ROperator
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
+        clsColourPaletteFunction = New RFunction
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -177,11 +185,8 @@ Public Class dlgRugPlot
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
 
-        clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
-
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
-        clsColourPaletteFunction.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
 
         clsLabelAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
@@ -220,6 +225,7 @@ Public Class dlgRugPlot
         ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
+        ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
     End Sub
 
@@ -231,7 +237,7 @@ Public Class dlgRugPlot
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrChkColourPalette.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -274,5 +280,13 @@ Public Class dlgRugPlot
                 ucrReceiverFill.Add(clsParam.strArgumentValue)
             End If
         Next
+    End Sub
+
+    Private Sub ucrChkColourPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourPalette.ControlValueChanged
+        If ucrChkColourPalette.Checked Then
+            clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
+        Else
+            clsBaseOperator.RemoveParameterByName("palette")
+        End If
     End Sub
 End Class

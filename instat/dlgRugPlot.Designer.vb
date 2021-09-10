@@ -56,8 +56,8 @@ Partial Class dlgRugPlot
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblColourPalette = New System.Windows.Forms.Label()
         Me.ucrInputColourPalette = New instat.ucrInputComboBox()
+        Me.ucrChkColourPalette = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -177,12 +177,6 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblColourPalette
-        '
-        resources.ApplyResources(Me.lblColourPalette, "lblColourPalette")
-        Me.lblColourPalette.Name = "lblColourPalette"
-        Me.lblColourPalette.Tag = "fill"
-        '
         'ucrInputColourPalette
         '
         Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
@@ -191,12 +185,18 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         '
+        'ucrChkColourPalette
+        '
+        Me.ucrChkColourPalette.Checked = False
+        resources.ApplyResources(Me.ucrChkColourPalette, "ucrChkColourPalette")
+        Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
+        '
         'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkColourPalette)
         Me.Controls.Add(Me.ucrInputColourPalette)
-        Me.Controls.Add(Me.lblColourPalette)
         Me.Controls.Add(Me.ucrInputSize)
         Me.Controls.Add(Me.lblSize)
         Me.Controls.Add(Me.ucrInputColour)
@@ -240,5 +240,5 @@ Partial Class dlgRugPlot
     Friend WithEvents ucrInputSize As ucrInputComboBox
     Friend WithEvents lblSize As Label
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
-    Friend WithEvents lblColourPalette As Label
+    Friend WithEvents ucrChkColourPalette As ucrCheck
 End Class

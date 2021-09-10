@@ -247,7 +247,7 @@
     <value>47, 13</value>
   </data>
   <data name="lblPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblPosition.Text" xml:space="preserve">
     <value>Position:</value>
@@ -277,7 +277,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblColour.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="lblColour.Text" xml:space="preserve">
     <value>Colour:</value>
@@ -307,7 +307,7 @@
     <value>30, 13</value>
   </data>
   <data name="lblSize.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="lblSize.Text" xml:space="preserve">
     <value>Size:</value>
@@ -331,7 +331,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputSize.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrInputSize.Name" xml:space="preserve">
     <value>ucrInputSize</value>
@@ -352,7 +352,7 @@
     <value>60, 21</value>
   </data>
   <data name="ucrInputColour.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrInputColour.Name" xml:space="preserve">
     <value>ucrInputColour</value>
@@ -373,7 +373,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrInputPosition.Name" xml:space="preserve">
     <value>ucrInputPosition</value>
@@ -394,7 +394,7 @@
     <value>82, 20</value>
   </data>
   <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
     <value>ucrChkAddLabels</value>
@@ -417,14 +417,35 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>420, 416</value>
   </data>
+  <data name="ucrChkColourPalette.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 299</value>
+  </data>
+  <data name="ucrChkColourPalette.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 20</value>
+  </data>
+  <data name="ucrChkColourPalette.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColourPalette.Name" xml:space="preserve">
+    <value>ucrChkColourPalette</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColourPalette.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColourPalette.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColourPalette.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 299</value>
+    <value>141, 299</value>
   </data>
   <data name="ucrInputColourPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 21</value>
   </data>
   <data name="ucrInputColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.Name" xml:space="preserve">
     <value>ucrInputColourPalette</value>
@@ -436,36 +457,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblColourPalette.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblColourPalette.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 302</value>
-  </data>
-  <data name="lblColourPalette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
-  <data name="lblColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="lblColourPalette.Text" xml:space="preserve">
-    <value>Colour Palette:</value>
-  </data>
-  <data name="&gt;&gt;lblColourPalette.Name" xml:space="preserve">
-    <value>lblColourPalette</value>
-  </data>
-  <data name="&gt;&gt;lblColourPalette.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblColourPalette.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblColourPalette.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrReceiverFill.Location" type="System.Drawing.Point, System.Drawing">
@@ -526,7 +517,7 @@
     <value>370, 20</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
     <value>ucrSaveGraph</value>
@@ -571,7 +562,7 @@
     <value>410, 58</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
