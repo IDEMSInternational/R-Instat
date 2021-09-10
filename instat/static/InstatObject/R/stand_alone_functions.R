@@ -2360,3 +2360,144 @@ record_graph <- function(x) {
   dev.off(which = d2)
   return(y)
 }
+# this is a "theme" essentially. So we can create it as a theme and add that
+newggslopegraph_theme <- function(x_text_size = 12){
+  list(scale_x_discrete(position = "top"), 
+                  ggplot2::theme(legend.position = "none"),
+                  ggplot2::theme(axis.text.y = ggplot2::element_blank()),
+                  ggplot2::theme(panel.border = ggplot2::element_blank()), 
+                  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank()),
+                  ggplot2::theme(panel.grid.minor.y = ggplot2::element_blank()), 
+                  ggplot2::theme(axis.title.x = ggplot2::element_blank()),
+                  ggplot2::theme(panel.grid.major.x = ggplot2::element_blank()), 
+                  ggplot2::theme(axis.text.x.top = ggplot2::element_text(size = x_text_size, face = "bold")),
+                  ggplot2::theme(axis.ticks = ggplot2::element_blank()))
+}
+
+
+# slightly amended the "newggslopegraph" function in the CGPfunctions package
+newggslopegraph_amended <- function(data, x, y, colour, data_label = NULL, 
+          y_text_size = 3, 
+          line_thickness = 1, line_colour = "ByGroup", 
+          data_text_size = 2.5, data_text_colour = "black", data_label_padding = 0.05, 
+          data_label_line_size = 0, data_label_fill_colour = "white", 
+          reverse_x_axis = FALSE, 
+          remove_missing = TRUE){
+  
+  
+  if (length(match.call()) <= 4) {
+    stop("Not enough arguments passed requires a dataframe, plus at least three variables")
+  }
+  argList <- as.list(match.call()[-1])
+  if (!hasArg(data)) {
+    stop("You didn't specify a dataframe to use", call. = FALSE)
+  }
+  Nx <- deparse(substitute(x))
+  Ny <- deparse(substitute(y))
+  Ncolour <- deparse(substitute(colour))
+  if (is.null(argList$data_label)) {
+    Ndata_label <- deparse(substitute(y))
+    data_label <- argList$y
+  }
+  else {
+    Ndata_label <- deparse(substitute(data_label))
+  }
+  Ndata <- argList$data
+  if (!is(data, "data.frame")) {
+    stop(paste0("'", Ndata, "' does not appear to be a data frame"))
+  }
+  if (!Nx %in% names(data)) {
+    stop(paste0("'", Nx, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (anyNA(data[[Nx]])) {
+    stop(paste0("'", Nx, "' can not have missing data please remove those rows"), 
+         call. = FALSE)
+  }
+  if (!Ny %in% names(data)) {
+    stop(paste0("'", Ny, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (!Ncolour %in% names(data)) {
+    stop(paste0("'", Ncolour, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (!Ndata_label %in% names(data)) {
+    stop(paste0("'", Ndata_label, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (anyNA(data[[Ncolour]])) {
+    stop(paste0("'", Ncolour, "' can not have missing data please remove those rows"), 
+         call. = FALSE)
+  }
+  if (!class(data[[Ny]]) %in% c("integer", "numeric")) {
+    stop(paste0("Variable '", 
+                Ny, "' needs to be numeric"), call. = FALSE)
+  }
+  if (!"ordered" %in% class(data[[Nx]])) {
+    if (!"character" %in% class(data[[Nx]])) {
+      if ("factor" %in% class(data[[Nx]])) {
+        message(paste0("\nConverting '", Nx, 
+                       "' to an ordered factor\n"))
+        data[[Nx]] <- factor(data[[Nx]], 
+                                      ordered = TRUE)
+      }
+      else {
+        stop(paste0("Variable '", 
+                    Nx, "' needs to be of class character, factor or ordered"), 
+             call. = FALSE)
+      }
+    }
+  }
+  data_label <- enquo(data_label)
+  if (reverse_x_axis) {
+    data[[Nx]] <- forcats::fct_rev(data[[Nx]])
+  }
+  NumbOfLevels <- nlevels(factor(data[[Nx]]))
+  if (length(line_colour) > 1) {
+    if (length(line_colour) < length(unique(data[[Ncolour]]))) {
+      message(paste0("\nGiven ", length(line_colour), 
+                     " colours. Recycling colours because there are ", 
+                     length(unique(data[[Ncolour]])), " ", 
+                     Ncolour, "s\n"))
+      line_colour <- rep(line_colour, length.out = length(unique(data[[Ncolour]])))
+    }
+    LineGeom <- list(ggplot2::geom_line(ggplot2::aes(colour = {{colour}}), size = line_thickness), 
+                     scale_colour_manual(values = line_colour))
+  }
+  else {
+    if (line_colour == "ByGroup") {
+      LineGeom <- list(ggplot2::geom_line(ggplot2::aes(colour = {{colour}}, 
+                                      alpha = 1), size = line_thickness))
+    }
+    else {
+      LineGeom <- list(ggplot2::geom_line(ggplot2::aes_(), size = line_thickness, 
+                                 colour = line_colour))
+    }
+  }
+  if (anyNA(data[[Ny]])) {
+    if (remove_missing) {
+      data <- data %>% group_by({{colour}}) %>% 
+        dplyr::filter(!anyNA({{y}})) %>% droplevels()
+    }
+    else {
+      data <- data %>% dplyr::filter(!is.na({{y}}))
+    }
+  }
+  data %>% ggplot2::ggplot(ggplot2::aes(group = {{colour}}, y = {{y}}, x = {{x}})) +
+    LineGeom +
+    
+    # note: this may conflict with other label in R, in which case we need to rewrite this
+    ggrepel::geom_text_repel(data = . %>% dplyr::filter({{x}} == min({{x}})), ggplot2::aes(label = {{colour}}),
+                    hjust = "left", box.padding = 0.1, point.padding = 0.1, 
+                    segment.colour = "gray", segment.alpha = 0.6, fontface = "bold", 
+                    size = y_text_size, nudge_x = -1.95, direction = "y", 
+                    force = 0.5, max.iter = 3000) +
+    ggrepel::geom_text_repel(data = . %>% dplyr::filter({{x}} == max({{x}})), ggplot2::aes(label = {{colour}}),
+                    hjust = "right", box.padding = 0.1, point.padding = 0.1, 
+                    segment.colour = "gray", segment.alpha = 0.6, fontface = "bold", 
+                    size = y_text_size, nudge_x = 1.95, direction = "y",
+                    force = 0.5, max.iter = 3000) +
+    ggplot2::geom_label(ggplot2::aes_string(label = Ndata_label), size = data_text_size, label.padding = unit(data_label_padding, "lines"),
+               label.size = data_label_line_size, colour = data_text_colour, fill = data_label_fill_colour)
+}

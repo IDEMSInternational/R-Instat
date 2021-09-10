@@ -51,15 +51,23 @@ Partial Class dlgLinePlot
         Me.rdoSmoothing = New System.Windows.Forms.RadioButton()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
+        Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoSlope = New System.Windows.Forms.RadioButton()
+        Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
+        Me.lblXEnd = New System.Windows.Forms.Label()
+        Me.lblSlopeY = New System.Windows.Forms.Label()
+        Me.lblSlopeX = New System.Windows.Forms.Label()
+        Me.ucrReceiverSlopeX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
         Me.ucrChkSpan = New instat.ucrCheck()
         Me.ucrChkFormula = New instat.ucrCheck()
-        Me.ucrInputFormula = New instat.ucrInputComboBox()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
+        Me.ucrChkAddSE = New instat.ucrCheck()
         Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
-        Me.ucrChkAddSE = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlStepOrPath = New instat.UcrPanel()
         Me.ucrChkPathOrStep = New instat.ucrCheck()
@@ -72,9 +80,10 @@ Partial Class dlgLinePlot
         Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
         Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
+        Me.ucrChkRemoveMissing = New instat.ucrCheck()
         Me.grpSmoothOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -162,6 +171,89 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.lblFamily, "lblFamily")
         Me.lblFamily.Name = "lblFamily"
         '
+        'grpSmoothOptions
+        '
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputFormula)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkSpan)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkFormula)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrNudSpan)
+        Me.grpSmoothOptions.Controls.Add(Me.lblFamily)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
+        Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
+        resources.ApplyResources(Me.grpSmoothOptions, "grpSmoothOptions")
+        Me.grpSmoothOptions.Name = "grpSmoothOptions"
+        Me.grpSmoothOptions.TabStop = False
+        '
+        'rdoSlope
+        '
+        resources.ApplyResources(Me.rdoSlope, "rdoSlope")
+        Me.rdoSlope.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSlope.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSlope.FlatAppearance.BorderSize = 2
+        Me.rdoSlope.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSlope.Name = "rdoSlope"
+        Me.rdoSlope.TabStop = True
+        Me.rdoSlope.Tag = "Slope"
+        Me.rdoSlope.UseVisualStyleBackColor = False
+        '
+        'rdoDumbbell
+        '
+        resources.ApplyResources(Me.rdoDumbbell, "rdoDumbbell")
+        Me.rdoDumbbell.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoDumbbell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.FlatAppearance.BorderSize = 2
+        Me.rdoDumbbell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.Name = "rdoDumbbell"
+        Me.rdoDumbbell.TabStop = True
+        Me.rdoDumbbell.Tag = "linepathstep"
+        Me.rdoDumbbell.UseVisualStyleBackColor = False
+        '
+        'lblXEnd
+        '
+        resources.ApplyResources(Me.lblXEnd, "lblXEnd")
+        Me.lblXEnd.Name = "lblXEnd"
+        Me.lblXEnd.Tag = "XEnd_Variable:"
+        '
+        'lblSlopeY
+        '
+        resources.ApplyResources(Me.lblSlopeY, "lblSlopeY")
+        Me.lblSlopeY.Name = "lblSlopeY"
+        Me.lblSlopeY.Tag = "Y_Slope_Variable:"
+        '
+        'lblSlopeX
+        '
+        resources.ApplyResources(Me.lblSlopeX, "lblSlopeX")
+        Me.lblSlopeX.Name = "lblSlopeX"
+        Me.lblSlopeX.Tag = "X_Slope_Variable:"
+        '
+        'ucrReceiverSlopeX
+        '
+        Me.ucrReceiverSlopeX.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSlopeX, "ucrReceiverSlopeX")
+        Me.ucrReceiverSlopeX.Name = "ucrReceiverSlopeX"
+        Me.ucrReceiverSlopeX.Selector = Nothing
+        Me.ucrReceiverSlopeX.strNcFilePath = ""
+        Me.ucrReceiverSlopeX.ucrSelector = Nothing
+        '
+        'ucrReceiverSlopeY
+        '
+        Me.ucrReceiverSlopeY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSlopeY, "ucrReceiverSlopeY")
+        Me.ucrReceiverSlopeY.Name = "ucrReceiverSlopeY"
+        Me.ucrReceiverSlopeY.Selector = Nothing
+        Me.ucrReceiverSlopeY.strNcFilePath = ""
+        Me.ucrReceiverSlopeY.ucrSelector = Nothing
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        '
         'ucrChkSpan
         '
         Me.ucrChkSpan.Checked = False
@@ -174,21 +266,11 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
         Me.ucrChkFormula.Name = "ucrChkFormula"
         '
-        'ucrInputFormula
+        'ucrChkAddSE
         '
-        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
-        Me.ucrInputFormula.GetSetSelectedIndex = -1
-        Me.ucrInputFormula.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
-        Me.ucrInputFormula.Name = "ucrInputFormula"
-        '
-        'ucrFamilyInput
-        '
-        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
-        Me.ucrFamilyInput.GetSetSelectedIndex = -1
-        Me.ucrFamilyInput.IsReadOnly = False
-        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
-        Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        Me.ucrChkAddSE.Checked = False
+        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
         '
         'ucrNudSpan
         '
@@ -199,6 +281,22 @@ Partial Class dlgLinePlot
         Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSpan.Name = "ucrNudSpan"
         Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'ucrChkAddLine
         '
@@ -211,20 +309,6 @@ Partial Class dlgLinePlot
         Me.ucrChkAddPoints.Checked = False
         resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        '
-        'ucrChkAddSE
-        '
-        Me.ucrChkAddSE.Checked = False
-        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
         '
         'ucrPnlOptions
         '
@@ -303,15 +387,6 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrFactorOptionalReceiver
-        '
-        Me.ucrFactorOptionalReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorOptionalReceiver, "ucrFactorOptionalReceiver")
-        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
-        Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
-        Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
-        '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
@@ -321,25 +396,41 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'grpSmoothOptions
+        'ucrFactorOptionalReceiver
         '
-        Me.grpSmoothOptions.Controls.Add(Me.ucrInputFormula)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrChkSpan)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrChkFormula)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrNudSpan)
-        Me.grpSmoothOptions.Controls.Add(Me.lblFamily)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
-        Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
-        resources.ApplyResources(Me.grpSmoothOptions, "grpSmoothOptions")
-        Me.grpSmoothOptions.Name = "grpSmoothOptions"
-        Me.grpSmoothOptions.TabStop = False
+        Me.ucrFactorOptionalReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrFactorOptionalReceiver, "ucrFactorOptionalReceiver")
+        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
+        Me.ucrFactorOptionalReceiver.Selector = Nothing
+        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
+        Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
+        '
+        'ucrReceiverXEnd
+        '
+        Me.ucrReceiverXEnd.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXEnd, "ucrReceiverXEnd")
+        Me.ucrReceiverXEnd.Name = "ucrReceiverXEnd"
+        Me.ucrReceiverXEnd.Selector = Nothing
+        Me.ucrReceiverXEnd.strNcFilePath = ""
+        Me.ucrReceiverXEnd.ucrSelector = Nothing
+        '
+        'ucrChkRemoveMissing
+        '
+        Me.ucrChkRemoveMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkRemoveMissing, "ucrChkRemoveMissing")
+        Me.ucrChkRemoveMissing.Name = "ucrChkRemoveMissing"
         '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkRemoveMissing)
+        Me.Controls.Add(Me.ucrReceiverSlopeX)
+        Me.Controls.Add(Me.lblSlopeX)
+        Me.Controls.Add(Me.ucrReceiverSlopeY)
+        Me.Controls.Add(Me.lblSlopeY)
+        Me.Controls.Add(Me.rdoSlope)
+        Me.Controls.Add(Me.rdoDumbbell)
         Me.Controls.Add(Me.grpSmoothOptions)
         Me.Controls.Add(Me.ucrChkAddLine)
         Me.Controls.Add(Me.ucrChkAddPoints)
@@ -362,11 +453,13 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
+        Me.Controls.Add(Me.lblXEnd)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.ucrReceiverXEnd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -414,4 +507,13 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkFormula As ucrCheck
     Friend WithEvents ucrChkSpan As ucrCheck
     Friend WithEvents grpSmoothOptions As GroupBox
+    Friend WithEvents rdoSlope As RadioButton
+    Friend WithEvents rdoDumbbell As RadioButton
+    Friend WithEvents lblXEnd As Label
+    Friend WithEvents ucrReceiverXEnd As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSlopeX As ucrReceiverSingle
+    Friend WithEvents lblSlopeX As Label
+    Friend WithEvents ucrReceiverSlopeY As ucrReceiverSingle
+    Friend WithEvents lblSlopeY As Label
+    Friend WithEvents ucrChkRemoveMissing As ucrCheck
 End Class
