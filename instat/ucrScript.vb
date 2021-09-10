@@ -88,28 +88,33 @@ Public Class ucrScript
         Return If(strText <> "", frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment), "")
     End Function
 
+    Private Sub EnableRunButtons(bEnable As Boolean)
+        cmdRunLineSelection.Enabled = bEnable
+        cmdRunAll.Enabled = bEnable
+    End Sub
+
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles cmdRunLineSelection.Click, mnuRunCurrentLineSelection.Click
         'temporarily disable the buttons incase its a long operation
-        cmdRunLineSelection.Enabled = False
-        cmdRunAll.Enabled = False
+        EnableRunButtons(False)
         txtScript.Focus()
         If txtScript.SelectionLength > 0 Then
             RunSelectedText()
         Else
             RunCurrentLine()
         End If
-        cmdRunLineSelection.Enabled = True
-        cmdRunAll.Enabled = True
+        EnableRunButtons(True)
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+    Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click, mnuRunAllText.Click
+        'temporarily disable the buttons incase its a long operation
+        EnableRunButtons(False)
+        RunAllText()
+        EnableRunButtons(True)
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click, mnuClearContents.Click
         ClearContents()
     End Sub
-
-    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
-        ClearContents()
-    End Sub
-
 
     Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim strScriptFilename As String = ""
@@ -194,7 +199,7 @@ Public Class ucrScript
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
         txtScript.WordWrap = False
-        cmdRunAll.Enabled = (txtScript.TextLength > 0)
+        EnableRunButtons(txtScript.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
     End Sub
 
@@ -254,7 +259,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        cmdRunAll.Enabled = (txtScript.TextLength > 0)
+        EnableRunButtons(txtScript.TextLength > 0)
         'Only enabled undo if the text was changed directly by the user.  
 
         If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
@@ -266,13 +271,8 @@ Public Class ucrScript
         bUserTextChanged = False 'reset flag
     End Sub
 
-    Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
-        RunAllText()
-    End Sub
-
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
-
 
 End Class
