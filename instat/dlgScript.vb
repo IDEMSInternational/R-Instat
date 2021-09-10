@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgScript
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-
     Private clsLibraryFunction, clsGetDataFrameFunction, clsImportNewDataFrame As New RFunction
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,6 +46,7 @@ Public Class dlgScript
         ucrComboGetPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrComboGetPackage.SetDropDownStyleAsNonEditable()
 
+        ucrDataFrameGet.lblDataFrame.Text = "Get Data Frame:"
         ucrDataFrameGet.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameGet.SetParameterIsString()
 
