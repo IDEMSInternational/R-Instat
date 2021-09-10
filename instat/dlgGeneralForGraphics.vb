@@ -126,8 +126,6 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
-        'clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        'clsGlobalAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
