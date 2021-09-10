@@ -48,8 +48,6 @@ Public Class dlgGeneralForGraphics
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
 
-    'Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksPointsParameterName, strValleysPointsParameterName}
-
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
