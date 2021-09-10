@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgRugPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_TileFunction As New RFunction
+    Private clsRgeomTileFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private clsBaseOperator As New ROperator
@@ -148,7 +148,7 @@ Public Class dlgRugPlot
     Private Sub SetDefaults()
         clsRaesFunction = New RFunction
         clsRggplotFunction = New RFunction
-        clsRgeom_TileFunction = New RFunction
+        clsRgeomTileFunction = New RFunction
         clsBaseOperator = New ROperator
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
@@ -163,7 +163,7 @@ Public Class dlgRugPlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeom_TileFunction, iPosition:=1)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeomTileFunction, iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -172,8 +172,8 @@ Public Class dlgRugPlot
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
-        clsRgeom_TileFunction.SetPackageName("ggplot2")
-        clsRgeom_TileFunction.SetRCommand("geom_tile")
+        clsRgeomTileFunction.SetPackageName("ggplot2")
+        clsRgeomTileFunction.SetRCommand("geom_tile")
 
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
@@ -268,7 +268,7 @@ Public Class dlgRugPlot
 
     Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdHeatMapOptions.Click
         ''''''' i wonder if all this will be needed for the new system
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeom_TileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetRugLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
