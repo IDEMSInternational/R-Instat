@@ -115,7 +115,7 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddToLinkedControls(ucrChkMinFrq, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudMinFreq.SetParameter(New RParameter("min.frq", 10))
-        ucrNudMinFreq.SetMinMax(0, 1000)
+        ucrNudMinFreq.SetMinMax(iNewMin:=0)
         ucrNudMinFreq.SetRDefault(0)
 
 
