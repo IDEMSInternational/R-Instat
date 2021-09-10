@@ -88,15 +88,6 @@ Public Class ucrScript
         Return If(strText <> "", frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment), "")
     End Function
 
-    Private Sub cmdRunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click
-        'temporarily disable the buttons incase its a long operation
-        cmdRunLineSelection.Enabled = False
-        cmdRunAll.Enabled = False
-        RunAllText()
-        cmdRunLineSelection.Enabled = True
-        cmdRunAll.Enabled = True
-    End Sub
-
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles cmdRunLineSelection.Click, mnuRunCurrentLineSelection.Click
         'temporarily disable the buttons incase its a long operation
         cmdRunLineSelection.Enabled = False
