@@ -56,6 +56,8 @@ Partial Class dlgBarAndPieChart
         Me.lblLollipopSize = New System.Windows.Forms.Label()
         Me.lblLollipopColour = New System.Windows.Forms.Label()
         Me.lblReorder = New System.Windows.Forms.Label()
+        Me.lblReorderX = New System.Windows.Forms.Label()
+        Me.ucrInputReorderX = New instat.ucrInputComboBox()
         Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
         Me.ucrNudLollipopSize = New instat.ucrNud()
@@ -190,12 +192,25 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblReorder, "lblReorder")
         Me.lblReorder.Name = "lblReorder"
         '
+        'lblReorderX
+        '
+        resources.ApplyResources(Me.lblReorderX, "lblReorderX")
+        Me.lblReorderX.Name = "lblReorderX"
+        '
+        'ucrInputReorderX
+        '
+        Me.ucrInputReorderX.AddQuotesIfUnrecognised = True
+        Me.ucrInputReorderX.GetSetSelectedIndex = -1
+        Me.ucrInputReorderX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputReorderX, "ucrInputReorderX")
+        Me.ucrInputReorderX.Name = "ucrInputReorderX"
+        '
         'ucrInputAddReorder
         '
         Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
         Me.ucrInputAddReorder.GetSetSelectedIndex = -1
         Me.ucrInputAddReorder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
         '
         'ucrInputLollipopColour
@@ -338,6 +353,8 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblReorderX)
+        Me.Controls.Add(Me.ucrInputReorderX)
         Me.Controls.Add(Me.lblReorder)
         Me.Controls.Add(Me.ucrInputAddReorder)
         Me.Controls.Add(Me.ucrInputLollipopColour)
@@ -422,4 +439,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrChkLollipop As ucrCheck
     Friend WithEvents ucrInputAddReorder As ucrInputComboBox
     Friend WithEvents lblReorder As Label
+    Friend WithEvents lblReorderX As Label
+    Friend WithEvents ucrInputReorderX As ucrInputComboBox
 End Class
