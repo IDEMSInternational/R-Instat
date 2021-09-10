@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 279</value>
+    <value>252, 237</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -274,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 362</value>
+    <value>252, 323</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 321</value>
+    <value>252, 280</value>
   </data>
   <data name="lblReorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -637,7 +637,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReorderX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 234</value>
+    <value>253, 110</value>
   </data>
   <data name="lblReorderX.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -661,7 +661,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputReorderX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 249</value>
+    <value>252, 125</value>
   </data>
   <data name="ucrInputReorderX.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -681,11 +681,8 @@
   <data name="&gt;&gt;ucrInputReorderX.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputAddReorder.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrInputAddReorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 337</value>
+    <value>252, 296</value>
   </data>
   <data name="ucrInputAddReorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -946,7 +943,7 @@
     <value>23</value>
   </data>
   <data name="ucrInputBarChartPositions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 378</value>
+    <value>252, 339</value>
   </data>
   <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -1012,7 +1009,7 @@
     <value>29</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 294</value>
+    <value>252, 252</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1100,9 +1097,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>38</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

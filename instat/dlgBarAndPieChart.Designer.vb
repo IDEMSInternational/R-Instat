@@ -208,9 +208,9 @@ Partial Class dlgBarAndPieChart
         'ucrInputAddReorder
         '
         Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
         Me.ucrInputAddReorder.GetSetSelectedIndex = -1
         Me.ucrInputAddReorder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
         '
         'ucrInputLollipopColour
