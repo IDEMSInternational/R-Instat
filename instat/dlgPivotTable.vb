@@ -119,7 +119,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSavePivot.IsComplete Then
+        If ucrSavePivot.IsComplete AndAlso ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -195,7 +195,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
-            ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
+            ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged, ucrSelectorPivot.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
