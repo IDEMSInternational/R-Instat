@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>29</value>
   </data>
   <data name="lblAvailable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblAvailable.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>30</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>25</value>
   </data>
   <data name="cmdLinePathStepSmoothOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -229,7 +229,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdLinePathStepSmoothOptions.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>24</value>
   </data>
   <data name="lblFactorOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorOptional.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>28</value>
   </data>
   <data name="lblGroupLine.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 417</value>
+    <value>154, 417</value>
   </data>
   <data name="rdoPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 17</value>
@@ -328,7 +328,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 417</value>
+    <value>215, 417</value>
   </data>
   <data name="rdoStep.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 17</value>
@@ -483,6 +483,15 @@
   <data name="&gt;&gt;lblFamily.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrInputFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 46</value>
+  </data>
+  <data name="ucrInputFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
+  </data>
+  <data name="ucrInputFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="&gt;&gt;ucrInputFormula.Name" xml:space="preserve">
     <value>ucrInputFormula</value>
   </data>
@@ -494,6 +503,15 @@
   </data>
   <data name="&gt;&gt;ucrInputFormula.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 20</value>
+  </data>
+  <data name="ucrChkSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="ucrChkSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkSpan.Name" xml:space="preserve">
     <value>ucrChkSpan</value>
@@ -507,6 +525,15 @@
   <data name="&gt;&gt;ucrChkSpan.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 49</value>
+  </data>
+  <data name="ucrChkFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 20</value>
+  </data>
+  <data name="ucrChkFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;ucrChkFormula.Name" xml:space="preserve">
     <value>ucrChkFormula</value>
   </data>
@@ -518,6 +545,15 @@
   </data>
   <data name="&gt;&gt;ucrChkFormula.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrChkAddSE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 49</value>
+  </data>
+  <data name="ucrChkAddSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrChkAddSE.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkAddSE.Name" xml:space="preserve">
     <value>ucrChkAddSE</value>
@@ -531,6 +567,15 @@
   <data name="&gt;&gt;ucrChkAddSE.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrNudSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 20</value>
+  </data>
+  <data name="ucrNudSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;ucrNudSpan.Name" xml:space="preserve">
     <value>ucrNudSpan</value>
   </data>
@@ -543,6 +588,15 @@
   <data name="&gt;&gt;ucrNudSpan.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 19</value>
+  </data>
+  <data name="ucrInputMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;ucrInputMethod.Name" xml:space="preserve">
     <value>ucrInputMethod</value>
   </data>
@@ -554,6 +608,15 @@
   </data>
   <data name="&gt;&gt;ucrInputMethod.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="ucrFamilyInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrFamilyInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 24</value>
+  </data>
+  <data name="ucrFamilyInput.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrFamilyInput.Name" xml:space="preserve">
     <value>ucrFamilyInput</value>
@@ -691,7 +754,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXEnd.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>31</value>
   </data>
   <data name="lblSlopeY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -753,26 +816,35 @@
   <data name="&gt;&gt;lblSlopeX.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrChkRemoveMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 262</value>
+  <data name="lblSlopeColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrChkRemoveMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 24</value>
+  <data name="lblSlopeColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrChkRemoveMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+  <data name="lblSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 273</value>
   </data>
-  <data name="&gt;&gt;ucrChkRemoveMissing.Name" xml:space="preserve">
-    <value>ucrChkRemoveMissing</value>
+  <data name="lblSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
   </data>
-  <data name="&gt;&gt;ucrChkRemoveMissing.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblSlopeColour.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
-  <data name="&gt;&gt;ucrChkRemoveMissing.Parent" xml:space="preserve">
+  <data name="lblSlopeColour.Text" xml:space="preserve">
+    <value>Colour:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Name" xml:space="preserve">
+    <value>lblSlopeColour</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkRemoveMissing.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;lblSlopeColour.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -782,258 +854,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>423, 523</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Name" xml:space="preserve">
-    <value>ucrReceiverSlopeY</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Name" xml:space="preserve">
-    <value>ucrChkAddLine</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Name" xml:space="preserve">
-    <value>ucrChkAddPoints</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
-    <value>ucrPnlOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Name" xml:space="preserve">
-    <value>ucrPnlStepOrPath</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Name" xml:space="preserve">
-    <value>ucrChkPathOrStep</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
-    <value>ucrChkValley</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
-    <value>ucrChkPeak</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
-    <value>ucrReceiverGroup</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
-    <value>ucrChkWithSE</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
-    <value>ucrChkLineofBestFit</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
-    <value>ucrSave</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Name" xml:space="preserve">
-    <value>ucrVariablesAsFactorForLinePlot</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Type" xml:space="preserve">
-    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Name" xml:space="preserve">
-    <value>ucrLinePlotSelector</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
-    <value>ucrReceiverX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
-    <value>ucrFactorOptionalReceiver</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Name" xml:space="preserve">
-    <value>ucrReceiverXEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.ZOrder" xml:space="preserve">
-    <value>35</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Line</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgLinePlot</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 242</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 26</value>
-  </data>
-  <data name="ucrReceiverSlopeX.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Name" xml:space="preserve">
-    <value>ucrReceiverSlopeX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrReceiverSlopeY.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 107</value>
@@ -1058,153 +878,6 @@
   </data>
   <data name="&gt;&gt;ucrReceiverSlopeY.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrInputFormula.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 46</value>
-  </data>
-  <data name="ucrInputFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
-  </data>
-  <data name="ucrInputFormula.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Name" xml:space="preserve">
-    <value>ucrInputFormula</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 20</value>
-  </data>
-  <data name="ucrChkSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
-  </data>
-  <data name="ucrChkSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Name" xml:space="preserve">
-    <value>ucrChkSpan</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkFormula.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 49</value>
-  </data>
-  <data name="ucrChkFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
-  </data>
-  <data name="ucrChkFormula.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Name" xml:space="preserve">
-    <value>ucrChkFormula</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkAddSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 49</value>
-  </data>
-  <data name="ucrChkAddSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="ucrChkAddSE.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Name" xml:space="preserve">
-    <value>ucrChkAddSE</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrNudSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 20</value>
-  </data>
-  <data name="ucrNudSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Name" xml:space="preserve">
-    <value>ucrNudSpan</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 19</value>
-  </data>
-  <data name="ucrInputMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 21</value>
-  </data>
-  <data name="ucrInputMethod.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Name" xml:space="preserve">
-    <value>ucrInputMethod</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrFamilyInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 20</value>
-  </data>
-  <data name="ucrFamilyInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 24</value>
-  </data>
-  <data name="ucrFamilyInput.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Name" xml:space="preserve">
-    <value>ucrFamilyInput</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="ucrChkAddLine.Location" type="System.Drawing.Point, System.Drawing">
     <value>90, 337</value>
@@ -1353,30 +1026,6 @@
   <data name="&gt;&gt;ucrChkPeak.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 327</value>
-  </data>
-  <data name="ucrReceiverGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
-  </data>
-  <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
-    <value>ucrReceiverGroup</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
   <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
     <value>161, 367</value>
   </data>
@@ -1396,7 +1045,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 363</value>
@@ -1417,7 +1066,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 442</value>
@@ -1441,7 +1090,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <data name="ucrVariablesAsFactorForLinePlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 79</value>
@@ -1462,7 +1111,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>23</value>
   </data>
   <data name="ucrLinePlotSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 59</value>
@@ -1486,7 +1135,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>26</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 467</value>
@@ -1507,55 +1156,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
-  <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 242</value>
-  </data>
-  <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
-    <value>ucrReceiverX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 288</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
-    <value>ucrFactorOptionalReceiver</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>27</value>
   </data>
   <data name="ucrReceiverXEnd.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 288</value>
@@ -1579,6 +1180,138 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverXEnd.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 242</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 26</value>
+  </data>
+  <data name="ucrReceiverSlopeX.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Name" xml:space="preserve">
+    <value>ucrReceiverSlopeX</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 242</value>
+  </data>
+  <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
+    <value>ucrReceiverX</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 288</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Name" xml:space="preserve">
+    <value>ucrReceiverSlopeColour</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.ZOrder" xml:space="preserve">
     <value>35</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 288</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
+    <value>ucrFactorOptionalReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgLinePlot</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 327</value>
+  </data>
+  <data name="ucrReceiverGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
+    <value>ucrReceiverGroup</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>

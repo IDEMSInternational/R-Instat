@@ -57,7 +57,8 @@ Partial Class dlgLinePlot
         Me.lblXEnd = New System.Windows.Forms.Label()
         Me.lblSlopeY = New System.Windows.Forms.Label()
         Me.lblSlopeX = New System.Windows.Forms.Label()
-        Me.ucrReceiverSlopeX = New instat.ucrReceiverSingle()
+        Me.lblSlopeColour = New System.Windows.Forms.Label()
+        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
         Me.ucrInputFormula = New instat.ucrInputComboBox()
         Me.ucrChkSpan = New instat.ucrCheck()
@@ -73,17 +74,17 @@ Partial Class dlgLinePlot
         Me.ucrChkPathOrStep = New instat.ucrCheck()
         Me.ucrChkValley = New instat.ucrCheck()
         Me.ucrChkPeak = New instat.ucrCheck()
-        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
         Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
-        Me.ucrChkRemoveMissing = New instat.ucrCheck()
+        Me.ucrReceiverSlopeX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSlopeColour = New instat.ucrReceiverSingle()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.grpSmoothOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -228,14 +229,20 @@ Partial Class dlgLinePlot
         Me.lblSlopeX.Name = "lblSlopeX"
         Me.lblSlopeX.Tag = "X_Slope_Variable:"
         '
-        'ucrReceiverSlopeX
+        'lblSlopeColour
         '
-        Me.ucrReceiverSlopeX.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSlopeX, "ucrReceiverSlopeX")
-        Me.ucrReceiverSlopeX.Name = "ucrReceiverSlopeX"
-        Me.ucrReceiverSlopeX.Selector = Nothing
-        Me.ucrReceiverSlopeX.strNcFilePath = ""
-        Me.ucrReceiverSlopeX.ucrSelector = Nothing
+        resources.ApplyResources(Me.lblSlopeColour, "lblSlopeColour")
+        Me.lblSlopeColour.Name = "lblSlopeColour"
+        Me.lblSlopeColour.Tag = "Colour"
+        '
+        'ucrReceiverGroup
+        '
+        Me.ucrReceiverGroup.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
+        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
+        Me.ucrReceiverGroup.Selector = Nothing
+        Me.ucrReceiverGroup.strNcFilePath = ""
+        Me.ucrReceiverGroup.ucrSelector = Nothing
         '
         'ucrReceiverSlopeY
         '
@@ -338,15 +345,6 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.ucrChkPeak, "ucrChkPeak")
         Me.ucrChkPeak.Name = "ucrChkPeak"
         '
-        'ucrReceiverGroup
-        '
-        Me.ucrReceiverGroup.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
-        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
-        Me.ucrReceiverGroup.Selector = Nothing
-        Me.ucrReceiverGroup.strNcFilePath = ""
-        Me.ucrReceiverGroup.ucrSelector = Nothing
-        '
         'ucrChkWithSE
         '
         Me.ucrChkWithSE.Checked = False
@@ -387,6 +385,24 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrReceiverXEnd
+        '
+        Me.ucrReceiverXEnd.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXEnd, "ucrReceiverXEnd")
+        Me.ucrReceiverXEnd.Name = "ucrReceiverXEnd"
+        Me.ucrReceiverXEnd.Selector = Nothing
+        Me.ucrReceiverXEnd.strNcFilePath = ""
+        Me.ucrReceiverXEnd.ucrSelector = Nothing
+        '
+        'ucrReceiverSlopeX
+        '
+        Me.ucrReceiverSlopeX.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSlopeX, "ucrReceiverSlopeX")
+        Me.ucrReceiverSlopeX.Name = "ucrReceiverSlopeX"
+        Me.ucrReceiverSlopeX.Selector = Nothing
+        Me.ucrReceiverSlopeX.strNcFilePath = ""
+        Me.ucrReceiverSlopeX.ucrSelector = Nothing
+        '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
@@ -395,6 +411,15 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
+        '
+        'ucrReceiverSlopeColour
+        '
+        Me.ucrReceiverSlopeColour.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSlopeColour, "ucrReceiverSlopeColour")
+        Me.ucrReceiverSlopeColour.Name = "ucrReceiverSlopeColour"
+        Me.ucrReceiverSlopeColour.Selector = Nothing
+        Me.ucrReceiverSlopeColour.strNcFilePath = ""
+        Me.ucrReceiverSlopeColour.ucrSelector = Nothing
         '
         'ucrFactorOptionalReceiver
         '
@@ -405,27 +430,12 @@ Partial Class dlgLinePlot
         Me.ucrFactorOptionalReceiver.strNcFilePath = ""
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
-        'ucrReceiverXEnd
-        '
-        Me.ucrReceiverXEnd.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverXEnd, "ucrReceiverXEnd")
-        Me.ucrReceiverXEnd.Name = "ucrReceiverXEnd"
-        Me.ucrReceiverXEnd.Selector = Nothing
-        Me.ucrReceiverXEnd.strNcFilePath = ""
-        Me.ucrReceiverXEnd.ucrSelector = Nothing
-        '
-        'ucrChkRemoveMissing
-        '
-        Me.ucrChkRemoveMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkRemoveMissing, "ucrChkRemoveMissing")
-        Me.ucrChkRemoveMissing.Name = "ucrChkRemoveMissing"
-        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkRemoveMissing)
-        Me.Controls.Add(Me.ucrReceiverSlopeX)
+        Me.Controls.Add(Me.ucrReceiverGroup)
+        Me.Controls.Add(Me.lblSlopeColour)
         Me.Controls.Add(Me.lblSlopeX)
         Me.Controls.Add(Me.ucrReceiverSlopeY)
         Me.Controls.Add(Me.lblSlopeY)
@@ -444,7 +454,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblGroupLine)
         Me.Controls.Add(Me.ucrChkValley)
         Me.Controls.Add(Me.ucrChkPeak)
-        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSave)
@@ -454,12 +463,14 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorOptional)
-        Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
         Me.Controls.Add(Me.lblXEnd)
-        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.ucrReceiverXEnd)
+        Me.Controls.Add(Me.ucrReceiverSlopeX)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.ucrReceiverSlopeColour)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -515,5 +526,6 @@ Partial Class dlgLinePlot
     Friend WithEvents lblSlopeX As Label
     Friend WithEvents ucrReceiverSlopeY As ucrReceiverSingle
     Friend WithEvents lblSlopeY As Label
-    Friend WithEvents ucrChkRemoveMissing As ucrCheck
+    Friend WithEvents lblSlopeColour As Label
+    Friend WithEvents ucrReceiverSlopeColour As ucrReceiverSingle
 End Class

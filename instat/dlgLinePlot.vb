@@ -100,7 +100,7 @@ Public Class dlgLinePlot
         ucrReceiverXEnd.Selector = ucrLinePlotSelector
         ucrReceiverXEnd.bWithQuotes = False
         ucrReceiverXEnd.SetParameterIsString()
-        ucrReceiverXEnd.SetIncludedDataTypes({"numeric"})
+        ucrReceiverXEnd.SetIncludedDataTypes({"factor", "numeric"})
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
@@ -125,6 +125,12 @@ Public Class dlgLinePlot
         ucrReceiverSlopeY.bWithQuotes = False
         ucrReceiverSlopeY.SetParameterIsString()
         ucrReceiverSlopeY.SetIncludedDataTypes({"numeric"})
+
+        ucrReceiverSlopeColour.SetParameter(New RParameter("colour", 3))
+        ucrReceiverSlopeColour.Selector = ucrLinePlotSelector
+        ucrReceiverSlopeColour.bWithQuotes = False
+        ucrReceiverSlopeColour.SetParameterIsString()
+        ucrReceiverSlopeColour.SetIncludedDataTypes({"factor"})
 
         ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
@@ -187,10 +193,6 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetText("Add SE")
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
-        ucrChkRemoveMissing.SetText("Remove Missing")
-        ucrChkRemoveMissing.SetParameter(New RParameter("remove_missing", 4))
-        ucrChkRemoveMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrSave.SetPrefix("lineplot")
         ucrSave.SetIsComboBox()
@@ -264,15 +266,16 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup, ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSlope, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot, ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeY, ucrChkRemoveMissing}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeY, ucrReceiverSlopeColour}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrChkFormula.SetLinkedDisplayControl(grpSmoothOptions)
         ucrReceiverXEnd.SetLinkedDisplayControl(lblXEnd)
         ucrReceiverX.SetLinkedDisplayControl(lblXVariable)
         ucrReceiverSlopeY.SetLinkedDisplayControl(lblSlopeY)
+        ucrReceiverSlopeColour.SetLinkedDisplayControl(lblSlopeColour)
         ucrReceiverSlopeX.SetLinkedDisplayControl(lblSlopeX)
         ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
@@ -354,6 +357,7 @@ Public Class dlgLinePlot
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverSlopeY.SetRCode(clsggSlopeFunction, bReset)
         ucrReceiverSlopeX.SetRCode(clsggSlopeFunction, bReset)
+        ucrReceiverSlopeColour.SetRCode(clsggSlopeFunction, bReset)
         ucrReceiverXEnd.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
@@ -372,7 +376,6 @@ Public Class dlgLinePlot
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
         ucrFamilyInput.SetRCode(clsListFunction, bReset)
         ucrChkFormula.SetRCode(clsBaseOperator, bReset)
-        ucrChkRemoveMissing.SetRCode(clsggSlopeFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -381,7 +384,7 @@ Public Class dlgLinePlot
             (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty())) OrElse
             (rdoDumbbell.Checked AndAlso (ucrReceiverX.IsEmpty() OrElse ucrVariablesAsFactorForLinePlot.IsEmpty() OrElse
             ucrReceiverXEnd.IsEmpty())) OrElse (rdoSlope.Checked AndAlso (ucrReceiverSlopeX.IsEmpty() OrElse
-            ucrReceiverSlopeY.IsEmpty() OrElse ucrFactorOptionalReceiver.IsEmpty())) Then
+            ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -473,6 +476,7 @@ Public Class dlgLinePlot
 
     Private Sub SetGraphPrefixAndRcommand()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
+        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         cmdLinePathStepSmoothOptions.Visible = True
         cmdOptions.Visible = True
         clsBaseOperator.RemoveParameterByName("slopeplot")
@@ -497,6 +501,7 @@ Public Class dlgLinePlot
             ucrSave.SetPrefix("smooth")
             clsOptionsFunction.SetRCommand("geom_smooth")
         ElseIf rdoDumbbell.Checked Then
+            ucrReceiverX.SetIncludedDataTypes({"factor"})
             ucrSave.SetPrefix("dumbbell")
             clsOptionsFunction.SetPackageName("ggalt")
             clsOptionsFunction.SetRCommand("geom_dumbbell")
@@ -525,7 +530,7 @@ Public Class dlgLinePlot
             End If
         ElseIf rdoSmoothing.Checked Then
             cmdLinePathStepSmoothOptions.Text = GetTranslation("Smooth options")
-        ElseIf rdoSmoothing.Checked Then
+        ElseIf rdoDumbbell.Checked Then
             cmdLinePathStepSmoothOptions.Text = GetTranslation("Dumbbell options")
         End If
     End Sub
@@ -535,7 +540,7 @@ Public Class dlgLinePlot
         SetOptionButtonText()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
