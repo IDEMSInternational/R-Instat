@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 237</value>
+    <value>252, 277</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblByFactor.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>34</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>33</value>
   </data>
   <data name="cmdPieChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPieChartOptions.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>39</value>
   </data>
   <data name="rdoValue.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoValue.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>32</value>
   </data>
   <data name="cmdBarChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -265,7 +265,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBarChartOptions.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>38</value>
   </data>
   <data name="lblPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -274,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 323</value>
+    <value>252, 364</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -295,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPosition.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>29</value>
   </data>
   <data name="cmdColumnChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -322,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdColumnChartOptions.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>28</value>
   </data>
   <data name="rdoFrequency.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -358,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFrequency.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>26</value>
   </data>
   <data name="lblXvariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -388,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXvariable.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="rdoPie.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +397,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 383</value>
+    <value>184, 393</value>
   </data>
   <data name="rdoPie.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 17</value>
@@ -418,7 +418,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoPie.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="rdoDonut.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -427,7 +427,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDonut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 383</value>
+    <value>115, 393</value>
   </data>
   <data name="rdoDonut.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
@@ -448,7 +448,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoDonut.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="lblLabelPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -457,7 +457,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 444</value>
+    <value>101, 454</value>
   </data>
   <data name="lblLabelPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -478,7 +478,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelPosition.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="lblLabelColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 444</value>
+    <value>210, 454</value>
   </data>
   <data name="lblLabelColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -508,7 +508,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelColour.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblLabelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 444</value>
+    <value>313, 454</value>
   </data>
   <data name="lblLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -538,7 +538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelSize.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblLollipopSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -547,7 +547,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLollipopSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 412</value>
+    <value>101, 422</value>
   </data>
   <data name="lblLollipopSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -568,7 +568,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLollipopSize.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblLollipopColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -577,7 +577,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLollipopColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 412</value>
+    <value>210, 422</value>
   </data>
   <data name="lblLollipopColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -598,7 +598,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLollipopColour.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblReorder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 280</value>
+    <value>252, 320</value>
   </data>
   <data name="lblReorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -628,7 +628,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorder.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblReorderX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -658,7 +658,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorderX.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrInputReorderX.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 125</value>
@@ -679,10 +679,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputReorderX.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrInputAddReorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 296</value>
+    <value>252, 336</value>
   </data>
   <data name="ucrInputAddReorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -700,10 +700,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputAddReorder.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrInputLollipopColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 408</value>
+    <value>252, 418</value>
   </data>
   <data name="ucrInputLollipopColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -721,10 +721,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLollipopColour.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrNudLollipopSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 409</value>
+    <value>151, 419</value>
   </data>
   <data name="ucrNudLollipopSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -742,10 +742,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudLollipopSize.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrChkLollipop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 410</value>
+    <value>10, 420</value>
   </data>
   <data name="ucrChkLollipop.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -763,10 +763,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkLollipop.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="ucrInputLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 440</value>
+    <value>346, 450</value>
   </data>
   <data name="ucrInputLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 21</value>
@@ -784,10 +784,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLabelSize.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="ucrInputLabelPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 440</value>
+    <value>151, 450</value>
   </data>
   <data name="ucrInputLabelPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 21</value>
@@ -805,10 +805,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLabelPosition.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="ucrInputLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 440</value>
+    <value>252, 450</value>
   </data>
   <data name="ucrInputLabelColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 21</value>
@@ -826,10 +826,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLabelColour.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 441</value>
+    <value>10, 451</value>
   </data>
   <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -847,10 +847,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="ucrChkPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 380</value>
+    <value>10, 390</value>
   </data>
   <data name="ucrChkPolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -868,10 +868,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPolarCoordinates.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="ucrPnlPolar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 380</value>
+    <value>108, 390</value>
   </data>
   <data name="ucrPnlPolar.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 24</value>
@@ -889,10 +889,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlPolar.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="ucrChkBacktoback.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 323</value>
+    <value>10, 333</value>
   </data>
   <data name="ucrChkBacktoback.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 20</value>
@@ -910,7 +910,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkBacktoback.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -919,7 +919,58 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 550</value>
+    <value>415, 562</value>
+  </data>
+  <data name="ucrInputReorderValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 250</value>
+  </data>
+  <data name="ucrInputReorderValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 21</value>
+  </data>
+  <data name="ucrInputReorderValue.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;ucrInputReorderValue.Name" xml:space="preserve">
+    <value>ucrInputReorderValue</value>
+  </data>
+  <data name="&gt;&gt;ucrInputReorderValue.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputReorderValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputReorderValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblReorderValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblReorderValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblReorderValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 235</value>
+  </data>
+  <data name="lblReorderValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblReorderValue.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="lblReorderValue.Text" xml:space="preserve">
+    <value>Reorder:</value>
+  </data>
+  <data name="&gt;&gt;lblReorderValue.Name" xml:space="preserve">
+    <value>lblReorderValue</value>
+  </data>
+  <data name="&gt;&gt;lblReorderValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReorderValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblReorderValue.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrVariablesAsFactorForBarChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 53</value>
@@ -940,10 +991,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="ucrInputBarChartPositions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 339</value>
+    <value>252, 380</value>
   </data>
   <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -961,10 +1012,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputBarChartPositions.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>27</value>
   </data>
   <data name="ucrSaveBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 471</value>
+    <value>10, 481</value>
   </data>
   <data name="ucrSaveBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -985,10 +1036,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveBar.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>30</value>
   </data>
   <data name="ucrChkFlipCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 352</value>
+    <value>10, 362</value>
   </data>
   <data name="ucrChkFlipCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 20</value>
@@ -1006,10 +1057,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>31</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 252</value>
+    <value>252, 292</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1030,7 +1081,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverByFactor.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>35</value>
   </data>
   <data name="ucrBarChartSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 41</value>
@@ -1054,10 +1105,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBarChartSelector.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>36</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 497</value>
+    <value>10, 507</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 52</value>
@@ -1075,7 +1126,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>37</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 6</value>
@@ -1096,7 +1147,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>40</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1132,6 +1183,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>24</value>
   </data>
 </root>

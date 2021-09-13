@@ -78,6 +78,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblReorderValue = New System.Windows.Forms.Label()
+        Me.ucrInputReorderValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -349,10 +351,25 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'lblReorderValue
+        '
+        resources.ApplyResources(Me.lblReorderValue, "lblReorderValue")
+        Me.lblReorderValue.Name = "lblReorderValue"
+        '
+        'ucrInputReorderValue
+        '
+        Me.ucrInputReorderValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputReorderValue.GetSetSelectedIndex = -1
+        Me.ucrInputReorderValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
+        Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputReorderValue)
+        Me.Controls.Add(Me.lblReorderValue)
         Me.Controls.Add(Me.lblReorderX)
         Me.Controls.Add(Me.ucrInputReorderX)
         Me.Controls.Add(Me.lblReorder)
@@ -441,4 +458,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblReorder As Label
     Friend WithEvents lblReorderX As Label
     Friend WithEvents ucrInputReorderX As ucrInputComboBox
+    Friend WithEvents ucrInputReorderValue As ucrInputComboBox
+    Friend WithEvents lblReorderValue As Label
 End Class
