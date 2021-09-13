@@ -55,6 +55,15 @@ Partial Class dlgBarAndPieChart
         Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.lblLollipopSize = New System.Windows.Forms.Label()
         Me.lblLollipopColour = New System.Windows.Forms.Label()
+        Me.lblArea = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.rdoTreeMap = New System.Windows.Forms.RadioButton()
+        Me.ucrChkLayout = New instat.ucrCheck()
+        Me.ucrChkStart = New instat.ucrCheck()
+        Me.ucrInputStart = New instat.ucrInputComboBox()
+        Me.ucrInputLayout = New instat.ucrInputComboBox()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
+        Me.ucrReceiverArea = New instat.ucrReceiverSingle()
         Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
         Me.ucrNudLollipopSize = New instat.ucrNud()
         Me.ucrChkLollipop = New instat.ucrCheck()
@@ -182,6 +191,74 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.lblLollipopColour, "lblLollipopColour")
         Me.lblLollipopColour.Name = "lblLollipopColour"
+        '
+        'lblArea
+        '
+        resources.ApplyResources(Me.lblArea, "lblArea")
+        Me.lblArea.Name = "lblArea"
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        '
+        'rdoTreeMap
+        '
+        resources.ApplyResources(Me.rdoTreeMap, "rdoTreeMap")
+        Me.rdoTreeMap.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoTreeMap.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTreeMap.FlatAppearance.BorderSize = 2
+        Me.rdoTreeMap.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTreeMap.Name = "rdoTreeMap"
+        Me.rdoTreeMap.TabStop = True
+        Me.rdoTreeMap.Tag = "Value"
+        Me.rdoTreeMap.UseVisualStyleBackColor = False
+        '
+        'ucrChkLayout
+        '
+        Me.ucrChkLayout.Checked = False
+        resources.ApplyResources(Me.ucrChkLayout, "ucrChkLayout")
+        Me.ucrChkLayout.Name = "ucrChkLayout"
+        '
+        'ucrChkStart
+        '
+        Me.ucrChkStart.Checked = False
+        resources.ApplyResources(Me.ucrChkStart, "ucrChkStart")
+        Me.ucrChkStart.Name = "ucrChkStart"
+        '
+        'ucrInputStart
+        '
+        Me.ucrInputStart.AddQuotesIfUnrecognised = True
+        Me.ucrInputStart.GetSetSelectedIndex = -1
+        Me.ucrInputStart.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStart, "ucrInputStart")
+        Me.ucrInputStart.Name = "ucrInputStart"
+        '
+        'ucrInputLayout
+        '
+        Me.ucrInputLayout.AddQuotesIfUnrecognised = True
+        Me.ucrInputLayout.GetSetSelectedIndex = -1
+        Me.ucrInputLayout.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLayout, "ucrInputLayout")
+        Me.ucrInputLayout.Name = "ucrInputLayout"
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'ucrReceiverArea
+        '
+        Me.ucrReceiverArea.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverArea, "ucrReceiverArea")
+        Me.ucrReceiverArea.Name = "ucrReceiverArea"
+        Me.ucrReceiverArea.Selector = Nothing
+        Me.ucrReceiverArea.strNcFilePath = ""
+        Me.ucrReceiverArea.ucrSelector = Nothing
         '
         'ucrInputLollipopColour
         '
@@ -323,6 +400,11 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkLayout)
+        Me.Controls.Add(Me.ucrChkStart)
+        Me.Controls.Add(Me.ucrInputStart)
+        Me.Controls.Add(Me.ucrInputLayout)
+        Me.Controls.Add(Me.rdoTreeMap)
         Me.Controls.Add(Me.ucrInputLollipopColour)
         Me.Controls.Add(Me.lblLollipopColour)
         Me.Controls.Add(Me.ucrNudLollipopSize)
@@ -342,7 +424,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.lblXvariable)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
         Me.Controls.Add(Me.rdoFrequency)
         Me.Controls.Add(Me.ucrInputBarChartPositions)
         Me.Controls.Add(Me.cmdColumnChartOptions)
@@ -358,6 +439,11 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
         Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.lblFill)
+        Me.Controls.Add(Me.ucrReceiverFill)
+        Me.Controls.Add(Me.lblArea)
+        Me.Controls.Add(Me.ucrReceiverArea)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -403,4 +489,13 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrNudLollipopSize As ucrNud
     Friend WithEvents lblLollipopSize As Label
     Friend WithEvents ucrChkLollipop As ucrCheck
+    Friend WithEvents ucrReceiverArea As ucrReceiverSingle
+    Friend WithEvents lblArea As Label
+    Friend WithEvents lblFill As Label
+    Friend WithEvents ucrReceiverFill As ucrReceiverSingle
+    Friend WithEvents rdoTreeMap As RadioButton
+    Friend WithEvents ucrChkLayout As ucrCheck
+    Friend WithEvents ucrChkStart As ucrCheck
+    Friend WithEvents ucrInputStart As ucrInputComboBox
+    Friend WithEvents ucrInputLayout As ucrInputComboBox
 End Class
