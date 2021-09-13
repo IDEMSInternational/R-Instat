@@ -92,15 +92,11 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrPnlOperation.AddToLinkedControls(ucrPnlSide, {rdoPad}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSide.AddRadioButton(rdoLeftSide)
-        ucrPnlSide.AddRadioButton(rdoRightSide)
-        ucrPnlSide.AddRadioButton(rdoBothSide)
-
         ucrPnlSide.SetParameter(New RParameter("side", 2))
-        ucrPnlSide.AddParameterValuesCondition(rdoLeftSide, "side", Chr(34) & "left" & Chr(34))
-        ucrPnlSide.AddParameterValuesCondition(rdoRightSide, "side", Chr(34) & "right" & Chr(34))
-        ucrPnlSide.AddParameterValuesCondition(rdoBothSide, "side", Chr(34) & "both" & Chr(34))
-        ucrPnlSide.SetRDefault(Chr(34) & "left" & Chr(34))
+        ucrPnlSide.AddRadioButton(rdoLeftSide, Chr(34) & "left" & Chr(34))
+        ucrPnlSide.AddRadioButton(rdoRightSide, Chr(34) & "right" & Chr(34))
+        ucrPnlSide.AddRadioButton(rdoBothSide, Chr(34) & "both" & Chr(34))
+
 
         'ucrInputPad
         ucrInputPad.SetParameter(New RParameter("pad", 3))
@@ -201,11 +197,10 @@ Public Class dlgTransformText
         clsConvertFunction = New RFunction
         clsLengthFunction = New RFunction
         clsPadFunction = New RFunction
-        'clsTrimFunction = New RFunction
         clsWordsFunction = New RFunction
         clsSubstringFunction = New RFunction
         clsSquishTrimFunction = New RFunction
-        'clsSquishFunction = New RFunction
+
 
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
@@ -249,7 +244,6 @@ Public Class dlgTransformText
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrPnlSide.AddAdditionalCodeParameterPair(clsPadFunction, New RParameter("side", 2), iAdditionalPairNo:=1)
 
         ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsLengthFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=2)
@@ -365,12 +359,6 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrPnlOperation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrPnlPad.ControlValueChanged, ucrPnlSide.ControlValueChanged
-        'If rdoPad.Checked Then
-        '    rdoSquish.Visible = False
-        'ElseIf rdoTrim.Checked Then
-        '    rdoSquish.Visible = True
-        'End If
-
         If rdoWords.Checked Then
             ucrNudFirstWord.Visible = True
             ucrNudLastWord.Visible = True
@@ -473,16 +461,6 @@ Public Class dlgTransformText
                 ElseIf rdoBothPad.Checked Then
                     clsSquishTrimFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
                 End If
-            End If
-        End If
-
-        If rdoPad.Checked Then
-            If rdoLeftSide.Checked Then
-                clsPadFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
-            ElseIf rdoRightSide.Checked Then
-                clsPadFunction.AddParameter("side", Chr(34) & "right" & Chr(34), iPosition:=2)
-            ElseIf rdoBothSide.Checked Then
-                clsPadFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
             End If
         End If
 
