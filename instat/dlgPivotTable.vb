@@ -155,14 +155,6 @@ Public Class dlgPivotTable
         End If
     End Sub
 
-    Private Sub lblInitialColumnFactor_Click(sender As Object, e As EventArgs) Handles lblInitialColumnFactor.Click
-
-    End Sub
-
-    Private Sub ucrReceiverSelectedVariable_Load(sender As Object, e As EventArgs) Handles ucrReceiverSelectedVariable.Load
-
-    End Sub
-
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
         If Not bRcodeSet OrElse Not ucrChkSelectedVariable.Checked Then
             Exit Sub
