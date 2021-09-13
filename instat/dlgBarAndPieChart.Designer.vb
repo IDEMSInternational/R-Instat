@@ -52,6 +52,13 @@ Partial Class dlgBarAndPieChart
         Me.rdoDonut = New System.Windows.Forms.RadioButton()
         Me.lblLabelPosition = New System.Windows.Forms.Label()
         Me.lblLabelColour = New System.Windows.Forms.Label()
+        Me.lblLabelSize = New System.Windows.Forms.Label()
+        Me.lblLollipopSize = New System.Windows.Forms.Label()
+        Me.lblLollipopColour = New System.Windows.Forms.Label()
+        Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
+        Me.ucrNudLollipopSize = New instat.ucrNud()
+        Me.ucrChkLollipop = New instat.ucrCheck()
+        Me.ucrInputLabelSize = New instat.ucrInputComboBox()
         Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
         Me.ucrChkAddLabels = New instat.ucrCheck()
@@ -67,8 +74,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputLabelSize = New instat.ucrInputComboBox()
-        Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -162,6 +167,53 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.lblLabelColour, "lblLabelColour")
         Me.lblLabelColour.Name = "lblLabelColour"
+        '
+        'lblLabelSize
+        '
+        resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
+        Me.lblLabelSize.Name = "lblLabelSize"
+        '
+        'lblLollipopSize
+        '
+        resources.ApplyResources(Me.lblLollipopSize, "lblLollipopSize")
+        Me.lblLollipopSize.Name = "lblLollipopSize"
+        '
+        'lblLollipopColour
+        '
+        resources.ApplyResources(Me.lblLollipopColour, "lblLollipopColour")
+        Me.lblLollipopColour.Name = "lblLollipopColour"
+        '
+        'ucrInputLollipopColour
+        '
+        Me.ucrInputLollipopColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
+        Me.ucrInputLollipopColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLollipopColour, "ucrInputLollipopColour")
+        Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
+        '
+        'ucrNudLollipopSize
+        '
+        Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLollipopSize, "ucrNudLollipopSize")
+        Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
+        Me.ucrNudLollipopSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ucrChkLollipop
+        '
+        Me.ucrChkLollipop.Checked = False
+        resources.ApplyResources(Me.ucrChkLollipop, "ucrChkLollipop")
+        Me.ucrChkLollipop.Name = "ucrChkLollipop"
+        '
+        'ucrInputLabelSize
+        '
+        Me.ucrInputLabelSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelSize.GetSetSelectedIndex = -1
+        Me.ucrInputLabelSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelSize, "ucrInputLabelSize")
+        Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
         '
         'ucrInputLabelPosition
         '
@@ -267,23 +319,15 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrInputLabelSize
-        '
-        Me.ucrInputLabelSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabelSize.GetSetSelectedIndex = -1
-        Me.ucrInputLabelSize.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLabelSize, "ucrInputLabelSize")
-        Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
-        '
-        'lblLabelSize
-        '
-        resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
-        Me.lblLabelSize.Name = "lblLabelSize"
-        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputLollipopColour)
+        Me.Controls.Add(Me.lblLollipopColour)
+        Me.Controls.Add(Me.ucrNudLollipopSize)
+        Me.Controls.Add(Me.lblLollipopSize)
+        Me.Controls.Add(Me.ucrChkLollipop)
         Me.Controls.Add(Me.lblLabelSize)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
@@ -354,4 +398,9 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrInputLabelColour As ucrInputComboBox
     Friend WithEvents lblLabelSize As Label
     Friend WithEvents ucrInputLabelSize As ucrInputComboBox
+    Friend WithEvents ucrInputLollipopColour As ucrInputComboBox
+    Friend WithEvents lblLollipopColour As Label
+    Friend WithEvents ucrNudLollipopSize As ucrNud
+    Friend WithEvents lblLollipopSize As Label
+    Friend WithEvents ucrChkLollipop As ucrCheck
 End Class
