@@ -119,7 +119,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSavePivot.IsComplete AndAlso ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If ucrSavePivot.IsComplete AndAlso Not String.IsNullOrEmpty(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
