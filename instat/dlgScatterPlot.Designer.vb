@@ -42,8 +42,9 @@ Partial Class dlgScatterPlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
-        Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdPointOptions = New System.Windows.Forms.Button()
         Me.lblVariable = New System.Windows.Forms.Label()
+        Me.ucrChkAddRugPlot = New instat.ucrCheck()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
@@ -53,6 +54,10 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.lblSides = New System.Windows.Forms.Label()
+        Me.ucrInputSides = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -74,17 +79,23 @@ Partial Class dlgScatterPlot
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Tag = "X_Variable:"
         '
-        'cmdScatterPlotOptions
+        'cmdPointOptions
         '
-        resources.ApplyResources(Me.cmdScatterPlotOptions, "cmdScatterPlotOptions")
-        Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
-        Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
-        Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdPointOptions, "cmdPointOptions")
+        Me.cmdPointOptions.Name = "cmdPointOptions"
+        Me.cmdPointOptions.Tag = "Point_Options"
+        Me.cmdPointOptions.UseVisualStyleBackColor = True
         '
         'lblVariable
         '
         resources.ApplyResources(Me.lblVariable, "lblVariable")
         Me.lblVariable.Name = "lblVariable"
+        '
+        'ucrChkAddRugPlot
+        '
+        Me.ucrChkAddRugPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkAddRugPlot, "ucrChkAddRugPlot")
+        Me.ucrChkAddRugPlot.Name = "ucrChkAddRugPlot"
         '
         'ucrReceiverLabel
         '
@@ -153,10 +164,43 @@ Partial Class dlgScatterPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSize, "ucrNudSize")
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Name = "lblSize"
+        '
+        'lblSides
+        '
+        resources.ApplyResources(Me.lblSides, "lblSides")
+        Me.lblSides.Name = "lblSides"
+        '
+        'ucrInputSides
+        '
+        Me.ucrInputSides.AddQuotesIfUnrecognised = True
+        Me.ucrInputSides.GetSetSelectedIndex = -1
+        Me.ucrInputSides.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSides, "ucrInputSides")
+        Me.ucrInputSides.Name = "ucrInputSides"
+        '
         'dlgScatterPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputSides)
+        Me.Controls.Add(Me.lblSides)
+        Me.Controls.Add(Me.lblSize)
+        Me.Controls.Add(Me.ucrNudSize)
+        Me.Controls.Add(Me.ucrChkAddRugPlot)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrChkWithSE)
@@ -164,7 +208,7 @@ Partial Class dlgScatterPlot
         Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrSelectorForScatter)
         Me.Controls.Add(Me.ucrVariablesAsFactorForScatter)
-        Me.Controls.Add(Me.cmdScatterPlotOptions)
+        Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
@@ -186,7 +230,7 @@ Partial Class dlgScatterPlot
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
-    Friend WithEvents cmdScatterPlotOptions As Button
+    Friend WithEvents cmdPointOptions As Button
     Friend WithEvents ucrVariablesAsFactorForScatter As ucrVariablesAsFactor
     Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveScatterPlot As ucrSave
@@ -194,4 +238,9 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
+    Friend WithEvents ucrChkAddRugPlot As ucrCheck
+    Friend WithEvents lblSize As Label
+    Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents lblSides As Label
+    Friend WithEvents ucrInputSides As ucrInputComboBox
 End Class

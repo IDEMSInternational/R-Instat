@@ -95,7 +95,7 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
         ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_decimals", 4))
-        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
+        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (if Numeric)")
         ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
         ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrNudConvertDisplayDecimals, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -218,6 +218,4 @@ Public Class dlgDuplicateColumns
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-
 End Class
