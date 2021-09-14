@@ -16,26 +16,38 @@
 
 Imports instat.Translations
 Public Class dlgSelect
+    Private bFirstLoad As Boolean = True
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
         autoTranslate(Me)
-        rdoSelectbycondition.Checked = True
-        grpCondition.Visible = True
-        grpFactor.Visible = False
     End Sub
 
-    Private Sub rdoSelectbycondition_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectbycondition.CheckedChanged
-        If rdoSelectbycondition.Checked = True Then
-            grpCondition.Visible = True
-        Else
-            grpCondition.Visible = False
-        End If
+    Private Sub InitialiseDialog()
+        ucrInputSelectPreview.txtInput.ReadOnly = True
+        ucrReceiverSelect.SetItemType("column_selection")
+        ucrReceiverSelect.strSelectorHeading = "Column selections"
+        ucrReceiverSelect.Selector = ucrSelectorForSelectColumns
+        ucrReceiverSelect.SetMeAsReceiver()
+
+        ucrNewDataFrameName.SetIsTextBox()
+        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
+        ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorForSelectColumns.ucrAvailableDataFrames)
+        ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
     End Sub
 
-    Private Sub rdoSelectbyfactor_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectbyfactor.CheckedChanged
-        If rdoSelectbyfactor.Checked = True Then
-            grpFactor.Visible = True
-        Else
-            grpFactor.Visible = False
-        End If
+    Private Sub SetDefaults()
+        ucrSelectorForSelectColumns.Reset()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        dlgSelectColumns.ShowDialog()
     End Sub
 End Class
