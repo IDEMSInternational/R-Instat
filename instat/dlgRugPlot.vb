@@ -99,6 +99,9 @@ Public Class dlgRugPlot
         ucrReceiverShape.Selector = ucrHeatMapSelector
         ucrReceiverShape.bWithQuotes = False
 
+        ucrReceiverShape.AddParameterPresentCondition(True, "geom_point")
+        ucrReceiverShape.AddParameterPresentCondition(False, "geom_point", False)
+
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
@@ -138,10 +141,6 @@ Public Class dlgRugPlot
         ucrChkColourPalette.SetText("Colour Palette")
         ucrChkColourPalette.AddParameterPresentCondition(True, "option")
         ucrChkColourPalette.AddParameterPresentCondition(False, "option", False)
-
-        ucrReceiverShape.AddParameterPresentCondition(True, "geom_point")
-        ucrReceiverShape.AddParameterPresentCondition(False, "geom_point", False)
-
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
@@ -199,7 +198,7 @@ Public Class dlgRugPlot
 
         clsShapeFunction.SetPackageName("ggplot2")
         clsShapeFunction.SetRCommand("geom_point")
-        clsShapeFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeAes, iPosition:=1)
+        clsShapeFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeAes, iPosition:=0)
 
         clsShapeAes.SetPackageName("ggplot2")
         clsShapeAes.SetRCommand("aes")
@@ -234,7 +233,7 @@ Public Class dlgRugPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
-        ucrReceiverShape.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("size", 2), iAdditionalPairNo:=1)
+        ucrReceiverShape.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("size", 0), iAdditionalPairNo:=1)
 
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
@@ -259,7 +258,7 @@ Public Class dlgRugPlot
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrChkColourPalette.ControlContentsChanged, ucrReceiverShape.ControlContentsChanged
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
