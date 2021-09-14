@@ -82,6 +82,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         'ucrNewColumnName
         '
         Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 199)
+        Me.ucrNewColumnName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(253, 24)
         Me.ucrNewColumnName.TabIndex = 7
@@ -131,6 +132,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrSelectorRecodeNumeric
         '
+        Me.ucrSelectorRecodeNumeric.bDropUnusedFilterLevels = False
         Me.ucrSelectorRecodeNumeric.bShowHiddenColumns = False
         Me.ucrSelectorRecodeNumeric.bUseCurrentFilter = True
         Me.ucrSelectorRecodeNumeric.Location = New System.Drawing.Point(10, 10)
@@ -158,7 +160,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.MinimizeBox = False
         Me.Name = "dlgRecodeNumericIntoQuantiles"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Recode Numeric Into Quantiles"
+        Me.Text = "Recode Numeric into Quantiles"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
