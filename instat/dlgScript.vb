@@ -119,6 +119,10 @@ Public Class dlgScript
         ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & strAssignedScript)
     End Sub
 
+    Private Sub btnGetColumn_Click(sender As Object, e As EventArgs) Handles btnGetColumn.Click
+
+    End Sub
+
     Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputNewDataFrame.ContentsChanged
         btnNewDataframe.Enabled = Not ucrInputNewDataFrame.IsEmpty
     End Sub

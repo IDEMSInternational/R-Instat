@@ -32,6 +32,9 @@ Partial Class dlgScript
         Me.ucrInputCommand = New instat.ucrInputTextBox()
         Me.ucrDataFrameGet = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverGetCol = New instat.ucrReceiverSingle()
+        Me.lblGetColumn = New System.Windows.Forms.Label()
+        Me.btnGetColumn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblPackage
@@ -47,7 +50,7 @@ Partial Class dlgScript
         '
         Me.lblNewName.AutoSize = True
         Me.lblNewName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNewName.Location = New System.Drawing.Point(9, 134)
+        Me.lblNewName.Location = New System.Drawing.Point(12, 197)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(111, 13)
         Me.lblNewName.TabIndex = 21
@@ -79,7 +82,7 @@ Partial Class dlgScript
         'btnNewDataframe
         '
         Me.btnNewDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnNewDataframe.Location = New System.Drawing.Point(182, 148)
+        Me.btnNewDataframe.Location = New System.Drawing.Point(185, 211)
         Me.btnNewDataframe.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnNewDataframe.Name = "btnNewDataframe"
         Me.btnNewDataframe.Size = New System.Drawing.Size(74, 23)
@@ -92,7 +95,7 @@ Partial Class dlgScript
         Me.ucrInputNewDataFrame.AddQuotesIfUnrecognised = True
         Me.ucrInputNewDataFrame.IsMultiline = False
         Me.ucrInputNewDataFrame.IsReadOnly = False
-        Me.ucrInputNewDataFrame.Location = New System.Drawing.Point(9, 150)
+        Me.ucrInputNewDataFrame.Location = New System.Drawing.Point(12, 213)
         Me.ucrInputNewDataFrame.Name = "ucrInputNewDataFrame"
         Me.ucrInputNewDataFrame.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNewDataFrame.TabIndex = 22
@@ -121,7 +124,7 @@ Partial Class dlgScript
         '
         Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
         Me.ucrDataFrameGet.bUseCurrentFilter = True
-        Me.ucrDataFrameGet.Location = New System.Drawing.Point(9, 75)
+        Me.ucrDataFrameGet.Location = New System.Drawing.Point(13, 75)
         Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
         Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
@@ -135,11 +138,47 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(416, 57)
         Me.ucrBase.TabIndex = 16
         '
+        'ucrReceiverGetCol
+        '
+        Me.ucrReceiverGetCol.frmParent = Me
+        Me.ucrReceiverGetCol.Location = New System.Drawing.Point(12, 155)
+        Me.ucrReceiverGetCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverGetCol.Name = "ucrReceiverGetCol"
+        Me.ucrReceiverGetCol.Selector = Nothing
+        Me.ucrReceiverGetCol.Size = New System.Drawing.Size(158, 20)
+        Me.ucrReceiverGetCol.strNcFilePath = ""
+        Me.ucrReceiverGetCol.TabIndex = 27
+        Me.ucrReceiverGetCol.ucrSelector = Nothing
+        '
+        'lblGetColumn
+        '
+        Me.lblGetColumn.AutoSize = True
+        Me.lblGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGetColumn.Location = New System.Drawing.Point(14, 140)
+        Me.lblGetColumn.Name = "lblGetColumn"
+        Me.lblGetColumn.Size = New System.Drawing.Size(45, 13)
+        Me.lblGetColumn.TabIndex = 26
+        Me.lblGetColumn.Text = "Column:"
+        '
+        'btnGetColumn
+        '
+        Me.btnGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnGetColumn.Location = New System.Drawing.Point(182, 155)
+        Me.btnGetColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnGetColumn.Name = "btnGetColumn"
+        Me.btnGetColumn.Size = New System.Drawing.Size(74, 23)
+        Me.btnGetColumn.TabIndex = 28
+        Me.btnGetColumn.Text = "Add"
+        Me.btnGetColumn.UseVisualStyleBackColor = True
+        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(750, 501)
+        Me.Controls.Add(Me.btnGetColumn)
+        Me.Controls.Add(Me.ucrReceiverGetCol)
+        Me.Controls.Add(Me.lblGetColumn)
         Me.Controls.Add(Me.btnNewDataframe)
         Me.Controls.Add(Me.btnGetPackage)
         Me.Controls.Add(Me.btnGetDataFrame)
@@ -170,4 +209,7 @@ Partial Class dlgScript
     Friend WithEvents btnGetDataFrame As Button
     Friend WithEvents btnGetPackage As Button
     Friend WithEvents btnNewDataframe As Button
+    Friend WithEvents ucrReceiverGetCol As ucrReceiverSingle
+    Friend WithEvents btnGetColumn As Button
+    Friend WithEvents lblGetColumn As Label
 End Class
