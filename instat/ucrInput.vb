@@ -145,6 +145,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsColumnSelection()
+        strDefaultType = "Column_selection"
+        SetDefaultName()
+    End Sub
+
     Public Overridable Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
         ucrDataFrameSelector = ucrNewSelector
         If Not bUserTyped Then
@@ -191,6 +196,12 @@ Public Class ucrInput
             ElseIf strDefaultType = "Filter" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName("")
+                End If
+            ElseIf strDefaultType = "Column_selection" Then
+                If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetColumnSelectionNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
                     SetName("")
                 End If

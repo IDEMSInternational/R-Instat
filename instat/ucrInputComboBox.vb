@@ -88,6 +88,12 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsColumnSelection()
+        strItemsType = "Column_selection"
+        FillItemTypes()
+    End Sub
+
+
     Public Sub SetItemsTypeAsKeys()
         strItemsType = "Keys"
         FillItemTypes()
@@ -135,6 +141,11 @@ Public Class ucrInputComboBox
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
+                End If
+            Case "Column_Selection"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetColumnSelectionNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
         End Select
     End Sub
