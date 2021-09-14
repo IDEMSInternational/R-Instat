@@ -34,15 +34,21 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctOptions As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 36
 
-        ucrPnlOptions.AddRadioButton(rdoByHand)
+        ucrPnlOptions.AddRadioButton(rdoHand)
         ucrPnlOptions.AddRadioButton(rdoProperty)
         ucrPnlOptions.AddRadioButton(rdoVariable)
-        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition({rdoByHand, rdoProperty, rdoVariable}, {frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels"})
+        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition({rdoHand, rdoProperty, rdoVariable}, {frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels"})
 
-        ucrPnlOptions.AddToLinkedControls(ucrReorderFactor, {rdoByHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrPnlOptions.AddToLinkedControls(ucrReorderFactor, {rdoHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrPnlProperty, ucrInputPrefix, ucrNudShift}, {rdoProperty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverVariable, ucrInputOptions, ucrChkReorderVariable}, {rdoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlProperty.SetLinkedDisplayControl(ucrChkReorderOrder)
+        ucrInputPrefix.SetLinkedDisplayControl(lblPrefix)
+        ucrInputOptions.SetLinkedDisplayControl(lblOptions)
+        ucrReceiverVariable.SetLinkedDisplayControl(lblVariable)
         'Set data frame paramater
         ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
@@ -60,22 +66,56 @@ Public Class dlgReorderLevels
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
         ucrReorderFactor.setDataType("factor")
 
+        ucrReceiverVariable.SetParameter(New RParameter(""))
+        ucrReceiverVariable.Selector = ucrSelectorFactorLevelsToReorder
+        ucrReceiverVariable.SetParameterIsString()
+        ucrReceiverVariable.strSelectorHeading = "Numerics/Dates/Logical"
+        ucrReceiverVariable.SetIncludedDataTypes({"numeric", "dates", "logical"})
+        'ucrReceiverVariable.SetClimaticType("element")
+        ucrReceiverVariable.bAutoFill = True
 
-        ucrSaveGraph.SetPrefix("Reorder")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrInputOptions.SetParameter(New RParameter(""))
+        dctOptions.Add("Median", Chr(34) & "median" & Chr(34))
+        dctOptions.Add("Mean", Chr(34) & "mean" & Chr(34))
+        dctOptions.Add("Max", Chr(34) & "max" & Chr(34))
+        dctOptions.Add("Min", Chr(34) & "min" & Chr(34))
+        dctOptions.Add("Sd", Chr(34) & "sd" & Chr(34))
+        dctOptions.Add("IQR", Chr(34) & "IQR" & Chr(34))
+        dctOptions.Add("Range", Chr(34) & "range" & Chr(34))
+        ucrInputOptions.SetItems(dctOptions)
+        ucrInputOptions.SetRDefault("median")
+        ucrInputOptions.SetDropDownStyleAsNonEditable()
+
+        ucrChkReorderOrder.SetText("Reverse Order")
+
+        ucrChkReorderVariable.SetText("Reverse Order")
+
+        ucrPnlProperty.AddRadioButton(rdoAsIs)
+        ucrPnlProperty.AddRadioButton(rdoAppearance)
+        ucrPnlProperty.AddRadioButton(rdoFrequency)
+        ucrPnlProperty.AddRadioButton(rdoSequence)
+        ucrPnlProperty.AddRadioButton(rdoShift)
+        ucrPnlProperty.AddRadioButton(rdoShuffle)
+        ucrPnlProperty.AddRadioButton(rdoAnonymise)
+
+        ucrSaveResults.SetPrefix("row_summary")
+        ucrSaveResults.SetSaveTypeAsColumn()
+        ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
+        ucrSaveResults.SetLabelText("Save As:")
+        ucrSaveResults.SetIsComboBox()
+        'ucrSaveResults.setLinkedReceiver(ucrReceiverForRowSummaries)
     End Sub
 
     Private Sub SetDefaults()
         clsReorder = New RFunction
         'reset
         ucrSelectorFactorLevelsToReorder.Reset()
-        ucrSaveGraph.Reset()
+        ucrSaveResults.Reset()
+        rdoHand.Checked = True
+        ucrReceiverFactor.SetMeAsReceiver()
         ' Set default function
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        clsReorder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
     End Sub
 
@@ -84,7 +124,12 @@ Public Class dlgReorderLevels
         ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
         ucrReceiverFactor.SetRCode(clsReorder, bReset)
         ucrReorderFactor.SetRCode(clsReorder, bReset)
-        ucrSaveGraph.SetRCode(clsReorder, bReset)
+        ucrSaveResults.SetRCode(clsReorder, bReset)
+        ucrChkReorderOrder.SetRCode(clsReorder, bReset)
+        ucrInputOptions.SetRCode(clsReorder, bReset)
+        ucrReceiverVariable.SetRCode(clsReorder, bReset)
+        ucrChkReorderVariable.SetRCode(clsReorder, bReset)
+        ' ucrPnlProperty.SetRCode(clsReorder)
         ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
@@ -100,6 +145,12 @@ Public Class dlgReorderLevels
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlProperty_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlProperty.ControlValueChanged
+        ucrNudShift.Visible = If(rdoShift.Checked, True, False)
+        ucrInputPrefix.Visible = If(rdoAnonymise.Checked, True, False)
+
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged

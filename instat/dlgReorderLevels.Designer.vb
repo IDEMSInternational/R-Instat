@@ -40,15 +40,33 @@ Partial Class dlgReorderLevels
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.rdoByHand = New System.Windows.Forms.RadioButton()
+        Me.rdoHand = New System.Windows.Forms.RadioButton()
         Me.rdoProperty = New System.Windows.Forms.RadioButton()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoAsIs = New System.Windows.Forms.RadioButton()
+        Me.rdoAppearance = New System.Windows.Forms.RadioButton()
+        Me.rdoFrequency = New System.Windows.Forms.RadioButton()
+        Me.rdoSequence = New System.Windows.Forms.RadioButton()
+        Me.rdoShift = New System.Windows.Forms.RadioButton()
+        Me.rdoShuffle = New System.Windows.Forms.RadioButton()
+        Me.rdoAnonymise = New System.Windows.Forms.RadioButton()
+        Me.lblPrefix = New System.Windows.Forms.Label()
+        Me.lblVariable = New System.Windows.Forms.Label()
+        Me.lblOptions = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ucrInputOptions = New instat.ucrInputComboBox()
+        Me.ucrChkReorderVariable = New instat.ucrCheck()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrInputPrefix = New instat.ucrInputTextBox()
+        Me.ucrNudShift = New instat.ucrNud()
+        Me.ucrChkReorderOrder = New instat.ucrCheck()
+        Me.ucrPnlProperty = New instat.UcrPanel()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReorderFactor = New instat.ucrReorder()
         Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrSaveResults = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -57,17 +75,17 @@ Partial Class dlgReorderLevels
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Tag = "Factor_Selected:"
         '
-        'rdoByHand
+        'rdoHand
         '
-        resources.ApplyResources(Me.rdoByHand, "rdoByHand")
-        Me.rdoByHand.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoByHand.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByHand.FlatAppearance.BorderSize = 2
-        Me.rdoByHand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByHand.Name = "rdoByHand"
-        Me.rdoByHand.TabStop = True
-        Me.rdoByHand.Tag = "By_Hand"
-        Me.rdoByHand.UseVisualStyleBackColor = False
+        resources.ApplyResources(Me.rdoHand, "rdoHand")
+        Me.rdoHand.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoHand.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoHand.FlatAppearance.BorderSize = 2
+        Me.rdoHand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoHand.Name = "rdoHand"
+        Me.rdoHand.TabStop = True
+        Me.rdoHand.Tag = "Hand"
+        Me.rdoHand.UseVisualStyleBackColor = False
         '
         'rdoProperty
         '
@@ -92,6 +110,129 @@ Partial Class dlgReorderLevels
         Me.rdoVariable.TabStop = True
         Me.rdoVariable.Tag = "Variable"
         Me.rdoVariable.UseVisualStyleBackColor = False
+        '
+        'rdoAsIs
+        '
+        resources.ApplyResources(Me.rdoAsIs, "rdoAsIs")
+        Me.rdoAsIs.Name = "rdoAsIs"
+        Me.rdoAsIs.TabStop = True
+        Me.rdoAsIs.UseVisualStyleBackColor = True
+        '
+        'rdoAppearance
+        '
+        resources.ApplyResources(Me.rdoAppearance, "rdoAppearance")
+        Me.rdoAppearance.Name = "rdoAppearance"
+        Me.rdoAppearance.TabStop = True
+        Me.rdoAppearance.UseVisualStyleBackColor = True
+        '
+        'rdoFrequency
+        '
+        resources.ApplyResources(Me.rdoFrequency, "rdoFrequency")
+        Me.rdoFrequency.Name = "rdoFrequency"
+        Me.rdoFrequency.TabStop = True
+        Me.rdoFrequency.UseVisualStyleBackColor = True
+        '
+        'rdoSequence
+        '
+        resources.ApplyResources(Me.rdoSequence, "rdoSequence")
+        Me.rdoSequence.Name = "rdoSequence"
+        Me.rdoSequence.TabStop = True
+        Me.rdoSequence.UseVisualStyleBackColor = True
+        '
+        'rdoShift
+        '
+        resources.ApplyResources(Me.rdoShift, "rdoShift")
+        Me.rdoShift.Name = "rdoShift"
+        Me.rdoShift.TabStop = True
+        Me.rdoShift.UseVisualStyleBackColor = True
+        '
+        'rdoShuffle
+        '
+        resources.ApplyResources(Me.rdoShuffle, "rdoShuffle")
+        Me.rdoShuffle.Name = "rdoShuffle"
+        Me.rdoShuffle.TabStop = True
+        Me.rdoShuffle.UseVisualStyleBackColor = True
+        '
+        'rdoAnonymise
+        '
+        resources.ApplyResources(Me.rdoAnonymise, "rdoAnonymise")
+        Me.rdoAnonymise.Name = "rdoAnonymise"
+        Me.rdoAnonymise.TabStop = True
+        Me.rdoAnonymise.UseVisualStyleBackColor = True
+        '
+        'lblPrefix
+        '
+        resources.ApplyResources(Me.lblPrefix, "lblPrefix")
+        Me.lblPrefix.Name = "lblPrefix"
+        '
+        'lblVariable
+        '
+        resources.ApplyResources(Me.lblVariable, "lblVariable")
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Tag = "Variable:"
+        '
+        'lblOptions
+        '
+        resources.ApplyResources(Me.lblOptions, "lblOptions")
+        Me.lblOptions.Name = "lblOptions"
+        Me.lblOptions.Tag = "Options"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'ucrInputOptions
+        '
+        Me.ucrInputOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputOptions.GetSetSelectedIndex = -1
+        Me.ucrInputOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOptions, "ucrInputOptions")
+        Me.ucrInputOptions.Name = "ucrInputOptions"
+        '
+        'ucrChkReorderVariable
+        '
+        Me.ucrChkReorderVariable.Checked = False
+        resources.ApplyResources(Me.ucrChkReorderVariable, "ucrChkReorderVariable")
+        Me.ucrChkReorderVariable.Name = "ucrChkReorderVariable"
+        '
+        'ucrReceiverVariable
+        '
+        resources.ApplyResources(Me.ucrReceiverVariable, "ucrReceiverVariable")
+        Me.ucrReceiverVariable.frmParent = Me
+        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
+        Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.ucrSelector = Nothing
+        '
+        'ucrInputPrefix
+        '
+        Me.ucrInputPrefix.AddQuotesIfUnrecognised = True
+        Me.ucrInputPrefix.IsMultiline = False
+        Me.ucrInputPrefix.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPrefix, "ucrInputPrefix")
+        Me.ucrInputPrefix.Name = "ucrInputPrefix"
+        '
+        'ucrNudShift
+        '
+        Me.ucrNudShift.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShift.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudShift, "ucrNudShift")
+        Me.ucrNudShift.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShift.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShift.Name = "ucrNudShift"
+        Me.ucrNudShift.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkReorderOrder
+        '
+        Me.ucrChkReorderOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkReorderOrder, "ucrChkReorderOrder")
+        Me.ucrChkReorderOrder.Name = "ucrChkReorderOrder"
+        '
+        'ucrPnlProperty
+        '
+        resources.ApplyResources(Me.ucrPnlProperty, "ucrPnlProperty")
+        Me.ucrPnlProperty.Name = "ucrPnlProperty"
         '
         'ucrPnlOptions
         '
@@ -127,18 +268,36 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
         Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
         '
-        'ucrSaveGraph
+        'ucrSaveResults
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        resources.ApplyResources(Me.ucrSaveResults, "ucrSaveResults")
+        Me.ucrSaveResults.Name = "ucrSaveResults"
         '
         'dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrSaveResults)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblOptions)
+        Me.Controls.Add(Me.ucrInputOptions)
+        Me.Controls.Add(Me.ucrChkReorderVariable)
+        Me.Controls.Add(Me.lblVariable)
+        Me.Controls.Add(Me.ucrReceiverVariable)
+        Me.Controls.Add(Me.ucrInputPrefix)
+        Me.Controls.Add(Me.ucrNudShift)
+        Me.Controls.Add(Me.lblPrefix)
+        Me.Controls.Add(Me.ucrChkReorderOrder)
+        Me.Controls.Add(Me.rdoAnonymise)
+        Me.Controls.Add(Me.rdoShuffle)
+        Me.Controls.Add(Me.rdoShift)
+        Me.Controls.Add(Me.rdoSequence)
+        Me.Controls.Add(Me.rdoFrequency)
+        Me.Controls.Add(Me.rdoAppearance)
+        Me.Controls.Add(Me.rdoAsIs)
+        Me.Controls.Add(Me.ucrPnlProperty)
         Me.Controls.Add(Me.rdoVariable)
-        Me.Controls.Add(Me.rdoByHand)
+        Me.Controls.Add(Me.rdoHand)
         Me.Controls.Add(Me.rdoProperty)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.lblFactor)
@@ -162,8 +321,26 @@ Partial Class dlgReorderLevels
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrReorderFactor As ucrReorder
     Friend WithEvents rdoVariable As RadioButton
-    Friend WithEvents rdoByHand As RadioButton
+    Friend WithEvents rdoHand As RadioButton
     Friend WithEvents rdoProperty As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
-    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrPnlProperty As UcrPanel
+    Friend WithEvents rdoAnonymise As RadioButton
+    Friend WithEvents rdoShuffle As RadioButton
+    Friend WithEvents rdoShift As RadioButton
+    Friend WithEvents rdoSequence As RadioButton
+    Friend WithEvents rdoFrequency As RadioButton
+    Friend WithEvents rdoAppearance As RadioButton
+    Friend WithEvents rdoAsIs As RadioButton
+    Friend WithEvents ucrInputPrefix As ucrInputTextBox
+    Friend WithEvents ucrNudShift As ucrNud
+    Friend WithEvents lblPrefix As Label
+    Friend WithEvents ucrChkReorderOrder As ucrCheck
+    Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
+    Friend WithEvents ucrChkReorderVariable As ucrCheck
+    Friend WithEvents lblOptions As Label
+    Friend WithEvents ucrInputOptions As ucrInputComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ucrSaveResults As ucrSave
 End Class
