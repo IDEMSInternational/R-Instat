@@ -146,7 +146,7 @@
     <value>Rating Data...</value>
   </data>
   <data name="mnuDescribeOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeOneVariable.Text" xml:space="preserve">
     <value>One Variable</value>
@@ -179,7 +179,7 @@
     <value>Pivot Table...</value>
   </data>
   <data name="mnuDescribeTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeTwoVariables.Text" xml:space="preserve">
     <value>Two Variables</value>
@@ -213,7 +213,7 @@
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeThreeVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeThreeVariable.Text" xml:space="preserve">
     <value>Three Variables</value>
@@ -315,7 +315,7 @@
     <value>Parallel Coordinate Plot...</value>
   </data>
   <data name="mnuDescribeSpecific.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeSpecific.Text" xml:space="preserve">
     <value>Specific</value>
@@ -354,13 +354,13 @@
     <value>Use Summaries...</value>
   </data>
   <data name="mnuDescribeGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeGeneral.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>169, 6</value>
   </data>
   <data name="mnuDescribeMultivariateCorrelations.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 22</value>
@@ -381,22 +381,22 @@
     <value>Canonical Correlations...</value>
   </data>
   <data name="mnuDescribeMultivariate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeMultivariate.Text" xml:space="preserve">
     <value>Multivariate</value>
   </data>
   <data name="ToolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>169, 6</value>
   </data>
   <data name="mnuDescribeUseGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeUseGraph.Text" xml:space="preserve">
     <value>Use Graph...</value>
   </data>
   <data name="mnuDescribeCombineGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeCombineGraph.Text" xml:space="preserve">
     <value>Combine Graphs...</value>
@@ -405,7 +405,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeThemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeThemes.Text" xml:space="preserve">
     <value>Themes...</value>
@@ -414,7 +414,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="mnuDescribeViewGraph.Text" xml:space="preserve">
     <value>View Graph...</value>
@@ -4012,13 +4012,13 @@
     <value>Mapping</value>
   </data>
   <data name="mnuProcurementModelDefineCorruption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 22</value>
+    <value>233, 22</value>
   </data>
   <data name="mnuProcurementModelDefineCorruption.Text" xml:space="preserve">
-    <value>Define Corruption Risk Output Variables...</value>
+    <value>Define Corruption Indicators...</value>
   </data>
   <data name="mnuProcurementModelFitModelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 22</value>
+    <value>233, 22</value>
   </data>
   <data name="mnuProcurementModelFitModelToolStripMenuItem.Text" xml:space="preserve">
     <value>Fit Model...</value>
