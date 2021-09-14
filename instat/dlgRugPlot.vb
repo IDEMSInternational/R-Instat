@@ -43,6 +43,8 @@ Public Class dlgRugPlot
     Private clsGeomTextFunction As New RFunction
     Private clsLabelAesFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
+    Private clsShapeFunction As New RFunction
+    Private clsShapeAes As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
@@ -93,6 +95,10 @@ Public Class dlgRugPlot
         ucrReceiverFill.Selector = ucrHeatMapSelector
         ucrReceiverFill.bWithQuotes = False
 
+        ucrReceiverShape.SetParameterIsString()
+        ucrReceiverShape.Selector = ucrHeatMapSelector
+        ucrReceiverShape.bWithQuotes = False
+
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
@@ -133,6 +139,9 @@ Public Class dlgRugPlot
         ucrChkColourPalette.AddParameterPresentCondition(True, "option")
         ucrChkColourPalette.AddParameterPresentCondition(False, "option", False)
 
+        ucrReceiverShape.AddParameterPresentCondition(True, "geom_point")
+        ucrReceiverShape.AddParameterPresentCondition(False, "geom_point", False)
+
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
@@ -153,6 +162,8 @@ Public Class dlgRugPlot
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsColourPaletteFunction = New RFunction
+        clsShapeFunction = New RFunction
+        clsShapeAes = New RFunction
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -185,6 +196,15 @@ Public Class dlgRugPlot
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
 
+
+        clsShapeFunction.SetPackageName("ggplot2")
+        clsShapeFunction.SetRCommand("geom_point")
+        clsShapeFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeAes, iPosition:=1)
+
+        clsShapeAes.SetPackageName("ggplot2")
+        clsShapeAes.SetRCommand("aes")
+
+
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
 
@@ -214,6 +234,7 @@ Public Class dlgRugPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
+        ucrReceiverShape.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("size", 2), iAdditionalPairNo:=1)
 
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
@@ -227,6 +248,7 @@ Public Class dlgRugPlot
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
         ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
+        ucrReceiverShape.SetRCode(clsRaesFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -237,7 +259,7 @@ Public Class dlgRugPlot
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrChkColourPalette.ControlContentsChanged
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrChkColourPalette.ControlContentsChanged, ucrReceiverShape.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -252,6 +274,14 @@ Public Class dlgRugPlot
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
             clsBaseOperator.RemoveParameterByName("geom_text")
+        End If
+    End Sub
+
+    Private Sub ucrRecieverShape_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShape.ControlValueChanged
+        If (Not ucrReceiverShape.IsEmpty) Then
+            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsShapeFunction, iPosition:=7)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_point")
         End If
     End Sub
 
