@@ -1846,6 +1846,7 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::contains" = tidyselect::contains,
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
+                 "tidyselect::last_col" =  tidyselect::last_col,
                  NULL
                  )
     if (op == "base::match") args$table <- all_column_names
