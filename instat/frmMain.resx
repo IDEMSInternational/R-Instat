@@ -4021,13 +4021,13 @@
     <value>Mapping</value>
   </data>
   <data name="mnuProcurementModelDefineCorruption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 22</value>
+    <value>233, 22</value>
   </data>
   <data name="mnuProcurementModelDefineCorruption.Text" xml:space="preserve">
-    <value>Define Corruption Risk Output Variables...</value>
+    <value>Define Corruption Indicators...</value>
   </data>
   <data name="mnuProcurementModelFitModelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 22</value>
+    <value>233, 22</value>
   </data>
   <data name="mnuProcurementModelFitModelToolStripMenuItem.Text" xml:space="preserve">
     <value>Fit Model...</value>
