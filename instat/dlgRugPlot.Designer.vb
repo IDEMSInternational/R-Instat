@@ -46,6 +46,10 @@ Partial Class dlgRugPlot
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.lblSize = New System.Windows.Forms.Label()
+        Me.lblPointsOptional = New System.Windows.Forms.Label()
+        Me.ucrReceiverPoints = New instat.ucrReceiverSingle()
+        Me.ucrChkColourPalette = New instat.ucrCheck()
+        Me.ucrInputColourPalette = New instat.ucrInputComboBox()
         Me.ucrInputSize = New instat.ucrInputComboBox()
         Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
@@ -56,10 +60,6 @@ Partial Class dlgRugPlot
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputColourPalette = New instat.ucrInputComboBox()
-        Me.ucrChkColourPalette = New instat.ucrCheck()
-        Me.lblShape = New System.Windows.Forms.Label()
-        Me.ucrReceiverShape = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -102,6 +102,35 @@ Partial Class dlgRugPlot
         '
         resources.ApplyResources(Me.lblSize, "lblSize")
         Me.lblSize.Name = "lblSize"
+        '
+        'lblPointsOptional
+        '
+        resources.ApplyResources(Me.lblPointsOptional, "lblPointsOptional")
+        Me.lblPointsOptional.Name = "lblPointsOptional"
+        Me.lblPointsOptional.Tag = ""
+        '
+        'ucrReceiverPoints
+        '
+        Me.ucrReceiverPoints.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverPoints, "ucrReceiverPoints")
+        Me.ucrReceiverPoints.Name = "ucrReceiverPoints"
+        Me.ucrReceiverPoints.Selector = Nothing
+        Me.ucrReceiverPoints.strNcFilePath = ""
+        Me.ucrReceiverPoints.ucrSelector = Nothing
+        '
+        'ucrChkColourPalette
+        '
+        Me.ucrChkColourPalette.Checked = False
+        resources.ApplyResources(Me.ucrChkColourPalette, "ucrChkColourPalette")
+        Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
+        '
+        'ucrInputColourPalette
+        '
+        Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourPalette.GetSetSelectedIndex = -1
+        Me.ucrInputColourPalette.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
+        Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         '
         'ucrInputSize
         '
@@ -179,41 +208,12 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrInputColourPalette
-        '
-        Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourPalette.GetSetSelectedIndex = -1
-        Me.ucrInputColourPalette.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
-        Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
-        '
-        'ucrChkColourPalette
-        '
-        Me.ucrChkColourPalette.Checked = False
-        resources.ApplyResources(Me.ucrChkColourPalette, "ucrChkColourPalette")
-        Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
-        '
-        'lblShape
-        '
-        resources.ApplyResources(Me.lblShape, "lblShape")
-        Me.lblShape.Name = "lblShape"
-        Me.lblShape.Tag = "Shape:"
-        '
-        'ucrReceiverShape
-        '
-        Me.ucrReceiverShape.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverShape, "ucrReceiverShape")
-        Me.ucrReceiverShape.Name = "ucrReceiverShape"
-        Me.ucrReceiverShape.Selector = Nothing
-        Me.ucrReceiverShape.strNcFilePath = ""
-        Me.ucrReceiverShape.ucrSelector = Nothing
-        '
         'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverShape)
-        Me.Controls.Add(Me.lblShape)
+        Me.Controls.Add(Me.ucrReceiverPoints)
+        Me.Controls.Add(Me.lblPointsOptional)
         Me.Controls.Add(Me.ucrChkColourPalette)
         Me.Controls.Add(Me.ucrInputColourPalette)
         Me.Controls.Add(Me.ucrInputSize)
@@ -260,6 +260,6 @@ Partial Class dlgRugPlot
     Friend WithEvents lblSize As Label
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
     Friend WithEvents ucrChkColourPalette As ucrCheck
-    Friend WithEvents ucrReceiverShape As ucrReceiverSingle
-    Friend WithEvents lblShape As Label
+    Friend WithEvents ucrReceiverPoints As ucrReceiverSingle
+    Friend WithEvents lblPointsOptional As Label
 End Class
