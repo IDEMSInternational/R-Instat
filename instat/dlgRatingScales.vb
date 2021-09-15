@@ -39,7 +39,7 @@ Public Class dlgRatingScales
 
         lblOrderedFactor.Text = "Variables:"
 
-        ucrPnlSjpLikert.Enabled = False
+        ucrPnlSjpLikert.Enabled = True
 
 
         ucrPnlGraphType.AddRadioButton(rdoLikert)
@@ -48,7 +48,7 @@ Public Class dlgRatingScales
 
         ucrPnlGraphType.AddFunctionNamesCondition(rdoTable, "sjt.stackfrq")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoStacked, "sjp.stackfrq")
-        '  ucrPnlGraphType.AddFunctionNamesCondition(rdoLikert, "sjp.likert")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoLikert, "sjp.likert")
 
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -68,7 +68,7 @@ Public Class dlgRatingScales
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
         'ucrPnlSortsjp.likert
-        rdoLikert.Enabled = False 'Temporary for now
+        rdoLikert.Enabled = True
         ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 6))
         ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, "NULL")
         ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "last.asc" & Chr(34))
@@ -115,24 +115,25 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
 
         clsSjpLikert.SetPackageName("sjPlot")
-        clsSjpLikert.SetRCommand("sjp.likert")
-        ' clsSjplikert.AddParameter("catcount", 1)
-        'clsSjplikert.AddParameter("cat.neutral")
+        clsSjpLikert.SetRCommand("plot.likert")
+        clsSjpLikert.AddParameter("catcount", 1)
+        clsSjpLikert.AddParameter("cat.neutral")
         clsSjpLikert.AddParameter("coord.flip", "FALSE", iPosition:=12)
 
         clsSjpStackFrq.SetPackageName("sjPlot")
-        clsSjpStackFrq.SetRCommand("sjp.stackfrq")
+        clsSjpStackFrq.SetRCommand("plot_stackfrq")
         clsSjpStackFrq.AddParameter("show.n", "TRUE", iPosition:=11)
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE", iPosition:=12)
         clsSjpStackFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsSjtStackFrq.SetPackageName("sjPlot")
-        clsSjtStackFrq.SetRCommand("sjt.stackfrq")
+        clsSjtStackFrq.SetRCommand("tab_stackfrq")
         clsSjtStackFrq.AddParameter("sort.frq", "NULL", iPosition:=6)
         clsSjtStackFrq.AddParameter("show.n", "TRUE", iPosition:=11)
         clsSjtStackFrq.AddParameter("show.na", "TRUE", iPosition:=13)
         clsSjtStackFrq.AddParameter("show.total", "TRUE", iPosition:=12)
-        clsSjtStackFrq.AddParameter("altr.row.col", "TRUE", iPosition:=7)
+        clsSjtStackFrq.AddParameter("alternate.rows", "TRUE", iPosition:=7)
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -147,7 +148,7 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
-        ' ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjplikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
         ucrPnlSjpLikert.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -161,11 +162,11 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub TestOkEnabled()
-        'If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrNudNeutralLevel.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        ucrBase.OKEnabled(False)
-        'End If
+        If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrNudNeutralLevel.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -214,12 +215,12 @@ Public Class dlgRatingScales
             ucrBase.clsRsyntax.iCallType = 4
         ElseIf rdoStacked.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
@@ -290,17 +291,17 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-    Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrChkNumberOfCategories.ControlValueChanged, ucrSelectorRatingScale.ControlValueChanged
+    Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrChkNumberOfCategories.ControlValueChanged, ucrSelectorRatingScale.ControlValueChanged, ucrPnlGraphType.ControlValueChanged
         NumberOfLevels()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
-        'If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
-        '    ucrChkNumberOfCategories.Checked = False
-        'Else
-        '    ucrChkNumberOfCategories.Checked = True
-        'End If
+        If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
+            ucrChkNumberOfCategories.Checked = False
+        Else
+            ucrChkNumberOfCategories.Checked = True
+        End If
     End Sub
 
 End Class

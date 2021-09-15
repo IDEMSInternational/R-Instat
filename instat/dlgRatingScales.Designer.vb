@@ -19,7 +19,7 @@ Partial Class dlgRatingScales
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class dlgRatingScales
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRatingScales))
         Me.lblOrderedFactor = New System.Windows.Forms.Label()
@@ -62,7 +62,6 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
         Me.SuspendLayout()
@@ -237,17 +236,10 @@ Partial Class dlgRatingScales
         resources.ApplyResources(Me.ucrSelectorRatingScale, "ucrSelectorRatingScale")
         Me.ucrSelectorRatingScale.Name = "ucrSelectorRatingScale"
         '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.UcrDialogDisabled1, "UcrDialogDisabled1")
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        '
         'dlgRatingScales
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
@@ -298,5 +290,4 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class

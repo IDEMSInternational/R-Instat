@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOrderedFactor.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="rdoHighDescendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -324,7 +324,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSort.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrChkNumberOfCategories.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 26</value>
@@ -420,7 +420,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpLikertType.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoStacked.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
@@ -454,7 +454,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoStacked.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoLikert.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -487,7 +487,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoLikert.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoTable.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -520,10 +520,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoTable.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 383</value>
+  </data>
+  <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 24</value>
@@ -541,7 +544,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
     <value>53, 8</value>
@@ -562,7 +565,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrChkFlip.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 271</value>
@@ -583,7 +586,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFlip.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -593,27 +596,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>419, 470</value>
-  </data>
-  <data name="UcrDialogDisabled1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 192</value>
-  </data>
-  <data name="UcrDialogDisabled1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 50</value>
-  </data>
-  <data name="UcrDialogDisabled1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;UcrDialogDisabled1.Name" xml:space="preserve">
-    <value>UcrDialogDisabled1</value>
-  </data>
-  <data name="&gt;&gt;UcrDialogDisabled1.Type" xml:space="preserve">
-    <value>instat.ucrDialogDisabled, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrDialogDisabled1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UcrDialogDisabled1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 245</value>
@@ -634,7 +616,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkWeights.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrReceiverOrderedFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 99</value>
@@ -658,7 +640,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverOrderedFactors.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 413</value>
@@ -679,7 +661,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="ucrSelectorRatingScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
@@ -703,7 +685,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorRatingScale.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -739,6 +721,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
 </root>
