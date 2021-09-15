@@ -154,13 +154,13 @@
     <value>264, 231</value>
   </data>
   <data name="cmdCombineWithAndOr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 27</value>
+    <value>142, 30</value>
   </data>
   <data name="cmdCombineWithAndOr.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="cmdCombineWithAndOr.Text" xml:space="preserve">
-    <value>All Combined with |</value>
+    <value>All combined with |</value>
   </data>
   <data name="&gt;&gt;cmdCombineWithAndOr.Name" xml:space="preserve">
     <value>cmdCombineWithAndOr</value>
@@ -211,7 +211,7 @@
     <value>18</value>
   </data>
   <data name="lblNewSelectName.Text" xml:space="preserve">
-    <value>New Select Name:</value>
+    <value>New column selection name:</value>
   </data>
   <data name="&gt;&gt;lblNewSelectName.Name" xml:space="preserve">
     <value>lblNewSelectName</value>
@@ -238,7 +238,7 @@
     <value>15</value>
   </data>
   <data name="cmdClearConditions.Text" xml:space="preserve">
-    <value>Clear Conditions</value>
+    <value>Clear conditions</value>
   </data>
   <data name="&gt;&gt;cmdClearConditions.Name" xml:space="preserve">
     <value>cmdClearConditions</value>
@@ -253,13 +253,13 @@
     <value>14</value>
   </data>
   <data name="ucrSelectPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 372</value>
+    <value>158, 372</value>
   </data>
   <data name="ucrSelectPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrSelectPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 21</value>
+    <value>248, 21</value>
   </data>
   <data name="ucrSelectPreview.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -283,13 +283,13 @@
     <value>13, 374</value>
   </data>
   <data name="lblSelectPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 19</value>
+    <value>143, 19</value>
   </data>
   <data name="lblSelectPreview.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="lblSelectPreview.Text" xml:space="preserve">
-    <value>Select Preview:</value>
+    <value>Column selection preview:</value>
   </data>
   <data name="&gt;&gt;lblSelectPreview.Name" xml:space="preserve">
     <value>lblSelectPreview</value>
@@ -334,13 +334,13 @@
     <value>275, 85</value>
   </data>
   <data name="cmdAddCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 21</value>
+    <value>112, 30</value>
   </data>
   <data name="cmdAddCondition.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="cmdAddCondition.Text" xml:space="preserve">
-    <value>Add Condition</value>
+    <value>Add condition</value>
   </data>
   <data name="&gt;&gt;cmdAddCondition.Name" xml:space="preserve">
     <value>cmdAddCondition</value>
@@ -358,7 +358,7 @@
     <value>True</value>
   </data>
   <data name="lblSelectBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 38</value>
+    <value>273, 38</value>
   </data>
   <data name="lblSelectBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -640,7 +640,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Select Column(s)</value>
+    <value>Select column(s)</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgSelectColumns</value>

@@ -106,7 +106,7 @@ Partial Class dlgSelectColumns
         '
         resources.ApplyResources(Me.cmdAddCondition, "cmdAddCondition")
         Me.cmdAddCondition.Name = "cmdAddCondition"
-        Me.cmdAddCondition.Tag = "Add_Condition"
+        Me.cmdAddCondition.Tag = "Add_condition"
         Me.cmdAddCondition.UseVisualStyleBackColor = True
         '
         'lblSelectBy

@@ -214,6 +214,7 @@ Public Class dlgSelectColumns
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         If lstColumnSelections.Items.Count > 0 Then
             frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
+            dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
             lstColumnSelections.Items.Clear()
             clsConditionsList.ClearParameters()
         End If

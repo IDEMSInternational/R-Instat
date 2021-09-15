@@ -41,15 +41,15 @@ Partial Class dlgSelect
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
-        Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
-        Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.lblSelection = New System.Windows.Forms.Label()
-        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.ucrPnlApplyOptions = New instat.UcrPanel()
+        Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
+        Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.grpApplyOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,7 +63,7 @@ Partial Class dlgSelect
         Me.grpApplyOptions.Size = New System.Drawing.Size(396, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
-        Me.grpApplyOptions.Text = "Apply Options"
+        Me.grpApplyOptions.Text = "Apply options"
         '
         'rdoApplyAsSubset
         '
@@ -87,14 +87,51 @@ Partial Class dlgSelect
         Me.rdoApplyAsSelect.Text = "Apply as selected columns"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
         '
+        'lblSelection
+        '
+        Me.lblSelection.AutoSize = True
+        Me.lblSelection.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelection.Location = New System.Drawing.Point(250, 55)
+        Me.lblSelection.Name = "lblSelection"
+        Me.lblSelection.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelection.TabIndex = 1
+        Me.lblSelection.Text = "Column selection:"
+        '
+        'cmdDefineNewSelect
+        '
+        Me.cmdDefineNewSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDefineNewSelect.Location = New System.Drawing.Point(250, 98)
+        Me.cmdDefineNewSelect.Name = "cmdDefineNewSelect"
+        Me.cmdDefineNewSelect.Size = New System.Drawing.Size(157, 30)
+        Me.cmdDefineNewSelect.TabIndex = 3
+        Me.cmdDefineNewSelect.Tag = ""
+        Me.cmdDefineNewSelect.Text = "Define new column selection"
+        Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
+        '
+        'lblFilterPreview
+        '
+        Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFilterPreview.Location = New System.Drawing.Point(11, 303)
+        Me.lblFilterPreview.Name = "lblFilterPreview"
+        Me.lblFilterPreview.Size = New System.Drawing.Size(132, 22)
+        Me.lblFilterPreview.TabIndex = 6
+        Me.lblFilterPreview.Text = "Column selection preview:"
+        '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(0, 13)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(390, 36)
+        Me.ucrPnlApplyOptions.TabIndex = 2
+        '
         'ucrInputSelectPreview
         '
         Me.ucrInputSelectPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectPreview.IsMultiline = True
         Me.ucrInputSelectPreview.IsReadOnly = False
-        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(141, 294)
+        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(146, 294)
         Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
-        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(277, 43)
+        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(269, 43)
         Me.ucrInputSelectPreview.TabIndex = 7
         '
         'ucrReceiverSelect
@@ -109,16 +146,6 @@ Partial Class dlgSelect
         Me.ucrReceiverSelect.TabIndex = 2
         Me.ucrReceiverSelect.ucrSelector = Nothing
         '
-        'lblSelection
-        '
-        Me.lblSelection.AutoSize = True
-        Me.lblSelection.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelection.Location = New System.Drawing.Point(250, 55)
-        Me.lblSelection.Name = "lblSelection"
-        Me.lblSelection.Size = New System.Drawing.Size(90, 13)
-        Me.lblSelection.TabIndex = 1
-        Me.lblSelection.Text = "Column selection:"
-        '
         'ucrSelectorForSelectColumns
         '
         Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
@@ -130,17 +157,6 @@ Partial Class dlgSelect
         Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForSelectColumns.TabIndex = 0
         '
-        'cmdDefineNewSelect
-        '
-        Me.cmdDefineNewSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDefineNewSelect.Location = New System.Drawing.Point(250, 98)
-        Me.cmdDefineNewSelect.Name = "cmdDefineNewSelect"
-        Me.cmdDefineNewSelect.Size = New System.Drawing.Size(157, 30)
-        Me.cmdDefineNewSelect.TabIndex = 3
-        Me.cmdDefineNewSelect.Tag = ""
-        Me.cmdDefineNewSelect.Text = "Define new column selection"
-        Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
-        '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(11, 343)
@@ -150,27 +166,11 @@ Partial Class dlgSelect
         '
         'ucrNewDataFrameName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(11, 271)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(11, 267)
         Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(344, 24)
         Me.ucrNewDataFrameName.TabIndex = 5
-        '
-        'lblFilterPreview
-        '
-        Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFilterPreview.Location = New System.Drawing.Point(11, 303)
-        Me.lblFilterPreview.Name = "lblFilterPreview"
-        Me.lblFilterPreview.Size = New System.Drawing.Size(118, 22)
-        Me.lblFilterPreview.TabIndex = 6
-        Me.lblFilterPreview.Text = "Select preview:"
-        '
-        'ucrPnlApplyOptions
-        '
-        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(0, 13)
-        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(390, 36)
-        Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'dlgSelect
         '
