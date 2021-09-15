@@ -460,7 +460,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Delete Rows or Columns</value>
+    <value>Delete Columns or Rows</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgDeleteRowsOrColums</value>
