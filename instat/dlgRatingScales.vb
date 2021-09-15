@@ -39,7 +39,7 @@ Public Class dlgRatingScales
 
         lblOrderedFactor.Text = "Variables:"
 
-        ucrPnlSjpLikert.Enabled = True
+        ucrPnlSjpLikert.Enabled = False
 
 
         ucrPnlGraphType.AddRadioButton(rdoLikert)
@@ -115,14 +115,14 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
 
         clsSjpLikert.SetPackageName("sjPlot")
-        clsSjpLikert.SetRCommand("plot.likert")
+        clsSjpLikert.SetRCommand("plot_likert")
         clsSjpLikert.AddParameter("catcount", 1)
-        clsSjpLikert.AddParameter("cat.neutral")
+        clsSjpLikert.AddParameter("cat.neutral", "NULL")
         clsSjpLikert.AddParameter("coord.flip", "FALSE", iPosition:=12)
 
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("plot_stackfrq")
-        clsSjpStackFrq.AddParameter("show.n", "TRUE", iPosition:=11)
+        clsSjpStackFrq.AddParameter("show.n", "FALSE", iPosition:=11)
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE", iPosition:=12)
         clsSjpStackFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -148,7 +148,7 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
-        ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
+        'ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
         ucrPnlSjpLikert.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -212,10 +212,11 @@ Public Class dlgRatingScales
     Private Sub SetBaseFunction()
         If rdoLikert.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpLikert)
-            ucrBase.clsRsyntax.iCallType = 4
+            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoStacked.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
-            ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
