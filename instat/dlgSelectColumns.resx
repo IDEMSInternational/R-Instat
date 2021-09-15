@@ -418,7 +418,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 55</value>
+    <value>388, 81</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -448,7 +448,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 81</value>
+    <value>388, 107</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -472,7 +472,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 77</value>
+    <value>423, 103</value>
   </data>
   <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -493,7 +493,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 54</value>
+    <value>423, 80</value>
   </data>
   <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>

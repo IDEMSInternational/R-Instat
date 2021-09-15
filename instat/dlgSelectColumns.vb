@@ -49,10 +49,10 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputSelectOperation.AddToLinkedControls({ucrInputText, ucrChkIgnoreCase}, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrReceiverMultipleVariables, {"Columns"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputSelectOperation.AddToLinkedControls(ucrNudFrom, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputSelectOperation.AddToLinkedControls(ucrNudTo, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputSelectOperation.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputSelectOperation.AddToLinkedControls(ucrInputText, {"Numeric range", "Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleVariables.SetLinkedDisplayControl(lblSeclectedColumns)
         ucrInputText.SetLinkedDisplayControl(lblString)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
@@ -157,7 +157,8 @@ Public Class dlgSelectColumns
             clsParametersList.AddParameter("x", ucrReceiverMultipleVariables.GetVariableNames, iPosition:=0)
             strValue = ucrReceiverMultipleVariables.GetVariableNames(False)
         ElseIf ucrInputSelectOperation.GetText = "Numeric range" Then
-            clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=0)
+            clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+            clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
             strValue = clsFromToOperation.ToScript
         Else
             clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
@@ -191,11 +192,11 @@ Public Class dlgSelectColumns
                 bEnableOrDisable = False
             End If
         ElseIf ucrInputSelectOperation.GetText = "Numeric range" Then
-            If ucrNudFrom.GetText = "" OrElse ucrNudTo.GetText = "" Then
+            If ucrNudFrom.IsEmpty OrElse ucrNudTo.IsEmpty OrElse ucrInputText.IsEmpty Then
                 bEnableOrDisable = False
             End If
         Else
-            If ucrInputText.GetText = "" Then
+            If ucrInputText.IsEmpty Then
                 bEnableOrDisable = False
             End If
         End If
