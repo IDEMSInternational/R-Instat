@@ -49,6 +49,7 @@ Partial Class dlgSelect
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
+        Me.ucrPnlApplyOptions = New instat.UcrPanel()
         Me.grpApplyOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -56,6 +57,7 @@ Partial Class dlgSelect
         '
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSelect)
+        Me.grpApplyOptions.Controls.Add(Me.ucrPnlApplyOptions)
         Me.grpApplyOptions.Location = New System.Drawing.Point(11, 207)
         Me.grpApplyOptions.Name = "grpApplyOptions"
         Me.grpApplyOptions.Size = New System.Drawing.Size(396, 53)
@@ -148,10 +150,10 @@ Partial Class dlgSelect
         '
         'ucrNewDataFrameName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(11, 264)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(11, 271)
         Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(291, 24)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(344, 24)
         Me.ucrNewDataFrameName.TabIndex = 5
         '
         'lblFilterPreview
@@ -162,6 +164,13 @@ Partial Class dlgSelect
         Me.lblFilterPreview.Size = New System.Drawing.Size(118, 22)
         Me.lblFilterPreview.TabIndex = 6
         Me.lblFilterPreview.Text = "Select preview:"
+        '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(0, 13)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(390, 36)
+        Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'dlgSelect
         '
@@ -200,4 +209,5 @@ Partial Class dlgSelect
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrNewDataFrameName As ucrSave
     Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrPnlApplyOptions As UcrPanel
 End Class

@@ -17,12 +17,19 @@
 Imports instat.Translations
 Public Class dlgSelect
     Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsSetCurrentColumnSelection As RFunction
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRcodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -33,6 +40,19 @@ Public Class dlgSelect
         ucrReceiverSelect.Selector = ucrSelectorForSelectColumns
         ucrReceiverSelect.SetMeAsReceiver()
 
+        ucrSelectorForSelectColumns.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForSelectColumns.SetParameterIsString()
+
+        ucrReceiverSelect.SetParameter(New RParameter("name", 1))
+        ucrReceiverSelect.SetParameterIsString()
+
+        ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
+        ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
+        rdoApplyAsSubset.Enabled = False
+
+
+        ucrPnlApplyOptions.AddToLinkedControls({ucrNewDataFrameName}, {rdoApplyAsSubset}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrNewDataFrameName.SetIsTextBox()
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorForSelectColumns.ucrAvailableDataFrames)
@@ -40,14 +60,36 @@ Public Class dlgSelect
     End Sub
 
     Private Sub SetDefaults()
+        clsSetCurrentColumnSelection = New RFunction
         ucrSelectorForSelectColumns.Reset()
+        rdoApplyAsSelect.Checked = True
+
+        clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
+    End Sub
+
+    Private Sub SetRcodeForControls(bReset As Boolean)
+        ucrSelectorForSelectColumns.SetRCode(clsSetCurrentColumnSelection, bReset)
+        ucrReceiverSelect.SetRCode(clsSetCurrentColumnSelection, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRcodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
         dlgSelectColumns.ShowDialog()
+        ucrSelectorForSelectColumns.LoadList()
+    End Sub
+
+    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

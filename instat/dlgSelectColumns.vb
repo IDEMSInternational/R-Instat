@@ -19,7 +19,6 @@ Public Class dlgSelectColumns
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsAddColumnSelection As RFunction
-    Private clsSetCurrentColumnSelection As RFunction
     Private clsConditionsList As RFunction
     Private clsFromToOperation As ROperator
     Private Sub dlgSelectColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -82,7 +81,6 @@ Public Class dlgSelectColumns
 
     Private Sub SetDefaults()
         clsAddColumnSelection = New RFunction
-        clsSetCurrentColumnSelection = New RFunction
         clsConditionsList = New RFunction
         clsFromToOperation = New ROperator
 
@@ -90,7 +88,6 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetText("Columns")
 
         clsConditionsList.SetRCommand("list")
-        'clsConditionsList.SetAssignTo("conds")
 
         clsFromToOperation.SetOperation(":")
         clsFromToOperation.AddParameter("from", 1, iPosition:=0)
@@ -100,9 +97,6 @@ Public Class dlgSelectColumns
         clsAddColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_column_selection")
         clsAddColumnSelection.AddParameter("column_selection", clsRFunctionParameter:=clsConditionsList, iPosition:=2)
         clsAddColumnSelection.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
-
-        clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
-
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -116,20 +110,12 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
-        If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
-            cmdCombineWithAndOr.Text = " All combined with &&"
-            clsAddColumnSelection.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
-        Else
-            cmdCombineWithAndOr.Text = "All combined with |"
+        If cmdCombineWithAndOr.Text.Contains("All combined with &") Then
+            cmdCombineWithAndOr.Text = " All combined with |"
             clsAddColumnSelection.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
-        End If
-    End Sub
-
-    Private Sub ucrSelectorForColumnSelection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForColumnSelection.ControlValueChanged
-        If ucrSelectorForColumnSelection.ucrAvailableDataFrames.strCurrDataFrame <> "" Then
-            clsSetCurrentColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorForColumnSelection.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         Else
-            clsSetCurrentColumnSelection.RemoveParameterByName("data_name")
+            cmdCombineWithAndOr.Text = "All combined with &&"
+            clsAddColumnSelection.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
         End If
     End Sub
 
@@ -137,7 +123,6 @@ Public Class dlgSelectColumns
         If clsAddColumnSelection IsNot Nothing Then
             If Not ucrInputSelectName.IsEmpty() Then
                 clsAddColumnSelection.AddParameter("name", Chr(34) & ucrInputSelectName.GetText() & Chr(34), iPosition:=1)
-                clsSetCurrentColumnSelection.AddParameter("name", Chr(34) & ucrInputSelectName.GetText() & Chr(34), iPosition:=1)
             Else
                 clsAddColumnSelection.RemoveParameterByName("name")
             End If
