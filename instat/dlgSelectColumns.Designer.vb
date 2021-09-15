@@ -23,36 +23,30 @@ Partial Class dlgSelectColumns
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSelectColumns))
-        Me.ucrSelectorForColumnSelection = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
-        Me.ucrInputSelectName = New instat.ucrInputComboBox()
         Me.lblNewSelectName = New System.Windows.Forms.Label()
         Me.cmdClearConditions = New System.Windows.Forms.Button()
-        Me.ucrSelectPreview = New instat.ucrInputTextBox()
         Me.lblSelectPreview = New System.Windows.Forms.Label()
         Me.lstColumnSelections = New System.Windows.Forms.ListView()
         Me.cmdAddCondition = New System.Windows.Forms.Button()
         Me.lblSelectBy = New System.Windows.Forms.Label()
-        Me.ucrInputSelectOperation = New instat.ucrInputComboBox()
-        Me.ucrReceiverMultipleVariables = New instat.ucrReceiverMultiple()
         Me.lblSeclectedColumns = New System.Windows.Forms.Label()
-        Me.ucrInputText = New instat.ucrInputTextBox()
         Me.lblString = New System.Windows.Forms.Label()
-        Me.ucrChkIgnoreCase = New instat.ucrCheck()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
+        Me.lblColumnType = New System.Windows.Forms.Label()
+        Me.ucrInputColumnType = New instat.ucrInputComboBox()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkIgnoreCase = New instat.ucrCheck()
+        Me.ucrInputSelectOperation = New instat.ucrInputComboBox()
+        Me.ucrInputSelectName = New instat.ucrInputComboBox()
+        Me.ucrSelectPreview = New instat.ucrInputTextBox()
+        Me.ucrSelectorForColumnSelection = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputText = New instat.ucrInputTextBox()
+        Me.ucrReceiverMultipleVariables = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
-        '
-        'ucrSelectorForColumnSelection
-        '
-        Me.ucrSelectorForColumnSelection.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForColumnSelection.bShowHiddenColumns = False
-        Me.ucrSelectorForColumnSelection.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForColumnSelection, "ucrSelectorForColumnSelection")
-        Me.ucrSelectorForColumnSelection.Name = "ucrSelectorForColumnSelection"
         '
         'cmdCombineWithAndOr
         '
@@ -60,14 +54,6 @@ Partial Class dlgSelectColumns
         Me.cmdCombineWithAndOr.Name = "cmdCombineWithAndOr"
         Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
         Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
-        '
-        'ucrInputSelectName
-        '
-        Me.ucrInputSelectName.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectName.GetSetSelectedIndex = -1
-        Me.ucrInputSelectName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSelectName, "ucrInputSelectName")
-        Me.ucrInputSelectName.Name = "ucrInputSelectName"
         '
         'lblNewSelectName
         '
@@ -80,14 +66,6 @@ Partial Class dlgSelectColumns
         Me.cmdClearConditions.Name = "cmdClearConditions"
         Me.cmdClearConditions.Tag = "Clear_Conditions"
         Me.cmdClearConditions.UseVisualStyleBackColor = True
-        '
-        'ucrSelectPreview
-        '
-        Me.ucrSelectPreview.AddQuotesIfUnrecognised = True
-        Me.ucrSelectPreview.IsMultiline = False
-        Me.ucrSelectPreview.IsReadOnly = False
-        resources.ApplyResources(Me.ucrSelectPreview, "ucrSelectPreview")
-        Me.ucrSelectPreview.Name = "ucrSelectPreview"
         '
         'lblSelectPreview
         '
@@ -114,71 +92,15 @@ Partial Class dlgSelectColumns
         resources.ApplyResources(Me.lblSelectBy, "lblSelectBy")
         Me.lblSelectBy.Name = "lblSelectBy"
         '
-        'ucrInputSelectOperation
-        '
-        Me.ucrInputSelectOperation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectOperation.GetSetSelectedIndex = -1
-        Me.ucrInputSelectOperation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSelectOperation, "ucrInputSelectOperation")
-        Me.ucrInputSelectOperation.Name = "ucrInputSelectOperation"
-        '
-        'ucrReceiverMultipleVariables
-        '
-        Me.ucrReceiverMultipleVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleVariables, "ucrReceiverMultipleVariables")
-        Me.ucrReceiverMultipleVariables.Name = "ucrReceiverMultipleVariables"
-        Me.ucrReceiverMultipleVariables.Selector = Nothing
-        Me.ucrReceiverMultipleVariables.strNcFilePath = ""
-        Me.ucrReceiverMultipleVariables.ucrSelector = Nothing
-        '
         'lblSeclectedColumns
         '
         resources.ApplyResources(Me.lblSeclectedColumns, "lblSeclectedColumns")
         Me.lblSeclectedColumns.Name = "lblSeclectedColumns"
         '
-        'ucrInputText
-        '
-        Me.ucrInputText.AddQuotesIfUnrecognised = True
-        Me.ucrInputText.IsMultiline = False
-        Me.ucrInputText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputText, "ucrInputText")
-        Me.ucrInputText.Name = "ucrInputText"
-        '
         'lblString
         '
         resources.ApplyResources(Me.lblString, "lblString")
         Me.lblString.Name = "lblString"
-        '
-        'ucrChkIgnoreCase
-        '
-        Me.ucrChkIgnoreCase.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreCase, "ucrChkIgnoreCase")
-        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblTo
         '
@@ -190,10 +112,105 @@ Partial Class dlgSelectColumns
         resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
         '
+        'lblColumnType
+        '
+        resources.ApplyResources(Me.lblColumnType, "lblColumnType")
+        Me.lblColumnType.Name = "lblColumnType"
+        '
+        'ucrInputColumnType
+        '
+        Me.ucrInputColumnType.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnType.GetSetSelectedIndex = -1
+        Me.ucrInputColumnType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColumnType, "ucrInputColumnType")
+        Me.ucrInputColumnType.Name = "ucrInputColumnType"
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrChkIgnoreCase
+        '
+        Me.ucrChkIgnoreCase.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreCase, "ucrChkIgnoreCase")
+        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        '
+        'ucrInputSelectOperation
+        '
+        Me.ucrInputSelectOperation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectOperation.GetSetSelectedIndex = -1
+        Me.ucrInputSelectOperation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSelectOperation, "ucrInputSelectOperation")
+        Me.ucrInputSelectOperation.Name = "ucrInputSelectOperation"
+        '
+        'ucrInputSelectName
+        '
+        Me.ucrInputSelectName.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectName.GetSetSelectedIndex = -1
+        Me.ucrInputSelectName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSelectName, "ucrInputSelectName")
+        Me.ucrInputSelectName.Name = "ucrInputSelectName"
+        '
+        'ucrSelectPreview
+        '
+        Me.ucrSelectPreview.AddQuotesIfUnrecognised = True
+        Me.ucrSelectPreview.IsMultiline = False
+        Me.ucrSelectPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrSelectPreview, "ucrSelectPreview")
+        Me.ucrSelectPreview.Name = "ucrSelectPreview"
+        '
+        'ucrSelectorForColumnSelection
+        '
+        Me.ucrSelectorForColumnSelection.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForColumnSelection.bShowHiddenColumns = False
+        Me.ucrSelectorForColumnSelection.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForColumnSelection, "ucrSelectorForColumnSelection")
+        Me.ucrSelectorForColumnSelection.Name = "ucrSelectorForColumnSelection"
+        '
+        'ucrInputText
+        '
+        Me.ucrInputText.AddQuotesIfUnrecognised = True
+        Me.ucrInputText.IsMultiline = False
+        Me.ucrInputText.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputText, "ucrInputText")
+        Me.ucrInputText.Name = "ucrInputText"
+        '
+        'ucrReceiverMultipleVariables
+        '
+        Me.ucrReceiverMultipleVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleVariables, "ucrReceiverMultipleVariables")
+        Me.ucrReceiverMultipleVariables.Name = "ucrReceiverMultipleVariables"
+        Me.ucrReceiverMultipleVariables.Selector = Nothing
+        Me.ucrReceiverMultipleVariables.strNcFilePath = ""
+        Me.ucrReceiverMultipleVariables.ucrSelector = Nothing
+        '
         'dlgSelectColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblColumnType)
+        Me.Controls.Add(Me.ucrInputColumnType)
         Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.ucrNudTo)
@@ -245,4 +262,6 @@ Partial Class dlgSelectColumns
     Friend WithEvents lblTo As Label
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents ucrInputColumnType As ucrInputComboBox
+    Friend WithEvents lblColumnType As Label
 End Class

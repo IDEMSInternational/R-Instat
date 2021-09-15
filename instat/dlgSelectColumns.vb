@@ -31,7 +31,6 @@ Public Class dlgSelectColumns
         End If
         SetRcodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -45,18 +44,22 @@ Public Class dlgSelectColumns
         ucrReceiverMultipleVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverMultipleVariables.SetParameterIsString()
 
-        ucrInputSelectOperation.SetParameter(New RParameter("operation", 0))
-        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range"})
+        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
+
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character"})
+        ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrReceiverMultipleVariables, {"Columns"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrInputText, {"Numeric range", "Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleVariables.SetLinkedDisplayControl(lblSeclectedColumns)
         ucrInputText.SetLinkedDisplayControl(lblString)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrInputColumnType.SetLinkedDisplayControl(lblColumnType)
 
         ucrChkIgnoreCase.SetParameter(New RParameter("ignore.case", 1))
         ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -86,6 +89,7 @@ Public Class dlgSelectColumns
 
         ucrSelectorForColumnSelection.Reset()
         ucrInputSelectOperation.SetText("Columns")
+        ucrInputColumnType.SetText("Numeric")
 
         clsConditionsList.SetRCommand("list")
 
@@ -103,10 +107,6 @@ Public Class dlgSelectColumns
         ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset)
         ucrNudFrom.SetRCode(clsFromToOperation, bReset)
         ucrNudTo.SetRCode(clsFromToOperation, bReset)
-    End Sub
-
-    Private Sub TestOkEnabled()
-
     End Sub
 
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
@@ -141,35 +141,63 @@ Public Class dlgSelectColumns
         clsParametersList.SetRCommand("list")
         Select Case strOperation
             Case "Columns"
-                clsCurrentConditionList.AddParameter("operation", Chr(34) & "base::match" & Chr(34))
+                clsCurrentConditionList.AddParameter("operation", Chr(34) & "base::match" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("x", ucrReceiverMultipleVariables.GetVariableNames, iPosition:=0)
+                strValue = ucrReceiverMultipleVariables.GetVariableNames(False)
             Case "Starts with"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::starts_with" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+                strValue = ucrInputText.GetText
+                If ucrChkIgnoreCase.Checked Then
+                    clsParametersList.AddParameter("ignore.case", "TRUE", iPosition:=1)
+                Else
+                    clsParametersList.AddParameter("ignore.case", "FALSE", iPosition:=1)
+                End If
             Case "Ends with"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::ends_with" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+                strValue = ucrInputText.GetText
+                If ucrChkIgnoreCase.Checked Then
+                    clsParametersList.AddParameter("ignore.case", "TRUE", iPosition:=1)
+                Else
+                    clsParametersList.AddParameter("ignore.case", "FALSE", iPosition:=1)
+                End If
             Case "Contains"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::contains" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+                strValue = ucrInputText.GetText
+                If ucrChkIgnoreCase.Checked Then
+                    clsParametersList.AddParameter("ignore.case", "TRUE", iPosition:=1)
+                Else
+                    clsParametersList.AddParameter("ignore.case", "FALSE", iPosition:=1)
+                End If
             Case "Matches"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::matches" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+                strValue = ucrInputText.GetText
+                If ucrChkIgnoreCase.Checked Then
+                    clsParametersList.AddParameter("ignore.case", "TRUE", iPosition:=1)
+                Else
+                    clsParametersList.AddParameter("ignore.case", "FALSE", iPosition:=1)
+                End If
             Case "Numeric range"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::num_range" & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
+                clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
+                strValue = clsFromToOperation.ToScript
+                'Case "Where"
+                'clsCurrentConditionList.AddParameter("operation", Chr(34) & "where" & Chr(34), iPosition:=0)
+                'If ucrInputColumnType.GetText = "Numeric" Then
+                'clsParametersList.AddParameter("fn", "is.numeric", iPosition:=0)
+                'ElseIf ucrInputColumnType.GetText = "Factor" Then
+                'clsParametersList.AddParameter("fn", "is.factor", iPosition:=0)
+                'ElseIf ucrInputColumnType.GetText = "Character" Then
+                'clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
+                'End If
+            Case "Last column"
+                strValue = "Last column"
+                clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::last_col" & Chr(34), iPosition:=0)
         End Select
-        If ucrInputSelectOperation.GetText = "Columns" Then
-            clsParametersList.AddParameter("x", ucrReceiverMultipleVariables.GetVariableNames, iPosition:=0)
-            strValue = ucrReceiverMultipleVariables.GetVariableNames(False)
-        ElseIf ucrInputSelectOperation.GetText = "Numeric range" Then
-            clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
-            clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
-            strValue = clsFromToOperation.ToScript
-        Else
-            clsParametersList.AddParameter("match", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
-            strValue = ucrInputText.GetText
-            If ucrChkIgnoreCase.Checked Then
-                clsParametersList.AddParameter("ignore.case", "TRUE", iPosition:=1)
-            Else
-                clsParametersList.AddParameter("ignore.case", "FALSE", iPosition:=1)
-            End If
-        End If
-
         clsCurrentConditionList.AddParameter("parameters", clsRFunctionParameter:=clsParametersList, iPosition:=1)
 
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
@@ -187,19 +215,26 @@ Public Class dlgSelectColumns
 
     Private Sub EnableDisableAddConditionButton()
         Dim bEnableOrDisable As Boolean = True
-        If ucrInputSelectOperation.GetText = "Columns" Then
-            If ucrReceiverMultipleVariables.IsEmpty Then
-                bEnableOrDisable = False
-            End If
-        ElseIf ucrInputSelectOperation.GetText = "Numeric range" Then
-            If ucrNudFrom.IsEmpty OrElse ucrNudTo.IsEmpty OrElse ucrInputText.IsEmpty Then
-                bEnableOrDisable = False
-            End If
-        Else
-            If ucrInputText.IsEmpty Then
-                bEnableOrDisable = False
-            End If
-        End If
+        Dim strOperation As String
+        strOperation = ucrInputSelectOperation.GetText
+        Select Case strOperation
+            Case "Columns"
+                If ucrReceiverMultipleVariables.IsEmpty Then
+                    bEnableOrDisable = False
+                End If
+            Case "Starts with", "Ends with", "Contains", "Matches"
+                If ucrInputText.IsEmpty Then
+                    bEnableOrDisable = False
+                End If
+            Case "Numeric range"
+                If ucrNudFrom.IsEmpty OrElse ucrNudTo.IsEmpty OrElse ucrInputText.IsEmpty Then
+                    bEnableOrDisable = False
+                End If
+            Case "Where"
+                '
+            Case "Last column"
+                '
+        End Select
         cmdAddCondition.Enabled = bEnableOrDisable
     End Sub
 
