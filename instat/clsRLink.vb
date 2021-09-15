@@ -1545,6 +1545,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_filter_names")
+                Case "column_selection"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_column_selection_names")
                 Case "object"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_object_names")
                 Case "model"
