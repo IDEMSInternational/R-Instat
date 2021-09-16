@@ -113,6 +113,7 @@ Public Class dlgReorderLevels
 
         ucrNudShift.SetParameter(New RParameter("n", 1))
         ucrNudShift.SetMinMax(-35, 50)
+        ucrNudShift.SetRDefault(0)
 
         ucrInputPrefix.SetParameter(New RParameter("prefix", 1))
 
@@ -186,7 +187,6 @@ Public Class dlgReorderLevels
         clsForcatsReorder.SetPackageName("forcats")
         clsForcatsReorder.SetRCommand("fct_reorder")
 
-
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
         clsReorder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
@@ -199,6 +199,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInSeq, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShift, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShuffle, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsAnonymise, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInOrder, iAdditionalPairNo:=1)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInFreq, iAdditionalPairNo:=2)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInSeq, iAdditionalPairNo:=3)
