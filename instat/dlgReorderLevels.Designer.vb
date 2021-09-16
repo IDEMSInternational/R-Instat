@@ -68,6 +68,7 @@ Partial Class dlgReorderLevels
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReorderFactor = New instat.ucrReorder()
         Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactorX = New instat.ucrReceiverSingle()
         Me.grpMethods.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -293,10 +294,20 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
         Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
         '
+        'ucrReceiverFactorX
+        '
+        resources.ApplyResources(Me.ucrReceiverFactorX, "ucrReceiverFactorX")
+        Me.ucrReceiverFactorX.frmParent = Me
+        Me.ucrReceiverFactorX.Name = "ucrReceiverFactorX"
+        Me.ucrReceiverFactorX.Selector = Nothing
+        Me.ucrReceiverFactorX.strNcFilePath = ""
+        Me.ucrReceiverFactorX.ucrSelector = Nothing
+        '
         'dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverFactorX)
         Me.Controls.Add(Me.grpMethods)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.Label1)
@@ -355,4 +366,5 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoAppearance As RadioButton
     Friend WithEvents rdoAsIs As RadioButton
     Friend WithEvents ucrPnlProperty As UcrPanel
+    Friend WithEvents ucrReceiverFactorX As ucrReceiverSingle
 End Class

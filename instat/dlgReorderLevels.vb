@@ -53,8 +53,8 @@ Public Class dlgReorderLevels
         ucrPnlOptions.AddFunctionNamesCondition(rdoVariable, "fct_reorder")
 
         ucrPnlOptions.AddToLinkedControls(ucrReorderFactor, {rdoHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrChkReorderOrder, {rdoProperty}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverVariable, ucrInputOptions, ucrChkReorderVariable}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkReorderOrder, ucrReceiverFactorX}, {rdoProperty}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverVariable, ucrInputOptions, ucrChkReorderVariable, ucrReceiverFactorX}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkReorderOrder.SetLinkedDisplayControl(grpMethods)
         ucrInputOptions.SetLinkedDisplayControl(lblOptions)
         ucrReceiverVariable.SetLinkedDisplayControl(lblVariable)
@@ -69,6 +69,16 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsString()
+
+        'Setting receiver data types and parameters
+        ucrReceiverFactorX.SetParameter(New RParameter("f", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverFactorX.Selector = ucrSelectorFactorLevelsToReorder
+        ucrReceiverFactorX.strSelectorHeading = "Factors"
+        ucrReceiverFactorX.SetIncludedDataTypes({"factor"}, bStrict:=True)
+        'ucrReceiverFactorX.bUseFilteredData = False
+        'ucrReceiverFactorX.bForceAsDataFrame = True
+        ucrReceiverFactorX.SetParameterIsRFunction()
+        ucrReceiverFactorX.SetMeAsReceiver()
 
         'Set reorder scroll list view & datatype accepted
         ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
@@ -125,12 +135,12 @@ Public Class dlgReorderLevels
         ucrPnlProperty.AddToLinkedControls(ucrInputPrefix, {rdoAnonymise}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPrefix.SetLinkedDisplayControl(lblPrefix)
 
-        ucrSaveResults.SetPrefix("row_summary")
+        ucrSaveResults.SetPrefix("new_column")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Save As:")
+        ucrSaveResults.SetLabelText("New Column Name:")
         ucrSaveResults.SetIsComboBox()
-        'ucrSaveResults.setLinkedReceiver(ucrReceiverForRowSummaries)
+        'ucrSaveResults.setLinkedReceiver(ucrReceiverFactorX)
     End Sub
 
     Private Sub SetDefaults()
@@ -184,13 +194,19 @@ Public Class dlgReorderLevels
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsForcatsInOrder, New RParameter("f", 0), iAdditionalPairNo:=1)
-        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsForcatsInFreq, New RParameter("f", 0), iAdditionalPairNo:=2)
-        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsForcatsInSeq, New RParameter("f", 0), iAdditionalPairNo:=3)
-        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsForcatsShift, New RParameter("f", 0), iAdditionalPairNo:=4)
-        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsForcatsShuffle, New RParameter("f", 0), iAdditionalPairNo:=5)
+        'ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInOrder, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInFreq, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInSeq, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShift, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShuffle, New RParameter("f", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsInOrder, iAdditionalPairNo:=1)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsInFreq, iAdditionalPairNo:=2)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsInSeq, iAdditionalPairNo:=3)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsShift, iAdditionalPairNo:=4)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsShuffle, iAdditionalPairNo:=5)
         ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
         ucrReceiverFactor.SetRCode(clsReorder, bReset)
+        ucrReceiverFactorX.SetRCode(clsForcatsInOrder)
         ucrReorderFactor.SetRCode(clsReorder, bReset)
         ucrSaveResults.SetRCode(clsReorder, bReset)
         ucrChkReorderOrder.SetRCode(clsReorder, bReset)
@@ -198,6 +214,7 @@ Public Class dlgReorderLevels
         ucrReceiverVariable.SetRCode(clsReorder, bReset)
         ucrChkReorderVariable.SetRCode(clsReorder, bReset)
         ucrInputPrefix.SetRCode(clsForcatsAnonymise, bReset)
+        ucrNudShift.SetRCode(clsForcatsShift, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -214,10 +231,30 @@ Public Class dlgReorderLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrChkReorderOrder.ControlValueChanged
         If rdoAppearance.Checked Then
             clsForcatsInOrder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrder)
+        End If
+        If rdoFrequency.Checked Then
+            clsForcatsInFreq.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInFreq)
+        End If
+        If rdoSequence.Checked Then
+            clsForcatsInSeq.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeq)
+        End If
+        If rdoShift.Checked Then
+            clsForcatsShift.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShift)
+        End If
+        If rdoShuffle.Checked Then
+            clsForcatsShuffle.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffle)
+        End If
+        If rdoAnonymise.Checked Then
+            clsForcatsAnonymise.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymise)
         End If
         If rdoHand.Checked Then
             clsReorder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
