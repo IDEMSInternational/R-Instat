@@ -368,6 +368,8 @@ Partial Class frmMain
         Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -2435,7 +2437,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         resources.ApplyResources(Me.mnuEdit, "mnuEdit")
         Me.mnuEdit.Tag = "Edit"
@@ -2498,6 +2500,16 @@ Partial Class frmMain
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         resources.ApplyResources(Me.mnuEditSelectAll, "mnuEditSelectAll")
         Me.mnuEditSelectAll.Tag = "Select_All"
+        '
+        'ToolStripSeparator71
+        '
+        Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
+        resources.ApplyResources(Me.ToolStripSeparator71, "ToolStripSeparator71")
+        '
+        'mnuEditScript
+        '
+        resources.ApplyResources(Me.mnuEditScript, "mnuEditScript")
+        Me.mnuEditScript.Name = "mnuEditScript"
         '
         'stsStrip
         '
@@ -4892,4 +4904,6 @@ Partial Class frmMain
     Friend WithEvents mnuploty As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesPivotTable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
+    Friend WithEvents mnuEditScript As ToolStripMenuItem
 End Class
