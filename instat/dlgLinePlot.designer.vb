@@ -52,14 +52,6 @@ Partial Class dlgLinePlot
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoSlope = New System.Windows.Forms.RadioButton()
-        Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
-        Me.lblXEnd = New System.Windows.Forms.Label()
-        Me.lblSlopeY = New System.Windows.Forms.Label()
-        Me.lblSlopeX = New System.Windows.Forms.Label()
-        Me.lblSlopeColour = New System.Windows.Forms.Label()
-        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
         Me.ucrInputFormula = New instat.ucrInputComboBox()
         Me.ucrChkSpan = New instat.ucrCheck()
         Me.ucrChkFormula = New instat.ucrCheck()
@@ -67,6 +59,28 @@ Partial Class dlgLinePlot
         Me.ucrNudSpan = New instat.ucrNud()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrFamilyInput = New instat.ucrInputComboBox()
+        Me.rdoSlope = New System.Windows.Forms.RadioButton()
+        Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
+        Me.lblXEnd = New System.Windows.Forms.Label()
+        Me.lblSlopeY = New System.Windows.Forms.Label()
+        Me.lblSlopeX = New System.Windows.Forms.Label()
+        Me.lblSlopeColour = New System.Windows.Forms.Label()
+        Me.lblXColour = New System.Windows.Forms.Label()
+        Me.lblLineSize = New System.Windows.Forms.Label()
+        Me.lblXEndSize = New System.Windows.Forms.Label()
+        Me.lblXSize = New System.Windows.Forms.Label()
+        Me.lblLineColour = New System.Windows.Forms.Label()
+        Me.lblXEndColour = New System.Windows.Forms.Label()
+        Me.ucrInputDumbbellLine = New instat.ucrInputComboBox()
+        Me.ucrInputDumbbellXEnd = New instat.ucrInputComboBox()
+        Me.ucrInputDumbbellX = New instat.ucrInputComboBox()
+        Me.ucrNudDumbbellLine = New instat.ucrNud()
+        Me.ucrNudDumbbellXEnd = New instat.ucrNud()
+        Me.ucrNudDumbbellX = New instat.ucrNud()
+        Me.ucrChkDumbbellColour = New instat.ucrCheck()
+        Me.ucrChkDumbbellSize = New instat.ucrCheck()
+        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -187,72 +201,6 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.Name = "grpSmoothOptions"
         Me.grpSmoothOptions.TabStop = False
         '
-        'rdoSlope
-        '
-        resources.ApplyResources(Me.rdoSlope, "rdoSlope")
-        Me.rdoSlope.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSlope.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSlope.FlatAppearance.BorderSize = 2
-        Me.rdoSlope.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSlope.Name = "rdoSlope"
-        Me.rdoSlope.TabStop = True
-        Me.rdoSlope.Tag = "Slope"
-        Me.rdoSlope.UseVisualStyleBackColor = False
-        '
-        'rdoDumbbell
-        '
-        resources.ApplyResources(Me.rdoDumbbell, "rdoDumbbell")
-        Me.rdoDumbbell.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoDumbbell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDumbbell.FlatAppearance.BorderSize = 2
-        Me.rdoDumbbell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDumbbell.Name = "rdoDumbbell"
-        Me.rdoDumbbell.TabStop = True
-        Me.rdoDumbbell.Tag = "linepathstep"
-        Me.rdoDumbbell.UseVisualStyleBackColor = False
-        '
-        'lblXEnd
-        '
-        resources.ApplyResources(Me.lblXEnd, "lblXEnd")
-        Me.lblXEnd.Name = "lblXEnd"
-        Me.lblXEnd.Tag = "XEnd_Variable:"
-        '
-        'lblSlopeY
-        '
-        resources.ApplyResources(Me.lblSlopeY, "lblSlopeY")
-        Me.lblSlopeY.Name = "lblSlopeY"
-        Me.lblSlopeY.Tag = "Y_Slope_Variable:"
-        '
-        'lblSlopeX
-        '
-        resources.ApplyResources(Me.lblSlopeX, "lblSlopeX")
-        Me.lblSlopeX.Name = "lblSlopeX"
-        Me.lblSlopeX.Tag = "X_Slope_Variable:"
-        '
-        'lblSlopeColour
-        '
-        resources.ApplyResources(Me.lblSlopeColour, "lblSlopeColour")
-        Me.lblSlopeColour.Name = "lblSlopeColour"
-        Me.lblSlopeColour.Tag = "Colour"
-        '
-        'ucrReceiverGroup
-        '
-        Me.ucrReceiverGroup.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
-        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
-        Me.ucrReceiverGroup.Selector = Nothing
-        Me.ucrReceiverGroup.strNcFilePath = ""
-        Me.ucrReceiverGroup.ucrSelector = Nothing
-        '
-        'ucrReceiverSlopeY
-        '
-        Me.ucrReceiverSlopeY.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSlopeY, "ucrReceiverSlopeY")
-        Me.ucrReceiverSlopeY.Name = "ucrReceiverSlopeY"
-        Me.ucrReceiverSlopeY.Selector = Nothing
-        Me.ucrReceiverSlopeY.strNcFilePath = ""
-        Me.ucrReceiverSlopeY.ucrSelector = Nothing
-        '
         'ucrInputFormula
         '
         Me.ucrInputFormula.AddQuotesIfUnrecognised = True
@@ -304,6 +252,168 @@ Partial Class dlgLinePlot
         Me.ucrFamilyInput.IsReadOnly = False
         resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
         Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        '
+        'rdoSlope
+        '
+        resources.ApplyResources(Me.rdoSlope, "rdoSlope")
+        Me.rdoSlope.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSlope.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSlope.FlatAppearance.BorderSize = 2
+        Me.rdoSlope.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSlope.Name = "rdoSlope"
+        Me.rdoSlope.TabStop = True
+        Me.rdoSlope.Tag = "Slope"
+        Me.rdoSlope.UseVisualStyleBackColor = False
+        '
+        'rdoDumbbell
+        '
+        resources.ApplyResources(Me.rdoDumbbell, "rdoDumbbell")
+        Me.rdoDumbbell.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoDumbbell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.FlatAppearance.BorderSize = 2
+        Me.rdoDumbbell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.Name = "rdoDumbbell"
+        Me.rdoDumbbell.TabStop = True
+        Me.rdoDumbbell.Tag = "linepathstep"
+        Me.rdoDumbbell.UseVisualStyleBackColor = False
+        '
+        'lblXEnd
+        '
+        resources.ApplyResources(Me.lblXEnd, "lblXEnd")
+        Me.lblXEnd.Name = "lblXEnd"
+        Me.lblXEnd.Tag = "XEnd_Variable:"
+        '
+        'lblSlopeY
+        '
+        resources.ApplyResources(Me.lblSlopeY, "lblSlopeY")
+        Me.lblSlopeY.Name = "lblSlopeY"
+        Me.lblSlopeY.Tag = "Y_Slope_Variable:"
+        '
+        'lblSlopeX
+        '
+        resources.ApplyResources(Me.lblSlopeX, "lblSlopeX")
+        Me.lblSlopeX.Name = "lblSlopeX"
+        Me.lblSlopeX.Tag = "X_Slope_Variable:"
+        '
+        'lblSlopeColour
+        '
+        resources.ApplyResources(Me.lblSlopeColour, "lblSlopeColour")
+        Me.lblSlopeColour.Name = "lblSlopeColour"
+        Me.lblSlopeColour.Tag = "Colour"
+        '
+        'lblXColour
+        '
+        resources.ApplyResources(Me.lblXColour, "lblXColour")
+        Me.lblXColour.Name = "lblXColour"
+        '
+        'lblLineSize
+        '
+        resources.ApplyResources(Me.lblLineSize, "lblLineSize")
+        Me.lblLineSize.Name = "lblLineSize"
+        '
+        'lblXEndSize
+        '
+        resources.ApplyResources(Me.lblXEndSize, "lblXEndSize")
+        Me.lblXEndSize.Name = "lblXEndSize"
+        '
+        'lblXSize
+        '
+        resources.ApplyResources(Me.lblXSize, "lblXSize")
+        Me.lblXSize.Name = "lblXSize"
+        '
+        'lblLineColour
+        '
+        resources.ApplyResources(Me.lblLineColour, "lblLineColour")
+        Me.lblLineColour.Name = "lblLineColour"
+        '
+        'lblXEndColour
+        '
+        resources.ApplyResources(Me.lblXEndColour, "lblXEndColour")
+        Me.lblXEndColour.Name = "lblXEndColour"
+        '
+        'ucrInputDumbbellLine
+        '
+        Me.ucrInputDumbbellLine.AddQuotesIfUnrecognised = True
+        Me.ucrInputDumbbellLine.GetSetSelectedIndex = -1
+        Me.ucrInputDumbbellLine.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDumbbellLine, "ucrInputDumbbellLine")
+        Me.ucrInputDumbbellLine.Name = "ucrInputDumbbellLine"
+        '
+        'ucrInputDumbbellXEnd
+        '
+        Me.ucrInputDumbbellXEnd.AddQuotesIfUnrecognised = True
+        Me.ucrInputDumbbellXEnd.GetSetSelectedIndex = -1
+        Me.ucrInputDumbbellXEnd.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDumbbellXEnd, "ucrInputDumbbellXEnd")
+        Me.ucrInputDumbbellXEnd.Name = "ucrInputDumbbellXEnd"
+        '
+        'ucrInputDumbbellX
+        '
+        Me.ucrInputDumbbellX.AddQuotesIfUnrecognised = True
+        Me.ucrInputDumbbellX.GetSetSelectedIndex = -1
+        Me.ucrInputDumbbellX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDumbbellX, "ucrInputDumbbellX")
+        Me.ucrInputDumbbellX.Name = "ucrInputDumbbellX"
+        '
+        'ucrNudDumbbellLine
+        '
+        Me.ucrNudDumbbellLine.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellLine.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDumbbellLine, "ucrNudDumbbellLine")
+        Me.ucrNudDumbbellLine.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDumbbellLine.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellLine.Name = "ucrNudDumbbellLine"
+        Me.ucrNudDumbbellLine.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDumbbellXEnd
+        '
+        Me.ucrNudDumbbellXEnd.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellXEnd.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDumbbellXEnd, "ucrNudDumbbellXEnd")
+        Me.ucrNudDumbbellXEnd.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDumbbellXEnd.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellXEnd.Name = "ucrNudDumbbellXEnd"
+        Me.ucrNudDumbbellXEnd.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDumbbellX
+        '
+        Me.ucrNudDumbbellX.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellX.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDumbbellX, "ucrNudDumbbellX")
+        Me.ucrNudDumbbellX.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDumbbellX.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDumbbellX.Name = "ucrNudDumbbellX"
+        Me.ucrNudDumbbellX.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkDumbbellColour
+        '
+        Me.ucrChkDumbbellColour.Checked = False
+        resources.ApplyResources(Me.ucrChkDumbbellColour, "ucrChkDumbbellColour")
+        Me.ucrChkDumbbellColour.Name = "ucrChkDumbbellColour"
+        '
+        'ucrChkDumbbellSize
+        '
+        Me.ucrChkDumbbellSize.Checked = False
+        resources.ApplyResources(Me.ucrChkDumbbellSize, "ucrChkDumbbellSize")
+        Me.ucrChkDumbbellSize.Name = "ucrChkDumbbellSize"
+        '
+        'ucrReceiverGroup
+        '
+        Me.ucrReceiverGroup.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
+        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
+        Me.ucrReceiverGroup.Selector = Nothing
+        Me.ucrReceiverGroup.strNcFilePath = ""
+        Me.ucrReceiverGroup.ucrSelector = Nothing
+        '
+        'ucrReceiverSlopeY
+        '
+        Me.ucrReceiverSlopeY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSlopeY, "ucrReceiverSlopeY")
+        Me.ucrReceiverSlopeY.Name = "ucrReceiverSlopeY"
+        Me.ucrReceiverSlopeY.Selector = Nothing
+        Me.ucrReceiverSlopeY.strNcFilePath = ""
+        Me.ucrReceiverSlopeY.ucrSelector = Nothing
         '
         'ucrChkAddLine
         '
@@ -434,6 +544,20 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblXEndColour)
+        Me.Controls.Add(Me.lblLineColour)
+        Me.Controls.Add(Me.lblXSize)
+        Me.Controls.Add(Me.lblXEndSize)
+        Me.Controls.Add(Me.lblLineSize)
+        Me.Controls.Add(Me.lblXColour)
+        Me.Controls.Add(Me.ucrInputDumbbellLine)
+        Me.Controls.Add(Me.ucrInputDumbbellXEnd)
+        Me.Controls.Add(Me.ucrInputDumbbellX)
+        Me.Controls.Add(Me.ucrNudDumbbellLine)
+        Me.Controls.Add(Me.ucrNudDumbbellXEnd)
+        Me.Controls.Add(Me.ucrNudDumbbellX)
+        Me.Controls.Add(Me.ucrChkDumbbellColour)
+        Me.Controls.Add(Me.ucrChkDumbbellSize)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.lblSlopeColour)
         Me.Controls.Add(Me.lblSlopeX)
@@ -528,4 +652,18 @@ Partial Class dlgLinePlot
     Friend WithEvents lblSlopeY As Label
     Friend WithEvents lblSlopeColour As Label
     Friend WithEvents ucrReceiverSlopeColour As ucrReceiverSingle
+    Friend WithEvents lblXEndColour As Label
+    Friend WithEvents lblLineColour As Label
+    Friend WithEvents lblXSize As Label
+    Friend WithEvents lblXEndSize As Label
+    Friend WithEvents lblLineSize As Label
+    Friend WithEvents lblXColour As Label
+    Friend WithEvents ucrInputDumbbellLine As ucrInputComboBox
+    Friend WithEvents ucrInputDumbbellXEnd As ucrInputComboBox
+    Friend WithEvents ucrInputDumbbellX As ucrInputComboBox
+    Friend WithEvents ucrNudDumbbellLine As ucrNud
+    Friend WithEvents ucrNudDumbbellXEnd As ucrNud
+    Friend WithEvents ucrNudDumbbellX As ucrNud
+    Friend WithEvents ucrChkDumbbellColour As ucrCheck
+    Friend WithEvents ucrChkDumbbellSize As ucrCheck
 End Class

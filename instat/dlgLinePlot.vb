@@ -49,6 +49,7 @@ Public Class dlgLinePlot
     Private clsFormulaFunction As New RFunction
     Private clsggSlopeFunction As New RFunction
     Private clsSlopeThemeFunction As New RFunction
+    Private clsDumbbellFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -80,6 +81,7 @@ Public Class dlgLinePlot
         Dim clsValleysParam As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
+        Dim dctColourOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -100,7 +102,7 @@ Public Class dlgLinePlot
         ucrReceiverXEnd.Selector = ucrLinePlotSelector
         ucrReceiverXEnd.bWithQuotes = False
         ucrReceiverXEnd.SetParameterIsString()
-        ucrReceiverXEnd.SetIncludedDataTypes({"factor", "numeric"})
+        ucrReceiverXEnd.SetIncludedDataTypes({"numeric"})
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
@@ -218,7 +220,7 @@ Public Class dlgLinePlot
 
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_path", "geom_step"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, strFirstParameterName, {"geom_dumbbell"})
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, "dumbbellplot", {"geom_dumbbell"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSlope, "slopeplot", {"newggslopegraph_amended", "newggslopegraph_theme"})
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
@@ -261,15 +263,69 @@ Public Class dlgLinePlot
         ucrInputMethod.AddToLinkedControls(ucrFamilyInput, {"gam", "glm"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrFamilyInput.SetLinkedDisplayControl(lblFamily)
 
+        ucrInputDumbbellX.SetParameter(New RParameter("colour_x", 2))
+        dctColourOptions.Add("Null", Chr(34) & "NULL" & Chr(34))
+        dctColourOptions.Add("Black", Chr(34) & "black" & Chr(34))
+        dctColourOptions.Add("White", Chr(34) & "white" & Chr(34))
+        dctColourOptions.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctColourOptions.Add("Red", Chr(34) & "red" & Chr(34))
+        dctColourOptions.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctColourOptions.Add("Purple", Chr(34) & "purple" & Chr(34))
+        dctColourOptions.Add("Green", Chr(34) & "green" & Chr(34))
+        dctColourOptions.Add("Orange", Chr(34) & "orange" & Chr(34))
+        dctColourOptions.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctColourOptions.Add("Brown", Chr(34) & "brown" & Chr(34))
+        dctColourOptions.Add("Pink", Chr(34) & "pink" & Chr(34))
+        ucrInputDumbbellX.SetItems(dctColourOptions)
+        ucrInputDumbbellX.SetDropDownStyleAsNonEditable()
+        ucrInputDumbbellX.SetRDefault(Chr(34) & "orange" & Chr(34))
+
+        ucrInputDumbbellXEnd.SetParameter(New RParameter("colour_xend", 3))
+        ucrInputDumbbellXEnd.SetItems(dctColourOptions)
+        ucrInputDumbbellXEnd.SetDropDownStyleAsNonEditable()
+        ucrInputDumbbellXEnd.SetRDefault(Chr(34) & "blue" & Chr(34))
+
+        ucrInputDumbbellLine.SetParameter(New RParameter("colour", 4))
+        ucrInputDumbbellLine.SetItems(dctColourOptions)
+        ucrInputDumbbellLine.SetDropDownStyleAsNonEditable()
+        ucrInputDumbbellLine.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrNudDumbbellX.SetParameter(New RParameter("size_x", 5))
+        ucrNudDumbbellX.SetMinMax(0, Integer.MaxValue)
+        ucrNudDumbbellX.Increment = 0.1
+        ucrNudDumbbellX.SetDefaultState(4)
+        ucrNudDumbbellX.DecimalPlaces = 1
+
+        ucrNudDumbbellXEnd.SetParameter(New RParameter("size_xend", 6))
+        ucrNudDumbbellXEnd.SetMinMax(0, Integer.MaxValue)
+        ucrNudDumbbellXEnd.Increment = 0.1
+        ucrNudDumbbellX.SetDefaultState(4)
+        ucrNudDumbbellXEnd.DecimalPlaces = 1
+
+        ucrNudDumbbellLine.SetParameter(New RParameter("size", 7))
+        ucrNudDumbbellLine.SetMinMax(0, Integer.MaxValue)
+        ucrNudDumbbellLine.Increment = 0.1
+        ucrNudDumbbellX.SetDefaultState(0.5)
+        ucrNudDumbbellLine.DecimalPlaces = 1
+
+        ucrChkDumbbellSize.SetText("Size")
+        ucrChkDumbbellSize.AddParameterPresentCondition(True, "size")
+        ucrChkDumbbellSize.AddParameterPresentCondition(False, "size", False)
+
+        ucrChkDumbbellColour.SetText("Colour")
+        ucrChkDumbbellColour.AddParameterPresentCondition(True, "colour")
+        ucrChkDumbbellColour.AddParameterPresentCondition(False, "colour", False)
+
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup, ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot, ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeY, ucrReceiverSlopeColour}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX, ucrInputDumbbellXEnd, ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDumbbellSize.AddToLinkedControls({ucrNudDumbbellX, ucrNudDumbbellXEnd, ucrNudDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrChkFormula.SetLinkedDisplayControl(grpSmoothOptions)
         ucrReceiverXEnd.SetLinkedDisplayControl(lblXEnd)
@@ -279,6 +335,12 @@ Public Class dlgLinePlot
         ucrReceiverSlopeX.SetLinkedDisplayControl(lblSlopeX)
         ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
+        ucrInputDumbbellX.SetLinkedDisplayControl(lblXColour)
+        ucrInputDumbbellXEnd.SetLinkedDisplayControl(lblXEndColour)
+        ucrInputDumbbellLine.SetLinkedDisplayControl(lblLineColour)
+        ucrNudDumbbellX.SetLinkedDisplayControl(lblXSize)
+        ucrNudDumbbellXEnd.SetLinkedDisplayControl(lblXEndSize)
+        ucrNudDumbbellLine.SetLinkedDisplayControl(lblLineSize)
     End Sub
 
     Private Sub SetDefaults()
@@ -289,6 +351,7 @@ Public Class dlgLinePlot
         clsListFunction = New RFunction
         clsggSlopeFunction = New RFunction
         clsSlopeThemeFunction = New RFunction
+        clsDumbbellFunction = New RFunction
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -317,6 +380,9 @@ Public Class dlgLinePlot
         clsOptionsFunction.SetRCommand("geom_line")
         'clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
         clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
+
+        clsDumbbellFunction.SetPackageName("ggalt")
+        clsDumbbellFunction.SetRCommand("geom_dumbbell")
 
         clsggSlopeFunction.SetRCommand("newggslopegraph_amended")
         clsggSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -376,6 +442,8 @@ Public Class dlgLinePlot
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
         ucrFamilyInput.SetRCode(clsListFunction, bReset)
         ucrChkFormula.SetRCode(clsBaseOperator, bReset)
+        ucrChkDumbbellColour.SetRCode(clsDumbbellFunction, bReset)
+        ucrChkDumbbellSize.SetRCode(clsDumbbellFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -456,19 +524,23 @@ Public Class dlgLinePlot
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         SetGroupParam()
     End Sub
 
     Private Sub SetGroupParam()
-        If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-            ucrReceiverGroup.Enabled = False
+        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+                ucrReceiverGroup.Enabled = False
 
-        ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-            ucrReceiverGroup.Enabled = True
-            ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
-            clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+                ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+            Else
+                clsRaesFunction.RemoveParameterByName("group")
+            End If
         Else
             clsRaesFunction.RemoveParameterByName("group")
         End If
@@ -476,13 +548,13 @@ Public Class dlgLinePlot
 
     Private Sub SetGraphPrefixAndRcommand()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
-        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         cmdLinePathStepSmoothOptions.Visible = True
         cmdOptions.Visible = True
         clsBaseOperator.RemoveParameterByName("slopeplot")
         clsBaseOperator.RemoveParameterByName("slopetheme")
+        clsBaseOperator.RemoveParameterByName("dumbbellplot")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
         clsOptionsFunction.SetPackageName("ggplot2")
         If rdoLine.Checked Then
             If ucrChkPathOrStep.Checked Then
@@ -501,10 +573,9 @@ Public Class dlgLinePlot
             ucrSave.SetPrefix("smooth")
             clsOptionsFunction.SetRCommand("geom_smooth")
         ElseIf rdoDumbbell.Checked Then
-            ucrReceiverX.SetIncludedDataTypes({"factor"})
             ucrSave.SetPrefix("dumbbell")
-            clsOptionsFunction.SetPackageName("ggalt")
-            clsOptionsFunction.SetRCommand("geom_dumbbell")
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+            clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
         ElseIf rdoSlope.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
             cmdLinePathStepSmoothOptions.Visible = False
@@ -513,7 +584,7 @@ Public Class dlgLinePlot
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
             clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsggSlopeFunction, iPosition:=0)
-            clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=1)
         End If
     End Sub
 
@@ -559,4 +630,22 @@ Public Class dlgLinePlot
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
     End Sub
+
+    'Private Sub ucrReceiverXEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXEnd.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    '    If rdoDumbbell.Checked Then
+    '        If ucrReceiverX.strCurrDataType = "numeric" Then
+    '            ucrReceiverXEnd.SetIncludedDataTypes({"numeric"})
+    '        Else
+    '            ucrReceiverXEnd.SetIncludedDataTypes({"numeric", "factor"})
+    '        End If
+    '        If ucrReceiverXEnd.strCurrDataType = "factor" Then
+    '            ucrReceiverX.SetIncludedDataTypes({"factor"})
+    '        Else
+    '            ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
+    '        End If
+    '    Else
+    '        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
+    '        ucrReceiverXEnd.SetIncludedDataTypes({"factor", "numeric"})
+    '    End If
+    'End Sub
 End Class
