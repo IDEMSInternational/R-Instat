@@ -39,16 +39,16 @@ Public Class dlgRatingScales
 
         lblOrderedFactor.Text = "Variables:"
 
-        ucrPnlSjpLikert.Enabled = False
+        ucrPnlSjpLikert.Enabled = True
 
 
         ucrPnlGraphType.AddRadioButton(rdoLikert)
         ucrPnlGraphType.AddRadioButton(rdoStacked)
         ucrPnlGraphType.AddRadioButton(rdoTable)
 
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoTable, "sjt.stackfrq")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoStacked, "sjp.stackfrq")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoLikert, "sjp.likert")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoTable, "tab_stackfrq")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoStacked, "plot_stackfrq")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoLikert, "plot_likert")
 
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -67,7 +67,7 @@ Public Class dlgRatingScales
         ucrReceiverWeights.strSelectorHeading = "Numerics"
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
-        'ucrPnlSortsjp.likert
+        'ucrPnlSortplot.likert
         rdoLikert.Enabled = True
         ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 6))
         ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, "NULL")
