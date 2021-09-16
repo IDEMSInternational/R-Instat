@@ -38,6 +38,7 @@ Partial Class dlgBarAndPieChart
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBarAndPieChart))
         Me.lblByFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -58,12 +59,17 @@ Partial Class dlgBarAndPieChart
         Me.lblArea = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
         Me.rdoTreeMap = New System.Windows.Forms.RadioButton()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.lblPlace = New System.Windows.Forms.Label()
+        Me.ttArea = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttFill = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkSameLabelAsFill = New instat.ucrCheck()
+        Me.ucrInputPlace = New instat.ucrInputComboBox()
+        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrChkLayout = New instat.ucrCheck()
         Me.ucrChkStart = New instat.ucrCheck()
         Me.ucrInputStart = New instat.ucrInputComboBox()
         Me.ucrInputLayout = New instat.ucrInputComboBox()
-        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
-        Me.ucrReceiverArea = New instat.ucrReceiverSingle()
         Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
         Me.ucrNudLollipopSize = New instat.ucrNud()
         Me.ucrChkLollipop = New instat.ucrCheck()
@@ -75,7 +81,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
         Me.ucrInputBarChartPositions = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
@@ -83,6 +88,9 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
+        Me.ucrReceiverArea = New instat.ucrReceiverSingle()
+        Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -214,6 +222,39 @@ Partial Class dlgBarAndPieChart
         Me.rdoTreeMap.Tag = "Value"
         Me.rdoTreeMap.UseVisualStyleBackColor = False
         '
+        'lblLabel
+        '
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
+        '
+        'lblPlace
+        '
+        resources.ApplyResources(Me.lblPlace, "lblPlace")
+        Me.lblPlace.Name = "lblPlace"
+        '
+        'ucrChkSameLabelAsFill
+        '
+        Me.ucrChkSameLabelAsFill.Checked = False
+        resources.ApplyResources(Me.ucrChkSameLabelAsFill, "ucrChkSameLabelAsFill")
+        Me.ucrChkSameLabelAsFill.Name = "ucrChkSameLabelAsFill"
+        '
+        'ucrInputPlace
+        '
+        Me.ucrInputPlace.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlace.GetSetSelectedIndex = -1
+        Me.ucrInputPlace.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPlace, "ucrInputPlace")
+        Me.ucrInputPlace.Name = "ucrInputPlace"
+        '
+        'ucrReceiverLabel
+        '
+        Me.ucrReceiverLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
+        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
+        Me.ucrReceiverLabel.Selector = Nothing
+        Me.ucrReceiverLabel.strNcFilePath = ""
+        Me.ucrReceiverLabel.ucrSelector = Nothing
+        '
         'ucrChkLayout
         '
         Me.ucrChkLayout.Checked = False
@@ -241,24 +282,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLayout.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLayout, "ucrInputLayout")
         Me.ucrInputLayout.Name = "ucrInputLayout"
-        '
-        'ucrReceiverFill
-        '
-        Me.ucrReceiverFill.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
-        Me.ucrReceiverFill.Name = "ucrReceiverFill"
-        Me.ucrReceiverFill.Selector = Nothing
-        Me.ucrReceiverFill.strNcFilePath = ""
-        Me.ucrReceiverFill.ucrSelector = Nothing
-        '
-        'ucrReceiverArea
-        '
-        Me.ucrReceiverArea.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverArea, "ucrReceiverArea")
-        Me.ucrReceiverArea.Name = "ucrReceiverArea"
-        Me.ucrReceiverArea.Selector = Nothing
-        Me.ucrReceiverArea.strNcFilePath = ""
-        Me.ucrReceiverArea.ucrSelector = Nothing
         '
         'ucrInputLollipopColour
         '
@@ -340,16 +363,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'ucrVariablesAsFactorForBarChart
-        '
-        Me.ucrVariablesAsFactorForBarChart.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorForBarChart, "ucrVariablesAsFactorForBarChart")
-        Me.ucrVariablesAsFactorForBarChart.Name = "ucrVariablesAsFactorForBarChart"
-        Me.ucrVariablesAsFactorForBarChart.Selector = Nothing
-        Me.ucrVariablesAsFactorForBarChart.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForBarChart.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForBarChart.ucrVariableSelector = Nothing
-        '
         'ucrInputBarChartPositions
         '
         Me.ucrInputBarChartPositions.AddQuotesIfUnrecognised = True
@@ -396,10 +409,43 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'ucrReceiverArea
+        '
+        Me.ucrReceiverArea.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverArea, "ucrReceiverArea")
+        Me.ucrReceiverArea.Name = "ucrReceiverArea"
+        Me.ucrReceiverArea.Selector = Nothing
+        Me.ucrReceiverArea.strNcFilePath = ""
+        Me.ucrReceiverArea.ucrSelector = Nothing
+        '
+        'ucrVariablesAsFactorForBarChart
+        '
+        Me.ucrVariablesAsFactorForBarChart.frmParent = Me
+        resources.ApplyResources(Me.ucrVariablesAsFactorForBarChart, "ucrVariablesAsFactorForBarChart")
+        Me.ucrVariablesAsFactorForBarChart.Name = "ucrVariablesAsFactorForBarChart"
+        Me.ucrVariablesAsFactorForBarChart.Selector = Nothing
+        Me.ucrVariablesAsFactorForBarChart.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForBarChart.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForBarChart.ucrVariableSelector = Nothing
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkSameLabelAsFill)
+        Me.Controls.Add(Me.lblPlace)
+        Me.Controls.Add(Me.ucrInputPlace)
+        Me.Controls.Add(Me.lblLabel)
+        Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrChkLayout)
         Me.Controls.Add(Me.ucrChkStart)
         Me.Controls.Add(Me.ucrInputStart)
@@ -426,7 +472,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.rdoFrequency)
         Me.Controls.Add(Me.ucrInputBarChartPositions)
-        Me.Controls.Add(Me.cmdColumnChartOptions)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
@@ -444,6 +489,7 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.lblArea)
         Me.Controls.Add(Me.ucrReceiverArea)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
+        Me.Controls.Add(Me.cmdColumnChartOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -498,4 +544,11 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrChkStart As ucrCheck
     Friend WithEvents ucrInputStart As ucrInputComboBox
     Friend WithEvents ucrInputLayout As ucrInputComboBox
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
+    Friend WithEvents ucrInputPlace As ucrInputComboBox
+    Friend WithEvents lblPlace As Label
+    Friend WithEvents ttArea As ToolTip
+    Friend WithEvents ttFill As ToolTip
+    Friend WithEvents ucrChkSameLabelAsFill As ucrCheck
 End Class
