@@ -20,6 +20,7 @@ Public Class dlgRugPlot
     Private clsRgeomTileFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Private bRCodeSet As Boolean = True
     Private clsBaseOperator As New ROperator
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
@@ -97,12 +98,10 @@ Public Class dlgRugPlot
         ucrReceiverFill.Selector = ucrHeatMapSelector
         ucrReceiverFill.bWithQuotes = False
 
+        ucrReceiverPoints.SetParameter(New RParameter("size", 0))
         ucrReceiverPoints.SetParameterIsString()
         ucrReceiverPoints.Selector = ucrHeatMapSelector
         ucrReceiverPoints.bWithQuotes = False
-
-        ucrReceiverPoints.AddParameterPresentCondition(True, "geom_point")
-        ucrReceiverPoints.AddParameterPresentCondition(False, "geom_point", False)
 
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -243,9 +242,9 @@ Public Class dlgRugPlot
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
         ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
-        ucrReceiverPoints.AddAdditionalCodeParameterPair(clsSizeAes, New RParameter("size", 0), iAdditionalPairNo:=1)
-        ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("shape", 0), iAdditionalPairNo:=2)
+        ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
 
@@ -258,7 +257,8 @@ Public Class dlgRugPlot
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
         ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
-        ucrReceiverPoints.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverPoints.SetRCode(clsSizeAes, bReset)
+        bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -323,12 +323,20 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub ucrReceiverPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPoints.ControlValueChanged
-        If ucrReceiverPoints.strCurrDataType = "numeric" Then
-            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointSizeFunction, iPosition:=7)
-        ElseIf ucrReceiverPoints.strCurrDataType = "factor" Then
-            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointShapeFunction, iPosition:=7)
-        ElseIf ucrReceiverPoints.IsEmpty() Then
-            clsBaseOperator.RemoveParameterByName("geom_point")
+        If bRCodeSet Then
+            If ucrReceiverPoints.IsEmpty Then
+                clsBaseOperator.RemoveParameterByName("geom_point")
+            Else
+                If ucrReceiverPoints.strCurrDataType = "numeric" Then
+                    clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointSizeFunction, iPosition:=7)
+                ElseIf ucrReceiverPoints.strCurrDataType = "factor" Then
+                    clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointShapeFunction, iPosition:=7)
+                Else
+                    clsBaseOperator.RemoveParameterByName("geom_point")
+                End If
+
+            End If
         End If
+
     End Sub
 End Class

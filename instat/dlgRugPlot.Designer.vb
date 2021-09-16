@@ -60,6 +60,7 @@ Partial Class dlgRugPlot
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblPointOptional = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -208,10 +209,17 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblPointOptional
+        '
+        resources.ApplyResources(Me.lblPointOptional, "lblPointOptional")
+        Me.lblPointOptional.Name = "lblPointOptional"
+        Me.lblPointOptional.Tag = "X_Variable:"
+        '
         'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblPointOptional)
         Me.Controls.Add(Me.ucrReceiverPoints)
         Me.Controls.Add(Me.lblPointsOptional)
         Me.Controls.Add(Me.ucrChkColourPalette)
@@ -262,4 +270,5 @@ Partial Class dlgRugPlot
     Friend WithEvents ucrChkColourPalette As ucrCheck
     Friend WithEvents ucrReceiverPoints As ucrReceiverSingle
     Friend WithEvents lblPointsOptional As Label
+    Friend WithEvents lblPointOptional As Label
 End Class
