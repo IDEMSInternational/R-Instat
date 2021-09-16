@@ -212,11 +212,10 @@ Public Class dlgRatingScales
     Private Sub SetBaseFunction()
         If rdoLikert.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpLikert)
-            ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoStacked.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
-            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
