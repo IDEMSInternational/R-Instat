@@ -198,8 +198,6 @@ Public Class dlgReorderLevels
         ucrReceiverVariable.SetRCode(clsReorder, bReset)
         ucrChkReorderVariable.SetRCode(clsReorder, bReset)
         ucrInputPrefix.SetRCode(clsForcatsAnonymise, bReset)
-        'ucrPnlProperty.SetRCode(clsReorder)
-        'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
