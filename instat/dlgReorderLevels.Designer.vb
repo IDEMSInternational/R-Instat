@@ -55,14 +55,15 @@ Partial Class dlgReorderLevels
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoAppearance = New System.Windows.Forms.RadioButton()
         Me.rdoAsIs = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverValue = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactorX = New instat.ucrReceiverSingle()
-        Me.ucrChkReorderOrder = New instat.ucrCheck()
+        Me.ucrChkReverseOrder = New instat.ucrCheck()
         Me.ucrInputPrefix = New instat.ucrInputTextBox()
         Me.ucrNudShift = New instat.ucrNud()
         Me.ucrPnlProperty = New instat.UcrPanel()
         Me.ucrSaveResults = New instat.ucrSave()
         Me.ucrInputOptions = New instat.ucrInputComboBox()
-        Me.ucrChkReorderVariable = New instat.ucrCheck()
+        Me.ucrChkReverseVariable = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
@@ -133,7 +134,7 @@ Partial Class dlgReorderLevels
         '
         'grpMethods
         '
-        Me.grpMethods.Controls.Add(Me.ucrChkReorderOrder)
+        Me.grpMethods.Controls.Add(Me.ucrChkReverseOrder)
         Me.grpMethods.Controls.Add(Me.ucrInputPrefix)
         Me.grpMethods.Controls.Add(Me.lblPrefix)
         Me.grpMethods.Controls.Add(Me.rdoAnonymise)
@@ -203,6 +204,15 @@ Partial Class dlgReorderLevels
         Me.rdoAsIs.TabStop = True
         Me.rdoAsIs.UseVisualStyleBackColor = True
         '
+        'ucrReceiverValue
+        '
+        resources.ApplyResources(Me.ucrReceiverValue, "ucrReceiverValue")
+        Me.ucrReceiverValue.frmParent = Me
+        Me.ucrReceiverValue.Name = "ucrReceiverValue"
+        Me.ucrReceiverValue.Selector = Nothing
+        Me.ucrReceiverValue.strNcFilePath = ""
+        Me.ucrReceiverValue.ucrSelector = Nothing
+        '
         'ucrReceiverFactorX
         '
         resources.ApplyResources(Me.ucrReceiverFactorX, "ucrReceiverFactorX")
@@ -212,11 +222,11 @@ Partial Class dlgReorderLevels
         Me.ucrReceiverFactorX.strNcFilePath = ""
         Me.ucrReceiverFactorX.ucrSelector = Nothing
         '
-        'ucrChkReorderOrder
+        'ucrChkReverseOrder
         '
-        Me.ucrChkReorderOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkReorderOrder, "ucrChkReorderOrder")
-        Me.ucrChkReorderOrder.Name = "ucrChkReorderOrder"
+        Me.ucrChkReverseOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkReverseOrder, "ucrChkReverseOrder")
+        Me.ucrChkReverseOrder.Name = "ucrChkReverseOrder"
         '
         'ucrInputPrefix
         '
@@ -254,11 +264,11 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.ucrInputOptions, "ucrInputOptions")
         Me.ucrInputOptions.Name = "ucrInputOptions"
         '
-        'ucrChkReorderVariable
+        'ucrChkReverseVariable
         '
-        Me.ucrChkReorderVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkReorderVariable, "ucrChkReorderVariable")
-        Me.ucrChkReorderVariable.Name = "ucrChkReorderVariable"
+        Me.ucrChkReverseVariable.Checked = False
+        resources.ApplyResources(Me.ucrChkReverseVariable, "ucrChkReverseVariable")
+        Me.ucrChkReverseVariable.Name = "ucrChkReverseVariable"
         '
         'ucrPnlOptions
         '
@@ -307,6 +317,7 @@ Partial Class dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverValue)
         Me.Controls.Add(Me.ucrReceiverFactorX)
         Me.Controls.Add(Me.grpMethods)
         Me.Controls.Add(Me.ucrSaveResults)
@@ -316,7 +327,7 @@ Partial Class dlgReorderLevels
         Me.Controls.Add(Me.rdoHand)
         Me.Controls.Add(Me.ucrInputOptions)
         Me.Controls.Add(Me.rdoProperty)
-        Me.Controls.Add(Me.ucrChkReorderVariable)
+        Me.Controls.Add(Me.ucrChkReverseVariable)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblVariable)
@@ -348,13 +359,13 @@ Partial Class dlgReorderLevels
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
-    Friend WithEvents ucrChkReorderVariable As ucrCheck
+    Friend WithEvents ucrChkReverseVariable As ucrCheck
     Friend WithEvents lblOptions As Label
     Friend WithEvents ucrInputOptions As ucrInputComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents ucrSaveResults As ucrSave
     Friend WithEvents grpMethods As GroupBox
-    Friend WithEvents ucrChkReorderOrder As ucrCheck
+    Friend WithEvents ucrChkReverseOrder As ucrCheck
     Friend WithEvents ucrInputPrefix As ucrInputTextBox
     Friend WithEvents lblPrefix As Label
     Friend WithEvents rdoAnonymise As RadioButton
@@ -367,4 +378,5 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoAsIs As RadioButton
     Friend WithEvents ucrPnlProperty As UcrPanel
     Friend WithEvents ucrReceiverFactorX As ucrReceiverSingle
+    Friend WithEvents ucrReceiverValue As ucrReceiverSingle
 End Class
