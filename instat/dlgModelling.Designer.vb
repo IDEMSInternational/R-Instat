@@ -413,6 +413,7 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
         Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
         '
         'ucrChkIncludeArguments
         '
