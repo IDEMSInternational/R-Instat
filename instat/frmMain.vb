@@ -2415,4 +2415,12 @@ Public Class frmMain
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
         dlgScript.ShowDialog()
     End Sub
+
+    Private Sub CompareColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompareColumnsToolStripMenuItem.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
+
+    Private Sub ExportToClimsoftToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToClimsoftToolStripMenuItem.Click
+        dlgExportForClimsoft.ShowDialog()
+    End Sub
 End Class

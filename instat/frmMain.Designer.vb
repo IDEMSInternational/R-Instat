@@ -668,6 +668,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportToClimsoftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompareColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1494,7 +1496,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.ExportToClimsoftToolStripMenuItem, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1566,7 +1568,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuSetupForDataEntry, Me.mnuTidyandExamineClimaticDataEntry, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuSetupForDataEntry, Me.mnuTidyandExamineClimaticDataEntry, Me.CompareColumnsToolStripMenuItem, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         resources.ApplyResources(Me.mnuClimaticTidyandExamine, "mnuClimaticTidyandExamine")
         '
@@ -4231,6 +4233,16 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'ExportToClimsoftToolStripMenuItem
+        '
+        Me.ExportToClimsoftToolStripMenuItem.Name = "ExportToClimsoftToolStripMenuItem"
+        resources.ApplyResources(Me.ExportToClimsoftToolStripMenuItem, "ExportToClimsoftToolStripMenuItem")
+        '
+        'CompareColumnsToolStripMenuItem
+        '
+        Me.CompareColumnsToolStripMenuItem.Name = "CompareColumnsToolStripMenuItem"
+        resources.ApplyResources(Me.CompareColumnsToolStripMenuItem, "CompareColumnsToolStripMenuItem")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4906,4 +4918,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
     Friend WithEvents mnuEditScript As ToolStripMenuItem
+    Friend WithEvents ExportToClimsoftToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CompareColumnsToolStripMenuItem As ToolStripMenuItem
 End Class

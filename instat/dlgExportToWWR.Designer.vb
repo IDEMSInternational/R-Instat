@@ -388,7 +388,7 @@ Partial Class dlgExportToWWR
         Me.MinimizeBox = False
         Me.Name = "dlgExportToWWR"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Export To World Weather Record"
+        Me.Text = "Export for World Weather Record"
         Me.grpElements.ResumeLayout(False)
         Me.grpElements.PerformLayout()
         Me.ResumeLayout(False)
