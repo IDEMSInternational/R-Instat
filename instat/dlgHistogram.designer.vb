@@ -55,6 +55,7 @@ Partial Class dlgHistogram
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRidges = New instat.ucrCheck()
+        Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -177,10 +178,17 @@ Partial Class dlgHistogram
         resources.ApplyResources(Me.ucrChkRidges, "ucrChkRidges")
         Me.ucrChkRidges.Name = "ucrChkRidges"
         '
+        'ucrChkDisplayAsDotPlot
+        '
+        Me.ucrChkDisplayAsDotPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayAsDotPlot, "ucrChkDisplayAsDotPlot")
+        Me.ucrChkDisplayAsDotPlot.Name = "ucrChkDisplayAsDotPlot"
+        '
         'dlgHistogram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
         Me.Controls.Add(Me.lblStats)
         Me.Controls.Add(Me.ucrInputStats)
@@ -222,4 +230,5 @@ Partial Class dlgHistogram
     Friend WithEvents ucrChkPercentages As ucrCheck
     Friend WithEvents lblStats As Label
     Friend WithEvents ucrChkRidges As ucrCheck
+    Friend WithEvents ucrChkDisplayAsDotPlot As ucrCheck
 End Class
