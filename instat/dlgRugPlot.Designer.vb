@@ -40,13 +40,13 @@ Partial Class dlgRugPlot
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRugPlot))
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdHeatMapOptions = New System.Windows.Forms.Button()
+        Me.cmdTileOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.lblSize = New System.Windows.Forms.Label()
-        Me.lblVariableOptional = New System.Windows.Forms.Label()
+        Me.lblPointsOptional = New System.Windows.Forms.Label()
         Me.ucrReceiverPoints = New instat.ucrReceiverSingle()
         Me.ucrChkColourPalette = New instat.ucrCheck()
         Me.ucrInputColourPalette = New instat.ucrInputComboBox()
@@ -73,12 +73,12 @@ Partial Class dlgRugPlot
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdHeatMapOptions
+        'cmdTileOptions
         '
-        resources.ApplyResources(Me.cmdHeatMapOptions, "cmdHeatMapOptions")
-        Me.cmdHeatMapOptions.Name = "cmdHeatMapOptions"
-        Me.cmdHeatMapOptions.Tag = "Heat_Map_Options"
-        Me.cmdHeatMapOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdTileOptions, "cmdTileOptions")
+        Me.cmdTileOptions.Name = "cmdTileOptions"
+        Me.cmdTileOptions.Tag = "Tile_Options"
+        Me.cmdTileOptions.UseVisualStyleBackColor = True
         '
         'lblXVariable
         '
@@ -107,11 +107,11 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me.lblSize, "lblSize")
         Me.lblSize.Name = "lblSize"
         '
-        'lblVariableOptional
+        'lblPointsOptional
         '
-        resources.ApplyResources(Me.lblVariableOptional, "lblVariableOptional")
-        Me.lblVariableOptional.Name = "lblVariableOptional"
-        Me.lblVariableOptional.Tag = "X_Variable:"
+        resources.ApplyResources(Me.lblPointsOptional, "lblPointsOptional")
+        Me.lblPointsOptional.Name = "lblPointsOptional"
+        Me.lblPointsOptional.Tag = "Points_Optional"
         '
         'ucrReceiverPoints
         '
@@ -240,7 +240,7 @@ Partial Class dlgRugPlot
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrNudShape)
-        Me.Controls.Add(Me.lblVariableOptional)
+        Me.Controls.Add(Me.lblPointsOptional)
         Me.Controls.Add(Me.ucrChkColourPalette)
         Me.Controls.Add(Me.ucrInputColourPalette)
         Me.Controls.Add(Me.ucrInputSize)
@@ -257,7 +257,7 @@ Partial Class dlgRugPlot
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.cmdHeatMapOptions)
+        Me.Controls.Add(Me.cmdTileOptions)
         Me.Controls.Add(Me.ucrHeatMapSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpBoxPoints)
@@ -272,7 +272,7 @@ Partial Class dlgRugPlot
 
     End Sub
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdHeatMapOptions As Button
+    Friend WithEvents cmdTileOptions As Button
     Friend WithEvents ucrHeatMapSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
@@ -291,7 +291,7 @@ Partial Class dlgRugPlot
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
     Friend WithEvents ucrChkColourPalette As ucrCheck
     Friend WithEvents ucrReceiverPoints As ucrReceiverSingle
-    Friend WithEvents lblVariableOptional As Label
+    Friend WithEvents lblPointsOptional As Label
     Friend WithEvents ucrNudShape As ucrNud
     Friend WithEvents grpBoxPoints As GroupBox
     Friend WithEvents lblPointsSize As Label

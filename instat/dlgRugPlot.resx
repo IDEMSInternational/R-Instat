@@ -147,31 +147,31 @@
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="cmdHeatMapOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdTileOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdHeatMapOptions.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdTileOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 212</value>
   </data>
-  <data name="cmdHeatMapOptions.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdTileOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 25</value>
   </data>
-  <data name="cmdHeatMapOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdTileOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="cmdHeatMapOptions.Text" xml:space="preserve">
-    <value>Heat Map Options</value>
+  <data name="cmdTileOptions.Text" xml:space="preserve">
+    <value>Tile Options</value>
   </data>
-  <data name="&gt;&gt;cmdHeatMapOptions.Name" xml:space="preserve">
-    <value>cmdHeatMapOptions</value>
+  <data name="&gt;&gt;cmdTileOptions.Name" xml:space="preserve">
+    <value>cmdTileOptions</value>
   </data>
-  <data name="&gt;&gt;cmdHeatMapOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdTileOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdHeatMapOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdTileOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdHeatMapOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdTileOptions.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="lblXVariable.AutoSize" type="System.Boolean, mscorlib">
@@ -324,34 +324,34 @@
   <data name="&gt;&gt;lblSize.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblVariableOptional.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblPointsOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblVariableOptional.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblPointsOptional.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblVariableOptional.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblPointsOptional.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 198</value>
   </data>
-  <data name="lblVariableOptional.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 13</value>
+  <data name="lblPointsOptional.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
   </data>
-  <data name="lblVariableOptional.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblPointsOptional.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="lblVariableOptional.Text" xml:space="preserve">
-    <value>Variable (Optional):</value>
+  <data name="lblPointsOptional.Text" xml:space="preserve">
+    <value>Points (Optional):</value>
   </data>
-  <data name="&gt;&gt;lblVariableOptional.Name" xml:space="preserve">
-    <value>lblVariableOptional</value>
+  <data name="&gt;&gt;lblPointsOptional.Name" xml:space="preserve">
+    <value>lblPointsOptional</value>
   </data>
-  <data name="&gt;&gt;lblVariableOptional.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPointsOptional.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblVariableOptional.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPointsOptional.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblVariableOptional.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPointsOptional.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -511,7 +511,7 @@
     <value>10</value>
   </data>
   <data name="ucrVariableAsFactorForHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 22</value>
+    <value>273, 16</value>
   </data>
   <data name="ucrVariableAsFactorForHeatMap.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 74</value>

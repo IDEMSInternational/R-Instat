@@ -300,7 +300,7 @@ Public Class dlgRugPlot
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdHeatMapOptions.Click
+    Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
         ''''''' i wonder if all this will be needed for the new system
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         sdgLayerOptions.ShowDialog()
