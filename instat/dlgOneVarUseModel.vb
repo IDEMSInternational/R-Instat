@@ -62,7 +62,7 @@ Public Class dlgOneVarUseModel
 
         'This part is temporary for now
 
-        ucrNewDataFrameName.SetPrefix("UseModel")
+        ucrNewDataFrameName.SetPrefix("use_model")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrNewDataFrameName.SetSaveTypeAsModel()
         ucrNewDataFrameName.SetIsComboBox()

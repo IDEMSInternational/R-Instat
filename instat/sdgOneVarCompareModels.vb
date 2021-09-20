@@ -49,7 +49,7 @@ Public Class sdgOneVarCompareModels
         ucrChkQQ.AddRSyntaxContainsFunctionNamesCondition(False, {"qqcomp"}, False)
 
         'ucrSaveGOF
-        ucrSaveGOF.SetPrefix("GOF")
+        ucrSaveGOF.SetPrefix("gof")
         ucrSaveGOF.SetCheckBoxText("Save Fit")
         ucrSaveGOF.SetIsComboBox()
         ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")

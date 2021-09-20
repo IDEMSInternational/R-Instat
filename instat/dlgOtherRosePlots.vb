@@ -270,15 +270,15 @@ Public Class dlgOtherRosePlots
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         ucrReceiverDate.SetMeAsReceiver()
         If rdoPolarAnnulus.Checked Then
-            ucrSaveGraph.SetPrefix("Polar_Annulus")
+            ucrSaveGraph.SetPrefix("polar_annulus")
         ElseIf rdoPolarPlot.Checked Then
-            ucrSaveGraph.SetPrefix("Polar_Plot")
+            ucrSaveGraph.SetPrefix("polar_plot")
         ElseIf rdoPolarCluster.Checked Then
-            ucrSaveGraph.SetPrefix("Polar_Cluster")
+            ucrSaveGraph.SetPrefix("polar_cluster")
         ElseIf rdoPolarFrequency.Checked Then
-            ucrSaveGraph.SetPrefix("Polar_Frequency")
+            ucrSaveGraph.SetPrefix("polar_frequency")
         ElseIf rdoPercentileRose.Checked Then
-            ucrSaveGraph.SetPrefix("Percentile_Rose")
+            ucrSaveGraph.SetPrefix("percentile_rose")
         End If
         AddRemoveStatistic()
     End Sub
