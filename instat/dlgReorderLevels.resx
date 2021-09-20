@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="rdoHand.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -184,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoHand.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="rdoProperty.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoProperty.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="rdoVariable.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -256,7 +256,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoVariable.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVariable.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="lblOptions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,7 +316,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +349,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrChkReverseOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 185</value>
@@ -484,7 +484,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 114</value>
+    <value>78, 115</value>
   </data>
   <data name="ucrNudShift.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -697,9 +697,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMethods.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
-  <data name="ucrReceiverValue.AutoSize" type="System.Boolean, mscorlib">
+  <metadata name="ttAsIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ttAppearance.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
+  </metadata>
+  <metadata name="ttFrequency.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>215, 17</value>
+  </metadata>
+  <metadata name="ttSequence.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>314, 17</value>
+  </metadata>
+  <metadata name="ttShift.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>413, 17</value>
+  </metadata>
+  <metadata name="ttShuffle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>512, 17</value>
+  </metadata>
+  <metadata name="ttAnonymise.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>611, 17</value>
+  </metadata>
+  <data name="ucrReceiverFactorX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -710,33 +731,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>472, 419</value>
-  </data>
-  <data name="ucrReceiverFactorX.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrReceiverFactorX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 90</value>
-  </data>
-  <data name="ucrReceiverFactorX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverFactorX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
-  </data>
-  <data name="ucrReceiverFactorX.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverFactorX.Name" xml:space="preserve">
-    <value>ucrReceiverFactorX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverFactorX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverFactorX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverFactorX.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrSaveResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 335</value>
@@ -760,7 +754,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveResults.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrInputOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 174</value>
@@ -781,7 +775,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputOptions.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrChkReverseVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 204</value>
@@ -802,7 +796,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkReverseVariable.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 7</value>
@@ -823,19 +817,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ucrReceiverFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 90</value>
+    <value>238, 92</value>
   </data>
   <data name="ucrReceiverFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>131, 21</value>
   </data>
   <data name="ucrReceiverFactor.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -850,7 +844,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -877,7 +871,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverVariable.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 364</value>
@@ -898,7 +892,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="ucrReorderFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 116</value>
@@ -919,7 +913,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReorderFactor.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="ucrSelectorFactorLevelsToReorder.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 60</value>
@@ -943,10 +937,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorFactorLevelsToReorder.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>17</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -954,34 +945,76 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Reorder Levels</value>
   </data>
+  <data name="&gt;&gt;ttAsIs.Name" xml:space="preserve">
+    <value>ttAsIs</value>
+  </data>
+  <data name="&gt;&gt;ttAsIs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttAppearance.Name" xml:space="preserve">
+    <value>ttAppearance</value>
+  </data>
+  <data name="&gt;&gt;ttAppearance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttFrequency.Name" xml:space="preserve">
+    <value>ttFrequency</value>
+  </data>
+  <data name="&gt;&gt;ttFrequency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttSequence.Name" xml:space="preserve">
+    <value>ttSequence</value>
+  </data>
+  <data name="&gt;&gt;ttSequence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttShift.Name" xml:space="preserve">
+    <value>ttShift</value>
+  </data>
+  <data name="&gt;&gt;ttShift.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttShuffle.Name" xml:space="preserve">
+    <value>ttShuffle</value>
+  </data>
+  <data name="&gt;&gt;ttShuffle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttAnonymise.Name" xml:space="preserve">
+    <value>ttAnonymise</value>
+  </data>
+  <data name="&gt;&gt;ttAnonymise.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgReorderLevels</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 90</value>
+  <data name="ucrReceiverFactorX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 92</value>
   </data>
-  <data name="ucrReceiverValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverFactorX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+  <data name="ucrReceiverFactorX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 21</value>
   </data>
-  <data name="ucrReceiverValue.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="ucrReceiverFactorX.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverValue.Name" xml:space="preserve">
-    <value>ucrReceiverValue</value>
+  <data name="&gt;&gt;ucrReceiverFactorX.Name" xml:space="preserve">
+    <value>ucrReceiverFactorX</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverValue.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorX.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverValue.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorX.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverValue.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFactorX.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
 </root>

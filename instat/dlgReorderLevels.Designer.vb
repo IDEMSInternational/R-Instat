@@ -38,6 +38,7 @@ Partial Class dlgReorderLevels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.rdoHand = New System.Windows.Forms.RadioButton()
@@ -55,7 +56,13 @@ Partial Class dlgReorderLevels
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoAppearance = New System.Windows.Forms.RadioButton()
         Me.rdoAsIs = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverValue = New instat.ucrReceiverSingle()
+        Me.ttAsIs = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttAppearance = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttFrequency = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttSequence = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttShift = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttShuffle = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttAnonymise = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverFactorX = New instat.ucrReceiverSingle()
         Me.ucrChkReverseOrder = New instat.ucrCheck()
         Me.ucrInputPrefix = New instat.ucrInputTextBox()
@@ -204,14 +211,47 @@ Partial Class dlgReorderLevels
         Me.rdoAsIs.TabStop = True
         Me.rdoAsIs.UseVisualStyleBackColor = True
         '
-        'ucrReceiverValue
+        'ttAsIs
         '
-        resources.ApplyResources(Me.ucrReceiverValue, "ucrReceiverValue")
-        Me.ucrReceiverValue.frmParent = Me
-        Me.ucrReceiverValue.Name = "ucrReceiverValue"
-        Me.ucrReceiverValue.Selector = Nothing
-        Me.ucrReceiverValue.strNcFilePath = ""
-        Me.ucrReceiverValue.ucrSelector = Nothing
+        Me.ttAsIs.AutoPopDelay = 10000
+        Me.ttAsIs.InitialDelay = 500
+        Me.ttAsIs.ReshowDelay = 100
+        '
+        'ttAppearance
+        '
+        Me.ttAppearance.AutoPopDelay = 10000
+        Me.ttAppearance.InitialDelay = 500
+        Me.ttAppearance.ReshowDelay = 100
+        '
+        'ttFrequency
+        '
+        Me.ttFrequency.AutoPopDelay = 10000
+        Me.ttFrequency.InitialDelay = 500
+        Me.ttFrequency.ReshowDelay = 100
+        '
+        'ttSequence
+        '
+        Me.ttSequence.AutoPopDelay = 10000
+        Me.ttSequence.InitialDelay = 500
+        Me.ttSequence.ReshowDelay = 100
+        '
+        'ttShift
+        '
+        Me.ttShift.AutoPopDelay = 10000
+        Me.ttShift.InitialDelay = 500
+        Me.ttShift.ReshowDelay = 100
+        '
+        'ttShuffle
+        '
+        Me.ttShuffle.AutoPopDelay = 10000
+        Me.ttShuffle.InitialDelay = 500
+        Me.ttShuffle.ReshowDelay = 100
+        '
+        'ttAnonymise
+        '
+        Me.ttAnonymise.AutoPopDelay = 10000
+        Me.ttAnonymise.InitialDelay = 500
+        Me.ttAnonymise.ReshowDelay = 100
         '
         'ucrReceiverFactorX
         '
@@ -317,7 +357,6 @@ Partial Class dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverValue)
         Me.Controls.Add(Me.ucrReceiverFactorX)
         Me.Controls.Add(Me.grpMethods)
         Me.Controls.Add(Me.ucrSaveResults)
@@ -377,6 +416,12 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoAppearance As RadioButton
     Friend WithEvents rdoAsIs As RadioButton
     Friend WithEvents ucrPnlProperty As UcrPanel
+    Friend WithEvents ttAsIs As ToolTip
+    Friend WithEvents ttAppearance As ToolTip
+    Friend WithEvents ttFrequency As ToolTip
+    Friend WithEvents ttSequence As ToolTip
+    Friend WithEvents ttShift As ToolTip
+    Friend WithEvents ttShuffle As ToolTip
+    Friend WithEvents ttAnonymise As ToolTip
     Friend WithEvents ucrReceiverFactorX As ucrReceiverSingle
-    Friend WithEvents ucrReceiverValue As ucrReceiverSingle
 End Class
