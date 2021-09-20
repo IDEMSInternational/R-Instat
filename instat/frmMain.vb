@@ -2421,6 +2421,6 @@ Public Class frmMain
     End Sub
 
     Private Sub ExportToClimsoftToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToClimsoftToolStripMenuItem.Click
-        dlgExportForClimsoft.ShowDialog()
+        dlgExportToClimsoft.ShowDialog()
     End Sub
 End Class
