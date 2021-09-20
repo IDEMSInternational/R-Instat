@@ -57,7 +57,7 @@ Partial Class frmMain
         Me.mnuDescribeThreeVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeThreeVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecific = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
@@ -697,7 +697,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         resources.ApplyResources(Me.mnuDescribe, "mnuDescribe")
         Me.mnuDescribe.Tag = "Describe"
@@ -798,12 +798,12 @@ Partial Class frmMain
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
         resources.ApplyResources(Me.mnuDescribeThreeVariableFrequencies, "mnuDescribeThreeVariableFrequencies")
         '
-        'mnuDescribeSpecific
+        'mnuDescribeSpecificTablesGraphs
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
-        Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
-        resources.ApplyResources(Me.mnuDescribeSpecific, "mnuDescribeSpecific")
-        Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
+        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
+        Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
+        resources.ApplyResources(Me.mnuDescribeSpecificTablesGraphs, "mnuDescribeSpecificTablesGraphs")
+        Me.mnuDescribeSpecificTablesGraphs.Tag = "Table_Dialogs"
         '
         'mnuDescribeSpecificFrequency
         '
@@ -4432,7 +4432,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeGeneralColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralTabulation As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralGraphics As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecific As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificTablesGraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificFrequency As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMultipleResponse As ToolStripMenuItem

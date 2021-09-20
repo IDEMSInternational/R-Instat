@@ -118,117 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="mnuDescribe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="mnuDescribe.Text" xml:space="preserve">
-    <value>Describe</value>
-  </data>
   <data name="mnuDescribeOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuDescribeOneVariable.Text" xml:space="preserve">
     <value>One Variable</value>
   </data>
-  <data name="mnuDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeOneVariableSummarise.Text" xml:space="preserve">
-    <value>Summarise...</value>
-  </data>
-  <data name="mnuDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeOneVariableGraph.Text" xml:space="preserve">
-    <value>Graph...</value>
-  </data>
-  <data name="ToolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
-  </data>
-  <data name="mnuDescribeOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeOneVariableFrequencies.Text" xml:space="preserve">
-    <value>Frequencies...</value>
-  </data>
-  <data name="mnuDescribeOneVariableRatingData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeOneVariableRatingData.Text" xml:space="preserve">
-    <value>Rating Data...</value>
-  </data>
   <data name="mnuDescribeTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuDescribeTwoVariables.Text" xml:space="preserve">
     <value>Two Variables</value>
   </data>
-  <data name="mnuDescribeTwoVariablesSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesSummarise.Text" xml:space="preserve">
-    <value>Summarise...</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesGraph.Text" xml:space="preserve">
-    <value>Graph...</value>
-  </data>
-  <data name="ToolStripSeparator34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesFrequencies.Text" xml:space="preserve">
-    <value>Frequencies...</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeTwoVariablesPivotTable.Text" xml:space="preserve">
-    <value>Pivot Table...</value>
-  </data>
   <data name="mnuDescribeThreeVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuDescribeThreeVariable.Text" xml:space="preserve">
     <value>Three Variables</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mnuDescribeThreeVariableSummarise.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuDescribeThreeVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeThreeVariableSummarise.Text" xml:space="preserve">
-    <value>Summarise...</value>
-  </data>
-  <data name="mnuDescribeThreeVariableGraph.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuDescribeThreeVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeThreeVariableGraph.Text" xml:space="preserve">
-    <value>Graph...</value>
-  </data>
-  <data name="ToolStripSeparator36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
-  </data>
-  <data name="mnuDescribeThreeVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="mnuDescribeThreeVariableFrequencies.Text" xml:space="preserve">
-    <value>Frequencies...</value>
-  </data>
-  <data name="mnuDescribeSpecific.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeSpecific.Text" xml:space="preserve">
-    <value>Specific</value>
   </data>
   <data name="mnuDescribeSpecificFrequency.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 22</value>
@@ -242,6 +148,7 @@
   <data name="mnuDescribeSpecificSummary.Text" xml:space="preserve">
     <value>Summary Tables...</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mnuDescribeSpecificMultipleResponse.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -326,11 +233,146 @@
   <data name="mnuDescribeSpecificParallelCoordinatePlot.Text" xml:space="preserve">
     <value>Parallel Coordinate Plot...</value>
   </data>
+  <data name="mnuDescribeSpecificTablesGraphs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeSpecificTablesGraphs.Text" xml:space="preserve">
+    <value>Specific Tables/Graphs</value>
+  </data>
   <data name="mnuDescribeGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuDescribeGeneral.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 6</value>
+  </data>
+  <data name="mnuDescribeMultivariate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeMultivariate.Text" xml:space="preserve">
+    <value>Multivariate</value>
+  </data>
+  <data name="ToolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 6</value>
+  </data>
+  <data name="mnuDescribeUseGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeUseGraph.Text" xml:space="preserve">
+    <value>Use Graph...</value>
+  </data>
+  <data name="mnuDescribeCombineGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeCombineGraph.Text" xml:space="preserve">
+    <value>Combine Graphs...</value>
+  </data>
+  <data name="mnuDescribeThemes.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuDescribeThemes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeThemes.Text" xml:space="preserve">
+    <value>Themes...</value>
+  </data>
+  <data name="mnuDescribeThemes.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuDescribeViewGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuDescribeViewGraph.Text" xml:space="preserve">
+    <value>View Graph...</value>
+  </data>
+  <data name="mnuDescribe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="mnuDescribe.Text" xml:space="preserve">
+    <value>Describe</value>
+  </data>
+  <data name="mnuDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeOneVariableSummarise.Text" xml:space="preserve">
+    <value>Summarise...</value>
+  </data>
+  <data name="mnuDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeOneVariableGraph.Text" xml:space="preserve">
+    <value>Graph...</value>
+  </data>
+  <data name="ToolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 6</value>
+  </data>
+  <data name="mnuDescribeOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeOneVariableFrequencies.Text" xml:space="preserve">
+    <value>Frequencies...</value>
+  </data>
+  <data name="mnuDescribeOneVariableRatingData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeOneVariableRatingData.Text" xml:space="preserve">
+    <value>Rating Data...</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesSummarise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesSummarise.Text" xml:space="preserve">
+    <value>Summarise...</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesGraph.Text" xml:space="preserve">
+    <value>Graph...</value>
+  </data>
+  <data name="ToolStripSeparator34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 6</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesFrequencies.Text" xml:space="preserve">
+    <value>Frequencies...</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeTwoVariablesPivotTable.Text" xml:space="preserve">
+    <value>Pivot Table...</value>
+  </data>
+  <data name="mnuDescribeThreeVariableSummarise.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuDescribeThreeVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeThreeVariableSummarise.Text" xml:space="preserve">
+    <value>Summarise...</value>
+  </data>
+  <data name="mnuDescribeThreeVariableGraph.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuDescribeThreeVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeThreeVariableGraph.Text" xml:space="preserve">
+    <value>Graph...</value>
+  </data>
+  <data name="ToolStripSeparator36.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 6</value>
+  </data>
+  <data name="mnuDescribeThreeVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="mnuDescribeThreeVariableFrequencies.Text" xml:space="preserve">
+    <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeGeneralColumnSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 22</value>
@@ -365,15 +407,6 @@
   <data name="mnuDescribeGeneralUseSummaries.Text" xml:space="preserve">
     <value>Use Summaries...</value>
   </data>
-  <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
-  </data>
-  <data name="mnuDescribeMultivariate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeMultivariate.Text" xml:space="preserve">
-    <value>Multivariate</value>
-  </data>
   <data name="mnuDescribeMultivariateCorrelations.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 22</value>
   </data>
@@ -391,39 +424,6 @@
   </data>
   <data name="mnuDescribeMultivariateCanonicalCorrelations.Text" xml:space="preserve">
     <value>Canonical Correlations...</value>
-  </data>
-  <data name="ToolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
-  </data>
-  <data name="mnuDescribeUseGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeUseGraph.Text" xml:space="preserve">
-    <value>Use Graph...</value>
-  </data>
-  <data name="mnuDescribeCombineGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeCombineGraph.Text" xml:space="preserve">
-    <value>Combine Graphs...</value>
-  </data>
-  <data name="mnuDescribeThemes.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuDescribeThemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeThemes.Text" xml:space="preserve">
-    <value>Themes...</value>
-  </data>
-  <data name="mnuDescribeThemes.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuDescribeViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="mnuDescribeViewGraph.Text" xml:space="preserve">
-    <value>View Graph...</value>
   </data>
   <data name="mnuModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
@@ -1026,7 +1026,9 @@
     <value>Acknowledgements</value>
   </data>
   <metadata name="OpenFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+
     <value>544, 52</value>
+
   </metadata>
   <data name="ToolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
@@ -1103,6 +1105,7 @@
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 6</value>
   </data>
+
   <data name="ExportToClimsoftToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1112,6 +1115,7 @@
   <data name="ExportToClimsoftToolStripMenuItem.Text" xml:space="preserve">
     <value>Export to Climsoft...</value>
   </data>
+
   <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
@@ -1205,12 +1209,14 @@
   <data name="mnuTidyandExamineClimaticDataEntry.Text" xml:space="preserve">
     <value>Daily Data Entry...</value>
   </data>
+
   <data name="CompareColumnsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
   </data>
   <data name="CompareColumnsToolStripMenuItem.Text" xml:space="preserve">
     <value>Compare Columns...</value>
   </data>
+
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
   </data>
@@ -6663,10 +6669,10 @@
   <data name="&gt;&gt;mnuDescribeThreeVariableFrequencies.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecific.Name" xml:space="preserve">
-    <value>mnuDescribeSpecific</value>
+  <data name="&gt;&gt;mnuDescribeSpecificTablesGraphs.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificTablesGraphs</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecific.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuDescribeSpecificTablesGraphs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificFrequency.Name" xml:space="preserve">
