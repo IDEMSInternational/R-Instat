@@ -45,9 +45,9 @@ Public Class dlgRugPlot
     Private clsLabelAesFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
     Private clsGeomPointSizeFunction As New RFunction
-    Private clsSizeAes As New RFunction
     Private clsGeomPointShapeFunction As New RFunction
-    Private clsShapeAes As New RFunction
+    Private clsShapeAesFunction As New RFunction
+    Private clsSizeAesFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
@@ -72,7 +72,6 @@ Public Class dlgRugPlot
         Dim dctLabelPositions As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
-
 
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -102,6 +101,10 @@ Public Class dlgRugPlot
         ucrReceiverPoints.SetParameterIsString()
         ucrReceiverPoints.Selector = ucrHeatMapSelector
         ucrReceiverPoints.bWithQuotes = False
+
+        ucrNudShape.SetParameter(New RParameter("size", 2))
+        ucrNudShape.Visible = False
+        ucrNudShape.SetLinkedDisplayControl(lblPointsSize)
 
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -163,9 +166,9 @@ Public Class dlgRugPlot
         clsLabelAesFunction = New RFunction
         clsColourPaletteFunction = New RFunction
         clsGeomPointSizeFunction = New RFunction
-        clsSizeAes = New RFunction
+        clsSizeAesFunction = New RFunction
         clsGeomPointShapeFunction = New RFunction
-        clsShapeAes = New RFunction
+        clsShapeAesFunction = New RFunction
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -197,27 +200,25 @@ Public Class dlgRugPlot
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
-
+        clsLabelAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
         clsGeomPointSizeFunction.SetPackageName("ggplot2")
         clsGeomPointSizeFunction.SetRCommand("geom_point")
-        clsGeomPointSizeFunction.AddParameter("mapping", clsRFunctionParameter:=clsSizeAes, iPosition:=0)
+        clsGeomPointSizeFunction.AddParameter("mapping", clsRFunctionParameter:=clsSizeAesFunction, iPosition:=0)
 
-        clsSizeAes.SetPackageName("ggplot2")
-        clsSizeAes.SetRCommand("aes")
+        clsSizeAesFunction.SetPackageName("ggplot2")
+        clsSizeAesFunction.SetRCommand("aes")
 
         clsGeomPointShapeFunction.SetPackageName("ggplot2")
         clsGeomPointShapeFunction.SetRCommand("geom_point")
-        clsGeomPointShapeFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeAes, iPosition:=0)
+        clsGeomPointShapeFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeAesFunction, iPosition:=0)
+        clsGeomPointShapeFunction.AddParameter("size", 5, iPosition:=2)
 
-        clsShapeAes.SetPackageName("ggplot2")
-        clsShapeAes.SetRCommand("aes")
-        clsShapeAes.AddParameter("size", 5, iPosition:=1)
+        clsShapeAesFunction.SetPackageName("ggplot2")
+        clsShapeAesFunction.SetRCommand("aes")
 
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
-
-        clsLabelAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -244,7 +245,7 @@ Public Class dlgRugPlot
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
         ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
-        ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeAes, New RParameter("shape", 0), iAdditionalPairNo:=1)
+        ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
 
@@ -257,7 +258,8 @@ Public Class dlgRugPlot
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
         ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
-        ucrReceiverPoints.SetRCode(clsSizeAes, bReset)
+        ucrReceiverPoints.SetRCode(clsSizeAesFunction, bReset)
+        ucrNudShape.SetRCode(clsGeomPointShapeFunction, bReset)
         bRCodeSet = True
     End Sub
 
@@ -324,12 +326,14 @@ Public Class dlgRugPlot
 
     Private Sub ucrReceiverPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPoints.ControlValueChanged
         If bRCodeSet Then
+            ucrNudShape.Visible = False
             If ucrReceiverPoints.IsEmpty Then
                 clsBaseOperator.RemoveParameterByName("geom_point")
             Else
                 If ucrReceiverPoints.strCurrDataType = "numeric" Then
                     clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointSizeFunction, iPosition:=7)
                 ElseIf ucrReceiverPoints.strCurrDataType = "factor" Then
+                    ucrNudShape.Visible = True
                     clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointShapeFunction, iPosition:=7)
                 Else
                     clsBaseOperator.RemoveParameterByName("geom_point")
