@@ -36,7 +36,7 @@ Public Class dlgRatingScales
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 519
-
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         lblOrderedFactor.Text = "Variables:"
 
         ucrPnlSjpLikert.Enabled = True
@@ -53,7 +53,7 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked, rdoLikert}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 0))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
@@ -66,6 +66,7 @@ Public Class dlgRatingScales
         ucrReceiverWeights.SetDataType("numeric")
         ucrReceiverWeights.strSelectorHeading = "Numerics"
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
+        ucrReceiverWeights.SetRDefault("NULL")
 
         'ucrPnlSortplot.likert
         rdoLikert.Enabled = True
@@ -141,14 +142,14 @@ Public Class dlgRatingScales
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpLikert, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=2)
-        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjpLikert, ucrChkWeights.GetParameter, iAdditionalPairNo:=1)
+        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("coord.flip", 12), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpLikert, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
-        'ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
         ucrPnlSjpLikert.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -218,7 +219,6 @@ Public Class dlgRatingScales
             ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoTable.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
-            ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
