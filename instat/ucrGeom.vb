@@ -1978,7 +1978,7 @@ Public Class ucrGeom
 
         clsgeom_treemap_text.SetGeomName("geom_treemap_text")
         clsgeom_treemap_text.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
-        clsgeom_treemap_text.AddAesParameter("label", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_treemap_text.AddAesParameter("label", bIsMandatory:=True)
         clsgeom_treemap_text.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_treemap_text.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_treemap_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
