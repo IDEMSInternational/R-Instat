@@ -59,7 +59,7 @@ Public Class sdgOneVarCompareModels
         ucrSaveGOF.ucrChkSave.Checked = False
 
         'ucrSaveDisplayChi
-        ' ucrSaveDisplayChi.SetPrefix("ChiSquare")
+        ' ucrSaveDisplayChi.SetPrefix("chiSquare")
         ucrSaveDisplayChi.SetSaveTypeAsDataFrame()
         ucrSaveDisplayChi.SetCheckBoxText("DisplayChi")
         ucrSaveDisplayChi.SetIsComboBox()
