@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgHeatMapPlot
+Public Class dlgRugPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeomTileFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -52,7 +52,7 @@ Public Class dlgHeatMapPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
     Private strGeomParameterNames() As String = {strFirstParameterName}
-    Private Sub dlgHeatMapPLot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgRugPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False

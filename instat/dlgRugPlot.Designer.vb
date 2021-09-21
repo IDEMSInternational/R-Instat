@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgHeatMapPlot
+Partial Class dlgRugPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgHeatMapPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHeatMapPlot))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRugPlot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdTileOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
@@ -235,7 +235,7 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.lblPointsSize, "lblPointsSize")
         Me.lblPointsSize.Name = "lblPointsSize"
         '
-        'dlgHeatMapPlot
+        'dlgRugPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -264,7 +264,7 @@ Partial Class dlgHeatMapPlot
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgHeatMapPlot"
+        Me.Name = "dlgRugPlot"
         Me.grpBoxPoints.ResumeLayout(False)
         Me.grpBoxPoints.PerformLayout()
         Me.ResumeLayout(False)
