@@ -63,7 +63,6 @@ Partial Class dlgBarAndPieChart
         Me.lblPlace = New System.Windows.Forms.Label()
         Me.ttArea = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttFill = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkSameLabelAsFill = New instat.ucrCheck()
         Me.ucrInputPlace = New instat.ucrInputComboBox()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrChkLayout = New instat.ucrCheck()
@@ -231,12 +230,6 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.lblPlace, "lblPlace")
         Me.lblPlace.Name = "lblPlace"
-        '
-        'ucrChkSameLabelAsFill
-        '
-        Me.ucrChkSameLabelAsFill.Checked = False
-        resources.ApplyResources(Me.ucrChkSameLabelAsFill, "ucrChkSameLabelAsFill")
-        Me.ucrChkSameLabelAsFill.Name = "ucrChkSameLabelAsFill"
         '
         'ucrInputPlace
         '
@@ -441,7 +434,6 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkSameLabelAsFill)
         Me.Controls.Add(Me.lblPlace)
         Me.Controls.Add(Me.ucrInputPlace)
         Me.Controls.Add(Me.lblLabel)
@@ -550,5 +542,4 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblPlace As Label
     Friend WithEvents ttArea As ToolTip
     Friend WithEvents ttFill As ToolTip
-    Friend WithEvents ucrChkSameLabelAsFill As ucrCheck
 End Class
