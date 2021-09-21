@@ -240,7 +240,7 @@ Public Class dlgRatingScales
             End If
         ElseIf rdoStacked.Checked Then
             clsSjtStackFrq.RemoveParameterByName("sort.frq")
-            clsSjtStackFrq.RemoveParameterByName("sort.frq")
+            clsSjpLikert.RemoveParameterByName("sort.frq")
             If rdoNoneLikert.Checked Then
                 clsSjpStackFrq.AddParameter("sort.frq", "NULL")
             ElseIf rdoLowAscendingLikert.Checked Then
