@@ -53,10 +53,10 @@ Public Class dlgReorderLevels
         ucrPnlOptions.AddFunctionNamesCondition(rdoVariable, "fct_reorder")
 
         ucrPnlOptions.AddToLinkedControls({ucrReorderFactor, ucrReceiverFactor}, {rdoHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkReverseOrder}, {rdoProperty}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrPnlProperty}, {rdoProperty}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverVariable, ucrInputOptions, ucrChkReverseVariable}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverFactorX, {rdoProperty, rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkReverseOrder.SetLinkedDisplayControl(grpMethods)
+        ucrPnlProperty.SetLinkedDisplayControl(grpMethods)
         ucrInputOptions.SetLinkedDisplayControl(lblOptions)
         ucrReceiverVariable.SetLinkedDisplayControl(lblVariable)
         'Set data frame paramater
@@ -128,7 +128,7 @@ Public Class dlgReorderLevels
         ucrPnlProperty.AddFunctionNamesCondition(rdoShuffle, "fct_shuffle")
         ucrPnlProperty.AddFunctionNamesCondition(rdoAnonymise, "fct_anon")
 
-        ucrPnlProperty.AddToLinkedControls(ucrNudShift, {rdoShift}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlProperty.AddToLinkedControls(ucrNudShift, {rdoShift}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeParameterValue:=True, objNewDefaultState:=1)
         ucrPnlProperty.AddToLinkedControls(ucrInputPrefix, {rdoAnonymise}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPrefix.SetLinkedDisplayControl(lblPrefix)
 
@@ -137,6 +137,7 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
         ucrSaveResults.SetLabelText("Save As:")
         ucrSaveResults.SetIsComboBox()
+        ucrSaveResults.bAddRemoveParameter = True
 
         ttAsIs.SetToolTip(rdoAsIs, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
         ttAppearance.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
@@ -145,6 +146,8 @@ Public Class dlgReorderLevels
         ttShift.SetToolTip(rdoShift, "Move the levels down: Example:  If 1, levels a, b, c, become b, c, a.  Use -1 to move up.")
         ttShuffle.SetToolTip(rdoShuffle, "Change into random order.")
         ttAnonymise.SetToolTip(rdoAnonymise, "Replace factor levels with arbitrary numeric identifiers.")
+
+        ucrChkReverseOrder.Visible = False
     End Sub
 
     Private Sub SetDefaults()
@@ -158,13 +161,13 @@ Public Class dlgReorderLevels
         clsForcatsReverse = New RFunction
         clsForcatsReorder = New RFunction
 
-        'reset
+        'Reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSaveResults.Reset()
         rdoAsIs.Checked = True
         rdoHand.Checked = True
         ucrReceiverFactor.SetMeAsReceiver()
-        ' Set default function
+        'Set default function
 
         clsForcatsInOrder.SetPackageName("forcats")
         clsForcatsInOrder.SetRCommand("fct_inorder")
@@ -180,7 +183,7 @@ Public Class dlgReorderLevels
 
         clsForcatsShift.SetPackageName("forcats")
         clsForcatsShift.SetRCommand("fct_shift")
-        clsForcatsShift.AddParameter("n", "1", iPosition:=1)
+        clsForcatsShift.AddParameter("n", 1, iPosition:=1)
 
         clsForcatsShuffle.SetPackageName("forcats")
         clsForcatsShuffle.SetRCommand("fct_shuffle")
@@ -216,10 +219,10 @@ Public Class dlgReorderLevels
         ucrSaveResults.AddAdditionalRCode(clsForcatsShuffle, iAdditionalPairNo:=5)
         ucrSaveResults.AddAdditionalRCode(clsForcatsAnonymise, iAdditionalPairNo:=6)
         ucrSaveResults.AddAdditionalRCode(clsForcatsReorder, iAdditionalPairNo:=7)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsReverse, iAdditionalPairNo:=8)
+        'ucrSaveResults.AddAdditionalRCode(clsForcatsReverse, iAdditionalPairNo:=8)
         ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
         ucrReceiverFactor.SetRCode(clsReorder, bReset)
-        ucrReceiverFactorX.SetRCode(clsForcatsReorder)
+        ucrReceiverFactorX.SetRCode(clsForcatsReorder, bReset)
         ucrReorderFactor.SetRCode(clsReorder, bReset)
         ucrSaveResults.SetRCode(clsReorder, bReset)
         ucrChkReverseOrder.SetRCode(clsForcatsReverse, bReset)
@@ -261,15 +264,11 @@ Public Class dlgReorderLevels
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrChkReverseOrder.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged
         If rdoProperty.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
-            If rdoAsIs.Checked AndAlso ucrChkReverseOrder.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverse)
+            If rdoAsIs.Checked Then
+                'ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverse)
             End If
             If rdoAppearance.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrder)
-            End If
-            If rdoAppearance.Checked AndAlso ucrChkReverseOrder.Checked Then
-                clsForcatsReverse.AddParameter("f", clsRFunctionParameter:=clsForcatsInOrder, iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverse)
             End If
             If rdoFrequency.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInFreq)
