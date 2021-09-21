@@ -82,6 +82,7 @@ Public Class dlgLinePlot
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
+        Dim dctSlopeLineColourOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -299,22 +300,94 @@ Public Class dlgLinePlot
         ucrNudDumbbellXEnd.SetParameter(New RParameter("size_xend", 6))
         ucrNudDumbbellXEnd.SetMinMax(0, Integer.MaxValue)
         ucrNudDumbbellXEnd.Increment = 0.1
-        ucrNudDumbbellX.SetDefaultState(4)
+        ucrNudDumbbellXEnd.SetDefaultState(4)
         ucrNudDumbbellXEnd.DecimalPlaces = 1
 
         ucrNudDumbbellLine.SetParameter(New RParameter("size", 7))
         ucrNudDumbbellLine.SetMinMax(0, Integer.MaxValue)
         ucrNudDumbbellLine.Increment = 0.1
-        ucrNudDumbbellX.SetDefaultState(0.5)
+        ucrNudDumbbellLine.SetDefaultState(0.5)
         ucrNudDumbbellLine.DecimalPlaces = 1
 
         ucrChkDumbbellSize.SetText("Size")
-        ucrChkDumbbellSize.AddParameterPresentCondition(True, "size")
-        ucrChkDumbbellSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkDumbbellSize.AddParameterPresentCondition(True, {"size", "size_x", "size_xend"})
+        ucrChkDumbbellSize.AddParameterPresentCondition(False, {"size", "size_x", "size_xend"}, False)
 
         ucrChkDumbbellColour.SetText("Colour")
-        ucrChkDumbbellColour.AddParameterPresentCondition(True, "colour")
-        ucrChkDumbbellColour.AddParameterPresentCondition(False, "colour", False)
+        ucrChkDumbbellColour.AddParameterPresentCondition(True, {"colour", "colour_x", "colour_xend"})
+        ucrChkDumbbellColour.AddParameterPresentCondition(False, {"colour", "colour_x", "colour_xend"}, False)
+
+        ucrInputSlopeLabelColour.SetParameter(New RParameter("data_label_fill_color", 4))
+        ucrInputSlopeLabelColour.SetItems(dctColourOptions)
+        ucrInputSlopeLabelColour.SetDropDownStyleAsNonEditable()
+        ucrInputSlopeLabelColour.SetRDefault(Chr(34) & "white" & Chr(34))
+
+        ucrNudSlopeLabelSize.SetParameter(New RParameter("data_label_line_size", 5))
+        ucrNudSlopeLabelSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSlopeLabelSize.Increment = 0.05
+        ucrNudSlopeLabelSize.SetDefaultState(0)
+        ucrNudSlopeLabelSize.DecimalPlaces = 2
+
+        ucrNudSlopeLabelPadding.SetParameter(New RParameter("data_label_padding", 6))
+        ucrNudSlopeLabelPadding.SetMinMax(0, Integer.MaxValue)
+        ucrNudSlopeLabelPadding.Increment = 0.05
+        ucrNudSlopeLabelPadding.SetDefaultState(0.05)
+        ucrNudSlopeLabelPadding.DecimalPlaces = 2
+
+        ucrChkSlopeLabelOptions.SetText("Label")
+        ucrChkSlopeLabelOptions.AddParameterPresentCondition(True, "data_label_fill_color")
+        ucrChkSlopeLabelOptions.AddParameterPresentCondition(False, "data_label_fill_color", False)
+
+        ucrInputSlopeTextColour.SetParameter(New RParameter("data_text_color", 7))
+        ucrInputSlopeTextColour.SetItems(dctColourOptions)
+        ucrInputSlopeTextColour.SetDropDownStyleAsNonEditable()
+        ucrInputSlopeTextColour.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrNudSlopeTextSize.SetParameter(New RParameter("data_text_size", 8))
+        ucrNudSlopeTextSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSlopeTextSize.Increment = 0.5
+        ucrNudSlopeTextSize.SetDefaultState(2.5)
+        ucrNudSlopeTextSize.DecimalPlaces = 1
+
+        UcrNudSlopeYTextSize.SetParameter(New RParameter("y_text_size", 9))
+        UcrNudSlopeYTextSize.SetMinMax(0, Integer.MaxValue)
+        UcrNudSlopeYTextSize.Increment = 0.5
+        UcrNudSlopeYTextSize.SetDefaultState(3)
+        UcrNudSlopeYTextSize.DecimalPlaces = 1
+
+        ucrChkSlopeTextOptions.SetText("Text")
+        ucrChkSlopeTextOptions.AddParameterPresentCondition(True, "data_text_color")
+        ucrChkSlopeTextOptions.AddParameterPresentCondition(False, "data_text_color", False)
+
+        ucrInputSlopeLineColour.SetParameter(New RParameter("line_color", 10))
+        dctSlopeLineColourOptions.Add("ByGroup", Chr(34) & "ByGroup" & Chr(34))
+        dctSlopeLineColourOptions.Add("Null", Chr(34) & "NULL" & Chr(34))
+        dctSlopeLineColourOptions.Add("Black", Chr(34) & "black" & Chr(34))
+        dctSlopeLineColourOptions.Add("White", Chr(34) & "white" & Chr(34))
+        dctSlopeLineColourOptions.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctSlopeLineColourOptions.Add("Red", Chr(34) & "red" & Chr(34))
+        dctSlopeLineColourOptions.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctSlopeLineColourOptions.Add("Purple", Chr(34) & "purple" & Chr(34))
+        dctSlopeLineColourOptions.Add("Green", Chr(34) & "green" & Chr(34))
+        dctSlopeLineColourOptions.Add("Orange", Chr(34) & "orange" & Chr(34))
+        dctSlopeLineColourOptions.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctSlopeLineColourOptions.Add("Brown", Chr(34) & "brown" & Chr(34))
+        dctSlopeLineColourOptions.Add("Pink", Chr(34) & "pink" & Chr(34))
+        ucrInputSlopeLineColour.SetItems(dctSlopeLineColourOptions)
+        ucrInputSlopeLineColour.SetDropDownStyleAsNonEditable()
+        ucrInputSlopeLineColour.SetRDefault(Chr(34) & "ByGroup" & Chr(34))
+
+        ucrNudSlopeLineThickness.SetParameter(New RParameter("line_thickness", 12))
+        ucrNudSlopeLineThickness.SetMinMax(0, Integer.MaxValue)
+        ucrNudSlopeLineThickness.Increment = 0.5
+        ucrNudSlopeLineThickness.SetDefaultState(1)
+        ucrNudSlopeLineThickness.DecimalPlaces = 1
+
+        ucrChkSlopeLineOptions.SetText("Line")
+        ucrChkSlopeLineOptions.AddParameterPresentCondition(True, "line_color")
+        ucrChkSlopeLineOptions.AddParameterPresentCondition(False, "line_color", False)
+
+        'ucrChkSlopeLegend.SetText("Legend")
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -323,9 +396,18 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup, ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot, ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeY, ucrReceiverSlopeColour}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX, ucrInputDumbbellXEnd, ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
-        ucrChkDumbbellSize.AddToLinkedControls({ucrNudDumbbellX, ucrNudDumbbellXEnd, ucrNudDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeY, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions, ucrChkSlopeLegend}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDumbbellSize.AddToLinkedControls({ucrNudDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4.0)
+        ucrChkDumbbellSize.AddToLinkedControls({ucrNudDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4.0)
+        ucrChkDumbbellSize.AddToLinkedControls({ucrNudDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+
+        ucrChkSlopeLabelOptions.AddToLinkedControls({ucrInputSlopeLabelColour, ucrNudSlopeLabelSize, ucrNudSlopeLabelPadding}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkSlopeTextOptions.AddToLinkedControls({ucrInputSlopeTextColour, ucrNudSlopeTextSize, UcrNudSlopeYTextSize}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkSlopeLineOptions.AddToLinkedControls({ucrInputSlopeLineColour, ucrNudSlopeLineThickness}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrChkFormula.SetLinkedDisplayControl(grpSmoothOptions)
         ucrReceiverXEnd.SetLinkedDisplayControl(lblXEnd)
@@ -341,6 +423,15 @@ Public Class dlgLinePlot
         ucrNudDumbbellX.SetLinkedDisplayControl(lblXSize)
         ucrNudDumbbellXEnd.SetLinkedDisplayControl(lblXEndSize)
         ucrNudDumbbellLine.SetLinkedDisplayControl(lblLineSize)
+
+        ucrInputSlopeLabelColour.SetLinkedDisplayControl(lblSlopeLabelColour)
+        ucrNudSlopeLabelSize.SetLinkedDisplayControl(lblSlopeLabelSize)
+        ucrNudSlopeLabelPadding.SetLinkedDisplayControl(lblSlopeLabelPadding)
+        ucrInputSlopeTextColour.SetLinkedDisplayControl(lblSopeTextColour)
+        ucrNudSlopeTextSize.SetLinkedDisplayControl(lblSlopeTextSize)
+        UcrNudSlopeYTextSize.SetLinkedDisplayControl(lblSlopeYTextSize)
+        ucrInputSlopeLineColour.SetLinkedDisplayControl(lblSlopeLineColour)
+        ucrNudSlopeLineThickness.SetLinkedDisplayControl(lblSlopeLineTicknes)
     End Sub
 
     Private Sub SetDefaults()
@@ -383,6 +474,12 @@ Public Class dlgLinePlot
 
         clsDumbbellFunction.SetPackageName("ggalt")
         clsDumbbellFunction.SetRCommand("geom_dumbbell")
+        clsDumbbellFunction.AddParameter("colour_x", Chr(34) & "orange" & Chr(34), iPosition:=2)
+        clsDumbbellFunction.AddParameter("colour_xend", Chr(34) & "purple" & Chr(34), iPosition:=3)
+        clsDumbbellFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=4)
+        clsDumbbellFunction.AddParameter("size_x", ucrNudDumbbellX.GetText, iPosition:=5)
+        clsDumbbellFunction.AddParameter("size_xend", ucrNudDumbbellXEnd.GetText, iPosition:=6)
+        clsDumbbellFunction.AddParameter("size", ucrNudDumbbellLine.GetText, iPosition:=7)
 
         clsggSlopeFunction.SetRCommand("newggslopegraph_amended")
         clsggSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -442,8 +539,17 @@ Public Class dlgLinePlot
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
         ucrFamilyInput.SetRCode(clsListFunction, bReset)
         ucrChkFormula.SetRCode(clsBaseOperator, bReset)
-        ucrChkDumbbellColour.SetRCode(clsDumbbellFunction, bReset)
-        ucrChkDumbbellSize.SetRCode(clsDumbbellFunction, bReset)
+        'ucrChkDumbbellColour.SetRCode(clsDumbbellFunction, bReset)
+        'ucrChkDumbbellSize.SetRCode(clsDumbbellFunction, bReset)
+        ucrInputDumbbellLine.SetRCode(clsDumbbellFunction, bReset)
+        ucrInputDumbbellX.SetRCode(clsDumbbellFunction, bReset)
+        ucrInputDumbbellXEnd.SetRCode(clsDumbbellFunction, bReset)
+        ucrNudDumbbellLine.SetRCode(clsDumbbellFunction, bReset)
+        ucrNudDumbbellX.SetRCode(clsDumbbellFunction, bReset)
+        ucrNudDumbbellXEnd.SetRCode(clsDumbbellFunction, bReset)
+        ucrChkSlopeLabelOptions.SetRCode(clsggSlopeFunction, bReset)
+        ucrChkSlopeTextOptions.SetRCode(clsggSlopeFunction, bReset)
+        ucrChkSlopeLineOptions.SetRCode(clsggSlopeFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -585,6 +691,11 @@ Public Class dlgLinePlot
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
             clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsggSlopeFunction, iPosition:=0)
             clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=1)
+            'If ucrChkSlopeLegend.Checked Then
+            '    clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            'Else
+            '    clsBaseOperator.RemoveParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            'End If
         End If
     End Sub
 
@@ -606,7 +717,7 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged
         SetGraphPrefixAndRcommand()
         SetOptionButtonText()
     End Sub
@@ -629,6 +740,14 @@ Public Class dlgLinePlot
         Else
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+
     End Sub
 
     'Private Sub ucrReceiverXEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXEnd.ControlValueChanged, ucrReceiverX.ControlValueChanged
