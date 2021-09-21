@@ -234,9 +234,9 @@ Public Class dlgRatingScales
             ElseIf rdoLowDescendingLikert.Checked Then
                 clsSjpLikert.AddParameter("sort.frq", Chr(34) & "neg.desc" & Chr(34))
             ElseIf rdoHighAscendingLikert.Checked Then
-                clsSjpLikert.AddParameter("sort.frq", Chr(34) & "posc.asc" & Chr(34))
+                clsSjpLikert.AddParameter("sort.frq", Chr(34) & "pos.asc" & Chr(34))
             ElseIf rdoHighDescendingLikert.Checked Then
-                clsSjpLikert.AddParameter("sort.frq", Chr(34) & "posc.desc" & Chr(34))
+                clsSjpLikert.AddParameter("sort.frq", Chr(34) & "pos.desc" & Chr(34))
             End If
         ElseIf rdoStacked.Checked Then
             clsSjtStackFrq.RemoveParameterByName("sort.frq")
