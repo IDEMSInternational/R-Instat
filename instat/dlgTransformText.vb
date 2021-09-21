@@ -201,7 +201,6 @@ Public Class dlgTransformText
         clsSubstringFunction = New RFunction
         clsSquishTrimFunction = New RFunction
 
-
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
         NewDefaultName()
@@ -211,8 +210,6 @@ Public Class dlgTransformText
         ucrNudLastWord.SetText(2)
         ucrChkFirstOr.Checked = False
         ucrChkLastOr.Checked = False
-
-
 
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")
