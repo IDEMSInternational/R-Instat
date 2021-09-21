@@ -648,24 +648,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="lblPointsSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPointsSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblPointsSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 57</value>
-  </data>
-  <data name="lblPointsSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblPointsSize.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblPointsSize.Text" xml:space="preserve">
-    <value>Size:</value>
-  </data>
   <data name="&gt;&gt;lblPointsSize.Name" xml:space="preserve">
     <value>lblPointsSize</value>
   </data>
@@ -709,7 +691,7 @@
     <value>Heat Map</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgRugPlot</value>
+    <value>dlgHeatMapPlot</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -737,5 +719,35 @@
   </data>
   <data name="&gt;&gt;ucrReceiverPoints.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lblPointsSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPointsSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPointsSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 57</value>
+  </data>
+  <data name="lblPointsSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblPointsSize.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPointsSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="&gt;&gt;lblPointsSize.Name" xml:space="preserve">
+    <value>lblPointsSize</value>
+  </data>
+  <data name="&gt;&gt;lblPointsSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPointsSize.Parent" xml:space="preserve">
+    <value>grpBoxPoints</value>
+  </data>
+  <data name="&gt;&gt;lblPointsSize.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
