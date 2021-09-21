@@ -1131,7 +1131,7 @@ Public Class frmMain
         dlgRugPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarPieChart.Click
+    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChartTreemapWordcloud.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
 

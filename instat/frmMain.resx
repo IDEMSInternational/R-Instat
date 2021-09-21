@@ -164,11 +164,11 @@
   <data name="ToolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
     <value>296, 6</value>
   </data>
-  <data name="mnuDescribeSpecificBarPieChart.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuDescribeSpecificBarChartTreemapWordcloud.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 22</value>
   </data>
-  <data name="mnuDescribeSpecificBarPieChart.Text" xml:space="preserve">
-    <value>Bar Chart...</value>
+  <data name="mnuDescribeSpecificBarChartTreemapWordcloud.Text" xml:space="preserve">
+    <value>Bar Charts plus Treemap/Wordcloud...</value>
   </data>
   <data name="mnuDescribeSpecificBoxplotJitterViolinPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 22</value>
@@ -6534,9 +6534,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -6678,10 +6675,10 @@
   <data name="&gt;&gt;ToolStripSeparator26.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Name" xml:space="preserve">
-    <value>mnuDescribeSpecificBarPieChart</value>
+  <data name="&gt;&gt;mnuDescribeSpecificBarChartTreemapWordcloud.Name" xml:space="preserve">
+    <value>mnuDescribeSpecificBarChartTreemapWordcloud</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeSpecificBarPieChart.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuDescribeSpecificBarChartTreemapWordcloud.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeSpecificBoxplotJitterViolinPlot.Name" xml:space="preserve">
