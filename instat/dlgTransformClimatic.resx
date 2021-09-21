@@ -259,7 +259,7 @@
     <value>283, 15</value>
   </data>
   <data name="rdoSpell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
+    <value>64, 28</value>
   </data>
   <data name="rdoSpell.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -379,10 +379,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoWaterBalance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 15</value>
+    <value>434, 15</value>
   </data>
   <data name="rdoWaterBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
+    <value>117, 28</value>
   </data>
   <data name="rdoWaterBalance.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -586,7 +586,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMultSpells.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 15</value>
+    <value>345, 15</value>
   </data>
   <data name="rdoMultSpells.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 28</value>

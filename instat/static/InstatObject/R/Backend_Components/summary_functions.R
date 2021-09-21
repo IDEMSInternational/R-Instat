@@ -1003,6 +1003,12 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
   return(dplyr::n_distinct(x = x, na.rm = na.rm))
 }
 
+# sample function
+summary_sample <- function(x, replace = FALSE, seed, ...){
+  if(!missing(seed)) set.seed(seed = seed)
+  return(sample(x = x, size = 1, replace = replace))
+}
+
 #Proportions functions
 proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE, na_type = "", ... ){ 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -1364,9 +1370,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   }
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
 
-  # Converts factor columns to character so we can relabel values if needed
   for (i in seq_along(factors)) {
-    shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
+    levels(shaped_cell_values[[i]]) <- c(levels(shaped_cell_values[[i]]), margin_name) 
   }
   if (include_margins) {
     margin_tables <- list()

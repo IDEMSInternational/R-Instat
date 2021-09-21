@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrTextColors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 191</value>
+    <value>141, 192</value>
   </data>
   <data name="ucrTextColors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>101, 21</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrTextColors.TabIndex" type="System.Int32, mscorlib">
@@ -144,7 +144,7 @@
     <value>8, 192</value>
   </data>
   <data name="ucrChkTextColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkTextColour.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -165,7 +165,7 @@
     <value>8, 167</value>
   </data>
   <data name="ucrChkTextFace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkTextFace.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -186,7 +186,7 @@
     <value>8, 142</value>
   </data>
   <data name="ucrChkTextFamily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkTextFamily.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -207,7 +207,7 @@
     <value>8, 117</value>
   </data>
   <data name="ucrChkAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkAngle.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -228,7 +228,7 @@
     <value>8, 44</value>
   </data>
   <data name="ucrChkHjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkHjust.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -249,7 +249,7 @@
     <value>8, 69</value>
   </data>
   <data name="ucrChkVjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkVjust.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -270,7 +270,7 @@
     <value>8, 94</value>
   </data>
   <data name="ucrChkLineHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 18</value>
+    <value>127, 18</value>
   </data>
   <data name="ucrChkLineHeight.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -291,7 +291,7 @@
     <value>8, 19</value>
   </data>
   <data name="ucrChkSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>127, 20</value>
   </data>
   <data name="ucrChkSize.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -309,10 +309,10 @@
     <value>8</value>
   </data>
   <data name="ucrNudVjust.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 68</value>
+    <value>141, 69</value>
   </data>
   <data name="ucrNudVjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="ucrNudVjust.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -330,10 +330,10 @@
     <value>9</value>
   </data>
   <data name="ucrNudLineHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 92</value>
+    <value>141, 94</value>
   </data>
   <data name="ucrNudLineHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="ucrNudLineHeight.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -351,10 +351,10 @@
     <value>10</value>
   </data>
   <data name="ucrNudAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 117</value>
+    <value>141, 117</value>
   </data>
   <data name="ucrNudAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="ucrNudAngle.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -372,10 +372,10 @@
     <value>11</value>
   </data>
   <data name="ucrNudHjust.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 43</value>
+    <value>141, 44</value>
   </data>
   <data name="ucrNudHjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="ucrNudHjust.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -393,10 +393,10 @@
     <value>12</value>
   </data>
   <data name="ucrNudsize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 19</value>
+    <value>141, 19</value>
   </data>
   <data name="ucrNudsize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="ucrNudsize.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -414,14 +414,14 @@
     <value>13</value>
   </data>
   <data name="ucrInputTextFace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 166</value>
+    <value>141, 166</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputTextFace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputTextFace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>101, 21</value>
   </data>
   <data name="ucrInputTextFace.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -439,13 +439,13 @@
     <value>14</value>
   </data>
   <data name="ucrInputTextFamily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 141</value>
+    <value>141, 141</value>
   </data>
   <data name="ucrInputTextFamily.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputTextFamily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>101, 21</value>
   </data>
   <data name="ucrInputTextFamily.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
