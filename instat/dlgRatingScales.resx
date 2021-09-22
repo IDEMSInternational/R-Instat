@@ -121,6 +121,10 @@
   <data name="lblOrderedFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblOrderedFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 84</value>
@@ -149,6 +153,9 @@
   <data name="rdoHighDescendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoHighDescendingLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoHighDescendingLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 115</value>
   </data>
@@ -175,6 +182,9 @@
   </data>
   <data name="rdoLowDescendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoLowDescendingLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoLowDescendingLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 67</value>
@@ -203,6 +213,9 @@
   <data name="rdoLowAscendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoLowAscendingLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoLowAscendingLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 43</value>
   </data>
@@ -229,6 +242,9 @@
   </data>
   <data name="rdoNoneLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoNoneLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoNoneLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 19</value>
@@ -257,6 +273,9 @@
   <data name="rdoHighAscendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoHighAscendingLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoHighAscendingLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 91</value>
   </data>
@@ -280,27 +299,6 @@
   </data>
   <data name="&gt;&gt;rdoHighAscendingLikert.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="ucrPnlSjpLikert.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 14</value>
-  </data>
-  <data name="ucrPnlSjpLikert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 127</value>
-  </data>
-  <data name="ucrPnlSjpLikert.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSjpLikert.Name" xml:space="preserve">
-    <value>ucrPnlSjpLikert</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSjpLikert.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSjpLikert.Parent" xml:space="preserve">
-    <value>grpSort</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSjpLikert.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="grpSort.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 205</value>
@@ -371,6 +369,9 @@
   <data name="lblNeutralLevel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblNeutralLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblNeutralLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 56</value>
   </data>
@@ -422,12 +423,14 @@
   <data name="&gt;&gt;grpLikertType.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoStacked.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
   <data name="rdoStacked.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
+  </data>
+  <data name="rdoStacked.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoStacked.Location" type="System.Drawing.Point, System.Drawing">
     <value>162, 10</value>
@@ -462,6 +465,9 @@
   <data name="rdoLikert.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoLikert.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 10</value>
   </data>
@@ -494,6 +500,9 @@
   </data>
   <data name="rdoTable.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
+  </data>
+  <data name="rdoTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>64, 10</value>
@@ -686,6 +695,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorRatingScale.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
