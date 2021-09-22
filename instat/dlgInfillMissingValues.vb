@@ -397,7 +397,7 @@ Public Class dlgInfillMissingValues
 
     Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         If rdoNaApproximate.Checked Then
-            ucrSaveNewColumn.SetPrefix("tnt_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("int_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsApproximateFunction, iPosition:=1)
         ElseIf rdoNaAggregate.Checked Then
             ucrSaveNewColumn.SetPrefix("typ_" & ucrReceiverElement.GetVariableNames(False))

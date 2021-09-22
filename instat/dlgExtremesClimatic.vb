@@ -272,7 +272,7 @@ Public Class dlgExtremesClimatic
         ucrNudDeclusterColumns.SetRDefault("1")
 
         ucrSaveDeclusteredPlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
-        ucrSaveDeclusteredPlot.SetPrefix("declustred_plot")
+        ucrSaveDeclusteredPlot.SetPrefix("declustered_plot")
         ucrSaveDeclusteredPlot.SetSaveTypeAsGraph()
         ucrSaveDeclusteredPlot.SetIsComboBox()
         ucrSaveDeclusteredPlot.SetCheckBoxText("Save Graph")
