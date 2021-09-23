@@ -137,10 +137,12 @@ Public Class dlgCorrelation
 
         clsRGGscatMatricReverseOperator.SetOperation("+")
         clsRGGscatMatricReverseOperator.AddParameter("matrix", clsRFunctionParameter:=clsRGGscatMatrixFunction, iPosition:=0)
+        clsRGGscatMatricReverseOperator.iCallType = 3
+        clsRGGscatMatricReverseOperator.bExcludeAssignedFunctionOutput = False
 
         clsGuidesFunction.SetPackageName("ggplot2")
         clsGuidesFunction.SetRCommand("guides")
-        clsGuidesFunction.AddParameter("guide", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsGuidesFunction.AddParameter("colour", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0)
 
         clsGuideLegendFunction.SetPackageName("ggplot2")
         clsGuideLegendFunction.SetRCommand("guide_legend")
@@ -163,7 +165,6 @@ Public Class dlgCorrelation
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
-        clsRGGscatMatrixFunction.iCallType = 3
         clsRGGscatMatrixFunction.bExcludeAssignedFunctionOutput = False
         clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
 
