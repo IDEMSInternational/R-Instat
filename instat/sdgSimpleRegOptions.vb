@@ -149,25 +149,25 @@ Public Class sdgSimpleRegOptions
 
         'Save Plots (Save tab)
         'Save Fitted Column Names
-        ucrSaveFittedColumnName.SetPrefix("Fitted")
+        ucrSaveFittedColumnName.SetPrefix("fitted")
         ucrSaveFittedColumnName.SetSaveTypeAsColumn()
         ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
         ucrSaveFittedColumnName.SetIsComboBox()
 
         '' save residuals column names
-        ucrSaveResidualsColumnName.SetPrefix("Resids")
+        ucrSaveResidualsColumnName.SetPrefix("resids")
         ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
         ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
         ucrSaveResidualsColumnName.SetIsComboBox()
 
         '' save stdresiduals column names
-        ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
+        ucrSaveStdResidualsColumnName.SetPrefix("sresids")
         ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
         ucrSaveStdResidualsColumnName.SetIsComboBox()
         ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
 
         ''save leverage column names
-        ucrSaveLeverageColumnName.SetPrefix("Lever")
+        ucrSaveLeverageColumnName.SetPrefix("lever")
         ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
         ucrSaveLeverageColumnName.SetIsComboBox()
         ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")

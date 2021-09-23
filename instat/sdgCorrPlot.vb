@@ -43,7 +43,7 @@ Public Class sdgCorrPlot
         ucrChkLabel.SetText("Label")
         ucrChkLabel.SetRDefault("FALSE")
 
-        ucrSaveGraph.SetPrefix("CorGraph")
+        ucrSaveGraph.SetPrefix("cor_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
