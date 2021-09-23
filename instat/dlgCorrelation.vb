@@ -18,9 +18,12 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction,
+        clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction,
+        clsTempFunc, clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
-    Private clsColFunction As String
+    Private clsRGGscatMatricReverseOperator As New ROperator
+    Private strColFunction As String
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -119,12 +122,29 @@ Public Class dlgCorrelation
         clsListFunction = New RFunction
         clsWrapFunction = New RFunction
         clsRGGscatMatrixFunction = New RFunction
+        clsRGGscatMatricReverseOperator = New ROperator
+        clsGuidesFunction = New RFunction
+        clsGuideLegendFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsTempFunc = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
         ucrReceiverFirstColumn.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
+
+        clsRGGscatMatricReverseOperator.SetOperation("+")
+        clsRGGscatMatricReverseOperator.AddParameter("matrix", clsRFunctionParameter:=clsRGGscatMatrixFunction, iPosition:=0)
+
+        clsGuidesFunction.SetPackageName("ggplot2")
+        clsGuidesFunction.SetRCommand("guides")
+        clsGuidesFunction.AddParameter("guide", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsGuideLegendFunction.SetPackageName("ggplot2")
+        clsGuideLegendFunction.SetRCommand("guide_legend")
+        clsGuideLegendFunction.AddParameter("reverse", "TRUE", iPosition:=0)
 
         clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
         clsTempFunc.AddParameter("remove_attr", "TRUE")
@@ -234,7 +254,10 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog, bTwoColumns:=rdoTwoColumns.Checked)
+        sdgCorrPlot.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewcorrelationFunction:=clsCorrelationFunction, clsNewcorrelationTestFunction:=clsCorrelationTestFunction,
+                             clsNewRGGcorrGraphicsFunction:=clsRGGcorrGraphicsFunction, clsNewRGraphicsFuction:=clsRGraphicsFuction, clsNewRTempFunction:=clsRTempFunction,
+                             clsNewRGGscatmatrixFunction:=clsRGGscatMatrixFunction, strNewColFunction:=strColFunction, clsNewRGGscatMatrixReverseOperator:=clsRGGscatMatricReverseOperator,
+                             ucrNewBaseSelector:=ucrSelectorCorrelation, clsNewGuideFunction:=clsGuidesFunction, clsNewDummyFunction:=clsDummyFunction, bReset:=bResetSubdialog, bTwoColumns:=rdoTwoColumns.Checked)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
