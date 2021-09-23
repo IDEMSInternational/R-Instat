@@ -48,7 +48,8 @@ Partial Class dlgReorderLevels
         Me.lblOptions = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.ucrChkReverseOrder = New instat.ucrCheck()
+        Me.ucrInputOrder = New instat.ucrInputComboBox()
+        Me.lblOrder = New System.Windows.Forms.Label()
         Me.ucrInputPrefix = New instat.ucrInputTextBox()
         Me.lblPrefix = New System.Windows.Forms.Label()
         Me.rdoAnonymise = New System.Windows.Forms.RadioButton()
@@ -58,7 +59,7 @@ Partial Class dlgReorderLevels
         Me.rdoSequence = New System.Windows.Forms.RadioButton()
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoAppearance = New System.Windows.Forms.RadioButton()
-        Me.rdoAsIs = New System.Windows.Forms.RadioButton()
+        Me.rdoReverseLevels = New System.Windows.Forms.RadioButton()
         Me.ucrPnlProperty = New instat.UcrPanel()
         Me.ttAsIs = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttAppearance = New System.Windows.Forms.ToolTip(Me.components)
@@ -77,6 +78,7 @@ Partial Class dlgReorderLevels
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReorderFactor = New instat.ucrReorder()
         Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.rdoAlphabetical = New System.Windows.Forms.RadioButton()
         Me.grpMethods.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -141,6 +143,9 @@ Partial Class dlgReorderLevels
         '
         'grpMethods
         '
+        Me.grpMethods.Controls.Add(Me.rdoAlphabetical)
+        Me.grpMethods.Controls.Add(Me.ucrInputOrder)
+        Me.grpMethods.Controls.Add(Me.lblOrder)
         Me.grpMethods.Controls.Add(Me.ucrInputPrefix)
         Me.grpMethods.Controls.Add(Me.lblPrefix)
         Me.grpMethods.Controls.Add(Me.rdoAnonymise)
@@ -150,17 +155,24 @@ Partial Class dlgReorderLevels
         Me.grpMethods.Controls.Add(Me.rdoSequence)
         Me.grpMethods.Controls.Add(Me.rdoFrequency)
         Me.grpMethods.Controls.Add(Me.rdoAppearance)
-        Me.grpMethods.Controls.Add(Me.rdoAsIs)
+        Me.grpMethods.Controls.Add(Me.rdoReverseLevels)
         Me.grpMethods.Controls.Add(Me.ucrPnlProperty)
         resources.ApplyResources(Me.grpMethods, "grpMethods")
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'ucrChkReverseOrder
+        'ucrInputOrder
         '
-        Me.ucrChkReverseOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkReverseOrder, "ucrChkReverseOrder")
-        Me.ucrChkReverseOrder.Name = "ucrChkReverseOrder"
+        Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.GetSetSelectedIndex = -1
+        Me.ucrInputOrder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
+        Me.ucrInputOrder.Name = "ucrInputOrder"
+        '
+        'lblOrder
+        '
+        resources.ApplyResources(Me.lblOrder, "lblOrder")
+        Me.lblOrder.Name = "lblOrder"
         '
         'ucrInputPrefix
         '
@@ -227,12 +239,12 @@ Partial Class dlgReorderLevels
         Me.rdoAppearance.TabStop = True
         Me.rdoAppearance.UseVisualStyleBackColor = True
         '
-        'rdoAsIs
+        'rdoReverseLevels
         '
-        resources.ApplyResources(Me.rdoAsIs, "rdoAsIs")
-        Me.rdoAsIs.Name = "rdoAsIs"
-        Me.rdoAsIs.TabStop = True
-        Me.rdoAsIs.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoReverseLevels, "rdoReverseLevels")
+        Me.rdoReverseLevels.Name = "rdoReverseLevels"
+        Me.rdoReverseLevels.TabStop = True
+        Me.rdoReverseLevels.UseVisualStyleBackColor = True
         '
         'ucrPnlProperty
         '
@@ -352,11 +364,17 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.ucrSelectorFactorLevelsToReorder, "ucrSelectorFactorLevelsToReorder")
         Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
         '
+        'rdoAlphabetical
+        '
+        resources.ApplyResources(Me.rdoAlphabetical, "rdoAlphabetical")
+        Me.rdoAlphabetical.Name = "rdoAlphabetical"
+        Me.rdoAlphabetical.TabStop = True
+        Me.rdoAlphabetical.UseVisualStyleBackColor = True
+        '
         'dlgReorderLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkReverseOrder)
         Me.Controls.Add(Me.ucrReceiverFactorX)
         Me.Controls.Add(Me.grpMethods)
         Me.Controls.Add(Me.ucrSaveResults)
@@ -404,7 +422,6 @@ Partial Class dlgReorderLevels
     Friend WithEvents Label1 As Label
     Friend WithEvents ucrSaveResults As ucrSave
     Friend WithEvents grpMethods As GroupBox
-    Friend WithEvents ucrChkReverseOrder As ucrCheck
     Friend WithEvents ucrInputPrefix As ucrInputTextBox
     Friend WithEvents lblPrefix As Label
     Friend WithEvents rdoAnonymise As RadioButton
@@ -414,7 +431,7 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoSequence As RadioButton
     Friend WithEvents rdoFrequency As RadioButton
     Friend WithEvents rdoAppearance As RadioButton
-    Friend WithEvents rdoAsIs As RadioButton
+    Friend WithEvents rdoReverseLevels As RadioButton
     Friend WithEvents ucrPnlProperty As UcrPanel
     Friend WithEvents ttAsIs As ToolTip
     Friend WithEvents ttAppearance As ToolTip
@@ -424,4 +441,7 @@ Partial Class dlgReorderLevels
     Friend WithEvents ttShuffle As ToolTip
     Friend WithEvents ttAnonymise As ToolTip
     Friend WithEvents ucrReceiverFactorX As ucrReceiverSingle
+    Friend WithEvents lblOrder As Label
+    Friend WithEvents ucrInputOrder As ucrInputComboBox
+    Friend WithEvents rdoAlphabetical As RadioButton
 End Class
