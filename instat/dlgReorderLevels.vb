@@ -29,7 +29,10 @@ Public Class dlgReorderLevels
     Private clsForcatsRevFunction As New RFunction
     Private clsForcatsReorder As New RFunction
     Private clsForcatsInFreqFunction As New RFunction
-    Private clsForcatsRelevel As New RFunction
+    Private clsFactorFunction As New RFunction
+    Private clsSortFunction As New RFunction
+    Private clsLevelsFunction As New RFunction
+    Private clsFactorXFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -80,7 +83,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactorX.SetParameter(New RParameter(".f", 0))
         ucrReceiverFactorX.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactorX.strSelectorHeading = "Factors"
-        ucrReceiverFactorX.SetIncludedDataTypes({"factor"}, bStrict:=True)
+        ucrReceiverFactorX.SetIncludedDataTypes({"factor", "character"}, bStrict:=True)
         ucrReceiverFactorX.SetParameterIsRFunction()
         ucrReceiverFactorX.SetMeAsReceiver()
         ucrReceiverFactorX.bAutoFill = True
@@ -171,7 +174,10 @@ Public Class dlgReorderLevels
         clsForcatsReorder = New RFunction
         clsForcatsRevFunction = New RFunction
         clsForcatsInFreqFunction = New RFunction
-        clsForcatsRelevel = New RFunction
+        clsFactorFunction = New RFunction
+        clsSortFunction = New RFunction
+        clsFactorXFunction = New RFunction
+        clsLevelsFunction = New RFunction
 
         'Reset
         ucrSelectorFactorLevelsToReorder.Reset()
@@ -214,8 +220,18 @@ Public Class dlgReorderLevels
         clsForcatsRevFunction.SetRCommand("fct_rev")
         clsForcatsRevFunction.AddParameter("f", clsRFunctionParameter:=clsForcatsInFreqFunction, iPosition:=0)
 
-        clsForcatsRelevel.SetPackageName("forcats")
-        clsForcatsRelevel.SetRCommand("fct_relevel")
+        clsFactorXFunction.SetRCommand("factor")
+
+        clsSortFunction.SetRCommand("sort")
+        clsSortFunction.AddParameter("x", clsRFunctionParameter:=clsLevelsFunction, iPosition:=0)
+        clsSortFunction.AddParameter("decreasing", "FALSE", iPosition:=1)
+
+        clsLevelsFunction.SetRCommand("levels")
+        clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsFactorXFunction, iPosition:=0)
+
+        clsFactorFunction.SetRCommand("factor")
+        clsFactorFunction.AddParameter("x", clsRFunctionParameter:=clsLevelsFunction, iPosition:=0)
+        clsFactorFunction.AddParameter("levels", clsRFunctionParameter:=clsSortFunction, iPosition:=1)
 
         clsForcatsReorder.SetPackageName("forcats")
         clsForcatsReorder.SetRCommand("fct_reorder")
@@ -236,7 +252,8 @@ Public Class dlgReorderLevels
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsReverse, New RParameter("f", 0), iAdditionalPairNo:=6)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInOrder, New RParameter("f", 0), iAdditionalPairNo:=7)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=8)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsRelevel, New RParameter(".f", 0), iAdditionalPairNo:=9)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsFactorXFunction, New RParameter("x", 0), iAdditionalPairNo:=9)
+        'ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsFactorFunction, New RParameter("x", 0), iAdditionalPairNo:=10)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInOrder, iAdditionalPairNo:=1)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInFreq, iAdditionalPairNo:=2)
         ucrSaveResults.AddAdditionalRCode(clsForcatsInSeq, iAdditionalPairNo:=3)
@@ -246,7 +263,7 @@ Public Class dlgReorderLevels
         ucrSaveResults.AddAdditionalRCode(clsForcatsReorder, iAdditionalPairNo:=7)
         ucrSaveResults.AddAdditionalRCode(clsForcatsReverse, iAdditionalPairNo:=8)
         ucrSaveResults.AddAdditionalRCode(clsForcatsRevFunction, iAdditionalPairNo:=9)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsRelevel, iAdditionalPairNo:=10)
+        ucrSaveResults.AddAdditionalRCode(clsFactorFunction, iAdditionalPairNo:=10)
         ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
         ucrReceiverFactor.SetRCode(clsReorder, bReset)
         ucrReceiverFactorX.SetRCode(clsForcatsReorder, bReset)
@@ -308,7 +325,7 @@ Public Class dlgReorderLevels
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeq)
             End If
             If rdoAlphabetical.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevel)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsFactorFunction)
             End If
             If rdoShift.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShift)
