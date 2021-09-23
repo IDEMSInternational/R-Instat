@@ -139,7 +139,7 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.SetSaveTypeAsGraph()
-        ucrSaveBar.SetPrefix("bar")
+        ucrSaveBar.SetPrefix("bar_plot")
         ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
@@ -518,7 +518,7 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
-                ucrSaveBar.SetPrefix("bar")
+                ucrSaveBar.SetPrefix("bar_plot")
             End If
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"

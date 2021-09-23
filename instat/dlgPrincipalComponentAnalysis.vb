@@ -64,7 +64,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrNudNumberOfComp.SetRDefault(5)
 
         'ucrSaveResult
-        ucrSaveResult.SetPrefix("PCA")
+        ucrSaveResult.SetPrefix("pca")
         ucrSaveResult.SetSaveTypeAsModel()
         ucrSaveResult.SetDataFrameSelector(ucrSelectorPCA.ucrAvailableDataFrames)
         ucrSaveResult.SetCheckBoxText("Save Result")
