@@ -204,6 +204,9 @@
   <data name="&gt;&gt;cmdClearConditions.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="lblSelectPreview.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="lblSelectPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -617,6 +620,9 @@
   </data>
   <data name="&gt;&gt;ucrInputSelectName.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="ucrSelectPreview.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrSelectPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 372</value>
