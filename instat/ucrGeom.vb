@@ -1881,7 +1881,7 @@ Public Class ucrGeom
         clsgeom_text_wordcloud.SetGeomName("geom_text_wordcloud")
         'Adding aesthetics parameters
         'Mandatory Aesthetics
-        clsgeom_text_wordcloud.AddAesParameter("label", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_text_wordcloud.AddAesParameter("label", bIsMandatory:=True)
 
         'Optional aesthetics
         clsgeom_text_wordcloud.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
@@ -1919,7 +1919,7 @@ Public Class ucrGeom
         clsgeom_text_wordcloud_area.SetGeomName("geom_text_wordcloud_area")
         'Adding aesthetics parameters
         'Mandatory Aesthetics
-        clsgeom_text_wordcloud_area.AddAesParameter("label", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_text_wordcloud_area.AddAesParameter("label", bIsMandatory:=True)
 
         'Optional aesthetics
         clsgeom_text_wordcloud_area.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
