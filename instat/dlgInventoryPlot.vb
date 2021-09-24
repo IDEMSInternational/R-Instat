@@ -153,7 +153,7 @@ Public Class dlgInventoryPlot
         ucrInputFacetBy.SetRDefault("NULL")
         ucrInputFacetBy.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("Inventory")
+        ucrSaveGraph.SetPrefix("inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")

@@ -260,7 +260,7 @@ Public Class dlgInfillMissingValues
         ucrInputComboMeasure.SetItems(dctMeasures)
         ucrInputComboMeasure.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("missingplot")
+        ucrSaveGraph.SetPrefix("missing_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -397,21 +397,21 @@ Public Class dlgInfillMissingValues
 
     Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         If rdoNaApproximate.Checked Then
-            ucrSaveNewColumn.SetPrefix("Int_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("int_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsApproximateFunction, iPosition:=1)
         ElseIf rdoNaAggregate.Checked Then
-            ucrSaveNewColumn.SetPrefix("Typ_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("typ_" & ucrReceiverElement.GetVariableNames(False))
         ElseIf rdoNaFill.Checked Then
-            ucrSaveNewColumn.SetPrefix("Con_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("con_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsNaFillFunction, iPosition:=1)
         ElseIf rdoNaStructTS.Checked Then
-            ucrSaveNewColumn.SetPrefix("Str_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("str_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsStructTSFunction, iPosition:=1)
         ElseIf rdoNaSpline.Checked Then
-            ucrSaveNewColumn.SetPrefix("Spl_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("spl_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsSplineFunction, iPosition:=1)
         ElseIf rdoNaLocf.Checked Then
-            ucrSaveNewColumn.SetPrefix("Cop_" & ucrReceiverElement.GetVariableNames(False))
+            ucrSaveNewColumn.SetPrefix("cop_" & ucrReceiverElement.GetVariableNames(False))
             clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsNaLocfFunction, iPosition:=1)
         End If
         clsAveFunction.AddParameter("FUN", clsROperatorParameter:=clsBracketOperator, iPosition:=2)

@@ -2411,4 +2411,12 @@ Public Class frmMain
     Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
         dlgPivotTable.ShowDialog()
     End Sub
+
+    Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
+        dlgScript.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
+        dlgSelect.ShowDialog()
+    End Sub
 End Class
