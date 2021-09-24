@@ -2416,7 +2416,7 @@ Public Class frmMain
         dlgScript.ShowDialog()
     End Sub
 
-    Private Sub ColumnSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColumnSelectionToolStripMenuItem.Click
+    Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
     End Sub
 End Class
