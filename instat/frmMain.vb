@@ -2415,4 +2415,8 @@ Public Class frmMain
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
         dlgScript.ShowDialog()
     End Sub
+
+    Private Sub ColumnSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColumnSelectionToolStripMenuItem.Click
+        dlgSelect.ShowDialog()
+    End Sub
 End Class
