@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,13 +11,13 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
     Public bControlsInitialised As Boolean = False
-    Public clsOneWayTableFreq, clsOneWayGraphFreq As New RFunction
+    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid, clsOneWayListPlot As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -26,54 +26,38 @@ Public Class sdgOneWayFrequencies
     Public Sub InitialiseControls()
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
+        Dim dctOmitZero As New Dictionary(Of String, String)
+        Dim dctColors As New Dictionary(Of String, String)
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
         'Table Only
-        ucrChkHighlightedRows.SetParameter(New RParameter("altr.row.col", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkHighlightedRows.SetRDefault("FALSE")
-        ucrChkHighlightedRows.SetText("Alternate Rows Coloured")
+        ucrInputTitle.SetParameter(New RParameter("title", 5))
 
         'Table Only
-        ucrInputCountsName.SetParameter(New RParameter("string.cnt", 5))
-        ucrInputCountsName.SetRDefault(Chr(34) & "N" & Chr(34))
-        ucrChkCountName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkCountName.SetText("Count Name")
-        ucrChkCountName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'Table Only
-        ucrChkMedian.SetParameter(New RParameter("emph.md", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkMedian.SetRDefault("FALSE")
-        ucrChkMedian.SetText("Emphasise Median")
-
-        'Table Only
-        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowSummary.SetText("Show Summary")
-
-        'Table Only
-        'Default is auto
-        'skip.zero has three options: "auto", TRUE, FALSE so this could be a combobox instead
-        ucrChkOmitZero.SetParameter(New RParameter("skip.zero", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkOmitZero.SetText("Omit Zero Counts from Table")
-
-        'Table Only
-        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
-        ucrNudDecimalPlaces.SetMinMax(0, 4)
+        ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowStrings.SetText("Show Strings")
 
         'Graph Only
         ucrPnlGraphType.SetParameter(New RParameter("type", 4))
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoBoxplot, Chr(34) & "boxplot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoHistogram, Chr(34) & "histogram" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoDensity, Chr(34) & "density" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoViolin, Chr(34) & "violin" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
+        ucrPnlGraphType.bUpdateRCodeFromControl = False
 
         'Graph Only
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowCount.SetRDefault("FALSE")
+        ucrChkShowCount.SetRDefault("TRUE")
         ucrChkShowCount.SetText("Show Count")
 
         'Graph Only
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetRDefault("TRUE")
         ucrChkShowPercentage.SetText("Show Percentage")
 
         'Graph Only
@@ -107,39 +91,56 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
 
-        'Graph Only
-        ucrSaveGraph.SetPrefix("one_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrInputColor.SetParameter(New RParameter("geom.colors", 13))
+        dctColors.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctColors.Add("Black", Chr(34) & "black" & Chr(34))
+        dctColors.Add("Red", Chr(34) & "red" & Chr(34))
+        dctColors.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctColors.Add("Green", Chr(34) & "green" & Chr(34))
+        dctColors.Add("Violet", Chr(34) & "violet" & Chr(34))
+        dctColors.Add("White", Chr(34) & "white" & Chr(34))
+        ucrInputColor.SetItems(dctColors)
+        ucrInputColor.SetRDefault(Chr(34) & "blue" & Chr(34))
+        ucrInputColor.bAllowNonConditionValues = True
 
+        ucrNudSize.SetParameter(New RParameter("geom.size", 14))
+        ucrNudSize.DecimalPlaces = 1
+        ucrNudSize.Increment = 0.1
+        ucrNudSize.SetMinMax(iNewMin:=0, iNewMax:=Integer.MaxValue)
+
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, clsNewPlotGrid As RFunction, clsNewSjPlotList As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsOneWayTableFreq = clsNewSjtFreq
         clsOneWayGraphFreq = clsNewSjpFrq
+        clsOneWayPlotGrid = clsNewPlotGrid
+        clsOneWayListPlot = clsNewSjPlotList
 
-        ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset)
-        ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkOmitZero.SetRCode(clsOneWayTableFreq, bReset)
-        ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset)
+        ucrChkShowStrings.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputTitle.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrPnlGraphType.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputColor.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrNudSize.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            tbpOneWayFrequencies.SelectedIndex = 0
+        End If
+    End Sub
 
-        ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrPnlGraphType.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpOneWayFrequencies.TabCount - 1
+            tbpOneWayFrequencies.SelectedIndex = i
+        Next
+        tbpOneWayFrequencies.SelectedIndex = 0
     End Sub
 End Class

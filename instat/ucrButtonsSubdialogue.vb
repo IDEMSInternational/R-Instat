@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -19,18 +19,17 @@ Imports instat.Translations
 Public Class ucrButtonsSubdialogue
     Public Event ClickReturn(sender As Object, e As EventArgs)
     Public iHelpTopicID As Integer
+    Private strCurrLang As String
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Close()
     End Sub
 
     Private Sub cmdReturn_Click(sender As Object, e As EventArgs) Handles cmdReturn.Click
+        Enabled = False
         RaiseEvent ClickReturn(sender, e)
+        Enabled = True
         Me.ParentForm.Close()
-    End Sub
-
-    Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls)
     End Sub
 
     Private Sub HelpContent()
@@ -44,5 +43,38 @@ Public Class ucrButtonsSubdialogue
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         HelpContent()
+    End Sub
+
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me.ParentForm)
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+
+        If cmdLanguage.FlatStyle = FlatStyle.Popup Then
+            cmdLanguage.FlatStyle = FlatStyle.Flat
+        Else
+            cmdLanguage.FlatStyle = FlatStyle.Popup
+        End If
+    End Sub
+
+    Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdHelp.Width = cmdReturn.Width / 2
+                cmdLanguage.Visible = True
+            Else
+                cmdHelp.Width = cmdReturn.Width
+                cmdLanguage.Visible = False
+            End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
     End Sub
 End Class

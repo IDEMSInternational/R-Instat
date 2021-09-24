@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -24,7 +24,6 @@ Public Class dlgDefineRedFlags
     Private clsRedFlag As New RFunction
 
     Private Sub dlgDefineRedFlags_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -36,7 +35,9 @@ Public Class dlgDefineRedFlags
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetRedFlagColumnsInReceiver()
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
@@ -49,9 +50,7 @@ Public Class dlgDefineRedFlags
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
-
+        ucrBase.iHelpTopicID = 202
         'selector
         ucrSelectorDefineRedFlag.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineRedFlag.SetParameterIsString()
@@ -81,7 +80,7 @@ Public Class dlgDefineRedFlags
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRedFlag.IsEmpty Then
+        If ucrSelectorDefineRedFlag.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -91,10 +90,19 @@ Public Class dlgDefineRedFlags
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        SetRedFlagColumnsInReceiver()
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRedFlagColumnsInReceiver()
+        ucrReceiverRedFlag.AddItemsWithMetadataProperty(ucrSelectorDefineRedFlag.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Corruption_Red_Flag", {"TRUE"})
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRedFlag.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorDefineRedFlag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineRedFlag.ControlValueChanged
+        SetRedFlagColumnsInReceiver()
     End Sub
 End Class

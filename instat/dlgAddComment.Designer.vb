@@ -1,9 +1,25 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgAddComment
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,171 +36,159 @@ Partial Class dlgAddComment
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.rdoCell = New System.Windows.Forms.RadioButton()
-        Me.ucrDataFrame = New instat.ucrDataFrame()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddComment))
         Me.lblRow = New System.Windows.Forms.Label()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
+        Me.rdoCell = New System.Windows.Forms.RadioButton()
+        Me.rdoRow = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
-        Me.ucrPnlCellOrRow = New instat.UcrPanel()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputRow = New instat.ucrInputTextBox()
+        Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 260)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 1
-        '
-        'rdoRow
-        '
-        Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(266, 16)
-        Me.rdoRow.Name = "rdoRow"
-        Me.rdoRow.Size = New System.Drawing.Size(47, 17)
-        Me.rdoRow.TabIndex = 5
-        Me.rdoRow.TabStop = True
-        Me.rdoRow.Text = "Row"
-        Me.rdoRow.UseVisualStyleBackColor = True
-        '
-        'rdoCell
-        '
-        Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(31, 16)
-        Me.rdoCell.Name = "rdoCell"
-        Me.rdoCell.Size = New System.Drawing.Size(42, 17)
-        Me.rdoCell.TabIndex = 6
-        Me.rdoCell.TabStop = True
-        Me.rdoCell.Text = "Cell"
-        Me.rdoCell.UseVisualStyleBackColor = True
-        '
-        'ucrDataFrame
-        '
-        Me.ucrDataFrame.bUseCurrentFilter = True
-        Me.ucrDataFrame.Location = New System.Drawing.Point(9, 55)
-        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrame.Name = "ucrDataFrame"
-        Me.ucrDataFrame.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataFrame.TabIndex = 7
-        '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(9, 57)
-        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorAddComment.TabIndex = 8
-        '
-        'ucrReceiverRow
-        '
-        Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 105)
-        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Selector = Nothing
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverRow.TabIndex = 9
         '
         'lblRow
         '
-        Me.lblRow.AutoSize = True
-        Me.lblRow.Location = New System.Drawing.Point(266, 83)
+        resources.ApplyResources(Me.lblRow, "lblRow")
         Me.lblRow.Name = "lblRow"
-        Me.lblRow.Size = New System.Drawing.Size(32, 13)
-        Me.lblRow.TabIndex = 10
-        Me.lblRow.Text = "Row:"
+        '
+        'lblColumn
+        '
+        resources.ApplyResources(Me.lblColumn, "lblColumn")
+        Me.lblColumn.Name = "lblColumn"
+        '
+        'lblComment
+        '
+        resources.ApplyResources(Me.lblComment, "lblComment")
+        Me.lblComment.Name = "lblComment"
+        '
+        'rdoCell
+        '
+        resources.ApplyResources(Me.rdoCell, "rdoCell")
+        Me.rdoCell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatAppearance.BorderSize = 2
+        Me.rdoCell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoCell.Name = "rdoCell"
+        Me.rdoCell.UseVisualStyleBackColor = True
+        '
+        'rdoRow
+        '
+        resources.ApplyResources(Me.rdoRow, "rdoRow")
+        Me.rdoRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatAppearance.BorderSize = 2
+        Me.rdoRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRow.Name = "rdoRow"
+        Me.rdoRow.UseVisualStyleBackColor = True
+        '
+        'ucrPnlCellRowColumnDataFrame
+        '
+        resources.ApplyResources(Me.ucrPnlCellRowColumnDataFrame, "ucrPnlCellRowColumnDataFrame")
+        Me.ucrPnlCellRowColumnDataFrame.Name = "ucrPnlCellRowColumnDataFrame"
+        '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
+        Me.ucrInputComment.IsMultiline = False
+        Me.ucrInputComment.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComment, "ucrInputComment")
+        Me.ucrInputComment.Name = "ucrInputComment"
         '
         'ucrReceiverColumn
         '
         Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 154)
-        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverColumn.TabIndex = 11
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
-        'lblColumn
+        'ucrBase
         '
-        Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(266, 134)
-        Me.lblColumn.Name = "lblColumn"
-        Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 12
-        Me.lblColumn.Text = "Column:"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
-        'lblComment
+        'ucrSelectorAddComment
         '
-        Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(266, 184)
-        Me.lblComment.Name = "lblComment"
-        Me.lblComment.Size = New System.Drawing.Size(54, 13)
-        Me.lblComment.TabIndex = 14
-        Me.lblComment.Text = "Comment:"
+        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
         '
-        'ucrInputComment
+        'ucrInputRow
         '
-        Me.ucrInputComment.IsMultiline = False
-        Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
-        Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComment.TabIndex = 15
+        Me.ucrInputRow.AddQuotesIfUnrecognised = True
+        Me.ucrInputRow.IsMultiline = False
+        Me.ucrInputRow.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
+        Me.ucrInputRow.Name = "ucrInputRow"
         '
-        'ucrPnlCellOrRow
+        'rdoDataFrame
         '
-        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(12, 12)
-        Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
-        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(383, 32)
-        Me.ucrPnlCellOrRow.TabIndex = 16
+        resources.ApplyResources(Me.rdoDataFrame, "rdoDataFrame")
+        Me.rdoDataFrame.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataFrame.FlatAppearance.BorderSize = 2
+        Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataFrame.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoDataFrame.Name = "rdoDataFrame"
+        Me.rdoDataFrame.UseVisualStyleBackColor = True
+        '
+        'rdoColumn
+        '
+        resources.ApplyResources(Me.rdoColumn, "rdoColumn")
+        Me.rdoColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.FlatAppearance.BorderSize = 2
+        Me.rdoColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.UseVisualStyleBackColor = True
         '
         'dlgAddComment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 320)
+        Me.Controls.Add(Me.rdoColumn)
+        Me.Controls.Add(Me.rdoDataFrame)
+        Me.Controls.Add(Me.ucrInputRow)
+        Me.Controls.Add(Me.ucrSelectorAddComment)
+        Me.Controls.Add(Me.rdoCell)
+        Me.Controls.Add(Me.rdoRow)
+        Me.Controls.Add(Me.ucrPnlCellRowColumnDataFrame)
         Me.Controls.Add(Me.ucrInputComment)
         Me.Controls.Add(Me.lblComment)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.lblRow)
-        Me.Controls.Add(Me.ucrReceiverRow)
-        Me.Controls.Add(Me.ucrSelectorAddComment)
-        Me.Controls.Add(Me.ucrDataFrame)
-        Me.Controls.Add(Me.rdoCell)
-        Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrPnlCellOrRow)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAddComment"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Add Comment"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents rdoRow As RadioButton
-    Friend WithEvents rdoCell As RadioButton
-    Friend WithEvents ucrDataFrame As ucrDataFrame
-    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverRow As ucrReceiverSingle
     Friend WithEvents lblRow As Label
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblComment As Label
     Friend WithEvents ucrInputComment As ucrInputTextBox
-    Friend WithEvents ucrPnlCellOrRow As UcrPanel
+    Friend WithEvents rdoCell As RadioButton
+    Friend WithEvents rdoRow As RadioButton
+    Friend WithEvents ucrPnlCellRowColumnDataFrame As UcrPanel
+    Friend WithEvents ucrInputRow As ucrInputTextBox
+    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoColumn As RadioButton
+    Friend WithEvents rdoDataFrame As RadioButton
 End Class

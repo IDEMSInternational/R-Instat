@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -19,7 +19,7 @@ Imports instat
 Public Class ucrLayerParameters
     Public lstLayerParameterControl As New List(Of ucrLayerParamsControls)
     Private bFirstLoad As Boolean = True
-    Public WithEvents ucrGeomWithAes As UcrGeomListWithParameters
+    Public WithEvents ucrGeomWithAes As ucrGeomListWithParameters
 
     Public Sub New()
 
@@ -40,38 +40,30 @@ Public Class ucrLayerParameters
     Private Sub InitialiseControl()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
-        SetLayerParameters()
+    Public Overrides Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
+        MyBase.Setup(clsNewGgplotFunction, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
+        SetLayerParameters(bReset)
     End Sub
 
-    Public Overrides Sub SetGeomFunction(clsTempGeomFunc As RFunction)
-        MyBase.SetGeomFunction(clsTempGeomFunc)
-        For i = 0 To (lstLayerParameterControl.Count - 1)
-            lstLayerParameterControl(i).SetGeomFunction(clsGeomFunction)
-        Next
-    End Sub
-
-    Public Sub SetLayerParameters()
+    Public Sub SetLayerParameters(Optional bReset As Boolean = False)
         Dim i As Integer = 0
         'fill the labels and checkboxes
         If clsCurrGeom IsNot Nothing Then
             For i = 0 To (lstLayerParameterControl.Count - 1)
                 If (i < clsCurrGeom.clsLayerParameters.Count) Then
-                    lstLayerParameterControl(i).SetLayerParameter(clsCurrGeom.clsLayerParameters(i))
+                    lstLayerParameterControl(i).SetControl(clsGeomFunction, clsCurrGeom.clsLayerParameters(i), bReset:=bReset)
                 Else
-                    lstLayerParameterControl(i).SetLayerParameter(Nothing)
+                    lstLayerParameterControl(i).SetControl(clsGeomFunction, Nothing)
                 End If
             Next
         End If
     End Sub
 
-    Public Sub ucrLayerParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
+    Private Sub ucrLayerParameters_GeomChanged() Handles Me.GeomChanged
         If ucrGeomWithAes IsNot Nothing Then
-            ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+            ucrGeomWithAes.SetGeomName(GetGeomName())
         End If
-        SetLayerParameters()
+        SetLayerParameters(False)
     End Sub
-
 End Class
 

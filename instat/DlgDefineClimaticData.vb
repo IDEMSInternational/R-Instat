@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,11 +11,12 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
 Imports System.Text.RegularExpressions
+Imports RDotNet
 
 Public Class DlgDefineClimaticData
     Public bFirstLoad As Boolean = True
@@ -23,6 +24,10 @@ Public Class DlgDefineClimaticData
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private clsDefaultFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction As New RFunction
+    Private strCurrentDataframeName As String
+    Private bIsUnique As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,12 +40,7 @@ Public Class DlgDefineClimaticData
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -51,8 +51,8 @@ Public Class DlgDefineClimaticData
         Dim kvpCloudCover As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("cloud_cover", {"cloud"}.ToList())
         Dim kvpTempMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "max", "tempmax"}.ToList())
         Dim kvpTempMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "min", "tempmin"}.ToList())
-        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation"}.ToList())
-        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine"}.ToList())
+        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation", "rad"}.ToList())
+        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine", "sunh"}.ToList())
         Dim kvpWindDirection As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_direction", {"winddirection"}.ToList())
         Dim kvpWindSpeed As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_speed", {"windspeed"}.ToList())
         Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year"}.ToList())
@@ -79,29 +79,63 @@ Public Class DlgDefineClimaticData
         ucrReceiverMonth.Tag = "month"
         ucrReceiverDay.Tag = "day"
         ucrReceiverDOY.Tag = "doy"
+        ucrInputCheckInput.IsReadOnly = True
 
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
         SetRSelector()
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
+        clsGetColFunction = New RFunction
+        clsAnyDuplicatesFunction = New RFunction
+        clsConcFunction = New RFunction
 
         ucrSelectorDefineClimaticData.Reset()
+        ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+        clsDefaultFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
+
         clsTypesFunction.SetRCommand("c")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
 
+        clsConcFunction.SetRCommand("c")
+
+        clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
+        clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         AutoFillReceivers()
+        EnableDisableCheckUniqueBtn()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorDefineClimaticData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        SetRcodesforReceivers(bReset)
+        SetRCodesforReceivers(bReset)
     End Sub
 
-    Private Sub SetRcodesforReceivers(bReset As Boolean)
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverDate.IsEmpty AndAlso bIsUnique Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodesforReceivers(bReset As Boolean)
         Dim ucrTempReceiver As ucrReceiver
         For Each ucrTempReceiver In lstReceivers
             ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
@@ -116,20 +150,6 @@ Public Class DlgDefineClimaticData
             ucrTempReceiver.SetParameterIsString()
             ucrTempReceiver.bExcludeFromSelector = True
         Next
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverDate.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -177,11 +197,73 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+    Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
+        AutoFillReceivers()
+    End Sub
+
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
+        Dim iAnyDuplicated As Integer
+
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInput.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInput.SetName("")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
+            If ucrReceiverStationName.IsEmpty Then
+                ucrInputCheckInput.SetName("Duplicate dates found.")
+                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInput.SetName("Duplicate dates for station(s) were found.")
+                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
+        Else
+            ucrInputCheckInput.SetName("No duplicate dates.")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
+        End If
         TestOKEnabled()
     End Sub
 
-    Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
-        AutoFillReceivers()
+    Private Sub EnableDisableCheckUniqueBtn()
+        If ucrReceiverDate.IsEmpty Then
+            cmdCheckUnique.Enabled = False
+        Else
+            cmdCheckUnique.Enabled = True
+        End If
+        ucrInputCheckInput.SetName("")
+        ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
+        bIsUnique = True
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStationName.ControlValueChanged
+        EnableDisableCheckUniqueBtn()
+        If Not ucrReceiverStationName.IsEmpty Then
+            clsConcFunction.AddParameter("x1", ucrReceiverStationName.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("x1")
+        End If
+        If Not ucrReceiverDate.IsEmpty Then
+            clsConcFunction.AddParameter("x2", ucrReceiverDate.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("x2")
+        End If
+    End Sub
+
+    Private Sub ucrSelectorDefineClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlValueChanged
+        strCurrentDataframeName = ucrSelectorDefineClimaticData.strCurrentDataFrame
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

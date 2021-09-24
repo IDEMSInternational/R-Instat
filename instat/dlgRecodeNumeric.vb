@@ -1,6 +1,5 @@
-﻿
-' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -12,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -21,7 +20,6 @@ Public Class dlgRecodeNumeric
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumn As String = ""
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -32,6 +30,7 @@ Public Class dlgRecodeNumeric
         SetDefaultColumn()
         TestOKEnabled()
         ucrBase.iHelpTopicID = 43
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -39,22 +38,31 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetMeAsReceiver()
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
+        ucrReceiverRecode.strSelectorHeading = "Numerics"
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrInputRecode.SetItemsTypeAsColumns()
-        ucrInputRecode.SetDefaultTypeAsColumn()
-        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrInputRecode.SetValidationTypeAsRVariable()
+        ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
+
+        'ucrSave
+        ucrSaveRecode.SetPrefix("recode")
+        ucrSaveRecode.SetSaveTypeAsColumn()
+        ucrSaveRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrSaveRecode.SetIsComboBox()
+        ucrSaveRecode.SetLabelText("New column name:")
+        ucrSaveRecode.setLinkedReceiver(ucrReceiverRecode)
+        ucrSaveRecode.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, True)
+
         ucrMultipleLabels.SetValidationTypeAsList()
-        ucrMultipleNumericRecode.SetValidationTypeAsNumericList()
+        ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
     End Sub
 
     Private Sub SetDefaults()
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
-        ucrInputRecode.SetPrefix("Recode")
+        'ucrInputRecode.SetPrefix("Recode")
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
+        ucrSaveRecode.Reset()
         ucrMultipleNumericRecode.Reset()
         ucrMultipleNumericRecode.SetName("")
         ucrMultipleLabels.Reset()
@@ -72,7 +80,7 @@ Public Class dlgRecodeNumeric
         End If
         If strDefaultColumn <> "" Then
             ucrReceiverRecode.Add(strDefaultColumn, strDefaultDataFrame)
-            ucrInputRecode.Focus()
+            ucrSaveRecode.Focus()
         End If
         strDefaultDataFrame = ""
         strDefaultColumn = ""
@@ -81,7 +89,7 @@ Public Class dlgRecodeNumeric
     Private Sub TestOKEnabled()
         Dim iTemp As Integer
 
-        If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso Not ucrInputRecode.IsEmpty Then
+        If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso ucrSaveRecode.IsComplete Then
             If chkAddLabels.Checked AndAlso Not ucrMultipleLabels.IsEmpty Then
                 If (ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso (Not ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1)) OrElse (ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso Integer.TryParse(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue, iTemp) AndAlso iTemp = ucrMultipleLabels.clsRList.clsParameters.Count) Then
                     ucrBase.OKEnabled(True)
@@ -180,12 +188,11 @@ Public Class dlgRecodeNumeric
         SetDefaults()
     End Sub
 
-    Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrMultipleLabels.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

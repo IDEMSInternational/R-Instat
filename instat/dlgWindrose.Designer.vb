@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgWindrose
     Inherits System.Windows.Forms.Form
 
@@ -26,6 +42,13 @@ Partial Class dlgWindrose
         Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblFacet = New System.Windows.Forms.Label()
         Me.lblNoOfColumns = New System.Windows.Forms.Label()
+        Me.cmdWindroseOptions = New System.Windows.Forms.Button()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
+        Me.lblGraphSubtitle = New System.Windows.Forms.Label()
+        Me.lblGraphCaption = New System.Windows.Forms.Label()
+        Me.ucrInputCaption = New instat.ucrInputTextBox()
+        Me.ucrInputSubTitle = New instat.ucrInputTextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudNoOfColumns = New instat.ucrNud()
@@ -33,7 +56,6 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdWindroseOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -66,11 +88,77 @@ Partial Class dlgWindrose
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 194)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(259, 180)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
-        Me.lblNoOfColumns.Size = New System.Drawing.Size(79, 13)
+        Me.lblNoOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNoOfColumns.TabIndex = 7
-        Me.lblNoOfColumns.Text = "No of Columns:"
+        Me.lblNoOfColumns.Text = "Number of Columns:"
+        '
+        'cmdWindroseOptions
+        '
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 198)
+        Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(148, 23)
+        Me.cmdWindroseOptions.TabIndex = 11
+        Me.cmdWindroseOptions.Text = "Windrose Options"
+        Me.cmdWindroseOptions.UseVisualStyleBackColor = True
+        '
+        'lblGraphTitle
+        '
+        Me.lblGraphTitle.AutoSize = True
+        Me.lblGraphTitle.Location = New System.Drawing.Point(7, 234)
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        Me.lblGraphTitle.Size = New System.Drawing.Size(59, 13)
+        Me.lblGraphTitle.TabIndex = 18
+        Me.lblGraphTitle.Text = "Graph Title"
+        '
+        'lblGraphSubtitle
+        '
+        Me.lblGraphSubtitle.AutoSize = True
+        Me.lblGraphSubtitle.Location = New System.Drawing.Point(7, 261)
+        Me.lblGraphSubtitle.Name = "lblGraphSubtitle"
+        Me.lblGraphSubtitle.Size = New System.Drawing.Size(81, 13)
+        Me.lblGraphSubtitle.TabIndex = 18
+        Me.lblGraphSubtitle.Text = "Graph Sub Title"
+        '
+        'lblGraphCaption
+        '
+        Me.lblGraphCaption.AutoSize = True
+        Me.lblGraphCaption.Location = New System.Drawing.Point(7, 288)
+        Me.lblGraphCaption.Name = "lblGraphCaption"
+        Me.lblGraphCaption.Size = New System.Drawing.Size(75, 13)
+        Me.lblGraphCaption.TabIndex = 18
+        Me.lblGraphCaption.Text = "Graph Caption"
+        '
+        'ucrInputCaption
+        '
+        Me.ucrInputCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputCaption.IsMultiline = False
+        Me.ucrInputCaption.IsReadOnly = False
+        Me.ucrInputCaption.Location = New System.Drawing.Point(155, 287)
+        Me.ucrInputCaption.Name = "ucrInputCaption"
+        Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputCaption.TabIndex = 17
+        '
+        'ucrInputSubTitle
+        '
+        Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSubTitle.IsMultiline = False
+        Me.ucrInputSubTitle.IsReadOnly = False
+        Me.ucrInputSubTitle.Location = New System.Drawing.Point(155, 260)
+        Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
+        Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputSubTitle.TabIndex = 16
+        '
+        'ucrInputTitle
+        '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        Me.ucrInputTitle.Location = New System.Drawing.Point(155, 230)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputTitle.TabIndex = 15
         '
         'ucrReceiverFacet
         '
@@ -80,24 +168,27 @@ Partial Class dlgWindrose
         Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
         Me.ucrReceiverFacet.Selector = Nothing
         Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacet.strNcFilePath = ""
         Me.ucrReceiverFacet.TabIndex = 6
+        Me.ucrReceiverFacet.ucrSelector = Nothing
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(251, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns
         '
         Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 191)
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(362, 178)
         Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
-        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(35, 20)
+        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(46, 20)
         Me.ucrNudNoOfColumns.TabIndex = 8
         Me.ucrNudNoOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -109,7 +200,9 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
         Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindDirection.strNcFilePath = ""
         Me.ucrReceiverWindDirection.TabIndex = 4
+        Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
         'ucrReceiverWindSpeed
         '
@@ -119,10 +212,13 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
         Me.ucrReceiverWindSpeed.TabIndex = 2
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'ucrWindRoseSelector
         '
+        Me.ucrWindRoseSelector.bDropUnusedFilterLevels = False
         Me.ucrWindRoseSelector.bShowHiddenColumns = False
         Me.ucrWindRoseSelector.bUseCurrentFilter = True
         Me.ucrWindRoseSelector.Location = New System.Drawing.Point(10, 10)
@@ -133,25 +229,22 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 349)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'cmdWindroseOptions
-        '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 192)
-        Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdWindroseOptions.TabIndex = 11
-        Me.cmdWindroseOptions.Text = "Options"
-        Me.cmdWindroseOptions.UseVisualStyleBackColor = True
         '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 307)
+        Me.ClientSize = New System.Drawing.Size(420, 406)
+        Me.Controls.Add(Me.lblGraphCaption)
+        Me.Controls.Add(Me.lblGraphSubtitle)
+        Me.Controls.Add(Me.lblGraphTitle)
+        Me.Controls.Add(Me.ucrInputCaption)
+        Me.Controls.Add(Me.ucrInputSubTitle)
+        Me.Controls.Add(Me.ucrInputTitle)
         Me.Controls.Add(Me.cmdWindroseOptions)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -187,4 +280,10 @@ Partial Class dlgWindrose
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
     Friend WithEvents cmdWindroseOptions As Button
+    Friend WithEvents ucrInputCaption As ucrInputTextBox
+    Friend WithEvents ucrInputSubTitle As ucrInputTextBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents lblGraphCaption As Label
+    Friend WithEvents lblGraphSubtitle As Label
+    Friend WithEvents lblGraphTitle As Label
 End Class

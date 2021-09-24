@@ -12,4 +12,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cmdDelete.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>134, 121</value>
+  </data>
+  <data name="cmdDelete.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdDelete.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmdDelete.Text" xml:space="preserve">
+    <value>Futa</value>
+  </data>
+  <data name="cmdEdit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>134, 92</value>
+  </data>
+  <data name="cmdEdit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdEdit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdEdit.Text" xml:space="preserve">
+    <value>Hariri</value>
+  </data>
+  <data name="cmdAdd.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>134, 63</value>
+  </data>
+  <data name="cmdAdd.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdAdd.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cmdAdd.Text" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="lblLayers.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLayers.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 13</value>
+  </data>
+  <data name="lblLayers.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="lblLayers.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblLayers.Text" xml:space="preserve">
+    <value>Ta&amp;baka</value>
+  </data>
+  <data name="lstLayers.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 28</value>
+  </data>
+  <data name="lstLayers.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>125, 149</value>
+  </data>
+  <data name="lstLayers.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>213, 180</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

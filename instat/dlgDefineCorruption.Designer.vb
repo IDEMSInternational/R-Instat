@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDefineCorruption
     Inherits System.Windows.Forms.Form
 
@@ -61,6 +77,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrDefineCorruptionSelector
         '
+        Me.ucrDefineCorruptionSelector.bDropUnusedFilterLevels = False
         Me.ucrDefineCorruptionSelector.bShowHiddenColumns = False
         Me.ucrDefineCorruptionSelector.bUseCurrentFilter = True
         Me.ucrDefineCorruptionSelector.Location = New System.Drawing.Point(10, 10)
@@ -72,6 +89,7 @@ Partial Class dlgDefineCorruption
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 377)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 34
@@ -93,7 +111,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverNoBids.Name = "ucrReceiverNoBids"
         Me.ucrReceiverNoBids.Selector = Nothing
         Me.ucrReceiverNoBids.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNoBids.strNcFilePath = ""
         Me.ucrReceiverNoBids.TabIndex = 18
+        Me.ucrReceiverNoBids.ucrSelector = Nothing
         '
         'ucrReceiverProcedureType
         '
@@ -103,7 +123,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcedureType.Name = "ucrReceiverProcedureType"
         Me.ucrReceiverProcedureType.Selector = Nothing
         Me.ucrReceiverProcedureType.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverProcedureType.strNcFilePath = ""
         Me.ucrReceiverProcedureType.TabIndex = 22
+        Me.ucrReceiverProcedureType.ucrSelector = Nothing
         '
         'lblProcedureType
         '
@@ -122,7 +144,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractValue.Name = "ucrReceiverContractValue"
         Me.ucrReceiverContractValue.Selector = Nothing
         Me.ucrReceiverContractValue.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverContractValue.strNcFilePath = ""
         Me.ucrReceiverContractValue.TabIndex = 28
+        Me.ucrReceiverContractValue.ucrSelector = Nothing
         '
         'lblContractValue
         '
@@ -141,7 +165,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverNoConsideredBids.Name = "ucrReceiverNoConsideredBids"
         Me.ucrReceiverNoConsideredBids.Selector = Nothing
         Me.ucrReceiverNoConsideredBids.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNoConsideredBids.strNcFilePath = ""
         Me.ucrReceiverNoConsideredBids.TabIndex = 20
+        Me.ucrReceiverNoConsideredBids.ucrSelector = Nothing
         '
         'ucrReceiverWinnerCountry
         '
@@ -151,7 +177,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverWinnerCountry.Name = "ucrReceiverWinnerCountry"
         Me.ucrReceiverWinnerCountry.Selector = Nothing
         Me.ucrReceiverWinnerCountry.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWinnerCountry.strNcFilePath = ""
         Me.ucrReceiverWinnerCountry.TabIndex = 26
+        Me.ucrReceiverWinnerCountry.ucrSelector = Nothing
         '
         'lblNoConsideredBids
         '
@@ -179,7 +207,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcuringAuthority.Name = "ucrReceiverProcuringAuthority"
         Me.ucrReceiverProcuringAuthority.Selector = Nothing
         Me.ucrReceiverProcuringAuthority.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverProcuringAuthority.strNcFilePath = ""
         Me.ucrReceiverProcuringAuthority.TabIndex = 6
+        Me.ucrReceiverProcuringAuthority.ucrSelector = Nothing
         '
         'lblProcuringAuthority
         '
@@ -198,7 +228,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
         Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCountry.strNcFilePath = ""
         Me.ucrReceiverCountry.TabIndex = 2
+        Me.ucrReceiverCountry.ucrSelector = Nothing
         '
         'ucrReceiverSignatureDate
         '
@@ -208,7 +240,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverSignatureDate.Name = "ucrReceiverSignatureDate"
         Me.ucrReceiverSignatureDate.Selector = Nothing
         Me.ucrReceiverSignatureDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSignatureDate.strNcFilePath = ""
         Me.ucrReceiverSignatureDate.TabIndex = 10
+        Me.ucrReceiverSignatureDate.ucrSelector = Nothing
         '
         'ucrReceiverContractSector
         '
@@ -218,7 +252,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractSector.Name = "ucrReceiverContractSector"
         Me.ucrReceiverContractSector.Selector = Nothing
         Me.ucrReceiverContractSector.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverContractSector.strNcFilePath = ""
         Me.ucrReceiverContractSector.TabIndex = 14
+        Me.ucrReceiverContractSector.ucrSelector = Nothing
         '
         'ucrReceiverProcurementCategory
         '
@@ -228,7 +264,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverProcurementCategory.Name = "ucrReceiverProcurementCategory"
         Me.ucrReceiverProcurementCategory.Selector = Nothing
         Me.ucrReceiverProcurementCategory.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverProcurementCategory.strNcFilePath = ""
         Me.ucrReceiverProcurementCategory.TabIndex = 16
+        Me.ucrReceiverProcurementCategory.ucrSelector = Nothing
         '
         'ucrReceiverWinnerName
         '
@@ -238,7 +276,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverWinnerName.Name = "ucrReceiverWinnerName"
         Me.ucrReceiverWinnerName.Selector = Nothing
         Me.ucrReceiverWinnerName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWinnerName.strNcFilePath = ""
         Me.ucrReceiverWinnerName.TabIndex = 24
+        Me.ucrReceiverWinnerName.ucrSelector = Nothing
         '
         'lblWinnerName
         '
@@ -284,7 +324,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverAwardDate.Name = "ucrReceiverAwardDate"
         Me.ucrReceiverAwardDate.Selector = Nothing
         Me.ucrReceiverAwardDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverAwardDate.strNcFilePath = ""
         Me.ucrReceiverAwardDate.TabIndex = 8
+        Me.ucrReceiverAwardDate.ucrSelector = Nothing
         '
         'ucrReceiverContractTitle
         '
@@ -294,7 +336,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverContractTitle.Name = "ucrReceiverContractTitle"
         Me.ucrReceiverContractTitle.Selector = Nothing
         Me.ucrReceiverContractTitle.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverContractTitle.strNcFilePath = ""
         Me.ucrReceiverContractTitle.TabIndex = 12
+        Me.ucrReceiverContractTitle.ucrSelector = Nothing
         '
         'lblAwardDate
         '
@@ -340,7 +384,9 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverFiscalYear.Name = "ucrReceiverFiscalYear"
         Me.ucrReceiverFiscalYear.Selector = Nothing
         Me.ucrReceiverFiscalYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFiscalYear.strNcFilePath = ""
         Me.ucrReceiverFiscalYear.TabIndex = 30
+        Me.ucrReceiverFiscalYear.ucrSelector = Nothing
         '
         'lblRegion
         '
@@ -359,12 +405,15 @@ Partial Class dlgDefineCorruption
         Me.ucrReceiverRegion.Name = "ucrReceiverRegion"
         Me.ucrReceiverRegion.Selector = Nothing
         Me.ucrReceiverRegion.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverRegion.strNcFilePath = ""
         Me.ucrReceiverRegion.TabIndex = 4
+        Me.ucrReceiverRegion.ucrSelector = Nothing
         '
         'ucrChkAutoGenerate
         '
         Me.ucrChkAutoGenerate.Checked = False
         Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(10, 265)
+        Me.ucrChkAutoGenerate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
         Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkAutoGenerate.TabIndex = 31
@@ -432,7 +481,7 @@ Partial Class dlgDefineCorruption
         Me.MinimizeBox = False
         Me.Name = "dlgDefineCorruption"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Corruption"
+        Me.Text = "Define Procurement Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExportToCPT
     Inherits System.Windows.Forms.Form
 
@@ -22,209 +38,303 @@ Partial Class dlgExportToCPT
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.lblExport = New System.Windows.Forms.Label()
-        Me.lblYears = New System.Windows.Forms.Label()
-        Me.lblStations = New System.Windows.Forms.Label()
-        Me.lblDataColumn = New System.Windows.Forms.Label()
-        Me.lblDataColumns = New System.Windows.Forms.Label()
-        Me.ucrBaseExportToCPT = New instat.ucrButtons()
-        Me.ucrLocationDataFrame = New instat.ucrDataFrame()
-        Me.ucrReceiverMultipleDataColumns = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverDataColumn = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStations = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYears = New instat.ucrReceiverSingle()
-        Me.ucrSSTDataframe = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrChkLong = New instat.ucrCheck()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToCPT))
+        Me.lblSaveDataTo = New System.Windows.Forms.Label()
+        Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.lblLongitude = New System.Windows.Forms.Label()
+        Me.lblStationTwoDF = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.lblStationOneDF = New System.Windows.Forms.Label()
+        Me.lblMultStations = New System.Windows.Forms.Label()
+        Me.rdoOneDF = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoDFLong = New System.Windows.Forms.RadioButton()
+        Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.lblSaveFile = New System.Windows.Forms.Label()
+        Me.lblMissingValues = New System.Windows.Forms.Label()
+        Me.ucrInputCodeMissingValues = New instat.ucrInputTextBox()
+        Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverStationTwoDF = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationOneDF = New instat.ucrReceiverSingle()
+        Me.ucrPnlNoOfDF = New instat.UcrPanel()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'cmdBrowse
+        'lblSaveDataTo
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(347, 243)
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
-        Me.cmdBrowse.TabIndex = 11
-        Me.cmdBrowse.Text = "Browse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
+        Me.lblSaveDataTo.Name = "lblSaveDataTo"
         '
-        'lblExport
+        'cmdChooseFile
         '
-        Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(10, 249)
-        Me.lblExport.Name = "lblExport"
-        Me.lblExport.Size = New System.Drawing.Size(56, 13)
-        Me.lblExport.TabIndex = 9
-        Me.lblExport.Text = "Export file:"
+        resources.ApplyResources(Me.cmdChooseFile, "cmdChooseFile")
+        Me.cmdChooseFile.Name = "cmdChooseFile"
+        Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
-        'lblYears
+        'lblLatitude
         '
-        Me.lblYears.AutoSize = True
-        Me.lblYears.Location = New System.Drawing.Point(280, 45)
-        Me.lblYears.Name = "lblYears"
-        Me.lblYears.Size = New System.Drawing.Size(37, 13)
-        Me.lblYears.TabIndex = 2
-        Me.lblYears.Tag = "Years:"
-        Me.lblYears.Text = "Years:"
+        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
+        Me.lblLatitude.Name = "lblLatitude"
         '
-        'lblStations
+        'lblLongitude
         '
-        Me.lblStations.AutoSize = True
-        Me.lblStations.Location = New System.Drawing.Point(280, 145)
-        Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(48, 13)
-        Me.lblStations.TabIndex = 6
-        Me.lblStations.Tag = "Stations:"
-        Me.lblStations.Text = "Stations:"
+        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
+        Me.lblLongitude.Name = "lblLongitude"
         '
-        'lblDataColumn
+        'lblStationTwoDF
         '
-        Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(280, 95)
-        Me.lblDataColumn.Name = "lblDataColumn"
-        Me.lblDataColumn.Size = New System.Drawing.Size(71, 13)
-        Me.lblDataColumn.TabIndex = 6
-        Me.lblDataColumn.Tag = "Data_Column:"
-        Me.lblDataColumn.Text = "Data Column:"
+        resources.ApplyResources(Me.lblStationTwoDF, "lblStationTwoDF")
+        Me.lblStationTwoDF.Name = "lblStationTwoDF"
         '
-        'lblDataColumns
+        'lblElement
         '
-        Me.lblDataColumns.AutoSize = True
-        Me.lblDataColumns.Location = New System.Drawing.Point(280, 95)
-        Me.lblDataColumns.Name = "lblDataColumns"
-        Me.lblDataColumns.Size = New System.Drawing.Size(76, 13)
-        Me.lblDataColumns.TabIndex = 4
-        Me.lblDataColumns.Tag = "Data_Columns:"
-        Me.lblDataColumns.Text = "Data Columns:"
+        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.Name = "lblElement"
         '
-        'ucrBaseExportToCPT
+        'lblYear
         '
-        Me.ucrBaseExportToCPT.Location = New System.Drawing.Point(10, 276)
-        Me.ucrBaseExportToCPT.Name = "ucrBaseExportToCPT"
-        Me.ucrBaseExportToCPT.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseExportToCPT.TabIndex = 12
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
         '
-        'ucrLocationDataFrame
+        'lblStationOneDF
         '
-        Me.ucrLocationDataFrame.bUseCurrentFilter = True
-        Me.ucrLocationDataFrame.Location = New System.Drawing.Point(10, 193)
-        Me.ucrLocationDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrLocationDataFrame.Name = "ucrLocationDataFrame"
-        Me.ucrLocationDataFrame.Size = New System.Drawing.Size(127, 50)
-        Me.ucrLocationDataFrame.TabIndex = 8
+        resources.ApplyResources(Me.lblStationOneDF, "lblStationOneDF")
+        Me.lblStationOneDF.Name = "lblStationOneDF"
         '
-        'ucrReceiverMultipleDataColumns
+        'lblMultStations
         '
-        Me.ucrReceiverMultipleDataColumns.frmParent = Me
-        Me.ucrReceiverMultipleDataColumns.Location = New System.Drawing.Point(280, 110)
-        Me.ucrReceiverMultipleDataColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleDataColumns.Name = "ucrReceiverMultipleDataColumns"
-        Me.ucrReceiverMultipleDataColumns.Selector = Nothing
-        Me.ucrReceiverMultipleDataColumns.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleDataColumns.TabIndex = 5
+        resources.ApplyResources(Me.lblMultStations, "lblMultStations")
+        Me.lblMultStations.Name = "lblMultStations"
         '
-        'ucrReceiverDataColumn
+        'rdoOneDF
         '
-        Me.ucrReceiverDataColumn.frmParent = Me
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(280, 110)
-        Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
-        Me.ucrReceiverDataColumn.Selector = Nothing
-        Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDataColumn.TabIndex = 7
+        resources.ApplyResources(Me.rdoOneDF, "rdoOneDF")
+        Me.rdoOneDF.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOneDF.FlatAppearance.BorderSize = 2
+        Me.rdoOneDF.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOneDF.Name = "rdoOneDF"
+        Me.rdoOneDF.TabStop = True
+        Me.rdoOneDF.UseVisualStyleBackColor = True
         '
-        'ucrReceiverStations
+        'rdoTwoDFLong
         '
-        Me.ucrReceiverStations.frmParent = Me
-        Me.ucrReceiverStations.Location = New System.Drawing.Point(280, 160)
-        Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStations.Name = "ucrReceiverStations"
-        Me.ucrReceiverStations.Selector = Nothing
-        Me.ucrReceiverStations.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStations.TabIndex = 7
+        resources.ApplyResources(Me.rdoTwoDFLong, "rdoTwoDFLong")
+        Me.rdoTwoDFLong.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFLong.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFLong.Name = "rdoTwoDFLong"
+        Me.rdoTwoDFLong.TabStop = True
+        Me.rdoTwoDFLong.UseVisualStyleBackColor = True
         '
-        'ucrReceiverYears
+        'rdoTwoDFWide
         '
-        Me.ucrReceiverYears.frmParent = Me
-        Me.ucrReceiverYears.Location = New System.Drawing.Point(280, 60)
-        Me.ucrReceiverYears.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYears.Name = "ucrReceiverYears"
-        Me.ucrReceiverYears.Selector = Nothing
-        Me.ucrReceiverYears.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverYears.TabIndex = 3
+        resources.ApplyResources(Me.rdoTwoDFWide, "rdoTwoDFWide")
+        Me.rdoTwoDFWide.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.FlatAppearance.BorderSize = 2
+        Me.rdoTwoDFWide.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
+        Me.rdoTwoDFWide.TabStop = True
+        Me.rdoTwoDFWide.UseVisualStyleBackColor = True
         '
-        'ucrSSTDataframe
+        'lblLine
         '
-        Me.ucrSSTDataframe.bShowHiddenColumns = False
-        Me.ucrSSTDataframe.bUseCurrentFilter = True
-        Me.ucrSSTDataframe.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSSTDataframe.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSSTDataframe.Name = "ucrSSTDataframe"
-        Me.ucrSSTDataframe.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSSTDataframe.TabIndex = 0
+        resources.ApplyResources(Me.lblLine, "lblLine")
+        Me.lblLine.Name = "lblLine"
         '
-        'ucrInputExportFile
+        'lblSaveFile
         '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 245)
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
-        Me.ucrInputExportFile.TabIndex = 10
+        resources.ApplyResources(Me.lblSaveFile, "lblSaveFile")
+        Me.lblSaveFile.Name = "lblSaveFile"
         '
-        'ucrChkLong
+        'lblMissingValues
         '
-        Me.ucrChkLong.Checked = False
-        Me.ucrChkLong.Location = New System.Drawing.Point(280, 17)
-        Me.ucrChkLong.Name = "ucrChkLong"
-        Me.ucrChkLong.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkLong.TabIndex = 1
+        resources.ApplyResources(Me.lblMissingValues, "lblMissingValues")
+        Me.lblMissingValues.Name = "lblMissingValues"
+        '
+        'ucrInputCodeMissingValues
+        '
+        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputCodeMissingValues.IsMultiline = False
+        Me.ucrInputCodeMissingValues.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCodeMissingValues, "ucrInputCodeMissingValues")
+        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
+        '
+        'ucrReceiverMultipleStation
+        '
+        Me.ucrReceiverMultipleStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
+        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
+        Me.ucrReceiverMultipleStation.Selector = Nothing
+        Me.ucrReceiverMultipleStation.strNcFilePath = ""
+        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
+        '
+        'ucrSelectorTwoDF
+        '
+        Me.ucrSelectorTwoDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTwoDF.bShowHiddenColumns = False
+        Me.ucrSelectorTwoDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTwoDF, "ucrSelectorTwoDF")
+        Me.ucrSelectorTwoDF.Name = "ucrSelectorTwoDF"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrReceiverStationTwoDF
+        '
+        Me.ucrReceiverStationTwoDF.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationTwoDF, "ucrReceiverStationTwoDF")
+        Me.ucrReceiverStationTwoDF.Name = "ucrReceiverStationTwoDF"
+        Me.ucrReceiverStationTwoDF.Selector = Nothing
+        Me.ucrReceiverStationTwoDF.strNcFilePath = ""
+        Me.ucrReceiverStationTwoDF.ucrSelector = Nothing
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrReceiverStationOneDF
+        '
+        Me.ucrReceiverStationOneDF.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationOneDF, "ucrReceiverStationOneDF")
+        Me.ucrReceiverStationOneDF.Name = "ucrReceiverStationOneDF"
+        Me.ucrReceiverStationOneDF.Selector = Nothing
+        Me.ucrReceiverStationOneDF.strNcFilePath = ""
+        Me.ucrReceiverStationOneDF.ucrSelector = Nothing
+        '
+        'ucrPnlNoOfDF
+        '
+        resources.ApplyResources(Me.ucrPnlNoOfDF, "ucrPnlNoOfDF")
+        Me.ucrPnlNoOfDF.Name = "ucrPnlNoOfDF"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrSelectorOneDF
+        '
+        Me.ucrSelectorOneDF.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOneDF.bShowHiddenColumns = False
+        Me.ucrSelectorOneDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
+        Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
         '
         'dlgExportToCPT
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 329)
-        Me.Controls.Add(Me.ucrChkLong)
-        Me.Controls.Add(Me.ucrInputExportFile)
-        Me.Controls.Add(Me.ucrBaseExportToCPT)
-        Me.Controls.Add(Me.ucrLocationDataFrame)
-        Me.Controls.Add(Me.lblDataColumns)
-        Me.Controls.Add(Me.ucrReceiverMultipleDataColumns)
-        Me.Controls.Add(Me.lblDataColumn)
-        Me.Controls.Add(Me.lblStations)
-        Me.Controls.Add(Me.lblYears)
-        Me.Controls.Add(Me.ucrReceiverDataColumn)
-        Me.Controls.Add(Me.ucrReceiverStations)
-        Me.Controls.Add(Me.ucrReceiverYears)
-        Me.Controls.Add(Me.ucrSSTDataframe)
-        Me.Controls.Add(Me.cmdBrowse)
-        Me.Controls.Add(Me.lblExport)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Controls.Add(Me.lblMissingValues)
+        Me.Controls.Add(Me.ucrInputCodeMissingValues)
+        Me.Controls.Add(Me.lblSaveFile)
+        Me.Controls.Add(Me.lblLine)
+        Me.Controls.Add(Me.rdoTwoDFWide)
+        Me.Controls.Add(Me.rdoTwoDFLong)
+        Me.Controls.Add(Me.rdoOneDF)
+        Me.Controls.Add(Me.lblMultStations)
+        Me.Controls.Add(Me.ucrReceiverMultipleStation)
+        Me.Controls.Add(Me.ucrSelectorTwoDF)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblStationTwoDF)
+        Me.Controls.Add(Me.ucrReceiverStationTwoDF)
+        Me.Controls.Add(Me.ucrReceiverLongitude)
+        Me.Controls.Add(Me.lblLatitude)
+        Me.Controls.Add(Me.lblLongitude)
+        Me.Controls.Add(Me.cmdChooseFile)
+        Me.Controls.Add(Me.ucrInputFilePath)
+        Me.Controls.Add(Me.lblSaveDataTo)
+        Me.Controls.Add(Me.ucrReceiverLatitude)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.lblYear)
+        Me.Controls.Add(Me.lblStationOneDF)
+        Me.Controls.Add(Me.ucrReceiverStationOneDF)
+        Me.Controls.Add(Me.ucrPnlNoOfDF)
+        Me.Controls.Add(Me.ucrReceiverElement)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrSelectorOneDF)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportToCPT"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Export_To_CPT"
-        Me.Text = "Export to CPT"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents cmdBrowse As Button
-    Friend WithEvents lblExport As Label
-    Friend WithEvents ucrSSTDataframe As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverYears As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStations As ucrReceiverSingle
-    Friend WithEvents ucrReceiverDataColumn As ucrReceiverSingle
-    Friend WithEvents lblYears As Label
-    Friend WithEvents lblStations As Label
-    Friend WithEvents lblDataColumn As Label
-    Friend WithEvents ucrReceiverMultipleDataColumns As ucrReceiverMultiple
-    Friend WithEvents lblDataColumns As Label
-    Friend WithEvents ucrLocationDataFrame As ucrDataFrame
-    Friend WithEvents ucrBaseExportToCPT As ucrButtons
-    Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents ucrChkLong As ucrCheck
+    Friend WithEvents ucrSelectorOneDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrPnlNoOfDF As UcrPanel
+    Friend WithEvents lblSaveDataTo As Label
+    Friend WithEvents ucrInputFilePath As ucrInputTextBox
+    Friend WithEvents cmdChooseFile As Button
+    Friend WithEvents lblLatitude As Label
+    Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
+    Friend WithEvents lblLongitude As Label
+    Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
+    Friend WithEvents lblStationTwoDF As Label
+    Friend WithEvents ucrReceiverStationTwoDF As ucrReceiverSingle
+    Friend WithEvents lblElement As Label
+    Friend WithEvents lblYear As Label
+    Friend WithEvents lblStationOneDF As Label
+    Friend WithEvents ucrReceiverStationOneDF As ucrReceiverSingle
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents lblTwoDF As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lblOneDF As Label
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorTwoDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverMultipleStation As ucrReceiverMultiple
+    Friend WithEvents lblMultStations As Label
+    Friend WithEvents rdoOneDF As RadioButton
+    Friend WithEvents rdoTwoDFWide As RadioButton
+    Friend WithEvents rdoTwoDFLong As RadioButton
+    Friend WithEvents lblLine As Label
+    Friend WithEvents lblSaveFile As Label
+    Friend WithEvents lblMissingValues As Label
+    Friend WithEvents ucrInputCodeMissingValues As ucrInputTextBox
 End Class

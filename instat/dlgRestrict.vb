@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -26,6 +26,7 @@ Public Class dlgRestrict
     Public strDefaultDataframe As String = ""
     Public strDefaultColumn As String = ""
     Public bAutoOpenSubDialog As Boolean = False
+    Private bResetSubdialog = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -45,22 +46,21 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
-        SetFilterSubsetStatus()
         SetDefaultDataFrame()
         If bAutoOpenSubDialog Then
             OpenNewFilterSubDialog()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrInputFilterPreview.txtInput.ReadOnly = True
-        ucrSelectorFilter.SetItemType("filter")
+        ucrReceiverFilter.SetItemType("filter")
         ucrReceiverFilter.strSelectorHeading = "Filters"
         ucrReceiverFilter.Selector = ucrSelectorFilter
         ucrReceiverFilter.SetMeAsReceiver()
@@ -68,10 +68,10 @@ Public Class dlgRestrict
         'rdoApplyAsSubset.Enabled = False
 
         ' ucrSave
-        ucrNewDataFrameName.SetIsTextBox()
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
         ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorFilter.ucrAvailableDataFrames)
+        ucrNewDataFrameName.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
@@ -80,6 +80,7 @@ Public Class dlgRestrict
         SetDefaultNewDataFrameName()
         SetFilterSubsetStatus()
         SetDefaultDataFrame()
+        bResetSubdialog = True
         'ucrNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
         'lblNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
     End Sub
@@ -96,12 +97,10 @@ Public Class dlgRestrict
         If bIsSubsetDialog Then
             rdoApplyAsFilter.Enabled = False
             rdoApplyAsSubset.Checked = True
-            'TODO translate
             Me.Text = "Subset"
         Else
             rdoApplyAsFilter.Enabled = True
             rdoApplyAsFilter.Checked = True
-            'TODO translate
             Me.Text = "Filter"
         End If
     End Sub
@@ -117,8 +116,8 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub OpenNewFilterSubDialog()
-        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strDefaultDataframe)
-        If strDefaultColumn <> "" Then
+        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If strDefaultColumn <> "" AndAlso ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text = strDefaultDataframe Then
             sdgCreateFilter.ucrCreateFilter.SetDefaultColumn(strDefaultColumn)
         End If
         sdgCreateFilter.ShowDialog()
@@ -126,6 +125,11 @@ Public Class dlgRestrict
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
             ucrSelectorFilter.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            'Clear the receiver if the filter created is the same as the filter currently in the receiver. 
+            'Clearing ensures that the filter preview is updated correctly because it might have changed.
+            If ucrReceiverFilter.GetVariableNames(False) = sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText() Then
+                ucrReceiverFilter.Clear()
+            End If
             ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilter.LoadList()
@@ -202,6 +206,7 @@ Public Class dlgRestrict
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
@@ -210,5 +215,12 @@ Public Class dlgRestrict
 
     Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
         SetBaseFunction()
+    End Sub
+
+    Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
+        sdgFiltersFromFactor.SetRcodeAndDefaultDataFrame(ucrSelectorFilter, bReset:=bResetSubdialog)
+        sdgFiltersFromFactor.ShowDialog()
+        bResetSubdialog = False
+        ucrSelectorFilter.LoadList()
     End Sub
 End Class

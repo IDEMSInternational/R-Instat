@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrDataSelection
     Inherits System.Windows.Forms.UserControl
 
@@ -22,6 +38,7 @@ Partial Class ucrDataSelection
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDataSelection))
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
@@ -32,68 +49,50 @@ Partial Class ucrDataSelection
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(99, 76)
+        resources.ApplyResources(Me.btnRemove, "btnRemove")
         Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 80
         Me.btnRemove.Tag = "Remove"
-        Me.btnRemove.Text = "Remove "
         Me.btnRemove.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(99, 38)
+        resources.ApplyResources(Me.btnAdd, "btnAdd")
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 79
         Me.btnAdd.Tag = "Add"
-        Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'lblSelectedVariables
         '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(182, 3)
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 78
         Me.lblSelectedVariables.Tag = "Selected_Variables"
-        Me.lblSelectedVariables.Text = "Selected Variables"
         '
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(189, 23)
+        resources.ApplyResources(Me.lstSelectedVariables, "lstSelectedVariables")
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
         Me.lstSelectedVariables.Sorted = True
-        Me.lstSelectedVariables.TabIndex = 77
         '
         'lblAvailableVariables
         '
-        Me.lblAvailableVariables.AutoSize = True
-        Me.lblAvailableVariables.Location = New System.Drawing.Point(2, 3)
+        resources.ApplyResources(Me.lblAvailableVariables, "lblAvailableVariables")
         Me.lblAvailableVariables.Name = "lblAvailableVariables"
-        Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
-        Me.lblAvailableVariables.TabIndex = 76
         Me.lblAvailableVariables.Tag = "Available_Variables "
-        Me.lblAvailableVariables.Text = "Available  Variables "
         '
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.FormattingEnabled = True
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(9, 23)
+        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
         Me.lstAvailableVariable.Sorted = True
-        Me.lstAvailableVariable.TabIndex = 75
         Me.lstAvailableVariable.Tag = ""
         '
         'ucrDataSelection
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
@@ -102,7 +101,6 @@ Partial Class ucrDataSelection
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "ucrDataSelection"
-        Me.Size = New System.Drawing.Size(285, 122)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

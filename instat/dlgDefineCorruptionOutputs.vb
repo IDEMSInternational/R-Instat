@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,11 +11,11 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDefineCorruptionOutputs
+Public Class dlgCorruptionDefineOutputs
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
@@ -24,7 +24,6 @@ Public Class dlgDefineCorruptionOutputs
     Private clsCorruptionOutputs As New RFunction
 
     Private Sub dlgDefineCorruptionOutputs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -37,11 +36,11 @@ Public Class dlgDefineCorruptionOutputs
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 191
 
         'selector
         ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name", 0))

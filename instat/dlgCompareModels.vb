@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgCompareModels
@@ -20,7 +21,6 @@ Public Class dlgCompareModels
     Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -29,6 +29,7 @@ Public Class dlgCompareModels
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         clsPlotDist.SetRCommand("plotDist")
@@ -61,7 +62,7 @@ Public Class dlgCompareModels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ParameterChanged
+    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ControlContentsChanged
         distParameters()
     End Sub
 

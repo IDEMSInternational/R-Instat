@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -10,14 +11,13 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
 Public Class dlgTwoSampleNonparametricTest
     Public bFirstLoad As Boolean = True
     Private Sub dlgTwoSampleNonparametricTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         ucrReceiverVariable.Selector = ucrTwoSampleSelector
         ucrReceiverFactor.Selector = ucrTwoSampleSelector
         ucrReceiverFactor.SetDataType("factor")
@@ -25,6 +25,7 @@ Public Class dlgTwoSampleNonparametricTest
         If bFirstLoad Then
             'setDeafaults
         End If
+        autoTranslate(Me)
     End Sub
     Private Sub SetDefaults()
         ucrTwoSampleSelector.Reset()
