@@ -130,7 +130,7 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.SetText("Add Rug Plot")
         ucrChkAddRugPlot.SetParameter(clsGeomRugParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrSaveScatterPlot.SetPrefix("scatterplot")
+        ucrSaveScatterPlot.SetPrefix("scatter_plot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
