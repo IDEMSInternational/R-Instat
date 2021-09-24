@@ -169,7 +169,7 @@ Public Class dlgConversions
         ucrSaveConversions.SetSaveTypeAsColumn()
         ucrSaveConversions.SetIsTextBox()
         ucrSaveConversions.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
-        ucrSaveConversions.SetPrefix("Conversion")
+        ucrSaveConversions.SetPrefix("conversion")
     End Sub
 
     Private Sub SetDefaults()

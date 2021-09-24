@@ -337,8 +337,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       }
     } 
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
-      decimal_places[is.na(decimal_places)] <- 0
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
       return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
