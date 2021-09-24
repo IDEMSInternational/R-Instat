@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgRugPlot
+Public Class dlgHeatMapPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeomTileFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -52,7 +52,7 @@ Public Class dlgRugPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
     Private strGeomParameterNames() As String = {strFirstParameterName}
-    Private Sub dlgRugPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgHeatMapPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -300,7 +300,7 @@ Public Class dlgRugPlot
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdHeatMapOptions.Click
+    Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
         ''''''' i wonder if all this will be needed for the new system
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -341,6 +341,10 @@ Public Class dlgRugPlot
 
             End If
         End If
+
+    End Sub
+
+    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
 
     End Sub
 End Class
