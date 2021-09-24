@@ -1403,7 +1403,7 @@ Public Class ucrGeom
         clsgeom_mosaic.AddLayerParameter("stat", "editablelist", Chr(34) & "mosaic" & Chr(34), lstParameterStrings:={Chr(34) & "mosaic" & Chr(34)}) ' Made this editable because am not sure what other stats go here
         clsgeom_mosaic.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)}) ' Made this editable because am not sure what other positions go here
         clsgeom_mosaic.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_mosaic.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 1}) 'not certain if the size goues up to this much
+        clsgeom_mosaic.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 1})
         clsgeom_mosaic.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_mosaic.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_mosaic)
