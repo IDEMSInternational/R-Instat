@@ -1101,10 +1101,10 @@
     <Compile Include="dlgRenameDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRugPlot.Designer.vb">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <Compile Include="dlgHeatMapPlot.Designer.vb">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRugPlot.vb">
+    <Compile Include="dlgHeatMapPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgShowModel.Designer.vb">
@@ -3373,8 +3373,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.sw-KE.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFindNonnumericValues.resx">
       <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
@@ -3760,8 +3760,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>

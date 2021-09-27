@@ -168,7 +168,7 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrSave.SetPrefix("lineplot")
+        ucrSave.SetPrefix("line_plot")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")
@@ -416,14 +416,14 @@ Public Class dlgLinePlot
         If rdoLine.Checked Then
             If ucrChkPathOrStep.Checked Then
                 If rdoStep.Checked Then
-                    ucrSave.SetPrefix("stepplot")
+                    ucrSave.SetPrefix("step_plot")
                     clsOptionsFunction.SetRCommand("geom_step")
                 ElseIf rdoPath.Checked Then
-                    ucrSave.SetPrefix("pathplot")
+                    ucrSave.SetPrefix("path_plot")
                     clsOptionsFunction.SetRCommand("geom_path")
                 End If
             ElseIf rdoLine.Checked Then
-                ucrSave.SetPrefix("lineplot")
+                ucrSave.SetPrefix("line_plot")
                 clsOptionsFunction.SetRCommand("geom_line")
             End If
         ElseIf rdoSmoothing.Checked Then

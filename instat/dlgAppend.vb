@@ -57,7 +57,7 @@ Public Class dlgAppend
         ucrSaveGraph.SetIsTextBox()
         ucrSaveGraph.SetSaveTypeAsDataFrame()
         ucrSaveGraph.SetLabelText("New Data Frame Name:")
-        ucrSaveGraph.SetPrefix("Append")
+        ucrSaveGraph.SetPrefix("append")
     End Sub
 
     Private Sub SetDefaults()
