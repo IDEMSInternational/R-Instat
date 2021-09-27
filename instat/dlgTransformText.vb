@@ -445,19 +445,21 @@ Public Class dlgTransformText
 
     Private Sub ucrPnlPad_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPad.ControlValueChanged, ucrPnlOperation.ControlValueChanged, ucrPnlSide.ControlValueChanged
         ChangeBaseFunction()
-        If rdoTrim.Checked Then
-            If rdoSquish.Checked Then
-                clsSquishTrimFunction.SetRCommand("str_squish")
-                clsSquishTrimFunction.RemoveParameterByName("side")
-            Else
-                clsSquishTrimFunction.SetRCommand("str_trim")
-                If rdoLeftPad.Checked Then
-                    clsSquishTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
-                ElseIf rdoRightPad.Checked Then
-                    clsSquishTrimFunction.AddParameter("side", Chr(34) & "right" & Chr(34), iPosition:=2)
-                ElseIf rdoBothPad.Checked Then
-                    clsSquishTrimFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
-                End If
+        If Not rdoTrim.Checked Then
+            Exit Sub
+        End If
+
+        If rdoSquish.Checked Then
+            clsSquishTrimFunction.SetRCommand("str_squish")
+            clsSquishTrimFunction.RemoveParameterByName("side")
+        Else
+            clsSquishTrimFunction.SetRCommand("str_trim")
+            If rdoLeftPad.Checked Then
+                clsSquishTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
+            ElseIf rdoRightPad.Checked Then
+                clsSquishTrimFunction.AddParameter("side", Chr(34) & "right" & Chr(34), iPosition:=2)
+            ElseIf rdoBothPad.Checked Then
+                clsSquishTrimFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
             End If
         End If
 
