@@ -100,8 +100,8 @@ Public Class dlgReorderLevels
         ucrInputOptions.SetParameter(New RParameter(".fun", 2))
         dctOptions.Add("Median", "median")
         dctOptions.Add("Mean", "mean")
-        dctOptions.Add("Max", "max")
-        dctOptions.Add("Min", "min")
+        dctOptions.Add("Maximum", "max")
+        dctOptions.Add("Minimum", "min")
         dctOptions.Add("Sd", "sd")
         dctOptions.Add("IQR", "IQR")
         dctOptions.Add("Range", "range")
@@ -148,7 +148,6 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
         ucrSaveResults.SetLabelText("Save As:")
         ucrSaveResults.SetIsComboBox()
-        ucrSaveResults.bAddRemoveParameter = True
 
         ttAsIs.SetToolTip(rdoReverseLevels, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
         ttAppearance.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
@@ -176,9 +175,11 @@ Public Class dlgReorderLevels
         'Reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSaveResults.Reset()
+        ucrReceiverFactor.SetMeAsReceiver()
+
+        'Temp fix: Set panel conditions properly!
         rdoReverseLevels.Checked = True
         rdoHand.Checked = True
-        ucrReceiverFactor.SetMeAsReceiver()
 
         ucrInputOrder.SetText(strAscending)
 
@@ -216,7 +217,7 @@ Public Class dlgReorderLevels
 
         clsForcatsRelevel.SetPackageName("forcats")
         clsForcatsRelevel.SetRCommand("fct_relevel")
-        clsForcatsRelevel.AddParameter("sort", "sort", iPosition:=1, bIncludeArgumentName:=False)
+        clsForcatsRelevel.AddParameter("sort", "sort", iPosition:=1)
 
         clsForcatsReorder.SetPackageName("forcats")
         clsForcatsReorder.SetRCommand("fct_reorder")
