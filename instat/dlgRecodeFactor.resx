@@ -150,66 +150,6 @@
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;rdoKeep.Name" xml:space="preserve">
-    <value>rdoKeep</value>
-  </data>
-  <data name="&gt;&gt;rdoKeep.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoKeep.Parent" xml:space="preserve">
-    <value>grpSelectedValues</value>
-  </data>
-  <data name="&gt;&gt;rdoKeep.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoDrop.Name" xml:space="preserve">
-    <value>rdoDrop</value>
-  </data>
-  <data name="&gt;&gt;rdoDrop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoDrop.Parent" xml:space="preserve">
-    <value>grpSelectedValues</value>
-  </data>
-  <data name="&gt;&gt;rdoDrop.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
-    <value>ucrPnlMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
-    <value>grpSelectedValues</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpSelectedValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 240</value>
-  </data>
-  <data name="grpSelectedValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 59</value>
-  </data>
-  <data name="grpSelectedValues.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="grpSelectedValues.Text" xml:space="preserve">
-    <value>Selected Values</value>
-  </data>
-  <data name="&gt;&gt;grpSelectedValues.Name" xml:space="preserve">
-    <value>grpSelectedValues</value>
-  </data>
-  <data name="&gt;&gt;grpSelectedValues.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSelectedValues.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSelectedValues.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="rdoKeep.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -270,6 +210,51 @@
   <data name="&gt;&gt;rdoDrop.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 15</value>
+  </data>
+  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 37</value>
+  </data>
+  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
+    <value>ucrPnlMethods</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
+    <value>grpSelectedValues</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpSelectedValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 240</value>
+  </data>
+  <data name="grpSelectedValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 59</value>
+  </data>
+  <data name="grpSelectedValues.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpSelectedValues.Text" xml:space="preserve">
+    <value>Selected Values</value>
+  </data>
+  <data name="&gt;&gt;grpSelectedValues.Name" xml:space="preserve">
+    <value>grpSelectedValues</value>
+  </data>
+  <data name="&gt;&gt;grpSelectedValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSelectedValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpSelectedValues.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="lblOther.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -277,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 314</value>
+    <value>248, 314</value>
   </data>
   <data name="lblOther.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -449,27 +434,6 @@
   </data>
   <data name="&gt;&gt;ucrInputOther.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 15</value>
-  </data>
-  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 37</value>
-  </data>
-  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
-    <value>ucrPnlMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
-    <value>grpSelectedValues</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 381</value>

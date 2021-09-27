@@ -43,27 +43,27 @@ Partial Class dlgRecodeFactor
         Me.grpSelectedValues = New System.Windows.Forms.GroupBox()
         Me.rdoKeep = New System.Windows.Forms.RadioButton()
         Me.rdoDrop = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.lblOther = New System.Windows.Forms.Label()
         Me.rdoRecode = New System.Windows.Forms.RadioButton()
         Me.rdoOther = New System.Windows.Forms.RadioButton()
         Me.rdoLump = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrInputOther = New instat.ucrInputTextBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrFactorGrid = New instat.ucrFactor()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpKeep = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlKeep = New instat.UcrPanel()
-        Me.rdoLevels = New System.Windows.Forms.RadioButton()
-        Me.rdoCommonValues = New System.Windows.Forms.RadioButton()
-        Me.rdoFrequentValues = New System.Windows.Forms.RadioButton()
-        Me.rdoMore = New System.Windows.Forms.RadioButton()
-        Me.ucrNudLevels = New instat.ucrNud()
-        Me.ucrNudCommonValues = New instat.ucrNud()
         Me.ucrNudFrequentValues = New instat.ucrNud()
+        Me.ucrNudCommonValues = New instat.ucrNud()
+        Me.ucrNudLevels = New instat.ucrNud()
+        Me.rdoMore = New System.Windows.Forms.RadioButton()
+        Me.rdoFrequentValues = New System.Windows.Forms.RadioButton()
+        Me.rdoCommonValues = New System.Windows.Forms.RadioButton()
+        Me.rdoLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlKeep = New instat.UcrPanel()
         Me.grpSelectedValues.SuspendLayout()
         Me.grpKeep.SuspendLayout()
         Me.SuspendLayout()
@@ -95,6 +95,11 @@ Partial Class dlgRecodeFactor
         Me.rdoDrop.Name = "rdoDrop"
         Me.rdoDrop.TabStop = True
         Me.rdoDrop.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'lblOther
         '
@@ -150,11 +155,6 @@ Partial Class dlgRecodeFactor
         resources.ApplyResources(Me.ucrInputOther, "ucrInputOther")
         Me.ucrInputOther.Name = "ucrInputOther"
         '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        '
         'ucrSaveNewColumn
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
@@ -205,48 +205,15 @@ Partial Class dlgRecodeFactor
         Me.grpKeep.Name = "grpKeep"
         Me.grpKeep.TabStop = False
         '
-        'ucrPnlKeep
+        'ucrNudFrequentValues
         '
-        resources.ApplyResources(Me.ucrPnlKeep, "ucrPnlKeep")
-        Me.ucrPnlKeep.Name = "ucrPnlKeep"
-        '
-        'rdoLevels
-        '
-        resources.ApplyResources(Me.rdoLevels, "rdoLevels")
-        Me.rdoLevels.Name = "rdoLevels"
-        Me.rdoLevels.TabStop = True
-        Me.rdoLevels.UseVisualStyleBackColor = True
-        '
-        'rdoCommonValues
-        '
-        resources.ApplyResources(Me.rdoCommonValues, "rdoCommonValues")
-        Me.rdoCommonValues.Name = "rdoCommonValues"
-        Me.rdoCommonValues.TabStop = True
-        Me.rdoCommonValues.UseVisualStyleBackColor = True
-        '
-        'rdoFrequentValues
-        '
-        resources.ApplyResources(Me.rdoFrequentValues, "rdoFrequentValues")
-        Me.rdoFrequentValues.Name = "rdoFrequentValues"
-        Me.rdoFrequentValues.TabStop = True
-        Me.rdoFrequentValues.UseVisualStyleBackColor = True
-        '
-        'rdoMore
-        '
-        resources.ApplyResources(Me.rdoMore, "rdoMore")
-        Me.rdoMore.Name = "rdoMore"
-        Me.rdoMore.TabStop = True
-        Me.rdoMore.UseVisualStyleBackColor = True
-        '
-        'ucrNudLevels
-        '
-        Me.ucrNudLevels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLevels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLevels, "ucrNudLevels")
-        Me.ucrNudLevels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLevels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLevels.Name = "ucrNudLevels"
-        Me.ucrNudLevels.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrequentValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrequentValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFrequentValues, "ucrNudFrequentValues")
+        Me.ucrNudFrequentValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrequentValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrequentValues.Name = "ucrNudFrequentValues"
+        Me.ucrNudFrequentValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudCommonValues
         '
@@ -258,15 +225,48 @@ Partial Class dlgRecodeFactor
         Me.ucrNudCommonValues.Name = "ucrNudCommonValues"
         Me.ucrNudCommonValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudFrequentValues
+        'ucrNudLevels
         '
-        Me.ucrNudFrequentValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrequentValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrequentValues, "ucrNudFrequentValues")
-        Me.ucrNudFrequentValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrequentValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrequentValues.Name = "ucrNudFrequentValues"
-        Me.ucrNudFrequentValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLevels, "ucrNudLevels")
+        Me.ucrNudLevels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLevels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.Name = "ucrNudLevels"
+        Me.ucrNudLevels.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoMore
+        '
+        resources.ApplyResources(Me.rdoMore, "rdoMore")
+        Me.rdoMore.Name = "rdoMore"
+        Me.rdoMore.TabStop = True
+        Me.rdoMore.UseVisualStyleBackColor = True
+        '
+        'rdoFrequentValues
+        '
+        resources.ApplyResources(Me.rdoFrequentValues, "rdoFrequentValues")
+        Me.rdoFrequentValues.Name = "rdoFrequentValues"
+        Me.rdoFrequentValues.TabStop = True
+        Me.rdoFrequentValues.UseVisualStyleBackColor = True
+        '
+        'rdoCommonValues
+        '
+        resources.ApplyResources(Me.rdoCommonValues, "rdoCommonValues")
+        Me.rdoCommonValues.Name = "rdoCommonValues"
+        Me.rdoCommonValues.TabStop = True
+        Me.rdoCommonValues.UseVisualStyleBackColor = True
+        '
+        'rdoLevels
+        '
+        resources.ApplyResources(Me.rdoLevels, "rdoLevels")
+        Me.rdoLevels.Name = "rdoLevels"
+        Me.rdoLevels.TabStop = True
+        Me.rdoLevels.UseVisualStyleBackColor = True
+        '
+        'ucrPnlKeep
+        '
+        resources.ApplyResources(Me.ucrPnlKeep, "ucrPnlKeep")
+        Me.ucrPnlKeep.Name = "ucrPnlKeep"
         '
         'dlgRecodeFactor
         '
