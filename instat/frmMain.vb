@@ -2419,4 +2419,12 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
     End Sub
+
+    Private Sub ExportToClimsoftToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToClimsoftToolStripMenuItem.Click
+        dlgExportToClimsoft.ShowDialog()
+    End Sub
+
+    Private Sub CompareColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompareColumnsToolStripMenuItem.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
 End Class
