@@ -1111,7 +1111,7 @@ Public Class frmMain
         dlgScatterPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificLinePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificLinePlot.Click
+    Private Sub mnuDescribeSpecificLinePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificLineSmoothPlot.Click
         dlgLinePlot.ShowDialog()
     End Sub
 
@@ -1127,7 +1127,7 @@ Public Class frmMain
         dlgDotPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificRugPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificRugPlot.Click
+    Private Sub mnuDescribeSpecificRugPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMapPlot.Click
         dlgRugPlot.ShowDialog()
     End Sub
 
@@ -2408,4 +2408,15 @@ Public Class frmMain
         dlgPasteSpecial.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
+        dlgPivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
+        dlgScript.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
+        dlgSelect.ShowDialog()
+    End Sub
 End Class

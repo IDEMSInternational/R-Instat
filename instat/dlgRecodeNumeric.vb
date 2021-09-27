@@ -54,8 +54,8 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.AddParameterPresentCondition(True, "labels", True)
         ucrChkAddLabels.AddParameterPresentCondition(False, "labels", False)
         ucrChkAddLabels.AddToLinkedControls(ucrInputMultipleLabels, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
-        ucrSaveRecode.SetPrefix("Recode")
+    
+        ucrSaveRecode.SetPrefix("recode")
         ucrSaveRecode.SetSaveTypeAsColumn()
         ucrSaveRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveRecode.SetIsComboBox()

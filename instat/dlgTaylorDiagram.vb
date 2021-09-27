@@ -69,7 +69,7 @@ Public Class dlgTaylorDiagram
         ucrChkNormalise.SetText("Normalise")
         ucrChkNormalise.SetRDefault("FALSE")
 
-        ucrSavePlot.SetPrefix("taylordiagram")
+        ucrSavePlot.SetPrefix("taylor_diagram_plot")
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()

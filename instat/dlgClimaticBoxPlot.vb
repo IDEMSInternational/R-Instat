@@ -193,7 +193,7 @@ Public Class dlgClimaticBoxPlot
         ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
 
-        ucrSavePlot.SetPrefix("boxplot")
+        ucrSavePlot.SetPrefix("box_plot")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
@@ -351,7 +351,7 @@ Public Class dlgClimaticBoxPlot
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
             If Not ucrSavePlot.bUserTyped Then
-                ucrSavePlot.SetPrefix("boxplot")
+                ucrSavePlot.SetPrefix("box_plot")
             End If
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")

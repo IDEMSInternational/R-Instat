@@ -51,26 +51,28 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator34 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeTwoVariablesFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThreeVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThreeVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThreeVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeThreeVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecific = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeSpecificPointPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificLinePlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBoxplotJitterViolinPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarPieChart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificPointPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificLineSmoothPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificMapPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -366,6 +368,8 @@ Partial Class frmMain
         Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -428,6 +432,7 @@ Partial Class frmMain
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareDataFrameSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataFrameSelectColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -691,7 +696,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         resources.ApplyResources(Me.mnuDescribe, "mnuDescribe")
         Me.mnuDescribe.Tag = "Describe"
@@ -732,7 +737,7 @@ Partial Class frmMain
         '
         'mnuDescribeTwoVariables
         '
-        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoVariablesFrequencies})
+        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoVariablesFrequencies, Me.mnuDescribeTwoVariablesPivotTable})
         Me.mnuDescribeTwoVariables.Name = "mnuDescribeTwoVariables"
         resources.ApplyResources(Me.mnuDescribeTwoVariables, "mnuDescribeTwoVariables")
         Me.mnuDescribeTwoVariables.Tag = "Two_Variables"
@@ -761,6 +766,11 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesFrequencies.Name = "mnuDescribeTwoVariablesFrequencies"
         resources.ApplyResources(Me.mnuDescribeTwoVariablesFrequencies, "mnuDescribeTwoVariablesFrequencies")
         '
+        'mnuDescribeTwoVariablesPivotTable
+        '
+        Me.mnuDescribeTwoVariablesPivotTable.Name = "mnuDescribeTwoVariablesPivotTable"
+        resources.ApplyResources(Me.mnuDescribeTwoVariablesPivotTable, "mnuDescribeTwoVariablesPivotTable")
+        '
         'mnuDescribeThreeVariable
         '
         Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies})
@@ -787,12 +797,12 @@ Partial Class frmMain
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
         resources.ApplyResources(Me.mnuDescribeThreeVariableFrequencies, "mnuDescribeThreeVariableFrequencies")
         '
-        'mnuDescribeSpecific
+        'mnuDescribeSpecificTablesGraphs
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot, Me.mnuDescribeSpecificMosaic})
-        Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
-        resources.ApplyResources(Me.mnuDescribeSpecific, "mnuDescribeSpecific")
-        Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
+        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
+        Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
+        resources.ApplyResources(Me.mnuDescribeSpecificTablesGraphs, "mnuDescribeSpecificTablesGraphs")
+        Me.mnuDescribeSpecificTablesGraphs.Tag = "Table_Dialogs"
         '
         'mnuDescribeSpecificFrequency
         '
@@ -817,23 +827,11 @@ Partial Class frmMain
         Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
         resources.ApplyResources(Me.ToolStripSeparator26, "ToolStripSeparator26")
         '
-        'mnuDescribeSpecificPointPlot
+        'mnuDescribeSpecificBarPieChart
         '
-        Me.mnuDescribeSpecificPointPlot.Name = "mnuDescribeSpecificPointPlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificPointPlot, "mnuDescribeSpecificPointPlot")
-        Me.mnuDescribeSpecificPointPlot.Tag = "Point_Plot..."
-        '
-        'mnuDescribeSpecificLinePlot
-        '
-        Me.mnuDescribeSpecificLinePlot.Name = "mnuDescribeSpecificLinePlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificLinePlot, "mnuDescribeSpecificLinePlot")
-        Me.mnuDescribeSpecificLinePlot.Tag = "Line_Plot..."
-        '
-        'mnuDescribeSpecificHistogramDensityFrequencyPlot
-        '
-        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Name = "mnuDescribeSpecificHistogramDensityFrequencyPlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, "mnuDescribeSpecificHistogramDensityFrequencyPlot")
-        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Tag = "Histogram..."
+        Me.mnuDescribeSpecificBarPieChart.Name = "mnuDescribeSpecificBarPieChart"
+        resources.ApplyResources(Me.mnuDescribeSpecificBarPieChart, "mnuDescribeSpecificBarPieChart")
+        Me.mnuDescribeSpecificBarPieChart.Tag = "Bar_Chart"
         '
         'mnuDescribeSpecificBoxplotJitterViolinPlot
         '
@@ -841,22 +839,44 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuDescribeSpecificBoxplotJitterViolinPlot, "mnuDescribeSpecificBoxplotJitterViolinPlot")
         Me.mnuDescribeSpecificBoxplotJitterViolinPlot.Tag = "Boxplot..."
         '
+        'mnuDescribeSpecificHistogramDensityFrequencyPlot
+        '
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Name = "mnuDescribeSpecificHistogramDensityFrequencyPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, "mnuDescribeSpecificHistogramDensityFrequencyPlot")
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Tag = "Histogram..."
+        '
+        'mnuDescribeSpecificPointPlot
+        '
+        Me.mnuDescribeSpecificPointPlot.Name = "mnuDescribeSpecificPointPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificPointPlot, "mnuDescribeSpecificPointPlot")
+        Me.mnuDescribeSpecificPointPlot.Tag = "Point_Plot..."
+        '
+        'mnuDescribeSpecificLineSmoothPlot
+        '
+        Me.mnuDescribeSpecificLineSmoothPlot.Name = "mnuDescribeSpecificLineSmoothPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificLineSmoothPlot, "mnuDescribeSpecificLineSmoothPlot")
+        Me.mnuDescribeSpecificLineSmoothPlot.Tag = "Line_Plot..."
+        '
+        'mnuDescribeSpecificMapPlot
+        '
+        Me.mnuDescribeSpecificMapPlot.Name = "mnuDescribeSpecificMapPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificMapPlot, "mnuDescribeSpecificMapPlot")
+        '
         'mnuDescribeSpecificDotPlot
         '
         resources.ApplyResources(Me.mnuDescribeSpecificDotPlot, "mnuDescribeSpecificDotPlot")
         Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
         '
-        'mnuDescribeSpecificRugPlot
+        'ToolStripSeparator27
         '
-        Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificRugPlot, "mnuDescribeSpecificRugPlot")
+        Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
+        resources.ApplyResources(Me.ToolStripSeparator27, "ToolStripSeparator27")
         '
-        'mnuDescribeSpecificBarPieChart
+        'mnuDescribeSpecificMosaic
         '
-        Me.mnuDescribeSpecificBarPieChart.Name = "mnuDescribeSpecificBarPieChart"
-        resources.ApplyResources(Me.mnuDescribeSpecificBarPieChart, "mnuDescribeSpecificBarPieChart")
-        Me.mnuDescribeSpecificBarPieChart.Tag = "Bar_Chart"
+        Me.mnuDescribeSpecificMosaic.Name = "mnuDescribeSpecificMosaic"
+        resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
         '
         'mnuDescribeSpecificCummulativeDistribution
         '
@@ -867,11 +887,6 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecificParallelCoordinatePlot.Name = "mnuDescribeSpecificParallelCoordinatePlot"
         resources.ApplyResources(Me.mnuDescribeSpecificParallelCoordinatePlot, "mnuDescribeSpecificParallelCoordinatePlot")
-        '
-        'mnuDescribeSpecificMosaic
-        '
-        Me.mnuDescribeSpecificMosaic.Name = "mnuDescribeSpecificMosaic"
-        resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
         '
         'mnuDescribeGeneral
         '
@@ -2423,7 +2438,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         resources.ApplyResources(Me.mnuEdit, "mnuEdit")
         Me.mnuEdit.Tag = "Edit"
@@ -2486,6 +2501,16 @@ Partial Class frmMain
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         resources.ApplyResources(Me.mnuEditSelectAll, "mnuEditSelectAll")
         Me.mnuEditSelectAll.Tag = "Select_All"
+        '
+        'ToolStripSeparator71
+        '
+        Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
+        resources.ApplyResources(Me.ToolStripSeparator71, "ToolStripSeparator71")
+        '
+        'mnuEditScript
+        '
+        resources.ApplyResources(Me.mnuEditScript, "mnuEditScript")
+        Me.mnuEditScript.Name = "mnuEditScript"
         '
         'stsStrip
         '
@@ -2827,7 +2852,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataFrame
         '
-        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilter, Me.mnuPrepareDataFrameReplaceValues, Me.mnuPrepareDataFrameConvertColumns, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.mnuPrepareDataFrameColumnStructure, Me.mnuPrepareDataframeColourByProperty})
+        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilter, Me.mnuPrepareDataFrameSelectColumns, Me.mnuPrepareDataFrameReplaceValues, Me.mnuPrepareDataFrameConvertColumns, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.mnuPrepareDataFrameColumnStructure, Me.mnuPrepareDataframeColourByProperty})
         Me.mnuPrepareDataFrame.Name = "mnuPrepareDataFrame"
         resources.ApplyResources(Me.mnuPrepareDataFrame, "mnuPrepareDataFrame")
         Me.mnuPrepareDataFrame.Tag = "Data_Frame"
@@ -2866,6 +2891,11 @@ Partial Class frmMain
         Me.mnuPrepareDataFrameFilter.Name = "mnuPrepareDataFrameFilter"
         resources.ApplyResources(Me.mnuPrepareDataFrameFilter, "mnuPrepareDataFrameFilter")
         Me.mnuPrepareDataFrameFilter.Tag = "Filter..."
+        '
+        'mnuPrepareDataFrameSelectColumns
+        '
+        Me.mnuPrepareDataFrameSelectColumns.Name = "mnuPrepareDataFrameSelectColumns"
+        resources.ApplyResources(Me.mnuPrepareDataFrameSelectColumns, "mnuPrepareDataFrameSelectColumns")
         '
         'mnuPrepareDataFrameReplaceValues
         '
@@ -4396,7 +4426,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeGeneralColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralTabulation As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralGraphics As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecific As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificTablesGraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificFrequency As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMultipleResponse As ToolStripMenuItem
@@ -4509,11 +4539,11 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareSummary As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As ToolStripSeparator
     Friend WithEvents mnuDescribeSpecificPointPlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificLinePlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificLineSmoothPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificHistogramDensityFrequencyPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificBoxplotJitterViolinPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificDotPlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificRugPlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificMapPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificBarPieChart As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeTime As ToolStripMenuItem
@@ -4878,4 +4908,9 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoVariablesPivotTable As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
+    Friend WithEvents mnuEditScript As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
 End Class

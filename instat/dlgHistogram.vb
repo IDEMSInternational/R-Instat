@@ -74,7 +74,7 @@ Public Class dlgHistogram
         ucrPnlOptions.AddRadioButton(rdoDensity_ridges)
         ucrPnlOptions.AddRadioButton(rdoFrequencyPolygon)
 
-        ucrPnlOptions.AddFunctionNamesCondition(rdoHistogram, "geom_histogram")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoHistogram, {"geom_histogram", "geom_dotplot"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoDensity_ridges, {"geom_density", "geom_density_ridges"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequencyPolygon, "geom_freqpoly")
 
@@ -98,12 +98,17 @@ Public Class dlgHistogram
         ucrInputStats.SetLinkedDisplayControl(lblStats)
         ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
+        ucrPnlOptions.AddToLinkedControls({ucrChkDisplayAsDotPlot}, {rdoHistogram}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity_ridges}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         ucrChkPercentages.SetText("percentages")
         ucrChkPercentages.AddParameterPresentCondition(True, "scale")
         ucrChkPercentages.AddParameterPresentCondition(False, "scale", False)
+
+        ucrChkDisplayAsDotPlot.SetText("Display as Dotplot")
+        ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(True, "geom_dotplot")
+        ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(False, "geom_dotplot", False)
 
         ucrChkRidges.SetText("Density Ridges")
         ucrChkRidges.AddFunctionNamesCondition(True, "geom_density_ridges")
@@ -191,6 +196,7 @@ Public Class dlgHistogram
         ucrHistogramSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
+        ucrChkDisplayAsDotPlot.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
@@ -244,8 +250,13 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
-            cmdHistogramOptions.Text = "Histogram Options"
-            clsRgeomPlotFunction.SetRCommand("geom_histogram")
+            If ucrChkDisplayAsDotPlot.Checked Then
+                cmdHistogramOptions.Text = "Dotplot  Options"
+                clsRgeomPlotFunction.SetRCommand("geom_dotplot")
+            Else
+                cmdHistogramOptions.Text = "Histogram Options"
+                clsRgeomPlotFunction.SetRCommand("geom_histogram")
+            End If
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("histogram")
@@ -294,7 +305,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
         SetDialogOptions()
     End Sub
 

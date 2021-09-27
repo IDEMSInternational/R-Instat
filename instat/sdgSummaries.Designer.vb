@@ -62,6 +62,9 @@ Partial Class sdgSummaries
         Me.ucrChkOrderBy = New instat.ucrCheck()
         Me.lblOrderBy = New System.Windows.Forms.Label()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSetseed = New instat.ucrCheck()
+        Me.ucrNudSeed = New instat.ucrNud()
+        Me.ucrChkSample = New instat.ucrCheck()
         Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblInputN = New System.Windows.Forms.Label()
         Me.ucrChkFirst = New instat.ucrCheck()
@@ -333,6 +336,9 @@ Partial Class sdgSummaries
         '
         'grpPosition
         '
+        Me.grpPosition.Controls.Add(Me.ucrChkSetseed)
+        Me.grpPosition.Controls.Add(Me.ucrNudSeed)
+        Me.grpPosition.Controls.Add(Me.ucrChkSample)
         Me.grpPosition.Controls.Add(Me.ucrInputN)
         Me.grpPosition.Controls.Add(Me.lblInputN)
         Me.grpPosition.Controls.Add(Me.ucrChkFirst)
@@ -341,6 +347,28 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.grpPosition, "grpPosition")
         Me.grpPosition.Name = "grpPosition"
         Me.grpPosition.TabStop = False
+        '
+        'ucrChkSetseed
+        '
+        Me.ucrChkSetseed.Checked = False
+        resources.ApplyResources(Me.ucrChkSetseed, "ucrChkSetseed")
+        Me.ucrChkSetseed.Name = "ucrChkSetseed"
+        '
+        'ucrNudSeed
+        '
+        Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSeed, "ucrNudSeed")
+        Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSeed.Name = "ucrNudSeed"
+        Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSample
+        '
+        Me.ucrChkSample.Checked = False
+        resources.ApplyResources(Me.ucrChkSample, "ucrChkSample")
+        Me.ucrChkSample.Name = "ucrChkSample"
         '
         'ucrInputN
         '
@@ -1215,4 +1243,7 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkP80 As ucrCheck
     Friend WithEvents ucrChkP40 As ucrCheck
     Friend WithEvents ucrChkP30 As ucrCheck
+    Friend WithEvents ucrChkSample As ucrCheck
+    Friend WithEvents ucrChkSetseed As ucrCheck
+    Friend WithEvents ucrNudSeed As ucrNud
 End Class

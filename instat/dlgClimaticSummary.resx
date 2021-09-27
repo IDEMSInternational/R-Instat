@@ -409,16 +409,16 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 83</value>
+    <value>217, 83</value>
   </data>
   <data name="cmdMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 26</value>
+    <value>60, 26</value>
   </data>
   <data name="cmdMissingOptions.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="cmdMissingOptions.Text" xml:space="preserve">
-    <value>Missing Options</value>
+    <value>Options</value>
   </data>
   <data name="&gt;&gt;cmdMissingOptions.Name" xml:space="preserve">
     <value>cmdMissingOptions</value>
@@ -905,9 +905,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>23</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
