@@ -43,7 +43,7 @@ Public Class dlgRecodeNumeric
         ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
 
         'ucrSave
-        ucrSaveRecode.SetPrefix("Recode")
+        ucrSaveRecode.SetPrefix("recode")
         ucrSaveRecode.SetSaveTypeAsColumn()
         ucrSaveRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveRecode.SetIsComboBox()
