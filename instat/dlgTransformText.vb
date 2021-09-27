@@ -375,7 +375,7 @@ Public Class dlgTransformText
     Private Sub LastAndFirstWord_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged
         If ucrChangedControl Is ucrChkFirstOr AndAlso ucrChkFirstOr.Checked Then
             ucrReceiverFirstWord.SetMeAsReceiver()
-        ElseIf ucrChkLastOr.Checked AndAlso ucrChangedControl Is ucrChkFirstOr Then
+        ElseIf ucrChangedControl Is ucrChkFirstOr AndAlso ucrChkLastOr.Checked Then
             ucrReceiverLastWord.SetMeAsReceiver()
         ElseIf ucrChangedControl Is ucrChkLastOr AndAlso ucrChkLastOr.Checked Then
             ucrReceiverLastWord.SetMeAsReceiver()
