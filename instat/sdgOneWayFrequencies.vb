@@ -36,7 +36,13 @@ Public Class sdgOneWayFrequencies
 
         'Table Only
         ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowStrings.SetText("Show Strings")
+        ucrChkShowStrings.SetText("Omit Character Variabless")
+
+        ucrPnlShowMissingFreq.SetParameter(New RParameter("show.na", 8))
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingTrue, "TRUE")
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingFalse, "FALSE")
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingAuto, Chr(34) & "auto" & Chr(34))
+        ucrPnlShowMissingFreq.SetRDefault("TRUE")
 
         'Graph Only
         ucrPnlGraphType.SetParameter(New RParameter("type", 4))
@@ -132,6 +138,9 @@ Public Class sdgOneWayFrequencies
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrInputColor.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+
+        ucrPnlShowMissingFreq.AddAdditionalCodeParameterPair(clsOneWayTableFreq, clsNewRParameter:=New RParameter("show.na", 9), iAdditionalPairNo:=1)
+        ucrPnlShowMissingFreq.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         If bReset Then
             tbpOneWayFrequencies.SelectedIndex = 0
         End If
