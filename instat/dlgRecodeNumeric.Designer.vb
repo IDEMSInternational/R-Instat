@@ -39,27 +39,21 @@ Partial Class dlgRecodeNumeric
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRecodeNumeric))
-        Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
-        Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
+        Me.rdoLeft = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlClosedOn = New instat.UcrPanel()
         Me.ucrSaveRecode = New instat.ucrSave()
         Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
-        Me.ucrMultipleLabels = New instat.ucrInputTextBox()
+        Me.ucrInputMultipleLabels = New instat.ucrInputTextBox()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'chkAddLabels
-        '
-        resources.ApplyResources(Me.chkAddLabels, "chkAddLabels")
-        Me.chkAddLabels.Name = "chkAddLabels"
-        Me.chkAddLabels.Tag = "Add_Labels"
-        Me.chkAddLabels.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
@@ -75,26 +69,32 @@ Partial Class dlgRecodeNumeric
         '
         'grpClosedOn
         '
-        Me.grpClosedOn.Controls.Add(Me.rdoLeft)
         Me.grpClosedOn.Controls.Add(Me.rdoRight)
+        Me.grpClosedOn.Controls.Add(Me.rdoLeft)
+        Me.grpClosedOn.Controls.Add(Me.ucrPnlClosedOn)
         resources.ApplyResources(Me.grpClosedOn, "grpClosedOn")
         Me.grpClosedOn.Name = "grpClosedOn"
         Me.grpClosedOn.TabStop = False
         Me.grpClosedOn.Tag = "Closed_On"
         '
-        'rdoLeft
-        '
-        resources.ApplyResources(Me.rdoLeft, "rdoLeft")
-        Me.rdoLeft.Name = "rdoLeft"
-        Me.rdoLeft.Tag = "Left"
-        Me.rdoLeft.UseVisualStyleBackColor = True
-        '
         'rdoRight
         '
         resources.ApplyResources(Me.rdoRight, "rdoRight")
         Me.rdoRight.Name = "rdoRight"
-        Me.rdoRight.Tag = "Right"
+        Me.rdoRight.TabStop = True
         Me.rdoRight.UseVisualStyleBackColor = True
+        '
+        'rdoLeft
+        '
+        resources.ApplyResources(Me.rdoLeft, "rdoLeft")
+        Me.rdoLeft.Name = "rdoLeft"
+        Me.rdoLeft.TabStop = True
+        Me.rdoLeft.UseVisualStyleBackColor = True
+        '
+        'ucrPnlClosedOn
+        '
+        resources.ApplyResources(Me.ucrPnlClosedOn, "ucrPnlClosedOn")
+        Me.ucrPnlClosedOn.Name = "ucrPnlClosedOn"
         '
         'ucrSaveRecode
         '
@@ -109,13 +109,13 @@ Partial Class dlgRecodeNumeric
         resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
         '
-        'ucrMultipleLabels
+        'ucrInputMultipleLabels
         '
-        Me.ucrMultipleLabels.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleLabels.IsMultiline = False
-        Me.ucrMultipleLabels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleLabels, "ucrMultipleLabels")
-        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
+        Me.ucrInputMultipleLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputMultipleLabels.IsMultiline = False
+        Me.ucrInputMultipleLabels.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMultipleLabels, "ucrInputMultipleLabels")
+        Me.ucrInputMultipleLabels.Name = "ucrInputMultipleLabels"
         '
         'ucrReceiverRecode
         '
@@ -139,19 +139,25 @@ Partial Class dlgRecodeNumeric
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        '
         'dlgRecodeNumeric
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.ucrSaveRecode)
         Me.Controls.Add(Me.ucrMultipleNumericRecode)
-        Me.Controls.Add(Me.ucrMultipleLabels)
+        Me.Controls.Add(Me.ucrInputMultipleLabels)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
         Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -165,15 +171,16 @@ Partial Class dlgRecodeNumeric
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrSelectorForRecode As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
     Friend WithEvents grpClosedOn As GroupBox
-    Friend WithEvents rdoLeft As RadioButton
-    Friend WithEvents rdoRight As RadioButton
-    Friend WithEvents ucrMultipleLabels As ucrInputTextBox
+    Friend WithEvents ucrInputMultipleLabels As ucrInputTextBox
     Friend WithEvents ucrMultipleNumericRecode As ucrInputTextBox
     Friend WithEvents ucrSaveRecode As ucrSave
+    Friend WithEvents ucrPnlClosedOn As UcrPanel
+    Friend WithEvents rdoRight As RadioButton
+    Friend WithEvents rdoLeft As RadioButton
+    Friend WithEvents ucrChkAddLabels As ucrCheck
 End Class
