@@ -58,14 +58,14 @@ Public Class dlgRecodeFactor
 
         ucrPnlKeep.AddFunctionNamesCondition(rdoLevels, "fct_lump_min")
         ucrPnlKeep.AddFunctionNamesCondition(rdoCommonValues, "fct_lump_n")
-        ucrPnlKeep.AddFunctionNamesCondition(rdoFrequentValues, "fct_lumn_prop")
+        ucrPnlKeep.AddFunctionNamesCondition(rdoFrequentValues, "fct_lump_prop")
         ucrPnlKeep.AddFunctionNamesCondition(rdoMore, "fct_lump_lowfreq")
 
-        ucrNudLevels.SetParameter(New RParameter("min", iNewPosition:=1))
+        ucrNudLevels.SetParameter(New RParameter("min", 1))
         ucrNudLevels.SetMinMax(0, Integer.MaxValue)
         ucrNudLevels.Increment = 1
 
-        ucrNudCommonValues.SetParameter(New RParameter("n", iNewPosition:=1))
+        ucrNudCommonValues.SetParameter(New RParameter("n", 1))
         ucrNudCommonValues.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
         ucrNudFrequentValues.SetParameter(New RParameter("prop", 1))
@@ -102,9 +102,9 @@ Public Class dlgRecodeFactor
         ucrPnlKeep.SetLinkedDisplayControl(grpKeep)
         ucrInputOther.SetLinkedDisplayControl(lblOther)
 
-        ucrPnlKeep.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlKeep.AddToLinkedControls(ucrNudCommonValues, {rdoCommonValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlKeep.AddToLinkedControls(ucrNudFrequentValues, {rdoFrequentValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudCommonValues, {rdoCommonValues}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudFrequentValues, {rdoFrequentValues}, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -137,7 +137,7 @@ Public Class dlgRecodeFactor
         clsFctLumpnFunction.AddParameter("n", "5", iPosition:=1)
 
         clsFctLumpPropFunction.SetPackageName("forcats")
-        clsFctLumpPropFunction.SetRCommand("fct_lumn_prop")
+        clsFctLumpPropFunction.SetRCommand("fct_lump_prop")
         clsFctLumpPropFunction.AddParameter("prop", "0.1", iPosition:=1)
 
         clsFctLowFreqFunction.SetPackageName("forcats")
