@@ -39,6 +39,7 @@ Public Class dlgPivotTable
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 417
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
         ucrSelectorPivot.SetParameterIsrfunction()
