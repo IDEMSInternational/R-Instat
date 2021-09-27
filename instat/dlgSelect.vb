@@ -34,6 +34,7 @@ Public Class dlgSelect
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 597
         ucrInputSelectPreview.txtInput.ReadOnly = True
         ucrReceiverSelect.SetItemType("column_selection")
         ucrReceiverSelect.strSelectorHeading = "Column selections"
