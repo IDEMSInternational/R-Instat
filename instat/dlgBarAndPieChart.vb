@@ -1014,19 +1014,6 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkAddLabels.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrReceiverArea.ControlValueChanged, ucrReceiverFill.ControlValueChanged, ucrReceiverWordcloudLabel.ControlValueChanged,
-            ucrReceiverWordcloudSize.ControlValueChanged, ucrReceiverWordcloudColor.ControlValueChanged, ucrReceiverWordcloudAngle.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-
-    End Sub
-
     Private Sub ucrInputLayout_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLayout.ControlValueChanged
         If ucrInputLayout.GetText = "squarified" Then
             clsGeomTreemapTextFunction.AddParameter("layout", "squarified", iPosition:=0)
