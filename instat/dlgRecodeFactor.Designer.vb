@@ -48,13 +48,6 @@ Partial Class dlgRecodeFactor
         Me.rdoRecode = New System.Windows.Forms.RadioButton()
         Me.rdoOther = New System.Windows.Forms.RadioButton()
         Me.rdoLump = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputOther = New instat.ucrInputTextBox()
-        Me.ucrSaveNewColumn = New instat.ucrSave()
-        Me.ucrFactorGrid = New instat.ucrFactor()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
-        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpKeep = New System.Windows.Forms.GroupBox()
         Me.ucrNudFrequentValues = New instat.ucrNud()
         Me.ucrNudCommonValues = New instat.ucrNud()
@@ -65,6 +58,13 @@ Partial Class dlgRecodeFactor
         Me.rdoLevels = New System.Windows.Forms.RadioButton()
         Me.ucrPnlKeep = New instat.UcrPanel()
         Me.ucrFactorLevels = New instat.ucrFactor()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputOther = New instat.ucrInputTextBox()
+        Me.ucrSaveNewColumn = New instat.ucrSave()
+        Me.ucrFactorGrid = New instat.ucrFactor()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpSelectedValues.SuspendLayout()
         Me.grpKeep.SuspendLayout()
         Me.SuspendLayout()
@@ -142,55 +142,6 @@ Partial Class dlgRecodeFactor
         Me.rdoLump.TabStop = True
         Me.rdoLump.Tag = "Lump"
         Me.rdoLump.UseVisualStyleBackColor = False
-        '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'ucrInputOther
-        '
-        Me.ucrInputOther.AddQuotesIfUnrecognised = True
-        Me.ucrInputOther.IsMultiline = False
-        Me.ucrInputOther.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOther, "ucrInputOther")
-        Me.ucrInputOther.Name = "ucrInputOther"
-        '
-        'ucrSaveNewColumn
-        '
-        resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
-        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
-        '
-        'ucrFactorGrid
-        '
-        resources.ApplyResources(Me.ucrFactorGrid, "ucrFactorGrid")
-        Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorGrid.clsReceiver = Nothing
-        Me.ucrFactorGrid.Name = "ucrFactorGrid"
-        Me.ucrFactorGrid.shtCurrSheet = Nothing
-        Me.ucrFactorGrid.ucrChkLevels = Nothing
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.ucrSelector = Nothing
-        '
-        'ucrSelectorForRecode
-        '
-        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
-        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'grpKeep
         '
@@ -277,6 +228,55 @@ Partial Class dlgRecodeFactor
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
         Me.ucrFactorLevels.shtCurrSheet = Nothing
         Me.ucrFactorLevels.ucrChkLevels = Nothing
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrInputOther
+        '
+        Me.ucrInputOther.AddQuotesIfUnrecognised = True
+        Me.ucrInputOther.IsMultiline = False
+        Me.ucrInputOther.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOther, "ucrInputOther")
+        Me.ucrInputOther.Name = "ucrInputOther"
+        '
+        'ucrSaveNewColumn
+        '
+        resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
+        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        '
+        'ucrFactorGrid
+        '
+        resources.ApplyResources(Me.ucrFactorGrid, "ucrFactorGrid")
+        Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorGrid.clsReceiver = Nothing
+        Me.ucrFactorGrid.Name = "ucrFactorGrid"
+        Me.ucrFactorGrid.shtCurrSheet = Nothing
+        Me.ucrFactorGrid.ucrChkLevels = Nothing
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'ucrSelectorForRecode
+        '
+        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForRecode.bShowHiddenColumns = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
+        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgRecodeFactor
         '

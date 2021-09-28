@@ -22,8 +22,8 @@ Public Class dlgRecodeFactor
     Private clsFctRecodeFunction, clsFctOtherFunction As New RFunction
     Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpnFunction As New RFunction
     Private clsCFunction As New RFunction
-    Private clsDummyFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -61,10 +61,10 @@ Public Class dlgRecodeFactor
         ucrPnlKeep.AddRadioButton(rdoFrequentValues)
         ucrPnlKeep.AddRadioButton(rdoMore)
 
-        ucrPnlKeep.AddParameterValuesCondition(rdoLevels, "checked", "level")
-        ucrPnlKeep.AddParameterValuesCondition(rdoCommonValues, "checked", "lump_n")
-        ucrPnlKeep.AddParameterValuesCondition(rdoFrequentValues, "checked", "lump_prop")
-        ucrPnlKeep.AddParameterValuesCondition(rdoMore, "checked", "low_freq")
+        ucrPnlKeep.AddParameterValuesCondition(rdoLevels, "checked", "levels")
+        ucrPnlKeep.AddParameterValuesCondition(rdoCommonValues, "checked", "lumpn")
+        ucrPnlKeep.AddParameterValuesCondition(rdoFrequentValues, "checked", "prop")
+        ucrPnlKeep.AddParameterValuesCondition(rdoMore, "checked", "low")
 
         ucrNudLevels.SetParameter(New RParameter("min", 1))
         ucrNudLevels.SetMinMax(0, Integer.MaxValue)
@@ -104,18 +104,17 @@ Public Class dlgRecodeFactor
         ucrSaveNewColumn.SetLabelText("New Column Name:")
         ucrSaveNewColumn.setLinkedReceiver(ucrReceiverFactor)
 
-        ucrPnlOptions.AddToLinkedControls({ucrFactorLevels, ucrPnlMethods}, {rdoOther}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudCommonValues, {rdoCommonValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlKeep.AddToLinkedControls(ucrNudFrequentValues, {rdoFrequentValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlOptions.AddToLinkedControls({ucrFactorLevels, ucrPnlMethods}, {rdoOther}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorGrid}, {rdoRecode}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrInputOther}, {rdoOther, rdoLump}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlKeep, {rdoLump}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputOther}, {rdoOther, rdoLump}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlKeep, {rdoLump}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.SetLinkedDisplayControl(grpSelectedValues)
         ucrPnlKeep.SetLinkedDisplayControl(grpKeep)
         ucrInputOther.SetLinkedDisplayControl(lblOther)
-
-        ucrPnlKeep.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlKeep.AddToLinkedControls(ucrNudCommonValues, {rdoCommonValues}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlKeep.AddToLinkedControls(ucrNudFrequentValues, {rdoFrequentValues}, bNewLinkedHideIfParameterMissing:=True)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -134,7 +133,7 @@ Public Class dlgRecodeFactor
         ucrFactorGrid.ResetText()
         ucrSaveNewColumn.Reset()
 
-        clsDummyFunction.AddParameter("checked", "level", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "levels", iPosition:=0)
 
         clsOtherDummyFunction.AddParameter("checked", "keep", iPosition:=0)
 
@@ -162,10 +161,12 @@ Public Class dlgRecodeFactor
         clsFctRecodeFunction.SetRCommand("fct_recode")
         clsFctRecodeFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsFctRecodeFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctOtherFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpPropFunction, New RParameter("f", 0), iAdditionalPairNo:=2)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLowFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=3)
@@ -181,9 +182,8 @@ Public Class dlgRecodeFactor
         ucrNudFrequentValues.SetRCode(clsFctLumpPropFunction, bReset)
         ucrNudCommonValues.SetRCode(clsFctLumpnFunction, bReset)
         ucrNudLevels.SetRCode(clsFctLumpMinFunction, bReset)
-        ucrPnlKeep.SetRCode(clsDummyFunction, bReset)
         ucrPnlMethods.SetRCode(clsOtherDummyFunction, bReset)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlKeep.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -253,25 +253,25 @@ Public Class dlgRecodeFactor
                 clsFctOtherFunction.RemoveParameterByName("drop")
                 If rdoKeep.Checked Then
                     clsFctOtherFunction.AddParameter("keep", ucrFactorLevels.GetSelectedLevels(), iPosition:=1)
-                    clsDummyFunction.AddParameter("checked", "keep", iPosition:=0)
+                    clsOtherDummyFunction.AddParameter("checked", "keep", iPosition:=0)
                 ElseIf rdoDrop.Checked Then
                     clsFctOtherFunction.AddParameter("drop", ucrFactorLevels.GetSelectedLevels(), iPosition:=1)
-                    clsDummyFunction.AddParameter("checked", "drop", iPosition:=0)
+                    clsOtherDummyFunction.AddParameter("checked", "drop", iPosition:=0)
                 End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFctOtherFunction)
             ElseIf rdoLump.Checked Then
                 If rdoFrequentValues.Checked Then
+                    clsDummyFunction.AddParameter("checked", "prop", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpPropFunction)
-                    clsDummyFunction.AddParameter("checked", "lump_prop", iPosition:=0)
                 ElseIf rdoMore.Checked Then
+                    clsDummyFunction.AddParameter("checked", "low", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFctLowFreqFunction)
-                    clsDummyFunction.AddParameter("checked", "low_freq", iPosition:=0)
                 ElseIf rdoLevels.Checked Then
+                    clsDummyFunction.AddParameter("checked", "levels", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpMinFunction)
-                    clsDummyFunction.AddParameter("checked", "level", iPosition:=0)
                 ElseIf rdoCommonValues.Checked Then
+                    clsDummyFunction.AddParameter("checked", "lumpn", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpnFunction)
-                    clsDummyFunction.AddParameter("checked", "lump_n", iPosition:=0)
                 End If
             End If
         End If

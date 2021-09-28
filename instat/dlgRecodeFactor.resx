@@ -393,132 +393,6 @@
   <data name="&gt;&gt;rdoLump.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 6</value>
-  </data>
-  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 36</value>
-  </data>
-  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
-    <value>ucrPnlOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrInputOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 329</value>
-  </data>
-  <data name="ucrInputOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 21</value>
-  </data>
-  <data name="ucrInputOther.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOther.Name" xml:space="preserve">
-    <value>ucrInputOther</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOther.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOther.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOther.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 381</value>
-  </data>
-  <data name="ucrSaveNewColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveNewColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 22</value>
-  </data>
-  <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveNewColumn.Name" xml:space="preserve">
-    <value>ucrSaveNewColumn</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveNewColumn.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveNewColumn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveNewColumn.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrFactorGrid.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrFactorGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 101</value>
-  </data>
-  <data name="ucrFactorGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 210</value>
-  </data>
-  <data name="ucrFactorGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorGrid.Name" xml:space="preserve">
-    <value>ucrFactorGrid</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorGrid.Type" xml:space="preserve">
-    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorGrid.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorGrid.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>551, 467</value>
-  </data>
-  <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 101</value>
-  </data>
-  <data name="ucrFactorLevels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 210</value>
-  </data>
-  <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Name" xml:space="preserve">
-    <value>ucrFactorLevels</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Type" xml:space="preserve">
-    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrNudFrequentValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 67</value>
   </data>
@@ -746,6 +620,132 @@
   </data>
   <data name="&gt;&gt;grpKeep.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 101</value>
+  </data>
+  <data name="ucrFactorLevels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 210</value>
+  </data>
+  <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Name" xml:space="preserve">
+    <value>ucrFactorLevels</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Type" xml:space="preserve">
+    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 6</value>
+  </data>
+  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 36</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrInputOther.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 329</value>
+  </data>
+  <data name="ucrInputOther.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 21</value>
+  </data>
+  <data name="ucrInputOther.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputOther.Name" xml:space="preserve">
+    <value>ucrInputOther</value>
+  </data>
+  <data name="&gt;&gt;ucrInputOther.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputOther.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputOther.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 381</value>
+  </data>
+  <data name="ucrSaveNewColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveNewColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 22</value>
+  </data>
+  <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveNewColumn.Name" xml:space="preserve">
+    <value>ucrSaveNewColumn</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveNewColumn.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveNewColumn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveNewColumn.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrFactorGrid.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrFactorGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 101</value>
+  </data>
+  <data name="ucrFactorGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 210</value>
+  </data>
+  <data name="ucrFactorGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorGrid.Name" xml:space="preserve">
+    <value>ucrFactorGrid</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorGrid.Type" xml:space="preserve">
+    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorGrid.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorGrid.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>551, 467</value>
   </data>
   <data name="ucrSelectorForRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 47</value>
