@@ -229,10 +229,12 @@ Public Class dlgReorderLevels
 
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
         clsReorder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInFreq, New RParameter("f", 0), iAdditionalPairNo:=1)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInSeq, New RParameter("f", 0), iAdditionalPairNo:=2)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShift, New RParameter("f", 0), iAdditionalPairNo:=3)
@@ -262,7 +264,6 @@ Public Class dlgReorderLevels
         ucrChkReverseVariable.SetRCode(clsForcatsReorder, bReset)
         ucrInputPrefix.SetRCode(clsForcatsAnonymise, bReset)
         ucrNudShift.SetRCode(clsForcatsShift, bReset)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlProperty.SetRCode(clsDummyFunction, bReset)
     End Sub
 
