@@ -64,6 +64,7 @@ Partial Class dlgRecodeFactor
         Me.rdoCommonValues = New System.Windows.Forms.RadioButton()
         Me.rdoLevels = New System.Windows.Forms.RadioButton()
         Me.ucrPnlKeep = New instat.UcrPanel()
+        Me.ucrFactorLevels = New instat.ucrFactor()
         Me.grpSelectedValues.SuspendLayout()
         Me.grpKeep.SuspendLayout()
         Me.SuspendLayout()
@@ -268,10 +269,20 @@ Partial Class dlgRecodeFactor
         resources.ApplyResources(Me.ucrPnlKeep, "ucrPnlKeep")
         Me.ucrPnlKeep.Name = "ucrPnlKeep"
         '
+        'ucrFactorLevels
+        '
+        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.ucrChkLevels = Nothing
+        '
         'dlgRecodeFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.grpKeep)
         Me.Controls.Add(Me.rdoLump)
         Me.Controls.Add(Me.rdoRecode)
@@ -324,4 +335,5 @@ Partial Class dlgRecodeFactor
     Friend WithEvents ucrNudFrequentValues As ucrNud
     Friend WithEvents ucrNudCommonValues As ucrNud
     Friend WithEvents ucrNudLevels As ucrNud
+    Friend WithEvents ucrFactorLevels As ucrFactor
 End Class
