@@ -94,7 +94,7 @@ Public Class dlgGeneralForGraphics
         ucrFillOrColourReceiver.bWithQuotes = False
         ucrFillOrColourReceiver.SetParameterIsString()
 
-        ucrSave.SetPrefix("Graph")
+        ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")

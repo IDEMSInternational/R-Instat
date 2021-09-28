@@ -43,7 +43,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -52,6 +51,8 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrNudMinFreq = New instat.ucrNud()
+        Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
@@ -61,8 +62,10 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -97,11 +100,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.TabStop = True
         Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'ucrPnlSort
-        '
-        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
-        Me.ucrPnlSort.Name = "ucrPnlSort"
         '
         'cmdOptions
         '
@@ -161,6 +159,22 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.rdoAsText, "rdoAsText")
         Me.rdoAsText.Name = "rdoAsText"
         Me.rdoAsText.UseVisualStyleBackColor = True
+        '
+        'ucrNudMinFreq
+        '
+        Me.ucrNudMinFreq.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinFreq, "ucrNudMinFreq")
+        Me.ucrNudMinFreq.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinFreq.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Name = "ucrNudMinFreq"
+        Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMinFrq
+        '
+        Me.ucrChkMinFrq.Checked = False
+        resources.ApplyResources(Me.ucrChkMinFrq, "ucrChkMinFrq")
+        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
         '
         'ucrPnlOutput
         '
@@ -223,6 +237,11 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
         '
+        'ucrPnlSort
+        '
+        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
+        Me.ucrPnlSort.Name = "ucrPnlSort"
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -236,10 +255,18 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
+        'ucrSaveDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveDataFrame, "ucrSaveDataFrame")
+        Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveDataFrame)
+        Me.Controls.Add(Me.ucrNudMinFreq)
+        Me.Controls.Add(Me.ucrChkMinFrq)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
@@ -293,4 +320,7 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoAsHtml As RadioButton
     Friend WithEvents rdoAsText As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrNudMinFreq As ucrNud
+    Friend WithEvents ucrChkMinFrq As ucrCheck
+    Friend WithEvents ucrSaveDataFrame As ucrSave
 End Class
