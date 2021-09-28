@@ -30,6 +30,7 @@ Public Class dlgReorderLevels
     Private clsForcatsReorder As New RFunction
     Private clsForcatsInFreqFunction As New RFunction
     Private clsForcatsRelevel As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -54,8 +55,10 @@ Public Class dlgReorderLevels
         ucrPnlOptions.AddRadioButton(rdoHand)
         ucrPnlOptions.AddRadioButton(rdoProperty)
         ucrPnlOptions.AddRadioButton(rdoVariable)
+
         ucrPnlOptions.AddFunctionNamesCondition(rdoHand, frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoProperty, "fct_rev")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoProperty, {"fct_rev", "fct_inorder", "fct_infreq", "fct_inseq", "fct_shift",
+                                                "fct_shuffle", "fct_anon", "fct_relevel"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoVariable, "fct_reorder")
 
         ucrPnlOptions.AddToLinkedControls({ucrReorderFactor, ucrReceiverFactor}, {rdoHand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -129,13 +132,14 @@ Public Class dlgReorderLevels
         ucrPnlProperty.AddRadioButton(rdoAnonymise)
         ucrPnlProperty.AddRadioButton(rdoAlphabetical)
 
-        ucrPnlProperty.AddFunctionNamesCondition(rdoAppearance, "fct_inorder")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoFrequency, "fct_infreq")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoSequence, "fct_inseq")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoShift, "fct_shift")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoShuffle, "fct_shuffle")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoAnonymise, "fct_anon")
-        ucrPnlProperty.AddFunctionNamesCondition(rdoAlphabetical, "fct_relevel")
+        ucrPnlProperty.AddParameterValuesCondition(rdoReverseLevels, "checked", "reverse")
+        ucrPnlProperty.AddParameterValuesCondition(rdoAppearance, "checked", "appearance")
+        ucrPnlProperty.AddParameterValuesCondition(rdoFrequency, "checked", "frequency")
+        ucrPnlProperty.AddParameterValuesCondition(rdoSequence, "checked", "sequence")
+        ucrPnlProperty.AddParameterValuesCondition(rdoShift, "checked", "shift")
+        ucrPnlProperty.AddParameterValuesCondition(rdoShuffle, "checked", "shuffle")
+        ucrPnlProperty.AddParameterValuesCondition(rdoAnonymise, "checked", "anonymise")
+        ucrPnlProperty.AddParameterValuesCondition(rdoAlphabetical, "checked", "alphabetic")
 
         ucrPnlProperty.AddToLinkedControls(ucrNudShift, {rdoShift}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeParameterValue:=True, objNewDefaultState:=1)
         ucrPnlProperty.AddToLinkedControls(ucrInputPrefix, {rdoAnonymise}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -171,17 +175,16 @@ Public Class dlgReorderLevels
         clsForcatsRevFunction = New RFunction
         clsForcatsInFreqFunction = New RFunction
         clsForcatsRelevel = New RFunction
+        clsDummyFunction = New RFunction
 
         'Reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSaveResults.Reset()
         ucrReceiverFactor.SetMeAsReceiver()
 
-        'Temp fix: Set panel conditions properly!
-        rdoReverseLevels.Checked = True
-        rdoHand.Checked = True
-
         ucrInputOrder.SetText(strAscending)
+
+        clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
 
         'Set default function
         clsForcatsInOrder.SetPackageName("forcats")
@@ -259,6 +262,8 @@ Public Class dlgReorderLevels
         ucrChkReverseVariable.SetRCode(clsForcatsReorder, bReset)
         ucrInputPrefix.SetRCode(clsForcatsAnonymise, bReset)
         ucrNudShift.SetRCode(clsForcatsShift, bReset)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlProperty.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -294,9 +299,11 @@ Public Class dlgReorderLevels
             ucrReceiverFactorX.SetMeAsReceiver()
             If rdoReverseLevels.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverse)
+                clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
             End If
             If rdoAppearance.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrder)
+                clsDummyFunction.AddParameter("checked", "appearance", iPosition:=0)
             End If
             If rdoFrequency.Checked Then
                 Select Case ucrInputOrder.GetText()
@@ -305,21 +312,27 @@ Public Class dlgReorderLevels
                     Case strDescending
                         ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInFreq)
                 End Select
+                clsDummyFunction.AddParameter("checked", "frequency", iPosition:=0)
             End If
             If rdoSequence.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeq)
+                clsDummyFunction.AddParameter("checked", "sequence", iPosition:=0)
             End If
             If rdoAlphabetical.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevel)
+                clsDummyFunction.AddParameter("checked", "alphabetic", iPosition:=0)
             End If
             If rdoShift.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShift)
+                clsDummyFunction.AddParameter("checked", "shift", iPosition:=0)
             End If
             If rdoShuffle.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffle)
+                clsDummyFunction.AddParameter("checked", "shuffle", iPosition:=0)
             End If
             If rdoAnonymise.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymise)
+                clsDummyFunction.AddParameter("checked", "anonymise", iPosition:=0)
             End If
         ElseIf rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()

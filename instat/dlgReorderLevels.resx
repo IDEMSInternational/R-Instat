@@ -166,7 +166,7 @@
     <value>70, 28</value>
   </data>
   <data name="rdoHand.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoHand.Text" xml:space="preserve">
     <value>Hand</value>
@@ -202,7 +202,7 @@
     <value>84, 28</value>
   </data>
   <data name="rdoProperty.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoProperty.Text" xml:space="preserve">
     <value>Property</value>
@@ -238,7 +238,7 @@
     <value>87, 28</value>
   </data>
   <data name="rdoVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoVariable.Text" xml:space="preserve">
     <value>Variable</value>
@@ -862,7 +862,7 @@
     <value>244, 36</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
     <value>ucrPnlOptions</value>
@@ -995,6 +995,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorFactorLevelsToReorder.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
