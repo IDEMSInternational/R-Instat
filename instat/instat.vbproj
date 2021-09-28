@@ -263,6 +263,12 @@
     <Compile Include="dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCluster.Designer.vb">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCluster.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
@@ -1101,10 +1107,10 @@
     <Compile Include="dlgRenameDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRugPlot.Designer.vb">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <Compile Include="dlgHeatMapPlot.Designer.vb">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRugPlot.vb">
+    <Compile Include="dlgHeatMapPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgShowModel.Designer.vb">
@@ -2812,6 +2818,9 @@
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCluster.resx">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -3373,8 +3382,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.sw-KE.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFindNonnumericValues.resx">
       <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
@@ -3760,8 +3769,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
