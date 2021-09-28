@@ -38,6 +38,7 @@ Partial Class dlgBarAndPieChart
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBarAndPieChart))
         Me.lblByFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -57,6 +58,32 @@ Partial Class dlgBarAndPieChart
         Me.lblLollipopColour = New System.Windows.Forms.Label()
         Me.lblReorder = New System.Windows.Forms.Label()
         Me.lblReorderX = New System.Windows.Forms.Label()
+        Me.lblReorderValue = New System.Windows.Forms.Label()
+        Me.rdoTreeMap = New System.Windows.Forms.RadioButton()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lblArea = New System.Windows.Forms.Label()
+        Me.ttArea = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttFill = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblPlace = New System.Windows.Forms.Label()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.rdoWordCloud = New System.Windows.Forms.RadioButton()
+        Me.lblWordcloudLabel = New System.Windows.Forms.Label()
+        Me.lblWordcloudSize = New System.Windows.Forms.Label()
+        Me.lblWordcloudColor = New System.Windows.Forms.Label()
+        Me.lblWordcloudAngle = New System.Windows.Forms.Label()
+        Me.ucrReceiverWordcloudLabel = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWordcloudSize = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWordcloudColor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWordcloudAngle = New instat.ucrReceiverSingle()
+        Me.ucrChkLayout = New instat.ucrCheck()
+        Me.ucrChkStart = New instat.ucrCheck()
+        Me.ucrInputStart = New instat.ucrInputComboBox()
+        Me.ucrInputLayout = New instat.ucrInputComboBox()
+        Me.ucrInputPlace = New instat.ucrInputComboBox()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
+        Me.ucrReceiverArea = New instat.ucrReceiverSingle()
+        Me.ucrInputReorderValue = New instat.ucrInputComboBox()
         Me.ucrInputReorderX = New instat.ucrInputComboBox()
         Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
@@ -78,8 +105,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblReorderValue = New System.Windows.Forms.Label()
-        Me.ucrInputReorderValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -198,6 +223,182 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.lblReorderX, "lblReorderX")
         Me.lblReorderX.Name = "lblReorderX"
+        '
+        'lblReorderValue
+        '
+        resources.ApplyResources(Me.lblReorderValue, "lblReorderValue")
+        Me.lblReorderValue.Name = "lblReorderValue"
+        '
+        'rdoTreeMap
+        '
+        resources.ApplyResources(Me.rdoTreeMap, "rdoTreeMap")
+        Me.rdoTreeMap.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoTreeMap.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTreeMap.FlatAppearance.BorderSize = 2
+        Me.rdoTreeMap.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTreeMap.Name = "rdoTreeMap"
+        Me.rdoTreeMap.TabStop = True
+        Me.rdoTreeMap.Tag = "Value"
+        Me.rdoTreeMap.UseVisualStyleBackColor = False
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        '
+        'lblArea
+        '
+        resources.ApplyResources(Me.lblArea, "lblArea")
+        Me.lblArea.Name = "lblArea"
+        '
+        'lblPlace
+        '
+        resources.ApplyResources(Me.lblPlace, "lblPlace")
+        Me.lblPlace.Name = "lblPlace"
+        '
+        'lblLabel
+        '
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
+        '
+        'rdoWordCloud
+        '
+        resources.ApplyResources(Me.rdoWordCloud, "rdoWordCloud")
+        Me.rdoWordCloud.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoWordCloud.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWordCloud.FlatAppearance.BorderSize = 2
+        Me.rdoWordCloud.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWordCloud.Name = "rdoWordCloud"
+        Me.rdoWordCloud.TabStop = True
+        Me.rdoWordCloud.Tag = "Value"
+        Me.rdoWordCloud.UseVisualStyleBackColor = False
+        '
+        'lblWordcloudLabel
+        '
+        resources.ApplyResources(Me.lblWordcloudLabel, "lblWordcloudLabel")
+        Me.lblWordcloudLabel.Name = "lblWordcloudLabel"
+        '
+        'lblWordcloudSize
+        '
+        resources.ApplyResources(Me.lblWordcloudSize, "lblWordcloudSize")
+        Me.lblWordcloudSize.Name = "lblWordcloudSize"
+        '
+        'lblWordcloudColor
+        '
+        resources.ApplyResources(Me.lblWordcloudColor, "lblWordcloudColor")
+        Me.lblWordcloudColor.Name = "lblWordcloudColor"
+        '
+        'lblWordcloudAngle
+        '
+        resources.ApplyResources(Me.lblWordcloudAngle, "lblWordcloudAngle")
+        Me.lblWordcloudAngle.Name = "lblWordcloudAngle"
+        '
+        'ucrReceiverWordcloudLabel
+        '
+        Me.ucrReceiverWordcloudLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWordcloudLabel, "ucrReceiverWordcloudLabel")
+        Me.ucrReceiverWordcloudLabel.Name = "ucrReceiverWordcloudLabel"
+        Me.ucrReceiverWordcloudLabel.Selector = Nothing
+        Me.ucrReceiverWordcloudLabel.strNcFilePath = ""
+        Me.ucrReceiverWordcloudLabel.ucrSelector = Nothing
+        '
+        'ucrReceiverWordcloudSize
+        '
+        Me.ucrReceiverWordcloudSize.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWordcloudSize, "ucrReceiverWordcloudSize")
+        Me.ucrReceiverWordcloudSize.Name = "ucrReceiverWordcloudSize"
+        Me.ucrReceiverWordcloudSize.Selector = Nothing
+        Me.ucrReceiverWordcloudSize.strNcFilePath = ""
+        Me.ucrReceiverWordcloudSize.ucrSelector = Nothing
+        '
+        'ucrReceiverWordcloudColor
+        '
+        Me.ucrReceiverWordcloudColor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWordcloudColor, "ucrReceiverWordcloudColor")
+        Me.ucrReceiverWordcloudColor.Name = "ucrReceiverWordcloudColor"
+        Me.ucrReceiverWordcloudColor.Selector = Nothing
+        Me.ucrReceiverWordcloudColor.strNcFilePath = ""
+        Me.ucrReceiverWordcloudColor.ucrSelector = Nothing
+        '
+        'ucrReceiverWordcloudAngle
+        '
+        Me.ucrReceiverWordcloudAngle.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWordcloudAngle, "ucrReceiverWordcloudAngle")
+        Me.ucrReceiverWordcloudAngle.Name = "ucrReceiverWordcloudAngle"
+        Me.ucrReceiverWordcloudAngle.Selector = Nothing
+        Me.ucrReceiverWordcloudAngle.strNcFilePath = ""
+        Me.ucrReceiverWordcloudAngle.ucrSelector = Nothing
+        '
+        'ucrChkLayout
+        '
+        Me.ucrChkLayout.Checked = False
+        resources.ApplyResources(Me.ucrChkLayout, "ucrChkLayout")
+        Me.ucrChkLayout.Name = "ucrChkLayout"
+        '
+        'ucrChkStart
+        '
+        Me.ucrChkStart.Checked = False
+        resources.ApplyResources(Me.ucrChkStart, "ucrChkStart")
+        Me.ucrChkStart.Name = "ucrChkStart"
+        '
+        'ucrInputStart
+        '
+        Me.ucrInputStart.AddQuotesIfUnrecognised = True
+        Me.ucrInputStart.GetSetSelectedIndex = -1
+        Me.ucrInputStart.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStart, "ucrInputStart")
+        Me.ucrInputStart.Name = "ucrInputStart"
+        '
+        'ucrInputLayout
+        '
+        Me.ucrInputLayout.AddQuotesIfUnrecognised = True
+        Me.ucrInputLayout.GetSetSelectedIndex = -1
+        Me.ucrInputLayout.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLayout, "ucrInputLayout")
+        Me.ucrInputLayout.Name = "ucrInputLayout"
+        '
+        'ucrInputPlace
+        '
+        Me.ucrInputPlace.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlace.GetSetSelectedIndex = -1
+        Me.ucrInputPlace.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPlace, "ucrInputPlace")
+        Me.ucrInputPlace.Name = "ucrInputPlace"
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'ucrReceiverLabel
+        '
+        Me.ucrReceiverLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
+        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
+        Me.ucrReceiverLabel.Selector = Nothing
+        Me.ucrReceiverLabel.strNcFilePath = ""
+        Me.ucrReceiverLabel.ucrSelector = Nothing
+        '
+        'ucrReceiverArea
+        '
+        Me.ucrReceiverArea.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverArea, "ucrReceiverArea")
+        Me.ucrReceiverArea.Name = "ucrReceiverArea"
+        Me.ucrReceiverArea.Selector = Nothing
+        Me.ucrReceiverArea.strNcFilePath = ""
+        Me.ucrReceiverArea.ucrSelector = Nothing
+        '
+        'ucrInputReorderValue
+        '
+        Me.ucrInputReorderValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputReorderValue.GetSetSelectedIndex = -1
+        Me.ucrInputReorderValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
+        Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
         '
         'ucrInputReorderX
         '
@@ -351,23 +552,32 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'lblReorderValue
-        '
-        resources.ApplyResources(Me.lblReorderValue, "lblReorderValue")
-        Me.lblReorderValue.Name = "lblReorderValue"
-        '
-        'ucrInputReorderValue
-        '
-        Me.ucrInputReorderValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputReorderValue.GetSetSelectedIndex = -1
-        Me.ucrInputReorderValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
-        Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
-        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblWordcloudAngle)
+        Me.Controls.Add(Me.lblWordcloudColor)
+        Me.Controls.Add(Me.lblWordcloudSize)
+        Me.Controls.Add(Me.lblWordcloudLabel)
+        Me.Controls.Add(Me.ucrReceiverWordcloudLabel)
+        Me.Controls.Add(Me.ucrReceiverWordcloudSize)
+        Me.Controls.Add(Me.ucrReceiverWordcloudColor)
+        Me.Controls.Add(Me.ucrReceiverWordcloudAngle)
+        Me.Controls.Add(Me.rdoWordCloud)
+        Me.Controls.Add(Me.lblLabel)
+        Me.Controls.Add(Me.lblPlace)
+        Me.Controls.Add(Me.ucrChkLayout)
+        Me.Controls.Add(Me.ucrChkStart)
+        Me.Controls.Add(Me.ucrInputStart)
+        Me.Controls.Add(Me.ucrInputLayout)
+        Me.Controls.Add(Me.ucrInputPlace)
+        Me.Controls.Add(Me.lblArea)
+        Me.Controls.Add(Me.lblFill)
+        Me.Controls.Add(Me.ucrReceiverFill)
+        Me.Controls.Add(Me.ucrReceiverLabel)
+        Me.Controls.Add(Me.ucrReceiverArea)
+        Me.Controls.Add(Me.rdoTreeMap)
         Me.Controls.Add(Me.ucrInputReorderValue)
         Me.Controls.Add(Me.lblReorderValue)
         Me.Controls.Add(Me.lblReorderX)
@@ -460,4 +670,28 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrInputReorderX As ucrInputComboBox
     Friend WithEvents ucrInputReorderValue As ucrInputComboBox
     Friend WithEvents lblReorderValue As Label
+    Friend WithEvents rdoTreeMap As RadioButton
+    Friend WithEvents lblArea As Label
+    Friend WithEvents lblFill As Label
+    Friend WithEvents ucrReceiverFill As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
+    Friend WithEvents ucrReceiverArea As ucrReceiverSingle
+    Friend WithEvents ttArea As ToolTip
+    Friend WithEvents ttFill As ToolTip
+    Friend WithEvents ucrChkLayout As ucrCheck
+    Friend WithEvents ucrChkStart As ucrCheck
+    Friend WithEvents ucrInputStart As ucrInputComboBox
+    Friend WithEvents ucrInputLayout As ucrInputComboBox
+    Friend WithEvents ucrInputPlace As ucrInputComboBox
+    Friend WithEvents lblPlace As Label
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents rdoWordCloud As RadioButton
+    Friend WithEvents lblWordcloudAngle As Label
+    Friend WithEvents lblWordcloudColor As Label
+    Friend WithEvents lblWordcloudSize As Label
+    Friend WithEvents lblWordcloudLabel As Label
+    Friend WithEvents ucrReceiverWordcloudLabel As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWordcloudSize As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWordcloudColor As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWordcloudAngle As ucrReceiverSingle
 End Class
