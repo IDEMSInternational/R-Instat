@@ -1128,7 +1128,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeSpecificRugPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMapPlot.Click
-        dlgRugPlot.ShowDialog()
+        dlgHeatMapPlot.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarPieChart.Click
