@@ -36,7 +36,7 @@ Public Class sdgOneWayFrequencies
 
         'Table Only
         ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowStrings.SetText("Omit Character Variabless")
+        ucrChkShowStrings.SetText("Omit Character Variables")
 
         ucrPnlShowMissingFreq.SetParameter(New RParameter("show.na", 8))
         ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingTrue, "TRUE")
