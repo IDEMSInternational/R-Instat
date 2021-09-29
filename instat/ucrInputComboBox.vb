@@ -89,7 +89,8 @@ Public Class ucrInputComboBox
     End Sub
 
     Public Sub SetItemsTypeAsColumnSelection()
-        strItemsType = "Column_selection"
+        strItemsType = "Column Selection"
+
         FillItemTypes()
     End Sub
 
