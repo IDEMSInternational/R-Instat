@@ -199,7 +199,8 @@ Public Class ucrInput
                 Else
                     SetName("")
                 End If
-            ElseIf strDefaultType = "Column_selection" Then
+            ElseIf strDefaultType = "Column Selection" Then
+
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetColumnSelectionNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
