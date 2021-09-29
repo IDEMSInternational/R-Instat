@@ -1915,8 +1915,6 @@ Public Class RLink
     Public Function GetColumnSelectionNames(strDataFrameName As String) As List(Of String)
         Return GetNames(strDataFrameName, "$get_column_selection_names")
     End Function
-
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's graphs. </summary>
     '''
