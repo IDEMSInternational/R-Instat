@@ -187,8 +187,14 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoRecode.Checked OrElse rdoOther.Checked Then
+        If rdoRecode.Checked Then
             If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoOther.Checked Then
+            If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels()) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -200,7 +206,6 @@ Public Class dlgRecodeFactor
                 ucrBase.OKEnabled(False)
             End If
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -281,7 +286,7 @@ Public Class dlgRecodeFactor
         DefaultNewName()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrFactorLevels.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
