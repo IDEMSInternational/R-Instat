@@ -25,6 +25,7 @@ Public Class dlgRecodeFactor
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
+
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -229,7 +230,7 @@ Public Class dlgRecodeFactor
 
         If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
             For i = 0 To strCurrentLabels.Count - 1
-                ' Backtick needed for names of the vector incase the levels are not valid R names
+                'Backtick needed for names of the vector incase the levels are not valid R names
                 clsFctRecodeFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
             Next
         End If
