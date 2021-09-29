@@ -146,7 +146,8 @@ Public Class ucrInput
     End Sub
 
     Public Sub SetDefaultTypeAsColumnSelection()
-        strDefaultType = "Column_selection"
+        strDefaultType = "Column Selection"
+
         SetDefaultName()
     End Sub
 
