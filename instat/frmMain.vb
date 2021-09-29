@@ -2419,4 +2419,8 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareDataReshapeTransformClusters_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeTransformClusters.Click
+        dlgCluster.ShowDialog()
+    End Sub
 End Class
