@@ -23,28 +23,20 @@ Partial Class dlgCluster
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCluster))
-        Me.ucrSelectorPrepareData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSelectData = New instat.UcrPanel()
-        Me.ucrReceiverPrepareData = New instat.ucrReceiverMultiple()
-        Me.ucrChkOmitMissingRows = New instat.ucrCheck()
-        Me.ucrChkScaleEachVariable = New instat.ucrCheck()
-        Me.ucrChkCenterEachVariable = New instat.ucrCheck()
-        Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.rdoDistanceData = New System.Windows.Forms.RadioButton()
         Me.rdoScaleData = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlPrepareData = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveNewDataFrame = New instat.ucrSave()
+        Me.ucrChkCenterEachVariable = New instat.ucrCheck()
+        Me.ucrChkScaleEachVariable = New instat.ucrCheck()
+        Me.ucrChkOmitMissingRows = New instat.ucrCheck()
+        Me.ucrReceiverPrepareData = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorPrepareData = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.ucrPnlPrepareData = New instat.UcrPanel()
         Me.SuspendLayout()
-        '
-        'ucrSelectorPrepareData
-        '
-        Me.ucrSelectorPrepareData.bDropUnusedFilterLevels = False
-        Me.ucrSelectorPrepareData.bShowHiddenColumns = False
-        Me.ucrSelectorPrepareData.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorPrepareData, "ucrSelectorPrepareData")
-        Me.ucrSelectorPrepareData.Name = "ucrSelectorPrepareData"
         '
         'rdoWholeDataFrame
         '
@@ -59,43 +51,6 @@ Partial Class dlgCluster
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.TabStop = True
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
-        '
-        'ucrPnlSelectData
-        '
-        resources.ApplyResources(Me.ucrPnlSelectData, "ucrPnlSelectData")
-        Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        '
-        'ucrReceiverPrepareData
-        '
-        Me.ucrReceiverPrepareData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverPrepareData, "ucrReceiverPrepareData")
-        Me.ucrReceiverPrepareData.Name = "ucrReceiverPrepareData"
-        Me.ucrReceiverPrepareData.Selector = Nothing
-        Me.ucrReceiverPrepareData.strNcFilePath = ""
-        Me.ucrReceiverPrepareData.ucrSelector = Nothing
-        '
-        'ucrChkOmitMissingRows
-        '
-        Me.ucrChkOmitMissingRows.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingRows, "ucrChkOmitMissingRows")
-        Me.ucrChkOmitMissingRows.Name = "ucrChkOmitMissingRows"
-        '
-        'ucrChkScaleEachVariable
-        '
-        Me.ucrChkScaleEachVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkScaleEachVariable, "ucrChkScaleEachVariable")
-        Me.ucrChkScaleEachVariable.Name = "ucrChkScaleEachVariable"
-        '
-        'ucrChkCenterEachVariable
-        '
-        Me.ucrChkCenterEachVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkCenterEachVariable, "ucrChkCenterEachVariable")
-        Me.ucrChkCenterEachVariable.Name = "ucrChkCenterEachVariable"
-        '
-        'ucrSaveNewDataFrame
-        '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
-        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         '
         'rdoDistanceData
         '
@@ -115,15 +70,60 @@ Partial Class dlgCluster
         Me.rdoScaleData.Name = "rdoScaleData"
         Me.rdoScaleData.UseVisualStyleBackColor = True
         '
-        'ucrPnlPrepareData
-        '
-        resources.ApplyResources(Me.ucrPnlPrepareData, "ucrPnlPrepareData")
-        Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSaveNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        '
+        'ucrChkCenterEachVariable
+        '
+        Me.ucrChkCenterEachVariable.Checked = False
+        resources.ApplyResources(Me.ucrChkCenterEachVariable, "ucrChkCenterEachVariable")
+        Me.ucrChkCenterEachVariable.Name = "ucrChkCenterEachVariable"
+        '
+        'ucrChkScaleEachVariable
+        '
+        Me.ucrChkScaleEachVariable.Checked = False
+        resources.ApplyResources(Me.ucrChkScaleEachVariable, "ucrChkScaleEachVariable")
+        Me.ucrChkScaleEachVariable.Name = "ucrChkScaleEachVariable"
+        '
+        'ucrChkOmitMissingRows
+        '
+        Me.ucrChkOmitMissingRows.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissingRows, "ucrChkOmitMissingRows")
+        Me.ucrChkOmitMissingRows.Name = "ucrChkOmitMissingRows"
+        '
+        'ucrReceiverPrepareData
+        '
+        Me.ucrReceiverPrepareData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverPrepareData, "ucrReceiverPrepareData")
+        Me.ucrReceiverPrepareData.Name = "ucrReceiverPrepareData"
+        Me.ucrReceiverPrepareData.Selector = Nothing
+        Me.ucrReceiverPrepareData.strNcFilePath = ""
+        Me.ucrReceiverPrepareData.ucrSelector = Nothing
+        '
+        'ucrSelectorPrepareData
+        '
+        Me.ucrSelectorPrepareData.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPrepareData.bShowHiddenColumns = False
+        Me.ucrSelectorPrepareData.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorPrepareData, "ucrSelectorPrepareData")
+        Me.ucrSelectorPrepareData.Name = "ucrSelectorPrepareData"
+        '
+        'ucrPnlSelectData
+        '
+        resources.ApplyResources(Me.ucrPnlSelectData, "ucrPnlSelectData")
+        Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
+        '
+        'ucrPnlPrepareData
+        '
+        resources.ApplyResources(Me.ucrPnlPrepareData, "ucrPnlPrepareData")
+        Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
         '
         'dlgCluster
         '
