@@ -54,7 +54,7 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.AddToLinkedControls(ucrReceiverMultipleVariables, {"Columns"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrInputText, {"Numeric range", "Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)' TODO: uncomment once selection using where is added
         ucrReceiverMultipleVariables.SetLinkedDisplayControl(lblSeclectedColumns)
         ucrInputText.SetLinkedDisplayControl(lblString)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
@@ -185,6 +185,7 @@ Public Class dlgSelectColumns
                 clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
                 clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
                 strValue = clsFromToOperation.ToScript
+                'TODO: this will be needed when selection depending of variable type e.g factors,characters etc is added!
                 'Case "Where"
                 'clsCurrentConditionList.AddParameter("operation", Chr(34) & "where" & Chr(34), iPosition:=0)
                 'If ucrInputColumnType.GetText = "Numeric" Then
@@ -231,20 +232,15 @@ Public Class dlgSelectColumns
                     bEnableOrDisable = False
                 End If
             Case "Where"
-                '
-            Case "Last column"
-                '
+                'add where instance when enabled
         End Select
         cmdAddCondition.Enabled = bEnableOrDisable
     End Sub
 
-    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrInputText.ControlContentsChanged
         EnableDisableAddConditionButton()
     End Sub
 
-    Private Sub ucrInputText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputText.ControlContentsChanged
-        EnableDisableAddConditionButton()
-    End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         If lstColumnSelections.Items.Count > 0 Then
