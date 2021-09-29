@@ -110,7 +110,7 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
-        If cmdCombineWithAndOr.Text.Contains("All combined with &") Then
+        If cmdCombineWithAndOr.Text.Contains("All combined with &&") Then
             cmdCombineWithAndOr.Text = "All combined with |"
             clsAddColumnSelection.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
         Else
