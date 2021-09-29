@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction,
         clsCorrelationTestFunction, clsCorrelationFunction, clsRGraphicsFuction,
-        clsRTempFunction, clsGuideFunction, clsDummyFunction As New RFunction
+       clsGuideFunction, clsDummyFunction As New RFunction
     Public clsRGGscatMatricReverseOperator As New ROperator
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
@@ -100,7 +100,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction,
-                        clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction,
+                        clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction,
                         clsNewRGGscatmatrixFunction As RFunction, strNewColFunction As String, clsNewDummyFunction As RFunction,
                         clsNewRGGscatMatrixReverseOperator As ROperator, clsNewGuideFunction As RFunction,
                         Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False,
@@ -124,7 +124,6 @@ Public Class sdgCorrPlot
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
-        clsRTempFunction = clsNewRTempFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
