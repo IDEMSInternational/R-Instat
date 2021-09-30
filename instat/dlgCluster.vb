@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCluster
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsScaleFunction, clsStatsNAOmitFunction, clsStatsScaleFunction As New RFunction
+    Private clsScaleFunction, clsStatsNAOmitFunction, clsDummyFunction,
+        clsStatsScaleFunction As New RFunction
 
     Private Sub dlgCluster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -52,8 +53,8 @@ Public Class dlgCluster
 
         ucrPnlPrepareData.AddFunctionNamesCondition(rdoScaleData, "scale")
 
-        ucrPnlSelectData.AddParameterPresentCondition(rdoWholeDataFrame, "data")
-        ucrPnlSelectData.AddParameterPresentCondition(rdoSelectedColumn, "x")
+        ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
+        ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
 
         ucrChkOmitMissingRows.SetParameter(New RParameter("object", 1))
         ucrChkOmitMissingRows.SetText("Omit Missing Values")
@@ -82,9 +83,12 @@ Public Class dlgCluster
         clsScaleFunction = New RFunction
         clsStatsNAOmitFunction = New RFunction
         clsStatsScaleFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorPrepareData.Reset()
         ucrSaveNewDataFrame.Reset()
+
+        clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
 
         clsScaleFunction.SetRCommand("scale")
 
@@ -104,7 +108,7 @@ Public Class dlgCluster
         ucrChkCenterEachVariable.SetRCode(clsScaleFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsScaleFunction, bReset)
         ucrChkScaleEachVariable.SetRCode(clsScaleFunction, bReset)
-        ucrPnlSelectData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
         ucrPnlPrepareData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -142,9 +146,11 @@ Public Class dlgCluster
     Private Sub ChangeDataParameter()
         If rdoScaleData.Checked Then
             If rdoWholeDataFrame.Checked Then
+                clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
                 clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                 clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             Else
+                clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
                 clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
                 clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
             End If
