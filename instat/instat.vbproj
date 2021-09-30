@@ -263,6 +263,12 @@
     <Compile Include="dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCluster.Designer.vb">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCluster.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
@@ -416,10 +422,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Pivot Table.Designer.vb">
-      <DependentUpon>Pivot Table.vb</DependentUpon>
+    <Compile Include="dlgThreeVariablePivotTable.Designer.vb">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Pivot Table.vb">
+    <Compile Include="dlgThreeVariablePivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
@@ -2812,6 +2818,9 @@
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCluster.resx">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2882,8 +2891,8 @@
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pivot Table.resx">
-      <DependentUpon>Pivot Table.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
