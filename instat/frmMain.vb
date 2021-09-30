@@ -2419,8 +2419,4 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
     End Sub
-
-    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
-        dlgThreeVariablePivotTable.ShowDialog()
-    End Sub
 End Class
