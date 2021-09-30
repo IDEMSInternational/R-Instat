@@ -43,7 +43,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputWithinYear = New instat.ucrInputComboBox()
         Me.ucrInputYear = New instat.ucrInputComboBox()
         Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSavePlot = New instat.ucrSave()
@@ -206,12 +205,6 @@ Partial Class dlgClimaticBoxPlot
         resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
         Me.ucrInputStation.Name = "ucrInputStation"
         '
-        'ucrChkVerticalXTickMarkers
-        '
-        Me.ucrChkVerticalXTickMarkers.Checked = False
-        resources.ApplyResources(Me.ucrChkVerticalXTickMarkers, "ucrChkVerticalXTickMarkers")
-        Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
-        '
         'ucrPnlPlots
         '
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
@@ -266,7 +259,6 @@ Partial Class dlgClimaticBoxPlot
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplot)
@@ -297,7 +289,6 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoBoxplot As RadioButton
     Friend WithEvents ucrPnlPlots As UcrPanel
-    Friend WithEvents ucrChkVerticalXTickMarkers As ucrCheck
     Friend WithEvents lblWithinYear As Label
     Friend WithEvents lblElement As Label
     Friend WithEvents lblYear As Label

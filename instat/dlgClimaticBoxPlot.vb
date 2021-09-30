@@ -33,7 +33,6 @@ Public Class dlgClimaticBoxPlot
     Private clsFacetOp As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
-    Private clsThemeParam As New RParameter
     Private clsThemeFunction As New RFunction
     Private clsThemeFunc As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
@@ -174,15 +173,11 @@ Public Class dlgClimaticBoxPlot
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
         clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
-        clsThemeParam.SetArgument(clsThemeFunc)
-        clsThemeParam.SetArgumentName("theme")
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90", iPosition:=0)
         clsTextElementFunc.AddParameter("hjust", "1", iPosition:=1)
         clsTextElementFunc.AddParameter("vjust", "0.5", iPosition:=2)
-        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
-        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
         ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -302,7 +297,6 @@ Public Class dlgClimaticBoxPlot
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
@@ -342,7 +336,6 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
         sdgPlots.tbpFacet.Enabled = True
-        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
     End Sub
