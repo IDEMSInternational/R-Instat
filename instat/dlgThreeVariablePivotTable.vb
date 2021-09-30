@@ -45,7 +45,6 @@ Public Class dlgThreeVariablePivotTable
         ucrBase.iHelpTopicID = 603
         ucrBase.clsRsyntax.iCallType = 2
 
-
         ucrReceiverInitialRowFactor.SetParameter(New RParameter("col", iNewPosition:=1, bNewIncludeArgumentName:=False))
         ucrReceiverInitialRowFactor.SetParameterIsString()
         ucrReceiverInitialRowFactor.Selector = ucrSelectorPivot
@@ -155,7 +154,6 @@ Public Class dlgThreeVariablePivotTable
         clsSpaceOperator.AddParameter("SecondLeftCurlyBrackets", "}", iPosition:=11)
         clsSpaceOperator.AddParameter("right qoutes", Chr(34), iPosition:=12)
 
-
         clsAttrFunction.SetRCommand("function")
         clsAttrFunction.AddParameter("attr", "attr", bIncludeArgumentName:=False, iPosition:=0)
 
@@ -166,13 +164,11 @@ Public Class dlgThreeVariablePivotTable
         clsEqualOperator.AddParameter("attr", "attr", iPosition:=0)
         clsEqualOperator.AddParameter("operation", clsROperatorParameter:=clsEqualSpaceOperator, iPosition:=1)
 
-
         clsEqualSpaceOperator.SetOperation("")
         clsEqualSpaceOperator.AddParameter("FirstComma", Chr(34) & ", " & Chr(34), iPosition:=0)
         clsEqualSpaceOperator.AddParameter("slashQoute1", "\" & Chr(34), iPosition:=1)
         clsEqualSpaceOperator.AddParameter("slashQoute2", "\" & Chr(34) & Chr(34), iPosition:=3)
         clsEqualSpaceOperator.AddParameter("SecondComma", ", " & Chr(34), iPosition:=4)
-
 
         clsSorterAsFunction.SetRCommand("sortAs")
         clsSorterAsFunction.AddParameter("level", "["", month_levels_given,""]", bIncludeArgumentName:=False, iPosition:=0)
