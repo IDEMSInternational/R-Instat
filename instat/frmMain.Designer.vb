@@ -669,7 +669,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -774,7 +773,7 @@ Partial Class frmMain
         '
         'mnuDescribeThreeVariable
         '
-        Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies, Me.mnuDescribeThreeVariablePivotTable})
+        Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies})
         Me.mnuDescribeThreeVariable.Name = "mnuDescribeThreeVariable"
         resources.ApplyResources(Me.mnuDescribeThreeVariable, "mnuDescribeThreeVariable")
         '
@@ -4238,11 +4237,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuDescribeThreeVariablePivotTable
-        '
-        Me.mnuDescribeThreeVariablePivotTable.Name = "mnuDescribeThreeVariablePivotTable"
-        resources.ApplyResources(Me.mnuDescribeThreeVariablePivotTable, "mnuDescribeThreeVariablePivotTable")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4919,5 +4913,4 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
     Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
-    Friend WithEvents mnuDescribeThreeVariablePivotTable As ToolStripMenuItem
 End Class
