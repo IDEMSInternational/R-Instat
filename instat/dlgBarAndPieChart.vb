@@ -118,11 +118,10 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "coordpolar")
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor, ucrInputAddReorder, ucrVariablesAsFactorForBarChart}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrChkAddLabels, {rdoValue, rdoFrequency, rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor, ucrInputAddReorder, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrInputReorderValue}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputReorderX, {rdoFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
@@ -253,13 +252,18 @@ Public Class dlgBarAndPieChart
         ucrInputLabelSize.SetItems(dctLabelSizes)
         ucrInputLabelSize.SetDropDownStyleAsNonEditable()
 
-        ucrChkAddLabels.SetText("Add Labels")
-        ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
-        ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
-        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour, ucrInputPlace, ucrReceiverLabel}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLabelsText.SetText("Add Labels")
+        ucrChkAddLabelsText.AddParameterPresentCondition(True, "geom_text")
+        ucrChkAddLabelsText.AddParameterPresentCondition(False, "geom_text", False)
+        ucrChkAddLabelsText.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
+
+        ucrChkAddLabelsTreemap.SetText("Add Labels")
+        ucrChkAddLabelsTreemap.AddParameterPresentCondition(True, "geom_treemap_text")
+        ucrChkAddLabelsTreemap.AddParameterPresentCondition(False, "geom_treemap_text", False)
+        ucrChkAddLabelsTreemap.AddToLinkedControls({ucrInputPlace, ucrReceiverLabel}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPlace.SetLinkedDisplayControl(lblPlace)
         ucrReceiverLabel.SetLinkedDisplayControl(lblLabel)
 
@@ -575,7 +579,7 @@ Public Class dlgBarAndPieChart
         ucrChkBacktoback.SetRCode(clsScaleYSymmetricFunction, bReset)
         ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
-        ucrChkAddLabels.SetRCode(clsBaseOperator, bReset)
+        ucrChkAddLabelsText.SetRCode(clsBaseOperator, bReset)
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
         ucrNudLollipopSize.SetRCode(clsGeomLollipopFunction, bReset)
@@ -591,6 +595,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudSize.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrReceiverWordcloudColor.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrReceiverWordcloudAngle.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
+        ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -689,17 +694,6 @@ Public Class dlgBarAndPieChart
 
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
-            If ucrChkAddLabels.Checked Then
-                ucrInputPlace.Visible = False
-                ucrReceiverLabel.Visible = False
-                ucrInputLabelPosition.Visible = True
-                ucrInputLabelColour.Visible = True
-                ucrInputLabelSize.Visible = True
-            Else
-                ucrInputLabelPosition.Visible = False
-                ucrInputLabelColour.Visible = False
-                ucrInputLabelSize.Visible = False
-            End If
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
@@ -712,17 +706,6 @@ Public Class dlgBarAndPieChart
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
         ElseIf rdoTreeMap.Checked Then
-            If ucrChkAddLabels.Checked Then
-                ucrInputPlace.Visible = True
-                ucrReceiverLabel.Visible = True
-                ucrInputLabelPosition.Visible = False
-                ucrInputLabelColour.Visible = False
-                ucrInputLabelSize.Visible = False
-            Else
-                ucrInputPlace.Visible = False
-                ucrReceiverLabel.Visible = False
-                'clsGeomTreemapAesFunction.RemoveParameterByName("label")
-            End If
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
         Else
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=1)
@@ -839,7 +822,7 @@ Public Class dlgBarAndPieChart
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
             End If
-        Else
+        ElseIf rdoFrequency.Checked Then
             If ucrVariablesAsFactorForBarChart.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
@@ -856,7 +839,6 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
             clsRgeomBarFunction2.RemoveParameterByName("stat")
             clsBaseOperator.RemoveParameterByName("geom_treemap")
-            clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
         End If
 
@@ -878,6 +860,7 @@ Public Class dlgBarAndPieChart
 
         If rdoWordCloud.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_treemap")
+            clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_bar")
             cmdBarChartOptions.Text = "Wordcloud Options"
             clsBaseOperator.AddParameter("geom_text_wordcloud", clsRFunctionParameter:=clsGeomTextWordcloudFunction, iPosition:=2)
@@ -886,7 +869,7 @@ Public Class dlgBarAndPieChart
         UpdateParameter()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabels.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
@@ -964,22 +947,12 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
-        If rdoFrequency.Checked Or rdoValue.Checked Then
-            If ucrChkAddLabels.Checked Then
-                clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
-            Else
-                clsBaseOperator.RemoveParameterByName("geom_text")
-            End If
-        ElseIf rdoTreeMap.Checked Then
-            If ucrChkAddLabels.Checked Then
-                clsBaseOperator.AddParameter("geom_treemap_text", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
-            Else
-                clsBaseOperator.RemoveParameterByName("geom_treemap_text")
-            End If
-
+    Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
+        If ucrChkAddLabelsText.Checked Then
+            clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_text")
         End If
-
     End Sub
 
     Private Sub SetGeomTextOptions()
@@ -1010,19 +983,14 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged,
-            ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged
+            ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrInputLayout_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLayout.ControlValueChanged
-        If ucrInputLayout.GetText = "squarified" Then
-            clsGeomTreemapTextFunction.AddParameter("layout", "squarified", iPosition:=0)
-        ElseIf ucrInputLayout.GetText = "scol" Then
-            clsGeomTreemapTextFunction.AddParameter("layout", "scol", iPosition:=0)
-        ElseIf ucrInputLayout.GetText = "srow" Then
-            clsGeomTreemapTextFunction.AddParameter("layout", "srow", iPosition:=0)
-        ElseIf ucrInputLayout.GetText = "fixed" Then
-            clsGeomTreemapTextFunction.AddParameter("layout", "fixed", iPosition:=0)
+    Private Sub ucrChkAddLabelsTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsTreemap.ControlValueChanged
+        If ucrChkAddLabelsTreemap.Checked Then
+            clsBaseOperator.AddParameter("geom_treemap_text", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
 End Class

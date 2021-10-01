@@ -71,6 +71,7 @@ Partial Class dlgBarAndPieChart
         Me.lblWordcloudSize = New System.Windows.Forms.Label()
         Me.lblWordcloudColor = New System.Windows.Forms.Label()
         Me.lblWordcloudAngle = New System.Windows.Forms.Label()
+        Me.ucrChkAddLabelsTreemap = New instat.ucrCheck()
         Me.ucrReceiverWordcloudLabel = New instat.ucrReceiverSingle()
         Me.ucrReceiverWordcloudSize = New instat.ucrReceiverSingle()
         Me.ucrReceiverWordcloudColor = New instat.ucrReceiverSingle()
@@ -92,7 +93,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelSize = New instat.ucrInputComboBox()
         Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
-        Me.ucrChkAddLabels = New instat.ucrCheck()
+        Me.ucrChkAddLabelsText = New instat.ucrCheck()
         Me.ucrChkPolarCoordinates = New instat.ucrCheck()
         Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrChkBacktoback = New instat.ucrCheck()
@@ -293,6 +294,12 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblWordcloudAngle, "lblWordcloudAngle")
         Me.lblWordcloudAngle.Name = "lblWordcloudAngle"
         '
+        'ucrChkAddLabelsTreemap
+        '
+        Me.ucrChkAddLabelsTreemap.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabelsTreemap, "ucrChkAddLabelsTreemap")
+        Me.ucrChkAddLabelsTreemap.Name = "ucrChkAddLabelsTreemap"
+        '
         'ucrReceiverWordcloudLabel
         '
         Me.ucrReceiverWordcloudLabel.frmParent = Me
@@ -464,11 +471,11 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrInputLabelColour, "ucrInputLabelColour")
         Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
         '
-        'ucrChkAddLabels
+        'ucrChkAddLabelsText
         '
-        Me.ucrChkAddLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
-        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        Me.ucrChkAddLabelsText.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabelsText, "ucrChkAddLabelsText")
+        Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
         '
         'ucrChkPolarCoordinates
         '
@@ -556,6 +563,7 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkAddLabelsTreemap)
         Me.Controls.Add(Me.lblWordcloudAngle)
         Me.Controls.Add(Me.lblWordcloudColor)
         Me.Controls.Add(Me.lblWordcloudSize)
@@ -595,7 +603,7 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrInputLabelPosition)
         Me.Controls.Add(Me.ucrInputLabelColour)
-        Me.Controls.Add(Me.ucrChkAddLabels)
+        Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.rdoDonut)
         Me.Controls.Add(Me.rdoPie)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
@@ -652,7 +660,7 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrPnlPolar As UcrPanel
     Friend WithEvents rdoDonut As RadioButton
     Friend WithEvents rdoPie As RadioButton
-    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents ucrChkAddLabelsText As ucrCheck
     Friend WithEvents lblLabelColour As Label
     Friend WithEvents lblLabelPosition As Label
     Friend WithEvents ucrInputLabelPosition As ucrInputComboBox
@@ -694,4 +702,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrReceiverWordcloudSize As ucrReceiverSingle
     Friend WithEvents ucrReceiverWordcloudColor As ucrReceiverSingle
     Friend WithEvents ucrReceiverWordcloudAngle As ucrReceiverSingle
+    Friend WithEvents ucrChkAddLabelsTreemap As ucrCheck
 End Class
