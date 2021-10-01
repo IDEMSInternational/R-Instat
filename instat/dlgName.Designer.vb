@@ -48,6 +48,9 @@ Partial Class dlgName
         Me.rdoToTitle = New System.Windows.Forms.RadioButton()
         Me.rdoToLower = New System.Windows.Forms.RadioButton()
         Me.rdoToSentence = New System.Windows.Forms.RadioButton()
+        Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
+        Me.lblCase = New System.Windows.Forms.Label()
+        Me.ucrInputCase = New instat.ucrInputComboBox()
         Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
@@ -57,32 +60,34 @@ Partial Class dlgName
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlCase = New instat.UcrPanel()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblName
         '
-        Me.lblName.Location = New System.Drawing.Point(258, 112)
+        Me.lblName.Location = New System.Drawing.Point(317, 112)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(100, 23)
-        Me.lblName.TabIndex = 9
+        Me.lblName.TabIndex = 11
         Me.lblName.Tag = "New_Name"
         Me.lblName.Text = "New Name:"
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.Location = New System.Drawing.Point(258, 66)
+        Me.lblCurrentName.Location = New System.Drawing.Point(317, 66)
         Me.lblCurrentName.Name = "lblCurrentName"
         Me.lblCurrentName.Size = New System.Drawing.Size(100, 15)
-        Me.lblCurrentName.TabIndex = 1
+        Me.lblCurrentName.TabIndex = 5
         Me.lblCurrentName.Text = "Current Name:"
         '
         'lblVariableLabel
         '
         Me.lblVariableLabel.AutoSize = True
-        Me.lblVariableLabel.Location = New System.Drawing.Point(258, 160)
+        Me.lblVariableLabel.Location = New System.Drawing.Point(317, 160)
         Me.lblVariableLabel.Name = "lblVariableLabel"
         Me.lblVariableLabel.Size = New System.Drawing.Size(74, 13)
-        Me.lblVariableLabel.TabIndex = 10
+        Me.lblVariableLabel.TabIndex = 12
         Me.lblVariableLabel.Text = "Column Label:"
         '
         'rdoMultiple
@@ -94,7 +99,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(209, 12)
+        Me.rdoMultiple.Location = New System.Drawing.Point(269, 12)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -113,7 +118,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(99, 12)
+        Me.rdoSingle.Location = New System.Drawing.Point(159, 12)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -125,7 +130,7 @@ Partial Class dlgName
         '
         'lblColumns
         '
-        Me.lblColumns.Location = New System.Drawing.Point(258, 66)
+        Me.lblColumns.Location = New System.Drawing.Point(317, 66)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(55, 15)
         Me.lblColumns.TabIndex = 4
@@ -134,7 +139,7 @@ Partial Class dlgName
         'rdoToUpper
         '
         Me.rdoToUpper.AutoSize = True
-        Me.rdoToUpper.Location = New System.Drawing.Point(258, 198)
+        Me.rdoToUpper.Location = New System.Drawing.Point(10, 16)
         Me.rdoToUpper.Name = "rdoToUpper"
         Me.rdoToUpper.Size = New System.Drawing.Size(70, 17)
         Me.rdoToUpper.TabIndex = 11
@@ -145,7 +150,7 @@ Partial Class dlgName
         'rdoToTitle
         '
         Me.rdoToTitle.AutoSize = True
-        Me.rdoToTitle.Location = New System.Drawing.Point(334, 198)
+        Me.rdoToTitle.Location = New System.Drawing.Point(95, 16)
         Me.rdoToTitle.Name = "rdoToTitle"
         Me.rdoToTitle.Size = New System.Drawing.Size(61, 17)
         Me.rdoToTitle.TabIndex = 13
@@ -156,7 +161,7 @@ Partial Class dlgName
         'rdoToLower
         '
         Me.rdoToLower.AutoSize = True
-        Me.rdoToLower.Location = New System.Drawing.Point(258, 217)
+        Me.rdoToLower.Location = New System.Drawing.Point(10, 35)
         Me.rdoToLower.Name = "rdoToLower"
         Me.rdoToLower.Size = New System.Drawing.Size(70, 17)
         Me.rdoToLower.TabIndex = 12
@@ -167,7 +172,7 @@ Partial Class dlgName
         'rdoToSentence
         '
         Me.rdoToSentence.AutoSize = True
-        Me.rdoToSentence.Location = New System.Drawing.Point(334, 217)
+        Me.rdoToSentence.Location = New System.Drawing.Point(95, 35)
         Me.rdoToSentence.Name = "rdoToSentence"
         Me.rdoToSentence.Size = New System.Drawing.Size(87, 17)
         Me.rdoToSentence.TabIndex = 14
@@ -175,24 +180,53 @@ Partial Class dlgName
         Me.rdoToSentence.Text = "To Sentence"
         Me.rdoToSentence.UseVisualStyleBackColor = True
         '
+        'rdoMakeCleanNames
+        '
+        Me.rdoMakeCleanNames.AutoSize = True
+        Me.rdoMakeCleanNames.Location = New System.Drawing.Point(10, 58)
+        Me.rdoMakeCleanNames.Name = "rdoMakeCleanNames"
+        Me.rdoMakeCleanNames.Size = New System.Drawing.Size(88, 17)
+        Me.rdoMakeCleanNames.TabIndex = 19
+        Me.rdoMakeCleanNames.TabStop = True
+        Me.rdoMakeCleanNames.Text = "Clean Names"
+        Me.rdoMakeCleanNames.UseVisualStyleBackColor = True
+        '
+        'lblCase
+        '
+        Me.lblCase.Location = New System.Drawing.Point(109, 60)
+        Me.lblCase.Name = "lblCase"
+        Me.lblCase.Size = New System.Drawing.Size(37, 16)
+        Me.lblCase.TabIndex = 21
+        Me.lblCase.Text = "Case:"
+        '
+        'ucrInputCase
+        '
+        Me.ucrInputCase.AddQuotesIfUnrecognised = True
+        Me.ucrInputCase.GetSetSelectedIndex = -1
+        Me.ucrInputCase.IsReadOnly = False
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 57)
+        Me.ucrInputCase.Name = "ucrInputCase"
+        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputCase.TabIndex = 20
+        '
         'ucrSaveDataFrame
         '
         Me.ucrSaveDataFrame.Location = New System.Drawing.Point(13, 252)
         Me.ucrSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
         Me.ucrSaveDataFrame.Size = New System.Drawing.Size(238, 23)
-        Me.ucrSaveDataFrame.TabIndex = 15
+        Me.ucrSaveDataFrame.TabIndex = 14
         '
         'ucrReceiverColumns
         '
         Me.ucrReceiverColumns.frmParent = Me
-        Me.ucrReceiverColumns.Location = New System.Drawing.Point(258, 81)
+        Me.ucrReceiverColumns.Location = New System.Drawing.Point(317, 81)
         Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
         Me.ucrReceiverColumns.Selector = Nothing
         Me.ucrReceiverColumns.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverColumns.strNcFilePath = ""
-        Me.ucrReceiverColumns.TabIndex = 8
+        Me.ucrReceiverColumns.TabIndex = 10
         Me.ucrReceiverColumns.ucrSelector = Nothing
         '
         'ucrInputVariableLabel
@@ -200,21 +234,21 @@ Partial Class dlgName
         Me.ucrInputVariableLabel.AddQuotesIfUnrecognised = True
         Me.ucrInputVariableLabel.IsMultiline = False
         Me.ucrInputVariableLabel.IsReadOnly = False
-        Me.ucrInputVariableLabel.Location = New System.Drawing.Point(258, 175)
+        Me.ucrInputVariableLabel.Location = New System.Drawing.Point(317, 175)
         Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
         Me.ucrInputVariableLabel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputVariableLabel.TabIndex = 7
+        Me.ucrInputVariableLabel.TabIndex = 8
         '
         'ucrReceiverName
         '
         Me.ucrReceiverName.frmParent = Me
-        Me.ucrReceiverName.Location = New System.Drawing.Point(258, 81)
+        Me.ucrReceiverName.Location = New System.Drawing.Point(317, 81)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
         Me.ucrReceiverName.Size = New System.Drawing.Size(137, 21)
         Me.ucrReceiverName.strNcFilePath = ""
-        Me.ucrReceiverName.TabIndex = 5
+        Me.ucrReceiverName.TabIndex = 6
         Me.ucrReceiverName.ucrSelector = Nothing
         '
         'ucrInputNewName
@@ -222,10 +256,10 @@ Partial Class dlgName
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(258, 128)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(317, 128)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNewName.TabIndex = 6
+        Me.ucrInputNewName.TabIndex = 7
         '
         'ucrSelectVariables
         '
@@ -240,35 +274,48 @@ Partial Class dlgName
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 281)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 291)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 16
+        Me.ucrBase.TabIndex = 0
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(40, 3)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(134, 4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(303, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrPnlCase
         '
-        Me.ucrPnlCase.Location = New System.Drawing.Point(258, 184)
+        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(171, 62)
+        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 69)
         Me.ucrPnlCase.TabIndex = 17
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrInputCase)
+        Me.grpOptions.Controls.Add(Me.lblCase)
+        Me.grpOptions.Controls.Add(Me.rdoToUpper)
+        Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
+        Me.grpOptions.Controls.Add(Me.rdoToTitle)
+        Me.grpOptions.Controls.Add(Me.rdoToLower)
+        Me.grpOptions.Controls.Add(Me.rdoToSentence)
+        Me.grpOptions.Controls.Add(Me.ucrPnlCase)
+        Me.grpOptions.Location = New System.Drawing.Point(257, 191)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(259, 97)
+        Me.grpOptions.TabIndex = 13
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(436, 337)
-        Me.Controls.Add(Me.rdoToSentence)
+        Me.ClientSize = New System.Drawing.Size(538, 346)
         Me.Controls.Add(Me.ucrSaveDataFrame)
-        Me.Controls.Add(Me.rdoToLower)
-        Me.Controls.Add(Me.rdoToTitle)
-        Me.Controls.Add(Me.rdoToUpper)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrReceiverColumns)
         Me.Controls.Add(Me.rdoSingle)
@@ -282,14 +329,16 @@ Partial Class dlgName
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrPnlCase)
+        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgName"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rename_Data_Column"
-        Me.Text = "Rename Column"
+        Me.Text = "Rename Columns"
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -313,4 +362,8 @@ Partial Class dlgName
     Friend WithEvents ucrSaveDataFrame As ucrSave
     Friend WithEvents ucrPnlCase As UcrPanel
     Friend WithEvents rdoToSentence As RadioButton
+    Friend WithEvents rdoMakeCleanNames As RadioButton
+    Friend WithEvents ucrInputCase As ucrInputComboBox
+    Friend WithEvents lblCase As Label
+    Friend WithEvents grpOptions As GroupBox
 End Class

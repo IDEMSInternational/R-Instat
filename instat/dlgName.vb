@@ -44,6 +44,7 @@ Public Class dlgName
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 33
+        Dim dctCaseOptions As New Dictionary(Of String, String)
 
         'Selector
         ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
@@ -70,10 +71,13 @@ Public Class dlgName
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverColumns, ucrSaveDataFrame}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
         ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
+        ucrInputCase.SetLinkedDisplayControl(lblCase)
+        ucrPnlCase.SetLinkedDisplayControl(grpOptions)
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 2))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -85,15 +89,34 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
         ucrPnlCase.AddRadioButton(rdoToTitle, "stringr::str_to_title")
         ucrPnlCase.AddRadioButton(rdoToSentence, "stringr::str_to_sentence")
-        ucrPnlCase.AddParameterValuesCondition(rdoToUpper, ".fn", "toupper")
-        ucrPnlCase.AddParameterValuesCondition(rdoToLower, ".fn", "tolower")
-        ucrPnlCase.AddParameterValuesCondition(rdoToTitle, ".fn", "stringr::str_to_title")
-        ucrPnlCase.AddParameterValuesCondition(rdoToSentence, ".fn", "stringr::str_to_sentence")
+        ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
 
         ucrSaveDataFrame.SetLabelText("New Data Frame Name:")
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetPrefix("new_data_frame")
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectVariables.ucrAvailableDataFrames)
+
+        ucrInputCase.SetParameter(New RParameter("case", 3))
+        dctCaseOptions.Add("Snake", Chr(34) & "snake" & Chr(34))
+        dctCaseOptions.Add("Small camel", Chr(34) & "small_camel" & Chr(34))
+        dctCaseOptions.Add("Big camel", Chr(34) & "big_camel" & Chr(34))
+        dctCaseOptions.Add("Screaming snake", Chr(34) & "screaming_snake" & Chr(34))
+        dctCaseOptions.Add("Parsed", Chr(34) & "parsed" & Chr(34))
+        dctCaseOptions.Add("Mixed", Chr(34) & "mixed" & Chr(34))
+        dctCaseOptions.Add("Lower upper", Chr(34) & "lower_upper" & Chr(34))
+        dctCaseOptions.Add("Upper lower", Chr(34) & "upper_lower" & Chr(34))
+        dctCaseOptions.Add("Swap", Chr(34) & "swap" & Chr(34))
+        dctCaseOptions.Add("All caps", Chr(34) & "all_caps" & Chr(34))
+        dctCaseOptions.Add("Lower camel", Chr(34) & "lower_camel" & Chr(34))
+        dctCaseOptions.Add("Upper camel", Chr(34) & "upper_camel" & Chr(34))
+        dctCaseOptions.Add("Internal parsing", Chr(34) & "internal_parsing" & Chr(34))
+        dctCaseOptions.Add("None", Chr(34) & "none" & Chr(34))
+        dctCaseOptions.Add("Flip", Chr(34) & "flip" & Chr(34))
+        dctCaseOptions.Add("Sentence", Chr(34) & "sentence" & Chr(34))
+        dctCaseOptions.Add("Random", Chr(34) & "random" & Chr(34))
+        dctCaseOptions.Add("Title", Chr(34) & "title" & Chr(34))
+        ucrInputCase.SetDropDownStyleAsNonEditable()
+        ucrInputCase.SetItems(dctCaseOptions)
     End Sub
 
     Public Sub SetDefaults()
@@ -108,6 +131,7 @@ Public Class dlgName
         clsRenameWithFunction.SetPackageName("dplyr")
         clsRenameWithFunction.SetRCommand("rename_with")
         clsRenameWithFunction.AddParameter(".fn", "toupper", iPosition:=1)
+        clsRenameWithFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=3)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
@@ -135,6 +159,7 @@ Public Class dlgName
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverColumns.SetRCode(clsRenameWithFunction, bReset)
         ucrPnlCase.SetRCode(clsRenameWithFunction, bReset)
+        ucrInputCase.SetRCode(clsRenameWithFunction, bReset)
         ucrSaveDataFrame.SetRCode(clsRenameWithFunction, bReset)
     End Sub
 
