@@ -206,12 +206,6 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
-    Private Sub DefaultNewName()
-        If ((Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty)) Then
-            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
-        End If
-    End Sub
-
     Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
         Dim strCurrentLabels As List(Of String)
         Dim strNewLabels As List(Of String)
