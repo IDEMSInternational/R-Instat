@@ -376,6 +376,9 @@ Public Class dlgClimaticBoxPlot
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        'Making sure the filter isn't discarded
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
+        OmitFilter()
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         bResetBoxLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
