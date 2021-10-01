@@ -275,7 +275,9 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        DefaultNewName()
+        If (Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty) Then
+            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
+        End If
     End Sub
 
     Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrFactorLevels.ControlContentsChanged
