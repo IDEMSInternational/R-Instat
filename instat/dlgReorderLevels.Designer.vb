@@ -58,13 +58,7 @@ Partial Class dlgReorderLevels
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoAppearance = New System.Windows.Forms.RadioButton()
         Me.rdoReverseLevels = New System.Windows.Forms.RadioButton()
-        Me.ttAsIs = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttAppearance = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttFrequency = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttSequence = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttShift = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttShuffle = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttAnonymise = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttMethods = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverFactorX = New instat.ucrReceiverSingle()
         Me.ucrInputOrder = New instat.ucrInputComboBox()
         Me.ucrInputPrefix = New instat.ucrInputTextBox()
@@ -165,7 +159,6 @@ Partial Class dlgReorderLevels
         '
         resources.ApplyResources(Me.rdoAlphabetical, "rdoAlphabetical")
         Me.rdoAlphabetical.Name = "rdoAlphabetical"
-        Me.rdoAlphabetical.TabStop = True
         Me.rdoAlphabetical.UseVisualStyleBackColor = True
         '
         'lblOrder
@@ -182,92 +175,49 @@ Partial Class dlgReorderLevels
         '
         resources.ApplyResources(Me.rdoAnonymise, "rdoAnonymise")
         Me.rdoAnonymise.Name = "rdoAnonymise"
-        Me.rdoAnonymise.TabStop = True
         Me.rdoAnonymise.UseVisualStyleBackColor = True
         '
         'rdoShuffle
         '
         resources.ApplyResources(Me.rdoShuffle, "rdoShuffle")
         Me.rdoShuffle.Name = "rdoShuffle"
-        Me.rdoShuffle.TabStop = True
         Me.rdoShuffle.UseVisualStyleBackColor = True
         '
         'rdoShift
         '
         resources.ApplyResources(Me.rdoShift, "rdoShift")
         Me.rdoShift.Name = "rdoShift"
-        Me.rdoShift.TabStop = True
         Me.rdoShift.UseVisualStyleBackColor = True
         '
         'rdoSequence
         '
         resources.ApplyResources(Me.rdoSequence, "rdoSequence")
         Me.rdoSequence.Name = "rdoSequence"
-        Me.rdoSequence.TabStop = True
         Me.rdoSequence.UseVisualStyleBackColor = True
         '
         'rdoFrequency
         '
         resources.ApplyResources(Me.rdoFrequency, "rdoFrequency")
         Me.rdoFrequency.Name = "rdoFrequency"
-        Me.rdoFrequency.TabStop = True
         Me.rdoFrequency.UseVisualStyleBackColor = True
         '
         'rdoAppearance
         '
         resources.ApplyResources(Me.rdoAppearance, "rdoAppearance")
         Me.rdoAppearance.Name = "rdoAppearance"
-        Me.rdoAppearance.TabStop = True
         Me.rdoAppearance.UseVisualStyleBackColor = True
         '
         'rdoReverseLevels
         '
         resources.ApplyResources(Me.rdoReverseLevels, "rdoReverseLevels")
         Me.rdoReverseLevels.Name = "rdoReverseLevels"
-        Me.rdoReverseLevels.TabStop = True
         Me.rdoReverseLevels.UseVisualStyleBackColor = True
         '
-        'ttAsIs
+        'ttMethods
         '
-        Me.ttAsIs.AutoPopDelay = 10000
-        Me.ttAsIs.InitialDelay = 500
-        Me.ttAsIs.ReshowDelay = 100
-        '
-        'ttAppearance
-        '
-        Me.ttAppearance.AutoPopDelay = 10000
-        Me.ttAppearance.InitialDelay = 500
-        Me.ttAppearance.ReshowDelay = 100
-        '
-        'ttFrequency
-        '
-        Me.ttFrequency.AutoPopDelay = 10000
-        Me.ttFrequency.InitialDelay = 500
-        Me.ttFrequency.ReshowDelay = 100
-        '
-        'ttSequence
-        '
-        Me.ttSequence.AutoPopDelay = 10000
-        Me.ttSequence.InitialDelay = 500
-        Me.ttSequence.ReshowDelay = 100
-        '
-        'ttShift
-        '
-        Me.ttShift.AutoPopDelay = 10000
-        Me.ttShift.InitialDelay = 500
-        Me.ttShift.ReshowDelay = 100
-        '
-        'ttShuffle
-        '
-        Me.ttShuffle.AutoPopDelay = 10000
-        Me.ttShuffle.InitialDelay = 500
-        Me.ttShuffle.ReshowDelay = 100
-        '
-        'ttAnonymise
-        '
-        Me.ttAnonymise.AutoPopDelay = 10000
-        Me.ttAnonymise.InitialDelay = 500
-        Me.ttAnonymise.ReshowDelay = 100
+        Me.ttMethods.AutoPopDelay = 10000
+        Me.ttMethods.InitialDelay = 500
+        Me.ttMethods.ReshowDelay = 100
         '
         'ucrReceiverFactorX
         '
@@ -433,13 +383,7 @@ Partial Class dlgReorderLevels
     Friend WithEvents rdoAppearance As RadioButton
     Friend WithEvents rdoReverseLevels As RadioButton
     Friend WithEvents ucrPnlProperty As UcrPanel
-    Friend WithEvents ttAsIs As ToolTip
-    Friend WithEvents ttAppearance As ToolTip
-    Friend WithEvents ttFrequency As ToolTip
-    Friend WithEvents ttSequence As ToolTip
-    Friend WithEvents ttShift As ToolTip
-    Friend WithEvents ttShuffle As ToolTip
-    Friend WithEvents ttAnonymise As ToolTip
+    Friend WithEvents ttMethods As ToolTip
     Friend WithEvents ucrReceiverFactorX As ucrReceiverSingle
     Friend WithEvents lblOrder As Label
     Friend WithEvents ucrInputOrder As ucrInputComboBox

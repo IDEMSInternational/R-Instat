@@ -18,18 +18,18 @@ Imports instat.Translations
 Public Class dlgReorderLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsReorder As New RFunction
-    Private clsForcatsInOrder As New RFunction
-    Private clsForcatsInFreq As New RFunction
-    Private clsForcatsInSeq As New RFunction
-    Private clsForcatsShift As New RFunction
-    Private clsForcatsShuffle As New RFunction
-    Private clsForcatsAnonymise As New RFunction
-    Private clsForcatsReverse As New RFunction
+    Private clsReorderFunction As New RFunction
+    Private clsForcatsInOrderFunction As New RFunction
+    Private clsForcatInFreqFunction As New RFunction
+    Private clsForcatsInSeqFunction As New RFunction
+    Private clsForcatsShiftFunction As New RFunction
+    Private clsForcatsShuffleFunction As New RFunction
+    Private clsForcatsAnonymiseFunction As New RFunction
+    Private clsForcatsReverseFunction As New RFunction
     Private clsForcatsRevFunction As New RFunction
-    Private clsForcatsReorder As New RFunction
+    Private clsForcatsReorderFunction As New RFunction
     Private clsForcatsInFreqFunction As New RFunction
-    Private clsForcatsRelevel As New RFunction
+    Private clsForcatsRelevelFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
@@ -43,7 +43,7 @@ Public Class dlgReorderLevels
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -75,7 +75,6 @@ Public Class dlgReorderLevels
         'Setting receiver data types and parameters
         ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
-        ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsString()
@@ -85,8 +84,6 @@ Public Class dlgReorderLevels
         ucrReceiverFactorX.strSelectorHeading = "Factors"
         ucrReceiverFactorX.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactorX.SetParameterIsRFunction()
-        ucrReceiverFactorX.SetMeAsReceiver()
-        ucrReceiverFactorX.bAutoFill = True
 
         'Set reorder scroll list view & datatype accepted
         ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
@@ -98,7 +95,6 @@ Public Class dlgReorderLevels
         ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.strSelectorHeading = "Numerics/Dates/Logical"
         ucrReceiverVariable.SetIncludedDataTypes({"numeric", "dates", "logical"})
-        ucrReceiverVariable.bAutoFill = True
 
         ucrInputOptions.SetParameter(New RParameter(".fun", 2))
         dctOptions.Add("Median", "median")
@@ -153,28 +149,28 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetLabelText("Save As:")
         ucrSaveResults.SetIsComboBox()
 
-        ttAsIs.SetToolTip(rdoReverseLevels, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
-        ttAppearance.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
-        ttFrequency.SetToolTip(rdoFrequency, "In the order of the relative frequencies of each level.")
-        ttSequence.SetToolTip(rdoSequence, "In numerical order of the levels (At least one level must be numerical.)")
-        ttShift.SetToolTip(rdoShift, "Move the levels down: Example:  If 1, levels a, b, c, become b, c, a.  Use -1 to move up.")
-        ttShuffle.SetToolTip(rdoShuffle, "Change into random order.")
-        ttAnonymise.SetToolTip(rdoAnonymise, "Replace factor levels with arbitrary numeric identifiers.")
+        ttMethods.SetToolTip(rdoReverseLevels, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
+        'ttAppearance.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
+        'ttFrequency.SetToolTip(rdoFrequency, "In the order of the relative frequencies of each level.")
+        'ttSequence.SetToolTip(rdoSequence, "In numerical order of the levels (At least one level must be numerical.)")
+        'ttShift.SetToolTip(rdoShift, "Move the levels down: Example:  If 1, levels a, b, c, become b, c, a.  Use -1 to move up.")
+        'ttShuffle.SetToolTip(rdoShuffle, "Change into random order.")
+        'ttAnonymise.SetToolTip(rdoAnonymise, "Replace factor levels with arbitrary numeric identifiers.")
     End Sub
 
     Private Sub SetDefaults()
-        clsReorder = New RFunction
-        clsForcatsInOrder = New RFunction
-        clsForcatsInFreq = New RFunction
-        clsForcatsInSeq = New RFunction
-        clsForcatsShift = New RFunction
-        clsForcatsShuffle = New RFunction
-        clsForcatsAnonymise = New RFunction
-        clsForcatsReverse = New RFunction
-        clsForcatsReorder = New RFunction
+        clsReorderFunction = New RFunction
+        clsForcatsInOrderFunction = New RFunction
+        clsForcatInFreqFunction = New RFunction
+        clsForcatsInSeqFunction = New RFunction
+        clsForcatsShiftFunction = New RFunction
+        clsForcatsShuffleFunction = New RFunction
+        clsForcatsAnonymiseFunction = New RFunction
+        clsForcatsReverseFunction = New RFunction
+        clsForcatsReorderFunction = New RFunction
         clsForcatsRevFunction = New RFunction
         clsForcatsInFreqFunction = New RFunction
-        clsForcatsRelevel = New RFunction
+        clsForcatsRelevelFunction = New RFunction
         clsDummyFunction = New RFunction
 
         'Reset
@@ -187,83 +183,83 @@ Public Class dlgReorderLevels
         clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
 
         'Set default function
-        clsForcatsInOrder.SetPackageName("forcats")
-        clsForcatsInOrder.SetRCommand("fct_inorder")
-        clsForcatsInOrder.AddParameter("ordered", "NA", iPosition:=1)
+        clsForcatsInOrderFunction.SetPackageName("forcats")
+        clsForcatsInOrderFunction.SetRCommand("fct_inorder")
+        clsForcatsInOrderFunction.AddParameter("ordered", "NA", iPosition:=1)
 
-        clsForcatsInFreq.SetPackageName("forcats")
-        clsForcatsInFreq.SetRCommand("fct_infreq")
+        clsForcatInFreqFunction.SetPackageName("forcats")
+        clsForcatInFreqFunction.SetRCommand("fct_infreq")
 
         clsForcatsInFreqFunction.SetPackageName("forcats")
         clsForcatsInFreqFunction.SetRCommand("fct_infreq")
 
-        clsForcatsInSeq.SetPackageName("forcats")
-        clsForcatsInSeq.SetRCommand("fct_inseq")
-        clsForcatsInSeq.AddParameter("ordered", "NA", iPosition:=1)
+        clsForcatsInSeqFunction.SetPackageName("forcats")
+        clsForcatsInSeqFunction.SetRCommand("fct_inseq")
+        clsForcatsInSeqFunction.AddParameter("ordered", "NA", iPosition:=1)
 
-        clsForcatsShift.SetPackageName("forcats")
-        clsForcatsShift.SetRCommand("fct_shift")
-        clsForcatsShift.AddParameter("n", 1, iPosition:=1)
+        clsForcatsShiftFunction.SetPackageName("forcats")
+        clsForcatsShiftFunction.SetRCommand("fct_shift")
+        clsForcatsShiftFunction.AddParameter("n", 1, iPosition:=1)
 
-        clsForcatsShuffle.SetPackageName("forcats")
-        clsForcatsShuffle.SetRCommand("fct_shuffle")
+        clsForcatsShuffleFunction.SetPackageName("forcats")
+        clsForcatsShuffleFunction.SetRCommand("fct_shuffle")
 
-        clsForcatsAnonymise.SetPackageName("forcats")
-        clsForcatsAnonymise.SetRCommand("fct_anon")
+        clsForcatsAnonymiseFunction.SetPackageName("forcats")
+        clsForcatsAnonymiseFunction.SetRCommand("fct_anon")
 
-        clsForcatsReverse.SetPackageName("forcats")
-        clsForcatsReverse.SetRCommand("fct_rev")
+        clsForcatsReverseFunction.SetPackageName("forcats")
+        clsForcatsReverseFunction.SetRCommand("fct_rev")
 
         clsForcatsRevFunction.SetPackageName("forcats")
         clsForcatsRevFunction.SetRCommand("fct_rev")
         clsForcatsRevFunction.AddParameter("f", clsRFunctionParameter:=clsForcatsInFreqFunction, iPosition:=0)
 
-        clsForcatsRelevel.SetPackageName("forcats")
-        clsForcatsRelevel.SetRCommand("fct_relevel")
-        clsForcatsRelevel.AddParameter("sort", "sort", iPosition:=1)
+        clsForcatsRelevelFunction.SetPackageName("forcats")
+        clsForcatsRelevelFunction.SetRCommand("fct_relevel")
+        clsForcatsRelevelFunction.AddParameter("sort", "sort", iPosition:=1)
 
-        clsForcatsReorder.SetPackageName("forcats")
-        clsForcatsReorder.SetRCommand("fct_reorder")
-        clsForcatsReorder.AddParameter(".fun", "median", iPosition:=2)
-        clsForcatsReorder.AddParameter(".desc", "FALSE", iPosition:=3)
+        clsForcatsReorderFunction.SetPackageName("forcats")
+        clsForcatsReorderFunction.SetRCommand("fct_reorder")
+        clsForcatsReorderFunction.AddParameter(".fun", "median", iPosition:=2)
+        clsForcatsReorderFunction.AddParameter(".desc", "FALSE", iPosition:=3)
 
-        clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        clsReorder.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
+        clsReorderFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        clsReorderFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInFreq, New RParameter("f", 0), iAdditionalPairNo:=1)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInSeq, New RParameter("f", 0), iAdditionalPairNo:=2)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShift, New RParameter("f", 0), iAdditionalPairNo:=3)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShuffle, New RParameter("f", 0), iAdditionalPairNo:=4)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsAnonymise, New RParameter("f", 0), iAdditionalPairNo:=5)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsReverse, New RParameter("f", 0), iAdditionalPairNo:=6)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInOrder, New RParameter("f", 0), iAdditionalPairNo:=7)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatInFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInSeqFunction, New RParameter("f", 0), iAdditionalPairNo:=2)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShiftFunction, New RParameter("f", 0), iAdditionalPairNo:=3)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsShuffleFunction, New RParameter("f", 0), iAdditionalPairNo:=4)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsAnonymiseFunction, New RParameter("f", 0), iAdditionalPairNo:=5)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsReverseFunction, New RParameter("f", 0), iAdditionalPairNo:=6)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInOrderFunction, New RParameter("f", 0), iAdditionalPairNo:=7)
         ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsInFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=8)
-        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsRelevel, ucrReceiverFactorX.GetParameter(), iAdditionalPairNo:=9)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsInOrder, iAdditionalPairNo:=1)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsInFreq, iAdditionalPairNo:=2)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsInSeq, iAdditionalPairNo:=3)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsShift, iAdditionalPairNo:=4)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsShuffle, iAdditionalPairNo:=5)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsAnonymise, iAdditionalPairNo:=6)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsReorder, iAdditionalPairNo:=7)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsReverse, iAdditionalPairNo:=8)
+        ucrReceiverFactorX.AddAdditionalCodeParameterPair(clsForcatsRelevelFunction, ucrReceiverFactorX.GetParameter(), iAdditionalPairNo:=9)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsInOrderFunction, iAdditionalPairNo:=1)
+        ucrSaveResults.AddAdditionalRCode(clsForcatInFreqFunction, iAdditionalPairNo:=2)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsInSeqFunction, iAdditionalPairNo:=3)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsShiftFunction, iAdditionalPairNo:=4)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsShuffleFunction, iAdditionalPairNo:=5)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsAnonymiseFunction, iAdditionalPairNo:=6)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsReorderFunction, iAdditionalPairNo:=7)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsReverseFunction, iAdditionalPairNo:=8)
         ucrSaveResults.AddAdditionalRCode(clsForcatsRevFunction, iAdditionalPairNo:=9)
-        ucrSaveResults.AddAdditionalRCode(clsForcatsRelevel, iAdditionalPairNo:=10)
-        ucrSelectorFactorLevelsToReorder.SetRCode(clsReorder, bReset)
-        ucrReceiverFactor.SetRCode(clsReorder, bReset)
-        ucrReceiverFactorX.SetRCode(clsForcatsReorder, bReset)
-        ucrReorderFactor.SetRCode(clsReorder, bReset)
-        ucrSaveResults.SetRCode(clsReorder, bReset)
-        ucrInputOptions.SetRCode(clsForcatsReorder, bReset)
-        ucrReceiverVariable.SetRCode(clsForcatsReorder, bReset)
-        ucrChkReverseVariable.SetRCode(clsForcatsReorder, bReset)
-        ucrInputPrefix.SetRCode(clsForcatsAnonymise, bReset)
-        ucrNudShift.SetRCode(clsForcatsShift, bReset)
+        ucrSaveResults.AddAdditionalRCode(clsForcatsRelevelFunction, iAdditionalPairNo:=10)
+        ucrSelectorFactorLevelsToReorder.SetRCode(clsReorderFunction, bReset)
+        ucrReceiverFactor.SetRCode(clsReorderFunction, bReset)
+        ucrReceiverFactorX.SetRCode(clsForcatsReorderFunction, bReset)
+        ucrReorderFactor.SetRCode(clsReorderFunction, bReset)
+        ucrSaveResults.SetRCode(clsReorderFunction, bReset)
+        ucrInputOptions.SetRCode(clsForcatsReorderFunction, bReset)
+        ucrReceiverVariable.SetRCode(clsForcatsReorderFunction, bReset)
+        ucrChkReverseVariable.SetRCode(clsForcatsReorderFunction, bReset)
+        ucrInputPrefix.SetRCode(clsForcatsAnonymiseFunction, bReset)
+        ucrNudShift.SetRCode(clsForcatsShiftFunction, bReset)
         ucrPnlProperty.SetRCode(clsDummyFunction, bReset)
     End Sub
 
@@ -291,7 +287,7 @@ Public Class dlgReorderLevels
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(True)
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
@@ -299,49 +295,75 @@ Public Class dlgReorderLevels
         If rdoProperty.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
             If rdoReverseLevels.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverse)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverseFunction)
                 clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
             End If
             If rdoAppearance.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrder)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrderFunction)
                 clsDummyFunction.AddParameter("checked", "appearance", iPosition:=0)
-            End If
-            If rdoFrequency.Checked Then
+            ElseIf rdoFrequency.Checked Then
                 Select Case ucrInputOrder.GetText()
                     Case strAscending
                         ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRevFunction)
                     Case strDescending
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInFreq)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsForcatInFreqFunction)
                 End Select
                 clsDummyFunction.AddParameter("checked", "frequency", iPosition:=0)
-            End If
-            If rdoSequence.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeq)
+            ElseIf rdoSequence.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeqFunction)
                 clsDummyFunction.AddParameter("checked", "sequence", iPosition:=0)
-            End If
-            If rdoAlphabetical.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevel)
+            ElseIf rdoAlphabetical.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevelFunction)
                 clsDummyFunction.AddParameter("checked", "alphabetic", iPosition:=0)
-            End If
-            If rdoShift.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShift)
+            ElseIf rdoShift.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShiftFunction)
                 clsDummyFunction.AddParameter("checked", "shift", iPosition:=0)
-            End If
-            If rdoShuffle.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffle)
+            ElseIf rdoShuffle.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffleFunction)
                 clsDummyFunction.AddParameter("checked", "shuffle", iPosition:=0)
-            End If
-            If rdoAnonymise.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymise)
+            ElseIf rdoAnonymise.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymiseFunction)
                 clsDummyFunction.AddParameter("checked", "anonymise", iPosition:=0)
             End If
         ElseIf rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
         ElseIf rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorder)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorderFunction)
         End If
+    End Sub
+
+    Private Sub rdoAppearance_MouseHover(sender As Object, e As EventArgs) Handles rdoAppearance.MouseHover
+        ttMethods.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
+    End Sub
+
+    Private Sub rdoFrequency_MouseHover(sender As Object, e As EventArgs) Handles rdoFrequency.MouseHover
+        ttMethods.SetToolTip(rdoFrequency, "In the order of the relative frequencies of each level.")
+    End Sub
+
+    Private Sub rdoSequence_MouseHover(sender As Object, e As EventArgs) Handles rdoSequence.MouseHover
+        ttMethods.SetToolTip(rdoSequence, "In numerical order of the levels (At least one level must be numerical.)")
+    End Sub
+
+    Private Sub rdoAlphabetical_MouseHover(sender As Object, e As EventArgs) Handles rdoAlphabetical.MouseHover
+        ttMethods.SetToolTip(rdoAlphabetical, "Change the levels into to alphabetical order.")
+    End Sub
+
+    Private Sub rdoShift_MouseHover(sender As Object, e As EventArgs) Handles rdoShift.MouseHover
+        ttMethods.SetToolTip(rdoShift, "Move the levels down: Example:  If 1, levels a, b, c, become b, c, a.  Use -1 to move up.")
+    End Sub
+
+    Private Sub rdoShuffle_MouseHover(sender As Object, e As EventArgs) Handles rdoShuffle.MouseHover
+        ttMethods.SetToolTip(rdoShuffle, "Change into random order.")
+    End Sub
+
+    Private Sub rdoAnonymise_MouseHover(sender As Object, e As EventArgs) Handles rdoAnonymise.MouseHover
+        ttMethods.SetToolTip(rdoAnonymise, "Replace factor levels with arbitrary numeric identifiers.")
+    End Sub
+
+    Private Sub rdoReverseLevels_MouseHover(sender As Object, e As EventArgs) Handles rdoReverseLevels.MouseHover
+        ttMethods.SetToolTip(rdoReverseLevels, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged, ucrSaveResults.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrPnlProperty.ControlContentsChanged, ucrReceiverFactorX.ControlContentsChanged

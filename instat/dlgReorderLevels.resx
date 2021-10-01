@@ -133,7 +133,7 @@
     <value>85, 13</value>
   </data>
   <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblFactor.Text" xml:space="preserve">
     <value>Factor Selected:</value>
@@ -271,7 +271,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
+    <value>9</value>
   </data>
   <data name="lblVariable.Text" xml:space="preserve">
     <value>Variable:</value>
@@ -301,7 +301,7 @@
     <value>46, 13</value>
   </data>
   <data name="lblOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>11</value>
   </data>
   <data name="lblOptions.Text" xml:space="preserve">
     <value>Options:</value>
@@ -364,7 +364,7 @@
     <value>112, 17</value>
   </data>
   <data name="rdoAlphabetical.TabIndex" type="System.Int32, mscorlib">
-    <value>85</value>
+    <value>22</value>
   </data>
   <data name="rdoAlphabetical.Text" xml:space="preserve">
     <value>Alphabetical Order</value>
@@ -388,7 +388,7 @@
     <value>81, 21</value>
   </data>
   <data name="ucrInputOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>84</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrInputOrder.Name" xml:space="preserve">
     <value>ucrInputOrder</value>
@@ -402,6 +402,9 @@
   <data name="&gt;&gt;ucrInputOrder.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblOrder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lblOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -409,10 +412,10 @@
     <value>100, 73</value>
   </data>
   <data name="lblOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 16</value>
+    <value>36, 13</value>
   </data>
   <data name="lblOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>83</value>
+    <value>19</value>
   </data>
   <data name="lblOrder.Text" xml:space="preserve">
     <value>Order:</value>
@@ -436,7 +439,7 @@
     <value>85, 21</value>
   </data>
   <data name="ucrInputPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;ucrInputPrefix.Name" xml:space="preserve">
     <value>ucrInputPrefix</value>
@@ -463,7 +466,7 @@
     <value>36, 13</value>
   </data>
   <data name="lblPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>27</value>
   </data>
   <data name="lblPrefix.Text" xml:space="preserve">
     <value>Prefix:</value>
@@ -493,7 +496,7 @@
     <value>76, 17</value>
   </data>
   <data name="rdoAnonymise.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>26</value>
   </data>
   <data name="rdoAnonymise.Text" xml:space="preserve">
     <value>Anonymise</value>
@@ -523,7 +526,7 @@
     <value>58, 17</value>
   </data>
   <data name="rdoShuffle.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>25</value>
   </data>
   <data name="rdoShuffle.Text" xml:space="preserve">
     <value>Shuffle</value>
@@ -547,7 +550,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudShift.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;ucrNudShift.Name" xml:space="preserve">
     <value>ucrNudShift</value>
@@ -574,7 +577,7 @@
     <value>46, 17</value>
   </data>
   <data name="rdoShift.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>23</value>
   </data>
   <data name="rdoShift.Text" xml:space="preserve">
     <value>Shift</value>
@@ -604,7 +607,7 @@
     <value>74, 17</value>
   </data>
   <data name="rdoSequence.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>21</value>
   </data>
   <data name="rdoSequence.Text" xml:space="preserve">
     <value>Sequence</value>
@@ -634,7 +637,7 @@
     <value>75, 17</value>
   </data>
   <data name="rdoFrequency.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>18</value>
   </data>
   <data name="rdoFrequency.Text" xml:space="preserve">
     <value>Frequency</value>
@@ -664,7 +667,7 @@
     <value>83, 17</value>
   </data>
   <data name="rdoAppearance.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>17</value>
   </data>
   <data name="rdoAppearance.Text" xml:space="preserve">
     <value>Appearance</value>
@@ -694,7 +697,7 @@
     <value>99, 17</value>
   </data>
   <data name="rdoReverseLevels.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>16</value>
   </data>
   <data name="rdoReverseLevels.Text" xml:space="preserve">
     <value>Reverse Levels</value>
@@ -718,7 +721,7 @@
     <value>215, 191</value>
   </data>
   <data name="ucrPnlProperty.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrPnlProperty.Name" xml:space="preserve">
     <value>ucrPnlProperty</value>
@@ -733,13 +736,13 @@
     <value>13</value>
   </data>
   <data name="grpMethods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 118</value>
+    <value>235, 117</value>
   </data>
   <data name="grpMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 216</value>
   </data>
   <data name="grpMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
+    <value>14</value>
   </data>
   <data name="grpMethods.Text" xml:space="preserve">
     <value>Methods</value>
@@ -756,26 +759,8 @@
   <data name="&gt;&gt;grpMethods.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="ttAsIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="ttMethods.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="ttAppearance.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 17</value>
-  </metadata>
-  <metadata name="ttFrequency.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>215, 17</value>
-  </metadata>
-  <metadata name="ttSequence.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>314, 17</value>
-  </metadata>
-  <metadata name="ttShift.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>413, 17</value>
-  </metadata>
-  <metadata name="ttShuffle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>512, 17</value>
-  </metadata>
-  <metadata name="ttAnonymise.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>611, 17</value>
   </metadata>
   <data name="ucrReceiverFactorX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -799,7 +784,7 @@
     <value>269, 22</value>
   </data>
   <data name="ucrSaveResults.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrSaveResults.Name" xml:space="preserve">
     <value>ucrSaveResults</value>
@@ -820,7 +805,7 @@
     <value>109, 21</value>
   </data>
   <data name="ucrInputOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrInputOptions.Name" xml:space="preserve">
     <value>ucrInputOptions</value>
@@ -841,7 +826,7 @@
     <value>100, 17</value>
   </data>
   <data name="ucrChkReverseVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkReverseVariable.Name" xml:space="preserve">
     <value>ucrChkReverseVariable</value>
@@ -889,7 +874,7 @@
     <value>131, 21</value>
   </data>
   <data name="ucrReceiverFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.Name" xml:space="preserve">
     <value>ucrReceiverFactor</value>
@@ -916,7 +901,7 @@
     <value>134, 26</value>
   </data>
   <data name="ucrReceiverVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrReceiverVariable.Name" xml:space="preserve">
     <value>ucrReceiverVariable</value>
@@ -937,7 +922,7 @@
     <value>410, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -958,7 +943,7 @@
     <value>206, 180</value>
   </data>
   <data name="ucrReorderFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrReorderFactor.Name" xml:space="preserve">
     <value>ucrReorderFactor</value>
@@ -982,7 +967,7 @@
     <value>242, 193</value>
   </data>
   <data name="ucrSelectorFactorLevelsToReorder.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrSelectorFactorLevelsToReorder.Name" xml:space="preserve">
     <value>ucrSelectorFactorLevelsToReorder</value>
@@ -996,55 +981,16 @@
   <data name="&gt;&gt;ucrSelectorFactorLevelsToReorder.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Reorder Levels</value>
   </data>
-  <data name="&gt;&gt;ttAsIs.Name" xml:space="preserve">
-    <value>ttAsIs</value>
+  <data name="&gt;&gt;ttMethods.Name" xml:space="preserve">
+    <value>ttMethods</value>
   </data>
-  <data name="&gt;&gt;ttAsIs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttAppearance.Name" xml:space="preserve">
-    <value>ttAppearance</value>
-  </data>
-  <data name="&gt;&gt;ttAppearance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttFrequency.Name" xml:space="preserve">
-    <value>ttFrequency</value>
-  </data>
-  <data name="&gt;&gt;ttFrequency.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttSequence.Name" xml:space="preserve">
-    <value>ttSequence</value>
-  </data>
-  <data name="&gt;&gt;ttSequence.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttShift.Name" xml:space="preserve">
-    <value>ttShift</value>
-  </data>
-  <data name="&gt;&gt;ttShift.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttShuffle.Name" xml:space="preserve">
-    <value>ttShuffle</value>
-  </data>
-  <data name="&gt;&gt;ttShuffle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ttAnonymise.Name" xml:space="preserve">
-    <value>ttAnonymise</value>
-  </data>
-  <data name="&gt;&gt;ttAnonymise.Type" xml:space="preserve">
+  <data name="&gt;&gt;ttMethods.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
@@ -1063,7 +1009,7 @@
     <value>131, 21</value>
   </data>
   <data name="ucrReceiverFactorX.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactorX.Name" xml:space="preserve">
     <value>ucrReceiverFactorX</value>
