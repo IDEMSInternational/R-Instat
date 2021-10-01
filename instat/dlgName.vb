@@ -101,13 +101,13 @@ Public Class dlgName
         clsRenameWithFunction = New RFunction
 
         ucrSelectVariables.Reset()
+        ucrSaveDataFrame.Reset()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
 
         clsRenameWithFunction.SetPackageName("dplyr")
         clsRenameWithFunction.SetRCommand("rename_with")
         clsRenameWithFunction.AddParameter(".fn", "toupper", iPosition:=1)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
@@ -209,8 +209,8 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlValueChanged
-        If Not ucrSelectVariables.IsEmpty Then
+    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        If rdoMultiple.Checked AndAlso Not ucrSelectVariables.IsEmpty Then
             clsRenameWithFunction.AddParameter(".data", clsRFunctionParameter:=ucrSelectVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         Else
             clsRenameWithFunction.RemoveParameterByName(".data")
