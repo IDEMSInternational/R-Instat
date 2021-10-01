@@ -189,24 +189,14 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoRecode.Checked Then
-            If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If ucrReceiverFactor.IsEmpty OrElse Not ucrSaveNewColumn.IsComplete Then
+            ucrBase.OKEnabled(False)
+        ElseIf rdoRecode.Checked Then
+            ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete("New Label"))
         ElseIf rdoOther.Checked Then
-            If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels()) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels()))
         ElseIf rdoLump.Checked Then
-            If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
