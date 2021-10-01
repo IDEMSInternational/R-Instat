@@ -20,7 +20,8 @@ Imports instat.Translations
 Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
     Private clsFctRecodeFunction, clsFctOtherFunction As New RFunction
-    Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpnFunction As New RFunction
+    Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpNFunction As New RFunction
+
     Private clsCFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
