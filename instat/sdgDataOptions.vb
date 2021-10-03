@@ -46,26 +46,30 @@ Public Class sdgDataOptions
     Private Sub InitialiseDialog()
         clsFilterPreview.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
         clsRemoveCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+
         ucrReceiverFilter.Selector = ucrSelectorFilters
         ucrReceiverFilter.SetItemType("filter")
         ucrReceiverFilter.SetMeAsReceiver()
+        ucrReceiverFilter.strSelectorHeading = "Filters"
+
+        ucrSelectorFilters.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+
+        ucrReceiverSelect.Selector = ucrSelectorForSelectColumns
+        ucrReceiverSelect.SetMeAsReceiver()
+        ucrReceiverSelect.SetItemType("column_selection")
+        ucrReceiverSelect.strSelectorHeading = "Column Selections"
+
         ucrInputFilterPreview.txtInput.ReadOnly = True
     End Sub
 
     Public Sub SetDefaults()
         ucrSelectorFilters.Reset()
-        'chkShowHiddenColumns.Checked = False
+        ucrSelectorForSelectColumns.Reset()
         rdoAllDialogs.Checked = True
+        rdoColumnsForAllDialogs.Checked = True
     End Sub
-
-    Public Property ShowHiddenColumns As Boolean
-        Get
-            Return chkShowHiddenColumns.Checked
-        End Get
-        Set(bShowHidden As Boolean)
-            chkShowHiddenColumns.Checked = bShowHidden
-        End Set
-    End Property
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
         sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strCurrentDataFrame)
@@ -119,5 +123,10 @@ Public Class sdgDataOptions
         If Not ucrReceiverFilter.IsEmpty Then
             ucrReceiverFilter.Clear()
         End If
+    End Sub
+
+    Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        dlgSelectColumns.ShowDialog()
+        ucrSelectorForSelectColumns.LoadList()
     End Sub
 End Class

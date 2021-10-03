@@ -48,4 +48,9 @@ Public Class ucrSelectorByDataFrameAddRemove
             btnDataOptions.Enabled = False
         End If
     End Sub
+
+    Public Sub HideShowAddOrDataOptionsButton(Optional bAddVisible As Boolean = True, Optional bDataOptionsVisible As Boolean = True)
+        btnDataOptions.Visible = bDataOptionsVisible
+        btnAdd.Visible = bAddVisible
+    End Sub
 End Class

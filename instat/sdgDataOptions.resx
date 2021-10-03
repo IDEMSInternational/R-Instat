@@ -222,27 +222,6 @@
   <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="rdoForDialog.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoForDialog.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="rdoForDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 35</value>
-  </data>
-  <data name="rdoForDialog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 17</value>
-  </data>
-  <data name="rdoForDialog.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoForDialog.Text" xml:space="preserve">
-    <value>For This Dialog Only</value>
-  </data>
   <data name="&gt;&gt;rdoForDialog.Name" xml:space="preserve">
     <value>rdoForDialog</value>
   </data>
@@ -254,24 +233,6 @@
   </data>
   <data name="&gt;&gt;rdoForDialog.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="rdoAllDialogs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoAllDialogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 19</value>
-  </data>
-  <data name="rdoAllDialogs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
-  </data>
-  <data name="rdoAllDialogs.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rdoAllDialogs.Text" xml:space="preserve">
-    <value>For All Dialogs</value>
   </data>
   <data name="&gt;&gt;rdoAllDialogs.Name" xml:space="preserve">
     <value>rdoAllDialogs</value>
@@ -343,16 +304,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 21</value>
+    <value>225, 20</value>
   </data>
   <data name="lblFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
+    <value>32, 13</value>
   </data>
   <data name="lblFilter.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblFilter.Text" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filter:</value>
   </data>
   <data name="&gt;&gt;lblFilter.Name" xml:space="preserve">
     <value>lblFilter</value>
@@ -417,35 +378,191 @@
   <data name="&gt;&gt;tbRows.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="chkShowHiddenColumns.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Name" xml:space="preserve">
+    <value>rdoColumnsForThisDialog</value>
   </data>
-  <data name="chkShowHiddenColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkShowHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
-  <data name="chkShowHiddenColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 17</value>
-  </data>
-  <data name="chkShowHiddenColumns.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;rdoColumnsForThisDialog.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="chkShowHiddenColumns.Text" xml:space="preserve">
-    <value>Show Hidden Columns in Selector</value>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Name" xml:space="preserve">
+    <value>rdoColumnsForAllDialogs</value>
   </data>
-  <data name="&gt;&gt;chkShowHiddenColumns.Name" xml:space="preserve">
-    <value>chkShowHiddenColumns</value>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkShowHiddenColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;chkShowHiddenColumns.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 234</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 58</value>
+  </data>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Apply Options</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
     <value>tbColumns</value>
   </data>
-  <data name="&gt;&gt;chkShowHiddenColumns.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>375, 351</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Name" xml:space="preserve">
+    <value>ucrSubDialogueBase</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Data Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgDataOptions</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 53</value>
+  </data>
+  <data name="ucrReceiverSelect.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 20</value>
+  </data>
+  <data name="ucrReceiverSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelect.Name" xml:space="preserve">
+    <value>ucrReceiverSelect</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelect.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelect.Parent" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelect.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSelection.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 37</value>
+  </data>
+  <data name="lblSelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="lblSelection.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblSelection.Text" xml:space="preserve">
+    <value>Column Selection:</value>
+  </data>
+  <data name="&gt;&gt;lblSelection.Name" xml:space="preserve">
+    <value>lblSelection</value>
+  </data>
+  <data name="&gt;&gt;lblSelection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelection.Parent" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;lblSelection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrSelectorForSelectColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="ucrSelectorForSelectColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForSelectColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForSelectColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForSelectColumns.Name" xml:space="preserve">
+    <value>ucrSelectorForSelectColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForSelectColumns.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForSelectColumns.Parent" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForSelectColumns.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdDefineNewSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdDefineNewSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 81</value>
+  </data>
+  <data name="cmdDefineNewSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 41</value>
+  </data>
+  <data name="cmdDefineNewSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdDefineNewSelect.Text" xml:space="preserve">
+    <value>Define New Column Selection</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewSelect.Name" xml:space="preserve">
+    <value>cmdDefineNewSelect</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewSelect.Parent" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewSelect.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="tbColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -495,6 +612,72 @@
   <data name="&gt;&gt;tbcDataOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rdoForDialog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoForDialog.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoForDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 35</value>
+  </data>
+  <data name="rdoForDialog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="rdoForDialog.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoForDialog.Text" xml:space="preserve">
+    <value>For This Dialog Only</value>
+  </data>
+  <data name="rdoForDialog.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Name" xml:space="preserve">
+    <value>rdoForDialog</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoAllDialogs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAllDialogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 15</value>
+  </data>
+  <data name="rdoAllDialogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rdoAllDialogs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoAllDialogs.Text" xml:space="preserve">
+    <value>For All Dialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Name" xml:space="preserve">
+    <value>rdoAllDialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrSubDialogueBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 323</value>
   </data>
@@ -516,25 +699,70 @@
   <data name="&gt;&gt;ucrSubDialogueBase.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="rdoColumnsForThisDialog.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>375, 351</value>
+  <data name="rdoColumnsForThisDialog.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+  <data name="rdoColumnsForThisDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Data Options</value>
+  <data name="rdoColumnsForThisDialog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 35</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>sdgDataOptions</value>
+  <data name="rdoColumnsForThisDialog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="rdoColumnsForThisDialog.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoColumnsForThisDialog.Text" xml:space="preserve">
+    <value>For This Dialog Only</value>
+  </data>
+  <data name="rdoColumnsForThisDialog.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Name" xml:space="preserve">
+    <value>rdoColumnsForThisDialog</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForThisDialog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 15</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoColumnsForAllDialogs.Text" xml:space="preserve">
+    <value>For All Dialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Name" xml:space="preserve">
+    <value>rdoColumnsForAllDialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsForAllDialogs.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>
