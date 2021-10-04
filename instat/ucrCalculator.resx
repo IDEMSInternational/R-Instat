@@ -153,31 +153,31 @@
   <data name="&gt;&gt;lblExpression.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdRHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdRHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>311, 228</value>
   </data>
-  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdRHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdRHelp.TabIndex" type="System.Int32, mscorlib">
     <value>182</value>
   </data>
-  <data name="cmdHelp.Text" xml:space="preserve">
-    <value>Help</value>
+  <data name="cmdRHelp.Text" xml:space="preserve">
+    <value>R Help</value>
   </data>
-  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
-    <value>cmdHelp</value>
+  <data name="&gt;&gt;cmdRHelp.Name" xml:space="preserve">
+    <value>cmdRHelp</value>
   </data>
-  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdRHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdRHelp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdRHelp.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="chkShowParameters.AutoSize" type="System.Boolean, mscorlib">

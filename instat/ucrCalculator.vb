@@ -340,6 +340,7 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpDates.Visible = False
                 grpCircular.Visible = False
+                cmdRHelp.Visible = True
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
@@ -362,6 +363,7 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
+                cmdRHelp.Visible = True
                 grpSymbols.Visible = False
             Case "Summary"
                 grpDates.Visible = False
@@ -379,6 +381,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Test/Strings (Character Columns)"
                 grpDates.Visible = False
@@ -394,6 +397,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = True
                 grpSymbols.Visible = True
+                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 129
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
@@ -413,6 +417,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Probability"
                 grpDates.Visible = False
@@ -428,6 +433,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
@@ -444,6 +450,7 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
+                cmdRHelp.Visible = True
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 130
@@ -462,6 +469,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
             Case "Wakefield"
@@ -479,6 +487,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
+                cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.7, iBaseHeight)
             Case "Circular"
                 grpDates.Visible = False
@@ -495,6 +504,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
                 grpDates.Visible = False
@@ -511,7 +521,29 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
+
+
+            Case "Basic"
+                cmdRHelp.Visible = False
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
+
+
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
@@ -1269,7 +1301,7 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click
         HelpContent()
     End Sub
 

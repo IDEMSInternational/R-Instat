@@ -41,7 +41,7 @@ Partial Class ucrCalculator
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
-        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.cmdRHelp = New System.Windows.Forms.Button()
         Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -419,11 +419,11 @@ Partial Class ucrCalculator
         Me.lblExpression.Name = "lblExpression"
         Me.lblExpression.Tag = "Expression"
         '
-        'cmdHelp
+        'cmdRHelp
         '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdRHelp, "cmdRHelp")
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
         '
         'chkShowParameters
         '
@@ -2881,6 +2881,7 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
         Me.ucrTryCalculator.Name = "ucrTryCalculator"
+        Me.ucrTryCalculator.RunCommandAsMultipleLines = False
         '
         'ucrInputCalOptions
         '
@@ -2926,7 +2927,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.cmdHelp)
+        Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.chkShowParameters)
         Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
@@ -2956,7 +2957,7 @@ Partial Class ucrCalculator
     Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
     Friend WithEvents lblExpression As Label
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdHelp As Button
+    Friend WithEvents cmdRHelp As Button
     Friend WithEvents chkShowParameters As CheckBox
     Friend WithEvents ucrInputCalOptions As ucrInputComboBox
     Friend WithEvents grpBasic As GroupBox
