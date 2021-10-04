@@ -60,7 +60,7 @@ Public Class ucrDayOfYear
             dtbMonths.Rows.Add(i, strMonthsFull(i), strMonthsAbbreviated(i))
         Next
         'TODO Display/Value member should be changeable
-        ucrInputMonth.SetDataSource(dtbMonths, strDisplayMember:="Full", strValueMember:="Number")
+        ucrInputMonth.SetDataSource(dtbMonths, strDisplayMember:="Abbreviated", strValueMember:="Number")
         ucrInputMonth.SetDropDownStyleAsNonEditable()
         For i As Integer = 0 To 30
             str31Days(i) = i + 1
@@ -303,4 +303,5 @@ Public Class ucrDayOfYear
         End If
         Return y
     End Function
+
 End Class
