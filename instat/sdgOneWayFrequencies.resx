@@ -118,16 +118,148 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblTableTitle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoShowMissingAuto.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblTableTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoShowMissingAuto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rdoShowMissingAuto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 70</value>
+  </data>
+  <data name="rdoShowMissingAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="rdoShowMissingAuto.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoShowMissingAuto.Text" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingAuto.Name" xml:space="preserve">
+    <value>rdoShowMissingAuto</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingAuto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingAuto.Parent" xml:space="preserve">
+    <value>grpShowMissingFrequencies</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingAuto.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoShowMissingFalse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoShowMissingFalse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoShowMissingFalse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 45</value>
+  </data>
+  <data name="rdoShowMissingFalse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="rdoShowMissingFalse.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoShowMissingFalse.Text" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingFalse.Name" xml:space="preserve">
+    <value>rdoShowMissingFalse</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingFalse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingFalse.Parent" xml:space="preserve">
+    <value>grpShowMissingFrequencies</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingFalse.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoShowMissingTrue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoShowMissingTrue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
+  <data name="rdoShowMissingTrue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="rdoShowMissingTrue.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoShowMissingTrue.Text" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingTrue.Name" xml:space="preserve">
+    <value>rdoShowMissingTrue</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingTrue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingTrue.Parent" xml:space="preserve">
+    <value>grpShowMissingFrequencies</value>
+  </data>
+  <data name="&gt;&gt;rdoShowMissingTrue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrPnlShowMissingFreq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="ucrPnlShowMissingFreq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 68</value>
+  </data>
+  <data name="ucrPnlShowMissingFreq.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlShowMissingFreq.Name" xml:space="preserve">
+    <value>ucrPnlShowMissingFreq</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlShowMissingFreq.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlShowMissingFreq.Parent" xml:space="preserve">
+    <value>grpShowMissingFrequencies</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlShowMissingFreq.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpShowMissingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 98</value>
+  </data>
+  <data name="grpShowMissingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 97</value>
+  </data>
+  <data name="grpShowMissingFrequencies.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpShowMissingFrequencies.Text" xml:space="preserve">
+    <value>Show Missing Frequencies</value>
+  </data>
+  <data name="&gt;&gt;grpShowMissingFrequencies.Name" xml:space="preserve">
+    <value>grpShowMissingFrequencies</value>
+  </data>
+  <data name="&gt;&gt;grpShowMissingFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpShowMissingFrequencies.Parent" xml:space="preserve">
+    <value>tbpTable</value>
+  </data>
+  <data name="&gt;&gt;grpShowMissingFrequencies.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTableTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTableTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblTableTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 56</value>
+    <value>12, 57</value>
   </data>
   <data name="lblTableTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -151,7 +283,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 56</value>
+    <value>97, 60</value>
   </data>
   <data name="ucrInputTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -196,7 +328,7 @@
     <value>3, 6</value>
   </data>
   <data name="grpTableOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 101</value>
+    <value>236, 92</value>
   </data>
   <data name="grpTableOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -214,7 +346,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;grpTableOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tbpTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -909,6 +1041,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>365, 323</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -916,7 +1051,7 @@
     <value>Frequencies Options</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>sdgFrequencies</value>
+    <value>sdgOneWayFrequencies</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

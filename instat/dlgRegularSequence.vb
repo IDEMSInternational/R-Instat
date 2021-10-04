@@ -100,7 +100,7 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNewColumnName.SetPrefix("Regular")
+        ucrNewColumnName.SetPrefix("regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetSaveTypeAsColumn()
