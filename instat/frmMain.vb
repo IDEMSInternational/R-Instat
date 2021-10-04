@@ -2049,7 +2049,7 @@ Public Class frmMain
         dlgInstallRPackage.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
+    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -2418,5 +2418,13 @@ Public Class frmMain
 
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click_1(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOneVariableVisualizeData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualizeData.Click
+        dlgVisualizeData.ShowDialog()
     End Sub
 End Class
