@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSjpLikert, clsSjpStackFrq, clsSjtStackFrq, clsLevelofFactor, clsFactorColumn As New RFunction
+    Private clsSjpLikert, clsSjpStackFrq, clsSjtStackFrq, clsLevelofFactor, clsFactorColumn, clsAsLabels As New RFunction
     Private Sub dlgRatingScales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -153,7 +153,7 @@ Public Class dlgRatingScales
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrq, bReset)
-        ucrNudNeutralLevel.SetRCode(clsSjpLikert, bReset)
+        'ucrNudNeutralLevel.SetRCode(clsSjpLikert, bReset)
         ucrChkNumberOfCategories.SetRCode(clsSjpLikert, bReset)
         ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveGraph.SetRCode(clsSjpStackFrq, bReset)
@@ -179,23 +179,35 @@ Public Class dlgRatingScales
         If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             If rdoLikert.Checked Then
                 If ucrChkNumberOfCategories.Checked Then
+                    clsSjpLikert.RemoveParameterByName("catcount")
+                    ucrNudNeutralLevel.AddAdditionalCodeParameterPair(clsSjpLikert, ucrNudNeutralLevel.GetParameter(), iAdditionalPairNo:=1)
+                    clsAsLabels.SetPackageName("sjlabelled")
+                    clsAsLabels.SetRCommand("as_label")
                     clsLevelofFactor.SetRCommand("nlevels")
                     clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                     clsFactorColumn.AddParameter("col_name", ucrReceiverOrderedFactors.GetVariableNames())
                     clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                    clsLevelofFactor.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+                    clsAsLabels.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+                    clsLevelofFactor.AddParameter("x", clsRFunctionParameter:=clsAsLabels)
 
                     iLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsLevelofFactor.ToScript).AsNumeric(0)
 
                     'to check it its even you can do this - see if you divide by two has a remeinder 
                     iMedLevel = (iLevels + 1) / 2
-                    If IsOdd(iLevels) = True Then
-                        ucrNudNeutralLevel.Visible = True
-                        ucrNudNeutralLevel.Value = iMedLevel
+                    If Not iLevels = 0 Then
+                        If IsOdd(iLevels) = True Then
+                            ucrNudNeutralLevel.Visible = True
+                            ucrNudNeutralLevel.Value = iMedLevel
+                        Else
+                            ucrNudNeutralLevel.Visible = False
+                            ucrNudNeutralLevel.Value = iLevels
+                        End If
+                        ucrNudNeutralLevel.SetMinMax(1, iLevels)
                     Else
+                        clsSjpLikert.RemoveParameterByName("catcount")
+                        clsSjpLikert.AddParameter("catcount", "NULL")
                         ucrNudNeutralLevel.Visible = False
                     End If
-                    ucrNudNeutralLevel.SetMinMax(1, iLevels)
                 End If
             Else
                 ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
@@ -295,6 +307,7 @@ Public Class dlgRatingScales
         TestOkEnabled()
         If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
             ucrChkNumberOfCategories.Checked = False
+
         Else
             ucrChkNumberOfCategories.Checked = True
         End If
