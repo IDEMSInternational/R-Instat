@@ -120,12 +120,12 @@ Public Class dlgHeatMapPlot
         ucrReceiverX.bWithQuotes = False
 
         ucrReceiverLongitude.Selector = ucrHeatMapSelector
-        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0))
+        ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.bWithQuotes = False
 
         ucrReceiverLatitude.Selector = ucrHeatMapSelector
-        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 1))
+        ucrReceiverLatitude.SetParameter(New RParameter("y", 1))
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.bWithQuotes = False
 
@@ -304,12 +304,12 @@ Public Class dlgHeatMapPlot
         clsShapeAesFunction.SetPackageName("ggplot2")
         clsShapeAesFunction.SetRCommand("aes")
 
-        clsGeomPolygonFunction.SetPackageName("ggplot2")
-        clsGeomPolygonFunction.SetRCommand("geom_polygon")
-        clsGeomPolygonFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomPolygonAesFunction, iPosition:=0)
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsGeomPolygonAesFunction, iPosition:=1)
 
         clsGeomPolygonAesFunction.SetPackageName("ggplot2")
-        clsGeomPolygonAesFunction.SetRCommand("aes")
+        clsGeomPolygonAesFunction.SetRCommand("geom_polygon")
 
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
@@ -369,7 +369,7 @@ Public Class dlgHeatMapPlot
         ucrReceiverLatitude.SetRCode(clsRaesFunction, bReset)
         ucrVariableAsFactorForHeatMap.SetRCode(clsRaesFunction, bReset)
         ucrReceiverFill.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverFillChoropleth.SetRCode(clsGeomPolygonFunction, bReset)
+        ucrReceiverFillChoropleth.SetRCode(clsRaesFunction, bReset)
         ucrChkAddLabels.SetRCode(clsBaseOperator, bReset)
         ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
@@ -441,12 +441,6 @@ Public Class dlgHeatMapPlot
                 ucrReceiverX.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "fill" Then
                 ucrReceiverFill.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "longitude" Then
-                ucrReceiverLongitude.Add(clsParam.strArgumentName)
-            ElseIf clsParam.strArgumentName = "latitude" Then
-                ucrReceiverLatitude.Add(clsParam.strArgumentName)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrReceiverFillChoropleth.Add(clsParam.strArgumentName)
             End If
         Next
     End Sub
