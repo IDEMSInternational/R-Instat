@@ -34,9 +34,9 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverSelectedVariable = New instat.ucrReceiverMultiple()
         Me.ucrChkSelectedVariable = New instat.ucrCheck()
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverInitialRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverInitialRowFactors = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblAdditionalRowFactor
@@ -101,15 +101,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverInitialColumnFactor.strNcFilePath = ""
         Me.ucrReceiverInitialColumnFactor.ucrSelector = Nothing
         '
-        'ucrReceiverInitialRowFactor
-        '
-        Me.ucrReceiverInitialRowFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverInitialRowFactor, "ucrReceiverInitialRowFactor")
-        Me.ucrReceiverInitialRowFactor.Name = "ucrReceiverInitialRowFactor"
-        Me.ucrReceiverInitialRowFactor.Selector = Nothing
-        Me.ucrReceiverInitialRowFactor.strNcFilePath = ""
-        Me.ucrReceiverInitialRowFactor.ucrSelector = Nothing
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -123,10 +114,20 @@ Partial Class dlgThreeVariablePivotTable
         resources.ApplyResources(Me.ucrSelectorPivot, "ucrSelectorPivot")
         Me.ucrSelectorPivot.Name = "ucrSelectorPivot"
         '
+        'ucrReceiverInitialRowFactors
+        '
+        Me.ucrReceiverInitialRowFactors.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverInitialRowFactors, "ucrReceiverInitialRowFactors")
+        Me.ucrReceiverInitialRowFactors.Name = "ucrReceiverInitialRowFactors"
+        Me.ucrReceiverInitialRowFactors.Selector = Nothing
+        Me.ucrReceiverInitialRowFactors.strNcFilePath = ""
+        Me.ucrReceiverInitialRowFactors.ucrSelector = Nothing
+        '
         'dlgThreeVariablePivotTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverInitialRowFactors)
         Me.Controls.Add(Me.lblAdditionalRowFactor)
         Me.Controls.Add(Me.lblInitialColumnFactor)
         Me.Controls.Add(Me.lblInitialRowFactor)
@@ -136,7 +137,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.Controls.Add(Me.ucrReceiverSelectedVariable)
         Me.Controls.Add(Me.ucrChkSelectedVariable)
         Me.Controls.Add(Me.ucrReceiverInitialColumnFactor)
-        Me.Controls.Add(Me.ucrReceiverInitialRowFactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorPivot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -158,7 +158,7 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents ucrReceiverSelectedVariable As ucrReceiverMultiple
     Friend WithEvents ucrChkSelectedVariable As ucrCheck
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverSingle
-    Friend WithEvents ucrReceiverInitialRowFactor As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorPivot As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverInitialRowFactors As ucrReceiverMultiple
 End Class
