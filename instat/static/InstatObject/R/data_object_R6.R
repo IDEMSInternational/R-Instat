@@ -2406,20 +2406,16 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 }
 )
 
+#This method adds the labels to the quarter e.g the defaut is JFM, AMJ, JAS, OND.
 DataSheet$set("public", "make_quarters",  function(quarter, start_month){
      #qtr <- c()
      mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
-     if (quater == 1){
-       qtr <- paste(mabb[start_month:(start_month+2)],collapse="")
-     } else if (quarter == 2){
-       qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")
-     }
-     if (quater == 3){
-         qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")
-       }
-     if (quater == 4){
-       qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")
-     }
+     switch(quarter,
+     "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
+     "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
+     "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
+     "4"={  qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
+     )
      return(qtr)
 })
 
