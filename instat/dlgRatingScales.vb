@@ -72,14 +72,14 @@ Public Class dlgRatingScales
         rdoLikert.Enabled = True
 
 
-        ucrNudNeutralLevel.SetParameter(New RParameter("catcount", 7))
+        ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 7))
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
 
         ucrChkNumberOfCategories.SetText("Number of Categories")
         ucrChkNumberOfCategories.SetParameter(ucrNudNeutralLevel.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNumberOfCategories.AddToLinkedControls(ucrNudNeutralLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrChkNumberOfCategories.AddParameterPresentCondition(True, "catcount")
-        ucrChkNumberOfCategories.AddParameterPresentCondition(False, "catcount", False)
+        ucrChkNumberOfCategories.AddParameterPresentCondition(True, "cat.neutral")
+        ucrChkNumberOfCategories.AddParameterPresentCondition(False, "cat.neutral", False)
         ucrChkNumberOfCategories.SetLinkedDisplayControl(grpLikertType)
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 12))
@@ -114,8 +114,8 @@ Public Class dlgRatingScales
 
         clsSjpLikert.SetPackageName("sjPlot")
         clsSjpLikert.SetRCommand("plot_likert")
-        clsSjpLikert.AddParameter("catcount", 1)
-        clsSjpLikert.AddParameter("cat.neutral", "NULL")
+        clsSjpLikert.AddParameter("catcount", "NULL")
+        clsSjpLikert.AddParameter("cat.neutral", 7)
         clsSjpLikert.AddParameter("coord.flip", "FALSE", iPosition:=12)
 
         clsSjpStackFrq.SetPackageName("sjPlot")
@@ -144,16 +144,12 @@ Public Class dlgRatingScales
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpLikert, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
-        'ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-        'ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpLikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
         ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
-        'ucrPnlSjpLikert.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrq, bReset)
-        'ucrNudNeutralLevel.SetRCode(clsSjpLikert, bReset)
         ucrChkNumberOfCategories.SetRCode(clsSjpLikert, bReset)
         ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveGraph.SetRCode(clsSjpStackFrq, bReset)
@@ -179,7 +175,7 @@ Public Class dlgRatingScales
         If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             If rdoLikert.Checked Then
                 If ucrChkNumberOfCategories.Checked Then
-                    clsSjpLikert.RemoveParameterByName("catcount")
+                    clsSjpLikert.RemoveParameterByName("cat.neutral")
                     ucrNudNeutralLevel.AddAdditionalCodeParameterPair(clsSjpLikert, ucrNudNeutralLevel.GetParameter(), iAdditionalPairNo:=1)
                     clsAsLabels.SetPackageName("sjlabelled")
                     clsAsLabels.SetRCommand("as_label")
@@ -200,12 +196,12 @@ Public Class dlgRatingScales
                             ucrNudNeutralLevel.Value = iMedLevel
                         Else
                             ucrNudNeutralLevel.Visible = False
-                            ucrNudNeutralLevel.Value = iLevels
+                            'ucrNudNeutralLevel.Value = iLevels
                         End If
                         ucrNudNeutralLevel.SetMinMax(1, iLevels)
                     Else
-                        clsSjpLikert.RemoveParameterByName("catcount")
-                        clsSjpLikert.AddParameter("catcount", "NULL")
+                        clsSjpLikert.RemoveParameterByName("cat.neutral")
+                        clsSjpLikert.AddParameter("cat.neutral", "NULL")
                         ucrNudNeutralLevel.Visible = False
                     End If
                 End If
