@@ -837,7 +837,6 @@ Public Class ucrDataView
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
-
     Private Sub lblColNext_Click(sender As Object, e As EventArgs) Handles lblColNext.Click
         GetCurrentDataFrameFocus().VisiblePage.LoadNextColumnPage()
         UpdateCurrentWorksheet()
