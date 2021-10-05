@@ -185,14 +185,6 @@ Public Class dlgCalculator
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
-
-    '    Private Sub dlgCalculator_HelpButtonClicked(sender As Object, e As CancelEventArgs) Handles Me.HelpButtonClicked
-    '        Select Case ucrCalc.ucrInputCalOptions.GetText
-    '            Case "Maths"
-    '                Me.Width = iBasicWidth * 1.38
-    '                iHelpCalcID = 126
-    '        End Select
-    '    End Sub
 End Class
 
 
