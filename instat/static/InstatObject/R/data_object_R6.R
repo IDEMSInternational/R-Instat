@@ -2408,7 +2408,7 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 
 DataSheet$set("public", "make_quarters",  function(quater,start_month){
      #qtr <- c()
-     mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D","J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
+     mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
      if (quater == 1){
        qtr <- paste(mabb[start_month:(start_month+2)],collapse="")
      }
