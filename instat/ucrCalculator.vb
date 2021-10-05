@@ -1321,6 +1321,49 @@ Public Class ucrCalculator
                 Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
             End If
 
+            If ucrInputCalOptions.GetText = "Wakefield" Then
+                clsHelp.AddParameter("package", Chr(34) & "wakefield" & Chr(34), iPosition:=1)
+                frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for wakefield package")
+            Else
+                If iHelpCalcID > 0 Then
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+                Else
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+                End If
+            End If
+
+            If ucrInputCalOptions.GetText = "Summary" Then
+                clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34), iPosition:=1)
+                frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for base package")
+            Else
+                If iHelpCalcID > 0 Then
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+                Else
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+                End If
+            End If
+
+            If ucrInputCalOptions.GetText = "Test/Strings (Character Columns)" Then
+                clsHelp.AddParameter("package", Chr(34) & "stringr" & Chr(34), iPosition:=1)
+                frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for stringr package")
+            Else
+                If iHelpCalcID > 0 Then
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+                Else
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+                End If
+            End If
+
+            If ucrInputCalOptions.GetText = "Factor" Then
+                clsHelp.AddParameter("package", Chr(34) & "forcats" & Chr(34), iPosition:=1)
+                frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for forcats package")
+            Else
+                If iHelpCalcID > 0 Then
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+                Else
+                    Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+                End If
+            End If
         End If
     End Sub
 
