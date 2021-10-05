@@ -1,3 +1,3 @@
-﻿Public Class dlgExportForClimsoft
+﻿Public Class dlgExportToClimsoft
 
 End Class
