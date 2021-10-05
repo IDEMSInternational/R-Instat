@@ -2411,8 +2411,7 @@ DataSheet$set("public", "make_quarters",  function(quarter, start_month){
      mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
      if (quater == 1){
        qtr <- paste(mabb[start_month:(start_month+2)],collapse="")
-     }
-     if (quater == 2){
+     } else if (quarter == 2){
        qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")
      }
      if (quater == 3){
