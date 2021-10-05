@@ -33,9 +33,9 @@ Partial Class dlgTaylorDiagram
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrReceiverGroup = New instat.ucrReceiverMultiple()
         Me.ucrReceiverObserved = New instat.ucrReceiverSingle()
-        Me.ucrReceiverEstimated = New instat.ucrReceiverSingle()
         Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdTaylorDiagramOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverEstimated = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblObserved
@@ -101,15 +101,6 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverObserved.strNcFilePath = ""
         Me.ucrReceiverObserved.ucrSelector = Nothing
         '
-        'ucrReceiverEstimated
-        '
-        Me.ucrReceiverEstimated.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverEstimated, "ucrReceiverEstimated")
-        Me.ucrReceiverEstimated.Name = "ucrReceiverEstimated"
-        Me.ucrReceiverEstimated.Selector = Nothing
-        Me.ucrReceiverEstimated.strNcFilePath = ""
-        Me.ucrReceiverEstimated.ucrSelector = Nothing
-        '
         'ucrSelectorTaylorDiagram
         '
         Me.ucrSelectorTaylorDiagram.bDropUnusedFilterLevels = False
@@ -124,10 +115,20 @@ Partial Class dlgTaylorDiagram
         Me.cmdTaylorDiagramOptions.Name = "cmdTaylorDiagramOptions"
         Me.cmdTaylorDiagramOptions.UseVisualStyleBackColor = True
         '
+        'ucrReceiverEstimated
+        '
+        Me.ucrReceiverEstimated.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverEstimated, "ucrReceiverEstimated")
+        Me.ucrReceiverEstimated.Name = "ucrReceiverEstimated"
+        Me.ucrReceiverEstimated.Selector = Nothing
+        Me.ucrReceiverEstimated.strNcFilePath = ""
+        Me.ucrReceiverEstimated.ucrSelector = Nothing
+        '
         'dlgTaylorDiagram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverEstimated)
         Me.Controls.Add(Me.cmdTaylorDiagramOptions)
         Me.Controls.Add(Me.ucrChkNormalise)
         Me.Controls.Add(Me.lblFacet)
@@ -139,7 +140,6 @@ Partial Class dlgTaylorDiagram
         Me.Controls.Add(Me.lblObserved)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.ucrReceiverObserved)
-        Me.Controls.Add(Me.ucrReceiverEstimated)
         Me.Controls.Add(Me.ucrSelectorTaylorDiagram)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -160,7 +160,7 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblFacet As Label
     Friend WithEvents ucrReceiverType As ucrReceiverSingle
-    Friend WithEvents ucrReceiverEstimated As ucrReceiverSingle
     Friend WithEvents ucrChkNormalise As ucrCheck
     Friend WithEvents cmdTaylorDiagramOptions As Button
+    Friend WithEvents ucrReceiverEstimated As ucrReceiverMultiple
 End Class

@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblObserved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 42</value>
+    <value>286, 24</value>
   </data>
   <data name="lblObserved.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblObserved.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblEstimated.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEstimated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 99</value>
+    <value>286, 72</value>
   </data>
   <data name="lblEstimated.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblEstimated.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblGroup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 206</value>
+    <value>286, 245</value>
   </data>
   <data name="lblGroup.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblFacet.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFacet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 156</value>
+    <value>283, 199</value>
   </data>
   <data name="lblFacet.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
@@ -238,10 +238,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFacet.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkNormalise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 245</value>
+    <value>6, 238</value>
   </data>
   <data name="ucrChkNormalise.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 20</value>
@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkNormalise.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -268,7 +268,31 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 406</value>
+    <value>415, 449</value>
+  </data>
+  <data name="ucrReceiverEstimated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 88</value>
+  </data>
+  <data name="ucrReceiverEstimated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverEstimated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverEstimated.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverEstimated.Name" xml:space="preserve">
+    <value>ucrReceiverEstimated</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverEstimated.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverEstimated.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverEstimated.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cmdTaylorDiagramOptions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -277,7 +301,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTaylorDiagramOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 211</value>
+    <value>6, 204</value>
   </data>
   <data name="cmdTaylorDiagramOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 28</value>
@@ -301,10 +325,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdTaylorDiagramOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 353</value>
+    <value>6, 395</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>400, 52</value>
@@ -322,10 +346,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrSavePlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 328</value>
+    <value>6, 367</value>
   </data>
   <data name="ucrSavePlot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -346,10 +370,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSavePlot.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 222</value>
+    <value>286, 261</value>
   </data>
   <data name="ucrReceiverGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -370,10 +394,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverObserved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 58</value>
+    <value>286, 40</value>
   </data>
   <data name="ucrReceiverObserved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -394,34 +418,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverObserved.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ucrReceiverEstimated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 115</value>
-  </data>
-  <data name="ucrReceiverEstimated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverEstimated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverEstimated.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Name" xml:space="preserve">
-    <value>ucrReceiverEstimated</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="ucrSelectorTaylorDiagram.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 18</value>
   </data>
   <data name="ucrSelectorTaylorDiagram.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -457,7 +457,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 172</value>
+    <value>286, 214</value>
   </data>
   <data name="ucrReceiverType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -478,6 +478,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverType.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>
