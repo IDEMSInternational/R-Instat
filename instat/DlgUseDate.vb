@@ -150,7 +150,6 @@ Public Class dlgUseDate
         ucrChkShiftQuarterAbbr.SetParameter(New RParameter("quarter_abbr", 21))
         ucrChkShiftQuarterAbbr.SetText("")
         ucrChkShiftQuarterAbbr.SetRDefault("FALSE")
-        ucrChkShiftQuarterAbbr.Enabled = False 'TODO. Temporary
 
         'start month
         Dim dctMonth As New Dictionary(Of String, String)
@@ -187,8 +186,6 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        'ucrInputComboBoxStartingMonth.AddAdditionalCodeParameterPair(clsDefaultFunction, New RParameter("n"), iAdditionalPairNo:=1)
-        'ucrInputComboBoxStartingMonth.SetRCode(clsDefaultFunction, bReset)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
