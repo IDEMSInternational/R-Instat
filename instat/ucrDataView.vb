@@ -146,12 +146,13 @@ Public Class ucrDataView
     End Sub
 
     Public Sub RefreshGridData()
-        If _clsDataBook IsNot Nothing Then
-            _clsDataBook.RefreshData()
-            AddAndUpdateWorksheets(grdData)
-            RemoveOldWorksheets(grdData)
-            grdData.Visible = Not grdData.Worksheets.Count = 0
+        If _clsDataBook Is Nothing Then
+            Exit Sub
         End If
+        _clsDataBook.RefreshData()
+        AddAndUpdateWorksheets(grdData)
+        RemoveOldWorksheets(grdData)
+        grdData.Visible = Not grdData.Worksheets.Count = 0
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
