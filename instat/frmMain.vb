@@ -190,6 +190,7 @@ Public Class frmMain
         ucrColumnMeta.RefreshGridData()
         ucrDataFrameMeta.RefreshGridData()
     End Sub
+
     ''' <summary>
     ''' Updates styles on data view, column meta and data frame meta grids.
     ''' </summary>
