@@ -119,34 +119,34 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mnuDescribeOneVariableVisualizeData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableVisualizeData.Text" xml:space="preserve">
     <value>Visualise Data...</value>
   </data>
   <data name="mnuDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>152, 6</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Text" xml:space="preserve">
     <value>Rating Data...</value>
@@ -158,28 +158,28 @@
     <value>One Variable</value>
   </data>
   <data name="mnuDescribeTwoVariablesSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
   </data>
   <data name="mnuDescribeTwoVariablesGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>143, 6</value>
   </data>
   <data name="mnuDescribeTwoVariablesFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeTwoVariablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesPivotTable.Text" xml:space="preserve">
     <value>Pivot Table...</value>
@@ -3189,56 +3189,62 @@
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 6</value>
   </data>
+  <data name="CalculatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="CalculatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Calculator...</value>
+  </data>
   <data name="mnuPrepareCalculator.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="mnuPrepareCalculator.Text" xml:space="preserve">
-    <value>Calculator...</value>
+    <value>Column: Calculator</value>
   </data>
   <data name="mnuPrepareColumnGenerateRegularSequence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateRegularSequence.Text" xml:space="preserve">
     <value>Regular Sequence...</value>
   </data>
   <data name="mnuPrepareColumnGenerateEnter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateEnter.Text" xml:space="preserve">
     <value>Enter...</value>
   </data>
   <data name="ToolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuPrepareColumnGenerateRowSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateRowSummaries.Text" xml:space="preserve">
     <value>Row Summaries...</value>
   </data>
   <data name="mnuPrepareColumnGenerateRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateRank.Text" xml:space="preserve">
     <value>Transform...</value>
   </data>
   <data name="mnuPrepareColumnPrpareColumnGeneratePolynomials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnPrpareColumnGeneratePolynomials.Text" xml:space="preserve">
     <value>Polynomials...</value>
   </data>
   <data name="ToolStripSeparator56.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuPrepareColumnGenerateRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateRandomSamples.Text" xml:space="preserve">
     <value>Random Samples...</value>
   </data>
   <data name="mnuPrepareColumnGeneratePermuteRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPrepareColumnGeneratePermuteRows.Text" xml:space="preserve">
     <value>Permute Columns...</value>
@@ -6558,9 +6564,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -6574,6 +6577,12 @@
     <value>mnuDescribeOneVariable</value>
   </data>
   <data name="&gt;&gt;mnuDescribeOneVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeOneVariableVisualizeData.Name" xml:space="preserve">
+    <value>mnuDescribeOneVariableVisualizeData</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeOneVariableVisualizeData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuDescribeOneVariableSummarise.Name" xml:space="preserve">
@@ -10260,10 +10269,10 @@
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeOneVariableVisualizeData.Name" xml:space="preserve">
-    <value>mnuDescribeOneVariableVisualizeData</value>
+  <data name="&gt;&gt;CalculatorToolStripMenuItem.Name" xml:space="preserve">
+    <value>CalculatorToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeOneVariableVisualizeData.Type" xml:space="preserve">
+  <data name="&gt;&gt;CalculatorToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

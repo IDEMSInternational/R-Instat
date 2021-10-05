@@ -2427,4 +2427,8 @@ Public Class frmMain
     Private Sub mnuDescribeOneVariableVisualizeData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualizeData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
+
+    Private Sub CalculatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculatorToolStripMenuItem.Click
+        dlgCalculator.ShowDialog()
+    End Sub
 End Class
