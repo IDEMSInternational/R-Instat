@@ -77,14 +77,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub UpdateNavigationButtons()
-        lblColFirst.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousColumnPage(), False)
         lblColBack.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousColumnPage(), False)
         lblColNext.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextColumnPage(), False)
-        lblColLast.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextColumnPage(), False)
-        lblRowFirst.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousRowPage(), False)
+        lblColFirst.Enabled = lblColBack.Enabled
+        lblColLast.Enabled = lblColNext.Enabled
+
         lblRowBack.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousRowPage(), False)
         lblRowNext.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextRowPage(), False)
-        lblRowLast.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextRowPage(), False)
+        lblRowFirst.Enabled = lblRowBack.Enabled
+        lblRowLast.Enabled = lblRowNext.Enabled
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
