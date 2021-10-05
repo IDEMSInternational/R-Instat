@@ -158,11 +158,11 @@ Public Class dlgBoxplot
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetRDefault(1)
 
-        ucrChkTufte.SetText("Tufte Box plots")
+        ucrChkTufte.SetText("Tufte Boxplots")
         ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
         ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
 
-        ucrSaveBoxplot.SetPrefix("boxplot")
+        ucrSaveBoxplot.SetPrefix("box_plot")
         ucrSaveBoxplot.SetIsComboBox()
         ucrSaveBoxplot.SetCheckBoxText("Save Graph")
         ucrSaveBoxplot.SetSaveTypeAsGraph()
@@ -373,14 +373,14 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
         If rdoBoxplotTufte.Checked Then
             If ucrChkTufte.Checked Then
-                cmdBoxPlotOptions.Text = "Tufte Boxplot Options"
+                cmdBoxPlotOptions.Text = "Tufte Box Options"
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
                 clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
-                cmdBoxPlotOptions.Text = "Boxplot Options"
-                ucrSaveBoxplot.SetPrefix("boxplot")
+                cmdBoxPlotOptions.Text = "Box Options"
+                ucrSaveBoxplot.SetPrefix("box_plot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
             End If

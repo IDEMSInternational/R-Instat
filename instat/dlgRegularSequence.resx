@@ -140,27 +140,6 @@
   <data name="&gt;&gt;ucrInputComboDatesBy.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrDateTimePickerTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 50</value>
-  </data>
-  <data name="ucrDateTimePickerTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 20</value>
-  </data>
-  <data name="ucrDateTimePickerTo.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerTo.Name" xml:space="preserve">
-    <value>ucrDateTimePickerTo</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerTo.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerTo.Parent" xml:space="preserve">
-    <value>grpSequenceDefinition</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerTo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrChkDefineAsFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 158</value>
   </data>
@@ -180,10 +159,10 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrChkDefineAsFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrNudRepeatValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 102</value>
+    <value>111, 101</value>
   </data>
   <data name="ucrNudRepeatValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -201,34 +180,13 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrNudRepeatValues.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrDateTimePickerFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 24</value>
-  </data>
-  <data name="ucrDateTimePickerFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 20</value>
-  </data>
-  <data name="ucrDateTimePickerFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerFrom.Name" xml:space="preserve">
-    <value>ucrDateTimePickerFrom</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerFrom.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerFrom.Parent" xml:space="preserve">
-    <value>grpSequenceDefinition</value>
-  </data>
-  <data name="&gt;&gt;ucrDateTimePickerFrom.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="ucrInputInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 76</value>
+    <value>111, 76</value>
   </data>
   <data name="ucrInputInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 23</value>
+    <value>50, 23</value>
   </data>
   <data name="ucrInputInStepsOf.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -243,10 +201,10 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrInputInStepsOf.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="ucrInputTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 50</value>
+    <value>111, 50</value>
   </data>
   <data name="ucrInputTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -264,10 +222,10 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrInputTo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="ucrInputFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 24</value>
+    <value>111, 24</value>
   </data>
   <data name="ucrInputFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -285,13 +243,13 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrInputFrom.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="ucrDataFrameLengthForRegularSequence.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 128</value>
   </data>
   <data name="ucrDataFrameLengthForRegularSequence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 23</value>
+    <value>50, 23</value>
   </data>
   <data name="ucrDataFrameLengthForRegularSequence.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -306,7 +264,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;ucrDataFrameLengthForRegularSequence.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="lblLength.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -337,7 +295,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblLength.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="lblTimes.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,7 +325,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblTimes.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="lblRepeatValues.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +355,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblRepeatValues.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="lblInStepsOf.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -427,7 +385,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblInStepsOf.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,7 +418,7 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lblFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -493,6 +451,48 @@
     <value>grpSequenceDefinition</value>
   </data>
   <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrDateTimePickerTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 50</value>
+  </data>
+  <data name="ucrDateTimePickerTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="ucrDateTimePickerTo.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerTo.Name" xml:space="preserve">
+    <value>ucrDateTimePickerTo</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerTo.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerTo.Parent" xml:space="preserve">
+    <value>grpSequenceDefinition</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerTo.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrDateTimePickerFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 24</value>
+  </data>
+  <data name="ucrDateTimePickerFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="ucrDateTimePickerFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerFrom.Name" xml:space="preserve">
+    <value>ucrDateTimePickerFrom</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerFrom.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerFrom.Parent" xml:space="preserve">
+    <value>grpSequenceDefinition</value>
+  </data>
+  <data name="&gt;&gt;ucrDateTimePickerFrom.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="grpSequenceDefinition.Font" type="System.Drawing.Font, System.Drawing">
@@ -556,7 +556,7 @@
     <value>256, 96</value>
   </data>
   <data name="txtGetPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 172</value>
+    <value>185, 140</value>
   </data>
   <data name="txtGetPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -583,7 +583,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 271</value>
+    <value>256, 243</value>
   </data>
   <data name="lblMessage.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 52</value>
@@ -703,7 +703,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 24</value>
+    <value>325, 24</value>
   </data>
   <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

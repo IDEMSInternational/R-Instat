@@ -69,6 +69,7 @@ Partial Class dlgImportFromODK
         'ucrInputChooseForm
         '
         Me.ucrInputChooseForm.AddQuotesIfUnrecognised = True
+        Me.ucrInputChooseForm.GetSetSelectedIndex = -1
         Me.ucrInputChooseForm.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputChooseForm, "ucrInputChooseForm")
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"

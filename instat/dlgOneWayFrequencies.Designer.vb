@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -40,8 +40,8 @@ Partial Class dlgOneWayFrequencies
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneWayFrequencies))
         Me.grpSort = New System.Windows.Forms.GroupBox()
-        Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
-        Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
+        Me.rdoDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
@@ -51,6 +51,8 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrNudMinFreq = New instat.ucrNud()
+        Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
@@ -63,33 +65,34 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSort
         '
-        Me.grpSort.Controls.Add(Me.rdoDescendingFrequencies)
-        Me.grpSort.Controls.Add(Me.rdoAscendingFrequencies)
+        Me.grpSort.Controls.Add(Me.rdoDescending)
+        Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
         resources.ApplyResources(Me.grpSort, "grpSort")
         Me.grpSort.Name = "grpSort"
         Me.grpSort.TabStop = False
         '
-        'rdoDescendingFrequencies
+        'rdoDescending
         '
-        resources.ApplyResources(Me.rdoDescendingFrequencies, "rdoDescendingFrequencies")
-        Me.rdoDescendingFrequencies.Name = "rdoDescendingFrequencies"
-        Me.rdoDescendingFrequencies.TabStop = True
-        Me.rdoDescendingFrequencies.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoDescending, "rdoDescending")
+        Me.rdoDescending.Name = "rdoDescending"
+        Me.rdoDescending.TabStop = True
+        Me.rdoDescending.UseVisualStyleBackColor = True
         '
-        'rdoAscendingFrequencies
+        'rdoAscending
         '
-        resources.ApplyResources(Me.rdoAscendingFrequencies, "rdoAscendingFrequencies")
-        Me.rdoAscendingFrequencies.Name = "rdoAscendingFrequencies"
-        Me.rdoAscendingFrequencies.TabStop = True
-        Me.rdoAscendingFrequencies.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoAscending, "rdoAscending")
+        Me.rdoAscending.Name = "rdoAscending"
+        Me.rdoAscending.TabStop = True
+        Me.rdoAscending.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
@@ -156,6 +159,22 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.rdoAsText, "rdoAsText")
         Me.rdoAsText.Name = "rdoAsText"
         Me.rdoAsText.UseVisualStyleBackColor = True
+        '
+        'ucrNudMinFreq
+        '
+        Me.ucrNudMinFreq.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinFreq, "ucrNudMinFreq")
+        Me.ucrNudMinFreq.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinFreq.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Name = "ucrNudMinFreq"
+        Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMinFrq
+        '
+        Me.ucrChkMinFrq.Checked = False
+        resources.ApplyResources(Me.ucrChkMinFrq, "ucrChkMinFrq")
+        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
         '
         'ucrPnlOutput
         '
@@ -236,10 +255,18 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
+        'ucrSaveDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveDataFrame, "ucrSaveDataFrame")
+        Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveDataFrame)
+        Me.Controls.Add(Me.ucrNudMinFreq)
+        Me.Controls.Add(Me.ucrChkMinFrq)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
@@ -272,8 +299,8 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrSelectorOneWayFreq As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSort As GroupBox
-    Friend WithEvents rdoDescendingFrequencies As RadioButton
-    Friend WithEvents rdoAscendingFrequencies As RadioButton
+    Friend WithEvents rdoDescending As RadioButton
+    Friend WithEvents rdoAscending As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlSort As UcrPanel
     Friend WithEvents cmdOptions As Button
@@ -293,4 +320,7 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoAsHtml As RadioButton
     Friend WithEvents rdoAsText As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrNudMinFreq As ucrNud
+    Friend WithEvents ucrChkMinFrq As ucrCheck
+    Friend WithEvents ucrSaveDataFrame As ucrSave
 End Class

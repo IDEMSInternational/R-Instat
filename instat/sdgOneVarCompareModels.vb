@@ -21,7 +21,7 @@ Public Class sdgOneVarCompareModels
     Private clsChisqtableOperator, clsChisqbreaksOperator As New ROperator
     Private clsRSyntax As RSyntax
 
-    Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
@@ -49,7 +49,7 @@ Public Class sdgOneVarCompareModels
         ucrChkQQ.AddRSyntaxContainsFunctionNamesCondition(False, {"qqcomp"}, False)
 
         'ucrSaveGOF
-        ucrSaveGOF.SetPrefix("GOF")
+        ucrSaveGOF.SetPrefix("gof")
         ucrSaveGOF.SetCheckBoxText("Save Fit")
         ucrSaveGOF.SetIsComboBox()
         ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
@@ -59,7 +59,7 @@ Public Class sdgOneVarCompareModels
         ucrSaveGOF.ucrChkSave.Checked = False
 
         'ucrSaveDisplayChi
-        ' ucrSaveDisplayChi.SetPrefix("ChiSquare")
+        ' ucrSaveDisplayChi.SetPrefix("chiSquare")
         ucrSaveDisplayChi.SetSaveTypeAsDataFrame()
         ucrSaveDisplayChi.SetCheckBoxText("DisplayChi")
         ucrSaveDisplayChi.SetIsComboBox()

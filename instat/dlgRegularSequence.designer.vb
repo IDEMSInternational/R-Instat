@@ -70,10 +70,8 @@ Partial Class dlgRegularSequence
         'grpSequenceDefinition
         '
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputComboDatesBy)
-        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrChkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrNudRepeatValues)
-        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputFrom)
@@ -84,6 +82,8 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.lblInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTo)
         Me.grpSequenceDefinition.Controls.Add(Me.lblFrom)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerTo)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerFrom)
         resources.ApplyResources(Me.grpSequenceDefinition, "grpSequenceDefinition")
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
         Me.grpSequenceDefinition.TabStop = False

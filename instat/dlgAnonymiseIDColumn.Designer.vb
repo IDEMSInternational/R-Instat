@@ -97,7 +97,7 @@ Partial Class dlgAnonymiseIDColumn
         Me.ucrSaveAnonymisedColumn.Location = New System.Drawing.Point(10, 205)
         Me.ucrSaveAnonymisedColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveAnonymisedColumn.Name = "ucrSaveAnonymisedColumn"
-        Me.ucrSaveAnonymisedColumn.Size = New System.Drawing.Size(250, 22)
+        Me.ucrSaveAnonymisedColumn.Size = New System.Drawing.Size(321, 22)
         Me.ucrSaveAnonymisedColumn.TabIndex = 7
         '
         'ucrReceiverIDColumn

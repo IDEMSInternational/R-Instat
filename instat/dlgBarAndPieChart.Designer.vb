@@ -50,6 +50,22 @@ Partial Class dlgBarAndPieChart
         Me.lblXvariable = New System.Windows.Forms.Label()
         Me.rdoPie = New System.Windows.Forms.RadioButton()
         Me.rdoDonut = New System.Windows.Forms.RadioButton()
+        Me.lblLabelPosition = New System.Windows.Forms.Label()
+        Me.lblLabelColour = New System.Windows.Forms.Label()
+        Me.lblLabelSize = New System.Windows.Forms.Label()
+        Me.lblLollipopSize = New System.Windows.Forms.Label()
+        Me.lblLollipopColour = New System.Windows.Forms.Label()
+        Me.lblReorder = New System.Windows.Forms.Label()
+        Me.lblReorderX = New System.Windows.Forms.Label()
+        Me.ucrInputReorderX = New instat.ucrInputComboBox()
+        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
+        Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
+        Me.ucrNudLollipopSize = New instat.ucrNud()
+        Me.ucrChkLollipop = New instat.ucrCheck()
+        Me.ucrInputLabelSize = New instat.ucrInputComboBox()
+        Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
+        Me.ucrInputLabelColour = New instat.ucrInputComboBox()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrChkPolarCoordinates = New instat.ucrCheck()
         Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrChkBacktoback = New instat.ucrCheck()
@@ -62,6 +78,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblReorderValue = New System.Windows.Forms.Label()
+        Me.ucrInputReorderValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -146,6 +164,111 @@ Partial Class dlgBarAndPieChart
         Me.rdoDonut.TabStop = True
         Me.rdoDonut.UseVisualStyleBackColor = True
         '
+        'lblLabelPosition
+        '
+        resources.ApplyResources(Me.lblLabelPosition, "lblLabelPosition")
+        Me.lblLabelPosition.Name = "lblLabelPosition"
+        '
+        'lblLabelColour
+        '
+        resources.ApplyResources(Me.lblLabelColour, "lblLabelColour")
+        Me.lblLabelColour.Name = "lblLabelColour"
+        '
+        'lblLabelSize
+        '
+        resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
+        Me.lblLabelSize.Name = "lblLabelSize"
+        '
+        'lblLollipopSize
+        '
+        resources.ApplyResources(Me.lblLollipopSize, "lblLollipopSize")
+        Me.lblLollipopSize.Name = "lblLollipopSize"
+        '
+        'lblLollipopColour
+        '
+        resources.ApplyResources(Me.lblLollipopColour, "lblLollipopColour")
+        Me.lblLollipopColour.Name = "lblLollipopColour"
+        '
+        'lblReorder
+        '
+        resources.ApplyResources(Me.lblReorder, "lblReorder")
+        Me.lblReorder.Name = "lblReorder"
+        '
+        'lblReorderX
+        '
+        resources.ApplyResources(Me.lblReorderX, "lblReorderX")
+        Me.lblReorderX.Name = "lblReorderX"
+        '
+        'ucrInputReorderX
+        '
+        Me.ucrInputReorderX.AddQuotesIfUnrecognised = True
+        Me.ucrInputReorderX.GetSetSelectedIndex = -1
+        Me.ucrInputReorderX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputReorderX, "ucrInputReorderX")
+        Me.ucrInputReorderX.Name = "ucrInputReorderX"
+        '
+        'ucrInputAddReorder
+        '
+        Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddReorder.GetSetSelectedIndex = -1
+        Me.ucrInputAddReorder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAddReorder, "ucrInputAddReorder")
+        Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
+        '
+        'ucrInputLollipopColour
+        '
+        Me.ucrInputLollipopColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
+        Me.ucrInputLollipopColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLollipopColour, "ucrInputLollipopColour")
+        Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
+        '
+        'ucrNudLollipopSize
+        '
+        Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLollipopSize, "ucrNudLollipopSize")
+        Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
+        Me.ucrNudLollipopSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ucrChkLollipop
+        '
+        Me.ucrChkLollipop.Checked = False
+        resources.ApplyResources(Me.ucrChkLollipop, "ucrChkLollipop")
+        Me.ucrChkLollipop.Name = "ucrChkLollipop"
+        '
+        'ucrInputLabelSize
+        '
+        Me.ucrInputLabelSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelSize.GetSetSelectedIndex = -1
+        Me.ucrInputLabelSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelSize, "ucrInputLabelSize")
+        Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
+        '
+        'ucrInputLabelPosition
+        '
+        Me.ucrInputLabelPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLabelPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelPosition, "ucrInputLabelPosition")
+        Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
+        '
+        'ucrInputLabelColour
+        '
+        Me.ucrInputLabelColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelColour.GetSetSelectedIndex = -1
+        Me.ucrInputLabelColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabelColour, "ucrInputLabelColour")
+        Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        '
         'ucrChkPolarCoordinates
         '
         Me.ucrChkPolarCoordinates.Checked = False
@@ -228,10 +351,41 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'lblReorderValue
+        '
+        resources.ApplyResources(Me.lblReorderValue, "lblReorderValue")
+        Me.lblReorderValue.Name = "lblReorderValue"
+        '
+        'ucrInputReorderValue
+        '
+        Me.ucrInputReorderValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputReorderValue.GetSetSelectedIndex = -1
+        Me.ucrInputReorderValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
+        Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputReorderValue)
+        Me.Controls.Add(Me.lblReorderValue)
+        Me.Controls.Add(Me.lblReorderX)
+        Me.Controls.Add(Me.ucrInputReorderX)
+        Me.Controls.Add(Me.lblReorder)
+        Me.Controls.Add(Me.ucrInputAddReorder)
+        Me.Controls.Add(Me.ucrInputLollipopColour)
+        Me.Controls.Add(Me.lblLollipopColour)
+        Me.Controls.Add(Me.ucrNudLollipopSize)
+        Me.Controls.Add(Me.lblLollipopSize)
+        Me.Controls.Add(Me.ucrChkLollipop)
+        Me.Controls.Add(Me.lblLabelSize)
+        Me.Controls.Add(Me.ucrInputLabelSize)
+        Me.Controls.Add(Me.lblLabelColour)
+        Me.Controls.Add(Me.lblLabelPosition)
+        Me.Controls.Add(Me.ucrInputLabelPosition)
+        Me.Controls.Add(Me.ucrInputLabelColour)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.rdoDonut)
         Me.Controls.Add(Me.rdoPie)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
@@ -288,4 +442,22 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrPnlPolar As UcrPanel
     Friend WithEvents rdoDonut As RadioButton
     Friend WithEvents rdoPie As RadioButton
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents lblLabelColour As Label
+    Friend WithEvents lblLabelPosition As Label
+    Friend WithEvents ucrInputLabelPosition As ucrInputComboBox
+    Friend WithEvents ucrInputLabelColour As ucrInputComboBox
+    Friend WithEvents lblLabelSize As Label
+    Friend WithEvents ucrInputLabelSize As ucrInputComboBox
+    Friend WithEvents ucrInputLollipopColour As ucrInputComboBox
+    Friend WithEvents lblLollipopColour As Label
+    Friend WithEvents ucrNudLollipopSize As ucrNud
+    Friend WithEvents lblLollipopSize As Label
+    Friend WithEvents ucrChkLollipop As ucrCheck
+    Friend WithEvents ucrInputAddReorder As ucrInputComboBox
+    Friend WithEvents lblReorder As Label
+    Friend WithEvents lblReorderX As Label
+    Friend WithEvents ucrInputReorderX As ucrInputComboBox
+    Friend WithEvents ucrInputReorderValue As ucrInputComboBox
+    Friend WithEvents lblReorderValue As Label
 End Class
