@@ -181,6 +181,7 @@ Public Class frmMain
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
+
     ''' <summary>
     ''' Updates data view, column meta and data frame meta grids.
     ''' </summary>
