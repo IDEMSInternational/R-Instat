@@ -22,7 +22,6 @@ Public Class dlgCalculator
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
-
     'holds the original width of the form
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
@@ -162,7 +161,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 130
             Case "Transform"
                 Me.Width = iBasicWidth * 1.37
-                ucrBase.iHelpTopicID = 168
+                ucrBase.iHelpTopicID = 166
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
                 ucrBase.iHelpTopicID = 596
