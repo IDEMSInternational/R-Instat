@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class dlgCalculator
@@ -135,12 +136,15 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
+
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
+                ucrBase.iHelpTopicID = 126
             Case "Logical and Symbols"
                 Me.Width = iBasicWidth * 1.4
+                ucrBase.iHelpTopicID = 127
             Case "Summary"
                 Me.Width = iBasicWidth * 1.46
             Case "Test/Strings (Character Columns)"
@@ -172,6 +176,14 @@ Public Class dlgCalculator
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
+
+    '    Private Sub dlgCalculator_HelpButtonClicked(sender As Object, e As CancelEventArgs) Handles Me.HelpButtonClicked
+    '        Select Case ucrCalc.ucrInputCalOptions.GetText
+    '            Case "Maths"
+    '                Me.Width = iBasicWidth * 1.38
+    '                iHelpCalcID = 126
+    '        End Select
+    '    End Sub
 End Class
 
-    
+
