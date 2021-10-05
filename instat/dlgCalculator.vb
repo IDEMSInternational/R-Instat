@@ -147,26 +147,35 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 127
             Case "Summary"
                 Me.Width = iBasicWidth * 1.46
+                ucrBase.iHelpTopicID = 128
             Case "Test/Strings (Character Columns)"
                 Me.Width = iBasicWidth * 1.49
+                ucrBase.iHelpTopicID = 338
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
+                ucrBase.iHelpTopicID = 44
             Case "Probability"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 129
             Case "Dates/Times"
                 Me.Width = iBasicWidth * 1.37
+                ucrBase.iHelpTopicID = 130
             Case "Transform"
                 Me.Width = iBasicWidth * 1.37
+                ucrBase.iHelpTopicID = 168
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
+                ucrBase.iHelpTopicID = 596
             Case "Wakefield"
                 Me.Width = iBasicWidth * 1.73
+                ucrBase.iHelpTopicID = 444
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
             Case "Symbols"
                 Me.Width = iBasicWidth * 2.56
             Case "hydroGOF"
                 Me.Width = iBasicWidth * 1.27
+                ucrBase.iHelpTopicID = 598
             Case Else
                 Me.Width = iBasicWidth
         End Select
