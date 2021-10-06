@@ -80,25 +80,24 @@ Public Class dlgScript
         'ucrInputNewDataFrame.SetParameter(New RParameter("new_name", 1))
         ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
 
-
         'ucrSaveColoumn.SetPrefix("newcol")
         ucrSaveColumn.SetSaveTypeAsColumn()
-        ucrSaveColumn.SetDataFrameSelector(ucrDataFrameColumn)
+        ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSaveObject)
         ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetLabelText("Column Name:")
 
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrDataFrameObject)
+        ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSaveObject)
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetLabelText("Graph Name:")
 
         ucrSaveTable.SetSaveTypeAsTable()
-        ucrSaveTable.SetDataFrameSelector(ucrDataFrameObject)
+        ucrSaveTable.SetDataFrameSelector(ucrDataFrameSaveObject)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetLabelText("Table Name:")
 
         ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetDataFrameSelector(ucrDataFrameObject)
+        ucrSaveModel.SetDataFrameSelector(ucrDataFrameSaveObject)
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetLabelText("Model Name:")
 
@@ -146,9 +145,8 @@ Public Class dlgScript
 
         'save controls reset
         ucrInputSaveDataFrame.SetName("")
-        ucrDataFrameColumn.Reset()
         ucrSaveColumn.Reset()
-        ucrDataFrameObject.Reset()
+        ucrDataFrameSaveObject.Reset()
         ucrSaveGraph.Reset()
         ucrSaveTable.Reset()
         ucrSaveModel.Reset()
@@ -249,11 +247,11 @@ Public Class dlgScript
 
     'todo. do we really need this?
     Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputSaveDataFrame.ContentsChanged
-        btnSaveDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
+        btnSaveNewDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
     End Sub
 
 
-    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
+    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveNewDataframe.Click
         Dim clsImportNewDataFrame As New RFunction
         Dim clsRFunctionList As New RFunction
 
@@ -266,7 +264,6 @@ Public Class dlgScript
         AddScript(ucrInputSaveDataFrame.GetText() & "<-")
         AddScript(clsImportNewDataFrame.ToScript)
     End Sub
-
 
 
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveNewColumn.Click
