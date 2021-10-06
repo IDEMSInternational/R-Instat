@@ -2427,4 +2427,8 @@ Public Class frmMain
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
         dlgExportToClimsoft.ShowDialog()
     End Sub
+
+    Private Sub CompareColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompareColumnsToolStripMenuItem.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
 End Class
