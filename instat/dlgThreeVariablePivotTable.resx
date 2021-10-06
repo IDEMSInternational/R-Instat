@@ -130,13 +130,13 @@
     <value>258, 187</value>
   </data>
   <data name="lblAdditionalRowFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
+    <value>51, 13</value>
   </data>
   <data name="lblAdditionalRowFactor.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
   <data name="lblAdditionalRowFactor.Text" xml:space="preserve">
-    <value>Additional Row Factor:</value>
+    <value>Variable :</value>
   </data>
   <data name="&gt;&gt;lblAdditionalRowFactor.Name" xml:space="preserve">
     <value>lblAdditionalRowFactor</value>
@@ -213,55 +213,55 @@
   <metadata name="ttSelectedVariable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>9, 1</value>
   </metadata>
-  <data name="lblRenderer.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTableChart.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblRenderer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblTableChart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblRenderer.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblTableChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 233</value>
   </data>
-  <data name="lblRenderer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+  <data name="lblTableChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
   </data>
-  <data name="lblRenderer.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblTableChart.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
   </data>
-  <data name="lblRenderer.Text" xml:space="preserve">
-    <value>Renderer :</value>
+  <data name="lblTableChart.Text" xml:space="preserve">
+    <value>Table/Chart  :</value>
   </data>
-  <data name="&gt;&gt;lblRenderer.Name" xml:space="preserve">
-    <value>lblRenderer</value>
+  <data name="&gt;&gt;lblTableChart.Name" xml:space="preserve">
+    <value>lblTableChart</value>
   </data>
-  <data name="&gt;&gt;lblRenderer.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTableChart.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblRenderer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTableChart.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblRenderer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTableChart.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrInputRenderer.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputTableChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 227</value>
   </data>
-  <data name="ucrInputRenderer.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputTableChart.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
   </data>
-  <data name="ucrInputRenderer.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputTableChart.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
   </data>
-  <data name="&gt;&gt;ucrInputRenderer.Name" xml:space="preserve">
-    <value>ucrInputRenderer</value>
+  <data name="&gt;&gt;ucrInputTableChart.Name" xml:space="preserve">
+    <value>ucrInputTableChart</value>
   </data>
-  <data name="&gt;&gt;ucrInputRenderer.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableChart.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputRenderer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableChart.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputRenderer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableChart.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -276,55 +276,55 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>417, 456</value>
   </data>
-  <data name="ucrInputAggregator.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputSummary.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 262</value>
   </data>
-  <data name="ucrInputAggregator.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
   </data>
-  <data name="ucrInputAggregator.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputSummary.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="&gt;&gt;ucrInputAggregator.Name" xml:space="preserve">
-    <value>ucrInputAggregator</value>
+  <data name="&gt;&gt;ucrInputSummary.Name" xml:space="preserve">
+    <value>ucrInputSummary</value>
   </data>
-  <data name="&gt;&gt;ucrInputAggregator.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSummary.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputAggregator.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSummary.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputAggregator.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSummary.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblAggregator.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblSummary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblAggregator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblSummary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblAggregator.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblSummary.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 265</value>
   </data>
-  <data name="lblAggregator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+  <data name="lblSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
   </data>
-  <data name="lblAggregator.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblSummary.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="lblAggregator.Text" xml:space="preserve">
-    <value>Aggregator : </value>
+  <data name="lblSummary.Text" xml:space="preserve">
+    <value>Summary : </value>
   </data>
-  <data name="&gt;&gt;lblAggregator.Name" xml:space="preserve">
-    <value>lblAggregator</value>
+  <data name="&gt;&gt;lblSummary.Name" xml:space="preserve">
+    <value>lblSummary</value>
   </data>
-  <data name="&gt;&gt;lblAggregator.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblAggregator.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSummary.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblAggregator.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSummary.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrReceiverAdditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
@@ -509,9 +509,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorPivot.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

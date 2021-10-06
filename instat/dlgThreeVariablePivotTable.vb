@@ -70,13 +70,13 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
-        ucrInputRenderer.SetParameter(New RParameter("rendererName", iNewPosition:=5))
-        ucrInputRenderer.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
+        ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
+        ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
          "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
          "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
 
-        ucrInputAggregator.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
-        ucrInputAggregator.SetItems({"Count", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
+        ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
+        ucrInputSummary.SetItems({"Count", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
                                     "Average", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
                                     "Maximum", "First", "Last", "Sum over Sum", "80% Upper Bound", "80% Lower Bound",
                                     "Sum as Fraction of Totals", "Sum as Fraction of Rows", "Sum as Fraction of Columns",
@@ -130,8 +130,8 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverAdditionalRowFactor.SetRCode(clsRPivotTableFunction, bReset)
-        ucrInputRenderer.SetRCode(clsRPivotTableFunction, bReset)
-        ucrInputAggregator.SetRCode(clsRPivotTableFunction, bReset)
+        ucrInputTableChart.SetRCode(clsRPivotTableFunction, bReset)
+        ucrInputSummary.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
