@@ -62,24 +62,17 @@ Public Class dlgScript
 
         ucrSelectorGet.SetParameterIsString()
 
-        ucrReceiverGetCol.SetParameter(New RParameter("string", 0))
-        ucrReceiverGetCol.SetParameterIsRFunction()
-        ucrReceiverGetCol.Selector = ucrSelectorGet
-        ucrReceiverGetCol.bUseFilteredData = False
-        ucrReceiverGetCol.SetMeAsReceiver()
-        ucrReceiverGetCol.SetLinkedDisplayControl(New List(Of Control)({lblGetColumn, btnGetColumn}))
-
         'get object controls
         ucrPnlGetObject.AddRadioButton(rdoGraph)
         ucrPnlGetObject.AddRadioButton(rdoTable)
         ucrPnlGetObject.AddRadioButton(rdoModel)
 
-        ucrReceiverGetObject.SetParameter(New RParameter("string", 0))
-        ucrReceiverGetObject.SetParameterIsRFunction()
-        ucrReceiverGetObject.Selector = ucrSelectorGet
-        ucrReceiverGetObject.bUseFilteredData = False
-        'ucrReceiverGetObject.SetMeAsReceiver()
-        ucrReceiverGetObject.SetLinkedDisplayControl(New List(Of Control)({lblGetSelectedObject, btnGetObject}))
+        ucrReceiverGet.SetParameter(New RParameter("string", 0))
+        ucrReceiverGet.SetParameterIsRFunction()
+        ucrReceiverGet.Selector = ucrSelectorGet
+        ucrReceiverGet.bUseFilteredData = False
+        ucrReceiverGet.SetMeAsReceiver()
+        ucrReceiverGet.SetLinkedDisplayControl(New List(Of Control)({lblGet, btnGet}))
 
 
         '---------------------------------------------------
@@ -202,38 +195,38 @@ Public Class dlgScript
 
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
-
         ucrComboGetPackage.SetVisible(False)
         ucrDataFrameGet.SetVisible(False)
         ucrSelectorGet.SetVisible(False)
         ucrPnlGetObject.SetVisible(False)
-        ucrReceiverGetCol.SetVisible(False)
-        ucrReceiverGetObject.SetVisible(False)
+        ucrReceiverGet.SetVisible(False)
         If rdoGetPackage.Checked Then
             ucrComboGetPackage.SetVisible(True)
         ElseIf rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
         ElseIf rdoGetColumn.Checked Then
             ucrSelectorGet.SetVisible(True)
-            ucrReceiverGetObject.SetVisible(True)
-            ucrReceiverGetObject.SetItemType("column")
-            ucrReceiverGetCol.SetMeAsReceiver()
+            ucrReceiverGet.SetVisible(True)
+            ucrReceiverGet.SetItemType("column")
+            ucrReceiverGet.Clear()
+            'ucrReceiverGetObject.SetMeAsReceiver()
         ElseIf rdoGetObject.Checked Then
             ucrSelectorGet.SetVisible(True)
             ucrPnlGetObject.SetVisible(True)
-            ucrReceiverGetObject.SetVisible(True)
-            ucrReceiverGetObject.SetMeAsReceiver()
+            ucrReceiverGet.SetVisible(True)
+            ucrReceiverGet.Clear()
+            'ucrReceiverGetObject.SetMeAsReceiver()
         End If
     End Sub
 
     Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
-        ucrReceiverGetObject.Clear()
+        ucrReceiverGet.Clear()
         If rdoGraph.Checked Then
-            ucrReceiverGetObject.SetItemType("graph")
+            ucrReceiverGet.SetItemType("graph")
         ElseIf rdoTable.Checked Then
-            ucrReceiverGetObject.SetItemType("table")
+            ucrReceiverGet.SetItemType("table")
         ElseIf rdoModel.Checked Then
-            ucrReceiverGetObject.SetItemType("model")
+            ucrReceiverGet.SetItemType("model")
         End If
     End Sub
 
@@ -248,15 +241,8 @@ Public Class dlgScript
         AddScript(strAssignedScript)
     End Sub
 
-    Private Sub btnGetColumn_Click(sender As Object, e As EventArgs) Handles btnGetColumn.Click
-        Dim clsFunction As RFunction = ucrReceiverGetCol.GetVariables()
-        Dim strAssignedScript As String = ""
-        clsFunction.ToScript(strScript:=strAssignedScript)
-        AddScript(strAssignedScript)
-    End Sub
-
-    Private Sub btnGetObject_Click(sender As Object, e As EventArgs) Handles btnGetObject.Click
-        Dim clsFunction As RFunction = ucrReceiverGetObject.GetVariables()
+    Private Sub btnGetObject_Click(sender As Object, e As EventArgs) Handles btnGet.Click
+        Dim clsFunction As RFunction = ucrReceiverGet.GetVariables()
         Dim strAssignedScript As String = ""
         clsFunction.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
