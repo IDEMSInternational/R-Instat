@@ -215,7 +215,8 @@ Public Class dlgScript
             ucrDataFrameGet.SetVisible(True)
         ElseIf rdoGetColumn.Checked Then
             ucrSelectorGet.SetVisible(True)
-            ucrReceiverGetCol.SetVisible(True)
+            ucrReceiverGetObject.SetVisible(True)
+            ucrReceiverGetObject.SetItemType("column")
             ucrReceiverGetCol.SetMeAsReceiver()
         ElseIf rdoGetObject.Checked Then
             ucrSelectorGet.SetVisible(True)
@@ -226,6 +227,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
+        ucrReceiverGetObject.Clear()
         If rdoGraph.Checked Then
             ucrReceiverGetObject.SetItemType("graph")
         ElseIf rdoTable.Checked Then

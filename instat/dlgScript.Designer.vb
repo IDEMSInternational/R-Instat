@@ -159,7 +159,7 @@ Partial Class dlgScript
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(438, 585)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Data From R-Instat"
+        Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'rdoTable
@@ -398,7 +398,7 @@ Partial Class dlgScript
         Me.TabPage3.Controls.Add(Me.grpBoxNewColumn)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(438, 662)
+        Me.TabPage3.Size = New System.Drawing.Size(438, 585)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Save Results"
         Me.TabPage3.UseVisualStyleBackColor = True
