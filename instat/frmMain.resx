@@ -3430,16 +3430,16 @@
     <value>Column: Date</value>
   </data>
   <data name="mnuPrepareColumnDefineConvertColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="mnuPrepareColumnDefineConvertColumns.Text" xml:space="preserve">
     <value>Convert Columns...</value>
   </data>
   <data name="ToolStripSeparator55.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>173, 6</value>
   </data>
   <data name="mnuPrepareColumnDefineCircular.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>176, 22</value>
   </data>
   <data name="mnuPrepareColumnDefineCircular.Text" xml:space="preserve">
     <value>Circular...</value>
@@ -3517,7 +3517,7 @@
     <value>193, 22</value>
   </data>
   <data name="mnuPrepareDataReshapeTransformClusters.Text" xml:space="preserve">
-    <value>Transform Cluster...</value>
+    <value>Scale/Distance...</value>
   </data>
   <data name="mnuPrepareDataReshape.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -9429,6 +9429,12 @@
   <data name="&gt;&gt;mnuPrepareColumnReshapeTranspose.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuPrepareDataReshapeTransformClusters.Name" xml:space="preserve">
+    <value>mnuPrepareDataReshapeTransformClusters</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareDataReshapeTransformClusters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripSeparator7.Name" xml:space="preserve">
     <value>ToolStripSeparator7</value>
   </data>
@@ -10243,12 +10249,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareDataReshapeTransformClusters.Name" xml:space="preserve">
-    <value>mnuPrepareDataReshapeTransformClusters</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareDataReshapeTransformClusters.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

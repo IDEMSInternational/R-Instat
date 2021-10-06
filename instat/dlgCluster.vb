@@ -51,7 +51,7 @@ Public Class dlgCluster
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
 
-        ucrPnlPrepareData.AddFunctionNamesCondition(rdoScaleData, "scale")
+        ucrPnlPrepareData.AddFunctionNamesCondition(rdoScaleData, {"scale", "na.omit"})
 
         ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
         ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
@@ -85,12 +85,16 @@ Public Class dlgCluster
         clsStatsScaleFunction = New RFunction
         clsDummyFunction = New RFunction
 
+        ucrChkOmitMissingRows.Checked = False
+        ucrSaveNewDataFrame.SetPrefix("scale")
+
         ucrSelectorPrepareData.Reset()
         ucrSaveNewDataFrame.Reset()
 
         clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
 
         clsScaleFunction.SetRCommand("scale")
+
 
         clsStatsScaleFunction.SetRCommand("scale")
 
@@ -99,6 +103,7 @@ Public Class dlgCluster
         clsStatsNAOmitFunction.AddParameter("object", clsRFunctionParameter:=clsStatsScaleFunction, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
+        ChangeDataParameter()
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkCenterEachVariable.AddAdditionalCodeParameterPair(clsStatsScaleFunction, New RParameter("center", 1), iAdditionalPairNo:=1)
@@ -113,7 +118,7 @@ Public Class dlgCluster
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) Then
+        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) OrElse Not ucrSaveNewDataFrame.IsComplete() Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -138,8 +143,6 @@ Public Class dlgCluster
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
             End If
-        Else
-
         End If
     End Sub
 
@@ -173,7 +176,7 @@ Public Class dlgCluster
         End If
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlContentsChanged, ucrSelectorPrepareData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlContentsChanged, ucrSelectorPrepareData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

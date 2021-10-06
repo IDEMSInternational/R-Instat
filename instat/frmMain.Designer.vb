@@ -522,6 +522,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnReshapeSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeTransformClusters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
@@ -669,7 +670,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareDataReshapeTransformClusters = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3394,6 +3394,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareColumnReshapeTranspose, "mnuPrepareColumnReshapeTranspose")
         Me.mnuPrepareColumnReshapeTranspose.Tag = "Transpose..."
         '
+        'mnuPrepareDataReshapeTransformClusters
+        '
+        Me.mnuPrepareDataReshapeTransformClusters.Name = "mnuPrepareDataReshapeTransformClusters"
+        resources.ApplyResources(Me.mnuPrepareDataReshapeTransformClusters, "mnuPrepareDataReshapeTransformClusters")
+        '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
@@ -4237,11 +4242,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuPrepareDataReshapeTransformClusters
-        '
-        Me.mnuPrepareDataReshapeTransformClusters.Name = "mnuPrepareDataReshapeTransformClusters"
-        resources.ApplyResources(Me.mnuPrepareDataReshapeTransformClusters, "mnuPrepareDataReshapeTransformClusters")
         '
         'frmMain
         '
