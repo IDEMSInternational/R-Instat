@@ -51,11 +51,19 @@ Partial Class dlgRatingScales
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.grpSortTable = New System.Windows.Forms.GroupBox()
+        Me.rdoHighDescendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoLowDescendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoLowAscendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoNoneTable = New System.Windows.Forms.RadioButton()
+        Me.rdoHighAscendingTable = New System.Windows.Forms.RadioButton()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkNumberOfCategories = New instat.ucrCheck()
         Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlTableOptions = New instat.UcrPanel()
+        Me.ucrPnlLikertOptions = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
@@ -63,6 +71,7 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
+        Me.grpSortTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblOrderedFactor
@@ -77,6 +86,7 @@ Partial Class dlgRatingScales
         Me.grpSort.Controls.Add(Me.rdoLowAscendingLikert)
         Me.grpSort.Controls.Add(Me.rdoNoneLikert)
         Me.grpSort.Controls.Add(Me.rdoHighAscendingLikert)
+        Me.grpSort.Controls.Add(Me.ucrPnlLikertOptions)
         resources.ApplyResources(Me.grpSort, "grpSort")
         Me.grpSort.Name = "grpSort"
         Me.grpSort.TabStop = False
@@ -160,6 +170,53 @@ Partial Class dlgRatingScales
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.UseVisualStyleBackColor = True
         '
+        'grpSortTable
+        '
+        Me.grpSortTable.Controls.Add(Me.rdoHighDescendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoLowAscendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoHighAscendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoLowDescendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoNoneTable)
+        Me.grpSortTable.Controls.Add(Me.ucrPnlTableOptions)
+        resources.ApplyResources(Me.grpSortTable, "grpSortTable")
+        Me.grpSortTable.Name = "grpSortTable"
+        Me.grpSortTable.TabStop = False
+        '
+        'rdoHighDescendingTable
+        '
+        resources.ApplyResources(Me.rdoHighDescendingTable, "rdoHighDescendingTable")
+        Me.rdoHighDescendingTable.Name = "rdoHighDescendingTable"
+        Me.rdoHighDescendingTable.TabStop = True
+        Me.rdoHighDescendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoLowDescendingTable
+        '
+        resources.ApplyResources(Me.rdoLowDescendingTable, "rdoLowDescendingTable")
+        Me.rdoLowDescendingTable.Name = "rdoLowDescendingTable"
+        Me.rdoLowDescendingTable.TabStop = True
+        Me.rdoLowDescendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoLowAscendingTable
+        '
+        resources.ApplyResources(Me.rdoLowAscendingTable, "rdoLowAscendingTable")
+        Me.rdoLowAscendingTable.Name = "rdoLowAscendingTable"
+        Me.rdoLowAscendingTable.TabStop = True
+        Me.rdoLowAscendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoNoneTable
+        '
+        resources.ApplyResources(Me.rdoNoneTable, "rdoNoneTable")
+        Me.rdoNoneTable.Name = "rdoNoneTable"
+        Me.rdoNoneTable.TabStop = True
+        Me.rdoNoneTable.UseVisualStyleBackColor = True
+        '
+        'rdoHighAscendingTable
+        '
+        resources.ApplyResources(Me.rdoHighAscendingTable, "rdoHighAscendingTable")
+        Me.rdoHighAscendingTable.Name = "rdoHighAscendingTable"
+        Me.rdoHighAscendingTable.TabStop = True
+        Me.rdoHighAscendingTable.UseVisualStyleBackColor = True
+        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
@@ -191,6 +248,16 @@ Partial Class dlgRatingScales
         Me.ucrChkFlip.Checked = False
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
+        '
+        'ucrPnlTableOptions
+        '
+        resources.ApplyResources(Me.ucrPnlTableOptions, "ucrPnlTableOptions")
+        Me.ucrPnlTableOptions.Name = "ucrPnlTableOptions"
+        '
+        'ucrPnlLikertOptions
+        '
+        resources.ApplyResources(Me.ucrPnlLikertOptions, "ucrPnlLikertOptions")
+        Me.ucrPnlLikertOptions.Name = "ucrPnlLikertOptions"
         '
         'ucrReceiverWeights
         '
@@ -233,6 +300,7 @@ Partial Class dlgRatingScales
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpSortTable)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
@@ -255,6 +323,8 @@ Partial Class dlgRatingScales
         Me.grpSort.PerformLayout()
         Me.grpLikertType.ResumeLayout(False)
         Me.grpLikertType.PerformLayout()
+        Me.grpSortTable.ResumeLayout(False)
+        Me.grpSortTable.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -282,4 +352,12 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents grpSortTable As GroupBox
+    Friend WithEvents rdoHighDescendingTable As RadioButton
+    Friend WithEvents rdoLowDescendingTable As RadioButton
+    Friend WithEvents rdoLowAscendingTable As RadioButton
+    Friend WithEvents rdoNoneTable As RadioButton
+    Friend WithEvents rdoHighAscendingTable As RadioButton
+    Friend WithEvents ucrPnlTableOptions As UcrPanel
+    Friend WithEvents ucrPnlLikertOptions As UcrPanel
 End Class
