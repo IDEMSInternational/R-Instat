@@ -129,7 +129,6 @@ Public Class dlgRatingScales
 
         rdoNoneLikert.Checked = True
 
-        'ChangeOfParameters()
         ucrSaveGraph.Reset()
         ucrSelectorRatingScale.Reset()
         ucrReceiverOrderedFactors.SetMeAsReceiver()
@@ -256,53 +255,6 @@ Public Class dlgRatingScales
             ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
-
-
-    'Private Sub ChangeOfParameters()
-    '    If rdoLikert.Checked Then
-    '        clsSjtStackFrq.RemoveParameterByName("sort.frq")
-    '        clsSjpStackFrq.RemoveParameterByName("sort.frq")
-    '        If rdoNoneLikert.Checked Then
-    '            clsSjpLikert.AddParameter("sort.frq", "NULL")
-    '        ElseIf rdoLowAscendingLikert.Checked Then
-    '            clsSjpLikert.AddParameter("sort.frq", Chr(34) & "neg.asc" & Chr(34))
-    '        ElseIf rdoLowDescendingLikert.Checked Then
-    '            clsSjpLikert.AddParameter("sort.frq", Chr(34) & "neg.desc" & Chr(34))
-    '        ElseIf rdoHighAscendingLikert.Checked Then
-    '            clsSjpLikert.AddParameter("sort.frq", Chr(34) & "pos.asc" & Chr(34))
-    '        ElseIf rdoHighDescendingLikert.Checked Then
-    '            clsSjpLikert.AddParameter("sort.frq", Chr(34) & "pos.desc" & Chr(34))
-    '        End If
-    '    ElseIf rdoStacked.Checked Then
-    '        clsSjtStackFrq.RemoveParameterByName("sort.frq")
-    '        clsSjpLikert.RemoveParameterByName("sort.frq")
-    '        If rdoNoneLikert.Checked Then
-    '            clsSjpStackFrq.AddParameter("sort.frq", "NULL")
-    '        ElseIf rdoLowAscendingLikert.Checked Then
-    '            clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "last.asc" & Chr(34))
-    '        ElseIf rdoLowDescendingLikert.Checked Then
-    '            clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "last.desc" & Chr(34))
-    '        ElseIf rdoHighAscendingLikert.Checked Then
-    '            clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "first.asc" & Chr(34))
-    '        ElseIf rdoHighDescendingLikert.Checked Then
-    '            clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "first.desc" & Chr(34))
-    '        End If
-    '    ElseIf rdoTable.Checked Then
-    '        clsSjpLikert.RemoveParameterByName("sort.frq")
-    '        clsSjpStackFrq.RemoveParameterByName("sort.frq")
-    '        If rdoNoneLikert.Checked Then
-    '            clsSjtStackFrq.AddParameter("sort.frq", "NULL")
-    '        ElseIf rdoLowAscendingLikert.Checked Then
-    '            clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "last.asc" & Chr(34))
-    '        ElseIf rdoLowDescendingLikert.Checked Then
-    '            clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "last.desc" & Chr(34))
-    '        ElseIf rdoHighAscendingLikert.Checked Then
-    '            clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "first.asc" & Chr(34))
-    '        ElseIf rdoHighDescendingLikert.Checked Then
-    '            clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "first.desc" & Chr(34))
-    '        End If
-    '    End If
-    'End Sub
 
     Private Function IsOdd(iNumb As Integer) As Boolean
         If ((iNumb >= 2 Or iNumb <= -2) AndAlso (iNumb Mod 2 <> 0)) Then
