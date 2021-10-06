@@ -102,8 +102,6 @@ Public Class dlgRecodeFactor
         ucrFactorLevels.SetIncludeLevels(False)
         ucrFactorLevels.bIncludeNA = True
 
-        ucrInputOther.SetText("Other")
-
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
@@ -141,6 +139,9 @@ Public Class dlgRecodeFactor
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
         ucrSaveNewColumn.Reset()
+
+        ucrInputAddNa.SetText("(Missing)")
+        ucrInputOther.SetText("Other")
 
         clsDummyFunction.AddParameter("checked", "levels", iPosition:=0)
 
