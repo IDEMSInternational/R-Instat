@@ -2423,4 +2423,8 @@ Public Class frmMain
     Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
+        dlgExportToClimsoft.ShowDialog()
+    End Sub
 End Class

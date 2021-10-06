@@ -57,6 +57,7 @@ Partial Class frmMain
         Me.mnuDescribeThreeVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeThreeVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -669,7 +670,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileExportToClimsoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -797,6 +798,11 @@ Partial Class frmMain
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
         resources.ApplyResources(Me.mnuDescribeThreeVariableFrequencies, "mnuDescribeThreeVariableFrequencies")
+        '
+        'mnuDescribeThreeVariablePivotTable
+        '
+        Me.mnuDescribeThreeVariablePivotTable.Name = "mnuDescribeThreeVariablePivotTable"
+        resources.ApplyResources(Me.mnuDescribeThreeVariablePivotTable, "mnuDescribeThreeVariablePivotTable")
         '
         'mnuDescribeSpecificTablesGraphs
         '
@@ -1496,7 +1502,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToClimsoft, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -4238,10 +4244,10 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuDescribeThreeVariablePivotTable
+        'mnuClimaticFileExportToClimsoft
         '
-        Me.mnuDescribeThreeVariablePivotTable.Name = "mnuDescribeThreeVariablePivotTable"
-        resources.ApplyResources(Me.mnuDescribeThreeVariablePivotTable, "mnuDescribeThreeVariablePivotTable")
+        resources.ApplyResources(Me.mnuClimaticFileExportToClimsoft, "mnuClimaticFileExportToClimsoft")
+        Me.mnuClimaticFileExportToClimsoft.Name = "mnuClimaticFileExportToClimsoft"
         '
         'frmMain
         '
@@ -4920,4 +4926,5 @@ Partial Class frmMain
     Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
     Friend WithEvents mnuDescribeThreeVariablePivotTable As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileExportToClimsoft As ToolStripMenuItem
 End Class
