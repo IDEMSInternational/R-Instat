@@ -29,18 +29,23 @@ Partial Class dlgScript
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.rdoGetObject = New System.Windows.Forms.RadioButton()
+        Me.rdoGetDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoGetColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoGetPackage = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlGetData = New instat.UcrPanel()
+        Me.lblGetPackage = New System.Windows.Forms.Label()
+        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
+        Me.btnGetPackage = New System.Windows.Forms.Button()
+        Me.ucrDataFrameGet = New instat.ucrDataFrame()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoModel = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetObject = New instat.UcrPanel()
-        Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblGetSelectedObject = New System.Windows.Forms.Label()
         Me.btnGetObject = New System.Windows.Forms.Button()
         Me.ucrReceiverGetObject = New instat.ucrReceiverSingle()
-        Me.ucrDataFrameGet = New instat.ucrDataFrame()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.ucrSelectorGetColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorGet = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverGetCol = New instat.ucrReceiverSingle()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -64,18 +69,8 @@ Partial Class dlgScript
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrInputCommand = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblGetPackage = New System.Windows.Forms.Label()
-        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
-        Me.btnGetPackage = New System.Windows.Forms.Button()
-        Me.ucrPnlGetData = New instat.UcrPanel()
-        Me.rdoGetDataFrame = New System.Windows.Forms.RadioButton()
-        Me.rdoGetColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoGetPackage = New System.Windows.Forms.RadioButton()
-        Me.rdoGetObject = New System.Windows.Forms.RadioButton()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.grpBoxNewObject.SuspendLayout()
@@ -86,7 +81,7 @@ Partial Class dlgScript
         'btnGetDataFrame
         '
         Me.btnGetDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetDataFrame.Location = New System.Drawing.Point(188, 132)
+        Me.btnGetDataFrame.Location = New System.Drawing.Point(188, 169)
         Me.btnGetDataFrame.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnGetDataFrame.Name = "btnGetDataFrame"
         Me.btnGetDataFrame.Size = New System.Drawing.Size(74, 23)
@@ -109,7 +104,7 @@ Partial Class dlgScript
         '
         Me.lblGetColumn.AutoSize = True
         Me.lblGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGetColumn.Location = New System.Drawing.Point(255, 63)
+        Me.lblGetColumn.Location = New System.Drawing.Point(265, 214)
         Me.lblGetColumn.Name = "lblGetColumn"
         Me.lblGetColumn.Size = New System.Drawing.Size(90, 13)
         Me.lblGetColumn.TabIndex = 35
@@ -118,7 +113,7 @@ Partial Class dlgScript
         'btnGetColumn
         '
         Me.btnGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetColumn.Location = New System.Drawing.Point(256, 111)
+        Me.btnGetColumn.Location = New System.Drawing.Point(266, 262)
         Me.btnGetColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnGetColumn.Name = "btnGetColumn"
         Me.btnGetColumn.Size = New System.Drawing.Size(74, 23)
@@ -150,7 +145,18 @@ Partial Class dlgScript
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.rdoTable)
+        Me.TabPage2.Controls.Add(Me.lblGetColumn)
+        Me.TabPage2.Controls.Add(Me.rdoModel)
+        Me.TabPage2.Controls.Add(Me.btnGetColumn)
+        Me.TabPage2.Controls.Add(Me.rdoGraph)
+        Me.TabPage2.Controls.Add(Me.ucrSelectorGet)
+        Me.TabPage2.Controls.Add(Me.ucrPnlGetObject)
         Me.TabPage2.Controls.Add(Me.rdoGetObject)
+        Me.TabPage2.Controls.Add(Me.lblGetSelectedObject)
+        Me.TabPage2.Controls.Add(Me.btnGetObject)
+        Me.TabPage2.Controls.Add(Me.ucrReceiverGetCol)
+        Me.TabPage2.Controls.Add(Me.ucrReceiverGetObject)
         Me.TabPage2.Controls.Add(Me.rdoGetDataFrame)
         Me.TabPage2.Controls.Add(Me.rdoGetColumn)
         Me.TabPage2.Controls.Add(Me.rdoGetPackage)
@@ -160,8 +166,6 @@ Partial Class dlgScript
         Me.TabPage2.Controls.Add(Me.btnGetPackage)
         Me.TabPage2.Controls.Add(Me.ucrDataFrameGet)
         Me.TabPage2.Controls.Add(Me.btnGetDataFrame)
-        Me.TabPage2.Controls.Add(Me.GroupBox6)
-        Me.TabPage2.Controls.Add(Me.GroupBox4)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -170,22 +174,120 @@ Partial Class dlgScript
         Me.TabPage2.Text = "Data From R-Instat"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'GroupBox6
+        'rdoGetObject
         '
-        Me.GroupBox6.Controls.Add(Me.rdoTable)
-        Me.GroupBox6.Controls.Add(Me.rdoModel)
-        Me.GroupBox6.Controls.Add(Me.rdoGraph)
-        Me.GroupBox6.Controls.Add(Me.ucrPnlGetObject)
-        Me.GroupBox6.Controls.Add(Me.ucrSelectorGetObject)
-        Me.GroupBox6.Controls.Add(Me.Label2)
-        Me.GroupBox6.Controls.Add(Me.btnGetObject)
-        Me.GroupBox6.Controls.Add(Me.ucrReceiverGetObject)
-        Me.GroupBox6.Location = New System.Drawing.Point(10, 392)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(419, 256)
-        Me.GroupBox6.TabIndex = 38
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Get Object:"
+        Me.rdoGetObject.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetObject.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetObject.FlatAppearance.BorderSize = 2
+        Me.rdoGetObject.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetObject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetObject.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetObject.Location = New System.Drawing.Point(267, 12)
+        Me.rdoGetObject.Name = "rdoGetObject"
+        Me.rdoGetObject.Size = New System.Drawing.Size(80, 30)
+        Me.rdoGetObject.TabIndex = 46
+        Me.rdoGetObject.TabStop = True
+        Me.rdoGetObject.Text = "Object"
+        Me.rdoGetObject.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetObject.UseVisualStyleBackColor = True
+        '
+        'rdoGetDataFrame
+        '
+        Me.rdoGetDataFrame.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetDataFrame.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetDataFrame.FlatAppearance.BorderSize = 2
+        Me.rdoGetDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetDataFrame.Location = New System.Drawing.Point(111, 12)
+        Me.rdoGetDataFrame.Name = "rdoGetDataFrame"
+        Me.rdoGetDataFrame.Size = New System.Drawing.Size(80, 30)
+        Me.rdoGetDataFrame.TabIndex = 44
+        Me.rdoGetDataFrame.TabStop = True
+        Me.rdoGetDataFrame.Text = "Data Frame"
+        Me.rdoGetDataFrame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetDataFrame.UseVisualStyleBackColor = True
+        '
+        'rdoGetColumn
+        '
+        Me.rdoGetColumn.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetColumn.FlatAppearance.BorderSize = 2
+        Me.rdoGetColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetColumn.Location = New System.Drawing.Point(189, 12)
+        Me.rdoGetColumn.Name = "rdoGetColumn"
+        Me.rdoGetColumn.Size = New System.Drawing.Size(80, 30)
+        Me.rdoGetColumn.TabIndex = 45
+        Me.rdoGetColumn.TabStop = True
+        Me.rdoGetColumn.Text = "Column"
+        Me.rdoGetColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetColumn.UseVisualStyleBackColor = True
+        '
+        'rdoGetPackage
+        '
+        Me.rdoGetPackage.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetPackage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetPackage.FlatAppearance.BorderSize = 2
+        Me.rdoGetPackage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetPackage.Location = New System.Drawing.Point(27, 12)
+        Me.rdoGetPackage.Name = "rdoGetPackage"
+        Me.rdoGetPackage.Size = New System.Drawing.Size(86, 30)
+        Me.rdoGetPackage.TabIndex = 43
+        Me.rdoGetPackage.TabStop = True
+        Me.rdoGetPackage.Text = "Package"
+        Me.rdoGetPackage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetPackage.UseVisualStyleBackColor = True
+        '
+        'ucrPnlGetData
+        '
+        Me.ucrPnlGetData.Location = New System.Drawing.Point(6, 10)
+        Me.ucrPnlGetData.Name = "ucrPnlGetData"
+        Me.ucrPnlGetData.Size = New System.Drawing.Size(402, 36)
+        Me.ucrPnlGetData.TabIndex = 42
+        '
+        'lblGetPackage
+        '
+        Me.lblGetPackage.AutoSize = True
+        Me.lblGetPackage.Location = New System.Drawing.Point(16, 103)
+        Me.lblGetPackage.Name = "lblGetPackage"
+        Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
+        Me.lblGetPackage.TabIndex = 39
+        Me.lblGetPackage.Text = "Get Package:"
+        '
+        'ucrComboGetPackage
+        '
+        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
+        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
+        Me.ucrComboGetPackage.IsReadOnly = False
+        Me.ucrComboGetPackage.Location = New System.Drawing.Point(19, 119)
+        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
+        Me.ucrComboGetPackage.Size = New System.Drawing.Size(137, 21)
+        Me.ucrComboGetPackage.TabIndex = 40
+        '
+        'btnGetPackage
+        '
+        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnGetPackage.Location = New System.Drawing.Point(186, 119)
+        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnGetPackage.Name = "btnGetPackage"
+        Me.btnGetPackage.Size = New System.Drawing.Size(74, 23)
+        Me.btnGetPackage.TabIndex = 41
+        Me.btnGetPackage.Text = "Add"
+        Me.btnGetPackage.UseVisualStyleBackColor = True
+        '
+        'ucrDataFrameGet
+        '
+        Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameGet.bUseCurrentFilter = True
+        Me.ucrDataFrameGet.Location = New System.Drawing.Point(19, 151)
+        Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
+        Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
+        Me.ucrDataFrameGet.TabIndex = 31
         '
         'rdoTable
         '
@@ -195,7 +297,7 @@ Partial Class dlgScript
         Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTable.Location = New System.Drawing.Point(144, 21)
+        Me.rdoTable.Location = New System.Drawing.Point(154, 55)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(80, 30)
         Me.rdoTable.TabIndex = 32
@@ -212,7 +314,7 @@ Partial Class dlgScript
         Me.rdoModel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoModel.Location = New System.Drawing.Point(222, 21)
+        Me.rdoModel.Location = New System.Drawing.Point(232, 55)
         Me.rdoModel.Name = "rdoModel"
         Me.rdoModel.Size = New System.Drawing.Size(80, 30)
         Me.rdoModel.TabIndex = 33
@@ -229,7 +331,7 @@ Partial Class dlgScript
         Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGraph.Location = New System.Drawing.Point(60, 21)
+        Me.rdoGraph.Location = New System.Drawing.Point(70, 55)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(86, 30)
         Me.rdoGraph.TabIndex = 31
@@ -240,36 +342,25 @@ Partial Class dlgScript
         '
         'ucrPnlGetObject
         '
-        Me.ucrPnlGetObject.Location = New System.Drawing.Point(9, 17)
+        Me.ucrPnlGetObject.Location = New System.Drawing.Point(19, 51)
         Me.ucrPnlGetObject.Name = "ucrPnlGetObject"
         Me.ucrPnlGetObject.Size = New System.Drawing.Size(402, 36)
         Me.ucrPnlGetObject.TabIndex = 30
         '
-        'ucrSelectorGetObject
+        'lblGetSelectedObject
         '
-        Me.ucrSelectorGetObject.bDropUnusedFilterLevels = False
-        Me.ucrSelectorGetObject.bShowHiddenColumns = False
-        Me.ucrSelectorGetObject.bUseCurrentFilter = True
-        Me.ucrSelectorGetObject.Location = New System.Drawing.Point(8, 60)
-        Me.ucrSelectorGetObject.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorGetObject.Name = "ucrSelectorGetObject"
-        Me.ucrSelectorGetObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorGetObject.TabIndex = 29
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(255, 103)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(86, 13)
-        Me.Label2.TabIndex = 26
-        Me.Label2.Text = "Selected Object:"
+        Me.lblGetSelectedObject.AutoSize = True
+        Me.lblGetSelectedObject.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGetSelectedObject.Location = New System.Drawing.Point(269, 329)
+        Me.lblGetSelectedObject.Name = "lblGetSelectedObject"
+        Me.lblGetSelectedObject.Size = New System.Drawing.Size(86, 13)
+        Me.lblGetSelectedObject.TabIndex = 26
+        Me.lblGetSelectedObject.Text = "Selected Object:"
         '
         'btnGetObject
         '
         Me.btnGetObject.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetObject.Location = New System.Drawing.Point(256, 151)
+        Me.btnGetObject.Location = New System.Drawing.Point(270, 377)
         Me.btnGetObject.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnGetObject.Name = "btnGetObject"
         Me.btnGetObject.Size = New System.Drawing.Size(74, 23)
@@ -280,7 +371,7 @@ Partial Class dlgScript
         'ucrReceiverGetObject
         '
         Me.ucrReceiverGetObject.frmParent = Me
-        Me.ucrReceiverGetObject.Location = New System.Drawing.Point(253, 118)
+        Me.ucrReceiverGetObject.Location = New System.Drawing.Point(267, 344)
         Me.ucrReceiverGetObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverGetObject.Name = "ucrReceiverGetObject"
         Me.ucrReceiverGetObject.Selector = Nothing
@@ -289,44 +380,21 @@ Partial Class dlgScript
         Me.ucrReceiverGetObject.TabIndex = 27
         Me.ucrReceiverGetObject.ucrSelector = Nothing
         '
-        'ucrDataFrameGet
+        'ucrSelectorGet
         '
-        Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameGet.bUseCurrentFilter = True
-        Me.ucrDataFrameGet.Location = New System.Drawing.Point(19, 114)
-        Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
-        Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
-        Me.ucrDataFrameGet.TabIndex = 31
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.ucrSelectorGetColumn)
-        Me.GroupBox4.Controls.Add(Me.lblGetColumn)
-        Me.GroupBox4.Controls.Add(Me.btnGetColumn)
-        Me.GroupBox4.Controls.Add(Me.ucrReceiverGetCol)
-        Me.GroupBox4.Location = New System.Drawing.Point(10, 167)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(419, 215)
-        Me.GroupBox4.TabIndex = 33
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Get Column:"
-        '
-        'ucrSelectorGetColumn
-        '
-        Me.ucrSelectorGetColumn.bDropUnusedFilterLevels = False
-        Me.ucrSelectorGetColumn.bShowHiddenColumns = False
-        Me.ucrSelectorGetColumn.bUseCurrentFilter = True
-        Me.ucrSelectorGetColumn.Location = New System.Drawing.Point(8, 18)
-        Me.ucrSelectorGetColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorGetColumn.Name = "ucrSelectorGetColumn"
-        Me.ucrSelectorGetColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorGetColumn.TabIndex = 34
+        Me.ucrSelectorGet.bDropUnusedFilterLevels = False
+        Me.ucrSelectorGet.bShowHiddenColumns = False
+        Me.ucrSelectorGet.bUseCurrentFilter = True
+        Me.ucrSelectorGet.Location = New System.Drawing.Point(19, 203)
+        Me.ucrSelectorGet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorGet.Name = "ucrSelectorGet"
+        Me.ucrSelectorGet.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorGet.TabIndex = 34
         '
         'ucrReceiverGetCol
         '
         Me.ucrReceiverGetCol.frmParent = Me
-        Me.ucrReceiverGetCol.Location = New System.Drawing.Point(253, 78)
+        Me.ucrReceiverGetCol.Location = New System.Drawing.Point(263, 229)
         Me.ucrReceiverGetCol.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverGetCol.Name = "ucrReceiverGetCol"
         Me.ucrReceiverGetCol.Selector = Nothing
@@ -510,7 +578,7 @@ Partial Class dlgScript
         Me.TabPage4.Controls.Add(Me.btnDetachPackage)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(438, 589)
+        Me.TabPage4.Size = New System.Drawing.Size(438, 662)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Finally"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -561,111 +629,6 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(416, 57)
         Me.ucrBase.TabIndex = 16
         '
-        'lblGetPackage
-        '
-        Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(16, 66)
-        Me.lblGetPackage.Name = "lblGetPackage"
-        Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
-        Me.lblGetPackage.TabIndex = 39
-        Me.lblGetPackage.Text = "Get Package:"
-        '
-        'ucrComboGetPackage
-        '
-        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
-        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
-        Me.ucrComboGetPackage.IsReadOnly = False
-        Me.ucrComboGetPackage.Location = New System.Drawing.Point(19, 82)
-        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
-        Me.ucrComboGetPackage.Size = New System.Drawing.Size(137, 21)
-        Me.ucrComboGetPackage.TabIndex = 40
-        '
-        'btnGetPackage
-        '
-        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetPackage.Location = New System.Drawing.Point(186, 82)
-        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnGetPackage.Name = "btnGetPackage"
-        Me.btnGetPackage.Size = New System.Drawing.Size(74, 23)
-        Me.btnGetPackage.TabIndex = 41
-        Me.btnGetPackage.Text = "Add"
-        Me.btnGetPackage.UseVisualStyleBackColor = True
-        '
-        'ucrPnlGetData
-        '
-        Me.ucrPnlGetData.Location = New System.Drawing.Point(6, 10)
-        Me.ucrPnlGetData.Name = "ucrPnlGetData"
-        Me.ucrPnlGetData.Size = New System.Drawing.Size(402, 36)
-        Me.ucrPnlGetData.TabIndex = 42
-        '
-        'rdoGetDataFrame
-        '
-        Me.rdoGetDataFrame.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGetDataFrame.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetDataFrame.FlatAppearance.BorderSize = 2
-        Me.rdoGetDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGetDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGetDataFrame.Location = New System.Drawing.Point(111, 12)
-        Me.rdoGetDataFrame.Name = "rdoGetDataFrame"
-        Me.rdoGetDataFrame.Size = New System.Drawing.Size(80, 30)
-        Me.rdoGetDataFrame.TabIndex = 44
-        Me.rdoGetDataFrame.TabStop = True
-        Me.rdoGetDataFrame.Text = "Data Frame"
-        Me.rdoGetDataFrame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGetDataFrame.UseVisualStyleBackColor = True
-        '
-        'rdoGetColumn
-        '
-        Me.rdoGetColumn.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGetColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetColumn.FlatAppearance.BorderSize = 2
-        Me.rdoGetColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGetColumn.Location = New System.Drawing.Point(189, 12)
-        Me.rdoGetColumn.Name = "rdoGetColumn"
-        Me.rdoGetColumn.Size = New System.Drawing.Size(80, 30)
-        Me.rdoGetColumn.TabIndex = 45
-        Me.rdoGetColumn.TabStop = True
-        Me.rdoGetColumn.Text = "Column"
-        Me.rdoGetColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGetColumn.UseVisualStyleBackColor = True
-        '
-        'rdoGetPackage
-        '
-        Me.rdoGetPackage.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGetPackage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetPackage.FlatAppearance.BorderSize = 2
-        Me.rdoGetPackage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGetPackage.Location = New System.Drawing.Point(27, 12)
-        Me.rdoGetPackage.Name = "rdoGetPackage"
-        Me.rdoGetPackage.Size = New System.Drawing.Size(86, 30)
-        Me.rdoGetPackage.TabIndex = 43
-        Me.rdoGetPackage.TabStop = True
-        Me.rdoGetPackage.Text = "Package"
-        Me.rdoGetPackage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGetPackage.UseVisualStyleBackColor = True
-        '
-        'rdoGetObject
-        '
-        Me.rdoGetObject.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGetObject.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetObject.FlatAppearance.BorderSize = 2
-        Me.rdoGetObject.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetObject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGetObject.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGetObject.Location = New System.Drawing.Point(267, 12)
-        Me.rdoGetObject.Name = "rdoGetObject"
-        Me.rdoGetObject.Size = New System.Drawing.Size(80, 30)
-        Me.rdoGetObject.TabIndex = 46
-        Me.rdoGetObject.TabStop = True
-        Me.rdoGetObject.Text = "Object"
-        Me.rdoGetObject.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGetObject.UseVisualStyleBackColor = True
-        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,10 +647,6 @@ Partial Class dlgScript
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -728,11 +687,9 @@ Partial Class dlgScript
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents lblNewDataFrameName As Label
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents ucrSelectorGetColumn As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents ucrSelectorGet As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSelectorGetObject As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblGetSelectedObject As Label
     Friend WithEvents btnGetObject As Button
     Friend WithEvents ucrReceiverGetObject As ucrReceiverSingle
     Friend WithEvents ucrPnlGetObject As UcrPanel

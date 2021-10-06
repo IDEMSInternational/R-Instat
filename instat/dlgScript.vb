@@ -44,7 +44,7 @@ Public Class dlgScript
 
         '--------------------------------
         'get data controls
-        ucrPnlGetData.AddRadioButton(rdoGetpackage)
+        ucrPnlGetData.AddRadioButton(rdoGetPackage)
         ucrPnlGetData.AddRadioButton(rdoGetDataFrame)
         ucrPnlGetData.AddRadioButton(rdoGetColumn)
         ucrPnlGetData.AddRadioButton(rdoGetObject)
@@ -64,11 +64,11 @@ Public Class dlgScript
 
         'ucrSelectorAddRemoveColumn.ucrAvailableDataFrames.SetLabelText("Get Column:")
         'ucrSelectorAddRemoveColumn.SetParameter(New RParameter("string", 0))
-        ucrSelectorGetColumn.SetParameterIsString()
+        ucrSelectorGet.SetParameterIsString()
 
         ucrReceiverGetCol.SetParameter(New RParameter("string", 0))
         ucrReceiverGetCol.SetParameterIsRFunction()
-        ucrReceiverGetCol.Selector = ucrSelectorGetColumn
+        ucrReceiverGetCol.Selector = ucrSelectorGet
         ucrReceiverGetCol.bUseFilteredData = False
         ucrReceiverGetCol.SetMeAsReceiver()
 
@@ -143,10 +143,10 @@ Public Class dlgScript
 
 
         'get controls reset
-        rdoGetpackage.Checked = True
+        rdoGetPackage.Checked = True
         ucrComboGetPackage.Reset()
         ucrDataFrameGet.Reset()
-        ucrSelectorGetColumn.Reset()
+        ucrSelectorGet.Reset()
         rdoGraph.Checked = True
         ucrSelectorGetObject.Reset()
         ucrReceiverGetObject.SetItemType("graph")
@@ -205,15 +205,21 @@ Public Class dlgScript
 
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
-        'If rdoGetpackage.Checked Then
-        '    ucrComboGetPackage.SetVisible(True)
-        'ElseIf rdoGetDataFrame.Checked Then
 
-        'ElseIf rdoGetColumn.Checked Then
+        ucrComboGetPackage.SetVisible(True)
+        ucrDataFrameGet.SetVisible(False)
 
-        'ElseIf rdoGetObject.Checked Then
+        ucrPnlGetObject.SetVisible(False)
 
-        'End If
+        If rdoGetPackage.Checked Then
+            ucrComboGetPackage.SetVisible(True)
+        ElseIf rdoGetDataFrame.Checked Then
+            ucrDataFrameGet.SetVisible(True)
+        ElseIf rdoGetColumn.Checked Then
+
+        ElseIf rdoGetObject.Checked Then
+
+        End If
     End Sub
 
     Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
