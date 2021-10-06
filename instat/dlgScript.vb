@@ -58,12 +58,8 @@ Public Class dlgScript
         ucrDataFrameGet.SetLabelText("Get Data Frame:")
         ucrDataFrameGet.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameGet.SetParameterIsString()
-        ucrDataFrameGet.SetLinkedDisplayControl(btnGetPackage)
+        ucrDataFrameGet.SetLinkedDisplayControl(btnGetDataFrame)
 
-
-
-        'ucrSelectorAddRemoveColumn.ucrAvailableDataFrames.SetLabelText("Get Column:")
-        'ucrSelectorAddRemoveColumn.SetParameter(New RParameter("string", 0))
         ucrSelectorGet.SetParameterIsString()
 
         ucrReceiverGetCol.SetParameter(New RParameter("string", 0))
@@ -71,7 +67,7 @@ Public Class dlgScript
         ucrReceiverGetCol.Selector = ucrSelectorGet
         ucrReceiverGetCol.bUseFilteredData = False
         ucrReceiverGetCol.SetMeAsReceiver()
-
+        ucrReceiverGetCol.SetLinkedDisplayControl(New List(Of Control)({lblGetColumn, btnGetColumn}))
 
         'get object controls
         ucrPnlGetObject.AddRadioButton(rdoGraph)
@@ -80,9 +76,11 @@ Public Class dlgScript
 
         ucrReceiverGetObject.SetParameter(New RParameter("string", 0))
         ucrReceiverGetObject.SetParameterIsRFunction()
-        ucrReceiverGetObject.Selector = ucrSelectorGetObject
+        ucrReceiverGetObject.Selector = ucrSelectorGet
         ucrReceiverGetObject.bUseFilteredData = False
-        ucrReceiverGetObject.SetMeAsReceiver()
+        'ucrReceiverGetObject.SetMeAsReceiver()
+        ucrReceiverGetObject.SetLinkedDisplayControl(New List(Of Control)({lblGetSelectedObject, btnGetObject}))
+
 
         '---------------------------------------------------
         'save controls
@@ -147,10 +145,9 @@ Public Class dlgScript
         ucrComboGetPackage.Reset()
         ucrDataFrameGet.Reset()
         ucrSelectorGet.Reset()
+        'ucrReceiverGetCol.SetMeAsReceiver()
         rdoGraph.Checked = True
-        ucrSelectorGetObject.Reset()
-        ucrReceiverGetObject.SetItemType("graph")
-
+        'ucrReceiverGetObject.SetItemType("graph")
 
 
 
@@ -206,19 +203,25 @@ Public Class dlgScript
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
 
-        ucrComboGetPackage.SetVisible(True)
+        ucrComboGetPackage.SetVisible(False)
         ucrDataFrameGet.SetVisible(False)
-
+        ucrSelectorGet.SetVisible(False)
         ucrPnlGetObject.SetVisible(False)
-
+        ucrReceiverGetCol.SetVisible(False)
+        ucrReceiverGetObject.SetVisible(False)
         If rdoGetPackage.Checked Then
             ucrComboGetPackage.SetVisible(True)
         ElseIf rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
         ElseIf rdoGetColumn.Checked Then
-
+            ucrSelectorGet.SetVisible(True)
+            ucrReceiverGetCol.SetVisible(True)
+            ucrReceiverGetCol.SetMeAsReceiver()
         ElseIf rdoGetObject.Checked Then
-
+            ucrSelectorGet.SetVisible(True)
+            ucrPnlGetObject.SetVisible(True)
+            ucrReceiverGetObject.SetVisible(True)
+            ucrReceiverGetObject.SetMeAsReceiver()
         End If
     End Sub
 
