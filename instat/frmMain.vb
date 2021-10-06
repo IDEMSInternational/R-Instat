@@ -1128,7 +1128,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeSpecificRugPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMapPlot.Click
-        dlgRugPlot.ShowDialog()
+        dlgHeatMapPlot.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarPieChart.Click
@@ -2418,5 +2418,9 @@ Public Class frmMain
 
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
+        dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 End Class
