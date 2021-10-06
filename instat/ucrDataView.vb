@@ -612,9 +612,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
-        Dim intNonNumericValues As Integer
         For Each strColumn In GetSelectedColumnNames()
-            intNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
+            Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
             If intNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
             ElseIf intNonNumericValues = GetCurrentDataFrameFocus().TotalRowCount Then
