@@ -63,9 +63,9 @@ Public Class dlgScript
         ucrSelectorGet.SetParameterIsString()
 
         'get object controls
-        ucrPnlGetObject.AddRadioButton(rdoGraph)
-        ucrPnlGetObject.AddRadioButton(rdoTable)
-        ucrPnlGetObject.AddRadioButton(rdoModel)
+        ucrPnlGetObject.AddRadioButton(rdoGetGraph)
+        ucrPnlGetObject.AddRadioButton(rdoGetTable)
+        ucrPnlGetObject.AddRadioButton(rdoGetModel)
 
         ucrReceiverGet.SetParameter(New RParameter("string", 0))
         ucrReceiverGet.SetParameterIsRFunction()
@@ -139,7 +139,7 @@ Public Class dlgScript
         ucrDataFrameGet.Reset()
         ucrSelectorGet.Reset()
         'ucrReceiverGetCol.SetMeAsReceiver()
-        rdoGraph.Checked = True
+        rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
 
 
@@ -204,28 +204,26 @@ Public Class dlgScript
             ucrComboGetPackage.SetVisible(True)
         ElseIf rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
-        ElseIf rdoGetColumn.Checked Then
+        ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
-            ucrReceiverGet.SetItemType("column")
-            ucrReceiverGet.Clear()
-            'ucrReceiverGetObject.SetMeAsReceiver()
-        ElseIf rdoGetObject.Checked Then
-            ucrSelectorGet.SetVisible(True)
-            ucrPnlGetObject.SetVisible(True)
-            ucrReceiverGet.SetVisible(True)
-            ucrReceiverGet.Clear()
-            'ucrReceiverGetObject.SetMeAsReceiver()
+            SetReceiverItemType()
         End If
     End Sub
 
     Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
+        SetReceiverItemType()
+    End Sub
+
+    Private Sub SetReceiverItemType()
         ucrReceiverGet.Clear()
-        If rdoGraph.Checked Then
+        If rdoGetColumn.Checked Then
+            ucrReceiverGet.SetItemType("column")
+        ElseIf rdoGetGraph.Checked Then
             ucrReceiverGet.SetItemType("graph")
-        ElseIf rdoTable.Checked Then
+        ElseIf rdoGetTable.Checked Then
             ucrReceiverGet.SetItemType("table")
-        ElseIf rdoModel.Checked Then
+        ElseIf rdoGetModel.Checked Then
             ucrReceiverGet.SetItemType("model")
         End If
     End Sub

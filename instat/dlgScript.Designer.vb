@@ -26,9 +26,9 @@ Partial Class dlgScript
         Me.btnSaveNewDataframe = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.rdoTable = New System.Windows.Forms.RadioButton()
-        Me.rdoModel = New System.Windows.Forms.RadioButton()
-        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.rdoGetTable = New System.Windows.Forms.RadioButton()
+        Me.rdoGetModel = New System.Windows.Forms.RadioButton()
+        Me.rdoGetGraph = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorGet = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlGetObject = New instat.UcrPanel()
         Me.rdoGetObject = New System.Windows.Forms.RadioButton()
@@ -123,9 +123,9 @@ Partial Class dlgScript
         Me.TabPage2.Controls.Add(Me.lblGetPackage)
         Me.TabPage2.Controls.Add(Me.ucrComboGetPackage)
         Me.TabPage2.Controls.Add(Me.btnGetPackage)
-        Me.TabPage2.Controls.Add(Me.rdoTable)
-        Me.TabPage2.Controls.Add(Me.rdoModel)
-        Me.TabPage2.Controls.Add(Me.rdoGraph)
+        Me.TabPage2.Controls.Add(Me.rdoGetTable)
+        Me.TabPage2.Controls.Add(Me.rdoGetModel)
+        Me.TabPage2.Controls.Add(Me.rdoGetGraph)
         Me.TabPage2.Controls.Add(Me.ucrPnlGetObject)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
@@ -135,56 +135,56 @@ Partial Class dlgScript
         Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'rdoTable
+        'rdoGetTable
         '
-        Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTable.FlatAppearance.BorderSize = 2
-        Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTable.Location = New System.Drawing.Point(154, 55)
-        Me.rdoTable.Name = "rdoTable"
-        Me.rdoTable.Size = New System.Drawing.Size(80, 30)
-        Me.rdoTable.TabIndex = 32
-        Me.rdoTable.TabStop = True
-        Me.rdoTable.Text = "Table"
-        Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoTable.UseVisualStyleBackColor = True
+        Me.rdoGetTable.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetTable.FlatAppearance.BorderSize = 2
+        Me.rdoGetTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetTable.Location = New System.Drawing.Point(154, 55)
+        Me.rdoGetTable.Name = "rdoGetTable"
+        Me.rdoGetTable.Size = New System.Drawing.Size(80, 30)
+        Me.rdoGetTable.TabIndex = 32
+        Me.rdoGetTable.TabStop = True
+        Me.rdoGetTable.Text = "Table"
+        Me.rdoGetTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetTable.UseVisualStyleBackColor = True
         '
-        'rdoModel
+        'rdoGetModel
         '
-        Me.rdoModel.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoModel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoModel.FlatAppearance.BorderSize = 2
-        Me.rdoModel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoModel.Location = New System.Drawing.Point(232, 55)
-        Me.rdoModel.Name = "rdoModel"
-        Me.rdoModel.Size = New System.Drawing.Size(80, 30)
-        Me.rdoModel.TabIndex = 33
-        Me.rdoModel.TabStop = True
-        Me.rdoModel.Text = "Model"
-        Me.rdoModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoModel.UseVisualStyleBackColor = True
+        Me.rdoGetModel.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetModel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetModel.FlatAppearance.BorderSize = 2
+        Me.rdoGetModel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetModel.Location = New System.Drawing.Point(232, 55)
+        Me.rdoGetModel.Name = "rdoGetModel"
+        Me.rdoGetModel.Size = New System.Drawing.Size(80, 30)
+        Me.rdoGetModel.TabIndex = 33
+        Me.rdoGetModel.TabStop = True
+        Me.rdoGetModel.Text = "Model"
+        Me.rdoGetModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetModel.UseVisualStyleBackColor = True
         '
-        'rdoGraph
+        'rdoGetGraph
         '
-        Me.rdoGraph.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraph.FlatAppearance.BorderSize = 2
-        Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGraph.Location = New System.Drawing.Point(70, 55)
-        Me.rdoGraph.Name = "rdoGraph"
-        Me.rdoGraph.Size = New System.Drawing.Size(86, 30)
-        Me.rdoGraph.TabIndex = 31
-        Me.rdoGraph.TabStop = True
-        Me.rdoGraph.Text = "Graph"
-        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGraph.UseVisualStyleBackColor = True
+        Me.rdoGetGraph.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGetGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetGraph.FlatAppearance.BorderSize = 2
+        Me.rdoGetGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGetGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGetGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGetGraph.Location = New System.Drawing.Point(70, 55)
+        Me.rdoGetGraph.Name = "rdoGetGraph"
+        Me.rdoGetGraph.Size = New System.Drawing.Size(86, 30)
+        Me.rdoGetGraph.TabIndex = 31
+        Me.rdoGetGraph.TabStop = True
+        Me.rdoGetGraph.Text = "Graph"
+        Me.rdoGetGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGetGraph.UseVisualStyleBackColor = True
         '
         'ucrSelectorGet
         '
@@ -638,9 +638,9 @@ Partial Class dlgScript
     Friend WithEvents btnGet As Button
     Friend WithEvents ucrReceiverGet As ucrReceiverSingle
     Friend WithEvents ucrPnlGetObject As UcrPanel
-    Friend WithEvents rdoTable As RadioButton
-    Friend WithEvents rdoModel As RadioButton
-    Friend WithEvents rdoGraph As RadioButton
+    Friend WithEvents rdoGetTable As RadioButton
+    Friend WithEvents rdoGetModel As RadioButton
+    Friend WithEvents rdoGetGraph As RadioButton
     Friend WithEvents btnRemoveObjects As Button
     Friend WithEvents btnDetachPackage As Button
     Friend WithEvents lblGetPackage As Label
