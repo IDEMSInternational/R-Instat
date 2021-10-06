@@ -235,3 +235,4 @@ ModelManifest.xml
 /instat/static/InstatObject/R/examples.R
 /instat/static/Library/
 installer/Output/
+*.vb

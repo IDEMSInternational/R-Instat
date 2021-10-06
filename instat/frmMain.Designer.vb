@@ -57,6 +57,7 @@ Partial Class frmMain
         Me.mnuDescribeThreeVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeThreeVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -669,7 +670,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -797,6 +797,11 @@ Partial Class frmMain
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
         resources.ApplyResources(Me.mnuDescribeThreeVariableFrequencies, "mnuDescribeThreeVariableFrequencies")
+        '
+        'mnuDescribeThreeVariablePivotTable
+        '
+        Me.mnuDescribeThreeVariablePivotTable.Name = "mnuDescribeThreeVariablePivotTable"
+        resources.ApplyResources(Me.mnuDescribeThreeVariablePivotTable, "mnuDescribeThreeVariablePivotTable")
         '
         'mnuDescribeSpecificTablesGraphs
         '
@@ -4237,11 +4242,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuDescribeThreeVariablePivotTable
-        '
-        Me.mnuDescribeThreeVariablePivotTable.Name = "mnuDescribeThreeVariablePivotTable"
-        resources.ApplyResources(Me.mnuDescribeThreeVariablePivotTable, "mnuDescribeThreeVariablePivotTable")
         '
         'frmMain
         '
