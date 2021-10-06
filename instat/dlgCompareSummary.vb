@@ -139,7 +139,7 @@ Public Class dlgCompareSummary
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverSatellite.ControlValueChanged
         SetSelectorDataTypes()
     End Sub
 
