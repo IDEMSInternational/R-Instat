@@ -23,10 +23,9 @@ Partial Class dlgScript
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnGetDataFrame = New System.Windows.Forms.Button()
-        Me.btnSaveNewDataframe = New System.Windows.Forms.Button()
+        Me.btnSaveDataframe = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.ucrSelectorGet = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoGetObject = New System.Windows.Forms.RadioButton()
         Me.lblGet = New System.Windows.Forms.Label()
         Me.btnGet = New System.Windows.Forms.Button()
@@ -35,35 +34,36 @@ Partial Class dlgScript
         Me.rdoGetColumn = New System.Windows.Forms.RadioButton()
         Me.rdoGetPackage = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetData = New instat.UcrPanel()
-        Me.ucrDataFrameGet = New instat.ucrDataFrame()
-        Me.lblGetPackage = New System.Windows.Forms.Label()
-        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
-        Me.btnGetPackage = New System.Windows.Forms.Button()
         Me.rdoGetTable = New System.Windows.Forms.RadioButton()
         Me.rdoGetModel = New System.Windows.Forms.RadioButton()
         Me.rdoGetGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetObject = New instat.UcrPanel()
+        Me.ucrDataFrameGet = New instat.ucrDataFrame()
+        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
+        Me.lblGetPackage = New System.Windows.Forms.Label()
+        Me.ucrSelectorGet = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.btnGetPackage = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
-        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
-        Me.btnSaveNewModel = New System.Windows.Forms.Button()
+        Me.btnSaveModel = New System.Windows.Forms.Button()
         Me.ucrSaveModel = New instat.ucrSave()
-        Me.btSaveNewTable = New System.Windows.Forms.Button()
+        Me.btnSaveColumn = New System.Windows.Forms.Button()
+        Me.btSaveTable = New System.Windows.Forms.Button()
+        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
         Me.ucrSaveTable = New instat.ucrSave()
-        Me.ucrDataFrameSaveObject = New instat.ucrDataFrame()
-        Me.btnSaveNewGraph = New System.Windows.Forms.Button()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.btnSaveNewColumn = New System.Windows.Forms.Button()
         Me.ucrSaveColumn = New instat.ucrSave()
+        Me.ucrDataFrameSave = New instat.ucrDataFrame()
+        Me.btnSaveGraph = New System.Windows.Forms.Button()
+        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSaveData = New instat.UcrPanel()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.btnRemoveObjects = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrInputCommand = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSaveData = New instat.UcrPanel()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
@@ -81,16 +81,16 @@ Partial Class dlgScript
         Me.btnGetDataFrame.Text = "Add"
         Me.btnGetDataFrame.UseVisualStyleBackColor = True
         '
-        'btnSaveNewDataframe
+        'btnSaveDataframe
         '
-        Me.btnSaveNewDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSaveNewDataframe.Location = New System.Drawing.Point(280, 59)
-        Me.btnSaveNewDataframe.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnSaveNewDataframe.Name = "btnSaveNewDataframe"
-        Me.btnSaveNewDataframe.Size = New System.Drawing.Size(74, 23)
-        Me.btnSaveNewDataframe.TabIndex = 32
-        Me.btnSaveNewDataframe.Text = "Add"
-        Me.btnSaveNewDataframe.UseVisualStyleBackColor = True
+        Me.btnSaveDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSaveDataframe.Location = New System.Drawing.Point(280, 59)
+        Me.btnSaveDataframe.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnSaveDataframe.Name = "btnSaveDataframe"
+        Me.btnSaveDataframe.Size = New System.Drawing.Size(74, 23)
+        Me.btnSaveDataframe.TabIndex = 32
+        Me.btnSaveDataframe.Text = "Add"
+        Me.btnSaveDataframe.UseVisualStyleBackColor = True
         '
         'TabControl1
         '
@@ -130,17 +130,6 @@ Partial Class dlgScript
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'ucrSelectorGet
-        '
-        Me.ucrSelectorGet.bDropUnusedFilterLevels = False
-        Me.ucrSelectorGet.bShowHiddenColumns = False
-        Me.ucrSelectorGet.bUseCurrentFilter = True
-        Me.ucrSelectorGet.Location = New System.Drawing.Point(19, 55)
-        Me.ucrSelectorGet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorGet.Name = "ucrSelectorGet"
-        Me.ucrSelectorGet.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorGet.TabIndex = 34
         '
         'rdoGetObject
         '
@@ -250,46 +239,6 @@ Partial Class dlgScript
         Me.ucrPnlGetData.Size = New System.Drawing.Size(402, 36)
         Me.ucrPnlGetData.TabIndex = 42
         '
-        'ucrDataFrameGet
-        '
-        Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameGet.bUseCurrentFilter = True
-        Me.ucrDataFrameGet.Location = New System.Drawing.Point(19, 51)
-        Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
-        Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
-        Me.ucrDataFrameGet.TabIndex = 31
-        '
-        'lblGetPackage
-        '
-        Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(16, 52)
-        Me.lblGetPackage.Name = "lblGetPackage"
-        Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
-        Me.lblGetPackage.TabIndex = 39
-        Me.lblGetPackage.Text = "Get Package:"
-        '
-        'ucrComboGetPackage
-        '
-        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
-        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
-        Me.ucrComboGetPackage.IsReadOnly = False
-        Me.ucrComboGetPackage.Location = New System.Drawing.Point(19, 68)
-        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
-        Me.ucrComboGetPackage.Size = New System.Drawing.Size(137, 21)
-        Me.ucrComboGetPackage.TabIndex = 40
-        '
-        'btnGetPackage
-        '
-        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetPackage.Location = New System.Drawing.Point(186, 68)
-        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnGetPackage.Name = "btnGetPackage"
-        Me.btnGetPackage.Size = New System.Drawing.Size(74, 23)
-        Me.btnGetPackage.TabIndex = 41
-        Me.btnGetPackage.Text = "Add"
-        Me.btnGetPackage.UseVisualStyleBackColor = True
-        '
         'rdoGetTable
         '
         Me.rdoGetTable.Appearance = System.Windows.Forms.Appearance.Button
@@ -348,21 +297,72 @@ Partial Class dlgScript
         Me.ucrPnlGetObject.Size = New System.Drawing.Size(402, 36)
         Me.ucrPnlGetObject.TabIndex = 30
         '
+        'ucrDataFrameGet
+        '
+        Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameGet.bUseCurrentFilter = True
+        Me.ucrDataFrameGet.Location = New System.Drawing.Point(19, 51)
+        Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
+        Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
+        Me.ucrDataFrameGet.TabIndex = 31
+        '
+        'ucrComboGetPackage
+        '
+        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
+        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
+        Me.ucrComboGetPackage.IsReadOnly = False
+        Me.ucrComboGetPackage.Location = New System.Drawing.Point(19, 68)
+        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
+        Me.ucrComboGetPackage.Size = New System.Drawing.Size(137, 21)
+        Me.ucrComboGetPackage.TabIndex = 40
+        '
+        'lblGetPackage
+        '
+        Me.lblGetPackage.AutoSize = True
+        Me.lblGetPackage.Location = New System.Drawing.Point(16, 52)
+        Me.lblGetPackage.Name = "lblGetPackage"
+        Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
+        Me.lblGetPackage.TabIndex = 39
+        Me.lblGetPackage.Text = "Get Package:"
+        '
+        'ucrSelectorGet
+        '
+        Me.ucrSelectorGet.bDropUnusedFilterLevels = False
+        Me.ucrSelectorGet.bShowHiddenColumns = False
+        Me.ucrSelectorGet.bUseCurrentFilter = True
+        Me.ucrSelectorGet.Location = New System.Drawing.Point(19, 55)
+        Me.ucrSelectorGet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorGet.Name = "ucrSelectorGet"
+        Me.ucrSelectorGet.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorGet.TabIndex = 34
+        '
+        'btnGetPackage
+        '
+        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnGetPackage.Location = New System.Drawing.Point(186, 68)
+        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnGetPackage.Name = "btnGetPackage"
+        Me.btnGetPackage.Size = New System.Drawing.Size(74, 23)
+        Me.btnGetPackage.TabIndex = 41
+        Me.btnGetPackage.Text = "Add"
+        Me.btnGetPackage.UseVisualStyleBackColor = True
+        '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.btnSaveNewModel)
+        Me.TabPage3.Controls.Add(Me.btnSaveModel)
         Me.TabPage3.Controls.Add(Me.ucrSaveModel)
-        Me.TabPage3.Controls.Add(Me.btnSaveNewColumn)
-        Me.TabPage3.Controls.Add(Me.btSaveNewTable)
+        Me.TabPage3.Controls.Add(Me.btnSaveColumn)
+        Me.TabPage3.Controls.Add(Me.btSaveTable)
         Me.TabPage3.Controls.Add(Me.lblSaveDataFrame)
         Me.TabPage3.Controls.Add(Me.ucrSaveTable)
         Me.TabPage3.Controls.Add(Me.ucrSaveColumn)
-        Me.TabPage3.Controls.Add(Me.ucrDataFrameSaveObject)
-        Me.TabPage3.Controls.Add(Me.btnSaveNewGraph)
+        Me.TabPage3.Controls.Add(Me.ucrDataFrameSave)
+        Me.TabPage3.Controls.Add(Me.btnSaveGraph)
         Me.TabPage3.Controls.Add(Me.ucrInputSaveDataFrame)
         Me.TabPage3.Controls.Add(Me.ucrSaveGraph)
         Me.TabPage3.Controls.Add(Me.RadioButton1)
-        Me.TabPage3.Controls.Add(Me.btnSaveNewDataframe)
+        Me.TabPage3.Controls.Add(Me.btnSaveDataframe)
         Me.TabPage3.Controls.Add(Me.RadioButton2)
         Me.TabPage3.Controls.Add(Me.RadioButton3)
         Me.TabPage3.Controls.Add(Me.ucrPnlSaveData)
@@ -372,6 +372,47 @@ Partial Class dlgScript
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Save Results"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'btnSaveModel
+        '
+        Me.btnSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSaveModel.Location = New System.Drawing.Point(291, 249)
+        Me.btnSaveModel.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnSaveModel.Name = "btnSaveModel"
+        Me.btnSaveModel.Size = New System.Drawing.Size(74, 23)
+        Me.btnSaveModel.TabIndex = 33
+        Me.btnSaveModel.Text = "Add"
+        Me.btnSaveModel.UseVisualStyleBackColor = True
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(13, 250)
+        Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(271, 22)
+        Me.ucrSaveModel.TabIndex = 32
+        '
+        'btnSaveColumn
+        '
+        Me.btnSaveColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSaveColumn.Location = New System.Drawing.Point(292, 145)
+        Me.btnSaveColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnSaveColumn.Name = "btnSaveColumn"
+        Me.btnSaveColumn.Size = New System.Drawing.Size(74, 23)
+        Me.btnSaveColumn.TabIndex = 36
+        Me.btnSaveColumn.Text = "Add"
+        Me.btnSaveColumn.UseVisualStyleBackColor = True
+        '
+        'btSaveTable
+        '
+        Me.btSaveTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btSaveTable.Location = New System.Drawing.Point(290, 215)
+        Me.btSaveTable.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btSaveTable.Name = "btSaveTable"
+        Me.btSaveTable.Size = New System.Drawing.Size(74, 23)
+        Me.btSaveTable.TabIndex = 31
+        Me.btSaveTable.Text = "Add"
+        Me.btSaveTable.UseVisualStyleBackColor = True
         '
         'lblSaveDataFrame
         '
@@ -384,6 +425,43 @@ Partial Class dlgScript
         Me.lblSaveDataFrame.Tag = ""
         Me.lblSaveDataFrame.Text = "Data Frame Name:"
         '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.Location = New System.Drawing.Point(12, 216)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(272, 22)
+        Me.ucrSaveTable.TabIndex = 30
+        '
+        'ucrSaveColumn
+        '
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(12, 145)
+        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(274, 22)
+        Me.ucrSaveColumn.TabIndex = 35
+        '
+        'ucrDataFrameSave
+        '
+        Me.ucrDataFrameSave.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameSave.bUseCurrentFilter = True
+        Me.ucrDataFrameSave.Location = New System.Drawing.Point(13, 92)
+        Me.ucrDataFrameSave.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameSave.Name = "ucrDataFrameSave"
+        Me.ucrDataFrameSave.Size = New System.Drawing.Size(148, 50)
+        Me.ucrDataFrameSave.TabIndex = 29
+        '
+        'btnSaveGraph
+        '
+        Me.btnSaveGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSaveGraph.Location = New System.Drawing.Point(291, 181)
+        Me.btnSaveGraph.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnSaveGraph.Name = "btnSaveGraph"
+        Me.btnSaveGraph.Size = New System.Drawing.Size(74, 23)
+        Me.btnSaveGraph.TabIndex = 27
+        Me.btnSaveGraph.Text = "Add"
+        Me.btnSaveGraph.UseVisualStyleBackColor = True
+        '
         'ucrInputSaveDataFrame
         '
         Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
@@ -394,65 +472,6 @@ Partial Class dlgScript
         Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSaveDataFrame.TabIndex = 31
         '
-        'btnSaveNewModel
-        '
-        Me.btnSaveNewModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSaveNewModel.Location = New System.Drawing.Point(291, 249)
-        Me.btnSaveNewModel.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnSaveNewModel.Name = "btnSaveNewModel"
-        Me.btnSaveNewModel.Size = New System.Drawing.Size(74, 23)
-        Me.btnSaveNewModel.TabIndex = 33
-        Me.btnSaveNewModel.Text = "Add"
-        Me.btnSaveNewModel.UseVisualStyleBackColor = True
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(13, 250)
-        Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(271, 22)
-        Me.ucrSaveModel.TabIndex = 32
-        '
-        'btSaveNewTable
-        '
-        Me.btSaveNewTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btSaveNewTable.Location = New System.Drawing.Point(290, 215)
-        Me.btSaveNewTable.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btSaveNewTable.Name = "btSaveNewTable"
-        Me.btSaveNewTable.Size = New System.Drawing.Size(74, 23)
-        Me.btSaveNewTable.TabIndex = 31
-        Me.btSaveNewTable.Text = "Add"
-        Me.btSaveNewTable.UseVisualStyleBackColor = True
-        '
-        'ucrSaveTable
-        '
-        Me.ucrSaveTable.Location = New System.Drawing.Point(12, 216)
-        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(272, 22)
-        Me.ucrSaveTable.TabIndex = 30
-        '
-        'ucrDataFrameSaveObject
-        '
-        Me.ucrDataFrameSaveObject.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameSaveObject.bUseCurrentFilter = True
-        Me.ucrDataFrameSaveObject.Location = New System.Drawing.Point(13, 92)
-        Me.ucrDataFrameSaveObject.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameSaveObject.Name = "ucrDataFrameSaveObject"
-        Me.ucrDataFrameSaveObject.Size = New System.Drawing.Size(148, 50)
-        Me.ucrDataFrameSaveObject.TabIndex = 29
-        '
-        'btnSaveNewGraph
-        '
-        Me.btnSaveNewGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSaveNewGraph.Location = New System.Drawing.Point(291, 181)
-        Me.btnSaveNewGraph.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnSaveNewGraph.Name = "btnSaveNewGraph"
-        Me.btnSaveNewGraph.Size = New System.Drawing.Size(74, 23)
-        Me.btnSaveNewGraph.TabIndex = 27
-        Me.btnSaveNewGraph.Text = "Add"
-        Me.btnSaveNewGraph.UseVisualStyleBackColor = True
-        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 182)
@@ -460,72 +479,6 @@ Partial Class dlgScript
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(271, 22)
         Me.ucrSaveGraph.TabIndex = 26
-        '
-        'btnSaveNewColumn
-        '
-        Me.btnSaveNewColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSaveNewColumn.Location = New System.Drawing.Point(292, 145)
-        Me.btnSaveNewColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnSaveNewColumn.Name = "btnSaveNewColumn"
-        Me.btnSaveNewColumn.Size = New System.Drawing.Size(74, 23)
-        Me.btnSaveNewColumn.TabIndex = 36
-        Me.btnSaveNewColumn.Text = "Add"
-        Me.btnSaveNewColumn.UseVisualStyleBackColor = True
-        '
-        'ucrSaveColumn
-        '
-        Me.ucrSaveColumn.Location = New System.Drawing.Point(12, 145)
-        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        Me.ucrSaveColumn.Size = New System.Drawing.Size(274, 22)
-        Me.ucrSaveColumn.TabIndex = 35
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.btnRemoveObjects)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(438, 585)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Finally"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'btnRemoveObjects
-        '
-        Me.btnRemoveObjects.Location = New System.Drawing.Point(13, 29)
-        Me.btnRemoveObjects.Name = "btnRemoveObjects"
-        Me.btnRemoveObjects.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemoveObjects.TabIndex = 1
-        Me.btnRemoveObjects.Text = "Remove Objects"
-        Me.btnRemoveObjects.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(460, 11)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 13)
-        Me.Label1.TabIndex = 30
-        Me.Label1.Text = "Script:"
-        '
-        'ucrInputCommand
-        '
-        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
-        Me.ucrInputCommand.IsMultiline = True
-        Me.ucrInputCommand.IsReadOnly = False
-        Me.ucrInputCommand.Location = New System.Drawing.Point(460, 29)
-        Me.ucrInputCommand.Name = "ucrInputCommand"
-        Me.ucrInputCommand.Size = New System.Drawing.Size(576, 460)
-        Me.ucrInputCommand.TabIndex = 18
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(292, 498)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(416, 57)
-        Me.ucrBase.TabIndex = 16
         '
         'RadioButton1
         '
@@ -585,6 +538,53 @@ Partial Class dlgScript
         Me.ucrPnlSaveData.Size = New System.Drawing.Size(402, 36)
         Me.ucrPnlSaveData.TabIndex = 47
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.btnRemoveObjects)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(438, 460)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Finally"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'btnRemoveObjects
+        '
+        Me.btnRemoveObjects.Location = New System.Drawing.Point(13, 29)
+        Me.btnRemoveObjects.Name = "btnRemoveObjects"
+        Me.btnRemoveObjects.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemoveObjects.TabIndex = 1
+        Me.btnRemoveObjects.Text = "Remove Objects"
+        Me.btnRemoveObjects.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(460, 11)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.TabIndex = 30
+        Me.Label1.Text = "Script:"
+        '
+        'ucrInputCommand
+        '
+        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
+        Me.ucrInputCommand.IsMultiline = True
+        Me.ucrInputCommand.IsReadOnly = False
+        Me.ucrInputCommand.Location = New System.Drawing.Point(460, 29)
+        Me.ucrInputCommand.Name = "ucrInputCommand"
+        Me.ucrInputCommand.Size = New System.Drawing.Size(576, 460)
+        Me.ucrInputCommand.TabIndex = 18
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(292, 498)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(416, 57)
+        Me.ucrBase.TabIndex = 16
+        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -616,20 +616,20 @@ Partial Class dlgScript
     Friend WithEvents ucrInputCommand As ucrInputTextBox
     Friend WithEvents ucrInputSaveDataFrame As ucrInputTextBox
     Friend WithEvents btnGetDataFrame As Button
-    Friend WithEvents btnSaveNewDataframe As Button
+    Friend WithEvents btnSaveDataframe As Button
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Label1 As Label
-    Friend WithEvents btnSaveNewColumn As Button
+    Friend WithEvents btnSaveColumn As Button
     Friend WithEvents ucrSaveColumn As ucrSave
     Friend WithEvents TabPage4 As TabPage
-    Friend WithEvents ucrDataFrameSaveObject As ucrDataFrame
-    Friend WithEvents btnSaveNewGraph As Button
+    Friend WithEvents ucrDataFrameSave As ucrDataFrame
+    Friend WithEvents btnSaveGraph As Button
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents btnSaveNewModel As Button
+    Friend WithEvents btnSaveModel As Button
     Friend WithEvents ucrSaveModel As ucrSave
-    Friend WithEvents btSaveNewTable As Button
+    Friend WithEvents btSaveTable As Button
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents lblSaveDataFrame As Label
     Friend WithEvents ucrSelectorGet As ucrSelectorByDataFrameAddRemove

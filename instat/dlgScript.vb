@@ -77,27 +77,28 @@ Public Class dlgScript
 
         '---------------------------------------------------
         'save controls
-        'ucrInputNewDataFrame.SetParameter(New RParameter("new_name", 1))
+
         ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
+        ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
 
         'ucrSaveColoumn.SetPrefix("newcol")
         ucrSaveColumn.SetSaveTypeAsColumn()
-        ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSaveObject)
+        ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetLabelText("Column Name:")
 
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSaveObject)
+        ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetLabelText("Graph Name:")
 
         ucrSaveTable.SetSaveTypeAsTable()
-        ucrSaveTable.SetDataFrameSelector(ucrDataFrameSaveObject)
+        ucrSaveTable.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetLabelText("Table Name:")
 
         ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetDataFrameSelector(ucrDataFrameSaveObject)
+        ucrSaveModel.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetLabelText("Model Name:")
 
@@ -146,7 +147,7 @@ Public Class dlgScript
         'save controls reset
         ucrInputSaveDataFrame.SetName("")
         ucrSaveColumn.Reset()
-        ucrDataFrameSaveObject.Reset()
+        ucrDataFrameSave.Reset()
         ucrSaveGraph.Reset()
         ucrSaveTable.Reset()
         ucrSaveModel.Reset()
@@ -214,6 +215,25 @@ Public Class dlgScript
         SetReceiverItemType()
     End Sub
 
+    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
+        ucrInputSaveDataFrame.SetVisible(False)
+        'todo. left here. finish from here
+        ucrSaveColumn.SetVisible(False)
+        ucrSelectorGet.SetVisible(False)
+        ucrPnlGetObject.SetVisible(False)
+        ucrReceiverGet.SetVisible(False)
+        If rdoGetPackage.Checked Then
+            ucrComboGetPackage.SetVisible(True)
+        ElseIf rdoGetDataFrame.Checked Then
+            ucrDataFrameGet.SetVisible(True)
+        ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
+            ucrPnlGetObject.SetVisible(False)
+            ucrSelectorGet.SetVisible(True)
+            ucrReceiverGet.SetVisible(True)
+            SetReceiverItemType()
+        End If
+    End Sub
+
     Private Sub SetReceiverItemType()
         ucrReceiverGet.Clear()
         If rdoGetColumn.Checked Then
@@ -247,11 +267,11 @@ Public Class dlgScript
 
     'todo. do we really need this?
     Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputSaveDataFrame.ContentsChanged
-        btnSaveNewDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
+        btnSaveDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
     End Sub
 
 
-    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveNewDataframe.Click
+    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
         Dim clsImportNewDataFrame As New RFunction
         Dim clsRFunctionList As New RFunction
 
@@ -266,28 +286,28 @@ Public Class dlgScript
     End Sub
 
 
-    Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveNewColumn.Click
+    Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
     End Sub
 
-    Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveNewGraph.Click
+    Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveGraph.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
     End Sub
 
-    Private Sub btSaveNewTable_Click(sender As Object, e As EventArgs) Handles btSaveNewTable.Click
+    Private Sub btSaveNewTable_Click(sender As Object, e As EventArgs) Handles btSaveTable.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
     End Sub
 
-    Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveNewModel.Click
+    Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
