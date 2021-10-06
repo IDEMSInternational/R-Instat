@@ -91,7 +91,6 @@ Public Class dlgRatingScales
         'ucrPnlSortplot.likert
         rdoLikert.Enabled = True
 
-
         ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 7))
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
 
@@ -101,6 +100,7 @@ Public Class dlgRatingScales
         ucrChkNumberOfCategories.AddParameterPresentCondition(True, "cat.neutral")
         ucrChkNumberOfCategories.AddParameterPresentCondition(False, "cat.neutral", False)
         ucrChkNumberOfCategories.SetLinkedDisplayControl(grpLikertType)
+        ucrChkNumberOfCategories.SetDefaultState(False)
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 12))
         ucrChkFlip.SetText("Flip Coordinates")
@@ -128,6 +128,8 @@ Public Class dlgRatingScales
         clsFactorColumn = New RFunction
 
         rdoNoneLikert.Checked = True
+
+        ucrChkNumberOfCategories.Checked = False
 
         ucrSaveGraph.Reset()
         ucrSelectorRatingScale.Reset()
@@ -161,6 +163,7 @@ Public Class dlgRatingScales
         clsSjtStackFrq.AddParameter("show.total", "TRUE", iPosition:=12)
         clsSjtStackFrq.AddParameter("alternate.rows", "TRUE", iPosition:=7)
 
+        NumberOfLevels()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -219,27 +222,22 @@ Public Class dlgRatingScales
                     'to check it its even you can do this - see if you divide by two has a remeinder 
                     iMedLevel = (iLevels + 1) / 2
                     If Not iLevels = 0 Then
-                        If IsOdd(iLevels) = True Then
-                            ucrNudNeutralLevel.Visible = True
-                            ucrNudNeutralLevel.Value = iMedLevel
+                        If iLevels < 3 Then
+                            clsSjpLikert.RemoveParameterByName("cat.neutral")
+                            ucrChkNumberOfCategories.Checked = False
                         Else
-                            ucrNudNeutralLevel.Visible = False
-                            'ucrNudNeutralLevel.Value = iLevels
+                            ucrNudNeutralLevel.SetMinMax(1, iLevels)
                         End If
-                        ucrNudNeutralLevel.SetMinMax(1, iLevels)
                     Else
                         clsSjpLikert.RemoveParameterByName("cat.neutral")
-                        clsSjpLikert.AddParameter("cat.neutral", "NULL")
-                        ucrNudNeutralLevel.Visible = False
+                        ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
                     End If
                 End If
             Else
                 ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
-                ucrNudNeutralLevel.Value = 1
             End If
         Else
             ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
-            ucrNudNeutralLevel.Value = 1
         End If
     End Sub
 
@@ -289,12 +287,12 @@ Public Class dlgRatingScales
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
-        If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
-            ucrChkNumberOfCategories.Checked = False
+        'If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
+        '    ucrChkNumberOfCategories.Checked = False
 
-        Else
-            ucrChkNumberOfCategories.Checked = True
-        End If
+        'Else
+        '    ucrChkNumberOfCategories.Checked = True
+        'End If
     End Sub
 
 End Class
