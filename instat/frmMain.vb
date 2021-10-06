@@ -2419,4 +2419,8 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticTidyandExamineCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineCompareColumns.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
 End Class
