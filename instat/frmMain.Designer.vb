@@ -670,6 +670,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeTransformClusters = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeThreeVariablePivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -774,7 +776,7 @@ Partial Class frmMain
         '
         'mnuDescribeThreeVariable
         '
-        Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies})
+        Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies, Me.mnuDescribeThreeVariablePivotTable})
         Me.mnuDescribeThreeVariable.Name = "mnuDescribeThreeVariable"
         resources.ApplyResources(Me.mnuDescribeThreeVariable, "mnuDescribeThreeVariable")
         '
@@ -4243,6 +4245,11 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'mnuPrepareDataReshapeTransformClusters
+        '
+        Me.mnuPrepareDataReshapeTransformClusters.Name = "mnuPrepareDataReshapeTransformClusters"
+        resources.ApplyResources(Me.mnuPrepareDataReshapeTransformClusters, "mnuPrepareDataReshapeTransformClusters")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4920,4 +4927,5 @@ Partial Class frmMain
     Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataReshapeTransformClusters As ToolStripMenuItem
+    Friend WithEvents mnuDescribeThreeVariablePivotTable As ToolStripMenuItem
 End Class
