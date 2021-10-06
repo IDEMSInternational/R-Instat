@@ -78,7 +78,7 @@ Public Class dlgScript
         '---------------------------------------------------
         'save controls
         'ucrInputNewDataFrame.SetParameter(New RParameter("new_name", 1))
-        ucrInputNewDataFrame.SetValidationTypeAsRVariable()
+        ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
 
 
         'ucrSaveColoumn.SetPrefix("newcol")
@@ -145,7 +145,7 @@ Public Class dlgScript
 
 
         'save controls reset
-        ucrInputNewDataFrame.SetName("")
+        ucrInputSaveDataFrame.SetName("")
         ucrDataFrameColumn.Reset()
         ucrSaveColumn.Reset()
         ucrDataFrameObject.Reset()
@@ -248,22 +248,22 @@ Public Class dlgScript
     End Sub
 
     'todo. do we really need this?
-    Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputNewDataFrame.ContentsChanged
-        btnSaveNewDataframe.Enabled = Not ucrInputNewDataFrame.IsEmpty
+    Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputSaveDataFrame.ContentsChanged
+        btnSaveDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
     End Sub
 
 
-    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveNewDataframe.Click
+    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
         Dim clsImportNewDataFrame As New RFunction
         Dim clsRFunctionList As New RFunction
 
         clsImportNewDataFrame.SetRCommand("data_book$import_data")
 
         clsRFunctionList.SetRCommand("list")
-        clsRFunctionList.AddParameter(ucrInputNewDataFrame.GetText(), ucrInputNewDataFrame.GetText())
+        clsRFunctionList.AddParameter(ucrInputSaveDataFrame.GetText(), ucrInputSaveDataFrame.GetText())
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
 
-        AddScript(ucrInputNewDataFrame.GetText() & "<-")
+        AddScript(ucrInputSaveDataFrame.GetText() & "<-")
         AddScript(clsImportNewDataFrame.ToScript)
     End Sub
 
