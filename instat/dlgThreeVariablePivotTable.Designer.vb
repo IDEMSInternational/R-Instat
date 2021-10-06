@@ -28,6 +28,9 @@ Partial Class dlgThreeVariablePivotTable
         Me.lblInitialColumnFactor = New System.Windows.Forms.Label()
         Me.lblInitialRowFactor = New System.Windows.Forms.Label()
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblRenderer = New System.Windows.Forms.Label()
+        Me.ucrInputRenderer = New instat.ucrInputComboBox()
+        Me.ucrReceiverInitialRowFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverAdditionalRowFactor = New instat.ucrReceiverSingle()
         Me.ucrSavePivot = New instat.ucrSave()
         Me.ucrChkIncludeSubTotals = New instat.ucrCheck()
@@ -36,7 +39,8 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverInitialRowFactors = New instat.ucrReceiverMultiple()
+        Me.ucrInputAggregator = New instat.ucrInputComboBox()
+        Me.lblAggregator = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblAdditionalRowFactor
@@ -56,6 +60,28 @@ Partial Class dlgThreeVariablePivotTable
         resources.ApplyResources(Me.lblInitialRowFactor, "lblInitialRowFactor")
         Me.lblInitialRowFactor.Name = "lblInitialRowFactor"
         Me.lblInitialRowFactor.Tag = "Initial Row Factor:"
+        '
+        'lblRenderer
+        '
+        resources.ApplyResources(Me.lblRenderer, "lblRenderer")
+        Me.lblRenderer.Name = "lblRenderer"
+        '
+        'ucrInputRenderer
+        '
+        Me.ucrInputRenderer.AddQuotesIfUnrecognised = True
+        Me.ucrInputRenderer.GetSetSelectedIndex = -1
+        Me.ucrInputRenderer.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRenderer, "ucrInputRenderer")
+        Me.ucrInputRenderer.Name = "ucrInputRenderer"
+        '
+        'ucrReceiverInitialRowFactors
+        '
+        Me.ucrReceiverInitialRowFactors.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverInitialRowFactors, "ucrReceiverInitialRowFactors")
+        Me.ucrReceiverInitialRowFactors.Name = "ucrReceiverInitialRowFactors"
+        Me.ucrReceiverInitialRowFactors.Selector = Nothing
+        Me.ucrReceiverInitialRowFactors.strNcFilePath = ""
+        Me.ucrReceiverInitialRowFactors.ucrSelector = Nothing
         '
         'ucrReceiverAdditionalRowFactor
         '
@@ -114,19 +140,27 @@ Partial Class dlgThreeVariablePivotTable
         resources.ApplyResources(Me.ucrSelectorPivot, "ucrSelectorPivot")
         Me.ucrSelectorPivot.Name = "ucrSelectorPivot"
         '
-        'ucrReceiverInitialRowFactors
+        'ucrInputAggregator
         '
-        Me.ucrReceiverInitialRowFactors.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverInitialRowFactors, "ucrReceiverInitialRowFactors")
-        Me.ucrReceiverInitialRowFactors.Name = "ucrReceiverInitialRowFactors"
-        Me.ucrReceiverInitialRowFactors.Selector = Nothing
-        Me.ucrReceiverInitialRowFactors.strNcFilePath = ""
-        Me.ucrReceiverInitialRowFactors.ucrSelector = Nothing
+        Me.ucrInputAggregator.AddQuotesIfUnrecognised = True
+        Me.ucrInputAggregator.GetSetSelectedIndex = -1
+        Me.ucrInputAggregator.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAggregator, "ucrInputAggregator")
+        Me.ucrInputAggregator.Name = "ucrInputAggregator"
+        '
+        'lblAggregator
+        '
+        resources.ApplyResources(Me.lblAggregator, "lblAggregator")
+        Me.lblAggregator.Name = "lblAggregator"
         '
         'dlgThreeVariablePivotTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputAggregator)
+        Me.Controls.Add(Me.lblAggregator)
+        Me.Controls.Add(Me.ucrInputRenderer)
+        Me.Controls.Add(Me.lblRenderer)
         Me.Controls.Add(Me.ucrReceiverInitialRowFactors)
         Me.Controls.Add(Me.lblAdditionalRowFactor)
         Me.Controls.Add(Me.lblInitialColumnFactor)
@@ -161,4 +195,8 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorPivot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverInitialRowFactors As ucrReceiverMultiple
+    Friend WithEvents ucrInputRenderer As ucrInputComboBox
+    Friend WithEvents lblRenderer As Label
+    Friend WithEvents ucrInputAggregator As ucrInputComboBox
+    Friend WithEvents lblAggregator As Label
 End Class
