@@ -205,6 +205,7 @@ Public Class dlgScript
         ElseIf rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
+            ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
             SetReceiverItemType()
@@ -228,7 +229,7 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub btnGetPackage_Click(sender As Object, e As EventArgs)
+    Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
         AddScript(clsLibraryFunction.ToScript)
     End Sub
 
