@@ -51,7 +51,6 @@ Public Class dlgTaylorDiagram
         ucrReceiverEstimated.SetParameterIsString()
         ucrReceiverEstimated.SetIncludedDataTypes({"numeric"})
         ucrReceiverEstimated.strSelectorHeading = "Numerics"
-        ucrReceiverEstimated.bExcludeFromSelector = True
 
         ucrReceiverGroup.SetParameter(New RParameter("group", 3))
         ucrReceiverGroup.Selector = ucrSelectorTaylorDiagram
