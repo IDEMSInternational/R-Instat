@@ -119,28 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mnuDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariableSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Text" xml:space="preserve">
     <value>Rating Data...</value>
@@ -152,28 +152,28 @@
     <value>One Variable</value>
   </data>
   <data name="mnuDescribeTwoVariablesSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
   </data>
   <data name="mnuDescribeTwoVariablesGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeTwoVariablesFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeTwoVariablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariablesPivotTable.Text" xml:space="preserve">
     <value>Pivot Table...</value>
@@ -1091,6 +1091,12 @@
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 6</value>
   </data>
+  <data name="ClimaticFileExportToClimsoft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="ClimaticFileExportToClimsoft.Text" xml:space="preserve">
+    <value>Export to Climsoft...</value>
+  </data>
   <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
@@ -1183,6 +1189,12 @@
   </data>
   <data name="mnuTidyandExamineClimaticDataEntry.Text" xml:space="preserve">
     <value>Daily Data Entry...</value>
+  </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Compare Columns...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
@@ -10237,6 +10249,18 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ClimaticFileExportToClimsoft.Name" xml:space="preserve">
+    <value>ClimaticFileExportToClimsoft</value>
+  </data>
+  <data name="&gt;&gt;ClimaticFileExportToClimsoft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
+    <value>ToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
