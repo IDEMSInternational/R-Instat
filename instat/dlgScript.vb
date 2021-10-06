@@ -41,25 +41,26 @@ Public Class dlgScript
         'ucrBase.clsRsyntax.iCallType = 2
         'ucrBase.clsRsyntax.bSeparateThread = False
 
-        '---------------
-        'preliminary controls
+
+        '--------------------------------
+        'get data controls
+        ucrPnlGetData.AddRadioButton(rdoGetpackage)
+        ucrPnlGetData.AddRadioButton(rdoGetDataFrame)
+        ucrPnlGetData.AddRadioButton(rdoGetColumn)
+        ucrPnlGetData.AddRadioButton(rdoGetObject)
 
         'todo. this combobox can be a custom package control in future. Its also needed in dlgHelpVignettes
         ucrComboGetPackage.SetParameter(New RParameter("package", 0))
         ucrComboGetPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrComboGetPackage.SetDropDownStyleAsNonEditable()
-
-
-        '--------------------------------
-        'get controls
+        ucrComboGetPackage.SetLinkedDisplayControl(New List(Of Control)({lblGetPackage, btnGetPackage}))
 
         ucrDataFrameGet.SetLabelText("Get Data Frame:")
-        'ucrDataFrameGet.lblDataFrame.Text = "Get Data Frame:"
         ucrDataFrameGet.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameGet.SetParameterIsString()
+        ucrDataFrameGet.SetLinkedDisplayControl(btnGetPackage)
 
-        'ucrInputNewDataFrame.SetParameter(New RParameter("new_name", 1))
-        ucrInputNewDataFrame.SetValidationTypeAsRVariable()
+
 
         'ucrSelectorAddRemoveColumn.ucrAvailableDataFrames.SetLabelText("Get Column:")
         'ucrSelectorAddRemoveColumn.SetParameter(New RParameter("string", 0))
@@ -85,6 +86,9 @@ Public Class dlgScript
 
         '---------------------------------------------------
         'save controls
+        'ucrInputNewDataFrame.SetParameter(New RParameter("new_name", 1))
+        ucrInputNewDataFrame.SetValidationTypeAsRVariable()
+
 
         'ucrSaveColoumn.SetPrefix("newcol")
         ucrSaveColumn.SetSaveTypeAsColumn()
@@ -137,7 +141,9 @@ Public Class dlgScript
         clsSaveTableFunction = New RFunction
         clsSaveModelFunction = New RFunction
 
+
         'get controls reset
+        rdoGetpackage.Checked = True
         ucrComboGetPackage.Reset()
         ucrDataFrameGet.Reset()
         ucrSelectorGetColumn.Reset()
@@ -197,7 +203,30 @@ Public Class dlgScript
         TestOKEnabled()
     End Sub
 
-    Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
+
+    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
+        'If rdoGetpackage.Checked Then
+        '    ucrComboGetPackage.SetVisible(True)
+        'ElseIf rdoGetDataFrame.Checked Then
+
+        'ElseIf rdoGetColumn.Checked Then
+
+        'ElseIf rdoGetObject.Checked Then
+
+        'End If
+    End Sub
+
+    Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
+        If rdoGraph.Checked Then
+            ucrReceiverGetObject.SetItemType("graph")
+        ElseIf rdoTable.Checked Then
+            ucrReceiverGetObject.SetItemType("table")
+        ElseIf rdoModel.Checked Then
+            ucrReceiverGetObject.SetItemType("model")
+        End If
+    End Sub
+
+    Private Sub btnGetPackage_Click(sender As Object, e As EventArgs)
         AddScript(clsLibraryFunction.ToScript)
     End Sub
 
@@ -242,9 +271,7 @@ Public Class dlgScript
         AddScript(clsImportNewDataFrame.ToScript)
     End Sub
 
-    Private Sub ucrPnlGetObject_Load(sender As Object, e As EventArgs) Handles ucrPnlGetObject.Load
 
-    End Sub
 
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveNewColumn.Click
         Dim strAssignedScript As String = ""
@@ -252,7 +279,6 @@ Public Class dlgScript
         Dim str As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
     End Sub
-
 
     Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveNewGraph.Click
         Dim strAssignedScript As String = ""
@@ -279,15 +305,6 @@ Public Class dlgScript
         ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & Environment.NewLine & strNewScript.Trim)
     End Sub
 
-    Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
-        If rdoGraph.Checked Then
-            ucrReceiverGetObject.SetItemType("graph")
-        ElseIf rdoTable.Checked Then
-            ucrReceiverGetObject.SetItemType("table")
-        ElseIf rdoModel.Checked Then
-            ucrReceiverGetObject.SetItemType("model")
-        End If
-    End Sub
 
 
 End Class
