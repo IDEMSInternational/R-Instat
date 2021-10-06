@@ -68,11 +68,10 @@ Public Class dlgReorderLevels
         ucrPnlProperty.SetLinkedDisplayControl(grpMethods)
         ucrInputOptions.SetLinkedDisplayControl(lblOptions)
         ucrReceiverVariable.SetLinkedDisplayControl(lblVariable)
-        'Set data frame paramater
+
         ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
 
-        'Setting receiver data types and parameters
         ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
@@ -85,7 +84,6 @@ Public Class dlgReorderLevels
         ucrReceiverFactorX.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactorX.SetParameterIsRFunction()
 
-        'Set reorder scroll list view & datatype accepted
         ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
         ucrReorderFactor.setDataType("factor")
@@ -148,14 +146,6 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
         ucrSaveResults.SetLabelText("Save As:")
         ucrSaveResults.SetIsComboBox()
-
-        ttMethods.SetToolTip(rdoReverseLevels, "Keep the current order of levels and labels.  Use Reverse checkbox to invert the order.")
-        'ttAppearance.SetToolTip(rdoAppearance, "The order that each level appears in the data frame.")
-        'ttFrequency.SetToolTip(rdoFrequency, "In the order of the relative frequencies of each level.")
-        'ttSequence.SetToolTip(rdoSequence, "In numerical order of the levels (At least one level must be numerical.)")
-        'ttShift.SetToolTip(rdoShift, "Move the levels down: Example:  If 1, levels a, b, c, become b, c, a.  Use -1 to move up.")
-        'ttShuffle.SetToolTip(rdoShuffle, "Change into random order.")
-        'ttAnonymise.SetToolTip(rdoAnonymise, "Replace factor levels with arbitrary numeric identifiers.")
     End Sub
 
     Private Sub SetDefaults()
