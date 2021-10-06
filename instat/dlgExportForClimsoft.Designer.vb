@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgExportForClimsoft
+Partial Class dlgExportToClimsoft
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,13 +24,17 @@ Partial Class dlgExportForClimsoft
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'dlgExportForClimsoft
+        'dlgExportToClimsoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Name = "dlgExportForClimsoft"
-        Me.Text = "Export For Climsoft"
+        Me.ClientSize = New System.Drawing.Size(498, 331)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "dlgExportToClimsoft"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export to Climsoft"
         Me.ResumeLayout(False)
 
     End Sub
