@@ -532,7 +532,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Fill date gaps</value>
+    <value>Fill Date Gaps</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgInfill</value>
