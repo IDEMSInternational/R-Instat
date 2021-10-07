@@ -41,7 +41,7 @@ Public Class dlgThemes
         ucrBase.iHelpTopicID = 440
 
         ucrChkDeleteTheme.SetText("Delete Theme")
-        ucrSaveTheme.SetPrefix("Theme")
+        ucrSaveTheme.SetPrefix("theme")
         ucrSaveTheme.SetIsComboBox()
         ucrSaveTheme.SetCheckBoxText("New Theme Name")
 

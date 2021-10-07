@@ -89,8 +89,8 @@ Public Class dlgRowNamesOrNumbers
         ucrChkAsNumeric.SetRDefault("TRUE")
 
         'ucrNewColumnName
-        ucrNewColumnName.SetIsTextBox()
-        ucrNewColumnName.SetPrefix("row_names")
+        ucrNewColumnName.SetIsComboBox()
+        ucrNewColumnName.SetPrefix("row")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")

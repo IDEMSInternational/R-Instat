@@ -64,7 +64,7 @@ Public Class dlgCombine
 
         ' Input Column Name
         ucrNewColName.SetIsComboBox()
-        ucrNewColName.SetPrefix("Interact")
+        ucrNewColName.SetPrefix("interact")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
