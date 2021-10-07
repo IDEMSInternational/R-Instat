@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>15</value>
   </data>
   <data name="cmdTileOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdTileOptions.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>16</value>
   </data>
   <data name="lblXVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>23</value>
   </data>
   <data name="lblFill.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -232,97 +232,97 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFill.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>11</value>
   </data>
-  <data name="lblLabelPositionHeatMap.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLabelPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblLabelPositionHeatMap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLabelPosition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblLabelPositionHeatMap.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLabelPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 413</value>
   </data>
-  <data name="lblLabelPositionHeatMap.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblLabelPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
   </data>
-  <data name="lblLabelPositionHeatMap.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLabelPosition.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="lblLabelPositionHeatMap.Text" xml:space="preserve">
+  <data name="lblLabelPosition.Text" xml:space="preserve">
     <value>Position:</value>
   </data>
-  <data name="&gt;&gt;lblLabelPositionHeatMap.Name" xml:space="preserve">
-    <value>lblLabelPositionHeatMap</value>
+  <data name="&gt;&gt;lblLabelPosition.Name" xml:space="preserve">
+    <value>lblLabelPosition</value>
   </data>
-  <data name="&gt;&gt;lblLabelPositionHeatMap.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelPosition.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblLabelPositionHeatMap.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelPosition.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblLabelPositionHeatMap.ZOrder" xml:space="preserve">
-    <value>17</value>
+  <data name="&gt;&gt;lblLabelPosition.ZOrder" xml:space="preserve">
+    <value>36</value>
   </data>
-  <data name="lblLabelColourHeatMap.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLabelColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblLabelColourHeatMap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLabelColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblLabelColourHeatMap.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLabelColour.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 413</value>
   </data>
-  <data name="lblLabelColourHeatMap.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblLabelColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
-  <data name="lblLabelColourHeatMap.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLabelColour.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="lblLabelColourHeatMap.Text" xml:space="preserve">
+  <data name="lblLabelColour.Text" xml:space="preserve">
     <value>Colour:</value>
   </data>
-  <data name="&gt;&gt;lblLabelColourHeatMap.Name" xml:space="preserve">
-    <value>lblLabelColourHeatMap</value>
+  <data name="&gt;&gt;lblLabelColour.Name" xml:space="preserve">
+    <value>lblLabelColour</value>
   </data>
-  <data name="&gt;&gt;lblLabelColourHeatMap.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelColour.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblLabelColourHeatMap.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelColour.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblLabelColourHeatMap.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;lblLabelColour.ZOrder" xml:space="preserve">
+    <value>38</value>
   </data>
-  <data name="lblLabelSizeHeatMap.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblLabelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblLabelSizeHeatMap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLabelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblLabelSizeHeatMap.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblLabelSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>314, 413</value>
   </data>
-  <data name="lblLabelSizeHeatMap.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
-  <data name="lblLabelSizeHeatMap.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="lblLabelSizeHeatMap.Text" xml:space="preserve">
+  <data name="lblLabelSize.Text" xml:space="preserve">
     <value>Size:</value>
   </data>
-  <data name="&gt;&gt;lblLabelSizeHeatMap.Name" xml:space="preserve">
-    <value>lblLabelSizeHeatMap</value>
+  <data name="&gt;&gt;lblLabelSize.Name" xml:space="preserve">
+    <value>lblLabelSize</value>
   </data>
-  <data name="&gt;&gt;lblLabelSizeHeatMap.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblLabelSizeHeatMap.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLabelSize.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblLabelSizeHeatMap.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;lblLabelSize.ZOrder" xml:space="preserve">
+    <value>40</value>
   </data>
   <data name="lblPointsOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -352,7 +352,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsOptional.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="lblPointsSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,7 +382,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsSize.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="lblReorderVariableX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -412,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorderVariableX.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>30</value>
   </data>
   <data name="lblReorderValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -442,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorderValue.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>26</value>
   </data>
   <data name="rdoChoroplethMap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -478,7 +478,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoChoroplethMap.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="rdoHeatMap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -514,7 +514,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoHeatMap.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="lblLongitude.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -544,7 +544,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLongitude.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>21</value>
   </data>
   <data name="lblLatitude.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -574,7 +574,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLatitude.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>25</value>
   </data>
   <data name="lblFillChoropleth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,7 +604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFillChoropleth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblPointsChoropleth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -634,7 +634,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsChoropleth.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>29</value>
   </data>
   <data name="lblSizeChoropleth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -664,7 +664,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSizeChoropleth.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>33</value>
   </data>
   <data name="ucrNudShapeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 237</value>
@@ -685,7 +685,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudShapeChoropleth.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>32</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -695,48 +695,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>420, 562</value>
-  </data>
-  <data name="ucrInputColourPaletteChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 439</value>
-  </data>
-  <data name="ucrInputColourPaletteChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="ucrInputColourPaletteChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourPaletteChoropleth.Name" xml:space="preserve">
-    <value>ucrInputColourPaletteChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourPaletteChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourPaletteChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourPaletteChoropleth.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkColourPaletteChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 439</value>
-  </data>
-  <data name="ucrChkColourPaletteChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
-  </data>
-  <data name="ucrChkColourPaletteChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPaletteChoropleth.Name" xml:space="preserve">
-    <value>ucrChkColourPaletteChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPaletteChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPaletteChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPaletteChoropleth.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrChkFlipCoordinates.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 379</value>
@@ -757,7 +715,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="ucrReceiverPoints.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 343</value>
@@ -781,7 +739,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPoints.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="ucrNudShapeHeatMap.Location" type="System.Drawing.Point, System.Drawing">
     <value>308, 366</value>
@@ -802,7 +760,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudShapeHeatMap.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="ucrChkColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 439</value>
@@ -823,7 +781,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkColourPalette.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="ucrInputColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 439</value>
@@ -844,70 +802,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrInputColourHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 409</value>
-  </data>
-  <data name="ucrInputColourHeatMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
-  </data>
-  <data name="ucrInputColourHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourHeatMap.Name" xml:space="preserve">
-    <value>ucrInputColourHeatMap</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourHeatMap.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourHeatMap.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourHeatMap.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="ucrInputPositionHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 409</value>
-  </data>
-  <data name="ucrInputPositionHeatMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="ucrInputPositionHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionHeatMap.Name" xml:space="preserve">
-    <value>ucrInputPositionHeatMap</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionHeatMap.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionHeatMap.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionHeatMap.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="ucrChkAddLabelsHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 409</value>
-  </data>
-  <data name="ucrChkAddLabelsHeatMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
-  </data>
-  <data name="ucrChkAddLabelsHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsHeatMap.Name" xml:space="preserve">
-    <value>ucrChkAddLabelsHeatMap</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsHeatMap.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsHeatMap.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsHeatMap.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 300</value>
@@ -931,7 +826,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFill.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>12</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 213</value>
@@ -955,7 +850,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>13</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 470</value>
@@ -979,7 +874,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 510</value>
@@ -1000,7 +895,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>17</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 5</value>
@@ -1021,7 +916,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>18</value>
   </data>
   <data name="ucrInputReorderValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 127</value>
@@ -1042,7 +937,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputReorderValue.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>19</value>
   </data>
   <data name="ucrHeatMapSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 60</value>
@@ -1066,7 +961,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrHeatMapSelector.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>20</value>
   </data>
   <data name="ucrReceiverLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 84</value>
@@ -1090,7 +985,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLongitude.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>22</value>
   </data>
   <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 127</value>
@@ -1114,7 +1009,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLatitude.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>24</value>
   </data>
   <data name="ucrReceiverFillChoropleth.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 170</value>
@@ -1138,7 +1033,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFillChoropleth.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>27</value>
   </data>
   <data name="ucrVariableAsFactorForHeatMap.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 54</value>
@@ -1159,7 +1054,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariableAsFactorForHeatMap.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>28</value>
   </data>
   <data name="ucrInputReorderVariableX.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 256</value>
@@ -1180,202 +1075,91 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputReorderVariableX.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>31</value>
   </data>
-  <data name="ucrChkAddLabelsChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 409</value>
-  </data>
-  <data name="ucrChkAddLabelsChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
-  </data>
-  <data name="ucrChkAddLabelsChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsChoropleth.Name" xml:space="preserve">
-    <value>ucrChkAddLabelsChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabelsChoropleth.ZOrder" xml:space="preserve">
-    <value>42</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 413</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="lblLabelPositionChoropleth.Text" xml:space="preserve">
-    <value>Position:</value>
-  </data>
-  <data name="&gt;&gt;lblLabelPositionChoropleth.Name" xml:space="preserve">
-    <value>lblLabelPositionChoropleth</value>
-  </data>
-  <data name="&gt;&gt;lblLabelPositionChoropleth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLabelPositionChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLabelPositionChoropleth.ZOrder" xml:space="preserve">
-    <value>43</value>
-  </data>
-  <data name="ucrInputPositionChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 409</value>
-  </data>
-  <data name="ucrInputPositionChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="ucrInputPositionChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionChoropleth.Name" xml:space="preserve">
-    <value>ucrInputPositionChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPositionChoropleth.ZOrder" xml:space="preserve">
-    <value>44</value>
-  </data>
-  <data name="lblLabelColourChoropleth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLabelColourChoropleth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLabelColourChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 413</value>
-  </data>
-  <data name="lblLabelColourChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblLabelColourChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="lblLabelColourChoropleth.Text" xml:space="preserve">
-    <value>Colour:</value>
-  </data>
-  <data name="&gt;&gt;lblLabelColourChoropleth.Name" xml:space="preserve">
-    <value>lblLabelColourChoropleth</value>
-  </data>
-  <data name="&gt;&gt;lblLabelColourChoropleth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLabelColourChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLabelColourChoropleth.ZOrder" xml:space="preserve">
-    <value>45</value>
-  </data>
-  <data name="ucrInputColourChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 409</value>
-  </data>
-  <data name="ucrInputColourChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
-  </data>
-  <data name="ucrInputColourChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourChoropleth.Name" xml:space="preserve">
-    <value>ucrInputColourChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColourChoropleth.ZOrder" xml:space="preserve">
-    <value>46</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 413</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="lblLabelSizeChoropleth.Text" xml:space="preserve">
-    <value>Size:</value>
-  </data>
-  <data name="&gt;&gt;lblLabelSizeChoropleth.Name" xml:space="preserve">
-    <value>lblLabelSizeChoropleth</value>
-  </data>
-  <data name="&gt;&gt;lblLabelSizeChoropleth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLabelSizeChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLabelSizeChoropleth.ZOrder" xml:space="preserve">
-    <value>47</value>
-  </data>
-  <data name="ucrInputSizeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>347, 409</value>
   </data>
-  <data name="ucrInputSizeChoropleth.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 21</value>
   </data>
-  <data name="ucrInputSizeChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSizeChoropleth.Name" xml:space="preserve">
-    <value>ucrInputSizeChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSizeChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSizeChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSizeChoropleth.ZOrder" xml:space="preserve">
-    <value>48</value>
-  </data>
-  <data name="ucrInputSizeHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 409</value>
-  </data>
-  <data name="ucrInputSizeHeatMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
-  </data>
-  <data name="ucrInputSizeHeatMap.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputSize.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="&gt;&gt;ucrInputSizeHeatMap.Name" xml:space="preserve">
-    <value>ucrInputSizeHeatMap</value>
+  <data name="&gt;&gt;ucrInputSize.Name" xml:space="preserve">
+    <value>ucrInputSize</value>
   </data>
-  <data name="&gt;&gt;ucrInputSizeHeatMap.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSize.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputSizeHeatMap.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSize.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputSizeHeatMap.ZOrder" xml:space="preserve">
-    <value>49</value>
+  <data name="&gt;&gt;ucrInputSize.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 409</value>
+  </data>
+  <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 20</value>
+  </data>
+  <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
+    <value>ucrChkAddLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="ucrInputPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 409</value>
+  </data>
+  <data name="ucrInputPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="ucrInputPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPosition.Name" xml:space="preserve">
+    <value>ucrInputPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPosition.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPosition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPosition.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="ucrInputColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 409</value>
+  </data>
+  <data name="ucrInputColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 21</value>
+  </data>
+  <data name="ucrInputColour.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrInputColour.Name" xml:space="preserve">
+    <value>ucrInputColour</value>
+  </data>
+  <data name="&gt;&gt;ucrInputColour.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputColour.ZOrder" xml:space="preserve">
+    <value>39</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1411,6 +1195,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsChoropleth.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
 </root>

@@ -43,9 +43,9 @@ Partial Class dlgHeatMapPlot
         Me.cmdTileOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
-        Me.lblLabelPositionHeatMap = New System.Windows.Forms.Label()
-        Me.lblLabelColourHeatMap = New System.Windows.Forms.Label()
-        Me.lblLabelSizeHeatMap = New System.Windows.Forms.Label()
+        Me.lblLabelPosition = New System.Windows.Forms.Label()
+        Me.lblLabelColour = New System.Windows.Forms.Label()
+        Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.lblPointsOptional = New System.Windows.Forms.Label()
         Me.lblPointsSize = New System.Windows.Forms.Label()
         Me.lblReorderVariableX = New System.Windows.Forms.Label()
@@ -66,10 +66,10 @@ Partial Class dlgHeatMapPlot
         Me.ucrNudShapeHeatMap = New instat.ucrNud()
         Me.ucrChkColourPalette = New instat.ucrCheck()
         Me.ucrInputColourPalette = New instat.ucrInputComboBox()
-        Me.ucrInputSizeHeatMap = New instat.ucrInputComboBox()
-        Me.ucrInputColourHeatMap = New instat.ucrInputComboBox()
-        Me.ucrInputPositionHeatMap = New instat.ucrInputComboBox()
-        Me.ucrChkAddLabelsHeatMap = New instat.ucrCheck()
+        Me.ucrInputSize = New instat.ucrInputComboBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -80,15 +80,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrInputReorderValue = New instat.ucrInputComboBox()
         Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
-        Me.ucrChkAddLabelsChoropleth = New instat.ucrCheck()
-        Me.lblLabelPositionChoropleth = New System.Windows.Forms.Label()
-        Me.ucrInputPositionChoropleth = New instat.ucrInputComboBox()
-        Me.lblLabelColourChoropleth = New System.Windows.Forms.Label()
-        Me.ucrInputColourChoropleth = New instat.ucrInputComboBox()
-        Me.lblLabelSizeChoropleth = New System.Windows.Forms.Label()
-        Me.ucrInputSizeChoropleth = New instat.ucrInputComboBox()
-        Me.ucrChkColourPaletteChoropleth = New instat.ucrCheck()
-        Me.ucrInputColourPaletteChoropleth = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -117,20 +108,20 @@ Partial Class dlgHeatMapPlot
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Tag = "fill"
         '
-        'lblLabelPositionHeatMap
+        'lblLabelPosition
         '
-        resources.ApplyResources(Me.lblLabelPositionHeatMap, "lblLabelPositionHeatMap")
-        Me.lblLabelPositionHeatMap.Name = "lblLabelPositionHeatMap"
+        resources.ApplyResources(Me.lblLabelPosition, "lblLabelPosition")
+        Me.lblLabelPosition.Name = "lblLabelPosition"
         '
-        'lblLabelColourHeatMap
+        'lblLabelColour
         '
-        resources.ApplyResources(Me.lblLabelColourHeatMap, "lblLabelColourHeatMap")
-        Me.lblLabelColourHeatMap.Name = "lblLabelColourHeatMap"
+        resources.ApplyResources(Me.lblLabelColour, "lblLabelColour")
+        Me.lblLabelColour.Name = "lblLabelColour"
         '
-        'lblLabelSizeHeatMap
+        'lblLabelSize
         '
-        resources.ApplyResources(Me.lblLabelSizeHeatMap, "lblLabelSizeHeatMap")
-        Me.lblLabelSizeHeatMap.Name = "lblLabelSizeHeatMap"
+        resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
+        Me.lblLabelSize.Name = "lblLabelSize"
         '
         'lblPointsOptional
         '
@@ -279,35 +270,35 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         '
-        'ucrInputSizeHeatMap
+        'ucrInputSize
         '
-        Me.ucrInputSizeHeatMap.AddQuotesIfUnrecognised = True
-        Me.ucrInputSizeHeatMap.GetSetSelectedIndex = -1
-        Me.ucrInputSizeHeatMap.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSizeHeatMap, "ucrInputSizeHeatMap")
-        Me.ucrInputSizeHeatMap.Name = "ucrInputSizeHeatMap"
+        Me.ucrInputSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputSize.GetSetSelectedIndex = -1
+        Me.ucrInputSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSize, "ucrInputSize")
+        Me.ucrInputSize.Name = "ucrInputSize"
         '
-        'ucrInputColourHeatMap
+        'ucrInputColour
         '
-        Me.ucrInputColourHeatMap.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourHeatMap.GetSetSelectedIndex = -1
-        Me.ucrInputColourHeatMap.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourHeatMap, "ucrInputColourHeatMap")
-        Me.ucrInputColourHeatMap.Name = "ucrInputColourHeatMap"
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
+        Me.ucrInputColour.Name = "ucrInputColour"
         '
-        'ucrInputPositionHeatMap
+        'ucrInputPosition
         '
-        Me.ucrInputPositionHeatMap.AddQuotesIfUnrecognised = True
-        Me.ucrInputPositionHeatMap.GetSetSelectedIndex = -1
-        Me.ucrInputPositionHeatMap.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPositionHeatMap, "ucrInputPositionHeatMap")
-        Me.ucrInputPositionHeatMap.Name = "ucrInputPositionHeatMap"
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
         '
-        'ucrChkAddLabelsHeatMap
+        'ucrChkAddLabels
         '
-        Me.ucrChkAddLabelsHeatMap.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabelsHeatMap, "ucrChkAddLabelsHeatMap")
-        Me.ucrChkAddLabelsHeatMap.Name = "ucrChkAddLabelsHeatMap"
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
         '
         'ucrReceiverFill
         '
@@ -386,71 +377,10 @@ Partial Class dlgHeatMapPlot
         Me.ucrVariableAsFactorForHeatMap.ucrSelector = Nothing
         Me.ucrVariableAsFactorForHeatMap.ucrVariableSelector = Nothing
         '
-        'ucrChkAddLabelsChoropleth
-        '
-        Me.ucrChkAddLabelsChoropleth.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabelsChoropleth, "ucrChkAddLabelsChoropleth")
-        Me.ucrChkAddLabelsChoropleth.Name = "ucrChkAddLabelsChoropleth"
-        '
-        'lblLabelPositionChoropleth
-        '
-        resources.ApplyResources(Me.lblLabelPositionChoropleth, "lblLabelPositionChoropleth")
-        Me.lblLabelPositionChoropleth.Name = "lblLabelPositionChoropleth"
-        '
-        'ucrInputPositionChoropleth
-        '
-        Me.ucrInputPositionChoropleth.AddQuotesIfUnrecognised = True
-        Me.ucrInputPositionChoropleth.GetSetSelectedIndex = -1
-        Me.ucrInputPositionChoropleth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPositionChoropleth, "ucrInputPositionChoropleth")
-        Me.ucrInputPositionChoropleth.Name = "ucrInputPositionChoropleth"
-        '
-        'lblLabelColourChoropleth
-        '
-        resources.ApplyResources(Me.lblLabelColourChoropleth, "lblLabelColourChoropleth")
-        Me.lblLabelColourChoropleth.Name = "lblLabelColourChoropleth"
-        '
-        'ucrInputColourChoropleth
-        '
-        Me.ucrInputColourChoropleth.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourChoropleth.GetSetSelectedIndex = -1
-        Me.ucrInputColourChoropleth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourChoropleth, "ucrInputColourChoropleth")
-        Me.ucrInputColourChoropleth.Name = "ucrInputColourChoropleth"
-        '
-        'lblLabelSizeChoropleth
-        '
-        resources.ApplyResources(Me.lblLabelSizeChoropleth, "lblLabelSizeChoropleth")
-        Me.lblLabelSizeChoropleth.Name = "lblLabelSizeChoropleth"
-        '
-        'ucrInputSizeChoropleth
-        '
-        Me.ucrInputSizeChoropleth.AddQuotesIfUnrecognised = True
-        Me.ucrInputSizeChoropleth.GetSetSelectedIndex = -1
-        Me.ucrInputSizeChoropleth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSizeChoropleth, "ucrInputSizeChoropleth")
-        Me.ucrInputSizeChoropleth.Name = "ucrInputSizeChoropleth"
-        '
-        'ucrChkColourPaletteChoropleth
-        '
-        Me.ucrChkColourPaletteChoropleth.Checked = False
-        resources.ApplyResources(Me.ucrChkColourPaletteChoropleth, "ucrChkColourPaletteChoropleth")
-        Me.ucrChkColourPaletteChoropleth.Name = "ucrChkColourPaletteChoropleth"
-        '
-        'ucrInputColourPaletteChoropleth
-        '
-        Me.ucrInputColourPaletteChoropleth.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourPaletteChoropleth.GetSetSelectedIndex = -1
-        Me.ucrInputColourPaletteChoropleth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourPaletteChoropleth, "ucrInputColourPaletteChoropleth")
-        Me.ucrInputColourPaletteChoropleth.Name = "ucrInputColourPaletteChoropleth"
-        '
         'dlgHeatMapPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputColourPaletteChoropleth)
-        Me.Controls.Add(Me.ucrChkColourPaletteChoropleth)
         Me.Controls.Add(Me.ucrReceiverPointsChoropleth)
         Me.Controls.Add(Me.lblFillChoropleth)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
@@ -462,12 +392,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrNudShapeHeatMap)
         Me.Controls.Add(Me.ucrChkColourPalette)
         Me.Controls.Add(Me.ucrInputColourPalette)
-        Me.Controls.Add(Me.lblLabelSizeHeatMap)
-        Me.Controls.Add(Me.ucrInputColourHeatMap)
-        Me.Controls.Add(Me.lblLabelColourHeatMap)
-        Me.Controls.Add(Me.ucrInputPositionHeatMap)
-        Me.Controls.Add(Me.lblLabelPositionHeatMap)
-        Me.Controls.Add(Me.ucrChkAddLabelsHeatMap)
         Me.Controls.Add(Me.lblFill)
         Me.Controls.Add(Me.ucrReceiverFill)
         Me.Controls.Add(Me.ucrReceiverX)
@@ -491,14 +415,13 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrInputReorderVariableX)
         Me.Controls.Add(Me.ucrNudShapeChoropleth)
         Me.Controls.Add(Me.lblSizeChoropleth)
-        Me.Controls.Add(Me.ucrChkAddLabelsChoropleth)
-        Me.Controls.Add(Me.lblLabelPositionChoropleth)
-        Me.Controls.Add(Me.ucrInputPositionChoropleth)
-        Me.Controls.Add(Me.lblLabelColourChoropleth)
-        Me.Controls.Add(Me.ucrInputColourChoropleth)
-        Me.Controls.Add(Me.lblLabelSizeChoropleth)
-        Me.Controls.Add(Me.ucrInputSizeChoropleth)
-        Me.Controls.Add(Me.ucrInputSizeHeatMap)
+        Me.Controls.Add(Me.ucrInputSize)
+        Me.Controls.Add(Me.ucrChkAddLabels)
+        Me.Controls.Add(Me.lblLabelPosition)
+        Me.Controls.Add(Me.ucrInputPosition)
+        Me.Controls.Add(Me.lblLabelColour)
+        Me.Controls.Add(Me.ucrInputColour)
+        Me.Controls.Add(Me.lblLabelSize)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -517,13 +440,13 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents ucrVariableAsFactorForHeatMap As ucrVariablesAsFactor
     Friend WithEvents lblFill As Label
     Friend WithEvents ucrReceiverFill As ucrReceiverSingle
-    Friend WithEvents ucrChkAddLabelsHeatMap As ucrCheck
-    Friend WithEvents lblLabelPositionHeatMap As Label
-    Friend WithEvents ucrInputPositionHeatMap As ucrInputComboBox
-    Friend WithEvents lblLabelColourHeatMap As Label
-    Friend WithEvents ucrInputColourHeatMap As ucrInputComboBox
-    Friend WithEvents ucrInputSizeHeatMap As ucrInputComboBox
-    Friend WithEvents lblLabelSizeHeatMap As Label
+    Friend WithEvents ucrChkAddLabels As ucrCheck
+    Friend WithEvents lblLabelPosition As Label
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents lblLabelColour As Label
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents ucrInputSize As ucrInputComboBox
+    Friend WithEvents lblLabelSize As Label
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
     Friend WithEvents ucrChkColourPalette As ucrCheck
     Friend WithEvents lblPointsOptional As Label
@@ -548,13 +471,4 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents lblPointsChoropleth As Label
     Friend WithEvents lblSizeChoropleth As Label
     Friend WithEvents ucrReceiverPointsChoropleth As ucrReceiverSingle
-    Friend WithEvents ucrInputSizeChoropleth As ucrInputComboBox
-    Friend WithEvents lblLabelSizeChoropleth As Label
-    Friend WithEvents ucrInputColourChoropleth As ucrInputComboBox
-    Friend WithEvents lblLabelColourChoropleth As Label
-    Friend WithEvents ucrInputPositionChoropleth As ucrInputComboBox
-    Friend WithEvents lblLabelPositionChoropleth As Label
-    Friend WithEvents ucrChkAddLabelsChoropleth As ucrCheck
-    Friend WithEvents ucrInputColourPaletteChoropleth As ucrInputComboBox
-    Friend WithEvents ucrChkColourPaletteChoropleth As ucrCheck
 End Class
