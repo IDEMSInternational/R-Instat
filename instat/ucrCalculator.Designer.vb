@@ -397,6 +397,7 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdSortF = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpHydroGOF.SuspendLayout()
@@ -1771,6 +1772,7 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdSortF)
         Me.grpTransform.Controls.Add(Me.cmdNasplin)
         Me.grpTransform.Controls.Add(Me.cmdNaapprox)
         Me.grpTransform.Controls.Add(Me.cmdNaest)
@@ -2908,6 +2910,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdSortF
+        '
+        resources.ApplyResources(Me.cmdSortF, "cmdSortF")
+        Me.cmdSortF.Name = "cmdSortF"
+        Me.cmdSortF.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -3314,4 +3322,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdGlue As Button
     Friend WithEvents cmdTrunck As Button
     Friend WithEvents cmdEnds As Button
+    Friend WithEvents cmdSortF As Button
 End Class

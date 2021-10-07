@@ -54,7 +54,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Test/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -380,7 +380,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
-            Case "Test/Strings (Character Columns)"
+            Case "Text/Strings (Character Columns)"
                 grpDates.Visible = False
                 grpTestString.Visible = True
                 grpFactor.Visible = False
@@ -1332,7 +1332,7 @@ Public Class ucrCalculator
                 End If
             End If
 
-            If ucrInputCalOptions.GetText = "Test/Strings (Character Columns)" Then
+            If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
                 clsHelp.AddParameter("package", Chr(34) & "stringr" & Chr(34), iPosition:=1)
                 frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for stringr package")
             Else
@@ -2978,4 +2978,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
+    Private Sub cmdSortF_Click(sender As Object, e As EventArgs) Handles cmdSortF.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sort(x = , decreasing = FALSE )", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sort()", 1)
+        End If
+    End Sub
 End Class
