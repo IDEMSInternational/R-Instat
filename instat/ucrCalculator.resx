@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 228</value>
+    <value>363, 40</value>
   </data>
   <data name="cmdRHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -802,7 +802,7 @@
     <value>18</value>
   </data>
   <data name="grpBasic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 66</value>
+    <value>223, 69</value>
   </data>
   <data name="grpBasic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1384,7 +1384,7 @@
     <value>18</value>
   </data>
   <data name="grpDates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 61</value>
+    <value>434, 65</value>
   </data>
   <data name="grpDates.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -2041,7 +2041,7 @@
     <value>20</value>
   </data>
   <data name="grpHydroGOF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>430, 73</value>
   </data>
   <data name="grpHydroGOF.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2671,7 +2671,7 @@
     <value>19</value>
   </data>
   <data name="grpFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>430, 70</value>
   </data>
   <data name="grpFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -4351,7 +4351,7 @@
     <value>54</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>430, 73</value>
   </data>
   <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 345</value>
@@ -5074,7 +5074,7 @@
     <value>22</value>
   </data>
   <data name="grpMaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>431, 61</value>
+    <value>431, 67</value>
   </data>
   <data name="grpMaths.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -8719,7 +8719,7 @@
     <value>33</value>
   </data>
   <data name="grpLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>430, 72</value>
   </data>
   <data name="grpLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -10111,7 +10111,7 @@
     <value>15</value>
   </data>
   <data name="grpCircular.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>430, 70</value>
   </data>
   <data name="grpCircular.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
