@@ -2428,7 +2428,7 @@ Public Class frmMain
         dlgExportToClimsoft.ShowDialog()
     End Sub
 
-    Private Sub CompareColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompareColumnsToolStripMenuItem.Click
+    Private Sub CompareColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineCompareColumns.Click
         dlgCompareColumns.ShowDialog()
     End Sub
 End Class
