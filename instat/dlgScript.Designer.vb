@@ -100,7 +100,7 @@ Partial Class dlgScript
         Me.TabControl1.Location = New System.Drawing.Point(8, 7)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(446, 486)
+        Me.TabControl1.Size = New System.Drawing.Size(446, 455)
         Me.TabControl1.TabIndex = 31
         '
         'TabPage2
@@ -368,7 +368,7 @@ Partial Class dlgScript
         Me.TabPage3.Controls.Add(Me.ucrPnlSaveData)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(438, 460)
+        Me.TabPage3.Size = New System.Drawing.Size(438, 429)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Save Results"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -574,12 +574,12 @@ Partial Class dlgScript
         Me.ucrInputCommand.IsReadOnly = False
         Me.ucrInputCommand.Location = New System.Drawing.Point(460, 29)
         Me.ucrInputCommand.Name = "ucrInputCommand"
-        Me.ucrInputCommand.Size = New System.Drawing.Size(576, 460)
+        Me.ucrInputCommand.Size = New System.Drawing.Size(576, 429)
         Me.ucrInputCommand.TabIndex = 18
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(292, 498)
+        Me.ucrBase.Location = New System.Drawing.Point(287, 464)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(416, 57)
@@ -589,7 +589,7 @@ Partial Class dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1041, 566)
+        Me.ClientSize = New System.Drawing.Size(1041, 529)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.ucrInputCommand)

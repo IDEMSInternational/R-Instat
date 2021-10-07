@@ -20,6 +20,7 @@ Public Class dlgScript
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsLibraryFunction, clsGetDataFrameFunction, clsSaveColumnFunction, clsSaveGraphFunction, clsSaveTableFunction, clsSaveModelFunction As New RFunction
+    Private lstAssignToStrings As New List(Of String)
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -33,7 +34,6 @@ Public Class dlgScript
         bReset = False
         autoTranslate(Me)
     End Sub
-
 
     Private Sub InitialiseDialog()
 
@@ -88,12 +88,13 @@ Public Class dlgScript
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetLabelText("Column Name:")
+        ucrSaveColumn.SetLinkedDisplayControl(btnSaveColumn)
 
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetLabelText("Graph Name:")
-        ucrSaveTable.SetLinkedDisplayControl(btnSaveGraph)
+        ucrSaveGraph.SetLinkedDisplayControl(btnSaveGraph)
 
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrDataFrameSave)
@@ -137,6 +138,7 @@ Public Class dlgScript
         clsSaveTableFunction = New RFunction
         clsSaveModelFunction = New RFunction
 
+        lstAssignToStrings.Clear()
 
         'get controls reset
         rdoGetPackage.Checked = True
@@ -146,7 +148,6 @@ Public Class dlgScript
         'ucrReceiverGetCol.SetMeAsReceiver()
         rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
-
 
 
         'save controls reset
@@ -168,12 +169,9 @@ Public Class dlgScript
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrDataFrameGet.strCurrDataFrame & Chr(34))
 
-
     End Sub
 
     Private Sub TestOKEnabled()
-
-        'enable if there is text in the input textbox
         ucrBase.OKEnabled(Not ucrInputCommand.IsEmpty)
     End Sub
 
@@ -197,7 +195,6 @@ Public Class dlgScript
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
-
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
         ucrComboGetPackage.SetVisible(False)
@@ -224,12 +221,16 @@ Public Class dlgScript
     Private Sub SetGetReceiverItemType()
         ucrReceiverGet.Clear()
         If rdoGetColumn.Checked Then
+            lblGet.Text = "Selected Column:"
             ucrReceiverGet.SetItemType("column")
         ElseIf rdoGetGraph.Checked Then
+            lblGet.Text = "Selected Graph:"
             ucrReceiverGet.SetItemType("graph")
         ElseIf rdoGetTable.Checked Then
+            lblGet.Text = "Selected Table:"
             ucrReceiverGet.SetItemType("table")
         ElseIf rdoGetModel.Checked Then
+            lblGet.Text = "Selected Model:"
             ucrReceiverGet.SetItemType("model")
         End If
     End Sub
@@ -255,30 +256,38 @@ Public Class dlgScript
     End Sub
 
     Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
-        AddScript(clsLibraryFunction.ToScript)
+        AddScript(clsLibraryFunction.Clone.ToScript)
     End Sub
 
     Private Sub btnGetDataFrame_Click(sender As Object, e As EventArgs) Handles btnGetDataFrame.Click
+        If ucrDataFrameGet.cboAvailableDataFrames.Text.Length < 1 Then
+            Exit Sub
+        End If
+
         Dim strAssignedScript As String = ""
         clsGetDataFrameFunction.SetAssignTo(ucrDataFrameGet.cboAvailableDataFrames.Text)
-        clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
+        Dim strAssignedTo As String = clsGetDataFrameFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
+        AddAssignToString(strAssignedTo)
     End Sub
 
     Private Sub btnGetObject_Click(sender As Object, e As EventArgs) Handles btnGet.Click
+        If ucrReceiverGet.IsEmpty Then
+            Exit Sub
+        End If
+
         Dim clsFunction As RFunction = ucrReceiverGet.GetVariables()
         Dim strAssignedScript As String = ""
-        clsFunction.ToScript(strScript:=strAssignedScript)
+        Dim strAssignedTo As String = clsFunction.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
+        AddAssignToString(strAssignedTo)
     End Sub
-
-    'todo. do we really need this?
-    Private Sub ucrInputNewDataFrame_ContentsChanged() Handles ucrInputSaveDataFrame.ContentsChanged
-        btnSaveDataframe.Enabled = Not ucrInputSaveDataFrame.IsEmpty
-    End Sub
-
 
     Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
+        If ucrInputSaveDataFrame.IsEmpty Then
+            Exit Sub
+        End If
+
         Dim clsImportNewDataFrame As New RFunction
         Dim clsRFunctionList As New RFunction
 
@@ -288,46 +297,84 @@ Public Class dlgScript
         clsRFunctionList.AddParameter(ucrInputSaveDataFrame.GetText(), ucrInputSaveDataFrame.GetText())
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
 
-        AddScript(ucrInputSaveDataFrame.GetText() & "<-")
+        Dim strAssignedTo As String = ucrInputSaveDataFrame.GetText()
+        AddScript(strAssignedTo & "<-")
         AddScript(clsImportNewDataFrame.ToScript)
+        AddAssignToString(strAssignedTo)
     End Sub
 
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
+        If Not ucrSaveColumn.IsComplete Then
+            Exit Sub
+        End If
+
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
-        Dim str As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
+        Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
+        AddAssignToString(ucrSaveColumn.GetText)
     End Sub
 
     Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveGraph.Click
+        If Not ucrSaveGraph.IsComplete Then
+            Exit Sub
+        End If
+
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
-        Dim str As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AddScript(strAssignedScript)
+        Dim strGetScript As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
+        AddScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        AddAssignToString(ucrSaveGraph.GetText)
     End Sub
 
     Private Sub btnSaveNewTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
+        If Not ucrSaveTable.IsComplete Then
+            Exit Sub
+        End If
+
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
-        Dim str As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AddScript(strAssignedScript)
+        Dim strGetScript As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
+        AddScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        AddAssignToString(ucrSaveTable.GetText)
     End Sub
 
     Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
+
+        If Not ucrSaveModel.IsComplete Then
+            Exit Sub
+        End If
+
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
-        Dim str As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AddScript(strAssignedScript)
+        Dim strGetScript As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
+        AddScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        AddAssignToString(ucrSaveModel.GetText)
     End Sub
 
     Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs) Handles btnRemoveObjects.Click
+        'create function to remove the objects added in the script
+        Dim clsRemoveFunc As New RFunction
+        Dim clsRemoveListFun As New RFunction
+        clsRemoveFunc.SetRCommand("rm")
+        clsRemoveListFun.SetRCommand("c")
+        For i As Integer = 0 To lstAssignToStrings.Count - 1
+            clsRemoveListFun.AddParameter(i, Chr(34) & lstAssignToStrings(i) & Chr(34), bIncludeArgumentName:=False)
+        Next
+        clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
 
+        AddScript(clsRemoveFunc.ToScript())
     End Sub
 
     Private Sub AddScript(strNewScript As String)
         ucrInputCommand.SetName(ucrInputCommand.GetText & Environment.NewLine & Environment.NewLine & strNewScript.Trim)
     End Sub
 
+    Private Sub AddAssignToString(strObjectName As String)
+        If Not lstAssignToStrings.Contains(strObjectName) Then
+            lstAssignToStrings.Add(strObjectName)
+        End If
+    End Sub
 
 
 End Class
