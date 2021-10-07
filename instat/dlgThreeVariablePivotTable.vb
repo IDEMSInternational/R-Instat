@@ -184,39 +184,39 @@ Public Class dlgThreeVariablePivotTable
 
         Dim lstColumns As New List(Of String)
         Dim iPosition As Integer = 0
+        Dim strColumnVariableName As String = ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False)
+        Dim strRowVariableName As String = ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=False)
 
         clsConcatenateFunction.ClearParameters()
         If Not ucrReceiverInitialRowFactors.IsEmpty Then
-            For Each strColumn In ucrReceiverInitialRowFactors.GetVariableNamesList(bWithQuotes:=False)
-                If lstColumns.Contains(strColumn) Then
-                    Continue For
-                End If
-                lstColumns.Add(strColumn)
-                clsConcatenateFunction.AddParameter("col" & iPosition, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                iPosition += 1
-            Next
+            CheckForDuplication(lstColumns, ucrReceiverInitialRowFactors, iPosition)
         End If
 
         If Not ucrReceiverSelectedVariable.IsEmpty Then
-            For Each strColumn In ucrReceiverSelectedVariable.GetVariableNamesList(bWithQuotes:=False)
-                If Not lstColumns.Contains(strColumn) Then
-                    lstColumns.Add(strColumn)
-                    clsConcatenateFunction.AddParameter("row" & iPosition, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                    iPosition = iPosition + 1
-                End If
-            Next
+            CheckForDuplication(lstColumns, ucrReceiverSelectedVariable, iPosition)
         End If
 
-        If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not lstColumns.Contains(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=True)) Then
-            lstColumns.Add(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=True))
-            clsConcatenateFunction.AddParameter("col" & iPosition, ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=True), iPosition:=iPosition, bIncludeArgumentName:=False)
+        If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not lstColumns.Contains(strColumnVariableName) Then
+            lstColumns.Add(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False))
+            clsConcatenateFunction.AddParameter("col" & iPosition, strColumnVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
             iPosition = iPosition + 1
         End If
 
-        If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso Not lstColumns.Contains(ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=True)) Then
-            clsConcatenateFunction.AddParameter("col" & iPosition, ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=True), iPosition:=iPosition, bIncludeArgumentName:=False)
+        If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso Not lstColumns.Contains(strRowVariableName) Then
+            clsConcatenateFunction.AddParameter("col" & iPosition, strRowVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
             iPosition = iPosition + 1
         End If
+    End Sub
+
+    Private Sub CheckForDuplication(lstNewColumns As List(Of String), ucrNewReceiver As ucrReceiverMultiple, ByRef iNewposition As Integer)
+        For Each strColumn In ucrNewReceiver.GetVariableNamesList(bWithQuotes:=False)
+            If lstNewColumns.Contains(strColumn) Then
+                Continue For
+            End If
+            lstNewColumns.Add(strColumn)
+            clsConcatenateFunction.AddParameter("col" & iNewposition, strColumn, iPosition:=iNewposition, bIncludeArgumentName:=False)
+            iNewposition += 1
+        Next
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
