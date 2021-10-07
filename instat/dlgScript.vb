@@ -191,11 +191,6 @@ Public Class dlgScript
         SetRCodeForControls(True)
     End Sub
 
-    Private Sub ucrInputCommand_ContentsChanged()
-        ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
         ucrComboGetPackage.SetVisible(False)
         ucrDataFrameGet.SetVisible(False)
@@ -324,6 +319,8 @@ Public Class dlgScript
         AddAssignToString(ucrSaveGraph.GetText)
     End Sub
 
+
+
     Private Sub btnSaveNewTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
         If Not ucrSaveTable.IsComplete Then
             Exit Sub
@@ -361,6 +358,11 @@ Public Class dlgScript
         clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
 
         AppendTextScript(clsRemoveFunc.ToScript())
+    End Sub
+
+    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
+        TestOKEnabled()
     End Sub
 
     Private Sub AppendTextScript(strNewScript As String)
