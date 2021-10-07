@@ -331,7 +331,6 @@ Public Class ucrCalculator
     Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
-
                 strPackageName = "stats"
                 grpSummary.Visible = False
                 grpMaths.Visible = True
@@ -350,6 +349,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
+                strPackageName = "base"
                 grpDates.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = True
@@ -367,6 +367,8 @@ Public Class ucrCalculator
                 cmdRHelp.Visible = True
                 grpSymbols.Visible = False
             Case "Summary"
+                strPackageName = "base"
+                 strPackageName = "stats"
                 grpDates.Visible = False
                 grpSummary.Visible = True
                 grpLogical.Visible = False
@@ -384,6 +386,7 @@ Public Class ucrCalculator
                 cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Text/Strings (Character Columns)"
+                strPackageName = "stringr"
                 grpDates.Visible = False
                 grpTestString.Visible = True
                 grpFactor.Visible = False
@@ -401,6 +404,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
+                strPackageName = "base"
                 grpFactor.Visible = True
                 grpDates.Visible = False
                 grpSummary.Visible = False
@@ -418,6 +422,7 @@ Public Class ucrCalculator
                 cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Probability"
+                strPackageName = "stats"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpTestString.Visible = False
@@ -435,6 +440,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
+                strPackageName = "lubridate"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
                 grpTestString.Visible = False
@@ -452,6 +458,8 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
+                strPackageName = "dplyr"
+                strPackageName = "zoo"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -469,6 +477,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
             Case "Wakefield"
+                strPackageName = "wakefield"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -486,6 +495,7 @@ Public Class ucrCalculator
                 cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.7, iBaseHeight)
             Case "Circular"
+                strPackageName = "circular"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -503,6 +513,7 @@ Public Class ucrCalculator
                 cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
+                strPackageName = "hydroGOF"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -1294,12 +1305,8 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click
-        'HelpContent()
         Dim clsHelp As New RFunction
-        Dim strPackageName As String
 
-
-        'strPackageName = ucrInputCalOptions.GetText
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
@@ -1310,141 +1317,6 @@ Public Class ucrCalculator
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
         RaiseEvent TryCommadClick()
     End Sub
-
-    'Private Sub HelpContent()
-
-    '    If ucrInputCalOptions.GetText = "hydroGOF" Then
-    '        clsHelp.AddParameter("package", Chr(34) & "hydroGOF" & Chr(34), iPosition:=1)
-    '        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for hydroGOF package")
-    '    Else
-    '        If iHelpCalcID > 0 Then
-    '            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '        Else
-    '            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Wakefield" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "wakefield" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for wakefield package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Summary" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for base package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "stringr" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for stringr package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Probability" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "stats" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for stats package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Transform" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "dplyr" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for dplyr package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Transform" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "zoo" & Chr(34), iPosition:=2)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for dplyr package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Dates/Times" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "lubridate" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for lubridate package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Circular" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "circular" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for circular package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Maths" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "stats" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for stats package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for base package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-
-    '        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
-    '            clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34), iPosition:=1)
-    '            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for base package")
-    '        Else
-    '            If iHelpCalcID > 0 Then
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-    '            Else
-    '                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
 
     Public Sub SetAsCurrentReceiver()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
