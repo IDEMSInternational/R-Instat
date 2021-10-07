@@ -77,11 +77,13 @@ Public Class dlgScript
 
         '---------------------------------------------------
         'save controls
+        ucrPnlSaveData.AddRadioButton(rdoSaveDataFrame)
+        ucrPnlSaveData.AddRadioButton(rdoSaveColumn)
+        ucrPnlSaveData.AddRadioButton(rdoSaveObject)
 
         ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
         ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
 
-        'ucrSaveColoumn.SetPrefix("newcol")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveColumn.SetIsComboBox()
@@ -91,18 +93,21 @@ Public Class dlgScript
         ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetLabelText("Graph Name:")
+        ucrSaveTable.SetLinkedDisplayControl(btnSaveGraph)
 
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetLabelText("Table Name:")
+        ucrSaveTable.SetLinkedDisplayControl(btnSaveTable)
 
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetLabelText("Model Name:")
+        ucrSaveModel.SetLinkedDisplayControl(btnSaveModel)
 
-        'disable base button comment
+        'hide base button comment controls
         ucrBase.chkComment.Checked = False
         ucrBase.chkComment.Visible = False
         ucrBase.txtComment.Visible = False
@@ -145,9 +150,10 @@ Public Class dlgScript
 
 
         'save controls reset
+        rdoSaveDataFrame.Checked = True
         ucrInputSaveDataFrame.SetName("")
-        ucrSaveColumn.Reset()
         ucrDataFrameSave.Reset()
+        ucrSaveColumn.Reset()
         ucrSaveGraph.Reset()
         ucrSaveTable.Reset()
         ucrSaveModel.Reset()
@@ -207,34 +213,15 @@ Public Class dlgScript
             ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
-            SetReceiverItemType()
+            SetGetReceiverItemType()
         End If
     End Sub
 
     Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
-        SetReceiverItemType()
+        SetGetReceiverItemType()
     End Sub
 
-    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
-        ucrInputSaveDataFrame.SetVisible(False)
-        'todo. left here. finish from here
-        ucrSaveColumn.SetVisible(False)
-        ucrSelectorGet.SetVisible(False)
-        ucrPnlGetObject.SetVisible(False)
-        ucrReceiverGet.SetVisible(False)
-        If rdoGetPackage.Checked Then
-            ucrComboGetPackage.SetVisible(True)
-        ElseIf rdoGetDataFrame.Checked Then
-            ucrDataFrameGet.SetVisible(True)
-        ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
-            ucrPnlGetObject.SetVisible(False)
-            ucrSelectorGet.SetVisible(True)
-            ucrReceiverGet.SetVisible(True)
-            SetReceiverItemType()
-        End If
-    End Sub
-
-    Private Sub SetReceiverItemType()
+    Private Sub SetGetReceiverItemType()
         ucrReceiverGet.Clear()
         If rdoGetColumn.Checked Then
             ucrReceiverGet.SetItemType("column")
@@ -244,6 +231,26 @@ Public Class dlgScript
             ucrReceiverGet.SetItemType("table")
         ElseIf rdoGetModel.Checked Then
             ucrReceiverGet.SetItemType("model")
+        End If
+    End Sub
+
+    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
+        ucrInputSaveDataFrame.SetVisible(False)
+        ucrDataFrameSave.SetVisible(False)
+        ucrSaveColumn.SetVisible(False)
+        ucrSaveGraph.SetVisible(False)
+        ucrSaveTable.SetVisible(False)
+        ucrSaveModel.SetVisible(False)
+        If rdoSaveDataFrame.Checked Then
+            ucrInputSaveDataFrame.SetVisible(True)
+        ElseIf rdoSaveColumn.Checked Then
+            ucrDataFrameSave.SetVisible(True)
+            ucrSaveColumn.SetVisible(True)
+        ElseIf rdoSaveObject.Checked Then
+            ucrDataFrameSave.SetVisible(True)
+            ucrSaveGraph.SetVisible(True)
+            ucrSaveTable.SetVisible(True)
+            ucrSaveModel.SetVisible(True)
         End If
     End Sub
 
@@ -285,7 +292,6 @@ Public Class dlgScript
         AddScript(clsImportNewDataFrame.ToScript)
     End Sub
 
-
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
@@ -300,7 +306,7 @@ Public Class dlgScript
         AddScript(strAssignedScript)
     End Sub
 
-    Private Sub btSaveNewTable_Click(sender As Object, e As EventArgs) Handles btSaveTable.Click
+    Private Sub btnSaveNewTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
@@ -312,6 +318,10 @@ Public Class dlgScript
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim str As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
         AddScript(strAssignedScript)
+    End Sub
+
+    Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs) Handles btnRemoveObjects.Click
+
     End Sub
 
     Private Sub AddScript(strNewScript As String)
