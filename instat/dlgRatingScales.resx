@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOrderedFactor.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="rdoHighDescendingLikert.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -343,13 +343,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSort.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrChkNumberOfCategories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 26</value>
+    <value>10, 297</value>
   </data>
   <data name="ucrChkNumberOfCategories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkNumberOfCategories.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -361,13 +361,13 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkNumberOfCategories.Parent" xml:space="preserve">
-    <value>grpLikertType</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkNumberOfCategories.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrNudNeutralLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 52</value>
+    <value>152, 297</value>
   </data>
   <data name="ucrNudNeutralLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -382,67 +382,10 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudNeutralLevel.Parent" xml:space="preserve">
-    <value>grpLikertType</value>
-  </data>
-  <data name="&gt;&gt;ucrNudNeutralLevel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblNeutralLevel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNeutralLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNeutralLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 56</value>
-  </data>
-  <data name="lblNeutralLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="lblNeutralLevel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblNeutralLevel.Text" xml:space="preserve">
-    <value>Neutral Level:</value>
-  </data>
-  <data name="&gt;&gt;lblNeutralLevel.Name" xml:space="preserve">
-    <value>lblNeutralLevel</value>
-  </data>
-  <data name="&gt;&gt;lblNeutralLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNeutralLevel.Parent" xml:space="preserve">
-    <value>grpLikertType</value>
-  </data>
-  <data name="&gt;&gt;lblNeutralLevel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpLikertType.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="grpLikertType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 297</value>
-  </data>
-  <data name="grpLikertType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 80</value>
-  </data>
-  <data name="grpLikertType.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="grpLikertType.Text" xml:space="preserve">
-    <value>Likert Options</value>
-  </data>
-  <data name="&gt;&gt;grpLikertType.Name" xml:space="preserve">
-    <value>grpLikertType</value>
-  </data>
-  <data name="&gt;&gt;grpLikertType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLikertType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpLikertType.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;ucrNudNeutralLevel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="rdoStacked.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -478,7 +421,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoStacked.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="rdoLikert.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -514,7 +457,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoLikert.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="rdoTable.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -550,7 +493,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoTable.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="rdoHighDescendingTable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -745,7 +688,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSortTable.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 383</value>
@@ -769,7 +712,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
     <value>53, 8</value>
@@ -790,7 +733,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrChkFlip.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 271</value>
@@ -811,7 +754,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFlip.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -841,7 +784,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkWeights.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrReceiverOrderedFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 99</value>
@@ -865,7 +808,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverOrderedFactors.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 413</value>
@@ -886,7 +829,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrSelectorRatingScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 49</value>
@@ -910,10 +853,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorRatingScale.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>15</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -949,6 +889,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
 </root>
