@@ -188,11 +188,12 @@ Public Class dlgThreeVariablePivotTable
         clsConcatenateFunction.ClearParameters()
         If Not ucrReceiverInitialRowFactors.IsEmpty Then
             For Each strColumn In ucrReceiverInitialRowFactors.GetVariableNamesList(bWithQuotes:=False)
-                If Not lstColumns.Contains(strColumn) Then
-                    lstColumns.Add(strColumn)
-                    clsConcatenateFunction.AddParameter("col" & iPosition, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                    iPosition = iPosition + 1
+                If lstColumns.Contains(strColumn) Then
+                    Continue For
                 End If
+                lstColumns.Add(strColumn)
+                clsConcatenateFunction.AddParameter("col" & iPosition, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
+                iPosition += 1
             Next
         End If
 
