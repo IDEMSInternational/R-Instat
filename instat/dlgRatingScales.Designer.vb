@@ -46,9 +46,6 @@ Partial Class dlgRatingScales
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlLikertOptions = New instat.UcrPanel()
-        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
-        Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
@@ -58,10 +55,13 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingTable = New System.Windows.Forms.RadioButton()
         Me.rdoLowDescendingTable = New System.Windows.Forms.RadioButton()
         Me.rdoNoneTable = New System.Windows.Forms.RadioButton()
+        Me.ucrNudNeutralLevel = New instat.ucrNud()
+        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
         Me.ucrPnlTableOptions = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlLikertOptions = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
@@ -122,27 +122,6 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.Name = "rdoHighAscendingLikert"
         Me.rdoHighAscendingLikert.TabStop = True
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
-        '
-        'ucrPnlLikertOptions
-        '
-        resources.ApplyResources(Me.ucrPnlLikertOptions, "ucrPnlLikertOptions")
-        Me.ucrPnlLikertOptions.Name = "ucrPnlLikertOptions"
-        '
-        'ucrChkNumberOfCategories
-        '
-        Me.ucrChkNumberOfCategories.Checked = False
-        resources.ApplyResources(Me.ucrChkNumberOfCategories, "ucrChkNumberOfCategories")
-        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
-        '
-        'ucrNudNeutralLevel
-        '
-        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNeutralLevel, "ucrNudNeutralLevel")
-        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
-        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoStacked
         '
@@ -218,6 +197,22 @@ Partial Class dlgRatingScales
         Me.rdoNoneTable.TabStop = True
         Me.rdoNoneTable.UseVisualStyleBackColor = True
         '
+        'ucrNudNeutralLevel
+        '
+        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNeutralLevel, "ucrNudNeutralLevel")
+        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
+        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkNumberOfCategories
+        '
+        Me.ucrChkNumberOfCategories.Checked = False
+        resources.ApplyResources(Me.ucrChkNumberOfCategories, "ucrChkNumberOfCategories")
+        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
+        '
         'ucrPnlTableOptions
         '
         resources.ApplyResources(Me.ucrPnlTableOptions, "ucrPnlTableOptions")
@@ -238,6 +233,11 @@ Partial Class dlgRatingScales
         Me.ucrChkFlip.Checked = False
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
+        '
+        'ucrPnlLikertOptions
+        '
+        resources.ApplyResources(Me.ucrPnlLikertOptions, "ucrPnlLikertOptions")
+        Me.ucrPnlLikertOptions.Name = "ucrPnlLikertOptions"
         '
         'ucrReceiverWeights
         '

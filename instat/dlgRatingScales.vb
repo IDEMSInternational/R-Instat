@@ -90,14 +90,12 @@ Public Class dlgRatingScales
 
         ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 7))
 
-
-        ucrChkNumberOfCategories.SetText("Neutral Levels")
+        ucrChkNumberOfCategories.SetText("Neutral Level:")
         ucrChkNumberOfCategories.SetParameter(ucrNudNeutralLevel.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNumberOfCategories.AddToLinkedControls(ucrNudNeutralLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkNumberOfCategories.AddParameterPresentCondition(True, "cat.neutral")
         ucrChkNumberOfCategories.AddParameterPresentCondition(False, "cat.neutral", False)
         ucrChkNumberOfCategories.SetDefaultState(False)
-        
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 12))
         ucrChkFlip.SetText("Flip Coordinates")
