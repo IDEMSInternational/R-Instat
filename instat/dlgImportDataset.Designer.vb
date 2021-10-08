@@ -649,7 +649,6 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
-        Me.Controls.Add(Me.ucrChkSheetsCheckAll)
         Me.Controls.Add(Me.lblSelectSheets)
         Me.Controls.Add(Me.clbSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
@@ -673,6 +672,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.txtTextFilePreview)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblTextFilePreview)
+        Me.Controls.Add(Me.ucrChkSheetsCheckAll)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
