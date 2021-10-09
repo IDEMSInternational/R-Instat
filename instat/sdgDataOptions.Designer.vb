@@ -52,14 +52,15 @@ Partial Class sdgDataOptions
         Me.lblFilter = New System.Windows.Forms.Label()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.tbColumns = New System.Windows.Forms.TabPage()
-        Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
+        Me.cmdRemoveCurrentColumnSelection = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rdoColumnsForThisDialog = New System.Windows.Forms.RadioButton()
+        Me.rdoColumnsForAllDialogs = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.lblSelection = New System.Windows.Forms.Label()
         Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rdoColumnsForThisDialog = New System.Windows.Forms.RadioButton()
-        Me.rdoColumnsForAllDialogs = New System.Windows.Forms.RadioButton()
+        Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
         Me.grpApplyOptions.SuspendLayout()
@@ -165,6 +166,7 @@ Partial Class sdgDataOptions
         '
         'tbColumns
         '
+        Me.tbColumns.Controls.Add(Me.cmdRemoveCurrentColumnSelection)
         Me.tbColumns.Controls.Add(Me.GroupBox1)
         Me.tbColumns.Controls.Add(Me.ucrReceiverSelect)
         Me.tbColumns.Controls.Add(Me.lblSelection)
@@ -175,14 +177,39 @@ Partial Class sdgDataOptions
         Me.tbColumns.Tag = "Columns"
         Me.tbColumns.UseVisualStyleBackColor = True
         '
-        'ucrSubDialogueBase
+        'cmdRemoveCurrentColumnSelection
         '
-        resources.ApplyResources(Me.ucrSubDialogueBase, "ucrSubDialogueBase")
-        Me.ucrSubDialogueBase.Name = "ucrSubDialogueBase"
+        resources.ApplyResources(Me.cmdRemoveCurrentColumnSelection, "cmdRemoveCurrentColumnSelection")
+        Me.cmdRemoveCurrentColumnSelection.Name = "cmdRemoveCurrentColumnSelection"
+        Me.cmdRemoveCurrentColumnSelection.Tag = ""
+        Me.cmdRemoveCurrentColumnSelection.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.rdoColumnsForThisDialog)
+        Me.GroupBox1.Controls.Add(Me.rdoColumnsForAllDialogs)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Tag = "Apply_Options"
+        '
+        'rdoColumnsForThisDialog
+        '
+        resources.ApplyResources(Me.rdoColumnsForThisDialog, "rdoColumnsForThisDialog")
+        Me.rdoColumnsForThisDialog.Name = "rdoColumnsForThisDialog"
+        Me.rdoColumnsForThisDialog.TabStop = True
+        Me.rdoColumnsForThisDialog.UseVisualStyleBackColor = True
+        '
+        'rdoColumnsForAllDialogs
+        '
+        resources.ApplyResources(Me.rdoColumnsForAllDialogs, "rdoColumnsForAllDialogs")
+        Me.rdoColumnsForAllDialogs.Name = "rdoColumnsForAllDialogs"
+        Me.rdoColumnsForAllDialogs.TabStop = True
+        Me.rdoColumnsForAllDialogs.UseVisualStyleBackColor = True
         '
         'ucrReceiverSelect
         '
-        Me.ucrReceiverSelect.frmParent = Me
+        Me.ucrReceiverSelect.frmParent = Nothing
         resources.ApplyResources(Me.ucrReceiverSelect, "ucrReceiverSelect")
         Me.ucrReceiverSelect.Name = "ucrReceiverSelect"
         Me.ucrReceiverSelect.Selector = Nothing
@@ -209,28 +236,10 @@ Partial Class sdgDataOptions
         Me.cmdDefineNewSelect.Tag = ""
         Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'ucrSubDialogueBase
         '
-        Me.GroupBox1.Controls.Add(Me.rdoColumnsForThisDialog)
-        Me.GroupBox1.Controls.Add(Me.rdoColumnsForAllDialogs)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Tag = "Apply_Options"
-        '
-        'rdoColumnsForThisDialog
-        '
-        resources.ApplyResources(Me.rdoColumnsForThisDialog, "rdoColumnsForThisDialog")
-        Me.rdoColumnsForThisDialog.Name = "rdoColumnsForThisDialog"
-        Me.rdoColumnsForThisDialog.TabStop = True
-        Me.rdoColumnsForThisDialog.UseVisualStyleBackColor = True
-        '
-        'rdoColumnsForAllDialogs
-        '
-        resources.ApplyResources(Me.rdoColumnsForAllDialogs, "rdoColumnsForAllDialogs")
-        Me.rdoColumnsForAllDialogs.Name = "rdoColumnsForAllDialogs"
-        Me.rdoColumnsForAllDialogs.TabStop = True
-        Me.rdoColumnsForAllDialogs.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrSubDialogueBase, "ucrSubDialogueBase")
+        Me.ucrSubDialogueBase.Name = "ucrSubDialogueBase"
         '
         'sdgDataOptions
         '
@@ -277,4 +286,5 @@ Partial Class sdgDataOptions
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents rdoColumnsForThisDialog As RadioButton
     Friend WithEvents rdoColumnsForAllDialogs As RadioButton
+    Friend WithEvents cmdRemoveCurrentColumnSelection As Button
 End Class
