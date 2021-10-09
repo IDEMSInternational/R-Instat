@@ -1737,7 +1737,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
     i <- i + 1
   }
   out <- paste(out, ")")
-  if (curr_filter$parameters[["outer_not"]]) {
+  if (isTRUE(curr_filter$parameters[["outer_not"]])) {
     out <- gsub("[!()]", "", out)
     out <- paste0("!(", out, ")")
   }
