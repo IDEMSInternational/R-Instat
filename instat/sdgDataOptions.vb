@@ -102,7 +102,11 @@ Public Class sdgDataOptions
     Private Sub ucrReceiverFilter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFilter.SelectionChanged
         If Not ucrReceiverFilter.IsEmpty() Then
             clsFilterPreview.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
-            ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterPreview.ToScript()).AsCharacter(0))
+            Try
+                ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterPreview.ToScript()).AsCharacter(0))
+            Catch ex As Exception
+                ucrInputFilterPreview.SetName("Preview not available")
+            End Try
         Else
             ucrInputFilterPreview.SetName("")
         End If
