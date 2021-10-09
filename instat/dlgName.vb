@@ -24,7 +24,6 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDefaultRFunction As New RFunction
-    Private clsRenameWithFunction As RFunction
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -63,13 +62,13 @@ Public Class dlgName
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
-        ucrPnlOptions.AddRadioButton(rdoSingle)
-        ucrPnlOptions.AddRadioButton(rdoMultiple)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, "rename_with")
+        ucrPnlOptions.SetParameter(New RParameter("type", 4))
+        ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverColumns, ucrSaveDataFrame}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
@@ -79,24 +78,15 @@ Public Class dlgName
         ucrInputCase.SetLinkedDisplayControl(lblCase)
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
 
-        ucrReceiverColumns.SetParameter(New RParameter(".cols", 2))
-        ucrReceiverColumns.Selector = ucrSelectVariables
-        ucrReceiverColumns.SetParameterIsString()
-        ucrReceiverColumns.bWithQuotes = False
-
-        ucrPnlCase.SetParameter(New RParameter(".fn", 1))
-        ucrPnlCase.AddRadioButton(rdoToUpper, "toupper")
+        ucrPnlCase.SetParameter(New RParameter(".fn", 5))
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
-        ucrPnlCase.AddRadioButton(rdoToTitle, "stringr::str_to_title")
-        ucrPnlCase.AddRadioButton(rdoToSentence, "stringr::str_to_sentence")
         ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
 
-        ucrSaveDataFrame.SetLabelText("New Data Frame Name:")
-        ucrSaveDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveDataFrame.SetPrefix("new_data_frame")
-        ucrSaveDataFrame.SetDataFrameSelector(ucrSelectVariables.ucrAvailableDataFrames)
+        ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
+        ucrReceiverColumns.Selector = ucrSelectVariables
+        ucrReceiverColumns.SetParameterIsString()
 
-        ucrInputCase.SetParameter(New RParameter("case", 3))
+        ucrInputCase.SetParameter(New RParameter("case", 7))
         dctCaseOptions.Add("Snake", Chr(34) & "snake" & Chr(34))
         dctCaseOptions.Add("Small camel", Chr(34) & "small_camel" & Chr(34))
         dctCaseOptions.Add("Big camel", Chr(34) & "big_camel" & Chr(34))
@@ -121,17 +111,14 @@ Public Class dlgName
 
     Public Sub SetDefaults()
         clsDefaultRFunction = New RFunction
-        clsRenameWithFunction = New RFunction
 
         ucrSelectVariables.Reset()
-        ucrSaveDataFrame.Reset()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
+        clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
+        clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
 
-        clsRenameWithFunction.SetPackageName("dplyr")
-        clsRenameWithFunction.SetRCommand("rename_with")
-        clsRenameWithFunction.AddParameter(".fn", "toupper", iPosition:=1)
-        clsRenameWithFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=3)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
@@ -143,24 +130,12 @@ Public Class dlgName
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If ucrSaveDataFrame.IsComplete Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectVariables.SetRCode(clsDefaultRFunction, bReset)
-        ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
-        ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
-        ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverColumns.SetRCode(clsRenameWithFunction, bReset)
-        ucrPnlCase.SetRCode(clsRenameWithFunction, bReset)
-        ucrInputCase.SetRCode(clsRenameWithFunction, bReset)
-        ucrSaveDataFrame.SetRCode(clsRenameWithFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -226,23 +201,19 @@ Public Class dlgName
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoSingle.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
             ucrReceiverName.SetMeAsReceiver()
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRenameWithFunction)
             ucrReceiverColumns.SetMeAsReceiver()
         End If
     End Sub
 
-    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        If rdoMultiple.Checked AndAlso Not ucrSelectVariables.IsEmpty Then
-            clsRenameWithFunction.AddParameter(".data", clsRFunctionParameter:=ucrSelectVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        Else
-            clsRenameWithFunction.RemoveParameterByName(".data")
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If Not ucrReceiverColumns.IsEmpty Then
+            ucrReceiverColumns.Clear()
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrSaveDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
