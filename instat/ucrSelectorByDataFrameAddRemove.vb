@@ -21,6 +21,13 @@ Public Class ucrSelectorByDataFrameAddRemove
 
     Private Sub btnDataOptions_Click(sender As Object, e As EventArgs) Handles btnDataOptions.Click
         ShowDataOptionsDialog()
+        If ParentForm IsNot Nothing Then
+            For Each ctr In ParentForm.Controls
+                If TypeOf ctr Is ucrSelector Then
+                    ctr.LoadList()
+                End If
+            Next
+        End If
     End Sub
 
     Public Sub ShowColumnSelector(bShow As Boolean)

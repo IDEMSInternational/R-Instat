@@ -109,9 +109,6 @@ Public Class sdgDataOptions
             Else
                 'TODO: Set Local column selection
             End If
-            'For Each ctr As ucrSelector In Parent.Controls
-            'ctr.LoadList()
-            'Next
         End If
     End Sub
 
