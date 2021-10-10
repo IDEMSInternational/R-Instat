@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 Public Class dlgSelectColumns
     Private bReset As Boolean = True
@@ -65,7 +66,7 @@ Public Class dlgSelectColumns
 
         ucrChkIgnoreCase.SetParameter(New RParameter("ignore.case", 1))
         ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkIgnoreCase.SetText("Ignore case")
+        ucrChkIgnoreCase.SetText("Ignore Case")
 
         ucrInputSelectName.SetItemsTypeAsColumnSelection()
         ucrInputSelectName.SetDataFrameSelector(ucrSelectorForColumnSelection.ucrAvailableDataFrames)
@@ -209,6 +210,7 @@ Public Class dlgSelectColumns
         lstColumnSelections.Columns(0).Width = -2
         lstColumnSelections.Columns(1).Width = -2
         ucrReceiverMultipleVariables.Clear()
+        cmdAddCondition.Enabled = False
     End Sub
 
     Private Sub cmdClearConditions_Click(sender As Object, e As EventArgs) Handles cmdClearConditions.Click
@@ -253,6 +255,17 @@ Public Class dlgSelectColumns
                 lstColumnSelections.Items.Clear()
                 clsConditionsList.ClearParameters()
                 bSelectedColumns = False
+            End If
+        End If
+    End Sub
+
+    Private Sub dlgSelectColumns_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim result As MsgBoxResult
+
+        If cmdAddCondition.Enabled Then
+            result = MessageBox.Show(text:="Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+            If result = MsgBoxResult.No Then
+                e.Cancel = True
             End If
         End If
     End Sub

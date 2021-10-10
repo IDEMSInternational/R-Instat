@@ -325,13 +325,13 @@
     <value>392, 38</value>
   </data>
   <data name="lblSeclectedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>89, 13</value>
   </data>
   <data name="lblSeclectedColumns.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblSeclectedColumns.Text" xml:space="preserve">
-    <value>Select column(s):</value>
+    <value>Select Column(s):</value>
   </data>
   <data name="&gt;&gt;lblSeclectedColumns.Name" xml:space="preserve">
     <value>lblSeclectedColumns</value>
