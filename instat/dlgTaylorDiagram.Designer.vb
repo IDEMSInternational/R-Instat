@@ -27,6 +27,8 @@ Partial Class dlgTaylorDiagram
         Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
         Me.lblFacet = New System.Windows.Forms.Label()
+        Me.cmdTaylorDiagramOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverEstimated = New instat.ucrReceiverMultiple()
         Me.ucrChkNormalise = New instat.ucrCheck()
         Me.ucrReceiverType = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
@@ -34,8 +36,6 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverGroup = New instat.ucrReceiverMultiple()
         Me.ucrReceiverObserved = New instat.ucrReceiverSingle()
         Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.cmdTaylorDiagramOptions = New System.Windows.Forms.Button()
-        Me.ucrReceiverEstimated = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblObserved
@@ -57,6 +57,21 @@ Partial Class dlgTaylorDiagram
         '
         resources.ApplyResources(Me.lblFacet, "lblFacet")
         Me.lblFacet.Name = "lblFacet"
+        '
+        'cmdTaylorDiagramOptions
+        '
+        resources.ApplyResources(Me.cmdTaylorDiagramOptions, "cmdTaylorDiagramOptions")
+        Me.cmdTaylorDiagramOptions.Name = "cmdTaylorDiagramOptions"
+        Me.cmdTaylorDiagramOptions.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverEstimated
+        '
+        Me.ucrReceiverEstimated.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverEstimated, "ucrReceiverEstimated")
+        Me.ucrReceiverEstimated.Name = "ucrReceiverEstimated"
+        Me.ucrReceiverEstimated.Selector = Nothing
+        Me.ucrReceiverEstimated.strNcFilePath = ""
+        Me.ucrReceiverEstimated.ucrSelector = Nothing
         '
         'ucrChkNormalise
         '
@@ -108,21 +123,6 @@ Partial Class dlgTaylorDiagram
         Me.ucrSelectorTaylorDiagram.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTaylorDiagram, "ucrSelectorTaylorDiagram")
         Me.ucrSelectorTaylorDiagram.Name = "ucrSelectorTaylorDiagram"
-        '
-        'cmdTaylorDiagramOptions
-        '
-        resources.ApplyResources(Me.cmdTaylorDiagramOptions, "cmdTaylorDiagramOptions")
-        Me.cmdTaylorDiagramOptions.Name = "cmdTaylorDiagramOptions"
-        Me.cmdTaylorDiagramOptions.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverEstimated
-        '
-        Me.ucrReceiverEstimated.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverEstimated, "ucrReceiverEstimated")
-        Me.ucrReceiverEstimated.Name = "ucrReceiverEstimated"
-        Me.ucrReceiverEstimated.Selector = Nothing
-        Me.ucrReceiverEstimated.strNcFilePath = ""
-        Me.ucrReceiverEstimated.ucrSelector = Nothing
         '
         'dlgTaylorDiagram
         '

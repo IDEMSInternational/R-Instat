@@ -109,6 +109,12 @@ Public Class dlgTaylorDiagram
         End If
     End Sub
 
+    Private Sub ucrReceiverEstimated_Leave(sender As Object, e As EventArgs) Handles ucrReceiverEstimated.Leave
+        If ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 Then
+            MsgBox("Note, mod can be of length 2 i.e. two lots of model predictions!!!", MsgBoxStyle.Exclamation)
+        End If
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
     End Sub

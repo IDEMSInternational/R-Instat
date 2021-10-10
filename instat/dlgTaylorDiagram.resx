@@ -240,60 +240,6 @@
   <data name="&gt;&gt;lblFacet.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkNormalise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 238</value>
-  </data>
-  <data name="ucrChkNormalise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 20</value>
-  </data>
-  <data name="ucrChkNormalise.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNormalise.Name" xml:space="preserve">
-    <value>ucrChkNormalise</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNormalise.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNormalise.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNormalise.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 449</value>
-  </data>
-  <data name="ucrReceiverEstimated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 88</value>
-  </data>
-  <data name="ucrReceiverEstimated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverEstimated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
-  </data>
-  <data name="ucrReceiverEstimated.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Name" xml:space="preserve">
-    <value>ucrReceiverEstimated</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Type" xml:space="preserve">
-    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverEstimated.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cmdTaylorDiagramOptions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -326,6 +272,60 @@
   </data>
   <data name="&gt;&gt;cmdTaylorDiagramOptions.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>415, 449</value>
+  </data>
+  <data name="ucrChkNormalise.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 238</value>
+  </data>
+  <data name="ucrChkNormalise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="ucrChkNormalise.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNormalise.Name" xml:space="preserve">
+    <value>ucrChkNormalise</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNormalise.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNormalise.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNormalise.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrReceiverType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 214</value>
+  </data>
+  <data name="ucrReceiverType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverType.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverType.Name" xml:space="preserve">
+    <value>ucrReceiverType</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverType.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverType.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 395</value>
@@ -456,28 +456,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 214</value>
+  <data name="ucrReceiverEstimated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 88</value>
   </data>
-  <data name="ucrReceiverType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverEstimated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="ucrReceiverEstimated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
   </data>
-  <data name="ucrReceiverType.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ucrReceiverEstimated.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverType.Name" xml:space="preserve">
-    <value>ucrReceiverType</value>
+  <data name="&gt;&gt;ucrReceiverEstimated.Name" xml:space="preserve">
+    <value>ucrReceiverEstimated</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverType.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverEstimated.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverEstimated.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverType.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;ucrReceiverEstimated.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
