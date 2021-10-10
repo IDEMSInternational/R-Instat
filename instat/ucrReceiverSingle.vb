@@ -49,7 +49,7 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim clsGetDataType As New RFunction
-        Dim strCurrentItemType As String
+        Dim strCurrentItemType As String = ""
         Dim expColumnType As SymbolicExpression
         Dim bRemove As Boolean = False
 
@@ -65,10 +65,12 @@ Public Class ucrReceiverSingle
         End If
         MyBase.Add(strItem, strDataFrame)
 
-        If bTypeSet Then
-            strCurrentItemType = strType
-        Else
-            strCurrentItemType = Selector.GetItemType()
+        If Selector IsNot Nothing Then
+            If bTypeSet Then
+                strCurrentItemType = strType
+            Else
+                strCurrentItemType = Selector.GetItemType()
+            End If
         End If
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
@@ -122,7 +124,9 @@ Public Class ucrReceiverSingle
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            Selector.AddToVariablesList(strItem, strDataFrameName)
+            If Selector IsNot Nothing Then
+                Selector.AddToVariablesList(strItem, strDataFrameName)
+            End If
             If bRemove Then
                 RemoveSelected()
             End If

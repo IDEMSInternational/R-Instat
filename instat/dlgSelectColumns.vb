@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgSelectColumns
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private clsAddColumnSelection As RFunction
+    Public bSelectedColumns As Boolean = True
+    Public clsAddColumnSelection As RFunction
     Private clsConditionsList As RFunction
     Private clsFromToOperation As ROperator
     Private Sub dlgSelectColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -244,13 +245,15 @@ Public Class dlgSelectColumns
         EnableDisableAddConditionButton()
     End Sub
 
-
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
-        If lstColumnSelections.Items.Count > 0 Then
-            frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
-            dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
-            lstColumnSelections.Items.Clear()
-            clsConditionsList.ClearParameters()
+        If bSelectedColumns Then
+            If lstColumnSelections.Items.Count > 0 Then
+                frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
+                dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
+                lstColumnSelections.Items.Clear()
+                clsConditionsList.ClearParameters()
+                bSelectedColumns = False
+            End If
         End If
     End Sub
 End Class

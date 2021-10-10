@@ -109,6 +109,9 @@ Public Class sdgDataOptions
             Else
                 'TODO: Set Local column selection
             End If
+            'For Each ctr As ucrSelector In Parent.Controls
+            'ctr.LoadList()
+            'Next
         End If
     End Sub
 
@@ -146,7 +149,11 @@ Public Class sdgDataOptions
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
         dlgSelectColumns.ShowDialog()
-        ucrSelectorForSelectColumns.LoadList()
+        If Not dlgSelectColumns.bSelectedColumns Then
+            ucrReceiverSelect.Add(dlgSelectColumns.ucrInputSelectName.GetText)
+            ucrSelectorForSelectColumns.LoadList()
+        End If
+        dlgSelectColumns.bSelectedColumns = True
     End Sub
 
     Private Sub cmdRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles cmdRemoveCurrentColumnSelection.Click
