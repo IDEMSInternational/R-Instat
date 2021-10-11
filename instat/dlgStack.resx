@@ -130,13 +130,13 @@
     <value>261, 65</value>
   </data>
   <data name="lblColumnsTostack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>93, 13</value>
   </data>
   <data name="lblColumnsTostack.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lblColumnsTostack.Text" xml:space="preserve">
-    <value>Columns to stack:</value>
+    <value>Columns to Stack:</value>
   </data>
   <data name="&gt;&gt;lblColumnsTostack.Name" xml:space="preserve">
     <value>lblColumnsTostack</value>
@@ -220,16 +220,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPivotLonger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 12</value>
+    <value>80, 12</value>
   </data>
   <data name="rdoPivotLonger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="rdoPivotLonger.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="rdoPivotLonger.Text" xml:space="preserve">
-    <value>Pivot longer</value>
+    <value>Stack(Pivot Longer)</value>
   </data>
   <data name="rdoPivotLonger.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -256,10 +256,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoUnnest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 12</value>
+    <value>209, 12</value>
   </data>
   <data name="rdoUnnest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="rdoUnnest.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -436,10 +436,10 @@
     <value>1</value>
   </data>
   <data name="ucrInputOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 323</value>
+    <value>87, 322</value>
   </data>
   <data name="ucrInputOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
+    <value>79, 21</value>
   </data>
   <data name="ucrInputOutput.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -514,10 +514,10 @@
     <value>5</value>
   </data>
   <data name="ucrPnlStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 12</value>
+    <value>64, 3</value>
   </data>
   <data name="ucrPnlStack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 29</value>
+    <value>290, 49</value>
   </data>
   <data name="ucrPnlStack.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -559,13 +559,13 @@
     <value>9</value>
   </data>
   <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 188</value>
+    <value>262, 187</value>
   </data>
   <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>131, 20</value>
   </data>
   <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -631,7 +631,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverColumnsToCarry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 208</value>
+    <value>262, 209</value>
   </data>
   <data name="ucrReceiverColumnsToCarry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -790,7 +790,7 @@
     <value>10, 273</value>
   </data>
   <data name="ucrChkPunctuation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 15</value>
+    <value>120, 20</value>
   </data>
   <data name="ucrChkPunctuation.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -814,7 +814,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Stack (pivot longer) Columns</value>
+    <value>Stack (Pivot longer) Columns</value>
   </data>
   <data name="&gt;&gt;ttPattern.Name" xml:space="preserve">
     <value>ttPattern</value>
