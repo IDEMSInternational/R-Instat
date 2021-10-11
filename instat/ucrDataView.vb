@@ -368,6 +368,7 @@ Public Class ucrDataView
     Private Function IsOnlyOneColumnSeleted() As Boolean
         Return grdData.CurrentWorksheet.SelectionRange.Cols = 1
     End Function
+
     Private Function IsFirstSelectedColumnAFactor() As Boolean
         Return GetSelectedColumns().FirstOrDefault().IsFactor
     End Function
