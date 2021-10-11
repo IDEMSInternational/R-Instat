@@ -352,6 +352,7 @@ Public Class ucrDataView
         Next
         Return lstColumns
     End Function
+
     Private Function GetSelectedColumnNames() As List(Of String)
         Return GetSelectedColumns().Select(Function(x) x.Name).ToList()
     End Function
