@@ -392,6 +392,7 @@ Public Class ucrDataView
         Cursor = Cursors.WaitCursor
         grdData.Enabled = False
     End Sub
+
     Private Sub EndWait()
         grdData.Enabled = True
         Cursor = Cursors.Default
