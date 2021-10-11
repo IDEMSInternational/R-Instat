@@ -253,13 +253,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SetDisplayLabels()
+        lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().VisiblePage.intStartRow & " to " &
+                             GetCurrentDataFrameFocus().VisiblePage.intEndRow & " of "
         If GetCurrentDataFrameFocus().Filter.bApplied Then
-            lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().VisiblePage.intStartRow & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndRow &
-                                 " of " & GetCurrentDataFrameFocus().Filter.intFilteredRowCount &
+            lblRowDisplay.Text &= GetCurrentDataFrameFocus().Filter.intFilteredRowCount &
                                  " (" & GetCurrentDataFrameFocus().TotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().Filter.strName
         Else
-            lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().VisiblePage.intStartRow & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndRow &
-                                 " of " & GetCurrentDataFrameFocus().TotalRowCount
+            lblRowDisplay.Text &= GetCurrentDataFrameFocus().TotalRowCount
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().VisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().TotalColumnCount
