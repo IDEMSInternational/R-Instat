@@ -119,10 +119,15 @@ Public Class dlgStack
         ucrReceiverTextColumn.strSelectorHeading = "Characters"
         ucrReceiverTextColumn.SetDataType("character")
 
+        ucrChkCarryAllColumns.SetText("Carry All Columns")
+        ucrChkCarryAllColumns.AddParameterIsROperatorCondition(True, "%>%", False)
+        ucrChkCarryAllColumns.AddParameterIsROperatorCondition(False, "%>%", True)
+
         ucrInputToken.AddToLinkedControls(ucrInputPattern, {"Regex"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputToken.AddToLinkedControls(ucrChkPunctuation, {"Words", "Tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputToken.AddToLinkedControls(ucrChkUrl, {"Tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls(ucrChkCarryColumns, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCarryColumns.AddToLinkedControls(ucrChkCarryAllColumns, {False}, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls({ucrReceiverTextColumn, ucrInputOutput, ucrInputToken, ucrInputFormat, ucrChkToLowerCase}, {rdoUnnest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrInputValuesTo, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverTextColumn.SetLinkedDisplayControl(lblVariable)
@@ -155,7 +160,6 @@ Public Class dlgStack
 
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
-        clsPivotLongerFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
 
         clsUnnestTokensFunction.SetPackageName("tidytext")
         clsUnnestTokensFunction.SetRCommand("unnest_tokens")
@@ -187,6 +191,7 @@ Public Class dlgStack
         ucrInputNamesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputValuesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrPnlStack.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkCarryAllColumns.SetRCode(clsPivotLongerFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -247,6 +252,7 @@ Public Class dlgStack
             iPosition = iPosition + 1
         Next
         If ucrChkCarryColumns.Checked Then
+            ucrChkCarryAllColumns.Checked = False
             ucrReceiverColumnsToCarry.SetMeAsReceiver()
             For Each strColumn In ucrReceiverColumnsToCarry.GetVariableNamesAsList
                 If Not ucrReceiverColumnsToBeStack.GetVariableNamesAsList.Contains(strColumn) Then
@@ -257,6 +263,21 @@ Public Class dlgStack
         Else
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
+        AddRemoveDataOrPipeOperator()
+    End Sub
+
+    Private Sub AddRemoveDataOrPipeOperator()
+        If ucrChkCarryAllColumns.Checked Then
+            clsPivotLongerFunction.RemoveParameterByName("%>%")
+            clsPivotLongerFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        Else
+            clsPivotLongerFunction.RemoveParameterByName("data")
+            clsPivotLongerFunction.AddParameter("%>%", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
+        End If
+    End Sub
+
+    Private Sub ucrChkCarryAllColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryAllColumns.ControlValueChanged
+        AddRemoveDataOrPipeOperator()
     End Sub
 
     Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged,
