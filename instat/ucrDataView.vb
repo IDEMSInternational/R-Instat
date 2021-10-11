@@ -266,7 +266,6 @@ Public Class ucrDataView
 
     End Sub
 
-
     'TODO discuss validation for cell editing
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
         'temporary disabled editing
