@@ -236,6 +236,7 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdSortF = New System.Windows.Forms.Button()
         Me.cmdNasplin = New System.Windows.Forms.Button()
         Me.cmdNaapprox = New System.Windows.Forms.Button()
         Me.cmdNaest = New System.Windows.Forms.Button()
@@ -397,7 +398,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdSortF = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpHydroGOF.SuspendLayout()
@@ -1801,6 +1801,12 @@ Partial Class ucrCalculator
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
+        'cmdSortF
+        '
+        resources.ApplyResources(Me.cmdSortF, "cmdSortF")
+        Me.cmdSortF.Name = "cmdSortF"
+        Me.cmdSortF.UseVisualStyleBackColor = True
+        '
         'cmdNasplin
         '
         resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
@@ -2909,12 +2915,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdSortF
-        '
-        resources.ApplyResources(Me.cmdSortF, "cmdSortF")
-        Me.cmdSortF.Name = "cmdSortF"
-        Me.cmdSortF.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '

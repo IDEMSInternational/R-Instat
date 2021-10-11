@@ -127,19 +127,19 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 10</value>
+    <value>6, 10</value>
   </data>
   <data name="lblExpression.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>61, 13</value>
   </data>
   <data name="lblExpression.TabIndex" type="System.Int32, mscorlib">
     <value>119</value>
   </data>
   <data name="lblExpression.Text" xml:space="preserve">
-    <value>Expression</value>
+    <value>Expression:</value>
   </data>
   <data name="&gt;&gt;lblExpression.Name" xml:space="preserve">
     <value>lblExpression</value>
