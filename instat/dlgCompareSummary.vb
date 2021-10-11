@@ -45,13 +45,13 @@ Public Class dlgCompareSummary
         ucrPnlObservationType.AddRadioButton(rdoCategorical, Chr(34) & "'cat'" & Chr(34))
         ucrPnlObservationType.AddRadioButton(rdoBinary, Chr(34) & "'binary'" & Chr(34))
 
-        ucrReceiverStation.SetParameter(New RParameter("columns_to_summarise", 2))
-        ucrReceiverStation.Selector = ucrSelectorVerificationSummary
-        ucrReceiverStation.SetParameterIsString()
-
-        ucrReceiverSatellite.SetParameter(New RParameter("y", 3))
+        ucrReceiverSatellite.SetParameter(New RParameter("columns_to_summarise", 2))
         ucrReceiverSatellite.Selector = ucrSelectorVerificationSummary
         ucrReceiverSatellite.SetParameterIsString()
+
+        ucrReceiverStation.SetParameter(New RParameter("y", 3))
+        ucrReceiverStation.Selector = ucrSelectorVerificationSummary
+        ucrReceiverStation.SetParameterIsString()
 
         ucrReceiverMultipleFactors.SetParameter(New RParameter("factors", 4))
         ucrReceiverMultipleFactors.Selector = ucrSelectorVerificationSummary
