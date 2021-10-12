@@ -431,6 +431,7 @@ Partial Class frmMain
         Me.mnuPrepareDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameViewData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataFrameDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameRowNumbersNames = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareDataFrameSort = New System.Windows.Forms.ToolStripMenuItem()
@@ -524,6 +525,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnReshapeSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeScaleOrDistance = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
@@ -671,7 +673,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareDataFrameDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2887,6 +2888,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareDataFrameRenameColumn, "mnuPrepareDataFrameRenameColumn")
         Me.mnuPrepareDataFrameRenameColumn.Tag = "Rename_Column..."
         '
+        'mnuPrepareDataFrameDuplicateColumn
+        '
+        Me.mnuPrepareDataFrameDuplicateColumn.Name = "mnuPrepareDataFrameDuplicateColumn"
+        resources.ApplyResources(Me.mnuPrepareDataFrameDuplicateColumn, "mnuPrepareDataFrameDuplicateColumn")
+        '
         'mnuPrepareDataFrameRowNumbersNames
         '
         Me.mnuPrepareDataFrameRowNumbersNames.Name = "mnuPrepareDataFrameRowNumbersNames"
@@ -3339,7 +3345,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshape
         '
-        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose})
+        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
         resources.ApplyResources(Me.mnuPrepareDataReshape, "mnuPrepareDataReshape")
         Me.mnuPrepareDataReshape.Tag = ""
@@ -3405,6 +3411,11 @@ Partial Class frmMain
         Me.mnuPrepareColumnReshapeTranspose.Name = "mnuPrepareColumnReshapeTranspose"
         resources.ApplyResources(Me.mnuPrepareColumnReshapeTranspose, "mnuPrepareColumnReshapeTranspose")
         Me.mnuPrepareColumnReshapeTranspose.Tag = "Transpose..."
+        '
+        'mnuPrepareDataReshapeScaleOrDistance
+        '
+        Me.mnuPrepareDataReshapeScaleOrDistance.Name = "mnuPrepareDataReshapeScaleOrDistance"
+        resources.ApplyResources(Me.mnuPrepareDataReshapeScaleOrDistance, "mnuPrepareDataReshapeScaleOrDistance")
         '
         'ToolStripSeparator7
         '
@@ -4250,11 +4261,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuPrepareDataFrameDuplicateColumn
-        '
-        Me.mnuPrepareDataFrameDuplicateColumn.Name = "mnuPrepareDataFrameDuplicateColumn"
-        resources.ApplyResources(Me.mnuPrepareDataFrameDuplicateColumn, "mnuPrepareDataFrameDuplicateColumn")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4933,4 +4939,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileExportToClimsoft As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineCompareColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameDuplicateColumn As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataReshapeScaleOrDistance As ToolStripMenuItem
 End Class
