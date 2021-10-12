@@ -43,6 +43,7 @@ Public Class dlgName
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 33
+        Dim dctCaseOptions As New Dictionary(Of String, String)
 
         'Selector
         ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
@@ -52,7 +53,6 @@ Public Class dlgName
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
         ucrReceiverName.SetParameterIsString()
         ucrReceiverName.Selector = ucrSelectVariables
-        ucrReceiverName.SetMeAsReceiver()
 
         'New Name Input
         ucrInputNewName.SetParameter(New RParameter("new_val", 2))
@@ -61,25 +61,76 @@ Public Class dlgName
 
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
+
+        ucrPnlOptions.SetParameter(New RParameter("type", 4))
+        ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
+
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
+        ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
+        ucrInputNewName.SetLinkedDisplayControl(lblName)
+        ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
+        ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
+        ucrInputCase.SetLinkedDisplayControl(lblCase)
+        ucrPnlCase.SetLinkedDisplayControl(grpOptions)
+
+        ucrPnlCase.SetParameter(New RParameter(".fn", 5))
+        ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
+        ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
+
+        ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
+        ucrReceiverColumns.Selector = ucrSelectVariables
+        ucrReceiverColumns.SetParameterIsString()
+
+        ucrInputCase.SetParameter(New RParameter("case", 7))
+        dctCaseOptions.Add("Snake", Chr(34) & "snake" & Chr(34))
+        dctCaseOptions.Add("Small camel", Chr(34) & "small_camel" & Chr(34))
+        dctCaseOptions.Add("Big camel", Chr(34) & "big_camel" & Chr(34))
+        dctCaseOptions.Add("Screaming snake", Chr(34) & "screaming_snake" & Chr(34))
+        dctCaseOptions.Add("Parsed", Chr(34) & "parsed" & Chr(34))
+        dctCaseOptions.Add("Mixed", Chr(34) & "mixed" & Chr(34))
+        dctCaseOptions.Add("Lower upper", Chr(34) & "lower_upper" & Chr(34))
+        dctCaseOptions.Add("Upper lower", Chr(34) & "upper_lower" & Chr(34))
+        dctCaseOptions.Add("Swap", Chr(34) & "swap" & Chr(34))
+        dctCaseOptions.Add("All caps", Chr(34) & "all_caps" & Chr(34))
+        dctCaseOptions.Add("Lower camel", Chr(34) & "lower_camel" & Chr(34))
+        dctCaseOptions.Add("Upper camel", Chr(34) & "upper_camel" & Chr(34))
+        dctCaseOptions.Add("Internal parsing", Chr(34) & "internal_parsing" & Chr(34))
+        dctCaseOptions.Add("None", Chr(34) & "none" & Chr(34))
+        dctCaseOptions.Add("Flip", Chr(34) & "flip" & Chr(34))
+        dctCaseOptions.Add("Sentence", Chr(34) & "sentence" & Chr(34))
+        dctCaseOptions.Add("Random", Chr(34) & "random" & Chr(34))
+        dctCaseOptions.Add("Title", Chr(34) & "title" & Chr(34))
+        ucrInputCase.SetDropDownStyleAsNonEditable()
+        ucrInputCase.SetItems(dctCaseOptions)
     End Sub
 
     Public Sub SetDefaults()
         clsDefaultRFunction = New RFunction
 
         ucrSelectVariables.Reset()
-        ucrInputNewName.Reset()
-        ucrInputVariableLabel.Reset()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
+        clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
+        clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
 
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
-            ucrBase.OKEnabled(True)
+        If rdoSingle.Checked Then
+            If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -102,10 +153,6 @@ Public Class dlgName
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -143,7 +190,7 @@ Public Class dlgName
                 'the number of labels for a column expected is 1
                 If strArr.Length = 1 Then
                     strColLabel = strArr(0)
-                ElseIf strArr.Length > 1
+                ElseIf strArr.Length > 1 Then
                     MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     strColLabel = strArr(strArr.Length - 1)
                 End If
@@ -152,5 +199,21 @@ Public Class dlgName
         Return strColLabel
     End Function
 
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoSingle.Checked Then
+            ucrReceiverName.SetMeAsReceiver()
+        Else
+            ucrReceiverColumns.SetMeAsReceiver()
+        End If
+    End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If Not ucrReceiverColumns.IsEmpty Then
+            ucrReceiverColumns.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class

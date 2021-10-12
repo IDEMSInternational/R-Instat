@@ -14,15 +14,15 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgPivotTable
+Public Class dlgThreeVariablePivotTable
     Private bFirstLoad As Boolean = True
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
-    Private clsRPivotTableFunction, clsSelectFunction,
-        clsConcatenateFunction, clsGetObjectFunction As New RFunction
+    Private clsRPivotTableFunction, clsSelectFunction, clsConcatenateFunction,
+        clsGetObjectFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
-    Private Sub dlgPivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -38,16 +38,15 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 417
+        ucrBase.iHelpTopicID = 603
         ucrBase.clsRsyntax.iCallType = 2
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
         ucrSelectorPivot.SetParameterIsrfunction()
 
-        UcrReceiverMultipleIntialRowFactor.SetParameter(New RParameter("rows", iNewPosition:=1))
-        UcrReceiverMultipleIntialRowFactor.SetParameterIsString()
-        UcrReceiverMultipleIntialRowFactor.Selector = ucrSelectorPivot
-        UcrReceiverMultipleIntialRowFactor.SetLinkedDisplayControl(lblInitialColumnFactor)
+        ucrReceiverInitialRowFactors.SetParameter(New RParameter("rows", iNewPosition:=1))
+        ucrReceiverInitialRowFactors.SetParameterIsString()
+        ucrReceiverInitialRowFactors.Selector = ucrSelectorPivot
 
         ucrReceiverInitialColumnFactor.SetParameter(New RParameter("cols", iNewPosition:=2))
         ucrReceiverInitialColumnFactor.SetParameterIsString()
@@ -55,10 +54,14 @@ Public Class dlgPivotTable
 
         ucrReceiverSelectedVariable.Selector = ucrSelectorPivot
 
+        ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
+        ucrReceiverAdditionalRowFactor.SetParameterIsString()
+        ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
+
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(True, "data", False)
 
-        ucrChkSelectedVariable.SetText("Selected Variable(s)")
+        ucrChkSelectedVariable.SetText("Select Variable(s)")
         ucrChkSelectedVariable.AddToLinkedControls(ucrReceiverSelectedVariable, {True}, bNewLinkedHideIfParameterMissing:=True)
         ttSelectedVariable.SetToolTip(ucrChkSelectedVariable.chkCheck, "Include the dataframe if unchecked")
 
@@ -66,6 +69,18 @@ Public Class dlgPivotTable
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
+
+        ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
+        ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
+         "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
+         "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
+
+        ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
+        ucrInputSummary.SetItems({"Count", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
+                                    "Average", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
+                                    "Maximum", "First", "Last", "Sum over Sum", "80% Upper Bound", "80% Lower Bound",
+                                    "Sum as Fraction of Totals", "Sum as Fraction of Rows", "Sum as Fraction of Columns",
+                                    "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
 
         ucrSavePivot.SetPrefix("pivot_table")
         ucrSavePivot.SetSaveTypeAsTable()
@@ -82,7 +97,7 @@ Public Class dlgPivotTable
         clsPipeOperator = New ROperator
         clsGetObjectFunction = New RFunction
 
-        UcrReceiverMultipleIntialRowFactor.SetMeAsReceiver()
+        ucrReceiverInitialRowFactors.SetMeAsReceiver()
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
         ucrBase.clsRsyntax.ClearCodes()
@@ -97,6 +112,8 @@ Public Class dlgPivotTable
         clsRPivotTableFunction.SetPackageName("rpivotTable")
         clsRPivotTableFunction.SetRCommand("rpivotTable")
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & "Table" & Chr(34), iPosition:=5)
+        clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & "Count" & Chr(34), iPosition:=6)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
@@ -104,7 +121,7 @@ Public Class dlgPivotTable
 
         clsConcatenateFunction.SetRCommand("c")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTableFunction, 1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTableFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectFunction)
     End Sub
 
@@ -112,7 +129,10 @@ Public Class dlgPivotTable
         bRcodeSet = False
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
-        UcrReceiverMultipleIntialRowFactor.SetRCode(clsRPivotTableFunction, bReset)
+        ucrReceiverAdditionalRowFactor.SetRCode(clsRPivotTableFunction, bReset)
+        ucrInputTableChart.SetRCode(clsRPivotTableFunction, bReset)
+        ucrInputSummary.SetRCode(clsRPivotTableFunction, bReset)
+        ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)
@@ -156,39 +176,51 @@ Public Class dlgPivotTable
         End If
     End Sub
 
-    Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
+    Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged,
+        ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged
         If Not bRcodeSet OrElse Not ucrChkSelectedVariable.Checked Then
             Exit Sub
         End If
 
+        Dim lstColumns As New List(Of String)
+        Dim iPosition As Integer = 0
+        Dim strColumnVariableName As String = ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False)
+        Dim strRowVariableName As String = ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=False)
+
         clsConcatenateFunction.ClearParameters()
-        Dim iCount As Integer = 2
-        'To avoid repeating the same column in the c() function eg c("fert"."fert")
-        If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not UcrReceiverMultipleIntialRowFactor.IsEmpty Then
-            If UcrReceiverMultipleIntialRowFactor.GetVariableNames(bWithQuotes:=False) <> ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False) Then
-                clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                clsConcatenateFunction.AddParameter("row", UcrReceiverMultipleIntialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-            Else
-                clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-            End If
-        Else
-            If Not ucrReceiverInitialColumnFactor.IsEmpty Then
-                clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-            End If
-            If Not UcrReceiverMultipleIntialRowFactor.IsEmpty Then
-                clsConcatenateFunction.AddParameter("row", UcrReceiverMultipleIntialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-            End If
+        If Not ucrReceiverInitialRowFactors.IsEmpty Then
+            CheckForDuplication(lstColumns, ucrReceiverInitialRowFactors, iPosition)
         End If
-        For Each strItem In ucrReceiverSelectedVariable.GetVariableNamesList(bWithQuotes:=False)
-            If strItem <> UcrReceiverMultipleIntialRowFactor.GetVariableNames(bWithQuotes:=False) AndAlso strItem <> ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False) Then
-                clsConcatenateFunction.AddParameter(strItem, strItem, bIncludeArgumentName:=False, iPosition:=iCount)
-                iCount += 1
+
+        If Not ucrReceiverSelectedVariable.IsEmpty Then
+            CheckForDuplication(lstColumns, ucrReceiverSelectedVariable, iPosition)
+        End If
+
+        If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not lstColumns.Contains(strColumnVariableName) Then
+            lstColumns.Add(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False))
+            clsConcatenateFunction.AddParameter("col" & iPosition, strColumnVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
+            iPosition = iPosition + 1
+        End If
+
+        If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso Not lstColumns.Contains(strRowVariableName) Then
+            clsConcatenateFunction.AddParameter("col" & iPosition, strRowVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
+            iPosition = iPosition + 1
+        End If
+    End Sub
+
+    Private Sub CheckForDuplication(lstNewColumns As List(Of String), ucrNewReceiver As ucrReceiverMultiple, ByRef iNewposition As Integer)
+        For Each strColumn In ucrNewReceiver.GetVariableNamesList(bWithQuotes:=False)
+            If lstNewColumns.Contains(strColumn) Then
+                Continue For
             End If
+            lstNewColumns.Add(strColumn)
+            clsConcatenateFunction.AddParameter("col" & iNewposition, strColumn, iPosition:=iNewposition, bIncludeArgumentName:=False)
+            iNewposition += 1
         Next
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
-            ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged, ucrSelectorPivot.ControlContentsChanged
+            ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
