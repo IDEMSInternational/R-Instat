@@ -2406,7 +2406,19 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 }
 )
 
-#This method changes the quarters labeled by numbers 1, 2, 3, 4 to be renamed by labels like JFM, AMJ, JAS, OND for the starting month January = 1 etc...
+# Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
+#
+# Parameters:
+#   quarter - The quarter of the year (first, second etc.), must be an integer between 1 and 4 inclusive.
+#   start_month - The month when the year is considered to start (January, February etc.), must be 
+#                 an integer between 1 and 12 inclusive.
+#
+# Examples (quarter, start_month, returned value)
+#   1, 1, "JFM"
+#   1, 2, "FMA"
+#   1, 12, "DJF"
+#   2, 1, "AMJ"
+#   2, 6, "SON"
 DataSheet$set("public", "make_quarters",  function(quarter, start_month){
      #qtr <- c()
      mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
