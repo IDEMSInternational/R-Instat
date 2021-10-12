@@ -67,31 +67,38 @@ Public Class dlgConversions
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.Selector = ucrSelectorConversions
+        ucrReceiverElement.bUseFilteredData = False
 
         ucrReceiverDate.SetParameter(New RParameter("doy", 2))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
+        ucrReceiverDate.bUseFilteredData = False
 
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 1))
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
+        ucrReceiverLatitude.bUseFilteredData = False
 
         ucrReceiverDegrees.SetParameter(New RParameter("dd", 0))
         ucrReceiverDegrees.SetParameterIsRFunction()
         ucrReceiverDegrees.Selector = ucrSelectorConversions
+        ucrReceiverDegrees.bUseFilteredData = False
 
         ucrReceiverMinutes.SetParameter(New RParameter("mm", 1))
         ucrReceiverMinutes.SetParameterIsRFunction()
         ucrReceiverMinutes.Selector = ucrSelectorConversions
+        ucrReceiverMinutes.bUseFilteredData = False
 
         ucrReceiverSeconds.SetParameter(New RParameter("ss", 2))
         ucrReceiverSeconds.SetParameterIsRFunction()
         ucrReceiverSeconds.Selector = ucrSelectorConversions
+        ucrReceiverSeconds.bUseFilteredData = False
 
         ucrReceiverLetters.SetParameter(New RParameter("dir", 3))
         ucrReceiverLetters.SetParameterIsRFunction()
         ucrReceiverLetters.Selector = ucrSelectorConversions
+        ucrReceiverLetters.bUseFilteredData = False
 
         ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
