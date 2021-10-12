@@ -93,12 +93,11 @@ Public Class dlgRank
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudSignifDigits, {rdoSignificantDigits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudRoundOfDigits, {rdoRoundOf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagLeadPosition, {rdoLag, rdoLead}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlNumericOptions.AddToLinkedControls({ucrNudDifferences, ucrNudDiffLag}, {rdoDifference}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNumericOptions.AddToLinkedControls({ucrNudDiffLag}, {rdoDifference}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudSignifDigits.SetLinkedDisplayControl(lblDigits)
         ucrNudRoundOfDigits.SetLinkedDisplayControl(lblRoundofDigits)
         ucrNudLagLeadPosition.SetLinkedDisplayControl(lblLagLeadPosition)
         ucrNudDiffLag.SetLinkedDisplayControl(lblDiffLag)
-        ucrNudDifferences.SetLinkedDisplayControl(lblDifferences)
 
         ucrNudSignifDigits.SetParameter(New RParameter("digits", 1))
         ucrNudSignifDigits.SetMinMax(iNewMin:=0, iNewMax:=22)
@@ -117,11 +116,6 @@ Public Class dlgRank
         ucrNudDiffLag.SetMinMax(iNewMin:=1)
         ucrNudDiffLag.Increment = 1
         ucrNudDiffLag.SetRDefault(1)
-
-        ucrNudDifferences.SetParameter(New RParameter("differences", 2))
-        ucrNudDifferences.SetMinMax(iNewMin:=1)
-        ucrNudDifferences.Increment = 1
-        ucrNudDifferences.SetRDefault(1)
 
         ucrSaveNew.SetPrefix("rank")
         ucrSaveNew.SetSaveTypeAsColumn()
@@ -184,7 +178,6 @@ Public Class dlgRank
 
         clsDiffFunction.SetRCommand("diff")
         clsDiffFunction.AddParameter("lag", iPosition:=1)
-        clsDiffFunction.AddParameter("differences", iPosition:=2)
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
@@ -217,7 +210,6 @@ Public Class dlgRank
         ucrNudSignifDigits.SetRCode(clsSignifFunction, bReset)
         ucrNudLagLeadPosition.SetRCode(clsLagFunction, bReset)
         ucrNudDiffLag.SetRCode(clsDiffFunction, bReset)
-        ucrNudDifferences.SetRCode(clsDiffFunction, bReset)
     End Sub
 
     Private Sub SetBaseFunction()
@@ -242,6 +234,9 @@ Public Class dlgRank
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
             ElseIf rdoDifference.Checked Then
                 ucrSaveNew.SetPrefix("difference")
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDiffFunction)
+            ElseIf rdoScale.Checked Then
+                ucrSaveNew.SetPrefix("scale")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDiffFunction)
             End If
         End If

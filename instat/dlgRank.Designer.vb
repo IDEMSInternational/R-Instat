@@ -67,9 +67,7 @@ Partial Class dlgRank
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
         Me.lblDiffLag = New System.Windows.Forms.Label()
-        Me.lblDifferences = New System.Windows.Forms.Label()
         Me.lblRoundofDigits = New System.Windows.Forms.Label()
-        Me.ucrNudDifferences = New instat.ucrNud()
         Me.ucrNudSignifDigits = New instat.ucrNud()
         Me.ucrPnlTransformOptions = New instat.UcrPanel()
         Me.ucrSaveNew = New instat.ucrSave()
@@ -293,25 +291,10 @@ Partial Class dlgRank
         resources.ApplyResources(Me.lblDiffLag, "lblDiffLag")
         Me.lblDiffLag.Name = "lblDiffLag"
         '
-        'lblDifferences
-        '
-        resources.ApplyResources(Me.lblDifferences, "lblDifferences")
-        Me.lblDifferences.Name = "lblDifferences"
-        '
         'lblRoundofDigits
         '
         resources.ApplyResources(Me.lblRoundofDigits, "lblRoundofDigits")
         Me.lblRoundofDigits.Name = "lblRoundofDigits"
-        '
-        'ucrNudDifferences
-        '
-        Me.ucrNudDifferences.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDifferences.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDifferences, "ucrNudDifferences")
-        Me.ucrNudDifferences.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDifferences.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDifferences.Name = "ucrNudDifferences"
-        Me.ucrNudDifferences.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSignifDigits
         '
@@ -401,10 +384,6 @@ Partial Class dlgRank
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblDifferences)
-        Me.Controls.Add(Me.ucrNudDifferences)
-        Me.Controls.Add(Me.lblDigits)
-        Me.Controls.Add(Me.ucrNudSignifDigits)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.rdoNonNegative)
         Me.Controls.Add(Me.rdoSort)
@@ -426,6 +405,8 @@ Partial Class dlgRank
         Me.Controls.Add(Me.lblDiffLag)
         Me.Controls.Add(Me.lblLagLeadPosition)
         Me.Controls.Add(Me.ucrNudLagLeadPosition)
+        Me.Controls.Add(Me.ucrNudSignifDigits)
+        Me.Controls.Add(Me.lblDigits)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -477,8 +458,6 @@ Partial Class dlgRank
     Friend WithEvents ucrNudSignifDigits As ucrNud
     Friend WithEvents lblLagLeadPosition As Label
     Friend WithEvents ucrNudLagLeadPosition As ucrNud
-    Friend WithEvents lblDifferences As Label
-    Friend WithEvents ucrNudDifferences As ucrNud
     Friend WithEvents ucrNudDiffLag As ucrNud
     Friend WithEvents lblDiffLag As Label
     Friend WithEvents lblRoundofDigits As Label
