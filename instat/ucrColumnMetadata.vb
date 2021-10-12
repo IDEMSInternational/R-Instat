@@ -387,6 +387,7 @@ Public Class ucrColumnMetadata
         strType = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnType(GetFirstSelectedDataFrameColumnName())
         Return strType.Contains("factor")
     End Function
+
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedDataFrameColumnNames())
