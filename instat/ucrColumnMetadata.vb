@@ -54,7 +54,6 @@ Public Class ucrColumnMetadata
         Return _clsDataBook.GetColumnMetaData(grdCurrSheet.Name)
     End Function
 
-
     Private Sub RefreshWorksheet(fillWorkSheet As Worksheet, dataFrame As clsDataFrame)
         AddColumns(dataFrame, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
