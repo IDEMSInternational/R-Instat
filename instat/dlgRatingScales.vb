@@ -163,7 +163,6 @@ Public Class dlgRatingScales
         clsSjtStackFrqFunction.AddParameter("show.total", "TRUE", iPosition:=4)
         clsSjtStackFrqFunction.AddParameter("show.na", "TRUE", iPosition:=5)
 
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrqFunction)
     End Sub
 
@@ -253,7 +252,7 @@ Public Class dlgRatingScales
         End If
     End Function
 
-    Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlContentsChanged
+    Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         SetBaseFunction()
         If Not rdoLikert.Checked Then
             grpSortTable.Visible = True
