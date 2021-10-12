@@ -368,7 +368,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Function GetSelectedDataFrameColumnNames() As List(Of String)
-        Dim lstColumns As List(Of String) = New List(Of String)
+        Dim lstColumns As New List(Of String)
         For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To grdVariables.CurrentWorksheet.SelectionRange.Row + grdVariables.CurrentWorksheet.SelectionRange.Rows - 1
             lstColumns.Add(grdVariables.CurrentWorksheet(i, 0))
         Next
