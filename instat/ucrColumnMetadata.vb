@@ -61,11 +61,9 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub AddColumns(dataFramePage As clsDataFrame, workSheet As Worksheet)
-        Dim workSheetColumnHeader As ColumnHeader
         workSheet.Columns = dataFramePage.clsColumnMetaData.ColumnCount
         For i = 0 To dataFramePage.clsColumnMetaData.ColumnCount - 1
-            workSheetColumnHeader = workSheet.ColumnHeaders(i)
-            workSheetColumnHeader.Text = dataFramePage.clsColumnMetaData.ColumnName(i)
+            workSheet.ColumnHeaders(i).Text = dataFramePage.clsColumnMetaData.ColumnName(i)
         Next
     End Sub
 
