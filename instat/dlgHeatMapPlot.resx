@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>5</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -157,7 +157,7 @@
     <value>147, 25</value>
   </data>
   <data name="cmdTileOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>4</value>
   </data>
   <data name="cmdTileOptions.Text" xml:space="preserve">
     <value>Tile Options</value>
@@ -187,7 +187,7 @@
     <value>58, 13</value>
   </data>
   <data name="lblXVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>15</value>
   </data>
   <data name="lblXVariable.Text" xml:space="preserve">
     <value>X Variable:</value>
@@ -217,7 +217,7 @@
     <value>22, 13</value>
   </data>
   <data name="lblFill.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>21</value>
   </data>
   <data name="lblFill.Text" xml:space="preserve">
     <value>Fill:</value>
@@ -247,7 +247,7 @@
     <value>47, 13</value>
   </data>
   <data name="lblLabelPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>28</value>
   </data>
   <data name="lblLabelPosition.Text" xml:space="preserve">
     <value>Position:</value>
@@ -277,7 +277,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblLabelColour.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>30</value>
   </data>
   <data name="lblLabelColour.Text" xml:space="preserve">
     <value>Colour:</value>
@@ -307,7 +307,7 @@
     <value>30, 13</value>
   </data>
   <data name="lblLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>32</value>
   </data>
   <data name="lblLabelSize.Text" xml:space="preserve">
     <value>Size:</value>
@@ -337,7 +337,7 @@
     <value>87, 13</value>
   </data>
   <data name="lblPointsOptional.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>23</value>
   </data>
   <data name="lblPointsOptional.Text" xml:space="preserve">
     <value>Points (Optional):</value>
@@ -367,7 +367,7 @@
     <value>30, 13</value>
   </data>
   <data name="lblPointsSize.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>24</value>
   </data>
   <data name="lblPointsSize.Text" xml:space="preserve">
     <value>Size:</value>
@@ -397,7 +397,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblReorderVariableX.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>18</value>
   </data>
   <data name="lblReorderVariableX.Text" xml:space="preserve">
     <value>Reorder:</value>
@@ -427,7 +427,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblReorderValue.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>10</value>
   </data>
   <data name="lblReorderValue.Text" xml:space="preserve">
     <value>Reorder:</value>
@@ -460,7 +460,7 @@
     <value>110, 28</value>
   </data>
   <data name="rdoChoroplethMap.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>2</value>
   </data>
   <data name="rdoChoroplethMap.Text" xml:space="preserve">
     <value>Chorolopleth Map</value>
@@ -496,7 +496,7 @@
     <value>110, 28</value>
   </data>
   <data name="rdoHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+    <value>1</value>
   </data>
   <data name="rdoHeatMap.Text" xml:space="preserve">
     <value>Heat Map</value>
@@ -529,7 +529,7 @@
     <value>57, 13</value>
   </data>
   <data name="lblLongitude.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+    <value>7</value>
   </data>
   <data name="lblLongitude.Text" xml:space="preserve">
     <value>Longitude:</value>
@@ -559,7 +559,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+    <value>11</value>
   </data>
   <data name="lblLatitude.Text" xml:space="preserve">
     <value>Latitude:</value>
@@ -589,7 +589,7 @@
     <value>22, 13</value>
   </data>
   <data name="lblFillChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
+    <value>13</value>
   </data>
   <data name="lblFillChoropleth.Text" xml:space="preserve">
     <value>Fill:</value>
@@ -619,7 +619,7 @@
     <value>87, 13</value>
   </data>
   <data name="lblPointsChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
+    <value>15</value>
   </data>
   <data name="lblPointsChoropleth.Text" xml:space="preserve">
     <value>Points (Optional):</value>
@@ -673,7 +673,7 @@
     <value>41, 20</value>
   </data>
   <data name="ucrNudShapeChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;ucrNudShapeChoropleth.Name" xml:space="preserve">
     <value>ucrNudShapeChoropleth</value>
@@ -703,7 +703,7 @@
     <value>166, 20</value>
   </data>
   <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>26</value>
   </data>
   <data name="&gt;&gt;ucrChkFlipCoordinates.Name" xml:space="preserve">
     <value>ucrChkFlipCoordinates</value>
@@ -727,7 +727,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrReceiverPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPoints.Name" xml:space="preserve">
     <value>ucrReceiverPoints</value>
@@ -748,7 +748,7 @@
     <value>41, 20</value>
   </data>
   <data name="ucrNudShapeHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>25</value>
   </data>
   <data name="&gt;&gt;ucrNudShapeHeatMap.Name" xml:space="preserve">
     <value>ucrNudShapeHeatMap</value>
@@ -769,7 +769,7 @@
     <value>128, 20</value>
   </data>
   <data name="ucrChkColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>34</value>
   </data>
   <data name="&gt;&gt;ucrChkColourPalette.Name" xml:space="preserve">
     <value>ucrChkColourPalette</value>
@@ -790,7 +790,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>35</value>
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.Name" xml:space="preserve">
     <value>ucrInputColourPalette</value>
@@ -814,7 +814,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrReceiverFill.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFill.Name" xml:space="preserve">
     <value>ucrReceiverFill</value>
@@ -862,7 +862,7 @@
     <value>370, 32</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>36</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
     <value>ucrSaveGraph</value>
@@ -883,7 +883,7 @@
     <value>410, 58</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>37</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -904,7 +904,7 @@
     <value>217, 43</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
     <value>ucrPnlOptions</value>
@@ -925,7 +925,7 @@
     <value>93, 21</value>
   </data>
   <data name="ucrInputReorderValue.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrInputReorderValue.Name" xml:space="preserve">
     <value>ucrInputReorderValue</value>
@@ -949,7 +949,7 @@
     <value>238, 190</value>
   </data>
   <data name="ucrHeatMapSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrHeatMapSelector.Name" xml:space="preserve">
     <value>ucrHeatMapSelector</value>
@@ -973,7 +973,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverLongitude.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLongitude.Name" xml:space="preserve">
     <value>ucrReceiverLongitude</value>
@@ -997,7 +997,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLatitude.Name" xml:space="preserve">
     <value>ucrReceiverLatitude</value>
@@ -1021,7 +1021,7 @@
     <value>122, 20</value>
   </data>
   <data name="ucrReceiverFillChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFillChoropleth.Name" xml:space="preserve">
     <value>ucrReceiverFillChoropleth</value>
@@ -1042,7 +1042,7 @@
     <value>125, 138</value>
   </data>
   <data name="ucrVariableAsFactorForHeatMap.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrVariableAsFactorForHeatMap.Name" xml:space="preserve">
     <value>ucrVariableAsFactorForHeatMap</value>
@@ -1063,7 +1063,7 @@
     <value>93, 21</value>
   </data>
   <data name="ucrInputReorderVariableX.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrInputReorderVariableX.Name" xml:space="preserve">
     <value>ucrInputReorderVariableX</value>
@@ -1084,7 +1084,7 @@
     <value>61, 21</value>
   </data>
   <data name="ucrInputSize.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>33</value>
   </data>
   <data name="&gt;&gt;ucrInputSize.Name" xml:space="preserve">
     <value>ucrInputSize</value>
@@ -1105,7 +1105,7 @@
     <value>82, 20</value>
   </data>
   <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>27</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
     <value>ucrChkAddLabels</value>
@@ -1126,7 +1126,7 @@
     <value>63, 21</value>
   </data>
   <data name="ucrInputPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrInputPosition.Name" xml:space="preserve">
     <value>ucrInputPosition</value>
@@ -1147,7 +1147,7 @@
     <value>57, 21</value>
   </data>
   <data name="ucrInputColour.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>31</value>
   </data>
   <data name="&gt;&gt;ucrInputColour.Name" xml:space="preserve">
     <value>ucrInputColour</value>
@@ -1183,7 +1183,7 @@
     <value>122, 20</value>
   </data>
   <data name="ucrReceiverPointsChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsChoropleth.Name" xml:space="preserve">
     <value>ucrReceiverPointsChoropleth</value>

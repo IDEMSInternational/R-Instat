@@ -37,7 +37,7 @@ Public Class dlgHeatMapPlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
-    Private clsLabelHeatMapAesFunction, clsLabelChoroplethAesFunction As New RFunction
+    Private clsLabelAesFuction As New RFunction
     Private clsColourPaletteFunction As New RFunction
     Private clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction As New RFunction
     Private clsGeomPointShapeHeatMapFunction, clsGeomPointShapeChoroplethFunction As New RFunction
@@ -49,7 +49,6 @@ Public Class dlgHeatMapPlot
     Private clsForecatsReverseValue As New RFunction
     Private clsReorderFunction As New RFunction
     Private clsReorderFunctionValue As New RFunction
-    Private clsGeomPolygonFunction As New RFunction
     Private clsGeomPolygonAesFunction As New RFunction
 
 
@@ -239,8 +238,7 @@ Public Class dlgHeatMapPlot
         clsRgeomTileFunction = New RFunction
         clsBaseOperator = New ROperator
         clsGeomTextFunction = New RFunction
-        clsLabelHeatMapAesFunction = New RFunction
-        clsLabelChoroplethAesFunction = New RFunction
+        clsLabelAesFuction = New RFunction
         clsColourPaletteFunction = New RFunction
         clsGeomPointSizeHeatMapFunction = New RFunction
         clsGeomPointSizeChoroplethFunction = New RFunction
@@ -257,7 +255,6 @@ Public Class dlgHeatMapPlot
         clsForecatsReverseValue = New RFunction
         clsReorderFunction = New RFunction
         clsReorderFunctionValue = New RFunction
-        clsGeomPolygonFunction = New RFunction
         clsHeatmapAesFunction = New RFunction
         clsChoroplethAesFunction = New RFunction
 
@@ -293,14 +290,14 @@ Public Class dlgHeatMapPlot
 
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
-        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelHeatMapAesFunction, iPosition:=1)
+        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
         clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
         clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
         clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
 
-        clsLabelHeatMapAesFunction.SetPackageName("ggplot2")
-        clsLabelHeatMapAesFunction.SetRCommand("aes")
-        clsLabelHeatMapAesFunction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
+        clsLabelAesFuction.SetPackageName("ggplot2")
+        clsLabelAesFuction.SetRCommand("aes")
+        clsLabelAesFuction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
 
         clsGeomPointSizeHeatMapFunction.SetPackageName("ggplot2")
         clsGeomPointSizeHeatMapFunction.SetRCommand("geom_point")
@@ -385,8 +382,8 @@ Public Class dlgHeatMapPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelHeatMapAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
-        ucrReceiverFillChoropleth.AddAdditionalCodeParameterPair(clsLabelHeatMapAesFunction, New RParameter("label", 2), iAdditionalPairNo:=1)
+        ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFuction, New RParameter("label", 2), iAdditionalPairNo:=1)
+        ucrReceiverFillChoropleth.AddAdditionalCodeParameterPair(clsLabelAesFuction, New RParameter("label", 2), iAdditionalPairNo:=1)
         ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeHeatMapAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrReceiverPointsChoropleth.AddAdditionalCodeParameterPair(clsShapeChoroplethAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
 
@@ -440,7 +437,7 @@ Public Class dlgHeatMapPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkAddLabelsHeatMap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
         If ucrChkAddLabels.Checked Then
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
@@ -540,13 +537,13 @@ Public Class dlgHeatMapPlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoHeatMap.Checked Then
-            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelHeatMapAesFunction, iPosition:=1)
+            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
             cmdTileOptions.Text = "Tile Options"
             clsBaseOperator.AddParameter("geom_tile", clsRFunctionParameter:=clsRgeomTileFunction, iPosition:=1)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHeatmapAesFunction, iPosition:=1)
             clsBaseOperator.RemoveParameterByName("geom_polygon")
         Else
-            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelHeatMapAesFunction, iPosition:=1)
+            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
             cmdTileOptions.Text = "Polygon Options"
             clsBaseOperator.RemoveParameterByName("geom_tile")
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsChoroplethAesFunction, iPosition:=1)
