@@ -2414,7 +2414,7 @@ DataSheet$set("public", "make_quarters",  function(quarter, start_month){
      "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
      "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
      "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
-     "4"={  qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
+     "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
      )
      return(qtr)
 })
