@@ -368,7 +368,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
             Case "Summary"
                 strPackageName = "base"
-                 strPackageName = "stats"
+                strPackageName = "stats"
                 grpDates.Visible = False
                 grpSummary.Visible = True
                 grpLogical.Visible = False
@@ -1304,7 +1304,7 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click
         Dim clsHelp As New RFunction
 
         clsHelp.SetPackageName("utils")
