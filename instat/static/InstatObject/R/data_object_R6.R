@@ -2419,16 +2419,20 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 #   1, 12, "DJF"
 #   2, 1, "AMJ"
 #   2, 6, "SON"
-DataSheet$set("public", "make_quarters",  function(quarter, start_month){
-     #qtr <- c()
-     mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
-     switch(quarter,
-     "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
-     "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
-     "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
-     "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
-     )
-     return(qtr)
+DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
+  mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
+  quarters <- seq(1,4)
+  s_month <- seq(1,12)
+  if (quarter %in% quarters && s_month %in% start_month){
+    switch(quarter,
+      "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
+      "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
+      "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
+      "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
+    )
+    return(qtr)
+  }
+  else stop("The quarter or starting month is not valid")
 })
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
@@ -2517,27 +2521,27 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector, adjacent_column = adjacent_column, before = FALSE)
   }
   if(quarter_val && quarter_abbr){
-      quarter_labels <- c()
-      if(s_shift) {
-         s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
-         for(num in s_quarter_val_vector){
-            s_quarter_label_vector <- self$make_quarters(num, s_start_month)
-            quarter_labels <- c(quarter_labels, s_quarter_label_vector)
-         }
-         col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
-         self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
-         self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted quarter starting on day", s_start_day))
-      } 
-      else {
-        quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
-        for(num in quarter_val_vector){
-           quarter_label_vector <- self$make_quarters(num, s_start_month)
-           quarter_labels <- c(quarter_labels, quarter_label_vector)
-        }
-        col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
-        self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
+    quarter_labels <- c()
+    if(s_shift) {
+      s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
+      for(num in s_quarter_val_vector){
+        s_quarter_label_vector <- self$get_quarter_label(num, s_start_month)
+        quarter_labels <- c(quarter_labels, s_quarter_label_vector)
       }
-      self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
+      col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted quarter starting on day", s_start_day))
+    } 
+    else {
+      quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
+      for(num in quarter_val_vector){
+        quarter_label_vector <- self$get_quarter_label(num, s_start_month)
+        quarter_labels <- c(quarter_labels, quarter_label_vector)
+      }
+      col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
+    }
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   else if(quarter_val) {
     if(s_shift) {
