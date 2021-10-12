@@ -53,7 +53,7 @@ Public Class dlgCalculator
         ucrCalc.Reset()
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
-        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
+        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
