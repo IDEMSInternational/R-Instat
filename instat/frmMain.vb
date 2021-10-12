@@ -2049,16 +2049,16 @@ Public Class frmMain
         dlgInstallRPackage.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDuplicateColumn.Click
+    Private Sub mnuPrepareColumnTransformDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateRowSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRowSummaries.Click
+    Private Sub mnuPrepareColumnTransformRowSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRowSummaries.Click
         dlgRowSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateRank_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericTransform.Click
-        dlgRank.ShowDialog()
+    Private Sub mnuPrepareColumnNumericTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericTransform.Click
+        dlgTransform.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareColumnPrpareColumnGeneratePolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericPolynomials.Click
@@ -2069,7 +2069,7 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+    Private Sub mnuPrepareColumnTransformCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
         dlgCountinFactor.ShowDialog()
     End Sub
 
