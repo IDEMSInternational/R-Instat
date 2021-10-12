@@ -46,10 +46,12 @@ Partial Class dlgRank
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTies = New instat.UcrPanel()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.rdoRank = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoSort = New System.Windows.Forms.RadioButton()
@@ -61,6 +63,7 @@ Partial Class dlgRank
         Me.rdoLead = New System.Windows.Forms.RadioButton()
         Me.rdoLag = New System.Windows.Forms.RadioButton()
         Me.grpNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlNumericOptions = New instat.UcrPanel()
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
         Me.lblDiffLag = New System.Windows.Forms.Label()
@@ -68,14 +71,11 @@ Partial Class dlgRank
         Me.lblRoundofDigits = New System.Windows.Forms.Label()
         Me.ucrNudDifferences = New instat.ucrNud()
         Me.ucrNudSignifDigits = New instat.ucrNud()
-        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.ucrPnlTransformOptions = New instat.UcrPanel()
         Me.ucrSaveNew = New instat.ucrSave()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlNumericOptions = New instat.UcrPanel()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
         Me.ucrNudRoundOfDigits = New instat.ucrNud()
@@ -145,6 +145,11 @@ Partial Class dlgRank
         Me.rdoAverage.Tag = "Average"
         Me.rdoAverage.UseVisualStyleBackColor = True
         '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
@@ -179,6 +184,11 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing.TabStop = True
         Me.rdoKeptAsMissing.Tag = "Kept_as_missing"
         Me.rdoKeptAsMissing.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMissingValues
+        '
+        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
+        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
         '
         'rdoRank
         '
@@ -263,6 +273,11 @@ Partial Class dlgRank
         Me.grpNumericOptions.Name = "grpNumericOptions"
         Me.grpNumericOptions.TabStop = False
         '
+        'ucrPnlNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
+        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
+        '
         'lblDigits
         '
         resources.ApplyResources(Me.lblDigits, "lblDigits")
@@ -308,11 +323,6 @@ Partial Class dlgRank
         Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
         Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrPnlMissingValues
-        '
-        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
-        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
-        '
         'ucrPnlTransformOptions
         '
         resources.ApplyResources(Me.ucrPnlTransformOptions, "ucrPnlTransformOptions")
@@ -344,16 +354,6 @@ Partial Class dlgRank
         Me.ucrSelectorForRank.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRank, "ucrSelectorForRank")
         Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
-        '
-        'ucrPnlNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
-        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
-        '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
         '
         'ucrChkMissingLast
         '

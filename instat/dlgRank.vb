@@ -116,10 +116,12 @@ Public Class dlgRank
         ucrNudDiffLag.SetParameter(New RParameter("lag", 1))
         ucrNudDiffLag.SetMinMax(iNewMin:=1)
         ucrNudDiffLag.Increment = 1
+        ucrNudDiffLag.SetRDefault(1)
 
         ucrNudDifferences.SetParameter(New RParameter("differences", 2))
         ucrNudDifferences.SetMinMax(iNewMin:=1)
         ucrNudDifferences.Increment = 1
+        ucrNudDifferences.SetRDefault(1)
 
         ucrSaveNew.SetPrefix("rank")
         ucrSaveNew.SetSaveTypeAsColumn()
@@ -163,20 +165,16 @@ Public Class dlgRank
         'Setting default parameters for the base function
         clsRankFunction.SetRCommand("rank")
         clsRankFunction.AddParameter("na.last", Chr(34) & "keep" & Chr(34))
-        'clsRankFunction.SetAssignTo(ucrSaveNew.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNew.GetText, bAssignToIsPrefix:=True)
 
-        clsSortFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        clsSortFunction.SetRCommand("sort")
         clsSortFunction.AddParameter("decreasing", iPosition:=1)
         clsSortFunction.AddParameter("na.last", iPosition:=2)
-        'clsSortFunction.SetAssignTo(ucrSaveNew.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNew.GetText, bAssignToIsPrefix:=True)
 
         clsRoundFunction.SetRCommand("round")
         clsRoundFunction.AddParameter("digits", "0", iPosition:=1)
-        'clsRoundFunction.SetAssignTo(ucrSaveNew.GetText(), strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNew.GetText(), bAssignToIsPrefix:=True)
 
         clsSignifFunction.SetRCommand("signif")
         clsSignifFunction.AddParameter("digits", "3", iPosition:=1)
-        ' clsSignifFunction.SetAssignTo(ucrSaveNew.GetText(), strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNew.GetText, bAssignToIsPrefix:=True)
 
         clsLagFunction.SetPackageName("dplyr")
         clsLagFunction.SetRCommand("lag")
@@ -185,14 +183,11 @@ Public Class dlgRank
         clsLeadFunction.SetRCommand("lead")
 
         clsDiffFunction.SetRCommand("diff")
-        clsDiffFunction.AddParameter("lag", "1", iPosition:=1)
-        clsDiffFunction.AddParameter("differences", "1", iPosition:=2)
-        'clsDiffFunction.SetAssignTo(ucrSaveNew.GetText(), strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNew.GetText, bAssignToIsPrefix:=True)
+        clsDiffFunction.AddParameter("lag", iPosition:=1)
+        clsDiffFunction.AddParameter("differences", iPosition:=2)
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
-
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -240,13 +235,13 @@ Public Class dlgRank
                 ucrSaveNew.SetPrefix("significant")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
             ElseIf rdoLag.Checked Then
-                ucrSaveNew.SetPrefix("lagged")
+                ucrSaveNew.SetPrefix("lag")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
             ElseIf rdoLead.Checked Then
                 ucrSaveNew.SetPrefix("lead")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
             ElseIf rdoDifference.Checked Then
-                ucrSaveNew.SetPrefix("differentiated")
+                ucrSaveNew.SetPrefix("difference")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDiffFunction)
             End If
         End If
