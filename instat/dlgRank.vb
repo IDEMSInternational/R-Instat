@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 
-Public Class dlgRank
+Public Class dlgTransform
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRankFunction As New RFunction
