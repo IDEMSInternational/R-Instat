@@ -382,6 +382,7 @@ Public Class ucrColumnMetadata
     Private Function IsOnlyOneDataFrameColumnSeleted() As Boolean
         Return grdVariables.CurrentWorksheet.SelectionRange.Rows = 1
     End Function
+
     Private Function IsFirstSelectedDataFrameColumnAFactor() As Boolean
         Dim strType As String
         strType = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnType(GetFirstSelectedDataFrameColumnName())
