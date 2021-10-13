@@ -211,6 +211,7 @@ Partial Class ucrCalculator
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdSummaryHelp = New System.Windows.Forms.Button()
         Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
@@ -240,6 +241,8 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdHelpZoo = New System.Windows.Forms.Button()
+        Me.cmdHelpDplyr = New System.Windows.Forms.Button()
         Me.cmdSortF = New System.Windows.Forms.Button()
         Me.cmdNasplin = New System.Windows.Forms.Button()
         Me.cmdNaapprox = New System.Windows.Forms.Button()
@@ -404,7 +407,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdSummaryHelp = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpFactor.SuspendLayout()
@@ -1642,6 +1644,12 @@ Partial Class ucrCalculator
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
         '
+        'cmdSummaryHelp
+        '
+        resources.ApplyResources(Me.cmdSummaryHelp, "cmdSummaryHelp")
+        Me.cmdSummaryHelp.Name = "cmdSummaryHelp"
+        Me.cmdSummaryHelp.UseVisualStyleBackColor = True
+        '
         'cmdKurtosis
         '
         resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
@@ -1812,6 +1820,8 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdHelpZoo)
+        Me.grpTransform.Controls.Add(Me.cmdHelpDplyr)
         Me.grpTransform.Controls.Add(Me.cmdSortF)
         Me.grpTransform.Controls.Add(Me.cmdNasplin)
         Me.grpTransform.Controls.Add(Me.cmdNaapprox)
@@ -1840,6 +1850,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
+        '
+        'cmdHelpZoo
+        '
+        resources.ApplyResources(Me.cmdHelpZoo, "cmdHelpZoo")
+        Me.cmdHelpZoo.Name = "cmdHelpZoo"
+        Me.cmdHelpZoo.UseVisualStyleBackColor = True
+        '
+        'cmdHelpDplyr
+        '
+        resources.ApplyResources(Me.cmdHelpDplyr, "cmdHelpDplyr")
+        Me.cmdHelpDplyr.Name = "cmdHelpDplyr"
+        Me.cmdHelpDplyr.UseVisualStyleBackColor = True
         '
         'cmdSortF
         '
@@ -2970,22 +2992,16 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdSummaryHelp
-        '
-        resources.ApplyResources(Me.cmdSummaryHelp, "cmdSummaryHelp")
-        Me.cmdSummaryHelp.Name = "cmdSummaryHelp"
-        Me.cmdSummaryHelp.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.ucrTryCalculator)
@@ -3386,4 +3402,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMathsHelp As Button
     Friend WithEvents cmdLogicalHelp As Button
     Friend WithEvents cmdSummaryHelp As Button
+    Friend WithEvents cmdHelpZoo As Button
+    Friend WithEvents cmdHelpDplyr As Button
 End Class

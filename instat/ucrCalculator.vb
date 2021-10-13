@@ -342,7 +342,6 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpDates.Visible = False
                 grpCircular.Visible = False
-                cmdRHelp.Visible = True
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
@@ -364,7 +363,6 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
-                cmdRHelp.Visible = True
                 grpSymbols.Visible = False
             Case "Summary"
                 strPackageName = "base"
@@ -383,7 +381,6 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
-                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Text/Strings (Character Columns)"
                 strPackageName = "stringr"
@@ -400,7 +397,6 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = True
                 grpSymbols.Visible = True
-                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
@@ -419,7 +415,6 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
-                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
             Case "Probability"
                 strPackageName = "stats"
@@ -436,7 +431,6 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
-                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
@@ -453,13 +447,11 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
-                cmdRHelp.Visible = True
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
                 strPackageName = "dplyr"
-                strPackageName = "zoo"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -473,7 +465,6 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
-                cmdRHelp.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
             Case "Wakefield"
@@ -492,7 +483,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
-                cmdRHelp.Visible = True
+
                 Me.Size = New Size(iBasicWidth * 1.7, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
@@ -510,7 +501,6 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-                cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
                 strPackageName = "hydroGOF"
@@ -528,10 +518,8 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
-                cmdRHelp.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
             Case "Basic"
-                cmdRHelp.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
@@ -1303,6 +1291,14 @@ Public Class ucrCalculator
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         RaiseEvent SelectionChanged()
     End Sub
+
+    'Private Sub ZooPackage()
+    '    If ucrInputCalOptions.GetText = "Transform" Then
+    '        strPackageName = "zoo"
+    '    Else
+    '        strPackageName = "dplyr"
+    '    End If
+    'End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click
         Dim clsHelp As New RFunction
@@ -2869,5 +2865,33 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sort()", 1)
         End If
+    End Sub
+
+    Private Sub cmdHelpZoo_Click(sender As Object, e As EventArgs) Handles cmdHelpZoo.Click
+        Dim clsHelp As New RFunction
+        CalculationsOptions()
+        Select Case ucrInputCalOptions.GetText
+            Case "Transform"
+                strPackageName = "zoo"
+        End Select
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
+    Private Sub cmdHelpDplyr_Click(sender As Object, e As EventArgs) Handles cmdHelpDplyr.Click
+        Dim clsHelp As New RFunction
+        CalculationsOptions()
+        Select Case ucrInputCalOptions.GetText
+            Case "Transform"
+                strPackageName = "dplyr"
+        End Select
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 End Class
