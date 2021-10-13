@@ -269,6 +269,7 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdProbRHelp = New System.Windows.Forms.Button()
         Me.cmdQnbin = New System.Windows.Forms.Button()
         Me.cmdQpois = New System.Windows.Forms.Button()
         Me.cmdQbinom = New System.Windows.Forms.Button()
@@ -407,6 +408,7 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdStringRHelp = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpFactor.SuspendLayout()
@@ -584,7 +586,6 @@ Partial Class ucrCalculator
         '
         Me.grpDates.Controls.Add(Me.cmdPm)
         Me.grpDates.Controls.Add(Me.cmdTime)
-        Me.grpDates.Controls.Add(Me.grpFactor)
         Me.grpDates.Controls.Add(Me.cmdDateTime)
         Me.grpDates.Controls.Add(Me.cmdQuarter)
         Me.grpDates.Controls.Add(Me.cmdD_In_M)
@@ -621,7 +622,6 @@ Partial Class ucrCalculator
         '
         'grpFactor
         '
-        Me.grpFactor.Controls.Add(Me.grpHydroGOF)
         Me.grpFactor.Controls.Add(Me.cmdTransformHelp)
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
         Me.grpFactor.Controls.Add(Me.cmdShift)
@@ -1038,7 +1038,6 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
-        Me.grpWakefield.Controls.Add(Me.grpMaths)
         Me.grpWakefield.Controls.Add(Me.cmdWakefieldHelp)
         Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
@@ -2015,6 +2014,7 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
+        Me.grpProbabilty.Controls.Add(Me.cmdProbRHelp)
         Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
         Me.grpProbabilty.Controls.Add(Me.cmdQpois)
         Me.grpProbabilty.Controls.Add(Me.cmdQbinom)
@@ -2048,6 +2048,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpProbabilty, "grpProbabilty")
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.TabStop = False
+        '
+        'cmdProbRHelp
+        '
+        resources.ApplyResources(Me.cmdProbRHelp, "cmdProbRHelp")
+        Me.cmdProbRHelp.Name = "cmdProbRHelp"
+        Me.cmdProbRHelp.UseVisualStyleBackColor = True
         '
         'cmdQnbin
         '
@@ -2992,16 +2998,26 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdStringRHelp
+        '
+        resources.ApplyResources(Me.cmdStringRHelp, "cmdStringRHelp")
+        Me.cmdStringRHelp.Name = "cmdStringRHelp"
+        Me.cmdStringRHelp.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpHydroGOF)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.cmdStringRHelp)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.ucrTryCalculator)
@@ -3404,4 +3420,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdSummaryHelp As Button
     Friend WithEvents cmdHelpZoo As Button
     Friend WithEvents cmdHelpDplyr As Button
+    Friend WithEvents cmdStringRHelp As Button
+    Friend WithEvents cmdProbRHelp As Button
 End Class

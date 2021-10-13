@@ -342,6 +342,7 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpDates.Visible = False
                 grpCircular.Visible = False
+                cmdStringRHelp.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
@@ -354,6 +355,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
+                cmdStringRHelp.Visible = False
                 grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpHydroGOF.Visible = False
@@ -366,7 +368,6 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
             Case "Summary"
                 strPackageName = "base"
-                strPackageName = "stats"
                 grpDates.Visible = False
                 grpSummary.Visible = True
                 grpLogical.Visible = False
@@ -378,6 +379,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
                 grpCircular.Visible = False
+                cmdStringRHelp.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
@@ -389,6 +391,7 @@ Public Class ucrCalculator
                 grpFactor.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
+                cmdStringRHelp.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
@@ -406,6 +409,7 @@ Public Class ucrCalculator
                 grpSummary.Visible = False
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                cmdStringRHelp.Visible = False
                 grpBasic.Visible = True
                 grpTestString.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.44, iBaseHeight)
@@ -427,6 +431,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                cmdStringRHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
@@ -444,6 +449,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                cmdStringRHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
@@ -461,6 +467,7 @@ Public Class ucrCalculator
                 grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = True
+                cmdStringRHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
@@ -474,6 +481,7 @@ Public Class ucrCalculator
                 grpSummary.Visible = False
                 grpBasic.Visible = True
                 grpLogical.Visible = False
+                cmdStringRHelp.Visible = False
                 grpMaths.Visible = False
                 grpTestString.Visible = False
                 grpFactor.Visible = False
@@ -497,6 +505,7 @@ Public Class ucrCalculator
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
+                cmdStringRHelp.Visible = False
                 grpCircular.Visible = True
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
@@ -512,6 +521,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
@@ -526,6 +536,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpBasic.Visible = True
                 grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
                 grpFactor.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -1300,7 +1311,7 @@ Public Class ucrCalculator
     '    End If
     'End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click
         Dim clsHelp As New RFunction
 
         clsHelp.SetPackageName("utils")
