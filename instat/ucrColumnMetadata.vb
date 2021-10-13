@@ -363,7 +363,8 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.WaitCursor
         grdVariables.Enabled = False
     End Sub
-    Private Sub EndWait()
+
+        Private Sub EndWait()
         grdVariables.Enabled = True
         Cursor = Cursors.Default
     End Sub
