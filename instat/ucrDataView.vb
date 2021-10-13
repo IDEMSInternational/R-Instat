@@ -616,14 +616,14 @@ Public Class ucrDataView
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
         For Each strColumn In GetSelectedColumnNames()
             Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
-            If intNonNumericValues = 0 Then
+            If iNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-            ElseIf intNonNumericValues = GetCurrentDataFrameFocus().TotalRowCount Then
+            ElseIf iNonNumericValues = GetCurrentDataFrameFocus().TotalRowCount Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
             Else
                 frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().Name)
                 frmConvertToNumeric.SetColumnName(strColumn)
-                frmConvertToNumeric.SetNonNumeric(intNonNumericValues)
+                frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                 frmConvertToNumeric.ShowDialog()
                 ' Yes for "normal" convert and No for "labelled" convert
                 If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
