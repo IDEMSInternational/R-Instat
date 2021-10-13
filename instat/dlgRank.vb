@@ -26,6 +26,8 @@ Public Class dlgRank
     Private clsLagFunction As New RFunction
     Private clsLeadFunction As New RFunction
     Private clsDiffFunction As New RFunction
+    Private clsListFunction As New RFunction
+    Private clsScaleFunction As New RFunction
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,7 +52,7 @@ Public Class dlgRank
         ucrPnlTransformOptions.AddRadioButton(rdoNonNegative)
 
         ucrPnlTransformOptions.AddFunctionNamesCondition(rdoRank, "rank")
-        ucrPnlTransformOptions.AddFunctionNamesCondition(rdoNumeric, {"round", "signif", "lag", "lead", "diff"})
+        ucrPnlTransformOptions.AddFunctionNamesCondition(rdoNumeric, {"round", "signif", "lag", "lead", "c"})
         ucrPnlTransformOptions.AddFunctionNamesCondition(rdoSort, "sort")
 
         ucrPnlTransformOptions.AddToLinkedControls({ucrPnlTies, ucrPnlMissingValues}, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -151,6 +153,8 @@ Public Class dlgRank
         clsLagFunction = New RFunction
         clsLeadFunction = New RFunction
         clsDiffFunction = New RFunction
+        clsListFunction = New RFunction
+        clsScaleFunction = New RFunction
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -177,7 +181,11 @@ Public Class dlgRank
         clsLeadFunction.SetRCommand("lead")
 
         clsDiffFunction.SetRCommand("diff")
-        clsDiffFunction.AddParameter("lag", iPosition:=1)
+        clsDiffFunction.AddParameter("lag", "1", iPosition:=1)
+
+        clsListFunction.SetRCommand("c")
+        clsListFunction.AddParameter("NA", "NA", iPosition:=0, bIncludeArgumentName:=False)
+        clsListFunction.AddParameter("x", clsRFunctionParameter:=clsDiffFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
@@ -194,7 +202,7 @@ Public Class dlgRank
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
         ucrSaveNew.AddAdditionalRCode(clsSignifFunction, iAdditionalPairNo:=3)
-        ucrSaveNew.AddAdditionalRCode(clsDiffFunction, iAdditionalPairNo:=4)
+        ucrSaveNew.AddAdditionalRCode(clsListFunction, iAdditionalPairNo:=4)
         ucrSaveNew.AddAdditionalRCode(clsRankFunction, iAdditionalPairNo:=5)
         ucrSaveNew.AddAdditionalRCode(clsSortFunction, iAdditionalPairNo:=6)
 
@@ -234,10 +242,10 @@ Public Class dlgRank
                 ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
             ElseIf rdoDifference.Checked Then
                 ucrSaveNew.SetPrefix("difference")
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDiffFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsListFunction)
             ElseIf rdoScale.Checked Then
                 ucrSaveNew.SetPrefix("scale")
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDiffFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
             End If
         End If
     End Sub
