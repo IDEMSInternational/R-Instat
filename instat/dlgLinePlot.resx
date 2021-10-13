@@ -1762,10 +1762,10 @@
     <value>43</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 7</value>
+    <value>30, 7</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 44</value>
+    <value>363, 44</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1999,16 +1999,16 @@
     <value>61</value>
   </data>
   <data name="ucrReceiverXEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 288</value>
+    <value>246, 288</value>
   </data>
   <data name="ucrReceiverXEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverXEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
+    <value>129, 20</value>
   </data>
   <data name="ucrReceiverXEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>75</value>
   </data>
   <data name="&gt;&gt;ucrReceiverXEnd.Name" xml:space="preserve">
     <value>ucrReceiverXEnd</value>

@@ -52,6 +52,13 @@ Partial Class dlgLinePlot
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
+        Me.ucrChkSpan = New instat.ucrCheck()
+        Me.ucrChkFormula = New instat.ucrCheck()
+        Me.ucrChkAddSE = New instat.ucrCheck()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.rdoSlope = New System.Windows.Forms.RadioButton()
         Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
         Me.lblXEnd = New System.Windows.Forms.Label()
@@ -94,13 +101,6 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellSize = New instat.ucrCheck()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
-        Me.ucrInputFormula = New instat.ucrInputComboBox()
-        Me.ucrChkSpan = New instat.ucrCheck()
-        Me.ucrChkFormula = New instat.ucrCheck()
-        Me.ucrChkAddSE = New instat.ucrCheck()
-        Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -220,6 +220,58 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.grpSmoothOptions, "grpSmoothOptions")
         Me.grpSmoothOptions.Name = "grpSmoothOptions"
         Me.grpSmoothOptions.TabStop = False
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        '
+        'ucrChkSpan
+        '
+        Me.ucrChkSpan.Checked = False
+        resources.ApplyResources(Me.ucrChkSpan, "ucrChkSpan")
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.Checked = False
+        resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
+        Me.ucrChkFormula.Name = "ucrChkFormula"
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.Checked = False
+        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSpan, "ucrNudSpan")
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'rdoSlope
         '
@@ -520,58 +572,6 @@ Partial Class dlgLinePlot
         Me.ucrReceiverSlopeY.Selector = Nothing
         Me.ucrReceiverSlopeY.strNcFilePath = ""
         Me.ucrReceiverSlopeY.ucrSelector = Nothing
-        '
-        'ucrInputFormula
-        '
-        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
-        Me.ucrInputFormula.GetSetSelectedIndex = -1
-        Me.ucrInputFormula.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
-        Me.ucrInputFormula.Name = "ucrInputFormula"
-        '
-        'ucrChkSpan
-        '
-        Me.ucrChkSpan.Checked = False
-        resources.ApplyResources(Me.ucrChkSpan, "ucrChkSpan")
-        Me.ucrChkSpan.Name = "ucrChkSpan"
-        '
-        'ucrChkFormula
-        '
-        Me.ucrChkFormula.Checked = False
-        resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
-        Me.ucrChkFormula.Name = "ucrChkFormula"
-        '
-        'ucrChkAddSE
-        '
-        Me.ucrChkAddSE.Checked = False
-        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        '
-        'ucrNudSpan
-        '
-        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSpan, "ucrNudSpan")
-        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Name = "ucrNudSpan"
-        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        '
-        'ucrFamilyInput
-        '
-        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
-        Me.ucrFamilyInput.GetSetSelectedIndex = -1
-        Me.ucrFamilyInput.IsReadOnly = False
-        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
-        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'ucrChkAddLine
         '
