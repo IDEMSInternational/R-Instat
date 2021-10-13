@@ -119,7 +119,8 @@ Public Class ucrColumnMetadata
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
         For i = grid.Worksheets.Count - 1 To 0 Step -1
-            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(i).Name).Count = 0 Then
+            Dim iGridWorkheetsCount As Integer = i 'Needed to prevent warning
+            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(iGridWorkheetsCount).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
             End If
         Next
