@@ -30,6 +30,7 @@ Public Class dlgImportDataset
     Private strCurrentDirectory As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
+    Private lastFileName As String = ""
     Public strFileToOpenOn As String = ""
     Private bDialogLoaded As Boolean = False
     Private iDataFrameCount As Integer
@@ -524,6 +525,7 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetDialogStateFromFile(strFileOrFolderPath As String, Optional strFolderFileExt As String = "")
+        lastFileName = strFileName
         bImportFromFolder = False
         strFileName = ""
         strFileExtension = ""
@@ -1010,7 +1012,7 @@ Public Class dlgImportDataset
         If ucrChkMultipleFiles.Checked Then
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
         Else
-            SetDialogStateFromFile(strCurrentDirectory & "\" & strFileName & strFileExtension)
+            SetDialogStateFromFile(strCurrentDirectory & "\" & lastFileName & strFileExtension)
         End If
         TestOkEnabled()
     End Sub
