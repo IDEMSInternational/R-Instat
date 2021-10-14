@@ -43,6 +43,7 @@ Public Class clsPrepareFunctionsForGrids
         clsDeleteColumns.AddParameter("cols", _RLink.GetListAsRString(lstColumnNames))
         _RLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
+
     ''' <summary>
     ''' Convert one or many columns to text type
     ''' </summary>
