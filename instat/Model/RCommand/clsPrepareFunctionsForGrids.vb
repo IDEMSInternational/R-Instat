@@ -225,7 +225,7 @@ Public Class clsPrepareFunctionsForGrids
         Dim clsUnfreezeColumns As New RFunction
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsUnfreezeColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        _RLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+        _RLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Unfreeze Columns")
     End Sub
     ''' <summary>
     ''' Appends variables to Metadata
