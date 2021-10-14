@@ -20,7 +20,6 @@ Public Class clsDataFrameMetaData
     Private _RLink As RLink
     Private _dataFrame As DataFrame
 
-
     Public ReadOnly Property Data(row As Integer, column As Integer) As Object
         Get
             Return If(_dataFrame IsNot Nothing AndAlso _dataFrame.RowCount > 0, _dataFrame(row, column), 0)
