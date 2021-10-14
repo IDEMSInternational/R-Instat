@@ -294,7 +294,7 @@ Public Class clsPrepareFunctionsForGrids
         Else
             clsReplaceValue.AddParameter("new_value", strNewValue)
         End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
+        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
     ''' <summary>
     ''' Get the column type for a given column
