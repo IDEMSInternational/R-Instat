@@ -189,7 +189,7 @@ Public Class clsPrepareFunctionsForGrids
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteRows.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
         clsDeleteRows.AddParameter("row_names", _RLink.GetListAsRString(lstRowNames))
-        _RLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right click menu: Delete row(s)")
+        _RLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right click menu: Delete Row(s)")
 
     End Sub
     ''' <summary>
