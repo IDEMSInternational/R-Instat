@@ -178,7 +178,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 596
             Case "Wakefield"
                 Me.Width = iBasicWidth * 1.73
-                Me.Height = iBasicHeight * 1.1 Or w
+                Me.Height = iBasicHeight * 1.1
                 ucrBase.iHelpTopicID = 444
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
