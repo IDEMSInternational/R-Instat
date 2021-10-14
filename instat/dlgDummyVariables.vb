@@ -73,7 +73,7 @@ Public Class dlgDummyVariables
         clsDummyColsFunction.AddParameter("split", "NULL", iPosition:=5)
         clsDummyColsFunction.AddParameter("remove_selected_columns", "FALSE", iPosition:=6)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDummyColsFunction)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True, bInsertColumnBefore:=False)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
