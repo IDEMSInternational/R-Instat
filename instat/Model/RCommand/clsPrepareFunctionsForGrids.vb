@@ -19,8 +19,8 @@ Imports RDotNet
 ''' and, meta data grid. 
 ''' </summary>
 Public Class clsPrepareFunctionsForGrids
-    Private _RLink As RLink
-    Private _strDataFrame As String
+    Private ReadOnly _RLink As RLink
+    Private ReadOnly _strDataFrame As String
 
     ''' <summary>
     ''' Create a new instance of prepare functions for an indivdual dataframe
