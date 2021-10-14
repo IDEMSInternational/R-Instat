@@ -638,12 +638,10 @@ Public Class ucrDataView
         Next
     End Sub
 
-    Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
-        ' If IsOnlyOneColumnSeleted() Then
+    Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevel.Click
         If IsFirstSelectedColumnAFactor() Then
             dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName, grdCurrSheet.Name)
         End If
-        '  End If
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -756,7 +754,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
-        mnuLebelsLevel.Enabled = IsOnlyOneColumnSeleted() AndAlso IsOnlyOneColumnSeleted()
+        mnuLabelsLevel.Enabled = IsOnlyOneColumnSeleted() AndAlso IsOnlyOneColumnSeleted()
         mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().Filter.bApplied
     End Sub
 

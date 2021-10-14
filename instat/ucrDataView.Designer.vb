@@ -74,7 +74,7 @@ Partial Class ucrDataView
         Me.mnuConvertToLogic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuLebelsLevel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLabelsLevel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSorts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuComment = New System.Windows.Forms.ToolStripMenuItem()
@@ -287,7 +287,7 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
         Me.cellContextMenuStrip.Size = New System.Drawing.Size(293, 476)
         '
@@ -360,11 +360,11 @@ Partial Class ucrDataView
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(289, 6)
         '
-        'mnuLebelsLevel
+        'mnuLabelsLevel
         '
-        Me.mnuLebelsLevel.Name = "mnuLebelsLevel"
-        Me.mnuLebelsLevel.Size = New System.Drawing.Size(292, 32)
-        Me.mnuLebelsLevel.Text = "Levels/Labels..."
+        Me.mnuLabelsLevel.Name = "mnuLabelsLevel"
+        Me.mnuLabelsLevel.Size = New System.Drawing.Size(292, 32)
+        Me.mnuLabelsLevel.Text = "Levels/Labels..."
         '
         'ToolStripSeparator7
         '
@@ -983,7 +983,7 @@ Partial Class ucrDataView
     Friend WithEvents mnuConvertToLogic As ToolStripMenuItem
     Friend WithEvents mnuConvertToNumeric As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents mnuLebelsLevel As ToolStripMenuItem
+    Friend WithEvents mnuLabelsLevel As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents mnuSorts As ToolStripMenuItem
     Private WithEvents mnuFilters As ToolStripMenuItem
