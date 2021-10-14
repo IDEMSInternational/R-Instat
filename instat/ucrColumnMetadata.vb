@@ -21,7 +21,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 
 Public Class ucrColumnMetadata
-    Public _clsDataBook As clsDataBook
+    Private _clsDataBook As clsDataBook
 
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
@@ -33,17 +33,16 @@ Public Class ucrColumnMetadata
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
 
+    Public WriteOnly Property DataBook() As clsDataBook
+        Set(ByVal value As clsDataBook)
+            _clsDataBook = value
+        End Set
+    End Property
+
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
         mnuInsertColsAfter.Visible = False
         mnuInsertColsBefore.Visible = False
-    End Sub
-
-    ''' <summary>
-    ''' Sets the databook to be used throughout the form
-    ''' </summary>
-    Public Sub SetDataBook(clsDataBook As clsDataBook)
-        _clsDataBook = clsDataBook
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -54,28 +53,28 @@ Public Class ucrColumnMetadata
         Return _clsDataBook.GetColumnMetaData(grdCurrSheet.Name)
     End Function
 
-    Private Sub RefreshWorksheet(fillWorkSheet As Worksheet, dataFrame As clsDataFrame)
-        AddColumns(dataFrame, fillWorkSheet)
-        AddRowData(dataFrame, fillWorkSheet)
-        UpdateWorksheetStyle(fillWorkSheet)
+    Private Sub RefreshWorksheet(fillWorksheet As Worksheet, dataFrame As clsDataFrame)
+        AddColumns(dataFrame, fillWorksheet)
+        AddRowData(dataFrame, fillWorksheet)
+        UpdateWorksheetStyle(fillWorksheet)
     End Sub
 
-    Private Sub AddColumns(dataFramePage As clsDataFrame, workSheet As Worksheet)
-        workSheet.Columns = dataFramePage.clsColumnMetaData.ColumnCount
+    Private Sub AddColumns(dataFramePage As clsDataFrame, worksheet As Worksheet)
+        worksheet.Columns = dataFramePage.clsColumnMetaData.ColumnCount
         For i = 0 To dataFramePage.clsColumnMetaData.ColumnCount - 1
-            workSheet.ColumnHeaders(i).Text = dataFramePage.clsColumnMetaData.ColumnName(i)
+            worksheet.ColumnHeaders(i).Text = dataFramePage.clsColumnMetaData.ColumnName(i)
         Next
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
-        Dim fillWorkSheet As Worksheet
         For Each clsDataFrame In _clsDataBook.DataFrames
-            fillWorkSheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.Name).FirstOrDefault
-            If fillWorkSheet Is Nothing Then
-                fillWorkSheet = grid.CreateWorksheet(clsDataFrame.Name)
-                grid.AddWorksheet(fillWorkSheet)
+            Dim fillWorksheet As Worksheet
+            fillWorksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.Name).FirstOrDefault
+            If fillWorksheet Is Nothing Then
+                fillWorksheet = grid.CreateWorksheet(clsDataFrame.Name)
+                grid.AddWorksheet(fillWorksheet)
             End If
-            RefreshWorksheet(fillWorkSheet, clsDataFrame)
+            RefreshWorksheet(fillWorksheet, clsDataFrame)
         Next
 
     End Sub
@@ -86,8 +85,8 @@ Public Class ucrColumnMetadata
         Next
     End Sub
 
-    Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
-        fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+    Private Sub UpdateWorksheetStyle(fillWorksheet As Worksheet)
+        fillWorksheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
@@ -95,18 +94,18 @@ Public Class ucrColumnMetadata
                                 })
     End Sub
 
-    Private Sub AddRowData(dataFrame As clsDataFrame, workSheet As Worksheet)
+    Private Sub AddRowData(dataFrame As clsDataFrame, worksheet As Worksheet)
         Dim rngDataRange As RangePosition
 
-        workSheet.Rows = dataFrame.clsColumnMetaData.RowCount
-        rngDataRange = New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
-        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+        worksheet.Rows = dataFrame.clsColumnMetaData.RowCount
+        rngDataRange = New RangePosition(0, 0, worksheet.Rows, worksheet.Columns)
+        worksheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
 
-        For i = 0 To workSheet.Rows - 1
-            For j = 0 To workSheet.Columns - 1
-                workSheet(row:=i, col:=j) = dataFrame.clsColumnMetaData.Data(i, j)
+        For i = 0 To worksheet.Rows - 1
+            For j = 0 To worksheet.Columns - 1
+                worksheet(row:=i, col:=j) = dataFrame.clsColumnMetaData.Data(i, j)
             Next
-            workSheet.RowHeaders.Item(i).Text = dataFrame.clsColumnMetaData.RowName(i)
+            worksheet.RowHeaders.Item(i).Text = dataFrame.clsColumnMetaData.RowName(i)
         Next
     End Sub
 
@@ -119,8 +118,8 @@ Public Class ucrColumnMetadata
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
         For i = grid.Worksheets.Count - 1 To 0 Step -1
-            Dim iGridWorkheetsCount As Integer = i 'Needed to prevent warning
-            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(iGridWorkheetsCount).Name).Count = 0 Then
+            Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
+            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
             End If
         Next
@@ -312,27 +311,28 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        Dim intNonNumericValues As Integer
         For Each strColumn In GetSelectedDataFrameColumnNames()
-            intNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
-            If intNonNumericValues = 0 Then
-                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-            ElseIf intNonNumericValues = GetCurrentDataFrameFocus().TotalRowCount Then
-                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-            Else
-                frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().Name)
-                frmConvertToNumeric.SetColumnName(strColumn)
-                frmConvertToNumeric.SetNonNumeric(intNonNumericValues)
-                frmConvertToNumeric.ShowDialog()
-                ' Yes for "normal" convert and No for "labelled" convert
-                If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
+            Dim iNonNumericValues As Integer
+            iNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
+            Select Case iNonNumericValues
+                Case 0
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
+                Case GetCurrentDataFrameFocus().TotalRowCount
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
-                    Continue For
-                End If
-            End If
+                Case Else
+                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().Name)
+                    frmConvertToNumeric.SetColumnName(strColumn)
+                    frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
+                    Dim dialogResult = frmConvertToNumeric.ShowDialog()
+                    ' Yes for "normal" convert and No for "labelled" convert
+                    If dialogResult = DialogResult.Yes Then
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    ElseIf dialogResult = DialogResult.No Then
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    ElseIf dialogResult = DialogResult.Cancel Then
+                        Continue For
+                    End If
+            End Select
         Next
     End Sub
 
@@ -387,8 +387,7 @@ Public Class ucrColumnMetadata
     End Function
 
     Private Function IsFirstSelectedDataFrameColumnAFactor() As Boolean
-        Dim strType As String
-        strType = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnType(GetFirstSelectedDataFrameColumnName())
+        Dim strType As String = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnType(GetFirstSelectedDataFrameColumnName())
         Return strType.Contains("factor")
     End Function
 

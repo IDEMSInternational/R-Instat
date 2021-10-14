@@ -99,9 +99,9 @@ Public Class frmMain
         InitialiseOutputWindow()
         clsDataBook = New clsDataBook(clsRLink)
 
-        ucrDataViewer.SetDataBook(clsDataBook)
-        ucrColumnMeta.SetDataBook(clsDataBook)
-        ucrDataFrameMeta.SetDataBook(clsDataBook)
+        ucrDataViewer.DataBook = clsDataBook
+        ucrColumnMeta.DataBook = clsDataBook
+        ucrDataFrameMeta.DataBook = clsDataBook
 
         clsRLink.SetLog(ucrLogWindow.txtLog)
 

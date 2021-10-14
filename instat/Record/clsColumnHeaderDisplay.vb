@@ -14,21 +14,20 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class clsColumnHeaderDisplay
-    Public Property Name As String
+    Public Property strName As String
 
-    Public ReadOnly Property DisplayName As String
+    Public ReadOnly Property strDisplayName As String
         Get
-            Return Name + " " + TypeShortCode
+            Return strName & " " & strTypeShortCode
         End Get
     End Property
 
-    Public Property TypeShortCode As String
+    Public Property strTypeShortCode As String
 
-    Public Property Colour As Color
+    Public Property clsColour As Color
 
-    Public Property BackGroundColour As Color
+    Public Property clsBackGroundColour As Color
 
-    Public Property IsFactor As Boolean
-
+    Public Property bIsFactor As Boolean
 
 End Class

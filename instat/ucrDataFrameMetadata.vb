@@ -28,6 +28,12 @@ Public Class ucrDataFrameMetadata
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
 
+    Public WriteOnly Property DataBook() As clsDataBook
+        Set(ByVal value As clsDataBook)
+            _clsDataBook = value
+        End Set
+    End Property
+
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadForm()
         clsViewDataFrame.SetRCommand("View")
@@ -42,13 +48,6 @@ Public Class ucrDataFrameMetadata
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)
         grdMetaData.SheetTabNewButtonVisible = False
-    End Sub
-
-    ''' <summary>
-    ''' Sets the databook to be used throughout the form
-    ''' </summary>
-    Public Sub SetDataBook(clsDataBook As clsDataBook)
-        _clsDataBook = clsDataBook
     End Sub
 
     Private Sub StartWait()

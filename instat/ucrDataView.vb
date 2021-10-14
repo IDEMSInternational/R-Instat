@@ -24,22 +24,20 @@ Imports System.ComponentModel
 Imports unvell.ReoGrid
 
 Public Class ucrDataView
-    'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
+    Private _clsDataBook As clsDataBook
+
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
-    Private _clsDataBook As clsDataBook
+    Public WriteOnly Property DataBook() As clsDataBook
+        Set(ByVal value As clsDataBook)
+            _clsDataBook = value
+        End Set
+    End Property
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
         ' Add any initialization after the InitializeComponent() call.
-    End Sub
-
-    ''' <summary>
-    ''' Sets the databook to be used throughout the form
-    ''' </summary>
-    Public Sub SetDataBook(clsDataBook As clsDataBook)
-        _clsDataBook = clsDataBook
     End Sub
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -105,8 +103,8 @@ Public Class ucrDataView
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
         For i = grid.Worksheets.Count - 1 To 0 Step -1
-            Dim iGridWorkheetsCount As Integer = i 'Needed to prevent warning
-            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(index:=iGridWorkheetsCount).Name).Count = 0 Then
+            Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
+            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(index:=iGridWorkheetsPosition).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
             End If
         Next
@@ -117,9 +115,9 @@ Public Class ucrDataView
         workSheet.Columns = dataFramePage.lstColumns.Count
         For i = 0 To dataFramePage.lstColumns.Count - 1
             workSheetColumnHeader = workSheet.ColumnHeaders(i)
-            workSheetColumnHeader.Text = dataFramePage.lstColumns(i).DisplayName
-            workSheetColumnHeader.TextColor = dataFramePage.lstColumns(i).Colour
-            workSheetColumnHeader.Style.BackColor = dataFramePage.lstColumns(i).BackGroundColour
+            workSheetColumnHeader.Text = dataFramePage.lstColumns(i).strDisplayName
+            workSheetColumnHeader.TextColor = dataFramePage.lstColumns(i).clsColour
+            workSheetColumnHeader.Style.BackColor = dataFramePage.lstColumns(i).clsBackGroundColour
         Next
     End Sub
 
@@ -275,7 +273,7 @@ Public Class ucrDataView
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         ReplaceValueInData(e.NewData.ToString(),
-                           GetCurrentDataFrameFocus().VisiblePage.lstColumns(e.Cell.Column).Name,
+                           GetCurrentDataFrameFocus().VisiblePage.lstColumns(e.Cell.Column).StrName,
                            GetCurrentDataFrameFocus().VisiblePage.RowName(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
     End Sub
@@ -284,49 +282,43 @@ Public Class ucrDataView
         Dim dblValue As Double
         Dim iValue As Integer
         Dim bWithQuotes As Boolean
-        Dim bValid As Boolean = False
 
         If strNewValue = "NA" Then
             bWithQuotes = False
-            bValid = True
         Else
             Select Case GetCurrentDataFrameFocus().clsPrepareFunctions.GetDataTypeLabel(strColumnName)
                 Case "factor"
                     If Not GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnFactorLevels(strColumnName).Contains(strNewValue) Then
                         MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        Exit Sub
                     Else
                         bWithQuotes = True
-                        bValid = True
                     End If
                 Case "numeric"
                     If Double.TryParse(strNewValue, dblValue) Then
                         bWithQuotes = False
-                        bValid = True
                     Else
                         MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        Exit Sub
                     End If
                 Case "integer"
                     If Integer.TryParse(strNewValue, iValue) Then
                         bWithQuotes = False
-                        bValid = True
                     Else
                         MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        Exit Sub
                     End If
                 Case Else
                     If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
                         bWithQuotes = False
-                        bValid = True
                     Else
                         bWithQuotes = True
-                        bValid = True
                     End If
             End Select
         End If
-        If bValid Then
-            StartWait()
-            GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes)
-            EndWait()
-        End If
+        StartWait()
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes)
+        EndWait()
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
@@ -355,23 +347,23 @@ Public Class ucrDataView
     End Function
 
     Private Function GetSelectedColumnNames() As List(Of String)
-        Return GetSelectedColumns().Select(Function(x) x.Name).ToList()
+        Return GetSelectedColumns().Select(Function(x) x.StrName).ToList()
     End Function
 
     Private Function GetFirstSelectedColumnName() As String
-        Return GetSelectedColumns().FirstOrDefault().Name
+        Return GetSelectedColumns().FirstOrDefault().StrName
     End Function
 
     Private Function GetLastSelectedColumnName() As String
-        Return GetSelectedColumns().LastOrDefault().Name
+        Return GetSelectedColumns().LastOrDefault().StrName
     End Function
 
-    Private Function IsOnlyOneColumnSeleted() As Boolean
+    Private Function IsOnlyOneColumnSelected() As Boolean
         Return grdData.CurrentWorksheet.SelectionRange.Cols = 1
     End Function
 
     Private Function IsFirstSelectedColumnAFactor() As Boolean
-        Return GetSelectedColumns().FirstOrDefault().IsFactor
+        Return GetSelectedColumns().FirstOrDefault().bIsFactor
     End Function
 
     Private Function GetFirstSelectedRow() As String
@@ -544,7 +536,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
-        If IsOnlyOneColumnSeleted() Then
+        If IsOnlyOneColumnSelected() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
@@ -754,7 +746,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
-        mnuLabelsLevel.Enabled = IsOnlyOneColumnSeleted() AndAlso IsOnlyOneColumnSeleted()
+        mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected()
         mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().Filter.bApplied
     End Sub
 
