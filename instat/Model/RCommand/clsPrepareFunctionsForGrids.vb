@@ -180,7 +180,7 @@ Public Class clsPrepareFunctionsForGrids
         clsInsertRows.AddParameter("number_rows", noOfRowsToAdd)
         If bBefore Then
             clsInsertRows.AddParameter("before", "TRUE")
-            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert row(s) Before")
+            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) Before")
         Else
             clsInsertRows.AddParameter("before", "FALSE")
             _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) After")
