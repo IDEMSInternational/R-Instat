@@ -265,7 +265,6 @@ Public Class dlgLinePlot
         ucrFamilyInput.SetLinkedDisplayControl(lblFamily)
 
         ucrInputDumbbellX.SetParameter(New RParameter("colour_x", 2))
-        dctColourOptions.Add("Null", Chr(34) & "NULL" & Chr(34))
         dctColourOptions.Add("Black", Chr(34) & "black" & Chr(34))
         dctColourOptions.Add("White", Chr(34) & "white" & Chr(34))
         dctColourOptions.Add("Blue", Chr(34) & "blue" & Chr(34))
@@ -349,7 +348,6 @@ Public Class dlgLinePlot
 
         ucrInputSlopeLineColour.SetParameter(New RParameter("line_colour", 10))
         dctSlopeLineColourOptions.Add("ByGroup", Chr(34) & "ByGroup" & Chr(34))
-        dctSlopeLineColourOptions.Add("Null", Chr(34) & "NULL" & Chr(34))
         dctSlopeLineColourOptions.Add("Black", Chr(34) & "black" & Chr(34))
         dctSlopeLineColourOptions.Add("White", Chr(34) & "white" & Chr(34))
         dctSlopeLineColourOptions.Add("Blue", Chr(34) & "blue" & Chr(34))
@@ -470,10 +468,10 @@ Public Class dlgLinePlot
         clsDumbbellFunction.SetPackageName("ggalt")
         clsDumbbellFunction.SetRCommand("geom_dumbbell")
 
-        clsggSlopeFunction.SetRCommand("newggslopegraph_amended")
+        clsggSlopeFunction.SetRCommand("slopegraph")
         clsggSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
-        clsSlopeThemeFunction.SetRCommand("newggslopegraph_theme")
+        clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -722,5 +720,13 @@ Public Class dlgLinePlot
         Else
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+
     End Sub
 End Class

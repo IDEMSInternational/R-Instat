@@ -52,13 +52,6 @@ Partial Class dlgLinePlot
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputFormula = New instat.ucrInputComboBox()
-        Me.ucrChkSpan = New instat.ucrCheck()
-        Me.ucrChkFormula = New instat.ucrCheck()
-        Me.ucrChkAddSE = New instat.ucrCheck()
-        Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.rdoSlope = New System.Windows.Forms.RadioButton()
         Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
         Me.lblXEnd = New System.Windows.Forms.Label()
@@ -82,11 +75,9 @@ Partial Class dlgLinePlot
         Me.ucrChkSlopeLegend = New instat.ucrCheck()
         Me.ucrNudSlopeLabelPadding = New instat.ucrNud()
         Me.ucrNudSlopeLineThickness = New instat.ucrNud()
-        Me.ucrChkSlopeLineOptions = New instat.ucrCheck()
         Me.ucrInputSlopeLineColour = New instat.ucrInputComboBox()
         Me.ucrInputSlopeTextColour = New instat.ucrInputComboBox()
         Me.ucrInputSlopeLabelColour = New instat.ucrInputComboBox()
-        Me.UcrNudSlopeYTextSize = New instat.ucrNud()
         Me.ucrNudSlopeTextSize = New instat.ucrNud()
         Me.ucrNudSlopeLabelSize = New instat.ucrNud()
         Me.ucrChkSlopeLabelOptions = New instat.ucrCheck()
@@ -101,6 +92,13 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellSize = New instat.ucrCheck()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
+        Me.ucrChkSpan = New instat.ucrCheck()
+        Me.ucrChkFormula = New instat.ucrCheck()
+        Me.ucrChkAddSE = New instat.ucrCheck()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -119,6 +117,8 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeColour = New instat.ucrReceiverSingle()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.ucrChkSlopeLineOptions = New instat.ucrCheck()
+        Me.UcrNudSlopeYTextSize = New instat.ucrNud()
         Me.grpSmoothOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -214,64 +214,12 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
         Me.grpSmoothOptions.Controls.Add(Me.ucrNudSpan)
         Me.grpSmoothOptions.Controls.Add(Me.lblFamily)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
         Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
         Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
         resources.ApplyResources(Me.grpSmoothOptions, "grpSmoothOptions")
         Me.grpSmoothOptions.Name = "grpSmoothOptions"
         Me.grpSmoothOptions.TabStop = False
-        '
-        'ucrInputFormula
-        '
-        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
-        Me.ucrInputFormula.GetSetSelectedIndex = -1
-        Me.ucrInputFormula.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
-        Me.ucrInputFormula.Name = "ucrInputFormula"
-        '
-        'ucrChkSpan
-        '
-        Me.ucrChkSpan.Checked = False
-        resources.ApplyResources(Me.ucrChkSpan, "ucrChkSpan")
-        Me.ucrChkSpan.Name = "ucrChkSpan"
-        '
-        'ucrChkFormula
-        '
-        Me.ucrChkFormula.Checked = False
-        resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
-        Me.ucrChkFormula.Name = "ucrChkFormula"
-        '
-        'ucrChkAddSE
-        '
-        Me.ucrChkAddSE.Checked = False
-        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        '
-        'ucrNudSpan
-        '
-        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSpan, "ucrNudSpan")
-        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Name = "ucrNudSpan"
-        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        '
-        'ucrFamilyInput
-        '
-        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
-        Me.ucrFamilyInput.GetSetSelectedIndex = -1
-        Me.ucrFamilyInput.IsReadOnly = False
-        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
-        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'rdoSlope
         '
@@ -417,12 +365,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeLineThickness.Name = "ucrNudSlopeLineThickness"
         Me.ucrNudSlopeLineThickness.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkSlopeLineOptions
-        '
-        Me.ucrChkSlopeLineOptions.Checked = False
-        resources.ApplyResources(Me.ucrChkSlopeLineOptions, "ucrChkSlopeLineOptions")
-        Me.ucrChkSlopeLineOptions.Name = "ucrChkSlopeLineOptions"
-        '
         'ucrInputSlopeLineColour
         '
         Me.ucrInputSlopeLineColour.AddQuotesIfUnrecognised = True
@@ -446,16 +388,6 @@ Partial Class dlgLinePlot
         Me.ucrInputSlopeLabelColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSlopeLabelColour, "ucrInputSlopeLabelColour")
         Me.ucrInputSlopeLabelColour.Name = "ucrInputSlopeLabelColour"
-        '
-        'UcrNudSlopeYTextSize
-        '
-        Me.UcrNudSlopeYTextSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudSlopeYTextSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNudSlopeYTextSize, "UcrNudSlopeYTextSize")
-        Me.UcrNudSlopeYTextSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudSlopeYTextSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudSlopeYTextSize.Name = "UcrNudSlopeYTextSize"
-        Me.UcrNudSlopeYTextSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSlopeTextSize
         '
@@ -572,6 +504,58 @@ Partial Class dlgLinePlot
         Me.ucrReceiverSlopeY.Selector = Nothing
         Me.ucrReceiverSlopeY.strNcFilePath = ""
         Me.ucrReceiverSlopeY.ucrSelector = Nothing
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        '
+        'ucrChkSpan
+        '
+        Me.ucrChkSpan.Checked = False
+        resources.ApplyResources(Me.ucrChkSpan, "ucrChkSpan")
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.Checked = False
+        resources.ApplyResources(Me.ucrChkFormula, "ucrChkFormula")
+        Me.ucrChkFormula.Name = "ucrChkFormula"
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.Checked = False
+        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSpan, "ucrNudSpan")
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'ucrChkAddLine
         '
@@ -698,6 +682,22 @@ Partial Class dlgLinePlot
         Me.ucrFactorOptionalReceiver.strNcFilePath = ""
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
+        'ucrChkSlopeLineOptions
+        '
+        Me.ucrChkSlopeLineOptions.Checked = False
+        resources.ApplyResources(Me.ucrChkSlopeLineOptions, "ucrChkSlopeLineOptions")
+        Me.ucrChkSlopeLineOptions.Name = "ucrChkSlopeLineOptions"
+        '
+        'UcrNudSlopeYTextSize
+        '
+        Me.UcrNudSlopeYTextSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNudSlopeYTextSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.UcrNudSlopeYTextSize, "UcrNudSlopeYTextSize")
+        Me.UcrNudSlopeYTextSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNudSlopeYTextSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNudSlopeYTextSize.Name = "UcrNudSlopeYTextSize"
+        Me.UcrNudSlopeYTextSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
@@ -707,21 +707,16 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblSlopeLineTicknes)
         Me.Controls.Add(Me.ucrNudSlopeLineThickness)
         Me.Controls.Add(Me.lblSlopeLineColour)
-        Me.Controls.Add(Me.ucrChkSlopeLineOptions)
         Me.Controls.Add(Me.lblSlopeLabelSize)
         Me.Controls.Add(Me.lblSlopeLabelPadding)
         Me.Controls.Add(Me.lblSopeTextColour)
         Me.Controls.Add(Me.lblSlopeTextSize)
-        Me.Controls.Add(Me.lblSlopeYTextSize)
         Me.Controls.Add(Me.lblSlopeLabelColour)
         Me.Controls.Add(Me.ucrInputSlopeLineColour)
         Me.Controls.Add(Me.ucrInputSlopeTextColour)
         Me.Controls.Add(Me.ucrInputSlopeLabelColour)
-        Me.Controls.Add(Me.UcrNudSlopeYTextSize)
         Me.Controls.Add(Me.ucrNudSlopeTextSize)
         Me.Controls.Add(Me.ucrNudSlopeLabelSize)
-        Me.Controls.Add(Me.ucrChkSlopeLabelOptions)
-        Me.Controls.Add(Me.ucrChkSlopeTextOptions)
         Me.Controls.Add(Me.lblXEndColour)
         Me.Controls.Add(Me.lblLineColour)
         Me.Controls.Add(Me.lblXSize)
@@ -734,7 +729,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrNudDumbbellLine)
         Me.Controls.Add(Me.ucrNudDumbbellXEnd)
         Me.Controls.Add(Me.ucrNudDumbbellX)
-        Me.Controls.Add(Me.ucrChkDumbbellColour)
         Me.Controls.Add(Me.ucrChkDumbbellSize)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.lblSlopeColour)
@@ -745,7 +739,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.rdoDumbbell)
         Me.Controls.Add(Me.grpSmoothOptions)
         Me.Controls.Add(Me.ucrChkAddLine)
-        Me.Controls.Add(Me.ucrChkAddPoints)
         Me.Controls.Add(Me.rdoSmoothing)
         Me.Controls.Add(Me.rdoLine)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -773,6 +766,13 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrReceiverSlopeColour)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.ucrChkSlopeLineOptions)
+        Me.Controls.Add(Me.UcrNudSlopeYTextSize)
+        Me.Controls.Add(Me.ucrChkDumbbellColour)
+        Me.Controls.Add(Me.ucrChkAddPoints)
+        Me.Controls.Add(Me.lblSlopeYTextSize)
+        Me.Controls.Add(Me.ucrChkSlopeLabelOptions)
+        Me.Controls.Add(Me.ucrChkSlopeTextOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

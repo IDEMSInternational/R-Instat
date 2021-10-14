@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>63</value>
+    <value>56</value>
   </data>
   <data name="lblAvailable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblAvailable.ZOrder" xml:space="preserve">
-    <value>64</value>
+    <value>57</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>59</value>
+    <value>52</value>
   </data>
   <data name="cmdLinePathStepSmoothOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -229,7 +229,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdLinePathStepSmoothOptions.ZOrder" xml:space="preserve">
-    <value>58</value>
+    <value>51</value>
   </data>
   <data name="lblFactorOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorOptional.ZOrder" xml:space="preserve">
-    <value>62</value>
+    <value>55</value>
   </data>
   <data name="lblGroupLine.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblGroupLine.ZOrder" xml:space="preserve">
-    <value>51</value>
+    <value>44</value>
   </data>
   <data name="rdoPath.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoPath.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>41</value>
   </data>
   <data name="rdoStep.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +349,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoStep.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>40</value>
   </data>
   <data name="rdoLine.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -385,7 +385,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoLine.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>38</value>
   </data>
   <data name="rdoSmoothing.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -421,7 +421,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSmoothing.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>37</value>
   </data>
   <data name="lblMethod.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -482,6 +482,1617 @@
   </data>
   <data name="&gt;&gt;lblFamily.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFormula.Name" xml:space="preserve">
+    <value>ucrInputFormula</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFormula.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFormula.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFormula.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpan.Name" xml:space="preserve">
+    <value>ucrChkSpan</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpan.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpan.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpan.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFormula.Name" xml:space="preserve">
+    <value>ucrChkFormula</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFormula.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFormula.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFormula.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddSE.Name" xml:space="preserve">
+    <value>ucrChkAddSE</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddSE.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddSE.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddSE.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSpan.Name" xml:space="preserve">
+    <value>ucrNudSpan</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSpan.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSpan.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSpan.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrFamilyInput.Name" xml:space="preserve">
+    <value>ucrFamilyInput</value>
+  </data>
+  <data name="&gt;&gt;ucrFamilyInput.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFamilyInput.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrFamilyInput.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMethod.Name" xml:space="preserve">
+    <value>ucrInputMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMethod.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMethod.Parent" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMethod.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpSmoothOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 360</value>
+  </data>
+  <data name="grpSmoothOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 77</value>
+  </data>
+  <data name="grpSmoothOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="grpSmoothOptions.Text" xml:space="preserve">
+    <value>Smooth Options</value>
+  </data>
+  <data name="&gt;&gt;grpSmoothOptions.Name" xml:space="preserve">
+    <value>grpSmoothOptions</value>
+  </data>
+  <data name="&gt;&gt;grpSmoothOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSmoothOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpSmoothOptions.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="rdoSlope.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoSlope.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoSlope.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSlope.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 15</value>
+  </data>
+  <data name="rdoSlope.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 28</value>
+  </data>
+  <data name="rdoSlope.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoSlope.Text" xml:space="preserve">
+    <value>Slope</value>
+  </data>
+  <data name="rdoSlope.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoSlope.Name" xml:space="preserve">
+    <value>rdoSlope</value>
+  </data>
+  <data name="&gt;&gt;rdoSlope.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSlope.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoSlope.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="rdoDumbbell.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDumbbell.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDumbbell.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDumbbell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 15</value>
+  </data>
+  <data name="rdoDumbbell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 28</value>
+  </data>
+  <data name="rdoDumbbell.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoDumbbell.Text" xml:space="preserve">
+    <value>Dumbbell</value>
+  </data>
+  <data name="rdoDumbbell.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoDumbbell.Name" xml:space="preserve">
+    <value>rdoDumbbell</value>
+  </data>
+  <data name="&gt;&gt;rdoDumbbell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDumbbell.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDumbbell.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="lblXEnd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXEnd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 275</value>
+  </data>
+  <data name="lblXEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblXEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblXEnd.Text" xml:space="preserve">
+    <value>X End Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblXEnd.Name" xml:space="preserve">
+    <value>lblXEnd</value>
+  </data>
+  <data name="&gt;&gt;lblXEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXEnd.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="lblSlopeY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 94</value>
+  </data>
+  <data name="lblSlopeY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblSlopeY.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblSlopeY.Text" xml:space="preserve">
+    <value>Y Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeY.Name" xml:space="preserve">
+    <value>lblSlopeY</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeY.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeY.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="lblSlopeX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 229</value>
+  </data>
+  <data name="lblSlopeX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblSlopeX.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblSlopeX.Text" xml:space="preserve">
+    <value>X Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeX.Name" xml:space="preserve">
+    <value>lblSlopeX</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeX.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="lblSlopeColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 273</value>
+  </data>
+  <data name="lblSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblSlopeColour.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="lblSlopeColour.Text" xml:space="preserve">
+    <value>Colour:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Name" xml:space="preserve">
+    <value>lblSlopeColour</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeColour.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="lblXColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 322</value>
+  </data>
+  <data name="lblXColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblXColour.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblXColour.Text" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="&gt;&gt;lblXColour.Name" xml:space="preserve">
+    <value>lblXColour</value>
+  </data>
+  <data name="&gt;&gt;lblXColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXColour.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="lblLineSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLineSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLineSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 358</value>
+  </data>
+  <data name="lblLineSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblLineSize.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="lblLineSize.Text" xml:space="preserve">
+    <value>Line:</value>
+  </data>
+  <data name="&gt;&gt;lblLineSize.Name" xml:space="preserve">
+    <value>lblLineSize</value>
+  </data>
+  <data name="&gt;&gt;lblLineSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLineSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLineSize.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="lblXEndSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXEndSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXEndSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>188, 355</value>
+  </data>
+  <data name="lblXEndSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblXEndSize.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="lblXEndSize.Text" xml:space="preserve">
+    <value>X End:</value>
+  </data>
+  <data name="&gt;&gt;lblXEndSize.Name" xml:space="preserve">
+    <value>lblXEndSize</value>
+  </data>
+  <data name="&gt;&gt;lblXEndSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXEndSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXEndSize.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="lblXSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 358</value>
+  </data>
+  <data name="lblXSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblXSize.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="lblXSize.Text" xml:space="preserve">
+    <value>X:</value>
+  </data>
+  <data name="&gt;&gt;lblXSize.Name" xml:space="preserve">
+    <value>lblXSize</value>
+  </data>
+  <data name="&gt;&gt;lblXSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXSize.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="lblLineColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLineColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLineColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 322</value>
+  </data>
+  <data name="lblLineColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblLineColour.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="lblLineColour.Text" xml:space="preserve">
+    <value>Line:</value>
+  </data>
+  <data name="&gt;&gt;lblLineColour.Name" xml:space="preserve">
+    <value>lblLineColour</value>
+  </data>
+  <data name="&gt;&gt;lblLineColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLineColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLineColour.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="lblXEndColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXEndColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXEndColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>189, 322</value>
+  </data>
+  <data name="lblXEndColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblXEndColour.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="lblXEndColour.Text" xml:space="preserve">
+    <value>X End:</value>
+  </data>
+  <data name="&gt;&gt;lblXEndColour.Name" xml:space="preserve">
+    <value>lblXEndColour</value>
+  </data>
+  <data name="&gt;&gt;lblXEndColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXEndColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXEndColour.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="lblSlopeLabelSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeLabelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeLabelSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 321</value>
+  </data>
+  <data name="lblSlopeLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblSlopeLabelSize.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="lblSlopeLabelSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelSize.Name" xml:space="preserve">
+    <value>lblSlopeLabelSize</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelSize.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblSlopeLabelPadding.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeLabelPadding.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeLabelPadding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 321</value>
+  </data>
+  <data name="lblSlopeLabelPadding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="lblSlopeLabelPadding.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="lblSlopeLabelPadding.Text" xml:space="preserve">
+    <value>Padding:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelPadding.Name" xml:space="preserve">
+    <value>lblSlopeLabelPadding</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelPadding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelPadding.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelPadding.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblSopeTextColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSopeTextColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSopeTextColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 352</value>
+  </data>
+  <data name="lblSopeTextColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblSopeTextColour.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="lblSopeTextColour.Text" xml:space="preserve">
+    <value>Colour:</value>
+  </data>
+  <data name="&gt;&gt;lblSopeTextColour.Name" xml:space="preserve">
+    <value>lblSopeTextColour</value>
+  </data>
+  <data name="&gt;&gt;lblSopeTextColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSopeTextColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSopeTextColour.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblSlopeTextSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeTextSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeTextSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 351</value>
+  </data>
+  <data name="lblSlopeTextSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblSlopeTextSize.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="lblSlopeTextSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeTextSize.Name" xml:space="preserve">
+    <value>lblSlopeTextSize</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeTextSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeTextSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeTextSize.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblSlopeYTextSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeYTextSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeYTextSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 354</value>
+  </data>
+  <data name="lblSlopeYTextSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblSlopeYTextSize.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="lblSlopeYTextSize.Text" xml:space="preserve">
+    <value>Y TextSize:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeYTextSize.Name" xml:space="preserve">
+    <value>lblSlopeYTextSize</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeYTextSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeYTextSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeYTextSize.ZOrder" xml:space="preserve">
+    <value>68</value>
+  </data>
+  <data name="lblSlopeLabelColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeLabelColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeLabelColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 324</value>
+  </data>
+  <data name="lblSlopeLabelColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblSlopeLabelColour.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="lblSlopeLabelColour.Text" xml:space="preserve">
+    <value>Colour:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelColour.Name" xml:space="preserve">
+    <value>lblSlopeLabelColour</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLabelColour.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblSlopeLineColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeLineColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeLineColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 380</value>
+  </data>
+  <data name="lblSlopeLineColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblSlopeLineColour.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="lblSlopeLineColour.Text" xml:space="preserve">
+    <value>Colour:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineColour.Name" xml:space="preserve">
+    <value>lblSlopeLineColour</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineColour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineColour.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblSlopeLineTicknes.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSlopeLineTicknes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSlopeLineTicknes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 381</value>
+  </data>
+  <data name="lblSlopeLineTicknes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblSlopeLineTicknes.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="lblSlopeLineTicknes.Text" xml:space="preserve">
+    <value>Thicknes:</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineTicknes.Name" xml:space="preserve">
+    <value>lblSlopeLineTicknes</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineTicknes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineTicknes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSlopeLineTicknes.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkSlopeLegend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 292</value>
+  </data>
+  <data name="ucrChkSlopeLegend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkSlopeLegend.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLegend.Name" xml:space="preserve">
+    <value>ucrChkSlopeLegend</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLegend.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLegend.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLegend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudSlopeLabelPadding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 319</value>
+  </data>
+  <data name="ucrNudSlopeLabelPadding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSlopeLabelPadding.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Name" xml:space="preserve">
+    <value>ucrNudSlopeLabelPadding</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelPadding.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudSlopeLineThickness.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 381</value>
+  </data>
+  <data name="ucrNudSlopeLineThickness.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="ucrNudSlopeLineThickness.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLineThickness.Name" xml:space="preserve">
+    <value>ucrNudSlopeLineThickness</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLineThickness.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLineThickness.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLineThickness.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputSlopeLineColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 377</value>
+  </data>
+  <data name="ucrInputSlopeLineColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="ucrInputSlopeLineColour.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLineColour.Name" xml:space="preserve">
+    <value>ucrInputSlopeLineColour</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLineColour.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLineColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLineColour.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrInputSlopeTextColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 348</value>
+  </data>
+  <data name="ucrInputSlopeTextColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="ucrInputSlopeTextColour.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeTextColour.Name" xml:space="preserve">
+    <value>ucrInputSlopeTextColour</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeTextColour.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeTextColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeTextColour.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrInputSlopeLabelColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 319</value>
+  </data>
+  <data name="ucrInputSlopeLabelColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="ucrInputSlopeLabelColour.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLabelColour.Name" xml:space="preserve">
+    <value>ucrInputSlopeLabelColour</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLabelColour.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLabelColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSlopeLabelColour.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrNudSlopeTextSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 350</value>
+  </data>
+  <data name="ucrNudSlopeTextSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="ucrNudSlopeTextSize.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeTextSize.Name" xml:space="preserve">
+    <value>ucrNudSlopeTextSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeTextSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeTextSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeTextSize.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrNudSlopeLabelSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 319</value>
+  </data>
+  <data name="ucrNudSlopeLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="ucrNudSlopeLabelSize.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelSize.Name" xml:space="preserve">
+    <value>ucrNudSlopeLabelSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSlopeLabelSize.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrChkSlopeLabelOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 322</value>
+  </data>
+  <data name="ucrChkSlopeLabelOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkSlopeLabelOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Name" xml:space="preserve">
+    <value>ucrChkSlopeLabelOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLabelOptions.ZOrder" xml:space="preserve">
+    <value>69</value>
+  </data>
+  <data name="ucrChkSlopeTextOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 352</value>
+  </data>
+  <data name="ucrChkSlopeTextOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkSlopeTextOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeTextOptions.Name" xml:space="preserve">
+    <value>ucrChkSlopeTextOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeTextOptions.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeTextOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeTextOptions.ZOrder" xml:space="preserve">
+    <value>70</value>
+  </data>
+  <data name="ucrInputDumbbellLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 318</value>
+  </data>
+  <data name="ucrInputDumbbellLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 21</value>
+  </data>
+  <data name="ucrInputDumbbellLine.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellLine.Name" xml:space="preserve">
+    <value>ucrInputDumbbellLine</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellLine.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellLine.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="ucrInputDumbbellXEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 318</value>
+  </data>
+  <data name="ucrInputDumbbellXEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 21</value>
+  </data>
+  <data name="ucrInputDumbbellXEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellXEnd.Name" xml:space="preserve">
+    <value>ucrInputDumbbellXEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellXEnd.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellXEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellXEnd.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="ucrInputDumbbellX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 320</value>
+  </data>
+  <data name="ucrInputDumbbellX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="ucrInputDumbbellX.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellX.Name" xml:space="preserve">
+    <value>ucrInputDumbbellX</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellX.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDumbbellX.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="ucrNudDumbbellLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 350</value>
+  </data>
+  <data name="ucrNudDumbbellLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudDumbbellLine.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellLine.Name" xml:space="preserve">
+    <value>ucrNudDumbbellLine</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellLine.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellLine.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="ucrNudDumbbellXEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 351</value>
+  </data>
+  <data name="ucrNudDumbbellXEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="ucrNudDumbbellXEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellXEnd.Name" xml:space="preserve">
+    <value>ucrNudDumbbellXEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellXEnd.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellXEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellXEnd.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="ucrNudDumbbellX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 351</value>
+  </data>
+  <data name="ucrNudDumbbellX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="ucrNudDumbbellX.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellX.Name" xml:space="preserve">
+    <value>ucrNudDumbbellX</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellX.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDumbbellX.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="ucrChkDumbbellColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 322</value>
+  </data>
+  <data name="ucrChkDumbbellColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkDumbbellColour.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellColour.Name" xml:space="preserve">
+    <value>ucrChkDumbbellColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellColour.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellColour.ZOrder" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="ucrChkDumbbellSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 353</value>
+  </data>
+  <data name="ucrChkDumbbellSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkDumbbellSize.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellSize.Name" xml:space="preserve">
+    <value>ucrChkDumbbellSize</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellSize.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDumbbellSize.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>423, 523</value>
+  </data>
+  <data name="ucrReceiverSlopeY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 107</value>
+  </data>
+  <data name="ucrReceiverSlopeY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSlopeY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrReceiverSlopeY.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeY.Name" xml:space="preserve">
+    <value>ucrReceiverSlopeY</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeY.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeY.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeY.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="ucrChkAddLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 337</value>
+  </data>
+  <data name="ucrChkAddLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 24</value>
+  </data>
+  <data name="ucrChkAddLine.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLine.Name" xml:space="preserve">
+    <value>ucrChkAddLine</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLine.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLine.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 7</value>
+  </data>
+  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>363, 44</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="ucrPnlStepOrPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 411</value>
+  </data>
+  <data name="ucrPnlStepOrPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 29</value>
+  </data>
+  <data name="ucrPnlStepOrPath.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStepOrPath.Name" xml:space="preserve">
+    <value>ucrPnlStepOrPath</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStepOrPath.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStepOrPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStepOrPath.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="ucrChkPathOrStep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 415</value>
+  </data>
+  <data name="ucrChkPathOrStep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkPathOrStep.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPathOrStep.Name" xml:space="preserve">
+    <value>ucrChkPathOrStep</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPathOrStep.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPathOrStep.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPathOrStep.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="ucrChkValley.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 385</value>
+  </data>
+  <data name="ucrChkValley.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
+    <value>ucrChkValley</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValley.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValley.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValley.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="ucrChkPeak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 389</value>
+  </data>
+  <data name="ucrChkPeak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 20</value>
+  </data>
+  <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
+    <value>ucrChkPeak</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPeak.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPeak.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPeak.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 367</value>
+  </data>
+  <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
+  </data>
+  <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
+    <value>ucrChkWithSE</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 363</value>
+  </data>
+  <data name="ucrChkLineofBestFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 24</value>
+  </data>
+  <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
+    <value>ucrChkLineofBestFit</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineofBestFit.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineofBestFit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 442</value>
+  </data>
+  <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 24</value>
+  </data>
+  <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
+    <value>ucrSave</value>
+  </data>
+  <data name="&gt;&gt;ucrSave.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSave.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="ucrVariablesAsFactorForLinePlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 79</value>
+  </data>
+  <data name="ucrVariablesAsFactorForLinePlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 136</value>
+  </data>
+  <data name="ucrVariablesAsFactorForLinePlot.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Name" xml:space="preserve">
+    <value>ucrVariablesAsFactorForLinePlot</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Type" xml:space="preserve">
+    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.ZOrder" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="ucrLinePlotSelector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 59</value>
+  </data>
+  <data name="ucrLinePlotSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrLinePlotSelector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 195</value>
+  </data>
+  <data name="ucrLinePlotSelector.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrLinePlotSelector.Name" xml:space="preserve">
+    <value>ucrLinePlotSelector</value>
+  </data>
+  <data name="&gt;&gt;ucrLinePlotSelector.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLinePlotSelector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
+    <value>53</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 467</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 53</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="ucrReceiverXEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 288</value>
+  </data>
+  <data name="ucrReceiverXEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverXEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="ucrReceiverXEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverXEnd.Name" xml:space="preserve">
+    <value>ucrReceiverXEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverXEnd.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverXEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverXEnd.ZOrder" xml:space="preserve">
+    <value>59</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 242</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSlopeX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 26</value>
+  </data>
+  <data name="ucrReceiverSlopeX.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Name" xml:space="preserve">
+    <value>ucrReceiverSlopeX</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeX.ZOrder" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 242</value>
+  </data>
+  <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
+    <value>ucrReceiverX</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
+    <value>61</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 288</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrReceiverSlopeColour.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Name" xml:space="preserve">
+    <value>ucrReceiverSlopeColour</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSlopeColour.ZOrder" xml:space="preserve">
+    <value>62</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 288</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
+    <value>ucrFactorOptionalReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
+    <value>63</value>
+  </data>
+  <data name="ucrChkSlopeLineOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 382</value>
+  </data>
+  <data name="ucrChkSlopeLineOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkSlopeLineOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLineOptions.Name" xml:space="preserve">
+    <value>ucrChkSlopeLineOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLineOptions.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLineOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSlopeLineOptions.ZOrder" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="UcrNudSlopeYTextSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 350</value>
+  </data>
+  <data name="UcrNudSlopeYTextSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="UcrNudSlopeYTextSize.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="&gt;&gt;UcrNudSlopeYTextSize.Name" xml:space="preserve">
+    <value>UcrNudSlopeYTextSize</value>
+  </data>
+  <data name="&gt;&gt;UcrNudSlopeYTextSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrNudSlopeYTextSize.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrNudSlopeYTextSize.ZOrder" xml:space="preserve">
+    <value>65</value>
+  </data>
+  <data name="ucrChkAddPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 337</value>
+  </data>
+  <data name="ucrChkAddPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ucrChkAddPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPoints.Name" xml:space="preserve">
+    <value>ucrChkAddPoints</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPoints.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPoints.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPoints.ZOrder" xml:space="preserve">
+    <value>67</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgLinePlot</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 327</value>
+  </data>
+  <data name="ucrReceiverGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
+    <value>ucrReceiverGroup</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
+    <value>28</value>
   </data>
   <data name="ucrInputFormula.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 46</value>
@@ -589,7 +2200,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 19</value>
+    <value>52, 20</value>
   </data>
   <data name="ucrInputMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 21</value>
@@ -607,7 +2218,7 @@
     <value>grpSmoothOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputMethod.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrFamilyInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 20</value>
@@ -628,1530 +2239,6 @@
     <value>grpSmoothOptions</value>
   </data>
   <data name="&gt;&gt;ucrFamilyInput.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grpSmoothOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 360</value>
-  </data>
-  <data name="grpSmoothOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 77</value>
-  </data>
-  <data name="grpSmoothOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="grpSmoothOptions.Text" xml:space="preserve">
-    <value>Smooth Options</value>
-  </data>
-  <data name="&gt;&gt;grpSmoothOptions.Name" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;grpSmoothOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSmoothOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSmoothOptions.ZOrder" xml:space="preserve">
-    <value>41</value>
-  </data>
-  <data name="rdoSlope.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoSlope.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoSlope.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoSlope.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 15</value>
-  </data>
-  <data name="rdoSlope.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 28</value>
-  </data>
-  <data name="rdoSlope.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="rdoSlope.Text" xml:space="preserve">
-    <value>Slope</value>
-  </data>
-  <data name="rdoSlope.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoSlope.Name" xml:space="preserve">
-    <value>rdoSlope</value>
-  </data>
-  <data name="&gt;&gt;rdoSlope.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSlope.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoSlope.ZOrder" xml:space="preserve">
-    <value>39</value>
-  </data>
-  <data name="rdoDumbbell.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoDumbbell.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoDumbbell.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoDumbbell.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 15</value>
-  </data>
-  <data name="rdoDumbbell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 28</value>
-  </data>
-  <data name="rdoDumbbell.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="rdoDumbbell.Text" xml:space="preserve">
-    <value>Dumbbell</value>
-  </data>
-  <data name="rdoDumbbell.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoDumbbell.Name" xml:space="preserve">
-    <value>rdoDumbbell</value>
-  </data>
-  <data name="&gt;&gt;rdoDumbbell.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoDumbbell.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoDumbbell.ZOrder" xml:space="preserve">
-    <value>40</value>
-  </data>
-  <data name="lblXEnd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblXEnd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblXEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 275</value>
-  </data>
-  <data name="lblXEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
-  </data>
-  <data name="lblXEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="lblXEnd.Text" xml:space="preserve">
-    <value>X End Variable:</value>
-  </data>
-  <data name="&gt;&gt;lblXEnd.Name" xml:space="preserve">
-    <value>lblXEnd</value>
-  </data>
-  <data name="&gt;&gt;lblXEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblXEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblXEnd.ZOrder" xml:space="preserve">
-    <value>65</value>
-  </data>
-  <data name="lblSlopeY.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 94</value>
-  </data>
-  <data name="lblSlopeY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="lblSlopeY.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblSlopeY.Text" xml:space="preserve">
-    <value>Y Variable:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeY.Name" xml:space="preserve">
-    <value>lblSlopeY</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeY.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeY.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeY.ZOrder" xml:space="preserve">
-    <value>38</value>
-  </data>
-  <data name="lblSlopeX.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 229</value>
-  </data>
-  <data name="lblSlopeX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="lblSlopeX.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="lblSlopeX.Text" xml:space="preserve">
-    <value>X Variable:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeX.Name" xml:space="preserve">
-    <value>lblSlopeX</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeX.ZOrder" xml:space="preserve">
-    <value>36</value>
-  </data>
-  <data name="lblSlopeColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 273</value>
-  </data>
-  <data name="lblSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblSlopeColour.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="lblSlopeColour.Text" xml:space="preserve">
-    <value>Colour:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeColour.Name" xml:space="preserve">
-    <value>lblSlopeColour</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeColour.ZOrder" xml:space="preserve">
-    <value>35</value>
-  </data>
-  <data name="lblXColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblXColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblXColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 322</value>
-  </data>
-  <data name="lblXColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 13</value>
-  </data>
-  <data name="lblXColour.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblXColour.Text" xml:space="preserve">
-    <value>X:</value>
-  </data>
-  <data name="&gt;&gt;lblXColour.Name" xml:space="preserve">
-    <value>lblXColour</value>
-  </data>
-  <data name="&gt;&gt;lblXColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblXColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblXColour.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="lblLineSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLineSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLineSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 358</value>
-  </data>
-  <data name="lblLineSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblLineSize.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="lblLineSize.Text" xml:space="preserve">
-    <value>Line:</value>
-  </data>
-  <data name="&gt;&gt;lblLineSize.Name" xml:space="preserve">
-    <value>lblLineSize</value>
-  </data>
-  <data name="&gt;&gt;lblLineSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLineSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLineSize.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="lblXEndSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblXEndSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblXEndSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 358</value>
-  </data>
-  <data name="lblXEndSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
-  <data name="lblXEndSize.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="lblXEndSize.Text" xml:space="preserve">
-    <value>X End:</value>
-  </data>
-  <data name="&gt;&gt;lblXEndSize.Name" xml:space="preserve">
-    <value>lblXEndSize</value>
-  </data>
-  <data name="&gt;&gt;lblXEndSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblXEndSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblXEndSize.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="lblXSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblXSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblXSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 358</value>
-  </data>
-  <data name="lblXSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 13</value>
-  </data>
-  <data name="lblXSize.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="lblXSize.Text" xml:space="preserve">
-    <value>X:</value>
-  </data>
-  <data name="&gt;&gt;lblXSize.Name" xml:space="preserve">
-    <value>lblXSize</value>
-  </data>
-  <data name="&gt;&gt;lblXSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblXSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblXSize.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="lblLineColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLineColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLineColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 322</value>
-  </data>
-  <data name="lblLineColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblLineColour.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="lblLineColour.Text" xml:space="preserve">
-    <value>Line:</value>
-  </data>
-  <data name="&gt;&gt;lblLineColour.Name" xml:space="preserve">
-    <value>lblLineColour</value>
-  </data>
-  <data name="&gt;&gt;lblLineColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLineColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLineColour.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="lblXEndColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblXEndColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblXEndColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 322</value>
-  </data>
-  <data name="lblXEndColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
-  <data name="lblXEndColour.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="lblXEndColour.Text" xml:space="preserve">
-    <value>X End:</value>
-  </data>
-  <data name="&gt;&gt;lblXEndColour.Name" xml:space="preserve">
-    <value>lblXEndColour</value>
-  </data>
-  <data name="&gt;&gt;lblXEndColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblXEndColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblXEndColour.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="lblSlopeLabelSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeLabelSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 321</value>
-  </data>
-  <data name="lblSlopeLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblSlopeLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="lblSlopeLabelSize.Text" xml:space="preserve">
-    <value>Size:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelSize.Name" xml:space="preserve">
-    <value>lblSlopeLabelSize</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelSize.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="lblSlopeLabelPadding.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeLabelPadding.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeLabelPadding.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 321</value>
-  </data>
-  <data name="lblSlopeLabelPadding.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
-  </data>
-  <data name="lblSlopeLabelPadding.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="lblSlopeLabelPadding.Text" xml:space="preserve">
-    <value>Padding:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelPadding.Name" xml:space="preserve">
-    <value>lblSlopeLabelPadding</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelPadding.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelPadding.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelPadding.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblSopeTextColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSopeTextColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSopeTextColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 355</value>
-  </data>
-  <data name="lblSopeTextColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblSopeTextColour.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="lblSopeTextColour.Text" xml:space="preserve">
-    <value>Colour:</value>
-  </data>
-  <data name="&gt;&gt;lblSopeTextColour.Name" xml:space="preserve">
-    <value>lblSopeTextColour</value>
-  </data>
-  <data name="&gt;&gt;lblSopeTextColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSopeTextColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSopeTextColour.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="lblSlopeTextSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeTextSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 355</value>
-  </data>
-  <data name="lblSlopeTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblSlopeTextSize.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="lblSlopeTextSize.Text" xml:space="preserve">
-    <value>Size:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeTextSize.Name" xml:space="preserve">
-    <value>lblSlopeTextSize</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeTextSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeTextSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeTextSize.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="lblSlopeYTextSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeYTextSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeYTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 354</value>
-  </data>
-  <data name="lblSlopeYTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="lblSlopeYTextSize.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="lblSlopeYTextSize.Text" xml:space="preserve">
-    <value>Y TextSize:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeYTextSize.Name" xml:space="preserve">
-    <value>lblSlopeYTextSize</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeYTextSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeYTextSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeYTextSize.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="lblSlopeLabelColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeLabelColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 321</value>
-  </data>
-  <data name="lblSlopeLabelColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblSlopeLabelColour.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="lblSlopeLabelColour.Text" xml:space="preserve">
-    <value>Colour:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelColour.Name" xml:space="preserve">
-    <value>lblSlopeLabelColour</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLabelColour.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="lblSlopeLineColour.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeLineColour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeLineColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 381</value>
-  </data>
-  <data name="lblSlopeLineColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblSlopeLineColour.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
-  <data name="lblSlopeLineColour.Text" xml:space="preserve">
-    <value>Colour:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineColour.Name" xml:space="preserve">
-    <value>lblSlopeLineColour</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineColour.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblSlopeLineTicknes.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSlopeLineTicknes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSlopeLineTicknes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 382</value>
-  </data>
-  <data name="lblSlopeLineTicknes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="lblSlopeLineTicknes.TabIndex" type="System.Int32, mscorlib">
-    <value>72</value>
-  </data>
-  <data name="lblSlopeLineTicknes.Text" xml:space="preserve">
-    <value>Thicknes:</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineTicknes.Name" xml:space="preserve">
-    <value>lblSlopeLineTicknes</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineTicknes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineTicknes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSlopeLineTicknes.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkSlopeLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 291</value>
-  </data>
-  <data name="ucrChkSlopeLegend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkSlopeLegend.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLegend.Name" xml:space="preserve">
-    <value>ucrChkSlopeLegend</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLegend.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLegend.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLegend.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrNudSlopeLabelPadding.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 319</value>
-  </data>
-  <data name="ucrNudSlopeLabelPadding.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSlopeLabelPadding.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Name" xml:space="preserve">
-    <value>ucrNudSlopeLabelPadding</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelPadding.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelPadding.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrNudSlopeLineThickness.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 378</value>
-  </data>
-  <data name="ucrNudSlopeLineThickness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="ucrNudSlopeLineThickness.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLineThickness.Name" xml:space="preserve">
-    <value>ucrNudSlopeLineThickness</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLineThickness.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLineThickness.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLineThickness.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrChkSlopeLineOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 382</value>
-  </data>
-  <data name="ucrChkSlopeLineOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkSlopeLineOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLineOptions.Name" xml:space="preserve">
-    <value>ucrChkSlopeLineOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLineOptions.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLineOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLineOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrInputSlopeLineColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 377</value>
-  </data>
-  <data name="ucrInputSlopeLineColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
-  </data>
-  <data name="ucrInputSlopeLineColour.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLineColour.Name" xml:space="preserve">
-    <value>ucrInputSlopeLineColour</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLineColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLineColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLineColour.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrInputSlopeTextColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 350</value>
-  </data>
-  <data name="ucrInputSlopeTextColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
-  </data>
-  <data name="ucrInputSlopeTextColour.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeTextColour.Name" xml:space="preserve">
-    <value>ucrInputSlopeTextColour</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeTextColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeTextColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeTextColour.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="ucrInputSlopeLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 317</value>
-  </data>
-  <data name="ucrInputSlopeLabelColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
-  </data>
-  <data name="ucrInputSlopeLabelColour.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLabelColour.Name" xml:space="preserve">
-    <value>ucrInputSlopeLabelColour</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLabelColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLabelColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSlopeLabelColour.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="UcrNudSlopeYTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 350</value>
-  </data>
-  <data name="UcrNudSlopeYTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="UcrNudSlopeYTextSize.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSlopeYTextSize.Name" xml:space="preserve">
-    <value>UcrNudSlopeYTextSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSlopeYTextSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSlopeYTextSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSlopeYTextSize.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="ucrNudSlopeTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 351</value>
-  </data>
-  <data name="ucrNudSlopeTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
-  </data>
-  <data name="ucrNudSlopeTextSize.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeTextSize.Name" xml:space="preserve">
-    <value>ucrNudSlopeTextSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeTextSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeTextSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeTextSize.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="ucrNudSlopeLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 319</value>
-  </data>
-  <data name="ucrNudSlopeLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 20</value>
-  </data>
-  <data name="ucrNudSlopeLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelSize.Name" xml:space="preserve">
-    <value>ucrNudSlopeLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSlopeLabelSize.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="ucrChkSlopeLabelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 318</value>
-  </data>
-  <data name="ucrChkSlopeLabelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkSlopeLabelOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Name" xml:space="preserve">
-    <value>ucrChkSlopeLabelOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLabelOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeLabelOptions.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="ucrChkSlopeTextOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 352</value>
-  </data>
-  <data name="ucrChkSlopeTextOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkSlopeTextOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeTextOptions.Name" xml:space="preserve">
-    <value>ucrChkSlopeTextOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeTextOptions.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeTextOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSlopeTextOptions.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="ucrInputDumbbellLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 318</value>
-  </data>
-  <data name="ucrInputDumbbellLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 21</value>
-  </data>
-  <data name="ucrInputDumbbellLine.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellLine.Name" xml:space="preserve">
-    <value>ucrInputDumbbellLine</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellLine.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellLine.ZOrder" xml:space="preserve">
-    <value>26</value>
-  </data>
-  <data name="ucrInputDumbbellXEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 318</value>
-  </data>
-  <data name="ucrInputDumbbellXEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 21</value>
-  </data>
-  <data name="ucrInputDumbbellXEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellXEnd.Name" xml:space="preserve">
-    <value>ucrInputDumbbellXEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellXEnd.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellXEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellXEnd.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <data name="ucrInputDumbbellX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 318</value>
-  </data>
-  <data name="ucrInputDumbbellX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
-  </data>
-  <data name="ucrInputDumbbellX.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellX.Name" xml:space="preserve">
-    <value>ucrInputDumbbellX</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellX.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDumbbellX.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
-  <data name="ucrNudDumbbellLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 354</value>
-  </data>
-  <data name="ucrNudDumbbellLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudDumbbellLine.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellLine.Name" xml:space="preserve">
-    <value>ucrNudDumbbellLine</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellLine.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellLine.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
-  <data name="ucrNudDumbbellXEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 354</value>
-  </data>
-  <data name="ucrNudDumbbellXEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="ucrNudDumbbellXEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellXEnd.Name" xml:space="preserve">
-    <value>ucrNudDumbbellXEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellXEnd.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellXEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellXEnd.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="ucrNudDumbbellX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 354</value>
-  </data>
-  <data name="ucrNudDumbbellX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 20</value>
-  </data>
-  <data name="ucrNudDumbbellX.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellX.Name" xml:space="preserve">
-    <value>ucrNudDumbbellX</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellX.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDumbbellX.ZOrder" xml:space="preserve">
-    <value>31</value>
-  </data>
-  <data name="ucrChkDumbbellColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 319</value>
-  </data>
-  <data name="ucrChkDumbbellColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkDumbbellColour.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellColour.Name" xml:space="preserve">
-    <value>ucrChkDumbbellColour</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellColour.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellColour.ZOrder" xml:space="preserve">
-    <value>32</value>
-  </data>
-  <data name="ucrChkDumbbellSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 355</value>
-  </data>
-  <data name="ucrChkDumbbellSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkDumbbellSize.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellSize.Name" xml:space="preserve">
-    <value>ucrChkDumbbellSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellSize.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDumbbellSize.ZOrder" xml:space="preserve">
-    <value>33</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>423, 523</value>
-  </data>
-  <data name="ucrReceiverSlopeY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 107</value>
-  </data>
-  <data name="ucrReceiverSlopeY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverSlopeY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrReceiverSlopeY.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Name" xml:space="preserve">
-    <value>ucrReceiverSlopeY</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeY.ZOrder" xml:space="preserve">
-    <value>37</value>
-  </data>
-  <data name="ucrChkAddLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 337</value>
-  </data>
-  <data name="ucrChkAddLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 24</value>
-  </data>
-  <data name="ucrChkAddLine.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Name" xml:space="preserve">
-    <value>ucrChkAddLine</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLine.ZOrder" xml:space="preserve">
-    <value>42</value>
-  </data>
-  <data name="ucrChkAddPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 337</value>
-  </data>
-  <data name="ucrChkAddPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ucrChkAddPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Name" xml:space="preserve">
-    <value>ucrChkAddPoints</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPoints.ZOrder" xml:space="preserve">
-    <value>43</value>
-  </data>
-  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 7</value>
-  </data>
-  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 44</value>
-  </data>
-  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
-    <value>ucrPnlOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>46</value>
-  </data>
-  <data name="ucrPnlStepOrPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 411</value>
-  </data>
-  <data name="ucrPnlStepOrPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 29</value>
-  </data>
-  <data name="ucrPnlStepOrPath.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Name" xml:space="preserve">
-    <value>ucrPnlStepOrPath</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStepOrPath.ZOrder" xml:space="preserve">
-    <value>49</value>
-  </data>
-  <data name="ucrChkPathOrStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 415</value>
-  </data>
-  <data name="ucrChkPathOrStep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkPathOrStep.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Name" xml:space="preserve">
-    <value>ucrChkPathOrStep</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPathOrStep.ZOrder" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="ucrChkValley.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 385</value>
-  </data>
-  <data name="ucrChkValley.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
-    <value>ucrChkValley</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkValley.ZOrder" xml:space="preserve">
-    <value>52</value>
-  </data>
-  <data name="ucrChkPeak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 389</value>
-  </data>
-  <data name="ucrChkPeak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 20</value>
-  </data>
-  <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
-    <value>ucrChkPeak</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPeak.ZOrder" xml:space="preserve">
-    <value>53</value>
-  </data>
-  <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 367</value>
-  </data>
-  <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
-  </data>
-  <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
-    <value>ucrChkWithSE</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
-    <value>54</value>
-  </data>
-  <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 363</value>
-  </data>
-  <data name="ucrChkLineofBestFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 24</value>
-  </data>
-  <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
-    <value>ucrChkLineofBestFit</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
-    <value>55</value>
-  </data>
-  <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 442</value>
-  </data>
-  <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 24</value>
-  </data>
-  <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
-    <value>ucrSave</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
-    <value>56</value>
-  </data>
-  <data name="ucrVariablesAsFactorForLinePlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 79</value>
-  </data>
-  <data name="ucrVariablesAsFactorForLinePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 136</value>
-  </data>
-  <data name="ucrVariablesAsFactorForLinePlot.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Name" xml:space="preserve">
-    <value>ucrVariablesAsFactorForLinePlot</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Type" xml:space="preserve">
-    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.ZOrder" xml:space="preserve">
-    <value>57</value>
-  </data>
-  <data name="ucrLinePlotSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 59</value>
-  </data>
-  <data name="ucrLinePlotSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrLinePlotSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 195</value>
-  </data>
-  <data name="ucrLinePlotSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Name" xml:space="preserve">
-    <value>ucrLinePlotSelector</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
-    <value>60</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 467</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 53</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>61</value>
-  </data>
-  <data name="ucrReceiverXEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 288</value>
-  </data>
-  <data name="ucrReceiverXEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverXEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 20</value>
-  </data>
-  <data name="ucrReceiverXEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Name" xml:space="preserve">
-    <value>ucrReceiverXEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverXEnd.ZOrder" xml:space="preserve">
-    <value>66</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 242</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverSlopeX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 26</value>
-  </data>
-  <data name="ucrReceiverSlopeX.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Name" xml:space="preserve">
-    <value>ucrReceiverSlopeX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeX.ZOrder" xml:space="preserve">
-    <value>67</value>
-  </data>
-  <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 242</value>
-  </data>
-  <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
-    <value>ucrReceiverX</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>68</value>
-  </data>
-  <data name="ucrReceiverSlopeColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 288</value>
-  </data>
-  <data name="ucrReceiverSlopeColour.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverSlopeColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrReceiverSlopeColour.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeColour.Name" xml:space="preserve">
-    <value>ucrReceiverSlopeColour</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeColour.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeColour.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSlopeColour.ZOrder" xml:space="preserve">
-    <value>69</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 288</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
-  </data>
-  <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
-    <value>ucrFactorOptionalReceiver</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
-    <value>70</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Line</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgLinePlot</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 327</value>
-  </data>
-  <data name="ucrReceiverGroup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
-  </data>
-  <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
-    <value>ucrReceiverGroup</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
-    <value>34</value>
   </data>
 </root>

@@ -2361,7 +2361,7 @@ record_graph <- function(x) {
   return(y)
 }
 # this is a "theme" essentially. So we can create it as a theme and add that
-newggslopegraph_theme <- function(x_text_size = 12){
+slopegraph_theme <- function(x_text_size = 12){
   list(scale_x_discrete(position = "top"), 
                   ggplot2::theme(legend.position = "none"),
                   ggplot2::theme(axis.text.y = ggplot2::element_blank()),
@@ -2376,7 +2376,7 @@ newggslopegraph_theme <- function(x_text_size = 12){
 
 
 # slightly amended the "newggslopegraph" function in the CGPfunctions package
-newggslopegraph_amended <- function(data, x, y, colour, data_label = NULL, 
+slopegraph <- function(data, x, y, colour, data_label = NULL, 
           y_text_size = 3, 
           line_thickness = 1, line_colour = "ByGroup", 
           data_text_size = 2.5, data_text_colour = "black", data_label_padding = 0.05, 
