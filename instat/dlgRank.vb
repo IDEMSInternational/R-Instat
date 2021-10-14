@@ -28,6 +28,7 @@ Public Class dlgRank
     Private clsDiffFunction As New RFunction
     Private clsListFunction As New RFunction
     Private clsScaleFunction As New RFunction
+    Private clsReplicateFunction As New RFunction
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -104,10 +105,12 @@ Public Class dlgRank
         ucrNudSignifDigits.SetParameter(New RParameter("digits", 1))
         ucrNudSignifDigits.SetMinMax(iNewMin:=0, iNewMax:=22)
         ucrNudSignifDigits.Increment = 1
+        ucrNudSignifDigits.SetRDefault(4)
 
         ucrNudRoundOfDigits.SetParameter(New RParameter("digits", 1))
         ucrNudRoundOfDigits.Increment = 1
         ucrNudRoundOfDigits.SetMinMax(iNewMax:=Integer.MaxValue)
+        ucrNudRoundOfDigits.SetRDefault(0)
 
         ucrNudLagLeadPosition.SetParameter(New RParameter("n", 1))
         ucrNudLagLeadPosition.SetMinMax(iNewMin:=1)
@@ -155,6 +158,7 @@ Public Class dlgRank
         clsDiffFunction = New RFunction
         clsListFunction = New RFunction
         clsScaleFunction = New RFunction
+        clsReplicateFunction = New RFunction
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -172,7 +176,7 @@ Public Class dlgRank
         clsRoundFunction.AddParameter("digits", "0", iPosition:=1)
 
         clsSignifFunction.SetRCommand("signif")
-        clsSignifFunction.AddParameter("digits", "3", iPosition:=1)
+        clsSignifFunction.AddParameter("digits", "4", iPosition:=1)
 
         clsLagFunction.SetPackageName("dplyr")
         clsLagFunction.SetRCommand("lag")
@@ -183,8 +187,12 @@ Public Class dlgRank
         clsDiffFunction.SetRCommand("diff")
         clsDiffFunction.AddParameter("lag", "1", iPosition:=1)
 
+        clsReplicateFunction.SetRCommand("rep")
+        clsReplicateFunction.AddParameter("NA", "NA", iPosition:=0, bIncludeArgumentName:=False)
+        clsReplicateFunction.AddParameter("times", iPosition:=1, bIncludeArgumentName:=False)
+
         clsListFunction.SetRCommand("c")
-        clsListFunction.AddParameter("NA", "NA", iPosition:=0, bIncludeArgumentName:=False)
+        clsListFunction.AddParameter("y", clsRFunctionParameter:=clsReplicateFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsListFunction.AddParameter("x", clsRFunctionParameter:=clsDiffFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         ' Set default RFunction as the base function
@@ -199,6 +207,7 @@ Public Class dlgRank
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsLeadFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=5)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsDiffFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=6)
         ucrNudLagLeadPosition.AddAdditionalCodeParameterPair(clsLeadFunction, New RParameter("n", 1), iAdditionalPairNo:=1)
+        ucrNudDiffLag.AddAdditionalCodeParameterPair(clsReplicateFunction, New RParameter("times", 1), iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
         ucrSaveNew.AddAdditionalRCode(clsSignifFunction, iAdditionalPairNo:=3)

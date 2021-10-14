@@ -838,7 +838,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDigits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 295</value>
+    <value>241, 295</value>
   </data>
   <data name="lblDigits.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -889,7 +889,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLagLeadPosition.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="lblDiffLag.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -898,7 +898,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDiffLag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 295</value>
+    <value>241, 295</value>
   </data>
   <data name="lblDiffLag.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 13</value>
@@ -949,28 +949,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRoundofDigits.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="ucrNudSignifDigits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 292</value>
-  </data>
-  <data name="ucrNudSignifDigits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSignifDigits.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSignifDigits.Name" xml:space="preserve">
-    <value>ucrNudSignifDigits</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSignifDigits.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSignifDigits.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSignifDigits.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlTransformOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 8</value>
@@ -1114,7 +1093,7 @@
     <value>14</value>
   </data>
   <data name="ucrNudRoundOfDigits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 292</value>
+    <value>297, 292</value>
   </data>
   <data name="ucrNudRoundOfDigits.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1132,10 +1111,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudRoundOfDigits.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrNudDiffLag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 292</value>
+    <value>274, 292</value>
   </data>
   <data name="ucrNudDiffLag.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1174,7 +1153,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudLagLeadPosition.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
+  </data>
+  <data name="ucrNudSignifDigits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 292</value>
+  </data>
+  <data name="ucrNudSignifDigits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSignifDigits.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSignifDigits.Name" xml:space="preserve">
+    <value>ucrNudSignifDigits</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSignifDigits.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSignifDigits.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSignifDigits.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
