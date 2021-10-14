@@ -177,7 +177,7 @@ Public Class clsPrepareFunctionsForGrids
             _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert row(s) Before")
         Else
             clsInsertRows.AddParameter("before", "FALSE")
-            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert row(s) After")
+            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) After")
         End If
     End Sub
     ''' <summary>
