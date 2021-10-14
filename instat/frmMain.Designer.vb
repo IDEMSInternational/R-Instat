@@ -659,20 +659,22 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuDescribeOneVariableVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator72 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -707,7 +709,7 @@ Partial Class frmMain
         '
         'mnuDescribeOneVariable
         '
-        Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.mnuDescribeOneVariableRatingData})
+        Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableVisualiseData, Me.ToolStripSeparator72, Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.mnuDescribeOneVariableRatingData})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
         resources.ApplyResources(Me.mnuDescribeOneVariable, "mnuDescribeOneVariable")
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
@@ -4160,6 +4162,18 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4176,6 +4190,19 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -4191,6 +4218,20 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'ucrDataViewer
+        '
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
+        '
+        'ucrOutput
+        '
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -4222,44 +4263,15 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'ucrColumnMeta
+        'mnuDescribeOneVariableVisualiseData
         '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.mnuDescribeOneVariableVisualiseData.Name = "mnuDescribeOneVariableVisualiseData"
+        resources.ApplyResources(Me.mnuDescribeOneVariableVisualiseData, "mnuDescribeOneVariableVisualiseData")
         '
-        'ucrDataFrameMeta
+        'ToolStripSeparator72
         '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
+        Me.ToolStripSeparator72.Name = "ToolStripSeparator72"
+        resources.ApplyResources(Me.ToolStripSeparator72, "ToolStripSeparator72")
         '
         'frmMain
         '
@@ -4940,4 +4952,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineCompareColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataReshapeScaleOrDistance As ToolStripMenuItem
+    Friend WithEvents mnuDescribeOneVariableVisualiseData As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator72 As ToolStripSeparator
 End Class

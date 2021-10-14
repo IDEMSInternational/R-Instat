@@ -2435,4 +2435,8 @@ Public Class frmMain
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
         dlgCluster.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeOneVariableVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
 End Class
