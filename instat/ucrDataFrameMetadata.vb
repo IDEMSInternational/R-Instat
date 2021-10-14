@@ -54,6 +54,7 @@ Public Class ucrDataFrameMetadata
         Cursor = Cursors.WaitCursor
         grdMetaData.Enabled = False
     End Sub
+
     Private Sub EndWait()
         grdMetaData.Enabled = True
         Cursor = Cursors.Default
@@ -66,11 +67,9 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub AddColumns()
-        Dim workSheetColumnHeader As ColumnHeader
         grdCurrSheet.Columns = _clsDataBook.clsDataFrameMetaData.ColumnCount
         For i = 0 To _clsDataBook.clsDataFrameMetaData.ColumnCount - 1
-            workSheetColumnHeader = grdCurrSheet.ColumnHeaders(i)
-            workSheetColumnHeader.Text = _clsDataBook.clsDataFrameMetaData.ColumnName(i)
+            grdCurrSheet.ColumnHeaders(i).Text = _clsDataBook.clsDataFrameMetaData.ColumnName(i)
         Next
     End Sub
 

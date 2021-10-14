@@ -19,8 +19,8 @@ Imports RDotNet
 ''' and, meta data grid. 
 ''' </summary>
 Public Class clsPrepareFunctionsForGrids
-    Private _RLink As RLink
-    Private _strDataFrame As String
+    Private ReadOnly _RLink As RLink
+    Private ReadOnly _strDataFrame As String
 
     ''' <summary>
     ''' Create a new instance of prepare functions for an indivdual dataframe
@@ -43,6 +43,7 @@ Public Class clsPrepareFunctionsForGrids
         clsDeleteColumns.AddParameter("cols", _RLink.GetListAsRString(lstColumnNames))
         _RLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
+
     ''' <summary>
     ''' Convert one or many columns to text type
     ''' </summary>
@@ -294,7 +295,7 @@ Public Class clsPrepareFunctionsForGrids
         Else
             clsReplaceValue.AddParameter("new_value", strNewValue)
         End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
+        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
     ''' <summary>
     ''' Get the column type for a given column

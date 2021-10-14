@@ -29,7 +29,7 @@ Public Class clsDataFramePage
     Private _clsDataFrame As DataFrame
     Private _lstColumns As List(Of clsColumnHeaderDisplay)
 
-    Private ReadOnly Property intColumnIncrements As Integer
+    Private ReadOnly Property iColumnIncrements As Integer
         Get
             Return frmMain.clsInstatOptions.iMaxCols
         End Get
