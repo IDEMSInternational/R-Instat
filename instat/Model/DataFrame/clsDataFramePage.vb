@@ -166,7 +166,7 @@ Public Class clsDataFramePage
 
     Private Function GetNoOfColumnPages() As Integer
         'Needs to be a function as the number of increments can be changed through options 
-        Return Math.Ceiling(_iTotalColumnCount / intColumnIncrements)
+        Return Math.Ceiling(_iTotalColumnCount / iColumnIncrements)
     End Function
 
     Private Function GetDataFrameFromRCommand() As DataFrame
@@ -176,7 +176,7 @@ Public Class clsDataFramePage
         clsRFunction.AddParameter("convert_to_character", "TRUE")
         clsRFunction.AddParameter("include_hidden_columns", "FALSE")
         clsRFunction.AddParameter("use_current_filter", "TRUE")
-        clsRFunction.AddParameter("max_cols", intColumnIncrements)
+        clsRFunction.AddParameter("max_cols", iColumnIncrements)
         clsRFunction.AddParameter("max_rows", intRowIncrements)
         clsRFunction.AddParameter("start_row", _iRowStart)
         clsRFunction.AddParameter("start_col", _iColumnStart)
@@ -346,7 +346,7 @@ Public Class clsDataFramePage
     ''' </summary>
     Public Sub LoadNextColumnPage()
         If CanLoadNextColumnPage() Then
-            _iColumnStart += intColumnIncrements
+            _iColumnStart += iColumnIncrements
             _clsDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If
@@ -357,15 +357,15 @@ Public Class clsDataFramePage
     ''' </summary>
     ''' <returns></returns>
     Public Function CanLoadPreviousColumnPage() As Boolean
-        Return _iColumnStart > intColumnIncrements
+        Return _iColumnStart > iColumnIncrements
     End Function
 
     ''' <summary>
     ''' Load previous column page
     ''' </summary>
     Public Sub LoadPreviousColumnPage()
-        If _iColumnStart - intColumnIncrements >= 0 Then
-            _iColumnStart -= intColumnIncrements
+        If _iColumnStart - iColumnIncrements >= 0 Then
+            _iColumnStart -= iColumnIncrements
             _clsDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If
@@ -375,7 +375,7 @@ Public Class clsDataFramePage
     ''' Load last column page
     ''' </summary>
     Public Sub LoadLastColumnPage()
-        _iColumnStart = (intColumnIncrements * (GetNoOfColumnPages() - 1)) + 1
+        _iColumnStart = (iColumnIncrements * (GetNoOfColumnPages() - 1)) + 1
         _clsDataFrame = GetDataFrameFromRCommand()
         SetHeaders()
     End Sub
