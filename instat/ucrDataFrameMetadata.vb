@@ -68,11 +68,9 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub AddColumns()
-        Dim workSheetColumnHeader As ColumnHeader
         grdCurrSheet.Columns = _clsDataBook.clsDataFrameMetaData.ColumnCount
         For i = 0 To _clsDataBook.clsDataFrameMetaData.ColumnCount - 1
-            workSheetColumnHeader = grdCurrSheet.ColumnHeaders(i)
-            workSheetColumnHeader.Text = _clsDataBook.clsDataFrameMetaData.ColumnName(i)
+            grdCurrSheet.ColumnHeaders(i).Text = _clsDataBook.clsDataFrameMetaData.ColumnName(i)
         Next
     End Sub
 
