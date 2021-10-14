@@ -210,7 +210,7 @@ Public Class clsPrepareFunctionsForGrids
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsFreezeColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
         clsFreezeColumns.AddParameter("column", Chr(34) & strLastSelectedColumn & Chr(34))
-        _RLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+        _RLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze Columns")
     End Sub
     ''' <summary>
     ''' UnFreeze selected columns
