@@ -16,7 +16,7 @@
 Public Class clsColumnHeaderDisplay
     Public Property Name As String
 
-    Public ReadOnly Property DisplayName As String
+    Public ReadOnly Property strDisplayName As String
         Get
             Return Name + " " + TypeShortCode
         End Get
