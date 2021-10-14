@@ -312,7 +312,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        Dim intNonNumericValues As Integer
+        Dim iNonNumericValues As Integer
         For Each strColumn In GetSelectedDataFrameColumnNames()
             intNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
             If intNonNumericValues = 0 Then
