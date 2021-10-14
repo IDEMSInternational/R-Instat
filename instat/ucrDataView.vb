@@ -347,7 +347,7 @@ Public Class ucrDataView
     End Sub
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
-        Dim lstColumns As List(Of clsColumnHeaderDisplay) = New List(Of clsColumnHeaderDisplay)
+        Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
             lstColumns.Add(GetCurrentDataFrameFocus().VisiblePage.lstColumns(i))
         Next
