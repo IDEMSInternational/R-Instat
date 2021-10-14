@@ -402,6 +402,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
+                Me.Size = New Size(iBasicWidth, iBaseHeight * 1.0)
             Case "Factor"
                 strPackageName = "base"
                 grpFactor.Visible = True
@@ -491,8 +492,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
-
-                Me.Size = New Size(iBasicWidth * 1.7, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
                 grpDates.Visible = False
