@@ -82,6 +82,7 @@ Public Class clsPrepareFunctionsForGrids
         clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
         _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
+
     ''' <summary>
     ''' Convert one or many columns to ordered factor type
     ''' </summary>
