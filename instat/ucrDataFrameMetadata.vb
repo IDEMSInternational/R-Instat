@@ -55,6 +55,7 @@ Public Class ucrDataFrameMetadata
         Cursor = Cursors.WaitCursor
         grdMetaData.Enabled = False
     End Sub
+
     Private Sub EndWait()
         grdMetaData.Enabled = True
         Cursor = Cursors.Default
