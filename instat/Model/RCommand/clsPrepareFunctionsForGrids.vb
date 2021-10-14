@@ -248,7 +248,7 @@ Public Class clsPrepareFunctionsForGrids
         clsPasteValues.AddParameter("start_row_pos", strStartRow)
         clsPasteValues.AddParameter("first_clip_row_is_header", "FALSE")
         clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
-        _RLink.RunScript(clsPasteValues.ToScript(), strComment:="Paste values in Data")
+        _RLink.RunScript(clsPasteValues.ToScript(), strComment:="Paste Values In Data")
     End Sub
     ''' <summary>
     ''' Get data type label for a given column
