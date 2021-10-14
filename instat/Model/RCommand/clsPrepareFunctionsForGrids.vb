@@ -133,6 +133,7 @@ Public Class clsPrepareFunctionsForGrids
             Return 0 'Defaults to 0 if value cannot be got
         End If
     End Function
+
     ''' <summary>
     ''' Converts given column to numeric. 
     ''' </summary>
