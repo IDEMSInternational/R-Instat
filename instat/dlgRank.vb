@@ -105,7 +105,7 @@ Public Class dlgRank
         ucrNudSignifDigits.SetParameter(New RParameter("digits", 1))
         ucrNudSignifDigits.SetMinMax(iNewMin:=0, iNewMax:=22)
         ucrNudSignifDigits.Increment = 1
-        ucrNudSignifDigits.SetRDefault(4)
+        ucrNudSignifDigits.SetRDefault(6)
 
         ucrNudRoundOfDigits.SetParameter(New RParameter("digits", 1))
         ucrNudRoundOfDigits.Increment = 1
@@ -176,7 +176,7 @@ Public Class dlgRank
         clsRoundFunction.AddParameter("digits", "0", iPosition:=1)
 
         clsSignifFunction.SetRCommand("signif")
-        clsSignifFunction.AddParameter("digits", "4", iPosition:=1)
+        clsSignifFunction.AddParameter("digits", "6", iPosition:=1)
 
         clsLagFunction.SetPackageName("dplyr")
         clsLagFunction.SetRCommand("lag")
@@ -188,8 +188,8 @@ Public Class dlgRank
         clsDiffFunction.AddParameter("lag", "1", iPosition:=1)
 
         clsReplicateFunction.SetRCommand("rep")
-        clsReplicateFunction.AddParameter("NA", "NA", iPosition:=0, bIncludeArgumentName:=False)
-        clsReplicateFunction.AddParameter("times", iPosition:=1, bIncludeArgumentName:=False)
+        clsReplicateFunction.AddParameter("x", "NA", iPosition:=0)
+        clsReplicateFunction.AddParameter("times", iPosition:=1)
 
         clsListFunction.SetRCommand("c")
         clsListFunction.AddParameter("y", clsRFunctionParameter:=clsReplicateFunction, iPosition:=0, bIncludeArgumentName:=False)
