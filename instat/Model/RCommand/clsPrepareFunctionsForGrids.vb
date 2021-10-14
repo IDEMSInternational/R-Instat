@@ -69,6 +69,7 @@ Public Class clsPrepareFunctionsForGrids
         clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34), iPosition:=2)
         _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
+
     ''' <summary>
     ''' Convert one or many columns to factor type
     ''' </summary>
