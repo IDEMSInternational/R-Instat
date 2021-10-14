@@ -108,6 +108,7 @@ Public Class clsPrepareFunctionsForGrids
         clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
         _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
+
     ''' <summary>
     ''' Get the number of non numeric values within a column
     ''' </summary>
