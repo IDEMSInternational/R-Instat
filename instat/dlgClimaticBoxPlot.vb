@@ -170,6 +170,15 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
+        ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
+        ucrNudOutlierCoefficient.DecimalPlaces = 1
+        ucrNudOutlierCoefficient.Increment = 0.1
+        ucrNudOutlierCoefficient.SetRDefault(1.5)
+
+        ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
+
+        ucrPnlPlots.AddToLinkedControls(ucrNudOutlierCoefficient, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
         clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
@@ -300,6 +309,7 @@ Public Class dlgClimaticBoxPlot
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
@@ -380,6 +390,9 @@ Public Class dlgClimaticBoxPlot
         clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
         OmitFilter()
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        If Not IsNothing(clsRgeomPlotFunction.GetParameter("coef")) Then
+            ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
+        End If
         bResetBoxLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
