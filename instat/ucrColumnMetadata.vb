@@ -574,4 +574,8 @@ Public Class ucrColumnMetadata
         dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
+
+    Private Sub mnuSelection_Click(sender As Object, e As EventArgs) Handles mnuSelection.Click
+        dlgSelect.ShowDialog()
+    End Sub
 End Class

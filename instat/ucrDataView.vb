@@ -1103,4 +1103,15 @@ Public Class ucrDataView
         End Try
     End Sub
 
+    Private Sub mnuColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnSelection.Click
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuCellSelections_Click(sender As Object, e As EventArgs) Handles mnuCellSelections.Click
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuRowSelection_Click(sender As Object, e As EventArgs) Handles mnuRowSelection.Click
+        dlgSelect.ShowDialog()
+    End Sub
 End Class
