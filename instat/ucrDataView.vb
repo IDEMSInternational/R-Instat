@@ -40,6 +40,7 @@ Public Class ucrDataView
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
     Private clsRemoveFilter As New RFunction
+    Private clsRemoveSelection As New RFunction
     Private clsFreezeColumns As New RFunction
     Private clsUnfreezeColumns As New RFunction
     Private clsViewDataFrame As New RFunction
@@ -48,15 +49,18 @@ Public Class ucrDataView
     Private clsFilterApplied As New RFunction
     Private clsHideDataFrame As New RFunction
     Private clsGetCurrentFilterName As New RFunction
+    Private clsGetCurrentSelectionName As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
     Private strFilterName As String
+    Private strSelectionName As String
     Private strNoFilter As String = "no_filter"
+    Private strNoSelection As String = ".everything"
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
         autoTranslate(Me)
-        'Disable Autoformat cell
+        'Disable Auto format cell
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
@@ -97,6 +101,7 @@ Public Class ucrDataView
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsRemoveSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -105,6 +110,7 @@ Public Class ucrDataView
         clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
         clsViewDataFrame.SetRCommand("View")
         clsGetCurrentFilterName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_current_filter_name")
+        clsGetCurrentSelectionName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_current_column_selection_name")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -344,6 +350,7 @@ Public Class ucrDataView
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
             lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCountFilter & " rows"
             strFilterName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
+            strSelectionName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentSelectionName.ToScript(), bSilent:=True).AsCharacter(0)
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
                 lblRowDisplay.Text = lblRowDisplay.Text & " (" & iRowCountFull & ")" & " | Active filter: " & strFilterName
             End If
@@ -599,12 +606,14 @@ Public Class ucrDataView
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsRemoveSelection.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsFilterApplied.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsGetCurrentFilterName.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsGetCurrentSelectionName.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
         End If
     End Sub
 
@@ -782,6 +791,7 @@ Public Class ucrDataView
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
         mnuClearColumnFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
+        mnuColumnRemoveCurrentSelection.Enabled = Not String.Equals(strSelectionName, strNoSelection)
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
@@ -891,7 +901,7 @@ Public Class ucrDataView
     End Sub
 
     ''' <summary>
-    ''' clears all the added links label menu items from the recents panel of the data view
+    ''' clears all the added links label menu items from the recent panel of the data view
     ''' </summary>
     Public Sub ClearRecentFileMenuItems()
         panelRecentMenuItems.Controls.Clear()
@@ -899,7 +909,7 @@ Public Class ucrDataView
     End Sub
 
     ''' <summary>
-    ''' adds the link label as a menu item to the recents panel of the data view
+    ''' adds the link label as a menu item to the recent panel of the data view
     ''' </summary>
     ''' <param name="linkMenuItem">link label with file path set as its tag</param>
     Public Sub InsertRecentFileMenuItems(linkMenuItem As LinkLabel)
@@ -963,6 +973,7 @@ Public Class ucrDataView
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
         mnuRemoveCurrentFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
+        mnuRowRemoveCurrentSelection.Enabled = Not String.Equals(strSelectionName, strNoSelection)
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
@@ -980,6 +991,7 @@ Public Class ucrDataView
             mnuLebelsLevel.Enabled = False
         End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
+        mnuCellRemoveCurrentSelections.Enabled = Not String.Equals(strSelectionName, strNoSelection)
     End Sub
 
     Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
@@ -1021,7 +1033,7 @@ Public Class ucrDataView
     ''' pastes data from clipboard to data view
     ''' </summary>
     ''' <param name="lstColumnNames">column names to paste data into</param>
-    ''' <param name="startRowPos">starting row position. This starts at postion 1</param>
+    ''' <param name="startRowPos">starting row position. This starts at position 1</param>
     ''' <param name="firstClipRowHeader">flag indicating whether first row of clipboard data is a header</param>
     Private Sub PasteValuesToDataFrame(lstColumnNames As IEnumerable(Of String), startRowPos As String, firstClipRowHeader As Boolean)
         Dim clsPasteValues As New RFunction
@@ -1113,5 +1125,17 @@ Public Class ucrDataView
 
     Private Sub mnuRowSelection_Click(sender As Object, e As EventArgs) Handles mnuRowSelection.Click
         dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuColumnRemoveCurrentSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnRemoveCurrentSelection.Click
+        RunScriptFromDataView(clsRemoveSelection.ToScript(), strComment:="Right click menu: Remove Current Selection")
+    End Sub
+
+    Private Sub mnuCellRemoveCurrentSelections_Click(sender As Object, e As EventArgs) Handles mnuCellRemoveCurrentSelections.Click
+        RunScriptFromDataView(clsRemoveSelection.ToScript(), strComment:="Right click menu: Remove Current Selection")
+    End Sub
+
+    Private Sub mnuRowRemoveCurrentSelection_Click(sender As Object, e As EventArgs) Handles mnuRowRemoveCurrentSelection.Click
+        RunScriptFromDataView(clsRemoveSelection.ToScript(), strComment:="Right click menu: Remove Current Selection")
     End Sub
 End Class
