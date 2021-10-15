@@ -807,6 +807,9 @@
   <data name="&gt;&gt;ucrChkPunctuation.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -814,7 +817,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Stack (Pivot longer)</value>
+    <value>Stack (Pivot Longer)</value>
   </data>
   <data name="&gt;&gt;ttPattern.Name" xml:space="preserve">
     <value>ttPattern</value>
