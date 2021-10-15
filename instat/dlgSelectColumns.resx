@@ -163,7 +163,7 @@
     <value>18</value>
   </data>
   <data name="lblNewSelectName.Text" xml:space="preserve">
-    <value>New Column Selection Name:</value>
+    <value>New Selection Name:</value>
   </data>
   <data name="&gt;&gt;lblNewSelectName.Name" xml:space="preserve">
     <value>lblNewSelectName</value>
@@ -217,7 +217,7 @@
     <value>16</value>
   </data>
   <data name="lblSelectPreview.Text" xml:space="preserve">
-    <value>Column Selection Preview:</value>
+    <value>Selection Preview:</value>
   </data>
   <data name="lblSelectPreview.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -325,13 +325,13 @@
     <value>392, 38</value>
   </data>
   <data name="lblSeclectedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>95, 13</value>
   </data>
   <data name="lblSeclectedColumns.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblSeclectedColumns.Text" xml:space="preserve">
-    <value>Select Column(s):</value>
+    <value>Selected Columns:</value>
   </data>
   <data name="&gt;&gt;lblSeclectedColumns.Name" xml:space="preserve">
     <value>lblSeclectedColumns</value>
@@ -706,7 +706,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Select Column(s)</value>
+    <value>Define New Selection</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgSelectColumns</value>

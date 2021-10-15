@@ -41,10 +41,10 @@ Partial Class dlgSelect
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlApplyOptions = New instat.UcrPanel()
         Me.lblSelection = New System.Windows.Forms.Label()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
-        Me.ucrPnlApplyOptions = New instat.UcrPanel()
         Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
@@ -63,7 +63,7 @@ Partial Class dlgSelect
         Me.grpApplyOptions.Size = New System.Drawing.Size(417, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
-        Me.grpApplyOptions.Text = "Apply options"
+        Me.grpApplyOptions.Text = "Apply"
         '
         'rdoApplyAsSubset
         '
@@ -73,7 +73,7 @@ Partial Class dlgSelect
         Me.rdoApplyAsSubset.Size = New System.Drawing.Size(190, 17)
         Me.rdoApplyAsSubset.TabIndex = 1
         Me.rdoApplyAsSubset.TabStop = True
-        Me.rdoApplyAsSubset.Text = "Apply As Subset"
+        Me.rdoApplyAsSubset.Text = "As Subset"
         Me.rdoApplyAsSubset.UseVisualStyleBackColor = True
         Me.rdoApplyAsSubset.Visible = False
         '
@@ -85,8 +85,15 @@ Partial Class dlgSelect
         Me.rdoApplyAsSelect.Size = New System.Drawing.Size(154, 17)
         Me.rdoApplyAsSelect.TabIndex = 0
         Me.rdoApplyAsSelect.TabStop = True
-        Me.rdoApplyAsSelect.Text = "Apply As Selected Columns"
+        Me.rdoApplyAsSelect.Text = "Selector Only"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
+        '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(4, 15)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(396, 32)
+        Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'lblSelection
         '
@@ -94,9 +101,9 @@ Partial Class dlgSelect
         Me.lblSelection.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSelection.Location = New System.Drawing.Point(250, 55)
         Me.lblSelection.Name = "lblSelection"
-        Me.lblSelection.Size = New System.Drawing.Size(92, 13)
+        Me.lblSelection.Size = New System.Drawing.Size(54, 13)
         Me.lblSelection.TabIndex = 1
-        Me.lblSelection.Text = "Column Selection:"
+        Me.lblSelection.Text = "Selection:"
         '
         'cmdDefineNewSelect
         '
@@ -106,7 +113,7 @@ Partial Class dlgSelect
         Me.cmdDefineNewSelect.Size = New System.Drawing.Size(157, 30)
         Me.cmdDefineNewSelect.TabIndex = 3
         Me.cmdDefineNewSelect.Tag = ""
-        Me.cmdDefineNewSelect.Text = "Define New Column Selection"
+        Me.cmdDefineNewSelect.Text = "Define New Selection"
         Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
         '
         'lblFilterPreview
@@ -116,15 +123,8 @@ Partial Class dlgSelect
         Me.lblFilterPreview.Name = "lblFilterPreview"
         Me.lblFilterPreview.Size = New System.Drawing.Size(143, 22)
         Me.lblFilterPreview.TabIndex = 6
-        Me.lblFilterPreview.Text = "Column Selection Preview:"
+        Me.lblFilterPreview.Text = "Selection Preview:"
         Me.lblFilterPreview.Visible = False
-        '
-        'ucrPnlApplyOptions
-        '
-        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(4, 15)
-        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(396, 32)
-        Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'ucrInputSelectPreview
         '
@@ -195,7 +195,7 @@ Partial Class dlgSelect
         Me.Name = "dlgSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Select"
-        Me.Text = "Select column(s)"
+        Me.Text = "Selection"
         Me.grpApplyOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

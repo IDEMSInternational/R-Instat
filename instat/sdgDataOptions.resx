@@ -433,7 +433,7 @@
     <value>4</value>
   </data>
   <data name="cmdRemoveCurrentColumnSelection.Text" xml:space="preserve">
-    <value>Remove Current Column Selection</value>
+    <value>Remove Current Selection</value>
   </data>
   <data name="&gt;&gt;cmdRemoveCurrentColumnSelection.Name" xml:space="preserve">
     <value>cmdRemoveCurrentColumnSelection</value>
@@ -571,13 +571,13 @@
     <value>223, 37</value>
   </data>
   <data name="lblSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>54, 13</value>
   </data>
   <data name="lblSelection.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblSelection.Text" xml:space="preserve">
-    <value>Column Selection:</value>
+    <value>Selection:</value>
   </data>
   <data name="&gt;&gt;lblSelection.Name" xml:space="preserve">
     <value>lblSelection</value>
@@ -628,7 +628,7 @@
     <value>3</value>
   </data>
   <data name="cmdDefineNewSelect.Text" xml:space="preserve">
-    <value>Define New Column Selection</value>
+    <value>Define New Selection</value>
   </data>
   <data name="&gt;&gt;cmdDefineNewSelect.Name" xml:space="preserve">
     <value>cmdDefineNewSelect</value>
