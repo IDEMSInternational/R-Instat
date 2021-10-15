@@ -92,6 +92,7 @@ Public Class dlgSelect
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        dlgSelectColumns.SetDefaultDataFrame(ucrSelectorForSelectColumns.ucrAvailableDataFrames.strCurrDataFrame)
         dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()
     End Sub

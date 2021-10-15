@@ -112,6 +112,13 @@ Public Class dlgSelectColumns
         ucrNudTo.SetRCode(clsFromToOperation, bReset)
     End Sub
 
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+        If strDefaultDataframe <> "" Then
+            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=False)
+            ucrSelectorForColumnSelection.ucrAvailableDataFrames.Enabled = False 'Note: This is potentially a duplication because for some reason setting  bEnableDataframe:=False in line 117 changes internally
+        End If
+    End Sub
+
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
         If cmdCombineWithAndOr.Text.Contains("All combined with &&") Then
             cmdCombineWithAndOr.Text = "All combined with |"
