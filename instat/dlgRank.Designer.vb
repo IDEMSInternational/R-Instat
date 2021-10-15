@@ -50,10 +50,6 @@ Partial Class dlgRank
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoRank = New System.Windows.Forms.RadioButton()
-        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
-        Me.rdoSort = New System.Windows.Forms.RadioButton()
-        Me.rdoNonNegative = New System.Windows.Forms.RadioButton()
         Me.rdoRoundOf = New System.Windows.Forms.RadioButton()
         Me.rdoSignificantDigits = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
@@ -61,24 +57,28 @@ Partial Class dlgRank
         Me.rdoLead = New System.Windows.Forms.RadioButton()
         Me.rdoLag = New System.Windows.Forms.RadioButton()
         Me.grpNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.lblRoundofDigits = New System.Windows.Forms.Label()
+        Me.lblDiffLag = New System.Windows.Forms.Label()
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
-        Me.lblDiffLag = New System.Windows.Forms.Label()
-        Me.lblRoundofDigits = New System.Windows.Forms.Label()
+        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
+        Me.rdoNonNegative = New System.Windows.Forms.RadioButton()
+        Me.rdoRank = New System.Windows.Forms.RadioButton()
+        Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.ucrPnlTransformOptions = New instat.UcrPanel()
         Me.ucrSaveNew = New instat.ucrSave()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlNumericOptions = New instat.UcrPanel()
-        Me.ucrPnlTies = New instat.UcrPanel()
-        Me.ucrChkMissingLast = New instat.ucrCheck()
-        Me.ucrChkDecreasing = New instat.ucrCheck()
         Me.ucrNudRoundOfDigits = New instat.ucrNud()
         Me.ucrNudDiffLag = New instat.ucrNud()
         Me.ucrNudLagLeadPosition = New instat.ucrNud()
         Me.ucrNudSignifDigits = New instat.ucrNud()
+        Me.ucrPnlNumericOptions = New instat.UcrPanel()
+        Me.ucrPnlTies = New instat.UcrPanel()
+        Me.ucrChkMissingLast = New instat.ucrCheck()
+        Me.ucrChkDecreasing = New instat.ucrCheck()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -178,34 +178,6 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing.Tag = "Kept_as_missing"
         Me.rdoKeptAsMissing.UseVisualStyleBackColor = True
         '
-        'rdoRank
-        '
-        resources.ApplyResources(Me.rdoRank, "rdoRank")
-        Me.rdoRank.Name = "rdoRank"
-        Me.rdoRank.TabStop = True
-        Me.rdoRank.UseVisualStyleBackColor = True
-        '
-        'rdoNumeric
-        '
-        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
-        Me.rdoNumeric.Name = "rdoNumeric"
-        Me.rdoNumeric.TabStop = True
-        Me.rdoNumeric.UseVisualStyleBackColor = True
-        '
-        'rdoSort
-        '
-        resources.ApplyResources(Me.rdoSort, "rdoSort")
-        Me.rdoSort.Name = "rdoSort"
-        Me.rdoSort.TabStop = True
-        Me.rdoSort.UseVisualStyleBackColor = True
-        '
-        'rdoNonNegative
-        '
-        resources.ApplyResources(Me.rdoNonNegative, "rdoNonNegative")
-        Me.rdoNonNegative.Name = "rdoNonNegative"
-        Me.rdoNonNegative.TabStop = True
-        Me.rdoNonNegative.UseVisualStyleBackColor = True
-        '
         'rdoRoundOf
         '
         resources.ApplyResources(Me.rdoRoundOf, "rdoRoundOf")
@@ -256,10 +228,28 @@ Partial Class dlgRank
         Me.grpNumericOptions.Controls.Add(Me.rdoSignificantDigits)
         Me.grpNumericOptions.Controls.Add(Me.rdoRoundOf)
         Me.grpNumericOptions.Controls.Add(Me.rdoScale)
+        Me.grpNumericOptions.Controls.Add(Me.lblRoundofDigits)
+        Me.grpNumericOptions.Controls.Add(Me.ucrNudRoundOfDigits)
+        Me.grpNumericOptions.Controls.Add(Me.ucrNudDiffLag)
+        Me.grpNumericOptions.Controls.Add(Me.ucrNudLagLeadPosition)
+        Me.grpNumericOptions.Controls.Add(Me.ucrNudSignifDigits)
+        Me.grpNumericOptions.Controls.Add(Me.lblDiffLag)
+        Me.grpNumericOptions.Controls.Add(Me.lblDigits)
+        Me.grpNumericOptions.Controls.Add(Me.lblLagLeadPosition)
         Me.grpNumericOptions.Controls.Add(Me.ucrPnlNumericOptions)
         resources.ApplyResources(Me.grpNumericOptions, "grpNumericOptions")
         Me.grpNumericOptions.Name = "grpNumericOptions"
         Me.grpNumericOptions.TabStop = False
+        '
+        'lblRoundofDigits
+        '
+        resources.ApplyResources(Me.lblRoundofDigits, "lblRoundofDigits")
+        Me.lblRoundofDigits.Name = "lblRoundofDigits"
+        '
+        'lblDiffLag
+        '
+        resources.ApplyResources(Me.lblDiffLag, "lblDiffLag")
+        Me.lblDiffLag.Name = "lblDiffLag"
         '
         'lblDigits
         '
@@ -271,15 +261,53 @@ Partial Class dlgRank
         resources.ApplyResources(Me.lblLagLeadPosition, "lblLagLeadPosition")
         Me.lblLagLeadPosition.Name = "lblLagLeadPosition"
         '
-        'lblDiffLag
+        'rdoNumeric
         '
-        resources.ApplyResources(Me.lblDiffLag, "lblDiffLag")
-        Me.lblDiffLag.Name = "lblDiffLag"
+        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
+        Me.rdoNumeric.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatAppearance.BorderSize = 2
+        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.TabStop = True
+        Me.rdoNumeric.Tag = "Frequency"
+        Me.rdoNumeric.UseVisualStyleBackColor = False
         '
-        'lblRoundofDigits
+        'rdoNonNegative
         '
-        resources.ApplyResources(Me.lblRoundofDigits, "lblRoundofDigits")
-        Me.lblRoundofDigits.Name = "lblRoundofDigits"
+        resources.ApplyResources(Me.rdoNonNegative, "rdoNonNegative")
+        Me.rdoNonNegative.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoNonNegative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.FlatAppearance.BorderSize = 2
+        Me.rdoNonNegative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNonNegative.Name = "rdoNonNegative"
+        Me.rdoNonNegative.TabStop = True
+        Me.rdoNonNegative.Tag = "Frequency"
+        Me.rdoNonNegative.UseVisualStyleBackColor = False
+        '
+        'rdoRank
+        '
+        resources.ApplyResources(Me.rdoRank, "rdoRank")
+        Me.rdoRank.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRank.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.FlatAppearance.BorderSize = 2
+        Me.rdoRank.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRank.Name = "rdoRank"
+        Me.rdoRank.TabStop = True
+        Me.rdoRank.Tag = "Frequency"
+        Me.rdoRank.UseVisualStyleBackColor = False
+        '
+        'rdoSort
+        '
+        resources.ApplyResources(Me.rdoSort, "rdoSort")
+        Me.rdoSort.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSort.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.FlatAppearance.BorderSize = 2
+        Me.rdoSort.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSort.Name = "rdoSort"
+        Me.rdoSort.TabStop = True
+        Me.rdoSort.Tag = "Frequency"
+        Me.rdoSort.UseVisualStyleBackColor = False
         '
         'ucrPnlMissingValues
         '
@@ -317,28 +345,6 @@ Partial Class dlgRank
         Me.ucrSelectorForRank.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRank, "ucrSelectorForRank")
         Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
-        '
-        'ucrPnlNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
-        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
-        '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
-        'ucrChkMissingLast
-        '
-        Me.ucrChkMissingLast.Checked = False
-        resources.ApplyResources(Me.ucrChkMissingLast, "ucrChkMissingLast")
-        Me.ucrChkMissingLast.Name = "ucrChkMissingLast"
-        '
-        'ucrChkDecreasing
-        '
-        Me.ucrChkDecreasing.Checked = False
-        resources.ApplyResources(Me.ucrChkDecreasing, "ucrChkDecreasing")
-        Me.ucrChkDecreasing.Name = "ucrChkDecreasing"
         '
         'ucrNudRoundOfDigits
         '
@@ -380,15 +386,37 @@ Partial Class dlgRank
         Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
         Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrPnlNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
+        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
+        '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
+        'ucrChkMissingLast
+        '
+        Me.ucrChkMissingLast.Checked = False
+        resources.ApplyResources(Me.ucrChkMissingLast, "ucrChkMissingLast")
+        Me.ucrChkMissingLast.Name = "ucrChkMissingLast"
+        '
+        'ucrChkDecreasing
+        '
+        Me.ucrChkDecreasing.Checked = False
+        resources.ApplyResources(Me.ucrChkDecreasing, "ucrChkDecreasing")
+        Me.ucrChkDecreasing.Name = "ucrChkDecreasing"
+        '
         'dlgRank
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpMissingValues)
-        Me.Controls.Add(Me.rdoNonNegative)
         Me.Controls.Add(Me.rdoSort)
-        Me.Controls.Add(Me.rdoNumeric)
         Me.Controls.Add(Me.rdoRank)
+        Me.Controls.Add(Me.rdoNonNegative)
+        Me.Controls.Add(Me.rdoNumeric)
+        Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.ucrPnlTransformOptions)
         Me.Controls.Add(Me.ucrSaveNew)
         Me.Controls.Add(Me.lblSelectColumns)
@@ -399,14 +427,6 @@ Partial Class dlgRank
         Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.ucrChkMissingLast)
         Me.Controls.Add(Me.ucrChkDecreasing)
-        Me.Controls.Add(Me.lblRoundofDigits)
-        Me.Controls.Add(Me.ucrNudRoundOfDigits)
-        Me.Controls.Add(Me.ucrNudDiffLag)
-        Me.Controls.Add(Me.lblDiffLag)
-        Me.Controls.Add(Me.ucrNudLagLeadPosition)
-        Me.Controls.Add(Me.lblLagLeadPosition)
-        Me.Controls.Add(Me.ucrNudSignifDigits)
-        Me.Controls.Add(Me.lblDigits)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -440,10 +460,6 @@ Partial Class dlgRank
     Friend WithEvents ucrPnlMissingValues As UcrPanel
     Friend WithEvents ucrSaveNew As ucrSave
     Friend WithEvents ucrPnlTransformOptions As UcrPanel
-    Friend WithEvents rdoNonNegative As RadioButton
-    Friend WithEvents rdoSort As RadioButton
-    Friend WithEvents rdoNumeric As RadioButton
-    Friend WithEvents rdoRank As RadioButton
     Friend WithEvents ucrChkMissingLast As ucrCheck
     Friend WithEvents ucrChkDecreasing As ucrCheck
     Friend WithEvents rdoSignificantDigits As RadioButton
@@ -462,4 +478,8 @@ Partial Class dlgRank
     Friend WithEvents lblDiffLag As Label
     Friend WithEvents lblRoundofDigits As Label
     Friend WithEvents ucrNudRoundOfDigits As ucrNud
+    Friend WithEvents rdoNonNegative As RadioButton
+    Friend WithEvents rdoNumeric As RadioButton
+    Friend WithEvents rdoSort As RadioButton
+    Friend WithEvents rdoRank As RadioButton
 End Class
