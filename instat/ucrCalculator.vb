@@ -402,7 +402,6 @@ Public Class ucrCalculator
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
-                Me.Size = New Size(iBasicWidth, iBaseHeight * 1.0)
             Case "Factor"
                 strPackageName = "base"
                 grpFactor.Visible = True

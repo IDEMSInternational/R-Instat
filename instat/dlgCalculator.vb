@@ -154,7 +154,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 128
             Case "Text/Strings (Character Columns)"
                 Me.Width = iBasicWidth * 1.49
-                Me.Height = iBasicHeight * 1.1
+                Me.Height = iBasicHeight + 19.5
                 ucrBase.iHelpTopicID = 338
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
@@ -178,7 +178,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 596
             Case "Wakefield"
                 Me.Width = iBasicWidth * 1.73
-                Me.Height = iBasicHeight * 1.1
+                Me.Height = iBasicHeight + 17.5
                 ucrBase.iHelpTopicID = 444
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
