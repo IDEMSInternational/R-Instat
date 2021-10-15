@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class dlgTransform
     Public bFirstLoad As Boolean = True
+
     Private bReset As Boolean = True
     Private clsRankFunction As New RFunction
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
