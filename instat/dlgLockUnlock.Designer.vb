@@ -72,7 +72,9 @@ Partial Class dlgLockUnlock
         Me.ucrReceiverLockUnlock.Name = "ucrReceiverLockUnlock"
         Me.ucrReceiverLockUnlock.Selector = Nothing
         Me.ucrReceiverLockUnlock.Size = New System.Drawing.Size(121, 134)
+        Me.ucrReceiverLockUnlock.strNcFilePath = ""
         Me.ucrReceiverLockUnlock.TabIndex = 2
+        Me.ucrReceiverLockUnlock.ucrSelector = Nothing
         '
         'lblSelectedColumns
         '
@@ -142,7 +144,7 @@ Partial Class dlgLockUnlock
         Me.Name = "dlgLockUnlock"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Lock_and_unlock"
-        Me.Text = "Lock and unlock"
+        Me.Text = "Lock and Unlock"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
