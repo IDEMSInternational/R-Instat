@@ -814,7 +814,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Stack (pivot longer) Columns</value>
+    <value>Stack (Pivot longer)</value>
   </data>
   <data name="&gt;&gt;ttPattern.Name" xml:space="preserve">
     <value>ttPattern</value>
