@@ -222,7 +222,7 @@ Public Class dlgSelectColumns
         Dim bEnableOrDisable As Boolean = True
         Dim strOperation As String
         strOperation = ucrInputSelectOperation.GetText
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(False, False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(strOperation = "Columns", False)
         Select Case strOperation
             Case "Columns"
                 If ucrReceiverMultipleVariables.IsEmpty Then
