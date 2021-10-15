@@ -65,13 +65,7 @@ Public Class ucrReceiverSingle
         End If
         MyBase.Add(strItem, strDataFrame)
 
-        If Selector IsNot Nothing Then
-            If bTypeSet Then
-                strCurrentItemType = strType
-            Else
-                strCurrentItemType = Selector.GetItemType()
-            End If
-        End If
+        strCurrentItemType = If(bTypeSet, strType, Selector?.GetItemType())
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
