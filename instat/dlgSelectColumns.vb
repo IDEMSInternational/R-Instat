@@ -70,7 +70,7 @@ Public Class dlgSelectColumns
 
         ucrInputSelectName.SetItemsTypeAsColumnSelection()
         ucrInputSelectName.SetDataFrameSelector(ucrSelectorForColumnSelection.ucrAvailableDataFrames)
-        ucrInputSelectName.SetPrefix("column_selection")
+        ucrInputSelectName.SetPrefix("selection")
         ucrInputSelectName.SetDefaultTypeAsColumnSelection()
 
         ucrSelectPreview.txtInput.ReadOnly = True
