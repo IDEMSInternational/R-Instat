@@ -228,7 +228,6 @@ Public Class dlgSelectColumns
                 If ucrReceiverMultipleVariables.IsEmpty Then
                     bEnableOrDisable = False
                 End If
-                ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(True, False)
             Case "Starts with", "Ends with", "Contains", "Matches"
                 If ucrInputText.IsEmpty Then
                     bEnableOrDisable = False
