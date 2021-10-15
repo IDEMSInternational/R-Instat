@@ -133,7 +133,7 @@
     <value>1</value>
   </data>
   <data name="btnEstablishConnection.Text" xml:space="preserve">
-    <value>Establish Connection..</value>
+    <value>Establish Connection...</value>
   </data>
   <data name="&gt;&gt;btnEstablishConnection.Name" xml:space="preserve">
     <value>btnEstablishConnection</value>
