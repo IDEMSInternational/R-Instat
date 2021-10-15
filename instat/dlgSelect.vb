@@ -85,6 +85,12 @@ Public Class dlgSelect
         TestOkEnabled()
     End Sub
 
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+        If strDefaultDataframe <> "" Then
+            ucrSelectorForSelectColumns.SetDataframe(strDefaultDataframe)
+        End If
+    End Sub
+
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
         dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()

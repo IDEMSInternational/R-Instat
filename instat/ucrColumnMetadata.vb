@@ -585,6 +585,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuSelection_Click(sender As Object, e As EventArgs) Handles mnuSelection.Click
+        dlgSelect.SetDefaultDataFrame(grdCurrSheet.Name)
         dlgSelect.ShowDialog()
     End Sub
 
