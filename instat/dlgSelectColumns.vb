@@ -260,13 +260,16 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub dlgSelectColumns_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Dim result As MsgBoxResult
-
-        If cmdAddCondition.Enabled Then
-            result = MessageBox.Show(text:="Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
-            If result = MsgBoxResult.No Then
-                e.Cancel = True
-            End If
+        If Not cmdAddCondition.Enabled Then
+            Exit Sub
         End If
+
+        Dim result As MsgBoxResult = MessageBox.Show(
+            text:="Are you sure you want to return to the main dialog?" & Environment.NewLine &
+                  "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine &
+                  "Click the ""Add Condition"" button if you want to add it.",
+            caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+        e.Cancel = result = MsgBoxResult.No
+
     End Sub
 End Class
