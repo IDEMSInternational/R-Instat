@@ -166,7 +166,7 @@ Public Class dlgClimSoft
         TestOKEnabled()
     End Sub
 
-    Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles btnEstablishConnection.Click
+    Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
         'shows the database connect sub dialog and checks if connection has been established
         sdgImportFromClimSoft.ShowDialog()
         CheckAndUpdateConnectionStatus()
