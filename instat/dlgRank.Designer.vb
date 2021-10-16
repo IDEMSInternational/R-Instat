@@ -46,10 +46,12 @@ Partial Class dlgRank
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTies = New instat.UcrPanel()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.rdoRoundOf = New System.Windows.Forms.RadioButton()
         Me.rdoSignificantDigits = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
@@ -57,26 +59,26 @@ Partial Class dlgRank
         Me.rdoLead = New System.Windows.Forms.RadioButton()
         Me.rdoLag = New System.Windows.Forms.RadioButton()
         Me.grpNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrNudLagPosition = New instat.ucrNud()
+        Me.lblLagPosition = New System.Windows.Forms.Label()
         Me.lblRoundofDigits = New System.Windows.Forms.Label()
+        Me.ucrNudRoundOfDigits = New instat.ucrNud()
+        Me.ucrNudDiffLag = New instat.ucrNud()
+        Me.ucrNudLagLeadPosition = New instat.ucrNud()
+        Me.ucrNudSignifDigits = New instat.ucrNud()
         Me.lblDiffLag = New System.Windows.Forms.Label()
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
+        Me.ucrPnlNumericOptions = New instat.UcrPanel()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoNonNegative = New System.Windows.Forms.RadioButton()
         Me.rdoRank = New System.Windows.Forms.RadioButton()
         Me.rdoSort = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMissingValues = New instat.UcrPanel()
         Me.ucrPnlTransformOptions = New instat.UcrPanel()
         Me.ucrSaveNew = New instat.ucrSave()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrNudRoundOfDigits = New instat.ucrNud()
-        Me.ucrNudDiffLag = New instat.ucrNud()
-        Me.ucrNudLagLeadPosition = New instat.ucrNud()
-        Me.ucrNudSignifDigits = New instat.ucrNud()
-        Me.ucrPnlNumericOptions = New instat.UcrPanel()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
         Me.grpTies.SuspendLayout()
@@ -143,6 +145,11 @@ Partial Class dlgRank
         Me.rdoAverage.Tag = "Average"
         Me.rdoAverage.UseVisualStyleBackColor = True
         '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
@@ -177,6 +184,11 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing.TabStop = True
         Me.rdoKeptAsMissing.Tag = "Kept_as_missing"
         Me.rdoKeptAsMissing.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMissingValues
+        '
+        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
+        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
         '
         'rdoRoundOf
         '
@@ -222,6 +234,8 @@ Partial Class dlgRank
         '
         'grpNumericOptions
         '
+        Me.grpNumericOptions.Controls.Add(Me.ucrNudLagPosition)
+        Me.grpNumericOptions.Controls.Add(Me.lblLagPosition)
         Me.grpNumericOptions.Controls.Add(Me.rdoLead)
         Me.grpNumericOptions.Controls.Add(Me.rdoDifference)
         Me.grpNumericOptions.Controls.Add(Me.rdoLag)
@@ -241,10 +255,65 @@ Partial Class dlgRank
         Me.grpNumericOptions.Name = "grpNumericOptions"
         Me.grpNumericOptions.TabStop = False
         '
+        'ucrNudLagPosition
+        '
+        Me.ucrNudLagPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLagPosition, "ucrNudLagPosition")
+        Me.ucrNudLagPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLagPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagPosition.Name = "ucrNudLagPosition"
+        Me.ucrNudLagPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLagPosition
+        '
+        resources.ApplyResources(Me.lblLagPosition, "lblLagPosition")
+        Me.lblLagPosition.Name = "lblLagPosition"
+        '
         'lblRoundofDigits
         '
         resources.ApplyResources(Me.lblRoundofDigits, "lblRoundofDigits")
         Me.lblRoundofDigits.Name = "lblRoundofDigits"
+        '
+        'ucrNudRoundOfDigits
+        '
+        Me.ucrNudRoundOfDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRoundOfDigits, "ucrNudRoundOfDigits")
+        Me.ucrNudRoundOfDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Name = "ucrNudRoundOfDigits"
+        Me.ucrNudRoundOfDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDiffLag
+        '
+        Me.ucrNudDiffLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDiffLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDiffLag, "ucrNudDiffLag")
+        Me.ucrNudDiffLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDiffLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDiffLag.Name = "ucrNudDiffLag"
+        Me.ucrNudDiffLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLagLeadPosition
+        '
+        Me.ucrNudLagLeadPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLagLeadPosition, "ucrNudLagLeadPosition")
+        Me.ucrNudLagLeadPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Name = "ucrNudLagLeadPosition"
+        Me.ucrNudLagLeadPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSignifDigits
+        '
+        Me.ucrNudSignifDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignifDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSignifDigits, "ucrNudSignifDigits")
+        Me.ucrNudSignifDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSignifDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
+        Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDiffLag
         '
@@ -260,6 +329,11 @@ Partial Class dlgRank
         '
         resources.ApplyResources(Me.lblLagLeadPosition, "lblLagLeadPosition")
         Me.lblLagLeadPosition.Name = "lblLagLeadPosition"
+        '
+        'ucrPnlNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
+        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
         '
         'rdoNumeric
         '
@@ -309,11 +383,6 @@ Partial Class dlgRank
         Me.rdoSort.Tag = "Frequency"
         Me.rdoSort.UseVisualStyleBackColor = False
         '
-        'ucrPnlMissingValues
-        '
-        resources.ApplyResources(Me.ucrPnlMissingValues, "ucrPnlMissingValues")
-        Me.ucrPnlMissingValues.Name = "ucrPnlMissingValues"
-        '
         'ucrPnlTransformOptions
         '
         resources.ApplyResources(Me.ucrPnlTransformOptions, "ucrPnlTransformOptions")
@@ -345,56 +414,6 @@ Partial Class dlgRank
         Me.ucrSelectorForRank.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRank, "ucrSelectorForRank")
         Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
-        '
-        'ucrNudRoundOfDigits
-        '
-        Me.ucrNudRoundOfDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRoundOfDigits, "ucrNudRoundOfDigits")
-        Me.ucrNudRoundOfDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Name = "ucrNudRoundOfDigits"
-        Me.ucrNudRoundOfDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudDiffLag
-        '
-        Me.ucrNudDiffLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDiffLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDiffLag, "ucrNudDiffLag")
-        Me.ucrNudDiffLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDiffLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDiffLag.Name = "ucrNudDiffLag"
-        Me.ucrNudDiffLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudLagLeadPosition
-        '
-        Me.ucrNudLagLeadPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLagLeadPosition, "ucrNudLagLeadPosition")
-        Me.ucrNudLagLeadPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Name = "ucrNudLagLeadPosition"
-        Me.ucrNudLagLeadPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudSignifDigits
-        '
-        Me.ucrNudSignifDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSignifDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSignifDigits, "ucrNudSignifDigits")
-        Me.ucrNudSignifDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSignifDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
-        Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
-        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
-        '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
         '
         'ucrChkMissingLast
         '
@@ -482,4 +501,6 @@ Partial Class dlgRank
     Friend WithEvents rdoNumeric As RadioButton
     Friend WithEvents rdoSort As RadioButton
     Friend WithEvents rdoRank As RadioButton
+    Friend WithEvents ucrNudLagPosition As ucrNud
+    Friend WithEvents lblLagPosition As Label
 End Class
