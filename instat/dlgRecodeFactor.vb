@@ -205,17 +205,20 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
+    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged, ucrReceiverFactor.ControlContentsChanged
         Dim strCurrentLabels As List(Of String)
         Dim strNewLabels As List(Of String)
 
         strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
-        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
+        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", False)
+        clsFctRecodeFunction.ClearParameters()
+        ucrReceiverFactor.SetParameterIsRFunction()
+        clsFctRecodeFunction.AddParameter(".f", ucrReceiverFactor.GetVariableNames(), iPosition:=0)
 
         If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
             For i = 0 To strCurrentLabels.Count - 1
                 'Backtick needed for names of the vector incase the levels are not valid R names
-                clsFctRecodeFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
+                clsFctRecodeFunction.AddParameter(Chr(96) & strNewLabels(i) & Chr(96), Chr(34) & strCurrentLabels(i) & Chr(34))
             Next
         End If
         TestOKEnabled()
