@@ -69,7 +69,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
         'disabling replaceby input text box
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrChkIncludeRegularExpressions}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrChkIncludeRegularExpressions, ucrChkAddKeyboard}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         'ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrPnlFixedRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=rdoFixed)
         ucrPnlFixedRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {rdoRegex}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -92,8 +92,11 @@ Public Class dlgStringHandling
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
         ucrPnlFixedRegex.Visible = False
 
+        ucrChkAddKeyboard.SetText("Add keyboard")
+
         'temporary disabling
         grpRegex.Enabled = False
+        ucrChkAddKeyboard.Enabled = False
         'hiding the Regex group box 
         grpRegex.Hide()
         'cmdDBackSlah.Visible = False
