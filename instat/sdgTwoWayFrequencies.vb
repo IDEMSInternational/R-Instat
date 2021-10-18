@@ -116,7 +116,7 @@ Public Class sdgTwoWayFrequencies
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         InitialiseTabs()
         'TODO: Investigate why when some variables are used for line graph this error is given "Breaks and labels are of different lengths"
-        rdoLine.Enabled = False
+        rdoLine.Enabled = True
         bControlsInitialised = True
     End Sub
     'Linking the subdialog to the functions main dialogue
