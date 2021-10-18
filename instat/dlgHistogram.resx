@@ -408,15 +408,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>448, 436</value>
   </data>
-  <data name="ucrChkDisplayAsDotPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 267</value>
-  </data>
-  <data name="ucrChkDisplayAsDotPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
-  </data>
-  <data name="ucrChkDisplayAsDotPlot.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
   <data name="&gt;&gt;ucrChkDisplayAsDotPlot.Name" xml:space="preserve">
     <value>ucrChkDisplayAsDotPlot</value>
   </data>
@@ -429,18 +420,6 @@
   <data name="&gt;&gt;ucrChkDisplayAsDotPlot.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkRidges.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 277</value>
-  </data>
-  <data name="ucrChkRidges.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="ucrChkRidges.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkRidges.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
   <data name="&gt;&gt;ucrChkRidges.Name" xml:space="preserve">
     <value>ucrChkRidges</value>
   </data>
@@ -452,6 +431,90 @@
   </data>
   <data name="&gt;&gt;ucrChkRidges.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorReceiver.Name" xml:space="preserve">
+    <value>ucrFactorReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorReceiver.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrHistogramSelector.Name" xml:space="preserve">
+    <value>ucrHistogramSelector</value>
+  </data>
+  <data name="&gt;&gt;ucrHistogramSelector.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrHistogramSelector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrHistogramSelector.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Histogram Plot</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgHistogram</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 68</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 136</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Name" xml:space="preserve">
+    <value>ucrVariablesAsFactorforHist</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Type" xml:space="preserve">
+    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorforHist.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 241</value>
@@ -549,40 +612,49 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="ucrChkRidges.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 277</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Histogram Plot</value>
+  <data name="ucrChkRidges.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgHistogram</value>
+  <data name="ucrChkRidges.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ucrChkRidges.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="ucrVariablesAsFactorforHist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 68</value>
+  <data name="&gt;&gt;ucrChkRidges.Name" xml:space="preserve">
+    <value>ucrChkRidges</value>
   </data>
-  <data name="ucrVariablesAsFactorforHist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+  <data name="&gt;&gt;ucrChkRidges.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="ucrVariablesAsFactorforHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 97</value>
-  </data>
-  <data name="ucrVariablesAsFactorforHist.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Name" xml:space="preserve">
-    <value>ucrVariablesAsFactorforHist</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Type" xml:space="preserve">
-    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorforHist.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkRidges.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorforHist.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;ucrChkRidges.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkDisplayAsDotPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 267</value>
+  </data>
+  <data name="ucrChkDisplayAsDotPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="ucrChkDisplayAsDotPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayAsDotPlot.Name" xml:space="preserve">
+    <value>ucrChkDisplayAsDotPlot</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayAsDotPlot.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayAsDotPlot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDisplayAsDotPlot.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
