@@ -282,45 +282,47 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged, ucrInputOrder.ControlValueChanged
-        If rdoProperty.Checked Then
-            ucrReceiverFactorX.SetMeAsReceiver()
-            If rdoReverseLevels.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverseFunction)
-                clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
-            End If
-            If rdoAppearance.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrderFunction)
-                clsDummyFunction.AddParameter("checked", "appearance", iPosition:=0)
-            ElseIf rdoFrequency.Checked Then
-                Select Case ucrInputOrder.GetText()
-                    Case strAscending
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRevFunction)
-                    Case strDescending
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsForcatInFreqFunction)
-                End Select
-                clsDummyFunction.AddParameter("checked", "frequency", iPosition:=0)
-            ElseIf rdoSequence.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeqFunction)
-                clsDummyFunction.AddParameter("checked", "sequence", iPosition:=0)
-            ElseIf rdoAlphabetical.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevelFunction)
-                clsDummyFunction.AddParameter("checked", "alphabetic", iPosition:=0)
-            ElseIf rdoShift.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShiftFunction)
-                clsDummyFunction.AddParameter("checked", "shift", iPosition:=0)
-            ElseIf rdoShuffle.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffleFunction)
-                clsDummyFunction.AddParameter("checked", "shuffle", iPosition:=0)
-            ElseIf rdoAnonymise.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymiseFunction)
-                clsDummyFunction.AddParameter("checked", "anonymise", iPosition:=0)
-            End If
-        ElseIf rdoHand.Checked Then
+        If rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
-        ElseIf rdoVariable.Checked Then
+        ElseIf rdoProperty.Checked OrElse rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorderFunction)
+            ucrSaveResults.setLinkedReceiver(ucrReceiverFactorX)
+            If rdoProperty.Checked Then
+                If rdoReverseLevels.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReverseFunction)
+                    clsDummyFunction.AddParameter("checked", "reverse", iPosition:=0)
+                End If
+                If rdoAppearance.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInOrderFunction)
+                    clsDummyFunction.AddParameter("checked", "appearance", iPosition:=0)
+                ElseIf rdoFrequency.Checked Then
+                    Select Case ucrInputOrder.GetText()
+                        Case strAscending
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRevFunction)
+                        Case strDescending
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsForcatInFreqFunction)
+                    End Select
+                    clsDummyFunction.AddParameter("checked", "frequency", iPosition:=0)
+                ElseIf rdoSequence.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsInSeqFunction)
+                    clsDummyFunction.AddParameter("checked", "sequence", iPosition:=0)
+                ElseIf rdoAlphabetical.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsRelevelFunction)
+                    clsDummyFunction.AddParameter("checked", "alphabetic", iPosition:=0)
+                ElseIf rdoShift.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShiftFunction)
+                    clsDummyFunction.AddParameter("checked", "shift", iPosition:=0)
+                ElseIf rdoShuffle.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsShuffleFunction)
+                    clsDummyFunction.AddParameter("checked", "shuffle", iPosition:=0)
+                ElseIf rdoAnonymise.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsAnonymiseFunction)
+                    clsDummyFunction.AddParameter("checked", "anonymise", iPosition:=0)
+                End If
+            ElseIf rdoVariable.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorderFunction)
+            End If
         End If
     End Sub
 
