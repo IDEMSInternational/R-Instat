@@ -40,6 +40,12 @@ Public Class dlgRecodeNumeric
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 43
 
+        ucrPnlRadioButtons.AddRadioButton(rdoQuantiles)
+        ucrPnlRadioButtons.AddRadioButton(rdoMinimum)
+
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrReceiverRecode.SetParameter(New RParameter("x", iNewPosition:=2))
         ucrReceiverRecode.SetParameterIsRFunction()
         ucrReceiverRecode.Selector = ucrSelectorForRecode
@@ -49,22 +55,17 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetParameter(New RParameter("g", iNewPosition:=3))
         ucrNudQuantiles.SetMinMax(1, Integer.MaxValue)
         ucrNudQuantiles.SetRDefault(4)
-        ttQuantiles.SetToolTip(ucrChkQuantiles.chkCheck, "Opens control")
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
         ucrNudMinimum.SetMinMax(1, Integer.MaxValue)
         ucrNudMinimum.SetRDefault(1)
 
-        ucrChkMinimum.SetText("Minimum:")
-        ucrChkMinimum.AddToLinkedControls(ucrNudMinimum, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkMinimum.AddParameterPresentCondition(True, "m", True)
-        ucrChkMinimum.AddParameterPresentCondition(False, "m", False)
-        ttMinimum.SetToolTip(ucrChkMinimum.chkCheck, "Opens a control")
+        ttMinimum.Show("Opens a control", rdoMinimum)
+        ttMinimum.Hide(rdoMinimum)
 
-        ucrChkQuantiles.SetText("Quantiles:")
-        ucrChkQuantiles.AddToLinkedControls(ucrNudQuantiles, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkQuantiles.AddParameterPresentCondition(True, "g", True)
-        ucrChkQuantiles.AddParameterPresentCondition(False, "g", False)
+
+        ttQuantiles.Show("Opens a control", rdoQuantiles)
+        ttQuantiles.Hide(rdoQuantiles)
 
         ucrChkAddLabels.SetText("Label Groups with Means")
 
@@ -78,8 +79,10 @@ Public Class dlgRecodeNumeric
 
         'ucrInputMultipleLabels.SetValidationTypeAsList()
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
-        ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3))
-        ttBreakpoint.SetToolTip(ucrMultipleNumericRecode.txtInput, "Seperate with comma")
+        ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3,))
+
+
+        ttBreakpoint.SetToolTip(ucrMultipleNumericRecode.txtInput, "Seperate break point with comma")
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -97,10 +100,7 @@ Public Class dlgRecodeNumeric
     Private Sub SetDefaults()
         clsCut2Function = New RFunction
 
-        ucrChkMinimum.Checked = False
-        ucrChkQuantiles.Checked = False
-
-
+        rdoQuantiles.Checked = True
 
         ucrSelectorForRecode.Reset()
         ucrSaveRecode.Reset()
@@ -109,11 +109,8 @@ Public Class dlgRecodeNumeric
 
         clsCut2Function.SetRCommand("cut2")
         clsCut2Function.SetPackageName("Hmisc")
-        'clsCut2Function.AddParameter("g", "4", iPosition:=1)
-        'clsCut2Function.AddParameter("m", "1", iPosition:=2)
-        clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
-        AddParameters()
 
+        AddParameters()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCut2Function)
     End Sub
 
@@ -128,7 +125,7 @@ Public Class dlgRecodeNumeric
     Private Sub TestOKEnabled()
         'Dim iTemp As Integer
 
-        If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso ucrSaveRecode.IsComplete Then
+        If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -153,21 +150,19 @@ Public Class dlgRecodeNumeric
     'End Sub
 
     Private Sub AddParameters()
-        If ucrChkAddLabels.Checked Then
-            clsCut2Function.AddParameter(New RParameter("levels.mean", "TRUE", iNewPosition:=5))
-            clsCut2Function.AddParameter(New RParameter("digits", "3", iNewPosition:=6))
-        Else
-            clsCut2Function.RemoveParameterByName("levels.mean")
-            clsCut2Function.RemoveParameterByName("digits")
-        End If
-
-        If ucrChkMinimum.Checked = True Then
-            ucrChkMinimum.Visible = True
-        ElseIf ucrChkQuantiles.Checked = True Then
+        If rdoMinimum.Checked = True Then
+            rdoMinimum.Visible = True
+        ElseIf rdoQuantiles.Checked = True Then
             ucrNudQuantiles.Visible = True
         Else
             ucrNudQuantiles.Visible = False
             ucrNudMinimum.Visible = False
+        End If
+
+        If ucrMultipleNumericRecode.IsEmpty Then
+            clsCut2Function.RemoveParameterByName("cuts")
+        Else
+            clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
         End If
     End Sub
 
@@ -191,11 +186,21 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrReceiverRecode.ControlContentsChanged,
-            ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrNudMinimum.ControlContentsChanged, ucrNudQuantiles.ControlContentsChanged
+            ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrNudMinimum.ControlContentsChanged, ucrNudQuantiles.ControlContentsChanged, ucrPnlRadioButtons.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+        If ucrChkAddLabels.Checked Then
+            clsCut2Function.AddParameter(New RParameter("levels.mean", "TRUE", iNewPosition:=5))
+            clsCut2Function.AddParameter(New RParameter("digits", "3", iNewPosition:=6))
+        Else
+            clsCut2Function.RemoveParameterByName("levels.mean")
+            clsCut2Function.RemoveParameterByName("digits")
+        End If
+    End Sub
+
+    Private Sub ucrMultipleNumericRecode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlValueChanged
         AddParameters()
     End Sub
 End Class

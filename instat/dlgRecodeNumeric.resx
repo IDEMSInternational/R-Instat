@@ -175,51 +175,69 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblBreakPoints.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+    <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;lblBreakPoints.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkMinimum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 65</value>
+  <data name="rdoMinimum.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrChkMinimum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 20</value>
+  <data name="rdoMinimum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrChkMinimum.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="rdoMinimum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 65</value>
   </data>
-  <data name="&gt;&gt;ucrChkMinimum.Name" xml:space="preserve">
-    <value>ucrChkMinimum</value>
+  <data name="rdoMinimum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 17</value>
   </data>
-  <data name="&gt;&gt;ucrChkMinimum.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rdoMinimum.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
   </data>
-  <data name="&gt;&gt;ucrChkMinimum.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+  <data name="rdoMinimum.Text" xml:space="preserve">
+    <value>Minimum</value>
   </data>
-  <data name="&gt;&gt;ucrChkMinimum.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoMinimum.Name" xml:space="preserve">
+    <value>rdoMinimum</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.Parent" xml:space="preserve">
+    <value>grpQuantileGroups</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+  <data name="rdoQuantiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrChkQuantiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+  <data name="rdoQuantiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrChkQuantiles.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="rdoQuantiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 26</value>
   </data>
-  <data name="&gt;&gt;ucrChkQuantiles.Name" xml:space="preserve">
-    <value>ucrChkQuantiles</value>
+  <data name="rdoQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 17</value>
   </data>
-  <data name="&gt;&gt;ucrChkQuantiles.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rdoQuantiles.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
-  <data name="&gt;&gt;ucrChkQuantiles.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+  <data name="rdoQuantiles.Text" xml:space="preserve">
+    <value>Quantiles</value>
   </data>
-  <data name="&gt;&gt;ucrChkQuantiles.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoQuantiles.Name" xml:space="preserve">
+    <value>rdoQuantiles</value>
+  </data>
+  <data name="&gt;&gt;rdoQuantiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoQuantiles.Parent" xml:space="preserve">
+    <value>grpQuantileGroups</value>
+  </data>
+  <data name="&gt;&gt;rdoQuantiles.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrMultipleNumericRecode.Location" type="System.Drawing.Point, System.Drawing">
@@ -238,7 +256,7 @@
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrMultipleNumericRecode.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+    <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;ucrMultipleNumericRecode.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -259,7 +277,7 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudMinimum.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+    <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;ucrNudMinimum.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -280,35 +298,65 @@
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrNudQuantiles.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
+    <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;ucrNudQuantiles.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="grpClosedOn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 84</value>
+  <data name="ucrPnlRadioButtons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
   </data>
-  <data name="grpClosedOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 146</value>
+  <data name="ucrPnlRadioButtons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 81</value>
   </data>
-  <data name="grpClosedOn.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="ucrPnlRadioButtons.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="grpClosedOn.Text" xml:space="preserve">
-    <value>Closed On</value>
+  <data name="&gt;&gt;ucrPnlRadioButtons.Name" xml:space="preserve">
+    <value>ucrPnlRadioButtons</value>
   </data>
-  <data name="&gt;&gt;grpClosedOn.Name" xml:space="preserve">
-    <value>grpClosedOn</value>
+  <data name="&gt;&gt;ucrPnlRadioButtons.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;grpClosedOn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ucrPnlRadioButtons.Parent" xml:space="preserve">
+    <value>grpQuantileGroups</value>
   </data>
-  <data name="&gt;&gt;grpClosedOn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpClosedOn.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlRadioButtons.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="grpQuantileGroups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 84</value>
+  </data>
+  <data name="grpQuantileGroups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 146</value>
+  </data>
+  <data name="grpQuantileGroups.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="grpQuantileGroups.Text" xml:space="preserve">
+    <value>Quantile Groups</value>
+  </data>
+  <data name="&gt;&gt;grpQuantileGroups.Name" xml:space="preserve">
+    <value>grpQuantileGroups</value>
+  </data>
+  <data name="&gt;&gt;grpQuantileGroups.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpQuantileGroups.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpQuantileGroups.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="ttBreakpoint.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ttQuantiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
+  </metadata>
+  <metadata name="ttMinimum.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>227, 17</value>
+  </metadata>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 221</value>
   </data>
@@ -462,13 +510,4 @@
   <data name="&gt;&gt;ucrReceiverRecode.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="ttBreakpoint.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ttQuantiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 17</value>
-  </metadata>
-  <metadata name="ttMinimum.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>227, 17</value>
-  </metadata>
 </root>

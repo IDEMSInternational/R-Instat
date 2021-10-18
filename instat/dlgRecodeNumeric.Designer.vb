@@ -42,21 +42,22 @@ Partial Class dlgRecodeNumeric
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRecodeNumeric))
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
-        Me.grpClosedOn = New System.Windows.Forms.GroupBox()
+        Me.grpQuantileGroups = New System.Windows.Forms.GroupBox()
+        Me.rdoMinimum = New System.Windows.Forms.RadioButton()
+        Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrNudMinimum = New instat.ucrNud()
+        Me.ucrNudQuantiles = New instat.ucrNud()
+        Me.ucrPnlRadioButtons = New instat.UcrPanel()
+        Me.ttBreakpoint = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttQuantiles = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttMinimum = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrSaveRecode = New instat.ucrSave()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkMinimum = New instat.ucrCheck()
-        Me.ucrChkQuantiles = New instat.ucrCheck()
-        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
-        Me.ucrNudMinimum = New instat.ucrNud()
-        Me.ucrNudQuantiles = New instat.ucrNud()
-        Me.ttBreakpoint = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttQuantiles = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttMinimum = New System.Windows.Forms.ToolTip(Me.components)
-        Me.grpClosedOn.SuspendLayout()
+        Me.grpQuantileGroups.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -71,17 +72,65 @@ Partial Class dlgRecodeNumeric
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Tag = "Break_Points"
         '
-        'grpClosedOn
+        'grpQuantileGroups
         '
-        Me.grpClosedOn.Controls.Add(Me.ucrChkMinimum)
-        Me.grpClosedOn.Controls.Add(Me.ucrChkQuantiles)
-        Me.grpClosedOn.Controls.Add(Me.ucrMultipleNumericRecode)
-        Me.grpClosedOn.Controls.Add(Me.lblBreakPoints)
-        Me.grpClosedOn.Controls.Add(Me.ucrNudMinimum)
-        Me.grpClosedOn.Controls.Add(Me.ucrNudQuantiles)
-        resources.ApplyResources(Me.grpClosedOn, "grpClosedOn")
-        Me.grpClosedOn.Name = "grpClosedOn"
-        Me.grpClosedOn.TabStop = False
+        Me.grpQuantileGroups.Controls.Add(Me.rdoMinimum)
+        Me.grpQuantileGroups.Controls.Add(Me.rdoQuantiles)
+        Me.grpQuantileGroups.Controls.Add(Me.ucrMultipleNumericRecode)
+        Me.grpQuantileGroups.Controls.Add(Me.lblBreakPoints)
+        Me.grpQuantileGroups.Controls.Add(Me.ucrNudMinimum)
+        Me.grpQuantileGroups.Controls.Add(Me.ucrNudQuantiles)
+        Me.grpQuantileGroups.Controls.Add(Me.ucrPnlRadioButtons)
+        resources.ApplyResources(Me.grpQuantileGroups, "grpQuantileGroups")
+        Me.grpQuantileGroups.Name = "grpQuantileGroups"
+        Me.grpQuantileGroups.TabStop = False
+        '
+        'rdoMinimum
+        '
+        resources.ApplyResources(Me.rdoMinimum, "rdoMinimum")
+        Me.rdoMinimum.Name = "rdoMinimum"
+        Me.rdoMinimum.TabStop = True
+        Me.rdoMinimum.UseVisualStyleBackColor = True
+        '
+        'rdoQuantiles
+        '
+        resources.ApplyResources(Me.rdoQuantiles, "rdoQuantiles")
+        Me.rdoQuantiles.Name = "rdoQuantiles"
+        Me.rdoQuantiles.TabStop = True
+        Me.rdoQuantiles.UseVisualStyleBackColor = True
+        '
+        'ucrMultipleNumericRecode
+        '
+        Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
+        Me.ucrMultipleNumericRecode.IsMultiline = False
+        Me.ucrMultipleNumericRecode.IsReadOnly = False
+        resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
+        Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
+        '
+        'ucrNudMinimum
+        '
+        Me.ucrNudMinimum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinimum, "ucrNudMinimum")
+        Me.ucrNudMinimum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinimum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimum.Name = "ucrNudMinimum"
+        Me.ucrNudMinimum.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudQuantiles
+        '
+        Me.ucrNudQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudQuantiles, "ucrNudQuantiles")
+        Me.ucrNudQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudQuantiles.Name = "ucrNudQuantiles"
+        Me.ucrNudQuantiles.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlRadioButtons
+        '
+        resources.ApplyResources(Me.ucrPnlRadioButtons, "ucrPnlRadioButtons")
+        Me.ucrPnlRadioButtons.Name = "ucrPnlRadioButtons"
         '
         'ucrChkAddLabels
         '
@@ -116,46 +165,6 @@ Partial Class dlgRecodeNumeric
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkMinimum
-        '
-        Me.ucrChkMinimum.Checked = False
-        resources.ApplyResources(Me.ucrChkMinimum, "ucrChkMinimum")
-        Me.ucrChkMinimum.Name = "ucrChkMinimum"
-        '
-        'ucrChkQuantiles
-        '
-        Me.ucrChkQuantiles.Checked = False
-        resources.ApplyResources(Me.ucrChkQuantiles, "ucrChkQuantiles")
-        Me.ucrChkQuantiles.Name = "ucrChkQuantiles"
-        '
-        'ucrMultipleNumericRecode
-        '
-        Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleNumericRecode.IsMultiline = False
-        Me.ucrMultipleNumericRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
-        Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
-        '
-        'ucrNudMinimum
-        '
-        Me.ucrNudMinimum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinimum, "ucrNudMinimum")
-        Me.ucrNudMinimum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinimum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimum.Name = "ucrNudMinimum"
-        Me.ucrNudMinimum.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudQuantiles
-        '
-        Me.ucrNudQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudQuantiles, "ucrNudQuantiles")
-        Me.ucrNudQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudQuantiles.Name = "ucrNudQuantiles"
-        Me.ucrNudQuantiles.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgRecodeNumeric
         '
         resources.ApplyResources(Me, "$this")
@@ -166,14 +175,14 @@ Partial Class dlgRecodeNumeric
         Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpClosedOn)
+        Me.Controls.Add(Me.grpQuantileGroups)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRecodeNumeric"
         Me.Tag = "Recode_Numeric"
-        Me.grpClosedOn.ResumeLayout(False)
-        Me.grpClosedOn.PerformLayout()
+        Me.grpQuantileGroups.ResumeLayout(False)
+        Me.grpQuantileGroups.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -188,10 +197,11 @@ Partial Class dlgRecodeNumeric
     Friend WithEvents ucrChkAddLabels As ucrCheck
     Friend WithEvents ucrNudMinimum As ucrNud
     Friend WithEvents ucrNudQuantiles As ucrNud
-    Friend WithEvents grpClosedOn As GroupBox
-    Friend WithEvents ucrChkMinimum As ucrCheck
-    Friend WithEvents ucrChkQuantiles As ucrCheck
+    Friend WithEvents grpQuantileGroups As GroupBox
     Friend WithEvents ttBreakpoint As ToolTip
     Friend WithEvents ttQuantiles As ToolTip
     Friend WithEvents ttMinimum As ToolTip
+    Friend WithEvents ucrPnlRadioButtons As UcrPanel
+    Friend WithEvents rdoQuantiles As RadioButton
+    Friend WithEvents rdoMinimum As RadioButton
 End Class
