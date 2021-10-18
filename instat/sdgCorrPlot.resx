@@ -272,6 +272,27 @@
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkReverseLegendOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 217</value>
+  </data>
+  <data name="ucrChkReverseLegendOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 20</value>
+  </data>
+  <data name="ucrChkReverseLegendOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrChkReverseLegendOrder.Name" xml:space="preserve">
+    <value>ucrChkReverseLegendOrder</value>
+  </data>
+  <data name="&gt;&gt;ucrChkReverseLegendOrder.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkReverseLegendOrder.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkReverseLegendOrder.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -297,7 +318,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrSelectorFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 24</value>
@@ -322,7 +343,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrSelectorFactor.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -331,10 +352,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>366, 362</value>
+    <value>366, 401</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 303</value>
+    <value>10, 339</value>
   </data>
   <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -358,7 +379,7 @@
     <value>0</value>
   </data>
   <data name="ucrBaseSdgCorrPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 327</value>
+    <value>111, 363</value>
   </data>
   <data name="ucrBaseSdgCorrPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 30</value>
@@ -412,7 +433,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 51</value>
@@ -433,7 +454,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblGeom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,7 +481,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblGeom.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrInputComboGeom.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 24</value>
@@ -481,7 +502,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputComboGeom.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrNudMaximumSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>98, 103</value>
@@ -502,7 +523,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudMaximumSize.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblMaximumSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,7 +550,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblMaximumSize.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrNudMinimunSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>98, 77</value>
@@ -550,7 +571,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudMinimunSize.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblMinimumSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -577,13 +598,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblMinimumSize.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 80</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 217</value>
+    <value>346, 252</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
