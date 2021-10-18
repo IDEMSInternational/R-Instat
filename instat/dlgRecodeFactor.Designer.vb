@@ -43,23 +43,26 @@ Partial Class dlgRecodeFactor
         Me.grpSelectedValues = New System.Windows.Forms.GroupBox()
         Me.rdoKeep = New System.Windows.Forms.RadioButton()
         Me.rdoDrop = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.lblOther = New System.Windows.Forms.Label()
         Me.rdoRecode = New System.Windows.Forms.RadioButton()
         Me.rdoOther = New System.Windows.Forms.RadioButton()
         Me.rdoLump = New System.Windows.Forms.RadioButton()
         Me.grpKeep = New System.Windows.Forms.GroupBox()
-        Me.ucrNudFrequentValues = New instat.ucrNud()
-        Me.ucrNudCommonValues = New instat.ucrNud()
-        Me.ucrNudLevels = New instat.ucrNud()
         Me.rdoMore = New System.Windows.Forms.RadioButton()
         Me.rdoFrequentValues = New System.Windows.Forms.RadioButton()
         Me.rdoCommonValues = New System.Windows.Forms.RadioButton()
         Me.rdoLevels = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlKeep = New instat.UcrPanel()
+        Me.rdoAddNa = New System.Windows.Forms.RadioButton()
+        Me.lblNameForNa = New System.Windows.Forms.Label()
+        Me.ucrInputAddNa = New instat.ucrInputTextBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
+        Me.ucrNudFrequentValues = New instat.ucrNud()
+        Me.ucrNudCommonValues = New instat.ucrNud()
+        Me.ucrNudLevels = New instat.ucrNud()
+        Me.ucrPnlKeep = New instat.UcrPanel()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrInputOther = New instat.ucrInputTextBox()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrFactorGrid = New instat.ucrFactor()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -96,11 +99,6 @@ Partial Class dlgRecodeFactor
         Me.rdoDrop.Name = "rdoDrop"
         Me.rdoDrop.TabStop = True
         Me.rdoDrop.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'lblOther
         '
@@ -157,6 +155,68 @@ Partial Class dlgRecodeFactor
         Me.grpKeep.Name = "grpKeep"
         Me.grpKeep.TabStop = False
         '
+        'rdoMore
+        '
+        resources.ApplyResources(Me.rdoMore, "rdoMore")
+        Me.rdoMore.Name = "rdoMore"
+        Me.rdoMore.TabStop = True
+        Me.rdoMore.UseVisualStyleBackColor = True
+        '
+        'rdoFrequentValues
+        '
+        resources.ApplyResources(Me.rdoFrequentValues, "rdoFrequentValues")
+        Me.rdoFrequentValues.Name = "rdoFrequentValues"
+        Me.rdoFrequentValues.TabStop = True
+        Me.rdoFrequentValues.UseVisualStyleBackColor = True
+        '
+        'rdoCommonValues
+        '
+        resources.ApplyResources(Me.rdoCommonValues, "rdoCommonValues")
+        Me.rdoCommonValues.Name = "rdoCommonValues"
+        Me.rdoCommonValues.TabStop = True
+        Me.rdoCommonValues.UseVisualStyleBackColor = True
+        '
+        'rdoLevels
+        '
+        resources.ApplyResources(Me.rdoLevels, "rdoLevels")
+        Me.rdoLevels.Name = "rdoLevels"
+        Me.rdoLevels.TabStop = True
+        Me.rdoLevels.UseVisualStyleBackColor = True
+        '
+        'rdoAddNa
+        '
+        resources.ApplyResources(Me.rdoAddNa, "rdoAddNa")
+        Me.rdoAddNa.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoAddNa.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAddNa.FlatAppearance.BorderSize = 2
+        Me.rdoAddNa.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAddNa.Name = "rdoAddNa"
+        Me.rdoAddNa.TabStop = True
+        Me.rdoAddNa.Tag = "add_na"
+        Me.rdoAddNa.UseVisualStyleBackColor = False
+        '
+        'lblNameForNa
+        '
+        resources.ApplyResources(Me.lblNameForNa, "lblNameForNa")
+        Me.lblNameForNa.Name = "lblNameForNa"
+        '
+        'ucrInputAddNa
+        '
+        Me.ucrInputAddNa.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddNa.IsMultiline = False
+        Me.ucrInputAddNa.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAddNa, "ucrInputAddNa")
+        Me.ucrInputAddNa.Name = "ucrInputAddNa"
+        '
+        'ucrFactorLevels
+        '
+        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.ucrChkLevels = Nothing
+        '
         'ucrNudFrequentValues
         '
         Me.ucrNudFrequentValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -187,47 +247,10 @@ Partial Class dlgRecodeFactor
         Me.ucrNudLevels.Name = "ucrNudLevels"
         Me.ucrNudLevels.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoMore
-        '
-        resources.ApplyResources(Me.rdoMore, "rdoMore")
-        Me.rdoMore.Name = "rdoMore"
-        Me.rdoMore.TabStop = True
-        Me.rdoMore.UseVisualStyleBackColor = True
-        '
-        'rdoFrequentValues
-        '
-        resources.ApplyResources(Me.rdoFrequentValues, "rdoFrequentValues")
-        Me.rdoFrequentValues.Name = "rdoFrequentValues"
-        Me.rdoFrequentValues.TabStop = True
-        Me.rdoFrequentValues.UseVisualStyleBackColor = True
-        '
-        'rdoCommonValues
-        '
-        resources.ApplyResources(Me.rdoCommonValues, "rdoCommonValues")
-        Me.rdoCommonValues.Name = "rdoCommonValues"
-        Me.rdoCommonValues.TabStop = True
-        Me.rdoCommonValues.UseVisualStyleBackColor = True
-        '
-        'rdoLevels
-        '
-        resources.ApplyResources(Me.rdoLevels, "rdoLevels")
-        Me.rdoLevels.Name = "rdoLevels"
-        Me.rdoLevels.TabStop = True
-        Me.rdoLevels.UseVisualStyleBackColor = True
-        '
         'ucrPnlKeep
         '
         resources.ApplyResources(Me.ucrPnlKeep, "ucrPnlKeep")
         Me.ucrPnlKeep.Name = "ucrPnlKeep"
-        '
-        'ucrFactorLevels
-        '
-        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
         'ucrPnlOptions
         '
@@ -241,6 +264,11 @@ Partial Class dlgRecodeFactor
         Me.ucrInputOther.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOther, "ucrInputOther")
         Me.ucrInputOther.Name = "ucrInputOther"
+        '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'ucrSaveNewColumn
         '
@@ -282,6 +310,9 @@ Partial Class dlgRecodeFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNameForNa)
+        Me.Controls.Add(Me.ucrInputAddNa)
+        Me.Controls.Add(Me.rdoAddNa)
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.grpKeep)
         Me.Controls.Add(Me.rdoLump)
@@ -336,4 +367,7 @@ Partial Class dlgRecodeFactor
     Friend WithEvents ucrNudCommonValues As ucrNud
     Friend WithEvents ucrNudLevels As ucrNud
     Friend WithEvents ucrFactorLevels As ucrFactor
+    Friend WithEvents rdoAddNa As RadioButton
+    Friend WithEvents lblNameForNa As Label
+    Friend WithEvents ucrInputAddNa As ucrInputTextBox
 End Class

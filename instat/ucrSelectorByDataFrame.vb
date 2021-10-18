@@ -167,4 +167,12 @@ Public Class ucrSelectorByDataFrame
     Public Overrides Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
         ucrAvailableDataFrames.SetPrimaryDataFrameOptions(strNewPrimaryDataFrame:=strNewPrimaryDataFrame, bNewOnlyLinkedToPrimaryDataFrames:=bNewOnlyLinkedToPrimaryDataFrames, bNewIncludePrimaryDataFrameAsLinked:=bNewIncludePrimaryDataFrameAsLinked)
     End Sub
+
+    Public Function IsEmpty() As Boolean
+        If ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class
