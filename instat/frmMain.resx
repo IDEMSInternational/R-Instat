@@ -189,7 +189,7 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeThreeVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariableSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
@@ -198,22 +198,22 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeThreeVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariableGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeThreeVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariableFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeThreeVariablePivotTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariablePivotTable.Text" xml:space="preserve">
     <value>Pivot Table...</value>
@@ -1097,18 +1097,6 @@
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 6</value>
   </data>
-  <data name="mnuClimaticFileExportToClimsoft.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticFileExportToClimsoft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileExportToClimsoft.Text" xml:space="preserve">
-    <value>Export to Climsoft...</value>
-  </data>
-  <data name="mnuClimaticFileExportToClimsoft.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
@@ -1201,12 +1189,6 @@
   </data>
   <data name="mnuTidyandExamineClimaticDataEntry.Text" xml:space="preserve">
     <value>Daily Data Entry...</value>
-  </data>
-  <data name="mnuClimaticTidyandExamineCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 22</value>
-  </data>
-  <data name="mnuClimaticTidyandExamineCompareColumns.Text" xml:space="preserve">
-    <value>Compare Columns...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
@@ -6675,12 +6657,6 @@
   <data name="&gt;&gt;mnuDescribeThreeVariableFrequencies.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuDescribeThreeVariablePivotTable.Name" xml:space="preserve">
-    <value>mnuDescribeThreeVariablePivotTable</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeThreeVariablePivotTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuDescribeSpecificTablesGraphs.Name" xml:space="preserve">
     <value>mnuDescribeSpecificTablesGraphs</value>
   </data>
@@ -7503,12 +7479,6 @@
   <data name="&gt;&gt;ToolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileExportToClimsoft.Name" xml:space="preserve">
-    <value>mnuClimaticFileExportToClimsoft</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticFileExportToClimsoft.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuClimaticFileExportToCPT.Name" xml:space="preserve">
     <value>mnuClimaticFileExportToCPT</value>
   </data>
@@ -7609,12 +7579,6 @@
     <value>mnuTidyandExamineClimaticDataEntry</value>
   </data>
   <data name="&gt;&gt;mnuTidyandExamineClimaticDataEntry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticTidyandExamineCompareColumns.Name" xml:space="preserve">
-    <value>mnuClimaticTidyandExamineCompareColumns</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticTidyandExamineCompareColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator50.Name" xml:space="preserve">
@@ -10279,6 +10243,12 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeThreeVariablePivotTable.Name" xml:space="preserve">
+    <value>mnuDescribeThreeVariablePivotTable</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeThreeVariablePivotTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
