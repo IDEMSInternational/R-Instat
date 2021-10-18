@@ -254,13 +254,8 @@ Public Class dlgRatingScales
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         SetBaseFunction()
-        If Not rdoLikert.Checked Then
-            grpSortTable.Visible = True
-            grpSort.Visible = False
-        Else
-            grpSort.Visible = True
-            grpSortTable.Visible = False
-        End If
+        grpSort.Visible = rdoLikert.Checked
+        grpSortTable.Visible = Not rdoLikert.Checked
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
