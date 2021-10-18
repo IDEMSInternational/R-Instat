@@ -284,6 +284,7 @@ Public Class dlgReorderLevels
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged, ucrInputOrder.ControlValueChanged
         If rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
+            ucrSaveResults.setLinkedReceiver(ucrReceiverFactor)
             ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
         ElseIf rdoProperty.Checked OrElse rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
