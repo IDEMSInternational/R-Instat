@@ -129,7 +129,6 @@ Partial Class ucrCalculator
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.grpWakefield = New System.Windows.Forms.GroupBox()
-        Me.cmdWakefieldHelp = New System.Windows.Forms.Button()
         Me.cmdLinkert7 = New System.Windows.Forms.Button()
         Me.cmdWakefield_Year = New System.Windows.Forms.Button()
         Me.cmdValid = New System.Windows.Forms.Button()
@@ -185,6 +184,7 @@ Partial Class ucrCalculator
         Me.cmdHair = New System.Windows.Forms.Button()
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.cmdWakefieldHelp = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
         Me.cmdMathsHelp = New System.Windows.Forms.Button()
         Me.cmdAtan2 = New System.Windows.Forms.Button()
@@ -310,10 +310,6 @@ Partial Class ucrCalculator
         Me.cmdNA = New System.Windows.Forms.Button()
         Me.cmdNear = New System.Windows.Forms.Button()
         Me.cmdBetween = New System.Windows.Forms.Button()
-        Me.cmdIsFalse = New System.Windows.Forms.Button()
-        Me.cmdAny = New System.Windows.Forms.Button()
-        Me.cmdAll = New System.Windows.Forms.Button()
-        Me.cmdIsTrue = New System.Windows.Forms.Button()
         Me.cmdIsNa = New System.Windows.Forms.Button()
         Me.cmdNotIsNa = New System.Windows.Forms.Button()
         Me.cmdDuplicate = New System.Windows.Forms.Button()
@@ -403,12 +399,12 @@ Partial Class ucrCalculator
         Me.cmdEnd1 = New System.Windows.Forms.Button()
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
+        Me.cmdStringRHelp = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdStringRHelp = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpFactor.SuspendLayout()
@@ -1097,12 +1093,6 @@ Partial Class ucrCalculator
         Me.grpWakefield.Name = "grpWakefield"
         Me.grpWakefield.TabStop = False
         '
-        'cmdWakefieldHelp
-        '
-        resources.ApplyResources(Me.cmdWakefieldHelp, "cmdWakefieldHelp")
-        Me.cmdWakefieldHelp.Name = "cmdWakefieldHelp"
-        Me.cmdWakefieldHelp.UseVisualStyleBackColor = True
-        '
         'cmdLinkert7
         '
         resources.ApplyResources(Me.cmdLinkert7, "cmdLinkert7")
@@ -1432,6 +1422,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdGrade, "cmdGrade")
         Me.cmdGrade.Name = "cmdGrade"
         Me.cmdGrade.UseVisualStyleBackColor = True
+        '
+        'cmdWakefieldHelp
+        '
+        resources.ApplyResources(Me.cmdWakefieldHelp, "cmdWakefieldHelp")
+        Me.cmdWakefieldHelp.Name = "cmdWakefieldHelp"
+        Me.cmdWakefieldHelp.UseVisualStyleBackColor = True
         '
         'grpMaths
         '
@@ -2246,10 +2242,6 @@ Partial Class ucrCalculator
         Me.grpLogical.Controls.Add(Me.cmdNA)
         Me.grpLogical.Controls.Add(Me.cmdNear)
         Me.grpLogical.Controls.Add(Me.cmdBetween)
-        Me.grpLogical.Controls.Add(Me.cmdIsFalse)
-        Me.grpLogical.Controls.Add(Me.cmdAny)
-        Me.grpLogical.Controls.Add(Me.cmdAll)
-        Me.grpLogical.Controls.Add(Me.cmdIsTrue)
         Me.grpLogical.Controls.Add(Me.cmdIsNa)
         Me.grpLogical.Controls.Add(Me.cmdNotIsNa)
         Me.grpLogical.Controls.Add(Me.cmdDuplicate)
@@ -2329,30 +2321,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdBetween, "cmdBetween")
         Me.cmdBetween.Name = "cmdBetween"
         Me.cmdBetween.UseVisualStyleBackColor = True
-        '
-        'cmdIsFalse
-        '
-        resources.ApplyResources(Me.cmdIsFalse, "cmdIsFalse")
-        Me.cmdIsFalse.Name = "cmdIsFalse"
-        Me.cmdIsFalse.UseVisualStyleBackColor = True
-        '
-        'cmdAny
-        '
-        resources.ApplyResources(Me.cmdAny, "cmdAny")
-        Me.cmdAny.Name = "cmdAny"
-        Me.cmdAny.UseVisualStyleBackColor = True
-        '
-        'cmdAll
-        '
-        resources.ApplyResources(Me.cmdAll, "cmdAll")
-        Me.cmdAll.Name = "cmdAll"
-        Me.cmdAll.UseVisualStyleBackColor = True
-        '
-        'cmdIsTrue
-        '
-        resources.ApplyResources(Me.cmdIsTrue, "cmdIsTrue")
-        Me.cmdIsTrue.Name = "cmdIsTrue"
-        Me.cmdIsTrue.UseVisualStyleBackColor = True
         '
         'cmdIsNa
         '
@@ -2961,6 +2929,12 @@ Partial Class ucrCalculator
         Me.cmdAny1.Name = "cmdAny1"
         Me.cmdAny1.UseVisualStyleBackColor = True
         '
+        'cmdStringRHelp
+        '
+        resources.ApplyResources(Me.cmdStringRHelp, "cmdStringRHelp")
+        Me.cmdStringRHelp.Name = "cmdStringRHelp"
+        Me.cmdStringRHelp.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
@@ -2996,12 +2970,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdStringRHelp
-        '
-        resources.ApplyResources(Me.cmdStringRHelp, "cmdStringRHelp")
-        Me.cmdStringRHelp.Name = "cmdStringRHelp"
-        Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -3190,9 +3158,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdDRank As Button
     Friend WithEvents cmdMovMax As Button
     Friend WithEvents cmdMovSum As Button
-    Friend WithEvents cmdAny As Button
-    Friend WithEvents cmdAll As Button
-    Friend WithEvents cmdIsTrue As Button
     Friend WithEvents cmdIsNa As Button
     Friend WithEvents cmdNotIsNa As Button
     Friend WithEvents cmdDuplicate As Button
@@ -3201,7 +3166,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdwhen As Button
     Friend WithEvents cmdNear As Button
     Friend WithEvents cmdBetween As Button
-    Friend WithEvents cmdIsFalse As Button
     Friend WithEvents cmdRowRank As Button
     Friend WithEvents cmdNonMiss As Button
     Friend WithEvents cmdDistinct As Button
