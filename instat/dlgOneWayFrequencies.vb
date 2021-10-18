@@ -25,16 +25,7 @@ Public Class dlgOneWayFrequencies
     Private clsSjPlotList As New RFunction
     Private clsAsGGplot As New RFunction
     Private clsAsDataFrame As New RFunction
-    Private clsCaptureOutput As New RFunction
-    Private clsLengthFunction As New RFunction
-    Private clsLengthOperator As New ROperator
-    Private clsPlusOperator As New ROperator
-    Private clsDataFrame As New RFunction
-    Private clsGgplotFuntion As New RFunction
-    Private clsGeomTextFunction As New RFunction
     Private clsStemAndLeafFunction As New RFunction
-    Private clsLabelAesFunction As New RFunction
-    Private clsFlipCoordinates As New RFunction
     Private clsDummyFunction As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -67,11 +58,11 @@ Public Class dlgOneWayFrequencies
         'temp fix to bug in sjPlot
         ucrReceiverOneWayFreq.bRemoveLabels = True
 
-        ucrReceiverMultipleStemAndLeaf.SetParameter(New RParameter("x", 0))
-        ucrReceiverMultipleStemAndLeaf.SetParameterIsRFunction()
-        ucrReceiverMultipleStemAndLeaf.bWithQuotes = False
-        ucrReceiverMultipleStemAndLeaf.Selector = ucrSelectorOneWayFreq
-        ucrReceiverMultipleStemAndLeaf.SetIncludedDataTypes({"numeric"})
+        ucrReceiverStemAndLeaf.SetParameter(New RParameter("x", 0))
+        ucrReceiverStemAndLeaf.SetParameterIsRFunction()
+        ucrReceiverStemAndLeaf.bWithQuotes = False
+        ucrReceiverStemAndLeaf.Selector = ucrSelectorOneWayFreq
+        ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -106,9 +97,9 @@ Public Class dlgOneWayFrequencies
         ucrPnlOutput.AddRadioButton(rdoAsHtml, Chr(34) & "viewer" & Chr(34))
 
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth, rdoStemAndLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFrequencies.AddToLinkedControls({ucrPnlSort, ucrChkWeights, ucrChkGroupData, ucrReceiverOneWayFreq}, {rdoTable, rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFrequencies.AddToLinkedControls({ucrReceiverMultipleStemAndLeaf, ucrChkScale}, {rdoStemAndLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFrequencies.AddToLinkedControls({ucrReceiverStemAndLeaf, ucrChkScale}, {rdoStemAndLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrPnlOutput, {rdoBoth, rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
 
@@ -148,13 +139,12 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetRDefault("FALSE")
 
         ucrChkScale.SetText("Scale")
-        ucrChkScale.AddToLinkedControls(ucrNudScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkScale.AddParameterPresentCondition(True, "stem")
-        ucrChkScale.AddParameterPresentCondition(False, "stem", False)
+        ucrChkScale.AddToLinkedControls(ucrNudScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkScale.AddParameterPresentCondition(True, "scale")
+        ucrChkScale.AddParameterPresentCondition(False, "scale", False)
 
         ucrNudScale.SetParameter(New RParameter("scale", 1))
-        ucrNudScale.AddParameterPresentCondition(True, "scale")
-        ucrNudScale.SetMinMax(0.1)
+        ucrNudScale.SetMinMax(0.0)
         ucrNudScale.DecimalPlaces = 1
         ucrNudScale.Increment = 0.1
 
@@ -173,15 +163,6 @@ Public Class dlgOneWayFrequencies
         clsAsGGplot = New RFunction
         clsAsDataFrame = New RFunction
         clsStemAndLeafFunction = New RFunction
-        clsCaptureOutput = New RFunction
-        clsLengthFunction = New RFunction
-        clsLengthOperator = New ROperator
-        clsPlusOperator = New ROperator
-        clsDataFrame = New RFunction
-        clsGgplotFuntion = New RFunction
-        clsGeomTextFunction = New RFunction
-        clsLabelAesFunction = New RFunction
-        clsFlipCoordinates = New RFunction
         clsDummyFunction = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
@@ -216,47 +197,7 @@ Public Class dlgOneWayFrequencies
         clsAsGGplot.AddParameter("plot", clsRFunctionParameter:=clsPlotGrid, iPosition:=0)
 
         clsStemAndLeafFunction.SetRCommand("stem")
-
-
-        clsCaptureOutput.SetRCommand("capture.output")
-        clsCaptureOutput.AddParameter("stem", clsRFunctionParameter:=clsStemAndLeafFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsCaptureOutput.SetAssignTo("tmp")
-
-        clsLengthFunction.SetRCommand("length")
-        clsLengthFunction.AddParameter("tmp", clsRFunctionParameter:=clsCaptureOutput, iPosition:=0, bIncludeArgumentName:=False)
-
-        clsLengthOperator.SetOperation(":")
-        clsLengthOperator.AddParameter("start", 1, iPosition:=0)
-        clsLengthOperator.AddParameter("end", clsRFunctionParameter:=clsLengthFunction, iPosition:=1)
-        clsLengthOperator.SetAssignTo("rr")
-
-        clsDataFrame.SetRCommand("data.frame")
-        clsDataFrame.AddParameter("x", clsRFunctionParameter:=clsCaptureOutput, iPosition:=0, bIncludeArgumentName:=False)
-        clsDataFrame.AddParameter("rr", clsROperatorParameter:=clsLengthOperator, iPosition:=1)
-        clsDataFrame.SetAssignTo("stemdf")
-
-        clsGgplotFuntion.SetPackageName("ggplot2")
-        clsGgplotFuntion.SetRCommand("ggplot")
-        clsGgplotFuntion.AddParameter("x", clsRFunctionParameter:=clsDataFrame, iPosition:=0)
-
-        clsGeomTextFunction.SetPackageName("ggplot2")
-        clsGeomTextFunction.SetRCommand("geom_text")
-        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=0)
-        clsGeomTextFunction.AddParameter("hjust", 0)
-
-        clsLabelAesFunction.AddParameter("x", clsROperatorParameter:=clsLengthOperator, iPosition:=0)
-        clsLabelAesFunction.AddParameter("y", 0, iPosition:=1)
-        clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsCaptureOutput, iPosition:=2)
-
-        clsLabelAesFunction.SetPackageName("ggplot2")
-        clsLabelAesFunction.SetRCommand("aes")
-
-        clsPlusOperator.SetOperation("+")
-        clsPlusOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFuntion, iPosition:=0)
-        clsPlusOperator.AddParameter("geomtext", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=1)
-        clsPlusOperator.AddParameter("coord_flip", clsRFunctionParameter:=clsFlipCoordinates, iPosition:=2)
-
-        clsFlipCoordinates.SetRCommand("coord_flip")
+        clsStemAndLeafFunction.AddParameter("x", Chr(34) & "stem" & Chr(34), iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
         bResetSubdialog = True
@@ -269,15 +210,14 @@ Public Class dlgOneWayFrequencies
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
         ucrChkGroupData.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
         ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
-        ucrNudScale.AddAdditionalCodeParameterPair(clsStemAndLeafFunction, New RParameter("scale", 1), iAdditionalPairNo:=1)
-        ucrSaveGraph.AddAdditionalRCode(clsPlusOperator, iAdditionalPairNo:=1)
 
 
         ucrReceiverWeights.SetRCode(clsSjMiscFrq, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSjMiscFrq, bReset)
         ucrPnlFrequencies.SetRCode(clsDummyFunction, bReset)
 
-
+        ucrNudScale.SetRCode(clsStemAndLeafFunction, bReset)
+        ucrChkScale.SetRCode(clsStemAndLeafFunction, bReset)
         ucrPnlOutput.SetRCode(clsSjMiscFrq, bReset)
         ucrChkWeights.SetRCode(clsSjMiscFrq, bReset)
         ucrPnlSort.SetRCode(clsSjMiscFrq, bReset)
@@ -287,7 +227,7 @@ Public Class dlgOneWayFrequencies
         ucrSaveGraph.SetRCode(clsAsGGplot, bReset)
         ucrNudMinFreq.SetRCode(clsSjMiscFrq, bReset)
         ucrChkMinFrq.SetRCode(clsSjMiscFrq, bReset)
-        ucrReceiverMultipleStemAndLeaf.SetRCode(clsStemAndLeafFunction, bReset)
+        ucrReceiverStemAndLeaf.SetRCode(clsStemAndLeafFunction, bReset)
 
         ucrSaveDataFrame.SetRCode(clsAsDataFrame, bReset)
 
@@ -308,7 +248,7 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If rdoStemAndLeaf.Checked Then
-            If Not ucrReceiverMultipleStemAndLeaf.IsEmpty Then
+            If Not ucrReceiverStemAndLeaf.IsEmpty OrElse ucrChkScale.Checked Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -376,11 +316,10 @@ Public Class dlgOneWayFrequencies
                 ucrBase.clsRsyntax.iCallType = 2
                 clsDummyFunction.AddParameter("check", "table", iPosition:=0)
             Else
-                ucrReceiverMultipleStemAndLeaf.SetMeAsReceiver()
+                ucrReceiverStemAndLeaf.SetMeAsReceiver()
                 grpSort.Visible = False
                 cmdOptions.Visible = False
-                ucrBase.clsRsyntax.SetBaseROperator(clsPlusOperator)
-                ucrBase.clsRsyntax.iCallType = 3
+                ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeafFunction)
                 clsDummyFunction.AddParameter("check", "stem", iPosition:=0)
             End If
         End If
@@ -398,7 +337,8 @@ Public Class dlgOneWayFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged,
         ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
-        ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged, ucrReceiverMultipleStemAndLeaf.ControlContentsChanged
+        ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged, ucrReceiverStemAndLeaf.ControlContentsChanged,
+        ucrChkScale.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

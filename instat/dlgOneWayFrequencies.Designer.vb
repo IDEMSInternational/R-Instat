@@ -53,6 +53,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
         Me.lblSelectVariableStemAndLeaf = New System.Windows.Forms.Label()
+        Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
         Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.ucrNudMinFreq = New instat.ucrNud()
@@ -66,11 +67,10 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverMultipleStemAndLeaf = New instat.ucrReceiverMultiple()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrChkScale = New instat.ucrCheck()
+        Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -179,6 +179,15 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.lblSelectVariableStemAndLeaf, "lblSelectVariableStemAndLeaf")
         Me.lblSelectVariableStemAndLeaf.Name = "lblSelectVariableStemAndLeaf"
         '
+        'ucrReceiverStemAndLeaf
+        '
+        Me.ucrReceiverStemAndLeaf.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStemAndLeaf, "ucrReceiverStemAndLeaf")
+        Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
+        Me.ucrReceiverStemAndLeaf.Selector = Nothing
+        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
+        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
+        '
         'ucrNudScale
         '
         Me.ucrNudScale.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -268,24 +277,6 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
-        'ucrReceiverOneWayFreq
-        '
-        Me.ucrReceiverOneWayFreq.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverOneWayFreq, "ucrReceiverOneWayFreq")
-        Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
-        Me.ucrReceiverOneWayFreq.Selector = Nothing
-        Me.ucrReceiverOneWayFreq.strNcFilePath = ""
-        Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
-        '
-        'ucrReceiverMultipleStemAndLeaf
-        '
-        Me.ucrReceiverMultipleStemAndLeaf.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleStemAndLeaf, "ucrReceiverMultipleStemAndLeaf")
-        Me.ucrReceiverMultipleStemAndLeaf.Name = "ucrReceiverMultipleStemAndLeaf"
-        Me.ucrReceiverMultipleStemAndLeaf.Selector = Nothing
-        Me.ucrReceiverMultipleStemAndLeaf.strNcFilePath = ""
-        Me.ucrReceiverMultipleStemAndLeaf.ucrSelector = Nothing
-        '
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
@@ -304,10 +295,20 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrChkScale, "ucrChkScale")
         Me.ucrChkScale.Name = "ucrChkScale"
         '
+        'ucrReceiverOneWayFreq
+        '
+        Me.ucrReceiverOneWayFreq.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverOneWayFreq, "ucrReceiverOneWayFreq")
+        Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
+        Me.ucrReceiverOneWayFreq.Selector = Nothing
+        Me.ucrReceiverOneWayFreq.strNcFilePath = ""
+        Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.ucrNudScale)
         Me.Controls.Add(Me.lblSelectVariableStemAndLeaf)
         Me.Controls.Add(Me.rdoStemAndLeaf)
@@ -328,11 +329,10 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.grpSort)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorOneWayFreq)
-        Me.Controls.Add(Me.ucrReceiverOneWayFreq)
-        Me.Controls.Add(Me.ucrReceiverMultipleStemAndLeaf)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.ucrChkMinFrq)
         Me.Controls.Add(Me.ucrChkScale)
+        Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -373,8 +373,8 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrChkMinFrq As ucrCheck
     Friend WithEvents ucrSaveDataFrame As ucrSave
     Friend WithEvents lblSelectVariableStemAndLeaf As Label
-    Friend WithEvents ucrReceiverMultipleStemAndLeaf As ucrReceiverMultiple
     Private WithEvents rdoStemAndLeaf As RadioButton
     Friend WithEvents ucrNudScale As ucrNud
     Friend WithEvents ucrChkScale As ucrCheck
+    Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
 End Class
