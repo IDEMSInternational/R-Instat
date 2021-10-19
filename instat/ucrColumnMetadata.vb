@@ -28,11 +28,13 @@ Public Class ucrColumnMetadata
     Private clsConvertTo As New RFunction
     Public lstRowsNames As New List(Of KeyValuePair(Of String, String()))
     Private clsRemoveFilter As New RFunction
+    Private clsRemoveSelection As New RFunction
     Private clsFreezeColumns As New RFunction
     Private clsUnfreezeColumns As New RFunction
     Private clsConvertOrderedFactor As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
     Private clsGetCurrentFilterName As New RFunction
+    Private clsGetCurrentSelectionName As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
     Private clsHideDataFrame As New RFunction
@@ -76,10 +78,12 @@ Public Class ucrColumnMetadata
         clsConvertTo.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsRemoveSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsGetCurrentFilterName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_current_filter_name")
+        clsGetCurrentSelectionName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_current_column_selection_name")
         clsViewDataFrame.SetRCommand("View")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
@@ -412,11 +416,13 @@ Public Class ucrColumnMetadata
             clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsRemoveSelection.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsGetCurrentFilterName.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsGetCurrentSelectionName.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
         End If
     End Sub
 
@@ -478,7 +484,9 @@ Public Class ucrColumnMetadata
         Dim strType As String
         Dim strColumns() As String
         Dim strNoFilter As String = "no_filter"
+        Dim strNoSelection As String = ".everything"
         Dim strFilterName As String = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
+        Dim strSelectionName As String = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentSelectionName.ToScript(), bSilent:=True).AsCharacter(0)
 
         iSelectedCols = grdVariables.CurrentWorksheet.SelectionRange.Rows
         strColumns = GetSelectedVariableNamesAsArray()
@@ -496,6 +504,7 @@ Public Class ucrColumnMetadata
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
         mnuClearColumnFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
+        mnuRemoveCurrentSelection.Enabled = Not String.Equals(strSelectionName, strNoSelection)
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
@@ -573,5 +582,14 @@ Public Class ucrColumnMetadata
     Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
         dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuSelection_Click(sender As Object, e As EventArgs) Handles mnuSelection.Click
+        dlgSelect.SetDefaultDataFrame(grdCurrSheet.Name)
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuRemoveCurrentSelection_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentSelection.Click
+        RunScriptFromColumnMetadata(clsRemoveSelection.ToScript(), strComment:="Right click menu: Remove Current Selection")
     End Sub
 End Class
