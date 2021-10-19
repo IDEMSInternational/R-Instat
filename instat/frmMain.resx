@@ -119,37 +119,37 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mnuDescribeOneVariableVisualiseData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableVisualiseData.Text" xml:space="preserve">
     <value>Visualise Data...</value>
   </data>
   <data name="ToolStripSeparator72.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>152, 6</value>
   </data>
   <data name="mnuDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableSummarise.Text" xml:space="preserve">
     <value>Summarise...</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableGraph.Text" xml:space="preserve">
     <value>Graph...</value>
   </data>
   <data name="ToolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>152, 6</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="mnuDescribeOneVariableRatingData.Text" xml:space="preserve">
     <value>Rating Data...</value>
@@ -502,6 +502,18 @@
   </data>
   <data name="mnuModelFitModelGeneral.Text" xml:space="preserve">
     <value>General...</value>
+  </data>
+  <data name="mnuModelFitModelMachineLearning.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuModelFitModelMachineLearning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="mnuModelFitModelMachineLearning.Text" xml:space="preserve">
+    <value>Machine Learning (Caret)...</value>
+  </data>
+  <data name="mnuModelFitModelMachineLearning.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ToolStripSeparator57.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
@@ -3241,49 +3253,49 @@
     <value>Column: Calculator...</value>
   </data>
   <data name="mnuPrepareColumnNumericRegularSequence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericRegularSequence.Text" xml:space="preserve">
     <value>Regular Sequence...</value>
   </data>
   <data name="mnuPrepareColumnNumericEnter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericEnter.Text" xml:space="preserve">
     <value>Enter...</value>
   </data>
   <data name="ToolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>176, 6</value>
   </data>
   <data name="mnuPrepareColumnNumericRowSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericRowSummaries.Text" xml:space="preserve">
     <value>Row Summaries...</value>
   </data>
   <data name="mnuPrepareColumnNumericTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericTransform.Text" xml:space="preserve">
     <value>Transform...</value>
   </data>
   <data name="mnuPrepareColumnNumericPolynomials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericPolynomials.Text" xml:space="preserve">
     <value>Polynomials...</value>
   </data>
   <data name="ToolStripSeparator56.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>176, 6</value>
   </data>
   <data name="mnuPrepareColumnNumericRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericRandomSamples.Text" xml:space="preserve">
     <value>Random Samples...</value>
   </data>
   <data name="mnuPrepareColumnNumericPermuteRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnNumericPermuteRows.Text" xml:space="preserve">
     <value>Permute Columns...</value>
@@ -6639,6 +6651,18 @@
   <data name="&gt;&gt;mnuDescribeOneVariable.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuDescribeOneVariableVisualiseData.Name" xml:space="preserve">
+    <value>mnuDescribeOneVariableVisualiseData</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeOneVariableVisualiseData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator72.Name" xml:space="preserve">
+    <value>ToolStripSeparator72</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator72.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuDescribeOneVariableSummarise.Name" xml:space="preserve">
     <value>mnuDescribeOneVariableSummarise</value>
   </data>
@@ -7009,6 +7033,12 @@
     <value>mnuModelFitModelGeneral</value>
   </data>
   <data name="&gt;&gt;mnuModelFitModelGeneral.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuModelFitModelMachineLearning.Name" xml:space="preserve">
+    <value>mnuModelFitModelMachineLearning</value>
+  </data>
+  <data name="&gt;&gt;mnuModelFitModelMachineLearning.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator57.Name" xml:space="preserve">
@@ -10346,18 +10376,6 @@
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeOneVariableVisualiseData.Name" xml:space="preserve">
-    <value>mnuDescribeOneVariableVisualiseData</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeOneVariableVisualiseData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator72.Name" xml:space="preserve">
-    <value>ToolStripSeparator72</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator72.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>
