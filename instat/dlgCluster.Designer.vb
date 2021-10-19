@@ -27,6 +27,8 @@ Partial Class dlgCluster
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
         Me.rdoDistanceData = New System.Windows.Forms.RadioButton()
         Me.rdoScaleData = New System.Windows.Forms.RadioButton()
+        Me.lblMethod = New System.Windows.Forms.Label()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.ucrChkCenterEachVariable = New instat.ucrCheck()
@@ -36,9 +38,7 @@ Partial Class dlgCluster
         Me.ucrSelectorPrepareData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlSelectData = New instat.UcrPanel()
         Me.ucrPnlPrepareData = New instat.UcrPanel()
-        Me.ucrChkMatrixFunction = New instat.ucrCheck()
-        Me.lblMethod = New System.Windows.Forms.Label()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrChkMatrix = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoWholeDataFrame
@@ -72,6 +72,19 @@ Partial Class dlgCluster
         Me.rdoScaleData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoScaleData.Name = "rdoScaleData"
         Me.rdoScaleData.UseVisualStyleBackColor = True
+        '
+        'lblMethod
+        '
+        resources.ApplyResources(Me.lblMethod, "lblMethod")
+        Me.lblMethod.Name = "lblMethod"
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
         '
         'ucrBase
         '
@@ -128,24 +141,11 @@ Partial Class dlgCluster
         resources.ApplyResources(Me.ucrPnlPrepareData, "ucrPnlPrepareData")
         Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
         '
-        'ucrChkMatrixFunction
+        'ucrChkMatrix
         '
-        Me.ucrChkMatrixFunction.Checked = False
-        resources.ApplyResources(Me.ucrChkMatrixFunction, "ucrChkMatrixFunction")
-        Me.ucrChkMatrixFunction.Name = "ucrChkMatrixFunction"
-        '
-        'lblMethod
-        '
-        resources.ApplyResources(Me.lblMethod, "lblMethod")
-        Me.lblMethod.Name = "lblMethod"
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
-        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrChkMatrix.Checked = False
+        resources.ApplyResources(Me.ucrChkMatrix, "ucrChkMatrix")
+        Me.ucrChkMatrix.Name = "ucrChkMatrix"
         '
         'dlgCluster
         '
@@ -159,14 +159,14 @@ Partial Class dlgCluster
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrChkCenterEachVariable)
         Me.Controls.Add(Me.ucrChkScaleEachVariable)
-        Me.Controls.Add(Me.ucrChkOmitMissingRows)
         Me.Controls.Add(Me.ucrReceiverPrepareData)
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.ucrSelectorPrepareData)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrPnlPrepareData)
-        Me.Controls.Add(Me.ucrChkMatrixFunction)
+        Me.Controls.Add(Me.ucrChkOmitMissingRows)
+        Me.Controls.Add(Me.ucrChkMatrix)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -191,5 +191,5 @@ Partial Class dlgCluster
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblMethod As Label
-    Friend WithEvents ucrChkMatrixFunction As ucrCheck
+    Friend WithEvents ucrChkMatrix As ucrCheck
 End Class
