@@ -223,12 +223,6 @@ Public Class ucrSelector
     Public Sub ShowDataOptionsDialog()
         sdgDataOptions.SetCurrentDataFrame(strCurrentDataFrame, False)
         sdgDataOptions.ShowDialog()
-        SetDataOptionsSettings()
-    End Sub
-
-    Public Overridable Sub SetDataOptionsSettings()
-        bShowHiddenColumns = sdgDataOptions.ShowHiddenColumns()
-        LoadList()
     End Sub
 
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
