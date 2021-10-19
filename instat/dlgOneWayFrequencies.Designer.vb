@@ -43,6 +43,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -51,26 +52,27 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
         Me.lblSelectVariableStemAndLeaf = New System.Windows.Forms.Label()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
         Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.ucrNudMinFreq = New instat.ucrNud()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudGroups = New instat.ucrNud()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
         Me.ucrChkGroupData = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrChkScale = New instat.ucrCheck()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
+        Me.ucrChkWidth = New instat.ucrCheck()
+        Me.ucrNudWidth = New instat.ucrNud()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -105,6 +107,11 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.TabStop = True
         Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSort
+        '
+        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
+        Me.ucrPnlSort.Name = "ucrPnlSort"
         '
         'cmdOptions
         '
@@ -165,6 +172,11 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsText.Name = "rdoAsText"
         Me.rdoAsText.UseVisualStyleBackColor = True
         '
+        'ucrPnlOutput
+        '
+        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        '
         'rdoStemAndLeaf
         '
         resources.ApplyResources(Me.rdoStemAndLeaf, "rdoStemAndLeaf")
@@ -213,11 +225,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudMinFreq.Name = "ucrNudMinFreq"
         Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrPnlOutput
-        '
-        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
-        '
         'ucrSaveGraph
         '
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
@@ -259,11 +266,6 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrChkWeights, "ucrChkWeights")
         Me.ucrChkWeights.Name = "ucrChkWeights"
         '
-        'ucrPnlSort
-        '
-        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
-        Me.ucrPnlSort.Name = "ucrPnlSort"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -304,10 +306,27 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.strNcFilePath = ""
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
+        'ucrChkWidth
+        '
+        Me.ucrChkWidth.Checked = False
+        resources.ApplyResources(Me.ucrChkWidth, "ucrChkWidth")
+        Me.ucrChkWidth.Name = "ucrChkWidth"
+        '
+        'ucrNudWidth
+        '
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWidth, "ucrNudWidth")
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudWidth)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.ucrNudScale)
         Me.Controls.Add(Me.lblSelectVariableStemAndLeaf)
@@ -321,18 +340,19 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.ucrNudGroups)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.ucrPnlFrequencies)
-        Me.Controls.Add(Me.ucrChkGroupData)
         Me.Controls.Add(Me.ucrReceiverWeights)
-        Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpSort)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorOneWayFreq)
         Me.Controls.Add(Me.ucrChkFlip)
-        Me.Controls.Add(Me.ucrChkMinFrq)
         Me.Controls.Add(Me.ucrChkScale)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
+        Me.Controls.Add(Me.ucrChkMinFrq)
+        Me.Controls.Add(Me.ucrChkWeights)
+        Me.Controls.Add(Me.ucrChkWidth)
+        Me.Controls.Add(Me.ucrChkGroupData)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -377,4 +397,6 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrNudScale As ucrNud
     Friend WithEvents ucrChkScale As ucrCheck
     Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
+    Friend WithEvents ucrNudWidth As ucrNud
+    Friend WithEvents ucrChkWidth As ucrCheck
 End Class

@@ -99,9 +99,11 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFrequencies.AddToLinkedControls({ucrPnlSort, ucrChkWeights, ucrChkGroupData, ucrReceiverOneWayFreq}, {rdoTable, rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFrequencies.AddToLinkedControls({ucrReceiverStemAndLeaf, ucrChkScale}, {rdoStemAndLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFrequencies.AddToLinkedControls({ucrReceiverStemAndLeaf, ucrChkScale, ucrChkWidth}, {rdoStemAndLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrPnlOutput, {rdoBoth, rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
+        ucrPnlSort.SetLinkedDisplayControl(grpSort)
+        ucrReceiverOneWayFreq.SetLinkedDisplayControl(cmdOptions)
 
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveDataFrame, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrSaveDataFrame.SetPrefix("one_way_freq_table")
@@ -147,6 +149,15 @@ Public Class dlgOneWayFrequencies
         ucrNudScale.SetMinMax(0.0)
         ucrNudScale.DecimalPlaces = 1
         ucrNudScale.Increment = 0.1
+
+        ucrChkWidth.SetText("Width")
+        ucrChkWidth.AddToLinkedControls(ucrNudWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=80)
+        ucrChkWidth.AddParameterPresentCondition(True, "width")
+        ucrChkWidth.AddParameterPresentCondition(False, "width", False)
+
+        ucrNudWidth.SetParameter(New RParameter("width", 2))
+        ucrNudWidth.SetMinMax(20)
+        ucrNudWidth.Increment = 1
 
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -217,7 +228,9 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.SetRCode(clsDummyFunction, bReset)
 
         ucrNudScale.SetRCode(clsStemAndLeafFunction, bReset)
+        ucrNudWidth.SetRCode(clsStemAndLeafFunction, bReset)
         ucrChkScale.SetRCode(clsStemAndLeafFunction, bReset)
+        ucrChkWidth.SetRCode(clsStemAndLeafFunction, bReset)
         ucrPnlOutput.SetRCode(clsSjMiscFrq, bReset)
         ucrChkWeights.SetRCode(clsSjMiscFrq, bReset)
         ucrPnlSort.SetRCode(clsSjMiscFrq, bReset)
@@ -248,7 +261,7 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If rdoStemAndLeaf.Checked Then
-            If Not ucrReceiverStemAndLeaf.IsEmpty OrElse ucrChkScale.Checked Then
+            If Not ucrReceiverStemAndLeaf.IsEmpty OrElse ucrChkScale.Checked OrElse ucrChkWidth.Checked Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -299,8 +312,6 @@ Public Class dlgOneWayFrequencies
     Private Sub SetBaseFunction()
         ucrBase.clsRsyntax.GetBeforeCodes().Clear()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
-        grpSort.Visible = True
-        cmdOptions.Visible = True
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
             ucrBase.clsRsyntax.iCallType = 3
@@ -317,8 +328,6 @@ Public Class dlgOneWayFrequencies
                 clsDummyFunction.AddParameter("check", "table", iPosition:=0)
             Else
                 ucrReceiverStemAndLeaf.SetMeAsReceiver()
-                grpSort.Visible = False
-                cmdOptions.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeafFunction)
                 clsDummyFunction.AddParameter("check", "stem", iPosition:=0)
             End If
@@ -338,7 +347,7 @@ Public Class dlgOneWayFrequencies
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged,
         ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
         ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged, ucrReceiverStemAndLeaf.ControlContentsChanged,
-        ucrChkScale.ControlContentsChanged
+        ucrChkScale.ControlContentsChanged, ucrChkWidth.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
