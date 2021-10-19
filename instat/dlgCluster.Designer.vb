@@ -36,6 +36,9 @@ Partial Class dlgCluster
         Me.ucrSelectorPrepareData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlSelectData = New instat.UcrPanel()
         Me.ucrPnlPrepareData = New instat.UcrPanel()
+        Me.ucrChkMatrixFunction = New instat.ucrCheck()
+        Me.lblMethod = New System.Windows.Forms.Label()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'rdoWholeDataFrame
@@ -125,10 +128,31 @@ Partial Class dlgCluster
         resources.ApplyResources(Me.ucrPnlPrepareData, "ucrPnlPrepareData")
         Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
         '
+        'ucrChkMatrixFunction
+        '
+        Me.ucrChkMatrixFunction.Checked = False
+        resources.ApplyResources(Me.ucrChkMatrixFunction, "ucrChkMatrixFunction")
+        Me.ucrChkMatrixFunction.Name = "ucrChkMatrixFunction"
+        '
+        'lblMethod
+        '
+        resources.ApplyResources(Me.lblMethod, "lblMethod")
+        Me.lblMethod.Name = "lblMethod"
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        '
         'dlgCluster
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputMethod)
+        Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoScaleData)
         Me.Controls.Add(Me.rdoDistanceData)
@@ -142,6 +166,7 @@ Partial Class dlgCluster
         Me.Controls.Add(Me.ucrSelectorPrepareData)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrPnlPrepareData)
+        Me.Controls.Add(Me.ucrChkMatrixFunction)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -164,4 +189,7 @@ Partial Class dlgCluster
     Friend WithEvents rdoDistanceData As RadioButton
     Friend WithEvents ucrPnlPrepareData As UcrPanel
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrInputMethod As ucrInputComboBox
+    Friend WithEvents lblMethod As Label
+    Friend WithEvents ucrChkMatrixFunction As ucrCheck
 End Class
