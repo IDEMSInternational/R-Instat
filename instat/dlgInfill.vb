@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgInfillDates
+Public Class dlgInfill
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
