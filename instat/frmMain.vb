@@ -2440,7 +2440,7 @@ Public Class frmMain
         dlgVisualizeData.ShowDialog()
     End Sub
 
-    Private Sub mnuMachineLearning_Click(sender As Object, e As EventArgs) Handles mnuMachineLearning.Click
+    Private Sub mnuModelFitModelMachineLearning_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelMachineLearning.Click
         dlgMachineLearning.ShowDialog()
     End Sub
 End Class

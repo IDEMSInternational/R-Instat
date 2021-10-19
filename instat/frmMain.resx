@@ -503,16 +503,16 @@
   <data name="mnuModelFitModelGeneral.Text" xml:space="preserve">
     <value>General...</value>
   </data>
-  <data name="mnuMachineLearning.Enabled" type="System.Boolean, mscorlib">
+  <data name="mnuModelFitModelMachineLearning.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="mnuMachineLearning.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuModelFitModelMachineLearning.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
   </data>
-  <data name="mnuMachineLearning.Text" xml:space="preserve">
+  <data name="mnuModelFitModelMachineLearning.Text" xml:space="preserve">
     <value>Machine Learning (Caret)...</value>
   </data>
-  <data name="mnuMachineLearning.Visible" type="System.Boolean, mscorlib">
+  <data name="mnuModelFitModelMachineLearning.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="ToolStripSeparator57.Size" type="System.Drawing.Size, System.Drawing">
@@ -7035,10 +7035,10 @@
   <data name="&gt;&gt;mnuModelFitModelGeneral.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuMachineLearning.Name" xml:space="preserve">
-    <value>mnuMachineLearning</value>
+  <data name="&gt;&gt;mnuModelFitModelMachineLearning.Name" xml:space="preserve">
+    <value>mnuModelFitModelMachineLearning</value>
   </data>
-  <data name="&gt;&gt;mnuMachineLearning.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuModelFitModelMachineLearning.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator57.Name" xml:space="preserve">
