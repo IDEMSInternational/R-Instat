@@ -339,6 +339,12 @@
     <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
@@ -2851,6 +2857,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
