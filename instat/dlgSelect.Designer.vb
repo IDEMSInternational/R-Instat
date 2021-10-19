@@ -194,7 +194,7 @@ Partial Class dlgSelect
         Me.Name = "dlgSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Select"
-        Me.Text = "Select Column(s)"
+        Me.Text = "Select column(s)"
         Me.grpApplyOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
