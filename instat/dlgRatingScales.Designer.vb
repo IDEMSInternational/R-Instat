@@ -19,7 +19,7 @@ Partial Class dlgRatingScales
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class dlgRatingScales
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRatingScales))
         Me.lblOrderedFactor = New System.Windows.Forms.Label()
@@ -46,14 +46,19 @@ Partial Class dlgRatingScales
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSjpLikert = New instat.UcrPanel()
-        Me.grpLikertType = New System.Windows.Forms.GroupBox()
-        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
-        Me.ucrNudNeutralLevel = New instat.ucrNud()
-        Me.lblNeutralLevel = New System.Windows.Forms.Label()
+        Me.ucrPnlLikertOptions = New instat.UcrPanel()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.grpSortTable = New System.Windows.Forms.GroupBox()
+        Me.rdoHighDescendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoLowAscendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoHighAscendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoLowDescendingTable = New System.Windows.Forms.RadioButton()
+        Me.rdoNoneTable = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTableOptions = New instat.UcrPanel()
+        Me.ucrNudNeutralLevel = New instat.ucrNud()
+        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkFlip = New instat.ucrCheck()
@@ -62,9 +67,8 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.grpSort.SuspendLayout()
-        Me.grpLikertType.SuspendLayout()
+        Me.grpSortTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblOrderedFactor
@@ -79,7 +83,7 @@ Partial Class dlgRatingScales
         Me.grpSort.Controls.Add(Me.rdoLowAscendingLikert)
         Me.grpSort.Controls.Add(Me.rdoNoneLikert)
         Me.grpSort.Controls.Add(Me.rdoHighAscendingLikert)
-        Me.grpSort.Controls.Add(Me.ucrPnlSjpLikert)
+        Me.grpSort.Controls.Add(Me.ucrPnlLikertOptions)
         resources.ApplyResources(Me.grpSort, "grpSort")
         Me.grpSort.Name = "grpSort"
         Me.grpSort.TabStop = False
@@ -119,43 +123,10 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.TabStop = True
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
         '
-        'ucrPnlSjpLikert
+        'ucrPnlLikertOptions
         '
-        resources.ApplyResources(Me.ucrPnlSjpLikert, "ucrPnlSjpLikert")
-        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
-        '
-        'grpLikertType
-        '
-        Me.grpLikertType.Controls.Add(Me.ucrChkNumberOfCategories)
-        Me.grpLikertType.Controls.Add(Me.ucrNudNeutralLevel)
-        Me.grpLikertType.Controls.Add(Me.lblNeutralLevel)
-        Me.grpLikertType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        resources.ApplyResources(Me.grpLikertType, "grpLikertType")
-        Me.grpLikertType.Name = "grpLikertType"
-        Me.grpLikertType.TabStop = False
-        Me.grpLikertType.Tag = "Graph_type"
-        '
-        'ucrChkNumberOfCategories
-        '
-        Me.ucrChkNumberOfCategories.Checked = False
-        resources.ApplyResources(Me.ucrChkNumberOfCategories, "ucrChkNumberOfCategories")
-        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
-        '
-        'ucrNudNeutralLevel
-        '
-        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNeutralLevel, "ucrNudNeutralLevel")
-        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
-        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblNeutralLevel
-        '
-        resources.ApplyResources(Me.lblNeutralLevel, "lblNeutralLevel")
-        Me.lblNeutralLevel.Name = "lblNeutralLevel"
-        Me.lblNeutralLevel.Tag = "Neutral_Level"
+        resources.ApplyResources(Me.ucrPnlLikertOptions, "ucrPnlLikertOptions")
+        Me.ucrPnlLikertOptions.Name = "ucrPnlLikertOptions"
         '
         'rdoStacked
         '
@@ -183,6 +154,74 @@ Partial Class dlgRatingScales
         Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.UseVisualStyleBackColor = True
+        '
+        'grpSortTable
+        '
+        Me.grpSortTable.Controls.Add(Me.rdoHighDescendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoLowAscendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoHighAscendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoLowDescendingTable)
+        Me.grpSortTable.Controls.Add(Me.rdoNoneTable)
+        Me.grpSortTable.Controls.Add(Me.ucrPnlTableOptions)
+        resources.ApplyResources(Me.grpSortTable, "grpSortTable")
+        Me.grpSortTable.Name = "grpSortTable"
+        Me.grpSortTable.TabStop = False
+        '
+        'rdoHighDescendingTable
+        '
+        resources.ApplyResources(Me.rdoHighDescendingTable, "rdoHighDescendingTable")
+        Me.rdoHighDescendingTable.Name = "rdoHighDescendingTable"
+        Me.rdoHighDescendingTable.TabStop = True
+        Me.rdoHighDescendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoLowAscendingTable
+        '
+        resources.ApplyResources(Me.rdoLowAscendingTable, "rdoLowAscendingTable")
+        Me.rdoLowAscendingTable.Name = "rdoLowAscendingTable"
+        Me.rdoLowAscendingTable.TabStop = True
+        Me.rdoLowAscendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoHighAscendingTable
+        '
+        resources.ApplyResources(Me.rdoHighAscendingTable, "rdoHighAscendingTable")
+        Me.rdoHighAscendingTable.Name = "rdoHighAscendingTable"
+        Me.rdoHighAscendingTable.TabStop = True
+        Me.rdoHighAscendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoLowDescendingTable
+        '
+        resources.ApplyResources(Me.rdoLowDescendingTable, "rdoLowDescendingTable")
+        Me.rdoLowDescendingTable.Name = "rdoLowDescendingTable"
+        Me.rdoLowDescendingTable.TabStop = True
+        Me.rdoLowDescendingTable.UseVisualStyleBackColor = True
+        '
+        'rdoNoneTable
+        '
+        resources.ApplyResources(Me.rdoNoneTable, "rdoNoneTable")
+        Me.rdoNoneTable.Name = "rdoNoneTable"
+        Me.rdoNoneTable.TabStop = True
+        Me.rdoNoneTable.UseVisualStyleBackColor = True
+        '
+        'ucrPnlTableOptions
+        '
+        resources.ApplyResources(Me.ucrPnlTableOptions, "ucrPnlTableOptions")
+        Me.ucrPnlTableOptions.Name = "ucrPnlTableOptions"
+        '
+        'ucrNudNeutralLevel
+        '
+        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNeutralLevel, "ucrNudNeutralLevel")
+        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
+        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkNumberOfCategories
+        '
+        Me.ucrChkNumberOfCategories.Checked = False
+        resources.ApplyResources(Me.ucrChkNumberOfCategories, "ucrChkNumberOfCategories")
+        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
         '
         'ucrSaveGraph
         '
@@ -237,23 +276,18 @@ Partial Class dlgRatingScales
         resources.ApplyResources(Me.ucrSelectorRatingScale, "ucrSelectorRatingScale")
         Me.ucrSelectorRatingScale.Name = "ucrSelectorRatingScale"
         '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.UcrDialogDisabled1, "UcrDialogDisabled1")
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        '
         'dlgRatingScales
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrDialogDisabled1)
+        Me.Controls.Add(Me.ucrNudNeutralLevel)
+        Me.Controls.Add(Me.ucrChkNumberOfCategories)
+        Me.Controls.Add(Me.grpSortTable)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.ucrPnlGraphType)
-        Me.Controls.Add(Me.grpLikertType)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.grpSort)
         Me.Controls.Add(Me.ucrReceiverWeights)
@@ -268,8 +302,8 @@ Partial Class dlgRatingScales
         Me.Name = "dlgRatingScales"
         Me.grpSort.ResumeLayout(False)
         Me.grpSort.PerformLayout()
-        Me.grpLikertType.ResumeLayout(False)
-        Me.grpLikertType.PerformLayout()
+        Me.grpSortTable.ResumeLayout(False)
+        Me.grpSortTable.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -283,20 +317,24 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
     Friend WithEvents grpSort As GroupBox
     Friend WithEvents ucrChkFlip As ucrCheck
-    Friend WithEvents grpLikertType As GroupBox
     Friend WithEvents ucrNudNeutralLevel As ucrNud
-    Friend WithEvents lblNeutralLevel As Label
     Friend WithEvents rdoHighDescendingLikert As RadioButton
     Friend WithEvents rdoNoneLikert As RadioButton
     Friend WithEvents rdoHighAscendingLikert As RadioButton
     Friend WithEvents rdoLowDescendingLikert As RadioButton
     Friend WithEvents rdoLowAscendingLikert As RadioButton
-    Friend WithEvents ucrPnlSjpLikert As UcrPanel
     Friend WithEvents rdoStacked As RadioButton
     Friend WithEvents rdoLikert As RadioButton
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents grpSortTable As GroupBox
+    Friend WithEvents rdoHighDescendingTable As RadioButton
+    Friend WithEvents rdoLowDescendingTable As RadioButton
+    Friend WithEvents rdoLowAscendingTable As RadioButton
+    Friend WithEvents rdoNoneTable As RadioButton
+    Friend WithEvents rdoHighAscendingTable As RadioButton
+    Friend WithEvents ucrPnlTableOptions As UcrPanel
+    Friend WithEvents ucrPnlLikertOptions As UcrPanel
 End Class

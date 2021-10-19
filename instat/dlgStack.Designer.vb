@@ -68,6 +68,7 @@ Partial Class dlgStack
         Me.ucrChkToLowerCase = New instat.ucrCheck()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrChkPunctuation = New instat.ucrCheck()
+        Me.ucrChkCarryAllColumns = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -254,10 +255,17 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrChkPunctuation, "ucrChkPunctuation")
         Me.ucrChkPunctuation.Name = "ucrChkPunctuation"
         '
+        'ucrChkCarryAllColumns
+        '
+        Me.ucrChkCarryAllColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCarryAllColumns, "ucrChkCarryAllColumns")
+        Me.ucrChkCarryAllColumns.Name = "ucrChkCarryAllColumns"
+        '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrInputOutput)
@@ -322,4 +330,5 @@ Partial Class dlgStack
     Friend WithEvents ucrInputOutput As ucrInputTextBox
     Friend WithEvents lblOutput As Label
     Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrChkCarryAllColumns As ucrCheck
 End Class
