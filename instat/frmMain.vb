@@ -2440,7 +2440,7 @@ Public Class frmMain
         dlgVisualizeData.ShowDialog()
     End Sub
 
-    Private Sub MachineLearningCaretToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MachineLearningCaretToolStripMenuItem.Click
+    Private Sub mnuMachineLearning_Click(sender As Object, e As EventArgs) Handles mnuMachineLearning.Click
         dlgMachineLearning.ShowDialog()
     End Sub
 End Class
