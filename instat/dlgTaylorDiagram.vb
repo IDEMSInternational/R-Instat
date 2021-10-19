@@ -102,7 +102,7 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete OrElse ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
