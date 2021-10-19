@@ -120,7 +120,7 @@ Partial Class ucrColumnMetadata
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilter, Me.mnuSelection, Me.mnuRemoveCurrentSelection, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 440)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 418)
         '
         'mnuColumnRename
         '
@@ -251,55 +251,54 @@ Partial Class ucrColumnMetadata
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 202)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
         Me.renameSheet.Text = "Rename..."
         '
         'mnuBottomAddComment
         '
         Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
-        Me.mnuBottomAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuBottomAddComment.Size = New System.Drawing.Size(180, 22)
         Me.mnuBottomAddComment.Text = "Add Comment..."
         '
         'hideSheet
         '
         Me.hideSheet.Name = "hideSheet"
-        Me.hideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.hideSheet.Size = New System.Drawing.Size(180, 22)
         Me.hideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'copySheet
         '
         Me.copySheet.Name = "copySheet"
-        Me.copySheet.Size = New System.Drawing.Size(162, 22)
+        Me.copySheet.Size = New System.Drawing.Size(180, 22)
         Me.copySheet.Text = "Copy..."
         '
         'reorderSheet
         '
-        Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'viewSheet
         '
         Me.viewSheet.Name = "viewSheet"
-        Me.viewSheet.Size = New System.Drawing.Size(162, 22)
+        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
         Me.viewSheet.Text = "View Data Frame"
         '
         'propertiesContextMenuStrip
