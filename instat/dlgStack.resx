@@ -130,13 +130,13 @@
     <value>261, 65</value>
   </data>
   <data name="lblColumnsTostack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>93, 13</value>
   </data>
   <data name="lblColumnsTostack.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblColumnsTostack.Text" xml:space="preserve">
-    <value>Columns to stack:</value>
+    <value>Columns to Stack:</value>
   </data>
   <data name="&gt;&gt;lblColumnsTostack.Name" xml:space="preserve">
     <value>lblColumnsTostack</value>
@@ -229,7 +229,7 @@
     <value>15</value>
   </data>
   <data name="rdoPivotLonger.Text" xml:space="preserve">
-    <value>Pivot longer</value>
+    <value>Pivot Longer</value>
   </data>
   <data name="rdoPivotLonger.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -807,6 +807,9 @@
   <data name="&gt;&gt;ucrChkPunctuation.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -814,7 +817,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Stack (pivot longer) Columns</value>
+    <value>Stack (Pivot Longer)</value>
   </data>
   <data name="&gt;&gt;ttPattern.Name" xml:space="preserve">
     <value>ttPattern</value>
