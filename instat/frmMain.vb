@@ -2439,4 +2439,8 @@ Public Class frmMain
     Private Sub mnuDescribeOneVariableVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualiseData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
+
+    Private Sub MachineLearningCaretToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MachineLearningCaretToolStripMenuItem.Click
+        dlgMachineLearning.ShowDialog()
+    End Sub
 End Class
