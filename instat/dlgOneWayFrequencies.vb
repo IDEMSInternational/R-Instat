@@ -261,7 +261,7 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If rdoStemAndLeaf.Checked Then
-            If Not ucrReceiverStemAndLeaf.IsEmpty OrElse ucrChkScale.Checked OrElse ucrChkWidth.Checked Then
+            If Not ucrReceiverStemAndLeaf.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
