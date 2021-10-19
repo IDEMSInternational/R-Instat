@@ -125,11 +125,11 @@ DataBook$set("public", "replace_instat_object", function(new_instat_object) {
 )
 
 DataBook$set("public", "set_data_objects", function(new_data_objects) {
-  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !all("data_object" %in% sapply(new_data_objects, class)))) {
+  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !any(c("DataSheet","data_object") %in% sapply(new_data_objects, class)))) {
     stop("new_data_objects must be a list of data_objects")
   }
   else private$.data_sheets <- new_data_objects
-}
+  }
 )
 
 DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", reset_row_names = TRUE) {
