@@ -234,6 +234,10 @@ Public Class ucrReorder
         lstAvailableData.Items.Clear()
     End Sub
 
+    Public Function Count() As Integer
+        Return lstAvailableData.Items.Count
+    End Function
+
     Protected Overrides Sub SetControlValue()
         Dim lstCurrentVariables As String()
         Dim clsMainParameter As RParameter

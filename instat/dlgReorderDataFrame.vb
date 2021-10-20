@@ -65,7 +65,7 @@ Public Class dlgReorderDataFrame
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(Not ucrDataFrameToReorder.IsEmpty)
+        ucrBase.OKEnabled(Not ucrDataFrameToReorder.IsEmpty AndAlso ucrDataFrameToReorder.Count > 1)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
