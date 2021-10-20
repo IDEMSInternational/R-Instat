@@ -112,7 +112,11 @@ Public Class dlgTaylorDiagram
     Private Sub ucrReceiverEstimated_Leave(sender As Object, e As EventArgs) Handles ucrReceiverEstimated.Leave
         If ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 Then
             MsgBox("Note, mod can be of length 2 i.e. two lots of model predictions!!!", MsgBoxStyle.Exclamation)
-            ucrReceiverEstimated.lstSelectedVariables.Items.RemoveAt(ucrReceiverEstimated.lstSelectedVariables.Items.Count - 1)
+            For i As Integer = ucrReceiverEstimated.lstSelectedVariables.Items.Count - 1 To 0 Step -1
+                If i > 1 Then
+                    ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+                End If
+            Next
         End If
     End Sub
 
