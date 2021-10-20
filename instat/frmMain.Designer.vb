@@ -3492,8 +3492,8 @@ Partial Class frmMain
         '
         'mnuPrepareDataObjectReorderDataFrames
         '
-        resources.ApplyResources(Me.mnuPrepareDataObjectReorderDataFrames, "mnuPrepareDataObjectReorderDataFrames")
         Me.mnuPrepareDataObjectReorderDataFrames.Name = "mnuPrepareDataObjectReorderDataFrames"
+        resources.ApplyResources(Me.mnuPrepareDataObjectReorderDataFrames, "mnuPrepareDataObjectReorderDataFrames")
         Me.mnuPrepareDataObjectReorderDataFrames.Tag = "Reorder_Data_Frames..."
         '
         'mnuPrepareDataObjectCopyDataFrame

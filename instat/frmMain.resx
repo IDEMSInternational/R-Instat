@@ -3654,17 +3654,11 @@
   <data name="mnuPrepareDataObjectRenameDataFrame.Text" xml:space="preserve">
     <value>Rename Data Frame...</value>
   </data>
-  <data name="mnuPrepareDataObjectReorderDataFrames.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuPrepareDataObjectReorderDataFrames.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 22</value>
   </data>
   <data name="mnuPrepareDataObjectReorderDataFrames.Text" xml:space="preserve">
     <value>Reorder Data Frames...</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderDataFrames.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuPrepareDataObjectCopyDataFrame.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 22</value>
