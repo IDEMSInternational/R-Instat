@@ -122,6 +122,7 @@ Public Class dlgTaylorDiagram
         If ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 Then
             MsgBox("Note, mod can be of length 2 i.e. two lots of model predictions!!!", MsgBoxStyle.Exclamation)
             RemoveExtraVariables()
+            TestOkEnabled()
         End If
     End Sub
 
