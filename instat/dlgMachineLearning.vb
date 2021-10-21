@@ -44,7 +44,6 @@ Public Class dlgMachineLearning
         ucrPnlExplanatoryVariable.AddRadioButton(rdoExplanatoryVariable)
         ucrPnlExplanatoryVariable.AddRadioButton(rdoExplanatoryModel)
 
-
         ucrReceiverExpressionFitModel.SetParameter(New RParameter("x", 1))
         ucrReceiverExpressionFitModel.Selector = ucrSelectorMachineLearning
         ucrReceiverExpressionFitModel.SetParameterIsString()
@@ -52,10 +51,13 @@ Public Class dlgMachineLearning
         ucrReceiverMultipleExplanatoryVariable.SetParameter(New RParameter("x", 1))
         ucrReceiverMultipleExplanatoryVariable.Selector = ucrSelectorMachineLearning
         ucrReceiverMultipleExplanatoryVariable.SetParameterIsString()
+        ucrReceiverMultipleExplanatoryVariable.bWithQuotes = False
+        ucrReceiverMultipleExplanatoryVariable.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverResponseVariable.SetParameter(New RParameter("y", 2))
         ucrReceiverResponseVariable.Selector = ucrSelectorMachineLearning
         ucrReceiverResponseVariable.SetParameterIsString()
+        ucrReceiverResponseVariable.bWithQuotes = False
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
         dctMethod.Add("lm", Chr(34) & "lm" & Chr(34))
@@ -64,6 +66,7 @@ Public Class dlgMachineLearning
         dctMethod.Add("rf", Chr(34) & "rf" & Chr(34))
         ucrInputMethod.SetItems(dctMethod)
         ucrInputMethod.SetDropDownStyleAsNonEditable()
+        ucrInputMethod.SetDefaultState("lm")
 
 
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverMultipleExplanatoryVariable, {rdoExplanatoryVariable}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -75,6 +78,8 @@ Public Class dlgMachineLearning
         clsTrainFunction = New RFunction
 
         ucrReceiverResponseVariable.SetMeAsReceiver()
+        clsTrainFunction.AddParameter("method", "lm", iPosition:=3)
+        rdoExplanatoryVariable.Checked = True
 
         clsTrainFunction.SetPackageName("caret")
         clsTrainFunction.SetRCommand("train")
@@ -83,6 +88,7 @@ Public Class dlgMachineLearning
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorMachineLearning.SetRCode(clsTrainFunction, bReset)
         ucrReceiverResponseVariable.SetRCode(clsTrainFunction, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsTrainFunction, bReset)
         ucrReceiverMultipleExplanatoryVariable.SetRCode(clsTrainFunction, bReset)
