@@ -116,6 +116,7 @@ Public Class dlgTaylorDiagram
                 ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
             End If
         Next
+        clsTaylorDiagramFunction.AddParameter("mod", ucrReceiverEstimated.GetVariableNames(True), iPosition:=2)
     End Sub
 
     Private Sub ucrReceiverEstimated_Leave(sender As Object, e As EventArgs) Handles ucrReceiverEstimated.Leave
