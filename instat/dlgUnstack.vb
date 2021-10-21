@@ -120,7 +120,7 @@ Public Class dlgUnstack
 
         clsDcastFunction.SetPackageName("tidyr")
         clsDcastFunction.SetRCommand("pivot_wider")
-        clsDcastFunction.AddParameter(New RParameter("id_cols", ucrReceiverCarryColumns.GetVariablesAsList))
+        'clsDcastFunction.AddParameter(New RParameter("id_cols", ucrReceiverCarryColumns.GetVariablesAsList))
 
 
         clsSelectFunction.SetPackageName("dplyr")
