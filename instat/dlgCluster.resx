@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoWholeDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 73</value>
+    <value>265, 96</value>
   </data>
   <data name="rdoWholeDataFrame.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 17</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSelectedColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 96</value>
+    <value>265, 73</value>
   </data>
   <data name="rdoSelectedColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 17</value>
