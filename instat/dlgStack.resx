@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblValuesTo.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>25</value>
   </data>
   <data name="lblNamesTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNamesTo.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>28</value>
   </data>
   <data name="rdoPivotLonger.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -370,7 +370,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPattern.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <metadata name="ttPattern.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -403,7 +403,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOutput.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>24</value>
   </data>
   <data name="lblVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -765,27 +765,6 @@
   <data name="&gt;&gt;ucrInputFormat.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="ucrChkToLowerCase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 246</value>
-  </data>
-  <data name="ucrChkToLowerCase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrChkToLowerCase.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrChkToLowerCase.Name" xml:space="preserve">
-    <value>ucrChkToLowerCase</value>
-  </data>
-  <data name="&gt;&gt;ucrChkToLowerCase.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkToLowerCase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkToLowerCase.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 202</value>
   </data>
@@ -805,7 +784,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputPattern.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <data name="ucrChkPunctuation.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 273</value>
@@ -826,7 +805,49 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPunctuation.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>23</value>
+  </data>
+  <data name="ucrChkDropMissingValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 300</value>
+  </data>
+  <data name="ucrChkDropMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 17</value>
+  </data>
+  <data name="ucrChkDropMissingValues.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingValues.Name" xml:space="preserve">
+    <value>ucrChkDropMissingValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingValues.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropMissingValues.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="ucrChkToLowerCase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 246</value>
+  </data>
+  <data name="ucrChkToLowerCase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrChkToLowerCase.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkToLowerCase.Name" xml:space="preserve">
+    <value>ucrChkToLowerCase</value>
+  </data>
+  <data name="&gt;&gt;ucrChkToLowerCase.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkToLowerCase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkToLowerCase.ZOrder" xml:space="preserve">
+    <value>27</value>
   </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>

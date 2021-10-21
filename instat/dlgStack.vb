@@ -61,6 +61,11 @@ Public Class dlgStack
         ucrInputNamesTo.SetParameter(New RParameter("names_to", 3))
         ucrInputNamesTo.SetRDefault(Chr(34) & "names" & Chr(34))
 
+        ucrChkDropMissingValues.SetParameter(New RParameter("values_drop_na", 5))
+        ucrChkDropMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropMissingValues.SetRDefault("FALSE")
+        ucrChkDropMissingValues.SetText("Drop Missing Values")
+
         ucrChkCarryColumns.SetText("Columns to Carry")
         ucrChkCarryColumns.AddToLinkedControls(ucrReceiverColumnsToCarry, {True}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -129,7 +134,7 @@ Public Class dlgStack
         ucrPnlStack.AddToLinkedControls(ucrChkCarryColumns, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCarryColumns.AddToLinkedControls(ucrChkCarryAllColumns, {False}, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls({ucrReceiverTextColumn, ucrInputOutput, ucrInputToken, ucrInputFormat, ucrChkToLowerCase}, {rdoUnnest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrInputValuesTo, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrChkDropMissingValues, ucrInputValuesTo, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverTextColumn.SetLinkedDisplayControl(lblVariable)
         ucrReceiverColumnsToBeStack.SetLinkedDisplayControl(lblColumnsTostack)
         ucrInputNamesTo.SetLinkedDisplayControl(lblNamesTo)
@@ -189,6 +194,7 @@ Public Class dlgStack
         ucrInputOutput.SetRCode(clsUnnestTokensFunction, bReset)
         ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputNamesTo.SetRCode(clsPivotLongerFunction, bReset)
+        ucrChkDropMissingValues.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputValuesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrPnlStack.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkCarryAllColumns.SetRCode(clsPivotLongerFunction, bReset)
@@ -282,7 +288,7 @@ Public Class dlgStack
 
     Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged,
     ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged,
-    ucrPnlStack.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrReceiverColumnsToCarry.ControlContentsChanged
+    ucrPnlStack.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
