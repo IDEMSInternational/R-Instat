@@ -100,7 +100,7 @@ Public Class dlgParallelCoordinatePlot
         ucrInputScale.SetRDefault("std")
         ucrInputScale.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("ParCoord")
+        ucrSaveGraph.SetPrefix("par_coord_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")

@@ -15,6 +15,8 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
     i = 1
     for(curr_col in colnames(data)) {
       if(is.na(decimal_places[i])) {
+        #use as.character() for non numeric column vales because format() adds extra spaces to the text
+        #which are recognised oddly by the R.Net 
         out[,i] <- as.character(data[[i]])
       }
       else {

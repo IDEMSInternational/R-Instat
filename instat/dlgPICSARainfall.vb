@@ -182,7 +182,7 @@ Public Class dlgPICSARainfall
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrSave.SetPrefix("PICSA_Rainfall_Graph")
+        ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")

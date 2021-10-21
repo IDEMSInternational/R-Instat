@@ -140,7 +140,7 @@ Public Class dlgTreemap
         ucrSaveTreemap.SetCheckBoxText("Save Treemap")
         ucrSaveTreemap.SetDataFrameSelector(ucrSelectorTreemap.ucrAvailableDataFrames)
         ucrSaveTreemap.SetSaveTypeAsGraph()
-        ucrSaveTreemap.SetPrefix("treemap")
+        ucrSaveTreemap.SetPrefix("tree_map")
         ucrSaveTreemap.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 

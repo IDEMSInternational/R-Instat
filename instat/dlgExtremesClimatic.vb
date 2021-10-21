@@ -254,14 +254,14 @@ Public Class dlgExtremesClimatic
         ucrNudRunLength.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
 
         ucrSaveMrlPlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
-        ucrSaveMrlPlot.SetPrefix("mrlplot")
+        ucrSaveMrlPlot.SetPrefix("mrl_plot")
         ucrSaveMrlPlot.SetSaveTypeAsGraph()
         ucrSaveMrlPlot.SetIsComboBox()
         ucrSaveMrlPlot.SetCheckBoxText("Save Graph")
         ucrSaveMrlPlot.SetAssignToIfUncheckedValue("last_graph")
 
         ucrSaveThresholdPlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
-        ucrSaveThresholdPlot.SetPrefix("thresholdplot")
+        ucrSaveThresholdPlot.SetPrefix("threshold_plot")
         ucrSaveThresholdPlot.SetSaveTypeAsGraph()
         ucrSaveThresholdPlot.SetIsComboBox()
         ucrSaveThresholdPlot.SetCheckBoxText("Save Graph")
@@ -272,7 +272,7 @@ Public Class dlgExtremesClimatic
         ucrNudDeclusterColumns.SetRDefault("1")
 
         ucrSaveDeclusteredPlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
-        ucrSaveDeclusteredPlot.SetPrefix("declustredplot")
+        ucrSaveDeclusteredPlot.SetPrefix("declustered_plot")
         ucrSaveDeclusteredPlot.SetSaveTypeAsGraph()
         ucrSaveDeclusteredPlot.SetIsComboBox()
         ucrSaveDeclusteredPlot.SetCheckBoxText("Save Graph")
