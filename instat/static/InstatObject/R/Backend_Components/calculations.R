@@ -51,7 +51,8 @@ calculation$set("public", "data_clone", function() {
   ret <- calculation$new(function_name = self$function_name, parameters = self$parameters, 
                          calculated_from = self$calculated_from, is_recalculable = self$is_recalculable,
                          sub_calculations = self$sub_calculations, type = self$type, 
-                         filter_conditions = self$filter_conditions, filters = self$filters, selections = self$selections,
+                         filter_conditions = self$filter_conditions, filters = self$filters, 
+                         selection_conditions = self$selection_conditions, selections = self$selections,
                          name = self$name)
   return(ret)
 }
