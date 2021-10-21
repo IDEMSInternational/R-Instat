@@ -42,9 +42,11 @@ Public Class dlgRecodeNumeric
 
         ucrPnlRadioButtons.AddRadioButton(rdoQuantiles)
         ucrPnlRadioButtons.AddRadioButton(rdoMinimum)
+        ucrPnlRadioButtons.AddRadioButton(rdoBreakPoints)
 
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverRecode.SetParameter(New RParameter("x", iNewPosition:=2))
         ucrReceiverRecode.SetParameterIsRFunction()
@@ -60,12 +62,9 @@ Public Class dlgRecodeNumeric
         ucrNudMinimum.SetMinMax(1, Integer.MaxValue)
         ucrNudMinimum.SetRDefault(1)
 
-        ttMinimum.Show("Opens a control", rdoMinimum)
-        ttMinimum.Hide(rdoMinimum)
+        ttMinimum.SetToolTip(ucrNudMinimum.nudUpDown, "Splits the data into groups of at least the specified size.")
 
-
-        ttQuantiles.Show("Opens a control", rdoQuantiles)
-        ttQuantiles.Hide(rdoQuantiles)
+        ttQuantiles.SetToolTip(ucrNudQuantiles.nudUpDown, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
 
         ucrChkAddLabels.SetText("Label Groups with Means")
 
@@ -80,7 +79,7 @@ Public Class dlgRecodeNumeric
         ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3,))
 
 
-        ttBreakpoint.SetToolTip(ucrMultipleNumericRecode.txtInput, "Seperate break point with comma")
+        ttBreakpoint.SetToolTip(ucrMultipleNumericRecode.txtInput, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -117,6 +116,7 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
+        ucrMultipleNumericRecode.SetRCode(clsCut2Function, bReset)
 
     End Sub
 
@@ -130,19 +130,22 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub AddParameters()
+        clsCut2Function.RemoveParameterByName("cuts")
         If rdoMinimum.Checked = True Then
             rdoMinimum.Visible = True
         ElseIf rdoQuantiles.Checked = True Then
             ucrNudQuantiles.Visible = True
+        ElseIf rdoBreakPoints.Checked = True Then
+            ucrMultipleNumericRecode.Visible = True
+            If ucrMultipleNumericRecode.IsEmpty Then
+                clsCut2Function.RemoveParameterByName("cuts")
+            Else
+                clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
+            End If
         Else
             ucrNudQuantiles.Visible = False
             ucrNudMinimum.Visible = False
-        End If
-
-        If ucrMultipleNumericRecode.IsEmpty Then
-            clsCut2Function.RemoveParameterByName("cuts")
-        Else
-            clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
+            ucrMultipleNumericRecode.Visible = False
         End If
     End Sub
 
@@ -170,4 +173,5 @@ Public Class dlgRecodeNumeric
     Private Sub ucrMultipleNumericRecode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlValueChanged
         AddParameters()
     End Sub
+
 End Class

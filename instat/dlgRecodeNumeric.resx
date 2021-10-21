@@ -150,35 +150,35 @@
   <data name="&gt;&gt;lblSelectedVariable.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblBreakPoints.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoBreakPoints.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblBreakPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoBreakPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 103</value>
+  <data name="rdoBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 81</value>
   </data>
-  <data name="lblBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+  <data name="rdoBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 17</value>
   </data>
-  <data name="lblBreakPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="rdoBreakPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
-  <data name="lblBreakPoints.Text" xml:space="preserve">
-    <value>Break Points:</value>
+  <data name="rdoBreakPoints.Text" xml:space="preserve">
+    <value>Break points:</value>
   </data>
-  <data name="&gt;&gt;lblBreakPoints.Name" xml:space="preserve">
-    <value>lblBreakPoints</value>
+  <data name="&gt;&gt;rdoBreakPoints.Name" xml:space="preserve">
+    <value>rdoBreakPoints</value>
   </data>
-  <data name="&gt;&gt;lblBreakPoints.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rdoBreakPoints.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblBreakPoints.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoBreakPoints.Parent" xml:space="preserve">
     <value>grpQuantileGroups</value>
   </data>
-  <data name="&gt;&gt;lblBreakPoints.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;rdoBreakPoints.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="rdoMinimum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,16 +187,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMinimum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 65</value>
+    <value>6, 51</value>
   </data>
   <data name="rdoMinimum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 17</value>
+    <value>69, 17</value>
   </data>
   <data name="rdoMinimum.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
   <data name="rdoMinimum.Text" xml:space="preserve">
-    <value>Minimum</value>
+    <value>Minimum:</value>
   </data>
   <data name="&gt;&gt;rdoMinimum.Name" xml:space="preserve">
     <value>rdoMinimum</value>
@@ -208,7 +208,7 @@
     <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;rdoMinimum.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoQuantiles.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,16 +217,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="rdoQuantiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 17</value>
+    <value>72, 17</value>
   </data>
   <data name="rdoQuantiles.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="rdoQuantiles.Text" xml:space="preserve">
-    <value>Quantiles</value>
+    <value>Quantiles:</value>
   </data>
   <data name="&gt;&gt;rdoQuantiles.Name" xml:space="preserve">
     <value>rdoQuantiles</value>
@@ -238,10 +238,10 @@
     <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;rdoQuantiles.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrMultipleNumericRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 119</value>
+    <value>96, 81</value>
   </data>
   <data name="ucrMultipleNumericRecode.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -259,10 +259,10 @@
     <value>grpQuantileGroups</value>
   </data>
   <data name="&gt;&gt;ucrMultipleNumericRecode.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrNudMinimum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 65</value>
+    <value>143, 51</value>
   </data>
   <data name="ucrNudMinimum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -283,7 +283,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 26</value>
+    <value>142, 25</value>
   </data>
   <data name="ucrNudQuantiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -307,7 +307,7 @@
     <value>6, 19</value>
   </data>
   <data name="ucrPnlRadioButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 81</value>
+    <value>215, 87</value>
   </data>
   <data name="ucrPnlRadioButtons.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -325,10 +325,10 @@
     <value>6</value>
   </data>
   <data name="grpQuantileGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 84</value>
+    <value>238, 84</value>
   </data>
   <data name="grpQuantileGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 146</value>
+    <value>221, 123</value>
   </data>
   <data name="grpQuantileGroups.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -358,7 +358,7 @@
     <value>227, 17</value>
   </metadata>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 221</value>
+    <value>11, 217</value>
   </data>
   <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 20</value>
@@ -379,7 +379,7 @@
     <value>0</value>
   </data>
   <data name="ucrSaveRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 248</value>
+    <value>9, 244</value>
   </data>
   <data name="ucrSaveRecode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -409,7 +409,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>471, 379</value>
+    <value>466, 327</value>
   </data>
   <data name="ucrSelectorForRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -436,7 +436,7 @@
     <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 279</value>
+    <value>10, 275</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -455,6 +455,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
