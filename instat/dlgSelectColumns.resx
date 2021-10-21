@@ -136,7 +136,7 @@
     <value>14</value>
   </data>
   <data name="cmdCombineWithAndOr.Text" xml:space="preserve">
-    <value>All combined with |</value>
+    <value>All Combined With |</value>
   </data>
   <data name="&gt;&gt;cmdCombineWithAndOr.Name" xml:space="preserve">
     <value>cmdCombineWithAndOr</value>
@@ -163,7 +163,7 @@
     <value>18</value>
   </data>
   <data name="lblNewSelectName.Text" xml:space="preserve">
-    <value>New column selection name:</value>
+    <value>New Selection Name:</value>
   </data>
   <data name="&gt;&gt;lblNewSelectName.Name" xml:space="preserve">
     <value>lblNewSelectName</value>
@@ -190,7 +190,7 @@
     <value>15</value>
   </data>
   <data name="cmdClearConditions.Text" xml:space="preserve">
-    <value>Clear conditions</value>
+    <value>Clear Conditions</value>
   </data>
   <data name="&gt;&gt;cmdClearConditions.Name" xml:space="preserve">
     <value>cmdClearConditions</value>
@@ -203,9 +203,6 @@
   </data>
   <data name="&gt;&gt;cmdClearConditions.ZOrder" xml:space="preserve">
     <value>16</value>
-  </data>
-  <data name="lblSelectPreview.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="lblSelectPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -220,7 +217,10 @@
     <value>16</value>
   </data>
   <data name="lblSelectPreview.Text" xml:space="preserve">
-    <value>Column selection preview:</value>
+    <value>Selection Preview:</value>
+  </data>
+  <data name="lblSelectPreview.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblSelectPreview.Name" xml:space="preserve">
     <value>lblSelectPreview</value>
@@ -271,7 +271,7 @@
     <value>12</value>
   </data>
   <data name="cmdAddCondition.Text" xml:space="preserve">
-    <value>Add condition</value>
+    <value>Add Condition</value>
   </data>
   <data name="&gt;&gt;cmdAddCondition.Name" xml:space="preserve">
     <value>cmdAddCondition</value>
@@ -295,13 +295,13 @@
     <value>273, 38</value>
   </data>
   <data name="lblSelectBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+    <value>55, 13</value>
   </data>
   <data name="lblSelectBy.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblSelectBy.Text" xml:space="preserve">
-    <value>Select by:</value>
+    <value>Select By:</value>
   </data>
   <data name="&gt;&gt;lblSelectBy.Name" xml:space="preserve">
     <value>lblSelectBy</value>
@@ -325,13 +325,13 @@
     <value>392, 38</value>
   </data>
   <data name="lblSeclectedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>95, 13</value>
   </data>
   <data name="lblSeclectedColumns.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblSeclectedColumns.Text" xml:space="preserve">
-    <value>Select column(s):</value>
+    <value>Selected Columns:</value>
   </data>
   <data name="&gt;&gt;lblSeclectedColumns.Name" xml:space="preserve">
     <value>lblSeclectedColumns</value>
@@ -355,13 +355,13 @@
     <value>393, 38</value>
   </data>
   <data name="lblString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+    <value>84, 13</value>
   </data>
   <data name="lblString.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lblString.Text" xml:space="preserve">
-    <value>Matching string:</value>
+    <value>Matching String:</value>
   </data>
   <data name="&gt;&gt;lblString.Name" xml:space="preserve">
     <value>lblString</value>
@@ -445,13 +445,13 @@
     <value>393, 38</value>
   </data>
   <data name="lblColumnType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>72, 13</value>
   </data>
   <data name="lblColumnType.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
   <data name="lblColumnType.Text" xml:space="preserve">
-    <value>Column type:</value>
+    <value>Column Type:</value>
   </data>
   <data name="lblColumnType.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -621,9 +621,6 @@
   <data name="&gt;&gt;ucrInputSelectName.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="ucrSelectPreview.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrSelectPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 372</value>
   </data>
@@ -635,6 +632,9 @@
   </data>
   <data name="ucrSelectPreview.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
+  </data>
+  <data name="ucrSelectPreview.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrSelectPreview.Name" xml:space="preserve">
     <value>ucrSelectPreview</value>
@@ -706,7 +706,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Select column(s)</value>
+    <value>Define New Selection</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgSelectColumns</value>
