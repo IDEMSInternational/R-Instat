@@ -191,31 +191,18 @@ Public Class clsRecentFiles
             End If
         End If
 
-        If strFilePath.Contains("MRU:") Then
-            Dim strNewFilePath = strFilePath.Replace("MRU:", "")
-            If File.Exists(strNewFilePath) Then
-                dlgImportDataset.strFileToOpenOn = strNewFilePath
-                dlgImportDataset.ShowDialog()
-            Else
-                'removes the path to the non existent file
-                If DialogResult.Yes = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) Then
-                    lstRecentOpenedFiles.Remove(strNewFilePath)
-                    'update recent file menu items controls to not show the file name and path
-                    UpdateRecentFilesMenuItems()
-                End If
-            End If
-        Else
-            If File.Exists(strFilePath) Then
-                dlgImportDataset.strFileToOpenOn = strFilePath
-                dlgImportDataset.ShowDialog()
-            Else
-                'removes the path to the non existent file
-                If DialogResult.Yes = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) Then
-                    lstRecentOpenedFiles.Remove(strFilePath)
-                    'update recent file menu items controls to not show the file name and path
-                    UpdateRecentFilesMenuItems()
-                End If
-            End If
+        Dim strFilePathTmp As String = strFilePath.Replace("MRU:", "")
+        If File.Exists(strFilePathTmp) Then
+            dlgImportDataset.strFileToOpenOn = strFilePathTmp
+            dlgImportDataset.ShowDialog()
+        ElseIf DialogResult.Yes = MessageBox.Show(    'else allow the user to remove file from list
+                    frmMain, "File not accessible. It may have been renamed, moved or deleted." &
+                    Environment.NewLine & Environment.NewLine &
+                    "Would you like to remove this file from the list?", "Cannot access file",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) Then
+            lstRecentOpenedFiles.Remove(strFilePathTmp)
+            'update recent file menu items controls to not show the file name and path
+            UpdateRecentFilesMenuItems()
         End If
     End Sub
 
