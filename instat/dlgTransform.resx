@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectColumns.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>17</value>
   </data>
   <data name="rdoRandom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +322,7 @@
     <value>5</value>
   </data>
   <data name="grpTies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 128</value>
+    <value>238, 128</value>
   </data>
   <data name="grpTies.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 135</value>
@@ -343,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpTies.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>23</value>
   </data>
   <data name="rdoLast.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -469,7 +469,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMissingValues.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <data name="rdoRoundOf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -531,34 +531,34 @@
   <data name="&gt;&gt;rdoSignificantDigits.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rdoScale.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoStandardize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoScale.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoStandardize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoScale.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoStandardize.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 75</value>
   </data>
-  <data name="rdoScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 17</value>
+  <data name="rdoStandardize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
   </data>
-  <data name="rdoScale.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoStandardize.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="rdoScale.Text" xml:space="preserve">
-    <value>Scale</value>
+  <data name="rdoStandardize.Text" xml:space="preserve">
+    <value>Standardize</value>
   </data>
-  <data name="&gt;&gt;rdoScale.Name" xml:space="preserve">
-    <value>rdoScale</value>
+  <data name="&gt;&gt;rdoStandardize.Name" xml:space="preserve">
+    <value>rdoStandardize</value>
   </data>
-  <data name="&gt;&gt;rdoScale.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoStandardize.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoScale.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoStandardize.Parent" xml:space="preserve">
     <value>grpNumericOptions</value>
   </data>
-  <data name="&gt;&gt;rdoScale.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoStandardize.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="rdoDifference.AutoSize" type="System.Boolean, mscorlib">
@@ -589,7 +589,7 @@
     <value>grpNumericOptions</value>
   </data>
   <data name="&gt;&gt;rdoDifference.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="rdoLead.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -619,7 +619,7 @@
     <value>grpNumericOptions</value>
   </data>
   <data name="&gt;&gt;rdoLead.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoLag.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -670,7 +670,7 @@
     <value>grpNumericOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudLagPosition.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblLagPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -700,7 +700,7 @@
     <value>grpNumericOptions</value>
   </data>
   <data name="&gt;&gt;lblLagPosition.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblRoundofDigits.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -910,7 +910,7 @@
     <value>6, 19</value>
   </data>
   <data name="ucrPnlNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 174</value>
+    <value>79, 174</value>
   </data>
   <data name="ucrPnlNumericOptions.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -928,7 +928,7 @@
     <value>16</value>
   </data>
   <data name="grpNumericOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 129</value>
+    <value>238, 128</value>
   </data>
   <data name="grpNumericOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 199</value>
@@ -949,7 +949,223 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpNumericOptions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>0</value>
+  </data>
+  <data name="lblPower.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 92</value>
+  </data>
+  <data name="lblPower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblPower.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblPower.Text" xml:space="preserve">
+    <value>Power:</value>
+  </data>
+  <data name="&gt;&gt;lblPower.Name" xml:space="preserve">
+    <value>lblPower</value>
+  </data>
+  <data name="&gt;&gt;lblPower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPower.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;lblPower.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudPower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 88</value>
+  </data>
+  <data name="ucrNudPower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudPower.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Name" xml:space="preserve">
+    <value>ucrNudPower</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPower.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoPower.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoPower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 88</value>
+  </data>
+  <data name="rdoPower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
+  </data>
+  <data name="rdoPower.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="rdoPower.Text" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Name" xml:space="preserve">
+    <value>rdoPower</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;rdoPower.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoSquareRoot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSquareRoot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSquareRoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 21</value>
+  </data>
+  <data name="rdoSquareRoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
+  </data>
+  <data name="rdoSquareRoot.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="rdoSquareRoot.Text" xml:space="preserve">
+    <value>Square Root</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Name" xml:space="preserve">
+    <value>rdoSquareRoot</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;rdoSquareRoot.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoNaturalLog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNaturalLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoNaturalLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 43</value>
+  </data>
+  <data name="rdoNaturalLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 17</value>
+  </data>
+  <data name="rdoNaturalLog.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="rdoNaturalLog.Text" xml:space="preserve">
+    <value>Log(Natural)</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Name" xml:space="preserve">
+    <value>rdoNaturalLog</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;rdoNaturalLog.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoLogToBase10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLogToBase10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoLogToBase10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 65</value>
+  </data>
+  <data name="rdoLogToBase10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 17</value>
+  </data>
+  <data name="rdoLogToBase10.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="rdoLogToBase10.Text" xml:space="preserve">
+    <value>Log(base 10)</value>
+  </data>
+  <data name="&gt;&gt;rdoLogToBase10.Name" xml:space="preserve">
+    <value>rdoLogToBase10</value>
+  </data>
+  <data name="&gt;&gt;rdoLogToBase10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLogToBase10.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;rdoLogToBase10.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrPnlNonNegative.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 14</value>
+  </data>
+  <data name="ucrPnlNonNegative.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 100</value>
+  </data>
+  <data name="ucrPnlNonNegative.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNonNegative.Name" xml:space="preserve">
+    <value>ucrPnlNonNegative</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNonNegative.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNonNegative.Parent" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlNonNegative.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpNonNegative.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 128</value>
+  </data>
+  <data name="grpNonNegative.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 121</value>
+  </data>
+  <data name="grpNonNegative.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="grpNonNegative.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpNonNegative.Name" xml:space="preserve">
+    <value>grpNonNegative</value>
+  </data>
+  <data name="&gt;&gt;grpNonNegative.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpNonNegative.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpNonNegative.ZOrder" xml:space="preserve">
+    <value>24</value>
   </data>
   <data name="rdoNumeric.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -961,10 +1177,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 13</value>
+    <value>13, 13</value>
   </data>
   <data name="rdoNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 28</value>
+    <value>82, 28</value>
   </data>
   <data name="rdoNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -985,13 +1201,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoNumeric.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="rdoNonNegative.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
-  </data>
-  <data name="rdoNonNegative.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="rdoNonNegative.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1000,7 +1213,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoNonNegative.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="rdoNonNegative.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 28</value>
@@ -1024,7 +1237,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoNonNegative.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>12</value>
   </data>
   <data name="rdoRank.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1036,10 +1249,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 13</value>
+    <value>178, 13</value>
   </data>
   <data name="rdoRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 28</value>
+    <value>82, 28</value>
   </data>
   <data name="rdoRank.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1060,7 +1273,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRank.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="rdoSort.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1072,10 +1285,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 13</value>
+    <value>259, 13</value>
   </data>
   <data name="rdoSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 28</value>
+    <value>82, 28</value>
   </data>
   <data name="rdoSort.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1096,13 +1309,217 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSort.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>10</value>
+  </data>
+  <data name="rdoScale.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoScale.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoScale.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 13</value>
+  </data>
+  <data name="rdoScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 28</value>
+  </data>
+  <data name="rdoScale.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="rdoScale.Text" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="rdoScale.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoScale.Name" xml:space="preserve">
+    <value>rdoScale</value>
+  </data>
+  <data name="&gt;&gt;rdoScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoScale.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoScale.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrInputAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 207</value>
+  </data>
+  <data name="ucrInputAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrInputAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAdd.Name" xml:space="preserve">
+    <value>ucrInputAdd</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAdd.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAdd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAdd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputDivide.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 180</value>
+  </data>
+  <data name="ucrInputDivide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrInputDivide.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDivide.Name" xml:space="preserve">
+    <value>ucrInputDivide</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDivide.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDivide.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDivide.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputMultiply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 153</value>
+  </data>
+  <data name="ucrInputMultiply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrInputMultiply.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMultiply.Name" xml:space="preserve">
+    <value>ucrInputMultiply</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMultiply.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMultiply.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMultiply.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputSubtract.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 126</value>
+  </data>
+  <data name="ucrInputSubtract.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrInputSubtract.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSubtract.Name" xml:space="preserve">
+    <value>ucrInputSubtract</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSubtract.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSubtract.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSubtract.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 206</value>
+  </data>
+  <data name="ucrChkAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 20</value>
+  </data>
+  <data name="ucrChkAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAdd.Name" xml:space="preserve">
+    <value>ucrChkAdd</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAdd.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAdd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAdd.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkDivide.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 180</value>
+  </data>
+  <data name="ucrChkDivide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 20</value>
+  </data>
+  <data name="ucrChkDivide.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDivide.Name" xml:space="preserve">
+    <value>ucrChkDivide</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDivide.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDivide.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDivide.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrChkMultiply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 154</value>
+  </data>
+  <data name="ucrChkMultiply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 20</value>
+  </data>
+  <data name="ucrChkMultiply.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultiply.Name" xml:space="preserve">
+    <value>ucrChkMultiply</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultiply.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultiply.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMultiply.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkSubtract.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 128</value>
+  </data>
+  <data name="ucrChkSubtract.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 20</value>
+  </data>
+  <data name="ucrChkSubtract.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSubtract.Name" xml:space="preserve">
+    <value>ucrChkSubtract</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSubtract.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSubtract.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSubtract.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="ucrPnlTransformOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 8</value>
+    <value>10, 8</value>
   </data>
   <data name="ucrPnlTransformOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 45</value>
+    <value>423, 45</value>
   </data>
   <data name="ucrPnlTransformOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1117,7 +1534,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlTransformOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>15</value>
   </data>
   <data name="ucrSaveNew.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 346</value>
@@ -1141,7 +1558,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNew.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>16</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1171,7 +1588,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>19</value>
   </data>
   <data name="ucrSelectorForRank.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 73</value>
@@ -1195,7 +1612,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForRank.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>20</value>
   </data>
   <data name="ucrChkMissingLast.Location" type="System.Drawing.Point, System.Drawing">
     <value>244, 154</value>
@@ -1216,7 +1633,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkMissingLast.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>21</value>
   </data>
   <data name="ucrChkDecreasing.Location" type="System.Drawing.Point, System.Drawing">
     <value>244, 128</value>
@@ -1237,7 +1654,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkDecreasing.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>22</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1273,6 +1693,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverRank.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>18</value>
   </data>
 </root>
