@@ -525,7 +525,6 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetDialogStateFromFile(strFileOrFolderPath As String, Optional strFolderFileExt As String = "")
-        strlastFileName = strFileName
         bImportFromFolder = False
         strFileName = ""
         strFileExtension = ""
@@ -544,6 +543,9 @@ Public Class dlgImportDataset
             If File.Exists(strFileOrFolderPath) Then
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFileOrFolderPath)
+                'getting the name of the file without replacing any characters
+                'so that its possible to reload the file after checking and unchecking the all file check box 
+                strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
             ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
