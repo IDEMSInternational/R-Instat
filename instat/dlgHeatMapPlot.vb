@@ -343,14 +343,8 @@ Public Class dlgHeatMapPlot
         clsForecatsReverse.SetPackageName("forcats")
         clsForecatsReverse.SetRCommand("fct_rev")
 
-        clsForecatsInfreq.SetPackageName("forcats")
-        clsForecatsInfreq.SetRCommand("fct_infreq")
-
         clsForecatsReverseValue.SetPackageName("forcats")
         clsForecatsReverseValue.SetRCommand("fct_rev")
-
-        clsForecatsInfreqValue.SetPackageName("forcats")
-        clsForecatsInfreqValue.SetRCommand("fct_infreq")
 
         clsReorderFunctionValue.SetRCommand("reorder")
         clsReorderFunctionValue.SetRCommand("reorder")
@@ -386,6 +380,8 @@ Public Class dlgHeatMapPlot
         ucrReceiverFillChoropleth.AddAdditionalCodeParameterPair(clsLabelAesFuction, New RParameter("label", 2), iAdditionalPairNo:=1)
         ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeHeatMapAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrReceiverPointsChoropleth.AddAdditionalCodeParameterPair(clsShapeChoroplethAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=1)
 
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
@@ -549,8 +545,6 @@ Public Class dlgHeatMapPlot
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsChoroplethAesFunction, iPosition:=1)
             clsBaseOperator.AddParameter("geom_polygon", clsRFunctionParameter:=clsGeomPolygonAesFunction, iPosition:=1)
         End If
-        MakeVisible()
-        MakeNudVisible()
     End Sub
 
     Private Sub ucrVariableAsFactorForHeatMap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariableAsFactorForHeatMap.ControlValueChanged
@@ -591,5 +585,42 @@ Public Class dlgHeatMapPlot
                 ucrNudShapeChoropleth.Visible = True
             End If
         End If
+    End Sub
+
+    Private Sub UpdateParameter()
+        Dim strChangeTextReorder As String = ucrInputReorderVariableX.GetText()
+        Dim strChangedReorderValue As String = ucrInputReorderValue.GetText()
+        If rdoHeatMap.Checked Then
+            Select Case strChangedReorderValue
+                Case strAscending
+                    clsReorderFunctionValue.AddParameter("X", ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=0)
+                Case strDescending
+                    clsReorderFunctionValue.AddParameter("X", "-" & ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=0)
+                Case strReverse
+                    clsForecatsReverseValue.AddParameter("f", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=0)
+            End Select
+            Select Case strChangeTextReorder
+                Case strAscending
+                    clsReorderFunction.AddParameter("X", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                Case strDescending
+                    clsReorderFunction.AddParameter("X", "-" & ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                Case strReverse
+                    clsForecatsReverse.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+                    clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+            End Select
+        End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariableAsFactorForHeatMap.ControlValueChanged,
+        ucrReceiverX.ControlValueChanged, ucrReceiverFill.ControlValueChanged, ucrChkAddLabels.ControlValueChanged, ucrInputReorderValue.ControlValueChanged,
+        ucrInputReorderVariableX.ControlValueChanged
+        MakeNudVisible()
+        UpdateParameter()
+        MakeVisible()
     End Sub
 End Class
