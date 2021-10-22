@@ -24,7 +24,6 @@ Public Class dlgCalculator
     Public iHelpCalcID As Integer
     'holds the original width of the form
     Private iBasicWidth As Integer
-    Private iBasicHeight As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
     Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
@@ -34,7 +33,6 @@ Public Class dlgCalculator
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
-            iBasicHeight = Me.Height
             SetDefaults()
             bFirstLoad = False
         Else
@@ -144,55 +142,42 @@ Public Class dlgCalculator
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
                 ucrBase.iHelpTopicID = 126
-                Me.Height = iBasicHeight
             Case "Logical and Symbols"
                 Me.Width = iBasicWidth * 1.4
                 ucrBase.iHelpTopicID = 127
             Case "Summary"
                 Me.Width = iBasicWidth * 1.46
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 128
             Case "Text/Strings (Character Columns)"
                 Me.Width = iBasicWidth * 1.49
-                Me.Height = iBasicHeight + 19.5
                 ucrBase.iHelpTopicID = 338
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 44
             Case "Probability"
                 Me.Width = iBasicWidth * 1.5
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 129
             Case "Dates/Times"
                 Me.Width = iBasicWidth * 1.37
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 130
             Case "Transform"
                 Me.Width = iBasicWidth * 1.37
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 166
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 596
             Case "Wakefield"
                 Me.Width = iBasicWidth * 1.73
-                Me.Height = iBasicHeight + 17.5
                 ucrBase.iHelpTopicID = 444
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
-                Me.Height = iBasicHeight
             Case "Symbols"
                 Me.Width = iBasicWidth * 2.56
-                Me.Height = iBasicHeight
             Case "hydroGOF"
                 Me.Width = iBasicWidth * 1.27
-                Me.Height = iBasicHeight
                 ucrBase.iHelpTopicID = 598
             Case Else
                 Me.Width = iBasicWidth
-                Me.Height = iBasicHeight
         End Select
     End Sub
 
