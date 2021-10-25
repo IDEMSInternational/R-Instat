@@ -148,37 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorToUnstackBy.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="lblCarryColumns.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCarryColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 246</value>
-  </data>
-  <data name="lblCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
-  </data>
-  <data name="lblCarryColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblCarryColumns.Text" xml:space="preserve">
-    <value>Carry Columns:</value>
-  </data>
-  <data name="&gt;&gt;lblCarryColumns.Name" xml:space="preserve">
-    <value>lblCarryColumns</value>
-  </data>
-  <data name="&gt;&gt;lblCarryColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCarryColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblCarryColumns.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="rdoSingle.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -214,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSingle.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rdoMultiple.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -250,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoMultiple.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="rdoRestoreHierarchy.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -286,7 +256,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRestoreHierarchy.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblMultipleColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,40 +316,40 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumnToUnstack.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
-  <data name="ucrChkAddPrefix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 319</value>
+  <data name="lblColumnsToCarry.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrChkAddPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="lblColumnsToCarry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrChkAddPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="lblColumnsToCarry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 252</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Name" xml:space="preserve">
-    <value>ucrChkAddPrefix</value>
+  <data name="lblColumnsToCarry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblColumnsToCarry.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Parent" xml:space="preserve">
+  <data name="lblColumnsToCarry.Text" xml:space="preserve">
+    <value>Columns to Carry</value>
+  </data>
+  <data name="&gt;&gt;lblColumnsToCarry.Name" xml:space="preserve">
+    <value>lblColumnsToCarry</value>
+  </data>
+  <data name="&gt;&gt;lblColumnsToCarry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblColumnsToCarry.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblColumnsToCarry.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>436, 463</value>
-  </data>
   <data name="ucrNudValuesFill.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 263</value>
+    <value>154, 263</value>
   </data>
   <data name="ucrNudValuesFill.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -397,34 +367,67 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudValuesFill.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
-  <data name="ucrChkValuesFill.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 264</value>
+  <data name="ucrChkAddPrefix.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 319</value>
   </data>
-  <data name="ucrChkValuesFill.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="ucrChkAddPrefix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 20</value>
   </data>
-  <data name="ucrChkValuesFill.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="ucrChkAddPrefix.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="&gt;&gt;ucrChkValuesFill.Name" xml:space="preserve">
-    <value>ucrChkValuesFill</value>
+  <data name="&gt;&gt;ucrChkAddPrefix.Name" xml:space="preserve">
+    <value>ucrChkAddPrefix</value>
   </data>
-  <data name="&gt;&gt;ucrChkValuesFill.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddPrefix.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkValuesFill.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddPrefix.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkValuesFill.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>436, 463</value>
+  </data>
+  <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 233</value>
+  </data>
+  <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Name" xml:space="preserve">
+    <value>ucrChkCarryColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 320</value>
+    <value>154, 320</value>
   </data>
   <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>100, 21</value>
   </data>
   <data name="ucrInputTextPrefix.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -439,16 +442,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 370</value>
+    <value>12, 374</value>
   </data>
   <data name="ucrNewDFName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 24</value>
+    <value>256, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -463,10 +466,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 264</value>
+    <value>272, 268</value>
   </data>
   <data name="ucrReceiverCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -487,7 +490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverCarryColumns.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 78</value>
@@ -511,7 +514,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactorToUnstackby.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrSelectorForUnstack.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 59</value>
@@ -535,7 +538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForUnstack.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 401</value>
@@ -556,7 +559,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlUnstackCol.Location" type="System.Drawing.Point, System.Drawing">
     <value>40, 5</value>
@@ -580,7 +583,7 @@
     <value>16</value>
   </data>
   <data name="ucrMultipleColumnsReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 136</value>
+    <value>272, 128</value>
   </data>
   <data name="ucrMultipleColumnsReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -603,6 +606,27 @@
   <data name="&gt;&gt;ucrMultipleColumnsReceiver.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="ucrChkValuesFill.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 263</value>
+  </data>
+  <data name="ucrChkValuesFill.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkValuesFill.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValuesFill.Name" xml:space="preserve">
+    <value>ucrChkValuesFill</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValuesFill.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValuesFill.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkValuesFill.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -616,7 +640,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 135</value>
+    <value>272, 125</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -637,6 +661,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumnToUnstack.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
 </root>
