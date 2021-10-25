@@ -339,6 +339,12 @@
     <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
@@ -2278,10 +2284,10 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRank.Designer.vb">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <Compile Include="dlgTransform.Designer.vb">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRank.vb">
+    <Compile Include="dlgTransform.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2851,6 +2857,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -4428,11 +4437,11 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.sw-KE.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>

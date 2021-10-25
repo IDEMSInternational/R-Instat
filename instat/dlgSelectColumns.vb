@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 Public Class dlgSelectColumns
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private clsAddColumnSelection As RFunction
+    Public bSelectedColumns As Boolean = True
+    Public clsAddColumnSelection As RFunction
     Private clsConditionsList As RFunction
     Private clsFromToOperation As ROperator
     Private Sub dlgSelectColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,6 +39,7 @@ Public Class dlgSelectColumns
     Private Sub InitialiseDialog()
         ucrSelectorForColumnSelection.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnSelection.SetParameterIsString()
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
 
         ucrReceiverMultipleVariables.Selector = ucrSelectorForColumnSelection
         ucrReceiverMultipleVariables.SetMeAsReceiver()
@@ -63,11 +66,11 @@ Public Class dlgSelectColumns
 
         ucrChkIgnoreCase.SetParameter(New RParameter("ignore.case", 1))
         ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkIgnoreCase.SetText("Ignore case")
+        ucrChkIgnoreCase.SetText("Ignore Case")
 
         ucrInputSelectName.SetItemsTypeAsColumnSelection()
         ucrInputSelectName.SetDataFrameSelector(ucrSelectorForColumnSelection.ucrAvailableDataFrames)
-        ucrInputSelectName.SetPrefix("column_selection")
+        ucrInputSelectName.SetPrefix("selection")
         ucrInputSelectName.SetDefaultTypeAsColumnSelection()
 
         ucrSelectPreview.txtInput.ReadOnly = True
@@ -107,6 +110,13 @@ Public Class dlgSelectColumns
         ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset)
         ucrNudFrom.SetRCode(clsFromToOperation, bReset)
         ucrNudTo.SetRCode(clsFromToOperation, bReset)
+    End Sub
+
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+        If strDefaultDataframe <> "" Then
+            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=False)
+            ucrSelectorForColumnSelection.ucrAvailableDataFrames.Enabled = False 'Note: This is potentially a duplication because for some reason setting  bEnableDataframe:=False in line 117 changes internally
+        End If
     End Sub
 
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
@@ -207,6 +217,7 @@ Public Class dlgSelectColumns
         lstColumnSelections.Columns(0).Width = -2
         lstColumnSelections.Columns(1).Width = -2
         ucrReceiverMultipleVariables.Clear()
+        cmdAddCondition.Enabled = False
     End Sub
 
     Private Sub cmdClearConditions_Click(sender As Object, e As EventArgs) Handles cmdClearConditions.Click
@@ -218,6 +229,7 @@ Public Class dlgSelectColumns
         Dim bEnableOrDisable As Boolean = True
         Dim strOperation As String
         strOperation = ucrInputSelectOperation.GetText
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(strOperation = "Columns", False)
         Select Case strOperation
             Case "Columns"
                 If ucrReceiverMultipleVariables.IsEmpty Then
@@ -241,13 +253,29 @@ Public Class dlgSelectColumns
         EnableDisableAddConditionButton()
     End Sub
 
-
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
-        If lstColumnSelections.Items.Count > 0 Then
-            frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
-            dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
-            lstColumnSelections.Items.Clear()
-            clsConditionsList.ClearParameters()
+        If bSelectedColumns Then
+            If lstColumnSelections.Items.Count > 0 Then
+                frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
+                dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
+                lstColumnSelections.Items.Clear()
+                clsConditionsList.ClearParameters()
+                bSelectedColumns = False
+            End If
         End If
+    End Sub
+
+    Private Sub dlgSelectColumns_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If Not cmdAddCondition.Enabled Then
+            Exit Sub
+        End If
+
+        Dim result As MsgBoxResult = MessageBox.Show(
+            text:="Are you sure you want to return to the main dialog?" & Environment.NewLine &
+                  "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine &
+                  "Click the ""Add Condition"" button if you want to add it.",
+            caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+        e.Cancel = result = MsgBoxResult.No
+
     End Sub
 End Class
