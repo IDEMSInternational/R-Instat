@@ -125,6 +125,7 @@ Public Class dlgLabelsLevels
         End If
         lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1
         lblLevelNumber.ForeColor = Color.Red
-        'lblNaValue.Text = "Missing Values: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.Item(1, 1)
+        lblNaValue.ForeColor = Color.Red
+        lblNaValue.Text = "Missing Values: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.GetCellData(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1)
     End Sub
 End Class
