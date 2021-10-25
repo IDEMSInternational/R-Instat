@@ -667,45 +667,54 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 }
 )
 
-DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
-  if(new_col_name != curr_col_name) {
-    if (new_col_name %in% names(curr_data)){
-      stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
-    }
-    if(!is.character(curr_col_name)) {
-      stop("Current column name must be of type: character")
-    }
-    
-    else if (!(curr_col_name %in% names(curr_data))) {
-      stop(paste0("Cannot rename column: ",curr_col_name,". Column was not found in the data."))
-    }
-    
-    else if (!is.character(new_col_name)) {
-      stop("New column name must be of type: character")
-    }
-    
-    else {
-      if(sum(names(curr_data) == curr_col_name) > 1) {
-        # Should never happen since column names must be unique
-        warning("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed.")
+  if (type == "single") {
+    if (new_col_name != curr_col_name) {
+      if (new_col_name %in% names(curr_data)) {
+        stop("Cannot rename this column. A column named: ", new_col_name, " already exists in the data.")
       }
-      # Need to use private$data here because changing names of data field
-      names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
-      self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
-      # TODO decide if we need to do these 2 lines
-      self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-      self$data_changed <- TRUE
+      if (!is.character(curr_col_name)) {
+        stop("Current column name must be of type: character")
+      }
+
+      else if (!(curr_col_name %in% names(curr_data))) {
+        stop(paste0("Cannot rename column: ", curr_col_name, ". Column was not found in the data."))
+      }
+
+      else if (!is.character(new_col_name)) {
+        stop("New column name must be of type: character")
+      }
+
+      else {
+        if (sum(names(curr_data) == curr_col_name) > 1) {
+          # Should never happen since column names must be unique
+          warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
+        }
+        # Need to use private$data here because changing names of data field
+        names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+        self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
+        # TODO decide if we need to do these 2 lines
+        self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
+        self$data_changed <- TRUE
+        self$variables_metadata_changed <- TRUE
+      }
+    }
+    if (label != "") {
+      self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
       self$variables_metadata_changed <- TRUE
     }
-  }
-  if(label != "") {
-    self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
+  } else {
+    private$data <- curr_data |>
+    dplyr::rename_with(
+      .fn = .fn,
+      .cols = {{ .cols }}, ...
+    )
+    self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
   }
-}
-)
+})
 
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
   if(length(cols) == self$get_column_count()) {
@@ -1737,7 +1746,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
     i <- i + 1
   }
   out <- paste(out, ")")
-  if (curr_filter$parameters[["outer_not"]]) {
+  if (isTRUE(curr_filter$parameters[["outer_not"]])) {
     out <- gsub("[!()]", "", out)
     out <- paste0("!(", out, ")")
   }
@@ -1845,6 +1854,7 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::contains" = tidyselect::contains,
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
+                 "tidyselect::last_col" =  tidyselect::last_col,
                  NULL
                  )
     if (op == "base::match") args$table <- all_column_names
