@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="cmdAddLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdAddLevel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="lblLevelNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -205,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLevelNumber.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrChkIncludeLevelNumbers.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 316</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeLevelNumbers.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -236,36 +236,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>604, 431</value>
-  </data>
-  <data name="lblNaValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNaValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNaValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 40</value>
-  </data>
-  <data name="lblNaValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
-  <data name="lblNaValue.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="lblNaValue.Text" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;lblNaValue.Name" xml:space="preserve">
-    <value>lblNaValue</value>
-  </data>
-  <data name="&gt;&gt;lblNaValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNaValue.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblNaValue.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="ucrFactorLabels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorLabels.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrSelectorForLabels.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -313,7 +283,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForLabels.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 376</value>
@@ -334,7 +304,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -370,6 +343,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLabels.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
 </root>
