@@ -41,11 +41,13 @@ Partial Class dlgLabelsLevels
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgLabelsLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdAddLevel = New System.Windows.Forms.Button()
+        Me.lblLevelNumber = New System.Windows.Forms.Label()
         Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
         Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblNaValue = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -59,6 +61,11 @@ Partial Class dlgLabelsLevels
         resources.ApplyResources(Me.cmdAddLevel, "cmdAddLevel")
         Me.cmdAddLevel.Name = "cmdAddLevel"
         Me.cmdAddLevel.UseVisualStyleBackColor = True
+        '
+        'lblLevelNumber
+        '
+        resources.ApplyResources(Me.lblLevelNumber, "lblLevelNumber")
+        Me.lblLevelNumber.Name = "lblLevelNumber"
         '
         'ucrChkIncludeLevelNumbers
         '
@@ -97,10 +104,17 @@ Partial Class dlgLabelsLevels
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblNaValue
+        '
+        resources.ApplyResources(Me.lblNaValue, "lblNaValue")
+        Me.lblNaValue.Name = "lblNaValue"
+        '
         'dlgLabelsLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNaValue)
+        Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
@@ -126,4 +140,6 @@ Partial Class dlgLabelsLevels
     Friend WithEvents ucrReceiverLabels As ucrReceiverSingle
     Friend WithEvents cmdAddLevel As Button
     Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
+    Friend WithEvents lblLevelNumber As Label
+    Friend WithEvents lblNaValue As Label
 End Class
