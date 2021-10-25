@@ -42,6 +42,7 @@ Partial Class dlgLabelsLevels
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdAddLevel = New System.Windows.Forms.Button()
         Me.lblLevelNumber = New System.Windows.Forms.Label()
+        Me.lblNaValue = New System.Windows.Forms.Label()
         Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
@@ -65,6 +66,11 @@ Partial Class dlgLabelsLevels
         '
         resources.ApplyResources(Me.lblLevelNumber, "lblLevelNumber")
         Me.lblLevelNumber.Name = "lblLevelNumber"
+        '
+        'lblNaValue
+        '
+        resources.ApplyResources(Me.lblNaValue, "lblNaValue")
+        Me.lblNaValue.Name = "lblNaValue"
         '
         'ucrChkIncludeLevelNumbers
         '
@@ -107,6 +113,7 @@ Partial Class dlgLabelsLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNaValue)
         Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
@@ -134,4 +141,5 @@ Partial Class dlgLabelsLevels
     Friend WithEvents cmdAddLevel As Button
     Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
     Friend WithEvents lblLevelNumber As Label
+    Friend WithEvents lblNaValue As Label
 End Class

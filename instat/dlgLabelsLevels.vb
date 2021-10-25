@@ -47,6 +47,7 @@ Public Class dlgLabelsLevels
         ucrFactorLabels.AddEditableColumns({ucrFactorLabels.strLevelsName, ucrFactorLabels.strLabelsName})
         ucrFactorLabels.SetIsGridColumn(ucrFactorLabels.strLabelsName)
         ucrFactorLabels.SetLevelsCheckbox(ucrChkIncludeLevelNumbers)
+        ucrFactorLabels.bIncludeNA = True
 
         ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
         ucrReceiverLabels.SetParameterIsString()
@@ -122,7 +123,17 @@ Public Class dlgLabelsLevels
         Else
             clsViewLabels.RemoveParameterByName("new_levels")
         End If
-        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
+        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1
         lblLevelNumber.ForeColor = Color.Red
+        lblNaValue.ForeColor = Color.Red
+
+        If ucrFactorLabels.grdFactorData.CurrentWorksheet.GetCellData(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1) > 0 Then
+            lblNaValue.Visible = True
+            lblNaValue.Text = "Missing Values: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.GetCellData(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1)
+        Else
+            lblNaValue.Visible = False
+        End If
+
+        ucrFactorLabels.grdFactorData.CurrentWorksheet.HideRows(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1)
     End Sub
 End Class
