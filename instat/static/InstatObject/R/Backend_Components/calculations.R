@@ -3,7 +3,7 @@ calculation <- R6::R6Class("calculation",
                            initialize = function(function_name = "", parameters = list(), 
                                                  calculated_from = c(), is_recalculable = TRUE,
                                                  sub_calculations = list(), type = "", filter_conditions = list(),
-                                                 filters = list(), selections = list(), selection_conditions = list(), name = "") {
+                                                 filters = list(), name = "") {
                              self$function_name = function_name
                              self$parameters = parameters
                              self$calculated_from = c()
@@ -13,8 +13,6 @@ calculation <- R6::R6Class("calculation",
                              self$name = name
                              self$filter_conditions = filter_conditions
                              self$filters = filters
-                             self$selections = selections
-                             self$selection_conditions = selection_conditions
                            },
                            function_name = "",
                            parameters = list(), 
@@ -23,8 +21,6 @@ calculation <- R6::R6Class("calculation",
                            sub_calculations = list(),
                            filter_conditions = list(),
                            filters = list(),
-                           selection_conditions = list(),
-                           selections = list(),
                            name = "",
                            type = ""
                          )
@@ -51,7 +47,7 @@ calculation$set("public", "data_clone", function() {
   ret <- calculation$new(function_name = self$function_name, parameters = self$parameters, 
                          calculated_from = self$calculated_from, is_recalculable = self$is_recalculable,
                          sub_calculations = self$sub_calculations, type = self$type, 
-                         filter_conditions = self$filter_conditions, filters = self$filters, selections = self$selections,
+                         filter_conditions = self$filter_conditions, filters = self$filters,
                          name = self$name)
   return(ret)
 }

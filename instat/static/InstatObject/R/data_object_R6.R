@@ -1787,11 +1787,11 @@ DataSheet$set("public", "add_column_selection", function(column_selection, name 
     if (!is.logical(condition[["negation"]])) stop("negative must be either TRUE or FALSE.")
   }
   if(name %in% names(private$column_selection)) message("A column selection named ", name, " already exists. It will be replaced by the new column selection.")
-  column_selection_obj <- calculation$new(type = "selection", 
-                                          selection_conditions = column_selection, 
-                                          name = name, 
-                                          parameters = list(is_everything = is_everything,
-                                                            and_or = and_or))
+  column_selection_obj <- list(name = name,
+                               conditions = column_selection,
+                               is_everything = is_everything,
+                               and_or = and_or
+                               )
   private$column_selections[[name]] <- column_selection_obj
   self$append_to_changes(list(Added_column_selection, name))
   if(set_as_current) {
@@ -1877,7 +1877,7 @@ DataSheet$set("public", "column_selection_applied", function() {
   curr_sel <- private$.current_column_selection
   if (is.null(curr_sel) || length(curr_sel) == 0) {
     return(FALSE)
-  } else return(!curr_sel$parameters[["is_everything"]])
+  } else return(!curr_sel[["is_everything"]])
 }
 )
 
