@@ -36,6 +36,8 @@ Partial Class dlgMachineLearning
         Me.ucrSelectorMachineLearning = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverMultipleExplanatoryVariable = New instat.ucrReceiverMultiple()
+        Me.lblTrainSize = New System.Windows.Forms.Label()
+        Me.ucrNudTrainSize = New instat.ucrNud()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -86,7 +88,7 @@ Partial Class dlgMachineLearning
         '
         Me.lblMethod.AutoSize = True
         Me.lblMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMethod.Location = New System.Drawing.Point(10, 212)
+        Me.lblMethod.Location = New System.Drawing.Point(10, 254)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 7
@@ -108,7 +110,7 @@ Partial Class dlgMachineLearning
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(62, 208)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(62, 252)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputMethod.TabIndex = 8
@@ -181,11 +183,35 @@ Partial Class dlgMachineLearning
         Me.ucrReceiverMultipleExplanatoryVariable.TabIndex = 6
         Me.ucrReceiverMultipleExplanatoryVariable.ucrSelector = Nothing
         '
+        'lblTrainSize
+        '
+        Me.lblTrainSize.AutoSize = True
+        Me.lblTrainSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTrainSize.Location = New System.Drawing.Point(10, 227)
+        Me.lblTrainSize.Name = "lblTrainSize"
+        Me.lblTrainSize.Size = New System.Drawing.Size(57, 13)
+        Me.lblTrainSize.TabIndex = 11
+        Me.lblTrainSize.Text = "Train Size:"
+        '
+        'ucrNudTrainSize
+        '
+        Me.ucrNudTrainSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrainSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTrainSize.Location = New System.Drawing.Point(73, 225)
+        Me.ucrNudTrainSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTrainSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrainSize.Name = "ucrNudTrainSize"
+        Me.ucrNudTrainSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTrainSize.TabIndex = 12
+        Me.ucrNudTrainSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgMachineLearning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 399)
+        Me.Controls.Add(Me.ucrNudTrainSize)
+        Me.Controls.Add(Me.lblTrainSize)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.GroupBox1)
@@ -224,4 +250,6 @@ Partial Class dlgMachineLearning
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents rdoExplanatoryVariable As RadioButton
+    Friend WithEvents ucrNudTrainSize As ucrNud
+    Friend WithEvents lblTrainSize As Label
 End Class
