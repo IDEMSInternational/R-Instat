@@ -100,17 +100,19 @@ Public Class clsDataFramePage
     Public ReadOnly Property Data(iRow As Integer, iColumn As Integer) As Object
         Get
             Return _clsDataFrame(iRow, iColumn)
+            'ToDo Need better error handling if out of range
         End Get
     End Property
 
     ''' <summary>
     ''' Row name of the dataframe for a given row
     ''' </summary>
-    ''' <param name="row"></param>
+    ''' <param name="iRow"></param>
     ''' <returns></returns>
-    Public ReadOnly Property RowName(row As Integer) As String
+    Public ReadOnly Property RowName(iRow As Integer) As String
         Get
-            Return _clsDataFrame.RowNames(row)
+            Return _clsDataFrame.RowNames(iRow)
+            'ToDo Need better error handling if out of range
         End Get
     End Property
 
