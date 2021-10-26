@@ -40,7 +40,7 @@ Partial Class dlgClimSoft
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimSoft))
-        Me.btnEstablishConnection = New System.Windows.Forms.Button()
+        Me.cmdEstablishConnection = New System.Windows.Forms.Button()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.lblStations = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
@@ -62,11 +62,11 @@ Partial Class dlgClimSoft
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'btnEstablishConnection
+        'cmdEstablishConnection
         '
-        resources.ApplyResources(Me.btnEstablishConnection, "btnEstablishConnection")
-        Me.btnEstablishConnection.Name = "btnEstablishConnection"
-        Me.btnEstablishConnection.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdEstablishConnection, "cmdEstablishConnection")
+        Me.cmdEstablishConnection.Name = "cmdEstablishConnection"
+        Me.cmdEstablishConnection.UseVisualStyleBackColor = True
         '
         'lblElements
         '
@@ -215,7 +215,7 @@ Partial Class dlgClimSoft
         Me.Controls.Add(Me.lblStations)
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.ucrReceiverMultipleStations)
-        Me.Controls.Add(Me.btnEstablishConnection)
+        Me.Controls.Add(Me.cmdEstablishConnection)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -227,7 +227,7 @@ Partial Class dlgClimSoft
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents btnEstablishConnection As Button
+    Friend WithEvents cmdEstablishConnection As Button
     Friend WithEvents ucrReceiverMultipleStations As ucrReceiverMultiple
     Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
     Friend WithEvents lblStations As Label
