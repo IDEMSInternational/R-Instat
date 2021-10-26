@@ -33,7 +33,6 @@ Public Class dlgClimaticBoxPlot
     Private clsFacetOp As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
-    Private clsThemeParam As New RParameter
     Private clsThemeFunction As New RFunction
     Private clsThemeFunc As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
@@ -171,18 +170,23 @@ Public Class dlgClimaticBoxPlot
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
 
+        ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
+        ucrNudOutlierCoefficient.DecimalPlaces = 1
+        ucrNudOutlierCoefficient.Increment = 0.1
+        ucrNudOutlierCoefficient.SetRDefault(1.5)
+
+        ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
+
+        ucrPnlPlots.AddToLinkedControls(ucrNudOutlierCoefficient, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
         clsThemeFunc.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextElementFunc)
-        clsThemeParam.SetArgument(clsThemeFunc)
-        clsThemeParam.SetArgumentName("theme")
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90", iPosition:=0)
         clsTextElementFunc.AddParameter("hjust", "1", iPosition:=1)
         clsTextElementFunc.AddParameter("vjust", "0.5", iPosition:=2)
-        ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
-        ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
         ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -193,7 +197,7 @@ Public Class dlgClimaticBoxPlot
         ucrInputWithinYear.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputWithinYear.SetDropDownStyleAsNonEditable()
 
-        ucrSavePlot.SetPrefix("boxplot")
+        ucrSavePlot.SetPrefix("box_plot")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
@@ -302,10 +306,10 @@ Public Class dlgClimaticBoxPlot
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
 
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
 
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterElementOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
@@ -342,7 +346,6 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
         sdgPlots.tbpFacet.Enabled = True
-        ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
     End Sub
@@ -351,7 +354,7 @@ Public Class dlgClimaticBoxPlot
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
             If Not ucrSavePlot.bUserTyped Then
-                ucrSavePlot.SetPrefix("boxplot")
+                ucrSavePlot.SetPrefix("box_plot")
             End If
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
@@ -383,7 +386,13 @@ Public Class dlgClimaticBoxPlot
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimaticBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        'Making sure the filter isn't discarded
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
+        OmitFilter()
         ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        If Not IsNothing(clsRgeomPlotFunction.GetParameter("coef")) Then
+            ucrNudOutlierCoefficient.SetRCode(clsRgeomPlotFunction, bReset)
+        End If
         bResetBoxLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then

@@ -325,11 +325,11 @@ Public Class ucrColumnMetadata
                     frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                     Dim dialogResult = frmConvertToNumeric.ShowDialog()
                     ' Yes for "normal" convert and No for "labelled" convert
-                    If dialogResult = DialogResult.Yes Then
+                    If dialogResult = dialogResult.Yes Then
                         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                    ElseIf dialogResult = DialogResult.No Then
+                    ElseIf dialogResult = dialogResult.No Then
                         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                    ElseIf dialogResult = DialogResult.Cancel Then
+                    ElseIf dialogResult = dialogResult.Cancel Then
                         Continue For
                     End If
             End Select

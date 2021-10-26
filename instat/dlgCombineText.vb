@@ -57,7 +57,7 @@ Public Class dlgCombineText
 
         ' ucrSaveColumn
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetPrefix("Combine")
+        ucrSaveColumn.SetPrefix("combine")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("New Column:")

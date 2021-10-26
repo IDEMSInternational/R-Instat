@@ -85,7 +85,7 @@ Public Class dlgCorruptionDefineCRI
         ucrSaveCRI.SetDataFrameSelector(ucrSelectorCRI.ucrAvailableDataFrames)
         ucrSaveCRI.SetLabelText("New Column Name:")
         ucrSaveCRI.SetIsTextBox()
-        ucrSaveCRI.SetPrefix("CRI")
+        ucrSaveCRI.SetPrefix("cri")
         ucrSaveCRI.SetSaveTypeAsColumn()
     End Sub
 

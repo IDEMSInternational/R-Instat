@@ -238,13 +238,13 @@
     <value>12, 289</value>
   </data>
   <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
+    <value>44, 13</value>
   </data>
   <data name="lblMergeBy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblMergeBy.Text" xml:space="preserve">
-    <value>Join by:</value>
+    <value>Join By:</value>
   </data>
   <data name="&gt;&gt;lblMergeBy.Name" xml:space="preserve">
     <value>lblMergeBy</value>

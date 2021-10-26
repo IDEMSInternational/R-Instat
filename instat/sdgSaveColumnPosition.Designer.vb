@@ -110,9 +110,9 @@ Partial Class sdgSaveColumnPosition
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblColumns.Location = New System.Drawing.Point(224, 106)
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(48, 13)
+        Me.lblColumns.Size = New System.Drawing.Size(45, 13)
         Me.lblColumns.TabIndex = 14
-        Me.lblColumns.Text = "Column :"
+        Me.lblColumns.Text = "Column:"
         '
         'ucrReceiverColumn
         '

@@ -131,6 +131,7 @@ Public Class ucrGeom
         Dim clsgeom_density As New Geoms
         Dim clsgeom_density2d As New Geoms
         Dim clsgeom_density_2d As New Geoms
+        Dim clsgeom_dumbbell As New Geoms
         Dim clsgeom_dotplot As New Geoms
         Dim clsgeom_encircle As New Geoms
         Dim clsgeom_errorbar As New Geoms
@@ -142,8 +143,10 @@ Public Class ucrGeom
         Dim clsgeom_hline As New Geoms
         Dim clsgeom_jitter As New Geoms
         Dim clsgeom_label As New Geoms
+        Dim clsgeom_label_repel As New Geoms
         Dim clsgeom_line As New Geoms
         Dim clsgeom_linerange As New Geoms
+        Dim clsgeom_lollipop As New Geoms
         Dim clsgeom_map As New Geoms
         Dim clsgeom_mosaic As New Geoms
         Dim clsgeom_path As New Geoms
@@ -157,12 +160,17 @@ Public Class ucrGeom
         Dim clsgeom_rect As New Geoms
         Dim clsgeom_ribbon As New Geoms
         Dim clsgeom_rug As New Geoms
+        Dim clsgeom_scale_fill_viridis_c As New Geoms
         Dim clsgeom_segment As New Geoms
         Dim clsgeom_sf As New Geoms
         Dim clsgeom_smooth As New Geoms
         Dim clsgeom_spoke As New Geoms
+        Dim clsgeom_stat_density_ridges As New Geoms
+        Dim clsgeom_statECDF As New Geoms
         Dim clsgeom_step As New Geoms
         Dim clsgeom_text As New Geoms
+        Dim clsgeom_text_wordcloud As New Geoms
+        Dim clsgeom_text_wordcloud_area As New Geoms
         Dim clsgeom_text_repel As New Geoms
         Dim clsgeom_tile As New Geoms
         Dim clsgeom_treemap As New Geoms
@@ -170,30 +178,24 @@ Public Class ucrGeom
         Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
-        Dim clsgeom_label_repel As New Geoms
-        Dim clsgeom_lollipop As New Geoms
-        Dim clsgeom_dumbbell As New Geoms
-        Dim clsgeom_stat_density_ridges As New Geoms
-        Dim clsgeom_statECDF As New Geoms
-        Dim clsscale_fill_viridis_c As New Geoms
 
-        clsscale_fill_viridis_c.SetGeomPackage("ggplot2")
-        clsscale_fill_viridis_c.strGeomName = "scale_fill_viridis_c"
+        clsgeom_scale_fill_viridis_c.SetGeomPackage("ggplot2")
+        clsgeom_scale_fill_viridis_c.strGeomName = "scale_fill_viridis_c"
         'Other Aesthetics
-        clsscale_fill_viridis_c.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsscale_fill_viridis_c.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_scale_fill_viridis_c.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_scale_fill_viridis_c.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         'adding layer parameters
-        clsscale_fill_viridis_c.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
-        clsscale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
-        clsscale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
-        clsscale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
-        clsscale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
-        clsscale_fill_viridis_c.AddLayerParameter("values", "numeric", "0", lstParameterStrings:={1, 0})
-        clsscale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
-        clsscale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})
-        clsscale_fill_viridis_c.AddLayerParameter("guide", "list", Chr(34) & "colourbar" & Chr(34), lstParameterStrings:={Chr(34) & "colourbar" & Chr(34)})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("values", "numeric", "0", lstParameterStrings:={1, 0})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("guide", "list", Chr(34) & "colourbar" & Chr(34), lstParameterStrings:={Chr(34) & "colourbar" & Chr(34)})
 
-        lstAllGeoms.Add(clsscale_fill_viridis_c)
+        lstAllGeoms.Add(clsgeom_scale_fill_viridis_c)
 
 
         clsgeom_stat_density_ridges.SetGeomPackage("ggridges")
@@ -1403,7 +1405,7 @@ Public Class ucrGeom
         clsgeom_mosaic.AddLayerParameter("stat", "editablelist", Chr(34) & "mosaic" & Chr(34), lstParameterStrings:={Chr(34) & "mosaic" & Chr(34)}) ' Made this editable because am not sure what other stats go here
         clsgeom_mosaic.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)}) ' Made this editable because am not sure what other positions go here
         clsgeom_mosaic.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_abline.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 10}) 'not certain if the size goues up to this much
+        clsgeom_mosaic.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 1})
         clsgeom_mosaic.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_mosaic.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_mosaic)
@@ -1772,7 +1774,7 @@ Public Class ucrGeom
         ''****Not sure how many positions exist for geom_smooth
         clsgeom_smooth.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         'Can we have  stack, DoDragDrop, fill positions here)
-        clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
+        clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), "MASS::rlm"})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
         clsgeom_smooth.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
         clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
@@ -1874,6 +1876,81 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_text)
+
+        clsgeom_text_wordcloud.SetGeomPackage("ggwordcloud")
+        clsgeom_text_wordcloud.SetGeomName("geom_text_wordcloud")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_text_wordcloud.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+
+        'Optional aesthetics
+        clsgeom_text_wordcloud.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_text_wordcloud.AddAesParameter("color", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_text_wordcloud.AddAesParameter("angle", "0", strIncludedDataTypes:={"numeric"})
+
+        'Adding layer parameters
+        'geom_text_wordcloud Parameters
+        clsgeom_text_wordcloud.AddLayerParameter("stat", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_text_wordcloud.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_text_wordcloud.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_text_wordcloud.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_wordcloud.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_wordcloud.AddLayerParameter("eccentricity", "numeric", "0.65", lstParameterStrings:={2, 0, 1})
+        clsgeom_text_wordcloud.AddLayerParameter("grid_size", "numeric", "4", lstParameterStrings:={0, 0, 128})
+        clsgeom_text_wordcloud.AddLayerParameter("max_grid_size", "numeric", "128", lstParameterStrings:={0, 0, 256})
+        clsgeom_text_wordcloud.AddLayerParameter("grid_margin", "numeric", "1", lstParameterStrings:={0, 0, 10})
+        clsgeom_text_wordcloud.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_wordcloud.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_wordcloud.AddLayerParameter("rm_outside", "boolean", "FALSE")
+        clsgeom_text_wordcloud.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:={Chr(34) & "circle" & Chr(34), Chr(34) & "cardioid" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "triangle - forward" & Chr(34), Chr(34) & "triangle - upright" & Chr(34), Chr(34) & "pentagon" & Chr(34), Chr(34) & "star" & Chr(34)})
+        clsgeom_text_wordcloud.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_text_wordcloud.AddLayerParameter("Show.legend", "boolean", "FALSE")
+        clsgeom_text_wordcloud.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_text_wordcloud.AddLayerParameter("show_boxes", "boolean", "FALSE")
+        clsgeom_text_wordcloud.AddLayerParameter("area_corr", "boolean", "FALSE")
+        'clsgeom_text_wordcloud.AddLayerParameter("rstep", "numeric", "0.01", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud.AddLayerParameter("tstep", "numeric", "0.02", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud.AddLayerParameter("perc_step", "numeric", "0.01", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud.AddLayerParameter("max_steps", "numeric", "10", lstParameterStrings:={0, 0, 100})
+        'clsgeom_text_wordcloud.AddLayerParameter("area_corr", "boolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_text_wordcloud)
+
+        clsgeom_text_wordcloud_area.SetGeomPackage("ggwordcloud")
+        clsgeom_text_wordcloud_area.SetGeomName("geom_text_wordcloud_area")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_text_wordcloud_area.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+
+        'Optional aesthetics
+        clsgeom_text_wordcloud_area.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_text_wordcloud_area.AddAesParameter("color", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_text_wordcloud_area.AddAesParameter("angle", "0", strIncludedDataTypes:={"numeric"})
+
+        'Adding layer parameters
+        'geom_text_wordcloud_area Parameters
+        clsgeom_text_wordcloud_area.AddLayerParameter("stat", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_text_wordcloud_area.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_text_wordcloud_area.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_text_wordcloud_area.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_wordcloud_area.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_wordcloud_area.AddLayerParameter("eccentricity", "numeric", "0.65", lstParameterStrings:={2, 0, 1})
+        clsgeom_text_wordcloud_area.AddLayerParameter("grid_size", "numeric", "4", lstParameterStrings:={0, 0, 128})
+        clsgeom_text_wordcloud_area.AddLayerParameter("max_grid_size", "numeric", "128", lstParameterStrings:={0, 0, 256})
+        clsgeom_text_wordcloud_area.AddLayerParameter("grid_margin", "numeric", "1", lstParameterStrings:={0, 0, 10})
+        clsgeom_text_wordcloud_area.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_wordcloud_area.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_wordcloud_area.AddLayerParameter("rm_outside", "boolean", "FALSE")
+        clsgeom_text_wordcloud_area.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:={Chr(34) & "circle" & Chr(34), Chr(34) & "cardioid" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "triangle - forward" & Chr(34), Chr(34) & "triangle - upright" & Chr(34), Chr(34) & "pentagon" & Chr(34), Chr(34) & "star" & Chr(34)})
+        clsgeom_text_wordcloud_area.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_text_wordcloud_area.AddLayerParameter("Show.legend", "boolean", "FALSE")
+        clsgeom_text_wordcloud_area.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_text_wordcloud_area.AddLayerParameter("show_boxes", "boolean", "FALSE")
+        'clsgeom_text_wordcloud_area.AddLayerParameter("rstep", "numeric", "0.01", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud_area.AddLayerParameter("tstep", "numeric", "0.02", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud_area.AddLayerParameter("perc_step", "numeric", "0.01", lstParameterStrings:={2, 0, 1})
+        'clsgeom_text_wordcloud_area.AddLayerParameter("max_steps", "numeric", "10", lstParameterStrings:={0, 0, 100})
+        'clsgeom_text_wordcloud_area.AddLayerParameter("area_corr", "boolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_text_wordcloud_area)
 
         clsgeom_text_repel.SetGeomPackage("ggrepel")
         clsgeom_text_repel.SetGeomName("geom_text_repel")
@@ -1978,7 +2055,7 @@ Public Class ucrGeom
 
         clsgeom_treemap_text.SetGeomName("geom_treemap_text")
         clsgeom_treemap_text.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
-        clsgeom_treemap_text.AddAesParameter("label", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_treemap_text.AddAesParameter("label", bIsMandatory:=True)
         clsgeom_treemap_text.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_treemap_text.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_treemap_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})

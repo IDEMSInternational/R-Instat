@@ -269,6 +269,12 @@
     <Compile Include="dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCluster.Designer.vb">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCluster.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
@@ -303,6 +309,12 @@
     <Compile Include="dlgDisplayTopN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportToClimsoft.Designer.vb">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToClimsoft.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
     </Compile>
@@ -333,6 +345,12 @@
     <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
@@ -361,6 +379,12 @@
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPivotTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgScript.Designer.vb">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScript.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
@@ -410,6 +434,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariablePivotTable.Designer.vb">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariablePivotTable.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
@@ -1091,10 +1121,10 @@
     <Compile Include="dlgRenameDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRugPlot.Designer.vb">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <Compile Include="dlgHeatMapPlot.Designer.vb">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRugPlot.vb">
+    <Compile Include="dlgHeatMapPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgShowModel.Designer.vb">
@@ -2262,10 +2292,10 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRank.Designer.vb">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <Compile Include="dlgTransform.Designer.vb">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRank.vb">
+    <Compile Include="dlgTransform.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2802,6 +2832,9 @@
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCluster.resx">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2814,6 +2847,9 @@
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToClimsoft.resx">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
@@ -2830,6 +2866,9 @@
     <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </EmbeddedResource>
@@ -2844,6 +2883,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPivotTable.resx">
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScript.resx">
+      <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -2865,6 +2907,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
@@ -3354,8 +3399,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.sw-KE.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFindNonnumericValues.resx">
       <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
@@ -3741,8 +3786,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
@@ -4400,11 +4445,11 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.sw-KE.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>

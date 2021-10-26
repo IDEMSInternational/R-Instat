@@ -58,14 +58,13 @@ Partial Class dlgNewDataFrame
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
-        Me.btnTry = New System.Windows.Forms.Button()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrInputCommand = New instat.ucrInputTextBox()
         Me.ucrPnlDataFrame = New instat.UcrPanel()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrTryNewDataFrame = New instat.ucrTry()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -190,20 +189,6 @@ Partial Class dlgNewDataFrame
         Me.btnExample.Name = "btnExample"
         Me.btnExample.UseVisualStyleBackColor = True
         '
-        'btnTry
-        '
-        resources.ApplyResources(Me.btnTry, "btnTry")
-        Me.btnTry.Name = "btnTry"
-        Me.btnTry.UseVisualStyleBackColor = True
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        '
         'ucrInputCommand
         '
         Me.ucrInputCommand.AddQuotesIfUnrecognised = True
@@ -247,12 +232,16 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrTryNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrTryNewDataFrame, "ucrTryNewDataFrame")
+        Me.ucrTryNewDataFrame.Name = "ucrTryNewDataFrame"
+        '
         'dlgNewDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.btnTry)
+        Me.Controls.Add(Me.ucrTryNewDataFrame)
         Me.Controls.Add(Me.ucrInputCommand)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.lblCommand)
@@ -303,6 +292,5 @@ Partial Class dlgNewDataFrame
     Friend WithEvents colRowNum As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents btnTry As Button
+    Friend WithEvents ucrTryNewDataFrame As ucrTry
 End Class

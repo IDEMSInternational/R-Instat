@@ -8,6 +8,7 @@ Added_metadata="Added metadata"
 Added_object="Added object"
 Added_variables_metadata="Added variables metadata"
 Added_filter="Added filter"
+Added_column_selection="Added column selection"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
@@ -66,3 +67,6 @@ surv_label="surv"
 keyed_link_label="keyed_link"
 
 max_labels_display=4
+
+# Column Selection Operations
+column_selection_operations <- c("base::match", "tidyselect::starts_with", "tidyselect::ends_with", "tidyselect::contains", "tidyselect::matches", "tidyselect::num_range", "tidyselect::last_col")

@@ -36,7 +36,13 @@ Public Class sdgOneWayFrequencies
 
         'Table Only
         ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowStrings.SetText("Show Strings")
+        ucrChkShowStrings.SetText("Omit Character Variables")
+
+        ucrPnlShowMissingFreq.SetParameter(New RParameter("show.na", 8))
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingTrue, "TRUE")
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingFalse, "FALSE")
+        ucrPnlShowMissingFreq.AddRadioButton(rdoShowMissingAuto, Chr(34) & "auto" & Chr(34))
+        ucrPnlShowMissingFreq.SetRDefault("TRUE")
 
         'Graph Only
         ucrPnlGraphType.SetParameter(New RParameter("type", 4))
@@ -77,6 +83,7 @@ Public Class sdgOneWayFrequencies
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
         ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
+        ucrInputHorizontalLabels.SetDropDownStyleAsNonEditable()
 
         'Graph Only
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
@@ -90,6 +97,7 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
+        ucrInputVerticalLabels.SetDropDownStyleAsNonEditable()
 
         ucrInputColor.SetParameter(New RParameter("geom.colors", 13))
         dctColors.Add("Blue", Chr(34) & "blue" & Chr(34))
@@ -132,6 +140,9 @@ Public Class sdgOneWayFrequencies
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrInputColor.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+
+        ucrPnlShowMissingFreq.AddAdditionalCodeParameterPair(clsOneWayTableFreq, clsNewRParameter:=New RParameter("show.na", 9), iAdditionalPairNo:=1)
+        ucrPnlShowMissingFreq.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         If bReset Then
             tbpOneWayFrequencies.SelectedIndex = 0
         End If

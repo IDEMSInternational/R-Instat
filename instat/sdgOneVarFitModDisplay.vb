@@ -25,7 +25,7 @@ Public Class sdgOneVarFitModDisplay
     Private clsRSyntax As RSyntax
     Public bControlsInitialised As Boolean = False
 
-    Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgOneVarFitModDisplay_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
