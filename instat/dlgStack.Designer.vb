@@ -51,6 +51,9 @@ Partial Class dlgStack
         Me.ttPattern = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.lblVariable = New System.Windows.Forms.Label()
+        Me.ucrInputDropPrefix = New instat.ucrInputTextBox()
+        Me.ucrChkDropPrefix = New instat.ucrCheck()
+        Me.ucrChkCarryAllColumns = New instat.ucrCheck()
         Me.ucrInputOutput = New instat.ucrInputTextBox()
         Me.ucrChkUrl = New instat.ucrCheck()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
@@ -65,11 +68,10 @@ Partial Class dlgStack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputToken = New instat.ucrInputComboBox()
         Me.ucrInputFormat = New instat.ucrInputComboBox()
-        Me.ucrChkToLowerCase = New instat.ucrCheck()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrChkPunctuation = New instat.ucrCheck()
-        Me.ucrChkCarryAllColumns = New instat.ucrCheck()
         Me.ucrChkDropMissingValues = New instat.ucrCheck()
+        Me.ucrChkToLowerCase = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -133,6 +135,26 @@ Partial Class dlgStack
         resources.ApplyResources(Me.lblVariable, "lblVariable")
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Tag = "Columns_to_Stack:"
+        '
+        'ucrInputDropPrefix
+        '
+        Me.ucrInputDropPrefix.AddQuotesIfUnrecognised = True
+        Me.ucrInputDropPrefix.IsMultiline = False
+        Me.ucrInputDropPrefix.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDropPrefix, "ucrInputDropPrefix")
+        Me.ucrInputDropPrefix.Name = "ucrInputDropPrefix"
+        '
+        'ucrChkDropPrefix
+        '
+        Me.ucrChkDropPrefix.Checked = False
+        resources.ApplyResources(Me.ucrChkDropPrefix, "ucrChkDropPrefix")
+        Me.ucrChkDropPrefix.Name = "ucrChkDropPrefix"
+        '
+        'ucrChkCarryAllColumns
+        '
+        Me.ucrChkCarryAllColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCarryAllColumns, "ucrChkCarryAllColumns")
+        Me.ucrChkCarryAllColumns.Name = "ucrChkCarryAllColumns"
         '
         'ucrInputOutput
         '
@@ -236,12 +258,6 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
         Me.ucrInputFormat.Name = "ucrInputFormat"
         '
-        'ucrChkToLowerCase
-        '
-        Me.ucrChkToLowerCase.Checked = False
-        resources.ApplyResources(Me.ucrChkToLowerCase, "ucrChkToLowerCase")
-        Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
-        '
         'ucrInputPattern
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
@@ -256,27 +272,27 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrChkPunctuation, "ucrChkPunctuation")
         Me.ucrChkPunctuation.Name = "ucrChkPunctuation"
         '
-        'ucrChkCarryAllColumns
-        '
-        Me.ucrChkCarryAllColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkCarryAllColumns, "ucrChkCarryAllColumns")
-        Me.ucrChkCarryAllColumns.Name = "ucrChkCarryAllColumns"
-        '
         'ucrChkDropMissingValues
         '
         Me.ucrChkDropMissingValues.Checked = False
         resources.ApplyResources(Me.ucrChkDropMissingValues, "ucrChkDropMissingValues")
         Me.ucrChkDropMissingValues.Name = "ucrChkDropMissingValues"
         '
+        'ucrChkToLowerCase
+        '
+        Me.ucrChkToLowerCase.Checked = False
+        resources.ApplyResources(Me.ucrChkToLowerCase, "ucrChkToLowerCase")
+        Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
+        '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputDropPrefix)
         Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrInputOutput)
-        Me.Controls.Add(Me.ucrChkUrl)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
         Me.Controls.Add(Me.ucrReceiverTextColumn)
         Me.Controls.Add(Me.rdoUnnest)
@@ -301,6 +317,8 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrChkDropMissingValues)
         Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.lblNamesTo)
+        Me.Controls.Add(Me.ucrChkUrl)
+        Me.Controls.Add(Me.ucrChkDropPrefix)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -340,4 +358,6 @@ Partial Class dlgStack
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrChkCarryAllColumns As ucrCheck
     Friend WithEvents ucrChkDropMissingValues As ucrCheck
+    Friend WithEvents ucrChkDropPrefix As ucrCheck
+    Friend WithEvents ucrInputDropPrefix As ucrInputTextBox
 End Class
