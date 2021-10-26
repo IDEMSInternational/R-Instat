@@ -37,7 +37,6 @@ Public Class dlgLabelsLevels
             SetDefaultColumn()
         End If
         autoTranslate(Me)
-        ShowNumberOfMissingValue()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -93,10 +92,6 @@ Public Class dlgLabelsLevels
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ''ucrReceiverLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ''ucrSelectorForLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        'ucrFactorLabels.SetRCode(clsViewLabelsFunction, bReset)
-        'ucrSelectorForLabels.SetRCode(clsViewLabelsFunction, bReset)
         TestOKEnabled()
     End Sub
 
@@ -124,7 +119,7 @@ Public Class dlgLabelsLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub ShowNumberOfMissingValue()
+    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
         Dim iMissingValue As Integer
         Dim clsGetColumnFunction As RFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
@@ -144,10 +139,6 @@ Public Class dlgLabelsLevels
         Else
             lblNaValue.Visible = False
         End If
-    End Sub
-
-    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
-        ShowNumberOfMissingValue()
     End Sub
 
     Private Sub AddLevelButtonEnabled()
