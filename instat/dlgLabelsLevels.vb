@@ -14,10 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewLabels As New RFunction
+    Private clsViewLabelsFunction, clsIsNAFunction, clsSumFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
@@ -36,6 +37,7 @@ Public Class dlgLabelsLevels
             SetDefaultColumn()
         End If
         autoTranslate(Me)
+        ShowNumberOfMissingValue()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -47,7 +49,6 @@ Public Class dlgLabelsLevels
         ucrFactorLabels.AddEditableColumns({ucrFactorLabels.strLevelsName, ucrFactorLabels.strLabelsName})
         ucrFactorLabels.SetIsGridColumn(ucrFactorLabels.strLabelsName)
         ucrFactorLabels.SetLevelsCheckbox(ucrChkIncludeLevelNumbers)
-        ucrFactorLabels.bIncludeNA = True
 
         ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
         ucrReceiverLabels.SetParameterIsString()
@@ -63,11 +64,18 @@ Public Class dlgLabelsLevels
     End Sub
 
     Private Sub SetDefaults()
-        clsViewLabels = New RFunction
+        clsViewLabelsFunction = New RFunction
+        clsIsNAFunction = New RFunction
+        clsSumFunction = New RFunction
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
-        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
+
+        clsSumFunction.SetRCommand("sum")
+
+        clsIsNAFunction.SetRCommand("is.na")
+
+        clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
         AddLevelButtonEnabled()
     End Sub
 
@@ -85,6 +93,11 @@ Public Class dlgLabelsLevels
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ''ucrReceiverLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ''ucrSelectorForLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        'ucrFactorLabels.SetRCode(clsViewLabelsFunction, bReset)
+        'ucrReceiverLabels.SetRCode(clsViewLabelsFunction, bReset)
+        'ucrSelectorForLabels.SetRCode(clsViewLabelsFunction, bReset)
         TestOKEnabled()
     End Sub
 
@@ -112,6 +125,22 @@ Public Class dlgLabelsLevels
         TestOKEnabled()
     End Sub
 
+    Private Sub ShowNumberOfMissingValue()
+        Dim iMissingValue As Integer
+        If Not ucrReceiverLabels.IsEmpty Then
+            clsIsNAFunction.AddParameter("x", ucrReceiverLabels.GetVariables.ToScript, iPosition:=0)
+            clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0)
+        End If
+        iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumFunction.ToScript(), bSilent:=False).AsNumeric(0)
+        If iMissingValue > 0 Then
+            lblNaValue.Text = "Missing Values: " & iMissingValue.ToString
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
+        ShowNumberOfMissingValue()
+    End Sub
+
     Private Sub AddLevelButtonEnabled()
         cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible AndAlso Not ucrReceiverLabels.IsEmpty
     End Sub
@@ -119,21 +148,12 @@ Public Class dlgLabelsLevels
     'TODO modify factor control to be able to manage two parameters from different columns
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
         If (ucrChkIncludeLevelNumbers.Checked OrElse Not ucrChkIncludeLevelNumbers.Visible) AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName) Then
-            clsViewLabels.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet(ucrFactorLabels.strLevelsName, bWithQuotes:=False))
+            clsViewLabelsFunction.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet(ucrFactorLabels.strLevelsName, bWithQuotes:=False))
         Else
-            clsViewLabels.RemoveParameterByName("new_levels")
+            clsViewLabelsFunction.RemoveParameterByName("new_levels")
         End If
-        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1
+        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
         lblLevelNumber.ForeColor = Color.Red
-        lblNaValue.ForeColor = Color.Red
 
-        If ucrFactorLabels.grdFactorData.CurrentWorksheet.GetCellData(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1) > 0 Then
-            lblNaValue.Visible = True
-            lblNaValue.Text = "Missing Values: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.GetCellData(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1)
-        Else
-            lblNaValue.Visible = False
-        End If
-
-        ucrFactorLabels.grdFactorData.CurrentWorksheet.HideRows(ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount - 1, ucrFactorLabels.grdFactorData.CurrentWorksheet.ColumnCount - 1)
     End Sub
 End Class
