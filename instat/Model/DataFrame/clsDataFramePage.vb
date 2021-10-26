@@ -235,7 +235,10 @@ Public Class clsDataFramePage
             columnHeader.bIsFactor = True
         ElseIf strHeaderType.Contains("character") Then
             columnHeader.strTypeShortCode = "(C)"
-        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("POSIXct") OrElse strHeaderType.Contains("POSIXt") OrElse strHeaderType.Contains("hms") OrElse strHeaderType.Contains("difftime") OrElse strHeaderType.Contains("Duration") OrElse strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
+        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("POSIXct") OrElse
+                strHeaderType.Contains("POSIXt") OrElse strHeaderType.Contains("hms") OrElse
+                strHeaderType.Contains("difftime") OrElse strHeaderType.Contains("Duration") OrElse
+                strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
             columnHeader.strTypeShortCode = "(D)"
         ElseIf strHeaderType.Contains("logical") Then
             columnHeader.strTypeShortCode = "(L)"

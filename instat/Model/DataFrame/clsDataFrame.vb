@@ -27,17 +27,19 @@ Public Class clsDataFrame
     Private _clsFilter As clsDataFrameFilter
     Private _strName As String
     Private _RLink As RLink
-    Private _intTotalRowCount As Integer
-    Private _intTotalColumnCount As Integer
+    Private _iTotalRowCount As Integer
+    Private _iTotalColumnCount As Integer
+
     ''' <summary>
     ''' Filter information
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property Filter() As clsDataFrameFilter
+    Public ReadOnly Property clsFilter() As clsDataFrameFilter
         Get
             Return _clsFilter
         End Get
     End Property
+
     ''' <summary>
     ''' Simple R functions that can be called from the gird
     ''' </summary>
@@ -47,6 +49,7 @@ Public Class clsDataFrame
             Return _clsPrepareFunctions
         End Get
     End Property
+
     ''' <summary>
     ''' Column meta data for the dataframe
     ''' </summary>
@@ -56,68 +59,75 @@ Public Class clsDataFrame
             Return _clsColumnMetaData
         End Get
     End Property
+
     ''' <summary>
     ''' Name of the dataframe
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property Name() As String
+    Public ReadOnly Property strName() As String
         Get
             Return _strName
         End Get
     End Property
+
     ''' <summary>
     ''' Returns the data in a specific cell as an object
     ''' </summary>
-    ''' <param name="row"></param>
-    ''' <param name="column"></param>
+    ''' <param name="iRow"></param>
+    ''' <param name="iColumn"></param>
     ''' <returns></returns>
-    Public ReadOnly Property Data(row As Integer, column As Integer) As Object
+    Public ReadOnly Property Data(iRow As Integer, iColumn As Integer) As Object
         Get
-            Return _clsVisiblePage.Data(row, column)
+            Return _clsVisiblePage.Data(iRow, iColumn)
         End Get
     End Property
+
     ''' <summary>
     ''' Returns the row name for a specific row
     ''' </summary>
-    ''' <param name="row"></param>
+    ''' <param name="iRow"></param>
     ''' <returns></returns>
-    Public ReadOnly Property RowName(row As Integer) As String
+    Public ReadOnly Property strRowName(iRow As Integer) As String
         Get
-            Return _clsVisiblePage.RowName(row)
+            Return _clsVisiblePage.RowName(iRow)
         End Get
     End Property
+
     ''' <summary>
     ''' Returns how many rows are contained in the visible page 
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property DisplayedRowCount As Integer
+    Public ReadOnly Property iDisplayedRowCount As Integer
         Get
             Return _clsVisiblePage.DisplayedRowCount
         End Get
     End Property
+
     ''' <summary>
     ''' Returns the total rows for the dataframe
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property TotalRowCount() As Integer
+    Public ReadOnly Property iTotalRowCount() As Integer
         Get
-            Return _intTotalRowCount
+            Return _iTotalRowCount
         End Get
     End Property
+
     ''' <summary>
     ''' Returns the total column count for the dataframe
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property TotalColumnCount() As Integer
+    Public ReadOnly Property iTotalColumnCount() As Integer
         Get
-            Return _intTotalColumnCount
+            Return _iTotalColumnCount
         End Get
     End Property
+
     ''' <summary>
     ''' Returns a subset of the dataframe
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property VisiblePage() As clsDataFramePage
+    Public ReadOnly Property clsVisiblePage() As clsDataFramePage
         Get
             Return _clsVisiblePage
         End Get
@@ -127,14 +137,14 @@ Public Class clsDataFrame
     ''' Creates a new dataframe from the given name
     ''' </summary>
     ''' <param name="rLink"></param>
-    ''' <param name="name"></param>
-    Public Sub New(rLink As RLink, name As String)
+    ''' <param name="strName"></param>
+    Public Sub New(rLink As RLink, strName As String)
         _RLink = rLink
-        _strName = name
-        _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, name)
-        _clsVisiblePage = New clsDataFramePage(rLink, name)
-        _clsFilter = New clsDataFrameFilter(rLink, name)
-        _clsColumnMetaData = New clsColumnMetaData(rLink, name)
+        _strName = strName
+        _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, strName)
+        _clsVisiblePage = New clsDataFramePage(rLink, strName)
+        _clsFilter = New clsDataFrameFilter(rLink, strName)
+        _clsColumnMetaData = New clsColumnMetaData(rLink, strName)
     End Sub
 
     Private Function HasDataChanged() As Boolean
@@ -150,15 +160,16 @@ Public Class clsDataFrame
             Return False
         End If
     End Function
+
     ''' <summary>
     ''' Updates datframe where data has changed 
     ''' </summary>
     Public Sub RefreshData()
         If HasDataChanged() Then
             If _clsVisiblePage.RefreshData() Then
-                _intTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
-                _intTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
-                _clsVisiblePage.SetTotalRowAndColumnCounts(_intTotalColumnCount, _intTotalRowCount)
+                _iTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
+                _iTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
+                _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _iTotalRowCount)
                 _clsFilter.RefreshData()
                 ResetDataFramesChanged()
             End If

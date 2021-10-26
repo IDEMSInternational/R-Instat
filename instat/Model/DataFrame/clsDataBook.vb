@@ -76,11 +76,11 @@ Public Class clsDataBook
     ''' <summary>
     ''' Runs the R command to hide a dataframe of the given name
     ''' </summary>
-    ''' <param name="dataFrameName"></param>
-    Public Sub HideDataFrame(dataFrameName As String)
+    ''' <param name="strDataFrameName"></param>
+    Public Sub HideDataFrame(strDataFrameName As String)
         Dim clsHideDataFrame As New RFunction
         clsHideDataFrame.SetRCommand(_RLink.strInstatDataObject & "$append_to_dataframe_metadata")
-        clsHideDataFrame.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34))
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         clsHideDataFrame.AddParameter("property", "is_hidden_label")
         clsHideDataFrame.AddParameter("new_val", "TRUE")
         _RLink.RunScript(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
@@ -98,7 +98,7 @@ Public Class clsDataBook
     ''' <param name="strName"></param>
     ''' <returns></returns>
     Public Function GetDataFrame(strName As String) As clsDataFrame
-        Return _dataFrames.Where(Function(x) x.Name = strName).FirstOrDefault
+        Return _dataFrames.Where(Function(x) x.strName = strName).FirstOrDefault
     End Function
     ''' <summary>
     ''' Gets the Column Metadata for the dataframe name given
@@ -106,7 +106,7 @@ Public Class clsDataBook
     ''' <param name="strName"></param>
     ''' <returns></returns>
     Public Function GetColumnMetaData(strName As String) As clsColumnMetaData
-        Return _dataFrames.Where(Function(x) x.Name = strName).FirstOrDefault().clsColumnMetaData
+        Return _dataFrames.Where(Function(x) x.strName = strName).FirstOrDefault().clsColumnMetaData
     End Function
 
     ''' <summary>
@@ -128,7 +128,7 @@ Public Class clsDataBook
 
     Private Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
         Dim dataFrame As clsDataFrame
-        dataFrame = _dataFrames.Where(Function(x) x.Name = strDataFrameName).SingleOrDefault
+        dataFrame = _dataFrames.Where(Function(x) x.strName = strDataFrameName).SingleOrDefault
         If dataFrame Is Nothing Then
             dataFrame = CreateNewGridTab(strDataFrameName)
         End If
@@ -139,7 +139,7 @@ Public Class clsDataBook
         Dim gridTab As clsDataFrame
         For i = _dataFrames.Count - 1 To 0 Step -1
             gridTab = _dataFrames(i)
-            If Not currentDataFrames.Contains(gridTab.Name) Then
+            If Not currentDataFrames.Contains(gridTab.strName) Then
                 _dataFrames.RemoveAt(i)
             End If
         Next

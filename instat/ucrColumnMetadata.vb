@@ -60,18 +60,18 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub AddColumns(dataFramePage As clsDataFrame, worksheet As Worksheet)
-        worksheet.Columns = dataFramePage.clsColumnMetaData.ColumnCount
-        For i = 0 To dataFramePage.clsColumnMetaData.ColumnCount - 1
-            worksheet.ColumnHeaders(i).Text = dataFramePage.clsColumnMetaData.ColumnName(i)
+        worksheet.Columns = dataFramePage.clsColumnMetaData.iColumnCount
+        For i = 0 To dataFramePage.clsColumnMetaData.iColumnCount - 1
+            worksheet.ColumnHeaders(i).Text = dataFramePage.clsColumnMetaData.strColumnName(i)
         Next
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim fillWorksheet As Worksheet
-            fillWorksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.Name).FirstOrDefault
+            fillWorksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
             If fillWorksheet Is Nothing Then
-                fillWorksheet = grid.CreateWorksheet(clsDataFrame.Name)
+                fillWorksheet = grid.CreateWorksheet(clsDataFrame.strName)
                 grid.AddWorksheet(fillWorksheet)
             End If
             RefreshWorksheet(fillWorksheet, clsDataFrame)
@@ -97,7 +97,7 @@ Public Class ucrColumnMetadata
     Private Sub AddRowData(dataFrame As clsDataFrame, worksheet As Worksheet)
         Dim rngDataRange As RangePosition
 
-        worksheet.Rows = dataFrame.clsColumnMetaData.RowCount
+        worksheet.Rows = dataFrame.clsColumnMetaData.iRowCount
         rngDataRange = New RangePosition(0, 0, worksheet.Rows, worksheet.Columns)
         worksheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
 
@@ -105,7 +105,7 @@ Public Class ucrColumnMetadata
             For j = 0 To worksheet.Columns - 1
                 worksheet(row:=i, col:=j) = dataFrame.clsColumnMetaData.Data(i, j)
             Next
-            worksheet.RowHeaders.Item(i).Text = dataFrame.clsColumnMetaData.RowName(i)
+            worksheet.RowHeaders.Item(i).Text = dataFrame.clsColumnMetaData.strRowName(i)
         Next
     End Sub
 
@@ -119,7 +119,7 @@ Public Class ucrColumnMetadata
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
         For i = grid.Worksheets.Count - 1 To 0 Step -1
             Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
-            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
+            If _clsDataBook.DataFrames.Where(Function(x) x.strName = grid.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
             End If
         Next
@@ -317,10 +317,10 @@ Public Class ucrColumnMetadata
             Select Case iNonNumericValues
                 Case 0
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                Case GetCurrentDataFrameFocus().TotalRowCount
+                Case GetCurrentDataFrameFocus().iTotalRowCount
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
                 Case Else
-                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().Name)
+                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)
                     frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                     Dim dialogResult = frmConvertToNumeric.ShowDialog()
@@ -439,7 +439,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         If IsFirstSelectedDataFrameColumnAFactor() Then
-            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedDataFrameColumnName(), GetCurrentDataFrameFocus().Name)
+            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedDataFrameColumnName(), GetCurrentDataFrameFocus().strName)
         End If
         dlgLabelsLevels.ShowDialog()
     End Sub
@@ -456,7 +456,7 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & grdVariables.CurrentWorksheet.SelectionRange.Cols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & grdVariables.CurrentWorksheet.SelectionRange.Cols & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().Filter.bApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bApplied
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click

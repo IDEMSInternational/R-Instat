@@ -21,7 +21,8 @@ Imports RDotNet
 Public Class clsColumnMetaData
     Private _strName As String
     Private _RLink As RLink
-    Private _dataFrame As DataFrame
+    Private _clsDataFrame As DataFrame
+
     ''' <summary>
     ''' Returns data for a given cell within the Column Meta data table
     ''' </summary>
@@ -30,55 +31,60 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property Data(row As Integer, column As Integer) As Object
         Get
-            Return _dataFrame(row, column)
+            Return _clsDataFrame(row, column)
         End Get
     End Property
+
     ''' <summary>
     ''' Returns row name of a given row
     ''' </summary>
     ''' <param name="row"></param>
     ''' <returns></returns>
-    Public ReadOnly Property RowName(row As Integer) As String
+    Public ReadOnly Property strRowName(row As Integer) As String
         Get
-            Return _dataFrame.RowNames(row)
+            Return _clsDataFrame.RowNames(row)
         End Get
     End Property
+
     ''' <summary>
     ''' Returns total number of rows within the column metadata table
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property RowCount As Integer
+    Public ReadOnly Property iRowCount As Integer
         Get
-            Return _dataFrame.RowCount
+            Return _clsDataFrame.RowCount
         End Get
     End Property
+
     ''' <summary>
     ''' Returns the column name of a given column
     ''' </summary>
     ''' <param name="column"></param>
     ''' <returns></returns>
-    Public ReadOnly Property ColumnName(column As Integer) As String
+    Public ReadOnly Property strColumnName(column As Integer) As String
         Get
-            Return _dataFrame.ColumnNames(column)
+            Return _clsDataFrame.ColumnNames(column)
         End Get
     End Property
+
     ''' <summary>
     ''' Returns total number of columns within the column metadata table
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property ColumnCount As Integer
+    Public ReadOnly Property iColumnCount As Integer
         Get
-            Return _dataFrame.ColumnCount
+            Return _clsDataFrame.ColumnCount
         End Get
     End Property
+
     ''' <summary>
     ''' Creates new instance of a column metadata class
     ''' </summary>
     ''' <param name="rLink"></param>
-    ''' <param name="name"></param>
-    Public Sub New(rLink As RLink, name As String)
+    ''' <param name="strName"></param>
+    Public Sub New(rLink As RLink, strName As String)
         _RLink = rLink
-        _strName = name
+        _strName = strName
     End Sub
 
     Private Function HasDataChanged() As Boolean
@@ -93,16 +99,18 @@ Public Class clsColumnMetaData
             Return False
         End If
     End Function
+
     ''' <summary>
     ''' Updates column Meta Data if data has changed
     ''' </summary>
     Public Sub RefreshData()
         'Need to check to see if dataframe exists due to the column meta data not changing when sheets are un-hidden 
-        If _dataFrame Is Nothing Or HasDataChanged() Then
-            _dataFrame = GetDataFrameFromRCommand()
+        If _clsDataFrame Is Nothing Or HasDataChanged() Then
+            _clsDataFrame = GetDataFrameFromRCommand()
             ResetDataFramesChanged()
         End If
     End Sub
+
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
@@ -117,6 +125,7 @@ Public Class clsColumnMetaData
             Return Nothing
         End If
     End Function
+
     Private Sub ResetDataFramesChanged()
         Dim clsSetVariablesMetadataChanged As New RFunction
         clsSetVariablesMetadataChanged.SetRCommand(_RLink.strInstatDataObject & "$set_variables_metadata_changed")
