@@ -51,6 +51,11 @@ Public Class dlgSpells
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 200
 
+        ucrPnlOptions.AddRadioButton(rdoAnnuel)
+        ucrPnlOptions.AddRadioButton(rdoSpells)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAnnuel, frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSpells, "")
+
         ucrSelectorForSpells.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSpells.SetParameterIsString()
 
@@ -104,10 +109,10 @@ Public Class dlgSpells
         ucrInputCondition.SetItems({strLessThan, strGreaterThan, strBetween, strExcludingBetween})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
-        ucrChkConditional.SetParameter(New RParameter("initial_value"))
-        ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
-        ucrChkConditional.SetRDefault("NA_real_")
+        'ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
+        'ucrChkConditional.SetParameter(New RParameter("initial_value"))
+        'ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
+        'ucrChkConditional.SetRDefault("NA_real_")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -273,7 +278,7 @@ Public Class dlgSpells
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
-        ucrChkConditional.SetRCode(clsSpellsFunction, bReset)
+        'ucrChkConditional.SetRCode(clsSpellsFunction, bReset)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -357,15 +362,15 @@ Public Class dlgSpells
         UpdateDayFilterPreview()
     End Sub
 
-    Private Sub ucrChkConditional_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConditional.ControlValueChanged
-        If ucrChkConditional.Checked Then
-            clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
-            clsMaxSpellManipulation.RemoveParameterByName("manip1")
-        Else
-            clsMaxSpellSummary.RemoveParameterByName("sub_calculation")
-            clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        End If
-    End Sub
+    'Private Sub ucrChkConditional_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    If ucrChkConditional.Checked Then
+    '        clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
+    '        clsMaxSpellManipulation.RemoveParameterByName("manip1")
+    '    Else
+    '        clsMaxSpellSummary.RemoveParameterByName("sub_calculation")
+    '        clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
+    '    End If
+    'End Sub
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForSpells.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
