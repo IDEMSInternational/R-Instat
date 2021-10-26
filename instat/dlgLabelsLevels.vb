@@ -54,7 +54,7 @@ Public Class dlgLabelsLevels
         ucrReceiverLabels.SetParameterIsString()
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
-        ucrReceiverLabels.SetIncludedDataTypes({"factor"}, bStrict:=True)
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
         ucrReceiverLabels.strSelectorHeading = "Factors"
 
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
@@ -96,7 +96,6 @@ Public Class dlgLabelsLevels
         ''ucrReceiverLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ''ucrSelectorForLabels.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         'ucrFactorLabels.SetRCode(clsViewLabelsFunction, bReset)
-        'ucrReceiverLabels.SetRCode(clsViewLabelsFunction, bReset)
         'ucrSelectorForLabels.SetRCode(clsViewLabelsFunction, bReset)
         TestOKEnabled()
     End Sub
@@ -127,13 +126,23 @@ Public Class dlgLabelsLevels
 
     Private Sub ShowNumberOfMissingValue()
         Dim iMissingValue As Integer
+        Dim clsGetColumnFunction As RFunction = ucrReceiverLabels.GetVariables()
+        clsGetColumnFunction.RemoveAssignTo()
+
         If Not ucrReceiverLabels.IsEmpty Then
-            clsIsNAFunction.AddParameter("x", ucrReceiverLabels.GetVariables.ToScript, iPosition:=0)
+            clsIsNAFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
             clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0)
+        Else
+            clsIsNAFunction.RemoveParameterByName("x")
+            clsSumFunction.RemoveParameterByName("x")
         End If
         iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumFunction.ToScript(), bSilent:=False).AsNumeric(0)
         If iMissingValue > 0 Then
             lblNaValue.Text = "Missing Values: " & iMissingValue.ToString
+            lblNaValue.ForeColor = Color.Red
+            lblNaValue.Visible = True
+        Else
+            lblNaValue.Visible = False
         End If
     End Sub
 
