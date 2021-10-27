@@ -214,8 +214,6 @@ Public Class dlgReorderLevels
         clsForcatsReorderFunction.AddParameter(".desc", "TRUE", iPosition:=3)
 
         clsReorderFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        'clsReorderFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
     End Sub
 
@@ -239,7 +237,6 @@ Public Class dlgReorderLevels
         ucrSaveResults.AddAdditionalRCode(clsForcatsReorderFunction, iAdditionalPairNo:=7)
         ucrSaveResults.AddAdditionalRCode(clsForcatsReverseFunction, iAdditionalPairNo:=8)
         ucrSaveResults.AddAdditionalRCode(clsForcatsRevFunction, iAdditionalPairNo:=9)
-        'ucrSaveResults.AddAdditionalRCode(clsForcatsRelevelFunction, iAdditionalPairNo:=10)
         ucrSelectorFactorLevelsToReorder.SetRCode(clsReorderFunction, bReset)
         ucrReceiverFactor.SetRCode(clsReorderFunction, bReset)
         ucrReceiverFactorX.SetRCode(clsForcatsReorderFunction, bReset)
