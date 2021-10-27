@@ -463,7 +463,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverEstimated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
+    <value>120, 57</value>
   </data>
   <data name="ucrReceiverEstimated.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

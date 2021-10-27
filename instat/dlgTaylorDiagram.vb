@@ -30,7 +30,6 @@ Public Class dlgTaylorDiagram
         SetRcodeForControls(bReset)
 
         bReset = False
-        RemoveExtraVariables()
         TestOkEnabled()
         autoTranslate(Me)
     End Sub
@@ -103,31 +102,26 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub RemoveExtraVariables()
-        For i As Integer = ucrReceiverEstimated.lstSelectedVariables.Items.Count - 1 To 0 Step -1
-            If i > 1 Then
-                ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
-            End If
-        Next
-        clsTaylorDiagramFunction.AddParameter("mod", ucrReceiverEstimated.GetVariableNames(True), iPosition:=2)
-    End Sub
-
-    Private Sub ucrReceiverEstimated_Leave(sender As Object, e As EventArgs) Handles ucrReceiverEstimated.Leave
-        If ucrReceiverEstimated.lstSelectedVariables.Items.Count > 2 Then
-            MsgBox("Note, mod can be of length 2 i.e. two lots of model predictions!!!", MsgBoxStyle.Exclamation)
-            RemoveExtraVariables()
-            TestOkEnabled()
-        End If
-    End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
+        If ucrReceiverEstimated.Count > 2 Then
+            MsgBox("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
+            For i As Integer = ucrReceiverEstimated.Count - 1 To 0 Step -1
+                If i > 1 Then
+                    ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+                End If
+            Next
+            TestOkEnabled()
+        End If
     End Sub
 End Class
