@@ -1309,14 +1309,22 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+
+    Private Sub OpenHelpPage()
         Dim clsHelp As New RFunction
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Calculator", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        frmMain.clsRLink.RunScript(clsHelp.ToScript,
+                                   strComment:="Opening help page for " &
+                                   strPackageName & " " & "Package. Generated from dialog Calculator",
+                                   iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+        OpenHelpPage()
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
@@ -2877,30 +2885,18 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdHelpZoo_Click(sender As Object, e As EventArgs) Handles cmdHelpZoo.Click
-        Dim clsHelp As New RFunction
         CalculationsOptions()
-        Select Case ucrInputCalOptions.GetText
-            Case "Transform"
-                strPackageName = "zoo"
-        End Select
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Calculator", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "zoo"
+        End If
+        OpenHelpPage()
     End Sub
 
     Private Sub cmdHelpDplyr_Click(sender As Object, e As EventArgs) Handles cmdHelpDplyr.Click
-        Dim clsHelp As New RFunction
         CalculationsOptions()
-        Select Case ucrInputCalOptions.GetText
-            Case "Transform"
-                strPackageName = "dplyr"
-        End Select
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Calculator", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
     End Sub
 End Class
