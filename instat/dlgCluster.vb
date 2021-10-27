@@ -36,7 +36,6 @@ Public Class dlgCluster
 
     Private Sub InitialiseDialog()
         Dim dctMethod As New Dictionary(Of String, String)
-
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 599
 
