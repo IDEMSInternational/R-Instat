@@ -2423,7 +2423,7 @@ DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
   mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
   quarters <- seq(1,4)
   s_month <- seq(1,12)
-  if (quarter %in% quarters && s_month %in% start_month){
+  if (quarter %in% quarters && start_month %in% s_month){
     switch(quarter,
       "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
       "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
