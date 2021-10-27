@@ -142,8 +142,10 @@ Public Class dlgLabelsLevels
         Else
             clsViewLabelsFunction.RemoveParameterByName("new_levels")
         End If
-        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
-        lblLevelNumber.ForeColor = Color.Red
+        If ucrFactorLabels.grdFactorData.CurrentWorksheet IsNot Nothing Then
+            lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
+            lblLevelNumber.ForeColor = Color.Red
+        End If
     End Sub
 
     Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
