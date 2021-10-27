@@ -18,7 +18,7 @@ Imports RDotNet
 Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewLabelsFunction, clsIsNAFunction, clsSumFunction As New RFunction
+    Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
@@ -64,14 +64,11 @@ Public Class dlgLabelsLevels
 
     Private Sub SetDefaults()
         clsViewLabelsFunction = New RFunction
-        clsIsNAFunction = New RFunction
-        clsSumFunction = New RFunction
+        clsSumCountMissingFunction = New RFunction
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
 
-        clsSumFunction.SetRCommand("sum")
-
-        clsIsNAFunction.SetRCommand("is.na")
+        clsSumCountMissingFunction.SetRCommand("summary_count_missing")
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
@@ -114,24 +111,17 @@ Public Class dlgLabelsLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged
-        AddLevelButtonEnabled()
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
         Dim iMissingValue As Integer
         Dim clsGetColumnFunction As RFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
 
         If Not ucrReceiverLabels.IsEmpty Then
-            clsIsNAFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
-            clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0)
+            clsSumCountMissingFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
+            iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumCountMissingFunction.ToScript(), bSilent:=False).AsNumeric(0)
         Else
-            clsIsNAFunction.RemoveParameterByName("x")
-            clsSumFunction.RemoveParameterByName("x")
+            clsSumCountMissingFunction.RemoveParameterByName("x")
         End If
-        iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumFunction.ToScript(), bSilent:=False).AsNumeric(0)
         If iMissingValue > 0 Then
             lblNaValue.Text = "Missing Values: " & iMissingValue.ToString
             lblNaValue.ForeColor = Color.Red
@@ -154,6 +144,14 @@ Public Class dlgLabelsLevels
         End If
         lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
         lblLevelNumber.ForeColor = Color.Red
+    End Sub
 
+    Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
+        lblLevelNumber.Visible = If(Not ucrReceiverLabels.IsEmpty, True, False)
+    End Sub
+
+    Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged
+        AddLevelButtonEnabled()
+        TestOKEnabled()
     End Sub
 End Class
