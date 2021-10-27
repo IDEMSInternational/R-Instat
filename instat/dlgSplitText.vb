@@ -89,6 +89,8 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetDefaults()
+        frmMain.clsRLink.GetRFunctionDefinitionParameters("ggplot2::geom_col")
+
         clsTextComponentsFixed = New RFunction
         clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction

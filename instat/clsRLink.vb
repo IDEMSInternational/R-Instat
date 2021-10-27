@@ -17,6 +17,7 @@
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
+Imports RScript
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -2364,5 +2365,52 @@ Public Class RLink
             Next
         End If
         Return strReconstructedComment
+    End Function
+
+    Public Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
+        'temporary object that retrieves the output from the environment
+        Dim strTempAssignTo As String = ".temp_func"
+        'parameter name position
+        Dim iParameterName As Integer = 0
+        'parameter value position
+        Dim iParameterValue As Integer = 1
+        Dim expTemp As SymbolicExpression
+        Dim clsFormalsFunction As New RFunction
+        Dim clsAsListFunction As New RFunction
+        Dim lstRParameters As New List(Of clsRParameter)
+
+        clsAsListFunction.SetRCommand("as.list")
+        clsAsListFunction.AddParameter(clsRFunctionParameter:=clsFormalsFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsFormalsFunction.SetRCommand("formals")
+        clsFormalsFunction.AddParameter(strParameterValue:=strFunctionName, bIncludeArgumentName:=False, iPosition:=0)
+
+        'TODO check that the fuctin name provided has no pening and closing brackets at the end
+
+        If Evaluate(strTempAssignTo & " <- " & "capture.output(" & clsAsListFunction.ToScript() & ")", bSilent:=True) Then
+            expTemp = GetSymbol(strTempAssignTo)
+            Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+            If expTemp IsNot Nothing Then
+                While (iParameterName < expTemp.AsCharacter().Length)
+                    Dim clsNewRParameter As New clsRParameter
+                    'Assign the parameter Name
+                    clsNewRParameter.strPrefix = expTemp.AsCharacter(iParameterName)
+                    'Assign the parameter Value
+                    '?Not sure why it can  not assign "NULL"
+                    If expTemp.AsCharacter(iParameterValue).ToString = "NULL" Then
+                        clsNewRParameter.clsArgValue.strTxt = Chr(34) 
+                    Else
+                        clsNewRParameter.clsArgValue.strTxt = expTemp.AsCharacter(iParameterValue)
+                    End If
+
+
+                    iParameterName = iParameterName + 3
+                    iParameterValue = iParameterValue + 3
+                End While
+            End If
+        Else
+            'Error getting the parameters either the function name provided is incorrect/package containing the function isn't loaded 
+        End If
+        Return lstRParameters
     End Function
 End Class
