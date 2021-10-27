@@ -38,7 +38,6 @@ Public Class dlgCluster
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 599
 
         ucrReceiverPrepareData.SetParameterIsRFunction()
@@ -190,7 +189,7 @@ Public Class dlgCluster
                 ucrBase.clsRsyntax.RemoveAssignTo()
                 ucrBase.clsRsyntax.iCallType = 2
             Else
-                ucrBase.clsRsyntax.iCallType = 3
+                ucrBase.clsRsyntax.iCallType = 0
             End If
         End If
     End Sub
