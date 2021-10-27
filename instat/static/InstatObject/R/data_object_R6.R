@@ -2020,7 +2020,7 @@ DataSheet$set("public", "data_clone", function(include_objects = TRUE, include_m
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
   else new_filters <- list()
-  if(include_column_selections) new_column_selections <- lapply(private$column_selections, function(x) x$data_clone())
+  if(include_column_selections) new_column_selections <- private$column_selections
   else new_column_selections <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
