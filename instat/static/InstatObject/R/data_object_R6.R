@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -325,8 +325,67 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
         }
       }
     }
-    if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if(!missing(max_rows) && max_rows < nrow(out)) {
+    # If there is a start column, return columns from start onwards
+    if (!missing(start_col) && start_col <= ncol(out)) #out <- out[start_col:max_cols]
+    {
+        if (!missing(max_cols))
+        {
+            # If maximum columns to be displayed is greater than number of columns return all columns
+            if (max_cols + start_col > ncol(out)){
+                out <- out[start_col:ncol(out)]
+            }
+            # -1 after columns as start column is added and is not 0 based
+            else{
+                out <- out[start_col:(start_col + max_cols - 1)]
+            }
+       }
+       else{
+            out <- out[start_col:ncol(out)]
+        }
+    }
+    # If there is a maximum number of columns return up to that maximum
+    else if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
+    # If there is a start row, return rows from start onwards
+    if (!missing(start_row) && start_row <= nrow(out)) {
+        if (!missing(max_rows)){
+            # If maximum rows to be displayed is greater than number of rows return all rows
+            if (max_rows + start_row > nrow(out)){
+                if(ncol(out) == 1){
+                    #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+                    rnames <- row.names(out)[start_row:nrow(out)]
+                    out <- as.data.frame(dplyr::slice(out,start_row:nrow(out)))
+                    row.names(out) <- rnames
+                } 
+                else { 
+                    out <- out[start_row:nrow(out), ]
+                }
+            }
+            else{
+                #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+                if(ncol(out) == 1){
+                    rnames <- row.names(out)[start_row:(start_row + max_rows - 1)]
+                    out <- as.data.frame(dplyr::slice(out,start_row:(start_row + max_rows - 1)))
+                    row.names(out) <- rnames
+                } 
+                # -1 after rows as start row is added and is not 0 based
+                else { 
+                    out <- out[start_row:(start_row + max_rows - 1), ]
+                }
+            }
+        }
+        else{
+            #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
+            if(ncol(out) == 1){
+                rnames <- row.names(out)[start_row:nrow(out)]
+                out <- as.data.frame(dplyr::slice(out,start_row:nrow(out)))
+                row.names(out) <- rnames
+            } 
+            else { 
+                out <- out[start_row:nrow(out), ]
+            }
+        }
+    }
+    else if(!missing(max_rows) && max_rows < nrow(out)) {
       #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
       if(ncol(out) == 1){
         rnames <- row.names(out)[1:max_rows]
