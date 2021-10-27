@@ -2520,7 +2520,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector, adjacent_column = adjacent_column, before = FALSE)
   }
-  if(quarter_val && quarter_abbr){
+  if(quarter_abbr){
     quarter_labels <- c()
     if(s_shift) {
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
@@ -2538,12 +2538,12 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
         quarter_label_vector <- self$get_quarter_label(num, s_start_month)
         quarter_labels <- c(quarter_labels, quarter_label_vector)
       }
-      col_name <- next_default_item(prefix = "quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      col_name <- next_default_item(prefix = "quarter_abbr", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
     }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
-  else if(quarter_val) {
+  if(quarter_val) {
     if(s_shift) {
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
       col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
