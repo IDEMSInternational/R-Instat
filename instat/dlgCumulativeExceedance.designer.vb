@@ -144,10 +144,10 @@ Partial Class dlgCumulativeExceedance
         Me.chkCumulativeGraph.AutoSize = True
         Me.chkCumulativeGraph.Location = New System.Drawing.Point(6, 100)
         Me.chkCumulativeGraph.Name = "chkCumulativeGraph"
-        Me.chkCumulativeGraph.Size = New System.Drawing.Size(108, 17)
+        Me.chkCumulativeGraph.Size = New System.Drawing.Size(110, 17)
         Me.chkCumulativeGraph.TabIndex = 0
         Me.chkCumulativeGraph.Tag = "Cumulative_graph"
-        Me.chkCumulativeGraph.Text = "Cumulative graph"
+        Me.chkCumulativeGraph.Text = "Cumulative Graph"
         Me.chkCumulativeGraph.UseVisualStyleBackColor = True
         '
         'txtTitle
