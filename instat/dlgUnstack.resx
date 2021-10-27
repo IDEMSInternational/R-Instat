@@ -328,13 +328,13 @@
     <value>272, 252</value>
   </data>
   <data name="lblColumnsToCarry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>89, 13</value>
   </data>
   <data name="lblColumnsToCarry.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
   <data name="lblColumnsToCarry.Text" xml:space="preserve">
-    <value>Columns to Carry</value>
+    <value>Columns to Carry:</value>
   </data>
   <data name="&gt;&gt;lblColumnsToCarry.Name" xml:space="preserve">
     <value>lblColumnsToCarry</value>
@@ -347,6 +347,51 @@
   </data>
   <data name="&gt;&gt;lblColumnsToCarry.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 233</value>
+  </data>
+  <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Name" xml:space="preserve">
+    <value>ucrChkCarryColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 320</value>
+  </data>
+  <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputTextPrefix.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Name" xml:space="preserve">
+    <value>ucrInputTextPrefix</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrNudValuesFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 263</value>
@@ -399,51 +444,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>436, 463</value>
   </data>
-  <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 233</value>
-  </data>
-  <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCarryColumns.Name" xml:space="preserve">
-    <value>ucrChkCarryColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCarryColumns.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCarryColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 320</value>
-  </data>
-  <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 21</value>
-  </data>
-  <data name="ucrInputTextPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Name" xml:space="preserve">
-    <value>ucrInputTextPrefix</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 374</value>
   </data>
@@ -451,7 +451,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 24</value>
+    <value>382, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
