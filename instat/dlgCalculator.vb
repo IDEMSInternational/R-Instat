@@ -135,7 +135,6 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
-
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
