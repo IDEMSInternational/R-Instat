@@ -20,6 +20,7 @@ Public Class dlgCluster
     Private bReset As Boolean = True
     Private clsScaleFunction, clsStatsNAOmitFunction, clsDummyFunction,
         clsStatsScaleFunction, clsMatrixDistFunction, clsDistFunction, clsMatrixFunction As New RFunction
+
     Private Sub dlgCluster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
