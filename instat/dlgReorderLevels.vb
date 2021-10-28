@@ -264,7 +264,7 @@ Public Class dlgReorderLevels
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoVariable.Checked Then
-            If (Not ucrReceiverFactorX.IsEmpty OrElse Not ucrReceiverVariable.IsEmpty) AndAlso ucrSaveResults.IsComplete Then
+            If Not ucrReceiverFactorX.IsEmpty AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrSaveResults.IsComplete Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
