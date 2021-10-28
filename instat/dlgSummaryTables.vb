@@ -334,9 +334,8 @@ Public Class dlgSummaryTables
             ucrReorderSummary.lstAvailableData.Columns.Add("Summaries")
             ucrReorderSummary.lstAvailableData.Columns(0).Width = -2
             For i = 0 To clsSummariesList.clsParameters.Count - 1
-                clsSummariesList.clsParameters(i).Position = iPosition
+                clsSummariesList.clsParameters(i).Position = i
                 ucrReorderSummary.lstAvailableData.Items.Add(clsSummariesList.clsParameters(i).strArgumentName)
-                iPosition = iPosition + 1
             Next
         Else
             ucrReorderSummary.lstAvailableData.Items.Clear()
