@@ -235,6 +235,7 @@ Public Class dlgCluster
         ChangeDataParameter()
         AddRemoveDataHideOptionsButtons()
     End Sub
+
     Private Sub ucrChkMatrix_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMatrix.ControlValueChanged
         SetBaseFunction()
     End Sub
