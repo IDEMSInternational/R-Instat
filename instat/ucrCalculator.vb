@@ -1319,7 +1319,7 @@ Public Class ucrCalculator
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript,
                                    strComment:="Opening help page for " &
-                                   strPackageName & " " & "Package. Generated from dialog Calculator",
+                                   strPackageName & " Package. Generated from dialog Calculator",
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
