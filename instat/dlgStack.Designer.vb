@@ -72,6 +72,9 @@ Partial Class dlgStack
         Me.ucrChkPunctuation = New instat.ucrCheck()
         Me.ucrChkDropMissingValues = New instat.ucrCheck()
         Me.ucrChkToLowerCase = New instat.ucrCheck()
+        Me.ucrChkStackMultipleSets = New instat.ucrCheck()
+        Me.ucrNudNoSets = New instat.ucrNud()
+        Me.lblSets = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -284,10 +287,33 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrChkToLowerCase, "ucrChkToLowerCase")
         Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
         '
+        'ucrChkStackMultipleSets
+        '
+        Me.ucrChkStackMultipleSets.Checked = False
+        resources.ApplyResources(Me.ucrChkStackMultipleSets, "ucrChkStackMultipleSets")
+        Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
+        '
+        'ucrNudNoSets
+        '
+        Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNoSets, "ucrNudNoSets")
+        Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Name = "ucrNudNoSets"
+        Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSets
+        '
+        resources.ApplyResources(Me.lblSets, "lblSets")
+        Me.lblSets.Name = "lblSets"
+        '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSets)
+        Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
         Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
@@ -312,13 +338,14 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblPattern)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrChkPunctuation)
-        Me.Controls.Add(Me.lblOutput)
         Me.Controls.Add(Me.lblValuesTo)
         Me.Controls.Add(Me.ucrChkDropMissingValues)
         Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.ucrChkUrl)
         Me.Controls.Add(Me.ucrChkDropPrefix)
+        Me.Controls.Add(Me.lblOutput)
+        Me.Controls.Add(Me.ucrChkStackMultipleSets)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -360,4 +387,7 @@ Partial Class dlgStack
     Friend WithEvents ucrChkDropMissingValues As ucrCheck
     Friend WithEvents ucrChkDropPrefix As ucrCheck
     Friend WithEvents ucrInputDropPrefix As ucrInputTextBox
+    Friend WithEvents lblSets As Label
+    Friend WithEvents ucrNudNoSets As ucrNud
+    Friend WithEvents ucrChkStackMultipleSets As ucrCheck
 End Class
