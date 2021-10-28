@@ -238,6 +238,7 @@ Public Class dlgCluster
     Private Sub ucrChkMatrix_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMatrix.ControlValueChanged
         SetBaseFunction()
     End Sub
+
     Private Sub ucrChkOmitMissingRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissingRows.ControlValueChanged
         SetBaseFunction()
     End Sub
