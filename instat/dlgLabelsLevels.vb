@@ -60,6 +60,9 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.SetParameterIsString()
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
+
+        lblNaValue.ForeColor = Color.Red
+        lblLevelNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -122,13 +125,10 @@ Public Class dlgLabelsLevels
         Else
             clsSumCountMissingFunction.RemoveParameterByName("x")
         End If
-        If iMissingValue > 0 Then
-            lblNaValue.Text = "Missing Values: " & iMissingValue.ToString
-            lblNaValue.ForeColor = Color.Red
-            lblNaValue.Visible = True
-        Else
-            lblNaValue.Visible = False
-        End If
+
+        lblNaValue.Text = "Missing Values: " & iMissingValue
+        lblNaValue.Visible = iMissingValue > 0
+        lblLevelNumber.Visible = If(Not ucrReceiverLabels.IsEmpty, True, False)
     End Sub
 
     Private Sub AddLevelButtonEnabled()
@@ -144,12 +144,7 @@ Public Class dlgLabelsLevels
         End If
         If ucrFactorLabels.grdFactorData.CurrentWorksheet IsNot Nothing Then
             lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
-            lblLevelNumber.ForeColor = Color.Red
         End If
-    End Sub
-
-    Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
-        lblLevelNumber.Visible = If(Not ucrReceiverLabels.IsEmpty, True, False)
     End Sub
 
     Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged
