@@ -77,6 +77,8 @@ Public Class dlgUnstack
 
         ucrChkCarryColumns.SetText("Columns to Carry")
         ucrChkCarryColumns.AddToLinkedControls(ucrReceiverCarryColumns, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCarryColumns.AddParameterIsROperatorCondition(True, "data")
+        ucrChkCarryColumns.AddParameterIsRFunctionCondition(False, "data")
 
         'ucrCarryColumns
         ucrReceiverCarryColumns.SetParameterIsString()
@@ -111,9 +113,8 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddRadioButton(rdoMultiple)
         ucrPnlUnstackCol.AddRadioButton(rdoRestoreHierarchy)
 
-        ucrPnlUnstackCol.AddFunctionNamesCondition({rdoSingle}, "pivot_wider")
+        ucrPnlUnstackCol.AddFunctionNamesCondition(rdoSingle, "pivot_wider")
         'ucrPnlUnstackCol.AddParameterIsROperatorCondition(rdoRestoreHierarchy, "%>%")
-
         ucrPnlUnstackCol.AddRCodeIsRFunctionCondition(rdoRestoreHierarchy, bNewIsPositive:=False)
         'TODO add function name condition for rdoMultiple
 
@@ -232,10 +233,10 @@ Public Class dlgUnstack
 
     Private Sub AddRemoveDataOrPipeOperator()
         If Not ucrChkCarryColumns.Checked Then
-            clsDcastFunction.RemoveParameterByName("%>%")
+            'clsDcastFunction.RemoveParameterByName("%>%")
             clsDcastFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         Else
-            clsDcastFunction.RemoveParameterByName("data")
+            'clsDcastFunction.RemoveParameterByName("data")
             clsDcastFunction.AddParameter("data", clsROperatorParameter:=clspipeOperator, iPosition:=0, bIncludeArgumentName:=True)
         End If
     End Sub
