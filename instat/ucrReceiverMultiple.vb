@@ -116,6 +116,10 @@ Public Class ucrReceiverMultiple
 
     End Function
 
+    Public Function Count() As Integer
+        Return lstSelectedVariables.Items.Count
+    End Function
+
     Public Overrides Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         'TODO sort this out
         Dim clsGetVariablesFunc As New RFunction
