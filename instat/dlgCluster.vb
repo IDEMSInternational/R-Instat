@@ -153,7 +153,10 @@ Public Class dlgCluster
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) OrElse Not ucrSaveNewDataFrame.IsComplete() Then
+        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" _
+            OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) _
+            OrElse Not ucrSaveNewDataFrame.IsComplete() Then
+            ucrBase.OKEnabled(False)
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
