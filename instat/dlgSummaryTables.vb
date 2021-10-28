@@ -355,7 +355,7 @@ Public Class dlgSummaryTables
         For Each clsParameter In lstOrderedSummaries
             clsParameter.Position = iPosition
             clsSummariesList.AddParameter(clsParameter)
-            iPosition = iPosition + 1
+            iPosition += 1
         Next
     End Sub
 End Class
