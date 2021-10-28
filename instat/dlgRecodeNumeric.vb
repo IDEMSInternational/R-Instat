@@ -62,9 +62,9 @@ Public Class dlgRecodeNumeric
         ucrNudMinimum.SetMinMax(1, Integer.MaxValue)
         ucrNudMinimum.SetRDefault(1)
 
-        ttMinimum.SetToolTip(ucrNudMinimum.nudUpDown, "Splits the data into groups of at least the specified size.")
+        ttMinimum.SetToolTip(rdoMinimum, "Splits the data into groups of at least the specified size.")
 
-        ttQuantiles.SetToolTip(ucrNudQuantiles.nudUpDown, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
+        ttQuantiles.SetToolTip(rdoQuantiles, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
 
         ucrChkAddLabels.SetText("Label Groups with Means")
 
@@ -79,7 +79,7 @@ Public Class dlgRecodeNumeric
         ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3,))
 
 
-        ttBreakpoint.SetToolTip(ucrMultipleNumericRecode.txtInput, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
+        ttBreakpoint.SetToolTip(rdoBreakPoints, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -116,7 +116,6 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
-        ucrMultipleNumericRecode.SetRCode(clsCut2Function, bReset)
 
     End Sub
 
