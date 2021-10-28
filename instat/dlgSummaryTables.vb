@@ -328,7 +328,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub FillListView()
-        Dim iPosition As Integer = 0
         If clsSummariesList.clsParameters.Count > 0 Then
             ucrReorderSummary.lstAvailableData.Clear()
             ucrReorderSummary.lstAvailableData.Columns.Add("Summaries")
