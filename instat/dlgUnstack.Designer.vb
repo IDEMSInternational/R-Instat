@@ -44,7 +44,6 @@ Partial Class dlgUnstack
         Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
         Me.lblMultipleColumns = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
-        Me.lblColumnsToCarry = New System.Windows.Forms.Label()
         Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrInputTextPrefix = New instat.ucrInputTextBox()
         Me.ucrNudValuesFill = New instat.ucrNud()
@@ -108,11 +107,6 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.lblColumnToUnstack, "lblColumnToUnstack")
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
         Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
-        '
-        'lblColumnsToCarry
-        '
-        resources.ApplyResources(Me.lblColumnsToCarry, "lblColumnsToCarry")
-        Me.lblColumnsToCarry.Name = "lblColumnsToCarry"
         '
         'ucrChkCarryColumns
         '
@@ -215,7 +209,6 @@ Partial Class dlgUnstack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrInputTextPrefix)
-        Me.Controls.Add(Me.lblColumnsToCarry)
         Me.Controls.Add(Me.ucrNudValuesFill)
         Me.Controls.Add(Me.ucrChkAddPrefix)
         Me.Controls.Add(Me.ucrReceiverColumnToUnstack)
@@ -259,7 +252,6 @@ Partial Class dlgUnstack
     Friend WithEvents ucrReceiverColumnToUnstack As ucrReceiverSingle
     Friend WithEvents ucrChkAddPrefix As ucrCheck
     Friend WithEvents ucrNudValuesFill As ucrNud
-    Friend WithEvents lblColumnsToCarry As Label
     Friend WithEvents ucrChkValuesFill As ucrCheck
     Friend WithEvents ucrChkCarryColumns As ucrCheck
 End Class
