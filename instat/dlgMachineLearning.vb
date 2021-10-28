@@ -44,7 +44,7 @@ Public Class dlgMachineLearning
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.iCallType = 2
-        ucrSelectorMachineLearning.SetParameter(New RParameter("data", 0))
+        ucrSelectorMachineLearning.SetParameter(New RParameter("x", 0))
         ucrSelectorMachineLearning.SetParameterIsrfunction()
 
         ucrPnlExplanatoryVariable.AddRadioButton(rdoExplanatoryVariable)
@@ -60,9 +60,10 @@ Public Class dlgMachineLearning
         ucrReceiverMultipleExplanatoryVariable.bForceAsDataFrame = True
         ucrReceiverMultipleExplanatoryVariable.SetIncludedDataTypes({"numeric"})
 
-        ucrReceiverResponseVariable.SetParameter(New RParameter("y", 2))
+        ucrReceiverResponseVariable.SetParameter(New RParameter("y", 0))
         ucrReceiverResponseVariable.Selector = ucrSelectorMachineLearning
         ucrReceiverResponseVariable.SetParameterIsString()
+        ucrReceiverResponseVariable.bWithQuotes = False
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
         dctMethod.Add("lm", Chr(34) & "lm" & Chr(34))
@@ -77,6 +78,8 @@ Public Class dlgMachineLearning
         ucrNudTrainSize.SetMinMax(0, 1.0)
         ucrNudTrainSize.SetDefaultState(1)
         ucrNudTrainSize.DecimalPlaces = 2
+        ucrNudTrainSize.Increment = 0.01
+        ucrNudTrainSize.SetRDefault(0.7)
 
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverMultipleExplanatoryVariable, {rdoExplanatoryVariable}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverExpressionFitModel, {rdoExplanatoryModel}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -102,13 +105,14 @@ Public Class dlgMachineLearning
         clsPredictFunction = New RFunction
         clsConfusionmatrixFunction = New RFunction
 
+        ucrSelectorMachineLearning.Reset()
         ucrReceiverResponseVariable.SetMeAsReceiver()
         rdoExplanatoryVariable.Checked = True
 
         'train test set ratio
-        clsFirstNrowFunction.SetRCommand("new")
+        clsFirstNrowFunction.SetRCommand("nrow")
 
-        clsSecondNrowFunction.SetRCommand("new")
+        clsSecondNrowFunction.SetRCommand("nrow")
 
         clsMultiplicationOperator.SetOperation("*")
         clsMultiplicationOperator.AddParameter("new", clsRFunctionParameter:=clsSecondNrowFunction, iPosition:=0)
@@ -137,62 +141,59 @@ Public Class dlgMachineLearning
 
         clsSecondOpeningOperator.SetOperation("[-")
         clsSecondOpeningOperator.AddParameter("comma", clsROperatorParameter:=clsSecondCommaOperator, iPosition:=1)
-        clsSecondOpeningOperator.SetAssignTo("train")
+        clsSecondOpeningOperator.SetAssignTo("test")
 
         'traindata
         clsTrainDataFunction.SetPackageName("dplyr")
         clsTrainDataFunction.SetRCommand("select")
         clsTrainDataFunction.AddParameter("train", clsROperatorParameter:=clsFirstOpeningOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsTrainDataFunction.SetAssignTo("Traindata")
+        clsTrainDataFunction.SetAssignTo("train_data")
 
         'trainclases
-        clsTrainClassesoperator.SetOperation("$")
-        clstrainClassesoperator.AddParameter("train", clsRFunctionParameter:=clsTrainDataFunction, iPosition:=0)
-        clstrainClassesoperator.SetAssignTo("TrainClasses")
+        clsTrainClassesoperator.SetOperation("$", bBracketsTemp:=False)
+        clsTrainClassesoperator.AddParameter("train", clsROperatorParameter:=clsFirstOpeningOperator, iPosition:=0)
+        clsTrainClassesoperator.SetAssignTo("train_classes")
 
-        clstestDataFunction.SetRCommand("select")
-        clstestDataFunction.AddParameter("test", clsROperatorParameter:=clsSecondOpeningOperator, iPosition:=0)
-        clstestDataFunction.SetAssignTo("Testdata")
+        clsTestDataFunction.SetRCommand("select")
+        clsTestDataFunction.AddParameter("test", clsROperatorParameter:=clsSecondOpeningOperator, iPosition:=0)
+        clsTestDataFunction.SetAssignTo("test_data")
 
-        clsTestClassesOperator.SetOperation("$")
-        clsTestClassesOperator.AddParameter("test", clsRFunctionParameter:=clstestDataFunction, iPosition:=0)
-        clsTestClassesOperator.SetAssignTo("Testclasses")
+        clsTestClassesOperator.SetOperation("$", bBracketsTemp:=False)
+        clsTestClassesOperator.AddParameter("test", clsROperatorParameter:=clsSecondOpeningOperator, iPosition:=0)
+        clsTestClassesOperator.SetAssignTo("test_classes")
 
         clsTrainFunction.SetPackageName("caret")
         clsTrainFunction.SetRCommand("train")
-        clsTrainFunction.AddParameter("TrainData", clsRFunctionParameter:=clsTrainDataFunction, iPosition:=0)
-        clsTrainFunction.AddParameter("TrainClasses", clsROperatorParameter:=clsTrainClassesoperator, iPosition:=1)
-        clsTrainFunction.AddParameter("method", "knn", iPosition:=3)
-        clsTrainFunction.SetAssignTo("Model")
+        clsTrainFunction.AddParameter("train_data", clsRFunctionParameter:=clsTrainDataFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsTrainFunction.AddParameter("train_classes", clsROperatorParameter:=clsTrainClassesoperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsTrainFunction.AddParameter("method", Chr(34) & "knn" & Chr(34), iPosition:=3)
+        clsTrainFunction.SetAssignTo("learned_model")
 
         clsPredictFunction.SetPackageName("stats")
         clsPredictFunction.SetRCommand("predict")
         clsPredictFunction.AddParameter("object", clsRFunctionParameter:=clsTrainFunction, iPosition:=0)
         clsPredictFunction.AddParameter("test", clsROperatorParameter:=clsSecondOpeningOperator, iPosition:=1)
-        clsPredictFunction.AddParameter("type", "raw", iPosition:=2)
-        clsPredictFunction.SetAssignTo("Predicrion")
-
+        clsPredictFunction.AddParameter("type", Chr(34) & "raw" & Chr(34), iPosition:=2)
+        clsPredictFunction.SetAssignTo("prediction")
 
         clsConfusionmatrixFunction.SetPackageName("caret")
         clsConfusionmatrixFunction.SetRCommand("train")
         clsConfusionmatrixFunction.AddParameter("data", clsRFunctionParameter:=clsPredictFunction, iPosition:=0)
-        clsConfusionmatrixFunction.AddParameter("rference", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1)
+        clsConfusionmatrixFunction.AddParameter("reference", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverResponseVariable.AddAdditionalCodeParameterPair(clsTrainClassesoperator, New RParameter("label", iNewPosition:=1), iAdditionalPairNo:=1)
-        ucrReceiverResponseVariable.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1), iAdditionalPairNo:=2)
+        ucrReceiverResponseVariable.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1), iAdditionalPairNo:=1)
 
         ucrSelectorMachineLearning.SetRCode(clsFirstNrowFunction, bReset)
-        ucrReceiverResponseVariable.SetRCode(clsTrainFunction, bReset)
+        'ucrReceiverResponseVariable.SetRCode(clsTrainFunction, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsTrainFunction, bReset)
         ucrReceiverMultipleExplanatoryVariable.SetRCode(clsTrainDataFunction, bReset)
-        ucrReceiverResponseVariable.SetRCode(clsTrainFunction, bReset)
-        ucrReceiverResponseVariable.SetRCode(clsTrainFunction, bReset)
+        ucrReceiverResponseVariable.SetRCode(clsTrainClassesoperator, bReset)
         ucrInputMethod.SetRCode(clsTrainFunction, bReset)
         ucrNudTrainSize.SetRCode(clsMultiplicationOperator, bReset)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTrainFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsConfusionmatrixFunction)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -200,9 +201,9 @@ Public Class dlgMachineLearning
     End Sub
 
     Private Sub ucrSelectorMachineLearning_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorMachineLearning.ControlValueChanged
-        clsFirstNrowFunction.AddParameter("data", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-        clsSecondNrowFunction.AddParameter("data", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-        clsFirstOpeningOperator.AddParameter("data", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-        clsSecondOpeningOperator.AddParameter("data", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+        'clsFirstNrowFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorMachineLearning.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSecondNrowFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorMachineLearning.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsFirstOpeningOperator.AddParameter("x", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+        clsSecondOpeningOperator.AddParameter("x", ucrSelectorMachineLearning.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
     End Sub
 End Class
