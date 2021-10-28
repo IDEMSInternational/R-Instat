@@ -2367,7 +2367,7 @@ Public Class RLink
         Return strReconstructedComment
     End Function
 
-    Public Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
+    Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
         'temporary object that retrieves the output from the environment
         Dim strTempAssignTo As String = ".temp_func"
         'parameter name position
@@ -2391,19 +2391,17 @@ Public Class RLink
             expTemp = GetSymbol(strTempAssignTo)
             Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
             If expTemp IsNot Nothing Then
+                Dim iNewArgPosition As Integer = 0
                 While (iParameterName < expTemp.AsCharacter().Length)
                     Dim clsNewRParameter As New clsRParameter
+
                     'Assign the parameter Name
-                    clsNewRParameter.strPrefix = expTemp.AsCharacter(iParameterName)
+                    clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName)
                     'Assign the parameter Value
                     '?Not sure why it can  not assign "NULL"
-                    If expTemp.AsCharacter(iParameterValue).ToString = "NULL" Then
-                        clsNewRParameter.clsArgValue.strTxt = Chr(34) 
-                    Else
-                        clsNewRParameter.clsArgValue.strTxt = expTemp.AsCharacter(iParameterValue)
-                    End If
+                    clsNewRParameter.iArgPosDefinition = iNewArgPosition
 
-
+                    iNewArgPosition = iNewArgPosition + 1
                     iParameterName = iParameterName + 3
                     iParameterValue = iParameterValue + 3
                 End While

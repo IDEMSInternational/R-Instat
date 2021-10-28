@@ -84,13 +84,6 @@ RScript
  <returns>   as debug string. </returns>
 --------------------------------------------------------------------------------------------
 </member>
-<member name="M:RScript.clsRParameterNamed.GetAsDebugString">
---------------------------------------------------------------------------------------------
- <summary>   TODO. </summary>
-
- <returns>   as debug string. </returns>
---------------------------------------------------------------------------------------------
-</member>
 <member name="T:RScript.clsRScript">
  <summary>   TODO Add class summary. </summary>
 </member>
