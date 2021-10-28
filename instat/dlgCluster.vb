@@ -180,14 +180,11 @@ Public Class dlgCluster
         ElseIf rdoDistanceData.Checked Then
             If ucrChkMatrix.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMatrixFunction)
+                ucrBase.clsRsyntax.iCallType = 0
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
-            End If
-            If Not ucrChkMatrix.Checked Then
                 ucrBase.clsRsyntax.RemoveAssignTo()
                 ucrBase.clsRsyntax.iCallType = 2
-            Else
-                ucrBase.clsRsyntax.iCallType = 0
             End If
         End If
     End Sub
