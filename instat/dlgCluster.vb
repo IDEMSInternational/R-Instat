@@ -164,15 +164,10 @@ Public Class dlgCluster
     End Sub
 
     Private Sub AddRemoveDataHideOptionsButtons()
-        If rdoWholeDataFrame.Checked Then
-            ucrSelectorPrepareData.lstAvailableVariable.Visible = False
-            ucrSelectorPrepareData.btnAdd.Visible = False
-            ucrSelectorPrepareData.btnDataOptions.Visible = False
-        ElseIf rdoSelectedColumn.Checked Then
-            ucrSelectorPrepareData.lstAvailableVariable.Visible = True
-            ucrSelectorPrepareData.btnAdd.Visible = True
-            ucrSelectorPrepareData.btnDataOptions.Visible = True
-        End If
+        Dim bVisible As Boolean = rdoSelectedColumn.Checked
+        ucrSelectorPrepareData.lstAvailableVariable.Visible = bVisible
+        ucrSelectorPrepareData.btnAdd.Visible = bVisible
+        ucrSelectorPrepareData.btnDataOptions.Visible = bVisible
     End Sub
 
     Private Sub SetBaseFunction()
