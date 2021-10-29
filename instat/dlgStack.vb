@@ -71,6 +71,7 @@ Public Class dlgStack
         ucrChkStackMultipleSets.SetText("Stack Multiple Column Sets")
         ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryAllColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputValuesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropMissingValues, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropPrefix, {False}, bNewLinkedHideIfParameterMissing:=True)
@@ -81,7 +82,6 @@ Public Class dlgStack
         ucrNudNoSets.SetParameter(New RParameter("num", 1))
         ucrNudNoSets.Minimum = 2
         ucrNudNoSets.SetLinkedDisplayControl(lblSets)
-
 
         ucrChkCarryColumns.SetText("Columns to Carry")
         ucrChkCarryColumns.AddToLinkedControls(ucrReceiverColumnsToCarry, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -231,7 +231,6 @@ Public Class dlgStack
 
         ucrNudNoSets.SetRCode(clsSplitColumnsInGroups, bReset)
 
-
         ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
         ucrSelectorStack.SetRCode(clsUnnestTokensFunction, bReset)
         ucrSaveNewDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -251,7 +250,8 @@ Public Class dlgStack
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
 
-        SetSingleOrMultipleOptions()
+
+        'SetSingleOrMultipleOptions()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -357,8 +357,15 @@ Public Class dlgStack
             If Not ucrInputNamesTo.IsEmpty Then
                 clsReshapeFunction.AddParameter("timevar", Chr(34) & ucrInputNamesTo.GetText() & Chr(34))
             End If
+            ucrChkDropPrefix.Visible = False
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
+            ucrChkDropPrefix.Visible = True
+        End If
+        If ucrChkDropPrefix.Checked Then
+            ucrInputDropPrefix.Visible = True
+        Else
+            ucrInputDropPrefix.Visible = False
         End If
         TestOKEnabled()
     End Sub
