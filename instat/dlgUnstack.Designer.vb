@@ -207,10 +207,9 @@ Partial Class dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrInputTextPrefix)
+        Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrNudValuesFill)
-        Me.Controls.Add(Me.ucrChkAddPrefix)
         Me.Controls.Add(Me.ucrReceiverColumnToUnstack)
         Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.rdoRestoreHierarchy)
@@ -226,6 +225,7 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.lblMultipleColumns)
         Me.Controls.Add(Me.ucrMultipleColumnsReceiver)
         Me.Controls.Add(Me.ucrChkValuesFill)
+        Me.Controls.Add(Me.ucrChkAddPrefix)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
