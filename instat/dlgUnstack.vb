@@ -166,7 +166,6 @@ Public Class dlgUnstack
         clsHierachyFunction.SetRCommand("dcast")
         clsHierachyFunction.AddParameter("formula", clsROperatorParameter:=clsFormula, iPosition:=1)
 
-
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
         clsSelectFunction.AddParameter("comma", clsROperatorParameter:=clsCommaOperator, bIncludeArgumentName:=False)
