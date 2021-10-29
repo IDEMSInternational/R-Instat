@@ -44,7 +44,11 @@ Partial Class dlgSpells
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.lblAnd = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
+        Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.rdoAnnuel = New System.Windows.Forms.RadioButton()
@@ -55,10 +59,6 @@ Partial Class dlgSpells
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrInputCondition = New instat.ucrInputComboBox()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -126,6 +126,16 @@ Partial Class dlgSpells
         Me.grpRainParameters.TabStop = False
         Me.grpRainParameters.Text = "Options"
         '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(124, 25)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.TabIndex = 16
+        '
         'cmdDoyRange
         '
         Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -136,6 +146,36 @@ Partial Class dlgSpells
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'ucrInputSpellLower
+        '
+        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.IsMultiline = False
+        Me.ucrInputSpellLower.IsReadOnly = False
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(168, 55)
+        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
+        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellLower.TabIndex = 18
+        '
+        'ucrInputCondition
+        '
+        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.GetSetSelectedIndex = -1
+        Me.ucrInputCondition.IsReadOnly = False
+        Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
+        Me.ucrInputCondition.Name = "ucrInputCondition"
+        Me.ucrInputCondition.Size = New System.Drawing.Size(141, 21)
+        Me.ucrInputCondition.TabIndex = 17
+        '
+        'ucrInputSpellUpper
+        '
+        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.IsMultiline = False
+        Me.ucrInputSpellUpper.IsReadOnly = False
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(272, 55)
+        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellUpper.TabIndex = 20
         '
         'lblStation
         '
@@ -164,13 +204,12 @@ Partial Class dlgSpells
         Me.rdoAnnuel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnuel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnuel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnuel.Location = New System.Drawing.Point(98, 8)
+        Me.rdoAnnuel.Location = New System.Drawing.Point(91, 8)
         Me.rdoAnnuel.Name = "rdoAnnuel"
-        Me.rdoAnnuel.Size = New System.Drawing.Size(110, 28)
+        Me.rdoAnnuel.Size = New System.Drawing.Size(130, 28)
         Me.rdoAnnuel.TabIndex = 1
-        Me.rdoAnnuel.TabStop = True
-        Me.rdoAnnuel.Tag = "Annuel"
-        Me.rdoAnnuel.Text = "Annuel"
+        Me.rdoAnnuel.Tag = "Annual_Longest_Spell"
+        Me.rdoAnnuel.Text = "Annual Longest Spell"
         Me.rdoAnnuel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAnnuel.UseVisualStyleBackColor = False
         '
@@ -178,27 +217,25 @@ Partial Class dlgSpells
         '
         Me.rdoSpells.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoSpells.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSpells.Enabled = False
         Me.rdoSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpells.FlatAppearance.BorderSize = 2
         Me.rdoSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSpells.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSpells.Location = New System.Drawing.Point(208, 8)
+        Me.rdoSpells.Location = New System.Drawing.Point(220, 8)
         Me.rdoSpells.Name = "rdoSpells"
         Me.rdoSpells.Size = New System.Drawing.Size(110, 28)
         Me.rdoSpells.TabIndex = 2
-        Me.rdoSpells.TabStop = True
-        Me.rdoSpells.Tag = "Spells"
-        Me.rdoSpells.Text = "Spells"
+        Me.rdoSpells.Tag = "All_Spells"
+        Me.rdoSpells.Text = "All Spells"
         Me.rdoSpells.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSpells.UseVisualStyleBackColor = False
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(93, 3)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(90, 3)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(227, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(243, 36)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrInputNewColumnName
@@ -258,46 +295,6 @@ Partial Class dlgSpells
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 7
         Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(124, 25)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 16
-        '
-        'ucrInputSpellLower
-        '
-        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellLower.IsMultiline = False
-        Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(168, 55)
-        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellLower.TabIndex = 18
-        '
-        'ucrInputCondition
-        '
-        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
-        Me.ucrInputCondition.GetSetSelectedIndex = -1
-        Me.ucrInputCondition.IsReadOnly = False
-        Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
-        Me.ucrInputCondition.Name = "ucrInputCondition"
-        Me.ucrInputCondition.Size = New System.Drawing.Size(141, 21)
-        Me.ucrInputCondition.TabIndex = 17
-        '
-        'ucrInputSpellUpper
-        '
-        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellUpper.IsMultiline = False
-        Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(272, 55)
-        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
-        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellUpper.TabIndex = 20
         '
         'ucrReceiverElement
         '

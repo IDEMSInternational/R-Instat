@@ -22,12 +22,14 @@ Public Class dlgSpells
     Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
     Private clsDayFilter, clsGroupBy, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
-    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsRRaindayMatch As New RFunction
-    Private clsSpellsFunction As New RFunction
+    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc As New RFunction
+    Private clsSpellsFunction, clsSpellsManipulationsFunc, clsSpellFunction, clsRSpellSubFunct, clsRSpellFilterSubFunct, clsSpellFilterFunction As New RFunction
+    Private clsCurrCalc As RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
 
     Private strCurrDataName As String = ""
+    Private strRainDay As String = "rain_day"
 
     Private strLessThan As String = "Less than or equal to"
     Private strGreaterThan As String = "Greater than or equal to"
@@ -53,8 +55,8 @@ Public Class dlgSpells
 
         ucrPnlOptions.AddRadioButton(rdoAnnuel)
         ucrPnlOptions.AddRadioButton(rdoSpells)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAnnuel, frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSpells, "")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAnnuel, "type", Chr(34) & "summary" & Chr(34))
+        ucrPnlOptions.AddParameterValuesCondition(rdoSpells, "type", Chr(34) & "filter" & Chr(34))
 
         ucrSelectorForSpells.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSpells.SetParameterIsString()
@@ -116,6 +118,7 @@ Public Class dlgSpells
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
+        ucrInputNewColumnName.SetValidationTypeAsRVariable()
         ucrInputNewColumnName.SetName("spells")
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {strLessThan, strGreaterThan, strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -125,6 +128,11 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetDefaults()
+        clsSpellsManipulationsFunc = New RFunction
+        clsSpellFunction = New RFunction
+        clsRSpellSubFunct = New RFunction
+        clsRSpellFilterSubFunct = New RFunction
+        clsSpellFilterFunction = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
@@ -134,6 +142,7 @@ Public Class dlgSpells
         clsGroupBy.Clear()
         clsSpellsFunction.Clear()
         clsSpellLogicalCalc.Clear()
+        clsSpellsLogicalCalc.Clear()
         clsSpellLength.Clear()
         clsMaxSpellSummary.Clear()
         clsDayFromAndToOperator.Clear()
@@ -217,6 +226,36 @@ Public Class dlgSpells
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
         clsSpellLength.SetAssignTo("spell_length")
 
+        clsSpellsManipulationsFunc.SetRCommand("list")
+        clsSpellsManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsSpellsLogicalCalc.SetRCommand("instat_calculation$new")
+        clsSpellsLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsSpellsLogicalCalc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
+        clsSpellsLogicalCalc.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
+        clsSpellsLogicalCalc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellsManipulationsFunc, iPosition:=3)
+        clsSpellsLogicalCalc.SetAssignTo(strRainDay)
+
+        clsRSpellSubFunct.SetRCommand("list")
+        clsRSpellSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellsLogicalCalc, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsSpellFunction.SetRCommand("instat_calculation$new")
+        clsSpellFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsSpellFunction.AddParameter("function_exp", Chr(34) & ".spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1) ' changes depending on the rdo
+        clsSpellFunction.AddParameter("result_name", Chr(34) & "spell" & Chr(34), iPosition:=2)
+        clsSpellFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRSpellSubFunct, iPosition:=4)
+        clsSpellFunction.SetAssignTo("spells_calculation")
+
+        clsRSpellFilterSubFunct.SetRCommand("list")
+        clsRSpellFilterSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsSpellFilterFunction.SetRCommand("instat_calculation$new")
+        clsSpellFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsSpellFilterFunction.AddParameter("function_exp", Chr(34) & "dplyr::lead(c(NA,diff(spell)))<0" & Chr(34), iPosition:=1) ' changes depending on the rdo
+        clsSpellFilterFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRSpellFilterSubFunct, iPosition:=2)
+        clsSpellFilterFunction.AddParameter("save", 2, iPosition:=3)
+        clsSpellFilterFunction.SetAssignTo("spells_filter")
+
         ' Additional Checkbox
         'clsAdditionalConditionReplaceFunction.bToScriptAsRString = True
         'clsAdditionalCondition.SetRCommand("instat_calculation$new")
@@ -257,6 +296,10 @@ Public Class dlgSpells
         clsSpellsFunction.SetRCommand(".spells")
         clsSpellsFunction.AddParameter("x", strSpellLogical)
 
+
+
+        clsCurrCalc = clsMaxSpellSummary
+
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
@@ -272,13 +315,14 @@ Public Class dlgSpells
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
+        ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
-        'ucrChkConditional.SetRCode(clsSpellsFunction, bReset)
+        ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -380,6 +424,16 @@ Public Class dlgSpells
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         GroupByOptions()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoAnnuel.Checked Then
+            clsCurrCalc = clsMaxSpellSummary
+            clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
+        Else
+            clsCurrCalc = clsSpellFilterFunction
+            clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsSpellFilterFunction, iPosition:=0)
+        End If
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
