@@ -157,7 +157,6 @@ Public Class dlgCluster
             OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) _
             OrElse Not ucrSaveNewDataFrame.IsComplete() Then
             ucrBase.OKEnabled(False)
-            ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
