@@ -2474,6 +2474,35 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 }
 )
 
+# Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
+#
+# Parameters:
+#   quarter - The quarter of the year (first, second etc.), must be an integer between 1 and 4 inclusive.
+#   start_month - The month when the year is considered to start (January, February etc.), must be 
+#                 an integer between 1 and 12 inclusive.
+#
+# Examples (quarter, start_month, returned value)
+#   1, 1, "JFM"
+#   1, 2, "FMA"
+#   1, 12, "DJF"
+#   2, 1, "AMJ"
+#   2, 6, "SON"
+DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
+  mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
+  quarters <- seq(1,4)
+  s_month <- seq(1,12)
+  if (quarter %in% quarters && start_month %in% s_month){
+    switch(quarter,
+      "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
+      "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
+      "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
+      "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
+    )
+    return(qtr)
+  }
+  else stop("The quarter or starting month is not valid")
+})
+
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
@@ -2558,6 +2587,29 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
     col_name <- next_default_item(prefix = "dekad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector, adjacent_column = adjacent_column, before = FALSE)
+  }
+  if(quarter_abbr){
+    quarter_labels <- c()
+    if(s_shift) {
+      s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
+      for(num in s_quarter_val_vector){
+        s_quarter_label_vector <- self$get_quarter_label(num, s_start_month)
+        quarter_labels <- c(quarter_labels, s_quarter_label_vector)
+      }
+      col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted quarter starting on day", s_start_day))
+    } 
+    else {
+      quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
+      for(num in quarter_val_vector){
+        quarter_label_vector <- self$get_quarter_label(num, s_start_month)
+        quarter_labels <- c(quarter_labels, quarter_label_vector)
+      }
+      col_name <- next_default_item(prefix = "quarter_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
+    }
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(quarter_val) {
     if(s_shift) {
