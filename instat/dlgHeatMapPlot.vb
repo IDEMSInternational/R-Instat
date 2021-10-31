@@ -19,7 +19,7 @@ Public Class dlgHeatMapPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeomTileFunction As New RFunction
     Private clsHeatmapAesFunction, clsChoroplethAesFunction, clsXlabsFunction, clsYlabFunction, clsXScalecontinuousFunction,
-        clsYScalecontinuousFunction, clsRFacetFunction, clsThemeFunction As New RFunction
+        clsYScalecontinuousFunction, clsRFacetFunction, clsThemeFunction, clsRoundFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bRCodeSet As Boolean = True
     Private clsBaseOperator As New ROperator
@@ -257,6 +257,7 @@ Public Class dlgHeatMapPlot
         clsReorderFunctionValue = New RFunction
         clsHeatmapAesFunction = New RFunction
         clsChoroplethAesFunction = New RFunction
+        clsRoundFunction = New RFunction
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -297,7 +298,10 @@ Public Class dlgHeatMapPlot
 
         clsLabelAesFuction.SetPackageName("ggplot2")
         clsLabelAesFuction.SetRCommand("aes")
-        clsLabelAesFuction.AddParameter("label", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
+        clsLabelAesFuction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("digits", 2, iPosition:=0)
 
         clsGeomPointSizeHeatMapFunction.SetPackageName("ggplot2")
         clsGeomPointSizeHeatMapFunction.SetRCommand("geom_point")
@@ -376,8 +380,8 @@ Public Class dlgHeatMapPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrReceiverFill.AddAdditionalCodeParameterPair(clsLabelAesFuction, New RParameter("label", 2), iAdditionalPairNo:=1)
-        ucrReceiverFillChoropleth.AddAdditionalCodeParameterPair(clsLabelAesFuction, New RParameter("label", 2), iAdditionalPairNo:=1)
+        ucrReceiverFill.AddAdditionalCodeParameterPair(clsRoundFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverFillChoropleth.AddAdditionalCodeParameterPair(clsRoundFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverPoints.AddAdditionalCodeParameterPair(clsShapeHeatMapAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrReceiverPointsChoropleth.AddAdditionalCodeParameterPair(clsShapeChoroplethAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
