@@ -20,10 +20,10 @@ Public Class dlgSpells
     Private bReset As Boolean = True
     Private clsSpellLength, clsMaxSpellManipulation, clsSubSpellLength1 As New RFunction
     Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
-    Private clsDayFilter, clsGroupBy, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
+    Private clsDayFilter, clsGroupBy, clsGroupByStation, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
-    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc As New RFunction
-    Private clsSpellsFunction, clsSpellsManipulationsFunc, clsSpellFunction, clsRSpellSubFunct, clsRSpellFilterSubFunct, clsSpellFilterFunction As New RFunction
+    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc, clsSpellsLogCalcFunc As New RFunction
+    Private clsSpellsFunction, clsSpellsManipulationsFunc, clsSpellManipulationsFunc, clsSpellFunction, clsRSpellSubFunct, clsRSpellFilterSubFunct, clsSpellFilterFunction As New RFunction
     Private clsCurrCalc As RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
@@ -129,6 +129,7 @@ Public Class dlgSpells
 
     Private Sub SetDefaults()
         clsSpellsManipulationsFunc = New RFunction
+        clsSpellManipulationsFunc = New RFunction
         clsSpellFunction = New RFunction
         clsRSpellSubFunct = New RFunction
         clsRSpellFilterSubFunct = New RFunction
@@ -143,6 +144,7 @@ Public Class dlgSpells
         clsSpellsFunction.Clear()
         clsSpellLogicalCalc.Clear()
         clsSpellsLogicalCalc.Clear()
+        clsSpellsLogCalcFunc.Clear()
         clsSpellLength.Clear()
         clsMaxSpellSummary.Clear()
         clsDayFromAndToOperator.Clear()
@@ -198,6 +200,10 @@ Public Class dlgSpells
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupBy.SetAssignTo("grouping")
 
+        clsGroupByStation.SetRCommand("instat_calculation$new")
+        clsGroupByStation.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByStation.SetAssignTo("group_by_station")
+
         ' rain_day
         clsSpellLogicalCalc.SetRCommand("instat_calculation$new")
         clsSpellLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -233,11 +239,20 @@ Public Class dlgSpells
         clsSpellsLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellsLogicalCalc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
         clsSpellsLogicalCalc.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
-        clsSpellsLogicalCalc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellsManipulationsFunc, iPosition:=3)
         clsSpellsLogicalCalc.SetAssignTo(strRainDay)
 
+        clsSpellManipulationsFunc.SetRCommand("list")
+        clsSpellManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsSpellsLogCalcFunc.SetRCommand("instat_calculation$new")
+        clsSpellsLogCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsSpellsLogCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
+        clsSpellsLogCalcFunc.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
+        clsSpellsLogCalcFunc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellManipulationsFunc, iPosition:=3)
+        clsSpellsLogCalcFunc.SetAssignTo(strRainDay)
+
         clsRSpellSubFunct.SetRCommand("list")
-        clsRSpellSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellsLogicalCalc, bIncludeArgumentName:=False, iPosition:=0)
+        clsRSpellSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellsLogCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         clsSpellFunction.SetRCommand("instat_calculation$new")
         clsSpellFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -387,6 +402,8 @@ Public Class dlgSpells
 
     Private Sub RainDays()
         clsSpellLogicalCalc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=0)
+        clsSpellsLogCalcFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=3)
+        clsSpellFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")", iPosition:=3)
     End Sub
 
     Private Sub GroupByOptions()
@@ -397,6 +414,18 @@ Public Class dlgSpells
         End If
     End Sub
 
+    Private Sub GroupByStation()
+        If Not ucrReceiverStation.IsEmpty() Then
+            clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+            clsSpellManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
+            clsSpellsLogCalcFunc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellManipulationsFunc, iPosition:=3)
+        Else
+            clsGroupByStation.RemoveParameterByName("calculated_from")
+            clsSpellManipulationsFunc.RemoveParameterByName("group_by_station")
+            clsSpellsLogCalcFunc.RemoveParameterByName("manipulations")
+        End If
+    End Sub
+
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForSpells.ControlValueChanged
         If Not ucrReceiverDOY.IsEmpty Then
             clsDayFilterCalcFromList.AddParameter(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
@@ -404,6 +433,7 @@ Public Class dlgSpells
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
         UpdateDayFilterPreview()
+        GroupByStation()
     End Sub
 
     'Private Sub ucrChkConditional_ControlValueChanged(ucrChangedControl As ucrCore)
@@ -420,6 +450,7 @@ Public Class dlgSpells
         strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         RainDays()
         GroupByOptions()
+        GroupByStation()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
