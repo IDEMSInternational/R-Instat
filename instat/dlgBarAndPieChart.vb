@@ -92,7 +92,7 @@ Public Class dlgBarAndPieChart
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        ChangeParameterName()
+        ChangeButtonsText()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -441,7 +441,6 @@ Public Class dlgBarAndPieChart
         clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsPieAesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-
         clsForecatsReverse.SetPackageName("forcats")
         clsForecatsReverse.SetRCommand("fct_rev")
 
@@ -456,7 +455,6 @@ Public Class dlgBarAndPieChart
 
         clsReorderFunctionValue.SetRCommand("reorder")
         clsReorderFunctionValue.SetRCommand("reorder")
-
 
         clsReorderFunction.SetRCommand("reorder")
         clsReorderFunction.SetRCommand("reorder")
@@ -516,7 +514,6 @@ Public Class dlgBarAndPieChart
         clsGeomTreemapFunction.AddParameter("layout", Chr(34) & "squarified" & Chr(34), iPosition:=0)
         clsGeomTreemapFunction.AddParameter("start", Chr(34) & "bottomleft" & Chr(34), iPosition:=1)
 
-
         clsGeomTreemapTextFunction.SetPackageName("treemapify")
         clsGeomTreemapTextFunction.SetRCommand("geom_treemap_text")
         clsGeomTreemapTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapTextAesFunction, iPosition:=0)
@@ -536,14 +533,12 @@ Public Class dlgBarAndPieChart
 
         clsGeomTextWordcloudAesFunction.SetPackageName("ggplot2")
         clsGeomTextWordcloudAesFunction.SetRCommand("aes")
-        'clsGeomTextWordcloudAesFunction.AddParameter("label", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=0)
 
         clsGeomTextWordcloudFunction.SetPackageName("ggwordcloud")
         clsGeomTextWordcloudFunction.SetRCommand("geom_text_wordcloud")
 
         clsScaleSizeAreaFunction.SetPackageName("ggplot2")
         clsScaleSizeAreaFunction.SetRCommand("scale_size_area")
-        'clsScaleSizeAreaFunction.AddParameter("max_size", "20", iPosition:=0)
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -639,7 +634,6 @@ Public Class dlgBarAndPieChart
                 ucrBase.OKEnabled(False)
             End If
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -700,19 +694,10 @@ Public Class dlgBarAndPieChart
 
     End Sub
 
-    'Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-    '    sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
-    '    sdgLayerOptions.ShowDialog()
-    '    bResetBarLayerSubdialog = False
-    '    TestOkEnabled()
-    'End Sub
-
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            'cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
-            'cmdColumnChartOptions.Visible = False
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
@@ -805,6 +790,22 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
+    Private Sub ChangeButtonsText()
+        If rdoValue.Checked Then
+            If ucrChkLollipop.Checked Then
+                cmdBarChartOptions.Text = "Lollipop Options"
+            Else
+                cmdBarChartOptions.Text = "Bar Chart Options"
+            End If
+        ElseIf rdoFrequency.Checked Then
+            cmdBarChartOptions.Text = "Bar Chart Options"
+        ElseIf rdoTreeMap.Checked Then
+            cmdBarChartOptions.Text = "Treemap Options"
+        ElseIf rdoWordCloud.Checked Then
+            cmdBarChartOptions.Text = "Wordcloud Options"
+        End If
+    End Sub
+
     Private Sub ChangeParameterName()
         clsBarAesFunction.RemoveParameterByName("x")
         clsBarAesFunction.RemoveParameterByName("y")
@@ -838,10 +839,8 @@ Public Class dlgBarAndPieChart
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
             End If
             If ucrChkLollipop.Checked Then
-                cmdBarChartOptions.Text = "Lollipop Options"
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
             Else
-                cmdBarChartOptions.Text = "Bar Chart Options"
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
         ElseIf rdoFrequency.Checked Then
@@ -867,14 +866,12 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameterByName("geom_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
-            cmdBarChartOptions.Text = "Treemap Options"
             clsBaseOperator.AddParameter("geom_treemap", clsRFunctionParameter:=clsGeomTreemapFunction, iPosition:=2)
 
         ElseIf rdoWordCloud.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_bar")
-            cmdBarChartOptions.Text = "Wordcloud Options"
             clsBaseOperator.AddParameter("geom_text_wordcloud", clsRFunctionParameter:=clsGeomTextWordcloudFunction, iPosition:=2)
             If ucrChkIncreaseSize.Checked Then
                 clsBaseOperator.AddParameter("scale_size_area", clsRFunctionParameter:=clsScaleSizeAreaFunction, iPosition:=3)
@@ -883,6 +880,7 @@ Public Class dlgBarAndPieChart
             End If
         End If
         UpdateParameter()
+        ChangeButtonsText()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged,
