@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgCluster
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetRCode As Boolean = True
     Private clsScaleFunction, clsStatsNAOmitFunction, clsDummyFunction,
         clsStatsScaleFunction, clsMatrixDistFunction, clsDistFunction, clsMatrixFunction As New RFunction
 
@@ -57,11 +58,9 @@ Public Class dlgCluster
         ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
         ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
 
-        'ucrChkOmitMissingRows.SetParameter(New RParameter("object", 1))
         ucrChkOmitMissingRows.SetText("Omit Missing Values")
         ucrChkOmitMissingRows.AddParameterValuesCondition(True, "omit", "False")
         ucrChkOmitMissingRows.AddParameterValuesCondition(False, "omit", "True")
-        'ucrChkOmitMissingRows.SetRDefault("FALSE")
 
         ucrChkCenterEachVariable.SetParameter(New RParameter("center", 1))
         ucrChkCenterEachVariable.SetText("Centre")
@@ -74,8 +73,8 @@ Public Class dlgCluster
         ucrChkScaleEachVariable.SetRDefault("TRUE")
 
         ucrChkMatrix.SetText("Matrix")
-        ucrChkMatrix.AddParameterValuesCondition(True, "matrix", "False")
-        ucrChkMatrix.AddParameterValuesCondition(False, "matrix", "True")
+        ucrChkMatrix.AddParameterValuesCondition(True, "matrix", "True")
+        ucrChkMatrix.AddParameterValuesCondition(False, "matrix", "False")
 
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrInputMethod.SetParameter(New RParameter("method", 1))
@@ -108,14 +107,9 @@ Public Class dlgCluster
         clsDummyFunction = New RFunction
         clsDistFunction = New RFunction
 
-        'ucrChkOmitMissingRows.Checked = False
-        ucrChkMatrix.Checked = True
-
         ucrSaveNewDataFrame.SetPrefix("scale")
-        rdoSelectedColumn.Checked = True
         ucrSelectorPrepareData.Reset()
         ucrSaveNewDataFrame.Reset()
-        rdoScaleData.Checked = True
 
         clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
         clsDummyFunction.AddParameter("omit", "True", iPosition:=1)
@@ -139,10 +133,10 @@ Public Class dlgCluster
         clsStatsNAOmitFunction.AddParameter("object", clsRFunctionParameter:=clsStatsScaleFunction, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
-        ChangeDataParameter()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bResetRCode = False
         ucrChkCenterEachVariable.AddAdditionalCodeParameterPair(clsStatsScaleFunction, New RParameter("center", 1), iAdditionalPairNo:=1)
         ucrChkScaleEachVariable.AddAdditionalCodeParameterPair(clsStatsScaleFunction, New RParameter("scale", 2), iAdditionalPairNo:=1)
         ucrSaveNewDataFrame.AddAdditionalRCode(clsStatsNAOmitFunction, bReset)
@@ -157,6 +151,7 @@ Public Class dlgCluster
         ucrPnlPrepareData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkOmitMissingRows.SetRCode(clsDummyFunction, bReset)
         ucrChkMatrix.SetRCode(clsDummyFunction, bReset)
+        bResetRCode = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -177,47 +172,50 @@ Public Class dlgCluster
     End Sub
 
     Private Sub SetBaseFunction()
-        If rdoScaleData.Checked Then
-            If ucrChkOmitMissingRows.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsStatsNAOmitFunction)
-                clsDummyFunction.AddParameter("omit", "False", iPosition:=1)
-
-            Else
-                clsDummyFunction.AddParameter("omit", "True", iPosition:=1)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
-            End If
-        ElseIf rdoDistanceData.Checked Then
-            If ucrChkMatrix.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMatrixFunction)
-                ucrBase.clsRsyntax.iCallType = 0
-                clsDummyFunction.AddParameter("matrix", "False", iPosition:=2)
-            Else
-                clsDummyFunction.AddParameter("matrix", "True", iPosition:=2)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                ucrBase.clsRsyntax.iCallType = 2
+        If bResetRCode Then
+            If rdoScaleData.Checked Then
+                If ucrChkOmitMissingRows.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsStatsNAOmitFunction)
+                    clsDummyFunction.AddParameter("omit", "False", iPosition:=1)
+                Else
+                    clsDummyFunction.AddParameter("omit", "True", iPosition:=1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
+                End If
+            ElseIf rdoDistanceData.Checked Then
+                If ucrChkMatrix.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsMatrixFunction)
+                    ucrBase.clsRsyntax.iCallType = 0
+                    clsDummyFunction.AddParameter("matrix", "True", iPosition:=2)
+                Else
+                    clsDummyFunction.AddParameter("matrix", "False", iPosition:=2)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
+                    ucrBase.clsRsyntax.RemoveAssignTo()
+                    ucrBase.clsRsyntax.iCallType = 2
+                End If
             End If
         End If
     End Sub
 
     Private Sub ChangeDataParameter()
-        If rdoScaleData.Checked Then
-            If rdoWholeDataFrame.Checked Then
-                clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
-                clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-            Else
-                clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
-                clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
-                clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
-            End If
-        ElseIf rdoDistanceData.Checked Then
-            If rdoWholeDataFrame.Checked Then
-                clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-            Else
-                clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
-                clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+        If bResetRCode Then
+            If rdoScaleData.Checked Then
+                If rdoWholeDataFrame.Checked Then
+                    clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
+                    clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                    clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                Else
+                    clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
+                    clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                    clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                End If
+            ElseIf rdoDistanceData.Checked Then
+                If rdoWholeDataFrame.Checked Then
+                    clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                    clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                Else
+                    clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                    clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                End If
             End If
         End If
     End Sub
