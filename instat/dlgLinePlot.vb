@@ -222,7 +222,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_path", "geom_step"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, "dumbbellplot", {"geom_dumbbell"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSlope, "slopeplot", {"newggslopegraph_amended", "newggslopegraph_theme"})
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSlope, "slopeplot", {"slopegraph", "slopegraph_theme"})
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
         dctMethodOptions.Add("loess", Chr(34) & "loess" & Chr(34))
