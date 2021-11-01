@@ -50,7 +50,7 @@ Public Class dlgSplitText
         ucrPnlTextComponents.AddRadioButton(rdoMaximumNumberOfComponents)
 
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoMaximumNumberOfComponents, "str_split")
-        ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split")
+        ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split_fixed")
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -110,7 +110,7 @@ Public Class dlgSplitText
         clsBinaryColumns.SetRCommand("multi.split")
 
         clsTextComponentsFixed.SetPackageName("stringr")
-        clsTextComponentsFixed.SetRCommand("str_split")
+        clsTextComponentsFixed.SetRCommand("str_split_fixed")
         clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
         clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
