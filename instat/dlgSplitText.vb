@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
+    Private clsTextComponentsFixed, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
     Private clsBinaryColumns As New RFunction
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -50,14 +50,12 @@ Public Class dlgSplitText
         ucrPnlTextComponents.AddRadioButton(rdoMaximumNumberOfComponents)
 
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoMaximumNumberOfComponents, "str_split")
-        ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split_fixed")
-
+        ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split")
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrPnlTextComponents, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFixedNumberOfComponents)
         ucrNudPieces.SetLinkedDisplayControl(lblNumberofPiecesToReturn)
-
 
         ucrReceiverSplitTextColumn.SetParameter(New RParameter("string", 0))
         ucrReceiverSplitTextColumn.SetParameterIsRFunction()
@@ -80,6 +78,12 @@ Public Class dlgSplitText
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
 
+        ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
+        ucrChkIncludeRegularExpressions.SetDefaultState(False)
+
+        ucrChkAddKeyboard.SetText("Add keyboard")
+        ucrChkAddKeyboard.Enabled = False
+
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
@@ -92,14 +96,21 @@ Public Class dlgSplitText
         clsTextComponentsFixed = New RFunction
         clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction
+        clsStringCollFunction = New RFunction
+
+        ucrChkIncludeRegularExpressions.Checked = False
 
         ucrSelectorSplitTextColumn.Reset()
+
+        clsStringCollFunction.SetPackageName("stringr")
+        clsStringCollFunction.SetRCommand("coll")
+        clsStringCollFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=0)
 
         clsBinaryColumns.SetPackageName("questionr")
         clsBinaryColumns.SetRCommand("multi.split")
 
         clsTextComponentsFixed.SetPackageName("stringr")
-        clsTextComponentsFixed.SetRCommand("str_split_fixed")
+        clsTextComponentsFixed.SetRCommand("str_split")
         clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
         clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
@@ -143,15 +154,44 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub ucrPnlSplitText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlValueChanged
-
         If rdoBinaryColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
         ElseIf rdoTextComponents.Checked Then
             SplitTextOptions()
         End If
     End Sub
+
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
         SplitTextOptions()
+        ChangeParametersValues()
+    End Sub
+
+    Private Sub ChangeParametersValues()
+        Dim strPattern As String = Nothing
+        Select Case ucrInputPattern.GetText
+            Case "Space ( )"
+                strPattern = Chr(34) & " " & Chr(34)
+            Case "Period ."
+                strPattern = "stringr::fixed(" & Chr(34) & "." & Chr(34) & ")"
+            Case "Comma ,"
+                strPattern = Chr(34) & "," & Chr(34)
+            Case "Colon :"
+                strPattern = Chr(34) & ":" & Chr(34)
+            Case "Semicolon ;"
+                strPattern = Chr(34) & ";" & Chr(34)
+            Case "Hyphen -"
+                strPattern = Chr(34) & "-" & Chr(34)
+            Case "Underscore _"
+                strPattern = Chr(34) & "_" & Chr(34)
+        End Select
+        clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
+        If ucrChkIncludeRegularExpressions.Checked Then
+            clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
+            clsTextComponentsMaximum.AddParameter("pattern", strPattern, iPosition:=1)
+        Else
+            clsTextComponentsFixed.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            clsTextComponentsMaximum.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+        End If
     End Sub
 
     Private Sub SplitTextOptions()
@@ -161,6 +201,11 @@ Public Class dlgSplitText
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
         End If
     End Sub
+
+    Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrPnlSplitText.ControlValueChanged
+        ChangeParametersValues()
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
