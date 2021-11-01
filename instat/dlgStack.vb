@@ -249,8 +249,6 @@ Public Class dlgStack
         ucrChkCarryAllColumns.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
-
-
         'SetSingleOrMultipleOptions()
     End Sub
 
