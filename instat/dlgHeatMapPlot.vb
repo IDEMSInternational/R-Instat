@@ -134,6 +134,7 @@ Public Class dlgHeatMapPlot
         ucrReceiverFillChoropleth.bWithQuotes = False
 
         ucrVariableAsFactorForHeatMap.Selector = ucrHeatMapSelector
+        ucrVariableAsFactorForHeatMap.SetFactorReceiver(ucrReceiverX)
         ucrVariableAsFactorForHeatMap.SetParameter(New RParameter("y", 1))
         ucrVariableAsFactorForHeatMap.SetParameterIsString()
         ucrVariableAsFactorForHeatMap.bWithQuotes = False
@@ -376,6 +377,7 @@ Public Class dlgHeatMapPlot
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrHeatMapSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -443,6 +445,20 @@ Public Class dlgHeatMapPlot
         Else
             clsBaseOperator.RemoveParameterByName("geom_text")
         End If
+    End Sub
+
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariableAsFactorForHeatMap.bSingleVariable Then
+            cmdTileOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdTileOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariableAsFactorForHeatMap.ControlValueChanged
+        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
