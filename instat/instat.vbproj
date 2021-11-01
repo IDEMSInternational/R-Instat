@@ -184,11 +184,17 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
+    <Compile Include="Model\DataFrame\clsDataBook.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
@@ -339,6 +345,12 @@
     <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
@@ -417,6 +429,7 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -428,6 +441,7 @@
     <Compile Include="dlgThreeVariablePivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
@@ -2278,10 +2292,10 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRank.Designer.vb">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <Compile Include="dlgTransform.Designer.vb">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRank.vb">
+    <Compile Include="dlgTransform.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2851,6 +2865,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -4428,11 +4445,11 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.sw-KE.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>

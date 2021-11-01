@@ -67,31 +67,38 @@ Public Class dlgConversions
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.Selector = ucrSelectorConversions
+        ucrReceiverElement.bUseFilteredData = False
 
         ucrReceiverDate.SetParameter(New RParameter("doy", 2))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
+        ucrReceiverDate.bUseFilteredData = False
 
         ucrReceiverLatitude.SetParameter(New RParameter("lat", 1))
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
+        ucrReceiverLatitude.bUseFilteredData = False
 
         ucrReceiverDegrees.SetParameter(New RParameter("dd", 0))
         ucrReceiverDegrees.SetParameterIsRFunction()
         ucrReceiverDegrees.Selector = ucrSelectorConversions
+        ucrReceiverDegrees.bUseFilteredData = False
 
         ucrReceiverMinutes.SetParameter(New RParameter("mm", 1))
         ucrReceiverMinutes.SetParameterIsRFunction()
         ucrReceiverMinutes.Selector = ucrSelectorConversions
+        ucrReceiverMinutes.bUseFilteredData = False
 
         ucrReceiverSeconds.SetParameter(New RParameter("ss", 2))
         ucrReceiverSeconds.SetParameterIsRFunction()
         ucrReceiverSeconds.Selector = ucrSelectorConversions
+        ucrReceiverSeconds.bUseFilteredData = False
 
         ucrReceiverLetters.SetParameter(New RParameter("dir", 3))
         ucrReceiverLetters.SetParameterIsRFunction()
         ucrReceiverLetters.Selector = ucrSelectorConversions
+        ucrReceiverLetters.bUseFilteredData = False
 
         ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
@@ -165,11 +172,10 @@ Public Class dlgConversions
         ucrPnlLatitude.SetLinkedDisplayControl(grpLatitude)
         ucrPnlElements.SetLinkedDisplayControl(grpElements)
 
-        ucrSaveConversions.SetLabelText("Result into:")
         ucrSaveConversions.SetSaveTypeAsColumn()
-        ucrSaveConversions.SetIsTextBox()
         ucrSaveConversions.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
-        ucrSaveConversions.SetPrefix("conversion")
+        ucrSaveConversions.SetIsComboBox()
+        ucrSaveConversions.SetLabelText("Result into:")
     End Sub
 
     Private Sub SetDefaults()
@@ -289,14 +295,17 @@ Public Class dlgConversions
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrReceiverDate.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("day_length")
+            ucrSaveConversions.setLinkedReceiver(ucrReceiverDate)
         ElseIf rdoUnits.Checked Then
             SetBaseFunction()
             ucrReceiverElement.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("conversion")
+            ucrSaveConversions.setLinkedReceiver(ucrReceiverElement)
         ElseIf rdoCoordinates.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsConvertToDegreeFunction)
             ucrReceiverDegrees.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("coord")
+            ucrSaveConversions.setLinkedReceiver(ucrReceiverDegrees)
         End If
         ChangeLatParameter()
     End Sub
@@ -319,7 +328,7 @@ Public Class dlgConversions
         ChangeLatParameter()
     End Sub
 
-    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged, ucrReceiverDegrees.ControlContentsChanged
+    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged, ucrReceiverDegrees.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
