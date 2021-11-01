@@ -343,7 +343,7 @@ Public Class dlgStack
     End Sub
 
     Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged,
-    ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged,
+    ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged, ucrInputDropPrefix.ControlContentsChanged,
     ucrPnlStack.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged, ucrChkDropPrefix.ControlContentsChanged, ucrChkStackMultipleSets.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -357,15 +357,8 @@ Public Class dlgStack
             If Not ucrInputNamesTo.IsEmpty Then
                 clsReshapeFunction.AddParameter("timevar", Chr(34) & ucrInputNamesTo.GetText() & Chr(34))
             End If
-            ucrChkDropPrefix.Visible = False
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
-            ucrChkDropPrefix.Visible = True
-        End If
-        If ucrChkDropPrefix.Checked Then
-            ucrInputDropPrefix.Visible = True
-        Else
-            ucrInputDropPrefix.Visible = False
         End If
         TestOKEnabled()
     End Sub
