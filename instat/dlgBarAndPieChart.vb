@@ -73,6 +73,7 @@ Public Class dlgBarAndPieChart
     Private clsAsNumericFunction As New RFunction
     Private clsGeomTextWordcloudFunction As New RFunction
     Private clsGeomTextWordcloudAesFunction As New RFunction
+    Private clsScaleSizeAreaFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -91,6 +92,7 @@ Public Class dlgBarAndPieChart
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        ChangeParameterName()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -122,7 +124,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrInputReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputReorderX, {rdoFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
         ucrInputBarChartPositions.SetLinkedDisplayControl(lblPosition)
@@ -340,6 +342,11 @@ Public Class dlgBarAndPieChart
         ucrInputPlace.SetRDefault(Chr(34) & "middle" & Chr(34))
         ucrInputPlace.SetDropDownStyleAsNonEditable()
 
+        ucrNudMaxSize.SetParameter(New RParameter("max_size", 0))
+        ucrChkIncreaseSize.SetText("Increase size")
+        ucrChkIncreaseSize.AddToLinkedControls(ucrNudMaxSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
+        ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
+        ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
     End Sub
 
     Private Sub SetDefaults()
@@ -378,6 +385,7 @@ Public Class dlgBarAndPieChart
         clsAsNumericFunction = New RFunction
         clsGeomTextWordcloudFunction = New RFunction
         clsGeomTextWordcloudAesFunction = New RFunction
+        clsScaleSizeAreaFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -533,6 +541,10 @@ Public Class dlgBarAndPieChart
         clsGeomTextWordcloudFunction.SetPackageName("ggwordcloud")
         clsGeomTextWordcloudFunction.SetRCommand("geom_text_wordcloud")
 
+        clsScaleSizeAreaFunction.SetPackageName("ggplot2")
+        clsScaleSizeAreaFunction.SetRCommand("scale_size_area")
+        'clsScaleSizeAreaFunction.AddParameter("max_size", "20", iPosition:=0)
+
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -569,6 +581,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverFill.AddAdditionalCodeParameterPair(clsGeomTreemapTextAesFunction, New RParameter("label", 0), iAdditionalPairNo:=1)
         ucrInputLayout.AddAdditionalCodeParameterPair(clsGeomTreemapTextFunction, New RParameter("layout", 1), iAdditionalPairNo:=1)
+
         ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
@@ -596,6 +609,8 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudColor.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrReceiverWordcloudAngle.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
+        ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+        ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -685,19 +700,19 @@ Public Class dlgBarAndPieChart
 
     End Sub
 
-    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBarLayerSubdialog = False
-        TestOkEnabled()
-    End Sub
+    'Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+    '    sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
+    '    sdgLayerOptions.ShowDialog()
+    '    bResetBarLayerSubdialog = False
+    '    TestOkEnabled()
+    'End Sub
 
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            cmdPieChartOptions.Visible = False
+            'cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
-            cmdColumnChartOptions.Visible = False
+            'cmdColumnChartOptions.Visible = False
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
@@ -822,6 +837,13 @@ Public Class dlgBarAndPieChart
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
             End If
+            If ucrChkLollipop.Checked Then
+                cmdBarChartOptions.Text = "Lollipop Options"
+                clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
+            Else
+                cmdBarChartOptions.Text = "Bar Chart Options"
+                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+            End If
         ElseIf rdoFrequency.Checked Then
             If ucrVariablesAsFactorForBarChart.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
@@ -840,36 +862,31 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction2.RemoveParameterByName("stat")
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
-        End If
 
-        If ucrChkLollipop.Checked Then
-            cmdBarChartOptions.Text = "Lollipop Options"
-            clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
-        Else
-            cmdBarChartOptions.Text = "Bar Chart Options"
-            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
-        End If
-
-        If rdoTreeMap.Checked Then
+        ElseIf rdoTreeMap.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameterByName("geom_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
             cmdBarChartOptions.Text = "Treemap Options"
             clsBaseOperator.AddParameter("geom_treemap", clsRFunctionParameter:=clsGeomTreemapFunction, iPosition:=2)
-        End If
 
-        If rdoWordCloud.Checked Then
+        ElseIf rdoWordCloud.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
             clsBaseOperator.RemoveParameterByName("geom_bar")
             cmdBarChartOptions.Text = "Wordcloud Options"
             clsBaseOperator.AddParameter("geom_text_wordcloud", clsRFunctionParameter:=clsGeomTextWordcloudFunction, iPosition:=2)
+            If ucrChkIncreaseSize.Checked Then
+                clsBaseOperator.AddParameter("scale_size_area", clsRFunctionParameter:=clsScaleSizeAreaFunction, iPosition:=3)
+            Else
+                clsBaseOperator.RemoveParameterByName("scale_size_area")
+            End If
         End If
-
         UpdateParameter()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged,
+    ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
@@ -982,8 +999,8 @@ Public Class dlgBarAndPieChart
         SetGeomTextOptions()
     End Sub
 
-    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged,
-            ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged
+    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged, ucrReceiverArea.ControlContentsChanged,
+        ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged, ucrChkIncreaseSize.ControlContentsChanged
         TestOkEnabled()
     End Sub
     Private Sub ucrChkAddLabelsTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsTreemap.ControlValueChanged
