@@ -281,13 +281,6 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
         by <- NULL
         for(temp_overall_link in overall_links) {
           for(temp_curr_link in curr_calc_links) {
-            equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, curr_calc_from)
-            if(length(equ_curr_cols) > 0 && all(equ_curr_cols %in% temp_curr_link)) {
-              by <- temp_overall_link
-              names(by) <- equ_curr_cols
-              join_into_overall <- FALSE
-              break
-            }
             equ_overall_cols <- self$get_equivalent_columns(curr_calc_from, temp_curr_link, overall_calc_from)
             if(length(equ_overall_cols) > 0 && all(equ_overall_cols %in% temp_overall_link)) {
               by <- temp_curr_link
@@ -295,7 +288,13 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
               join_into_overall <- TRUE
               break
             }
-            
+            equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, curr_calc_from)
+            if(length(equ_curr_cols) > 0 && all(equ_curr_cols %in% temp_curr_link)) {
+              by <- temp_overall_link
+              names(by) <- equ_curr_cols
+              join_into_overall <- FALSE
+              break
+            }
           }
           if(length(by) > 0) break
         }

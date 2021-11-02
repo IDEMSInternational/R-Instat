@@ -226,12 +226,19 @@ Public Class dlgRecodeFactor
         Dim strNewLabels As List(Of String)
 
         strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
-        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
+        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", False)
+
+        If strCurrentLabels.Count = strNewLabels.Count Then
+            For i = 0 To strCurrentLabels.Count - 1
+                'Backtick needed for names of the vector incase the levels are not valid R names
+                clsFctRecodeFunction.RemoveParameterByPosition(i + 1)
+            Next
+        End If
 
         If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
             For i = 0 To strCurrentLabels.Count - 1
                 'Backtick needed for names of the vector incase the levels are not valid R names
-                clsFctRecodeFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
+                clsFctRecodeFunction.AddParameter(Chr(96) & strNewLabels(i) & Chr(96), Chr(34) & strCurrentLabels(i) & Chr(34), iPosition:=i + 1)
             Next
         End If
         TestOKEnabled()
