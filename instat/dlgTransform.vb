@@ -47,6 +47,9 @@ Public Class dlgTransform
     Private clsReverseDivideOperator As ROperator
     Private clsScaleMeanFunction As RFunction
     Private clsScaleMinFunction As RFunction
+    Private clsNonNegativeFunction As RCodeStructure
+    Private clsScaleOperator As ROperator
+    Private clsConstantAddOperator As ROperator
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -80,7 +83,7 @@ Public Class dlgTransform
         ucrPnlTransformOptions.AddFunctionNamesCondition(rdoNumeric, {"round", "signif", "lag", "lead", "c"})
         ucrPnlTransformOptions.AddFunctionNamesCondition(rdoSort, "sort")
         ucrPnlTransformOptions.AddFunctionNamesCondition(rdoNonNegative, {"sqrt", "log", "log10"})
-        ucrPnlTransformOptions.AddFunctionNamesCondition(rdoScale, {"-", "/", "*", "+"})
+        ucrPnlTransformOptions.AddParameterIsROperatorCondition(rdoScale, "-")
 
         ucrReceiverRank.SetParameter(New RParameter("x", 0))
         ucrReceiverRank.Selector = ucrSelectorForRank
@@ -136,16 +139,14 @@ Public Class dlgTransform
         ucrPnlNonNegative.AddFunctionNamesCondition(rdoSquareRoot, "sqrt")
         ucrPnlNonNegative.AddFunctionNamesCondition(rdoLogToBase10, "log10")
         ucrPnlNonNegative.AddFunctionNamesCondition(rdoNaturalLog, "log")
-        ucrPnlNonNegative.AddFunctionNamesCondition(rdoPower, "^")
+        ucrPnlNonNegative.AddParameterIsROperatorCondition(rdoPower, "^")
 
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudSignifDigits, {rdoSignificantDigits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudRoundOfDigits, {rdoRoundOf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagLeadPosition, {rdoLead}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudDiffLag, {rdoDifference}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagPosition, {rdoLag}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrPnlNonNegative.AddToLinkedControls(ucrNudPower, {rdoPower}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlMissingValues, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlTies, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrChkDecreasing, {rdoSort}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -153,6 +154,12 @@ Public Class dlgTransform
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls({ucrPnlNonNegative, ucrChkAddConstant}, {rdoNonNegative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls({ucrChkSubtract, ucrChkMultiply, ucrChkDivide, ucrChkAdd, ucrChkReverse}, {rdoScale}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddConstant.AddToLinkedControls(ucrNudConstant, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+        ucrChkSubtract.AddToLinkedControls(ucrInputSubtract, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+        ucrChkMultiply.AddToLinkedControls(ucrInputMultiply, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrChkDivide.AddToLinkedControls(ucrInputDivide, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrChkAdd.AddToLinkedControls(ucrInputAdd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+
         ucrNudSignifDigits.SetLinkedDisplayControl(lblDigits)
         ucrNudRoundOfDigits.SetLinkedDisplayControl(lblRoundofDigits)
         ucrNudLagLeadPosition.SetLinkedDisplayControl(lblLagLeadPosition)
@@ -185,16 +192,14 @@ Public Class dlgTransform
         ucrNudLagPosition.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
 
         ucrNudPower.SetParameter(New RParameter("y", 1))
-        ucrNudPower.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
-        ucrNudPower.DecimalPlaces = 2
-        ucrNudPower.Increment = 0.01
+        ucrNudPower.SetMinMax(iNewMax:=Integer.MaxValue)
 
         ucrNudConstant.SetParameter(New RParameter("c", 1))
         ucrNudConstant.SetMinMax(iNewMin:=0, iNewMax:=Integer.MaxValue)
         ucrNudConstant.SetRDefault(0)
 
         ucrChkAddConstant.SetText("Add Constant")
-        ucrChkAddConstant.AddToLinkedControls(ucrNudConstant, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+        ucrChkAddConstant.AddParameterIsROperatorCondition(True, "+")
 
         ucrSaveNew.SetPrefix("rank")
         ucrSaveNew.SetSaveTypeAsColumn()
@@ -221,7 +226,6 @@ Public Class dlgTransform
         ucrInputSubtract.SetItems(dctSubtractValues)
 
         ucrChkSubtract.SetText("Subtract")
-        ucrChkSubtract.AddToLinkedControls(ucrInputSubtract, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
 
         ucrInputMultiply.SetParameter(New RParameter("y", 1))
         dctMultiplyValues.Add("1", "1")
@@ -234,7 +238,6 @@ Public Class dlgTransform
         ucrInputMultiply.SetItems(dctMultiplyValues)
 
         ucrChkMultiply.SetText("Multiply")
-        ucrChkMultiply.AddToLinkedControls(ucrInputMultiply, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
 
         ucrInputDivide.SetParameter(New RParameter("z", 1))
         dctDivideValues.Add("1", "1")
@@ -248,7 +251,6 @@ Public Class dlgTransform
         ucrInputDivide.SetItems(dctDivideValues)
 
         ucrChkDivide.SetText("Divide")
-        ucrChkDivide.AddToLinkedControls(ucrInputDivide, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
 
         ucrInputAdd.SetParameter(New RParameter("v", 1))
         dctAddValues.Add("0", "0")
@@ -257,7 +259,6 @@ Public Class dlgTransform
         ucrInputAdd.SetItems(dctAddValues)
 
         ucrChkAdd.SetText("Add")
-        ucrChkAdd.AddToLinkedControls(ucrInputAdd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
 
         ucrChkReverse.SetText("Reverse")
     End Sub
@@ -291,6 +292,8 @@ Public Class dlgTransform
         clsReverseMultiplyOperator = New ROperator
         clsScaleMeanFunction = New RFunction
         clsScaleMinFunction = New RFunction
+        clsNonNegativeFunction = New RFunction
+        clsConstantAddOperator = New ROperator
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -383,8 +386,11 @@ Public Class dlgTransform
         clsScaleAddOperator.AddParameter("x", clsROperatorParameter:=clsReverseDivideOperator, iPosition:=0)
         clsScaleAddOperator.AddParameter("v", "0", iPosition:=1)
 
+        clsConstantAddOperator.SetOperation("+")
+
         ' Set default RFunction as the base function
         clsNumericRcodeStructure = clsRoundFunction
+        clsNonNegativeFunction = clsSquarerootFunction
         ucrBase.clsRsyntax.SetBaseRFunction(clsNumericRcodeStructure)
         bSetRcode = True
     End Sub
@@ -440,8 +446,11 @@ Public Class dlgTransform
         ucrInputDivide.SetRCode(clsScaleDivideOperator, bReset)
         ucrInputMultiply.SetRCode(clsScaleMultiplyOperator, bReset)
         ucrChkReverse.SetRCode(clsScaleAddOperator, bReset)
+        ucrNudConstant.SetRCode(clsConstantAddOperator, bReset)
+        'ucrChkAddConstant.SetRCode(clsConstantAddOperator, bReset)
         If bSetRcode Then
             ucrPnlNumericOptions.SetRCode(clsNumericRcodeStructure, bReset)
+            ucrPnlNonNegative.SetRCode(clsNonNegativeFunction, bReset)
         End If
     End Sub
 
@@ -455,8 +464,7 @@ Public Class dlgTransform
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlTransformOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged
-        bSetRcode = True
+    Private Sub SetBaseFunctionOrOperator()
         If rdoRank.Checked Then
             ucrSaveNew.SetPrefix("rank")
             ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
@@ -493,18 +501,28 @@ Public Class dlgTransform
         ElseIf rdoNonNegative.Checked Then
             If rdoSquareRoot.Checked Then
                 ucrSaveNew.SetPrefix("sqrt")
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSquarerootFunction)
+                clsConstantAddOperator.AddParameter("left", clsRFunctionParameter:=clsSquarerootFunction, iPosition:=0)
+                clsNonNegativeFunction = clsSquarerootFunction
+                ucrBase.clsRsyntax.SetBaseRFunction(clsNonNegativeFunction)
             ElseIf rdoPower.Checked Then
+                bSetRcode = False
                 ucrSaveNew.SetPrefix("power")
-                ucrBase.clsRsyntax.SetBaseROperator(clsPowerOperator)
+                clsConstantAddOperator.AddParameter("left", clsROperatorParameter:=clsPowerOperator, iPosition:=0)
+                clsNonNegativeFunction = clsPowerOperator
+                ucrBase.clsRsyntax.SetBaseROperator(clsNonNegativeFunction)
             ElseIf rdoLogToBase10.Checked Then
                 ucrSaveNew.SetPrefix("log10")
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLogBase10Function)
+                clsConstantAddOperator.AddParameter("left", clsRFunctionParameter:=clsLogBase10Function, iPosition:=0)
+                clsNonNegativeFunction = clsLogBase10Function
+                ucrBase.clsRsyntax.SetBaseRFunction(clsNonNegativeFunction)
             ElseIf rdoNaturalLog.Checked Then
                 ucrSaveNew.SetPrefix("log")
-                ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
+                clsConstantAddOperator.AddParameter("left", clsRFunctionParameter:=clsNaturalLogFunction, iPosition:=0)
+                clsNonNegativeFunction = clsNaturalLogFunction
+                ucrBase.clsRsyntax.SetBaseRFunction(clsNonNegativeFunction)
             End If
         ElseIf rdoScale.Checked Then
+            bSetRcode = False
             If ucrChkReverse.Checked Then
                 ucrSaveNew.SetPrefix("Reverse")
                 ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
@@ -515,8 +533,22 @@ Public Class dlgTransform
         End If
     End Sub
 
+    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged
+        bSetRcode = True
+        SetBaseFunctionOrOperator()
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
         ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkReverse.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged
+        If ucrChkAddConstant.Checked Then
+            bSetRcode = False
+            ucrBase.clsRsyntax.SetBaseROperator(clsConstantAddOperator)
+        Else
+            SetBaseFunctionOrOperator()
+        End If
     End Sub
 End Class
