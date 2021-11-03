@@ -75,6 +75,8 @@ Partial Class dlgStack
         Me.ucrChkStackMultipleSets = New instat.ucrCheck()
         Me.ucrNudNoSets = New instat.ucrNud()
         Me.lblSets = New System.Windows.Forms.Label()
+        Me.ucrFactorInto = New instat.ucrInputTextBox()
+        Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -308,10 +310,25 @@ Partial Class dlgStack
         resources.ApplyResources(Me.lblSets, "lblSets")
         Me.lblSets.Name = "lblSets"
         '
+        'ucrFactorInto
+        '
+        Me.ucrFactorInto.AddQuotesIfUnrecognised = True
+        Me.ucrFactorInto.IsMultiline = False
+        Me.ucrFactorInto.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFactorInto, "ucrFactorInto")
+        Me.ucrFactorInto.Name = "ucrFactorInto"
+        '
+        'lblFactorInto
+        '
+        resources.ApplyResources(Me.lblFactorInto, "lblFactorInto")
+        Me.lblFactorInto.Name = "lblFactorInto"
+        Me.lblFactorInto.Tag = ""
+        '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputNamesTo)
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
@@ -327,7 +344,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrInputValuesTo)
-        Me.Controls.Add(Me.ucrInputNamesTo)
         Me.Controls.Add(Me.ucrReceiverColumnsToCarry)
         Me.Controls.Add(Me.ucrSelectorStack)
         Me.Controls.Add(Me.ucrBase)
@@ -340,12 +356,14 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrChkPunctuation)
         Me.Controls.Add(Me.lblValuesTo)
         Me.Controls.Add(Me.ucrChkDropMissingValues)
-        Me.Controls.Add(Me.ucrChkToLowerCase)
-        Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.ucrChkUrl)
         Me.Controls.Add(Me.ucrChkDropPrefix)
         Me.Controls.Add(Me.lblOutput)
         Me.Controls.Add(Me.ucrChkStackMultipleSets)
+        Me.Controls.Add(Me.ucrChkToLowerCase)
+        Me.Controls.Add(Me.lblNamesTo)
+        Me.Controls.Add(Me.lblFactorInto)
+        Me.Controls.Add(Me.ucrFactorInto)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -390,4 +408,6 @@ Partial Class dlgStack
     Friend WithEvents lblSets As Label
     Friend WithEvents ucrNudNoSets As ucrNud
     Friend WithEvents ucrChkStackMultipleSets As ucrCheck
+    Friend WithEvents ucrFactorInto As ucrInputTextBox
+    Friend WithEvents lblFactorInto As Label
 End Class

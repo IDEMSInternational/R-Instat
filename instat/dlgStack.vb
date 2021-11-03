@@ -70,18 +70,24 @@ Public Class dlgStack
 
         ucrChkStackMultipleSets.SetText("Stack Multiple Column Sets")
         ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStackMultipleSets.AddToLinkedControls(ucrFactorInto, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryAllColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputValuesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropMissingValues, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropPrefix, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputDropPrefix, {False}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStackMultipleSets.AddToLinkedControls(ucrInputNamesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddFunctionNamesCondition(True, "reshape")
         ucrChkStackMultipleSets.AddFunctionNamesCondition(False, "pivot_longer")
 
         ucrNudNoSets.SetParameter(New RParameter("num", 1))
         ucrNudNoSets.Minimum = 2
         ucrNudNoSets.SetLinkedDisplayControl(lblSets)
+
+        ucrFactorInto.SetParameter(New RParameter("timevar", 3))
+        ucrFactorInto.SetRDefault("variable")
+        ucrFactorInto.SetLinkedDisplayControl(lblFactorInto)
 
         ucrChkCarryColumns.SetText("Columns to Carry")
         ucrChkCarryColumns.AddToLinkedControls(ucrReceiverColumnsToCarry, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -149,7 +155,6 @@ Public Class dlgStack
         ucrChkDropPrefix.AddParameterPresentCondition(True, "names_prefix")
         ucrChkDropPrefix.AddParameterPresentCondition(False, "names_prefix", False)
 
-
         ucrInputDropPrefix.SetParameter(New RParameter("names_prefix", 6))
         ucrInputDropPrefix.SetValuesToIgnore({"NULL"})
 
@@ -158,7 +163,7 @@ Public Class dlgStack
         ucrInputToken.AddToLinkedControls(ucrChkUrl, {"Tweets"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls({ucrChkCarryColumns, ucrChkCarryAllColumns}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls({ucrReceiverTextColumn, ucrInputOutput, ucrInputToken, ucrInputFormat, ucrChkToLowerCase}, {rdoUnnest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrChkDropMissingValues, ucrInputValuesTo, ucrChkStackMultipleSets, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrChkDropMissingValues, ucrFactorInto, ucrInputValuesTo, ucrChkStackMultipleSets, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrChkDropPrefix.AddToLinkedControls(ucrInputDropPrefix, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls(ucrChkDropPrefix, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
@@ -205,7 +210,6 @@ Public Class dlgStack
         clsReshapeFunction.SetRCommand("reshape")
         clsReshapeFunction.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34))
-        clsReshapeFunction.AddParameter("timevar", Chr(34) & "variable" & Chr(34))
 
         clsSplitColumnsInGroups.SetRCommand("split_items_in_groups")
         clsSplitColumnsInGroups.AddParameter("num", 2, iPosition:=1)
@@ -220,15 +224,9 @@ Public Class dlgStack
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrSaveNewDataName.AddAdditionalRCode(clsPivotLongerFunction, iAdditionalPairNo:=1)
-
         ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsInGroups, New RParameter("items", 0), iAdditionalPairNo:=1)
-        ucrInputNamesTo.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("timevar", 3), iAdditionalPairNo:=1)
-        ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data",ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame ,0), iAdditionalPairNo:=1)
-        'ucrSaveNewDataName.AddAdditionalRCode(clsReshapeFunction, iAdditionalPairNo:=1)
-
+        ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
         ucrNudNoSets.SetRCode(clsSplitColumnsInGroups, bReset)
 
         ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
@@ -249,7 +247,7 @@ Public Class dlgStack
         ucrChkCarryAllColumns.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
-        'SetSingleOrMultipleOptions()
+        ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -260,7 +258,7 @@ Public Class dlgStack
                 ucrBase.OKEnabled(True)
             End If
         Else
-            If ucrReceiverColumnsToBeStack.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete OrElse ucrInputNamesTo.IsEmpty OrElse ucrInputValuesTo.IsEmpty OrElse (ucrReceiverColumnsToCarry.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
+            If ucrReceiverColumnsToBeStack.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete OrElse ucrInputNamesTo.IsEmpty OrElse ucrInputValuesTo.IsEmpty OrElse ucrFactorInto.IsEmpty OrElse (ucrReceiverColumnsToCarry.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -341,7 +339,7 @@ Public Class dlgStack
     End Sub
 
     Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged,
-    ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged, ucrInputDropPrefix.ControlContentsChanged,
+    ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged, ucrInputDropPrefix.ControlContentsChanged, ucrFactorInto.ControlContentsChanged,
     ucrPnlStack.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged, ucrChkDropPrefix.ControlContentsChanged, ucrChkStackMultipleSets.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -350,13 +348,8 @@ Public Class dlgStack
         If ucrChkStackMultipleSets.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReshapeFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
-            'This is needed in case the value in ucrInputNamesTo is the R default for pivot_longer ("names")
-            'in which case it would have been removed from all functions (R default shared by all functions)
-            If Not ucrInputNamesTo.IsEmpty Then
-                clsReshapeFunction.AddParameter("timevar", Chr(34) & ucrInputNamesTo.GetText() & Chr(34))
-            End If
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
         End If
         TestOKEnabled()
     End Sub
