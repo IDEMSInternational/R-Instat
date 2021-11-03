@@ -19,6 +19,7 @@ Public Class dlgRecodeNumeric
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsCut2Function As New RFunction
+    Private clsDummyFunction As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumn As String = ""
 
@@ -43,6 +44,10 @@ Public Class dlgRecodeNumeric
         ucrPnlRadioButtons.AddRadioButton(rdoQuantiles)
         ucrPnlRadioButtons.AddRadioButton(rdoMinimum)
         ucrPnlRadioButtons.AddRadioButton(rdoBreakPoints)
+
+        ucrPnlRadioButtons.AddParameterValuesCondition(rdoQuantiles, "checked", "quantile")
+        ucrPnlRadioButtons.AddParameterValuesCondition(rdoMinimum, "checked", "minimum")
+        ucrPnlRadioButtons.AddParameterValuesCondition(rdoBreakPoints, "checked", "breakpoints")
 
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -92,14 +97,15 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub SetDefaults()
+        clsDummyFunction = New RFunction
         clsCut2Function = New RFunction
-
-        rdoQuantiles.Checked = True
 
         ucrSelectorForRecode.Reset()
         ucrSaveRecode.Reset()
         ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.SetName("")
+
+        clsDummyFunction.AddParameter("checked", "quantile", iPosition:=0)
 
         clsCut2Function.SetRCommand("cut2")
         clsCut2Function.SetPackageName("Hmisc")
@@ -113,11 +119,10 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
-
+        ucrPnlRadioButtons.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-
         If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
@@ -126,7 +131,6 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub AddParameters()
-        'clsCut2Function.RemoveParameterByName("cuts")
         If ucrMultipleNumericRecode.IsEmpty Then
             clsCut2Function.RemoveParameterByName("cuts")
         Else
@@ -155,8 +159,17 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
+    Private Sub ucrPnlRadioButtons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRadioButtons.ControlValueChanged
+        If rdoQuantiles.Checked Then
+            clsDummyFunction.AddParameter("checked", "quantile", iPosition:=0)
+        ElseIf rdoMinimum.Checked Then
+            clsDummyFunction.AddParameter("checked", "minimum", iPosition:=0)
+        ElseIf rdoBreakPoints.Checked Then
+            clsDummyFunction.AddParameter("checked", "breakpoints", iPosition:=0)
+        End If
+    End Sub
+
     Private Sub ucrMultipleNumericRecode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlValueChanged
         AddParameters()
     End Sub
-
 End Class
