@@ -63,8 +63,8 @@ Public Class dlgRecodeNumeric
         ucrNudMinimum.SetRDefault(1)
 
         ttMinimum.SetToolTip(rdoMinimum, "Splits the data into groups of at least the specified size.")
-
         ttQuantiles.SetToolTip(rdoQuantiles, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
+        ttBreakpoint.SetToolTip(rdoBreakPoints, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
 
         ucrChkAddLabels.SetText("Label Groups with Means")
 
@@ -76,10 +76,7 @@ Public Class dlgRecodeNumeric
         ucrSaveRecode.setLinkedReceiver(ucrReceiverRecode)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
-        ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3,))
-
-
-        ttBreakpoint.SetToolTip(rdoBreakPoints, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
+        ucrMultipleNumericRecode.SetParameter(New RParameter("cuts", iNewPosition:=3))
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -129,22 +126,11 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub AddParameters()
-        clsCut2Function.RemoveParameterByName("cuts")
-        If rdoMinimum.Checked = True Then
-            rdoMinimum.Visible = True
-        ElseIf rdoQuantiles.Checked = True Then
-            ucrNudQuantiles.Visible = True
-        ElseIf rdoBreakPoints.Checked = True Then
-            ucrMultipleNumericRecode.Visible = True
-            If ucrMultipleNumericRecode.IsEmpty Then
-                clsCut2Function.RemoveParameterByName("cuts")
-            Else
-                clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
-            End If
+        'clsCut2Function.RemoveParameterByName("cuts")
+        If ucrMultipleNumericRecode.IsEmpty Then
+            clsCut2Function.RemoveParameterByName("cuts")
         Else
-            ucrNudQuantiles.Visible = False
-            ucrNudMinimum.Visible = False
-            ucrMultipleNumericRecode.Visible = False
+            clsCut2Function.AddParameter("cuts", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList, iPosition:=3)
         End If
     End Sub
 

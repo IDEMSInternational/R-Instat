@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 46</value>
+    <value>241, 46</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 81</value>
+    <value>6, 71</value>
   </data>
   <data name="rdoBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 17</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMinimum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 51</value>
+    <value>6, 48</value>
   </data>
   <data name="rdoMinimum.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 17</value>
@@ -241,7 +241,7 @@
     <value>2</value>
   </data>
   <data name="ucrMultipleNumericRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 81</value>
+    <value>99, 71</value>
   </data>
   <data name="ucrMultipleNumericRecode.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -262,7 +262,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudMinimum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 51</value>
+    <value>99, 45</value>
   </data>
   <data name="ucrNudMinimum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -283,7 +283,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudQuantiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 25</value>
+    <value>99, 22</value>
   </data>
   <data name="ucrNudQuantiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -304,10 +304,10 @@
     <value>5</value>
   </data>
   <data name="ucrPnlRadioButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+    <value>5, 19</value>
   </data>
   <data name="ucrPnlRadioButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 87</value>
+    <value>213, 73</value>
   </data>
   <data name="ucrPnlRadioButtons.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -328,7 +328,7 @@
     <value>238, 84</value>
   </data>
   <data name="grpQuantileGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 123</value>
+    <value>226, 106</value>
   </data>
   <data name="grpQuantileGroups.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -358,7 +358,7 @@
     <value>227, 17</value>
   </metadata>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 217</value>
+    <value>10, 201</value>
   </data>
   <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 20</value>
@@ -379,7 +379,7 @@
     <value>0</value>
   </data>
   <data name="ucrSaveRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 244</value>
+    <value>10, 229</value>
   </data>
   <data name="ucrSaveRecode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -409,7 +409,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>466, 327</value>
+    <value>466, 311</value>
   </data>
   <data name="ucrSelectorForRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -436,7 +436,7 @@
     <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 275</value>
+    <value>10, 254</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -455,9 +455,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -490,7 +487,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 61</value>
+    <value>238, 59</value>
   </data>
   <data name="ucrReceiverRecode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
