@@ -178,9 +178,9 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsFormula, New RParameter("right", 0), iAdditionalPairNo:=1)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsFormula, New RParameter("right", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("y", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("y", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrSelectorForUnstack.AddAdditionalCodeParameterPair(clsHierachyFunction, New RParameter("data", ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrReceiverCarryColumns.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("y", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverColumnToUnstack.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
@@ -272,10 +272,7 @@ Public Class dlgUnstack
             If rdoRestoreHierarchy.Checked Then
                 clsCarryColumnsOperator.AddParameter(i, ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=i)
                 i = i + 1
-            End If
-            If rdoSingle.Checked AndAlso ucrReceiverCarryColumns.IsEmpty Then
-                clsFormula.AddParameter("left", ".", iPosition:=0)
-            Else
+               
                 For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
                     clsCarryColumnsOperator.AddParameter(i, strIndicatorVar, iPosition:=i)
                     i = i + 1
