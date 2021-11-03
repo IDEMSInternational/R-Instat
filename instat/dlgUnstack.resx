@@ -448,7 +448,7 @@
     <value>120, 104</value>
   </data>
   <data name="ucrReceiverCarryColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverCarryColumns.Name" xml:space="preserve">
     <value>ucrReceiverCarryColumns</value>
@@ -472,7 +472,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactorToUnstackby.Name" xml:space="preserve">
     <value>ucrReceiverFactorToUnstackby</value>
@@ -562,7 +562,7 @@
     <value>120, 100</value>
   </data>
   <data name="ucrMultipleColumnsReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrMultipleColumnsReceiver.Name" xml:space="preserve">
     <value>ucrMultipleColumnsReceiver</value>
@@ -619,7 +619,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumnToUnstack.Name" xml:space="preserve">
     <value>ucrReceiverColumnToUnstack</value>
