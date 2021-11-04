@@ -2397,8 +2397,9 @@ Public Class RLink
 
                     'Assign the parameter Name
                     clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName)
+                    'Adding the parameter value
+                    clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
                     'Assign the parameter Value
-                    '?Not sure why it can  not assign "NULL"
                     clsNewRParameter.iArgPosDefinition = iNewArgPosition
 
                     iNewArgPosition = iNewArgPosition + 1
