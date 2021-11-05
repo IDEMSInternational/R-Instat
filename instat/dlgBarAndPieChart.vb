@@ -117,8 +117,11 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoValue)
         ucrPnlOptions.AddRadioButton(rdoTreeMap)
         ucrPnlOptions.AddRadioButton(rdoWordCloud)
+
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "coordpolar")
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor, ucrInputAddReorder, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrInputReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -213,14 +216,12 @@ Public Class dlgBarAndPieChart
         ucrChkBacktoback.SetText("Back to back")
         ucrChkBacktoback.SetParameter(New RParameter("labels", 0))
         ucrChkBacktoback.SetValueIfChecked("abs")
-        ' ucrChkBacktoback.AddToLinkedControls(ucrInputBarChartPositions, {False}, bNewLinkedChangeParameterValue:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrChkPolarCoordinates.SetText("Polar")
         ucrChkPolarCoordinates.SetParameter(New RParameter("theta"))
         ucrChkPolarCoordinates.SetValueIfChecked(Chr(34) & "y" & Chr(34))
         ucrChkPolarCoordinates.AddToLinkedControls({ucrPnlPolar}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkPolarCoordinates.AddToLinkedControls(ucrChkBacktoback, {False}, bNewLinkedChangeParameterValue:=True, bNewLinkedDisabledIfParameterMissing:=True)
-
+        
         ucrPnlPolar.AddRadioButton(rdoPie)
         ucrPnlPolar.AddRadioButton(rdoDonut)
 
@@ -597,7 +598,9 @@ Public Class dlgBarAndPieChart
         ucrReceiverFill.SetRCode(clsGeomTreemapAesFunction, bReset)
         ucrReceiverLabel.SetRCode(clsGeomTreemapTextAesFunction, bReset)
         ucrInputLayout.SetRCode(clsGeomTreemapFunction, bReset)
+        ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
         ucrInputStart.SetRCode(clsGeomTreemapFunction, bReset)
+        ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
         ucrInputPlace.SetRCode(clsGeomTreemapTextFunction, bReset)
         ucrReceiverWordcloudLabel.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrReceiverWordcloudSize.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
@@ -1007,5 +1010,17 @@ Public Class dlgBarAndPieChart
         Else
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
+
     End Sub
 End Class
