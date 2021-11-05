@@ -43,6 +43,7 @@ Public Class dlgUnstack
         End If
         SetRCodeforControls(bReset)
         bReset = False
+        TestOKEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -64,15 +65,9 @@ Public Class dlgUnstack
         ucrReceiverFactorToUnstackby.strSelectorHeading = "Factors"
 
         'ucrColumn
-        ucrReceiverColumnToUnstack.SetParameter(New RParameter("values_from", 2))
-        ucrReceiverColumnToUnstack.SetParameterIsString()
-        ucrReceiverColumnToUnstack.bWithQuotes = False
         ucrReceiverColumnToUnstack.Selector = ucrSelectorForUnstack
 
         'ucrMultipleColumnsReceiver
-        ucrMultipleColumnsReceiver.SetParameter(New RParameter("values_from", 2))
-        ucrMultipleColumnsReceiver.SetParameterIsString()
-        ucrMultipleColumnsReceiver.bWithQuotes = False
         ucrMultipleColumnsReceiver.Selector = ucrSelectorForUnstack
 
         ucrChkCarryColumns.SetText("Columns to Carry:")
@@ -81,8 +76,6 @@ Public Class dlgUnstack
         ucrChkCarryColumns.AddParameterIsRFunctionCondition(False, "data")
 
         'ucrCarryColumns
-        ucrReceiverCarryColumns.SetParameterIsString()
-        ucrReceiverCarryColumns.bWithQuotes = False
         ucrReceiverCarryColumns.Selector = ucrSelectorForUnstack
 
         ucrChkValuesFill.SetText("Fill Missing Values:")
@@ -160,6 +153,7 @@ Public Class dlgUnstack
 
         clsHierachyFunction.SetPackageName("reshape2")
         clsHierachyFunction.SetRCommand("dcast")
+        clsHierachyFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsHierachyFunction.AddParameter("formula", clsROperatorParameter:=clsFormula, iPosition:=1)
 
         clsSelectFunction.SetPackageName("dplyr")
@@ -180,10 +174,7 @@ Public Class dlgUnstack
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsFormula, New RParameter("right", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("y", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrSelectorForUnstack.AddAdditionalCodeParameterPair(clsHierachyFunction, New RParameter("data", ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
-        ucrReceiverCarryColumns.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("y", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverColumnToUnstack.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrPnlUnstackCol.SetRCode(clsDummyFunction, bReset)
         ucrNudValuesFill.SetRCode(clsDcastFunction, bReset)
@@ -194,41 +185,38 @@ Public Class dlgUnstack
         ucrNewDFName.SetRCode(clsBaseRCode, bReset)
     End Sub
 
-    Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged,
-    ucrMultipleColumnsReceiver.ControlValueChanged, ucrReceiverCarryColumns.ControlValueChanged
-        Dim iPosition As Integer = 2
-        If rdoMultiple.Checked Then
-            For Each strColumn In ucrMultipleColumnsReceiver.GetVariableNamesAsList()
-                clsSelectDataFunction.AddParameter(strColumn, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                iPosition = iPosition + 1
-            Next
-            If ucrChkCarryColumns.Checked Then
-                For Each strColumn In ucrReceiverCarryColumns.GetVariableNamesAsList
-                    If Not ucrMultipleColumnsReceiver.GetVariableNamesAsList.Contains(strColumn) Then
-                        clsSelectDataFunction.AddParameter(strColumn, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                        iPosition = iPosition + 1
-                    End If
-                Next
-            End If
-        ElseIf rdoSingle.Checked Then
-            If ucrChkCarryColumns.Checked Then
-                For Each strColumn In ucrReceiverCarryColumns.GetVariableNamesAsList()
-                    clsSelectDataFunction.AddParameter(strColumn, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
-                    iPosition = iPosition + 1
-                Next
-            End If
-        End If
+    Private Sub ucrMultipleColumnsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleColumnsReceiver.ControlValueChanged
+
+        ValuesfillParameter()
+    End Sub
+
+    Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
         AddRemoveDataOrPipeOperator()
+        CarryColumnsParameter()
+
     End Sub
 
     Private Sub ValuesfillParameter()
+        Dim clsCommaMultiple As New ROperator
+        clsCommaMultiple.SetOperation(",")
+        Dim position As Integer
+        position = 0
         If rdoSingle.Checked Then
-            clsDcastFunction.AddParameter(ucrReceiverColumnToUnstack.GetParameter)
-        ElseIf rdoMultiple.Checked Then
-            clsDcastFunction.RemoveParameterByName("values_from")
-            clsDcastFunction.AddParameter(ucrMultipleColumnsReceiver.GetParameter)
-        End If
+            clsSelectDataFunction.RemoveParameterByName("Multiple_Values")
+            clsDcastFunction.AddParameter("values_from", ucrReceiverColumnToUnstack.GetVariableNames(False), iPosition:=2)
+            clsSelectDataFunction.AddParameter("single", ucrReceiverColumnToUnstack.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
 
+        ElseIf rdoMultiple.Checked Then
+            clsSelectDataFunction.RemoveParameterByName("single")
+            For Each strMultiple In ucrMultipleColumnsReceiver.GetVariableNamesAsList()
+                clsCommaMultiple.AddParameter(strMultiple, strMultiple, iPosition:=position)
+                position = position + 1
+            Next
+
+            clsSelectDataFunction.AddParameter("Multiple_Values", clsROperatorParameter:=clsCommaMultiple, iPosition:=4, bIncludeArgumentName:=False)
+            clsDcastFunction.AddParameter("values_from", ucrMultipleColumnsReceiver.GetVariableNames(False), iPosition:=2)
+
+        End If
     End Sub
 
     Private Sub AddRemoveDataOrPipeOperator()
@@ -240,11 +228,26 @@ Public Class dlgUnstack
         End If
     End Sub
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactorToUnstackby.IsEmpty() AndAlso ucrNewDFName.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        If rdoSingle.Checked Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrReceiverColumnToUnstack.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoMultiple.Checked Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrMultipleColumnsReceiver.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoRestoreHierarchy.Checked Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -261,6 +264,8 @@ Public Class dlgUnstack
 
     Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForUnstack.ControlValueChanged
         NewDefaultName()
+        AddRemoveDataOrPipeOperator()
+
     End Sub
 
     Private Sub SetFormula()
@@ -282,9 +287,41 @@ Public Class dlgUnstack
         End If
     End Sub
 
+    Private Sub CarryColumnsParameter()
+        Dim clsTempCommaOperator As New ROperator
+        clsTempCommaOperator.SetOperation(",")
+        Dim iposition As Integer = 0
+
+        If ucrChkCarryColumns.Checked Then
+            For Each strcolumn In ucrReceiverCarryColumns.GetVariableNamesAsList
+                clsTempCommaOperator.AddParameter(strcolumn, strcolumn, iPosition:=iposition)
+                iposition = iposition + 1
+            Next
+
+            If rdoSingle.Checked Then
+                clsSelectDataFunction.AddParameter("comma", clsROperatorParameter:=clsTempCommaOperator, iPosition:=3, bIncludeArgumentName:=False)
+            ElseIf rdoMultiple.Checked Then
+                clsTempCommaOperator.ClearParameters()
+                For Each strcolumn In ucrReceiverCarryColumns.GetVariableNamesAsList
+                    If Not ucrMultipleColumnsReceiver.GetVariableNamesAsList.Contains(strcolumn) Then
+                        clsTempCommaOperator.AddParameter(strcolumn, strcolumn, iPosition:=iposition)
+                        iposition = iposition + 1
+                    End If
+                Next
+                clsSelectDataFunction.AddParameter("comma", clsROperatorParameter:=clsTempCommaOperator, iPosition:=3, bIncludeArgumentName:=False)
+
+            ElseIf rdoRestoreHierarchy.Checked Then
+                clsCommaOperator.AddParameter("comma", clsROperatorParameter:=clsTempCommaOperator, iPosition:=1)
+            End If
+        Else
+            clsSelectDataFunction.RemoveParameterByName("comma")
+            clsCommaOperator.RemoveParameterByName("comma")
+        End If
+
+    End Sub
     Private Sub ucrReceiverCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCarryColumns.ControlValueChanged, ucrReceiverFactorToUnstackby.ControlValueChanged
         SetFormula()
-
+        CarryColumnsParameter()
     End Sub
 
     Private Sub ucrPnlUnstackCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlUnstackCol.ControlValueChanged
@@ -305,6 +342,7 @@ Public Class dlgUnstack
         CarryColumnsLabelReceiverLocation()
         SetFormula()
         ValuesfillParameter()
+        CarryColumnsParameter()
     End Sub
 
     Private Sub CarryColumnsLabelReceiverLocation()
@@ -321,7 +359,7 @@ Public Class dlgUnstack
 
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -331,4 +369,7 @@ Public Class dlgUnstack
         End If
     End Sub
 
+    Private Sub ucrReceiverColumnToUnstack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnToUnstack.ControlValueChanged
+        ValuesfillParameter()
+    End Sub
 End Class

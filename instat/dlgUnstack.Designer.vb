@@ -44,10 +44,9 @@ Partial Class dlgUnstack
         Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
         Me.lblMultipleColumns = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
-        Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrInputTextPrefix = New instat.ucrInputTextBox()
+        Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrNudValuesFill = New instat.ucrNud()
-        Me.ucrChkAddPrefix = New instat.ucrCheck()
         Me.ucrReceiverColumnToUnstack = New instat.ucrReceiverSingle()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrReceiverCarryColumns = New instat.ucrReceiverMultiple()
@@ -57,6 +56,7 @@ Partial Class dlgUnstack
         Me.ucrPnlUnstackCol = New instat.UcrPanel()
         Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
         Me.ucrChkValuesFill = New instat.ucrCheck()
+        Me.ucrChkAddPrefix = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -108,12 +108,6 @@ Partial Class dlgUnstack
         Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
         Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
         '
-        'ucrChkCarryColumns
-        '
-        Me.ucrChkCarryColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkCarryColumns, "ucrChkCarryColumns")
-        Me.ucrChkCarryColumns.Name = "ucrChkCarryColumns"
-        '
         'ucrInputTextPrefix
         '
         Me.ucrInputTextPrefix.AddQuotesIfUnrecognised = True
@@ -121,6 +115,12 @@ Partial Class dlgUnstack
         Me.ucrInputTextPrefix.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTextPrefix, "ucrInputTextPrefix")
         Me.ucrInputTextPrefix.Name = "ucrInputTextPrefix"
+        '
+        'ucrChkCarryColumns
+        '
+        Me.ucrChkCarryColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCarryColumns, "ucrChkCarryColumns")
+        Me.ucrChkCarryColumns.Name = "ucrChkCarryColumns"
         '
         'ucrNudValuesFill
         '
@@ -131,12 +131,6 @@ Partial Class dlgUnstack
         Me.ucrNudValuesFill.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudValuesFill.Name = "ucrNudValuesFill"
         Me.ucrNudValuesFill.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkAddPrefix
-        '
-        Me.ucrChkAddPrefix.Checked = False
-        resources.ApplyResources(Me.ucrChkAddPrefix, "ucrChkAddPrefix")
-        Me.ucrChkAddPrefix.Name = "ucrChkAddPrefix"
         '
         'ucrReceiverColumnToUnstack
         '
@@ -202,6 +196,12 @@ Partial Class dlgUnstack
         Me.ucrChkValuesFill.Checked = False
         resources.ApplyResources(Me.ucrChkValuesFill, "ucrChkValuesFill")
         Me.ucrChkValuesFill.Name = "ucrChkValuesFill"
+        '
+        'ucrChkAddPrefix
+        '
+        Me.ucrChkAddPrefix.Checked = False
+        resources.ApplyResources(Me.ucrChkAddPrefix, "ucrChkAddPrefix")
+        Me.ucrChkAddPrefix.Name = "ucrChkAddPrefix"
         '
         'dlgUnstack
         '

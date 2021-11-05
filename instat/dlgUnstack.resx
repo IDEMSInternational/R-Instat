@@ -318,6 +318,27 @@
   <data name="&gt;&gt;lblColumnToUnstack.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 320</value>
+  </data>
+  <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputTextPrefix.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Name" xml:space="preserve">
+    <value>ucrInputTextPrefix</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 233</value>
   </data>
@@ -342,27 +363,6 @@
   <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputTextPrefix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 320</value>
-  </data>
-  <data name="ucrInputTextPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 21</value>
-  </data>
-  <data name="ucrInputTextPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Name" xml:space="preserve">
-    <value>ucrInputTextPrefix</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextPrefix.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrNudValuesFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 263</value>
   </data>
@@ -383,27 +383,6 @@
   </data>
   <data name="&gt;&gt;ucrNudValuesFill.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="ucrChkAddPrefix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 319</value>
-  </data>
-  <data name="ucrChkAddPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 20</value>
-  </data>
-  <data name="ucrChkAddPrefix.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Name" xml:space="preserve">
-    <value>ucrChkAddPrefix</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
-    <value>18</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -596,6 +575,27 @@
   </data>
   <data name="&gt;&gt;ucrChkValuesFill.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="ucrChkAddPrefix.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 319</value>
+  </data>
+  <data name="ucrChkAddPrefix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 20</value>
+  </data>
+  <data name="ucrChkAddPrefix.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPrefix.Name" xml:space="preserve">
+    <value>ucrChkAddPrefix</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPrefix.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPrefix.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
