@@ -30,6 +30,7 @@ Public Class dlgImportDataset
     Private strCurrentDirectory As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
+    Private strlastFileName As String = ""
     Public strFileToOpenOn As String = ""
     Private bDialogLoaded As Boolean = False
     Private iDataFrameCount As Integer
@@ -542,6 +543,9 @@ Public Class dlgImportDataset
             If File.Exists(strFileOrFolderPath) Then
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFileOrFolderPath)
+                'getting the name of the file without replacing any characters
+                'so that its possible to reload the file after checking and unchecking the all file check box 
+                strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
             ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
@@ -1010,7 +1014,7 @@ Public Class dlgImportDataset
         If ucrChkMultipleFiles.Checked Then
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
         Else
-            SetDialogStateFromFile(strCurrentDirectory & "\" & strFileName & strFileExtension)
+            SetDialogStateFromFile(strCurrentDirectory & "\" & strlastFileName & strFileExtension)
         End If
         TestOkEnabled()
     End Sub

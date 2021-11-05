@@ -41,6 +41,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.mnuDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeOneVariableVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator72 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator33 = New System.Windows.Forms.ToolStripSeparator()
@@ -103,6 +105,7 @@ Partial Class frmMain
         Me.mnuModelFitModelFourVariables = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelFitModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelFitModelMachineLearning = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator57 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelFitModelHypothesisTestsKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelFitModelModelKeyboard = New System.Windows.Forms.ToolStripMenuItem()
@@ -673,8 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeOneVariableVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator72 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -713,6 +714,16 @@ Partial Class frmMain
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
         resources.ApplyResources(Me.mnuDescribeOneVariable, "mnuDescribeOneVariable")
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
+        '
+        'mnuDescribeOneVariableVisualiseData
+        '
+        Me.mnuDescribeOneVariableVisualiseData.Name = "mnuDescribeOneVariableVisualiseData"
+        resources.ApplyResources(Me.mnuDescribeOneVariableVisualiseData, "mnuDescribeOneVariableVisualiseData")
+        '
+        'ToolStripSeparator72
+        '
+        Me.ToolStripSeparator72.Name = "ToolStripSeparator72"
+        resources.ApplyResources(Me.ToolStripSeparator72, "ToolStripSeparator72")
         '
         'mnuDescribeOneVariableSummarise
         '
@@ -1023,7 +1034,7 @@ Partial Class frmMain
         '
         'mnuModelFitModel
         '
-        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.ToolStripSeparator57, Me.mnuModelFitModelHypothesisTestsKeyboard, Me.mnuModelFitModelModelKeyboard})
+        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.mnuModelFitModelMachineLearning, Me.ToolStripSeparator57, Me.mnuModelFitModelHypothesisTestsKeyboard, Me.mnuModelFitModelModelKeyboard})
         Me.mnuModelFitModel.Name = "mnuModelFitModel"
         resources.ApplyResources(Me.mnuModelFitModel, "mnuModelFitModel")
         Me.mnuModelFitModel.Tag = "Fit_Model..."
@@ -1057,6 +1068,11 @@ Partial Class frmMain
         '
         Me.mnuModelFitModelGeneral.Name = "mnuModelFitModelGeneral"
         resources.ApplyResources(Me.mnuModelFitModelGeneral, "mnuModelFitModelGeneral")
+        '
+        'mnuModelFitModelMachineLearning
+        '
+        resources.ApplyResources(Me.mnuModelFitModelMachineLearning, "mnuModelFitModelMachineLearning")
+        Me.mnuModelFitModelMachineLearning.Name = "mnuModelFitModelMachineLearning"
         '
         'ToolStripSeparator57
         '
@@ -3476,8 +3492,8 @@ Partial Class frmMain
         '
         'mnuPrepareDataObjectReorderDataFrames
         '
-        resources.ApplyResources(Me.mnuPrepareDataObjectReorderDataFrames, "mnuPrepareDataObjectReorderDataFrames")
         Me.mnuPrepareDataObjectReorderDataFrames.Name = "mnuPrepareDataObjectReorderDataFrames"
+        resources.ApplyResources(Me.mnuPrepareDataObjectReorderDataFrames, "mnuPrepareDataObjectReorderDataFrames")
         Me.mnuPrepareDataObjectReorderDataFrames.Tag = "Reorder_Data_Frames..."
         '
         'mnuPrepareDataObjectCopyDataFrame
@@ -4263,16 +4279,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuDescribeOneVariableVisualiseData
-        '
-        Me.mnuDescribeOneVariableVisualiseData.Name = "mnuDescribeOneVariableVisualiseData"
-        resources.ApplyResources(Me.mnuDescribeOneVariableVisualiseData, "mnuDescribeOneVariableVisualiseData")
-        '
-        'ToolStripSeparator72
-        '
-        Me.ToolStripSeparator72.Name = "ToolStripSeparator72"
-        resources.ApplyResources(Me.ToolStripSeparator72, "ToolStripSeparator72")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4954,4 +4960,5 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareDataReshapeScaleOrDistance As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableVisualiseData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator72 As ToolStripSeparator
+    Friend WithEvents mnuModelFitModelMachineLearning As ToolStripMenuItem
 End Class
