@@ -94,9 +94,9 @@ Public Class dlgTransformText
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=20, bNewLinkedChangeToDefaultState:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudWidthTrunc, {rdoTruncate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=20, bNewLinkedChangeToDefaultState:=True)
-        ucrPnlOperation.AddToLinkedControls(ucrNudWidthWrap, {rdoWrap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=40, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudWidthTrunc, {rdoTruncate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudWidthWrap, {rdoWrap}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOperation.AddToLinkedControls(ucrPnlSide, {rdoPad}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSide.SetParameter(New RParameter("side", 2))
