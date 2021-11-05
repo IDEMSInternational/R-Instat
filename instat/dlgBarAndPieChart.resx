@@ -745,7 +745,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPlace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 384</value>
+    <value>96, 383</value>
   </data>
   <data name="lblPlace.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -775,7 +775,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 384</value>
+    <value>226, 383</value>
   </data>
   <data name="lblLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -955,7 +955,7 @@
     <value>42</value>
   </data>
   <data name="ucrInputPlace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 380</value>
+    <value>134, 379</value>
   </data>
   <data name="ucrInputPlace.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 21</value>
@@ -976,7 +976,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 356</value>
+    <value>79, 354</value>
   </data>
   <data name="ucrInputLayout.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1603,7 +1603,7 @@
     <value>54</value>
   </data>
   <data name="ucrInputStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 332</value>
+    <value>79, 330</value>
   </data>
   <data name="ucrInputStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -1669,7 +1669,7 @@
     <value>10, 380</value>
   </data>
   <data name="ucrChkAddLabelsTreemap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 20</value>
+    <value>83, 20</value>
   </data>
   <data name="ucrChkAddLabelsTreemap.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -1774,7 +1774,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 380</value>
+    <value>264, 379</value>
   </data>
   <data name="ucrReceiverLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

@@ -694,7 +694,6 @@ Public Class dlgBarAndPieChart
             'Allows for sync with the layer parameters
             TestOkEnabled()
         End If
-
     End Sub
 
     Private Sub SetDialogOptions()
@@ -864,13 +863,11 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction2.RemoveParameterByName("stat")
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
-
         ElseIf rdoTreeMap.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameterByName("geom_text")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
             clsBaseOperator.AddParameter("geom_treemap", clsRFunctionParameter:=clsGeomTreemapFunction, iPosition:=2)
-
         ElseIf rdoWordCloud.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
@@ -1004,6 +1001,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged, ucrChkIncreaseSize.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
     Private Sub ucrChkAddLabelsTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsTreemap.ControlValueChanged
         If ucrChkAddLabelsTreemap.Checked Then
             clsBaseOperator.AddParameter("geom_treemap_text", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
@@ -1011,5 +1009,4 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
-
 End Class
