@@ -158,7 +158,7 @@ Public Class dlgUnstack
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
-        clsSelectFunction.AddParameter("comma", clsROperatorParameter:=clsCommaOperator, bIncludeArgumentName:=False)
+        clsSelectFunction.AddParameter("comma", clsROperatorParameter:=clsCommaOperator, bIncludeArgumentName:=False, iPosition:=0)
 
         clsCommaOperator.SetOperation(",")
         clsUnstackedOperator.SetOperation("%>%")
@@ -186,14 +186,12 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub ucrMultipleColumnsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleColumnsReceiver.ControlValueChanged
-
         ValuesfillParameter()
     End Sub
 
     Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
         AddRemoveDataOrPipeOperator()
         CarryColumnsParameter()
-
     End Sub
 
     Private Sub ValuesfillParameter()
