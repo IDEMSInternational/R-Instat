@@ -349,10 +349,11 @@ Public Class dlgStack
             ucrBase.clsRsyntax.SetBaseRFunction(clsReshapeFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
         End If
         TestOKEnabled()
     End Sub
+
     Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
         SetSingleOrMultipleOptions()
     End Sub

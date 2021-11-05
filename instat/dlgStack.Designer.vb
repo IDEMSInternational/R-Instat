@@ -51,18 +51,19 @@ Partial Class dlgStack
         Me.ttPattern = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.lblVariable = New System.Windows.Forms.Label()
+        Me.lblSets = New System.Windows.Forms.Label()
+        Me.lblFactorInto = New System.Windows.Forms.Label()
+        Me.ucrInputNamesTo = New instat.ucrInputTextBox()
+        Me.ucrNudNoSets = New instat.ucrNud()
         Me.ucrInputDropPrefix = New instat.ucrInputTextBox()
-        Me.ucrChkDropPrefix = New instat.ucrCheck()
         Me.ucrChkCarryAllColumns = New instat.ucrCheck()
         Me.ucrInputOutput = New instat.ucrInputTextBox()
-        Me.ucrChkUrl = New instat.ucrCheck()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverTextColumn = New instat.ucrReceiverSingle()
         Me.ucrPnlStack = New instat.UcrPanel()
         Me.ucrSaveNewDataName = New instat.ucrSave()
         Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrInputValuesTo = New instat.ucrInputTextBox()
-        Me.ucrInputNamesTo = New instat.ucrInputTextBox()
         Me.ucrReceiverColumnsToCarry = New instat.ucrReceiverMultiple()
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -71,12 +72,11 @@ Partial Class dlgStack
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrChkPunctuation = New instat.ucrCheck()
         Me.ucrChkDropMissingValues = New instat.ucrCheck()
-        Me.ucrChkToLowerCase = New instat.ucrCheck()
+        Me.ucrChkUrl = New instat.ucrCheck()
+        Me.ucrChkDropPrefix = New instat.ucrCheck()
         Me.ucrChkStackMultipleSets = New instat.ucrCheck()
-        Me.ucrNudNoSets = New instat.ucrNud()
-        Me.lblSets = New System.Windows.Forms.Label()
         Me.ucrFactorInto = New instat.ucrInputTextBox()
-        Me.lblFactorInto = New System.Windows.Forms.Label()
+        Me.ucrChkToLowerCase = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -141,6 +141,35 @@ Partial Class dlgStack
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Tag = "Columns_to_Stack:"
         '
+        'lblSets
+        '
+        resources.ApplyResources(Me.lblSets, "lblSets")
+        Me.lblSets.Name = "lblSets"
+        '
+        'lblFactorInto
+        '
+        resources.ApplyResources(Me.lblFactorInto, "lblFactorInto")
+        Me.lblFactorInto.Name = "lblFactorInto"
+        Me.lblFactorInto.Tag = ""
+        '
+        'ucrInputNamesTo
+        '
+        Me.ucrInputNamesTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputNamesTo.IsMultiline = False
+        Me.ucrInputNamesTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNamesTo, "ucrInputNamesTo")
+        Me.ucrInputNamesTo.Name = "ucrInputNamesTo"
+        '
+        'ucrNudNoSets
+        '
+        Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNoSets, "ucrNudNoSets")
+        Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Name = "ucrNudNoSets"
+        Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrInputDropPrefix
         '
         Me.ucrInputDropPrefix.AddQuotesIfUnrecognised = True
@@ -148,12 +177,6 @@ Partial Class dlgStack
         Me.ucrInputDropPrefix.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDropPrefix, "ucrInputDropPrefix")
         Me.ucrInputDropPrefix.Name = "ucrInputDropPrefix"
-        '
-        'ucrChkDropPrefix
-        '
-        Me.ucrChkDropPrefix.Checked = False
-        resources.ApplyResources(Me.ucrChkDropPrefix, "ucrChkDropPrefix")
-        Me.ucrChkDropPrefix.Name = "ucrChkDropPrefix"
         '
         'ucrChkCarryAllColumns
         '
@@ -168,12 +191,6 @@ Partial Class dlgStack
         Me.ucrInputOutput.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOutput, "ucrInputOutput")
         Me.ucrInputOutput.Name = "ucrInputOutput"
-        '
-        'ucrChkUrl
-        '
-        Me.ucrChkUrl.Checked = False
-        resources.ApplyResources(Me.ucrChkUrl, "ucrChkUrl")
-        Me.ucrChkUrl.Name = "ucrChkUrl"
         '
         'ucrReceiverColumnsToBeStack
         '
@@ -216,14 +233,6 @@ Partial Class dlgStack
         Me.ucrInputValuesTo.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputValuesTo, "ucrInputValuesTo")
         Me.ucrInputValuesTo.Name = "ucrInputValuesTo"
-        '
-        'ucrInputNamesTo
-        '
-        Me.ucrInputNamesTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputNamesTo.IsMultiline = False
-        Me.ucrInputNamesTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNamesTo, "ucrInputNamesTo")
-        Me.ucrInputNamesTo.Name = "ucrInputNamesTo"
         '
         'ucrReceiverColumnsToCarry
         '
@@ -283,32 +292,23 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrChkDropMissingValues, "ucrChkDropMissingValues")
         Me.ucrChkDropMissingValues.Name = "ucrChkDropMissingValues"
         '
-        'ucrChkToLowerCase
+        'ucrChkUrl
         '
-        Me.ucrChkToLowerCase.Checked = False
-        resources.ApplyResources(Me.ucrChkToLowerCase, "ucrChkToLowerCase")
-        Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
+        Me.ucrChkUrl.Checked = False
+        resources.ApplyResources(Me.ucrChkUrl, "ucrChkUrl")
+        Me.ucrChkUrl.Name = "ucrChkUrl"
+        '
+        'ucrChkDropPrefix
+        '
+        Me.ucrChkDropPrefix.Checked = False
+        resources.ApplyResources(Me.ucrChkDropPrefix, "ucrChkDropPrefix")
+        Me.ucrChkDropPrefix.Name = "ucrChkDropPrefix"
         '
         'ucrChkStackMultipleSets
         '
         Me.ucrChkStackMultipleSets.Checked = False
         resources.ApplyResources(Me.ucrChkStackMultipleSets, "ucrChkStackMultipleSets")
         Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
-        '
-        'ucrNudNoSets
-        '
-        Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNoSets, "ucrNudNoSets")
-        Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoSets.Name = "ucrNudNoSets"
-        Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSets
-        '
-        resources.ApplyResources(Me.lblSets, "lblSets")
-        Me.lblSets.Name = "lblSets"
         '
         'ucrFactorInto
         '
@@ -318,16 +318,17 @@ Partial Class dlgStack
         resources.ApplyResources(Me.ucrFactorInto, "ucrFactorInto")
         Me.ucrFactorInto.Name = "ucrFactorInto"
         '
-        'lblFactorInto
+        'ucrChkToLowerCase
         '
-        resources.ApplyResources(Me.lblFactorInto, "lblFactorInto")
-        Me.lblFactorInto.Name = "lblFactorInto"
-        Me.lblFactorInto.Tag = ""
+        Me.ucrChkToLowerCase.Checked = False
+        resources.ApplyResources(Me.ucrChkToLowerCase, "ucrChkToLowerCase")
+        Me.ucrChkToLowerCase.Name = "ucrChkToLowerCase"
         '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.ucrInputNamesTo)
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
@@ -341,7 +342,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.rdoUnnest)
         Me.Controls.Add(Me.rdoPivotLonger)
         Me.Controls.Add(Me.ucrPnlStack)
-        Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrInputValuesTo)
         Me.Controls.Add(Me.ucrReceiverColumnsToCarry)
@@ -360,10 +360,10 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrChkDropPrefix)
         Me.Controls.Add(Me.lblOutput)
         Me.Controls.Add(Me.ucrChkStackMultipleSets)
-        Me.Controls.Add(Me.ucrChkToLowerCase)
+        Me.Controls.Add(Me.ucrFactorInto)
+        Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.lblFactorInto)
-        Me.Controls.Add(Me.ucrFactorInto)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
