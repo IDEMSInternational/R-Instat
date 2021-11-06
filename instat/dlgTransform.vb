@@ -505,6 +505,7 @@ Public Class dlgTransform
                 ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
             End If
         ElseIf rdoNonNegative.Checked Then
+            UpdateConstantParameter()
             clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
             If rdoSquareRoot.Checked Then
                 clsPreviewTextFunction = clsSquarerootFunction.Clone
@@ -561,7 +562,7 @@ Public Class dlgTransform
         End If
     End Sub
 
-    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged
+    Private Sub UpdateConstantParameter()
         If ucrChkAddConstant.Checked Then
             clsConstantDummyFunction.AddParameter("checked", "TRUE", iPosition:=0)
             clsSquarerootFunction.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
@@ -575,6 +576,10 @@ Public Class dlgTransform
             clsLogBase10Function.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
             clsNaturalLogFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
         End If
+    End Sub
+
+    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged, ucrNudConstant.ControlValueChanged
+        UpdateConstantParameter()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
