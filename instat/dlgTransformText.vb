@@ -329,11 +329,7 @@ Public Class dlgTransformText
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            ElseIf rdoTruncate.Checked Then
-                ucrBase.OKEnabled(True)
-            ElseIf rdoTrim.Checked Then
-                ucrBase.OKEnabled(True)
-            ElseIf rdoWrap.Checked Then
+            ElseIf rdoTruncate.Checked OrElse rdoTrim.Checked OrElse rdoWrap.Checked Then
                 ucrBase.OKEnabled(True)
             ElseIf rdoWords.Checked Then
                 If Not ucrInputSeparator.IsEmpty() AndAlso ((ucrNudFirstWord.GetText <> "" AndAlso Not ucrChkFirstOr.Checked) OrElse (ucrChkFirstOr.Checked AndAlso Not ucrReceiverFirstWord.IsEmpty)) AndAlso ((ucrNudLastWord.GetText <> "" AndAlso Not ucrChkLastOr.Checked) OrElse (ucrChkLastOr.Checked AndAlso Not ucrReceiverLastWord.IsEmpty)) Then
