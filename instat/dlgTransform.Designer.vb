@@ -73,7 +73,8 @@ Partial Class dlgTransform
         Me.rdoRank = New System.Windows.Forms.RadioButton()
         Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
-        Me.ucrNudConstant = New instat.ucrNud()
+        Me.lblCommandPreview = New System.Windows.Forms.Label()
+        Me.ucrInputPreview = New instat.ucrInputTextBox()
         Me.ucrNudLagPosition = New instat.ucrNud()
         Me.ucrNudRoundOfDigits = New instat.ucrNud()
         Me.ucrNudDiffLag = New instat.ucrNud()
@@ -101,6 +102,7 @@ Partial Class dlgTransform
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
         Me.ucrPnlTies = New instat.UcrPanel()
+        Me.ucrNudConstant = New instat.ucrNud()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -397,15 +399,18 @@ Partial Class dlgTransform
         Me.rdoScale.Tag = "Frequency"
         Me.rdoScale.UseVisualStyleBackColor = False
         '
-        'ucrNudConstant
+        'lblCommandPreview
         '
-        Me.ucrNudConstant.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConstant.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudConstant, "ucrNudConstant")
-        Me.ucrNudConstant.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConstant.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConstant.Name = "ucrNudConstant"
-        Me.ucrNudConstant.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblCommandPreview, "lblCommandPreview")
+        Me.lblCommandPreview.Name = "lblCommandPreview"
+        '
+        'ucrInputPreview
+        '
+        Me.ucrInputPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreview.IsMultiline = False
+        Me.ucrInputPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
+        Me.ucrInputPreview.Name = "ucrInputPreview"
         '
         'ucrNudLagPosition
         '
@@ -599,11 +604,22 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
         Me.ucrPnlTies.Name = "ucrPnlTies"
         '
+        'ucrNudConstant
+        '
+        Me.ucrNudConstant.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConstant.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudConstant, "ucrNudConstant")
+        Me.ucrNudConstant.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudConstant.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConstant.Name = "ucrNudConstant"
+        Me.ucrNudConstant.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgTransform
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrNudConstant)
+        Me.Controls.Add(Me.lblCommandPreview)
+        Me.Controls.Add(Me.ucrInputPreview)
         Me.Controls.Add(Me.grpNumericOptions)
         Me.Controls.Add(Me.grpNonNegative)
         Me.Controls.Add(Me.ucrChkAddConstant)
@@ -631,6 +647,7 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.ucrChkMissingLast)
         Me.Controls.Add(Me.ucrChkDecreasing)
         Me.Controls.Add(Me.grpTies)
+        Me.Controls.Add(Me.ucrNudConstant)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -710,4 +727,6 @@ Partial Class dlgTransform
     Friend WithEvents ucrChkReverse As ucrCheck
     Friend WithEvents ucrChkAddConstant As ucrCheck
     Friend WithEvents ucrNudConstant As ucrNud
+    Friend WithEvents lblCommandPreview As Label
+    Friend WithEvents ucrInputPreview As ucrInputTextBox
 End Class
