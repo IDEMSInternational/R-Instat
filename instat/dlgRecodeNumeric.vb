@@ -72,12 +72,13 @@ Public Class dlgRecodeNumeric
         ttBreakpoint.SetToolTip(rdoBreakPoints, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
 
         ucrChkAddLabels.SetText("Label Groups with Means")
+        ucrChkAddLabels.SetRDefault(bReset)
 
         ucrSaveRecode.SetPrefix("recode")
         ucrSaveRecode.SetSaveTypeAsColumn()
         ucrSaveRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveRecode.SetIsComboBox()
-        ucrSaveRecode.SetLabelText("New column name:")
+        ucrSaveRecode.SetLabelText("New Column Name:")
         ucrSaveRecode.setLinkedReceiver(ucrReceiverRecode)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
@@ -119,11 +120,12 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
+        ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
         ucrPnlRadioButtons.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete Then
+        If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete AndAlso Not ucrNudQuantiles.IsEmpty() AndAlso Not ucrNudMinimum.IsEmpty() AndAlso Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
