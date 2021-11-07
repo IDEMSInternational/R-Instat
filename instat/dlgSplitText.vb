@@ -20,7 +20,7 @@ Public Class dlgSplitText
     Private bReset As Boolean = True
     Private clsTextComponentsFixed, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
     Private clsBinaryColumns As New RFunction
-    Private clsSplitDummyFunction As RFunction
+    Private clsSplitDummyFunction As New RFunction
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,6 +54,7 @@ Public Class dlgSplitText
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSplitText.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoTextComponents}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrPnlTextComponents, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFixedNumberOfComponents)
         ucrNudPieces.SetLinkedDisplayControl(lblNumberofPiecesToReturn)
 
@@ -72,18 +73,21 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
+        'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
         ucrInputPattern.bAllowNonConditionValues = True
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
 
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
-        ucrChkIncludeRegularExpressions.AddParameterPresentCondition(True, "checked")
-        ucrChkIncludeRegularExpressions.AddParameterPresentCondition(False, "checked", False)
+        ucrChkIncludeRegularExpressions.SetParameter(New RParameter("checked", 0))
+        ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIncludeRegularExpressions.SetRDefault("FALSE")
 
         'This is not yet implemented
         ucrChkAddKeyboard.SetText("Add keyboard")
         ucrChkAddKeyboard.Enabled = False
+        ucrChkAddKeyboard.Visible = False
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
@@ -201,14 +205,6 @@ Public Class dlgSplitText
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
         ElseIf rdoMaximumNumberOfComponents.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
-        End If
-    End Sub
-
-    Private Sub ucrChkIncludeRegularExpressions_ControlConteChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlContentsChanged
-        If ucrChkIncludeRegularExpressions.Checked Then
-            clsSplitDummyFunction.AddParameter("checked", "TRUE", iPosition:=0)
-        Else
-            clsSplitDummyFunction.RemoveParameterByName("checked")
         End If
     End Sub
 
