@@ -20,6 +20,7 @@ Public Class dlgSplitText
     Private bReset As Boolean = True
     Private clsTextComponentsFixed, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
     Private clsBinaryColumns As New RFunction
+    Private clsSplitDummyFunction As RFunction
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -71,15 +72,16 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
-        'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
         ucrInputPattern.bAllowNonConditionValues = True
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
 
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
-        ucrChkIncludeRegularExpressions.SetDefaultState(False)
+        ucrChkIncludeRegularExpressions.AddParameterPresentCondition(True, "checked")
+        ucrChkIncludeRegularExpressions.AddParameterPresentCondition(False, "checked", False)
 
+        'This is not yet implemented
         ucrChkAddKeyboard.SetText("Add keyboard")
         ucrChkAddKeyboard.Enabled = False
 
@@ -96,8 +98,7 @@ Public Class dlgSplitText
         clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction
         clsStringCollFunction = New RFunction
-
-        ucrChkIncludeRegularExpressions.Checked = False
+        clsSplitDummyFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
 
@@ -134,6 +135,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
         ucrInputPattern.SetRCode(clsTextComponentsFixed, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
+        ucrChkIncludeRegularExpressions.SetRCode(clsSplitDummyFunction, bReset)
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveColumn.SetRCode(clsTextComponentsFixed, bReset)
@@ -202,7 +204,15 @@ Public Class dlgSplitText
         End If
     End Sub
 
-    Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrPnlSplitText.ControlValueChanged
+    Private Sub ucrChkIncludeRegularExpressions_ControlConteChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlContentsChanged
+        If ucrChkIncludeRegularExpressions.Checked Then
+            clsSplitDummyFunction.AddParameter("checked", "TRUE", iPosition:=0)
+        Else
+            clsSplitDummyFunction.RemoveParameterByName("checked")
+        End If
+    End Sub
+
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrPnlSplitText.ControlValueChanged
         ChangeParametersValues()
     End Sub
 
