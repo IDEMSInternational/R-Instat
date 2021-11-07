@@ -534,429 +534,6 @@
   <data name="&gt;&gt;ucrChkLastOr.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>665, 498</value>
-  </data>
-  <data name="rdoTruncate.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoTruncate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoTruncate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoTruncate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 4</value>
-  </data>
-  <data name="rdoTruncate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoTruncate.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="rdoTruncate.Text" xml:space="preserve">
-    <value>Truncate</value>
-  </data>
-  <data name="rdoTruncate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoTruncate.Name" xml:space="preserve">
-    <value>rdoTruncate</value>
-  </data>
-  <data name="&gt;&gt;rdoTruncate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoTruncate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoTruncate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rdoWrap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoWrap.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoWrap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoWrap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 4</value>
-  </data>
-  <data name="rdoWrap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoWrap.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="rdoWrap.Text" xml:space="preserve">
-    <value>Wrap</value>
-  </data>
-  <data name="rdoWrap.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoWrap.Name" xml:space="preserve">
-    <value>rdoWrap</value>
-  </data>
-  <data name="&gt;&gt;rdoWrap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoWrap.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoWrap.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rdoTrim.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoTrim.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoTrim.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoTrim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 4</value>
-  </data>
-  <data name="rdoTrim.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoTrim.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="rdoTrim.Text" xml:space="preserve">
-    <value>Trim</value>
-  </data>
-  <data name="rdoTrim.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoTrim.Name" xml:space="preserve">
-    <value>rdoTrim</value>
-  </data>
-  <data name="&gt;&gt;rdoTrim.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoTrim.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoTrim.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="rdoWords.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoWords.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoWords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>495, 4</value>
-  </data>
-  <data name="rdoWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoWords.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="rdoWords.Text" xml:space="preserve">
-    <value>Words</value>
-  </data>
-  <data name="rdoWords.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoWords.Name" xml:space="preserve">
-    <value>rdoWords</value>
-  </data>
-  <data name="&gt;&gt;rdoWords.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoWords.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoWords.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="rdoSubstring.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoSubstring.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoSubstring.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoSubstring.Location" type="System.Drawing.Point, System.Drawing">
-    <value>576, 4</value>
-  </data>
-  <data name="rdoSubstring.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoSubstring.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="rdoSubstring.Text" xml:space="preserve">
-    <value>Substring</value>
-  </data>
-  <data name="rdoSubstring.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoSubstring.Name" xml:space="preserve">
-    <value>rdoSubstring</value>
-  </data>
-  <data name="&gt;&gt;rdoSubstring.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSubstring.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoSubstring.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="rdoPad.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoPad.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoPad.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoPad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 4</value>
-  </data>
-  <data name="rdoPad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoPad.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdoPad.Text" xml:space="preserve">
-    <value>Pad</value>
-  </data>
-  <data name="rdoPad.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoPad.Name" xml:space="preserve">
-    <value>rdoPad</value>
-  </data>
-  <data name="&gt;&gt;rdoPad.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoPad.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoPad.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="rdoLength.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoLength.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoLength.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 4</value>
-  </data>
-  <data name="rdoLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoLength.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdoLength.Text" xml:space="preserve">
-    <value>Length</value>
-  </data>
-  <data name="rdoLength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoLength.Name" xml:space="preserve">
-    <value>rdoLength</value>
-  </data>
-  <data name="&gt;&gt;rdoLength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoLength.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoLength.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="rdoCase.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoCase.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoCase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoCase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 4</value>
-  </data>
-  <data name="rdoCase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 43</value>
-  </data>
-  <data name="rdoCase.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoCase.Text" xml:space="preserve">
-    <value>Case</value>
-  </data>
-  <data name="rdoCase.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoCase.Name" xml:space="preserve">
-    <value>rdoCase</value>
-  </data>
-  <data name="&gt;&gt;rdoCase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoCase.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 417</value>
-  </data>
-  <data name="ucrNewColName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 22</value>
-  </data>
-  <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColName.Name" xml:space="preserve">
-    <value>ucrNewColName</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColName.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColName.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ucrReceiverTransformText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 100</value>
-  </data>
-  <data name="ucrReceiverTransformText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverTransformText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 26</value>
-  </data>
-  <data name="ucrReceiverTransformText.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverTransformText.Name" xml:space="preserve">
-    <value>ucrReceiverTransformText</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverTransformText.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverTransformText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverTransformText.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrSelectorForTransformText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 50</value>
-  </data>
-  <data name="ucrSelectorForTransformText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorForTransformText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 185</value>
-  </data>
-  <data name="ucrSelectorForTransformText.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForTransformText.Name" xml:space="preserve">
-    <value>ucrSelectorForTransformText</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForTransformText.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForTransformText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForTransformText.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 442</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 53</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="ucrPnlOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="ucrPnlOperation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 43</value>
-  </data>
-  <data name="ucrPnlOperation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOperation.Name" xml:space="preserve">
-    <value>ucrPnlOperation</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOperation.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOperation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOperation.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Transform Text Column</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgTransformText</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="ucrReceiverLastWord.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 110</value>
   </data>
@@ -1619,5 +1196,431 @@
   </data>
   <data name="&gt;&gt;grpParameters.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="rdoCase.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoCase.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoCase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoCase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 8</value>
+  </data>
+  <data name="rdoCase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoCase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoCase.Text" xml:space="preserve">
+    <value>Case</value>
+  </data>
+  <data name="rdoCase.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoCase.Name" xml:space="preserve">
+    <value>rdoCase</value>
+  </data>
+  <data name="&gt;&gt;rdoCase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoCase.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="rdoLength.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoLength.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoLength.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 8</value>
+  </data>
+  <data name="rdoLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoLength.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoLength.Text" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="rdoLength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoLength.Name" xml:space="preserve">
+    <value>rdoLength</value>
+  </data>
+  <data name="&gt;&gt;rdoLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLength.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoLength.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="rdoPad.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoPad.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoPad.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoPad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 8</value>
+  </data>
+  <data name="rdoPad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoPad.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoPad.Text" xml:space="preserve">
+    <value>Pad</value>
+  </data>
+  <data name="rdoPad.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoPad.Name" xml:space="preserve">
+    <value>rdoPad</value>
+  </data>
+  <data name="&gt;&gt;rdoPad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPad.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoPad.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoSubstring.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoSubstring.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoSubstring.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSubstring.Location" type="System.Drawing.Point, System.Drawing">
+    <value>452, 8</value>
+  </data>
+  <data name="rdoSubstring.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoSubstring.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoSubstring.Text" xml:space="preserve">
+    <value>Substring</value>
+  </data>
+  <data name="rdoSubstring.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoSubstring.Name" xml:space="preserve">
+    <value>rdoSubstring</value>
+  </data>
+  <data name="&gt;&gt;rdoSubstring.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSubstring.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoSubstring.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoWords.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoWords.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoWords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoWords.Location" type="System.Drawing.Point, System.Drawing">
+    <value>389, 8</value>
+  </data>
+  <data name="rdoWords.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoWords.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rdoWords.Text" xml:space="preserve">
+    <value>Words</value>
+  </data>
+  <data name="rdoWords.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoWords.Name" xml:space="preserve">
+    <value>rdoWords</value>
+  </data>
+  <data name="&gt;&gt;rdoWords.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoWords.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoWords.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoTrim.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoTrim.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoTrim.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoTrim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 8</value>
+  </data>
+  <data name="rdoTrim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoTrim.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoTrim.Text" xml:space="preserve">
+    <value>Trim</value>
+  </data>
+  <data name="rdoTrim.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoTrim.Name" xml:space="preserve">
+    <value>rdoTrim</value>
+  </data>
+  <data name="&gt;&gt;rdoTrim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoTrim.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoTrim.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoWrap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoWrap.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoWrap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoWrap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 8</value>
+  </data>
+  <data name="rdoWrap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoWrap.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoWrap.Text" xml:space="preserve">
+    <value>Wrap</value>
+  </data>
+  <data name="rdoWrap.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoWrap.Name" xml:space="preserve">
+    <value>rdoWrap</value>
+  </data>
+  <data name="&gt;&gt;rdoWrap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoWrap.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoWrap.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoTruncate.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoTruncate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoTruncate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoTruncate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 8</value>
+  </data>
+  <data name="rdoTruncate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 34</value>
+  </data>
+  <data name="rdoTruncate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoTruncate.Text" xml:space="preserve">
+    <value>Truncate</value>
+  </data>
+  <data name="rdoTruncate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoTruncate.Name" xml:space="preserve">
+    <value>rdoTruncate</value>
+  </data>
+  <data name="&gt;&gt;rdoTruncate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoTruncate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoTruncate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 417</value>
+  </data>
+  <data name="ucrNewColName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 22</value>
+  </data>
+  <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColName.Name" xml:space="preserve">
+    <value>ucrNewColName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>530, 498</value>
+  </data>
+  <data name="ucrSelectorForTransformText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="ucrSelectorForTransformText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForTransformText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 185</value>
+  </data>
+  <data name="ucrSelectorForTransformText.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForTransformText.Name" xml:space="preserve">
+    <value>ucrSelectorForTransformText</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForTransformText.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForTransformText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForTransformText.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 442</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 53</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrPnlOperation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 4</value>
+  </data>
+  <data name="ucrPnlOperation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>523, 43</value>
+  </data>
+  <data name="ucrPnlOperation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOperation.Name" xml:space="preserve">
+    <value>ucrPnlOperation</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOperation.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOperation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOperation.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Transform Text Column</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgTransformText</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverTransformText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 100</value>
+  </data>
+  <data name="ucrReceiverTransformText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverTransformText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 26</value>
+  </data>
+  <data name="ucrReceiverTransformText.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverTransformText.Name" xml:space="preserve">
+    <value>ucrReceiverTransformText</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverTransformText.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverTransformText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverTransformText.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
 </root>
