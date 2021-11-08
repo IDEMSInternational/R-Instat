@@ -177,6 +177,8 @@ Public Class dlgSplitText
                 strPattern = Chr(34) & "-" & Chr(34)
             Case "Underscore _"
                 strPattern = Chr(34) & "_" & Chr(34)
+            Case Else
+                strPattern = Chr(34) & ucrInputPattern.GetText & Chr(34)
         End Select
         clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
         clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
