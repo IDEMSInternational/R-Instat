@@ -2398,13 +2398,26 @@ Public Class RLink
                     'Assign the parameter Name
                     clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName)
                     'Adding the parameter value
-                    clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                    'check to remove the [1] notation before some parameter values
+                    If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
+                        Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
+                        clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(strcleanArgument).lstRStatements(0).clsElement
+                    Else
+                        'Empty string are not accepted hence the mdidifaction below
+                        If expTemp.AsCharacter(iParameterValue) = "" Then
+                            clsNewRParameter.clsArgValueDefault = New RScript.clsRScript("""").lstRStatements(0).clsElement
+                        Else
+                            clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                        End If
+
+                    End If
                     'Assign the parameter Value
                     clsNewRParameter.iArgPosDefinition = iNewArgPosition
 
                     iNewArgPosition = iNewArgPosition + 1
                     iParameterName = iParameterName + 3
                     iParameterValue = iParameterValue + 3
+                    lstRParameters.Add(clsNewRParameter)
                 End While
             End If
         Else
