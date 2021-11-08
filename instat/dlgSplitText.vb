@@ -64,17 +64,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrReceiverSplitTextColumn.bUseFilteredData = False
 
-        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
-        dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
-        dctPatternPairs.Add("Period .", Chr(34) & "." & Chr(34))
-        dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
-        dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
-        dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
-        dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
-        dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
-        ucrInputPattern.SetItems(dctPatternPairs)
-        'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
-        ucrInputPattern.bAllowNonConditionValues = True
+        ucrInputPattern.SetItems({"Space ( )", "Period .", "Comma ,", "Colon :", "Semicolon ;", "Hyphen -", "Underscore _"})
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
@@ -105,6 +95,7 @@ Public Class dlgSplitText
         clsSplitDummyFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
+        ucrInputPattern.cboInput.SelectedIndex = 2
 
         clsStringCollFunction.SetPackageName("stringr")
         clsStringCollFunction.SetRCommand("coll")
@@ -133,11 +124,8 @@ Public Class dlgSplitText
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=2)
         ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, bReset)
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
-        ucrInputPattern.SetRCode(clsTextComponentsFixed, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsSplitDummyFunction, bReset)
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -191,6 +179,7 @@ Public Class dlgSplitText
                 strPattern = Chr(34) & "_" & Chr(34)
         End Select
         clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
+        clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", strPattern, iPosition:=1)
