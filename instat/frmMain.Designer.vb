@@ -1071,8 +1071,8 @@ Partial Class frmMain
         '
         'mnuModelFitModelMachineLearning
         '
-        Me.mnuModelFitModelMachineLearning.Name = "mnuModelFitModelMachineLearning"
         resources.ApplyResources(Me.mnuModelFitModelMachineLearning, "mnuModelFitModelMachineLearning")
+        Me.mnuModelFitModelMachineLearning.Name = "mnuModelFitModelMachineLearning"
         '
         'ToolStripSeparator57
         '
