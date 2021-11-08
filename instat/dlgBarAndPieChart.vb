@@ -118,8 +118,8 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoTreeMap)
         ucrPnlOptions.AddRadioButton(rdoWordCloud)
 
-        ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "coordpolar")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, {"coordpolar", "geom_bar", "geom_text"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
@@ -357,6 +357,7 @@ Public Class dlgBarAndPieChart
         clsOpeningSubsetOperator2 = New ROperator
         clsOpeningSubsetOperator1 = New ROperator
         clsRggplotFunction = New RFunction
+        clsRgeomBarFunction = New RFunction
         clsRgeomBarFunction1 = New RFunction
         clsRgeomBarFunction2 = New RFunction
         clsGeomLollipopFunction = New RFunction
@@ -681,18 +682,12 @@ Public Class dlgBarAndPieChart
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomTreemapFunction, clsNewGlobalAesFunc:=clsGeomTreemapAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
             sdgLayerOptions.ShowDialog()
             bResetBarLayerSubdialog = False
-
-            'Allows for sync with the layer parameters
-            TestOkEnabled()
         End If
 
         If rdoWordCloud.Checked Then
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomTextWordcloudFunction, clsNewGlobalAesFunc:=clsGeomTextWordcloudAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
             sdgLayerOptions.ShowDialog()
             bResetBarLayerSubdialog = False
-
-            'Allows for sync with the layer parameters
-            TestOkEnabled()
         End If
     End Sub
 
@@ -814,7 +809,6 @@ Public Class dlgBarAndPieChart
         clsPieAesFunction.RemoveParameterByName("x")
         clsPieAesFunction.RemoveParameterByName("y")
         clsBaseOperator.RemoveParameterByName("geom_lollipop")
-        clsBaseOperator.RemoveParameterByName("geom_bar")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
