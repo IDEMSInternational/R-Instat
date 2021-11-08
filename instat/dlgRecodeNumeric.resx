@@ -331,7 +331,7 @@
     <value>226, 106</value>
   </data>
   <data name="grpQuantileGroups.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>3</value>
   </data>
   <data name="grpQuantileGroups.Text" xml:space="preserve">
     <value>Groups</value>
@@ -364,7 +364,7 @@
     <value>149, 20</value>
   </data>
   <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
     <value>ucrChkAddLabels</value>
@@ -388,7 +388,7 @@
     <value>328, 22</value>
   </data>
   <data name="ucrSaveRecode.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrSaveRecode.Name" xml:space="preserve">
     <value>ucrSaveRecode</value>
@@ -442,7 +442,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -455,9 +455,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

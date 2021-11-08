@@ -45,6 +45,10 @@ Partial Class dlgRecodeNumeric
         Me.rdoBreakPoints = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrNudMinimum = New instat.ucrNud()
+        Me.ucrNudQuantiles = New instat.ucrNud()
+        Me.ucrPnlRadioButtons = New instat.UcrPanel()
         Me.ttBreakpoint = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttQuantiles = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttMinimum = New System.Windows.Forms.ToolTip(Me.components)
@@ -53,10 +57,6 @@ Partial Class dlgRecodeNumeric
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
-        Me.ucrNudMinimum = New instat.ucrNud()
-        Me.ucrNudQuantiles = New instat.ucrNud()
-        Me.ucrPnlRadioButtons = New instat.UcrPanel()
         Me.grpQuantileGroups.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -100,39 +100,6 @@ Partial Class dlgRecodeNumeric
         Me.rdoQuantiles.TabStop = True
         Me.rdoQuantiles.UseVisualStyleBackColor = True
         '
-        'ucrChkAddLabels
-        '
-        Me.ucrChkAddLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
-        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
-        '
-        'ucrSaveRecode
-        '
-        resources.ApplyResources(Me.ucrSaveRecode, "ucrSaveRecode")
-        Me.ucrSaveRecode.Name = "ucrSaveRecode"
-        '
-        'ucrReceiverRecode
-        '
-        Me.ucrReceiverRecode.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverRecode, "ucrReceiverRecode")
-        Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
-        Me.ucrReceiverRecode.Selector = Nothing
-        Me.ucrReceiverRecode.strNcFilePath = ""
-        Me.ucrReceiverRecode.ucrSelector = Nothing
-        '
-        'ucrSelectorForRecode
-        '
-        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
-        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'ucrMultipleNumericRecode
         '
         Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
@@ -165,6 +132,39 @@ Partial Class dlgRecodeNumeric
         '
         resources.ApplyResources(Me.ucrPnlRadioButtons, "ucrPnlRadioButtons")
         Me.ucrPnlRadioButtons.Name = "ucrPnlRadioButtons"
+        '
+        'ucrChkAddLabels
+        '
+        Me.ucrChkAddLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
+        '
+        'ucrSaveRecode
+        '
+        resources.ApplyResources(Me.ucrSaveRecode, "ucrSaveRecode")
+        Me.ucrSaveRecode.Name = "ucrSaveRecode"
+        '
+        'ucrReceiverRecode
+        '
+        Me.ucrReceiverRecode.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverRecode, "ucrReceiverRecode")
+        Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
+        Me.ucrReceiverRecode.Selector = Nothing
+        Me.ucrReceiverRecode.strNcFilePath = ""
+        Me.ucrReceiverRecode.ucrSelector = Nothing
+        '
+        'ucrSelectorForRecode
+        '
+        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForRecode.bShowHiddenColumns = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
+        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgRecodeNumeric
         '
