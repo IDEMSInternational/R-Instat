@@ -503,17 +503,11 @@
   <data name="mnuModelFitModelGeneral.Text" xml:space="preserve">
     <value>General...</value>
   </data>
-  <data name="mnuModelFitModelMachineLearning.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuModelFitModelMachineLearning.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
   </data>
   <data name="mnuModelFitModelMachineLearning.Text" xml:space="preserve">
     <value>Machine Learning (Caret)...</value>
-  </data>
-  <data name="mnuModelFitModelMachineLearning.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="ToolStripSeparator57.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
