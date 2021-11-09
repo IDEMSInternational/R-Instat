@@ -124,6 +124,7 @@ Public Class ucrDataView
     Private Sub AddRowData(dataFrame As clsDataFrame, workSheet As Worksheet)
         Dim textColour As Color
         Dim rngDataRange As RangePosition
+        Dim strRowNames As String()
 
         workSheet.Rows = dataFrame.iDisplayedRowCount
 
@@ -136,11 +137,12 @@ Public Class ucrDataView
             textColour = Color.DarkBlue
         End If
 
+        strRowNames = dataFrame.strRowNames()
         For i = 0 To workSheet.Rows - 1
             For j = 0 To workSheet.Columns - 1
                 workSheet(row:=i, col:=j) = dataFrame.Data(i, j)
             Next
-            workSheet.RowHeaders.Item(i).Text = dataFrame.strRowName(i)
+            workSheet.RowHeaders.Item(i).Text = strRowNames(i)
             workSheet.RowHeaders(i).TextColor = textColour
         Next
     End Sub
@@ -274,7 +276,7 @@ Public Class ucrDataView
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         ReplaceValueInData(e.NewData.ToString(),
                            GetCurrentDataFrameFocus().clsVisiblePage.lstColumns(e.Cell.Column).strName,
-                           GetCurrentDataFrameFocus().clsVisiblePage.RowName(e.Cell.Row))
+                           GetCurrentDataFrameFocus().clsVisiblePage.RowNames()(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
     End Sub
 
