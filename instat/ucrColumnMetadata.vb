@@ -132,8 +132,6 @@ Public Class ucrColumnMetadata
         'Therefore blank worksheet is added
         Dim fillWorksheet As Worksheet = grid.CreateWorksheet("blank")
         grid.AddWorksheet(fillWorksheet)
-        fillWorksheet.ColumnCount = 1
-        fillWorksheet.RowCount = 0
     End Sub
 
     Private Sub loadForm()
