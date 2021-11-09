@@ -113,22 +113,24 @@ Public Class clsDataBook
     ''' Updates all the dataframes and metadata where the data has changed
     ''' </summary>
     Public Sub RefreshData()
-        Dim listOfDataFrames As List(Of String)
-        Dim dataFrame As clsDataFrame
         If Not _RLink.bInstatObjectExists Then
-            listOfDataFrames = New List(Of String)
-            DeleteOldDataFrames(listOfDataFrames)
+            DeleteAllDataFrames()
             Exit Sub
         End If
         If HasDataChanged() Then
-            listOfDataFrames = GetDataFrameNames()
+            Dim listOfDataFrames As List(Of String) = GetDataFrameNames()
             DeleteOldDataFrames(listOfDataFrames)
             For Each strDataFrameName In listOfDataFrames
-                dataFrame = GetOrCreateDataFrame(strDataFrameName)
+                Dim dataFrame As clsDataFrame = GetOrCreateDataFrame(strDataFrameName)
                 dataFrame.RefreshData()
             Next
             _clsDataFrameMetaData.RefreshData()
         End If
+    End Sub
+
+    Private Sub DeleteAllDataFrames()
+        Dim listOfDataFrames As New List(Of String)
+        DeleteOldDataFrames(listOfDataFrames)
     End Sub
 
     Private Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
