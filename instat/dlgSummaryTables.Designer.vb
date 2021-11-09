@@ -56,6 +56,7 @@ Partial Class dlgSummaryTables
         Me.ucrPnlMargin = New instat.UcrPanel()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.lblVariables = New System.Windows.Forms.Label()
+        Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -194,6 +195,13 @@ Partial Class dlgSummaryTables
         Me.lblVariables.Name = "lblVariables"
         Me.lblVariables.Tag = ""
         '
+        'ucrReorderSummary
+        '
+        resources.ApplyResources(Me.ucrReorderSummary, "ucrReorderSummary")
+        Me.ucrReorderSummary.Name = "ucrReorderSummary"
+        Me.ucrReorderSummary.ucrDataFrameList = Nothing
+        Me.ucrReorderSummary.ucrReceiver = Nothing
+        '
         'ucrInputMarginName
         '
         Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
@@ -281,6 +289,7 @@ Partial Class dlgSummaryTables
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
@@ -341,4 +350,5 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrNudColumnFactors As ucrNud
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents lblVariables As Label
+    Friend WithEvents ucrReorderSummary As ucrReorder
 End Class
