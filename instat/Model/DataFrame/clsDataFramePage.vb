@@ -53,6 +53,16 @@ Public Class clsDataFramePage
     End Property
 
     ''' <summary>
+    ''' Array of row names within the visible page
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property RowNames() As String()
+        Get
+            Return _clsDataFrame.RowNames()
+        End Get
+    End Property
+
+    ''' <summary>
     ''' Starting row of the visible page
     ''' </summary>
     ''' <returns></returns>
@@ -101,18 +111,6 @@ Public Class clsDataFramePage
     Public ReadOnly Property Data(iRow As Integer, iColumn As Integer) As Object
         Get
             Return _clsDataFrame(iRow, iColumn)
-            'ToDo Need better error handling if out of range
-        End Get
-    End Property
-
-    ''' <summary>
-    ''' Row name of the dataframe for a given row
-    ''' </summary>
-    ''' <param name="iRow"></param>
-    ''' <returns></returns>
-    Public ReadOnly Property RowName(iRow As Integer) As String
-        Get
-            Return _clsDataFrame.RowNames(iRow)
             'ToDo Need better error handling if out of range
         End Get
     End Property
