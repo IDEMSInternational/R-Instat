@@ -115,6 +115,11 @@ Public Class clsDataBook
     Public Sub RefreshData()
         Dim listOfDataFrames As List(Of String)
         Dim dataFrame As clsDataFrame
+        If Not _RLink.bInstatObjectExists Then
+            listOfDataFrames = New List(Of String)
+            DeleteOldDataFrames(listOfDataFrames)
+            Exit Sub
+        End If
         If HasDataChanged() Then
             listOfDataFrames = GetDataFrameNames()
             DeleteOldDataFrames(listOfDataFrames)
