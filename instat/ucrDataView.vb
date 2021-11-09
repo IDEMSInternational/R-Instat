@@ -53,10 +53,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As Worksheet, dataFrame As clsDataFrame)
+        If Not dataFrame.clsVisiblePage.HasChanged Then
+            Exit Sub
+        End If
         AddColumns(dataFrame.clsVisiblePage, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
         UpdateNavigationButtons()
         UpdateWorksheetStyle(fillWorkSheet)
+
+        dataFrame.clsVisiblePage.HasChanged = False
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
