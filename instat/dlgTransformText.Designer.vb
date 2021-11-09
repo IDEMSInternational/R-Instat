@@ -48,38 +48,21 @@ Partial Class dlgTransformText
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.lblSideTrunc = New System.Windows.Forms.Label()
         Me.lblSide = New System.Windows.Forms.Label()
-        Me.ucrNudWidthWrap = New instat.ucrNud()
-        Me.ucrNudWidthTrunc = New instat.ucrNud()
         Me.lblWidthWrap = New System.Windows.Forms.Label()
         Me.lblWidthTrunc = New System.Windows.Forms.Label()
         Me.rdoSquish = New System.Windows.Forms.RadioButton()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrChkLastOr = New instat.ucrCheck()
-        Me.ucrReceiverLastWord = New instat.ucrReceiverSingle()
-        Me.ucrNudLastWord = New instat.ucrNud()
-        Me.ucrInputPad = New instat.ucrInputComboBox()
         Me.lblPad = New System.Windows.Forms.Label()
         Me.rdoBothPad = New System.Windows.Forms.RadioButton()
-        Me.ucrNudFrom = New instat.ucrNud()
         Me.rdoRightPad = New System.Windows.Forms.RadioButton()
         Me.rdoLeftPad = New System.Windows.Forms.RadioButton()
-        Me.ucrNudWidth = New instat.ucrNud()
-        Me.ucrPnlPad = New instat.UcrPanel()
-        Me.ucrInputTo = New instat.ucrInputComboBox()
         Me.lblWidth = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
-        Me.ucrNudFirstWord = New instat.ucrNud()
         Me.rdoMiddle = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoBothSide = New System.Windows.Forms.RadioButton()
         Me.rdoRightSide = New System.Windows.Forms.RadioButton()
         Me.rdoLeftSide = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverFirstWord = New instat.ucrReceiverSingle()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrChkFirstOr = New instat.ucrCheck()
-        Me.ucrPnlSide = New instat.UcrPanel()
-        Me.ucrPnlSideTrunc = New instat.UcrPanel()
         Me.rdoCase = New System.Windows.Forms.RadioButton()
         Me.rdoLength = New System.Windows.Forms.RadioButton()
         Me.rdoPad = New System.Windows.Forms.RadioButton()
@@ -88,6 +71,23 @@ Partial Class dlgTransformText
         Me.rdoTrim = New System.Windows.Forms.RadioButton()
         Me.rdoWrap = New System.Windows.Forms.RadioButton()
         Me.rdoTruncate = New System.Windows.Forms.RadioButton()
+        Me.ucrNudWidthWrap = New instat.ucrNud()
+        Me.ucrNudWidthTrunc = New instat.ucrNud()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrChkLastOr = New instat.ucrCheck()
+        Me.ucrReceiverLastWord = New instat.ucrReceiverSingle()
+        Me.ucrNudLastWord = New instat.ucrNud()
+        Me.ucrInputPad = New instat.ucrInputComboBox()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrNudWidth = New instat.ucrNud()
+        Me.ucrPnlPad = New instat.UcrPanel()
+        Me.ucrInputTo = New instat.ucrInputComboBox()
+        Me.ucrNudFirstWord = New instat.ucrNud()
+        Me.ucrReceiverFirstWord = New instat.ucrReceiverSingle()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrChkFirstOr = New instat.ucrCheck()
+        Me.ucrPnlSide = New instat.UcrPanel()
+        Me.ucrPnlSideTrunc = New instat.UcrPanel()
         Me.ucrNewColName = New instat.ucrSave()
         Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
@@ -180,26 +180,6 @@ Partial Class dlgTransformText
         resources.ApplyResources(Me.lblSide, "lblSide")
         Me.lblSide.Name = "lblSide"
         '
-        'ucrNudWidthWrap
-        '
-        Me.ucrNudWidthWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidthWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidthWrap, "ucrNudWidthWrap")
-        Me.ucrNudWidthWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidthWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidthWrap.Name = "ucrNudWidthWrap"
-        Me.ucrNudWidthWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudWidthTrunc
-        '
-        Me.ucrNudWidthTrunc.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidthTrunc.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidthTrunc, "ucrNudWidthTrunc")
-        Me.ucrNudWidthTrunc.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidthTrunc.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidthTrunc.Name = "ucrNudWidthTrunc"
-        Me.ucrNudWidthTrunc.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblWidthWrap
         '
         resources.ApplyResources(Me.lblWidthWrap, "lblWidthWrap")
@@ -217,47 +197,6 @@ Partial Class dlgTransformText
         Me.rdoSquish.TabStop = True
         Me.rdoSquish.UseVisualStyleBackColor = True
         '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
-        Me.ucrInputSeparator.GetSetSelectedIndex = -1
-        Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        '
-        'ucrChkLastOr
-        '
-        Me.ucrChkLastOr.Checked = False
-        resources.ApplyResources(Me.ucrChkLastOr, "ucrChkLastOr")
-        Me.ucrChkLastOr.Name = "ucrChkLastOr"
-        '
-        'ucrReceiverLastWord
-        '
-        Me.ucrReceiverLastWord.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLastWord, "ucrReceiverLastWord")
-        Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
-        Me.ucrReceiverLastWord.Selector = Nothing
-        Me.ucrReceiverLastWord.strNcFilePath = ""
-        Me.ucrReceiverLastWord.ucrSelector = Nothing
-        '
-        'ucrNudLastWord
-        '
-        Me.ucrNudLastWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLastWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLastWord, "ucrNudLastWord")
-        Me.ucrNudLastWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLastWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLastWord.Name = "ucrNudLastWord"
-        Me.ucrNudLastWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputPad
-        '
-        Me.ucrInputPad.AddQuotesIfUnrecognised = True
-        Me.ucrInputPad.GetSetSelectedIndex = -1
-        Me.ucrInputPad.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPad, "ucrInputPad")
-        Me.ucrInputPad.Name = "ucrInputPad"
-        '
         'lblPad
         '
         resources.ApplyResources(Me.lblPad, "lblPad")
@@ -269,16 +208,6 @@ Partial Class dlgTransformText
         Me.rdoBothPad.Name = "rdoBothPad"
         Me.rdoBothPad.TabStop = True
         Me.rdoBothPad.UseVisualStyleBackColor = True
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoRightPad
         '
@@ -294,29 +223,6 @@ Partial Class dlgTransformText
         Me.rdoLeftPad.TabStop = True
         Me.rdoLeftPad.UseVisualStyleBackColor = True
         '
-        'ucrNudWidth
-        '
-        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidth, "ucrNudWidth")
-        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Name = "ucrNudWidth"
-        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlPad
-        '
-        resources.ApplyResources(Me.ucrPnlPad, "ucrPnlPad")
-        Me.ucrPnlPad.Name = "ucrPnlPad"
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputTo.GetSetSelectedIndex = -1
-        Me.ucrInputTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
-        Me.ucrInputTo.Name = "ucrInputTo"
-        '
         'lblWidth
         '
         resources.ApplyResources(Me.lblWidth, "lblWidth")
@@ -326,16 +232,6 @@ Partial Class dlgTransformText
         '
         resources.ApplyResources(Me.lblTo, "lblTo")
         Me.lblTo.Name = "lblTo"
-        '
-        'ucrNudFirstWord
-        '
-        Me.ucrNudFirstWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFirstWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFirstWord, "ucrNudFirstWord")
-        Me.ucrNudFirstWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFirstWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFirstWord.Name = "ucrNudFirstWord"
-        Me.ucrNudFirstWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoMiddle
         '
@@ -378,41 +274,6 @@ Partial Class dlgTransformText
         Me.rdoLeftSide.Name = "rdoLeftSide"
         Me.rdoLeftSide.TabStop = True
         Me.rdoLeftSide.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverFirstWord
-        '
-        Me.ucrReceiverFirstWord.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFirstWord, "ucrReceiverFirstWord")
-        Me.ucrReceiverFirstWord.Name = "ucrReceiverFirstWord"
-        Me.ucrReceiverFirstWord.Selector = Nothing
-        Me.ucrReceiverFirstWord.strNcFilePath = ""
-        Me.ucrReceiverFirstWord.ucrSelector = Nothing
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkFirstOr
-        '
-        Me.ucrChkFirstOr.Checked = False
-        resources.ApplyResources(Me.ucrChkFirstOr, "ucrChkFirstOr")
-        Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
-        '
-        'ucrPnlSide
-        '
-        resources.ApplyResources(Me.ucrPnlSide, "ucrPnlSide")
-        Me.ucrPnlSide.Name = "ucrPnlSide"
-        '
-        'ucrPnlSideTrunc
-        '
-        resources.ApplyResources(Me.ucrPnlSideTrunc, "ucrPnlSideTrunc")
-        Me.ucrPnlSideTrunc.Name = "ucrPnlSideTrunc"
         '
         'rdoCase
         '
@@ -493,6 +354,145 @@ Partial Class dlgTransformText
         Me.rdoTruncate.Name = "rdoTruncate"
         Me.rdoTruncate.TabStop = True
         Me.rdoTruncate.UseVisualStyleBackColor = True
+        '
+        'ucrNudWidthWrap
+        '
+        Me.ucrNudWidthWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidthWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWidthWrap, "ucrNudWidthWrap")
+        Me.ucrNudWidthWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidthWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidthWrap.Name = "ucrNudWidthWrap"
+        Me.ucrNudWidthWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWidthTrunc
+        '
+        Me.ucrNudWidthTrunc.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidthTrunc.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWidthTrunc, "ucrNudWidthTrunc")
+        Me.ucrNudWidthTrunc.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidthTrunc.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidthTrunc.Name = "ucrNudWidthTrunc"
+        Me.ucrNudWidthTrunc.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
+        Me.ucrInputSeparator.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        '
+        'ucrChkLastOr
+        '
+        Me.ucrChkLastOr.Checked = False
+        resources.ApplyResources(Me.ucrChkLastOr, "ucrChkLastOr")
+        Me.ucrChkLastOr.Name = "ucrChkLastOr"
+        '
+        'ucrReceiverLastWord
+        '
+        Me.ucrReceiverLastWord.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverLastWord, "ucrReceiverLastWord")
+        Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
+        Me.ucrReceiverLastWord.Selector = Nothing
+        Me.ucrReceiverLastWord.strNcFilePath = ""
+        Me.ucrReceiverLastWord.ucrSelector = Nothing
+        '
+        'ucrNudLastWord
+        '
+        Me.ucrNudLastWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLastWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLastWord, "ucrNudLastWord")
+        Me.ucrNudLastWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLastWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLastWord.Name = "ucrNudLastWord"
+        Me.ucrNudLastWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputPad
+        '
+        Me.ucrInputPad.AddQuotesIfUnrecognised = True
+        Me.ucrInputPad.GetSetSelectedIndex = -1
+        Me.ucrInputPad.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPad, "ucrInputPad")
+        Me.ucrInputPad.Name = "ucrInputPad"
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWidth
+        '
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWidth, "ucrNudWidth")
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlPad
+        '
+        resources.ApplyResources(Me.ucrPnlPad, "ucrPnlPad")
+        Me.ucrPnlPad.Name = "ucrPnlPad"
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.GetSetSelectedIndex = -1
+        Me.ucrInputTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
+        Me.ucrInputTo.Name = "ucrInputTo"
+        '
+        'ucrNudFirstWord
+        '
+        Me.ucrNudFirstWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFirstWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFirstWord, "ucrNudFirstWord")
+        Me.ucrNudFirstWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFirstWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFirstWord.Name = "ucrNudFirstWord"
+        Me.ucrNudFirstWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverFirstWord
+        '
+        Me.ucrReceiverFirstWord.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverFirstWord, "ucrReceiverFirstWord")
+        Me.ucrReceiverFirstWord.Name = "ucrReceiverFirstWord"
+        Me.ucrReceiverFirstWord.Selector = Nothing
+        Me.ucrReceiverFirstWord.strNcFilePath = ""
+        Me.ucrReceiverFirstWord.ucrSelector = Nothing
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkFirstOr
+        '
+        Me.ucrChkFirstOr.Checked = False
+        resources.ApplyResources(Me.ucrChkFirstOr, "ucrChkFirstOr")
+        Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
+        '
+        'ucrPnlSide
+        '
+        resources.ApplyResources(Me.ucrPnlSide, "ucrPnlSide")
+        Me.ucrPnlSide.Name = "ucrPnlSide"
+        '
+        'ucrPnlSideTrunc
+        '
+        resources.ApplyResources(Me.ucrPnlSideTrunc, "ucrPnlSideTrunc")
+        Me.ucrPnlSideTrunc.Name = "ucrPnlSideTrunc"
         '
         'ucrNewColName
         '
