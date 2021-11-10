@@ -1703,8 +1703,12 @@ DataSheet$set("public", "get_filter", function(filter_name) {
 
 DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
+  and_or <- curr_filter$parameters[["and_or"]]
+  # This should no longer be needed as default will be set in check_filter()
+  if (is.null(and_or)) and_or <- "&"
+  outer_not <- curr_filter$parameters[["outer_not"]]
   i <- 1
-  if (!curr_filter$parameters[["outer_not"]]) {
+  if (!isTRUE(outer_not)) {
     if (length(curr_filter$filter_conditions) == 0) {
       out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
     } else {
@@ -1730,7 +1734,7 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
           } else {
             logical_vec <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
           }
-          if (!curr_filter$parameters[["inner_not"]]) {
+          if (! isTRUE(curr_filter$parameters[["inner_not"]])) {
             result[, i] <- logical_vec
           } else {
             result[, i] <- !logical_vec
@@ -1738,8 +1742,6 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
         }
         i <- i + 1
       }
-      and_or <- curr_filter$parameters[["and_or"]]
-      if (is.null(and_or)) and_or <- "&"
       if (and_or == "&") {
         out <- apply(result, 1, all)
       } else if (and_or == "|") {
