@@ -115,6 +115,7 @@ Public Class clsDataBook
     Public Sub RefreshData()
         If Not _RLink.bInstatObjectExists Then
             DeleteAllDataFrames()
+            _clsDataFrameMetaData = New clsDataFrameMetaData(_RLink)
             Exit Sub
         End If
         If HasDataChanged() Then
