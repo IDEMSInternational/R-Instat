@@ -108,8 +108,8 @@ Public Class dlgInfillMissingValues
         ucrChkCopyFromBelow.SetRDefault("FALSE")
 
         ucrChkBy.SetText("By:")
-        ucrChkBy.AddParameterPresentCondition(True, "by")
-        ucrChkBy.AddParameterPresentCondition(False, "by", False)
+        'ucrChkBy.AddParameterPresentCondition(True, "by")
+        'ucrChkBy.AddParameterPresentCondition(False, "by", False)
 
         ucrChkMaxGap.SetText("Maximum Gap:")
         ucrChkMaxGap.AddParameterPresentCondition(True, "maxgap")
