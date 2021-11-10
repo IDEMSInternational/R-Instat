@@ -145,7 +145,6 @@ Public Class dlgUnstack
 
         clsDcastFunction.SetPackageName("tidyr")
         clsDcastFunction.SetRCommand("pivot_wider")
-        'clsDcastFunction.AddParameter("values_fill", iPosition:=7)
 
         clsHierachyFunction.SetPackageName("reshape2")
         clsHierachyFunction.SetRCommand("dcast")
