@@ -159,7 +159,9 @@ Public Class ucrDataView
         _clsDataBook.RefreshData()
         AddAndUpdateWorksheets(grdData)
         RemoveOldWorksheets(grdData)
-        grdData.Visible = Not grdData.Worksheets.Count = 0
+        If _clsDataBook.DataFrames.Count = 0 Then
+            RefreshDisplayInformation()
+        End If
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -240,6 +242,7 @@ Public Class ucrDataView
 
     Private Sub RefreshDisplayInformation()
         grdCurrSheet = grdData.CurrentWorksheet
+        grdData.Visible = Not grdData.Worksheets.Count = 0
         If grdCurrSheet IsNot Nothing AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
