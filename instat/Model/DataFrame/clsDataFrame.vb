@@ -83,13 +83,12 @@ Public Class clsDataFrame
     End Property
 
     ''' <summary>
-    ''' Returns the row name for a specific row
+    ''' Returns the row names
     ''' </summary>
-    ''' <param name="iRow"></param>
     ''' <returns></returns>
-    Public ReadOnly Property strRowName(iRow As Integer) As String
+    Public ReadOnly Property strRowNames() As String()
         Get
-            Return _clsVisiblePage.RowName(iRow)
+            Return _clsVisiblePage.RowNames()
         End Get
     End Property
 

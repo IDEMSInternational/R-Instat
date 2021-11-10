@@ -28,6 +28,7 @@ Public Class clsDataFramePage
     Private _clsRLink As RLink
     Private _clsDataFrame As DataFrame
     Private _lstColumns As List(Of clsColumnHeaderDisplay)
+    Private _hasChanged As Boolean
 
     Private ReadOnly Property iColumnIncrements As Integer
         Get
@@ -48,6 +49,16 @@ Public Class clsDataFramePage
     Public ReadOnly Property lstColumns() As List(Of clsColumnHeaderDisplay)
         Get
             Return _lstColumns
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Array of row names within the visible page
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property RowNames() As String()
+        Get
+            Return _clsDataFrame.RowNames()
         End Get
     End Property
 
@@ -105,18 +116,6 @@ Public Class clsDataFramePage
     End Property
 
     ''' <summary>
-    ''' Row name of the dataframe for a given row
-    ''' </summary>
-    ''' <param name="iRow"></param>
-    ''' <returns></returns>
-    Public ReadOnly Property RowName(iRow As Integer) As String
-        Get
-            Return _clsDataFrame.RowNames(iRow)
-            'ToDo Need better error handling if out of range
-        End Get
-    End Property
-
-    ''' <summary>
     ''' Total number of rows for the visible page
     ''' </summary>
     ''' <returns></returns>
@@ -124,6 +123,19 @@ Public Class clsDataFramePage
         Get
             Return _clsDataFrame.RowCount
         End Get
+    End Property
+
+    ''' <summary>
+    ''' holds whether the dataframe is different from visual grid component
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property HasChanged() As Boolean
+        Get
+            Return _hasChanged
+        End Get
+        Set(ByVal value As Boolean)
+            _hasChanged = value
+        End Set
     End Property
 
     ''' <summary>
@@ -137,6 +149,7 @@ Public Class clsDataFramePage
         _lstColumns = New List(Of clsColumnHeaderDisplay)
         _iColumnStart = 1
         _iRowStart = 1
+        _hasChanged = True
     End Sub
 
     ''' <summary>
@@ -174,6 +187,7 @@ Public Class clsDataFramePage
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsRFunction As New RFunction
         Dim expTemp As SymbolicExpression
+        _hasChanged = True
         clsRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_data_frame")
         clsRFunction.AddParameter("convert_to_character", "TRUE")
         clsRFunction.AddParameter("include_hidden_columns", "FALSE")
