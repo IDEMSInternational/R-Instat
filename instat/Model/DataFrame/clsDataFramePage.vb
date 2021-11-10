@@ -172,6 +172,12 @@ Public Class clsDataFramePage
     Public Sub SetTotalRowAndColumnCounts(intTotalColumns As Integer, intTotalRows As Integer)
         _iTotalRowCount = intTotalRows
         _iTotalColumnCount = intTotalColumns
+        If _iTotalRowCount < _iRowStart Then
+            _iRowStart = 1
+        End If
+        If _iTotalColumnCount < _iColumnStart Then
+            _iColumnStart = 1
+        End If
     End Sub
 
     Private Function GetNoOfRowPages() As Integer
