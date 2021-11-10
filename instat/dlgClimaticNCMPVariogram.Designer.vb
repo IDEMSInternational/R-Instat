@@ -229,7 +229,7 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrSaveVariogram.Location = New System.Drawing.Point(10, 214)
         Me.ucrSaveVariogram.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveVariogram.Name = "ucrSaveVariogram"
-        Me.ucrSaveVariogram.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveVariogram.Size = New System.Drawing.Size(383, 22)
         Me.ucrSaveVariogram.TabIndex = 16
         '
         'dlgClimaticNCMPVariogram
