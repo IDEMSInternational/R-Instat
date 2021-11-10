@@ -64,10 +64,13 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkShowPercentage = New instat.ucrCheck()
         Me.ucrChkShowCount = New instat.ucrCheck()
         Me.grpGraphType = New System.Windows.Forms.GroupBox()
-        Me.rdoLine = New System.Windows.Forms.RadioButton()
+        Me.rdoViolinPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoBoxPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoDot = New System.Windows.Forms.RadioButton()
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseSubDialogue = New instat.ucrButtonsSubdialogue()
+        Me.rdoLineGraph = New System.Windows.Forms.RadioButton()
         Me.tbpTwoWayFrequencies.SuspendLayout()
         Me.tbpTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
@@ -255,19 +258,36 @@ Partial Class sdgTwoWayFrequencies
         '
         'grpGraphType
         '
-        Me.grpGraphType.Controls.Add(Me.rdoLine)
+        Me.grpGraphType.Controls.Add(Me.rdoLineGraph)
+        Me.grpGraphType.Controls.Add(Me.rdoViolinPlot)
+        Me.grpGraphType.Controls.Add(Me.rdoBoxPlot)
+        Me.grpGraphType.Controls.Add(Me.rdoDot)
         Me.grpGraphType.Controls.Add(Me.rdoBar)
         Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
         resources.ApplyResources(Me.grpGraphType, "grpGraphType")
         Me.grpGraphType.Name = "grpGraphType"
         Me.grpGraphType.TabStop = False
         '
-        'rdoLine
+        'rdoViolinPlot
         '
-        resources.ApplyResources(Me.rdoLine, "rdoLine")
-        Me.rdoLine.Name = "rdoLine"
-        Me.rdoLine.TabStop = True
-        Me.rdoLine.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoViolinPlot, "rdoViolinPlot")
+        Me.rdoViolinPlot.Name = "rdoViolinPlot"
+        Me.rdoViolinPlot.TabStop = True
+        Me.rdoViolinPlot.UseVisualStyleBackColor = True
+        '
+        'rdoBoxPlot
+        '
+        resources.ApplyResources(Me.rdoBoxPlot, "rdoBoxPlot")
+        Me.rdoBoxPlot.Name = "rdoBoxPlot"
+        Me.rdoBoxPlot.TabStop = True
+        Me.rdoBoxPlot.UseVisualStyleBackColor = True
+        '
+        'rdoDot
+        '
+        resources.ApplyResources(Me.rdoDot, "rdoDot")
+        Me.rdoDot.Name = "rdoDot"
+        Me.rdoDot.TabStop = True
+        Me.rdoDot.UseVisualStyleBackColor = True
         '
         'rdoBar
         '
@@ -285,6 +305,13 @@ Partial Class sdgTwoWayFrequencies
         '
         resources.ApplyResources(Me.ucrBaseSubDialogue, "ucrBaseSubDialogue")
         Me.ucrBaseSubDialogue.Name = "ucrBaseSubDialogue"
+        '
+        'rdoLineGraph
+        '
+        resources.ApplyResources(Me.rdoLineGraph, "rdoLineGraph")
+        Me.rdoLineGraph.Name = "rdoLineGraph"
+        Me.rdoLineGraph.TabStop = True
+        Me.rdoLineGraph.UseVisualStyleBackColor = True
         '
         'sdgTwoWayFrequencies
         '
@@ -329,7 +356,7 @@ Partial Class sdgTwoWayFrequencies
     Friend WithEvents ucrChkShowPercentage As ucrCheck
     Friend WithEvents ucrChkShowCount As ucrCheck
     Friend WithEvents grpGraphType As GroupBox
-    Friend WithEvents rdoLine As RadioButton
+    Friend WithEvents rdoDot As RadioButton
     Friend WithEvents rdoBar As RadioButton
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkStack As ucrCheck
@@ -337,4 +364,7 @@ Partial Class sdgTwoWayFrequencies
     Friend WithEvents ucrInputTableTitle As ucrInputTextBox
     Friend WithEvents lblNumberOfDecimals As Label
     Friend WithEvents ucrNudDecimalPlaces As ucrNud
+    Friend WithEvents rdoBoxPlot As RadioButton
+    Friend WithEvents rdoViolinPlot As RadioButton
+    Friend WithEvents rdoLineGraph As RadioButton
 End Class
