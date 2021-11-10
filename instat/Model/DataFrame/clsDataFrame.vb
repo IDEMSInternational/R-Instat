@@ -83,13 +83,12 @@ Public Class clsDataFrame
     End Property
 
     ''' <summary>
-    ''' Returns the row name for a specific row
+    ''' Returns the row names
     ''' </summary>
-    ''' <param name="iRow"></param>
     ''' <returns></returns>
-    Public ReadOnly Property strRowName(iRow As Integer) As String
+    Public ReadOnly Property strRowNames() As String()
         Get
-            Return _clsVisiblePage.RowName(iRow)
+            Return _clsVisiblePage.RowNames()
         End Get
     End Property
 
@@ -169,8 +168,12 @@ Public Class clsDataFrame
             If _clsVisiblePage.RefreshData() Then
                 _iTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
                 _iTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
-                _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _iTotalRowCount)
                 _clsFilter.RefreshData()
+                If _clsFilter.bApplied Then
+                    _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _clsFilter.iFilteredRowCount)
+                Else
+                    _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _iTotalRowCount)
+                End If
                 ResetDataFramesChanged()
             End If
         End If
