@@ -112,9 +112,7 @@ Public Class ucrColumnMetadata
         If _clsDataBook IsNot Nothing Then
             RemoveOldWorksheets(grdVariables)
             AddAndUpdateWorksheets(grdVariables)
-            If grdVariables.Worksheets.Count = 0 Then
-                AddBlankWorksheet(grdVariables)
-            End If
+            grdVariables.Visible = grdVariables.Worksheets.Count > 0
         End If
     End Sub
 
