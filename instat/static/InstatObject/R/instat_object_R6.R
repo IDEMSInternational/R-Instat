@@ -990,7 +990,7 @@ DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_bo
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
-    data_objects_changed <- TRUE
+    self$data_objects_changed <- TRUE
     link_names <- c()
     for(i in seq_along(private$.links)) {
       if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
