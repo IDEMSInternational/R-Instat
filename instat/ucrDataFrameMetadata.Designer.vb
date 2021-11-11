@@ -45,7 +45,6 @@ Partial Class ucrDataFrameMetadata
         Me.rowRightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.hideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,6 +52,7 @@ Partial Class ucrDataFrameMetadata
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderDataFrameMetaData = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowRightClickMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -109,12 +109,6 @@ Partial Class ucrDataFrameMetadata
         Me.renameSheet.Size = New System.Drawing.Size(180, 22)
         Me.renameSheet.Text = "Rename..."
         '
-        'mnuAddComment
-        '
-        Me.mnuAddComment.Name = "mnuAddComment"
-        Me.mnuAddComment.Size = New System.Drawing.Size(180, 22)
-        Me.mnuAddComment.Text = "Add Comment..."
-        '
         'hideSheet
         '
         Me.hideSheet.Name = "hideSheet"
@@ -135,6 +129,7 @@ Partial Class ucrDataFrameMetadata
         '
         'reorderSheet
         '
+        Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
         Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
@@ -172,6 +167,12 @@ Partial Class ucrDataFrameMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(477, 317)
         Me.tlpTableContainer.TabIndex = 8
+        '
+        'mnuAddComment
+        '
+        Me.mnuAddComment.Name = "mnuAddComment"
+        Me.mnuAddComment.Size = New System.Drawing.Size(180, 22)
+        Me.mnuAddComment.Text = "Add Comment..."
         '
         'ucrDataFrameMetadata
         '
