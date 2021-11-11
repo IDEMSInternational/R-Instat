@@ -129,13 +129,14 @@ Public Class ucrDataView
 
     Private Sub AddRowData(dataFrame As clsDataFrame, workSheet As Worksheet)
         Dim textColour As Color
-        Dim rngDataRange As RangePosition
         Dim strRowNames As String()
 
+        If dataFrame.iDisplayedRowCount = 0 Then
+            AddBlankRow(workSheet)
+            Exit Sub
+        End If
         workSheet.Rows = dataFrame.iDisplayedRowCount
-
-        rngDataRange = New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
-        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+        UpdateWorksheetSettings(workSheet)
 
         If dataFrame.clsFilter.bApplied Then
             textColour = Color.Red
@@ -151,6 +152,23 @@ Public Class ucrDataView
             workSheet.RowHeaders.Item(i).Text = strRowNames(i)
             workSheet.RowHeaders(i).TextColor = textColour
         Next
+    End Sub
+
+    Private Sub UpdateWorksheetSettings(workSheet As Worksheet)
+        workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+        workSheet.SetRowsHeight(0, 1, 20)
+        Dim rngDataRange As New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
+        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+    End Sub
+
+    Private Sub AddBlankRow(workSheet As Worksheet)
+        workSheet.Rows = 1
+        For i = 0 To workSheet.Columns - 1
+            workSheet(0, col:=i) = ""
+        Next
+        workSheet.SetRowsHeight(0, 1, 0.1)
+        workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
+        Exit Sub
     End Sub
 
     Public Sub RefreshGridData()
@@ -170,7 +188,7 @@ Public Class ucrDataView
     End Function
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        If grdData.CurrentWorksheet.SelectionRange.Cols = grdData.CurrentWorksheet.ColumnCount Then
+        If grdData.CurrentWorksheet.SelectionRange.Cols = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
