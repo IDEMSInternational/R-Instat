@@ -219,8 +219,10 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
   else new_objects <- list()
-  if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
-  else new_filters <- list()
+  if(include_filters && "get_filter" %in% curr_names) {
+    new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
+    new_filters <- lapply(new_filters, function(x) check_filter(x))
+  } else new_filters <- list()
   if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- lapply(curr_data_object$get_column_selection(), function(x) x$data_clone())
   else new_column_selections <- list()
   if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
@@ -326,17 +328,17 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
 }
 )
 
-DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
+DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")

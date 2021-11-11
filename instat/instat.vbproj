@@ -184,11 +184,17 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
+    <Compile Include="Model\DataFrame\clsDataBook.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
@@ -423,6 +429,7 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -434,6 +441,7 @@
     <Compile Include="dlgThreeVariablePivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
@@ -456,6 +464,12 @@
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCommentForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.Designer.vb">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -2914,6 +2928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCommentForDataEntry.resx">
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgConstructRegexExpression.resx">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
