@@ -438,6 +438,27 @@
   <data name="&gt;&gt;grpMethods.ZOrder" xml:space="preserve">
     <value>62</value>
   </data>
+  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 71</value>
+  </data>
+  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
+    <value>ucrPnlMethods</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
+    <value>grpMethods</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;rdoExtendFill.Name" xml:space="preserve">
     <value>rdoExtendFill</value>
   </data>
@@ -557,6 +578,27 @@
   </data>
   <data name="&gt;&gt;rdoLeaveAsMissing.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrPnlStartEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="ucrPnlStartEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 44</value>
+  </data>
+  <data name="ucrPnlStartEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStartEnd.Name" xml:space="preserve">
+    <value>ucrPnlStartEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStartEnd.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStartEnd.Parent" xml:space="preserve">
+    <value>grpStartEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlStartEnd.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1057,7 +1099,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIntervalSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 291</value>
+    <value>12, 289</value>
   </data>
   <data name="lblIntervalSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -1216,7 +1258,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkTimeInterval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 303</value>
+    <value>14, 305</value>
   </data>
   <data name="ucrChkTimeInterval.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 20</value>
@@ -1264,7 +1306,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>451, 514</value>
+    <value>454, 514</value>
   </data>
   <data name="ucrReceiverDispMultShowStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>281, 76</value>
@@ -1312,7 +1354,7 @@
     <value>10</value>
   </data>
   <data name="ucrChkFlipCordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 284</value>
+    <value>13, 279</value>
   </data>
   <data name="ucrChkFlipCordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 20</value>
@@ -1354,7 +1396,7 @@
     <value>14</value>
   </data>
   <data name="ucrChkAddLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 268</value>
+    <value>12, 266</value>
   </data>
   <data name="ucrChkAddLegend.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 20</value>
@@ -1492,7 +1534,7 @@
     <value>24</value>
   </data>
   <data name="ucrInputNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 328</value>
+    <value>144, 328</value>
   </data>
   <data name="ucrInputNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1555,7 +1597,7 @@
     <value>30</value>
   </data>
   <data name="ucrChkStdBias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 287</value>
+    <value>14, 283</value>
   </data>
   <data name="ucrChkStdBias.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 20</value>
@@ -1998,9 +2040,6 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>61</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -2036,47 +2075,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverTrueValues.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="ucrPnlStartEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
-  </data>
-  <data name="ucrPnlStartEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 44</value>
-  </data>
-  <data name="ucrPnlStartEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Name" xml:space="preserve">
-    <value>ucrPnlStartEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Parent" xml:space="preserve">
-    <value>grpStartEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
-  </data>
-  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 71</value>
-  </data>
-  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
-    <value>ucrPnlMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
-    <value>grpMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
 </root>
