@@ -1595,9 +1595,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
          paste(which(!unique(data[[link]]) %in% station_data[[wmo_number]]), collapse = ", "))
   }
   if (!missing(wmo_number)) {
-    print(station_data[[wmo_number]])
     station_data[[wmo_number]] <- as.numeric(station_data[[wmo_number]])
-    print(station_data[[wmo_number]])
     station_data[[wmo_number]] <- ifelse(is.na(station_data[[wmo_number]]),
                                          "", sprintf("%05d", station_data[[wmo_number]]))
   } else {
@@ -1735,8 +1733,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
                                   station_data[[height_barometer]][i]))
     lines <- append(lines, paste0("WIGOS Station Identifier (WSI):", strrep(" ", 8),
                                   station_data[[wigos_identifier]][i]))
-    lines <- append(lines, "")
     if (!missing(mean_station_pressure)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(2) Mean Station Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1750,6 +1748,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_sea_level_pressure)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(3) Mean Sea Level Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1763,6 +1762,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(4) Mean Daily Air Temperature (precision to tenths of degrees Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1776,6 +1776,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(total_precip)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(5) Total Precipitation (precision to tenths of mm)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1789,6 +1790,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_max_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(6) Mean Daily Maximum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1802,6 +1804,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_min_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(7) Mean Daily Minimum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1815,6 +1818,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_rel_hum)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(8) Mean of the Daily Relative Humidity (whole percent)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)

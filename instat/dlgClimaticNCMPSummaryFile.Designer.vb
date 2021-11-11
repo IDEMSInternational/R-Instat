@@ -104,7 +104,7 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 159)
         Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveSummary.Name = "ucrSaveSummary"
-        Me.ucrSaveSummary.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(393, 22)
         Me.ucrSaveSummary.TabIndex = 3
         '
         'dlgClimaticNCMPSummaryFile
