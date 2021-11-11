@@ -38,6 +38,7 @@ Partial Class dlgTransform
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTransform))
         Me.lblSelectColumns = New System.Windows.Forms.Label()
         Me.grpTies = New System.Windows.Forms.GroupBox()
@@ -73,18 +74,13 @@ Partial Class dlgTransform
         Me.rdoRank = New System.Windows.Forms.RadioButton()
         Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
-        Me.lblCommandPreview = New System.Windows.Forms.Label()
-        Me.ucrInputPreview = New instat.ucrInputTextBox()
-        Me.ucrNudLagPosition = New instat.ucrNud()
-        Me.ucrNudRoundOfDigits = New instat.ucrNud()
-        Me.ucrNudDiffLag = New instat.ucrNud()
-        Me.ucrNudLagLeadPosition = New instat.ucrNud()
-        Me.ucrNudSignifDigits = New instat.ucrNud()
-        Me.ucrPnlNumericOptions = New instat.UcrPanel()
+        Me.ttEditPreview = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkEditPreview = New instat.ucrCheck()
         Me.ucrNudPower = New instat.ucrNud()
         Me.ucrPnlNonNegative = New instat.UcrPanel()
+        Me.ucrChkPreview = New instat.ucrCheck()
+        Me.ucrInputPreview = New instat.ucrInputTextBox()
         Me.ucrChkAddConstant = New instat.ucrCheck()
-        Me.ucrChkReverse = New instat.ucrCheck()
         Me.ucrInputAdd = New instat.ucrInputComboBox()
         Me.ucrInputDivide = New instat.ucrInputComboBox()
         Me.ucrInputMultiply = New instat.ucrInputComboBox()
@@ -101,8 +97,15 @@ Partial Class dlgTransform
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrNudConstant = New instat.ucrNud()
+        Me.ucrPnlTies = New instat.UcrPanel()
+        Me.ucrChkOmitNA = New instat.ucrCheck()
+        Me.ucrNudLagPosition = New instat.ucrNud()
+        Me.ucrNudRoundOfDigits = New instat.ucrNud()
+        Me.ucrNudDiffLag = New instat.ucrNud()
+        Me.ucrNudLagLeadPosition = New instat.ucrNud()
+        Me.ucrNudSignifDigits = New instat.ucrNud()
+        Me.ucrPnlNumericOptions = New instat.UcrPanel()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -247,6 +250,7 @@ Partial Class dlgTransform
         '
         'grpNumericOptions
         '
+        Me.grpNumericOptions.Controls.Add(Me.ucrChkOmitNA)
         Me.grpNumericOptions.Controls.Add(Me.rdoDifference)
         Me.grpNumericOptions.Controls.Add(Me.ucrNudLagPosition)
         Me.grpNumericOptions.Controls.Add(Me.lblLagPosition)
@@ -399,73 +403,11 @@ Partial Class dlgTransform
         Me.rdoScale.Tag = "Frequency"
         Me.rdoScale.UseVisualStyleBackColor = False
         '
-        'lblCommandPreview
+        'ucrChkEditPreview
         '
-        resources.ApplyResources(Me.lblCommandPreview, "lblCommandPreview")
-        Me.lblCommandPreview.Name = "lblCommandPreview"
-        '
-        'ucrInputPreview
-        '
-        Me.ucrInputPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputPreview.IsMultiline = False
-        Me.ucrInputPreview.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
-        Me.ucrInputPreview.Name = "ucrInputPreview"
-        '
-        'ucrNudLagPosition
-        '
-        Me.ucrNudLagPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLagPosition, "ucrNudLagPosition")
-        Me.ucrNudLagPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLagPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagPosition.Name = "ucrNudLagPosition"
-        Me.ucrNudLagPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudRoundOfDigits
-        '
-        Me.ucrNudRoundOfDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRoundOfDigits, "ucrNudRoundOfDigits")
-        Me.ucrNudRoundOfDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRoundOfDigits.Name = "ucrNudRoundOfDigits"
-        Me.ucrNudRoundOfDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudDiffLag
-        '
-        Me.ucrNudDiffLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDiffLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDiffLag, "ucrNudDiffLag")
-        Me.ucrNudDiffLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDiffLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDiffLag.Name = "ucrNudDiffLag"
-        Me.ucrNudDiffLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudLagLeadPosition
-        '
-        Me.ucrNudLagLeadPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLagLeadPosition, "ucrNudLagLeadPosition")
-        Me.ucrNudLagLeadPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLagLeadPosition.Name = "ucrNudLagLeadPosition"
-        Me.ucrNudLagLeadPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudSignifDigits
-        '
-        Me.ucrNudSignifDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSignifDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSignifDigits, "ucrNudSignifDigits")
-        Me.ucrNudSignifDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSignifDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
-        Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
-        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
+        Me.ucrChkEditPreview.Checked = False
+        resources.ApplyResources(Me.ucrChkEditPreview, "ucrChkEditPreview")
+        Me.ucrChkEditPreview.Name = "ucrChkEditPreview"
         '
         'ucrNudPower
         '
@@ -482,17 +424,25 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrPnlNonNegative, "ucrPnlNonNegative")
         Me.ucrPnlNonNegative.Name = "ucrPnlNonNegative"
         '
+        'ucrChkPreview
+        '
+        Me.ucrChkPreview.Checked = False
+        resources.ApplyResources(Me.ucrChkPreview, "ucrChkPreview")
+        Me.ucrChkPreview.Name = "ucrChkPreview"
+        '
+        'ucrInputPreview
+        '
+        Me.ucrInputPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreview.IsMultiline = False
+        Me.ucrInputPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
+        Me.ucrInputPreview.Name = "ucrInputPreview"
+        '
         'ucrChkAddConstant
         '
         Me.ucrChkAddConstant.Checked = False
         resources.ApplyResources(Me.ucrChkAddConstant, "ucrChkAddConstant")
         Me.ucrChkAddConstant.Name = "ucrChkAddConstant"
-        '
-        'ucrChkReverse
-        '
-        Me.ucrChkReverse.Checked = False
-        resources.ApplyResources(Me.ucrChkReverse, "ucrChkReverse")
-        Me.ucrChkReverse.Name = "ucrChkReverse"
         '
         'ucrInputAdd
         '
@@ -599,11 +549,6 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrChkDecreasing, "ucrChkDecreasing")
         Me.ucrChkDecreasing.Name = "ucrChkDecreasing"
         '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
         'ucrNudConstant
         '
         Me.ucrNudConstant.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -614,16 +559,83 @@ Partial Class dlgTransform
         Me.ucrNudConstant.Name = "ucrNudConstant"
         Me.ucrNudConstant.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
+        'ucrChkOmitNA
+        '
+        Me.ucrChkOmitNA.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitNA, "ucrChkOmitNA")
+        Me.ucrChkOmitNA.Name = "ucrChkOmitNA"
+        '
+        'ucrNudLagPosition
+        '
+        Me.ucrNudLagPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLagPosition, "ucrNudLagPosition")
+        Me.ucrNudLagPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLagPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagPosition.Name = "ucrNudLagPosition"
+        Me.ucrNudLagPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudRoundOfDigits
+        '
+        Me.ucrNudRoundOfDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRoundOfDigits, "ucrNudRoundOfDigits")
+        Me.ucrNudRoundOfDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRoundOfDigits.Name = "ucrNudRoundOfDigits"
+        Me.ucrNudRoundOfDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDiffLag
+        '
+        Me.ucrNudDiffLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDiffLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDiffLag, "ucrNudDiffLag")
+        Me.ucrNudDiffLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDiffLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDiffLag.Name = "ucrNudDiffLag"
+        Me.ucrNudDiffLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLagLeadPosition
+        '
+        Me.ucrNudLagLeadPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLagLeadPosition, "ucrNudLagLeadPosition")
+        Me.ucrNudLagLeadPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLagLeadPosition.Name = "ucrNudLagLeadPosition"
+        Me.ucrNudLagLeadPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSignifDigits
+        '
+        Me.ucrNudSignifDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignifDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSignifDigits, "ucrNudSignifDigits")
+        Me.ucrNudSignifDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSignifDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSignifDigits.Name = "ucrNudSignifDigits"
+        Me.ucrNudSignifDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
+        Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
+        '
         'dlgTransform
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblCommandPreview)
-        Me.Controls.Add(Me.ucrInputPreview)
         Me.Controls.Add(Me.grpNumericOptions)
         Me.Controls.Add(Me.grpNonNegative)
+        Me.Controls.Add(Me.grpTies)
+        Me.Controls.Add(Me.ucrChkEditPreview)
+        Me.Controls.Add(Me.ucrChkPreview)
+        Me.Controls.Add(Me.ucrInputPreview)
         Me.Controls.Add(Me.ucrChkAddConstant)
-        Me.Controls.Add(Me.ucrChkReverse)
         Me.Controls.Add(Me.ucrInputAdd)
         Me.Controls.Add(Me.ucrInputDivide)
         Me.Controls.Add(Me.ucrInputMultiply)
@@ -646,7 +658,6 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.ucrSelectorForRank)
         Me.Controls.Add(Me.ucrChkMissingLast)
         Me.Controls.Add(Me.ucrChkDecreasing)
-        Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.ucrNudConstant)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -724,9 +735,11 @@ Partial Class dlgTransform
     Friend WithEvents ucrInputDivide As ucrInputComboBox
     Friend WithEvents ucrInputMultiply As ucrInputComboBox
     Friend WithEvents ucrInputSubtract As ucrInputComboBox
-    Friend WithEvents ucrChkReverse As ucrCheck
     Friend WithEvents ucrChkAddConstant As ucrCheck
     Friend WithEvents ucrNudConstant As ucrNud
-    Friend WithEvents lblCommandPreview As Label
     Friend WithEvents ucrInputPreview As ucrInputTextBox
+    Friend WithEvents ucrChkPreview As ucrCheck
+    Friend WithEvents ucrChkOmitNA As ucrCheck
+    Friend WithEvents ucrChkEditPreview As ucrCheck
+    Friend WithEvents ttEditPreview As ToolTip
 End Class
