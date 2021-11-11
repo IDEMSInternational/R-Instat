@@ -175,7 +175,7 @@ Public Class dlgInfillMissingValues
         ucrPnlMethods.AddToLinkedControls(ucrPnlStartEnd, {rdoNaFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromBelow, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkBy, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
         ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.AddToLinkedControls(ucrChkSetSeed, {"Sample"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
@@ -359,7 +359,6 @@ Public Class dlgInfillMissingValues
 
         ucrReceiverElement.SetRCode(clsAveFunction, bReset)
         ucrReceiverStation.SetRCode(clsAveFunction, bReset)
-        ucrReceiverByFactor.SetRCode(clsAggregateFunction, bReset)
         ucrInputComboFunction.SetRCode(clsAggregateFunction, bReset)
         ucrChkCopyFromBelow.SetRCode(clsNaLocfFunction, bReset)
         ucrChkBy.SetRCode(clsAggregateFunction, bReset)
