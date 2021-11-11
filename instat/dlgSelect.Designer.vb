@@ -60,7 +60,7 @@ Partial Class dlgSelect
         Me.grpApplyOptions.Controls.Add(Me.ucrPnlApplyOptions)
         Me.grpApplyOptions.Location = New System.Drawing.Point(11, 207)
         Me.grpApplyOptions.Name = "grpApplyOptions"
-        Me.grpApplyOptions.Size = New System.Drawing.Size(417, 53)
+        Me.grpApplyOptions.Size = New System.Drawing.Size(404, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
         Me.grpApplyOptions.Text = "Apply"
@@ -92,7 +92,7 @@ Partial Class dlgSelect
         '
         Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(4, 15)
         Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(396, 32)
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(392, 32)
         Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'lblSelection
