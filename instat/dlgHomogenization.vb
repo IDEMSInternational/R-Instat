@@ -231,7 +231,7 @@ Public Class dlgHomogenization
         clsTapplyFunction.AddParameter("INDEX", clsROperatorParameter:=clsRightBracketOperator, iPosition:=1)
         clsTapplyFunction.AddParameter("FUN", clsROperatorParameter:=clsBracketsOperator, iPosition:=2)
 
-        clsBracketsOperator.SetOperation(")")
+        clsBracketsOperator.SetOperation(") ")
         clsBracketsOperator.AddParameter("left", "function(X", iPosition:=0)
         clsBracketsOperator.bSpaceAroundOperation = False
 

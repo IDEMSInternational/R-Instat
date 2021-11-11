@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblAdditionalRowFactor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblAdditionalRowFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblAdditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 187</value>
+  </data>
+  <data name="lblAdditionalRowFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblAdditionalRowFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="lblAdditionalRowFactor.Text" xml:space="preserve">
+    <value>Variable :</value>
+  </data>
+  <data name="&gt;&gt;lblAdditionalRowFactor.Name" xml:space="preserve">
+    <value>lblAdditionalRowFactor</value>
+  </data>
+  <data name="&gt;&gt;lblAdditionalRowFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAdditionalRowFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAdditionalRowFactor.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblInitialColumnFactor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInitialColumnFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblInitialColumnFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 142</value>
+  </data>
+  <data name="lblInitialColumnFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="lblInitialColumnFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="lblInitialColumnFactor.Text" xml:space="preserve">
+    <value>Initial Column Factor:</value>
+  </data>
+  <data name="&gt;&gt;lblInitialColumnFactor.Name" xml:space="preserve">
+    <value>lblInitialColumnFactor</value>
+  </data>
+  <data name="&gt;&gt;lblInitialColumnFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInitialColumnFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblInitialColumnFactor.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblInitialRowFactor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInitialRowFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblInitialRowFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 42</value>
+  </data>
+  <data name="lblInitialRowFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 13</value>
+  </data>
+  <data name="lblInitialRowFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="lblInitialRowFactor.Text" xml:space="preserve">
+    <value>Initial Row Factor(s) :</value>
+  </data>
+  <data name="&gt;&gt;lblInitialRowFactor.Name" xml:space="preserve">
+    <value>lblInitialRowFactor</value>
+  </data>
+  <data name="&gt;&gt;lblInitialRowFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInitialRowFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblInitialRowFactor.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <metadata name="ttSelectedVariable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>9, 1</value>
+  </metadata>
+  <data name="lblTableChart.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTableChart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTableChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 233</value>
+  </data>
+  <data name="lblTableChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblTableChart.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="lblTableChart.Text" xml:space="preserve">
+    <value>Table/Chart  :</value>
+  </data>
+  <data name="&gt;&gt;lblTableChart.Name" xml:space="preserve">
+    <value>lblTableChart</value>
+  </data>
+  <data name="&gt;&gt;lblTableChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTableChart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTableChart.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputTableChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 227</value>
+  </data>
+  <data name="ucrInputTableChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 21</value>
+  </data>
+  <data name="ucrInputTableChart.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableChart.Name" xml:space="preserve">
+    <value>ucrInputTableChart</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableChart.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableChart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableChart.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>417, 456</value>
+  </data>
+  <data name="ucrInputSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 262</value>
+  </data>
+  <data name="ucrInputSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 21</value>
+  </data>
+  <data name="ucrInputSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSummary.Name" xml:space="preserve">
+    <value>ucrInputSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSummary.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSummary.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSummary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 265</value>
+  </data>
+  <data name="lblSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="lblSummary.Text" xml:space="preserve">
+    <value>Summary : </value>
+  </data>
+  <data name="&gt;&gt;lblSummary.Name" xml:space="preserve">
+    <value>lblSummary</value>
+  </data>
+  <data name="&gt;&gt;lblSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSummary.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrReceiverAdditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 201</value>
+  </data>
+  <data name="ucrReceiverAdditionalRowFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverAdditionalRowFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverAdditionalRowFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAdditionalRowFactor.Name" xml:space="preserve">
+    <value>ucrReceiverAdditionalRowFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAdditionalRowFactor.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAdditionalRowFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverAdditionalRowFactor.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrSavePivot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 361</value>
+  </data>
+  <data name="ucrSavePivot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSavePivot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 23</value>
+  </data>
+  <data name="ucrSavePivot.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePivot.Name" xml:space="preserve">
+    <value>ucrSavePivot</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePivot.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePivot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSavePivot.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrChkIncludeSubTotals.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 194</value>
+  </data>
+  <data name="ucrChkIncludeSubTotals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 20</value>
+  </data>
+  <data name="ucrChkIncludeSubTotals.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSubTotals.Name" xml:space="preserve">
+    <value>ucrChkIncludeSubTotals</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSubTotals.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSubTotals.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSubTotals.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 253</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Name" xml:space="preserve">
+    <value>ucrReceiverSelectedVariable</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrChkSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 233</value>
+  </data>
+  <data name="ucrChkSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrChkSelectedVariable.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSelectedVariable.Name" xml:space="preserve">
+    <value>ucrChkSelectedVariable</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSelectedVariable.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSelectedVariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSelectedVariable.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrReceiverInitialColumnFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 157</value>
+  </data>
+  <data name="ucrReceiverInitialColumnFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverInitialColumnFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverInitialColumnFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialColumnFactor.Name" xml:space="preserve">
+    <value>ucrReceiverInitialColumnFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialColumnFactor.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialColumnFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialColumnFactor.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 392</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrSelectorPivot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 9</value>
+  </data>
+  <data name="ucrSelectorPivot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorPivot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorPivot.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorPivot.Name" xml:space="preserve">
+    <value>ucrSelectorPivot</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorPivot.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorPivot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorPivot.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Pivot Table</value>
+  </data>
+  <data name="&gt;&gt;ttSelectedVariable.Name" xml:space="preserve">
+    <value>ttSelectedVariable</value>
+  </data>
+  <data name="&gt;&gt;ttSelectedVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgThreeVariablePivotTable</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverInitialRowFactors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 55</value>
+  </data>
+  <data name="ucrReceiverInitialRowFactors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverInitialRowFactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 77</value>
+  </data>
+  <data name="ucrReceiverInitialRowFactors.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialRowFactors.Name" xml:space="preserve">
+    <value>ucrReceiverInitialRowFactors</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialRowFactors.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialRowFactors.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverInitialRowFactors.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+</root>

@@ -175,9 +175,9 @@ Partial Class dlgSelectColumns
         'ucrSelectPreview
         '
         Me.ucrSelectPreview.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrSelectPreview, "ucrSelectPreview")
         Me.ucrSelectPreview.IsMultiline = False
         Me.ucrSelectPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrSelectPreview, "ucrSelectPreview")
         Me.ucrSelectPreview.Name = "ucrSelectPreview"
         '
         'ucrSelectorForColumnSelection

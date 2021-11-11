@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDummyColsFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,61 +36,54 @@ Public Class dlgDummyVariables
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 41
-        ucrChkWithXVariable.Enabled = False ' temporary
-        lblVariate.Enabled = False ' temporary
-        ucrVariateReceiver.Enabled = False ' temporary
-        grpLevelOmitted.Enabled = False ' temporary
 
-        'Set Receiver
-        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
+        ucrSelectorDummyVariable.SetParameter(New RParameter(".data", 0))
+        ucrSelectorDummyVariable.SetParameterIsrfunction()
+
+        ucrReceiverFactor.SetParameter(New RParameter("select_columns", 1))
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactor.strSelectorHeading = "Factors"
-        ucrReceiverFactor.SetParameterIsRFunction()
+        ucrReceiverFactor.SetParameterIsString()
 
-        'Set RadioBattons : Parameters yet to be set up
-        'ucrPnlLevelOmitted.SetParameter(New RParameter(""))
-        'ucrPnlLevelOmitted.AddRadioButton(rdoNone, "")
-        'ucrPnlLevelOmitted.AddRadioButton(rdoFirst, "")
-        'ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
-        'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
-        ucrPnlLevelOmitted.bAllowNonConditionValues = True
-        'currently disabled sice the functions and parameters are yet to be set
+        ucrPnlLevelOmitted.AddRadioButton(rdoNone)
+        ucrPnlLevelOmitted.AddRadioButton(rdoFirst)
+        ucrPnlLevelOmitted.AddRadioButton(rdoMostFrequent)
 
-        ' ucrChkWithXVariable.SetParameter(New RParameter(""))
-        ucrChkWithXVariable.SetText("With X Variable")
-
-        'ucrChkWithXVariable.AddToLinkedControls(ucrVariateReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        'ucrVariateReceiver.SetLinkedDisplayControl(lblVariate)
-        ucrVariateReceiver.Selector = ucrSelectorDummyVariable
-
-        'ucrSaveDummy.SetPrefix("dummy")
-        'ucrSaveDummy.SetSaveTypeAsColumn()
-        'ucrSaveDummy.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
-        'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
-        'ucrSaveDummy.SetIsComboBox()
+        ucrPnlLevelOmitted.AddParameterValuesCondition(rdoNone, "checked", "none")
+        ucrPnlLevelOmitted.AddParameterValuesCondition(rdoFirst, "checked", "first")
+        ucrPnlLevelOmitted.AddParameterValuesCondition(rdoMostFrequent, "checked", "most")
     End Sub
 
     Private Sub SetDefaults()
+        clsDummyColsFunction = New RFunction
         clsDummyFunction = New RFunction
 
-        'reset
+        ucrReceiverFactor.SetMeAsReceiver()
         ucrSelectorDummyVariable.Reset()
 
-        'set default function
-        clsDummyFunction.SetPackageName("dummies")
-        clsDummyFunction.SetRCommand("dummy")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDummyFunction)
+        clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
+
+        clsDummyColsFunction.SetPackageName("fastDummies")
+        clsDummyColsFunction.SetRCommand("dummy_cols")
+        clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
+        clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "FALSE", iPosition:=3)
+        clsDummyColsFunction.AddParameter("ignore_na", "FALSE", iPosition:=4)
+        clsDummyColsFunction.AddParameter("split", "NULL", iPosition:=5)
+        clsDummyColsFunction.AddParameter("remove_selected_columns", "FALSE", iPosition:=6)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDummyColsFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorDummyVariable.SetRCode(clsDummyColsFunction, bReset)
+        ucrReceiverFactor.SetRCode(clsDummyColsFunction, bReset)
+        ucrPnlLevelOmitted.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ((ucrChkWithXVariable.Checked AndAlso Not ucrVariateReceiver.IsEmpty) OrElse Not ucrChkWithXVariable.Checked) Then
+        If Not ucrReceiverFactor.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -102,20 +96,23 @@ Public Class dlgDummyVariables
         TestOkEnabled()
     End Sub
 
-    'Private Sub SetMeAsReceiver()
-    '    If ucrChkWithXVariable.Checked Then
-    '        ucrVariateReceiver.SetMeAsReceiver()
-    '    Else
-    '        ucrReceiverFactor.SetMeAsReceiver()
-    '    End If
-    'End Sub
+    Private Sub ucrPnlLevelOmitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLevelOmitted.ControlValueChanged
+        If rdoNone.Checked Then
+            clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
+            clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
+            clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "FALSE", iPosition:=3)
+        ElseIf rdoFirst.Checked Then
+            clsDummyFunction.AddParameter("checked", "first", iPosition:=0)
+            clsDummyColsFunction.AddParameter("remove_first_dummy", "TRUE", iPosition:=2)
+            clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "FALSE", iPosition:=3)
+        ElseIf rdoMostFrequent.Checked Then
+            clsDummyFunction.AddParameter("checked", "most", iPosition:=0)
+            clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
+            clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "TRUE", iPosition:=3)
+        End If
+    End Sub
 
-    'Private Sub ucrChkWithXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithXVariable.ControlValueChanged
-    '    VariateVisible()
-    ' SetReceiver()
-    'End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged, ucrVariateReceiver.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

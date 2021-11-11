@@ -43,6 +43,7 @@ Public Class dlgSelect
 
         ucrSelectorForSelectColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSelectColumns.SetParameterIsString()
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
 
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()
@@ -50,7 +51,6 @@ Public Class dlgSelect
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
         rdoApplyAsSubset.Enabled = False
-
 
         ucrPnlApplyOptions.AddToLinkedControls({ucrNewDataFrameName}, {rdoApplyAsSubset}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -85,7 +85,14 @@ Public Class dlgSelect
         TestOkEnabled()
     End Sub
 
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+        If strDefaultDataframe <> "" Then
+            ucrSelectorForSelectColumns.SetDataframe(strDefaultDataframe)
+        End If
+    End Sub
+
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        dlgSelectColumns.SetDefaultDataFrame(ucrSelectorForSelectColumns.ucrAvailableDataFrames.strCurrDataFrame)
         dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()
     End Sub

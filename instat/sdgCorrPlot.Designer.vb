@@ -58,6 +58,7 @@ Partial Class sdgCorrPlot
         Me.lblMinimumSize = New System.Windows.Forms.Label()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkReverseLegendOrder = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -104,6 +105,7 @@ Partial Class sdgCorrPlot
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkReverseLegendOrder)
         Me.grpOptions.Controls.Add(Me.lblFactor)
         Me.grpOptions.Controls.Add(Me.ucrSelectorFactor)
         Me.grpOptions.Controls.Add(Me.ucrReceiverFactor)
@@ -202,6 +204,12 @@ Partial Class sdgCorrPlot
         resources.ApplyResources(Me.ucrBaseSdgCorrPlot, "ucrBaseSdgCorrPlot")
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
         '
+        'ucrChkReverseLegendOrder
+        '
+        Me.ucrChkReverseLegendOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkReverseLegendOrder, "ucrChkReverseLegendOrder")
+        Me.ucrChkReverseLegendOrder.Name = "ucrChkReverseLegendOrder"
+        '
         'sdgCorrPlot
         '
         resources.ApplyResources(Me, "$this")
@@ -243,4 +251,5 @@ Partial Class sdgCorrPlot
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrChkReverseLegendOrder As ucrCheck
 End Class

@@ -70,12 +70,18 @@ Partial Class sdgOneWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseOneWayFrequencies = New instat.ucrButtonsSubdialogue()
+        Me.grpShowMissingFrequencies = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlShowMissingFreq = New instat.UcrPanel()
+        Me.rdoShowMissingTrue = New System.Windows.Forms.RadioButton()
+        Me.rdoShowMissingFalse = New System.Windows.Forms.RadioButton()
+        Me.rdoShowMissingAuto = New System.Windows.Forms.RadioButton()
         Me.tbpOneWayFrequencies.SuspendLayout()
         Me.tbpTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
         Me.tbpGraph.SuspendLayout()
         Me.grpGraphOptions.SuspendLayout()
         Me.grpGraphType.SuspendLayout()
+        Me.grpShowMissingFrequencies.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpOneWayFrequencies
@@ -88,6 +94,7 @@ Partial Class sdgOneWayFrequencies
         '
         'tbpTable
         '
+        Me.tbpTable.Controls.Add(Me.grpShowMissingFrequencies)
         Me.tbpTable.Controls.Add(Me.grpTableOptions)
         resources.ApplyResources(Me.tbpTable, "tbpTable")
         Me.tbpTable.Name = "tbpTable"
@@ -306,6 +313,42 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.ucrBaseOneWayFrequencies, "ucrBaseOneWayFrequencies")
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         '
+        'grpShowMissingFrequencies
+        '
+        Me.grpShowMissingFrequencies.Controls.Add(Me.rdoShowMissingAuto)
+        Me.grpShowMissingFrequencies.Controls.Add(Me.rdoShowMissingFalse)
+        Me.grpShowMissingFrequencies.Controls.Add(Me.rdoShowMissingTrue)
+        Me.grpShowMissingFrequencies.Controls.Add(Me.ucrPnlShowMissingFreq)
+        resources.ApplyResources(Me.grpShowMissingFrequencies, "grpShowMissingFrequencies")
+        Me.grpShowMissingFrequencies.Name = "grpShowMissingFrequencies"
+        Me.grpShowMissingFrequencies.TabStop = False
+        '
+        'ucrPnlShowMissingFreq
+        '
+        resources.ApplyResources(Me.ucrPnlShowMissingFreq, "ucrPnlShowMissingFreq")
+        Me.ucrPnlShowMissingFreq.Name = "ucrPnlShowMissingFreq"
+        '
+        'rdoShowMissingTrue
+        '
+        resources.ApplyResources(Me.rdoShowMissingTrue, "rdoShowMissingTrue")
+        Me.rdoShowMissingTrue.Name = "rdoShowMissingTrue"
+        Me.rdoShowMissingTrue.TabStop = True
+        Me.rdoShowMissingTrue.UseVisualStyleBackColor = True
+        '
+        'rdoShowMissingFalse
+        '
+        resources.ApplyResources(Me.rdoShowMissingFalse, "rdoShowMissingFalse")
+        Me.rdoShowMissingFalse.Name = "rdoShowMissingFalse"
+        Me.rdoShowMissingFalse.TabStop = True
+        Me.rdoShowMissingFalse.UseVisualStyleBackColor = True
+        '
+        'rdoShowMissingAuto
+        '
+        resources.ApplyResources(Me.rdoShowMissingAuto, "rdoShowMissingAuto")
+        Me.rdoShowMissingAuto.Name = "rdoShowMissingAuto"
+        Me.rdoShowMissingAuto.TabStop = True
+        Me.rdoShowMissingAuto.UseVisualStyleBackColor = True
+        '
         'sdgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
@@ -325,6 +368,8 @@ Partial Class sdgOneWayFrequencies
         Me.grpGraphOptions.PerformLayout()
         Me.grpGraphType.ResumeLayout(False)
         Me.grpGraphType.PerformLayout()
+        Me.grpShowMissingFrequencies.ResumeLayout(False)
+        Me.grpShowMissingFrequencies.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -360,4 +405,9 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents lblColor As Label
     Friend WithEvents lblSize As Label
     Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents grpShowMissingFrequencies As GroupBox
+    Friend WithEvents rdoShowMissingAuto As RadioButton
+    Friend WithEvents rdoShowMissingFalse As RadioButton
+    Friend WithEvents rdoShowMissingTrue As RadioButton
+    Friend WithEvents ucrPnlShowMissingFreq As UcrPanel
 End Class

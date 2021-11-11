@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class dlgCalculator
@@ -21,12 +22,11 @@ Public Class dlgCalculator
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
-
     'holds the original width of the form
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
-    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Test/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
+    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
 
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -53,7 +53,7 @@ Public Class dlgCalculator
         ucrCalc.Reset()
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
-        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
+        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
@@ -83,11 +83,11 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
-        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result ")
+        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result")
+        ucrCalc.ucrSaveResultInto.SetAssignToIfUncheckedValue("calc")
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
-
 
     End Sub
 
@@ -139,30 +139,41 @@ Public Class dlgCalculator
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
+                ucrBase.iHelpTopicID = 126
             Case "Logical and Symbols"
                 Me.Width = iBasicWidth * 1.4
+                ucrBase.iHelpTopicID = 127
             Case "Summary"
                 Me.Width = iBasicWidth * 1.46
-            Case "Test/Strings (Character Columns)"
+                ucrBase.iHelpTopicID = 128
+            Case "Text/Strings (Character Columns)"
                 Me.Width = iBasicWidth * 1.49
+                ucrBase.iHelpTopicID = 338
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
+                ucrBase.iHelpTopicID = 44
             Case "Probability"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 129
             Case "Dates/Times"
                 Me.Width = iBasicWidth * 1.37
+                ucrBase.iHelpTopicID = 130
             Case "Transform"
                 Me.Width = iBasicWidth * 1.37
+                ucrBase.iHelpTopicID = 166
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
+                ucrBase.iHelpTopicID = 596
             Case "Wakefield"
                 Me.Width = iBasicWidth * 1.73
+                ucrBase.iHelpTopicID = 444
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
             Case "Symbols"
                 Me.Width = iBasicWidth * 2.56
             Case "hydroGOF"
                 Me.Width = iBasicWidth * 1.27
+                ucrBase.iHelpTopicID = 598
             Case Else
                 Me.Width = iBasicWidth
         End Select
@@ -174,4 +185,4 @@ Public Class dlgCalculator
     End Sub
 End Class
 
-    
+

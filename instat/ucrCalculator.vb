@@ -26,6 +26,7 @@ Public Class ucrCalculator
     Public clsHelp As New RFunction
     Private iBasicWidth As Integer
     Private iBaseHeight As Integer
+    Private strPackageName As String
 
     Public Sub New()
 
@@ -54,17 +55,13 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Test/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         'Temp disabled::Needs discussions to see if they are needed
-        cmdAny.Enabled = False
-        cmdAll.Enabled = False
-        cmdIsTrue.Enabled = False
-        cmdIsFalse.Enabled = False
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
@@ -119,7 +116,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
         ttCalculator.SetToolTip(cmdWhich, "which gives the indices of a logical variable. For example which(11:15>13) gives 4, 5. Note the result is usually not the same length as the original variable.")
         ttCalculator.SetToolTip(cmdAnyDup, "any Are any values TRUE in a logical variable. For example any(1:5 >3) gives TRUE")
-        ttCalculator.SetToolTip(cmdAll, "all Are all values TRUE in a logical variable. For example all(1:5 >3) gives FALSE")
         ttCalculator.SetToolTip(cmdPnorm, "(normal probabilities. For example; pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
         ttCalculator.SetToolTip(cmdPt, " t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
         ttCalculator.SetToolTip(cmdPChisq, "chi square probabilities. For example pchisq(5,1) = 0.9747; pchisq(5,10) = 0.1088")
@@ -330,6 +326,7 @@ Public Class ucrCalculator
     Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
+                strPackageName = "stats"
                 grpSummary.Visible = False
                 grpMaths.Visible = True
                 grpLogical.Visible = False
@@ -340,22 +337,25 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpDates.Visible = False
                 grpCircular.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-                iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
+                strPackageName = "base"
                 grpDates.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpHydroGOF.Visible = False
-                iHelpCalcID = 127
                 Me.Size = New Size(iBasicWidth * 1.44, iBaseHeight)
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -364,28 +364,33 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
             Case "Summary"
+                strPackageName = "base"
                 grpDates.Visible = False
                 grpSummary.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                iHelpCalcID = 128
                 Me.Size = New Size(iBasicWidth * 1.51, iBaseHeight)
                 grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
                 grpCircular.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-            Case "Test/Strings (Character Columns)"
+            Case "Text/Strings (Character Columns)"
+                strPackageName = "stringr"
                 grpDates.Visible = False
                 grpTestString.Visible = True
                 grpFactor.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
+                cmdStringRHelp.Visible = True
+                cmdWakefieldHelp.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
@@ -395,17 +400,18 @@ Public Class ucrCalculator
                 grpModifier.Visible = True
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
-                iHelpCalcID = 129
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
+                strPackageName = "base"
                 grpFactor.Visible = True
                 grpDates.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpBasic.Visible = True
                 grpTestString.Visible = False
-                iHelpCalcID = 127
                 Me.Size = New Size(iBasicWidth * 1.44, iBaseHeight)
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -415,6 +421,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
             Case "Probability"
+                strPackageName = "stats"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpTestString.Visible = False
@@ -424,14 +431,16 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-                iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
+                strPackageName = "lubridate"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
                 grpTestString.Visible = False
@@ -441,14 +450,16 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-                iHelpCalcID = 130
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
+                strPackageName = "dplyr"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -458,6 +469,8 @@ Public Class ucrCalculator
                 grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = True
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
@@ -465,11 +478,14 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
             Case "Wakefield"
+                strPackageName = "wakefield"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
                 grpBasic.Visible = True
                 grpLogical.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = True
                 grpMaths.Visible = False
                 grpTestString.Visible = False
                 grpFactor.Visible = False
@@ -479,8 +495,9 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
-                Me.Size = New Size(iBasicWidth * 1.7, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
+                strPackageName = "circular"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -491,12 +508,15 @@ Public Class ucrCalculator
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpCircular.Visible = True
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
+                strPackageName = "hydroGOF"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -505,6 +525,8 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
@@ -512,6 +534,24 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
+            Case "Basic"
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
@@ -1269,27 +1309,26 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        HelpContent()
+
+    Private Sub OpenHelpPage()
+        Dim clsHelp As New RFunction
+
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript,
+                                   strComment:="Opening help page for " &
+                                   strPackageName & " Package. Generated from dialog Calculator",
+                                   iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+        OpenHelpPage()
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
         RaiseEvent TryCommadClick()
-    End Sub
-
-    Private Sub HelpContent()
-
-        If ucrInputCalOptions.GetText = "hydroGOF" Then
-            clsHelp.AddParameter("package", Chr(34) & "hydroGOF" & Chr(34), iPosition:=1)
-            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for hydroGOF package")
-        Else
-            If iHelpCalcID > 0 Then
-                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
-            Else
-                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-            End If
-
-        End If
     End Sub
 
     Public Sub SetAsCurrentReceiver()
@@ -2837,4 +2876,27 @@ Public Class ucrCalculator
         End If
     End Sub
 
+    Private Sub cmdSortF_Click(sender As Object, e As EventArgs) Handles cmdSortF.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sort(x = , decreasing = FALSE )", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sort()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdHelpZoo_Click(sender As Object, e As EventArgs) Handles cmdHelpZoo.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "zoo"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdHelpDplyr_Click(sender As Object, e As EventArgs) Handles cmdHelpDplyr.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
 End Class
