@@ -117,12 +117,24 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
+        ' Flag to say if a sheet has been deleted.
+        Dim bDeleted As Boolean = False
+
         For i = grid.Worksheets.Count - 1 To 0 Step -1
             Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
             If _clsDataBook.DataFrames.Where(Function(x) x.strName = grid.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
+                bDeleted = True
             End If
         Next
+        UpdateCurrentWorksheet()
+        ' Force the grid to refresh if a sheet has been deleted as there is sometimes a UI problem otherwise.
+        ' There may be a better way to force a refresh. Disable/Enable is almost unnoticeable.
+        ' Could investigate why this issue doesn't happen in ucrDataView.
+        If bDeleted Then
+            grdVariables.Enabled = False
+            grdVariables.Enabled = True
+        End If
     End Sub
 
     Private Sub AddBlankWorksheet(grid As ReoGridControl)
