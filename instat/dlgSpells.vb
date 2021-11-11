@@ -22,14 +22,14 @@ Public Class dlgSpells
     Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
     Private clsDayFilter, clsGroupBy, clsGroupByStation, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
-    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc, clsSpellsLogCalcFunc As New RFunction
+    Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc, clsSpellsLogCalcFunc, clsDotSpellsFunction As New RFunction
     Private clsSpellsFunction, clsSpellsManipulationsFunc, clsSpellManipulationsFunc, clsSpellFunction, clsRSpellSubFunct, clsRSpellFilterSubFunct, clsSpellFilterFunction As New RFunction
     Private clsCurrCalc As RFunction
     Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
 
     Private strCurrDataName As String = ""
-    Private strRainDay As String = "rain_day"
+    Private strSpellDay As String = "spell_day"
 
     Private strLessThan As String = "Less than or equal to"
     Private strGreaterThan As String = "Greater than or equal to"
@@ -134,6 +134,7 @@ Public Class dlgSpells
         clsRSpellSubFunct = New RFunction
         clsRSpellFilterSubFunct = New RFunction
         clsSpellFilterFunction = New RFunction
+        clsDotSpellsFunction = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
@@ -212,7 +213,7 @@ Public Class dlgSpells
         clsSpellLogicalCalc.AddParameter("save", "0", iPosition:=6)
         clsSpellLogicalCalc.SetAssignTo(strSpellLogical)
 
-        clsSpellLogicalAndOperator.bToScriptAsRString = True
+        'clsSpellLogicalAndOperator.bToScriptAsRString = True
         clsSpellLogicalAndOperator.SetOperation("&")
         clsSpellLogicalGreaterThanOperator.SetOperation(">=")
         clsSpellLogicalGreaterThanOperator.AddParameter("min", 0, iPosition:=1)
@@ -238,27 +239,33 @@ Public Class dlgSpells
         clsSpellsLogicalCalc.SetRCommand("instat_calculation$new")
         clsSpellsLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellsLogicalCalc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
-        clsSpellsLogicalCalc.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
-        clsSpellsLogicalCalc.SetAssignTo(strRainDay)
+        clsSpellsLogicalCalc.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
+        clsSpellsLogicalCalc.SetAssignTo(strSpellDay)
 
         clsSpellManipulationsFunc.SetRCommand("list")
         clsSpellManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsSpellsLogCalcFunc.SetRCommand("instat_calculation$new")
-        clsSpellsLogCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSpellsLogCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
-        clsSpellsLogCalcFunc.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
-        clsSpellsLogCalcFunc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellManipulationsFunc, iPosition:=3)
-        clsSpellsLogCalcFunc.SetAssignTo(strRainDay)
+        'clsSpellsLogCalcFunc.SetRCommand("instat_calculation$new")
+        'clsSpellsLogCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        'clsSpellsLogCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
+        'clsSpellsLogCalcFunc.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
+        'clsSpellsLogCalcFunc.AddParameter("manipulations", clsRFunctionParameter:=clsSpellManipulationsFunc, iPosition:=3)
+        'clsSpellsLogCalcFunc.SetAssignTo(strSpellDay)
 
-        clsRSpellSubFunct.SetRCommand("list")
-        clsRSpellSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellsLogCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
+        'clsRSpellSubFunct.SetRCommand("list")
+        'clsRSpellSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellsLogCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
+
+
+        clsDotSpellsFunction.bToScriptAsRString = True
+        clsDotSpellsFunction.SetRCommand(".spells")
+        clsDotSpellsFunction.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
 
         clsSpellFunction.SetRCommand("instat_calculation$new")
         clsSpellFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSpellFunction.AddParameter("function_exp", Chr(34) & ".spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1) ' changes depending on the rdo
+        clsSpellFunction.AddParameter("function_exp", clsRFunctionParameter:=clsDotSpellsFunction, iPosition:=1) ' changes depending on the rdo
         clsSpellFunction.AddParameter("result_name", Chr(34) & "spell" & Chr(34), iPosition:=2)
-        clsSpellFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRSpellSubFunct, iPosition:=4)
+        'clsSpellFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRSpellSubFunct, iPosition:=4)
+        clsSpellFunction.AddParameter("manipulations", clsRFunctionParameter:=clsSpellManipulationsFunc, iPosition:=3)
         clsSpellFunction.SetAssignTo("spells_calculation")
 
         clsRSpellFilterSubFunct.SetRCommand("list")
@@ -276,11 +283,11 @@ Public Class dlgSpells
         'clsAdditionalCondition.SetRCommand("instat_calculation$new")
         'clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         'clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
-        'clsAdditionalCondition.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
+        'clsAdditionalCondition.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
         'clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
         'clsAdditionalCondition.SetAssignTo("additional_condition")
         'clsAdditionalConditionReplaceFunction.SetRCommand("replace")
-        'clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
+        'clsAdditionalConditionReplaceFunction.AddParameter("x", strSpellDay, iPosition:=0)
         'clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
         'clsAdditionalConditionList.SetRCommand("list")
         'clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
@@ -460,8 +467,10 @@ Public Class dlgSpells
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoAnnuel.Checked Then
             clsCurrCalc = clsMaxSpellSummary
+            clsSpellLogicalAndOperator.bToScriptAsRString = True
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         Else
+            clsSpellLogicalAndOperator.bToScriptAsRString = False
             clsCurrCalc = clsSpellFilterFunction
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsSpellFilterFunction, iPosition:=0)
         End If
