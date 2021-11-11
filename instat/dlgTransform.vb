@@ -177,7 +177,7 @@ Public Class dlgTransform
         ucrNudSignifDigits.SetRDefault(6)
 
         ucrNudRoundOfDigits.SetParameter(New RParameter("digits", 1))
-        ucrNudRoundOfDigits.SetMinMax(iNewMin:=0, iNewMax:=Integer.MaxValue)
+        ucrNudRoundOfDigits.SetMinMax(iNewMin:=Integer.MinValue, iNewMax:=Integer.MaxValue)
         ucrNudRoundOfDigits.SetRDefault(0)
 
         ucrNudLagLeadPosition.SetParameter(New RParameter("n", 1))
