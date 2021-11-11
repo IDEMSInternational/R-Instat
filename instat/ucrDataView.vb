@@ -100,6 +100,7 @@ Public Class ucrDataView
             If fillWorkSheet Is Nothing Then
                 fillWorkSheet = grid.CreateWorksheet(clsDataFrame.strName)
                 grid.AddWorksheet(fillWorkSheet)
+                grid.CurrentWorksheet = fillWorkSheet
             End If
             RefreshWorksheet(fillWorkSheet, clsDataFrame)
         Next
