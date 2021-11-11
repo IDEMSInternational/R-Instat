@@ -184,6 +184,12 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="dlgClusterAnalysis.Designer.vb">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -464,6 +470,12 @@
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCommentForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.Designer.vb">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -2835,6 +2847,9 @@
     <EmbeddedResource Include="dlgCluster.resx">
       <DependentUpon>dlgCluster.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClusterAnalysis.resx">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2922,6 +2937,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCommentForDataEntry.resx">
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgConstructRegexExpression.resx">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>

@@ -53,6 +53,14 @@ calculation$set("public", "data_clone", function() {
 }
 )
 
+# This ensures cloned filter objects from older saved data_books have the expected parameters
+check_filter <- function(filter_obj) {
+  if (is.null(filter_obj$parameters[["and_or"]])) filter_obj$parameters[["and_or"]] <- "&"
+  if (is.null(filter_obj$parameters[["outer_not"]])) filter_obj$parameters[["outer_not"]] <- FALSE
+  if (is.null(filter_obj$parameters[["inner_not"]])) filter_obj$parameters[["inner_not"]] <- FALSE
+  return(filter_obj)
+}
+
 # calculation$set("public", "data_clone", function() {
 #   ret = calculation$new(function_name = private$function_name, parameters = private$parameters, calculated_from = private$calculated_from, is_recalculable = private$is_recalculable, sub_calculations = private$sub_calculations, type = private$type, filter_conditions = private$.filter_conditions)
 #   sub_calculations[[name]] <- sub_calculation

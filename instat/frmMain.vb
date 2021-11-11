@@ -517,20 +517,23 @@ Public Class frmMain
             Else
                 splOverall.Panel1Collapsed = True
             End If
-            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked Then
-                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-                splMetadata.Panel1.Controls.Add(ucrDataViewer)
-                If Not mnuViewColumnMetadata.Checked Then
-                    mnuViewColumnMetadata.Checked = True
-                    mnuViewDataView.Checked = False
-                End If
-            Else
-                splDataOutput.Panel1.Controls.Add(ucrDataViewer)
-                splMetadata.Panel1.Controls.Add(ucrColumnMeta)
-            End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
+    End Sub
+
+    Private Sub UpdateSwapDataAndMetadata()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+            splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            mnuViewColumnMetadata.Text = "Data View"
+            mnuViewDataView.Text = "Column Metadata"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splMetadata.Panel1.Controls.Add(ucrColumnMeta)
+            mnuViewColumnMetadata.Text = "Column Metadata"
+            mnuViewDataView.Text = "Data View"
+        End If
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -2330,6 +2333,7 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
 
