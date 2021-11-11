@@ -22,6 +22,8 @@ Public Class ucrReorder
     Private strDataType As String = ""
     Public bWithQuotes As Boolean = True
     Public bIsDataType As Boolean = True
+    'Summaries can not be loaded from the data frame, so the updating list of summaries is done in the dialogue
+    Public bDataIsSummaries As Boolean = False
     Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
     ''' <summary>
@@ -196,7 +198,7 @@ Public Class ucrReorder
                 lstAvailableData.Items.Add(vecNames(i))
             Next
             RaiseEvent OrderChanged()
-        Else
+        ElseIf Not bDataIsSummaries Then
             lstAvailableData.Items.Clear()
         End If
     End Sub

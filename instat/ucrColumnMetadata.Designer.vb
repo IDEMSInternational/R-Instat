@@ -100,12 +100,13 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 154
         Me.grdVariables.ShowScrollEndSpacing = True
-        Me.grdVariables.Size = New System.Drawing.Size(338, 92)
+        Me.grdVariables.Size = New System.Drawing.Size(575, 333)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
         'cellContextMenuStrip
         '
+        Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
         Me.cellContextMenuStrip.Name = "ContextMenuStrip1"
         Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
@@ -118,6 +119,7 @@ Partial Class ucrColumnMetadata
         '
         'columnContextMenuStrip
         '
+        Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilter, Me.mnuSelection, Me.mnuRemoveCurrentSelection, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
         Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 418)
@@ -303,6 +305,7 @@ Partial Class ucrColumnMetadata
         '
         'propertiesContextMenuStrip
         '
+        Me.propertiesContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
         Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
         Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
@@ -321,7 +324,7 @@ Partial Class ucrColumnMetadata
         Me.lblHeaderColumnMetadata.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeaderColumnMetadata.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderColumnMetadata.Name = "lblHeaderColumnMetadata"
-        Me.lblHeaderColumnMetadata.Size = New System.Drawing.Size(338, 20)
+        Me.lblHeaderColumnMetadata.Size = New System.Drawing.Size(575, 20)
         Me.lblHeaderColumnMetadata.TabIndex = 6
         Me.lblHeaderColumnMetadata.Text = "Column Metadata"
         Me.lblHeaderColumnMetadata.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -339,16 +342,17 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(581, 379)
         Me.tlpTableContainer.TabIndex = 7
         '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
-        Me.Size = New System.Drawing.Size(344, 138)
+        Me.Size = New System.Drawing.Size(581, 379)
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.statusColumnMenu.ResumeLayout(False)
