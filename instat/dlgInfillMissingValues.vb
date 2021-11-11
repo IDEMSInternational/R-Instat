@@ -513,7 +513,7 @@ Public Class dlgInfillMissingValues
 
     Private Sub ucrReceiverObserved_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlValueChanged
         If Not ucrReceiverObserved.IsEmpty Then
-            ucrInputNewColumnName.SetName(ucrReceiverObserved.GetVariableNames(False) & "_Infilled")
+            ucrInputNewColumnName.SetName(ucrReceiverObserved.GetVariableNames(False) & "_filled")
         End If
     End Sub
 
