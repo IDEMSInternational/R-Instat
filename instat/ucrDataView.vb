@@ -58,10 +58,10 @@ Public Class ucrDataView
         End If
         AddColumns(dataFrame.clsVisiblePage, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
-        UpdateNavigationButtons()
         UpdateWorksheetStyle(fillWorkSheet)
 
         dataFrame.clsVisiblePage.HasChanged = False
+        RefreshDisplayInformation()
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
@@ -159,7 +159,9 @@ Public Class ucrDataView
         _clsDataBook.RefreshData()
         AddAndUpdateWorksheets(grdData)
         RemoveOldWorksheets(grdData)
-        grdData.Visible = Not grdData.Worksheets.Count = 0
+        If _clsDataBook.DataFrames.Count = 0 Then
+            RefreshDisplayInformation()
+        End If
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -223,7 +225,7 @@ Public Class ucrDataView
         If grdData.Worksheets.Count < 1 Then
             grdData.Hide()
         ElseIf grdCurrSheet.Equals(e.Worksheet) Then
-            UpdateCurrentWorksheet()
+            RefreshDisplayInformation()
             grdData.Refresh()
         End If
     End Sub
@@ -234,11 +236,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
-        UpdateCurrentWorksheet()
+        RefreshDisplayInformation()
     End Sub
 
-    Public Sub UpdateCurrentWorksheet()
+
+    Private Sub RefreshDisplayInformation()
         grdCurrSheet = grdData.CurrentWorksheet
+        grdData.Visible = Not grdData.Worksheets.Count = 0
         If grdCurrSheet IsNot Nothing AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
@@ -802,49 +806,41 @@ Public Class ucrDataView
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColFirst_Click(sender As Object, e As EventArgs) Handles lblColFirst.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColBack_Click(sender As Object, e As EventArgs) Handles lblColBack.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColNext_Click(sender As Object, e As EventArgs) Handles lblColNext.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColLast_Click(sender As Object, e As EventArgs) Handles lblColLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 

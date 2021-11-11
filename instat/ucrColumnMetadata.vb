@@ -76,7 +76,6 @@ Public Class ucrColumnMetadata
             End If
             RefreshWorksheet(fillWorksheet, clsDataFrame)
         Next
-
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
@@ -111,8 +110,9 @@ Public Class ucrColumnMetadata
 
     Public Sub RefreshGridData()
         If _clsDataBook IsNot Nothing Then
-            AddAndUpdateWorksheets(grdVariables)
             RemoveOldWorksheets(grdVariables)
+            AddAndUpdateWorksheets(grdVariables)
+            grdVariables.Visible = grdVariables.Worksheets.Count > 0
         End If
     End Sub
 
@@ -123,6 +123,13 @@ Public Class ucrColumnMetadata
                 grid.RemoveWorksheet(i)
             End If
         Next
+    End Sub
+
+    Private Sub AddBlankWorksheet(grid As ReoGridControl)
+        'ReoGrid can not be visible if no worksheets exist
+        'Therefore blank worksheet is added
+        Dim fillWorksheet As Worksheet = grid.CreateWorksheet("blank")
+        grid.AddWorksheet(fillWorksheet)
     End Sub
 
     Private Sub loadForm()

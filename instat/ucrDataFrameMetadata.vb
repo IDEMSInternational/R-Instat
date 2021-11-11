@@ -91,6 +91,7 @@ Public Class ucrDataFrameMetadata
     Public Sub RefreshGridData()
         If _clsDataBook?.clsDataFrameMetaData IsNot Nothing Then
             RefreshWorksheet()
+            grdMetaData.Visible = _clsDataBook?.clsDataFrameMetaData.RowCount > 0
         End If
     End Sub
 
