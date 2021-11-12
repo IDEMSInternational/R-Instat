@@ -3055,7 +3055,7 @@
     <value>200, 22</value>
   </data>
   <data name="mnuPrepareDataFrameSelectColumns.Text" xml:space="preserve">
-    <value>Selection...</value>
+    <value>Column Selection...</value>
   </data>
   <data name="mnuPrepareDataFrameReplaceValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
