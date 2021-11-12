@@ -61,6 +61,7 @@ Public Class ucrDataView
         UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisiblePage.HasChanged = False
         grdData.CurrentWorksheet = fillWorkSheet
+        RefreshDisplayInformation()
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
