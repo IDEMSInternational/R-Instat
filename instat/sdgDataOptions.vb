@@ -146,11 +146,8 @@ Public Class sdgDataOptions
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
         dlgSelectColumns.ShowDialog()
-        If Not dlgSelectColumns.bSelectedColumns Then
-            ucrReceiverSelect.Add(dlgSelectColumns.ucrInputSelectName.GetText)
-            ucrSelectorForSelectColumns.LoadList()
-        End If
-        dlgSelectColumns.bSelectedColumns = True
+        ucrReceiverSelect.Add(dlgSelectColumns.ucrInputSelectName.GetText)
+        ucrSelectorForSelectColumns.LoadList()
     End Sub
 
     Private Sub cmdRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles cmdRemoveCurrentColumnSelection.Click
