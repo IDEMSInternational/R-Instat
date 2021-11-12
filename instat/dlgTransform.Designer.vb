@@ -64,7 +64,6 @@ Partial Class dlgTransform
         Me.lblDigits = New System.Windows.Forms.Label()
         Me.lblLagLeadPosition = New System.Windows.Forms.Label()
         Me.grpNonNegative = New System.Windows.Forms.GroupBox()
-        Me.lblPower = New System.Windows.Forms.Label()
         Me.rdoPower = New System.Windows.Forms.RadioButton()
         Me.rdoSquareRoot = New System.Windows.Forms.RadioButton()
         Me.rdoNaturalLog = New System.Windows.Forms.RadioButton()
@@ -75,12 +74,14 @@ Partial Class dlgTransform
         Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
         Me.ttEditPreview = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkEditPreview = New instat.ucrCheck()
-        Me.ucrNudPower = New instat.ucrNud()
+        Me.ucrInputPower = New instat.ucrInputComboBox()
+        Me.ucrInputConstant = New instat.ucrInputComboBox()
+        Me.ucrChkAddConstant = New instat.ucrCheck()
         Me.ucrPnlNonNegative = New instat.UcrPanel()
+        Me.ucrPnlTies = New instat.UcrPanel()
+        Me.ucrChkEditPreview = New instat.ucrCheck()
         Me.ucrChkPreview = New instat.ucrCheck()
         Me.ucrInputPreview = New instat.ucrInputTextBox()
-        Me.ucrChkAddConstant = New instat.ucrCheck()
         Me.ucrInputAdd = New instat.ucrInputComboBox()
         Me.ucrInputDivide = New instat.ucrInputComboBox()
         Me.ucrInputMultiply = New instat.ucrInputComboBox()
@@ -97,8 +98,6 @@ Partial Class dlgTransform
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
-        Me.ucrNudConstant = New instat.ucrNud()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrChkOmitNA = New instat.ucrCheck()
         Me.ucrNudLagPosition = New instat.ucrNud()
         Me.ucrNudRoundOfDigits = New instat.ucrNud()
@@ -299,21 +298,17 @@ Partial Class dlgTransform
         '
         'grpNonNegative
         '
-        Me.grpNonNegative.Controls.Add(Me.lblPower)
-        Me.grpNonNegative.Controls.Add(Me.ucrNudPower)
+        Me.grpNonNegative.Controls.Add(Me.ucrInputPower)
         Me.grpNonNegative.Controls.Add(Me.rdoPower)
+        Me.grpNonNegative.Controls.Add(Me.ucrInputConstant)
         Me.grpNonNegative.Controls.Add(Me.rdoSquareRoot)
         Me.grpNonNegative.Controls.Add(Me.rdoNaturalLog)
         Me.grpNonNegative.Controls.Add(Me.rdoLogToBase10)
+        Me.grpNonNegative.Controls.Add(Me.ucrChkAddConstant)
         Me.grpNonNegative.Controls.Add(Me.ucrPnlNonNegative)
         resources.ApplyResources(Me.grpNonNegative, "grpNonNegative")
         Me.grpNonNegative.Name = "grpNonNegative"
         Me.grpNonNegative.TabStop = False
-        '
-        'lblPower
-        '
-        resources.ApplyResources(Me.lblPower, "lblPower")
-        Me.lblPower.Name = "lblPower"
         '
         'rdoPower
         '
@@ -403,26 +398,43 @@ Partial Class dlgTransform
         Me.rdoScale.Tag = "Frequency"
         Me.rdoScale.UseVisualStyleBackColor = False
         '
-        'ucrChkEditPreview
+        'ucrInputPower
         '
-        Me.ucrChkEditPreview.Checked = False
-        resources.ApplyResources(Me.ucrChkEditPreview, "ucrChkEditPreview")
-        Me.ucrChkEditPreview.Name = "ucrChkEditPreview"
+        Me.ucrInputPower.AddQuotesIfUnrecognised = True
+        Me.ucrInputPower.GetSetSelectedIndex = -1
+        Me.ucrInputPower.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPower, "ucrInputPower")
+        Me.ucrInputPower.Name = "ucrInputPower"
         '
-        'ucrNudPower
+        'ucrInputConstant
         '
-        Me.ucrNudPower.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPower, "ucrNudPower")
-        Me.ucrNudPower.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPower.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Name = "ucrNudPower"
-        Me.ucrNudPower.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
+        Me.ucrInputConstant.GetSetSelectedIndex = -1
+        Me.ucrInputConstant.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
+        Me.ucrInputConstant.Name = "ucrInputConstant"
+        '
+        'ucrChkAddConstant
+        '
+        Me.ucrChkAddConstant.Checked = False
+        resources.ApplyResources(Me.ucrChkAddConstant, "ucrChkAddConstant")
+        Me.ucrChkAddConstant.Name = "ucrChkAddConstant"
         '
         'ucrPnlNonNegative
         '
         resources.ApplyResources(Me.ucrPnlNonNegative, "ucrPnlNonNegative")
         Me.ucrPnlNonNegative.Name = "ucrPnlNonNegative"
+        '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
+        'ucrChkEditPreview
+        '
+        Me.ucrChkEditPreview.Checked = False
+        resources.ApplyResources(Me.ucrChkEditPreview, "ucrChkEditPreview")
+        Me.ucrChkEditPreview.Name = "ucrChkEditPreview"
         '
         'ucrChkPreview
         '
@@ -437,12 +449,6 @@ Partial Class dlgTransform
         Me.ucrInputPreview.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
         Me.ucrInputPreview.Name = "ucrInputPreview"
-        '
-        'ucrChkAddConstant
-        '
-        Me.ucrChkAddConstant.Checked = False
-        resources.ApplyResources(Me.ucrChkAddConstant, "ucrChkAddConstant")
-        Me.ucrChkAddConstant.Name = "ucrChkAddConstant"
         '
         'ucrInputAdd
         '
@@ -549,21 +555,6 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrChkDecreasing, "ucrChkDecreasing")
         Me.ucrChkDecreasing.Name = "ucrChkDecreasing"
         '
-        'ucrNudConstant
-        '
-        Me.ucrNudConstant.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConstant.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudConstant, "ucrNudConstant")
-        Me.ucrNudConstant.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConstant.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConstant.Name = "ucrNudConstant"
-        Me.ucrNudConstant.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
         'ucrChkOmitNA
         '
         Me.ucrChkOmitNA.Checked = False
@@ -629,13 +620,10 @@ Partial Class dlgTransform
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpNumericOptions)
         Me.Controls.Add(Me.grpNonNegative)
-        Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.ucrChkEditPreview)
         Me.Controls.Add(Me.ucrChkPreview)
         Me.Controls.Add(Me.ucrInputPreview)
-        Me.Controls.Add(Me.ucrChkAddConstant)
         Me.Controls.Add(Me.ucrInputAdd)
         Me.Controls.Add(Me.ucrInputDivide)
         Me.Controls.Add(Me.ucrInputMultiply)
@@ -658,7 +646,8 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.ucrSelectorForRank)
         Me.Controls.Add(Me.ucrChkMissingLast)
         Me.Controls.Add(Me.ucrChkDecreasing)
-        Me.Controls.Add(Me.ucrNudConstant)
+        Me.Controls.Add(Me.grpNumericOptions)
+        Me.Controls.Add(Me.grpTies)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -725,8 +714,6 @@ Partial Class dlgTransform
     Friend WithEvents rdoLogToBase10 As RadioButton
     Friend WithEvents ucrPnlNonNegative As UcrPanel
     Friend WithEvents rdoScale As RadioButton
-    Friend WithEvents lblPower As Label
-    Friend WithEvents ucrNudPower As ucrNud
     Friend WithEvents ucrChkAdd As ucrCheck
     Friend WithEvents ucrChkDivide As ucrCheck
     Friend WithEvents ucrChkMultiply As ucrCheck
@@ -736,10 +723,11 @@ Partial Class dlgTransform
     Friend WithEvents ucrInputMultiply As ucrInputComboBox
     Friend WithEvents ucrInputSubtract As ucrInputComboBox
     Friend WithEvents ucrChkAddConstant As ucrCheck
-    Friend WithEvents ucrNudConstant As ucrNud
     Friend WithEvents ucrInputPreview As ucrInputTextBox
     Friend WithEvents ucrChkPreview As ucrCheck
     Friend WithEvents ucrChkOmitNA As ucrCheck
     Friend WithEvents ucrChkEditPreview As ucrCheck
     Friend WithEvents ttEditPreview As ToolTip
+    Friend WithEvents ucrInputConstant As ucrInputComboBox
+    Friend WithEvents ucrInputPower As ucrInputComboBox
 End Class
