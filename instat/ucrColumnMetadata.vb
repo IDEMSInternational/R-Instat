@@ -54,9 +54,14 @@ Public Class ucrColumnMetadata
     End Function
 
     Private Sub RefreshWorksheet(fillWorksheet As Worksheet, dataFrame As clsDataFrame)
+        If Not dataFrame.clsColumnMetaData.HasChanged Then
+            Exit Sub
+        End If
         AddColumns(dataFrame, fillWorksheet)
         AddRowData(dataFrame, fillWorksheet)
         UpdateWorksheetStyle(fillWorksheet)
+        dataFrame.clsColumnMetaData.HasChanged = False
+        grdVariables.CurrentWorksheet = fillWorksheet
     End Sub
 
     Private Sub AddColumns(dataFramePage As clsDataFrame, worksheet As Worksheet)
@@ -67,15 +72,22 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
+        Dim firstAddedWorksheet As Worksheet = Nothing
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim fillWorksheet As Worksheet
             fillWorksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
             If fillWorksheet Is Nothing Then
                 fillWorksheet = grid.CreateWorksheet(clsDataFrame.strName)
                 grid.AddWorksheet(fillWorksheet)
+                If firstAddedWorksheet Is Nothing Then
+                    firstAddedWorksheet = fillWorksheet
+                End If
             End If
             RefreshWorksheet(fillWorksheet, clsDataFrame)
         Next
+        If firstAddedWorksheet IsNot Nothing Then
+            grid.CurrentWorksheet = firstAddedWorksheet
+        End If
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()

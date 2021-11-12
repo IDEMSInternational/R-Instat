@@ -59,9 +59,8 @@ Public Class ucrDataView
         AddColumns(dataFrame.clsVisiblePage, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
         UpdateWorksheetStyle(fillWorkSheet)
-
         dataFrame.clsVisiblePage.HasChanged = False
-        RefreshDisplayInformation()
+        grdData.CurrentWorksheet = fillWorkSheet
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
@@ -92,19 +91,21 @@ Public Class ucrDataView
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
-        'This should use existing worksheets rather than re adding
-        Dim fillWorkSheet As Worksheet
-        ' grid.Worksheets.Clear()
+        Dim firstAddedWorksheet As Worksheet = Nothing
         For Each clsDataFrame In _clsDataBook.DataFrames
-            fillWorkSheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
+            Dim fillWorkSheet As Worksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
             If fillWorkSheet Is Nothing Then
                 fillWorkSheet = grid.CreateWorksheet(clsDataFrame.strName)
                 grid.AddWorksheet(fillWorkSheet)
-                grid.CurrentWorksheet = fillWorkSheet
+                If firstAddedWorksheet Is Nothing Then
+                    firstAddedWorksheet = fillWorkSheet
+                End If
             End If
             RefreshWorksheet(fillWorkSheet, clsDataFrame)
         Next
-
+        If firstAddedWorksheet IsNot Nothing Then
+            grid.CurrentWorksheet = firstAddedWorksheet
+        End If
     End Sub
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
