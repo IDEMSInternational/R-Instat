@@ -19,6 +19,7 @@ Public Class dlgRecodeNumeric
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsCut2Function As New RFunction
+    Private clsDummyRfunction As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumn As String = ""
 
@@ -34,22 +35,15 @@ Public Class dlgRecodeNumeric
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-        SetDefaultColumn()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 43
 
-        ucrPnlRadioButtons.AddRadioButton(rdoQuantiles)
-        ucrPnlRadioButtons.AddRadioButton(rdoMinimum)
-        ucrPnlRadioButtons.AddRadioButton(rdoBreakPoints)
-        ucrPnlRadioButtons.AddParameterPresentCondition(rdoQuantiles, "g")
-        ucrPnlRadioButtons.AddParameterPresentCondition(rdoMinimum, "m")
-        ucrPnlRadioButtons.AddParameterPresentCondition(rdoBreakPoints, "cuts")
-
-        ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRadioButtons.SetParameter(New RParameter("type", 0))
+        ucrPnlRadioButtons.AddRadioButton(rdoQuantiles, "quantile")
+        ucrPnlRadioButtons.AddRadioButton(rdoMinimum, "minimum")
+        ucrPnlRadioButtons.AddRadioButton(rdoBreakPoints, "points")
 
         ucrReceiverRecode.SetParameter(New RParameter("x", 0))
         ucrReceiverRecode.SetParameterIsRFunction()
@@ -59,10 +53,10 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetMeAsReceiver()
 
         ucrNudQuantiles.SetParameter(New RParameter("g", 1))
-        ucrNudQuantiles.SetMinMax(1, Integer.MaxValue)
+        ucrNudQuantiles.SetMinMax(1)
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
-        ucrNudMinimum.SetMinMax(1, Integer.MaxValue)
+        ucrNudMinimum.SetMinMax(1)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
@@ -75,6 +69,10 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.SetText("Label Groups with Means")
         ucrChkAddLabels.SetRDefault("TRUE")
 
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrSaveRecode.SetPrefix("recode")
         ucrSaveRecode.SetSaveTypeAsColumn()
         ucrSaveRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
@@ -83,20 +81,9 @@ Public Class dlgRecodeNumeric
         ucrSaveRecode.setLinkedReceiver(ucrReceiverRecode)
     End Sub
 
-    Private Sub SetDefaultColumn()
-        If strDefaultDataFrame <> "" Then
-            ucrSelectorForRecode.SetDataframe(strDefaultDataFrame)
-        End If
-        If strDefaultColumn <> "" Then
-            ucrReceiverRecode.Add(strDefaultColumn, strDefaultDataFrame)
-            ucrSaveRecode.Focus()
-        End If
-        strDefaultDataFrame = ""
-        strDefaultColumn = ""
-    End Sub
-
     Private Sub SetDefaults()
         clsCut2Function = New RFunction
+        clsDummyRfunction = New RFunction
 
         ucrSelectorForRecode.Reset()
         ucrSaveRecode.Reset()
@@ -105,14 +92,19 @@ Public Class dlgRecodeNumeric
         clsCut2Function.SetPackageName("Hmisc")
         clsCut2Function.SetRCommand("cut2")
         clsCut2Function.AddParameter("g", "4", iPosition:=1)
-        clsCut2Function.AddParameter("m", "150", iPosition:=2)
-        clsCut2Function.RemoveParameterByName("cuts")
+        clsDummyRfunction.AddParameter("type", "quantile", iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCut2Function)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction)
+        ucrNudMinimum.SetRCode(clsCut2Function, bReset)
+        ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
+        ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
+        ucrSaveRecode.SetRCode(clsCut2Function, bReset)
+        ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
+        ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
+        ucrPnlRadioButtons.SetRCode(clsDummyRfunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
