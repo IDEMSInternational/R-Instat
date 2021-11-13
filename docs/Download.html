@@ -1,125 +1,264 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>R-Instat</title>
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
 
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <title>R-Instat Website</title>
 </head>
 
-<body id="page-top">
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">R-Instat</a>
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">R-Instat Website</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <a  href="index.html">Home</a>
-                  </li>
-                  <li>
-                      <a  href="About.html">About</a>
-                  </li>
-                    <li>
-                        <a href="Download.html">Download</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i>Home
+                        </a>
                     </li>
-                    <li>
-                        <a href="ReleaseNotes.html">Support</a>
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i>About
+                        </a>
                     </li>
-                    <li>
-                        <a href="Developers.html">Developers</a>
+                    <li class="nav__item">
+                        <a href="Download.html" class="nav__link active-link">
+                            <i class="uil uil-file-alt nav__icon"></i>Download
+                        </a>
                     </li>
-                    <li>
-                        <a href="Contact.html">Contact us</a>
+                    <li class="nav__item">
+                        <a href="Resources.html" class="nav__link">
+                            <i class="uil uil-briefcase nav__icon"></i>
+                            <div class="dropdown">
+                                <button class="dropbtn"></button>Resources</button>
+                        
+                        <div class="dropdown-content">
+                            <a href="Resources.html">Documentation</a>
+                            <a href="Youtube.html">Video Tutorials</a>
+                            <a href="#">Data Sets</a>
+                        </div>
+                        </div></a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Developers.html" class="nav__link">
+                            <i class="uil uil-scenery nav__icon"></i>Developers
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="FAQs.html" class="nav__link">
+                            <i class="uil uil-question nav__icon"></i>FAQs
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Contact.html" class="nav__link">
+                            <i class="uil uil-message nav__icon"></i>Contact Us
+                        </a>
                     </li>
                 </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+
             </div>
-            <!-- /.navbar-collapse -->
+
+            <div class="nav__btns">
+
+                <!-- Theme change button -->
+
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"> </i>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+            <!--==================== DOWNLOAD ====================-->
+            <section class="download section" id="download">
+                <h2 class="section__title">Download</h2>
+                <span class="section__subtitle">Download R-Instat</span>
+                
+               
+                <div class="skills__container container grid">
+                    <div>
+                       
+                        <!--==================== R-INSTAT PACKAGE ====================-->
+                        
+                            <div class="skills__header">
+                                
+    
+                                <div>
+                                    <h1 class="skills__title">Download R-Instat Packages</h1>
+                                    <span class="skills__subtitle"></span>
+                                </div>
+    
+                                
+                            </div>
+                                
+                            <div class="skills__list grid">
+                                <div class="skills__data">
+                                    <div class="skills__titles">
+                                        <h3 class="skills__name">32 Bit</h3>
+                                    </div>
+                                    <div class="about__buttons">
+                                        <a download="" href="https://drive.google.com/file/d/1iOISyTYnWFldfxA0mGHYODAtDk1XYA0t/view" target="_blank" class="button button--flex">
+                                            R-Instat 0.7.3 Installer 32 Bit (.exe 669MB) <i class="uil uil-download-alt button__icon"></i>
+                                        </a>
+                                        </div>
+                                </div>                                
+                                
+                            </div>
+                            <div class="skills__list grid">
+                                <div class="skills__data">
+                                    <div class="skills__titles">
+                                        <h3 class="skills__name">64 Bit</h3>
+                                    </div>
+                                    <div class="about__buttons">
+                                        <a download="" href="https://drive.google.com/file/d/19RZWSCHrXuD1hOaC_cLmWGO2gq1q54aC/view" target="_blank" class="button button--flex">
+                                            R-Instat 0.7.2 Installer 32 Bit (.exe 669MB) <i class="uil uil-download-alt button__icon"></i>
+                                        </a>
+                                        </div>
+                                
+                                   
+                                       
+                                        
+                                </div>                                
+                                <h3 class="skills__subtitle">R-Instat is currently a Windows only application. However, it can be accessed on Mac or Linux through use of a Virtual Windows Machine.</h3>
+    
+                            </div>
+    
+                            
+                        </div>
+                        <!--==================== Installation & Documentation ====================-->
+                        
+                            <div class="skills__header">
+                                <div>
+                                    <h1 class="skills__title">Installation & Documentation</h1>
+                                    
+                                </div>
+    
+                                
+                            </div>
+    
+                            <div class="skills__list grid">
+                                <div class="skills__data">
+                                    <div class="skills__titles">
+                                        <h3 class="skills__name">Installation Guide:</h3>
+                                        
+                                        <div class="about__buttons">
+                                            <a download="" href="http://r-instat.org/Resources/Installation-Guide.pdf" class="button button--flex">
+                                                PDF<i class="uil uil-download-alt button__icon"></i>
+                                            </a>
+                                    
+                                            </div>
+                                            <div class="about__buttons">
+                                                
+                                                <a download="" href="https://github.com/africanmathsinitiative/R-Instat/wiki/Installation-Guide" target="_blank" class="button button--flex">
+                                                    ONLINE<i class="uil uil-download-alt button__icon"></i>
+                                                </a>
+                                                </div>
+                                    </div>
+                                    <a download="" href="Resources.html" target="_blank" class="button button--flex">
+                                        Introductory guides and Documentation <i class="uil uil-download-alt button__icon"></i>
+                                    </a>
+    
+                                    <p>
+                                        To see the changes made since the previous version check out <output><a download="" href="https://github.com/africanmathsinitiative/R-Instat/releases" class="button button--flex">
+                                            the release notes. <i class="uil uil-download-alt button__icon"></i>
+                                        </a></output>
+                                    </p>
+                                </div>
+    
+                                <div class="skills__data">
+                                    <div class="skills__title">
+                                        <h1>Prerequisite Software</h1> 
+                                    </div>
+                                    <p class="skills__number"><a href="https://dotnet.microsoft.com/download" target="_blank">.NET Framework</a>: R-Instat is a .NET software and requires an up to date version of the .NET
+                                        (atleast 4.6.1) to be installed before it can run. Most new Windows version already have this.
+                                        The Installation process will tell you if your .NET needs to be updated. if you need to download it,
+                                        you can download <a href="https://dotnet.microsoft.com/download" target="_blank">.NET framework here</a>.
+                                    </p>
+                                    <p> <a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">Rtools:</a> R-Instat requires Rtools to export data to Excel. if you do not intend to use this feature,
+                                        you do not need to download Rtools. if you would like to you can download Rtool here.
+                                    </p>
+                                </div>
+    
+                                <div class="skills__data">
+                                    <div class="skills__title">
+                                        <h1>R</h1> 
+                                    </div>
+                                    <p class="skills__number"><a href="https://cran.r-project.org/" target="_blank">R:</a> R-Instat includes a built in copy of R, which performs all data processing in
+                                        all data processing in R-Instat. You do not need to donwload R separately to use R-Intat. 
+                                        if you would like to know more about R see.<a href="https://cran.r-project.org/" target="_blank">https://cran.r-projects.org</a>
+                                    </p>
+                                   
+                                </div>
+                                                     
+    
+    
+                        </div>
+                    </div>
+                </div>
+                </div>
+    
+    
+                </div>
+                </div>
+    
+            </section>
+
+
+            <!--==================== FOOTER ====================-->
+    <footer class="footer">
+
+        <div class="footer__bg">
+            <div class="footer__container container grid">
+                <div>
+                    <h1 class="footer__title">R-Instat</h1>
+                    <span class="footer__subtitle">statistical software</span>
+                </div>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="Developers.html" class="footer__link">Developers</a>
+                    </li>
+                    <li>
+                        <a href="Download.html" class="footer__link">Downloads</a>
+                    </li>
+                    <li>
+                        <a href="Contact.html" class="footer__link">Contact</a>
+                    </li>
+                </ul> 
         </div>
-        <!-- /.container-fluid -->
-    </nav>
-  <section class="bg-primary" id="about">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <h2 class="section-heading">Download R-Instat</h2>
-                  <hr class="light">
-                  <p><a href=https://bit.ly/r-instat_072_installer_32bit" style="color:blue;" target="_blank">R-Instat 0.7.2 Installer 32 Bit (.exe 669MB)</a></p>
-                  <p>If you know that you have a 64 bit computer, we suggest you download the 64 Bit version</p>
-                  <a href=https://bit.ly/r-instat_072_installer_64bit" style="color:blue;" target="_blank">R-Instat 0.7.2 Installer 64 Bit (.exe 755MB)</a>
-                  <p>R-Instat is currently a Windows only application. However, it can be accessed on Mac or Linux through use of a Virtual Windows Machine.</p>
 
-                  <h2 class="section-heading">Installation & Documentation</h2>
-                  <hr class="light">
-                  <p>Installation guide: <a href="Resources/Installation-Guide.pdf" style="color:blue;" target="_blank">PDF version</a> |
-                  <a href="https://github.com/africanmathsinitiative/R-Instat/wiki/Installation-Guide" style="color:blue;" target="_blank">Online version</a></p>
-                  <p><a href="ReleaseNotes.html" style="color:blue;">Introductory guides and Documentation</a></p>
-                  <p>To see the changes made since the previous version check out <a href="https://github.com/africanmathsinitiative/R-Instat/releases" style="color:blue;" target="_blank">the release notes</a>.</p>
+    </footer>
 
-                  <h2 class="section-heading">Prerequisite Software</h2>
-                  <hr class="light">
-                  <p><a href="https://www.microsoft.com/net/download/framework" style="color:blue;" target="_blank">.NET Framework</a>: R-Instat is a .NET software and requires an up to date version of the .NET (at least 4.6.1) to be installed before it can run. Most new Windows version already have this. The installation process will tell you if your .NET needs to be updated. If you need to download it, you can <a href="https://www.microsoft.com/net/download/framework" style="color:blue;" target="_blank">download .NET Framework here</a>.</p>
-                  <p><a href="https://cran.r-project.org/bin/windows/Rtools/" style="color:blue;" target="_blank">Rtools</a>: R-Instat requires Rtools to export data to Excel files. If you do not intend to use this feature, you do not need to download Rtools. If you would like to you can <a href="https://cran.r-project.org/bin/windows/Rtools/" style="color:blue;" target="_blank">download Rtools here</a>.</p>
-                  
-                  <h2 class="section-heading">R</h2>
-                  <hr class="light">
-                  <p><a href="https://cran.r-project.org/" style="color:blue;" target="_blank">R</a>: R-Instat includes a built in copy of R, which performs all data processing in R-Instat. You <b>do not</b> need to download R separately to use R-Instat. If you would like to know more about R see <a href="https://cran.r-project.org/" style="color:blue;" target="_blank">https://cran.r-project.org/</a>.</p>
+    <!--==================== SCROLL TOP ====================-->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="uil uil-arrow-up scrollup__icon"></i>
+    </a>
+    
 
-              </div>
-          </div>
-      </div>
+    <!--==================== SWIPER JS ====================-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
 
-    </section>
-
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/creative.min.js"></script>
-
+    <!--==================== MAIN JS ====================-->
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

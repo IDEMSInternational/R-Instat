@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>R-Instat Website</title>
+</head>
+
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">R-Instat</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i>About
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Download.html" class="nav__link">
+                            <i class="uil uil-file-alt nav__icon"></i>Download
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Resources.html" class="nav__link">
+                            <i class="uil uil-briefcase nav__icon"></i>Resources
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Developers.html" class="nav__link">
+                            <i class="uil uil-scenery nav__icon"></i>Developers
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="FAQs.html" class="nav__link active-link">
+                            <i class="uil uil-question nav__icon"></i>FAQs
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Contact.html" class="nav__link">
+                            <i class="uil uil-message nav__icon"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+
+            </div>
+
+            <div class="nav__btns">
+
+                <!-- Theme change button -->
+
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"> </i>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== FAQs ====================-->
+    <section class="faqs section" id="faqs">
+        <h2 class="section__title">FAQs</h2>
+        <span class="section__subtitle">________________</span>
+
+        <h3 class="section__title">Frequently asked questions</h3><br/>
+        <h5 class="section__title">Introduction</h5><br/>
+        <div class="skills__container container grid">
+            <p>
+                In this section, we tried to imagine ourselves in user's situation. We posed questions we were asked and others we feel that you may have, as you considered whether to install and use the previous versions of Instat. Many continue to be relevance!
+            </p>
+        </div>
+        <div class="faq__drop">
+            <h5 class="section__title">General questions:</h5><br/>
+            <button type="button" class="collapse">What is Instat and what is R-Instat?</button>
+            <div class="content">
+                <p>
+                    The original Instat is a general statistics package. It is simple enough to be useful in the teaching of statistics and has the power to assist research in any discipline that requires the statistical analysis of data.
+                </p>
+                <p>
+                    Instat was written by experienced statisticians engaged in teaching, research and consultancy, in collaboration with professional programmers.
+                </p>
+                <p>
+                    Instat is used by many people who have not used a statistics package before. It is easy to learn and to use. It is designed to encourage good statistical practice and to support the teaching of statistics, both in class-room situations and on an individual
+                    basis. We hope this will also apply to R-Instat.
+                </p>
+                <p>
+                    The Windows version has been developed from Instat around 2000). This was an improvement on our first shareware version released in Autumn 1994. Before then, Instat had been sold commercially. R-Instat is a total rewrite, and is build on the enourmous
+                    power of the R statistical system.
+                </p>
+            </div>
+            <button type="button" class="collapse">Why should I use R-Instat?</button>
+            <div class="content">
+                <p>Some points are as follows:</p>
+                <ol>
+                    <li>It is simple to use.</li>
+                    <li>All the documentation is available on-line.</li>
+                    <li>It encourages good statistical practice. For examples of what we mean by this, see the series of Case Studies or the Introductory Guide.</li>
+                    <li>It is quick and easy to install. Installation usually takes less than 5 minutes.</li>
+                    <li>It has a wide range of facilities. These include:
+                        <ul style="list-style-type:disc;">
+                            <li>good data manipulation</li>
+                            <li>descriptive statistics</li>
+                            <li>plotting</li>
+                            <li>multi-way tables</li>
+                            <li>simple, multiple regression, gelenralised linear models, etc</li>
+                            <li>analysis of variance</li>
+                        </ul>
+                    </li>
+                    <li>It can handle quite large data sets, for example
+                        <ul style="list-style-type:disc;">
+                            <li>10 variables by 200 cases is no problem</li>
+                            <li>100 variables by 10,000 cases is now easy</li>
+                            <li>We are keen to see the limits of R-Instat</li>
+                        </ul>
+                    </li>
+                    <li>R-Instat was free for individual non-commercial use (now it is completely free). R-Instat is both free and open source. It can be downloaded and includes both the program and the full documentation. It can easily be distributed to
+                        friends, colleagues, or students.</li>
+                </ol>
+            </div>
+            <button type="button" class="collapse">What about Documentation and help?</button>
+            <div class="content">
+                <p>
+                    One problem with the effective use of packages can be the lack of documentation when it is needed. This is particularly the case with shareware packages. This is not the case with R-Instat. There are 4 main guides for R-Instat, as follows.
+                </p>
+                <p>
+                    Tutorial, Introductory, Reference, Climatic.
+                </p>
+                <p>
+                    This version includes all these guides. They are available online. When you install R-Instat you can automatically install all these guides. This means that if you are teaching a group of 20 students, all of them have easy access to the manuals. The guides
+                    are available as help files and in printable pdf format.
+                </p>
+                <p>
+                    Both the program and the Guides can be downloaded from our web site <a href="http://www.reading.ac.uk/ssc">here</a>
+                </p>
+            </div>
+            <button type="button" class="collapse">So, where is the catch?</button>
+            <div class="content">
+                <p>There isn't a catch. Instat has been written and used by staff who are interested in improving the teaching of statistics. Statistics is often not a popular subject. This is sometimes because courses are unnecessarily theoretical, particularly
+                    when taught to students for whom it is not their main subject.</p>
+                <p>We are often amazed to see a statistics course still taught separately from computers. In some developing countries, computers are still not plentiful for individual students, but where they are available, their use can make a statistics
+                    course much more relevant and more fun.</p>
+                <p>In the help files on Teaching and in the new Introductory Guide, we describe ways that statistics teaching can develop, once computers and statistical software are available. We also include a set of 11 Case Studies, as well as many examples
+                    from R packages, etc.</p>
+                <p>We believe R-Instat can continue in its role of providing support for the teaching of statistics, and for research that involves statistical analyses, for many years to come. We hope you enjoy using it.</p>
+            </div>
+            <button type="button" class="collapse">Is R-Instat only for small data sets?</button>
+            <div class="content">
+                <p>No.</p>
+                <p>It also depends what you mean by small. Think of your data as one, or more rectangular worksheets, or data frames. In each worksheet the columns are the variables you measured and the rows are the cases. In the old Instat the maximum number
+                    of columns in a worksheet is 127. Now, the front-end grid apparently has a limit of 32,000 columns - though the limit in R is higher!</p>
+                <p>For the maximum number of rows, i.e. cases, lets take some examples. With experimental data there may be 100 rows, and that is low, and so fine. With daily climatic analyses for 50 years there are close to 20,000 rows and that is fine
+                    too.
+                </p>
+                <p>If you have 50 stations, each with 50 years of daily data, then you are close to 1 million rows. That is the limit in many spreadsheets, including the grid we use as the front end to R. However, the grid is just a visual window to the
+                    R data frames, where all the work is conducted. Well before having 1 million rows we suggest you don't have all the data displayed in the front-end grid. R itself can cope with much longer data sets.</p>
+                <p>So, the limits are very high. However, processing the data, with very long columns may take a long time. We suggest the limits now are concerned with processing time and not space. If you have a very large data set - with millions of rows
+                    - then we strongly suggest you migrate from using R-Instat to using R itself. And if you really want to know about large data sets, then R has a task view that can help. It is
+                    <a href="here: https://cran.r-project.org/web/views/HighPerformanceComputing.html"></a>
+                </p>
+            </div>
+            <h5 class="section__title">We currently use a spreadsheet (Excel, Open Office) for our statistical work</h5><br/>
+            <button type="button" class="collapse">Should we move to R-Instat?</button>
+            <div class="content">
+                <p>
+                    No.
+                </p>
+                <p>
+                    Using any statistics package does not mean abandoning Excel. Consider instead adding a statistics package to your use of Excel.
+                </p>
+                <p>
+                    Most statistics packages including Instat can read from Excel workbooks and also write to Excel. So you can still continue doing data manipulation, tabulation and graphics in Excel. If you add a statistics package, then you could just use it for the more
+                    advanced statistical work that is not in Excel or is poor in Excel.
+                </p>
+            </div>
+            <button type="button" class="collapse">Where does R-Instat fit in relation to Excel?</button>
+            <div class="content">
+                <p>
+                    We are enthusiasts for Excel, even for statistical work. Excel is useful, because of its powerful data manipulation, tabulation (pivot-tables), and graphics. Its dynamic nature (the way it updates automatically) and ease with which you can add to Excel
+                    are excellent.
+                </p>
+                <p>
+                    However there are two problems with Excel for statistical work. The first is that Excel does not encourage "good statistical practice". We think that this can be put right, but it does need an add-in. See our web site for further information.
+                </p>
+                <p>
+                    Second, it has weaknesses once you consider more advanced statistics than simple tables and graphs.
+                </p>
+                <p>So, when you fall off the end of Excel for statistical work, you need to add something. This could be one of the many add-ins. It could be a (free) statistical package like Instat, (which can be downloaded from www.ssc.rdg.ac.uk/), or
+                    it could be a commercial statistics package.</p>
+                <p>R-Instat does encourage good statistical practice. It supports the teaching of statistics to a reasonable level. It may be sufficient for all the analyses you need. If it is not sufficient, it can be a useful "stepping-stone" to encourage
+                    you to add one of the commercial statistics packages to your repertoire.</p>
+            </div>
+            <button type="button" class="collapse">Couldn't R-Instat be an add-in to Excel?</button>
+            <div class="content">
+                <p>
+                    We do have an add-in to Excel, to encourage "good statistical practice" when using Excel. It would have been too difficult to make the current Instat into an add-in.
+                </p>
+                <p>
+                    Maybe if it is very successful, then a future version might be usable as an add-in? For now, R-Instat's importing from Excel is very flexible and it can write data to an Excel workbook.
+                </p>
+            </div>
+            <button type="button" class="collapse">How does R-Instat compare with Excel add-ins?</button>
+            <div class="content">
+                <p>
+                    Add-ins range from free, to 10's of pounds (dollars) to some at many hundreds of pounds. They are not to be ignored, because they can add useful features, like boxplots or improved regression. We think that R-Instat compares well, with all but the most
+                    expensive. And if you are looking to spend 100's of pounds, then we suggest that you are likely to opt for one of the standard commercial statistics packages. They have also become easy to use.
+                </p>
+            </div>
+
+            <h5 class="section__title">Other Statistical packages</h5><br/>
+            <button type="button" class="collapse">How does R-Instat compare with other free software for statistics?</button>
+            <div class="content">
+                <p>
+                    We are obviously hopelessly biased, and the situation keeps changing. So you should look for yourself. A web site with comprehensive information on statistics packages is http://www.ltsn.gla.ac.uk/ from the old Computers in Teaching (CTI) initiative.
+                </p>
+            </div>
+            <button type="button" class="collapse">How does R-Instat compare with commercial statistics packages?</button>
+            <div class="content">
+                <p>
+                    The basis for our comparison is that we use many standard packages in our statistics courses. For our own students these include Excel, Minitab, SAS, Genstat and S-Plus. In our Statistical Services Centre short-course programme and commissioned courses
+                    we have also used SPSS, JMP, Statgraphics, Statistica, StatExact, Conoco or MLWin.
+                </p>
+                <p>On the statistical side, with the exception of Excel, R-Instat is not as powerful as these packages.</p>
+                <p>R-Instat is intended to complement, rather than compete with, the standard statistics packages. For those who currently just use a spreadsheet, it can be a "stepping-stone". Once you are familiar with any Windows based statistics package,
+                    you will find it easy to add another.</p>
+                <p>If you are already using a standard statistics package then consider adding R-Instat, because of its use as a teaching tool. Most standard packages are primarily to process data, though they can be used to support the teaching of statistics.
+                    R-Instat is the other way round. It is largely to support the teaching of statistics, though it can be used for data processing.</p>
+            </div>
+            <button type="button" class="collapse">Compared with commercial statistics packages, what do you mean "Not as Powerful?"</button>
+            <div class="content">
+                <p>
+                    Modern statistical methods have advanced particularly in two areas. The first is the processing of non-normal data and the second is the processing of data at "multiple levels".
+                </p>
+                <p>For example for analysing data from "contingency tables R-Instat includes facilities for log-linear models, that is much more powerful than the traditional simple chi-square test. That is an example of the analysis of data from a non-normal
+                    distribution. We even include a guide to explain the comparison in detail, because this sort of development is to be encouraged. The standard statistics packages have log-linear models and much more.</p>
+                <p>If you have data at different levels (like people within households) you might need software that can analyse these data at the multiple levels. If you have such data, then look first at our analysis guide (see our Help menu), because
+                    you don't always need to do the analysis at the different levels. If you do, then you need, not just any commercial package, but a powerful one, like Genstat (with REML), SAS (PROC Mixed), S-Plus or MLWin.</p>
+            </div>
+            <button type="button" class="collapse">What is your relationship with the commercial software producers?</button>
+            <div class="content">
+                <p>
+                    In summary it is "good, but not commercial." We do not act as an agent for any producer, nor to we receive any commission on sales.
+                </p>
+                <p>We can therefore give unbiased advice on statistical software. As we give R-Instat away to all individuals, we feel that it complements, rather than competes with the standard statistics packages.</p>
+            </div>
+
+            <h5 class="section__title">Finally</h5><br/>
+            <button type="button" class="collapse">Why does R-Instat have a teaching menu?</button>
+            <div class="content">
+                <p>
+                    In this version we have moved the Teaching Menu to be part of the Help system.
+                </p>
+                <p>We describe what this means in the Teaching help file.</p>
+                <p>Our main aim is to encourage good teaching practice, rather than R-Instat. We believe imaginative teaching requires the use of a software package, but it doesn't have to be Instat. It also needs other resources. Those from Reading are
+                    freely available, whether, or not, you use Instat. We also list web sites where you can find resources elsewhere.</p>
+            </div>
+            <button type="button" class="collapse">Why does R-Instat have a climatic menu?</button>
+            <div class="content">
+                <p>
+                    This has been a research area at Reading for many years, and R-Instat has included facilities for the analysis of climatic data for 15 years. We believe R-Instat and Instat are currently the only general statistics packages to add these facilities. They
+                    were a main reason that the DOS version of Instat continued to be used and led to support from the UK Met Office for the development of the Windows version. We are very grateful to the UK Met Office for this support.
+                </p>
+            </div>
+            <button type="button" class="collapse">What are you hoping to get from R-Instat?</button>
+            <div class="content">
+                <p>
+                    "Hope" is the key word, and we are hoping for a lot. We usually do, until realism sets in. Our hopes include:
+                </p>
+                <ul>
+                    <li>More imaginative use of the computer to support the teaching of statistics.</li>
+                    <li>Improved teaching of statistics (and analysis of data) generally, and particularly in developing countries.</li>
+                    <li>Publicity for the skills of the SSC in training, software evaluation and software development.</li>
+                    <li>Funds from department and site licences to support further developments of R-Instat.</li>
+                    <li>More constructive and effective analyses of climatic data.</li>
+                </ul>
+            </div>
+            <h5 class="section__title">More FAQs</h5>
+            <div class="skills__container container grid">
+                <p>
+                    The above frequently asked questions are very useful for all users but below is a link to more useful and and important update of FAQs.
+                </p>
+                <p>The link below will provide you with all answers you need to know about R-Instat. This will make you understand R-Instat even much easier.</p>
+                <p><a href=" https://docs.google.com/document/d/1sWNCbjLtMAyqWcX3NaxI_oGLKbSEniMBzxLmIbwGgCU/edit?usp=sharing">The latest update of FAQs</a></p>
+            </div>
+            <script>
+                var coll = document.getElementsByClassName("collapse");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    });
+                }
+            </script>
+
+            <!--==================== FOOTER ====================-->
+            <footer class="footer">
+
+                <div class="footer__bg">
+                    <div class="footer__container container grid">
+                        <div>
+                            <h1 class="footer__title">R-Instat</h1>
+                            <span class="footer__subtitle">statistical software</span>
+                        </div>
+
+                        <ul class="footer__links">
+                            <li>
+                                <a href="Developers.html" class="footer__link">Developers</a>
+                            </li>
+                            <li>
+                                <a href="Download.html" class="footer__link">Downloads</a>
+                            </li>
+                            <li>
+                                <a href="Contact.html" class="footer__link">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+            </footer>
+
+            <!--==================== SCROLL TOP ====================-->
+            <a href="#" class="scrollup" id="scroll-up">
+                <i class="uil uil-arrow-up scrollup__icon"></i>
+            </a>
+
+
+            <!--==================== SWIPER JS ====================-->
+            <script src="assets/js/swiper-bundle.min.js"></script>
+
+            <!--==================== MAIN JS ====================-->
+            <script src="assets/js/main.js"></script>
+</body>
+
+</html>

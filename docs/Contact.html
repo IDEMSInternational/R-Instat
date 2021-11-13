@@ -3,105 +3,210 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>R-Instat</title>
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
 
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <title>R-Instat Website</title>
 </head>
 
-<body id="page-top">
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">R-Instat</a>
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                  <a class="navbar-brand page-scroll" href="#page-top"><img src= ""/></a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <a  href="index.html">Home</a>
-                  </li>
-                  <li>
-                      <a  href="About.html">About</a>
-                  </li>
-                    <li>
-                        <a href="Download.html">Download</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i>Home
+                        </a>
                     </li>
-                    <li>
-                        <a href="ReleaseNotes.html">Support</a>
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i>About
+                        </a>
                     </li>
-                    <li>
-                        <a href="Developers.html">Developers</a>
+                    <li class="nav__item">
+                        <a href="Download.html" class="nav__link">
+                            <i class="uil uil-file-alt nav__icon"></i>Download
+                        </a>
                     </li>
-                    <li>
-                        <a href="Contact.html">Contact us</a>
+                    <li class="nav__item">
+                        <a href="Resources.html" class="nav__link">
+                            <i class="uil uil-briefcase nav__icon"></i>
+                            <div class="dropdown">
+                                <button class="dropbtn"></button>Resources</button>
+                        
+                        <div class="dropdown-content">
+                            <a href="Resources.html">Documentation</a>
+                            <a href="#">Video Tutorials</a>
+                            <a href="#">Data Sets</a>
+                        </div>
+                        </div></a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Developers.html" class="nav__link">
+                            <i class="uil uil-scenery nav__icon"></i>Developers
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="FAQs.html" class="nav__link">
+                            <i class="uil uil-question nav__icon"></i>FAQs
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Contact.html" class="nav__link active-link">
+                            <i class="uil uil-message nav__icon"></i>Contact Us
+                        </a>
                     </li>
                 </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+
             </div>
-            <!-- /.navbar-collapse -->
+
+            <div class="nav__btns">
+
+                <!-- Theme change button -->
+
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"> </i>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+ <!--==================== CONTACT ME ====================-->
+ <section class="contact section" id="contact">
+     <!--==================== CONTACT ====================-->
+     <section class="contact section" id="contact">
+        <h2 class="section__title">Lets get in touch</h2>
+        <span class="section__subtitle">____________________</span>
+        <div class="skills__container container grid">
+                    <div class="skills_header">
+                        <p>
+                            For general enquires send us an email to r-instat@africanmathsinitiative.net.
+                            To report issues or bugs with the software, please post an issue on our
+                            Github Issues page
+                        </p>
+                    </div>
         </div>
-        <!-- /.container-fluid -->
-    </nav>
-        <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <h2 class="section-heading">Lets get in touch </h2>
-                  <hr class="light">
-                  <p class="text-faded">For general enquiries send us an email to r-instat@africanmathsinitiative.net.
-                  <br />
-                  To report issues or bugs with the software, please post an issue on our<a href="https://github.com/africanmathsinitiative/R-Instat/issues/" style="color:blue;">Github Issues page</a> </b></p> <br>
-                  </p>
-              </div>
-          </div>
-      </div>
+     </section>
+   
+    <div class="contact__container container grid">
+        <div>
+            <div class="contact__information">
+                <i class="uil uil-phone-alt contact__icon"></i>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+                <div>
+                    <h3 class="contact__title">Call me</h3>
+                    <span class="contatc__subtitle">(+254) 722124199</span>
+                </div>
+            </div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+            <div class="contact__information">
+                <i class="uil uil-envelope contact__icon"></i>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+                <div>
+                    <h3 class="contact__title">E-mail</h3>
+                    <span class="contatc__subtitle">r-instat@
+                        africanmathsinitiative.net</span>
+                </div>
+            </div>
 
-    <!-- Theme JavaScript -->
-    <script src="js/creative.min.js"></script>
+            <div class="contact__information">
+                <i class="uil uil-map-marker contact__icon"></i>
 
+                <div>
+                    <h3 class="contact__title">Location</h3>
+                    <span class="contatc__subtitle">Maseno, Kenya</span>
+                </div>
+            </div>
+        </div>
+
+        <form action="" class="contact__form grid">
+            <div class="contact__inputs grid">
+                <div class="contact__content">
+                    <label for="" class="contact__label">Name</label>
+                    <input type="text" class="contact__input">
+                </div>
+
+                <div class="contact__content">
+                    <label for="" class="contact__label">E-mail</label>
+                    <input type="email" class="contact__input">
+                </div>
+            </div>
+
+            <div class="contact__content">
+                <label for="" class="contact__label">Project</label>
+                <input type="text" class="contact__input">
+            </div>
+
+            <div class="contact__content">
+                <label for="" class="contact__label">Message</label>
+                <textarea name="" id="" cols="0" rows="7" class="contact__input"></textarea>
+            </div>
+
+            <div>
+                <a href="https://www.africanmathsinitiative.net/" class="button button--flex">
+                    Send message
+                    <i class="uil uil-message button__icon"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+
+</section>
+<!--==================== FOOTER ====================-->
+<footer class="footer">
+
+    <div class="footer__bg">
+        <div class="footer__container container grid">
+            <div>
+                <h1 class="footer__title">R-Instat</h1>
+                <span class="footer__subtitle">statistical software</span>
+            </div>
+
+            <ul class="footer__links">
+                <li>
+                    <a href="Developers.html" class="footer__link">Developers</a>
+                </li>
+                <li>
+                    <a href="Download.html" class="footer__link">Downloads</a>
+                </li>
+                <li>
+                    <a href="Contact.html" class="footer__link">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+</footer>
+
+<!--==================== SCROLL TOP ====================-->
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="uil uil-arrow-up scrollup__icon"></i>
+</a>
+
+
+<!--==================== SWIPER JS ====================-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+
+<!--==================== MAIN JS ====================-->
+<script src="assets/js/main.js"></script>
 </body>
 
 </html>

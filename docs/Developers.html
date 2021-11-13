@@ -1,105 +1,242 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>R-Instat</title>
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
 
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <title>R-Instat Website</title>
 </head>
 
-<body id="page-top">
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">R-Instat</a>
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top"><img src= ""/></a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <a  href="index.html">Home</a>
-                  </li>
-                  <li>
-                      <a  href="About.html">About</a>
-                  </li>
-                    <li>
-                        <a href="Download.html">Download</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i>Home
+                        </a>
                     </li>
-                    <li>
-                        <a href="ReleaseNotes.html">Support</a>
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i>About
+                        </a>
                     </li>
-                    <li>
-                        <a href="Developers.html">Developers</a>
+                    <li class="nav__item">
+                        <a href="Download.html" class="nav__link">
+                            <i class="uil uil-file-alt nav__icon"></i>Download
+                        </a>
                     </li>
-                    <li>
-                        <a href="Contact.html">Contact us</a>
+                    <li class="nav__item">
+                        <a href="Resources.html" class="nav__link">
+                            <i class="uil uil-briefcase nav__icon"></i>
+                            <div class="dropdown">
+                                <button class="dropbtn"></button>Resources</button>
+                        
+                        <div class="dropdown-content">
+                            <a href="Resources.html">Documentation</a>
+                            <a href="Youtube.html">Video Tutorials</a>
+                            <a href="#">Data Sets</a>
+                        </div>
+                        </div></a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Developers.html" class="nav__link active-link">
+                            <i class="uil uil-scenery nav__icon"></i>Developers
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="FAQs.html" class="nav__link">
+                            <i class="uil uil-question nav__icon"></i>FAQs
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Contact.html" class="nav__link">
+                            <i class="uil uil-message nav__icon"></i>Contact Us
+                        </a>
                     </li>
                 </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
+
+            <div class="nav__btns">
+
+                <!-- Theme change button -->
+
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"> </i>
+
+                </div>
+            </div>
         </nav>
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <h2 class="section-heading">R-Instat Developers</h2>
-                  <hr class="light">
-                  <p class="text-faded">We are more than happy to welcome any developer to take on the task of making R-Instat better.
-                  <br />
-                  We welcome you to get a copy of source code in our <a href="https://github.com/africanmathsinitiative/R-Instat/" style="color:blue;">Github page</a> </b></p> <br>
-                  </p>
-              </div>
-          </div>
-      </div>
-</section>
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    </header>
+<!--==================== PERSONNEL PROFILE ====================-->
+  <section class="services section" id="services">
+    <h2 class="section__title">Developers</h2>
+    <span class="section__subtitle">________________</span>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <div class="skills__container container grid">
+    We are more than happy to welcome any developer to take on the task of making R-Instat better.
+    We welcome you to get a copy of source code from our Github page
+    <a href="https://github.com/africanmathsinitiative/R-Instat/graphs/contributors" target="_blank"> here.</a>
+    </div>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <!--==================== CONCEPTUALISERS ====================-->
+        <h2 class="section__title">R-Instat Conceptualisers</h2>
+            <span class="section__subtitle">_______________________</span>
 
-    <!-- Theme JavaScript -->
-    <script src="js/creative.min.js"></script>
+            <div class="about__container container grid">
+                <div class="about__data">
+                    <img src="assets/img/david.png" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="ConDavid.html" target="_blank">David Stern</a></h3>
+                    <span class="testimonial__client"></span> 
+                </div>
 
+                <div class="about__data">
+                    <img src="assets/img/roger.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="ConRoger.html" target="_blank">Roger Stern</a></h3>
+                    <span class="testimonial__client"></span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/1_Zach-Photo.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="ConZach.html" target="_blank">Zach Mbasu</a></h3>
+                    <span class="testimonial__client"></span> 
+                </div>
+            </div>
+        
+        <!--==================== DEVELOPERS ====================-->
+        <h2 class="section__title">R-Instat Developers</h2>
+            <span class="section__subtitle">Meet Our Developers</span>
+
+            <div class="about__container container grid">
+
+                <div class="about__data">
+                    <img src="assets/img/Maxwell Fundi.jpeg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevMaxwell.html" target="_blank">Maxwell Fundi</a></h3>
+                        <span class="testimonial__client">Developer & Collaborator</span>        
+                </div>
+                <div class="about__data">
+                    <img src="assets/img/antione.jpeg" alt="" class="about__img">
+                        <h3 class="testimonial__name"><a href="DevAntione.html" target="_blank">Antoine Ntalumeso</a></h3>
+                        <span class="testimonial__client">Developer</span>  
+                </div>
+                <div class="about__data">
+                    <img src="assets/img/shaddy.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevShadrack.html" target="_blank">Shadrack Kibet</a></h3>
+                    <span class="testimonial__client">Statistician</span> 
+                </div>
+                <div class="about__data">
+                    <img src="assets/img/lily.png" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevLily.html" target="_blank">Lily Clements</a></h3>
+                    <span class="testimonial__client">Mathematical Scientist</span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/6_ivan-photo.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevIvan.html" target="_blank">Ivan Luvisia</a></h3>
+                    <span class="testimonial__client">Mathematical Scientist</span>
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/5_Bonyo.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevShadrack.html" target="_blank">Wycklife Bonyo</a></h3>
+                    <span class="testimonial__client">Research Assistant</span> 
+                </div>
+                <div class="about__data">
+                    <img src="assets/img/7_Kelvin.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevKelvin.html" target="_blank">Kelvin Kuya</a></h3>
+                    <span class="testimonial__client">Research Assistant</span> 
+                </div>
+                <div class="about__data">
+                    <img src="assets/img/Esther-Njeri.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevEsther.html" target="_blank">Esther Njeri</a></h3>
+                    <span class="testimonial__client">Intern</span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/Victor-Mmulah.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevVictor.html" target="_blank">Victor Mmulah</a></h3>
+                    <span class="testimonial__client">Intern</span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/Anastasia-Mbithe.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevAnastasia.html" target="_blank">Anastasia Mbithe</a></h3>
+                    <span class="testimonial__client">Intern</span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/Vitalis-Kwambai.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevVitallis.html" target="_blank">Vitalis Kwambaii</a></h3>
+                    <span class="testimonial__client">Intern</span> 
+                </div>
+
+                <div class="about__data">
+                    <img src="assets/img/Dennis-Gioche.jpg" alt="" class="about__img">
+                    <h3 class="testimonial__name"><a href="DevDennis.html" target="_blank">Dennis Gioche</a></h3>
+                    <span class="testimonial__client">Intern</span> 
+                </div>
+
+                
+            </div>
+
+            
+        </section>
+</body>
+ <!--==================== FOOTER ====================-->
+ <footer class="footer">
+
+    <div class="footer__bg">
+        <div class="footer__container container grid">
+            <div>
+                <h1 class="footer__title">R-Instat</h1>
+                <span class="footer__subtitle">statistical software</span>
+            </div>
+
+            <ul class="footer__links">
+                <li>
+                    <a href="Developers.html" class="footer__link">Developers</a>
+                </li>
+                <li>
+                    <a href="Download.html" class="footer__link">Downloads</a>
+                </li>
+                <li>
+                    <a href="Contact.html" class="footer__link">Contact</a>
+                </li>
+            </ul>
+    </div>
+
+</footer>
+
+<!--==================== SCROLL TOP ====================-->
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="uil uil-arrow-up scrollup__icon"></i>
+</a>
+
+
+<!--==================== SWIPER JS ====================-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+
+<!--==================== MAIN JS ====================-->
+<script src="assets/js/main.js"></script>
 </body>
 
 </html>

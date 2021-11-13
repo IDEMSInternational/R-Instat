@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>R-Instat Website</title>
+</head>
+
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">R-Instat</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i>About
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Download.html" class="nav__link">
+                            <i class="uil uil-file-alt nav__icon"></i>Download
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Resources.html" class="nav__link">
+                            <i class="uil uil-briefcase nav__icon"></i>
+                            <div class="dropdown">
+                                <button class="dropbtn"></button>Resources</button>
+                        
+                        <div class="dropdown-content">
+                            <a href="Resources.html">Documentation</a>
+                            <a href="Youtube.html"class="nav__link active-link">Video Tutorials</a>
+                            <a href="#">Data Sets</a>
+                        </div>
+                        </div></a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Developers.html" class="nav__link">
+                            <i class="uil uil-scenery nav__icon"></i>Developers
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="FAQs.html" class="nav__link">
+                            <i class="uil uil-question nav__icon"></i>FAQs
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Contact.html" class="nav__link">
+                            <i class="uil uil-message nav__icon"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+
+            </div>
+
+            <div class="nav__btns">
+
+                <!-- Theme change button -->
+
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"> </i>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+<!--==================== Youtube Embedded Videos ====================-->
+<section class="about section" id="about">
+    <h2 class="section__title">Video Tutorials </h2>
+    <span class="section__subtitle">R-Instat Data Tutorials</span>
+
+    <div class="about__container container grid">
+        <iframe width="300" height="315" 
+        src="https://www.youtube.com/embed/videoseries?list=PLpy934-2vCrIrJfsWG-JrRYQmWLpk_KHi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <br>
+</br>
+    <div class="about__container container description">
+        <p class="about__description">We are begining to create a series of How To videos for R-Instat. 
+            You can watch the videos here on our website or go to our <a href="https://www.youtube.com/watch?v=ISzrdfmFDR8&list=PLx5FJ5icCaj0_EWh6q7GfZdl01RACdueJ" target="_blank">"Youtube playlist"</a> to see the current collection.</p>
+    </div>
+
+    <!--==================== Built in Help ====================-->
+
+    <h2 class="section__title">Built in Help</h2>
+    <div class="skills__container container grid">
+    <div>
+        <p> comprehensive help for each R-Instat dialog will be implemented soon.
+            This will be accessible through the Help button on each dialog, or the Help menu. 
+            As well as help on using the dialog, there will also be information about the R code 
+            and packages behind them, including direct links to R's Documentation where approriate.
+        </p>
+    </div>
+    </div>
+    
+</section>
+
+</body>
+ <!--==================== FOOTER ====================-->
+ <footer class="footer">
+
+    <div class="footer__bg">
+        <div class="footer__container container grid">
+            <div>
+                <h1 class="footer__title">R-Instat</h1>
+                <span class="footer__subtitle">statistical software</span>
+            </div>
+
+            <ul class="footer__links">
+                <li>
+                    <a href="Developers.html" class="footer__link">Developers</a>
+                </li>
+                <li>
+                    <a href="Download.html" class="footer__link">Downloads</a>
+                </li>
+                <li>
+                    <a href="Contact.html" class="footer__link">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+</footer>
+
+<!--==================== SCROLL TOP ====================-->
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="uil uil-arrow-up scrollup__icon"></i>
+</a>
+
+
+<!--==================== SWIPER JS ====================-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+
+<!--==================== MAIN JS ====================-->
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>
