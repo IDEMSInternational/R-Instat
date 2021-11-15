@@ -446,7 +446,7 @@ Public Class dlgInfillMissingValues
     End Sub
 
     Private Sub ucrchkTimeInterval_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTimeInterval.ControlValueChanged
-        If ucrChkTimeInterval.Checked AndAlso ucrNudTimeInterval.GetText <> "" AndAlso ucrInputTimeInterval.GetText <> "" Then
+        If ucrChkTimeInterval.Checked AndAlso ucrNudTimeInterval.IsEmpty() AndAlso ucrInputTimeInterval.IsEmpty() Then
             clsPatchClimateElementFunction.AddParameter("time_interval", clsROperatorParameter:=clsTimeIntOperator, iPosition:=6)
         Else
             clsPatchClimateElementFunction.RemoveParameterByName("time_interval")
