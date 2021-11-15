@@ -562,6 +562,12 @@
     <Compile Include="dlgTreemap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgFormatSummaryTables.Designer.vb">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </Compile>
@@ -2976,6 +2982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFormatSummaryTables.resx">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
