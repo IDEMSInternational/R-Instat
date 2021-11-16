@@ -78,7 +78,6 @@ Partial Class dlgTransform
         Me.ucrInputConstant = New instat.ucrInputComboBox()
         Me.ucrChkAddConstant = New instat.ucrCheck()
         Me.ucrPnlNonNegative = New instat.UcrPanel()
-        Me.ucrPnlTies = New instat.UcrPanel()
         Me.ucrChkEditPreview = New instat.ucrCheck()
         Me.ucrChkPreview = New instat.ucrCheck()
         Me.ucrInputPreview = New instat.ucrInputTextBox()
@@ -105,6 +104,8 @@ Partial Class dlgTransform
         Me.ucrNudLagLeadPosition = New instat.ucrNud()
         Me.ucrNudSignifDigits = New instat.ucrNud()
         Me.ucrPnlNumericOptions = New instat.UcrPanel()
+        Me.ucrPnlTies = New instat.UcrPanel()
+        Me.cmdUpdatePreview = New System.Windows.Forms.Button()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -425,11 +426,6 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrPnlNonNegative, "ucrPnlNonNegative")
         Me.ucrPnlNonNegative.Name = "ucrPnlNonNegative"
         '
-        'ucrPnlTies
-        '
-        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
-        Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
         'ucrChkEditPreview
         '
         Me.ucrChkEditPreview.Checked = False
@@ -616,10 +612,22 @@ Partial Class dlgTransform
         resources.ApplyResources(Me.ucrPnlNumericOptions, "ucrPnlNumericOptions")
         Me.ucrPnlNumericOptions.Name = "ucrPnlNumericOptions"
         '
+        'ucrPnlTies
+        '
+        resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
+        Me.ucrPnlTies.Name = "ucrPnlTies"
+        '
+        'cmdUpdatePreview
+        '
+        resources.ApplyResources(Me.cmdUpdatePreview, "cmdUpdatePreview")
+        Me.cmdUpdatePreview.Name = "cmdUpdatePreview"
+        Me.cmdUpdatePreview.UseVisualStyleBackColor = True
+        '
         'dlgTransform
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdUpdatePreview)
         Me.Controls.Add(Me.grpNonNegative)
         Me.Controls.Add(Me.ucrChkEditPreview)
         Me.Controls.Add(Me.ucrChkPreview)
@@ -730,4 +738,5 @@ Partial Class dlgTransform
     Friend WithEvents ttEditPreview As ToolTip
     Friend WithEvents ucrInputConstant As ucrInputComboBox
     Friend WithEvents ucrInputPower As ucrInputComboBox
+    Friend WithEvents cmdUpdatePreview As Button
 End Class

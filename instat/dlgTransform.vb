@@ -173,6 +173,7 @@ Public Class dlgTransform
         ucrPnlMissingValues.SetLinkedDisplayControl(grpMissingValues)
         ucrPnlTies.SetLinkedDisplayControl(grpTies)
         ucrPnlNonNegative.SetLinkedDisplayControl(grpNonNegative)
+        ucrInputPreview.SetLinkedDisplayControl(cmdUpdatePreview)
 
         ucrNudSignifDigits.SetParameter(New RParameter("digits", 1))
         ucrNudSignifDigits.SetMinMax(iNewMin:=0, iNewMax:=22)
@@ -201,6 +202,7 @@ Public Class dlgTransform
         dctPowerValues.Add("0.5", "0.5")
         ucrInputPower.SetItems(dctPowerValues)
         ucrInputPower.AddQuotesIfUnrecognised = False
+        ucrInputPower.bAllowNonConditionValues = True
 
         ucrInputConstant.SetParameter(New RParameter("c", 1))
         dctConstantValues.Add("0", "0")
@@ -400,10 +402,12 @@ Public Class dlgTransform
         clsScaleDivideOperator.SetOperation("/")
         clsScaleDivideOperator.AddParameter("x", clsROperatorParameter:=clsScaleMultiplyOperator, iPosition:=0)
         clsScaleDivideOperator.AddParameter("z", "1", iPosition:=1)
+        clsScaleDivideOperator.bBrackets = False
 
         clsScaleAddOperator.SetOperation("+")
         clsScaleAddOperator.AddParameter("x", clsROperatorParameter:=clsScaleDivideOperator, iPosition:=0)
         clsScaleAddOperator.AddParameter("v", "0", iPosition:=1)
+        clsScaleAddOperator.bBrackets = False
 
         clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
         clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
@@ -599,7 +603,7 @@ Public Class dlgTransform
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
-    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged, ucrChkAddConstant.ControlContentsChanged
+    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged, ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
