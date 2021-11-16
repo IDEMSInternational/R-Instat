@@ -184,6 +184,12 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="dlgClusterAnalysis.Designer.vb">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -560,6 +566,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.Designer.vb">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
@@ -2841,6 +2853,9 @@
     <EmbeddedResource Include="dlgCluster.resx">
       <DependentUpon>dlgCluster.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClusterAnalysis.resx">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2976,6 +2991,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFormatSummaryTables.resx">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
