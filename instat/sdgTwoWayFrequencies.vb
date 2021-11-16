@@ -104,6 +104,7 @@ Public Class sdgTwoWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoBoxPlot, Chr(34) & "boxplot" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoViolinPlot, Chr(34) & "violin" & Chr(34))
+        ucrPnlGraphType.AddToLinkedControls(ucrChkShowPercentage, {rdoBar, rdoDot, rdoLineGraph, rdoViolinPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
