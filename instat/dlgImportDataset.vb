@@ -38,6 +38,10 @@ Public Class dlgImportDataset
     Private bSupressSheetChange As Boolean = False
     'key value map of excel sheet number and sheet name
     Private dctSelectedExcelSheets As New Dictionary(Of Integer, String)
+    Private clsDetectEmptyCols As New RFunction
+    Private clsConcFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
@@ -271,6 +275,9 @@ Public Class dlgImportDataset
         ucrNudMaxRowsText.Minimum = 0
         ucrNudMaxRowsText.Maximum = Decimal.MaxValue
 
+        ucrChkDropEmptyCols.SetText("Drop Empty Columns")
+        ucrChkDropEmptyCols.AddParameterValuesCondition(True, "isRFunction", "True")
+        ucrChkDropEmptyCols.AddParameterValuesCondition(False, "isRFunction", "False")
     End Sub
 
     Private Sub SetDefaults()
@@ -286,6 +293,8 @@ Public Class dlgImportDataset
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
+        clsDetectEmptyCols = New RFunction
+        clsDummyFunction = New RFunction
 
         clsImportExcelMulti = New RFunction
 
@@ -357,6 +366,20 @@ Public Class dlgImportDataset
         clsImportMultipleTextFiles.SetRCommand("lapply")
         clsImportMultipleTextFiles.AddParameter("X", clsRFunctionParameter:=clsSetNames, iPosition:=0)
         clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
+
+        clsConcFunction.SetRCommand("c")
+        clsConcFunction.AddParameter("x", "rows", iPosition:=0)
+        clsConcFunction.AddParameter("y", "cols", iPosition:=1)
+
+        clsDetectEmptyCols.SetPackageName("janitor")
+        clsDetectEmptyCols.SetRCommand("remove_empty")
+        clsDetectEmptyCols.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        'clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsReadRDS, iPosition:=0)
+        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyCols, iPosition:=1)
+
+        clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -440,6 +463,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
+        ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -500,6 +524,7 @@ Public Class dlgImportDataset
         ucrChkRange.SetRCode(clsImportExcel, bReset)
         ucrInputTextFrom.SetRCode(clsRangeOperator, bReset)
         ucrInputTextTo.SetRCode(clsRangeOperator, bReset)
+        ucrChkDropEmptyCols.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
@@ -662,6 +687,7 @@ Public Class dlgImportDataset
         TestOkEnabled()
 
         autoTranslate(Me)
+        RemoveMissingValues()
     End Sub
 
     Private Sub TryTextPreview()
@@ -905,6 +931,7 @@ Public Class dlgImportDataset
         End If
         TryTextPreview()
         TryGridPreview()
+        RemoveMissingValues()
         TestOkEnabled()
     End Sub
 
@@ -948,6 +975,7 @@ Public Class dlgImportDataset
         bSupressCheckAllSheets = False
         ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=dctSelectedExcelSheets.Count > 1)
         TryGridPreview()
+        RemoveMissingValues()
         TestOkEnabled()
     End Sub
 
@@ -1100,5 +1128,21 @@ Public Class dlgImportDataset
         Return {".xlsx", ".xls"}.Contains(strFileExtension)
     End Function
 
+    Private Sub RemoveMissingValues()
+        Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
+        If ucrChkDropEmptyCols.Checked Then
+            Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
+            clsTempFunction.RemoveAssignTo()
+            clsDummyFunction.AddParameter("isRFunction", "True", iPosition:=0)
+            clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+        Else
+            clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
+        End If
+    End Sub
 
+    Private Sub ucrChkDropEmptyCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropEmptyCols.ControlValueChanged
+        RemoveMissingValues()
+    End Sub
 End Class

@@ -110,6 +110,7 @@ Partial Class dlgImportDataset
         Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkDropEmptyCols = New instat.ucrCheck()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -642,10 +643,17 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkDropEmptyCols
+        '
+        Me.ucrChkDropEmptyCols.Checked = False
+        resources.ApplyResources(Me.ucrChkDropEmptyCols, "ucrChkDropEmptyCols")
+        Me.ucrChkDropEmptyCols.Name = "ucrChkDropEmptyCols"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkDropEmptyCols)
         Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
@@ -761,4 +769,5 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
     Friend WithEvents ucrSaveFile As ucrSave
     Friend WithEvents ucrChkMultipleFiles As ucrCheck
+    Friend WithEvents ucrChkDropEmptyCols As ucrCheck
 End Class
