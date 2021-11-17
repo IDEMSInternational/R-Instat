@@ -2411,7 +2411,7 @@ Public Class RLink
                 Dim clsNewRParameter As New clsRParameter
 
                 'Assign the parameter Name
-                clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName)
+                clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
                 'Adding the parameter value
                 'check to remove the [1] notation before some parameter values
                 If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
