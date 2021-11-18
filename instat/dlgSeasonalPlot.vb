@@ -192,7 +192,7 @@ Public Class dlgSeasonalPlot
         ucrInputSmoothing.AddRCodeIsRFunctionCondition("Periodic Splines", bNewIsPositive:=False)
         ucrInputSmoothing.AddParameterValueFunctionNamesCondition("Periodic Splines", strParameterName:="1", strFunctionName:="pbs")
         ucrInputSmoothing.AddRCodeIsRFunctionCondition("Natural Splines", bNewIsPositive:=False)
-        ucrInputSmoothing.AddParameterValueFunctionNamesCondition("Natural Splines", strParameterName:="1", strFunctionName:="ns")
+        ucrInputSmoothing.AddParameterValueFunctionNamesCondition("Natural Splines", strParameterName:="1", strFunctionName:="mspline")
         ucrInputSmoothing.AddRCodeIsRFunctionCondition("LOESS", bNewIsPositive:=False)
         ucrInputSmoothing.AddParameterIsStringCondition("LOESS", "1")
 
@@ -450,8 +450,8 @@ Public Class dlgSeasonalPlot
         clsPbsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
         clsPbsFunction.AddParameter("df", 6, iPosition:=1)
 
-        clsNsFunction.SetPackageName("splines")
-        clsNsFunction.SetRCommand("ns")
+        clsNsFunction.SetPackageName("splines2")
+        clsNsFunction.SetRCommand("mspline")
         clsNsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
         clsNsFunction.AddParameter("df", 6, iPosition:=1)
 
