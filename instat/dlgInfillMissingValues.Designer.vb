@@ -33,11 +33,9 @@ Partial Class dlgInfillMissingValues
         Me.rdoFitSingle = New System.Windows.Forms.RadioButton()
         Me.rdoFitMultiple = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.lblValue = New System.Windows.Forms.Label()
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
@@ -52,6 +50,19 @@ Partial Class dlgInfillMissingValues
         Me.lblImputed = New System.Windows.Forms.Label()
         Me.lblDisplayElement = New System.Windows.Forms.Label()
         Me.lblDisplayDate = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.lblIntervalSize = New System.Windows.Forms.Label()
+        Me.lblDispMultShowStation = New System.Windows.Forms.Label()
+        Me.lblTrueValues = New System.Windows.Forms.Label()
+        Me.lblPercentCount = New System.Windows.Forms.Label()
+        Me.ucrInputComboMeasure = New instat.ucrInputComboBox()
+        Me.ucrReceiverTrueValues = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDispMultShowStation = New instat.ucrReceiverSingle()
+        Me.ucrInputIntervalSize = New instat.ucrInputTextBox()
+        Me.ucrChkFlipCordinates = New instat.ucrCheck()
+        Me.ucrInputComboType = New instat.ucrInputComboBox()
+        Me.ucrChkAddLegend = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudFacetColumns = New instat.ucrNud()
         Me.ucrReceiverImputed = New instat.ucrReceiverSingle()
@@ -74,25 +85,14 @@ Partial Class dlgInfillMissingValues
         Me.ucrChkMaxGap = New instat.ucrCheck()
         Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrChkCopyFromBelow = New instat.ucrCheck()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrChkAddLegend = New instat.ucrCheck()
-        Me.ucrInputComboType = New instat.ucrInputComboBox()
-        Me.lblType = New System.Windows.Forms.Label()
-        Me.ucrChkFlipCordinates = New instat.ucrCheck()
-        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.ucrInputIntervalSize = New instat.ucrInputTextBox()
-        Me.lblIntervalSize = New System.Windows.Forms.Label()
-        Me.ucrReceiverDispMultShowStation = New instat.ucrReceiverSingle()
-        Me.lblDispMultShowStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverTrueValues = New instat.ucrReceiverSingle()
-        Me.lblTrueValues = New System.Windows.Forms.Label()
-        Me.ucrInputComboMeasure = New instat.ucrInputComboBox()
-        Me.lblPercentCount = New System.Windows.Forms.Label()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -177,11 +177,6 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        '
         'grpStartEnd
         '
         Me.grpStartEnd.Controls.Add(Me.rdoExtendFill)
@@ -204,11 +199,6 @@ Partial Class dlgInfillMissingValues
         Me.rdoLeaveAsMissing.Name = "rdoLeaveAsMissing"
         Me.rdoLeaveAsMissing.TabStop = True
         Me.rdoLeaveAsMissing.UseVisualStyleBackColor = True
-        '
-        'ucrPnlStartEnd
-        '
-        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
-        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
         '
         'lblValue
         '
@@ -289,6 +279,91 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblDisplayDate, "lblDisplayDate")
         Me.lblDisplayDate.Name = "lblDisplayDate"
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'lblIntervalSize
+        '
+        resources.ApplyResources(Me.lblIntervalSize, "lblIntervalSize")
+        Me.lblIntervalSize.Name = "lblIntervalSize"
+        '
+        'lblDispMultShowStation
+        '
+        resources.ApplyResources(Me.lblDispMultShowStation, "lblDispMultShowStation")
+        Me.lblDispMultShowStation.Name = "lblDispMultShowStation"
+        '
+        'lblTrueValues
+        '
+        resources.ApplyResources(Me.lblTrueValues, "lblTrueValues")
+        Me.lblTrueValues.Name = "lblTrueValues"
+        '
+        'lblPercentCount
+        '
+        resources.ApplyResources(Me.lblPercentCount, "lblPercentCount")
+        Me.lblPercentCount.Name = "lblPercentCount"
+        '
+        'ucrInputComboMeasure
+        '
+        Me.ucrInputComboMeasure.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeasure.GetSetSelectedIndex = -1
+        Me.ucrInputComboMeasure.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMeasure, "ucrInputComboMeasure")
+        Me.ucrInputComboMeasure.Name = "ucrInputComboMeasure"
+        '
+        'ucrReceiverTrueValues
+        '
+        Me.ucrReceiverTrueValues.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverTrueValues, "ucrReceiverTrueValues")
+        Me.ucrReceiverTrueValues.Name = "ucrReceiverTrueValues"
+        Me.ucrReceiverTrueValues.Selector = Nothing
+        Me.ucrReceiverTrueValues.strNcFilePath = ""
+        Me.ucrReceiverTrueValues.ucrSelector = Nothing
+        '
+        'ucrReceiverDispMultShowStation
+        '
+        Me.ucrReceiverDispMultShowStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDispMultShowStation, "ucrReceiverDispMultShowStation")
+        Me.ucrReceiverDispMultShowStation.Name = "ucrReceiverDispMultShowStation"
+        Me.ucrReceiverDispMultShowStation.Selector = Nothing
+        Me.ucrReceiverDispMultShowStation.strNcFilePath = ""
+        Me.ucrReceiverDispMultShowStation.ucrSelector = Nothing
+        '
+        'ucrInputIntervalSize
+        '
+        Me.ucrInputIntervalSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputIntervalSize.IsMultiline = False
+        Me.ucrInputIntervalSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputIntervalSize, "ucrInputIntervalSize")
+        Me.ucrInputIntervalSize.Name = "ucrInputIntervalSize"
+        '
+        'ucrChkFlipCordinates
+        '
+        Me.ucrChkFlipCordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkFlipCordinates, "ucrChkFlipCordinates")
+        Me.ucrChkFlipCordinates.Name = "ucrChkFlipCordinates"
+        '
+        'ucrInputComboType
+        '
+        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
+        Me.ucrInputComboType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
+        Me.ucrInputComboType.Name = "ucrInputComboType"
+        '
+        'ucrChkAddLegend
+        '
+        Me.ucrChkAddLegend.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLegend, "ucrChkAddLegend")
+        Me.ucrChkAddLegend.Name = "ucrChkAddLegend"
         '
         'ucrSaveGraph
         '
@@ -465,6 +540,11 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkCopyFromBelow, "ucrChkCopyFromBelow")
         Me.ucrChkCopyFromBelow.Name = "ucrChkCopyFromBelow"
         '
+        'ucrPnlStartEnd
+        '
+        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        '
         'ucrSaveNewColumn
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
@@ -505,90 +585,10 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrChkAddLegend
+        'ucrPnlMethods
         '
-        Me.ucrChkAddLegend.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLegend, "ucrChkAddLegend")
-        Me.ucrChkAddLegend.Name = "ucrChkAddLegend"
-        '
-        'ucrInputComboType
-        '
-        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboType.GetSetSelectedIndex = -1
-        Me.ucrInputComboType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
-        Me.ucrInputComboType.Name = "ucrInputComboType"
-        '
-        'lblType
-        '
-        resources.ApplyResources(Me.lblType, "lblType")
-        Me.lblType.Name = "lblType"
-        '
-        'ucrChkFlipCordinates
-        '
-        Me.ucrChkFlipCordinates.Checked = False
-        resources.ApplyResources(Me.ucrChkFlipCordinates, "ucrChkFlipCordinates")
-        Me.ucrChkFlipCordinates.Name = "ucrChkFlipCordinates"
-        '
-        'cmdDisplayOptions
-        '
-        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
-        'ucrInputIntervalSize
-        '
-        Me.ucrInputIntervalSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputIntervalSize.IsMultiline = False
-        Me.ucrInputIntervalSize.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputIntervalSize, "ucrInputIntervalSize")
-        Me.ucrInputIntervalSize.Name = "ucrInputIntervalSize"
-        '
-        'lblIntervalSize
-        '
-        resources.ApplyResources(Me.lblIntervalSize, "lblIntervalSize")
-        Me.lblIntervalSize.Name = "lblIntervalSize"
-        '
-        'ucrReceiverDispMultShowStation
-        '
-        Me.ucrReceiverDispMultShowStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDispMultShowStation, "ucrReceiverDispMultShowStation")
-        Me.ucrReceiverDispMultShowStation.Name = "ucrReceiverDispMultShowStation"
-        Me.ucrReceiverDispMultShowStation.Selector = Nothing
-        Me.ucrReceiverDispMultShowStation.strNcFilePath = ""
-        Me.ucrReceiverDispMultShowStation.ucrSelector = Nothing
-        '
-        'lblDispMultShowStation
-        '
-        resources.ApplyResources(Me.lblDispMultShowStation, "lblDispMultShowStation")
-        Me.lblDispMultShowStation.Name = "lblDispMultShowStation"
-        '
-        'ucrReceiverTrueValues
-        '
-        Me.ucrReceiverTrueValues.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverTrueValues, "ucrReceiverTrueValues")
-        Me.ucrReceiverTrueValues.Name = "ucrReceiverTrueValues"
-        Me.ucrReceiverTrueValues.Selector = Nothing
-        Me.ucrReceiverTrueValues.strNcFilePath = ""
-        Me.ucrReceiverTrueValues.ucrSelector = Nothing
-        '
-        'lblTrueValues
-        '
-        resources.ApplyResources(Me.lblTrueValues, "lblTrueValues")
-        Me.lblTrueValues.Name = "lblTrueValues"
-        '
-        'ucrInputComboMeasure
-        '
-        Me.ucrInputComboMeasure.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMeasure.GetSetSelectedIndex = -1
-        Me.ucrInputComboMeasure.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMeasure, "ucrInputComboMeasure")
-        Me.ucrInputComboMeasure.Name = "ucrInputComboMeasure"
-        '
-        'lblPercentCount
-        '
-        resources.ApplyResources(Me.lblPercentCount, "lblPercentCount")
-        Me.lblPercentCount.Name = "lblPercentCount"
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'dlgInfillMissingValues
         '
