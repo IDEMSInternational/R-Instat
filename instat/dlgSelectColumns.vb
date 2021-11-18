@@ -19,8 +19,7 @@ Imports instat.Translations
 Public Class dlgSelectColumns
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Public bSelectedColumns As Boolean = True
-    Public clsAddColumnSelection As RFunction
+    Public clsAddColumnSelection As New RFunction
     Private clsConditionsList As RFunction
     Private clsFromToOperation As ROperator
     Private Sub dlgSelectColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -130,12 +129,14 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub ucrInputSelectName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectName.ControlValueChanged
-        If clsAddColumnSelection IsNot Nothing Then
-            If Not ucrInputSelectName.IsEmpty() Then
-                clsAddColumnSelection.AddParameter("name", Chr(34) & ucrInputSelectName.GetText() & Chr(34), iPosition:=1)
-            Else
-                clsAddColumnSelection.RemoveParameterByName("name")
-            End If
+        AddRemoveSelectionName()
+    End Sub
+
+    Private Sub AddRemoveSelectionName()
+        If Not ucrInputSelectName.IsEmpty() Then
+            clsAddColumnSelection.AddParameter("name", Chr(34) & ucrInputSelectName.GetText() & Chr(34), iPosition:=1)
+        Else
+            clsAddColumnSelection.RemoveParameterByName("name")
         End If
     End Sub
 
@@ -254,14 +255,12 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
-        If bSelectedColumns Then
-            If lstColumnSelections.Items.Count > 0 Then
-                frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
-                dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
-                lstColumnSelections.Items.Clear()
-                clsConditionsList.ClearParameters()
-                bSelectedColumns = False
-            End If
+        AddRemoveSelectionName()
+        If lstColumnSelections.Items.Count > 0 Then
+            frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
+            dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
+            lstColumnSelections.Items.Clear()
+            clsConditionsList.ClearParameters()
         End If
     End Sub
 

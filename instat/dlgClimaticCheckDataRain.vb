@@ -696,6 +696,9 @@ Public Class dlgClimaticCheckDataRain
 
         GroupByOptions()
         GroupByMonth()
+    End Sub
+
+    Private Sub ucrSelectorRain_DataFrameChanged() Handles ucrSelectorRain.DataFrameChanged
         AutoFillRainColumn()
     End Sub
 
