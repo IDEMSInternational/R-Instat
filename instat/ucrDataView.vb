@@ -58,10 +58,10 @@ Public Class ucrDataView
         End If
         AddColumns(dataFrame.clsVisiblePage, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
-        UpdateNavigationButtons()
         UpdateWorksheetStyle(fillWorkSheet)
-
         dataFrame.clsVisiblePage.HasChanged = False
+        grdData.CurrentWorksheet = fillWorkSheet
+        RefreshDisplayInformation()
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
@@ -92,18 +92,21 @@ Public Class ucrDataView
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
-        'This should use existing worksheets rather than re adding
-        Dim fillWorkSheet As Worksheet
-        ' grid.Worksheets.Clear()
+        Dim firstAddedWorksheet As Worksheet = Nothing
         For Each clsDataFrame In _clsDataBook.DataFrames
-            fillWorkSheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
+            Dim fillWorkSheet As Worksheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.strName).FirstOrDefault
             If fillWorkSheet Is Nothing Then
                 fillWorkSheet = grid.CreateWorksheet(clsDataFrame.strName)
                 grid.AddWorksheet(fillWorkSheet)
+                If firstAddedWorksheet Is Nothing Then
+                    firstAddedWorksheet = fillWorkSheet
+                End If
             End If
             RefreshWorksheet(fillWorkSheet, clsDataFrame)
         Next
-
+        If firstAddedWorksheet IsNot Nothing Then
+            grid.CurrentWorksheet = firstAddedWorksheet
+        End If
     End Sub
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
@@ -128,13 +131,14 @@ Public Class ucrDataView
 
     Private Sub AddRowData(dataFrame As clsDataFrame, workSheet As Worksheet)
         Dim textColour As Color
-        Dim rngDataRange As RangePosition
         Dim strRowNames As String()
 
+        If dataFrame.iDisplayedRowCount = 0 Then
+            AddBlankRow(workSheet)
+            Exit Sub
+        End If
         workSheet.Rows = dataFrame.iDisplayedRowCount
-
-        rngDataRange = New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
-        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+        UpdateWorksheetSettings(workSheet)
 
         If dataFrame.clsFilter.bApplied Then
             textColour = Color.Red
@@ -152,6 +156,23 @@ Public Class ucrDataView
         Next
     End Sub
 
+    Private Sub UpdateWorksheetSettings(workSheet As Worksheet)
+        workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+        workSheet.SetRowsHeight(0, 1, 20)
+        Dim rngDataRange As New RangePosition(0, 0, workSheet.Rows, workSheet.Columns)
+        workSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+    End Sub
+
+    Private Sub AddBlankRow(workSheet As Worksheet)
+        workSheet.Rows = 1
+        For i = 0 To workSheet.Columns - 1
+            workSheet(0, col:=i) = ""
+        Next
+        workSheet.SetRowsHeight(0, 1, 0.1)
+        workSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
+        Exit Sub
+    End Sub
+
     Public Sub RefreshGridData()
         If _clsDataBook Is Nothing Then
             Exit Sub
@@ -159,7 +180,9 @@ Public Class ucrDataView
         _clsDataBook.RefreshData()
         AddAndUpdateWorksheets(grdData)
         RemoveOldWorksheets(grdData)
-        grdData.Visible = Not grdData.Worksheets.Count = 0
+        If _clsDataBook.DataFrames.Count = 0 Then
+            RefreshDisplayInformation()
+        End If
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -167,7 +190,7 @@ Public Class ucrDataView
     End Function
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        If grdData.CurrentWorksheet.SelectionRange.Cols = grdData.CurrentWorksheet.ColumnCount Then
+        If grdData.CurrentWorksheet.SelectionRange.Cols = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
@@ -223,7 +246,7 @@ Public Class ucrDataView
         If grdData.Worksheets.Count < 1 Then
             grdData.Hide()
         ElseIf grdCurrSheet.Equals(e.Worksheet) Then
-            UpdateCurrentWorksheet()
+            RefreshDisplayInformation()
             grdData.Refresh()
         End If
     End Sub
@@ -234,11 +257,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
-        UpdateCurrentWorksheet()
+        RefreshDisplayInformation()
     End Sub
 
-    Public Sub UpdateCurrentWorksheet()
+
+    Private Sub RefreshDisplayInformation()
         grdCurrSheet = grdData.CurrentWorksheet
+        grdData.Visible = Not grdData.Worksheets.Count = 0
         If grdCurrSheet IsNot Nothing AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
@@ -802,49 +827,41 @@ Public Class ucrDataView
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColFirst_Click(sender As Object, e As EventArgs) Handles lblColFirst.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColBack_Click(sender As Object, e As EventArgs) Handles lblColBack.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColNext_Click(sender As Object, e As EventArgs) Handles lblColNext.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColLast_Click(sender As Object, e As EventArgs) Handles lblColLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastColumnPage()
-        UpdateCurrentWorksheet()
         RefreshWorksheet(grdData.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 

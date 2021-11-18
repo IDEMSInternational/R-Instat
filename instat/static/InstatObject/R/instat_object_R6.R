@@ -223,7 +223,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
     new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
     new_filters <- lapply(new_filters, function(x) check_filter(x))
   } else new_filters <- list()
-  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- lapply(curr_data_object$get_column_selection(), function(x) x$data_clone())
+  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- curr_data_object$get_column_selection()
   else new_column_selections <- list()
   if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
   else new_calculations <- list()
@@ -990,7 +990,7 @@ DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_bo
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
-    data_objects_changed <- TRUE
+    self$data_objects_changed <- TRUE
     link_names <- c()
     for(i in seq_along(private$.links)) {
       if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
