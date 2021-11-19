@@ -2369,16 +2369,55 @@ Public Class RLink
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the list of clsRParameter from the <paramref name="strFunctionName"/> function definition 
-    ''' (e.g. when "stringr::str_split" is passed as the function name, this functins returns its 4 default parameters ie
-    ''' clsParameter 1: Argument Name ="string" , Parameter position = 0 , Default value = "NODEFAULTVALUE" 
-    ''' clsParameter 2: Argument Name = "patterm" , Parameter position = 1 , Default value = "NODEFAULTVALUE"
-    ''' clsParameter 3: Argument Name="n" , Parameter position = 2 , Default value = "Inf"
-    ''' clsParameter 4: Argument Name="simplify" , Parameter position = 3 , Default value = "FALSE")
-    ''' </summary>
-    '''
+    ''' (e.g. the function "stringr::str_split"  returns "str_split(string, pattern, n = Inf, simplify = FALSE)" ie
+    ''' 
+    ''' <list type="bullet">
+    '''  <item>
+    '''  $string
+    '''  </item>
+    '''  <item>
+    '''  
+    '''  </item>    
+    '''  <item>
+    '''  $pattern  
+    '''  </item>
+    '''  <item>
+    ''' 
+    '''  </item>
+    '''  <item>
+    '''  $n
+    '''  </item>
+    '''  <item>
+    '''  [1] Inf
+    '''  </item>
+    '''  <item>
+    '''  $simplify
+    '''  </item>
+    '''  <item>
+    '''  [1] FALSE    
+    '''  </item>
+    '''  
+    ''' </list>
+    ''' <list type="bullet">
+    '''     <item><description>
+    '''             clsParameter 1: Argument Name ="string" , Parameter position = 0 , Default value = NOTHING 
+    '''     </description></item><item><description>
+    '''             clsParameter 2: Argument Name = "patterm" , Parameter position = 1 , Default value = NOTHING
+    '''     </description></item><item><description>
+    '''             clsParameter 3: Argument Name="n" , Parameter position = 2 , Default value = "Inf"
+    '''     </description></item><item><description>
+    '''             clsParameter 4: Argument Name="simplify" , Parameter position = 3 , Default value = "FALSE")
+    '''     </description></item><item><description>
+    '''             Define what to do with the result returned from the R command (e.g. ignore, show 
+    '''             the result as text, show the result as a graph or store in a temporary variable).
+    '''     </description></item><item><description>
+    '''             Return the R command as an executable R string.
+    '''     </description></item>
+    ''' </list>
     ''' <param name="strFunctionName">  The function name provided. </param>
     '''
     ''' <returns>   The list of clsRParameter. </returns>
+    ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
         'temporary object that retrieves the output from the environment
@@ -2396,54 +2435,54 @@ Public Class RLink
 
         'TODO check that the fuction name provided has no pening and closing brackets at the end
         '?QUESTION /CLARIFICATION Parameters value fror the function  ?gt::cols_merge() are being split into different parts
-        If Evaluate(strTempAssignTo & " <- " & "capture.output(" & clsAsListFunction.ToScript() & ")", bSilent:=True) Then
-            expTemp = GetSymbol(strTempAssignTo)
-            Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
-            If expTemp Is Nothing Then
-                Return Nothing
-            End If
-            Dim iNewArgPosition As Integer = 0
-            'parameter name position
-            Dim iParameterName As Integer = 0
-            'parameter value position
-            Dim iParameterValue As Integer = 1
-            While (iParameterName < expTemp.AsCharacter().Length)
-                Dim clsNewRParameter As New clsRParameter
-
-                'Assign the parameter Name
-                clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
-                'Adding the parameter value
-                'check to remove the [1] notation before some parameter values
-                If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
-                    Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                    clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(strcleanArgument).lstRStatements(0).clsElement
-                Else
-                    'Empty string are not accepted hence the modification below
-                    If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                        clsNewRParameter.clsArgValueDefault = New RScript.clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
-                    Else
-                        clsNewRParameter.clsArgValueDefault = New RScript.clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
-                    End If
-
-                End If
-                'Assign the parameter Value
-                clsNewRParameter.iArgPosDefinition = iNewArgPosition
-
-                'TEMPORARY FUNCTIONALITY FOR PRESENTATION
-                Console.WriteLine("PARAMETER" & clsNewRParameter.iArgPosDefinition)
-                Console.WriteLine("..strArgumentName:" & clsNewRParameter.strArgName)
-                Console.WriteLine("..strArgumentValue:" & clsNewRParameter.clsArgValueDefault.strTxt)
-                Console.WriteLine("..ArgumentPosition:" & clsNewRParameter.iArgPosDefinition)
-
-                iNewArgPosition += 1
-                iParameterName += 3
-                iParameterValue += 3
-                lstRParameters.Add(clsNewRParameter)
-            End While
-
-        Else
+        If Not Evaluate(strTempAssignTo & " <- " & "capture.output(" & clsAsListFunction.ToScript() & ")", bSilent:=True) Then
             'Error getting the parameters either the function name provided is incorrect/package containing the function isn't loaded 
+            Return Nothing
         End If
+        expTemp = GetSymbol(strTempAssignTo)
+        Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+        If expTemp Is Nothing Then
+            Return Nothing
+        End If
+        Dim iNewArgPosition As Integer = 0
+        'parameter name position
+        Dim iParameterName As Integer = 0
+        'parameter value position
+        Dim iParameterValue As Integer = 1
+        While (iParameterName < expTemp.AsCharacter().Length)
+            Dim clsNewRParameter As New clsRParameter
+
+            'Assign the parameter Name
+            clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
+            'Adding the parameter value
+            'check to remove the [1] notation before some parameter values
+            If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
+                Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
+                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).lstRStatements(0).clsElement
+            Else
+                'Empty string are not accepted hence the modification below
+                'If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
+                '    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
+                'Else
+                clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                'End If
+
+            End If
+            'Assign the parameter Value
+            clsNewRParameter.iArgPosDefinition = iNewArgPosition
+
+            'TEMPORARY FUNCTIONALITY FOR PRESENTATION
+            Console.WriteLine("PARAMETER" & clsNewRParameter.iArgPosDefinition)
+            Console.WriteLine("..strArgumentName:" & clsNewRParameter.strArgName)
+            Console.WriteLine("..strArgumentValue:" & clsNewRParameter.clsArgValueDefault.strTxt)
+            Console.WriteLine("..ArgumentPosition:" & clsNewRParameter.iArgPosDefinition)
+
+            iNewArgPosition += 1
+            iParameterName += 3
+            iParameterValue += 3
+            lstRParameters.Add(clsNewRParameter)
+        End While
+
         Return lstRParameters
     End Function
 End Class
