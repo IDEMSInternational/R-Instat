@@ -20,7 +20,7 @@ Public Class dlgStack
     Private clsPivotLongerFunction As RFunction
     Private clsSelectFunction As RFunction
     Private clsReshapeFunction As RFunction
-    Private clsSplitColumnsInGroups As RFunction
+    Private clsSplitColumnsFunction As RFunction
     Private clsPipeOperator As ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
