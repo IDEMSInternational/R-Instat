@@ -303,6 +303,8 @@ Public Class dlgImportDataset
         clsImportMultipleTextFiles = New RFunction
         clsFileNamesWithExt = New RFunction
 
+        ucrChkDropEmptyCols.Visible = False
+
         clsImportTextFileFormats.SetPackageName("readr")
         clsImportTextFileFormats.SetRCommand("read_table")
 
@@ -1131,7 +1133,7 @@ Public Class dlgImportDataset
 
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
-        If strFileExtension IsNot ".rds" And ucrChkMultipleFiles.Checked = False Then
+        If Not strFileExtension = ".rds" AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportExcelMulti AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportMultipleFiles AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportMultipleTextFiles Then
             ucrChkDropEmptyCols.Visible = True
             If ucrChkDropEmptyCols.Checked Then
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
