@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgStack
     Private clsUnnestTokensFunction As RFunction
     Private clsPivotLongerFunction As RFunction
@@ -189,7 +190,7 @@ Public Class dlgStack
         clsUnnestTokensFunction = New RFunction
         clsSelectFunction = New RFunction
         clsReshapeFunction = New RFunction
-        clsSplitColumnsInGroups = New RFunction
+        clsSplitColumnsFunction = New RFunction
         clsPipeOperator = New ROperator
 
         ucrSelectorStack.Reset()
@@ -209,12 +210,12 @@ Public Class dlgStack
         clsReshapeFunction.SetPackageName("stats")
         clsReshapeFunction.SetRCommand("reshape")
         clsReshapeFunction.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-        clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34))
+        clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34), iPosition:=4)
 
-        clsSplitColumnsInGroups.SetRCommand("split_items_in_groups")
-        clsSplitColumnsInGroups.AddParameter("num", 2, iPosition:=1)
+        clsSplitColumnsFunction.SetRCommand("split_items_in_groups")
+        clsSplitColumnsFunction.AddParameter("num", 2)
 
-        clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsInGroups, iPosition:=1)
+        clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsFunction, iPosition:=1)
 
         clsPipeOperator.SetOperation(" %>% ")
         clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -224,10 +225,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsInGroups, New RParameter("items", 0), iAdditionalPairNo:=1)
+        ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsFunction, New RParameter("items", 0), iAdditionalPairNo:=1)
         ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNudNoSets.SetRCode(clsSplitColumnsInGroups, bReset)
+        ucrNudNoSets.SetRCode(clsSplitColumnsFunction, bReset)
 
         ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
         ucrSelectorStack.SetRCode(clsUnnestTokensFunction, bReset)
@@ -252,13 +253,18 @@ Public Class dlgStack
 
     Private Sub TestOKEnabled()
         If rdoUnnest.Checked Then
-            If ucrReceiverTextColumn.IsEmpty OrElse ucrInputOutput.IsEmpty OrElse ucrInputToken.IsEmpty OrElse ucrInputFormat.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete Then
+            If ucrReceiverTextColumn.IsEmpty OrElse ucrInputOutput.IsEmpty OrElse
+                ucrInputToken.IsEmpty OrElse
+                ucrInputFormat.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
             End If
         Else
-            If ucrReceiverColumnsToBeStack.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete OrElse ucrInputNamesTo.IsEmpty OrElse ucrInputValuesTo.IsEmpty OrElse ucrFactorInto.IsEmpty OrElse (ucrReceiverColumnsToCarry.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
+            If ucrReceiverColumnsToBeStack.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete OrElse
+                ucrInputNamesTo.IsEmpty OrElse ucrInputValuesTo.IsEmpty OrElse
+                ucrFactorInto.IsEmpty OrElse
+                (ucrReceiverColumnsToCarry.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -344,7 +350,7 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub SetSingleOrMultipleOptions()
+    Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
         If ucrChkStackMultipleSets.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReshapeFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
@@ -352,9 +358,5 @@ Public Class dlgStack
             ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
         End If
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
-        SetSingleOrMultipleOptions()
     End Sub
 End Class
