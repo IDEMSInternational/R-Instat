@@ -2416,7 +2416,6 @@ Public Class RLink
         ElseIf strCommentFromDialogue.Contains("combine factors") Then
             dlgCombine.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgCombine.ShowDialog()
-            dlgRecodeFactor.ShowDialog()
         ElseIf strCommentFromDialogue.Contains("dummy variable") Then
             lstNewRCodeStructures.RemoveAt(0)
             dlgDummyVariables.lstScriptsRCodeStructure = lstNewRCodeStructures
