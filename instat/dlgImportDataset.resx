@@ -2025,7 +2025,7 @@ white spaces</value>
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrChkDropEmptyCols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
+    <value>211, 20</value>
   </data>
   <data name="ucrChkDropEmptyCols.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>

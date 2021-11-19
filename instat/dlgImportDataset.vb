@@ -275,7 +275,7 @@ Public Class dlgImportDataset
         ucrNudMaxRowsText.Minimum = 0
         ucrNudMaxRowsText.Maximum = Decimal.MaxValue
 
-        ucrChkDropEmptyCols.SetText("Drop Empty Columns")
+        ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
         ucrChkDropEmptyCols.AddParameterValuesCondition(True, "isRFunction", "True")
         ucrChkDropEmptyCols.AddParameterValuesCondition(False, "isRFunction", "False")
     End Sub
@@ -368,15 +368,14 @@ Public Class dlgImportDataset
         clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
 
         clsConcFunction.SetRCommand("c")
-        clsConcFunction.AddParameter("x", "rows", iPosition:=0)
-        clsConcFunction.AddParameter("y", "cols", iPosition:=1)
+        clsConcFunction.AddParameter("x", Chr(34) & "rows" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("y", Chr(34) & "cols" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
         clsDetectEmptyCols.SetPackageName("janitor")
         clsDetectEmptyCols.SetRCommand("remove_empty")
         clsDetectEmptyCols.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
 
         clsPipeOperator.SetOperation("%>%")
-        'clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsReadRDS, iPosition:=0)
         clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyCols, iPosition:=1)
 
         clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
@@ -877,7 +876,9 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged, ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
+    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
+        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged,
+        ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
     End Sub
@@ -1130,14 +1131,21 @@ Public Class dlgImportDataset
 
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
-        If ucrChkDropEmptyCols.Checked Then
-            Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
-            clsTempFunction.RemoveAssignTo()
-            clsDummyFunction.AddParameter("isRFunction", "True", iPosition:=0)
-            clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+        If strFileExtension IsNot ".rds" And ucrChkMultipleFiles.Checked = False Then
+            ucrChkDropEmptyCols.Visible = True
+            If ucrChkDropEmptyCols.Checked Then
+                Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
+                clsTempFunction.RemoveAssignTo()
+                clsTempFunction.bExcludeAssignedFunctionOutput = False
+                clsDummyFunction.AddParameter("isRFunction", "True", iPosition:=0)
+                clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            Else
+                clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
+            End If
         Else
-            clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
+            ucrChkDropEmptyCols.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
         End If
     End Sub
