@@ -96,10 +96,6 @@ Public Class RLink
     ''' <summary>   True if the link to the R environment is initialised. </summary>
     Public bREngineInitialised As Boolean = False
 
-
-    ''' The R output window (the window on the right that displays the R scripts and results).
-    Public rtbOutput As New ucrWPFRichTextBox
-
     ''' The log window.
     Public txtLog As New TextBox
 
@@ -107,7 +103,7 @@ Public Class RLink
     Public bLog As Boolean = False
 
     ''' <summary> True if the R output window is defined.</summary>
-    Public bOutput As Boolean = False
+    Public bOutput As Boolean = True
 
 
     ''' <summary>   True to climate object exists. </summary>
@@ -170,6 +166,16 @@ Public Class RLink
     ''' <summary>   The R bundled version. </summary>
     Private strRBundledVersion As String = "4.1.0"
 
+    Private clsOutputLogger As clsOutputLogger
+
+    ''' <summary>
+    ''' Create method for clsRLink
+    ''' Must pass in the output logger so the R link knows where to post outputs to
+    ''' </summary>
+    ''' <param name="outputLogger"></param>
+    Public Sub New(outputLogger As clsOutputLogger)
+        clsOutputLogger = outputLogger
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Initialises the connection with the R environment:
@@ -586,18 +592,6 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the R output window (the window on the right that displays the R scripts 
-    '''             and results). </summary>
-    '''
-    ''' <param name="tempOutput">   The R output window. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetOutput(tempOutput As ucrWPFRichTextBox)
-        'TEST temporary
-        rtbOutput = tempOutput
-        bOutput = True
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the log window. </summary>
     '''
     ''' <param name="tempLog">  The log window. </param>
@@ -953,6 +947,11 @@ Public Class RLink
 
         ' set temp folder for graphs, e.g. to "C:\Users\myName\Temp\R_Instat_Temp_Graphs"
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
+        'Need to create directory as R unable to create the directory in linux
+        If Not Directory.Exists(strTempGraphsDirectory) Then
+            Directory.CreateDirectory(strTempGraphsDirectory)
+        End If
+
         strOutput = ""
 
         ' if comment provided
@@ -968,18 +967,7 @@ Public Class RLink
         End If
         ' if the output window is defined then output comments (if exists) and script (if 'bShowCommands' is true).
         If bOutput Then
-            If strComment <> "" AndAlso bShowCommands Then
-                'TODO SJL 20/04/20 - why is this needed in addition to the else block? 
-                ' (only difference I see is 'TrimEnd' which trims any trailing newlines but then adds a newline after anyway)
-                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript.TrimEnd(Environment.NewLine.ToCharArray) & Environment.NewLine)
-            Else
-                If strComment <> "" Then
-                    rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript)
-                End If
-                If bShowCommands Then
-                    rtbOutput.AppendText(clrScript, fScript, strScript & Environment.NewLine)
-                End If
-            End If
+            clsOutputLogger.AddRScript(strScriptWithComment)
         End If
 
         'TODO SJL 20/04/20 - is the commented out check below needed?
@@ -1039,7 +1027,7 @@ Public Class RLink
                         If iNumberOfFiles > 0 Then
                             For Each strFileName As String In lstTempGraphFiles
                                 If strGraphDisplayOption = "view_output_window" Then
-                                    rtbOutput.DisplayGraph(strFileName)
+                                    clsOutputLogger.AddImageOutput(strFileName)
                                 ElseIf strGraphDisplayOption = "view_separate_window" Then
                                     frmMain.AddGraphForm(strFileName)
                                 End If
@@ -1115,9 +1103,10 @@ Public Class RLink
         If bOutput AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
             ' if output should be sent to web browser
             If iCallType = 4 Then
-                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
+                '  rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
+                'TODO Add to web browser
             Else
-                rtbOutput.AppendText(clrOutput, fOutput, strOutput)
+                clsOutputLogger.AddStringOutput(strOutput)
             End If
         End If
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
@@ -1362,12 +1351,12 @@ Public Class RLink
                                                               End If
                                                               While thrRScript.IsAlive
                                                                   If bErrorMessageOpen Then
-                                                                      frmSetupLoading.Hide()
+                                                                      frmSetupLoading.Close()
                                                                   End If
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
-                                                              frmSetupLoading.Hide()
+                                                              frmSetupLoading.Close()
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
                     thrWaitDisplay.IsBackground = True

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,6 +17,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>C:\Users\deaspo\Desktop\applications\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -35,8 +38,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -110,6 +111,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,10 +137,14 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="RScript, Version=0.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.1\lib\net461\RScript.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
@@ -167,6 +175,18 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -429,6 +449,7 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Enum\OutputType.vb" />
     <Compile Include="frmConvertToNumeric.Designer.vb">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </Compile>
@@ -436,6 +457,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
+    <Compile Include="Model\Options\OutputFont.vb" />
+    <Compile Include="Model\Output\clsOutputElement.vb" />
+    <Compile Include="Model\Output\clsOutputList.vb" />
+    <Compile Include="Model\Output\clsOutputLogger.vb" />
+    <Compile Include="Model\Output\clsRScriptElement.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1233,12 +1259,6 @@
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
     <Compile Include="frmGraphDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOutputWindow.Designer.vb">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
@@ -2806,19 +2826,35 @@
     <Compile Include="ucrVariablesAsFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrWPFRichTextBox.xaml.vb">
-      <DependentUpon>ucrWPFRichTextBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UcrPanel.Designer.vb">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="UcrPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\ucrOutputPage.Designer.vb">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.Designer.vb">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
+      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
@@ -2917,8 +2953,14 @@
     <EmbeddedResource Include="dlgSetupForDataEntry.resx">
       <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSubset.resx">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeSummaries.resx">
+      <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
@@ -3006,15 +3048,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.sw-KE.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddKey.resx">
       <DependentUpon>dlgAddKey.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
@@ -3066,18 +3111,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.sw-KE.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotMethod.resx">
       <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
@@ -3599,6 +3636,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -3963,12 +4001,6 @@
     <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.sw-KE.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
@@ -4221,6 +4253,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.sw-KE.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
@@ -4592,9 +4625,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStemAndLeaf.resx">
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
@@ -5065,12 +5095,19 @@
     <EmbeddedResource Include="UcrPanel.resx">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="instat.licenseheader" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -5468,12 +5505,6 @@
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ucrWPFRichTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
@@ -5483,7 +5514,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
   </Target>
+  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
