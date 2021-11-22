@@ -2368,36 +2368,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the list of clsRParameter from the <paramref name="strFunctionName"/> function definition 
-    ''' (e.g. the function "stringr::str_split"  returns "str_split(string, pattern, n = Inf, simplify = FALSE)" ie
-    ''' 
-    ''' <list type="bullet">
-    '''  <item>
-    '''  $string
-    '''  </item>
-    '''  <item>
-    '''  
-    '''  </item>    
-    '''  <item>
-    '''  $pattern  
-    '''  </item>
-    '''  <item>
-    ''' 
-    '''  </item>
-    '''  <item>
-    '''  $n
-    '''  </item>
-    '''  <item>
-    '''  [1] Inf
-    '''  </item>
-    '''  <item>
-    '''  $simplify
-    '''  </item>
-    '''  <item>
-    '''  [1] FALSE    
-    '''  </item>
-    '''  
-    ''' </list>
+    ''' <summary>   
+    ''' Gets the list of clsRParameters from the <paramref name="strFunctionName"/> function 
+    ''' definition. 
+    ''' For example, the function "str_split(string, pattern, n = Inf, simplify = FALSE)" returns 
+    ''' the following parameters:
     ''' <list type="bullet">
     '''     <item><description>
     '''             clsParameter 1: Argument Name ="string" , Parameter position = 0 , Default value = NOTHING 
@@ -2407,17 +2382,12 @@ Public Class RLink
     '''             clsParameter 3: Argument Name="n" , Parameter position = 2 , Default value = "Inf"
     '''     </description></item><item><description>
     '''             clsParameter 4: Argument Name="simplify" , Parameter position = 3 , Default value = "FALSE")
-    '''     </description></item><item><description>
-    '''             Define what to do with the result returned from the R command (e.g. ignore, show 
-    '''             the result as text, show the result as a graph or store in a temporary variable).
-    '''     </description></item><item><description>
-    '''             Return the R command as an executable R string.
     '''     </description></item>
-    ''' </list>
+    ''' </list></summary>
+    ''' 
     ''' <param name="strFunctionName">  The function name provided. </param>
     '''
-    ''' <returns>   The list of clsRParameter. </returns>
-    ''' </summary>
+    ''' <returns>   The list of clsRParameters. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
         'temporary object that retrieves the output from the environment
