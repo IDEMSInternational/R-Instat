@@ -218,7 +218,7 @@ Public Class dlgFromLibrary
         End If
     End Function
 
-    Private Function GetStringInBracket(ByRef strValue As String)
+    Private Function FindStringInBracket(ByVal strValue As String)
         Dim iStartIndex As Integer = strValue.IndexOf("(") + 1
         Dim strLength As Integer = strValue.IndexOf(")") - iStartIndex
         If strLength = -1 Then
@@ -252,7 +252,7 @@ Public Class dlgFromLibrary
     ''' </summary>
     Private Sub SetParameterValues()
         Dim strSelectedText As String = Nothing
-        Dim strSelectedDataName, strSelectedDataNameFromBracket As String
+        Dim strSelectedDataName, strDataNameFromBracket As String
         Dim strVecOutput As CharacterVector
         Dim strRClass As String = ""
 
@@ -262,11 +262,11 @@ Public Class dlgFromLibrary
 
         strSelectedText = lstCollection.SelectedItems(0).SubItems(0).Text
 
-        strSelectedDataNameFromBracket = GetStringInBracket(strSelectedText)
+        strDataNameFromBracket = FindStringInBracket(strSelectedText)
         strSelectedDataName = CheckString(strSelectedText)
 
         If strSelectedText.Contains("(") Then
-            clsDataFunction.AddParameter("X", strSelectedDataNameFromBracket)
+            clsDataFunction.AddParameter("X", strDataNameFromBracket)
         Else
             clsDataFunction.AddParameter("X", strSelectedDataName)
         End If
