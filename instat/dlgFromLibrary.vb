@@ -218,6 +218,16 @@ Public Class dlgFromLibrary
         End If
     End Function
 
+    Private Function GetStringInBracket(ByRef strValue As String)
+        Dim startIndex As Integer = strValue.IndexOf("(") + 1
+        Dim strLength As Integer = strValue.IndexOf(")") - startIndex
+        If strLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(startIndex, strLength)
+        End If
+    End Function
+
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
         clsHelp.SetPackageName("utils")
@@ -241,7 +251,8 @@ Public Class dlgFromLibrary
     ''' in importing datasets of different R types 
     ''' </summary>
     Private Sub SetParameterValues()
-        Dim strSelectedDataName As String
+        Dim strSelectedText As String = Nothing
+        Dim strSelectedDataName, strSelectedDataNameFromBracket As String
         Dim strVecOutput As CharacterVector
         Dim strRClass As String = ""
 
@@ -249,8 +260,17 @@ Public Class dlgFromLibrary
             Exit Sub
         End If
 
-        strSelectedDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
-        clsDataFunction.AddParameter("X", strSelectedDataName)
+        strSelectedText = lstCollection.SelectedItems(0).SubItems(0).Text
+
+        strSelectedDataNameFromBracket = GetStringInBracket(strSelectedText)
+        strSelectedDataName = CheckString(strSelectedText)
+
+        ' strSelectedDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
+        If strSelectedText.Contains("(") Then
+            clsDataFunction.AddParameter("X", strSelectedDataNameFromBracket)
+        Else
+            clsDataFunction.AddParameter("X", strSelectedDataName)
+        End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines
         frmMain.clsRLink.RunInternalScriptGetOutput(clsDataFunction.Clone.ToScript(), bSilent:=True)
