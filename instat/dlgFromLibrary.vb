@@ -265,7 +265,6 @@ Public Class dlgFromLibrary
         strSelectedDataNameFromBracket = GetStringInBracket(strSelectedText)
         strSelectedDataName = CheckString(strSelectedText)
 
-        ' strSelectedDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
         If strSelectedText.Contains("(") Then
             clsDataFunction.AddParameter("X", strSelectedDataNameFromBracket)
         Else
