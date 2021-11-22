@@ -2438,16 +2438,16 @@ Public Class RLink
                 Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
                 clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).lstRStatements(0).clsElement
             Else
-                'Empty string are not accepted hence the modification below
-                'If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                '    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
-                'Else
-                clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
-                'End If
+                'Empty String are Not accepted hence the modification below
+                If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
+                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
+                Else
+                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                End If
 
             End If
-            'Assign the parameter Value
-            clsNewRParameter.iArgPosDefinition = iNewArgPosition
+                'Assign the parameter Value
+                clsNewRParameter.iArgPosDefinition = iNewArgPosition
 
             'TEMPORARY FUNCTIONALITY FOR PRESENTATION
             Console.WriteLine("PARAMETER" & clsNewRParameter.iArgPosDefinition)
