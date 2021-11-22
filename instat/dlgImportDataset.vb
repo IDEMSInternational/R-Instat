@@ -276,6 +276,8 @@ Public Class dlgImportDataset
         ucrNudMaxRowsText.Maximum = Decimal.MaxValue
 
         ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
+        ucrChkDropEmptyCols.SetParameter(New RParameter("checked", 0))
+        ucrChkDropEmptyCols.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropEmptyCols.AddParameterValuesCondition(True, "isRFunction", "True")
         ucrChkDropEmptyCols.AddParameterValuesCondition(False, "isRFunction", "False")
     End Sub
