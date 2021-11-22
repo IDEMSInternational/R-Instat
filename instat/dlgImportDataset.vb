@@ -278,8 +278,9 @@ Public Class dlgImportDataset
         ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
         ucrChkDropEmptyCols.SetParameter(New RParameter("checked", 0))
         ucrChkDropEmptyCols.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropEmptyCols.AddParameterValuesCondition(True, "isRFunction", "True")
-        ucrChkDropEmptyCols.AddParameterValuesCondition(False, "isRFunction", "False")
+        'ucrChkDropEmptyCols.SetRDefault("FALSE")
+        ' ucrChkDropEmptyCols.AddParameterValuesCondition(True, "isRFunction", "True")
+        'ucrChkDropEmptyCols.AddParameterValuesCondition(False, "isRFunction", "False")
     End Sub
 
     Private Sub SetDefaults()
@@ -382,7 +383,7 @@ Public Class dlgImportDataset
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyCols, iPosition:=1)
 
-        clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -1141,11 +1142,11 @@ Public Class dlgImportDataset
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False
-                clsDummyFunction.AddParameter("isRFunction", "True", iPosition:=0)
+                clsDummyFunction.AddParameter("checked", "TRUE", iPosition:=0)
                 clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
             Else
-                clsDummyFunction.AddParameter("isRFunction", "False", iPosition:=0)
+                clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
             End If
         Else
