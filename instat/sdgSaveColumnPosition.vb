@@ -46,6 +46,7 @@ Public Class sdgSaveColumnPosition
         'For ucrSelector
         ucrSelectorColumns.btnDataOptions.Visible = False
 
+        ucrBaseSubdialog.iHelpTopicID = 179
 
         'Panel and radio buttons
         ucrPnlColumnPosition.SetParameter(New RParameter("before"))

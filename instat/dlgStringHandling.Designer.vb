@@ -84,6 +84,7 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.ucrChkAddKeyboard = New instat.ucrCheck()
         Me.grpRegex.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -412,10 +413,17 @@ Partial Class dlgStringHandling
         resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         '
+        'ucrChkAddKeyboard
+        '
+        Me.ucrChkAddKeyboard.Checked = False
+        resources.ApplyResources(Me.ucrChkAddKeyboard, "ucrChkAddKeyboard")
+        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
+        '
         'dlgStringHandling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkAddKeyboard)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
         Me.Controls.Add(Me.ucrPnlFixedRegex)
@@ -493,4 +501,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoRegex As RadioButton
     Friend WithEvents rdoFixed As RadioButton
     Friend WithEvents ucrPnlFixedRegex As UcrPanel
+    Friend WithEvents ucrChkAddKeyboard As ucrCheck
 End Class

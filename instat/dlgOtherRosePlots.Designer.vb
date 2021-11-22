@@ -95,7 +95,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarFrequency.TabIndex = 90
         Me.rdoPolarFrequency.TabStop = True
         Me.rdoPolarFrequency.Tag = ""
-        Me.rdoPolarFrequency.Text = "Polar frequency"
+        Me.rdoPolarFrequency.Text = "Polar Frequency"
         Me.rdoPolarFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPolarFrequency.UseVisualStyleBackColor = True
         '
