@@ -210,21 +210,21 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Function CheckString(ByVal strValue As String)
-        Dim strLength As Integer = strValue.IndexOf(" ")
-        If strLength = -1 Then
+        Dim iLength As Integer = strValue.IndexOf(" ")
+        If iLength = -1 Then
             Return strValue
         Else
-            Return strValue.Substring(0, strLength)
+            Return strValue.Substring(0, iLength)
         End If
     End Function
 
     Private Function FindStringInBracket(ByVal strValue As String)
         Dim iStartIndex As Integer = strValue.IndexOf("(") + 1
-        Dim strLength As Integer = strValue.IndexOf(")") - iStartIndex
-        If strLength = -1 Then
+        Dim iLength As Integer = strValue.IndexOf(")") - iStartIndex
+        If iLength = -1 Then
             Return strValue
         Else
-            Return strValue.Substring(iStartIndex, strLength)
+            Return strValue.Substring(iStartIndex, iLength)
         End If
     End Function
 
