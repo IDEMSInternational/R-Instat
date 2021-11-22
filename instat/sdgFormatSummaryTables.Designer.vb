@@ -45,6 +45,18 @@ Partial Class sdgFormatSummaryTables
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
         Me.grpStyle = New System.Windows.Forms.GroupBox()
+        Me.ucrInputStyleFillAlpha = New instat.ucrInputComboBox()
+        Me.lblStyleFillAlpha = New System.Windows.Forms.Label()
+        Me.ucrInputStyleFillColor = New instat.ucrInputComboBox()
+        Me.lblStyleFillColor = New System.Windows.Forms.Label()
+        Me.ucrInputStyleBorderWeight = New instat.ucrInputComboBox()
+        Me.lblBorderWeight = New System.Windows.Forms.Label()
+        Me.ucrInputStyleBorderStyle = New instat.ucrInputComboBox()
+        Me.lblBorderStyle = New System.Windows.Forms.Label()
+        Me.ucrInputStyleBorderSides = New instat.ucrInputComboBox()
+        Me.ucrInputStyleBorderColor = New instat.ucrInputComboBox()
+        Me.lblBorderColor = New System.Windows.Forms.Label()
+        Me.lblBorderSides = New System.Windows.Forms.Label()
         Me.ucrInputStyleTextFont = New instat.ucrInputComboBox()
         Me.ucrInputStyleTextSize = New instat.ucrInputComboBox()
         Me.ucrInputStyleTextAlign = New instat.ucrInputComboBox()
@@ -56,7 +68,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputStyleTextDecorate = New instat.ucrInputComboBox()
         Me.ucrInputStyleTextTransform = New instat.ucrInputComboBox()
         Me.ucrInputStyleTextStyle = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextFill = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextColor = New instat.ucrInputComboBox()
         Me.lblIndent = New System.Windows.Forms.Label()
         Me.lblWhitespace = New System.Windows.Forms.Label()
         Me.lblTransform = New System.Windows.Forms.Label()
@@ -68,7 +80,7 @@ Partial Class sdgFormatSummaryTables
         Me.lblStyle = New System.Windows.Forms.Label()
         Me.lblAlign = New System.Windows.Forms.Label()
         Me.lblVAlign = New System.Windows.Forms.Label()
-        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lbl = New System.Windows.Forms.Label()
         Me.ucrChkStyleBoarder = New instat.ucrCheck()
         Me.ucrChkStyleText = New instat.ucrCheck()
         Me.ucrChkStyleFill = New instat.ucrCheck()
@@ -77,16 +89,29 @@ Partial Class sdgFormatSummaryTables
         Me.ucrPnlHeader = New instat.UcrPanel()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tbpTable = New System.Windows.Forms.TabPage()
-        Me.ucrInputSides = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox14 = New instat.ucrInputComboBox()
-        Me.lblColour = New System.Windows.Forms.Label()
-        Me.lblSides = New System.Windows.Forms.Label()
+        Me.ucrInputStubLabel = New instat.ucrInputTextBox()
+        Me.ucrChkAddStubHeader = New instat.ucrCheck()
+        Me.ucrNudTableFontSize = New instat.ucrNud()
+        Me.ucrNudTableWidth = New instat.ucrNud()
+        Me.lblFontSize = New System.Windows.Forms.Label()
+        Me.lblTableWidth = New System.Windows.Forms.Label()
+        Me.lblTableBackgroundColor = New System.Windows.Forms.Label()
+        Me.lblTableAlign = New System.Windows.Forms.Label()
+        Me.lblTableWeight = New System.Windows.Forms.Label()
+        Me.lblTableFontColor = New System.Windows.Forms.Label()
+        Me.lblTableLayout = New System.Windows.Forms.Label()
+        Me.ucrInputTableAlign = New instat.ucrInputComboBox()
+        Me.ucrInputTableBackgroundColor = New instat.ucrInputComboBox()
+        Me.ucrInputTableWeight = New instat.ucrInputComboBox()
+        Me.ucrInputTableFontColor = New instat.ucrInputComboBox()
+        Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.grpTitleSubtitle.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.grpStyle.SuspendLayout()
+        Me.tbpTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -253,10 +278,18 @@ Partial Class sdgFormatSummaryTables
         '
         'grpStyle
         '
-        Me.grpStyle.Controls.Add(Me.ucrInputSides)
-        Me.grpStyle.Controls.Add(Me.UcrInputComboBox14)
-        Me.grpStyle.Controls.Add(Me.lblColour)
-        Me.grpStyle.Controls.Add(Me.lblSides)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleFillAlpha)
+        Me.grpStyle.Controls.Add(Me.lblStyleFillAlpha)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleFillColor)
+        Me.grpStyle.Controls.Add(Me.lblStyleFillColor)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderWeight)
+        Me.grpStyle.Controls.Add(Me.lblBorderWeight)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderStyle)
+        Me.grpStyle.Controls.Add(Me.lblBorderStyle)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderSides)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderColor)
+        Me.grpStyle.Controls.Add(Me.lblBorderColor)
+        Me.grpStyle.Controls.Add(Me.lblBorderSides)
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextFont)
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextSize)
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextAlign)
@@ -268,7 +301,7 @@ Partial Class sdgFormatSummaryTables
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextDecorate)
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextTransform)
         Me.grpStyle.Controls.Add(Me.ucrInputStyleTextStyle)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextFill)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextColor)
         Me.grpStyle.Controls.Add(Me.lblIndent)
         Me.grpStyle.Controls.Add(Me.lblWhitespace)
         Me.grpStyle.Controls.Add(Me.lblTransform)
@@ -280,13 +313,91 @@ Partial Class sdgFormatSummaryTables
         Me.grpStyle.Controls.Add(Me.lblStyle)
         Me.grpStyle.Controls.Add(Me.lblAlign)
         Me.grpStyle.Controls.Add(Me.lblVAlign)
-        Me.grpStyle.Controls.Add(Me.lblFill)
+        Me.grpStyle.Controls.Add(Me.lbl)
         Me.grpStyle.Controls.Add(Me.ucrChkStyleBoarder)
         Me.grpStyle.Controls.Add(Me.ucrChkStyleText)
         Me.grpStyle.Controls.Add(Me.ucrChkStyleFill)
         resources.ApplyResources(Me.grpStyle, "grpStyle")
         Me.grpStyle.Name = "grpStyle"
         Me.grpStyle.TabStop = False
+        '
+        'ucrInputStyleFillAlpha
+        '
+        Me.ucrInputStyleFillAlpha.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleFillAlpha.GetSetSelectedIndex = -1
+        Me.ucrInputStyleFillAlpha.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleFillAlpha, "ucrInputStyleFillAlpha")
+        Me.ucrInputStyleFillAlpha.Name = "ucrInputStyleFillAlpha"
+        '
+        'lblStyleFillAlpha
+        '
+        resources.ApplyResources(Me.lblStyleFillAlpha, "lblStyleFillAlpha")
+        Me.lblStyleFillAlpha.Name = "lblStyleFillAlpha"
+        '
+        'ucrInputStyleFillColor
+        '
+        Me.ucrInputStyleFillColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleFillColor.GetSetSelectedIndex = -1
+        Me.ucrInputStyleFillColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleFillColor, "ucrInputStyleFillColor")
+        Me.ucrInputStyleFillColor.Name = "ucrInputStyleFillColor"
+        '
+        'lblStyleFillColor
+        '
+        resources.ApplyResources(Me.lblStyleFillColor, "lblStyleFillColor")
+        Me.lblStyleFillColor.Name = "lblStyleFillColor"
+        '
+        'ucrInputStyleBorderWeight
+        '
+        Me.ucrInputStyleBorderWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleBorderWeight.GetSetSelectedIndex = -1
+        Me.ucrInputStyleBorderWeight.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleBorderWeight, "ucrInputStyleBorderWeight")
+        Me.ucrInputStyleBorderWeight.Name = "ucrInputStyleBorderWeight"
+        '
+        'lblBorderWeight
+        '
+        resources.ApplyResources(Me.lblBorderWeight, "lblBorderWeight")
+        Me.lblBorderWeight.Name = "lblBorderWeight"
+        '
+        'ucrInputStyleBorderStyle
+        '
+        Me.ucrInputStyleBorderStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleBorderStyle.GetSetSelectedIndex = -1
+        Me.ucrInputStyleBorderStyle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleBorderStyle, "ucrInputStyleBorderStyle")
+        Me.ucrInputStyleBorderStyle.Name = "ucrInputStyleBorderStyle"
+        '
+        'lblBorderStyle
+        '
+        resources.ApplyResources(Me.lblBorderStyle, "lblBorderStyle")
+        Me.lblBorderStyle.Name = "lblBorderStyle"
+        '
+        'ucrInputStyleBorderSides
+        '
+        Me.ucrInputStyleBorderSides.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleBorderSides.GetSetSelectedIndex = -1
+        Me.ucrInputStyleBorderSides.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleBorderSides, "ucrInputStyleBorderSides")
+        Me.ucrInputStyleBorderSides.Name = "ucrInputStyleBorderSides"
+        '
+        'ucrInputStyleBorderColor
+        '
+        Me.ucrInputStyleBorderColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleBorderColor.GetSetSelectedIndex = -1
+        Me.ucrInputStyleBorderColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleBorderColor, "ucrInputStyleBorderColor")
+        Me.ucrInputStyleBorderColor.Name = "ucrInputStyleBorderColor"
+        '
+        'lblBorderColor
+        '
+        resources.ApplyResources(Me.lblBorderColor, "lblBorderColor")
+        Me.lblBorderColor.Name = "lblBorderColor"
+        '
+        'lblBorderSides
+        '
+        resources.ApplyResources(Me.lblBorderSides, "lblBorderSides")
+        Me.lblBorderSides.Name = "lblBorderSides"
         '
         'ucrInputStyleTextFont
         '
@@ -376,13 +487,13 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputStyleTextStyle, "ucrInputStyleTextStyle")
         Me.ucrInputStyleTextStyle.Name = "ucrInputStyleTextStyle"
         '
-        'ucrInputStyleTextFill
+        'ucrInputStyleTextColor
         '
-        Me.ucrInputStyleTextFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputStyleTextFill.GetSetSelectedIndex = -1
-        Me.ucrInputStyleTextFill.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextFill, "ucrInputStyleTextFill")
-        Me.ucrInputStyleTextFill.Name = "ucrInputStyleTextFill"
+        Me.ucrInputStyleTextColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStyleTextColor.GetSetSelectedIndex = -1
+        Me.ucrInputStyleTextColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStyleTextColor, "ucrInputStyleTextColor")
+        Me.ucrInputStyleTextColor.Name = "ucrInputStyleTextColor"
         '
         'lblIndent
         '
@@ -439,10 +550,10 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.lblVAlign, "lblVAlign")
         Me.lblVAlign.Name = "lblVAlign"
         '
-        'lblFill
+        'lbl
         '
-        resources.ApplyResources(Me.lblFill, "lblFill")
-        Me.lblFill.Name = "lblFill"
+        resources.ApplyResources(Me.lbl, "lbl")
+        Me.lbl.Name = "lbl"
         '
         'ucrChkStyleBoarder
         '
@@ -488,35 +599,134 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpTable
         '
+        Me.tbpTable.Controls.Add(Me.ucrInputStubLabel)
+        Me.tbpTable.Controls.Add(Me.ucrChkAddStubHeader)
+        Me.tbpTable.Controls.Add(Me.ucrNudTableFontSize)
+        Me.tbpTable.Controls.Add(Me.ucrNudTableWidth)
+        Me.tbpTable.Controls.Add(Me.lblFontSize)
+        Me.tbpTable.Controls.Add(Me.lblTableWidth)
+        Me.tbpTable.Controls.Add(Me.lblTableBackgroundColor)
+        Me.tbpTable.Controls.Add(Me.lblTableAlign)
+        Me.tbpTable.Controls.Add(Me.lblTableWeight)
+        Me.tbpTable.Controls.Add(Me.lblTableFontColor)
+        Me.tbpTable.Controls.Add(Me.lblTableLayout)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableAlign)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableBackgroundColor)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableWeight)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableFontColor)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableLayout)
         resources.ApplyResources(Me.tbpTable, "tbpTable")
         Me.tbpTable.Name = "tbpTable"
         Me.tbpTable.UseVisualStyleBackColor = True
         '
-        'ucrInputSides
+        'ucrInputStubLabel
         '
-        Me.ucrInputSides.AddQuotesIfUnrecognised = True
-        Me.ucrInputSides.GetSetSelectedIndex = -1
-        Me.ucrInputSides.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSides, "ucrInputSides")
-        Me.ucrInputSides.Name = "ucrInputSides"
+        Me.ucrInputStubLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubLabel.IsMultiline = False
+        Me.ucrInputStubLabel.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStubLabel, "ucrInputStubLabel")
+        Me.ucrInputStubLabel.Name = "ucrInputStubLabel"
         '
-        'UcrInputComboBox14
+        'ucrChkAddStubHeader
         '
-        Me.UcrInputComboBox14.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox14.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox14.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox14, "UcrInputComboBox14")
-        Me.UcrInputComboBox14.Name = "UcrInputComboBox14"
+        Me.ucrChkAddStubHeader.Checked = False
+        resources.ApplyResources(Me.ucrChkAddStubHeader, "ucrChkAddStubHeader")
+        Me.ucrChkAddStubHeader.Name = "ucrChkAddStubHeader"
         '
-        'lblColour
+        'ucrNudTableFontSize
         '
-        resources.ApplyResources(Me.lblColour, "lblColour")
-        Me.lblColour.Name = "lblColour"
+        Me.ucrNudTableFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTableFontSize, "ucrNudTableFontSize")
+        Me.ucrNudTableFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableFontSize.Name = "ucrNudTableFontSize"
+        Me.ucrNudTableFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblSides
+        'ucrNudTableWidth
         '
-        resources.ApplyResources(Me.lblSides, "lblSides")
-        Me.lblSides.Name = "lblSides"
+        Me.ucrNudTableWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTableWidth, "ucrNudTableWidth")
+        Me.ucrNudTableWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
+        Me.ucrNudTableWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblFontSize
+        '
+        resources.ApplyResources(Me.lblFontSize, "lblFontSize")
+        Me.lblFontSize.Name = "lblFontSize"
+        '
+        'lblTableWidth
+        '
+        resources.ApplyResources(Me.lblTableWidth, "lblTableWidth")
+        Me.lblTableWidth.Name = "lblTableWidth"
+        '
+        'lblTableBackgroundColor
+        '
+        resources.ApplyResources(Me.lblTableBackgroundColor, "lblTableBackgroundColor")
+        Me.lblTableBackgroundColor.Name = "lblTableBackgroundColor"
+        '
+        'lblTableAlign
+        '
+        resources.ApplyResources(Me.lblTableAlign, "lblTableAlign")
+        Me.lblTableAlign.Name = "lblTableAlign"
+        '
+        'lblTableWeight
+        '
+        resources.ApplyResources(Me.lblTableWeight, "lblTableWeight")
+        Me.lblTableWeight.Name = "lblTableWeight"
+        '
+        'lblTableFontColor
+        '
+        resources.ApplyResources(Me.lblTableFontColor, "lblTableFontColor")
+        Me.lblTableFontColor.Name = "lblTableFontColor"
+        '
+        'lblTableLayout
+        '
+        resources.ApplyResources(Me.lblTableLayout, "lblTableLayout")
+        Me.lblTableLayout.Name = "lblTableLayout"
+        '
+        'ucrInputTableAlign
+        '
+        Me.ucrInputTableAlign.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableAlign.GetSetSelectedIndex = -1
+        Me.ucrInputTableAlign.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableAlign, "ucrInputTableAlign")
+        Me.ucrInputTableAlign.Name = "ucrInputTableAlign"
+        '
+        'ucrInputTableBackgroundColor
+        '
+        Me.ucrInputTableBackgroundColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableBackgroundColor.GetSetSelectedIndex = -1
+        Me.ucrInputTableBackgroundColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableBackgroundColor, "ucrInputTableBackgroundColor")
+        Me.ucrInputTableBackgroundColor.Name = "ucrInputTableBackgroundColor"
+        '
+        'ucrInputTableWeight
+        '
+        Me.ucrInputTableWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableWeight.GetSetSelectedIndex = -1
+        Me.ucrInputTableWeight.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableWeight, "ucrInputTableWeight")
+        Me.ucrInputTableWeight.Name = "ucrInputTableWeight"
+        '
+        'ucrInputTableFontColor
+        '
+        Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableFontColor.GetSetSelectedIndex = -1
+        Me.ucrInputTableFontColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableFontColor, "ucrInputTableFontColor")
+        Me.ucrInputTableFontColor.Name = "ucrInputTableFontColor"
+        '
+        'ucrInputTableLayout
+        '
+        Me.ucrInputTableLayout.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableLayout.GetSetSelectedIndex = -1
+        Me.ucrInputTableLayout.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
+        Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
         'sdgFormatSummaryTables
         '
@@ -537,6 +747,8 @@ Partial Class sdgFormatSummaryTables
         Me.tbpHeader.PerformLayout()
         Me.grpStyle.ResumeLayout(False)
         Me.grpStyle.PerformLayout()
+        Me.tbpTable.ResumeLayout(False)
+        Me.tbpTable.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -579,7 +791,7 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents lblStyle As Label
     Friend WithEvents lblAlign As Label
     Friend WithEvents lblVAlign As Label
-    Friend WithEvents lblFill As Label
+    Friend WithEvents lbl As Label
     Friend WithEvents lblIndent As Label
     Friend WithEvents lblWhitespace As Label
     Friend WithEvents lblTransform As Label
@@ -594,9 +806,33 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputStyleTextDecorate As ucrInputComboBox
     Friend WithEvents ucrInputStyleTextTransform As ucrInputComboBox
     Friend WithEvents ucrInputStyleTextStyle As ucrInputComboBox
-    Friend WithEvents ucrInputStyleTextFill As ucrInputComboBox
-    Friend WithEvents ucrInputSides As ucrInputComboBox
-    Friend WithEvents UcrInputComboBox14 As ucrInputComboBox
-    Friend WithEvents lblColour As Label
-    Friend WithEvents lblSides As Label
+    Friend WithEvents ucrInputStyleTextColor As ucrInputComboBox
+    Friend WithEvents ucrInputStyleBorderSides As ucrInputComboBox
+    Friend WithEvents ucrInputStyleBorderColor As ucrInputComboBox
+    Friend WithEvents lblBorderColor As Label
+    Friend WithEvents lblBorderSides As Label
+    Friend WithEvents ucrInputStyleBorderWeight As ucrInputComboBox
+    Friend WithEvents lblBorderWeight As Label
+    Friend WithEvents ucrInputStyleBorderStyle As ucrInputComboBox
+    Friend WithEvents lblBorderStyle As Label
+    Friend WithEvents ucrInputStyleFillAlpha As ucrInputComboBox
+    Friend WithEvents lblStyleFillAlpha As Label
+    Friend WithEvents ucrInputStyleFillColor As ucrInputComboBox
+    Friend WithEvents lblStyleFillColor As Label
+    Friend WithEvents lblTableWidth As Label
+    Friend WithEvents lblTableBackgroundColor As Label
+    Friend WithEvents lblTableAlign As Label
+    Friend WithEvents lblTableWeight As Label
+    Friend WithEvents lblTableFontColor As Label
+    Friend WithEvents lblTableLayout As Label
+    Friend WithEvents ucrInputTableAlign As ucrInputComboBox
+    Friend WithEvents ucrInputTableBackgroundColor As ucrInputComboBox
+    Friend WithEvents ucrInputTableWeight As ucrInputComboBox
+    Friend WithEvents ucrInputTableFontColor As ucrInputComboBox
+    Friend WithEvents ucrInputTableLayout As ucrInputComboBox
+    Friend WithEvents ucrNudTableFontSize As ucrNud
+    Friend WithEvents ucrNudTableWidth As ucrNud
+    Friend WithEvents lblFontSize As Label
+    Friend WithEvents ucrInputStubLabel As ucrInputTextBox
+    Friend WithEvents ucrChkAddStubHeader As ucrCheck
 End Class
