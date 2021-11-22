@@ -219,12 +219,12 @@ Public Class dlgFromLibrary
     End Function
 
     Private Function GetStringInBracket(ByRef strValue As String)
-        Dim startIndex As Integer = strValue.IndexOf("(") + 1
-        Dim strLength As Integer = strValue.IndexOf(")") - startIndex
+        Dim iStartIndex As Integer = strValue.IndexOf("(") + 1
+        Dim strLength As Integer = strValue.IndexOf(")") - iStartIndex
         If strLength = -1 Then
             Return strValue
         Else
-            Return strValue.Substring(startIndex, strLength)
+            Return strValue.Substring(iStartIndex, strLength)
         End If
     End Function
 
