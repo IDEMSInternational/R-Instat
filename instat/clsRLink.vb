@@ -2430,6 +2430,14 @@ Public Class RLink
         clsAsListFunction.SetRCommand("as.list")
         clsAsListFunction.AddParameter(clsRFunctionParameter:=clsFormalsFunction, bIncludeArgumentName:=False, iPosition:=0)
 
+        'The 'formals' function returns the parameters for a specified function. 
+        'for example, for the function "str_split(string, pattern, n = Inf, simplify = FALSE)", formals returns
+        '    $string
+        '    $pattern 
+        '    $n 
+        '    [1] Inf 
+        '    $simplify 
+        '    [1] FALSE 
         clsFormalsFunction.SetRCommand("formals")
         clsFormalsFunction.AddParameter(strParameterValue:=strFunctionName, bIncludeArgumentName:=False, iPosition:=0)
 
