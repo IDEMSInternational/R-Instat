@@ -355,13 +355,13 @@
     <value>393, 38</value>
   </data>
   <data name="lblString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>36, 13</value>
   </data>
   <data name="lblString.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lblString.Text" xml:space="preserve">
-    <value>Matching String:</value>
+    <value>Prefix:</value>
   </data>
   <data name="&gt;&gt;lblString.Name" xml:space="preserve">
     <value>lblString</value>
@@ -442,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumnType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 38</value>
+    <value>390, 38</value>
   </data>
   <data name="lblColumnType.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -706,7 +706,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Define New Selection</value>
+    <value>Define New Column Selection</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgSelectColumns</value>

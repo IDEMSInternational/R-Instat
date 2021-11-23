@@ -119,7 +119,7 @@ Public Class dlgLabelsLevels
         Dim clsGetColumnFunction As RFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
 
-        If Not ucrReceiverLabels.IsEmpty Then
+        If Not ucrReceiverLabels.IsEmpty AndAlso {"factor"}.Contains(ucrReceiverLabels.strCurrDataType) Then
             clsSumCountMissingFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
             iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumCountMissingFunction.ToScript(), bSilent:=False).AsNumeric(0)
         Else
