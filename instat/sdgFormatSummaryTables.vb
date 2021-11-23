@@ -38,7 +38,93 @@ Public Class sdgFormatSummaryTables
         ucrPnlHeader.AddRadioButton(rdoAllColumns)
         ucrPnlHeader.AddRadioButton(rdoAllRows)
 
+        ucrChkStyleText.SetText("Add Text style")
+        ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextSize, ucrInputStyleTextAlign,
+                                             ucrInputStyleTextValign, ucrInputStyleTextStyle, ucrInputStyleTextWeight, ucrInputStyleTextStretch,
+                                             ucrInputStyleTextDecorate, ucrInputStyleTextTransform, ucrInputStyleTextWhitespace, ucrNudStyleTextIndent},
+                                          {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
 
+
+        ucrInputStyleTextColor.SetParameter(New RParameter("color", iNewPosition:=0))
+        ucrInputStyleTextColor.SetRDefault("NULL")
+        ucrInputStyleTextColor.SetLinkedDisplayControl(lblStyleTextColor)
+
+        ucrInputStyleTextFont.SetLinkedDisplayControl(lblStyleTextFont)
+
+        ucrInputStyleTextSize.SetParameter(New RParameter("size", iNewPosition:=2))
+        ucrInputStyleTextSize.SetRDefault("NULL")
+        ucrInputStyleTextSize.SetLinkedDisplayControl(lblStyleTextSize)
+
+        ucrInputStyleTextAlign.SetParameter(New RParameter("align", iNewPosition:=3))
+        ucrInputStyleTextAlign.SetRDefault("NULL")
+        ucrInputStyleTextAlign.SetLinkedDisplayControl(lblStyleTextAlign)
+
+        ucrInputStyleTextValign.SetParameter(New RParameter("v_align", iNewPosition:=4))
+        ucrInputStyleTextValign.SetRDefault("NULL")
+        ucrInputStyleTextValign.SetLinkedDisplayControl(lblStyleTextVAlign)
+
+        ucrInputStyleTextStyle.SetParameter(New RParameter("style", iNewPosition:=5))
+        ucrInputStyleTextStyle.SetRDefault("NULL")
+        ucrInputStyleTextStyle.SetLinkedDisplayControl(lblStyleTextStyle)
+
+        ucrInputStyleTextWeight.SetParameter(New RParameter("weight", iNewPosition:=6))
+        ucrInputStyleTextWeight.SetRDefault("NULL")
+        ucrInputStyleTextWeight.SetLinkedDisplayControl(lblStyleTextWeight)
+
+        ucrInputStyleTextStretch.SetParameter(New RParameter("stretch", iNewPosition:=7))
+        ucrInputStyleTextStretch.SetRDefault("NULL")
+        ucrInputStyleTextStretch.SetLinkedDisplayControl(lblStyleTextStretch)
+
+        ucrInputStyleTextDecorate.SetParameter(New RParameter("decorate", iNewPosition:=8))
+        ucrInputStyleTextDecorate.SetRDefault("NULL")
+        ucrInputStyleTextDecorate.SetLinkedDisplayControl(lblStyleTextStretch)
+
+        ucrInputStyleTextTransform.SetParameter(New RParameter("transform", iNewPosition:=9))
+        ucrInputStyleTextTransform.SetRDefault("NULL")
+        ucrInputStyleTextTransform.SetLinkedDisplayControl(lblStyleTextTransform)
+
+        ucrInputStyleTextWhitespace.SetParameter(New RParameter("whitespace", iNewPosition:=10))
+        ucrInputStyleTextWhitespace.SetRDefault("NULL")
+        ucrInputStyleTextWhitespace.SetLinkedDisplayControl(lblStyleTextWhitespace)
+
+        ucrNudStyleTextIndent.SetParameter(New RParameter("indent", iNewPosition:=11))
+        ucrNudStyleTextIndent.SetRDefault("NULL")
+        ucrNudStyleTextIndent.SetLinkedDisplayControl(lblStyleTextIndent)
+        ucrNudStyleTextIndent.Increment = 1
+
+        ucrChkStyleBoarder.SetText("Add style border")
+        ucrChkStyleBoarder.AddToLinkedControls({ucrInputStyleBorderSides, ucrInputStyleBorderColor, ucrInputStyleBorderStyle, ucrNudStyleBorderWeight}, {True},
+                                               bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+
+        ucrInputStyleBorderSides.SetParameter(New RParameter("sides", iNewPosition:=0))
+        ucrInputStyleBorderSides.SetRDefault("all")
+        ucrInputStyleBorderSides.SetLinkedDisplayControl(lblBorderSides)
+
+        ucrInputStyleBorderColor.SetParameter(New RParameter("color", iNewPosition:=1))
+        ucrInputStyleBorderColor.SetRDefault("#000000")
+        ucrInputStyleBorderColor.SetLinkedDisplayControl(lblBorderColor)
+
+        ucrInputStyleBorderStyle.SetParameter(New RParameter("style", iNewPosition:=2))
+        ucrInputStyleBorderStyle.SetRDefault("solid")
+        ucrInputStyleBorderStyle.SetLinkedDisplayControl(lblBorderStyle)
+
+        ucrNudStyleBorderWeight.SetParameter(New RParameter("weight", iNewPosition:=3))
+        ucrNudStyleBorderWeight.SetRDefault("1")
+        ucrNudStyleBorderWeight.SetLinkedDisplayControl(lblBorderWeight)
+        ucrNudStyleBorderWeight.Increment = 1
+
+        ucrChkStyleFill.SetText("Add fill style")
+        ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+
+        ucrNudStyleFillAlpha.Increment = 0.1
+        ucrNudStyleFillAlpha.SetMinMax(0.0, 1.0)
+        ucrNudStyleFillAlpha.SetParameter(New RParameter("alpha", iNewPosition:=1))
+        ucrNudStyleFillAlpha.SetRDefault("NULL")
+        ucrNudStyleFillAlpha.SetLinkedDisplayControl(lblStyleFillAlpha)
+
+        ucrInputStyleFillColor.SetParameter(New RParameter("color", iNewPosition:=0))
+        ucrInputStyleFillColor.SetRDefault("#D3D3D3")
+        ucrInputStyleFillColor.SetLinkedDisplayControl(lblStyleFillColor)
 
     End Sub
 

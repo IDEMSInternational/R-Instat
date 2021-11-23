@@ -564,26 +564,152 @@
   <data name="&gt;&gt;tbpTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrInputStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 305</value>
+  <data name="ucrNudStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 310</value>
   </data>
-  <data name="ucrInputStyleFillAlpha.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
+  <data name="ucrNudStyleFillAlpha.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="ucrInputStyleFillAlpha.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+  <data name="ucrNudStyleFillAlpha.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
-  <data name="&gt;&gt;ucrInputStyleFillAlpha.Name" xml:space="preserve">
-    <value>ucrInputStyleFillAlpha</value>
+  <data name="&gt;&gt;ucrNudStyleFillAlpha.Name" xml:space="preserve">
+    <value>ucrNudStyleFillAlpha</value>
   </data>
-  <data name="&gt;&gt;ucrInputStyleFillAlpha.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudStyleFillAlpha.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputStyleFillAlpha.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudStyleFillAlpha.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;ucrInputStyleFillAlpha.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudStyleFillAlpha.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputStyleFillColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 306</value>
+  </data>
+  <data name="ucrInputStyleFillColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 21</value>
+  </data>
+  <data name="ucrInputStyleFillColor.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleFillColor.Name" xml:space="preserve">
+    <value>ucrInputStyleFillColor</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleFillColor.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleFillColor.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleFillColor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudStyleBorderWeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 250</value>
+  </data>
+  <data name="ucrNudStyleBorderWeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudStyleBorderWeight.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleBorderWeight.Name" xml:space="preserve">
+    <value>ucrNudStyleBorderWeight</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleBorderWeight.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleBorderWeight.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleBorderWeight.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputStyleBorderColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 248</value>
+  </data>
+  <data name="ucrInputStyleBorderColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 21</value>
+  </data>
+  <data name="ucrInputStyleBorderColor.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleBorderColor.Name" xml:space="preserve">
+    <value>ucrInputStyleBorderColor</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleBorderColor.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleBorderColor.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleBorderColor.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputStyleTextColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 45</value>
+  </data>
+  <data name="ucrInputStyleTextColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 21</value>
+  </data>
+  <data name="ucrInputStyleTextColor.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextColor.Name" xml:space="preserve">
+    <value>ucrInputStyleTextColor</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextColor.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextColor.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextColor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputStyleTextFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 73</value>
+  </data>
+  <data name="ucrInputStyleTextFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 22</value>
+  </data>
+  <data name="ucrInputStyleTextFont.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextFont.Name" xml:space="preserve">
+    <value>ucrInputStyleTextFont</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextFont.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextFont.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStyleTextFont.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrNudStyleTextIndent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>408, 77</value>
+  </data>
+  <data name="ucrNudStyleTextIndent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudStyleTextIndent.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleTextIndent.Name" xml:space="preserve">
+    <value>ucrNudStyleTextIndent</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleTextIndent.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleTextIndent.Parent" xml:space="preserve">
+    <value>grpStyle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudStyleTextIndent.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="lblStyleFillAlpha.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -613,28 +739,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblStyleFillAlpha.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputStyleFillColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 305</value>
-  </data>
-  <data name="ucrInputStyleFillColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleFillColor.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleFillColor.Name" xml:space="preserve">
-    <value>ucrInputStyleFillColor</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleFillColor.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleFillColor.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleFillColor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="lblStyleFillColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -664,28 +769,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblStyleFillColor.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputStyleBorderWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 248</value>
-  </data>
-  <data name="ucrInputStyleBorderWeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleBorderWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderWeight.Name" xml:space="preserve">
-    <value>ucrInputStyleBorderWeight</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderWeight.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderWeight.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderWeight.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="lblBorderWeight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -715,7 +799,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblBorderWeight.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="ucrInputStyleBorderStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 220</value>
@@ -736,7 +820,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleBorderStyle.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="lblBorderStyle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -766,7 +850,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblBorderStyle.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="ucrInputStyleBorderSides.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 220</value>
@@ -787,28 +871,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleBorderSides.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrInputStyleBorderColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 248</value>
-  </data>
-  <data name="ucrInputStyleBorderColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleBorderColor.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderColor.Name" xml:space="preserve">
-    <value>ucrInputStyleBorderColor</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderColor.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderColor.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleBorderColor.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="lblBorderColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -838,7 +901,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblBorderColor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="lblBorderSides.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -868,28 +931,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;lblBorderSides.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="ucrInputStyleTextFont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 74</value>
-  </data>
-  <data name="ucrInputStyleTextFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleTextFont.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextFont.Name" xml:space="preserve">
-    <value>ucrInputStyleTextFont</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextFont.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextFont.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextFont.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="ucrInputStyleTextSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 102</value>
@@ -910,7 +952,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextSize.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="ucrInputStyleTextAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 130</value>
@@ -931,7 +973,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextAlign.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrInputStyleTextValign.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 158</value>
@@ -952,7 +994,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextValign.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="ucrInputStyleTextWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 74</value>
@@ -973,7 +1015,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextWeight.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="ucrInputStyleTextWhitespace.Location" type="System.Drawing.Point, System.Drawing">
     <value>408, 48</value>
@@ -994,28 +1036,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextWhitespace.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="ucrInputStyleTextIndent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 74</value>
-  </data>
-  <data name="ucrInputStyleTextIndent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleTextIndent.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextIndent.Name" xml:space="preserve">
-    <value>ucrInputStyleTextIndent</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextIndent.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextIndent.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextIndent.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="ucrInputStyleTextStretch.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 102</value>
@@ -1036,7 +1057,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextStretch.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="ucrInputStyleTextDecorate.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 130</value>
@@ -1057,7 +1078,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextDecorate.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="ucrInputStyleTextTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 158</value>
@@ -1078,7 +1099,7 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextTransform.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="ucrInputStyleTextStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 46</value>
@@ -1099,360 +1120,339 @@
     <value>grpStyle</value>
   </data>
   <data name="&gt;&gt;ucrInputStyleTextStyle.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="ucrInputStyleTextColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 46</value>
-  </data>
-  <data name="ucrInputStyleTextColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
-  </data>
-  <data name="ucrInputStyleTextColor.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextColor.Name" xml:space="preserve">
-    <value>ucrInputStyleTextColor</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextColor.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextColor.Parent" xml:space="preserve">
-    <value>grpStyle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStyleTextColor.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="lblIndent.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextIndent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblIndent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblStyleTextIndent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblIndent.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextIndent.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 77</value>
   </data>
-  <data name="lblIndent.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextIndent.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
-  <data name="lblIndent.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextIndent.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="lblIndent.Text" xml:space="preserve">
+  <data name="lblStyleTextIndent.Text" xml:space="preserve">
     <value>Indent:</value>
   </data>
-  <data name="&gt;&gt;lblIndent.Name" xml:space="preserve">
-    <value>lblIndent</value>
+  <data name="&gt;&gt;lblStyleTextIndent.Name" xml:space="preserve">
+    <value>lblStyleTextIndent</value>
   </data>
-  <data name="&gt;&gt;lblIndent.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextIndent.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblIndent.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextIndent.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblIndent.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextIndent.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
-  <data name="lblWhitespace.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextWhitespace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblWhitespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblStyleTextWhitespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblWhitespace.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextWhitespace.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 48</value>
   </data>
-  <data name="lblWhitespace.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextWhitespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
   </data>
-  <data name="lblWhitespace.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextWhitespace.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="lblWhitespace.Text" xml:space="preserve">
+  <data name="lblStyleTextWhitespace.Text" xml:space="preserve">
     <value>Whitespace:</value>
   </data>
-  <data name="&gt;&gt;lblWhitespace.Name" xml:space="preserve">
-    <value>lblWhitespace</value>
+  <data name="&gt;&gt;lblStyleTextWhitespace.Name" xml:space="preserve">
+    <value>lblStyleTextWhitespace</value>
   </data>
-  <data name="&gt;&gt;lblWhitespace.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWhitespace.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblWhitespace.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWhitespace.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblWhitespace.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWhitespace.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
-  <data name="lblTransform.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextTransform.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblTransform.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblStyleTextTransform.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblTransform.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 163</value>
   </data>
-  <data name="lblTransform.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
-  <data name="lblTransform.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextTransform.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="lblTransform.Text" xml:space="preserve">
+  <data name="lblStyleTextTransform.Text" xml:space="preserve">
     <value>Transform:</value>
   </data>
-  <data name="&gt;&gt;lblTransform.Name" xml:space="preserve">
-    <value>lblTransform</value>
+  <data name="&gt;&gt;lblStyleTextTransform.Name" xml:space="preserve">
+    <value>lblStyleTextTransform</value>
   </data>
-  <data name="&gt;&gt;lblTransform.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextTransform.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblTransform.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextTransform.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblTransform.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextTransform.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
-  <data name="lblWeight.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextWeight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblWeight.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 78</value>
   </data>
-  <data name="lblWeight.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextWeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
   </data>
-  <data name="lblWeight.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextWeight.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="lblWeight.Text" xml:space="preserve">
+  <data name="lblStyleTextWeight.Text" xml:space="preserve">
     <value>Weight:</value>
   </data>
-  <data name="&gt;&gt;lblWeight.Name" xml:space="preserve">
-    <value>lblWeight</value>
+  <data name="&gt;&gt;lblStyleTextWeight.Name" xml:space="preserve">
+    <value>lblStyleTextWeight</value>
   </data>
-  <data name="&gt;&gt;lblWeight.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWeight.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblWeight.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWeight.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblWeight.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextWeight.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
-  <data name="lblStretch.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextStretch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblStretch.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextStretch.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 106</value>
   </data>
-  <data name="lblStretch.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextStretch.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
   </data>
-  <data name="lblStretch.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextStretch.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="lblStretch.Text" xml:space="preserve">
+  <data name="lblStyleTextStretch.Text" xml:space="preserve">
     <value>Stretch:</value>
   </data>
-  <data name="&gt;&gt;lblStretch.Name" xml:space="preserve">
-    <value>lblStretch</value>
+  <data name="&gt;&gt;lblStyleTextStretch.Name" xml:space="preserve">
+    <value>lblStyleTextStretch</value>
   </data>
-  <data name="&gt;&gt;lblStretch.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStretch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblStretch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStretch.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblStretch.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStretch.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
-  <data name="lblDecorate.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextDecorate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblDecorate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextDecorate.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 134</value>
   </data>
-  <data name="lblDecorate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextDecorate.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
   </data>
-  <data name="lblDecorate.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextDecorate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="lblDecorate.Text" xml:space="preserve">
+  <data name="lblStyleTextDecorate.Text" xml:space="preserve">
     <value>Decorate:</value>
   </data>
-  <data name="&gt;&gt;lblDecorate.Name" xml:space="preserve">
-    <value>lblDecorate</value>
+  <data name="&gt;&gt;lblStyleTextDecorate.Name" xml:space="preserve">
+    <value>lblStyleTextDecorate</value>
   </data>
-  <data name="&gt;&gt;lblDecorate.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextDecorate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblDecorate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextDecorate.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblDecorate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextDecorate.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
-  <data name="lblSize.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblSize.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 105</value>
   </data>
-  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
-  <data name="lblSize.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextSize.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="lblSize.Text" xml:space="preserve">
+  <data name="lblStyleTextSize.Text" xml:space="preserve">
     <value>Size:</value>
   </data>
-  <data name="&gt;&gt;lblSize.Name" xml:space="preserve">
-    <value>lblSize</value>
+  <data name="&gt;&gt;lblStyleTextSize.Name" xml:space="preserve">
+    <value>lblStyleTextSize</value>
   </data>
-  <data name="&gt;&gt;lblSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextSize.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextSize.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
-  <data name="lblFont.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextFont.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblFont.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextFont.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 77</value>
   </data>
-  <data name="lblFont.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextFont.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
   </data>
-  <data name="lblFont.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextFont.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="lblFont.Text" xml:space="preserve">
+  <data name="lblStyleTextFont.Text" xml:space="preserve">
     <value>Font:</value>
   </data>
-  <data name="&gt;&gt;lblFont.Name" xml:space="preserve">
-    <value>lblFont</value>
+  <data name="&gt;&gt;lblStyleTextFont.Name" xml:space="preserve">
+    <value>lblStyleTextFont</value>
   </data>
-  <data name="&gt;&gt;lblFont.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextFont.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblFont.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextFont.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblFont.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextFont.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
-  <data name="lblStyle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextStyle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblStyle.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 50</value>
   </data>
-  <data name="lblStyle.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
-  <data name="lblStyle.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextStyle.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="lblStyle.Text" xml:space="preserve">
+  <data name="lblStyleTextStyle.Text" xml:space="preserve">
     <value>Style:</value>
   </data>
-  <data name="&gt;&gt;lblStyle.Name" xml:space="preserve">
-    <value>lblStyle</value>
+  <data name="&gt;&gt;lblStyleTextStyle.Name" xml:space="preserve">
+    <value>lblStyleTextStyle</value>
   </data>
-  <data name="&gt;&gt;lblStyle.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStyle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblStyle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStyle.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblStyle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextStyle.ZOrder" xml:space="preserve">
     <value>32</value>
   </data>
-  <data name="lblAlign.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextAlign.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblAlign.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 134</value>
   </data>
-  <data name="lblAlign.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextAlign.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
-  <data name="lblAlign.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextAlign.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblAlign.Text" xml:space="preserve">
+  <data name="lblStyleTextAlign.Text" xml:space="preserve">
     <value>Align:</value>
   </data>
-  <data name="&gt;&gt;lblAlign.Name" xml:space="preserve">
-    <value>lblAlign</value>
+  <data name="&gt;&gt;lblStyleTextAlign.Name" xml:space="preserve">
+    <value>lblStyleTextAlign</value>
   </data>
-  <data name="&gt;&gt;lblAlign.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextAlign.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblAlign.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextAlign.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblAlign.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextAlign.ZOrder" xml:space="preserve">
     <value>33</value>
   </data>
-  <data name="lblVAlign.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextVAlign.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblVAlign.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextVAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 163</value>
   </data>
-  <data name="lblVAlign.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextVAlign.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
   </data>
-  <data name="lblVAlign.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextVAlign.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblVAlign.Text" xml:space="preserve">
+  <data name="lblStyleTextVAlign.Text" xml:space="preserve">
     <value>V-Align:</value>
   </data>
-  <data name="&gt;&gt;lblVAlign.Name" xml:space="preserve">
-    <value>lblVAlign</value>
+  <data name="&gt;&gt;lblStyleTextVAlign.Name" xml:space="preserve">
+    <value>lblStyleTextVAlign</value>
   </data>
-  <data name="&gt;&gt;lblVAlign.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextVAlign.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblVAlign.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextVAlign.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lblVAlign.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextVAlign.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
-  <data name="lbl.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStyleTextColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbl.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStyleTextColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
-  <data name="lbl.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStyleTextColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
-  <data name="lbl.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStyleTextColor.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="lbl.Text" xml:space="preserve">
+  <data name="lblStyleTextColor.Text" xml:space="preserve">
     <value>Color:</value>
   </data>
-  <data name="&gt;&gt;lbl.Name" xml:space="preserve">
-    <value>lbl</value>
+  <data name="&gt;&gt;lblStyleTextColor.Name" xml:space="preserve">
+    <value>lblStyleTextColor</value>
   </data>
-  <data name="&gt;&gt;lbl.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextColor.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbl.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextColor.Parent" xml:space="preserve">
     <value>grpStyle</value>
   </data>
-  <data name="&gt;&gt;lbl.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStyleTextColor.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
   <data name="ucrChkStyleBoarder.Location" type="System.Drawing.Point, System.Drawing">
