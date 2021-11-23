@@ -46,6 +46,9 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrSubDialogueBase.iHelpTopicID = 169
+
         clsFilterPreview.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
         clsRemoveCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         clsRemoveCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
