@@ -21,11 +21,11 @@ Public Class dlgMachineLearning
     'Functions
     Private clsTrainTestSplitFunction As New RFunction
     Private clsClassificationTrainFunction, clsRegressionTrainFunction, clsTrainingFunction, clsTestFunction As New RFunction
-    Private clsRegressionTrainDataFunction, clsClassificationTrainDataFunction, clsPredictFunction As New RFunction
-    Private clsConfusionmatrixFunction As New RFunction
+    Private clsRegressionTrainDataFunction, clsClassificationTrainDataFunction, clspostResampleFunction As New RFunction
+    Private clsConfusionmatrixFunction, clsClassificationPredictFunction, clsRegressionPredictFunction As New RFunction
     'Operators
     Private clsTrainClassesoperator, clsTestClassesOperator, clsDeltaOperator As New ROperator
-    
+
     Private Sub dlgMachineLearning_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -54,6 +54,12 @@ Public Class dlgMachineLearning
         ucrPnlModelType.AddRadioButton(rdoClassification)
         ucrPnlModelType.AddRadioButton(rdoRegression)
 
+        ucrPnlClassificationPerformanceMeasure.AddRadioButton(rdoClassificationModelSummary)
+        ucrPnlClassificationPerformanceMeasure.AddRadioButton(rdoClassificationPerformanceStatistics)
+
+        ucrPnlRegressionPerformanceMeasure.AddRadioButton(rdoRegressionModelSummary)
+        ucrPnlRegressionPerformanceMeasure.AddRadioButton(rdoRegressionPerformanceStatistics)
+
         'ucrReceiverExpressionFitModel.SetParameter(New RParameter("x", 1))
         'ucrReceiverExpressionFitModel.Selector = ucrSelectorMachineLearning
         'ucrReceiverExpressionFitModel.SetParameterIsString()
@@ -80,8 +86,8 @@ Public Class dlgMachineLearning
         'Commonly used Methods
         dctClassificationMethod.Add("knn", Chr(34) & "knn" & Chr(34))
         dctClassificationMethod.Add("nnet", Chr(34) & "nnet" & Chr(34))
-        dctClassificationMethod.Add("rf", Chr(34) & "rf" & Chr(34))
-        dctClassificationMethod.Add("bayesglm", Chr(34) & "bayesglm" & Chr(34))
+        'dctClassificationMethod.Add("rf", Chr(34) & "rf" & Chr(34))
+        'dctClassificationMethod.Add("bayesglm", Chr(34) & "bayesglm" & Chr(34))
         dctClassificationMethod.Add("glm", Chr(34) & "glm" & Chr(34))
         'Other Methods
         dctClassificationMethod.Add("AdaBoost.M1", Chr(34) & "AdaBoost.M1" & Chr(34))
@@ -299,9 +305,10 @@ Public Class dlgMachineLearning
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverMultipleExplanatoryVariable, {rdoExplanatoryVariable}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         'ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverExpressionFitModel, {rdoExplanatoryModel}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrPnlModelType.AddToLinkedControls({ucrReceiverClassificationResponseVariable, ucrInputClassificationMethod}, {rdoClassification}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlModelType.AddToLinkedControls({ucrReceiverRegressionResponse, ucrInputRegressionMethod}, {rdoRegression}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
+        ucrPnlModelType.AddToLinkedControls({ucrReceiverClassificationResponseVariable, ucrInputClassificationMethod}, {rdoClassification}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlModelType.AddToLinkedControls({ucrReceiverRegressionResponse, ucrInputRegressionMethod}, {rdoRegression}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputClassificationMethod.SetLinkedDisplayControl(grpClassificationPerformanceMeasure)
+        'ucrInputRegressionMethod.SetLinkedDisplayControl(grpRegressionPerformanceMeasure)
     End Sub
 
     Private Sub SetDefaults()
@@ -310,8 +317,10 @@ Public Class dlgMachineLearning
         clsConfusionmatrixFunction = New RFunction
         clsTrainTestSplitFunction = New RFunction
         clsTrainingFunction = New RFunction
-        clsPredictFunction = New RFunction
+        clsClassificationPredictFunction = New RFunction
+        clsRegressionPredictFunction = New RFunction
         clsTestFunction = New RFunction
+        clspostResampleFunction = New RFunction
         clsRegressionTrainDataFunction = New RFunction
         clsClassificationTrainDataFunction = New RFunction
         clsTrainClassesoperator = New ROperator
@@ -319,7 +328,6 @@ Public Class dlgMachineLearning
         clsDeltaOperator = New ROperator
 
         ucrSelectorMachineLearning.Reset()
-        ucrReceiverClassificationResponseVariable.SetMeAsReceiver()
         rdoExplanatoryVariable.Checked = True
         rdoClassification.Checked = True
 
@@ -364,17 +372,17 @@ Public Class dlgMachineLearning
         clsClassificationTrainFunction.AddParameter("method", Chr(34) & "knn" & Chr(34), iPosition:=2)
         'clsClassificationTrainFunction.SetAssignTo("classification_model")
 
-        'clsPredictFunction.SetPackageName("stats")
-        'clsPredictFunction.SetRCommand("predict")
-        'clsPredictFunction.AddParameter("object", clsRFunctionParameter:=clsClassificationTrainFunction, iPosition:=0, bIncludeArgumentName:=False)
-        'clsPredictFunction.AddParameter("test", clsRFunctionParameter:=clsTestFunction, iPosition:=1, bIncludeArgumentName:=False)
-        'clsPredictFunction.AddParameter("type", Chr(34) & "raw" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
-        'clsPredictFunction.SetAssignTo("prediction")
+        clsClassificationPredictFunction.SetPackageName("stats")
+        clsClassificationPredictFunction.SetRCommand("predict")
+        clsClassificationPredictFunction.AddParameter("object", clsRFunctionParameter:=clsClassificationTrainFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsClassificationPredictFunction.AddParameter("test", clsRFunctionParameter:=clsTestFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsClassificationPredictFunction.AddParameter("type", Chr(34) & "raw" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsClassificationPredictFunction.SetAssignTo("prediction")
 
-        'clsConfusionmatrixFunction.SetPackageName("caret")
-        'clsConfusionmatrixFunction.SetRCommand("confusionMatrix")
-        'clsConfusionmatrixFunction.AddParameter("data", clsRFunctionParameter:=clsPredictFunction, iPosition:=0)
-        'clsConfusionmatrixFunction.AddParameter("reference", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1)
+        clsConfusionmatrixFunction.SetPackageName("caret")
+        clsConfusionmatrixFunction.SetRCommand("confusionMatrix")
+        clsConfusionmatrixFunction.AddParameter("data", clsRFunctionParameter:=clsClassificationPredictFunction, iPosition:=0)
+        clsConfusionmatrixFunction.AddParameter("reference", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1)
 
         'Regression Traindata
         clsRegressionTrainDataFunction.SetPackageName("dplyr")
@@ -391,6 +399,17 @@ Public Class dlgMachineLearning
         clsRegressionTrainFunction.AddParameter("data", clsRFunctionParameter:=clsRegressionTrainDataFunction, iPosition:=1)
         clsRegressionTrainFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=2)
         'clsRegressionTrainFunction.SetAssignTo("regression_model")
+
+        clsRegressionPredictFunction.SetPackageName("stats")
+        clsRegressionPredictFunction.SetRCommand("predict")
+        clsRegressionPredictFunction.AddParameter("object", clsRFunctionParameter:=clsRegressionTrainFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsRegressionPredictFunction.AddParameter("test", clsRFunctionParameter:=clsTestFunction, iPosition:=1, bIncludeArgumentName:=False)
+        'clsRegressionPredictFunction.AddParameter("type", Chr(34) & "raw" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsRegressionPredictFunction.SetAssignTo("prediction")
+
+        clspostResampleFunction.SetRCommand("postResample")
+        clspostResampleFunction.AddParameter("pred", clsRFunctionParameter:=clsRegressionPredictFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clspostResampleFunction.AddParameter("obs", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -417,14 +436,30 @@ Public Class dlgMachineLearning
 
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
         If rdoClassification.Checked Then
+            ucrReceiverClassificationResponseVariable.SetMeAsReceiver()
             rdoRegression.Checked = False
             rdoClassification.Checked = True
-            ucrBase.clsRsyntax.SetBaseRFunction(clsClassificationTrainFunction)
+            grpRegressionPerformanceMeasure.Visible = False
+            grpClassificationPerformanceMeasure.Visible = True
+            If rdoClassificationModelSummary.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsClassificationTrainFunction)
+            ElseIf rdoClassificationPerformanceStatistics.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsConfusionmatrixFunction)
+            End If
         Else
+            ucrReceiverRegressionResponse.SetMeAsReceiver()
             rdoClassification.Checked = False
             rdoRegression.Checked = True
+            grpClassificationPerformanceMeasure.Visible = False
+            grpRegressionPerformanceMeasure.Visible = True
             ucrReceiverRegressionResponse.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRegressionTrainFunction)
+
+            If rdoRegressionModelSummary.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRegressionTrainFunction)
+            ElseIf rdoClassificationPerformanceStatistics.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clspostResampleFunction)
+            End If
+
         End If
     End Sub
 

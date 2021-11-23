@@ -27,24 +27,34 @@ Partial Class dlgMachineLearning
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rdoExplanatoryVariable = New System.Windows.Forms.RadioButton()
         Me.rdoExplanatoryModel = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlExplanatoryVariable = New instat.UcrPanel()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblTrainSize = New System.Windows.Forms.Label()
         Me.rdoClassification = New System.Windows.Forms.RadioButton()
         Me.rdoRegression = New System.Windows.Forms.RadioButton()
         Me.grpModelType = New System.Windows.Forms.GroupBox()
+        Me.rdoClassificationPerformanceStatistics = New System.Windows.Forms.RadioButton()
+        Me.grpClassificationPerformanceMeasure = New System.Windows.Forms.GroupBox()
+        Me.grpRegressionPerformanceMeasure = New System.Windows.Forms.GroupBox()
+        Me.rdoRegressionPerformanceStatistics = New System.Windows.Forms.RadioButton()
+        Me.rdoRegressionModelSummary = New System.Windows.Forms.RadioButton()
+        Me.rdoClassificationModelSummary = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlClassificationPerformanceMeasure = New instat.UcrPanel()
+        Me.ucrPnlRegressionPerformanceMeasure = New instat.UcrPanel()
+        Me.ucrInputRegressionMethod = New instat.ucrInputComboBox()
         Me.ucrPnlModelType = New instat.UcrPanel()
         Me.ucrNudTrainSize = New instat.ucrNud()
         Me.ucrInputClassificationMethod = New instat.ucrInputComboBox()
+        Me.ucrPnlExplanatoryVariable = New instat.UcrPanel()
         Me.ucrModelName = New instat.ucrSave()
         Me.ucrReceiverClassificationResponseVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorMachineLearning = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverMultipleExplanatoryVariable = New instat.ucrReceiverMultiple()
         Me.ucrReceiverRegressionResponse = New instat.ucrReceiverSingle()
-        Me.ucrInputRegressionMethod = New instat.ucrInputComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.grpModelType.SuspendLayout()
+        Me.grpClassificationPerformanceMeasure.SuspendLayout()
+        Me.grpRegressionPerformanceMeasure.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExplanatoryModel
@@ -102,13 +112,6 @@ Partial Class dlgMachineLearning
         Me.rdoExplanatoryModel.Text = "Model"
         Me.rdoExplanatoryModel.UseVisualStyleBackColor = True
         '
-        'ucrPnlExplanatoryVariable
-        '
-        Me.ucrPnlExplanatoryVariable.Location = New System.Drawing.Point(4, 15)
-        Me.ucrPnlExplanatoryVariable.Name = "ucrPnlExplanatoryVariable"
-        Me.ucrPnlExplanatoryVariable.Size = New System.Drawing.Size(137, 26)
-        Me.ucrPnlExplanatoryVariable.TabIndex = 0
-        '
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
@@ -163,6 +166,98 @@ Partial Class dlgMachineLearning
         Me.grpModelType.TabStop = False
         Me.grpModelType.Text = "Type"
         '
+        'rdoClassificationPerformanceStatistics
+        '
+        Me.rdoClassificationPerformanceStatistics.AutoSize = True
+        Me.rdoClassificationPerformanceStatistics.Location = New System.Drawing.Point(13, 39)
+        Me.rdoClassificationPerformanceStatistics.Name = "rdoClassificationPerformanceStatistics"
+        Me.rdoClassificationPerformanceStatistics.Size = New System.Drawing.Size(130, 17)
+        Me.rdoClassificationPerformanceStatistics.TabIndex = 2
+        Me.rdoClassificationPerformanceStatistics.TabStop = True
+        Me.rdoClassificationPerformanceStatistics.Text = "Performance Statistics"
+        Me.rdoClassificationPerformanceStatistics.UseVisualStyleBackColor = True
+        '
+        'grpClassificationPerformanceMeasure
+        '
+        Me.grpClassificationPerformanceMeasure.Controls.Add(Me.rdoClassificationModelSummary)
+        Me.grpClassificationPerformanceMeasure.Controls.Add(Me.rdoClassificationPerformanceStatistics)
+        Me.grpClassificationPerformanceMeasure.Controls.Add(Me.ucrPnlClassificationPerformanceMeasure)
+        Me.grpClassificationPerformanceMeasure.Location = New System.Drawing.Point(226, 273)
+        Me.grpClassificationPerformanceMeasure.Name = "grpClassificationPerformanceMeasure"
+        Me.grpClassificationPerformanceMeasure.Size = New System.Drawing.Size(170, 63)
+        Me.grpClassificationPerformanceMeasure.TabIndex = 15
+        Me.grpClassificationPerformanceMeasure.TabStop = False
+        Me.grpClassificationPerformanceMeasure.Text = "Performance Measure"
+        '
+        'grpRegressionPerformanceMeasure
+        '
+        Me.grpRegressionPerformanceMeasure.Controls.Add(Me.rdoRegressionModelSummary)
+        Me.grpRegressionPerformanceMeasure.Controls.Add(Me.rdoRegressionPerformanceStatistics)
+        Me.grpRegressionPerformanceMeasure.Controls.Add(Me.ucrPnlRegressionPerformanceMeasure)
+        Me.grpRegressionPerformanceMeasure.Location = New System.Drawing.Point(226, 273)
+        Me.grpRegressionPerformanceMeasure.Name = "grpRegressionPerformanceMeasure"
+        Me.grpRegressionPerformanceMeasure.Size = New System.Drawing.Size(164, 63)
+        Me.grpRegressionPerformanceMeasure.TabIndex = 16
+        Me.grpRegressionPerformanceMeasure.TabStop = False
+        Me.grpRegressionPerformanceMeasure.Text = "Performance Measure"
+        '
+        'rdoRegressionPerformanceStatistics
+        '
+        Me.rdoRegressionPerformanceStatistics.AutoSize = True
+        Me.rdoRegressionPerformanceStatistics.Location = New System.Drawing.Point(13, 35)
+        Me.rdoRegressionPerformanceStatistics.Name = "rdoRegressionPerformanceStatistics"
+        Me.rdoRegressionPerformanceStatistics.Size = New System.Drawing.Size(130, 17)
+        Me.rdoRegressionPerformanceStatistics.TabIndex = 2
+        Me.rdoRegressionPerformanceStatistics.TabStop = True
+        Me.rdoRegressionPerformanceStatistics.Text = "Performance Statistics"
+        Me.rdoRegressionPerformanceStatistics.UseVisualStyleBackColor = True
+        '
+        'rdoRegressionModelSummary
+        '
+        Me.rdoRegressionModelSummary.AutoSize = True
+        Me.rdoRegressionModelSummary.Location = New System.Drawing.Point(13, 18)
+        Me.rdoRegressionModelSummary.Name = "rdoRegressionModelSummary"
+        Me.rdoRegressionModelSummary.Size = New System.Drawing.Size(100, 17)
+        Me.rdoRegressionModelSummary.TabIndex = 6
+        Me.rdoRegressionModelSummary.TabStop = True
+        Me.rdoRegressionModelSummary.Text = "Model Summary"
+        Me.rdoRegressionModelSummary.UseVisualStyleBackColor = True
+        '
+        'rdoClassificationModelSummary
+        '
+        Me.rdoClassificationModelSummary.AutoSize = True
+        Me.rdoClassificationModelSummary.Location = New System.Drawing.Point(14, 18)
+        Me.rdoClassificationModelSummary.Name = "rdoClassificationModelSummary"
+        Me.rdoClassificationModelSummary.Size = New System.Drawing.Size(100, 17)
+        Me.rdoClassificationModelSummary.TabIndex = 8
+        Me.rdoClassificationModelSummary.TabStop = True
+        Me.rdoClassificationModelSummary.Text = "Model Summary"
+        Me.rdoClassificationModelSummary.UseVisualStyleBackColor = True
+        '
+        'ucrPnlClassificationPerformanceMeasure
+        '
+        Me.ucrPnlClassificationPerformanceMeasure.Location = New System.Drawing.Point(4, 15)
+        Me.ucrPnlClassificationPerformanceMeasure.Name = "ucrPnlClassificationPerformanceMeasure"
+        Me.ucrPnlClassificationPerformanceMeasure.Size = New System.Drawing.Size(135, 42)
+        Me.ucrPnlClassificationPerformanceMeasure.TabIndex = 0
+        '
+        'ucrPnlRegressionPerformanceMeasure
+        '
+        Me.ucrPnlRegressionPerformanceMeasure.Location = New System.Drawing.Point(4, 15)
+        Me.ucrPnlRegressionPerformanceMeasure.Name = "ucrPnlRegressionPerformanceMeasure"
+        Me.ucrPnlRegressionPerformanceMeasure.Size = New System.Drawing.Size(149, 48)
+        Me.ucrPnlRegressionPerformanceMeasure.TabIndex = 0
+        '
+        'ucrInputRegressionMethod
+        '
+        Me.ucrInputRegressionMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputRegressionMethod.GetSetSelectedIndex = -1
+        Me.ucrInputRegressionMethod.IsReadOnly = False
+        Me.ucrInputRegressionMethod.Location = New System.Drawing.Point(62, 283)
+        Me.ucrInputRegressionMethod.Name = "ucrInputRegressionMethod"
+        Me.ucrInputRegressionMethod.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputRegressionMethod.TabIndex = 14
+        '
         'ucrPnlModelType
         '
         Me.ucrPnlModelType.Location = New System.Drawing.Point(4, 15)
@@ -192,9 +287,16 @@ Partial Class dlgMachineLearning
         Me.ucrInputClassificationMethod.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputClassificationMethod.TabIndex = 11
         '
+        'ucrPnlExplanatoryVariable
+        '
+        Me.ucrPnlExplanatoryVariable.Location = New System.Drawing.Point(4, 15)
+        Me.ucrPnlExplanatoryVariable.Name = "ucrPnlExplanatoryVariable"
+        Me.ucrPnlExplanatoryVariable.Size = New System.Drawing.Size(137, 26)
+        Me.ucrPnlExplanatoryVariable.TabIndex = 0
+        '
         'ucrModelName
         '
-        Me.ucrModelName.Location = New System.Drawing.Point(8, 316)
+        Me.ucrModelName.Location = New System.Drawing.Point(8, 355)
         Me.ucrModelName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(302, 24)
@@ -225,7 +327,7 @@ Partial Class dlgMachineLearning
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 344)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 384)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 13
@@ -254,21 +356,13 @@ Partial Class dlgMachineLearning
         Me.ucrReceiverRegressionResponse.TabIndex = 3
         Me.ucrReceiverRegressionResponse.ucrSelector = Nothing
         '
-        'ucrInputRegressionMethod
-        '
-        Me.ucrInputRegressionMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputRegressionMethod.GetSetSelectedIndex = -1
-        Me.ucrInputRegressionMethod.IsReadOnly = False
-        Me.ucrInputRegressionMethod.Location = New System.Drawing.Point(62, 283)
-        Me.ucrInputRegressionMethod.Name = "ucrInputRegressionMethod"
-        Me.ucrInputRegressionMethod.Size = New System.Drawing.Size(94, 21)
-        Me.ucrInputRegressionMethod.TabIndex = 14
-        '
         'dlgMachineLearning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 399)
+        Me.ClientSize = New System.Drawing.Size(420, 447)
+        Me.Controls.Add(Me.grpClassificationPerformanceMeasure)
+        Me.Controls.Add(Me.grpRegressionPerformanceMeasure)
         Me.Controls.Add(Me.ucrInputRegressionMethod)
         Me.Controls.Add(Me.grpModelType)
         Me.Controls.Add(Me.ucrNudTrainSize)
@@ -294,6 +388,10 @@ Partial Class dlgMachineLearning
         Me.GroupBox1.PerformLayout()
         Me.grpModelType.ResumeLayout(False)
         Me.grpModelType.PerformLayout()
+        Me.grpClassificationPerformanceMeasure.ResumeLayout(False)
+        Me.grpClassificationPerformanceMeasure.PerformLayout()
+        Me.grpRegressionPerformanceMeasure.ResumeLayout(False)
+        Me.grpRegressionPerformanceMeasure.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -320,4 +418,12 @@ Partial Class dlgMachineLearning
     Friend WithEvents ucrPnlModelType As UcrPanel
     Friend WithEvents ucrReceiverRegressionResponse As ucrReceiverSingle
     Friend WithEvents ucrInputRegressionMethod As ucrInputComboBox
+    Friend WithEvents grpClassificationPerformanceMeasure As GroupBox
+    Friend WithEvents rdoClassificationPerformanceStatistics As RadioButton
+    Friend WithEvents ucrPnlClassificationPerformanceMeasure As UcrPanel
+    Friend WithEvents grpRegressionPerformanceMeasure As GroupBox
+    Friend WithEvents rdoRegressionPerformanceStatistics As RadioButton
+    Friend WithEvents ucrPnlRegressionPerformanceMeasure As UcrPanel
+    Friend WithEvents rdoClassificationModelSummary As RadioButton
+    Friend WithEvents rdoRegressionModelSummary As RadioButton
 End Class
