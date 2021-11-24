@@ -2402,6 +2402,10 @@ Public Class RLink
     ''' <returns>   The list of clsRParameters. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
+        'Note: this function is not currently called but it will be used in future
+        '      functionality to populate dialogs from script.
+        '      Please do not delete this function. (@lloyddewit 24/11/21)
+        
         'temporary object that retrieves the output from the environment
         Dim strTempAssignTo As String = ".temp_func"
         Dim expTemp As SymbolicExpression
