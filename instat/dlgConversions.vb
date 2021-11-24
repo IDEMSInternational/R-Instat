@@ -151,6 +151,17 @@ Public Class dlgConversions
         ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlDirection.AddRadioButton(rdoN)
+        ucrPnlDirection.AddRadioButton(rdoS)
+        ucrPnlDirection.AddRadioButton(rdoE)
+        ucrPnlDirection.AddRadioButton(rdoW)
+        ucrPnlDirection.AddRadioButton(rdoVariable)
+
+        ucrPnlDirection.AddParameterValuesCondition(rdoN, "dir", "N")
+        ucrPnlDirection.AddParameterValuesCondition(rdoS, "dir", "S")
+        ucrPnlDirection.AddParameterValuesCondition(rdoE, "dir", "E")
+        ucrPnlDirection.AddParameterValuesCondition(rdoW, "dir", "W")
+
         ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Kelvin")
@@ -160,11 +171,13 @@ Public Class dlgConversions
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDegrees, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverMinutes, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverSeconds, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrReceiverLetters, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrPnlDirection, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverDegrees.SetLinkedDisplayControl(lblDegrees)
         ucrReceiverMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrReceiverSeconds.SetLinkedDisplayControl(lblSeconds)
-        ucrReceiverLetters.SetLinkedDisplayControl(lblLetters)
+        'ucrReceiverLetters.SetLinkedDisplayControl(lblLetters)
+        ucrPnlDirection.AddToLinkedControls(ucrReceiverLetters, {rdoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDirection.SetLinkedDisplayControl(grpDirection)
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
@@ -233,7 +246,8 @@ Public Class dlgConversions
         ucrReceiverDegrees.SetRCode(clsConvertToDegreeFunction, bReset)
         ucrReceiverMinutes.SetRCode(clsConvertToDegreeFunction, bReset)
         ucrReceiverSeconds.SetRCode(clsConvertToDegreeFunction, bReset)
-        ucrReceiverLetters.SetRCode(clsConvertToDegreeFunction, bReset)
+        'ucrReceiverLetters.SetRCode(clsConvertToDegreeFunction, bReset)
+        ucrPnlConversions.SetRCode(clsConvertToDegreeFunction, bReset)
 
         If bReset Then
             ucrPnlConversions.SetRCode(clsPrecipitationFunction, bReset)
@@ -313,6 +327,12 @@ Public Class dlgConversions
     Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
         SetBaseFunction()
     End Sub
+
+    'Private Sub ucrPnlDirection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDirection.ControlValueChanged
+    '    If rdoVariable.Checked AndAlso Not ucrReceiverLetters.IsEmpty Then
+    '        clsConvertToDegreeFunction.AddParameter("dir", )
+    '    End If
+    'End Sub
 
     Private Sub ChangeLatParameter()
         'This is done since the "lat" parameter is being given by two controls (ucrReceiverLatitude and ucrInputLatitude)
