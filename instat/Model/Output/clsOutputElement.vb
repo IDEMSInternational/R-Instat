@@ -17,7 +17,7 @@
 Imports RScript
 
 ''' <summary>
-''' Output elemet for a r command, the output element could be just the script or the script with
+''' Output element for a r command, the output element could be just the script or the script with
 ''' an image or output text
 ''' </summary>
 Public Class clsOutputElement
