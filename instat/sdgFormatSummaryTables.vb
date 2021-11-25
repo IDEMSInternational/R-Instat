@@ -1,7 +1,7 @@
 ﻿Imports instat.Translations
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
-        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsCellHeaderFormatFunction,
+        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -25,7 +25,7 @@ Public Class dlgSummaryTables
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
-        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsCellHeaderFormatFunction,
+        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
 
@@ -154,7 +154,7 @@ Public Class dlgSummaryTables
         clsCellTextFunction = New RFunction
         clsCellBorderFunction = New RFunction
         clsCellFillFunction = New RFunction
-        clsCellHeaderFormatFunction = New RFunction
+        clsHeaderFormatFunction = New RFunction
         clsTabOptionsFunction = New RFunction
         clsPxFunction = New RFunction
         clsMutableOperator = New ROperator
@@ -226,15 +226,23 @@ Public Class dlgSummaryTables
         clsCellsTitleFunction.SetPackageName("gt")
         clsCellsTitleFunction.SetRCommand("cells_title")
 
-        clsCellTextFunction
+        clsCellTextFunction.SetPackageName("gt")
+        clsCellTextFunction.SetRCommand("cell_text")
 
+        clsCellBorderFunction.SetPackageName("gt")
+        clsCellBorderFunction.SetRCommand("cell_borders")
 
-        clsCellBorderFunction
-        clsCellFillFunction
-        clsCellHeaderFormatFunction
+        clsCellFillFunction.SetPackageName("gt")
+        clsCellFillFunction.SetRCommand("cell_text")
 
-        clsTabOptionsFunction
-        clsPxFunction
+        clsHeaderFormatFunction.SetPackageName("mmtable2")
+        clsHeaderFormatFunction.SetRCommand("header_format")
+
+        clsTabOptionsFunction.SetPackageName("gt")
+        clsTabOptionsFunction.SetRCommand("tab_options")
+
+        clsPxFunction.SetPackageName("gt")
+        clsPxFunction.SetRCommand("px")
 
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
