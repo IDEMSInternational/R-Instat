@@ -67,7 +67,7 @@ Public Class dlgSplitText
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
-        dctPatternPairs.Add("Period .", "stringr::fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctPatternPairs.Add("Period .", Chr(34) & "." & Chr(34))
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
         dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
         dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
@@ -181,6 +181,7 @@ Public Class dlgSplitText
             strPattern = Chr(34) & ucrInputPattern.GetText & Chr(34)
         End If
         clsTextComponentsFixed.RemoveParameterByName("pattern")
+        clsTextComponentsMaximum.RemoveParameterByName("pattern")
         clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
