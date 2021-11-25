@@ -126,6 +126,28 @@ Public Class sdgFormatSummaryTables
         ucrInputStyleFillColor.SetRDefault("#D3D3D3")
         ucrInputStyleFillColor.SetLinkedDisplayControl(lblStyleFillColor)
 
+        'Table
+        ucrInputTableAlign.SetParameter(New RParameter("table.layout", iNewPosition:=0))
+        ucrInputTableAlign.SetItems({"left", "right", "NULL"}, bAddConditions:=True)
+        ucrInputTableAlign.SetRDefault("NULL")
+
+
+        ucrInputTableBackgroundColor.SetParameter(New RParameter("table.background.color", iNewPosition:=1))
+        ucrInputTableBackgroundColor.SetRDefault("NULL")
+
+        ucrInputTableFontColor.SetParameter(New RParameter("table.font.color ", 2))
+        ucrInputTableFontColor.SetRDefault("NULL")
+
+        ucrInputTableLayout.SetParameter(New RParameter("table.layout", iNewPosition:=3))
+        ucrInputTableLayout.SetItems({"fixed", "auto"}, bAddConditions:=True)
+        ucrInputTableLayout.SetRDefault("fixed")
+
+        ucrInputTableFontWeight.SetParameter(New RParameter("table.font.weight", iNewPosition:=4))
+        ucrInputTableFontWeight.SetItems({"normal", "bold", "lighter", "bolder"}, bAddConditions:=True)
+        ucrInputTableFontWeight.SetRDefault("NULL")
+
+        ucrChkAddStubHeader.SetText("Add stub header")
+        ucrChkAddStubHeader.AddToLinkedControls(ucrInputStubLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Public Sub SetRCode()

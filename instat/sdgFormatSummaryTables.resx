@@ -1674,6 +1674,48 @@
   <data name="&gt;&gt;tbpHeader.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputTableFontColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 141</value>
+  </data>
+  <data name="ucrInputTableFontColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 21</value>
+  </data>
+  <data name="ucrInputTableFontColor.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableFontColor.Name" xml:space="preserve">
+    <value>ucrInputTableFontColor</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableFontColor.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableFontColor.Parent" xml:space="preserve">
+    <value>tbpTable</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableFontColor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputTableBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 87</value>
+  </data>
+  <data name="ucrInputTableBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 21</value>
+  </data>
+  <data name="ucrInputTableBackgroundColor.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableBackgroundColor.Name" xml:space="preserve">
+    <value>ucrInputTableBackgroundColor</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableBackgroundColor.Type" xml:space="preserve">
+    <value>instat.ucrColors, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableBackgroundColor.Parent" xml:space="preserve">
+    <value>tbpTable</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTableBackgroundColor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrInputStubLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 231</value>
   </data>
@@ -1693,7 +1735,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputStubLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkAddStubHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 235</value>
@@ -1714,7 +1756,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrChkAddStubHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrNudTableFontSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 198</value>
@@ -1735,7 +1777,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrNudTableFontSize.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrNudTableWidth.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 170</value>
@@ -1756,7 +1798,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrNudTableWidth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblFontSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1786,7 +1828,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblFontSize.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="lblTableWidth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1816,7 +1858,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableWidth.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblTableBackgroundColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1846,7 +1888,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableBackgroundColor.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lblTableAlign.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1876,37 +1918,37 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableAlign.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
-  <data name="lblTableWeight.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTableFontWeight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblTableWeight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblTableFontWeight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblTableWeight.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblTableFontWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 119</value>
   </data>
-  <data name="lblTableWeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+  <data name="lblTableFontWeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
   </data>
-  <data name="lblTableWeight.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblTableFontWeight.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <data name="lblTableWeight.Text" xml:space="preserve">
-    <value>Weight:</value>
+  <data name="lblTableFontWeight.Text" xml:space="preserve">
+    <value>Font Weight:</value>
   </data>
-  <data name="&gt;&gt;lblTableWeight.Name" xml:space="preserve">
-    <value>lblTableWeight</value>
+  <data name="&gt;&gt;lblTableFontWeight.Name" xml:space="preserve">
+    <value>lblTableFontWeight</value>
   </data>
-  <data name="&gt;&gt;lblTableWeight.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTableFontWeight.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblTableWeight.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTableFontWeight.Parent" xml:space="preserve">
     <value>tbpTable</value>
   </data>
-  <data name="&gt;&gt;lblTableWeight.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;lblTableFontWeight.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="lblTableFontColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1936,7 +1978,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableFontColor.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblTableLayout.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1966,7 +2008,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableLayout.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="ucrInputTableAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 58</value>
@@ -1987,69 +2029,27 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableAlign.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="ucrInputTableBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 86</value>
-  </data>
-  <data name="ucrInputTableBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 21</value>
-  </data>
-  <data name="ucrInputTableBackgroundColor.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableBackgroundColor.Name" xml:space="preserve">
-    <value>ucrInputTableBackgroundColor</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableBackgroundColor.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableBackgroundColor.Parent" xml:space="preserve">
-    <value>tbpTable</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableBackgroundColor.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrInputTableWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 114</value>
-  </data>
-  <data name="ucrInputTableWeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 21</value>
-  </data>
-  <data name="ucrInputTableWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableWeight.Name" xml:space="preserve">
-    <value>ucrInputTableWeight</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableWeight.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableWeight.Parent" xml:space="preserve">
-    <value>tbpTable</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTableWeight.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="ucrInputTableFontColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 142</value>
+  <data name="ucrInputTableFontWeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 114</value>
   </data>
-  <data name="ucrInputTableFontColor.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputTableFontWeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
   </data>
-  <data name="ucrInputTableFontColor.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="ucrInputTableFontWeight.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
-  <data name="&gt;&gt;ucrInputTableFontColor.Name" xml:space="preserve">
-    <value>ucrInputTableFontColor</value>
+  <data name="&gt;&gt;ucrInputTableFontWeight.Name" xml:space="preserve">
+    <value>ucrInputTableFontWeight</value>
   </data>
-  <data name="&gt;&gt;ucrInputTableFontColor.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableFontWeight.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputTableFontColor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableFontWeight.Parent" xml:space="preserve">
     <value>tbpTable</value>
   </data>
-  <data name="&gt;&gt;ucrInputTableFontColor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTableFontWeight.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="ucrInputTableLayout.Location" type="System.Drawing.Point, System.Drawing">
