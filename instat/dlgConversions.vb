@@ -290,6 +290,7 @@ Public Class dlgConversions
         ElseIf rdoWindSpeed.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWindSpeedFunction)
         End If
+        ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
     Private Sub ucrPnlLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLatitude.ControlValueChanged
@@ -307,6 +308,7 @@ Public Class dlgConversions
 
         If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
+            ucrBase.clsRsyntax.iCallType = 0
             ucrReceiverDate.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("day_length")
             ucrSaveConversions.setLinkedReceiver(ucrReceiverDate)
@@ -317,6 +319,7 @@ Public Class dlgConversions
             ucrSaveConversions.setLinkedReceiver(ucrReceiverElement)
         ElseIf rdoCoordinates.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsConvertToDegreeFunction)
+            ucrBase.clsRsyntax.iCallType = 0
             ucrReceiverDegrees.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("coord")
             ucrSaveConversions.setLinkedReceiver(ucrReceiverDegrees)
