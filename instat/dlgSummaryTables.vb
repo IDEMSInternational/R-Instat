@@ -24,6 +24,9 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
+    Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
+        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsCellHeaderFormatFunction,
+        clsTabOptionsFunction, clsPxFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -144,8 +147,19 @@ Public Class dlgSummaryTables
         clsVariableHeaderTopLeftFunction = New RFunction
         clsummaryVariableHeaderLeftTopFunction = New RFunction
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
+        clsTableTitleFunction = New RFunction
+        clsTabFootnoteFunction = New RFunction
+        clsTableSourcenoteFunction = New RFunction
+        clsCellsTitleFunction = New RFunction
+        clsCellTextFunction = New RFunction
+        clsCellBorderFunction = New RFunction
+        clsCellFillFunction = New RFunction
+        clsCellHeaderFormatFunction = New RFunction
+        clsTabOptionsFunction = New RFunction
+        clsPxFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
+
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -199,6 +213,29 @@ Public Class dlgSummaryTables
         clsDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=9)
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
+
+        clsTableTitleFunction.SetPackageName("mmtable2")
+        clsTableTitleFunction.SetRCommand("table_title")
+
+        clsTabFootnoteFunction.SetPackageName("gt")
+        clsTabFootnoteFunction.SetRCommand("tab_footnote")
+
+        clsTableSourcenoteFunction.SetPackageName("gt")
+        clsTableSourcenoteFunction.SetRCommand("table_source_note")
+
+        clsCellsTitleFunction.SetPackageName("gt")
+        clsCellsTitleFunction.SetRCommand("cells_title")
+
+        clsCellTextFunction
+
+
+        clsCellBorderFunction
+        clsCellFillFunction
+        clsCellHeaderFormatFunction
+
+        clsTabOptionsFunction
+        clsPxFunction
+
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)

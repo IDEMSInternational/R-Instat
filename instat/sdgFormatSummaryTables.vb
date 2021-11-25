@@ -1,6 +1,6 @@
 ﻿Imports instat.Translations
 Public Class sdgFormatSummaryTables
-    Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellTilteFunction,
+    Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsCellHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
 
