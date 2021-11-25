@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgInfillMissingValues
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgInfillMissingValues
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInfillMissingValues))
         Me.rdoNaStructTS = New System.Windows.Forms.RadioButton()
@@ -33,11 +33,9 @@ Partial Class dlgInfillMissingValues
         Me.rdoFitSingle = New System.Windows.Forms.RadioButton()
         Me.rdoFitMultiple = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.lblValue = New System.Windows.Forms.Label()
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
@@ -45,7 +43,6 @@ Partial Class dlgInfillMissingValues
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblObserved = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.rdoDisplay = New System.Windows.Forms.RadioButton()
         Me.rdoShow = New System.Windows.Forms.RadioButton()
         Me.lblFacetColumns = New System.Windows.Forms.Label()
@@ -58,6 +55,7 @@ Partial Class dlgInfillMissingValues
         Me.lblDispMultShowStation = New System.Windows.Forms.Label()
         Me.lblTrueValues = New System.Windows.Forms.Label()
         Me.lblPercentCount = New System.Windows.Forms.Label()
+        Me.ucrSaveFitNewColumn = New instat.ucrSave()
         Me.ucrInputTimeInterval = New instat.ucrInputComboBox()
         Me.ucrNudTimeInterval = New instat.ucrNud()
         Me.ucrChkTimeInterval = New instat.ucrCheck()
@@ -73,7 +71,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrReceiverImputed = New instat.ucrReceiverSingle()
         Me.ucrReceiverDisplayObserved = New instat.ucrReceiverSingle()
         Me.ucrReceiverDisplayShowDate = New instat.ucrReceiverSingle()
-        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
         Me.ucrInputStdBias = New instat.ucrInputTextBox()
         Me.ucrInputMeanBias = New instat.ucrInputTextBox()
         Me.ucrChkStdBias = New instat.ucrCheck()
@@ -90,12 +87,14 @@ Partial Class dlgInfillMissingValues
         Me.ucrChkMaxGap = New instat.ucrCheck()
         Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrChkCopyFromBelow = New instat.ucrCheck()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -180,11 +179,6 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        '
         'grpStartEnd
         '
         Me.grpStartEnd.Controls.Add(Me.rdoExtendFill)
@@ -207,11 +201,6 @@ Partial Class dlgInfillMissingValues
         Me.rdoLeaveAsMissing.Name = "rdoLeaveAsMissing"
         Me.rdoLeaveAsMissing.TabStop = True
         Me.rdoLeaveAsMissing.UseVisualStyleBackColor = True
-        '
-        'ucrPnlStartEnd
-        '
-        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
-        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
         '
         'lblValue
         '
@@ -247,11 +236,6 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblObserved, "lblObserved")
         Me.lblObserved.Name = "lblObserved"
-        '
-        'lblNewColumnName
-        '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
         '
         'rdoDisplay
         '
@@ -323,6 +307,11 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblPercentCount, "lblPercentCount")
         Me.lblPercentCount.Name = "lblPercentCount"
+        '
+        'ucrSaveFitNewColumn
+        '
+        resources.ApplyResources(Me.ucrSaveFitNewColumn, "ucrSaveFitNewColumn")
+        Me.ucrSaveFitNewColumn.Name = "ucrSaveFitNewColumn"
         '
         'ucrInputTimeInterval
         '
@@ -443,14 +432,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrReceiverDisplayShowDate.Selector = Nothing
         Me.ucrReceiverDisplayShowDate.strNcFilePath = ""
         Me.ucrReceiverDisplayShowDate.ucrSelector = Nothing
-        '
-        'ucrInputNewColumnName
-        '
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewColumnName.IsMultiline = False
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         '
         'ucrInputStdBias
         '
@@ -577,6 +558,11 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkCopyFromBelow, "ucrChkCopyFromBelow")
         Me.ucrChkCopyFromBelow.Name = "ucrChkCopyFromBelow"
         '
+        'ucrPnlStartEnd
+        '
+        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        '
         'ucrSaveNewColumn
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
@@ -617,10 +603,16 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveFitNewColumn)
         Me.Controls.Add(Me.ucrInputTimeInterval)
         Me.Controls.Add(Me.ucrNudTimeInterval)
         Me.Controls.Add(Me.ucrChkTimeInterval)
@@ -648,8 +640,6 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.ucrReceiverDisplayShowDate)
         Me.Controls.Add(Me.rdoShow)
         Me.Controls.Add(Me.rdoDisplay)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
-        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputStdBias)
         Me.Controls.Add(Me.ucrInputMeanBias)
         Me.Controls.Add(Me.ucrChkStdBias)
@@ -741,8 +731,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrChkMeanBias As ucrCheck
     Friend WithEvents ucrInputStdBias As ucrInputTextBox
     Friend WithEvents ucrInputMeanBias As ucrInputTextBox
-    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents rdoShow As RadioButton
     Friend WithEvents rdoDisplay As RadioButton
     Friend WithEvents ucrReceiverDisplayObserved As ucrReceiverSingle
@@ -770,4 +758,5 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrNudTimeInterval As ucrNud
     Friend WithEvents ucrChkTimeInterval As ucrCheck
     Friend WithEvents ucrInputTimeInterval As ucrInputComboBox
+    Friend WithEvents ucrSaveFitNewColumn As ucrSave
 End Class

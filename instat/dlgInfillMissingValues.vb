@@ -21,6 +21,7 @@ Public Class dlgInfillMissingValues
     Private iDialogHeight As Integer
     Private iBaseMaxY
     Private clsApproximateFunction, clsAggregateFunction, clsNaLocfFunction, clsSplineFunction, clsNaFillFunction, clsStructTSFunction, clsSetSeedFunction, clsAveFunction, clsPatchClimateElementFunction, clsVisualizeElementNa As New RFunction
+    Private clsTimeDummyFunction As New RFunction
     Private clsBracketOperator, clsTimeIntOperator As New ROperator
     Private dctTimeInterval As New Dictionary(Of String, String)
     Private Sub dlgInfillMissingValues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -180,8 +181,9 @@ Public Class dlgInfillMissingValues
         ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.AddToLinkedControls(ucrChkSetSeed, {"Sample"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverDate, ucrChkMeanBias, ucrChkTimeInterval, ucrChkStdBias, ucrReceiverObserved, ucrInputNewColumnName, ucrReceiverEstimatedElements}, {rdoFitMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverDate, ucrChkMeanBias, ucrChkStdBias, ucrReceiverObserved, ucrSaveFitNewColumn, ucrReceiverEstimatedElements}, {rdoFitMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkBy, ucrChkMaxGap, ucrPnlMethods, ucrReceiverElement, ucrSaveNewColumn}, {rdoFitSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkTimeInterval, {rdoFitMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMeanBias.AddToLinkedControls(ucrInputMeanBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrChkTimeInterval.AddToLinkedControls({ucrNudTimeInterval, ucrInputTimeInterval}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStdBias.AddToLinkedControls(ucrInputStdBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
@@ -201,7 +203,7 @@ Public Class dlgInfillMissingValues
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrPnlMethods.SetLinkedDisplayControl(grpMethods)
         ucrReceiverObserved.SetLinkedDisplayControl(lblObserved)
-        ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
+        ' ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
         ucrReceiverDisplayShowDate.SetLinkedDisplayControl(lblDisplayDate)
         ucrReceiverDisplayObserved.SetLinkedDisplayControl(lblDisplayElement)
         ucrReceiverImputed.SetLinkedDisplayControl(lblImputed)
@@ -225,8 +227,9 @@ Public Class dlgInfillMissingValues
         ucrChkStdBias.AddParameterPresentCondition(False, "max_stdev_bias", False)
 
         ucrChkTimeInterval.SetText("Time interval:")
-        ucrChkTimeInterval.AddParameterPresentCondition(True, "time_interval")
-        ucrChkTimeInterval.AddParameterPresentCondition(False, "time_interval", False)
+        ucrChkTimeInterval.SetParameter(New RParameter("time_interval", 0))
+        ucrChkTimeInterval.SetValuesCheckedAndUnchecked("True", "False")
+        ucrChkTimeInterval.SetRDefault("False")
 
         ucrInputMeanBias.SetParameter(New RParameter("max_mean_bias", 4))
         ucrInputMeanBias.AddQuotesIfUnrecognised = False
@@ -249,8 +252,14 @@ Public Class dlgInfillMissingValues
         ucrNudTimeInterval.Increment = 1
         ucrNudTimeInterval.SetParameter(New RParameter("left", 0))
 
-        ucrInputNewColumnName.SetParameter(New RParameter("column_name", 7))
-        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
+        'ucrInputNewColumnName.SetParameter(New RParameter("column_name", 7))
+        'ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
+
+        'ucrSaveFitNewColumn.SetParameter(New RParameter("column_name", 7))
+        ucrSaveFitNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
+        ucrSaveFitNewColumn.SetSaveTypeAsColumn()
+        ucrSaveFitNewColumn.SetIsComboBox()
+        ucrSaveFitNewColumn.SetLabelText("New Column Name:")
 
         ucrNudFacetColumns.SetParameter(New RParameter("ncol", 4))
         ucrNudFacetColumns.SetMinMax(iNewMin:=1)
@@ -298,6 +307,7 @@ Public Class dlgInfillMissingValues
         clsAveFunction = New RFunction
         clsPatchClimateElementFunction = New RFunction
         clsVisualizeElementNa = New RFunction
+        clsTimeDummyFunction = New RFunction
         clsTimeIntOperator = New ROperator
 
         clsBracketOperator = New ROperator
@@ -305,6 +315,7 @@ Public Class dlgInfillMissingValues
         ucrSelectorInfillMissing.Reset()
         ucrReceiverElement.SetMeAsReceiver()
         ucrSaveNewColumn.Reset()
+        ucrSaveFitNewColumn.Reset()
 
         'Temp fix: Set panel conditions properly!
         rdoLeaveAsMissing.Checked = True
@@ -400,8 +411,8 @@ Public Class dlgInfillMissingValues
         ucrInputStdBias.SetRCode(clsPatchClimateElementFunction, bReset)
         ucrChkMeanBias.SetRCode(clsPatchClimateElementFunction, bReset)
         ucrChkStdBias.SetRCode(clsPatchClimateElementFunction, bReset)
-        ucrChkTimeInterval.SetRCode(clsPatchClimateElementFunction, bReset)
-        ucrInputNewColumnName.SetRCode(clsPatchClimateElementFunction, bReset)
+        ucrChkTimeInterval.SetRCode(clsTimeDummyFunction, bReset)
+        'ucrInputNewColumnName.SetRCode(clsPatchClimateElementFunction, bReset)
         ucrReceiverDisplayObserved.SetRCode(clsVisualizeElementNa, bReset)
         ucrReceiverDisplayShowDate.SetRCode(clsVisualizeElementNa, bReset)
         ucrReceiverImputed.SetRCode(clsVisualizeElementNa, bReset)
@@ -418,6 +429,7 @@ Public Class dlgInfillMissingValues
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
 
         ucrSaveNewColumn.SetRCode(clsAveFunction, bReset)
+        ucrSaveFitNewColumn.SetRCode(clsPatchClimateElementFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisualizeElementNa, bReset)
 
         'ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -482,7 +494,7 @@ Public Class dlgInfillMissingValues
     Private Sub TestOkEnabled()
         If rdoFitSingle.Checked AndAlso (ucrReceiverElement.IsEmpty OrElse Not ucrSaveNewColumn.IsComplete OrElse (rdoNaFill.Checked AndAlso ((rdoLeaveAsMissing.Checked OrElse rdoExtendFill.Checked) AndAlso ucrInputConstant.IsEmpty))) Then
             ucrBase.OKEnabled(False)
-        ElseIf rdoFitMultiple.Checked AndAlso (ucrReceiverDate.IsEmpty OrElse ucrReceiverObserved.IsEmpty OrElse ucrReceiverEstimatedElements.IsEmpty OrElse (ucrChkMeanBias.Checked AndAlso ucrInputMeanBias.IsEmpty) OrElse (ucrChkStdBias.Checked AndAlso ucrInputStdBias.IsEmpty) OrElse ucrInputNewColumnName.IsEmpty) Then
+        ElseIf rdoFitMultiple.Checked AndAlso (ucrReceiverDate.IsEmpty OrElse ucrReceiverObserved.IsEmpty OrElse ucrReceiverEstimatedElements.IsEmpty OrElse (ucrChkMeanBias.Checked AndAlso ucrInputMeanBias.IsEmpty) OrElse (ucrChkStdBias.Checked AndAlso ucrInputStdBias.IsEmpty) OrElse Not ucrSaveFitNewColumn.IsComplete) Then
             ucrBase.OKEnabled(False)
         ElseIf (rdoShow.Checked AndAlso ucrReceiverImputed.IsEmpty) OrElse (rdoDisplay.Checked OrElse rdoShow.Checked) AndAlso (ucrReceiverDisplayShowDate.IsEmpty OrElse ucrReceiverDisplayObserved.IsEmpty OrElse Not ucrSaveGraph.IsComplete) Then
             ucrBase.OKEnabled(False)
@@ -540,7 +552,7 @@ Public Class dlgInfillMissingValues
             cmdDisplayOptions.Visible = False
             ucrReceiverStation.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsPatchClimateElementFunction)
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.iCallType = 0
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.32)
             ucrReceiverObserved.SetMeAsReceiver()
@@ -549,7 +561,7 @@ Public Class dlgInfillMissingValues
 
     Private Sub ucrReceiverObserved_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlValueChanged
         If Not ucrReceiverObserved.IsEmpty Then
-            ucrInputNewColumnName.SetName(ucrReceiverObserved.GetVariableNames(False) & "_filled")
+            ucrSaveFitNewColumn.SetName(ucrReceiverObserved.GetVariableNames(False) & "_filled")
         End If
     End Sub
 
@@ -563,7 +575,7 @@ Public Class dlgInfillMissingValues
         lblFacetColumns.Visible = bVisible
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlStartEnd.ControlContentsChanged, ucrInputConstant.ControlContentsChanged, ucrPnlMethods.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverObserved.ControlContentsChanged, ucrReceiverEstimatedElements.ControlContentsChanged, ucrChkMeanBias.ControlContentsChanged, ucrInputMeanBias.ControlContentsChanged, ucrChkStdBias.ControlContentsChanged, ucrInputStdBias.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrReceiverImputed.ControlContentsChanged, ucrReceiverDisplayShowDate.ControlContentsChanged, ucrReceiverDisplayObserved.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlStartEnd.ControlContentsChanged, ucrInputConstant.ControlContentsChanged, ucrPnlMethods.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverObserved.ControlContentsChanged, ucrReceiverEstimatedElements.ControlContentsChanged, ucrChkMeanBias.ControlContentsChanged, ucrInputMeanBias.ControlContentsChanged, ucrChkStdBias.ControlContentsChanged, ucrInputStdBias.ControlContentsChanged, ucrReceiverImputed.ControlContentsChanged, ucrReceiverDisplayShowDate.ControlContentsChanged, ucrReceiverDisplayObserved.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
