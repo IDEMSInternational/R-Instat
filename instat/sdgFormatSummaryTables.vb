@@ -2,7 +2,7 @@
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellTilteFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsCellHeaderFormatFunction,
-        clsTabOptionsFunction As New RFunction
+        clsTabOptionsFunction, clsPxFunction As New RFunction
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -145,6 +145,10 @@ Public Class sdgFormatSummaryTables
         ucrInputTableFontWeight.SetParameter(New RParameter("table.font.weight", iNewPosition:=4))
         ucrInputTableFontWeight.SetItems({"normal", "bold", "lighter", "bolder"}, bAddConditions:=True)
         ucrInputTableFontWeight.SetRDefault("NULL")
+
+        ucrNudTableWidth.SetParameter(New RParameter("table.width", iNewPosition:=0, bNewIncludeArgumentName:=False))
+
+        ucrNudTableFontSize.SetParameter(New RParameter("table.font.size", iNewPosition:=0, bNewIncludeArgumentName:=False))
 
         ucrChkAddStubHeader.SetText("Add stub header")
         ucrChkAddStubHeader.AddToLinkedControls(ucrInputStubLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
