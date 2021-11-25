@@ -21,7 +21,7 @@ Imports RScript
 ''' an image or output text
 ''' </summary>
 Public Class clsOutputElement
-    Private _formatedRScript As List(Of clsRScriptElement)
+    Private _formattedRScript As List(Of clsRScriptElement)
     Private _id As Integer
     Private _lstBmpImage As List(Of Bitmap)
     Private _lstStringOutput As List(Of String)
