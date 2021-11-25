@@ -80,7 +80,7 @@ Partial Class sdgExtremesDisplayOptions
         Me.rdoQQPlot.Name = "rdoQQPlot"
         Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
         Me.rdoQQPlot.TabIndex = 6
-        Me.rdoQQPlot.Text = "QQ-Plot"
+        Me.rdoQQPlot.Text = "QQ Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
         'rdoQQ2

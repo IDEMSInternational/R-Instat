@@ -133,6 +133,9 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="RScript, Version=0.1.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.4\lib\net461\RScript.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -184,11 +187,23 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="dlgClusterAnalysis.Designer.vb">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
+    <Compile Include="Model\DataFrame\clsDataBook.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
@@ -303,10 +318,10 @@
     <Compile Include="dlgDisplayTopN.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgExportForClimsoft.Designer.vb">
-      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
+    <Compile Include="dlgExportToClimsoft.Designer.vb">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgExportForClimsoft.vb">
+    <Compile Include="dlgExportToClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
@@ -337,6 +352,12 @@
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgLocatingPointsInShapeFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
@@ -417,6 +438,7 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -428,6 +450,7 @@
     <Compile Include="dlgThreeVariablePivotTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
@@ -450,6 +473,12 @@
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCommentForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.Designer.vb">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -540,6 +569,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.Designer.vb">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
@@ -2278,10 +2313,10 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRank.Designer.vb">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <Compile Include="dlgTransform.Designer.vb">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRank.vb">
+    <Compile Include="dlgTransform.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2821,6 +2856,9 @@
     <EmbeddedResource Include="dlgCluster.resx">
       <DependentUpon>dlgCluster.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClusterAnalysis.resx">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2834,8 +2872,8 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgExportForClimsoft.resx">
-      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
+    <EmbeddedResource Include="dlgExportToClimsoft.resx">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
@@ -2851,6 +2889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
       <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -2906,6 +2947,9 @@
     <EmbeddedResource Include="sdgCommentForDataEntry.resx">
       <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgConstructRegexExpression.resx">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2950,6 +2994,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFormatSummaryTables.resx">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
@@ -4428,11 +4475,11 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.sw-KE.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>

@@ -19,7 +19,7 @@ Partial Class dlgLabelsLevels
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,11 +36,13 @@ Partial Class dlgLabelsLevels
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgLabelsLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdAddLevel = New System.Windows.Forms.Button()
+        Me.lblLevelNumber = New System.Windows.Forms.Label()
+        Me.lblNaValue = New System.Windows.Forms.Label()
         Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
@@ -59,6 +61,16 @@ Partial Class dlgLabelsLevels
         resources.ApplyResources(Me.cmdAddLevel, "cmdAddLevel")
         Me.cmdAddLevel.Name = "cmdAddLevel"
         Me.cmdAddLevel.UseVisualStyleBackColor = True
+        '
+        'lblLevelNumber
+        '
+        resources.ApplyResources(Me.lblLevelNumber, "lblLevelNumber")
+        Me.lblLevelNumber.Name = "lblLevelNumber"
+        '
+        'lblNaValue
+        '
+        resources.ApplyResources(Me.lblNaValue, "lblNaValue")
+        Me.lblNaValue.Name = "lblNaValue"
         '
         'ucrChkIncludeLevelNumbers
         '
@@ -101,6 +113,8 @@ Partial Class dlgLabelsLevels
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNaValue)
+        Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
@@ -126,4 +140,6 @@ Partial Class dlgLabelsLevels
     Friend WithEvents ucrReceiverLabels As ucrReceiverSingle
     Friend WithEvents cmdAddLevel As Button
     Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
+    Friend WithEvents lblLevelNumber As Label
+    Friend WithEvents lblNaValue As Label
 End Class

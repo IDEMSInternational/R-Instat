@@ -19,7 +19,7 @@ Imports instat.Translations
 
 Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
-    Private clsFctRecodeFunction, clsFctOtherFunction As New RFunction
+    Private clsPlyrRevalueFunction, clsReplaceFunction, clsFctOtherFunction, clsFctExplicitNaFunction As New RFunction
     Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpNFunction As New RFunction
 
     Private clsCFunction As New RFunction
@@ -45,10 +45,12 @@ Public Class dlgRecodeFactor
         ucrBase.iHelpTopicID = 37
 
         ucrPnlOptions.AddRadioButton(rdoRecode)
+        ucrPnlOptions.AddRadioButton(rdoAddNa)
         ucrPnlOptions.AddRadioButton(rdoOther)
         ucrPnlOptions.AddRadioButton(rdoLump)
 
-        ucrPnlOptions.AddFunctionNamesCondition(rdoRecode, "fct_recode")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoRecode, "revalue")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAddNa, "fct_explicit_na")
         ucrPnlOptions.AddFunctionNamesCondition(rdoOther, "fct_other")
         ucrPnlOptions.AddFunctionNamesCondition(rdoLump, {"fct_lump_min", "fct_lump_n", "fct_lump_prop", "fct_lump_lowfreq"})
 
@@ -80,13 +82,15 @@ Public Class dlgRecodeFactor
         ucrNudFrequentValues.Increment = 0.01
         ucrNudFrequentValues.DecimalPlaces = 2
 
-        ucrReceiverFactor.SetParameter(New RParameter(".f", 0))
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetParameterIsRFunction()
         ucrReceiverFactor.bUseFilteredData = False
+
+        ucrInputAddNa.SetParameter(New RParameter("na_level", 1))
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()
@@ -98,8 +102,6 @@ Public Class dlgRecodeFactor
         ucrFactorLevels.SetIncludeLevels(False)
         ucrFactorLevels.bIncludeNA = True
 
-        ucrInputOther.SetText("Other")
-
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
@@ -110,6 +112,7 @@ Public Class dlgRecodeFactor
         ucrPnlKeep.AddToLinkedControls(ucrNudCommonValues, {rdoCommonValues}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlKeep.AddToLinkedControls(ucrNudFrequentValues, {rdoFrequentValues}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlOptions.AddToLinkedControls(ucrInputAddNa, {rdoAddNa}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorLevels, ucrPnlMethods}, {rdoOther}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorGrid}, {rdoRecode}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputOther}, {rdoOther, rdoLump}, bNewLinkedHideIfParameterMissing:=True)
@@ -117,10 +120,13 @@ Public Class dlgRecodeFactor
         ucrPnlMethods.SetLinkedDisplayControl(grpSelectedValues)
         ucrPnlKeep.SetLinkedDisplayControl(grpKeep)
         ucrInputOther.SetLinkedDisplayControl(lblOther)
+        ucrInputAddNa.SetLinkedDisplayControl(lblNameForNa)
     End Sub
 
     Private Sub SetDefaults()
-        clsFctRecodeFunction = New RFunction
+        clsPlyrRevalueFunction = New RFunction
+        clsReplaceFunction = New RFunction
+        clsFctExplicitNaFunction = New RFunction
         clsFctOtherFunction = New RFunction
         clsFctLowFreqFunction = New RFunction
         clsFctLumpPropFunction = New RFunction
@@ -134,6 +140,9 @@ Public Class dlgRecodeFactor
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
         ucrSaveNewColumn.Reset()
+
+        ucrInputAddNa.SetText("(Missing)")
+        ucrInputOther.SetText("Other")
 
         clsDummyFunction.AddParameter("checked", "levels", iPosition:=0)
 
@@ -159,11 +168,18 @@ Public Class dlgRecodeFactor
         clsFctOtherFunction.SetPackageName("forcats")
         clsFctOtherFunction.SetRCommand("fct_other")
 
-        clsFctRecodeFunction.SetPackageName("forcats")
-        clsFctRecodeFunction.SetRCommand("fct_recode")
-        clsFctRecodeFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
+        clsFctExplicitNaFunction.SetPackageName("forcats")
+        clsFctExplicitNaFunction.SetRCommand("fct_explicit_na")
+        clsFctExplicitNaFunction.AddParameter("na_level ", Chr(34) & "(Missing)" & Chr(34), iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsFctRecodeFunction)
+        clsPlyrRevalueFunction.SetPackageName("plyr")
+        clsPlyrRevalueFunction.SetRCommand("revalue")
+        clsPlyrRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction, iPosition:=1)
+        clsPlyrRevalueFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
+
+        clsReplaceFunction.SetRCommand("c")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -173,13 +189,15 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLowFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=3)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpNFunction, New RParameter("f", 0), iAdditionalPairNo:=4)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpMinFunction, New RParameter("f", 0), iAdditionalPairNo:=5)
+        ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctExplicitNaFunction, New RParameter("f", 0), iAdditionalPairNo:=6)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpPropFunction, iAdditionalPairNo:=1)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLowFreqFunction, iAdditionalPairNo:=2)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpMinFunction, iAdditionalPairNo:=3)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpNFunction, iAdditionalPairNo:=4)
+        ucrSaveNewColumn.AddAdditionalRCode(clsFctExplicitNaFunction, iAdditionalPairNo:=5)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctOtherFunction, bReset)
-        ucrReceiverFactor.SetRCode(clsFctRecodeFunction, bReset)
-        ucrSaveNewColumn.SetRCode(clsFctRecodeFunction, bReset)
+        ucrReceiverFactor.SetRCode(clsPlyrRevalueFunction, bReset)
+        ucrSaveNewColumn.SetRCode(clsPlyrRevalueFunction, bReset)
         ucrNudFrequentValues.SetRCode(clsFctLumpPropFunction, bReset)
         ucrNudCommonValues.SetRCode(clsFctLumpNFunction, bReset)
         ucrNudLevels.SetRCode(clsFctLumpMinFunction, bReset)
@@ -190,6 +208,8 @@ Public Class dlgRecodeFactor
     Private Sub TestOKEnabled()
         If ucrReceiverFactor.IsEmpty OrElse Not ucrSaveNewColumn.IsComplete Then
             ucrBase.OKEnabled(False)
+        ElseIf rdoAddNa.Checked AndAlso Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
+            ucrBase.OKEnabled(True)
         ElseIf rdoRecode.Checked Then
             ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete("New Label"))
         ElseIf rdoOther.Checked Then
@@ -210,12 +230,13 @@ Public Class dlgRecodeFactor
         Dim strNewLabels As List(Of String)
 
         strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
-        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
+        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", False)
 
+        clsReplaceFunction.ClearParameters()
         If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
             For i = 0 To strCurrentLabels.Count - 1
                 'Backtick needed for names of the vector incase the levels are not valid R names
-                clsFctRecodeFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
+                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), Chr(34) & strNewLabels(i) & Chr(34), iPosition:=i + 1)
             Next
         End If
         TestOKEnabled()
@@ -223,7 +244,9 @@ Public Class dlgRecodeFactor
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
         If rdoRecode.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsFctRecodeFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
+        ElseIf rdoAddNa.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsFctExplicitNaFunction)
         ElseIf rdoOther.Checked OrElse rdoLump.Checked Then
             If ucrInputOther.IsEmpty OrElse ucrInputOther.GetText = "Other" Then
                 clsFctOtherFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)

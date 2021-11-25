@@ -19,7 +19,7 @@ Partial Class sdgDataOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class sdgDataOptions
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgDataOptions))
         Me.tbcDataOptions = New System.Windows.Forms.TabControl()
@@ -52,12 +52,20 @@ Partial Class sdgDataOptions
         Me.lblFilter = New System.Windows.Forms.Label()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.tbColumns = New System.Windows.Forms.TabPage()
-        Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
+        Me.cmdRemoveCurrentColumnSelection = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rdoColumnsForThisDialog = New System.Windows.Forms.RadioButton()
+        Me.rdoColumnsForAllDialogs = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
+        Me.lblSelection = New System.Windows.Forms.Label()
+        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
         Me.grpApplyOptions.SuspendLayout()
         Me.tbColumns.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcDataOptions
@@ -158,18 +166,75 @@ Partial Class sdgDataOptions
         '
         'tbColumns
         '
-        Me.tbColumns.Controls.Add(Me.chkShowHiddenColumns)
+        Me.tbColumns.Controls.Add(Me.cmdRemoveCurrentColumnSelection)
+        Me.tbColumns.Controls.Add(Me.GroupBox1)
+        Me.tbColumns.Controls.Add(Me.ucrReceiverSelect)
+        Me.tbColumns.Controls.Add(Me.lblSelection)
+        Me.tbColumns.Controls.Add(Me.ucrSelectorForSelectColumns)
+        Me.tbColumns.Controls.Add(Me.cmdDefineNewSelect)
         resources.ApplyResources(Me.tbColumns, "tbColumns")
         Me.tbColumns.Name = "tbColumns"
         Me.tbColumns.Tag = "Columns"
         Me.tbColumns.UseVisualStyleBackColor = True
         '
-        'chkShowHiddenColumns
+        'cmdRemoveCurrentColumnSelection
         '
-        resources.ApplyResources(Me.chkShowHiddenColumns, "chkShowHiddenColumns")
-        Me.chkShowHiddenColumns.Name = "chkShowHiddenColumns"
-        Me.chkShowHiddenColumns.Tag = "Show_Hidden_Columns_in_Selector"
-        Me.chkShowHiddenColumns.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdRemoveCurrentColumnSelection, "cmdRemoveCurrentColumnSelection")
+        Me.cmdRemoveCurrentColumnSelection.Name = "cmdRemoveCurrentColumnSelection"
+        Me.cmdRemoveCurrentColumnSelection.Tag = ""
+        Me.cmdRemoveCurrentColumnSelection.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.rdoColumnsForThisDialog)
+        Me.GroupBox1.Controls.Add(Me.rdoColumnsForAllDialogs)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Tag = "Apply_Options"
+        '
+        'rdoColumnsForThisDialog
+        '
+        resources.ApplyResources(Me.rdoColumnsForThisDialog, "rdoColumnsForThisDialog")
+        Me.rdoColumnsForThisDialog.Name = "rdoColumnsForThisDialog"
+        Me.rdoColumnsForThisDialog.TabStop = True
+        Me.rdoColumnsForThisDialog.UseVisualStyleBackColor = True
+        '
+        'rdoColumnsForAllDialogs
+        '
+        resources.ApplyResources(Me.rdoColumnsForAllDialogs, "rdoColumnsForAllDialogs")
+        Me.rdoColumnsForAllDialogs.Name = "rdoColumnsForAllDialogs"
+        Me.rdoColumnsForAllDialogs.TabStop = True
+        Me.rdoColumnsForAllDialogs.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverSelect
+        '
+        Me.ucrReceiverSelect.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverSelect, "ucrReceiverSelect")
+        Me.ucrReceiverSelect.Name = "ucrReceiverSelect"
+        Me.ucrReceiverSelect.Selector = Nothing
+        Me.ucrReceiverSelect.strNcFilePath = ""
+        Me.ucrReceiverSelect.ucrSelector = Nothing
+        '
+        'lblSelection
+        '
+        resources.ApplyResources(Me.lblSelection, "lblSelection")
+        Me.lblSelection.Name = "lblSelection"
+        '
+        'ucrSelectorForSelectColumns
+        '
+        Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForSelectColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForSelectColumns.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForSelectColumns, "ucrSelectorForSelectColumns")
+        Me.ucrSelectorForSelectColumns.Name = "ucrSelectorForSelectColumns"
+        '
+        'cmdDefineNewSelect
+        '
+        resources.ApplyResources(Me.cmdDefineNewSelect, "cmdDefineNewSelect")
+        Me.cmdDefineNewSelect.Name = "cmdDefineNewSelect"
+        Me.cmdDefineNewSelect.Tag = ""
+        Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
         '
         'ucrSubDialogueBase
         '
@@ -194,6 +259,8 @@ Partial Class sdgDataOptions
         Me.grpApplyOptions.PerformLayout()
         Me.tbColumns.ResumeLayout(False)
         Me.tbColumns.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -202,7 +269,6 @@ Partial Class sdgDataOptions
     Friend WithEvents tbcDataOptions As TabControl
     Friend WithEvents tbRows As TabPage
     Friend WithEvents tbColumns As TabPage
-    Friend WithEvents chkShowHiddenColumns As CheckBox
     Friend WithEvents cmdDefineNewFilter As Button
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
@@ -213,4 +279,12 @@ Partial Class sdgDataOptions
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrSelectorFilters As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdRemoveCurrentFilter As Button
+    Friend WithEvents ucrReceiverSelect As ucrReceiverSingle
+    Friend WithEvents lblSelection As Label
+    Friend WithEvents ucrSelectorForSelectColumns As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdDefineNewSelect As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents rdoColumnsForThisDialog As RadioButton
+    Friend WithEvents rdoColumnsForAllDialogs As RadioButton
+    Friend WithEvents cmdRemoveCurrentColumnSelection As Button
 End Class
