@@ -74,7 +74,7 @@ Public Class clsOutputList
     Public Sub MoveElementUp(outputElement As clsOutputElement)
         If outputElement.Id > 1 Then
             _output.Where(Function(x) x.Id = outputElement.Id - 1).First.Id = outputElement.Id
-            outputElement.Id += -1
+            outputElement.Id -= 1
         End If
     End Sub
 
