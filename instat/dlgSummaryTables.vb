@@ -27,6 +27,7 @@ Public Class dlgSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
+
     Private clsMutableOperator, clsColumnOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -293,6 +294,13 @@ Public Class dlgSummaryTables
         sdgSummaries.bEnable2VariableTab = True
         FillListView()
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
+        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteFunction:=clsTabFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
+                                        clsNewCellsTitleFunction:=clsCellsTitleFunction, clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction,
+                                        clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction, clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewPxFunction:=clsPxFunction)
+        sdgFormatSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeight.ControlValueChanged

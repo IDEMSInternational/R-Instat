@@ -69,6 +69,7 @@ Partial Class dlgSummaryTables
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeight = New instat.ucrCheck()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
@@ -285,10 +286,17 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.ucrSelectorSummaryTables, "ucrSelectorSummaryTables")
         Me.ucrSelectorSummaryTables.Name = "ucrSelectorSummaryTables"
         '
+        'cmdFormatTable
+        '
+        resources.ApplyResources(Me.cmdFormatTable, "cmdFormatTable")
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
+        '
         'dlgSummaryTables
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -351,4 +359,5 @@ Partial Class dlgSummaryTables
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents lblVariables As Label
     Friend WithEvents ucrReorderSummary As ucrReorder
+    Friend WithEvents cmdFormatTable As Button
 End Class

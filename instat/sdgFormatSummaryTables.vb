@@ -3,12 +3,14 @@ Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
+    Private bControlsInitialised = False
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
+        bControlsInitialised = False
         'Titles
         ucrInputTitle.SetLinkedDisplayControl(lblTitle)
         ucrInputSubtitle.SetLinkedDisplayControl(lblSubtitle)
@@ -152,10 +154,25 @@ Public Class sdgFormatSummaryTables
 
         ucrChkAddStubHeader.SetText("Add stub header")
         ucrChkAddStubHeader.AddToLinkedControls(ucrInputStubLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode()
+    Public Sub SetRCode(clsNewTableTitleFunction, clsNewTabFootnoteFunction, clsNewTableSourcenoteFunction, clsNewCellsTitleFunction,
+        clsNewCellTextFunction, clsNewCellBorderFunction, clsNewCellFillFunction, clsNewHeaderFormatFunction, clsNewTabOptionsFunction, clsNewPxFunction)
+        clsTableTitleFunction = clsNewTableTitleFunction
+        clsTabFootnoteFunction = clsNewTabFootnoteFunction
+        clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
+        clsCellsTitleFunction = clsNewCellsTitleFunction
+        clsCellTextFunction = clsNewCellTextFunction
+        clsCellBorderFunction = clsNewCellBorderFunction
+        clsCellFillFunction = clsNewCellFillFunction
+        clsHeaderFormatFunction = clsNewHeaderFormatFunction
+        clsTabOptionsFunction = clsNewTabOptionsFunction
+        clsPxFunction = clsNewPxFunction
+
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
 
     End Sub
-
 End Class
