@@ -3,6 +3,7 @@ Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsPxFunction As New RFunction
+    Private clsPipeOperator As New ROperator
     Private bControlsInitialised = False
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,6 +25,9 @@ Public Class sdgFormatSummaryTables
         ucrChkAddTitleSubtitle.SetText("Add title/subtitle")
         ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTitleSubtitle.SetLinkedDisplayControl(grpTitleSubtitle)
+
+        ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title\subtitle")
+        ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title\subtitle", False)
 
         ucrInputFootnoteColumnLocation.SetLinkedDisplayControl(lblColumns)
         ucrInputFootnoteRowLocation.SetLinkedDisplayControl(lblRows)
@@ -158,7 +162,8 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteFunction As RFunction, clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction,
-        clsNewCellTextFunction As RFunction, clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewTabOptionsFunction As RFunction, clsNewPxFunction As RFunction)
+        clsNewCellTextFunction As RFunction, clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewTabOptionsFunction As RFunction,
+                        clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteFunction = clsNewTabFootnoteFunction
         clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
@@ -169,11 +174,13 @@ Public Class sdgFormatSummaryTables
         clsHeaderFormatFunction = clsNewHeaderFormatFunction
         clsTabOptionsFunction = clsNewTabOptionsFunction
         clsPxFunction = clsNewPxFunction
+        clsPipeOperator = clsNewPipeOperator
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
+        ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrInputStyleTextColor.SetRCode(clsCellTextFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStyleTextFont.SetRCode(clsCellTextFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStyleTextSize.SetRCode(clsCellTextFunction, bReset, bCloneIfNeeded:=True)
@@ -198,5 +205,29 @@ Public Class sdgFormatSummaryTables
         ucrInputTableFontWeight.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableWidth.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableFontSize.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+    End Sub
+
+    Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
+        If ucrChkAddTitleSubtitle.Checked Then
+            clsPipeOperator.AddParameter("title\subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
+        Else
+            clsPipeOperator.RemoveParameterByName("title\subtitle")
+        End If
+    End Sub
+
+    Private Sub ucrInputTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlValueChanged
+        If Not ucrInputTitle.IsEmpty Then
+            clsTableTitleFunction.AddParameter("title", Chr(34) & ucrInputTitle.GetText() & Chr(34), iPosition:=0)
+        Else
+            clsTableTitleFunction.RemoveParameterByName("title")
+        End If
+    End Sub
+
+    Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitle.ControlValueChanged
+        If Not ucrInputTitle.IsEmpty Then
+            clsTableTitleFunction.AddParameter("subtitle", Chr(34) & ucrInputSubtitle.GetText() & Chr(34), iPosition:=1)
+        Else
+            clsTableTitleFunction.RemoveParameterByName("subtitle")
+        End If
     End Sub
 End Class
