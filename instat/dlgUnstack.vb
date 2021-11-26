@@ -285,6 +285,7 @@ Public Class dlgUnstack
         Dim iposition As Integer = 0
 
         If ucrChkCarryColumns.Checked Then
+            ucrReceiverCarryColumns.SetMeAsReceiver()
             For Each strcolumn In ucrReceiverCarryColumns.GetVariableNamesAsList
                 clsTempCommaOperator.AddParameter(strcolumn, strcolumn, iPosition:=iposition)
                 iposition = iposition + 1
@@ -311,7 +312,7 @@ Public Class dlgUnstack
         End If
 
     End Sub
-    Private Sub ucrReceiverCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCarryColumns.ControlValueChanged, ucrReceiverFactorToUnstackby.ControlValueChanged
+    Private Sub ucrReceiverCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCarryColumns.ControlValueChanged
         SetFormula()
         CarryColumnsParameter()
     End Sub
