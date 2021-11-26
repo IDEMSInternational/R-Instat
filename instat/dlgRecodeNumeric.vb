@@ -53,10 +53,10 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetMeAsReceiver()
 
         ucrNudQuantiles.SetParameter(New RParameter("g", 1))
-        ucrNudQuantiles.SetMinMax(1)
+        ucrNudQuantiles.SetMinMax(4)
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
-        ucrNudMinimum.SetMinMax(1)
+        ucrNudMinimum.SetMinMax(5)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
@@ -67,7 +67,7 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.SetParameter(New RParameter("levels.mean", 4))
         ucrChkAddLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddLabels.SetText("Label Groups with Means")
-        ucrChkAddLabels.SetRDefault("TRUE")
+        ucrChkAddLabels.SetRDefault("FALSE")
 
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
@@ -102,7 +102,6 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
-        ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
         ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
         ucrPnlRadioButtons.SetRCode(clsDummyRfunction, bReset)
     End Sub
