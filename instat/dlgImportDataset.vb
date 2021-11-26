@@ -41,7 +41,7 @@ Public Class dlgImportDataset
     Private clsDetectEmptyCols As New RFunction
     Private clsConcFunction As New RFunction
     Private clsPipeOperator As New ROperator
-    Private clsDummyFunction As New RFunction
+    Private clsDummyEmptyCols As New RFunction
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
@@ -294,10 +294,8 @@ Public Class dlgImportDataset
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
         clsDetectEmptyCols = New RFunction
-        clsDummyFunction = New RFunction
-
+        clsDummyEmptyCols = New RFunction
         clsImportExcelMulti = New RFunction
-
         clsGetFilesList = New RFunction
         clsImportMultipleFiles = New RFunction
         clsImportMultipleTextFiles = New RFunction
@@ -523,7 +521,7 @@ Public Class dlgImportDataset
         ucrChkRange.SetRCode(clsImportExcel, bReset)
         ucrInputTextFrom.SetRCode(clsRangeOperator, bReset)
         ucrInputTextTo.SetRCode(clsRangeOperator, bReset)
-        ucrChkDropEmptyCols.SetRCode(clsDummyFunction, bReset)
+        ucrChkDropEmptyCols.SetRCode(clsDummyEmptyCols, bReset)
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
@@ -560,7 +558,6 @@ Public Class dlgImportDataset
                 'store what was there temporarily first 
                 strFilePathSystemTemp = strFilePathSystem
             End If
-
             'always set the appropriate file path separators
             strFilePathSystem = Replace(strFileOrFolderPath, "/", "\")
             strFilePathR = Replace(strFileOrFolderPath, "\", "/")
