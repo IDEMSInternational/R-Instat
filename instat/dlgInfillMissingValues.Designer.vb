@@ -169,8 +169,6 @@ Partial Class dlgInfillMissingValues
         '
         'grpMethods
         '
-        Me.grpMethods.Controls.Add(Me.ucrInputNewColumnName)
-        Me.grpMethods.Controls.Add(Me.lblNewColumnName)
         Me.grpMethods.Controls.Add(Me.rdoNaStructTS)
         Me.grpMethods.Controls.Add(Me.rdoNaLocf)
         Me.grpMethods.Controls.Add(Me.rdoNaSpline)
@@ -623,6 +621,8 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputNewColumnName)
+        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputTimeInterval)
         Me.Controls.Add(Me.ucrNudTimeInterval)
         Me.Controls.Add(Me.ucrChkTimeInterval)
