@@ -1383,6 +1383,33 @@
   <metadata name="ttEditPreview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="cmdUpdatePreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdUpdatePreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 340</value>
+  </data>
+  <data name="cmdUpdatePreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cmdUpdatePreview.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdUpdatePreview.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="&gt;&gt;cmdUpdatePreview.Name" xml:space="preserve">
+    <value>cmdUpdatePreview</value>
+  </data>
+  <data name="&gt;&gt;cmdUpdatePreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdUpdatePreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdUpdatePreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkEditPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 343</value>
   </data>
@@ -1668,30 +1695,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>440, 445</value>
   </data>
-  <data name="cmdUpdatePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 340</value>
-  </data>
-  <data name="cmdUpdatePreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="cmdUpdatePreview.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="cmdUpdatePreview.Text" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="&gt;&gt;cmdUpdatePreview.Name" xml:space="preserve">
-    <value>cmdUpdatePreview</value>
-  </data>
-  <data name="&gt;&gt;cmdUpdatePreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdUpdatePreview.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdUpdatePreview.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 392</value>
   </data>
@@ -1778,6 +1781,9 @@
   </data>
   <data name="&gt;&gt;ucrChkDecreasing.ZOrder" xml:space="preserve">
     <value>26</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

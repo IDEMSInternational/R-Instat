@@ -74,6 +74,7 @@ Partial Class dlgTransform
         Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.rdoScale = New System.Windows.Forms.RadioButton()
         Me.ttEditPreview = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdUpdatePreview = New System.Windows.Forms.Button()
         Me.ucrInputPower = New instat.ucrInputComboBox()
         Me.ucrInputConstant = New instat.ucrInputComboBox()
         Me.ucrChkAddConstant = New instat.ucrCheck()
@@ -105,7 +106,6 @@ Partial Class dlgTransform
         Me.ucrNudSignifDigits = New instat.ucrNud()
         Me.ucrPnlNumericOptions = New instat.UcrPanel()
         Me.ucrPnlTies = New instat.UcrPanel()
-        Me.cmdUpdatePreview = New System.Windows.Forms.Button()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -399,6 +399,12 @@ Partial Class dlgTransform
         Me.rdoScale.Tag = "Frequency"
         Me.rdoScale.UseVisualStyleBackColor = False
         '
+        'cmdUpdatePreview
+        '
+        resources.ApplyResources(Me.cmdUpdatePreview, "cmdUpdatePreview")
+        Me.cmdUpdatePreview.Name = "cmdUpdatePreview"
+        Me.cmdUpdatePreview.UseVisualStyleBackColor = True
+        '
         'ucrInputPower
         '
         Me.ucrInputPower.AddQuotesIfUnrecognised = True
@@ -616,12 +622,6 @@ Partial Class dlgTransform
         '
         resources.ApplyResources(Me.ucrPnlTies, "ucrPnlTies")
         Me.ucrPnlTies.Name = "ucrPnlTies"
-        '
-        'cmdUpdatePreview
-        '
-        resources.ApplyResources(Me.cmdUpdatePreview, "cmdUpdatePreview")
-        Me.cmdUpdatePreview.Name = "cmdUpdatePreview"
-        Me.cmdUpdatePreview.UseVisualStyleBackColor = True
         '
         'dlgTransform
         '

@@ -43,12 +43,13 @@ Public Class dlgTransform
     Private clsScaleAddOperator As ROperator
     Private clsScaleMeanFunction As RFunction
     Private clsScaleMinFunction As RFunction
+    Private clsPreviewOperator As ROperator
     Private clsDummyTransformFunction As RFunction
     Private clsConstantDummyFunction As New RFunction
     Private clsNumericDummyFunction As RFunction
     Private clsNonNegativeDummyFunction As RFunction
     Private clsPreviewTextFunction As New RCodeStructure
-    Private bResetRCode = True
+    Private bResetRCode As Boolean = True
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -317,6 +318,7 @@ Public Class dlgTransform
         clsScaleDivideOperator = New ROperator
         clsScaleMultiplyOperator = New ROperator
         clsScaleSubtractOperator = New ROperator
+        clsPreviewOperator = New ROperator
         clsScaleMeanFunction = New RFunction
         clsScaleMinFunction = New RFunction
         clsDummyTransformFunction = New RFunction
@@ -409,6 +411,9 @@ Public Class dlgTransform
         clsScaleAddOperator.AddParameter("v", "0", iPosition:=1)
         clsScaleAddOperator.bBrackets = False
 
+        clsPreviewOperator.bBrackets = False
+        clsPreviewOperator.bToScriptAsRString = False
+
         clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
         clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
         clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
@@ -446,6 +451,7 @@ Public Class dlgTransform
         ucrSaveNew.AddAdditionalRCode(clsNaturalLogFunction, iAdditionalPairNo:=10)
         ucrSaveNew.AddAdditionalRCode(clsPowerOperator, iAdditionalPairNo:=11)
         ucrSaveNew.AddAdditionalRCode(clsScaleAddOperator, iAdditionalPairNo:=12)
+        ucrSaveNew.AddAdditionalRCode(clsPreviewOperator, iAdditionalPairNo:=13)
 
         ucrPnlTransformOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrReceiverRank.SetRCode(clsRankFunction, bReset)
@@ -496,6 +502,7 @@ Public Class dlgTransform
         ucrChkAddConstant.ControlValueChanged, ucrChkMissingLast.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputConstant.ControlValueChanged,
         ucrInputAdd.ControlValueChanged, ucrInputDivide.ControlValueChanged, ucrInputMultiply.ControlValueChanged, ucrInputSubtract.ControlValueChanged, ucrChkAdd.ControlValueChanged,
         ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrChkPreview.ControlValueChanged
+        ucrBase.clsRsyntax.ClearCodes()
         If rdoRank.Checked Then
             clsPreviewTextFunction = clsRankFunction.Clone
             clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
@@ -581,29 +588,27 @@ Public Class dlgTransform
     End Sub
 
     Private Sub UpdateConstantParameter()
+        If ucrChkAddConstant.Checked Then
+            clsSquarerootFunction.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
+            clsPowerOperator.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
+            clsLogBase10Function.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
+            clsNaturalLogFunction.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
+        End If
         If bResetRCode Then
             If ucrChkAddConstant.Checked Then
                 clsConstantDummyFunction.AddParameter("checked", "TRUE", iPosition:=0)
-                clsSquarerootFunction.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
-                clsPowerOperator.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
-                clsLogBase10Function.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
-                clsNaturalLogFunction.AddParameter("x", clsROperatorParameter:=clsAddConstantOperator, iPosition:=0)
             Else
                 clsConstantDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
-                '    clsSquarerootFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
-                '    clsPowerOperator.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
-                '    clsLogBase10Function.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
-                '    clsNaturalLogFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables, iPosition:=0)
             End If
         End If
     End Sub
 
-    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged, ucrInputConstant.ControlValueChanged
+    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputPreview.ControlValueChanged
         UpdateConstantParameter()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
-    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged, ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged
+    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged, ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -624,5 +629,18 @@ Public Class dlgTransform
 
     Private Sub ucrChkEditPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditPreview.ControlValueChanged
         ResetPreview()
+    End Sub
+
+    Private Sub ucrInputPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreview.ControlValueChanged
+        Dim clsGetVariablesFunc As RFunction = ucrReceiverRank.GetVariables
+        If ucrChkEditPreview.Checked Then
+            clsPreviewOperator.AddParameter("left", ucrInputPreview.GetValue, iPosition:=0)
+            ucrBase.clsRsyntax.ClearCodes()
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetVariablesFunc, 0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsPreviewOperator, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetVariablesFunc)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPreviewOperator)
+        End If
     End Sub
 End Class
