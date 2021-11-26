@@ -4180,6 +4180,7 @@ Partial Class frmMain
         '
         'ucrColumnMeta
         '
+        Me.ucrColumnMeta.BackColor = System.Drawing.SystemColors.Control
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
