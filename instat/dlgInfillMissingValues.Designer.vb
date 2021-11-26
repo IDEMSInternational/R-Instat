@@ -33,6 +33,7 @@ Partial Class dlgInfillMissingValues
         Me.rdoFitSingle = New System.Windows.Forms.RadioButton()
         Me.rdoFitMultiple = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
@@ -55,7 +56,6 @@ Partial Class dlgInfillMissingValues
         Me.lblDispMultShowStation = New System.Windows.Forms.Label()
         Me.lblTrueValues = New System.Windows.Forms.Label()
         Me.lblPercentCount = New System.Windows.Forms.Label()
-        Me.ucrSaveFitNewColumn = New instat.ucrSave()
         Me.ucrInputTimeInterval = New instat.ucrInputComboBox()
         Me.ucrNudTimeInterval = New instat.ucrNud()
         Me.ucrChkTimeInterval = New instat.ucrCheck()
@@ -94,6 +94,7 @@ Partial Class dlgInfillMissingValues
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
         Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
@@ -168,6 +169,8 @@ Partial Class dlgInfillMissingValues
         '
         'grpMethods
         '
+        Me.grpMethods.Controls.Add(Me.ucrInputNewColumnName)
+        Me.grpMethods.Controls.Add(Me.lblNewColumnName)
         Me.grpMethods.Controls.Add(Me.rdoNaStructTS)
         Me.grpMethods.Controls.Add(Me.rdoNaLocf)
         Me.grpMethods.Controls.Add(Me.rdoNaSpline)
@@ -178,6 +181,11 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.grpMethods, "grpMethods")
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
+        '
+        'lblNewColumnName
+        '
+        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
+        Me.lblNewColumnName.Name = "lblNewColumnName"
         '
         'grpStartEnd
         '
@@ -307,11 +315,6 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblPercentCount, "lblPercentCount")
         Me.lblPercentCount.Name = "lblPercentCount"
-        '
-        'ucrSaveFitNewColumn
-        '
-        resources.ApplyResources(Me.ucrSaveFitNewColumn, "ucrSaveFitNewColumn")
-        Me.ucrSaveFitNewColumn.Name = "ucrSaveFitNewColumn"
         '
         'ucrInputTimeInterval
         '
@@ -603,6 +606,14 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsMultiline = False
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        '
         'ucrPnlMethods
         '
         resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
@@ -612,7 +623,6 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveFitNewColumn)
         Me.Controls.Add(Me.ucrInputTimeInterval)
         Me.Controls.Add(Me.ucrNudTimeInterval)
         Me.Controls.Add(Me.ucrChkTimeInterval)
@@ -758,5 +768,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrNudTimeInterval As ucrNud
     Friend WithEvents ucrChkTimeInterval As ucrCheck
     Friend WithEvents ucrInputTimeInterval As ucrInputComboBox
-    Friend WithEvents ucrSaveFitNewColumn As ucrSave
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
 End Class

@@ -4074,7 +4074,7 @@ DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) 
 }
 )
 
-DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, station_col_name, time_interval = "month") {
+DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name, time_interval = "month") {
   if (missing(date_col_name)) stop("date is missing with no default")
   if (missing(var)) stop("var is missing with no default")
   if (missing(vars)) stop("vars is missing with no default")
@@ -4129,18 +4129,16 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (!missing(station_col_name)) {
     col <- unlist(list_out)
-    return(col)
   }
   else {
     out <- chillR::patch_daily_temps(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, time_interval = time_interval)
     col <- out[[1]][, var]
-    return (col)
   }
   if (length(col) == dim(curr_data)[[1]]) {
+    self$add_columns_to_data(col_name = column_name, col_data = col)
     gaps_remaining <- summary_count_missing(col)
     gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
-    #self$add_columns_to_data(col_name = column_name, col_data = col)
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
   }
