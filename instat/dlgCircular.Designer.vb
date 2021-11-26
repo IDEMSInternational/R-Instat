@@ -27,19 +27,19 @@ Partial Class dlgCircular
         Me.rdoHours = New System.Windows.Forms.RadioButton()
         Me.rdoDegrees = New System.Windows.Forms.RadioButton()
         Me.rdoRadians = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlUnits = New instat.UcrPanel()
         Me.rdo2Pi = New System.Windows.Forms.RadioButton()
         Me.rdoPi = New System.Windows.Forms.RadioButton()
         Me.rdoAsis = New System.Windows.Forms.RadioButton()
         Me.grpModulo = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlModulo = New instat.UcrPanel()
         Me.grpTemplate = New System.Windows.Forms.GroupBox()
+        Me.rdoClock24 = New System.Windows.Forms.RadioButton()
         Me.rdoClock12 = New System.Windows.Forms.RadioButton()
         Me.rdoGeographics = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.rdoClock24 = New System.Windows.Forms.RadioButton()
         Me.ucrPnlTemplate = New instat.UcrPanel()
         Me.ucrSaveCircularColumn = New instat.ucrSave()
-        Me.ucrPnlModulo = New instat.UcrPanel()
-        Me.ucrPnlUnits = New instat.UcrPanel()
         Me.ucrReceiverCircular = New instat.ucrReceiverSingle()
         Me.ucrSelectorCircular = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -107,6 +107,14 @@ Partial Class dlgCircular
         Me.rdoRadians.Text = "radians"
         Me.rdoRadians.UseVisualStyleBackColor = True
         '
+        'ucrPnlUnits
+        '
+        Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlUnits.Name = "ucrPnlUnits"
+        Me.ucrPnlUnits.Size = New System.Drawing.Size(93, 67)
+        Me.ucrPnlUnits.TabIndex = 0
+        '
         'rdo2Pi
         '
         Me.rdo2Pi.AutoSize = True
@@ -149,12 +157,20 @@ Partial Class dlgCircular
         Me.grpModulo.Controls.Add(Me.rdoPi)
         Me.grpModulo.Controls.Add(Me.rdoAsis)
         Me.grpModulo.Controls.Add(Me.ucrPnlModulo)
-        Me.grpModulo.Location = New System.Drawing.Point(161, 212)
+        Me.grpModulo.Location = New System.Drawing.Point(144, 212)
         Me.grpModulo.Name = "grpModulo"
         Me.grpModulo.Size = New System.Drawing.Size(105, 88)
         Me.grpModulo.TabIndex = 5
         Me.grpModulo.TabStop = False
         Me.grpModulo.Text = "Modulo"
+        '
+        'ucrPnlModulo
+        '
+        Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
+        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlModulo.Name = "ucrPnlModulo"
+        Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
+        Me.ucrPnlModulo.TabIndex = 3
         '
         'grpTemplate
         '
@@ -163,12 +179,24 @@ Partial Class dlgCircular
         Me.grpTemplate.Controls.Add(Me.rdoGeographics)
         Me.grpTemplate.Controls.Add(Me.rdoNone)
         Me.grpTemplate.Controls.Add(Me.ucrPnlTemplate)
-        Me.grpTemplate.Location = New System.Drawing.Point(279, 193)
+        Me.grpTemplate.Location = New System.Drawing.Point(277, 212)
         Me.grpTemplate.Name = "grpTemplate"
         Me.grpTemplate.Size = New System.Drawing.Size(105, 109)
         Me.grpTemplate.TabIndex = 7
         Me.grpTemplate.TabStop = False
         Me.grpTemplate.Text = "Template"
+        '
+        'rdoClock24
+        '
+        Me.rdoClock24.AutoSize = True
+        Me.rdoClock24.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoClock24.Location = New System.Drawing.Point(16, 82)
+        Me.rdoClock24.Name = "rdoClock24"
+        Me.rdoClock24.Size = New System.Drawing.Size(63, 17)
+        Me.rdoClock24.TabIndex = 4
+        Me.rdoClock24.TabStop = True
+        Me.rdoClock24.Text = "clock24"
+        Me.rdoClock24.UseVisualStyleBackColor = True
         '
         'rdoClock12
         '
@@ -206,18 +234,6 @@ Partial Class dlgCircular
         Me.rdoNone.Text = "none"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
-        'rdoClock24
-        '
-        Me.rdoClock24.AutoSize = True
-        Me.rdoClock24.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoClock24.Location = New System.Drawing.Point(16, 82)
-        Me.rdoClock24.Name = "rdoClock24"
-        Me.rdoClock24.Size = New System.Drawing.Size(63, 17)
-        Me.rdoClock24.TabIndex = 4
-        Me.rdoClock24.TabStop = True
-        Me.rdoClock24.Text = "clock24"
-        Me.rdoClock24.UseVisualStyleBackColor = True
-        '
         'ucrPnlTemplate
         '
         Me.ucrPnlTemplate.Location = New System.Drawing.Point(10, 15)
@@ -233,22 +249,6 @@ Partial Class dlgCircular
         Me.ucrSaveCircularColumn.Name = "ucrSaveCircularColumn"
         Me.ucrSaveCircularColumn.Size = New System.Drawing.Size(255, 22)
         Me.ucrSaveCircularColumn.TabIndex = 6
-        '
-        'ucrPnlModulo
-        '
-        Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
-        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlModulo.Name = "ucrPnlModulo"
-        Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
-        Me.ucrPnlModulo.TabIndex = 3
-        '
-        'ucrPnlUnits
-        '
-        Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlUnits.Name = "ucrPnlUnits"
-        Me.ucrPnlUnits.Size = New System.Drawing.Size(93, 67)
-        Me.ucrPnlUnits.TabIndex = 0
         '
         'ucrReceiverCircular
         '

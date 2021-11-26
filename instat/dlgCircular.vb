@@ -99,8 +99,4 @@ Public Class dlgCircular
     Private Sub ucrReceiverCircular_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCircular.ControlContentsChanged, ucrSaveCircularColumn.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub grpModulo_Enter(sender As Object, e As EventArgs) Handles grpModulo.Enter
-
-    End Sub
 End Class
