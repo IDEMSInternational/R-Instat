@@ -38,10 +38,10 @@ Public Class dlgImportDataset
     Private bSupressSheetChange As Boolean = False
     'key value map of excel sheet number and sheet name
     Private dctSelectedExcelSheets As New Dictionary(Of Integer, String)
-    Private clsDetectEmptyCols As New RFunction
+    Private clsDetectEmptyColsFunction As New RFunction
     Private clsConcFunction As New RFunction
     Private clsPipeOperator As New ROperator
-    Private clsDummyEmptyCols As New RFunction
+    Private clsEmptyDummyFunction As New RFunction
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
@@ -293,13 +293,13 @@ Public Class dlgImportDataset
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
-        clsDetectEmptyCols = New RFunction
-        clsDummyEmptyCols = New RFunction
         clsImportExcelMulti = New RFunction
         clsGetFilesList = New RFunction
         clsImportMultipleFiles = New RFunction
         clsImportMultipleTextFiles = New RFunction
         clsFileNamesWithExt = New RFunction
+        clsDetectEmptyColsFunction = New RFunction
+        clsEmptyDummyFunction = New RFunction
 
         ucrChkDropEmptyCols.Visible = False
 
@@ -371,12 +371,12 @@ Public Class dlgImportDataset
         clsConcFunction.AddParameter("x", Chr(34) & "rows" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsConcFunction.AddParameter("y", Chr(34) & "cols" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
-        clsDetectEmptyCols.SetPackageName("janitor")
-        clsDetectEmptyCols.SetRCommand("remove_empty")
-        clsDetectEmptyCols.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
+        clsDetectEmptyColsFunction.SetPackageName("janitor")
+        clsDetectEmptyColsFunction.SetRCommand("remove_empty")
+        clsDetectEmptyColsFunction.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
 
         clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyCols, iPosition:=1)
+        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyColsFunction, iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -521,7 +521,7 @@ Public Class dlgImportDataset
         ucrChkRange.SetRCode(clsImportExcel, bReset)
         ucrInputTextFrom.SetRCode(clsRangeOperator, bReset)
         ucrInputTextTo.SetRCode(clsRangeOperator, bReset)
-        ucrChkDropEmptyCols.SetRCode(clsDummyEmptyCols, bReset)
+        ucrChkDropEmptyCols.SetRCode(clsEmptyDummyFunction, bReset)
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
