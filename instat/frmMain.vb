@@ -1537,11 +1537,10 @@ Public Class frmMain
     End Sub
 
     Public Function GetDataFrameCount() As Integer
-        If ucrDataViewer IsNot Nothing AndAlso ucrDataViewer.grdData IsNot Nothing Then
-            Return ucrDataViewer.grdData.Worksheets.Count
-        Else
-            Return 0
+        If clsDataBook IsNot Nothing Then
+            Return clsDataBook.DataFrames.Count
         End If
+        Return 0
     End Function
 
     Public Sub SetCurrentDataFrame(strDataName As String)

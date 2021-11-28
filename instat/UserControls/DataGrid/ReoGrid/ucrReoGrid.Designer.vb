@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ucrDataViewReoGrid
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucrReoGrid
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ucrDataViewReoGrid
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grdData = New unvell.ReoGrid.ReoGridControl()
         Me.SuspendLayout()
@@ -32,26 +32,25 @@ Partial Class ucrDataViewReoGrid
         Me.grdData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdData.LeadHeaderContextMenuStrip = Nothing
         Me.grdData.Location = New System.Drawing.Point(0, 0)
-        Me.grdData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grdData.Name = "grdData"
         Me.grdData.RowHeaderContextMenuStrip = Nothing
         Me.grdData.Script = Nothing
         Me.grdData.SheetTabContextMenuStrip = Nothing
         Me.grdData.SheetTabNewButtonVisible = False
         Me.grdData.SheetTabVisible = True
-        Me.grdData.SheetTabWidth = 231
+        Me.grdData.SheetTabWidth = 250
         Me.grdData.ShowScrollEndSpacing = True
-        Me.grdData.Size = New System.Drawing.Size(1070, 1222)
-        Me.grdData.TabIndex = 1
+        Me.grdData.Size = New System.Drawing.Size(558, 423)
+        Me.grdData.TabIndex = 2
         '
-        'ucrDataViewReoGrid
+        'ucrReoGrid
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grdData)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Name = "ucrDataViewReoGrid"
-        Me.Size = New System.Drawing.Size(1070, 1222)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Name = "ucrReoGrid"
+        Me.Size = New System.Drawing.Size(558, 423)
         Me.ResumeLayout(False)
 
     End Sub

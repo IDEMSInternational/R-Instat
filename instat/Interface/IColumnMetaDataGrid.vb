@@ -11,28 +11,20 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Interface IDataViewGrid
+Public Interface IColumnMetaDataGrid
     Inherits IGrid
 
-    Event CellDataChanged()
+    Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
 
-    Event PasteValuesToDataframe()
+    Sub AddColumns(columnMetaData As clsColumnMetaData)
 
-    Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
+    Sub AddRowData(columnMetaData As clsColumnMetaData)
 
-    Event WorksheetChanged()
+    Function GetSelectedColumns() As List(Of String)
 
-    Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
-
-    Sub AddColumns(visiblePage As clsDataFramePage)
-
-    Sub AddRowData(dataFrame As clsDataFrame)
-
-    Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
-
-    Function WorksheetCount() As Integer
+    Sub SetNonEditableColumns(lstNonEditableColumns As List(Of String))
 
 End Interface

@@ -15,7 +15,6 @@ Public Class clsWorksheetAdapter
         _name = worksheet.Name
     End Sub
 
-
     Public Sub New(tab As TabPage)
         _name = tab.Text
     End Sub
