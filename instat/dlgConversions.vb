@@ -19,6 +19,7 @@ Public Class dlgConversions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsPrecipitationFunction, clsTemperatureFunction, clsWindSpeedFunction, clsConvertToDegreeFunction As New RFunction
+    Private clsRoundFunction As New RFunction
     Private clsDayLengthFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
@@ -63,6 +64,11 @@ Public Class dlgConversions
         ucrPnlElements.AddFunctionNamesCondition(rdoRain, "convert_precip")
         ucrPnlElements.AddFunctionNamesCondition(rdoTemperature, "convert_temperature")
         ucrPnlElements.AddFunctionNamesCondition(rdoWindSpeed, "convert_wind_speed")
+
+        ucrChkVariable.SetText("Variable")
+        ucrChkVariable.SetParameter(New RParameter("checked", 0))
+        ucrChkVariable.SetValuesCheckedAndUnchecked("True", "False")
+        ucrChkVariable.SetRDefault("True")
 
         ucrReceiverElement.SetParameter(New RParameter("precip", 0))
         ucrReceiverElement.bWithQuotes = False
@@ -150,7 +156,6 @@ Public Class dlgConversions
         ucrPnlDirection.AddRadioButton(rdoW, Chr(34) & "W" & Chr(34))
         ucrPnlDirection.AddRadioButton(rdoVariable, Chr(34) & Chr(34))
 
-
         ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Kelvin")
@@ -161,13 +166,8 @@ Public Class dlgConversions
         ucrPnlConversions.AddToLinkedControls(ucrReceiverMinutes, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverSeconds, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlDirection, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrChkVariable, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkVariable.AddToLinkedControls({ucrInputDegree, ucrInputMinute, ucrInputSecond}, {"False"}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkVariable.SetText("Variable")
-        ucrChkVariable.SetParameter(New RParameter("checked", 0))
-        ucrChkVariable.SetValuesCheckedAndUnchecked("True", "False")
-        ucrChkVariable.SetRDefault("True")
+        ucrPnlConversions.AddToLinkedControls({ucrChkVariable}, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVariable.AddToLinkedControls({ucrInputDegree, ucrInputMinute, ucrInputSecond}, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverDegrees.SetLinkedDisplayControl(lblDegrees)
         ucrReceiverMinutes.SetLinkedDisplayControl(lblMinutes)
@@ -193,6 +193,7 @@ Public Class dlgConversions
         clsWindSpeedFunction = New RFunction
         clsDayLengthFunction = New RFunction
         clsConvertToDegreeFunction = New RFunction
+        clsRoundFunction = New RFunction
         clsDummyFunction = New RFunction
 
         ucrSelectorConversions.Reset()
@@ -221,6 +222,10 @@ Public Class dlgConversions
         clsConvertToDegreeFunction.SetRCommand("convert_to_dec_deg")
         clsConvertToDegreeFunction.AddParameter("dir", Chr(34) & "N" & Chr(34), iPosition:=3)
 
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsConvertToDegreeFunction, iPosition:=0)
+        clsRoundFunction.AddParameter("digits", 3, iPosition:=1)
+
         clsPrecipitationFunction.SetAssignTo(ucrSaveConversions.GetText, strTempDataframe:=ucrSelectorConversions.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveConversions.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
     End Sub
@@ -233,9 +238,8 @@ Public Class dlgConversions
         ucrSaveConversions.AddAdditionalRCode(clsTemperatureFunction, iAdditionalPairNo:=1)
         ucrSaveConversions.AddAdditionalRCode(clsWindSpeedFunction, iAdditionalPairNo:=2)
         ucrSaveConversions.AddAdditionalRCode(clsDayLengthFunction, iAdditionalPairNo:=3)
-        ucrSaveConversions.AddAdditionalRCode(clsConvertToDegreeFunction, iAdditionalPairNo:=4)
+        ucrSaveConversions.AddAdditionalRCode(clsRoundFunction, iAdditionalPairNo:=4)
 
-        ucrSaveConversions.SetRCode(clsPrecipitationFunction, bReset)
         ucrReceiverElement.SetRCode(clsPrecipitationFunction, bReset)
         ucrInputFromPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
         ucrInputToPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
@@ -245,6 +249,7 @@ Public Class dlgConversions
         ucrInputToWindSpeed.SetRCode(clsWindSpeedFunction, bReset)
         ucrNudDecimal.SetRCode(clsPrecipitationFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyFunction, bReset)
+        ucrSaveConversions.SetRCode(clsPrecipitationFunction, bReset)
 
         If bReset Then
             ucrPnlConversions.SetRCode(clsPrecipitationFunction, bReset)
@@ -270,9 +275,11 @@ Public Class dlgConversions
         ElseIf rdoCoordinates.Checked Then
             If (Not ucrReceiverDegrees.IsEmpty AndAlso ucrSaveConversions.IsComplete AndAlso ucrChkVariable.Checked) OrElse (Not ucrChkVariable.Checked AndAlso Not ucrInputDegree.IsEmpty) Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
         Else
-                ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -318,14 +325,18 @@ Public Class dlgConversions
             ucrSaveConversions.SetPrefix("conversion")
             ucrSaveConversions.setLinkedReceiver(ucrReceiverElement)
         ElseIf rdoCoordinates.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertToDegreeFunction)
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
             ucrReceiverDegrees.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("coord")
             ucrSaveConversions.setLinkedReceiver(ucrReceiverDegrees)
             ChangeParameter()
         End If
         ChangeLatParameter()
+        'SetVisibleSaveControl()
+    End Sub
+
+    Private Sub SetVisibleSaveControl()
+        'ucrChkVariable.Visible = If(rdoCoordinates.Checked, True, False)
     End Sub
 
     Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
@@ -391,6 +402,7 @@ Public Class dlgConversions
 
     Private Sub ucrChkVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVariable.ControlValueChanged, ucrInputDegree.ControlValueChanged, ucrInputMinute.ControlValueChanged, ucrInputSecond.ControlValueChanged
         ChangeParameter()
+        'SetVisibleSaveControl()
     End Sub
 
     Private Sub ucrReceiverDegrees_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDegrees.ControlValueChanged, ucrReceiverMinutes.ControlValueChanged, ucrReceiverSeconds.ControlValueChanged

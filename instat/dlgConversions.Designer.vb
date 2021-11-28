@@ -32,11 +32,22 @@ Partial Class dlgConversions
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLatitude = New instat.ucrInputTextBox()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.lblDecimal = New System.Windows.Forms.Label()
+        Me.ucrNudDecimal = New instat.ucrNud()
         Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
+        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
+        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
         Me.rdoTemperature = New System.Windows.Forms.RadioButton()
+        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
+        Me.ucrPnlElements = New instat.UcrPanel()
+        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
+        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
+        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.rdoCoordinates = New System.Windows.Forms.RadioButton()
         Me.lblMinutes = New System.Windows.Forms.Label()
         Me.lblSeconds = New System.Windows.Forms.Label()
@@ -46,33 +57,22 @@ Partial Class dlgConversions
         Me.rdoW = New System.Windows.Forms.RadioButton()
         Me.rdoS = New System.Windows.Forms.RadioButton()
         Me.rdoN = New System.Windows.Forms.RadioButton()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverLetters = New instat.ucrReceiverSingle()
+        Me.ucrPnlDirection = New instat.UcrPanel()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrInputSecond = New instat.ucrInputTextBox()
         Me.ucrInputMinute = New instat.ucrInputTextBox()
         Me.ucrInputDegree = New instat.ucrInputTextBox()
-        Me.ucrReceiverLetters = New instat.ucrReceiverSingle()
-        Me.ucrPnlDirection = New instat.UcrPanel()
         Me.ucrSaveConversions = New instat.ucrSave()
         Me.ucrReceiverDegrees = New instat.ucrReceiverSingle()
         Me.ucrReceiverMinutes = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeconds = New instat.ucrReceiverSingle()
-        Me.ucrInputLatitude = New instat.ucrInputTextBox()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudDecimal = New instat.ucrNud()
-        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
-        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
-        Me.ucrPnlElements = New instat.UcrPanel()
-        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.grpDirection.SuspendLayout()
@@ -144,6 +144,28 @@ Partial Class dlgConversions
         Me.grpLatitude.Name = "grpLatitude"
         Me.grpLatitude.TabStop = False
         '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrPnlLatitude
+        '
+        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
+        '
         'grpElements
         '
         Me.grpElements.Controls.Add(Me.lblDecimal)
@@ -169,6 +191,16 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.lblDecimal, "lblDecimal")
         Me.lblDecimal.Name = "lblDecimal"
         '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'rdoWindSpeed
         '
         resources.ApplyResources(Me.rdoWindSpeed, "rdoWindSpeed")
@@ -179,6 +211,14 @@ Partial Class dlgConversions
         Me.rdoWindSpeed.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoWindSpeed.Name = "rdoWindSpeed"
         Me.rdoWindSpeed.UseVisualStyleBackColor = True
+        '
+        'ucrInputFromTemperature
+        '
+        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromTemperature.GetSetSelectedIndex = -1
+        Me.ucrInputFromTemperature.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
+        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
         '
         'rdoRain
         '
@@ -191,6 +231,14 @@ Partial Class dlgConversions
         Me.rdoRain.Name = "rdoRain"
         Me.rdoRain.UseVisualStyleBackColor = True
         '
+        'ucrInputToWindSpeed
+        '
+        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputToWindSpeed.GetSetSelectedIndex = -1
+        Me.ucrInputToWindSpeed.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
+        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
+        '
         'rdoTemperature
         '
         resources.ApplyResources(Me.rdoTemperature, "rdoTemperature")
@@ -201,239 +249,6 @@ Partial Class dlgConversions
         Me.rdoTemperature.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoTemperature.Name = "rdoTemperature"
         Me.rdoTemperature.UseVisualStyleBackColor = True
-        '
-        'rdoCoordinates
-        '
-        resources.ApplyResources(Me.rdoCoordinates, "rdoCoordinates")
-        Me.rdoCoordinates.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCoordinates.FlatAppearance.BorderSize = 2
-        Me.rdoCoordinates.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCoordinates.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoCoordinates.Name = "rdoCoordinates"
-        Me.rdoCoordinates.UseVisualStyleBackColor = True
-        '
-        'lblMinutes
-        '
-        resources.ApplyResources(Me.lblMinutes, "lblMinutes")
-        Me.lblMinutes.Name = "lblMinutes"
-        '
-        'lblSeconds
-        '
-        resources.ApplyResources(Me.lblSeconds, "lblSeconds")
-        Me.lblSeconds.Name = "lblSeconds"
-        '
-        'lblDegrees
-        '
-        resources.ApplyResources(Me.lblDegrees, "lblDegrees")
-        Me.lblDegrees.Name = "lblDegrees"
-        '
-        'grpDirection
-        '
-        Me.grpDirection.Controls.Add(Me.rdoE)
-        Me.grpDirection.Controls.Add(Me.rdoW)
-        Me.grpDirection.Controls.Add(Me.rdoS)
-        Me.grpDirection.Controls.Add(Me.rdoN)
-        Me.grpDirection.Controls.Add(Me.rdoVariable)
-        Me.grpDirection.Controls.Add(Me.ucrReceiverLetters)
-        Me.grpDirection.Controls.Add(Me.ucrPnlDirection)
-        resources.ApplyResources(Me.grpDirection, "grpDirection")
-        Me.grpDirection.Name = "grpDirection"
-        Me.grpDirection.TabStop = False
-        '
-        'rdoE
-        '
-        resources.ApplyResources(Me.rdoE, "rdoE")
-        Me.rdoE.Name = "rdoE"
-        Me.rdoE.TabStop = True
-        Me.rdoE.UseVisualStyleBackColor = True
-        '
-        'rdoW
-        '
-        resources.ApplyResources(Me.rdoW, "rdoW")
-        Me.rdoW.Name = "rdoW"
-        Me.rdoW.TabStop = True
-        Me.rdoW.UseVisualStyleBackColor = True
-        '
-        'rdoS
-        '
-        resources.ApplyResources(Me.rdoS, "rdoS")
-        Me.rdoS.Name = "rdoS"
-        Me.rdoS.TabStop = True
-        Me.rdoS.UseVisualStyleBackColor = True
-        '
-        'rdoN
-        '
-        resources.ApplyResources(Me.rdoN, "rdoN")
-        Me.rdoN.Name = "rdoN"
-        Me.rdoN.TabStop = True
-        Me.rdoN.UseVisualStyleBackColor = True
-        '
-        'rdoVariable
-        '
-        resources.ApplyResources(Me.rdoVariable, "rdoVariable")
-        Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.TabStop = True
-        Me.rdoVariable.UseVisualStyleBackColor = True
-        '
-        'ucrChkVariable
-        '
-        Me.ucrChkVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkVariable, "ucrChkVariable")
-        Me.ucrChkVariable.Name = "ucrChkVariable"
-        '
-        'ucrInputSecond
-        '
-        Me.ucrInputSecond.AddQuotesIfUnrecognised = True
-        Me.ucrInputSecond.IsMultiline = False
-        Me.ucrInputSecond.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSecond, "ucrInputSecond")
-        Me.ucrInputSecond.Name = "ucrInputSecond"
-        '
-        'ucrInputMinute
-        '
-        Me.ucrInputMinute.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinute.IsMultiline = False
-        Me.ucrInputMinute.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinute, "ucrInputMinute")
-        Me.ucrInputMinute.Name = "ucrInputMinute"
-        '
-        'ucrInputDegree
-        '
-        Me.ucrInputDegree.AddQuotesIfUnrecognised = True
-        Me.ucrInputDegree.IsMultiline = False
-        Me.ucrInputDegree.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDegree, "ucrInputDegree")
-        Me.ucrInputDegree.Name = "ucrInputDegree"
-        '
-        'ucrReceiverLetters
-        '
-        Me.ucrReceiverLetters.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverLetters, "ucrReceiverLetters")
-        Me.ucrReceiverLetters.Name = "ucrReceiverLetters"
-        Me.ucrReceiverLetters.Selector = Nothing
-        Me.ucrReceiverLetters.strNcFilePath = ""
-        Me.ucrReceiverLetters.ucrSelector = Nothing
-        '
-        'ucrPnlDirection
-        '
-        resources.ApplyResources(Me.ucrPnlDirection, "ucrPnlDirection")
-        Me.ucrPnlDirection.Name = "ucrPnlDirection"
-        '
-        'ucrSaveConversions
-        '
-        resources.ApplyResources(Me.ucrSaveConversions, "ucrSaveConversions")
-        Me.ucrSaveConversions.Name = "ucrSaveConversions"
-        '
-        'ucrReceiverDegrees
-        '
-        Me.ucrReceiverDegrees.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDegrees, "ucrReceiverDegrees")
-        Me.ucrReceiverDegrees.Name = "ucrReceiverDegrees"
-        Me.ucrReceiverDegrees.Selector = Nothing
-        Me.ucrReceiverDegrees.strNcFilePath = ""
-        Me.ucrReceiverDegrees.ucrSelector = Nothing
-        '
-        'ucrReceiverMinutes
-        '
-        Me.ucrReceiverMinutes.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMinutes, "ucrReceiverMinutes")
-        Me.ucrReceiverMinutes.Name = "ucrReceiverMinutes"
-        Me.ucrReceiverMinutes.Selector = Nothing
-        Me.ucrReceiverMinutes.strNcFilePath = ""
-        Me.ucrReceiverMinutes.ucrSelector = Nothing
-        '
-        'ucrReceiverSeconds
-        '
-        Me.ucrReceiverSeconds.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSeconds, "ucrReceiverSeconds")
-        Me.ucrReceiverSeconds.Name = "ucrReceiverSeconds"
-        Me.ucrReceiverSeconds.Selector = Nothing
-        Me.ucrReceiverSeconds.strNcFilePath = ""
-        Me.ucrReceiverSeconds.ucrSelector = Nothing
-        '
-        'ucrInputLatitude
-        '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrPnlLatitude
-        '
-        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrPnlConversions
-        '
-        resources.ApplyResources(Me.ucrPnlConversions, "ucrPnlConversions")
-        Me.ucrPnlConversions.Name = "ucrPnlConversions"
-        '
-        'ucrSelectorConversions
-        '
-        Me.ucrSelectorConversions.bDropUnusedFilterLevels = False
-        Me.ucrSelectorConversions.bShowHiddenColumns = False
-        Me.ucrSelectorConversions.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorConversions, "ucrSelectorConversions")
-        Me.ucrSelectorConversions.Name = "ucrSelectorConversions"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrNudDecimal
-        '
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFromTemperature
-        '
-        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromTemperature.GetSetSelectedIndex = -1
-        Me.ucrInputFromTemperature.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
-        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
-        '
-        'ucrInputToWindSpeed
-        '
-        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputToWindSpeed.GetSetSelectedIndex = -1
-        Me.ucrInputToWindSpeed.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
-        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
         '
         'ucrInputToTemperature
         '
@@ -471,6 +286,191 @@ Partial Class dlgConversions
         Me.ucrInputToPrecipitation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
         Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
+        '
+        'rdoCoordinates
+        '
+        resources.ApplyResources(Me.rdoCoordinates, "rdoCoordinates")
+        Me.rdoCoordinates.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCoordinates.FlatAppearance.BorderSize = 2
+        Me.rdoCoordinates.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCoordinates.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoCoordinates.Name = "rdoCoordinates"
+        Me.rdoCoordinates.UseVisualStyleBackColor = True
+        '
+        'lblMinutes
+        '
+        resources.ApplyResources(Me.lblMinutes, "lblMinutes")
+        Me.lblMinutes.Name = "lblMinutes"
+        '
+        'lblSeconds
+        '
+        resources.ApplyResources(Me.lblSeconds, "lblSeconds")
+        Me.lblSeconds.Name = "lblSeconds"
+        '
+        'lblDegrees
+        '
+        resources.ApplyResources(Me.lblDegrees, "lblDegrees")
+        Me.lblDegrees.Name = "lblDegrees"
+        '
+        'grpDirection
+        '
+        Me.grpDirection.Controls.Add(Me.rdoVariable)
+        Me.grpDirection.Controls.Add(Me.rdoE)
+        Me.grpDirection.Controls.Add(Me.rdoW)
+        Me.grpDirection.Controls.Add(Me.rdoS)
+        Me.grpDirection.Controls.Add(Me.rdoN)
+        Me.grpDirection.Controls.Add(Me.ucrReceiverLetters)
+        Me.grpDirection.Controls.Add(Me.ucrPnlDirection)
+        resources.ApplyResources(Me.grpDirection, "grpDirection")
+        Me.grpDirection.Name = "grpDirection"
+        Me.grpDirection.TabStop = False
+        '
+        'rdoE
+        '
+        resources.ApplyResources(Me.rdoE, "rdoE")
+        Me.rdoE.Name = "rdoE"
+        Me.rdoE.TabStop = True
+        Me.rdoE.UseVisualStyleBackColor = True
+        '
+        'rdoW
+        '
+        resources.ApplyResources(Me.rdoW, "rdoW")
+        Me.rdoW.Name = "rdoW"
+        Me.rdoW.TabStop = True
+        Me.rdoW.UseVisualStyleBackColor = True
+        '
+        'rdoS
+        '
+        resources.ApplyResources(Me.rdoS, "rdoS")
+        Me.rdoS.Name = "rdoS"
+        Me.rdoS.TabStop = True
+        Me.rdoS.UseVisualStyleBackColor = True
+        '
+        'rdoN
+        '
+        resources.ApplyResources(Me.rdoN, "rdoN")
+        Me.rdoN.Name = "rdoN"
+        Me.rdoN.TabStop = True
+        Me.rdoN.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverLetters
+        '
+        Me.ucrReceiverLetters.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLetters, "ucrReceiverLetters")
+        Me.ucrReceiverLetters.Name = "ucrReceiverLetters"
+        Me.ucrReceiverLetters.Selector = Nothing
+        Me.ucrReceiverLetters.strNcFilePath = ""
+        Me.ucrReceiverLetters.ucrSelector = Nothing
+        '
+        'ucrPnlDirection
+        '
+        resources.ApplyResources(Me.ucrPnlDirection, "ucrPnlDirection")
+        Me.ucrPnlDirection.Name = "ucrPnlDirection"
+        '
+        'ucrChkVariable
+        '
+        Me.ucrChkVariable.Checked = False
+        resources.ApplyResources(Me.ucrChkVariable, "ucrChkVariable")
+        Me.ucrChkVariable.Name = "ucrChkVariable"
+        '
+        'ucrInputSecond
+        '
+        Me.ucrInputSecond.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecond.IsMultiline = False
+        Me.ucrInputSecond.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSecond, "ucrInputSecond")
+        Me.ucrInputSecond.Name = "ucrInputSecond"
+        '
+        'ucrInputMinute
+        '
+        Me.ucrInputMinute.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinute.IsMultiline = False
+        Me.ucrInputMinute.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinute, "ucrInputMinute")
+        Me.ucrInputMinute.Name = "ucrInputMinute"
+        '
+        'ucrInputDegree
+        '
+        Me.ucrInputDegree.AddQuotesIfUnrecognised = True
+        Me.ucrInputDegree.IsMultiline = False
+        Me.ucrInputDegree.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDegree, "ucrInputDegree")
+        Me.ucrInputDegree.Name = "ucrInputDegree"
+        '
+        'ucrSaveConversions
+        '
+        resources.ApplyResources(Me.ucrSaveConversions, "ucrSaveConversions")
+        Me.ucrSaveConversions.Name = "ucrSaveConversions"
+        '
+        'ucrReceiverDegrees
+        '
+        Me.ucrReceiverDegrees.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDegrees, "ucrReceiverDegrees")
+        Me.ucrReceiverDegrees.Name = "ucrReceiverDegrees"
+        Me.ucrReceiverDegrees.Selector = Nothing
+        Me.ucrReceiverDegrees.strNcFilePath = ""
+        Me.ucrReceiverDegrees.ucrSelector = Nothing
+        '
+        'ucrReceiverMinutes
+        '
+        Me.ucrReceiverMinutes.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMinutes, "ucrReceiverMinutes")
+        Me.ucrReceiverMinutes.Name = "ucrReceiverMinutes"
+        Me.ucrReceiverMinutes.Selector = Nothing
+        Me.ucrReceiverMinutes.strNcFilePath = ""
+        Me.ucrReceiverMinutes.ucrSelector = Nothing
+        '
+        'ucrReceiverSeconds
+        '
+        Me.ucrReceiverSeconds.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSeconds, "ucrReceiverSeconds")
+        Me.ucrReceiverSeconds.Name = "ucrReceiverSeconds"
+        Me.ucrReceiverSeconds.Selector = Nothing
+        Me.ucrReceiverSeconds.strNcFilePath = ""
+        Me.ucrReceiverSeconds.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrPnlConversions
+        '
+        resources.ApplyResources(Me.ucrPnlConversions, "ucrPnlConversions")
+        Me.ucrPnlConversions.Name = "ucrPnlConversions"
+        '
+        'ucrSelectorConversions
+        '
+        Me.ucrSelectorConversions.bDropUnusedFilterLevels = False
+        Me.ucrSelectorConversions.bShowHiddenColumns = False
+        Me.ucrSelectorConversions.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorConversions, "ucrSelectorConversions")
+        Me.ucrSelectorConversions.Name = "ucrSelectorConversions"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'rdoVariable
+        '
+        resources.ApplyResources(Me.rdoVariable, "rdoVariable")
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.TabStop = True
+        Me.rdoVariable.UseVisualStyleBackColor = True
         '
         'dlgConversions
         '
@@ -559,10 +559,10 @@ Partial Class dlgConversions
     Friend WithEvents rdoW As RadioButton
     Friend WithEvents rdoS As RadioButton
     Friend WithEvents rdoN As RadioButton
-    Friend WithEvents rdoVariable As RadioButton
     Friend WithEvents ucrPnlDirection As UcrPanel
     Friend WithEvents ucrInputDegree As ucrInputTextBox
     Friend WithEvents ucrInputSecond As ucrInputTextBox
     Friend WithEvents ucrInputMinute As ucrInputTextBox
     Friend WithEvents ucrChkVariable As ucrCheck
+    Friend WithEvents rdoVariable As RadioButton
 End Class
