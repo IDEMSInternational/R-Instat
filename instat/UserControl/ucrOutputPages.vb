@@ -203,7 +203,7 @@ Public Class ucrOutputPages
     Private Sub tbAddToNew_Click(sender As Object, e As EventArgs) Handles tbAddToNew.Click
         Dim strTabName As String = "New Tab"
         While Not _outputLogger.IsValidFilteredListName(strTabName)
-            strTabName = strTabName + "1"
+            strTabName &= "1"
         End While
         For Each element In _selectedOutputPage.SelectedElements
             _outputLogger.AddOutputToFilteredList(element, strTabName)
