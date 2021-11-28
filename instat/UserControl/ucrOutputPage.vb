@@ -125,7 +125,7 @@ Public Class ucrOutputPage
     End Sub
 
     ''' <summary>
-    ''' Copys selected elenments to clipboard
+    ''' Copies selected elenments to clipboard
     ''' </summary>
     Public Sub CopySelectedElementsToClipboard()
         If CopyOneImageOnly() Then
