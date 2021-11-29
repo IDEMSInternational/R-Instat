@@ -2468,4 +2468,8 @@ Public Class frmMain
     Private Sub mnuModelFitModelMachineLearning_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelMachineLearning.Click
         dlgMachineLearning.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeMultivariateClusterAnalysis_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateClusterAnalysis.Click
+        dlgClusterAnalysis.ShowDialog()
+    End Sub
 End Class
