@@ -214,6 +214,17 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbDelete_Click(sender As Object, e As EventArgs) Handles tbDelete.Click
+        If SelectedTab() = "Output" Then
+            For Each element In _selectedOutputPage.SelectedElements
+                _outputLogger.DeleteOutputFromMainList(element)
+            Next
+            _selectedOutputPage.ClearAllOutputs()
+            For Each output In _outputLogger.Output
+                _selectedOutputPage.AddNewOutput(output)
+            Next
+            EnableDisableTopButtons()
+            Exit Sub
+        End If
         For Each element In _selectedOutputPage.SelectedElements
             _outputLogger.DeleteOutputFromFilteredList(element, SelectedTab)
         Next
@@ -222,6 +233,18 @@ Public Class ucrOutputPages
         Else
             RefreshPage()
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Clears the output from "Output tab"
+    ''' </summary>
+    Public Sub ClearOutputWindow()
+        tabControl.SelectedIndex = 0
+        For i = _outputLogger.Output.Count - 1 To 0 Step -1
+            _outputLogger.DeleteOutputFromMainList(_outputLogger.Output(i))
+        Next
+        _selectedOutputPage.ClearAllOutputs()
+        EnableDisableTopButtons()
     End Sub
 
     Private Sub tbMoveDown_Click(sender As Object, e As EventArgs) Handles tbMoveDown.Click

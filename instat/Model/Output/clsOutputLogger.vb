@@ -24,11 +24,11 @@ Public Class clsOutputLogger
     Private _output As List(Of clsOutputElement)
     ''Output not used externally at the moment but will this will need to
     ''change if we are to remove from the output list.
-    'Public ReadOnly Property Output As List(Of OutputElement)
-    '    Get
-    '        Return _output
-    '    End Get
-    'End Property
+    Public ReadOnly Property Output As List(Of clsOutputElement)
+        Get
+            Return _output
+        End Get
+    End Property
 
     ''' <summary>
     ''' Constructor
@@ -143,6 +143,14 @@ Public Class clsOutputLogger
         For Each element In filteredList.Output.Where(Function(x) x.Id > elementId)
             element.Id -= 1
         Next
+    End Sub
+
+    ''' <summary>
+    ''' Deletes output from main output list
+    ''' </summary>
+    ''' <param name="outputElement"></param>
+    Public Sub DeleteOutputFromMainList(outputElement As clsOutputElement)
+        _output.RemoveAll(Function(x) x Is outputElement)
     End Sub
 
     ''' <summary>

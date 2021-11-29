@@ -122,6 +122,7 @@ Public Class ucrOutputPage
                 AddNewImageOutput(outputElement)
         End Select
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
+        pnlMain.PerformLayout()
     End Sub
 
     ''' <summary>
@@ -195,7 +196,7 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function CopyOneImageOnly() As Boolean
-        If SelectedElements.Count = 1 And SelectedElements(0).OutputType = OutputType.ImageOutput Then
+        If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
             Dim element As clsOutputElement = SelectedElements(0)
             Clipboard.Clear()
             Clipboard.SetImage(element.ImageOutput)
