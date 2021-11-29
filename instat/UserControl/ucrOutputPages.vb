@@ -120,14 +120,12 @@ Public Class ucrOutputPages
         Dim tabName As String = SelectedTab()
         tabControl.TabPages.Remove(tab)
         tab.Dispose()
-        Dim found As ucrOutputPage = Nothing
         For Each outputPage In _allOutputPages
             If outputPage.Tag = tabName Then
-                found = outputPage
+                _allOutputPages.Remove(outputPage)
                 Exit For
             End If
         Next
-        _allOutputPages.Remove(found)
         _outputLogger.FilteredOutputs.Remove(_outputLogger.GetFilteredList(tabName))
         UpdateTabsInDropDown()
     End Sub
