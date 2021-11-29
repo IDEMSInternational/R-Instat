@@ -1363,12 +1363,12 @@ Public Class RLink
                                                               End If
                                                               While thrRScript.IsAlive
                                                                   If bErrorMessageOpen Then
-                                                                      frmSetupLoading.Hide()
+                                                                      frmSetupLoading.Close()
                                                                   End If
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
-                                                              frmSetupLoading.Hide()
+                                                              frmSetupLoading.Close()
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
                     thrWaitDisplay.IsBackground = True
