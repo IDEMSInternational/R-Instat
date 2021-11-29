@@ -40,7 +40,7 @@ Public Class ucrOutputPages
     ''' ToDo InstatOptions should be able to be accessed from anywhere
     ''' </summary>
     Public WriteOnly Property clsInstatOptions() As InstatOptions
-        Set(ByVal value As InstatOptions)
+        Set(value As InstatOptions)
             _clsInstatOptions = value
         End Set
     End Property
@@ -234,7 +234,7 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbMoveUp_Click(sender As Object, e As EventArgs) Handles tbMoveUp.Click
-        For Each element In _selectedOutputPage.SelectedElements
+        For Each element In _selectedOutputPage.SelectedElements.OrderBy((Function(x) x.Id))
             _outputLogger.GetFilteredList(SelectedTab).MoveElementUp(element)
         Next
         RefreshPage()

@@ -29,13 +29,13 @@ Public Class ucrOutputPage
     ''' <returns></returns>
     Public ReadOnly Property SelectedElements() As List(Of clsOutputElement)
         Get
-            Dim elemets As New List(Of clsOutputElement)
+            Dim elements As New List(Of clsOutputElement)
             For Each checkbox In _checkBoxes
                 If checkbox.Checked Then
-                    elemets.Add(checkbox.Tag)
+                    elements.Add(checkbox.Tag)
                 End If
             Next
-            Return elemets
+            Return elements
         End Get
     End Property
 

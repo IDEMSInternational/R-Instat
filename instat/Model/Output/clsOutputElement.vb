@@ -31,7 +31,7 @@ Public Class clsOutputElement
     ''' Constructor
     ''' </summary>
     Public Sub New()
-        _formatedRScript = New List(Of clsRScriptElement)
+        _formattedRScript = New List(Of clsRScriptElement)
         _lstStringOutput = New List(Of String)
         _lstBmpImage = New List(Of Bitmap)
     End Sub
@@ -42,7 +42,7 @@ Public Class clsOutputElement
     ''' <returns></returns>
     Public ReadOnly Property FormatedRScript As List(Of clsRScriptElement)
         Get
-            Return _formatedRScript
+            Return _formattedRScript
         End Get
     End Property
 
@@ -99,7 +99,7 @@ Public Class clsOutputElement
     ''' <param name="image"></param>
     Public Sub AddImageOutputFromR(image As Bitmap, script As List(Of clsRScriptElement))
         _lstBmpImage.Add(image)
-        _formatedRScript = script
+        _formattedRScript = script
         _outputType = OutputType.ImageOutput
     End Sub
 
@@ -110,7 +110,7 @@ Public Class clsOutputElement
     Public Sub AddScript(strScript As String)
         Dim rScript As New clsRScript(strScript)
         For Each rToken In rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
-            _formatedRScript.Add(New clsRScriptElement With
+            _formattedRScript.Add(New clsRScriptElement With
                 {
                     .Text = rToken.strTxt,
                     .Type = rToken.enuToken
@@ -125,7 +125,7 @@ Public Class clsOutputElement
     ''' <param name="strOutput"></param>
     Public Sub AddStringOutputFromR(strOutput As String, script As List(Of clsRScriptElement))
         _lstStringOutput.Add(strOutput)
-        _formatedRScript = script
+        _formattedRScript = script
         _outputType = OutputType.TextOutput
     End Sub
 
