@@ -213,7 +213,7 @@ Public MustInherit Class ucrLinuxGrid
             Dim rectangle As Rectangle = tcTabs.GetTabRect(i)
             If rectangle.Contains(point) Then
                 tcTabs.SelectedIndex = i ' i is the index of tab under cursor
-                Return
+                Exit Sub
             End If
         Next
         e.Cancel = True
@@ -229,10 +229,10 @@ Public MustInherit Class ucrLinuxGrid
 
     Private Sub dataGrid_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs)
         sender.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect
-        If _columnContextMenuStrip IsNot Nothing And e.Button = MouseButtons.Right Then
-            If sender.SelectedColumns.Count > 0 Then
-                _columnContextMenuStrip.Show(Cursor.Position)
-            End If
+        If _cellContextMenuStrip IsNot Nothing _
+                AndAlso e.Button = MouseButtons.Right _
+                AndAlso sender.SelectedCells.Count > 0 Then
+            _cellContextMenuStrip.Show(Cursor.Position)
         End If
     End Sub
 

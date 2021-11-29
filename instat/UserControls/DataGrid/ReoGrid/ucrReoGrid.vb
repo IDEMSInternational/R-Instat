@@ -88,9 +88,8 @@ Public MustInherit Class ucrReoGrid
         Dim worksheet = grdData.Worksheets.Where(Function(x) x.Name = name).FirstOrDefault
         If worksheet IsNot Nothing Then
             Return New clsWorksheetAdapter(worksheet)
-        Else
-            Return Nothing
         End If
+        Return Nothing
     End Function
 
     Public Sub RemoveOldWorksheets() Implements IGrid.RemoveOldWorksheets
