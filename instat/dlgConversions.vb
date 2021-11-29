@@ -22,7 +22,6 @@ Public Class dlgConversions
     Private clsRoundFunction As New RFunction
     Private clsDayLengthFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private dctDirectionPairs As New Dictionary(Of String, String)
 
     Private Sub dlgConversions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,6 +42,7 @@ Public Class dlgConversions
         Dim dctPrecipitationUnits As New Dictionary(Of String, String)
         Dim dctTemperatureUnits As New Dictionary(Of String, String)
         Dim dctWindSpeedUnits As New Dictionary(Of String, String)
+        Dim dctDirectionPairs As New Dictionary(Of String, String)
 
         Dim lstLabels As New List(Of Control)
         lstLabels.AddRange({lblFrom, lblTo, lblDecimal})
