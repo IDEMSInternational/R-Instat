@@ -212,7 +212,7 @@ Public MustInherit Class ucrLinuxGrid
             Dim r As Rectangle = tcTabs.GetTabRect(i)
             If r.Contains(p) Then
                 tcTabs.SelectedIndex = i ' i is the index of tab under cursor
-                Return
+                Exit Sub
             End If
         Next
         e.Cancel = True
