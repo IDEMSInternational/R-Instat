@@ -40,16 +40,12 @@ Partial Class dlgDummyVariables
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDummyVariables))
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.lblVariate = New System.Windows.Forms.Label()
         Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
-        Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
-        Me.rdoLast = New System.Windows.Forms.RadioButton()
+        Me.rdoMostFrequent = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLevelOmitted = New instat.UcrPanel()
-        Me.ucrChkWithXVariable = New instat.ucrCheck()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpLevelOmitted.SuspendLayout()
@@ -61,16 +57,9 @@ Partial Class dlgDummyVariables
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Tag = "Selected"
         '
-        'lblVariate
-        '
-        resources.ApplyResources(Me.lblVariate, "lblVariate")
-        Me.lblVariate.Name = "lblVariate"
-        Me.lblVariate.Tag = "Variate"
-        '
         'grpLevelOmitted
         '
-        Me.grpLevelOmitted.Controls.Add(Me.rdoLevelNumber)
-        Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
+        Me.grpLevelOmitted.Controls.Add(Me.rdoMostFrequent)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
         Me.grpLevelOmitted.Controls.Add(Me.ucrPnlLevelOmitted)
@@ -79,21 +68,13 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.TabStop = False
         Me.grpLevelOmitted.Tag = "Level Omitted"
         '
-        'rdoLevelNumber
+        'rdoMostFrequent
         '
-        resources.ApplyResources(Me.rdoLevelNumber, "rdoLevelNumber")
-        Me.rdoLevelNumber.Name = "rdoLevelNumber"
-        Me.rdoLevelNumber.TabStop = True
-        Me.rdoLevelNumber.Tag = "Level"
-        Me.rdoLevelNumber.UseVisualStyleBackColor = True
-        '
-        'rdoLast
-        '
-        resources.ApplyResources(Me.rdoLast, "rdoLast")
-        Me.rdoLast.Name = "rdoLast"
-        Me.rdoLast.TabStop = True
-        Me.rdoLast.Tag = "Last"
-        Me.rdoLast.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoMostFrequent, "rdoMostFrequent")
+        Me.rdoMostFrequent.Name = "rdoMostFrequent"
+        Me.rdoMostFrequent.TabStop = True
+        Me.rdoMostFrequent.Tag = "Most_Frequent"
+        Me.rdoMostFrequent.UseVisualStyleBackColor = True
         '
         'rdoFirst
         '
@@ -116,12 +97,6 @@ Partial Class dlgDummyVariables
         resources.ApplyResources(Me.ucrPnlLevelOmitted, "ucrPnlLevelOmitted")
         Me.ucrPnlLevelOmitted.Name = "ucrPnlLevelOmitted"
         '
-        'ucrChkWithXVariable
-        '
-        Me.ucrChkWithXVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkWithXVariable, "ucrChkWithXVariable")
-        Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
-        '
         'ucrSelectorDummyVariable
         '
         Me.ucrSelectorDummyVariable.bDropUnusedFilterLevels = False
@@ -129,15 +104,6 @@ Partial Class dlgDummyVariables
         Me.ucrSelectorDummyVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDummyVariable, "ucrSelectorDummyVariable")
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
-        '
-        'ucrVariateReceiver
-        '
-        Me.ucrVariateReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrVariateReceiver, "ucrVariateReceiver")
-        Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
-        Me.ucrVariateReceiver.Selector = Nothing
-        Me.ucrVariateReceiver.strNcFilePath = ""
-        Me.ucrVariateReceiver.ucrSelector = Nothing
         '
         'ucrReceiverFactor
         '
@@ -157,11 +123,8 @@ Partial Class dlgDummyVariables
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkWithXVariable)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
-        Me.Controls.Add(Me.ucrVariateReceiver)
-        Me.Controls.Add(Me.lblVariate)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrBase)
@@ -181,13 +144,9 @@ Partial Class dlgDummyVariables
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblVariate As Label
-    Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
     Friend WithEvents grpLevelOmitted As GroupBox
-    Friend WithEvents rdoLevelNumber As RadioButton
-    Friend WithEvents rdoLast As RadioButton
+    Friend WithEvents rdoMostFrequent As RadioButton
     Friend WithEvents rdoFirst As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlLevelOmitted As UcrPanel
-    Friend WithEvents ucrChkWithXVariable As ucrCheck
 End Class

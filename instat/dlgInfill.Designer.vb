@@ -43,7 +43,6 @@ Partial Class dlgInfill
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
         Me.lblStartingFrom = New System.Windows.Forms.Label()
         Me.ucrChkResort = New instat.ucrCheck()
         Me.ucrInputComboMonth = New instat.ucrInputComboBox()
@@ -51,6 +50,7 @@ Partial Class dlgInfill
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
+        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
         Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -89,15 +89,6 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
-        '
-        'ucrDtpStartDate
-        '
-        Me.ucrDtpStartDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 387)
-        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
-        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
         '
         'lblStartingFrom
         '
@@ -145,6 +136,15 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.lblStartDate, "lblStartDate")
         Me.lblStartDate.Name = "lblStartDate"
         '
+        'ucrDtpStartDate
+        '
+        Me.ucrDtpStartDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 387)
+        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
+        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
+        '
         'ucrChkCompleteYears
         '
         Me.ucrChkCompleteYears.Checked = False
@@ -186,6 +186,7 @@ Partial Class dlgInfill
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverFactors)

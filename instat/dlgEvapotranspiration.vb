@@ -176,7 +176,7 @@ Public Class dlgEvapotranspiration
         ucrNewColName.SetDataFrameSelector(ucrSelectorEvapotranspiration.ucrAvailableDataFrames)
         ucrNewColName.SetIsComboBox()
         ucrNewColName.SetSaveTypeAsColumn()
-        ucrNewColName.SetPrefix("Evapotranspiration")
+        ucrNewColName.SetPrefix("evapotranspiration")
     End Sub
 
     Private Sub SetDefaults()

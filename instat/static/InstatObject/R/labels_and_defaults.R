@@ -69,4 +69,4 @@ keyed_link_label="keyed_link"
 max_labels_display=4
 
 # Column Selection Operations
-column_selection_operations <- c("base::match", "tidyselect::starts_with", "tidyselect::ends_with", "tidyselect::contains", "tidyselect::matches", "tidyselect::num_range")
+column_selection_operations <- c("base::match", "tidyselect::starts_with", "tidyselect::ends_with", "tidyselect::contains", "tidyselect::matches", "tidyselect::num_range", "tidyselect::last_col")

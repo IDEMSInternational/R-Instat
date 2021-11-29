@@ -358,7 +358,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Country Coloured Map</value>
+    <value>Map Country Values</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgCountryColouredMap</value>

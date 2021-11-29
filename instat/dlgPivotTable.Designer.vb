@@ -27,12 +27,12 @@ Partial Class dlgPivotTable
         Me.lblInitialRowFactor = New System.Windows.Forms.Label()
         Me.lblInitialColumnFactor = New System.Windows.Forms.Label()
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
+        Me.UcrReceiverMultipleIntialRowFactor = New instat.ucrReceiverMultiple()
         Me.ucrSavePivot = New instat.ucrSave()
         Me.ucrChkIncludeSubTotals = New instat.ucrCheck()
         Me.ucrReceiverSelectedVariable = New instat.ucrReceiverMultiple()
         Me.ucrChkSelectedVariable = New instat.ucrCheck()
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverInitialRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
@@ -48,6 +48,15 @@ Partial Class dlgPivotTable
         resources.ApplyResources(Me.lblInitialColumnFactor, "lblInitialColumnFactor")
         Me.lblInitialColumnFactor.Name = "lblInitialColumnFactor"
         Me.lblInitialColumnFactor.Tag = "Initial Column Factor:"
+        '
+        'UcrReceiverMultipleIntialRowFactor
+        '
+        Me.UcrReceiverMultipleIntialRowFactor.frmParent = Me
+        resources.ApplyResources(Me.UcrReceiverMultipleIntialRowFactor, "UcrReceiverMultipleIntialRowFactor")
+        Me.UcrReceiverMultipleIntialRowFactor.Name = "UcrReceiverMultipleIntialRowFactor"
+        Me.UcrReceiverMultipleIntialRowFactor.Selector = Nothing
+        Me.UcrReceiverMultipleIntialRowFactor.strNcFilePath = ""
+        Me.UcrReceiverMultipleIntialRowFactor.ucrSelector = Nothing
         '
         'ucrSavePivot
         '
@@ -84,15 +93,6 @@ Partial Class dlgPivotTable
         Me.ucrReceiverInitialColumnFactor.strNcFilePath = ""
         Me.ucrReceiverInitialColumnFactor.ucrSelector = Nothing
         '
-        'ucrReceiverInitialRowFactor
-        '
-        Me.ucrReceiverInitialRowFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverInitialRowFactor, "ucrReceiverInitialRowFactor")
-        Me.ucrReceiverInitialRowFactor.Name = "ucrReceiverInitialRowFactor"
-        Me.ucrReceiverInitialRowFactor.Selector = Nothing
-        Me.ucrReceiverInitialRowFactor.strNcFilePath = ""
-        Me.ucrReceiverInitialRowFactor.ucrSelector = Nothing
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -110,6 +110,7 @@ Partial Class dlgPivotTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrReceiverMultipleIntialRowFactor)
         Me.Controls.Add(Me.ucrSavePivot)
         Me.Controls.Add(Me.ucrChkIncludeSubTotals)
         Me.Controls.Add(Me.ucrReceiverSelectedVariable)
@@ -117,7 +118,6 @@ Partial Class dlgPivotTable
         Me.Controls.Add(Me.lblInitialColumnFactor)
         Me.Controls.Add(Me.ucrReceiverInitialColumnFactor)
         Me.Controls.Add(Me.lblInitialRowFactor)
-        Me.Controls.Add(Me.ucrReceiverInitialRowFactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorPivot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -133,7 +133,6 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrSelectorPivot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblInitialRowFactor As Label
-    Friend WithEvents ucrReceiverInitialRowFactor As ucrReceiverSingle
     Friend WithEvents lblInitialColumnFactor As Label
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverSingle
     Friend WithEvents ucrChkSelectedVariable As ucrCheck
@@ -141,4 +140,5 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrReceiverSelectedVariable As ucrReceiverMultiple
     Friend WithEvents ucrChkIncludeSubTotals As ucrCheck
     Friend WithEvents ucrSavePivot As ucrSave
+    Friend WithEvents UcrReceiverMultipleIntialRowFactor As ucrReceiverMultiple
 End Class

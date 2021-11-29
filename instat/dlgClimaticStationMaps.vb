@@ -117,7 +117,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
 
-        ucrSaveMap.SetPrefix("Map")
+        ucrSaveMap.SetPrefix("map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
         ucrSaveMap.SetCheckBoxText("Save Map")

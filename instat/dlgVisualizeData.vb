@@ -47,6 +47,7 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 54
         Dim lstMaximumControls As New List(Of Control)
         Dim lstMaximumSizeControls As New List(Of Control)
         Dim dctPalette As New Dictionary(Of String, String)

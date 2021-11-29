@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgThreeVariablePivotTable
+Partial Class dlgMachineLearning
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,18 +22,31 @@ Partial Class dlgThreeVariablePivotTable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgThreeVariablePivotTable))
+        Me.UcrButtons1 = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'dlgThreeVariablePivotTable
+        'UcrButtons1
         '
-        resources.ApplyResources(Me, "$this")
+        Me.UcrButtons1.Location = New System.Drawing.Point(7, 384)
+        Me.UcrButtons1.Name = "UcrButtons1"
+        Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
+        Me.UcrButtons1.TabIndex = 13
+        '
+        'dlgMachineLearning
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(418, 438)
+        Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgThreeVariablePivotTable"
+        Me.Name = "dlgMachineLearning"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Machine Learning (caret) "
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents UcrButtons1 As ucrButtons
 End Class

@@ -210,7 +210,7 @@ Public Class dlgDisplayDailyData
         ucrInputFacetBy.SetLinkedDisplayControl(lblFacetby)
         ucrInputFacetBy.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetPrefix("graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
         ucrSaveGraph.SetIsComboBox()
@@ -442,9 +442,9 @@ Public Class dlgDisplayDailyData
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
         If rdoGraphByYear.Checked Then
-            ucrSaveGraph.SetPrefix("Graph_by_Year")
+            ucrSaveGraph.SetPrefix("graph_by_year")
         ElseIf rdoGraph.checked Then
-            ucrSaveGraph.SetPrefix("Graph")
+            ucrSaveGraph.SetPrefix("graph")
         End If
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3

@@ -69,7 +69,7 @@ Public Class dlgTaylorDiagram
         ucrChkNormalise.SetText("Normalise")
         ucrChkNormalise.SetRDefault("FALSE")
 
-        ucrSavePlot.SetPrefix("taylordiagram")
+        ucrSavePlot.SetPrefix("taylor_diagram_plot")
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
@@ -102,7 +102,7 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -111,5 +111,17 @@ Public Class dlgTaylorDiagram
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
+        If ucrReceiverEstimated.Count > 2 Then
+            MsgBox("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
+            For i As Integer = ucrReceiverEstimated.Count - 1 To 0 Step -1
+                If i > 1 Then
+                    ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+                End If
+            Next
+            TestOkEnabled()
+        End If
     End Sub
 End Class

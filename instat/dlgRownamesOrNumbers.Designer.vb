@@ -39,49 +39,22 @@ Partial Class dlgRowNamesOrNumbers
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRowNamesOrNumbers))
-        Me.ucrSelectorRowNames = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlOverallOptions = New instat.UcrPanel()
-        Me.ucrReceiverRowNames = New instat.ucrReceiverSingle()
         Me.rdoCopyRowNamesIntoFirstColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSetRowNamesFromColumn = New System.Windows.Forms.RadioButton()
         Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
         Me.rdoSortbyRowNames = New System.Windows.Forms.RadioButton()
         Me.rdoSortDescending = New System.Windows.Forms.RadioButton()
         Me.rdoSortAscending = New System.Windows.Forms.RadioButton()
-        Me.ucrNewColumnName = New instat.ucrSave()
-        Me.ucrChkAsNumeric = New instat.ucrCheck()
         Me.grpboxOptionsforRowNamesorNumbercols = New System.Windows.Forms.GroupBox()
+        Me.ucrChkAsNumeric = New instat.ucrCheck()
         Me.ucrPnlSortOptions = New instat.UcrPanel()
+        Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrReceiverRowNames = New instat.ucrReceiverSingle()
+        Me.ucrPnlOverallOptions = New instat.UcrPanel()
+        Me.ucrSelectorRowNames = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpboxOptionsforRowNamesorNumbercols.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrSelectorRowNames
-        '
-        Me.ucrSelectorRowNames.bDropUnusedFilterLevels = False
-        Me.ucrSelectorRowNames.bShowHiddenColumns = False
-        Me.ucrSelectorRowNames.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorRowNames, "ucrSelectorRowNames")
-        Me.ucrSelectorRowNames.Name = "ucrSelectorRowNames"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrPnlOverallOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOverallOptions, "ucrPnlOverallOptions")
-        Me.ucrPnlOverallOptions.Name = "ucrPnlOverallOptions"
-        '
-        'ucrReceiverRowNames
-        '
-        Me.ucrReceiverRowNames.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverRowNames, "ucrReceiverRowNames")
-        Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
-        Me.ucrReceiverRowNames.Selector = Nothing
-        Me.ucrReceiverRowNames.strNcFilePath = ""
-        Me.ucrReceiverRowNames.ucrSelector = Nothing
         '
         'rdoCopyRowNamesIntoFirstColumn
         '
@@ -125,17 +98,6 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoSortAscending.TabStop = True
         Me.rdoSortAscending.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
-        '
-        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        '
-        'ucrChkAsNumeric
-        '
-        Me.ucrChkAsNumeric.Checked = False
-        resources.ApplyResources(Me.ucrChkAsNumeric, "ucrChkAsNumeric")
-        Me.ucrChkAsNumeric.Name = "ucrChkAsNumeric"
-        '
         'grpboxOptionsforRowNamesorNumbercols
         '
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrChkAsNumeric)
@@ -153,10 +115,48 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.Name = "grpboxOptionsforRowNamesorNumbercols"
         Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
         '
+        'ucrChkAsNumeric
+        '
+        Me.ucrChkAsNumeric.Checked = False
+        resources.ApplyResources(Me.ucrChkAsNumeric, "ucrChkAsNumeric")
+        Me.ucrChkAsNumeric.Name = "ucrChkAsNumeric"
+        '
         'ucrPnlSortOptions
         '
         resources.ApplyResources(Me.ucrPnlSortOptions, "ucrPnlSortOptions")
         Me.ucrPnlSortOptions.Name = "ucrPnlSortOptions"
+        '
+        'ucrNewColumnName
+        '
+        resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        '
+        'ucrReceiverRowNames
+        '
+        Me.ucrReceiverRowNames.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverRowNames, "ucrReceiverRowNames")
+        Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
+        Me.ucrReceiverRowNames.Selector = Nothing
+        Me.ucrReceiverRowNames.strNcFilePath = ""
+        Me.ucrReceiverRowNames.ucrSelector = Nothing
+        '
+        'ucrPnlOverallOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOverallOptions, "ucrPnlOverallOptions")
+        Me.ucrPnlOverallOptions.Name = "ucrPnlOverallOptions"
+        '
+        'ucrSelectorRowNames
+        '
+        Me.ucrSelectorRowNames.bDropUnusedFilterLevels = False
+        Me.ucrSelectorRowNames.bShowHiddenColumns = False
+        Me.ucrSelectorRowNames.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorRowNames, "ucrSelectorRowNames")
+        Me.ucrSelectorRowNames.Name = "ucrSelectorRowNames"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgRowNamesOrNumbers
         '

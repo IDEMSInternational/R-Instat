@@ -61,10 +61,13 @@ Partial Class ucrColumnMetadata
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSelection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRemoveCurrentSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.hideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,7 +77,6 @@ Partial Class ucrColumnMetadata
         Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderColumnMetadata = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
@@ -98,12 +100,13 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 154
         Me.grdVariables.ShowScrollEndSpacing = True
-        Me.grdVariables.Size = New System.Drawing.Size(338, 92)
+        Me.grdVariables.Size = New System.Drawing.Size(575, 333)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
         'cellContextMenuStrip
         '
+        Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
         Me.cellContextMenuStrip.Name = "ContextMenuStrip1"
         Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
@@ -116,9 +119,10 @@ Partial Class ucrColumnMetadata
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilter, Me.mnuSelection, Me.mnuRemoveCurrentSelection, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 374)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 418)
         '
         'mnuColumnRename
         '
@@ -226,6 +230,18 @@ Partial Class ucrColumnMetadata
         Me.mnuColumnFilter.Size = New System.Drawing.Size(212, 22)
         Me.mnuColumnFilter.Text = "Filter..."
         '
+        'mnuSelection
+        '
+        Me.mnuSelection.Name = "mnuSelection"
+        Me.mnuSelection.Size = New System.Drawing.Size(212, 22)
+        Me.mnuSelection.Text = "Selection..."
+        '
+        'mnuRemoveCurrentSelection
+        '
+        Me.mnuRemoveCurrentSelection.Name = "mnuRemoveCurrentSelection"
+        Me.mnuRemoveCurrentSelection.Size = New System.Drawing.Size(212, 22)
+        Me.mnuRemoveCurrentSelection.Text = "Remove Current Selection"
+        '
         'mnuClearColumnFilter
         '
         Me.mnuClearColumnFilter.Name = "mnuClearColumnFilter"
@@ -237,53 +253,60 @@ Partial Class ucrColumnMetadata
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 202)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
+        '
+        'mnuBottomAddComment
+        '
+        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
+        Me.mnuBottomAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuBottomAddComment.Text = "Add Comment..."
         '
         'hideSheet
         '
         Me.hideSheet.Name = "hideSheet"
-        Me.hideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.hideSheet.Size = New System.Drawing.Size(162, 22)
         Me.hideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'copySheet
         '
         Me.copySheet.Name = "copySheet"
-        Me.copySheet.Size = New System.Drawing.Size(180, 22)
+        Me.copySheet.Size = New System.Drawing.Size(162, 22)
         Me.copySheet.Text = "Copy..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'viewSheet
         '
         Me.viewSheet.Name = "viewSheet"
-        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.viewSheet.Size = New System.Drawing.Size(162, 22)
         Me.viewSheet.Text = "View Data Frame"
         '
         'propertiesContextMenuStrip
         '
+        Me.propertiesContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
         Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
         Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
@@ -302,7 +325,7 @@ Partial Class ucrColumnMetadata
         Me.lblHeaderColumnMetadata.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeaderColumnMetadata.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderColumnMetadata.Name = "lblHeaderColumnMetadata"
-        Me.lblHeaderColumnMetadata.Size = New System.Drawing.Size(338, 20)
+        Me.lblHeaderColumnMetadata.Size = New System.Drawing.Size(575, 20)
         Me.lblHeaderColumnMetadata.TabIndex = 6
         Me.lblHeaderColumnMetadata.Text = "Column Metadata"
         Me.lblHeaderColumnMetadata.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -320,22 +343,17 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(581, 379)
         Me.tlpTableContainer.TabIndex = 7
-        '
-        'mnuBottomAddComment
-        '
-        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
-        Me.mnuBottomAddComment.Size = New System.Drawing.Size(180, 22)
-        Me.mnuBottomAddComment.Text = "Add Comment..."
         '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
-        Me.Size = New System.Drawing.Size(344, 138)
+        Me.Size = New System.Drawing.Size(581, 379)
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.statusColumnMenu.ResumeLayout(False)
@@ -381,4 +399,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents viewSheet As ToolStripMenuItem
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
+    Friend WithEvents mnuSelection As ToolStripMenuItem
+    Friend WithEvents mnuRemoveCurrentSelection As ToolStripMenuItem
 End Class

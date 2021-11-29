@@ -76,7 +76,7 @@ Public Class dlgWindrose
         ucrInputSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputCaption.SetParameter(New RParameter("caption"))
 
-        ucrSaveGraph.SetPrefix("windrose")
+        ucrSaveGraph.SetPrefix("wind_rose")
         ucrSaveGraph.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()

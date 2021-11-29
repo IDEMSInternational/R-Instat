@@ -407,6 +407,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "table_name"
             Case "filter"
                 strItemsParameterNameInRFunction = "filter_name"
+            Case "column_selection"
+                strItemsParameterNameInRFunction = "column_selection_name"
             Case "link"
                 strItemsParameterNameInRFunction = "link_name"
             Case "object"

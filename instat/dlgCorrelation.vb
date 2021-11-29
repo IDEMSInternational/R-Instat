@@ -18,9 +18,12 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction,
+        clsRGGscatMatrixFunction, clsCorrelationFunction, clsCurrentDataFrameFunction,
+        clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
-    Private clsColFunction As String
+    Private clsRGGscatMatricReverseOperator As New ROperator
+    Private strColFunction As String
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -102,7 +105,7 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
 
-        ucrSaveModel.SetPrefix("Cor")
+        ucrSaveModel.SetPrefix("cor")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name")
@@ -119,21 +122,40 @@ Public Class dlgCorrelation
         clsListFunction = New RFunction
         clsWrapFunction = New RFunction
         clsRGGscatMatrixFunction = New RFunction
-        clsTempFunc = New RFunction
+        clsRGGscatMatricReverseOperator = New ROperator
+        clsGuidesFunction = New RFunction
+        clsGuideLegendFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsCurrentDataFrameFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
         ucrReceiverFirstColumn.SetMeAsReceiver()
 
-        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
-        clsTempFunc.AddParameter("remove_attr", "TRUE")
+        clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
+
+        clsRGGscatMatricReverseOperator.SetOperation("+")
+        clsRGGscatMatricReverseOperator.AddParameter("matrix", clsRFunctionParameter:=clsRGGscatMatrixFunction, iPosition:=0)
+        clsRGGscatMatricReverseOperator.iCallType = 3
+        clsRGGscatMatricReverseOperator.bExcludeAssignedFunctionOutput = False
+
+        clsGuidesFunction.SetPackageName("ggplot2")
+        clsGuidesFunction.SetRCommand("guides")
+        clsGuidesFunction.AddParameter("colour", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0)
+
+        clsGuideLegendFunction.SetPackageName("ggplot2")
+        clsGuideLegendFunction.SetRCommand("guide_legend")
+        clsGuideLegendFunction.AddParameter("reverse", "TRUE", iPosition:=0)
+
+        clsCurrentDataFrameFunction = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
+        clsCurrentDataFrameFunction.AddParameter("remove_attr", "TRUE")
 
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
         clsRGraphicsFuction.iCallType = 3
         clsRGraphicsFuction.bExcludeAssignedFunctionOutput = False
-        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
+        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
         clsRGraphicsFuction.AddParameter("lower", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         clsListFunction.SetRCommand("list")
         clsWrapFunction.SetPackageName("GGally")
@@ -143,9 +165,8 @@ Public Class dlgCorrelation
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
-        clsRGGscatMatrixFunction.iCallType = 3
         clsRGGscatMatrixFunction.bExcludeAssignedFunctionOutput = False
-        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
+        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationTestFunction.iCallType = 2
@@ -178,7 +199,6 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrapFunction, New RParameter("method", 2), iAdditionalPairNo:=2)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
-        '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
@@ -218,13 +238,6 @@ Public Class dlgCorrelation
         Else
             ucrBase.OKEnabled(False)
         End If
-        'If (rdoMultipleColumns.Checked) AndAlso (ucrSaveModel.chkSaveModel.Checked OrElse chkCorrelationMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoPairwisePlot.Checked) Then
-        '    If (Not ucrReceiverMultipleColumns.IsEmpty()) AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
-        '        SaveModel()
-        '        TempData()
-        '        AssignModelName()
-        '    End If
-        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -234,7 +247,10 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog, bTwoColumns:=rdoTwoColumns.Checked)
+        sdgCorrPlot.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewcorrelationFunction:=clsCorrelationFunction, clsNewcorrelationTestFunction:=clsCorrelationTestFunction,
+                             clsNewRGGcorrGraphicsFunction:=clsRGGcorrGraphicsFunction, clsNewRGraphicsFuction:=clsRGraphicsFuction, clsNewRGGscatmatrixFunction:=clsRGGscatMatrixFunction,
+                             strNewColFunction:=strColFunction, clsNewRGGscatMatrixReverseOperator:=clsRGGscatMatricReverseOperator, ucrNewBaseSelector:=ucrSelectorCorrelation,
+                             clsNewGuideFunction:=clsGuidesFunction, clsNewDummyFunction:=clsDummyFunction, bReset:=bResetSubdialog, bTwoColumns:=rdoTwoColumns.Checked)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -270,13 +286,12 @@ Public Class dlgCorrelation
         ReceiverColumns()
     End Sub
 
-
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCorrelation.ControlContentsChanged
-        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
+        clsCurrentDataFrameFunction = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
     End Sub
 
     Private Sub ReceiverColumns()
@@ -291,6 +306,4 @@ Public Class dlgCorrelation
             clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
         End If
     End Sub
-
-
 End Class

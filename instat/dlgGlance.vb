@@ -54,7 +54,7 @@ Public Class dlgGlance
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
-        ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
+        ucrSaveNewDataFrame.SetPrefix("glance_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))

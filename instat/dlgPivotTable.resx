@@ -127,16 +127,16 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblInitialRowFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 43</value>
+    <value>251, 34</value>
   </data>
   <data name="lblInitialRowFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="lblInitialRowFactor.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="lblInitialRowFactor.Text" xml:space="preserve">
-    <value>Initial Row Factor:</value>
+    <value>Initial Row Factor(s):</value>
   </data>
   <data name="&gt;&gt;lblInitialRowFactor.Name" xml:space="preserve">
     <value>lblInitialRowFactor</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInitialRowFactor.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblInitialColumnFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInitialColumnFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 88</value>
+    <value>248, 156</value>
   </data>
   <data name="lblInitialColumnFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -178,11 +178,20 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInitialColumnFactor.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="ttSelectedVariable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>418, 419</value>
+  </data>
   <data name="ucrSavePivot.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 331</value>
   </data>
@@ -205,7 +214,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSavePivot.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkIncludeSubTotals.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 197</value>
@@ -226,19 +235,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeSubTotals.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ucrReceiverSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 214</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 419</value>
+  <data name="ucrReceiverSelectedVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverSelectedVariable.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Name" xml:space="preserve">
+    <value>ucrReceiverSelectedVariable</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSelectedVariable.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="ucrChkSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 197</value>
+    <value>248, 197</value>
   </data>
   <data name="ucrChkSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 20</value>
@@ -256,10 +280,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkSelectedVariable.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrReceiverInitialColumnFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 103</value>
+    <value>248, 169</value>
   </data>
   <data name="ucrReceiverInitialColumnFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -280,31 +304,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverInitialColumnFactor.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrReceiverInitialRowFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 58</value>
-  </data>
-  <data name="ucrReceiverInitialRowFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverInitialRowFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverInitialRowFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverInitialRowFactor.Name" xml:space="preserve">
-    <value>ucrReceiverInitialRowFactor</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverInitialRowFactor.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverInitialRowFactor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverInitialRowFactor.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 362</value>
@@ -351,9 +351,6 @@
   <data name="&gt;&gt;ucrSelectorPivot.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -372,28 +369,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 220</value>
+  <data name="UcrReceiverMultipleIntialRowFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 49</value>
   </data>
-  <data name="ucrReceiverSelectedVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="UcrReceiverMultipleIntialRowFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="UcrReceiverMultipleIntialRowFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
-  <data name="ucrReceiverSelectedVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
+  <data name="UcrReceiverMultipleIntialRowFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSelectedVariable.Name" xml:space="preserve">
-    <value>ucrReceiverSelectedVariable</value>
+  <data name="&gt;&gt;UcrReceiverMultipleIntialRowFactor.Name" xml:space="preserve">
+    <value>UcrReceiverMultipleIntialRowFactor</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSelectedVariable.Type" xml:space="preserve">
+  <data name="&gt;&gt;UcrReceiverMultipleIntialRowFactor.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSelectedVariable.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UcrReceiverMultipleIntialRowFactor.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSelectedVariable.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;UcrReceiverMultipleIntialRowFactor.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>

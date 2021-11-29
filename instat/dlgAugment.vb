@@ -58,7 +58,7 @@ Public Class dlgAugment
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
-        ucrSaveNewDataFrame.SetPrefix("Augment_dataframe")
+        ucrSaveNewDataFrame.SetPrefix("augment_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))

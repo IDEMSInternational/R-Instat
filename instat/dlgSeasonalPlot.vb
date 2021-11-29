@@ -179,7 +179,7 @@ Public Class dlgSeasonalPlot
         ucrChkMovingAverage.AddParameterPresentCondition(True, "moving_mutate")
         ucrChkMovingAverage.AddParameterPresentCondition(False, "moving_mutate", False)
 
-        ucrSaveGraph.SetPrefix("seasonalityplot")
+        ucrSaveGraph.SetPrefix("seasonality_plot")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetCheckBoxText("Save Graph")

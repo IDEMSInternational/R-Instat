@@ -162,7 +162,7 @@ Public Class dlgBoxplot
         ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
         ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
 
-        ucrSaveBoxplot.SetPrefix("boxplot")
+        ucrSaveBoxplot.SetPrefix("box_plot")
         ucrSaveBoxplot.SetIsComboBox()
         ucrSaveBoxplot.SetCheckBoxText("Save Graph")
         ucrSaveBoxplot.SetSaveTypeAsGraph()
@@ -380,7 +380,7 @@ Public Class dlgBoxplot
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
                 cmdBoxPlotOptions.Text = "Box Options"
-                ucrSaveBoxplot.SetPrefix("boxplot")
+                ucrSaveBoxplot.SetPrefix("box_plot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
             End If

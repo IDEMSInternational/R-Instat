@@ -129,7 +129,7 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverStatistics.SetLinkedDisplayControl(lblStatistics)
         ucrReceiverType.SetLinkedDisplayControl(lblType)
 
-        ucrSavePlot.SetPrefix("conditionalquantile")
+        ucrSavePlot.SetPrefix("cond_quantile_plot")
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
@@ -216,14 +216,14 @@ Public Class dlgConditionalQuantilePlot
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoQuantiles.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalQuantileFunction)
-            ucrSavePlot.SetPrefix("conditionalquantile")
+            ucrSavePlot.SetPrefix("cond_quantile_plot")
             Me.Size = New System.Drawing.Size(Me.Width, 489)
             ucrBase.Location = New Point(ucrBase.Location.X, 397)
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 370)
             cmdPlotOptions.Text = "Conditional Quantile Options"
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalEvalFunction)
-            ucrSavePlot.SetPrefix("conditionalEval")
+            ucrSavePlot.SetPrefix("cond_eval_plot")
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 401)

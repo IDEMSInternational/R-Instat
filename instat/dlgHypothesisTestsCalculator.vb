@@ -45,7 +45,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrChkDisplayModel.SetText("Display Model")
         ucrChkSummaryModel.SetText("Summary Model")
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveResult.SetPrefix("Test")
+        ucrSaveResult.SetPrefix("test")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
         ucrSaveResult.SetCheckBoxText("Save test object")
