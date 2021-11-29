@@ -168,10 +168,8 @@ Public Class clsOutputLogger
     ''' <param name="strListName"></param>
     ''' <returns></returns>
     Public Function IsValidFilteredListName(strListName As String) As Boolean
-        If Trim(strListName) Is "" Then
-            Return False
-        End If
-        If _filteredOutputs.Where(Function(x) x.StrName = strListName).Any() Then
+        If Trim(strListName) Is "" OrElse
+            _filteredOutputs.Where(Function(x) x.StrName = strListName).Any() Then
             Return False
         End If
         Return True
