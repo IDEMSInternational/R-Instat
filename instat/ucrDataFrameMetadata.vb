@@ -67,16 +67,16 @@ Public Class ucrDataFrameMetadata
 
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, rowRightClickMenu, Nothing)
         _grid.InstatOptions = frmMain.clsInstatOptions
-        _grid.SetMainWorksheetUp("metadata")
+        _grid.SetupMainWorksheet("metadata")
     End Sub
 
     Private Sub StartWait()
         Cursor = Cursors.WaitCursor
-        _grid.Enabled = False
+        _grid.bEnabled = False
     End Sub
 
     Private Sub EndWait()
-        _grid.Enabled = True
+        _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
 
@@ -92,7 +92,7 @@ Public Class ucrDataFrameMetadata
     Public Sub RefreshGridData()
         If _clsDataBook?.clsDataFrameMetaData IsNot Nothing Then
             RefreshWorksheet()
-            _grid.Visible = _clsDataBook?.clsDataFrameMetaData.RowCount > 0
+            _grid.bVisible = _clsDataBook?.clsDataFrameMetaData.RowCount > 0
         End If
     End Sub
 

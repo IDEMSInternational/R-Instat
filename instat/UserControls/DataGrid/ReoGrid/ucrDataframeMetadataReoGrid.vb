@@ -46,7 +46,7 @@ Public Class ucrDataframeMetadataReoGrid
         Next
     End Sub
 
-    Public Sub SetMainWorksheetUp(strWorksheetName As String) Implements IDataframeMetaDataGrid.SetMainWorksheetUp
+    Public Sub SetupMainWorksheet(strWorksheetName As String) Implements IDataframeMetaDataGrid.SetupMainWorksheet
         grdData.Worksheets(0).Name = strWorksheetName
         grdData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         grdData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)

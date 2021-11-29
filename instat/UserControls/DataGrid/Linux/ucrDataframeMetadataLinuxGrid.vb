@@ -42,7 +42,7 @@ Public Class ucrDataframeMetadataLinuxGrid
         Next
     End Sub
 
-    Public Sub SetMainWorksheetUp(strWorksheetName As String) Implements IDataframeMetaDataGrid.SetMainWorksheetUp
+    Public Sub SetupMainWorksheet(strWorksheetName As String) Implements IDataframeMetaDataGrid.SetupMainWorksheet
         tcTabs.TabPages.Clear()
         AddNewWorksheet(strWorksheetName)
     End Sub

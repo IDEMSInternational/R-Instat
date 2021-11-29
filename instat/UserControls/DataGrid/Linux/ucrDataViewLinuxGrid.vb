@@ -69,7 +69,7 @@ Public Class ucrDataViewLinuxGrid
         Return tcTabs.SelectedTab.Text
     End Function
 
-    Public Function WorksheetCount() As Integer Implements IDataViewGrid.WorksheetCount
+    Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
         Return tcTabs.TabPages.Count()
     End Function
 

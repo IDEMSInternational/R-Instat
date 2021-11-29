@@ -86,7 +86,7 @@ Public Class ucrColumnMetadata
         If _clsDataBook IsNot Nothing Then
             _grid.RemoveOldWorksheets()
             AddAndUpdateWorksheets()
-            _grid.Visible = _clsDataBook.DataFrames.Count > 0
+            _grid.bVisible = _clsDataBook.DataFrames.Count > 0
         End If
     End Sub
 
@@ -258,11 +258,11 @@ Public Class ucrColumnMetadata
 
     Private Sub StartWait()
         Cursor = Cursors.WaitCursor
-        _grid.Enabled = False
+        _grid.bEnabled = False
     End Sub
 
     Private Sub EndWait()
-        _grid.Enabled = True
+        _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
 

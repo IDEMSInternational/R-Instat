@@ -75,7 +75,7 @@ Public Class ucrDataViewReoGrid
         Return lstColumns
     End Function
 
-    Public Function WorksheetCount() As Integer Implements IDataViewGrid.WorksheetCount
+    Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
         Return grdData.Worksheets.Count
     End Function
 

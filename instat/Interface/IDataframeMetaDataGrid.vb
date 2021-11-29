@@ -23,6 +23,6 @@ Public Interface IDataframeMetaDataGrid
 
     Sub AddRowData()
 
-    Sub SetMainWorksheetUp(strWorksheetName As String)
+    Sub SetupMainWorksheet(strWorksheetName As String)
 
 End Interface

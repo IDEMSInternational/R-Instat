@@ -19,9 +19,9 @@ Public Interface IGrid
     Property CurrentWorksheet As clsWorksheetAdapter
     WriteOnly Property DataBook As clsDataBook
     WriteOnly Property InstatOptions As InstatOptions
-    Property Enabled() As Boolean
-    Property Visible() As Boolean
-    Function AddNewWorksheet(name As String) As clsWorksheetAdapter
+    Property bEnabled() As Boolean
+    Property bVisible() As Boolean
+    Function AddNewWorksheet(strName As String) As clsWorksheetAdapter
 
     Sub CopyRange()
 
@@ -29,7 +29,7 @@ Public Interface IGrid
 
     Function GetSelectedRows() As List(Of String)
 
-    Function GetWorksheet(name As String) As clsWorksheetAdapter
+    Function GetWorksheet(strName As String) As clsWorksheetAdapter
 
     Sub RemoveOldWorksheets()
 

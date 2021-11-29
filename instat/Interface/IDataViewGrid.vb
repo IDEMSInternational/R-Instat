@@ -33,6 +33,6 @@ Public Interface IDataViewGrid
 
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
-    Function WorksheetCount() As Integer
+    Function GetWorksheetCount() As Integer
 
 End Interface

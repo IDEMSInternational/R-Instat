@@ -218,7 +218,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub RefreshDisplayInformation()
-        If _grid.WorksheetCount <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+        If _grid.GetWorksheetCount <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = _grid.CurrentWorksheet.Name
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
             SetDisplayLabels()
@@ -367,11 +367,11 @@ Public Class ucrDataView
 
     Private Sub StartWait()
         Cursor = Cursors.WaitCursor
-        _grid.Enabled = False
+        _grid.bEnabled = False
     End Sub
 
     Private Sub EndWait()
-        _grid.Enabled = True
+        _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
 
@@ -499,7 +499,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
-        HideSheet.Enabled = (_grid.WorksheetCount > 1)
+        HideSheet.Enabled = (_grid.GetWorksheetCount > 1)
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click

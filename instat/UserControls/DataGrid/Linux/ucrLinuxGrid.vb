@@ -46,7 +46,7 @@ Public MustInherit Class ucrLinuxGrid
         End Set
     End Property
 
-    Private Property IGrid_Enabled As Boolean Implements IGrid.Enabled
+    Private Property IGrid_Enabled As Boolean Implements IGrid.bEnabled
         Get
             Return tcTabs.Enabled
         End Get
@@ -55,7 +55,7 @@ Public MustInherit Class ucrLinuxGrid
         End Set
     End Property
 
-    Private Property IGrid_Visible As Boolean Implements IGrid.Visible
+    Private Property IGrid_Visible As Boolean Implements IGrid.bVisible
         Get
             Return Me.Visible
         End Get
@@ -70,8 +70,8 @@ Public MustInherit Class ucrLinuxGrid
         End Set
     End Property
 
-    Public Function AddNewWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.AddNewWorksheet
-        Dim tab As New TabPage(name)
+    Public Function AddNewWorksheet(strName As String) As clsWorksheetAdapter Implements IGrid.AddNewWorksheet
+        Dim tab As New TabPage(strName)
         tcTabs.TabPages.Add(tab)
         Dim dataGrid As New DataGridView
         tab.Controls.Add(dataGrid)
@@ -107,9 +107,9 @@ Public MustInherit Class ucrLinuxGrid
         Return CType(tabPage.Tag, DataGridView)
     End Function
 
-    Public Function GetGrid(worksheetName As String) As DataGridView
+    Public Function GetGrid(strWorksheetName As String) As DataGridView
         For Each tabPage As TabPage In tcTabs.TabPages
-            If tabPage.Text = worksheetName Then
+            If tabPage.Text = strWorksheetName Then
                 Return CType(tabPage.Tag, DataGridView)
             End If
         Next
@@ -163,6 +163,7 @@ Public MustInherit Class ucrLinuxGrid
         For Each tabPage As TabPage In tcTabs.TabPages
             If tabPage.Text = strDataName Then
                 tcTabs.SelectedTab = tabPage
+                Exit For
             End If
         Next
     End Sub
@@ -207,10 +208,10 @@ Public MustInherit Class ucrLinuxGrid
     End Sub
 
     Private Sub contextMenuStrip_Opening(sender As Object, e As CancelEventArgs)
-        Dim p = tcTabs.PointToClient(Cursor.Position)
+        Dim point = tcTabs.PointToClient(Cursor.Position)
         For i As Integer = 0 To tcTabs.TabCount - 1
-            Dim r As Rectangle = tcTabs.GetTabRect(i)
-            If r.Contains(p) Then
+            Dim rectangle As Rectangle = tcTabs.GetTabRect(i)
+            If rectangle.Contains(point) Then
                 tcTabs.SelectedIndex = i ' i is the index of tab under cursor
                 Return
             End If
@@ -237,10 +238,9 @@ Public MustInherit Class ucrLinuxGrid
 
     Private Sub dataGrid_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs)
         sender.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
-        If _rowContextMenuStrip IsNot Nothing And e.Button = MouseButtons.Right Then
-            If sender.SelectedRows.Count > 0 Then
-                _rowContextMenuStrip.Show(Cursor.Position)
-            End If
+        If _rowContextMenuStrip IsNot Nothing AndAlso e.Button = MouseButtons.Right AndAlso
+                            sender.SelectedRows.Count > 0 Then
+            _rowContextMenuStrip.Show(Cursor.Position)
         End If
     End Sub
 

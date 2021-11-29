@@ -38,7 +38,7 @@ Public MustInherit Class ucrReoGrid
         End Set
     End Property
 
-    Private Property IGrid_Enabled As Boolean Implements IGrid.Enabled
+    Private Property IGrid_Enabled As Boolean Implements IGrid.bEnabled
         Get
             Return grdData.Enabled
         End Get
@@ -47,7 +47,7 @@ Public MustInherit Class ucrReoGrid
         End Set
     End Property
 
-    Private Property IGrid_Visible As Boolean Implements IGrid.Visible
+    Private Property IGrid_Visible As Boolean Implements IGrid.bVisible
         Get
             Return Me.Visible
         End Get
