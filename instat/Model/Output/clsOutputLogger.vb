@@ -98,7 +98,7 @@ Public Class clsOutputLogger
         Dim filteredList As clsOutputList
         filteredList = GetFilteredList(strListName)
         outputElement.Id = filteredList.Output.Count + 1
-        filteredList.Output.Add(outputElement.Clone)
+        filteredList.Output.Add(outputElement)
         RaiseEvent NewOutputAddedToFilteredList(outputElement, strListName)
     End Sub
 

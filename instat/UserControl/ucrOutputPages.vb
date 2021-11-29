@@ -110,7 +110,7 @@ Public Class ucrOutputPages
 
     Private Sub AddToExistingTab_Click(sender As Object, e As EventArgs)
         For Each element In _selectedOutputPage.SelectedElements
-            _outputLogger.AddOutputToFilteredList(element, CType(sender, ToolStripButton).Text)
+            _outputLogger.AddOutputToFilteredList(element.Clone, CType(sender, ToolStripButton).Text)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
     End Sub
@@ -206,7 +206,7 @@ Public Class ucrOutputPages
             strTabName &= "1"
         End While
         For Each element In _selectedOutputPage.SelectedElements
-            _outputLogger.AddOutputToFilteredList(element, strTabName)
+            _outputLogger.AddOutputToFilteredList(element.Clone, strTabName)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
     End Sub
