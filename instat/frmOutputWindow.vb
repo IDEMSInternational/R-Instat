@@ -29,7 +29,7 @@ Public Class frmOutputWindow
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
             e.Cancel = True
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 

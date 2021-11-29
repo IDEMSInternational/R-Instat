@@ -33,7 +33,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblRangeElement1to = New System.Windows.Forms.Label()
         Me.lblRangeElement2to = New System.Windows.Forms.Label()
         Me.lblElement2 = New System.Windows.Forms.Label()
-        Me.rdoSatelite = New System.Windows.Forms.RadioButton()
         Me.rdoIndividual = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.lblNudSame = New System.Windows.Forms.Label()
@@ -45,9 +44,11 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
+        Me.ttMultiple = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkIncludeLogicalColumns = New instat.ucrCheck()
-        Me.ucrChkIncludeCalculatedColumns = New instat.ucrCheck()
         Me.ucrChkRangeElement2 = New instat.ucrCheck()
         Me.ucrReceiverElement2 = New instat.ucrReceiverSingle()
         Me.ucrNudJump = New instat.ucrNud()
@@ -71,7 +72,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
-        Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -119,16 +119,6 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me.lblElement2, "lblElement2")
         Me.lblElement2.Name = "lblElement2"
-        '
-        'rdoSatelite
-        '
-        resources.ApplyResources(Me.rdoSatelite, "rdoSatelite")
-        Me.rdoSatelite.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSatelite.FlatAppearance.BorderSize = 2
-        Me.rdoSatelite.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSatelite.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSatelite.Name = "rdoSatelite"
-        Me.rdoSatelite.UseVisualStyleBackColor = True
         '
         'rdoIndividual
         '
@@ -191,6 +181,25 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.lblCoeff, "lblCoeff")
         Me.lblCoeff.Name = "lblCoeff"
         '
+        'grpLogicalCalculatedColumns
+        '
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
+        resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
+        Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
+        Me.grpLogicalCalculatedColumns.TabStop = False
+        '
+        'ucrChkIncludeCalculatedColumns
+        '
+        Me.ucrChkIncludeCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeCalculatedColumns, "ucrChkIncludeCalculatedColumns")
+        Me.ucrChkIncludeCalculatedColumns.Name = "ucrChkIncludeCalculatedColumns"
+        '
+        'ttMultiple
+        '
+        Me.ttMultiple.AutoPopDelay = 10000
+        Me.ttMultiple.InitialDelay = 500
+        Me.ttMultiple.ReshowDelay = 100
+        '
         'ucrNudCoeff
         '
         Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -206,12 +215,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkIncludeLogicalColumns.Checked = False
         resources.ApplyResources(Me.ucrChkIncludeLogicalColumns, "ucrChkIncludeLogicalColumns")
         Me.ucrChkIncludeLogicalColumns.Name = "ucrChkIncludeLogicalColumns"
-        '
-        'ucrChkIncludeCalculatedColumns
-        '
-        Me.ucrChkIncludeCalculatedColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeCalculatedColumns, "ucrChkIncludeCalculatedColumns")
-        Me.ucrChkIncludeCalculatedColumns.Name = "ucrChkIncludeCalculatedColumns"
         '
         'ucrChkRangeElement2
         '
@@ -400,13 +403,6 @@ Partial Class dlgClimaticCheckDataTemperature
         resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
         Me.ucrPnlType.Name = "ucrPnlType"
         '
-        'grpLogicalCalculatedColumns
-        '
-        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
-        resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
-        Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
-        Me.grpLogicalCalculatedColumns.TabStop = False
-        '
         'dlgClimaticCheckDataTemperature
         '
         resources.ApplyResources(Me, "$this")
@@ -422,7 +418,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.lblNudDiff)
         Me.Controls.Add(Me.lblNudJump)
         Me.Controls.Add(Me.lblNudSame)
-        Me.Controls.Add(Me.rdoSatelite)
         Me.Controls.Add(Me.rdoIndividual)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.lblElement2)
@@ -497,7 +492,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrNudJump As ucrNud
     Friend WithEvents lblElement2 As Label
     Friend WithEvents ucrReceiverElement2 As ucrReceiverSingle
-    Friend WithEvents rdoSatelite As RadioButton
     Friend WithEvents rdoIndividual As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
@@ -515,4 +509,5 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrNudCoeff As ucrNud
     Friend WithEvents lblCoeff As Label
     Friend WithEvents grpLogicalCalculatedColumns As GroupBox
+    Friend WithEvents ttMultiple As ToolTip
 End Class
