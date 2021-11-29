@@ -37,62 +37,62 @@ Public Class sdgConstructRegexExpression
     End Sub
 
     Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
-        strRegex = "."
+        strRegex = strRegex & "."
     End Sub
 
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
-        strRegex = "^"
+        strRegex = strRegex & "^"
     End Sub
 
     Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
-        strRegex = "$"
+        strRegex = strRegex & strRegex & "$"
     End Sub
 
     Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
-        strRegex = "\\d"
+        strRegex = strRegex & "\\d"
     End Sub
 
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
-        strRegex = "\\s"
+        strRegex = strRegex & "\\s"
     End Sub
 
     Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
-        strRegex = "[]"
+        strRegex = strRegex & "[]"
     End Sub
 
     Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
-        strRegex = "[^ ]"
+        strRegex = strRegex & "[^ ]"
     End Sub
 
     Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
-        strRegex = "|"
+        strRegex = strRegex & "|"
     End Sub
 
     Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
-        strRegex = "{}"
+        strRegex = strRegex & "{}"
     End Sub
 
     Private Sub cmdNumbers_Click(sender As Object, e As EventArgs) Handles cmdNumbers.Click
-        strRegex = "{,}"
+        strRegex = strRegex & "{,}"
     End Sub
 
     Private Sub cmdZeroOrOne_Click(sender As Object, e As EventArgs) Handles cmdZeroOrOne.Click
-        strRegex = "?"
+        strRegex = strRegex & "?"
     End Sub
 
     Private Sub cmdPlusOne_Click(sender As Object, e As EventArgs) Handles cmdPlusOne.Click
-        strRegex = "+"
+        strRegex = strRegex & "+"
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        strRegex = "+"
+        strRegex = strRegex & "+"
     End Sub
 
     Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
-        strRegex = "\\"
+        strRegex = strRegex & "\\"
     End Sub
 
     Private Sub cmdPlusZero_Click(sender As Object, e As EventArgs) Handles cmdPlusZero.Click
-        strRegex = "-"
+        strRegex = strRegex & "-"
     End Sub
 End Class

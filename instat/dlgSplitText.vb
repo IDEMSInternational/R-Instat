@@ -143,7 +143,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso ((rdoTextComponents.Checked AndAlso ucrNudPieces.GetText <> "" AndAlso ucrSaveColumn.IsComplete()) OrElse rdoBinaryColumns.Checked) Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso ((ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForCalculation.IsEmpty) OrElse (Not ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrInputPattern.IsEmpty)) AndAlso ((rdoTextComponents.Checked AndAlso ucrNudPieces.GetText <> "" AndAlso ucrSaveColumn.IsComplete()) OrElse rdoBinaryColumns.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -201,16 +201,17 @@ Public Class dlgSplitText
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
-        Dim strRegex As String = sdgConstructRegexExpression.strRegex
-        If {".", "^", "[]", "|", "{}"}.Contains(strRegex) Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 1)
-        ElseIf {"{,}"}.Contains(strRegex) Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 2)
-        ElseIf {"[^ ]"}.Contains(strRegex) Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 3)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex)
-        End If
+        'Dim strRegex As String = sdgConstructRegexExpression.strRegex
+        'If {".", "^", "[]", "|", "{}"}.Contains(strRegex) Then
+        '    ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 1)
+        'ElseIf {"{,}"}.Contains(strRegex) Then
+        '    ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 2)
+        'ElseIf {"[^ ]"}.Contains(strRegex) Then
+        '    ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex, 3)
+        'Else
+        '    ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strRegex)
+        'End If
+        ucrReceiverForCalculation.cboExpression.Text = sdgConstructRegexExpression.strRegex
     End Sub
 
     Private Sub ucrReceiverForCalculation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCalculation.ControlValueChanged
@@ -222,7 +223,7 @@ Public Class dlgSplitText
         cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged, ucrReceiverForCalculation.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
