@@ -52,13 +52,7 @@ Partial Class dlgConversions
         Me.lblMinutes = New System.Windows.Forms.Label()
         Me.lblSeconds = New System.Windows.Forms.Label()
         Me.lblDegrees = New System.Windows.Forms.Label()
-        Me.grpDirection = New System.Windows.Forms.GroupBox()
-        Me.rdoE = New System.Windows.Forms.RadioButton()
-        Me.rdoW = New System.Windows.Forms.RadioButton()
-        Me.rdoS = New System.Windows.Forms.RadioButton()
-        Me.rdoN = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverLetters = New instat.ucrReceiverSingle()
-        Me.ucrPnlDirection = New instat.UcrPanel()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrInputSecond = New instat.ucrInputTextBox()
         Me.ucrInputMinute = New instat.ucrInputTextBox()
@@ -72,10 +66,11 @@ Partial Class dlgConversions
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.ucrInputDirection = New instat.ucrInputComboBox()
+        Me.lblDirection = New System.Windows.Forms.Label()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
-        Me.grpDirection.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoDayLength
@@ -312,47 +307,6 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.lblDegrees, "lblDegrees")
         Me.lblDegrees.Name = "lblDegrees"
         '
-        'grpDirection
-        '
-        Me.grpDirection.Controls.Add(Me.rdoVariable)
-        Me.grpDirection.Controls.Add(Me.rdoE)
-        Me.grpDirection.Controls.Add(Me.rdoW)
-        Me.grpDirection.Controls.Add(Me.rdoS)
-        Me.grpDirection.Controls.Add(Me.rdoN)
-        Me.grpDirection.Controls.Add(Me.ucrReceiverLetters)
-        Me.grpDirection.Controls.Add(Me.ucrPnlDirection)
-        resources.ApplyResources(Me.grpDirection, "grpDirection")
-        Me.grpDirection.Name = "grpDirection"
-        Me.grpDirection.TabStop = False
-        '
-        'rdoE
-        '
-        resources.ApplyResources(Me.rdoE, "rdoE")
-        Me.rdoE.Name = "rdoE"
-        Me.rdoE.TabStop = True
-        Me.rdoE.UseVisualStyleBackColor = True
-        '
-        'rdoW
-        '
-        resources.ApplyResources(Me.rdoW, "rdoW")
-        Me.rdoW.Name = "rdoW"
-        Me.rdoW.TabStop = True
-        Me.rdoW.UseVisualStyleBackColor = True
-        '
-        'rdoS
-        '
-        resources.ApplyResources(Me.rdoS, "rdoS")
-        Me.rdoS.Name = "rdoS"
-        Me.rdoS.TabStop = True
-        Me.rdoS.UseVisualStyleBackColor = True
-        '
-        'rdoN
-        '
-        resources.ApplyResources(Me.rdoN, "rdoN")
-        Me.rdoN.Name = "rdoN"
-        Me.rdoN.TabStop = True
-        Me.rdoN.UseVisualStyleBackColor = True
-        '
         'ucrReceiverLetters
         '
         Me.ucrReceiverLetters.frmParent = Me
@@ -361,11 +315,6 @@ Partial Class dlgConversions
         Me.ucrReceiverLetters.Selector = Nothing
         Me.ucrReceiverLetters.strNcFilePath = ""
         Me.ucrReceiverLetters.ucrSelector = Nothing
-        '
-        'ucrPnlDirection
-        '
-        resources.ApplyResources(Me.ucrPnlDirection, "ucrPnlDirection")
-        Me.ucrPnlDirection.Name = "ucrPnlDirection"
         '
         'ucrChkVariable
         '
@@ -465,22 +414,36 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'rdoVariable
+        'ucrInputDirection
         '
-        resources.ApplyResources(Me.rdoVariable, "rdoVariable")
-        Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.TabStop = True
-        Me.rdoVariable.UseVisualStyleBackColor = True
+        Me.ucrInputDirection.AddQuotesIfUnrecognised = True
+        Me.ucrInputDirection.GetSetSelectedIndex = -1
+        Me.ucrInputDirection.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDirection, "ucrInputDirection")
+        Me.ucrInputDirection.Name = "ucrInputDirection"
+        '
+        'lblDirection
+        '
+        resources.ApplyResources(Me.lblDirection, "lblDirection")
+        Me.lblDirection.Name = "lblDirection"
+        '
+        'ucrSaveColumn
+        '
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
         '
         'dlgConversions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveColumn)
+        Me.Controls.Add(Me.lblDirection)
+        Me.Controls.Add(Me.ucrInputDirection)
         Me.Controls.Add(Me.ucrChkVariable)
         Me.Controls.Add(Me.ucrInputSecond)
         Me.Controls.Add(Me.ucrInputMinute)
         Me.Controls.Add(Me.ucrInputDegree)
-        Me.Controls.Add(Me.grpDirection)
+        Me.Controls.Add(Me.ucrReceiverLetters)
         Me.Controls.Add(Me.ucrSaveConversions)
         Me.Controls.Add(Me.lblDegrees)
         Me.Controls.Add(Me.lblSeconds)
@@ -508,8 +471,6 @@ Partial Class dlgConversions
         Me.grpLatitude.PerformLayout()
         Me.grpElements.ResumeLayout(False)
         Me.grpElements.PerformLayout()
-        Me.grpDirection.ResumeLayout(False)
-        Me.grpDirection.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -554,15 +515,11 @@ Partial Class dlgConversions
     Friend WithEvents ucrReceiverLetters As ucrReceiverSingle
     Friend WithEvents lblDegrees As Label
     Friend WithEvents ucrSaveConversions As ucrSave
-    Friend WithEvents grpDirection As GroupBox
-    Friend WithEvents rdoE As RadioButton
-    Friend WithEvents rdoW As RadioButton
-    Friend WithEvents rdoS As RadioButton
-    Friend WithEvents rdoN As RadioButton
-    Friend WithEvents ucrPnlDirection As UcrPanel
     Friend WithEvents ucrInputDegree As ucrInputTextBox
     Friend WithEvents ucrInputSecond As ucrInputTextBox
     Friend WithEvents ucrInputMinute As ucrInputTextBox
     Friend WithEvents ucrChkVariable As ucrCheck
-    Friend WithEvents rdoVariable As RadioButton
+    Friend WithEvents lblDirection As Label
+    Friend WithEvents ucrInputDirection As ucrInputComboBox
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class

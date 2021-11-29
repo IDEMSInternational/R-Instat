@@ -22,6 +22,7 @@ Public Class dlgConversions
     Private clsRoundFunction As New RFunction
     Private clsDayLengthFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private dctDirectionPairs As New Dictionary(Of String, String)
 
     Private Sub dlgConversions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -149,12 +150,13 @@ Public Class dlgConversions
         ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlDirection.SetParameter(New RParameter("dir", 3))
-        ucrPnlDirection.AddRadioButton(rdoN, Chr(34) & "N" & Chr(34))
-        ucrPnlDirection.AddRadioButton(rdoS, Chr(34) & "S" & Chr(34))
-        ucrPnlDirection.AddRadioButton(rdoE, Chr(34) & "E" & Chr(34))
-        ucrPnlDirection.AddRadioButton(rdoW, Chr(34) & "W" & Chr(34))
-        ucrPnlDirection.AddRadioButton(rdoVariable, Chr(34) & Chr(34))
+        ucrInputDirection.SetParameter(New RParameter("dir", 3))
+        dctDirectionPairs.Add("N", Chr(34) & "N" & Chr(34))
+        dctDirectionPairs.Add("S", Chr(34) & "S" & Chr(34))
+        dctDirectionPairs.Add("W", Chr(34) & "W" & Chr(34))
+        dctDirectionPairs.Add("E", Chr(34) & "E" & Chr(34))
+        ucrInputDirection.SetItems(dctDirectionPairs)
+        ucrInputDirection.SetDropDownStyleAsNonEditable()
 
         ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
@@ -165,15 +167,17 @@ Public Class dlgConversions
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDegrees, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverMinutes, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverSeconds, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrPnlDirection, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrInputDirection, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrSaveConversions, {rdoUnits, rdoDayLength}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls({ucrChkVariable}, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputDirection.AddToLinkedControls(ucrReceiverLetters, {"Variable"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls({ucrInputDegree, ucrInputMinute, ucrInputSecond}, {False}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVariable.AddToLinkedControls(ucrSaveColumn, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverDegrees.SetLinkedDisplayControl(lblDegrees)
         ucrReceiverMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrReceiverSeconds.SetLinkedDisplayControl(lblSeconds)
-        ucrPnlDirection.AddToLinkedControls(ucrReceiverLetters, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDirection.SetLinkedDisplayControl(grpDirection)
+        ucrInputDirection.SetLinkedDisplayControl(lblDirection)
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
@@ -185,6 +189,13 @@ Public Class dlgConversions
         ucrSaveConversions.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
         ucrSaveConversions.SetIsComboBox()
         ucrSaveConversions.SetLabelText("Result into:")
+
+        ucrSaveColumn.SetSaveTypeAsColumn()
+        ucrSaveColumn.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
+        ucrSaveColumn.SetIsComboBox()
+        ucrSaveColumn.SetLabelText("Result into:")
+        ucrSaveColumn.SetPrefix("coord")
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverDegrees)
     End Sub
 
     Private Sub SetDefaults()
@@ -238,7 +249,6 @@ Public Class dlgConversions
         ucrSaveConversions.AddAdditionalRCode(clsTemperatureFunction, iAdditionalPairNo:=1)
         ucrSaveConversions.AddAdditionalRCode(clsWindSpeedFunction, iAdditionalPairNo:=2)
         ucrSaveConversions.AddAdditionalRCode(clsDayLengthFunction, iAdditionalPairNo:=3)
-        ucrSaveConversions.AddAdditionalRCode(clsRoundFunction, iAdditionalPairNo:=4)
 
         ucrReceiverElement.SetRCode(clsPrecipitationFunction, bReset)
         ucrInputFromPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
@@ -250,10 +260,11 @@ Public Class dlgConversions
         ucrNudDecimal.SetRCode(clsPrecipitationFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyFunction, bReset)
         ucrSaveConversions.SetRCode(clsPrecipitationFunction, bReset)
+        ucrSaveColumn.SetRCode(clsRoundFunction, bReset)
+        ucrInputDirection.SetRCode(clsConvertToDegreeFunction, bReset)
 
         If bReset Then
             ucrPnlConversions.SetRCode(clsPrecipitationFunction, bReset)
-            ucrPnlDirection.SetRCode(clsConvertToDegreeFunction, bReset)
         End If
         ucrReceiverDate.SetRCode(clsDayLengthFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsDayLengthFunction, bReset)
@@ -327,30 +338,25 @@ Public Class dlgConversions
         ElseIf rdoCoordinates.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
             ucrReceiverDegrees.SetMeAsReceiver()
-            ucrSaveConversions.SetPrefix("coord")
-            ucrSaveConversions.setLinkedReceiver(ucrReceiverDegrees)
             ChangeParameter()
         End If
         ChangeLatParameter()
-        'SetVisibleSaveControl()
-    End Sub
-
-    Private Sub SetVisibleSaveControl()
-        'ucrChkVariable.Visible = If(rdoCoordinates.Checked, True, False)
     End Sub
 
     Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
         SetBaseFunction()
     End Sub
 
-    Private Sub ucrPnlDirection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDirection.ControlValueChanged, ucrReceiverLetters.ControlValueChanged
+    Private Sub ucrInputDirection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDirection.ControlValueChanged, ucrReceiverLetters.ControlValueChanged
         Dim clsGetDirVariable As RFunction = ucrReceiverLetters.GetVariables
-        If rdoVariable.Checked Then
-            ucrReceiverLetters.SetMeAsReceiver()
-            If Not ucrReceiverLetters.IsEmpty Then
-                clsConvertToDegreeFunction.AddParameter("dir", clsRFunctionParameter:=clsGetDirVariable, iPosition:=3)
+        If ucrInputDirection.GetText = "Variable" Then
+            If Not ucrReceiverDegrees.IsEmpty Then
+                ucrReceiverLetters.SetMeAsReceiver()
             End If
-        End If
+            If Not ucrReceiverLetters.IsEmpty Then
+                    clsConvertToDegreeFunction.AddParameter("dir", clsRFunctionParameter:=clsGetDirVariable, iPosition:=3)
+                End If
+            End If
         ChangeParameter()
     End Sub
 
@@ -396,13 +402,21 @@ Public Class dlgConversions
             ucrBase.clsRsyntax.iCallType = 1
         Else
             ucrBase.clsRsyntax.iCallType = 0
-            ucrReceiverDegrees.SetMeAsReceiver()
+        End If
+        If ucrChkVariable.Checked AndAlso Not ucrInputDirection.cboInput.Items.Contains("Variable") Then
+            ucrInputDirection.cboInput.Items.Add("Variable")
+        ElseIf Not ucrChkVariable.Checked AndAlso ucrInputDirection.GetText = "Variable" Then
+            ucrInputDirection.cboInput.Items.Remove("Variable")
+            ucrInputDirection.cboInput.SelectedIndex = 0
         End If
     End Sub
 
-    Private Sub ucrChkVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVariable.ControlValueChanged, ucrInputDegree.ControlValueChanged, ucrInputMinute.ControlValueChanged, ucrInputSecond.ControlValueChanged
+    Private Sub ucrChkVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVariable.ControlValueChanged
         ChangeParameter()
-        'SetVisibleSaveControl()
+    End Sub
+
+    Private Sub ucrInputDegree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDegree.ControlValueChanged, ucrInputMinute.ControlValueChanged, ucrInputSecond.ControlValueChanged
+        ChangeParameter()
     End Sub
 
     Private Sub ucrReceiverDegrees_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDegrees.ControlValueChanged, ucrReceiverMinutes.ControlValueChanged, ucrReceiverSeconds.ControlValueChanged
