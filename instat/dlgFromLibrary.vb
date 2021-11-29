@@ -129,7 +129,7 @@ Public Class dlgFromLibrary
         dlgImportDataset.bFromLibrary = True 'set flag that this should open from library
         dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.ShowDialog()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged

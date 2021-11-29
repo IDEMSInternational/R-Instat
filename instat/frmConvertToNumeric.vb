@@ -37,12 +37,12 @@
     End Sub
 
     Private Sub ConvertButtons_Click(sender As Object, e As EventArgs) Handles cmdNormalConvert.Click, cmdLabelledConvert.Click
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.DialogResult = DialogResult.Cancel
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
@@ -52,7 +52,7 @@
     End Sub
 
     Private Sub cmdInspectValues_Click(sender As Object, e As EventArgs) Handles cmdInspectValues.Click
-        Me.Hide()
+        Me.Close()
         dlgFindNonnumericValues.SetCurrentColumn(strColumnName, strDataFrameName)
         dlgFindNonnumericValues.ShowDialog()
     End Sub
