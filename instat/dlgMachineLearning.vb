@@ -89,10 +89,12 @@ Public Class dlgMachineLearning
         ucrReceiverRegressionResponse.SetIncludedDataTypes({"numeric"})
 
         ucrChkClassificationPerformance.SetText("Performance Measure")
-        ucrChkClassificationPerformance.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkClassificationPerformance.AddFunctionNamesCondition(True, {"confusionMatrix"})
+        ucrChkClassificationPerformance.AddFunctionNamesCondition(False, {"confusionMatrix"}, False)
 
         ucrChkRegressionPerformance.SetText("Performance Measure")
-        ucrChkRegressionPerformance.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkRegressionPerformance.AddFunctionNamesCondition(True, {"postResample"})
+        ucrChkRegressionPerformance.AddFunctionNamesCondition(False, {"postResample"}, False)
 
         ucrInputClassificationMethod.SetParameter(New RParameter("method", 2))
         'Commonly used Methods
@@ -391,7 +393,7 @@ Public Class dlgMachineLearning
             'rdoClassification.Checked = False
             'rdoRegression.Checked = True
             ucrReceiverRegressionResponse.SetMeAsReceiver()
-            If ucrChkClassificationPerformance.Checked Then
+            If ucrChkRegressionPerformance.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRegressionTrainFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clspostResampleFunction)
