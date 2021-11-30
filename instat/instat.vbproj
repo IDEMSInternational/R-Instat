@@ -195,6 +195,10 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\IColumnMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataViewGrid.vb" />
+    <Compile Include="Interface\IGrid.vb" />
     <Compile Include="frmOutputWindow.Designer.vb">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </Compile>
@@ -2823,6 +2827,54 @@
     <Compile Include="UcrPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\DataGrid\clsWorksheetAdapter.vb" />
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataViewLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.Designer.vb">
+      <DependentUpon>ucrDataViewReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.Designer.vb">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.Designer.vb">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
+	</Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -5086,6 +5138,12 @@
     <EmbeddedResource Include="UcrPanel.resx">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\Linux\ucrLinuxGrid.resx">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </EmbeddedResource>
