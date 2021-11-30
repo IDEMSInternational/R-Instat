@@ -51,9 +51,11 @@ Partial Class dlgSplitText
         Me.ucrNudPieces = New instat.ucrNud()
         Me.ucrInputPattern = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
-        Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlTextComponents = New instat.UcrPanel()
+        Me.ucrChkAddKeyboard = New instat.ucrCheck()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
+        Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -145,14 +147,6 @@ Partial Class dlgSplitText
         Me.ucrReceiverSplitTextColumn.strNcFilePath = ""
         Me.ucrReceiverSplitTextColumn.ucrSelector = Nothing
         '
-        'ucrSelectorSplitTextColumn
-        '
-        Me.ucrSelectorSplitTextColumn.bDropUnusedFilterLevels = False
-        Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
-        Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
-        Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -163,10 +157,33 @@ Partial Class dlgSplitText
         resources.ApplyResources(Me.ucrPnlTextComponents, "ucrPnlTextComponents")
         Me.ucrPnlTextComponents.Name = "ucrPnlTextComponents"
         '
+        'ucrChkAddKeyboard
+        '
+        Me.ucrChkAddKeyboard.Checked = False
+        resources.ApplyResources(Me.ucrChkAddKeyboard, "ucrChkAddKeyboard")
+        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        '
+        'ucrSelectorSplitTextColumn
+        '
+        Me.ucrSelectorSplitTextColumn.bDropUnusedFilterLevels = False
+        Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
+        Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
+        Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
+        '
         'dlgSplitText
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
+        Me.Controls.Add(Me.ucrChkAddKeyboard)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoFixedNumberOfComponents)
         Me.Controls.Add(Me.rdoMaximumNumberOfComponents)
         Me.Controls.Add(Me.rdoTextComponents)
@@ -179,7 +196,6 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
         Me.Controls.Add(Me.lblSplitBy)
         Me.Controls.Add(Me.lblSelectedFactor)
-        Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlTextComponents)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -193,7 +209,6 @@ Partial Class dlgSplitText
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedFactor As Label
     Friend WithEvents lblSplitBy As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
@@ -207,4 +222,7 @@ Partial Class dlgSplitText
     Friend WithEvents rdoFixedNumberOfComponents As RadioButton
     Friend WithEvents rdoMaximumNumberOfComponents As RadioButton
     Friend WithEvents ucrPnlTextComponents As UcrPanel
+    Friend WithEvents ucrChkAddKeyboard As ucrCheck
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
+    Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
 End Class

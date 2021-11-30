@@ -77,14 +77,6 @@ Public Class clsGridLink
         End If
     End Sub
 
-    Public Sub SetDataViewer(ucrNewDataViewer As ucrDataView)
-        ucrDataViewer = ucrNewDataViewer
-        grdData = ucrNewDataViewer.grdData
-        bGrdDataExists = True
-        bGrdDataChanged = True
-        UpdateGrids()
-    End Sub
-
     Public Sub SetMetadata(grdTemp As ReoGridControl)
         grdMetadata = grdTemp
         bGrdMetadataExists = True
