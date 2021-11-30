@@ -39,6 +39,10 @@ Public Class sdgConstructRegexExpression
         Return ucrReceiverForCalculation.GetText
     End Function
 
+    Public Sub Reset()
+        ucrReceiverForCalculation.Clear()
+    End Sub
+
     Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".", 1)
     End Sub

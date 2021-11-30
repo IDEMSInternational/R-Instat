@@ -74,7 +74,6 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputPattern.SetItems(dctPatternPairs)
-        ucrInputPattern.SetRDefault(Chr(34) & "," & Chr(34))
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
@@ -102,6 +101,8 @@ Public Class dlgSplitText
 
         ucrSelectorSplitTextColumn.Reset()
 
+        clsPatternDummyFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+
         clsStringCollFunction.SetPackageName("stringr")
         clsStringCollFunction.SetRCommand("coll")
         clsStringCollFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=0)
@@ -128,6 +129,8 @@ Public Class dlgSplitText
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
+        'ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
+        'ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=1)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
         ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, bReset)
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
@@ -151,6 +154,7 @@ Public Class dlgSplitText
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+        sdgConstructRegexExpression.Reset()
     End Sub
 
     Private Sub ucrPnlSplitText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlValueChanged
@@ -177,14 +181,17 @@ Public Class dlgSplitText
         End If
         clsTextComponentsFixed.RemoveParameterByName("pattern")
         clsTextComponentsMaximum.RemoveParameterByName("pattern")
+        'clsPatternDummyFunction.RemoveParameterByName("pattern")
         clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", strPattern, iPosition:=1)
+            'clsPatternDummyFunction.AddParameter("pattern", strPattern, iPosition:=1)
         Else
             clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
             clsTextComponentsFixed.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            'clsPatternDummyFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
         End If
     End Sub
 
@@ -198,14 +205,10 @@ Public Class dlgSplitText
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
-        ucrInputPattern.SetText(sdgConstructRegexExpression.GetRegexExpression())
+        ucrInputPattern.SetName(sdgConstructRegexExpression.GetRegexExpression())
     End Sub
 
-    'Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged
-    '    ChangeParametersValues()
-    'End Sub
-
-    Private Sub ucrInputPattern_NameChanged() Handles ucrInputPattern.NameChanged
+    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         ChangeParametersValues()
     End Sub
 
