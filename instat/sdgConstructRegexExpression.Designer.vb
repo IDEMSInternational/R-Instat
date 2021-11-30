@@ -41,6 +41,8 @@ Partial Class sdgConstructRegexExpression
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.ttAddKeyboard = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.lblExpression = New System.Windows.Forms.Label()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpSymbols.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -61,7 +63,7 @@ Partial Class sdgConstructRegexExpression
         Me.grpSymbols.Controls.Add(Me.cmdEnd1)
         Me.grpSymbols.Controls.Add(Me.cmdbegin)
         Me.grpSymbols.Controls.Add(Me.cmdAny1)
-        Me.grpSymbols.Location = New System.Drawing.Point(11, 11)
+        Me.grpSymbols.Location = New System.Drawing.Point(11, 54)
         Me.grpSymbols.Margin = New System.Windows.Forms.Padding(2)
         Me.grpSymbols.Name = "grpSymbols"
         Me.grpSymbols.Padding = New System.Windows.Forms.Padding(2)
@@ -237,17 +239,43 @@ Partial Class sdgConstructRegexExpression
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(84, 130)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(84, 173)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(153, 30)
         Me.ucrBaseSubdialog.TabIndex = 8
         '
+        'lblExpression
+        '
+        Me.lblExpression.AutoSize = True
+        Me.lblExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExpression.Location = New System.Drawing.Point(15, 28)
+        Me.lblExpression.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblExpression.Name = "lblExpression"
+        Me.lblExpression.Size = New System.Drawing.Size(61, 13)
+        Me.lblExpression.TabIndex = 195
+        Me.lblExpression.Tag = "Expression"
+        Me.lblExpression.Text = "Expression:"
+        '
+        'ucrReceiverForCalculation
+        '
+        Me.ucrReceiverForCalculation.frmParent = Me
+        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(84, 25)
+        Me.ucrReceiverForCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
+        Me.ucrReceiverForCalculation.Selector = Nothing
+        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(191, 21)
+        Me.ucrReceiverForCalculation.strNcFilePath = ""
+        Me.ucrReceiverForCalculation.TabIndex = 196
+        Me.ucrReceiverForCalculation.ucrSelector = Nothing
+        '
         'sdgConstructRegexExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(341, 170)
+        Me.ClientSize = New System.Drawing.Size(341, 213)
+        Me.Controls.Add(Me.ucrReceiverForCalculation)
+        Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -256,6 +284,7 @@ Partial Class sdgConstructRegexExpression
         Me.Text = "Construct regex expression"
         Me.grpSymbols.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -277,4 +306,6 @@ Partial Class sdgConstructRegexExpression
     Friend WithEvents cmdbegin As Button
     Friend WithEvents cmdAny1 As Button
     Friend WithEvents ttAddKeyboard As ToolTip
+    Friend WithEvents lblExpression As Label
+    Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
 End Class

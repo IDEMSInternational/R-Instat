@@ -47,7 +47,6 @@ Partial Class dlgSplitText
         Me.rdoMaximumNumberOfComponents = New System.Windows.Forms.RadioButton()
         Me.rdoFixedNumberOfComponents = New System.Windows.Forms.RadioButton()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrPnlSplitText = New instat.UcrPanel()
@@ -117,15 +116,6 @@ Partial Class dlgSplitText
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.UseVisualStyleBackColor = True
         '
-        'ucrReceiverForCalculation
-        '
-        Me.ucrReceiverForCalculation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
-        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
-        Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.strNcFilePath = ""
-        Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
         'ucrSelectorSplitTextColumn
         '
         Me.ucrSelectorSplitTextColumn.bDropUnusedFilterLevels = False
@@ -191,7 +181,6 @@ Partial Class dlgSplitText
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
@@ -236,5 +225,4 @@ Partial Class dlgSplitText
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdAddkeyboard As Button
-    Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
 End Class

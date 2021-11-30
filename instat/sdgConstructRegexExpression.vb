@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class sdgConstructRegexExpression
-    Public strRegex As String = ""
 
     Private Sub sdgConstructRegexExpression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ttAddKeyboard.SetToolTip(cmdAny1, " Matches any character. For example,str_count(c(""rss"",""r.s.t""),""."") gives 3 5.  Using \\. Gives 0 2 ")
@@ -36,63 +35,68 @@ Public Class sdgConstructRegexExpression
 
     End Sub
 
+    Public Function GetRegexExpression() As String
+        Return ucrReceiverForCalculation.GetText
+    End Function
+
     Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
-        strRegex = strRegex & "."
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".", 1)
     End Sub
 
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
-        strRegex = strRegex & "^"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^", 1)
     End Sub
 
     Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
-        strRegex = strRegex & strRegex & "$"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("$")
     End Sub
 
     Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
-        strRegex = strRegex & "\\d"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\d")
     End Sub
 
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
-        strRegex = strRegex & "\\s"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\s")
     End Sub
 
     Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
-        strRegex = strRegex & "[]"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]", 1)
     End Sub
 
     Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
-        strRegex = strRegex & "[^ ]"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 3)
     End Sub
 
     Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
-        strRegex = strRegex & "|"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|", 1)
     End Sub
 
     Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
-        strRegex = strRegex & "{}"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{}", 1)
     End Sub
 
     Private Sub cmdNumbers_Click(sender As Object, e As EventArgs) Handles cmdNumbers.Click
-        strRegex = strRegex & "{,}"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{,}", 2)
     End Sub
 
     Private Sub cmdZeroOrOne_Click(sender As Object, e As EventArgs) Handles cmdZeroOrOne.Click
-        strRegex = strRegex & "?"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("?")
     End Sub
 
     Private Sub cmdPlusOne_Click(sender As Object, e As EventArgs) Handles cmdPlusOne.Click
-        strRegex = strRegex & "+"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        strRegex = strRegex & "+"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
-        strRegex = strRegex & "\\"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\")
     End Sub
 
     Private Sub cmdPlusZero_Click(sender As Object, e As EventArgs) Handles cmdPlusZero.Click
-        strRegex = strRegex & "-"
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
     End Sub
+
 End Class
