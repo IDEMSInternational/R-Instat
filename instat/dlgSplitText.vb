@@ -206,10 +206,6 @@ Public Class dlgSplitText
         ucrInputRegex.SetName(sdgConstructRegexExpression.ucrReceiverForCalculation.GetText())
     End Sub
 
-    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
-        ChangeParametersValues()
-    End Sub
-
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrInputRegex.ControlValueChanged
         ChangeParametersValues()
         cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
