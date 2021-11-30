@@ -40,7 +40,7 @@ Public Class ucrOutputPages
     ''' ToDo InstatOptions should be able to be accessed from anywhere
     ''' </summary>
     Public WriteOnly Property clsInstatOptions() As InstatOptions
-        Set(ByVal value As InstatOptions)
+        Set(value As InstatOptions)
             _clsInstatOptions = value
         End Set
     End Property
@@ -110,7 +110,7 @@ Public Class ucrOutputPages
 
     Private Sub AddToExistingTab_Click(sender As Object, e As EventArgs)
         For Each element In _selectedOutputPage.SelectedElements
-            _outputLogger.AddOutputToFilteredList(element, CType(sender, ToolStripButton).Text)
+            _outputLogger.AddOutputToFilteredList(element.Clone, CType(sender, ToolStripButton).Text)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
     End Sub
@@ -120,14 +120,12 @@ Public Class ucrOutputPages
         Dim tabName As String = SelectedTab()
         tabControl.TabPages.Remove(tab)
         tab.Dispose()
-        Dim found As ucrOutputPage = Nothing
         For Each outputPage In _allOutputPages
             If outputPage.Tag = tabName Then
-                found = outputPage
+                _allOutputPages.Remove(outputPage)
                 Exit For
             End If
         Next
-        _allOutputPages.Remove(found)
         _outputLogger.FilteredOutputs.Remove(_outputLogger.GetFilteredList(tabName))
         UpdateTabsInDropDown()
     End Sub
@@ -203,10 +201,10 @@ Public Class ucrOutputPages
     Private Sub tbAddToNew_Click(sender As Object, e As EventArgs) Handles tbAddToNew.Click
         Dim strTabName As String = "New Tab"
         While Not _outputLogger.IsValidFilteredListName(strTabName)
-            strTabName = strTabName + "1"
+            strTabName &= "1"
         End While
         For Each element In _selectedOutputPage.SelectedElements
-            _outputLogger.AddOutputToFilteredList(element, strTabName)
+            _outputLogger.AddOutputToFilteredList(element.Clone, strTabName)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
     End Sub
@@ -216,6 +214,17 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbDelete_Click(sender As Object, e As EventArgs) Handles tbDelete.Click
+        If SelectedTab() = "Output" Then
+            For Each element In _selectedOutputPage.SelectedElements
+                _outputLogger.DeleteOutputFromMainList(element)
+            Next
+            _selectedOutputPage.ClearAllOutputs()
+            For Each output In _outputLogger.Output
+                _selectedOutputPage.AddNewOutput(output)
+            Next
+            EnableDisableTopButtons()
+            Exit Sub
+        End If
         For Each element In _selectedOutputPage.SelectedElements
             _outputLogger.DeleteOutputFromFilteredList(element, SelectedTab)
         Next
@@ -226,6 +235,18 @@ Public Class ucrOutputPages
         End If
     End Sub
 
+    ''' <summary>
+    ''' Clears the output from "Output tab"
+    ''' </summary>
+    Public Sub ClearOutputWindow()
+        tabControl.SelectedIndex = 0
+        For i = _outputLogger.Output.Count - 1 To 0 Step -1
+            _outputLogger.DeleteOutputFromMainList(_outputLogger.Output(i))
+        Next
+        _selectedOutputPage.ClearAllOutputs()
+        EnableDisableTopButtons()
+    End Sub
+
     Private Sub tbMoveDown_Click(sender As Object, e As EventArgs) Handles tbMoveDown.Click
         For Each element In _selectedOutputPage.SelectedElements.OrderByDescending((Function(x) x.Id))
             _outputLogger.GetFilteredList(SelectedTab).MoveElementDown(element)
@@ -234,7 +255,7 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbMoveUp_Click(sender As Object, e As EventArgs) Handles tbMoveUp.Click
-        For Each element In _selectedOutputPage.SelectedElements
+        For Each element In _selectedOutputPage.SelectedElements.OrderBy((Function(x) x.Id))
             _outputLogger.GetFilteredList(SelectedTab).MoveElementUp(element)
         Next
         RefreshPage()

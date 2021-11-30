@@ -34,7 +34,7 @@ Partial Class ucrOutputPage
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(851, 587)
+        Me.pnlMain.Size = New System.Drawing.Size(598, 362)
         Me.pnlMain.TabIndex = 5
         '
         'ucrOutputPage
@@ -44,7 +44,7 @@ Partial Class ucrOutputPage
         Me.Controls.Add(Me.pnlMain)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ucrOutputPage"
-        Me.Size = New System.Drawing.Size(851, 587)
+        Me.Size = New System.Drawing.Size(598, 362)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

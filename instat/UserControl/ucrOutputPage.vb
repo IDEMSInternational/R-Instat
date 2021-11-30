@@ -29,13 +29,13 @@ Public Class ucrOutputPage
     ''' <returns></returns>
     Public ReadOnly Property SelectedElements() As List(Of clsOutputElement)
         Get
-            Dim elemets As New List(Of clsOutputElement)
+            Dim elements As New List(Of clsOutputElement)
             For Each checkbox In _checkBoxes
                 If checkbox.Checked Then
-                    elemets.Add(checkbox.Tag)
+                    elements.Add(checkbox.Tag)
                 End If
             Next
-            Return elemets
+            Return elements
         End Get
     End Property
 
@@ -122,10 +122,11 @@ Public Class ucrOutputPage
                 AddNewImageOutput(outputElement)
         End Select
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
+        pnlMain.PerformLayout()
     End Sub
 
     ''' <summary>
-    ''' Copys selected elenments to clipboard
+    ''' Copies selected elenments to clipboard
     ''' </summary>
     Public Sub CopySelectedElementsToClipboard()
         If CopyOneImageOnly() Then
@@ -195,7 +196,7 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function CopyOneImageOnly() As Boolean
-        If SelectedElements.Count = 1 And SelectedElements(0).OutputType = OutputType.ImageOutput Then
+        If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
             Dim element As clsOutputElement = SelectedElements(0)
             Clipboard.Clear()
             Clipboard.SetImage(element.ImageOutput)

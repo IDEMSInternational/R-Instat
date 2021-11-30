@@ -24,11 +24,11 @@ Public Class clsOutputLogger
     Private _output As List(Of clsOutputElement)
     ''Output not used externally at the moment but will this will need to
     ''change if we are to remove from the output list.
-    'Public ReadOnly Property Output As List(Of OutputElement)
-    '    Get
-    '        Return _output
-    '    End Get
-    'End Property
+    Public ReadOnly Property Output As List(Of clsOutputElement)
+        Get
+            Return _output
+        End Get
+    End Property
 
     ''' <summary>
     ''' Constructor
@@ -98,7 +98,7 @@ Public Class clsOutputLogger
         Dim filteredList As clsOutputList
         filteredList = GetFilteredList(strListName)
         outputElement.Id = filteredList.Output.Count + 1
-        filteredList.Output.Add(outputElement.Clone)
+        filteredList.Output.Add(outputElement)
         RaiseEvent NewOutputAddedToFilteredList(outputElement, strListName)
     End Sub
 
@@ -146,6 +146,14 @@ Public Class clsOutputLogger
     End Sub
 
     ''' <summary>
+    ''' Deletes output from main output list
+    ''' </summary>
+    ''' <param name="outputElement"></param>
+    Public Sub DeleteOutputFromMainList(outputElement As clsOutputElement)
+        _output.RemoveAll(Function(x) x Is outputElement)
+    End Sub
+
+    ''' <summary>
     ''' Returns the filtered list given the name. Will create the list if doesnt already exist.
     ''' </summary>
     ''' <param name="strListName"></param>
@@ -168,10 +176,8 @@ Public Class clsOutputLogger
     ''' <param name="strListName"></param>
     ''' <returns></returns>
     Public Function IsValidFilteredListName(strListName As String) As Boolean
-        If Trim(strListName) Is "" Then
-            Return False
-        End If
-        If _filteredOutputs.Where(Function(x) x.StrName = strListName).Any() Then
+        If Trim(strListName) Is "" OrElse
+            _filteredOutputs.Where(Function(x) x.StrName = strListName).Any() Then
             Return False
         End If
         Return True

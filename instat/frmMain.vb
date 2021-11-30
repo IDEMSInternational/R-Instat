@@ -830,12 +830,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
-        'Dim rstResponse As DialogResult
-        'rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
-        'If rstResponse = DialogResult.Yes Then
-        '    ucrOutput.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
-        'End If
-        'ToDo Need to decide how the main output window works. Can you clear it?
+        Dim rstResponse As DialogResult
+        rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        If rstResponse = DialogResult.Yes Then
+            ucrOutput.UcrOutputPages.ClearOutputWindow()
+        End If
     End Sub
 
     Private Sub mnuOrganiseDataObjectDeleteMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteMetadata.Click
