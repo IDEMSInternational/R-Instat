@@ -195,6 +195,12 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmOutputWindow.Designer.vb">
+      <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />

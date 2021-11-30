@@ -2407,10 +2407,10 @@
     <value>No worksheet loaded</value>
   </data>
   <data name="stsStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 462</value>
+    <value>0, 460</value>
   </data>
   <data name="stsStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 22</value>
+    <value>834, 22</value>
   </data>
   <data name="stsStrip.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2863,7 +2863,7 @@
     <value>No</value>
   </data>
   <data name="Tool_strip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 37</value>
+    <value>834, 37</value>
   </data>
   <data name="Tool_strip.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4375,7 +4375,7 @@
     <value>0, 0</value>
   </data>
   <data name="mnuBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 24</value>
+    <value>834, 24</value>
   </data>
   <data name="mnuBar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -4432,7 +4432,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 168</value>
+    <value>72, 168</value>
   </data>
   <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4471,7 +4471,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 168</value>
+    <value>178, 168</value>
   </data>
   <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4501,10 +4501,10 @@
     <value>1</value>
   </data>
   <data name="splMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 168</value>
+    <value>255, 168</value>
   </data>
   <data name="splMetadata.SplitterDistance" type="System.Int32, mscorlib">
-    <value>71</value>
+    <value>72</value>
   </data>
   <data name="splMetadata.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4552,7 +4552,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 168</value>
+    <value>174, 168</value>
   </data>
   <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4591,7 +4591,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 168</value>
+    <value>395, 168</value>
   </data>
   <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4621,10 +4621,10 @@
     <value>1</value>
   </data>
   <data name="splLogScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 168</value>
+    <value>574, 168</value>
   </data>
   <data name="splLogScript.SplitterDistance" type="System.Int32, mscorlib">
-    <value>172</value>
+    <value>174</value>
   </data>
   <data name="splLogScript.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4657,10 +4657,10 @@
     <value>1</value>
   </data>
   <data name="splExtraWindows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 168</value>
+    <value>834, 168</value>
   </data>
   <data name="splExtraWindows.SplitterDistance" type="System.Int32, mscorlib">
-    <value>253</value>
+    <value>255</value>
   </data>
   <data name="splExtraWindows.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4708,7 +4708,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 228</value>
+    <value>384, 226</value>
   </data>
   <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4747,7 +4747,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 228</value>
+    <value>445, 226</value>
   </data>
   <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4777,10 +4777,10 @@
     <value>1</value>
   </data>
   <data name="splDataOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 228</value>
+    <value>834, 226</value>
   </data>
   <data name="splDataOutput.SplitterDistance" type="System.Int32, mscorlib">
-    <value>381</value>
+    <value>384</value>
   </data>
   <data name="splDataOutput.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4813,7 +4813,7 @@
     <value>1</value>
   </data>
   <data name="splOverall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 401</value>
+    <value>834, 399</value>
   </data>
   <data name="splOverall.SplitterDistance" type="System.Int32, mscorlib">
     <value>168</value>
@@ -4900,7 +4900,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>828, 484</value>
+    <value>834, 482</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
