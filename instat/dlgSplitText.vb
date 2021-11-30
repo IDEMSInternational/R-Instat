@@ -181,12 +181,12 @@ Public Class dlgSplitText
         End If
         clsTextComponentsFixed.RemoveParameterByName("pattern")
         clsTextComponentsMaximum.RemoveParameterByName("pattern")
-        clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             strPattern = Chr(34) & ucrInputRegex.GetText & Chr(34)
             clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", strPattern, iPosition:=1)
         Else
+            clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
             clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
             clsTextComponentsFixed.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
