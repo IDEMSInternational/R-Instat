@@ -2874,6 +2874,7 @@
       <DependentUpon>ucrReoGrid.vb</DependentUpon>
     </Compile>
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
+	</Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -5142,6 +5143,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
       <DependentUpon>ucrReoGrid.vb</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </EmbeddedResource>
