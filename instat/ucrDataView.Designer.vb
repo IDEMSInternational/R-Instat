@@ -590,7 +590,7 @@ Partial Class ucrDataView
         '
         'linkHelpIntroduction
         '
-        Me.linkHelpIntroduction.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpIntroduction.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpIntroduction.AutoSize = True
         Me.linkHelpIntroduction.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpIntroduction.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -603,7 +603,7 @@ Partial Class ucrDataView
         '
         'linkHelpInstructionVideos
         '
-        Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpInstructionVideos.AutoSize = True
         Me.linkHelpInstructionVideos.Enabled = False
         Me.linkHelpInstructionVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -618,7 +618,7 @@ Partial Class ucrDataView
         '
         'linkHelpRpackages
         '
-        Me.linkHelpRpackages.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRpackages.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpRpackages.AutoSize = True
         Me.linkHelpRpackages.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRpackages.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -631,7 +631,7 @@ Partial Class ucrDataView
         '
         'linkHelpRInstatWebsite
         '
-        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpRInstatWebsite.AutoSize = True
         Me.linkHelpRInstatWebsite.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRInstatWebsite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -666,7 +666,7 @@ Partial Class ucrDataView
         '
         'linkStartNewDataFrame
         '
-        Me.linkStartNewDataFrame.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartNewDataFrame.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkStartNewDataFrame.AutoSize = True
         Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -679,7 +679,7 @@ Partial Class ucrDataView
         '
         'linkStartOpenFile
         '
-        Me.linkStartOpenFile.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartOpenFile.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkStartOpenFile.AutoSize = True
         Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -692,7 +692,7 @@ Partial Class ucrDataView
         '
         'linkStartOpenLibrary
         '
-        Me.linkStartOpenLibrary.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartOpenLibrary.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkStartOpenLibrary.AutoSize = True
         Me.linkStartOpenLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
