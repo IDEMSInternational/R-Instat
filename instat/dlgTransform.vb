@@ -238,8 +238,6 @@ Public Class dlgTransform
         dctSubtractValues.Add("0", "0")
         dctSubtractValues.Add("32", "32")
         dctSubtractValues.Add("1970", "1970")
-        'dctSubtractValues.Add("Mean", "mean")
-        'dctSubtractValues.Add("Min", "min")
         ucrInputSubtract.SetItems(dctSubtractValues)
         ucrInputSubtract.AddQuotesIfUnrecognised = False
 
@@ -265,8 +263,6 @@ Public Class dlgTransform
         dctDivideValues.Add("25.4", "25.4")
         dctDivideValues.Add("365.25", "365.25")
         dctDivideValues.Add("1440", "1440")
-        'dctDivideValues.Add("sd", "sd")
-        'dctDivideValues.Add("range", "range")
         ucrInputDivide.SetItems(dctDivideValues)
         ucrInputDivide.AddQuotesIfUnrecognised = False
 
