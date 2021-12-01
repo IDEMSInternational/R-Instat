@@ -564,6 +564,7 @@ Public Class ucrDataView
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
                     Continue For
                 End If
+                frmConvertToNumeric.Close()
             End If
         Next
     End Sub
