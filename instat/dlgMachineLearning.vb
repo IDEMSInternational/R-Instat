@@ -346,8 +346,8 @@ Public Class dlgMachineLearning
         clsRegressionPredictFunction.SetAssignTo("prediction")
 
         clspostResampleFunction.SetRCommand("postResample")
-        clspostResampleFunction.AddParameter("pred", clsRFunctionParameter:=clsRegressionPredictFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clspostResampleFunction.AddParameter("obs", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clspostResampleFunction.AddParameter("pred", clsRFunctionParameter:=clsRegressionPredictFunction, iPosition:=0) ', bIncludeArgumentName:=False)
+        clspostResampleFunction.AddParameter("obs", clsROperatorParameter:=clsTestClassesOperator, iPosition:=1) ', bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsClassificationTrainFunction)
     End Sub
@@ -355,6 +355,7 @@ Public Class dlgMachineLearning
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverClassificationResponseVariable.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrReceiverRegressionResponse.AddAdditionalCodeParameterPair(clsRegressionTrainDataFunction, New RParameter("response", iNewPosition:=2, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverRegressionResponse.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverMultipleExplanatoryVariable.AddAdditionalCodeParameterPair(clsRegressionTrainDataFunction, New RParameter("train_data", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrSelectorMachineLearning.SetRCode(clsTrainTestSplitFunction, bReset)
