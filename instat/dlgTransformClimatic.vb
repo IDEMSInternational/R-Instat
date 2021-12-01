@@ -75,6 +75,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoMultSpells)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
+        ucrPnlTransform.AddRadioButton(rdoDegree)
 
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCumulative, "function_exp", {"cumsum", "cummin", "cummax"})
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
@@ -105,6 +106,7 @@ Public Class dlgTransformClimatic
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
+        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 
         ' What is this used for? I don't think this requires a key.
         ucrReceiverDate.Selector = ucrSelectorTransform
@@ -119,6 +121,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.Selector = ucrSelectorTransform
         ucrReceiverData.strSelectorHeading = "Numerics"
         ucrReceiverData.SetIncludedDataTypes({"numeric"})
+        ucrReceiverData.SetLinkedDisplayControl(lblData)
 
         ucrReceiverEvap.Selector = ucrSelectorTransform
         ucrReceiverEvap.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
@@ -126,6 +129,19 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.bWithQuotes = False
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
+
+        ucrReceiverTMax.Selector = ucrSelectorTransform
+        ucrReceiverTMax.SetClimaticType("tmax")
+        ucrReceiverTMax.bAutoFill = True
+        ucrReceiverTMax.SetLinkedDisplayControl(lblTMax)
+
+        ucrReceiverTMin.Selector = ucrSelectorTransform
+        ucrReceiverTMin.SetClimaticType("tmin")
+        ucrReceiverTMin.bAutoFill = True
+        ucrReceiverTMin.SetLinkedDisplayControl(lblTMin)
+
+        ucrReceiverTMean.Selector = ucrSelectorTransform
+        ucrReceiverTMean.SetLinkedDisplayControl(lblTMean)
 
         ucrChkGroupByYear.SetText("Calculate by Year")
 
@@ -203,6 +219,11 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
+        'Degree
+        ucrChkUseMaxMin.SetText("Use Max and Min")
+        ucrChkUseMaxMin.AddToLinkedControls({ucrReceiverTMax, ucrReceiverTMin}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUseMaxMin.AddToLinkedControls(ucrReceiverTMean, {False}, bNewLinkedHideIfParameterMissing:=True)
+
         'save control 
         ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetSaveTypeAsColumn()
@@ -226,6 +247,8 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
         ucrPnlTransform.AddToLinkedControls(ucrChkGroupByYear, {rdoCount, rdoMoving, rdoSpell, rdoMultSpells, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrReceiverYear, ucrReceiverData}, {rdoCumulative, rdoCount, rdoMoving, rdoMultSpells, rdoSpell, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls(ucrChkUseMaxMin, {rdoDegree}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkCircular.AddToLinkedControls(ucrInputCircularPosition, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCircular.AddToLinkedControls(ucrInputPosition, {False}, bNewLinkedHideIfParameterMissing:=True)
