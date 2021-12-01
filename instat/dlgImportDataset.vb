@@ -1128,7 +1128,13 @@ Public Class dlgImportDataset
 
     Private Sub RemoveMissingValues()
         Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
-        If Not strFileExtension = ".rds" AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportExcelMulti AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportMultipleFiles AndAlso ucrBase.clsRsyntax.clsBaseFunction IsNot clsImportMultipleTextFiles Then
+        If strFileExtension = ".rds" _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
+        Else
             ucrChkDropEmptyCols.Visible = True
             If ucrChkDropEmptyCols.Checked Then
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
@@ -1139,9 +1145,6 @@ Public Class dlgImportDataset
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
             End If
-        Else
-            ucrChkDropEmptyCols.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
         End If
     End Sub
 
