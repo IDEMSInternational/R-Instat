@@ -685,10 +685,10 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
-        Me.linkStartOpenFile.Size = New System.Drawing.Size(81, 13)
+        Me.linkStartOpenFile.Size = New System.Drawing.Size(84, 13)
         Me.linkStartOpenFile.TabIndex = 4
         Me.linkStartOpenFile.TabStop = True
-        Me.linkStartOpenFile.Text = "Open from file..."
+        Me.linkStartOpenFile.Text = "Import from file..."
         '
         'linkStartOpenLibrary
         '
@@ -698,10 +698,10 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
         Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
-        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(95, 13)
+        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(98, 13)
         Me.linkStartOpenLibrary.TabIndex = 5
         Me.linkStartOpenLibrary.TabStop = True
-        Me.linkStartOpenLibrary.Text = "Open from library..."
+        Me.linkStartOpenLibrary.Text = "Import from library..."
         '
         'TblPanPageDisplay
         '
