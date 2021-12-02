@@ -129,7 +129,7 @@ Public Class dlgFromLibrary
         dlgImportDataset.bFromLibrary = True 'set flag that this should open from library
         dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.ShowDialog()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
@@ -210,11 +210,21 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Function CheckString(ByVal strValue As String)
-        Dim strLength As Integer = strValue.IndexOf(" ")
-        If strLength = -1 Then
+        Dim iLength As Integer = strValue.IndexOf(" ")
+        If iLength = -1 Then
             Return strValue
         Else
-            Return strValue.Substring(0, strLength)
+            Return strValue.Substring(0, iLength)
+        End If
+    End Function
+
+    Private Function FindStringInBracket(ByVal strValue As String)
+        Dim iStartIndex As Integer = strValue.IndexOf("(") + 1
+        Dim iLength As Integer = strValue.IndexOf(")") - iStartIndex
+        If iLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(iStartIndex, iLength)
         End If
     End Function
 
@@ -241,7 +251,8 @@ Public Class dlgFromLibrary
     ''' in importing datasets of different R types 
     ''' </summary>
     Private Sub SetParameterValues()
-        Dim strSelectedDataName As String
+        Dim strSelectedText As String = Nothing
+        Dim strSelectedDataName, strDataNameFromBracket As String
         Dim strVecOutput As CharacterVector
         Dim strRClass As String = ""
 
@@ -249,8 +260,16 @@ Public Class dlgFromLibrary
             Exit Sub
         End If
 
-        strSelectedDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
-        clsDataFunction.AddParameter("X", strSelectedDataName)
+        strSelectedText = lstCollection.SelectedItems(0).SubItems(0).Text
+
+        strDataNameFromBracket = FindStringInBracket(strSelectedText)
+        strSelectedDataName = CheckString(strSelectedText)
+
+        If strSelectedText.Contains("(") Then
+            clsDataFunction.AddParameter("X", strDataNameFromBracket)
+        Else
+            clsDataFunction.AddParameter("X", strSelectedDataName)
+        End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines
         frmMain.clsRLink.RunInternalScriptGetOutput(clsDataFunction.Clone.ToScript(), bSilent:=True)
