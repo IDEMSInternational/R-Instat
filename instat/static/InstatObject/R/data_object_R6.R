@@ -2490,15 +2490,21 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 #   2, 1, "AMJ"
 #   2, 6, "SON"
 DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
-  mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
-  quarters <- seq(1,4)
   s_month <- seq(1,12)
-  if (quarter %in% quarters && start_month %in% s_month){
-    switch(quarter,
-      "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
-      "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
-      "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
-      "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
+  if (start_month %in% s_month){
+    switch(start_month,
+      "1" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JFM", "2" = "AMJ", "3" = "JAS", "4" = "OND"))},
+      "2" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "FMA", "2" = "MJJ", "3" = "ASO", "4" = "NDJ"))},
+      "3" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "MAM", "2" = "JJA", "3" = "SON", "4" = "DJF"))},
+      "4" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "AMJ", "2" = "JAS", "3" = "OND", "4" = "JFM"))},
+      "5" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "MJJ", "2" = "ASO", "3" = "NDJ", "4" = "FMA"))},
+      "6" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JJA", "2" = "SON", "3" = "DJF", "4" = "MAM"))},
+      "7" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JAS", "2" = "OND", "3" = "JFM", "4" = "AMJ"))},
+      "8" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "ASO", "2" = "NDJ", "3" = "FMA", "4" = "MJJ"))},
+      "9" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "SON", "2" = "DJF", "3" = "MAM", "4" = "JJA"))},
+      "10"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "OND", "2" = "JFM", "3" = "AMJ", "4" = "JAS"))},
+      "11"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "NDJ", "2" = "FMA", "3" = "MJJ", "4" = "ASO"))},
+      "12"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "DJF", "2" = "MAM", "3" = "JJA", "4" = "SON"))},
     )
     return(qtr)
   }
@@ -2594,22 +2600,16 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     quarter_labels <- c()
     if(s_shift) {
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
-      for(num in s_quarter_val_vector){
-        s_quarter_label_vector <- self$get_quarter_label(num, s_start_month)
-        quarter_labels <- c(quarter_labels, s_quarter_label_vector)
-      }
+      quarter_labels <- self$get_quarter_label(s_quarter_val_vector, s_start_month)
       col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = make_factor(quarter_labels), adjacent_column = adjacent_column, before = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted quarter starting on day", s_start_day))
     } 
     else {
       quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
-      for(num in quarter_val_vector){
-        quarter_label_vector <- self$get_quarter_label(num, s_start_month)
-        quarter_labels <- c(quarter_labels, quarter_label_vector)
-      }
+      quarter_labels <- self$get_quarter_label(quarter_val_vector, s_start_month)
       col_name <- next_default_item(prefix = "quarter_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = make_factor(quarter_labels), adjacent_column = adjacent_column, before = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
     }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
