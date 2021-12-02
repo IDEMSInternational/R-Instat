@@ -72,7 +72,6 @@ Public Class dlgTransform
         Dim dctMultiplyValues As New Dictionary(Of String, String)
         Dim dctDivideValues As New Dictionary(Of String, String)
         Dim dctAddValues As New Dictionary(Of String, String)
-        Dim dctConstantValues As New Dictionary(Of String, String)
         Dim dctPowerValues As New Dictionary(Of String, String)
 
         ucrPnlTransformOptions.AddRadioButton(rdoRank)
@@ -206,12 +205,7 @@ Public Class dlgTransform
         ucrInputPower.bAllowNonConditionValues = True
 
         ucrInputConstant.SetParameter(New RParameter("c", 1))
-        dctConstantValues.Add("0", "0")
-        dctConstantValues.Add("2", "2")
-        dctConstantValues.Add("5", "5")
-        dctConstantValues.Add("-5", "-5")
-        dctConstantValues.Add("0.5", "0.5")
-        ucrInputConstant.SetItems(dctConstantValues)
+        ucrInputConstant.SetItems(dctPowerValues)
         ucrInputConstant.AddQuotesIfUnrecognised = False
 
         ucrChkAddConstant.SetText("Add Constant")
@@ -609,17 +603,14 @@ Public Class dlgTransform
     End Sub
 
     Private Sub ResetPreview()
-        If bResetRCode Then
-            If ucrChkPreview.Checked Then
-                clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
-                If ucrChkEditPreview.Checked Then
-                    ucrInputPreview.IsReadOnly = False
-                Else
-                    ucrInputPreview.IsReadOnly = True
-                End If
-            Else
-                clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
-            End If
+        If Not bResetRCode Then
+            Exit Sub
+        End If
+        If ucrChkPreview.Checked Then
+            clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
+            ucrInputPreview.IsReadOnly = Not ucrChkEditPreview.Checked
+        Else
+            clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
         End If
     End Sub
 
