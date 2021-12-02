@@ -353,7 +353,8 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
@@ -425,4 +426,14 @@ Public Class ucrColumnMetadata
         dlgAddComment.ShowDialog()
     End Sub
 
+    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextColumnSelection.Click
+        dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub mnuColumnContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextRemoveCurrentColumnSelection.Click
+        StartWait()
+        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
+        EndWait()
+    End Sub
 End Class
