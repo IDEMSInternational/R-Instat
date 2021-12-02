@@ -32,6 +32,9 @@ Public Class sdgSummaries
     End Sub
 
     Public Sub InitialiseControls()
+
+        ucrButtonsSummaries.iHelpTopicID = 183
+
         lstCheckboxes = New List(Of ucrCheck)
 
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
