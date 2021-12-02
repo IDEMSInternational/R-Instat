@@ -564,6 +564,7 @@ Public Class ucrDataView
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
                     Continue For
                 End If
+                frmConvertToNumeric.Close()
             End If
         Next
     End Sub
@@ -596,15 +597,15 @@ Public Class ucrDataView
         frmMain.bDataSaved = False
     End Sub
 
-    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+    Private Sub linkStartNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
         dlgNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+    Private Sub linkStartOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+    Private Sub linkStartOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
         dlgFromLibrary.ShowDialog()
     End Sub
 
@@ -770,5 +771,4 @@ Public Class ucrDataView
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
-
 End Class
