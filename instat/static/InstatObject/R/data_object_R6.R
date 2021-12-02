@@ -2491,21 +2491,10 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 #   2, 6, "SON"
 DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
   s_month <- seq(1,12)
+  mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
   if (start_month %in% s_month){
-    switch(start_month,
-      "1" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JFM", "2" = "AMJ", "3" = "JAS", "4" = "OND"))},
-      "2" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "FMA", "2" = "MJJ", "3" = "ASO", "4" = "NDJ"))},
-      "3" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "MAM", "2" = "JJA", "3" = "SON", "4" = "DJF"))},
-      "4" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "AMJ", "2" = "JAS", "3" = "OND", "4" = "JFM"))},
-      "5" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "MJJ", "2" = "ASO", "3" = "NDJ", "4" = "FMA"))},
-      "6" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JJA", "2" = "SON", "3" = "DJF", "4" = "MAM"))},
-      "7" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "JAS", "2" = "OND", "3" = "JFM", "4" = "AMJ"))},
-      "8" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "ASO", "2" = "NDJ", "3" = "FMA", "4" = "MJJ"))},
-      "9" = { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "SON", "2" = "DJF", "3" = "MAM", "4" = "JJA"))},
-      "10"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "OND", "2" = "JFM", "3" = "AMJ", "4" = "JAS"))},
-      "11"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "NDJ", "2" = "FMA", "3" = "MJJ", "4" = "ASO"))},
-      "12"= { qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = "DJF", "2" = "MAM", "3" = "JJA", "4" = "SON"))},
-    )
+    if (start_month==1){ qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = paste(mabb[start_month:(start_month+2)], collapse=""), "2" = paste(mabb[(start_month+3):(start_month+5)], collapse=""), "3" = paste(mabb[(start_month+6):(start_month+8)], collapse=""), "4" = paste(mabb[(start_month+9):(start_month+11)], collapse="")))}
+    else{qtr <- plyr::revalue(x = factor(quarter), replace=c("1" = paste(mabb[start_month:(start_month+2)], collapse=""), "2" = paste(mabb[(start_month+3):(start_month+5)], collapse=""), "3" = paste(mabb[(start_month+6):(start_month+8)], collapse=""), "4" = paste(mabb[(start_month+9):(start_month+11)], collapse="")))}
     return(qtr)
   }
   else stop("The quarter or starting month is not valid")
