@@ -262,7 +262,7 @@ Public Class Translations
                         'Ignore comment lines
                     Case "!"
                         'Add negation pattern to negation list
-                        lstIgnoreNegations.Add(strIgnoreFileLine)
+                        lstIgnoreNegations.Add(strIgnoreFileLine.Substring(1)) 'remove leading '!'
                     Case Else
                         'Add pattern to ignore list
                         lstIgnore.Add(strIgnoreFileLine)
