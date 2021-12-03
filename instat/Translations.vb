@@ -270,63 +270,65 @@ Public Class Translations
             Loop
         End Using
 
-        'If the ignore file contained at least one pattern
-        If lstIgnore.Count > 0 OrElse lstIgnoreNegations.Count > 0 Then
+        'If the ignore file didn't contain any specifications, then exit
+        If lstIgnore.Count <= 0 AndAlso lstIgnoreNegations.Count <= 0 Then
+            MsgBox("The " & strPath & " ignore file was processed. No ignore specifications were found. " &
+                   "The database was not updated. The application will now exit.", MsgBoxStyle.Exclamation)
+            Application.Exit()
+        End If
 
-            'create the SQL command to update the database
-            Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE "
+        'create the SQL command to update the database
+        Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE "
 
-            If lstIgnore.Count > 0 Then
-                strSqlUpdate &= "("
-                For iListPos As Integer = 0 To lstIgnore.Count - 1
-                    strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                    strSqlUpdate &= "control_name LIKE '" & lstIgnore.Item(iListPos) & "'"
-                Next iListPos
-                strSqlUpdate &= ")"
-            End If
+        If lstIgnore.Count > 0 Then
+            strSqlUpdate &= "("
+            For iListPos As Integer = 0 To lstIgnore.Count - 1
+                strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                strSqlUpdate &= "control_name LIKE '" & lstIgnore.Item(iListPos) & "'"
+            Next iListPos
+            strSqlUpdate &= ")"
+        End If
 
-            strSqlUpdate &= If(lstIgnore.Count > 0 AndAlso lstIgnoreNegations.Count > 0, " AND ", "")
+        If lstIgnoreNegations.Count > 0 Then
+            strSqlUpdate &= If(lstIgnore.Count > 0, " AND ", "")
+            strSqlUpdate &= "NOT ("
+            For iListPos As Integer = 0 To lstIgnoreNegations.Count - 1
+                strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                strSqlUpdate &= "control_name LIKE '" & lstIgnoreNegations.Item(iListPos) & "'"
+            Next iListPos
+            strSqlUpdate &= ")"
+        End If
 
-            If lstIgnoreNegations.Count > 0 Then
-                strSqlUpdate &= "NOT ("
-                For iListPos As Integer = 0 To lstIgnoreNegations.Count - 1
-                    strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                    strSqlUpdate &= "control_name LIKE '" & lstIgnoreNegations.Item(iListPos) & "'"
-                Next iListPos
-                strSqlUpdate &= ")"
-            End If
+        'execute the SQL command
+        Try
+            'specify the path of the SQLite database that contains the translations (2 levels up from the execution folder)
+            Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
+            strDbPath = Directory.GetParent(strDbPath).FullName
+            strDbPath = Path.Combine(strDbPath, "translations")
+            strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
 
-            'execute the SQL command
-            Try
-                'specify the path of the SQLite database that contains the translations (2 levels up from the execution folder)
-                Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
-                strDbPath = Directory.GetParent(strDbPath).FullName
-                strDbPath = Path.Combine(strDbPath, "translations")
-                strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
-
-                'connect to the database and execute the SQL command
-                Dim clsBuilder As New SQLiteConnectionStringBuilder With {
+            'connect to the database and execute the SQL command
+            Dim clsBuilder As New SQLiteConnectionStringBuilder With {
                     .FailIfMissing = True,
                     .DataSource = strDbPath}
-                Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
-                    Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
-                        clsConnection.Open()
-                        Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
-                        clsConnection.Close()
-                    End Using
+            Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
+                Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
+                    clsConnection.Open()
+                    Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
+                    clsConnection.Close()
+                    MsgBox("The " & strPath & " ignore file was processed. " &
+                           iRowsUpdated & " database rows were updated. " &
+                           "The application will now exit.", MsgBoxStyle.Exclamation)
                 End Using
-            Catch e As Exception
-                MsgBox(e.Message & Environment.NewLine &
-                       "An error occured processing ignore file: " & strPath, MsgBoxStyle.Exclamation)
-            End Try
-
-        End If
+            End Using
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine & "An error occured processing ignore file: " &
+                   strPath, MsgBoxStyle.Exclamation)
+        End Try
 
         'This sub should only be used by developers to process the translation ignore file.
         'Therefore, exit the application with a message to ensure that this sub is not run 
         'accidentally in the release version. 
-        MsgBox("The " & strPath &
-               " ignore file was processed. The application will now exit.", MsgBoxStyle.Exclamation)
         Application.Exit()
     End Sub
 
