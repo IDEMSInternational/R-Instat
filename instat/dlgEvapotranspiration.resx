@@ -355,7 +355,7 @@
     <value>5, 362</value>
   </data>
   <data name="grpMissingDataOpts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 98</value>
+    <value>175, 98</value>
   </data>
   <data name="grpMissingDataOpts.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -541,7 +541,7 @@
     <value>8, 31</value>
   </data>
   <data name="ucrChkWind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 20</value>
+    <value>97, 20</value>
   </data>
   <data name="ucrChkWind.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -558,41 +558,53 @@
   <data name="&gt;&gt;ucrChkWind.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblWindSpeed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrReceiverWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 32</value>
   </data>
-  <data name="lblWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 14</value>
+  <data name="ucrReceiverWindSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="lblWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 15</value>
+  <data name="ucrReceiverWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="lblWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="ucrReceiverWindSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="lblWindSpeed.Text" xml:space="preserve">
-    <value>WindSpeed:</value>
+  <data name="&gt;&gt;ucrReceiverWindSpeed.Name" xml:space="preserve">
+    <value>ucrReceiverWindSpeed</value>
   </data>
-  <data name="&gt;&gt;lblWindSpeed.Name" xml:space="preserve">
-    <value>lblWindSpeed</value>
+  <data name="&gt;&gt;ucrReceiverWindSpeed.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblWindSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWindSpeed.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverWindSpeed.Parent" xml:space="preserve">
     <value>grpWindSpeed</value>
   </data>
-  <data name="&gt;&gt;lblWindSpeed.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverWindSpeed.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="grpWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 363</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 640</value>
+  <data name="grpWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 97</value>
+  </data>
+  <data name="grpWindSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="grpWindSpeed.Text" xml:space="preserve">
+    <value>Wind Speed</value>
+  </data>
+  <data name="&gt;&gt;grpWindSpeed.Name" xml:space="preserve">
+    <value>grpWindSpeed</value>
+  </data>
+  <data name="&gt;&gt;grpWindSpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpWindSpeed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpWindSpeed.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="rdoHargreavesSamani.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -649,7 +661,7 @@
     <value>1</value>
   </data>
   <data name="rdoPenmanMonteith.Text" xml:space="preserve">
-    <value>PenmanMonteith</value>
+    <value>Penman-Monteith</value>
   </data>
   <data name="rdoPenmanMonteith.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -709,7 +721,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputMissingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 493</value>
+    <value>132, 493</value>
   </data>
   <data name="ucrInputMissingMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -771,29 +783,14 @@
   <data name="&gt;&gt;ucrInputSolar.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="ucrReceiverRadiation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 304</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="ucrReceiverRadiation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverRadiation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverRadiation.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRadiation.Name" xml:space="preserve">
-    <value>ucrReceiverRadiation</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRadiation.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRadiation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRadiation.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>422, 640</value>
   </data>
   <data name="ucrInputCrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 520</value>
@@ -1059,52 +1056,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 32</value>
+  <data name="ucrReceiverRadiation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 304</value>
   </data>
-  <data name="ucrReceiverWindSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverRadiation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverRadiation.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="ucrReceiverRadiation.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Name" xml:space="preserve">
-    <value>ucrReceiverWindSpeed</value>
+  <data name="&gt;&gt;ucrReceiverRadiation.Name" xml:space="preserve">
+    <value>ucrReceiverRadiation</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverRadiation.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.Parent" xml:space="preserve">
-    <value>grpWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverWindSpeed.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 363</value>
-  </data>
-  <data name="grpWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 97</value>
-  </data>
-  <data name="grpWindSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="grpWindSpeed.Text" xml:space="preserve">
-    <value>Wind Speed</value>
-  </data>
-  <data name="&gt;&gt;grpWindSpeed.Name" xml:space="preserve">
-    <value>grpWindSpeed</value>
-  </data>
-  <data name="&gt;&gt;grpWindSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpWindSpeed.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverRadiation.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpWindSpeed.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;ucrReceiverRadiation.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
 </root>
