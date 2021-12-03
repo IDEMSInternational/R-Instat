@@ -52,7 +52,7 @@ Public Class Translations
         ' The 'SetTranslateIgnore' function call below should normally be commented out.
         ' It only needs be uncommented when the 'translateIgnore.txt' file is updated, and the 
         ' changes need to be applied to the database.
-        SetTranslateIgnore()
+        'SetTranslateIgnore()
 
         If IsNothing(tsCollection) OrElse IsNothing(ctrParent) OrElse IsNothing(TryCast(ctrParent, Form)) Then
             Exit Sub
@@ -230,11 +230,19 @@ Public Class Translations
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
-    '''    TODO
+    '''    Updates the `TranslateWinForm` library database based on the specifications in the 
+    '''    'translateIgnore.txt' file. This file provides a way to ignore specified WinForm 
+    '''    controls when the application or dialog is translated into a different language.
+    '''    <para>
+    '''    For example, this file can be used to ensure that text that references pre-existing data 
+    '''    or meta data (e.g. a file name, data frame name, column name, cell value etc.) stays the 
+    '''    same, even when the rest of the dialog is translated into French or Portuguese.
+    '''    </para><para>
+    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
+    '''    database specifies all the controls to ignore during the translation.  </para>  
     ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Shared Sub SetTranslateIgnore()
-        Dim iRowsUpdated As Integer = 0
         Dim lstIgnore As New List(Of String)
         Dim lstIgnoreNegations As New List(Of String)
 
@@ -293,7 +301,6 @@ Public Class Translations
                 'specify the path of the SQLite database that contains the translations (2 levels up from the execution folder)
                 Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
                 strDbPath = Directory.GetParent(strDbPath).FullName
-                'strDbPath = String.Concat(strDbPath, "\translations")
                 strDbPath = Path.Combine(strDbPath, "translations")
                 strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
 
@@ -304,7 +311,7 @@ Public Class Translations
                 Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
                     Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
                         clsConnection.Open()
-                        iRowsUpdated = clsSqliteCmd.ExecuteNonQuery()
+                        Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
                         clsConnection.Close()
                     End Using
                 End Using

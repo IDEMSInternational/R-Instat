@@ -4,7 +4,7 @@
 # translated into a different language.
 # 
 # For example, this file can be used to ensure that a specific label's text stays the same, even 
-# when the the rest of the dialog is translated into French or Portuguese.
+# when the rest of the dialog is translated into French or Portuguese.
 # 
 # Examples of controls that should be ignored (i.e. never translated) include:
 # 
