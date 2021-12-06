@@ -43,6 +43,8 @@ Public Class sdgCombineGraphOptions
         grdCurrSheet.Rows = ucrNudRows.Value
         grdCurrSheet.Columns = ucrNudColumns.Value
 
+        ucrsdgLayoutBase.iHelpTopicID = 431
+
         ucrNudColumns.SetParameter(New RParameter("ncol", 1))
         ucrNudRows.SetParameter(New RParameter("nrow", 2))
 
