@@ -56,7 +56,6 @@ Public Class dlgRecodeNumeric
         ucrNudQuantiles.SetMinMax(4)
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
-        ucrNudMinimum.SetMinMax(5)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
@@ -70,7 +69,7 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.SetRDefault("FALSE")
 
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="5")
         ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveRecode.SetPrefix("recode")
