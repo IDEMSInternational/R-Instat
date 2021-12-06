@@ -72,7 +72,6 @@ Public Class dlgUnstack
         ucrChkCarryColumns.SetText("Columns to Carry:")
         ucrChkCarryColumns.SetParameter(New RParameter("checked", iNewPosition:=0))
         ucrChkCarryColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkCarryColumns.SetRDefault("FALSE")
         ucrChkCarryColumns.AddToLinkedControls(ucrReceiverCarryColumns, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrCarryColumns
@@ -125,6 +124,8 @@ Public Class dlgUnstack
         clsformulaOperator = New ROperator
         clsDummyFunction = New RFunction
         clsDummyCarryFunction = New RFunction
+
+        clsDummyCarryFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         clsDummyFunction.AddParameter("checked", "single", iPosition:=0)
         ucrReceiverFactorToUnstackby.SetMeAsReceiver()
