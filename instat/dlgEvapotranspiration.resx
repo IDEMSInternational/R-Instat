@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTmax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 154</value>
+    <value>321, 154</value>
   </data>
   <data name="lblTmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -151,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 107</value>
+    <value>321, 107</value>
   </data>
   <data name="lblTmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 14</value>
@@ -178,7 +178,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 195</value>
+    <value>323, 195</value>
   </data>
   <data name="lblHumidityMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 17</value>
@@ -205,7 +205,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 240</value>
+    <value>324, 240</value>
   </data>
   <data name="lblHumidityMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 17</value>
@@ -286,7 +286,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 64</value>
+    <value>323, 64</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 14</value>
@@ -514,7 +514,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRadiation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 288</value>
+    <value>323, 288</value>
   </data>
   <data name="lblRadiation.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 14</value>
@@ -541,7 +541,7 @@
     <value>5, 31</value>
   </data>
   <data name="ucrChkWind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
+    <value>103, 20</value>
   </data>
   <data name="ucrChkWind.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -559,7 +559,7 @@
     <value>0</value>
   </data>
   <data name="ucrReceiverWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 32</value>
+    <value>109, 30</value>
   </data>
   <data name="ucrReceiverWindSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -583,10 +583,10 @@
     <value>1</value>
   </data>
   <data name="grpWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 363</value>
+    <value>210, 363</value>
   </data>
   <data name="grpWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 97</value>
+    <value>235, 97</value>
   </data>
   <data name="grpWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -790,7 +790,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>440, 640</value>
+    <value>452, 640</value>
   </data>
   <data name="ucrInputCrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 520</value>
@@ -838,7 +838,7 @@
     <value>16</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 79</value>
+    <value>324, 79</value>
   </data>
   <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -904,7 +904,7 @@
     <value>23</value>
   </data>
   <data name="ucrReceiverHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 259</value>
+    <value>324, 259</value>
   </data>
   <data name="ucrReceiverHumidityMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -928,7 +928,7 @@
     <value>25</value>
   </data>
   <data name="ucrReceiverHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 214</value>
+    <value>324, 214</value>
   </data>
   <data name="ucrReceiverHumidityMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -952,7 +952,7 @@
     <value>27</value>
   </data>
   <data name="ucrReceiverTmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 124</value>
+    <value>324, 124</value>
   </data>
   <data name="ucrReceiverTmin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -976,7 +976,7 @@
     <value>29</value>
   </data>
   <data name="ucrReceiverTmax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 169</value>
+    <value>324, 169</value>
   </data>
   <data name="ucrReceiverTmax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1024,7 +1024,7 @@
     <value>32</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 583</value>
+    <value>5, 583</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 52</value>
@@ -1044,9 +1044,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>33</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1060,7 +1057,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverRadiation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 304</value>
+    <value>324, 304</value>
   </data>
   <data name="ucrReceiverRadiation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
