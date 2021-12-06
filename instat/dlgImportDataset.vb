@@ -655,6 +655,30 @@ Public Class dlgImportDataset
                 ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
             End If
 
+            If strFileExtension = ".r" Then
+                If Not frmMain.mnuViewScriptWindow.Checked Then
+                    frmMain.mnuViewScriptWindow.Checked = True
+                    frmMain.UpdateLayout()
+                End If
+                If frmMain.ucrScriptWindow.txtScript.TextLength > 0 Then
+                    If MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
+                     "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                        Try
+                            frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFileOrFolderPath)
+                        Catch
+                            MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
+                Else
+                    Try
+                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFileOrFolderPath)
+                    Catch
+                        MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End If
+                Me.Close()
+            End If
+
         End If
 
         TryTextPreview()
