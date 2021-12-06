@@ -30,6 +30,9 @@ Public Class sdgOneVarFitModel
 
     Public Sub InitialiseControls()
         'TODO needs a probs argument
+
+        ucrBase.iHelpTopicID = 113
+
         rdoQme.Enabled = False
         rdoMge.Enabled = bRdoMgeEnabled
         ucrPnlFitMethod.SetParameter(New RParameter("method"))
