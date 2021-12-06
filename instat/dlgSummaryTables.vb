@@ -24,9 +24,10 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
-    Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-        clsTabOptionsFunction, clsPxFunction As New RFunction
+        clsTabOptionsFunction, clsPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+        clsTabFootnoteSubtitleFunction As New RFunction
 
     Private clsMutableOperator, clsColumnOperator, clsPipeOperator As New ROperator
 
@@ -149,7 +150,7 @@ Public Class dlgSummaryTables
         clsummaryVariableHeaderLeftTopFunction = New RFunction
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
         clsTableTitleFunction = New RFunction
-        clsTabFootnoteFunction = New RFunction
+        clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
         clsCellsTitleFunction = New RFunction
         clsCellTextFunction = New RFunction
@@ -158,6 +159,8 @@ Public Class dlgSummaryTables
         clsHeaderFormatFunction = New RFunction
         clsTabOptionsFunction = New RFunction
         clsPxFunction = New RFunction
+        clsFootnoteTitleLocationFunction = New RFunction
+        clsFootnoteSubtitleLocationFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
         clsPipeOperator = New ROperator
@@ -220,8 +223,14 @@ Public Class dlgSummaryTables
         clsTableTitleFunction.SetPackageName("gt")
         clsTableTitleFunction.SetRCommand("tab_header")
 
-        clsTabFootnoteFunction.SetPackageName("gt")
-        clsTabFootnoteFunction.SetRCommand("tab_footnote")
+        clsTabFootnoteTitleFunction.SetPackageName("gt")
+        clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
+
+        clsFootnoteTitleLocationFunction.SetPackageName("gt")
+        clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
+
+        clsFootnoteSubtitleLocationFunction.SetPackageName("gt")
+        clsFootnoteSubtitleLocationFunction.SetRCommand("cells_title")
 
         clsTableSourcenoteFunction.SetPackageName("gt")
         clsTableSourcenoteFunction.SetRCommand("table_source_note")
@@ -299,10 +308,11 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteFunction:=clsTabFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
+        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
                                         clsNewCellsTitleFunction:=clsCellsTitleFunction, clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction,
                                         clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction, clsNewTabOptionsFunction:=clsTabOptionsFunction,
-                                        clsNewPipeOperator:=clsPipeOperator, clsNewPxFunction:=clsPxFunction, bReset:=bReset)
+                                        clsNewPipeOperator:=clsPipeOperator, clsNewPxFunction:=clsPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction,
+                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
 

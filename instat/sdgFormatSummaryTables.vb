@@ -1,8 +1,8 @@
 ﻿Imports instat.Translations
 Public Class sdgFormatSummaryTables
-    Private clsTableTitleFunction, clsTabFootnoteFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
-        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-        clsTabOptionsFunction, clsPxFunction As New RFunction
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
+        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
+        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised = False
 
@@ -161,11 +161,14 @@ Public Class sdgFormatSummaryTables
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteFunction As RFunction, clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction,
-        clsNewCellTextFunction As RFunction, clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewTabOptionsFunction As RFunction,
-                        clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction)
+    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction,
+                        clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction, clsNewCellTextFunction As RFunction,
+                        clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction,
+                        clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
+                        clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
-        clsTabFootnoteFunction = clsNewTabFootnoteFunction
+        clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
+        clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
         clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
         clsCellsTitleFunction = clsNewCellsTitleFunction
         clsCellTextFunction = clsNewCellTextFunction
@@ -174,6 +177,8 @@ Public Class sdgFormatSummaryTables
         clsHeaderFormatFunction = clsNewHeaderFormatFunction
         clsTabOptionsFunction = clsNewTabOptionsFunction
         clsPxFunction = clsNewPxFunction
+        clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
+        clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
         clsPipeOperator = clsNewPipeOperator
 
         If Not bControlsInitialised Then
@@ -228,6 +233,42 @@ Public Class sdgFormatSummaryTables
             clsTableTitleFunction.AddParameter("subtitle", Chr(34) & ucrInputSubtitle.GetText() & Chr(34), iPosition:=1)
         Else
             clsTableTitleFunction.RemoveParameterByName("subtitle")
+        End If
+    End Sub
+
+    Private Sub ucrChkTitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTitleFootnote.ControlValueChanged
+        If ucrChkTitleFootnote.Checked Then
+            clsTabFootnoteTitleFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteTitleLocationFunction, iPosition:=2)
+            clsFootnoteTitleLocationFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
+        Else
+            clsFootnoteTitleLocationFunction.RemoveParameterByName("groups")
+            clsTabFootnoteTitleFunction.RemoveParameterByName("locations")
+        End If
+    End Sub
+
+    Private Sub ucrChkSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSubtitleFootnote.ControlValueChanged
+        If ucrChkSubtitleFootnote.Checked Then
+            clsTabFootnoteSubtitleFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteSubtitleLocationFunction, iPosition:=2)
+            clsFootnoteSubtitleLocationFunction.AddParameter("groups", Chr(34) & "subtitle" & Chr(34), iPosition:=0)
+        Else
+            clsFootnoteSubtitleLocationFunction.RemoveParameterByName("groups")
+            clsTabFootnoteSubtitleFunction.RemoveParameterByName("locations")
+        End If
+    End Sub
+
+    Private Sub ucrInputTitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTitleFootnote.ControlValueChanged
+        If Not ucrInputTitleFootnote.IsEmpty Then
+            clsFootnoteTitleLocationFunction.AddParameter("footnote", ucrInputTitleFootnote.GetText, iPosition:=1)
+        Else
+            clsFootnoteTitleLocationFunction.RemoveParameterByName("footnote")
+        End If
+    End Sub
+
+    Private Sub ucrInputSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitleFootnote.ControlValueChanged
+        If Not ucrInputSubtitleFootnote.IsEmpty Then
+            clsFootnoteSubtitleLocationFunction.AddParameter("footnote", ucrInputSubtitleFootnote.GetText, iPosition:=1)
+        Else
+            clsFootnoteSubtitleLocationFunction.RemoveParameterByName("footnote")
         End If
     End Sub
 End Class
