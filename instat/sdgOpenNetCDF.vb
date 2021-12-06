@@ -49,6 +49,8 @@ Public Class sdgOpenNetCDF
 
     Public Sub InitialiseControls()
 
+        ucrBase.iHelpTopicID = 117
+
         clsAsDateMin.SetRCommand("as.Date")
         clsAsDateMax.SetRCommand("as.Date")
 
