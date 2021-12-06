@@ -24,8 +24,11 @@ Public Class sdgOneVarGraph
     End Sub
 
     Public Sub InitialiseControls()
+
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
+
+        ucrButtonsOneVarGraph.iHelpTopicID = 97
 
         ucrInputNumeric.SetParameter(New RParameter("numeric", 2))
         dctNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
