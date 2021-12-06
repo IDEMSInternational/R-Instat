@@ -29,7 +29,7 @@ Public Class frmOutputWindow
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
             e.Cancel = True
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 
@@ -39,7 +39,7 @@ Public Class frmOutputWindow
 
     Public Sub CopyContent()
         'copies the content of the selection in rich text format.
-        ucrRichTextBox.rtbOutput.Copy() 'Warning: Copy is a text method, only copies text...
+        'ucrRichTextBox.rtbOutput.Copy() 'Warning: Copy is a text method, only copies text...
         'Using stream As New IO.MemoryStream
         'Range = New Windows.Documents.TextRange(ucrRichTextBox.rtbOutput.Document.ContentStart, ucrRichTextBox.rtbOutput.Document.ContentEnd)
         'Range.Save(stream, Windows.DataFormats.XamlPackage)
@@ -49,7 +49,7 @@ Public Class frmOutputWindow
     End Sub
 
     Public Sub selectAllText()
-        ucrRichTextBox.rtbOutput.SelectAll()
+        'ucrRichTextBox.rtbOutput.SelectAll()
     End Sub
 
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -59,12 +59,12 @@ Public Class frmOutputWindow
     Private Sub mnuContextRTB_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextRTB.Opening
         'This sub checks whether or not Copy Image should be enabled. It is enabled if one of the selected block is an "1 image paragraph".
         'Could add SaveImageRTB enabled when it exists.
-        For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
-            If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentEnd) AndAlso TypeOf (block) Is System.Windows.Documents.Paragraph AndAlso CType(block, System.Windows.Documents.Paragraph).Inlines.Count = 1 AndAlso TypeOf (CType(block, System.Windows.Documents.Paragraph).Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
-                CopyImageRTB.Enabled = True
-                Exit Sub
-            End If
-        Next
+        'For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
+        'If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentEnd) AndAlso TypeOf (block) Is System.Windows.Documents.Paragraph AndAlso CType(block, System.Windows.Documents.Paragraph).Inlines.Count = 1 AndAlso TypeOf (CType(block, System.Windows.Documents.Paragraph).Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
+        'CopyImageRTB.Enabled = True
+        'Exit Sub
+        'End If
+        'Next
         CopyImageRTB.Enabled = False
     End Sub
 
@@ -82,15 +82,15 @@ Public Class frmOutputWindow
         'Copies the first selected image into the clipboard.
         Dim prphTemp As System.Windows.Documents.Paragraph
         Dim conImage As System.Windows.Documents.InlineUIContainer
-        For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
-            If TypeOf (block) Is System.Windows.Documents.Paragraph Then
-                prphTemp = block
-                If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso prphTemp.Inlines.Count = 1 AndAlso TypeOf (prphTemp.Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
-                    conImage = prphTemp.Inlines.FirstInline
-                    ucrRichTextBox.CopyUIElementToClipboard(conImage.Child)
-                    Exit Sub
-                End If
-            End If
-        Next
+        'For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
+        'If TypeOf (block) Is System.Windows.Documents.Paragraph Then
+        'prphTemp = block
+        'If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso prphTemp.Inlines.Count = 1 AndAlso TypeOf (prphTemp.Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
+        'conImage = prphTemp.Inlines.FirstInline
+        'ucrRichTextBox.CopyUIElementToClipboard(conImage.Child)
+        'Exit Sub
+        'End If
+        'End If
+        'Next
     End Sub
 End Class
