@@ -53,9 +53,10 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetMeAsReceiver()
 
         ucrNudQuantiles.SetParameter(New RParameter("g", 1))
-        ucrNudQuantiles.SetMinMax(4)
+        ucrNudQuantiles.SetMinMax(1)
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
+        ucrNudMinimum.SetMinMax(1)
 
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
