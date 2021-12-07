@@ -158,20 +158,12 @@ Public Class ucrScript
             dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
             If dlgLoad.ShowDialog() = DialogResult.OK Then
-                If txtScript.TextLength > 0 Then
-                    If MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
-                                   "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        Try
-                            txtScript.Text = File.ReadAllText(dlgLoad.FileName)
-                        Catch
-                            MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End Try
-                    End If
-                Else
+                If txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
+              "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                    txtScript.Text = File.ReadAllText(dlgLoad.FileName)
-                Catch
-                    MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(dlgLoad.FileName)
+                    Catch
+                        MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
                 End If
             End If
