@@ -295,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 114</value>
+    <value>272, 113</value>
   </data>
   <data name="lblColumnToUnstack.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>

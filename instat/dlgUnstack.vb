@@ -224,13 +224,13 @@ Public Class dlgUnstack
 
     Private Sub TestOKEnabled()
         If rdoSingle.Checked Then
-            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrReceiverColumnToUnstack.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrReceiverColumnToUnstack.IsEmpty OrElse Not ucrNewDFName.IsComplete OrElse (ucrReceiverCarryColumns.IsEmpty AndAlso ucrChkCarryColumns.Checked) OrElse (ucrInputTextPrefix.IsEmpty AndAlso ucrChkAddPrefix.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
             End If
         ElseIf rdoMultiple.Checked Then
-            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrMultipleColumnsReceiver.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse ucrMultipleColumnsReceiver.IsEmpty OrElse Not ucrNewDFName.IsComplete OrElse (ucrReceiverCarryColumns.IsEmpty AndAlso ucrChkCarryColumns.Checked) OrElse (ucrInputTextPrefix.IsEmpty AndAlso ucrChkAddPrefix.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -308,6 +308,7 @@ Public Class dlgUnstack
                 clsCommaOperator.AddParameter("comma", clsROperatorParameter:=clsTempCommaOperator, iPosition:=1)
             End If
         Else
+            ucrReceiverFactorToUnstackby.SetMeAsReceiver()
             clsSelectDataFunction.RemoveParameterByName("comma")
             clsCommaOperator.RemoveParameterByName("comma")
         End If
@@ -341,7 +342,7 @@ Public Class dlgUnstack
 
     Private Sub CarryColumnsLabelReceiverLocation()
         If rdoRestoreHierarchy.Checked Then
-            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY / 1.9)
+            ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY / 1.8)
             ucrChkCarryColumns.Location = New Point(ucrChkCarryColumns.Location.X, iCarryClomunsY / 2)
         ElseIf rdoSingle.Checked Then
             ucrReceiverCarryColumns.Location = New Point(ucrReceiverCarryColumns.Location.X, iReceiverMaxY / 1.45)
@@ -353,7 +354,7 @@ Public Class dlgUnstack
 
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
