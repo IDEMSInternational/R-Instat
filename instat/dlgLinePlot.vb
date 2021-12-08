@@ -585,7 +585,7 @@ Public Class dlgLinePlot
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsDumbbellFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         End If
         sdgLayerOptions.ShowDialog()
-            bResetLineLayerSubdialog = False
+        bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -629,7 +629,6 @@ Public Class dlgLinePlot
             If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
                 clsRaesFunction.AddParameter("group", "1", iPosition:=3)
                 ucrReceiverGroup.Enabled = False
-
             ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
                 ucrReceiverGroup.Enabled = True
                 ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
@@ -657,11 +656,11 @@ Public Class dlgLinePlot
                 If rdoStep.Checked Then
                     ucrSave.SetPrefix("step_plot")
                     clsOptionsFunction.SetRCommand("geom_step")
-                ElseIf rdoPath.Checked Then
+                Else
                     ucrSave.SetPrefix("path_plot")
                     clsOptionsFunction.SetRCommand("geom_path")
                 End If
-            ElseIf rdoLine.Checked Then
+            Else
                 ucrSave.SetPrefix("line_plot")
                 clsOptionsFunction.SetRCommand("geom_line")
             End If
@@ -694,10 +693,10 @@ Public Class dlgLinePlot
             If ucrChkPathOrStep.Checked Then
                 If rdoStep.Checked Then
                     cmdLinePathStepSmoothOptions.Text = GetTranslation("Step options")
-                ElseIf rdoPath.Checked Then
+                Else
                     cmdLinePathStepSmoothOptions.Text = GetTranslation("Path options")
                 End If
-            ElseIf rdoLine.Checked Then
+            Else
                 cmdLinePathStepSmoothOptions.Text = GetTranslation("Line options")
             End If
         ElseIf rdoSmoothing.Checked Then
@@ -730,13 +729,5 @@ Public Class dlgLinePlot
         Else
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
-
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-
     End Sub
 End Class
