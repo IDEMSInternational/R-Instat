@@ -564,6 +564,27 @@
   <data name="&gt;&gt;tbpTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="UcrCheck1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 16</value>
+  </data>
+  <data name="UcrCheck1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Name" xml:space="preserve">
+    <value>UcrCheck1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Parent" xml:space="preserve">
+    <value>tbpHeader</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrNudStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 310</value>
   </data>
@@ -1519,7 +1540,7 @@
     <value>38</value>
   </data>
   <data name="grpStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 51</value>
+    <value>8, 69</value>
   </data>
   <data name="grpStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 337</value>
@@ -1540,7 +1561,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;grpStyle.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoAllColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1549,7 +1570,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAllColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 16</value>
+    <value>194, 29</value>
   </data>
   <data name="rdoAllColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 17</value>
@@ -1570,13 +1591,13 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllColumns.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoAllRows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="rdoAllRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 16</value>
+    <value>77, 29</value>
   </data>
   <data name="rdoAllRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
@@ -1597,10 +1618,10 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllRows.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrPnlHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 13</value>
+    <value>60, 26</value>
   </data>
   <data name="ucrPnlHeader.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 23</value>
@@ -1618,13 +1639,13 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;ucrPnlHeader.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblHeader.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>6, 31</value>
   </data>
   <data name="lblHeader.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -1645,7 +1666,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;lblHeader.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tbpHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

@@ -89,6 +89,8 @@ Partial Class sdgFormatSummaryTables
         Me.ucrPnlHeader = New instat.UcrPanel()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tbpTable = New System.Windows.Forms.TabPage()
+        Me.ucrInputTableFontColor = New instat.ucrColors()
+        Me.ucrInputTableBackgroundColor = New instat.ucrColors()
         Me.ucrInputStubLabel = New instat.ucrInputTextBox()
         Me.ucrChkAddStubHeader = New instat.ucrCheck()
         Me.ucrNudTableFontSize = New instat.ucrNud()
@@ -103,8 +105,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
-        Me.ucrInputTableBackgroundColor = New instat.ucrColors()
-        Me.ucrInputTableFontColor = New instat.ucrColors()
+        Me.UcrCheck1 = New instat.ucrCheck()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -267,6 +268,7 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpHeader
         '
+        Me.tbpHeader.Controls.Add(Me.UcrCheck1)
         Me.tbpHeader.Controls.Add(Me.grpStyle)
         Me.tbpHeader.Controls.Add(Me.rdoAllColumns)
         Me.tbpHeader.Controls.Add(Me.rdoAllRows)
@@ -625,6 +627,22 @@ Partial Class sdgFormatSummaryTables
         Me.tbpTable.Name = "tbpTable"
         Me.tbpTable.UseVisualStyleBackColor = True
         '
+        'ucrInputTableFontColor
+        '
+        Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableFontColor.GetSetSelectedIndex = -1
+        Me.ucrInputTableFontColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableFontColor, "ucrInputTableFontColor")
+        Me.ucrInputTableFontColor.Name = "ucrInputTableFontColor"
+        '
+        'ucrInputTableBackgroundColor
+        '
+        Me.ucrInputTableBackgroundColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputTableBackgroundColor.GetSetSelectedIndex = -1
+        Me.ucrInputTableBackgroundColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTableBackgroundColor, "ucrInputTableBackgroundColor")
+        Me.ucrInputTableBackgroundColor.Name = "ucrInputTableBackgroundColor"
+        '
         'ucrInputStubLabel
         '
         Me.ucrInputStubLabel.AddQuotesIfUnrecognised = True
@@ -718,21 +736,11 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
-        'ucrInputTableBackgroundColor
+        'UcrCheck1
         '
-        Me.ucrInputTableBackgroundColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableBackgroundColor.GetSetSelectedIndex = -1
-        Me.ucrInputTableBackgroundColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableBackgroundColor, "ucrInputTableBackgroundColor")
-        Me.ucrInputTableBackgroundColor.Name = "ucrInputTableBackgroundColor"
-        '
-        'ucrInputTableFontColor
-        '
-        Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableFontColor.GetSetSelectedIndex = -1
-        Me.ucrInputTableFontColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableFontColor, "ucrInputTableFontColor")
-        Me.ucrInputTableFontColor.Name = "ucrInputTableFontColor"
+        Me.UcrCheck1.Checked = False
+        resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
+        Me.UcrCheck1.Name = "UcrCheck1"
         '
         'sdgFormatSummaryTables
         '
@@ -841,4 +849,5 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputStyleFillColor As ucrColors
     Friend WithEvents ucrInputTableBackgroundColor As ucrColors
     Friend WithEvents ucrInputTableFontColor As ucrColors
+    Friend WithEvents UcrCheck1 As ucrCheck
 End Class
