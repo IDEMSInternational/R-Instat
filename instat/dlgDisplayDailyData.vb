@@ -177,7 +177,7 @@ Public Class dlgDisplayDailyData
 
         lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR, ucrChkSumMissing})
 
-        ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
+        ' ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
         ucrChkMissing.AddParameterPresentCondition(False, "Misscode", False)
         ucrChkMissing.SetText("Missing Values")
@@ -226,7 +226,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrInputFacetBy, ucrChkNumberOfColumns}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGraphRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkMissing, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
@@ -240,7 +240,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
 
 
-        ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedUpdateFunction:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
         ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="--")
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
@@ -386,7 +386,7 @@ Public Class dlgDisplayDailyData
         ucrChkMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboZero.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboTrace.SetRCode(clsDisplayDailyTable, bReset)
-        ucrInputComboMissing.SetRCode(clsDisplayDailyTable, bReset)
+        'ucrInputComboMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverDayOfYear.SetRCode(clsDisplayDailyGraphFunction, bReset)
