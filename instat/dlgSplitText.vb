@@ -203,7 +203,7 @@ Public Class dlgSplitText
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
-        ucrInputRegex.SetName(sdgConstructRegexExpression.ucrReceiverForCalculation.GetText())
+        ucrInputRegex.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrInputRegex.ControlValueChanged

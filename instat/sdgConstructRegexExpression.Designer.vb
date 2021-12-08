@@ -42,7 +42,7 @@ Partial Class sdgConstructRegexExpression
         Me.ttAddKeyboard = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.lblExpression = New System.Windows.Forms.Label()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.ucrReceiverForRegex = New instat.ucrReceiverExpression()
         Me.grpSymbols.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -257,24 +257,24 @@ Partial Class sdgConstructRegexExpression
         Me.lblExpression.Tag = "Expression"
         Me.lblExpression.Text = "Expression:"
         '
-        'ucrReceiverForCalculation
+        'ucrReceiverForRegex
         '
-        Me.ucrReceiverForCalculation.frmParent = Me
-        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(84, 25)
-        Me.ucrReceiverForCalculation.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
-        Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(191, 21)
-        Me.ucrReceiverForCalculation.strNcFilePath = ""
-        Me.ucrReceiverForCalculation.TabIndex = 196
-        Me.ucrReceiverForCalculation.ucrSelector = Nothing
+        Me.ucrReceiverForRegex.frmParent = Me
+        Me.ucrReceiverForRegex.Location = New System.Drawing.Point(84, 25)
+        Me.ucrReceiverForRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForRegex.Name = "ucrReceiverForRegex"
+        Me.ucrReceiverForRegex.Selector = Nothing
+        Me.ucrReceiverForRegex.Size = New System.Drawing.Size(191, 21)
+        Me.ucrReceiverForRegex.strNcFilePath = ""
+        Me.ucrReceiverForRegex.TabIndex = 196
+        Me.ucrReceiverForRegex.ucrSelector = Nothing
         '
         'sdgConstructRegexExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(341, 213)
-        Me.Controls.Add(Me.ucrReceiverForCalculation)
+        Me.Controls.Add(Me.ucrReceiverForRegex)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.ucrBaseSubdialog)
@@ -307,5 +307,5 @@ Partial Class sdgConstructRegexExpression
     Friend WithEvents cmdAny1 As Button
     Friend WithEvents ttAddKeyboard As ToolTip
     Friend WithEvents lblExpression As Label
-    Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
+    Friend WithEvents ucrReceiverForRegex As ucrReceiverExpression
 End Class

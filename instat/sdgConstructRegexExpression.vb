@@ -35,72 +35,71 @@ Public Class sdgConstructRegexExpression
 
     End Sub
 
-    Public Function GetRegexExpression() As String
-        Return ucrReceiverForCalculation.GetText
-    End Function
-
     Public Sub Reset()
-        ucrReceiverForCalculation.Clear()
+        ucrReceiverForRegex.Clear()
     End Sub
 
     Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".", 1)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition(".", 1)
     End Sub
 
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^", 1)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("^", 1)
     End Sub
 
     Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("$")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("$")
     End Sub
 
     Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\d")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("\\d")
     End Sub
 
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\s")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("\\s")
     End Sub
 
     Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]", 1)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("[]", 1)
     End Sub
 
     Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 3)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("[^ ]", 3)
     End Sub
 
     Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|", 1)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("|", 1)
     End Sub
 
     Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{}", 1)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("{}", 1)
     End Sub
 
     Private Sub cmdNumbers_Click(sender As Object, e As EventArgs) Handles cmdNumbers.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{,}", 2)
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("{,}", 2)
     End Sub
 
     Private Sub cmdZeroOrOne_Click(sender As Object, e As EventArgs) Handles cmdZeroOrOne.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("?")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("?")
     End Sub
 
     Private Sub cmdPlusOne_Click(sender As Object, e As EventArgs) Handles cmdPlusOne.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("\\")
     End Sub
 
     Private Sub cmdPlusZero_Click(sender As Object, e As EventArgs) Handles cmdPlusZero.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
+        ucrReceiverForRegex.AddToReceiverAtCursorPosition("-")
     End Sub
 
+    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+        ucrReceiverForRegex.AddtoCombobox(ucrReceiverForRegex.GetText)
+    End Sub
 End Class

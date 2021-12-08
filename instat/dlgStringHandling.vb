@@ -362,7 +362,7 @@ Public Class dlgStringHandling
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
-        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForCalculation.GetText())
+        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
     Private Sub cmdBackSlashd_Click(sender As Object, e As EventArgs) Handles cmdBackSlashd.Click
