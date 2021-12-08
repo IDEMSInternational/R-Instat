@@ -47,7 +47,7 @@ Public Class dlgLinePlot
     Private clsAnnotateFunction As New RFunction
     Private clsListFunction As New RFunction
     Private clsFormulaFunction As New RFunction
-    Private clsggSlopeFunction As New RFunction
+    Private clsGgSlopeFunction As New RFunction
     Private clsSlopeThemeFunction As New RFunction
     Private clsDumbbellFunction As New RFunction
 
