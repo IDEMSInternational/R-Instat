@@ -40,6 +40,7 @@ Partial Class dlgClusterAnalysis
         Me.ucrSelectorClusterData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlClusterData = New instat.UcrPanel()
         Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.ucrChkHierarcPlot = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoHierarchicalData
@@ -220,11 +221,20 @@ Partial Class dlgClusterAnalysis
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(183, 49)
         Me.ucrPnlSelectData.TabIndex = 8
         '
+        'ucrChkHierarcPlot
+        '
+        Me.ucrChkHierarcPlot.Checked = False
+        Me.ucrChkHierarcPlot.Location = New System.Drawing.Point(8, 295)
+        Me.ucrChkHierarcPlot.Name = "ucrChkHierarcPlot"
+        Me.ucrChkHierarcPlot.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkHierarcPlot.TabIndex = 29
+        '
         'dlgClusterAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(455, 426)
+        Me.Controls.Add(Me.ucrChkHierarcPlot)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkPartitionPlot)
         Me.Controls.Add(Me.ucrBase)
@@ -272,4 +282,5 @@ Partial Class dlgClusterAnalysis
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrChkPartitionPlot As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkHierarcPlot As ucrCheck
 End Class
