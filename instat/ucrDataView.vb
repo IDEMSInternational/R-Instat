@@ -224,9 +224,25 @@ Public Class ucrDataView
             SetDisplayLabels()
             UpdateNavigationButtons()
             SetGridVisibility(True)
+            ResizeLabe()
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
+        End If
+    End Sub
+
+    Private Sub ResizeLabe()
+        If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width OrElse
+            lblRowDisplay.Width > TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width OrElse
+            lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width Then
+            lblRowDisplay.Font = New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+            lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width
+        End If
+        If lblColDisplay.Width < TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width OrElse
+            lblColDisplay.Width > TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width OrElse
+            lblColDisplay.Width = TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width Then
+            lblColDisplay.Font = New Font(lblColDisplay.Font.FontFamily, lblColDisplay.Font.Size - 0.5F, lblColDisplay.Font.Style)
+            lblColDisplay.Width = TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width
         End If
     End Sub
 

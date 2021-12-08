@@ -752,7 +752,6 @@ Partial Class ucrDataView
         '
         'lblColDisplay
         '
-        Me.lblColDisplay.AutoSize = True
         Me.lblColDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColDisplay.Location = New System.Drawing.Point(252, 0)
@@ -808,7 +807,6 @@ Partial Class ucrDataView
         '
         'lblRowDisplay
         '
-        Me.lblRowDisplay.AutoSize = True
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowDisplay.Location = New System.Drawing.Point(125, 0)
@@ -891,7 +889,6 @@ Partial Class ucrDataView
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
         Me.TblPanPageDisplay.ResumeLayout(False)
-        Me.TblPanPageDisplay.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
