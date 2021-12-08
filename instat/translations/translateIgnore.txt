@@ -79,3 +79,12 @@ dlgSplitText_ucrInputPattern%
 # In the 'Filter' dialog, the 'Selected Filter Preview' should not be translated.
 # Fixes issue #6949, related to PR #6956
 dlgRestrict_ucrInputFilterPreview
+
+# In the 'Boxplot' dialog, the selected 'Facet' either for Station, Year or Within Year should not be translated
+# Fixes issue #6185, item a)
+dlgClimaticBoxPlot_ucrInputStation%
+dlgClimaticBoxPlot_ucrInputStation_cboInput%
+dlgClimaticBoxPlot_ucrInputYear%
+dlgClimaticBoxPlot_ucrInputYear_cboInput%
+dlgClimaticBoxPlot_ucrInputWithinYear%
+dlgClimaticBoxPlot_ucrInputWithinYear_cboInput%
