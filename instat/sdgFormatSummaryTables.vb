@@ -2,7 +2,7 @@
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
-        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction As New RFunction
+        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsStyleListFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised = False
 
@@ -43,6 +43,8 @@ Public Class sdgFormatSummaryTables
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
         ucrPnlHeader.AddRadioButton(rdoAllColumns)
         ucrPnlHeader.AddRadioButton(rdoAllRows)
+        ucrPnlHeader.AddParameterValuesCondition(rdoAllColumns, "header", Chr(34) & "all_cols" & Chr(34))
+        ucrPnlHeader.AddParameterValuesCondition(rdoAllRows, "header", Chr(34) & "all_rows" & Chr(34))
 
         ucrChkStyleText.SetText("Add Text style")
         ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextSize, ucrInputStyleTextAlign,
@@ -165,7 +167,7 @@ Public Class sdgFormatSummaryTables
                         clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction, clsNewCellTextFunction As RFunction,
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
-                        clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction)
+                        clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
         clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
@@ -179,6 +181,7 @@ Public Class sdgFormatSummaryTables
         clsPxFunction = clsNewPxFunction
         clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
         clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
+        clsStyleListFunction = clsNewStyleListFunction
         clsPipeOperator = clsNewPipeOperator
 
         If Not bControlsInitialised Then
@@ -210,6 +213,7 @@ Public Class sdgFormatSummaryTables
         ucrInputTableFontWeight.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableWidth.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableFontSize.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlHeader.SetRCode(clsHeaderFormatFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
@@ -279,6 +283,31 @@ Public Class sdgFormatSummaryTables
     Private Sub ucrInputAddSourceNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAddSourceNote.ControlValueChanged
         If Not ucrInputAddSourceNote.IsEmpty Then
             clsTableSourcenoteFunction.AddParameter("sourcenote", ucrInputAddSourceNote.GetText(), iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkStyleText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleText.ControlValueChanged
+        If ucrChkStyleText.Checked Then
+            clsStyleListFunction.AddParameter("textStyle", clsRFunctionParameter:=clsCellTextFunction, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsStyleListFunction.RemoveParameterByName("textStyle")
+        End If
+
+    End Sub
+
+    Private Sub ucrChkStyleBoarder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleBoarder.ControlValueChanged
+        If ucrChkStyleBoarder.Checked Then
+            clsStyleListFunction.AddParameter("boarderStyle", clsRFunctionParameter:=clsCellBorderFunction, bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsStyleListFunction.RemoveParameterByName("boarderStyle")
+        End If
+    End Sub
+
+    Private Sub ucrChkStyleFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleFill.ControlValueChanged
+        If ucrChkStyleFill.Checked Then
+            clsStyleListFunction.AddParameter("fillStyle", clsRFunctionParameter:=clsCellFillFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsStyleListFunction.RemoveParameterByName("fillStyle")
         End If
     End Sub
 End Class
