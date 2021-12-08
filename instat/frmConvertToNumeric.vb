@@ -36,13 +36,8 @@
         End If
     End Sub
 
-    Private Sub ConvertButtons_Click(sender As Object, e As EventArgs) Handles cmdNormalConvert.Click, cmdLabelledConvert.Click
-        Me.Close()
-    End Sub
-
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.DialogResult = DialogResult.Cancel
-        Me.Close()
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
