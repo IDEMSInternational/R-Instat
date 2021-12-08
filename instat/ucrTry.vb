@@ -82,7 +82,6 @@ Public Class ucrTry
         End If
     End Sub
 
-
     Private Sub TryScript()
         Dim strErrorDetail As String = ""
         Dim lstScripts As New List(Of String)
