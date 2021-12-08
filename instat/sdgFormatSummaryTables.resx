@@ -564,26 +564,47 @@
   <data name="&gt;&gt;tbpTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
+  <data name="ucrChkAddStyles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 54</value>
   </data>
-  <data name="UcrCheck1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkAddStyles.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 16</value>
   </data>
-  <data name="UcrCheck1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="ucrChkAddStyles.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;UcrCheck1.Name" xml:space="preserve">
-    <value>UcrCheck1</value>
+  <data name="&gt;&gt;ucrChkAddStyles.Name" xml:space="preserve">
+    <value>ucrChkAddStyles</value>
   </data>
-  <data name="&gt;&gt;UcrCheck1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddStyles.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrCheck1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddStyles.Parent" xml:space="preserve">
     <value>tbpHeader</value>
   </data>
-  <data name="&gt;&gt;UcrCheck1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddStyles.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkAddHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="ucrChkAddHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 16</value>
+  </data>
+  <data name="ucrChkAddHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddHeader.Name" xml:space="preserve">
+    <value>ucrChkAddHeader</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddHeader.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddHeader.Parent" xml:space="preserve">
+    <value>tbpHeader</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrNudStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 310</value>
@@ -1540,7 +1561,7 @@
     <value>38</value>
   </data>
   <data name="grpStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 69</value>
+    <value>0, 72</value>
   </data>
   <data name="grpStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 337</value>
@@ -1561,7 +1582,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;grpStyle.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoAllColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1591,7 +1612,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllColumns.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoAllRows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1618,7 +1639,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllRows.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrPnlHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 26</value>
@@ -1639,7 +1660,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;ucrPnlHeader.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblHeader.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1666,7 +1687,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;lblHeader.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="tbpHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1695,8 +1716,29 @@
   <data name="&gt;&gt;tbpHeader.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkAddTableFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="ucrChkAddTableFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 19</value>
+  </data>
+  <data name="ucrChkAddTableFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddTableFormat.Name" xml:space="preserve">
+    <value>ucrChkAddTableFormat</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddTableFormat.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddTableFormat.Parent" xml:space="preserve">
+    <value>tbpTable</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddTableFormat.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputTableFontColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 141</value>
+    <value>113, 146</value>
   </data>
   <data name="ucrInputTableFontColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -1714,10 +1756,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableFontColor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputTableBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 87</value>
+    <value>113, 92</value>
   </data>
   <data name="ucrInputTableBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -1735,10 +1777,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableBackgroundColor.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputStubLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 231</value>
+    <value>113, 236</value>
   </data>
   <data name="ucrInputStubLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -1756,10 +1798,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputStubLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkAddStubHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 235</value>
+    <value>9, 240</value>
   </data>
   <data name="ucrChkAddStubHeader.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 19</value>
@@ -1777,10 +1819,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrChkAddStubHeader.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrNudTableFontSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 198</value>
+    <value>113, 203</value>
   </data>
   <data name="ucrNudTableFontSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1798,10 +1840,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrNudTableFontSize.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrNudTableWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 170</value>
+    <value>113, 175</value>
   </data>
   <data name="ucrNudTableWidth.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1819,7 +1861,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrNudTableWidth.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblFontSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1828,7 +1870,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFontSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 204</value>
+    <value>6, 209</value>
   </data>
   <data name="lblFontSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -1849,7 +1891,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblFontSize.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblTableWidth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1858,7 +1900,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 175</value>
+    <value>6, 180</value>
   </data>
   <data name="lblTableWidth.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -1879,7 +1921,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableWidth.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblTableBackgroundColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1888,7 +1930,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 90</value>
+    <value>6, 95</value>
   </data>
   <data name="lblTableBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -1909,7 +1951,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableBackgroundColor.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblTableAlign.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1918,7 +1960,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableAlign.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 62</value>
+    <value>6, 67</value>
   </data>
   <data name="lblTableAlign.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -1939,7 +1981,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableAlign.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lblTableFontWeight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1948,7 +1990,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableFontWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 119</value>
+    <value>6, 124</value>
   </data>
   <data name="lblTableFontWeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -1969,7 +2011,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableFontWeight.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="lblTableFontColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1978,7 +2020,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableFontColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 144</value>
+    <value>6, 149</value>
   </data>
   <data name="lblTableFontColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -1999,7 +2041,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableFontColor.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="lblTableLayout.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2008,7 +2050,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTableLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>6, 39</value>
   </data>
   <data name="lblTableLayout.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -2029,10 +2071,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;lblTableLayout.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrInputTableAlign.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 58</value>
+    <value>113, 63</value>
   </data>
   <data name="ucrInputTableAlign.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -2050,10 +2092,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableAlign.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrInputTableFontWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 114</value>
+    <value>113, 119</value>
   </data>
   <data name="ucrInputTableFontWeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -2071,10 +2113,10 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableFontWeight.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrInputTableLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 30</value>
+    <value>113, 35</value>
   </data>
   <data name="ucrInputTableLayout.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -2092,7 +2134,7 @@
     <value>tbpTable</value>
   </data>
   <data name="&gt;&gt;ucrInputTableLayout.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="tbpTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

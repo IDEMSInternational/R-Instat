@@ -44,6 +44,8 @@ Partial Class sdgFormatSummaryTables
         Me.lblSubtitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddStyles = New instat.ucrCheck()
+        Me.ucrChkAddHeader = New instat.ucrCheck()
         Me.grpStyle = New System.Windows.Forms.GroupBox()
         Me.ucrNudStyleFillAlpha = New instat.ucrNud()
         Me.ucrInputStyleFillColor = New instat.ucrColors()
@@ -105,7 +107,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
-        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.ucrChkAddTableFormat = New instat.ucrCheck()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -268,7 +270,8 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpHeader
         '
-        Me.tbpHeader.Controls.Add(Me.UcrCheck1)
+        Me.tbpHeader.Controls.Add(Me.ucrChkAddStyles)
+        Me.tbpHeader.Controls.Add(Me.ucrChkAddHeader)
         Me.tbpHeader.Controls.Add(Me.grpStyle)
         Me.tbpHeader.Controls.Add(Me.rdoAllColumns)
         Me.tbpHeader.Controls.Add(Me.rdoAllRows)
@@ -277,6 +280,18 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.tbpHeader, "tbpHeader")
         Me.tbpHeader.Name = "tbpHeader"
         Me.tbpHeader.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddStyles
+        '
+        Me.ucrChkAddStyles.Checked = False
+        resources.ApplyResources(Me.ucrChkAddStyles, "ucrChkAddStyles")
+        Me.ucrChkAddStyles.Name = "ucrChkAddStyles"
+        '
+        'ucrChkAddHeader
+        '
+        Me.ucrChkAddHeader.Checked = False
+        resources.ApplyResources(Me.ucrChkAddHeader, "ucrChkAddHeader")
+        Me.ucrChkAddHeader.Name = "ucrChkAddHeader"
         '
         'grpStyle
         '
@@ -607,6 +622,7 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpTable
         '
+        Me.tbpTable.Controls.Add(Me.ucrChkAddTableFormat)
         Me.tbpTable.Controls.Add(Me.ucrInputTableFontColor)
         Me.tbpTable.Controls.Add(Me.ucrInputTableBackgroundColor)
         Me.tbpTable.Controls.Add(Me.ucrInputStubLabel)
@@ -736,11 +752,11 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
-        'UcrCheck1
+        'ucrChkAddTableFormat
         '
-        Me.UcrCheck1.Checked = False
-        resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
-        Me.UcrCheck1.Name = "UcrCheck1"
+        Me.ucrChkAddTableFormat.Checked = False
+        resources.ApplyResources(Me.ucrChkAddTableFormat, "ucrChkAddTableFormat")
+        Me.ucrChkAddTableFormat.Name = "ucrChkAddTableFormat"
         '
         'sdgFormatSummaryTables
         '
@@ -849,5 +865,7 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputStyleFillColor As ucrColors
     Friend WithEvents ucrInputTableBackgroundColor As ucrColors
     Friend WithEvents ucrInputTableFontColor As ucrColors
-    Friend WithEvents UcrCheck1 As ucrCheck
+    Friend WithEvents ucrChkAddHeader As ucrCheck
+    Friend WithEvents ucrChkAddStyles As ucrCheck
+    Friend WithEvents ucrChkAddTableFormat As ucrCheck
 End Class

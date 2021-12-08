@@ -40,9 +40,24 @@ Public Class sdgFormatSummaryTables
         ucrChkAddSourcenote.AddToLinkedControls(ucrInputAddSourceNote, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'Header
+        ucrChkAddHeader.SetText("Add Header")
+        ucrChkAddHeader.AddToLinkedControls({ucrPnlHeader, ucrChkAddStyles}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterValue:=True)
+        'Add conditions for the add header checkbox
+        'Add setRcode for the header checkbox
+
+        ucrChkAddStyles.SetText("Add Style")
+        ucrChkAddStyles.AddToLinkedControls(ucrChkStyleText, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'Add conditions for the add style checkbox
+        'Add setRcode for the style checkbox
+
+        ucrChkAddTableFormat.SetText("Add Table format")
+        ucrChkAddTableFormat.AddToLinkedControls({ucrInputTableLayout, ucrInputTableAlign, ucrInputTableBackgroundColor, ucrInputTableFontWeight, ucrInputTableFontColor,
+                                                  ucrNudTableWidth, ucrNudTableFontSize}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterValue:=True)
+
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
         ucrPnlHeader.AddRadioButton(rdoAllColumns)
         ucrPnlHeader.AddRadioButton(rdoAllRows)
+        ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
         ucrPnlHeader.AddParameterValuesCondition(rdoAllColumns, "header", Chr(34) & "all_cols" & Chr(34))
         ucrPnlHeader.AddParameterValuesCondition(rdoAllRows, "header", Chr(34) & "all_rows" & Chr(34))
 
@@ -51,7 +66,7 @@ Public Class sdgFormatSummaryTables
                                              ucrInputStyleTextValign, ucrInputStyleTextStyle, ucrInputStyleTextWeight, ucrInputStyleTextStretch,
                                              ucrInputStyleTextDecorate, ucrInputStyleTextTransform, ucrInputStyleTextWhitespace, ucrNudStyleTextIndent},
                                           {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
-
+        ucrChkStyleText.SetLinkedDisplayControl(grpStyle)
 
         ucrInputStyleTextColor.SetParameter(New RParameter("color", iNewPosition:=0))
         ucrInputStyleTextColor.SetRDefault("NULL")
@@ -138,21 +153,26 @@ Public Class sdgFormatSummaryTables
         ucrInputTableAlign.SetParameter(New RParameter("table.layout", iNewPosition:=0))
         ucrInputTableAlign.SetItems({"left", "right", "NULL"}, bAddConditions:=True)
         ucrInputTableAlign.SetRDefault("NULL")
+        ucrInputTableAlign.SetLinkedDisplayControl(lblTableAlign)
 
 
         ucrInputTableBackgroundColor.SetParameter(New RParameter("table.background.color", iNewPosition:=1))
         ucrInputTableBackgroundColor.SetRDefault("NULL")
+        ucrInputTableBackgroundColor.SetLinkedDisplayControl(lblTableBackgroundColor)
 
         ucrInputTableFontColor.SetParameter(New RParameter("table.font.color ", 2))
         ucrInputTableFontColor.SetRDefault("NULL")
+        ucrInputTableFontColor.SetLinkedDisplayControl(lblTableFontColor)
 
         ucrInputTableLayout.SetParameter(New RParameter("table.layout", iNewPosition:=3))
         ucrInputTableLayout.SetItems({"fixed", "auto"}, bAddConditions:=True)
         ucrInputTableLayout.SetRDefault("fixed")
+        ucrInputTableLayout.SetLinkedDisplayControl(lblTableLayout)
 
         ucrInputTableFontWeight.SetParameter(New RParameter("table.font.weight", iNewPosition:=4))
         ucrInputTableFontWeight.SetItems({"normal", "bold", "lighter", "bolder"}, bAddConditions:=True)
         ucrInputTableFontWeight.SetRDefault("NULL")
+        ucrInputTableFontWeight.SetLinkedDisplayControl(lblTableFontWeight)
 
         ucrNudTableWidth.SetParameter(New RParameter("table.width", iNewPosition:=0, bNewIncludeArgumentName:=False))
 
@@ -308,6 +328,22 @@ Public Class sdgFormatSummaryTables
             clsStyleListFunction.AddParameter("fillStyle", clsRFunctionParameter:=clsCellFillFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsStyleListFunction.RemoveParameterByName("fillStyle")
+        End If
+    End Sub
+
+    Private Sub ucrChkAddHeader_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddHeader.ControlValueChanged
+        If ucrChkAddHeader.Checked Then
+            'add header
+        Else
+            'remove header
+        End If
+    End Sub
+
+    Private Sub ucrChkAddStyles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddStyles.ControlValueChanged
+        If ucrChkAddStyles.Checked Then
+            clsHeaderFormatFunction.AddParameter("list", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
+        Else
+            clsHeaderFormatFunction.RemoveParameterByName("list")
         End If
     End Sub
 End Class
