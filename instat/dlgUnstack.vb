@@ -172,7 +172,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsformulaOperator, New RParameter("right", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsformulaOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
@@ -191,6 +191,7 @@ Public Class dlgUnstack
     Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
         AddRemoveDataOrPipeOperator()
         CarryColumnsParameter()
+        SetFormula()
     End Sub
 
     Private Sub ValuesfillParameter()
@@ -262,20 +263,23 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetFormula()
-        Dim i As Integer = 0
+        Dim i As Integer = 1
 
         If Not ucrReceiverFactorToUnstackby.IsEmpty Then
             clsCarryColumnsOperator.ClearParameters()
-            clsCarryColumnsOperator.bBrackets = False
             If rdoRestoreHierarchy.Checked Then
-                clsCarryColumnsOperator.AddParameter(i, ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=i)
-                i = i + 1
+                clsCarryColumnsOperator.AddParameter("factor1", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+            End If
 
+            If ucrChkCarryColumns.Checked Then
                 For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
                     clsCarryColumnsOperator.AddParameter(i, strIndicatorVar, iPosition:=i)
                     i = i + 1
                 Next
                 clsformulaOperator.AddParameter("left", clsROperatorParameter:=clsCarryColumnsOperator, iPosition:=0)
+            Else
+                clsformulaOperator.RemoveParameterByName("left")
+                clsformulaOperator.AddParameter("left", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
             End If
         End If
     End Sub
@@ -368,5 +372,9 @@ Public Class dlgUnstack
 
     Private Sub ucrReceiverColumnToUnstack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnToUnstack.ControlValueChanged
         ValuesfillParameter()
+    End Sub
+
+    Private Sub ucrReceiverFactorToUnstackby_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorToUnstackby.ControlValueChanged
+        SetFormula()
     End Sub
 End Class
