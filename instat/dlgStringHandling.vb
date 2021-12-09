@@ -89,11 +89,8 @@ Public Class dlgStringHandling
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
         ucrPnlFixedRegex.Visible = False
 
-        ucrChkAddKeyboard.SetText("Add keyboard")
-
         'temporary disabling
         grpRegex.Enabled = False
-        ucrChkAddKeyboard.Enabled = False
         'hiding the Regex group box 
         grpRegex.Hide()
     End Sub
@@ -206,6 +203,7 @@ Public Class dlgStringHandling
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        sdgConstructRegexExpression.Reset()
     End Sub
 
     Private Sub NewColumnName()
@@ -358,6 +356,11 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\S")
     End Sub
 
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+        sdgConstructRegexExpression.ShowDialog()
+        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
+    End Sub
+
     Private Sub cmdBackSlashd_Click(sender As Object, e As EventArgs) Handles cmdBackSlashd.Click
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\d")
     End Sub
@@ -381,6 +384,7 @@ Public Class dlgStringHandling
     Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
         VisibleRdo()
         AddRemoveParameters()
+        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
     End Sub
 
     Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged
