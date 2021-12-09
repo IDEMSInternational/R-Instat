@@ -2,9 +2,11 @@
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
-        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsStyleListFunction As New RFunction
-    Private clsPipeOperator As New ROperator
+        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
+        clsStyleListFunction As New RFunction
+    Private clsPipeOperator, clsMutableOperator, clsTempMutableOPerator As New ROperator
     Private bControlsInitialised = False
+    Private clsRsyntax As New RSyntax
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -23,7 +25,7 @@ Public Class sdgFormatSummaryTables
         ucrChkSubtitleFootnote.AddToLinkedControls(ucrInputSubtitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkAddTitleSubtitle.SetText("Add title/subtitle")
-        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTitleSubtitle.SetLinkedDisplayControl(grpTitleSubtitle)
 
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title\subtitle")
@@ -183,9 +185,9 @@ Public Class sdgFormatSummaryTables
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction,
+    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewRSyntax As RSyntax,
                         clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction, clsNewCellTextFunction As RFunction,
-                        clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction,
+                        clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -203,6 +205,9 @@ Public Class sdgFormatSummaryTables
         clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
         clsStyleListFunction = clsNewStyleListFunction
         clsPipeOperator = clsNewPipeOperator
+        clsMutableOperator = clsNewMutableOPerator
+        clsTempMutableOPerator = clsMutableOperator.Clone()
+        clsRsyntax = clsNewRSyntax
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -346,4 +351,19 @@ Public Class sdgFormatSummaryTables
             clsHeaderFormatFunction.RemoveParameterByName("list")
         End If
     End Sub
+
+    Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlContentsChanged,
+            ucrChkAddFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged, ucrChkAddHeader.ControlContentsChanged,
+            ucrChkAddTableFormat.ControlContentsChanged
+        If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse ucrChkAddHeader.Checked OrElse ucrChkAddTableFormat.Checked Then
+            clsTempMutableOPerator.SetAssignTo("mmtable_table")
+            clsRsyntax.AddToBeforeCodes(clsTempMutableOperator, iPosition:=1)
+            clsPipeOperator.AddParameter("table", "mmtable_table", iPosition:=0)
+            clsRsyntax.SetBaseROperator(clsPipeOperator)
+        Else
+            clsRsyntax.RemoveFromBeforeCodes(clsTempMutableOPerator)
+            clsRsyntax.SetBaseROperator(clsMutableOperator)
+        End If
+    End Sub
+
 End Class

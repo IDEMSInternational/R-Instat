@@ -268,6 +268,8 @@ Public Class dlgSummaryTables
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrSaveTable.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=1)
+
         ucrSelectorSummaryTables.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverSummaryCols.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
@@ -317,7 +319,7 @@ Public Class dlgSummaryTables
                                         clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction, clsNewTabOptionsFunction:=clsTabOptionsFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewPxFunction:=clsPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction,
-                                        clsNewStyleListFunction:=clsStyleListFunction, bReset:=bReset)
+                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewMutableOPerator:=clsMutableOperator, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
 
