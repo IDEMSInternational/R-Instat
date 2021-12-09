@@ -233,14 +233,17 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        While lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
-              New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
+        If bSizeLabel Then
+            If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
+      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
 
-            lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
-            lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
-              New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
-            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-        End While
+                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
+                lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
+                  New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
+                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+            End If
+            bSizeLabel = False
+        End If
 
     End Sub
 
@@ -273,6 +276,7 @@ Public Class ucrDataView
         lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
         If GetCurrentDataFrameFocus().clsFilter.bApplied Then
+            bSizeLabel = True
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilter.iFilteredRowCount &
                                  " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilter.strName
         Else
@@ -747,25 +751,25 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
-        'bSizeLabel = False
+        bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
-        'bSizeLabel = False
+        bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
-        'bSizeLabel = False
+        bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
-        'bSizeLabel = False
+        bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
