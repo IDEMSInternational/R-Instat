@@ -13,6 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Data.SQLite
+Imports System.IO
 Imports System.Reflection
 
 Public Class Translations
@@ -46,6 +48,11 @@ Public Class Translations
         ' The 'WriteCsvFile' function call below should normally be commented out. 
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
+
+        ' The 'SetTranslateIgnore' function call below should normally be commented out.
+        ' It only needs be uncommented when the 'translateIgnore.txt' file is updated, and the 
+        ' changes need to be applied to the database.
+        'SetTranslateIgnore()
 
         If IsNothing(tsCollection) OrElse IsNothing(ctrParent) OrElse IsNothing(TryCast(ctrParent, Form)) Then
             Exit Sub
@@ -219,6 +226,110 @@ Public Class Translations
         MsgBox("The form controls' translation text was written to: " & strPath &
                ". The application will now exit.", MsgBoxStyle.Exclamation)
         System.Windows.Forms.Application.Exit()
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''    Updates the `TranslateWinForm` library database based on the specifications in the 
+    '''    'translateIgnore.txt' file. This file provides a way to ignore specified WinForm 
+    '''    controls when the application or dialog is translated into a different language.
+    '''    <para>
+    '''    For example, this file can be used to ensure that text that references pre-existing data 
+    '''    or meta data (e.g. a file name, data frame name, column name, cell value etc.) stays the 
+    '''    same, even when the rest of the dialog is translated into French or Portuguese.
+    '''    </para><para>
+    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
+    '''    database specifies all the controls to ignore during the translation.  </para>  
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Sub SetTranslateIgnore()
+        Dim lstIgnore As New List(Of String)
+        Dim lstIgnoreNegations As New List(Of String)
+
+        'For each line in the ignore file
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFileName As String = "translateIgnore.txt"
+        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
+        Using clsReader As New StreamReader(strPath)
+            Do While clsReader.Peek() >= 0
+                Dim strIgnoreFileLine = clsReader.ReadLine().Trim()
+                If String.IsNullOrEmpty(strIgnoreFileLine) Then
+                    Continue Do
+                End If
+
+                Select Case (strIgnoreFileLine(0))
+                    Case "#"
+                        'Ignore comment lines
+                    Case "!"
+                        'Add negation pattern to negation list
+                        lstIgnoreNegations.Add(strIgnoreFileLine.Substring(1)) 'remove leading '!'
+                    Case Else
+                        'Add pattern to ignore list
+                        lstIgnore.Add(strIgnoreFileLine)
+                End Select
+            Loop
+        End Using
+
+        'If the ignore file didn't contain any specifications, then exit
+        If lstIgnore.Count <= 0 AndAlso lstIgnoreNegations.Count <= 0 Then
+            MsgBox("The " & strPath & " ignore file was processed. No ignore specifications were found. " &
+                   "The database was not updated. The application will now exit.", MsgBoxStyle.Exclamation)
+            Application.Exit()
+        End If
+
+        'create the SQL command to update the database
+        Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE "
+
+        If lstIgnore.Count > 0 Then
+            strSqlUpdate &= "("
+            For iListPos As Integer = 0 To lstIgnore.Count - 1
+                strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                strSqlUpdate &= "control_name LIKE '" & lstIgnore.Item(iListPos) & "'"
+            Next iListPos
+            strSqlUpdate &= ")"
+        End If
+
+        If lstIgnoreNegations.Count > 0 Then
+            strSqlUpdate &= If(lstIgnore.Count > 0, " AND ", "")
+            strSqlUpdate &= "NOT ("
+            For iListPos As Integer = 0 To lstIgnoreNegations.Count - 1
+                strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                strSqlUpdate &= "control_name LIKE '" & lstIgnoreNegations.Item(iListPos) & "'"
+            Next iListPos
+            strSqlUpdate &= ")"
+        End If
+
+        'execute the SQL command
+        Try
+            'specify the path of the SQLite database that contains the translations (2 levels up from the execution folder)
+            Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
+            strDbPath = Directory.GetParent(strDbPath).FullName
+            strDbPath = Path.Combine(strDbPath, "translations")
+            strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
+
+            'connect to the database and execute the SQL command
+            Dim clsBuilder As New SQLiteConnectionStringBuilder With {
+                    .FailIfMissing = True,
+                    .DataSource = strDbPath}
+            Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
+                Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
+                    clsConnection.Open()
+                    Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
+                    clsConnection.Close()
+                    MsgBox("The " & strPath & " ignore file was processed. " &
+                           iRowsUpdated & " database rows were updated. " &
+                           "The application will now exit.", MsgBoxStyle.Exclamation)
+                End Using
+            End Using
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine & "An error occured processing ignore file: " &
+                   strPath, MsgBoxStyle.Exclamation)
+        End Try
+
+        'This sub should only be used by developers to process the translation ignore file.
+        'Therefore, exit the application with a message to ensure that this sub is not run 
+        'accidentally in the release version. 
+        Application.Exit()
     End Sub
 
 End Class
