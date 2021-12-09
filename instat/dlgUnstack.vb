@@ -236,7 +236,7 @@ Public Class dlgUnstack
                 ucrBase.OKEnabled(True)
             End If
         ElseIf rdoRestoreHierarchy.Checked Then
-            If ucrReceiverFactorToUnstackby.IsEmpty OrElse Not ucrNewDFName.IsComplete Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse Not ucrNewDFName.IsComplete OrElse (ucrReceiverCarryColumns.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
