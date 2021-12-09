@@ -239,7 +239,7 @@ Public Class ucrDataView
             lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
             lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
               New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
-            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
+            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
         End While
 
     End Sub
