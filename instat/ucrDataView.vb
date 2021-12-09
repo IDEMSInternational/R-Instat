@@ -25,7 +25,7 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
 
-    Private bSizeLabel As Boolean = False
+    Private bSizeLabel As Boolean = True
 
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
@@ -232,21 +232,16 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub ResizeLabel()
-        If bSizeLabel Then
-            If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width OrElse
-               lblRowDisplay.Width > TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width OrElse
-               lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width Then
-                lblRowDisplay.Font = New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-                lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text, lblRowDisplay.Font).Width
-            End If
-            If lblColDisplay.Width < TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width OrElse
-               lblColDisplay.Width > TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width OrElse
-               lblColDisplay.Width = TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width Then
-                lblColDisplay.Font = New Font(lblColDisplay.Font.FontFamily, lblColDisplay.Font.Size - 0.5F, lblColDisplay.Font.Style)
-                lblColDisplay.Width = TextRenderer.MeasureText(lblColDisplay.Text, lblColDisplay.Font).Width
-            End If
-        End If
+    Private Sub ResizeLabels()
+        While lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
+              New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
+
+            lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
+            lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
+              New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
+            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
+        End While
+
     End Sub
 
     Private Sub SetGridVisibility(bIsVisible As Boolean)
@@ -285,7 +280,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-
+        ResizeLabels()
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
@@ -752,25 +747,25 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub

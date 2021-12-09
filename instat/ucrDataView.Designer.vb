@@ -741,6 +741,7 @@ Partial Class ucrDataView
         '
         'lblColFirst
         '
+        Me.lblColFirst.AutoSize = True
         Me.lblColFirst.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColFirst.Location = New System.Drawing.Point(315, 0)
@@ -752,6 +753,7 @@ Partial Class ucrDataView
         '
         'lblColDisplay
         '
+        Me.lblColDisplay.AutoSize = True
         Me.lblColDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColDisplay.Location = New System.Drawing.Point(252, 0)
@@ -763,6 +765,7 @@ Partial Class ucrDataView
         '
         'lblColNext
         '
+        Me.lblColNext.AutoSize = True
         Me.lblColNext.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColNext.Location = New System.Drawing.Point(347, 0)
@@ -774,6 +777,7 @@ Partial Class ucrDataView
         '
         'lblColBack
         '
+        Me.lblColBack.AutoSize = True
         Me.lblColBack.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColBack.Location = New System.Drawing.Point(331, 0)
@@ -785,6 +789,7 @@ Partial Class ucrDataView
         '
         'lblRowLast
         '
+        Me.lblRowLast.AutoSize = True
         Me.lblRowLast.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowLast.Location = New System.Drawing.Point(236, 0)
@@ -796,6 +801,7 @@ Partial Class ucrDataView
         '
         'lblRowFirst
         '
+        Me.lblRowFirst.AutoSize = True
         Me.lblRowFirst.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowFirst.Location = New System.Drawing.Point(188, 0)
@@ -809,6 +815,7 @@ Partial Class ucrDataView
         '
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblRowDisplay.Location = New System.Drawing.Point(125, 0)
         Me.lblRowDisplay.Name = "lblRowDisplay"
         Me.lblRowDisplay.Size = New System.Drawing.Size(57, 20)
@@ -818,6 +825,7 @@ Partial Class ucrDataView
         '
         'lblRowNext
         '
+        Me.lblRowNext.AutoSize = True
         Me.lblRowNext.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowNext.Location = New System.Drawing.Point(220, 0)
@@ -829,6 +837,7 @@ Partial Class ucrDataView
         '
         'lblColLast
         '
+        Me.lblColLast.AutoSize = True
         Me.lblColLast.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblColLast.Location = New System.Drawing.Point(363, 0)
@@ -840,6 +849,7 @@ Partial Class ucrDataView
         '
         'lblRowBack
         '
+        Me.lblRowBack.AutoSize = True
         Me.lblRowBack.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowBack.Location = New System.Drawing.Point(204, 0)
@@ -889,6 +899,7 @@ Partial Class ucrDataView
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
         Me.TblPanPageDisplay.ResumeLayout(False)
+        Me.TblPanPageDisplay.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
