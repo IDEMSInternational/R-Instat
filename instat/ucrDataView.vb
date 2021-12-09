@@ -25,7 +25,6 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
 
-    Private bSizeLabel As Boolean = True
 
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
@@ -233,18 +232,19 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        If bSizeLabel Then
-            If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
+        Dim minSize As Single = 10.2
+        Dim maxSize As Single = 11.5
+
+        If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
       New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
-
-                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.9F, lblRowDisplay.Font.Style)
+            Dim newSize As Single = lblRowDisplay.Font.Size - 0.9F
+            If newSize >= minSize AndAlso newSize <= maxSize Then
+                lblRowDisplay.Font = New Font(lblRowDisplay.Font.FontFamily, newSize, lblRowDisplay.Font.Style)
+                lblColDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
                 lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
-                  New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
-                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+                      New Font(lblRowDisplay.Font.FontFamily, newSize, lblRowDisplay.Font.Style)).Width
             End If
-            bSizeLabel = False
         End If
-
     End Sub
 
     Private Sub SetGridVisibility(bIsVisible As Boolean)
@@ -276,7 +276,6 @@ Public Class ucrDataView
         lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
         If GetCurrentDataFrameFocus().clsFilter.bApplied Then
-            bSizeLabel = True
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilter.iFilteredRowCount &
                                  " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilter.strName
         Else
@@ -751,25 +750,25 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
-        bSizeLabel = False
+        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
