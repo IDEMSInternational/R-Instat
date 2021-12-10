@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction, clsStringCollFunction As New RFunction
+    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private iFullWidth As Integer
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,16 +38,16 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctBoundaryPairs As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 406
 
-        'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.bUseFilteredData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
-        'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
         ucrPnlStringHandling.AddRadioButton(rdoExtract)
         ucrPnlStringHandling.AddRadioButton(rdoDetect)
@@ -54,7 +55,7 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
         ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
 
-        'ucrRdofixedRegex
+
         ucrPnlFixedRegex.AddRadioButton(rdoFixed)
         ucrPnlFixedRegex.AddRadioButton(rdoRegex)
 
@@ -68,12 +69,12 @@ Public Class dlgStringHandling
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
-        'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoCount, rdoExtract, rdoDetect, rdoLocate}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrPnlFixedRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {rdoRegex}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrSave
         ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
@@ -81,9 +82,32 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetLabelText("New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
-        'ucrChkIncludeRegularExpressions
+        ucrChkIgnoreCase.SetText("Ignore Case")
+        ucrChkIgnoreCase.SetParameter(New RParameter("ignore_case", 3))
+        ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrInputBoundary.SetParameter(New RParameter("type", 0))
+        dctBoundaryPairs.Add("character", Chr(34) & "character" & Chr(34))
+        dctBoundaryPairs.Add("line_break", Chr(34) & "line_break" & Chr(34))
+        dctBoundaryPairs.Add("sentence", Chr(34) & "sentence" & Chr(34))
+        dctBoundaryPairs.Add("word", Chr(34) & "word" & Chr(34))
+        ucrInputBoundary.SetItems(dctBoundaryPairs)
+        ucrInputBoundary.SetDropDownStyleAsNonEditable()
+
+        ucrChkBoundary.SetText("Boundary")
+        ucrChkBoundary.SetParameter(New RParameter("checked", 0))
+        ucrChkBoundary.SetValuesCheckedAndUnchecked(True, False)
+
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
         ucrChkIncludeRegularExpressions.SetDefaultState(False)
+
+        ucrChkMultiline.SetText("Multiple")
+        ucrChkMultiline.SetParameter(New RParameter("multiline", 4))
+        ucrChkMultiline.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkComments.SetText("Comments")
+        ucrChkComments.SetParameter(New RParameter("comments", 4))
+        ucrChkComments.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoFixed, "fixed")
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
@@ -105,6 +129,8 @@ Public Class dlgStringHandling
         clsFixedFunction = New RFunction
         clsRegexFunction = New RFunction
         clsStringCollFunction = New RFunction
+        clsBoundaryFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
@@ -121,6 +147,13 @@ Public Class dlgStringHandling
         ucrInputPattern.Reset()
         ucrReceiverForRegexExpression.ResetText()
 
+        clsDummyFunction.AddParameter("checked", False, iPosition:=0)
+
+
+        clsBoundaryFunction.SetPackageName("stringr")
+        clsBoundaryFunction.SetRCommand("boundary")
+        clsBoundaryFunction.AddParameter("type", Chr(34) & "character" & Chr(34), iPosition:=0)
+
         clsFixedFunction.SetPackageName("stringr")
         clsFixedFunction.SetRCommand("fixed")
         clsFixedFunction.AddParameter("ignore_case", "FALSE")
@@ -131,6 +164,7 @@ Public Class dlgStringHandling
 
         clsStringCollFunction.SetPackageName("stringr")
         clsStringCollFunction.SetRCommand("coll")
+        clsStringCollFunction.AddParameter("ignore_case", "FALSE")
 
         ucrReceiverForRegexExpression.SetText("")
         AddRemoveParameters()
@@ -182,6 +216,9 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsStringCollFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
+        ucrChkBoundary.SetRCode(clsDummyFunction, bReset)
+        ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
+        ucrInputBoundary.SetRCode(clsBoundaryFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
     End Sub
 
@@ -230,6 +267,15 @@ Public Class dlgStringHandling
             clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
             clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
         End If
+        'If ucrChkBoundary.Checked Then
+        '    clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+        '    clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+        '    clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+        '    clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+        '    clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+        '    clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsBoundaryFunction, iPosition:=1)
+
+        'End If
     End Sub
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
@@ -248,6 +294,8 @@ Public Class dlgStringHandling
         End If
         NewColumnName()
         ChangePrefixName()
+        VisibleModifiersAndAddKeyboard()
+        AddRemoveParameters()
     End Sub
 
     Private Sub ChangeSize()
@@ -356,6 +404,14 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\S")
     End Sub
 
+    Private Sub ucrChkBoundary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBoundary.ControlValueChanged
+        If ucrChkBoundary.Checked Then
+            clsStringCollFunction.AddParameter("boundary", clsRFunctionParameter:=clsBoundaryFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsStringCollFunction.RemoveParameterByName("boundary")
+        End If
+    End Sub
+
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
         ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
@@ -381,10 +437,15 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.Clear()
     End Sub
 
-    Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
+    Private Sub VisibleModifiersAndAddKeyboard()
+        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked AndAlso ucrChkIncludeRegularExpressions.Visible, True, False)
+        grpModifiers.Visible = If(ucrChkIncludeRegularExpressions.Checked AndAlso ucrChkIncludeRegularExpressions.Visible, True, False)
+    End Sub
+
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrInputBoundary.ControlValueChanged, ucrChkBoundary.ControlValueChanged, ucrInputPattern.ControlValueChanged
         VisibleRdo()
         AddRemoveParameters()
-        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
+        VisibleModifiersAndAddKeyboard()
     End Sub
 
     Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged
@@ -392,7 +453,7 @@ Public Class dlgStringHandling
         ChangeSize()
     End Sub
 
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

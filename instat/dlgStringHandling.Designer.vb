@@ -74,18 +74,25 @@ Partial Class dlgStringHandling
         Me.cmdOr = New System.Windows.Forms.Button()
         Me.rdoRegex = New System.Windows.Forms.RadioButton()
         Me.rdoFixed = New System.Windows.Forms.RadioButton()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.grpModifiers = New System.Windows.Forms.GroupBox()
+        Me.ucrChkComments = New instat.ucrCheck()
+        Me.ucrChkMultiline = New instat.ucrCheck()
+        Me.ucrChkBoundary = New instat.ucrCheck()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
+        Me.ucrChkIgnoreCase = New instat.ucrCheck()
+        Me.ucrInputBoundary = New instat.ucrInputComboBox()
         Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
-        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
-        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.grpRegex.SuspendLayout()
+        Me.grpModifiers.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -345,6 +352,58 @@ Partial Class dlgStringHandling
         Me.rdoFixed.TabStop = True
         Me.rdoFixed.UseVisualStyleBackColor = True
         '
+        'cmdAddkeyboard
+        '
+        resources.ApplyResources(Me.cmdAddkeyboard, "cmdAddkeyboard")
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
+        'grpModifiers
+        '
+        Me.grpModifiers.Controls.Add(Me.ucrChkComments)
+        Me.grpModifiers.Controls.Add(Me.ucrChkMultiline)
+        resources.ApplyResources(Me.grpModifiers, "grpModifiers")
+        Me.grpModifiers.Name = "grpModifiers"
+        Me.grpModifiers.TabStop = False
+        '
+        'ucrChkComments
+        '
+        Me.ucrChkComments.Checked = False
+        resources.ApplyResources(Me.ucrChkComments, "ucrChkComments")
+        Me.ucrChkComments.Name = "ucrChkComments"
+        '
+        'ucrChkMultiline
+        '
+        Me.ucrChkMultiline.Checked = False
+        resources.ApplyResources(Me.ucrChkMultiline, "ucrChkMultiline")
+        Me.ucrChkMultiline.Name = "ucrChkMultiline"
+        '
+        'ucrChkBoundary
+        '
+        Me.ucrChkBoundary.Checked = False
+        resources.ApplyResources(Me.ucrChkBoundary, "ucrChkBoundary")
+        Me.ucrChkBoundary.Name = "ucrChkBoundary"
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        '
+        'ucrChkIgnoreCase
+        '
+        Me.ucrChkIgnoreCase.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreCase, "ucrChkIgnoreCase")
+        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        '
+        'ucrInputBoundary
+        '
+        Me.ucrInputBoundary.AddQuotesIfUnrecognised = True
+        Me.ucrInputBoundary.GetSetSelectedIndex = -1
+        Me.ucrInputBoundary.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBoundary, "ucrInputBoundary")
+        Me.ucrInputBoundary.Name = "ucrInputBoundary"
+        '
         'ucrPnlFixedRegex
         '
         resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
@@ -363,12 +422,6 @@ Partial Class dlgStringHandling
         Me.ucrReceiverForRegexExpression.Selector = Nothing
         Me.ucrReceiverForRegexExpression.strNcFilePath = ""
         Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
-        '
-        'ucrChkIncludeRegularExpressions
-        '
-        Me.ucrChkIncludeRegularExpressions.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
-        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         '
         'ucrReceiverStringHandling
         '
@@ -413,16 +466,15 @@ Partial Class dlgStringHandling
         resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         '
-        'cmdAddkeyboard
-        '
-        resources.ApplyResources(Me.cmdAddkeyboard, "cmdAddkeyboard")
-        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
-        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
-        '
         'dlgStringHandling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkBoundary)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
+        Me.Controls.Add(Me.ucrChkIgnoreCase)
+        Me.Controls.Add(Me.grpModifiers)
+        Me.Controls.Add(Me.ucrInputBoundary)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
@@ -430,7 +482,6 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
         Me.Controls.Add(Me.grpRegex)
-        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
@@ -451,6 +502,7 @@ Partial Class dlgStringHandling
         Me.MinimizeBox = False
         Me.Name = "dlgStringHandling"
         Me.grpRegex.ResumeLayout(False)
+        Me.grpModifiers.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -471,7 +523,6 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlStringHandling As UcrPanel
     Friend WithEvents rdoReplaceAll As RadioButton
-    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents grpRegex As GroupBox
     Friend WithEvents cmdOpenCloseParenthesis As Button
     Friend WithEvents cmdBackSlashd As Button
@@ -502,4 +553,11 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoFixed As RadioButton
     Friend WithEvents ucrPnlFixedRegex As UcrPanel
     Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents ucrInputBoundary As ucrInputComboBox
+    Friend WithEvents ucrChkBoundary As ucrCheck
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
+    Friend WithEvents ucrChkIgnoreCase As ucrCheck
+    Friend WithEvents grpModifiers As GroupBox
+    Friend WithEvents ucrChkComments As ucrCheck
+    Friend WithEvents ucrChkMultiline As ucrCheck
 End Class
