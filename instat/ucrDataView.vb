@@ -239,7 +239,7 @@ Public Class ucrDataView
       New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
             Dim newSize As Single = lblRowDisplay.Font.Size - 0.9F
             If newSize >= minSize AndAlso newSize <= maxSize Then
-                lblRowDisplay.Font = New Font(lblRowDisplay.Font.FontFamily, newSize, lblRowDisplay.Font.Style)
+                lblRowDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
                 lblColDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
             End If
         End If
