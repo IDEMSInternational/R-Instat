@@ -232,17 +232,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        Dim minSize As Single = 10.2
+        Dim minSize As Single = 9.2
         Dim maxSize As Single = 11.5
 
-        If lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
+        If lblRowDisplay.Width <= TextRenderer.MeasureText(lblRowDisplay.Text,
       New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
             Dim newSize As Single = lblRowDisplay.Font.Size - 0.9F
             If newSize >= minSize AndAlso newSize <= maxSize Then
                 lblRowDisplay.Font = New Font(lblRowDisplay.Font.FontFamily, newSize, lblRowDisplay.Font.Style)
                 lblColDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
-                lblRowDisplay.Width = TextRenderer.MeasureText(lblRowDisplay.Text,
-                      New Font(lblRowDisplay.Font.FontFamily, newSize, lblRowDisplay.Font.Style)).Width
             End If
         End If
     End Sub

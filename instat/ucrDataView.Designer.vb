@@ -813,6 +813,7 @@ Partial Class ucrDataView
         '
         'lblRowDisplay
         '
+        Me.lblRowDisplay.AutoSize = True
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
