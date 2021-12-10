@@ -691,8 +691,8 @@ Public Class dlgImportDataset
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
                               "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
-                    Me.Close()
                 End If
+                Me.Close()
             End If
         End If
 
