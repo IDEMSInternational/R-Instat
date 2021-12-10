@@ -26,13 +26,13 @@ Partial Class dlgClusterAnalysis
         Me.rdoPartitioningData = New System.Windows.Forms.RadioButton()
         Me.rdoNumericVariables = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrChkHierarcPlot = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkPartitionPlot = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputMetric = New instat.ucrInputComboBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrNudPamCluster = New instat.ucrNud()
-        Me.ucrChkCluster = New instat.ucrCheck()
         Me.ucrChkMethod = New instat.ucrCheck()
         Me.ucrChkStand = New instat.ucrCheck()
         Me.ucrChkMetric = New instat.ucrCheck()
@@ -40,7 +40,7 @@ Partial Class dlgClusterAnalysis
         Me.ucrSelectorClusterData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlClusterData = New instat.UcrPanel()
         Me.ucrPnlSelectData = New instat.UcrPanel()
-        Me.ucrChkHierarcPlot = New instat.ucrCheck()
+        Me.ucrChkCluster = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoHierarchicalData
@@ -51,7 +51,7 @@ Partial Class dlgClusterAnalysis
         Me.rdoHierarchicalData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoHierarchicalData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoHierarchicalData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHierarchicalData.Location = New System.Drawing.Point(244, 7)
+        Me.rdoHierarchicalData.Location = New System.Drawing.Point(239, 7)
         Me.rdoHierarchicalData.Name = "rdoHierarchicalData"
         Me.rdoHierarchicalData.Size = New System.Drawing.Size(100, 28)
         Me.rdoHierarchicalData.TabIndex = 2
@@ -67,7 +67,7 @@ Partial Class dlgClusterAnalysis
         Me.rdoPartitioningData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPartitioningData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPartitioningData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPartitioningData.Location = New System.Drawing.Point(146, 7)
+        Me.rdoPartitioningData.Location = New System.Drawing.Point(141, 7)
         Me.rdoPartitioningData.Name = "rdoPartitioningData"
         Me.rdoPartitioningData.Size = New System.Drawing.Size(100, 28)
         Me.rdoPartitioningData.TabIndex = 3
@@ -97,9 +97,17 @@ Partial Class dlgClusterAnalysis
         Me.rdoDataFrame.Text = "Data Frame/Matrix"
         Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
+        'ucrChkHierarcPlot
+        '
+        Me.ucrChkHierarcPlot.Checked = False
+        Me.ucrChkHierarcPlot.Location = New System.Drawing.Point(7, 295)
+        Me.ucrChkHierarcPlot.Name = "ucrChkHierarcPlot"
+        Me.ucrChkHierarcPlot.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkHierarcPlot.TabIndex = 29
+        '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 324)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(8, 324)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(339, 24)
@@ -152,14 +160,6 @@ Partial Class dlgClusterAnalysis
         Me.ucrNudPamCluster.TabIndex = 22
         Me.ucrNudPamCluster.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkCluster
-        '
-        Me.ucrChkCluster.Checked = False
-        Me.ucrChkCluster.Location = New System.Drawing.Point(8, 295)
-        Me.ucrChkCluster.Name = "ucrChkCluster"
-        Me.ucrChkCluster.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkCluster.TabIndex = 21
-        '
         'ucrChkMethod
         '
         Me.ucrChkMethod.Checked = False
@@ -209,9 +209,9 @@ Partial Class dlgClusterAnalysis
         '
         'ucrPnlClusterData
         '
-        Me.ucrPnlClusterData.Location = New System.Drawing.Point(138, -2)
+        Me.ucrPnlClusterData.Location = New System.Drawing.Point(127, -2)
         Me.ucrPnlClusterData.Name = "ucrPnlClusterData"
-        Me.ucrPnlClusterData.Size = New System.Drawing.Size(239, 40)
+        Me.ucrPnlClusterData.Size = New System.Drawing.Size(236, 40)
         Me.ucrPnlClusterData.TabIndex = 4
         '
         'ucrPnlSelectData
@@ -221,13 +221,13 @@ Partial Class dlgClusterAnalysis
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(183, 49)
         Me.ucrPnlSelectData.TabIndex = 8
         '
-        'ucrChkHierarcPlot
+        'ucrChkCluster
         '
-        Me.ucrChkHierarcPlot.Checked = False
-        Me.ucrChkHierarcPlot.Location = New System.Drawing.Point(8, 295)
-        Me.ucrChkHierarcPlot.Name = "ucrChkHierarcPlot"
-        Me.ucrChkHierarcPlot.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkHierarcPlot.TabIndex = 29
+        Me.ucrChkCluster.Checked = False
+        Me.ucrChkCluster.Location = New System.Drawing.Point(8, 295)
+        Me.ucrChkCluster.Name = "ucrChkCluster"
+        Me.ucrChkCluster.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkCluster.TabIndex = 21
         '
         'dlgClusterAnalysis
         '

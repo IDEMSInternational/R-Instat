@@ -39,6 +39,7 @@ Public Class dlgClusterAnalysis
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Dim dctMetric As New Dictionary(Of String, String)
@@ -55,8 +56,8 @@ Public Class dlgClusterAnalysis
 
         ucrPnlClusterData.AddRadioButton(rdoPartitioningData)
         ucrPnlClusterData.AddRadioButton(rdoHierarchicalData)
-        ucrPnlClusterData.AddParameterValuesCondition(rdoHierarchicalData, "fvizdend", True)
-        ucrPnlClusterData.AddParameterValuesCondition(rdoPartitioningData, "fvizdend", False)
+        ucrPnlClusterData.AddParameterValuesCondition(rdoHierarchicalData, "fvizdend", "True")
+        ucrPnlClusterData.AddParameterValuesCondition(rdoPartitioningData, "fvizdend", "False")
 
         ucrInputMetric.SetParameter(New RParameter("metric", 3))
         dctMetric.Add("euclidean", Chr(34) & "euclidean" & Chr(34))
@@ -69,12 +70,12 @@ Public Class dlgClusterAnalysis
         ucrChkMetric.AddFunctionNamesCondition(True, {"pam", "agnes"})
 
         ucrChkPartitionPlot.SetText("Partition Plot")
-        ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(True, "dend", False)
-        ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(False, "dend", True)
+        ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(True, "dend", "False")
+        ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(False, "dend", "True")
 
         ucrChkHierarcPlot.SetText("Hierarch Plot")
-        ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(True, "fviz", False)
-        ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(False, "fviz", True)
+        ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(True, "fviz", "False")
+        ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(False, "fviz", "True")
 
         ucrPnlSelectData.AddRadioButton(rdoNumericVariables)
         ucrPnlSelectData.AddRadioButton(rdoDataFrame)
@@ -120,6 +121,7 @@ Public Class dlgClusterAnalysis
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
+
     Private Sub SetDefaults()
         clsAgnesFunction = New RFunction
         clsPamFunction = New RFunction
@@ -136,6 +138,7 @@ Public Class dlgClusterAnalysis
         clsDummyFunction.AddParameter("fvizdend", "False", iPosition:=1)
         clsDummyFunction.AddParameter("fviz", "False", iPosition:=2)
         clsDummyFunction.AddParameter("dend", "False", iPosition:=3)
+
         clsPamFunction.SetRCommand("pam")
         clsPamFunction.SetPackageName("cluster")
 
@@ -160,6 +163,7 @@ Public Class dlgClusterAnalysis
         clsFvizDendFunction.AddParameter("k", "4", iPosition:=2)
         clsFvizDendFunction.AddParameter("cex", "0.6", iPosition:=3)
 
+        clsFvizDendFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClusterData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsPamFunction)
     End Sub
 
@@ -172,7 +176,7 @@ Public Class dlgClusterAnalysis
 
         ucrInputMetric.AddAdditionalCodeParameterPair(clsFvizAgnesFunction, New RParameter("metric", iNewPosition:=1), iAdditionalPairNo:=2)
         ucrChkStand.AddAdditionalCodeParameterPair(clsFvizAgnesFunction, New RParameter("stand", iNewPosition:=2), iAdditionalPairNo:=2)
-
+        ucrSaveGraph.AddAdditionalRCode(clsFvizClusterFunction, iAdditionalPairNo:=1)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsFvizAgnesFunction, New RParameter("method", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrInputMetric.AddAdditionalCodeParameterPair(clsFvizPamFunction, New RParameter("metric", iNewPosition:=1), iAdditionalPairNo:=3)
         ucrChkStand.AddAdditionalCodeParameterPair(clsFvizPamFunction, New RParameter("stand", iNewPosition:=1), iAdditionalPairNo:=3)
@@ -182,9 +186,7 @@ Public Class dlgClusterAnalysis
         ucrChkMethod.SetRCode(clsAgnesFunction, bReset)
         ucrInputMetric.SetRCode(clsPamFunction, bReset)
         ucrInputMethod.SetRCode(clsAgnesFunction, bReset)
-
         ucrSaveGraph.SetRCode(clsFvizDendFunction, bReset)
-        ucrSaveGraph.SetRCode(clsFvizClusterFunction, bReset)
         ucrPnlClusterData.SetRCode(clsDummyFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
         bResetRCode = True
@@ -210,18 +212,17 @@ Public Class dlgClusterAnalysis
     Private Sub SetBaseFunction()
         If bResetRCode Then
             If rdoPartitioningData.Checked Then
-                clsDummyFunction.AddParameter("fvizdend", False, iPosition:=1)
+                clsDummyFunction.AddParameter("fvizdend", "False", iPosition:=1)
                 If ucrChkPartitionPlot.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFvizClusterFunction)
                     ucrBase.clsRsyntax.iCallType = 3
-
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPamFunction)
                     ucrBase.clsRsyntax.iCallType = 2
                     ucrBase.clsRsyntax.RemoveAssignTo()
                 End If
             ElseIf rdoHierarchicalData.Checked Then
-                clsDummyFunction.AddParameter("fvizdend", True, iPosition:=1)
+                clsDummyFunction.AddParameter("fvizdend", "True", iPosition:=1)
                 If ucrChkHierarcPlot.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFvizDendFunction)
                     ucrBase.clsRsyntax.iCallType = 3
@@ -231,7 +232,7 @@ Public Class dlgClusterAnalysis
                     ucrBase.clsRsyntax.RemoveAssignTo()
                 End If
             End If
-            End If
+        End If
     End Sub
 
     Private Sub AddRemoveDataHideOptionsButtons()
@@ -245,12 +246,9 @@ Public Class dlgClusterAnalysis
         If bResetRCode Then
             If rdoPartitioningData.Checked Then
                 If rdoDataFrame.Checked Then
-                    clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
                     clsFvizPamFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorClusterData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                     clsPamFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorClusterData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-
                 ElseIf rdoNumericVariables.Checked Then
-                    clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
                     clsFvizPamFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverClusterData.GetVariables, iPosition:=0)
                     clsPamFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverClusterData.GetVariables, iPosition:=0)
                 End If
@@ -258,11 +256,15 @@ Public Class dlgClusterAnalysis
                 If rdoDataFrame.Checked Then
                     clsFvizAgnesFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorClusterData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                     clsAgnesFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorClusterData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-
                 Else
                     clsAgnesFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverClusterData.GetVariables, iPosition:=0)
                     clsFvizAgnesFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverClusterData.GetVariables, iPosition:=0)
                 End If
+            End If
+            If rdoDataFrame.Checked Then
+                clsDummyFunction.AddParameter("checked", "whole", iPosition:=0)
+            Else
+                clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
             End If
         End If
     End Sub
