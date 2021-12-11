@@ -76,11 +76,11 @@ Partial Class dlgStringHandling
         Me.rdoFixed = New System.Windows.Forms.RadioButton()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.grpModifiers = New System.Windows.Forms.GroupBox()
-        Me.ucrChkComments = New instat.ucrCheck()
-        Me.ucrChkMultiline = New instat.ucrCheck()
         Me.ucrChkBoundary = New instat.ucrCheck()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrChkIgnoreCase = New instat.ucrCheck()
+        Me.ucrChkComments = New instat.ucrCheck()
+        Me.ucrChkMultiline = New instat.ucrCheck()
         Me.ucrInputBoundary = New instat.ucrInputComboBox()
         Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrSaveStringHandling = New instat.ucrSave()
@@ -366,18 +366,6 @@ Partial Class dlgStringHandling
         Me.grpModifiers.Name = "grpModifiers"
         Me.grpModifiers.TabStop = False
         '
-        'ucrChkComments
-        '
-        Me.ucrChkComments.Checked = False
-        resources.ApplyResources(Me.ucrChkComments, "ucrChkComments")
-        Me.ucrChkComments.Name = "ucrChkComments"
-        '
-        'ucrChkMultiline
-        '
-        Me.ucrChkMultiline.Checked = False
-        resources.ApplyResources(Me.ucrChkMultiline, "ucrChkMultiline")
-        Me.ucrChkMultiline.Name = "ucrChkMultiline"
-        '
         'ucrChkBoundary
         '
         Me.ucrChkBoundary.Checked = False
@@ -395,6 +383,18 @@ Partial Class dlgStringHandling
         Me.ucrChkIgnoreCase.Checked = False
         resources.ApplyResources(Me.ucrChkIgnoreCase, "ucrChkIgnoreCase")
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        '
+        'ucrChkComments
+        '
+        Me.ucrChkComments.Checked = False
+        resources.ApplyResources(Me.ucrChkComments, "ucrChkComments")
+        Me.ucrChkComments.Name = "ucrChkComments"
+        '
+        'ucrChkMultiline
+        '
+        Me.ucrChkMultiline.Checked = False
+        resources.ApplyResources(Me.ucrChkMultiline, "ucrChkMultiline")
+        Me.ucrChkMultiline.Name = "ucrChkMultiline"
         '
         'ucrInputBoundary
         '
