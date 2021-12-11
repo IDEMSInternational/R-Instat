@@ -569,7 +569,7 @@ Public Class dlgImportDataset
                 strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -685,7 +685,8 @@ Public Class dlgImportDataset
                               Environment.NewLine & "Do you still want to load?",
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFileOrFolderPath)
+                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFilePathSystem)
+                        SetDialogStateFromFile("")
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
