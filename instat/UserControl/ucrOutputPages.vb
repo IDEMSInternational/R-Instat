@@ -293,4 +293,10 @@ Public Class ucrOutputPages
             End If
         Next
     End Sub
+
+    Private Sub tabControl_KeyDown(sender As Object, e As KeyEventArgs) Handles tabControl.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.C Then
+            Clipboard.SetText(tabControl.SelectedTab.Text)
+        End If
+    End Sub
 End Class
