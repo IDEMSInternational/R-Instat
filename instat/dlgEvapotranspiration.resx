@@ -577,16 +577,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHargreavesSamani.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 12</value>
+    <value>210, 12</value>
   </data>
   <data name="rdoHargreavesSamani.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 27</value>
+    <value>131, 27</value>
   </data>
   <data name="rdoHargreavesSamani.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="rdoHargreavesSamani.Text" xml:space="preserve">
-    <value>Hargreaves Samani</value>
+    <value>Hargreaves- Samani</value>
   </data>
   <data name="rdoHargreavesSamani.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -613,7 +613,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPenmanMonteith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 12</value>
+    <value>103, 12</value>
   </data>
   <data name="rdoPenmanMonteith.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 27</value>
@@ -838,10 +838,10 @@
     <value>19</value>
   </data>
   <data name="ucrPnlMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 10</value>
+    <value>102, 10</value>
   </data>
   <data name="ucrPnlMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 41</value>
+    <value>244, 37</value>
   </data>
   <data name="ucrPnlMethod.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
