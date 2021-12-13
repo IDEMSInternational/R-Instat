@@ -96,6 +96,7 @@ Public Class sdgPlots
 
 
         ucrBaseSubdialog.iHelpTopicID = 136
+
         'facets tab  
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
