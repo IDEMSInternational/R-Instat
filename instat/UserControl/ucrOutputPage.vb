@@ -193,6 +193,7 @@ Public Class ucrOutputPage
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
+        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
     End Sub
 
     Private Function CopyOneImageOnly() As Boolean
@@ -270,51 +271,21 @@ Public Class ucrOutputPage
         RaiseEvent RefreshContextButtons()
     End Sub
 
-    'Private Sub r1_SelectionChanged(sender As Object, e As EventArgs)
-    '    For Each element In pnlMain.Controls
-    '        'For Each elt In panel.Controls
-    '        If TypeOf element Is RichTextBox Then
-    '            Dim richtext As RichTextBox = CType(sender, RichTextBox)
-    '            Dim dto As New DataObject()
-    '            Dim txt As String = richtext.SelectedText
-    '            dto.SetText(richtext.Rtf, TextDataFormat.Rtf)
-    '            dto.SetText(richtext.Text, TextDataFormat.UnicodeText)
-    '            Clipboard.Clear()
-    '            Clipboard.SetDataObject(dto)
-    '        End If
-    '        'Next
-    '    Next
-    'End Sub
-
-    Public Sub CopyToRichTextBox()
-        Try
-            For Each control In pnlMain.Controls
-                If TypeOf control Is Panel Then
-                    For Each element In control.Controls
-                        If TypeOf element Is RichTextBox Then
-                            Dim richtext As RichTextBox = CType(element, RichTextBox)
-                            AddHandler richtext.SelectionChanged, AddressOf richText_Event
-                            'Dim dto As New DataObject()
-                            'dto.SetText(richtext.Rtf, TextDataFormat.Rtf)
-                            'dto.SetText(richtext.Text, TextDataFormat.UnicodeText)
-                            'Clipboard.Clear()
-                            'Clipboard.SetDataObject(dto)
-                        End If
+    Private Sub richTextBox_CopySelectedText(sender As Object, e As KeyEventArgs)
+        If e.KeyData = Keys.Control + Keys.C Then
+            Try
+                Dim richText As RichTextBox = CType(sender, RichTextBox)
+                Dim strClip As String = String.Empty
+                With richText
+                    For Each Line As String In .Lines
+                        strClip &= Line & Environment.NewLine
                     Next
-                End If
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
-    Private Sub richText_Event(sender As Object, e As EventArgs)
-        Dim richText = CType(sender, RichTextBox)
-        Dim dto As New DataObject()
-        dto.SetText(richText.Rtf, TextDataFormat.Rtf)
-        dto.SetText(richText.Text, TextDataFormat.UnicodeText)
-        Clipboard.Clear()
-        Clipboard.SetDataObject(dto)
+                    Clipboard.SetText(strClip, TextDataFormat.Text)
+                End With
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
     End Sub
 
     Private Sub Panel_Resize(sender As Object, e As EventArgs)
