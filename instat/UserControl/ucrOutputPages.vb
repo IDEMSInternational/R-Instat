@@ -295,8 +295,8 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tabControl_KeyDown(sender As Object, e As KeyEventArgs) Handles tabControl.KeyDown
-        If e.Control AndAlso e.KeyCode = Keys.C Then
-            Clipboard.SetText(tabControl.SelectedTab.Text)
+        If e.Control  Then
+            _selectedOutputPage.CopyToRichTextBox()
         End If
     End Sub
 End Class
