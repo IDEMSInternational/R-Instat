@@ -42,6 +42,7 @@ Public Class dlgTransformClimatic
     Private clsGrowingDegreDiffOperator, clsGrowingDegreeLogicOperator, clsGrowingDegreeOperator As New ROperator
     Private clsModifiedMinfunction As New RFunction
     Private clsModifiedDiffOperator, clsModifiedLogicOperator, clsModifiedGDDOperator As New ROperator
+    Private clsLogicalRFunction, clsLogicalGDDRFunction As New RFunction
 
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
@@ -73,9 +74,6 @@ Public Class dlgTransformClimatic
         Dim dctInputPosition As New Dictionary(Of String, String)
         Dim dctInputCircularPosition As New Dictionary(Of String, String)
 
-        Dim lstControls As New List(Of Control)
-        lstControls.AddRange({lblYear, grpTransform})
-
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
@@ -95,7 +93,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
         ucrPnlTransform.AddFunctionNamesCondition(rdoMultSpells, "rollapply")
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
-        ucrPnlTransform.AddParameterIsStringCondition(rdoDegree, "function_exp")
+        ucrPnlTransform.AddParameterIsROperatorCondition(rdoDegree, "function_exp")
 
         ucrPnlEvap.AddRadioButton(rdoEvapValue)
         ucrPnlEvap.AddRadioButton(rdoEvapVariable)
@@ -126,7 +124,7 @@ Public Class dlgTransformClimatic
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
-        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
+        'ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 
         ' What is this used for? I don't think this requires a key.
         ucrReceiverDate.Selector = ucrSelectorTransform
@@ -252,9 +250,8 @@ Public Class dlgTransformClimatic
         ucrChkUseMaxMin.AddToLinkedControls({ucrReceiverTMax, ucrReceiverTMin}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkUseMaxMin.AddToLinkedControls(ucrReceiverTMean, {False}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNudHDD.SetParameter(New RParameter("baseline", 1, bNewIncludeArgumentName:=False))
+        ucrNudHDD.SetParameter(New RParameter("baseline", 0, bNewIncludeArgumentName:=False))
         ucrNudHDD.SetMinMax(Integer.MinValue, Integer.MaxValue)
-        ucrNudHDD.Increment = 0.1
         ucrNudHDD.SetLinkedDisplayControl(lblBaselneHDD)
 
         ucrNudGDD.SetParameter(New RParameter("baseline", 1, bNewIncludeArgumentName:=False))
@@ -293,7 +290,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
         ucrPnlTransform.AddToLinkedControls(ucrChkGroupByYear, {rdoCount, rdoMoving, rdoSpell, rdoMultSpells, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrReceiverYear, ucrReceiverData}, {rdoCumulative, rdoCount, rdoMoving, rdoMultSpells, rdoSpell, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrReceiverYear, ucrReceiverData, ucrChkOptions}, {rdoCumulative, rdoCount, rdoMoving, rdoMultSpells, rdoSpell, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrChkUseMaxMin, ucrPnlDegree}, {rdoDegree}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkCircular.AddToLinkedControls(ucrInputCircularPosition, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -301,7 +298,9 @@ Public Class dlgTransformClimatic
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrReceiverYear.SetLinkedDisplayControl(lstControls)
+        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
+        'Temporary fix: ucrChkOptions is only used in linking
+        ucrChkOptions.SetLinkedDisplayControl(grpTransform)
         ucrPnlDegree.SetLinkedDisplayControl(grpDegree)
     End Sub
 
@@ -340,6 +339,8 @@ Public Class dlgTransformClimatic
         clsModifiedDiffOperator = New ROperator
         clsModifiedLogicOperator = New ROperator
         clsModifiedGDDOperator = New ROperator
+        clsLogicalRFunction = New RFunction
+        clsLogicalGDDRFunction = New RFunction
 
         clsPMinFunctionMax = New RFunction
         clsPMaxFunctionMax = New RFunction
@@ -462,17 +463,20 @@ Public Class dlgTransformClimatic
         clsTMeanDivideOperator.bToScriptAsRString = True
 
         clsHeatingDegreeDiffOperator.SetOperation("-")
-        clsHeatingDegreeDiffOperator.AddParameter("baseline", 15, iPosition:=0)
+        'clsHeatingDegreeDiffOperator.AddParameter("baseline", 15, iPosition:=0)
         clsHeatingDegreeDiffOperator.AddParameter("tmean", "tmean", iPosition:=1)
 
         clsHeatingDegreeLogicOperator.SetOperation("<")
         clsHeatingDegreeLogicOperator.AddParameter("tmean", "tmean", iPosition:=0)
         clsHeatingDegreeLogicOperator.AddParameter("baseline", 15, iPosition:=1)
-        clsHeatingDegreeLogicOperator.bBrackets = True
+        'clsHeatingDegreeLogicOperator.bBrackets = True
+
+        clsLogicalRFunction.SetRCommand("")
+        clsLogicalRFunction.AddParameter("logical", clsROperatorParameter:=clsHeatingDegreeLogicOperator, iPosition:=0, bIncludeArgumentName:=False)
 
         clsHeatingDegreeOperator.SetOperation("*")
         clsHeatingDegreeOperator.AddParameter("x", clsROperatorParameter:=clsHeatingDegreeDiffOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsHeatingDegreeOperator.AddParameter("y", clsROperatorParameter:=clsHeatingDegreeLogicOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsHeatingDegreeOperator.AddParameter("y", clsRFunctionParameter:=clsLogicalRFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsHeatingDegreeOperator.bToScriptAsRString = True
 
         clsGrowingDegreDiffOperator.SetOperation("-")
@@ -482,11 +486,14 @@ Public Class dlgTransformClimatic
         clsGrowingDegreeLogicOperator.SetOperation(">")
         clsGrowingDegreeLogicOperator.AddParameter("tmean", "tmean", iPosition:=0)
         clsGrowingDegreeLogicOperator.AddParameter("baseline", 15, iPosition:=1)
-        clsGrowingDegreeLogicOperator.bBrackets = True
+        'clsGrowingDegreeLogicOperator.bBrackets = True
+
+        clsLogicalGDDRFunction.SetRCommand("")
+        clsLogicalGDDRFunction.AddParameter("logical", clsROperatorParameter:=clsGrowingDegreeLogicOperator, iPosition:=0, bIncludeArgumentName:=False)
 
         clsGrowingDegreeOperator.SetOperation("*")
         clsGrowingDegreeOperator.AddParameter("x", clsROperatorParameter:=clsGrowingDegreDiffOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsGrowingDegreeOperator.AddParameter("y", clsROperatorParameter:=clsGrowingDegreeLogicOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsGrowingDegreeOperator.AddParameter("y", clsRFunctionParameter:=clsLogicalGDDRFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsGrowingDegreeOperator.bToScriptAsRString = True
 
         clsModifiedMinfunction.SetRCommand("min")

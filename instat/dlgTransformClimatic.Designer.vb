@@ -105,6 +105,7 @@ Partial Class dlgTransformClimatic
         Me.ucrChkUseMaxMin = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
+        Me.ucrChkOptions = New instat.ucrCheck()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -190,6 +191,7 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrChkOptions)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
         Me.grpTransform.Controls.Add(Me.ucrChkGroupByYear)
@@ -634,12 +636,16 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverTMean.strNcFilePath = ""
         Me.ucrReceiverTMean.ucrSelector = Nothing
         '
+        'ucrChkOptions
+        '
+        Me.ucrChkOptions.Checked = False
+        resources.ApplyResources(Me.ucrChkOptions, "ucrChkOptions")
+        Me.ucrChkOptions.Name = "ucrChkOptions"
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverTMax)
-        Me.Controls.Add(Me.lblTMax)
         Me.Controls.Add(Me.rdoDegree)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
@@ -658,14 +664,16 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrChkUseMaxMin)
         Me.Controls.Add(Me.ucrReceiverYear)
-        Me.Controls.Add(Me.ucrReceiverTMean)
         Me.Controls.Add(Me.lblTMean)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.lblTMin)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.ucrReceiverTMin)
         Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.grpDegree)
+        Me.Controls.Add(Me.ucrReceiverTMax)
+        Me.Controls.Add(Me.lblTMax)
+        Me.Controls.Add(Me.ucrReceiverTMean)
+        Me.Controls.Add(Me.ucrReceiverTMin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -745,4 +753,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrNudHDD As ucrNud
     Friend WithEvents ucrInputLimit As ucrInputTextBox
     Friend WithEvents lblLimit As Label
+    Friend WithEvents ucrChkOptions As ucrCheck
 End Class
