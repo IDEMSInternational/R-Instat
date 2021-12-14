@@ -66,7 +66,6 @@ Public Class ucrDataFrameMetadata
         AddHandler _grid.EditValue, AddressOf EditValue
 
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, rowRightClickMenu, Nothing)
-        _grid.InstatOptions = frmMain.clsInstatOptions
         _grid.SetupMainWorksheet("metadata")
     End Sub
 
