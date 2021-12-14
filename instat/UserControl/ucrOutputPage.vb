@@ -126,7 +126,7 @@ Public Class ucrOutputPage
     End Sub
 
     ''' <summary>
-    ''' Copies selected elenments to clipboard
+    ''' Copies selected elements to clipboard
     ''' </summary>
     Public Sub CopySelectedElementsToClipboard()
         If CopyOneImageOnly() Then
@@ -137,11 +137,14 @@ Public Class ucrOutputPage
         For Each element In SelectedElements
             AddElementToRichTextBox(element, richText)
         Next
-        Dim dto As New DataObject()
-        dto.SetText(richText.Rtf, TextDataFormat.Rtf)
-        dto.SetText(richText.Text, TextDataFormat.UnicodeText)
-        Clipboard.Clear()
-        Clipboard.SetDataObject(dto)
+        Dim strClip As String = String.Empty
+        With richText
+            For Each Line As String In .Lines
+                strClip &= Line & Environment.NewLine
+            Next
+            Clipboard.Clear()
+            Clipboard.SetText(strClip, TextDataFormat.Text)
+        End With
     End Sub
 
     ''' <summary>
@@ -280,6 +283,7 @@ Public Class ucrOutputPage
                     For Each Line As String In .Lines
                         strClip &= Line & Environment.NewLine
                     Next
+                    Clipboard.Clear()
                     Clipboard.SetText(strClip, TextDataFormat.Text)
                 End With
             Catch ex As Exception
