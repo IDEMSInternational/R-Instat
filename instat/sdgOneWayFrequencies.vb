@@ -29,6 +29,8 @@ Public Class sdgOneWayFrequencies
         Dim dctOmitZero As New Dictionary(Of String, String)
         Dim dctColors As New Dictionary(Of String, String)
 
+        ucrBaseOneWayFrequencies.iHelpTopicID = 518
+
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
         'Table Only
