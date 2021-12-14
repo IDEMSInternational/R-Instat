@@ -18,7 +18,6 @@ Public Interface IGrid
 
     Property CurrentWorksheet As clsWorksheetAdapter
     WriteOnly Property DataBook As clsDataBook
-    WriteOnly Property InstatOptions As InstatOptions
     Property bEnabled() As Boolean
     Property bVisible() As Boolean
     Function AddNewWorksheet(strName As String) As clsWorksheetAdapter
