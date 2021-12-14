@@ -1,0 +1,81 @@
+﻿####################################################################################################
+#
+# This file provides a way to ignore specified WinForm controls when the application or dialog is 
+# translated into a different language.
+# 
+# For example, this file can be used to ensure that a specific label's text stays the same, even 
+# when the rest of the dialog is translated into French or Portuguese.
+# 
+# Examples of controls that should be ignored (i.e. never translated) include:
+# 
+#     - Text that references pre-existing data or meta data (e.g. a file name, data frame name, 
+#       column name, cell value etc.)
+#     - Text that represents R code (e.g. a variable name, code snippet or a complete 
+#       script/statement)
+# 
+# Each line in this file may represent:
+# 
+#     - The name of a specific control to ignore. The name must be identical to the name in the 
+#       'form_controls.form_name' column in the 'rInstatTranslations.db' database 
+#       (e.g. 'dlgAugment_ucrModelReceiver_txtReceiverSingle')
+# 
+#     - A group of controls to ignore. The group is specified using SQLite pattern matching 
+#       (see https://www.sqlite.org/lang_expr.html). Examples:
+#         - 'dlgAugment_%' do not translate any of the controls in the 'dlgAugment' dialog
+#         - '%_txtReceiverSingle' do not translate any text in single receivers
+# 
+#     - An exclamation point ('!') at the start of the line negates the pattern. Any control in that 
+#       pattern that was previously excluded (ignored) becomes included again. 
+#       This is similar to negation in the Git ignore file (see https://git-scm.com/docs/gitignore 
+#       for a deeper explanation of negation).
+#       Negation can be useful if you want to ignore a group of controls with a few specific exceptions. 
+#       For example, the lines below ignore all the controls in the 'dlgBarChart' dialog apart from 
+#       the 'lblTitle' label:
+#         'dlgBarChart_%'
+#         '!dlgBarChart_%_lblTitle'
+#
+#     - Blank lines are ignored, they can be used as separators for readability
+#
+#     - A hash '#' at the start of the line indicates a comment
+# 
+# 
+# Technical note:
+# 
+# The specifications in this file will be used to construct an SQL command that updates the 
+# translation database.
+#
+# For example, if this file contains:
+# 
+#     %_lblModels
+#     %_lblModelpreview
+#     !dlgGlance_%
+#     !dlgTidy_%
+# 
+# then these lines will be used to construct the following SQL command:
+# 
+#     UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE 
+#         (control_name LIKE '%_lblModels' OR control_name like '%_lblModelpreview') 
+#         AND NOT 
+#         (control_name LIKE 'dlgGlance_%' OR control_name LIKE 'dlgTidy_%')
+# 
+####################################################################################################
+
+# Single receivers normally contain column names, and these should not be translated
+# Fixes issue 6519
+%_txtReceiverSingle
+
+# In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
+# This is a literal that should not be translated.
+# Fixes issue #6581
+# TODO Can we assume that the name the user specifies for saving should never be translated 
+#      in any dialog (e.g. '%_ucrInputTextSave%')?
+dlgNewDataFrame_%_ucrInputTextSave%
+
+# In the 'Split Text' dialog, the user may specify how to split the column (by space, comma, 
+# period etc.). This string should not be translated.
+# Fixes issue #6532
+dlgSplitText_ucrInputPattern%
+
+# In the 'Filter' dialog, the 'Selected Filter Preview' should not be translated.
+# Fixes issue #6949, related to PR #6956
+dlgRestrict_ucrInputFilterPreview
