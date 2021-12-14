@@ -268,8 +268,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveTable.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=1)
-
         ucrSelectorSummaryTables.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverSummaryCols.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
@@ -285,7 +283,7 @@ Public Class dlgSummaryTables
         ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
-        ucrSaveTable.SetRCode(clsMutableOperator, bReset)
+        ucrSaveTable.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         FillListView()
     End Sub
 
@@ -315,7 +313,7 @@ Public Class dlgSummaryTables
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
         sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
-                                        clsNewCellsTitleFunction:=clsCellsTitleFunction, clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction,
+                                        clsNewCellsTitleFunction:=clsCellsTitleFunction, clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewDefaultFunction:=clsDefaultFunction,
                                         clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction, clsNewTabOptionsFunction:=clsTabOptionsFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewPxFunction:=clsPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction,

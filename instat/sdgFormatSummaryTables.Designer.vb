@@ -91,6 +91,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrPnlHeader = New instat.UcrPanel()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tbpTable = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddTableFormat = New instat.ucrCheck()
         Me.ucrInputTableFontColor = New instat.ucrColors()
         Me.ucrInputTableBackgroundColor = New instat.ucrColors()
         Me.ucrInputStubLabel = New instat.ucrInputTextBox()
@@ -107,7 +108,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
-        Me.ucrChkAddTableFormat = New instat.ucrCheck()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -643,6 +644,12 @@ Partial Class sdgFormatSummaryTables
         Me.tbpTable.Name = "tbpTable"
         Me.tbpTable.UseVisualStyleBackColor = True
         '
+        'ucrChkAddTableFormat
+        '
+        Me.ucrChkAddTableFormat.Checked = False
+        resources.ApplyResources(Me.ucrChkAddTableFormat, "ucrChkAddTableFormat")
+        Me.ucrChkAddTableFormat.Name = "ucrChkAddTableFormat"
+        '
         'ucrInputTableFontColor
         '
         Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
@@ -752,16 +759,16 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
-        'ucrChkAddTableFormat
+        'ucrBaseSubdialog
         '
-        Me.ucrChkAddTableFormat.Checked = False
-        resources.ApplyResources(Me.ucrChkAddTableFormat, "ucrChkAddTableFormat")
-        Me.ucrChkAddTableFormat.Name = "ucrChkAddTableFormat"
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'sdgFormatSummaryTables
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpFormatOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -868,4 +875,5 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrChkAddHeader As ucrCheck
     Friend WithEvents ucrChkAddStyles As ucrCheck
     Friend WithEvents ucrChkAddTableFormat As ucrCheck
+    Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
 End Class
