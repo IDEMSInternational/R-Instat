@@ -79,7 +79,6 @@ Public Class ucrDataView
         '_grid = ucrLinuxGrid
 
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
-        _grid.InstatOptions = frmMain.clsInstatOptions
         AttachEventsToGrid()
         RefreshDisplayInformation()
     End Sub
