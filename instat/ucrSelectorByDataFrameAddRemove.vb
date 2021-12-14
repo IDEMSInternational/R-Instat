@@ -21,6 +21,13 @@ Public Class ucrSelectorByDataFrameAddRemove
 
     Private Sub btnDataOptions_Click(sender As Object, e As EventArgs) Handles btnDataOptions.Click
         ShowDataOptionsDialog()
+        If ParentForm IsNot Nothing Then
+            For Each ctr In ParentForm.Controls
+                If TypeOf ctr Is ucrSelector Then
+                    ctr.LoadList()
+                End If
+            Next
+        End If
     End Sub
 
     Public Sub ShowColumnSelector(bShow As Boolean)
@@ -47,5 +54,10 @@ Public Class ucrSelectorByDataFrameAddRemove
         Else
             btnDataOptions.Enabled = False
         End If
+    End Sub
+
+    Public Sub HideShowAddOrDataOptionsButton(Optional bAddVisible As Boolean = True, Optional bDataOptionsVisible As Boolean = True)
+        btnDataOptions.Visible = bDataOptionsVisible
+        btnAdd.Visible = bAddVisible
     End Sub
 End Class
