@@ -73,6 +73,9 @@ Public Class dlgTransformClimatic
         Dim dctInputPosition As New Dictionary(Of String, String)
         Dim dctInputCircularPosition As New Dictionary(Of String, String)
 
+        Dim lstControls As New List(Of Control)
+        lstControls.AddRange({lblYear, grpTransform})
+
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
@@ -149,22 +152,23 @@ Public Class dlgTransformClimatic
 
         ucrReceiverTMax.Selector = ucrSelectorTransform
         ucrReceiverTMax.SetParameter(New RParameter("tmax", 0, bNewIncludeArgumentName:=False))
-        'ucrReceiverTMax.bAutoFill = True
-        ucrReceiverData.strSelectorHeading = "Numerics"
-        ucrReceiverData.SetIncludedDataTypes({"numeric"})
+        ucrReceiverTMax.strSelectorHeading = "Numerics"
+        ucrReceiverTMax.SetDataType("numeric")
+        ucrReceiverTMax.SetParameterIsRFunction()
         ucrReceiverTMax.SetLinkedDisplayControl(lblTMax)
 
         ucrReceiverTMin.Selector = ucrSelectorTransform
         ucrReceiverTMin.SetParameter(New RParameter("tmin", 1, bNewIncludeArgumentName:=False))
-        ucrReceiverData.strSelectorHeading = "Numerics"
-        ucrReceiverData.SetIncludedDataTypes({"numeric"})
-        'ucrReceiverTMin.bAutoFill = True
+        ucrReceiverTMin.strSelectorHeading = "Numerics"
+        ucrReceiverTMin.SetDataType("numeric")
+        ucrReceiverTMin.SetParameterIsRFunction()
         ucrReceiverTMin.SetLinkedDisplayControl(lblTMin)
 
         ucrReceiverTMean.Selector = ucrSelectorTransform
         ucrReceiverTMean.SetParameter(New RParameter("tmean", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverData.strSelectorHeading = "Numerics"
-        ucrReceiverData.SetIncludedDataTypes({"numeric"})
+        ucrReceiverTMean.strSelectorHeading = "Numerics"
+        ucrReceiverTMean.SetDataType("numeric")
+        ucrReceiverTMean.SetParameterIsRFunction()
         ucrReceiverTMean.SetLinkedDisplayControl(lblTMean)
 
         ucrChkGroupByYear.SetText("Calculate by Year")
@@ -275,9 +279,9 @@ Public Class dlgTransformClimatic
         ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
 
-        ucrPnlDegree.AddToLinkedControls(ucrNudGDD, {rdoGrowingDegreeDays, rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=15)
-        ucrPnlDegree.AddToLinkedControls(ucrNudHDD, {rdoHeatingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=15)
-        ucrPnlDegree.AddToLinkedControls(ucrInputLimit, {rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=30)
+        ucrPnlDegree.AddToLinkedControls(ucrNudGDD, {rdoGrowingDegreeDays, rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15)
+        ucrPnlDegree.AddToLinkedControls(ucrNudHDD, {rdoHeatingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15)
+        ucrPnlDegree.AddToLinkedControls(ucrInputLimit, {rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
 
         ucrPnlTransform.AddToLinkedControls({ucrInputCumulative}, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
@@ -297,8 +301,7 @@ Public Class dlgTransformClimatic
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        'ucrReceiverYear.SetLinkedDisplayControl(grpTransform)
-        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
+        ucrReceiverYear.SetLinkedDisplayControl(lstControls)
         ucrPnlDegree.SetLinkedDisplayControl(grpDegree)
     End Sub
 
@@ -684,7 +687,6 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         ElseIf rdoDegree.Checked Then
-            grpTransform.Visible = False
             If rdoDiurnalRange.Checked Then
                 clsRTransform.AddParameter("function_exp", clsROperatorParameter:=clsDiurnalRangeOperator, iPosition:=1)
                 clsRTransform.RemoveParameterByName("sub_calculations")
@@ -711,6 +713,7 @@ Public Class dlgTransformClimatic
         AddCalculate()
         SetAssignName()
         GroupByYear()
+        SetMeAsReceiver()
     End Sub
 
     Private Sub SetAssignName()
@@ -816,14 +819,6 @@ Public Class dlgTransformClimatic
                 clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
                 clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
             End If
-        ElseIf rdoDegree.Checked Then
-            If ucrChkUseMaxMin.Checked Then
-                ucrReceiverTMin.SetMeAsReceiver()
-            Else
-                ucrReceiverTMean.SetMeAsReceiver()
-            End If
-        Else
-            ucrReceiverData.SetMeAsReceiver()
         End If
     End Sub
 
@@ -928,5 +923,21 @@ Public Class dlgTransformClimatic
     Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged
         'change the parameter values
         clsRTransform.AddParameter(strParameterName:="result_name", strParameterValue:=Chr(34) & ucrSaveColumn.GetText & Chr(34), iPosition:=2)
+    End Sub
+
+    Private Sub SetMeAsReceiver()
+        If Not rdoDegree.Checked Then
+            Exit Sub
+        End If
+        If ucrChkUseMaxMin.Checked Then
+                ucrReceiverTMin.SetMeAsReceiver()
+            Else
+                ucrReceiverTMean.SetMeAsReceiver()
+            End If
+
+    End Sub
+
+    Private Sub ucrChkUseMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseMaxMin.ControlValueChanged
+        SetMeAsReceiver()
     End Sub
 End Class

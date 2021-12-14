@@ -75,6 +75,8 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.grpDegree = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLimit = New instat.ucrInputTextBox()
+        Me.lblLimit = New System.Windows.Forms.Label()
         Me.rdoModifiedGDD = New System.Windows.Forms.RadioButton()
         Me.lblBaselineGDD = New System.Windows.Forms.Label()
         Me.rdoGrowingDegreeDays = New System.Windows.Forms.RadioButton()
@@ -103,8 +105,6 @@ Partial Class dlgTransformClimatic
         Me.ucrChkUseMaxMin = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
-        Me.lblLimit = New System.Windows.Forms.Label()
-        Me.ucrInputLimit = New instat.ucrInputTextBox()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -411,6 +411,20 @@ Partial Class dlgTransformClimatic
         Me.grpDegree.Name = "grpDegree"
         Me.grpDegree.TabStop = False
         '
+        'ucrInputLimit
+        '
+        Me.ucrInputLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimit.IsMultiline = False
+        Me.ucrInputLimit.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLimit, "ucrInputLimit")
+        Me.ucrInputLimit.Name = "ucrInputLimit"
+        '
+        'lblLimit
+        '
+        resources.ApplyResources(Me.lblLimit, "lblLimit")
+        Me.lblLimit.Name = "lblLimit"
+        Me.lblLimit.Tag = "Over"
+        '
         'rdoModifiedGDD
         '
         resources.ApplyResources(Me.rdoModifiedGDD, "rdoModifiedGDD")
@@ -620,27 +634,12 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverTMean.strNcFilePath = ""
         Me.ucrReceiverTMean.ucrSelector = Nothing
         '
-        'lblLimit
-        '
-        resources.ApplyResources(Me.lblLimit, "lblLimit")
-        Me.lblLimit.Name = "lblLimit"
-        Me.lblLimit.Tag = "Over"
-        '
-        'ucrInputLimit
-        '
-        Me.ucrInputLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputLimit.IsMultiline = False
-        Me.ucrInputLimit.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLimit, "ucrInputLimit")
-        Me.ucrInputLimit.Name = "ucrInputLimit"
-        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrReceiverTMax)
         Me.Controls.Add(Me.lblTMax)
-        Me.Controls.Add(Me.ucrReceiverTMin)
         Me.Controls.Add(Me.rdoDegree)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
@@ -653,7 +652,6 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrSelectorTransform)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblYear)
@@ -661,11 +659,13 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.ucrChkUseMaxMin)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverTMean)
-        Me.Controls.Add(Me.grpDegree)
         Me.Controls.Add(Me.lblTMean)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.lblTMin)
         Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.ucrReceiverTMin)
+        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.grpDegree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
