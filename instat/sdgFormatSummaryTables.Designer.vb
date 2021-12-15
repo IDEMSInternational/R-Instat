@@ -25,6 +25,8 @@ Partial Class sdgFormatSummaryTables
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFormatSummaryTables))
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpTitle = New System.Windows.Forms.TabPage()
+        Me.lblFootnote = New System.Windows.Forms.Label()
+        Me.ucrInputCellFootnote = New instat.ucrInputTextBox()
         Me.ucrInputAddSourceNote = New instat.ucrInputTextBox()
         Me.ucrChkAddSourcenote = New instat.ucrCheck()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
@@ -44,7 +46,6 @@ Partial Class sdgFormatSummaryTables
         Me.lblSubtitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
-        Me.ucrChkAddStyles = New instat.ucrCheck()
         Me.ucrChkAddHeader = New instat.ucrCheck()
         Me.grpStyle = New System.Windows.Forms.GroupBox()
         Me.ucrNudStyleFillAlpha = New instat.ucrNud()
@@ -129,6 +130,8 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpTitle
         '
+        Me.tbpTitle.Controls.Add(Me.lblFootnote)
+        Me.tbpTitle.Controls.Add(Me.ucrInputCellFootnote)
         Me.tbpTitle.Controls.Add(Me.ucrInputAddSourceNote)
         Me.tbpTitle.Controls.Add(Me.ucrChkAddSourcenote)
         Me.tbpTitle.Controls.Add(Me.grpLocation)
@@ -138,6 +141,19 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.tbpTitle, "tbpTitle")
         Me.tbpTitle.Name = "tbpTitle"
         Me.tbpTitle.UseVisualStyleBackColor = True
+        '
+        'lblFootnote
+        '
+        resources.ApplyResources(Me.lblFootnote, "lblFootnote")
+        Me.lblFootnote.Name = "lblFootnote"
+        '
+        'ucrInputCellFootnote
+        '
+        Me.ucrInputCellFootnote.AddQuotesIfUnrecognised = True
+        Me.ucrInputCellFootnote.IsMultiline = False
+        Me.ucrInputCellFootnote.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCellFootnote, "ucrInputCellFootnote")
+        Me.ucrInputCellFootnote.Name = "ucrInputCellFootnote"
         '
         'ucrInputAddSourceNote
         '
@@ -271,7 +287,6 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpHeader
         '
-        Me.tbpHeader.Controls.Add(Me.ucrChkAddStyles)
         Me.tbpHeader.Controls.Add(Me.ucrChkAddHeader)
         Me.tbpHeader.Controls.Add(Me.grpStyle)
         Me.tbpHeader.Controls.Add(Me.rdoAllColumns)
@@ -281,12 +296,6 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.tbpHeader, "tbpHeader")
         Me.tbpHeader.Name = "tbpHeader"
         Me.tbpHeader.UseVisualStyleBackColor = True
-        '
-        'ucrChkAddStyles
-        '
-        Me.ucrChkAddStyles.Checked = False
-        resources.ApplyResources(Me.ucrChkAddStyles, "ucrChkAddStyles")
-        Me.ucrChkAddStyles.Name = "ucrChkAddStyles"
         '
         'ucrChkAddHeader
         '
@@ -776,6 +785,7 @@ Partial Class sdgFormatSummaryTables
         Me.Name = "sdgFormatSummaryTables"
         Me.tbpFormatOptions.ResumeLayout(False)
         Me.tbpTitle.ResumeLayout(False)
+        Me.tbpTitle.PerformLayout()
         Me.grpLocation.ResumeLayout(False)
         Me.grpLocation.PerformLayout()
         Me.grpTitleSubtitle.ResumeLayout(False)
@@ -873,7 +883,8 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputTableBackgroundColor As ucrColors
     Friend WithEvents ucrInputTableFontColor As ucrColors
     Friend WithEvents ucrChkAddHeader As ucrCheck
-    Friend WithEvents ucrChkAddStyles As ucrCheck
     Friend WithEvents ucrChkAddTableFormat As ucrCheck
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
+    Friend WithEvents ucrInputCellFootnote As ucrInputTextBox
+    Friend WithEvents lblFootnote As Label
 End Class

@@ -117,14 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblFootnote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblFootnote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 163</value>
+  </data>
+  <data name="lblFootnote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblFootnote.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblFootnote.Text" xml:space="preserve">
+    <value>Footnote:</value>
+  </data>
+  <data name="&gt;&gt;lblFootnote.Name" xml:space="preserve">
+    <value>lblFootnote</value>
+  </data>
+  <data name="&gt;&gt;lblFootnote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFootnote.Parent" xml:space="preserve">
+    <value>tbpTitle</value>
+  </data>
+  <data name="&gt;&gt;lblFootnote.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputCellFootnote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>188, 161</value>
+  </data>
+  <data name="ucrInputCellFootnote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 21</value>
+  </data>
+  <data name="ucrInputCellFootnote.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCellFootnote.Name" xml:space="preserve">
+    <value>ucrInputCellFootnote</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCellFootnote.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCellFootnote.Parent" xml:space="preserve">
+    <value>tbpTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCellFootnote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrInputAddSourceNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>148, 282</value>
   </data>
   <data name="ucrInputAddSourceNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputAddSourceNote.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -138,7 +190,7 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;ucrInputAddSourceNote.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkAddSourcenote.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 282</value>
@@ -159,7 +211,7 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;ucrChkAddSourcenote.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrInputFootnoteColumnLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 22</value>
@@ -206,7 +258,6 @@
   <data name="lblColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -268,7 +319,7 @@
     <value>9, 182</value>
   </data>
   <data name="grpLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 83</value>
+    <value>256, 83</value>
   </data>
   <data name="grpLocation.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -286,10 +337,10 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;grpLocation.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChkAddFootnote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 156</value>
+    <value>6, 159</value>
   </data>
   <data name="ucrChkAddFootnote.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 20</value>
@@ -307,7 +358,7 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;ucrChkAddFootnote.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrChkAddTitleSubtitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 18</value>
@@ -328,7 +379,7 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTitleSubtitle.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrInputSubtitleFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>336, 55</value>
@@ -535,7 +586,7 @@
     <value>tbpTitle</value>
   </data>
   <data name="&gt;&gt;grpTitleSubtitle.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="tbpTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -564,27 +615,6 @@
   <data name="&gt;&gt;tbpTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkAddStyles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
-  </data>
-  <data name="ucrChkAddStyles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 16</value>
-  </data>
-  <data name="ucrChkAddStyles.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddStyles.Name" xml:space="preserve">
-    <value>ucrChkAddStyles</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddStyles.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddStyles.Parent" xml:space="preserve">
-    <value>tbpHeader</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddStyles.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrChkAddHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
   </data>
@@ -604,7 +634,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;ucrChkAddHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrNudStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 310</value>
@@ -1561,7 +1591,7 @@
     <value>38</value>
   </data>
   <data name="grpStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 72</value>
+    <value>0, 57</value>
   </data>
   <data name="grpStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 337</value>
@@ -1582,7 +1612,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;grpStyle.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoAllColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1612,7 +1642,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllColumns.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoAllRows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1639,7 +1669,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;rdoAllRows.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrPnlHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 26</value>
@@ -1660,7 +1690,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;ucrPnlHeader.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblHeader.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1687,7 +1717,7 @@
     <value>tbpHeader</value>
   </data>
   <data name="&gt;&gt;lblHeader.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="tbpHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
