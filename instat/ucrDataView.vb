@@ -231,18 +231,18 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub ResizeLabels(minSize As Single, maxSize As Single)
-        'Dim minSize As Single = 9.2
-        'Dim maxSize As Single = 11.5
+    Private Sub ResizeLabels()
+        Dim minSize As Single = 7
+        Dim maxSize As Single = 12
 
-        If lblRowDisplay.Width <= TextRenderer.MeasureText(lblRowDisplay.Text,
-      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
-            Dim newSize As Single = lblRowDisplay.Font.Size - 0.9F
+        While lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
+      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
+            Dim newSize As Single = lblRowDisplay.Font.Size - 0.5F
             If newSize >= minSize AndAlso newSize <= maxSize Then
                 lblRowDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
                 lblColDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
             End If
-        End If
+        End While
     End Sub
 
     Private Sub SetGridVisibility(bIsVisible As Boolean)
