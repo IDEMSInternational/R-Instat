@@ -231,9 +231,9 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub ResizeLabels()
-        Dim minSize As Single = 9.2
-        Dim maxSize As Single = 11.5
+    Private Sub ResizeLabels(minSize As Single, maxSize As Single)
+        'Dim minSize As Single = 9.2
+        'Dim maxSize As Single = 11.5
 
         If lblRowDisplay.Width <= TextRenderer.MeasureText(lblRowDisplay.Text,
       New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width Then
@@ -281,7 +281,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-        ResizeLabels()
+        ResizeLabels(minSize:=9.2, maxSize:=11.3)
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
@@ -748,25 +748,21 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowFirst_Click(sender As Object, e As EventArgs) Handles lblRowFirst.Click
-        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadFirstRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowBack_Click(sender As Object, e As EventArgs) Handles lblRowBack.Click
-        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadPreviousRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowNext_Click(sender As Object, e As EventArgs) Handles lblRowNext.Click
-        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadNextRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblRowLast_Click(sender As Object, e As EventArgs) Handles lblRowLast.Click
-        'bSizeLabel = False
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastRowPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
