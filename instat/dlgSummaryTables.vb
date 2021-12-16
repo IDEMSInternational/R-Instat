@@ -26,7 +26,7 @@ Public Class dlgSummaryTables
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-        clsTabOptionsFunction, clsPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+        clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
         clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction As New RFunction
 
     Private clsMutableOperator, clsColumnOperator, clsMutablePlusOperator, clsPipeOperator As New ROperator
@@ -158,7 +158,7 @@ Public Class dlgSummaryTables
         clsCellFillFunction = New RFunction
         clsHeaderFormatFunction = New RFunction
         clsTabOptionsFunction = New RFunction
-        clsPxFunction = New RFunction
+        clsBorderWeightPxFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
         clsStyleListFunction = New RFunction
@@ -259,6 +259,7 @@ Public Class dlgSummaryTables
 
         clsCellBorderFunction.SetPackageName("gt")
         clsCellBorderFunction.SetRCommand("cell_borders")
+        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
 
         clsCellFillFunction.SetPackageName("gt")
         clsCellFillFunction.SetRCommand("cell_text")
@@ -266,16 +267,16 @@ Public Class dlgSummaryTables
         clsHeaderFormatFunction.SetPackageName("mmtable2")
         clsHeaderFormatFunction.SetRCommand("header_format")
         clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
+        clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
 
         clsTabOptionsFunction.SetPackageName("gt")
         clsTabOptionsFunction.SetRCommand("tab_options")
 
-        clsPxFunction.SetPackageName("gt")
-        clsPxFunction.SetRCommand("px")
+        clsBorderWeightPxFunction.SetPackageName("gt")
+        clsBorderWeightPxFunction.SetRCommand("px")
+        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
 
         clsStyleListFunction.SetRCommand("list")
-        clsStyleListFunction.AddParameter("textStyle", clsRFunctionParameter:=clsCellTextFunction, bIncludeArgumentName:=False, iPosition:=0)
-
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)
@@ -334,7 +335,7 @@ Public Class dlgSummaryTables
         sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
                                         clsNewCellsTitleFunction:=clsCellsTitleFunction, clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewDefaultFunction:=clsDefaultFunction,
                                         clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction, clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction,
-                                        clsNewPipeOperator:=clsPipeOperator, clsNewPxFunction:=clsPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                        clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewMutablePlusOperator:=clsMutablePlusOperator,
                                         clsNewStyleListFunction:=clsStyleListFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewMutableOPerator:=clsMutableOperator, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()

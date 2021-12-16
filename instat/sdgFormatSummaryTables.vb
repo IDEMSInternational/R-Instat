@@ -2,7 +2,7 @@
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction, clsFootnoteCellFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
-        clsTabOptionsFunction, clsPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
+        clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
         clsStyleListFunction, clsDefaultFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsTempMutableOPerator, clsMutablePlusOperator As New ROperator
     Private bControlsInitialised = False
@@ -14,6 +14,9 @@ Public Class sdgFormatSummaryTables
 
     Public Sub InitialiseControls()
         bControlsInitialised = False
+        Dim dctTextSize, dctTextAlign, dctTextValign, dctTextStyle, dctTextWeight, dctTextDecorate, dctTextTransform,
+        dctTextStretch, dctTextWhitespace, dctTableAlign As New Dictionary(Of String, String)
+
         'Titles
         ucrInputTitle.SetLinkedDisplayControl(lblTitle)
         ucrInputSubtitle.SetLinkedDisplayControl(lblSubtitle)
@@ -75,72 +78,134 @@ Public Class sdgFormatSummaryTables
         ucrPnlHeader.AddParameterValuesCondition(rdoAllRows, "header", Chr(34) & "all_rows" & Chr(34))
 
         ucrChkStyleText.SetText("Add Text style")
-        ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextSize, ucrInputStyleTextAlign,
+        ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextSize, ucrInputStyleTextAlign, ucrInputStyleTextFont,
                                              ucrInputStyleTextValign, ucrInputStyleTextStyle, ucrInputStyleTextWeight, ucrInputStyleTextStretch,
                                              ucrInputStyleTextDecorate, ucrInputStyleTextTransform, ucrInputStyleTextWhitespace, ucrNudStyleTextIndent},
-                                          {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+                                          {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkStyleText.SetLinkedDisplayControl(grpStyle)
-        ucrChkStyleText.AddParameterPresentCondition(True, "boarderStyle")
-        ucrChkStyleText.AddParameterPresentCondition(False, "boarderStyle", False)
+        ucrChkStyleText.AddParameterPresentCondition(True, "textStyle")
+        ucrChkStyleText.AddParameterPresentCondition(False, "textStyle", False)
 
 
         ucrInputStyleTextColor.SetParameter(New RParameter("color", iNewPosition:=0))
-        ucrInputStyleTextColor.SetRDefault("NULL")
+        ucrInputStyleTextColor.SetRDefault("black")
         ucrInputStyleTextColor.SetLinkedDisplayControl(lblStyleTextColor)
 
         ucrInputStyleTextFont.SetLinkedDisplayControl(lblStyleTextFont)
 
         ucrInputStyleTextSize.SetParameter(New RParameter("size", iNewPosition:=2))
+        dctTextSize.Add("NULL", "NULL")
+        dctTextSize.Add("xx-small", Chr(34) & "xx-small" & Chr(34))
+        dctTextSize.Add("x-small", Chr(34) & "x-small" & Chr(34))
+        dctTextSize.Add("small", Chr(34) & "small" & Chr(34))
+        dctTextSize.Add("medium", Chr(34) & "medium" & Chr(34))
+        dctTextSize.Add("large", Chr(34) & "large" & Chr(34))
+        dctTextSize.Add("x-large", Chr(34) & "x-large" & Chr(34))
+        dctTextSize.Add("xx-large", Chr(34) & "xx-large" & Chr(34))
+        ucrInputStyleTextSize.SetItems(dctTextSize)
         ucrInputStyleTextSize.SetRDefault("NULL")
         ucrInputStyleTextSize.SetLinkedDisplayControl(lblStyleTextSize)
 
+
         ucrInputStyleTextAlign.SetParameter(New RParameter("align", iNewPosition:=3))
+        dctTextAlign.Add("NULL", "NULL")
+        dctTextAlign.Add("center", Chr(34) & "center" & Chr(34))
+        dctTextAlign.Add("left", Chr(34) & "left" & Chr(34))
+        dctTextAlign.Add("right", Chr(34) & "right" & Chr(34))
+        dctTextAlign.Add("justify", Chr(34) & "justify" & Chr(34))
+        ucrInputStyleTextAlign.SetItems(dctTextAlign)
         ucrInputStyleTextAlign.SetRDefault("NULL")
         ucrInputStyleTextAlign.SetLinkedDisplayControl(lblStyleTextAlign)
 
         ucrInputStyleTextValign.SetParameter(New RParameter("v_align", iNewPosition:=4))
+        dctTextValign.Add("NULL", "NULL")
+        dctTextValign.Add("middle", Chr(34) & "middle" & Chr(34))
+        dctTextValign.Add("top", Chr(34) & "top" & Chr(34))
+        dctTextValign.Add("bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputStyleTextValign.SetItems(dctTextValign)
         ucrInputStyleTextValign.SetRDefault("NULL")
         ucrInputStyleTextValign.SetLinkedDisplayControl(lblStyleTextVAlign)
 
         ucrInputStyleTextStyle.SetParameter(New RParameter("style", iNewPosition:=5))
+        dctTextStyle.Add("NULL", "NULL")
+        dctTextStyle.Add("normal", Chr(34) & "normal" & Chr(34))
+        dctTextStyle.Add("italic", Chr(34) & "italic" & Chr(34))
+        dctTextStyle.Add("oblique", Chr(34) & "oblique" & Chr(34))
+        ucrInputStyleTextStyle.SetItems(dctTextStyle)
         ucrInputStyleTextStyle.SetRDefault("NULL")
         ucrInputStyleTextStyle.SetLinkedDisplayControl(lblStyleTextStyle)
 
         ucrInputStyleTextWeight.SetParameter(New RParameter("weight", iNewPosition:=6))
+        dctTextWeight.Add("NULL", "NULL")
+        dctTextWeight.Add("normal", Chr(34) & "normal" & Chr(34))
+        dctTextWeight.Add("bold", Chr(34) & "bold" & Chr(34))
+        dctTextWeight.Add("lighter", Chr(34) & "lighter" & Chr(34))
+        dctTextWeight.Add("bolder", Chr(34) & "bolder" & Chr(34))
+        ucrInputStyleTextWeight.SetItems(dctTextWeight)
         ucrInputStyleTextWeight.SetRDefault("NULL")
         ucrInputStyleTextWeight.SetLinkedDisplayControl(lblStyleTextWeight)
 
         ucrInputStyleTextStretch.SetParameter(New RParameter("stretch", iNewPosition:=7))
+        dctTextStretch.Add("NULL", "NULL")
+        dctTextStretch.Add("ultra-condensed", Chr(34) & "ultra-condensed" & Chr(34))
+        dctTextStretch.Add("extra-condensed", Chr(34) & "extra-condensed" & Chr(34))
+        dctTextStretch.Add("condensed", Chr(34) & "condensed" & Chr(34))
+        dctTextStretch.Add("semi-condensed", Chr(34) & "semi-condensed" & Chr(34))
+        dctTextStretch.Add("normal", Chr(34) & "normal" & Chr(34))
+        dctTextStretch.Add("semi-expanded", Chr(34) & "semi-expanded" & Chr(34))
+        dctTextStretch.Add("expanded", Chr(34) & "expanded" & Chr(34))
+        dctTextStretch.Add("extra-expanded", Chr(34) & "extra-expanded" & Chr(34))
+        dctTextStretch.Add("ultra-expanded", Chr(34) & "ultra-expanded" & Chr(34))
+        ucrInputStyleTextStretch.SetItems(dctTextStretch)
         ucrInputStyleTextStretch.SetRDefault("NULL")
         ucrInputStyleTextStretch.SetLinkedDisplayControl(lblStyleTextStretch)
 
         ucrInputStyleTextDecorate.SetParameter(New RParameter("decorate", iNewPosition:=8))
+        dctTextDecorate.Add("NULL", "NULL")
+        dctTextDecorate.Add("overline", Chr(34) & "overline" & Chr(34))
+        dctTextDecorate.Add("line-through", Chr(34) & "line-through" & Chr(34))
+        dctTextDecorate.Add("underline", Chr(34) & "underline" & Chr(34))
+        ucrInputStyleTextDecorate.SetItems(dctTextDecorate)
         ucrInputStyleTextDecorate.SetRDefault("NULL")
-        ucrInputStyleTextDecorate.SetLinkedDisplayControl(lblStyleTextStretch)
+        ucrInputStyleTextDecorate.SetLinkedDisplayControl(lblStyleTextDecorate)
 
         ucrInputStyleTextTransform.SetParameter(New RParameter("transform", iNewPosition:=9))
+        dctTextTransform.Add("NULL", "NULL")
+        dctTextTransform.Add("uppercase", Chr(34) & "uppercase" & Chr(34))
+        dctTextTransform.Add("lowercase", Chr(34) & "lowercase" & Chr(34))
+        dctTextTransform.Add("capitalize", Chr(34) & "capitalize" & Chr(34))
+        ucrInputStyleTextTransform.SetItems(dctTextTransform)
         ucrInputStyleTextTransform.SetRDefault("NULL")
         ucrInputStyleTextTransform.SetLinkedDisplayControl(lblStyleTextTransform)
 
         ucrInputStyleTextWhitespace.SetParameter(New RParameter("whitespace", iNewPosition:=10))
+        dctTextWhitespace.Add("NULL", "NULL")
+        dctTextWhitespace.Add("normal", Chr(34) & "normal" & Chr(34))
+        dctTextWhitespace.Add("nowrap", Chr(34) & "nowrap" & Chr(34))
+        dctTextWhitespace.Add("pre", Chr(34) & "pre" & Chr(34))
+        dctTextWhitespace.Add("pre-wrap", Chr(34) & "pre-wrap" & Chr(34))
+        dctTextWhitespace.Add("pre-line", Chr(34) & "pre-line" & Chr(34))
+        dctTextWhitespace.Add("break-spaces", Chr(34) & "break-spaces" & Chr(34))
+        ucrInputStyleTextWhitespace.SetItems(dctTextWhitespace)
         ucrInputStyleTextWhitespace.SetRDefault("NULL")
         ucrInputStyleTextWhitespace.SetLinkedDisplayControl(lblStyleTextWhitespace)
 
         ucrNudStyleTextIndent.SetParameter(New RParameter("indent", iNewPosition:=11))
-        ucrNudStyleTextIndent.SetRDefault("NULL")
+        ucrNudStyleTextIndent.SetDefaultState(0)
         ucrNudStyleTextIndent.SetLinkedDisplayControl(lblStyleTextIndent)
         ucrNudStyleTextIndent.Increment = 1
 
         ucrChkStyleBoarder.SetText("Add style border")
         ucrChkStyleBoarder.AddToLinkedControls({ucrInputStyleBorderSides, ucrInputStyleBorderColor, ucrInputStyleBorderStyle, ucrNudStyleBorderWeight}, {True},
-                                               bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+                                               bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkStyleBoarder.AddParameterPresentCondition(True, "textStyle")
-        ucrChkStyleBoarder.AddParameterPresentCondition(False, "textStyle", False)
+        ucrChkStyleBoarder.AddParameterPresentCondition(True, "boarderStyle")
+        ucrChkStyleBoarder.AddParameterPresentCondition(False, "boarderStyle", False)
 
         ucrInputStyleBorderSides.SetParameter(New RParameter("sides", iNewPosition:=0))
-        ucrInputStyleBorderSides.SetRDefault("all")
+        ucrInputStyleBorderSides.SetItems({"all", "left", "right", "top", "bottom"}, bAddConditions:=True)
+        ucrInputStyleBorderSides.SetRDefault(Chr(34) & "all" & Chr(34))
         ucrInputStyleBorderSides.SetLinkedDisplayControl(lblBorderSides)
 
         ucrInputStyleBorderColor.SetParameter(New RParameter("color", iNewPosition:=1))
@@ -148,23 +213,23 @@ Public Class sdgFormatSummaryTables
         ucrInputStyleBorderColor.SetLinkedDisplayControl(lblBorderColor)
 
         ucrInputStyleBorderStyle.SetParameter(New RParameter("style", iNewPosition:=2))
-        ucrInputStyleBorderStyle.SetRDefault("solid")
+        ucrInputStyleBorderStyle.SetItems({"solid", "dashed", "dotted"}, bAddConditions:=True)
+        ucrInputStyleBorderStyle.SetRDefault(Chr(34) & "solid" & Chr(34))
         ucrInputStyleBorderStyle.SetLinkedDisplayControl(lblBorderStyle)
 
-        ucrNudStyleBorderWeight.SetParameter(New RParameter("weight", iNewPosition:=3))
-        ucrNudStyleBorderWeight.SetRDefault("1")
+        ucrNudStyleBorderWeight.SetParameter(New RParameter("weight", iNewPosition:=3, bNewIncludeArgumentName:=False))
         ucrNudStyleBorderWeight.SetLinkedDisplayControl(lblBorderWeight)
         ucrNudStyleBorderWeight.Increment = 1
 
         ucrChkStyleFill.SetText("Add fill style")
-        ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStyleFill.AddParameterPresentCondition(True, "fillStyle")
         ucrChkStyleFill.AddParameterPresentCondition(False, "fillStyle", False)
 
         ucrNudStyleFillAlpha.Increment = 0.1
         ucrNudStyleFillAlpha.SetMinMax(0.0, 1.0)
         ucrNudStyleFillAlpha.SetParameter(New RParameter("alpha", iNewPosition:=1))
-        ucrNudStyleFillAlpha.SetRDefault("NULL")
+        ucrNudStyleFillAlpha.SetDefaultState("0.0")
         ucrNudStyleFillAlpha.SetLinkedDisplayControl(lblStyleFillAlpha)
 
         ucrInputStyleFillColor.SetParameter(New RParameter("color", iNewPosition:=0))
@@ -172,18 +237,21 @@ Public Class sdgFormatSummaryTables
         ucrInputStyleFillColor.SetLinkedDisplayControl(lblStyleFillColor)
 
         'Table
-        ucrInputTableAlign.SetParameter(New RParameter("table.layout", iNewPosition:=0))
-        ucrInputTableAlign.SetItems({"left", "right", "NULL"}, bAddConditions:=True)
+        ucrInputTableAlign.SetParameter(New RParameter("table.align", iNewPosition:=0))
+        dctTableAlign.Add("NULL", "NULL")
+        dctTableAlign.Add("left", Chr(34) & "left" & Chr(34))
+        dctTableAlign.Add("right", Chr(34) & "right" & Chr(34))
+        ucrInputTableAlign.SetItems(dctTableAlign)
         ucrInputTableAlign.SetRDefault("NULL")
         ucrInputTableAlign.SetLinkedDisplayControl(lblTableAlign)
 
 
         ucrInputTableBackgroundColor.SetParameter(New RParameter("table.background.color", iNewPosition:=1))
-        ucrInputTableBackgroundColor.SetRDefault("NULL")
+        ucrInputTableBackgroundColor.SetDefaultState("grey")
         ucrInputTableBackgroundColor.SetLinkedDisplayControl(lblTableBackgroundColor)
 
         ucrInputTableFontColor.SetParameter(New RParameter("table.font.color ", 2))
-        ucrInputTableFontColor.SetRDefault("NULL")
+        ucrInputTableFontColor.SetRDefault("black")
         ucrInputTableFontColor.SetLinkedDisplayControl(lblTableFontColor)
 
         ucrInputTableLayout.SetParameter(New RParameter("table.layout", iNewPosition:=3))
@@ -192,11 +260,12 @@ Public Class sdgFormatSummaryTables
         ucrInputTableLayout.SetLinkedDisplayControl(lblTableLayout)
 
         ucrInputTableFontWeight.SetParameter(New RParameter("table.font.weight", iNewPosition:=4))
-        ucrInputTableFontWeight.SetItems({"normal", "bold", "lighter", "bolder"}, bAddConditions:=True)
+        ucrInputTableFontWeight.SetItems(dctTextWeight)
         ucrInputTableFontWeight.SetRDefault("NULL")
         ucrInputTableFontWeight.SetLinkedDisplayControl(lblTableFontWeight)
 
         ucrNudTableWidth.SetParameter(New RParameter("table.width", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrNudTableWidth.SetDefaultState(0)
 
         ucrNudTableFontSize.SetParameter(New RParameter("table.font.size", iNewPosition:=0, bNewIncludeArgumentName:=False))
 
@@ -208,7 +277,7 @@ Public Class sdgFormatSummaryTables
     Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewRSyntax As RSyntax, clsNewFootnoteCellFunction As RFunction,
                         clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction, clsNewCellTextFunction As RFunction, clsNewDefaultFunction As RFunction,
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
-                        clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
+                        clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
                         clsNewMutablePlusOperator As ROperator, clsNewFootnoteCellBodyFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -221,7 +290,7 @@ Public Class sdgFormatSummaryTables
         clsCellFillFunction = clsNewCellFillFunction
         clsHeaderFormatFunction = clsNewHeaderFormatFunction
         clsTabOptionsFunction = clsNewTabOptionsFunction
-        clsPxFunction = clsNewPxFunction
+        clsBorderWeightPxFunction = clsNewBorderWeightPxFunction
         clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
         clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
         clsStyleListFunction = clsNewStyleListFunction
@@ -262,7 +331,8 @@ Public Class sdgFormatSummaryTables
         ucrInputStyleBorderSides.SetRCode(clsCellBorderFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStyleBorderColor.SetRCode(clsCellBorderFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStyleBorderStyle.SetRCode(clsCellBorderFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudStyleBorderWeight.SetRCode(clsCellBorderFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStyleBorderWeight.SetRCode(clsBorderWeightPxFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStyleFillAlpha.SetRCode(clsCellFillFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStyleFillColor.SetRCode(clsCellFillFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableAlign.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableBackgroundColor.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
@@ -460,6 +530,14 @@ Public Class sdgFormatSummaryTables
             clsTableSourcenoteFunction.AddParameter("source_note", Chr(34) & ucrInputAddSourceNote.GetText() & Chr(34), iPosition:=1)
         Else
             clsTableSourcenoteFunction.RemoveParameterByName("source_note")
+        End If
+    End Sub
+
+    Private Sub ucrChkAddTableFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTableFormat.ControlValueChanged
+        If ucrChkAddTableFormat.Checked Then
+            clsPipeOperator.AddParameter("table_format", clsRFunctionParameter:=clsTabOptionsFunction, iPosition:=6)
+        Else
+            clsPipeOperator.RemoveParameterByName("table_format")
         End If
     End Sub
 End Class
