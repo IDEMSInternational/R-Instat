@@ -232,15 +232,22 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        Dim minSize As Single = 7
+        Dim minSize As Single = 2
         Dim maxSize As Single = 12
 
-        While lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
-      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width AndAlso
-      lblRowDisplay.Font.Size > minSize
-            lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-        End While
+        If lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width > tlpTableContainer.Width Then
+            While lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width > tlpTableContainer.Width AndAlso
+              lblRowDisplay.Font.Size > minSize
+                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+            End While
+        Else
+            While lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width < tlpTableContainer.Width AndAlso
+          lblRowDisplay.Font.Size < maxSize
+                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size + 0.5F, lblRowDisplay.Font.Style)
+                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size + 0.5F, lblRowDisplay.Font.Style)
+            End While
+        End If
     End Sub
 
     Private Sub SetGridVisibility(bIsVisible As Boolean)
@@ -279,7 +286,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-        'ResizeLabels()
+        ResizeLabels()
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
@@ -783,5 +790,9 @@ Public Class ucrDataView
     Private Sub lblColLast_Click(sender As Object, e As EventArgs) Handles lblColLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
+    Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        ResizeLabels()
     End Sub
 End Class

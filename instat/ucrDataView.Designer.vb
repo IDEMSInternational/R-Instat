@@ -808,6 +808,7 @@ Partial Class ucrDataView
         '
         'lblRowDisplay
         '
+        Me.lblRowDisplay.AutoSize = True
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblRowDisplay.Location = New System.Drawing.Point(125, 0)
