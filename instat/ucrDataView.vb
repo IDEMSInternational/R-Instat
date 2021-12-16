@@ -236,12 +236,10 @@ Public Class ucrDataView
         Dim maxSize As Single = 12
 
         While lblRowDisplay.Width < TextRenderer.MeasureText(lblRowDisplay.Text,
-      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width
-            Dim newSize As Single = lblRowDisplay.Font.Size - 0.5F
-            If newSize >= minSize AndAlso newSize <= maxSize Then
-                lblRowDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
-                lblColDisplay.Font = New Font("Microsoft Sans Serif", newSize, lblRowDisplay.Font.Style)
-            End If
+      New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width AndAlso
+      lblRowDisplay.Font.Size > minSize
+            lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
+            lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
         End While
     End Sub
 
@@ -281,7 +279,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-        ResizeLabels(minSize:=9.2, maxSize:=11.3)
+        'ResizeLabels()
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
