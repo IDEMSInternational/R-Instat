@@ -144,7 +144,7 @@
     <value>5, 158</value>
   </data>
   <data name="ucrChkDefineAsFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 20</value>
+    <value>202, 20</value>
   </data>
   <data name="ucrChkDefineAsFactor.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -274,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 132</value>
+    <value>6, 128</value>
   </data>
   <data name="lblLength.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -430,7 +430,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 28</value>
+    <value>6, 31</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -529,7 +529,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 80</value>
+    <value>253, 59</value>
   </data>
   <data name="lblPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -553,7 +553,7 @@
     <value>7</value>
   </data>
   <data name="txtGetPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 96</value>
+    <value>255, 75</value>
   </data>
   <data name="txtGetPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 140</value>
@@ -583,7 +583,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 243</value>
+    <value>255, 218</value>
   </data>
   <data name="lblMessage.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 52</value>
@@ -703,7 +703,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 24</value>
+    <value>343, 24</value>
   </data>
   <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -773,6 +773,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>448, 387</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
