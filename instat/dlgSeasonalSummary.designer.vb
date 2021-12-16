@@ -43,6 +43,7 @@ Partial Class dlgSeasonalSummary
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 151)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
@@ -52,6 +53,7 @@ Partial Class dlgSeasonalSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(460, 216)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -62,6 +64,7 @@ Partial Class dlgSeasonalSummary
         Me.Tag = "Seasonal_Summary"
         Me.Text = "Seasonal Summary"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

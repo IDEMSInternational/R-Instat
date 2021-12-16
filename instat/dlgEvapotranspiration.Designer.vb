@@ -384,6 +384,7 @@ Partial Class dlgEvapotranspiration
         Me.grpMissingDataOpts.ResumeLayout(False)
         Me.grpWindSpeed.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -66,6 +66,7 @@ Partial Class dlgCalculator
         Me.ShowIcon = False
         Me.Tag = "Calculations"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrCalc As ucrCalculator

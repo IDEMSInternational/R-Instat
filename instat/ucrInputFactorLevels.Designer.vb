@@ -22,8 +22,16 @@ Partial Class ucrInputFactorLevels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.SuspendLayout()
+        '
+        'ucrInputFactorLevels
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.Name = "ucrInputFactorLevels"
+        Me.ResumeLayout(False)
+
     End Sub
 
 End Class

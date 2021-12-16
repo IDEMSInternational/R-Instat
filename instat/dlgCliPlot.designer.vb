@@ -82,6 +82,7 @@ Partial Class dlgCliPlot
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(82, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -416,6 +417,7 @@ Partial Class dlgCliPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(564, 378)
         Me.Controls.Add(Me.lblShowLegend)
         Me.Controls.Add(Me.txtShowLegend)

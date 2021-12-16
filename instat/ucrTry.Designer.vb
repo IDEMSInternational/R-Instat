@@ -49,6 +49,7 @@ Partial Class ucrTry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Name = "ucrTry"

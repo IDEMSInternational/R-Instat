@@ -26,14 +26,14 @@ Partial Class dlgCompareColumns
         Me.lblFirstColumn = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
         Me.grpComparisions = New System.Windows.Forms.GroupBox()
-        Me.lblTolerance = New System.Windows.Forms.Label()
-        Me.rdoByValue = New System.Windows.Forms.RadioButton()
-        Me.rdoByRow = New System.Windows.Forms.RadioButton()
         Me.ucrChkAllValues = New instat.ucrCheck()
         Me.ucrChkUnion = New instat.ucrCheck()
         Me.ucrChkIntersection = New instat.ucrCheck()
         Me.ucrChkSecondNotFirst = New instat.ucrCheck()
         Me.ucrChkFirstNotSecond = New instat.ucrCheck()
+        Me.lblTolerance = New System.Windows.Forms.Label()
+        Me.rdoByValue = New System.Windows.Forms.RadioButton()
+        Me.rdoByRow = New System.Windows.Forms.RadioButton()
         Me.ucrInputTolerance = New instat.ucrInputComboBox()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveLogical = New instat.ucrSave()
@@ -67,33 +67,6 @@ Partial Class dlgCompareColumns
         Me.grpComparisions.Name = "grpComparisions"
         Me.grpComparisions.TabStop = False
         '
-        'lblTolerance
-        '
-        resources.ApplyResources(Me.lblTolerance, "lblTolerance")
-        Me.lblTolerance.Name = "lblTolerance"
-        '
-        'rdoByValue
-        '
-        resources.ApplyResources(Me.rdoByValue, "rdoByValue")
-        Me.rdoByValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByValue.FlatAppearance.BorderSize = 2
-        Me.rdoByValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByValue.Name = "rdoByValue"
-        Me.rdoByValue.TabStop = True
-        Me.rdoByValue.Tag = ""
-        Me.rdoByValue.UseVisualStyleBackColor = True
-        '
-        'rdoByRow
-        '
-        resources.ApplyResources(Me.rdoByRow, "rdoByRow")
-        Me.rdoByRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByRow.FlatAppearance.BorderSize = 2
-        Me.rdoByRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByRow.Name = "rdoByRow"
-        Me.rdoByRow.TabStop = True
-        Me.rdoByRow.Tag = ""
-        Me.rdoByRow.UseVisualStyleBackColor = True
-        '
         'ucrChkAllValues
         '
         Me.ucrChkAllValues.Checked = False
@@ -123,6 +96,33 @@ Partial Class dlgCompareColumns
         Me.ucrChkFirstNotSecond.Checked = False
         resources.ApplyResources(Me.ucrChkFirstNotSecond, "ucrChkFirstNotSecond")
         Me.ucrChkFirstNotSecond.Name = "ucrChkFirstNotSecond"
+        '
+        'lblTolerance
+        '
+        resources.ApplyResources(Me.lblTolerance, "lblTolerance")
+        Me.lblTolerance.Name = "lblTolerance"
+        '
+        'rdoByValue
+        '
+        resources.ApplyResources(Me.rdoByValue, "rdoByValue")
+        Me.rdoByValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByValue.FlatAppearance.BorderSize = 2
+        Me.rdoByValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByValue.Name = "rdoByValue"
+        Me.rdoByValue.TabStop = True
+        Me.rdoByValue.Tag = ""
+        Me.rdoByValue.UseVisualStyleBackColor = True
+        '
+        'rdoByRow
+        '
+        resources.ApplyResources(Me.rdoByRow, "rdoByRow")
+        Me.rdoByRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByRow.FlatAppearance.BorderSize = 2
+        Me.rdoByRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByRow.Name = "rdoByRow"
+        Me.rdoByRow.TabStop = True
+        Me.rdoByRow.Tag = ""
+        Me.rdoByRow.UseVisualStyleBackColor = True
         '
         'ucrInputTolerance
         '

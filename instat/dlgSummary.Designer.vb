@@ -43,6 +43,7 @@ Partial Class dlgSummary
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 124)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -52,6 +53,7 @@ Partial Class dlgSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 209)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -62,6 +64,7 @@ Partial Class dlgSummary
         Me.Tag = "Summary"
         Me.Text = "Summary"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
