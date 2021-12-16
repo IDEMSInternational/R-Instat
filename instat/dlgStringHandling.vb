@@ -206,7 +206,6 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("string", 0), iAdditionalPairNo:=4)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("string", 0), iAdditionalPairNo:=5)
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
-        'ucrInputPattern.AddAdditionalCodeParameterPair(clsRegexFunction, ucrInputPattern.GetParameter(), iAdditionalPairNo:=1)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
@@ -217,7 +216,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsReplaceAllFunction, iAdditionalPairNo:=5)
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
-        ' ucrInputPattern.SetRCode(clsStringCollFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
