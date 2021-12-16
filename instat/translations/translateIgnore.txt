@@ -84,3 +84,12 @@ dlgRestrict_ucrInputFilterPreview
 # Partially fixes issue #7026, related to PR #7035
 dlgEvapotranspiration_%_rdoPenmanMonteith
 dlgEvapotranspiration_%_rdoHargreavesSamani
+
+# In the 'Boxplot' dialog, the selected 'Facet' either for Station, Year or Within Year should not be translated
+# Fixes issue #6185, item a)
+dlgClimaticBoxPlot_ucrInputStation%
+dlgClimaticBoxPlot_ucrInputStation_cboInput%
+dlgClimaticBoxPlot_ucrInputYear%
+dlgClimaticBoxPlot_ucrInputYear_cboInput%
+dlgClimaticBoxPlot_ucrInputWithinYear%
+dlgClimaticBoxPlot_ucrInputWithinYear_cboInput%
