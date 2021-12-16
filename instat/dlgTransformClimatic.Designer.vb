@@ -51,61 +51,61 @@ Partial Class dlgTransformClimatic
         Me.lblSumOver = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
         Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlEvap = New instat.UcrPanel()
-        Me.ucrInputCumulative = New instat.ucrInputComboBox()
-        Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.lblPosition = New System.Windows.Forms.Label()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrChkCircular = New instat.ucrCheck()
-        Me.ucrNudMultSpells = New instat.ucrNud()
         Me.lblRowsMultSpells = New System.Windows.Forms.Label()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
-        Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.lblWBEvaporation = New System.Windows.Forms.Label()
-        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrNudSumOver = New instat.ucrNud()
         Me.lblWBCapacity = New System.Windows.Forms.Label()
-        Me.ucrNudWBCapacity = New instat.ucrNud()
-        Me.ucrInputSum = New instat.ucrInputComboBox()
-        Me.ucrNudCountOver = New instat.ucrNud()
+        Me.lblTMin = New System.Windows.Forms.Label()
         Me.grpDegree = New System.Windows.Forms.GroupBox()
-        Me.ucrInputLimit = New instat.ucrInputTextBox()
         Me.lblLimit = New System.Windows.Forms.Label()
         Me.rdoModifiedGDD = New System.Windows.Forms.RadioButton()
         Me.lblBaselineGDD = New System.Windows.Forms.Label()
         Me.rdoGrowingDegreeDays = New System.Windows.Forms.RadioButton()
         Me.lblBaselneHDD = New System.Windows.Forms.Label()
         Me.rdoHeatingDegreeDays = New System.Windows.Forms.RadioButton()
-        Me.ucrNudGDD = New instat.ucrNud()
         Me.rdoTMean = New System.Windows.Forms.RadioButton()
-        Me.ucrNudHDD = New instat.ucrNud()
         Me.rdoDiurnalRange = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlDegree = New instat.UcrPanel()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
         Me.rdoDegree = New System.Windows.Forms.RadioButton()
-        Me.lblTMin = New System.Windows.Forms.Label()
         Me.lblTMax = New System.Windows.Forms.Label()
         Me.lblTMean = New System.Windows.Forms.Label()
-        Me.ucrReceiverTMax = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTMin = New instat.ucrReceiverSingle()
+        Me.ucrInputSpellLower = New instat.ucrInputComboBox()
+        Me.ucrChkOptions = New instat.ucrCheck()
+        Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
+        Me.ucrPnlEvap = New instat.UcrPanel()
+        Me.ucrInputCumulative = New instat.ucrInputComboBox()
+        Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrChkCircular = New instat.ucrCheck()
+        Me.ucrNudMultSpells = New instat.ucrNud()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
+        Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.ucrNudSumOver = New instat.ucrNud()
+        Me.ucrNudWBCapacity = New instat.ucrNud()
+        Me.ucrInputSum = New instat.ucrInputComboBox()
+        Me.ucrNudCountOver = New instat.ucrNud()
         Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkUseMaxMin = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTMin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTMax = New instat.ucrReceiverSingle()
+        Me.ucrInputLimit = New instat.ucrInputTextBox()
+        Me.ucrNudGDD = New instat.ucrNud()
+        Me.ucrNudHDD = New instat.ucrNud()
+        Me.ucrPnlDegree = New instat.UcrPanel()
+        Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
-        Me.ucrChkOptions = New instat.ucrCheck()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -191,6 +191,7 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
         Me.grpTransform.Controls.Add(Me.ucrChkOptions)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
@@ -210,7 +211,6 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.ucrInputCondition)
         Me.grpTransform.Controls.Add(Me.lblCondition)
         Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
-        Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
         Me.grpTransform.Controls.Add(Me.lblCountOver)
         Me.grpTransform.Controls.Add(Me.ucrNudSumOver)
         Me.grpTransform.Controls.Add(Me.lblWBCapacity)
@@ -221,29 +221,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
-        '
-        'ucrReceiverEvap
-        '
-        Me.ucrReceiverEvap.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
-        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
-        Me.ucrReceiverEvap.Selector = Nothing
-        Me.ucrReceiverEvap.strNcFilePath = ""
-        Me.ucrReceiverEvap.ucrSelector = Nothing
-        '
-        'ucrInputEvaporation
-        '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        '
-        'ucrChkGroupByYear
-        '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'rdoEvapVariable
         '
@@ -259,77 +236,16 @@ Partial Class dlgTransformClimatic
         Me.rdoEvapValue.TabStop = True
         Me.rdoEvapValue.UseVisualStyleBackColor = True
         '
-        'ucrPnlEvap
-        '
-        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
-        Me.ucrPnlEvap.Name = "ucrPnlEvap"
-        '
-        'ucrInputCumulative
-        '
-        Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
-        Me.ucrInputCumulative.GetSetSelectedIndex = -1
-        Me.ucrInputCumulative.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
-        Me.ucrInputCumulative.Name = "ucrInputCumulative"
-        '
-        'ucrInputCircularPosition
-        '
-        Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputCircularPosition.GetSetSelectedIndex = -1
-        Me.ucrInputCircularPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
-        Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
-        '
         'lblPosition
         '
         resources.ApplyResources(Me.lblPosition, "lblPosition")
         Me.lblPosition.Name = "lblPosition"
-        '
-        'ucrInputPosition
-        '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.GetSetSelectedIndex = -1
-        Me.ucrInputPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
-        Me.ucrInputPosition.Name = "ucrInputPosition"
-        '
-        'ucrChkCircular
-        '
-        Me.ucrChkCircular.Checked = False
-        resources.ApplyResources(Me.ucrChkCircular, "ucrChkCircular")
-        Me.ucrChkCircular.Name = "ucrChkCircular"
-        '
-        'ucrNudMultSpells
-        '
-        Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
-        Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
-        Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblRowsMultSpells
         '
         resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
         Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
         Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
-        '
-        'ucrInputSpellUpper
-        '
-        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellUpper.IsMultiline = False
-        Me.ucrInputSpellUpper.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpellUpper, "ucrInputSpellUpper")
-        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
-        '
-        'ucrInputCondition
-        '
-        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
-        Me.ucrInputCondition.GetSetSelectedIndex = -1
-        Me.ucrInputCondition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
-        Me.ucrInputCondition.Name = "ucrInputCondition"
         '
         'lblCondition
         '
@@ -343,57 +259,16 @@ Partial Class dlgTransformClimatic
         Me.lblWBEvaporation.Name = "lblWBEvaporation"
         Me.lblWBEvaporation.Tag = "Evaporation"
         '
-        'ucrInputSpellLower
-        '
-        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellLower.IsMultiline = False
-        Me.ucrInputSpellLower.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpellLower, "ucrInputSpellLower")
-        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        '
-        'ucrNudSumOver
-        '
-        Me.ucrNudSumOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSumOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSumOver, "ucrNudSumOver")
-        Me.ucrNudSumOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSumOver.Name = "ucrNudSumOver"
-        Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblWBCapacity
         '
         resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
         Me.lblWBCapacity.Name = "lblWBCapacity"
         Me.lblWBCapacity.Tag = "Capacity"
         '
-        'ucrNudWBCapacity
+        'lblTMin
         '
-        Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWBCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWBCapacity, "ucrNudWBCapacity")
-        Me.ucrNudWBCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWBCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWBCapacity.Name = "ucrNudWBCapacity"
-        Me.ucrNudWBCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputSum
-        '
-        Me.ucrInputSum.AddQuotesIfUnrecognised = True
-        Me.ucrInputSum.GetSetSelectedIndex = -1
-        Me.ucrInputSum.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSum, "ucrInputSum")
-        Me.ucrInputSum.Name = "ucrInputSum"
-        '
-        'ucrNudCountOver
-        '
-        Me.ucrNudCountOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCountOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCountOver, "ucrNudCountOver")
-        Me.ucrNudCountOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCountOver.Name = "ucrNudCountOver"
-        Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblTMin, "lblTMin")
+        Me.lblTMin.Name = "lblTMin"
         '
         'grpDegree
         '
@@ -412,14 +287,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpDegree, "grpDegree")
         Me.grpDegree.Name = "grpDegree"
         Me.grpDegree.TabStop = False
-        '
-        'ucrInputLimit
-        '
-        Me.ucrInputLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputLimit.IsMultiline = False
-        Me.ucrInputLimit.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLimit, "ucrInputLimit")
-        Me.ucrInputLimit.Name = "ucrInputLimit"
         '
         'lblLimit
         '
@@ -460,16 +327,6 @@ Partial Class dlgTransformClimatic
         Me.rdoHeatingDegreeDays.TabStop = True
         Me.rdoHeatingDegreeDays.UseVisualStyleBackColor = True
         '
-        'ucrNudGDD
-        '
-        Me.ucrNudGDD.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudGDD.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudGDD, "ucrNudGDD")
-        Me.ucrNudGDD.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudGDD.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudGDD.Name = "ucrNudGDD"
-        Me.ucrNudGDD.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'rdoTMean
         '
         resources.ApplyResources(Me.rdoTMean, "rdoTMean")
@@ -477,27 +334,12 @@ Partial Class dlgTransformClimatic
         Me.rdoTMean.TabStop = True
         Me.rdoTMean.UseVisualStyleBackColor = True
         '
-        'ucrNudHDD
-        '
-        Me.ucrNudHDD.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHDD.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudHDD, "ucrNudHDD")
-        Me.ucrNudHDD.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHDD.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHDD.Name = "ucrNudHDD"
-        Me.ucrNudHDD.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'rdoDiurnalRange
         '
         resources.ApplyResources(Me.rdoDiurnalRange, "rdoDiurnalRange")
         Me.rdoDiurnalRange.Name = "rdoDiurnalRange"
         Me.rdoDiurnalRange.TabStop = True
         Me.rdoDiurnalRange.UseVisualStyleBackColor = True
-        '
-        'ucrPnlDegree
-        '
-        resources.ApplyResources(Me.ucrPnlDegree, "ucrPnlDegree")
-        Me.ucrPnlDegree.Name = "ucrPnlDegree"
         '
         'rdoMultSpells
         '
@@ -529,11 +371,6 @@ Partial Class dlgTransformClimatic
         Me.rdoDegree.Name = "rdoDegree"
         Me.rdoDegree.UseVisualStyleBackColor = True
         '
-        'lblTMin
-        '
-        resources.ApplyResources(Me.lblTMin, "lblTMin")
-        Me.lblTMin.Name = "lblTMin"
-        '
         'lblTMax
         '
         resources.ApplyResources(Me.lblTMax, "lblTMax")
@@ -544,23 +381,141 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.lblTMean, "lblTMean")
         Me.lblTMean.Name = "lblTMean"
         '
-        'ucrReceiverTMax
+        'ucrInputSpellLower
         '
-        Me.ucrReceiverTMax.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverTMax, "ucrReceiverTMax")
-        Me.ucrReceiverTMax.Name = "ucrReceiverTMax"
-        Me.ucrReceiverTMax.Selector = Nothing
-        Me.ucrReceiverTMax.strNcFilePath = ""
-        Me.ucrReceiverTMax.ucrSelector = Nothing
+        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.GetSetSelectedIndex = -1
+        Me.ucrInputSpellLower.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSpellLower, "ucrInputSpellLower")
+        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         '
-        'ucrReceiverTMin
+        'ucrChkOptions
         '
-        Me.ucrReceiverTMin.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverTMin, "ucrReceiverTMin")
-        Me.ucrReceiverTMin.Name = "ucrReceiverTMin"
-        Me.ucrReceiverTMin.Selector = Nothing
-        Me.ucrReceiverTMin.strNcFilePath = ""
-        Me.ucrReceiverTMin.ucrSelector = Nothing
+        Me.ucrChkOptions.Checked = False
+        resources.ApplyResources(Me.ucrChkOptions, "ucrChkOptions")
+        Me.ucrChkOptions.Name = "ucrChkOptions"
+        '
+        'ucrReceiverEvap
+        '
+        Me.ucrReceiverEvap.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
+        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
+        Me.ucrReceiverEvap.Selector = Nothing
+        Me.ucrReceiverEvap.strNcFilePath = ""
+        Me.ucrReceiverEvap.ucrSelector = Nothing
+        '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        '
+        'ucrPnlEvap
+        '
+        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
+        Me.ucrPnlEvap.Name = "ucrPnlEvap"
+        '
+        'ucrInputCumulative
+        '
+        Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        Me.ucrInputCumulative.GetSetSelectedIndex = -1
+        Me.ucrInputCumulative.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
+        Me.ucrInputCumulative.Name = "ucrInputCumulative"
+        '
+        'ucrInputCircularPosition
+        '
+        Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCircularPosition.GetSetSelectedIndex = -1
+        Me.ucrInputCircularPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
+        Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        '
+        'ucrChkCircular
+        '
+        Me.ucrChkCircular.Checked = False
+        resources.ApplyResources(Me.ucrChkCircular, "ucrChkCircular")
+        Me.ucrChkCircular.Name = "ucrChkCircular"
+        '
+        'ucrNudMultSpells
+        '
+        Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
+        Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
+        Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSpellUpper
+        '
+        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.IsMultiline = False
+        Me.ucrInputSpellUpper.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSpellUpper, "ucrInputSpellUpper")
+        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        '
+        'ucrInputCondition
+        '
+        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.GetSetSelectedIndex = -1
+        Me.ucrInputCondition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
+        Me.ucrInputCondition.Name = "ucrInputCondition"
+        '
+        'ucrNudSumOver
+        '
+        Me.ucrNudSumOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSumOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSumOver, "ucrNudSumOver")
+        Me.ucrNudSumOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSumOver.Name = "ucrNudSumOver"
+        Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWBCapacity
+        '
+        Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudWBCapacity, "ucrNudWBCapacity")
+        Me.ucrNudWBCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWBCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBCapacity.Name = "ucrNudWBCapacity"
+        Me.ucrNudWBCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSum
+        '
+        Me.ucrInputSum.AddQuotesIfUnrecognised = True
+        Me.ucrInputSum.GetSetSelectedIndex = -1
+        Me.ucrInputSum.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSum, "ucrInputSum")
+        Me.ucrInputSum.Name = "ucrInputSum"
+        '
+        'ucrNudCountOver
+        '
+        Me.ucrNudCountOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCountOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCountOver, "ucrNudCountOver")
+        Me.ucrNudCountOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCountOver.Name = "ucrNudCountOver"
+        Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveColumn
         '
@@ -590,15 +545,6 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
-        '
         'ucrSelectorTransform
         '
         Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
@@ -627,6 +573,66 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
+        'ucrReceiverTMin
+        '
+        Me.ucrReceiverTMin.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverTMin, "ucrReceiverTMin")
+        Me.ucrReceiverTMin.Name = "ucrReceiverTMin"
+        Me.ucrReceiverTMin.Selector = Nothing
+        Me.ucrReceiverTMin.strNcFilePath = ""
+        Me.ucrReceiverTMin.ucrSelector = Nothing
+        '
+        'ucrReceiverTMax
+        '
+        Me.ucrReceiverTMax.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverTMax, "ucrReceiverTMax")
+        Me.ucrReceiverTMax.Name = "ucrReceiverTMax"
+        Me.ucrReceiverTMax.Selector = Nothing
+        Me.ucrReceiverTMax.strNcFilePath = ""
+        Me.ucrReceiverTMax.ucrSelector = Nothing
+        '
+        'ucrInputLimit
+        '
+        Me.ucrInputLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimit.IsMultiline = False
+        Me.ucrInputLimit.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLimit, "ucrInputLimit")
+        Me.ucrInputLimit.Name = "ucrInputLimit"
+        '
+        'ucrNudGDD
+        '
+        Me.ucrNudGDD.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGDD.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudGDD, "ucrNudGDD")
+        Me.ucrNudGDD.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudGDD.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGDD.Name = "ucrNudGDD"
+        Me.ucrNudGDD.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudHDD
+        '
+        Me.ucrNudHDD.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHDD.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudHDD, "ucrNudHDD")
+        Me.ucrNudHDD.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHDD.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHDD.Name = "ucrNudHDD"
+        Me.ucrNudHDD.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlDegree
+        '
+        resources.ApplyResources(Me.ucrPnlDegree, "ucrPnlDegree")
+        Me.ucrPnlDegree.Name = "ucrPnlDegree"
+        '
+        'ucrReceiverData
+        '
+        Me.ucrReceiverData.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.ucrSelector = Nothing
+        '
         'ucrReceiverTMean
         '
         Me.ucrReceiverTMean.frmParent = Me
@@ -636,16 +642,11 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverTMean.strNcFilePath = ""
         Me.ucrReceiverTMean.ucrSelector = Nothing
         '
-        'ucrChkOptions
-        '
-        Me.ucrChkOptions.Checked = False
-        resources.ApplyResources(Me.ucrChkOptions, "ucrChkOptions")
-        Me.ucrChkOptions.Name = "ucrChkOptions"
-        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.rdoDegree)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
@@ -664,16 +665,15 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrChkUseMaxMin)
         Me.Controls.Add(Me.ucrReceiverYear)
-        Me.Controls.Add(Me.lblTMean)
-        Me.Controls.Add(Me.lblData)
-        Me.Controls.Add(Me.lblTMin)
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.ucrReceiverData)
-        Me.Controls.Add(Me.grpDegree)
+        Me.Controls.Add(Me.ucrReceiverTMin)
         Me.Controls.Add(Me.ucrReceiverTMax)
         Me.Controls.Add(Me.lblTMax)
+        Me.Controls.Add(Me.grpDegree)
+        Me.Controls.Add(Me.lblTMean)
+        Me.Controls.Add(Me.lblData)
+        Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrReceiverTMean)
-        Me.Controls.Add(Me.ucrReceiverTMin)
+        Me.Controls.Add(Me.lblTMin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -712,7 +712,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrNudWBCapacity As ucrNud
     Friend WithEvents lblWBCapacity As Label
     Friend WithEvents grpTransform As GroupBox
-    Friend WithEvents ucrInputSpellLower As ucrInputTextBox
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
     Friend WithEvents lblCondition As Label
@@ -734,9 +733,9 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrSaveColumn As ucrSave
     Friend WithEvents ucrReceiverTMean As ucrReceiverSingle
     Friend WithEvents lblTMean As Label
-    Friend WithEvents ucrReceiverTMax As ucrReceiverSingle
-    Friend WithEvents lblTMax As Label
     Friend WithEvents ucrReceiverTMin As ucrReceiverSingle
+    Friend WithEvents lblTMax As Label
+    Friend WithEvents ucrReceiverTMax As ucrReceiverSingle
     Friend WithEvents lblTMin As Label
     Friend WithEvents ucrChkUseMaxMin As ucrCheck
     Friend WithEvents rdoDegree As RadioButton
@@ -754,4 +753,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputLimit As ucrInputTextBox
     Friend WithEvents lblLimit As Label
     Friend WithEvents ucrChkOptions As ucrCheck
+    Friend WithEvents ucrInputSpellLower As ucrInputComboBox
 End Class
