@@ -55,7 +55,6 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
         ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
 
-
         ucrPnlFixedRegex.AddRadioButton(rdoFixed)
         ucrPnlFixedRegex.AddRadioButton(rdoRegex)
 
@@ -150,7 +149,6 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.ResetText()
 
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
-
 
         clsBoundaryFunction.SetPackageName("stringr")
         clsBoundaryFunction.SetRCommand("boundary")
