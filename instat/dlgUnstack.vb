@@ -211,8 +211,8 @@ Public Class dlgUnstack
             Next
             clsSelectDataFunction.AddParameter("Multiple_Values", clsROperatorParameter:=clsCommaMultiple, iPosition:=4, bIncludeArgumentName:=False)
             clsDcastFunction.AddParameter("values_from", ucrMultipleColumnsReceiver.GetVariableNames(False), iPosition:=2)
-
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub AddRemoveDataOrPipeOperator()
