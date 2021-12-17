@@ -232,22 +232,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        Dim minSize As Single = 2
-        Dim maxSize As Single = 12
+        Dim minSize As Single = 7
+        TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
 
-        If lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width > tlpTableContainer.Width Then
-            While lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width > tlpTableContainer.Width AndAlso
-              lblRowDisplay.Font.Size > minSize
-                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size - 0.5F, lblRowDisplay.Font.Style)
-            End While
-        Else
-            While lblRowDisplay.Width + TextRenderer.MeasureText(lblRowDisplay.Text, New Font(lblRowDisplay.Font.FontFamily, lblRowDisplay.Font.Size, lblRowDisplay.Font.Style)).Width < tlpTableContainer.Width AndAlso
-          lblRowDisplay.Font.Size < maxSize
-                lblRowDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size + 0.5F, lblRowDisplay.Font.Style)
-                lblColDisplay.Font = New Font("Microsoft Sans Serif", lblRowDisplay.Font.Size + 0.5F, lblRowDisplay.Font.Style)
-            End While
-        End If
+        While lblRowDisplay.Width + lblColDisplay.Width + lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width + lblRowBack.Width +
+            lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso TblPanPageDisplay.Font.Size > minSize
+            TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.5F, TblPanPageDisplay.Font.Style)
+        End While
     End Sub
 
     Private Sub SetGridVisibility(bIsVisible As Boolean)
@@ -792,7 +783,7 @@ Public Class ucrDataView
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
-    Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
     End Sub
 End Class

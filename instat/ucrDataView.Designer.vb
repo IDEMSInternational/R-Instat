@@ -710,15 +710,15 @@ Partial Class ucrDataView
         Me.tlpTableContainer.SetColumnSpan(Me.TblPanPageDisplay, 2)
         Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
         Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TblPanPageDisplay.Controls.Add(Me.lblColFirst, 7, 0)
         Me.TblPanPageDisplay.Controls.Add(Me.lblColDisplay, 6, 0)
@@ -746,7 +746,7 @@ Partial Class ucrDataView
         Me.lblColFirst.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblColFirst.Location = New System.Drawing.Point(315, 0)
         Me.lblColFirst.Name = "lblColFirst"
-        Me.lblColFirst.Size = New System.Drawing.Size(10, 20)
+        Me.lblColFirst.Size = New System.Drawing.Size(18, 20)
         Me.lblColFirst.TabIndex = 15
         Me.lblColFirst.Text = "«"
         Me.lblColFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -766,9 +766,9 @@ Partial Class ucrDataView
         '
         Me.lblColNext.AutoSize = True
         Me.lblColNext.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblColNext.Location = New System.Drawing.Point(347, 0)
+        Me.lblColNext.Location = New System.Drawing.Point(363, 0)
         Me.lblColNext.Name = "lblColNext"
-        Me.lblColNext.Size = New System.Drawing.Size(10, 20)
+        Me.lblColNext.Size = New System.Drawing.Size(18, 20)
         Me.lblColNext.TabIndex = 13
         Me.lblColNext.Text = ">"
         Me.lblColNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -777,9 +777,9 @@ Partial Class ucrDataView
         '
         Me.lblColBack.AutoSize = True
         Me.lblColBack.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblColBack.Location = New System.Drawing.Point(331, 0)
+        Me.lblColBack.Location = New System.Drawing.Point(339, 0)
         Me.lblColBack.Name = "lblColBack"
-        Me.lblColBack.Size = New System.Drawing.Size(10, 20)
+        Me.lblColBack.Size = New System.Drawing.Size(18, 20)
         Me.lblColBack.TabIndex = 12
         Me.lblColBack.Text = "<"
         Me.lblColBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -788,9 +788,9 @@ Partial Class ucrDataView
         '
         Me.lblRowLast.AutoSize = True
         Me.lblRowLast.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowLast.Location = New System.Drawing.Point(236, 0)
+        Me.lblRowLast.Location = New System.Drawing.Point(228, 0)
         Me.lblRowLast.Name = "lblRowLast"
-        Me.lblRowLast.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowLast.Size = New System.Drawing.Size(18, 20)
         Me.lblRowLast.TabIndex = 11
         Me.lblRowLast.Text = "»"
         Me.lblRowLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -799,9 +799,9 @@ Partial Class ucrDataView
         '
         Me.lblRowFirst.AutoSize = True
         Me.lblRowFirst.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowFirst.Location = New System.Drawing.Point(188, 0)
+        Me.lblRowFirst.Location = New System.Drawing.Point(156, 0)
         Me.lblRowFirst.Name = "lblRowFirst"
-        Me.lblRowFirst.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowFirst.Size = New System.Drawing.Size(18, 20)
         Me.lblRowFirst.TabIndex = 10
         Me.lblRowFirst.Text = "«"
         Me.lblRowFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -811,7 +811,7 @@ Partial Class ucrDataView
         Me.lblRowDisplay.AutoSize = True
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.lblRowDisplay.Location = New System.Drawing.Point(125, 0)
+        Me.lblRowDisplay.Location = New System.Drawing.Point(93, 0)
         Me.lblRowDisplay.Name = "lblRowDisplay"
         Me.lblRowDisplay.Size = New System.Drawing.Size(57, 20)
         Me.lblRowDisplay.TabIndex = 9
@@ -822,9 +822,9 @@ Partial Class ucrDataView
         '
         Me.lblRowNext.AutoSize = True
         Me.lblRowNext.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowNext.Location = New System.Drawing.Point(220, 0)
+        Me.lblRowNext.Location = New System.Drawing.Point(204, 0)
         Me.lblRowNext.Name = "lblRowNext"
-        Me.lblRowNext.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowNext.Size = New System.Drawing.Size(18, 20)
         Me.lblRowNext.TabIndex = 8
         Me.lblRowNext.Text = ">"
         Me.lblRowNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -833,9 +833,9 @@ Partial Class ucrDataView
         '
         Me.lblColLast.AutoSize = True
         Me.lblColLast.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblColLast.Location = New System.Drawing.Point(363, 0)
+        Me.lblColLast.Location = New System.Drawing.Point(387, 0)
         Me.lblColLast.Name = "lblColLast"
-        Me.lblColLast.Size = New System.Drawing.Size(10, 20)
+        Me.lblColLast.Size = New System.Drawing.Size(18, 20)
         Me.lblColLast.TabIndex = 7
         Me.lblColLast.Text = "»"
         Me.lblColLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -844,9 +844,9 @@ Partial Class ucrDataView
         '
         Me.lblRowBack.AutoSize = True
         Me.lblRowBack.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowBack.Location = New System.Drawing.Point(204, 0)
+        Me.lblRowBack.Location = New System.Drawing.Point(180, 0)
         Me.lblRowBack.Name = "lblRowBack"
-        Me.lblRowBack.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowBack.Size = New System.Drawing.Size(18, 20)
         Me.lblRowBack.TabIndex = 5
         Me.lblRowBack.Text = "<"
         Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
