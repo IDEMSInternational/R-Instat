@@ -232,11 +232,10 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        Dim minSize As Single = 7
+        Dim minSize As Single = 5
         TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
 
-        While lblRowDisplay.Width + lblColDisplay.Width + lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width + lblRowBack.Width +
-            lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso TblPanPageDisplay.Font.Size > minSize
+        While lblRowDisplay.Width + lblColDisplay.Width + lblColDisplay.Width + lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width + lblRowBack.Width + lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso TblPanPageDisplay.Font.Size > minSize
             TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.5F, TblPanPageDisplay.Font.Style)
         End While
     End Sub
