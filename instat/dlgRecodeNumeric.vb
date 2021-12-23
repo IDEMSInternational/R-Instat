@@ -41,7 +41,7 @@ Public Class dlgRecodeNumeric
         ucrBase.iHelpTopicID = 43
 
         ucrPnlRadioButtons.SetParameter(New RParameter("type", 0))
-        ucrPnlRadioButtons.AddRadioButton(rdoQuantiles, "quantile")
+        ucrPnlRadioButtons.AddRadioButton(rdoLevels, "levels")
         ucrPnlRadioButtons.AddRadioButton(rdoMinimum, "minimum")
         ucrPnlRadioButtons.AddRadioButton(rdoBreakPoints, "points")
 
@@ -52,8 +52,8 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.strSelectorHeading = "Numerics"
         ucrReceiverRecode.SetMeAsReceiver()
 
-        ucrNudQuantiles.SetParameter(New RParameter("g", 1))
-        ucrNudQuantiles.SetMinMax(1)
+        ucrNudLevels.SetParameter(New RParameter("g", 1))
+        ucrNudLevels.SetMinMax(1)
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
         ucrNudMinimum.SetMinMax(1)
@@ -61,7 +61,7 @@ Public Class dlgRecodeNumeric
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
         ttMinimum.SetToolTip(rdoMinimum, "Splits the data into groups of at least the specified size.")
-        ttQuantiles.SetToolTip(rdoQuantiles, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
+        ttLevels.SetToolTip(rdoLevels, "For a value of 4, splits the data so 4 groups are produced of (roughly) equal size.")
         ttBreakpoint.SetToolTip(rdoBreakPoints, "Separate values by commas. For example 20, 30, 40, 50 gives 3 groups. If minimum is less than 20 then a 4th group is added. Similarly with a maximum more than 50.")
 
         ucrChkAddLabels.SetParameter(New RParameter("levels.mean", 4))
@@ -69,7 +69,7 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.SetText("Label Groups with Means")
         ucrChkAddLabels.SetRDefault("FALSE")
 
-        ucrPnlRadioButtons.AddToLinkedControls(ucrNudQuantiles, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="5")
         ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -92,14 +92,14 @@ Public Class dlgRecodeNumeric
         clsCut2Function.SetPackageName("Hmisc")
         clsCut2Function.SetRCommand("cut2")
         clsCut2Function.AddParameter("g", "4", iPosition:=1)
-        clsDummyRfunction.AddParameter("type", "quantile", iPosition:=0)
+        clsDummyRfunction.AddParameter("type", "levels", iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCut2Function)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
         ucrNudMinimum.SetRCode(clsCut2Function, bReset)
-        ucrNudQuantiles.SetRCode(clsCut2Function, bReset)
+        ucrNudLevels.SetRCode(clsCut2Function, bReset)
         ucrReceiverRecode.SetRCode(clsCut2Function, bReset)
         ucrSaveRecode.SetRCode(clsCut2Function, bReset)
         ucrChkAddLabels.SetRCode(clsCut2Function, bReset)
@@ -107,7 +107,7 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete AndAlso (rdoMinimum.Checked AndAlso Not ucrNudMinimum.IsEmpty OrElse rdoQuantiles.Checked AndAlso Not ucrNudQuantiles.IsEmpty OrElse rdoBreakPoints.Checked AndAlso Not ucrMultipleNumericRecode.IsEmpty) Then
+        If Not ucrReceiverRecode.IsEmpty() AndAlso ucrSaveRecode.IsComplete AndAlso (rdoMinimum.Checked AndAlso Not ucrNudMinimum.IsEmpty OrElse rdoLevels.Checked AndAlso Not ucrNudLevels.IsEmpty OrElse rdoBreakPoints.Checked AndAlso Not ucrMultipleNumericRecode.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -137,7 +137,7 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrReceiverRecode.ControlContentsChanged,
-        ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrNudMinimum.ControlContentsChanged, ucrNudQuantiles.ControlContentsChanged, ucrPnlRadioButtons.ControlContentsChanged
+        ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrNudMinimum.ControlContentsChanged, ucrNudLevels.ControlContentsChanged, ucrPnlRadioButtons.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

@@ -44,13 +44,13 @@ Partial Class dlgRecodeNumeric
         Me.grpQuantileGroups = New System.Windows.Forms.GroupBox()
         Me.rdoBreakPoints = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
-        Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.rdoLevels = New System.Windows.Forms.RadioButton()
         Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
         Me.ucrNudMinimum = New instat.ucrNud()
-        Me.ucrNudQuantiles = New instat.ucrNud()
+        Me.ucrNudLevels = New instat.ucrNud()
         Me.ucrPnlRadioButtons = New instat.UcrPanel()
         Me.ttBreakpoint = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ttQuantiles = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttLevels = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttMinimum = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrSaveRecode = New instat.ucrSave()
@@ -70,10 +70,10 @@ Partial Class dlgRecodeNumeric
         '
         Me.grpQuantileGroups.Controls.Add(Me.rdoBreakPoints)
         Me.grpQuantileGroups.Controls.Add(Me.rdoMinimum)
-        Me.grpQuantileGroups.Controls.Add(Me.rdoQuantiles)
+        Me.grpQuantileGroups.Controls.Add(Me.rdoLevels)
         Me.grpQuantileGroups.Controls.Add(Me.ucrMultipleNumericRecode)
         Me.grpQuantileGroups.Controls.Add(Me.ucrNudMinimum)
-        Me.grpQuantileGroups.Controls.Add(Me.ucrNudQuantiles)
+        Me.grpQuantileGroups.Controls.Add(Me.ucrNudLevels)
         Me.grpQuantileGroups.Controls.Add(Me.ucrPnlRadioButtons)
         resources.ApplyResources(Me.grpQuantileGroups, "grpQuantileGroups")
         Me.grpQuantileGroups.Name = "grpQuantileGroups"
@@ -93,12 +93,12 @@ Partial Class dlgRecodeNumeric
         Me.rdoMinimum.TabStop = True
         Me.rdoMinimum.UseVisualStyleBackColor = True
         '
-        'rdoQuantiles
+        'rdoLevels
         '
-        resources.ApplyResources(Me.rdoQuantiles, "rdoQuantiles")
-        Me.rdoQuantiles.Name = "rdoQuantiles"
-        Me.rdoQuantiles.TabStop = True
-        Me.rdoQuantiles.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoLevels, "rdoLevels")
+        Me.rdoLevels.Name = "rdoLevels"
+        Me.rdoLevels.TabStop = True
+        Me.rdoLevels.UseVisualStyleBackColor = True
         '
         'ucrMultipleNumericRecode
         '
@@ -118,15 +118,15 @@ Partial Class dlgRecodeNumeric
         Me.ucrNudMinimum.Name = "ucrNudMinimum"
         Me.ucrNudMinimum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudQuantiles
+        'ucrNudLevels
         '
-        Me.ucrNudQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudQuantiles, "ucrNudQuantiles")
-        Me.ucrNudQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudQuantiles.Name = "ucrNudQuantiles"
-        Me.ucrNudQuantiles.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLevels, "ucrNudLevels")
+        Me.ucrNudLevels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLevels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLevels.Name = "ucrNudLevels"
+        Me.ucrNudLevels.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlRadioButtons
         '
@@ -196,13 +196,13 @@ Partial Class dlgRecodeNumeric
     Friend WithEvents ucrSaveRecode As ucrSave
     Friend WithEvents ucrChkAddLabels As ucrCheck
     Friend WithEvents ucrNudMinimum As ucrNud
-    Friend WithEvents ucrNudQuantiles As ucrNud
+    Friend WithEvents ucrNudLevels As ucrNud
     Friend WithEvents grpQuantileGroups As GroupBox
     Friend WithEvents ttBreakpoint As ToolTip
-    Friend WithEvents ttQuantiles As ToolTip
+    Friend WithEvents ttLevels As ToolTip
     Friend WithEvents ttMinimum As ToolTip
     Friend WithEvents ucrPnlRadioButtons As UcrPanel
-    Friend WithEvents rdoQuantiles As RadioButton
+    Friend WithEvents rdoLevels As RadioButton
     Friend WithEvents rdoMinimum As RadioButton
     Friend WithEvents rdoBreakPoints As RadioButton
 End Class
