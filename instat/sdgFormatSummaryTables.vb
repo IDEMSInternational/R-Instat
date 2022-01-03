@@ -1,12 +1,11 @@
 ﻿Imports instat.Translations
 Public Class sdgFormatSummaryTables
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsCellsTitleFunction, clsFootnoteCellFunction,
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
-        clsStyleListFunction, clsDefaultFunction As New RFunction
-    Private clsPipeOperator, clsMutableOperator, clsTempMutableOPerator, clsMutablePlusOperator As New ROperator
+        clsStyleListFunction, clsStubHeadFunction As New RFunction
+    Private clsPipeOperator, clsMutableOperator, clsJoiningOperator As New ROperator
     Private bControlsInitialised = False
-    Private clsRsyntax As New RSyntax
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -61,27 +60,28 @@ Public Class sdgFormatSummaryTables
 
         'Header
         ucrChkAddHeader.SetText("Add Header")
-        ucrChkAddHeader.AddToLinkedControls({ucrChkStyleText, ucrPnlHeader}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddHeader.AddToLinkedControls({ucrChkStyleText, ucrPnlHeader}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
         ucrChkAddHeader.AddParameterPresentCondition(True, "header")
         ucrChkAddHeader.AddParameterPresentCondition(False, "header", False)
 
         ucrChkAddTableFormat.SetText("Add Table format")
         ucrChkAddTableFormat.AddToLinkedControls({ucrInputTableLayout, ucrInputTableAlign, ucrInputTableBackgroundColor, ucrInputTableFontWeight, ucrInputTableFontColor,
-                                                  ucrNudTableWidth, ucrNudTableFontSize}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterValue:=True)
+                                                  ucrNudTableWidth, ucrNudTableFontSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTableFormat.AddParameterPresentCondition(True, "table_format")
+        ucrChkAddTableFormat.AddParameterPresentCondition(False, "table_format", False)
 
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
-        ucrPnlHeader.AddRadioButton(rdoAllColumns)
-        ucrPnlHeader.AddRadioButton(rdoAllRows)
+        ucrPnlHeader.SetParameter(New RParameter("header", iNewPosition:=0))
+        ucrPnlHeader.AddRadioButton(rdoAllColumns, Chr(34) & "all_cols" & Chr(34))
+        ucrPnlHeader.AddRadioButton(rdoAllRows, Chr(34) & "all_rows" & Chr(34))
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
-        ucrPnlHeader.AddParameterValuesCondition(rdoAllColumns, "header", Chr(34) & "all_cols" & Chr(34))
-        ucrPnlHeader.AddParameterValuesCondition(rdoAllRows, "header", Chr(34) & "all_rows" & Chr(34))
 
         ucrChkStyleText.SetText("Add Text style")
-        ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextSize, ucrInputStyleTextAlign, ucrInputStyleTextFont,
+        ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextFont, ucrInputStyleTextSize, ucrInputStyleTextAlign,
                                              ucrInputStyleTextValign, ucrInputStyleTextStyle, ucrInputStyleTextWeight, ucrInputStyleTextStretch,
                                              ucrInputStyleTextDecorate, ucrInputStyleTextTransform, ucrInputStyleTextWhitespace, ucrNudStyleTextIndent},
-                                          {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+                                          {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkStyleText.SetLinkedDisplayControl(grpStyle)
         ucrChkStyleText.AddParameterPresentCondition(True, "textStyle")
@@ -89,10 +89,13 @@ Public Class sdgFormatSummaryTables
 
 
         ucrInputStyleTextColor.SetParameter(New RParameter("color", iNewPosition:=0))
-        ucrInputStyleTextColor.SetRDefault("black")
+        ucrInputStyleTextColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrInputStyleTextColor.SetLinkedDisplayControl(lblStyleTextColor)
 
+        ucrInputStyleTextFont.SetParameter(New RParameter("font", iNewPosition:=1))
         ucrInputStyleTextFont.SetLinkedDisplayControl(lblStyleTextFont)
+        ucrInputStyleTextFont.AddQuotesIfUnrecognised = False
+        ucrInputStyleTextFont.SetRDefault("NULL")
 
         ucrInputStyleTextSize.SetParameter(New RParameter("size", iNewPosition:=2))
         dctTextSize.Add("NULL", "NULL")
@@ -192,13 +195,14 @@ Public Class sdgFormatSummaryTables
         ucrInputStyleTextWhitespace.SetLinkedDisplayControl(lblStyleTextWhitespace)
 
         ucrNudStyleTextIndent.SetParameter(New RParameter("indent", iNewPosition:=11))
-        ucrNudStyleTextIndent.SetDefaultState(0)
+        ucrNudStyleTextIndent.SetRDefault(0)
+
         ucrNudStyleTextIndent.SetLinkedDisplayControl(lblStyleTextIndent)
         ucrNudStyleTextIndent.Increment = 1
 
         ucrChkStyleBoarder.SetText("Add style border")
         ucrChkStyleBoarder.AddToLinkedControls({ucrInputStyleBorderSides, ucrInputStyleBorderColor, ucrInputStyleBorderStyle, ucrNudStyleBorderWeight}, {True},
-                                               bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+                                                bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkStyleBoarder.AddParameterPresentCondition(True, "boarderStyle")
         ucrChkStyleBoarder.AddParameterPresentCondition(False, "boarderStyle", False)
@@ -222,14 +226,15 @@ Public Class sdgFormatSummaryTables
         ucrNudStyleBorderWeight.Increment = 1
 
         ucrChkStyleFill.SetText("Add fill style")
-        ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStyleFill.AddParameterPresentCondition(True, "fillStyle")
         ucrChkStyleFill.AddParameterPresentCondition(False, "fillStyle", False)
 
         ucrNudStyleFillAlpha.Increment = 0.1
+        ucrNudStyleFillAlpha.DecimalPlaces = 1
         ucrNudStyleFillAlpha.SetMinMax(0.0, 1.0)
         ucrNudStyleFillAlpha.SetParameter(New RParameter("alpha", iNewPosition:=1))
-        ucrNudStyleFillAlpha.SetDefaultState("0.0")
+        ucrNudStyleFillAlpha.SetRDefault("0.0")
         ucrNudStyleFillAlpha.SetLinkedDisplayControl(lblStyleFillAlpha)
 
         ucrInputStyleFillColor.SetParameter(New RParameter("color", iNewPosition:=0))
@@ -247,16 +252,16 @@ Public Class sdgFormatSummaryTables
 
 
         ucrInputTableBackgroundColor.SetParameter(New RParameter("table.background.color", iNewPosition:=1))
-        ucrInputTableBackgroundColor.SetDefaultState("grey")
+        ucrInputTableBackgroundColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrInputTableBackgroundColor.SetLinkedDisplayControl(lblTableBackgroundColor)
 
         ucrInputTableFontColor.SetParameter(New RParameter("table.font.color ", 2))
-        ucrInputTableFontColor.SetRDefault("black")
+        ucrInputTableFontColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrInputTableFontColor.SetLinkedDisplayControl(lblTableFontColor)
 
         ucrInputTableLayout.SetParameter(New RParameter("table.layout", iNewPosition:=3))
         ucrInputTableLayout.SetItems({"fixed", "auto"}, bAddConditions:=True)
-        ucrInputTableLayout.SetRDefault("fixed")
+        ucrInputTableLayout.SetRDefault(Chr(34) & "fixed" & Chr(34))
         ucrInputTableLayout.SetLinkedDisplayControl(lblTableLayout)
 
         ucrInputTableFontWeight.SetParameter(New RParameter("table.font.weight", iNewPosition:=4))
@@ -264,27 +269,33 @@ Public Class sdgFormatSummaryTables
         ucrInputTableFontWeight.SetRDefault("NULL")
         ucrInputTableFontWeight.SetLinkedDisplayControl(lblTableFontWeight)
 
-        ucrNudTableWidth.SetParameter(New RParameter("table.width", iNewPosition:=0, bNewIncludeArgumentName:=False))
-        ucrNudTableWidth.SetDefaultState(0)
+        ucrNudTableWidth.SetParameter(New RParameter("table.width", iNewPosition:=0))
+        ucrNudTableWidth.SetRDefault(0)
+        ucrNudTableWidth.SetLinkedDisplayControl(lblTableWidth)
 
-        ucrNudTableFontSize.SetParameter(New RParameter("table.font.size", iNewPosition:=0, bNewIncludeArgumentName:=False))
+
+        ucrNudTableFontSize.SetParameter(New RParameter("table.font.size", iNewPosition:=0))
+        ucrNudTableFontSize.SetRDefault(0)
+        ucrNudTableFontSize.SetLinkedDisplayControl(lblFontSize)
 
         ucrChkAddStubHeader.SetText("Add stub header")
         ucrChkAddStubHeader.AddToLinkedControls(ucrInputStubLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddStubHeader.AddParameterPresentCondition(True, "stub")
+        ucrChkAddStubHeader.AddParameterPresentCondition(False, "stub", False)
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewRSyntax As RSyntax, clsNewFootnoteCellFunction As RFunction,
-                        clsNewTableSourcenoteFunction As RFunction, clsNewCellsTitleFunction As RFunction, clsNewCellTextFunction As RFunction, clsNewDefaultFunction As RFunction,
+    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
+                        clsNewTableSourcenoteFunction As RFunction, clsNewCellTextFunction As RFunction, clsNewStubHeadFunction As RFunction,
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
-                        clsNewMutablePlusOperator As ROperator, clsNewFootnoteCellBodyFunction As RFunction)
+                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator)
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
         clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
         clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
-        clsCellsTitleFunction = clsNewCellsTitleFunction
         clsCellTextFunction = clsNewCellTextFunction
         clsCellBorderFunction = clsNewCellBorderFunction
         clsCellFillFunction = clsNewCellFillFunction
@@ -296,12 +307,10 @@ Public Class sdgFormatSummaryTables
         clsStyleListFunction = clsNewStyleListFunction
         clsPipeOperator = clsNewPipeOperator
         clsMutableOperator = clsNewMutableOPerator
-        clsTempMutableOPerator = clsMutableOperator.Clone()
-        clsDefaultFunction = clsNewDefaultFunction
         clsFootnoteCellFunction = clsNewFootnoteCellFunction
         clsFootnoteCellBodyFunction = clsNewFootnoteCellBodyFunction
-        clsMutablePlusOperator = clsNewMutablePlusOperator
-        clsRsyntax = clsNewRSyntax
+        clsJoiningOperator = clsNewJoiningOperator
+        clsStubHeadFunction = clsNewStubHeadFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -312,7 +321,7 @@ Public Class sdgFormatSummaryTables
         ucrChkAddFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSubtitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddSourcenote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkAddHeader.SetRCode(clsMutablePlusOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddHeader.SetRCode(clsMutableOperator, bReset, bCloneIfNeeded:=True)
         ucrChkStyleText.SetRCode(clsStyleListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkStyleBoarder.SetRCode(clsStyleListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkStyleFill.SetRCode(clsStyleListFunction, bReset, bCloneIfNeeded:=True)
@@ -342,6 +351,8 @@ Public Class sdgFormatSummaryTables
         ucrNudTableWidth.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableFontSize.SetRCode(clsTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlHeader.SetRCode(clsHeaderFormatFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkAddTableFormat.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddStubHeader.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
@@ -439,41 +450,23 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrChkAddHeader_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddHeader.ControlValueChanged
         If ucrChkAddHeader.Checked Then
-            clsMutablePlusOperator.AddParameter("header", clsRFunctionParameter:=clsHeaderFormatFunction, iPosition:=1)
+            clsMutableOperator.AddParameter("header", clsRFunctionParameter:=clsHeaderFormatFunction, iPosition:=2)
         Else
-            clsMutablePlusOperator.RemoveParameterByName("header")
+            clsMutableOperator.RemoveParameterByName("header")
         End If
-        setBaseFunction()
+
     End Sub
 
     Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlContentsChanged,
             ucrChkAddFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged, ucrChkAddHeader.ControlContentsChanged,
-            ucrChkAddTableFormat.ControlContentsChanged
-        clsRsyntax.lstBeforeCodes.Clear()
-        clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
-        If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse ucrChkAddHeader.Checked OrElse ucrChkAddTableFormat.Checked Then
-            clsTempMutableOPerator.RemoveAssignTo()
-            clsTempMutableOPerator.SetAssignTo("mmtable_table")
-            clsRsyntax.AddToBeforeCodes(clsTempMutableOPerator, iPosition:=1)
-            clsPipeOperator.AddParameter("table", "mmtable_table", iPosition:=0)
-            setBaseFunction()
+            ucrChkAddTableFormat.ControlContentsChanged, ucrChkAddStubHeader.ControlContentsChanged
+        If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse ucrChkAddTableFormat.Checked OrElse ucrChkAddStubHeader.Checked Then
+            clsJoiningOperator.AddParameter("pipe", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
         Else
-            clsRsyntax.RemoveFromBeforeCodes(clsTempMutableOPerator)
-            clsRsyntax.SetBaseROperator(clsMutableOperator)
+            clsJoiningOperator.RemoveParameterByName("pipe")
         End If
     End Sub
 
-    Private Sub setBaseFunction()
-        Dim clsTempPipeOperator As ROperator = clsPipeOperator.Clone()
-        clsTempPipeOperator.RemoveAssignTo()
-
-        If ucrChkAddHeader.Checked Then
-            clsMutablePlusOperator.AddParameter("pipe", clsROperatorParameter:=clsTempPipeOperator, iPosition:=0)
-            clsRsyntax.SetBaseROperator(clsMutablePlusOperator)
-        Else
-            clsRsyntax.SetBaseROperator(clsPipeOperator)
-        End If
-    End Sub
 
     Private Sub ucrChkAddFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFootnote.ControlValueChanged
         If ucrChkAddFootnote.Checked Then
@@ -538,6 +531,22 @@ Public Class sdgFormatSummaryTables
             clsPipeOperator.AddParameter("table_format", clsRFunctionParameter:=clsTabOptionsFunction, iPosition:=6)
         Else
             clsPipeOperator.RemoveParameterByName("table_format")
+        End If
+    End Sub
+
+    Private Sub ucrChkAddStubHeader_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddStubHeader.ControlValueChanged
+        If ucrChkAddStubHeader.Checked Then
+            clsPipeOperator.AddParameter("stub", clsRFunctionParameter:=clsStubHeadFunction, iPosition:=5)
+        Else
+            clsPipeOperator.RemoveParameterByName("stub")
+        End If
+    End Sub
+
+    Private Sub ucrInputStubLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStubLabel.ControlValueChanged
+        If Not ucrInputStubLabel.IsEmpty Then
+            clsStubHeadFunction.AddParameter("label", Chr(34) & ucrInputStubLabel.GetText & Chr(34), iPosition:=0)
+        Else
+            clsStubHeadFunction.RemoveParameterByName("label")
         End If
     End Sub
 End Class
