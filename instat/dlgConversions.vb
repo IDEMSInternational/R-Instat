@@ -281,10 +281,12 @@ Public Class dlgConversions
             Else
                 ucrBase.OKEnabled(False)
             End If
-        ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso ((rdoSingleValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse (rdoColumn.Checked AndAlso Not ucrReceiverLatitude.IsEmpty)) Then
+        ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso ((rdoSingleValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse
+               (rdoColumn.Checked AndAlso Not ucrReceiverLatitude.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         ElseIf rdoCoordinates.Checked Then
-            If (Not ucrReceiverDegrees.IsEmpty AndAlso ucrSaveConversions.IsComplete AndAlso ucrChkVariable.Checked) OrElse (Not ucrChkVariable.Checked AndAlso Not ucrInputDegree.IsEmpty) Then
+            If (Not ucrReceiverDegrees.IsEmpty AndAlso ucrSaveConversions.IsComplete AndAlso ucrChkVariable.Checked) OrElse
+               (Not ucrChkVariable.Checked AndAlso Not ucrInputDegree.IsEmpty) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
