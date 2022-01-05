@@ -56,6 +56,7 @@ Partial Class dlgSplitText
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.ucrInputRegexPattern = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -177,10 +178,19 @@ Partial Class dlgSplitText
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.UseVisualStyleBackColor = True
         '
+        'ucrInputRegexPattern
+        '
+        Me.ucrInputRegexPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputRegexPattern.IsMultiline = False
+        Me.ucrInputRegexPattern.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRegexPattern, "ucrInputRegexPattern")
+        Me.ucrInputRegexPattern.Name = "ucrInputRegexPattern"
+        '
         'dlgSplitText
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputRegexPattern)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
@@ -225,4 +235,5 @@ Partial Class dlgSplitText
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents ucrInputRegexPattern As ucrInputTextBox
 End Class

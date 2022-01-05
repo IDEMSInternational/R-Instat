@@ -57,6 +57,7 @@ Public Class dlgSplitText
         ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoTextComponents}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrPnlTextComponents, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFixedNumberOfComponents)
+        ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrInputRegexPattern, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudPieces.SetLinkedDisplayControl(lblNumberofPiecesToReturn)
 
         ucrReceiverSplitTextColumn.SetParameter(New RParameter("string", 0))
@@ -100,6 +101,7 @@ Public Class dlgSplitText
         clsPatternDummyFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
+        ucrInputRegexPattern.SetName("")
 
         clsSplitDummyFunction.AddParameter("checked", False, iPosition:=0)
 
@@ -159,7 +161,7 @@ Public Class dlgSplitText
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
-        ucrInputPattern.SetText(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
+        ucrInputRegexPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
     Private Sub ucrPnlSplitText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlValueChanged
@@ -173,7 +175,7 @@ Public Class dlgSplitText
         ChangeParametersValues()
     End Sub
 
-    Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
+    Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged, ucrInputPattern.ControlContentsChanged
         SplitTextOptions()
         ChangeParametersValues()
     End Sub
@@ -198,10 +200,9 @@ Public Class dlgSplitText
         clsTextComponentsFixed.RemoveParameterByName("pattern")
         clsTextComponentsMaximum.RemoveParameterByName("pattern")
         clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
-
         If ucrChkIncludeRegularExpressions.Checked Then
-            clsTextComponentsFixed.AddParameter("pattern", strPattern, iPosition:=1)
-            clsTextComponentsMaximum.AddParameter("pattern", strPattern, iPosition:=1)
+            clsTextComponentsFixed.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
+            clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
         Else
             clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
             clsTextComponentsFixed.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
@@ -217,12 +218,12 @@ Public Class dlgSplitText
         End If
     End Sub
 
-    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrInputRegexPattern.ControlValueChanged
         ChangeParametersValues()
         SetVisibleAddKeyboardButton()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

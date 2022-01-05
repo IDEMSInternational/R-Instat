@@ -144,7 +144,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.Reset()
         ucrInputReplaceBy.SetName("")
         ucrInputPattern.SetName("")
-        ucrInputPattern.Reset()
         ucrReceiverForRegexExpression.ResetText()
 
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
