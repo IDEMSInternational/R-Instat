@@ -17,8 +17,8 @@
 Public Class sdgConstructRegexExpression
 
     Private Sub sdgConstructRegexExpression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ttAddKeyboard.SetToolTip(cmdAny1, " Matches any character. For example,str_count(c(""rss"",""r.s.t""),""."") gives 3 5.  Using \\. Gives 0 2 ")
-        ttAddKeyboard.SetToolTip(cmdbegin, " Start of the string. For example, str_count(c(""rss"",""r.s.t""),""^r\\."") gives 0 1")
+        ttAddKeyboard.SetToolTip(cmdAny1, "Matches any character. For example,str_count(c(""rss"",""r.s.t""),""."") gives 3 5.  Using \\. Gives 0 2")
+        ttAddKeyboard.SetToolTip(cmdbegin, "Start of the string. For example, str_count(c(""rss"",""r.s.t""),""^r\\."") gives 0 1")
         ttAddKeyboard.SetToolTip(cmdEnd1, "End of the string. For example, str_count(c(""rss"",""r.s.t""),""s$"") gives 1 0")
         ttAddKeyboard.SetToolTip(cmdDigit, "Digit (0 to 9), For example, str_replace_all(c(""rs5"",""r19s20t""),""[^\\d]"","") gives 5 1920")
         ttAddKeyboard.SetToolTip(cmdSpace, "space. For example. str_remove_all(c(""r ss"",""r s t""),""\\s"") gives ""rss"" ""rst""")
@@ -27,9 +27,9 @@ Public Class sdgConstructRegexExpression
         ttAddKeyboard.SetToolTip(cmdOr3, "or. For example, str_count(c(""-abc"",""67""),""-|\\d"") gives 1 2")
         ttAddKeyboard.SetToolTip(cmdOr2, "n times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]{1}t"") gives 0 1 0 0")
         ttAddKeyboard.SetToolTip(cmdNumbers, "between. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]{0,2}t"") gives 1 1 1 1")
-        ttAddKeyboard.SetToolTip(cmdZeroOrOne, "0 or 1 times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]?t"") gives 1 1 0 0 ")
+        ttAddKeyboard.SetToolTip(cmdZeroOrOne, "0 or 1 times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]?t"") gives 1 1 0 0")
         ttAddKeyboard.SetToolTip(cmdPlusOne, "1 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]+t"") gives 0 1 1 1")
-        ttAddKeyboard.SetToolTip(cmdZero, "0 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]*t"") gives 1 1 1 1 ")
+        ttAddKeyboard.SetToolTip(cmdZero, "0 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]*t"") gives 1 1 1 1")
         ttAddKeyboard.SetToolTip(cmdEscape, "Escape (with +*.? etc). For example, str_detect(c(""b$t"",""bat?"",""3*4""),""[\\?\\$\\*]"") gives TRUE TRUE TRUE")
         ttAddKeyboard.SetToolTip(cmdPlusZero, "range of values. For example, str_count(c(""b$t"",""Bat?""),""[a-zA-Z]"") gives 2 3")
     End Sub
