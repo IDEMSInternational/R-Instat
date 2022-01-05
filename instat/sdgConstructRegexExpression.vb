@@ -32,7 +32,6 @@ Public Class sdgConstructRegexExpression
         ttAddKeyboard.SetToolTip(cmdZero, "0 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]*t"") gives 1 1 1 1 ")
         ttAddKeyboard.SetToolTip(cmdEscape, "Escape (with +*.? etc). For example, str_detect(c(""b$t"",""bat?"",""3*4""),""[\\?\\$\\*]"") gives TRUE TRUE TRUE")
         ttAddKeyboard.SetToolTip(cmdPlusZero, "range of values. For example, str_count(c(""b$t"",""Bat?""),""[a-zA-Z]"") gives 2 3")
-
     End Sub
 
     Public Sub Reset()
