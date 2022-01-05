@@ -2874,7 +2874,8 @@
       <DependentUpon>ucrReoGrid.vb</DependentUpon>
     </Compile>
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
-	</Compile>
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -5143,7 +5144,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
       <DependentUpon>ucrReoGrid.vb</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </EmbeddedResource>
@@ -5155,6 +5156,7 @@
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
