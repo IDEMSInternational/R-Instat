@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 62</value>
+    <value>257, 63</value>
   </data>
   <data name="lblSelectedFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSplitBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 109</value>
+    <value>257, 108</value>
   </data>
   <data name="lblSplitBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNumberofPiecesToReturn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 225</value>
+    <value>257, 205</value>
   </data>
   <data name="lblNumberofPiecesToReturn.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 13</value>
@@ -289,7 +289,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMaximumNumberOfComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 164</value>
+    <value>257, 156</value>
   </data>
   <data name="rdoMaximumNumberOfComponents.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 17</value>
@@ -319,7 +319,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFixedNumberOfComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 189</value>
+    <value>257, 181</value>
   </data>
   <data name="rdoFixedNumberOfComponents.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 17</value>
@@ -388,7 +388,7 @@
     <value>8</value>
   </data>
   <data name="ucrNudPieces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 241</value>
+    <value>257, 221</value>
   </data>
   <data name="ucrNudPieces.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -438,6 +438,33 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>453, 392</value>
   </data>
+  <data name="cmdAddkeyboard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdAddkeyboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 272</value>
+  </data>
+  <data name="cmdAddkeyboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 21</value>
+  </data>
+  <data name="cmdAddkeyboard.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="cmdAddkeyboard.Text" xml:space="preserve">
+    <value>Add keyboard</value>
+  </data>
+  <data name="&gt;&gt;cmdAddkeyboard.Name" xml:space="preserve">
+    <value>cmdAddkeyboard</value>
+  </data>
+  <data name="&gt;&gt;cmdAddkeyboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddkeyboard.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdAddkeyboard.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrSelectorSplitTextColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 52</value>
   </data>
@@ -460,27 +487,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSplitTextColumn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkAddKeyboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 273</value>
-  </data>
-  <data name="ucrChkAddKeyboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 20</value>
-  </data>
-  <data name="ucrChkAddKeyboard.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKeyboard.Name" xml:space="preserve">
-    <value>ucrChkAddKeyboard</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKeyboard.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKeyboard.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKeyboard.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Location" type="System.Drawing.Point, System.Drawing">
@@ -526,10 +532,10 @@
     <value>15</value>
   </data>
   <data name="ucrPnlTextComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 151</value>
+    <value>236, 153</value>
   </data>
   <data name="ucrPnlTextComponents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 63</value>
+    <value>205, 47</value>
   </data>
   <data name="ucrPnlTextComponents.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

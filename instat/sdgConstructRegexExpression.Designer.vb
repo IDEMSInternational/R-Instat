@@ -48,7 +48,7 @@ Partial Class sdgConstructRegexExpression
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(85, 160)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(92, 160)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(153, 30)
@@ -279,7 +279,7 @@ Partial Class sdgConstructRegexExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(361, 204)
+        Me.ClientSize = New System.Drawing.Size(345, 204)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.ucrReceiverForRegex)

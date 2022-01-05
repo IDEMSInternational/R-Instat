@@ -53,9 +53,9 @@ Partial Class dlgSplitText
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlTextComponents = New instat.UcrPanel()
-        Me.ucrChkAddKeyboard = New instat.ucrCheck()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -157,12 +157,6 @@ Partial Class dlgSplitText
         resources.ApplyResources(Me.ucrPnlTextComponents, "ucrPnlTextComponents")
         Me.ucrPnlTextComponents.Name = "ucrPnlTextComponents"
         '
-        'ucrChkAddKeyboard
-        '
-        Me.ucrChkAddKeyboard.Checked = False
-        resources.ApplyResources(Me.ucrChkAddKeyboard, "ucrChkAddKeyboard")
-        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
-        '
         'ucrChkIncludeRegularExpressions
         '
         Me.ucrChkIncludeRegularExpressions.Checked = False
@@ -177,12 +171,18 @@ Partial Class dlgSplitText
         resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
         '
+        'cmdAddkeyboard
+        '
+        resources.ApplyResources(Me.cmdAddkeyboard, "cmdAddkeyboard")
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
         'dlgSplitText
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
-        Me.Controls.Add(Me.ucrChkAddKeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoFixedNumberOfComponents)
         Me.Controls.Add(Me.rdoMaximumNumberOfComponents)
@@ -222,7 +222,7 @@ Partial Class dlgSplitText
     Friend WithEvents rdoFixedNumberOfComponents As RadioButton
     Friend WithEvents rdoMaximumNumberOfComponents As RadioButton
     Friend WithEvents ucrPnlTextComponents As UcrPanel
-    Friend WithEvents ucrChkAddKeyboard As ucrCheck
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdAddkeyboard As Button
 End Class
