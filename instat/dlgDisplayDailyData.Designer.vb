@@ -49,7 +49,7 @@ Partial Class dlgDisplayDailyData
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
         Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.lblRugColour = New System.Windows.Forms.Label()
         Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
@@ -148,7 +148,7 @@ Partial Class dlgDisplayDailyData
         'grpGraph
         '
         Me.grpGraph.Controls.Add(Me.ucrInputRugColour)
-        Me.grpGraph.Controls.Add(Me.lblRugColor)
+        Me.grpGraph.Controls.Add(Me.lblRugColour)
         Me.grpGraph.Controls.Add(Me.ucrInputBarColour)
         Me.grpGraph.Controls.Add(Me.lblBarColour)
         Me.grpGraph.Controls.Add(Me.ucrNudUpperYaxis)
@@ -165,10 +165,10 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
         Me.ucrInputRugColour.Name = "ucrInputRugColour"
         '
-        'lblRugColor
+        'lblRugColour
         '
-        resources.ApplyResources(Me.lblRugColor, "lblRugColor")
-        Me.lblRugColor.Name = "lblRugColor"
+        resources.ApplyResources(Me.lblRugColour, "lblRugColour")
+        Me.lblRugColour.Name = "lblRugColour"
         '
         'ucrInputBarColour
         '
@@ -469,9 +469,6 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdDispalyDailyOptions)
-        Me.Controls.Add(Me.grpGraph)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphRugColur)
         Me.Controls.Add(Me.lblGRugColour)
@@ -500,6 +497,9 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverSingleElements)
+        Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpFacet)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -532,7 +532,7 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents grpGraph As GroupBox
     Friend WithEvents ucrNudUpperYaxis As ucrNud
     Friend WithEvents ucrInputRugColour As ucrInputComboBox
-    Friend WithEvents lblRugColor As Label
+    Friend WithEvents lblRugColour As Label
     Friend WithEvents ucrInputBarColour As ucrInputComboBox
     Friend WithEvents lblBarColour As Label
     Friend WithEvents ucrChkTrace As ucrCheck

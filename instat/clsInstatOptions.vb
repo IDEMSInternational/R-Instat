@@ -293,8 +293,12 @@ Imports RDotNet
     End Sub
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
+        'TODO OutputFont should be the one saved back and loaded up
+        'currently need to keep fntOutput for saving
         OutputFont.ROutputFont = fntNew
         OutputFont.ROutputColour = clrNew
+        fntOutput = fntNew
+        clrOutput = clrNew
     End Sub
 
     Public Sub SetFormatScript(fntNew As Font, clrNew As Color)
@@ -331,11 +335,15 @@ Imports RDotNet
         OutputFont.ROperatorBracketColour = clrNew
         OutputFont.RPresentationColour = clrNew
         OutputFont.RInvalidColour = clrNew
+        fntScript = fntNew
+        clrScript = clrNew
     End Sub
 
     Public Sub SetFormatComment(fntNew As Font, clrNew As Color)
         OutputFont.RCommentFont = fntNew
         OutputFont.RCommentColour = clrNew
+        fntComment = fntNew
+        clrComment = clrNew
     End Sub
 
     Public Sub SetFormatEditor(fntNew As Font, clrNew As Color)
