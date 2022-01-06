@@ -282,7 +282,7 @@ Public Class ucrOutputPage
         Dim strClip As String = String.Empty
         With richText
             For Each Line As String In .Lines
-                strClip &= Line & Environment.NewLine
+                If Line <> "" Then strClip &= Line & Environment.NewLine
             Next
             Clipboard.Clear()
             Clipboard.SetText(strClip, TextDataFormat.Text)
