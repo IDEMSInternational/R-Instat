@@ -57,6 +57,7 @@ Partial Class dlgImportFromCSPRO
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromCSPRO"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

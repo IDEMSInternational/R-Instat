@@ -103,13 +103,14 @@ Partial Class dlgImportDataset
         Me.clbSheets = New System.Windows.Forms.CheckedListBox()
         Me.lblSelectSheets = New System.Windows.Forms.Label()
         Me.lblImportingSheets = New System.Windows.Forms.Label()
+        Me.ucrChkDropEmptyCols = New instat.ucrCheck()
         Me.ucrChkMultipleFiles = New instat.ucrCheck()
         Me.ucrSaveFile = New instat.ucrSave()
-        Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
         Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -597,6 +598,12 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblImportingSheets, "lblImportingSheets")
         Me.lblImportingSheets.Name = "lblImportingSheets"
         '
+        'ucrChkDropEmptyCols
+        '
+        Me.ucrChkDropEmptyCols.Checked = False
+        resources.ApplyResources(Me.ucrChkDropEmptyCols, "ucrChkDropEmptyCols")
+        Me.ucrChkDropEmptyCols.Name = "ucrChkDropEmptyCols"
+        '
         'ucrChkMultipleFiles
         '
         resources.ApplyResources(Me.ucrChkMultipleFiles, "ucrChkMultipleFiles")
@@ -607,12 +614,6 @@ Partial Class dlgImportDataset
         '
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
-        '
-        'ucrChkSheetsCheckAll
-        '
-        Me.ucrChkSheetsCheckAll.Checked = False
-        resources.ApplyResources(Me.ucrChkSheetsCheckAll, "ucrChkSheetsCheckAll")
-        Me.ucrChkSheetsCheckAll.Name = "ucrChkSheetsCheckAll"
         '
         'ucrNudPreviewLines
         '
@@ -642,10 +643,17 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkSheetsCheckAll
+        '
+        Me.ucrChkSheetsCheckAll.Checked = False
+        resources.ApplyResources(Me.ucrChkSheetsCheckAll, "ucrChkSheetsCheckAll")
+        Me.ucrChkSheetsCheckAll.Name = "ucrChkSheetsCheckAll"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkDropEmptyCols)
         Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
@@ -761,4 +769,5 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
     Friend WithEvents ucrSaveFile As ucrSave
     Friend WithEvents ucrChkMultipleFiles As ucrCheck
+    Friend WithEvents ucrChkDropEmptyCols As ucrCheck
 End Class

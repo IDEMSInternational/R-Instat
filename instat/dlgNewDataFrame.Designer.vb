@@ -236,6 +236,7 @@ Partial Class dlgNewDataFrame
         '
         resources.ApplyResources(Me.ucrTryNewDataFrame, "ucrTryNewDataFrame")
         Me.ucrTryNewDataFrame.Name = "ucrTryNewDataFrame"
+        Me.ucrTryNewDataFrame.RunCommandAsMultipleLines = False
         '
         'dlgNewDataFrame
         '

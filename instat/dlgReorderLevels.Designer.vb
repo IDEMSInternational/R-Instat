@@ -49,21 +49,21 @@ Partial Class dlgReorderLevels
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.rdoAlphabetical = New System.Windows.Forms.RadioButton()
+        Me.ucrInputOrder = New instat.ucrInputComboBox()
         Me.lblOrder = New System.Windows.Forms.Label()
+        Me.ucrInputPrefix = New instat.ucrInputTextBox()
         Me.lblPrefix = New System.Windows.Forms.Label()
         Me.rdoAnonymise = New System.Windows.Forms.RadioButton()
         Me.rdoShuffle = New System.Windows.Forms.RadioButton()
+        Me.ucrNudShift = New instat.ucrNud()
         Me.rdoShift = New System.Windows.Forms.RadioButton()
         Me.rdoSequence = New System.Windows.Forms.RadioButton()
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoAppearance = New System.Windows.Forms.RadioButton()
         Me.rdoReverseLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlProperty = New instat.UcrPanel()
         Me.ttMethods = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverFactorX = New instat.ucrReceiverSingle()
-        Me.ucrInputOrder = New instat.ucrInputComboBox()
-        Me.ucrInputPrefix = New instat.ucrInputTextBox()
-        Me.ucrNudShift = New instat.ucrNud()
-        Me.ucrPnlProperty = New instat.UcrPanel()
         Me.ucrSaveResults = New instat.ucrSave()
         Me.ucrInputOptions = New instat.ucrInputComboBox()
         Me.ucrChkReverseVariable = New instat.ucrCheck()
@@ -161,10 +161,26 @@ Partial Class dlgReorderLevels
         Me.rdoAlphabetical.Name = "rdoAlphabetical"
         Me.rdoAlphabetical.UseVisualStyleBackColor = True
         '
+        'ucrInputOrder
+        '
+        Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.GetSetSelectedIndex = -1
+        Me.ucrInputOrder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
+        Me.ucrInputOrder.Name = "ucrInputOrder"
+        '
         'lblOrder
         '
         resources.ApplyResources(Me.lblOrder, "lblOrder")
         Me.lblOrder.Name = "lblOrder"
+        '
+        'ucrInputPrefix
+        '
+        Me.ucrInputPrefix.AddQuotesIfUnrecognised = True
+        Me.ucrInputPrefix.IsMultiline = False
+        Me.ucrInputPrefix.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPrefix, "ucrInputPrefix")
+        Me.ucrInputPrefix.Name = "ucrInputPrefix"
         '
         'lblPrefix
         '
@@ -182,6 +198,16 @@ Partial Class dlgReorderLevels
         resources.ApplyResources(Me.rdoShuffle, "rdoShuffle")
         Me.rdoShuffle.Name = "rdoShuffle"
         Me.rdoShuffle.UseVisualStyleBackColor = True
+        '
+        'ucrNudShift
+        '
+        Me.ucrNudShift.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShift.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudShift, "ucrNudShift")
+        Me.ucrNudShift.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShift.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShift.Name = "ucrNudShift"
+        Me.ucrNudShift.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoShift
         '
@@ -213,6 +239,11 @@ Partial Class dlgReorderLevels
         Me.rdoReverseLevels.Name = "rdoReverseLevels"
         Me.rdoReverseLevels.UseVisualStyleBackColor = True
         '
+        'ucrPnlProperty
+        '
+        resources.ApplyResources(Me.ucrPnlProperty, "ucrPnlProperty")
+        Me.ucrPnlProperty.Name = "ucrPnlProperty"
+        '
         'ttMethods
         '
         Me.ttMethods.AutoPopDelay = 10000
@@ -227,37 +258,6 @@ Partial Class dlgReorderLevels
         Me.ucrReceiverFactorX.Selector = Nothing
         Me.ucrReceiverFactorX.strNcFilePath = ""
         Me.ucrReceiverFactorX.ucrSelector = Nothing
-        '
-        'ucrInputOrder
-        '
-        Me.ucrInputOrder.AddQuotesIfUnrecognised = True
-        Me.ucrInputOrder.GetSetSelectedIndex = -1
-        Me.ucrInputOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
-        Me.ucrInputOrder.Name = "ucrInputOrder"
-        '
-        'ucrInputPrefix
-        '
-        Me.ucrInputPrefix.AddQuotesIfUnrecognised = True
-        Me.ucrInputPrefix.IsMultiline = False
-        Me.ucrInputPrefix.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPrefix, "ucrInputPrefix")
-        Me.ucrInputPrefix.Name = "ucrInputPrefix"
-        '
-        'ucrNudShift
-        '
-        Me.ucrNudShift.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShift.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudShift, "ucrNudShift")
-        Me.ucrNudShift.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShift.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShift.Name = "ucrNudShift"
-        Me.ucrNudShift.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlProperty
-        '
-        resources.ApplyResources(Me.ucrPnlProperty, "ucrPnlProperty")
-        Me.ucrPnlProperty.Name = "ucrPnlProperty"
         '
         'ucrSaveResults
         '

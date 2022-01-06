@@ -54,6 +54,7 @@ Partial Class dlgRenameDataFrame
         '
         'ucrDataFrameToRename
         '
+        Me.ucrDataFrameToRename.bDropUnusedFilterLevels = False
         Me.ucrDataFrameToRename.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameToRename, "ucrDataFrameToRename")
         Me.ucrDataFrameToRename.Name = "ucrDataFrameToRename"

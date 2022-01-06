@@ -438,6 +438,30 @@
   <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 394</value>
+  </data>
+  <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 119</value>
+  </data>
+  <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="grpDisplay.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Name" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="rdoBoth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -783,6 +807,9 @@
   <data name="&gt;&gt;ucrChkSummaries.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 512</value>
   </data>
@@ -809,6 +836,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>489, 571</value>

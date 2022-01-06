@@ -41,6 +41,7 @@ Partial Class sdgCalculationsSummmary
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCalculationsSummmary))
         Me.tbSummaryCalcs = New System.Windows.Forms.TabControl()
         Me.tbMain = New System.Windows.Forms.TabPage()
+        Me.ucrDefineFilter = New instat.ucrFilter()
         Me.ucrReceiverByOrSort = New instat.ucrReceiverMultiple()
         Me.ucrInputCalculationName = New instat.ucrInputTextBox()
         Me.lblReceiverLabel = New System.Windows.Forms.Label()
@@ -53,9 +54,8 @@ Partial Class sdgCalculationsSummmary
         Me.lblType = New System.Windows.Forms.Label()
         Me.ucrInputType = New instat.ucrInputComboBox()
         Me.ucrSelectorBy = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrCalcSummary = New instat.ucrCalculator()
-        Me.ucrDefineFilter = New instat.ucrFilter()
         Me.ucrPnlSave = New instat.UcrPanel()
+        Me.ucrCalcSummary = New instat.ucrCalculator()
         Me.tbManipulations = New System.Windows.Forms.TabPage()
         Me.ucrManipulations = New instat.ucrReorder()
         Me.cmdManipDuplicate = New System.Windows.Forms.Button()
@@ -106,6 +106,11 @@ Partial Class sdgCalculationsSummmary
         resources.ApplyResources(Me.tbMain, "tbMain")
         Me.tbMain.Name = "tbMain"
         Me.tbMain.UseVisualStyleBackColor = True
+        '
+        'ucrDefineFilter
+        '
+        resources.ApplyResources(Me.ucrDefineFilter, "ucrDefineFilter")
+        Me.ucrDefineFilter.Name = "ucrDefineFilter"
         '
         'ucrReceiverByOrSort
         '
@@ -189,20 +194,15 @@ Partial Class sdgCalculationsSummmary
         resources.ApplyResources(Me.ucrSelectorBy, "ucrSelectorBy")
         Me.ucrSelectorBy.Name = "ucrSelectorBy"
         '
-        'ucrCalcSummary
-        '
-        resources.ApplyResources(Me.ucrCalcSummary, "ucrCalcSummary")
-        Me.ucrCalcSummary.Name = "ucrCalcSummary"
-        '
-        'ucrDefineFilter
-        '
-        resources.ApplyResources(Me.ucrDefineFilter, "ucrDefineFilter")
-        Me.ucrDefineFilter.Name = "ucrDefineFilter"
-        '
         'ucrPnlSave
         '
         resources.ApplyResources(Me.ucrPnlSave, "ucrPnlSave")
         Me.ucrPnlSave.Name = "ucrPnlSave"
+        '
+        'ucrCalcSummary
+        '
+        resources.ApplyResources(Me.ucrCalcSummary, "ucrCalcSummary")
+        Me.ucrCalcSummary.Name = "ucrCalcSummary"
         '
         'tbManipulations
         '

@@ -43,13 +43,13 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblBy = New System.Windows.Forms.Label()
         Me.lblSecondType = New System.Windows.Forms.Label()
         Me.lblSummaryName = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
@@ -84,6 +84,12 @@ Partial Class dlgDescribeTwoVariable
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         '
         'lblSummary
         '
@@ -121,12 +127,6 @@ Partial Class dlgDescribeTwoVariable
         resources.ApplyResources(Me.grpSummaries, "grpSummaries")
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.TabStop = False
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         '
         'ucrReceiverSecondVar
         '

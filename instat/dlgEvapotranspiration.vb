@@ -113,7 +113,7 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetDropDownStyleAsNonEditable()
 
         ucrChkWind.SetParameter(New RParameter("wind", 4))
-        ucrChkWind.SetText("Wind")
+        ucrChkWind.SetText("Wind Speed")
         ucrChkWind.SetValuesCheckedAndUnchecked(Chr(34) & "yes" & Chr(34), Chr(34) & "no" & Chr(34))
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
@@ -162,7 +162,6 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
 
         ucrChkWind.SetLinkedDisplayControl(grpWindSpeed)
-        ucrReceiverWindSpeed.SetLinkedDisplayControl(lblWindSpeed)
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)

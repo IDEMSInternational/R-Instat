@@ -181,6 +181,7 @@ Partial Class dlgMetadata
         Me.Tag = "Metadata"
         Me.grpProperty.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

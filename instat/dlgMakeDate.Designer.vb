@@ -630,6 +630,7 @@ Partial Class dlgMakeDate
         Me.grpThreeColumns.ResumeLayout(False)
         Me.grpThreeColumns.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -119,9 +119,9 @@ Partial Class dlgFromLibrary
         'ucrInputPackages
         '
         Me.ucrInputPackages.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputPackages, "ucrInputPackages")
         Me.ucrInputPackages.GetSetSelectedIndex = -1
         Me.ucrInputPackages.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPackages, "ucrInputPackages")
         Me.ucrInputPackages.Name = "ucrInputPackages"
         '
         'ucrBase

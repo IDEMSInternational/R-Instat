@@ -69,12 +69,15 @@ Partial Class dlgFormat
         '
         'ucrMultiple
         '
+        Me.ucrMultiple.frmParent = Me
         Me.ucrMultiple.Location = New System.Drawing.Point(211, 19)
         Me.ucrMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Selector = Nothing
         Me.ucrMultiple.Size = New System.Drawing.Size(121, 131)
+        Me.ucrMultiple.strNcFilePath = ""
         Me.ucrMultiple.TabIndex = 3
+        Me.ucrMultiple.ucrSelector = Nothing
         '
         'lblSelectedColumns
         '
@@ -98,6 +101,7 @@ Partial Class dlgFormat
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(13, 156)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -107,6 +111,7 @@ Partial Class dlgFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(435, 214)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrAddRemove)

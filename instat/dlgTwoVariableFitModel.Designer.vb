@@ -263,6 +263,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.ucrTryModelling.Location = New System.Drawing.Point(-3, 351)
         Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
         Me.ucrTryModelling.Size = New System.Drawing.Size(396, 29)
         Me.ucrTryModelling.TabIndex = 20
         '
@@ -336,6 +337,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 449)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
@@ -384,6 +386,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 510)
         Me.Controls.Add(Me.lblNullHypothesis)
         Me.Controls.Add(Me.ucrInputNullHypothesis)

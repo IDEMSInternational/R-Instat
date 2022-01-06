@@ -1,0 +1,689 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RScript
+</name>
+</assembly>
+<members>
+<member name="T:RScript.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:RScript.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:RScript.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="F:RScript.clsRElement.strTxt">
+ <summary> The text representation of the element (e.g. '+', '/', 'myFunction', 
+           '"my string constant"' etc.). </summary>
+</member>
+<member name="F:RScript.clsRElement.bBracketed">
+ <summary> If true, then the element is surrounded by round brackets. For example, if the 
+           script is 'a*(b+c)', then the element representing the '+' operator will have 
+           'bBracketed' set to true. </summary>
+</member>
+<member name="F:RScript.clsRElement.strPrefix">
+ <summary> 
+ Any formatting text that precedes the element. The formatting text may consist of spaces, 
+ comments and new lines to make the script more readable for humans. For example, in the 
+ example below, 'strprefix' for the 'myFunction' element shall be set to 
+ "#comment1\n  #comment2\n  ".<code>
+ 
+ #comment1<para>
+   #comment2</para><para>
+   myFunction()</para></code></summary>
+</member>
+<member name="M:RScript.clsRElement.GetAsDebugString">
+--------------------------------------------------------------------------------------------
+ <summary>   TODO. </summary>
+
+ <returns>   as debug string. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="F:RScript.clsRElementAssignable.clsStatement">
+ <summary>   
+ The statement where this element is assigned. For example, for the following R script, on the 2nd line, the statement associated with 'a' will be 'a=1'.
+ <code>
+ a=1<para>
+ b=a</para></code></summary>
+</member>
+<member name="M:RScript.clsRElementFunction.GetAsDebugString">
+--------------------------------------------------------------------------------------------
+ <summary>   TODO. </summary>
+
+ <returns>   as debug string. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRElementOperator.GetAsDebugString">
+--------------------------------------------------------------------------------------------
+ <summary>   TODO. </summary>
+
+ <returns>   as debug string. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRElementProperty.GetAsDebugString">
+--------------------------------------------------------------------------------------------
+ <summary>   TODO. </summary>
+
+ <returns>   as debug string. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRParameter.GetAsDebugString">
+--------------------------------------------------------------------------------------------
+ <summary>   TODO. </summary>
+
+ <returns>   as debug string. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="T:RScript.clsRScript">
+ <summary>   TODO Add class summary. </summary>
+</member>
+<member name="F:RScript.clsRScript.lstRStatements">
+ <summary>   The R statements in the script </summary>
+</member>
+<member name="T:RScript.clsRScript.typTokenState">
+ <summary>   The current state of the token parsing. </summary>
+</member>
+<member name="M:RScript.clsRScript.#ctor(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Parses the R script in <paramref name="strInput"/> and populates the list of
+             R statements.
+             <para>
+             This subroutine will accept, and correctly process all valid R. However, this 
+             class does not attempt to validate <paramref name="strInput"/>. If it is not 
+             valid R then this subroutine may still process the script without throwing an 
+             exception. In this case, the list of R statements will be undefined.
+             </para><para>
+             In other words, this subroutine will not generate false negatives (reject 
+             valid R) but may generate false positives (accept invalid R).
+             </para></summary>
+
+ <param name="strInput"> The R script to parse. This must be valid R according to the 
+                         R language specification at 
+                         https://cran.r-project.org/doc/manuals/r-release/R-lang.html 
+                         (referenced 01 Feb 2021).</param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRScript.GetLstLexemes(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns <paramref name="strRScript"/> as a list of its constituent lexemes. 
+             A lexeme is a string of characters that represent a valid R element 
+             (identifier, operator, keyword, seperator, bracket etc.). A lexeme does not 
+             include any type information.
+             <para>
+             This function identifies lexemes using a technique known as 'longest match' 
+             or 'maximal munch'. It keeps adding characters to the lexeme one at a time 
+             until it reaches a character that is not in the set of characters acceptable 
+             for that lexeme.
+             </para></summary>
+
+ <param name="strRScript"> The R script to convert (must be syntactically correct R). </param>
+
+ <returns>   <paramref name="strRScript"/> as a list of its constituent lexemes. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRScript.GetLstTokens(System.Collections.Generic.List{System.String})">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns <paramref name="lstLexemes"/> as a list of tokens.
+             <para>
+             A token is a string of characters that represent a valid R element, plus meta 
+             data about the token type (identifier, operator, keyword, bracket etc.). 
+             </para></summary>
+
+ <param name="lstLexemes">   The list of lexemes to convert to tokens. </param>
+
+ <returns>   <paramref name="lstLexemes"/> as a list of tokens. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRScript.GetAsExecutableScript">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns this object as a valid, executable R script. </summary>
+
+ <returns>   The current state of this object as a valid, executable R script. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="T:RScript.clsRStatement">
+ <summary>   TODO Add class summary. </summary>
+</member>
+<member name="F:RScript.clsRStatement.bTerminateWithNewline">
+ <summary>   If true, then when this R statement is converted to a script, then it will be 
+             terminated with a newline (else if false then a semicolon)
+ </summary>
+</member>
+<member name="F:RScript.clsRStatement.strAssignmentOperator">
+ <summary>   The assignment operator used in this statement (e.g. '=' in the statement 'a=b').
+             If there is no assignment (e.g. as in 'myFunction(a)' then set to 'nothing'. </summary>
+</member>
+<member name="F:RScript.clsRStatement.strAssignmentPrefix">
+ <summary>   If this R statement is converted to a script, then contains the formatting 
+             string that will prefix the assignment operator.
+             This is typically used to insert spaces before the assignment operator to line 
+             up the assignment operators in a list of assignments. For example:
+             <code>
+             shortName    = 1 <para>
+             veryLongName = 2 </para></code>
+             </summary>
+</member>
+<member name="F:RScript.clsRStatement.strSuffix">
+ <summary>   If this R statement is converted to a script, then contains the formatting 
+             string that will be placed at the end of the statement.
+             This is typically used to insert a comment at the end of the statement. 
+             For example:
+             <code>
+             a = b * 2 # comment1</code>
+             </summary>
+</member>
+<member name="F:RScript.clsRStatement.clsAssignment">
+ <summary>   The element assigned to by the statement (e.g. 'a' in the statement 'a=b').
+             If there is no assignment (e.g. as in 'myFunction(a)' then set to 'nothing'. </summary>
+</member>
+<member name="F:RScript.clsRStatement.clsElement">
+ <summary>   The element assigned in the statement (e.g. 'b' in the statement 'a=b').
+             If there is no assignment (e.g. as in 'myFunction(a)' then set to the top-
+             level element in the statement (e.g. 'myFunction'). </summary>
+</member>
+<member name="F:RScript.clsRStatement.arrOperatorPrecedence">
+ <summary>   The relative precedence of the R operators. This is a two-dimensional array 
+             because the operators are stored in groups together with operators that 
+             have the same precedence.</summary>
+</member>
+<member name="M:RScript.clsRStatement.#ctor(System.Collections.Generic.List{RScript.clsRToken},System.Int32@,System.Collections.Generic.Dictionary{System.String,RScript.clsRStatement})">
+--------------------------------------------------------------------------------------------
+ <summary>   
+ Constructs an object representing a valid R statement.<para>
+ Processes the tokens from <paramref name="lstTokens"/> from position <paramref name="intPos"/> 
+ to the end of statement, end of script or end of list (whichever comes first).</para></summary>
+
+ <param name="lstTokens">   The list of R tokens to process </param>
+ <param name="intPos">      [in,out] The position in the list to start processing </param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetAsExecutableScript">
+--------------------------------------------------------------------------------------------
+ <summary>   
+ Returns this object as a valid, executable R statement. <para>
+ The script may contain formatting information such as spaces, comments and extra new lines.
+ If this object was created by analysing original R script, then the returned script's 
+ formatting will be as close as possible to the original.</para><para>
+ The script may vary slightly because some formatting information is lost in the object 
+ model. For lost formatting, the formatting will be done according to the guidelines in
+ https://style.tidyverse.org/syntax.html  </para><para>
+ The returned script will always show:</para><list type="bullet"><item>
+ No spaces before commas</item><item>
+ No spaces before brackets</item><item>
+ No spaces before package ('::') and object ('$') operators</item><item>
+ One space before parameter assignments ('=')</item><item>
+ For example,  'pkg ::obj1 $obj2$fn1 (a ,b=1,    c    = 2 )' will be returned as 
+                                                 'pkg::obj1$obj2$fn1(a, b =1, c = 2)'</item>
+ </list></summary>
+
+ <returns>   The current state of this object as a valid, executable R statement. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetScriptElement(System.Object)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns <paramref name="clsElement"/> as an executable R script. </summary>
+
+ <param name="clsElement">   The R element to convert to an executable R script. 
+                             The R element may be a function, operator, constant, 
+                             syntactic name, key word etc. </param>
+
+ <returns>   <paramref name="clsElement"/> as an executable R script. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetScriptElementProperty(RScript.clsRElementProperty)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns <paramref name="clsElement"/> as an executable R script. </summary>
+
+ <param name="clsElement">   The R element to convert to an executable R script. The R element
+                             may have an associated package name, and a list of associated 
+                             objects e.g. 'pkg::obj1$obj2$fn1(a)'. </param>
+
+ <returns>   <paramref name="clsElement"/> as an executable R script. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstPresentation(System.Collections.Generic.List{RScript.clsRToken},System.Int32)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+ Iterates through the tokens in <paramref name="lstTokens"/> and makes each presentation 
+ element a child of the next non-presentation element. 
+ <para>
+ A presentation element is an element that has no functionality and is only used to make 
+ the script easier to read. It may be a block of spaces, a comment or a newline that does
+ not end a statement.
+ </para><para>
+ For example, the list of tokens representing the following block of script:
+ </para><code>
+ # comment1 <para>
+ a =b # comment2 </para></code><para>
+ </para><para>
+ Will be structured as:</para><code><para>
+ a</para><para>
+ .."# comment1\n"</para><para>
+ =</para><para>
+ .." "</para><para>
+ b</para><para>
+ (endStatement)</para><para>
+ .." # comment2"</para><para>
+ </para></code></summary>
+ 
+ <param name="lstTokens">   The list of tokens to process. </param>
+
+ <returns>   A token tree where presentation information is stored as a child of the next 
+             non-presentation element. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstTokenBrackets(System.Collections.Generic.List{RScript.clsRToken},System.Int32@)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+ Iterates through the tokens in <paramref name="lstTokens"/>.
+ If the token is a '(' then it makes everything inside the brackets a child of the '(' token.
+ If the '(' belongs to a function then makes the '(' a child of the function. Brackets may 
+ be nested. For example, '(a*(b+c))' is structured as:<code>
+   (<para>
+   ..a</para><para>
+   ..*</para><para>
+   ..(</para><para>
+   ....b</para><para>
+   ....+</para><para>
+   ....c</para><para>
+   ....)</para><para>
+   ..)</para></code></summary>
+
+ <param name="lstTokens">   The token tree to restructure. </param>
+
+ <returns>   A token tree restructured for round brackets. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstTokenFunctionBrackets(System.Collections.Generic.List{RScript.clsRToken})">
+--------------------------------------------------------------------------------------------
+ <summary>
+ Traverses the tree of tokens in <paramref name="lstTokens"/>. If the token is a function name then it 
+ makes the subsequent '(' a child of the function name token. </summary>
+
+ <param name="lstTokens">   The token tree to restructure. </param>
+
+ <returns>   A token tree restructured for function names. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstTokenCommas(System.Collections.Generic.List{RScript.clsRToken},System.Int32@,System.Boolean)">
+--------------------------------------------------------------------------------------------
+ <summary>
+ Traverses the tree of tokens in <paramref name="lstTokens"/>. If the token is a ',' then it 
+ makes everything up to the next ',' or ')' a child of the ',' token. Commas are used to 
+ separate function parameters. Parameters between commas are optional. For example, 
+ 'myFunction(a,,b)' is structured as: <code>
+   myFunction (<para>
+   ..a</para><para>
+   ..,</para><para>
+   ..,</para><para>
+   ....b</para><para>
+   ....)</para></code>
+ </summary>
+
+ <param name="lstTokens">        The token tree to restructure. </param>
+ <param name="intPos">           [in,out] The position in the list to start processing. </param>
+ <param name="bProcessingComma"> (Optional) True to processing comma. </param>
+
+ <returns>   A token tree restructured for function commas. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstTokenOperators(System.Collections.Generic.List{RScript.clsRToken})">
+--------------------------------------------------------------------------------------------
+ <summary> 
+ Iterates through all the possible operators in order of precedence. For each operator, 
+ traverses the tree of tokens in <paramref name="lstTokens"/>. If the operator is found then 
+ the operator's parameters (typically the tokens to the left and right of the operator) are 
+ made children of the operator. For example, 'a*b+c' is structured as:<code>
+   +<para>
+   ..*</para><para>
+   ....a</para><para>
+   ....b</para><para>
+   ..c</para></code></summary>
+
+ <param name="lstTokens">   The token tree to restructure. </param>
+
+ <returns>   A token tree restructured for all the possible operators. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetLstTokenOperatorGroup(System.Collections.Generic.List{RScript.clsRToken},System.Int32)">
+--------------------------------------------------------------------------------------------
+ <summary>
+ Traverses the tree of tokens in <paramref name="lstTokens"/>. If one of the operators in 
+ the <paramref name="intPosOperators"/> group is found, then the operator's parameters 
+ (typically the tokens to the left and right of the operator) are made children of the 
+ operator. For example, 'a*b+c' is structured as:<code>
+   +<para>
+   ..*</para><para>
+   ....a</para><para>
+   ....b</para><para>
+   ..c</para></code>
+
+ Edge case: This function cannot process the  case where a binary operator is immediately 
+ followed by a unary operator with the same or a lower precedence (e.g. 'a^-b', 'a+~b', 
+ 'a~~b' etc.). This is because of the R default precedence rules. The workaround is to 
+ enclose the unary operator in brackets (e.g. 'a^(-b)', 'a+(~b)', 'a~(~b)' etc.).
+ </summary>
+ <param name="lstTokens">        The token tree to restructure. </param>
+ <param name="intPosOperators">  The group of operators to search for in the tree. </param>
+
+ <returns>   A token tree restructured for the specified group of operators. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetNextToken(System.Collections.Generic.List{RScript.clsRToken},System.Int32)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns a clone of the next token in the <paramref name="lstTokens"/> list, 
+             after <paramref name="intPosTokens"/>. If there is no next token then throws 
+             an error.</summary>
+
+ <param name="lstTokens">        The list of tokens. </param>
+ <param name="intPosTokens">     The position of the current token in the list. </param>
+
+ <returns>   A clone of the next token in the <paramref name="lstTokens"/> list. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetRElement(RScript.clsRToken,System.Collections.Generic.Dictionary{System.String,RScript.clsRStatement},System.Boolean,System.String,System.String,System.Collections.Generic.List{RScript.clsRElement})">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns an R element object constructed from the <paramref name="clsToken"/> 
+             token. </summary>
+
+ <param name="clsToken">         The token to convert into an R element object. </param>
+ <param name="dctAssignments">   Dictionary containing all the current existing assignments. 
+                                 The key is the name of the variable. The value is a reference 
+                                 to the R statement that performed the assignment. </param>
+ <param name="bBracketedNew">    (Optional) True if the token is enclosed in brackets. </param>
+ <param name="strPackageName">   (Optional) The package name associated with the token. </param>
+ <param name="strPackagePrefix"> (Optional) The formatting string that prefixes the package 
+                                 name (e.g. spaces or comment lines). </param>
+ <param name="lstObjects">       (Optional) The list of objects associated with the token 
+                                 (e.g. 'obj1$obj2$myFn()'). </param>
+
+ <returns>   An R element object constructed from the <paramref name="clsToken"/>
+             token. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetTokenPackageName(RScript.clsRToken)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns the package name token associated with the <paramref name="clsToken"/> 
+             package operator. </summary>
+
+ <param name="clsToken"> Package operator ('::') token. </param>
+
+ <returns>   The package name associated with the <paramref name="clsToken"/> package 
+             operator. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetPackagePrefix(RScript.clsRToken)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns the formatting prefix (spaces or comment lines) associated with the 
+             <paramref name="clsToken"/> package operator. If the package operator has no 
+             associated formatting, then returns an empty string.</summary>
+
+ <param name="clsToken"> Package operator ('::') token. </param>
+
+ <returns>   The formatting prefix (spaces or comment lines) associated with the
+             <paramref name="clsToken"/> package operator. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetRParameterNamed(RScript.clsRToken,System.Collections.Generic.Dictionary{System.String,RScript.clsRStatement})">
+--------------------------------------------------------------------------------------------
+ <summary>   
+ Returns a named parameter element constructed from the <paramref name="clsToken"/> token 
+ tree. The top-level element in the token tree may be:<list type="bullet"><item>
+ 'value' e.g. for fn(a)</item><item>
+ '=' e.g. for 'fn(a=1)'</item><item>
+ ',' e.g. for 'fn(a,b) or 'fn(a=1,b,,c,)'</item><item>
+ ')' indicates the end of the parameter list, returns nothing</item>
+ </list></summary>
+
+ <param name="clsToken">         The token tree to convert into a named parameter element. </param>
+ <param name="dctAssignments">   Dictionary containing all the current existing assignments.
+                                 The key is the name of the variable. The value is a reference
+                                 to the R statement that performed the assignment. </param>
+
+ <returns>   A named parameter element constructed from the <paramref name="clsToken"/> token
+             tree. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetChildPosNonPresentation(RScript.clsRToken)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns the first child of <paramref name="clsToken"/> that is not a 
+             presentation token or a close bracket ')'. </summary>
+
+ <param name="clsToken"> The token tree to search for non-presentation children. </param>
+
+ <returns>   The first child of <paramref name="clsToken"/> that is not a presentation token 
+             or a close bracket ')'. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRStatement.GetRParameter(RScript.clsRToken,System.Collections.Generic.Dictionary{System.String,RScript.clsRStatement})">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns a  parameter element constructed from the <paramref name="clsToken"/> 
+             token tree. </summary>
+
+ <param name="clsToken">         The token tree to convert into a parameter element. </param>
+ <param name="dctAssignments">   Dictionary containing all the current existing assignments.
+                                 The key is the name of the variable. The value is a reference
+                                 to the R statement that performed the assignment. </param>
+
+ <returns>   A parameter element constructed from the <paramref name="clsToken"/> token tree. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="T:RScript.clsRToken.typToken">
+ <summary>   The different types of R element (function name, key word, comment etc.) 
+             that the token may represent. </summary>
+</member>
+<member name="F:RScript.clsRToken.strTxt">
+ <summary>   The lexeme associated with the token. </summary>
+</member>
+<member name="F:RScript.clsRToken.enuToken">
+ <summary>   The token type (function name, key word, comment etc.).  </summary>
+</member>
+<member name="F:RScript.clsRToken.lstTokens">
+ <summary>   The token's children. </summary>
+</member>
+<member name="M:RScript.clsRToken.#ctor(System.String,RScript.clsRToken.typToken)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     Constructs a new token with lexeme <paramref name="strTxtNew"/> and token type 
+     <paramref name="enuTokenNew"/>.
+     <para>
+     A token is a string of characters that represent a valid R element, plus meta data about
+     the token type (identifier, operator, keyword, bracket etc.).
+     </para>
+ </summary>
+
+ <param name="strTxtNew">    The lexeme to associate with the token. </param>
+ <param name="enuTokenNew">  The token type (function name, key word, comment etc.). </param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.#ctor(System.String,System.String,System.String,System.Boolean)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     Constructs a token from <paramref name="strLexemeCurrent"/>. 
+     <para>
+     A token is a string of characters that represent a valid R element, plus meta data about
+     the token type (identifier, operator, keyword, bracket etc.).
+     </para><para>
+     <paramref name="strLexemePrev"/> and <paramref name="strLexemeNext"/> are needed
+     to correctly identify if <paramref name="strLexemeCurrent"/> is a unary or binary
+     operator.</para>
+ </summary>
+
+ <param name="strLexemePrev">    The non-space lexeme immediately to the left of
+                                 <paramref name="strLexemeCurrent"/>. </param>
+ <param name="strLexemeCurrent"> The lexeme to convert to a token. </param>
+ <param name="strLexemeNext">    The non-space lexeme immediately to the right of
+                                 <paramref name="strLexemeCurrent"/>. </param>
+
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.CloneMe">
+--------------------------------------------------------------------------------------------
+ <summary>   Creates and returns a clone of this object. </summary>
+
+ <exception cref="T:System.Exception">    Thrown when the object has an empty child token. </exception>
+
+ <returns>   A clone of this object. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsValidLexeme(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a valid lexeme, else returns false.
+             </summary>
+
+ <param name="strTxt">   A sequence of characters from a syntactically correct R script </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a valid lexeme, else  false. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsSyntacticName(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a complete or partial 
+             valid R syntactic name or key word, else returns false.<para>
+             Please note that the rules for syntactic names are actually stricter than 
+             the rules used in this function, but this library assumes it is parsing valid 
+             R code. </para></summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a valid R syntactic name or key word, 
+             else returns false.</returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsConstantString(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a complete or partial string 
+             constant, else returns false.<para>
+             String constants are delimited by a pair of single (‘'’) or double (‘"’) quotes 
+             and can contain all other printable characters. Quotes and other special 
+             characters within strings are specified using escape sequences. </para></summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a complete or partial string constant,
+             else returns false.</returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsComment(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a comment, else returns false.
+             <para>
+             Any text from a # character to the end of the line is taken to be a comment,
+             unless the # character is inside a quoted string. </para></summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a comment, else returns false.</returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsSequenceOfSpaces(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is sequence of spaces (and no other 
+             characters), else returns false. </summary>
+
+ <param name="strTxt">   The text to check . </param>
+
+ <returns>   True  if <paramref name="strTxt"/> is sequence of spaces (and no other 
+             characters), else returns false. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsElement(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a functional R element 
+             (i.e. not empty, and not a space, comment or new line), else returns false. </summary>
+
+ <param name="strTxt">   The text to check . </param>
+
+ <returns>   True  if <paramref name="strTxt"/> is a functional R element
+             (i.e. not a space, comment or new line), else returns false. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsOperatorUserDefined(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a complete or partial  
+             user-defined operator, else returns false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a complete or partial  
+             user-defined operator, else returns false.</returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsOperatorReserved(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a resrved operator, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a reserved operator, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsOperatorBrackets(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a bracket operator, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a bracket operator, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsOperatorUnary(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a unary operator, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a unary operator, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsBracket(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a bracket, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a bracket, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsNewLine(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a new line, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a new line, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:RScript.clsRToken.IsKeyWord(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   Returns true if <paramref name="strTxt"/> is a key word, else returns 
+             false.</summary>
+
+ <param name="strTxt">   The text to check. </param>
+
+ <returns>   True if <paramref name="strTxt"/> is a key word, else returns false.
+             </returns>
+--------------------------------------------------------------------------------------------
+</member>
+</members>
+</doc>

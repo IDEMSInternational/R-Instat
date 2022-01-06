@@ -82,6 +82,7 @@ Partial Class dlgContrasts
         'ucrInputContrastName
         '
         Me.ucrInputContrastName.AddQuotesIfUnrecognised = True
+        Me.ucrInputContrastName.GetSetSelectedIndex = -1
         Me.ucrInputContrastName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputContrastName, "ucrInputContrastName")
         Me.ucrInputContrastName.Name = "ucrInputContrastName"
