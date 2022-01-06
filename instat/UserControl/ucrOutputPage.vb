@@ -137,14 +137,7 @@ Public Class ucrOutputPage
         For Each element In SelectedElements
             AddElementToRichTextBox(element, richText)
         Next
-        Dim strClip As String = String.Empty
-        With richText
-            For Each Line As String In .Lines
-                strClip &= Line & Environment.NewLine
-            Next
-            Clipboard.Clear()
-            Clipboard.SetText(strClip, TextDataFormat.Text)
-        End With
+        CopySelectedTextToClipBoard(richText)
     End Sub
 
     ''' <summary>
@@ -278,18 +271,22 @@ Public Class ucrOutputPage
         If e.KeyData = Keys.Control + Keys.C Then
             Try
                 Dim richText As RichTextBox = CType(sender, RichTextBox)
-                Dim strClip As String = String.Empty
-                With richText
-                    For Each Line As String In .Lines
-                        strClip &= Line & Environment.NewLine
-                    Next
-                    Clipboard.Clear()
-                    Clipboard.SetText(strClip, TextDataFormat.Text)
-                End With
+                CopySelectedTextToClipBoard(richText)
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
         End If
+    End Sub
+
+    Private Sub CopySelectedTextToClipBoard(richText As RichTextBox)
+        Dim strClip As String = String.Empty
+        With richText
+            For Each Line As String In .Lines
+                strClip &= Line & Environment.NewLine
+            Next
+            Clipboard.Clear()
+            Clipboard.SetText(strClip, TextDataFormat.Text)
+        End With
     End Sub
 
     Private Sub Panel_Resize(sender As Object, e As EventArgs)
