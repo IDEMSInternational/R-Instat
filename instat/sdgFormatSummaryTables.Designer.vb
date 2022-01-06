@@ -26,20 +26,52 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpTitle = New System.Windows.Forms.TabPage()
         Me.lblFootnote = New System.Windows.Forms.Label()
+        Me.ucrInputCellFootnote = New instat.ucrInputTextBox()
+        Me.ucrInputAddSourceNote = New instat.ucrInputTextBox()
+        Me.ucrChkAddSourcenote = New instat.ucrCheck()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFootnoteColumnLocation = New instat.ucrInputTextBox()
+        Me.ucrInputFootnoteRowLocation = New instat.ucrInputTextBox()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
+        Me.ucrChkAddFootnote = New instat.ucrCheck()
+        Me.ucrChkAddTitleSubtitle = New instat.ucrCheck()
         Me.grpTitleSubtitle = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
+        Me.ucrInputTitleFootnote = New instat.ucrInputTextBox()
+        Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
+        Me.ucrChkTitleFootnote = New instat.ucrCheck()
+        Me.ucrInputSubtitle = New instat.ucrInputTextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.lblSubtitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddHeader = New instat.ucrCheck()
         Me.grpStyle = New System.Windows.Forms.GroupBox()
+        Me.ucrNudStyleFillAlpha = New instat.ucrNud()
+        Me.ucrInputStyleFillColor = New instat.ucrColors()
+        Me.ucrNudStyleBorderWeight = New instat.ucrNud()
+        Me.ucrInputStyleBorderColor = New instat.ucrColors()
+        Me.ucrInputStyleTextColor = New instat.ucrColors()
+        Me.ucrInputStyleTextFont = New instat.ucrInputTextBox()
+        Me.ucrNudStyleTextIndent = New instat.ucrNud()
         Me.lblStyleFillAlpha = New System.Windows.Forms.Label()
         Me.lblStyleFillColor = New System.Windows.Forms.Label()
         Me.lblBorderWeight = New System.Windows.Forms.Label()
+        Me.ucrInputStyleBorderStyle = New instat.ucrInputComboBox()
         Me.lblBorderStyle = New System.Windows.Forms.Label()
+        Me.ucrInputStyleBorderSides = New instat.ucrInputComboBox()
         Me.lblBorderColor = New System.Windows.Forms.Label()
         Me.lblBorderSides = New System.Windows.Forms.Label()
+        Me.ucrInputStyleTextSize = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextAlign = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextValign = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextWeight = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextWhitespace = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextStretch = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextDecorate = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextTransform = New instat.ucrInputComboBox()
+        Me.ucrInputStyleTextStyle = New instat.ucrInputComboBox()
         Me.lblStyleTextIndent = New System.Windows.Forms.Label()
         Me.lblStyleTextWhitespace = New System.Windows.Forms.Label()
         Me.lblStyleTextTransform = New System.Windows.Forms.Label()
@@ -52,54 +84,14 @@ Partial Class sdgFormatSummaryTables
         Me.lblStyleTextAlign = New System.Windows.Forms.Label()
         Me.lblStyleTextVAlign = New System.Windows.Forms.Label()
         Me.lblStyleTextColor = New System.Windows.Forms.Label()
-        Me.rdoAllColumns = New System.Windows.Forms.RadioButton()
-        Me.rdoAllRows = New System.Windows.Forms.RadioButton()
-        Me.lblHeader = New System.Windows.Forms.Label()
-        Me.tbpTable = New System.Windows.Forms.TabPage()
-        Me.lblFontSize = New System.Windows.Forms.Label()
-        Me.lblTableWidth = New System.Windows.Forms.Label()
-        Me.lblTableBackgroundColor = New System.Windows.Forms.Label()
-        Me.lblTableAlign = New System.Windows.Forms.Label()
-        Me.lblTableFontWeight = New System.Windows.Forms.Label()
-        Me.lblTableFontColor = New System.Windows.Forms.Label()
-        Me.lblTableLayout = New System.Windows.Forms.Label()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputCellFootnote = New instat.ucrInputTextBox()
-        Me.ucrInputAddSourceNote = New instat.ucrInputTextBox()
-        Me.ucrChkAddSourcenote = New instat.ucrCheck()
-        Me.ucrInputFootnoteColumnLocation = New instat.ucrInputTextBox()
-        Me.ucrInputFootnoteRowLocation = New instat.ucrInputTextBox()
-        Me.ucrChkAddFootnote = New instat.ucrCheck()
-        Me.ucrChkAddTitleSubtitle = New instat.ucrCheck()
-        Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
-        Me.ucrInputTitleFootnote = New instat.ucrInputTextBox()
-        Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
-        Me.ucrChkTitleFootnote = New instat.ucrCheck()
-        Me.ucrInputSubtitle = New instat.ucrInputTextBox()
-        Me.ucrInputTitle = New instat.ucrInputTextBox()
-        Me.ucrChkAddHeader = New instat.ucrCheck()
-        Me.ucrNudStyleFillAlpha = New instat.ucrNud()
-        Me.ucrInputStyleFillColor = New instat.ucrColors()
-        Me.ucrNudStyleBorderWeight = New instat.ucrNud()
-        Me.ucrInputStyleBorderColor = New instat.ucrColors()
-        Me.ucrInputStyleTextColor = New instat.ucrColors()
-        Me.ucrInputStyleTextFont = New instat.ucrInputTextBox()
-        Me.ucrNudStyleTextIndent = New instat.ucrNud()
-        Me.ucrInputStyleBorderStyle = New instat.ucrInputComboBox()
-        Me.ucrInputStyleBorderSides = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextSize = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextAlign = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextValign = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextWeight = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextWhitespace = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextStretch = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextDecorate = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextTransform = New instat.ucrInputComboBox()
-        Me.ucrInputStyleTextStyle = New instat.ucrInputComboBox()
         Me.ucrChkStyleBoarder = New instat.ucrCheck()
         Me.ucrChkStyleText = New instat.ucrCheck()
         Me.ucrChkStyleFill = New instat.ucrCheck()
+        Me.rdoAllColumns = New System.Windows.Forms.RadioButton()
+        Me.rdoAllRows = New System.Windows.Forms.RadioButton()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.ucrPnlHeader = New instat.UcrPanel()
+        Me.tbpTable = New System.Windows.Forms.TabPage()
         Me.ucrChkAddTableFormat = New instat.ucrCheck()
         Me.ucrInputTableFontColor = New instat.ucrColors()
         Me.ucrInputTableBackgroundColor = New instat.ucrColors()
@@ -107,9 +99,25 @@ Partial Class sdgFormatSummaryTables
         Me.ucrChkAddStubHeader = New instat.ucrCheck()
         Me.ucrNudTableFontSize = New instat.ucrNud()
         Me.ucrNudTableWidth = New instat.ucrNud()
+        Me.lblFontSize = New System.Windows.Forms.Label()
+        Me.lblTableWidth = New System.Windows.Forms.Label()
+        Me.lblTableBackgroundColor = New System.Windows.Forms.Label()
+        Me.lblTableAlign = New System.Windows.Forms.Label()
+        Me.lblTableFontWeight = New System.Windows.Forms.Label()
+        Me.lblTableFontColor = New System.Windows.Forms.Label()
+        Me.lblTableLayout = New System.Windows.Forms.Label()
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.grpSecondFootnote = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSecondFootnoteColumnLocation = New instat.ucrInputTextBox()
+        Me.ucrInputSecondFootnoteRowLocation = New instat.ucrInputTextBox()
+        Me.lblSecondColumns = New System.Windows.Forms.Label()
+        Me.lblSecondRows = New System.Windows.Forms.Label()
+        Me.lblSecondFootnote = New System.Windows.Forms.Label()
+        Me.ucrInputSecondCellFootnote = New instat.ucrInputTextBox()
+        Me.ucrChKAddSecondFootnote = New instat.ucrCheck()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -117,6 +125,7 @@ Partial Class sdgFormatSummaryTables
         Me.tbpHeader.SuspendLayout()
         Me.grpStyle.SuspendLayout()
         Me.tbpTable.SuspendLayout()
+        Me.grpSecondFootnote.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -130,6 +139,10 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpTitle
         '
+        Me.tbpTitle.Controls.Add(Me.grpSecondFootnote)
+        Me.tbpTitle.Controls.Add(Me.lblSecondFootnote)
+        Me.tbpTitle.Controls.Add(Me.ucrInputSecondCellFootnote)
+        Me.tbpTitle.Controls.Add(Me.ucrChKAddSecondFootnote)
         Me.tbpTitle.Controls.Add(Me.lblFootnote)
         Me.tbpTitle.Controls.Add(Me.ucrInputCellFootnote)
         Me.tbpTitle.Controls.Add(Me.ucrInputAddSourceNote)
@@ -146,279 +159,6 @@ Partial Class sdgFormatSummaryTables
         '
         resources.ApplyResources(Me.lblFootnote, "lblFootnote")
         Me.lblFootnote.Name = "lblFootnote"
-        '
-        'grpLocation
-        '
-        Me.grpLocation.Controls.Add(Me.ucrInputFootnoteColumnLocation)
-        Me.grpLocation.Controls.Add(Me.ucrInputFootnoteRowLocation)
-        Me.grpLocation.Controls.Add(Me.lblColumns)
-        Me.grpLocation.Controls.Add(Me.lblRows)
-        resources.ApplyResources(Me.grpLocation, "grpLocation")
-        Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.TabStop = False
-        '
-        'lblColumns
-        '
-        resources.ApplyResources(Me.lblColumns, "lblColumns")
-        Me.lblColumns.Name = "lblColumns"
-        '
-        'lblRows
-        '
-        resources.ApplyResources(Me.lblRows, "lblRows")
-        Me.lblRows.Name = "lblRows"
-        '
-        'grpTitleSubtitle
-        '
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitleFootnote)
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrChkTitleFootnote)
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputSubtitle)
-        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitle)
-        Me.grpTitleSubtitle.Controls.Add(Me.lblSubtitle)
-        Me.grpTitleSubtitle.Controls.Add(Me.lblTitle)
-        resources.ApplyResources(Me.grpTitleSubtitle, "grpTitleSubtitle")
-        Me.grpTitleSubtitle.Name = "grpTitleSubtitle"
-        Me.grpTitleSubtitle.TabStop = False
-        '
-        'lblSubtitle
-        '
-        resources.ApplyResources(Me.lblSubtitle, "lblSubtitle")
-        Me.lblSubtitle.Name = "lblSubtitle"
-        '
-        'lblTitle
-        '
-        resources.ApplyResources(Me.lblTitle, "lblTitle")
-        Me.lblTitle.Name = "lblTitle"
-        '
-        'tbpHeader
-        '
-        Me.tbpHeader.Controls.Add(Me.ucrChkAddHeader)
-        Me.tbpHeader.Controls.Add(Me.grpStyle)
-        Me.tbpHeader.Controls.Add(Me.rdoAllColumns)
-        Me.tbpHeader.Controls.Add(Me.rdoAllRows)
-        Me.tbpHeader.Controls.Add(Me.lblHeader)
-        Me.tbpHeader.Controls.Add(Me.ucrPnlHeader)
-        resources.ApplyResources(Me.tbpHeader, "tbpHeader")
-        Me.tbpHeader.Name = "tbpHeader"
-        Me.tbpHeader.UseVisualStyleBackColor = True
-        '
-        'grpStyle
-        '
-        Me.grpStyle.Controls.Add(Me.ucrNudStyleFillAlpha)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleFillColor)
-        Me.grpStyle.Controls.Add(Me.ucrNudStyleBorderWeight)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderColor)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextColor)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextFont)
-        Me.grpStyle.Controls.Add(Me.ucrNudStyleTextIndent)
-        Me.grpStyle.Controls.Add(Me.lblStyleFillAlpha)
-        Me.grpStyle.Controls.Add(Me.lblStyleFillColor)
-        Me.grpStyle.Controls.Add(Me.lblBorderWeight)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderStyle)
-        Me.grpStyle.Controls.Add(Me.lblBorderStyle)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderSides)
-        Me.grpStyle.Controls.Add(Me.lblBorderColor)
-        Me.grpStyle.Controls.Add(Me.lblBorderSides)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextSize)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextAlign)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextValign)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextWeight)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextWhitespace)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextStretch)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextDecorate)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextTransform)
-        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextStyle)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextIndent)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextWhitespace)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextTransform)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextWeight)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextStretch)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextDecorate)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextSize)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextFont)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextStyle)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextAlign)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextVAlign)
-        Me.grpStyle.Controls.Add(Me.lblStyleTextColor)
-        Me.grpStyle.Controls.Add(Me.ucrChkStyleBoarder)
-        Me.grpStyle.Controls.Add(Me.ucrChkStyleText)
-        Me.grpStyle.Controls.Add(Me.ucrChkStyleFill)
-        resources.ApplyResources(Me.grpStyle, "grpStyle")
-        Me.grpStyle.Name = "grpStyle"
-        Me.grpStyle.TabStop = False
-        '
-        'lblStyleFillAlpha
-        '
-        resources.ApplyResources(Me.lblStyleFillAlpha, "lblStyleFillAlpha")
-        Me.lblStyleFillAlpha.Name = "lblStyleFillAlpha"
-        '
-        'lblStyleFillColor
-        '
-        resources.ApplyResources(Me.lblStyleFillColor, "lblStyleFillColor")
-        Me.lblStyleFillColor.Name = "lblStyleFillColor"
-        '
-        'lblBorderWeight
-        '
-        resources.ApplyResources(Me.lblBorderWeight, "lblBorderWeight")
-        Me.lblBorderWeight.Name = "lblBorderWeight"
-        '
-        'lblBorderStyle
-        '
-        resources.ApplyResources(Me.lblBorderStyle, "lblBorderStyle")
-        Me.lblBorderStyle.Name = "lblBorderStyle"
-        '
-        'lblBorderColor
-        '
-        resources.ApplyResources(Me.lblBorderColor, "lblBorderColor")
-        Me.lblBorderColor.Name = "lblBorderColor"
-        '
-        'lblBorderSides
-        '
-        resources.ApplyResources(Me.lblBorderSides, "lblBorderSides")
-        Me.lblBorderSides.Name = "lblBorderSides"
-        '
-        'lblStyleTextIndent
-        '
-        resources.ApplyResources(Me.lblStyleTextIndent, "lblStyleTextIndent")
-        Me.lblStyleTextIndent.Name = "lblStyleTextIndent"
-        '
-        'lblStyleTextWhitespace
-        '
-        resources.ApplyResources(Me.lblStyleTextWhitespace, "lblStyleTextWhitespace")
-        Me.lblStyleTextWhitespace.Name = "lblStyleTextWhitespace"
-        '
-        'lblStyleTextTransform
-        '
-        resources.ApplyResources(Me.lblStyleTextTransform, "lblStyleTextTransform")
-        Me.lblStyleTextTransform.Name = "lblStyleTextTransform"
-        '
-        'lblStyleTextWeight
-        '
-        resources.ApplyResources(Me.lblStyleTextWeight, "lblStyleTextWeight")
-        Me.lblStyleTextWeight.Name = "lblStyleTextWeight"
-        '
-        'lblStyleTextStretch
-        '
-        resources.ApplyResources(Me.lblStyleTextStretch, "lblStyleTextStretch")
-        Me.lblStyleTextStretch.Name = "lblStyleTextStretch"
-        '
-        'lblStyleTextDecorate
-        '
-        resources.ApplyResources(Me.lblStyleTextDecorate, "lblStyleTextDecorate")
-        Me.lblStyleTextDecorate.Name = "lblStyleTextDecorate"
-        '
-        'lblStyleTextSize
-        '
-        resources.ApplyResources(Me.lblStyleTextSize, "lblStyleTextSize")
-        Me.lblStyleTextSize.Name = "lblStyleTextSize"
-        '
-        'lblStyleTextFont
-        '
-        resources.ApplyResources(Me.lblStyleTextFont, "lblStyleTextFont")
-        Me.lblStyleTextFont.Name = "lblStyleTextFont"
-        '
-        'lblStyleTextStyle
-        '
-        resources.ApplyResources(Me.lblStyleTextStyle, "lblStyleTextStyle")
-        Me.lblStyleTextStyle.Name = "lblStyleTextStyle"
-        '
-        'lblStyleTextAlign
-        '
-        resources.ApplyResources(Me.lblStyleTextAlign, "lblStyleTextAlign")
-        Me.lblStyleTextAlign.Name = "lblStyleTextAlign"
-        '
-        'lblStyleTextVAlign
-        '
-        resources.ApplyResources(Me.lblStyleTextVAlign, "lblStyleTextVAlign")
-        Me.lblStyleTextVAlign.Name = "lblStyleTextVAlign"
-        '
-        'lblStyleTextColor
-        '
-        resources.ApplyResources(Me.lblStyleTextColor, "lblStyleTextColor")
-        Me.lblStyleTextColor.Name = "lblStyleTextColor"
-        '
-        'rdoAllColumns
-        '
-        resources.ApplyResources(Me.rdoAllColumns, "rdoAllColumns")
-        Me.rdoAllColumns.Name = "rdoAllColumns"
-        Me.rdoAllColumns.TabStop = True
-        Me.rdoAllColumns.UseVisualStyleBackColor = True
-        '
-        'rdoAllRows
-        '
-        resources.ApplyResources(Me.rdoAllRows, "rdoAllRows")
-        Me.rdoAllRows.Name = "rdoAllRows"
-        Me.rdoAllRows.TabStop = True
-        Me.rdoAllRows.UseVisualStyleBackColor = True
-        '
-        'lblHeader
-        '
-        resources.ApplyResources(Me.lblHeader, "lblHeader")
-        Me.lblHeader.Name = "lblHeader"
-        '
-        'tbpTable
-        '
-        Me.tbpTable.Controls.Add(Me.ucrChkAddTableFormat)
-        Me.tbpTable.Controls.Add(Me.ucrInputTableFontColor)
-        Me.tbpTable.Controls.Add(Me.ucrInputTableBackgroundColor)
-        Me.tbpTable.Controls.Add(Me.ucrInputStubLabel)
-        Me.tbpTable.Controls.Add(Me.ucrChkAddStubHeader)
-        Me.tbpTable.Controls.Add(Me.ucrNudTableFontSize)
-        Me.tbpTable.Controls.Add(Me.ucrNudTableWidth)
-        Me.tbpTable.Controls.Add(Me.lblFontSize)
-        Me.tbpTable.Controls.Add(Me.lblTableWidth)
-        Me.tbpTable.Controls.Add(Me.lblTableBackgroundColor)
-        Me.tbpTable.Controls.Add(Me.lblTableAlign)
-        Me.tbpTable.Controls.Add(Me.lblTableFontWeight)
-        Me.tbpTable.Controls.Add(Me.lblTableFontColor)
-        Me.tbpTable.Controls.Add(Me.lblTableLayout)
-        Me.tbpTable.Controls.Add(Me.ucrInputTableAlign)
-        Me.tbpTable.Controls.Add(Me.ucrInputTableFontWeight)
-        Me.tbpTable.Controls.Add(Me.ucrInputTableLayout)
-        resources.ApplyResources(Me.tbpTable, "tbpTable")
-        Me.tbpTable.Name = "tbpTable"
-        Me.tbpTable.UseVisualStyleBackColor = True
-        '
-        'lblFontSize
-        '
-        resources.ApplyResources(Me.lblFontSize, "lblFontSize")
-        Me.lblFontSize.Name = "lblFontSize"
-        '
-        'lblTableWidth
-        '
-        resources.ApplyResources(Me.lblTableWidth, "lblTableWidth")
-        Me.lblTableWidth.Name = "lblTableWidth"
-        '
-        'lblTableBackgroundColor
-        '
-        resources.ApplyResources(Me.lblTableBackgroundColor, "lblTableBackgroundColor")
-        Me.lblTableBackgroundColor.Name = "lblTableBackgroundColor"
-        '
-        'lblTableAlign
-        '
-        resources.ApplyResources(Me.lblTableAlign, "lblTableAlign")
-        Me.lblTableAlign.Name = "lblTableAlign"
-        '
-        'lblTableFontWeight
-        '
-        resources.ApplyResources(Me.lblTableFontWeight, "lblTableFontWeight")
-        Me.lblTableFontWeight.Name = "lblTableFontWeight"
-        '
-        'lblTableFontColor
-        '
-        resources.ApplyResources(Me.lblTableFontColor, "lblTableFontColor")
-        Me.lblTableFontColor.Name = "lblTableFontColor"
-        '
-        'lblTableLayout
-        '
-        resources.ApplyResources(Me.lblTableLayout, "lblTableLayout")
-        Me.lblTableLayout.Name = "lblTableLayout"
-        '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'ucrInputCellFootnote
         '
@@ -442,6 +182,16 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrChkAddSourcenote, "ucrChkAddSourcenote")
         Me.ucrChkAddSourcenote.Name = "ucrChkAddSourcenote"
         '
+        'grpLocation
+        '
+        Me.grpLocation.Controls.Add(Me.ucrInputFootnoteColumnLocation)
+        Me.grpLocation.Controls.Add(Me.ucrInputFootnoteRowLocation)
+        Me.grpLocation.Controls.Add(Me.lblColumns)
+        Me.grpLocation.Controls.Add(Me.lblRows)
+        resources.ApplyResources(Me.grpLocation, "grpLocation")
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.TabStop = False
+        '
         'ucrInputFootnoteColumnLocation
         '
         Me.ucrInputFootnoteColumnLocation.AddQuotesIfUnrecognised = True
@@ -458,6 +208,16 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputFootnoteRowLocation, "ucrInputFootnoteRowLocation")
         Me.ucrInputFootnoteRowLocation.Name = "ucrInputFootnoteRowLocation"
         '
+        'lblColumns
+        '
+        resources.ApplyResources(Me.lblColumns, "lblColumns")
+        Me.lblColumns.Name = "lblColumns"
+        '
+        'lblRows
+        '
+        resources.ApplyResources(Me.lblRows, "lblRows")
+        Me.lblRows.Name = "lblRows"
+        '
         'ucrChkAddFootnote
         '
         Me.ucrChkAddFootnote.Checked = False
@@ -469,6 +229,20 @@ Partial Class sdgFormatSummaryTables
         Me.ucrChkAddTitleSubtitle.Checked = False
         resources.ApplyResources(Me.ucrChkAddTitleSubtitle, "ucrChkAddTitleSubtitle")
         Me.ucrChkAddTitleSubtitle.Name = "ucrChkAddTitleSubtitle"
+        '
+        'grpTitleSubtitle
+        '
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitleFootnote)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrChkTitleFootnote)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputSubtitle)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitle)
+        Me.grpTitleSubtitle.Controls.Add(Me.lblSubtitle)
+        Me.grpTitleSubtitle.Controls.Add(Me.lblTitle)
+        resources.ApplyResources(Me.grpTitleSubtitle, "grpTitleSubtitle")
+        Me.grpTitleSubtitle.Name = "grpTitleSubtitle"
+        Me.grpTitleSubtitle.TabStop = False
         '
         'ucrInputSubtitleFootnote
         '
@@ -514,11 +288,78 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
         Me.ucrInputTitle.Name = "ucrInputTitle"
         '
+        'lblSubtitle
+        '
+        resources.ApplyResources(Me.lblSubtitle, "lblSubtitle")
+        Me.lblSubtitle.Name = "lblSubtitle"
+        '
+        'lblTitle
+        '
+        resources.ApplyResources(Me.lblTitle, "lblTitle")
+        Me.lblTitle.Name = "lblTitle"
+        '
+        'tbpHeader
+        '
+        Me.tbpHeader.Controls.Add(Me.ucrChkAddHeader)
+        Me.tbpHeader.Controls.Add(Me.grpStyle)
+        Me.tbpHeader.Controls.Add(Me.rdoAllColumns)
+        Me.tbpHeader.Controls.Add(Me.rdoAllRows)
+        Me.tbpHeader.Controls.Add(Me.lblHeader)
+        Me.tbpHeader.Controls.Add(Me.ucrPnlHeader)
+        resources.ApplyResources(Me.tbpHeader, "tbpHeader")
+        Me.tbpHeader.Name = "tbpHeader"
+        Me.tbpHeader.UseVisualStyleBackColor = True
+        '
         'ucrChkAddHeader
         '
         Me.ucrChkAddHeader.Checked = False
         resources.ApplyResources(Me.ucrChkAddHeader, "ucrChkAddHeader")
         Me.ucrChkAddHeader.Name = "ucrChkAddHeader"
+        '
+        'grpStyle
+        '
+        Me.grpStyle.Controls.Add(Me.ucrNudStyleFillAlpha)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleFillColor)
+        Me.grpStyle.Controls.Add(Me.ucrNudStyleBorderWeight)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderColor)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextColor)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextFont)
+        Me.grpStyle.Controls.Add(Me.ucrNudStyleTextIndent)
+        Me.grpStyle.Controls.Add(Me.lblStyleFillAlpha)
+        Me.grpStyle.Controls.Add(Me.lblStyleFillColor)
+        Me.grpStyle.Controls.Add(Me.lblBorderWeight)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderStyle)
+        Me.grpStyle.Controls.Add(Me.lblBorderStyle)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleBorderSides)
+        Me.grpStyle.Controls.Add(Me.lblBorderColor)
+        Me.grpStyle.Controls.Add(Me.lblBorderSides)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextSize)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextAlign)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextValign)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextWeight)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextWhitespace)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextStretch)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextDecorate)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextTransform)
+        Me.grpStyle.Controls.Add(Me.ucrInputStyleTextStyle)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextIndent)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextWhitespace)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextTransform)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextWeight)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextStretch)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextDecorate)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextSize)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextFont)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextStyle)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextAlign)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextVAlign)
+        Me.grpStyle.Controls.Add(Me.lblStyleTextColor)
+        Me.grpStyle.Controls.Add(Me.ucrChkStyleBoarder)
+        Me.grpStyle.Controls.Add(Me.ucrChkStyleText)
+        Me.grpStyle.Controls.Add(Me.ucrChkStyleFill)
+        resources.ApplyResources(Me.grpStyle, "grpStyle")
+        Me.grpStyle.Name = "grpStyle"
+        Me.grpStyle.TabStop = False
         '
         'ucrNudStyleFillAlpha
         '
@@ -582,6 +423,21 @@ Partial Class sdgFormatSummaryTables
         Me.ucrNudStyleTextIndent.Name = "ucrNudStyleTextIndent"
         Me.ucrNudStyleTextIndent.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblStyleFillAlpha
+        '
+        resources.ApplyResources(Me.lblStyleFillAlpha, "lblStyleFillAlpha")
+        Me.lblStyleFillAlpha.Name = "lblStyleFillAlpha"
+        '
+        'lblStyleFillColor
+        '
+        resources.ApplyResources(Me.lblStyleFillColor, "lblStyleFillColor")
+        Me.lblStyleFillColor.Name = "lblStyleFillColor"
+        '
+        'lblBorderWeight
+        '
+        resources.ApplyResources(Me.lblBorderWeight, "lblBorderWeight")
+        Me.lblBorderWeight.Name = "lblBorderWeight"
+        '
         'ucrInputStyleBorderStyle
         '
         Me.ucrInputStyleBorderStyle.AddQuotesIfUnrecognised = True
@@ -590,6 +446,11 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputStyleBorderStyle, "ucrInputStyleBorderStyle")
         Me.ucrInputStyleBorderStyle.Name = "ucrInputStyleBorderStyle"
         '
+        'lblBorderStyle
+        '
+        resources.ApplyResources(Me.lblBorderStyle, "lblBorderStyle")
+        Me.lblBorderStyle.Name = "lblBorderStyle"
+        '
         'ucrInputStyleBorderSides
         '
         Me.ucrInputStyleBorderSides.AddQuotesIfUnrecognised = True
@@ -597,6 +458,16 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputStyleBorderSides.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputStyleBorderSides, "ucrInputStyleBorderSides")
         Me.ucrInputStyleBorderSides.Name = "ucrInputStyleBorderSides"
+        '
+        'lblBorderColor
+        '
+        resources.ApplyResources(Me.lblBorderColor, "lblBorderColor")
+        Me.lblBorderColor.Name = "lblBorderColor"
+        '
+        'lblBorderSides
+        '
+        resources.ApplyResources(Me.lblBorderSides, "lblBorderSides")
+        Me.lblBorderSides.Name = "lblBorderSides"
         '
         'ucrInputStyleTextSize
         '
@@ -670,6 +541,66 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputStyleTextStyle, "ucrInputStyleTextStyle")
         Me.ucrInputStyleTextStyle.Name = "ucrInputStyleTextStyle"
         '
+        'lblStyleTextIndent
+        '
+        resources.ApplyResources(Me.lblStyleTextIndent, "lblStyleTextIndent")
+        Me.lblStyleTextIndent.Name = "lblStyleTextIndent"
+        '
+        'lblStyleTextWhitespace
+        '
+        resources.ApplyResources(Me.lblStyleTextWhitespace, "lblStyleTextWhitespace")
+        Me.lblStyleTextWhitespace.Name = "lblStyleTextWhitespace"
+        '
+        'lblStyleTextTransform
+        '
+        resources.ApplyResources(Me.lblStyleTextTransform, "lblStyleTextTransform")
+        Me.lblStyleTextTransform.Name = "lblStyleTextTransform"
+        '
+        'lblStyleTextWeight
+        '
+        resources.ApplyResources(Me.lblStyleTextWeight, "lblStyleTextWeight")
+        Me.lblStyleTextWeight.Name = "lblStyleTextWeight"
+        '
+        'lblStyleTextStretch
+        '
+        resources.ApplyResources(Me.lblStyleTextStretch, "lblStyleTextStretch")
+        Me.lblStyleTextStretch.Name = "lblStyleTextStretch"
+        '
+        'lblStyleTextDecorate
+        '
+        resources.ApplyResources(Me.lblStyleTextDecorate, "lblStyleTextDecorate")
+        Me.lblStyleTextDecorate.Name = "lblStyleTextDecorate"
+        '
+        'lblStyleTextSize
+        '
+        resources.ApplyResources(Me.lblStyleTextSize, "lblStyleTextSize")
+        Me.lblStyleTextSize.Name = "lblStyleTextSize"
+        '
+        'lblStyleTextFont
+        '
+        resources.ApplyResources(Me.lblStyleTextFont, "lblStyleTextFont")
+        Me.lblStyleTextFont.Name = "lblStyleTextFont"
+        '
+        'lblStyleTextStyle
+        '
+        resources.ApplyResources(Me.lblStyleTextStyle, "lblStyleTextStyle")
+        Me.lblStyleTextStyle.Name = "lblStyleTextStyle"
+        '
+        'lblStyleTextAlign
+        '
+        resources.ApplyResources(Me.lblStyleTextAlign, "lblStyleTextAlign")
+        Me.lblStyleTextAlign.Name = "lblStyleTextAlign"
+        '
+        'lblStyleTextVAlign
+        '
+        resources.ApplyResources(Me.lblStyleTextVAlign, "lblStyleTextVAlign")
+        Me.lblStyleTextVAlign.Name = "lblStyleTextVAlign"
+        '
+        'lblStyleTextColor
+        '
+        resources.ApplyResources(Me.lblStyleTextColor, "lblStyleTextColor")
+        Me.lblStyleTextColor.Name = "lblStyleTextColor"
+        '
         'ucrChkStyleBoarder
         '
         Me.ucrChkStyleBoarder.Checked = False
@@ -688,10 +619,52 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrChkStyleFill, "ucrChkStyleFill")
         Me.ucrChkStyleFill.Name = "ucrChkStyleFill"
         '
+        'rdoAllColumns
+        '
+        resources.ApplyResources(Me.rdoAllColumns, "rdoAllColumns")
+        Me.rdoAllColumns.Name = "rdoAllColumns"
+        Me.rdoAllColumns.TabStop = True
+        Me.rdoAllColumns.UseVisualStyleBackColor = True
+        '
+        'rdoAllRows
+        '
+        resources.ApplyResources(Me.rdoAllRows, "rdoAllRows")
+        Me.rdoAllRows.Name = "rdoAllRows"
+        Me.rdoAllRows.TabStop = True
+        Me.rdoAllRows.UseVisualStyleBackColor = True
+        '
+        'lblHeader
+        '
+        resources.ApplyResources(Me.lblHeader, "lblHeader")
+        Me.lblHeader.Name = "lblHeader"
+        '
         'ucrPnlHeader
         '
         resources.ApplyResources(Me.ucrPnlHeader, "ucrPnlHeader")
         Me.ucrPnlHeader.Name = "ucrPnlHeader"
+        '
+        'tbpTable
+        '
+        Me.tbpTable.Controls.Add(Me.ucrChkAddTableFormat)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableFontColor)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableBackgroundColor)
+        Me.tbpTable.Controls.Add(Me.ucrInputStubLabel)
+        Me.tbpTable.Controls.Add(Me.ucrChkAddStubHeader)
+        Me.tbpTable.Controls.Add(Me.ucrNudTableFontSize)
+        Me.tbpTable.Controls.Add(Me.ucrNudTableWidth)
+        Me.tbpTable.Controls.Add(Me.lblFontSize)
+        Me.tbpTable.Controls.Add(Me.lblTableWidth)
+        Me.tbpTable.Controls.Add(Me.lblTableBackgroundColor)
+        Me.tbpTable.Controls.Add(Me.lblTableAlign)
+        Me.tbpTable.Controls.Add(Me.lblTableFontWeight)
+        Me.tbpTable.Controls.Add(Me.lblTableFontColor)
+        Me.tbpTable.Controls.Add(Me.lblTableLayout)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableAlign)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableFontWeight)
+        Me.tbpTable.Controls.Add(Me.ucrInputTableLayout)
+        resources.ApplyResources(Me.tbpTable, "tbpTable")
+        Me.tbpTable.Name = "tbpTable"
+        Me.tbpTable.UseVisualStyleBackColor = True
         '
         'ucrChkAddTableFormat
         '
@@ -749,6 +722,41 @@ Partial Class sdgFormatSummaryTables
         Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
         Me.ucrNudTableWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblFontSize
+        '
+        resources.ApplyResources(Me.lblFontSize, "lblFontSize")
+        Me.lblFontSize.Name = "lblFontSize"
+        '
+        'lblTableWidth
+        '
+        resources.ApplyResources(Me.lblTableWidth, "lblTableWidth")
+        Me.lblTableWidth.Name = "lblTableWidth"
+        '
+        'lblTableBackgroundColor
+        '
+        resources.ApplyResources(Me.lblTableBackgroundColor, "lblTableBackgroundColor")
+        Me.lblTableBackgroundColor.Name = "lblTableBackgroundColor"
+        '
+        'lblTableAlign
+        '
+        resources.ApplyResources(Me.lblTableAlign, "lblTableAlign")
+        Me.lblTableAlign.Name = "lblTableAlign"
+        '
+        'lblTableFontWeight
+        '
+        resources.ApplyResources(Me.lblTableFontWeight, "lblTableFontWeight")
+        Me.lblTableFontWeight.Name = "lblTableFontWeight"
+        '
+        'lblTableFontColor
+        '
+        resources.ApplyResources(Me.lblTableFontColor, "lblTableFontColor")
+        Me.lblTableFontColor.Name = "lblTableFontColor"
+        '
+        'lblTableLayout
+        '
+        resources.ApplyResources(Me.lblTableLayout, "lblTableLayout")
+        Me.lblTableLayout.Name = "lblTableLayout"
+        '
         'ucrInputTableAlign
         '
         Me.ucrInputTableAlign.AddQuotesIfUnrecognised = True
@@ -773,6 +781,66 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'grpSecondFootnote
+        '
+        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteColumnLocation)
+        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteRowLocation)
+        Me.grpSecondFootnote.Controls.Add(Me.lblSecondColumns)
+        Me.grpSecondFootnote.Controls.Add(Me.lblSecondRows)
+        resources.ApplyResources(Me.grpSecondFootnote, "grpSecondFootnote")
+        Me.grpSecondFootnote.Name = "grpSecondFootnote"
+        Me.grpSecondFootnote.TabStop = False
+        '
+        'ucrInputSecondFootnoteColumnLocation
+        '
+        Me.ucrInputSecondFootnoteColumnLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecondFootnoteColumnLocation.IsMultiline = False
+        Me.ucrInputSecondFootnoteColumnLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSecondFootnoteColumnLocation, "ucrInputSecondFootnoteColumnLocation")
+        Me.ucrInputSecondFootnoteColumnLocation.Name = "ucrInputSecondFootnoteColumnLocation"
+        '
+        'ucrInputSecondFootnoteRowLocation
+        '
+        Me.ucrInputSecondFootnoteRowLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecondFootnoteRowLocation.IsMultiline = False
+        Me.ucrInputSecondFootnoteRowLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSecondFootnoteRowLocation, "ucrInputSecondFootnoteRowLocation")
+        Me.ucrInputSecondFootnoteRowLocation.Name = "ucrInputSecondFootnoteRowLocation"
+        '
+        'lblSecondColumns
+        '
+        resources.ApplyResources(Me.lblSecondColumns, "lblSecondColumns")
+        Me.lblSecondColumns.Name = "lblSecondColumns"
+        '
+        'lblSecondRows
+        '
+        resources.ApplyResources(Me.lblSecondRows, "lblSecondRows")
+        Me.lblSecondRows.Name = "lblSecondRows"
+        '
+        'lblSecondFootnote
+        '
+        resources.ApplyResources(Me.lblSecondFootnote, "lblSecondFootnote")
+        Me.lblSecondFootnote.Name = "lblSecondFootnote"
+        '
+        'ucrInputSecondCellFootnote
+        '
+        Me.ucrInputSecondCellFootnote.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecondCellFootnote.IsMultiline = False
+        Me.ucrInputSecondCellFootnote.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSecondCellFootnote, "ucrInputSecondCellFootnote")
+        Me.ucrInputSecondCellFootnote.Name = "ucrInputSecondCellFootnote"
+        '
+        'ucrChKAddSecondFootnote
+        '
+        Me.ucrChKAddSecondFootnote.Checked = False
+        resources.ApplyResources(Me.ucrChKAddSecondFootnote, "ucrChKAddSecondFootnote")
+        Me.ucrChKAddSecondFootnote.Name = "ucrChKAddSecondFootnote"
+        '
         'sdgFormatSummaryTables
         '
         resources.ApplyResources(Me, "$this")
@@ -796,6 +864,8 @@ Partial Class sdgFormatSummaryTables
         Me.grpStyle.PerformLayout()
         Me.tbpTable.ResumeLayout(False)
         Me.tbpTable.PerformLayout()
+        Me.grpSecondFootnote.ResumeLayout(False)
+        Me.grpSecondFootnote.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -887,4 +957,12 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents ucrInputCellFootnote As ucrInputTextBox
     Friend WithEvents lblFootnote As Label
+    Friend WithEvents grpSecondFootnote As GroupBox
+    Friend WithEvents ucrInputSecondFootnoteColumnLocation As ucrInputTextBox
+    Friend WithEvents ucrInputSecondFootnoteRowLocation As ucrInputTextBox
+    Friend WithEvents lblSecondColumns As Label
+    Friend WithEvents lblSecondRows As Label
+    Friend WithEvents lblSecondFootnote As Label
+    Friend WithEvents ucrInputSecondCellFootnote As ucrInputTextBox
+    Friend WithEvents ucrChKAddSecondFootnote As ucrCheck
 End Class
