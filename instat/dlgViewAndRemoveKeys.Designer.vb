@@ -64,6 +64,7 @@ Partial Class dlgViewAndRemoveKeys
         '
         'ucrSelectorKeys
         '
+        Me.ucrSelectorKeys.bDropUnusedFilterLevels = False
         Me.ucrSelectorKeys.bShowHiddenColumns = False
         Me.ucrSelectorKeys.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorKeys, "ucrSelectorKeys")

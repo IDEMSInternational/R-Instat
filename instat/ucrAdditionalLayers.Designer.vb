@@ -72,6 +72,7 @@ Partial Class ucrAdditionalLayers
         'lstLayers
         '
         Me.lstLayers.FullRowSelect = True
+        Me.lstLayers.HideSelection = False
         resources.ApplyResources(Me.lstLayers, "lstLayers")
         Me.lstLayers.Name = "lstLayers"
         Me.lstLayers.UseCompatibleStateImageBehavior = False

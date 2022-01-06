@@ -164,7 +164,7 @@ Partial Class ucrDataFrameMetadata
         '
         Me.ucrLinuxGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrLinuxGrid.Location = New System.Drawing.Point(2, 22)
-        Me.ucrLinuxGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ucrLinuxGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.ucrLinuxGrid.Name = "ucrLinuxGrid"
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(323, 381)
         Me.ucrLinuxGrid.TabIndex = 8
@@ -173,7 +173,7 @@ Partial Class ucrDataFrameMetadata
         '
         Me.ucrReoGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrReoGrid.Location = New System.Drawing.Point(329, 22)
-        Me.ucrReoGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ucrReoGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.ucrReoGrid.Name = "ucrReoGrid"
         Me.ucrReoGrid.Size = New System.Drawing.Size(324, 381)
         Me.ucrReoGrid.TabIndex = 9
@@ -182,6 +182,7 @@ Partial Class ucrDataFrameMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataFrameMetadata"
         Me.Size = New System.Drawing.Size(655, 405)

@@ -52,6 +52,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.FullRowSelect = True
         Me.lstSelectedVariables.GridLines = True
         Me.lstSelectedVariables.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lstSelectedVariables.HideSelection = False
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.ShowItemToolTips = True
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False

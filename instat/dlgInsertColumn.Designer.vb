@@ -300,6 +300,7 @@ Partial Class dlgInsertColumn
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblStartPos As Label

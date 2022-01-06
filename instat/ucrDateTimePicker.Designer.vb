@@ -37,6 +37,7 @@ Partial Class ucrDateTimePicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.dtpDateTime)
         Me.Name = "ucrDateTimePicker"
         Me.Size = New System.Drawing.Size(163, 20)

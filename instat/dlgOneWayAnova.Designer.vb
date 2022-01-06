@@ -93,7 +93,9 @@ Partial Class dlgOneWayANOVA
         '
         'UcrInputTextBox1
         '
+        Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
         Me.UcrInputTextBox1.Enabled = False
+        Me.UcrInputTextBox1.IsMultiline = False
         Me.UcrInputTextBox1.IsReadOnly = False
         Me.UcrInputTextBox1.Location = New System.Drawing.Point(82, 204)
         Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
@@ -102,6 +104,7 @@ Partial Class dlgOneWayANOVA
         '
         'ucrAddRemoveDataFrame
         '
+        Me.ucrAddRemoveDataFrame.bDropUnusedFilterLevels = False
         Me.ucrAddRemoveDataFrame.bShowHiddenColumns = False
         Me.ucrAddRemoveDataFrame.bUseCurrentFilter = True
         Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(10, 10)
@@ -112,24 +115,31 @@ Partial Class dlgOneWayANOVA
         '
         'ucrFactor
         '
+        Me.ucrFactor.frmParent = Me
         Me.ucrFactor.Location = New System.Drawing.Point(252, 99)
         Me.ucrFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactor.Name = "ucrFactor"
         Me.ucrFactor.Selector = Nothing
         Me.ucrFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactor.strNcFilePath = ""
         Me.ucrFactor.TabIndex = 4
+        Me.ucrFactor.ucrSelector = Nothing
         '
         'ucrYVariate
         '
+        Me.ucrYVariate.frmParent = Me
         Me.ucrYVariate.Location = New System.Drawing.Point(252, 46)
         Me.ucrYVariate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYVariate.Name = "ucrYVariate"
         Me.ucrYVariate.Selector = Nothing
         Me.ucrYVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYVariate.strNcFilePath = ""
         Me.ucrYVariate.TabIndex = 2
+        Me.ucrYVariate.ucrSelector = Nothing
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 231)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -139,6 +149,7 @@ Partial Class dlgOneWayANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 291)
         Me.Controls.Add(Me.UcrInputTextBox1)
         Me.Controls.Add(Me.cmdOptions)

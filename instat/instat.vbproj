@@ -4977,6 +4977,9 @@
     <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
       <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputFactorLevels.resx">
+      <DependentUpon>ucrInputFactorLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -5060,6 +5063,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingleNew.resx">
+      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>

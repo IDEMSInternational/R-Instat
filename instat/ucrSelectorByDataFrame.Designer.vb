@@ -48,6 +48,7 @@ Partial Class ucrSelectorByDataFrame
         '
         'ucrAvailableDataFrames
         '
+        Me.ucrAvailableDataFrames.bDropUnusedFilterLevels = False
         Me.ucrAvailableDataFrames.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrAvailableDataFrames, "ucrAvailableDataFrames")
         Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"

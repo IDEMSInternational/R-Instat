@@ -429,7 +429,7 @@ Partial Class dlgUseModel
         '
         Me.ucrChkIncludeArguments.Checked = False
         Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
-        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 20)
         Me.ucrChkIncludeArguments.TabIndex = 32
@@ -637,8 +637,9 @@ Partial Class dlgUseModel
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(9, 362)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 20
@@ -669,8 +670,9 @@ Partial Class dlgUseModel
         'ucrTryModelling
         '
         Me.ucrTryModelling.Location = New System.Drawing.Point(2, 285)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
         Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
         Me.ucrTryModelling.TabIndex = 163
         '
@@ -678,6 +680,7 @@ Partial Class dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.ucrTryModelling)

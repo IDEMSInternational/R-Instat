@@ -48,6 +48,7 @@ Partial Class dlgSubset
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(40, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -104,6 +105,7 @@ Partial Class dlgSubset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 334)
         Me.Controls.Add(Me.cboDrop)
         Me.Controls.Add(Me.lblDrop)
@@ -118,6 +120,7 @@ Partial Class dlgSubset
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Subset"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
