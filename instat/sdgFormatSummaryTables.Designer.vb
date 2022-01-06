@@ -25,6 +25,14 @@ Partial Class sdgFormatSummaryTables
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFormatSummaryTables))
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpTitle = New System.Windows.Forms.TabPage()
+        Me.grpSecondFootnote = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSecondFootnoteColumnLocation = New instat.ucrInputTextBox()
+        Me.ucrInputSecondFootnoteRowLocation = New instat.ucrInputTextBox()
+        Me.lblSecondColumns = New System.Windows.Forms.Label()
+        Me.lblSecondRows = New System.Windows.Forms.Label()
+        Me.lblSecondFootnote = New System.Windows.Forms.Label()
+        Me.ucrInputSecondCellFootnote = New instat.ucrInputTextBox()
+        Me.ucrChKAddSecondFootnote = New instat.ucrCheck()
         Me.lblFootnote = New System.Windows.Forms.Label()
         Me.ucrInputCellFootnote = New instat.ucrInputTextBox()
         Me.ucrInputAddSourceNote = New instat.ucrInputTextBox()
@@ -110,22 +118,14 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grpSecondFootnote = New System.Windows.Forms.GroupBox()
-        Me.ucrInputSecondFootnoteColumnLocation = New instat.ucrInputTextBox()
-        Me.ucrInputSecondFootnoteRowLocation = New instat.ucrInputTextBox()
-        Me.lblSecondColumns = New System.Windows.Forms.Label()
-        Me.lblSecondRows = New System.Windows.Forms.Label()
-        Me.lblSecondFootnote = New System.Windows.Forms.Label()
-        Me.ucrInputSecondCellFootnote = New instat.ucrInputTextBox()
-        Me.ucrChKAddSecondFootnote = New instat.ucrCheck()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
+        Me.grpSecondFootnote.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.grpTitleSubtitle.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.grpStyle.SuspendLayout()
         Me.tbpTable.SuspendLayout()
-        Me.grpSecondFootnote.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -155,6 +155,61 @@ Partial Class sdgFormatSummaryTables
         Me.tbpTitle.Name = "tbpTitle"
         Me.tbpTitle.UseVisualStyleBackColor = True
         '
+        'grpSecondFootnote
+        '
+        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteColumnLocation)
+        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteRowLocation)
+        Me.grpSecondFootnote.Controls.Add(Me.lblSecondColumns)
+        Me.grpSecondFootnote.Controls.Add(Me.lblSecondRows)
+        resources.ApplyResources(Me.grpSecondFootnote, "grpSecondFootnote")
+        Me.grpSecondFootnote.Name = "grpSecondFootnote"
+        Me.grpSecondFootnote.TabStop = False
+        '
+        'ucrInputSecondFootnoteColumnLocation
+        '
+        Me.ucrInputSecondFootnoteColumnLocation.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSecondFootnoteColumnLocation, "ucrInputSecondFootnoteColumnLocation")
+        Me.ucrInputSecondFootnoteColumnLocation.IsMultiline = False
+        Me.ucrInputSecondFootnoteColumnLocation.IsReadOnly = False
+        Me.ucrInputSecondFootnoteColumnLocation.Name = "ucrInputSecondFootnoteColumnLocation"
+        '
+        'ucrInputSecondFootnoteRowLocation
+        '
+        Me.ucrInputSecondFootnoteRowLocation.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSecondFootnoteRowLocation, "ucrInputSecondFootnoteRowLocation")
+        Me.ucrInputSecondFootnoteRowLocation.IsMultiline = False
+        Me.ucrInputSecondFootnoteRowLocation.IsReadOnly = False
+        Me.ucrInputSecondFootnoteRowLocation.Name = "ucrInputSecondFootnoteRowLocation"
+        '
+        'lblSecondColumns
+        '
+        resources.ApplyResources(Me.lblSecondColumns, "lblSecondColumns")
+        Me.lblSecondColumns.Name = "lblSecondColumns"
+        '
+        'lblSecondRows
+        '
+        resources.ApplyResources(Me.lblSecondRows, "lblSecondRows")
+        Me.lblSecondRows.Name = "lblSecondRows"
+        '
+        'lblSecondFootnote
+        '
+        resources.ApplyResources(Me.lblSecondFootnote, "lblSecondFootnote")
+        Me.lblSecondFootnote.Name = "lblSecondFootnote"
+        '
+        'ucrInputSecondCellFootnote
+        '
+        Me.ucrInputSecondCellFootnote.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSecondCellFootnote, "ucrInputSecondCellFootnote")
+        Me.ucrInputSecondCellFootnote.IsMultiline = False
+        Me.ucrInputSecondCellFootnote.IsReadOnly = False
+        Me.ucrInputSecondCellFootnote.Name = "ucrInputSecondCellFootnote"
+        '
+        'ucrChKAddSecondFootnote
+        '
+        resources.ApplyResources(Me.ucrChKAddSecondFootnote, "ucrChKAddSecondFootnote")
+        Me.ucrChKAddSecondFootnote.Checked = False
+        Me.ucrChKAddSecondFootnote.Name = "ucrChKAddSecondFootnote"
+        '
         'lblFootnote
         '
         resources.ApplyResources(Me.lblFootnote, "lblFootnote")
@@ -163,23 +218,23 @@ Partial Class sdgFormatSummaryTables
         'ucrInputCellFootnote
         '
         Me.ucrInputCellFootnote.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputCellFootnote, "ucrInputCellFootnote")
         Me.ucrInputCellFootnote.IsMultiline = False
         Me.ucrInputCellFootnote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCellFootnote, "ucrInputCellFootnote")
         Me.ucrInputCellFootnote.Name = "ucrInputCellFootnote"
         '
         'ucrInputAddSourceNote
         '
         Me.ucrInputAddSourceNote.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputAddSourceNote, "ucrInputAddSourceNote")
         Me.ucrInputAddSourceNote.IsMultiline = False
         Me.ucrInputAddSourceNote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAddSourceNote, "ucrInputAddSourceNote")
         Me.ucrInputAddSourceNote.Name = "ucrInputAddSourceNote"
         '
         'ucrChkAddSourcenote
         '
-        Me.ucrChkAddSourcenote.Checked = False
         resources.ApplyResources(Me.ucrChkAddSourcenote, "ucrChkAddSourcenote")
+        Me.ucrChkAddSourcenote.Checked = False
         Me.ucrChkAddSourcenote.Name = "ucrChkAddSourcenote"
         '
         'grpLocation
@@ -195,17 +250,17 @@ Partial Class sdgFormatSummaryTables
         'ucrInputFootnoteColumnLocation
         '
         Me.ucrInputFootnoteColumnLocation.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputFootnoteColumnLocation, "ucrInputFootnoteColumnLocation")
         Me.ucrInputFootnoteColumnLocation.IsMultiline = False
         Me.ucrInputFootnoteColumnLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFootnoteColumnLocation, "ucrInputFootnoteColumnLocation")
         Me.ucrInputFootnoteColumnLocation.Name = "ucrInputFootnoteColumnLocation"
         '
         'ucrInputFootnoteRowLocation
         '
         Me.ucrInputFootnoteRowLocation.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputFootnoteRowLocation, "ucrInputFootnoteRowLocation")
         Me.ucrInputFootnoteRowLocation.IsMultiline = False
         Me.ucrInputFootnoteRowLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFootnoteRowLocation, "ucrInputFootnoteRowLocation")
         Me.ucrInputFootnoteRowLocation.Name = "ucrInputFootnoteRowLocation"
         '
         'lblColumns
@@ -220,14 +275,14 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrChkAddFootnote
         '
-        Me.ucrChkAddFootnote.Checked = False
         resources.ApplyResources(Me.ucrChkAddFootnote, "ucrChkAddFootnote")
+        Me.ucrChkAddFootnote.Checked = False
         Me.ucrChkAddFootnote.Name = "ucrChkAddFootnote"
         '
         'ucrChkAddTitleSubtitle
         '
-        Me.ucrChkAddTitleSubtitle.Checked = False
         resources.ApplyResources(Me.ucrChkAddTitleSubtitle, "ucrChkAddTitleSubtitle")
+        Me.ucrChkAddTitleSubtitle.Checked = False
         Me.ucrChkAddTitleSubtitle.Name = "ucrChkAddTitleSubtitle"
         '
         'grpTitleSubtitle
@@ -247,45 +302,45 @@ Partial Class sdgFormatSummaryTables
         'ucrInputSubtitleFootnote
         '
         Me.ucrInputSubtitleFootnote.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSubtitleFootnote, "ucrInputSubtitleFootnote")
         Me.ucrInputSubtitleFootnote.IsMultiline = False
         Me.ucrInputSubtitleFootnote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSubtitleFootnote, "ucrInputSubtitleFootnote")
         Me.ucrInputSubtitleFootnote.Name = "ucrInputSubtitleFootnote"
         '
         'ucrInputTitleFootnote
         '
         Me.ucrInputTitleFootnote.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTitleFootnote, "ucrInputTitleFootnote")
         Me.ucrInputTitleFootnote.IsMultiline = False
         Me.ucrInputTitleFootnote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTitleFootnote, "ucrInputTitleFootnote")
         Me.ucrInputTitleFootnote.Name = "ucrInputTitleFootnote"
         '
         'ucrChkSubtitleFootnote
         '
-        Me.ucrChkSubtitleFootnote.Checked = False
         resources.ApplyResources(Me.ucrChkSubtitleFootnote, "ucrChkSubtitleFootnote")
+        Me.ucrChkSubtitleFootnote.Checked = False
         Me.ucrChkSubtitleFootnote.Name = "ucrChkSubtitleFootnote"
         '
         'ucrChkTitleFootnote
         '
-        Me.ucrChkTitleFootnote.Checked = False
         resources.ApplyResources(Me.ucrChkTitleFootnote, "ucrChkTitleFootnote")
+        Me.ucrChkTitleFootnote.Checked = False
         Me.ucrChkTitleFootnote.Name = "ucrChkTitleFootnote"
         '
         'ucrInputSubtitle
         '
         Me.ucrInputSubtitle.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSubtitle, "ucrInputSubtitle")
         Me.ucrInputSubtitle.IsMultiline = False
         Me.ucrInputSubtitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSubtitle, "ucrInputSubtitle")
         Me.ucrInputSubtitle.Name = "ucrInputSubtitle"
         '
         'ucrInputTitle
         '
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
         Me.ucrInputTitle.Name = "ucrInputTitle"
         '
         'lblSubtitle
@@ -312,8 +367,8 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrChkAddHeader
         '
-        Me.ucrChkAddHeader.Checked = False
         resources.ApplyResources(Me.ucrChkAddHeader, "ucrChkAddHeader")
+        Me.ucrChkAddHeader.Checked = False
         Me.ucrChkAddHeader.Name = "ucrChkAddHeader"
         '
         'grpStyle
@@ -363,9 +418,9 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrNudStyleFillAlpha
         '
+        resources.ApplyResources(Me.ucrNudStyleFillAlpha, "ucrNudStyleFillAlpha")
         Me.ucrNudStyleFillAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleFillAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudStyleFillAlpha, "ucrNudStyleFillAlpha")
         Me.ucrNudStyleFillAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStyleFillAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleFillAlpha.Name = "ucrNudStyleFillAlpha"
@@ -374,16 +429,16 @@ Partial Class sdgFormatSummaryTables
         'ucrInputStyleFillColor
         '
         Me.ucrInputStyleFillColor.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleFillColor, "ucrInputStyleFillColor")
         Me.ucrInputStyleFillColor.GetSetSelectedIndex = -1
         Me.ucrInputStyleFillColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleFillColor, "ucrInputStyleFillColor")
         Me.ucrInputStyleFillColor.Name = "ucrInputStyleFillColor"
         '
         'ucrNudStyleBorderWeight
         '
+        resources.ApplyResources(Me.ucrNudStyleBorderWeight, "ucrNudStyleBorderWeight")
         Me.ucrNudStyleBorderWeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleBorderWeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudStyleBorderWeight, "ucrNudStyleBorderWeight")
         Me.ucrNudStyleBorderWeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStyleBorderWeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleBorderWeight.Name = "ucrNudStyleBorderWeight"
@@ -392,32 +447,32 @@ Partial Class sdgFormatSummaryTables
         'ucrInputStyleBorderColor
         '
         Me.ucrInputStyleBorderColor.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleBorderColor, "ucrInputStyleBorderColor")
         Me.ucrInputStyleBorderColor.GetSetSelectedIndex = -1
         Me.ucrInputStyleBorderColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleBorderColor, "ucrInputStyleBorderColor")
         Me.ucrInputStyleBorderColor.Name = "ucrInputStyleBorderColor"
         '
         'ucrInputStyleTextColor
         '
         Me.ucrInputStyleTextColor.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextColor, "ucrInputStyleTextColor")
         Me.ucrInputStyleTextColor.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextColor, "ucrInputStyleTextColor")
         Me.ucrInputStyleTextColor.Name = "ucrInputStyleTextColor"
         '
         'ucrInputStyleTextFont
         '
         Me.ucrInputStyleTextFont.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextFont, "ucrInputStyleTextFont")
         Me.ucrInputStyleTextFont.IsMultiline = False
         Me.ucrInputStyleTextFont.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextFont, "ucrInputStyleTextFont")
         Me.ucrInputStyleTextFont.Name = "ucrInputStyleTextFont"
         '
         'ucrNudStyleTextIndent
         '
+        resources.ApplyResources(Me.ucrNudStyleTextIndent, "ucrNudStyleTextIndent")
         Me.ucrNudStyleTextIndent.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleTextIndent.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudStyleTextIndent, "ucrNudStyleTextIndent")
         Me.ucrNudStyleTextIndent.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStyleTextIndent.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStyleTextIndent.Name = "ucrNudStyleTextIndent"
@@ -441,9 +496,9 @@ Partial Class sdgFormatSummaryTables
         'ucrInputStyleBorderStyle
         '
         Me.ucrInputStyleBorderStyle.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleBorderStyle, "ucrInputStyleBorderStyle")
         Me.ucrInputStyleBorderStyle.GetSetSelectedIndex = -1
         Me.ucrInputStyleBorderStyle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleBorderStyle, "ucrInputStyleBorderStyle")
         Me.ucrInputStyleBorderStyle.Name = "ucrInputStyleBorderStyle"
         '
         'lblBorderStyle
@@ -454,9 +509,9 @@ Partial Class sdgFormatSummaryTables
         'ucrInputStyleBorderSides
         '
         Me.ucrInputStyleBorderSides.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleBorderSides, "ucrInputStyleBorderSides")
         Me.ucrInputStyleBorderSides.GetSetSelectedIndex = -1
         Me.ucrInputStyleBorderSides.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleBorderSides, "ucrInputStyleBorderSides")
         Me.ucrInputStyleBorderSides.Name = "ucrInputStyleBorderSides"
         '
         'lblBorderColor
@@ -472,73 +527,73 @@ Partial Class sdgFormatSummaryTables
         'ucrInputStyleTextSize
         '
         Me.ucrInputStyleTextSize.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextSize, "ucrInputStyleTextSize")
         Me.ucrInputStyleTextSize.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextSize.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextSize, "ucrInputStyleTextSize")
         Me.ucrInputStyleTextSize.Name = "ucrInputStyleTextSize"
         '
         'ucrInputStyleTextAlign
         '
         Me.ucrInputStyleTextAlign.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextAlign, "ucrInputStyleTextAlign")
         Me.ucrInputStyleTextAlign.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextAlign.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextAlign, "ucrInputStyleTextAlign")
         Me.ucrInputStyleTextAlign.Name = "ucrInputStyleTextAlign"
         '
         'ucrInputStyleTextValign
         '
         Me.ucrInputStyleTextValign.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextValign, "ucrInputStyleTextValign")
         Me.ucrInputStyleTextValign.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextValign.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextValign, "ucrInputStyleTextValign")
         Me.ucrInputStyleTextValign.Name = "ucrInputStyleTextValign"
         '
         'ucrInputStyleTextWeight
         '
         Me.ucrInputStyleTextWeight.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextWeight, "ucrInputStyleTextWeight")
         Me.ucrInputStyleTextWeight.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextWeight.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextWeight, "ucrInputStyleTextWeight")
         Me.ucrInputStyleTextWeight.Name = "ucrInputStyleTextWeight"
         '
         'ucrInputStyleTextWhitespace
         '
         Me.ucrInputStyleTextWhitespace.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextWhitespace, "ucrInputStyleTextWhitespace")
         Me.ucrInputStyleTextWhitespace.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextWhitespace.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextWhitespace, "ucrInputStyleTextWhitespace")
         Me.ucrInputStyleTextWhitespace.Name = "ucrInputStyleTextWhitespace"
         '
         'ucrInputStyleTextStretch
         '
         Me.ucrInputStyleTextStretch.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextStretch, "ucrInputStyleTextStretch")
         Me.ucrInputStyleTextStretch.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextStretch.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextStretch, "ucrInputStyleTextStretch")
         Me.ucrInputStyleTextStretch.Name = "ucrInputStyleTextStretch"
         '
         'ucrInputStyleTextDecorate
         '
         Me.ucrInputStyleTextDecorate.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextDecorate, "ucrInputStyleTextDecorate")
         Me.ucrInputStyleTextDecorate.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextDecorate.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextDecorate, "ucrInputStyleTextDecorate")
         Me.ucrInputStyleTextDecorate.Name = "ucrInputStyleTextDecorate"
         '
         'ucrInputStyleTextTransform
         '
         Me.ucrInputStyleTextTransform.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextTransform, "ucrInputStyleTextTransform")
         Me.ucrInputStyleTextTransform.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextTransform.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextTransform, "ucrInputStyleTextTransform")
         Me.ucrInputStyleTextTransform.Name = "ucrInputStyleTextTransform"
         '
         'ucrInputStyleTextStyle
         '
         Me.ucrInputStyleTextStyle.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStyleTextStyle, "ucrInputStyleTextStyle")
         Me.ucrInputStyleTextStyle.GetSetSelectedIndex = -1
         Me.ucrInputStyleTextStyle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStyleTextStyle, "ucrInputStyleTextStyle")
         Me.ucrInputStyleTextStyle.Name = "ucrInputStyleTextStyle"
         '
         'lblStyleTextIndent
@@ -603,20 +658,20 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrChkStyleBoarder
         '
-        Me.ucrChkStyleBoarder.Checked = False
         resources.ApplyResources(Me.ucrChkStyleBoarder, "ucrChkStyleBoarder")
+        Me.ucrChkStyleBoarder.Checked = False
         Me.ucrChkStyleBoarder.Name = "ucrChkStyleBoarder"
         '
         'ucrChkStyleText
         '
-        Me.ucrChkStyleText.Checked = False
         resources.ApplyResources(Me.ucrChkStyleText, "ucrChkStyleText")
+        Me.ucrChkStyleText.Checked = False
         Me.ucrChkStyleText.Name = "ucrChkStyleText"
         '
         'ucrChkStyleFill
         '
-        Me.ucrChkStyleFill.Checked = False
         resources.ApplyResources(Me.ucrChkStyleFill, "ucrChkStyleFill")
+        Me.ucrChkStyleFill.Checked = False
         Me.ucrChkStyleFill.Name = "ucrChkStyleFill"
         '
         'rdoAllColumns
@@ -668,45 +723,45 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrChkAddTableFormat
         '
-        Me.ucrChkAddTableFormat.Checked = False
         resources.ApplyResources(Me.ucrChkAddTableFormat, "ucrChkAddTableFormat")
+        Me.ucrChkAddTableFormat.Checked = False
         Me.ucrChkAddTableFormat.Name = "ucrChkAddTableFormat"
         '
         'ucrInputTableFontColor
         '
         Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTableFontColor, "ucrInputTableFontColor")
         Me.ucrInputTableFontColor.GetSetSelectedIndex = -1
         Me.ucrInputTableFontColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableFontColor, "ucrInputTableFontColor")
         Me.ucrInputTableFontColor.Name = "ucrInputTableFontColor"
         '
         'ucrInputTableBackgroundColor
         '
         Me.ucrInputTableBackgroundColor.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTableBackgroundColor, "ucrInputTableBackgroundColor")
         Me.ucrInputTableBackgroundColor.GetSetSelectedIndex = -1
         Me.ucrInputTableBackgroundColor.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableBackgroundColor, "ucrInputTableBackgroundColor")
         Me.ucrInputTableBackgroundColor.Name = "ucrInputTableBackgroundColor"
         '
         'ucrInputStubLabel
         '
         Me.ucrInputStubLabel.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStubLabel, "ucrInputStubLabel")
         Me.ucrInputStubLabel.IsMultiline = False
         Me.ucrInputStubLabel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStubLabel, "ucrInputStubLabel")
         Me.ucrInputStubLabel.Name = "ucrInputStubLabel"
         '
         'ucrChkAddStubHeader
         '
-        Me.ucrChkAddStubHeader.Checked = False
         resources.ApplyResources(Me.ucrChkAddStubHeader, "ucrChkAddStubHeader")
+        Me.ucrChkAddStubHeader.Checked = False
         Me.ucrChkAddStubHeader.Name = "ucrChkAddStubHeader"
         '
         'ucrNudTableFontSize
         '
+        resources.ApplyResources(Me.ucrNudTableFontSize, "ucrNudTableFontSize")
         Me.ucrNudTableFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTableFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTableFontSize, "ucrNudTableFontSize")
         Me.ucrNudTableFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTableFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTableFontSize.Name = "ucrNudTableFontSize"
@@ -714,9 +769,9 @@ Partial Class sdgFormatSummaryTables
         '
         'ucrNudTableWidth
         '
+        resources.ApplyResources(Me.ucrNudTableWidth, "ucrNudTableWidth")
         Me.ucrNudTableWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTableWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTableWidth, "ucrNudTableWidth")
         Me.ucrNudTableWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTableWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
@@ -760,86 +815,31 @@ Partial Class sdgFormatSummaryTables
         'ucrInputTableAlign
         '
         Me.ucrInputTableAlign.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTableAlign, "ucrInputTableAlign")
         Me.ucrInputTableAlign.GetSetSelectedIndex = -1
         Me.ucrInputTableAlign.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableAlign, "ucrInputTableAlign")
         Me.ucrInputTableAlign.Name = "ucrInputTableAlign"
         '
         'ucrInputTableFontWeight
         '
         Me.ucrInputTableFontWeight.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTableFontWeight, "ucrInputTableFontWeight")
         Me.ucrInputTableFontWeight.GetSetSelectedIndex = -1
         Me.ucrInputTableFontWeight.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableFontWeight, "ucrInputTableFontWeight")
         Me.ucrInputTableFontWeight.Name = "ucrInputTableFontWeight"
         '
         'ucrInputTableLayout
         '
         Me.ucrInputTableLayout.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.GetSetSelectedIndex = -1
         Me.ucrInputTableLayout.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTableLayout, "ucrInputTableLayout")
         Me.ucrInputTableLayout.Name = "ucrInputTableLayout"
         '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'grpSecondFootnote
-        '
-        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteColumnLocation)
-        Me.grpSecondFootnote.Controls.Add(Me.ucrInputSecondFootnoteRowLocation)
-        Me.grpSecondFootnote.Controls.Add(Me.lblSecondColumns)
-        Me.grpSecondFootnote.Controls.Add(Me.lblSecondRows)
-        resources.ApplyResources(Me.grpSecondFootnote, "grpSecondFootnote")
-        Me.grpSecondFootnote.Name = "grpSecondFootnote"
-        Me.grpSecondFootnote.TabStop = False
-        '
-        'ucrInputSecondFootnoteColumnLocation
-        '
-        Me.ucrInputSecondFootnoteColumnLocation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSecondFootnoteColumnLocation.IsMultiline = False
-        Me.ucrInputSecondFootnoteColumnLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSecondFootnoteColumnLocation, "ucrInputSecondFootnoteColumnLocation")
-        Me.ucrInputSecondFootnoteColumnLocation.Name = "ucrInputSecondFootnoteColumnLocation"
-        '
-        'ucrInputSecondFootnoteRowLocation
-        '
-        Me.ucrInputSecondFootnoteRowLocation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSecondFootnoteRowLocation.IsMultiline = False
-        Me.ucrInputSecondFootnoteRowLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSecondFootnoteRowLocation, "ucrInputSecondFootnoteRowLocation")
-        Me.ucrInputSecondFootnoteRowLocation.Name = "ucrInputSecondFootnoteRowLocation"
-        '
-        'lblSecondColumns
-        '
-        resources.ApplyResources(Me.lblSecondColumns, "lblSecondColumns")
-        Me.lblSecondColumns.Name = "lblSecondColumns"
-        '
-        'lblSecondRows
-        '
-        resources.ApplyResources(Me.lblSecondRows, "lblSecondRows")
-        Me.lblSecondRows.Name = "lblSecondRows"
-        '
-        'lblSecondFootnote
-        '
-        resources.ApplyResources(Me.lblSecondFootnote, "lblSecondFootnote")
-        Me.lblSecondFootnote.Name = "lblSecondFootnote"
-        '
-        'ucrInputSecondCellFootnote
-        '
-        Me.ucrInputSecondCellFootnote.AddQuotesIfUnrecognised = True
-        Me.ucrInputSecondCellFootnote.IsMultiline = False
-        Me.ucrInputSecondCellFootnote.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSecondCellFootnote, "ucrInputSecondCellFootnote")
-        Me.ucrInputSecondCellFootnote.Name = "ucrInputSecondCellFootnote"
-        '
-        'ucrChKAddSecondFootnote
-        '
-        Me.ucrChKAddSecondFootnote.Checked = False
-        resources.ApplyResources(Me.ucrChKAddSecondFootnote, "ucrChKAddSecondFootnote")
-        Me.ucrChKAddSecondFootnote.Name = "ucrChKAddSecondFootnote"
         '
         'sdgFormatSummaryTables
         '
@@ -854,6 +854,8 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFormatOptions.ResumeLayout(False)
         Me.tbpTitle.ResumeLayout(False)
         Me.tbpTitle.PerformLayout()
+        Me.grpSecondFootnote.ResumeLayout(False)
+        Me.grpSecondFootnote.PerformLayout()
         Me.grpLocation.ResumeLayout(False)
         Me.grpLocation.PerformLayout()
         Me.grpTitleSubtitle.ResumeLayout(False)
@@ -864,9 +866,8 @@ Partial Class sdgFormatSummaryTables
         Me.grpStyle.PerformLayout()
         Me.tbpTable.ResumeLayout(False)
         Me.tbpTable.PerformLayout()
-        Me.grpSecondFootnote.ResumeLayout(False)
-        Me.grpSecondFootnote.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

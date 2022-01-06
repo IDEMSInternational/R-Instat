@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputSecondFootnoteColumnLocation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrInputSecondFootnoteColumnLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 22</value>
@@ -124,7 +128,6 @@
   <data name="ucrInputSecondFootnoteColumnLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 21</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputSecondFootnoteColumnLocation.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -139,6 +142,9 @@
   </data>
   <data name="&gt;&gt;ucrInputSecondFootnoteColumnLocation.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputSecondFootnoteRowLocation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputSecondFootnoteRowLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 50</value>
@@ -276,6 +282,9 @@
   <data name="&gt;&gt;lblSecondFootnote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputSecondCellFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputSecondCellFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 269</value>
   </data>
@@ -297,11 +306,14 @@
   <data name="&gt;&gt;ucrInputSecondCellFootnote.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChKAddSecondFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChKAddSecondFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 270</value>
   </data>
   <data name="ucrChKAddSecondFootnote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>133, 23</value>
   </data>
   <data name="ucrChKAddSecondFootnote.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -348,6 +360,9 @@
   <data name="&gt;&gt;lblFootnote.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputCellFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputCellFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 155</value>
   </data>
@@ -368,6 +383,9 @@
   </data>
   <data name="&gt;&gt;ucrInputCellFootnote.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrInputAddSourceNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputAddSourceNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>148, 378</value>
@@ -390,11 +408,14 @@
   <data name="&gt;&gt;ucrInputAddSourceNote.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrChkAddSourcenote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddSourcenote.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 378</value>
   </data>
   <data name="ucrChkAddSourcenote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>133, 23</value>
   </data>
   <data name="ucrChkAddSourcenote.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -410,6 +431,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddSourcenote.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="ucrInputFootnoteColumnLocation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputFootnoteColumnLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 16</value>
@@ -431,6 +455,9 @@
   </data>
   <data name="&gt;&gt;ucrInputFootnoteColumnLocation.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputFootnoteRowLocation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputFootnoteRowLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 44</value>
@@ -537,11 +564,14 @@
   <data name="&gt;&gt;grpLocation.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="ucrChkAddFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 153</value>
   </data>
   <data name="ucrChkAddFootnote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>133, 23</value>
   </data>
   <data name="ucrChkAddFootnote.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -558,11 +588,14 @@
   <data name="&gt;&gt;ucrChkAddFootnote.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="ucrChkAddTitleSubtitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddTitleSubtitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 18</value>
   </data>
   <data name="ucrChkAddTitleSubtitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>156, 23</value>
   </data>
   <data name="ucrChkAddTitleSubtitle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -578,6 +611,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddTitleSubtitle.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="ucrInputSubtitleFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputSubtitleFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 55</value>
@@ -600,6 +636,9 @@
   <data name="&gt;&gt;ucrInputSubtitleFootnote.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputTitleFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputTitleFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 25</value>
   </data>
@@ -621,11 +660,14 @@
   <data name="&gt;&gt;ucrInputTitleFootnote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkSubtitleFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkSubtitleFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 56</value>
   </data>
   <data name="ucrChkSubtitleFootnote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 20</value>
+    <value>124, 23</value>
   </data>
   <data name="ucrChkSubtitleFootnote.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -642,11 +684,14 @@
   <data name="&gt;&gt;ucrChkSubtitleFootnote.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkTitleFootnote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkTitleFootnote.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 26</value>
   </data>
   <data name="ucrChkTitleFootnote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 20</value>
+    <value>124, 23</value>
   </data>
   <data name="ucrChkTitleFootnote.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -662,6 +707,9 @@
   </data>
   <data name="&gt;&gt;ucrChkTitleFootnote.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="ucrInputSubtitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputSubtitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 55</value>
@@ -683,6 +731,9 @@
   </data>
   <data name="&gt;&gt;ucrInputSubtitle.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="ucrInputTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>69, 25</value>
@@ -816,11 +867,14 @@
   <data name="&gt;&gt;tbpTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkAddHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
   </data>
   <data name="ucrChkAddHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 16</value>
+    <value>185, 23</value>
   </data>
   <data name="ucrChkAddHeader.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -836,6 +890,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddHeader.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrNudStyleFillAlpha.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudStyleFillAlpha.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 307</value>
@@ -858,6 +915,9 @@
   <data name="&gt;&gt;ucrNudStyleFillAlpha.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputStyleFillColor.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleFillColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 306</value>
   </data>
@@ -878,6 +938,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleFillColor.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrNudStyleBorderWeight.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudStyleBorderWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 249</value>
@@ -900,6 +963,9 @@
   <data name="&gt;&gt;ucrNudStyleBorderWeight.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrInputStyleBorderColor.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleBorderColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 248</value>
   </data>
@@ -920,6 +986,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleBorderColor.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="ucrInputStyleTextColor.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleTextColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 45</value>
@@ -942,6 +1011,9 @@
   <data name="&gt;&gt;ucrInputStyleTextColor.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputStyleTextFont.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputStyleTextFont.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 73</value>
   </data>
@@ -962,6 +1034,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleTextFont.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrNudStyleTextIndent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudStyleTextIndent.Location" type="System.Drawing.Point, System.Drawing">
     <value>414, 77</value>
@@ -1074,6 +1149,9 @@
   <data name="&gt;&gt;lblBorderWeight.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="ucrInputStyleBorderStyle.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleBorderStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 220</value>
   </data>
@@ -1124,6 +1202,9 @@
   </data>
   <data name="&gt;&gt;lblBorderStyle.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="ucrInputStyleBorderSides.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleBorderSides.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 220</value>
@@ -1206,6 +1287,9 @@
   <data name="&gt;&gt;lblBorderSides.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="ucrInputStyleTextSize.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleTextSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 102</value>
   </data>
@@ -1226,6 +1310,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleTextSize.ZOrder" xml:space="preserve">
     <value>15</value>
+  </data>
+  <data name="ucrInputStyleTextAlign.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleTextAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 130</value>
@@ -1248,6 +1335,9 @@
   <data name="&gt;&gt;ucrInputStyleTextAlign.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="ucrInputStyleTextValign.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleTextValign.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 158</value>
   </data>
@@ -1268,6 +1358,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleTextValign.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="ucrInputStyleTextWeight.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleTextWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 74</value>
@@ -1290,6 +1383,9 @@
   <data name="&gt;&gt;ucrInputStyleTextWeight.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="ucrInputStyleTextWhitespace.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleTextWhitespace.Location" type="System.Drawing.Point, System.Drawing">
     <value>414, 48</value>
   </data>
@@ -1310,6 +1406,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleTextWhitespace.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="ucrInputStyleTextStretch.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleTextStretch.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 102</value>
@@ -1332,6 +1431,9 @@
   <data name="&gt;&gt;ucrInputStyleTextStretch.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
+  <data name="ucrInputStyleTextDecorate.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleTextDecorate.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 130</value>
   </data>
@@ -1353,6 +1455,9 @@
   <data name="&gt;&gt;ucrInputStyleTextDecorate.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
+  <data name="ucrInputStyleTextTransform.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputStyleTextTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 158</value>
   </data>
@@ -1373,6 +1478,9 @@
   </data>
   <data name="&gt;&gt;ucrInputStyleTextTransform.ZOrder" xml:space="preserve">
     <value>22</value>
+  </data>
+  <data name="ucrInputStyleTextStyle.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputStyleTextStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 46</value>
@@ -1755,11 +1863,14 @@
   <data name="&gt;&gt;lblStyleTextColor.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
+  <data name="ucrChkStyleBoarder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkStyleBoarder.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 195</value>
   </data>
   <data name="ucrChkStyleBoarder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 16</value>
+    <value>112, 23</value>
   </data>
   <data name="ucrChkStyleBoarder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1776,11 +1887,14 @@
   <data name="&gt;&gt;ucrChkStyleBoarder.ZOrder" xml:space="preserve">
     <value>36</value>
   </data>
+  <data name="ucrChkStyleText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkStyleText.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
   <data name="ucrChkStyleText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 16</value>
+    <value>112, 23</value>
   </data>
   <data name="ucrChkStyleText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1797,11 +1911,14 @@
   <data name="&gt;&gt;ucrChkStyleText.ZOrder" xml:space="preserve">
     <value>37</value>
   </data>
+  <data name="ucrChkStyleFill.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkStyleFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 283</value>
   </data>
   <data name="ucrChkStyleFill.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 16</value>
+    <value>112, 23</value>
   </data>
   <data name="ucrChkStyleFill.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1932,11 +2049,14 @@
   <data name="&gt;&gt;lblHeader.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrPnlHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrPnlHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 26</value>
   </data>
   <data name="ucrPnlHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 23</value>
+    <value>250, 25</value>
   </data>
   <data name="ucrPnlHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1980,11 +2100,14 @@
   <data name="&gt;&gt;tbpHeader.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkAddTableFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddTableFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 10</value>
   </data>
   <data name="ucrChkAddTableFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 19</value>
+    <value>202, 23</value>
   </data>
   <data name="ucrChkAddTableFormat.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -2000,6 +2123,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddTableFormat.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputTableFontColor.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputTableFontColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 146</value>
@@ -2022,6 +2148,9 @@
   <data name="&gt;&gt;ucrInputTableFontColor.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputTableBackgroundColor.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputTableBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 92</value>
   </data>
@@ -2042,6 +2171,9 @@
   </data>
   <data name="&gt;&gt;ucrInputTableBackgroundColor.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrInputStubLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputStubLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 236</value>
@@ -2064,11 +2196,14 @@
   <data name="&gt;&gt;ucrInputStubLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrChkAddStubHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddStubHeader.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 240</value>
   </data>
   <data name="ucrChkAddStubHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 19</value>
+    <value>100, 23</value>
   </data>
   <data name="ucrChkAddStubHeader.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -2084,6 +2219,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddStubHeader.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="ucrNudTableFontSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudTableFontSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 203</value>
@@ -2105,6 +2243,9 @@
   </data>
   <data name="&gt;&gt;ucrNudTableFontSize.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrNudTableWidth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudTableWidth.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 175</value>
@@ -2337,6 +2478,9 @@
   <data name="&gt;&gt;lblTableLayout.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="ucrInputTableAlign.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputTableAlign.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 63</value>
   </data>
@@ -2358,6 +2502,9 @@
   <data name="&gt;&gt;ucrInputTableAlign.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="ucrInputTableFontWeight.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputTableFontWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 119</value>
   </data>
@@ -2378,6 +2525,9 @@
   </data>
   <data name="&gt;&gt;ucrInputTableFontWeight.ZOrder" xml:space="preserve">
     <value>15</value>
+  </data>
+  <data name="ucrInputTableLayout.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputTableLayout.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 35</value>
@@ -2448,11 +2598,14 @@
   <data name="&gt;&gt;tbpFormatOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrBaseSubdialog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBaseSubdialog.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 456</value>
   </data>
   <data name="ucrBaseSubdialog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 28</value>
+    <value>224, 29</value>
   </data>
   <data name="ucrBaseSubdialog.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2475,7 +2628,6 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
