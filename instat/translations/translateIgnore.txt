@@ -79,3 +79,8 @@ dlgSplitText_ucrInputPattern%
 # In the 'Filter' dialog, the 'Selected Filter Preview' should not be translated.
 # Fixes issue #6949, related to PR #6956
 dlgRestrict_ucrInputFilterPreview
+
+# In the 'Evapotranspiration' dialog, the 'Penman-Monteith' and 'Hargreaves-Samani' buttons should not be translated.
+# Partially fixes issue #7026, related to PR #7035
+dlgEvapotranspiration_%_rdoPenmanMonteith
+dlgEvapotranspiration_%_rdoHargreavesSamani
