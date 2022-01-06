@@ -87,6 +87,7 @@ Partial Class frmMain
         Me.mnuDescribeMultivariateCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeMultivariateprincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeMultivariateCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeMultivariateClusterAnalysis = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeUseGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -952,7 +953,7 @@ Partial Class frmMain
         '
         'mnuDescribeMultivariate
         '
-        Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations})
+        Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations, Me.mnuDescribeMultivariateClusterAnalysis})
         Me.mnuDescribeMultivariate.Name = "mnuDescribeMultivariate"
         resources.ApplyResources(Me.mnuDescribeMultivariate, "mnuDescribeMultivariate")
         '
@@ -970,6 +971,11 @@ Partial Class frmMain
         '
         Me.mnuDescribeMultivariateCanonicalCorrelations.Name = "mnuDescribeMultivariateCanonicalCorrelations"
         resources.ApplyResources(Me.mnuDescribeMultivariateCanonicalCorrelations, "mnuDescribeMultivariateCanonicalCorrelations")
+        '
+        'mnuDescribeMultivariateClusterAnalysis
+        '
+        resources.ApplyResources(Me.mnuDescribeMultivariateClusterAnalysis, "mnuDescribeMultivariateClusterAnalysis")
+        Me.mnuDescribeMultivariateClusterAnalysis.Name = "mnuDescribeMultivariateClusterAnalysis"
         '
         'ToolStripSeparator13
         '
@@ -4180,6 +4186,7 @@ Partial Class frmMain
         '
         'ucrColumnMeta
         '
+        Me.ucrColumnMeta.BackColor = System.Drawing.SystemColors.Control
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
@@ -4961,4 +4968,5 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOneVariableVisualiseData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator72 As ToolStripSeparator
     Friend WithEvents mnuModelFitModelMachineLearning As ToolStripMenuItem
+    Friend WithEvents mnuDescribeMultivariateClusterAnalysis As ToolStripMenuItem
 End Class

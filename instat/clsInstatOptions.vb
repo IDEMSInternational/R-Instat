@@ -293,21 +293,57 @@ Imports RDotNet
     End Sub
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
+        'TODO OutputFont should be the one saved back and loaded up
+        'currently need to keep fntOutput for saving
+        OutputFont.ROutputFont = fntNew
+        OutputFont.ROutputColour = clrNew
         fntOutput = fntNew
         clrOutput = clrNew
-        frmMain.clsRLink.SetFormatOutput(fntOutput, clrOutput)
     End Sub
 
     Public Sub SetFormatScript(fntNew As Font, clrNew As Color)
+        OutputFont.RSyntacticNameFont = fntNew
+        OutputFont.RFunctionNameFont = fntNew
+        OutputFont.RKeyWordFont = fntNew
+        OutputFont.RConstantStringFont = fntNew
+        OutputFont.RSpaceFont = fntNew
+        OutputFont.RBracketFont = fntNew
+        OutputFont.RSeparatorFont = fntNew
+        OutputFont.REndStatementFont = fntNew
+        OutputFont.REndScriptFont = fntNew
+        OutputFont.RNewLineFont = fntNew
+        OutputFont.ROperatorUnaryLeftFont = fntNew
+        OutputFont.ROperatorUnaryRightFont = fntNew
+        OutputFont.ROperatorBinaryFont = fntNew
+        OutputFont.ROperatorBracketFont = fntNew
+        OutputFont.RPresentationFont = fntNew
+        OutputFont.RInvalidFont = fntNew
+
+        OutputFont.RSyntacticNameColour = clrNew
+        OutputFont.RFunctionNameColour = clrNew
+        OutputFont.RKeyWordColour = clrNew
+        OutputFont.RConstantStringColour = clrNew
+        OutputFont.RSpaceColour = clrNew
+        OutputFont.RBracketColour = clrNew
+        OutputFont.RSeparatorColour = clrNew
+        OutputFont.REndStatementColour = clrNew
+        OutputFont.REndScriptColour = clrNew
+        OutputFont.RNewLineColour = clrNew
+        OutputFont.ROperatorUnaryLeftColour = clrNew
+        OutputFont.ROperatorUnaryRightColour = clrNew
+        OutputFont.ROperatorBinaryColour = clrNew
+        OutputFont.ROperatorBracketColour = clrNew
+        OutputFont.RPresentationColour = clrNew
+        OutputFont.RInvalidColour = clrNew
         fntScript = fntNew
         clrScript = clrNew
-        frmMain.clsRLink.SetFormatScript(fntScript, clrScript)
     End Sub
 
     Public Sub SetFormatComment(fntNew As Font, clrNew As Color)
+        OutputFont.RCommentFont = fntNew
+        OutputFont.RCommentColour = clrNew
         fntComment = fntNew
         clrComment = clrNew
-        frmMain.clsRLink.SetFormatComment(fntComment, clrComment)
     End Sub
 
     Public Sub SetFormatEditor(fntNew As Font, clrNew As Color)

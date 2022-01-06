@@ -22,6 +22,7 @@ Public Class clsColumnMetaData
     Private _strName As String
     Private _RLink As RLink
     Private _clsDataFrame As DataFrame
+    Private _hasChanged As Boolean
 
     ''' <summary>
     ''' Returns data for a given cell within the Column Meta data table
@@ -78,6 +79,20 @@ Public Class clsColumnMetaData
     End Property
 
     ''' <summary>
+    ''' holds whether the dataframe is different from visual grid component
+    ''' ToDo This is more ViewModel level not here where its stored
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property HasChanged() As Boolean
+        Get
+            Return _hasChanged
+        End Get
+        Set(ByVal value As Boolean)
+            _hasChanged = value
+        End Set
+    End Property
+
+    ''' <summary>
     ''' Creates new instance of a column metadata class
     ''' </summary>
     ''' <param name="rLink"></param>
@@ -85,6 +100,7 @@ Public Class clsColumnMetaData
     Public Sub New(rLink As RLink, strName As String)
         _RLink = rLink
         _strName = strName
+        _hasChanged = True
     End Sub
 
     Private Function HasDataChanged() As Boolean
@@ -114,7 +130,7 @@ Public Class clsColumnMetaData
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
-
+        _hasChanged = True
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
         clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strName & Chr(34))
