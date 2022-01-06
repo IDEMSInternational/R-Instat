@@ -55,6 +55,14 @@ Public Class sdgFormatSummaryTables
         ucrChKAddSecondFootnote.SetText("Add Second footnote")
         ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrInputSecondFootnoteRowLocation.SetValidationTypeAsNumericList()
+
+        ucrInputSecondFootnoteColumnLocation.SetValidationTypeAsNumericList()
+
+        ucrInputSecondCellFootnote.SetLinkedDisplayControl(lblSecondFootnote)
+
+        ucrInputSecondFootnoteColumnLocation.SetLinkedDisplayControl(grpSecondFootnote)
+
         ucrChKAddSecondFootnote.AddParameterPresentCondition(True, "second_cellfootnote")
         ucrChKAddSecondFootnote.AddParameterPresentCondition(False, "second_cellfootnote", False)
 
@@ -503,7 +511,8 @@ Public Class sdgFormatSummaryTables
             ucrChkAddFootnote.ControlContentsChanged, ucrChKAddSecondFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged,
             ucrChkAddHeader.ControlContentsChanged, ucrChkAddTableFormat.ControlContentsChanged, ucrChkAddStubHeader.ControlContentsChanged,
             ucrInputTitle.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged,
-            ucrInputSubtitleFootnote.ControlContentsChanged, ucrInputAddSourceNote.ControlContentsChanged, ucrInputStubLabel.ControlContentsChanged, ucrInputCellFootnote.ControlValueChanged
+            ucrInputSubtitleFootnote.ControlContentsChanged, ucrInputAddSourceNote.ControlContentsChanged, ucrInputStubLabel.ControlContentsChanged,
+            ucrInputCellFootnote.ControlContentsChanged, ucrInputSecondCellFootnote.ControlContentsChanged
 
 
         If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChKAddSecondFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse
@@ -598,6 +607,12 @@ Public Class sdgFormatSummaryTables
             clsFootnoteCellFunction.AddParameter("footnote", Chr(34) & ucrInputCellFootnote.GetText() & Chr(34), iPosition:=2)
         Else
             clsFootnoteCellFunction.RemoveParameterByName("footnote")
+        End If
+
+        If Not ucrInputSecondCellFootnote.IsEmpty Then
+            clsSecondFootnoteCellFunction.AddParameter("footnote", Chr(34) & ucrInputSecondCellFootnote.GetText() & Chr(34), iPosition:=2)
+        Else
+            clsSecondFootnoteCellFunction.RemoveParameterByName("footnote")
         End If
     End Sub
 
