@@ -45,6 +45,9 @@ Partial Class sdgFormatSummaryTables
         Me.ucrChkAddFootnote = New instat.ucrCheck()
         Me.ucrChkAddTitleSubtitle = New instat.ucrCheck()
         Me.grpTitleSubtitle = New System.Windows.Forms.GroupBox()
+        Me.ucrNudTitleSize = New instat.ucrNud()
+        Me.lblTitleSize = New System.Windows.Forms.Label()
+        Me.lblTitleFont = New System.Windows.Forms.Label()
         Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
         Me.ucrInputTitleFootnote = New instat.ucrInputTextBox()
         Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
@@ -118,6 +121,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputTitleFont = New instat.ucrInputTextBox()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSecondFootnote.SuspendLayout()
@@ -287,6 +291,10 @@ Partial Class sdgFormatSummaryTables
         '
         'grpTitleSubtitle
         '
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitleFont)
+        Me.grpTitleSubtitle.Controls.Add(Me.ucrNudTitleSize)
+        Me.grpTitleSubtitle.Controls.Add(Me.lblTitleSize)
+        Me.grpTitleSubtitle.Controls.Add(Me.lblTitleFont)
         Me.grpTitleSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
         Me.grpTitleSubtitle.Controls.Add(Me.ucrInputTitleFootnote)
         Me.grpTitleSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
@@ -298,6 +306,26 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.grpTitleSubtitle, "grpTitleSubtitle")
         Me.grpTitleSubtitle.Name = "grpTitleSubtitle"
         Me.grpTitleSubtitle.TabStop = False
+        '
+        'ucrNudTitleSize
+        '
+        resources.ApplyResources(Me.ucrNudTitleSize, "ucrNudTitleSize")
+        Me.ucrNudTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTitleSize.Name = "ucrNudTitleSize"
+        Me.ucrNudTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblTitleSize
+        '
+        resources.ApplyResources(Me.lblTitleSize, "lblTitleSize")
+        Me.lblTitleSize.Name = "lblTitleSize"
+        '
+        'lblTitleFont
+        '
+        resources.ApplyResources(Me.lblTitleFont, "lblTitleFont")
+        Me.lblTitleFont.Name = "lblTitleFont"
         '
         'ucrInputSubtitleFootnote
         '
@@ -841,6 +869,14 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
+        'ucrInputTitleFont
+        '
+        Me.ucrInputTitleFont.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTitleFont, "ucrInputTitleFont")
+        Me.ucrInputTitleFont.IsMultiline = False
+        Me.ucrInputTitleFont.IsReadOnly = False
+        Me.ucrInputTitleFont.Name = "ucrInputTitleFont"
+        '
         'sdgFormatSummaryTables
         '
         resources.ApplyResources(Me, "$this")
@@ -966,4 +1002,8 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents lblSecondFootnote As Label
     Friend WithEvents ucrInputSecondCellFootnote As ucrInputTextBox
     Friend WithEvents ucrChKAddSecondFootnote As ucrCheck
+    Friend WithEvents ucrNudTitleSize As ucrNud
+    Friend WithEvents lblTitleSize As Label
+    Friend WithEvents lblTitleFont As Label
+    Friend WithEvents ucrInputTitleFont As ucrInputTextBox
 End Class

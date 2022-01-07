@@ -28,7 +28,8 @@ Public Class dlgSummaryTables
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
         clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
-        clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction As New RFunction
+        clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction,
+        clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
 
     Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator As New ROperator
 
@@ -171,6 +172,10 @@ Public Class dlgSummaryTables
         clsFootnoteCellFunction = New RFunction
         clsSecondFootnoteCellFunction = New RFunction
         clsStubHeadFunction = New RFunction
+        clsTabStyleFunction = New RFunction
+        clsTabStyleCellTextFunction = New RFunction
+        clsTabStylePxFunction = New RFunction
+        clsTabStyleCellTitleFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -193,6 +198,23 @@ Public Class dlgSummaryTables
 
         clsStubHeadFunction.SetPackageName("gt")
         clsStubHeadFunction.SetRCommand("tab_stubhead")
+
+        clsTabStyleFunction.SetRCommand("tab_style")
+        clsTabStyleFunction.SetPackageName("gt")
+        clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
+        clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
+
+        clsTabStyleCellTitleFunction.SetPackageName("gt")
+        clsTabStyleCellTitleFunction.SetRCommand("cells_title")
+        clsTabStyleCellTitleFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
+
+        clsTabStyleCellTextFunction.SetPackageName("gt")
+        clsTabStyleCellTextFunction.SetRCommand("cell_text")
+        clsTabStyleCellTextFunction.AddParameter("size", clsRFunctionParameter:=clsTabStylePxFunction, iPosition:=0)
+
+        clsTabStylePxFunction.SetPackageName("gt")
+        clsTabStylePxFunction.SetRCommand("px")
+        clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
@@ -344,7 +366,8 @@ Public Class dlgSummaryTables
                                          clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, bReset:=bReset)
+                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
 

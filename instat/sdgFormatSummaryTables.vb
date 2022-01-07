@@ -3,7 +3,8 @@ Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
-        clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction As New RFunction
+        clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
+        clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsJoiningOperator As New ROperator
     Private bControlsInitialised = False
 
@@ -33,8 +34,16 @@ Public Class sdgFormatSummaryTables
         ucrChkSubtitleFootnote.AddParameterPresentCondition(True, "subtitlefootnote")
         ucrChkSubtitleFootnote.AddParameterPresentCondition(False, "subtitlefootnote", False)
 
+        ucrInputTitleFont.SetParameter(New RParameter("font", iNewPosition:=0))
+        ucrInputTitleFont.SetRDefault("NULL")
+        ucrInputTitleFont.SetLinkedDisplayControl(lblTitleFont)
+
+        ucrNudTitleSize.SetParameter(New RParameter("size", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrNudTitleSize.Increment = 1
+        ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
+
         ucrChkAddTitleSubtitle.SetText("Add title/subtitle")
-        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title\subtitle")
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title\subtitle", False)
@@ -301,11 +310,12 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
-                        clsNewTableSourcenoteFunction As RFunction, clsNewCellTextFunction As RFunction, clsNewStubHeadFunction As RFunction,
+                        clsNewTableSourcenoteFunction As RFunction, clsNewCellTextFunction As RFunction, clsNewStubHeadFunction As RFunction, clsNewTabStyleFunction As RFunction,
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
-                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction)
+                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction,
+                        clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
         clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
@@ -327,6 +337,9 @@ Public Class sdgFormatSummaryTables
         clsStubHeadFunction = clsNewStubHeadFunction
         clsSecondFootnoteCellFunction = clsNewSecondFootnoteCellFunction
         clsSecondFootnoteCellBodyFunction = clsNewSecondFootnoteCellBodyFunction
+        clsTabStyleFunction = clsNewTabStyleFunction
+        clsTabStyleCellTextFunction = clsNewTabStyleCellTextFunction
+        clsTabStylePxFunction = clsNewTabStylePxFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -370,6 +383,8 @@ Public Class sdgFormatSummaryTables
         ucrPnlHeader.SetRCode(clsHeaderFormatFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddTableFormat.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddStubHeader.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTitleFont.SetRCode(clsTabStyleCellTextFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudTitleSize.SetRCode(clsTabStylePxFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
@@ -380,11 +395,14 @@ Public Class sdgFormatSummaryTables
         If ucrChkAddTitleSubtitle.Checked Then
             If Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty Then
                 clsPipeOperator.AddParameter("title\subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
+                clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
             Else
                 clsPipeOperator.RemoveParameterByName("title\subtitle")
+                clsPipeOperator.RemoveParameterByName("title_font")
             End If
         Else
             clsPipeOperator.RemoveParameterByName("title\subtitle")
+            clsPipeOperator.RemoveParameterByName("title_font")
         End If
     End Sub
 
