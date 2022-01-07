@@ -242,6 +242,7 @@ Public Class ucrOutputPage
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
+        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)
@@ -271,7 +272,9 @@ Public Class ucrOutputPage
         If e.KeyData = Keys.Control + Keys.C Then
             Try
                 Dim richText As RichTextBox = CType(sender, RichTextBox)
-                CopySelectedTextToClipBoard(richText)
+                Dim richSelectedText As New RichTextBox
+                richSelectedText.AppendText(richText.SelectedText)
+                CopySelectedTextToClipBoard(richSelectedText)
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -285,7 +288,7 @@ Public Class ucrOutputPage
                 If Line <> "" Then strClip &= Line & Environment.NewLine
             Next
             Clipboard.Clear()
-            Clipboard.SetText(strClip, TextDataFormat.Text)
+            Clipboard.SetDataObject(strClip, TextDataFormat.Text)
         End With
     End Sub
 
