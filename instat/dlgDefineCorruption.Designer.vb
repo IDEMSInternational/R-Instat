@@ -88,8 +88,9 @@ Partial Class dlgDefineCorruption
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 377)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 34
@@ -413,7 +414,7 @@ Partial Class dlgDefineCorruption
         '
         Me.ucrChkAutoGenerate.Checked = False
         Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(10, 265)
-        Me.ucrChkAutoGenerate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkAutoGenerate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
         Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkAutoGenerate.TabIndex = 31
@@ -440,6 +441,7 @@ Partial Class dlgDefineCorruption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(553, 437)
         Me.Controls.Add(Me.cmdCalculatedColumns)
         Me.Controls.Add(Me.cmdCountryLevel)

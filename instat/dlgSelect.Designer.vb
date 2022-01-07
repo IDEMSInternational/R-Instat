@@ -162,6 +162,7 @@ Partial Class dlgSelect
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(11, 343)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -179,6 +180,7 @@ Partial Class dlgSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 401)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.grpApplyOptions)

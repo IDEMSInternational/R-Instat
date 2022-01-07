@@ -46,6 +46,7 @@ Partial Class sdgCorrPlot
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkReverseLegendOrder = New instat.ucrCheck()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -58,7 +59,6 @@ Partial Class sdgCorrPlot
         Me.lblMinimumSize = New System.Windows.Forms.Label()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkReverseLegendOrder = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -119,6 +119,12 @@ Partial Class sdgCorrPlot
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'ucrChkReverseLegendOrder
+        '
+        Me.ucrChkReverseLegendOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkReverseLegendOrder, "ucrChkReverseLegendOrder")
+        Me.ucrChkReverseLegendOrder.Name = "ucrChkReverseLegendOrder"
         '
         'lblFactor
         '
@@ -203,12 +209,6 @@ Partial Class sdgCorrPlot
         '
         resources.ApplyResources(Me.ucrBaseSdgCorrPlot, "ucrBaseSdgCorrPlot")
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
-        '
-        'ucrChkReverseLegendOrder
-        '
-        Me.ucrChkReverseLegendOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkReverseLegendOrder, "ucrChkReverseLegendOrder")
-        Me.ucrChkReverseLegendOrder.Name = "ucrChkReverseLegendOrder"
         '
         'sdgCorrPlot
         '

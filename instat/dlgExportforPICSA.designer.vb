@@ -43,6 +43,7 @@ Partial Class dlgExportforPICSA
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 197)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -52,6 +53,7 @@ Partial Class dlgExportforPICSA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 262)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -62,6 +64,7 @@ Partial Class dlgExportforPICSA
         Me.Tag = "Export_for_PICSA"
         Me.Text = "Export for PICSA"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
