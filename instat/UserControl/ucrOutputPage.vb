@@ -288,7 +288,7 @@ Public Class ucrOutputPage
                 If Line <> "" Then strClip &= Line & Environment.NewLine
             Next
             Clipboard.Clear()
-            Clipboard.SetDataObject(strClip, TextDataFormat.Text)
+            Clipboard.SetText(strClip, TextDataFormat.Text)
         End With
     End Sub
 
