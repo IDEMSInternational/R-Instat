@@ -24,6 +24,7 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction, clsStubHeadFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
+
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
@@ -176,6 +177,7 @@ Public Class dlgSummaryTables
         clsTabStyleCellTextFunction = New RFunction
         clsTabStylePxFunction = New RFunction
         clsTabStyleCellTitleFunction = New RFunction
+        clsJoiningPipeOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -193,7 +195,6 @@ Public Class dlgSummaryTables
         clsPipeOperator.SetOperation("%>%")
 
         clsJoiningPipeOperator.SetOperation("%>%")
-
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsMutableOperator, iPosition:=0)
 
         clsStubHeadFunction.SetPackageName("gt")

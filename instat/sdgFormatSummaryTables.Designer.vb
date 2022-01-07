@@ -45,6 +45,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrChkAddFootnote = New instat.ucrCheck()
         Me.ucrChkAddTitleSubtitle = New instat.ucrCheck()
         Me.grpTitleSubtitle = New System.Windows.Forms.GroupBox()
+        Me.ucrInputTitleFont = New instat.ucrInputTextBox()
         Me.ucrNudTitleSize = New instat.ucrNud()
         Me.lblTitleSize = New System.Windows.Forms.Label()
         Me.lblTitleFont = New System.Windows.Forms.Label()
@@ -121,7 +122,6 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputTitleFont = New instat.ucrInputTextBox()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSecondFootnote.SuspendLayout()
@@ -306,6 +306,14 @@ Partial Class sdgFormatSummaryTables
         resources.ApplyResources(Me.grpTitleSubtitle, "grpTitleSubtitle")
         Me.grpTitleSubtitle.Name = "grpTitleSubtitle"
         Me.grpTitleSubtitle.TabStop = False
+        '
+        'ucrInputTitleFont
+        '
+        Me.ucrInputTitleFont.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTitleFont, "ucrInputTitleFont")
+        Me.ucrInputTitleFont.IsMultiline = False
+        Me.ucrInputTitleFont.IsReadOnly = False
+        Me.ucrInputTitleFont.Name = "ucrInputTitleFont"
         '
         'ucrNudTitleSize
         '
@@ -868,14 +876,6 @@ Partial Class sdgFormatSummaryTables
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrInputTitleFont
-        '
-        Me.ucrInputTitleFont.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputTitleFont, "ucrInputTitleFont")
-        Me.ucrInputTitleFont.IsMultiline = False
-        Me.ucrInputTitleFont.IsReadOnly = False
-        Me.ucrInputTitleFont.Name = "ucrInputTitleFont"
         '
         'sdgFormatSummaryTables
         '

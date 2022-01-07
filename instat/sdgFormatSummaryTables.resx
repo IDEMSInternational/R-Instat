@@ -2446,13 +2446,13 @@
     <value>6, 95</value>
   </data>
   <data name="lblTableBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>101, 13</value>
   </data>
   <data name="lblTableBackgroundColor.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
   <data name="lblTableBackgroundColor.Text" xml:space="preserve">
-    <value>BackGround Colour:</value>
+    <value>Background Colour:</value>
   </data>
   <data name="&gt;&gt;lblTableBackgroundColor.Name" xml:space="preserve">
     <value>lblTableBackgroundColor</value>

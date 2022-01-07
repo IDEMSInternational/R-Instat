@@ -40,7 +40,7 @@ Partial Class dlgFrequency
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFrequency))
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
@@ -71,11 +71,11 @@ Partial Class dlgFrequency
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Tag = "Factors:"
         '
-        'cmdOptions
+        'cmdFormatTable
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdFormatTable, "cmdFormatTable")
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -90,9 +90,9 @@ Partial Class dlgFrequency
         '
         'ucrNudColumnFactors
         '
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
         Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
         Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
@@ -100,8 +100,8 @@ Partial Class dlgFrequency
         '
         'ucrChkDisplaySummariesAsRow
         '
-        Me.ucrChkDisplaySummariesAsRow.Checked = False
         resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
+        Me.ucrChkDisplaySummariesAsRow.Checked = False
         Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
         '
         'lblColumnFactors
@@ -112,9 +112,9 @@ Partial Class dlgFrequency
         '
         'ucrNudSigFigs
         '
+        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
         Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
         Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
@@ -144,8 +144,8 @@ Partial Class dlgFrequency
         '
         'ucrReceiverMultiplePercentages
         '
-        Me.ucrReceiverMultiplePercentages.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverMultiplePercentages, "ucrReceiverMultiplePercentages")
+        Me.ucrReceiverMultiplePercentages.frmParent = Me
         Me.ucrReceiverMultiplePercentages.Name = "ucrReceiverMultiplePercentages"
         Me.ucrReceiverMultiplePercentages.Selector = Nothing
         Me.ucrReceiverMultiplePercentages.strNcFilePath = ""
@@ -153,14 +153,14 @@ Partial Class dlgFrequency
         '
         'ucrChkPercentageProportion
         '
-        Me.ucrChkPercentageProportion.Checked = False
         resources.ApplyResources(Me.ucrChkPercentageProportion, "ucrChkPercentageProportion")
+        Me.ucrChkPercentageProportion.Checked = False
         Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
         '
         'ucrChkDisplayAsPercentage
         '
-        Me.ucrChkDisplayAsPercentage.Checked = False
         resources.ApplyResources(Me.ucrChkDisplayAsPercentage, "ucrChkDisplayAsPercentage")
+        Me.ucrChkDisplayAsPercentage.Checked = False
         Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
         '
         'lblMarginName
@@ -171,9 +171,9 @@ Partial Class dlgFrequency
         'ucrInputMarginName
         '
         Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputMarginName, "ucrInputMarginName")
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMarginName, "ucrInputMarginName")
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         '
         'ucrSaveTable
@@ -183,20 +183,20 @@ Partial Class dlgFrequency
         '
         'ucrChkDisplayMargins
         '
-        Me.ucrChkDisplayMargins.Checked = False
         resources.ApplyResources(Me.ucrChkDisplayMargins, "ucrChkDisplayMargins")
+        Me.ucrChkDisplayMargins.Checked = False
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
         '
         'ucrChkStoreResults
         '
-        Me.ucrChkStoreResults.Checked = False
         resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
+        Me.ucrChkStoreResults.Checked = False
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
         '
         'ucrReceiverFactors
         '
-        Me.ucrReceiverFactors.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverFactors, "ucrReceiverFactors")
+        Me.ucrReceiverFactors.frmParent = Me
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
         Me.ucrReceiverFactors.strNcFilePath = ""
@@ -204,10 +204,10 @@ Partial Class dlgFrequency
         '
         'ucrSelectorFrequency
         '
+        resources.ApplyResources(Me.ucrSelectorFrequency, "ucrSelectorFrequency")
         Me.ucrSelectorFrequency.bDropUnusedFilterLevels = False
         Me.ucrSelectorFrequency.bShowHiddenColumns = False
         Me.ucrSelectorFrequency.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFrequency, "ucrSelectorFrequency")
         Me.ucrSelectorFrequency.Name = "ucrSelectorFrequency"
         '
         'ucrBase
@@ -217,8 +217,8 @@ Partial Class dlgFrequency
         '
         'UcrCheck1
         '
-        Me.UcrCheck1.Checked = False
         resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
+        Me.UcrCheck1.Checked = False
         Me.UcrCheck1.Name = "UcrCheck1"
         '
         'dlgFrequency
@@ -231,7 +231,7 @@ Partial Class dlgFrequency
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.ucrChkStoreResults)
-        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactors)
@@ -255,7 +255,7 @@ Partial Class dlgFrequency
     Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdFormatTable As Button
     Friend WithEvents UcrCheck1 As ucrCheck
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrNudSigFigs As ucrNud

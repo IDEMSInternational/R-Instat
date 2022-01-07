@@ -150,32 +150,35 @@
   <data name="&gt;&gt;lblFactors.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdFormatTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdFormatTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>323, 410</value>
   </data>
-  <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdFormatTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 23</value>
   </data>
-  <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdFormatTable.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Options</value>
+  <data name="cmdFormatTable.Text" xml:space="preserve">
+    <value>Format Table...</value>
   </data>
-  <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
-    <value>cmdOptions</value>
+  <data name="&gt;&gt;cmdFormatTable.Name" xml:space="preserve">
+    <value>cmdFormatTable</value>
   </data>
-  <data name="&gt;&gt;cmdOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdFormatTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdFormatTable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdFormatTable.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="ucrNudColumnFactors.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 48</value>
@@ -198,11 +201,14 @@
   <data name="&gt;&gt;ucrNudColumnFactors.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkDisplaySummariesAsRow.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkDisplaySummariesAsRow.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 74</value>
   </data>
   <data name="ucrChkDisplaySummariesAsRow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 20</value>
+    <value>175, 23</value>
   </data>
   <data name="ucrChkDisplaySummariesAsRow.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -248,6 +254,9 @@
   </data>
   <data name="&gt;&gt;lblColumnFactors.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrNudSigFigs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 22</value>
@@ -354,6 +363,9 @@
   <data name="&gt;&gt;lblFactorsAsPercentage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrReceiverMultiplePercentages.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -365,6 +377,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>444, 498</value>
+  </data>
+  <data name="ucrInputMarginName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputMarginName.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 258</value>
@@ -417,6 +432,9 @@
   <data name="&gt;&gt;lblMarginName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrSaveTable.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrSaveTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 411</value>
   </data>
@@ -441,11 +459,14 @@
   <data name="&gt;&gt;ucrSaveTable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrChkDisplayMargins.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkDisplayMargins.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 232</value>
   </data>
   <data name="ucrChkDisplayMargins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 16</value>
+    <value>130, 23</value>
   </data>
   <data name="ucrChkDisplayMargins.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -462,11 +483,14 @@
   <data name="&gt;&gt;ucrChkDisplayMargins.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrChkStoreResults.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 205</value>
   </data>
   <data name="ucrChkStoreResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 16</value>
+    <value>135, 23</value>
   </data>
   <data name="ucrChkStoreResults.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -482,6 +506,9 @@
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrReceiverFactors.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 60</value>
@@ -507,6 +534,9 @@
   <data name="&gt;&gt;ucrReceiverFactors.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="ucrSelectorFrequency.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrSelectorFrequency.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
@@ -514,7 +544,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 182</value>
+    <value>213, 183</value>
   </data>
   <data name="ucrSelectorFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -534,11 +564,14 @@
   <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="ucrBase.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 442</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 55</value>
+    <value>405, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -591,11 +624,14 @@
   <data name="&gt;&gt;ucrReceiverMultiplePercentages.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkPercentageProportion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkPercentageProportion.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 171</value>
   </data>
   <data name="ucrChkPercentageProportion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 15</value>
+    <value>160, 23</value>
   </data>
   <data name="ucrChkPercentageProportion.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -612,11 +648,14 @@
   <data name="&gt;&gt;ucrChkPercentageProportion.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkDisplayAsPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkDisplayAsPercentage.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 19</value>
   </data>
   <data name="ucrChkDisplayAsPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+    <value>135, 23</value>
   </data>
   <data name="ucrChkDisplayAsPercentage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -656,6 +695,9 @@
   </data>
   <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="UcrCheck1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
     <value>227, 311</value>
