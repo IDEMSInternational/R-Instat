@@ -6,7 +6,7 @@ Public Class sdgFormatSummaryTables
         clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsJoiningOperator As New ROperator
-    Private bControlsInitialised = False
+    Private bControlsInitialised As Boolean = False
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
