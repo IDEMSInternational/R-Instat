@@ -1,4 +1,5 @@
-﻿' R- Instat
+﻿
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -23,8 +24,6 @@ Public Class dlgFrequency
     Private clsFrequencyOperator As New ROperator
     Private clsMmtableOperator, clsJoiningPipeOperator, clsPipeOperator As New ROperator
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction As New RFunction
-
-
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
@@ -45,7 +44,6 @@ Public Class dlgFrequency
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 425
@@ -102,7 +100,6 @@ Public Class dlgFrequency
 
         ucrChkDisplaySummariesAsRow.SetText("Display Summaries As Rows")
         ucrChkDisplaySummariesAsRow.Enabled = False
-
 
         ucrSaveTable.SetPrefix("frequency_table")
         ucrSaveTable.SetSaveTypeAsTable()
@@ -228,7 +225,6 @@ Public Class dlgFrequency
         clsTabStylePxFunction.SetRCommand("px")
         clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
-
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
         clsSummariesHeaderLeftTopFunction.AddParameter("variable", "summary", iPosition:=0)
@@ -256,7 +252,6 @@ Public Class dlgFrequency
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, 0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputMarginName.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
