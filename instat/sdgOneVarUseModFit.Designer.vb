@@ -38,7 +38,6 @@ Partial Class sdgOneVarUseModFit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOneVarUseModFit))
         Me.tbpBootstrapOptions = New System.Windows.Forms.TabPage()
         Me.ucrChkParametric = New instat.ucrCheck()
         Me.lblNumberOfIterations = New System.Windows.Forms.Label()
@@ -80,44 +79,65 @@ Partial Class sdgOneVarUseModFit
         Me.tbpBootstrapOptions.Controls.Add(Me.lblCI)
         Me.tbpBootstrapOptions.Controls.Add(Me.ucrNudIterations)
         Me.tbpBootstrapOptions.Controls.Add(Me.ucrNudCI)
-        resources.ApplyResources(Me.tbpBootstrapOptions, "tbpBootstrapOptions")
+        Me.tbpBootstrapOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbpBootstrapOptions.Name = "tbpBootstrapOptions"
+        Me.tbpBootstrapOptions.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpBootstrapOptions.Size = New System.Drawing.Size(241, 179)
+        Me.tbpBootstrapOptions.TabIndex = 2
+        Me.tbpBootstrapOptions.Text = "Bootstrap Options"
         Me.tbpBootstrapOptions.UseVisualStyleBackColor = True
         '
         'ucrChkParametric
         '
+        Me.ucrChkParametric.AutoSize = True
         Me.ucrChkParametric.Checked = False
-        resources.ApplyResources(Me.ucrChkParametric, "ucrChkParametric")
+        Me.ucrChkParametric.Location = New System.Drawing.Point(14, 71)
         Me.ucrChkParametric.Name = "ucrChkParametric"
+        Me.ucrChkParametric.Size = New System.Drawing.Size(140, 23)
+        Me.ucrChkParametric.TabIndex = 4
         '
         'lblNumberOfIterations
         '
-        resources.ApplyResources(Me.lblNumberOfIterations, "lblNumberOfIterations")
+        Me.lblNumberOfIterations.AutoSize = True
+        Me.lblNumberOfIterations.Location = New System.Drawing.Point(11, 12)
         Me.lblNumberOfIterations.Name = "lblNumberOfIterations"
+        Me.lblNumberOfIterations.Size = New System.Drawing.Size(105, 13)
+        Me.lblNumberOfIterations.TabIndex = 0
+        Me.lblNumberOfIterations.Text = "Number of Iterations:"
         '
         'lblCI
         '
-        resources.ApplyResources(Me.lblCI, "lblCI")
+        Me.lblCI.AutoSize = True
+        Me.lblCI.Location = New System.Drawing.Point(11, 39)
         Me.lblCI.Name = "lblCI"
+        Me.lblCI.Size = New System.Drawing.Size(102, 13)
+        Me.lblCI.TabIndex = 2
+        Me.lblCI.Text = "Confidence Interval:"
         '
         'ucrNudIterations
         '
+        Me.ucrNudIterations.AutoSize = True
         Me.ucrNudIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudIterations.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudIterations, "ucrNudIterations")
+        Me.ucrNudIterations.Location = New System.Drawing.Point(129, 9)
         Me.ucrNudIterations.Maximum = New Decimal(New Integer() {10001, 0, 0, 0})
         Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudIterations.Name = "ucrNudIterations"
+        Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudIterations.TabIndex = 1
         Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
         '
         'ucrNudCI
         '
+        Me.ucrNudCI.AutoSize = True
         Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        resources.ApplyResources(Me.ucrNudCI, "ucrNudCI")
+        Me.ucrNudCI.Location = New System.Drawing.Point(129, 35)
         Me.ucrNudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 3
         Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'tbpQuantiles
@@ -132,79 +152,118 @@ Partial Class sdgOneVarUseModFit
         Me.tbpQuantiles.Controls.Add(Me.rdoInsertValues)
         Me.tbpQuantiles.Controls.Add(Me.lblBy)
         Me.tbpQuantiles.Controls.Add(Me.ucrPnlQuantiles)
-        resources.ApplyResources(Me.tbpQuantiles, "tbpQuantiles")
+        Me.tbpQuantiles.Location = New System.Drawing.Point(4, 22)
         Me.tbpQuantiles.Name = "tbpQuantiles"
+        Me.tbpQuantiles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpQuantiles.Size = New System.Drawing.Size(241, 179)
+        Me.tbpQuantiles.TabIndex = 1
+        Me.tbpQuantiles.Text = "Quantiles"
         Me.tbpQuantiles.UseVisualStyleBackColor = True
         '
         'ucrInputQuantiles
         '
         Me.ucrInputQuantiles.AddQuotesIfUnrecognised = True
+        Me.ucrInputQuantiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputQuantiles.GetSetSelectedIndex = -1
         Me.ucrInputQuantiles.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputQuantiles, "ucrInputQuantiles")
+        Me.ucrInputQuantiles.Location = New System.Drawing.Point(50, 144)
         Me.ucrInputQuantiles.Name = "ucrInputQuantiles"
+        Me.ucrInputQuantiles.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputQuantiles.TabIndex = 9
         '
         'ucrNudBy
         '
+        Me.ucrNudBy.AutoSize = True
         Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
+        Me.ucrNudBy.Location = New System.Drawing.Point(79, 91)
         Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Size = New System.Drawing.Size(53, 20)
+        Me.ucrNudBy.TabIndex = 7
         Me.ucrNudBy.Value = New Decimal(New Integer() {1, 0, 0, 65536})
         '
         'ucrNudTo
         '
+        Me.ucrNudTo.AutoSize = True
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
+        Me.ucrNudTo.Location = New System.Drawing.Point(79, 65)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudTo.TabIndex = 5
         Me.ucrNudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrNudFrom
         '
+        Me.ucrNudFrom.AutoSize = True
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
+        Me.ucrNudFrom.Location = New System.Drawing.Point(79, 39)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudFrom.TabIndex = 2
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblFrom
         '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(18, 41)
         Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.TabIndex = 1
+        Me.lblFrom.Text = "From:"
         '
         'lblTo
         '
-        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(18, 67)
         Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.TabIndex = 4
+        Me.lblTo.Text = "To:"
         '
         'rdoSequence
         '
-        resources.ApplyResources(Me.rdoSequence, "rdoSequence")
+        Me.rdoSequence.AutoSize = True
+        Me.rdoSequence.Location = New System.Drawing.Point(11, 12)
         Me.rdoSequence.Name = "rdoSequence"
+        Me.rdoSequence.Size = New System.Drawing.Size(121, 17)
+        Me.rdoSequence.TabIndex = 0
+        Me.rdoSequence.Text = "Sequence of Values"
         Me.rdoSequence.UseVisualStyleBackColor = True
         '
         'rdoInsertValues
         '
-        resources.ApplyResources(Me.rdoInsertValues, "rdoInsertValues")
+        Me.rdoInsertValues.AutoSize = True
+        Me.rdoInsertValues.Location = New System.Drawing.Point(11, 121)
         Me.rdoInsertValues.Name = "rdoInsertValues"
+        Me.rdoInsertValues.Size = New System.Drawing.Size(86, 17)
+        Me.rdoInsertValues.TabIndex = 8
+        Me.rdoInsertValues.Text = "Insert Values"
         Me.rdoInsertValues.UseVisualStyleBackColor = True
         '
         'lblBy
         '
-        resources.ApplyResources(Me.lblBy, "lblBy")
+        Me.lblBy.AutoSize = True
+        Me.lblBy.Location = New System.Drawing.Point(18, 93)
         Me.lblBy.Name = "lblBy"
+        Me.lblBy.Size = New System.Drawing.Size(22, 13)
+        Me.lblBy.TabIndex = 6
+        Me.lblBy.Text = "By:"
         '
         'ucrPnlQuantiles
         '
-        resources.ApplyResources(Me.ucrPnlQuantiles, "ucrPnlQuantiles")
+        Me.ucrPnlQuantiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlQuantiles.Location = New System.Drawing.Point(5, 12)
         Me.ucrPnlQuantiles.Name = "ucrPnlQuantiles"
+        Me.ucrPnlQuantiles.Size = New System.Drawing.Size(227, 164)
+        Me.ucrPnlQuantiles.TabIndex = 3
         '
         'tbpPlots
         '
@@ -216,81 +275,125 @@ Partial Class sdgOneVarUseModFit
         Me.tbpPlots.Controls.Add(Me.rdoQQPlot)
         Me.tbpPlots.Controls.Add(Me.rdoCIcdf)
         Me.tbpPlots.Controls.Add(Me.ucrPnlPlots)
-        resources.ApplyResources(Me.tbpPlots, "tbpPlots")
+        Me.tbpPlots.Location = New System.Drawing.Point(4, 22)
         Me.tbpPlots.Name = "tbpPlots"
+        Me.tbpPlots.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpPlots.Size = New System.Drawing.Size(241, 179)
+        Me.tbpPlots.TabIndex = 0
+        Me.tbpPlots.Text = "Plots"
         Me.tbpPlots.UseVisualStyleBackColor = True
         '
         'rdoNoPlot
         '
-        resources.ApplyResources(Me.rdoNoPlot, "rdoNoPlot")
+        Me.rdoNoPlot.AutoSize = True
+        Me.rdoNoPlot.Location = New System.Drawing.Point(11, 12)
         Me.rdoNoPlot.Name = "rdoNoPlot"
+        Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoNoPlot.TabIndex = 0
+        Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
         'rdoPlotAll
         '
-        resources.ApplyResources(Me.rdoPlotAll, "rdoPlotAll")
+        Me.rdoPlotAll.AutoSize = True
+        Me.rdoPlotAll.Location = New System.Drawing.Point(11, 35)
         Me.rdoPlotAll.Name = "rdoPlotAll"
+        Me.rdoPlotAll.Size = New System.Drawing.Size(68, 17)
+        Me.rdoPlotAll.TabIndex = 1
+        Me.rdoPlotAll.Text = "Multi-Plot"
         Me.rdoPlotAll.UseVisualStyleBackColor = True
         '
         'rdoCDFPlot
         '
-        resources.ApplyResources(Me.rdoCDFPlot, "rdoCDFPlot")
+        Me.rdoCDFPlot.AutoSize = True
+        Me.rdoCDFPlot.Location = New System.Drawing.Point(11, 58)
         Me.rdoCDFPlot.Name = "rdoCDFPlot"
+        Me.rdoCDFPlot.Size = New System.Drawing.Size(67, 17)
+        Me.rdoCDFPlot.TabIndex = 2
+        Me.rdoCDFPlot.Text = "CDF Plot"
         Me.rdoCDFPlot.UseVisualStyleBackColor = True
         '
         'rdoPPPlot
         '
-        resources.ApplyResources(Me.rdoPPPlot, "rdoPPPlot")
+        Me.rdoPPPlot.AutoSize = True
+        Me.rdoPPPlot.Location = New System.Drawing.Point(11, 127)
         Me.rdoPPPlot.Name = "rdoPPPlot"
+        Me.rdoPPPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoPPPlot.TabIndex = 5
+        Me.rdoPPPlot.Text = "PP-Plot"
         Me.rdoPPPlot.UseVisualStyleBackColor = True
         '
         'rdoDensityPlot
         '
-        resources.ApplyResources(Me.rdoDensityPlot, "rdoDensityPlot")
+        Me.rdoDensityPlot.AutoSize = True
+        Me.rdoDensityPlot.Location = New System.Drawing.Point(11, 81)
         Me.rdoDensityPlot.Name = "rdoDensityPlot"
+        Me.rdoDensityPlot.Size = New System.Drawing.Size(81, 17)
+        Me.rdoDensityPlot.TabIndex = 3
+        Me.rdoDensityPlot.Text = "Density Plot"
         Me.rdoDensityPlot.UseVisualStyleBackColor = True
         '
         'rdoQQPlot
         '
-        resources.ApplyResources(Me.rdoQQPlot, "rdoQQPlot")
+        Me.rdoQQPlot.AutoSize = True
+        Me.rdoQQPlot.Location = New System.Drawing.Point(11, 104)
         Me.rdoQQPlot.Name = "rdoQQPlot"
+        Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
+        Me.rdoQQPlot.TabIndex = 4
+        Me.rdoQQPlot.Text = "QQ-Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
         'rdoCIcdf
         '
-        resources.ApplyResources(Me.rdoCIcdf, "rdoCIcdf")
+        Me.rdoCIcdf.AutoSize = True
+        Me.rdoCIcdf.Location = New System.Drawing.Point(11, 150)
         Me.rdoCIcdf.Name = "rdoCIcdf"
+        Me.rdoCIcdf.Size = New System.Drawing.Size(189, 17)
+        Me.rdoCIcdf.TabIndex = 6
+        Me.rdoCIcdf.Text = "CDF Plot with Confidence Intervals"
         Me.rdoCIcdf.UseVisualStyleBackColor = True
         '
         'ucrPnlPlots
         '
-        resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
+        Me.ucrPnlPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(8, 8)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(227, 165)
+        Me.ucrPnlPlots.TabIndex = 0
         '
         'tbpOneVarUseModFit
         '
         Me.tbpOneVarUseModFit.Controls.Add(Me.tbpPlots)
         Me.tbpOneVarUseModFit.Controls.Add(Me.tbpQuantiles)
         Me.tbpOneVarUseModFit.Controls.Add(Me.tbpBootstrapOptions)
-        resources.ApplyResources(Me.tbpOneVarUseModFit, "tbpOneVarUseModFit")
+        Me.tbpOneVarUseModFit.Location = New System.Drawing.Point(5, 5)
         Me.tbpOneVarUseModFit.Name = "tbpOneVarUseModFit"
         Me.tbpOneVarUseModFit.SelectedIndex = 0
+        Me.tbpOneVarUseModFit.Size = New System.Drawing.Size(249, 205)
+        Me.tbpOneVarUseModFit.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.Location = New System.Drawing.Point(49, 216)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'sdgOneVarUseModFit
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(260, 255)
         Me.Controls.Add(Me.tbpOneVarUseModFit)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarUseModFit"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Fit Model and Bootstrap Options"
         Me.tbpBootstrapOptions.ResumeLayout(False)
         Me.tbpBootstrapOptions.PerformLayout()
         Me.tbpQuantiles.ResumeLayout(False)
@@ -299,6 +402,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbpPlots.PerformLayout()
         Me.tbpOneVarUseModFit.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
