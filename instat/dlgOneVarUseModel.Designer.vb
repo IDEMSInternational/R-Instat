@@ -77,6 +77,7 @@ Partial Class dlgOneVarUseModel
         'ucrSaveObjects
         '
         Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 114)
+        Me.ucrSaveObjects.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveObjects.Name = "ucrSaveObjects"
         Me.ucrSaveObjects.Size = New System.Drawing.Size(189, 24)
         Me.ucrSaveObjects.TabIndex = 4
@@ -84,12 +85,14 @@ Partial Class dlgOneVarUseModel
         'ucrNewDataFrameName
         '
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 200)
+        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(265, 24)
         Me.ucrNewDataFrameName.TabIndex = 6
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 230)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -109,6 +112,7 @@ Partial Class dlgOneVarUseModel
         '
         'ucrSelectorUseModel
         '
+        Me.ucrSelectorUseModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseModel.bShowHiddenColumns = False
         Me.ucrSelectorUseModel.bUseCurrentFilter = True
         Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 10)
@@ -121,6 +125,7 @@ Partial Class dlgOneVarUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 289)
         Me.Controls.Add(Me.ucrChkProduceBootstrap)
         Me.Controls.Add(Me.ucrSaveObjects)

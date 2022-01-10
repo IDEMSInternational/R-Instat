@@ -68,6 +68,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrSelectorOneWayAnovaNonParam
         '
+        Me.ucrSelectorOneWayAnovaNonParam.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneWayAnovaNonParam.bShowHiddenColumns = False
         Me.ucrSelectorOneWayAnovaNonParam.bUseCurrentFilter = True
         Me.ucrSelectorOneWayAnovaNonParam.Location = New System.Drawing.Point(10, 10)
@@ -78,6 +79,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 197)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -111,6 +113,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(423, 255)
         Me.Controls.Add(Me.ucrSelectorOneWayAnovaNonParam)
         Me.Controls.Add(Me.lblFactor)

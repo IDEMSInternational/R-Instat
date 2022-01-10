@@ -21,7 +21,6 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
-    Private _InstatOptions As InstatOptions
 
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
@@ -54,12 +53,6 @@ Public MustInherit Class ucrReoGrid
         Set(value As Boolean)
             Me.Visible = value
             grdData.SheetTabWidth = 450
-        End Set
-    End Property
-
-    Public WriteOnly Property InstatOptions As InstatOptions Implements IGrid.InstatOptions
-        Set(value As InstatOptions)
-            _InstatOptions = value
         End Set
     End Property
 
@@ -183,12 +176,12 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
-        If _InstatOptions IsNot Nothing Then
+        If frmMain.clsInstatOptions IsNot Nothing Then
             workSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
-                                .TextColor = _InstatOptions.clrEditor,
-                                .FontSize = _InstatOptions.fntEditor.Size,
-                                .FontName = _InstatOptions.fntEditor.Name
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
                                 })
         End If
 

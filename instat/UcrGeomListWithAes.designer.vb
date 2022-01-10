@@ -35,7 +35,6 @@ Partial Class ucrGeomListWithParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrGeomListWithParameters))
         Me.ucrGeomWithAesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblAesList = New System.Windows.Forms.Label()
         Me.ucrReceiverParam1 = New instat.ucrReceiverSingle()
@@ -72,59 +71,87 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrGeomWithAesSelector
         '
+        Me.ucrGeomWithAesSelector.AutoSize = True
+        Me.ucrGeomWithAesSelector.bDropUnusedFilterLevels = False
         Me.ucrGeomWithAesSelector.bShowHiddenColumns = False
         Me.ucrGeomWithAesSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrGeomWithAesSelector, "ucrGeomWithAesSelector")
+        Me.ucrGeomWithAesSelector.Location = New System.Drawing.Point(3, 56)
+        Me.ucrGeomWithAesSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGeomWithAesSelector.Name = "ucrGeomWithAesSelector"
+        Me.ucrGeomWithAesSelector.Size = New System.Drawing.Size(232, 192)
+        Me.ucrGeomWithAesSelector.TabIndex = 3
         '
         'lblAesList
         '
-        resources.ApplyResources(Me.lblAesList, "lblAesList")
+        Me.lblAesList.AutoSize = True
+        Me.lblAesList.Location = New System.Drawing.Point(256, 69)
         Me.lblAesList.Name = "lblAesList"
+        Me.lblAesList.Size = New System.Drawing.Size(0, 13)
+        Me.lblAesList.TabIndex = 6
         '
         'ucrReceiverParam1
         '
+        Me.ucrReceiverParam1.AutoSize = True
         Me.ucrReceiverParam1.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam1, "ucrReceiverParam1")
+        Me.ucrReceiverParam1.Location = New System.Drawing.Point(97, 25)
+        Me.ucrReceiverParam1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam1.Name = "ucrReceiverParam1"
         Me.ucrReceiverParam1.Selector = Nothing
+        Me.ucrReceiverParam1.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam1.strNcFilePath = ""
+        Me.ucrReceiverParam1.TabIndex = 1
         Me.ucrReceiverParam1.ucrSelector = Nothing
         '
         'ucrReceiverParam2
         '
+        Me.ucrReceiverParam2.AutoSize = True
         Me.ucrReceiverParam2.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam2, "ucrReceiverParam2")
+        Me.ucrReceiverParam2.Location = New System.Drawing.Point(97, 51)
+        Me.ucrReceiverParam2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam2.Name = "ucrReceiverParam2"
         Me.ucrReceiverParam2.Selector = Nothing
+        Me.ucrReceiverParam2.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam2.strNcFilePath = ""
+        Me.ucrReceiverParam2.TabIndex = 3
         Me.ucrReceiverParam2.ucrSelector = Nothing
         '
         'ucrReceiverParam3
         '
+        Me.ucrReceiverParam3.AutoSize = True
         Me.ucrReceiverParam3.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam3, "ucrReceiverParam3")
+        Me.ucrReceiverParam3.Location = New System.Drawing.Point(97, 77)
+        Me.ucrReceiverParam3.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam3.Name = "ucrReceiverParam3"
         Me.ucrReceiverParam3.Selector = Nothing
+        Me.ucrReceiverParam3.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam3.strNcFilePath = ""
+        Me.ucrReceiverParam3.TabIndex = 5
         Me.ucrReceiverParam3.ucrSelector = Nothing
         '
         'ucrReceiverParam4
         '
+        Me.ucrReceiverParam4.AutoSize = True
         Me.ucrReceiverParam4.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam4, "ucrReceiverParam4")
+        Me.ucrReceiverParam4.Location = New System.Drawing.Point(97, 103)
+        Me.ucrReceiverParam4.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam4.Name = "ucrReceiverParam4"
         Me.ucrReceiverParam4.Selector = Nothing
+        Me.ucrReceiverParam4.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam4.strNcFilePath = ""
+        Me.ucrReceiverParam4.TabIndex = 7
         Me.ucrReceiverParam4.ucrSelector = Nothing
         '
         'ucrReceiverParam5
         '
+        Me.ucrReceiverParam5.AutoSize = True
         Me.ucrReceiverParam5.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam5, "ucrReceiverParam5")
+        Me.ucrReceiverParam5.Location = New System.Drawing.Point(97, 129)
+        Me.ucrReceiverParam5.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam5.Name = "ucrReceiverParam5"
         Me.ucrReceiverParam5.Selector = Nothing
+        Me.ucrReceiverParam5.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam5.strNcFilePath = ""
+        Me.ucrReceiverParam5.TabIndex = 9
         Me.ucrReceiverParam5.ucrSelector = Nothing
         '
         'grpAesList
@@ -155,168 +182,263 @@ Partial Class ucrGeomListWithParameters
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam4)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam3)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam2)
-        resources.ApplyResources(Me.grpAesList, "grpAesList")
+        Me.grpAesList.Location = New System.Drawing.Point(242, 19)
         Me.grpAesList.Name = "grpAesList"
+        Me.grpAesList.Size = New System.Drawing.Size(219, 366)
+        Me.grpAesList.TabIndex = 4
         Me.grpAesList.TabStop = False
+        Me.grpAesList.Text = "Geom Aesthetics:"
         '
         'lblGgParam13
         '
-        resources.ApplyResources(Me.lblGgParam13, "lblGgParam13")
+        Me.lblGgParam13.AutoSize = True
+        Me.lblGgParam13.Location = New System.Drawing.Point(7, 341)
         Me.lblGgParam13.Name = "lblGgParam13"
+        Me.lblGgParam13.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam13.TabIndex = 24
+        Me.lblGgParam13.Text = "Label3"
         '
         'ucrReceiverParam13
         '
+        Me.ucrReceiverParam13.AutoSize = True
         Me.ucrReceiverParam13.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam13, "ucrReceiverParam13")
+        Me.ucrReceiverParam13.Location = New System.Drawing.Point(97, 337)
+        Me.ucrReceiverParam13.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam13.Name = "ucrReceiverParam13"
         Me.ucrReceiverParam13.Selector = Nothing
+        Me.ucrReceiverParam13.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam13.strNcFilePath = ""
+        Me.ucrReceiverParam13.TabIndex = 25
         Me.ucrReceiverParam13.ucrSelector = Nothing
         '
         'lblGgParam12
         '
-        resources.ApplyResources(Me.lblGgParam12, "lblGgParam12")
+        Me.lblGgParam12.AutoSize = True
+        Me.lblGgParam12.Location = New System.Drawing.Point(7, 315)
         Me.lblGgParam12.Name = "lblGgParam12"
+        Me.lblGgParam12.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam12.TabIndex = 22
+        Me.lblGgParam12.Text = "Label2"
         '
         'ucrReceiverParam12
         '
+        Me.ucrReceiverParam12.AutoSize = True
         Me.ucrReceiverParam12.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam12, "ucrReceiverParam12")
+        Me.ucrReceiverParam12.Location = New System.Drawing.Point(97, 311)
+        Me.ucrReceiverParam12.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam12.Name = "ucrReceiverParam12"
         Me.ucrReceiverParam12.Selector = Nothing
+        Me.ucrReceiverParam12.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam12.strNcFilePath = ""
+        Me.ucrReceiverParam12.TabIndex = 23
         Me.ucrReceiverParam12.ucrSelector = Nothing
         '
         'lblGgParam11
         '
-        resources.ApplyResources(Me.lblGgParam11, "lblGgParam11")
+        Me.lblGgParam11.AutoSize = True
+        Me.lblGgParam11.Location = New System.Drawing.Point(7, 289)
         Me.lblGgParam11.Name = "lblGgParam11"
+        Me.lblGgParam11.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam11.TabIndex = 20
+        Me.lblGgParam11.Text = "Label2"
         '
         'ucrReceiverParam11
         '
+        Me.ucrReceiverParam11.AutoSize = True
         Me.ucrReceiverParam11.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam11, "ucrReceiverParam11")
+        Me.ucrReceiverParam11.Location = New System.Drawing.Point(97, 285)
+        Me.ucrReceiverParam11.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam11.Name = "ucrReceiverParam11"
         Me.ucrReceiverParam11.Selector = Nothing
+        Me.ucrReceiverParam11.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam11.strNcFilePath = ""
+        Me.ucrReceiverParam11.TabIndex = 21
         Me.ucrReceiverParam11.ucrSelector = Nothing
         '
         'lblGgParam6
         '
-        resources.ApplyResources(Me.lblGgParam6, "lblGgParam6")
+        Me.lblGgParam6.AutoSize = True
+        Me.lblGgParam6.Location = New System.Drawing.Point(7, 159)
         Me.lblGgParam6.Name = "lblGgParam6"
+        Me.lblGgParam6.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam6.TabIndex = 10
+        Me.lblGgParam6.Text = "Label2"
         '
         'lblGgParam10
         '
-        resources.ApplyResources(Me.lblGgParam10, "lblGgParam10")
+        Me.lblGgParam10.AutoSize = True
+        Me.lblGgParam10.Location = New System.Drawing.Point(7, 263)
         Me.lblGgParam10.Name = "lblGgParam10"
+        Me.lblGgParam10.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam10.TabIndex = 18
+        Me.lblGgParam10.Text = "Label2"
         '
         'lblGgParam9
         '
-        resources.ApplyResources(Me.lblGgParam9, "lblGgParam9")
+        Me.lblGgParam9.AutoSize = True
+        Me.lblGgParam9.Location = New System.Drawing.Point(7, 237)
         Me.lblGgParam9.Name = "lblGgParam9"
+        Me.lblGgParam9.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam9.TabIndex = 16
+        Me.lblGgParam9.Text = "Label2"
         '
         'lblGgParam8
         '
-        resources.ApplyResources(Me.lblGgParam8, "lblGgParam8")
+        Me.lblGgParam8.AutoSize = True
+        Me.lblGgParam8.Location = New System.Drawing.Point(7, 211)
         Me.lblGgParam8.Name = "lblGgParam8"
+        Me.lblGgParam8.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam8.TabIndex = 14
+        Me.lblGgParam8.Text = "Label2"
         '
         'lblGgParam7
         '
-        resources.ApplyResources(Me.lblGgParam7, "lblGgParam7")
+        Me.lblGgParam7.AutoSize = True
+        Me.lblGgParam7.Location = New System.Drawing.Point(7, 185)
         Me.lblGgParam7.Name = "lblGgParam7"
+        Me.lblGgParam7.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam7.TabIndex = 12
+        Me.lblGgParam7.Text = "Label2"
         '
         'lblGgParam5
         '
-        resources.ApplyResources(Me.lblGgParam5, "lblGgParam5")
+        Me.lblGgParam5.AutoSize = True
+        Me.lblGgParam5.Location = New System.Drawing.Point(7, 133)
         Me.lblGgParam5.Name = "lblGgParam5"
+        Me.lblGgParam5.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam5.TabIndex = 8
+        Me.lblGgParam5.Text = "Label2"
         '
         'lblGgParam4
         '
-        resources.ApplyResources(Me.lblGgParam4, "lblGgParam4")
+        Me.lblGgParam4.AutoSize = True
+        Me.lblGgParam4.Location = New System.Drawing.Point(7, 107)
         Me.lblGgParam4.Name = "lblGgParam4"
+        Me.lblGgParam4.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam4.TabIndex = 6
+        Me.lblGgParam4.Text = "Label2"
         '
         'lblGgParam3
         '
-        resources.ApplyResources(Me.lblGgParam3, "lblGgParam3")
+        Me.lblGgParam3.AutoSize = True
+        Me.lblGgParam3.Location = New System.Drawing.Point(7, 81)
         Me.lblGgParam3.Name = "lblGgParam3"
+        Me.lblGgParam3.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam3.TabIndex = 4
+        Me.lblGgParam3.Text = "Label2"
         '
         'lblGgParam2
         '
-        resources.ApplyResources(Me.lblGgParam2, "lblGgParam2")
+        Me.lblGgParam2.AutoSize = True
+        Me.lblGgParam2.Location = New System.Drawing.Point(7, 55)
         Me.lblGgParam2.Name = "lblGgParam2"
+        Me.lblGgParam2.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam2.TabIndex = 2
+        Me.lblGgParam2.Text = "Label2"
         '
         'lblGgParam1
         '
-        resources.ApplyResources(Me.lblGgParam1, "lblGgParam1")
+        Me.lblGgParam1.AutoSize = True
+        Me.lblGgParam1.Location = New System.Drawing.Point(7, 29)
         Me.lblGgParam1.Name = "lblGgParam1"
+        Me.lblGgParam1.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam1.TabIndex = 0
+        Me.lblGgParam1.Text = "Label1"
         '
         'ucrReceiverParam10
         '
+        Me.ucrReceiverParam10.AutoSize = True
         Me.ucrReceiverParam10.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam10, "ucrReceiverParam10")
+        Me.ucrReceiverParam10.Location = New System.Drawing.Point(97, 259)
+        Me.ucrReceiverParam10.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam10.Name = "ucrReceiverParam10"
         Me.ucrReceiverParam10.Selector = Nothing
+        Me.ucrReceiverParam10.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam10.strNcFilePath = ""
+        Me.ucrReceiverParam10.TabIndex = 19
         Me.ucrReceiverParam10.ucrSelector = Nothing
         '
         'ucrReceiverParam9
         '
+        Me.ucrReceiverParam9.AutoSize = True
         Me.ucrReceiverParam9.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam9, "ucrReceiverParam9")
+        Me.ucrReceiverParam9.Location = New System.Drawing.Point(97, 233)
+        Me.ucrReceiverParam9.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam9.Name = "ucrReceiverParam9"
         Me.ucrReceiverParam9.Selector = Nothing
+        Me.ucrReceiverParam9.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam9.strNcFilePath = ""
+        Me.ucrReceiverParam9.TabIndex = 17
         Me.ucrReceiverParam9.ucrSelector = Nothing
         '
         'ucrReceiverParam8
         '
+        Me.ucrReceiverParam8.AutoSize = True
         Me.ucrReceiverParam8.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam8, "ucrReceiverParam8")
+        Me.ucrReceiverParam8.Location = New System.Drawing.Point(97, 207)
+        Me.ucrReceiverParam8.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam8.Name = "ucrReceiverParam8"
         Me.ucrReceiverParam8.Selector = Nothing
+        Me.ucrReceiverParam8.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam8.strNcFilePath = ""
+        Me.ucrReceiverParam8.TabIndex = 15
         Me.ucrReceiverParam8.ucrSelector = Nothing
         '
         'ucrReceiverParam7
         '
+        Me.ucrReceiverParam7.AutoSize = True
         Me.ucrReceiverParam7.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam7, "ucrReceiverParam7")
+        Me.ucrReceiverParam7.Location = New System.Drawing.Point(97, 181)
+        Me.ucrReceiverParam7.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam7.Name = "ucrReceiverParam7"
         Me.ucrReceiverParam7.Selector = Nothing
+        Me.ucrReceiverParam7.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam7.strNcFilePath = ""
+        Me.ucrReceiverParam7.TabIndex = 13
         Me.ucrReceiverParam7.ucrSelector = Nothing
         '
         'ucrReceiverParam6
         '
+        Me.ucrReceiverParam6.AutoSize = True
         Me.ucrReceiverParam6.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverParam6, "ucrReceiverParam6")
+        Me.ucrReceiverParam6.Location = New System.Drawing.Point(97, 155)
+        Me.ucrReceiverParam6.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverParam6.Name = "ucrReceiverParam6"
         Me.ucrReceiverParam6.Selector = Nothing
+        Me.ucrReceiverParam6.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam6.strNcFilePath = ""
+        Me.ucrReceiverParam6.TabIndex = 11
         Me.ucrReceiverParam6.ucrSelector = Nothing
         '
         'ucrChkIgnoreGlobalAes
         '
+        Me.ucrChkIgnoreGlobalAes.AutoSize = True
         Me.ucrChkIgnoreGlobalAes.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreGlobalAes, "ucrChkIgnoreGlobalAes")
+        Me.ucrChkIgnoreGlobalAes.Location = New System.Drawing.Point(5, 280)
         Me.ucrChkIgnoreGlobalAes.Name = "ucrChkIgnoreGlobalAes"
+        Me.ucrChkIgnoreGlobalAes.Size = New System.Drawing.Size(230, 23)
+        Me.ucrChkIgnoreGlobalAes.TabIndex = 6
         '
         'ucrChkApplyOnAllLayers
         '
+        Me.ucrChkApplyOnAllLayers.AutoSize = True
         Me.ucrChkApplyOnAllLayers.Checked = False
-        resources.ApplyResources(Me.ucrChkApplyOnAllLayers, "ucrChkApplyOnAllLayers")
+        Me.ucrChkApplyOnAllLayers.Location = New System.Drawing.Point(5, 254)
         Me.ucrChkApplyOnAllLayers.Name = "ucrChkApplyOnAllLayers"
+        Me.ucrChkApplyOnAllLayers.Size = New System.Drawing.Size(230, 23)
+        Me.ucrChkApplyOnAllLayers.TabIndex = 5
         '
         'ucrGeomListWithParameters
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.ucrChkApplyOnAllLayers)
         Me.Controls.Add(Me.ucrChkIgnoreGlobalAes)
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.ucrGeomWithAesSelector)
         Me.Name = "ucrGeomListWithParameters"
+        Me.Size = New System.Drawing.Size(467, 399)
         Me.Controls.SetChildIndex(Me.ucrGeomWithAesSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)

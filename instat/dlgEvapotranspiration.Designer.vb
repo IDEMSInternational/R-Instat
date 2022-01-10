@@ -41,7 +41,6 @@ Partial Class dlgEvapotranspiration
         Me.lblRadiation = New System.Windows.Forms.Label()
         Me.grpWindSpeed = New System.Windows.Forms.GroupBox()
         Me.ucrChkWind = New instat.ucrCheck()
-        Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
@@ -154,7 +153,6 @@ Partial Class dlgEvapotranspiration
         'grpWindSpeed
         '
         Me.grpWindSpeed.Controls.Add(Me.ucrChkWind)
-        Me.grpWindSpeed.Controls.Add(Me.lblWindSpeed)
         Me.grpWindSpeed.Controls.Add(Me.ucrReceiverWindSpeed)
         resources.ApplyResources(Me.grpWindSpeed, "grpWindSpeed")
         Me.grpWindSpeed.Name = "grpWindSpeed"
@@ -165,11 +163,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrChkWind.Checked = False
         resources.ApplyResources(Me.ucrChkWind, "ucrChkWind")
         Me.ucrChkWind.Name = "ucrChkWind"
-        '
-        'lblWindSpeed
-        '
-        resources.ApplyResources(Me.lblWindSpeed, "lblWindSpeed")
-        Me.lblWindSpeed.Name = "lblWindSpeed"
         '
         'ucrReceiverWindSpeed
         '
@@ -384,6 +377,7 @@ Partial Class dlgEvapotranspiration
         Me.grpMissingDataOpts.ResumeLayout(False)
         Me.grpWindSpeed.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -418,7 +412,6 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
     Friend WithEvents grpWindSpeed As GroupBox
     Friend WithEvents ucrChkWind As ucrCheck
-    Friend WithEvents lblWindSpeed As Label
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents ucrInputSolar As ucrInputComboBox
     Friend WithEvents lblSolar As Label

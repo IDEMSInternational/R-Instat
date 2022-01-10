@@ -117,14 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrButtonsSdgWindrose.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrButtonsSdgWindrose.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 207</value>
   </data>
   <data name="ucrButtonsSdgWindrose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 30</value>
+    <value>224, 30</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrButtonsSdgWindrose.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="&gt;&gt;lblPalette.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputPalettes.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputPalettes.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 60</value>
@@ -318,6 +324,9 @@
   <data name="&gt;&gt;rdoDiverging.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrPnlColourPalette.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrPnlColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 24</value>
   </data>
@@ -390,6 +399,9 @@
   <data name="&gt;&gt;tbpColours.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputSpeedCuts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputSpeedCuts.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 90</value>
   </data>
@@ -411,6 +423,9 @@
   <data name="&gt;&gt;ucrInputSpeedCuts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputTheme.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputTheme.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 117</value>
   </data>
@@ -431,6 +446,9 @@
   </data>
   <data name="&gt;&gt;ucrInputTheme.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrNudNoOfDirections.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudNoOfDirections.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 12</value>
@@ -483,6 +501,9 @@
   <data name="&gt;&gt;lblTheme.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrNudNoOfSpeeds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrNudNoOfSpeeds.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 64</value>
   </data>
@@ -533,6 +554,9 @@
   </data>
   <data name="&gt;&gt;lblSpeedCuts.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrNudCalmWind.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudCalmWind.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 38</value>
@@ -697,7 +721,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>384, 239</value>

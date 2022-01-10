@@ -88,7 +88,7 @@ Partial Class dlgRemoveUnusedLevels
         '
         Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
         Me.ucrInputUnusedLevels.IsMultiline = False
-        Me.ucrInputUnusedLevels.IsReadOnly = False
+        Me.ucrInputUnusedLevels.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputUnusedLevels, "ucrInputUnusedLevels")
         Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
         '

@@ -125,6 +125,7 @@ Partial Class dlgJitter
         '
         'ucrSelectorForJitter
         '
+        Me.ucrSelectorForJitter.bDropUnusedFilterLevels = False
         Me.ucrSelectorForJitter.bShowHiddenColumns = False
         Me.ucrSelectorForJitter.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForJitter, "ucrSelectorForJitter")
