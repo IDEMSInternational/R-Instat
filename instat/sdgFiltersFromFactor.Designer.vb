@@ -22,7 +22,6 @@ Partial Class sdgFiltersFromFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFiltersFromFactor))
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorFiltersFromFactors = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -33,50 +32,72 @@ Partial Class sdgFiltersFromFactor
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.Location = New System.Drawing.Point(201, 304)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorFiltersFromFactors
         '
+        Me.ucrSelectorFiltersFromFactors.AutoSize = True
         Me.ucrSelectorFiltersFromFactors.bDropUnusedFilterLevels = False
         Me.ucrSelectorFiltersFromFactors.bShowHiddenColumns = False
         Me.ucrSelectorFiltersFromFactors.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFiltersFromFactors, "ucrSelectorFiltersFromFactors")
+        Me.ucrSelectorFiltersFromFactors.Location = New System.Drawing.Point(9, 51)
+        Me.ucrSelectorFiltersFromFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFiltersFromFactors.Name = "ucrSelectorFiltersFromFactors"
+        Me.ucrSelectorFiltersFromFactors.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorFiltersFromFactors.TabIndex = 4
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(267, 32)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 3
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'lblFactors
         '
-        resources.ApplyResources(Me.lblFactors, "lblFactors")
+        Me.lblFactors.Location = New System.Drawing.Point(267, 17)
         Me.lblFactors.Name = "lblFactors"
+        Me.lblFactors.Size = New System.Drawing.Size(57, 13)
+        Me.lblFactors.TabIndex = 2
+        Me.lblFactors.Text = "Factor:"
         '
         'ucrFactorLevels
         '
-        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
+        Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(267, 57)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
         Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(270, 208)
+        Me.ucrFactorLevels.TabIndex = 1
         Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
         'cmdSelectAll
         '
-        resources.ApplyResources(Me.cmdSelectAll, "cmdSelectAll")
+        Me.cmdSelectAll.Location = New System.Drawing.Point(462, 268)
         Me.cmdSelectAll.Name = "cmdSelectAll"
+        Me.cmdSelectAll.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSelectAll.TabIndex = 0
+        Me.cmdSelectAll.Text = "Select All"
         Me.cmdSelectAll.UseVisualStyleBackColor = True
         '
         'sdgFiltersFromFactor
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(545, 337)
         Me.Controls.Add(Me.cmdSelectAll)
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.lblFactors)
@@ -87,6 +108,8 @@ Partial Class sdgFiltersFromFactor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgFiltersFromFactor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Filters From Factor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
