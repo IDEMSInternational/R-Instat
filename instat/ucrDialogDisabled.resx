@@ -129,7 +129,7 @@
     <value>0, 0</value>
   </data>
   <data name="lblDisabled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 50</value>
+    <value>238, 48</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDisabled.TabIndex" type="System.Int32, mscorlib">
@@ -162,8 +162,11 @@ OK cannot be enabled.
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 50</value>
+    <value>238, 48</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrDialogDisabled</value>

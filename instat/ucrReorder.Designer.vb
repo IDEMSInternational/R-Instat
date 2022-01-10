@@ -78,6 +78,7 @@ Partial Class ucrReorder
         '
         resources.ApplyResources(Me.lstAvailableData, "lstAvailableData")
         Me.lstAvailableData.FullRowSelect = True
+        Me.lstAvailableData.HideSelection = False
         Me.lstAvailableData.Name = "lstAvailableData"
         Me.lstAvailableData.UseCompatibleStateImageBehavior = False
         Me.lstAvailableData.View = System.Windows.Forms.View.Details

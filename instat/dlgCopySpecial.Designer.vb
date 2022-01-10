@@ -46,6 +46,7 @@ Partial Class dlgCopySpecial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(384, 182)
         Me.Controls.Add(Me.UcrCheck2)
         Me.Controls.Add(Me.UcrCheck1)

@@ -237,6 +237,7 @@ Partial Class sdgDoyRange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(587, 357)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDoy)

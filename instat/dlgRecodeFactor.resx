@@ -393,6 +393,15 @@
   <data name="&gt;&gt;rdoLump.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrNudFrequentValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 67</value>
+  </data>
+  <data name="ucrNudFrequentValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudFrequentValues.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
   <data name="&gt;&gt;ucrNudFrequentValues.Name" xml:space="preserve">
     <value>ucrNudFrequentValues</value>
   </data>
@@ -404,6 +413,15 @@
   </data>
   <data name="&gt;&gt;ucrNudFrequentValues.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrNudCommonValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 44</value>
+  </data>
+  <data name="ucrNudCommonValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudCommonValues.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrNudCommonValues.Name" xml:space="preserve">
     <value>ucrNudCommonValues</value>
@@ -417,6 +435,15 @@
   <data name="&gt;&gt;ucrNudCommonValues.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrNudLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 21</value>
+  </data>
+  <data name="ucrNudLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <data name="&gt;&gt;ucrNudLevels.Name" xml:space="preserve">
     <value>ucrNudLevels</value>
   </data>
@@ -428,90 +455,6 @@
   </data>
   <data name="&gt;&gt;ucrNudLevels.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdoMore.Name" xml:space="preserve">
-    <value>rdoMore</value>
-  </data>
-  <data name="&gt;&gt;rdoMore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoMore.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;rdoMore.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;rdoFrequentValues.Name" xml:space="preserve">
-    <value>rdoFrequentValues</value>
-  </data>
-  <data name="&gt;&gt;rdoFrequentValues.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoFrequentValues.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;rdoFrequentValues.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;rdoCommonValues.Name" xml:space="preserve">
-    <value>rdoCommonValues</value>
-  </data>
-  <data name="&gt;&gt;rdoCommonValues.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCommonValues.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;rdoCommonValues.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;rdoLevels.Name" xml:space="preserve">
-    <value>rdoLevels</value>
-  </data>
-  <data name="&gt;&gt;rdoLevels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoLevels.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;rdoLevels.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Name" xml:space="preserve">
-    <value>ucrPnlKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grpKeep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 99</value>
-  </data>
-  <data name="grpKeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 119</value>
-  </data>
-  <data name="grpKeep.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="grpKeep.Text" xml:space="preserve">
-    <value>Keep</value>
-  </data>
-  <data name="&gt;&gt;grpKeep.Name" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;grpKeep.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpKeep.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpKeep.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="rdoMore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -633,6 +576,51 @@
   <data name="&gt;&gt;rdoLevels.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrPnlKeep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="ucrPnlKeep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 95</value>
+  </data>
+  <data name="ucrPnlKeep.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlKeep.Name" xml:space="preserve">
+    <value>ucrPnlKeep</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlKeep.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlKeep.Parent" xml:space="preserve">
+    <value>grpKeep</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlKeep.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpKeep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 99</value>
+  </data>
+  <data name="grpKeep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 119</value>
+  </data>
+  <data name="grpKeep.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="grpKeep.Text" xml:space="preserve">
+    <value>Keep</value>
+  </data>
+  <data name="&gt;&gt;grpKeep.Name" xml:space="preserve">
+    <value>grpKeep</value>
+  </data>
+  <data name="&gt;&gt;grpKeep.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpKeep.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpKeep.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="rdoAddNa.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -679,7 +667,7 @@
     <value>248, 97</value>
   </data>
   <data name="lblNameForNa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>71, 13</value>
   </data>
   <data name="lblNameForNa.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -746,90 +734,6 @@
   </data>
   <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrNudFrequentValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 67</value>
-  </data>
-  <data name="ucrNudFrequentValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudFrequentValues.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrNudFrequentValues.Name" xml:space="preserve">
-    <value>ucrNudFrequentValues</value>
-  </data>
-  <data name="&gt;&gt;ucrNudFrequentValues.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudFrequentValues.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrNudFrequentValues.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrNudCommonValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 44</value>
-  </data>
-  <data name="ucrNudCommonValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudCommonValues.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCommonValues.Name" xml:space="preserve">
-    <value>ucrNudCommonValues</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCommonValues.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCommonValues.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCommonValues.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrNudLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 21</value>
-  </data>
-  <data name="ucrNudLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudLevels.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLevels.Name" xml:space="preserve">
-    <value>ucrNudLevels</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLevels.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLevels.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLevels.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrPnlKeep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
-  </data>
-  <data name="ucrPnlKeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 95</value>
-  </data>
-  <data name="ucrPnlKeep.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Name" xml:space="preserve">
-    <value>ucrPnlKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.Parent" xml:space="preserve">
-    <value>grpKeep</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlKeep.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 6</value>
@@ -927,6 +831,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>550, 467</value>
   </data>
@@ -953,6 +860,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorForRecode.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 410</value>

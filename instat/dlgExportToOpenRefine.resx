@@ -192,6 +192,9 @@
   <data name="&gt;&gt;ucrChkOpenBrowser.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 112</value>
   </data>
@@ -239,6 +242,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 170</value>

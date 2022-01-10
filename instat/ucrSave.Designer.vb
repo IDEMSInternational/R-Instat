@@ -48,8 +48,8 @@ Partial Class ucrSave
         '
         'ucrChkSave
         '
-        Me.ucrChkSave.Checked = False
         resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
+        Me.ucrChkSave.Checked = False
         Me.ucrChkSave.Name = "ucrChkSave"
         '
         'lblSaveText
@@ -68,9 +68,9 @@ Partial Class ucrSave
         'ucrInputTextSave
         '
         Me.ucrInputTextSave.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
         Me.ucrInputTextSave.IsMultiline = False
         Me.ucrInputTextSave.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
         '
         'btnColumnPosition

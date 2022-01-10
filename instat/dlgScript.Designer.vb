@@ -578,6 +578,7 @@ Partial Class dlgScript
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(287, 464)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
@@ -588,6 +589,7 @@ Partial Class dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1042, 529)
         Me.Controls.Add(Me.txtScript)
         Me.Controls.Add(Me.Label1)

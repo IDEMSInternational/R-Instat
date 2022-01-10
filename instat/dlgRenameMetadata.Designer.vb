@@ -54,6 +54,7 @@ Partial Class dlgRenameMetadata
         '
         'ucrSelectorForDeleTeMetadata
         '
+        Me.ucrSelectorForDeleTeMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectorForDeleTeMetadata.bShowHiddenColumns = False
         Me.ucrSelectorForDeleTeMetadata.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForDeleTeMetadata, "ucrSelectorForDeleTeMetadata")
@@ -101,6 +102,7 @@ Partial Class dlgRenameMetadata
         Me.MinimizeBox = False
         Me.Name = "dlgRenameMetadata"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

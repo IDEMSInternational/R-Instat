@@ -84,6 +84,7 @@ Public Class clsOutputLogger
             End Using
             Dim outputElement As New clsOutputElement
             outputElement.AddImageOutputFromR(image, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
 
@@ -126,6 +127,7 @@ Public Class clsOutputLogger
         Else
             Dim outputElement As New clsOutputElement
             outputElement.AddStringOutputFromR(strOutput, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
     End Sub

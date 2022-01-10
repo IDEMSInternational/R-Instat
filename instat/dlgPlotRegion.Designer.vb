@@ -117,6 +117,7 @@ Partial Class dlgPlotRegion
         '
         'ucrSelectorPlotRegion
         '
+        Me.ucrSelectorPlotRegion.bDropUnusedFilterLevels = False
         Me.ucrSelectorPlotRegion.bShowHiddenColumns = False
         Me.ucrSelectorPlotRegion.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorPlotRegion, "ucrSelectorPlotRegion")
