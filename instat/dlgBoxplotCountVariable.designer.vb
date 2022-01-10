@@ -58,6 +58,7 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(3, 188)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
@@ -152,6 +153,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(101, 25)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(111, 21)
@@ -159,6 +163,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrInputVariable
         '
+        Me.ucrInputVariable.AddQuotesIfUnrecognised = True
+        Me.ucrInputVariable.IsMultiline = False
+        Me.ucrInputVariable.IsReadOnly = False
         Me.ucrInputVariable.Location = New System.Drawing.Point(101, 54)
         Me.ucrInputVariable.Name = "ucrInputVariable"
         Me.ucrInputVariable.Size = New System.Drawing.Size(111, 21)
@@ -166,6 +173,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrInputColour
         '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.IsMultiline = False
+        Me.ucrInputColour.IsReadOnly = False
         Me.ucrInputColour.Location = New System.Drawing.Point(101, 82)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(111, 21)
@@ -173,6 +183,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrInputTimePeriod
         '
+        Me.ucrInputTimePeriod.AddQuotesIfUnrecognised = True
+        Me.ucrInputTimePeriod.IsMultiline = False
+        Me.ucrInputTimePeriod.IsReadOnly = False
         Me.ucrInputTimePeriod.Location = New System.Drawing.Point(101, 109)
         Me.ucrInputTimePeriod.Name = "ucrInputTimePeriod"
         Me.ucrInputTimePeriod.Size = New System.Drawing.Size(111, 21)
@@ -180,6 +193,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrInputWhiskerColour
         '
+        Me.ucrInputWhiskerColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputWhiskerColour.IsMultiline = False
+        Me.ucrInputWhiskerColour.IsReadOnly = False
         Me.ucrInputWhiskerColour.Location = New System.Drawing.Point(101, 135)
         Me.ucrInputWhiskerColour.Name = "ucrInputWhiskerColour"
         Me.ucrInputWhiskerColour.Size = New System.Drawing.Size(111, 21)
@@ -189,6 +205,7 @@ Partial Class dlgBoxplotCountVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(411, 252)
         Me.Controls.Add(Me.ucrInputWhiskerColour)
         Me.Controls.Add(Me.ucrInputTimePeriod)

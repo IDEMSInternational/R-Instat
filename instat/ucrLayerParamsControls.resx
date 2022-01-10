@@ -148,7 +148,7 @@
     <value>0, 0</value>
   </data>
   <data name="ucrChkParamName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 25</value>
+    <value>100, 28</value>
   </data>
   <data name="ucrChkParamName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -171,8 +171,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 25</value>
+    <value>265, 28</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrLayerParamsControls</value>

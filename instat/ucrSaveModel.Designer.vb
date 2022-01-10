@@ -53,6 +53,7 @@ Partial Class ucrSaveModel
         'ucrInputModelName
         '
         Me.ucrInputModelName.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelName.GetSetSelectedIndex = -1
         Me.ucrInputModelName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputModelName, "ucrInputModelName")
         Me.ucrInputModelName.Name = "ucrInputModelName"

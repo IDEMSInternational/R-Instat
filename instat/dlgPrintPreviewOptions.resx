@@ -127,13 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkGridLines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 74</value>
-  </data>
-  <data name="chkGridLines.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>3, 48</value>
   </data>
   <data name="chkGridLines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 24</value>
+    <value>97, 17</value>
   </data>
   <data name="chkGridLines.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -157,13 +154,10 @@
     <value>Bottom</value>
   </data>
   <data name="cmdPrtSheet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 123</value>
-  </data>
-  <data name="cmdPrtSheet.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>0, 80</value>
   </data>
   <data name="cmdPrtSheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 68</value>
+    <value>156, 44</value>
   </data>
   <data name="cmdPrtSheet.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -189,11 +183,8 @@
   <data name="cmdPrevSheet.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="cmdPrevSheet.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
   <data name="cmdPrevSheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 65</value>
+    <value>156, 42</value>
   </data>
   <data name="cmdPrevSheet.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -214,13 +205,10 @@
     <value>2</value>
   </data>
   <data name="pnlEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
-  </data>
-  <data name="pnlEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>2, 4</value>
   </data>
   <data name="pnlEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 195</value>
+    <value>160, 128</value>
   </data>
   <data name="pnlEditor.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -244,13 +232,10 @@
     <value>Bottom</value>
   </data>
   <data name="cmdPrtLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 67</value>
-  </data>
-  <data name="cmdPrtLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>0, 44</value>
   </data>
   <data name="cmdPrtLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 68</value>
+    <value>156, 44</value>
   </data>
   <data name="cmdPrtLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -276,11 +261,8 @@
   <data name="cmdPrevLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="cmdPrevLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
   <data name="cmdPrevLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 65</value>
+    <value>156, 42</value>
   </data>
   <data name="cmdPrevLog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -301,13 +283,10 @@
     <value>1</value>
   </data>
   <data name="pnlLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 6</value>
-  </data>
-  <data name="pnlLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>168, 4</value>
   </data>
   <data name="pnlLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 139</value>
+    <value>160, 92</value>
   </data>
   <data name="pnlLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -331,13 +310,10 @@
     <value>Bottom</value>
   </data>
   <data name="cmdPrtOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 67</value>
-  </data>
-  <data name="cmdPrtOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>0, 44</value>
   </data>
   <data name="cmdPrtOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 68</value>
+    <value>156, 44</value>
   </data>
   <data name="cmdPrtOutput.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -363,11 +339,8 @@
   <data name="cmdPrevOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="cmdPrevOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
   <data name="cmdPrevOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 65</value>
+    <value>156, 42</value>
   </data>
   <data name="cmdPrevOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -388,13 +361,10 @@
     <value>1</value>
   </data>
   <data name="pnlOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 9</value>
-  </data>
-  <data name="pnlOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>332, 6</value>
   </data>
   <data name="pnlOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 139</value>
+    <value>160, 92</value>
   </data>
   <data name="pnlOutput.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -415,13 +385,10 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="cmdExitPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 152</value>
-  </data>
-  <data name="cmdExitPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>168, 99</value>
   </data>
   <data name="cmdExitPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 49</value>
+    <value>160, 32</value>
   </data>
   <data name="cmdExitPreview.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -445,13 +412,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>744, 222</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>496, 144</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

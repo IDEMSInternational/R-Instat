@@ -27,6 +27,7 @@ Partial Class dlgMachineLearning
         '
         'UcrButtons1
         '
+        Me.UcrButtons1.AutoSize = True
         Me.UcrButtons1.Location = New System.Drawing.Point(7, 384)
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
@@ -36,6 +37,7 @@ Partial Class dlgMachineLearning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 438)
         Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -45,6 +47,7 @@ Partial Class dlgMachineLearning
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Machine Learning (caret) "
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

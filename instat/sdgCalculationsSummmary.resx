@@ -118,6 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrDefineFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 55</value>
+  </data>
+  <data name="ucrDefineFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 359</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrDefineFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Name" xml:space="preserve">
+    <value>ucrDefineFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Type" xml:space="preserve">
+    <value>instat.ucrFilter, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Parent" xml:space="preserve">
+    <value>tbMain</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrReceiverByOrSort.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 143</value>
   </data>
@@ -128,7 +150,6 @@
   <data name="ucrReceiverByOrSort.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverByOrSort.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
@@ -142,7 +163,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrReceiverByOrSort.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputCalculationName.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 439</value>
@@ -163,7 +184,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputCalculationName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblReceiverLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -190,7 +211,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblReceiverLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrInputResultName.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 439</value>
@@ -211,7 +232,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputResultName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblResultName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +259,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblResultName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblCalcName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -265,7 +286,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblCalcName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoSaveCalcAndResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,7 +313,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoSaveCalcAndResult.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="rdoSaveCalculation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +340,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoSaveCalculation.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="rdoDoNotSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +367,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoDoNotSave.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -373,7 +394,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrInputType.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 28</value>
@@ -394,7 +415,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputType.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrSelectorBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 114</value>
@@ -418,49 +439,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrSelectorBy.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="ucrCalcSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 50</value>
-  </data>
-  <data name="ucrCalcSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>623, 282</value>
-  </data>
-  <data name="ucrCalcSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrCalcSummary.Name" xml:space="preserve">
-    <value>ucrCalcSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrCalcSummary.Type" xml:space="preserve">
-    <value>instat.ucrCalculator, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrCalcSummary.Parent" xml:space="preserve">
-    <value>tbMain</value>
-  </data>
-  <data name="&gt;&gt;ucrCalcSummary.ZOrder" xml:space="preserve">
     <value>12</value>
-  </data>
-  <data name="ucrDefineFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 55</value>
-  </data>
-  <data name="ucrDefineFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 359</value>
-  </data>
-  <data name="ucrDefineFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Name" xml:space="preserve">
-    <value>ucrDefineFilter</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Type" xml:space="preserve">
-    <value>instat.ucrFilter, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Parent" xml:space="preserve">
-    <value>tbMain</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.ZOrder" xml:space="preserve">
-    <value>13</value>
   </data>
   <data name="ucrPnlSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 466</value>
@@ -481,6 +460,27 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrPnlSave.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrCalcSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 50</value>
+  </data>
+  <data name="ucrCalcSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>623, 282</value>
+  </data>
+  <data name="ucrCalcSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrCalcSummary.Name" xml:space="preserve">
+    <value>ucrCalcSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrCalcSummary.Type" xml:space="preserve">
+    <value>instat.ucrCalculator, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrCalcSummary.Parent" xml:space="preserve">
+    <value>tbMain</value>
+  </data>
+  <data name="&gt;&gt;ucrCalcSummary.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="tbMain.Location" type="System.Drawing.Point, System.Drawing">
@@ -899,6 +899,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>806, 565</value>

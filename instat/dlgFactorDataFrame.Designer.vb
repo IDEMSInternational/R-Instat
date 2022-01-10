@@ -94,6 +94,7 @@ Partial Class dlgFactorDataFrame
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(9, 205)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -126,6 +127,7 @@ Partial Class dlgFactorDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 264)
         Me.Controls.Add(Me.ucrChkAddCurrentContrasts)
         Me.Controls.Add(Me.ucrChkReplaceIfAlreadyExists)

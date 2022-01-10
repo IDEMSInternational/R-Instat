@@ -232,6 +232,7 @@ Partial Class sdgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(396, 402)
         Me.Controls.Add(Me.lblWIGOSIdentifier)
         Me.Controls.Add(Me.ucrReceiverWIGOSIdentifier)

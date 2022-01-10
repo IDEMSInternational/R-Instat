@@ -102,6 +102,7 @@ Partial Class dlgTransposeColumns
         Me.Name = "dlgTransposeColumns"
         Me.Tag = "Transpose_Columns"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

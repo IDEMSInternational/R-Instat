@@ -151,17 +151,21 @@ Partial Class dlgNon_ParametricOneSampleTests
         '
         'ucrReceiverDataColumn
         '
+        Me.ucrReceiverDataColumn.frmParent = Me
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(265, 97)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverDataColumn.strNcFilePath = ""
         Me.ucrReceiverDataColumn.TabIndex = 2
+        Me.ucrReceiverDataColumn.ucrSelector = Nothing
         '
         'ucrSelectorNPOneSample
         '
+        Me.ucrSelectorNPOneSample.bDropUnusedFilterLevels = False
         Me.ucrSelectorNPOneSample.bShowHiddenColumns = False
-        Me.ucrSelectorNPOneSample.bUseCurrentFilter = False
+        Me.ucrSelectorNPOneSample.bUseCurrentFilter = True
         Me.ucrSelectorNPOneSample.Location = New System.Drawing.Point(2, 2)
         Me.ucrSelectorNPOneSample.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorNPOneSample.Name = "ucrSelectorNPOneSample"
@@ -170,6 +174,7 @@ Partial Class dlgNon_ParametricOneSampleTests
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(2, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
@@ -179,6 +184,7 @@ Partial Class dlgNon_ParametricOneSampleTests
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(412, 368)
         Me.Controls.Add(Me.grpTypeOfTest)
         Me.Controls.Add(Me.lblConfidenceInterval)

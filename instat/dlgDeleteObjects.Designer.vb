@@ -78,6 +78,7 @@ Partial Class dlgDeleteObjects
         'ucrInputComboType
         '
         Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
         Me.ucrInputComboType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
         Me.ucrInputComboType.Name = "ucrInputComboType"
