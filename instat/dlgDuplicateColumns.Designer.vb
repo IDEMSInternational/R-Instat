@@ -38,7 +38,6 @@ Partial Class dlgDuplicateColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDuplicateColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.grpConvertTo = New System.Windows.Forms.GroupBox()
         Me.rdoConvertToLogical = New System.Windows.Forms.RadioButton()
@@ -68,8 +67,13 @@ Partial Class dlgDuplicateColumns
         '
         'lblColumns
         '
-        resources.ApplyResources(Me.lblColumns, "lblColumns")
+        Me.lblColumns.AutoSize = True
+        Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColumns.Location = New System.Drawing.Point(228, 11)
         Me.lblColumns.Name = "lblColumns"
+        Me.lblColumns.Size = New System.Drawing.Size(105, 13)
+        Me.lblColumns.TabIndex = 1
+        Me.lblColumns.Text = "Column to Duplicate:"
         '
         'grpConvertTo
         '
@@ -80,56 +84,93 @@ Partial Class dlgDuplicateColumns
         Me.grpConvertTo.Controls.Add(Me.rdoConvertToOrderedFactor)
         Me.grpConvertTo.Controls.Add(Me.rdoConvertToFactor)
         Me.grpConvertTo.Controls.Add(Me.ucrPnlConvertTo)
-        resources.ApplyResources(Me.grpConvertTo, "grpConvertTo")
+        Me.grpConvertTo.Location = New System.Drawing.Point(228, 77)
         Me.grpConvertTo.Name = "grpConvertTo"
+        Me.grpConvertTo.Size = New System.Drawing.Size(235, 100)
+        Me.grpConvertTo.TabIndex = 4
         Me.grpConvertTo.TabStop = False
+        Me.grpConvertTo.Text = "Convert To"
         '
         'rdoConvertToLogical
         '
-        resources.ApplyResources(Me.rdoConvertToLogical, "rdoConvertToLogical")
+        Me.rdoConvertToLogical.AutoSize = True
+        Me.rdoConvertToLogical.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToLogical.Location = New System.Drawing.Point(149, 72)
         Me.rdoConvertToLogical.Name = "rdoConvertToLogical"
+        Me.rdoConvertToLogical.Size = New System.Drawing.Size(59, 17)
+        Me.rdoConvertToLogical.TabIndex = 11
         Me.rdoConvertToLogical.TabStop = True
+        Me.rdoConvertToLogical.Text = "Logical"
         Me.rdoConvertToLogical.UseVisualStyleBackColor = True
         '
         'rdoConvertToCharacter
         '
-        resources.ApplyResources(Me.rdoConvertToCharacter, "rdoConvertToCharacter")
+        Me.rdoConvertToCharacter.AutoSize = True
+        Me.rdoConvertToCharacter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToCharacter.Location = New System.Drawing.Point(16, 72)
         Me.rdoConvertToCharacter.Name = "rdoConvertToCharacter"
+        Me.rdoConvertToCharacter.Size = New System.Drawing.Size(71, 17)
+        Me.rdoConvertToCharacter.TabIndex = 8
         Me.rdoConvertToCharacter.TabStop = True
+        Me.rdoConvertToCharacter.Text = "Character"
         Me.rdoConvertToCharacter.UseVisualStyleBackColor = True
         '
         'rdoConvertToInteger
         '
-        resources.ApplyResources(Me.rdoConvertToInteger, "rdoConvertToInteger")
+        Me.rdoConvertToInteger.AutoSize = True
+        Me.rdoConvertToInteger.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToInteger.Location = New System.Drawing.Point(149, 49)
         Me.rdoConvertToInteger.Name = "rdoConvertToInteger"
+        Me.rdoConvertToInteger.Size = New System.Drawing.Size(58, 17)
+        Me.rdoConvertToInteger.TabIndex = 10
         Me.rdoConvertToInteger.TabStop = True
+        Me.rdoConvertToInteger.Text = "Integer"
         Me.rdoConvertToInteger.UseVisualStyleBackColor = True
         '
         'rdoConvertToNumeric
         '
-        resources.ApplyResources(Me.rdoConvertToNumeric, "rdoConvertToNumeric")
+        Me.rdoConvertToNumeric.AutoSize = True
+        Me.rdoConvertToNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToNumeric.Location = New System.Drawing.Point(149, 27)
         Me.rdoConvertToNumeric.Name = "rdoConvertToNumeric"
+        Me.rdoConvertToNumeric.Size = New System.Drawing.Size(64, 17)
+        Me.rdoConvertToNumeric.TabIndex = 9
         Me.rdoConvertToNumeric.TabStop = True
+        Me.rdoConvertToNumeric.Text = "Numeric"
         Me.rdoConvertToNumeric.UseVisualStyleBackColor = True
         '
         'rdoConvertToOrderedFactor
         '
-        resources.ApplyResources(Me.rdoConvertToOrderedFactor, "rdoConvertToOrderedFactor")
+        Me.rdoConvertToOrderedFactor.AutoSize = True
+        Me.rdoConvertToOrderedFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToOrderedFactor.Location = New System.Drawing.Point(16, 49)
         Me.rdoConvertToOrderedFactor.Name = "rdoConvertToOrderedFactor"
+        Me.rdoConvertToOrderedFactor.Size = New System.Drawing.Size(96, 17)
+        Me.rdoConvertToOrderedFactor.TabIndex = 7
         Me.rdoConvertToOrderedFactor.TabStop = True
+        Me.rdoConvertToOrderedFactor.Text = "Ordered Factor"
         Me.rdoConvertToOrderedFactor.UseVisualStyleBackColor = True
         '
         'rdoConvertToFactor
         '
-        resources.ApplyResources(Me.rdoConvertToFactor, "rdoConvertToFactor")
+        Me.rdoConvertToFactor.AutoSize = True
+        Me.rdoConvertToFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertToFactor.Location = New System.Drawing.Point(16, 27)
         Me.rdoConvertToFactor.Name = "rdoConvertToFactor"
+        Me.rdoConvertToFactor.Size = New System.Drawing.Size(55, 17)
+        Me.rdoConvertToFactor.TabIndex = 6
         Me.rdoConvertToFactor.TabStop = True
+        Me.rdoConvertToFactor.Text = "Factor"
         Me.rdoConvertToFactor.UseVisualStyleBackColor = True
         '
         'ucrPnlConvertTo
         '
-        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
+        Me.ucrPnlConvertTo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(7, 17)
+        Me.ucrPnlConvertTo.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(220, 80)
+        Me.ucrPnlConvertTo.TabIndex = 5
         '
         'grpFactorToNumericOptions
         '
@@ -137,101 +178,162 @@ Partial Class dlgDuplicateColumns
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
         Me.grpFactorToNumericOptions.Controls.Add(Me.ucrPnlConvertFactorToNumericOptions)
-        resources.ApplyResources(Me.grpFactorToNumericOptions, "grpFactorToNumericOptions")
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(228, 236)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
+        Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(196, 102)
+        Me.grpFactorToNumericOptions.TabIndex = 16
         Me.grpFactorToNumericOptions.TabStop = False
+        Me.grpFactorToNumericOptions.Text = "Factor Options"
         '
         'rdoConvertDefault
         '
-        resources.ApplyResources(Me.rdoConvertDefault, "rdoConvertDefault")
+        Me.rdoConvertDefault.AutoSize = True
+        Me.rdoConvertDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertDefault.Location = New System.Drawing.Point(14, 28)
         Me.rdoConvertDefault.Name = "rdoConvertDefault"
+        Me.rdoConvertDefault.Size = New System.Drawing.Size(59, 17)
+        Me.rdoConvertDefault.TabIndex = 18
         Me.rdoConvertDefault.TabStop = True
+        Me.rdoConvertDefault.Text = "Default"
         Me.rdoConvertDefault.UseVisualStyleBackColor = True
         '
         'rdoConvertOrdinals
         '
-        resources.ApplyResources(Me.rdoConvertOrdinals, "rdoConvertOrdinals")
+        Me.rdoConvertOrdinals.AutoSize = True
+        Me.rdoConvertOrdinals.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertOrdinals.Location = New System.Drawing.Point(14, 72)
         Me.rdoConvertOrdinals.Name = "rdoConvertOrdinals"
+        Me.rdoConvertOrdinals.Size = New System.Drawing.Size(115, 17)
+        Me.rdoConvertOrdinals.TabIndex = 20
         Me.rdoConvertOrdinals.TabStop = True
+        Me.rdoConvertOrdinals.Text = "Always Use Values"
         Me.rdoConvertOrdinals.UseVisualStyleBackColor = True
         '
         'rdoConvertLevels
         '
-        resources.ApplyResources(Me.rdoConvertLevels, "rdoConvertLevels")
+        Me.rdoConvertLevels.AutoSize = True
+        Me.rdoConvertLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertLevels.Location = New System.Drawing.Point(14, 50)
         Me.rdoConvertLevels.Name = "rdoConvertLevels"
+        Me.rdoConvertLevels.Size = New System.Drawing.Size(114, 17)
+        Me.rdoConvertLevels.TabIndex = 19
         Me.rdoConvertLevels.TabStop = True
+        Me.rdoConvertLevels.Text = "Always Use Levels"
         Me.rdoConvertLevels.UseVisualStyleBackColor = True
         '
         'ucrPnlConvertFactorToNumericOptions
         '
-        resources.ApplyResources(Me.ucrPnlConvertFactorToNumericOptions, "ucrPnlConvertFactorToNumericOptions")
+        Me.ucrPnlConvertFactorToNumericOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlConvertFactorToNumericOptions.Location = New System.Drawing.Point(6, 22)
+        Me.ucrPnlConvertFactorToNumericOptions.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlConvertFactorToNumericOptions.Name = "ucrPnlConvertFactorToNumericOptions"
+        Me.ucrPnlConvertFactorToNumericOptions.Size = New System.Drawing.Size(190, 74)
+        Me.ucrPnlConvertFactorToNumericOptions.TabIndex = 17
         '
         'ucrChkChangeType
         '
+        Me.ucrChkChangeType.AutoSize = True
         Me.ucrChkChangeType.Checked = False
-        resources.ApplyResources(Me.ucrChkChangeType, "ucrChkChangeType")
+        Me.ucrChkChangeType.Location = New System.Drawing.Point(228, 55)
+        Me.ucrChkChangeType.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkChangeType.Name = "ucrChkChangeType"
+        Me.ucrChkChangeType.Size = New System.Drawing.Size(165, 23)
+        Me.ucrChkChangeType.TabIndex = 3
         '
         'ucrChkConvertCreateLabels
         '
+        Me.ucrChkConvertCreateLabels.AutoSize = True
         Me.ucrChkConvertCreateLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkConvertCreateLabels, "ucrChkConvertCreateLabels")
+        Me.ucrChkConvertCreateLabels.Location = New System.Drawing.Point(371, 181)
+        Me.ucrChkConvertCreateLabels.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkConvertCreateLabels.Name = "ucrChkConvertCreateLabels"
+        Me.ucrChkConvertCreateLabels.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkConvertCreateLabels.TabIndex = 13
         '
         'ucrChkConvertKeepAttributes
         '
+        Me.ucrChkConvertKeepAttributes.AutoSize = True
         Me.ucrChkConvertKeepAttributes.Checked = False
-        resources.ApplyResources(Me.ucrChkConvertKeepAttributes, "ucrChkConvertKeepAttributes")
+        Me.ucrChkConvertKeepAttributes.Location = New System.Drawing.Point(230, 181)
+        Me.ucrChkConvertKeepAttributes.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkConvertKeepAttributes.Name = "ucrChkConvertKeepAttributes"
+        Me.ucrChkConvertKeepAttributes.Size = New System.Drawing.Size(139, 23)
+        Me.ucrChkConvertKeepAttributes.TabIndex = 12
         '
         'ucrNudConvertDisplayDecimals
         '
+        Me.ucrNudConvertDisplayDecimals.AutoSize = True
         Me.ucrNudConvertDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConvertDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudConvertDisplayDecimals, "ucrNudConvertDisplayDecimals")
+        Me.ucrNudConvertDisplayDecimals.Location = New System.Drawing.Point(413, 209)
+        Me.ucrNudConvertDisplayDecimals.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrNudConvertDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConvertDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConvertDisplayDecimals.Name = "ucrNudConvertDisplayDecimals"
+        Me.ucrNudConvertDisplayDecimals.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudConvertDisplayDecimals.TabIndex = 15
         Me.ucrNudConvertDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkConvertSpecifyDecimalsToDisplay
         '
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.AutoSize = True
         Me.ucrChkConvertSpecifyDecimalsToDisplay.Checked = False
-        resources.ApplyResources(Me.ucrChkConvertSpecifyDecimalsToDisplay, "ucrChkConvertSpecifyDecimalsToDisplay")
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(230, 209)
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkConvertSpecifyDecimalsToDisplay.Name = "ucrChkConvertSpecifyDecimalsToDisplay"
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(180, 23)
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.TabIndex = 14
         '
         'ucrReceiverDuplicateColumns
         '
+        Me.ucrReceiverDuplicateColumns.AutoSize = True
         Me.ucrReceiverDuplicateColumns.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDuplicateColumns, "ucrReceiverDuplicateColumns")
+        Me.ucrReceiverDuplicateColumns.Location = New System.Drawing.Point(228, 28)
+        Me.ucrReceiverDuplicateColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDuplicateColumns.Name = "ucrReceiverDuplicateColumns"
         Me.ucrReceiverDuplicateColumns.Selector = Nothing
+        Me.ucrReceiverDuplicateColumns.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverDuplicateColumns.strNcFilePath = ""
+        Me.ucrReceiverDuplicateColumns.TabIndex = 2
         Me.ucrReceiverDuplicateColumns.ucrSelector = Nothing
         '
         'ucrSelectorForDuplicateColumn
         '
+        Me.ucrSelectorForDuplicateColumn.AutoSize = True
         Me.ucrSelectorForDuplicateColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorForDuplicateColumn.bShowHiddenColumns = False
         Me.ucrSelectorForDuplicateColumn.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")
+        Me.ucrSelectorForDuplicateColumn.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForDuplicateColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
+        Me.ucrSelectorForDuplicateColumn.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForDuplicateColumn.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 371)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 29
         '
         'ucrSaveColumn
         '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(6, 343)
+        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(327, 22)
+        Me.ucrSaveColumn.TabIndex = 30
         '
         'dlgDuplicateColumns
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(486, 432)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrChkChangeType)
         Me.Controls.Add(Me.ucrChkConvertCreateLabels)
@@ -248,7 +350,9 @@ Partial Class dlgDuplicateColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
+        Me.Text = "Duplicate Column"
         Me.grpConvertTo.ResumeLayout(False)
         Me.grpConvertTo.PerformLayout()
         Me.grpFactorToNumericOptions.ResumeLayout(False)

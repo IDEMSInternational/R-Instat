@@ -22,7 +22,6 @@ Partial Class dlgParallelCoordinatePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgParallelCoordinatePlot))
         Me.cmdParcoordOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.lblXVariables = New System.Windows.Forms.Label()
@@ -42,106 +41,168 @@ Partial Class dlgParallelCoordinatePlot
         '
         'cmdParcoordOptions
         '
-        resources.ApplyResources(Me.cmdParcoordOptions, "cmdParcoordOptions")
+        Me.cmdParcoordOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdParcoordOptions.Location = New System.Drawing.Point(9, 201)
         Me.cmdParcoordOptions.Name = "cmdParcoordOptions"
+        Me.cmdParcoordOptions.Size = New System.Drawing.Size(147, 23)
+        Me.cmdParcoordOptions.TabIndex = 5
+        Me.cmdParcoordOptions.Text = "Parcoord Options"
         Me.cmdParcoordOptions.UseVisualStyleBackColor = True
         '
         'cmdPlotOptions
         '
-        resources.ApplyResources(Me.cmdPlotOptions, "cmdPlotOptions")
+        Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 230)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(147, 23)
+        Me.cmdPlotOptions.TabIndex = 6
+        Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'lblXVariables
         '
-        resources.ApplyResources(Me.lblXVariables, "lblXVariables")
+        Me.lblXVariables.AutoSize = True
+        Me.lblXVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXVariables.Location = New System.Drawing.Point(270, 44)
         Me.lblXVariables.Name = "lblXVariables"
+        Me.lblXVariables.Size = New System.Drawing.Size(63, 13)
+        Me.lblXVariables.TabIndex = 1
+        Me.lblXVariables.Text = "X Variables:"
         '
         'lblFactor
         '
-        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactor.Location = New System.Drawing.Point(270, 186)
         Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Text = "Factor (Optional):"
         '
         'lblScale
         '
-        resources.ApplyResources(Me.lblScale, "lblScale")
+        Me.lblScale.AutoSize = True
+        Me.lblScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblScale.Location = New System.Drawing.Point(8, 268)
         Me.lblScale.Name = "lblScale"
+        Me.lblScale.Size = New System.Drawing.Size(37, 13)
+        Me.lblScale.TabIndex = 7
+        Me.lblScale.Text = "Scale:"
         '
         'lblTransparency
         '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.AutoSize = True
+        Me.lblTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTransparency.Location = New System.Drawing.Point(265, 236)
         Me.lblTransparency.Name = "lblTransparency"
+        Me.lblTransparency.Size = New System.Drawing.Size(75, 13)
+        Me.lblTransparency.TabIndex = 9
+        Me.lblTransparency.Text = "Transparency:"
         '
         'ucrSaveGraph
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 344)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(324, 24)
+        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrNudTransparency
         '
+        Me.ucrNudTransparency.AutoSize = True
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Location = New System.Drawing.Point(343, 233)
         Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudTransparency.TabIndex = 10
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkPoints
         '
+        Me.ucrChkPoints.AutoSize = True
         Me.ucrChkPoints.Checked = False
-        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
+        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 318)
         Me.ucrChkPoints.Name = "ucrChkPoints"
+        Me.ucrChkPoints.Size = New System.Drawing.Size(210, 23)
+        Me.ucrChkPoints.TabIndex = 12
         '
         'ucrChkBoxplots
         '
+        Me.ucrChkBoxplots.AutoSize = True
         Me.ucrChkBoxplots.Checked = False
-        resources.ApplyResources(Me.ucrChkBoxplots, "ucrChkBoxplots")
+        Me.ucrChkBoxplots.Location = New System.Drawing.Point(9, 292)
         Me.ucrChkBoxplots.Name = "ucrChkBoxplots"
+        Me.ucrChkBoxplots.Size = New System.Drawing.Size(210, 23)
+        Me.ucrChkBoxplots.TabIndex = 11
         '
         'ucrInputScale
         '
         Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputScale.GetSetSelectedIndex = -1
         Me.ucrInputScale.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
+        Me.ucrInputScale.Location = New System.Drawing.Point(66, 265)
         Me.ucrInputScale.Name = "ucrInputScale"
+        Me.ucrInputScale.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputScale.TabIndex = 8
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 370)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 14
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(268, 201)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 4
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrReceiverXVariables
         '
+        Me.ucrReceiverXVariables.AutoSize = True
         Me.ucrReceiverXVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverXVariables, "ucrReceiverXVariables")
+        Me.ucrReceiverXVariables.Location = New System.Drawing.Point(268, 59)
+        Me.ucrReceiverXVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXVariables.Name = "ucrReceiverXVariables"
         Me.ucrReceiverXVariables.Selector = Nothing
+        Me.ucrReceiverXVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverXVariables.strNcFilePath = ""
+        Me.ucrReceiverXVariables.TabIndex = 2
         Me.ucrReceiverXVariables.ucrSelector = Nothing
         '
         'ucrSelectorParallelCoordinatePlot
         '
+        Me.ucrSelectorParallelCoordinatePlot.AutoSize = True
         Me.ucrSelectorParallelCoordinatePlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorParallelCoordinatePlot.bShowHiddenColumns = False
         Me.ucrSelectorParallelCoordinatePlot.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorParallelCoordinatePlot, "ucrSelectorParallelCoordinatePlot")
+        Me.ucrSelectorParallelCoordinatePlot.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorParallelCoordinatePlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorParallelCoordinatePlot.Name = "ucrSelectorParallelCoordinatePlot"
+        Me.ucrSelectorParallelCoordinatePlot.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorParallelCoordinatePlot.TabIndex = 0
         '
         'dlgParallelCoordinatePlot
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(417, 430)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrNudTransparency)
         Me.Controls.Add(Me.lblTransparency)
@@ -161,6 +222,8 @@ Partial Class dlgParallelCoordinatePlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgParallelCoordinatePlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Parallel Coordinate Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

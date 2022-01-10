@@ -38,7 +38,6 @@ Partial Class ucrButtons
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrButtons))
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
@@ -51,62 +50,89 @@ Partial Class ucrButtons
         '
         'cmdOk
         '
-        resources.ApplyResources(Me.cmdOk, "cmdOk")
+        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
         Me.cmdOk.Name = "cmdOk"
+        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOk.TabIndex = 2
         Me.cmdOk.Tag = "Ok "
+        Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
+        Me.cmdCancel.Location = New System.Drawing.Point(158, 26)
         Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCancel.TabIndex = 4
         Me.cmdCancel.Tag = "Close"
+        Me.cmdCancel.Text = "Close"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        resources.ApplyResources(Me.cmdReset, "cmdReset")
+        Me.cmdReset.Location = New System.Drawing.Point(79, 26)
         Me.cmdReset.Name = "cmdReset"
+        Me.cmdReset.Size = New System.Drawing.Size(75, 23)
+        Me.cmdReset.TabIndex = 3
         Me.cmdReset.Tag = "Reset"
+        Me.cmdReset.Text = "Reset "
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(237, 26)
         Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(84, 23)
+        Me.cmdHelp.TabIndex = 5
         Me.cmdHelp.Tag = "Help"
+        Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdPaste
         '
-        resources.ApplyResources(Me.cmdPaste, "cmdPaste")
+        Me.cmdPaste.Location = New System.Drawing.Point(327, 26)
         Me.cmdPaste.Name = "cmdPaste"
+        Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPaste.TabIndex = 6
         Me.cmdPaste.Tag = "To_Script"
+        Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
         '
         'chkComment
         '
-        resources.ApplyResources(Me.chkComment, "chkComment")
+        Me.chkComment.AutoSize = True
+        Me.chkComment.Location = New System.Drawing.Point(0, 3)
         Me.chkComment.Name = "chkComment"
+        Me.chkComment.Size = New System.Drawing.Size(73, 17)
+        Me.chkComment.TabIndex = 0
         Me.chkComment.Tag = "comment:"
+        Me.chkComment.Text = "Comment:"
         Me.chkComment.UseVisualStyleBackColor = True
         '
         'txtComment
         '
-        resources.ApplyResources(Me.txtComment, "txtComment")
+        Me.txtComment.Location = New System.Drawing.Point(90, 1)
         Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(312, 20)
+        Me.txtComment.TabIndex = 1
         '
         'cmdLanguage
         '
-        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLanguage.Location = New System.Drawing.Point(286, 26)
         Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Size = New System.Drawing.Size(37, 23)
+        Me.cmdLanguage.TabIndex = 7
         Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.Text = "Lang"
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
         'ucrButtons
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.chkComment)
@@ -116,6 +142,7 @@ Partial Class ucrButtons
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
+        Me.Size = New System.Drawing.Size(410, 52)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
