@@ -38,7 +38,6 @@ Partial Class dlgPrintPreviewOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgPrintPreviewOptions))
         Me.pnlEditor = New System.Windows.Forms.Panel()
         Me.chkGridLines = New System.Windows.Forms.CheckBox()
         Me.cmdPrtSheet = New System.Windows.Forms.Button()
@@ -57,81 +56,129 @@ Partial Class dlgPrintPreviewOptions
         '
         'pnlEditor
         '
-        resources.ApplyResources(Me.pnlEditor, "pnlEditor")
+        Me.pnlEditor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlEditor.Controls.Add(Me.chkGridLines)
         Me.pnlEditor.Controls.Add(Me.cmdPrtSheet)
         Me.pnlEditor.Controls.Add(Me.cmdPrevSheet)
+        Me.pnlEditor.Location = New System.Drawing.Point(2, 4)
         Me.pnlEditor.Name = "pnlEditor"
+        Me.pnlEditor.Size = New System.Drawing.Size(160, 128)
+        Me.pnlEditor.TabIndex = 0
         '
         'chkGridLines
         '
-        resources.ApplyResources(Me.chkGridLines, "chkGridLines")
+        Me.chkGridLines.AutoSize = True
+        Me.chkGridLines.Location = New System.Drawing.Point(3, 48)
         Me.chkGridLines.Name = "chkGridLines"
+        Me.chkGridLines.Size = New System.Drawing.Size(97, 17)
+        Me.chkGridLines.TabIndex = 2
+        Me.chkGridLines.Text = "Show grid lines"
         Me.chkGridLines.UseVisualStyleBackColor = True
         '
         'cmdPrtSheet
         '
-        resources.ApplyResources(Me.cmdPrtSheet, "cmdPrtSheet")
+        Me.cmdPrtSheet.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.cmdPrtSheet.Location = New System.Drawing.Point(0, 80)
         Me.cmdPrtSheet.Name = "cmdPrtSheet"
+        Me.cmdPrtSheet.Size = New System.Drawing.Size(156, 44)
+        Me.cmdPrtSheet.TabIndex = 1
+        Me.cmdPrtSheet.Text = "Print Current Sheet"
         Me.cmdPrtSheet.UseVisualStyleBackColor = True
         '
         'cmdPrevSheet
         '
-        resources.ApplyResources(Me.cmdPrevSheet, "cmdPrevSheet")
+        Me.cmdPrevSheet.Dock = System.Windows.Forms.DockStyle.Top
+        Me.cmdPrevSheet.Location = New System.Drawing.Point(0, 0)
         Me.cmdPrevSheet.Name = "cmdPrevSheet"
+        Me.cmdPrevSheet.Size = New System.Drawing.Size(156, 42)
+        Me.cmdPrevSheet.TabIndex = 0
+        Me.cmdPrevSheet.Text = "Preview Current Sheet"
         Me.cmdPrevSheet.UseVisualStyleBackColor = True
         '
         'pnlLog
         '
-        resources.ApplyResources(Me.pnlLog, "pnlLog")
+        Me.pnlLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlLog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlLog.Controls.Add(Me.cmdPrtLog)
         Me.pnlLog.Controls.Add(Me.cmdPrevLog)
+        Me.pnlLog.Location = New System.Drawing.Point(168, 4)
         Me.pnlLog.Name = "pnlLog"
+        Me.pnlLog.Size = New System.Drawing.Size(160, 92)
+        Me.pnlLog.TabIndex = 1
         '
         'cmdPrtLog
         '
-        resources.ApplyResources(Me.cmdPrtLog, "cmdPrtLog")
+        Me.cmdPrtLog.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.cmdPrtLog.Location = New System.Drawing.Point(0, 44)
         Me.cmdPrtLog.Name = "cmdPrtLog"
+        Me.cmdPrtLog.Size = New System.Drawing.Size(156, 44)
+        Me.cmdPrtLog.TabIndex = 1
+        Me.cmdPrtLog.Text = "Print Log"
         Me.cmdPrtLog.UseVisualStyleBackColor = True
         '
         'cmdPrevLog
         '
-        resources.ApplyResources(Me.cmdPrevLog, "cmdPrevLog")
+        Me.cmdPrevLog.Dock = System.Windows.Forms.DockStyle.Top
+        Me.cmdPrevLog.Location = New System.Drawing.Point(0, 0)
         Me.cmdPrevLog.Name = "cmdPrevLog"
+        Me.cmdPrevLog.Size = New System.Drawing.Size(156, 42)
+        Me.cmdPrevLog.TabIndex = 0
+        Me.cmdPrevLog.Text = "Preview Log"
         Me.cmdPrevLog.UseVisualStyleBackColor = True
         '
         'pnlOutput
         '
-        resources.ApplyResources(Me.pnlOutput, "pnlOutput")
+        Me.pnlOutput.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlOutput.Controls.Add(Me.cmdPrtOutput)
         Me.pnlOutput.Controls.Add(Me.cmdPrevOutput)
+        Me.pnlOutput.Location = New System.Drawing.Point(332, 6)
         Me.pnlOutput.Name = "pnlOutput"
+        Me.pnlOutput.Size = New System.Drawing.Size(160, 92)
+        Me.pnlOutput.TabIndex = 2
         '
         'cmdPrtOutput
         '
-        resources.ApplyResources(Me.cmdPrtOutput, "cmdPrtOutput")
+        Me.cmdPrtOutput.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.cmdPrtOutput.Location = New System.Drawing.Point(0, 44)
         Me.cmdPrtOutput.Name = "cmdPrtOutput"
+        Me.cmdPrtOutput.Size = New System.Drawing.Size(156, 44)
+        Me.cmdPrtOutput.TabIndex = 1
+        Me.cmdPrtOutput.Text = "Print Output"
         Me.cmdPrtOutput.UseVisualStyleBackColor = True
         '
         'cmdPrevOutput
         '
-        resources.ApplyResources(Me.cmdPrevOutput, "cmdPrevOutput")
+        Me.cmdPrevOutput.Dock = System.Windows.Forms.DockStyle.Top
+        Me.cmdPrevOutput.Location = New System.Drawing.Point(0, 0)
         Me.cmdPrevOutput.Name = "cmdPrevOutput"
+        Me.cmdPrevOutput.Size = New System.Drawing.Size(156, 42)
+        Me.cmdPrevOutput.TabIndex = 0
+        Me.cmdPrevOutput.Text = "Preview Output"
         Me.cmdPrevOutput.UseVisualStyleBackColor = True
         '
         'cmdExitPreview
         '
-        resources.ApplyResources(Me.cmdExitPreview, "cmdExitPreview")
+        Me.cmdExitPreview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdExitPreview.Location = New System.Drawing.Point(168, 99)
         Me.cmdExitPreview.Name = "cmdExitPreview"
+        Me.cmdExitPreview.Size = New System.Drawing.Size(160, 32)
+        Me.cmdExitPreview.TabIndex = 3
+        Me.cmdExitPreview.Text = "Exit Preview and Print"
         Me.cmdExitPreview.UseVisualStyleBackColor = True
         '
         'dlgPrintPreviewOptions
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(496, 144)
         Me.Controls.Add(Me.cmdExitPreview)
         Me.Controls.Add(Me.pnlOutput)
         Me.Controls.Add(Me.pnlLog)
@@ -140,6 +187,8 @@ Partial Class dlgPrintPreviewOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPrintPreviewOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Print and Preview Options"
         Me.pnlEditor.ResumeLayout(False)
         Me.pnlEditor.PerformLayout()
         Me.pnlLog.ResumeLayout(False)
