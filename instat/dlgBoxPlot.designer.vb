@@ -38,7 +38,6 @@ Partial Class dlgBoxplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBoxplot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
@@ -68,191 +67,296 @@ Partial Class dlgBoxplot
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 268)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(149, 25)
+        Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblByFactors
         '
-        resources.ApplyResources(Me.lblByFactors, "lblByFactors")
+        Me.lblByFactors.AutoSize = True
+        Me.lblByFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblByFactors.Location = New System.Drawing.Point(272, 207)
         Me.lblByFactors.Name = "lblByFactors"
+        Me.lblByFactors.Size = New System.Drawing.Size(88, 13)
+        Me.lblByFactors.TabIndex = 6
         Me.lblByFactors.Tag = "By_Factor:"
+        Me.lblByFactors.Text = "Factor (Optional):"
         '
         'lblBySecondFactor
         '
-        resources.ApplyResources(Me.lblBySecondFactor, "lblBySecondFactor")
+        Me.lblBySecondFactor.AutoSize = True
+        Me.lblBySecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblBySecondFactor.Location = New System.Drawing.Point(272, 249)
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
+        Me.lblBySecondFactor.Size = New System.Drawing.Size(128, 13)
+        Me.lblBySecondFactor.TabIndex = 8
         Me.lblBySecondFactor.Tag = "By_Second_Factor:"
+        Me.lblBySecondFactor.Text = "Second Factor (Optional):"
         '
         'cmdBoxPlotOptions
         '
-        resources.ApplyResources(Me.cmdBoxPlotOptions, "cmdBoxPlotOptions")
+        Me.cmdBoxPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 237)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
+        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(149, 25)
+        Me.cmdBoxPlotOptions.TabIndex = 10
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
+        Me.cmdBoxPlotOptions.Text = "Box Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
         'rdoBoxplotTufte
         '
-        resources.ApplyResources(Me.rdoBoxplotTufte, "rdoBoxplotTufte")
+        Me.rdoBoxplotTufte.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoBoxplotTufte.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoxplotTufte.FlatAppearance.BorderSize = 2
         Me.rdoBoxplotTufte.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplotTufte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoBoxplotTufte.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoBoxplotTufte.Location = New System.Drawing.Point(17, 13)
         Me.rdoBoxplotTufte.Name = "rdoBoxplotTufte"
+        Me.rdoBoxplotTufte.Size = New System.Drawing.Size(133, 27)
+        Me.rdoBoxplotTufte.TabIndex = 1
         Me.rdoBoxplotTufte.TabStop = True
+        Me.rdoBoxplotTufte.Text = "Boxplot/Tufte Boxplot"
+        Me.rdoBoxplotTufte.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoxplotTufte.UseVisualStyleBackColor = True
         '
         'rdoJitter
         '
-        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
+        Me.rdoJitter.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoJitter.FlatAppearance.BorderSize = 2
         Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoJitter.Location = New System.Drawing.Point(148, 13)
         Me.rdoJitter.Name = "rdoJitter"
+        Me.rdoJitter.Size = New System.Drawing.Size(129, 27)
+        Me.rdoJitter.TabIndex = 2
         Me.rdoJitter.TabStop = True
+        Me.rdoJitter.Text = "Jitter Plot"
+        Me.rdoJitter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoJitter.UseVisualStyleBackColor = True
         '
         'rdoViolin
         '
-        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
+        Me.rdoViolin.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViolin.FlatAppearance.BorderSize = 2
         Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViolin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoViolin.Location = New System.Drawing.Point(275, 13)
         Me.rdoViolin.Name = "rdoViolin"
+        Me.rdoViolin.Size = New System.Drawing.Size(135, 27)
+        Me.rdoViolin.TabIndex = 3
         Me.rdoViolin.TabStop = True
+        Me.rdoViolin.Text = "Violin Plot"
+        Me.rdoViolin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViolin.UseVisualStyleBackColor = True
         '
         'lblJitter
         '
-        resources.ApplyResources(Me.lblJitter, "lblJitter")
+        Me.lblJitter.AutoSize = True
+        Me.lblJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblJitter.Location = New System.Drawing.Point(157, 353)
         Me.lblJitter.Name = "lblJitter"
+        Me.lblJitter.Size = New System.Drawing.Size(32, 13)
+        Me.lblJitter.TabIndex = 18
         Me.lblJitter.Tag = "By_Factor:"
+        Me.lblJitter.Text = "Jitter:"
         '
         'lblTransparency
         '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.AutoSize = True
+        Me.lblTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTransparency.Location = New System.Drawing.Point(251, 352)
         Me.lblTransparency.Name = "lblTransparency"
+        Me.lblTransparency.Size = New System.Drawing.Size(75, 13)
+        Me.lblTransparency.TabIndex = 20
         Me.lblTransparency.Tag = "By_Factor:"
+        Me.lblTransparency.Text = "Transparency:"
         '
         'ucrChkTufte
         '
+        Me.ucrChkTufte.AutoSize = True
         Me.ucrChkTufte.Checked = False
-        resources.ApplyResources(Me.ucrChkTufte, "ucrChkTufte")
+        Me.ucrChkTufte.Location = New System.Drawing.Point(275, 313)
         Me.ucrChkTufte.Name = "ucrChkTufte"
+        Me.ucrChkTufte.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkTufte.TabIndex = 24
         '
         'ucrInputSummaries
         '
         Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
+        Me.ucrInputSummaries.Location = New System.Drawing.Point(160, 375)
         Me.ucrInputSummaries.Name = "ucrInputSummaries"
+        Me.ucrInputSummaries.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSummaries.TabIndex = 22
         '
         'ucrChkGrouptoConnect
         '
+        Me.ucrChkGrouptoConnect.AutoSize = True
         Me.ucrChkGrouptoConnect.Checked = False
-        resources.ApplyResources(Me.ucrChkGrouptoConnect, "ucrChkGrouptoConnect")
+        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 375)
         Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
+        Me.ucrChkGrouptoConnect.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkGrouptoConnect.TabIndex = 15
         '
         'ucrNudTransparency
         '
+        Me.ucrNudTransparency.AutoSize = True
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Location = New System.Drawing.Point(332, 349)
         Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTransparency.TabIndex = 21
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudJitter
         '
+        Me.ucrNudJitter.AutoSize = True
         Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
+        Me.ucrNudJitter.Location = New System.Drawing.Point(195, 349)
         Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudJitter.TabIndex = 19
         Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkAddPoints
         '
+        Me.ucrChkAddPoints.AutoSize = True
         Me.ucrChkAddPoints.Checked = False
-        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
+        Me.ucrChkAddPoints.Location = New System.Drawing.Point(10, 349)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(149, 23)
+        Me.ucrChkAddPoints.TabIndex = 14
         '
         'ucrChkSwapParameters
         '
+        Me.ucrChkSwapParameters.AutoSize = True
         Me.ucrChkSwapParameters.Checked = False
-        resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
+        Me.ucrChkSwapParameters.Enabled = False
+        Me.ucrChkSwapParameters.Location = New System.Drawing.Point(275, 290)
         Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
+        Me.ucrChkSwapParameters.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkSwapParameters.TabIndex = 17
         '
         'ucrSaveBoxplot
         '
-        resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
+        Me.ucrSaveBoxplot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 401)
+        Me.ucrSaveBoxplot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(328, 24)
+        Me.ucrSaveBoxplot.TabIndex = 16
         '
         'ucrChkHorizontalBoxplot
         '
+        Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 324)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
+        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(238, 23)
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrChkVarWidth
         '
+        Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
-        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 299)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(238, 23)
+        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrVariablesAsFactorForBoxplot
         '
+        Me.ucrVariablesAsFactorForBoxplot.AutoSize = True
         Me.ucrVariablesAsFactorForBoxplot.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorForBoxplot, "ucrVariablesAsFactorForBoxplot")
+        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(275, 63)
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
         Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
+        Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(120, 130)
         Me.ucrVariablesAsFactorForBoxplot.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 5
         Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
         '
         'ucrSecondFactorReceiver
         '
+        Me.ucrSecondFactorReceiver.AutoSize = True
         Me.ucrSecondFactorReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrSecondFactorReceiver, "ucrSecondFactorReceiver")
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(275, 262)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrSecondFactorReceiver.strNcFilePath = ""
+        Me.ucrSecondFactorReceiver.TabIndex = 9
         Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
         'ucrSelectorBoxPlot
         '
+        Me.ucrSelectorBoxPlot.AutoSize = True
         Me.ucrSelectorBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorBoxPlot.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorBoxPlot, "ucrSelectorBoxPlot")
+        Me.ucrSelectorBoxPlot.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorBoxPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
+        Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorBoxPlot.TabIndex = 4
         '
         'ucrByFactorsReceiver
         '
+        Me.ucrByFactorsReceiver.AutoSize = True
         Me.ucrByFactorsReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrByFactorsReceiver, "ucrByFactorsReceiver")
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(275, 220)
+        Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
+        Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrByFactorsReceiver.strNcFilePath = ""
+        Me.ucrByFactorsReceiver.TabIndex = 7
         Me.ucrByFactorsReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 430)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 23
         '
         'ucrPnlPlots
         '
-        resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
+        Me.ucrPnlPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(7, 12)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(410, 35)
+        Me.ucrPnlPlots.TabIndex = 0
         '
         'dlgBoxplot
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(425, 484)
         Me.Controls.Add(Me.ucrChkTufte)
         Me.Controls.Add(Me.ucrInputSummaries)
         Me.Controls.Add(Me.ucrChkGrouptoConnect)
@@ -284,7 +388,9 @@ Partial Class dlgBoxplot
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplot"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Boxplot"
+        Me.Text = "Boxplot Options"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
