@@ -38,6 +38,7 @@ Partial Class sdgWindrose
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgWindrose))
         Me.ucrButtonsSdgWindrose = New instat.ucrButtonsSubdialogue()
         Me.tbpColours = New System.Windows.Forms.TabPage()
         Me.grpColours = New System.Windows.Forms.GroupBox()
@@ -67,21 +68,14 @@ Partial Class sdgWindrose
         '
         'ucrButtonsSdgWindrose
         '
-        Me.ucrButtonsSdgWindrose.AutoSize = True
-        Me.ucrButtonsSdgWindrose.Location = New System.Drawing.Point(106, 207)
+        resources.ApplyResources(Me.ucrButtonsSdgWindrose, "ucrButtonsSdgWindrose")
         Me.ucrButtonsSdgWindrose.Name = "ucrButtonsSdgWindrose"
-        Me.ucrButtonsSdgWindrose.Size = New System.Drawing.Size(224, 30)
-        Me.ucrButtonsSdgWindrose.TabIndex = 10
         '
         'tbpColours
         '
         Me.tbpColours.Controls.Add(Me.grpColours)
-        Me.tbpColours.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpColours, "tbpColours")
         Me.tbpColours.Name = "tbpColours"
-        Me.tbpColours.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColours.Size = New System.Drawing.Size(350, 158)
-        Me.tbpColours.TabIndex = 2
-        Me.tbpColours.Text = "Colours"
         Me.tbpColours.UseVisualStyleBackColor = True
         '
         'grpColours
@@ -92,101 +86,60 @@ Partial Class sdgWindrose
         Me.grpColours.Controls.Add(Me.rdoSequential)
         Me.grpColours.Controls.Add(Me.rdoDiverging)
         Me.grpColours.Controls.Add(Me.ucrPnlColourPalette)
-        Me.grpColours.Location = New System.Drawing.Point(6, 6)
+        resources.ApplyResources(Me.grpColours, "grpColours")
         Me.grpColours.Name = "grpColours"
-        Me.grpColours.Size = New System.Drawing.Size(302, 92)
-        Me.grpColours.TabIndex = 23
         Me.grpColours.TabStop = False
-        Me.grpColours.Text = "Type of Palette"
         '
         'lblPalette
         '
-        Me.lblPalette.AutoSize = True
-        Me.lblPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPalette.Location = New System.Drawing.Point(22, 64)
+        resources.ApplyResources(Me.lblPalette, "lblPalette")
         Me.lblPalette.Name = "lblPalette"
-        Me.lblPalette.Size = New System.Drawing.Size(43, 13)
-        Me.lblPalette.TabIndex = 23
-        Me.lblPalette.Text = "Palette:"
         '
         'ucrInputPalettes
         '
         Me.ucrInputPalettes.AddQuotesIfUnrecognised = True
-        Me.ucrInputPalettes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
         Me.ucrInputPalettes.GetSetSelectedIndex = -1
         Me.ucrInputPalettes.IsReadOnly = False
-        Me.ucrInputPalettes.Location = New System.Drawing.Point(71, 60)
         Me.ucrInputPalettes.Name = "ucrInputPalettes"
-        Me.ucrInputPalettes.Size = New System.Drawing.Size(146, 26)
-        Me.ucrInputPalettes.TabIndex = 22
         '
         'rdoQualitative
         '
-        Me.rdoQualitative.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoQualitative, "rdoQualitative")
         Me.rdoQualitative.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoQualitative.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoQualitative.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoQualitative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoQualitative.FlatAppearance.BorderSize = 2
         Me.rdoQualitative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoQualitative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoQualitative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoQualitative.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoQualitative.Location = New System.Drawing.Point(199, 24)
         Me.rdoQualitative.Name = "rdoQualitative"
-        Me.rdoQualitative.Size = New System.Drawing.Size(91, 29)
-        Me.rdoQualitative.TabIndex = 21
-        Me.rdoQualitative.Text = "Qualitative"
-        Me.rdoQualitative.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoQualitative.UseVisualStyleBackColor = True
         '
         'rdoSequential
         '
-        Me.rdoSequential.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoSequential, "rdoSequential")
         Me.rdoSequential.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSequential.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoSequential.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSequential.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSequential.FlatAppearance.BorderSize = 2
         Me.rdoSequential.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSequential.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSequential.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSequential.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSequential.Location = New System.Drawing.Point(21, 24)
         Me.rdoSequential.Name = "rdoSequential"
-        Me.rdoSequential.Size = New System.Drawing.Size(91, 29)
-        Me.rdoSequential.TabIndex = 19
-        Me.rdoSequential.Text = "Sequential"
-        Me.rdoSequential.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSequential.UseVisualStyleBackColor = True
         '
         'rdoDiverging
         '
-        Me.rdoDiverging.Appearance = System.Windows.Forms.Appearance.Button
+        resources.ApplyResources(Me.rdoDiverging, "rdoDiverging")
         Me.rdoDiverging.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoDiverging.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoDiverging.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDiverging.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDiverging.FlatAppearance.BorderSize = 2
         Me.rdoDiverging.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDiverging.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDiverging.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoDiverging.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDiverging.Location = New System.Drawing.Point(110, 24)
         Me.rdoDiverging.Name = "rdoDiverging"
-        Me.rdoDiverging.Size = New System.Drawing.Size(91, 29)
-        Me.rdoDiverging.TabIndex = 20
-        Me.rdoDiverging.Text = "Diverging"
-        Me.rdoDiverging.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDiverging.UseVisualStyleBackColor = True
         '
         'ucrPnlColourPalette
         '
-        Me.ucrPnlColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColourPalette.Location = New System.Drawing.Point(21, 24)
+        resources.ApplyResources(Me.ucrPnlColourPalette, "ucrPnlColourPalette")
         Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
-        Me.ucrPnlColourPalette.Size = New System.Drawing.Size(269, 29)
-        Me.ucrPnlColourPalette.TabIndex = 18
         '
         'tbpOptions
         '
@@ -200,149 +153,99 @@ Partial Class sdgWindrose
         Me.tbpOptions.Controls.Add(Me.lblCalmWind)
         Me.tbpOptions.Controls.Add(Me.lblNoofDirections)
         Me.tbpOptions.Controls.Add(Me.lblNoOfSpeeds)
-        Me.tbpOptions.Location = New System.Drawing.Point(4, 22)
+        resources.ApplyResources(Me.tbpOptions, "tbpOptions")
         Me.tbpOptions.Name = "tbpOptions"
-        Me.tbpOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOptions.Size = New System.Drawing.Size(350, 158)
-        Me.tbpOptions.TabIndex = 1
-        Me.tbpOptions.Text = "Windrose Options"
         Me.tbpOptions.UseVisualStyleBackColor = True
         '
         'ucrInputSpeedCuts
         '
         Me.ucrInputSpeedCuts.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpeedCuts.AutoSize = True
+        resources.ApplyResources(Me.ucrInputSpeedCuts, "ucrInputSpeedCuts")
         Me.ucrInputSpeedCuts.IsMultiline = False
         Me.ucrInputSpeedCuts.IsReadOnly = False
-        Me.ucrInputSpeedCuts.Location = New System.Drawing.Point(102, 90)
         Me.ucrInputSpeedCuts.Name = "ucrInputSpeedCuts"
-        Me.ucrInputSpeedCuts.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputSpeedCuts.TabIndex = 7
         '
         'ucrInputTheme
         '
         Me.ucrInputTheme.AddQuotesIfUnrecognised = True
-        Me.ucrInputTheme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        resources.ApplyResources(Me.ucrInputTheme, "ucrInputTheme")
         Me.ucrInputTheme.GetSetSelectedIndex = -1
         Me.ucrInputTheme.IsReadOnly = False
-        Me.ucrInputTheme.Location = New System.Drawing.Point(102, 117)
         Me.ucrInputTheme.Name = "ucrInputTheme"
-        Me.ucrInputTheme.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputTheme.TabIndex = 9
         '
         'ucrNudNoOfDirections
         '
-        Me.ucrNudNoOfDirections.AutoSize = True
+        resources.ApplyResources(Me.ucrNudNoOfDirections, "ucrNudNoOfDirections")
         Me.ucrNudNoOfDirections.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfDirections.Location = New System.Drawing.Point(102, 12)
         Me.ucrNudNoOfDirections.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfDirections.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Name = "ucrNudNoOfDirections"
-        Me.ucrNudNoOfDirections.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudNoOfDirections.TabIndex = 1
         Me.ucrNudNoOfDirections.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblTheme
         '
-        Me.lblTheme.AutoSize = True
-        Me.lblTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTheme.Location = New System.Drawing.Point(11, 120)
+        resources.ApplyResources(Me.lblTheme, "lblTheme")
         Me.lblTheme.Name = "lblTheme"
-        Me.lblTheme.Size = New System.Drawing.Size(43, 13)
-        Me.lblTheme.TabIndex = 8
-        Me.lblTheme.Text = "Theme:"
         '
         'ucrNudNoOfSpeeds
         '
-        Me.ucrNudNoOfSpeeds.AutoSize = True
+        resources.ApplyResources(Me.ucrNudNoOfSpeeds, "ucrNudNoOfSpeeds")
         Me.ucrNudNoOfSpeeds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfSpeeds.Location = New System.Drawing.Point(102, 64)
         Me.ucrNudNoOfSpeeds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Name = "ucrNudNoOfSpeeds"
-        Me.ucrNudNoOfSpeeds.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudNoOfSpeeds.TabIndex = 5
         Me.ucrNudNoOfSpeeds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSpeedCuts
         '
-        Me.lblSpeedCuts.AutoSize = True
-        Me.lblSpeedCuts.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSpeedCuts.Location = New System.Drawing.Point(10, 94)
+        resources.ApplyResources(Me.lblSpeedCuts, "lblSpeedCuts")
         Me.lblSpeedCuts.Name = "lblSpeedCuts"
-        Me.lblSpeedCuts.Size = New System.Drawing.Size(65, 13)
-        Me.lblSpeedCuts.TabIndex = 6
-        Me.lblSpeedCuts.Text = "Speed Cuts:"
         '
         'ucrNudCalmWind
         '
-        Me.ucrNudCalmWind.AutoSize = True
+        resources.ApplyResources(Me.ucrNudCalmWind, "ucrNudCalmWind")
         Me.ucrNudCalmWind.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCalmWind.Location = New System.Drawing.Point(102, 38)
         Me.ucrNudCalmWind.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCalmWind.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Name = "ucrNudCalmWind"
-        Me.ucrNudCalmWind.Size = New System.Drawing.Size(72, 20)
-        Me.ucrNudCalmWind.TabIndex = 3
         Me.ucrNudCalmWind.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblCalmWind
         '
-        Me.lblCalmWind.AutoSize = True
-        Me.lblCalmWind.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCalmWind.Location = New System.Drawing.Point(10, 41)
+        resources.ApplyResources(Me.lblCalmWind, "lblCalmWind")
         Me.lblCalmWind.Name = "lblCalmWind"
-        Me.lblCalmWind.Size = New System.Drawing.Size(61, 13)
-        Me.lblCalmWind.TabIndex = 2
-        Me.lblCalmWind.Text = "Calm Wind:"
         '
         'lblNoofDirections
         '
-        Me.lblNoofDirections.AutoSize = True
-        Me.lblNoofDirections.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNoofDirections.Location = New System.Drawing.Point(10, 14)
+        resources.ApplyResources(Me.lblNoofDirections, "lblNoofDirections")
         Me.lblNoofDirections.Name = "lblNoofDirections"
-        Me.lblNoofDirections.Size = New System.Drawing.Size(89, 13)
-        Me.lblNoofDirections.TabIndex = 0
-        Me.lblNoofDirections.Text = "No. of Directions:"
         '
         'lblNoOfSpeeds
         '
-        Me.lblNoOfSpeeds.AutoSize = True
-        Me.lblNoOfSpeeds.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNoOfSpeeds.Location = New System.Drawing.Point(10, 67)
+        resources.ApplyResources(Me.lblNoOfSpeeds, "lblNoOfSpeeds")
         Me.lblNoOfSpeeds.Name = "lblNoOfSpeeds"
-        Me.lblNoOfSpeeds.Size = New System.Drawing.Size(78, 13)
-        Me.lblNoOfSpeeds.TabIndex = 4
-        Me.lblNoOfSpeeds.Text = "No. of Speeds:"
         '
         'tbpWindRoseOptions
         '
         Me.tbpWindRoseOptions.Controls.Add(Me.tbpOptions)
         Me.tbpWindRoseOptions.Controls.Add(Me.tbpColours)
-        Me.tbpWindRoseOptions.Location = New System.Drawing.Point(0, 2)
+        resources.ApplyResources(Me.tbpWindRoseOptions, "tbpWindRoseOptions")
         Me.tbpWindRoseOptions.Name = "tbpWindRoseOptions"
         Me.tbpWindRoseOptions.SelectedIndex = 0
-        Me.tbpWindRoseOptions.Size = New System.Drawing.Size(358, 184)
-        Me.tbpWindRoseOptions.TabIndex = 11
         '
         'sdgWindrose
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(384, 239)
         Me.Controls.Add(Me.tbpWindRoseOptions)
         Me.Controls.Add(Me.ucrButtonsSdgWindrose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgWindrose"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Wind Rose"
         Me.tbpColours.ResumeLayout(False)
         Me.grpColours.ResumeLayout(False)
         Me.grpColours.PerformLayout()

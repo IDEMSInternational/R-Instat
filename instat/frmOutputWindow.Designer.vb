@@ -55,30 +55,31 @@ Partial Class frmOutputWindow
         Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(722, 262)
         Me.ucrWPFrtfElementHost.TabIndex = 0
         Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
+        Me.ucrWPFrtfElementHost.Child = Nothing
         '
         'mnuContextRTB
         '
         Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(151, 48)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(150, 48)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyRTB.Size = New System.Drawing.Size(149, 22)
         Me.CopyRTB.Text = "Copy RichText"
         '
         'CopyImageRTB
         '
         Me.CopyImageRTB.Enabled = False
         Me.CopyImageRTB.Name = "CopyImageRTB"
-        Me.CopyImageRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyImageRTB.Size = New System.Drawing.Size(149, 22)
         Me.CopyImageRTB.Text = "Copy Image"
         '
         'frmOutputWindow
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(722, 262)
         Me.Controls.Add(Me.ucrWPFrtfElementHost)
         Me.Name = "frmOutputWindow"
