@@ -912,6 +912,9 @@
   <data name="&gt;&gt;ucrSelectorConversions.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 447</value>
   </data>

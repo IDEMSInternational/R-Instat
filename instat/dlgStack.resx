@@ -615,6 +615,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 447</value>
   </data>
@@ -779,6 +782,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorStack.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 387</value>
@@ -1019,9 +1025,6 @@
   </data>
   <data name="&gt;&gt;ucrSaveNewDataName.ZOrder" xml:space="preserve">
     <value>33</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>

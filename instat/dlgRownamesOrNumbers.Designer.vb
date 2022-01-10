@@ -133,7 +133,7 @@ Partial Class dlgRowNamesOrNumbers
         '
         'ucrReceiverRowNames
         '
-        Me.ucrReceiverRowNames.frmParent = Nothing
+        Me.ucrReceiverRowNames.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverRowNames, "ucrReceiverRowNames")
         Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
         Me.ucrReceiverRowNames.Selector = Nothing
@@ -172,6 +172,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.ResumeLayout(False)
         Me.grpboxOptionsforRowNamesorNumbercols.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

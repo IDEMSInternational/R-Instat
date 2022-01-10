@@ -70,6 +70,7 @@ Partial Class dlgImportOpenRefine
         'ucrInputFormat
         '
         Me.ucrInputFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormat.GetSetSelectedIndex = -1
         Me.ucrInputFormat.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
         Me.ucrInputFormat.Name = "ucrInputFormat"

@@ -281,6 +281,11 @@ Partial Class dlgMachineLearning
         Me.ucrChkClassificationPerformance.Name = "ucrChkClassificationPerformance"
         Me.ucrChkClassificationPerformance.Size = New System.Drawing.Size(206, 20)
         Me.ucrChkClassificationPerformance.TabIndex = 16
+        Me.UcrButtons1.AutoSize = True
+        Me.UcrButtons1.Location = New System.Drawing.Point(7, 384)
+        Me.UcrButtons1.Name = "UcrButtons1"
+        Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
+        Me.UcrButtons1.TabIndex = 13
         '
         'dlgMachineLearning
         '
@@ -304,6 +309,9 @@ Partial Class dlgMachineLearning
         Me.Controls.Add(Me.ucrReceiverRegressionResponse)
         Me.Controls.Add(Me.ucrChkRegressionPerformance)
         Me.Controls.Add(Me.ucrChkClassificationPerformance)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(418, 438)
+        Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

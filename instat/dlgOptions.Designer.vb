@@ -55,9 +55,9 @@ Partial Class dlgOptions
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.tbpImport = New System.Windows.Forms.TabPage()
-        Me.pnImportData = New System.Windows.Forms.Panel()
-        Me.ucrNudPreviewRows = New instat.ucrNud()
         Me.lblPreviewRows = New System.Windows.Forms.Label()
+        Me.ucrNudPreviewRows = New instat.ucrNud()
+        Me.pnImportData = New System.Windows.Forms.Panel()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
         Me.ucrChkShowRCommandsinOutputWindow = New instat.ucrCheck()
         Me.ucrChkIncludeCommentsbyDefault = New instat.ucrCheck()
@@ -272,10 +272,10 @@ Partial Class dlgOptions
         Me.tbpImport.Name = "tbpImport"
         Me.tbpImport.UseVisualStyleBackColor = True
         '
-        'pnImportData
+        'lblPreviewRows
         '
-        resources.ApplyResources(Me.pnImportData, "pnImportData")
-        Me.pnImportData.Name = "pnImportData"
+        resources.ApplyResources(Me.lblPreviewRows, "lblPreviewRows")
+        Me.lblPreviewRows.Name = "lblPreviewRows"
         '
         'ucrNudPreviewRows
         '
@@ -287,10 +287,10 @@ Partial Class dlgOptions
         Me.ucrNudPreviewRows.Name = "ucrNudPreviewRows"
         Me.ucrNudPreviewRows.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
-        'lblPreviewRows
+        'pnImportData
         '
-        resources.ApplyResources(Me.lblPreviewRows, "lblPreviewRows")
-        Me.lblPreviewRows.Name = "lblPreviewRows"
+        resources.ApplyResources(Me.pnImportData, "pnImportData")
+        Me.pnImportData.Name = "pnImportData"
         '
         'tbpOutputWindow
         '

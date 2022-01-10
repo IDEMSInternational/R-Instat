@@ -271,6 +271,7 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext3
         '
         Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.GetSetSelectedIndex = -1
         Me.ucrInputContext3.IsReadOnly = False
         Me.ucrInputContext3.Location = New System.Drawing.Point(141, 130)
         Me.ucrInputContext3.Name = "ucrInputContext3"
@@ -312,6 +313,7 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext2
         '
         Me.ucrInputContext2.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext2.GetSetSelectedIndex = -1
         Me.ucrInputContext2.IsReadOnly = False
         Me.ucrInputContext2.Location = New System.Drawing.Point(141, 84)
         Me.ucrInputContext2.Name = "ucrInputContext2"
@@ -333,6 +335,7 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext1
         '
         Me.ucrInputContext1.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext1.GetSetSelectedIndex = -1
         Me.ucrInputContext1.IsReadOnly = False
         Me.ucrInputContext1.Location = New System.Drawing.Point(141, 38)
         Me.ucrInputContext1.Name = "ucrInputContext1"
@@ -396,12 +399,14 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrSavePlot
         '
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 497)
+        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(255, 24)
         Me.ucrSavePlot.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 526)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -446,6 +451,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 582)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)

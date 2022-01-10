@@ -55,6 +55,7 @@ Partial Class dlgStandardiseCountryNames
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 198)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -74,6 +75,7 @@ Partial Class dlgStandardiseCountryNames
         '
         'ucrSelectorStandardiseCountry
         '
+        Me.ucrSelectorStandardiseCountry.bDropUnusedFilterLevels = False
         Me.ucrSelectorStandardiseCountry.bShowHiddenColumns = False
         Me.ucrSelectorStandardiseCountry.bUseCurrentFilter = True
         Me.ucrSelectorStandardiseCountry.Location = New System.Drawing.Point(10, 10)
@@ -86,6 +88,7 @@ Partial Class dlgStandardiseCountryNames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 253)
         Me.Controls.Add(Me.lblCountryNames)
         Me.Controls.Add(Me.ucrBase)

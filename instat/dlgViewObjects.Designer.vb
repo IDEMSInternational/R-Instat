@@ -97,6 +97,7 @@ Partial Class dlgViewObjects
         '
         'ucrSelectorForViewObject
         '
+        Me.ucrSelectorForViewObject.bDropUnusedFilterLevels = False
         Me.ucrSelectorForViewObject.bShowHiddenColumns = False
         Me.ucrSelectorForViewObject.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForViewObject, "ucrSelectorForViewObject")
