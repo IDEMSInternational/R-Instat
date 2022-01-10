@@ -109,7 +109,11 @@ Public Class clsOutputElement
     ''' <param name="strScript"></param>
     Public Sub AddScript(strScript As String)
         Dim rScript As New clsRScript(strScript)
-        For Each rToken In rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
+        If RScript.GetLstTokens(RScript.GetLstLexemes(strScript)) Is Nothing Then
+            Exit Sub
+        End If
+
+        For Each rToken In RScript.GetLstTokens(RScript.GetLstLexemes(strScript)) 'rScript.lstTokens
             _formattedRScript.Add(New clsRScriptElement With
                 {
                     .Text = rToken.strTxt,

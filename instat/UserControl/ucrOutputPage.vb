@@ -159,6 +159,10 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
+        If outputElement.FormatedRScript Is Nothing Then
+            Exit Function
+        End If
+
         Dim panel As New Panel With {
             .Height = 10, ' = 10 'small height as panel will grow
             .AutoSize = True,
