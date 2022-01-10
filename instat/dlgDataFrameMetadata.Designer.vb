@@ -58,6 +58,7 @@ Partial Class dlgDataFrameMetaData
         Me.Name = "dlgDataFrameMetaData"
         Me.Tag = "Sheet_Metadata"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

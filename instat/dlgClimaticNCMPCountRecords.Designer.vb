@@ -142,6 +142,7 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -151,6 +152,7 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 336)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveCountRecords)

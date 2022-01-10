@@ -150,9 +150,10 @@ Partial Class dlgOptionsByContextFitModel
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 429)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 54)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 54)
         Me.ucrBase.TabIndex = 0
         '
         'grpContexts
@@ -325,6 +326,7 @@ Partial Class dlgOptionsByContextFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(553, 486)
         Me.Controls.Add(Me.lblOptions)
         Me.Controls.Add(Me.ucrReceiverOptions)

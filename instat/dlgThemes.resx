@@ -204,6 +204,9 @@
   <data name="ucrSaveTheme.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 182</value>
   </data>
+  <data name="ucrSaveTheme.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveTheme.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
   </data>
@@ -227,6 +230,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>423, 279</value>
@@ -254,6 +260,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorThemes.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 212</value>

@@ -58,6 +58,7 @@ Partial Class dlgColumnMetadata
         Me.Name = "dlgColumnMetadata"
         Me.Tag = "Column_Metadata"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

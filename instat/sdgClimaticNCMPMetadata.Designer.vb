@@ -120,6 +120,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(388, 233)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverLongitude)

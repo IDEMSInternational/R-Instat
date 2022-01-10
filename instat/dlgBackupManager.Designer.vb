@@ -41,25 +41,26 @@ Partial Class dlgBackupManager
         resources.ApplyResources(Me.lblBackupHeader, "lblBackupHeader")
         Me.lblBackupHeader.Name = "lblBackupHeader"
         '
-        'ucrLstViewDataBackups
+        'ctrLstViewDataBackups
         '
         Me.ctrLstViewDataBackups.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ctrLstViewColName, Me.ctrLstViewColDate, Me.ctrLstViewSize})
-        resources.ApplyResources(Me.ctrLstViewDataBackups, "ucrLstViewDataBackups")
-        Me.ctrLstViewDataBackups.Name = "ucrLstViewDataBackups"
+        Me.ctrLstViewDataBackups.HideSelection = False
+        resources.ApplyResources(Me.ctrLstViewDataBackups, "ctrLstViewDataBackups")
+        Me.ctrLstViewDataBackups.Name = "ctrLstViewDataBackups"
         Me.ctrLstViewDataBackups.UseCompatibleStateImageBehavior = False
         Me.ctrLstViewDataBackups.View = System.Windows.Forms.View.Details
         '
-        'ucrLstViewColName
+        'ctrLstViewColName
         '
-        resources.ApplyResources(Me.ctrLstViewColName, "ucrLstViewColName")
+        resources.ApplyResources(Me.ctrLstViewColName, "ctrLstViewColName")
         '
-        'ucrLstViewColDate
+        'ctrLstViewColDate
         '
-        resources.ApplyResources(Me.ctrLstViewColDate, "ucrLstViewColDate")
+        resources.ApplyResources(Me.ctrLstViewColDate, "ctrLstViewColDate")
         '
-        'ucrLstViewSize
+        'ctrLstViewSize
         '
-        resources.ApplyResources(Me.ctrLstViewSize, "ucrLstViewSize")
+        resources.ApplyResources(Me.ctrLstViewSize, "ctrLstViewSize")
         '
         'cmdClose
         '

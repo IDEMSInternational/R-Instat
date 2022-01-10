@@ -50,10 +50,9 @@ Partial Class ucrOutputWindow
         Me.lblHeaderOutputWindow.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeaderOutputWindow.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeaderOutputWindow.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeaderOutputWindow.Location = New System.Drawing.Point(4, 0)
-        Me.lblHeaderOutputWindow.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHeaderOutputWindow.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderOutputWindow.Name = "lblHeaderOutputWindow"
-        Me.lblHeaderOutputWindow.Size = New System.Drawing.Size(955, 25)
+        Me.lblHeaderOutputWindow.Size = New System.Drawing.Size(716, 20)
         Me.lblHeaderOutputWindow.TabIndex = 6
         Me.lblHeaderOutputWindow.Text = "Output Window"
         Me.lblHeaderOutputWindow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -66,32 +65,31 @@ Partial Class ucrOutputWindow
         Me.tlpTableContainer.Controls.Add(Me.UcrOutputPages, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
-        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 2
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(963, 322)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(722, 262)
         Me.tlpTableContainer.TabIndex = 7
         '
         'UcrOutputPages
         '
         Me.UcrOutputPages.BackColor = System.Drawing.Color.White
         Me.UcrOutputPages.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcrOutputPages.Location = New System.Drawing.Point(3, 27)
-        Me.UcrOutputPages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.UcrOutputPages.Location = New System.Drawing.Point(2, 22)
+        Me.UcrOutputPages.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.UcrOutputPages.Name = "UcrOutputPages"
-        Me.UcrOutputPages.Size = New System.Drawing.Size(957, 293)
+        Me.UcrOutputPages.Size = New System.Drawing.Size(718, 238)
         Me.UcrOutputPages.TabIndex = 7
         '
         'ucrOutputWindow
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ucrOutputWindow"
-        Me.Size = New System.Drawing.Size(963, 322)
+        Me.Size = New System.Drawing.Size(722, 262)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
 

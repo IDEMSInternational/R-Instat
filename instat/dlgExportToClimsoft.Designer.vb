@@ -24,13 +24,14 @@ Partial Class dlgExportToClimsoft
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'dlgExportForClimsoft
+        'dlgExportToClimsoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(521, 312)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Name = "dlgExportForClimsoft"
+        Me.Name = "dlgExportToClimsoft"
         Me.Text = "Export For Climsoft"
         Me.ResumeLayout(False)
 

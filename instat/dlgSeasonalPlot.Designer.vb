@@ -390,6 +390,7 @@ Partial Class dlgSeasonalPlot
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 468)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -399,6 +400,7 @@ Partial Class dlgSeasonalPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 521)
         Me.Controls.Add(Me.ucrInputEstimatesSummary)
         Me.Controls.Add(Me.lblEstimatesSummary)

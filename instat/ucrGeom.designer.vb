@@ -51,6 +51,7 @@ Partial Class ucrGeom
         'ucrInputGeoms
         '
         Me.ucrInputGeoms.AddQuotesIfUnrecognised = True
+        Me.ucrInputGeoms.GetSetSelectedIndex = -1
         Me.ucrInputGeoms.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputGeoms, "ucrInputGeoms")
         Me.ucrInputGeoms.Name = "ucrInputGeoms"

@@ -207,102 +207,6 @@
   <data name="&gt;&gt;lblSigFigs.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrNudColumnFactors.Name" xml:space="preserve">
-    <value>ucrNudColumnFactors</value>
-  </data>
-  <data name="&gt;&gt;ucrNudColumnFactors.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudColumnFactors.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrNudColumnFactors.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblColumnFactors.Name" xml:space="preserve">
-    <value>lblColumnFactors</value>
-  </data>
-  <data name="&gt;&gt;lblColumnFactors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblColumnFactors.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblColumnFactors.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummaryVariablesAsRow.Name" xml:space="preserve">
-    <value>ucrChkDisplaySummaryVariablesAsRow</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummaryVariablesAsRow.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummaryVariablesAsRow.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummaryVariablesAsRow.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayVariablesAsRows.Name" xml:space="preserve">
-    <value>ucrChkDisplayVariablesAsRows</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayVariablesAsRows.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayVariablesAsRows.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayVariablesAsRows.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummariesAsRow.Name" xml:space="preserve">
-    <value>ucrChkDisplaySummariesAsRow</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummariesAsRow.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummariesAsRow.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplaySummariesAsRow.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSigFigs.Name" xml:space="preserve">
-    <value>ucrNudSigFigs</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSigFigs.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSigFigs.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 394</value>
-  </data>
-  <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 119</value>
-  </data>
-  <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="grpDisplay.Text" xml:space="preserve">
-    <value>Display</value>
-  </data>
-  <data name="&gt;&gt;grpDisplay.Name" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;grpDisplay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpDisplay.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 49</value>
   </data>
@@ -437,6 +341,30 @@
   </data>
   <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 394</value>
+  </data>
+  <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 119</value>
+  </data>
+  <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="grpDisplay.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Name" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="rdoBoth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -783,6 +711,9 @@
   <data name="&gt;&gt;ucrChkSummaries.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 545</value>
   </data>
@@ -809,6 +740,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>489, 605</value>

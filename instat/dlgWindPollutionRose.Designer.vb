@@ -292,6 +292,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(8, 351)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -301,6 +302,7 @@ Partial Class dlgWindPollutionRose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(526, 416)
         Me.Controls.Add(Me.ucrChkCompareTwoSets)
         Me.Controls.Add(Me.lblFacetTwo)

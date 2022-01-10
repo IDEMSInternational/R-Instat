@@ -74,6 +74,7 @@ Partial Class dlgCalculationsSummary
         'lstCalculations
         '
         Me.lstCalculations.FullRowSelect = True
+        Me.lstCalculations.HideSelection = False
         resources.ApplyResources(Me.lstCalculations, "lstCalculations")
         Me.lstCalculations.Name = "lstCalculations"
         Me.lstCalculations.UseCompatibleStateImageBehavior = False

@@ -44,6 +44,7 @@ Partial Class dlgHelpVignettes
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 145)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -121,6 +122,7 @@ Partial Class dlgHelpVignettes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(436, 207)
         Me.Controls.Add(Me.ucrInputFunctionName)
         Me.Controls.Add(Me.ucrChkFunction)
