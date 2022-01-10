@@ -143,10 +143,10 @@ Public Class sdgTwoWayFrequencies
                 rdoBar.Enabled = True
                 clsTwoWayGraphFreq.RemoveParameterByName("facet.grid")
             ElseIf clsTwoWayGraphFreq.GetParameter("fun").strArgumentValue = Chr(34) & "grpfrq" & Chr(34) Then
-                rdoLineGraph.Enabled = False
-                rdoDot.Enabled = True
                 rdoViolinPlot.Enabled = True
+                rdoDot.Enabled = True
                 rdoBoxPlot.Enabled = True
+                rdoLineGraph.Enabled = False
                 rdoBar.Enabled = True
             End If
         End If
