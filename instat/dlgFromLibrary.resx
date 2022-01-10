@@ -143,6 +143,18 @@
   <data name="&gt;&gt;cmdLibraryCollection.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="clmDatasets.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="clmDatasets.Width" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="clmDesc.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="clmDesc.Width" type="System.Int32, mscorlib">
+    <value>266</value>
+  </data>
   <data name="lstCollection.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 79</value>
   </data>
@@ -163,18 +175,6 @@
   </data>
   <data name="&gt;&gt;lstCollection.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="clmDatasets.Text" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="clmDatasets.Width" type="System.Int32, mscorlib">
-    <value>142</value>
-  </data>
-  <data name="clmDesc.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="clmDesc.Width" type="System.Int32, mscorlib">
-    <value>266</value>
   </data>
   <data name="lblFromPackage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -297,6 +297,9 @@
   <data name="ucrInputPackages.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="ucrInputPackages.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputPackages.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 51</value>
   </data>
@@ -304,7 +307,7 @@
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrInputPackages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>0, 0</value>
   </data>
   <data name="ucrInputPackages.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -323,6 +326,9 @@
   </data>
   <data name="ucrBase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="ucrBase.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 287</value>
@@ -348,9 +354,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="ucrPnlOptions.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 2</value>
   </data>
@@ -375,8 +378,8 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="ucrNewDataFrameName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrNewDataFrameName.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 259</value>
