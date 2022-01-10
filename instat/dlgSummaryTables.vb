@@ -26,12 +26,13 @@ Public Class dlgSummaryTables
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
-        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-        clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
-        clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
-        clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction,
-        clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
-    Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator As New ROperator
+            clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
+            clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+            clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
+            clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction,
+            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
+    Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator,
+            clsTabFootnoteOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -177,6 +178,7 @@ Public Class dlgSummaryTables
         clsTabStylePxFunction = New RFunction
         clsTabStyleCellTitleFunction = New RFunction
         clsJoiningPipeOperator = New ROperator
+        clsTabFootnoteOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -192,6 +194,10 @@ Public Class dlgSummaryTables
         clsConcFunction.SetRCommand("c")
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
+
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsMutableOperator, iPosition:=0)
@@ -366,7 +372,7 @@ Public Class dlgSummaryTables
                                          clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub

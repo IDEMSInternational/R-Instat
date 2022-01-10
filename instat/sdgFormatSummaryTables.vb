@@ -5,7 +5,7 @@ Public Class sdgFormatSummaryTables
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
         clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
-    Private clsPipeOperator, clsMutableOperator, clsJoiningOperator As New ROperator
+    Private clsPipeOperator, clsMutableOperator, clsJoiningOperator, clsTabFootnoteOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -305,7 +305,7 @@ Public Class sdgFormatSummaryTables
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
-                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction,
+                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction, clsNewTabFootnoteOperator As ROperator,
                         clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction)
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
@@ -331,16 +331,17 @@ Public Class sdgFormatSummaryTables
         clsTabStyleFunction = clsNewTabStyleFunction
         clsTabStyleCellTextFunction = clsNewTabStyleCellTextFunction
         clsTabStylePxFunction = clsNewTabStylePxFunction
+        clsTabFootnoteOperator = clsNewTabFootnoteOperator
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
         ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkTitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkTitleFootnote.SetRCode(clsTabFootnoteOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChKAddSecondFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkSubtitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkSubtitleFootnote.SetRCode(clsTabFootnoteOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddSourcenote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddHeader.SetRCode(clsMutableOperator, bReset, bCloneIfNeeded:=True)
         ucrChkStyleText.SetRCode(clsStyleListFunction, bReset, bCloneIfNeeded:=True)
@@ -380,6 +381,7 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
         AddTableTitle()
+        AddFootnote()
     End Sub
 
     Private Sub AddTableTitle()
@@ -396,7 +398,6 @@ Public Class sdgFormatSummaryTables
             clsPipeOperator.RemoveParameterByName("title_font")
         End If
     End Sub
-
 
     Private Sub ucrInputTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlValueChanged
         AddTableTitle()
@@ -419,25 +420,31 @@ Public Class sdgFormatSummaryTables
     Private Sub AddFootnote()
         If ucrChkTitleFootnote.Checked Then
             If Not ucrInputTitleFootnote.IsEmpty Then
-                clsPipeOperator.AddParameter("titlefootnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
+                clsTabFootnoteOperator.AddParameter("titlefootnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
             Else
-                clsPipeOperator.RemoveParameterByName("titlefootnote")
+                clsTabFootnoteOperator.RemoveParameterByName("titlefootnote")
             End If
         Else
-            clsPipeOperator.RemoveParameterByName("title\subtitle")
+            clsTabFootnoteOperator.RemoveParameterByName("titlefootnote")
         End If
 
         If ucrChkSubtitleFootnote.Checked Then
             If Not ucrInputSubtitleFootnote.IsEmpty Then
-                clsPipeOperator.AddParameter("subtitlefootnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
+                clsTabFootnoteOperator.AddParameter("subtitlefootnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
             Else
-                clsPipeOperator.RemoveParameterByName("subtitlefootnote")
+                clsTabFootnoteOperator.RemoveParameterByName("subtitlefootnote")
             End If
         Else
-            clsPipeOperator.RemoveParameterByName("subtitlefootnote")
+            clsTabFootnoteOperator.RemoveParameterByName("subtitlefootnote")
         End If
 
+        If (ucrChkSubtitleFootnote.Checked OrElse ucrChkTitleFootnote.Checked) AndAlso clsTabFootnoteOperator.clsParameters.Count >= 1 AndAlso ucrChkAddTitleSubtitle.Checked Then
+            clsPipeOperator.AddParameter("title_footnote", clsROperatorParameter:=clsTabFootnoteOperator, iPosition:=1)
+        Else
+            clsPipeOperator.RemoveParameterByName("title_footnote")
+        End If
     End Sub
+
     Private Sub ucrChkTitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTitleFootnote.ControlValueChanged
         If ucrChkTitleFootnote.Checked Then
             clsTabFootnoteTitleFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteTitleLocationFunction, iPosition:=2)
@@ -475,6 +482,7 @@ Public Class sdgFormatSummaryTables
         Else
             clsTabFootnoteSubtitleFunction.RemoveParameterByName("footnote")
         End If
+        AddFootnote()
     End Sub
 
     Private Sub ucrInputAddSourceNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAddSourceNote.ControlValueChanged
@@ -636,8 +644,6 @@ Public Class sdgFormatSummaryTables
         AddSourceNote()
         AddRemoveSourceNoteParameter()
     End Sub
-
-
 
     Private Sub AddRemoveSourceNoteParameter()
         If Not ucrInputAddSourceNote.IsEmpty Then

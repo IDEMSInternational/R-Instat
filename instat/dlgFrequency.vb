@@ -22,7 +22,7 @@ Public Class dlgFrequency
     Private clsDefaultFunction As New RFunction
     Private clsMmtableFunction As New RFunction
     Private clsFrequencyOperator As New ROperator
-    Private clsMmtableOperator, clsJoiningPipeOperator, clsPipeOperator As New ROperator
+    Private clsMmtableOperator, clsJoiningPipeOperator, clsPipeOperator, clsTabFootnoteOperator As New ROperator
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction As New RFunction
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
@@ -139,6 +139,7 @@ Public Class dlgFrequency
         clsTabStyleCellTitleFunction = New RFunction
         clsJoiningPipeOperator = New ROperator
         clsPipeOperator = New ROperator
+        clsTabFootnoteOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
@@ -147,6 +148,10 @@ Public Class dlgFrequency
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
+
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
@@ -302,7 +307,7 @@ Public Class dlgFrequency
                                        clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                       clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                       clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                      clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                      clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
