@@ -38,22 +38,25 @@ Partial Class ucrNud
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrNud))
         Me.nudUpDown = New System.Windows.Forms.NumericUpDown()
         CType(Me.nudUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nudUpDown
         '
-        resources.ApplyResources(Me.nudUpDown, "nudUpDown")
+        Me.nudUpDown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.nudUpDown.Location = New System.Drawing.Point(0, 0)
         Me.nudUpDown.Name = "nudUpDown"
+        Me.nudUpDown.Size = New System.Drawing.Size(50, 20)
+        Me.nudUpDown.TabIndex = 0
         '
         'ucrNud
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.nudUpDown)
         Me.Name = "ucrNud"
+        Me.Size = New System.Drawing.Size(50, 20)
         CType(Me.nudUpDown, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

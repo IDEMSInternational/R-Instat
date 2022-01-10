@@ -38,7 +38,6 @@ Partial Class ucrGridUnit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrGridUnit))
         Me.grpUnits = New System.Windows.Forms.GroupBox()
         Me.lblVector = New System.Windows.Forms.Label()
         Me.lblUnits = New System.Windows.Forms.Label()
@@ -59,61 +58,91 @@ Partial Class ucrGridUnit
         Me.grpUnits.Controls.Add(Me.ucrInputVector)
         Me.grpUnits.Controls.Add(Me.ucrInputUnits)
         Me.grpUnits.Controls.Add(Me.ucrChkUnits)
-        resources.ApplyResources(Me.grpUnits, "grpUnits")
+        Me.grpUnits.Location = New System.Drawing.Point(3, 0)
         Me.grpUnits.Name = "grpUnits"
+        Me.grpUnits.Size = New System.Drawing.Size(254, 119)
+        Me.grpUnits.TabIndex = 0
         Me.grpUnits.TabStop = False
+        Me.grpUnits.Text = "Units"
         '
         'lblVector
         '
-        resources.ApplyResources(Me.lblVector, "lblVector")
+        Me.lblVector.AutoSize = True
+        Me.lblVector.Location = New System.Drawing.Point(6, 47)
         Me.lblVector.Name = "lblVector"
+        Me.lblVector.Size = New System.Drawing.Size(74, 13)
+        Me.lblVector.TabIndex = 1
+        Me.lblVector.Text = "Value(Vector):"
         '
         'lblUnits
         '
-        resources.ApplyResources(Me.lblUnits, "lblUnits")
+        Me.lblUnits.AutoSize = True
+        Me.lblUnits.Location = New System.Drawing.Point(6, 71)
         Me.lblUnits.Name = "lblUnits"
+        Me.lblUnits.Size = New System.Drawing.Size(34, 13)
+        Me.lblUnits.TabIndex = 3
+        Me.lblUnits.Text = "Units:"
         '
         'lblData
         '
-        resources.ApplyResources(Me.lblData, "lblData")
+        Me.lblData.AutoSize = True
+        Me.lblData.Location = New System.Drawing.Point(6, 96)
         Me.lblData.Name = "lblData"
+        Me.lblData.Size = New System.Drawing.Size(81, 13)
+        Me.lblData.TabIndex = 5
+        Me.lblData.Text = "Data (Optional):"
         '
         'ucrInputData
         '
         Me.ucrInputData.AddQuotesIfUnrecognised = True
+        Me.ucrInputData.AutoSize = True
         Me.ucrInputData.IsMultiline = False
         Me.ucrInputData.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputData, "ucrInputData")
+        Me.ucrInputData.Location = New System.Drawing.Point(126, 92)
         Me.ucrInputData.Name = "ucrInputData"
+        Me.ucrInputData.Size = New System.Drawing.Size(124, 23)
+        Me.ucrInputData.TabIndex = 6
         '
         'ucrInputVector
         '
         Me.ucrInputVector.AddQuotesIfUnrecognised = True
+        Me.ucrInputVector.AutoSize = True
         Me.ucrInputVector.IsMultiline = False
         Me.ucrInputVector.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputVector, "ucrInputVector")
+        Me.ucrInputVector.Location = New System.Drawing.Point(126, 43)
         Me.ucrInputVector.Name = "ucrInputVector"
+        Me.ucrInputVector.Size = New System.Drawing.Size(124, 23)
+        Me.ucrInputVector.TabIndex = 2
         '
         'ucrInputUnits
         '
         Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputUnits.GetSetSelectedIndex = -1
         Me.ucrInputUnits.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
+        Me.ucrInputUnits.Location = New System.Drawing.Point(126, 68)
+        Me.ucrInputUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputUnits.Name = "ucrInputUnits"
+        Me.ucrInputUnits.Size = New System.Drawing.Size(124, 21)
+        Me.ucrInputUnits.TabIndex = 4
         '
         'ucrChkUnits
         '
+        Me.ucrChkUnits.AutoSize = True
         Me.ucrChkUnits.Checked = False
-        resources.ApplyResources(Me.ucrChkUnits, "ucrChkUnits")
+        Me.ucrChkUnits.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkUnits.Name = "ucrChkUnits"
+        Me.ucrChkUnits.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkUnits.TabIndex = 0
         '
         'ucrGridUnit
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.grpUnits)
         Me.Name = "ucrGridUnit"
+        Me.Size = New System.Drawing.Size(260, 123)
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
         Me.ResumeLayout(False)
