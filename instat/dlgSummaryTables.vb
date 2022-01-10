@@ -419,32 +419,31 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
-        Dim clsHeaderLeftFunction As New RFunction
-        Dim clsHeaderTopFunction As New RFunction
         Dim iColumn As Integer = 0
         Dim iNumberOfColumns As Integer
 
-        clsHeaderLeftFunction.SetPackageName("mmtable2")
-        clsHeaderLeftFunction.SetRCommand("header_top_left")
-
-        clsHeaderTopFunction.SetPackageName("mmtable2")
-        clsHeaderTopFunction.SetRCommand("header_left_top")
-
         clsColumnOperator.ClearParameters()
+        clsMutableOperator.RemoveParameterByName("columnOp")
 
         If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
             iNumberOfColumns = ucrNudColumnFactors.GetText()
             For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
                 If (iColumn + 1) <= iNumberOfColumns Then
+                    Dim clsHeaderLeftFunction As New RFunction
+                    clsHeaderLeftFunction.SetPackageName("mmtable2")
+                    clsHeaderLeftFunction.SetRCommand("header_top_left")
                     clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
                 Else
+                    Dim clsHeaderTopFunction As New RFunction
+                    clsHeaderTopFunction.SetPackageName("mmtable2")
+                    clsHeaderTopFunction.SetRCommand("header_left_top")
                     clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
                 End If
                 iColumn = iColumn + 1
             Next
-            clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator)
+            clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
         End If
     End Sub
 

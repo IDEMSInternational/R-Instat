@@ -43,24 +43,25 @@ Partial Class dlgSummaryTables
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.ucrChkDisplaySummaryVariablesAsRow = New instat.ucrCheck()
-        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
-        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
-        Me.ucrNudSigFigs = New instat.ucrNud()
         Me.grpMargin = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.rdoOuter = New System.Windows.Forms.RadioButton()
+        Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.lblVariables = New System.Windows.Forms.Label()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.ucrChkDisplaySummaryVariablesAsRow = New instat.ucrCheck()
+        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
+        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
+        Me.ucrNudSigFigs = New instat.ucrNud()
         Me.ucrChkSummaries = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSummaryCols = New instat.ucrReceiverMultiple()
@@ -68,7 +69,6 @@ Partial Class dlgSummaryTables
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeight = New instat.ucrCheck()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.ucrPnlMargin = New instat.UcrPanel()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
@@ -105,49 +105,11 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.TabStop = False
         '
-        'ucrNudColumnFactors
-        '
-        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblColumnFactors
         '
         resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
         Me.lblColumnFactors.Name = "lblColumnFactors"
         Me.lblColumnFactors.Tag = ""
-        '
-        'ucrChkDisplaySummaryVariablesAsRow
-        '
-        resources.ApplyResources(Me.ucrChkDisplaySummaryVariablesAsRow, "ucrChkDisplaySummaryVariablesAsRow")
-        Me.ucrChkDisplaySummaryVariablesAsRow.Checked = False
-        Me.ucrChkDisplaySummaryVariablesAsRow.Name = "ucrChkDisplaySummaryVariablesAsRow"
-        '
-        'ucrChkDisplayVariablesAsRows
-        '
-        resources.ApplyResources(Me.ucrChkDisplayVariablesAsRows, "ucrChkDisplayVariablesAsRows")
-        Me.ucrChkDisplayVariablesAsRows.Checked = False
-        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
-        '
-        'ucrChkDisplaySummariesAsRow
-        '
-        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
-        Me.ucrChkDisplaySummariesAsRow.Checked = False
-        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
-        '
-        'ucrNudSigFigs
-        '
-        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
-        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpMargin
         '
@@ -166,19 +128,19 @@ Partial Class dlgSummaryTables
         Me.rdoBoth.TabStop = True
         Me.rdoBoth.UseVisualStyleBackColor = True
         '
-        'rdoSummary
-        '
-        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
-        Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.TabStop = True
-        Me.rdoSummary.UseVisualStyleBackColor = True
-        '
         'rdoOuter
         '
         resources.ApplyResources(Me.rdoOuter, "rdoOuter")
         Me.rdoOuter.Name = "rdoOuter"
         Me.rdoOuter.TabStop = True
         Me.rdoOuter.UseVisualStyleBackColor = True
+        '
+        'rdoSummary
+        '
+        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
+        Me.rdoSummary.Name = "rdoSummary"
+        Me.rdoSummary.TabStop = True
+        Me.rdoSummary.UseVisualStyleBackColor = True
         '
         'lblMarginName
         '
@@ -190,6 +152,12 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.lblVariables, "lblVariables")
         Me.lblVariables.Name = "lblVariables"
         Me.lblVariables.Tag = ""
+        '
+        'cmdFormatTable
+        '
+        resources.ApplyResources(Me.cmdFormatTable, "cmdFormatTable")
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'ucrReorderSummary
         '
@@ -228,6 +196,44 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.ucrChkDisplayMargins, "ucrChkDisplayMargins")
         Me.ucrChkDisplayMargins.Checked = False
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        '
+        'ucrNudColumnFactors
+        '
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkDisplaySummaryVariablesAsRow
+        '
+        resources.ApplyResources(Me.ucrChkDisplaySummaryVariablesAsRow, "ucrChkDisplaySummaryVariablesAsRow")
+        Me.ucrChkDisplaySummaryVariablesAsRow.Checked = False
+        Me.ucrChkDisplaySummaryVariablesAsRow.Name = "ucrChkDisplaySummaryVariablesAsRow"
+        '
+        'ucrChkDisplayVariablesAsRows
+        '
+        resources.ApplyResources(Me.ucrChkDisplayVariablesAsRows, "ucrChkDisplayVariablesAsRows")
+        Me.ucrChkDisplayVariablesAsRows.Checked = False
+        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
+        '
+        'ucrChkDisplaySummariesAsRow
+        '
+        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
+        Me.ucrChkDisplaySummariesAsRow.Checked = False
+        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
+        '
+        'ucrNudSigFigs
+        '
+        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkSummaries
         '
@@ -280,12 +286,6 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.bShowHiddenColumns = False
         Me.ucrSelectorSummaryTables.bUseCurrentFilter = True
         Me.ucrSelectorSummaryTables.Name = "ucrSelectorSummaryTables"
-        '
-        'cmdFormatTable
-        '
-        resources.ApplyResources(Me.cmdFormatTable, "cmdFormatTable")
-        Me.cmdFormatTable.Name = "cmdFormatTable"
-        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'ucrPnlMargin
         '
