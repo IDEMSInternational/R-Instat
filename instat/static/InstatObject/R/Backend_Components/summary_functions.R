@@ -1364,8 +1364,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   grps <- nrow(cell_values)
   cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "summary-variable", value.name = "value")
   if (treat_columns_as_factor) {
-    cell_values[["variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values) / length(columns_to_summarise))
-    cell_values[["summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
+    cell_values[["variable"]] <- rep(columns_to_summarise, each = nrow(cell_values) / length(columns_to_summarise))
+    cell_values[["summary"]] <- rep(summaries_display, each = grps, length.out = nrow(cell_values))
     cell_values[["summary-variable"]] <- NULL
   }
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
