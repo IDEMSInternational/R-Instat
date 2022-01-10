@@ -38,7 +38,6 @@ Partial Class dlgMerge
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMerge))
         Me.cmdJoinOptions = New System.Windows.Forms.Button()
         Me.lnlJoinType = New System.Windows.Forms.Label()
         Me.lblMergeBy = New System.Windows.Forms.Label()
@@ -53,70 +52,112 @@ Partial Class dlgMerge
         '
         'cmdJoinOptions
         '
-        resources.ApplyResources(Me.cmdJoinOptions, "cmdJoinOptions")
+        Me.cmdJoinOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdJoinOptions.Location = New System.Drawing.Point(99, 149)
         Me.cmdJoinOptions.Name = "cmdJoinOptions"
+        Me.cmdJoinOptions.Size = New System.Drawing.Size(129, 23)
+        Me.cmdJoinOptions.TabIndex = 6
+        Me.cmdJoinOptions.Text = "Join Options"
         Me.cmdJoinOptions.UseVisualStyleBackColor = True
         '
         'lnlJoinType
         '
-        resources.ApplyResources(Me.lnlJoinType, "lnlJoinType")
+        Me.lnlJoinType.AutoSize = True
+        Me.lnlJoinType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lnlJoinType.Location = New System.Drawing.Point(9, 68)
         Me.lnlJoinType.Name = "lnlJoinType"
+        Me.lnlJoinType.Size = New System.Drawing.Size(56, 13)
+        Me.lnlJoinType.TabIndex = 2
+        Me.lnlJoinType.Text = "Join Type:"
         '
         'lblMergeBy
         '
-        resources.ApplyResources(Me.lblMergeBy, "lblMergeBy")
+        Me.lblMergeBy.AutoSize = True
+        Me.lblMergeBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMergeBy.Location = New System.Drawing.Point(9, 96)
         Me.lblMergeBy.Name = "lblMergeBy"
+        Me.lblMergeBy.Size = New System.Drawing.Size(58, 13)
+        Me.lblMergeBy.TabIndex = 4
+        Me.lblMergeBy.Text = "Joining By:"
         '
         'ucrInputMergingBy
         '
         Me.ucrInputMergingBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputMergingBy.AutoSize = True
         Me.ucrInputMergingBy.IsMultiline = False
         Me.ucrInputMergingBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMergingBy, "ucrInputMergingBy")
+        Me.ucrInputMergingBy.Location = New System.Drawing.Point(99, 93)
         Me.ucrInputMergingBy.Name = "ucrInputMergingBy"
+        Me.ucrInputMergingBy.Size = New System.Drawing.Size(278, 52)
+        Me.ucrInputMergingBy.TabIndex = 5
         '
         'ucrSaveMerge
         '
-        resources.ApplyResources(Me.ucrSaveMerge, "ucrSaveMerge")
+        Me.ucrSaveMerge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveMerge.Location = New System.Drawing.Point(10, 180)
+        Me.ucrSaveMerge.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveMerge.Name = "ucrSaveMerge"
+        Me.ucrSaveMerge.Size = New System.Drawing.Size(301, 24)
+        Me.ucrSaveMerge.TabIndex = 8
         '
         'ucrInputJoinType
         '
         Me.ucrInputJoinType.AddQuotesIfUnrecognised = True
+        Me.ucrInputJoinType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputJoinType.GetSetSelectedIndex = -1
         Me.ucrInputJoinType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputJoinType, "ucrInputJoinType")
+        Me.ucrInputJoinType.Location = New System.Drawing.Point(99, 65)
         Me.ucrInputJoinType.Name = "ucrInputJoinType"
+        Me.ucrInputJoinType.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputJoinType.TabIndex = 3
         '
         'ucrSecondDataFrame
         '
+        Me.ucrSecondDataFrame.AutoSize = True
         Me.ucrSecondDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSecondDataFrame.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSecondDataFrame, "ucrSecondDataFrame")
+        Me.ucrSecondDataFrame.Location = New System.Drawing.Point(216, 12)
+        Me.ucrSecondDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondDataFrame.Name = "ucrSecondDataFrame"
+        Me.ucrSecondDataFrame.Size = New System.Drawing.Size(151, 50)
+        Me.ucrSecondDataFrame.TabIndex = 1
         '
         'ucrFirstDataFrame
         '
+        Me.ucrFirstDataFrame.AutoSize = True
         Me.ucrFirstDataFrame.bDropUnusedFilterLevels = False
         Me.ucrFirstDataFrame.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrFirstDataFrame, "ucrFirstDataFrame")
+        Me.ucrFirstDataFrame.Location = New System.Drawing.Point(10, 12)
+        Me.ucrFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstDataFrame.Name = "ucrFirstDataFrame"
+        Me.ucrFirstDataFrame.Size = New System.Drawing.Size(151, 50)
+        Me.ucrFirstDataFrame.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'cmdColumnOptions
         '
-        resources.ApplyResources(Me.cmdColumnOptions, "cmdColumnOptions")
+        Me.cmdColumnOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdColumnOptions.Location = New System.Drawing.Point(245, 150)
         Me.cmdColumnOptions.Name = "cmdColumnOptions"
+        Me.cmdColumnOptions.Size = New System.Drawing.Size(132, 23)
+        Me.cmdColumnOptions.TabIndex = 7
+        Me.cmdColumnOptions.Text = "Column Selection"
         Me.cmdColumnOptions.UseVisualStyleBackColor = True
         '
         'dlgMerge
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(413, 263)
         Me.Controls.Add(Me.cmdColumnOptions)
         Me.Controls.Add(Me.ucrInputMergingBy)
         Me.Controls.Add(Me.lblMergeBy)
@@ -131,7 +172,9 @@ Partial Class dlgMerge
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMerge"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Merge"
+        Me.Text = "Merge"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
