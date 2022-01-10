@@ -46,6 +46,7 @@ Partial Class dlgFreezeColumns
         '
         'ucrSelectorByDataFrameAddRemoveforFreezeColumns
         '
+        Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bShowHiddenColumns = False
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.bUseCurrentFilter = True
         Me.ucrSelectorByDataFrameAddRemoveforFreezeColumns.Location = New System.Drawing.Point(10, 10)
@@ -62,10 +63,13 @@ Partial Class dlgFreezeColumns
         Me.ucrReceiverMultipleforFreezeColumns.Name = "ucrReceiverMultipleforFreezeColumns"
         Me.ucrReceiverMultipleforFreezeColumns.Selector = Nothing
         Me.ucrReceiverMultipleforFreezeColumns.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleforFreezeColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleforFreezeColumns.TabIndex = 2
+        Me.ucrReceiverMultipleforFreezeColumns.ucrSelector = Nothing
         '
         'ucrBaseforFreezeColumns
         '
+        Me.ucrBaseforFreezeColumns.AutoSize = True
         Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(10, 211)
         Me.ucrBaseforFreezeColumns.Name = "ucrBaseforFreezeColumns"
         Me.ucrBaseforFreezeColumns.Size = New System.Drawing.Size(410, 52)
@@ -84,6 +88,7 @@ Partial Class dlgFreezeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 271)
         Me.Controls.Add(Me.lblFreezeColumns)
         Me.Controls.Add(Me.ucrBaseforFreezeColumns)

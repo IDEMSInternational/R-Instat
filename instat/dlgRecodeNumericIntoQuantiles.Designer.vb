@@ -125,6 +125,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -145,6 +146,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 286)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrNewColumnName)

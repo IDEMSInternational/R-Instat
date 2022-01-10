@@ -116,6 +116,7 @@ Partial Class dlgAugment
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 331)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
@@ -126,6 +127,7 @@ Partial Class dlgAugment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 394)
         Me.Controls.Add(Me.rdoNewDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)

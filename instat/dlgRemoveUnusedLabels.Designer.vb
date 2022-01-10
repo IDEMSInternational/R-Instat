@@ -48,6 +48,7 @@ Partial Class dlgRemoveUnusedLabels
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(2, 266)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -107,6 +108,7 @@ Partial Class dlgRemoveUnusedLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 319)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.lblSelectedVariable)

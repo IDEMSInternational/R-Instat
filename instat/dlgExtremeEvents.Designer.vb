@@ -204,6 +204,7 @@ Partial Class dlgExtremeEvents
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 146)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
@@ -211,6 +212,9 @@ Partial Class dlgExtremeEvents
         '
         'ucrInputColumnNameExtremeEvents
         '
+        Me.ucrInputColumnNameExtremeEvents.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnNameExtremeEvents.IsMultiline = False
+        Me.ucrInputColumnNameExtremeEvents.IsReadOnly = False
         Me.ucrInputColumnNameExtremeEvents.Location = New System.Drawing.Point(183, 10)
         Me.ucrInputColumnNameExtremeEvents.Name = "ucrInputColumnNameExtremeEvents"
         Me.ucrInputColumnNameExtremeEvents.Size = New System.Drawing.Size(142, 21)
@@ -218,6 +222,9 @@ Partial Class dlgExtremeEvents
         '
         'ucrInputColumnNameEventDay
         '
+        Me.ucrInputColumnNameEventDay.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnNameEventDay.IsMultiline = False
+        Me.ucrInputColumnNameEventDay.IsReadOnly = False
         Me.ucrInputColumnNameEventDay.Location = New System.Drawing.Point(180, 37)
         Me.ucrInputColumnNameEventDay.Name = "ucrInputColumnNameEventDay"
         Me.ucrInputColumnNameEventDay.Size = New System.Drawing.Size(142, 21)
@@ -227,6 +234,7 @@ Partial Class dlgExtremeEvents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(480, 213)
         Me.Controls.Add(Me.ucrInputColumnNameEventDay)
         Me.Controls.Add(Me.ucrInputColumnNameExtremeEvents)

@@ -63,6 +63,7 @@ Partial Class dlgGammaDistr
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 295)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
@@ -113,12 +114,15 @@ Partial Class dlgGammaDistr
         '
         'ucrReceiverColumn
         '
+        Me.ucrReceiverColumn.frmParent = Me
         Me.ucrReceiverColumn.Location = New System.Drawing.Point(221, 60)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
         Me.ucrReceiverColumn.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.TabIndex = 3
+        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'lblSelectedColumn
         '
@@ -253,6 +257,7 @@ Partial Class dlgGammaDistr
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 350)
         Me.Controls.Add(Me.chkProbabilityPlot)
         Me.Controls.Add(Me.txtAnd)

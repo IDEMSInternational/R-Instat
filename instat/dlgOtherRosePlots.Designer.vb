@@ -95,7 +95,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarFrequency.TabIndex = 90
         Me.rdoPolarFrequency.TabStop = True
         Me.rdoPolarFrequency.Tag = ""
-        Me.rdoPolarFrequency.Text = "Polar frequency"
+        Me.rdoPolarFrequency.Text = "Polar Frequency"
         Me.rdoPolarFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPolarFrequency.UseVisualStyleBackColor = True
         '
@@ -351,6 +351,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(15, 426)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -488,6 +489,7 @@ Partial Class dlgOtherRosePlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(527, 488)
         Me.Controls.Add(Me.lblFacetTwo)
         Me.Controls.Add(Me.lblFacetOne)

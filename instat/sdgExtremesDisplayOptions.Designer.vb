@@ -80,7 +80,7 @@ Partial Class sdgExtremesDisplayOptions
         Me.rdoQQPlot.Name = "rdoQQPlot"
         Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
         Me.rdoQQPlot.TabIndex = 6
-        Me.rdoQQPlot.Text = "QQ-Plot"
+        Me.rdoQQPlot.Text = "QQ Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
         'rdoQQ2
@@ -195,6 +195,7 @@ Partial Class sdgExtremesDisplayOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(287, 224)
         Me.Controls.Add(Me.ucrSavePlots)
         Me.Controls.Add(Me.grpPlots)

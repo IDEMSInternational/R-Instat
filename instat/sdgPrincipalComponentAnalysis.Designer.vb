@@ -49,7 +49,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpVariablePlot = New System.Windows.Forms.GroupBox()
         Me.rdoTextVariables = New System.Windows.Forms.RadioButton()
         Me.rdoArrow = New System.Windows.Forms.RadioButton()
@@ -74,6 +73,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblDim = New System.Windows.Forms.Label()
         Me.ucrInputLabel2 = New instat.ucrInputComboBox()
         Me.ucrInputLabel1 = New instat.ucrInputComboBox()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoBiplot = New System.Windows.Forms.RadioButton()
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
@@ -189,14 +189,6 @@ Partial Class sdgPrincipalComponentAnalysis
         resources.ApplyResources(Me.lblFactorVariable, "lblFactorVariable")
         Me.lblFactorVariable.Name = "lblFactorVariable"
         Me.lblFactorVariable.Tag = "Factor_Variable"
-        '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bDropUnusedFilterLevels = False
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
         '
         'grpVariablePlot
         '
@@ -369,6 +361,14 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrInputLabel1.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLabel1, "ucrInputLabel1")
         Me.ucrInputLabel1.Name = "ucrInputLabel1"
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
         '
         'rdoBiplot
         '

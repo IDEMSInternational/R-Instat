@@ -1507,6 +1507,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrTryModelling.Location = New System.Drawing.Point(2, 360)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
         Me.ucrTryModelling.Size = New System.Drawing.Size(393, 28)
         Me.ucrTryModelling.TabIndex = 13
         '
@@ -1544,6 +1545,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 430)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
@@ -1596,6 +1598,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(643, 485)
         Me.Controls.Add(Me.grpTrend)
         Me.Controls.Add(Me.grpCoin)

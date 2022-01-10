@@ -39,7 +39,7 @@ Partial Class ucrTry
         '
         Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
         Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = False
+        Me.ucrInputTryMessage.IsReadOnly = True
         Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 6)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         Me.ucrInputTryMessage.Size = New System.Drawing.Size(297, 21)
@@ -49,6 +49,7 @@ Partial Class ucrTry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Name = "ucrTry"

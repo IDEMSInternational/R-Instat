@@ -273,8 +273,8 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsRLink.fScript
-        dlgFont.Color = frmMain.clsRLink.clrScript
+        dlgFont.Font = fntCommand
+        dlgFont.Color = clrCommand
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetCommandFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)
@@ -299,8 +299,8 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsRLink.fComments
-        dlgFont.Color = frmMain.clsRLink.clrComments
+        dlgFont.Font = fntComment
+        dlgFont.Color = clrComment
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetCommentFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)
@@ -313,8 +313,8 @@ Public Class dlgOptions
         'dlgFont.ShowEffects = False
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsGrids.fntText
-        dlgFont.Color = frmMain.clsGrids.clrText
+        dlgFont.Font = fntEditor
+        dlgFont.Color = clrEditor
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetEditorFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)

@@ -75,6 +75,7 @@ Partial Class dlgCumulativeExceedance
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(30, 338)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
@@ -144,10 +145,10 @@ Partial Class dlgCumulativeExceedance
         Me.chkCumulativeGraph.AutoSize = True
         Me.chkCumulativeGraph.Location = New System.Drawing.Point(6, 100)
         Me.chkCumulativeGraph.Name = "chkCumulativeGraph"
-        Me.chkCumulativeGraph.Size = New System.Drawing.Size(108, 17)
+        Me.chkCumulativeGraph.Size = New System.Drawing.Size(110, 17)
         Me.chkCumulativeGraph.TabIndex = 0
         Me.chkCumulativeGraph.Tag = "Cumulative_graph"
-        Me.chkCumulativeGraph.Text = "Cumulative graph"
+        Me.chkCumulativeGraph.Text = "Cumulative Graph"
         Me.chkCumulativeGraph.UseVisualStyleBackColor = True
         '
         'txtTitle
@@ -342,6 +343,7 @@ Partial Class dlgCumulativeExceedance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(560, 404)
         Me.Controls.Add(Me.txtLegendLabel)
         Me.Controls.Add(Me.txtLegendBtype)
