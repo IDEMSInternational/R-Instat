@@ -102,10 +102,13 @@ Partial Class dlgAlignment
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Selector = Nothing
         Me.ucrMultiple.Size = New System.Drawing.Size(127, 106)
+        Me.ucrMultiple.strNcFilePath = ""
         Me.ucrMultiple.TabIndex = 6
+        Me.ucrMultiple.ucrSelector = Nothing
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 282)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -113,6 +116,7 @@ Partial Class dlgAlignment
         '
         'ucrSelectorAlignment
         '
+        Me.ucrSelectorAlignment.bDropUnusedFilterLevels = False
         Me.ucrSelectorAlignment.bShowHiddenColumns = False
         Me.ucrSelectorAlignment.bUseCurrentFilter = True
         Me.ucrSelectorAlignment.Location = New System.Drawing.Point(10, 10)
@@ -125,6 +129,7 @@ Partial Class dlgAlignment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 340)
         Me.Controls.Add(Me.ucrSelectorAlignment)
         Me.Controls.Add(Me.ucrBase)

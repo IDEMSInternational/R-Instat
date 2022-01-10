@@ -229,6 +229,7 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 349)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -238,6 +239,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(420, 406)
         Me.Controls.Add(Me.lblGraphCaption)
         Me.Controls.Add(Me.lblGraphSubtitle)

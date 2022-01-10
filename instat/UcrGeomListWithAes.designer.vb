@@ -72,6 +72,7 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrGeomWithAesSelector
         '
+        Me.ucrGeomWithAesSelector.bDropUnusedFilterLevels = False
         Me.ucrGeomWithAesSelector.bShowHiddenColumns = False
         Me.ucrGeomWithAesSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrGeomWithAesSelector, "ucrGeomWithAesSelector")

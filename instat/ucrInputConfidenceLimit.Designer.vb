@@ -46,6 +46,7 @@ Partial Class ucrInputConfidenceLimit
         'ucrConfidenceLimit
         '
         Me.ucrConfidenceLimit.AddQuotesIfUnrecognised = True
+        Me.ucrConfidenceLimit.GetSetSelectedIndex = -1
         Me.ucrConfidenceLimit.IsReadOnly = False
         resources.ApplyResources(Me.ucrConfidenceLimit, "ucrConfidenceLimit")
         Me.ucrConfidenceLimit.Name = "ucrConfidenceLimit"

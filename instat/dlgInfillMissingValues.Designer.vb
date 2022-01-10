@@ -33,10 +33,12 @@ Partial Class dlgInfillMissingValues
         Me.rdoFitSingle = New System.Windows.Forms.RadioButton()
         Me.rdoFitMultiple = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.lblValue = New System.Windows.Forms.Label()
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
@@ -87,7 +89,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrChkMaxGap = New instat.ucrCheck()
         Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrChkCopyFromBelow = New instat.ucrCheck()
-        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
@@ -95,7 +96,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -180,6 +180,11 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        '
         'lblNewColumnName
         '
         resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
@@ -207,6 +212,11 @@ Partial Class dlgInfillMissingValues
         Me.rdoLeaveAsMissing.Name = "rdoLeaveAsMissing"
         Me.rdoLeaveAsMissing.TabStop = True
         Me.rdoLeaveAsMissing.UseVisualStyleBackColor = True
+        '
+        'ucrPnlStartEnd
+        '
+        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
         '
         'lblValue
         '
@@ -559,11 +569,6 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkCopyFromBelow, "ucrChkCopyFromBelow")
         Me.ucrChkCopyFromBelow.Name = "ucrChkCopyFromBelow"
         '
-        'ucrPnlStartEnd
-        '
-        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
-        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
-        '
         'ucrSaveNewColumn
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
@@ -611,11 +616,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrInputNewColumnName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'dlgInfillMissingValues
         '

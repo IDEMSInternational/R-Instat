@@ -57,6 +57,7 @@ Partial Class ucrReceiverMetadataProperty
         '
         Me.ucrInputCboParamValue.AddQuotesIfUnrecognised = True
         resources.ApplyResources(Me.ucrInputCboParamValue, "ucrInputCboParamValue")
+        Me.ucrInputCboParamValue.GetSetSelectedIndex = -1
         Me.ucrInputCboParamValue.IsReadOnly = False
         Me.ucrInputCboParamValue.Name = "ucrInputCboParamValue"
         '
@@ -64,6 +65,7 @@ Partial Class ucrReceiverMetadataProperty
         '
         Me.ucrColor.AddQuotesIfUnrecognised = True
         resources.ApplyResources(Me.ucrColor, "ucrColor")
+        Me.ucrColor.GetSetSelectedIndex = -1
         Me.ucrColor.IsReadOnly = False
         Me.ucrColor.Name = "ucrColor"
         '

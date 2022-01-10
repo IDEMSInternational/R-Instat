@@ -483,6 +483,15 @@
   <data name="&gt;&gt;lblFamily.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrInputFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 46</value>
+  </data>
+  <data name="ucrInputFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
+  </data>
+  <data name="ucrInputFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="&gt;&gt;ucrInputFormula.Name" xml:space="preserve">
     <value>ucrInputFormula</value>
   </data>
@@ -494,6 +503,15 @@
   </data>
   <data name="&gt;&gt;ucrInputFormula.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 20</value>
+  </data>
+  <data name="ucrChkSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="ucrChkSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkSpan.Name" xml:space="preserve">
     <value>ucrChkSpan</value>
@@ -507,6 +525,15 @@
   <data name="&gt;&gt;ucrChkSpan.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 49</value>
+  </data>
+  <data name="ucrChkFormula.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 20</value>
+  </data>
+  <data name="ucrChkFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;ucrChkFormula.Name" xml:space="preserve">
     <value>ucrChkFormula</value>
   </data>
@@ -518,6 +545,15 @@
   </data>
   <data name="&gt;&gt;ucrChkFormula.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrChkAddSE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 49</value>
+  </data>
+  <data name="ucrChkAddSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="ucrChkAddSE.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkAddSE.Name" xml:space="preserve">
     <value>ucrChkAddSE</value>
@@ -531,6 +567,15 @@
   <data name="&gt;&gt;ucrChkAddSE.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrNudSpan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 20</value>
+  </data>
+  <data name="ucrNudSpan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSpan.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;ucrNudSpan.Name" xml:space="preserve">
     <value>ucrNudSpan</value>
   </data>
@@ -541,6 +586,15 @@
     <value>grpSmoothOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudSpan.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrFamilyInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrFamilyInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 24</value>
+  </data>
+  <data name="ucrFamilyInput.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="&gt;&gt;ucrFamilyInput.Name" xml:space="preserve">
@@ -554,6 +608,15 @@
   </data>
   <data name="&gt;&gt;ucrFamilyInput.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="ucrInputMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="ucrInputMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrInputMethod.Name" xml:space="preserve">
     <value>ucrInputMethod</value>
@@ -1851,6 +1914,9 @@
   <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
     <value>53</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 467</value>
   </data>
@@ -2055,9 +2121,6 @@
   <data name="&gt;&gt;ucrChkAddPoints.ZOrder" xml:space="preserve">
     <value>67</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -2093,152 +2156,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
     <value>28</value>
-  </data>
-  <data name="ucrInputFormula.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 46</value>
-  </data>
-  <data name="ucrInputFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 23</value>
-  </data>
-  <data name="ucrInputFormula.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Name" xml:space="preserve">
-    <value>ucrInputFormula</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFormula.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 20</value>
-  </data>
-  <data name="ucrChkSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
-  </data>
-  <data name="ucrChkSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Name" xml:space="preserve">
-    <value>ucrChkSpan</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpan.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkFormula.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 49</value>
-  </data>
-  <data name="ucrChkFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
-  </data>
-  <data name="ucrChkFormula.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Name" xml:space="preserve">
-    <value>ucrChkFormula</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFormula.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkAddSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 49</value>
-  </data>
-  <data name="ucrChkAddSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="ucrChkAddSE.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Name" xml:space="preserve">
-    <value>ucrChkAddSE</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddSE.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrNudSpan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 20</value>
-  </data>
-  <data name="ucrNudSpan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSpan.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Name" xml:space="preserve">
-    <value>ucrNudSpan</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSpan.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="ucrInputMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 21</value>
-  </data>
-  <data name="ucrInputMethod.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Name" xml:space="preserve">
-    <value>ucrInputMethod</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMethod.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrFamilyInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 20</value>
-  </data>
-  <data name="ucrFamilyInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 24</value>
-  </data>
-  <data name="ucrFamilyInput.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Name" xml:space="preserve">
-    <value>ucrFamilyInput</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.Parent" xml:space="preserve">
-    <value>grpSmoothOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrFamilyInput.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
 </root>
