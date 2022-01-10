@@ -74,7 +74,7 @@ Public Class dlgMachineLearning
         ucrReceiverMultipleExplanatoryVariable.Selector = ucrSelectorMachineLearning
         ucrReceiverMultipleExplanatoryVariable.SetParameterIsString()
         ucrReceiverMultipleExplanatoryVariable.bForceAsDataFrame = True
-        ucrReceiverMultipleExplanatoryVariable.SetIncludedDataTypes({"numeric"})
+        'ucrReceiverMultipleExplanatoryVariable.SetIncludedDataTypes({"numeric"})
         ucrReceiverMultipleExplanatoryVariable.SetParameterIncludeArgumentName(False)
 
         ucrReceiverClassificationResponseVariable.SetParameter(New RParameter("y", 1))
@@ -86,7 +86,7 @@ Public Class dlgMachineLearning
         ucrReceiverRegressionResponse.Selector = ucrSelectorMachineLearning
         ucrReceiverRegressionResponse.SetParameterIsString()
         ucrReceiverRegressionResponse.bWithQuotes = False
-        ucrReceiverRegressionResponse.SetIncludedDataTypes({"numeric"})
+        'ucrReceiverRegressionResponse.SetIncludedDataTypes({"numeric"})
 
         ucrChkClassificationPerformance.SetText("Performance Measure")
         ucrChkClassificationPerformance.AddFunctionNamesCondition(True, {"confusionMatrix"})
@@ -237,16 +237,23 @@ Public Class dlgMachineLearning
         ucrInputRegressionMethod.SetItems(dctRegressionMethod)
         ucrInputRegressionMethod.SetDropDownStyleAsNonEditable()
 
-        ucrNudTrainSize.SetParameter(New RParameter("prop", 1))
-        ucrNudTrainSize.SetMinMax(0, 1.0)
-        ucrNudTrainSize.DecimalPlaces = 2
-        ucrNudTrainSize.Increment = 0.05
+        ucrNudTrainTestSize.SetParameter(New RParameter("prop", 1))
+        ucrNudTrainTestSize.SetMinMax(0.01, 0.99)
+        ucrNudTrainTestSize.DecimalPlaces = 2
+        ucrNudTrainTestSize.Increment = 0.05
 
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverMultipleExplanatoryVariable, {rdoExplanatoryVariable}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         'ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverExpressionFitModel, {rdoExplanatoryModel}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrPnlModelType.AddToLinkedControls({ucrReceiverClassificationResponseVariable, ucrInputClassificationMethod, ucrChkClassificationPerformance}, {rdoClassification}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddToLinkedControls({ucrReceiverRegressionResponse, ucrInputRegressionMethod, ucrChkRegressionPerformance}, {rdoRegression}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrModelName.SetDataFrameSelector(ucrSelectorMachineLearning.ucrAvailableDataFrames)
+        ucrModelName.SetPrefix("machine_learning_model")
+        ucrModelName.SetSaveTypeAsModel()
+        ucrModelName.SetCheckBoxText("Save Model")
+        ucrModelName.SetIsComboBox()
+        'ucrModelName.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
     Private Sub SetDefaults()
@@ -266,6 +273,7 @@ Public Class dlgMachineLearning
         clsDeltaOperator = New ROperator
 
         ucrSelectorMachineLearning.Reset()
+        ucrModelName.Reset()
         rdoExplanatoryVariable.Checked = True
         'rdoClassification.Checked = True
 
@@ -353,6 +361,7 @@ Public Class dlgMachineLearning
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrModelName.AddAdditionalRCode(clsRegressionTrainFunction, 1)
         ucrReceiverClassificationResponseVariable.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1), iAdditionalPairNo:=1)
         ucrReceiverRegressionResponse.AddAdditionalCodeParameterPair(clsRegressionTrainDataFunction, New RParameter("response", iNewPosition:=2, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverRegressionResponse.AddAdditionalCodeParameterPair(clsTestClassesOperator, New RParameter("label", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
@@ -364,19 +373,20 @@ Public Class dlgMachineLearning
         ucrReceiverRegressionResponse.SetRCode(clsDeltaOperator, bReset)
         ucrInputClassificationMethod.SetRCode(clsClassificationTrainFunction, bReset)
         ucrInputRegressionMethod.SetRCode(clsRegressionTrainFunction, bReset)
-        ucrNudTrainSize.SetRCode(clsTrainTestSplitFunction, bReset)
+        ucrNudTrainTestSize.SetRCode(clsTrainTestSplitFunction, bReset)
         ucrPnlModelType.SetRCode(clsConfusionmatrixFunction)
         ucrPnlModelType.SetRCode(clspostResampleFunction)
         ucrChkClassificationPerformance.SetRCode(clsConfusionmatrixFunction, bReset)
         ucrChkRegressionPerformance.SetRCode(clspostResampleFunction, bReset)
+        ucrModelName.SetRCode(clsClassificationTrainFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        'If ucrReceiverMultipleExplanatoryVariable.IsEmpty OrElse (rdoClassification.Checked AndAlso ucrReceiverClassificationResponseVariable.IsEmpty) OrElse (rdoRegression.Checked AndAlso ucrReceiverRegressionResponse.IsEmpty) Then
-        '    ucrBase.OKEnabled(False)
-        'Else
-        '    ucrBase.OKEnabled(True)
-        'End If
+        If ucrReceiverMultipleExplanatoryVariable.IsEmpty OrElse (rdoClassification.Checked AndAlso ucrReceiverClassificationResponseVariable.IsEmpty) OrElse (rdoRegression.Checked AndAlso ucrReceiverRegressionResponse.IsEmpty) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged, ucrChkClassificationPerformance.ControlValueChanged, ucrChkRegressionPerformance.ControlValueChanged
