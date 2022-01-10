@@ -68,7 +68,7 @@ Public Class ucrTry
         If bIsCommand Then
             CommandModel = "Command"
         ElseIf bIsModel Then
-            CommandModel = "Model"
+            CommandModel = "model"
         End If
     End Sub
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
@@ -81,7 +81,6 @@ Public Class ucrTry
             ucrInputTryMessage.txtInput.Controls.Clear()
         End If
     End Sub
-
 
     Private Sub TryScript()
         Dim strErrorDetail As String = ""
@@ -151,16 +150,28 @@ Public Class ucrTry
                             ucrInputTryMessage.SetName(If(vecOutput.Length > 1, Mid(vecOutput(0), 5) & "...", Mid(vecOutput(0), 5)))
                             ucrInputTryMessage.txtInput.BackColor = Color.White
                         Else
-                            ucrInputTryMessage.SetName(CommandModel & " runs without error")
-                            ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                            If bIsCommand Then
+                                ucrInputTryMessage.SetName(CommandModel & " runs without error")
+                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                            ElseIf bIsModel Then
+                                ucrInputTryMessage.SetName(CommandModel & " runs ok")
+                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                            End If
                         End If
                     Else
-                        ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                        strError = strErrorDetail
-                        AddButtonInTryTextBox()
+                        If bIsCommand Then
+                            ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                            strError = strErrorDetail
+                            AddButtonInTryTextBox()
+                        ElseIf bIsModel Then
+                            ucrInputTryMessage.SetName("Problem detected running " & CommandModel & " or no output to display.")
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                            strError = strErrorDetail
+                            AddButtonInTryTextBox()
+                        End If
                     End If
-                End If
+                    End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName(CommandModel & "produced an error. Modify input before running.")

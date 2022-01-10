@@ -180,66 +180,6 @@
   <data name="&gt;&gt;lblBreakPoints.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;rdoRight.Name" xml:space="preserve">
-    <value>rdoRight</value>
-  </data>
-  <data name="&gt;&gt;rdoRight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRight.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
-  </data>
-  <data name="&gt;&gt;rdoRight.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoLeft.Name" xml:space="preserve">
-    <value>rdoLeft</value>
-  </data>
-  <data name="&gt;&gt;rdoLeft.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoLeft.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
-  </data>
-  <data name="&gt;&gt;rdoLeft.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlClosedOn.Name" xml:space="preserve">
-    <value>ucrPnlClosedOn</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlClosedOn.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlClosedOn.Parent" xml:space="preserve">
-    <value>grpClosedOn</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlClosedOn.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpClosedOn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 134</value>
-  </data>
-  <data name="grpClosedOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 89</value>
-  </data>
-  <data name="grpClosedOn.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpClosedOn.Text" xml:space="preserve">
-    <value>Closed On</value>
-  </data>
-  <data name="&gt;&gt;grpClosedOn.Name" xml:space="preserve">
-    <value>grpClosedOn</value>
-  </data>
-  <data name="&gt;&gt;grpClosedOn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpClosedOn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpClosedOn.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="rdoRight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -318,6 +258,30 @@
   <data name="&gt;&gt;ucrPnlClosedOn.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="grpClosedOn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 134</value>
+  </data>
+  <data name="grpClosedOn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 89</value>
+  </data>
+  <data name="grpClosedOn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpClosedOn.Text" xml:space="preserve">
+    <value>Closed On</value>
+  </data>
+  <data name="&gt;&gt;grpClosedOn.Name" xml:space="preserve">
+    <value>grpClosedOn</value>
+  </data>
+  <data name="&gt;&gt;grpClosedOn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpClosedOn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpClosedOn.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="ucrSaveRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 232</value>
   </data>
@@ -390,6 +354,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 316</value>
   </data>
@@ -437,6 +404,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorForRecode.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 261</value>

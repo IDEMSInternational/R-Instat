@@ -75,6 +75,7 @@ Partial Class dlgCumulativeExceedance
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(30, 338)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 54)
@@ -342,6 +343,7 @@ Partial Class dlgCumulativeExceedance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(560, 404)
         Me.Controls.Add(Me.txtLegendLabel)
         Me.Controls.Add(Me.txtLegendBtype)

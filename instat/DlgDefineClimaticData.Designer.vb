@@ -40,12 +40,20 @@ Partial Class DlgDefineClimaticData
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DlgDefineClimaticData))
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRain = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSunshine = New instat.ucrReceiverSingle()
         Me.lblRain = New System.Windows.Forms.Label()
+        Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMaxTemp = New instat.ucrReceiverSingle()
+        Me.ucrReceiverCloudCover = New instat.ucrReceiverSingle()
         Me.lblMaxTemp = New System.Windows.Forms.Label()
         Me.lblCloudCover = New System.Windows.Forms.Label()
         Me.lblMinTemp = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.lblSunshine = New System.Windows.Forms.Label()
+        Me.ucrReceiverMinTemp = New instat.ucrReceiverSingle()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
         Me.lblStationName = New System.Windows.Forms.Label()
@@ -55,23 +63,15 @@ Partial Class DlgDefineClimaticData
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.grpDateTime = New System.Windows.Forms.GroupBox()
-        Me.grpStation = New System.Windows.Forms.GroupBox()
-        Me.cmdCheckUnique = New System.Windows.Forms.Button()
-        Me.ucrInputCheckInput = New instat.ucrInputTextBox()
-        Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
-        Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
-        Me.ucrReceiverRain = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSunshine = New instat.ucrReceiverSingle()
-        Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMaxTemp = New instat.ucrReceiverSingle()
-        Me.ucrReceiverCloudCover = New instat.ucrReceiverSingle()
-        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMinTemp = New instat.ucrReceiverSingle()
+        Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
+        Me.cmdCheckUnique = New System.Windows.Forms.Button()
+        Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpElements.SuspendLayout()
@@ -101,10 +101,64 @@ Partial Class DlgDefineClimaticData
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
         '
+        'ucrReceiverWindDirection
+        '
+        Me.ucrReceiverWindDirection.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWindDirection, "ucrReceiverWindDirection")
+        Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
+        Me.ucrReceiverWindDirection.Selector = Nothing
+        Me.ucrReceiverWindDirection.strNcFilePath = ""
+        Me.ucrReceiverWindDirection.ucrSelector = Nothing
+        '
+        'ucrReceiverRain
+        '
+        Me.ucrReceiverRain.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverRain, "ucrReceiverRain")
+        Me.ucrReceiverRain.Name = "ucrReceiverRain"
+        Me.ucrReceiverRain.Selector = Nothing
+        Me.ucrReceiverRain.strNcFilePath = ""
+        Me.ucrReceiverRain.ucrSelector = Nothing
+        '
+        'ucrReceiverSunshine
+        '
+        Me.ucrReceiverSunshine.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSunshine, "ucrReceiverSunshine")
+        Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
+        Me.ucrReceiverSunshine.Selector = Nothing
+        Me.ucrReceiverSunshine.strNcFilePath = ""
+        Me.ucrReceiverSunshine.ucrSelector = Nothing
+        '
         'lblRain
         '
         resources.ApplyResources(Me.lblRain, "lblRain")
         Me.lblRain.Name = "lblRain"
+        '
+        'ucrReceiverRadiation
+        '
+        Me.ucrReceiverRadiation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverRadiation, "ucrReceiverRadiation")
+        Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
+        Me.ucrReceiverRadiation.Selector = Nothing
+        Me.ucrReceiverRadiation.strNcFilePath = ""
+        Me.ucrReceiverRadiation.ucrSelector = Nothing
+        '
+        'ucrReceiverMaxTemp
+        '
+        Me.ucrReceiverMaxTemp.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMaxTemp, "ucrReceiverMaxTemp")
+        Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
+        Me.ucrReceiverMaxTemp.Selector = Nothing
+        Me.ucrReceiverMaxTemp.strNcFilePath = ""
+        Me.ucrReceiverMaxTemp.ucrSelector = Nothing
+        '
+        'ucrReceiverCloudCover
+        '
+        Me.ucrReceiverCloudCover.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverCloudCover, "ucrReceiverCloudCover")
+        Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
+        Me.ucrReceiverCloudCover.Selector = Nothing
+        Me.ucrReceiverCloudCover.strNcFilePath = ""
+        Me.ucrReceiverCloudCover.ucrSelector = Nothing
         '
         'lblMaxTemp
         '
@@ -126,10 +180,28 @@ Partial Class DlgDefineClimaticData
         resources.ApplyResources(Me.lblRadiation, "lblRadiation")
         Me.lblRadiation.Name = "lblRadiation"
         '
+        'ucrReceiverWindSpeed
+        '
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWindSpeed, "ucrReceiverWindSpeed")
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
+        '
         'lblSunshine
         '
         resources.ApplyResources(Me.lblSunshine, "lblSunshine")
         Me.lblSunshine.Name = "lblSunshine"
+        '
+        'ucrReceiverMinTemp
+        '
+        Me.ucrReceiverMinTemp.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMinTemp, "ucrReceiverMinTemp")
+        Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
+        Me.ucrReceiverMinTemp.Selector = Nothing
+        Me.ucrReceiverMinTemp.strNcFilePath = ""
+        Me.ucrReceiverMinTemp.ucrSelector = Nothing
         '
         'lblWindSpeed
         '
@@ -188,6 +260,51 @@ Partial Class DlgDefineClimaticData
         Me.grpDateTime.TabStop = False
         Me.grpDateTime.Tag = ""
         '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDOY, "ucrReceiverDOY")
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.strNcFilePath = ""
+        Me.ucrReceiverDOY.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverMonth
+        '
+        Me.ucrReceiverMonth.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
+        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
+        Me.ucrReceiverMonth.Selector = Nothing
+        Me.ucrReceiverMonth.strNcFilePath = ""
+        Me.ucrReceiverMonth.ucrSelector = Nothing
+        '
+        'ucrReceiverDay
+        '
+        Me.ucrReceiverDay.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDay, "ucrReceiverDay")
+        Me.ucrReceiverDay.Name = "ucrReceiverDay"
+        Me.ucrReceiverDay.Selector = Nothing
+        Me.ucrReceiverDay.strNcFilePath = ""
+        Me.ucrReceiverDay.ucrSelector = Nothing
+        '
         'grpStation
         '
         Me.grpStation.Controls.Add(Me.lblStationName)
@@ -196,6 +313,15 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.Name = "grpStation"
         Me.grpStation.TabStop = False
         Me.grpStation.Tag = ""
+        '
+        'ucrReceiverStationName
+        '
+        Me.ucrReceiverStationName.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStationName, "ucrReceiverStationName")
+        Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
+        Me.ucrReceiverStationName.Selector = Nothing
+        Me.ucrReceiverStationName.strNcFilePath = ""
+        Me.ucrReceiverStationName.ucrSelector = Nothing
         '
         'cmdCheckUnique
         '
@@ -210,132 +336,6 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCheckInput, "ucrInputCheckInput")
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
-        '
-        'ucrReceiverStationName
-        '
-        Me.ucrReceiverStationName.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverStationName, "ucrReceiverStationName")
-        Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
-        Me.ucrReceiverStationName.Selector = Nothing
-        Me.ucrReceiverStationName.strNcFilePath = ""
-        Me.ucrReceiverStationName.ucrSelector = Nothing
-        '
-        'ucrReceiverYear
-        '
-        Me.ucrReceiverYear.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
-        'ucrReceiverDOY
-        '
-        Me.ucrReceiverDOY.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverDOY, "ucrReceiverDOY")
-        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
-        Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverMonth
-        '
-        Me.ucrReceiverMonth.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverMonth, "ucrReceiverMonth")
-        Me.ucrReceiverMonth.Name = "ucrReceiverMonth"
-        Me.ucrReceiverMonth.Selector = Nothing
-        Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.ucrSelector = Nothing
-        '
-        'ucrReceiverDay
-        '
-        Me.ucrReceiverDay.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverDay, "ucrReceiverDay")
-        Me.ucrReceiverDay.Name = "ucrReceiverDay"
-        Me.ucrReceiverDay.Selector = Nothing
-        Me.ucrReceiverDay.strNcFilePath = ""
-        Me.ucrReceiverDay.ucrSelector = Nothing
-        '
-        'ucrReceiverWindDirection
-        '
-        Me.ucrReceiverWindDirection.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverWindDirection, "ucrReceiverWindDirection")
-        Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
-        Me.ucrReceiverWindDirection.Selector = Nothing
-        Me.ucrReceiverWindDirection.strNcFilePath = ""
-        Me.ucrReceiverWindDirection.ucrSelector = Nothing
-        '
-        'ucrReceiverRain
-        '
-        Me.ucrReceiverRain.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverRain, "ucrReceiverRain")
-        Me.ucrReceiverRain.Name = "ucrReceiverRain"
-        Me.ucrReceiverRain.Selector = Nothing
-        Me.ucrReceiverRain.strNcFilePath = ""
-        Me.ucrReceiverRain.ucrSelector = Nothing
-        '
-        'ucrReceiverSunshine
-        '
-        Me.ucrReceiverSunshine.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverSunshine, "ucrReceiverSunshine")
-        Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
-        Me.ucrReceiverSunshine.Selector = Nothing
-        Me.ucrReceiverSunshine.strNcFilePath = ""
-        Me.ucrReceiverSunshine.ucrSelector = Nothing
-        '
-        'ucrReceiverRadiation
-        '
-        Me.ucrReceiverRadiation.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverRadiation, "ucrReceiverRadiation")
-        Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
-        Me.ucrReceiverRadiation.Selector = Nothing
-        Me.ucrReceiverRadiation.strNcFilePath = ""
-        Me.ucrReceiverRadiation.ucrSelector = Nothing
-        '
-        'ucrReceiverMaxTemp
-        '
-        Me.ucrReceiverMaxTemp.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverMaxTemp, "ucrReceiverMaxTemp")
-        Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
-        Me.ucrReceiverMaxTemp.Selector = Nothing
-        Me.ucrReceiverMaxTemp.strNcFilePath = ""
-        Me.ucrReceiverMaxTemp.ucrSelector = Nothing
-        '
-        'ucrReceiverCloudCover
-        '
-        Me.ucrReceiverCloudCover.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverCloudCover, "ucrReceiverCloudCover")
-        Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
-        Me.ucrReceiverCloudCover.Selector = Nothing
-        Me.ucrReceiverCloudCover.strNcFilePath = ""
-        Me.ucrReceiverCloudCover.ucrSelector = Nothing
-        '
-        'ucrReceiverWindSpeed
-        '
-        Me.ucrReceiverWindSpeed.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverWindSpeed, "ucrReceiverWindSpeed")
-        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
-        Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
-        '
-        'ucrReceiverMinTemp
-        '
-        Me.ucrReceiverMinTemp.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverMinTemp, "ucrReceiverMinTemp")
-        Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
-        Me.ucrReceiverMinTemp.Selector = Nothing
-        Me.ucrReceiverMinTemp.strNcFilePath = ""
-        Me.ucrReceiverMinTemp.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -372,6 +372,7 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.ResumeLayout(False)
         Me.grpStation.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

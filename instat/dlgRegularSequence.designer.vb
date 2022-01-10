@@ -41,10 +41,8 @@ Partial Class dlgRegularSequence
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegularSequence))
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
         Me.ucrInputComboDatesBy = New instat.ucrInputComboBox()
-        Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
         Me.ucrChkDefineAsFactor = New instat.ucrCheck()
         Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
         Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
@@ -55,6 +53,8 @@ Partial Class dlgRegularSequence
         Me.lblInStepsOf = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
+        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
         Me.lblMessage = New System.Windows.Forms.Label()
@@ -98,15 +98,6 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.ucrInputComboDatesBy, "ucrInputComboDatesBy")
         Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
         '
-        'ucrDateTimePickerTo
-        '
-        Me.ucrDateTimePickerTo.DateValue = New Date(2021, 5, 19, 13, 55, 53, 370)
-        Me.ucrDateTimePickerTo.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDateTimePickerTo, "ucrDateTimePickerTo")
-        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
-        '
         'ucrChkDefineAsFactor
         '
         Me.ucrChkDefineAsFactor.Checked = False
@@ -122,15 +113,6 @@ Partial Class dlgRegularSequence
         Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
         Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrDateTimePickerFrom
-        '
-        Me.ucrDateTimePickerFrom.DateValue = New Date(2021, 5, 19, 13, 55, 53, 410)
-        Me.ucrDateTimePickerFrom.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDateTimePickerFrom, "ucrDateTimePickerFrom")
-        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
         '
         'ucrInputInStepsOf
         '
@@ -197,6 +179,24 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Tag = "From:"
+        '
+        'ucrDateTimePickerTo
+        '
+        Me.ucrDateTimePickerTo.DateValue = New Date(2021, 5, 19, 13, 55, 53, 370)
+        Me.ucrDateTimePickerTo.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDateTimePickerTo, "ucrDateTimePickerTo")
+        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
+        '
+        'ucrDateTimePickerFrom
+        '
+        Me.ucrDateTimePickerFrom.DateValue = New Date(2021, 5, 19, 13, 55, 53, 410)
+        Me.ucrDateTimePickerFrom.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDateTimePickerFrom, "ucrDateTimePickerFrom")
+        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
         '
         'lblPreview
         '

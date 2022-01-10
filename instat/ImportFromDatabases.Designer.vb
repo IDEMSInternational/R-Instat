@@ -57,6 +57,7 @@ Partial Class dlgImportFromDatabases
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromDatabases"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

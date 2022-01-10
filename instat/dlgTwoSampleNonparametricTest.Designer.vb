@@ -60,6 +60,7 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(12, 365)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
@@ -67,8 +68,9 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         'ucrTwoSampleSelector
         '
+        Me.ucrTwoSampleSelector.bDropUnusedFilterLevels = False
         Me.ucrTwoSampleSelector.bShowHiddenColumns = False
-        Me.ucrTwoSampleSelector.bUseCurrentFilter = False
+        Me.ucrTwoSampleSelector.bUseCurrentFilter = True
         Me.ucrTwoSampleSelector.Location = New System.Drawing.Point(8, 107)
         Me.ucrTwoSampleSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrTwoSampleSelector.Name = "ucrTwoSampleSelector"
@@ -160,12 +162,15 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         'ucrReceiverVariable
         '
+        Me.ucrReceiverVariable.frmParent = Me
         Me.ucrReceiverVariable.Location = New System.Drawing.Point(259, 173)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
         Me.ucrReceiverVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverVariable.strNcFilePath = ""
         Me.ucrReceiverVariable.TabIndex = 5
+        Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'lblFactor
         '
@@ -179,12 +184,15 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(259, 227)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 5
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'grpTypeOfTest
         '
@@ -239,6 +247,7 @@ Partial Class dlgTwoSampleNonparametricTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(444, 418)
         Me.Controls.Add(Me.grpTypeOfTest)
         Me.Controls.Add(Me.ucrReceiverFactor)

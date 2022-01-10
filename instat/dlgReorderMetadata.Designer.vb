@@ -52,6 +52,7 @@ Partial Class dlgReorderMetadata
         '
         'ucrDataFrameReoderMetadata
         '
+        Me.ucrDataFrameReoderMetadata.bDropUnusedFilterLevels = False
         Me.ucrDataFrameReoderMetadata.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameReoderMetadata, "ucrDataFrameReoderMetadata")
         Me.ucrDataFrameReoderMetadata.Name = "ucrDataFrameReoderMetadata"

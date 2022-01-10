@@ -136,6 +136,7 @@ Partial Class dlgRandomSample
         Me.MinimizeBox = False
         Me.Name = "dlgRandomSample"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
