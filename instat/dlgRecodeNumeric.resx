@@ -248,6 +248,7 @@
   </data>
   <data name="ucrMultipleNumericRecode.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
   <data name="rdoRight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -328,6 +329,7 @@
   </data>
   <data name="grpQuantileGroups.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 84</value>
+  </data>
   <data name="grpClosedOn.Location" type="System.Drawing.Point, System.Drawing">
     <value>247, 134</value>
   </data>
