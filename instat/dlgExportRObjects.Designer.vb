@@ -48,11 +48,17 @@ Partial Class dlgExportRObjects
         '
         'lblObjects
         '
-        resources.ApplyResources(Me.lblObjects, "lblObjects")
+        Me.lblObjects.AutoSize = True
+        Me.lblObjects.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblObjects.Location = New System.Drawing.Point(263, 45)
         Me.lblObjects.Name = "lblObjects"
+        Me.lblObjects.Size = New System.Drawing.Size(91, 13)
+        Me.lblObjects.TabIndex = 1
+        Me.lblObjects.Text = "Selected Objects:"
         '
         'ucrFilePath
         '
+        Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
         Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
@@ -60,36 +66,53 @@ Partial Class dlgExportRObjects
         Me.ucrFilePath.FilePathDialogTitle = "Export R Objects"
         Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
         Me.ucrFilePath.FolderBrowse = False
-        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Location = New System.Drawing.Point(14, 199)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
+        Me.ucrFilePath.Size = New System.Drawing.Size(2384, 58)
+        Me.ucrFilePath.TabIndex = 7
         '
         'ucrReceiverMultipleObjects
         '
+        Me.ucrReceiverMultipleObjects.AutoSize = True
         Me.ucrReceiverMultipleObjects.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleObjects, "ucrReceiverMultipleObjects")
+        Me.ucrReceiverMultipleObjects.Location = New System.Drawing.Point(267, 60)
+        Me.ucrReceiverMultipleObjects.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleObjects.Name = "ucrReceiverMultipleObjects"
         Me.ucrReceiverMultipleObjects.Selector = Nothing
+        Me.ucrReceiverMultipleObjects.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultipleObjects.strNcFilePath = ""
+        Me.ucrReceiverMultipleObjects.TabIndex = 2
         Me.ucrReceiverMultipleObjects.ucrSelector = Nothing
         '
         'ucrSelectorObjects
         '
+        Me.ucrSelectorObjects.AutoSize = True
         Me.ucrSelectorObjects.bDropUnusedFilterLevels = False
         Me.ucrSelectorObjects.bShowHiddenColumns = False
         Me.ucrSelectorObjects.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorObjects, "ucrSelectorObjects")
+        Me.ucrSelectorObjects.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorObjects.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorObjects.Name = "ucrSelectorObjects"
+        Me.ucrSelectorObjects.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorObjects.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 232)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgExportRObjects
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(423, 288)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblObjects)
         Me.Controls.Add(Me.ucrReceiverMultipleObjects)
@@ -99,6 +122,8 @@ Partial Class dlgExportRObjects
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportRObjects"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export R Objects"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

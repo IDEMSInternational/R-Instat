@@ -38,7 +38,6 @@ Partial Class dlgHideDataframes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHideDataframes))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForDataFrames = New instat.ucrSelectorAddRemove()
         Me.lblDataFrames = New System.Windows.Forms.Label()
@@ -48,38 +47,60 @@ Partial Class dlgHideDataframes
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 178)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 1
         '
         'ucrSelectorForDataFrames
         '
+        Me.ucrSelectorForDataFrames.AutoSize = True
         Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
-        resources.ApplyResources(Me.ucrSelectorForDataFrames, "ucrSelectorForDataFrames")
+        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 28)
+        Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
+        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(218, 147)
+        Me.ucrSelectorForDataFrames.TabIndex = 2
         '
         'lblDataFrames
         '
-        resources.ApplyResources(Me.lblDataFrames, "lblDataFrames")
+        Me.lblDataFrames.AutoSize = True
+        Me.lblDataFrames.Location = New System.Drawing.Point(10, 13)
         Me.lblDataFrames.Name = "lblDataFrames"
+        Me.lblDataFrames.Size = New System.Drawing.Size(76, 13)
+        Me.lblDataFrames.TabIndex = 3
+        Me.lblDataFrames.Text = "Data Frame(s):"
         '
         'lblHiddenDataFrames
         '
-        resources.ApplyResources(Me.lblHiddenDataFrames, "lblHiddenDataFrames")
+        Me.lblHiddenDataFrames.AutoSize = True
+        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(248, 31)
         Me.lblHiddenDataFrames.Name = "lblHiddenDataFrames"
+        Me.lblHiddenDataFrames.Size = New System.Drawing.Size(113, 13)
+        Me.lblHiddenDataFrames.TabIndex = 4
+        Me.lblHiddenDataFrames.Text = "Hidden Data Frame(s):"
         '
         'ucrReceiverMultiple
         '
+        Me.ucrReceiverMultiple.AutoSize = True
         Me.ucrReceiverMultiple.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(248, 46)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 112)
         Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.TabIndex = 5
         Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'dlgHideDataframes
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(422, 233)
         Me.Controls.Add(Me.lblHiddenDataFrames)
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.lblDataFrames)
@@ -89,7 +110,9 @@ Partial Class dlgHideDataframes
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHideDataframes"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Hide_Dataframes"
+        Me.Text = "Hide/Unhide Data Frame(s)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
