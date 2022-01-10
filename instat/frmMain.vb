@@ -485,7 +485,7 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub UpdateLayout()
+    Public Sub UpdateLayout()
         If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else

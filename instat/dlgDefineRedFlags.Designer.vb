@@ -61,6 +61,7 @@ Partial Class dlgDefineRedFlags
         '
         'ucrSelectorDefineRedFlag
         '
+        Me.ucrSelectorDefineRedFlag.bDropUnusedFilterLevels = False
         Me.ucrSelectorDefineRedFlag.bShowHiddenColumns = False
         Me.ucrSelectorDefineRedFlag.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDefineRedFlag, "ucrSelectorDefineRedFlag")

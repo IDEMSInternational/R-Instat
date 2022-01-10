@@ -29,6 +29,7 @@ Partial Class ucrDayOfYear
         'ucrInputDay
         '
         Me.ucrInputDay.AddQuotesIfUnrecognised = True
+        Me.ucrInputDay.GetSetSelectedIndex = -1
         Me.ucrInputDay.IsReadOnly = False
         Me.ucrInputDay.Location = New System.Drawing.Point(99, 0)
         Me.ucrInputDay.Name = "ucrInputDay"
@@ -38,6 +39,7 @@ Partial Class ucrDayOfYear
         'ucrInputMonth
         '
         Me.ucrInputMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputMonth.GetSetSelectedIndex = -1
         Me.ucrInputMonth.IsReadOnly = False
         Me.ucrInputMonth.Location = New System.Drawing.Point(0, 0)
         Me.ucrInputMonth.Name = "ucrInputMonth"
@@ -48,10 +50,11 @@ Partial Class ucrDayOfYear
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputMonth)
         Me.Controls.Add(Me.ucrInputDay)
         Me.Name = "ucrDayOfYear"
-        Me.Size = New System.Drawing.Size(176, 21)
+        Me.Size = New System.Drawing.Size(176, 24)
         Me.ResumeLayout(False)
 
     End Sub

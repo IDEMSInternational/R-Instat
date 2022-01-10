@@ -37,6 +37,7 @@ Partial Class dlgPasteSpecial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(545, 196)
         Me.Controls.Add(Me.UcrCheck1)
         Me.Name = "dlgPasteSpecial"

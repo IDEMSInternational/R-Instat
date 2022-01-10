@@ -224,6 +224,7 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(5, 161)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(418, 53)
@@ -241,6 +242,7 @@ Partial Class dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(821, 217)
         Me.Controls.Add(Me.lblFilesFound)
         Me.Controls.Add(Me.lblNFiles)

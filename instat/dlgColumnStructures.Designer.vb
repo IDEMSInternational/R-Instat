@@ -100,6 +100,7 @@ Partial Class dlgColumnStructure
         '
         'ucrSelectorColumnStructure
         '
+        Me.ucrSelectorColumnStructure.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumnStructure.bShowHiddenColumns = False
         Me.ucrSelectorColumnStructure.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorColumnStructure, "ucrSelectorColumnStructure")

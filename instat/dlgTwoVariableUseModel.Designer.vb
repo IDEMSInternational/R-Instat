@@ -126,6 +126,7 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrBaseUseModel
         '
+        Me.ucrBaseUseModel.AutoSize = True
         Me.ucrBaseUseModel.Location = New System.Drawing.Point(10, 226)
         Me.ucrBaseUseModel.Name = "ucrBaseUseModel"
         Me.ucrBaseUseModel.Size = New System.Drawing.Size(410, 52)
@@ -135,6 +136,7 @@ Partial Class dlgTwoVariableUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 283)
         Me.Controls.Add(Me.ucrModel)
         Me.Controls.Add(Me.lblModelFormula)

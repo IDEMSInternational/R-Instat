@@ -268,6 +268,7 @@ Partial Class sdgVerificationSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(578, 300)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrBase)

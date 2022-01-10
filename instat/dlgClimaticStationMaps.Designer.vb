@@ -89,6 +89,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(8, 387)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
@@ -339,6 +340,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(756, 441)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
@@ -358,6 +360,7 @@ Partial Class dlgClimaticStationMaps
         Me.grpMapOutline.ResumeLayout(False)
         Me.grpMapOutline.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
