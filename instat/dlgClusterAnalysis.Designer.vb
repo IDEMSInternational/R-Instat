@@ -253,6 +253,8 @@ Partial Class dlgClusterAnalysis
         Me.Controls.Add(Me.ucrPnlClusterData)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrChkCluster)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(613, 450)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

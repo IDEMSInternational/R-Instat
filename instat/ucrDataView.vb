@@ -25,6 +25,7 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
 
+
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -229,6 +230,18 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Private Sub ResizeLabels()
+        Const iMinSize As Single = 5
+        TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
+
+        While lblRowDisplay.Width + lblColDisplay.Width + 50 +
+                    lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width +
+                    lblRowBack.Width + lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso
+                    TblPanPageDisplay.Font.Size > iMinSize
+            TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.5F, TblPanPageDisplay.Font.Style)
+        End While
+    End Sub
+
     Private Sub SetGridVisibility(bIsVisible As Boolean)
         If bIsVisible Then
             tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
@@ -265,7 +278,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-
+        ResizeLabels()
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
@@ -769,5 +782,9 @@ Public Class ucrDataView
     Private Sub lblColLast_Click(sender As Object, e As EventArgs) Handles lblColLast.Click
         GetCurrentDataFrameFocus().clsVisiblePage.LoadLastColumnPage()
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
+    Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
+        ResizeLabels()
     End Sub
 End Class

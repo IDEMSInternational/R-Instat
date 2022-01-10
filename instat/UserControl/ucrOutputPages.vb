@@ -214,7 +214,7 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub tbDelete_Click(sender As Object, e As EventArgs) Handles tbDelete.Click
-        If SelectedTab() = "Output" Then
+        If SelectedTab() = "Main" Then
             For Each element In _selectedOutputPage.SelectedElements
                 _outputLogger.DeleteOutputFromMainList(element)
             Next

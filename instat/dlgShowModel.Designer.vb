@@ -218,6 +218,7 @@ Partial Class dlgShowModel
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(9, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -227,6 +228,7 @@ Partial Class dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(500, 372)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.rdoValues)
