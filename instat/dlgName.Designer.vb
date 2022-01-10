@@ -165,6 +165,7 @@ Partial Class dlgName
         'ucrInputCase
         '
         Me.ucrInputCase.AddQuotesIfUnrecognised = True
+        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCase.GetSetSelectedIndex = -1
         Me.ucrInputCase.IsReadOnly = False
         Me.ucrInputCase.Location = New System.Drawing.Point(148, 41)
@@ -174,6 +175,7 @@ Partial Class dlgName
         '
         'ucrReceiverColumns
         '
+        Me.ucrReceiverColumns.AutoSize = True
         Me.ucrReceiverColumns.frmParent = Me
         Me.ucrReceiverColumns.Location = New System.Drawing.Point(317, 81)
         Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
@@ -187,6 +189,7 @@ Partial Class dlgName
         'ucrInputVariableLabel
         '
         Me.ucrInputVariableLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputVariableLabel.AutoSize = True
         Me.ucrInputVariableLabel.IsMultiline = False
         Me.ucrInputVariableLabel.IsReadOnly = False
         Me.ucrInputVariableLabel.Location = New System.Drawing.Point(317, 175)
@@ -196,6 +199,7 @@ Partial Class dlgName
         '
         'ucrReceiverName
         '
+        Me.ucrReceiverName.AutoSize = True
         Me.ucrReceiverName.frmParent = Me
         Me.ucrReceiverName.Location = New System.Drawing.Point(317, 81)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
@@ -209,6 +213,7 @@ Partial Class dlgName
         'ucrInputNewName
         '
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewName.AutoSize = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(317, 128)
@@ -218,25 +223,28 @@ Partial Class dlgName
         '
         'ucrSelectVariables
         '
+        Me.ucrSelectVariables.AutoSize = True
         Me.ucrSelectVariables.bDropUnusedFilterLevels = False
         Me.ucrSelectVariables.bShowHiddenColumns = False
         Me.ucrSelectVariables.bUseCurrentFilter = True
         Me.ucrSelectVariables.Location = New System.Drawing.Point(10, 50)
         Me.ucrSelectVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectVariables.Name = "ucrSelectVariables"
-        Me.ucrSelectVariables.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectVariables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectVariables.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 291)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(134, 4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(303, 44)
@@ -244,6 +252,7 @@ Partial Class dlgName
         '
         'ucrPnlCase
         '
+        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
         Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
@@ -265,8 +274,8 @@ Partial Class dlgName
         '
         'dlgName
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(538, 346)
         Me.Controls.Add(Me.lblColumns)

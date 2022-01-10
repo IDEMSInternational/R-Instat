@@ -94,6 +94,7 @@ Partial Class dlgOneWayANOVA
         'UcrInputTextBox1
         '
         Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputTextBox1.AutoSize = True
         Me.UcrInputTextBox1.Enabled = False
         Me.UcrInputTextBox1.IsMultiline = False
         Me.UcrInputTextBox1.IsReadOnly = False
@@ -104,6 +105,7 @@ Partial Class dlgOneWayANOVA
         '
         'ucrAddRemoveDataFrame
         '
+        Me.ucrAddRemoveDataFrame.AutoSize = True
         Me.ucrAddRemoveDataFrame.bDropUnusedFilterLevels = False
         Me.ucrAddRemoveDataFrame.bShowHiddenColumns = False
         Me.ucrAddRemoveDataFrame.bUseCurrentFilter = True
@@ -115,6 +117,7 @@ Partial Class dlgOneWayANOVA
         '
         'ucrFactor
         '
+        Me.ucrFactor.AutoSize = True
         Me.ucrFactor.frmParent = Me
         Me.ucrFactor.Location = New System.Drawing.Point(252, 99)
         Me.ucrFactor.Margin = New System.Windows.Forms.Padding(0)
@@ -127,6 +130,7 @@ Partial Class dlgOneWayANOVA
         '
         'ucrYVariate
         '
+        Me.ucrYVariate.AutoSize = True
         Me.ucrYVariate.frmParent = Me
         Me.ucrYVariate.Location = New System.Drawing.Point(252, 46)
         Me.ucrYVariate.Margin = New System.Windows.Forms.Padding(0)
@@ -140,15 +144,16 @@ Partial Class dlgOneWayANOVA
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 231)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
         'dlgOneWayANOVA
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 291)
         Me.Controls.Add(Me.UcrInputTextBox1)
