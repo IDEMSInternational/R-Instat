@@ -435,78 +435,6 @@
   <data name="&gt;&gt;rdoCount.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrChkRow.Name" xml:space="preserve">
-    <value>ucrChkRow</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRow.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRow.Parent" xml:space="preserve">
-    <value>grpFreqTypeTable</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRow.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCount.Name" xml:space="preserve">
-    <value>ucrChkCount</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCount.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCount.Parent" xml:space="preserve">
-    <value>grpFreqTypeTable</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCount.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumn.Name" xml:space="preserve">
-    <value>ucrChkColumn</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumn.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumn.Parent" xml:space="preserve">
-    <value>grpFreqTypeTable</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumn.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCell.Name" xml:space="preserve">
-    <value>ucrChkCell</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCell.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCell.Parent" xml:space="preserve">
-    <value>grpFreqTypeTable</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCell.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="grpFreqTypeTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 279</value>
-  </data>
-  <data name="grpFreqTypeTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 131</value>
-  </data>
-  <data name="grpFreqTypeTable.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="grpFreqTypeTable.Text" xml:space="preserve">
-    <value>Table Frequencies</value>
-  </data>
-  <data name="&gt;&gt;grpFreqTypeTable.Name" xml:space="preserve">
-    <value>grpFreqTypeTable</value>
-  </data>
-  <data name="&gt;&gt;grpFreqTypeTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpFreqTypeTable.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpFreqTypeTable.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="ucrChkRow.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 59</value>
   </data>
@@ -591,6 +519,30 @@
   <data name="&gt;&gt;ucrChkCell.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="grpFreqTypeTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 279</value>
+  </data>
+  <data name="grpFreqTypeTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 131</value>
+  </data>
+  <data name="grpFreqTypeTable.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="grpFreqTypeTable.Text" xml:space="preserve">
+    <value>Table Frequencies</value>
+  </data>
+  <data name="&gt;&gt;grpFreqTypeTable.Name" xml:space="preserve">
+    <value>grpFreqTypeTable</value>
+  </data>
+  <data name="&gt;&gt;grpFreqTypeTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFreqTypeTable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpFreqTypeTable.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblGroupsby.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -620,6 +572,15 @@
   </data>
   <data name="&gt;&gt;lblGroupsby.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrPnlFreqType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 33</value>
+  </data>
+  <data name="ucrPnlFreqType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 95</value>
+  </data>
+  <data name="ucrPnlFreqType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlFreqType.Name" xml:space="preserve">
     <value>ucrPnlFreqType</value>
@@ -656,27 +617,6 @@
   </data>
   <data name="&gt;&gt;grpFreqTypeGraph.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="ucrPnlFreqType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 33</value>
-  </data>
-  <data name="ucrPnlFreqType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 95</value>
-  </data>
-  <data name="ucrPnlFreqType.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFreqType.Name" xml:space="preserve">
-    <value>ucrPnlFreqType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFreqType.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFreqType.Parent" xml:space="preserve">
-    <value>grpFreqTypeGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFreqType.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="rdoBoth.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -749,6 +689,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>416, 492</value>
@@ -867,11 +810,14 @@
   <data name="&gt;&gt;ucrPnlFrequencyDisplay.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 438</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 52</value>
+    <value>405, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>

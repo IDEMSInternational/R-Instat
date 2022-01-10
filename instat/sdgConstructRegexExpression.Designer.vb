@@ -283,6 +283,8 @@ Partial Class sdgConstructRegexExpression
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.ucrReceiverForRegex)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(361, 301)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgConstructRegexExpression"

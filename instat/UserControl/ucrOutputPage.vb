@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 ''' <summary>
 ''' Output page for R outputs
 ''' </summary>
@@ -223,10 +224,18 @@ Public Class ucrOutputPage
     Private Sub AddFormatedTextToRichTextBox(richTextBox As RichTextBox, text As String, font As Font, colour As Color)
         Dim intStartSelection As Integer = richTextBox.Text.Length
         richTextBox.AppendText(text)
-        richTextBox.SelectionStart = intStartSelection
-        richTextBox.SelectionLength = text.Length()
-        richTextBox.SelectionFont = font
-        richTextBox.SelectionColor = colour
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            'Through Mono cannot have multiple fonts and colours within RichTextBox
+            richTextBox.SelectAll()
+            richTextBox.Font = font
+            richTextBox.ForeColor = colour
+            richTextBox.SelectionLength = 0
+        Else
+            richTextBox.SelectionStart = intStartSelection
+            richTextBox.SelectionLength = text.Length()
+            richTextBox.SelectionFont = font
+            richTextBox.SelectionColor = colour
+        End If
     End Sub
 
     Private Sub FillRichTextBoxWithFormatedRScript(richTextBox As RichTextBox, formatedRScript As List(Of clsRScriptElement))

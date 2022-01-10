@@ -266,6 +266,7 @@ Partial Class dlgAutoSaveRecovery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(762, 371)
         Me.Controls.Add(Me.grpEndChoice)
         Me.Controls.Add(Me.grpSavingOptions)

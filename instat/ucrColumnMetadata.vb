@@ -110,7 +110,6 @@ Public Class ucrColumnMetadata
         End If
         _grid.SetNonEditableColumns(lstNonEditableColumns)
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
-        _grid.InstatOptions = frmMain.clsInstatOptions
         AddHandler _grid.EditValue, AddressOf EditValue
         autoTranslate(Me)
     End Sub

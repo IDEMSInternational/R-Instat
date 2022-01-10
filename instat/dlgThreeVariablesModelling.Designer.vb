@@ -251,15 +251,17 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 328)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 54)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 54)
         Me.ucrBase.TabIndex = 17
         '
         'dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 386)
         Me.Controls.Add(Me.cmdResponseFunction)
         Me.Controls.Add(Me.cmdSecondExplanatoryFunction)
