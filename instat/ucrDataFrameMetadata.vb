@@ -14,16 +14,29 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrDataFrameMetadata
-    Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
+    Private _clsDataBook As clsDataBook
+    Private _grid As IDataframeMetaDataGrid
+    Dim _strNameLabel As String = "data_name"
+
+    '  Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
     Private lstNonEditableColumns As New List(Of String)
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
+
+    Public WriteOnly Property DataBook() As clsDataBook
+        Set(ByVal value As clsDataBook)
+            _clsDataBook = value
+            _grid.DataBook = value
+        End Set
+    End Property
 
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadForm()
@@ -32,187 +45,142 @@ Public Class ucrDataFrameMetadata
         clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
     End Sub
 
-    ' TODO this needs tidying up
     Private Sub LoadForm()
         lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Row_Count", "Column_Count", "Is_Linkable", "Is_Calculated"})
-        grdMetaData.Worksheets(0).Name = "metadata"
-        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)
-        grdMetaData.SheetTabNewButtonVisible = False
-    End Sub
 
-    Private Sub grdMetaData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdMetaData.CurrentWorksheetChanged, Me.Load, grdMetaData.WorksheetInserted
-        grdCurrSheet = grdMetaData.CurrentWorksheet
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-        grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-    End Sub
-
-    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
-        If lstNonEditableColumns.Contains(grdCurrSheet.ColumnHeaders(e.Cell.Column).Text) OrElse grdCurrSheet.ColumnHeaders(e.Cell.Column).Text.Substring(0, 3) = "key" Then
-            e.IsCancelled = True
+        'Debug
+        'If True Then
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            _grid = ucrLinuxGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(0).Width = 100
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(1).Width = 0
         Else
-            strPreviousCellText = e.Cell.Data.ToString()
+            _grid = ucrReoGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(0).Width = 0
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(1).Width = 100
         End If
+        AddHandler _grid.EditValue, AddressOf EditValue
+
+        _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, rowRightClickMenu, Nothing)
+        _grid.SetupMainWorksheet("metadata")
     End Sub
 
-    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        Dim strScript As String = ""
-        Dim strComment As String = ""
-        Dim strSignifFiguresLabel As String = "Signif_Figures"
-        Dim strNameLabel As String = "data_name"
-        Dim strDataTypeLabel As String = "DataType"
-        Dim strProperty As String = grdCurrSheet.ColumnHeaders(e.Cell.Column).Text
-        Dim strDataName As String
-        Dim iTemp As Integer
-        Dim iNameColumn As Integer = -1
-        Dim strNewValue As String
+    Private Sub StartWait()
+        Cursor = Cursors.WaitCursor
+        _grid.bEnabled = False
+    End Sub
 
-        If e.NewData.ToString() = strPreviousCellText Then
-            e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+    Private Sub EndWait()
+        _grid.bEnabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RefreshWorksheet()
+        If _clsDataBook Is Nothing Or _clsDataBook.DataFrames.Count = 0 Then
             Exit Sub
         End If
+        _grid.AddColumns()
+        _grid.AddRowData()
+        _grid.UpdateAllWorksheetStyles()
+    End Sub
 
-        For i As Integer = 0 To grdCurrSheet.ColumnCount - 1
-            If grdCurrSheet.ColumnHeaders(i).Text = strNameLabel Then
-                iNameColumn = i
-                Exit For
-            End If
-        Next
-        If iNameColumn <> -1 Then
-            strDataName = grdCurrSheet(e.Cell.Row, iNameColumn).ToString()
-            If Decimal.TryParse(e.NewData, iTemp) Then
-                strNewValue = e.NewData
-            Else
-                strNewValue = Chr(34) & e.NewData & Chr(34)
-            End If
-            If strProperty = strNameLabel Then
-                If frmMain.clsRLink.IsValidText(e.NewData) Then
-                    If frmMain.clsRLink.GetDataFrameNames().Contains(e.NewData.ToString()) Then
-                        MsgBox(e.NewData.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
-                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                        Exit Sub
-                    Else
-                        strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousCellText & Chr(34) & ", new_val = " & strNewValue & ")"
-                        strComment = "Renamed data frame"
-                    End If
-                Else
-                    MsgBox(e.NewData & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
-                    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+    Public Sub RefreshGridData()
+        If _clsDataBook?.clsDataFrameMetaData IsNot Nothing Then
+            RefreshWorksheet()
+            _grid.bVisible = _clsDataBook?.clsDataFrameMetaData.RowCount > 0
+        End If
+    End Sub
+
+    Public Sub UpdateAllWorksheetStyles()
+        _grid.UpdateAllWorksheetStyles()
+    End Sub
+
+    Private Sub EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
+        Dim StrDataframeName As String
+        Dim strScript As String
+        Dim strComment As String
+        Dim iTemp As Integer
+        Dim strNewValue As String
+        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE"}
+
+        StrDataframeName = _grid.GetCellValue(iRow, _strNameLabel)
+        If StrDataframeName = "" Then
+            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
+            Exit Sub
+        End If
+        If Decimal.TryParse(newValue, iTemp) Then
+            strNewValue = newValue
+        Else
+            strNewValue = Chr(34) & newValue & Chr(34)
+        End If
+
+        If strColumnName = _strNameLabel Then
+            If frmMain.clsRLink.IsValidText(newValue) Then
+                If frmMain.clsRLink.GetDataFrameNames().Contains(newValue.ToString()) Then
+                    MsgBox(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                     Exit Sub
+                Else
+                    strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousCellText & Chr(34) &
+                                    ", new_val = " & strNewValue & ")"
+                    strComment = "Renamed data frame"
                 End If
             Else
-                strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata(data_name =" & Chr(34) & strDataName & Chr(34) & ", property = " & Chr(34) & strProperty & Chr(34) & ", new_val = " & strNewValue & ")"
-                strComment = "Edited data frame metadata value"
+                MsgBox(newValue & " is not a valid data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
+                Exit Sub
             End If
-            Try
-                RunScriptFromDataFrameMetadata(strScript, strComment:=strComment)
-            Catch
-                e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-            End Try
         Else
-            MsgBox("Developer error: Cannot find Name column in data frame metadata grid.", MsgBoxStyle.Critical, "Canont find Name column")
+            strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata(data_name =" & Chr(34) & StrDataframeName &
+                                        Chr(34) & ", property = " & Chr(34) & strColumnName & Chr(34) & ", new_val = " & strNewValue & ")"
+            strComment = "Edited data frame metadata value"
         End If
-    End Sub
-
-    Private Sub grdCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforeCut
-        e.IsCancelled = True
-    End Sub
-
-    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
-        MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
-        e.IsCancelled = True
-    End Sub
-
-    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot delete cells.")
-            e.IsCancelled = True
-        End If
-    End Sub
-
-    Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
-        e.IsCancelled = True
+        Try
+            RunScriptFromDataFrameMetadata(strScript, strComment:=strComment)
+        Catch
+        End Try
     End Sub
 
     Public Sub CopyRange()
         Try
-            grdMetaData.CurrentWorksheet.Copy()
-
-            Dim clsCopyValues As New RFunction
-            Dim strAllContent As String = ""
-            Dim iEndRow As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndRow
-            Dim iEndCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndCol
-            Dim iStartCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Col
-
-            'construct the copied range data
-            For iRowIndex As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To iEndRow
-                Dim strRowContent As String = ""
-                For iColIndex As Integer = iStartCol To iEndCol
-                    Dim strCellContent As String = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
-                    If strCellContent = "NA" Then
-                        strCellContent = ""
-                    End If
-                    If iColIndex = iStartCol Then
-                        strRowContent = strCellContent
-                    Else
-                        strRowContent &= vbTab & strCellContent
-                    End If
-                Next
-                strAllContent &= strRowContent
-                If iRowIndex < iEndRow Then
-                    strAllContent &= Environment.NewLine
-                End If
-            Next
-
-            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
-            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
-            RunScriptFromDataFrameMetadata(clsCopyValues.ToScript(), strComment:="Copy data frame metadata values to clipboard")
+            _grid.CopyRange()
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
     End Sub
 
     Public Sub SelectAllText()
-        If grdCurrSheet IsNot Nothing Then
-            grdCurrSheet.SelectAll()
-        End If
+        _grid.SelectAll()
     End Sub
 
     Private Sub RunScriptFromDataFrameMetadata(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
-        Cursor = Cursors.WaitCursor
-        grdMetaData.Enabled = False
+        StartWait()
         frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-        grdMetaData.Enabled = True
-        Cursor = Cursors.Default
+        EndWait()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "544")
     End Sub
 
-    Private Function GetSelectedVariableNamesAsArray() As String()
-        Dim arrSelectedVars(grdMetaData.CurrentWorksheet.SelectionRange.Rows - 1) As String
-
-        For i As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To grdMetaData.CurrentWorksheet.SelectionRange.Row + grdMetaData.CurrentWorksheet.SelectionRange.Rows - 1
-            arrSelectedVars(i - grdMetaData.CurrentWorksheet.SelectionRange.Row) = grdMetaData.CurrentWorksheet(i, 0)
-        Next
-        Return arrSelectedVars
+    Private Function GetSelectedDataframeNameFromSelectedRow() As String
+        Return _grid.GetCellValue(_grid.GetSelectedRows(0) - 1, _strNameLabel)
     End Function
 
     Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
-        dlgDeleteDataFrames.SetDataFrameToAdd(GetSelectedVariableNamesAsArray(0))
+        dlgDeleteDataFrames.SetDataFrameToAdd(GetSelectedDataframeNameFromSelectedRow)
         dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameDataFrame.SetCurrentDataframe(GetSelectedVariableNamesAsArray(0))
+        dlgRenameDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
         dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub hideSheet_Click(sender As Object, e As EventArgs) Handles hideSheet.Click
-        clsHideDataFrame.AddParameter("data_name", Chr(34) & GetSelectedVariableNamesAsArray(0) & Chr(34), iPosition:=0)
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & GetSelectedDataframeNameFromSelectedRow() & Chr(34), iPosition:=0)
         clsHideDataFrame.AddParameter("property", "is_hidden_label", iPosition:=1)
         clsHideDataFrame.AddParameter("new_val", "TRUE", iPosition:=2)
         RunScriptFromDataFrameMetadata(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
@@ -223,16 +191,16 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub copySheet_Click(sender As Object, e As EventArgs) Handles copySheet.Click
-        dlgCopyDataFrame.SetCurrentDataframe(GetSelectedVariableNamesAsArray(0))
+        dlgCopyDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
         Dim strScript As String = ""
         Dim strTemp As String
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedVariableNamesAsArray(0) & Chr(34), iPosition:=0)
+        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedDataframeNameFromSelectedRow() & Chr(34), iPosition:=0)
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
-        clsGetDataFrame.SetAssignTo(GetSelectedVariableNamesAsArray(0))
+        clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
         strTemp = clsViewDataFrame.ToScript(strScript)
         RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
     End Sub
@@ -242,11 +210,11 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub rowRightClickMenu_Opening(sender As Object, e As EventArgs) Handles rowRightClickMenu.Opening
-        hideSheet.Enabled = (grdMetaData.CurrentWorksheet.RowCount > 1)
+        hideSheet.Enabled = (_clsDataBook.DataFrames.Count > 1)
     End Sub
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
 End Class

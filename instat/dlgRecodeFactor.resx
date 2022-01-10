@@ -652,7 +652,7 @@
     <value>2</value>
   </data>
   <data name="rdoAddNa.Text" xml:space="preserve">
-    <value>add_na</value>
+    <value>Add NA</value>
   </data>
   <data name="rdoAddNa.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -685,7 +685,7 @@
     <value>8</value>
   </data>
   <data name="lblNameForNa.Text" xml:space="preserve">
-    <value>Name for na:</value>
+    <value>Name for NA:</value>
   </data>
   <data name="&gt;&gt;lblNameForNa.Name" xml:space="preserve">
     <value>lblNameForNa</value>
