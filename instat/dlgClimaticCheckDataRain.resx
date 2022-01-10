@@ -417,6 +417,15 @@
   <data name="&gt;&gt;lblSkewnessWeight.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="ucrChkLogicalColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="ucrChkLogicalColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 20</value>
+  </data>
+  <data name="ucrChkLogicalColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;ucrChkLogicalColumns.Name" xml:space="preserve">
     <value>ucrChkLogicalColumns</value>
   </data>
@@ -428,6 +437,15 @@
   </data>
   <data name="&gt;&gt;ucrChkLogicalColumns.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 21</value>
+  </data>
+  <data name="ucrChkCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="ucrChkCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrChkCalculatedColumns.Name" xml:space="preserve">
     <value>ucrChkCalculatedColumns</value>
@@ -945,6 +963,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>424, 504</value>
   </data>
@@ -1092,6 +1113,9 @@
   <data name="&gt;&gt;ucrSelectorRain.ZOrder" xml:space="preserve">
     <value>36</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 449</value>
   </data>
@@ -1112,9 +1136,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>37</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1151,47 +1172,5 @@
   </data>
   <data name="&gt;&gt;ucrReceiverMonth.ZOrder" xml:space="preserve">
     <value>24</value>
-  </data>
-  <data name="ucrChkLogicalColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
-  </data>
-  <data name="ucrChkLogicalColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 20</value>
-  </data>
-  <data name="ucrChkLogicalColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Name" xml:space="preserve">
-    <value>ucrChkLogicalColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Parent" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 21</value>
-  </data>
-  <data name="ucrChkCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 20</value>
-  </data>
-  <data name="ucrChkCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Name" xml:space="preserve">
-    <value>ucrChkCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Parent" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 </root>

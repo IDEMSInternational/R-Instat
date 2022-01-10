@@ -43,13 +43,14 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputWithinYear = New instat.ucrInputComboBox()
         Me.ucrInputYear = New instat.ucrInputComboBox()
         Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrChkVerticalXTickMarkers = New instat.ucrCheck()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblOutlierCoefficient = New System.Windows.Forms.Label()
+        Me.ucrNudOutlierCoefficient = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -206,12 +207,6 @@ Partial Class dlgClimaticBoxPlot
         resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
         Me.ucrInputStation.Name = "ucrInputStation"
         '
-        'ucrChkVerticalXTickMarkers
-        '
-        Me.ucrChkVerticalXTickMarkers.Checked = False
-        resources.ApplyResources(Me.ucrChkVerticalXTickMarkers, "ucrChkVerticalXTickMarkers")
-        Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
-        '
         'ucrPnlPlots
         '
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
@@ -247,10 +242,27 @@ Partial Class dlgClimaticBoxPlot
         resources.ApplyResources(Me.ucrSelectorClimaticBoxPlot, "ucrSelectorClimaticBoxPlot")
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
         '
+        'lblOutlierCoefficient
+        '
+        resources.ApplyResources(Me.lblOutlierCoefficient, "lblOutlierCoefficient")
+        Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
+        '
+        'ucrNudOutlierCoefficient
+        '
+        Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudOutlierCoefficient, "ucrNudOutlierCoefficient")
+        Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
+        Me.ucrNudOutlierCoefficient.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgClimaticBoxPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudOutlierCoefficient)
+        Me.Controls.Add(Me.lblOutlierCoefficient)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -266,7 +278,6 @@ Partial Class dlgClimaticBoxPlot
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrChkVerticalXTickMarkers)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplot)
@@ -297,7 +308,6 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoBoxplot As RadioButton
     Friend WithEvents ucrPnlPlots As UcrPanel
-    Friend WithEvents ucrChkVerticalXTickMarkers As ucrCheck
     Friend WithEvents lblWithinYear As Label
     Friend WithEvents lblElement As Label
     Friend WithEvents lblYear As Label
@@ -313,4 +323,6 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrNudOutlierCoefficient As ucrNud
+    Friend WithEvents lblOutlierCoefficient As Label
 End Class

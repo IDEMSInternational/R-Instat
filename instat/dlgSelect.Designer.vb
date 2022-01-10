@@ -60,10 +60,10 @@ Partial Class dlgSelect
         Me.grpApplyOptions.Controls.Add(Me.ucrPnlApplyOptions)
         Me.grpApplyOptions.Location = New System.Drawing.Point(11, 207)
         Me.grpApplyOptions.Name = "grpApplyOptions"
-        Me.grpApplyOptions.Size = New System.Drawing.Size(396, 53)
+        Me.grpApplyOptions.Size = New System.Drawing.Size(404, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
-        Me.grpApplyOptions.Text = "Apply options"
+        Me.grpApplyOptions.Text = "Apply"
         '
         'rdoApplyAsSubset
         '
@@ -73,8 +73,9 @@ Partial Class dlgSelect
         Me.rdoApplyAsSubset.Size = New System.Drawing.Size(190, 17)
         Me.rdoApplyAsSubset.TabIndex = 1
         Me.rdoApplyAsSubset.TabStop = True
-        Me.rdoApplyAsSubset.Text = "Apply as subset"
+        Me.rdoApplyAsSubset.Text = "As Subset"
         Me.rdoApplyAsSubset.UseVisualStyleBackColor = True
+        Me.rdoApplyAsSubset.Visible = False
         '
         'rdoApplyAsSelect
         '
@@ -84,14 +85,15 @@ Partial Class dlgSelect
         Me.rdoApplyAsSelect.Size = New System.Drawing.Size(154, 17)
         Me.rdoApplyAsSelect.TabIndex = 0
         Me.rdoApplyAsSelect.TabStop = True
-        Me.rdoApplyAsSelect.Text = "Apply as selected columns"
+        Me.rdoApplyAsSelect.Text = "Selector Only"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
         '
         'ucrPnlApplyOptions
         '
-        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(0, 13)
+        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(4, 15)
         Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(390, 36)
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(392, 32)
         Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'lblSelection
@@ -100,9 +102,9 @@ Partial Class dlgSelect
         Me.lblSelection.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSelection.Location = New System.Drawing.Point(250, 55)
         Me.lblSelection.Name = "lblSelection"
-        Me.lblSelection.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelection.Size = New System.Drawing.Size(54, 13)
         Me.lblSelection.TabIndex = 1
-        Me.lblSelection.Text = "Column selection:"
+        Me.lblSelection.Text = "Selection:"
         '
         'cmdDefineNewSelect
         '
@@ -112,32 +114,34 @@ Partial Class dlgSelect
         Me.cmdDefineNewSelect.Size = New System.Drawing.Size(157, 30)
         Me.cmdDefineNewSelect.TabIndex = 3
         Me.cmdDefineNewSelect.Tag = ""
-        Me.cmdDefineNewSelect.Text = "Define new column selection"
+        Me.cmdDefineNewSelect.Text = "Define New Selection"
         Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
         '
         'lblFilterPreview
         '
-        Me.lblFilterPreview.Enabled = False
         Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFilterPreview.Location = New System.Drawing.Point(11, 303)
         Me.lblFilterPreview.Name = "lblFilterPreview"
-        Me.lblFilterPreview.Size = New System.Drawing.Size(132, 22)
+        Me.lblFilterPreview.Size = New System.Drawing.Size(143, 22)
         Me.lblFilterPreview.TabIndex = 6
-        Me.lblFilterPreview.Text = "Column selection preview:"
+        Me.lblFilterPreview.Text = "Selection Preview:"
+        Me.lblFilterPreview.Visible = False
         '
         'ucrInputSelectPreview
         '
         Me.ucrInputSelectPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectPreview.Enabled = False
+        Me.ucrInputSelectPreview.AutoSize = True
         Me.ucrInputSelectPreview.IsMultiline = True
         Me.ucrInputSelectPreview.IsReadOnly = False
-        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(146, 294)
+        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(160, 294)
         Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
-        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(269, 43)
+        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(255, 43)
         Me.ucrInputSelectPreview.TabIndex = 7
+        Me.ucrInputSelectPreview.Visible = False
         '
         'ucrReceiverSelect
         '
+        Me.ucrReceiverSelect.AutoSize = True
         Me.ucrReceiverSelect.frmParent = Me
         Me.ucrReceiverSelect.Location = New System.Drawing.Point(251, 70)
         Me.ucrReceiverSelect.Margin = New System.Windows.Forms.Padding(0)
@@ -150,24 +154,28 @@ Partial Class dlgSelect
         '
         'ucrSelectorForSelectColumns
         '
+        Me.ucrSelectorForSelectColumns.AutoSize = True
         Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorForSelectColumns.bShowHiddenColumns = False
         Me.ucrSelectorForSelectColumns.bUseCurrentFilter = True
         Me.ucrSelectorForSelectColumns.Location = New System.Drawing.Point(11, 20)
         Me.ucrSelectorForSelectColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForSelectColumns.Name = "ucrSelectorForSelectColumns"
-        Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForSelectColumns.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(11, 343)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrNewDataFrameName
         '
+        Me.ucrNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(11, 267)
         Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
@@ -176,8 +184,9 @@ Partial Class dlgSelect
         '
         'dlgSelect
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 401)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.grpApplyOptions)
@@ -194,7 +203,7 @@ Partial Class dlgSelect
         Me.Name = "dlgSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Select"
-        Me.Text = "Select column(s)"
+        Me.Text = "Column Selection"
         Me.grpApplyOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

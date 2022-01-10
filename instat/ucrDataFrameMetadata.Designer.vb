@@ -39,12 +39,12 @@ Partial Class ucrDataFrameMetadata
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.grdMetaData = New unvell.ReoGrid.ReoGridControl()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.rowRightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.hideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,34 +52,16 @@ Partial Class ucrDataFrameMetadata
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderDataFrameMetaData = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrLinuxGrid = New instat.ucrDataframeMetadataLinuxGrid()
+        Me.ucrReoGrid = New instat.ucrDataframeMetadataReoGrid()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowRightClickMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
-        'grdMetaData
-        '
-        Me.grdMetaData.BackColor = System.Drawing.Color.White
-        Me.grdMetaData.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdMetaData.ContextMenuStrip = Me.cellContextMenuStrip
-        Me.grdMetaData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grdMetaData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdMetaData.Location = New System.Drawing.Point(3, 23)
-        Me.grdMetaData.Name = "grdMetaData"
-        Me.grdMetaData.RowHeaderContextMenuStrip = Me.rowRightClickMenu
-        Me.grdMetaData.Script = Nothing
-        Me.grdMetaData.SheetTabContextMenuStrip = Nothing
-        Me.grdMetaData.SheetTabNewButtonVisible = False
-        Me.grdMetaData.SheetTabVisible = False
-        Me.grdMetaData.SheetTabWidth = 100
-        Me.grdMetaData.ShowScrollEndSpacing = True
-        Me.grdMetaData.Size = New System.Drawing.Size(471, 291)
-        Me.grdMetaData.TabIndex = 1
-        Me.grdMetaData.Text = "Meta Data"
-        '
         'cellContextMenuStrip
         '
+        Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
         Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
@@ -95,100 +77,121 @@ Partial Class ucrDataFrameMetadata
         Me.rowRightClickMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
         Me.rowRightClickMenu.Name = "statusColumnMenu"
-        Me.rowRightClickMenu.Size = New System.Drawing.Size(181, 202)
+        Me.rowRightClickMenu.Size = New System.Drawing.Size(163, 180)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
+        '
+        'mnuAddComment
+        '
+        Me.mnuAddComment.Name = "mnuAddComment"
+        Me.mnuAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuAddComment.Text = "Add Comment..."
         '
         'hideSheet
         '
         Me.hideSheet.Name = "hideSheet"
-        Me.hideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.hideSheet.Size = New System.Drawing.Size(162, 22)
         Me.hideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'copySheet
         '
         Me.copySheet.Name = "copySheet"
-        Me.copySheet.Size = New System.Drawing.Size(180, 22)
+        Me.copySheet.Size = New System.Drawing.Size(162, 22)
         Me.copySheet.Text = "Copy..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'viewSheet
         '
         Me.viewSheet.Name = "viewSheet"
-        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.viewSheet.Size = New System.Drawing.Size(162, 22)
         Me.viewSheet.Text = "View Data Frame"
         '
         'lblHeaderDataFrameMetaData
         '
         Me.lblHeaderDataFrameMetaData.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.tlpTableContainer.SetColumnSpan(Me.lblHeaderDataFrameMetaData, 2)
         Me.lblHeaderDataFrameMetaData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeaderDataFrameMetaData.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeaderDataFrameMetaData.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeaderDataFrameMetaData.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderDataFrameMetaData.Name = "lblHeaderDataFrameMetaData"
-        Me.lblHeaderDataFrameMetaData.Size = New System.Drawing.Size(471, 20)
+        Me.lblHeaderDataFrameMetaData.Size = New System.Drawing.Size(649, 20)
         Me.lblHeaderDataFrameMetaData.TabIndex = 7
         Me.lblHeaderDataFrameMetaData.Text = "Data Frame Metadata"
         Me.lblHeaderDataFrameMetaData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
-        Me.tlpTableContainer.ColumnCount = 1
-        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.grdMetaData, 0, 1)
+        Me.tlpTableContainer.ColumnCount = 2
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderDataFrameMetaData, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.ucrLinuxGrid, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.ucrReoGrid, 1, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 2
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(477, 317)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(655, 405)
         Me.tlpTableContainer.TabIndex = 8
         '
-        'mnuAddComment
+        'ucrLinuxGrid
         '
-        Me.mnuAddComment.Name = "mnuAddComment"
-        Me.mnuAddComment.Size = New System.Drawing.Size(180, 22)
-        Me.mnuAddComment.Text = "Add Comment..."
+        Me.ucrLinuxGrid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLinuxGrid.Location = New System.Drawing.Point(2, 22)
+        Me.ucrLinuxGrid.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrLinuxGrid.Name = "ucrLinuxGrid"
+        Me.ucrLinuxGrid.Size = New System.Drawing.Size(323, 381)
+        Me.ucrLinuxGrid.TabIndex = 8
+        '
+        'ucrReoGrid
+        '
+        Me.ucrReoGrid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrReoGrid.Location = New System.Drawing.Point(329, 22)
+        Me.ucrReoGrid.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrReoGrid.Name = "ucrReoGrid"
+        Me.ucrReoGrid.Size = New System.Drawing.Size(324, 381)
+        Me.ucrReoGrid.TabIndex = 9
         '
         'ucrDataFrameMetadata
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataFrameMetadata"
-        Me.Size = New System.Drawing.Size(477, 317)
+        Me.Size = New System.Drawing.Size(655, 405)
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.rowRightClickMenu.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents grdMetaData As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblHeaderDataFrameMetaData As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents cellContextMenuStrip As ContextMenuStrip
@@ -202,4 +205,6 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents reorderSheet As ToolStripMenuItem
     Friend WithEvents viewSheet As ToolStripMenuItem
     Friend WithEvents mnuAddComment As ToolStripMenuItem
+    Friend WithEvents ucrLinuxGrid As ucrDataframeMetadataLinuxGrid
+    Friend WithEvents ucrReoGrid As ucrDataframeMetadataReoGrid
 End Class

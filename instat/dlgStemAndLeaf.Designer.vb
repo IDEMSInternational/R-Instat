@@ -46,6 +46,7 @@ Partial Class dlgStemAndLeaf
         '
         'ucrReceiverStemAndLeaf
         '
+        Me.ucrReceiverStemAndLeaf.AutoSize = True
         Me.ucrReceiverStemAndLeaf.frmParent = Me
         Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(256, 60)
         Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
@@ -58,9 +59,11 @@ Partial Class dlgStemAndLeaf
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 201)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 3
         '
         'lblSelectedVariable
@@ -75,6 +78,8 @@ Partial Class dlgStemAndLeaf
         '
         'ucrStemLeafSelector
         '
+        Me.ucrStemLeafSelector.AutoSize = True
+        Me.ucrStemLeafSelector.bDropUnusedFilterLevels = False
         Me.ucrStemLeafSelector.bShowHiddenColumns = False
         Me.ucrStemLeafSelector.bUseCurrentFilter = True
         Me.ucrStemLeafSelector.Location = New System.Drawing.Point(10, 10)
@@ -85,8 +90,9 @@ Partial Class dlgStemAndLeaf
         '
         'dlgStemAndLeaf
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 259)
         Me.Controls.Add(Me.ucrStemLeafSelector)
         Me.Controls.Add(Me.lblSelectedVariable)

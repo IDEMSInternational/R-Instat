@@ -134,6 +134,7 @@ Partial Class dlgDotPlot
         '
         'ucrDotPlotSelector
         '
+        Me.ucrDotPlotSelector.bDropUnusedFilterLevels = False
         Me.ucrDotPlotSelector.bShowHiddenColumns = False
         Me.ucrDotPlotSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDotPlotSelector, "ucrDotPlotSelector")

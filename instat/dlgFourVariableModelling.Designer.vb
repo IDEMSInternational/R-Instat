@@ -162,6 +162,7 @@ Partial Class dlgFourVariableModelling
         'ucrInputModelOperators2
         '
         Me.ucrInputModelOperators2.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelOperators2.GetSetSelectedIndex = -1
         Me.ucrInputModelOperators2.IsReadOnly = False
         Me.ucrInputModelOperators2.Location = New System.Drawing.Point(355, 201)
         Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
@@ -171,6 +172,7 @@ Partial Class dlgFourVariableModelling
         'ucrInputModelOperators1
         '
         Me.ucrInputModelOperators1.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelOperators1.GetSetSelectedIndex = -1
         Me.ucrInputModelOperators1.IsReadOnly = False
         Me.ucrInputModelOperators1.Location = New System.Drawing.Point(355, 124)
         Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
@@ -244,6 +246,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrSelectorFourVariableModelling
         '
+        Me.ucrSelectorFourVariableModelling.bDropUnusedFilterLevels = False
         Me.ucrSelectorFourVariableModelling.bShowHiddenColumns = False
         Me.ucrSelectorFourVariableModelling.bUseCurrentFilter = True
         Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(10, 10)
@@ -254,6 +257,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrBaseFourVariableModelling
         '
+        Me.ucrBaseFourVariableModelling.AutoSize = True
         Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(10, 406)
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
@@ -262,6 +266,7 @@ Partial Class dlgFourVariableModelling
         'ucrSaveModel
         '
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 376)
+        Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveModel.TabIndex = 22
@@ -313,6 +318,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(546, 460)
         Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.cmdThirdExplanatoryFunction)

@@ -405,6 +405,9 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>448, 436</value>
   </data>
@@ -501,6 +504,9 @@
   <data name="&gt;&gt;ucrHistogramSelector.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="ucrBase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 375</value>
   </data>
@@ -568,7 +574,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 97</value>
+    <value>125, 136</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

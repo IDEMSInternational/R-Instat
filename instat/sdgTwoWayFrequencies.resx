@@ -720,6 +720,27 @@
   <data name="&gt;&gt;rdoBoxPlot.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="grpGraphOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 195</value>
+  </data>
+  <data name="grpGraphOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpGraphOptions.Text" xml:space="preserve">
+    <value>Graph Options</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Name" xml:space="preserve">
+    <value>grpGraphOptions</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Parent" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="rdoDot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -867,6 +888,78 @@
   <data name="&gt;&gt;tbpTwoWayFrequencies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="grpGraphType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpGraphType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 48</value>
+  </data>
+  <data name="grpGraphType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpGraphType.Text" xml:space="preserve">
+    <value>Type of Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Name" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Parent" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpGraph.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 257</value>
+  </data>
+  <data name="tbpGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpGraph.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Name" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Parent" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 283</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Name" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrBaseSubDialogue.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 297</value>
   </data>
@@ -896,6 +989,9 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>408, 328</value>

@@ -34,9 +34,10 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(124, 200)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(156, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 7
         '
         'lblStation
@@ -51,6 +52,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'ucrReceiverLongitude
         '
+        Me.ucrReceiverLongitude.AutoSize = True
         Me.ucrReceiverLongitude.frmParent = Me
         Me.ucrReceiverLongitude.Location = New System.Drawing.Point(238, 147)
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
@@ -63,6 +65,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'ucrReceiverLatitude
         '
+        Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
         Me.ucrReceiverLatitude.Location = New System.Drawing.Point(238, 103)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
@@ -95,6 +98,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(238, 59)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -107,6 +111,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'ucrSelectorMetadata
         '
+        Me.ucrSelectorMetadata.AutoSize = True
         Me.ucrSelectorMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectorMetadata.bShowHiddenColumns = False
         Me.ucrSelectorMetadata.bUseCurrentFilter = True
@@ -118,8 +123,9 @@ Partial Class sdgClimaticNCMPMetadata
         '
         'sdgClimaticNCMPMetadata
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(388, 233)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverLongitude)

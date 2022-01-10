@@ -162,6 +162,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(10, 271)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -229,13 +230,14 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrSaveVariogram.Location = New System.Drawing.Point(10, 214)
         Me.ucrSaveVariogram.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveVariogram.Name = "ucrSaveVariogram"
-        Me.ucrSaveVariogram.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveVariogram.Size = New System.Drawing.Size(383, 22)
         Me.ucrSaveVariogram.TabIndex = 16
         '
         'dlgClimaticNCMPVariogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(420, 326)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdChooseFile)

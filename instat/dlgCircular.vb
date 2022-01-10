@@ -48,6 +48,12 @@ Public Class dlgCircular
         ucrPnlUnits.AddRadioButton(rdoHours, Chr(34) & "hours" & Chr(34))
         ucrPnlUnits.AddRadioButton(rdoRadians, Chr(34) & "radians" & Chr(34))
 
+        ucrPnlTemplate.SetParameter(New RParameter("template", 3))
+        ucrPnlTemplate.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
+        ucrPnlTemplate.AddRadioButton(rdoGeographics, Chr(34) & "geographics" & Chr(34))
+        ucrPnlTemplate.AddRadioButton(rdoClock12, Chr(34) & "clock12" & Chr(34))
+        ucrPnlTemplate.AddRadioButton(rdoClock24, Chr(34) & "clock24" & Chr(34))
+
         ucrSaveCircularColumn.SetPrefix("circ")
         ucrSaveCircularColumn.SetSaveTypeAsColumn()
         ucrSaveCircularColumn.SetDataFrameSelector(ucrSelectorCircular.ucrAvailableDataFrames)
@@ -64,7 +70,9 @@ Public Class dlgCircular
         clsCircularFunction.SetRCommand("circular")
 
         clsCircularFunction.AddParameter("units", Chr(34) & "radians" & Chr(34), iPosition:=2)
-        clsCircularFunction.AddParameter("modulo", Chr(34) & "2pi" & Chr(34), iPosition:=1)
+        clsCircularFunction.AddParameter("modulo", Chr(34) & "asis" & Chr(34), iPosition:=1)
+        clsCircularFunction.AddParameter("template", Chr(34) & "none" & Chr(34), iPosition:=3)
+
 
         clsCircularFunction.SetAssignTo(ucrSaveCircularColumn.GetText, strTempDataframe:=ucrSelectorCircular.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveCircularColumn.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCircularFunction)

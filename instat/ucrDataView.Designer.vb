@@ -39,7 +39,6 @@ Partial Class ucrDataView
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.grdData = New unvell.ReoGrid.ReoGridControl()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,7 +73,7 @@ Partial Class ucrDataView
         Me.mnuConvertToLogic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuLebelsLevel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLabelsLevel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSorts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuComment = New System.Windows.Forms.ToolStripMenuItem()
@@ -98,10 +97,8 @@ Partial Class ucrDataView
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.lblHeaderDataView = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.pnlDataContainer = New System.Windows.Forms.Panel()
         Me.panelSectionsAll = New System.Windows.Forms.Panel()
         Me.panelSectionRecent = New System.Windows.Forms.Panel()
         Me.lblRecent = New System.Windows.Forms.Label()
@@ -114,39 +111,33 @@ Partial Class ucrDataView
         Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
         Me.lblStart = New System.Windows.Forms.Label()
-        Me.linkStartNewdataframe = New System.Windows.Forms.LinkLabel()
-        Me.linkStartImportFile = New System.Windows.Forms.LinkLabel()
-        Me.linkStartImportLibrary = New System.Windows.Forms.LinkLabel()
+        Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
+        Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
+        Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
+        Me.TblPanPageDisplay = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblColFirst = New System.Windows.Forms.Label()
+        Me.lblColDisplay = New System.Windows.Forms.Label()
+        Me.lblColNext = New System.Windows.Forms.Label()
+        Me.lblColBack = New System.Windows.Forms.Label()
+        Me.lblRowLast = New System.Windows.Forms.Label()
+        Me.lblRowFirst = New System.Windows.Forms.Label()
+        Me.lblRowDisplay = New System.Windows.Forms.Label()
+        Me.lblRowNext = New System.Windows.Forms.Label()
+        Me.lblColLast = New System.Windows.Forms.Label()
+        Me.lblRowBack = New System.Windows.Forms.Label()
+        Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
+        Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
-        Me.pnlDataContainer.SuspendLayout()
         Me.panelSectionsAll.SuspendLayout()
         Me.panelSectionRecent.SuspendLayout()
         Me.panelSectionHelp.SuspendLayout()
         Me.panelSectionStart.SuspendLayout()
+        Me.TblPanPageDisplay.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'grdData
-        '
-        Me.grdData.BackColor = System.Drawing.Color.White
-        Me.grdData.ColumnHeaderContextMenuStrip = Me.columnContextMenuStrip
-        Me.grdData.ContextMenuStrip = Me.cellContextMenuStrip
-        Me.grdData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grdData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdData.Location = New System.Drawing.Point(0, 0)
-        Me.grdData.Name = "grdData"
-        Me.grdData.RowHeaderContextMenuStrip = Me.rowContextMenuStrip
-        Me.grdData.Script = Nothing
-        Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
-        Me.grdData.SheetTabNewButtonVisible = False
-        Me.grdData.SheetTabVisible = True
-        Me.grdData.SheetTabWidth = 154
-        Me.grdData.ShowScrollEndSpacing = True
-        Me.grdData.Size = New System.Drawing.Size(438, 454)
-        Me.grdData.TabIndex = 0
         '
         'columnContextMenuStrip
         '
@@ -275,7 +266,7 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
         Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
         '
@@ -348,11 +339,11 @@ Partial Class ucrDataView
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(209, 6)
         '
-        'mnuLebelsLevel
+        'mnuLabelsLevel
         '
-        Me.mnuLebelsLevel.Name = "mnuLebelsLevel"
-        Me.mnuLebelsLevel.Size = New System.Drawing.Size(212, 22)
-        Me.mnuLebelsLevel.Text = "Levels/Labels..."
+        Me.mnuLabelsLevel.Name = "mnuLabelsLevel"
+        Me.mnuLabelsLevel.Size = New System.Drawing.Size(212, 22)
+        Me.mnuLabelsLevel.Text = "Levels/Labels..."
         '
         'ToolStripSeparator7
         '
@@ -494,37 +485,32 @@ Partial Class ucrDataView
         Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
-        'lblRowDisplay
-        '
-        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblRowDisplay.Location = New System.Drawing.Point(3, 480)
-        Me.lblRowDisplay.Name = "lblRowDisplay"
-        Me.lblRowDisplay.Size = New System.Drawing.Size(438, 20)
-        Me.lblRowDisplay.TabIndex = 4
-        Me.lblRowDisplay.Text = "Label1"
-        Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'lblHeaderDataView
         '
         Me.lblHeaderDataView.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.tlpTableContainer.SetColumnSpan(Me.lblHeaderDataView, 3)
         Me.lblHeaderDataView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeaderDataView.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeaderDataView.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHeaderDataView.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderDataView.Name = "lblHeaderDataView"
-        Me.lblHeaderDataView.Size = New System.Drawing.Size(438, 20)
+        Me.lblHeaderDataView.Size = New System.Drawing.Size(742, 20)
         Me.lblHeaderDataView.TabIndex = 5
         Me.lblHeaderDataView.Text = "Data View"
         Me.lblHeaderDataView.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
-        Me.tlpTableContainer.ColumnCount = 1
-        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.ColumnCount = 3
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
+        Me.tlpTableContainer.Controls.Add(Me.panelSectionsAll, 0, 1)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderDataView, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.lblRowDisplay, 0, 2)
-        Me.tlpTableContainer.Controls.Add(Me.pnlDataContainer, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.TblPanPageDisplay, 1, 2)
+        Me.tlpTableContainer.Controls.Add(Me.ucrReoGrid, 2, 1)
+        Me.tlpTableContainer.Controls.Add(Me.ucrLinuxGrid, 1, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -532,18 +518,8 @@ Partial Class ucrDataView
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(444, 500)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(748, 481)
         Me.tlpTableContainer.TabIndex = 6
-        '
-        'pnlDataContainer
-        '
-        Me.pnlDataContainer.Controls.Add(Me.panelSectionsAll)
-        Me.pnlDataContainer.Controls.Add(Me.grdData)
-        Me.pnlDataContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDataContainer.Location = New System.Drawing.Point(3, 23)
-        Me.pnlDataContainer.Name = "pnlDataContainer"
-        Me.pnlDataContainer.Size = New System.Drawing.Size(438, 454)
-        Me.pnlDataContainer.TabIndex = 7
         '
         'panelSectionsAll
         '
@@ -551,10 +527,11 @@ Partial Class ucrDataView
         Me.panelSectionsAll.Controls.Add(Me.panelSectionHelp)
         Me.panelSectionsAll.Controls.Add(Me.panelSectionStart)
         Me.panelSectionsAll.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.panelSectionsAll.Location = New System.Drawing.Point(0, 0)
+        Me.panelSectionsAll.Location = New System.Drawing.Point(3, 23)
         Me.panelSectionsAll.Name = "panelSectionsAll"
-        Me.panelSectionsAll.Size = New System.Drawing.Size(438, 454)
-        Me.panelSectionsAll.TabIndex = 7
+        Me.tlpTableContainer.SetRowSpan(Me.panelSectionsAll, 2)
+        Me.panelSectionsAll.Size = New System.Drawing.Size(243, 455)
+        Me.panelSectionsAll.TabIndex = 9
         '
         'panelSectionRecent
         '
@@ -564,7 +541,7 @@ Partial Class ucrDataView
         Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
         Me.panelSectionRecent.Location = New System.Drawing.Point(28, 130)
         Me.panelSectionRecent.Name = "panelSectionRecent"
-        Me.panelSectionRecent.Size = New System.Drawing.Size(374, 186)
+        Me.panelSectionRecent.Size = New System.Drawing.Size(179, 186)
         Me.panelSectionRecent.TabIndex = 13
         '
         'lblRecent
@@ -583,9 +560,9 @@ Partial Class ucrDataView
         Me.panelRecentMenuItems.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panelRecentMenuItems.AutoScroll = True
-        Me.panelRecentMenuItems.Location = New System.Drawing.Point(9, 37)
+        Me.panelRecentMenuItems.Location = New System.Drawing.Point(9, 38)
         Me.panelRecentMenuItems.Name = "panelRecentMenuItems"
-        Me.panelRecentMenuItems.Size = New System.Drawing.Size(354, 138)
+        Me.panelRecentMenuItems.Size = New System.Drawing.Size(159, 138)
         Me.panelRecentMenuItems.TabIndex = 6
         '
         'panelSectionHelp
@@ -613,11 +590,11 @@ Partial Class ucrDataView
         '
         'linkHelpIntroduction
         '
-        Me.linkHelpIntroduction.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpIntroduction.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpIntroduction.AutoSize = True
         Me.linkHelpIntroduction.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpIntroduction.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpIntroduction.Location = New System.Drawing.Point(8, 37)
+        Me.linkHelpIntroduction.Location = New System.Drawing.Point(8, 38)
         Me.linkHelpIntroduction.Name = "linkHelpIntroduction"
         Me.linkHelpIntroduction.Size = New System.Drawing.Size(63, 13)
         Me.linkHelpIntroduction.TabIndex = 7
@@ -626,7 +603,7 @@ Partial Class ucrDataView
         '
         'linkHelpInstructionVideos
         '
-        Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpInstructionVideos.AutoSize = True
         Me.linkHelpInstructionVideos.Enabled = False
         Me.linkHelpInstructionVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -641,7 +618,7 @@ Partial Class ucrDataView
         '
         'linkHelpRpackages
         '
-        Me.linkHelpRpackages.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRpackages.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpRpackages.AutoSize = True
         Me.linkHelpRpackages.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRpackages.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -654,7 +631,7 @@ Partial Class ucrDataView
         '
         'linkHelpRInstatWebsite
         '
-        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Red
         Me.linkHelpRInstatWebsite.AutoSize = True
         Me.linkHelpRInstatWebsite.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRInstatWebsite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
@@ -668,9 +645,9 @@ Partial Class ucrDataView
         'panelSectionStart
         '
         Me.panelSectionStart.Controls.Add(Me.lblStart)
-        Me.panelSectionStart.Controls.Add(Me.linkStartNewdataframe)
-        Me.panelSectionStart.Controls.Add(Me.linkStartImportFile)
-        Me.panelSectionStart.Controls.Add(Me.linkStartImportLibrary)
+        Me.panelSectionStart.Controls.Add(Me.linkStartNewDataFrame)
+        Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
+        Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
         Me.panelSectionStart.Location = New System.Drawing.Point(28, 20)
         Me.panelSectionStart.Name = "panelSectionStart"
         Me.panelSectionStart.Size = New System.Drawing.Size(374, 96)
@@ -687,59 +664,226 @@ Partial Class ucrDataView
         Me.lblStart.TabIndex = 0
         Me.lblStart.Text = "Start"
         '
-        'linkStartNewdataframe
+        'linkStartNewDataFrame
         '
-        Me.linkStartNewdataframe.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartNewdataframe.AutoSize = True
-        Me.linkStartNewdataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartNewdataframe.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewdataframe.Location = New System.Drawing.Point(7, 37)
-        Me.linkStartNewdataframe.Name = "linkStartNewdataframe"
-        Me.linkStartNewdataframe.Size = New System.Drawing.Size(91, 13)
-        Me.linkStartNewdataframe.TabIndex = 3
-        Me.linkStartNewdataframe.TabStop = True
-        Me.linkStartNewdataframe.Text = "New data frame..."
+        Me.linkStartNewDataFrame.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartNewDataFrame.AutoSize = True
+        Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 38)
+        Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
+        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
+        Me.linkStartNewDataFrame.TabIndex = 3
+        Me.linkStartNewDataFrame.TabStop = True
+        Me.linkStartNewDataFrame.Text = "New Data Frame..."
         '
-        'linkStartImportFile
+        'linkStartOpenFile
         '
-        Me.linkStartImportFile.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartImportFile.AutoSize = True
-        Me.linkStartImportFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartImportFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartImportFile.Location = New System.Drawing.Point(7, 56)
-        Me.linkStartImportFile.Name = "linkStartImportFile"
-        Me.linkStartImportFile.Size = New System.Drawing.Size(84, 13)
-        Me.linkStartImportFile.TabIndex = 4
-        Me.linkStartImportFile.TabStop = True
-        Me.linkStartImportFile.Text = "Import from file..."
+        Me.linkStartOpenFile.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartOpenFile.AutoSize = True
+        Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
+        Me.linkStartOpenFile.Name = "linkStartOpenFile"
+        Me.linkStartOpenFile.Size = New System.Drawing.Size(90, 13)
+        Me.linkStartOpenFile.TabIndex = 4
+        Me.linkStartOpenFile.TabStop = True
+        Me.linkStartOpenFile.Text = "Import From File..."
         '
-        'linkStartImportLibrary
+        'linkStartOpenLibrary
         '
-        Me.linkStartImportLibrary.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartImportLibrary.AutoSize = True
-        Me.linkStartImportLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartImportLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartImportLibrary.Location = New System.Drawing.Point(7, 75)
-        Me.linkStartImportLibrary.Name = "linkStartImportLibrary"
-        Me.linkStartImportLibrary.Size = New System.Drawing.Size(98, 13)
-        Me.linkStartImportLibrary.TabIndex = 5
-        Me.linkStartImportLibrary.TabStop = True
-        Me.linkStartImportLibrary.Text = "Import from library..."
+        Me.linkStartOpenLibrary.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartOpenLibrary.AutoSize = True
+        Me.linkStartOpenLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
+        Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
+        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(105, 13)
+        Me.linkStartOpenLibrary.TabIndex = 5
+        Me.linkStartOpenLibrary.TabStop = True
+        Me.linkStartOpenLibrary.Text = "Import From Library..."
+        '
+        'TblPanPageDisplay
+        '
+        Me.TblPanPageDisplay.AutoSize = True
+        Me.TblPanPageDisplay.ColumnCount = 12
+        Me.tlpTableContainer.SetColumnSpan(Me.TblPanPageDisplay, 2)
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColFirst, 7, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColDisplay, 6, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColNext, 9, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColBack, 8, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowLast, 5, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowFirst, 2, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowDisplay, 1, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowNext, 4, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColLast, 10, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowBack, 3, 0)
+        Me.TblPanPageDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TblPanPageDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TblPanPageDisplay.Location = New System.Drawing.Point(249, 461)
+        Me.TblPanPageDisplay.Margin = New System.Windows.Forms.Padding(0)
+        Me.TblPanPageDisplay.Name = "TblPanPageDisplay"
+        Me.TblPanPageDisplay.RowCount = 1
+        Me.TblPanPageDisplay.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TblPanPageDisplay.Size = New System.Drawing.Size(499, 20)
+        Me.TblPanPageDisplay.TabIndex = 8
+        '
+        'lblColFirst
+        '
+        Me.lblColFirst.AutoSize = True
+        Me.lblColFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColFirst.Location = New System.Drawing.Point(315, 0)
+        Me.lblColFirst.Name = "lblColFirst"
+        Me.lblColFirst.Size = New System.Drawing.Size(18, 20)
+        Me.lblColFirst.TabIndex = 15
+        Me.lblColFirst.Text = "«"
+        Me.lblColFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColDisplay
+        '
+        Me.lblColDisplay.AutoSize = True
+        Me.lblColDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColDisplay.Location = New System.Drawing.Point(252, 0)
+        Me.lblColDisplay.Name = "lblColDisplay"
+        Me.lblColDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblColDisplay.TabIndex = 14
+        Me.lblColDisplay.Text = "Label1"
+        Me.lblColDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColNext
+        '
+        Me.lblColNext.AutoSize = True
+        Me.lblColNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColNext.Location = New System.Drawing.Point(363, 0)
+        Me.lblColNext.Name = "lblColNext"
+        Me.lblColNext.Size = New System.Drawing.Size(18, 20)
+        Me.lblColNext.TabIndex = 13
+        Me.lblColNext.Text = ">"
+        Me.lblColNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColBack
+        '
+        Me.lblColBack.AutoSize = True
+        Me.lblColBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColBack.Location = New System.Drawing.Point(339, 0)
+        Me.lblColBack.Name = "lblColBack"
+        Me.lblColBack.Size = New System.Drawing.Size(18, 20)
+        Me.lblColBack.TabIndex = 12
+        Me.lblColBack.Text = "<"
+        Me.lblColBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowLast
+        '
+        Me.lblRowLast.AutoSize = True
+        Me.lblRowLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowLast.Location = New System.Drawing.Point(228, 0)
+        Me.lblRowLast.Name = "lblRowLast"
+        Me.lblRowLast.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowLast.TabIndex = 11
+        Me.lblRowLast.Text = "»"
+        Me.lblRowLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowFirst
+        '
+        Me.lblRowFirst.AutoSize = True
+        Me.lblRowFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowFirst.Location = New System.Drawing.Point(156, 0)
+        Me.lblRowFirst.Name = "lblRowFirst"
+        Me.lblRowFirst.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowFirst.TabIndex = 10
+        Me.lblRowFirst.Text = "«"
+        Me.lblRowFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowDisplay
+        '
+        Me.lblRowDisplay.AutoSize = True
+        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowDisplay.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblRowDisplay.Location = New System.Drawing.Point(93, 0)
+        Me.lblRowDisplay.Name = "lblRowDisplay"
+        Me.lblRowDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblRowDisplay.TabIndex = 9
+        Me.lblRowDisplay.Text = "Label1"
+        Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblRowNext
+        '
+        Me.lblRowNext.AutoSize = True
+        Me.lblRowNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowNext.Location = New System.Drawing.Point(204, 0)
+        Me.lblRowNext.Name = "lblRowNext"
+        Me.lblRowNext.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowNext.TabIndex = 8
+        Me.lblRowNext.Text = ">"
+        Me.lblRowNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColLast
+        '
+        Me.lblColLast.AutoSize = True
+        Me.lblColLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColLast.Location = New System.Drawing.Point(387, 0)
+        Me.lblColLast.Name = "lblColLast"
+        Me.lblColLast.Size = New System.Drawing.Size(18, 20)
+        Me.lblColLast.TabIndex = 7
+        Me.lblColLast.Text = "»"
+        Me.lblColLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowBack
+        '
+        Me.lblRowBack.AutoSize = True
+        Me.lblRowBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowBack.Location = New System.Drawing.Point(180, 0)
+        Me.lblRowBack.Name = "lblRowBack"
+        Me.lblRowBack.Size = New System.Drawing.Size(18, 20)
+        Me.lblRowBack.TabIndex = 5
+        Me.lblRowBack.Text = "<"
+        Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ucrReoGrid
+        '
+        Me.ucrReoGrid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrReoGrid.Location = New System.Drawing.Point(500, 22)
+        Me.ucrReoGrid.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrReoGrid.Name = "ucrReoGrid"
+        Me.ucrReoGrid.Size = New System.Drawing.Size(246, 437)
+        Me.ucrReoGrid.TabIndex = 12
+        '
+        'ucrLinuxGrid
+        '
+        Me.ucrLinuxGrid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLinuxGrid.Location = New System.Drawing.Point(251, 22)
+        Me.ucrLinuxGrid.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrLinuxGrid.Name = "ucrLinuxGrid"
+        Me.ucrLinuxGrid.Size = New System.Drawing.Size(245, 437)
+        Me.ucrLinuxGrid.TabIndex = 13
         '
         'ucrDataView
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataView"
-        Me.Size = New System.Drawing.Size(444, 500)
+        Me.Size = New System.Drawing.Size(748, 481)
         Me.Tag = "Data_View"
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.rowContextMenuStrip.ResumeLayout(False)
         Me.statusColumnMenu.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
-        Me.pnlDataContainer.ResumeLayout(False)
+        Me.tlpTableContainer.PerformLayout()
         Me.panelSectionsAll.ResumeLayout(False)
         Me.panelSectionRecent.ResumeLayout(False)
         Me.panelSectionRecent.PerformLayout()
@@ -747,11 +891,11 @@ Partial Class ucrDataView
         Me.panelSectionHelp.PerformLayout()
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
+        Me.TblPanPageDisplay.ResumeLayout(False)
+        Me.TblPanPageDisplay.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Public WithEvents grdData As unvell.ReoGrid.ReoGridControl
     Private WithEvents columnContextMenuStrip As ContextMenuStrip
     Private WithEvents mnuInsertColsBefore As ToolStripMenuItem
     Private WithEvents mnuDeleteCol As ToolStripMenuItem
@@ -783,13 +927,11 @@ Partial Class ucrDataView
     Friend WithEvents ViewSheet As ToolStripMenuItem
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuDuplicateColumn As ToolStripMenuItem
-    Friend WithEvents lblRowDisplay As Label
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents lblHeaderDataView As Label
     Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
-    Friend WithEvents pnlDataContainer As Panel
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuReorderColumns As ToolStripMenuItem
@@ -804,29 +946,42 @@ Partial Class ucrDataView
     Friend WithEvents mnuConvertToLogic As ToolStripMenuItem
     Friend WithEvents mnuConvertToNumeric As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents mnuLebelsLevel As ToolStripMenuItem
+    Friend WithEvents mnuLabelsLevel As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents mnuSorts As ToolStripMenuItem
     Private WithEvents mnuFilters As ToolStripMenuItem
     Private WithEvents mnuRemoveCurrentFilters As ToolStripMenuItem
-    Friend WithEvents panelSectionsAll As Panel
-    Friend WithEvents linkStartImportLibrary As LinkLabel
-    Friend WithEvents linkStartImportFile As LinkLabel
-    Friend WithEvents linkStartNewdataframe As LinkLabel
-    Friend WithEvents lblHelp As Label
-    Friend WithEvents lblRecent As Label
-    Friend WithEvents lblStart As Label
-    Friend WithEvents panelRecentMenuItems As Panel
-    Friend WithEvents linkHelpInstructionVideos As LinkLabel
-    Friend WithEvents linkHelpRInstatWebsite As LinkLabel
-    Friend WithEvents linkHelpRpackages As LinkLabel
-    Friend WithEvents linkHelpIntroduction As LinkLabel
-    Friend WithEvents panelSectionRecent As Panel
-    Friend WithEvents panelSectionHelp As Panel
-    Friend WithEvents panelSectionStart As Panel
     Friend WithEvents mnuComment As ToolStripMenuItem
     Friend WithEvents mnuColumnAddComment As ToolStripMenuItem
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
     Private WithEvents mnuPaste As ToolStripMenuItem
     Friend WithEvents mnuCellPasteRange As ToolStripMenuItem
+    Friend WithEvents TblPanPageDisplay As TableLayoutPanel
+    Friend WithEvents lblColLast As Label
+    Friend WithEvents lblRowBack As Label
+    Friend WithEvents lblColFirst As Label
+    Friend WithEvents lblColDisplay As Label
+    Friend WithEvents lblColNext As Label
+    Friend WithEvents lblColBack As Label
+    Friend WithEvents lblRowLast As Label
+    Friend WithEvents lblRowFirst As Label
+    Friend WithEvents lblRowDisplay As Label
+    Friend WithEvents lblRowNext As Label
+    Friend WithEvents panelSectionsAll As Panel
+    Friend WithEvents panelSectionRecent As Panel
+    Friend WithEvents lblRecent As Label
+    Friend WithEvents panelRecentMenuItems As Panel
+    Friend WithEvents panelSectionHelp As Panel
+    Friend WithEvents lblHelp As Label
+    Friend WithEvents linkHelpIntroduction As LinkLabel
+    Friend WithEvents linkHelpInstructionVideos As LinkLabel
+    Friend WithEvents linkHelpRpackages As LinkLabel
+    Friend WithEvents linkHelpRInstatWebsite As LinkLabel
+    Friend WithEvents panelSectionStart As Panel
+    Friend WithEvents lblStart As Label
+    Friend WithEvents linkStartNewDataFrame As LinkLabel
+    Friend WithEvents linkStartOpenFile As LinkLabel
+    Friend WithEvents linkStartOpenLibrary As LinkLabel
+    Friend WithEvents ucrReoGrid As ucrDataViewReoGrid
+    Friend WithEvents ucrLinuxGrid As ucrDataViewLinuxGrid
 End Class
