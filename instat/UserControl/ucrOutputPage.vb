@@ -160,7 +160,7 @@ Public Class ucrOutputPage
 
     Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
         If outputElement Is Nothing OrElse outputElement.FormatedRScript Is Nothing Then
-            Exit Function
+            Return Nothing
         End If
 
         Dim panel As New Panel With {
