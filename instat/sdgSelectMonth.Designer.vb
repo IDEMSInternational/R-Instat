@@ -51,15 +51,17 @@ Partial Class sdgSelectMonth
         '
         'ucrBaseSdg
         '
+        Me.ucrBaseSdg.AutoSize = True
         Me.ucrBaseSdg.Location = New System.Drawing.Point(53, 265)
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
-        Me.ucrBaseSdg.Size = New System.Drawing.Size(154, 30)
+        Me.ucrBaseSdg.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdg.TabIndex = 0
         '
         'sdgSelectMonth
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(259, 298)
         Me.Controls.Add(Me.lblSelectMonth)
         Me.Controls.Add(Me.ucrMonthAsFactor)

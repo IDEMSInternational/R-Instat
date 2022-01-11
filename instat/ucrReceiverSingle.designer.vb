@@ -36,7 +36,6 @@ Partial Class ucrReceiverSingle
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrReceiverSingle))
         Me.txtReceiverSingle = New System.Windows.Forms.TextBox()
         Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRightClickRemove = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,32 +46,40 @@ Partial Class ucrReceiverSingle
         'txtReceiverSingle
         '
         Me.txtReceiverSingle.ContextMenuStrip = Me.mnuRightClick
-        resources.ApplyResources(Me.txtReceiverSingle, "txtReceiverSingle")
+        Me.txtReceiverSingle.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtReceiverSingle.Location = New System.Drawing.Point(0, 0)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
         Me.txtReceiverSingle.ReadOnly = True
+        Me.txtReceiverSingle.Size = New System.Drawing.Size(120, 20)
+        Me.txtReceiverSingle.TabIndex = 0
         '
         'mnuRightClick
         '
         Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickRemove, Me.mnuRightClickCopy})
         Me.mnuRightClick.Name = "SelectionMenuStrip"
-        resources.ApplyResources(Me.mnuRightClick, "mnuRightClick")
+        Me.mnuRightClick.Size = New System.Drawing.Size(118, 48)
         '
         'mnuRightClickRemove
         '
         Me.mnuRightClickRemove.Name = "mnuRightClickRemove"
-        resources.ApplyResources(Me.mnuRightClickRemove, "mnuRightClickRemove")
+        Me.mnuRightClickRemove.Size = New System.Drawing.Size(117, 22)
         Me.mnuRightClickRemove.Tag = "remove"
+        Me.mnuRightClickRemove.Text = "Remove"
         '
         'mnuRightClickCopy
         '
         Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
-        resources.ApplyResources(Me.mnuRightClickCopy, "mnuRightClickCopy")
+        Me.mnuRightClickCopy.Size = New System.Drawing.Size(117, 22)
+        Me.mnuRightClickCopy.Text = "Copy"
         '
         'ucrReceiverSingle
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.txtReceiverSingle)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverSingle"
+        Me.Size = New System.Drawing.Size(120, 20)
         Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

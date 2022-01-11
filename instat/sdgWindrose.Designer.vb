@@ -98,9 +98,9 @@ Partial Class sdgWindrose
         'ucrInputPalettes
         '
         Me.ucrInputPalettes.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
         Me.ucrInputPalettes.GetSetSelectedIndex = -1
         Me.ucrInputPalettes.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
         Me.ucrInputPalettes.Name = "ucrInputPalettes"
         '
         'rdoQualitative
@@ -160,24 +160,24 @@ Partial Class sdgWindrose
         'ucrInputSpeedCuts
         '
         Me.ucrInputSpeedCuts.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSpeedCuts, "ucrInputSpeedCuts")
         Me.ucrInputSpeedCuts.IsMultiline = False
         Me.ucrInputSpeedCuts.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpeedCuts, "ucrInputSpeedCuts")
         Me.ucrInputSpeedCuts.Name = "ucrInputSpeedCuts"
         '
         'ucrInputTheme
         '
         Me.ucrInputTheme.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTheme, "ucrInputTheme")
         Me.ucrInputTheme.GetSetSelectedIndex = -1
         Me.ucrInputTheme.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTheme, "ucrInputTheme")
         Me.ucrInputTheme.Name = "ucrInputTheme"
         '
         'ucrNudNoOfDirections
         '
+        resources.ApplyResources(Me.ucrNudNoOfDirections, "ucrNudNoOfDirections")
         Me.ucrNudNoOfDirections.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNoOfDirections, "ucrNudNoOfDirections")
         Me.ucrNudNoOfDirections.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfDirections.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Name = "ucrNudNoOfDirections"
@@ -190,9 +190,9 @@ Partial Class sdgWindrose
         '
         'ucrNudNoOfSpeeds
         '
+        resources.ApplyResources(Me.ucrNudNoOfSpeeds, "ucrNudNoOfSpeeds")
         Me.ucrNudNoOfSpeeds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNoOfSpeeds, "ucrNudNoOfSpeeds")
         Me.ucrNudNoOfSpeeds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Name = "ucrNudNoOfSpeeds"
@@ -205,9 +205,9 @@ Partial Class sdgWindrose
         '
         'ucrNudCalmWind
         '
+        resources.ApplyResources(Me.ucrNudCalmWind, "ucrNudCalmWind")
         Me.ucrNudCalmWind.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCalmWind, "ucrNudCalmWind")
         Me.ucrNudCalmWind.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCalmWind.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Name = "ucrNudCalmWind"
@@ -239,7 +239,7 @@ Partial Class sdgWindrose
         'sdgWindrose
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.tbpWindRoseOptions)
         Me.Controls.Add(Me.ucrButtonsSdgWindrose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -253,6 +253,7 @@ Partial Class sdgWindrose
         Me.tbpOptions.PerformLayout()
         Me.tbpWindRoseOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

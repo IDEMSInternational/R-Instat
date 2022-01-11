@@ -53,78 +53,124 @@ Partial Class dlgExportDataset
         '
         'lblConfirm
         '
-        resources.ApplyResources(Me.lblConfirm, "lblConfirm")
+        Me.lblConfirm.AutoSize = True
         Me.lblConfirm.ForeColor = System.Drawing.Color.Green
+        Me.lblConfirm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblConfirm.Location = New System.Drawing.Point(85, 240)
+        Me.lblConfirm.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirm.Name = "lblConfirm"
+        Me.lblConfirm.Size = New System.Drawing.Size(148, 13)
+        Me.lblConfirm.TabIndex = 4
+        Me.lblConfirm.Text = "Click Ok to Confirm the Export"
         '
         'lblDataFrames
         '
-        resources.ApplyResources(Me.lblDataFrames, "lblDataFrames")
+        Me.lblDataFrames.AutoSize = True
+        Me.lblDataFrames.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDataFrames.Location = New System.Drawing.Point(8, 10)
+        Me.lblDataFrames.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblDataFrames.Name = "lblDataFrames"
+        Me.lblDataFrames.Size = New System.Drawing.Size(70, 13)
+        Me.lblDataFrames.TabIndex = 7
+        Me.lblDataFrames.Text = "Data Frames:"
         '
         'lblSelectedDataFrames
         '
-        resources.ApplyResources(Me.lblSelectedDataFrames, "lblSelectedDataFrames")
+        Me.lblSelectedDataFrames.AutoSize = True
+        Me.lblSelectedDataFrames.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectedDataFrames.Location = New System.Drawing.Point(240, 10)
         Me.lblSelectedDataFrames.Name = "lblSelectedDataFrames"
+        Me.lblSelectedDataFrames.Size = New System.Drawing.Size(115, 13)
+        Me.lblSelectedDataFrames.TabIndex = 8
+        Me.lblSelectedDataFrames.Text = "Selected Data Frames:"
         '
         'lblFileExtension
         '
-        resources.ApplyResources(Me.lblFileExtension, "lblFileExtension")
+        Me.lblFileExtension.AutoSize = True
+        Me.lblFileExtension.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFileExtension.Location = New System.Drawing.Point(242, 161)
+        Me.lblFileExtension.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFileExtension.Name = "lblFileExtension"
+        Me.lblFileExtension.Size = New System.Drawing.Size(86, 13)
+        Me.lblFileExtension.TabIndex = 12
+        Me.lblFileExtension.Text = "Select File Type:"
         '
         'cboFileType
         '
         Me.cboFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboFileType.FormattingEnabled = True
-        Me.cboFileType.Items.AddRange(New Object() {resources.GetString("cboFileType.Items"), resources.GetString("cboFileType.Items1"), resources.GetString("cboFileType.Items2"), resources.GetString("cboFileType.Items3"), resources.GetString("cboFileType.Items4"), resources.GetString("cboFileType.Items5"), resources.GetString("cboFileType.Items6"), resources.GetString("cboFileType.Items7"), resources.GetString("cboFileType.Items8"), resources.GetString("cboFileType.Items9"), resources.GetString("cboFileType.Items10"), resources.GetString("cboFileType.Items11"), resources.GetString("cboFileType.Items12"), resources.GetString("cboFileType.Items13"), resources.GetString("cboFileType.Items14"), resources.GetString("cboFileType.Items15"), resources.GetString("cboFileType.Items16")})
-        resources.ApplyResources(Me.cboFileType, "cboFileType")
+        Me.cboFileType.Items.AddRange(New Object() {".csv", ".xlsx", ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"})
+        Me.cboFileType.Location = New System.Drawing.Point(245, 175)
         Me.cboFileType.Name = "cboFileType"
+        Me.cboFileType.Size = New System.Drawing.Size(170, 21)
+        Me.cboFileType.TabIndex = 4
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 53)
+        Me.ucrBase.TabIndex = 6
         '
         'ucrFilePath
         '
+        Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
         Me.ucrFilePath.FilePathDialogFilter = resources.GetString("ucrFilePath.FilePathDialogFilter")
         Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
-        Me.ucrFilePath.FilePathLabel = "Export File(s):"
+        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
         Me.ucrFilePath.FolderBrowse = False
-        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Location = New System.Drawing.Point(8, 211)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
+        Me.ucrFilePath.Size = New System.Drawing.Size(1001, 34)
+        Me.ucrFilePath.TabIndex = 5
         '
         'ucrSelectorDataFrames
         '
+        Me.ucrSelectorDataFrames.AutoSize = True
         Me.ucrSelectorDataFrames.bShowHiddenColumns = False
-        resources.ApplyResources(Me.ucrSelectorDataFrames, "ucrSelectorDataFrames")
+        Me.ucrSelectorDataFrames.Location = New System.Drawing.Point(10, 28)
+        Me.ucrSelectorDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrames.Name = "ucrSelectorDataFrames"
+        Me.ucrSelectorDataFrames.Size = New System.Drawing.Size(216, 147)
+        Me.ucrSelectorDataFrames.TabIndex = 1
         '
         'ucrReceiverMultipleDataFrames
         '
+        Me.ucrReceiverMultipleDataFrames.AutoSize = True
         Me.ucrReceiverMultipleDataFrames.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleDataFrames, "ucrReceiverMultipleDataFrames")
+        Me.ucrReceiverMultipleDataFrames.Location = New System.Drawing.Point(243, 28)
+        Me.ucrReceiverMultipleDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleDataFrames.Name = "ucrReceiverMultipleDataFrames"
         Me.ucrReceiverMultipleDataFrames.Selector = Nothing
+        Me.ucrReceiverMultipleDataFrames.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultipleDataFrames.strNcFilePath = ""
+        Me.ucrReceiverMultipleDataFrames.TabIndex = 2
         Me.ucrReceiverMultipleDataFrames.ucrSelector = Nothing
         '
         'chkSaveAsSingleFile
         '
-        resources.ApplyResources(Me.chkSaveAsSingleFile, "chkSaveAsSingleFile")
+        Me.chkSaveAsSingleFile.AutoSize = True
         Me.chkSaveAsSingleFile.Checked = True
         Me.chkSaveAsSingleFile.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkSaveAsSingleFile.Location = New System.Drawing.Point(243, 133)
         Me.chkSaveAsSingleFile.Name = "chkSaveAsSingleFile"
+        Me.chkSaveAsSingleFile.Size = New System.Drawing.Size(111, 17)
+        Me.chkSaveAsSingleFile.TabIndex = 13
+        Me.chkSaveAsSingleFile.Text = "Save as single file"
         Me.chkSaveAsSingleFile.UseVisualStyleBackColor = True
         '
         'dlgExportDataset
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(441, 331)
         Me.Controls.Add(Me.chkSaveAsSingleFile)
         Me.Controls.Add(Me.cboFileType)
         Me.Controls.Add(Me.lblFileExtension)
@@ -140,6 +186,8 @@ Partial Class dlgExportDataset
         Me.MinimizeBox = False
         Me.Name = "dlgExportDataset"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export Datasets"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

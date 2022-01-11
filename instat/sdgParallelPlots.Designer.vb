@@ -22,7 +22,6 @@ Partial Class sdgParallelPlots
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgParallelPlots))
         Me.ucrBaseSdgParallelPlot = New instat.ucrButtonsSubdialogue()
         Me.ucrInputMissing = New instat.ucrInputComboBox()
         Me.ucrInputOrder = New instat.ucrInputComboBox()
@@ -32,39 +31,59 @@ Partial Class sdgParallelPlots
         '
         'ucrBaseSdgParallelPlot
         '
-        resources.ApplyResources(Me.ucrBaseSdgParallelPlot, "ucrBaseSdgParallelPlot")
+        Me.ucrBaseSdgParallelPlot.AutoSize = True
+        Me.ucrBaseSdgParallelPlot.Location = New System.Drawing.Point(29, 89)
         Me.ucrBaseSdgParallelPlot.Name = "ucrBaseSdgParallelPlot"
+        Me.ucrBaseSdgParallelPlot.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSdgParallelPlot.TabIndex = 4
         '
         'ucrInputMissing
         '
         Me.ucrInputMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMissing.GetSetSelectedIndex = -1
         Me.ucrInputMissing.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMissing, "ucrInputMissing")
+        Me.ucrInputMissing.Location = New System.Drawing.Point(74, 18)
         Me.ucrInputMissing.Name = "ucrInputMissing"
+        Me.ucrInputMissing.Size = New System.Drawing.Size(127, 21)
+        Me.ucrInputMissing.TabIndex = 1
         '
         'ucrInputOrder
         '
         Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputOrder.GetSetSelectedIndex = -1
         Me.ucrInputOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
+        Me.ucrInputOrder.Location = New System.Drawing.Point(74, 47)
         Me.ucrInputOrder.Name = "ucrInputOrder"
+        Me.ucrInputOrder.Size = New System.Drawing.Size(128, 21)
+        Me.ucrInputOrder.TabIndex = 3
         '
         'lblMissing
         '
-        resources.ApplyResources(Me.lblMissing, "lblMissing")
+        Me.lblMissing.AutoSize = True
+        Me.lblMissing.Location = New System.Drawing.Point(8, 21)
         Me.lblMissing.Name = "lblMissing"
+        Me.lblMissing.Size = New System.Drawing.Size(45, 13)
+        Me.lblMissing.TabIndex = 0
+        Me.lblMissing.Text = "Missing:"
         '
         'lblOrder
         '
-        resources.ApplyResources(Me.lblOrder, "lblOrder")
+        Me.lblOrder.AutoSize = True
+        Me.lblOrder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblOrder.Location = New System.Drawing.Point(8, 47)
         Me.lblOrder.Name = "lblOrder"
+        Me.lblOrder.Size = New System.Drawing.Size(36, 13)
+        Me.lblOrder.TabIndex = 2
+        Me.lblOrder.Text = "Order:"
         '
         'sdgParallelPlots
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(213, 121)
         Me.Controls.Add(Me.lblOrder)
         Me.Controls.Add(Me.lblMissing)
         Me.Controls.Add(Me.ucrInputOrder)
@@ -74,6 +93,8 @@ Partial Class sdgParallelPlots
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgParallelPlots"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Parallel Plots"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

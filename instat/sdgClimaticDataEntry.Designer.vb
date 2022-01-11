@@ -23,7 +23,6 @@ Partial Class sdgClimaticDataEntry
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgClimaticDataEntry))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -47,8 +46,10 @@ Partial Class sdgClimaticDataEntry
         '
         'SplitContainer1
         '
-        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
         Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SplitContainer1.Panel1
         '
@@ -61,14 +62,18 @@ Partial Class sdgClimaticDataEntry
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgBaseButtons)
+        Me.SplitContainer1.Size = New System.Drawing.Size(647, 295)
+        Me.SplitContainer1.SplitterDistance = 251
+        Me.SplitContainer1.TabIndex = 0
         '
         'grdDataEntry
         '
         Me.grdDataEntry.BackColor = System.Drawing.Color.White
         Me.grdDataEntry.ColumnHeaderContextMenuStrip = Nothing
         Me.grdDataEntry.ContextMenuStrip = Me.cellContextMenuStrip
-        resources.ApplyResources(Me.grdDataEntry, "grdDataEntry")
+        Me.grdDataEntry.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdDataEntry.LeadHeaderContextMenuStrip = Nothing
+        Me.grdDataEntry.Location = New System.Drawing.Point(0, 0)
         Me.grdDataEntry.Name = "grdDataEntry"
         Me.grdDataEntry.RowHeaderContextMenuStrip = Nothing
         Me.grdDataEntry.Script = Nothing
@@ -77,69 +82,97 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.SheetTabVisible = True
         Me.grdDataEntry.SheetTabWidth = 154
         Me.grdDataEntry.ShowScrollEndSpacing = True
+        Me.grdDataEntry.Size = New System.Drawing.Size(647, 251)
+        Me.grdDataEntry.TabIndex = 3
+        Me.grdDataEntry.Text = "Variables"
         '
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuCopy, Me.mnuPaste, Me.ToolStripSeparator5, Me.mnuComment})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        resources.ApplyResources(Me.cellContextMenuStrip, "cellContextMenuStrip")
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(145, 82)
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(141, 6)
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
-        resources.ApplyResources(Me.mnuCopy, "mnuCopy")
+        Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.mnuCopy.Size = New System.Drawing.Size(144, 22)
+        Me.mnuCopy.Text = "Copy"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
-        resources.ApplyResources(Me.mnuPaste, "mnuPaste")
+        Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+        Me.mnuPaste.Size = New System.Drawing.Size(144, 22)
+        Me.mnuPaste.Text = "Paste"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        resources.ApplyResources(Me.ToolStripSeparator5, "ToolStripSeparator5")
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(141, 6)
         '
         'mnuComment
         '
         Me.mnuComment.Name = "mnuComment"
-        resources.ApplyResources(Me.mnuComment, "mnuComment")
+        Me.mnuComment.Size = New System.Drawing.Size(144, 22)
+        Me.mnuComment.Text = "Comment"
         '
         'ucrChkAddFlagFieldData
         '
+        Me.ucrChkAddFlagFieldData.AutoSize = True
         Me.ucrChkAddFlagFieldData.Checked = False
-        resources.ApplyResources(Me.ucrChkAddFlagFieldData, "ucrChkAddFlagFieldData")
+        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(185, 10)
         Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
+        Me.ucrChkAddFlagFieldData.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkAddFlagFieldData.TabIndex = 91
         '
         'cmdComment
         '
-        resources.ApplyResources(Me.cmdComment, "cmdComment")
+        Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComment.Location = New System.Drawing.Point(337, 7)
         Me.cmdComment.Name = "cmdComment"
+        Me.cmdComment.Size = New System.Drawing.Size(90, 24)
+        Me.cmdComment.TabIndex = 90
+        Me.cmdComment.Text = "Comment"
         Me.cmdComment.UseVisualStyleBackColor = True
         '
         'cmdTransform
         '
-        resources.ApplyResources(Me.cmdTransform, "cmdTransform")
+        Me.cmdTransform.Enabled = False
+        Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTransform.Location = New System.Drawing.Point(431, 7)
         Me.cmdTransform.Name = "cmdTransform"
-        Me.ttCmds.SetToolTip(Me.cmdTransform, resources.GetString("cmdTransform.ToolTip"))
+        Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
+        Me.cmdTransform.TabIndex = 89
+        Me.cmdTransform.Text = "Transform"
+        Me.ttCmds.SetToolTip(Me.cmdTransform, "When implemented, this is an option to show the transformed data.")
         Me.cmdTransform.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        resources.ApplyResources(Me.cmdReset, "cmdReset")
+        Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdReset.Location = New System.Drawing.Point(541, 7)
         Me.cmdReset.Name = "cmdReset"
-        Me.ttCmds.SetToolTip(Me.cmdReset, resources.GetString("cmdReset.ToolTip"))
+        Me.cmdReset.Size = New System.Drawing.Size(72, 24)
+        Me.cmdReset.TabIndex = 88
+        Me.cmdReset.Text = "Reset"
+        Me.ttCmds.SetToolTip(Me.cmdReset, "Clears all data entry.")
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'ucrSdgBaseButtons
         '
-        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
+        Me.ucrSdgBaseButtons.AutoSize = True
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(13, 6)
+        Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgBaseButtons.TabIndex = 87
         '
         'ttCmds
         '
@@ -149,12 +182,17 @@ Partial Class sdgClimaticDataEntry
         '
         'sdgClimaticDataEntry
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(647, 295)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "sdgClimaticDataEntry"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Climatic Data Entry"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.cellContextMenuStrip.ResumeLayout(False)

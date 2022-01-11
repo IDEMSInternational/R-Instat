@@ -82,6 +82,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         'ucrInputResolution
         '
         Me.ucrInputResolution.AddQuotesIfUnrecognised = True
+        Me.ucrInputResolution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputResolution.GetSetSelectedIndex = -1
         Me.ucrInputResolution.IsReadOnly = False
         Me.ucrInputResolution.Location = New System.Drawing.Point(158, 71)
@@ -92,6 +93,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         'ucrInputUNCode
         '
         Me.ucrInputUNCode.AddQuotesIfUnrecognised = True
+        Me.ucrInputUNCode.AutoSize = True
         Me.ucrInputUNCode.IsMultiline = False
         Me.ucrInputUNCode.IsReadOnly = False
         Me.ucrInputUNCode.Location = New System.Drawing.Point(158, 44)
@@ -101,10 +103,11 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrChkOutputGridSquareData
         '
+        Me.ucrChkOutputGridSquareData.AutoSize = True
         Me.ucrChkOutputGridSquareData.Checked = False
         Me.ucrChkOutputGridSquareData.Location = New System.Drawing.Point(8, 98)
         Me.ucrChkOutputGridSquareData.Name = "ucrChkOutputGridSquareData"
-        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(276, 20)
+        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(276, 23)
         Me.ucrChkOutputGridSquareData.TabIndex = 8
         '
         'lblRes
@@ -129,6 +132,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrNudNYE
         '
+        Me.ucrNudNYE.AutoSize = True
         Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYE.Location = New System.Drawing.Point(230, 18)
@@ -171,6 +175,8 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 346)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -178,6 +184,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrSelectorForA3
         '
+        Me.ucrSelectorForA3.AutoSize = True
         Me.ucrSelectorForA3.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA3.bUseCurrentFilter = True
         Me.ucrSelectorForA3.Location = New System.Drawing.Point(10, 204)
@@ -188,6 +195,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrReceiverMonth
         '
+        Me.ucrReceiverMonth.AutoSize = True
         Me.ucrReceiverMonth.frmParent = Me
         Me.ucrReceiverMonth.Location = New System.Drawing.Point(254, 148)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
@@ -200,6 +208,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(254, 104)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -212,6 +221,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(254, 60)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -224,19 +234,21 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrSelectorForA2
         '
+        Me.ucrSelectorForA2.AutoSize = True
         Me.ucrSelectorForA2.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA2.bShowHiddenColumns = False
         Me.ucrSelectorForA2.bUseCurrentFilter = True
         Me.ucrSelectorForA2.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForA2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForA2.Name = "ucrSelectorForA2"
-        Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForA2.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForA2.TabIndex = 0
         '
         'dlgClimaticNCMPRegionAverage
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 403)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorForA3)

@@ -22,7 +22,6 @@ Partial Class dlgBackupManager
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBackupManager))
         Me.lblBackupHeader = New System.Windows.Forms.Label()
         Me.ctrLstViewDataBackups = New System.Windows.Forms.ListView()
         Me.ctrLstViewColName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -38,69 +37,110 @@ Partial Class dlgBackupManager
         '
         'lblBackupHeader
         '
-        resources.ApplyResources(Me.lblBackupHeader, "lblBackupHeader")
+        Me.lblBackupHeader.AutoSize = True
+        Me.lblBackupHeader.Location = New System.Drawing.Point(4, 24)
+        Me.lblBackupHeader.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBackupHeader.Name = "lblBackupHeader"
+        Me.lblBackupHeader.Size = New System.Drawing.Size(92, 13)
+        Me.lblBackupHeader.TabIndex = 9
+        Me.lblBackupHeader.Text = "Backup versions :"
         '
-        'ucrLstViewDataBackups
+        'ctrLstViewDataBackups
         '
         Me.ctrLstViewDataBackups.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ctrLstViewColName, Me.ctrLstViewColDate, Me.ctrLstViewSize})
-        resources.ApplyResources(Me.ctrLstViewDataBackups, "ucrLstViewDataBackups")
-        Me.ctrLstViewDataBackups.Name = "ucrLstViewDataBackups"
+        Me.ctrLstViewDataBackups.HideSelection = False
+        Me.ctrLstViewDataBackups.Location = New System.Drawing.Point(4, 41)
+        Me.ctrLstViewDataBackups.Margin = New System.Windows.Forms.Padding(2)
+        Me.ctrLstViewDataBackups.Name = "ctrLstViewDataBackups"
+        Me.ctrLstViewDataBackups.Size = New System.Drawing.Size(277, 113)
+        Me.ctrLstViewDataBackups.TabIndex = 8
         Me.ctrLstViewDataBackups.UseCompatibleStateImageBehavior = False
         Me.ctrLstViewDataBackups.View = System.Windows.Forms.View.Details
         '
-        'ucrLstViewColName
+        'ctrLstViewColName
         '
-        resources.ApplyResources(Me.ctrLstViewColName, "ucrLstViewColName")
+        Me.ctrLstViewColName.Text = "Name"
+        Me.ctrLstViewColName.Width = 158
         '
-        'ucrLstViewColDate
+        'ctrLstViewColDate
         '
-        resources.ApplyResources(Me.ctrLstViewColDate, "ucrLstViewColDate")
+        Me.ctrLstViewColDate.Text = "Date modified"
+        Me.ctrLstViewColDate.Width = 152
         '
-        'ucrLstViewSize
+        'ctrLstViewSize
         '
-        resources.ApplyResources(Me.ctrLstViewSize, "ucrLstViewSize")
+        Me.ctrLstViewSize.Text = "Size"
+        Me.ctrLstViewSize.Width = 96
         '
         'cmdClose
         '
-        resources.ApplyResources(Me.cmdClose, "cmdClose")
+        Me.cmdClose.Location = New System.Drawing.Point(223, 155)
+        Me.cmdClose.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdClose.Name = "cmdClose"
+        Me.cmdClose.Size = New System.Drawing.Size(51, 19)
+        Me.cmdClose.TabIndex = 7
+        Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.Location = New System.Drawing.Point(168, 155)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(51, 19)
+        Me.cmdHelp.TabIndex = 6
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdDelete
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
+        Me.cmdDelete.Location = New System.Drawing.Point(113, 155)
+        Me.cmdDelete.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(51, 19)
+        Me.cmdDelete.TabIndex = 5
+        Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdOpen
         '
-        resources.ApplyResources(Me.cmdOpen, "cmdOpen")
+        Me.cmdOpen.AutoSize = True
+        Me.cmdOpen.Location = New System.Drawing.Point(4, 155)
+        Me.cmdOpen.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOpen.Name = "cmdOpen"
+        Me.cmdOpen.Size = New System.Drawing.Size(51, 23)
+        Me.cmdOpen.TabIndex = 3
+        Me.cmdOpen.Text = "Open"
         Me.cmdOpen.UseVisualStyleBackColor = True
         '
         'lblBackupMessage
         '
-        resources.ApplyResources(Me.lblBackupMessage, "lblBackupMessage")
+        Me.lblBackupMessage.AutoSize = True
         Me.lblBackupMessage.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.lblBackupMessage.Location = New System.Drawing.Point(3, 5)
+        Me.lblBackupMessage.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBackupMessage.Name = "lblBackupMessage"
+        Me.lblBackupMessage.Size = New System.Drawing.Size(281, 13)
+        Me.lblBackupMessage.TabIndex = 10
+        Me.lblBackupMessage.Text = "The backup versions come from periodic system backups."
         '
         'cmdSave
         '
-        resources.ApplyResources(Me.cmdSave, "cmdSave")
+        Me.cmdSave.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSave.Location = New System.Drawing.Point(59, 155)
+        Me.cmdSave.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(51, 19)
+        Me.cmdSave.TabIndex = 11
+        Me.cmdSave.Text = "Save"
         Me.cmdSave.UseVisualStyleBackColor = True
         '
         'dlgBackupManager
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(284, 178)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.ctrLstViewDataBackups)
@@ -110,9 +150,12 @@ Partial Class dlgBackupManager
         Me.Controls.Add(Me.lblBackupMessage)
         Me.Controls.Add(Me.cmdOpen)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBackupManager"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Backup Manager"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

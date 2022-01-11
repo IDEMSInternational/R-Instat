@@ -63,15 +63,17 @@ Partial Class dlgImportShapeFiles
         '
         'ucrChkSplitGeometry
         '
+        Me.ucrChkSplitGeometry.AutoSize = True
         Me.ucrChkSplitGeometry.Checked = False
         Me.ucrChkSplitGeometry.Location = New System.Drawing.Point(7, 89)
         Me.ucrChkSplitGeometry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrChkSplitGeometry.Name = "ucrChkSplitGeometry"
-        Me.ucrChkSplitGeometry.Size = New System.Drawing.Size(150, 20)
+        Me.ucrChkSplitGeometry.Size = New System.Drawing.Size(150, 23)
         Me.ucrChkSplitGeometry.TabIndex = 5
         '
         'ucrSaveDataframeName
         '
+        Me.ucrSaveDataframeName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveDataframeName.Location = New System.Drawing.Point(7, 60)
         Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
@@ -80,15 +82,18 @@ Partial Class dlgImportShapeFiles
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(7, 120)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(397, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 6
         '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(49, 18)
@@ -99,8 +104,9 @@ Partial Class dlgImportShapeFiles
         '
         'dlgImportShapeFiles
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 174)
         Me.Controls.Add(Me.ucrChkSplitGeometry)
         Me.Controls.Add(Me.ucrSaveDataframeName)
