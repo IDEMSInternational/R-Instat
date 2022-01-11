@@ -99,6 +99,7 @@ Partial Class sdgThemesSub
         '
         'ucrThemeTitleYAxis
         '
+        Me.ucrThemeTitleYAxis.AutoSize = True
         Me.ucrThemeTitleYAxis.Location = New System.Drawing.Point(0, 228)
         Me.ucrThemeTitleYAxis.Name = "ucrThemeTitleYAxis"
         Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 227)
@@ -106,6 +107,7 @@ Partial Class sdgThemesSub
         '
         'ucrThemeTitleXAxis
         '
+        Me.ucrThemeTitleXAxis.AutoSize = True
         Me.ucrThemeTitleXAxis.Location = New System.Drawing.Point(259, 3)
         Me.ucrThemeTitleXAxis.Name = "ucrThemeTitleXAxis"
         Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 231)
@@ -113,9 +115,10 @@ Partial Class sdgThemesSub
         '
         'ucrPlotTitle
         '
+        Me.ucrPlotTitle.AutoSize = True
         Me.ucrPlotTitle.Location = New System.Drawing.Point(0, 3)
         Me.ucrPlotTitle.Name = "ucrPlotTitle"
-        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 224)
+        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 226)
         Me.ucrPlotTitle.TabIndex = 1
         '
         'tbLabels
@@ -133,6 +136,7 @@ Partial Class sdgThemesSub
         '
         'ucrThemeLeftYAxis
         '
+        Me.ucrThemeLeftYAxis.AutoSize = True
         Me.ucrThemeLeftYAxis.Location = New System.Drawing.Point(254, 32)
         Me.ucrThemeLeftYAxis.Name = "ucrThemeLeftYAxis"
         Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 226)
@@ -140,13 +144,15 @@ Partial Class sdgThemesSub
         '
         'ucrThemeBottomXAxis
         '
+        Me.ucrThemeBottomXAxis.AutoSize = True
         Me.ucrThemeBottomXAxis.Location = New System.Drawing.Point(0, 32)
         Me.ucrThemeBottomXAxis.Name = "ucrThemeBottomXAxis"
-        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 224)
+        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 226)
         Me.ucrThemeBottomXAxis.TabIndex = 3
         '
         'ucrThemeAxesTickLabels
         '
+        Me.ucrThemeAxesTickLabels.AutoSize = True
         Me.ucrThemeAxesTickLabels.Location = New System.Drawing.Point(0, 32)
         Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
         Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
@@ -169,6 +175,7 @@ Partial Class sdgThemesSub
         '
         'ucrYAxisLines
         '
+        Me.ucrYAxisLines.AutoSize = True
         Me.ucrYAxisLines.Location = New System.Drawing.Point(260, 197)
         Me.ucrYAxisLines.Name = "ucrYAxisLines"
         Me.ucrYAxisLines.Size = New System.Drawing.Size(254, 124)
@@ -176,6 +183,7 @@ Partial Class sdgThemesSub
         '
         'ucrTickMarksYAxis
         '
+        Me.ucrTickMarksYAxis.AutoSize = True
         Me.ucrTickMarksYAxis.Location = New System.Drawing.Point(258, 32)
         Me.ucrTickMarksYAxis.Name = "ucrTickMarksYAxis"
         Me.ucrTickMarksYAxis.Size = New System.Drawing.Size(255, 123)
@@ -183,6 +191,7 @@ Partial Class sdgThemesSub
         '
         'ucrXAxisLines
         '
+        Me.ucrXAxisLines.AutoSize = True
         Me.ucrXAxisLines.Location = New System.Drawing.Point(0, 197)
         Me.ucrXAxisLines.Name = "ucrXAxisLines"
         Me.ucrXAxisLines.Size = New System.Drawing.Size(254, 124)
@@ -190,6 +199,7 @@ Partial Class sdgThemesSub
         '
         'ucrTickMarksXAxis
         '
+        Me.ucrTickMarksXAxis.AutoSize = True
         Me.ucrTickMarksXAxis.Location = New System.Drawing.Point(0, 32)
         Me.ucrTickMarksXAxis.Name = "ucrTickMarksXAxis"
         Me.ucrTickMarksXAxis.Size = New System.Drawing.Size(254, 124)
@@ -197,6 +207,7 @@ Partial Class sdgThemesSub
         '
         'ucrThemeAxesLines
         '
+        Me.ucrThemeAxesLines.AutoSize = True
         Me.ucrThemeAxesLines.Location = New System.Drawing.Point(3, 197)
         Me.ucrThemeAxesLines.Name = "ucrThemeAxesLines"
         Me.ucrThemeAxesLines.Size = New System.Drawing.Size(253, 122)
@@ -204,6 +215,7 @@ Partial Class sdgThemesSub
         '
         'ucrTickMarksAxes
         '
+        Me.ucrTickMarksAxes.AutoSize = True
         Me.ucrTickMarksAxes.Location = New System.Drawing.Point(3, 32)
         Me.ucrTickMarksAxes.Name = "ucrTickMarksAxes"
         Me.ucrTickMarksAxes.Size = New System.Drawing.Size(257, 122)
@@ -223,6 +235,7 @@ Partial Class sdgThemesSub
         '
         'ucrPanelGridMinor
         '
+        Me.ucrPanelGridMinor.AutoSize = True
         Me.ucrPanelGridMinor.Location = New System.Drawing.Point(261, 31)
         Me.ucrPanelGridMinor.Name = "ucrPanelGridMinor"
         Me.ucrPanelGridMinor.Size = New System.Drawing.Size(254, 124)
@@ -230,6 +243,7 @@ Partial Class sdgThemesSub
         '
         'ucrPanelGridMajor
         '
+        Me.ucrPanelGridMajor.AutoSize = True
         Me.ucrPanelGridMajor.Location = New System.Drawing.Point(6, 31)
         Me.ucrPanelGridMajor.Name = "ucrPanelGridMajor"
         Me.ucrPanelGridMajor.Size = New System.Drawing.Size(254, 124)
@@ -237,6 +251,7 @@ Partial Class sdgThemesSub
         '
         'ucrPanelGrid
         '
+        Me.ucrPanelGrid.AutoSize = True
         Me.ucrPanelGrid.Location = New System.Drawing.Point(3, 31)
         Me.ucrPanelGrid.Name = "ucrPanelGrid"
         Me.ucrPanelGrid.Size = New System.Drawing.Size(254, 124)
@@ -255,6 +270,7 @@ Partial Class sdgThemesSub
         '
         'ucrPanelBackground
         '
+        Me.ucrPanelBackground.AutoSize = True
         Me.ucrPanelBackground.Location = New System.Drawing.Point(0, 144)
         Me.ucrPanelBackground.Name = "ucrPanelBackground"
         Me.ucrPanelBackground.Size = New System.Drawing.Size(253, 132)
@@ -262,6 +278,7 @@ Partial Class sdgThemesSub
         '
         'ucrPanelBorder
         '
+        Me.ucrPanelBorder.AutoSize = True
         Me.ucrPanelBorder.Location = New System.Drawing.Point(0, 6)
         Me.ucrPanelBorder.Name = "ucrPanelBorder"
         Me.ucrPanelBorder.Size = New System.Drawing.Size(253, 132)
@@ -291,10 +308,11 @@ Partial Class sdgThemesSub
         '
         'ucrChkLegTitleTextSize
         '
+        Me.ucrChkLegTitleTextSize.AutoSize = True
         Me.ucrChkLegTitleTextSize.Checked = False
         Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
         Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
-        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkLegTitleTextSize.TabIndex = 5
         '
         'grpLegendPosition
@@ -334,6 +352,7 @@ Partial Class sdgThemesSub
         '
         'UcrNud2
         '
+        Me.UcrNud2.AutoSize = True
         Me.UcrNud2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNud2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.UcrNud2.Location = New System.Drawing.Point(348, 52)
@@ -346,6 +365,7 @@ Partial Class sdgThemesSub
         '
         'UcrNud1
         '
+        Me.UcrNud1.AutoSize = True
         Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.UcrNud1.Location = New System.Drawing.Point(258, 51)
@@ -358,6 +378,7 @@ Partial Class sdgThemesSub
         '
         'ucRdoCoordinated
         '
+        Me.ucRdoCoordinated.AutoSize = True
         Me.ucRdoCoordinated.Location = New System.Drawing.Point(220, 19)
         Me.ucRdoCoordinated.Name = "ucRdoCoordinated"
         Me.ucRdoCoordinated.Size = New System.Drawing.Size(100, 20)
@@ -365,6 +386,7 @@ Partial Class sdgThemesSub
         '
         'ucrrdoSpecific
         '
+        Me.ucrrdoSpecific.AutoSize = True
         Me.ucrrdoSpecific.Location = New System.Drawing.Point(9, 19)
         Me.ucrrdoSpecific.Name = "ucrrdoSpecific"
         Me.ucrrdoSpecific.Size = New System.Drawing.Size(100, 20)
@@ -373,6 +395,7 @@ Partial Class sdgThemesSub
         'UcrInputComboBox1
         '
         Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.UcrInputComboBox1.GetSetSelectedIndex = -1
         Me.UcrInputComboBox1.IsReadOnly = False
         Me.UcrInputComboBox1.Location = New System.Drawing.Point(59, 51)
@@ -391,23 +414,26 @@ Partial Class sdgThemesSub
         '
         'ucrChkRemoveLegend
         '
+        Me.ucrChkRemoveLegend.AutoSize = True
         Me.ucrChkRemoveLegend.Checked = False
         Me.ucrChkRemoveLegend.Location = New System.Drawing.Point(9, 10)
         Me.ucrChkRemoveLegend.Name = "ucrChkRemoveLegend"
-        Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkRemoveLegend.TabIndex = 2
         '
         'ucrBaseSubdialog
         '
+        Me.ucrBaseSubdialog.AutoSize = True
         Me.ucrBaseSubdialog.Location = New System.Drawing.Point(182, 494)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(157, 30)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubdialog.TabIndex = 2
         '
         'sdgThemesSub
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(531, 529)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.TabThemes)
@@ -420,15 +446,23 @@ Partial Class sdgThemesSub
         Me.Text = "Themes"
         Me.TabThemes.ResumeLayout(False)
         Me.tbTitles.ResumeLayout(False)
+        Me.tbTitles.PerformLayout()
         Me.tbLabels.ResumeLayout(False)
+        Me.tbLabels.PerformLayout()
         Me.tbAxes.ResumeLayout(False)
+        Me.tbAxes.PerformLayout()
         Me.tbPanel.ResumeLayout(False)
+        Me.tbPanel.PerformLayout()
         Me.tbBackground.ResumeLayout(False)
+        Me.tbBackground.PerformLayout()
         Me.tbLegend.ResumeLayout(False)
+        Me.tbLegend.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.grpLegendPosition.ResumeLayout(False)
         Me.grpLegendPosition.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

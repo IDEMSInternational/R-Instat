@@ -101,29 +101,41 @@ Partial Class dlgChiSquareTest
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.AutoSize = True
+        Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(16, 13)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(202, 135)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 135)
         Me.ucrAddRemove.TabIndex = 7
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(1, 271)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverChiSquare
         '
+        Me.ucrReceiverChiSquare.AutoSize = True
+        Me.ucrReceiverChiSquare.frmParent = Me
         Me.ucrReceiverChiSquare.Location = New System.Drawing.Point(224, 30)
+        Me.ucrReceiverChiSquare.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverChiSquare.Name = "ucrReceiverChiSquare"
+        Me.ucrReceiverChiSquare.Selector = Nothing
         Me.ucrReceiverChiSquare.Size = New System.Drawing.Size(122, 132)
+        Me.ucrReceiverChiSquare.strNcFilePath = ""
         Me.ucrReceiverChiSquare.TabIndex = 2
+        Me.ucrReceiverChiSquare.ucrSelector = Nothing
         '
         'dlgChiSquareTest
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(408, 324)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.lblDataColumns)

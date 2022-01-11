@@ -1486,32 +1486,37 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrChkDisplayModel
         '
+        Me.ucrChkDisplayModel.AutoSize = True
         Me.ucrChkDisplayModel.Checked = False
         Me.ucrChkDisplayModel.Location = New System.Drawing.Point(10, 292)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
-        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 20)
+        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 23)
         Me.ucrChkDisplayModel.TabIndex = 7
         '
         'ucrChkSummaryModel
         '
+        Me.ucrChkSummaryModel.AutoSize = True
         Me.ucrChkSummaryModel.Checked = False
         Me.ucrChkSummaryModel.Location = New System.Drawing.Point(10, 264)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
-        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 20)
+        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 23)
         Me.ucrChkSummaryModel.TabIndex = 6
         '
         'ucrTryModelling
         '
+        Me.ucrTryModelling.AutoSize = True
         Me.ucrTryModelling.Location = New System.Drawing.Point(2, 360)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.Size = New System.Drawing.Size(393, 28)
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
+        Me.ucrTryModelling.Size = New System.Drawing.Size(393, 30)
         Me.ucrTryModelling.TabIndex = 13
         '
         'ucrReceiverMultiple
         '
+        Me.ucrReceiverMultiple.AutoSize = True
         Me.ucrReceiverMultiple.frmParent = Me
         Me.ucrReceiverMultiple.Location = New System.Drawing.Point(165, 288)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
@@ -1525,6 +1530,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrSaveResult
         '
+        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 397)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
@@ -1534,6 +1540,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrInputComboRPackage
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboRPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboRPackage.IsReadOnly = False
         Me.ucrInputComboRPackage.Location = New System.Drawing.Point(308, 51)
@@ -1544,44 +1551,50 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 430)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
         '
         'ucrChkBy
         '
+        Me.ucrChkBy.AutoSize = True
         Me.ucrChkBy.Checked = False
         Me.ucrChkBy.Enabled = False
         Me.ucrChkBy.Location = New System.Drawing.Point(165, 264)
         Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkBy.Name = "ucrChkBy"
-        Me.ucrChkBy.Size = New System.Drawing.Size(166, 20)
+        Me.ucrChkBy.Size = New System.Drawing.Size(166, 23)
         Me.ucrChkBy.TabIndex = 8
         '
         'ucrSelectorColumn
         '
+        Me.ucrSelectorColumn.AutoSize = True
         Me.ucrSelectorColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumn.bShowHiddenColumns = False
         Me.ucrSelectorColumn.bUseCurrentFilter = True
         Me.ucrSelectorColumn.Location = New System.Drawing.Point(10, 56)
         Me.ucrSelectorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumn.Name = "ucrSelectorColumn"
-        Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorColumn.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorColumn.TabIndex = 3
         '
         'ucrChkIncludeArguments
         '
+        Me.ucrChkIncludeArguments.AutoSize = True
         Me.ucrChkIncludeArguments.Checked = False
         Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(443, 26)
         Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 20)
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 23)
         Me.ucrChkIncludeArguments.TabIndex = 2
         '
         'ucrReceiverForTestColumn
         '
+        Me.ucrReceiverForTestColumn.AutoSize = True
         Me.ucrReceiverForTestColumn.frmParent = Me
         Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(55, 25)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -1594,8 +1607,9 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'dlgHypothesisTestsCalculator
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(643, 485)
         Me.Controls.Add(Me.grpTrend)
         Me.Controls.Add(Me.grpCoin)

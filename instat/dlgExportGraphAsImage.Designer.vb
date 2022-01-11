@@ -48,47 +48,70 @@ Partial Class dlgExportGraphAsImage
         '
         'lblSelectedGraph
         '
-        resources.ApplyResources(Me.lblSelectedGraph, "lblSelectedGraph")
+        Me.lblSelectedGraph.AutoSize = True
+        Me.lblSelectedGraph.Location = New System.Drawing.Point(264, 45)
         Me.lblSelectedGraph.Name = "lblSelectedGraph"
+        Me.lblSelectedGraph.Size = New System.Drawing.Size(84, 13)
+        Me.lblSelectedGraph.TabIndex = 1
+        Me.lblSelectedGraph.Text = "Selected Graph:"
         '
         'ucrSelectedGraphReceiver
         '
+        Me.ucrSelectedGraphReceiver.AutoSize = True
         Me.ucrSelectedGraphReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrSelectedGraphReceiver, "ucrSelectedGraphReceiver")
+        Me.ucrSelectedGraphReceiver.Location = New System.Drawing.Point(265, 60)
+        Me.ucrSelectedGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectedGraphReceiver.Name = "ucrSelectedGraphReceiver"
         Me.ucrSelectedGraphReceiver.Selector = Nothing
+        Me.ucrSelectedGraphReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrSelectedGraphReceiver.strNcFilePath = ""
+        Me.ucrSelectedGraphReceiver.TabIndex = 2
         Me.ucrSelectedGraphReceiver.ucrSelector = Nothing
         '
         'ucrSelectorGraphAsImage
         '
+        Me.ucrSelectorGraphAsImage.AutoSize = True
         Me.ucrSelectorGraphAsImage.bDropUnusedFilterLevels = False
         Me.ucrSelectorGraphAsImage.bShowHiddenColumns = False
         Me.ucrSelectorGraphAsImage.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorGraphAsImage, "ucrSelectorGraphAsImage")
+        Me.ucrSelectorGraphAsImage.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorGraphAsImage.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGraphAsImage.Name = "ucrSelectorGraphAsImage"
+        Me.ucrSelectorGraphAsImage.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorGraphAsImage.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 224)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(404, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'ucrFilePath
         '
+        Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
         Me.ucrFilePath.FilePathDialogFilter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostSc" &
     "ript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
         Me.ucrFilePath.FilePathDialogTitle = "Save Graph As Image"
-        Me.ucrFilePath.FilePathLabel = "Export File:"
-        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FolderBrowse = False
+        Me.ucrFilePath.Location = New System.Drawing.Point(14, 195)
         Me.ucrFilePath.Name = "ucrFilePath"
+        Me.ucrFilePath.SelectedFileFilterIndex = 1
+        Me.ucrFilePath.Size = New System.Drawing.Size(990, 34)
+        Me.ucrFilePath.TabIndex = 7
         '
         'dlgExportGraphAsImage
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(418, 280)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblSelectedGraph)
         Me.Controls.Add(Me.ucrSelectedGraphReceiver)
@@ -98,6 +121,8 @@ Partial Class dlgExportGraphAsImage
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportGraphAsImage"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export Graph As Image"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -60,7 +60,6 @@ Public Class dlgClimaticCheckDataTemperature
         ucrBase.iHelpTopicID = 559
         'TODO: Not yet implemented.
         rdoMultiple.Enabled = False
-        rdoSatelite.Enabled = False
         rdoIndividual.Checked = True
 
         Dim lstLabels As New List(Of Control)
@@ -161,15 +160,23 @@ Public Class dlgClimaticCheckDataTemperature
         'Range Option
         ucrNudRangeElement1Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement1Min.SetMinMax(-35, 65)
+        ucrNudRangeElement1Min.DecimalPlaces = 1
+        ucrNudRangeElement1Min.Increment = 0.1
 
         ucrNudRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement1Max.SetMinMax(-35, 65)
+        ucrNudRangeElement1Max.DecimalPlaces = 1
+        ucrNudRangeElement1Max.Increment = 0.1
 
         ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement2Min.SetMinMax(-50, 40)
+        ucrNudRangeElement2Min.DecimalPlaces = 1
+        ucrNudRangeElement2Min.Increment = 0.1
 
         ucrNudRangeElement2Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrNudRangeElement2Max.SetMinMax(-50, 40)
+        ucrNudRangeElement2Max.DecimalPlaces = 1
+        ucrNudRangeElement2Max.Increment = 0.1
 
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
@@ -196,9 +203,9 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkIncludeLogicalColumns.SetParameter(New RParameter("save", 4))
         ucrChkIncludeLogicalColumns.SetValuesCheckedAndUnchecked("2", "0")
 
-        'outliers Option
-        ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
 
+        ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
+        ttMultiple.Show("Not yet implemented.", rdoMultiple)
     End Sub
 
     Private Sub SetDefaults()

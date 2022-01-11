@@ -69,20 +69,23 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 469)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 11
         '
         'ucrSelectorOptionsByContext
         '
+        Me.ucrSelectorOptionsByContext.AutoSize = True
         Me.ucrSelectorOptionsByContext.bDropUnusedFilterLevels = False
         Me.ucrSelectorOptionsByContext.bShowHiddenColumns = False
         Me.ucrSelectorOptionsByContext.bUseCurrentFilter = True
         Me.ucrSelectorOptionsByContext.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOptionsByContext.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOptionsByContext.Name = "ucrSelectorOptionsByContext"
-        Me.ucrSelectorOptionsByContext.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOptionsByContext.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorOptionsByContext.TabIndex = 0
         '
         'lblOptionOther
@@ -96,6 +99,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverOptionOther
         '
+        Me.ucrReceiverOptionOther.AutoSize = True
         Me.ucrReceiverOptionOther.frmParent = Me
         Me.ucrReceiverOptionOther.Location = New System.Drawing.Point(8, 78)
         Me.ucrReceiverOptionOther.Margin = New System.Windows.Forms.Padding(0)
@@ -108,6 +112,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverContextOther
         '
+        Me.ucrReceiverContextOther.AutoSize = True
         Me.ucrReceiverContextOther.frmParent = Me
         Me.ucrReceiverContextOther.Location = New System.Drawing.Point(8, 214)
         Me.ucrReceiverContextOther.Margin = New System.Windows.Forms.Padding(0)
@@ -129,6 +134,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverMeasurementOther
         '
+        Me.ucrReceiverMeasurementOther.AutoSize = True
         Me.ucrReceiverMeasurementOther.frmParent = Me
         Me.ucrReceiverMeasurementOther.Location = New System.Drawing.Point(8, 78)
         Me.ucrReceiverMeasurementOther.Margin = New System.Windows.Forms.Padding(0)
@@ -150,6 +156,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverOption1
         '
+        Me.ucrReceiverOption1.AutoSize = True
         Me.ucrReceiverOption1.frmParent = Me
         Me.ucrReceiverOption1.Location = New System.Drawing.Point(8, 32)
         Me.ucrReceiverOption1.Margin = New System.Windows.Forms.Padding(0)
@@ -180,6 +187,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverMeasurement1
         '
+        Me.ucrReceiverMeasurement1.AutoSize = True
         Me.ucrReceiverMeasurement1.frmParent = Me
         Me.ucrReceiverMeasurement1.Location = New System.Drawing.Point(8, 34)
         Me.ucrReceiverMeasurement1.Margin = New System.Windows.Forms.Padding(0)
@@ -201,6 +209,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverContext2
         '
+        Me.ucrReceiverContext2.AutoSize = True
         Me.ucrReceiverContext2.frmParent = Me
         Me.ucrReceiverContext2.Location = New System.Drawing.Point(8, 78)
         Me.ucrReceiverContext2.Margin = New System.Windows.Forms.Padding(0)
@@ -222,6 +231,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverContext1
         '
+        Me.ucrReceiverContext1.AutoSize = True
         Me.ucrReceiverContext1.frmParent = Me
         Me.ucrReceiverContext1.Location = New System.Drawing.Point(8, 32)
         Me.ucrReceiverContext1.Margin = New System.Windows.Forms.Padding(0)
@@ -243,6 +253,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverContext4
         '
+        Me.ucrReceiverContext4.AutoSize = True
         Me.ucrReceiverContext4.frmParent = Me
         Me.ucrReceiverContext4.Location = New System.Drawing.Point(8, 170)
         Me.ucrReceiverContext4.Margin = New System.Windows.Forms.Padding(0)
@@ -264,6 +275,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverContext3
         '
+        Me.ucrReceiverContext3.AutoSize = True
         Me.ucrReceiverContext3.frmParent = Me
         Me.ucrReceiverContext3.Location = New System.Drawing.Point(8, 124)
         Me.ucrReceiverContext3.Margin = New System.Windows.Forms.Padding(0)
@@ -352,6 +364,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverIDOther
         '
+        Me.ucrReceiverIDOther.AutoSize = True
         Me.ucrReceiverIDOther.frmParent = Me
         Me.ucrReceiverIDOther.Location = New System.Drawing.Point(8, 78)
         Me.ucrReceiverIDOther.Margin = New System.Windows.Forms.Padding(0)
@@ -364,6 +377,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverID1
         '
+        Me.ucrReceiverID1.AutoSize = True
         Me.ucrReceiverID1.frmParent = Me
         Me.ucrReceiverID1.Location = New System.Drawing.Point(8, 34)
         Me.ucrReceiverID1.Margin = New System.Windows.Forms.Padding(0)
@@ -377,6 +391,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrInputKeyCheck
         '
         Me.ucrInputKeyCheck.AddQuotesIfUnrecognised = True
+        Me.ucrInputKeyCheck.AutoSize = True
         Me.ucrInputKeyCheck.IsMultiline = False
         Me.ucrInputKeyCheck.IsReadOnly = False
         Me.ucrInputKeyCheck.Location = New System.Drawing.Point(104, 440)
@@ -387,6 +402,7 @@ Partial Class dlgDefineOptionsByContext
         'ucrInputKeyColumns
         '
         Me.ucrInputKeyColumns.AddQuotesIfUnrecognised = True
+        Me.ucrInputKeyColumns.AutoSize = True
         Me.ucrInputKeyColumns.IsMultiline = False
         Me.ucrInputKeyColumns.IsReadOnly = False
         Me.ucrInputKeyColumns.Location = New System.Drawing.Point(104, 409)
@@ -454,6 +470,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverBlockingOther
         '
+        Me.ucrReceiverBlockingOther.AutoSize = True
         Me.ucrReceiverBlockingOther.frmParent = Me
         Me.ucrReceiverBlockingOther.Location = New System.Drawing.Point(9, 78)
         Me.ucrReceiverBlockingOther.Margin = New System.Windows.Forms.Padding(0)
@@ -466,6 +483,7 @@ Partial Class dlgDefineOptionsByContext
         '
         'ucrReceiverBlocking1
         '
+        Me.ucrReceiverBlocking1.AutoSize = True
         Me.ucrReceiverBlocking1.frmParent = Me
         Me.ucrReceiverBlocking1.Location = New System.Drawing.Point(9, 34)
         Me.ucrReceiverBlocking1.Margin = New System.Windows.Forms.Padding(0)
@@ -478,8 +496,9 @@ Partial Class dlgDefineOptionsByContext
         '
         'dlgDefineOptionsByContext
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(594, 528)
         Me.Controls.Add(Me.grpBlockingVariables)
         Me.Controls.Add(Me.cmdModify)

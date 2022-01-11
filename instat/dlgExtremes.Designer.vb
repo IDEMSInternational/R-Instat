@@ -38,7 +38,6 @@ Partial Class dlgExtremes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExtremes))
         Me.cmdSqrt = New System.Windows.Forms.Button()
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
@@ -78,37 +77,67 @@ Partial Class dlgExtremes
         '
         'cmdSqrt
         '
-        resources.ApplyResources(Me.cmdSqrt, "cmdSqrt")
+        Me.cmdSqrt.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSqrt.Location = New System.Drawing.Point(4, 10)
+        Me.cmdSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSqrt.Name = "cmdSqrt"
+        Me.cmdSqrt.Size = New System.Drawing.Size(56, 30)
+        Me.cmdSqrt.TabIndex = 0
+        Me.cmdSqrt.Text = "sqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
         'cmdLog
         '
-        resources.ApplyResources(Me.cmdLog, "cmdLog")
+        Me.cmdLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLog.Location = New System.Drawing.Point(4, 40)
+        Me.cmdLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLog.Name = "cmdLog"
+        Me.cmdLog.Size = New System.Drawing.Size(56, 30)
+        Me.cmdLog.TabIndex = 2
+        Me.cmdLog.Text = "log"
         Me.cmdLog.UseVisualStyleBackColor = True
         '
         'cmdTan
         '
-        resources.ApplyResources(Me.cmdTan, "cmdTan")
+        Me.cmdTan.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTan.Location = New System.Drawing.Point(60, 70)
+        Me.cmdTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTan.Name = "cmdTan"
+        Me.cmdTan.Size = New System.Drawing.Size(56, 30)
+        Me.cmdTan.TabIndex = 5
+        Me.cmdTan.Text = "tan"
         Me.cmdTan.UseVisualStyleBackColor = True
         '
         'cmdExp
         '
-        resources.ApplyResources(Me.cmdExp, "cmdExp")
+        Me.cmdExp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdExp.Location = New System.Drawing.Point(4, 70)
+        Me.cmdExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExp.Name = "cmdExp"
+        Me.cmdExp.Size = New System.Drawing.Size(56, 30)
+        Me.cmdExp.TabIndex = 4
+        Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
         'lblThreshold
         '
-        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.AutoSize = True
+        Me.lblThreshold.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblThreshold.Location = New System.Drawing.Point(10, 235)
         Me.lblThreshold.Name = "lblThreshold"
+        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
+        Me.lblThreshold.TabIndex = 9
+        Me.lblThreshold.Text = "Threshold:"
         '
         'cmdSin
         '
-        resources.ApplyResources(Me.cmdSin, "cmdSin")
+        Me.cmdSin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSin.Location = New System.Drawing.Point(60, 40)
+        Me.cmdSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSin.Name = "cmdSin"
+        Me.cmdSin.Size = New System.Drawing.Size(56, 30)
+        Me.cmdSin.TabIndex = 3
+        Me.cmdSin.Text = "sin"
         Me.cmdSin.UseVisualStyleBackColor = True
         '
         'grpSecondCalc
@@ -119,14 +148,21 @@ Partial Class dlgExtremes
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        resources.ApplyResources(Me.grpSecondCalc, "grpSecondCalc")
+        Me.grpSecondCalc.Location = New System.Drawing.Point(390, 139)
         Me.grpSecondCalc.Name = "grpSecondCalc"
+        Me.grpSecondCalc.Size = New System.Drawing.Size(119, 104)
+        Me.grpSecondCalc.TabIndex = 6
         Me.grpSecondCalc.TabStop = False
         '
         'cmdCos
         '
-        resources.ApplyResources(Me.cmdCos, "cmdCos")
+        Me.cmdCos.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCos.Location = New System.Drawing.Point(60, 10)
+        Me.cmdCos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCos.Name = "cmdCos"
+        Me.cmdCos.Size = New System.Drawing.Size(56, 30)
+        Me.cmdCos.TabIndex = 1
+        Me.cmdCos.Text = "cos"
         Me.cmdCos.UseVisualStyleBackColor = True
         '
         'grpFirstCalc
@@ -142,166 +178,285 @@ Partial Class dlgExtremes
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
+        Me.grpFirstCalc.Location = New System.Drawing.Point(258, 139)
         Me.grpFirstCalc.Name = "grpFirstCalc"
+        Me.grpFirstCalc.Size = New System.Drawing.Size(127, 104)
+        Me.grpFirstCalc.TabIndex = 5
         Me.grpFirstCalc.TabStop = False
         '
         'cmdMultiply
         '
-        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
+        Me.cmdMultiply.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdMultiply.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMultiply.Location = New System.Drawing.Point(64, 10)
+        Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.Size = New System.Drawing.Size(29, 30)
+        Me.cmdMultiply.TabIndex = 2
+        Me.cmdMultiply.Text = "*"
         Me.cmdMultiply.UseVisualStyleBackColor = True
         '
         'cmdColon
         '
-        resources.ApplyResources(Me.cmdColon, "cmdColon")
+        Me.cmdColon.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdColon.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdColon.Location = New System.Drawing.Point(35, 10)
+        Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
+        Me.cmdColon.Size = New System.Drawing.Size(29, 30)
+        Me.cmdColon.TabIndex = 1
+        Me.cmdColon.Text = ":"
         Me.cmdColon.UseVisualStyleBackColor = True
         '
         'cmdPlus
         '
-        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
+        Me.cmdPlus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlus.Location = New System.Drawing.Point(6, 10)
+        Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.Size = New System.Drawing.Size(29, 30)
+        Me.cmdPlus.TabIndex = 0
+        Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
         '
         'cmdPower
         '
-        resources.ApplyResources(Me.cmdPower, "cmdPower")
+        Me.cmdPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPower.Location = New System.Drawing.Point(93, 40)
+        Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.Size = New System.Drawing.Size(29, 30)
+        Me.cmdPower.TabIndex = 7
+        Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
         '
         'cmdClosingBracket
         '
-        resources.ApplyResources(Me.cmdClosingBracket, "cmdClosingBracket")
+        Me.cmdClosingBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.cmdClosingBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdClosingBracket.Location = New System.Drawing.Point(64, 40)
+        Me.cmdClosingBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClosingBracket.Name = "cmdClosingBracket"
+        Me.cmdClosingBracket.Size = New System.Drawing.Size(29, 30)
+        Me.cmdClosingBracket.TabIndex = 6
+        Me.cmdClosingBracket.Text = ")"
         Me.cmdClosingBracket.UseVisualStyleBackColor = True
         '
         'cmdOpeningBracket
         '
-        resources.ApplyResources(Me.cmdOpeningBracket, "cmdOpeningBracket")
+        Me.cmdOpeningBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.cmdOpeningBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOpeningBracket.Location = New System.Drawing.Point(35, 40)
+        Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
+        Me.cmdOpeningBracket.Size = New System.Drawing.Size(29, 30)
+        Me.cmdOpeningBracket.TabIndex = 5
+        Me.cmdOpeningBracket.Text = "("
         Me.cmdOpeningBracket.UseVisualStyleBackColor = True
         '
         'cmdDiv
         '
-        resources.ApplyResources(Me.cmdDiv, "cmdDiv")
+        Me.cmdDiv.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdDiv.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDiv.Location = New System.Drawing.Point(93, 10)
+        Me.cmdDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDiv.Name = "cmdDiv"
+        Me.cmdDiv.Size = New System.Drawing.Size(29, 30)
+        Me.cmdDiv.TabIndex = 3
+        Me.cmdDiv.Text = "/"
         Me.cmdDiv.UseVisualStyleBackColor = True
         '
         'cmdDoubleBracket
         '
-        resources.ApplyResources(Me.cmdDoubleBracket, "cmdDoubleBracket")
+        Me.cmdDoubleBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.cmdDoubleBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoubleBracket.Location = New System.Drawing.Point(6, 40)
+        Me.cmdDoubleBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
+        Me.cmdDoubleBracket.Size = New System.Drawing.Size(29, 30)
+        Me.cmdDoubleBracket.TabIndex = 4
+        Me.cmdDoubleBracket.Text = "( )"
         Me.cmdDoubleBracket.UseVisualStyleBackColor = True
         '
         'cmdClear
         '
-        resources.ApplyResources(Me.cmdClear, "cmdClear")
+        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdClear.Location = New System.Drawing.Point(64, 70)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(58, 30)
+        Me.cmdClear.TabIndex = 10
+        Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdZero
         '
-        resources.ApplyResources(Me.cmdZero, "cmdZero")
+        Me.cmdZero.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.75!)
+        Me.cmdZero.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdZero.Location = New System.Drawing.Point(35, 70)
+        Me.cmdZero.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdZero.Name = "cmdZero"
+        Me.cmdZero.Size = New System.Drawing.Size(29, 30)
+        Me.cmdZero.TabIndex = 9
+        Me.cmdZero.Text = "l()"
         Me.cmdZero.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
-        resources.ApplyResources(Me.cmdMinus, "cmdMinus")
+        Me.cmdMinus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.cmdMinus.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMinus.Location = New System.Drawing.Point(6, 70)
+        Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMinus.Name = "cmdMinus"
+        Me.cmdMinus.Size = New System.Drawing.Size(29, 30)
+        Me.cmdMinus.TabIndex = 8
+        Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
         '
         'lblFevdType
         '
-        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
+        Me.lblFevdType.AutoSize = True
+        Me.lblFevdType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFevdType.Location = New System.Drawing.Point(10, 207)
         Me.lblFevdType.Name = "lblFevdType"
+        Me.lblFevdType.Size = New System.Drawing.Size(62, 13)
+        Me.lblFevdType.TabIndex = 7
+        Me.lblFevdType.Text = "Distribution:"
         '
         'cmdDisplayOptions
         '
-        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(401, 290)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(108, 23)
+        Me.cmdDisplayOptions.TabIndex = 14
+        Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'cmdFittingOptions
         '
-        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
+        Me.cmdFittingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(401, 261)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.Size = New System.Drawing.Size(108, 23)
+        Me.cmdFittingOptions.TabIndex = 12
+        Me.cmdFittingOptions.Text = "Fitting Options"
         Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'lblDataToFit
         '
-        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
+        Me.lblDataToFit.AutoSize = True
+        Me.lblDataToFit.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDataToFit.Location = New System.Drawing.Point(258, 45)
         Me.lblDataToFit.Name = "lblDataToFit"
+        Me.lblDataToFit.Size = New System.Drawing.Size(99, 13)
+        Me.lblDataToFit.TabIndex = 1
         Me.lblDataToFit.Tag = "Data_to_be_fitted"
+        Me.lblDataToFit.Text = "Response Variable:"
         '
         'ucrInputThresholdforLocation
         '
         Me.ucrInputThresholdforLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdforLocation.AutoSize = True
         Me.ucrInputThresholdforLocation.IsMultiline = False
         Me.ucrInputThresholdforLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputThresholdforLocation, "ucrInputThresholdforLocation")
+        Me.ucrInputThresholdforLocation.Location = New System.Drawing.Point(79, 231)
         Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
+        Me.ucrInputThresholdforLocation.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputThresholdforLocation.TabIndex = 10
         '
         'ucrTryModelling
         '
-        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.AutoSize = True
+        Me.ucrTryModelling.Location = New System.Drawing.Point(1, 258)
         Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
+        Me.ucrTryModelling.Size = New System.Drawing.Size(389, 33)
+        Me.ucrTryModelling.TabIndex = 11
         '
         'ucrChkExplanatoryModelForLocationParameter
         '
+        Me.ucrChkExplanatoryModelForLocationParameter.AutoSize = True
         Me.ucrChkExplanatoryModelForLocationParameter.Checked = False
-        resources.ApplyResources(Me.ucrChkExplanatoryModelForLocationParameter, "ucrChkExplanatoryModelForLocationParameter")
+        Me.ucrChkExplanatoryModelForLocationParameter.Location = New System.Drawing.Point(258, 85)
         Me.ucrChkExplanatoryModelForLocationParameter.Name = "ucrChkExplanatoryModelForLocationParameter"
+        Me.ucrChkExplanatoryModelForLocationParameter.Size = New System.Drawing.Size(270, 23)
+        Me.ucrChkExplanatoryModelForLocationParameter.TabIndex = 3
         '
         'ucrReceiverExpressionExplanatoryModelForLocParam
         '
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.AutoSize = True
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverExpressionExplanatoryModelForLocParam, "ucrReceiverExpressionExplanatoryModelForLocParam")
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Location = New System.Drawing.Point(258, 108)
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Name = "ucrReceiverExpressionExplanatoryModelForLocParam"
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Selector = Nothing
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Size = New System.Drawing.Size(251, 22)
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.strNcFilePath = ""
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.TabIndex = 4
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.ucrSelector = Nothing
         '
         'ucrInputExtremes
         '
         Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
+        Me.ucrInputExtremes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputExtremes.GetSetSelectedIndex = -1
         Me.ucrInputExtremes.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
+        Me.ucrInputExtremes.Location = New System.Drawing.Point(79, 204)
         Me.ucrInputExtremes.Name = "ucrInputExtremes"
+        Me.ucrInputExtremes.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputExtremes.TabIndex = 8
         '
         'ucrSaveExtremes
         '
-        resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
+        Me.ucrSaveExtremes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveExtremes.Location = New System.Drawing.Point(10, 292)
+        Me.ucrSaveExtremes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
+        Me.ucrSaveExtremes.Size = New System.Drawing.Size(320, 22)
+        Me.ucrSaveExtremes.TabIndex = 13
         '
         'ucrSelectorExtremes
         '
+        Me.ucrSelectorExtremes.AutoSize = True
         Me.ucrSelectorExtremes.bDropUnusedFilterLevels = False
         Me.ucrSelectorExtremes.bShowHiddenColumns = False
         Me.ucrSelectorExtremes.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorExtremes, "ucrSelectorExtremes")
+        Me.ucrSelectorExtremes.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorExtremes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorExtremes.Name = "ucrSelectorExtremes"
+        Me.ucrSelectorExtremes.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorExtremes.TabIndex = 0
         '
         'ucrReceiverVariable
         '
+        Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverVariable, "ucrReceiverVariable")
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(258, 60)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(127, 22)
         Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.TabIndex = 2
         Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 321)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
         '
         'dlgExtremes
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(533, 378)
         Me.Controls.Add(Me.ucrInputThresholdforLocation)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrTryModelling)
@@ -322,7 +477,9 @@ Partial Class dlgExtremes
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExtremes"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Fit_an_Extreme_distribution"
+        Me.Text = "Fit an Extreme Distribution"
         Me.grpSecondCalc.ResumeLayout(False)
         Me.grpFirstCalc.ResumeLayout(False)
         Me.ResumeLayout(False)
