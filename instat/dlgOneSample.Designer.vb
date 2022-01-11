@@ -186,34 +186,43 @@ Partial Class dlgOneSample
         '
         'ucrReceiverDataColumn
         '
+        Me.ucrReceiverDataColumn.AutoSize = True
+        Me.ucrReceiverDataColumn.frmParent = Me
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(238, 39)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(110, 26)
+        Me.ucrReceiverDataColumn.strNcFilePath = ""
         Me.ucrReceiverDataColumn.TabIndex = 2
+        Me.ucrReceiverDataColumn.ucrSelector = Nothing
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 278)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 6
         '
         'ucBaseOneSample
         '
+        Me.ucBaseOneSample.AutoSize = True
+        Me.ucBaseOneSample.bDropUnusedFilterLevels = False
         Me.ucBaseOneSample.bShowHiddenColumns = False
         Me.ucBaseOneSample.bUseCurrentFilter = True
         Me.ucBaseOneSample.Location = New System.Drawing.Point(10, 10)
         Me.ucBaseOneSample.Margin = New System.Windows.Forms.Padding(0)
         Me.ucBaseOneSample.Name = "ucBaseOneSample"
-        Me.ucBaseOneSample.Size = New System.Drawing.Size(210, 180)
+        Me.ucBaseOneSample.Size = New System.Drawing.Size(213, 183)
         Me.ucBaseOneSample.TabIndex = 0
         '
         'dlgOneSample
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(469, 339)
         Me.Controls.Add(Me.ucBaseOneSample)
         Me.Controls.Add(Me.ucrReceiverDataColumn)

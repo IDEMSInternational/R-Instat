@@ -16,6 +16,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>C:\Users\deaspo\Desktop\applications\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -35,8 +37,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -110,6 +110,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -140,6 +141,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
@@ -191,6 +193,16 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\IColumnMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataViewGrid.vb" />
+    <Compile Include="Interface\IGrid.vb" />
+    <Compile Include="frmOutputWindow.Designer.vb">
+      <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
@@ -432,6 +444,7 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Enum\OutputType.vb" />
     <Compile Include="frmConvertToNumeric.Designer.vb">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </Compile>
@@ -439,6 +452,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
+    <Compile Include="Model\Options\OutputFont.vb" />
+    <Compile Include="Model\Output\clsOutputElement.vb" />
+    <Compile Include="Model\Output\clsOutputList.vb" />
+    <Compile Include="Model\Output\clsOutputLogger.vb" />
+    <Compile Include="Model\Output\clsRScriptElement.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1236,12 +1254,6 @@
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
     <Compile Include="frmGraphDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOutputWindow.Designer.vb">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
@@ -2809,19 +2821,84 @@
     <Compile Include="ucrVariablesAsFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrWPFRichTextBox.xaml.vb">
-      <DependentUpon>ucrWPFRichTextBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UcrPanel.Designer.vb">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="UcrPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\DataGrid\clsWorksheetAdapter.vb" />
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataViewLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.Designer.vb">
+      <DependentUpon>ucrDataViewReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.Designer.vb">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.Designer.vb">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPage.Designer.vb">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.Designer.vb">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
+      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
@@ -2920,8 +2997,14 @@
     <EmbeddedResource Include="dlgSetupForDataEntry.resx">
       <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSubset.resx">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeSummaries.resx">
+      <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
@@ -2934,6 +3017,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOutputWindow.resx">
+      <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
@@ -3009,15 +3095,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.sw-KE.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddKey.resx">
       <DependentUpon>dlgAddKey.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
@@ -3069,18 +3158,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.sw-KE.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotMethod.resx">
       <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
@@ -3602,6 +3683,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -3966,12 +4048,6 @@
     <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.sw-KE.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
@@ -4224,6 +4300,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.sw-KE.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
@@ -4596,9 +4673,6 @@
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgStemAndLeaf.resx">
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
     </EmbeddedResource>
@@ -4906,6 +4980,9 @@
     <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
       <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputFactorLevels.resx">
+      <DependentUpon>ucrInputFactorLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -4990,6 +5067,9 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingleNew.resx">
+      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
@@ -5068,11 +5148,25 @@
     <EmbeddedResource Include="UcrPanel.resx">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\Linux\ucrLinuxGrid.resx">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
+    <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -5469,12 +5563,6 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="ucrWPFRichTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />

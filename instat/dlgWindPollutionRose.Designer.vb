@@ -141,14 +141,16 @@ Partial Class dlgWindPollutionRose
         '
         'ucrChkCompareTwoSets
         '
+        Me.ucrChkCompareTwoSets.AutoSize = True
         Me.ucrChkCompareTwoSets.Checked = False
         Me.ucrChkCompareTwoSets.Location = New System.Drawing.Point(257, 207)
         Me.ucrChkCompareTwoSets.Name = "ucrChkCompareTwoSets"
-        Me.ucrChkCompareTwoSets.Size = New System.Drawing.Size(155, 20)
+        Me.ucrChkCompareTwoSets.Size = New System.Drawing.Size(155, 23)
         Me.ucrChkCompareTwoSets.TabIndex = 9
         '
         'ucrReceiverFacetOne
         '
+        Me.ucrReceiverFacetOne.AutoSize = True
         Me.ucrReceiverFacetOne.frmParent = Me
         Me.ucrReceiverFacetOne.Location = New System.Drawing.Point(398, 47)
         Me.ucrReceiverFacetOne.Margin = New System.Windows.Forms.Padding(0)
@@ -161,6 +163,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverFacetTwo
         '
+        Me.ucrReceiverFacetTwo.AutoSize = True
         Me.ucrReceiverFacetTwo.frmParent = Me
         Me.ucrReceiverFacetTwo.Location = New System.Drawing.Point(398, 92)
         Me.ucrReceiverFacetTwo.Margin = New System.Windows.Forms.Padding(0)
@@ -173,6 +176,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(257, 30)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -185,6 +189,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 315)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
@@ -194,6 +199,7 @@ Partial Class dlgWindPollutionRose
         'ucrInputStatistic
         '
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
+        Me.ucrInputStatistic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
         Me.ucrInputStatistic.Location = New System.Drawing.Point(71, 240)
@@ -204,6 +210,7 @@ Partial Class dlgWindPollutionRose
         'ucrInputColor
         '
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
         Me.ucrInputColor.Location = New System.Drawing.Point(70, 211)
@@ -213,14 +220,16 @@ Partial Class dlgWindPollutionRose
         '
         'ucrChkPaddle
         '
+        Me.ucrChkPaddle.AutoSize = True
         Me.ucrChkPaddle.Checked = False
         Me.ucrChkPaddle.Location = New System.Drawing.Point(10, 282)
         Me.ucrChkPaddle.Name = "ucrChkPaddle"
-        Me.ucrChkPaddle.Size = New System.Drawing.Size(155, 20)
+        Me.ucrChkPaddle.Size = New System.Drawing.Size(155, 23)
         Me.ucrChkPaddle.TabIndex = 22
         '
         'ucrReceiverPollutant
         '
+        Me.ucrReceiverPollutant.AutoSize = True
         Me.ucrReceiverPollutant.frmParent = Me
         Me.ucrReceiverPollutant.Location = New System.Drawing.Point(257, 170)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
@@ -233,6 +242,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverWindSpeed
         '
+        Me.ucrReceiverWindSpeed.AutoSize = True
         Me.ucrReceiverWindSpeed.frmParent = Me
         Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(257, 75)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
@@ -245,6 +255,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverWindDirection
         '
+        Me.ucrReceiverWindDirection.AutoSize = True
         Me.ucrReceiverWindDirection.frmParent = Me
         Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(257, 120)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
@@ -257,6 +268,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverWindSpeed2
         '
+        Me.ucrReceiverWindSpeed2.AutoSize = True
         Me.ucrReceiverWindSpeed2.frmParent = Me
         Me.ucrReceiverWindSpeed2.Location = New System.Drawing.Point(257, 248)
         Me.ucrReceiverWindSpeed2.Margin = New System.Windows.Forms.Padding(0)
@@ -269,6 +281,7 @@ Partial Class dlgWindPollutionRose
         '
         'ucrReceiverWindDirection2
         '
+        Me.ucrReceiverWindDirection2.AutoSize = True
         Me.ucrReceiverWindDirection2.frmParent = Me
         Me.ucrReceiverWindDirection2.Location = New System.Drawing.Point(257, 291)
         Me.ucrReceiverWindDirection2.Margin = New System.Windows.Forms.Padding(0)
@@ -281,26 +294,30 @@ Partial Class dlgWindPollutionRose
         '
         'ucrSelectorWindPollutionRose
         '
+        Me.ucrSelectorWindPollutionRose.AutoSize = True
         Me.ucrSelectorWindPollutionRose.bDropUnusedFilterLevels = False
         Me.ucrSelectorWindPollutionRose.bShowHiddenColumns = False
         Me.ucrSelectorWindPollutionRose.bUseCurrentFilter = True
         Me.ucrSelectorWindPollutionRose.Location = New System.Drawing.Point(10, 5)
         Me.ucrSelectorWindPollutionRose.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorWindPollutionRose.Name = "ucrSelectorWindPollutionRose"
-        Me.ucrSelectorWindPollutionRose.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorWindPollutionRose.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorWindPollutionRose.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(8, 351)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 24
         '
         'dlgWindPollutionRose
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(526, 416)
         Me.Controls.Add(Me.ucrChkCompareTwoSets)
         Me.Controls.Add(Me.lblFacetTwo)

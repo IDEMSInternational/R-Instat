@@ -161,6 +161,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrSaveModel
         '
+        Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 298)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
@@ -169,6 +170,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrReceiverSecondExplanatory
         '
+        Me.ucrReceiverSecondExplanatory.AutoSize = True
         Me.ucrReceiverSecondExplanatory.frmParent = Me
         Me.ucrReceiverSecondExplanatory.Location = New System.Drawing.Point(254, 169)
         Me.ucrReceiverSecondExplanatory.Margin = New System.Windows.Forms.Padding(0)
@@ -181,6 +183,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrReceiverFirstExplanatory
         '
+        Me.ucrReceiverFirstExplanatory.AutoSize = True
         Me.ucrReceiverFirstExplanatory.frmParent = Me
         Me.ucrReceiverFirstExplanatory.Location = New System.Drawing.Point(255, 86)
         Me.ucrReceiverFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
@@ -193,14 +196,16 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrChkConvertToNumeric
         '
+        Me.ucrChkConvertToNumeric.AutoSize = True
         Me.ucrChkConvertToNumeric.Checked = False
         Me.ucrChkConvertToNumeric.Location = New System.Drawing.Point(384, 38)
         Me.ucrChkConvertToNumeric.Name = "ucrChkConvertToNumeric"
-        Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(155, 20)
+        Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(155, 23)
         Me.ucrChkConvertToNumeric.TabIndex = 25
         '
         'ucrReceiverResponse
         '
+        Me.ucrReceiverResponse.AutoSize = True
         Me.ucrReceiverResponse.frmParent = Me
         Me.ucrReceiverResponse.Location = New System.Drawing.Point(255, 38)
         Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
@@ -214,6 +219,7 @@ Partial Class dlgThreeVariableModelling
         'ucrInputModelOperator
         '
         Me.ucrInputModelOperator.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelOperator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputModelOperator.GetSetSelectedIndex = -1
         Me.ucrInputModelOperator.IsReadOnly = False
         Me.ucrInputModelOperator.Location = New System.Drawing.Point(384, 125)
@@ -224,6 +230,7 @@ Partial Class dlgThreeVariableModelling
         'ucrModelPreview
         '
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrModelPreview.AutoSize = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
         Me.ucrModelPreview.Location = New System.Drawing.Point(158, 263)
@@ -233,6 +240,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrDistributionChoice
         '
+        Me.ucrDistributionChoice.AutoSize = True
         Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 218)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(225, 43)
@@ -240,6 +248,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrSelectorThreeVariableModelling
         '
+        Me.ucrSelectorThreeVariableModelling.AutoSize = True
         Me.ucrSelectorThreeVariableModelling.bDropUnusedFilterLevels = False
         Me.ucrSelectorThreeVariableModelling.bShowHiddenColumns = False
         Me.ucrSelectorThreeVariableModelling.bUseCurrentFilter = True
@@ -251,15 +260,18 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 328)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 54)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 17
         '
         'dlgThreeVariableModelling
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 386)
         Me.Controls.Add(Me.cmdResponseFunction)
         Me.Controls.Add(Me.cmdSecondExplanatoryFunction)

@@ -47,13 +47,16 @@ Partial Class dlgOneVarCompareModels
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 204)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrReceiverCompareModels
         '
+        Me.ucrReceiverCompareModels.AutoSize = True
         Me.ucrReceiverCompareModels.frmParent = Me
         Me.ucrReceiverCompareModels.Location = New System.Drawing.Point(250, 60)
         Me.ucrReceiverCompareModels.Margin = New System.Windows.Forms.Padding(0)
@@ -66,13 +69,14 @@ Partial Class dlgOneVarCompareModels
         '
         'ucrSelectorOneVarCompModels
         '
+        Me.ucrSelectorOneVarCompModels.AutoSize = True
         Me.ucrSelectorOneVarCompModels.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarCompModels.bShowHiddenColumns = False
         Me.ucrSelectorOneVarCompModels.bUseCurrentFilter = True
         Me.ucrSelectorOneVarCompModels.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOneVarCompModels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarCompModels.Name = "ucrSelectorOneVarCompModels"
-        Me.ucrSelectorOneVarCompModels.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneVarCompModels.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorOneVarCompModels.TabIndex = 0
         '
         'cmdDisplayObjects
@@ -95,8 +99,9 @@ Partial Class dlgOneVarCompareModels
         '
         'dlgOneVarCompareModels
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 262)
         Me.Controls.Add(Me.lblReceiver)
         Me.Controls.Add(Me.cmdDisplayObjects)

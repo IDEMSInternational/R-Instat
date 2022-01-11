@@ -63,6 +63,7 @@ Partial Class dlgAnonymiseIDColumn
         'ucrInputAlgorithm
         '
         Me.ucrInputAlgorithm.AddQuotesIfUnrecognised = True
+        Me.ucrInputAlgorithm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAlgorithm.GetSetSelectedIndex = -1
         Me.ucrInputAlgorithm.IsReadOnly = False
         Me.ucrInputAlgorithm.Location = New System.Drawing.Point(253, 149)
@@ -74,6 +75,7 @@ Partial Class dlgAnonymiseIDColumn
         'ucrInputTextSalt
         '
         Me.ucrInputTextSalt.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextSalt.AutoSize = True
         Me.ucrInputTextSalt.IsMultiline = False
         Me.ucrInputTextSalt.IsReadOnly = False
         Me.ucrInputTextSalt.Location = New System.Drawing.Point(253, 104)
@@ -83,17 +85,19 @@ Partial Class dlgAnonymiseIDColumn
         '
         'ucrSelectorAnonymiseIDColumn
         '
+        Me.ucrSelectorAnonymiseIDColumn.AutoSize = True
         Me.ucrSelectorAnonymiseIDColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorAnonymiseIDColumn.bShowHiddenColumns = False
         Me.ucrSelectorAnonymiseIDColumn.bUseCurrentFilter = True
         Me.ucrSelectorAnonymiseIDColumn.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorAnonymiseIDColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAnonymiseIDColumn.Name = "ucrSelectorAnonymiseIDColumn"
-        Me.ucrSelectorAnonymiseIDColumn.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorAnonymiseIDColumn.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorAnonymiseIDColumn.TabIndex = 0
         '
         'ucrSaveAnonymisedColumn
         '
+        Me.ucrSaveAnonymisedColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveAnonymisedColumn.Location = New System.Drawing.Point(10, 205)
         Me.ucrSaveAnonymisedColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveAnonymisedColumn.Name = "ucrSaveAnonymisedColumn"
@@ -102,6 +106,7 @@ Partial Class dlgAnonymiseIDColumn
         '
         'ucrReceiverIDColumn
         '
+        Me.ucrReceiverIDColumn.AutoSize = True
         Me.ucrReceiverIDColumn.frmParent = Me
         Me.ucrReceiverIDColumn.Location = New System.Drawing.Point(253, 60)
         Me.ucrReceiverIDColumn.Margin = New System.Windows.Forms.Padding(0)
@@ -114,15 +119,18 @@ Partial Class dlgAnonymiseIDColumn
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 237)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
         'dlgAnonymiseIDColumn
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 296)
         Me.Controls.Add(Me.lblAlgorithm)
         Me.Controls.Add(Me.ucrInputAlgorithm)

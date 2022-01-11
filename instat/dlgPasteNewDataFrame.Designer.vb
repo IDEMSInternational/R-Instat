@@ -75,9 +75,11 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 276)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 5
         '
         'lblLinesToPreview
@@ -92,6 +94,7 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrNudPreviewLines
         '
+        Me.ucrNudPreviewLines.AutoSize = True
         Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudPreviewLines.Location = New System.Drawing.Point(413, 10)
@@ -105,10 +108,11 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrChkRowHeader
         '
+        Me.ucrChkRowHeader.AutoSize = True
         Me.ucrChkRowHeader.Checked = False
         Me.ucrChkRowHeader.Location = New System.Drawing.Point(146, 12)
         Me.ucrChkRowHeader.Name = "ucrChkRowHeader"
-        Me.ucrChkRowHeader.Size = New System.Drawing.Size(169, 20)
+        Me.ucrChkRowHeader.Size = New System.Drawing.Size(169, 23)
         Me.ucrChkRowHeader.TabIndex = 1
         '
         'lblConfirmText
@@ -124,6 +128,7 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrSaveNewDFName
         '
+        Me.ucrSaveNewDFName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveNewDFName.Location = New System.Drawing.Point(10, 243)
         Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
@@ -150,8 +155,9 @@ Partial Class dlgPasteNewDataFrame
         '
         'dlgPasteNewDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(599, 339)
         Me.Controls.Add(Me.panelNoDataPreview)
         Me.Controls.Add(Me.ucrSaveNewDFName)

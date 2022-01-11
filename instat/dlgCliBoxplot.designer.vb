@@ -372,13 +372,18 @@ Partial Class dlgCliBoxplot
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(33, 296)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 62)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.AutoSize = True
+        Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(128, 36)
         Me.ucrInputTitle.Name = "ucrInputTitle"
@@ -387,6 +392,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputDataPeriod
         '
+        Me.ucrInputDataPeriod.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataPeriod.AutoSize = True
+        Me.ucrInputDataPeriod.IsMultiline = False
         Me.ucrInputDataPeriod.IsReadOnly = False
         Me.ucrInputDataPeriod.Location = New System.Drawing.Point(128, 140)
         Me.ucrInputDataPeriod.Name = "ucrInputDataPeriod"
@@ -395,6 +403,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputVariable
         '
+        Me.ucrInputVariable.AddQuotesIfUnrecognised = True
+        Me.ucrInputVariable.AutoSize = True
+        Me.ucrInputVariable.IsMultiline = False
         Me.ucrInputVariable.IsReadOnly = False
         Me.ucrInputVariable.Location = New System.Drawing.Point(128, 61)
         Me.ucrInputVariable.Name = "ucrInputVariable"
@@ -403,6 +414,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputXLabel
         '
+        Me.ucrInputXLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputXLabel.AutoSize = True
+        Me.ucrInputXLabel.IsMultiline = False
         Me.ucrInputXLabel.IsReadOnly = False
         Me.ucrInputXLabel.Location = New System.Drawing.Point(128, 113)
         Me.ucrInputXLabel.Name = "ucrInputXLabel"
@@ -411,6 +425,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputWidth
         '
+        Me.ucrInputWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputWidth.AutoSize = True
+        Me.ucrInputWidth.IsMultiline = False
         Me.ucrInputWidth.IsReadOnly = False
         Me.ucrInputWidth.Location = New System.Drawing.Point(128, 193)
         Me.ucrInputWidth.Name = "ucrInputWidth"
@@ -419,6 +436,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputYLabel
         '
+        Me.ucrInputYLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputYLabel.AutoSize = True
+        Me.ucrInputYLabel.IsMultiline = False
         Me.ucrInputYLabel.IsReadOnly = False
         Me.ucrInputYLabel.Location = New System.Drawing.Point(128, 87)
         Me.ucrInputYLabel.Name = "ucrInputYLabel"
@@ -427,6 +447,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputFactorLab
         '
+        Me.ucrInputFactorLab.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorLab.AutoSize = True
+        Me.ucrInputFactorLab.IsMultiline = False
         Me.ucrInputFactorLab.IsReadOnly = False
         Me.ucrInputFactorLab.Location = New System.Drawing.Point(128, 166)
         Me.ucrInputFactorLab.Name = "ucrInputFactorLab"
@@ -435,6 +458,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputColour
         '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSize = True
+        Me.ucrInputColour.IsMultiline = False
         Me.ucrInputColour.IsReadOnly = False
         Me.ucrInputColour.Location = New System.Drawing.Point(128, 221)
         Me.ucrInputColour.Name = "ucrInputColour"
@@ -443,6 +469,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputLog
         '
+        Me.ucrInputLog.AddQuotesIfUnrecognised = True
+        Me.ucrInputLog.AutoSize = True
+        Me.ucrInputLog.IsMultiline = False
         Me.ucrInputLog.IsReadOnly = False
         Me.ucrInputLog.Location = New System.Drawing.Point(282, 35)
         Me.ucrInputLog.Name = "ucrInputLog"
@@ -451,6 +480,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputAt
         '
+        Me.ucrInputAt.AddQuotesIfUnrecognised = True
+        Me.ucrInputAt.AutoSize = True
+        Me.ucrInputAt.IsMultiline = False
         Me.ucrInputAt.IsReadOnly = False
         Me.ucrInputAt.Location = New System.Drawing.Point(282, 63)
         Me.ucrInputAt.Name = "ucrInputAt"
@@ -459,6 +491,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputBorder
         '
+        Me.ucrInputBorder.AddQuotesIfUnrecognised = True
+        Me.ucrInputBorder.AutoSize = True
+        Me.ucrInputBorder.IsMultiline = False
         Me.ucrInputBorder.IsReadOnly = False
         Me.ucrInputBorder.Location = New System.Drawing.Point(282, 86)
         Me.ucrInputBorder.Name = "ucrInputBorder"
@@ -467,6 +502,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrInputPars
         '
+        Me.ucrInputPars.AddQuotesIfUnrecognised = True
+        Me.ucrInputPars.AutoSize = True
+        Me.ucrInputPars.IsMultiline = False
         Me.ucrInputPars.IsReadOnly = False
         Me.ucrInputPars.Location = New System.Drawing.Point(282, 112)
         Me.ucrInputPars.Name = "ucrInputPars"
@@ -475,8 +513,9 @@ Partial Class dlgCliBoxplot
         '
         'dlgCliBoxplot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(518, 359)
         Me.Controls.Add(Me.ucrInputPars)
         Me.Controls.Add(Me.ucrInputBorder)
