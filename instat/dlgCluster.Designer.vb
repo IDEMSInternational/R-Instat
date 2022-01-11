@@ -22,7 +22,6 @@ Partial Class dlgCluster
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCluster))
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
         Me.rdoDistanceData = New System.Windows.Forms.RadioButton()
@@ -43,114 +42,181 @@ Partial Class dlgCluster
         '
         'rdoWholeDataFrame
         '
-        resources.ApplyResources(Me.rdoWholeDataFrame, "rdoWholeDataFrame")
+        Me.rdoWholeDataFrame.AutoSize = True
+        Me.rdoWholeDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(265, 96)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
+        Me.rdoWholeDataFrame.Size = New System.Drawing.Size(114, 17)
+        Me.rdoWholeDataFrame.TabIndex = 6
         Me.rdoWholeDataFrame.TabStop = True
+        Me.rdoWholeDataFrame.Text = "Whole Data Frame"
         Me.rdoWholeDataFrame.UseVisualStyleBackColor = True
         '
         'rdoSelectedColumn
         '
-        resources.ApplyResources(Me.rdoSelectedColumn, "rdoSelectedColumn")
+        Me.rdoSelectedColumn.AutoSize = True
+        Me.rdoSelectedColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(265, 73)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
+        Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
+        Me.rdoSelectedColumn.TabIndex = 7
         Me.rdoSelectedColumn.TabStop = True
+        Me.rdoSelectedColumn.Text = "Selected Variables"
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
         '
         'rdoDistanceData
         '
-        resources.ApplyResources(Me.rdoDistanceData, "rdoDistanceData")
+        Me.rdoDistanceData.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoDistanceData.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDistanceData.FlatAppearance.BorderSize = 2
         Me.rdoDistanceData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDistanceData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoDistanceData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDistanceData.Location = New System.Drawing.Point(200, 10)
         Me.rdoDistanceData.Name = "rdoDistanceData"
+        Me.rdoDistanceData.Size = New System.Drawing.Size(100, 28)
+        Me.rdoDistanceData.TabIndex = 16
+        Me.rdoDistanceData.Text = "Distance"
+        Me.rdoDistanceData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDistanceData.UseVisualStyleBackColor = True
         '
         'rdoScaleData
         '
-        resources.ApplyResources(Me.rdoScaleData, "rdoScaleData")
+        Me.rdoScaleData.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoScaleData.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoScaleData.FlatAppearance.BorderSize = 2
         Me.rdoScaleData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoScaleData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoScaleData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoScaleData.Location = New System.Drawing.Point(102, 10)
         Me.rdoScaleData.Name = "rdoScaleData"
+        Me.rdoScaleData.Size = New System.Drawing.Size(100, 28)
+        Me.rdoScaleData.TabIndex = 17
+        Me.rdoScaleData.Text = "Scale"
+        Me.rdoScaleData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoScaleData.UseVisualStyleBackColor = True
         '
         'lblMethod
         '
-        resources.ApplyResources(Me.lblMethod, "lblMethod")
+        Me.lblMethod.AutoSize = True
+        Me.lblMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMethod.Location = New System.Drawing.Point(280, 262)
         Me.lblMethod.Name = "lblMethod"
+        Me.lblMethod.Size = New System.Drawing.Size(43, 13)
+        Me.lblMethod.TabIndex = 21
+        Me.lblMethod.Text = "Method"
         '
         'ucrInputMethod
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Location = New System.Drawing.Point(280, 279)
         Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputMethod.TabIndex = 22
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(5, 371)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 19
         '
         'ucrSaveNewDataFrame
         '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(8, 338)
+        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveNewDataFrame.TabIndex = 13
         '
         'ucrChkCenterEachVariable
         '
+        Me.ucrChkCenterEachVariable.AutoSize = True
         Me.ucrChkCenterEachVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkCenterEachVariable, "ucrChkCenterEachVariable")
+        Me.ucrChkCenterEachVariable.Location = New System.Drawing.Point(7, 286)
         Me.ucrChkCenterEachVariable.Name = "ucrChkCenterEachVariable"
+        Me.ucrChkCenterEachVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkCenterEachVariable.TabIndex = 12
         '
         'ucrChkScaleEachVariable
         '
+        Me.ucrChkScaleEachVariable.AutoSize = True
         Me.ucrChkScaleEachVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkScaleEachVariable, "ucrChkScaleEachVariable")
+        Me.ucrChkScaleEachVariable.Location = New System.Drawing.Point(7, 312)
         Me.ucrChkScaleEachVariable.Name = "ucrChkScaleEachVariable"
+        Me.ucrChkScaleEachVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkScaleEachVariable.TabIndex = 11
         '
         'ucrChkOmitMissingRows
         '
+        Me.ucrChkOmitMissingRows.AutoSize = True
         Me.ucrChkOmitMissingRows.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingRows, "ucrChkOmitMissingRows")
+        Me.ucrChkOmitMissingRows.Location = New System.Drawing.Point(7, 259)
         Me.ucrChkOmitMissingRows.Name = "ucrChkOmitMissingRows"
+        Me.ucrChkOmitMissingRows.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkOmitMissingRows.TabIndex = 10
         '
         'ucrReceiverPrepareData
         '
+        Me.ucrReceiverPrepareData.AutoSize = True
         Me.ucrReceiverPrepareData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverPrepareData, "ucrReceiverPrepareData")
+        Me.ucrReceiverPrepareData.Location = New System.Drawing.Point(267, 125)
+        Me.ucrReceiverPrepareData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrepareData.Name = "ucrReceiverPrepareData"
         Me.ucrReceiverPrepareData.Selector = Nothing
+        Me.ucrReceiverPrepareData.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverPrepareData.strNcFilePath = ""
+        Me.ucrReceiverPrepareData.TabIndex = 9
         Me.ucrReceiverPrepareData.ucrSelector = Nothing
         '
         'ucrSelectorPrepareData
         '
+        Me.ucrSelectorPrepareData.AutoSize = True
         Me.ucrSelectorPrepareData.bDropUnusedFilterLevels = False
         Me.ucrSelectorPrepareData.bShowHiddenColumns = False
         Me.ucrSelectorPrepareData.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorPrepareData, "ucrSelectorPrepareData")
+        Me.ucrSelectorPrepareData.Location = New System.Drawing.Point(10, 51)
+        Me.ucrSelectorPrepareData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPrepareData.Name = "ucrSelectorPrepareData"
+        Me.ucrSelectorPrepareData.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorPrepareData.TabIndex = 5
         '
         'ucrPnlSelectData
         '
-        resources.ApplyResources(Me.ucrPnlSelectData, "ucrPnlSelectData")
+        Me.ucrPnlSelectData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(255, 65)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(135, 48)
+        Me.ucrPnlSelectData.TabIndex = 8
         '
         'ucrPnlPrepareData
         '
-        resources.ApplyResources(Me.ucrPnlPrepareData, "ucrPnlPrepareData")
+        Me.ucrPnlPrepareData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPrepareData.Location = New System.Drawing.Point(102, 10)
         Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
+        Me.ucrPnlPrepareData.Size = New System.Drawing.Size(199, 30)
+        Me.ucrPnlPrepareData.TabIndex = 18
         '
         'ucrChkMatrix
         '
+        Me.ucrChkMatrix.AutoSize = True
         Me.ucrChkMatrix.Checked = False
-        resources.ApplyResources(Me.ucrChkMatrix, "ucrChkMatrix")
+        Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 259)
         Me.ucrChkMatrix.Name = "ucrChkMatrix"
+        Me.ucrChkMatrix.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkMatrix.TabIndex = 20
         '
         'dlgCluster
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(421, 425)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrBase)
@@ -171,6 +237,8 @@ Partial Class dlgCluster
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCluster"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Scale/Distance"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

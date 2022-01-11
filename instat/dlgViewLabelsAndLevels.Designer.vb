@@ -38,7 +38,6 @@ Partial Class dlgViewFactorLabels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewFactorLabels))
         Me.lblFactorColumns = New System.Windows.Forms.Label()
         Me.grpSummaryStatistics = New System.Windows.Forms.GroupBox()
         Me.ucrChkShowPercentage = New instat.ucrCheck()
@@ -62,116 +61,171 @@ Partial Class dlgViewFactorLabels
         '
         'lblFactorColumns
         '
-        resources.ApplyResources(Me.lblFactorColumns, "lblFactorColumns")
+        Me.lblFactorColumns.AutoSize = True
+        Me.lblFactorColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactorColumns.Location = New System.Drawing.Point(303, 45)
         Me.lblFactorColumns.Name = "lblFactorColumns"
+        Me.lblFactorColumns.Size = New System.Drawing.Size(97, 13)
+        Me.lblFactorColumns.TabIndex = 1
+        Me.lblFactorColumns.Text = "Variable(s) to View:"
         '
         'grpSummaryStatistics
         '
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowPercentage)
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowFrequencies)
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowMissingValues)
-        resources.ApplyResources(Me.grpSummaryStatistics, "grpSummaryStatistics")
+        Me.grpSummaryStatistics.Location = New System.Drawing.Point(202, 199)
         Me.grpSummaryStatistics.Name = "grpSummaryStatistics"
+        Me.grpSummaryStatistics.Size = New System.Drawing.Size(166, 90)
+        Me.grpSummaryStatistics.TabIndex = 4
         Me.grpSummaryStatistics.TabStop = False
+        Me.grpSummaryStatistics.Text = "Summary Statistics"
         '
         'ucrChkShowPercentage
         '
+        Me.ucrChkShowPercentage.AutoSize = True
         Me.ucrChkShowPercentage.Checked = False
-        resources.ApplyResources(Me.ucrChkShowPercentage, "ucrChkShowPercentage")
+        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(7, 41)
         Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
+        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(154, 23)
+        Me.ucrChkShowPercentage.TabIndex = 1
         '
         'ucrChkShowFrequencies
         '
+        Me.ucrChkShowFrequencies.AutoSize = True
         Me.ucrChkShowFrequencies.Checked = False
-        resources.ApplyResources(Me.ucrChkShowFrequencies, "ucrChkShowFrequencies")
+        Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(7, 17)
         Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
+        Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkShowFrequencies.TabIndex = 0
         '
         'ucrChkShowMissingValues
         '
+        Me.ucrChkShowMissingValues.AutoSize = True
         Me.ucrChkShowMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkShowMissingValues, "ucrChkShowMissingValues")
+        Me.ucrChkShowMissingValues.Location = New System.Drawing.Point(7, 65)
         Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
+        Me.ucrChkShowMissingValues.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkShowMissingValues.TabIndex = 2
         '
         'grpDisplayOptions
         '
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkSortByName)
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkAlternateColour)
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkShowId)
-        resources.ApplyResources(Me.grpDisplayOptions, "grpDisplayOptions")
+        Me.grpDisplayOptions.Location = New System.Drawing.Point(374, 199)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
+        Me.grpDisplayOptions.Size = New System.Drawing.Size(152, 90)
+        Me.grpDisplayOptions.TabIndex = 5
         Me.grpDisplayOptions.TabStop = False
+        Me.grpDisplayOptions.Text = "Display Options"
         '
         'ucrChkSortByName
         '
+        Me.ucrChkSortByName.AutoSize = True
         Me.ucrChkSortByName.Checked = False
-        resources.ApplyResources(Me.ucrChkSortByName, "ucrChkSortByName")
+        Me.ucrChkSortByName.Location = New System.Drawing.Point(4, 42)
         Me.ucrChkSortByName.Name = "ucrChkSortByName"
+        Me.ucrChkSortByName.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkSortByName.TabIndex = 1
         '
         'ucrChkAlternateColour
         '
+        Me.ucrChkAlternateColour.AutoSize = True
         Me.ucrChkAlternateColour.Checked = False
-        resources.ApplyResources(Me.ucrChkAlternateColour, "ucrChkAlternateColour")
+        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(4, 66)
         Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
+        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkAlternateColour.TabIndex = 2
         '
         'ucrChkShowId
         '
+        Me.ucrChkShowId.AutoSize = True
         Me.ucrChkShowId.Checked = False
-        resources.ApplyResources(Me.ucrChkShowId, "ucrChkShowId")
+        Me.ucrChkShowId.Location = New System.Drawing.Point(4, 18)
         Me.ucrChkShowId.Name = "ucrChkShowId"
+        Me.ucrChkShowId.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkShowId.TabIndex = 0
         '
         'grpLabels
         '
         Me.grpLabels.Controls.Add(Me.ucrChkShowType)
         Me.grpLabels.Controls.Add(Me.ucrChkShowValues)
         Me.grpLabels.Controls.Add(Me.ucrChkShowLabels)
-        resources.ApplyResources(Me.grpLabels, "grpLabels")
+        Me.grpLabels.Location = New System.Drawing.Point(2, 199)
         Me.grpLabels.Name = "grpLabels"
+        Me.grpLabels.Size = New System.Drawing.Size(194, 90)
+        Me.grpLabels.TabIndex = 3
         Me.grpLabels.TabStop = False
+        Me.grpLabels.Text = "Variable Options"
         '
         'ucrChkShowType
         '
+        Me.ucrChkShowType.AutoSize = True
         Me.ucrChkShowType.Checked = False
-        resources.ApplyResources(Me.ucrChkShowType, "ucrChkShowType")
+        Me.ucrChkShowType.Location = New System.Drawing.Point(4, 66)
         Me.ucrChkShowType.Name = "ucrChkShowType"
+        Me.ucrChkShowType.Size = New System.Drawing.Size(174, 23)
+        Me.ucrChkShowType.TabIndex = 2
         '
         'ucrChkShowValues
         '
+        Me.ucrChkShowValues.AutoSize = True
         Me.ucrChkShowValues.Checked = False
-        resources.ApplyResources(Me.ucrChkShowValues, "ucrChkShowValues")
+        Me.ucrChkShowValues.Location = New System.Drawing.Point(4, 18)
         Me.ucrChkShowValues.Name = "ucrChkShowValues"
+        Me.ucrChkShowValues.Size = New System.Drawing.Size(174, 23)
+        Me.ucrChkShowValues.TabIndex = 0
         '
         'ucrChkShowLabels
         '
+        Me.ucrChkShowLabels.AutoSize = True
         Me.ucrChkShowLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkShowLabels, "ucrChkShowLabels")
+        Me.ucrChkShowLabels.Location = New System.Drawing.Point(3, 42)
         Me.ucrChkShowLabels.Name = "ucrChkShowLabels"
+        Me.ucrChkShowLabels.Size = New System.Drawing.Size(190, 23)
+        Me.ucrChkShowLabels.TabIndex = 1
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 295)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'ucrReceiverVariables
         '
+        Me.ucrReceiverVariables.AutoSize = True
         Me.ucrReceiverVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverVariables, "ucrReceiverVariables")
+        Me.ucrReceiverVariables.Location = New System.Drawing.Point(300, 60)
+        Me.ucrReceiverVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariables.Name = "ucrReceiverVariables"
         Me.ucrReceiverVariables.Selector = Nothing
+        Me.ucrReceiverVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverVariables.strNcFilePath = ""
+        Me.ucrReceiverVariables.TabIndex = 2
         Me.ucrReceiverVariables.ucrSelector = Nothing
         '
         'ucrSelectorViewLabelsAndLevels
         '
+        Me.ucrSelectorViewLabelsAndLevels.AutoSize = True
         Me.ucrSelectorViewLabelsAndLevels.bDropUnusedFilterLevels = False
         Me.ucrSelectorViewLabelsAndLevels.bShowHiddenColumns = False
         Me.ucrSelectorViewLabelsAndLevels.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorViewLabelsAndLevels, "ucrSelectorViewLabelsAndLevels")
+        Me.ucrSelectorViewLabelsAndLevels.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorViewLabelsAndLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorViewLabelsAndLevels.Name = "ucrSelectorViewLabelsAndLevels"
+        Me.ucrSelectorViewLabelsAndLevels.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorViewLabelsAndLevels.TabIndex = 0
         '
         'dlgViewFactorLabels
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(528, 351)
         Me.Controls.Add(Me.grpLabels)
         Me.Controls.Add(Me.grpDisplayOptions)
         Me.Controls.Add(Me.grpSummaryStatistics)
@@ -183,9 +237,14 @@ Partial Class dlgViewFactorLabels
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewFactorLabels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "View Labels/Levels"
         Me.grpSummaryStatistics.ResumeLayout(False)
+        Me.grpSummaryStatistics.PerformLayout()
         Me.grpDisplayOptions.ResumeLayout(False)
+        Me.grpDisplayOptions.PerformLayout()
         Me.grpLabels.ResumeLayout(False)
+        Me.grpLabels.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

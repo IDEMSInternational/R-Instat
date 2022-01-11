@@ -38,7 +38,6 @@ Partial Class dlgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInventoryPlot))
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
@@ -87,61 +86,110 @@ Partial Class dlgInventoryPlot
         '
         'lblDate
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.AutoSize = True
+        Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDate.Location = New System.Drawing.Point(263, 42)
         Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 24
+        Me.lblDate.Text = "Date:"
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStation.Location = New System.Drawing.Point(263, 200)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(91, 13)
+        Me.lblStation.TabIndex = 26
+        Me.lblStation.Text = "Station (Optional):"
         '
         'lblElement
         '
-        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.AutoSize = True
+        Me.lblElement.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblElement.Location = New System.Drawing.Point(263, 81)
         Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(59, 13)
+        Me.lblElement.TabIndex = 25
+        Me.lblElement.Text = "Element(s):"
         '
         'rdoMissing
         '
-        resources.ApplyResources(Me.rdoMissing, "rdoMissing")
+        Me.rdoMissing.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoMissing.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMissing.FlatAppearance.BorderSize = 2
         Me.rdoMissing.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMissing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMissing.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMissing.Location = New System.Drawing.Point(222, 3)
         Me.rdoMissing.Name = "rdoMissing"
+        Me.rdoMissing.Size = New System.Drawing.Size(135, 27)
+        Me.rdoMissing.TabIndex = 1
+        Me.rdoMissing.Text = "Missing"
+        Me.rdoMissing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMissing.UseVisualStyleBackColor = True
         '
         'rdoGraph
         '
-        resources.ApplyResources(Me.rdoGraph, "rdoGraph")
+        Me.rdoGraph.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGraph.FlatAppearance.BorderSize = 2
         Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGraph.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGraph.Location = New System.Drawing.Point(89, 3)
         Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.Size = New System.Drawing.Size(135, 27)
+        Me.rdoGraph.TabIndex = 2
+        Me.rdoGraph.Text = "Graph"
+        Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
         '
         'cmdInventoryPlotOptions
         '
-        resources.ApplyResources(Me.cmdInventoryPlotOptions, "cmdInventoryPlotOptions")
+        Me.cmdInventoryPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(7, 215)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
+        Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdInventoryPlotOptions.TabIndex = 50
+        Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Enabled = False
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(7, 240)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdOptions.TabIndex = 51
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'rdoElementOrder
         '
-        resources.ApplyResources(Me.rdoElementOrder, "rdoElementOrder")
+        Me.rdoElementOrder.AutoSize = True
+        Me.rdoElementOrder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoElementOrder.Location = New System.Drawing.Point(248, 38)
         Me.rdoElementOrder.Name = "rdoElementOrder"
+        Me.rdoElementOrder.Size = New System.Drawing.Size(92, 17)
+        Me.rdoElementOrder.TabIndex = 13
         Me.rdoElementOrder.TabStop = True
+        Me.rdoElementOrder.Text = "Element Order"
         Me.rdoElementOrder.UseVisualStyleBackColor = True
         '
         'rdoDateOrder
         '
-        resources.ApplyResources(Me.rdoDateOrder, "rdoDateOrder")
+        Me.rdoDateOrder.AutoSize = True
+        Me.rdoDateOrder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDateOrder.Location = New System.Drawing.Point(125, 38)
         Me.rdoDateOrder.Name = "rdoDateOrder"
+        Me.rdoDateOrder.Size = New System.Drawing.Size(77, 17)
+        Me.rdoDateOrder.TabIndex = 12
         Me.rdoDateOrder.TabStop = True
+        Me.rdoDateOrder.Text = "Date Order"
         Me.rdoDateOrder.UseVisualStyleBackColor = True
         '
         'grpOptions
@@ -153,38 +201,56 @@ Partial Class dlgInventoryPlot
         Me.grpOptions.Controls.Add(Me.ucrChkDetails)
         Me.grpOptions.Controls.Add(Me.ucrPnlOrder)
         Me.grpOptions.Controls.Add(Me.ucrChkSummary)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Location = New System.Drawing.Point(7, 254)
         Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(376, 60)
+        Me.grpOptions.TabIndex = 52
         Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Summary Options"
         '
         'ucrChkOmitStart
         '
+        Me.ucrChkOmitStart.AutoSize = True
         Me.ucrChkOmitStart.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitStart, "ucrChkOmitStart")
+        Me.ucrChkOmitStart.Location = New System.Drawing.Point(126, 16)
         Me.ucrChkOmitStart.Name = "ucrChkOmitStart"
+        Me.ucrChkOmitStart.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkOmitStart.TabIndex = 39
         '
         'ucrChkOmitEnd
         '
+        Me.ucrChkOmitEnd.AutoSize = True
         Me.ucrChkOmitEnd.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitEnd, "ucrChkOmitEnd")
+        Me.ucrChkOmitEnd.Location = New System.Drawing.Point(248, 16)
         Me.ucrChkOmitEnd.Name = "ucrChkOmitEnd"
+        Me.ucrChkOmitEnd.Size = New System.Drawing.Size(127, 23)
+        Me.ucrChkOmitEnd.TabIndex = 10
         '
         'ucrChkDetails
         '
+        Me.ucrChkDetails.AutoSize = True
         Me.ucrChkDetails.Checked = False
-        resources.ApplyResources(Me.ucrChkDetails, "ucrChkDetails")
+        Me.ucrChkDetails.Location = New System.Drawing.Point(6, 38)
         Me.ucrChkDetails.Name = "ucrChkDetails"
+        Me.ucrChkDetails.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkDetails.TabIndex = 11
         '
         'ucrPnlOrder
         '
-        resources.ApplyResources(Me.ucrPnlOrder, "ucrPnlOrder")
+        Me.ucrPnlOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOrder.Location = New System.Drawing.Point(124, 36)
         Me.ucrPnlOrder.Name = "ucrPnlOrder"
+        Me.ucrPnlOrder.Size = New System.Drawing.Size(238, 20)
+        Me.ucrPnlOrder.TabIndex = 38
         '
         'ucrChkSummary
         '
+        Me.ucrChkSummary.AutoSize = True
         Me.ucrChkSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
+        Me.ucrChkSummary.Location = New System.Drawing.Point(6, 16)
         Me.ucrChkSummary.Name = "ucrChkSummary"
+        Me.ucrChkSummary.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSummary.TabIndex = 16
         '
         'grpDetailsOptions
         '
@@ -195,177 +261,276 @@ Partial Class dlgInventoryPlot
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkHour)
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkYear)
         Me.grpDetailsOptions.Controls.Add(Me.ucrChkDay)
-        resources.ApplyResources(Me.grpDetailsOptions, "grpDetailsOptions")
+        Me.grpDetailsOptions.Location = New System.Drawing.Point(7, 316)
         Me.grpDetailsOptions.Name = "grpDetailsOptions"
+        Me.grpDetailsOptions.Size = New System.Drawing.Size(376, 114)
+        Me.grpDetailsOptions.TabIndex = 53
         Me.grpDetailsOptions.TabStop = False
+        Me.grpDetailsOptions.Text = "Details Options"
         '
         'ucrChkMinute
         '
+        Me.ucrChkMinute.AutoSize = True
         Me.ucrChkMinute.Checked = False
-        resources.ApplyResources(Me.ucrChkMinute, "ucrChkMinute")
+        Me.ucrChkMinute.Enabled = False
+        Me.ucrChkMinute.Location = New System.Drawing.Point(248, 36)
         Me.ucrChkMinute.Name = "ucrChkMinute"
+        Me.ucrChkMinute.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkMinute.TabIndex = 18
         '
         'ucrSaveDetails
         '
-        resources.ApplyResources(Me.ucrSaveDetails, "ucrSaveDetails")
+        Me.ucrSaveDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDetails.Location = New System.Drawing.Point(6, 86)
+        Me.ucrSaveDetails.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDetails.Name = "ucrSaveDetails"
+        Me.ucrSaveDetails.Size = New System.Drawing.Size(262, 21)
+        Me.ucrSaveDetails.TabIndex = 20
         '
         'ucrChkSecond
         '
+        Me.ucrChkSecond.AutoSize = True
         Me.ucrChkSecond.Checked = False
-        resources.ApplyResources(Me.ucrChkSecond, "ucrChkSecond")
+        Me.ucrChkSecond.Enabled = False
+        Me.ucrChkSecond.Location = New System.Drawing.Point(248, 62)
         Me.ucrChkSecond.Name = "ucrChkSecond"
+        Me.ucrChkSecond.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSecond.TabIndex = 19
         '
         'ucrChkMonth
         '
+        Me.ucrChkMonth.AutoSize = True
         Me.ucrChkMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
+        Me.ucrChkMonth.Location = New System.Drawing.Point(126, 36)
         Me.ucrChkMonth.Name = "ucrChkMonth"
+        Me.ucrChkMonth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkMonth.TabIndex = 15
         '
         'ucrChkHour
         '
+        Me.ucrChkHour.AutoSize = True
         Me.ucrChkHour.Checked = False
-        resources.ApplyResources(Me.ucrChkHour, "ucrChkHour")
+        Me.ucrChkHour.Enabled = False
+        Me.ucrChkHour.Location = New System.Drawing.Point(248, 12)
         Me.ucrChkHour.Name = "ucrChkHour"
+        Me.ucrChkHour.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkHour.TabIndex = 17
         '
         'ucrChkYear
         '
+        Me.ucrChkYear.AutoSize = True
         Me.ucrChkYear.Checked = False
-        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
+        Me.ucrChkYear.Location = New System.Drawing.Point(126, 12)
         Me.ucrChkYear.Name = "ucrChkYear"
+        Me.ucrChkYear.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkYear.TabIndex = 14
         '
         'ucrChkDay
         '
+        Me.ucrChkDay.AutoSize = True
         Me.ucrChkDay.Checked = False
-        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
+        Me.ucrChkDay.Location = New System.Drawing.Point(126, 62)
         Me.ucrChkDay.Name = "ucrChkDay"
+        Me.ucrChkDay.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkDay.TabIndex = 16
         '
         'lblGraphTitle
         '
-        resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
+        Me.lblGraphTitle.AutoSize = True
+        Me.lblGraphTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGraphTitle.Location = New System.Drawing.Point(14, 384)
         Me.lblGraphTitle.Name = "lblGraphTitle"
+        Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblGraphTitle.TabIndex = 62
+        Me.lblGraphTitle.Text = "Graph Title:"
         '
         'grpPlotType
         '
         Me.grpPlotType.Controls.Add(Me.rdoyear_doy_plot)
         Me.grpPlotType.Controls.Add(Me.rdoDatePlot)
         Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
-        resources.ApplyResources(Me.grpPlotType, "grpPlotType")
+        Me.grpPlotType.Location = New System.Drawing.Point(7, 269)
         Me.grpPlotType.Name = "grpPlotType"
+        Me.grpPlotType.Size = New System.Drawing.Size(245, 53)
+        Me.grpPlotType.TabIndex = 57
         Me.grpPlotType.TabStop = False
+        Me.grpPlotType.Text = "Plot Type"
         '
         'rdoyear_doy_plot
         '
-        resources.ApplyResources(Me.rdoyear_doy_plot, "rdoyear_doy_plot")
+        Me.rdoyear_doy_plot.AutoSize = True
+        Me.rdoyear_doy_plot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoyear_doy_plot.Location = New System.Drawing.Point(131, 21)
         Me.rdoyear_doy_plot.Name = "rdoyear_doy_plot"
+        Me.rdoyear_doy_plot.Size = New System.Drawing.Size(100, 17)
+        Me.rdoyear_doy_plot.TabIndex = 2
         Me.rdoyear_doy_plot.TabStop = True
+        Me.rdoyear_doy_plot.Text = "Year - DOY Plot"
         Me.rdoyear_doy_plot.UseVisualStyleBackColor = True
         '
         'rdoDatePlot
         '
-        resources.ApplyResources(Me.rdoDatePlot, "rdoDatePlot")
+        Me.rdoDatePlot.AutoSize = True
+        Me.rdoDatePlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDatePlot.Location = New System.Drawing.Point(7, 21)
         Me.rdoDatePlot.Name = "rdoDatePlot"
+        Me.rdoDatePlot.Size = New System.Drawing.Size(69, 17)
+        Me.rdoDatePlot.TabIndex = 1
         Me.rdoDatePlot.TabStop = True
+        Me.rdoDatePlot.Text = "Date Plot"
         Me.rdoDatePlot.UseVisualStyleBackColor = True
         '
         'ucrPnlPlotType
         '
-        resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
+        Me.ucrPnlPlotType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPlotType.Location = New System.Drawing.Point(6, 13)
         Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
+        Me.ucrPnlPlotType.Size = New System.Drawing.Size(236, 33)
+        Me.ucrPnlPlotType.TabIndex = 0
         '
         'lblFacetBy
         '
-        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(254, 292)
         Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 54
+        Me.lblFacetBy.Text = "Facet By:"
         '
         'ucrChkDisplayRainDays
         '
+        Me.ucrChkDisplayRainDays.AutoSize = True
         Me.ucrChkDisplayRainDays.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayRainDays, "ucrChkDisplayRainDays")
+        Me.ucrChkDisplayRainDays.Location = New System.Drawing.Point(14, 354)
         Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
+        Me.ucrChkDisplayRainDays.Size = New System.Drawing.Size(151, 23)
+        Me.ucrChkDisplayRainDays.TabIndex = 61
         '
         'ucrInputFacetBy
         '
         Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFacetBy.GetSetSelectedIndex = -1
         Me.ucrInputFacetBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
+        Me.ucrInputFacetBy.Location = New System.Drawing.Point(318, 288)
         Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
+        Me.ucrInputFacetBy.Size = New System.Drawing.Size(109, 21)
+        Me.ucrInputFacetBy.TabIndex = 55
         '
         'ucrInputTitle
         '
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.AutoSize = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
+        Me.ucrInputTitle.Location = New System.Drawing.Point(121, 381)
         Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(204, 21)
+        Me.ucrInputTitle.TabIndex = 59
         '
         'ucrChkShowNonMissing
         '
+        Me.ucrChkShowNonMissing.AutoSize = True
         Me.ucrChkShowNonMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkShowNonMissing, "ucrChkShowNonMissing")
+        Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(171, 328)
         Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
+        Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(151, 23)
+        Me.ucrChkShowNonMissing.TabIndex = 56
+        Me.ucrChkShowNonMissing.Visible = False
         '
         'ucrSaveGraph
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 407)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveGraph.TabIndex = 60
         '
         'ucrChkFlipCoordinates
         '
+        Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(14, 328)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(224, 23)
+        Me.ucrChkFlipCoordinates.TabIndex = 58
         '
         'ucrPnlOptions
         '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(84, 1)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
+        Me.ucrPnlOptions.TabIndex = 23
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(263, 57)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 4
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverElements
         '
+        Me.ucrReceiverElements.AutoSize = True
         Me.ucrReceiverElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElements, "ucrReceiverElements")
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(263, 96)
+        Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
+        Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverElements.strNcFilePath = ""
+        Me.ucrReceiverElements.TabIndex = 5
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 215)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 46
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrInventoryPlotSelector
         '
+        Me.ucrInventoryPlotSelector.AutoSize = True
         Me.ucrInventoryPlotSelector.bDropUnusedFilterLevels = False
         Me.ucrInventoryPlotSelector.bShowHiddenColumns = False
         Me.ucrInventoryPlotSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrInventoryPlotSelector, "ucrInventoryPlotSelector")
+        Me.ucrInventoryPlotSelector.Location = New System.Drawing.Point(7, 32)
+        Me.ucrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInventoryPlotSelector.Name = "ucrInventoryPlotSelector"
+        Me.ucrInventoryPlotSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrInventoryPlotSelector.TabIndex = 3
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(7, 435)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 20
         '
         'dlgInventoryPlot
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(448, 489)
         Me.Controls.Add(Me.lblGraphTitle)
         Me.Controls.Add(Me.ucrChkDisplayRainDays)
         Me.Controls.Add(Me.grpPlotType)
@@ -394,10 +559,13 @@ Partial Class dlgInventoryPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Inventory_Plot"
+        Me.Text = "Inventory"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.grpDetailsOptions.ResumeLayout(False)
+        Me.grpDetailsOptions.PerformLayout()
         Me.grpPlotType.ResumeLayout(False)
         Me.grpPlotType.PerformLayout()
         Me.ResumeLayout(False)

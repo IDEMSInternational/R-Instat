@@ -39,7 +39,6 @@ Partial Class sdgMerge
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMerge))
         Me.ttJoinDetails = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorSecondDF = New instat.ucrSelectorByDataFrameAddRemove()
@@ -66,24 +65,35 @@ Partial Class sdgMerge
         '
         'ucrSubBase
         '
-        resources.ApplyResources(Me.ucrSubBase, "ucrSubBase")
+        Me.ucrSubBase.AutoSize = True
+        Me.ucrSubBase.Location = New System.Drawing.Point(249, 292)
         Me.ucrSubBase.Name = "ucrSubBase"
+        Me.ucrSubBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSubBase.TabIndex = 4
         '
         'ucrSelectorSecondDF
         '
+        Me.ucrSelectorSecondDF.AutoSize = True
         Me.ucrSelectorSecondDF.bDropUnusedFilterLevels = False
         Me.ucrSelectorSecondDF.bShowHiddenColumns = False
         Me.ucrSelectorSecondDF.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorSecondDF, "ucrSelectorSecondDF")
+        Me.ucrSelectorSecondDF.Location = New System.Drawing.Point(226, 18)
+        Me.ucrSelectorSecondDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSecondDF.Name = "ucrSelectorSecondDF"
+        Me.ucrSelectorSecondDF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorSecondDF.TabIndex = 1
         '
         'ucrSelectorFirstDF
         '
+        Me.ucrSelectorFirstDF.AutoSize = True
         Me.ucrSelectorFirstDF.bDropUnusedFilterLevels = False
         Me.ucrSelectorFirstDF.bShowHiddenColumns = False
         Me.ucrSelectorFirstDF.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFirstDF, "ucrSelectorFirstDF")
+        Me.ucrSelectorFirstDF.Location = New System.Drawing.Point(10, 18)
+        Me.ucrSelectorFirstDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFirstDF.Name = "ucrSelectorFirstDF"
+        Me.ucrSelectorFirstDF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorFirstDF.TabIndex = 0
         '
         'pnlKeyColumns
         '
@@ -91,33 +101,50 @@ Partial Class sdgMerge
         Me.pnlKeyColumns.Controls.Add(Me.lstKeyColumns)
         Me.pnlKeyColumns.Controls.Add(Me.lblKeyColumns)
         Me.pnlKeyColumns.Controls.Add(Me.cmdRemoveSelectedPair)
-        resources.ApplyResources(Me.pnlKeyColumns, "pnlKeyColumns")
+        Me.pnlKeyColumns.Location = New System.Drawing.Point(443, 26)
         Me.pnlKeyColumns.Name = "pnlKeyColumns"
+        Me.pnlKeyColumns.Size = New System.Drawing.Size(194, 256)
+        Me.pnlKeyColumns.TabIndex = 2
         '
         'cmdRemoveAll
         '
-        resources.ApplyResources(Me.cmdRemoveAll, "cmdRemoveAll")
+        Me.cmdRemoveAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRemoveAll.Location = New System.Drawing.Point(6, 223)
         Me.cmdRemoveAll.Name = "cmdRemoveAll"
+        Me.cmdRemoveAll.Size = New System.Drawing.Size(130, 23)
+        Me.cmdRemoveAll.TabIndex = 3
+        Me.cmdRemoveAll.Text = "Remove All Pairs"
         Me.cmdRemoveAll.UseVisualStyleBackColor = True
         '
         'lstKeyColumns
         '
         Me.lstKeyColumns.FullRowSelect = True
         Me.lstKeyColumns.HideSelection = False
-        resources.ApplyResources(Me.lstKeyColumns, "lstKeyColumns")
+        Me.lstKeyColumns.Location = New System.Drawing.Point(6, 21)
         Me.lstKeyColumns.Name = "lstKeyColumns"
+        Me.lstKeyColumns.Size = New System.Drawing.Size(185, 167)
+        Me.lstKeyColumns.TabIndex = 1
         Me.lstKeyColumns.UseCompatibleStateImageBehavior = False
         Me.lstKeyColumns.View = System.Windows.Forms.View.Details
         '
         'lblKeyColumns
         '
-        resources.ApplyResources(Me.lblKeyColumns, "lblKeyColumns")
+        Me.lblKeyColumns.AutoSize = True
+        Me.lblKeyColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblKeyColumns.Location = New System.Drawing.Point(3, 5)
         Me.lblKeyColumns.Name = "lblKeyColumns"
+        Me.lblKeyColumns.Size = New System.Drawing.Size(68, 13)
+        Me.lblKeyColumns.TabIndex = 0
+        Me.lblKeyColumns.Text = "Key Columns"
         '
         'cmdRemoveSelectedPair
         '
-        resources.ApplyResources(Me.cmdRemoveSelectedPair, "cmdRemoveSelectedPair")
+        Me.cmdRemoveSelectedPair.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRemoveSelectedPair.Location = New System.Drawing.Point(6, 194)
         Me.cmdRemoveSelectedPair.Name = "cmdRemoveSelectedPair"
+        Me.cmdRemoveSelectedPair.Size = New System.Drawing.Size(130, 23)
+        Me.cmdRemoveSelectedPair.TabIndex = 2
+        Me.cmdRemoveSelectedPair.Text = "Remove Selected Pair"
         Me.cmdRemoveSelectedPair.UseVisualStyleBackColor = True
         '
         'grpKeys
@@ -126,43 +153,65 @@ Partial Class sdgMerge
         Me.grpKeys.Controls.Add(Me.lblFirstKeyMatch)
         Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDF)
         Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDF)
-        resources.ApplyResources(Me.grpKeys, "grpKeys")
+        Me.grpKeys.Location = New System.Drawing.Point(9, 204)
         Me.grpKeys.Name = "grpKeys"
+        Me.grpKeys.Size = New System.Drawing.Size(335, 76)
+        Me.grpKeys.TabIndex = 3
         Me.grpKeys.TabStop = False
+        Me.grpKeys.Text = "Key Columns"
         '
         'cmdAddPair
         '
-        resources.ApplyResources(Me.cmdAddPair, "cmdAddPair")
+        Me.cmdAddPair.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAddPair.Location = New System.Drawing.Point(4, 46)
         Me.cmdAddPair.Name = "cmdAddPair"
+        Me.cmdAddPair.Size = New System.Drawing.Size(118, 23)
+        Me.cmdAddPair.TabIndex = 3
+        Me.cmdAddPair.Text = "Add Pair"
         Me.cmdAddPair.UseVisualStyleBackColor = True
         '
         'lblFirstKeyMatch
         '
-        resources.ApplyResources(Me.lblFirstKeyMatch, "lblFirstKeyMatch")
+        Me.lblFirstKeyMatch.AutoSize = True
+        Me.lblFirstKeyMatch.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstKeyMatch.Location = New System.Drawing.Point(128, 22)
         Me.lblFirstKeyMatch.Name = "lblFirstKeyMatch"
+        Me.lblFirstKeyMatch.Size = New System.Drawing.Size(74, 13)
+        Me.lblFirstKeyMatch.TabIndex = 1
+        Me.lblFirstKeyMatch.Text = "Matched With"
         '
         'ucrReceiverSecondDF
         '
+        Me.ucrReceiverSecondDF.AutoSize = True
         Me.ucrReceiverSecondDF.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSecondDF, "ucrReceiverSecondDF")
+        Me.ucrReceiverSecondDF.Location = New System.Drawing.Point(205, 20)
+        Me.ucrReceiverSecondDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondDF.Name = "ucrReceiverSecondDF"
         Me.ucrReceiverSecondDF.Selector = Nothing
+        Me.ucrReceiverSecondDF.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSecondDF.strNcFilePath = ""
+        Me.ucrReceiverSecondDF.TabIndex = 2
         Me.ucrReceiverSecondDF.ucrSelector = Nothing
         '
         'ucrReceiverFirstDF
         '
+        Me.ucrReceiverFirstDF.AutoSize = True
         Me.ucrReceiverFirstDF.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFirstDF, "ucrReceiverFirstDF")
+        Me.ucrReceiverFirstDF.Location = New System.Drawing.Point(4, 20)
+        Me.ucrReceiverFirstDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstDF.Name = "ucrReceiverFirstDF"
         Me.ucrReceiverFirstDF.Selector = Nothing
+        Me.ucrReceiverFirstDF.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFirstDF.strNcFilePath = ""
+        Me.ucrReceiverFirstDF.TabIndex = 0
         Me.ucrReceiverFirstDF.ucrSelector = Nothing
         '
         'sdgMerge
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(644, 324)
         Me.Controls.Add(Me.ucrSelectorSecondDF)
         Me.Controls.Add(Me.ucrSelectorFirstDF)
         Me.Controls.Add(Me.pnlKeyColumns)
@@ -172,11 +221,14 @@ Partial Class sdgMerge
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgMerge"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Joining Columns"
         Me.pnlKeyColumns.ResumeLayout(False)
         Me.pnlKeyColumns.PerformLayout()
         Me.grpKeys.ResumeLayout(False)
         Me.grpKeys.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

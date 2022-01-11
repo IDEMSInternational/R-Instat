@@ -352,7 +352,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 257</value>
+    <value>365, 257</value>
   </data>
   <data name="tbpTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -610,6 +610,117 @@
     <value>6, 59</value>
   </data>
   <data name="grpGraphOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 195</value>
+  </data>
+  <data name="grpGraphOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpGraphOptions.Text" xml:space="preserve">
+    <value>Graph Options</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Name" xml:space="preserve">
+    <value>grpGraphOptions</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.Parent" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoLineGraph.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLineGraph.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoLineGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="rdoLineGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="rdoLineGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoLineGraph.Text" xml:space="preserve">
+    <value>Line Graph</value>
+  </data>
+  <data name="&gt;&gt;rdoLineGraph.Name" xml:space="preserve">
+    <value>rdoLineGraph</value>
+  </data>
+  <data name="&gt;&gt;rdoLineGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLineGraph.Parent" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;rdoLineGraph.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoViolinPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoViolinPlot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoViolinPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 19</value>
+  </data>
+  <data name="rdoViolinPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 17</value>
+  </data>
+  <data name="rdoViolinPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoViolinPlot.Text" xml:space="preserve">
+    <value>Violin Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoViolinPlot.Name" xml:space="preserve">
+    <value>rdoViolinPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoViolinPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoViolinPlot.Parent" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;rdoViolinPlot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoBoxPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBoxPlot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoBoxPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 19</value>
+  </data>
+  <data name="rdoBoxPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="rdoBoxPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoBoxPlot.Text" xml:space="preserve">
+    <value>Box Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Name" xml:space="preserve">
+    <value>rdoBoxPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Parent" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpGraphOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 195</value>
   </data>
   <data name="grpGraphOptions.TabIndex" type="System.Int32, mscorlib">
@@ -630,32 +741,32 @@
   <data name="&gt;&gt;grpGraphOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoLine.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoDot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 19</value>
+  <data name="rdoDot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 19</value>
   </data>
-  <data name="rdoLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
+  <data name="rdoDot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 17</value>
   </data>
-  <data name="rdoLine.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoDot.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rdoLine.Text" xml:space="preserve">
-    <value>Line Graph</value>
+  <data name="rdoDot.Text" xml:space="preserve">
+    <value>Dot Plot</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Name" xml:space="preserve">
-    <value>rdoLine</value>
+  <data name="&gt;&gt;rdoDot.Name" xml:space="preserve">
+    <value>rdoDot</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoDot.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoDot.Parent" xml:space="preserve">
     <value>grpGraphType</value>
   </data>
-  <data name="&gt;&gt;rdoLine.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;rdoDot.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="rdoBar.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -682,13 +793,13 @@
     <value>grpGraphType</value>
   </data>
   <data name="&gt;&gt;rdoBar.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 7</value>
   </data>
   <data name="ucrPnlGraphType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 35</value>
+    <value>373, 35</value>
   </data>
   <data name="ucrPnlGraphType.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -703,7 +814,79 @@
     <value>grpGraphType</value>
   </data>
   <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
+  </data>
+  <data name="grpGraphType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpGraphType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 48</value>
+  </data>
+  <data name="grpGraphType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpGraphType.Text" xml:space="preserve">
+    <value>Type of Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Name" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Parent" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpGraph.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>388, 257</value>
+  </data>
+  <data name="tbpGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpGraph.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Name" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Parent" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 283</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Name" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="grpGraphType.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -811,7 +994,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>339, 328</value>
+    <value>408, 328</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

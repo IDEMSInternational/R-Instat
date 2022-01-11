@@ -38,7 +38,6 @@ Partial Class dlgNewMarkovChains
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgNewMarkovChains))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMarkovChains = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -82,85 +81,132 @@ Partial Class dlgNewMarkovChains
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(12, 437)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorMarkovChains
         '
+        Me.ucrSelectorMarkovChains.AutoSize = True
         Me.ucrSelectorMarkovChains.bDropUnusedFilterLevels = False
         Me.ucrSelectorMarkovChains.bShowHiddenColumns = False
         Me.ucrSelectorMarkovChains.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorMarkovChains, "ucrSelectorMarkovChains")
+        Me.ucrSelectorMarkovChains.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorMarkovChains.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorMarkovChains.Name = "ucrSelectorMarkovChains"
+        Me.ucrSelectorMarkovChains.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorMarkovChains.TabIndex = 1
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(226, 13)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 2
+        Me.lblStation.Text = "Station:"
         '
         'lblDate
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(226, 59)
         Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblDate.TabIndex = 3
+        Me.lblDate.Text = "Date"
         '
         'lblRainfall
         '
-        resources.ApplyResources(Me.lblRainfall, "lblRainfall")
+        Me.lblRainfall.AutoSize = True
+        Me.lblRainfall.Location = New System.Drawing.Point(226, 149)
         Me.lblRainfall.Name = "lblRainfall"
+        Me.lblRainfall.Size = New System.Drawing.Size(42, 13)
+        Me.lblRainfall.TabIndex = 4
+        Me.lblRainfall.Text = "Rainfall"
         '
         'lblDOY
         '
-        resources.ApplyResources(Me.lblDOY, "lblDOY")
+        Me.lblDOY.AutoSize = True
+        Me.lblDOY.Location = New System.Drawing.Point(226, 105)
         Me.lblDOY.Name = "lblDOY"
+        Me.lblDOY.Size = New System.Drawing.Size(63, 13)
+        Me.lblDOY.TabIndex = 5
+        Me.lblDOY.Text = "Day of Year"
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(227, 30)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 6
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverRainfall
         '
+        Me.ucrReceiverRainfall.AutoSize = True
         Me.ucrReceiverRainfall.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverRainfall, "ucrReceiverRainfall")
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(229, 162)
+        Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
+        Me.ucrReceiverRainfall.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverRainfall.strNcFilePath = ""
+        Me.ucrReceiverRainfall.TabIndex = 7
         Me.ucrReceiverRainfall.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
+        Me.ucrReceiverDOY.AutoSize = True
         Me.ucrReceiverDOY.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDOY, "ucrReceiverDOY")
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(229, 118)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
+        Me.ucrReceiverDOY.TabIndex = 8
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(227, 72)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 9
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrInputExcludeSep
         '
         Me.ucrInputExcludeSep.AddQuotesIfUnrecognised = True
+        Me.ucrInputExcludeSep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputExcludeSep.GetSetSelectedIndex = -1
         Me.ucrInputExcludeSep.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExcludeSep, "ucrInputExcludeSep")
+        Me.ucrInputExcludeSep.Location = New System.Drawing.Point(351, 28)
         Me.ucrInputExcludeSep.Name = "ucrInputExcludeSep"
+        Me.ucrInputExcludeSep.Size = New System.Drawing.Size(108, 21)
+        Me.ucrInputExcludeSep.TabIndex = 10
         '
         'lblExcludeSep
         '
-        resources.ApplyResources(Me.lblExcludeSep, "lblExcludeSep")
+        Me.lblExcludeSep.AutoSize = True
+        Me.lblExcludeSep.Location = New System.Drawing.Point(351, 12)
         Me.lblExcludeSep.Name = "lblExcludeSep"
+        Me.lblExcludeSep.Size = New System.Drawing.Size(96, 13)
+        Me.lblExcludeSep.TabIndex = 11
+        Me.lblExcludeSep.Text = "Exclude/Separate:"
         '
         'grpSeasonalityHarmonics
         '
@@ -168,29 +214,44 @@ Partial Class dlgNewMarkovChains
         Me.grpSeasonalityHarmonics.Controls.Add(Me.lblSeasonalityFrom)
         Me.grpSeasonalityHarmonics.Controls.Add(Me.nudSeasonalityTo)
         Me.grpSeasonalityHarmonics.Controls.Add(Me.nudSeasonalityFrom)
-        resources.ApplyResources(Me.grpSeasonalityHarmonics, "grpSeasonalityHarmonics")
+        Me.grpSeasonalityHarmonics.Location = New System.Drawing.Point(13, 197)
         Me.grpSeasonalityHarmonics.Name = "grpSeasonalityHarmonics"
+        Me.grpSeasonalityHarmonics.Size = New System.Drawing.Size(200, 99)
+        Me.grpSeasonalityHarmonics.TabIndex = 12
         Me.grpSeasonalityHarmonics.TabStop = False
+        Me.grpSeasonalityHarmonics.Text = "Seasonality (Harmonics)"
         '
         'lblSeasonalityTo
         '
-        resources.ApplyResources(Me.lblSeasonalityTo, "lblSeasonalityTo")
+        Me.lblSeasonalityTo.AutoSize = True
+        Me.lblSeasonalityTo.Location = New System.Drawing.Point(7, 52)
         Me.lblSeasonalityTo.Name = "lblSeasonalityTo"
+        Me.lblSeasonalityTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblSeasonalityTo.TabIndex = 3
+        Me.lblSeasonalityTo.Text = "To:"
         '
         'lblSeasonalityFrom
         '
-        resources.ApplyResources(Me.lblSeasonalityFrom, "lblSeasonalityFrom")
+        Me.lblSeasonalityFrom.AutoSize = True
+        Me.lblSeasonalityFrom.Location = New System.Drawing.Point(7, 25)
         Me.lblSeasonalityFrom.Name = "lblSeasonalityFrom"
+        Me.lblSeasonalityFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblSeasonalityFrom.TabIndex = 2
+        Me.lblSeasonalityFrom.Text = "From:"
         '
         'nudSeasonalityTo
         '
-        resources.ApplyResources(Me.nudSeasonalityTo, "nudSeasonalityTo")
+        Me.nudSeasonalityTo.Location = New System.Drawing.Point(115, 45)
         Me.nudSeasonalityTo.Name = "nudSeasonalityTo"
+        Me.nudSeasonalityTo.Size = New System.Drawing.Size(48, 20)
+        Me.nudSeasonalityTo.TabIndex = 1
         '
         'nudSeasonalityFrom
         '
-        resources.ApplyResources(Me.nudSeasonalityFrom, "nudSeasonalityFrom")
+        Me.nudSeasonalityFrom.Location = New System.Drawing.Point(115, 19)
         Me.nudSeasonalityFrom.Name = "nudSeasonalityFrom"
+        Me.nudSeasonalityFrom.Size = New System.Drawing.Size(48, 20)
+        Me.nudSeasonalityFrom.TabIndex = 0
         '
         'grpOrder
         '
@@ -200,107 +261,164 @@ Partial Class dlgNewMarkovChains
         Me.grpOrder.Controls.Add(Me.lblOrderFrom)
         Me.grpOrder.Controls.Add(Me.nudOrderTo)
         Me.grpOrder.Controls.Add(Me.nudOrderFrom)
-        resources.ApplyResources(Me.grpOrder, "grpOrder")
+        Me.grpOrder.Location = New System.Drawing.Point(219, 197)
         Me.grpOrder.Name = "grpOrder"
+        Me.grpOrder.Size = New System.Drawing.Size(203, 99)
+        Me.grpOrder.TabIndex = 13
         Me.grpOrder.TabStop = False
+        Me.grpOrder.Text = "Order"
         '
         'ucrInputMarkovType
         '
         Me.ucrInputMarkovType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarkovType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMarkovType.GetSetSelectedIndex = -1
         Me.ucrInputMarkovType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMarkovType, "ucrInputMarkovType")
+        Me.ucrInputMarkovType.Location = New System.Drawing.Point(98, 71)
         Me.ucrInputMarkovType.Name = "ucrInputMarkovType"
+        Me.ucrInputMarkovType.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputMarkovType.TabIndex = 6
         '
         'lblMarkovType
         '
-        resources.ApplyResources(Me.lblMarkovType, "lblMarkovType")
+        Me.lblMarkovType.AutoSize = True
+        Me.lblMarkovType.Location = New System.Drawing.Point(5, 74)
         Me.lblMarkovType.Name = "lblMarkovType"
+        Me.lblMarkovType.Size = New System.Drawing.Size(73, 13)
+        Me.lblMarkovType.TabIndex = 5
+        Me.lblMarkovType.Text = "Markov Type:"
         '
         'lblOrderTo
         '
-        resources.ApplyResources(Me.lblOrderTo, "lblOrderTo")
+        Me.lblOrderTo.AutoSize = True
+        Me.lblOrderTo.Location = New System.Drawing.Point(5, 47)
         Me.lblOrderTo.Name = "lblOrderTo"
+        Me.lblOrderTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblOrderTo.TabIndex = 4
+        Me.lblOrderTo.Text = "To:"
         '
         'lblOrderFrom
         '
-        resources.ApplyResources(Me.lblOrderFrom, "lblOrderFrom")
+        Me.lblOrderFrom.AutoSize = True
+        Me.lblOrderFrom.Location = New System.Drawing.Point(7, 26)
         Me.lblOrderFrom.Name = "lblOrderFrom"
+        Me.lblOrderFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblOrderFrom.TabIndex = 3
+        Me.lblOrderFrom.Text = "From:"
         '
         'nudOrderTo
         '
-        resources.ApplyResources(Me.nudOrderTo, "nudOrderTo")
+        Me.nudOrderTo.Location = New System.Drawing.Point(146, 45)
         Me.nudOrderTo.Name = "nudOrderTo"
+        Me.nudOrderTo.Size = New System.Drawing.Size(48, 20)
+        Me.nudOrderTo.TabIndex = 2
         '
         'nudOrderFrom
         '
-        resources.ApplyResources(Me.nudOrderFrom, "nudOrderFrom")
+        Me.nudOrderFrom.Location = New System.Drawing.Point(146, 19)
         Me.nudOrderFrom.Name = "nudOrderFrom"
+        Me.nudOrderFrom.Size = New System.Drawing.Size(48, 20)
+        Me.nudOrderFrom.TabIndex = 1
         '
         'ucrInputInteractions
         '
         Me.ucrInputInteractions.AddQuotesIfUnrecognised = True
+        Me.ucrInputInteractions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputInteractions.GetSetSelectedIndex = -1
         Me.ucrInputInteractions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputInteractions, "ucrInputInteractions")
+        Me.ucrInputInteractions.Location = New System.Drawing.Point(91, 299)
         Me.ucrInputInteractions.Name = "ucrInputInteractions"
+        Me.ucrInputInteractions.Size = New System.Drawing.Size(67, 21)
+        Me.ucrInputInteractions.TabIndex = 15
         '
         'lblInteractions
         '
-        resources.ApplyResources(Me.lblInteractions, "lblInteractions")
+        Me.lblInteractions.AutoSize = True
+        Me.lblInteractions.Location = New System.Drawing.Point(12, 304)
         Me.lblInteractions.Name = "lblInteractions"
+        Me.lblInteractions.Size = New System.Drawing.Size(65, 13)
+        Me.lblInteractions.TabIndex = 14
+        Me.lblInteractions.Text = "Interactions:"
         '
         'lblAdditionalVariables
         '
-        resources.ApplyResources(Me.lblAdditionalVariables, "lblAdditionalVariables")
+        Me.lblAdditionalVariables.AutoSize = True
+        Me.lblAdditionalVariables.Location = New System.Drawing.Point(164, 299)
         Me.lblAdditionalVariables.Name = "lblAdditionalVariables"
+        Me.lblAdditionalVariables.Size = New System.Drawing.Size(102, 13)
+        Me.lblAdditionalVariables.TabIndex = 16
+        Me.lblAdditionalVariables.Text = "Additional Variables:"
         '
         'ucrReceiverAdditionalVariables
         '
+        Me.ucrReceiverAdditionalVariables.AutoSize = True
         Me.ucrReceiverAdditionalVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverAdditionalVariables, "ucrReceiverAdditionalVariables")
+        Me.ucrReceiverAdditionalVariables.Location = New System.Drawing.Point(167, 316)
+        Me.ucrReceiverAdditionalVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAdditionalVariables.Name = "ucrReceiverAdditionalVariables"
         Me.ucrReceiverAdditionalVariables.Selector = Nothing
+        Me.ucrReceiverAdditionalVariables.Size = New System.Drawing.Size(120, 65)
         Me.ucrReceiverAdditionalVariables.strNcFilePath = ""
+        Me.ucrReceiverAdditionalVariables.TabIndex = 17
         Me.ucrReceiverAdditionalVariables.ucrSelector = Nothing
         '
         'ucrInputOptions
         '
         Me.ucrInputOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputOptions.GetSetSelectedIndex = -1
         Me.ucrInputOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOptions, "ucrInputOptions")
+        Me.ucrInputOptions.Location = New System.Drawing.Point(303, 316)
         Me.ucrInputOptions.Name = "ucrInputOptions"
+        Me.ucrInputOptions.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputOptions.TabIndex = 18
         '
         'lblOptions
         '
-        resources.ApplyResources(Me.lblOptions, "lblOptions")
+        Me.lblOptions.AutoSize = True
+        Me.lblOptions.Location = New System.Drawing.Point(300, 299)
         Me.lblOptions.Name = "lblOptions"
+        Me.lblOptions.Size = New System.Drawing.Size(46, 13)
+        Me.lblOptions.TabIndex = 19
+        Me.lblOptions.Text = "Options:"
         '
         'chkSaveModel
         '
-        resources.ApplyResources(Me.chkSaveModel, "chkSaveModel")
+        Me.chkSaveModel.AutoSize = True
+        Me.chkSaveModel.Location = New System.Drawing.Point(13, 391)
         Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
+        Me.chkSaveModel.TabIndex = 20
+        Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'chkGraph
         '
-        resources.ApplyResources(Me.chkGraph, "chkGraph")
+        Me.chkGraph.AutoSize = True
+        Me.chkGraph.Location = New System.Drawing.Point(13, 414)
         Me.chkGraph.Name = "chkGraph"
+        Me.chkGraph.Size = New System.Drawing.Size(93, 17)
+        Me.chkGraph.TabIndex = 21
+        Me.chkGraph.Text = "Include Graph"
         Me.chkGraph.UseVisualStyleBackColor = True
         '
         'ucrInputSaveModel
         '
         Me.ucrInputSaveModel.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSaveModel.GetSetSelectedIndex = -1
         Me.ucrInputSaveModel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSaveModel, "ucrInputSaveModel")
+        Me.ucrInputSaveModel.Location = New System.Drawing.Point(169, 390)
         Me.ucrInputSaveModel.Name = "ucrInputSaveModel"
+        Me.ucrInputSaveModel.Size = New System.Drawing.Size(184, 21)
+        Me.ucrInputSaveModel.TabIndex = 22
         '
         'dlgNewMarkovChains
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(467, 492)
         Me.Controls.Add(Me.ucrInputSaveModel)
         Me.Controls.Add(Me.chkGraph)
         Me.Controls.Add(Me.chkSaveModel)
@@ -328,6 +446,8 @@ Partial Class dlgNewMarkovChains
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgNewMarkovChains"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Markov Chains"
         Me.grpSeasonalityHarmonics.ResumeLayout(False)
         Me.grpSeasonalityHarmonics.PerformLayout()
         CType(Me.nudSeasonalityTo, System.ComponentModel.ISupportInitialize).EndInit()

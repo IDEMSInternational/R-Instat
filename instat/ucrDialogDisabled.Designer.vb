@@ -38,24 +38,32 @@ Partial Class ucrDialogDisabled
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDialogDisabled))
         Me.lblDisabled = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDisabled
         '
         Me.lblDisabled.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        resources.ApplyResources(Me.lblDisabled, "lblDisabled")
+        Me.lblDisabled.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblDisabled.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
         Me.lblDisabled.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.lblDisabled.Location = New System.Drawing.Point(0, 0)
         Me.lblDisabled.Name = "lblDisabled"
+        Me.lblDisabled.Size = New System.Drawing.Size(236, 46)
+        Me.lblDisabled.TabIndex = 0
+        Me.lblDisabled.Text = "This dialog is not yet functioning. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is for viewing only." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OK cannot be enabl" &
+    "ed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lblDisabled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ucrDialogDisabled
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Controls.Add(Me.lblDisabled)
         Me.Name = "ucrDialogDisabled"
+        Me.Size = New System.Drawing.Size(236, 46)
         Me.ResumeLayout(False)
 
     End Sub

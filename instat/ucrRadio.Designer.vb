@@ -38,23 +38,27 @@ Partial Class ucrRadio
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrRadio))
         Me.rdoRadio = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'rdoRadio
         '
-        resources.ApplyResources(Me.rdoRadio, "rdoRadio")
+        Me.rdoRadio.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rdoRadio.Location = New System.Drawing.Point(0, 0)
         Me.rdoRadio.Name = "rdoRadio"
+        Me.rdoRadio.Size = New System.Drawing.Size(100, 20)
+        Me.rdoRadio.TabIndex = 0
         Me.rdoRadio.TabStop = True
+        Me.rdoRadio.Text = "RadioButton1"
         Me.rdoRadio.UseVisualStyleBackColor = True
         '
         'ucrRadio
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.rdoRadio)
         Me.Name = "ucrRadio"
+        Me.Size = New System.Drawing.Size(100, 20)
         Me.ResumeLayout(False)
 
     End Sub
