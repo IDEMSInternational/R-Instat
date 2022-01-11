@@ -64,18 +64,20 @@ Partial Class dlgGammaDistr
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 295)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.AutoSize = True
         Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(12, 44)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 133)
         Me.ucrAddRemove.TabIndex = 1
         '
         'grpColumns
@@ -114,6 +116,7 @@ Partial Class dlgGammaDistr
         '
         'ucrReceiverColumn
         '
+        Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
         Me.ucrReceiverColumn.Location = New System.Drawing.Point(221, 60)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
@@ -255,8 +258,8 @@ Partial Class dlgGammaDistr
         '
         'dlgGammaDistr
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 350)
         Me.Controls.Add(Me.chkProbabilityPlot)

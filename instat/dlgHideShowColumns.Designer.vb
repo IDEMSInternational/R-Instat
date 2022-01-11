@@ -38,7 +38,6 @@ Partial Class dlgHideShowColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHideShowColumns))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForHiddenColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverHiddenColumns = New instat.ucrReceiverMultiple()
@@ -47,35 +46,53 @@ Partial Class dlgHideShowColumns
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 200)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrSelectorForHiddenColumns
         '
+        Me.ucrSelectorForHiddenColumns.AutoSize = True
         Me.ucrSelectorForHiddenColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorForHiddenColumns.bShowHiddenColumns = False
         Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForHiddenColumns, "ucrSelectorForHiddenColumns")
+        Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForHiddenColumns.Name = "ucrSelectorForHiddenColumns"
+        Me.ucrSelectorForHiddenColumns.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForHiddenColumns.TabIndex = 0
         '
         'ucrReceiverHiddenColumns
         '
+        Me.ucrReceiverHiddenColumns.AutoSize = True
         Me.ucrReceiverHiddenColumns.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverHiddenColumns, "ucrReceiverHiddenColumns")
+        Me.ucrReceiverHiddenColumns.Location = New System.Drawing.Point(248, 59)
+        Me.ucrReceiverHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverHiddenColumns.Name = "ucrReceiverHiddenColumns"
         Me.ucrReceiverHiddenColumns.Selector = Nothing
+        Me.ucrReceiverHiddenColumns.Size = New System.Drawing.Size(120, 112)
         Me.ucrReceiverHiddenColumns.strNcFilePath = ""
+        Me.ucrReceiverHiddenColumns.TabIndex = 2
         Me.ucrReceiverHiddenColumns.ucrSelector = Nothing
         '
         'lblHiddenColumns
         '
-        resources.ApplyResources(Me.lblHiddenColumns, "lblHiddenColumns")
+        Me.lblHiddenColumns.AutoSize = True
+        Me.lblHiddenColumns.Location = New System.Drawing.Point(248, 44)
         Me.lblHiddenColumns.Name = "lblHiddenColumns"
+        Me.lblHiddenColumns.Size = New System.Drawing.Size(93, 13)
+        Me.lblHiddenColumns.TabIndex = 1
+        Me.lblHiddenColumns.Text = "Hidden Column(s):"
         '
         'dlgHideShowColumns
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(420, 259)
         Me.Controls.Add(Me.lblHiddenColumns)
         Me.Controls.Add(Me.ucrReceiverHiddenColumns)
         Me.Controls.Add(Me.ucrSelectorForHiddenColumns)
@@ -84,7 +101,9 @@ Partial Class dlgHideShowColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHideShowColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Hidden_Columns"
+        Me.Text = "Hide/Unhide Column(s)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
