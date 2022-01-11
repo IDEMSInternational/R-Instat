@@ -171,7 +171,7 @@ Partial Class ucrOutputPages
         Me.tpMain.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpMain.Size = New System.Drawing.Size(614, 287)
         Me.tpMain.TabIndex = 0
-        Me.tpMain.Text = "Output"
+        Me.tpMain.Text = "Main"
         Me.tpMain.UseVisualStyleBackColor = True
         '
         'ucrMainOutputPage

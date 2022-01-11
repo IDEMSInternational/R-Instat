@@ -38,7 +38,6 @@ Partial Class dlgGeneralForGraphics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblFillOrColor = New System.Windows.Forms.Label()
@@ -55,92 +54,142 @@ Partial Class dlgGeneralForGraphics
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(137, 25)
+        Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblXVariable
         '
-        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXVariable.Location = New System.Drawing.Point(264, 183)
         Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable:"
+        Me.lblXVariable.Text = "X Variable:"
         '
         'lblFillOrColor
         '
-        resources.ApplyResources(Me.lblFillOrColor, "lblFillOrColor")
+        Me.lblFillOrColor.AutoSize = True
+        Me.lblFillOrColor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFillOrColor.Location = New System.Drawing.Point(264, 231)
         Me.lblFillOrColor.Name = "lblFillOrColor"
+        Me.lblFillOrColor.Size = New System.Drawing.Size(57, 13)
+        Me.lblFillOrColor.TabIndex = 4
         Me.lblFillOrColor.Tag = "Fill_Colour:"
+        Me.lblFillOrColor.Text = "Fill/Colour:"
         '
         'cmdFacets
         '
-        resources.ApplyResources(Me.cmdFacets, "cmdFacets")
+        Me.cmdFacets.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFacets.Location = New System.Drawing.Point(146, 401)
         Me.cmdFacets.Name = "cmdFacets"
+        Me.cmdFacets.Size = New System.Drawing.Size(110, 25)
+        Me.cmdFacets.TabIndex = 18
         Me.cmdFacets.Tag = "Facets"
+        Me.cmdFacets.Text = "Facets"
         Me.cmdFacets.UseVisualStyleBackColor = True
         '
         'cmdTheme
         '
-        resources.ApplyResources(Me.cmdTheme, "cmdTheme")
+        Me.cmdTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTheme.Location = New System.Drawing.Point(258, 401)
         Me.cmdTheme.Name = "cmdTheme"
+        Me.cmdTheme.Size = New System.Drawing.Size(110, 25)
+        Me.cmdTheme.TabIndex = 19
         Me.cmdTheme.Tag = "Theme"
+        Me.cmdTheme.Text = "Theme"
         Me.cmdTheme.UseVisualStyleBackColor = True
         '
         'ucrSave
         '
-        resources.ApplyResources(Me.ucrSave, "ucrSave")
+        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSave.Location = New System.Drawing.Point(6, 434)
+        Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
+        Me.ucrSave.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSave.TabIndex = 17
         '
         'ucrVariablesAsFactorForGraphics
         '
+        Me.ucrVariablesAsFactorForGraphics.AutoSize = True
         Me.ucrVariablesAsFactorForGraphics.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorForGraphics, "ucrVariablesAsFactorForGraphics")
+        Me.ucrVariablesAsFactorForGraphics.Location = New System.Drawing.Point(262, 33)
         Me.ucrVariablesAsFactorForGraphics.Name = "ucrVariablesAsFactorForGraphics"
         Me.ucrVariablesAsFactorForGraphics.Selector = Nothing
+        Me.ucrVariablesAsFactorForGraphics.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForGraphics.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForGraphics.TabIndex = 1
         Me.ucrVariablesAsFactorForGraphics.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForGraphics.ucrVariableSelector = Nothing
         '
         'ucrFillOrColourReceiver
         '
+        Me.ucrFillOrColourReceiver.AutoSize = True
         Me.ucrFillOrColourReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFillOrColourReceiver, "ucrFillOrColourReceiver")
+        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(262, 246)
+        Me.ucrFillOrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillOrColourReceiver.Name = "ucrFillOrColourReceiver"
         Me.ucrFillOrColourReceiver.Selector = Nothing
+        Me.ucrFillOrColourReceiver.Size = New System.Drawing.Size(125, 26)
         Me.ucrFillOrColourReceiver.strNcFilePath = ""
+        Me.ucrFillOrColourReceiver.TabIndex = 5
         Me.ucrFillOrColourReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
+        Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
+        Me.ucrReceiverX.Location = New System.Drawing.Point(262, 198)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
         Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrGraphicsSelector
         '
+        Me.ucrGraphicsSelector.AutoSize = True
         Me.ucrGraphicsSelector.bDropUnusedFilterLevels = False
         Me.ucrGraphicsSelector.bShowHiddenColumns = False
         Me.ucrGraphicsSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrGraphicsSelector, "ucrGraphicsSelector")
+        Me.ucrGraphicsSelector.Location = New System.Drawing.Point(6, 14)
+        Me.ucrGraphicsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphicsSelector.Name = "ucrGraphicsSelector"
+        Me.ucrGraphicsSelector.Size = New System.Drawing.Size(226, 195)
+        Me.ucrGraphicsSelector.TabIndex = 0
         '
         'ucrAdditionalLayers
         '
-        resources.ApplyResources(Me.ucrAdditionalLayers, "ucrAdditionalLayers")
+        Me.ucrAdditionalLayers.AutoSize = True
+        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 213)
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
+        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(218, 182)
+        Me.ucrAdditionalLayers.TabIndex = 7
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(6, 464)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'dlgGeneralForGraphics
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(416, 519)
         Me.Controls.Add(Me.cmdTheme)
         Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
@@ -157,7 +206,9 @@ Partial Class dlgGeneralForGraphics
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGeneralForGraphics"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
+        Me.Text = "Graphics"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

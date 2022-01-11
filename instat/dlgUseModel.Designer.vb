@@ -419,6 +419,7 @@ Partial Class dlgUseModel
         '
         'ucrSaveResult
         '
+        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
@@ -427,11 +428,12 @@ Partial Class dlgUseModel
         '
         'ucrChkIncludeArguments
         '
+        Me.ucrChkIncludeArguments.AutoSize = True
         Me.ucrChkIncludeArguments.Checked = False
         Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
-        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 20)
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 23)
         Me.ucrChkIncludeArguments.TabIndex = 32
         '
         'grpSegmented
@@ -616,6 +618,7 @@ Partial Class dlgUseModel
         'ucrInputModels
         '
         Me.ucrInputModels.AddQuotesIfUnrecognised = True
+        Me.ucrInputModels.AutoSize = True
         Me.ucrInputModels.IsMultiline = False
         Me.ucrInputModels.IsReadOnly = False
         Me.ucrInputModels.Location = New System.Drawing.Point(133, 45)
@@ -626,25 +629,29 @@ Partial Class dlgUseModel
         '
         'ucrSelectorUseModel
         '
+        Me.ucrSelectorUseModel.AutoSize = True
         Me.ucrSelectorUseModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseModel.bShowHiddenColumns = False
         Me.ucrSelectorUseModel.bUseCurrentFilter = True
         Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 68)
         Me.ucrSelectorUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorUseModel.Name = "ucrSelectorUseModel"
-        Me.ucrSelectorUseModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorUseModel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorUseModel.TabIndex = 26
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 362)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 20
         '
         'ucrReceiverForTestColumn
         '
+        Me.ucrReceiverForTestColumn.AutoSize = True
         Me.ucrReceiverForTestColumn.frmParent = Me
         Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 11)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -658,6 +665,7 @@ Partial Class dlgUseModel
         'ucrInputComboRPackage
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboRPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboRPackage.IsReadOnly = False
         Me.ucrInputComboRPackage.Location = New System.Drawing.Point(328, 80)
@@ -668,16 +676,19 @@ Partial Class dlgUseModel
         '
         'ucrTryModelling
         '
+        Me.ucrTryModelling.AutoSize = True
         Me.ucrTryModelling.Location = New System.Drawing.Point(2, 285)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
+        Me.ucrTryModelling.RunCommandAsMultipleLines = False
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 30)
         Me.ucrTryModelling.TabIndex = 163
         '
         'dlgUseModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.ucrTryModelling)

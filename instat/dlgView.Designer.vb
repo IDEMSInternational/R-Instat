@@ -38,7 +38,6 @@ Partial Class dlgView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgView))
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
@@ -63,147 +62,234 @@ Partial Class dlgView
         '
         'lblSelected
         '
-        resources.ApplyResources(Me.lblSelected, "lblSelected")
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelected.Location = New System.Drawing.Point(248, 80)
         Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(97, 13)
+        Me.lblSelected.TabIndex = 4
         Me.lblSelected.Tag = ""
+        Me.lblSelected.Text = "Variable(s) to View:"
         '
         'rdoDispSepOutputWindow
         '
-        resources.ApplyResources(Me.rdoDispSepOutputWindow, "rdoDispSepOutputWindow")
+        Me.rdoDispSepOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 238)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
+        Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoDispSepOutputWindow.TabIndex = 6
         Me.rdoDispSepOutputWindow.TabStop = True
+        Me.rdoDispSepOutputWindow.Text = "Display in Separate Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoDispOutputWindow
         '
-        resources.ApplyResources(Me.rdoDispOutputWindow, "rdoDispOutputWindow")
+        Me.rdoDispOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 261)
         Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
+        Me.rdoDispOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoDispOutputWindow.TabIndex = 7
         Me.rdoDispOutputWindow.TabStop = True
+        Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoBottom
         '
-        resources.ApplyResources(Me.rdoBottom, "rdoBottom")
+        Me.rdoBottom.AutoSize = True
+        Me.rdoBottom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoBottom.Location = New System.Drawing.Point(325, 301)
         Me.rdoBottom.Name = "rdoBottom"
+        Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
+        Me.rdoBottom.TabIndex = 16
         Me.rdoBottom.TabStop = True
+        Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
         '
         'rdoTop
         '
-        resources.ApplyResources(Me.rdoTop, "rdoTop")
+        Me.rdoTop.AutoSize = True
+        Me.rdoTop.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoTop.Location = New System.Drawing.Point(325, 278)
         Me.rdoTop.Name = "rdoTop"
+        Me.rdoTop.Size = New System.Drawing.Size(44, 17)
+        Me.rdoTop.TabIndex = 15
         Me.rdoTop.TabStop = True
+        Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
         '
         'lblDisplayFrom
         '
-        resources.ApplyResources(Me.lblDisplayFrom, "lblDisplayFrom")
+        Me.lblDisplayFrom.AutoSize = True
+        Me.lblDisplayFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 279)
         Me.lblDisplayFrom.Name = "lblDisplayFrom"
+        Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
+        Me.lblDisplayFrom.TabIndex = 14
         Me.lblDisplayFrom.Tag = ""
+        Me.lblDisplayFrom.Text = "Display From:"
         '
         'lblNumberofRows
         '
-        resources.ApplyResources(Me.lblNumberofRows, "lblNumberofRows")
+        Me.lblNumberofRows.AutoSize = True
+        Me.lblNumberofRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNumberofRows.Location = New System.Drawing.Point(248, 258)
         Me.lblNumberofRows.Name = "lblNumberofRows"
+        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
+        Me.lblNumberofRows.TabIndex = 10
         Me.lblNumberofRows.Tag = "Number_of_rows"
+        Me.lblNumberofRows.Text = "Number of Rows:"
         '
         'rdoHTMLOutputWindow
         '
-        resources.ApplyResources(Me.rdoHTMLOutputWindow, "rdoHTMLOutputWindow")
+        Me.rdoHTMLOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 284)
         Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
+        Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoHTMLOutputWindow.TabIndex = 8
         Me.rdoHTMLOutputWindow.TabStop = True
+        Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
         Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoViewAll
         '
-        resources.ApplyResources(Me.rdoViewAll, "rdoViewAll")
+        Me.rdoViewAll.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoViewAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViewAll.FlatAppearance.BorderSize = 2
         Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViewAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoViewAll.Location = New System.Drawing.Point(67, 6)
         Me.rdoViewAll.Name = "rdoViewAll"
+        Me.rdoViewAll.Size = New System.Drawing.Size(140, 34)
+        Me.rdoViewAll.TabIndex = 1
+        Me.rdoViewAll.Text = "All Columns"
+        Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewAll.UseVisualStyleBackColor = True
         '
         'rdoViewSelectedColumnsRows
         '
-        resources.ApplyResources(Me.rdoViewSelectedColumnsRows, "rdoViewSelectedColumnsRows")
+        Me.rdoViewSelectedColumnsRows.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
         Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewSelectedColumnsRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViewSelectedColumnsRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(207, 6)
         Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
+        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(143, 34)
+        Me.rdoViewSelectedColumnsRows.TabIndex = 2
+        Me.rdoViewSelectedColumnsRows.Text = "Choose Columns"
+        Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
         '
         'ucrPnlViewData
         '
-        resources.ApplyResources(Me.ucrPnlViewData, "ucrPnlViewData")
+        Me.ucrPnlViewData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlViewData.Location = New System.Drawing.Point(56, 5)
         Me.ucrPnlViewData.Name = "ucrPnlViewData"
+        Me.ucrPnlViewData.Size = New System.Drawing.Size(298, 35)
+        Me.ucrPnlViewData.TabIndex = 0
         '
         'ucrReceiverSortCol
         '
+        Me.ucrReceiverSortCol.AutoSize = True
         Me.ucrReceiverSortCol.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSortCol, "ucrReceiverSortCol")
+        Me.ucrReceiverSortCol.Location = New System.Drawing.Point(274, 256)
+        Me.ucrReceiverSortCol.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSortCol.Name = "ucrReceiverSortCol"
         Me.ucrReceiverSortCol.Selector = Nothing
+        Me.ucrReceiverSortCol.Size = New System.Drawing.Size(119, 20)
         Me.ucrReceiverSortCol.strNcFilePath = ""
+        Me.ucrReceiverSortCol.TabIndex = 12
         Me.ucrReceiverSortCol.ucrSelector = Nothing
         '
         'ucrChkSortColumn
         '
+        Me.ucrChkSortColumn.AutoSize = True
         Me.ucrChkSortColumn.Checked = False
-        resources.ApplyResources(Me.ucrChkSortColumn, "ucrChkSortColumn")
+        Me.ucrChkSortColumn.Location = New System.Drawing.Point(248, 235)
         Me.ucrChkSortColumn.Name = "ucrChkSortColumn"
+        Me.ucrChkSortColumn.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSortColumn.TabIndex = 9
         '
         'ucrNudNumberRows
         '
+        Me.ucrNudNumberRows.AutoSize = True
         Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberRows, "ucrNudNumberRows")
+        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 256)
         Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
+        Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberRows.TabIndex = 13
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlDisplayFrom
         '
-        resources.ApplyResources(Me.ucrPnlDisplayFrom, "ucrPnlDisplayFrom")
+        Me.ucrPnlDisplayFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(325, 278)
         Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
+        Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
+        Me.ucrPnlDisplayFrom.TabIndex = 14
         '
         'ucrChkSpecifyRows
         '
+        Me.ucrChkSpecifyRows.AutoSize = True
         Me.ucrChkSpecifyRows.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyRows, "ucrChkSpecifyRows")
+        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(248, 235)
         Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
+        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSpecifyRows.TabIndex = 5
         '
         'ucrPnlDisplayWindow
         '
-        resources.ApplyResources(Me.ucrPnlDisplayWindow, "ucrPnlDisplayWindow")
+        Me.ucrPnlDisplayWindow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 235)
         Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
+        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(221, 83)
+        Me.ucrPnlDisplayWindow.TabIndex = 7
         '
         'ucrReceiverView
         '
+        Me.ucrReceiverView.AutoSize = True
         Me.ucrReceiverView.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverView, "ucrReceiverView")
+        Me.ucrReceiverView.Location = New System.Drawing.Point(248, 95)
+        Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
+        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverView.strNcFilePath = ""
+        Me.ucrReceiverView.TabIndex = 5
         Me.ucrReceiverView.ucrSelector = Nothing
         '
         'ucrSelectorForView
         '
+        Me.ucrSelectorForView.AutoSize = True
         Me.ucrSelectorForView.bDropUnusedFilterLevels = False
         Me.ucrSelectorForView.bShowHiddenColumns = False
         Me.ucrSelectorForView.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForView, "ucrSelectorForView")
+        Me.ucrSelectorForView.Location = New System.Drawing.Point(10, 45)
+        Me.ucrSelectorForView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForView.Name = "ucrSelectorForView"
+        Me.ucrSelectorForView.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForView.TabIndex = 3
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 324)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 17
         '
         'dlgView
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(416, 386)
         Me.Controls.Add(Me.rdoViewAll)
         Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
         Me.Controls.Add(Me.ucrPnlViewData)
@@ -228,7 +314,9 @@ Partial Class dlgView
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgView"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "View Data"
+        Me.Text = "View Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

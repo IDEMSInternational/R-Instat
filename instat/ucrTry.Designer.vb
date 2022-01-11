@@ -38,6 +38,7 @@ Partial Class ucrTry
         'ucrInputTryMessage
         '
         Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.AutoSize = True
         Me.ucrInputTryMessage.IsMultiline = False
         Me.ucrInputTryMessage.IsReadOnly = True
         Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 6)
@@ -47,13 +48,15 @@ Partial Class ucrTry
         '
         'ucrTry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Name = "ucrTry"
         Me.Size = New System.Drawing.Size(396, 33)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents cmdTry As Button

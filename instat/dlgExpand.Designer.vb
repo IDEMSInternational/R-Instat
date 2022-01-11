@@ -51,28 +51,35 @@ Partial Class dlgExpand
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(13, 227)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.AutoSize = True
         Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 133)
         Me.ucrAddRemove.TabIndex = 1
         '
         'ucrReceiverExpand
         '
+        Me.ucrReceiverExpand.AutoSize = True
+        Me.ucrReceiverExpand.frmParent = Me
         Me.ucrReceiverExpand.Location = New System.Drawing.Point(243, 28)
         Me.ucrReceiverExpand.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExpand.Name = "ucrReceiverExpand"
         Me.ucrReceiverExpand.Selector = Nothing
         Me.ucrReceiverExpand.Size = New System.Drawing.Size(121, 94)
+        Me.ucrReceiverExpand.strNcFilePath = ""
         Me.ucrReceiverExpand.TabIndex = 2
+        Me.ucrReceiverExpand.ucrSelector = Nothing
         '
         'lblInto
         '
@@ -136,8 +143,9 @@ Partial Class dlgExpand
         '
         'dlgExpand
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(431, 289)
         Me.Controls.Add(Me.rdoMatchingValues)
         Me.Controls.Add(Me.rdoMatchingColumn)

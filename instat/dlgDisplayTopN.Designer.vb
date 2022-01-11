@@ -22,7 +22,6 @@ Partial Class dlgDisplayTopN
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDisplayTopN))
         Me.lbOrder = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrInputDisplay = New instat.ucrInputComboBox()
@@ -53,8 +52,13 @@ Partial Class dlgDisplayTopN
         '
         'lbOrder
         '
-        resources.ApplyResources(Me.lbOrder, "lbOrder")
+        Me.lbOrder.AutoSize = True
+        Me.lbOrder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lbOrder.Location = New System.Drawing.Point(251, 149)
         Me.lbOrder.Name = "lbOrder"
+        Me.lbOrder.Size = New System.Drawing.Size(36, 13)
+        Me.lbOrder.TabIndex = 38
+        Me.lbOrder.Text = "Order:"
         '
         'grpOptions
         '
@@ -62,177 +66,290 @@ Partial Class dlgDisplayTopN
         Me.grpOptions.Controls.Add(Me.Label1)
         Me.grpOptions.Controls.Add(Me.ucrInputLayout)
         Me.grpOptions.Controls.Add(Me.lblLayout)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Location = New System.Drawing.Point(6, 265)
         Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(210, 80)
+        Me.grpOptions.TabIndex = 56
         Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
         '
         'ucrInputDisplay
         '
         Me.ucrInputDisplay.AddQuotesIfUnrecognised = True
+        Me.ucrInputDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDisplay.GetSetSelectedIndex = -1
         Me.ucrInputDisplay.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDisplay, "ucrInputDisplay")
+        Me.ucrInputDisplay.Location = New System.Drawing.Point(98, 24)
+        Me.ucrInputDisplay.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputDisplay.Name = "ucrInputDisplay"
+        Me.ucrInputDisplay.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputDisplay.TabIndex = 63
         '
         'Label1
         '
-        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.AutoSize = True
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(9, 25)
         Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(44, 13)
+        Me.Label1.TabIndex = 62
+        Me.Label1.Text = "Display:"
         '
         'ucrInputLayout
         '
         Me.ucrInputLayout.AddQuotesIfUnrecognised = True
+        Me.ucrInputLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLayout.GetSetSelectedIndex = -1
         Me.ucrInputLayout.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLayout, "ucrInputLayout")
+        Me.ucrInputLayout.Location = New System.Drawing.Point(98, 49)
+        Me.ucrInputLayout.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputLayout.Name = "ucrInputLayout"
+        Me.ucrInputLayout.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputLayout.TabIndex = 61
         '
         'lblLayout
         '
-        resources.ApplyResources(Me.lblLayout, "lblLayout")
+        Me.lblLayout.AutoSize = True
+        Me.lblLayout.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLayout.Location = New System.Drawing.Point(9, 53)
         Me.lblLayout.Name = "lblLayout"
+        Me.lblLayout.Size = New System.Drawing.Size(42, 13)
+        Me.lblLayout.TabIndex = 59
+        Me.lblLayout.Text = "Layout:"
         '
         'ucrInputOrder
         '
         Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputOrder.GetSetSelectedIndex = -1
         Me.ucrInputOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
+        Me.ucrInputOrder.Location = New System.Drawing.Point(251, 165)
+        Me.ucrInputOrder.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputOrder.Name = "ucrInputOrder"
+        Me.ucrInputOrder.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputOrder.TabIndex = 60
         '
         'ucrInputSymbol
         '
         Me.ucrInputSymbol.AddQuotesIfUnrecognised = True
+        Me.ucrInputSymbol.AutoSize = True
         Me.ucrInputSymbol.IsMultiline = False
         Me.ucrInputSymbol.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSymbol, "ucrInputSymbol")
+        Me.ucrInputSymbol.Location = New System.Drawing.Point(319, 296)
+        Me.ucrInputSymbol.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputSymbol.Name = "ucrInputSymbol"
+        Me.ucrInputSymbol.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputSymbol.TabIndex = 53
         '
         'lblSymbol
         '
-        resources.ApplyResources(Me.lblSymbol, "lblSymbol")
+        Me.lblSymbol.AutoSize = True
+        Me.lblSymbol.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSymbol.Location = New System.Drawing.Point(269, 299)
         Me.lblSymbol.Name = "lblSymbol"
+        Me.lblSymbol.Size = New System.Drawing.Size(44, 13)
+        Me.lblSymbol.TabIndex = 52
+        Me.lblSymbol.Text = "Symbol:"
         '
         'ucrSaveDisplay
         '
-        resources.ApplyResources(Me.ucrSaveDisplay, "ucrSaveDisplay")
+        Me.ucrSaveDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDisplay.Location = New System.Drawing.Point(6, 351)
+        Me.ucrSaveDisplay.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveDisplay.Name = "ucrSaveDisplay"
+        Me.ucrSaveDisplay.Size = New System.Drawing.Size(311, 24)
+        Me.ucrSaveDisplay.TabIndex = 50
         '
         'ucrChkIsCurrency
         '
+        Me.ucrChkIsCurrency.AutoSize = True
         Me.ucrChkIsCurrency.Checked = False
-        resources.ApplyResources(Me.ucrChkIsCurrency, "ucrChkIsCurrency")
+        Me.ucrChkIsCurrency.Location = New System.Drawing.Point(251, 272)
+        Me.ucrChkIsCurrency.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkIsCurrency.Name = "ucrChkIsCurrency"
+        Me.ucrChkIsCurrency.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkIsCurrency.TabIndex = 49
         '
         'rdoPrimary
         '
-        resources.ApplyResources(Me.rdoPrimary, "rdoPrimary")
+        Me.rdoPrimary.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoPrimary.BackColor = System.Drawing.SystemColors.Control
         Me.rdoPrimary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPrimary.FlatAppearance.BorderSize = 2
         Me.rdoPrimary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPrimary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPrimary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPrimary.Location = New System.Drawing.Point(99, 11)
         Me.rdoPrimary.Name = "rdoPrimary"
+        Me.rdoPrimary.Size = New System.Drawing.Size(110, 28)
+        Me.rdoPrimary.TabIndex = 39
         Me.rdoPrimary.TabStop = True
         Me.rdoPrimary.Tag = ""
+        Me.rdoPrimary.Text = "Primary data"
+        Me.rdoPrimary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPrimary.UseVisualStyleBackColor = False
+        Me.rdoPrimary.Visible = False
         '
         'rdoSummary
         '
-        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
+        Me.rdoSummary.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoSummary.BackColor = System.Drawing.SystemColors.Control
         Me.rdoSummary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSummary.FlatAppearance.BorderSize = 2
         Me.rdoSummary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSummary.Location = New System.Drawing.Point(207, 11)
         Me.rdoSummary.Name = "rdoSummary"
+        Me.rdoSummary.Size = New System.Drawing.Size(110, 28)
+        Me.rdoSummary.TabIndex = 40
         Me.rdoSummary.TabStop = True
         Me.rdoSummary.Tag = "Pie_Chart"
+        Me.rdoSummary.Text = "Summary data"
+        Me.rdoSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSummary.UseVisualStyleBackColor = False
+        Me.rdoSummary.Visible = False
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 232)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(147, 25)
+        Me.cmdOptions.TabIndex = 48
         Me.cmdOptions.Tag = "Plot_Options..."
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblWeightBy
         '
-        resources.ApplyResources(Me.lblWeightBy, "lblWeightBy")
+        Me.lblWeightBy.AutoSize = True
+        Me.lblWeightBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWeightBy.Location = New System.Drawing.Point(251, 194)
         Me.lblWeightBy.Name = "lblWeightBy"
+        Me.lblWeightBy.Size = New System.Drawing.Size(107, 13)
+        Me.lblWeightBy.TabIndex = 44
         Me.lblWeightBy.Tag = ""
+        Me.lblWeightBy.Text = "Weight By (Optional):"
         '
         'lblVariable
         '
-        resources.ApplyResources(Me.lblVariable, "lblVariable")
+        Me.lblVariable.AutoSize = True
+        Me.lblVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVariable.Location = New System.Drawing.Point(251, 61)
         Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Size = New System.Drawing.Size(48, 13)
+        Me.lblVariable.TabIndex = 42
         Me.lblVariable.Tag = ""
+        Me.lblVariable.Text = "Variable:"
         '
         'ucrReceiverWeightBy
         '
+        Me.ucrReceiverWeightBy.AutoSize = True
         Me.ucrReceiverWeightBy.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWeightBy, "ucrReceiverWeightBy")
+        Me.ucrReceiverWeightBy.Location = New System.Drawing.Point(251, 211)
+        Me.ucrReceiverWeightBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeightBy.Name = "ucrReceiverWeightBy"
         Me.ucrReceiverWeightBy.Selector = Nothing
+        Me.ucrReceiverWeightBy.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWeightBy.strNcFilePath = ""
+        Me.ucrReceiverWeightBy.TabIndex = 45
         Me.ucrReceiverWeightBy.ucrSelector = Nothing
         '
         'ucrReceiverVariable
         '
+        Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverVariable, "ucrReceiverVariable")
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(251, 76)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.TabIndex = 43
         Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'ucrSelectorDisplayTopN
         '
+        Me.ucrSelectorDisplayTopN.AutoSize = True
         Me.ucrSelectorDisplayTopN.bDropUnusedFilterLevels = False
         Me.ucrSelectorDisplayTopN.bShowHiddenColumns = False
         Me.ucrSelectorDisplayTopN.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorDisplayTopN, "ucrSelectorDisplayTopN")
+        Me.ucrSelectorDisplayTopN.Location = New System.Drawing.Point(6, 40)
+        Me.ucrSelectorDisplayTopN.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDisplayTopN.Name = "ucrSelectorDisplayTopN"
+        Me.ucrSelectorDisplayTopN.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorDisplayTopN.TabIndex = 41
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(6, 381)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 51
         '
         'ucrPnlDataType
         '
-        resources.ApplyResources(Me.ucrPnlDataType, "ucrPnlDataType")
+        Me.ucrPnlDataType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDataType.Location = New System.Drawing.Point(88, 5)
+        Me.ucrPnlDataType.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlDataType.Name = "ucrPnlDataType"
+        Me.ucrPnlDataType.Size = New System.Drawing.Size(241, 36)
+        Me.ucrPnlDataType.TabIndex = 38
+        Me.ucrPnlDataType.Visible = False
         '
         'ucrInputNLevels
         '
         Me.ucrInputNLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputNLevels.AutoSize = True
         Me.ucrInputNLevels.IsMultiline = False
         Me.ucrInputNLevels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNLevels, "ucrInputNLevels")
+        Me.ucrInputNLevels.Location = New System.Drawing.Point(251, 116)
+        Me.ucrInputNLevels.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputNLevels.Name = "ucrInputNLevels"
+        Me.ucrInputNLevels.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputNLevels.TabIndex = 59
         '
         'lblTopLevels
         '
-        resources.ApplyResources(Me.lblTopLevels, "lblTopLevels")
+        Me.lblTopLevels.AutoSize = True
+        Me.lblTopLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTopLevels.Location = New System.Drawing.Point(251, 101)
         Me.lblTopLevels.Name = "lblTopLevels"
+        Me.lblTopLevels.Size = New System.Drawing.Size(106, 13)
+        Me.lblTopLevels.TabIndex = 58
+        Me.lblTopLevels.Text = "Top levels displayed:"
         '
         'ucrInputSummary
         '
         Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummary.GetSetSelectedIndex = -1
         Me.ucrInputSummary.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
+        Me.ucrInputSummary.Location = New System.Drawing.Point(304, 247)
         Me.ucrInputSummary.Name = "ucrInputSummary"
+        Me.ucrInputSummary.Size = New System.Drawing.Size(67, 21)
+        Me.ucrInputSummary.TabIndex = 62
         '
         'lblSummary
         '
-        resources.ApplyResources(Me.lblSummary, "lblSummary")
+        Me.lblSummary.AutoSize = True
+        Me.lblSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSummary.Location = New System.Drawing.Point(249, 249)
         Me.lblSummary.Name = "lblSummary"
+        Me.lblSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblSummary.TabIndex = 61
+        Me.lblSummary.Text = "Summary:"
         '
         'dlgDisplayTopN
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(417, 437)
         Me.Controls.Add(Me.ucrInputSummary)
         Me.Controls.Add(Me.lblSummary)
         Me.Controls.Add(Me.ucrInputNLevels)
@@ -255,9 +372,12 @@ Partial Class dlgDisplayTopN
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlDataType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayTopN"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Display Top N"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)

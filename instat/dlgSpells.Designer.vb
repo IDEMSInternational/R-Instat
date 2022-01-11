@@ -129,6 +129,7 @@ Partial Class dlgSpells
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(124, 25)
@@ -150,6 +151,7 @@ Partial Class dlgSpells
         'ucrInputSpellLower
         '
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.AutoSize = True
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
         Me.ucrInputSpellLower.Location = New System.Drawing.Point(168, 55)
@@ -160,6 +162,7 @@ Partial Class dlgSpells
         'ucrInputCondition
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
         Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
@@ -170,6 +173,7 @@ Partial Class dlgSpells
         'ucrInputSpellUpper
         '
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.AutoSize = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
         Me.ucrInputSpellUpper.Location = New System.Drawing.Point(272, 55)
@@ -233,6 +237,7 @@ Partial Class dlgSpells
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(90, 3)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(243, 36)
@@ -241,6 +246,7 @@ Partial Class dlgSpells
         'ucrInputNewColumnName
         '
         Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.AutoSize = True
         Me.ucrInputNewColumnName.IsMultiline = False
         Me.ucrInputNewColumnName.IsReadOnly = False
         Me.ucrInputNewColumnName.Location = New System.Drawing.Point(171, 360)
@@ -250,6 +256,7 @@ Partial Class dlgSpells
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(247, 72)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -262,6 +269,7 @@ Partial Class dlgSpells
         '
         'ucrReceiverDOY
         '
+        Me.ucrReceiverDOY.AutoSize = True
         Me.ucrReceiverDOY.frmParent = Me
         Me.ucrReceiverDOY.Location = New System.Drawing.Point(247, 198)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
@@ -274,6 +282,7 @@ Partial Class dlgSpells
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(247, 156)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -286,6 +295,7 @@ Partial Class dlgSpells
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(247, 114)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -298,6 +308,7 @@ Partial Class dlgSpells
         '
         'ucrReceiverElement
         '
+        Me.ucrReceiverElement.AutoSize = True
         Me.ucrReceiverElement.frmParent = Me
         Me.ucrReceiverElement.Location = New System.Drawing.Point(247, 240)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
@@ -310,17 +321,20 @@ Partial Class dlgSpells
         '
         'ucrSelectorForSpells
         '
+        Me.ucrSelectorForSpells.AutoSize = True
         Me.ucrSelectorForSpells.bDropUnusedFilterLevels = False
         Me.ucrSelectorForSpells.bShowHiddenColumns = False
         Me.ucrSelectorForSpells.bUseCurrentFilter = True
         Me.ucrSelectorForSpells.Location = New System.Drawing.Point(10, 49)
         Me.ucrSelectorForSpells.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForSpells.Name = "ucrSelectorForSpells"
-        Me.ucrSelectorForSpells.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForSpells.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForSpells.TabIndex = 3
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 387)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -328,8 +342,9 @@ Partial Class dlgSpells
         '
         'dlgSpells
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(414, 441)
         Me.Controls.Add(Me.rdoAnnuel)
         Me.Controls.Add(Me.rdoSpells)

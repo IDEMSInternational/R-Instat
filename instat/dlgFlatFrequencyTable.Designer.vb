@@ -61,20 +61,22 @@ Partial Class dlgFlatFrequencyTable
         Me.lblColumnVariable.AutoSize = True
         Me.lblColumnVariable.Location = New System.Drawing.Point(264, 43)
         Me.lblColumnVariable.Name = "lblColumnVariable"
-        Me.lblColumnVariable.Size = New System.Drawing.Size(125, 13)
+        Me.lblColumnVariable.Size = New System.Drawing.Size(136, 13)
         Me.lblColumnVariable.TabIndex = 3
         Me.lblColumnVariable.Text = "Column Variable(s) (Factor):"
         '
         'ucrChkAddMargins
         '
+        Me.ucrChkAddMargins.AutoSize = True
         Me.ucrChkAddMargins.Checked = False
         Me.ucrChkAddMargins.Location = New System.Drawing.Point(10, 239)
         Me.ucrChkAddMargins.Name = "ucrChkAddMargins"
-        Me.ucrChkAddMargins.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAddMargins.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkAddMargins.TabIndex = 5
         '
         'ucrColumnVariable
         '
+        Me.ucrColumnVariable.AutoSize = True
         Me.ucrColumnVariable.frmParent = Me
         Me.ucrColumnVariable.Location = New System.Drawing.Point(264, 58)
         Me.ucrColumnVariable.Margin = New System.Windows.Forms.Padding(0)
@@ -87,6 +89,7 @@ Partial Class dlgFlatFrequencyTable
         '
         'ucrRowVariable
         '
+        Me.ucrRowVariable.AutoSize = True
         Me.ucrRowVariable.frmParent = Me
         Me.ucrRowVariable.Location = New System.Drawing.Point(264, 165)
         Me.ucrRowVariable.Margin = New System.Windows.Forms.Padding(0)
@@ -99,25 +102,30 @@ Partial Class dlgFlatFrequencyTable
         '
         'ucrSelectorDataFrame
         '
+        Me.ucrSelectorDataFrame.AutoSize = True
+        Me.ucrSelectorDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSelectorDataFrame.bShowHiddenColumns = False
         Me.ucrSelectorDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
-        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDataFrame.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 264)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 6
         '
         'dlgFlatFrequencyTable
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 322)
         Me.Controls.Add(Me.ucrChkAddMargins)
         Me.Controls.Add(Me.lblColumnVariable)

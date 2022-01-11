@@ -38,7 +38,6 @@ Partial Class dlgContrasts
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgContrasts))
         Me.lblFactorReceiver = New System.Windows.Forms.Label()
         Me.lblSelectContrastName = New System.Windows.Forms.Label()
         Me.lblDefineContrast = New System.Windows.Forms.Label()
@@ -51,25 +50,37 @@ Partial Class dlgContrasts
         '
         'lblFactorReceiver
         '
-        resources.ApplyResources(Me.lblFactorReceiver, "lblFactorReceiver")
+        Me.lblFactorReceiver.AutoSize = True
+        Me.lblFactorReceiver.Location = New System.Drawing.Point(246, 48)
         Me.lblFactorReceiver.Name = "lblFactorReceiver"
+        Me.lblFactorReceiver.Size = New System.Drawing.Size(93, 13)
+        Me.lblFactorReceiver.TabIndex = 1
+        Me.lblFactorReceiver.Text = "Selected Variable:"
         '
         'lblSelectContrastName
         '
-        resources.ApplyResources(Me.lblSelectContrastName, "lblSelectContrastName")
+        Me.lblSelectContrastName.AutoSize = True
+        Me.lblSelectContrastName.Location = New System.Drawing.Point(246, 99)
         Me.lblSelectContrastName.Name = "lblSelectContrastName"
+        Me.lblSelectContrastName.Size = New System.Drawing.Size(113, 13)
+        Me.lblSelectContrastName.TabIndex = 3
+        Me.lblSelectContrastName.Text = "Select Contrast Name:"
         '
         'lblDefineContrast
         '
-        resources.ApplyResources(Me.lblDefineContrast, "lblDefineContrast")
+        Me.lblDefineContrast.AutoSize = True
+        Me.lblDefineContrast.Location = New System.Drawing.Point(445, 20)
         Me.lblDefineContrast.Name = "lblDefineContrast"
+        Me.lblDefineContrast.Size = New System.Drawing.Size(92, 13)
+        Me.lblDefineContrast.TabIndex = 5
+        Me.lblDefineContrast.Text = "Define a Contrast:"
         '
         'grdLayoutForContrasts
         '
         Me.grdLayoutForContrasts.BackColor = System.Drawing.Color.White
         Me.grdLayoutForContrasts.ColumnHeaderContextMenuStrip = Nothing
         Me.grdLayoutForContrasts.LeadHeaderContextMenuStrip = Nothing
-        resources.ApplyResources(Me.grdLayoutForContrasts, "grdLayoutForContrasts")
+        Me.grdLayoutForContrasts.Location = New System.Drawing.Point(445, 36)
         Me.grdLayoutForContrasts.Name = "grdLayoutForContrasts"
         Me.grdLayoutForContrasts.RowHeaderContextMenuStrip = Nothing
         Me.grdLayoutForContrasts.Script = Nothing
@@ -78,40 +89,60 @@ Partial Class dlgContrasts
         Me.grdLayoutForContrasts.SheetTabVisible = True
         Me.grdLayoutForContrasts.SheetTabWidth = 60
         Me.grdLayoutForContrasts.ShowScrollEndSpacing = True
+        Me.grdLayoutForContrasts.Size = New System.Drawing.Size(333, 207)
+        Me.grdLayoutForContrasts.TabIndex = 6
         '
         'ucrInputContrastName
         '
         Me.ucrInputContrastName.AddQuotesIfUnrecognised = True
+        Me.ucrInputContrastName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputContrastName.GetSetSelectedIndex = -1
         Me.ucrInputContrastName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContrastName, "ucrInputContrastName")
+        Me.ucrInputContrastName.Location = New System.Drawing.Point(246, 114)
         Me.ucrInputContrastName.Name = "ucrInputContrastName"
+        Me.ucrInputContrastName.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputContrastName.TabIndex = 4
         '
         'ucrReceiverForContrasts
         '
+        Me.ucrReceiverForContrasts.AutoSize = True
         Me.ucrReceiverForContrasts.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForContrasts, "ucrReceiverForContrasts")
+        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(246, 63)
+        Me.ucrReceiverForContrasts.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForContrasts.Name = "ucrReceiverForContrasts"
         Me.ucrReceiverForContrasts.Selector = Nothing
+        Me.ucrReceiverForContrasts.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverForContrasts.strNcFilePath = ""
+        Me.ucrReceiverForContrasts.TabIndex = 2
         Me.ucrReceiverForContrasts.ucrSelector = Nothing
         '
         'ucrSelectorForContrast
         '
+        Me.ucrSelectorForContrast.AutoSize = True
         Me.ucrSelectorForContrast.bDropUnusedFilterLevels = False
         Me.ucrSelectorForContrast.bShowHiddenColumns = False
         Me.ucrSelectorForContrast.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForContrast, "ucrSelectorForContrast")
+        Me.ucrSelectorForContrast.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForContrast.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForContrast.Name = "ucrSelectorForContrast"
+        Me.ucrSelectorForContrast.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForContrast.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(13, 200)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'dlgContrasts
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(792, 255)
         Me.Controls.Add(Me.grdLayoutForContrasts)
         Me.Controls.Add(Me.lblDefineContrast)
         Me.Controls.Add(Me.lblSelectContrastName)
@@ -124,7 +155,9 @@ Partial Class dlgContrasts
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgContrasts"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Contrasts"
+        Me.Text = "Contrasts"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

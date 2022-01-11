@@ -38,32 +38,42 @@ Partial Class sdgCreateFilter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCreateFilter))
         Me.ucrCreateFilter = New instat.ucrFilter()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'ucrCreateFilter
         '
-        resources.ApplyResources(Me.ucrCreateFilter, "ucrCreateFilter")
+        Me.ucrCreateFilter.AutoSize = True
+        Me.ucrCreateFilter.Location = New System.Drawing.Point(0, 0)
         Me.ucrCreateFilter.Name = "ucrCreateFilter"
+        Me.ucrCreateFilter.Size = New System.Drawing.Size(770, 395)
+        Me.ucrCreateFilter.TabIndex = 1
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.Location = New System.Drawing.Point(289, 401)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'sdgCreateFilter
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(783, 434)
         Me.Controls.Add(Me.ucrCreateFilter)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCreateFilter"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Define New Filter"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

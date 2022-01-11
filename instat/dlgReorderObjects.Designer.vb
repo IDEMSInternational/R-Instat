@@ -38,7 +38,6 @@ Partial Class dlgReorderObjects
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderObjects))
         Me.ucrBase = New instat.ucrButtons()
         Me.lblObjectsToReoder = New System.Windows.Forms.Label()
         Me.ucrDataFrameReorder = New instat.ucrDataFrame()
@@ -47,32 +46,49 @@ Partial Class dlgReorderObjects
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'lblObjectsToReoder
         '
-        resources.ApplyResources(Me.lblObjectsToReoder, "lblObjectsToReoder")
+        Me.lblObjectsToReoder.AutoSize = True
+        Me.lblObjectsToReoder.Location = New System.Drawing.Point(182, 28)
         Me.lblObjectsToReoder.Name = "lblObjectsToReoder"
+        Me.lblObjectsToReoder.Size = New System.Drawing.Size(99, 13)
+        Me.lblObjectsToReoder.TabIndex = 1
         Me.lblObjectsToReoder.Tag = "Objects_to_Reorder"
+        Me.lblObjectsToReoder.Text = "Objects to Reorder:"
         '
         'ucrDataFrameReorder
         '
+        Me.ucrDataFrameReorder.AutoSize = True
+        Me.ucrDataFrameReorder.bDropUnusedFilterLevels = False
         Me.ucrDataFrameReorder.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameReorder, "ucrDataFrameReorder")
+        Me.ucrDataFrameReorder.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameReorder.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReorder.Name = "ucrDataFrameReorder"
+        Me.ucrDataFrameReorder.Size = New System.Drawing.Size(153, 43)
+        Me.ucrDataFrameReorder.TabIndex = 0
         '
         'ucrReorderObjects
         '
-        resources.ApplyResources(Me.ucrReorderObjects, "ucrReorderObjects")
+        Me.ucrReorderObjects.Location = New System.Drawing.Point(182, 45)
         Me.ucrReorderObjects.Name = "ucrReorderObjects"
+        Me.ucrReorderObjects.Size = New System.Drawing.Size(209, 178)
+        Me.ucrReorderObjects.TabIndex = 2
         Me.ucrReorderObjects.ucrDataFrameList = Nothing
         Me.ucrReorderObjects.ucrReceiver = Nothing
         '
         'dlgReorderObjects
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(418, 287)
         Me.Controls.Add(Me.lblObjectsToReoder)
         Me.Controls.Add(Me.ucrDataFrameReorder)
         Me.Controls.Add(Me.ucrBase)
@@ -81,7 +97,9 @@ Partial Class dlgReorderObjects
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReorderObjects"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reorder_Objects"
+        Me.Text = "Reorder Objects"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
