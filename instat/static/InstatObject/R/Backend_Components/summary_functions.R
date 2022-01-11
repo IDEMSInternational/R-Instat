@@ -1456,8 +1456,10 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     }
   }
   shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
+if (!is.null(shaped_cell_values$summary)){
   shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(summary = as.factor(summary)) %>% dplyr::mutate(summary = forcats::fct_relevel(summary, summaries_display))
-   if (store_table) {
+}
+if (store_table) {
     data_book$import_data(data_tables = list(shaped_cell_values = shaped_cell_values))
   }
   return(shaped_cell_values)
