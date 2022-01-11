@@ -90,7 +90,6 @@ dlgEvapotranspiration_%_rdoHargreavesSamani
 dlgClimaticBoxPlot_ucrInputStation%
 dlgClimaticBoxPlot_ucrInputYear%
 dlgClimaticBoxPlot_ucrInputWithinYear%
-dlgClimaticBoxPlot_ucrInputWithinYear_cboInput%
 
 # In the 'InventoryPlot' dialog, the selected 'Facet' should not be translated
 # Partially fixes issue #6989, related to PR #7070
