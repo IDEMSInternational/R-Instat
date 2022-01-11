@@ -231,15 +231,18 @@ Partial Class dlgBoxplotMethod
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(35, 282)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgBoxplotMethod
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(489, 336)
         Me.Controls.Add(Me.txtDataPeriodLabel)
         Me.Controls.Add(Me.lblDataPeriodLabel)

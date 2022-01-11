@@ -122,6 +122,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrReceiverFacetBy
         '
+        Me.ucrReceiverFacetBy.AutoSize = True
         Me.ucrReceiverFacetBy.frmParent = Me
         Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(248, 306)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
@@ -134,6 +135,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrReceiverX
         '
+        Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
         Me.ucrReceiverX.Location = New System.Drawing.Point(248, 216)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
@@ -146,6 +148,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrChkPoints
         '
+        Me.ucrChkPoints.AutoSize = True
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
         Me.ucrChkPoints.Name = "ucrChkPoints"
@@ -154,6 +157,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrSave
         '
+        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSave.Location = New System.Drawing.Point(9, 337)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
@@ -162,6 +166,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrSelectorPICSARainfall
         '
+        Me.ucrSelectorPICSARainfall.AutoSize = True
         Me.ucrSelectorPICSARainfall.bDropUnusedFilterLevels = False
         Me.ucrSelectorPICSARainfall.bShowHiddenColumns = False
         Me.ucrSelectorPICSARainfall.bUseCurrentFilter = True
@@ -173,13 +178,16 @@ Partial Class dlgPICSARainfall
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 366)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 26
         '
         'ucrReceiverColourBy
         '
+        Me.ucrReceiverColourBy.AutoSize = True
         Me.ucrReceiverColourBy.frmParent = Me
         Me.ucrReceiverColourBy.Location = New System.Drawing.Point(248, 260)
         Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
@@ -192,6 +200,7 @@ Partial Class dlgPICSARainfall
         '
         'ucrVariablesAsFactorForPicsa
         '
+        Me.ucrVariablesAsFactorForPicsa.AutoSize = True
         Me.ucrVariablesAsFactorForPicsa.frmParent = Me
         Me.ucrVariablesAsFactorForPicsa.Location = New System.Drawing.Point(248, 23)
         Me.ucrVariablesAsFactorForPicsa.Name = "ucrVariablesAsFactorForPicsa"
@@ -205,6 +214,7 @@ Partial Class dlgPICSARainfall
         'ucrInputStation
         '
         Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
         Me.ucrInputStation.Location = New System.Drawing.Point(375, 306)
@@ -214,8 +224,9 @@ Partial Class dlgPICSARainfall
         '
         'dlgPICSARainfall
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(463, 420)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucrReceiverFacetBy)

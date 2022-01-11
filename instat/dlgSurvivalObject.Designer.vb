@@ -186,6 +186,7 @@ Partial Class dlgSurvivalObject
         'ucrModifyEventLogical
         '
         Me.ucrModifyEventLogical.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventLogical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrModifyEventLogical.GetSetSelectedIndex = -1
         Me.ucrModifyEventLogical.IsReadOnly = False
         Me.ucrModifyEventLogical.Location = New System.Drawing.Point(278, 215)
@@ -196,6 +197,7 @@ Partial Class dlgSurvivalObject
         'ucrModifyEventNumeric
         '
         Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventNumeric.AutoSize = True
         Me.ucrModifyEventNumeric.IsMultiline = False
         Me.ucrModifyEventNumeric.IsReadOnly = False
         Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(278, 215)
@@ -218,6 +220,7 @@ Partial Class dlgSurvivalObject
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrigin.AutoSize = True
         Me.ucrInputOrigin.IsMultiline = False
         Me.ucrInputOrigin.IsReadOnly = False
         Me.ucrInputOrigin.Location = New System.Drawing.Point(328, 247)
@@ -227,6 +230,7 @@ Partial Class dlgSurvivalObject
         '
         'ucrPnlType
         '
+        Me.ucrPnlType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlType.Location = New System.Drawing.Point(34, 10)
         Me.ucrPnlType.Name = "ucrPnlType"
         Me.ucrPnlType.Size = New System.Drawing.Size(437, 36)
@@ -234,6 +238,7 @@ Partial Class dlgSurvivalObject
         '
         'ucrSaveObject
         '
+        Me.ucrSaveObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveObject.Location = New System.Drawing.Point(10, 247)
         Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveObject.Name = "ucrSaveObject"
@@ -242,6 +247,7 @@ Partial Class dlgSurvivalObject
         '
         'ucrReceiverEvent
         '
+        Me.ucrReceiverEvent.AutoSize = True
         Me.ucrReceiverEvent.frmParent = Me
         Me.ucrReceiverEvent.Location = New System.Drawing.Point(278, 170)
         Me.ucrReceiverEvent.Margin = New System.Windows.Forms.Padding(0)
@@ -254,6 +260,7 @@ Partial Class dlgSurvivalObject
         '
         'ucrReceiverExit
         '
+        Me.ucrReceiverExit.AutoSize = True
         Me.ucrReceiverExit.frmParent = Me
         Me.ucrReceiverExit.Location = New System.Drawing.Point(278, 123)
         Me.ucrReceiverExit.Margin = New System.Windows.Forms.Padding(0)
@@ -266,6 +273,7 @@ Partial Class dlgSurvivalObject
         '
         'ucrReceiverEntry
         '
+        Me.ucrReceiverEntry.AutoSize = True
         Me.ucrReceiverEntry.frmParent = Me
         Me.ucrReceiverEntry.Location = New System.Drawing.Point(278, 76)
         Me.ucrReceiverEntry.Margin = New System.Windows.Forms.Padding(0)
@@ -278,28 +286,32 @@ Partial Class dlgSurvivalObject
         '
         'ucrSelectorFitObject
         '
+        Me.ucrSelectorFitObject.AutoSize = True
         Me.ucrSelectorFitObject.bDropUnusedFilterLevels = False
         Me.ucrSelectorFitObject.bShowHiddenColumns = False
         Me.ucrSelectorFitObject.bUseCurrentFilter = True
         Me.ucrSelectorFitObject.Location = New System.Drawing.Point(9, 49)
         Me.ucrSelectorFitObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFitObject.Name = "ucrSelectorFitObject"
-        Me.ucrSelectorFitObject.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFitObject.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorFitObject.TabIndex = 7
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 277)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 22
         '
         'ucrChkModifyEvent
         '
+        Me.ucrChkModifyEvent.AutoSize = True
         Me.ucrChkModifyEvent.Checked = False
         Me.ucrChkModifyEvent.Location = New System.Drawing.Point(404, 171)
         Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
-        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(189, 20)
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(189, 23)
         Me.ucrChkModifyEvent.TabIndex = 14
         '
         'lblModifyEvent
@@ -312,8 +324,9 @@ Partial Class dlgSurvivalObject
         '
         'dlgSurvivalObject
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(648, 335)
         Me.Controls.Add(Me.ucrModifyEventLogical)
         Me.Controls.Add(Me.ucrModifyEventNumeric)

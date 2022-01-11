@@ -107,13 +107,15 @@ Partial Class sdgExportToWWR
         '
         'ucrButtonsSdg
         '
+        Me.ucrButtonsSdg.AutoSize = True
         Me.ucrButtonsSdg.Location = New System.Drawing.Point(113, 371)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
-        Me.ucrButtonsSdg.Size = New System.Drawing.Size(154, 30)
+        Me.ucrButtonsSdg.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsSdg.TabIndex = 17
         '
         'ucrReceiverStationHeight
         '
+        Me.ucrReceiverStationHeight.AutoSize = True
         Me.ucrReceiverStationHeight.frmParent = Me
         Me.ucrReceiverStationHeight.Location = New System.Drawing.Point(248, 252)
         Me.ucrReceiverStationHeight.Margin = New System.Windows.Forms.Padding(0)
@@ -126,6 +128,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverBarometerHeight
         '
+        Me.ucrReceiverBarometerHeight.AutoSize = True
         Me.ucrReceiverBarometerHeight.frmParent = Me
         Me.ucrReceiverBarometerHeight.Location = New System.Drawing.Point(248, 292)
         Me.ucrReceiverBarometerHeight.Margin = New System.Windows.Forms.Padding(0)
@@ -138,6 +141,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverCountry
         '
+        Me.ucrReceiverCountry.AutoSize = True
         Me.ucrReceiverCountry.frmParent = Me
         Me.ucrReceiverCountry.Location = New System.Drawing.Point(248, 132)
         Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
@@ -150,6 +154,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverLatitude
         '
+        Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
         Me.ucrReceiverLatitude.Location = New System.Drawing.Point(248, 172)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
@@ -162,6 +167,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverLongitude
         '
+        Me.ucrReceiverLongitude.AutoSize = True
         Me.ucrReceiverLongitude.frmParent = Me
         Me.ucrReceiverLongitude.Location = New System.Drawing.Point(248, 212)
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
@@ -174,6 +180,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverStationName
         '
+        Me.ucrReceiverStationName.AutoSize = True
         Me.ucrReceiverStationName.frmParent = Me
         Me.ucrReceiverStationName.Location = New System.Drawing.Point(248, 52)
         Me.ucrReceiverStationName.Margin = New System.Windows.Forms.Padding(0)
@@ -186,6 +193,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverWMONumber
         '
+        Me.ucrReceiverWMONumber.AutoSize = True
         Me.ucrReceiverWMONumber.frmParent = Me
         Me.ucrReceiverWMONumber.Location = New System.Drawing.Point(248, 92)
         Me.ucrReceiverWMONumber.Margin = New System.Windows.Forms.Padding(0)
@@ -198,13 +206,14 @@ Partial Class sdgExportToWWR
         '
         'ucrSelectorStationMetadata
         '
+        Me.ucrSelectorStationMetadata.AutoSize = True
         Me.ucrSelectorStationMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectorStationMetadata.bShowHiddenColumns = False
         Me.ucrSelectorStationMetadata.bUseCurrentFilter = True
         Me.ucrSelectorStationMetadata.Location = New System.Drawing.Point(12, 20)
         Me.ucrSelectorStationMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStationMetadata.Name = "ucrSelectorStationMetadata"
-        Me.ucrSelectorStationMetadata.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStationMetadata.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorStationMetadata.TabIndex = 0
         '
         'lblWIGOSIdentifier
@@ -218,6 +227,7 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverWIGOSIdentifier
         '
+        Me.ucrReceiverWIGOSIdentifier.AutoSize = True
         Me.ucrReceiverWIGOSIdentifier.frmParent = Me
         Me.ucrReceiverWIGOSIdentifier.Location = New System.Drawing.Point(248, 334)
         Me.ucrReceiverWIGOSIdentifier.Margin = New System.Windows.Forms.Padding(0)
@@ -230,8 +240,9 @@ Partial Class sdgExportToWWR
         '
         'sdgExportToWWR
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(396, 402)
         Me.Controls.Add(Me.lblWIGOSIdentifier)
         Me.Controls.Add(Me.ucrReceiverWIGOSIdentifier)

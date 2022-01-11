@@ -37,14 +37,16 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrSaveCountRecords
         '
+        Me.ucrSaveCountRecords.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveCountRecords.Location = New System.Drawing.Point(10, 251)
         Me.ucrSaveCountRecords.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveCountRecords.Name = "ucrSaveCountRecords"
-        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(380, 24)
         Me.ucrSaveCountRecords.TabIndex = 10
         '
         'ucrSelectorForA4
         '
+        Me.ucrSelectorForA4.AutoSize = True
         Me.ucrSelectorForA4.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA4.bUseCurrentFilter = True
         Me.ucrSelectorForA4.Location = New System.Drawing.Point(10, 201)
@@ -75,6 +77,7 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrReceiverMonth
         '
+        Me.ucrReceiverMonth.AutoSize = True
         Me.ucrReceiverMonth.frmParent = Me
         Me.ucrReceiverMonth.Location = New System.Drawing.Point(254, 148)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
@@ -87,6 +90,7 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(254, 104)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -119,6 +123,7 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(254, 60)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -131,17 +136,20 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'ucrSelectorForA2
         '
+        Me.ucrSelectorForA2.AutoSize = True
         Me.ucrSelectorForA2.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA2.bShowHiddenColumns = False
         Me.ucrSelectorForA2.bUseCurrentFilter = True
         Me.ucrSelectorForA2.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForA2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForA2.Name = "ucrSelectorForA2"
-        Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForA2.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForA2.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -149,8 +157,9 @@ Partial Class dlgClimaticNCMPCountRecords
         '
         'dlgClimaticNCMPCountRecords
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 336)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveCountRecords)

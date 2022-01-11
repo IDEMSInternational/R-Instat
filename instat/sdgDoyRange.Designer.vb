@@ -82,6 +82,7 @@ Partial Class sdgDoyRange
         '
         'ucrReceiverFrom
         '
+        Me.ucrReceiverFrom.AutoSize = True
         Me.ucrReceiverFrom.frmParent = Me
         Me.ucrReceiverFrom.Location = New System.Drawing.Point(36, 68)
         Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
@@ -94,13 +95,15 @@ Partial Class sdgDoyRange
         '
         'ucrDoyFrom
         '
+        Me.ucrDoyFrom.AutoSize = True
         Me.ucrDoyFrom.Location = New System.Drawing.Point(36, 67)
         Me.ucrDoyFrom.Name = "ucrDoyFrom"
-        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 21)
+        Me.ucrDoyFrom.Size = New System.Drawing.Size(209, 24)
         Me.ucrDoyFrom.TabIndex = 5
         '
         'ucrPnlFrom
         '
+        Me.ucrPnlFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlFrom.Location = New System.Drawing.Point(28, 17)
         Me.ucrPnlFrom.Name = "ucrPnlFrom"
         Me.ucrPnlFrom.Size = New System.Drawing.Size(186, 36)
@@ -136,6 +139,7 @@ Partial Class sdgDoyRange
         '
         'ucrNudToDiff
         '
+        Me.ucrNudToDiff.AutoSize = True
         Me.ucrNudToDiff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudToDiff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudToDiff.Location = New System.Drawing.Point(50, 68)
@@ -169,6 +173,7 @@ Partial Class sdgDoyRange
         '
         'ucrReceiverTo
         '
+        Me.ucrReceiverTo.AutoSize = True
         Me.ucrReceiverTo.frmParent = Me
         Me.ucrReceiverTo.Location = New System.Drawing.Point(14, 67)
         Me.ucrReceiverTo.Margin = New System.Windows.Forms.Padding(0)
@@ -181,9 +186,10 @@ Partial Class sdgDoyRange
         '
         'ucrDoyTo
         '
+        Me.ucrDoyTo.AutoSize = True
         Me.ucrDoyTo.Location = New System.Drawing.Point(16, 67)
         Me.ucrDoyTo.Name = "ucrDoyTo"
-        Me.ucrDoyTo.Size = New System.Drawing.Size(209, 21)
+        Me.ucrDoyTo.Size = New System.Drawing.Size(209, 24)
         Me.ucrDoyTo.TabIndex = 5
         '
         'rdoToVariable
@@ -210,6 +216,7 @@ Partial Class sdgDoyRange
         '
         'ucrPnlTo
         '
+        Me.ucrPnlTo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlTo.Location = New System.Drawing.Point(6, 17)
         Me.ucrPnlTo.Name = "ucrPnlTo"
         Me.ucrPnlTo.Size = New System.Drawing.Size(295, 36)
@@ -217,26 +224,29 @@ Partial Class sdgDoyRange
         '
         'ucrSelectorDoy
         '
+        Me.ucrSelectorDoy.AutoSize = True
         Me.ucrSelectorDoy.bDropUnusedFilterLevels = False
         Me.ucrSelectorDoy.bShowHiddenColumns = False
         Me.ucrSelectorDoy.bUseCurrentFilter = True
         Me.ucrSelectorDoy.Location = New System.Drawing.Point(10, 9)
         Me.ucrSelectorDoy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDoy.Name = "ucrSelectorDoy"
-        Me.ucrSelectorDoy.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorDoy.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDoy.TabIndex = 0
         '
         'ucrBaseSub
         '
+        Me.ucrBaseSub.AutoSize = True
         Me.ucrBaseSub.Location = New System.Drawing.Point(213, 324)
         Me.ucrBaseSub.Name = "ucrBaseSub"
-        Me.ucrBaseSub.Size = New System.Drawing.Size(156, 30)
+        Me.ucrBaseSub.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSub.TabIndex = 3
         '
         'sdgDoyRange
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(587, 357)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDoy)
@@ -253,6 +263,7 @@ Partial Class sdgDoyRange
         Me.grpTo.ResumeLayout(False)
         Me.grpTo.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

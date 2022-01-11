@@ -223,7 +223,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
     new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
     new_filters <- lapply(new_filters, function(x) check_filter(x))
   } else new_filters <- list()
-  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- lapply(curr_data_object$get_column_selection(), function(x) x$data_clone())
+  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- curr_data_object$get_column_selection()
   else new_column_selections <- list()
   if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
   else new_calculations <- list()
@@ -990,7 +990,7 @@ DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_bo
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
-    data_objects_changed <- TRUE
+    self$data_objects_changed <- TRUE
     link_names <- c()
     for(i in seq_along(private$.links)) {
       if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
@@ -2630,8 +2630,8 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   }
 })
 
-DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, time_interval = "month", column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, time_interval = time_interval, column_name = column_name, station_col_name = station_col_name)
 })
 
 DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {

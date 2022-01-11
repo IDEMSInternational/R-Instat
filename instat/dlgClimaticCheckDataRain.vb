@@ -625,17 +625,16 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverElement.IsEmpty OrElse 
-                ((ucrChkLarge.Checked AndAlso ucrNudLarge.IsEmpty) OrElse 
-                (ucrChkSame.Checked AndAlso (ucrNudSame.IsEmpty OrElse ucrInputSameValue.IsEmpty)) OrElse 
-                (ucrChkWetDays.Checked AndAlso ucrNudWetDays.IsEmpty) OrElse 
-                (ucrChkOutlier.Checked AndAlso (ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty)) OrElse
-                (ucrChkDryMonth.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse ucrReceiverMonth.IsEmpty))) OrElse
-                ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso Not ucrNudLarge.IsEmpty) OrElse
+               (ucrChkSame.Checked AndAlso (Not ucrNudSame.IsEmpty AndAlso Not ucrInputSameValue.IsEmpty)) OrElse
+               (ucrChkWetDays.Checked AndAlso Not ucrNudWetDays.IsEmpty) OrElse
+               (ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso Not ucrInputThresholdValue.IsEmpty) OrElse (ucrChkOutlier.Checked AndAlso (Not ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty))) OrElse
+               (ucrChkDryMonth.Checked AndAlso Not ucrInputThreshold.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty)) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Private Sub GroupByOptions()
@@ -696,6 +695,9 @@ Public Class dlgClimaticCheckDataRain
 
         GroupByOptions()
         GroupByMonth()
+    End Sub
+
+    Private Sub ucrSelectorRain_DataFrameChanged() Handles ucrSelectorRain.DataFrameChanged
         AutoFillRainColumn()
     End Sub
 
