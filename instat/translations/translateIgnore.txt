@@ -93,6 +93,6 @@ dlgClimaticBoxPlot_ucrInputWithinYear%
 dlgClimaticBoxPlot_ucrInputWithinYear_cboInput%
 
 # In the 'InventoryPlot' dialog, the selected 'Facet' should not be translated
-# Partially fixes issue, related to PR #7070
+# Partially fixes issue #6989, related to PR #7070
 dlgInventoryPlot_ucrInputFacetBy%
 dlgInventoryPlot_ucrInputFacetBy_cboInput%
