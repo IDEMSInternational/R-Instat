@@ -68,6 +68,7 @@ Partial Class dlgSummaryTables
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeight = New instat.ucrCheck()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
@@ -235,10 +236,11 @@ Partial Class dlgSummaryTables
         '
         'ucrPnlMargin
         '
+        Me.ucrPnlMargin.AutoSize = True
         Me.ucrPnlMargin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlMargin.Location = New System.Drawing.Point(6, 18)
         Me.ucrPnlMargin.Name = "ucrPnlMargin"
-        Me.ucrPnlMargin.Size = New System.Drawing.Size(91, 65)
+        Me.ucrPnlMargin.Size = New System.Drawing.Size(0, 0)
         Me.ucrPnlMargin.TabIndex = 13
         '
         'lblMarginName
@@ -264,6 +266,7 @@ Partial Class dlgSummaryTables
         '
         'ucrReorderSummary
         '
+        Me.ucrReorderSummary.AutoSize = True
         Me.ucrReorderSummary.Location = New System.Drawing.Point(284, 269)
         Me.ucrReorderSummary.Name = "ucrReorderSummary"
         Me.ucrReorderSummary.Size = New System.Drawing.Size(200, 168)
@@ -396,12 +399,23 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSummaryTables.TabIndex = 0
         '
+        'cmdFormatTable
+        '
+        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatTable.Location = New System.Drawing.Point(331, 467)
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
+        Me.cmdFormatTable.TabIndex = 19
+        Me.cmdFormatTable.Text = "Format Table..."
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
+        '
         'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(489, 605)
+        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -466,4 +480,5 @@ Partial Class dlgSummaryTables
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents lblVariables As Label
     Friend WithEvents ucrReorderSummary As ucrReorder
+    Friend WithEvents cmdFormatTable As Button
 End Class
