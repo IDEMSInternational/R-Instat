@@ -182,7 +182,7 @@ Public Class dlgExportToCPT
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "\", "/"))
     End Sub
 
     Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
