@@ -38,7 +38,6 @@ Partial Class sdgCorrPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCorrPlot))
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
@@ -65,26 +64,42 @@ Partial Class sdgCorrPlot
         '
         'rdoNone
         '
-        resources.ApplyResources(Me.rdoNone, "rdoNone")
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.Location = New System.Drawing.Point(12, 19)
         Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 1
+        Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
         'rdoPairwisePlot
         '
-        resources.ApplyResources(Me.rdoPairwisePlot, "rdoPairwisePlot")
+        Me.rdoPairwisePlot.AutoSize = True
+        Me.rdoPairwisePlot.Location = New System.Drawing.Point(12, 42)
         Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
+        Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
+        Me.rdoPairwisePlot.TabIndex = 2
+        Me.rdoPairwisePlot.Text = "Pairwise Plot"
         Me.rdoPairwisePlot.UseVisualStyleBackColor = True
         '
         'rdoCorrelationPlot
         '
-        resources.ApplyResources(Me.rdoCorrelationPlot, "rdoCorrelationPlot")
+        Me.rdoCorrelationPlot.AutoSize = True
+        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(177, 19)
         Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
+        Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
+        Me.rdoCorrelationPlot.TabIndex = 3
+        Me.rdoCorrelationPlot.Text = "Correlation Plot"
         Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
         '
         'rdoScatterPlotMatrix
         '
-        resources.ApplyResources(Me.rdoScatterPlotMatrix, "rdoScatterPlotMatrix")
+        Me.rdoScatterPlotMatrix.AutoSize = True
+        Me.rdoScatterPlotMatrix.Location = New System.Drawing.Point(177, 42)
         Me.rdoScatterPlotMatrix.Name = "rdoScatterPlotMatrix"
+        Me.rdoScatterPlotMatrix.Size = New System.Drawing.Size(90, 17)
+        Me.rdoScatterPlotMatrix.TabIndex = 4
+        Me.rdoScatterPlotMatrix.Text = "Scatter Matrix"
         Me.rdoScatterPlotMatrix.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -94,14 +109,20 @@ Partial Class sdgCorrPlot
         Me.GroupBox1.Controls.Add(Me.rdoCorrelationPlot)
         Me.GroupBox1.Controls.Add(Me.rdoScatterPlotMatrix)
         Me.GroupBox1.Controls.Add(Me.ucrPnlGraphType)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 2)
         Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(346, 67)
+        Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Graphs"
         '
         'ucrPnlGraphType
         '
-        resources.ApplyResources(Me.ucrPnlGraphType, "ucrPnlGraphType")
+        Me.ucrPnlGraphType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(6, 15)
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(318, 46)
+        Me.ucrPnlGraphType.TabIndex = 0
         '
         'grpOptions
         '
@@ -116,104 +137,155 @@ Partial Class sdgCorrPlot
         Me.grpOptions.Controls.Add(Me.lblMaximumSize)
         Me.grpOptions.Controls.Add(Me.ucrNudMinimunSize)
         Me.grpOptions.Controls.Add(Me.lblMinimumSize)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Location = New System.Drawing.Point(10, 80)
         Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(346, 252)
+        Me.grpOptions.TabIndex = 1
         Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
         '
         'ucrChkReverseLegendOrder
         '
+        Me.ucrChkReverseLegendOrder.AutoSize = True
         Me.ucrChkReverseLegendOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkReverseLegendOrder, "ucrChkReverseLegendOrder")
+        Me.ucrChkReverseLegendOrder.Location = New System.Drawing.Point(6, 217)
         Me.ucrChkReverseLegendOrder.Name = "ucrChkReverseLegendOrder"
+        Me.ucrChkReverseLegendOrder.Size = New System.Drawing.Size(190, 23)
+        Me.ucrChkReverseLegendOrder.TabIndex = 13
         '
         'lblFactor
         '
-        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(227, 35)
         Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
+        Me.lblFactor.TabIndex = 12
+        Me.lblFactor.Text = "Factor:"
         '
         'ucrSelectorFactor
         '
+        Me.ucrSelectorFactor.AutoSize = True
         Me.ucrSelectorFactor.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(7, 24)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorFactor.TabIndex = 11
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(223, 51)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 10
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrChkLabel
         '
+        Me.ucrChkLabel.AutoSize = True
         Me.ucrChkLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkLabel, "ucrChkLabel")
+        Me.ucrChkLabel.Location = New System.Drawing.Point(12, 51)
         Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkLabel.TabIndex = 3
         '
         'lblGeom
         '
-        resources.ApplyResources(Me.lblGeom, "lblGeom")
+        Me.lblGeom.AutoSize = True
+        Me.lblGeom.Location = New System.Drawing.Point(11, 28)
         Me.lblGeom.Name = "lblGeom"
+        Me.lblGeom.Size = New System.Drawing.Size(38, 13)
+        Me.lblGeom.TabIndex = 1
         Me.lblGeom.Tag = "Geom:"
+        Me.lblGeom.Text = "Geom:"
         '
         'ucrInputComboGeom
         '
         Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboGeom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboGeom.GetSetSelectedIndex = -1
         Me.ucrInputComboGeom.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboGeom, "ucrInputComboGeom")
+        Me.ucrInputComboGeom.Location = New System.Drawing.Point(51, 24)
         Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
+        Me.ucrInputComboGeom.Size = New System.Drawing.Size(145, 21)
+        Me.ucrInputComboGeom.TabIndex = 2
         '
         'ucrNudMaximumSize
         '
+        Me.ucrNudMaximumSize.AutoSize = True
         Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaximumSize, "ucrNudMaximumSize")
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(98, 103)
         Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
+        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaximumSize.TabIndex = 9
         Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMaximumSize
         '
-        resources.ApplyResources(Me.lblMaximumSize, "lblMaximumSize")
+        Me.lblMaximumSize.AutoSize = True
+        Me.lblMaximumSize.Location = New System.Drawing.Point(11, 106)
         Me.lblMaximumSize.Name = "lblMaximumSize"
+        Me.lblMaximumSize.Size = New System.Drawing.Size(77, 13)
+        Me.lblMaximumSize.TabIndex = 8
         Me.lblMaximumSize.Tag = "Maximum_Size:"
+        Me.lblMaximumSize.Text = "Maximum Size:"
         '
         'ucrNudMinimunSize
         '
+        Me.ucrNudMinimunSize.AutoSize = True
         Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinimunSize, "ucrNudMinimunSize")
+        Me.ucrNudMinimunSize.Location = New System.Drawing.Point(98, 77)
         Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
+        Me.ucrNudMinimunSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinimunSize.TabIndex = 7
         Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMinimumSize
         '
-        resources.ApplyResources(Me.lblMinimumSize, "lblMinimumSize")
+        Me.lblMinimumSize.AutoSize = True
+        Me.lblMinimumSize.Location = New System.Drawing.Point(11, 80)
         Me.lblMinimumSize.Name = "lblMinimumSize"
+        Me.lblMinimumSize.Size = New System.Drawing.Size(74, 13)
+        Me.lblMinimumSize.TabIndex = 6
         Me.lblMinimumSize.Tag = "Minimum_Size:"
+        Me.lblMinimumSize.Text = "Minimum Size:"
         '
         'ucrSaveGraph
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 339)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrBaseSdgCorrPlot
         '
-        resources.ApplyResources(Me.ucrBaseSdgCorrPlot, "ucrBaseSdgCorrPlot")
+        Me.ucrBaseSdgCorrPlot.AutoSize = True
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(111, 363)
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
+        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSdgCorrPlot.TabIndex = 14
         '
         'sdgCorrPlot
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(366, 401)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.Controls.Add(Me.GroupBox1)
@@ -222,12 +294,15 @@ Partial Class sdgCorrPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCorrPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Correlation_Display_and_Graphics"
+        Me.Text = "Correlation Display and Graphics"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

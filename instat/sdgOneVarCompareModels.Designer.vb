@@ -38,7 +38,6 @@ Partial Class sdgOneVarCompareModels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOneVarCompareModels))
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
         Me.tbpOneVarCompareModels = New System.Windows.Forms.TabControl()
         Me.tbpFit = New System.Windows.Forms.TabPage()
@@ -58,41 +57,61 @@ Partial Class sdgOneVarCompareModels
         '
         'ucrSubBase
         '
-        resources.ApplyResources(Me.ucrSubBase, "ucrSubBase")
+        Me.ucrSubBase.AutoSize = True
+        Me.ucrSubBase.Location = New System.Drawing.Point(76, 186)
         Me.ucrSubBase.Name = "ucrSubBase"
+        Me.ucrSubBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSubBase.TabIndex = 1
         '
         'tbpOneVarCompareModels
         '
         Me.tbpOneVarCompareModels.Controls.Add(Me.tbpFit)
         Me.tbpOneVarCompareModels.Controls.Add(Me.tbpPlot)
-        resources.ApplyResources(Me.tbpOneVarCompareModels, "tbpOneVarCompareModels")
+        Me.tbpOneVarCompareModels.Location = New System.Drawing.Point(7, 7)
         Me.tbpOneVarCompareModels.Name = "tbpOneVarCompareModels"
         Me.tbpOneVarCompareModels.SelectedIndex = 0
+        Me.tbpOneVarCompareModels.Size = New System.Drawing.Size(279, 174)
+        Me.tbpOneVarCompareModels.TabIndex = 0
         '
         'tbpFit
         '
         Me.tbpFit.Controls.Add(Me.ucrSaveDisplayChi)
         Me.tbpFit.Controls.Add(Me.ucrSaveGOF)
         Me.tbpFit.Controls.Add(Me.ucrChkInputChiSquareBreakpoints)
-        resources.ApplyResources(Me.tbpFit, "tbpFit")
+        Me.tbpFit.Location = New System.Drawing.Point(4, 22)
         Me.tbpFit.Name = "tbpFit"
+        Me.tbpFit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpFit.Size = New System.Drawing.Size(271, 148)
+        Me.tbpFit.TabIndex = 0
+        Me.tbpFit.Text = "Fit"
         Me.tbpFit.UseVisualStyleBackColor = True
         '
         'ucrSaveDisplayChi
         '
-        resources.ApplyResources(Me.ucrSaveDisplayChi, "ucrSaveDisplayChi")
+        Me.ucrSaveDisplayChi.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDisplayChi.Location = New System.Drawing.Point(10, 36)
+        Me.ucrSaveDisplayChi.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDisplayChi.Name = "ucrSaveDisplayChi"
+        Me.ucrSaveDisplayChi.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSaveDisplayChi.TabIndex = 1
         '
         'ucrSaveGOF
         '
-        resources.ApplyResources(Me.ucrSaveGOF, "ucrSaveGOF")
+        Me.ucrSaveGOF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGOF.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSaveGOF.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGOF.Name = "ucrSaveGOF"
+        Me.ucrSaveGOF.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGOF.TabIndex = 0
         '
         'ucrChkInputChiSquareBreakpoints
         '
+        Me.ucrChkInputChiSquareBreakpoints.AutoSize = True
         Me.ucrChkInputChiSquareBreakpoints.Checked = False
-        resources.ApplyResources(Me.ucrChkInputChiSquareBreakpoints, "ucrChkInputChiSquareBreakpoints")
+        Me.ucrChkInputChiSquareBreakpoints.Location = New System.Drawing.Point(10, 62)
         Me.ucrChkInputChiSquareBreakpoints.Name = "ucrChkInputChiSquareBreakpoints"
+        Me.ucrChkInputChiSquareBreakpoints.Size = New System.Drawing.Size(229, 23)
+        Me.ucrChkInputChiSquareBreakpoints.TabIndex = 2
         '
         'tbpPlot
         '
@@ -101,53 +120,80 @@ Partial Class sdgOneVarCompareModels
         Me.tbpPlot.Controls.Add(Me.ucrChkPP)
         Me.tbpPlot.Controls.Add(Me.ucrChkCDF)
         Me.tbpPlot.Controls.Add(Me.ucrChkDensity)
-        resources.ApplyResources(Me.tbpPlot, "tbpPlot")
+        Me.tbpPlot.Location = New System.Drawing.Point(4, 22)
         Me.tbpPlot.Name = "tbpPlot"
+        Me.tbpPlot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpPlot.Size = New System.Drawing.Size(271, 148)
+        Me.tbpPlot.TabIndex = 1
+        Me.tbpPlot.Text = "Plot"
         Me.tbpPlot.UseVisualStyleBackColor = True
         '
         'ucrSavePlots
         '
-        resources.ApplyResources(Me.ucrSavePlots, "ucrSavePlots")
+        Me.ucrSavePlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSavePlots.Location = New System.Drawing.Point(10, 114)
+        Me.ucrSavePlots.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlots.Name = "ucrSavePlots"
+        Me.ucrSavePlots.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSavePlots.TabIndex = 4
         '
         'ucrChkQQ
         '
+        Me.ucrChkQQ.AutoSize = True
         Me.ucrChkQQ.Checked = False
-        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
+        Me.ucrChkQQ.Location = New System.Drawing.Point(10, 88)
         Me.ucrChkQQ.Name = "ucrChkQQ"
+        Me.ucrChkQQ.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkQQ.TabIndex = 3
         '
         'ucrChkPP
         '
+        Me.ucrChkPP.AutoSize = True
         Me.ucrChkPP.Checked = False
-        resources.ApplyResources(Me.ucrChkPP, "ucrChkPP")
+        Me.ucrChkPP.Location = New System.Drawing.Point(10, 62)
         Me.ucrChkPP.Name = "ucrChkPP"
+        Me.ucrChkPP.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPP.TabIndex = 2
         '
         'ucrChkCDF
         '
+        Me.ucrChkCDF.AutoSize = True
         Me.ucrChkCDF.Checked = False
-        resources.ApplyResources(Me.ucrChkCDF, "ucrChkCDF")
+        Me.ucrChkCDF.Location = New System.Drawing.Point(10, 10)
         Me.ucrChkCDF.Name = "ucrChkCDF"
+        Me.ucrChkCDF.Size = New System.Drawing.Size(260, 23)
+        Me.ucrChkCDF.TabIndex = 0
         '
         'ucrChkDensity
         '
+        Me.ucrChkDensity.AutoSize = True
         Me.ucrChkDensity.Checked = False
-        resources.ApplyResources(Me.ucrChkDensity, "ucrChkDensity")
+        Me.ucrChkDensity.Location = New System.Drawing.Point(10, 36)
         Me.ucrChkDensity.Name = "ucrChkDensity"
+        Me.ucrChkDensity.Size = New System.Drawing.Size(260, 23)
+        Me.ucrChkDensity.TabIndex = 1
         '
         'sdgOneVarCompareModels
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(291, 221)
         Me.Controls.Add(Me.tbpOneVarCompareModels)
         Me.Controls.Add(Me.ucrSubBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarCompareModels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Display Options"
         Me.tbpOneVarCompareModels.ResumeLayout(False)
         Me.tbpFit.ResumeLayout(False)
+        Me.tbpFit.PerformLayout()
         Me.tbpPlot.ResumeLayout(False)
+        Me.tbpPlot.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
