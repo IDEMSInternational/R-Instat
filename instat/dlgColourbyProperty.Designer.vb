@@ -38,7 +38,6 @@ Partial Class dlgColourbyProperty
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgColourbyProperty))
         Me.lblMetadataProp = New System.Windows.Forms.Label()
         Me.ucrChkRemoveColours = New instat.ucrCheck()
         Me.ucrReceiverMetadataProperty = New instat.ucrReceiverSingle()
@@ -48,41 +47,63 @@ Partial Class dlgColourbyProperty
         '
         'lblMetadataProp
         '
-        resources.ApplyResources(Me.lblMetadataProp, "lblMetadataProp")
+        Me.lblMetadataProp.AutoSize = True
+        Me.lblMetadataProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMetadataProp.Location = New System.Drawing.Point(263, 45)
         Me.lblMetadataProp.Name = "lblMetadataProp"
+        Me.lblMetadataProp.Size = New System.Drawing.Size(97, 13)
+        Me.lblMetadataProp.TabIndex = 3
+        Me.lblMetadataProp.Text = "Metadata Property:"
         '
         'ucrChkRemoveColours
         '
+        Me.ucrChkRemoveColours.AutoSize = True
         Me.ucrChkRemoveColours.Checked = False
-        resources.ApplyResources(Me.ucrChkRemoveColours, "ucrChkRemoveColours")
+        Me.ucrChkRemoveColours.Location = New System.Drawing.Point(263, 84)
         Me.ucrChkRemoveColours.Name = "ucrChkRemoveColours"
+        Me.ucrChkRemoveColours.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkRemoveColours.TabIndex = 4
         '
         'ucrReceiverMetadataProperty
         '
+        Me.ucrReceiverMetadataProperty.AutoSize = True
         Me.ucrReceiverMetadataProperty.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMetadataProperty, "ucrReceiverMetadataProperty")
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(263, 60)
+        Me.ucrReceiverMetadataProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
         Me.ucrReceiverMetadataProperty.Selector = Nothing
+        Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMetadataProperty.strNcFilePath = ""
+        Me.ucrReceiverMetadataProperty.TabIndex = 2
         Me.ucrReceiverMetadataProperty.ucrSelector = Nothing
         '
         'ucrSelectorColourByMetadata
         '
+        Me.ucrSelectorColourByMetadata.AutoSize = True
         Me.ucrSelectorColourByMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectorColourByMetadata.bShowHiddenColumns = False
         Me.ucrSelectorColourByMetadata.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorColourByMetadata, "ucrSelectorColourByMetadata")
+        Me.ucrSelectorColourByMetadata.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorColourByMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColourByMetadata.Name = "ucrSelectorColourByMetadata"
+        Me.ucrSelectorColourByMetadata.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorColourByMetadata.TabIndex = 1
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(12, 201)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgColourbyProperty
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(422, 261)
         Me.Controls.Add(Me.ucrChkRemoveColours)
         Me.Controls.Add(Me.lblMetadataProp)
         Me.Controls.Add(Me.ucrReceiverMetadataProperty)
@@ -92,7 +113,9 @@ Partial Class dlgColourbyProperty
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgColourbyProperty"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Colour_by_Property"
+        Me.Text = "Colour by Property"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
