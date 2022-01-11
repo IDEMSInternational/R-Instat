@@ -409,13 +409,13 @@
     <value>100, 361</value>
   </data>
   <data name="lblIndicesSelectedOutOf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 13</value>
+    <value>143, 13</value>
   </data>
   <data name="lblIndicesSelectedOutOf.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="lblIndicesSelectedOutOf.Text" xml:space="preserve">
-    <value>indices selected out of</value>
+    <value>indices           selected out of</value>
   </data>
   <data name="&gt;&gt;lblIndicesSelectedOutOf.Name" xml:space="preserve">
     <value>lblIndicesSelectedOutOf</value>
