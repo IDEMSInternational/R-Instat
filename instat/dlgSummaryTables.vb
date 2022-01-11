@@ -22,9 +22,17 @@ Public Class dlgSummaryTables
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction, clsConcFunction, clsMutableFunction As New RFunction
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
-            clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
+            clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction, clsStubHeadFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
-    Private clsMutableOperator, clsColumnOperator As New ROperator
+
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
+            clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
+            clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+            clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
+            clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction,
+            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
+    Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator,
+            clsTabFootnoteOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -144,8 +152,33 @@ Public Class dlgSummaryTables
         clsVariableHeaderTopLeftFunction = New RFunction
         clsummaryVariableHeaderLeftTopFunction = New RFunction
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
+        clsTableTitleFunction = New RFunction
+        clsTabFootnoteTitleFunction = New RFunction
+        clsTableSourcenoteFunction = New RFunction
+        clsCellTextFunction = New RFunction
+        clsCellBorderFunction = New RFunction
+        clsCellFillFunction = New RFunction
+        clsHeaderFormatFunction = New RFunction
+        clsTabOptionsFunction = New RFunction
+        clsBorderWeightPxFunction = New RFunction
+        clsFootnoteTitleLocationFunction = New RFunction
+        clsFootnoteSubtitleLocationFunction = New RFunction
+        clsStyleListFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
+        clsPipeOperator = New ROperator
+        clsTabFootnoteSubtitleFunction = New RFunction
+        clsFootnoteCellBodyFunction = New RFunction
+        clsSecondFootnoteCellBodyFunction = New RFunction
+        clsFootnoteCellFunction = New RFunction
+        clsSecondFootnoteCellFunction = New RFunction
+        clsStubHeadFunction = New RFunction
+        clsTabStyleFunction = New RFunction
+        clsTabStyleCellTextFunction = New RFunction
+        clsTabStylePxFunction = New RFunction
+        clsTabStyleCellTitleFunction = New RFunction
+        clsJoiningPipeOperator = New ROperator
+        clsTabFootnoteOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -159,6 +192,35 @@ Public Class dlgSummaryTables
         clsColumnOperator.SetOperation("+")
 
         clsConcFunction.SetRCommand("c")
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
+
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsMutableOperator, iPosition:=0)
+
+        clsStubHeadFunction.SetPackageName("gt")
+        clsStubHeadFunction.SetRCommand("tab_stubhead")
+
+        clsTabStyleFunction.SetRCommand("tab_style")
+        clsTabStyleFunction.SetPackageName("gt")
+        clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
+        clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
+
+        clsTabStyleCellTitleFunction.SetPackageName("gt")
+        clsTabStyleCellTitleFunction.SetRCommand("cells_title")
+        clsTabStyleCellTitleFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
+
+        clsTabStyleCellTextFunction.SetPackageName("gt")
+        clsTabStyleCellTextFunction.SetRCommand("cell_text")
+        clsTabStyleCellTextFunction.AddParameter("size", clsRFunctionParameter:=clsTabStylePxFunction, iPosition:=0)
+
+        clsTabStylePxFunction.SetPackageName("gt")
+        clsTabStylePxFunction.SetRCommand("px")
+        clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
@@ -200,9 +262,63 @@ Public Class dlgSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
 
+        clsTableTitleFunction.SetPackageName("gt")
+        clsTableTitleFunction.SetRCommand("tab_header")
+
+        clsTabFootnoteTitleFunction.SetPackageName("gt")
+        clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
+
+        clsTabFootnoteSubtitleFunction.SetPackageName("gt")
+        clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
+
+        clsFootnoteCellFunction.SetPackageName("gt")
+        clsFootnoteCellFunction.SetRCommand("tab_footnote")
+
+        clsSecondFootnoteCellFunction.SetPackageName("gt")
+        clsSecondFootnoteCellFunction.SetRCommand("tab_footnote")
+
+        clsFootnoteTitleLocationFunction.SetPackageName("gt")
+        clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
+
+        clsFootnoteSubtitleLocationFunction.SetPackageName("gt")
+        clsFootnoteSubtitleLocationFunction.SetRCommand("cells_title")
+
+        clsTableSourcenoteFunction.SetPackageName("gt")
+        clsTableSourcenoteFunction.SetRCommand("tab_source_note")
+
+        clsFootnoteCellBodyFunction.SetPackageName("gt")
+        clsFootnoteCellBodyFunction.SetRCommand("cells_body")
+
+        clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
+        clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
+
+        clsCellTextFunction.SetPackageName("gt")
+        clsCellTextFunction.SetRCommand("cell_text")
+
+        clsCellBorderFunction.SetPackageName("gt")
+        clsCellBorderFunction.SetRCommand("cell_borders")
+        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
+
+        clsCellFillFunction.SetPackageName("gt")
+        clsCellFillFunction.SetRCommand("cell_fill")
+
+        clsHeaderFormatFunction.SetPackageName("mmtable2")
+        clsHeaderFormatFunction.SetRCommand("header_format")
+        clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
+        clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
+
+        clsTabOptionsFunction.SetPackageName("gt")
+        clsTabOptionsFunction.SetRCommand("tab_options")
+
+        clsBorderWeightPxFunction.SetPackageName("gt")
+        clsBorderWeightPxFunction.SetRCommand("px")
+        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsStyleListFunction.SetRCommand("list")
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
-        ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)
-        clsMutableOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
+        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         bResetSubdialog = True
     End Sub
 
@@ -222,7 +338,7 @@ Public Class dlgSummaryTables
         ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
-        ucrSaveTable.SetRCode(clsMutableOperator, bReset)
+        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
         FillListView()
     End Sub
 
@@ -248,6 +364,17 @@ Public Class dlgSummaryTables
         sdgSummaries.bEnable2VariableTab = True
         FillListView()
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
+        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction,
+                                         clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
+                                         clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                        clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
+                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+        sdgFormatSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeight.ControlValueChanged
@@ -298,32 +425,31 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
-        Dim clsHeaderLeftFunction As New RFunction
-        Dim clsHeaderTopFunction As New RFunction
         Dim iColumn As Integer = 0
         Dim iNumberOfColumns As Integer
 
-        clsHeaderLeftFunction.SetPackageName("mmtable2")
-        clsHeaderLeftFunction.SetRCommand("header_top_left")
-
-        clsHeaderTopFunction.SetPackageName("mmtable2")
-        clsHeaderTopFunction.SetRCommand("header_left_top")
-
         clsColumnOperator.ClearParameters()
+        clsMutableOperator.RemoveParameterByName("columnOp")
 
         If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
             iNumberOfColumns = ucrNudColumnFactors.GetText()
             For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
                 If (iColumn + 1) <= iNumberOfColumns Then
+                    Dim clsHeaderLeftFunction As New RFunction
+                    clsHeaderLeftFunction.SetPackageName("mmtable2")
+                    clsHeaderLeftFunction.SetRCommand("header_top_left")
                     clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
                 Else
+                    Dim clsHeaderTopFunction As New RFunction
+                    clsHeaderTopFunction.SetPackageName("mmtable2")
+                    clsHeaderTopFunction.SetRCommand("header_left_top")
                     clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
                 End If
                 iColumn = iColumn + 1
             Next
-            clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator)
+            clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
         End If
     End Sub
 
