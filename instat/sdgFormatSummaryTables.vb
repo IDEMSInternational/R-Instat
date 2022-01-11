@@ -385,14 +385,9 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddTableTitle()
-        If ucrChkAddTitleSubtitle.Checked Then
-            If Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty Then
-                clsPipeOperator.AddParameter("title\subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
-                clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
-            Else
-                clsPipeOperator.RemoveParameterByName("title\subtitle")
-                clsPipeOperator.RemoveParameterByName("title_font")
-            End If
+        If ucrChkAddTitleSubtitle.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
+            clsPipeOperator.AddParameter("title\subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
+            clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
             clsPipeOperator.RemoveParameterByName("title\subtitle")
             clsPipeOperator.RemoveParameterByName("title_font")
@@ -418,22 +413,14 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddFootnote()
-        If ucrChkTitleFootnote.Checked Then
-            If Not ucrInputTitleFootnote.IsEmpty Then
-                clsTabFootnoteOperator.AddParameter("titlefootnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
-            Else
-                clsTabFootnoteOperator.RemoveParameterByName("titlefootnote")
-            End If
+        If ucrChkTitleFootnote.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
+            clsTabFootnoteOperator.AddParameter("titlefootnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
         Else
             clsTabFootnoteOperator.RemoveParameterByName("titlefootnote")
         End If
 
-        If ucrChkSubtitleFootnote.Checked Then
-            If Not ucrInputSubtitleFootnote.IsEmpty Then
-                clsTabFootnoteOperator.AddParameter("subtitlefootnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
-            Else
-                clsTabFootnoteOperator.RemoveParameterByName("subtitlefootnote")
-            End If
+        If ucrChkSubtitleFootnote.Checked AndAlso Not ucrInputSubtitleFootnote.IsEmpty Then
+            clsTabFootnoteOperator.AddParameter("subtitlefootnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
         Else
             clsTabFootnoteOperator.RemoveParameterByName("subtitlefootnote")
         End If
@@ -544,22 +531,15 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddCellFootnote()
-        If ucrChkAddFootnote.Checked Then
-            If Not ucrInputCellFootnote.IsEmpty Then
-                clsPipeOperator.AddParameter("cellfootnote", clsRFunctionParameter:=clsFootnoteCellFunction, iPosition:=3)
-            Else
-                clsPipeOperator.RemoveParameterByName("cellfootnote")
-            End If
+        If ucrChkAddFootnote.Checked AndAlso Not ucrInputCellFootnote.IsEmpty Then
+            clsPipeOperator.AddParameter("cellfootnote", clsRFunctionParameter:=clsFootnoteCellFunction, iPosition:=3)
         Else
             clsPipeOperator.RemoveParameterByName("cellfootnote")
         End If
 
-        If ucrChKAddSecondFootnote.Checked Then
-            If Not ucrInputSecondCellFootnote.IsEmpty Then
-                clsPipeOperator.AddParameter("second_cellfootnote", clsRFunctionParameter:=clsSecondFootnoteCellFunction, iPosition:=3)
-            Else
-                clsPipeOperator.RemoveParameterByName("second_cellfootnote")
-            End If
+        If ucrChKAddSecondFootnote.Checked AndAlso Not ucrInputSecondCellFootnote.IsEmpty Then
+
+            clsPipeOperator.AddParameter("second_cellfootnote", clsRFunctionParameter:=clsSecondFootnoteCellFunction, iPosition:=3)
         Else
             clsPipeOperator.RemoveParameterByName("second_cellfootnote")
         End If
@@ -609,7 +589,7 @@ Public Class sdgFormatSummaryTables
         End If
     End Sub
 
-    Private Sub InputCellFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCellFootnote.ControlValueChanged, ucrInputSecondCellFootnote.ControlValueChanged
+    Private Sub Footnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCellFootnote.ControlValueChanged, ucrInputSecondCellFootnote.ControlValueChanged
         AddRemoveFootnote()
         AddCellFootnote()
     End Sub
@@ -629,12 +609,8 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddSourceNote()
-        If ucrChkAddSourcenote.Checked Then
-            If Not ucrInputAddSourceNote.IsEmpty Then
-                clsPipeOperator.AddParameter("source_note", iPosition:=4, clsRFunctionParameter:=clsTableSourcenoteFunction)
-            Else
-                clsPipeOperator.RemoveParameterByName("source_note")
-            End If
+        If ucrChkAddSourcenote.Checked AndAlso Not ucrInputAddSourceNote.IsEmpty Then
+            clsPipeOperator.AddParameter("source_note", iPosition:=4, clsRFunctionParameter:=clsTableSourcenoteFunction)
         Else
             clsPipeOperator.RemoveParameterByName("source_note")
         End If
