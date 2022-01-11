@@ -120,6 +120,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSecondFootnote.SuspendLayout()
@@ -1242,12 +1243,21 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTableLayout.Size = New System.Drawing.Size(91, 21)
         Me.ucrInputTableLayout.TabIndex = 28
         '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(169, 455)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.TabIndex = 3
+        '
         'sdgFormatSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(625, 502)
+        Me.ClientSize = New System.Drawing.Size(616, 490)
+        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpFormatOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -1271,6 +1281,7 @@ Partial Class sdgFormatSummaryTables
         Me.tbpTable.ResumeLayout(False)
         Me.tbpTable.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1372,4 +1383,5 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputTableAlign As ucrInputComboBox
     Friend WithEvents ucrInputTableFontWeight As ucrInputComboBox
     Friend WithEvents ucrInputTableLayout As ucrInputComboBox
+    Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
 End Class
