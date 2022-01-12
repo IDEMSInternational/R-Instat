@@ -67,7 +67,6 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
 
-        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -208,6 +207,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("string", 0), iAdditionalPairNo:=3)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("string", 0), iAdditionalPairNo:=4)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("string", 0), iAdditionalPairNo:=5)
+        ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
@@ -218,7 +218,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsReplaceAllFunction, iAdditionalPairNo:=5)
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
-        ucrInputPattern.SetRCode(clsStringCollFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
@@ -290,6 +289,7 @@ Public Class dlgStringHandling
         ElseIf rdoReplaceAll.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
         End If
+
         NewColumnName()
         ChangePrefixName()
         AddRemoveParameters()
