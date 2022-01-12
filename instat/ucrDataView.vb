@@ -251,6 +251,7 @@ Public Class ucrDataView
                 tlpTableContainer.ColumnStyles(1).Width = 0
                 tlpTableContainer.ColumnStyles(2).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(2).Width = 100
+                ucrReoGrid.grdData.SheetTabWidth = 450
             Else
                 tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(1).Width = 100
