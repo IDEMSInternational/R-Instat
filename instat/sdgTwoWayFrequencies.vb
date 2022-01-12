@@ -192,6 +192,7 @@ Public Class sdgTwoWayFrequencies
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
     End Sub
+
     Private Sub InitialiseTabs()
         For i = 0 To tbpTwoWayFrequencies.TabCount - 1
             tbpTwoWayFrequencies.SelectedIndex = i
