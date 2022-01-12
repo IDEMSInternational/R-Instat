@@ -63,7 +63,7 @@ Partial Class dlgPermuteColumn
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(239, 117)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(239, 118)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 5
