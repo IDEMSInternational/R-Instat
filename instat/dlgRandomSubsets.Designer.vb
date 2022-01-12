@@ -75,7 +75,7 @@ Partial Class dlgRandomSubsets
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(252, 142)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(252, 143)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 5
@@ -113,7 +113,7 @@ Partial Class dlgRandomSubsets
         '
         Me.ucrChkSetSeed.AutoSize = True
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(252, 93)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(252, 92)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkSetSeed.TabIndex = 7
