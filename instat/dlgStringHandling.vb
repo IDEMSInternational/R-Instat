@@ -358,6 +358,14 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\S")
     End Sub
 
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub cmdBackSlashd_Click(sender As Object, e As EventArgs) Handles cmdBackSlashd.Click
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\d")
     End Sub
