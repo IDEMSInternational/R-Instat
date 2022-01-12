@@ -159,6 +159,7 @@ Public Class dlgSplitText
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+        sdgConstructRegexExpression.ucrReceiverForRegex.Clear()
     End Sub
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
