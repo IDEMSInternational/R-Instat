@@ -654,7 +654,7 @@ Public Class ucrDataView
         panelRecentMenuItems.Controls.Add(linkMenuItem)
 
         'add the label control. will be besides each other on the same Y axis
-        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag))
+        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag).Replace("\", "/"))
         lblMenuItemPath.Location = New Point(linkMenuItem.Width + 10, position)
         lblMenuItemPath.Height = 13
         lblMenuItemPath.AutoSize = True
@@ -681,7 +681,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
-        Help.ShowHelp(frmMain, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
     End Sub
 
     Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
