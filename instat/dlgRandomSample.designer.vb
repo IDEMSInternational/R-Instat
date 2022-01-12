@@ -38,6 +38,7 @@ Partial Class dlgRandomSample
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.ucrSaveRandomSample = New instat.ucrSave()
@@ -48,6 +49,9 @@ Partial Class dlgRandomSample
         Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ttRngKind = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkRngKind = New instat.ucrCheck()
+        Me.ucrInputRngKind = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSampleSize
@@ -136,7 +140,6 @@ Partial Class dlgRandomSample
         '
         'ucrDistWithParameters
         '
-        Me.ucrDistWithParameters.AutoSize = True
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
         Me.ucrDistWithParameters.Size = New System.Drawing.Size(1037, 172)
@@ -151,11 +154,32 @@ Partial Class dlgRandomSample
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'ucrChkRngKind
+        '
+        Me.ucrChkRngKind.Checked = False
+        Me.ucrChkRngKind.Location = New System.Drawing.Point(276, 77)
+        Me.ucrChkRngKind.Name = "ucrChkRngKind"
+        Me.ucrChkRngKind.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRngKind.TabIndex = 10
+        '
+        'ucrInputRngKind
+        '
+        Me.ucrInputRngKind.AddQuotesIfUnrecognised = True
+        Me.ucrInputRngKind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRngKind.GetSetSelectedIndex = -1
+        Me.ucrInputRngKind.IsReadOnly = False
+        Me.ucrInputRngKind.Location = New System.Drawing.Point(355, 73)
+        Me.ucrInputRngKind.Name = "ucrInputRngKind"
+        Me.ucrInputRngKind.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputRngKind.TabIndex = 11
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(479, 300)
+        Me.Controls.Add(Me.ucrInputRngKind)
+        Me.Controls.Add(Me.ucrChkRngKind)
         Me.Controls.Add(Me.ucrSaveRandomSample)
         Me.Controls.Add(Me.ucrNudNumberOfSamples)
         Me.Controls.Add(Me.ucrNudSeed)
@@ -187,4 +211,7 @@ Partial Class dlgRandomSample
     Friend WithEvents ucrNudSeed As ucrNud
     Friend WithEvents ucrNudNumberOfSamples As ucrNud
     Friend WithEvents ucrSaveRandomSample As ucrSave
+    Friend WithEvents ttRngKind As ToolTip
+    Friend WithEvents ucrChkRngKind As ucrCheck
+    Friend WithEvents ucrInputRngKind As ucrInputComboBox
 End Class
