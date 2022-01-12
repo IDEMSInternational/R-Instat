@@ -171,6 +171,7 @@ Partial Class dlgScript
         '
         'ucrReceiverGet
         '
+        Me.ucrReceiverGet.AutoSize = True
         Me.ucrReceiverGet.frmParent = Nothing
         Me.ucrReceiverGet.Location = New System.Drawing.Point(267, 124)
         Me.ucrReceiverGet.Margin = New System.Windows.Forms.Padding(0)
@@ -234,6 +235,7 @@ Partial Class dlgScript
         '
         'ucrPnlGetData
         '
+        Me.ucrPnlGetData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGetData.Location = New System.Drawing.Point(6, 10)
         Me.ucrPnlGetData.Name = "ucrPnlGetData"
         Me.ucrPnlGetData.Size = New System.Drawing.Size(402, 36)
@@ -292,6 +294,7 @@ Partial Class dlgScript
         '
         'ucrPnlGetObject
         '
+        Me.ucrPnlGetObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGetObject.Location = New System.Drawing.Point(19, 51)
         Me.ucrPnlGetObject.Name = "ucrPnlGetObject"
         Me.ucrPnlGetObject.Size = New System.Drawing.Size(402, 36)
@@ -299,17 +302,19 @@ Partial Class dlgScript
         '
         'ucrDataFrameGet
         '
+        Me.ucrDataFrameGet.AutoSize = True
         Me.ucrDataFrameGet.bDropUnusedFilterLevels = False
         Me.ucrDataFrameGet.bUseCurrentFilter = True
         Me.ucrDataFrameGet.Location = New System.Drawing.Point(19, 51)
         Me.ucrDataFrameGet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameGet.Name = "ucrDataFrameGet"
-        Me.ucrDataFrameGet.Size = New System.Drawing.Size(148, 50)
+        Me.ucrDataFrameGet.Size = New System.Drawing.Size(151, 50)
         Me.ucrDataFrameGet.TabIndex = 31
         '
         'ucrComboGetPackage
         '
         Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
+        Me.ucrComboGetPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrComboGetPackage.GetSetSelectedIndex = -1
         Me.ucrComboGetPackage.IsReadOnly = False
         Me.ucrComboGetPackage.Location = New System.Drawing.Point(19, 68)
@@ -328,13 +333,14 @@ Partial Class dlgScript
         '
         'ucrSelectorGet
         '
+        Me.ucrSelectorGet.AutoSize = True
         Me.ucrSelectorGet.bDropUnusedFilterLevels = False
         Me.ucrSelectorGet.bShowHiddenColumns = False
         Me.ucrSelectorGet.bUseCurrentFilter = True
         Me.ucrSelectorGet.Location = New System.Drawing.Point(19, 55)
         Me.ucrSelectorGet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGet.Name = "ucrSelectorGet"
-        Me.ucrSelectorGet.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorGet.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorGet.TabIndex = 34
         '
         'btnGetPackage
@@ -470,6 +476,7 @@ Partial Class dlgScript
         '
         'ucrSaveModel
         '
+        Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveModel.Location = New System.Drawing.Point(13, 169)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
@@ -478,6 +485,7 @@ Partial Class dlgScript
         '
         'ucrSaveTable
         '
+        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveTable.Location = New System.Drawing.Point(12, 135)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
@@ -486,6 +494,7 @@ Partial Class dlgScript
         '
         'ucrSaveColumn
         '
+        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveColumn.Location = New System.Drawing.Point(12, 102)
         Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
@@ -494,17 +503,19 @@ Partial Class dlgScript
         '
         'ucrDataFrameSave
         '
+        Me.ucrDataFrameSave.AutoSize = True
         Me.ucrDataFrameSave.bDropUnusedFilterLevels = False
         Me.ucrDataFrameSave.bUseCurrentFilter = True
         Me.ucrDataFrameSave.Location = New System.Drawing.Point(13, 49)
         Me.ucrDataFrameSave.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSave.Name = "ucrDataFrameSave"
-        Me.ucrDataFrameSave.Size = New System.Drawing.Size(148, 50)
+        Me.ucrDataFrameSave.Size = New System.Drawing.Size(151, 50)
         Me.ucrDataFrameSave.TabIndex = 29
         '
         'ucrInputSaveDataFrame
         '
         Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveDataFrame.AutoSize = True
         Me.ucrInputSaveDataFrame.IsMultiline = False
         Me.ucrInputSaveDataFrame.IsReadOnly = False
         Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(127, 59)
@@ -514,6 +525,7 @@ Partial Class dlgScript
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 101)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
@@ -522,6 +534,7 @@ Partial Class dlgScript
         '
         'ucrPnlSaveData
         '
+        Me.ucrPnlSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSaveData.Location = New System.Drawing.Point(13, 12)
         Me.ucrPnlSaveData.Name = "ucrPnlSaveData"
         Me.ucrPnlSaveData.Size = New System.Drawing.Size(402, 36)
@@ -578,16 +591,19 @@ Partial Class dlgScript
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(287, 464)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(416, 57)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 16
         '
         'dlgScript
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1042, 529)
         Me.Controls.Add(Me.txtScript)
         Me.Controls.Add(Me.Label1)

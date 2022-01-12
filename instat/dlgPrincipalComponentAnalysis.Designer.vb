@@ -38,7 +38,6 @@ Partial Class dlgPrincipalComponentAnalysis
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgPrincipalComponentAnalysis))
         Me.lblExplanatoryVariables = New System.Windows.Forms.Label()
         Me.cmdPCAOptions = New System.Windows.Forms.Button()
         Me.lblComponents = New System.Windows.Forms.Label()
@@ -52,70 +51,105 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'lblExplanatoryVariables
         '
-        resources.ApplyResources(Me.lblExplanatoryVariables, "lblExplanatoryVariables")
+        Me.lblExplanatoryVariables.AutoSize = True
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(254, 45)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
+        Me.lblExplanatoryVariables.Size = New System.Drawing.Size(111, 13)
+        Me.lblExplanatoryVariables.TabIndex = 1
         Me.lblExplanatoryVariables.Tag = "Explanatory_Variables"
+        Me.lblExplanatoryVariables.Text = "Explanatory Variables:"
         '
         'cmdPCAOptions
         '
-        resources.ApplyResources(Me.cmdPCAOptions, "cmdPCAOptions")
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(309, 254)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
+        Me.cmdPCAOptions.Size = New System.Drawing.Size(96, 23)
+        Me.cmdPCAOptions.TabIndex = 7
         Me.cmdPCAOptions.Tag = "Options"
+        Me.cmdPCAOptions.Text = "Options"
         Me.cmdPCAOptions.UseVisualStyleBackColor = True
         '
         'lblComponents
         '
-        resources.ApplyResources(Me.lblComponents, "lblComponents")
+        Me.lblComponents.AutoSize = True
+        Me.lblComponents.Location = New System.Drawing.Point(10, 204)
         Me.lblComponents.Name = "lblComponents"
+        Me.lblComponents.Size = New System.Drawing.Size(121, 13)
+        Me.lblComponents.TabIndex = 3
         Me.lblComponents.Tag = "Number_of_Components"
+        Me.lblComponents.Text = "Number of Components:"
         '
         'ucrChkScaleData
         '
+        Me.ucrChkScaleData.AutoSize = True
         Me.ucrChkScaleData.Checked = False
-        resources.ApplyResources(Me.ucrChkScaleData, "ucrChkScaleData")
+        Me.ucrChkScaleData.Location = New System.Drawing.Point(10, 228)
         Me.ucrChkScaleData.Name = "ucrChkScaleData"
+        Me.ucrChkScaleData.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkScaleData.TabIndex = 5
         '
         'ucrSaveResult
         '
-        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
+        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 256)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(292, 24)
+        Me.ucrSaveResult.TabIndex = 6
         '
         'ucrNudNumberOfComp
         '
+        Me.ucrNudNumberOfComp.AutoSize = True
         Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberOfComp, "ucrNudNumberOfComp")
+        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(137, 202)
         Me.ucrNudNumberOfComp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfComp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Name = "ucrNudNumberOfComp"
+        Me.ucrNudNumberOfComp.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfComp.TabIndex = 4
         Me.ucrNudNumberOfComp.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverMultiplePCA
         '
+        Me.ucrReceiverMultiplePCA.AutoSize = True
         Me.ucrReceiverMultiplePCA.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultiplePCA, "ucrReceiverMultiplePCA")
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(254, 60)
+        Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
+        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultiplePCA.strNcFilePath = ""
+        Me.ucrReceiverMultiplePCA.TabIndex = 2
         Me.ucrReceiverMultiplePCA.ucrSelector = Nothing
         '
         'ucrSelectorPCA
         '
+        Me.ucrSelectorPCA.AutoSize = True
         Me.ucrSelectorPCA.bDropUnusedFilterLevels = False
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorPCA, "ucrSelectorPCA")
+        Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
+        Me.ucrSelectorPCA.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorPCA.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgPrincipalComponentAnalysis
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(417, 341)
         Me.Controls.Add(Me.ucrChkScaleData)
         Me.Controls.Add(Me.ucrNudNumberOfComp)
         Me.Controls.Add(Me.lblComponents)
@@ -129,7 +163,9 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPrincipalComponentAnalysis"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Principal_Component_Analysis"
+        Me.Text = "Principal Component Analysis"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

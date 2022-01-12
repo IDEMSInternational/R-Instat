@@ -27,10 +27,12 @@ Partial Class dlgCircular
         Me.rdoHours = New System.Windows.Forms.RadioButton()
         Me.rdoDegrees = New System.Windows.Forms.RadioButton()
         Me.rdoRadians = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlUnits = New instat.UcrPanel()
         Me.rdo2Pi = New System.Windows.Forms.RadioButton()
         Me.rdoPi = New System.Windows.Forms.RadioButton()
         Me.rdoAsis = New System.Windows.Forms.RadioButton()
         Me.grpModulo = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlModulo = New instat.UcrPanel()
         Me.grpTemplate = New System.Windows.Forms.GroupBox()
         Me.rdoClock24 = New System.Windows.Forms.RadioButton()
         Me.rdoClock12 = New System.Windows.Forms.RadioButton()
@@ -38,8 +40,6 @@ Partial Class dlgCircular
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlTemplate = New instat.UcrPanel()
         Me.ucrSaveCircularColumn = New instat.ucrSave()
-        Me.ucrPnlModulo = New instat.UcrPanel()
-        Me.ucrPnlUnits = New instat.UcrPanel()
         Me.ucrReceiverCircular = New instat.ucrReceiverSingle()
         Me.ucrSelectorCircular = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -107,6 +107,15 @@ Partial Class dlgCircular
         Me.rdoRadians.Text = "radians"
         Me.rdoRadians.UseVisualStyleBackColor = True
         '
+        'ucrPnlUnits
+        '
+        Me.ucrPnlUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlUnits.Name = "ucrPnlUnits"
+        Me.ucrPnlUnits.Size = New System.Drawing.Size(93, 67)
+        Me.ucrPnlUnits.TabIndex = 0
+        '
         'rdo2Pi
         '
         Me.rdo2Pi.AutoSize = True
@@ -155,6 +164,15 @@ Partial Class dlgCircular
         Me.grpModulo.TabIndex = 5
         Me.grpModulo.TabStop = False
         Me.grpModulo.Text = "Modulo"
+        '
+        'ucrPnlModulo
+        '
+        Me.ucrPnlModulo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
+        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlModulo.Name = "ucrPnlModulo"
+        Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
+        Me.ucrPnlModulo.TabIndex = 3
         '
         'grpTemplate
         '
@@ -220,6 +238,7 @@ Partial Class dlgCircular
         '
         'ucrPnlTemplate
         '
+        Me.ucrPnlTemplate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlTemplate.Location = New System.Drawing.Point(10, 15)
         Me.ucrPnlTemplate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlTemplate.Name = "ucrPnlTemplate"
@@ -228,30 +247,16 @@ Partial Class dlgCircular
         '
         'ucrSaveCircularColumn
         '
+        Me.ucrSaveCircularColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveCircularColumn.Location = New System.Drawing.Point(10, 314)
         Me.ucrSaveCircularColumn.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveCircularColumn.Name = "ucrSaveCircularColumn"
         Me.ucrSaveCircularColumn.Size = New System.Drawing.Size(255, 22)
         Me.ucrSaveCircularColumn.TabIndex = 6
         '
-        'ucrPnlModulo
-        '
-        Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
-        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlModulo.Name = "ucrPnlModulo"
-        Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
-        Me.ucrPnlModulo.TabIndex = 3
-        '
-        'ucrPnlUnits
-        '
-        Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlUnits.Name = "ucrPnlUnits"
-        Me.ucrPnlUnits.Size = New System.Drawing.Size(93, 67)
-        Me.ucrPnlUnits.TabIndex = 0
-        '
         'ucrReceiverCircular
         '
+        Me.ucrReceiverCircular.AutoSize = True
         Me.ucrReceiverCircular.frmParent = Me
         Me.ucrReceiverCircular.Location = New System.Drawing.Point(262, 66)
         Me.ucrReceiverCircular.Margin = New System.Windows.Forms.Padding(0)
@@ -264,27 +269,31 @@ Partial Class dlgCircular
         '
         'ucrSelectorCircular
         '
+        Me.ucrSelectorCircular.AutoSize = True
         Me.ucrSelectorCircular.bDropUnusedFilterLevels = False
         Me.ucrSelectorCircular.bShowHiddenColumns = False
         Me.ucrSelectorCircular.bUseCurrentFilter = True
         Me.ucrSelectorCircular.Location = New System.Drawing.Point(10, 27)
         Me.ucrSelectorCircular.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCircular.Name = "ucrSelectorCircular"
-        Me.ucrSelectorCircular.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorCircular.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCircular.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 341)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCircular
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 399)
         Me.Controls.Add(Me.grpTemplate)
         Me.Controls.Add(Me.ucrSaveCircularColumn)

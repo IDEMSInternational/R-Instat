@@ -38,7 +38,6 @@ Partial Class ucrReceiverMetadataProperty
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrReceiverMetadataProperty))
         Me.ucrInputTextValue = New instat.ucrInputTextBox()
         Me.ucrInputCboParamValue = New instat.ucrInputComboBox()
         Me.ucrColor = New instat.ucrColors()
@@ -48,45 +47,65 @@ Partial Class ucrReceiverMetadataProperty
         'ucrInputTextValue
         '
         Me.ucrInputTextValue.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputTextValue, "ucrInputTextValue")
+        Me.ucrInputTextValue.AutoSize = True
+        Me.ucrInputTextValue.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrInputTextValue.IsMultiline = False
         Me.ucrInputTextValue.IsReadOnly = False
+        Me.ucrInputTextValue.Location = New System.Drawing.Point(0, 0)
         Me.ucrInputTextValue.Name = "ucrInputTextValue"
+        Me.ucrInputTextValue.Size = New System.Drawing.Size(140, 22)
+        Me.ucrInputTextValue.TabIndex = 11
         '
         'ucrInputCboParamValue
         '
         Me.ucrInputCboParamValue.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputCboParamValue, "ucrInputCboParamValue")
+        Me.ucrInputCboParamValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCboParamValue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrInputCboParamValue.GetSetSelectedIndex = -1
         Me.ucrInputCboParamValue.IsReadOnly = False
+        Me.ucrInputCboParamValue.Location = New System.Drawing.Point(0, 0)
         Me.ucrInputCboParamValue.Name = "ucrInputCboParamValue"
+        Me.ucrInputCboParamValue.Size = New System.Drawing.Size(140, 22)
+        Me.ucrInputCboParamValue.TabIndex = 10
         '
         'ucrColor
         '
         Me.ucrColor.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrColor, "ucrColor")
+        Me.ucrColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrColor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColor.GetSetSelectedIndex = -1
         Me.ucrColor.IsReadOnly = False
+        Me.ucrColor.Location = New System.Drawing.Point(0, 0)
         Me.ucrColor.Name = "ucrColor"
+        Me.ucrColor.Size = New System.Drawing.Size(140, 22)
+        Me.ucrColor.TabIndex = 9
         '
         'ucrNudParamValue
         '
+        Me.ucrNudParamValue.AutoSize = True
         Me.ucrNudParamValue.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudParamValue, "ucrNudParamValue")
+        Me.ucrNudParamValue.Dock = System.Windows.Forms.DockStyle.Left
         Me.ucrNudParamValue.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudParamValue.Location = New System.Drawing.Point(0, 0)
         Me.ucrNudParamValue.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudParamValue.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudParamValue.Name = "ucrNudParamValue"
+        Me.ucrNudParamValue.Size = New System.Drawing.Size(0, 22)
+        Me.ucrNudParamValue.TabIndex = 12
         Me.ucrNudParamValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverMetadataProperty
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.ucrNudParamValue)
         Me.Controls.Add(Me.ucrInputTextValue)
         Me.Controls.Add(Me.ucrInputCboParamValue)
         Me.Controls.Add(Me.ucrColor)
         Me.Name = "ucrReceiverMetadataProperty"
+        Me.Size = New System.Drawing.Size(140, 22)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrColor As ucrColors

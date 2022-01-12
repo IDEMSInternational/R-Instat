@@ -334,6 +334,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputSuccess
         '
         Me.ucrInputSuccess.AddQuotesIfUnrecognised = True
+        Me.ucrInputSuccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSuccess.GetSetSelectedIndex = -1
         Me.ucrInputSuccess.IsReadOnly = False
         Me.ucrInputSuccess.Location = New System.Drawing.Point(350, 225)
@@ -346,6 +347,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputConfidenceInterval
         '
         Me.ucrInputConfidenceInterval.AddQuotesIfUnrecognised = True
+        Me.ucrInputConfidenceInterval.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputConfidenceInterval.GetSetSelectedIndex = -1
         Me.ucrInputConfidenceInterval.IsReadOnly = False
         Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(350, 140)
@@ -357,6 +359,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboQMethod
         '
         Me.ucrInputComboQMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboQMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboQMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboQMethod.IsReadOnly = False
         Me.ucrInputComboQMethod.Location = New System.Drawing.Point(350, 225)
@@ -368,6 +371,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputTextM
         '
         Me.ucrInputTextM.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextM.AutoSize = True
         Me.ucrInputTextM.IsMultiline = False
         Me.ucrInputTextM.IsReadOnly = False
         Me.ucrInputTextM.Location = New System.Drawing.Point(350, 166)
@@ -378,6 +382,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputNulHypothesis
         '
         Me.ucrInputNulHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputNulHypothesis.AutoSize = True
         Me.ucrInputNulHypothesis.IsMultiline = False
         Me.ucrInputNulHypothesis.IsReadOnly = False
         Me.ucrInputNulHypothesis.Location = New System.Drawing.Point(350, 166)
@@ -388,6 +393,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputTxtHypothesis
         '
         Me.ucrInputTxtHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtHypothesis.AutoSize = True
         Me.ucrInputTxtHypothesis.IsMultiline = False
         Me.ucrInputTxtHypothesis.IsReadOnly = False
         Me.ucrInputTxtHypothesis.Location = New System.Drawing.Point(350, 166)
@@ -397,6 +403,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrNudQuantile
         '
+        Me.ucrNudQuantile.AutoSize = True
         Me.ucrNudQuantile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudQuantile.Location = New System.Drawing.Point(350, 195)
@@ -410,6 +417,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboConfidenceLevel
         '
         Me.ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboConfidenceLevel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboConfidenceLevel.GetSetSelectedIndex = -1
         Me.ucrInputComboConfidenceLevel.IsReadOnly = False
         Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(351, 140)
@@ -421,6 +429,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputTxtSd
         '
         Me.ucrInputTxtSd.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtSd.AutoSize = True
         Me.ucrInputTxtSd.IsMultiline = False
         Me.ucrInputTxtSd.IsReadOnly = False
         Me.ucrInputTxtSd.Location = New System.Drawing.Point(350, 195)
@@ -431,6 +440,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboQuantilCI
         '
         Me.ucrInputComboQuantilCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboQuantilCI.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboQuantilCI.GetSetSelectedIndex = -1
         Me.ucrInputComboQuantilCI.IsReadOnly = False
         Me.ucrInputComboQuantilCI.Location = New System.Drawing.Point(350, 166)
@@ -442,6 +452,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboMedianCI
         '
         Me.ucrInputComboMedianCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMedianCI.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboMedianCI.GetSetSelectedIndex = -1
         Me.ucrInputComboMedianCI.IsReadOnly = False
         Me.ucrInputComboMedianCI.Location = New System.Drawing.Point(350, 166)
@@ -453,6 +464,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboVarianceCI
         '
         Me.ucrInputComboVarianceCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarianceCI.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboVarianceCI.GetSetSelectedIndex = -1
         Me.ucrInputComboVarianceCI.IsReadOnly = False
         Me.ucrInputComboVarianceCI.Location = New System.Drawing.Point(350, 166)
@@ -464,6 +476,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboMethod
         '
         Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboMethod.IsReadOnly = False
         Me.ucrInputComboMethod.Location = New System.Drawing.Point(350, 195)
@@ -474,6 +487,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputCIMethods
         '
         Me.ucrInputCIMethods.AddQuotesIfUnrecognised = True
+        Me.ucrInputCIMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCIMethods.GetSetSelectedIndex = -1
         Me.ucrInputCIMethods.IsReadOnly = False
         Me.ucrInputCIMethods.Location = New System.Drawing.Point(350, 195)
@@ -484,6 +498,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputMeanCIMethod
         '
         Me.ucrInputMeanCIMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanCIMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMeanCIMethod.GetSetSelectedIndex = -1
         Me.ucrInputMeanCIMethod.IsReadOnly = False
         Me.ucrInputMeanCIMethod.Location = New System.Drawing.Point(350, 166)
@@ -495,6 +510,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputNullHypothesis
         '
         Me.ucrInputNullHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputNullHypothesis.AutoSize = True
         Me.ucrInputNullHypothesis.IsMultiline = False
         Me.ucrInputNullHypothesis.IsReadOnly = False
         Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(351, 166)
@@ -506,6 +522,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboEstimate
         '
         Me.ucrInputComboEstimate.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboEstimate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboEstimate.GetSetSelectedIndex = -1
         Me.ucrInputComboEstimate.IsReadOnly = False
         Me.ucrInputComboEstimate.Location = New System.Drawing.Point(128, 252)
@@ -517,6 +534,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboTests
         '
         Me.ucrInputComboTests.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTests.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboTests.GetSetSelectedIndex = -1
         Me.ucrInputComboTests.IsReadOnly = False
         Me.ucrInputComboTests.Location = New System.Drawing.Point(128, 252)
@@ -527,24 +545,27 @@ Partial Class dlgOneVarFitModel
         '
         'ucrChkOmitMissing
         '
+        Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 289)
         Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(277, 20)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(277, 23)
         Me.ucrChkOmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate
         '
+        Me.ucrChkConvertVariate.AutoSize = True
         Me.ucrChkConvertVariate.Checked = False
         Me.ucrChkConvertVariate.Location = New System.Drawing.Point(235, 110)
         Me.ucrChkConvertVariate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
-        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(187, 20)
+        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(187, 23)
         Me.ucrChkConvertVariate.TabIndex = 42
         '
         'ucrPnlGeneralExactCase
         '
+        Me.ucrPnlGeneralExactCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(34, 7)
         Me.ucrPnlGeneralExactCase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
@@ -553,6 +574,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrSaveModel
         '
+        Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 323)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
@@ -561,6 +583,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrDistributionChoice
         '
+        Me.ucrDistributionChoice.AutoSize = True
         Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 249)
         Me.ucrDistributionChoice.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
@@ -569,6 +592,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrReceiverVariable
         '
+        Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
         Me.ucrReceiverVariable.Location = New System.Drawing.Point(235, 82)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
@@ -581,27 +605,31 @@ Partial Class dlgOneVarFitModel
         '
         'ucrSelectorOneVarFitMod
         '
+        Me.ucrSelectorOneVarFitMod.AutoSize = True
         Me.ucrSelectorOneVarFitMod.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarFitMod.bShowHiddenColumns = False
         Me.ucrSelectorOneVarFitMod.bUseCurrentFilter = True
         Me.ucrSelectorOneVarFitMod.Location = New System.Drawing.Point(10, 46)
         Me.ucrSelectorOneVarFitMod.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneVarFitMod.Name = "ucrSelectorOneVarFitMod"
-        Me.ucrSelectorOneVarFitMod.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneVarFitMod.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorOneVarFitMod.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 353)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgOneVarFitModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 420)
         Me.Controls.Add(Me.ucrInputSuccess)
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
