@@ -551,7 +551,7 @@ Partial Class dlgStringHandling
         'ucrSaveStringHandling
         '
         Me.ucrSaveStringHandling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 326)
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 327)
         Me.ucrSaveStringHandling.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(366, 22)
@@ -630,7 +630,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 352)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 353)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 20
@@ -649,7 +649,7 @@ Partial Class dlgStringHandling
         Me.ucrInputBoundary.AutoSize = True
         Me.ucrInputBoundary.IsMultiline = False
         Me.ucrInputBoundary.IsReadOnly = False
-        Me.ucrInputBoundary.Location = New System.Drawing.Point(172, 266)
+        Me.ucrInputBoundary.Location = New System.Drawing.Point(172, 267)
         Me.ucrInputBoundary.Name = "ucrInputBoundary"
         Me.ucrInputBoundary.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBoundary.TabIndex = 37
@@ -658,7 +658,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrChkBoundary.AutoSize = True
         Me.ucrChkBoundary.Checked = False
-        Me.ucrChkBoundary.Location = New System.Drawing.Point(10, 267)
+        Me.ucrChkBoundary.Location = New System.Drawing.Point(10, 268)
         Me.ucrChkBoundary.Name = "ucrChkBoundary"
         Me.ucrChkBoundary.Size = New System.Drawing.Size(140, 23)
         Me.ucrChkBoundary.TabIndex = 36
