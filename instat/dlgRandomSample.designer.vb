@@ -139,7 +139,7 @@ Partial Class dlgRandomSample
         Me.ucrDistWithParameters.AutoSize = True
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
-        Me.ucrDistWithParameters.Size = New System.Drawing.Size(1037, 156)
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(1037, 172)
         Me.ucrDistWithParameters.TabIndex = 1
         '
         'ucrBase
@@ -155,7 +155,6 @@ Partial Class dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(479, 300)
         Me.Controls.Add(Me.ucrSaveRandomSample)
         Me.Controls.Add(Me.ucrNudNumberOfSamples)
