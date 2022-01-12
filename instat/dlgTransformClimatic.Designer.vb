@@ -59,7 +59,6 @@ Partial Class dlgTransformClimatic
         Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
         Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
         Me.ucrPnlEvap = New instat.UcrPanel()
-        Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
@@ -75,14 +74,17 @@ Partial Class dlgTransformClimatic
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
+        Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.lblTMin = New System.Windows.Forms.Label()
         Me.grpDegree = New System.Windows.Forms.GroupBox()
+        Me.ucrNudMgdd = New instat.ucrNud()
+        Me.lblBaselineMgdd = New System.Windows.Forms.Label()
         Me.ucrInputLimit = New instat.ucrInputTextBox()
         Me.lblLimit = New System.Windows.Forms.Label()
         Me.rdoModifiedGDD = New System.Windows.Forms.RadioButton()
         Me.lblBaselineGDD = New System.Windows.Forms.Label()
         Me.rdoGrowingDegreeDays = New System.Windows.Forms.RadioButton()
-        Me.lblBaselneHDD = New System.Windows.Forms.Label()
+        Me.lblBaselineHDD = New System.Windows.Forms.Label()
         Me.rdoHeatingDegreeDays = New System.Windows.Forms.RadioButton()
         Me.ucrNudGDD = New instat.ucrNud()
         Me.rdoTMean = New System.Windows.Forms.RadioButton()
@@ -100,12 +102,12 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkUseMaxMin = New instat.ucrCheck()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverTMin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
         Me.ucrReceiverTMax = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrChkUseMaxMin = New instat.ucrCheck()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -199,7 +201,6 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.rdoEvapValue)
         Me.grpTransform.Controls.Add(Me.ucrPnlEvap)
-        Me.grpTransform.Controls.Add(Me.ucrInputCumulative)
         Me.grpTransform.Controls.Add(Me.ucrInputCircularPosition)
         Me.grpTransform.Controls.Add(Me.lblPosition)
         Me.grpTransform.Controls.Add(Me.ucrInputPosition)
@@ -218,6 +219,7 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.ucrInputSum)
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
+        Me.grpTransform.Controls.Add(Me.ucrInputCumulative)
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
@@ -277,14 +279,6 @@ Partial Class dlgTransformClimatic
         '
         resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
         Me.ucrPnlEvap.Name = "ucrPnlEvap"
-        '
-        'ucrInputCumulative
-        '
-        Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
-        Me.ucrInputCumulative.GetSetSelectedIndex = -1
-        Me.ucrInputCumulative.IsReadOnly = False
-        Me.ucrInputCumulative.Name = "ucrInputCumulative"
         '
         'ucrInputCircularPosition
         '
@@ -401,6 +395,14 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
         Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrInputCumulative
+        '
+        Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
+        Me.ucrInputCumulative.GetSetSelectedIndex = -1
+        Me.ucrInputCumulative.IsReadOnly = False
+        Me.ucrInputCumulative.Name = "ucrInputCumulative"
+        '
         'lblTMin
         '
         resources.ApplyResources(Me.lblTMin, "lblTMin")
@@ -408,12 +410,14 @@ Partial Class dlgTransformClimatic
         '
         'grpDegree
         '
+        Me.grpDegree.Controls.Add(Me.ucrNudMgdd)
+        Me.grpDegree.Controls.Add(Me.lblBaselineMgdd)
         Me.grpDegree.Controls.Add(Me.ucrInputLimit)
         Me.grpDegree.Controls.Add(Me.lblLimit)
         Me.grpDegree.Controls.Add(Me.rdoModifiedGDD)
         Me.grpDegree.Controls.Add(Me.lblBaselineGDD)
         Me.grpDegree.Controls.Add(Me.rdoGrowingDegreeDays)
-        Me.grpDegree.Controls.Add(Me.lblBaselneHDD)
+        Me.grpDegree.Controls.Add(Me.lblBaselineHDD)
         Me.grpDegree.Controls.Add(Me.rdoHeatingDegreeDays)
         Me.grpDegree.Controls.Add(Me.ucrNudGDD)
         Me.grpDegree.Controls.Add(Me.rdoTMean)
@@ -423,6 +427,22 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpDegree, "grpDegree")
         Me.grpDegree.Name = "grpDegree"
         Me.grpDegree.TabStop = False
+        '
+        'ucrNudMgdd
+        '
+        resources.ApplyResources(Me.ucrNudMgdd, "ucrNudMgdd")
+        Me.ucrNudMgdd.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMgdd.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMgdd.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMgdd.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMgdd.Name = "ucrNudMgdd"
+        Me.ucrNudMgdd.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblBaselineMgdd
+        '
+        resources.ApplyResources(Me.lblBaselineMgdd, "lblBaselineMgdd")
+        Me.lblBaselineMgdd.Name = "lblBaselineMgdd"
+        Me.lblBaselineMgdd.Tag = "Over"
         '
         'ucrInputLimit
         '
@@ -458,11 +478,11 @@ Partial Class dlgTransformClimatic
         Me.rdoGrowingDegreeDays.TabStop = True
         Me.rdoGrowingDegreeDays.UseVisualStyleBackColor = True
         '
-        'lblBaselneHDD
+        'lblBaselineHDD
         '
-        resources.ApplyResources(Me.lblBaselneHDD, "lblBaselneHDD")
-        Me.lblBaselneHDD.Name = "lblBaselneHDD"
-        Me.lblBaselneHDD.Tag = "Over"
+        resources.ApplyResources(Me.lblBaselineHDD, "lblBaselineHDD")
+        Me.lblBaselineHDD.Name = "lblBaselineHDD"
+        Me.lblBaselineHDD.Tag = "Over"
         '
         'rdoHeatingDegreeDays
         '
@@ -591,21 +611,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkUseMaxMin
-        '
-        resources.ApplyResources(Me.ucrChkUseMaxMin, "ucrChkUseMaxMin")
-        Me.ucrChkUseMaxMin.Checked = True
-        Me.ucrChkUseMaxMin.Name = "ucrChkUseMaxMin"
-        '
-        'ucrReceiverYear
-        '
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
-        Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Name = "ucrReceiverYear"
-        Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.ucrSelector = Nothing
-        '
         'ucrReceiverTMin
         '
         resources.ApplyResources(Me.ucrReceiverTMin, "ucrReceiverTMin")
@@ -614,6 +619,15 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverTMin.Selector = Nothing
         Me.ucrReceiverTMin.strNcFilePath = ""
         Me.ucrReceiverTMin.ucrSelector = Nothing
+        '
+        'ucrReceiverTMean
+        '
+        resources.ApplyResources(Me.ucrReceiverTMean, "ucrReceiverTMean")
+        Me.ucrReceiverTMean.frmParent = Me
+        Me.ucrReceiverTMean.Name = "ucrReceiverTMean"
+        Me.ucrReceiverTMean.Selector = Nothing
+        Me.ucrReceiverTMean.strNcFilePath = ""
+        Me.ucrReceiverTMean.ucrSelector = Nothing
         '
         'ucrReceiverTMax
         '
@@ -633,20 +647,25 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData.strNcFilePath = ""
         Me.ucrReceiverData.ucrSelector = Nothing
         '
-        'ucrReceiverTMean
+        'ucrReceiverYear
         '
-        resources.ApplyResources(Me.ucrReceiverTMean, "ucrReceiverTMean")
-        Me.ucrReceiverTMean.frmParent = Me
-        Me.ucrReceiverTMean.Name = "ucrReceiverTMean"
-        Me.ucrReceiverTMean.Selector = Nothing
-        Me.ucrReceiverTMean.strNcFilePath = ""
-        Me.ucrReceiverTMean.ucrSelector = Nothing
+        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrChkUseMaxMin
+        '
+        resources.ApplyResources(Me.ucrChkUseMaxMin, "ucrChkUseMaxMin")
+        Me.ucrChkUseMaxMin.Checked = True
+        Me.ucrChkUseMaxMin.Name = "ucrChkUseMaxMin"
         '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.rdoDegree)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
@@ -663,17 +682,18 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.ucrChkUseMaxMin)
-        Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverTMin)
-        Me.Controls.Add(Me.ucrReceiverTMax)
-        Me.Controls.Add(Me.lblTMax)
         Me.Controls.Add(Me.grpDegree)
-        Me.Controls.Add(Me.lblTMean)
-        Me.Controls.Add(Me.lblData)
-        Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrReceiverTMean)
         Me.Controls.Add(Me.lblTMin)
+        Me.Controls.Add(Me.lblTMax)
+        Me.Controls.Add(Me.ucrReceiverTMax)
+        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrChkUseMaxMin)
+        Me.Controls.Add(Me.lblTMean)
+        Me.Controls.Add(Me.lblData)
+        Me.Controls.Add(Me.grpTransform)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -747,11 +767,13 @@ Partial Class dlgTransformClimatic
     Friend WithEvents rdoTMean As RadioButton
     Friend WithEvents grpDegree As GroupBox
     Friend WithEvents lblBaselineGDD As Label
-    Friend WithEvents lblBaselneHDD As Label
+    Friend WithEvents lblBaselineHDD As Label
     Friend WithEvents ucrNudGDD As ucrNud
     Friend WithEvents ucrNudHDD As ucrNud
     Friend WithEvents ucrInputLimit As ucrInputTextBox
     Friend WithEvents lblLimit As Label
     Friend WithEvents ucrChkOptions As ucrCheck
     Friend WithEvents ucrInputSpellLower As ucrInputComboBox
+    Friend WithEvents ucrNudMgdd As ucrNud
+    Friend WithEvents lblBaselineMgdd As Label
 End Class
