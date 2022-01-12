@@ -68,7 +68,7 @@ Public Class ucrTry
         If bIsCommand Then
             CommandModel = "Command"
         ElseIf bIsModel Then
-            CommandModel = "model"
+            CommandModel = "Model"
         End If
     End Sub
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
