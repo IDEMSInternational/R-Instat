@@ -38,7 +38,6 @@ Partial Class ucrFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrFactor))
         Me.grdFactorData = New unvell.ReoGrid.ReoGridControl()
         Me.SuspendLayout()
         '
@@ -46,8 +45,9 @@ Partial Class ucrFactor
         '
         Me.grdFactorData.BackColor = System.Drawing.Color.White
         Me.grdFactorData.ColumnHeaderContextMenuStrip = Nothing
-        resources.ApplyResources(Me.grdFactorData, "grdFactorData")
+        Me.grdFactorData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
+        Me.grdFactorData.Location = New System.Drawing.Point(0, 0)
         Me.grdFactorData.Name = "grdFactorData"
         Me.grdFactorData.RowHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Script = Nothing
@@ -56,14 +56,17 @@ Partial Class ucrFactor
         Me.grdFactorData.SheetTabVisible = True
         Me.grdFactorData.SheetTabWidth = 60
         Me.grdFactorData.ShowScrollEndSpacing = True
+        Me.grdFactorData.Size = New System.Drawing.Size(268, 206)
+        Me.grdFactorData.TabIndex = 32
         '
         'ucrFactor
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Controls.Add(Me.grdFactorData)
         Me.Name = "ucrFactor"
+        Me.Size = New System.Drawing.Size(268, 206)
         Me.ResumeLayout(False)
 
     End Sub

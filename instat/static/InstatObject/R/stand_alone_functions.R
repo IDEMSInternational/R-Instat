@@ -613,16 +613,17 @@ multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_
   nc_list <- list()
   
   n_files <- length(filepaths)
-  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
   for(i in seq_along(filepaths)) {
     nc <- ncdf4::nc_open(filename = filepaths[i])
     dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     nc_list[[length(nc_list) + 1]] <- dat
     ncdf4::nc_close(nc)
     info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
   }
-  close(pb)
+  if (is_win) close(pb)
   names(nc_list) <- tools::file_path_sans_ext(filenames)
   merged_data <- dplyr::bind_rows(nc_list, .id = id)
   return(merged_data)

@@ -38,32 +38,39 @@ Partial Class ucrDistributions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDistributions))
         Me.lblDistributionType = New System.Windows.Forms.Label()
         Me.ucrInputDistributions = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblDistributionType
         '
-        resources.ApplyResources(Me.lblDistributionType, "lblDistributionType")
+        Me.lblDistributionType.AutoSize = True
+        Me.lblDistributionType.Location = New System.Drawing.Point(2, 7)
         Me.lblDistributionType.Name = "lblDistributionType"
+        Me.lblDistributionType.Size = New System.Drawing.Size(62, 13)
+        Me.lblDistributionType.TabIndex = 0
         Me.lblDistributionType.Tag = "distribution:"
+        Me.lblDistributionType.Text = "Distribution:"
         '
         'ucrInputDistributions
         '
         Me.ucrInputDistributions.AddQuotesIfUnrecognised = True
+        Me.ucrInputDistributions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDistributions.GetSetSelectedIndex = -1
         Me.ucrInputDistributions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDistributions, "ucrInputDistributions")
+        Me.ucrInputDistributions.Location = New System.Drawing.Point(67, 3)
         Me.ucrInputDistributions.Name = "ucrInputDistributions"
+        Me.ucrInputDistributions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDistributions.TabIndex = 1
         '
         'ucrDistributions
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.ucrInputDistributions)
         Me.Controls.Add(Me.lblDistributionType)
         Me.Name = "ucrDistributions"
+        Me.Size = New System.Drawing.Size(208, 27)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

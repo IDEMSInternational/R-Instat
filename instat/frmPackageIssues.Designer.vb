@@ -69,6 +69,7 @@ Partial Class frmPackageIssues
         'ucrInputPackageNames
         '
         Me.ucrInputPackageNames.AddQuotesIfUnrecognised = True
+        Me.ucrInputPackageNames.AutoSize = True
         Me.ucrInputPackageNames.IsMultiline = False
         Me.ucrInputPackageNames.IsReadOnly = False
         Me.ucrInputPackageNames.Location = New System.Drawing.Point(15, 42)
@@ -87,8 +88,8 @@ Partial Class frmPackageIssues
         '
         'frmPackageIssues
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(443, 437)
         Me.Controls.Add(Me.cmdCloseRInstat)
         Me.Controls.Add(Me.cmdClose)

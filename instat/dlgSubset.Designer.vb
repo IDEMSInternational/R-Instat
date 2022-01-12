@@ -49,24 +49,27 @@ Partial Class dlgSubset
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(40, 247)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 5
         '
         'ucrDataFrameAddRemove
         '
+        Me.ucrDataFrameAddRemove.AutoSize = True
         Me.ucrDataFrameAddRemove.bDropUnusedFilterLevels = False
         Me.ucrDataFrameAddRemove.bShowHiddenColumns = False
         Me.ucrDataFrameAddRemove.bUseCurrentFilter = True
         Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(33, 55)
         Me.ucrDataFrameAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
-        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(210, 180)
+        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(213, 183)
         Me.ucrDataFrameAddRemove.TabIndex = 4
         '
         'ucrReceiverSubset
         '
+        Me.ucrReceiverSubset.AutoSize = True
         Me.ucrReceiverSubset.frmParent = Me
         Me.ucrReceiverSubset.Location = New System.Drawing.Point(294, 66)
         Me.ucrReceiverSubset.Margin = New System.Windows.Forms.Padding(0)
@@ -103,8 +106,8 @@ Partial Class dlgSubset
         '
         'dlgSubset
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 334)
         Me.Controls.Add(Me.cboDrop)
