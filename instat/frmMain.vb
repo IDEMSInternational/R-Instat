@@ -1578,7 +1578,7 @@ Public Class frmMain
 
     Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
         If Not bDataSaved Then
-            If DialogResult.No = MsgBox("Are you sure you want to close you data?" &
+            If ucrDataViewer.GetWorkSheetCount() = 0 OrElse DialogResult.No = MsgBox("Are you sure you want to close your data?" &
                                          Environment.NewLine & "Any unsaved changes will be lost.",
                                          MessageBoxButtons.YesNo, "Close Data") Then
                 Exit Sub
