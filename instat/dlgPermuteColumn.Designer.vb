@@ -47,6 +47,7 @@ Partial Class dlgPermuteColumn
         Me.ucrReceiverPermuteRows = New instat.ucrReceiverSingle()
         Me.ucrPermuteRowsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkWithReplacement = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -147,12 +148,22 @@ Partial Class dlgPermuteColumn
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
+        'ucrChkWithReplacement
+        '
+        Me.ucrChkWithReplacement.AutoSize = True
+        Me.ucrChkWithReplacement.Checked = False
+        Me.ucrChkWithReplacement.Location = New System.Drawing.Point(242, 142)
+        Me.ucrChkWithReplacement.Name = "ucrChkWithReplacement"
+        Me.ucrChkWithReplacement.Size = New System.Drawing.Size(116, 23)
+        Me.ucrChkWithReplacement.TabIndex = 9
+        '
         'dlgPermuteColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 282)
+        Me.Controls.Add(Me.ucrChkWithReplacement)
         Me.Controls.Add(Me.ucrChkSetSeed)
         Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrNudNumberofColumns)
@@ -168,7 +179,7 @@ Partial Class dlgPermuteColumn
         Me.Name = "dlgPermuteColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Permute_Column"
-        Me.Text = "Permute Column"
+        Me.Text = "Permute/Sample Rows"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -183,4 +194,5 @@ Partial Class dlgPermuteColumn
     Friend WithEvents ucrNudNumberofColumns As ucrNud
     Friend WithEvents ucrNudSetSeed As ucrNud
     Friend WithEvents ucrChkSetSeed As ucrCheck
+    Friend WithEvents ucrChkWithReplacement As ucrCheck
 End Class
