@@ -56,7 +56,7 @@ Partial Class dlgExportDataset
         Me.lblConfirm.AutoSize = True
         Me.lblConfirm.ForeColor = System.Drawing.Color.Green
         Me.lblConfirm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirm.Location = New System.Drawing.Point(85, 240)
+        Me.lblConfirm.Location = New System.Drawing.Point(85, 245)
         Me.lblConfirm.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirm.Name = "lblConfirm"
         Me.lblConfirm.Size = New System.Drawing.Size(148, 13)
@@ -119,15 +119,15 @@ Partial Class dlgExportDataset
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = resources.GetString("ucrFilePath.FilePathDialogFilter")
         Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
-        Me.ucrFilePath.Location = New System.Drawing.Point(8, 211)
+        Me.ucrFilePath.Location = New System.Drawing.Point(8, 209)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
-        Me.ucrFilePath.Size = New System.Drawing.Size(1001, 34)
+        Me.ucrFilePath.Size = New System.Drawing.Size(407, 34)
         Me.ucrFilePath.TabIndex = 5
         '
         'ucrSelectorDataFrames
@@ -169,7 +169,6 @@ Partial Class dlgExportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(441, 331)
         Me.Controls.Add(Me.chkSaveAsSingleFile)
         Me.Controls.Add(Me.cboFileType)
