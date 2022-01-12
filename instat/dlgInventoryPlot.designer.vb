@@ -203,7 +203,7 @@ Partial Class dlgInventoryPlot
         Me.grpOptions.Controls.Add(Me.ucrChkSummary)
         Me.grpOptions.Location = New System.Drawing.Point(7, 254)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(376, 60)
+        Me.grpOptions.Size = New System.Drawing.Size(376, 63)
         Me.grpOptions.TabIndex = 52
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Summary Options"
