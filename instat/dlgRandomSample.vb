@@ -60,9 +60,6 @@ Public Class dlgRandomSample
         ucrChkRngKind.SetParameter(New RParameter("checked", 0))
         ucrChkRngKind.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkRngKind.AddParameterValuesCondition(True, "checked", "TRUE")
-        ucrChkRngKind.AddParameterValuesCondition(False, "checked", "FALSE")
-
         dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
         dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
         dctRNGKind.Add("Marsaglia-Multicarry", Chr(34) & "Marsaglia-Multicarry" & Chr(34))
@@ -72,6 +69,9 @@ Public Class dlgRandomSample
         dctRNGKind.Add("L'Ecuyer-CMRG", Chr(34) & "L'Ecuyer-CMRG" & Chr(34))
         ucrInputRngKind.SetItems(dctRNGKind)
         ucrInputRngKind.SetRDefault(Chr(34) & "Mersenne-Twister" & Chr(34))
+
+        ucrChkRngKind.AddParameterValuesCondition(True, "checked", "TRUE")
+        ucrChkRngKind.AddParameterValuesCondition(False, "checked", "FALSE")
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
