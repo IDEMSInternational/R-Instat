@@ -81,7 +81,6 @@ Partial Class ucrFilePath
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblName)

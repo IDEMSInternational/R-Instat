@@ -22,7 +22,6 @@ Partial Class dlgInstallRPackage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInstallRPackage))
         Me.cmdCheck = New System.Windows.Forms.Button()
         Me.lblRPackage = New System.Windows.Forms.Label()
         Me.ucrInputMessage = New instat.ucrInputTextBox()
@@ -32,40 +31,61 @@ Partial Class dlgInstallRPackage
         '
         'cmdCheck
         '
-        resources.ApplyResources(Me.cmdCheck, "cmdCheck")
+        Me.cmdCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCheck.Location = New System.Drawing.Point(14, 81)
         Me.cmdCheck.Name = "cmdCheck"
+        Me.cmdCheck.Size = New System.Drawing.Size(75, 22)
+        Me.cmdCheck.TabIndex = 16
+        Me.cmdCheck.Text = "Check"
         Me.cmdCheck.UseVisualStyleBackColor = True
         '
         'lblRPackage
         '
-        resources.ApplyResources(Me.lblRPackage, "lblRPackage")
+        Me.lblRPackage.AutoSize = True
+        Me.lblRPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRPackage.Location = New System.Drawing.Point(11, 33)
         Me.lblRPackage.Name = "lblRPackage"
+        Me.lblRPackage.Size = New System.Drawing.Size(64, 13)
+        Me.lblRPackage.TabIndex = 1
+        Me.lblRPackage.Text = "R Package:"
         '
         'ucrInputMessage
         '
         Me.ucrInputMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputMessage.AutoSize = True
         Me.ucrInputMessage.IsMultiline = False
         Me.ucrInputMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputMessage, "ucrInputMessage")
+        Me.ucrInputMessage.Location = New System.Drawing.Point(105, 81)
         Me.ucrInputMessage.Name = "ucrInputMessage"
+        Me.ucrInputMessage.Size = New System.Drawing.Size(319, 22)
+        Me.ucrInputMessage.TabIndex = 17
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(14, 130)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
         '
         'ucrInputTextBoxRPackage
         '
         Me.ucrInputTextBoxRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextBoxRPackage.AutoSize = True
         Me.ucrInputTextBoxRPackage.IsMultiline = False
         Me.ucrInputTextBoxRPackage.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTextBoxRPackage, "ucrInputTextBoxRPackage")
+        Me.ucrInputTextBoxRPackage.Location = New System.Drawing.Point(75, 31)
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
+        Me.ucrInputTextBoxRPackage.Size = New System.Drawing.Size(197, 22)
+        Me.ucrInputTextBoxRPackage.TabIndex = 0
         '
         'dlgInstallRPackage
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(448, 194)
         Me.Controls.Add(Me.ucrInputMessage)
         Me.Controls.Add(Me.cmdCheck)
         Me.Controls.Add(Me.ucrBase)
@@ -75,6 +95,8 @@ Partial Class dlgInstallRPackage
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInstallRPackage"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "R Packages"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
