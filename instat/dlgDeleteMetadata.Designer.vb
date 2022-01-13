@@ -38,7 +38,6 @@ Partial Class dlgDeleteMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDeleteMetadata))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForDeleteMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblMetadataToDelete = New System.Windows.Forms.Label()
@@ -47,34 +46,52 @@ Partial Class dlgDeleteMetadata
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 203)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrSelectorForDeleteMetadata
         '
+        Me.ucrSelectorForDeleteMetadata.AutoSize = True
+        Me.ucrSelectorForDeleteMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectorForDeleteMetadata.bShowHiddenColumns = False
         Me.ucrSelectorForDeleteMetadata.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForDeleteMetadata, "ucrSelectorForDeleteMetadata")
+        Me.ucrSelectorForDeleteMetadata.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorForDeleteMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteMetadata.Name = "ucrSelectorForDeleteMetadata"
+        Me.ucrSelectorForDeleteMetadata.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForDeleteMetadata.TabIndex = 2
         '
         'lblMetadataToDelete
         '
-        resources.ApplyResources(Me.lblMetadataToDelete, "lblMetadataToDelete")
+        Me.lblMetadataToDelete.Location = New System.Drawing.Point(252, 23)
         Me.lblMetadataToDelete.Name = "lblMetadataToDelete"
+        Me.lblMetadataToDelete.Size = New System.Drawing.Size(100, 23)
+        Me.lblMetadataToDelete.TabIndex = 1
+        Me.lblMetadataToDelete.Text = "Metadata to Delete"
         '
         'ucrReceiverMetadataToDelete
         '
+        Me.ucrReceiverMetadataToDelete.AutoSize = True
         Me.ucrReceiverMetadataToDelete.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMetadataToDelete, "ucrReceiverMetadataToDelete")
+        Me.ucrReceiverMetadataToDelete.Location = New System.Drawing.Point(255, 46)
+        Me.ucrReceiverMetadataToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMetadataToDelete.Name = "ucrReceiverMetadataToDelete"
         Me.ucrReceiverMetadataToDelete.Selector = Nothing
+        Me.ucrReceiverMetadataToDelete.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMetadataToDelete.strNcFilePath = ""
+        Me.ucrReceiverMetadataToDelete.TabIndex = 0
         Me.ucrReceiverMetadataToDelete.ucrSelector = Nothing
         '
         'dlgDeleteMetadata
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(431, 264)
         Me.Controls.Add(Me.ucrReceiverMetadataToDelete)
         Me.Controls.Add(Me.lblMetadataToDelete)
         Me.Controls.Add(Me.ucrSelectorForDeleteMetadata)
@@ -83,7 +100,10 @@ Partial Class dlgDeleteMetadata
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteMetadata"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Delete Metadata"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

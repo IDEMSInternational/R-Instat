@@ -22,23 +22,30 @@ Partial Class sdgComment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgComment))
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtComment
         '
-        resources.ApplyResources(Me.txtComment, "txtComment")
+        Me.txtComment.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtComment.Location = New System.Drawing.Point(0, 0)
+        Me.txtComment.Multiline = True
         Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(315, 78)
+        Me.txtComment.TabIndex = 1
         '
         'sdgComment
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(315, 78)
         Me.Controls.Add(Me.txtComment)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "sdgComment"
         Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

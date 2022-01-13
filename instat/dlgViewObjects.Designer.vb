@@ -38,7 +38,6 @@ Partial Class dlgViewObjects
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewObjects))
         Me.lblSelectedObject = New System.Windows.Forms.Label()
         Me.rdoStructure = New System.Windows.Forms.RadioButton()
         Me.rdoAllContents = New System.Windows.Forms.RadioButton()
@@ -52,70 +51,110 @@ Partial Class dlgViewObjects
         '
         'lblSelectedObject
         '
-        resources.ApplyResources(Me.lblSelectedObject, "lblSelectedObject")
+        Me.lblSelectedObject.AutoSize = True
+        Me.lblSelectedObject.Location = New System.Drawing.Point(250, 45)
         Me.lblSelectedObject.Name = "lblSelectedObject"
+        Me.lblSelectedObject.Size = New System.Drawing.Size(79, 13)
+        Me.lblSelectedObject.TabIndex = 1
+        Me.lblSelectedObject.Text = "Object to View:"
         '
         'rdoStructure
         '
-        resources.ApplyResources(Me.rdoStructure, "rdoStructure")
+        Me.rdoStructure.AutoSize = True
+        Me.rdoStructure.Location = New System.Drawing.Point(256, 116)
         Me.rdoStructure.Name = "rdoStructure"
+        Me.rdoStructure.Size = New System.Drawing.Size(68, 17)
+        Me.rdoStructure.TabIndex = 5
         Me.rdoStructure.TabStop = True
         Me.rdoStructure.Tag = "Structure"
+        Me.rdoStructure.Text = "Structure"
         Me.rdoStructure.UseVisualStyleBackColor = True
         '
         'rdoAllContents
         '
-        resources.ApplyResources(Me.rdoAllContents, "rdoAllContents")
+        Me.rdoAllContents.AutoSize = True
+        Me.rdoAllContents.Location = New System.Drawing.Point(256, 136)
         Me.rdoAllContents.Name = "rdoAllContents"
+        Me.rdoAllContents.Size = New System.Drawing.Size(81, 17)
+        Me.rdoAllContents.TabIndex = 6
         Me.rdoAllContents.TabStop = True
         Me.rdoAllContents.Tag = "All_Contents"
+        Me.rdoAllContents.Text = "All Contents"
         Me.rdoAllContents.UseVisualStyleBackColor = True
         '
         'rdoComponent
         '
-        resources.ApplyResources(Me.rdoComponent, "rdoComponent")
+        Me.rdoComponent.AutoSize = True
+        Me.rdoComponent.Location = New System.Drawing.Point(256, 158)
         Me.rdoComponent.Name = "rdoComponent"
+        Me.rdoComponent.Size = New System.Drawing.Size(79, 17)
+        Me.rdoComponent.TabIndex = 7
         Me.rdoComponent.TabStop = True
         Me.rdoComponent.Tag = "Component"
+        Me.rdoComponent.Text = "Component"
         Me.rdoComponent.UseVisualStyleBackColor = True
         '
         'rdoPrint
         '
-        resources.ApplyResources(Me.rdoPrint, "rdoPrint")
+        Me.rdoPrint.AutoSize = True
+        Me.rdoPrint.Location = New System.Drawing.Point(256, 94)
         Me.rdoPrint.Name = "rdoPrint"
+        Me.rdoPrint.Size = New System.Drawing.Size(46, 17)
+        Me.rdoPrint.TabIndex = 4
         Me.rdoPrint.TabStop = True
+        Me.rdoPrint.Text = "Print"
         Me.rdoPrint.UseVisualStyleBackColor = True
         '
         'ucrReceiverSelectedObject
         '
+        Me.ucrReceiverSelectedObject.AutoSize = True
         Me.ucrReceiverSelectedObject.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSelectedObject, "ucrReceiverSelectedObject")
+        Me.ucrReceiverSelectedObject.Location = New System.Drawing.Point(250, 60)
+        Me.ucrReceiverSelectedObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedObject.Name = "ucrReceiverSelectedObject"
         Me.ucrReceiverSelectedObject.Selector = Nothing
+        Me.ucrReceiverSelectedObject.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSelectedObject.strNcFilePath = ""
+        Me.ucrReceiverSelectedObject.TabIndex = 2
         Me.ucrReceiverSelectedObject.ucrSelector = Nothing
         '
         'ucrSelectorForViewObject
         '
+        Me.ucrSelectorForViewObject.AutoSize = True
+        Me.ucrSelectorForViewObject.bDropUnusedFilterLevels = False
         Me.ucrSelectorForViewObject.bShowHiddenColumns = False
         Me.ucrSelectorForViewObject.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForViewObject, "ucrSelectorForViewObject")
+        Me.ucrSelectorForViewObject.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForViewObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForViewObject.Name = "ucrSelectorForViewObject"
+        Me.ucrSelectorForViewObject.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForViewObject.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 206)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'ucrPnlContentsToView
         '
-        resources.ApplyResources(Me.ucrPnlContentsToView, "ucrPnlContentsToView")
+        Me.ucrPnlContentsToView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlContentsToView.Location = New System.Drawing.Point(250, 90)
+        Me.ucrPnlContentsToView.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlContentsToView.Name = "ucrPnlContentsToView"
+        Me.ucrPnlContentsToView.Size = New System.Drawing.Size(120, 100)
+        Me.ucrPnlContentsToView.TabIndex = 3
         '
         'dlgViewObjects
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(416, 262)
         Me.Controls.Add(Me.rdoPrint)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
@@ -129,7 +168,9 @@ Partial Class dlgViewObjects
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewObjects"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
+        Me.Text = "View Object"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

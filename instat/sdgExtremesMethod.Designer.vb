@@ -80,13 +80,15 @@ Partial Class sdgExtremesMethod
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(39, 124)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(157, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 5
         '
         'ucrPanelExtreme
         '
+        Me.ucrPanelExtreme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPanelExtreme.Location = New System.Drawing.Point(5, 11)
         Me.ucrPanelExtreme.Name = "ucrPanelExtreme"
         Me.ucrPanelExtreme.Size = New System.Drawing.Size(213, 119)
@@ -94,8 +96,9 @@ Partial Class sdgExtremesMethod
         '
         'sdgExtremesMethod
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(230, 160)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoLmoments)

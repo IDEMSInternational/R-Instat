@@ -140,6 +140,7 @@ Partial Class dlgShowModel
         '
         'ucrSaveNewColumn
         '
+        Me.ucrSaveNewColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveNewColumn.Location = New System.Drawing.Point(9, 285)
         Me.ucrSaveNewColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
@@ -148,6 +149,7 @@ Partial Class dlgShowModel
         '
         'ucrPnlGraphValues
         '
+        Me.ucrPnlGraphValues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGraphValues.Location = New System.Drawing.Point(9, 234)
         Me.ucrPnlGraphValues.Name = "ucrPnlGraphValues"
         Me.ucrPnlGraphValues.Size = New System.Drawing.Size(214, 31)
@@ -155,6 +157,7 @@ Partial Class dlgShowModel
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 285)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
@@ -163,14 +166,16 @@ Partial Class dlgShowModel
         '
         'ucrChkEnterValues
         '
+        Me.ucrChkEnterValues.AutoSize = True
         Me.ucrChkEnterValues.Checked = False
         Me.ucrChkEnterValues.Location = New System.Drawing.Point(9, 265)
         Me.ucrChkEnterValues.Name = "ucrChkEnterValues"
-        Me.ucrChkEnterValues.Size = New System.Drawing.Size(224, 20)
+        Me.ucrChkEnterValues.Size = New System.Drawing.Size(224, 23)
         Me.ucrChkEnterValues.TabIndex = 10
         '
         'ucrPnlDistributionType
         '
+        Me.ucrPnlDistributionType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlDistributionType.Location = New System.Drawing.Point(95, 10)
         Me.ucrPnlDistributionType.Name = "ucrPnlDistributionType"
         Me.ucrPnlDistributionType.Size = New System.Drawing.Size(273, 36)
@@ -179,6 +184,7 @@ Partial Class dlgShowModel
         'ucrInputValuesOrProbabilities
         '
         Me.ucrInputValuesOrProbabilities.AddQuotesIfUnrecognised = True
+        Me.ucrInputValuesOrProbabilities.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputValuesOrProbabilities.GetSetSelectedIndex = -1
         Me.ucrInputValuesOrProbabilities.IsReadOnly = False
         Me.ucrInputValuesOrProbabilities.Location = New System.Drawing.Point(246, 74)
@@ -188,24 +194,27 @@ Partial Class dlgShowModel
         '
         'ucrDistributionAndParameters
         '
+        Me.ucrDistributionAndParameters.AutoSize = True
         Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(241, 101)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
-        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 147)
+        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(1037, 172)
         Me.ucrDistributionAndParameters.TabIndex = 6
         '
         'ucrSelectorShowModel
         '
+        Me.ucrSelectorShowModel.AutoSize = True
         Me.ucrSelectorShowModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorShowModel.bShowHiddenColumns = False
         Me.ucrSelectorShowModel.bUseCurrentFilter = True
         Me.ucrSelectorShowModel.Location = New System.Drawing.Point(9, 49)
         Me.ucrSelectorShowModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorShowModel.Name = "ucrSelectorShowModel"
-        Me.ucrSelectorShowModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorShowModel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorShowModel.TabIndex = 3
         '
         'ucrReceiverProbabilitiesOrValues
         '
+        Me.ucrReceiverProbabilitiesOrValues.AutoSize = True
         Me.ucrReceiverProbabilitiesOrValues.frmParent = Me
         Me.ucrReceiverProbabilitiesOrValues.Location = New System.Drawing.Point(246, 74)
         Me.ucrReceiverProbabilitiesOrValues.Margin = New System.Windows.Forms.Padding(0)
@@ -218,15 +227,17 @@ Partial Class dlgShowModel
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 311)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 13
         '
         'dlgShowModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(500, 372)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.rdoValues)

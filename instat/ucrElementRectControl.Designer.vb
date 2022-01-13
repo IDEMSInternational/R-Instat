@@ -38,7 +38,6 @@ Partial Class ucrElementRectControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrElementRectControl))
         Me.grpElementRect = New System.Windows.Forms.GroupBox()
         Me.ucrRectFill = New instat.ucrColors()
         Me.ucrRectColors = New instat.ucrColors()
@@ -61,75 +60,105 @@ Partial Class ucrElementRectControl
         Me.grpElementRect.Controls.Add(Me.ucrChkRectColour)
         Me.grpElementRect.Controls.Add(Me.ucrNudRectSize)
         Me.grpElementRect.Controls.Add(Me.ucrInputRectLineType)
-        resources.ApplyResources(Me.grpElementRect, "grpElementRect")
+        Me.grpElementRect.Location = New System.Drawing.Point(3, 0)
         Me.grpElementRect.Name = "grpElementRect"
+        Me.grpElementRect.Size = New System.Drawing.Size(246, 119)
+        Me.grpElementRect.TabIndex = 0
         Me.grpElementRect.TabStop = False
+        Me.grpElementRect.Text = "ElementRect"
         '
         'ucrRectFill
         '
         Me.ucrRectFill.AddQuotesIfUnrecognised = True
+        Me.ucrRectFill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrRectFill.GetSetSelectedIndex = -1
         Me.ucrRectFill.IsReadOnly = False
-        resources.ApplyResources(Me.ucrRectFill, "ucrRectFill")
+        Me.ucrRectFill.Location = New System.Drawing.Point(138, 93)
         Me.ucrRectFill.Name = "ucrRectFill"
+        Me.ucrRectFill.Size = New System.Drawing.Size(104, 21)
+        Me.ucrRectFill.TabIndex = 7
         '
         'ucrRectColors
         '
         Me.ucrRectColors.AddQuotesIfUnrecognised = True
+        Me.ucrRectColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrRectColors.GetSetSelectedIndex = -1
         Me.ucrRectColors.IsReadOnly = False
-        resources.ApplyResources(Me.ucrRectColors, "ucrRectColors")
+        Me.ucrRectColors.Location = New System.Drawing.Point(138, 68)
         Me.ucrRectColors.Name = "ucrRectColors"
+        Me.ucrRectColors.Size = New System.Drawing.Size(104, 21)
+        Me.ucrRectColors.TabIndex = 5
         '
         'ucrChkRectFill
         '
+        Me.ucrChkRectFill.AutoSize = True
         Me.ucrChkRectFill.Checked = False
-        resources.ApplyResources(Me.ucrChkRectFill, "ucrChkRectFill")
+        Me.ucrChkRectFill.Location = New System.Drawing.Point(6, 94)
         Me.ucrChkRectFill.Name = "ucrChkRectFill"
+        Me.ucrChkRectFill.Size = New System.Drawing.Size(126, 23)
+        Me.ucrChkRectFill.TabIndex = 6
         '
         'ucrChkRectSize
         '
+        Me.ucrChkRectSize.AutoSize = True
         Me.ucrChkRectSize.Checked = False
-        resources.ApplyResources(Me.ucrChkRectSize, "ucrChkRectSize")
+        Me.ucrChkRectSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkRectSize.Name = "ucrChkRectSize"
+        Me.ucrChkRectSize.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChkRectSize.TabIndex = 0
         '
         'ucrChkRectLineType
         '
+        Me.ucrChkRectLineType.AutoSize = True
         Me.ucrChkRectLineType.Checked = False
-        resources.ApplyResources(Me.ucrChkRectLineType, "ucrChkRectLineType")
+        Me.ucrChkRectLineType.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkRectLineType.Name = "ucrChkRectLineType"
+        Me.ucrChkRectLineType.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChkRectLineType.TabIndex = 2
         '
         'ucrChkRectColour
         '
+        Me.ucrChkRectColour.AutoSize = True
         Me.ucrChkRectColour.Checked = False
-        resources.ApplyResources(Me.ucrChkRectColour, "ucrChkRectColour")
+        Me.ucrChkRectColour.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkRectColour.Name = "ucrChkRectColour"
+        Me.ucrChkRectColour.Size = New System.Drawing.Size(126, 23)
+        Me.ucrChkRectColour.TabIndex = 4
         '
         'ucrNudRectSize
         '
+        Me.ucrNudRectSize.AutoSize = True
         Me.ucrNudRectSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRectSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRectSize, "ucrNudRectSize")
+        Me.ucrNudRectSize.Location = New System.Drawing.Point(138, 19)
         Me.ucrNudRectSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRectSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRectSize.Name = "ucrNudRectSize"
+        Me.ucrNudRectSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRectSize.TabIndex = 1
         Me.ucrNudRectSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputRectLineType
         '
         Me.ucrInputRectLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectLineType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRectLineType.GetSetSelectedIndex = -1
         Me.ucrInputRectLineType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRectLineType, "ucrInputRectLineType")
+        Me.ucrInputRectLineType.Location = New System.Drawing.Point(138, 43)
+        Me.ucrInputRectLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputRectLineType.Name = "ucrInputRectLineType"
+        Me.ucrInputRectLineType.Size = New System.Drawing.Size(104, 21)
+        Me.ucrInputRectLineType.TabIndex = 3
         '
         'ucrElementRectControl
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.grpElementRect)
         Me.Name = "ucrElementRectControl"
+        Me.Size = New System.Drawing.Size(255, 123)
         Me.grpElementRect.ResumeLayout(False)
+        Me.grpElementRect.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

@@ -22,7 +22,6 @@ Partial Class dlgSetupForDataEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSetupForDataEntry))
         Me.rdoNew = New System.Windows.Forms.RadioButton()
         Me.rdoAddFlags = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -60,43 +59,80 @@ Partial Class dlgSetupForDataEntry
         '
         'rdoNew
         '
-        resources.ApplyResources(Me.rdoNew, "rdoNew")
+        Me.rdoNew.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.rdoNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoNew.FlatAppearance.BorderSize = 2
         Me.rdoNew.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoNew.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNew.Location = New System.Drawing.Point(95, 12)
         Me.rdoNew.Name = "rdoNew"
+        Me.rdoNew.Size = New System.Drawing.Size(110, 27)
+        Me.rdoNew.TabIndex = 1
+        Me.rdoNew.Text = "New"
+        Me.rdoNew.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoNew.UseVisualStyleBackColor = True
         '
         'rdoAddFlags
         '
-        resources.ApplyResources(Me.rdoAddFlags, "rdoAddFlags")
+        Me.rdoAddFlags.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoAddFlags.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAddFlags.FlatAppearance.BorderSize = 2
         Me.rdoAddFlags.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAddFlags.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoAddFlags.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAddFlags.Location = New System.Drawing.Point(203, 12)
         Me.rdoAddFlags.Name = "rdoAddFlags"
+        Me.rdoAddFlags.Size = New System.Drawing.Size(110, 27)
+        Me.rdoAddFlags.TabIndex = 2
+        Me.rdoAddFlags.Text = "Add Flags"
+        Me.rdoAddFlags.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAddFlags.UseVisualStyleBackColor = True
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStation.Location = New System.Drawing.Point(262, 55)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 4
+        Me.lblStation.Text = "Station:"
         '
         'lblSelectStation
         '
-        resources.ApplyResources(Me.lblSelectStation, "lblSelectStation")
+        Me.lblSelectStation.AutoSize = True
+        Me.lblSelectStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectStation.Location = New System.Drawing.Point(262, 96)
         Me.lblSelectStation.Name = "lblSelectStation"
+        Me.lblSelectStation.Size = New System.Drawing.Size(76, 13)
+        Me.lblSelectStation.TabIndex = 4
+        Me.lblSelectStation.Text = "Select Station:"
         '
         'lblDateTo
         '
-        resources.ApplyResources(Me.lblDateTo, "lblDateTo")
+        Me.lblDateTo.AutoSize = True
+        Me.lblDateTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.lblDateTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDateTo.Location = New System.Drawing.Point(262, 176)
         Me.lblDateTo.Name = "lblDateTo"
+        Me.lblDateTo.Size = New System.Drawing.Size(49, 13)
+        Me.lblDateTo.TabIndex = 11
         Me.lblDateTo.Tag = ""
+        Me.lblDateTo.Text = "Date To:"
         '
         'lblDateFrom
         '
-        resources.ApplyResources(Me.lblDateFrom, "lblDateFrom")
+        Me.lblDateFrom.AutoSize = True
+        Me.lblDateFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.lblDateFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDateFrom.Location = New System.Drawing.Point(262, 137)
         Me.lblDateFrom.Name = "lblDateFrom"
+        Me.lblDateFrom.Size = New System.Drawing.Size(59, 13)
+        Me.lblDateFrom.TabIndex = 9
         Me.lblDateFrom.Tag = ""
+        Me.lblDateFrom.Text = "Date From:"
         '
         'grpElements
         '
@@ -112,184 +148,275 @@ Partial Class dlgSetupForDataEntry
         Me.grpElements.Controls.Add(Me.ucrChkTmin)
         Me.grpElements.Controls.Add(Me.ucrChkTmax)
         Me.grpElements.Controls.Add(Me.ucrChkPrecip)
-        resources.ApplyResources(Me.grpElements, "grpElements")
+        Me.grpElements.Location = New System.Drawing.Point(4, 248)
         Me.grpElements.Name = "grpElements"
+        Me.grpElements.Size = New System.Drawing.Size(381, 95)
+        Me.grpElements.TabIndex = 15
         Me.grpElements.TabStop = False
+        Me.grpElements.Text = "Elements:"
         '
         'ucrInputSpecify3
         '
         Me.ucrInputSpecify3.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpecify3.AutoSize = True
         Me.ucrInputSpecify3.IsMultiline = False
         Me.ucrInputSpecify3.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpecify3, "ucrInputSpecify3")
+        Me.ucrInputSpecify3.Location = New System.Drawing.Point(262, 70)
         Me.ucrInputSpecify3.Name = "ucrInputSpecify3"
+        Me.ucrInputSpecify3.Size = New System.Drawing.Size(107, 21)
+        Me.ucrInputSpecify3.TabIndex = 19
         '
         'ucrInputSpecify2
         '
         Me.ucrInputSpecify2.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpecify2.AutoSize = True
         Me.ucrInputSpecify2.IsMultiline = False
         Me.ucrInputSpecify2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpecify2, "ucrInputSpecify2")
+        Me.ucrInputSpecify2.Location = New System.Drawing.Point(262, 44)
         Me.ucrInputSpecify2.Name = "ucrInputSpecify2"
+        Me.ucrInputSpecify2.Size = New System.Drawing.Size(107, 21)
+        Me.ucrInputSpecify2.TabIndex = 17
         '
         'ucrInputSpecify1
         '
         Me.ucrInputSpecify1.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpecify1.AutoSize = True
         Me.ucrInputSpecify1.IsMultiline = False
         Me.ucrInputSpecify1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpecify1, "ucrInputSpecify1")
+        Me.ucrInputSpecify1.Location = New System.Drawing.Point(262, 18)
         Me.ucrInputSpecify1.Name = "ucrInputSpecify1"
+        Me.ucrInputSpecify1.Size = New System.Drawing.Size(107, 21)
+        Me.ucrInputSpecify1.TabIndex = 15
         '
         'ucrChkWD
         '
+        Me.ucrChkWD.AutoSize = True
         Me.ucrChkWD.Checked = False
-        resources.ApplyResources(Me.ucrChkWD, "ucrChkWD")
+        Me.ucrChkWD.Location = New System.Drawing.Point(94, 72)
         Me.ucrChkWD.Name = "ucrChkWD"
+        Me.ucrChkWD.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkWD.TabIndex = 13
         '
         'ucrChkWS
         '
+        Me.ucrChkWS.AutoSize = True
         Me.ucrChkWS.Checked = False
-        resources.ApplyResources(Me.ucrChkWS, "ucrChkWS")
+        Me.ucrChkWS.Location = New System.Drawing.Point(94, 46)
         Me.ucrChkWS.Name = "ucrChkWS"
+        Me.ucrChkWS.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkWS.TabIndex = 12
         '
         'ucrChkSunh
         '
+        Me.ucrChkSunh.AutoSize = True
         Me.ucrChkSunh.Checked = False
-        resources.ApplyResources(Me.ucrChkSunh, "ucrChkSunh")
+        Me.ucrChkSunh.Location = New System.Drawing.Point(94, 20)
         Me.ucrChkSunh.Name = "ucrChkSunh"
+        Me.ucrChkSunh.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkSunh.TabIndex = 11
         '
         'ucrChkSpecify3
         '
+        Me.ucrChkSpecify3.AutoSize = True
         Me.ucrChkSpecify3.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecify3, "ucrChkSpecify3")
+        Me.ucrChkSpecify3.Location = New System.Drawing.Point(181, 72)
         Me.ucrChkSpecify3.Name = "ucrChkSpecify3"
+        Me.ucrChkSpecify3.Size = New System.Drawing.Size(89, 23)
+        Me.ucrChkSpecify3.TabIndex = 18
         '
         'ucrChkSpecify2
         '
+        Me.ucrChkSpecify2.AutoSize = True
         Me.ucrChkSpecify2.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecify2, "ucrChkSpecify2")
+        Me.ucrChkSpecify2.Location = New System.Drawing.Point(181, 46)
         Me.ucrChkSpecify2.Name = "ucrChkSpecify2"
+        Me.ucrChkSpecify2.Size = New System.Drawing.Size(89, 23)
+        Me.ucrChkSpecify2.TabIndex = 16
         '
         'ucrChkSpecify1
         '
+        Me.ucrChkSpecify1.AutoSize = True
         Me.ucrChkSpecify1.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecify1, "ucrChkSpecify1")
+        Me.ucrChkSpecify1.Location = New System.Drawing.Point(181, 20)
         Me.ucrChkSpecify1.Name = "ucrChkSpecify1"
+        Me.ucrChkSpecify1.Size = New System.Drawing.Size(89, 23)
+        Me.ucrChkSpecify1.TabIndex = 14
         '
         'ucrChkTmin
         '
+        Me.ucrChkTmin.AutoSize = True
         Me.ucrChkTmin.Checked = False
-        resources.ApplyResources(Me.ucrChkTmin, "ucrChkTmin")
+        Me.ucrChkTmin.Location = New System.Drawing.Point(7, 72)
         Me.ucrChkTmin.Name = "ucrChkTmin"
+        Me.ucrChkTmin.Size = New System.Drawing.Size(81, 23)
+        Me.ucrChkTmin.TabIndex = 10
         '
         'ucrChkTmax
         '
+        Me.ucrChkTmax.AutoSize = True
         Me.ucrChkTmax.Checked = False
-        resources.ApplyResources(Me.ucrChkTmax, "ucrChkTmax")
+        Me.ucrChkTmax.Location = New System.Drawing.Point(7, 46)
         Me.ucrChkTmax.Name = "ucrChkTmax"
+        Me.ucrChkTmax.Size = New System.Drawing.Size(81, 23)
+        Me.ucrChkTmax.TabIndex = 9
         '
         'ucrChkPrecip
         '
+        Me.ucrChkPrecip.AutoSize = True
         Me.ucrChkPrecip.Checked = False
-        resources.ApplyResources(Me.ucrChkPrecip, "ucrChkPrecip")
+        Me.ucrChkPrecip.Location = New System.Drawing.Point(7, 20)
         Me.ucrChkPrecip.Name = "ucrChkPrecip"
+        Me.ucrChkPrecip.Size = New System.Drawing.Size(81, 23)
+        Me.ucrChkPrecip.TabIndex = 8
         '
         'lblAddFlagVariables
         '
-        resources.ApplyResources(Me.lblAddFlagVariables, "lblAddFlagVariables")
+        Me.lblAddFlagVariables.AutoSize = True
+        Me.lblAddFlagVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAddFlagVariables.Location = New System.Drawing.Point(262, 137)
         Me.lblAddFlagVariables.Name = "lblAddFlagVariables"
+        Me.lblAddFlagVariables.Size = New System.Drawing.Size(76, 13)
+        Me.lblAddFlagVariables.TabIndex = 8
+        Me.lblAddFlagVariables.Text = "Flag Variables:"
         '
         'lblFlagDate
         '
-        resources.ApplyResources(Me.lblFlagDate, "lblFlagDate")
+        Me.lblFlagDate.AutoSize = True
+        Me.lblFlagDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFlagDate.Location = New System.Drawing.Point(262, 95)
         Me.lblFlagDate.Name = "lblFlagDate"
+        Me.lblFlagDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblFlagDate.TabIndex = 6
+        Me.lblFlagDate.Text = "Date:"
         '
         'ucrReceiverFlagDate
         '
+        Me.ucrReceiverFlagDate.AutoSize = True
         Me.ucrReceiverFlagDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFlagDate, "ucrReceiverFlagDate")
+        Me.ucrReceiverFlagDate.Location = New System.Drawing.Point(261, 111)
+        Me.ucrReceiverFlagDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFlagDate.Name = "ucrReceiverFlagDate"
         Me.ucrReceiverFlagDate.Selector = Nothing
+        Me.ucrReceiverFlagDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFlagDate.strNcFilePath = ""
+        Me.ucrReceiverFlagDate.TabIndex = 7
         Me.ucrReceiverFlagDate.ucrSelector = Nothing
         '
         'ucrReceiverAddFlagVariables
         '
+        Me.ucrReceiverAddFlagVariables.AutoSize = True
         Me.ucrReceiverAddFlagVariables.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverAddFlagVariables, "ucrReceiverAddFlagVariables")
+        Me.ucrReceiverAddFlagVariables.Location = New System.Drawing.Point(261, 154)
+        Me.ucrReceiverAddFlagVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAddFlagVariables.Name = "ucrReceiverAddFlagVariables"
         Me.ucrReceiverAddFlagVariables.Selector = Nothing
+        Me.ucrReceiverAddFlagVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverAddFlagVariables.strNcFilePath = ""
+        Me.ucrReceiverAddFlagVariables.TabIndex = 9
         Me.ucrReceiverAddFlagVariables.ucrSelector = Nothing
         '
         'ucrChkAddFlagVariables
         '
+        Me.ucrChkAddFlagVariables.AutoSize = True
         Me.ucrChkAddFlagVariables.Checked = False
-        resources.ApplyResources(Me.ucrChkAddFlagVariables, "ucrChkAddFlagVariables")
+        Me.ucrChkAddFlagVariables.Location = New System.Drawing.Point(4, 349)
         Me.ucrChkAddFlagVariables.Name = "ucrChkAddFlagVariables"
+        Me.ucrChkAddFlagVariables.Size = New System.Drawing.Size(177, 23)
+        Me.ucrChkAddFlagVariables.TabIndex = 16
         '
         'ucrDateTo
         '
+        Me.ucrDateTo.AutoSize = True
         Me.ucrDateTo.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
         Me.ucrDateTo.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDateTo, "ucrDateTo")
+        Me.ucrDateTo.Location = New System.Drawing.Point(261, 191)
         Me.ucrDateTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDateTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDateTo.Name = "ucrDateTo"
+        Me.ucrDateTo.Size = New System.Drawing.Size(135, 20)
+        Me.ucrDateTo.TabIndex = 12
         '
         'ucrDateFrom
         '
+        Me.ucrDateFrom.AutoSize = True
         Me.ucrDateFrom.DateValue = New Date(2021, 3, 27, 16, 14, 1, 567)
         Me.ucrDateFrom.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDateFrom, "ucrDateFrom")
+        Me.ucrDateFrom.Location = New System.Drawing.Point(261, 151)
         Me.ucrDateFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDateFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDateFrom.Name = "ucrDateFrom"
+        Me.ucrDateFrom.Size = New System.Drawing.Size(135, 20)
+        Me.ucrDateFrom.TabIndex = 10
         '
         'ucrInputSelectStation
         '
         Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectStation.AutoSize = True
+        Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSelectStation.GetSetSelectedIndex = -1
         Me.ucrInputSelectStation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSelectStation, "ucrInputSelectStation")
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(261, 112)
         Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputSelectStation.TabIndex = 5
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(261, 71)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 5
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(4, 406)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 18
         '
         'ucrSelectorSetupDataEntry
         '
+        Me.ucrSelectorSetupDataEntry.AutoSize = True
         Me.ucrSelectorSetupDataEntry.bDropUnusedFilterLevels = False
         Me.ucrSelectorSetupDataEntry.bShowHiddenColumns = False
         Me.ucrSelectorSetupDataEntry.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorSetupDataEntry, "ucrSelectorSetupDataEntry")
+        Me.ucrSelectorSetupDataEntry.Location = New System.Drawing.Point(4, 49)
+        Me.ucrSelectorSetupDataEntry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSetupDataEntry.Name = "ucrSelectorSetupDataEntry"
+        Me.ucrSelectorSetupDataEntry.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorSetupDataEntry.TabIndex = 3
         '
         'ucrPnlOptions
         '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(70, 8)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
+        Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrSaveNewDFName
         '
-        resources.ApplyResources(Me.ucrSaveNewDFName, "ucrSaveNewDFName")
+        Me.ucrSaveNewDFName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveNewDFName.Location = New System.Drawing.Point(4, 375)
+        Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
+        Me.ucrSaveNewDFName.Size = New System.Drawing.Size(300, 24)
+        Me.ucrSaveNewDFName.TabIndex = 17
         '
         'dlgSetupForDataEntry
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(408, 459)
         Me.Controls.Add(Me.ucrReceiverFlagDate)
         Me.Controls.Add(Me.lblFlagDate)
         Me.Controls.Add(Me.lblAddFlagVariables)
@@ -314,7 +441,10 @@ Partial Class dlgSetupForDataEntry
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSetupForDataEntry"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Setup For Data Entry"
         Me.grpElements.ResumeLayout(False)
+        Me.grpElements.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

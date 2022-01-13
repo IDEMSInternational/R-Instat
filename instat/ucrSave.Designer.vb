@@ -38,7 +38,6 @@ Partial Class ucrSave
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSave))
         Me.ucrChkSave = New instat.ucrCheck()
         Me.lblSaveText = New System.Windows.Forms.Label()
         Me.ucrInputComboSave = New instat.ucrInputComboBox()
@@ -48,47 +47,74 @@ Partial Class ucrSave
         '
         'ucrChkSave
         '
+        Me.ucrChkSave.AutoSize = True
         Me.ucrChkSave.Checked = False
-        resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
+        Me.ucrChkSave.Location = New System.Drawing.Point(0, 0)
+        Me.ucrChkSave.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSave.TabIndex = 0
         '
         'lblSaveText
         '
-        resources.ApplyResources(Me.lblSaveText, "lblSaveText")
+        Me.lblSaveText.AutoSize = True
+        Me.lblSaveText.Location = New System.Drawing.Point(0, 3)
         Me.lblSaveText.Name = "lblSaveText"
+        Me.lblSaveText.Size = New System.Drawing.Size(39, 13)
+        Me.lblSaveText.TabIndex = 1
+        Me.lblSaveText.Text = "Label1"
         '
         'ucrInputComboSave
         '
         Me.ucrInputComboSave.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputComboSave, "ucrInputComboSave")
+        Me.ucrInputComboSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.ucrInputComboSave.GetSetSelectedIndex = -1
         Me.ucrInputComboSave.IsReadOnly = False
+        Me.ucrInputComboSave.Location = New System.Drawing.Point(194, 0)
+        Me.ucrInputComboSave.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputComboSave.Name = "ucrInputComboSave"
+        Me.ucrInputComboSave.Size = New System.Drawing.Size(155, 34)
+        Me.ucrInputComboSave.TabIndex = 4
         '
         'ucrInputTextSave
         '
         Me.ucrInputTextSave.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextSave.AutoSize = True
         Me.ucrInputTextSave.IsMultiline = False
         Me.ucrInputTextSave.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
+        Me.ucrInputTextSave.Location = New System.Drawing.Point(182, 0)
+        Me.ucrInputTextSave.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
+        Me.ucrInputTextSave.Size = New System.Drawing.Size(155, 34)
+        Me.ucrInputTextSave.TabIndex = 3
         '
         'btnColumnPosition
         '
-        resources.ApplyResources(Me.btnColumnPosition, "btnColumnPosition")
+        Me.btnColumnPosition.AutoSize = True
+        Me.btnColumnPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnColumnPosition.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnColumnPosition.Location = New System.Drawing.Point(349, 0)
         Me.btnColumnPosition.Name = "btnColumnPosition"
+        Me.btnColumnPosition.Size = New System.Drawing.Size(54, 34)
+        Me.btnColumnPosition.TabIndex = 5
+        Me.btnColumnPosition.Text = "Position"
         Me.btnColumnPosition.UseVisualStyleBackColor = True
         '
         'ucrSave
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = False
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Controls.Add(Me.ucrInputComboSave)
         Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.lblSaveText)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.btnColumnPosition)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrSave"
+        Me.Size = New System.Drawing.Size(403, 34)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

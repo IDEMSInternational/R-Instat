@@ -2630,8 +2630,8 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   }
 })
 
-DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, time_interval = "month", column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, time_interval = time_interval, column_name = column_name, station_col_name = station_col_name)
 })
 
 DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
@@ -2663,7 +2663,8 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   all_dates <- seq(start_date, end_date, by = 1)
   all_periods <- unique(paste(lubridate::year(all_dates), sprintf("%02d", lubridate::month(all_dates)), sep = "-"))
   area <- c(lat[2], lon[1], lat[1], lon[2])
-  pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
   nc_files <- vector(mode = "character", length = length(all_periods))
   for (i in seq_along(all_periods)) {
     y <- substr(all_periods[i], 1, 4)
@@ -2683,7 +2684,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       target = paste0(dataset, "-", paste(elements, collapse = "_"), "-", all_periods[i], ".nc")
     )
     info <- paste0("Requesting data for ", all_periods[i], " - ", round(100 * i / length(all_periods)), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
     ncfile <- ecmwfr::wf_request(user = user, request = request,
                                  transfer = TRUE, path = path,
                                  time_out = 3 * 3600)
@@ -2693,7 +2694,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       ncdf4::nc_close(nc = nc)
     }
   }
-  close(pb)
+  if (is_win) close(pb)
 })
 
 DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {

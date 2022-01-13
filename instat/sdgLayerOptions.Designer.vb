@@ -38,70 +38,95 @@ Partial Class sdgLayerOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgLayerOptions))
         Me.tbcLayers = New System.Windows.Forms.TabControl()
-        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
-        Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
         Me.ucrGeomWithAes = New instat.ucrGeomListWithParameters()
+        Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
+        Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
         Me.tbcLayers.SuspendLayout()
-        Me.tbpGeomParameters.SuspendLayout()
         Me.tbpAesthetics.SuspendLayout()
+        Me.tbpGeomParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcLayers
         '
         Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
         Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
-        resources.ApplyResources(Me.tbcLayers, "tbcLayers")
+        Me.tbcLayers.Location = New System.Drawing.Point(6, 8)
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
-        '
-        'tbpGeomParameters
-        '
-        Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
-        resources.ApplyResources(Me.tbpGeomParameters, "tbpGeomParameters")
-        Me.tbpGeomParameters.Name = "tbpGeomParameters"
-        Me.tbpGeomParameters.UseVisualStyleBackColor = True
-        '
-        'ucrLayerParameter
-        '
-        resources.ApplyResources(Me.ucrLayerParameter, "ucrLayerParameter")
-        Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.ucrGeomWithAes = Nothing
+        Me.tbcLayers.Size = New System.Drawing.Size(482, 511)
+        Me.tbcLayers.TabIndex = 0
         '
         'tbpAesthetics
         '
         Me.tbpAesthetics.Controls.Add(Me.ucrGeomWithAes)
-        resources.ApplyResources(Me.tbpAesthetics, "tbpAesthetics")
+        Me.tbpAesthetics.Location = New System.Drawing.Point(4, 22)
         Me.tbpAesthetics.Name = "tbpAesthetics"
+        Me.tbpAesthetics.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 485)
+        Me.tbpAesthetics.TabIndex = 0
+        Me.tbpAesthetics.Text = "Layer Dimensions (Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
         '
         'ucrGeomWithAes
         '
-        resources.ApplyResources(Me.ucrGeomWithAes, "ucrGeomWithAes")
+        Me.ucrGeomWithAes.AutoSize = True
+        Me.ucrGeomWithAes.Location = New System.Drawing.Point(3, 3)
         Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
+        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 399)
+        Me.ucrGeomWithAes.TabIndex = 0
+        '
+        'tbpGeomParameters
+        '
+        Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
+        Me.tbpGeomParameters.Location = New System.Drawing.Point(4, 22)
+        Me.tbpGeomParameters.Name = "tbpGeomParameters"
+        Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 485)
+        Me.tbpGeomParameters.TabIndex = 1
+        Me.tbpGeomParameters.Text = "Layer Parameters (Geom Parameters)"
+        Me.tbpGeomParameters.UseVisualStyleBackColor = True
+        '
+        'ucrLayerParameter
+        '
+        Me.ucrLayerParameter.AutoSize = True
+        Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
+        Me.ucrLayerParameter.Name = "ucrLayerParameter"
+        Me.ucrLayerParameter.Size = New System.Drawing.Size(347, 481)
+        Me.ucrLayerParameter.TabIndex = 0
+        Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
-        resources.ApplyResources(Me.ucrSdgLayerBase, "ucrSdgLayerBase")
+        Me.ucrSdgLayerBase.AutoSize = True
+        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(173, 525)
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
+        Me.ucrSdgLayerBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgLayerBase.TabIndex = 1
         '
         'sdgLayerOptions
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(492, 562)
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgLayerOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Layer Options"
         Me.tbcLayers.ResumeLayout(False)
-        Me.tbpGeomParameters.ResumeLayout(False)
         Me.tbpAesthetics.ResumeLayout(False)
+        Me.tbpAesthetics.PerformLayout()
+        Me.tbpGeomParameters.ResumeLayout(False)
+        Me.tbpGeomParameters.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

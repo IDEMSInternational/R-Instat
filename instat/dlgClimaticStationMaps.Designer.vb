@@ -81,6 +81,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrSaveMap
         '
+        Me.ucrSaveMap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveMap.Location = New System.Drawing.Point(8, 356)
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
@@ -89,10 +90,12 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(8, 387)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 16
         '
         'grpPoints
@@ -128,6 +131,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(239, 120)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -150,6 +154,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverFacet
         '
+        Me.ucrReceiverFacet.AutoSize = True
         Me.ucrReceiverFacet.frmParent = Me
         Me.ucrReceiverFacet.Location = New System.Drawing.Point(241, 256)
         Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
@@ -162,13 +167,14 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrSelectorStation
         '
+        Me.ucrSelectorStation.AutoSize = True
         Me.ucrSelectorStation.bDropUnusedFilterLevels = False
         Me.ucrSelectorStation.bShowHiddenColumns = False
         Me.ucrSelectorStation.bUseCurrentFilter = True
         Me.ucrSelectorStation.Location = New System.Drawing.Point(8, 16)
         Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStation.Name = "ucrSelectorStation"
-        Me.ucrSelectorStation.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStation.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorStation.TabIndex = 21
         '
         'lblColor
@@ -203,6 +209,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverColor
         '
+        Me.ucrReceiverColor.AutoSize = True
         Me.ucrReceiverColor.frmParent = Me
         Me.ucrReceiverColor.Location = New System.Drawing.Point(240, 209)
         Me.ucrReceiverColor.Margin = New System.Windows.Forms.Padding(0)
@@ -225,6 +232,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverShape
         '
+        Me.ucrReceiverShape.AutoSize = True
         Me.ucrReceiverShape.frmParent = Me
         Me.ucrReceiverShape.Location = New System.Drawing.Point(240, 165)
         Me.ucrReceiverShape.Margin = New System.Windows.Forms.Padding(0)
@@ -237,6 +245,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverLatitude
         '
+        Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
         Me.ucrReceiverLatitude.Location = New System.Drawing.Point(240, 72)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
@@ -249,6 +258,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverLongitude
         '
+        Me.ucrReceiverLongitude.AutoSize = True
         Me.ucrReceiverLongitude.frmParent = Me
         Me.ucrReceiverLongitude.Location = New System.Drawing.Point(240, 31)
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
@@ -276,10 +286,11 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrChkAddPoints
         '
+        Me.ucrChkAddPoints.AutoSize = True
         Me.ucrChkAddPoints.Checked = False
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(231, 107)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        Me.ucrChkAddPoints.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkAddPoints.TabIndex = 34
         '
         'Label1
@@ -293,6 +304,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverGeometry
         '
+        Me.ucrReceiverGeometry.AutoSize = True
         Me.ucrReceiverGeometry.frmParent = Me
         Me.ucrReceiverGeometry.Location = New System.Drawing.Point(231, 27)
         Me.ucrReceiverGeometry.Margin = New System.Windows.Forms.Padding(0)
@@ -314,6 +326,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrReceiverFill
         '
+        Me.ucrReceiverFill.AutoSize = True
         Me.ucrReceiverFill.frmParent = Me
         Me.ucrReceiverFill.Location = New System.Drawing.Point(231, 74)
         Me.ucrReceiverFill.Margin = New System.Windows.Forms.Padding(0)
@@ -326,6 +339,7 @@ Partial Class dlgClimaticStationMaps
         '
         'ucrSelectorOutline
         '
+        Me.ucrSelectorOutline.AutoSize = True
         Me.ucrSelectorOutline.bDropUnusedFilterLevels = False
         Me.ucrSelectorOutline.bShowHiddenColumns = False
         Me.ucrSelectorOutline.bUseCurrentFilter = True
@@ -337,8 +351,8 @@ Partial Class dlgClimaticStationMaps
         '
         'dlgClimaticStationMaps
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(756, 441)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
@@ -358,6 +372,7 @@ Partial Class dlgClimaticStationMaps
         Me.grpMapOutline.ResumeLayout(False)
         Me.grpMapOutline.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
