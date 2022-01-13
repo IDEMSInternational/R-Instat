@@ -4008,8 +4008,8 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnReshapeMerge.Name = "mnuPrepareColumnReshapeMerge"
         Me.mnuPrepareColumnReshapeMerge.Size = New System.Drawing.Size(197, 22)
-        Me.mnuPrepareColumnReshapeMerge.Tag = "Merge..."
-        Me.mnuPrepareColumnReshapeMerge.Text = "Merge..."
+        Me.mnuPrepareColumnReshapeMerge.Tag = "Merge (Join)..."
+        Me.mnuPrepareColumnReshapeMerge.Text = "Merge (Join)..."
         '
         'ToolStripSeparator11
         '
