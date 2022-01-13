@@ -251,6 +251,15 @@ Public Class ucrDataView
                 tlpTableContainer.ColumnStyles(1).Width = 0
                 tlpTableContainer.ColumnStyles(2).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(2).Width = 100
+                'when the TableLayoutPanel column for the reogrid gets set to 0,
+                'the SheetTabWidth gets set to 60 pixels
+                'this makes the sheet names invisible when data is loaded into the grid.
+                'this check is meant to be a quick fix to this.
+                'Other possible solutions can implemented later
+                If ucrReoGrid.grdData.SheetTabWidth < 450 Then
+                    '450 pixels is the ideal width for displaying mutliple sheet names loaded to the grid
+                    ucrReoGrid.grdData.SheetTabWidth = 450
+                End If
             Else
                 tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(1).Width = 100
