@@ -257,7 +257,7 @@ Public Class ucrDataView
                 'this check is meant to be a quick fix to this.
                 'Other possible solutions can implemented later
                 If ucrReoGrid.grdData.SheetTabWidth < 450 Then
-                    '450 pixel is the ideal width for displaying mutliple sheet names loaded to the grid
+                    '450 pixels is the ideal width for displaying mutliple sheet names loaded to the grid
                     ucrReoGrid.grdData.SheetTabWidth = 450
                 End If
             Else
