@@ -33,6 +33,7 @@ Public Class ucrDataViewLinuxGrid
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
+        dataGrid.ClearSelection()
         dataGrid.Columns.Clear()
         For i = 0 To visiblePage.lstColumns.Count - 1
             Dim dataGridColumn As DataGridViewColumn = New DataGridViewColumn

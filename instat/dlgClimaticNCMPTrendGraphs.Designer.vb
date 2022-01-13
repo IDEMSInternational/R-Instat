@@ -171,6 +171,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrNudNYBA
         '
+        Me.ucrNudNYBA.AutoSize = True
         Me.ucrNudNYBA.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBA.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYBA.Location = New System.Drawing.Point(228, 14)
@@ -183,6 +184,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrNudNYE
         '
+        Me.ucrNudNYE.AutoSize = True
         Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYE.Location = New System.Drawing.Point(156, 93)
@@ -195,6 +197,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrNudNYB
         '
+        Me.ucrNudNYB.AutoSize = True
         Me.ucrNudNYB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYB.Location = New System.Drawing.Point(156, 67)
@@ -227,6 +230,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrNudNYEA
         '
+        Me.ucrNudNYEA.AutoSize = True
         Me.ucrNudNYEA.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYEA.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYEA.Location = New System.Drawing.Point(228, 40)
@@ -250,6 +254,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(162, 398)
@@ -259,6 +264,8 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 426)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -266,6 +273,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(308, 40)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -278,6 +286,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrReceiverMonthA4
         '
+        Me.ucrReceiverMonthA4.AutoSize = True
         Me.ucrReceiverMonthA4.frmParent = Me
         Me.ucrReceiverMonthA4.Location = New System.Drawing.Point(308, 289)
         Me.ucrReceiverMonthA4.Margin = New System.Windows.Forms.Padding(0)
@@ -290,6 +299,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrReceiverYearA4
         '
+        Me.ucrReceiverYearA4.AutoSize = True
         Me.ucrReceiverYearA4.frmParent = Me
         Me.ucrReceiverYearA4.Location = New System.Drawing.Point(308, 245)
         Me.ucrReceiverYearA4.Margin = New System.Windows.Forms.Padding(0)
@@ -302,17 +312,19 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrSelectorForA4
         '
+        Me.ucrSelectorForA4.AutoSize = True
         Me.ucrSelectorForA4.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA4.bShowHiddenColumns = False
         Me.ucrSelectorForA4.bUseCurrentFilter = True
         Me.ucrSelectorForA4.Location = New System.Drawing.Point(9, 206)
         Me.ucrSelectorForA4.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForA4.Name = "ucrSelectorForA4"
-        Me.ucrSelectorForA4.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForA4.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForA4.TabIndex = 9
         '
         'ucrReceiverMonthA2
         '
+        Me.ucrReceiverMonthA2.AutoSize = True
         Me.ucrReceiverMonthA2.frmParent = Me
         Me.ucrReceiverMonthA2.Location = New System.Drawing.Point(308, 126)
         Me.ucrReceiverMonthA2.Margin = New System.Windows.Forms.Padding(0)
@@ -325,6 +337,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrReceiverYearA2
         '
+        Me.ucrReceiverYearA2.AutoSize = True
         Me.ucrReceiverYearA2.frmParent = Me
         Me.ucrReceiverYearA2.Location = New System.Drawing.Point(308, 82)
         Me.ucrReceiverYearA2.Margin = New System.Windows.Forms.Padding(0)
@@ -337,19 +350,21 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrSelectorForA2
         '
+        Me.ucrSelectorForA2.AutoSize = True
         Me.ucrSelectorForA2.bDropUnusedFilterLevels = False
         Me.ucrSelectorForA2.bShowHiddenColumns = False
         Me.ucrSelectorForA2.bUseCurrentFilter = True
         Me.ucrSelectorForA2.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForA2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForA2.Name = "ucrSelectorForA2"
-        Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForA2.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForA2.TabIndex = 0
         '
         'dlgClimaticNCMPTrendGraphs
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(517, 483)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrBase)

@@ -77,6 +77,7 @@ Partial Class dlgAugment
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
@@ -85,6 +86,7 @@ Partial Class dlgAugment
         '
         'ucrSaveNewDataFrame
         '
+        Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(235, 278)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
@@ -93,6 +95,7 @@ Partial Class dlgAugment
         '
         'ucrModelReceiver
         '
+        Me.ucrModelReceiver.AutoSize = True
         Me.ucrModelReceiver.frmParent = Me
         Me.ucrModelReceiver.Location = New System.Drawing.Point(259, 53)
         Me.ucrModelReceiver.Margin = New System.Windows.Forms.Padding(0)
@@ -105,27 +108,31 @@ Partial Class dlgAugment
         '
         'ucrModelSelector
         '
+        Me.ucrModelSelector.AutoSize = True
         Me.ucrModelSelector.bDropUnusedFilterLevels = False
         Me.ucrModelSelector.bShowHiddenColumns = False
         Me.ucrModelSelector.bUseCurrentFilter = True
         Me.ucrModelSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrModelSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrModelSelector.Name = "ucrModelSelector"
-        Me.ucrModelSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrModelSelector.Size = New System.Drawing.Size(213, 183)
         Me.ucrModelSelector.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 331)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgAugment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 394)
         Me.Controls.Add(Me.rdoNewDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)

@@ -38,7 +38,6 @@ Partial Class ucrDataSelection
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrDataSelection))
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
@@ -49,51 +48,70 @@ Partial Class ucrDataSelection
         '
         'btnRemove
         '
-        resources.ApplyResources(Me.btnRemove, "btnRemove")
+        Me.btnRemove.Location = New System.Drawing.Point(99, 76)
         Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemove.TabIndex = 80
         Me.btnRemove.Tag = "Remove"
+        Me.btnRemove.Text = "Remove "
         Me.btnRemove.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
-        resources.ApplyResources(Me.btnAdd, "btnAdd")
+        Me.btnAdd.Location = New System.Drawing.Point(99, 38)
         Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.TabIndex = 79
         Me.btnAdd.Tag = "Add"
+        Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'lblSelectedVariables
         '
-        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(182, 3)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedVariables.TabIndex = 78
         Me.lblSelectedVariables.Tag = "Selected_Variables"
+        Me.lblSelectedVariables.Text = "Selected Variables"
         '
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        resources.ApplyResources(Me.lstSelectedVariables, "lstSelectedVariables")
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(189, 23)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
         Me.lstSelectedVariables.Sorted = True
+        Me.lstSelectedVariables.TabIndex = 77
         '
         'lblAvailableVariables
         '
-        resources.ApplyResources(Me.lblAvailableVariables, "lblAvailableVariables")
+        Me.lblAvailableVariables.AutoSize = True
+        Me.lblAvailableVariables.Location = New System.Drawing.Point(2, 3)
         Me.lblAvailableVariables.Name = "lblAvailableVariables"
+        Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
+        Me.lblAvailableVariables.TabIndex = 76
         Me.lblAvailableVariables.Tag = "Available_Variables "
+        Me.lblAvailableVariables.Text = "Available  Variables "
         '
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.FormattingEnabled = True
-        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(9, 23)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
         Me.lstAvailableVariable.Sorted = True
+        Me.lstAvailableVariable.TabIndex = 75
         Me.lstAvailableVariable.Tag = ""
         '
         'ucrDataSelection
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lblSelectedVariables)
@@ -101,6 +119,7 @@ Partial Class ucrDataSelection
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "ucrDataSelection"
+        Me.Size = New System.Drawing.Size(285, 122)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

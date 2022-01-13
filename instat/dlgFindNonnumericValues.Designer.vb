@@ -22,7 +22,6 @@ Partial Class dlgFindNonnumericValues
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFindNonnumericValues))
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.ucrChkFilterNonumerics = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
@@ -34,52 +33,81 @@ Partial Class dlgFindNonnumericValues
         '
         'lblColumn
         '
-        resources.ApplyResources(Me.lblColumn, "lblColumn")
+        Me.lblColumn.AutoSize = True
+        Me.lblColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColumn.Location = New System.Drawing.Point(240, 45)
         Me.lblColumn.Name = "lblColumn"
+        Me.lblColumn.Size = New System.Drawing.Size(94, 13)
+        Me.lblColumn.TabIndex = 1
+        Me.lblColumn.Text = "Character Column:"
         '
         'ucrChkFilterNonumerics
         '
+        Me.ucrChkFilterNonumerics.AutoSize = True
         Me.ucrChkFilterNonumerics.Checked = False
-        resources.ApplyResources(Me.ucrChkFilterNonumerics, "ucrChkFilterNonumerics")
+        Me.ucrChkFilterNonumerics.Location = New System.Drawing.Point(10, 221)
         Me.ucrChkFilterNonumerics.Name = "ucrChkFilterNonumerics"
+        Me.ucrChkFilterNonumerics.Size = New System.Drawing.Size(314, 23)
+        Me.ucrChkFilterNonumerics.TabIndex = 4
         '
         'ucrChkShowSummary
         '
+        Me.ucrChkShowSummary.AutoSize = True
         Me.ucrChkShowSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkShowSummary, "ucrChkShowSummary")
+        Me.ucrChkShowSummary.Location = New System.Drawing.Point(10, 196)
         Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
+        Me.ucrChkShowSummary.Size = New System.Drawing.Size(350, 23)
+        Me.ucrChkShowSummary.TabIndex = 3
         '
         'ucrReceiverColumn
         '
+        Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(240, 60)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.TabIndex = 2
         Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'ucrSelectorShowNonNumericValues
         '
+        Me.ucrSelectorShowNonNumericValues.AutoSize = True
         Me.ucrSelectorShowNonNumericValues.bDropUnusedFilterLevels = False
         Me.ucrSelectorShowNonNumericValues.bShowHiddenColumns = False
         Me.ucrSelectorShowNonNumericValues.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorShowNonNumericValues, "ucrSelectorShowNonNumericValues")
+        Me.ucrSelectorShowNonNumericValues.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorShowNonNumericValues.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorShowNonNumericValues.Name = "ucrSelectorShowNonNumericValues"
+        Me.ucrSelectorShowNonNumericValues.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorShowNonNumericValues.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 274)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'ucrSaveColumn
         '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 247)
+        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(288, 21)
+        Me.ucrSaveColumn.TabIndex = 8
         '
         'dlgFindNonnumericValues
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(419, 333)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrChkFilterNonumerics)
         Me.Controls.Add(Me.ucrChkShowSummary)
@@ -90,6 +118,8 @@ Partial Class dlgFindNonnumericValues
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MinimizeBox = False
         Me.Name = "dlgFindNonnumericValues"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Non-Numeric Values"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -25,6 +25,7 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
 
+
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -79,7 +80,6 @@ Public Class ucrDataView
         '_grid = ucrLinuxGrid
 
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
-        _grid.InstatOptions = frmMain.clsInstatOptions
         AttachEventsToGrid()
         RefreshDisplayInformation()
     End Sub
@@ -230,6 +230,18 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Private Sub ResizeLabels()
+        Const iMinSize As Single = 5
+        TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
+
+        While lblRowDisplay.Width + lblColDisplay.Width + 50 +
+                    lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width +
+                    lblRowBack.Width + lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso
+                    TblPanPageDisplay.Font.Size > iMinSize
+            TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.5F, TblPanPageDisplay.Font.Style)
+        End While
+    End Sub
+
     Private Sub SetGridVisibility(bIsVisible As Boolean)
         If bIsVisible Then
             tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
@@ -266,7 +278,7 @@ Public Class ucrDataView
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                             " of " & GetCurrentDataFrameFocus().iTotalColumnCount
-
+        ResizeLabels()
     End Sub
 
     Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
@@ -643,7 +655,7 @@ Public Class ucrDataView
         panelRecentMenuItems.Controls.Add(linkMenuItem)
 
         'add the label control. will be besides each other on the same Y axis
-        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag))
+        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag).Replace("\", "/"))
         lblMenuItemPath.Location = New Point(linkMenuItem.Width + 10, position)
         lblMenuItemPath.Height = 13
         lblMenuItemPath.AutoSize = True
@@ -670,7 +682,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
-        Help.ShowHelp(frmMain, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
     End Sub
 
     Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
@@ -808,5 +820,9 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
+    End Sub                      
+                          
+    Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
+        ResizeLabels()
     End Sub
 End Class

@@ -23,7 +23,6 @@ Partial Class sdgClimaticDataEntryOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgClimaticDataEntryOptions))
         Me.grpRestrictEntry = New System.Windows.Forms.GroupBox()
         Me.ucrChkAllowTrace = New instat.ucrCheck()
         Me.ucrChkNoDecimal = New instat.ucrCheck()
@@ -48,21 +47,30 @@ Partial Class sdgClimaticDataEntryOptions
         '
         Me.grpRestrictEntry.Controls.Add(Me.ucrChkAllowTrace)
         Me.grpRestrictEntry.Controls.Add(Me.ucrChkNoDecimal)
-        resources.ApplyResources(Me.grpRestrictEntry, "grpRestrictEntry")
+        Me.grpRestrictEntry.Location = New System.Drawing.Point(15, 163)
         Me.grpRestrictEntry.Name = "grpRestrictEntry"
+        Me.grpRestrictEntry.Size = New System.Drawing.Size(289, 40)
+        Me.grpRestrictEntry.TabIndex = 90
         Me.grpRestrictEntry.TabStop = False
+        Me.grpRestrictEntry.Text = "Restrict Entry"
         '
         'ucrChkAllowTrace
         '
+        Me.ucrChkAllowTrace.AutoSize = True
         Me.ucrChkAllowTrace.Checked = False
-        resources.ApplyResources(Me.ucrChkAllowTrace, "ucrChkAllowTrace")
+        Me.ucrChkAllowTrace.Location = New System.Drawing.Point(109, 14)
         Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
+        Me.ucrChkAllowTrace.Size = New System.Drawing.Size(127, 23)
+        Me.ucrChkAllowTrace.TabIndex = 66
         '
         'ucrChkNoDecimal
         '
+        Me.ucrChkNoDecimal.AutoSize = True
         Me.ucrChkNoDecimal.Checked = False
-        resources.ApplyResources(Me.ucrChkNoDecimal, "ucrChkNoDecimal")
+        Me.ucrChkNoDecimal.Location = New System.Drawing.Point(7, 14)
         Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
+        Me.ucrChkNoDecimal.Size = New System.Drawing.Size(113, 23)
+        Me.ucrChkNoDecimal.TabIndex = 65
         '
         'ttDefaultValue
         '
@@ -72,28 +80,49 @@ Partial Class sdgClimaticDataEntryOptions
         '
         'lblDefault
         '
-        resources.ApplyResources(Me.lblDefault, "lblDefault")
+        Me.lblDefault.AutoSize = True
+        Me.lblDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDefault.Location = New System.Drawing.Point(9, 15)
         Me.lblDefault.Name = "lblDefault"
-        Me.ttDefaultValue.SetToolTip(Me.lblDefault, resources.GetString("lblDefault.ToolTip"))
+        Me.lblDefault.Size = New System.Drawing.Size(113, 13)
+        Me.lblDefault.TabIndex = 102
+        Me.lblDefault.Text = "Missing/Default value:"
+        Me.ttDefaultValue.SetToolTip(Me.lblDefault, "Default value for missing values")
         '
         'ucrInputDefaultValue
         '
         Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputDefaultValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
         Me.ucrInputDefaultValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
+        Me.ucrInputDefaultValue.Location = New System.Drawing.Point(130, 10)
+        Me.ucrInputDefaultValue.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
-        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, resources.GetString("ucrInputDefaultValue.ToolTip"))
+        Me.ucrInputDefaultValue.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputDefaultValue.TabIndex = 101
+        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, "Select default value for missing values")
         '
         'lblBefore
         '
-        resources.ApplyResources(Me.lblBefore, "lblBefore")
+        Me.lblBefore.AutoSize = True
+        Me.lblBefore.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblBefore.Location = New System.Drawing.Point(102, 132)
         Me.lblBefore.Name = "lblBefore"
+        Me.lblBefore.Size = New System.Drawing.Size(41, 13)
+        Me.lblBefore.TabIndex = 98
+        Me.lblBefore.Text = "Before:"
+        Me.lblBefore.Visible = False
         '
         'lblAfter
         '
-        resources.ApplyResources(Me.lblAfter, "lblAfter")
+        Me.lblAfter.AutoSize = True
+        Me.lblAfter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAfter.Location = New System.Drawing.Point(197, 132)
         Me.lblAfter.Name = "lblAfter"
+        Me.lblAfter.Size = New System.Drawing.Size(32, 13)
+        Me.lblAfter.TabIndex = 99
+        Me.lblAfter.Text = "After:"
+        Me.lblAfter.Visible = False
         '
         'ttucrChkTransform
         '
@@ -103,68 +132,102 @@ Partial Class sdgClimaticDataEntryOptions
         '
         'ucrChkIncludeFirstNextMonth
         '
+        Me.ucrChkIncludeFirstNextMonth.AutoSize = True
         Me.ucrChkIncludeFirstNextMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeFirstNextMonth, "ucrChkIncludeFirstNextMonth")
+        Me.ucrChkIncludeFirstNextMonth.Location = New System.Drawing.Point(12, 96)
         Me.ucrChkIncludeFirstNextMonth.Name = "ucrChkIncludeFirstNextMonth"
-        Me.ttucrChkTransform.SetToolTip(Me.ucrChkIncludeFirstNextMonth, resources.GetString("ucrChkIncludeFirstNextMonth.ToolTip"))
+        Me.ucrChkIncludeFirstNextMonth.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkIncludeFirstNextMonth.TabIndex = 104
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkIncludeFirstNextMonth, "The values written to the data frame are transformed, usually multiplied, by the " &
+        "value given here.")
         '
         'ucrChkEditNAOnly
         '
+        Me.ucrChkEditNAOnly.AutoSize = True
         Me.ucrChkEditNAOnly.Checked = False
-        resources.ApplyResources(Me.ucrChkEditNAOnly, "ucrChkEditNAOnly")
+        Me.ucrChkEditNAOnly.Location = New System.Drawing.Point(12, 44)
         Me.ucrChkEditNAOnly.Name = "ucrChkEditNAOnly"
-        Me.ttucrChkTransform.SetToolTip(Me.ucrChkEditNAOnly, resources.GetString("ucrChkEditNAOnly.ToolTip"))
+        Me.ucrChkEditNAOnly.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkEditNAOnly.TabIndex = 103
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkEditNAOnly, "The values written to the data frame are transformed, usually multiplied, by the " &
+        "value given here.")
         '
         'ucrChkTransform
         '
+        Me.ucrChkTransform.AutoSize = True
         Me.ucrChkTransform.Checked = False
-        resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
+        Me.ucrChkTransform.Location = New System.Drawing.Point(12, 70)
         Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, resources.GetString("ucrChkTransform.ToolTip"))
+        Me.ucrChkTransform.Size = New System.Drawing.Size(83, 23)
+        Me.ucrChkTransform.TabIndex = 88
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the " &
+        "value given here.")
         '
         'ucrChkExtraRows
         '
+        Me.ucrChkExtraRows.AutoSize = True
         Me.ucrChkExtraRows.Checked = False
-        resources.ApplyResources(Me.ucrChkExtraRows, "ucrChkExtraRows")
+        Me.ucrChkExtraRows.Enabled = False
+        Me.ucrChkExtraRows.Location = New System.Drawing.Point(12, 129)
         Me.ucrChkExtraRows.Name = "ucrChkExtraRows"
+        Me.ucrChkExtraRows.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkExtraRows.TabIndex = 97
         '
         'ucrNudAfter
         '
+        Me.ucrNudAfter.AutoSize = True
         Me.ucrNudAfter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAfter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudAfter, "ucrNudAfter")
+        Me.ucrNudAfter.Location = New System.Drawing.Point(233, 129)
         Me.ucrNudAfter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAfter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAfter.Name = "ucrNudAfter"
+        Me.ucrNudAfter.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAfter.TabIndex = 96
         Me.ucrNudAfter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAfter.Visible = False
         '
         'ucrNudBefore
         '
+        Me.ucrNudBefore.AutoSize = True
         Me.ucrNudBefore.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBefore.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudBefore, "ucrNudBefore")
+        Me.ucrNudBefore.Location = New System.Drawing.Point(143, 129)
         Me.ucrNudBefore.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBefore.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBefore.Name = "ucrNudBefore"
+        Me.ucrNudBefore.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudBefore.TabIndex = 95
         Me.ucrNudBefore.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBefore.Visible = False
         '
         'ucrSdgPICSARainfalbuttons
         '
-        resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
+        Me.ucrSdgPICSARainfalbuttons.AutoSize = True
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(71, 210)
+        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgPICSARainfalbuttons.TabIndex = 93
         '
         'ucrInputTransform
         '
         Me.ucrInputTransform.AddQuotesIfUnrecognised = True
+        Me.ucrInputTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTransform.GetSetSelectedIndex = -1
         Me.ucrInputTransform.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTransform, "ucrInputTransform")
+        Me.ucrInputTransform.Location = New System.Drawing.Point(130, 69)
+        Me.ucrInputTransform.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputTransform.Name = "ucrInputTransform"
+        Me.ucrInputTransform.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputTransform.TabIndex = 91
         '
         'sdgClimaticDataEntryOptions
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(304, 247)
         Me.Controls.Add(Me.ucrChkIncludeFirstNextMonth)
         Me.Controls.Add(Me.ucrChkEditNAOnly)
         Me.Controls.Add(Me.lblDefault)
@@ -182,7 +245,10 @@ Partial Class sdgClimaticDataEntryOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgClimaticDataEntryOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Options"
         Me.grpRestrictEntry.ResumeLayout(False)
+        Me.grpRestrictEntry.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -28,30 +28,34 @@ Partial Class dlgCopySpecial
         '
         'UcrCheck2
         '
+        Me.UcrCheck2.AutoSize = True
         Me.UcrCheck2.Checked = False
         Me.UcrCheck2.Location = New System.Drawing.Point(68, 63)
         Me.UcrCheck2.Name = "UcrCheck2"
-        Me.UcrCheck2.Size = New System.Drawing.Size(100, 20)
+        Me.UcrCheck2.Size = New System.Drawing.Size(100, 23)
         Me.UcrCheck2.TabIndex = 2
         '
         'UcrCheck1
         '
+        Me.UcrCheck1.AutoSize = True
         Me.UcrCheck1.Checked = False
         Me.UcrCheck1.Location = New System.Drawing.Point(68, 26)
         Me.UcrCheck1.Name = "UcrCheck1"
-        Me.UcrCheck1.Size = New System.Drawing.Size(100, 20)
+        Me.UcrCheck1.Size = New System.Drawing.Size(100, 23)
         Me.UcrCheck1.TabIndex = 1
         '
         'dlgCopySpecial
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(384, 182)
         Me.Controls.Add(Me.UcrCheck2)
         Me.Controls.Add(Me.UcrCheck1)
         Me.Name = "dlgCopySpecial"
         Me.Text = "dlgCopySpecial"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

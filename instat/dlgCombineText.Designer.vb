@@ -38,7 +38,6 @@ Partial Class dlgCombineText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCombineText))
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.lblColumnsToCobine = New System.Windows.Forms.Label()
         Me.ucrSaveColumn = New instat.ucrSave()
@@ -50,54 +49,83 @@ Partial Class dlgCombineText
         '
         'lblSeparator
         '
-        resources.ApplyResources(Me.lblSeparator, "lblSeparator")
+        Me.lblSeparator.AutoSize = True
+        Me.lblSeparator.Location = New System.Drawing.Point(248, 167)
         Me.lblSeparator.Name = "lblSeparator"
+        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
+        Me.lblSeparator.TabIndex = 3
+        Me.lblSeparator.Text = "Separator:"
         '
         'lblColumnsToCobine
         '
-        resources.ApplyResources(Me.lblColumnsToCobine, "lblColumnsToCobine")
+        Me.lblColumnsToCobine.AutoSize = True
+        Me.lblColumnsToCobine.Location = New System.Drawing.Point(248, 46)
         Me.lblColumnsToCobine.Name = "lblColumnsToCobine"
+        Me.lblColumnsToCobine.Size = New System.Drawing.Size(106, 13)
+        Me.lblColumnsToCobine.TabIndex = 1
         Me.lblColumnsToCobine.Tag = "Columns_to_Combine:"
+        Me.lblColumnsToCobine.Text = "Columns to Combine:"
         '
         'ucrSaveColumn
         '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(280, 22)
+        Me.ucrSaveColumn.TabIndex = 5
         '
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(247, 182)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputSeparator.TabIndex = 4
         '
         'ucrReceiverCombineText
         '
+        Me.ucrReceiverCombineText.AutoSize = True
         Me.ucrReceiverCombineText.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverCombineText, "ucrReceiverCombineText")
+        Me.ucrReceiverCombineText.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverCombineText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCombineText.Name = "ucrReceiverCombineText"
         Me.ucrReceiverCombineText.Selector = Nothing
+        Me.ucrReceiverCombineText.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverCombineText.strNcFilePath = ""
+        Me.ucrReceiverCombineText.TabIndex = 2
         Me.ucrReceiverCombineText.ucrSelector = Nothing
         '
         'ucrSelectorForCombineText
         '
+        Me.ucrSelectorForCombineText.AutoSize = True
         Me.ucrSelectorForCombineText.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCombineText.bShowHiddenColumns = False
         Me.ucrSelectorForCombineText.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForCombineText, "ucrSelectorForCombineText")
+        Me.ucrSelectorForCombineText.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForCombineText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForCombineText.Name = "ucrSelectorForCombineText"
+        Me.ucrSelectorForCombineText.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForCombineText.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 236)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgCombineText
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(415, 297)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.lblColumnsToCobine)
@@ -109,7 +137,9 @@ Partial Class dlgCombineText
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCombineText"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Text_Columns"
+        Me.Text = "Combine Text Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

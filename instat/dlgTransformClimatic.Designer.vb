@@ -38,7 +38,6 @@ Partial Class dlgTransformClimatic
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTransformClimatic))
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -89,82 +88,152 @@ Partial Class dlgTransformClimatic
         '
         'lblYear
         '
-        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.AutoSize = True
+        Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYear.Location = New System.Drawing.Point(272, 164)
         Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 12
+        Me.lblYear.Text = "Year:"
         '
         'lblDate
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.AutoSize = True
+        Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDate.Location = New System.Drawing.Point(272, 117)
         Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 8
+        Me.lblDate.Text = "Date:"
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStation.Location = New System.Drawing.Point(272, 67)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 6
+        Me.lblStation.Text = "Station:"
         '
         'lblData
         '
-        resources.ApplyResources(Me.lblData, "lblData")
+        Me.lblData.AutoSize = True
+        Me.lblData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblData.Location = New System.Drawing.Point(272, 212)
         Me.lblData.Name = "lblData"
+        Me.lblData.Size = New System.Drawing.Size(48, 13)
+        Me.lblData.TabIndex = 16
+        Me.lblData.Text = "Element:"
         '
         'rdoSpell
         '
-        resources.ApplyResources(Me.rdoSpell, "rdoSpell")
+        Me.rdoSpell.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSpell.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoSpell.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSpell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpell.FlatAppearance.BorderSize = 2
         Me.rdoSpell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSpell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSpell.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoSpell.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSpell.Location = New System.Drawing.Point(283, 15)
         Me.rdoSpell.Name = "rdoSpell"
+        Me.rdoSpell.Size = New System.Drawing.Size(64, 28)
+        Me.rdoSpell.TabIndex = 3
+        Me.rdoSpell.Text = "Spell"
+        Me.rdoSpell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSpell.UseVisualStyleBackColor = True
         '
         'rdoMoving
         '
-        resources.ApplyResources(Me.rdoMoving, "rdoMoving")
+        Me.rdoMoving.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMoving.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoMoving.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMoving.Cursor = System.Windows.Forms.Cursors.Default
         Me.rdoMoving.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMoving.FlatAppearance.BorderSize = 2
         Me.rdoMoving.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMoving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMoving.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoMoving.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMoving.Location = New System.Drawing.Point(194, 15)
         Me.rdoMoving.Name = "rdoMoving"
+        Me.rdoMoving.Size = New System.Drawing.Size(91, 28)
+        Me.rdoMoving.TabIndex = 2
+        Me.rdoMoving.Text = "Moving"
+        Me.rdoMoving.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMoving.UseVisualStyleBackColor = True
         '
         'rdoCount
         '
-        resources.ApplyResources(Me.rdoCount, "rdoCount")
+        Me.rdoCount.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoCount.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCount.Location = New System.Drawing.Point(105, 15)
         Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(91, 28)
+        Me.rdoCount.TabIndex = 1
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCount.UseVisualStyleBackColor = True
         '
         'rdoWaterBalance
         '
-        resources.ApplyResources(Me.rdoWaterBalance, "rdoWaterBalance")
+        Me.rdoWaterBalance.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoWaterBalance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoWaterBalance.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWaterBalance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWaterBalance.FlatAppearance.BorderSize = 2
         Me.rdoWaterBalance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWaterBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWaterBalance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoWaterBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoWaterBalance.Location = New System.Drawing.Point(434, 15)
         Me.rdoWaterBalance.Name = "rdoWaterBalance"
+        Me.rdoWaterBalance.Size = New System.Drawing.Size(117, 28)
+        Me.rdoWaterBalance.TabIndex = 4
+        Me.rdoWaterBalance.Text = "Water Balance"
+        Me.rdoWaterBalance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWaterBalance.UseVisualStyleBackColor = True
         '
         'lblSumRows
         '
-        resources.ApplyResources(Me.lblSumRows, "lblSumRows")
+        Me.lblSumRows.AutoSize = True
+        Me.lblSumRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSumRows.Location = New System.Drawing.Point(245, 24)
         Me.lblSumRows.Name = "lblSumRows"
+        Me.lblSumRows.Size = New System.Drawing.Size(34, 13)
+        Me.lblSumRows.TabIndex = 5
         Me.lblSumRows.Tag = "Rows"
+        Me.lblSumRows.Text = "Rows"
         '
         'lblSumOver
         '
-        resources.ApplyResources(Me.lblSumOver, "lblSumOver")
+        Me.lblSumOver.AutoSize = True
+        Me.lblSumOver.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSumOver.Location = New System.Drawing.Point(157, 24)
         Me.lblSumOver.Name = "lblSumOver"
+        Me.lblSumOver.Size = New System.Drawing.Size(30, 13)
+        Me.lblSumOver.TabIndex = 3
         Me.lblSumOver.Tag = "Over"
+        Me.lblSumOver.Text = "Over"
         '
         'lblCountOver
         '
-        resources.ApplyResources(Me.lblCountOver, "lblCountOver")
+        Me.lblCountOver.AutoSize = True
+        Me.lblCountOver.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCountOver.Location = New System.Drawing.Point(12, 24)
         Me.lblCountOver.Name = "lblCountOver"
+        Me.lblCountOver.Size = New System.Drawing.Size(106, 13)
+        Me.lblCountOver.TabIndex = 8
         Me.lblCountOver.Tag = "Rows_to_Count_Over:"
+        Me.lblCountOver.Text = "Rows to Count Over:"
         '
         'grpTransform
         '
@@ -194,266 +263,404 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.ucrInputSum)
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
-        resources.ApplyResources(Me.grpTransform, "grpTransform")
+        Me.grpTransform.Location = New System.Drawing.Point(10, 261)
         Me.grpTransform.Name = "grpTransform"
+        Me.grpTransform.Size = New System.Drawing.Size(376, 142)
+        Me.grpTransform.TabIndex = 18
         Me.grpTransform.TabStop = False
+        Me.grpTransform.Text = "Options"
         '
         'ucrReceiverEvap
         '
+        Me.ucrReceiverEvap.AutoSize = True
         Me.ucrReceiverEvap.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
+        Me.ucrReceiverEvap.Location = New System.Drawing.Point(155, 79)
+        Me.ucrReceiverEvap.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
         Me.ucrReceiverEvap.Selector = Nothing
+        Me.ucrReceiverEvap.Size = New System.Drawing.Size(103, 20)
         Me.ucrReceiverEvap.strNcFilePath = ""
+        Me.ucrReceiverEvap.TabIndex = 37
         Me.ucrReceiverEvap.ucrSelector = Nothing
         '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.AutoSize = True
         Me.ucrInputEvaporation.IsMultiline = False
         Me.ucrInputEvaporation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(155, 53)
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        Me.ucrInputEvaporation.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputEvaporation.TabIndex = 31
         '
         'ucrChkGroupByYear
         '
+        Me.ucrChkGroupByYear.AutoSize = True
         Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Location = New System.Drawing.Point(24, 112)
         Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        Me.ucrChkGroupByYear.Size = New System.Drawing.Size(174, 23)
+        Me.ucrChkGroupByYear.TabIndex = 22
         '
         'rdoEvapVariable
         '
-        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
+        Me.rdoEvapVariable.AutoSize = True
+        Me.rdoEvapVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoEvapVariable.Location = New System.Drawing.Point(87, 82)
         Me.rdoEvapVariable.Name = "rdoEvapVariable"
+        Me.rdoEvapVariable.Size = New System.Drawing.Size(66, 17)
+        Me.rdoEvapVariable.TabIndex = 36
         Me.rdoEvapVariable.TabStop = True
+        Me.rdoEvapVariable.Text = "Variable:"
         Me.rdoEvapVariable.UseVisualStyleBackColor = True
         '
         'rdoEvapValue
         '
-        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
+        Me.rdoEvapValue.AutoSize = True
+        Me.rdoEvapValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoEvapValue.Location = New System.Drawing.Point(87, 54)
         Me.rdoEvapValue.Name = "rdoEvapValue"
+        Me.rdoEvapValue.Size = New System.Drawing.Size(55, 17)
+        Me.rdoEvapValue.TabIndex = 35
         Me.rdoEvapValue.TabStop = True
+        Me.rdoEvapValue.Text = "Value:"
         Me.rdoEvapValue.UseVisualStyleBackColor = True
         '
         'ucrPnlEvap
         '
-        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
+        Me.ucrPnlEvap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlEvap.Location = New System.Drawing.Point(86, 43)
         Me.ucrPnlEvap.Name = "ucrPnlEvap"
+        Me.ucrPnlEvap.Size = New System.Drawing.Size(63, 57)
+        Me.ucrPnlEvap.TabIndex = 29
         '
         'ucrInputCumulative
         '
         Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        Me.ucrInputCumulative.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCumulative.GetSetSelectedIndex = -1
         Me.ucrInputCumulative.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
+        Me.ucrInputCumulative.Location = New System.Drawing.Point(24, 21)
         Me.ucrInputCumulative.Name = "ucrInputCumulative"
+        Me.ucrInputCumulative.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputCumulative.TabIndex = 26
         '
         'ucrInputCircularPosition
         '
         Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCircularPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCircularPosition.GetSetSelectedIndex = -1
         Me.ucrInputCircularPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
+        Me.ucrInputCircularPosition.Location = New System.Drawing.Point(199, 55)
         Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
+        Me.ucrInputCircularPosition.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputCircularPosition.TabIndex = 27
         '
         'lblPosition
         '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPosition.Location = New System.Drawing.Point(151, 59)
         Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblPosition.TabIndex = 25
+        Me.lblPosition.Text = "Position:"
         '
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Location = New System.Drawing.Point(199, 55)
         Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPosition.TabIndex = 24
         '
         'ucrChkCircular
         '
+        Me.ucrChkCircular.AutoSize = True
         Me.ucrChkCircular.Checked = False
-        resources.ApplyResources(Me.ucrChkCircular, "ucrChkCircular")
+        Me.ucrChkCircular.Location = New System.Drawing.Point(24, 58)
         Me.ucrChkCircular.Name = "ucrChkCircular"
+        Me.ucrChkCircular.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkCircular.TabIndex = 26
         '
         'ucrNudMultSpells
         '
+        Me.ucrNudMultSpells.AutoSize = True
         Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMultSpells.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMultSpells, "ucrNudMultSpells")
+        Me.ucrNudMultSpells.Location = New System.Drawing.Point(194, 21)
         Me.ucrNudMultSpells.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
+        Me.ucrNudMultSpells.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMultSpells.TabIndex = 15
         Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblRowsMultSpells
         '
-        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
+        Me.lblRowsMultSpells.AutoSize = True
+        Me.lblRowsMultSpells.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRowsMultSpells.Location = New System.Drawing.Point(12, 25)
         Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
+        Me.lblRowsMultSpells.Size = New System.Drawing.Size(126, 13)
+        Me.lblRowsMultSpells.TabIndex = 14
         Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
+        Me.lblRowsMultSpells.Text = "Rows to Take Max Over:"
         '
         'ucrInputSpellUpper
         '
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.AutoSize = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpellUpper, "ucrInputSpellUpper")
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(285, 50)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(49, 21)
+        Me.ucrInputSpellUpper.TabIndex = 13
         '
         'ucrInputCondition
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
+        Me.ucrInputCondition.Location = New System.Drawing.Point(124, 50)
         Me.ucrInputCondition.Name = "ucrInputCondition"
+        Me.ucrInputCondition.Size = New System.Drawing.Size(155, 21)
+        Me.ucrInputCondition.TabIndex = 12
         '
         'lblCondition
         '
-        resources.ApplyResources(Me.lblCondition, "lblCondition")
+        Me.lblCondition.AutoSize = True
+        Me.lblCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCondition.Location = New System.Drawing.Point(12, 53)
         Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Size = New System.Drawing.Size(54, 13)
+        Me.lblCondition.TabIndex = 10
         Me.lblCondition.Tag = "Condition:"
+        Me.lblCondition.Text = "Condition:"
         '
         'lblWBEvaporation
         '
-        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
+        Me.lblWBEvaporation.AutoSize = True
+        Me.lblWBEvaporation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWBEvaporation.Location = New System.Drawing.Point(13, 55)
         Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Size = New System.Drawing.Size(67, 13)
+        Me.lblWBEvaporation.TabIndex = 6
         Me.lblWBEvaporation.Tag = "Evaporation"
+        Me.lblWBEvaporation.Text = "Evaporation:"
         '
         'ucrInputSpellLower
         '
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.AutoSize = True
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpellLower, "ucrInputSpellLower")
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(69, 50)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
+        Me.ucrInputSpellLower.Size = New System.Drawing.Size(49, 21)
+        Me.ucrInputSpellLower.TabIndex = 11
         '
         'ucrNudSumOver
         '
+        Me.ucrNudSumOver.AutoSize = True
         Me.ucrNudSumOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSumOver, "ucrNudSumOver")
+        Me.ucrNudSumOver.Location = New System.Drawing.Point(193, 21)
         Me.ucrNudSumOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
+        Me.ucrNudSumOver.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSumOver.TabIndex = 4
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblWBCapacity
         '
-        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
+        Me.lblWBCapacity.AutoSize = True
+        Me.lblWBCapacity.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 25)
         Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
+        Me.lblWBCapacity.TabIndex = 1
         Me.lblWBCapacity.Tag = "Capacity"
+        Me.lblWBCapacity.Text = "Capacity:"
         '
         'ucrNudWBCapacity
         '
+        Me.ucrNudWBCapacity.AutoSize = True
         Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWBCapacity, "ucrNudWBCapacity")
+        Me.ucrNudWBCapacity.Location = New System.Drawing.Point(86, 21)
         Me.ucrNudWBCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWBCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Name = "ucrNudWBCapacity"
+        Me.ucrNudWBCapacity.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWBCapacity.TabIndex = 2
         Me.ucrNudWBCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputSum
         '
         Me.ucrInputSum.AddQuotesIfUnrecognised = True
+        Me.ucrInputSum.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSum.GetSetSelectedIndex = -1
         Me.ucrInputSum.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSum, "ucrInputSum")
+        Me.ucrInputSum.Location = New System.Drawing.Point(24, 21)
         Me.ucrInputSum.Name = "ucrInputSum"
+        Me.ucrInputSum.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputSum.TabIndex = 0
         '
         'ucrNudCountOver
         '
+        Me.ucrNudCountOver.AutoSize = True
         Me.ucrNudCountOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCountOver, "ucrNudCountOver")
+        Me.ucrNudCountOver.Location = New System.Drawing.Point(134, 21)
         Me.ucrNudCountOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
+        Me.ucrNudCountOver.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCountOver.TabIndex = 9
         Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoMultSpells
         '
-        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
+        Me.rdoMultSpells.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMultSpells.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoMultSpells.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultSpells.FlatAppearance.BorderSize = 2
         Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultSpells.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultSpells.Location = New System.Drawing.Point(345, 15)
         Me.rdoMultSpells.Name = "rdoMultSpells"
+        Me.rdoMultSpells.Size = New System.Drawing.Size(91, 28)
+        Me.rdoMultSpells.TabIndex = 23
+        Me.rdoMultSpells.Text = "Multiple Spells"
+        Me.rdoMultSpells.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMultSpells.UseVisualStyleBackColor = True
         '
         'rdoCumulative
         '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCumulative.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoCumulative.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCumulative.FlatAppearance.BorderSize = 2
         Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCumulative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoCumulative.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCumulative.Location = New System.Drawing.Point(16, 15)
         Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.Size = New System.Drawing.Size(91, 28)
+        Me.rdoCumulative.TabIndex = 25
+        Me.rdoCumulative.Text = "Cumulative"
+        Me.rdoCumulative.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
         'ucrSaveColumn
         '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(11, 411)
+        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(335, 21)
+        Me.ucrSaveColumn.TabIndex = 20
         '
         'ucrPnlTransform
         '
-        resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
+        Me.ucrPnlTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTransform.Location = New System.Drawing.Point(12, 9)
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
+        Me.ucrPnlTransform.Size = New System.Drawing.Size(543, 49)
+        Me.ucrPnlTransform.TabIndex = 0
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(275, 130)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 9
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverYear, "ucrReceiverYear")
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(275, 177)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 13
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(275, 80)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 7
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverData
         '
+        Me.ucrReceiverData.AutoSize = True
         Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
+        Me.ucrReceiverData.Location = New System.Drawing.Point(275, 225)
+        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverData.Name = "ucrReceiverData"
         Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.TabIndex = 17
         Me.ucrReceiverData.ucrSelector = Nothing
         '
         'ucrSelectorTransform
         '
+        Me.ucrSelectorTransform.AutoSize = True
         Me.ucrSelectorTransform.bDropUnusedFilterLevels = False
         Me.ucrSelectorTransform.bShowHiddenColumns = False
         Me.ucrSelectorTransform.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTransform, "ucrSelectorTransform")
+        Me.ucrSelectorTransform.Location = New System.Drawing.Point(10, 61)
+        Me.ucrSelectorTransform.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTransform.Name = "ucrSelectorTransform"
+        Me.ucrSelectorTransform.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorTransform.TabIndex = 5
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 437)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 21
         '
         'dlgTransformClimatic
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(566, 490)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.rdoMultSpells)
@@ -477,6 +684,8 @@ Partial Class dlgTransformClimatic
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTransformClimatic"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Transform"
         Me.grpTransform.ResumeLayout(False)
         Me.grpTransform.PerformLayout()
         Me.ResumeLayout(False)

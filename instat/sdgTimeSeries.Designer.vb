@@ -71,66 +71,74 @@ Partial Class sdgTimeSeries
         '
         'ucrChkKge
         '
+        Me.ucrChkKge.AutoSize = True
         Me.ucrChkKge.Checked = False
         Me.ucrChkKge.Location = New System.Drawing.Point(224, 61)
         Me.ucrChkKge.Name = "ucrChkKge"
-        Me.ucrChkKge.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkKge.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkKge.TabIndex = 10
         '
         'ucrChkRmse
         '
+        Me.ucrChkRmse.AutoSize = True
         Me.ucrChkRmse.Checked = False
         Me.ucrChkRmse.Location = New System.Drawing.Point(153, 61)
         Me.ucrChkRmse.Name = "ucrChkRmse"
-        Me.ucrChkRmse.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkRmse.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkRmse.TabIndex = 9
         '
         'ucrChkMae
         '
+        Me.ucrChkMae.AutoSize = True
         Me.ucrChkMae.Checked = False
         Me.ucrChkMae.Location = New System.Drawing.Point(82, 61)
         Me.ucrChkMae.Name = "ucrChkMae"
-        Me.ucrChkMae.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkMae.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkMae.TabIndex = 8
         '
         'ucrChkMe
         '
+        Me.ucrChkMe.AutoSize = True
         Me.ucrChkMe.Checked = False
         Me.ucrChkMe.Location = New System.Drawing.Point(11, 61)
         Me.ucrChkMe.Name = "ucrChkMe"
-        Me.ucrChkMe.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkMe.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkMe.TabIndex = 7
         '
         'ucrChkRSd
         '
+        Me.ucrChkRSd.AutoSize = True
         Me.ucrChkRSd.Checked = False
         Me.ucrChkRSd.Location = New System.Drawing.Point(224, 29)
         Me.ucrChkRSd.Name = "ucrChkRSd"
-        Me.ucrChkRSd.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkRSd.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkRSd.TabIndex = 6
         '
         'ucrChkPBias
         '
+        Me.ucrChkPBias.AutoSize = True
         Me.ucrChkPBias.Checked = False
         Me.ucrChkPBias.Location = New System.Drawing.Point(153, 29)
         Me.ucrChkPBias.Name = "ucrChkPBias"
-        Me.ucrChkPBias.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkPBias.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkPBias.TabIndex = 2
         '
         'ucrChkCor
         '
+        Me.ucrChkCor.AutoSize = True
         Me.ucrChkCor.Checked = False
         Me.ucrChkCor.Location = New System.Drawing.Point(82, 29)
         Me.ucrChkCor.Name = "ucrChkCor"
-        Me.ucrChkCor.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkCor.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkCor.TabIndex = 1
         '
         'ucrChkN
         '
+        Me.ucrChkN.AutoSize = True
         Me.ucrChkN.Checked = False
         Me.ucrChkN.Location = New System.Drawing.Point(11, 29)
         Me.ucrChkN.Name = "ucrChkN"
-        Me.ucrChkN.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkN.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkN.TabIndex = 0
         '
         'lblSeparator
@@ -163,6 +171,7 @@ Partial Class sdgTimeSeries
         'ucrInputPositionReference
         '
         Me.ucrInputPositionReference.AddQuotesIfUnrecognised = True
+        Me.ucrInputPositionReference.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPositionReference.GetSetSelectedIndex = -1
         Me.ucrInputPositionReference.IsReadOnly = False
         Me.ucrInputPositionReference.Location = New System.Drawing.Point(124, 233)
@@ -172,15 +181,17 @@ Partial Class sdgTimeSeries
         '
         'ucrButtonsSummaries
         '
+        Me.ucrButtonsSummaries.AutoSize = True
         Me.ucrButtonsSummaries.Location = New System.Drawing.Point(87, 312)
         Me.ucrButtonsSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(150, 31)
+        Me.ucrButtonsSummaries.Size = New System.Drawing.Size(224, 31)
         Me.ucrButtonsSummaries.TabIndex = 7
         '
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.AutoSize = True
         Me.ucrInputSeparator.IsMultiline = False
         Me.ucrInputSeparator.IsReadOnly = False
         Me.ucrInputSeparator.Location = New System.Drawing.Point(124, 173)
@@ -191,6 +202,7 @@ Partial Class sdgTimeSeries
         'ucrInputFontSize
         '
         Me.ucrInputFontSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputFontSize.AutoSize = True
         Me.ucrInputFontSize.IsMultiline = False
         Me.ucrInputFontSize.IsReadOnly = False
         Me.ucrInputFontSize.Location = New System.Drawing.Point(124, 203)
@@ -234,6 +246,7 @@ Partial Class sdgTimeSeries
         '
         'ucrPnlSummaries
         '
+        Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSummaries.Location = New System.Drawing.Point(40, 11)
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
         Me.ucrPnlSummaries.Size = New System.Drawing.Size(244, 35)
@@ -242,6 +255,7 @@ Partial Class sdgTimeSeries
         'ucrInputPositionEstimates
         '
         Me.ucrInputPositionEstimates.AddQuotesIfUnrecognised = True
+        Me.ucrInputPositionEstimates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPositionEstimates.GetSetSelectedIndex = -1
         Me.ucrInputPositionEstimates.IsReadOnly = False
         Me.ucrInputPositionEstimates.Location = New System.Drawing.Point(124, 263)
@@ -273,40 +287,45 @@ Partial Class sdgTimeSeries
         '
         'ucrChkSlopeIndividual
         '
+        Me.ucrChkSlopeIndividual.AutoSize = True
         Me.ucrChkSlopeIndividual.Checked = False
         Me.ucrChkSlopeIndividual.Location = New System.Drawing.Point(224, 29)
         Me.ucrChkSlopeIndividual.Name = "ucrChkSlopeIndividual"
-        Me.ucrChkSlopeIndividual.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkSlopeIndividual.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkSlopeIndividual.TabIndex = 6
         '
         'ucrChkSdIndividual
         '
+        Me.ucrChkSdIndividual.AutoSize = True
         Me.ucrChkSdIndividual.Checked = False
         Me.ucrChkSdIndividual.Location = New System.Drawing.Point(153, 29)
         Me.ucrChkSdIndividual.Name = "ucrChkSdIndividual"
-        Me.ucrChkSdIndividual.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkSdIndividual.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkSdIndividual.TabIndex = 2
         '
         'ucrChkMeanIndividual
         '
+        Me.ucrChkMeanIndividual.AutoSize = True
         Me.ucrChkMeanIndividual.Checked = False
         Me.ucrChkMeanIndividual.Location = New System.Drawing.Point(82, 29)
         Me.ucrChkMeanIndividual.Name = "ucrChkMeanIndividual"
-        Me.ucrChkMeanIndividual.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkMeanIndividual.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkMeanIndividual.TabIndex = 1
         '
         'ucrChkNIndividual
         '
+        Me.ucrChkNIndividual.AutoSize = True
         Me.ucrChkNIndividual.Checked = False
         Me.ucrChkNIndividual.Location = New System.Drawing.Point(11, 29)
         Me.ucrChkNIndividual.Name = "ucrChkNIndividual"
-        Me.ucrChkNIndividual.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkNIndividual.Size = New System.Drawing.Size(60, 23)
         Me.ucrChkNIndividual.TabIndex = 0
         '
         'sdgTimeSeries
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(325, 342)
         Me.Controls.Add(Me.grpIndividualSummaries)
         Me.Controls.Add(Me.ucrInputPositionEstimates)
@@ -329,7 +348,9 @@ Partial Class sdgTimeSeries
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary Annotations"
         Me.grpComparisonSummaries.ResumeLayout(False)
+        Me.grpComparisonSummaries.PerformLayout()
         Me.grpIndividualSummaries.ResumeLayout(False)
+        Me.grpIndividualSummaries.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

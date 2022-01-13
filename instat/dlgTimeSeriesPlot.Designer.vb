@@ -88,46 +88,52 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrChkIncludePoints
         '
+        Me.ucrChkIncludePoints.AutoSize = True
         Me.ucrChkIncludePoints.Checked = False
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 253)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(272, 20)
+        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(272, 23)
         Me.ucrChkIncludePoints.TabIndex = 10
         '
         'ucrChkIncludeMeanLines
         '
+        Me.ucrChkIncludeMeanLines.AutoSize = True
         Me.ucrChkIncludeMeanLines.Checked = False
         Me.ucrChkIncludeMeanLines.Location = New System.Drawing.Point(10, 290)
         Me.ucrChkIncludeMeanLines.Name = "ucrChkIncludeMeanLines"
-        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(272, 20)
+        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(272, 23)
         Me.ucrChkIncludeMeanLines.TabIndex = 11
         '
         'ucrChkNAValues
         '
+        Me.ucrChkNAValues.AutoSize = True
         Me.ucrChkNAValues.Checked = False
         Me.ucrChkNAValues.Location = New System.Drawing.Point(10, 216)
         Me.ucrChkNAValues.Name = "ucrChkNAValues"
-        Me.ucrChkNAValues.Size = New System.Drawing.Size(272, 20)
+        Me.ucrChkNAValues.Size = New System.Drawing.Size(272, 23)
         Me.ucrChkNAValues.TabIndex = 9
         '
         'ucrChkIncludeLineOfBestFit
         '
+        Me.ucrChkIncludeLineOfBestFit.AutoSize = True
         Me.ucrChkIncludeLineOfBestFit.Checked = False
         Me.ucrChkIncludeLineOfBestFit.Location = New System.Drawing.Point(10, 327)
         Me.ucrChkIncludeLineOfBestFit.Name = "ucrChkIncludeLineOfBestFit"
-        Me.ucrChkIncludeLineOfBestFit.Size = New System.Drawing.Size(260, 20)
+        Me.ucrChkIncludeLineOfBestFit.Size = New System.Drawing.Size(260, 23)
         Me.ucrChkIncludeLineOfBestFit.TabIndex = 16
         '
         'ucrChkWithSE
         '
+        Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
         Me.ucrChkWithSE.Location = New System.Drawing.Point(276, 327)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkWithSE.TabIndex = 17
         '
         'ucrSavePlot
         '
+        Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 385)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
@@ -136,6 +142,7 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrReceiverFacetBy
         '
+        Me.ucrReceiverFacetBy.AutoSize = True
         Me.ucrReceiverFacetBy.frmParent = Me
         Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(286, 180)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
@@ -148,6 +155,7 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrReceiverTime
         '
+        Me.ucrReceiverTime.AutoSize = True
         Me.ucrReceiverTime.frmParent = Me
         Me.ucrReceiverTime.Location = New System.Drawing.Point(286, 133)
         Me.ucrReceiverTime.Margin = New System.Windows.Forms.Padding(0)
@@ -160,6 +168,7 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrReceiverEstimates
         '
+        Me.ucrReceiverEstimates.AutoSize = True
         Me.ucrReceiverEstimates.frmParent = Me
         Me.ucrReceiverEstimates.Location = New System.Drawing.Point(286, 86)
         Me.ucrReceiverEstimates.Margin = New System.Windows.Forms.Padding(0)
@@ -172,6 +181,7 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrReceiverReference
         '
+        Me.ucrReceiverReference.AutoSize = True
         Me.ucrReceiverReference.frmParent = Me
         Me.ucrReceiverReference.Location = New System.Drawing.Point(286, 39)
         Me.ucrReceiverReference.Margin = New System.Windows.Forms.Padding(0)
@@ -184,26 +194,30 @@ Partial Class dlgTimeSeriesPlot
         '
         'ucrSelectorTimeSeriesPlots
         '
+        Me.ucrSelectorTimeSeriesPlots.AutoSize = True
         Me.ucrSelectorTimeSeriesPlots.bDropUnusedFilterLevels = False
         Me.ucrSelectorTimeSeriesPlots.bShowHiddenColumns = False
         Me.ucrSelectorTimeSeriesPlots.bUseCurrentFilter = True
         Me.ucrSelectorTimeSeriesPlots.Location = New System.Drawing.Point(12, 9)
         Me.ucrSelectorTimeSeriesPlots.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTimeSeriesPlots.Name = "ucrSelectorTimeSeriesPlots"
-        Me.ucrSelectorTimeSeriesPlots.Size = New System.Drawing.Size(218, 180)
+        Me.ucrSelectorTimeSeriesPlots.Size = New System.Drawing.Size(218, 183)
         Me.ucrSelectorTimeSeriesPlots.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 428)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 14
         '
         'dlgTimeSeriesPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 482)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkIncludeLineOfBestFit)

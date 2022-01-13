@@ -39,7 +39,6 @@ Partial Class ucrInputTextBox
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrInputTextBox))
         Me.txtInput = New System.Windows.Forms.TextBox()
         Me.mnuRightClick = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,26 +48,31 @@ Partial Class ucrInputTextBox
         'txtInput
         '
         Me.txtInput.ContextMenuStrip = Me.mnuRightClick
-        resources.ApplyResources(Me.txtInput, "txtInput")
+        Me.txtInput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtInput.Location = New System.Drawing.Point(0, 0)
         Me.txtInput.Name = "txtInput"
+        Me.txtInput.Size = New System.Drawing.Size(137, 20)
+        Me.txtInput.TabIndex = 0
         '
         'mnuRightClick
         '
         Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy})
         Me.mnuRightClick.Name = "mnuRightClick"
-        resources.ApplyResources(Me.mnuRightClick, "mnuRightClick")
+        Me.mnuRightClick.Size = New System.Drawing.Size(103, 26)
         '
         'mnuRightClickCopy
         '
         Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
-        resources.ApplyResources(Me.mnuRightClickCopy, "mnuRightClickCopy")
+        Me.mnuRightClickCopy.Size = New System.Drawing.Size(102, 22)
+        Me.mnuRightClickCopy.Text = "Copy"
         '
         'ucrInputTextBox
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.txtInput)
         Me.Name = "ucrInputTextBox"
+        Me.Size = New System.Drawing.Size(137, 21)
         Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

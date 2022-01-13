@@ -167,6 +167,7 @@ Partial Class dlgAutoSaveRecovery
         'ucrInputSavedPathData
         '
         Me.ucrInputSavedPathData.AddQuotesIfUnrecognised = True
+        Me.ucrInputSavedPathData.AutoSize = True
         Me.ucrInputSavedPathData.IsMultiline = False
         Me.ucrInputSavedPathData.IsReadOnly = False
         Me.ucrInputSavedPathData.Location = New System.Drawing.Point(468, 27)
@@ -177,6 +178,7 @@ Partial Class dlgAutoSaveRecovery
         'ucrInputSavedPathLog
         '
         Me.ucrInputSavedPathLog.AddQuotesIfUnrecognised = True
+        Me.ucrInputSavedPathLog.AutoSize = True
         Me.ucrInputSavedPathLog.IsMultiline = False
         Me.ucrInputSavedPathLog.IsReadOnly = False
         Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(468, 76)
@@ -196,6 +198,7 @@ Partial Class dlgAutoSaveRecovery
         'ucrInputSavedPathInternalLog
         '
         Me.ucrInputSavedPathInternalLog.AddQuotesIfUnrecognised = True
+        Me.ucrInputSavedPathInternalLog.AutoSize = True
         Me.ucrInputSavedPathInternalLog.IsMultiline = False
         Me.ucrInputSavedPathInternalLog.IsReadOnly = False
         Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(468, 123)
@@ -214,10 +217,11 @@ Partial Class dlgAutoSaveRecovery
         '
         'ucrChkSendInternalLog
         '
+        Me.ucrChkSendInternalLog.AutoSize = True
         Me.ucrChkSendInternalLog.Checked = False
         Me.ucrChkSendInternalLog.Location = New System.Drawing.Point(12, 254)
         Me.ucrChkSendInternalLog.Name = "ucrChkSendInternalLog"
-        Me.ucrChkSendInternalLog.Size = New System.Drawing.Size(266, 20)
+        Me.ucrChkSendInternalLog.Size = New System.Drawing.Size(266, 23)
         Me.ucrChkSendInternalLog.TabIndex = 17
         '
         'cmdHelp
@@ -264,8 +268,9 @@ Partial Class dlgAutoSaveRecovery
         '
         'dlgAutoSaveRecovery
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(762, 371)
         Me.Controls.Add(Me.grpEndChoice)
         Me.Controls.Add(Me.grpSavingOptions)
@@ -282,6 +287,7 @@ Partial Class dlgAutoSaveRecovery
         Me.grpSavingOptions.PerformLayout()
         Me.grpEndChoice.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
