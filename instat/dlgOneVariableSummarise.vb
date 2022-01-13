@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction, clsConcFunction As New RFunction
+    Private clsSummaryFunction, clsSummariesList, clsSummaryTableFunction, clsConcFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -68,12 +68,16 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.SetRDefault("FALSE")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
+
+        ucrChkTreatColumnsAsFactors.SetParameter(New RParameter("treat_columns_as_factor", iNewPosition:=3))
+        ucrChkTreatColumnsAsFactors.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkTreatColumnsAsFactors.SetText("Treat Columns As Factor")
     End Sub
 
     Private Sub SetDefaults()
         clsSummariesList = New RFunction
         clsSummaryFunction = New RFunction
-        clsInstatSummaryFunction = New RFunction
+        clsSummaryTableFunction = New RFunction
         clsConcFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
@@ -89,21 +93,23 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction.AddParameter("maxsum", 7)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
 
-        clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
-        clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
-        clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=1)
+        clsSummaryTableFunction.AddParameter("j", "1", iPosition:=2)
+        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
+        clsSummaryTableFunction.SetAssignTo("summary_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrPnlSummaries.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSelectorOneVarSummarise.SetRCode(clsInstatSummaryFunction, bReset)
+        ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ChangeBaseFunction()
     End Sub
 
@@ -123,7 +129,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsSummaryTableFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
@@ -133,7 +139,7 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ChangeBaseFunction()
         If rdoCustomised.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryTableFunction)
             cmdSummaries.Visible = True
         ElseIf rdoDefault.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
@@ -143,9 +149,9 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlValueChanged
         If Not ucrReceiverOneVarSummarise.IsEmpty Then
-            clsInstatSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames())
+            clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames())
         Else
-            clsInstatSummaryFunction.RemoveParameterByName("columns_to_summarise")
+            clsSummaryTableFunction.RemoveParameterByName("columns_to_summarise")
         End If
     End Sub
 
