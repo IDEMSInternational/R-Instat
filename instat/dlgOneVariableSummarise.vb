@@ -26,7 +26,7 @@ Public Class dlgOneVariableSummarise
     Private clsSummaryFunction, clsSummariesList, clsSummaryTableFunction, clsConcFunction,
             clsMmtable2Function, clsHeaderTopLeftSummaryVariableFunction, clsHeaderTopLeftVariableFunction,
             clsHeaderTopLeftSummaryFunction, clsHeaderLeftTopSummaryFunction, clsHeaderLeftTopVariableFunction As New RFunction
-
+    Private clsMmtableOperator As New ROperator
     Private Sub dlgOneVariableSummarise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -87,10 +87,14 @@ Public Class dlgOneVariableSummarise
         clsHeaderTopLeftSummaryVariableFunction = New RFunction
         clsHeaderLeftTopSummaryFunction = New RFunction
         clsHeaderLeftTopVariableFunction = New RFunction
+        clsMmtableOperator = New ROperator
 
         ucrSelectorOneVarSummarise.Reset()
 
         clsConcFunction.SetRCommand("c")
+
+        clsMmtableOperator.SetOperation("+")
+        clsMmtableOperator.AddParameter("mmtable_function", clsRFunctionParameter:=clsMmtable2Function, iPosition:=0)
 
         clsMmtable2Function.SetPackageName("mmtable2")
         clsMmtable2Function.SetRCommand("mmtable")
