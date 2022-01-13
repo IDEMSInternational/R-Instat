@@ -20,10 +20,12 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsSummaryTableFunction, clsConcFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
+    Private clsSummaryFunction, clsSummariesList, clsSummaryTableFunction, clsConcFunction,
+            clsMmtable2Function, clsHeaderTopLeftSummaryVariableFunction, clsHeaderTopLeftVariableFunction,
+            clsHeaderTopLeftSummaryFunction, clsHeaderLeftTopSummaryFunction, clsHeaderLeftTopVariableFunction As New RFunction
 
     Private Sub dlgOneVariableSummarise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -79,10 +81,41 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction = New RFunction
         clsSummaryTableFunction = New RFunction
         clsConcFunction = New RFunction
+        clsMmtable2Function = New RFunction
+        clsHeaderTopLeftSummaryVariableFunction = New RFunction
+        clsHeaderTopLeftVariableFunction = New RFunction
+        clsHeaderTopLeftSummaryVariableFunction = New RFunction
+        clsHeaderLeftTopSummaryFunction = New RFunction
+        clsHeaderLeftTopVariableFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
 
         clsConcFunction.SetRCommand("c")
+
+        clsMmtable2Function.SetPackageName("mmtable2")
+        clsMmtable2Function.SetRCommand("mmtable")
+        clsMmtable2Function.AddParameter("data", "summary", iPosition:=0)
+        clsMmtable2Function.AddParameter("cells", "value", iPosition:=1)
+
+        clsHeaderTopLeftVariableFunction.SetPackageName("mmtable2")
+        clsHeaderTopLeftVariableFunction.SetRCommand("header_top_left")
+        clsHeaderTopLeftVariableFunction.AddParameter("variable", "variable", iPosition:=0)
+
+        clsHeaderTopLeftSummaryVariableFunction.SetPackageName("mmtable2")
+        clsHeaderTopLeftSummaryVariableFunction.SetRCommand("header_top_left")
+        clsHeaderTopLeftSummaryVariableFunction.AddParameter("variable", Chr(39) & "summary_variable" & Chr(34), iPosition:=0)
+
+        clsHeaderTopLeftSummaryFunction.SetPackageName("mmtable2")
+        clsHeaderTopLeftSummaryFunction.SetRCommand("header_top_left")
+        clsHeaderTopLeftSummaryFunction.AddParameter("variable", "summary", iPosition:=0)
+
+        clsHeaderLeftTopVariableFunction.SetPackageName("mmtable2")
+        clsHeaderLeftTopVariableFunction.SetRCommand("header_left_top")
+        clsHeaderLeftTopVariableFunction.AddParameter("variable", "variable", iPosition:=0)
+
+        clsHeaderLeftTopSummaryFunction.SetPackageName("mmtable2")
+        clsHeaderLeftTopSummaryFunction.SetRCommand("header_left_top")
+        clsHeaderLeftTopSummaryFunction.AddParameter("variable", "summary", iPosition:=0)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
