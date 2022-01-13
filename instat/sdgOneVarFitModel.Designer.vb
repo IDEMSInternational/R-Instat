@@ -38,7 +38,6 @@ Partial Class sdgOneVarFitModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOneVarFitModel))
         Me.tbFittingOptions = New System.Windows.Forms.TabControl()
         Me.tbFittingMethod = New System.Windows.Forms.TabPage()
         Me.rdoMme = New System.Windows.Forms.RadioButton()
@@ -63,9 +62,11 @@ Partial Class sdgOneVarFitModel
         '
         Me.tbFittingOptions.Controls.Add(Me.tbFittingMethod)
         Me.tbFittingOptions.Controls.Add(Me.tbOptimisationMethod)
-        resources.ApplyResources(Me.tbFittingOptions, "tbFittingOptions")
+        Me.tbFittingOptions.Location = New System.Drawing.Point(5, 7)
         Me.tbFittingOptions.Name = "tbFittingOptions"
         Me.tbFittingOptions.SelectedIndex = 0
+        Me.tbFittingOptions.Size = New System.Drawing.Size(201, 177)
+        Me.tbFittingOptions.TabIndex = 0
         '
         'tbFittingMethod
         '
@@ -74,42 +75,65 @@ Partial Class sdgOneVarFitModel
         Me.tbFittingMethod.Controls.Add(Me.rdoMle)
         Me.tbFittingMethod.Controls.Add(Me.rdoMge)
         Me.tbFittingMethod.Controls.Add(Me.ucrPnlFitMethod)
-        resources.ApplyResources(Me.tbFittingMethod, "tbFittingMethod")
+        Me.tbFittingMethod.Location = New System.Drawing.Point(4, 22)
         Me.tbFittingMethod.Name = "tbFittingMethod"
+        Me.tbFittingMethod.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbFittingMethod.Size = New System.Drawing.Size(193, 151)
+        Me.tbFittingMethod.TabIndex = 0
+        Me.tbFittingMethod.Text = "Fitting Method"
         Me.tbFittingMethod.UseVisualStyleBackColor = True
         '
         'rdoMme
         '
-        resources.ApplyResources(Me.rdoMme, "rdoMme")
+        Me.rdoMme.AutoSize = True
+        Me.rdoMme.Location = New System.Drawing.Point(10, 33)
         Me.rdoMme.Name = "rdoMme"
+        Me.rdoMme.Size = New System.Drawing.Size(102, 17)
+        Me.rdoMme.TabIndex = 2
         Me.rdoMme.TabStop = True
+        Me.rdoMme.Text = "Moments (MME)"
         Me.rdoMme.UseVisualStyleBackColor = True
         '
         'rdoQme
         '
-        resources.ApplyResources(Me.rdoQme, "rdoQme")
+        Me.rdoQme.AutoSize = True
+        Me.rdoQme.Location = New System.Drawing.Point(10, 56)
         Me.rdoQme.Name = "rdoQme"
+        Me.rdoQme.Size = New System.Drawing.Size(99, 17)
+        Me.rdoQme.TabIndex = 3
         Me.rdoQme.TabStop = True
+        Me.rdoQme.Text = "Quartiles (QME)"
         Me.rdoQme.UseVisualStyleBackColor = True
         '
         'rdoMle
         '
-        resources.ApplyResources(Me.rdoMle, "rdoMle")
+        Me.rdoMle.AutoSize = True
+        Me.rdoMle.Location = New System.Drawing.Point(10, 10)
         Me.rdoMle.Name = "rdoMle"
+        Me.rdoMle.Size = New System.Drawing.Size(151, 17)
+        Me.rdoMle.TabIndex = 1
         Me.rdoMle.TabStop = True
+        Me.rdoMle.Text = "Maximum Likelihood (MLE)"
         Me.rdoMle.UseVisualStyleBackColor = True
         '
         'rdoMge
         '
-        resources.ApplyResources(Me.rdoMge, "rdoMge")
+        Me.rdoMge.AutoSize = True
+        Me.rdoMge.Location = New System.Drawing.Point(10, 79)
         Me.rdoMge.Name = "rdoMge"
+        Me.rdoMge.Size = New System.Drawing.Size(132, 17)
+        Me.rdoMge.TabIndex = 4
         Me.rdoMge.TabStop = True
+        Me.rdoMge.Text = "Goodness of Fit (MGE)"
         Me.rdoMge.UseVisualStyleBackColor = True
         '
         'ucrPnlFitMethod
         '
-        resources.ApplyResources(Me.ucrPnlFitMethod, "ucrPnlFitMethod")
+        Me.ucrPnlFitMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlFitMethod.Location = New System.Drawing.Point(3, 6)
         Me.ucrPnlFitMethod.Name = "ucrPnlFitMethod"
+        Me.ucrPnlFitMethod.Size = New System.Drawing.Size(184, 114)
+        Me.ucrPnlFitMethod.TabIndex = 0
         '
         'tbOptimisationMethod
         '
@@ -119,71 +143,106 @@ Partial Class sdgOneVarFitModel
         Me.tbOptimisationMethod.Controls.Add(Me.rdoNelderMead)
         Me.tbOptimisationMethod.Controls.Add(Me.rdoBFGS)
         Me.tbOptimisationMethod.Controls.Add(Me.ucrPnlOptimisation)
-        resources.ApplyResources(Me.tbOptimisationMethod, "tbOptimisationMethod")
+        Me.tbOptimisationMethod.Location = New System.Drawing.Point(4, 22)
         Me.tbOptimisationMethod.Name = "tbOptimisationMethod"
+        Me.tbOptimisationMethod.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbOptimisationMethod.Size = New System.Drawing.Size(193, 151)
+        Me.tbOptimisationMethod.TabIndex = 1
+        Me.tbOptimisationMethod.Text = "Optimisation"
         Me.tbOptimisationMethod.UseVisualStyleBackColor = True
         '
         'rdoSANN
         '
-        resources.ApplyResources(Me.rdoSANN, "rdoSANN")
+        Me.rdoSANN.AutoSize = True
+        Me.rdoSANN.Location = New System.Drawing.Point(10, 102)
         Me.rdoSANN.Name = "rdoSANN"
+        Me.rdoSANN.Size = New System.Drawing.Size(55, 17)
+        Me.rdoSANN.TabIndex = 5
         Me.rdoSANN.TabStop = True
+        Me.rdoSANN.Text = "SANN"
         Me.rdoSANN.UseVisualStyleBackColor = True
         '
         'rdoDefault
         '
-        resources.ApplyResources(Me.rdoDefault, "rdoDefault")
+        Me.rdoDefault.AutoSize = True
+        Me.rdoDefault.Location = New System.Drawing.Point(10, 10)
         Me.rdoDefault.Name = "rdoDefault"
+        Me.rdoDefault.Size = New System.Drawing.Size(59, 17)
+        Me.rdoDefault.TabIndex = 1
         Me.rdoDefault.TabStop = True
+        Me.rdoDefault.Text = "Default"
         Me.rdoDefault.UseVisualStyleBackColor = True
         '
         'rdoCG
         '
-        resources.ApplyResources(Me.rdoCG, "rdoCG")
+        Me.rdoCG.AutoSize = True
+        Me.rdoCG.Location = New System.Drawing.Point(10, 79)
         Me.rdoCG.Name = "rdoCG"
+        Me.rdoCG.Size = New System.Drawing.Size(138, 17)
+        Me.rdoCG.TabIndex = 4
         Me.rdoCG.TabStop = True
+        Me.rdoCG.Text = "Conjugent Gradent (CG)"
         Me.rdoCG.UseVisualStyleBackColor = True
         '
         'rdoNelderMead
         '
-        resources.ApplyResources(Me.rdoNelderMead, "rdoNelderMead")
+        Me.rdoNelderMead.AutoSize = True
+        Me.rdoNelderMead.Location = New System.Drawing.Point(10, 33)
         Me.rdoNelderMead.Name = "rdoNelderMead"
+        Me.rdoNelderMead.Size = New System.Drawing.Size(86, 17)
+        Me.rdoNelderMead.TabIndex = 2
         Me.rdoNelderMead.TabStop = True
+        Me.rdoNelderMead.Text = "Nelder-Mead"
         Me.rdoNelderMead.UseVisualStyleBackColor = True
         '
         'rdoBFGS
         '
-        resources.ApplyResources(Me.rdoBFGS, "rdoBFGS")
+        Me.rdoBFGS.AutoSize = True
+        Me.rdoBFGS.Location = New System.Drawing.Point(10, 56)
         Me.rdoBFGS.Name = "rdoBFGS"
+        Me.rdoBFGS.Size = New System.Drawing.Size(53, 17)
+        Me.rdoBFGS.TabIndex = 3
         Me.rdoBFGS.TabStop = True
+        Me.rdoBFGS.Text = "BFGS"
         Me.rdoBFGS.UseVisualStyleBackColor = True
         '
         'ucrPnlOptimisation
         '
-        resources.ApplyResources(Me.ucrPnlOptimisation, "ucrPnlOptimisation")
+        Me.ucrPnlOptimisation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptimisation.Location = New System.Drawing.Point(6, 6)
         Me.ucrPnlOptimisation.Name = "ucrPnlOptimisation"
+        Me.ucrPnlOptimisation.Size = New System.Drawing.Size(165, 120)
+        Me.ucrPnlOptimisation.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.Location = New System.Drawing.Point(30, 190)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBase.TabIndex = 1
         '
         'sdgOneVarFitModel
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(209, 225)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.tbFittingOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarFitModel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Fitting Options"
         Me.tbFittingOptions.ResumeLayout(False)
         Me.tbFittingMethod.ResumeLayout(False)
         Me.tbFittingMethod.PerformLayout()
         Me.tbOptimisationMethod.ResumeLayout(False)
         Me.tbOptimisationMethod.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

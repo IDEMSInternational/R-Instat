@@ -38,7 +38,6 @@ Partial Class dlgCombine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCombine))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.ucrChkLexOrder = New instat.ucrCheck()
@@ -52,66 +51,102 @@ Partial Class dlgCombine
         '
         'lblFactors
         '
-        resources.ApplyResources(Me.lblFactors, "lblFactors")
+        Me.lblFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactors.Location = New System.Drawing.Point(247, 44)
         Me.lblFactors.Name = "lblFactors"
+        Me.lblFactors.Size = New System.Drawing.Size(100, 15)
+        Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors_Selected:"
+        Me.lblFactors.Text = "Factors Selected:"
         '
         'lblSeparator
         '
-        resources.ApplyResources(Me.lblSeparator, "lblSeparator")
+        Me.lblSeparator.AutoSize = True
+        Me.lblSeparator.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSeparator.Location = New System.Drawing.Point(250, 194)
         Me.lblSeparator.Name = "lblSeparator"
+        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
+        Me.lblSeparator.TabIndex = 4
+        Me.lblSeparator.Text = "Separator:"
         '
         'ucrChkLexOrder
         '
+        Me.ucrChkLexOrder.AutoSize = True
         Me.ucrChkLexOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkLexOrder, "ucrChkLexOrder")
+        Me.ucrChkLexOrder.Location = New System.Drawing.Point(250, 218)
         Me.ucrChkLexOrder.Name = "ucrChkLexOrder"
+        Me.ucrChkLexOrder.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkLexOrder.TabIndex = 6
         '
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(321, 192)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(87, 21)
+        Me.ucrInputSeparator.TabIndex = 5
         '
         'ucrNewColName
         '
-        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
+        Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewColName.Location = New System.Drawing.Point(10, 246)
+        Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
+        Me.ucrNewColName.Size = New System.Drawing.Size(294, 22)
+        Me.ucrNewColName.TabIndex = 7
         '
         'ucrChkDropUnusedLevels
         '
+        Me.ucrChkDropUnusedLevels.AutoSize = True
         Me.ucrChkDropUnusedLevels.Checked = False
-        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(250, 166)
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(170, 23)
+        Me.ucrChkDropUnusedLevels.TabIndex = 3
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 278)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'ucrFactorsReceiver
         '
+        Me.ucrFactorsReceiver.AutoSize = True
         Me.ucrFactorsReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorsReceiver, "ucrFactorsReceiver")
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(250, 59)
+        Me.ucrFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
+        Me.ucrFactorsReceiver.Size = New System.Drawing.Size(120, 100)
         Me.ucrFactorsReceiver.strNcFilePath = ""
+        Me.ucrFactorsReceiver.TabIndex = 2
         Me.ucrFactorsReceiver.ucrSelector = Nothing
         '
         'ucrSelectorCombineFactors
         '
+        Me.ucrSelectorCombineFactors.AutoSize = True
         Me.ucrSelectorCombineFactors.bDropUnusedFilterLevels = False
         Me.ucrSelectorCombineFactors.bShowHiddenColumns = False
         Me.ucrSelectorCombineFactors.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorCombineFactors, "ucrSelectorCombineFactors")
+        Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorCombineFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
+        Me.ucrSelectorCombineFactors.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorCombineFactors.TabIndex = 0
         '
         'dlgCombine
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(420, 333)
         Me.Controls.Add(Me.lblSeparator)
         Me.Controls.Add(Me.ucrChkLexOrder)
         Me.Controls.Add(Me.ucrInputSeparator)
@@ -125,7 +160,9 @@ Partial Class dlgCombine
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCombine"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Factors"
+        Me.Text = "Combine Factors"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

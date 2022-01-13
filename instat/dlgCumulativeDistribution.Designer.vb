@@ -38,7 +38,6 @@ Partial Class dlgCumulativeDistribution
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCumulativeDistribution))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.lblScale = New System.Windows.Forms.Label()
@@ -59,123 +58,195 @@ Partial Class dlgCumulativeDistribution
         '
         'lblFactors
         '
-        resources.ApplyResources(Me.lblFactors, "lblFactors")
+        Me.lblFactors.AutoSize = True
+        Me.lblFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactors.Location = New System.Drawing.Point(275, 220)
         Me.lblFactors.Name = "lblFactors"
+        Me.lblFactors.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactors.TabIndex = 5
         Me.lblFactors.Tag = "Factors_Optional:"
+        Me.lblFactors.Text = "Factor (Optional):"
         '
         'cmdPlotOptions
         '
-        resources.ApplyResources(Me.cmdPlotOptions, "cmdPlotOptions")
+        Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 238)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(150, 23)
+        Me.cmdPlotOptions.TabIndex = 7
         Me.cmdPlotOptions.Tag = "Plot_Options"
+        Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'lblScale
         '
-        resources.ApplyResources(Me.lblScale, "lblScale")
+        Me.lblScale.AutoSize = True
+        Me.lblScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblScale.Location = New System.Drawing.Point(193, 267)
         Me.lblScale.Name = "lblScale"
+        Me.lblScale.Size = New System.Drawing.Size(51, 13)
+        Me.lblScale.TabIndex = 11
+        Me.lblScale.Text = "Scale by:"
+        Me.lblScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblNudby
         '
-        resources.ApplyResources(Me.lblNudby, "lblNudby")
+        Me.lblNudby.AutoSize = True
+        Me.lblNudby.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNudby.Location = New System.Drawing.Point(185, 297)
         Me.lblNudby.Name = "lblNudby"
+        Me.lblNudby.Size = New System.Drawing.Size(59, 13)
+        Me.lblNudby.TabIndex = 13
+        Me.lblNudby.Text = "In steps of:"
+        Me.lblNudby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'rdoCumulative
         '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCumulative.FlatAppearance.BorderSize = 2
         Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCumulative.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCumulative.Location = New System.Drawing.Point(119, 14)
         Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.Size = New System.Drawing.Size(86, 27)
+        Me.rdoCumulative.TabIndex = 1
         Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.Text = "Cumulative"
+        Me.rdoCumulative.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
         'rdoExceedance
         '
-        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoExceedance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExceedance.FlatAppearance.BorderSize = 2
         Me.rdoExceedance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoExceedance.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoExceedance.Location = New System.Drawing.Point(203, 14)
         Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.Size = New System.Drawing.Size(86, 27)
+        Me.rdoExceedance.TabIndex = 2
         Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.Text = "Exceedance"
+        Me.rdoExceedance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoExceedance.UseVisualStyleBackColor = True
         '
         'ucrNudBy
         '
+        Me.ucrNudBy.AutoSize = True
         Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
+        Me.ucrNudBy.Location = New System.Drawing.Point(278, 294)
         Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Size = New System.Drawing.Size(56, 20)
+        Me.ucrNudBy.TabIndex = 14
         Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputComboScales
         '
         Me.ucrInputComboScales.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboScales.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboScales.GetSetSelectedIndex = -1
         Me.ucrInputComboScales.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboScales, "ucrInputComboScales")
+        Me.ucrInputComboScales.Location = New System.Drawing.Point(278, 264)
         Me.ucrInputComboScales.Name = "ucrInputComboScales"
+        Me.ucrInputComboScales.Size = New System.Drawing.Size(120, 26)
+        Me.ucrInputComboScales.TabIndex = 12
         '
         'ucrPnlOption
         '
-        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
+        Me.ucrPnlOption.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ucrPnlOption.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOption.Location = New System.Drawing.Point(101, 9)
         Me.ucrPnlOption.Name = "ucrPnlOption"
+        Me.ucrPnlOption.Size = New System.Drawing.Size(211, 38)
+        Me.ucrPnlOption.TabIndex = 0
         '
         'ucrChkIncludePoints
         '
+        Me.ucrChkIncludePoints.AutoSize = True
         Me.ucrChkIncludePoints.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
+        Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 300)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
+        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(152, 23)
+        Me.ucrChkIncludePoints.TabIndex = 9
         '
         'ucrChkCountsOnYAxis
         '
+        Me.ucrChkCountsOnYAxis.AutoSize = True
         Me.ucrChkCountsOnYAxis.Checked = False
-        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
+        Me.ucrChkCountsOnYAxis.Location = New System.Drawing.Point(10, 274)
         Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
+        Me.ucrChkCountsOnYAxis.Size = New System.Drawing.Size(152, 23)
+        Me.ucrChkCountsOnYAxis.TabIndex = 8
         '
         'ucrSaveCumDist
         '
-        resources.ApplyResources(Me.ucrSaveCumDist, "ucrSaveCumDist")
+        Me.ucrSaveCumDist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveCumDist.Location = New System.Drawing.Point(10, 327)
+        Me.ucrSaveCumDist.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
+        Me.ucrSaveCumDist.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveCumDist.TabIndex = 10
         '
         'ucrVariablesAsFactorforCumDist
         '
+        Me.ucrVariablesAsFactorforCumDist.AutoSize = True
         Me.ucrVariablesAsFactorforCumDist.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorforCumDist, "ucrVariablesAsFactorforCumDist")
+        Me.ucrVariablesAsFactorforCumDist.Location = New System.Drawing.Point(246, 70)
         Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
         Me.ucrVariablesAsFactorforCumDist.Selector = Nothing
+        Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorforCumDist.strNcFilePath = ""
+        Me.ucrVariablesAsFactorforCumDist.TabIndex = 4
         Me.ucrVariablesAsFactorforCumDist.ucrSelector = Nothing
         Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
         '
         'ucrFactorReceiver
         '
+        Me.ucrFactorReceiver.AutoSize = True
         Me.ucrFactorReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(278, 235)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 26)
         Me.ucrFactorReceiver.strNcFilePath = ""
+        Me.ucrFactorReceiver.TabIndex = 6
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'ucrCumDistSelector
         '
+        Me.ucrCumDistSelector.AutoSize = True
         Me.ucrCumDistSelector.bDropUnusedFilterLevels = False
         Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrCumDistSelector, "ucrCumDistSelector")
+        Me.ucrCumDistSelector.Location = New System.Drawing.Point(10, 50)
+        Me.ucrCumDistSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"
+        Me.ucrCumDistSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrCumDistSelector.TabIndex = 3
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 354)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
         '
         'dlgCumulativeDistribution
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(415, 410)
         Me.Controls.Add(Me.rdoExceedance)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrNudBy)
@@ -196,7 +267,9 @@ Partial Class dlgCumulativeDistribution
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCumulativeDistribution"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Cumulative_Distribution"
+        Me.Text = "Cumulative/Exceedance Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

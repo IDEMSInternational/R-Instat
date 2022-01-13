@@ -38,7 +38,6 @@ Partial Class dlgCountinFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCountinFactor))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.ucrNewColName = New instat.ucrSave()
         Me.ucrCountReceiver = New instat.ucrReceiverSingle()
@@ -48,40 +47,62 @@ Partial Class dlgCountinFactor
         '
         'lblSelectedFactor
         '
-        resources.ApplyResources(Me.lblSelectedFactor, "lblSelectedFactor")
+        Me.lblSelectedFactor.AutoSize = True
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(267, 45)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
+        Me.lblSelectedFactor.Size = New System.Drawing.Size(85, 13)
+        Me.lblSelectedFactor.TabIndex = 1
+        Me.lblSelectedFactor.Text = "Selected Factor:"
         '
         'ucrNewColName
         '
-        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
+        Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewColName.Location = New System.Drawing.Point(9, 210)
+        Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
+        Me.ucrNewColName.Size = New System.Drawing.Size(317, 22)
+        Me.ucrNewColName.TabIndex = 3
         '
         'ucrCountReceiver
         '
+        Me.ucrCountReceiver.AutoSize = True
         Me.ucrCountReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrCountReceiver, "ucrCountReceiver")
+        Me.ucrCountReceiver.Location = New System.Drawing.Point(267, 60)
+        Me.ucrCountReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountReceiver.Name = "ucrCountReceiver"
         Me.ucrCountReceiver.Selector = Nothing
+        Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
         Me.ucrCountReceiver.strNcFilePath = ""
+        Me.ucrCountReceiver.TabIndex = 2
         Me.ucrCountReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 240)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'ucrCountSelector
         '
+        Me.ucrCountSelector.AutoSize = True
         Me.ucrCountSelector.bDropUnusedFilterLevels = False
         Me.ucrCountSelector.bShowHiddenColumns = False
         Me.ucrCountSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrCountSelector, "ucrCountSelector")
+        Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountSelector.Name = "ucrCountSelector"
+        Me.ucrCountSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrCountSelector.TabIndex = 0
         '
         'dlgCountinFactor
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(423, 297)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrCountReceiver)
@@ -91,7 +112,9 @@ Partial Class dlgCountinFactor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCountinFactor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Count_in_Factor"
+        Me.Text = "Count in Factor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

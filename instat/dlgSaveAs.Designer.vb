@@ -38,7 +38,6 @@ Partial Class dlgSaveAs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSaveAs))
         Me.lblConfirm = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFilePath = New instat.ucrFilePath()
@@ -46,31 +45,45 @@ Partial Class dlgSaveAs
         '
         'lblConfirm
         '
-        resources.ApplyResources(Me.lblConfirm, "lblConfirm")
+        Me.lblConfirm.AutoSize = True
+        Me.lblConfirm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblConfirm.Location = New System.Drawing.Point(96, 44)
         Me.lblConfirm.Name = "lblConfirm"
+        Me.lblConfirm.Size = New System.Drawing.Size(140, 13)
+        Me.lblConfirm.TabIndex = 3
+        Me.lblConfirm.Text = "Click Ok to confirm the save"
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 63)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'ucrFilePath
         '
+        Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
         Me.ucrFilePath.FilePathDialogTitle = "Save Data File"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
-        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Location = New System.Drawing.Point(1, 11)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
+        Me.ucrFilePath.Size = New System.Drawing.Size(429, 34)
+        Me.ucrFilePath.TabIndex = 7
         '
         'dlgSaveAs
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(434, 124)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblConfirm)
         Me.Controls.Add(Me.ucrBase)
@@ -78,7 +91,9 @@ Partial Class dlgSaveAs
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSaveAs"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Save_Data_As"
+        Me.Text = "Save Data As"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

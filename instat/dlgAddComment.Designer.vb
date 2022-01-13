@@ -38,7 +38,6 @@ Partial Class dlgAddComment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddComment))
         Me.lblRow = New System.Windows.Forms.Label()
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
@@ -56,106 +55,173 @@ Partial Class dlgAddComment
         '
         'lblRow
         '
-        resources.ApplyResources(Me.lblRow, "lblRow")
+        Me.lblRow.AutoSize = True
+        Me.lblRow.Location = New System.Drawing.Point(266, 72)
         Me.lblRow.Name = "lblRow"
+        Me.lblRow.Size = New System.Drawing.Size(32, 13)
+        Me.lblRow.TabIndex = 6
+        Me.lblRow.Text = "Row:"
         '
         'lblColumn
         '
-        resources.ApplyResources(Me.lblColumn, "lblColumn")
+        Me.lblColumn.AutoSize = True
+        Me.lblColumn.Location = New System.Drawing.Point(266, 114)
         Me.lblColumn.Name = "lblColumn"
+        Me.lblColumn.Size = New System.Drawing.Size(45, 13)
+        Me.lblColumn.TabIndex = 8
+        Me.lblColumn.Text = "Column:"
         '
         'lblComment
         '
-        resources.ApplyResources(Me.lblComment, "lblComment")
+        Me.lblComment.AutoSize = True
+        Me.lblComment.Location = New System.Drawing.Point(14, 242)
         Me.lblComment.Name = "lblComment"
+        Me.lblComment.Size = New System.Drawing.Size(54, 13)
+        Me.lblComment.TabIndex = 10
+        Me.lblComment.Text = "Comment:"
         '
         'rdoCell
         '
-        resources.ApplyResources(Me.rdoCell, "rdoCell")
+        Me.rdoCell.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoCell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCell.FlatAppearance.BorderSize = 2
         Me.rdoCell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCell.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoCell.Location = New System.Drawing.Point(10, 3)
         Me.rdoCell.Name = "rdoCell"
+        Me.rdoCell.Size = New System.Drawing.Size(100, 42)
+        Me.rdoCell.TabIndex = 1
+        Me.rdoCell.Text = "Cell"
+        Me.rdoCell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCell.UseVisualStyleBackColor = True
         '
         'rdoRow
         '
-        resources.ApplyResources(Me.rdoRow, "rdoRow")
+        Me.rdoRow.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoRow.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRow.FlatAppearance.BorderSize = 2
         Me.rdoRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRow.Location = New System.Drawing.Point(108, 3)
         Me.rdoRow.Name = "rdoRow"
+        Me.rdoRow.Size = New System.Drawing.Size(100, 42)
+        Me.rdoRow.TabIndex = 2
+        Me.rdoRow.Text = "Row"
+        Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRow.UseVisualStyleBackColor = True
         '
         'ucrPnlCellRowColumnDataFrame
         '
-        resources.ApplyResources(Me.ucrPnlCellRowColumnDataFrame, "ucrPnlCellRowColumnDataFrame")
+        Me.ucrPnlCellRowColumnDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCellRowColumnDataFrame.Location = New System.Drawing.Point(-4, 1)
         Me.ucrPnlCellRowColumnDataFrame.Name = "ucrPnlCellRowColumnDataFrame"
+        Me.ucrPnlCellRowColumnDataFrame.Size = New System.Drawing.Size(422, 44)
+        Me.ucrPnlCellRowColumnDataFrame.TabIndex = 0
         '
         'ucrInputComment
         '
         Me.ucrInputComment.AddQuotesIfUnrecognised = True
+        Me.ucrInputComment.AutoSize = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComment, "ucrInputComment")
+        Me.ucrInputComment.Location = New System.Drawing.Point(83, 239)
         Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(325, 47)
+        Me.ucrInputComment.TabIndex = 11
         '
         'ucrReceiverColumn
         '
+        Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 129)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.TabIndex = 9
         Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 293)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 12
         '
         'ucrSelectorAddComment
         '
+        Me.ucrSelectorAddComment.AutoSize = True
         Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
         Me.ucrSelectorAddComment.bShowHiddenColumns = False
         Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
+        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(10, 48)
+        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorAddComment.TabIndex = 5
         '
         'ucrInputRow
         '
         Me.ucrInputRow.AddQuotesIfUnrecognised = True
+        Me.ucrInputRow.AutoSize = True
         Me.ucrInputRow.IsMultiline = False
         Me.ucrInputRow.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
+        Me.ucrInputRow.Location = New System.Drawing.Point(302, 68)
         Me.ucrInputRow.Name = "ucrInputRow"
+        Me.ucrInputRow.Size = New System.Drawing.Size(80, 21)
+        Me.ucrInputRow.TabIndex = 7
         '
         'rdoDataFrame
         '
-        resources.ApplyResources(Me.rdoDataFrame, "rdoDataFrame")
+        Me.rdoDataFrame.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoDataFrame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoDataFrame.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDataFrame.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatAppearance.BorderSize = 2
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDataFrame.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDataFrame.Location = New System.Drawing.Point(304, 3)
         Me.rdoDataFrame.Name = "rdoDataFrame"
+        Me.rdoDataFrame.Size = New System.Drawing.Size(100, 42)
+        Me.rdoDataFrame.TabIndex = 4
+        Me.rdoDataFrame.Text = "Data Frame"
+        Me.rdoDataFrame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
         'rdoColumn
         '
-        resources.ApplyResources(Me.rdoColumn, "rdoColumn")
+        Me.rdoColumn.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoColumn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoColumn.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoColumn.FlatAppearance.BorderSize = 2
         Me.rdoColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoColumn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoColumn.Location = New System.Drawing.Point(206, 3)
         Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.Size = New System.Drawing.Size(100, 42)
+        Me.rdoColumn.TabIndex = 3
+        Me.rdoColumn.Text = "Column"
+        Me.rdoColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoColumn.UseVisualStyleBackColor = True
         '
         'dlgAddComment
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(418, 346)
         Me.Controls.Add(Me.rdoColumn)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrInputRow)
@@ -173,6 +239,8 @@ Partial Class dlgAddComment
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAddComment"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Add Comment"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
