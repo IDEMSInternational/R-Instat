@@ -64,6 +64,7 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddFunctionNamesCondition(rdoDefault, "summary")
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls(ucrChkOmitMissing, {rdoCustomised}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddToLinkedControls(ucrChkTreatColumnsAsFactors, {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -71,9 +72,14 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
+        ucrChkDisplayVariablesAsRows.SetText("Display Variables As Rows")
+
+        ucrChkDisplaySummaryAsRow.SetText("Display Summary As Rows")
+
         ucrChkTreatColumnsAsFactors.SetParameter(New RParameter("treat_columns_as_factor", iNewPosition:=3))
         ucrChkTreatColumnsAsFactors.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkTreatColumnsAsFactors.SetText("Treat Columns As Factor")
+        ucrChkTreatColumnsAsFactors.AddToLinkedControls({ucrChkDisplaySummaryAsRow, ucrChkDisplayVariablesAsRows}, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
