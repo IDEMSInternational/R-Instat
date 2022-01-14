@@ -3670,59 +3670,59 @@ Partial Class frmMain
         'mnuPrepareColumnNumericRegularSequence
         '
         Me.mnuPrepareColumnNumericRegularSequence.Name = "mnuPrepareColumnNumericRegularSequence"
-        Me.mnuPrepareColumnNumericRegularSequence.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericRegularSequence.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericRegularSequence.Tag = "Regular_Sequence..."
         Me.mnuPrepareColumnNumericRegularSequence.Text = "Regular Sequence..."
         '
         'mnuPrepareColumnNumericEnter
         '
         Me.mnuPrepareColumnNumericEnter.Name = "mnuPrepareColumnNumericEnter"
-        Me.mnuPrepareColumnNumericEnter.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericEnter.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericEnter.Text = "Enter..."
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(200, 6)
         '
         'mnuPrepareColumnNumericRowSummaries
         '
         Me.mnuPrepareColumnNumericRowSummaries.Name = "mnuPrepareColumnNumericRowSummaries"
-        Me.mnuPrepareColumnNumericRowSummaries.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericRowSummaries.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericRowSummaries.Text = "Row Summaries..."
         '
         'mnuPrepareColumnNumericTransform
         '
         Me.mnuPrepareColumnNumericTransform.Name = "mnuPrepareColumnNumericTransform"
-        Me.mnuPrepareColumnNumericTransform.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericTransform.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericTransform.Tag = "Rank..."
         Me.mnuPrepareColumnNumericTransform.Text = "Transform..."
         '
         'mnuPrepareColumnNumericPolynomials
         '
         Me.mnuPrepareColumnNumericPolynomials.Name = "mnuPrepareColumnNumericPolynomials"
-        Me.mnuPrepareColumnNumericPolynomials.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericPolynomials.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericPolynomials.Tag = "Polynomials..."
         Me.mnuPrepareColumnNumericPolynomials.Text = "Polynomials..."
         '
         'ToolStripSeparator56
         '
         Me.ToolStripSeparator56.Name = "ToolStripSeparator56"
-        Me.ToolStripSeparator56.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator56.Size = New System.Drawing.Size(200, 6)
         '
         'mnuPrepareColumnNumericRandomSamples
         '
         Me.mnuPrepareColumnNumericRandomSamples.Name = "mnuPrepareColumnNumericRandomSamples"
-        Me.mnuPrepareColumnNumericRandomSamples.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericRandomSamples.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericRandomSamples.Tag = "Random_Samples..."
         Me.mnuPrepareColumnNumericRandomSamples.Text = "Random Samples..."
         '
         'mnuPrepareColumnNumericPermuteRows
         '
         Me.mnuPrepareColumnNumericPermuteRows.Name = "mnuPrepareColumnNumericPermuteRows"
-        Me.mnuPrepareColumnNumericPermuteRows.Size = New System.Drawing.Size(179, 22)
+        Me.mnuPrepareColumnNumericPermuteRows.Size = New System.Drawing.Size(203, 22)
         Me.mnuPrepareColumnNumericPermuteRows.Tag = "Permute_Rows..."
-        Me.mnuPrepareColumnNumericPermuteRows.Text = "Permute Columns..."
+        Me.mnuPrepareColumnNumericPermuteRows.Text = "Permute/Sample Rows..."
         '
         'mnuPrepareColumnFactor
         '
