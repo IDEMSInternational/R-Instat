@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Runtime.InteropServices
+Imports System.IO
 Imports RDotNet
 Imports instat.Translations
 
@@ -420,12 +421,16 @@ Public Class dlgImportDataset
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
-                dlgOpen.InitialDirectory = strLibraryPath
+                ' TODO There should be a way of using Path.GetDirectoryName to avoid needing the If but couldn't get this to work
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(strLibraryPath, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = strLibraryPath
+                End If
             Else
                 dlgOpen.Title = "Open Data from file"
                 dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
             End If
-
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 'always reset the multiple files checkbox
                 ucrChkMultipleFiles.Checked = False
@@ -872,7 +877,7 @@ Public Class dlgImportDataset
         'add the item to the MRU (Most Recently Used) list...
         'only add if its a file that was selected, don't add if folder path was selected
         If Not bImportFromFolder Then
-            frmMain.clsRecentItems.addToMenu(strFilePathSystem)
+            frmMain.clsRecentItems.addToMenu(Replace(strFilePathSystem, "\", "/"))
         End If
 
         'Sets the current data frame as the first new data frame
