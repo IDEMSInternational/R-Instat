@@ -55,6 +55,9 @@ Public Class dlgRandomSample
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
+        ucrNudSeed.SetParameter(New RParameter("seed", 0))
+        ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
+
         ucrChkRngKind.SetText("RNGKind")
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
@@ -71,9 +74,6 @@ Public Class dlgRandomSample
         ucrInputRngKind.SetItems(dctRNGKind)
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
-
-        ucrNudSeed.SetParameter(New RParameter("seed", 0))
-        ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
         ucrSaveRandomSample.SetSaveTypeAsColumn()
         ucrSaveRandomSample.SetDataFrameSelector(ucrSelectorRandomSamples)
