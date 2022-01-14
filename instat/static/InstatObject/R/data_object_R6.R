@@ -1417,7 +1417,7 @@ DataSheet$set("public", "drop_unused_factor_levels", function(col_name) {
 } 
 )
 
-DataSheet$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, set_new_labels = TRUE) {
+DataSheet$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, other_col_names, set_new_labels = TRUE) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in data.")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(col_data)) stop(col_name, " is not a factor.")
@@ -1427,6 +1427,17 @@ DataSheet$set("public", "set_factor_levels", function(col_name, new_labels, new_
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_labels
   
+  if (!missing(other_col_names)){
+  if(!all(other_col_names %in% self$get_column_names())) stop("Some column names not found in the data")
+  for (i in 1:length(other_col_names)){
+    if (length(levels(private$data[[other_col_names[i]]])) != length(new_labels)){
+      warning("Number of levels differ between ", other_col_names[i], " and ", col_name, ". No change to levels will occur.")
+    } else {
+      levels(private$data[[other_col_names[i]]]) <- new_labels
+    }
+  }
+  }
+
   if(!missing(new_levels)) {
     labels_list <- new_levels
     names(labels_list) <- new_labels

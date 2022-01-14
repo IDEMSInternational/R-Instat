@@ -1109,8 +1109,8 @@ DataBook$set("public", "drop_unused_factor_levels", function(data_name, col_name
 } 
 )
 
-DataBook$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, set_new_labels = TRUE) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, set_new_labels = set_new_labels)
+DataBook$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, other_col_names, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, other_col_names = other_col_names, set_new_labels = set_new_labels)
 } 
 )
 
