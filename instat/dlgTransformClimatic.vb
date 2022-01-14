@@ -45,6 +45,7 @@ Public Class dlgTransformClimatic
     Private clsModifiedMinfunction As New RFunction
     Private clsModifiedDiffOperator, clsModifiedLogicOperator, clsModifiedGDDOperator As New ROperator
     Private clsLogicalRFunction, clsLogicalGDDRFunction, clsLogicalMgddRFunction As New RFunction
+    Private clsMeanAddOperator, clsMeanDivideByOperator As New ROperator
 
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
@@ -362,6 +363,8 @@ Public Class dlgTransformClimatic
         clsLogicalRFunction = New RFunction
         clsLogicalGDDRFunction = New RFunction
         clsLogicalMgddRFunction = New RFunction
+        clsMeanAddOperator = New ROperator
+        clsMeanDivideByOperator = New ROperator
 
         clsPMinFunctionMax = New RFunction
         clsPMaxFunctionMax = New RFunction
@@ -483,6 +486,15 @@ Public Class dlgTransformClimatic
         clsTMeanDivideOperator.AddParameter("y", 2, iPosition:=1, bIncludeArgumentName:=False)
         clsTMeanDivideOperator.bToScriptAsRString = True
 
+        clsMeanAddOperator.SetOperation("+")
+        clsMeanAddOperator.AddParameter("tmax", "tmax", iPosition:=0)
+        clsMeanAddOperator.AddParameter("tmin", "tmin", iPosition:=1)
+        clsMeanDivideByOperator.SetOperation("/")
+        clsMeanDivideByOperator.AddParameter("x", clsROperatorParameter:=clsMeanAddOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsMeanDivideByOperator.AddParameter("y", 2, iPosition:=1, bIncludeArgumentName:=False)
+        clsMeanDivideByOperator.SetAssignTo("mean")
+        clsMeanDivideByOperator.bBrackets = True
+
         clsHeatingDegreeDiffOperator.SetOperation("-")
         clsHeatingDegreeDiffOperator.AddParameter("tmean", "tmean", iPosition:=1)
 
@@ -598,6 +610,8 @@ Public Class dlgTransformClimatic
         ucrNudHDD.AddAdditionalCodeParameterPair(clsHeatingDegreeLogicOperator, New RParameter("baseline", ucrNudHDD.GetText, 1), iAdditionalPairNo:=1)
         ucrNudGDD.AddAdditionalCodeParameterPair(clsGrowingDegreeLogicOperator, New RParameter("baseline", ucrNudGDD.GetText, 1), iAdditionalPairNo:=1)
         ucrNudMgdd.AddAdditionalCodeParameterPair(clsModifiedLogicOperator, New RParameter("baseline", ucrNudMgdd.GetText, 1), iAdditionalPairNo:=1)
+        ucrReceiverTMax.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=2)
+        ucrReceiverTMin.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=2)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
 
@@ -751,6 +765,8 @@ Public Class dlgTransformClimatic
         SetAssignName()
         GroupByYear()
         SetAsReceiver()
+        ChangeFunctions()
+        AddRemoveMeanOperator()
     End Sub
 
     Private Sub SetAssignName()
@@ -951,6 +967,27 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub ChangeFunctions()
+        If Not rdoDegree.Checked Then
+            Exit Sub
+        End If
+        If ucrChkUseMaxMin.Checked Then
+            If rdoGrowingDegreeDays.Checked Then
+                clsGrowingDegreDiffOperator.AddParameter("tmean", "mean", iPosition:=0, bIncludeArgumentName:=False)
+                clsGrowingDegreeLogicOperator.AddParameter("tmean", "mean", iPosition:=0, bIncludeArgumentName:=False)
+                clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverTMax.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverTMin.GetVariableNames & ")")
+            ElseIf rdoHeatingDegreeDays.Checked Then
+                clsHeatingDegreeDiffOperator.AddParameter("tmean", "mean", iPosition:=1, bIncludeArgumentName:=False)
+                clsHeatingDegreeLogicOperator.AddParameter("tmean", "mean", iPosition:=0, bIncludeArgumentName:=False)
+                clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverTMax.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverTMin.GetVariableNames & ")")
+            ElseIf rdoModifiedGDD.Checked Then
+                clsModifiedMinfunction.AddParameter("tmean", "mean", iPosition:=1, bIncludeArgumentName:=False)
+                clsModifiedLogicOperator.AddParameter("tmean", "mean", iPosition:=0, bIncludeArgumentName:=False)
+                clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverTMax.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverTMin.GetVariableNames & ")")
+            End If
+        End If
+    End Sub
+
     Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrPnlTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudMultSpells.ControlContentsChanged,
         ucrChkUseMaxMin.ControlContentsChanged, ucrReceiverTMin.ControlContentsChanged, ucrReceiverTMean.ControlContentsChanged, ucrReceiverTMax.ControlContentsChanged, ucrPnlDegree.ControlContentsChanged, ucrNudGDD.ControlContentsChanged, ucrNudHDD.ControlContentsChanged, ucrInputLimit.ControlContentsChanged, ucrNudMgdd.ControlContentsChanged
         TestOkEnabled()
@@ -968,25 +1005,29 @@ Public Class dlgTransformClimatic
         If ucrChkUseMaxMin.Checked Then
             rdoDiurnalRange.Enabled = True
             rdoTMean.Enabled = True
-            rdoGrowingDegreeDays.Enabled = False
-            rdoHeatingDegreeDays.Enabled = False
-            rdoModifiedGDD.Enabled = False
             If ucrReceiverTMax.IsEmpty Then
                 ucrReceiverTMax.SetMeAsReceiver()
             Else
                 ucrReceiverTMin.SetMeAsReceiver()
             End If
         Else
-            rdoHeatingDegreeDays.Enabled = True
-            rdoGrowingDegreeDays.Enabled = True
-            rdoModifiedGDD.Enabled = True
             rdoDiurnalRange.Enabled = False
             rdoTMean.Enabled = False
             ucrReceiverTMean.SetMeAsReceiver()
         End If
     End Sub
 
+    Private Sub AddRemoveMeanOperator()
+        If rdoDegree.Checked AndAlso ucrChkUseMaxMin.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsMeanDivideByOperator)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMeanDivideByOperator)
+        End If
+    End Sub
+
     Private Sub ucrChkUseMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseMaxMin.ControlValueChanged, ucrNudGDD.ControlValueChanged, ucrNudHDD.ControlValueChanged, ucrNudMgdd.ControlValueChanged
+        AddRemoveMeanOperator()
         SetAsReceiver()
+        ChangeFunctions()
     End Sub
 End Class
