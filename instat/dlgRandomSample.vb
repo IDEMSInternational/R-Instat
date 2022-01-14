@@ -56,9 +56,11 @@ Public Class dlgRandomSample
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrChkRngKind.SetText("RNGKind")
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
         ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mersenne-Twister")
-        ucrInputRngKind.SetParameter(New RParameter("kind", 0))
 
+        ucrInputRngKind.SetParameter(New RParameter("kind", 0))
         dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
         dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
         dctRNGKind.Add("Marsaglia-Multicarry", Chr(34) & "Marsaglia-Multicarry" & Chr(34))
@@ -67,9 +69,6 @@ Public Class dlgRandomSample
         dctRNGKind.Add("Knuth-TAOCP", Chr(34) & "Knuth-TAOCP" & Chr(34))
         dctRNGKind.Add("L'Ecuyer-CMRG", Chr(34) & "L'Ecuyer-CMRG" & Chr(34))
         ucrInputRngKind.SetItems(dctRNGKind)
-
-        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
-        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
