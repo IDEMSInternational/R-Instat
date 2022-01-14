@@ -57,6 +57,7 @@ Partial Class dlgUnstack
         Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
         Me.ucrChkValuesFill = New instat.ucrCheck()
         Me.ucrChkAddPrefix = New instat.ucrCheck()
+        Me.ucrSaveHierachy = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -203,10 +204,16 @@ Partial Class dlgUnstack
         Me.ucrChkAddPrefix.Checked = False
         Me.ucrChkAddPrefix.Name = "ucrChkAddPrefix"
         '
+        'ucrSaveHierachy
+        '
+        resources.ApplyResources(Me.ucrSaveHierachy, "ucrSaveHierachy")
+        Me.ucrSaveHierachy.Name = "ucrSaveHierachy"
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.ucrSaveHierachy)
         Me.Controls.Add(Me.ucrInputTextPrefix)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrNudValuesFill)
@@ -254,4 +261,5 @@ Partial Class dlgUnstack
     Friend WithEvents ucrNudValuesFill As ucrNud
     Friend WithEvents ucrChkValuesFill As ucrCheck
     Friend WithEvents ucrChkCarryColumns As ucrCheck
+    Friend WithEvents ucrSaveHierachy As ucrSave
 End Class
