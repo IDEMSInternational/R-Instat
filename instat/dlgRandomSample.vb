@@ -22,7 +22,6 @@ Public Class dlgRandomSample
     Private clsDistributionFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private clsRNGKindFunction As New RFunction
-    Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,8 +39,10 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 376
         Dim dctRNGKind As New Dictionary(Of String, String)
+
+        ucrBase.iHelpTopicID = 376
+
         ucrNudNumberOfSamples.SetParameter(New RParameter("n", 0))
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
 
@@ -55,10 +56,8 @@ Public Class dlgRandomSample
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrChkRngKind.SetText("RNGKind")
-        ucrChkRngKind.AddToLinkedControls(ucrLinked:=ucrInputRngKind, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mersenne-Twister")
         ucrInputRngKind.SetParameter(New RParameter("kind", 0))
-        ucrChkRngKind.SetParameter(New RParameter("checked", 0))
-        ucrChkRngKind.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
         dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
@@ -68,10 +67,9 @@ Public Class dlgRandomSample
         dctRNGKind.Add("Knuth-TAOCP", Chr(34) & "Knuth-TAOCP" & Chr(34))
         dctRNGKind.Add("L'Ecuyer-CMRG", Chr(34) & "L'Ecuyer-CMRG" & Chr(34))
         ucrInputRngKind.SetItems(dctRNGKind)
-        ucrInputRngKind.SetRDefault(Chr(34) & "Mersenne-Twister" & Chr(34))
 
-        ucrChkRngKind.AddParameterValuesCondition(True, "checked", "TRUE")
-        ucrChkRngKind.AddParameterValuesCondition(False, "checked", "FALSE")
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
@@ -88,7 +86,6 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
         clsRNGKindFunction = New RFunction
-        clsDummyFunction = New RFunction
         ucrBase.clsRsyntax.ClearCodes()
         ucrSelectorRandomSamples.Reset()
         ucrSaveRandomSample.Reset()
@@ -97,7 +94,6 @@ Public Class dlgRandomSample
         clsSetSeed.SetRCommand("set.seed")
 
         clsRNGKindFunction.SetRCommand("RNGkind")
-        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         ucrDistWithParameters.SetRDistributions()
         ucrDistWithParameters.SetParameters()
@@ -121,7 +117,7 @@ Public Class dlgRandomSample
         ucrSaveRandomSample.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrInputRngKind.SetRCode(clsRNGKindFunction, bReset)
-        ucrChkRngKind.SetRCode(clsDummyFunction, bReset)
+        ucrChkRngKind.SetRCode(clsRNGKindFunction, bReset)
         ucrChkRngKind.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
@@ -177,7 +173,7 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged
+    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged, ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
