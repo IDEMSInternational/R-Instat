@@ -80,7 +80,7 @@ Partial Class sdgExtremesDisplayOptions
         Me.rdoQQPlot.Name = "rdoQQPlot"
         Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
         Me.rdoQQPlot.TabIndex = 6
-        Me.rdoQQPlot.Text = "QQ-Plot"
+        Me.rdoQQPlot.Text = "QQ Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
         'rdoQQ2
@@ -171,6 +171,7 @@ Partial Class sdgExtremesDisplayOptions
         '
         'ucrPnlExtreme
         '
+        Me.ucrPnlExtreme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlExtreme.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlExtreme.Name = "ucrPnlExtreme"
         Me.ucrPnlExtreme.Size = New System.Drawing.Size(239, 117)
@@ -178,6 +179,7 @@ Partial Class sdgExtremesDisplayOptions
         '
         'ucrSavePlots
         '
+        Me.ucrSavePlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSavePlots.Location = New System.Drawing.Point(12, 161)
         Me.ucrSavePlots.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlots.Name = "ucrSavePlots"
@@ -186,15 +188,17 @@ Partial Class sdgExtremesDisplayOptions
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(66, 193)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(157, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 2
         '
         'sdgExtremesDisplayOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(287, 224)
         Me.Controls.Add(Me.ucrSavePlots)
         Me.Controls.Add(Me.grpPlots)
@@ -208,6 +212,7 @@ Partial Class sdgExtremesDisplayOptions
         Me.grpPlots.ResumeLayout(False)
         Me.grpPlots.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

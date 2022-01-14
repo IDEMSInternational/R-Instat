@@ -77,21 +77,24 @@ Partial Class dlgDefineCorruption
         '
         'ucrDefineCorruptionSelector
         '
+        Me.ucrDefineCorruptionSelector.AutoSize = True
         Me.ucrDefineCorruptionSelector.bDropUnusedFilterLevels = False
         Me.ucrDefineCorruptionSelector.bShowHiddenColumns = False
         Me.ucrDefineCorruptionSelector.bUseCurrentFilter = True
         Me.ucrDefineCorruptionSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrDefineCorruptionSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDefineCorruptionSelector.Name = "ucrDefineCorruptionSelector"
-        Me.ucrDefineCorruptionSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrDefineCorruptionSelector.Size = New System.Drawing.Size(213, 183)
         Me.ucrDefineCorruptionSelector.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 377)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 34
         '
         'lblNoBidsReceived
@@ -105,6 +108,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverNoBids
         '
+        Me.ucrReceiverNoBids.AutoSize = True
         Me.ucrReceiverNoBids.frmParent = Me
         Me.ucrReceiverNoBids.Location = New System.Drawing.Point(414, 42)
         Me.ucrReceiverNoBids.Margin = New System.Windows.Forms.Padding(0)
@@ -117,6 +121,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverProcedureType
         '
+        Me.ucrReceiverProcedureType.AutoSize = True
         Me.ucrReceiverProcedureType.frmParent = Me
         Me.ucrReceiverProcedureType.Location = New System.Drawing.Point(414, 128)
         Me.ucrReceiverProcedureType.Margin = New System.Windows.Forms.Padding(0)
@@ -138,6 +143,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverContractValue
         '
+        Me.ucrReceiverContractValue.AutoSize = True
         Me.ucrReceiverContractValue.frmParent = Me
         Me.ucrReceiverContractValue.Location = New System.Drawing.Point(414, 257)
         Me.ucrReceiverContractValue.Margin = New System.Windows.Forms.Padding(0)
@@ -159,6 +165,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverNoConsideredBids
         '
+        Me.ucrReceiverNoConsideredBids.AutoSize = True
         Me.ucrReceiverNoConsideredBids.frmParent = Me
         Me.ucrReceiverNoConsideredBids.Location = New System.Drawing.Point(414, 85)
         Me.ucrReceiverNoConsideredBids.Margin = New System.Windows.Forms.Padding(0)
@@ -171,6 +178,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverWinnerCountry
         '
+        Me.ucrReceiverWinnerCountry.AutoSize = True
         Me.ucrReceiverWinnerCountry.frmParent = Me
         Me.ucrReceiverWinnerCountry.Location = New System.Drawing.Point(414, 214)
         Me.ucrReceiverWinnerCountry.Margin = New System.Windows.Forms.Padding(0)
@@ -201,6 +209,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverProcuringAuthority
         '
+        Me.ucrReceiverProcuringAuthority.AutoSize = True
         Me.ucrReceiverProcuringAuthority.frmParent = Me
         Me.ucrReceiverProcuringAuthority.Location = New System.Drawing.Point(251, 128)
         Me.ucrReceiverProcuringAuthority.Margin = New System.Windows.Forms.Padding(0)
@@ -222,6 +231,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverCountry
         '
+        Me.ucrReceiverCountry.AutoSize = True
         Me.ucrReceiverCountry.frmParent = Me
         Me.ucrReceiverCountry.Location = New System.Drawing.Point(251, 42)
         Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
@@ -234,6 +244,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverSignatureDate
         '
+        Me.ucrReceiverSignatureDate.AutoSize = True
         Me.ucrReceiverSignatureDate.frmParent = Me
         Me.ucrReceiverSignatureDate.Location = New System.Drawing.Point(251, 214)
         Me.ucrReceiverSignatureDate.Margin = New System.Windows.Forms.Padding(0)
@@ -246,6 +257,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverContractSector
         '
+        Me.ucrReceiverContractSector.AutoSize = True
         Me.ucrReceiverContractSector.frmParent = Me
         Me.ucrReceiverContractSector.Location = New System.Drawing.Point(251, 300)
         Me.ucrReceiverContractSector.Margin = New System.Windows.Forms.Padding(0)
@@ -258,6 +270,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverProcurementCategory
         '
+        Me.ucrReceiverProcurementCategory.AutoSize = True
         Me.ucrReceiverProcurementCategory.frmParent = Me
         Me.ucrReceiverProcurementCategory.Location = New System.Drawing.Point(251, 346)
         Me.ucrReceiverProcurementCategory.Margin = New System.Windows.Forms.Padding(0)
@@ -270,6 +283,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverWinnerName
         '
+        Me.ucrReceiverWinnerName.AutoSize = True
         Me.ucrReceiverWinnerName.frmParent = Me
         Me.ucrReceiverWinnerName.Location = New System.Drawing.Point(414, 171)
         Me.ucrReceiverWinnerName.Margin = New System.Windows.Forms.Padding(0)
@@ -318,6 +332,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverAwardDate
         '
+        Me.ucrReceiverAwardDate.AutoSize = True
         Me.ucrReceiverAwardDate.frmParent = Me
         Me.ucrReceiverAwardDate.Location = New System.Drawing.Point(251, 171)
         Me.ucrReceiverAwardDate.Margin = New System.Windows.Forms.Padding(0)
@@ -330,6 +345,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverContractTitle
         '
+        Me.ucrReceiverContractTitle.AutoSize = True
         Me.ucrReceiverContractTitle.frmParent = Me
         Me.ucrReceiverContractTitle.Location = New System.Drawing.Point(251, 257)
         Me.ucrReceiverContractTitle.Margin = New System.Windows.Forms.Padding(0)
@@ -378,6 +394,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverFiscalYear
         '
+        Me.ucrReceiverFiscalYear.AutoSize = True
         Me.ucrReceiverFiscalYear.frmParent = Me
         Me.ucrReceiverFiscalYear.Location = New System.Drawing.Point(414, 300)
         Me.ucrReceiverFiscalYear.Margin = New System.Windows.Forms.Padding(0)
@@ -399,6 +416,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrReceiverRegion
         '
+        Me.ucrReceiverRegion.AutoSize = True
         Me.ucrReceiverRegion.frmParent = Me
         Me.ucrReceiverRegion.Location = New System.Drawing.Point(251, 85)
         Me.ucrReceiverRegion.Margin = New System.Windows.Forms.Padding(0)
@@ -411,11 +429,12 @@ Partial Class dlgDefineCorruption
         '
         'ucrChkAutoGenerate
         '
+        Me.ucrChkAutoGenerate.AutoSize = True
         Me.ucrChkAutoGenerate.Checked = False
         Me.ucrChkAutoGenerate.Location = New System.Drawing.Point(10, 265)
-        Me.ucrChkAutoGenerate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkAutoGenerate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAutoGenerate.Name = "ucrChkAutoGenerate"
-        Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkAutoGenerate.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkAutoGenerate.TabIndex = 31
         '
         'cmdCountryLevel
@@ -438,8 +457,9 @@ Partial Class dlgDefineCorruption
         '
         'dlgDefineCorruption
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(553, 437)
         Me.Controls.Add(Me.cmdCalculatedColumns)
         Me.Controls.Add(Me.cmdCountryLevel)

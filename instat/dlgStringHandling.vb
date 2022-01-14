@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction As New RFunction
+    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private iFullWidth As Integer
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,6 +38,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctBoundaryPairs As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 406
 
         'ucrReceiver
@@ -65,16 +67,14 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
 
-        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
-        'disabling replaceby input text box
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoCount, rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
-        ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrPnlFixedRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=rdoFixed)
         ucrPnlFixedRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {rdoRegex}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrSave
         ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
@@ -82,26 +82,45 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetLabelText("New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
-        'ucrChkIncludeRegularExpressions
+        ucrChkIgnoreCase.SetText("Ignore Case")
+        ucrChkIgnoreCase.SetParameter(New RParameter("ignore_case", 3))
+        ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrInputBoundary.SetParameter(New RParameter("type", 0))
+        dctBoundaryPairs.Add("character", Chr(34) & "character" & Chr(34))
+        dctBoundaryPairs.Add("line_break", Chr(34) & "line_break" & Chr(34))
+        dctBoundaryPairs.Add("sentence", Chr(34) & "sentence" & Chr(34))
+        dctBoundaryPairs.Add("word", Chr(34) & "word" & Chr(34))
+        'ucrInputBoundary.SetItems(dctBoundaryPairs)
+        'ucrInputBoundary.SetDropDownStyleAsNonEditable()
+        ucrInputBoundary.Visible = False
+
+        ucrChkBoundary.SetText("Boundary")
+        ucrChkBoundary.SetParameter(New RParameter("checked", 0))
+        ucrChkBoundary.SetValuesCheckedAndUnchecked(True, False)
+        ucrChkBoundary.Enabled = False
+
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
-        ucrChkIncludeRegularExpressions.AddFunctionNamesCondition(False, {"fixed", "regex"}, False)
+
+        ucrChkIncludeRegularExpressions.SetParameter(New RParameter("checked", 0))
+        ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked(True, False)
+
+        ucrChkMultiline.SetText("Multiline")
+        ucrChkMultiline.SetParameter(New RParameter("multiline", 4))
+        ucrChkMultiline.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkComments.SetText("Comments")
+        ucrChkComments.SetParameter(New RParameter("comments", 5))
+        ucrChkComments.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoFixed, "fixed")
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
+        ucrPnlFixedRegex.Visible = False
 
         'temporary disabling
         grpRegex.Enabled = False
         'hiding the Regex group box 
         grpRegex.Hide()
-        ucrChkIncludeRegularExpressions.Enabled = False
-        'cmdDBackSlah.Visible = False
-        'cmdWBackSlash.Visible = False
-        'cmdBbackSlash.Visible = False
-        'cmdSbackSlash.Visible = False
-        'cmdBackSlashb.Visible = False
-        'cmdBackSlashw.Visible = False
-        'cmdBackSlashs.Visible = False
-        'cmdBackSlashd.Visible = False
     End Sub
 
     Private Sub SetDefaults()
@@ -113,11 +132,12 @@ Public Class dlgStringHandling
         clsReplaceAllFunction = New RFunction
         clsFixedFunction = New RFunction
         clsRegexFunction = New RFunction
+        clsStringCollFunction = New RFunction
+        clsBoundaryFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
-        'temporaryfix
-        ucrChkIncludeRegularExpressions.Checked = False
         rdoFixed.Checked = True
         rdoCount.Checked = True
         VisibleRdo()
@@ -129,13 +149,25 @@ Public Class dlgStringHandling
         ucrInputPattern.Reset()
         ucrReceiverForRegexExpression.ResetText()
 
+        clsDummyFunction.AddParameter("checked", False, iPosition:=0)
+
+        clsBoundaryFunction.SetPackageName("stringr")
+        clsBoundaryFunction.SetRCommand("boundary")
+        clsBoundaryFunction.AddParameter("type", Chr(34) & "character" & Chr(34), iPosition:=0)
+
         clsFixedFunction.SetPackageName("stringr")
         clsFixedFunction.SetRCommand("fixed")
         clsFixedFunction.AddParameter("ignore_case", "FALSE")
 
         clsRegexFunction.SetPackageName("stringr")
         clsRegexFunction.SetRCommand("regex")
-        clsRegexFunction.AddParameter("ignore_case", "TRUE")
+        clsRegexFunction.AddParameter("ignore_case", "FALSE", bIncludeArgumentName:=False, iPosition:=3)
+        clsRegexFunction.AddParameter("multiline", "FALSE", iPosition:=4)
+        clsRegexFunction.AddParameter("comments", "FALSE", iPosition:=5)
+
+        clsStringCollFunction.SetPackageName("stringr")
+        clsStringCollFunction.SetRCommand("coll")
+        clsStringCollFunction.AddParameter("ignore_case", "FALSE", bIncludeArgumentName:=False, iPosition:=3)
 
         ucrReceiverForRegexExpression.SetText("")
         AddRemoveParameters()
@@ -156,7 +188,6 @@ Public Class dlgStringHandling
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         NewColumnName()
-        'ChangeSize()
     End Sub
 
     'temporary fix.
@@ -176,13 +207,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("string", 0), iAdditionalPairNo:=3)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("string", 0), iAdditionalPairNo:=4)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("string", 0), iAdditionalPairNo:=5)
-
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsDetectFunction, New RParameter("pattern", 1), iAdditionalPairNo:=1)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("pattern", 1), iAdditionalPairNo:=2)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("pattern", 1), iAdditionalPairNo:=3)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 1), iAdditionalPairNo:=6)
+        ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
@@ -193,12 +218,13 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsReplaceAllFunction, iAdditionalPairNo:=5)
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
-        ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
-        'ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
+        ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
+        ucrInputBoundary.SetRCode(clsBoundaryFunction, bReset)
+        ucrChkComments.SetRCode(clsRegexFunction, bReset)
+        ucrChkMultiline.SetRCode(clsRegexFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
-        'ucrChkIncludeRegularExpressions.SetRCode(clsFixedFunction, bReset)
-        'ucrPnlFixedRegex.SetRCode(clsFixedFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -230,38 +256,22 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub AddRemoveParameters()
+        clsStringCollFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
-            If rdoRegex.Checked Then
-                clsFixedFunction.RemoveParameterByName("ignore_case")
-                clsRegexFunction.AddParameter("ignore_case", "TRUE")
-                If Not ucrReceiverForRegexExpression.IsEmpty Then
-                    clsRegexFunction.AddParameter("pattern", Chr(34) & ucrReceiverForRegexExpression.GetText & Chr(34))
-                    clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                    clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                    clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                    clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                    clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                    clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
-                End If
-            Else
-                clsFixedFunction.AddParameter("ignore_case", "FALSE")
-                clsRegexFunction.RemoveParameterByName("ignore_case")
-                clsRegexFunction.RemoveParameterByName("pattern")
-                clsFixedFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-                clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-                clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-                clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-                clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-                clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-                clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-            End If
+            clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
         Else
-            clsCountFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-            clsDetectFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-            clsExtractFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-            clsLocateFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-            clsReplaceFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-            clsReplaceAllFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
         End If
     End Sub
 
@@ -279,8 +289,10 @@ Public Class dlgStringHandling
         ElseIf rdoReplaceAll.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
         End If
+
         NewColumnName()
         ChangePrefixName()
+        AddRemoveParameters()
     End Sub
 
     Private Sub ChangeSize()
@@ -317,110 +329,28 @@ Public Class dlgStringHandling
         End If
     End Sub
 
-    Private Sub cmdQuote_Click(sender As Object, e As EventArgs) Handles cmdQuote.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(" "" ")
-    End Sub
-
-    Private Sub cmdSingleQuote_Click(sender As Object, e As EventArgs) Handles cmdSingleQuote.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(" ' ' ")
-    End Sub
-
-    Private Sub cmdOpenClosedBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenClosedBracket.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("[ ] ")
-    End Sub
-
-    Private Sub cmdOpenBracketCaretClosedBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenBracketCaretClosedBracket.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("[ ^ ] ")
-    End Sub
-
-    Private Sub cmdOpenCloseBrace_Click(sender As Object, e As EventArgs) Handles cmdOpenCloseBrace.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("{ }")
-    End Sub
-
-    Private Sub cmdOpenCloseParenthesis_Click(sender As Object, e As EventArgs) Handles cmdOpenCloseParenthesis.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("*")
-    End Sub
-
-    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("+")
-    End Sub
-
-    Private Sub cmdQuestionMark_Click(sender As Object, e As EventArgs) Handles cmdQuestionMark.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("?")
-    End Sub
-
-    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(".")
-    End Sub
-
-    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("^")
-    End Sub
-
-    Private Sub cmdDollarSign_Click(sender As Object, e As EventArgs) Handles cmdDollarSign.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("$")
-    End Sub
-
-    Private Sub cmdOr_Click(sender As Object, e As EventArgs) Handles cmdOr.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("|,")
-    End Sub
-
-    Private Sub cmdBackSlashb_Click(sender As Object, e As EventArgs) Handles cmdBackSlashb.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\b")
-    End Sub
-
-    Private Sub cmdBbackSlash_Click(sender As Object, e As EventArgs) Handles cmdBbackSlash.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\B")
-    End Sub
-
-    Private Sub cmdBackSlashw_Click(sender As Object, e As EventArgs) Handles cmdBackSlashw.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\w")
-    End Sub
-
-    Private Sub cmdWBackSlash_Click(sender As Object, e As EventArgs) Handles cmdWBackSlash.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\W")
-    End Sub
-
-    Private Sub cmdBackSlashs_Click(sender As Object, e As EventArgs) Handles cmdBackSlashs.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\s")
-    End Sub
-
-    Private Sub cmdSbackSlash_Click(sender As Object, e As EventArgs) Handles cmdSbackSlash.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\S")
-    End Sub
-
-    Private Sub cmdBackSlashd_Click(sender As Object, e As EventArgs) Handles cmdBackSlashd.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\d")
-    End Sub
-
-    Private Sub cmdDBackSlah_Click(sender As Object, e As EventArgs) Handles cmdDBackSlah.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\D")
-    End Sub
-
-    Private Sub cmdBackSlash_Click(sender As Object, e As EventArgs) Handles cmdBackSlash.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\")
-    End Sub
-
-    Private Sub cmdStar_Click(sender As Object, e As EventArgs) Handles cmdStar.Click
-        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("*")
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+        sdgConstructRegexExpression.ShowDialog()
+        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForRegexExpression.Clear()
     End Sub
 
-    Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrInputBoundary.ControlValueChanged, ucrChkBoundary.ControlValueChanged, ucrInputPattern.ControlValueChanged
         VisibleRdo()
         AddRemoveParameters()
+        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
+        grpModifiers.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
     End Sub
 
     Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged
         VisibleRdo()
-        AddRemoveParameters()
         ChangeSize()
     End Sub
 
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

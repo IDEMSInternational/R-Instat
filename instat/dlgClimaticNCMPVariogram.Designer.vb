@@ -78,6 +78,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrNudNYB
         '
+        Me.ucrNudNYB.AutoSize = True
         Me.ucrNudNYB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYB.Location = New System.Drawing.Point(156, 20)
@@ -100,6 +101,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrNudNYE
         '
+        Me.ucrNudNYE.AutoSize = True
         Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYE.Location = New System.Drawing.Point(156, 54)
@@ -162,6 +164,8 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 271)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -170,6 +174,7 @@ Partial Class dlgClimaticNCMPVariogram
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(166, 244)
@@ -179,6 +184,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrReceiverMonth
         '
+        Me.ucrReceiverMonth.AutoSize = True
         Me.ucrReceiverMonth.frmParent = Me
         Me.ucrReceiverMonth.Location = New System.Drawing.Point(254, 148)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
@@ -191,6 +197,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(254, 104)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -203,6 +210,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(254, 60)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -215,27 +223,30 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrSelectorVariogram
         '
+        Me.ucrSelectorVariogram.AutoSize = True
         Me.ucrSelectorVariogram.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariogram.bShowHiddenColumns = False
         Me.ucrSelectorVariogram.bUseCurrentFilter = True
         Me.ucrSelectorVariogram.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorVariogram.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVariogram.Name = "ucrSelectorVariogram"
-        Me.ucrSelectorVariogram.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVariogram.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorVariogram.TabIndex = 0
         '
         'ucrSaveVariogram
         '
+        Me.ucrSaveVariogram.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveVariogram.Location = New System.Drawing.Point(10, 214)
         Me.ucrSaveVariogram.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveVariogram.Name = "ucrSaveVariogram"
-        Me.ucrSaveVariogram.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveVariogram.Size = New System.Drawing.Size(383, 22)
         Me.ucrSaveVariogram.TabIndex = 16
         '
         'dlgClimaticNCMPVariogram
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(420, 326)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdChooseFile)

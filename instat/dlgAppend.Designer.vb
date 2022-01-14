@@ -38,7 +38,6 @@ Partial Class dlgAppend
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAppend))
         Me.lblAppendToDataframe = New System.Windows.Forms.Label()
         Me.lblDataframes = New System.Windows.Forms.Label()
         Me.lblIDColName = New System.Windows.Forms.Label()
@@ -52,62 +51,101 @@ Partial Class dlgAppend
         '
         'lblAppendToDataframe
         '
-        resources.ApplyResources(Me.lblAppendToDataframe, "lblAppendToDataframe")
+        Me.lblAppendToDataframe.AutoSize = True
+        Me.lblAppendToDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAppendToDataframe.Location = New System.Drawing.Point(240, 17)
         Me.lblAppendToDataframe.Name = "lblAppendToDataframe"
+        Me.lblAppendToDataframe.Size = New System.Drawing.Size(115, 13)
+        Me.lblAppendToDataframe.TabIndex = 2
+        Me.lblAppendToDataframe.Text = "Selected Data Frames:"
         '
         'lblDataframes
         '
-        resources.ApplyResources(Me.lblDataframes, "lblDataframes")
+        Me.lblDataframes.AutoSize = True
+        Me.lblDataframes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDataframes.Location = New System.Drawing.Point(12, 17)
         Me.lblDataframes.Name = "lblDataframes"
+        Me.lblDataframes.Size = New System.Drawing.Size(70, 13)
+        Me.lblDataframes.TabIndex = 0
+        Me.lblDataframes.Text = "Data Frames:"
         '
         'lblIDColName
         '
-        resources.ApplyResources(Me.lblIDColName, "lblIDColName")
+        Me.lblIDColName.AutoSize = True
+        Me.lblIDColName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIDColName.Location = New System.Drawing.Point(132, 179)
         Me.lblIDColName.Name = "lblIDColName"
+        Me.lblIDColName.Size = New System.Drawing.Size(90, 13)
+        Me.lblIDColName.TabIndex = 5
+        Me.lblIDColName.Text = "ID Column Name:"
         '
         'ucrChkIncludeIDColumn
         '
+        Me.ucrChkIncludeIDColumn.AutoSize = True
         Me.ucrChkIncludeIDColumn.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeIDColumn, "ucrChkIncludeIDColumn")
+        Me.ucrChkIncludeIDColumn.Location = New System.Drawing.Point(10, 177)
         Me.ucrChkIncludeIDColumn.Name = "ucrChkIncludeIDColumn"
+        Me.ucrChkIncludeIDColumn.Size = New System.Drawing.Size(116, 23)
+        Me.ucrChkIncludeIDColumn.TabIndex = 4
         '
         'ucrSaveGraph
         '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 203)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(305, 24)
+        Me.ucrSaveGraph.TabIndex = 7
         '
         'ucrInputIDColName
         '
         Me.ucrInputIDColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputIDColName.AutoSize = True
         Me.ucrInputIDColName.IsMultiline = False
         Me.ucrInputIDColName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputIDColName, "ucrInputIDColName")
+        Me.ucrInputIDColName.Location = New System.Drawing.Point(242, 176)
         Me.ucrInputIDColName.Name = "ucrInputIDColName"
+        Me.ucrInputIDColName.Size = New System.Drawing.Size(122, 21)
+        Me.ucrInputIDColName.TabIndex = 6
         '
         'ucrReceiverAppendDataframe
         '
+        Me.ucrReceiverAppendDataframe.AutoSize = True
         Me.ucrReceiverAppendDataframe.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverAppendDataframe, "ucrReceiverAppendDataframe")
+        Me.ucrReceiverAppendDataframe.Location = New System.Drawing.Point(242, 32)
+        Me.ucrReceiverAppendDataframe.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAppendDataframe.Name = "ucrReceiverAppendDataframe"
         Me.ucrReceiverAppendDataframe.Selector = Nothing
+        Me.ucrReceiverAppendDataframe.Size = New System.Drawing.Size(122, 104)
         Me.ucrReceiverAppendDataframe.strNcFilePath = ""
+        Me.ucrReceiverAppendDataframe.TabIndex = 3
         Me.ucrReceiverAppendDataframe.ucrSelector = Nothing
         '
         'ucrSelectorDataframes
         '
+        Me.ucrSelectorDataframes.AutoSize = True
         Me.ucrSelectorDataframes.bShowHiddenColumns = False
-        resources.ApplyResources(Me.ucrSelectorDataframes, "ucrSelectorDataframes")
+        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 32)
+        Me.ucrSelectorDataframes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataframes.Name = "ucrSelectorDataframes"
+        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(216, 150)
+        Me.ucrSelectorDataframes.TabIndex = 1
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgAppend
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(421, 288)
         Me.Controls.Add(Me.ucrChkIncludeIDColumn)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputIDColName)
@@ -121,7 +159,9 @@ Partial Class dlgAppend
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAppend"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Append_Data_Frames"
+        Me.Text = "Append (Bind Rows)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

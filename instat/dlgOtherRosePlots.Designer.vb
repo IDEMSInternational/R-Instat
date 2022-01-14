@@ -95,7 +95,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarFrequency.TabIndex = 90
         Me.rdoPolarFrequency.TabStop = True
         Me.rdoPolarFrequency.Tag = ""
-        Me.rdoPolarFrequency.Text = "Polar frequency"
+        Me.rdoPolarFrequency.Text = "Polar Frequency"
         Me.rdoPolarFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPolarFrequency.UseVisualStyleBackColor = True
         '
@@ -254,6 +254,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverFacetOne
         '
+        Me.ucrReceiverFacetOne.AutoSize = True
         Me.ucrReceiverFacetOne.frmParent = Me
         Me.ucrReceiverFacetOne.Location = New System.Drawing.Point(403, 72)
         Me.ucrReceiverFacetOne.Margin = New System.Windows.Forms.Padding(0)
@@ -266,6 +267,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverFacetTwo
         '
+        Me.ucrReceiverFacetTwo.AutoSize = True
         Me.ucrReceiverFacetTwo.frmParent = Me
         Me.ucrReceiverFacetTwo.Location = New System.Drawing.Point(403, 113)
         Me.ucrReceiverFacetTwo.Margin = New System.Windows.Forms.Padding(0)
@@ -278,6 +280,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrNudPercentile
         '
+        Me.ucrNudPercentile.AutoSize = True
         Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudPercentile.Location = New System.Drawing.Point(85, 307)
@@ -290,6 +293,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 390)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
@@ -298,6 +302,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(17, 9)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
@@ -307,6 +312,7 @@ Partial Class dlgOtherRosePlots
         'ucrInputColor
         '
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
         Me.ucrInputColor.Location = New System.Drawing.Point(85, 279)
@@ -316,6 +322,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(259, 72)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -328,6 +335,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverWindDirection
         '
+        Me.ucrReceiverWindDirection.AutoSize = True
         Me.ucrReceiverWindDirection.frmParent = Me
         Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(259, 160)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
@@ -340,24 +348,28 @@ Partial Class dlgOtherRosePlots
         '
         'ucrSelectorOtherRosePlots
         '
+        Me.ucrSelectorOtherRosePlots.AutoSize = True
         Me.ucrSelectorOtherRosePlots.bDropUnusedFilterLevels = False
         Me.ucrSelectorOtherRosePlots.bShowHiddenColumns = False
         Me.ucrSelectorOtherRosePlots.bUseCurrentFilter = True
         Me.ucrSelectorOtherRosePlots.Location = New System.Drawing.Point(14, 55)
         Me.ucrSelectorOtherRosePlots.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOtherRosePlots.Name = "ucrSelectorOtherRosePlots"
-        Me.ucrSelectorOtherRosePlots.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOtherRosePlots.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorOtherRosePlots.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(15, 426)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 27
         '
         'ucrReceiverPollutant
         '
+        Me.ucrReceiverPollutant.AutoSize = True
         Me.ucrReceiverPollutant.frmParent = Me
         Me.ucrReceiverPollutant.Location = New System.Drawing.Point(259, 205)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
@@ -370,22 +382,25 @@ Partial Class dlgOtherRosePlots
         '
         'ucrChkForcePositive
         '
+        Me.ucrChkForcePositive.AutoSize = True
         Me.ucrChkForcePositive.Checked = False
         Me.ucrChkForcePositive.Location = New System.Drawing.Point(14, 362)
         Me.ucrChkForcePositive.Name = "ucrChkForcePositive"
-        Me.ucrChkForcePositive.Size = New System.Drawing.Size(244, 20)
+        Me.ucrChkForcePositive.Size = New System.Drawing.Size(244, 23)
         Me.ucrChkForcePositive.TabIndex = 25
         '
         'ucrChkNormalise
         '
+        Me.ucrChkNormalise.AutoSize = True
         Me.ucrChkNormalise.Checked = False
         Me.ucrChkNormalise.Location = New System.Drawing.Point(14, 363)
         Me.ucrChkNormalise.Name = "ucrChkNormalise"
-        Me.ucrChkNormalise.Size = New System.Drawing.Size(156, 20)
+        Me.ucrChkNormalise.Size = New System.Drawing.Size(156, 23)
         Me.ucrChkNormalise.TabIndex = 85
         '
         'ucrReceiverMultiplePollutants
         '
+        Me.ucrReceiverMultiplePollutants.AutoSize = True
         Me.ucrReceiverMultiplePollutants.frmParent = Me
         Me.ucrReceiverMultiplePollutants.Location = New System.Drawing.Point(259, 207)
         Me.ucrReceiverMultiplePollutants.Margin = New System.Windows.Forms.Padding(0)
@@ -398,6 +413,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverWindSpeed
         '
+        Me.ucrReceiverWindSpeed.AutoSize = True
         Me.ucrReceiverWindSpeed.frmParent = Me
         Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(259, 113)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
@@ -410,6 +426,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrReceiverX
         '
+        Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
         Me.ucrReceiverX.Location = New System.Drawing.Point(259, 113)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
@@ -422,6 +439,7 @@ Partial Class dlgOtherRosePlots
         '
         'ucrNudNmberOfClusters
         '
+        Me.ucrNudNmberOfClusters.AutoSize = True
         Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(97, 250)
@@ -435,6 +453,7 @@ Partial Class dlgOtherRosePlots
         'ucrInputMethod
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
         Me.ucrInputMethod.Location = New System.Drawing.Point(83, 249)
@@ -445,6 +464,7 @@ Partial Class dlgOtherRosePlots
         'ucrInputStatistic
         '
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
+        Me.ucrInputStatistic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
         Me.ucrInputStatistic.Location = New System.Drawing.Point(83, 249)
@@ -454,40 +474,45 @@ Partial Class dlgOtherRosePlots
         '
         'ucrChkPadDate
         '
+        Me.ucrChkPadDate.AutoSize = True
         Me.ucrChkPadDate.Checked = False
         Me.ucrChkPadDate.Location = New System.Drawing.Point(15, 307)
         Me.ucrChkPadDate.Name = "ucrChkPadDate"
-        Me.ucrChkPadDate.Size = New System.Drawing.Size(130, 20)
+        Me.ucrChkPadDate.Size = New System.Drawing.Size(130, 23)
         Me.ucrChkPadDate.TabIndex = 84
         '
         'ucrChkSmooth
         '
+        Me.ucrChkSmooth.AutoSize = True
         Me.ucrChkSmooth.Checked = False
         Me.ucrChkSmooth.Location = New System.Drawing.Point(14, 337)
         Me.ucrChkSmooth.Name = "ucrChkSmooth"
-        Me.ucrChkSmooth.Size = New System.Drawing.Size(244, 20)
+        Me.ucrChkSmooth.Size = New System.Drawing.Size(244, 23)
         Me.ucrChkSmooth.TabIndex = 103
         '
         'ucrChkExcludeMissing
         '
+        Me.ucrChkExcludeMissing.AutoSize = True
         Me.ucrChkExcludeMissing.Checked = False
         Me.ucrChkExcludeMissing.Location = New System.Drawing.Point(14, 337)
         Me.ucrChkExcludeMissing.Name = "ucrChkExcludeMissing"
-        Me.ucrChkExcludeMissing.Size = New System.Drawing.Size(244, 20)
+        Me.ucrChkExcludeMissing.Size = New System.Drawing.Size(244, 23)
         Me.ucrChkExcludeMissing.TabIndex = 24
         '
         'ucrChkTransform
         '
+        Me.ucrChkTransform.AutoSize = True
         Me.ucrChkTransform.Checked = False
         Me.ucrChkTransform.Location = New System.Drawing.Point(14, 337)
         Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ucrChkTransform.Size = New System.Drawing.Size(244, 20)
+        Me.ucrChkTransform.Size = New System.Drawing.Size(244, 23)
         Me.ucrChkTransform.TabIndex = 87
         '
         'dlgOtherRosePlots
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(527, 488)
         Me.Controls.Add(Me.lblFacetTwo)
         Me.Controls.Add(Me.lblFacetOne)

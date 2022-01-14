@@ -25,6 +25,7 @@ Public Class dlgSummaryTables
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
+
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -128,6 +129,8 @@ Public Class dlgSummaryTables
 
         ucrChkDisplayMargins.AddToLinkedControls({ucrInputMarginName}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="All")
         ucrChkDisplayMargins.AddToLinkedControls({ucrPnlMargin}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoOuter)
+
+        ucrReorderSummary.bDataIsSummaries = True
     End Sub
 
     Private Sub SetDefaults()
@@ -220,6 +223,7 @@ Public Class dlgSummaryTables
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsMutableOperator, bReset)
+        FillListView()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -242,6 +246,7 @@ Public Class dlgSummaryTables
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
         sdgSummaries.bEnable2VariableTab = True
+        FillListView()
         TestOKEnabled()
     End Sub
 
@@ -320,5 +325,35 @@ Public Class dlgSummaryTables
             Next
             clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator)
         End If
+    End Sub
+
+    Private Sub FillListView()
+        If clsSummariesList.clsParameters.Count > 0 Then
+            ucrReorderSummary.lstAvailableData.Clear()
+            ucrReorderSummary.lstAvailableData.Columns.Add("Summaries")
+            ucrReorderSummary.lstAvailableData.Columns(0).Width = -2
+            For i = 0 To clsSummariesList.clsParameters.Count - 1
+                clsSummariesList.clsParameters(i).Position = i
+                ucrReorderSummary.lstAvailableData.Items.Add(clsSummariesList.clsParameters(i).strArgumentName)
+            Next
+        Else
+            ucrReorderSummary.lstAvailableData.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrReorderSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReorderSummary.ControlValueChanged
+        Dim lstOrderedSummaries As New List(Of RParameter)
+        Dim iPosition As Integer = 0
+        For i = 0 To ucrReorderSummary.lstAvailableData.Items.Count - 1
+            lstOrderedSummaries.Add(clsSummariesList.GetParameter(ucrReorderSummary.lstAvailableData.Items(i).Text))
+        Next
+
+        clsSummariesList.ClearParameters()
+        'Changing the parameter positions
+        For Each clsParameter In lstOrderedSummaries
+            clsParameter.Position = iPosition
+            clsSummariesList.AddParameter(clsParameter)
+            iPosition += 1
+        Next
     End Sub
 End Class

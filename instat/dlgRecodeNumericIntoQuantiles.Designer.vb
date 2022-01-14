@@ -81,6 +81,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrNewColumnName
         '
+        Me.ucrNewColumnName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 199)
         Me.ucrNewColumnName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
@@ -89,6 +90,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrNudQuantileAlgorithm
         '
+        Me.ucrNudQuantileAlgorithm.AutoSize = True
         Me.ucrNudQuantileAlgorithm.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 117)
@@ -101,6 +103,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrNudNumberOfQuantiles
         '
+        Me.ucrNudNumberOfQuantiles.AutoSize = True
         Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 91)
@@ -113,6 +116,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrReceiverNumeric
         '
+        Me.ucrReceiverNumeric.AutoSize = True
         Me.ucrReceiverNumeric.frmParent = Me
         Me.ucrReceiverNumeric.Location = New System.Drawing.Point(245, 60)
         Me.ucrReceiverNumeric.Margin = New System.Windows.Forms.Padding(0)
@@ -125,26 +129,30 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrSelectorRecodeNumeric
         '
+        Me.ucrSelectorRecodeNumeric.AutoSize = True
         Me.ucrSelectorRecodeNumeric.bDropUnusedFilterLevels = False
         Me.ucrSelectorRecodeNumeric.bShowHiddenColumns = False
         Me.ucrSelectorRecodeNumeric.bUseCurrentFilter = True
         Me.ucrSelectorRecodeNumeric.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorRecodeNumeric.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRecodeNumeric.Name = "ucrSelectorRecodeNumeric"
-        Me.ucrSelectorRecodeNumeric.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorRecodeNumeric.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorRecodeNumeric.TabIndex = 0
         '
         'dlgRecodeNumericIntoQuantiles
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 286)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrNewColumnName)

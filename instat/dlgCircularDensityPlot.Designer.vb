@@ -146,6 +146,7 @@ Partial Class dlgCircularDensityPlot
         'ucrInputUnits
         '
         Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputUnits.GetSetSelectedIndex = -1
         Me.ucrInputUnits.IsReadOnly = False
         Me.ucrInputUnits.Location = New System.Drawing.Point(317, 217)
@@ -155,6 +156,7 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(36, -2)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
@@ -164,6 +166,7 @@ Partial Class dlgCircularDensityPlot
         'ucrInputComboKernel
         '
         Me.ucrInputComboKernel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboKernel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboKernel.GetSetSelectedIndex = -1
         Me.ucrInputComboKernel.IsReadOnly = False
         Me.ucrInputComboKernel.Location = New System.Drawing.Point(317, 190)
@@ -173,14 +176,16 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrChkOmitMissing
         '
+        Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(5, 257)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 20)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 23)
         Me.ucrChkOmitMissing.TabIndex = 20
         '
         'ucrSaveDensity
         '
+        Me.ucrSaveDensity.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveDensity.Location = New System.Drawing.Point(5, 297)
         Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDensity.Name = "ucrSaveDensity"
@@ -189,6 +194,7 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrReceiverVariable
         '
+        Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
         Me.ucrReceiverVariable.Location = New System.Drawing.Point(289, 85)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
@@ -201,25 +207,29 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrSelectorDataFrame
         '
+        Me.ucrSelectorDataFrame.AutoSize = True
         Me.ucrSelectorDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSelectorDataFrame.bShowHiddenColumns = False
         Me.ucrSelectorDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(10, 60)
         Me.ucrSelectorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
-        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDataFrame.TabIndex = 16
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 326)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputBins
         '
         Me.ucrInputBins.AddQuotesIfUnrecognised = True
+        Me.ucrInputBins.AutoSize = True
         Me.ucrInputBins.IsMultiline = False
         Me.ucrInputBins.IsReadOnly = False
         Me.ucrInputBins.Location = New System.Drawing.Point(339, 245)
@@ -230,6 +240,7 @@ Partial Class dlgCircularDensityPlot
         'ucrInputBandWidth
         '
         Me.ucrInputBandWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputBandWidth.AutoSize = True
         Me.ucrInputBandWidth.IsMultiline = False
         Me.ucrInputBandWidth.IsReadOnly = False
         Me.ucrInputBandWidth.Location = New System.Drawing.Point(353, 245)
@@ -239,6 +250,7 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrNudShrink
         '
+        Me.ucrNudShrink.AutoSize = True
         Me.ucrNudShrink.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShrink.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudShrink.Location = New System.Drawing.Point(360, 272)
@@ -260,8 +272,9 @@ Partial Class dlgCircularDensityPlot
         '
         'dlgCircularDensityPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(420, 389)
         Me.Controls.Add(Me.lblShrink)
         Me.Controls.Add(Me.ucrNudShrink)

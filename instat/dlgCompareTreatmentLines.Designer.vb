@@ -22,7 +22,6 @@ Partial Class dlgCompareTreatmentLines
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCompareTreatmentLines))
         Me.lblMeasurement = New System.Windows.Forms.Label()
         Me.lblOption = New System.Windows.Forms.Label()
         Me.lblID = New System.Windows.Forms.Label()
@@ -66,28 +65,53 @@ Partial Class dlgCompareTreatmentLines
         '
         'lblMeasurement
         '
-        resources.ApplyResources(Me.lblMeasurement, "lblMeasurement")
+        Me.lblMeasurement.AutoSize = True
+        Me.lblMeasurement.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMeasurement.Location = New System.Drawing.Point(267, 80)
         Me.lblMeasurement.Name = "lblMeasurement"
+        Me.lblMeasurement.Size = New System.Drawing.Size(74, 13)
+        Me.lblMeasurement.TabIndex = 4
+        Me.lblMeasurement.Text = "Measurement:"
         '
         'lblOption
         '
-        resources.ApplyResources(Me.lblOption, "lblOption")
+        Me.lblOption.AutoSize = True
+        Me.lblOption.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblOption.Location = New System.Drawing.Point(267, 121)
         Me.lblOption.Name = "lblOption"
+        Me.lblOption.Size = New System.Drawing.Size(41, 13)
+        Me.lblOption.TabIndex = 6
+        Me.lblOption.Text = "Option:"
         '
         'lblID
         '
-        resources.ApplyResources(Me.lblID, "lblID")
+        Me.lblID.AutoSize = True
+        Me.lblID.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblID.Location = New System.Drawing.Point(267, 246)
         Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(21, 13)
+        Me.lblID.TabIndex = 12
+        Me.lblID.Text = "ID:"
         '
         'lblOption1
         '
-        resources.ApplyResources(Me.lblOption1, "lblOption1")
+        Me.lblOption1.AutoSize = True
+        Me.lblOption1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblOption1.Location = New System.Drawing.Point(267, 162)
         Me.lblOption1.Name = "lblOption1"
+        Me.lblOption1.Size = New System.Drawing.Size(50, 13)
+        Me.lblOption1.TabIndex = 8
+        Me.lblOption1.Text = "Option 1:"
         '
         'lblTreatment2
         '
-        resources.ApplyResources(Me.lblTreatment2, "lblTreatment2")
+        Me.lblTreatment2.AutoSize = True
+        Me.lblTreatment2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTreatment2.Location = New System.Drawing.Point(267, 204)
         Me.lblTreatment2.Name = "lblTreatment2"
+        Me.lblTreatment2.Size = New System.Drawing.Size(50, 13)
+        Me.lblTreatment2.TabIndex = 10
+        Me.lblTreatment2.Text = "Option 2:"
         '
         'GroupBox1
         '
@@ -100,74 +124,113 @@ Partial Class dlgCompareTreatmentLines
         Me.GroupBox1.Controls.Add(Me.ucrReceiverContext2)
         Me.GroupBox1.Controls.Add(Me.ucrInputContext1)
         Me.GroupBox1.Controls.Add(Me.ucrReceiverContext1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Location = New System.Drawing.Point(263, 292)
         Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(248, 184)
+        Me.GroupBox1.TabIndex = 15
         Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Include Contexts"
         '
         'lblContext3
         '
-        resources.ApplyResources(Me.lblContext3, "lblContext3")
+        Me.lblContext3.AutoSize = True
+        Me.lblContext3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblContext3.Location = New System.Drawing.Point(6, 115)
         Me.lblContext3.Name = "lblContext3"
+        Me.lblContext3.Size = New System.Drawing.Size(73, 13)
+        Me.lblContext3.TabIndex = 6
+        Me.lblContext3.Text = "Third Context:"
         '
         'ucrInputContext3
         '
         Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputContext3.GetSetSelectedIndex = -1
         Me.ucrInputContext3.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
+        Me.ucrInputContext3.Location = New System.Drawing.Point(141, 130)
         Me.ucrInputContext3.Name = "ucrInputContext3"
+        Me.ucrInputContext3.Size = New System.Drawing.Size(98, 21)
+        Me.ucrInputContext3.TabIndex = 8
         '
         'ucrReceiverContext3
         '
+        Me.ucrReceiverContext3.AutoSize = True
         Me.ucrReceiverContext3.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
+        Me.ucrReceiverContext3.Location = New System.Drawing.Point(8, 130)
+        Me.ucrReceiverContext3.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
         Me.ucrReceiverContext3.Selector = Nothing
+        Me.ucrReceiverContext3.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverContext3.strNcFilePath = ""
+        Me.ucrReceiverContext3.TabIndex = 7
         Me.ucrReceiverContext3.ucrSelector = Nothing
         '
         'lblContext2
         '
-        resources.ApplyResources(Me.lblContext2, "lblContext2")
+        Me.lblContext2.AutoSize = True
+        Me.lblContext2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblContext2.Location = New System.Drawing.Point(6, 69)
         Me.lblContext2.Name = "lblContext2"
+        Me.lblContext2.Size = New System.Drawing.Size(86, 13)
+        Me.lblContext2.TabIndex = 3
+        Me.lblContext2.Text = "Second Context:"
         '
         'lblContext1
         '
-        resources.ApplyResources(Me.lblContext1, "lblContext1")
+        Me.lblContext1.AutoSize = True
+        Me.lblContext1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblContext1.Location = New System.Drawing.Point(6, 23)
         Me.lblContext1.Name = "lblContext1"
+        Me.lblContext1.Size = New System.Drawing.Size(68, 13)
+        Me.lblContext1.TabIndex = 0
+        Me.lblContext1.Text = "First Context:"
         '
         'ucrInputContext2
         '
         Me.ucrInputContext2.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputContext2.GetSetSelectedIndex = -1
         Me.ucrInputContext2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext2, "ucrInputContext2")
+        Me.ucrInputContext2.Location = New System.Drawing.Point(141, 84)
         Me.ucrInputContext2.Name = "ucrInputContext2"
+        Me.ucrInputContext2.Size = New System.Drawing.Size(98, 21)
+        Me.ucrInputContext2.TabIndex = 5
         '
         'ucrReceiverContext2
         '
+        Me.ucrReceiverContext2.AutoSize = True
         Me.ucrReceiverContext2.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverContext2, "ucrReceiverContext2")
+        Me.ucrReceiverContext2.Location = New System.Drawing.Point(8, 84)
+        Me.ucrReceiverContext2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext2.Name = "ucrReceiverContext2"
         Me.ucrReceiverContext2.Selector = Nothing
+        Me.ucrReceiverContext2.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverContext2.strNcFilePath = ""
+        Me.ucrReceiverContext2.TabIndex = 4
         Me.ucrReceiverContext2.ucrSelector = Nothing
         '
         'ucrInputContext1
         '
         Me.ucrInputContext1.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputContext1.GetSetSelectedIndex = -1
         Me.ucrInputContext1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext1, "ucrInputContext1")
+        Me.ucrInputContext1.Location = New System.Drawing.Point(141, 38)
         Me.ucrInputContext1.Name = "ucrInputContext1"
+        Me.ucrInputContext1.Size = New System.Drawing.Size(98, 21)
+        Me.ucrInputContext1.TabIndex = 2
         '
         'ucrReceiverContext1
         '
+        Me.ucrReceiverContext1.AutoSize = True
         Me.ucrReceiverContext1.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverContext1, "ucrReceiverContext1")
+        Me.ucrReceiverContext1.Location = New System.Drawing.Point(8, 38)
+        Me.ucrReceiverContext1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverContext1.Name = "ucrReceiverContext1"
         Me.ucrReceiverContext1.Selector = Nothing
+        Me.ucrReceiverContext1.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverContext1.strNcFilePath = ""
+        Me.ucrReceiverContext1.TabIndex = 1
         Me.ucrReceiverContext1.ucrSelector = Nothing
         '
         'grpOptions
@@ -182,162 +245,250 @@ Partial Class dlgCompareTreatmentLines
         Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
         Me.grpOptions.Controls.Add(Me.ucrChkIncludeBoxplot)
         Me.grpOptions.Controls.Add(Me.ucrChkColourByDifference)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Location = New System.Drawing.Point(7, 292)
         Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(234, 184)
+        Me.grpOptions.TabIndex = 14
         Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
         '
         'ucrChkIncludeMeanLine
         '
+        Me.ucrChkIncludeMeanLine.AutoSize = True
         Me.ucrChkIncludeMeanLine.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMeanLine, "ucrChkIncludeMeanLine")
+        Me.ucrChkIncludeMeanLine.Location = New System.Drawing.Point(6, 48)
         Me.ucrChkIncludeMeanLine.Name = "ucrChkIncludeMeanLine"
+        Me.ucrChkIncludeMeanLine.Size = New System.Drawing.Size(178, 23)
+        Me.ucrChkIncludeMeanLine.TabIndex = 1
         '
         'ucrChkIncludeSmoothLine
         '
+        Me.ucrChkIncludeSmoothLine.AutoSize = True
         Me.ucrChkIncludeSmoothLine.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeSmoothLine, "ucrChkIncludeSmoothLine")
+        Me.ucrChkIncludeSmoothLine.Location = New System.Drawing.Point(6, 22)
         Me.ucrChkIncludeSmoothLine.Name = "ucrChkIncludeSmoothLine"
+        Me.ucrChkIncludeSmoothLine.Size = New System.Drawing.Size(222, 23)
+        Me.ucrChkIncludeSmoothLine.TabIndex = 0
         '
         'ucrChkBoxplotOnlyComplete
         '
+        Me.ucrChkBoxplotOnlyComplete.AutoSize = True
         Me.ucrChkBoxplotOnlyComplete.Checked = False
-        resources.ApplyResources(Me.ucrChkBoxplotOnlyComplete, "ucrChkBoxplotOnlyComplete")
+        Me.ucrChkBoxplotOnlyComplete.Location = New System.Drawing.Point(31, 98)
         Me.ucrChkBoxplotOnlyComplete.Name = "ucrChkBoxplotOnlyComplete"
+        Me.ucrChkBoxplotOnlyComplete.Size = New System.Drawing.Size(197, 23)
+        Me.ucrChkBoxplotOnlyComplete.TabIndex = 4
         '
         'ucrInputHlineValue
         '
         Me.ucrInputHlineValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputHlineValue.AutoSize = True
         Me.ucrInputHlineValue.IsMultiline = False
         Me.ucrInputHlineValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHlineValue, "ucrInputHlineValue")
+        Me.ucrInputHlineValue.Location = New System.Drawing.Point(89, 152)
         Me.ucrInputHlineValue.Name = "ucrInputHlineValue"
+        Me.ucrInputHlineValue.Size = New System.Drawing.Size(107, 21)
+        Me.ucrInputHlineValue.TabIndex = 7
         '
         'lblHlineValue
         '
-        resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
+        Me.lblHlineValue.AutoSize = True
+        Me.lblHlineValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblHlineValue.Location = New System.Drawing.Point(44, 156)
         Me.lblHlineValue.Name = "lblHlineValue"
+        Me.lblHlineValue.Size = New System.Drawing.Size(36, 13)
+        Me.lblHlineValue.TabIndex = 6
+        Me.lblHlineValue.Text = "At Y ="
         '
         'ucrChkIncludeHline
         '
+        Me.ucrChkIncludeHline.AutoSize = True
         Me.ucrChkIncludeHline.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeHline, "ucrChkIncludeHline")
+        Me.ucrChkIncludeHline.Location = New System.Drawing.Point(6, 129)
         Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
+        Me.ucrChkIncludeHline.Size = New System.Drawing.Size(222, 23)
+        Me.ucrChkIncludeHline.TabIndex = 5
         '
         'lblTransparency
         '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.AutoSize = True
+        Me.lblTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTransparency.Location = New System.Drawing.Point(31, 74)
         Me.lblTransparency.Name = "lblTransparency"
+        Me.lblTransparency.Size = New System.Drawing.Size(75, 13)
+        Me.lblTransparency.TabIndex = 2
+        Me.lblTransparency.Text = "Transparency:"
         '
         'ucrNudTransparency
         '
+        Me.ucrNudTransparency.AutoSize = True
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Location = New System.Drawing.Point(114, 72)
         Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTransparency.TabIndex = 3
         Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeBoxplot
         '
+        Me.ucrChkIncludeBoxplot.AutoSize = True
         Me.ucrChkIncludeBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeBoxplot, "ucrChkIncludeBoxplot")
+        Me.ucrChkIncludeBoxplot.Location = New System.Drawing.Point(6, 48)
         Me.ucrChkIncludeBoxplot.Name = "ucrChkIncludeBoxplot"
+        Me.ucrChkIncludeBoxplot.Size = New System.Drawing.Size(178, 23)
+        Me.ucrChkIncludeBoxplot.TabIndex = 14
         '
         'ucrChkColourByDifference
         '
+        Me.ucrChkColourByDifference.AutoSize = True
         Me.ucrChkColourByDifference.Checked = False
-        resources.ApplyResources(Me.ucrChkColourByDifference, "ucrChkColourByDifference")
+        Me.ucrChkColourByDifference.Location = New System.Drawing.Point(6, 22)
         Me.ucrChkColourByDifference.Name = "ucrChkColourByDifference"
+        Me.ucrChkColourByDifference.Size = New System.Drawing.Size(178, 23)
+        Me.ucrChkColourByDifference.TabIndex = 13
         '
         'rdoLines
         '
-        resources.ApplyResources(Me.rdoLines, "rdoLines")
+        Me.rdoLines.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoLines.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLines.FlatAppearance.BorderSize = 2
         Me.rdoLines.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLines.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoLines.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLines.Location = New System.Drawing.Point(122, 15)
         Me.rdoLines.Name = "rdoLines"
+        Me.rdoLines.Size = New System.Drawing.Size(140, 28)
+        Me.rdoLines.TabIndex = 0
+        Me.rdoLines.Text = "Connecting Lines"
+        Me.rdoLines.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoLines.UseVisualStyleBackColor = True
         '
         'rdoPoints
         '
-        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoPoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPoints.FlatAppearance.BorderSize = 2
         Me.rdoPoints.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPoints.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPoints.Location = New System.Drawing.Point(260, 15)
         Me.rdoPoints.Name = "rdoPoints"
+        Me.rdoPoints.Size = New System.Drawing.Size(140, 28)
+        Me.rdoPoints.TabIndex = 1
+        Me.rdoPoints.Text = "Points"
+        Me.rdoPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPoints.UseVisualStyleBackColor = True
         '
         'ucrPnlCompareType
         '
-        resources.ApplyResources(Me.ucrPnlCompareType, "ucrPnlCompareType")
+        Me.ucrPnlCompareType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCompareType.Location = New System.Drawing.Point(54, 2)
         Me.ucrPnlCompareType.Name = "ucrPnlCompareType"
+        Me.ucrPnlCompareType.Size = New System.Drawing.Size(397, 62)
+        Me.ucrPnlCompareType.TabIndex = 2
         '
         'ucrInputFactorOption2
         '
         Me.ucrInputFactorOption2.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption2.AutoSize = True
+        Me.ucrInputFactorOption2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFactorOption2.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFactorOption2, "ucrInputFactorOption2")
+        Me.ucrInputFactorOption2.Location = New System.Drawing.Point(267, 219)
         Me.ucrInputFactorOption2.Name = "ucrInputFactorOption2"
+        Me.ucrInputFactorOption2.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputFactorOption2.TabIndex = 11
         '
         'ucrInputFactorOption1
         '
         Me.ucrInputFactorOption1.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption1.AutoSize = True
+        Me.ucrInputFactorOption1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFactorOption1.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFactorOption1, "ucrInputFactorOption1")
+        Me.ucrInputFactorOption1.Location = New System.Drawing.Point(267, 177)
         Me.ucrInputFactorOption1.Name = "ucrInputFactorOption1"
+        Me.ucrInputFactorOption1.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputFactorOption1.TabIndex = 9
         '
         'ucrReceiverID
         '
+        Me.ucrReceiverID.AutoSize = True
         Me.ucrReceiverID.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverID, "ucrReceiverID")
+        Me.ucrReceiverID.Location = New System.Drawing.Point(267, 261)
+        Me.ucrReceiverID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverID.Name = "ucrReceiverID"
         Me.ucrReceiverID.Selector = Nothing
+        Me.ucrReceiverID.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverID.strNcFilePath = ""
+        Me.ucrReceiverID.TabIndex = 13
         Me.ucrReceiverID.ucrSelector = Nothing
         '
         'ucrReceiverOption
         '
+        Me.ucrReceiverOption.AutoSize = True
         Me.ucrReceiverOption.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverOption, "ucrReceiverOption")
+        Me.ucrReceiverOption.Location = New System.Drawing.Point(267, 136)
+        Me.ucrReceiverOption.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOption.Name = "ucrReceiverOption"
         Me.ucrReceiverOption.Selector = Nothing
+        Me.ucrReceiverOption.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverOption.strNcFilePath = ""
+        Me.ucrReceiverOption.TabIndex = 7
         Me.ucrReceiverOption.ucrSelector = Nothing
         '
         'ucrReceiverMeasurement
         '
+        Me.ucrReceiverMeasurement.AutoSize = True
         Me.ucrReceiverMeasurement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMeasurement, "ucrReceiverMeasurement")
+        Me.ucrReceiverMeasurement.Location = New System.Drawing.Point(267, 95)
+        Me.ucrReceiverMeasurement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeasurement.Name = "ucrReceiverMeasurement"
         Me.ucrReceiverMeasurement.Selector = Nothing
+        Me.ucrReceiverMeasurement.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeasurement.strNcFilePath = ""
+        Me.ucrReceiverMeasurement.TabIndex = 5
         Me.ucrReceiverMeasurement.ucrSelector = Nothing
         '
         'ucrSelectorPlot
         '
+        Me.ucrSelectorPlot.AutoSize = True
         Me.ucrSelectorPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorPlot.bShowHiddenColumns = False
         Me.ucrSelectorPlot.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorPlot, "ucrSelectorPlot")
+        Me.ucrSelectorPlot.Location = New System.Drawing.Point(7, 64)
+        Me.ucrSelectorPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPlot.Name = "ucrSelectorPlot"
+        Me.ucrSelectorPlot.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorPlot.TabIndex = 3
         '
         'ucrSavePlot
         '
-        resources.ApplyResources(Me.ucrSavePlot, "ucrSavePlot")
+        Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 482)
+        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
+        Me.ucrSavePlot.Size = New System.Drawing.Size(333, 24)
+        Me.ucrSavePlot.TabIndex = 16
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 507)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 17
         '
         'dlgCompareTreatmentLines
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(523, 562)
         Me.Controls.Add(Me.rdoPoints)
         Me.Controls.Add(Me.rdoLines)
         Me.Controls.Add(Me.ucrPnlCompareType)
@@ -360,6 +511,8 @@ Partial Class dlgCompareTreatmentLines
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCompareTreatmentLines"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Compare Two Options"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.grpOptions.ResumeLayout(False)

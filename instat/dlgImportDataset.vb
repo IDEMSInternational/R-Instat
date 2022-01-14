@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Runtime.InteropServices
+Imports System.IO
 Imports RDotNet
 Imports instat.Translations
 
@@ -30,6 +31,7 @@ Public Class dlgImportDataset
     Private strCurrentDirectory As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
+    Private strlastFileName As String = ""
     Public strFileToOpenOn As String = ""
     Private bDialogLoaded As Boolean = False
     Private iDataFrameCount As Integer
@@ -37,6 +39,10 @@ Public Class dlgImportDataset
     Private bSupressSheetChange As Boolean = False
     'key value map of excel sheet number and sheet name
     Private dctSelectedExcelSheets As New Dictionary(Of Integer, String)
+    Private clsDetectEmptyColsFunction As New RFunction
+    Private clsConcFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsEmptyDummyFunction As New RFunction
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
@@ -270,6 +276,9 @@ Public Class dlgImportDataset
         ucrNudMaxRowsText.Minimum = 0
         ucrNudMaxRowsText.Maximum = Decimal.MaxValue
 
+        ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
+        ucrChkDropEmptyCols.SetParameter(New RParameter("isRFunction", 0))
+        ucrChkDropEmptyCols.SetValuesCheckedAndUnchecked("True", "False")
     End Sub
 
     Private Sub SetDefaults()
@@ -285,13 +294,15 @@ Public Class dlgImportDataset
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
-
         clsImportExcelMulti = New RFunction
-
         clsGetFilesList = New RFunction
         clsImportMultipleFiles = New RFunction
         clsImportMultipleTextFiles = New RFunction
         clsFileNamesWithExt = New RFunction
+        clsDetectEmptyColsFunction = New RFunction
+        clsEmptyDummyFunction = New RFunction
+
+        ucrChkDropEmptyCols.Visible = False
 
         clsImportTextFileFormats.SetPackageName("readr")
         clsImportTextFileFormats.SetRCommand("read_table")
@@ -357,6 +368,17 @@ Public Class dlgImportDataset
         clsImportMultipleTextFiles.AddParameter("X", clsRFunctionParameter:=clsSetNames, iPosition:=0)
         clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
 
+        clsConcFunction.SetRCommand("c")
+        clsConcFunction.AddParameter("x", Chr(34) & "rows" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("y", Chr(34) & "cols" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsDetectEmptyColsFunction.SetPackageName("janitor")
+        clsDetectEmptyColsFunction.SetRCommand("remove_empty")
+        clsDetectEmptyColsFunction.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsDetectEmptyColsFunction, iPosition:=1)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
 
@@ -399,12 +421,16 @@ Public Class dlgImportDataset
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
-                dlgOpen.InitialDirectory = strLibraryPath
+                ' TODO There should be a way of using Path.GetDirectoryName to avoid needing the If but couldn't get this to work
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(strLibraryPath, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = strLibraryPath
+                End If
             Else
                 dlgOpen.Title = "Open Data from file"
                 dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
             End If
-
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 'always reset the multiple files checkbox
                 ucrChkMultipleFiles.Checked = False
@@ -439,6 +465,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
+        ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -499,6 +526,7 @@ Public Class dlgImportDataset
         ucrChkRange.SetRCode(clsImportExcel, bReset)
         ucrInputTextFrom.SetRCode(clsRangeOperator, bReset)
         ucrInputTextTo.SetRCode(clsRangeOperator, bReset)
+        ucrChkDropEmptyCols.SetRCode(clsEmptyDummyFunction, bReset)
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
@@ -535,16 +563,18 @@ Public Class dlgImportDataset
                 'store what was there temporarily first 
                 strFilePathSystemTemp = strFilePathSystem
             End If
-
             'always set the appropriate file path separators
             strFilePathSystem = Replace(strFileOrFolderPath, "/", "\")
             strFilePathR = Replace(strFileOrFolderPath, "\", "/")
             If File.Exists(strFileOrFolderPath) Then
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFileOrFolderPath)
+                'getting the name of the file without replacing any characters
+                'so that its possible to reload the file after checking and unchecking the all file check box 
+                strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -651,6 +681,25 @@ Public Class dlgImportDataset
                 ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
             End If
 
+            If strFileExtension = ".r" Then
+                If Not frmMain.mnuViewScriptWindow.Checked Then
+                    frmMain.mnuViewScriptWindow.Checked = True
+                    frmMain.UpdateLayout()
+                End If
+                If frmMain.ucrScriptWindow.txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
+                              Environment.NewLine & "Do you still want to load?",
+                              "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                    Try
+                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFilePathSystem)
+                    Catch
+                        MessageBox.Show("Could not load the script from file." &
+                              Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
+                              "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End If
+                SetDialogStateFromFile("")
+                Me.Close()
+            End If
         End If
 
         TryTextPreview()
@@ -658,6 +707,7 @@ Public Class dlgImportDataset
         TestOkEnabled()
 
         autoTranslate(Me)
+        RemoveMissingValues()
     End Sub
 
     Private Sub TryTextPreview()
@@ -827,7 +877,7 @@ Public Class dlgImportDataset
         'add the item to the MRU (Most Recently Used) list...
         'only add if its a file that was selected, don't add if folder path was selected
         If Not bImportFromFolder Then
-            frmMain.clsRecentItems.addToMenu(strFilePathSystem)
+            frmMain.clsRecentItems.addToMenu(Replace(strFilePathSystem, "\", "/"))
         End If
 
         'Sets the current data frame as the first new data frame
@@ -847,7 +897,9 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged, ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
+    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
+        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged,
+        ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
     End Sub
@@ -901,6 +953,7 @@ Public Class dlgImportDataset
         End If
         TryTextPreview()
         TryGridPreview()
+        RemoveMissingValues()
         TestOkEnabled()
     End Sub
 
@@ -944,6 +997,7 @@ Public Class dlgImportDataset
         bSupressCheckAllSheets = False
         ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=dctSelectedExcelSheets.Count > 1)
         TryGridPreview()
+        RemoveMissingValues()
         TestOkEnabled()
     End Sub
 
@@ -1010,7 +1064,7 @@ Public Class dlgImportDataset
         If ucrChkMultipleFiles.Checked Then
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
         Else
-            SetDialogStateFromFile(strCurrentDirectory & "\" & strFileName & strFileExtension)
+            SetDialogStateFromFile(strCurrentDirectory & "\" & strlastFileName & strFileExtension)
         End If
         TestOkEnabled()
     End Sub
@@ -1096,5 +1150,29 @@ Public Class dlgImportDataset
         Return {".xlsx", ".xls"}.Contains(strFileExtension)
     End Function
 
+    Private Sub RemoveMissingValues()
+        Dim clsPreviousBaseFunction As RFunction = ucrBase.clsRsyntax.clsBaseFunction
+        If strFileExtension = ".rds" _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportExcelMulti _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleFiles _
+               OrElse ucrBase.clsRsyntax.clsBaseFunction Is clsImportMultipleTextFiles Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
+        Else
+            ucrChkDropEmptyCols.Visible = True
+            If ucrChkDropEmptyCols.Checked Then
+                Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
+                clsTempFunction.RemoveAssignTo()
+                clsTempFunction.bExcludeAssignedFunctionOutput = False
+                clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsPreviousBaseFunction)
+            End If
+        End If
+    End Sub
 
+    Private Sub ucrChkDropEmptyCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropEmptyCols.ControlValueChanged
+        RemoveMissingValues()
+    End Sub
 End Class

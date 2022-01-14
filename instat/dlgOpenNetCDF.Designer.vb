@@ -195,6 +195,7 @@ Partial Class dlgOpenNetCDF
         'ucrInputFileDetails
         '
         Me.ucrInputFileDetails.AddQuotesIfUnrecognised = True
+        Me.ucrInputFileDetails.AutoSize = True
         Me.ucrInputFileDetails.IsMultiline = True
         Me.ucrInputFileDetails.IsReadOnly = True
         Me.ucrInputFileDetails.Location = New System.Drawing.Point(489, 47)
@@ -205,6 +206,7 @@ Partial Class dlgOpenNetCDF
         'ucrInputPath
         '
         Me.ucrInputPath.AddQuotesIfUnrecognised = True
+        Me.ucrInputPath.AutoSize = True
         Me.ucrInputPath.IsMultiline = False
         Me.ucrInputPath.IsReadOnly = False
         Me.ucrInputPath.Location = New System.Drawing.Point(58, 20)
@@ -215,6 +217,7 @@ Partial Class dlgOpenNetCDF
         'ucrInputDataName
         '
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataName.AutoSize = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
         Me.ucrInputDataName.Location = New System.Drawing.Point(187, 133)
@@ -224,13 +227,16 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 161)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(418, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 13
         '
         'ucrPnlFileDetails
         '
+        Me.ucrPnlFileDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlFileDetails.Location = New System.Drawing.Point(547, 11)
         Me.ucrPnlFileDetails.Name = "ucrPnlFileDetails"
         Me.ucrPnlFileDetails.Size = New System.Drawing.Size(254, 30)
@@ -239,8 +245,8 @@ Partial Class dlgOpenNetCDF
         '
         'dlgOpenNetCDF
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(821, 217)
         Me.Controls.Add(Me.lblFilesFound)
         Me.Controls.Add(Me.lblNFiles)

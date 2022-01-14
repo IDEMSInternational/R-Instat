@@ -98,6 +98,7 @@ Partial Class sdgSaveColumnPosition
         '
         'ucrPnlColumnPosition
         '
+        Me.ucrPnlColumnPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlColumnPosition.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlColumnPosition.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlColumnPosition.Name = "ucrPnlColumnPosition"
@@ -110,12 +111,13 @@ Partial Class sdgSaveColumnPosition
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblColumns.Location = New System.Drawing.Point(224, 106)
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(48, 13)
+        Me.lblColumns.Size = New System.Drawing.Size(45, 13)
         Me.lblColumns.TabIndex = 14
-        Me.lblColumns.Text = "Column :"
+        Me.lblColumns.Text = "Column:"
         '
         'ucrReceiverColumn
         '
+        Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
         Me.ucrReceiverColumn.Location = New System.Drawing.Point(224, 121)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
@@ -128,35 +130,39 @@ Partial Class sdgSaveColumnPosition
         '
         'ucrSelectorColumns
         '
+        Me.ucrSelectorColumns.AutoSize = True
         Me.ucrSelectorColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumns.bShowHiddenColumns = False
         Me.ucrSelectorColumns.bUseCurrentFilter = True
         Me.ucrSelectorColumns.Location = New System.Drawing.Point(9, 71)
         Me.ucrSelectorColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumns.Name = "ucrSelectorColumns"
-        Me.ucrSelectorColumns.Size = New System.Drawing.Size(212, 180)
+        Me.ucrSelectorColumns.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorColumns.TabIndex = 13
         '
         'ucrBaseSubdialog
         '
+        Me.ucrBaseSubdialog.AutoSize = True
         Me.ucrBaseSubdialog.Location = New System.Drawing.Point(103, 270)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(153, 30)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubdialog.TabIndex = 7
         '
         'ucrChkKeepExistingPos
         '
+        Me.ucrChkKeepExistingPos.AutoSize = True
         Me.ucrChkKeepExistingPos.Checked = False
         Me.ucrChkKeepExistingPos.Location = New System.Drawing.Point(227, 155)
         Me.ucrChkKeepExistingPos.Name = "ucrChkKeepExistingPos"
-        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(126, 20)
+        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkKeepExistingPos.TabIndex = 16
         '
         'sdgSaveColumnPosition
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(361, 301)
         Me.Controls.Add(Me.ucrChkKeepExistingPos)
         Me.Controls.Add(Me.ucrReceiverColumn)

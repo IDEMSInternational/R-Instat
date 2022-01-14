@@ -56,6 +56,7 @@ Partial Class frmMetaData
         Me.grdMetaData.SheetTabNewButtonVisible = False
         Me.grdMetaData.SheetTabVisible = False
         Me.grdMetaData.SheetTabWidth = 100
+        Me.grdMetaData.ShowScrollEndSpacing = True
         Me.grdMetaData.Size = New System.Drawing.Size(477, 317)
         Me.grdMetaData.TabIndex = 1
         Me.grdMetaData.Text = "Meta Data"
@@ -71,8 +72,8 @@ Partial Class frmMetaData
         '
         'frmMetaData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(477, 317)
         Me.Controls.Add(Me.grdMetaData)
         Me.Controls.Add(Me.txtMetadata)

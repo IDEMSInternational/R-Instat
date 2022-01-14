@@ -23,7 +23,6 @@ Partial Class sdgPICSARainfallGraph
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPICSARainfallGraph))
         Me.lblXTo = New System.Windows.Forms.Label()
         Me.lblXFrom = New System.Windows.Forms.Label()
         Me.lblXInStepsOf = New System.Windows.Forms.Label()
@@ -193,18 +192,33 @@ Partial Class sdgPICSARainfallGraph
         '
         'lblXTo
         '
-        resources.ApplyResources(Me.lblXTo, "lblXTo")
+        Me.lblXTo.AutoSize = True
+        Me.lblXTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXTo.Location = New System.Drawing.Point(248, 24)
         Me.lblXTo.Name = "lblXTo"
+        Me.lblXTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblXTo.TabIndex = 21
+        Me.lblXTo.Text = "To:"
         '
         'lblXFrom
         '
-        resources.ApplyResources(Me.lblXFrom, "lblXFrom")
+        Me.lblXFrom.AutoSize = True
+        Me.lblXFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXFrom.Location = New System.Drawing.Point(122, 24)
         Me.lblXFrom.Name = "lblXFrom"
+        Me.lblXFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblXFrom.TabIndex = 20
+        Me.lblXFrom.Text = "From:"
         '
         'lblXInStepsOf
         '
-        resources.ApplyResources(Me.lblXInStepsOf, "lblXInStepsOf")
+        Me.lblXInStepsOf.AutoSize = True
+        Me.lblXInStepsOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXInStepsOf.Location = New System.Drawing.Point(368, 24)
         Me.lblXInStepsOf.Name = "lblXInStepsOf"
+        Me.lblXInStepsOf.Size = New System.Drawing.Size(61, 13)
+        Me.lblXInStepsOf.TabIndex = 22
+        Me.lblXInStepsOf.Text = "In Steps of:"
         '
         'tbPICSA
         '
@@ -214,17 +228,23 @@ Partial Class sdgPICSARainfallGraph
         Me.tbPICSA.Controls.Add(Me.tpLines)
         Me.tbPICSA.Controls.Add(Me.tpPanel)
         Me.tbPICSA.Controls.Add(Me.tpRug)
-        resources.ApplyResources(Me.tbPICSA, "tbPICSA")
+        Me.tbPICSA.Location = New System.Drawing.Point(8, 6)
         Me.tbPICSA.Name = "tbPICSA"
         Me.tbPICSA.SelectedIndex = 0
+        Me.tbPICSA.Size = New System.Drawing.Size(589, 335)
+        Me.tbPICSA.TabIndex = 26
         '
         'tpTitles
         '
         Me.tpTitles.Controls.Add(Me.grpGraphTitles)
         Me.tpTitles.Controls.Add(Me.grpAxes)
         Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
-        resources.ApplyResources(Me.tpTitles, "tpTitles")
+        Me.tpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tpTitles.Name = "tpTitles"
+        Me.tpTitles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpTitles.Size = New System.Drawing.Size(581, 309)
+        Me.tpTitles.TabIndex = 0
+        Me.tpTitles.Text = "Titles "
         Me.tpTitles.UseVisualStyleBackColor = True
         '
         'grpGraphTitles
@@ -241,93 +261,150 @@ Partial Class sdgPICSARainfallGraph
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphcCaption)
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphSubTitle)
-        resources.ApplyResources(Me.grpGraphTitles, "grpGraphTitles")
+        Me.grpGraphTitles.Location = New System.Drawing.Point(9, 10)
         Me.grpGraphTitles.Name = "grpGraphTitles"
+        Me.grpGraphTitles.Size = New System.Drawing.Size(525, 136)
+        Me.grpGraphTitles.TabIndex = 17
         Me.grpGraphTitles.TabStop = False
+        Me.grpGraphTitles.Text = "Graph"
         '
         'lblCaptionSize
         '
-        resources.ApplyResources(Me.lblCaptionSize, "lblCaptionSize")
+        Me.lblCaptionSize.AutoSize = True
+        Me.lblCaptionSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCaptionSize.Location = New System.Drawing.Point(347, 83)
         Me.lblCaptionSize.Name = "lblCaptionSize"
+        Me.lblCaptionSize.Size = New System.Drawing.Size(69, 13)
+        Me.lblCaptionSize.TabIndex = 26
+        Me.lblCaptionSize.Text = "Caption Size:"
         '
         'lblSubTitleSize
         '
-        resources.ApplyResources(Me.lblSubTitleSize, "lblSubTitleSize")
+        Me.lblSubTitleSize.AutoSize = True
+        Me.lblSubTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSubTitleSize.Location = New System.Drawing.Point(347, 53)
         Me.lblSubTitleSize.Name = "lblSubTitleSize"
+        Me.lblSubTitleSize.Size = New System.Drawing.Size(75, 13)
+        Me.lblSubTitleSize.TabIndex = 27
+        Me.lblSubTitleSize.Text = "Sub Title Size:"
         '
         'lblTitleSize
         '
-        resources.ApplyResources(Me.lblTitleSize, "lblTitleSize")
+        Me.lblTitleSize.AutoSize = True
+        Me.lblTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTitleSize.Location = New System.Drawing.Point(348, 23)
         Me.lblTitleSize.Name = "lblTitleSize"
+        Me.lblTitleSize.Size = New System.Drawing.Size(53, 13)
+        Me.lblTitleSize.TabIndex = 28
+        Me.lblTitleSize.Text = "Title Size:"
         '
         'lblCaption
         '
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
+        Me.lblCaption.AutoSize = True
+        Me.lblCaption.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCaption.Location = New System.Drawing.Point(5, 83)
         Me.lblCaption.Name = "lblCaption"
+        Me.lblCaption.Size = New System.Drawing.Size(78, 13)
+        Me.lblCaption.TabIndex = 23
+        Me.lblCaption.Text = "Graph Caption:"
         '
         'lblSubTitle
         '
-        resources.ApplyResources(Me.lblSubTitle, "lblSubTitle")
+        Me.lblSubTitle.AutoSize = True
+        Me.lblSubTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSubTitle.Location = New System.Drawing.Point(5, 53)
         Me.lblSubTitle.Name = "lblSubTitle"
+        Me.lblSubTitle.Size = New System.Drawing.Size(84, 13)
+        Me.lblSubTitle.TabIndex = 24
+        Me.lblSubTitle.Text = "Graph Sub Title:"
         '
         'lblTitle
         '
-        resources.ApplyResources(Me.lblTitle, "lblTitle")
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTitle.Location = New System.Drawing.Point(6, 23)
         Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblTitle.TabIndex = 25
+        Me.lblTitle.Text = "Graph Title:"
         '
         'ucrNudCaptionSize
         '
+        Me.ucrNudCaptionSize.AutoSize = True
         Me.ucrNudCaptionSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCaptionSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCaptionSize, "ucrNudCaptionSize")
+        Me.ucrNudCaptionSize.Location = New System.Drawing.Point(463, 78)
+        Me.ucrNudCaptionSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudCaptionSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCaptionSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCaptionSize.Name = "ucrNudCaptionSize"
+        Me.ucrNudCaptionSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCaptionSize.TabIndex = 22
         Me.ucrNudCaptionSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSubTitleSize
         '
+        Me.ucrNudSubTitleSize.AutoSize = True
         Me.ucrNudSubTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSubTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSubTitleSize, "ucrNudSubTitleSize")
+        Me.ucrNudSubTitleSize.Location = New System.Drawing.Point(463, 48)
+        Me.ucrNudSubTitleSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudSubTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSubTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSubTitleSize.Name = "ucrNudSubTitleSize"
+        Me.ucrNudSubTitleSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSubTitleSize.TabIndex = 21
         Me.ucrNudSubTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudTitleSize
         '
+        Me.ucrNudTitleSize.AutoSize = True
         Me.ucrNudTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTitleSize, "ucrNudTitleSize")
+        Me.ucrNudTitleSize.Location = New System.Drawing.Point(463, 18)
+        Me.ucrNudTitleSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTitleSize.Name = "ucrNudTitleSize"
+        Me.ucrNudTitleSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTitleSize.TabIndex = 20
         Me.ucrNudTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputGraphcCaption
         '
         Me.ucrInputGraphcCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphcCaption.AutoSize = True
         Me.ucrInputGraphcCaption.IsMultiline = True
         Me.ucrInputGraphcCaption.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGraphcCaption, "ucrInputGraphcCaption")
+        Me.ucrInputGraphcCaption.Location = New System.Drawing.Point(150, 78)
+        Me.ucrInputGraphcCaption.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputGraphcCaption.Name = "ucrInputGraphcCaption"
+        Me.ucrInputGraphcCaption.Size = New System.Drawing.Size(181, 53)
+        Me.ucrInputGraphcCaption.TabIndex = 16
         '
         'ucrInputGraphTitle
         '
         Me.ucrInputGraphTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphTitle.AutoSize = True
         Me.ucrInputGraphTitle.IsMultiline = False
         Me.ucrInputGraphTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGraphTitle, "ucrInputGraphTitle")
+        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(150, 18)
+        Me.ucrInputGraphTitle.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
+        Me.ucrInputGraphTitle.Size = New System.Drawing.Size(181, 21)
+        Me.ucrInputGraphTitle.TabIndex = 12
         '
         'ucrInputGraphSubTitle
         '
         Me.ucrInputGraphSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphSubTitle.AutoSize = True
         Me.ucrInputGraphSubTitle.IsMultiline = False
         Me.ucrInputGraphSubTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGraphSubTitle, "ucrInputGraphSubTitle")
+        Me.ucrInputGraphSubTitle.Location = New System.Drawing.Point(150, 48)
+        Me.ucrInputGraphSubTitle.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
+        Me.ucrInputGraphSubTitle.Size = New System.Drawing.Size(181, 21)
+        Me.ucrInputGraphSubTitle.TabIndex = 14
         '
         'grpAxes
         '
@@ -338,58 +415,93 @@ Partial Class sdgPICSARainfallGraph
         Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
         Me.grpAxes.Controls.Add(Me.ucrNudXAxisTitleSize)
         Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
-        resources.ApplyResources(Me.grpAxes, "grpAxes")
+        Me.grpAxes.Location = New System.Drawing.Point(9, 153)
         Me.grpAxes.Name = "grpAxes"
+        Me.grpAxes.Size = New System.Drawing.Size(228, 105)
+        Me.grpAxes.TabIndex = 18
         Me.grpAxes.TabStop = False
+        Me.grpAxes.Text = "X-Axis Title"
         '
         'lblXAxisTitleSize
         '
-        resources.ApplyResources(Me.lblXAxisTitleSize, "lblXAxisTitleSize")
+        Me.lblXAxisTitleSize.AutoSize = True
+        Me.lblXAxisTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXAxisTitleSize.Location = New System.Drawing.Point(6, 82)
         Me.lblXAxisTitleSize.Name = "lblXAxisTitleSize"
+        Me.lblXAxisTitleSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblXAxisTitleSize.TabIndex = 44
+        Me.lblXAxisTitleSize.Text = "Size:"
         '
         'rdoAutoXAxis
         '
-        resources.ApplyResources(Me.rdoAutoXAxis, "rdoAutoXAxis")
+        Me.rdoAutoXAxis.AutoSize = True
+        Me.rdoAutoXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAutoXAxis.Location = New System.Drawing.Point(6, 21)
         Me.rdoAutoXAxis.Name = "rdoAutoXAxis"
+        Me.rdoAutoXAxis.Size = New System.Drawing.Size(50, 17)
+        Me.rdoAutoXAxis.TabIndex = 43
         Me.rdoAutoXAxis.TabStop = True
+        Me.rdoAutoXAxis.Text = "Auto "
         Me.rdoAutoXAxis.UseVisualStyleBackColor = True
         '
         'ucrInputXAxisTitle
         '
         Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisTitle.AutoSize = True
         Me.ucrInputXAxisTitle.IsMultiline = False
         Me.ucrInputXAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
+        Me.ucrInputXAxisTitle.Location = New System.Drawing.Point(6, 44)
+        Me.ucrInputXAxisTitle.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
+        Me.ucrInputXAxisTitle.Size = New System.Drawing.Size(181, 21)
+        Me.ucrInputXAxisTitle.TabIndex = 42
         '
         'rdoNoTitleXAxisTitle
         '
-        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
+        Me.rdoNoTitleXAxisTitle.AutoSize = True
+        Me.rdoNoTitleXAxisTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNoTitleXAxisTitle.Location = New System.Drawing.Point(132, 21)
         Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
+        Me.rdoNoTitleXAxisTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoNoTitleXAxisTitle.TabIndex = 41
         Me.rdoNoTitleXAxisTitle.TabStop = True
+        Me.rdoNoTitleXAxisTitle.Text = "No Title"
         Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
         '
         'rdoSpecifyXAxisTitle
         '
-        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
+        Me.rdoSpecifyXAxisTitle.AutoSize = True
+        Me.rdoSpecifyXAxisTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSpecifyXAxisTitle.Location = New System.Drawing.Point(57, 21)
         Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
+        Me.rdoSpecifyXAxisTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoSpecifyXAxisTitle.TabIndex = 40
         Me.rdoSpecifyXAxisTitle.TabStop = True
+        Me.rdoSpecifyXAxisTitle.Text = "Specifiy"
         Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
         '
         'ucrNudXAxisTitleSize
         '
+        Me.ucrNudXAxisTitleSize.AutoSize = True
         Me.ucrNudXAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudXAxisTitleSize, "ucrNudXAxisTitleSize")
+        Me.ucrNudXAxisTitleSize.Location = New System.Drawing.Point(43, 80)
+        Me.ucrNudXAxisTitleSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudXAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisTitleSize.Name = "ucrNudXAxisTitleSize"
+        Me.ucrNudXAxisTitleSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudXAxisTitleSize.TabIndex = 23
         Me.ucrNudXAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlXAxisTitle
         '
-        resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
+        Me.ucrPnlXAxisTitle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlXAxisTitle.Location = New System.Drawing.Point(6, 15)
+        Me.ucrPnlXAxisTitle.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
+        Me.ucrPnlXAxisTitle.Size = New System.Drawing.Size(215, 57)
+        Me.ucrPnlXAxisTitle.TabIndex = 36
         '
         'grpyAxisTitle
         '
@@ -400,64 +512,103 @@ Partial Class sdgPICSARainfallGraph
         Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
-        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
+        Me.grpyAxisTitle.Location = New System.Drawing.Point(306, 149)
         Me.grpyAxisTitle.Name = "grpyAxisTitle"
+        Me.grpyAxisTitle.Size = New System.Drawing.Size(228, 105)
+        Me.grpyAxisTitle.TabIndex = 36
         Me.grpyAxisTitle.TabStop = False
+        Me.grpyAxisTitle.Text = "Y-Axis Title"
         '
         'rdoAutoYAxis
         '
-        resources.ApplyResources(Me.rdoAutoYAxis, "rdoAutoYAxis")
+        Me.rdoAutoYAxis.AutoSize = True
+        Me.rdoAutoYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAutoYAxis.Location = New System.Drawing.Point(6, 21)
         Me.rdoAutoYAxis.Name = "rdoAutoYAxis"
+        Me.rdoAutoYAxis.Size = New System.Drawing.Size(50, 17)
+        Me.rdoAutoYAxis.TabIndex = 44
         Me.rdoAutoYAxis.TabStop = True
+        Me.rdoAutoYAxis.Text = "Auto "
         Me.rdoAutoYAxis.UseVisualStyleBackColor = True
         '
         'ucrInputYAxisTitle
         '
         Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputYAxisTitle.AutoSize = True
         Me.ucrInputYAxisTitle.IsMultiline = False
         Me.ucrInputYAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
+        Me.ucrInputYAxisTitle.Location = New System.Drawing.Point(6, 44)
+        Me.ucrInputYAxisTitle.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        Me.ucrInputYAxisTitle.Size = New System.Drawing.Size(181, 21)
+        Me.ucrInputYAxisTitle.TabIndex = 14
         '
         'rdoNoYAxisTitle
         '
-        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
+        Me.rdoNoYAxisTitle.AutoSize = True
+        Me.rdoNoYAxisTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNoYAxisTitle.Location = New System.Drawing.Point(131, 21)
         Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
+        Me.rdoNoYAxisTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoNoYAxisTitle.TabIndex = 42
         Me.rdoNoYAxisTitle.TabStop = True
+        Me.rdoNoYAxisTitle.Text = "No Title"
         Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
         '
         'ucrNudYAxisTitleSize
         '
+        Me.ucrNudYAxisTitleSize.AutoSize = True
         Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
+        Me.ucrNudYAxisTitleSize.Location = New System.Drawing.Point(43, 79)
+        Me.ucrNudYAxisTitleSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
+        Me.ucrNudYAxisTitleSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudYAxisTitleSize.TabIndex = 22
         Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoSpecifyYAxisTitle
         '
-        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
+        Me.rdoSpecifyYAxisTitle.AutoSize = True
+        Me.rdoSpecifyYAxisTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSpecifyYAxisTitle.Location = New System.Drawing.Point(56, 21)
         Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
+        Me.rdoSpecifyYAxisTitle.Size = New System.Drawing.Size(60, 17)
+        Me.rdoSpecifyYAxisTitle.TabIndex = 41
         Me.rdoSpecifyYAxisTitle.TabStop = True
+        Me.rdoSpecifyYAxisTitle.Text = "Specify"
         Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
         '
         'UcrPnlYAxisTitle
         '
-        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
+        Me.UcrPnlYAxisTitle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.UcrPnlYAxisTitle.Location = New System.Drawing.Point(6, 15)
+        Me.UcrPnlYAxisTitle.Margin = New System.Windows.Forms.Padding(5)
         Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
+        Me.UcrPnlYAxisTitle.Size = New System.Drawing.Size(214, 57)
+        Me.UcrPnlYAxisTitle.TabIndex = 37
         '
         'lblYAxisTitleSize
         '
-        resources.ApplyResources(Me.lblYAxisTitleSize, "lblYAxisTitleSize")
+        Me.lblYAxisTitleSize.AutoSize = True
+        Me.lblYAxisTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYAxisTitleSize.Location = New System.Drawing.Point(6, 82)
         Me.lblYAxisTitleSize.Name = "lblYAxisTitleSize"
+        Me.lblYAxisTitleSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblYAxisTitleSize.TabIndex = 45
+        Me.lblYAxisTitleSize.Text = "Size:"
         '
         'tpXAxis
         '
         Me.tpXAxis.Controls.Add(Me.grpXAxisLabels)
-        resources.ApplyResources(Me.tpXAxis, "tpXAxis")
+        Me.tpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tpXAxis.Name = "tpXAxis"
+        Me.tpXAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpXAxis.Size = New System.Drawing.Size(581, 309)
+        Me.tpXAxis.TabIndex = 1
+        Me.tpXAxis.Text = "X-Axis"
         Me.tpXAxis.UseVisualStyleBackColor = True
         '
         'grpXAxisLabels
@@ -473,70 +624,105 @@ Partial Class sdgPICSARainfallGraph
         Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisAngle)
         Me.grpXAxisLabels.Controls.Add(Me.lblXInStepsOf)
         Me.grpXAxisLabels.Controls.Add(Me.lblXTo)
-        resources.ApplyResources(Me.grpXAxisLabels, "grpXAxisLabels")
+        Me.grpXAxisLabels.Location = New System.Drawing.Point(6, 8)
         Me.grpXAxisLabels.Name = "grpXAxisLabels"
+        Me.grpXAxisLabels.Size = New System.Drawing.Size(504, 93)
+        Me.grpXAxisLabels.TabIndex = 27
         Me.grpXAxisLabels.TabStop = False
+        Me.grpXAxisLabels.Text = "X-Axis"
         '
         'ucrChkXAxisLabelSize
         '
+        Me.ucrChkXAxisLabelSize.AutoSize = True
         Me.ucrChkXAxisLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkXAxisLabelSize, "ucrChkXAxisLabelSize")
+        Me.ucrChkXAxisLabelSize.Location = New System.Drawing.Point(162, 57)
+        Me.ucrChkXAxisLabelSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkXAxisLabelSize.Name = "ucrChkXAxisLabelSize"
+        Me.ucrChkXAxisLabelSize.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkXAxisLabelSize.TabIndex = 30
         '
         'ucrChkXAxisAngle
         '
+        Me.ucrChkXAxisAngle.AutoSize = True
         Me.ucrChkXAxisAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkXAxisAngle, "ucrChkXAxisAngle")
+        Me.ucrChkXAxisAngle.Location = New System.Drawing.Point(6, 57)
+        Me.ucrChkXAxisAngle.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkXAxisAngle.Name = "ucrChkXAxisAngle"
+        Me.ucrChkXAxisAngle.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkXAxisAngle.TabIndex = 29
         '
         'ucrChkSpecifyXAxisTickMarks
         '
+        Me.ucrChkSpecifyXAxisTickMarks.AutoSize = True
         Me.ucrChkSpecifyXAxisTickMarks.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyXAxisTickMarks, "ucrChkSpecifyXAxisTickMarks")
+        Me.ucrChkSpecifyXAxisTickMarks.Location = New System.Drawing.Point(6, 22)
+        Me.ucrChkSpecifyXAxisTickMarks.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSpecifyXAxisTickMarks.Name = "ucrChkSpecifyXAxisTickMarks"
+        Me.ucrChkSpecifyXAxisTickMarks.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSpecifyXAxisTickMarks.TabIndex = 28
         '
         'ucrInputXFrom
         '
         Me.ucrInputXFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputXFrom.AutoSize = True
         Me.ucrInputXFrom.IsMultiline = False
         Me.ucrInputXFrom.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXFrom, "ucrInputXFrom")
+        Me.ucrInputXFrom.Location = New System.Drawing.Point(160, 21)
+        Me.ucrInputXFrom.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputXFrom.Name = "ucrInputXFrom"
+        Me.ucrInputXFrom.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputXFrom.TabIndex = 25
         '
         'ucrInputXInStepsOf
         '
         Me.ucrInputXInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputXInStepsOf.AutoSize = True
         Me.ucrInputXInStepsOf.IsMultiline = False
         Me.ucrInputXInStepsOf.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXInStepsOf, "ucrInputXInStepsOf")
+        Me.ucrInputXInStepsOf.Location = New System.Drawing.Point(433, 21)
+        Me.ucrInputXInStepsOf.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputXInStepsOf.Name = "ucrInputXInStepsOf"
+        Me.ucrInputXInStepsOf.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputXInStepsOf.TabIndex = 23
         '
         'ucrNudXaxisLabelSize
         '
+        Me.ucrNudXaxisLabelSize.AutoSize = True
         Me.ucrNudXaxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXaxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudXaxisLabelSize, "ucrNudXaxisLabelSize")
+        Me.ucrNudXaxisLabelSize.Location = New System.Drawing.Point(241, 57)
+        Me.ucrNudXaxisLabelSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudXaxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXaxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXaxisLabelSize.Name = "ucrNudXaxisLabelSize"
+        Me.ucrNudXaxisLabelSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudXaxisLabelSize.TabIndex = 4
         Me.ucrNudXaxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputXTo
         '
         Me.ucrInputXTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputXTo.AutoSize = True
         Me.ucrInputXTo.IsMultiline = False
         Me.ucrInputXTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXTo, "ucrInputXTo")
+        Me.ucrInputXTo.Location = New System.Drawing.Point(275, 21)
+        Me.ucrInputXTo.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputXTo.Name = "ucrInputXTo"
+        Me.ucrInputXTo.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputXTo.TabIndex = 24
         '
         'ucrNudXAxisAngle
         '
+        Me.ucrNudXAxisAngle.AutoSize = True
         Me.ucrNudXAxisAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudXAxisAngle, "ucrNudXAxisAngle")
+        Me.ucrNudXAxisAngle.Location = New System.Drawing.Point(86, 57)
+        Me.ucrNudXAxisAngle.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudXAxisAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXAxisAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisAngle.Name = "ucrNudXAxisAngle"
+        Me.ucrNudXAxisAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudXAxisAngle.TabIndex = 4
         Me.ucrNudXAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'tpYAxis
@@ -570,225 +756,356 @@ Partial Class sdgPICSARainfallGraph
         Me.tpYAxis.Controls.Add(Me.ucrChkYAxisAngle)
         Me.tpYAxis.Controls.Add(Me.ucrInputYFrom)
         Me.tpYAxis.Controls.Add(Me.ucrChkYAxisLabelSize)
-        resources.ApplyResources(Me.tpYAxis, "tpYAxis")
+        Me.tpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tpYAxis.Name = "tpYAxis"
+        Me.tpYAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpYAxis.Size = New System.Drawing.Size(581, 309)
+        Me.tpYAxis.TabIndex = 4
+        Me.tpYAxis.Text = "Y-Axis"
         Me.tpYAxis.UseVisualStyleBackColor = True
         '
         'ucrNudUpperLimit
         '
+        Me.ucrNudUpperLimit.AutoSize = True
         Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudUpperLimit, "ucrNudUpperLimit")
+        Me.ucrNudUpperLimit.Location = New System.Drawing.Point(209, 158)
+        Me.ucrNudUpperLimit.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
+        Me.ucrNudUpperLimit.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudUpperLimit.TabIndex = 52
         Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudLowerLimit
         '
+        Me.ucrNudLowerLimit.AutoSize = True
         Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLowerLimit, "ucrNudLowerLimit")
+        Me.ucrNudLowerLimit.Location = New System.Drawing.Point(209, 127)
+        Me.ucrNudLowerLimit.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
+        Me.ucrNudLowerLimit.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudLowerLimit.TabIndex = 51
         Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDateDisplayFormat
         '
-        resources.ApplyResources(Me.lblDateDisplayFormat, "lblDateDisplayFormat")
+        Me.lblDateDisplayFormat.AutoSize = True
+        Me.lblDateDisplayFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDateDisplayFormat.Location = New System.Drawing.Point(8, 94)
         Me.lblDateDisplayFormat.Name = "lblDateDisplayFormat"
+        Me.lblDateDisplayFormat.Size = New System.Drawing.Size(79, 13)
+        Me.lblDateDisplayFormat.TabIndex = 50
+        Me.lblDateDisplayFormat.Text = "Display Format:"
         '
         'rdoYDate
         '
-        resources.ApplyResources(Me.rdoYDate, "rdoYDate")
+        Me.rdoYDate.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoYDate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoYDate.FlatAppearance.BorderSize = 2
         Me.rdoYDate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoYDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoYDate.Location = New System.Drawing.Point(282, 16)
         Me.rdoYDate.Name = "rdoYDate"
+        Me.rdoYDate.Size = New System.Drawing.Size(98, 27)
+        Me.rdoYDate.TabIndex = 43
         Me.rdoYDate.TabStop = True
+        Me.rdoYDate.Text = "Date"
+        Me.rdoYDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoYDate.UseVisualStyleBackColor = True
         '
         'rdoYNumeric
         '
-        resources.ApplyResources(Me.rdoYNumeric, "rdoYNumeric")
+        Me.rdoYNumeric.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoYNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoYNumeric.FlatAppearance.BorderSize = 2
         Me.rdoYNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYNumeric.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoYNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoYNumeric.Location = New System.Drawing.Point(186, 16)
         Me.rdoYNumeric.Name = "rdoYNumeric"
+        Me.rdoYNumeric.Size = New System.Drawing.Size(98, 27)
+        Me.rdoYNumeric.TabIndex = 42
         Me.rdoYNumeric.TabStop = True
+        Me.rdoYNumeric.Text = "Numeric"
+        Me.rdoYNumeric.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoYNumeric.UseVisualStyleBackColor = True
         '
         'lblStartMonth
         '
-        resources.ApplyResources(Me.lblStartMonth, "lblStartMonth")
+        Me.lblStartMonth.AutoSize = True
+        Me.lblStartMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStartMonth.Location = New System.Drawing.Point(8, 63)
         Me.lblStartMonth.Name = "lblStartMonth"
+        Me.lblStartMonth.Size = New System.Drawing.Size(65, 13)
+        Me.lblStartMonth.TabIndex = 37
+        Me.lblStartMonth.Text = "Start Month:"
         '
         'lblYInStepsOf
         '
-        resources.ApplyResources(Me.lblYInStepsOf, "lblYInStepsOf")
+        Me.lblYInStepsOf.AutoSize = True
+        Me.lblYInStepsOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYInStepsOf.Location = New System.Drawing.Point(387, 64)
         Me.lblYInStepsOf.Name = "lblYInStepsOf"
+        Me.lblYInStepsOf.Size = New System.Drawing.Size(61, 13)
+        Me.lblYInStepsOf.TabIndex = 22
+        Me.lblYInStepsOf.Text = "In Steps of:"
         '
         'lblYTo
         '
-        resources.ApplyResources(Me.lblYTo, "lblYTo")
+        Me.lblYTo.AutoSize = True
+        Me.lblYTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYTo.Location = New System.Drawing.Point(268, 64)
         Me.lblYTo.Name = "lblYTo"
+        Me.lblYTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblYTo.TabIndex = 21
+        Me.lblYTo.Text = "To:"
         '
         'lblYFrom
         '
-        resources.ApplyResources(Me.lblYFrom, "lblYFrom")
+        Me.lblYFrom.AutoSize = True
+        Me.lblYFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYFrom.Location = New System.Drawing.Point(162, 64)
         Me.lblYFrom.Name = "lblYFrom"
+        Me.lblYFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblYFrom.TabIndex = 20
+        Me.lblYFrom.Text = "From:"
         '
         'ucrInputYSpecifyUpperLimitDateMonth
         '
         Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitDateMonth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputYSpecifyUpperLimitDateMonth.GetSetSelectedIndex = -1
         Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Location = New System.Drawing.Point(269, 156)
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputYSpecifyUpperLimitDateMonth.TabIndex = 49
         '
         'ucrInputYSpecifyUpperLimitNumeric
         '
         Me.ucrInputYSpecifyUpperLimitNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitNumeric.AutoSize = True
         Me.ucrInputYSpecifyUpperLimitNumeric.IsMultiline = False
         Me.ucrInputYSpecifyUpperLimitNumeric.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitNumeric, "ucrInputYSpecifyUpperLimitNumeric")
+        Me.ucrInputYSpecifyUpperLimitNumeric.Location = New System.Drawing.Point(195, 157)
+        Me.ucrInputYSpecifyUpperLimitNumeric.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYSpecifyUpperLimitNumeric.Name = "ucrInputYSpecifyUpperLimitNumeric"
+        Me.ucrInputYSpecifyUpperLimitNumeric.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputYSpecifyUpperLimitNumeric.TabIndex = 48
         '
         'ucrInputYSpecifyLowerLimitDateMonth
         '
         Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitDateMonth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputYSpecifyLowerLimitDateMonth.GetSetSelectedIndex = -1
         Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Location = New System.Drawing.Point(269, 126)
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputYSpecifyLowerLimitDateMonth.TabIndex = 46
         '
         'ucrChkYSpecifyUpperLimit
         '
+        Me.ucrChkYSpecifyUpperLimit.AutoSize = True
         Me.ucrChkYSpecifyUpperLimit.Checked = False
-        resources.ApplyResources(Me.ucrChkYSpecifyUpperLimit, "ucrChkYSpecifyUpperLimit")
+        Me.ucrChkYSpecifyUpperLimit.Location = New System.Drawing.Point(11, 157)
+        Me.ucrChkYSpecifyUpperLimit.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkYSpecifyUpperLimit.Name = "ucrChkYSpecifyUpperLimit"
+        Me.ucrChkYSpecifyUpperLimit.Size = New System.Drawing.Size(180, 23)
+        Me.ucrChkYSpecifyUpperLimit.TabIndex = 47
         '
         'ucrInputYSpecifyLowerLimitNumeric
         '
         Me.ucrInputYSpecifyLowerLimitNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitNumeric.AutoSize = True
         Me.ucrInputYSpecifyLowerLimitNumeric.IsMultiline = False
         Me.ucrInputYSpecifyLowerLimitNumeric.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitNumeric, "ucrInputYSpecifyLowerLimitNumeric")
+        Me.ucrInputYSpecifyLowerLimitNumeric.Location = New System.Drawing.Point(195, 127)
+        Me.ucrInputYSpecifyLowerLimitNumeric.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYSpecifyLowerLimitNumeric.Name = "ucrInputYSpecifyLowerLimitNumeric"
+        Me.ucrInputYSpecifyLowerLimitNumeric.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputYSpecifyLowerLimitNumeric.TabIndex = 45
         '
         'ucrChkYSpecifyLowerLimit
         '
+        Me.ucrChkYSpecifyLowerLimit.AutoSize = True
         Me.ucrChkYSpecifyLowerLimit.Checked = False
-        resources.ApplyResources(Me.ucrChkYSpecifyLowerLimit, "ucrChkYSpecifyLowerLimit")
+        Me.ucrChkYSpecifyLowerLimit.Location = New System.Drawing.Point(11, 127)
+        Me.ucrChkYSpecifyLowerLimit.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkYSpecifyLowerLimit.Name = "ucrChkYSpecifyLowerLimit"
+        Me.ucrChkYSpecifyLowerLimit.Size = New System.Drawing.Size(180, 23)
+        Me.ucrChkYSpecifyLowerLimit.TabIndex = 44
         '
         'ucrPnlYAxisType
         '
-        resources.ApplyResources(Me.ucrPnlYAxisType, "ucrPnlYAxisType")
+        Me.ucrPnlYAxisType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlYAxisType.Location = New System.Drawing.Point(161, 7)
+        Me.ucrPnlYAxisType.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlYAxisType.Name = "ucrPnlYAxisType"
+        Me.ucrPnlYAxisType.Size = New System.Drawing.Size(243, 48)
+        Me.ucrPnlYAxisType.TabIndex = 39
         '
         'ucrInputStartMonth
         '
         Me.ucrInputStartMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputStartMonth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStartMonth.GetSetSelectedIndex = -1
         Me.ucrInputStartMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStartMonth, "ucrInputStartMonth")
+        Me.ucrInputStartMonth.Location = New System.Drawing.Point(157, 60)
+        Me.ucrInputStartMonth.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputStartMonth.Name = "ucrInputStartMonth"
+        Me.ucrInputStartMonth.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputStartMonth.TabIndex = 38
         '
         'ucrChkSpecifyYAxisTickMarks
         '
+        Me.ucrChkSpecifyYAxisTickMarks.AutoSize = True
         Me.ucrChkSpecifyYAxisTickMarks.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyYAxisTickMarks, "ucrChkSpecifyYAxisTickMarks")
+        Me.ucrChkSpecifyYAxisTickMarks.Location = New System.Drawing.Point(11, 61)
+        Me.ucrChkSpecifyYAxisTickMarks.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSpecifyYAxisTickMarks.Name = "ucrChkSpecifyYAxisTickMarks"
+        Me.ucrChkSpecifyYAxisTickMarks.Size = New System.Drawing.Size(149, 23)
+        Me.ucrChkSpecifyYAxisTickMarks.TabIndex = 29
         '
         'ucrNudDateBreakNumber
         '
+        Me.ucrNudDateBreakNumber.AutoSize = True
         Me.ucrNudDateBreakNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDateBreakNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDateBreakNumber, "ucrNudDateBreakNumber")
+        Me.ucrNudDateBreakNumber.Location = New System.Drawing.Point(431, 89)
+        Me.ucrNudDateBreakNumber.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudDateBreakNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDateBreakNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDateBreakNumber.Name = "ucrNudDateBreakNumber"
+        Me.ucrNudDateBreakNumber.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudDateBreakNumber.TabIndex = 36
         Me.ucrNudDateBreakNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputYInStepsOf
         '
         Me.ucrInputYInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputYInStepsOf.AutoSize = True
         Me.ucrInputYInStepsOf.IsMultiline = False
         Me.ucrInputYInStepsOf.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYInStepsOf, "ucrInputYInStepsOf")
+        Me.ucrInputYInStepsOf.Location = New System.Drawing.Point(503, 61)
+        Me.ucrInputYInStepsOf.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYInStepsOf.Name = "ucrInputYInStepsOf"
+        Me.ucrInputYInStepsOf.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputYInStepsOf.TabIndex = 23
         '
         'ucrInputDateBreakTime
         '
         Me.ucrInputDateBreakTime.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateBreakTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDateBreakTime.GetSetSelectedIndex = -1
         Me.ucrInputDateBreakTime.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDateBreakTime, "ucrInputDateBreakTime")
+        Me.ucrInputDateBreakTime.Location = New System.Drawing.Point(482, 88)
+        Me.ucrInputDateBreakTime.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputDateBreakTime.Name = "ucrInputDateBreakTime"
+        Me.ucrInputDateBreakTime.Size = New System.Drawing.Size(70, 21)
+        Me.ucrInputDateBreakTime.TabIndex = 35
         '
         'ucrChkSpecifyDateBreaks
         '
+        Me.ucrChkSpecifyDateBreaks.AutoSize = True
         Me.ucrChkSpecifyDateBreaks.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyDateBreaks, "ucrChkSpecifyDateBreaks")
+        Me.ucrChkSpecifyDateBreaks.Location = New System.Drawing.Point(268, 90)
+        Me.ucrChkSpecifyDateBreaks.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSpecifyDateBreaks.Name = "ucrChkSpecifyDateBreaks"
+        Me.ucrChkSpecifyDateBreaks.Size = New System.Drawing.Size(161, 23)
+        Me.ucrChkSpecifyDateBreaks.TabIndex = 34
         '
         'ucrInputDateDisplayFormat
         '
         Me.ucrInputDateDisplayFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateDisplayFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDateDisplayFormat.GetSetSelectedIndex = -1
         Me.ucrInputDateDisplayFormat.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDateDisplayFormat, "ucrInputDateDisplayFormat")
+        Me.ucrInputDateDisplayFormat.Location = New System.Drawing.Point(139, 90)
+        Me.ucrInputDateDisplayFormat.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputDateDisplayFormat.Name = "ucrInputDateDisplayFormat"
+        Me.ucrInputDateDisplayFormat.Size = New System.Drawing.Size(114, 21)
+        Me.ucrInputDateDisplayFormat.TabIndex = 32
         '
         'ucrInputYTo
         '
         Me.ucrInputYTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputYTo.AutoSize = True
         Me.ucrInputYTo.IsMultiline = False
         Me.ucrInputYTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYTo, "ucrInputYTo")
+        Me.ucrInputYTo.Location = New System.Drawing.Point(297, 61)
+        Me.ucrInputYTo.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYTo.Name = "ucrInputYTo"
+        Me.ucrInputYTo.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputYTo.TabIndex = 24
         '
         'ucrNudYAxisAngle
         '
+        Me.ucrNudYAxisAngle.AutoSize = True
         Me.ucrNudYAxisAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisAngle, "ucrNudYAxisAngle")
+        Me.ucrNudYAxisAngle.Location = New System.Drawing.Point(97, 195)
+        Me.ucrNudYAxisAngle.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudYAxisAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudYAxisAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisAngle.Name = "ucrNudYAxisAngle"
+        Me.ucrNudYAxisAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudYAxisAngle.TabIndex = 33
         Me.ucrNudYAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudYAxisLabelSize
         '
+        Me.ucrNudYAxisLabelSize.AutoSize = True
         Me.ucrNudYAxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisLabelSize, "ucrNudYAxisLabelSize")
+        Me.ucrNudYAxisLabelSize.Location = New System.Drawing.Point(252, 195)
+        Me.ucrNudYAxisLabelSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudYAxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudYAxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudYAxisLabelSize.Name = "ucrNudYAxisLabelSize"
+        Me.ucrNudYAxisLabelSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudYAxisLabelSize.TabIndex = 4
         Me.ucrNudYAxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkYAxisAngle
         '
+        Me.ucrChkYAxisAngle.AutoSize = True
         Me.ucrChkYAxisAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisAngle, "ucrChkYAxisAngle")
+        Me.ucrChkYAxisAngle.Location = New System.Drawing.Point(11, 195)
+        Me.ucrChkYAxisAngle.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkYAxisAngle.Name = "ucrChkYAxisAngle"
+        Me.ucrChkYAxisAngle.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkYAxisAngle.TabIndex = 32
         '
         'ucrInputYFrom
         '
         Me.ucrInputYFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputYFrom.AutoSize = True
         Me.ucrInputYFrom.IsMultiline = False
         Me.ucrInputYFrom.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYFrom, "ucrInputYFrom")
+        Me.ucrInputYFrom.Location = New System.Drawing.Point(199, 61)
+        Me.ucrInputYFrom.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYFrom.Name = "ucrInputYFrom"
+        Me.ucrInputYFrom.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputYFrom.TabIndex = 25
         '
         'ucrChkYAxisLabelSize
         '
+        Me.ucrChkYAxisLabelSize.AutoSize = True
         Me.ucrChkYAxisLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisLabelSize, "ucrChkYAxisLabelSize")
+        Me.ucrChkYAxisLabelSize.Location = New System.Drawing.Point(173, 195)
+        Me.ucrChkYAxisLabelSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkYAxisLabelSize.Name = "ucrChkYAxisLabelSize"
+        Me.ucrChkYAxisLabelSize.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkYAxisLabelSize.TabIndex = 31
         '
         'tpLines
         '
@@ -816,22 +1133,35 @@ Partial Class sdgPICSARainfallGraph
         Me.tpLines.Controls.Add(Me.ucrChkAddMeanLabel)
         Me.tpLines.Controls.Add(Me.ucrChkAddMedian)
         Me.tpLines.Controls.Add(Me.ucrChkAddTerciles)
-        resources.ApplyResources(Me.tpLines, "tpLines")
+        Me.tpLines.Location = New System.Drawing.Point(4, 22)
         Me.tpLines.Name = "tpLines"
+        Me.tpLines.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpLines.Size = New System.Drawing.Size(581, 309)
+        Me.tpLines.TabIndex = 2
+        Me.tpLines.Text = "Lines"
         Me.tpLines.UseVisualStyleBackColor = True
         '
         'ucrInputTercilesLineLabelTextUpper
         '
         Me.ucrInputTercilesLineLabelTextUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputTercilesLineLabelTextUpper.AutoSize = True
         Me.ucrInputTercilesLineLabelTextUpper.IsMultiline = False
         Me.ucrInputTercilesLineLabelTextUpper.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTercilesLineLabelTextUpper, "ucrInputTercilesLineLabelTextUpper")
+        Me.ucrInputTercilesLineLabelTextUpper.Location = New System.Drawing.Point(264, 201)
+        Me.ucrInputTercilesLineLabelTextUpper.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputTercilesLineLabelTextUpper.Name = "ucrInputTercilesLineLabelTextUpper"
+        Me.ucrInputTercilesLineLabelTextUpper.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputTercilesLineLabelTextUpper.TabIndex = 22
         '
         'lblTercilesLineLabelTextUpper
         '
-        resources.ApplyResources(Me.lblTercilesLineLabelTextUpper, "lblTercilesLineLabelTextUpper")
+        Me.lblTercilesLineLabelTextUpper.AutoSize = True
+        Me.lblTercilesLineLabelTextUpper.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTercilesLineLabelTextUpper.Location = New System.Drawing.Point(103, 205)
         Me.lblTercilesLineLabelTextUpper.Name = "lblTercilesLineLabelTextUpper"
+        Me.lblTercilesLineLabelTextUpper.Size = New System.Drawing.Size(98, 13)
+        Me.lblTercilesLineLabelTextUpper.TabIndex = 21
+        Me.lblTercilesLineLabelTextUpper.Text = "Label Text (Upper):"
         '
         'grpLinesFormat
         '
@@ -843,200 +1173,326 @@ Partial Class sdgPICSARainfallGraph
         Me.grpLinesFormat.Controls.Add(Me.ucrInputHLineColour)
         Me.grpLinesFormat.Controls.Add(Me.ucrChkHLineType)
         Me.grpLinesFormat.Controls.Add(Me.ucrChkHLineColour)
-        resources.ApplyResources(Me.grpLinesFormat, "grpLinesFormat")
+        Me.grpLinesFormat.Location = New System.Drawing.Point(9, 230)
         Me.grpLinesFormat.Name = "grpLinesFormat"
+        Me.grpLinesFormat.Size = New System.Drawing.Size(487, 75)
+        Me.grpLinesFormat.TabIndex = 20
         Me.grpLinesFormat.TabStop = False
+        Me.grpLinesFormat.Text = "Line Format"
         '
         'ucrNudLabelTransparency
         '
+        Me.ucrNudLabelTransparency.AutoSize = True
         Me.ucrNudLabelTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLabelTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLabelTransparency, "ucrNudLabelTransparency")
+        Me.ucrNudLabelTransparency.Location = New System.Drawing.Point(364, 50)
+        Me.ucrNudLabelTransparency.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudLabelTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLabelTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLabelTransparency.Name = "ucrNudLabelTransparency"
+        Me.ucrNudLabelTransparency.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLabelTransparency.TabIndex = 24
         Me.ucrNudLabelTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblLabelTransparency
         '
-        resources.ApplyResources(Me.lblLabelTransparency, "lblLabelTransparency")
+        Me.lblLabelTransparency.AutoSize = True
+        Me.lblLabelTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLabelTransparency.Location = New System.Drawing.Point(224, 53)
         Me.lblLabelTransparency.Name = "lblLabelTransparency"
+        Me.lblLabelTransparency.Size = New System.Drawing.Size(104, 13)
+        Me.lblLabelTransparency.TabIndex = 23
+        Me.lblLabelTransparency.Text = "Label Transparency:"
         '
         'ucrNudHLineSize
         '
+        Me.ucrNudHLineSize.AutoSize = True
         Me.ucrNudHLineSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHLineSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudHLineSize, "ucrNudHLineSize")
+        Me.ucrNudHLineSize.Location = New System.Drawing.Point(95, 50)
+        Me.ucrNudHLineSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudHLineSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHLineSize.Name = "ucrNudHLineSize"
+        Me.ucrNudHLineSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHLineSize.TabIndex = 7
         Me.ucrNudHLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkHLineSize
         '
+        Me.ucrChkHLineSize.AutoSize = True
         Me.ucrChkHLineSize.Checked = False
-        resources.ApplyResources(Me.ucrChkHLineSize, "ucrChkHLineSize")
+        Me.ucrChkHLineSize.Location = New System.Drawing.Point(6, 50)
+        Me.ucrChkHLineSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkHLineSize.Name = "ucrChkHLineSize"
+        Me.ucrChkHLineSize.Size = New System.Drawing.Size(83, 23)
+        Me.ucrChkHLineSize.TabIndex = 6
         '
         'ucrInputHLineType
         '
         Me.ucrInputHLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputHLineType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputHLineType.GetSetSelectedIndex = -1
         Me.ucrInputHLineType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHLineType, "ucrInputHLineType")
+        Me.ucrInputHLineType.Location = New System.Drawing.Point(312, 23)
+        Me.ucrInputHLineType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputHLineType.Name = "ucrInputHLineType"
+        Me.ucrInputHLineType.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputHLineType.TabIndex = 4
         '
         'ucrInputHLineColour
         '
         Me.ucrInputHLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputHLineColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputHLineColour.GetSetSelectedIndex = -1
         Me.ucrInputHLineColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHLineColour, "ucrInputHLineColour")
+        Me.ucrInputHLineColour.Location = New System.Drawing.Point(94, 23)
+        Me.ucrInputHLineColour.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputHLineColour.Name = "ucrInputHLineColour"
+        Me.ucrInputHLineColour.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputHLineColour.TabIndex = 3
         '
         'ucrChkHLineType
         '
+        Me.ucrChkHLineType.AutoSize = True
         Me.ucrChkHLineType.Checked = False
-        resources.ApplyResources(Me.ucrChkHLineType, "ucrChkHLineType")
+        Me.ucrChkHLineType.Location = New System.Drawing.Point(224, 23)
+        Me.ucrChkHLineType.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkHLineType.Name = "ucrChkHLineType"
+        Me.ucrChkHLineType.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkHLineType.TabIndex = 2
         '
         'ucrChkHLineColour
         '
+        Me.ucrChkHLineColour.AutoSize = True
         Me.ucrChkHLineColour.Checked = False
-        resources.ApplyResources(Me.ucrChkHLineColour, "ucrChkHLineColour")
+        Me.ucrChkHLineColour.Location = New System.Drawing.Point(6, 23)
+        Me.ucrChkHLineColour.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkHLineColour.Name = "ucrChkHLineColour"
+        Me.ucrChkHLineColour.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkHLineColour.TabIndex = 1
         '
         'lblTercilesLineLabelTextLower
         '
-        resources.ApplyResources(Me.lblTercilesLineLabelTextLower, "lblTercilesLineLabelTextLower")
+        Me.lblTercilesLineLabelTextLower.AutoSize = True
+        Me.lblTercilesLineLabelTextLower.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTercilesLineLabelTextLower.Location = New System.Drawing.Point(103, 176)
         Me.lblTercilesLineLabelTextLower.Name = "lblTercilesLineLabelTextLower"
+        Me.lblTercilesLineLabelTextLower.Size = New System.Drawing.Size(98, 13)
+        Me.lblTercilesLineLabelTextLower.TabIndex = 15
+        Me.lblTercilesLineLabelTextLower.Text = "Label Text (Lower):"
         '
         'lblTercilesLineType
         '
-        resources.ApplyResources(Me.lblTercilesLineType, "lblTercilesLineType")
+        Me.lblTercilesLineType.AutoSize = True
+        Me.lblTercilesLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTercilesLineType.Location = New System.Drawing.Point(307, 148)
         Me.lblTercilesLineType.Name = "lblTercilesLineType"
+        Me.lblTercilesLineType.Size = New System.Drawing.Size(63, 13)
+        Me.lblTercilesLineType.TabIndex = 14
+        Me.lblTercilesLineType.Text = "Label Type:"
         '
         'lblMedianLineLabelText
         '
-        resources.ApplyResources(Me.lblMedianLineLabelText, "lblMedianLineLabelText")
+        Me.lblMedianLineLabelText.AutoSize = True
+        Me.lblMedianLineLabelText.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMedianLineLabelText.Location = New System.Drawing.Point(132, 107)
         Me.lblMedianLineLabelText.Name = "lblMedianLineLabelText"
+        Me.lblMedianLineLabelText.Size = New System.Drawing.Size(60, 13)
+        Me.lblMedianLineLabelText.TabIndex = 10
+        Me.lblMedianLineLabelText.Text = "Label Text:"
         '
         'lblMedianLineType
         '
-        resources.ApplyResources(Me.lblMedianLineType, "lblMedianLineType")
+        Me.lblMedianLineType.AutoSize = True
+        Me.lblMedianLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMedianLineType.Location = New System.Drawing.Point(307, 78)
         Me.lblMedianLineType.Name = "lblMedianLineType"
+        Me.lblMedianLineType.Size = New System.Drawing.Size(63, 13)
+        Me.lblMedianLineType.TabIndex = 9
+        Me.lblMedianLineType.Text = "Label Type:"
         '
         'lblMeanLineLabelText
         '
-        resources.ApplyResources(Me.lblMeanLineLabelText, "lblMeanLineLabelText")
+        Me.lblMeanLineLabelText.AutoSize = True
+        Me.lblMeanLineLabelText.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMeanLineLabelText.Location = New System.Drawing.Point(132, 42)
         Me.lblMeanLineLabelText.Name = "lblMeanLineLabelText"
+        Me.lblMeanLineLabelText.Size = New System.Drawing.Size(60, 13)
+        Me.lblMeanLineLabelText.TabIndex = 5
+        Me.lblMeanLineLabelText.Text = "Label Text:"
         '
         'lblMeanLineType
         '
-        resources.ApplyResources(Me.lblMeanLineType, "lblMeanLineType")
+        Me.lblMeanLineType.AutoSize = True
+        Me.lblMeanLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMeanLineType.Location = New System.Drawing.Point(307, 13)
         Me.lblMeanLineType.Name = "lblMeanLineType"
+        Me.lblMeanLineType.Size = New System.Drawing.Size(63, 13)
+        Me.lblMeanLineType.TabIndex = 4
+        Me.lblMeanLineType.Text = "Label Type:"
         '
         'ucrChkTercilesLineLabelIncludeValue
         '
+        Me.ucrChkTercilesLineLabelIncludeValue.AutoSize = True
         Me.ucrChkTercilesLineLabelIncludeValue.Checked = False
-        resources.ApplyResources(Me.ucrChkTercilesLineLabelIncludeValue, "ucrChkTercilesLineLabelIncludeValue")
+        Me.ucrChkTercilesLineLabelIncludeValue.Location = New System.Drawing.Point(390, 188)
+        Me.ucrChkTercilesLineLabelIncludeValue.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkTercilesLineLabelIncludeValue.Name = "ucrChkTercilesLineLabelIncludeValue"
+        Me.ucrChkTercilesLineLabelIncludeValue.Size = New System.Drawing.Size(186, 23)
+        Me.ucrChkTercilesLineLabelIncludeValue.TabIndex = 19
         '
         'ucrChkMedianLineLabelIncludeValue
         '
+        Me.ucrChkMedianLineLabelIncludeValue.AutoSize = True
         Me.ucrChkMedianLineLabelIncludeValue.Checked = False
-        resources.ApplyResources(Me.ucrChkMedianLineLabelIncludeValue, "ucrChkMedianLineLabelIncludeValue")
+        Me.ucrChkMedianLineLabelIncludeValue.Location = New System.Drawing.Point(390, 106)
+        Me.ucrChkMedianLineLabelIncludeValue.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMedianLineLabelIncludeValue.Name = "ucrChkMedianLineLabelIncludeValue"
+        Me.ucrChkMedianLineLabelIncludeValue.Size = New System.Drawing.Size(186, 23)
+        Me.ucrChkMedianLineLabelIncludeValue.TabIndex = 18
         '
         'ucrChkMeanLineLabelIncludeValue
         '
+        Me.ucrChkMeanLineLabelIncludeValue.AutoSize = True
         Me.ucrChkMeanLineLabelIncludeValue.Checked = False
-        resources.ApplyResources(Me.ucrChkMeanLineLabelIncludeValue, "ucrChkMeanLineLabelIncludeValue")
+        Me.ucrChkMeanLineLabelIncludeValue.Location = New System.Drawing.Point(390, 41)
+        Me.ucrChkMeanLineLabelIncludeValue.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMeanLineLabelIncludeValue.Name = "ucrChkMeanLineLabelIncludeValue"
+        Me.ucrChkMeanLineLabelIncludeValue.Size = New System.Drawing.Size(185, 23)
+        Me.ucrChkMeanLineLabelIncludeValue.TabIndex = 17
         '
         'ucrInputTercilesLineLabelTextLower
         '
         Me.ucrInputTercilesLineLabelTextLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputTercilesLineLabelTextLower.AutoSize = True
         Me.ucrInputTercilesLineLabelTextLower.IsMultiline = False
         Me.ucrInputTercilesLineLabelTextLower.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTercilesLineLabelTextLower, "ucrInputTercilesLineLabelTextLower")
+        Me.ucrInputTercilesLineLabelTextLower.Location = New System.Drawing.Point(264, 174)
+        Me.ucrInputTercilesLineLabelTextLower.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputTercilesLineLabelTextLower.Name = "ucrInputTercilesLineLabelTextLower"
+        Me.ucrInputTercilesLineLabelTextLower.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputTercilesLineLabelTextLower.TabIndex = 16
         '
         'ucrInputTercilesLabelType
         '
         Me.ucrInputTercilesLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputTercilesLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTercilesLabelType.GetSetSelectedIndex = -1
         Me.ucrInputTercilesLabelType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTercilesLabelType, "ucrInputTercilesLabelType")
+        Me.ucrInputTercilesLabelType.Location = New System.Drawing.Point(426, 144)
+        Me.ucrInputTercilesLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputTercilesLabelType.Name = "ucrInputTercilesLabelType"
+        Me.ucrInputTercilesLabelType.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputTercilesLabelType.TabIndex = 13
         '
         'ucrInputMedianLineLabelText
         '
         Me.ucrInputMedianLineLabelText.AddQuotesIfUnrecognised = True
+        Me.ucrInputMedianLineLabelText.AutoSize = True
         Me.ucrInputMedianLineLabelText.IsMultiline = False
         Me.ucrInputMedianLineLabelText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMedianLineLabelText, "ucrInputMedianLineLabelText")
+        Me.ucrInputMedianLineLabelText.Location = New System.Drawing.Point(264, 105)
+        Me.ucrInputMedianLineLabelText.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMedianLineLabelText.Name = "ucrInputMedianLineLabelText"
+        Me.ucrInputMedianLineLabelText.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputMedianLineLabelText.TabIndex = 11
         '
         'ucrInputMedianLabelType
         '
         Me.ucrInputMedianLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMedianLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMedianLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMedianLabelType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMedianLabelType, "ucrInputMedianLabelType")
+        Me.ucrInputMedianLabelType.Location = New System.Drawing.Point(426, 74)
+        Me.ucrInputMedianLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMedianLabelType.Name = "ucrInputMedianLabelType"
+        Me.ucrInputMedianLabelType.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputMedianLabelType.TabIndex = 8
         '
         'ucrInputMeanLineLabelText
         '
         Me.ucrInputMeanLineLabelText.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanLineLabelText.AutoSize = True
         Me.ucrInputMeanLineLabelText.IsMultiline = False
         Me.ucrInputMeanLineLabelText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMeanLineLabelText, "ucrInputMeanLineLabelText")
+        Me.ucrInputMeanLineLabelText.Location = New System.Drawing.Point(264, 40)
+        Me.ucrInputMeanLineLabelText.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMeanLineLabelText.Name = "ucrInputMeanLineLabelText"
+        Me.ucrInputMeanLineLabelText.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputMeanLineLabelText.TabIndex = 6
         '
         'ucrChkAddTercilesLabel
         '
+        Me.ucrChkAddTercilesLabel.AutoSize = True
         Me.ucrChkAddTercilesLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddTercilesLabel, "ucrChkAddTercilesLabel")
+        Me.ucrChkAddTercilesLabel.Location = New System.Drawing.Point(132, 144)
+        Me.ucrChkAddTercilesLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddTercilesLabel.Name = "ucrChkAddTercilesLabel"
+        Me.ucrChkAddTercilesLabel.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkAddTercilesLabel.TabIndex = 2
         '
         'ucrChkAddMedianLabel
         '
+        Me.ucrChkAddMedianLabel.AutoSize = True
         Me.ucrChkAddMedianLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMedianLabel, "ucrChkAddMedianLabel")
+        Me.ucrChkAddMedianLabel.Location = New System.Drawing.Point(132, 75)
+        Me.ucrChkAddMedianLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
+        Me.ucrChkAddMedianLabel.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkAddMedianLabel.TabIndex = 2
         '
         'ucrInputMeanLabelType
         '
         Me.ucrInputMeanLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMeanLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMeanLabelType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMeanLabelType, "ucrInputMeanLabelType")
+        Me.ucrInputMeanLabelType.Location = New System.Drawing.Point(426, 9)
+        Me.ucrInputMeanLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMeanLabelType.Name = "ucrInputMeanLabelType"
+        Me.ucrInputMeanLabelType.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputMeanLabelType.TabIndex = 3
         '
         'ucrChkAddMean
         '
+        Me.ucrChkAddMean.AutoSize = True
         Me.ucrChkAddMean.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMean, "ucrChkAddMean")
+        Me.ucrChkAddMean.Location = New System.Drawing.Point(9, 10)
+        Me.ucrChkAddMean.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMean.Name = "ucrChkAddMean"
+        Me.ucrChkAddMean.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddMean.TabIndex = 1
         '
         'ucrChkAddMeanLabel
         '
+        Me.ucrChkAddMeanLabel.AutoSize = True
         Me.ucrChkAddMeanLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMeanLabel, "ucrChkAddMeanLabel")
+        Me.ucrChkAddMeanLabel.Location = New System.Drawing.Point(132, 10)
+        Me.ucrChkAddMeanLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMeanLabel.Name = "ucrChkAddMeanLabel"
+        Me.ucrChkAddMeanLabel.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkAddMeanLabel.TabIndex = 2
         '
         'ucrChkAddMedian
         '
+        Me.ucrChkAddMedian.AutoSize = True
         Me.ucrChkAddMedian.Checked = False
-        resources.ApplyResources(Me.ucrChkAddMedian, "ucrChkAddMedian")
+        Me.ucrChkAddMedian.Location = New System.Drawing.Point(9, 77)
+        Me.ucrChkAddMedian.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedian.Name = "ucrChkAddMedian"
+        Me.ucrChkAddMedian.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddMedian.TabIndex = 1
         '
         'ucrChkAddTerciles
         '
+        Me.ucrChkAddTerciles.AutoSize = True
         Me.ucrChkAddTerciles.Checked = False
-        resources.ApplyResources(Me.ucrChkAddTerciles, "ucrChkAddTerciles")
+        Me.ucrChkAddTerciles.Location = New System.Drawing.Point(9, 144)
+        Me.ucrChkAddTerciles.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddTerciles.Name = "ucrChkAddTerciles"
+        Me.ucrChkAddTerciles.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddTerciles.TabIndex = 1
         '
         'tpPanel
         '
@@ -1044,8 +1500,12 @@ Partial Class sdgPICSARainfallGraph
         Me.tpPanel.Controls.Add(Me.grpPnlBorder)
         Me.tpPanel.Controls.Add(Me.grpMajorGridLines)
         Me.tpPanel.Controls.Add(Me.grpPnlBackground)
-        resources.ApplyResources(Me.tpPanel, "tpPanel")
+        Me.tpPanel.Location = New System.Drawing.Point(4, 22)
         Me.tpPanel.Name = "tpPanel"
+        Me.tpPanel.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpPanel.Size = New System.Drawing.Size(581, 309)
+        Me.tpPanel.TabIndex = 3
+        Me.tpPanel.Text = "Panel"
         Me.tpPanel.UseVisualStyleBackColor = True
         '
         'grpMinorGridLine
@@ -1057,56 +1517,90 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMinorGridLine.Controls.Add(Me.lblMinorGridLineColour)
         Me.grpMinorGridLine.Controls.Add(Me.ucrInputMinorGridLineLinetype)
         Me.grpMinorGridLine.Controls.Add(Me.ucrInputMinorGridLineColour)
-        resources.ApplyResources(Me.grpMinorGridLine, "grpMinorGridLine")
+        Me.grpMinorGridLine.Location = New System.Drawing.Point(264, 166)
         Me.grpMinorGridLine.Name = "grpMinorGridLine"
+        Me.grpMinorGridLine.Size = New System.Drawing.Size(226, 140)
+        Me.grpMinorGridLine.TabIndex = 3
         Me.grpMinorGridLine.TabStop = False
+        Me.grpMinorGridLine.Text = "Minor Grid Lines"
         '
         'lblMinorGridLineSize
         '
-        resources.ApplyResources(Me.lblMinorGridLineSize, "lblMinorGridLineSize")
+        Me.lblMinorGridLineSize.AutoSize = True
+        Me.lblMinorGridLineSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMinorGridLineSize.Location = New System.Drawing.Point(6, 114)
         Me.lblMinorGridLineSize.Name = "lblMinorGridLineSize"
+        Me.lblMinorGridLineSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblMinorGridLineSize.TabIndex = 14
+        Me.lblMinorGridLineSize.Text = "Size:"
         '
         'ucrChkIncludeMinorGridLines
         '
+        Me.ucrChkIncludeMinorGridLines.AutoSize = True
         Me.ucrChkIncludeMinorGridLines.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMinorGridLines, "ucrChkIncludeMinorGridLines")
+        Me.ucrChkIncludeMinorGridLines.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkIncludeMinorGridLines.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeMinorGridLines.Name = "ucrChkIncludeMinorGridLines"
+        Me.ucrChkIncludeMinorGridLines.Size = New System.Drawing.Size(194, 23)
+        Me.ucrChkIncludeMinorGridLines.TabIndex = 9
         '
         'lblMinorGridLineLinetype
         '
-        resources.ApplyResources(Me.lblMinorGridLineLinetype, "lblMinorGridLineLinetype")
+        Me.lblMinorGridLineLinetype.AutoSize = True
+        Me.lblMinorGridLineLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMinorGridLineLinetype.Location = New System.Drawing.Point(6, 83)
         Me.lblMinorGridLineLinetype.Name = "lblMinorGridLineLinetype"
+        Me.lblMinorGridLineLinetype.Size = New System.Drawing.Size(57, 13)
+        Me.lblMinorGridLineLinetype.TabIndex = 13
+        Me.lblMinorGridLineLinetype.Text = "Line Type:"
         '
         'ucrNudMinorGridLineSize
         '
+        Me.ucrNudMinorGridLineSize.AutoSize = True
         Me.ucrNudMinorGridLineSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinorGridLineSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinorGridLineSize, "ucrNudMinorGridLineSize")
+        Me.ucrNudMinorGridLineSize.Location = New System.Drawing.Point(94, 110)
+        Me.ucrNudMinorGridLineSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudMinorGridLineSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinorGridLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinorGridLineSize.Name = "ucrNudMinorGridLineSize"
+        Me.ucrNudMinorGridLineSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinorGridLineSize.TabIndex = 8
         Me.ucrNudMinorGridLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMinorGridLineColour
         '
-        resources.ApplyResources(Me.lblMinorGridLineColour, "lblMinorGridLineColour")
+        Me.lblMinorGridLineColour.AutoSize = True
+        Me.lblMinorGridLineColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMinorGridLineColour.Location = New System.Drawing.Point(6, 52)
         Me.lblMinorGridLineColour.Name = "lblMinorGridLineColour"
+        Me.lblMinorGridLineColour.Size = New System.Drawing.Size(40, 13)
+        Me.lblMinorGridLineColour.TabIndex = 12
+        Me.lblMinorGridLineColour.Text = "Colour:"
         '
         'ucrInputMinorGridLineLinetype
         '
         Me.ucrInputMinorGridLineLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinorGridLineLinetype.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMinorGridLineLinetype.GetSetSelectedIndex = -1
         Me.ucrInputMinorGridLineLinetype.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinorGridLineLinetype, "ucrInputMinorGridLineLinetype")
+        Me.ucrInputMinorGridLineLinetype.Location = New System.Drawing.Point(94, 79)
+        Me.ucrInputMinorGridLineLinetype.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMinorGridLineLinetype.Name = "ucrInputMinorGridLineLinetype"
+        Me.ucrInputMinorGridLineLinetype.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputMinorGridLineLinetype.TabIndex = 4
         '
         'ucrInputMinorGridLineColour
         '
         Me.ucrInputMinorGridLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinorGridLineColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMinorGridLineColour.GetSetSelectedIndex = -1
         Me.ucrInputMinorGridLineColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinorGridLineColour, "ucrInputMinorGridLineColour")
+        Me.ucrInputMinorGridLineColour.Location = New System.Drawing.Point(94, 48)
+        Me.ucrInputMinorGridLineColour.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMinorGridLineColour.Name = "ucrInputMinorGridLineColour"
+        Me.ucrInputMinorGridLineColour.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputMinorGridLineColour.TabIndex = 3
         '
         'grpPnlBorder
         '
@@ -1116,53 +1610,80 @@ Partial Class sdgPICSARainfallGraph
         Me.grpPnlBorder.Controls.Add(Me.ucrInputBorderColour)
         Me.grpPnlBorder.Controls.Add(Me.ucrChkBorderLineType)
         Me.grpPnlBorder.Controls.Add(Me.ucrChkBorderColour)
-        resources.ApplyResources(Me.grpPnlBorder, "grpPnlBorder")
+        Me.grpPnlBorder.Location = New System.Drawing.Point(264, 9)
         Me.grpPnlBorder.Name = "grpPnlBorder"
+        Me.grpPnlBorder.Size = New System.Drawing.Size(226, 117)
+        Me.grpPnlBorder.TabIndex = 2
         Me.grpPnlBorder.TabStop = False
+        Me.grpPnlBorder.Text = "Border"
         '
         'ucrNudBorderSize
         '
+        Me.ucrNudBorderSize.AutoSize = True
         Me.ucrNudBorderSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBorderSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudBorderSize, "ucrNudBorderSize")
+        Me.ucrNudBorderSize.Location = New System.Drawing.Point(95, 86)
+        Me.ucrNudBorderSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudBorderSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBorderSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBorderSize.Name = "ucrNudBorderSize"
+        Me.ucrNudBorderSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudBorderSize.TabIndex = 6
         Me.ucrNudBorderSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'UcrChkBorderSize
         '
+        Me.UcrChkBorderSize.AutoSize = True
         Me.UcrChkBorderSize.Checked = False
-        resources.ApplyResources(Me.UcrChkBorderSize, "UcrChkBorderSize")
+        Me.UcrChkBorderSize.Location = New System.Drawing.Point(6, 88)
+        Me.UcrChkBorderSize.Margin = New System.Windows.Forms.Padding(5)
         Me.UcrChkBorderSize.Name = "UcrChkBorderSize"
+        Me.UcrChkBorderSize.Size = New System.Drawing.Size(83, 23)
+        Me.UcrChkBorderSize.TabIndex = 5
         '
         'ucrInputBorderLinetype
         '
         Me.ucrInputBorderLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputBorderLinetype.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBorderLinetype.GetSetSelectedIndex = -1
         Me.ucrInputBorderLinetype.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBorderLinetype, "ucrInputBorderLinetype")
+        Me.ucrInputBorderLinetype.Location = New System.Drawing.Point(94, 56)
+        Me.ucrInputBorderLinetype.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputBorderLinetype.Name = "ucrInputBorderLinetype"
+        Me.ucrInputBorderLinetype.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputBorderLinetype.TabIndex = 4
         '
         'ucrInputBorderColour
         '
         Me.ucrInputBorderColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBorderColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBorderColour.GetSetSelectedIndex = -1
         Me.ucrInputBorderColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBorderColour, "ucrInputBorderColour")
+        Me.ucrInputBorderColour.Location = New System.Drawing.Point(94, 23)
+        Me.ucrInputBorderColour.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputBorderColour.Name = "ucrInputBorderColour"
+        Me.ucrInputBorderColour.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputBorderColour.TabIndex = 3
         '
         'ucrChkBorderLineType
         '
+        Me.ucrChkBorderLineType.AutoSize = True
         Me.ucrChkBorderLineType.Checked = False
-        resources.ApplyResources(Me.ucrChkBorderLineType, "ucrChkBorderLineType")
+        Me.ucrChkBorderLineType.Location = New System.Drawing.Point(6, 56)
+        Me.ucrChkBorderLineType.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkBorderLineType.Name = "ucrChkBorderLineType"
+        Me.ucrChkBorderLineType.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkBorderLineType.TabIndex = 2
         '
         'ucrChkBorderColour
         '
+        Me.ucrChkBorderColour.AutoSize = True
         Me.ucrChkBorderColour.Checked = False
-        resources.ApplyResources(Me.ucrChkBorderColour, "ucrChkBorderColour")
+        Me.ucrChkBorderColour.Location = New System.Drawing.Point(6, 23)
+        Me.ucrChkBorderColour.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkBorderColour.Name = "ucrChkBorderColour"
+        Me.ucrChkBorderColour.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkBorderColour.TabIndex = 1
         '
         'grpMajorGridLines
         '
@@ -1173,56 +1694,90 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMajorGridLines.Controls.Add(Me.ucrNudMajorGridLineSize)
         Me.grpMajorGridLines.Controls.Add(Me.ucrInputMajorGridLineLinetype)
         Me.grpMajorGridLines.Controls.Add(Me.ucrInputMajorGridLineColour)
-        resources.ApplyResources(Me.grpMajorGridLines, "grpMajorGridLines")
+        Me.grpMajorGridLines.Location = New System.Drawing.Point(6, 166)
         Me.grpMajorGridLines.Name = "grpMajorGridLines"
+        Me.grpMajorGridLines.Size = New System.Drawing.Size(236, 140)
+        Me.grpMajorGridLines.TabIndex = 1
         Me.grpMajorGridLines.TabStop = False
+        Me.grpMajorGridLines.Text = "Major Grid Lines"
         '
         'lblMajorGridLineSize
         '
-        resources.ApplyResources(Me.lblMajorGridLineSize, "lblMajorGridLineSize")
+        Me.lblMajorGridLineSize.AutoSize = True
+        Me.lblMajorGridLineSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMajorGridLineSize.Location = New System.Drawing.Point(6, 114)
         Me.lblMajorGridLineSize.Name = "lblMajorGridLineSize"
+        Me.lblMajorGridLineSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblMajorGridLineSize.TabIndex = 11
+        Me.lblMajorGridLineSize.Text = "Size:"
         '
         'lblMajorGridLineLinetype
         '
-        resources.ApplyResources(Me.lblMajorGridLineLinetype, "lblMajorGridLineLinetype")
+        Me.lblMajorGridLineLinetype.AutoSize = True
+        Me.lblMajorGridLineLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMajorGridLineLinetype.Location = New System.Drawing.Point(6, 83)
         Me.lblMajorGridLineLinetype.Name = "lblMajorGridLineLinetype"
+        Me.lblMajorGridLineLinetype.Size = New System.Drawing.Size(57, 13)
+        Me.lblMajorGridLineLinetype.TabIndex = 10
+        Me.lblMajorGridLineLinetype.Text = "Line Type:"
         '
         'lblMajorGridLineColour
         '
-        resources.ApplyResources(Me.lblMajorGridLineColour, "lblMajorGridLineColour")
+        Me.lblMajorGridLineColour.AutoSize = True
+        Me.lblMajorGridLineColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMajorGridLineColour.Location = New System.Drawing.Point(6, 52)
         Me.lblMajorGridLineColour.Name = "lblMajorGridLineColour"
+        Me.lblMajorGridLineColour.Size = New System.Drawing.Size(40, 13)
+        Me.lblMajorGridLineColour.TabIndex = 9
+        Me.lblMajorGridLineColour.Text = "Colour:"
         '
         'ucrChkIncludeMajorGridLines
         '
+        Me.ucrChkIncludeMajorGridLines.AutoSize = True
         Me.ucrChkIncludeMajorGridLines.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMajorGridLines, "ucrChkIncludeMajorGridLines")
+        Me.ucrChkIncludeMajorGridLines.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkIncludeMajorGridLines.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeMajorGridLines.Name = "ucrChkIncludeMajorGridLines"
+        Me.ucrChkIncludeMajorGridLines.Size = New System.Drawing.Size(223, 23)
+        Me.ucrChkIncludeMajorGridLines.TabIndex = 8
         '
         'ucrNudMajorGridLineSize
         '
+        Me.ucrNudMajorGridLineSize.AutoSize = True
         Me.ucrNudMajorGridLineSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMajorGridLineSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMajorGridLineSize, "ucrNudMajorGridLineSize")
+        Me.ucrNudMajorGridLineSize.Location = New System.Drawing.Point(94, 110)
+        Me.ucrNudMajorGridLineSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudMajorGridLineSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMajorGridLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMajorGridLineSize.Name = "ucrNudMajorGridLineSize"
+        Me.ucrNudMajorGridLineSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMajorGridLineSize.TabIndex = 7
         Me.ucrNudMajorGridLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputMajorGridLineLinetype
         '
         Me.ucrInputMajorGridLineLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorGridLineLinetype.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMajorGridLineLinetype.GetSetSelectedIndex = -1
         Me.ucrInputMajorGridLineLinetype.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMajorGridLineLinetype, "ucrInputMajorGridLineLinetype")
+        Me.ucrInputMajorGridLineLinetype.Location = New System.Drawing.Point(94, 79)
+        Me.ucrInputMajorGridLineLinetype.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMajorGridLineLinetype.Name = "ucrInputMajorGridLineLinetype"
+        Me.ucrInputMajorGridLineLinetype.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputMajorGridLineLinetype.TabIndex = 4
         '
         'ucrInputMajorGridLineColour
         '
         Me.ucrInputMajorGridLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorGridLineColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMajorGridLineColour.GetSetSelectedIndex = -1
         Me.ucrInputMajorGridLineColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMajorGridLineColour, "ucrInputMajorGridLineColour")
+        Me.ucrInputMajorGridLineColour.Location = New System.Drawing.Point(94, 48)
+        Me.ucrInputMajorGridLineColour.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMajorGridLineColour.Name = "ucrInputMajorGridLineColour"
+        Me.ucrInputMajorGridLineColour.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputMajorGridLineColour.TabIndex = 3
         '
         'grpPnlBackground
         '
@@ -1234,67 +1789,102 @@ Partial Class sdgPICSARainfallGraph
         Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundLineType)
         Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundFill)
         Me.grpPnlBackground.Controls.Add(Me.ucrChkPnlBackgroundColour)
-        resources.ApplyResources(Me.grpPnlBackground, "grpPnlBackground")
+        Me.grpPnlBackground.Location = New System.Drawing.Point(6, 9)
         Me.grpPnlBackground.Name = "grpPnlBackground"
+        Me.grpPnlBackground.Size = New System.Drawing.Size(236, 154)
+        Me.grpPnlBackground.TabIndex = 0
         Me.grpPnlBackground.TabStop = False
+        Me.grpPnlBackground.Text = "Background"
         '
         'ucrNudPnlBackgroundSize
         '
+        Me.ucrNudPnlBackgroundSize.AutoSize = True
         Me.ucrNudPnlBackgroundSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPnlBackgroundSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPnlBackgroundSize, "ucrNudPnlBackgroundSize")
+        Me.ucrNudPnlBackgroundSize.Location = New System.Drawing.Point(94, 120)
+        Me.ucrNudPnlBackgroundSize.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPnlBackgroundSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPnlBackgroundSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPnlBackgroundSize.Name = "ucrNudPnlBackgroundSize"
+        Me.ucrNudPnlBackgroundSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPnlBackgroundSize.TabIndex = 2
         Me.ucrNudPnlBackgroundSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'UcrInputPnlBackgroundFill
         '
         Me.UcrInputPnlBackgroundFill.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundFill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.UcrInputPnlBackgroundFill.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundFill.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputPnlBackgroundFill, "UcrInputPnlBackgroundFill")
+        Me.UcrInputPnlBackgroundFill.Location = New System.Drawing.Point(94, 86)
+        Me.UcrInputPnlBackgroundFill.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.UcrInputPnlBackgroundFill.Name = "UcrInputPnlBackgroundFill"
+        Me.UcrInputPnlBackgroundFill.Size = New System.Drawing.Size(106, 21)
+        Me.UcrInputPnlBackgroundFill.TabIndex = 5
         '
         'UcrInputPnlBackgroundLinetype
         '
         Me.UcrInputPnlBackgroundLinetype.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundLinetype.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.UcrInputPnlBackgroundLinetype.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundLinetype.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputPnlBackgroundLinetype, "UcrInputPnlBackgroundLinetype")
+        Me.UcrInputPnlBackgroundLinetype.Location = New System.Drawing.Point(94, 54)
+        Me.UcrInputPnlBackgroundLinetype.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.UcrInputPnlBackgroundLinetype.Name = "UcrInputPnlBackgroundLinetype"
+        Me.UcrInputPnlBackgroundLinetype.Size = New System.Drawing.Size(106, 21)
+        Me.UcrInputPnlBackgroundLinetype.TabIndex = 4
         '
         'UcrInputPnlBackgroundColour
         '
         Me.UcrInputPnlBackgroundColour.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.UcrInputPnlBackgroundColour.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundColour.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputPnlBackgroundColour, "UcrInputPnlBackgroundColour")
+        Me.UcrInputPnlBackgroundColour.Location = New System.Drawing.Point(94, 22)
+        Me.UcrInputPnlBackgroundColour.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.UcrInputPnlBackgroundColour.Name = "UcrInputPnlBackgroundColour"
+        Me.UcrInputPnlBackgroundColour.Size = New System.Drawing.Size(106, 21)
+        Me.UcrInputPnlBackgroundColour.TabIndex = 2
         '
         'UcrChkPnlBackgroundSize
         '
+        Me.UcrChkPnlBackgroundSize.AutoSize = True
         Me.UcrChkPnlBackgroundSize.Checked = False
-        resources.ApplyResources(Me.UcrChkPnlBackgroundSize, "UcrChkPnlBackgroundSize")
+        Me.UcrChkPnlBackgroundSize.Location = New System.Drawing.Point(9, 120)
+        Me.UcrChkPnlBackgroundSize.Margin = New System.Windows.Forms.Padding(5)
         Me.UcrChkPnlBackgroundSize.Name = "UcrChkPnlBackgroundSize"
+        Me.UcrChkPnlBackgroundSize.Size = New System.Drawing.Size(83, 23)
+        Me.UcrChkPnlBackgroundSize.TabIndex = 3
         '
         'UcrChkPnlBackgroundLineType
         '
+        Me.UcrChkPnlBackgroundLineType.AutoSize = True
         Me.UcrChkPnlBackgroundLineType.Checked = False
-        resources.ApplyResources(Me.UcrChkPnlBackgroundLineType, "UcrChkPnlBackgroundLineType")
+        Me.UcrChkPnlBackgroundLineType.Location = New System.Drawing.Point(9, 55)
+        Me.UcrChkPnlBackgroundLineType.Margin = New System.Windows.Forms.Padding(5)
         Me.UcrChkPnlBackgroundLineType.Name = "UcrChkPnlBackgroundLineType"
+        Me.UcrChkPnlBackgroundLineType.Size = New System.Drawing.Size(100, 23)
+        Me.UcrChkPnlBackgroundLineType.TabIndex = 2
         '
         'UcrChkPnlBackgroundFill
         '
+        Me.UcrChkPnlBackgroundFill.AutoSize = True
         Me.UcrChkPnlBackgroundFill.Checked = False
-        resources.ApplyResources(Me.UcrChkPnlBackgroundFill, "UcrChkPnlBackgroundFill")
+        Me.UcrChkPnlBackgroundFill.Location = New System.Drawing.Point(9, 88)
+        Me.UcrChkPnlBackgroundFill.Margin = New System.Windows.Forms.Padding(5)
         Me.UcrChkPnlBackgroundFill.Name = "UcrChkPnlBackgroundFill"
+        Me.UcrChkPnlBackgroundFill.Size = New System.Drawing.Size(83, 23)
+        Me.UcrChkPnlBackgroundFill.TabIndex = 1
         '
         'ucrChkPnlBackgroundColour
         '
+        Me.ucrChkPnlBackgroundColour.AutoSize = True
         Me.ucrChkPnlBackgroundColour.Checked = False
-        resources.ApplyResources(Me.ucrChkPnlBackgroundColour, "ucrChkPnlBackgroundColour")
+        Me.ucrChkPnlBackgroundColour.Location = New System.Drawing.Point(9, 23)
+        Me.ucrChkPnlBackgroundColour.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkPnlBackgroundColour.Name = "ucrChkPnlBackgroundColour"
+        Me.ucrChkPnlBackgroundColour.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPnlBackgroundColour.TabIndex = 0
         '
         'tpRug
         '
@@ -1304,47 +1894,77 @@ Partial Class sdgPICSARainfallGraph
         Me.tpRug.Controls.Add(Me.ucrChkXaxis)
         Me.tpRug.Controls.Add(Me.ucrInputYaxisOptions)
         Me.tpRug.Controls.Add(Me.ucrChkYaxis)
-        resources.ApplyResources(Me.tpRug, "tpRug")
+        Me.tpRug.Location = New System.Drawing.Point(4, 22)
         Me.tpRug.Name = "tpRug"
+        Me.tpRug.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpRug.Size = New System.Drawing.Size(581, 309)
+        Me.tpRug.TabIndex = 5
+        Me.tpRug.Text = "Rug"
         Me.tpRug.UseVisualStyleBackColor = True
         '
         'ucrInputXaxisOptions
         '
         Me.ucrInputXaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputXaxisOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputXaxisOptions.GetSetSelectedIndex = -1
         Me.ucrInputXaxisOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXaxisOptions, "ucrInputXaxisOptions")
+        Me.ucrInputXaxisOptions.Location = New System.Drawing.Point(225, 69)
+        Me.ucrInputXaxisOptions.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputXaxisOptions.Name = "ucrInputXaxisOptions"
+        Me.ucrInputXaxisOptions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputXaxisOptions.TabIndex = 5
         '
         'lblXaxisOptions
         '
-        resources.ApplyResources(Me.lblXaxisOptions, "lblXaxisOptions")
+        Me.lblXaxisOptions.AutoSize = True
+        Me.lblXaxisOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXaxisOptions.Location = New System.Drawing.Point(135, 69)
         Me.lblXaxisOptions.Name = "lblXaxisOptions"
+        Me.lblXaxisOptions.Size = New System.Drawing.Size(77, 13)
+        Me.lblXaxisOptions.TabIndex = 4
+        Me.lblXaxisOptions.Text = "X-axis Options:"
         '
         'lblYaxisOptions
         '
-        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
+        Me.lblYaxisOptions.AutoSize = True
+        Me.lblYaxisOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYaxisOptions.Location = New System.Drawing.Point(135, 25)
         Me.lblYaxisOptions.Name = "lblYaxisOptions"
+        Me.lblYaxisOptions.Size = New System.Drawing.Size(77, 13)
+        Me.lblYaxisOptions.TabIndex = 1
+        Me.lblYaxisOptions.Text = "Y-axis Options:"
         '
         'ucrChkXaxis
         '
+        Me.ucrChkXaxis.AutoSize = True
         Me.ucrChkXaxis.Checked = False
-        resources.ApplyResources(Me.ucrChkXaxis, "ucrChkXaxis")
+        Me.ucrChkXaxis.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkXaxis.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkXaxis.Name = "ucrChkXaxis"
+        Me.ucrChkXaxis.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkXaxis.TabIndex = 3
         '
         'ucrInputYaxisOptions
         '
         Me.ucrInputYaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputYaxisOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputYaxisOptions.GetSetSelectedIndex = -1
         Me.ucrInputYaxisOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
+        Me.ucrInputYaxisOptions.Location = New System.Drawing.Point(225, 25)
+        Me.ucrInputYaxisOptions.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"
+        Me.ucrInputYaxisOptions.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputYaxisOptions.TabIndex = 2
         '
         'ucrChkYaxis
         '
+        Me.ucrChkYaxis.AutoSize = True
         Me.ucrChkYaxis.Checked = False
-        resources.ApplyResources(Me.ucrChkYaxis, "ucrChkYaxis")
+        Me.ucrChkYaxis.Location = New System.Drawing.Point(6, 25)
+        Me.ucrChkYaxis.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkYaxis.Name = "ucrChkYaxis"
+        Me.ucrChkYaxis.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkYaxis.TabIndex = 0
         '
         'ttPICSARainfallGraph
         '
@@ -1354,19 +1974,27 @@ Partial Class sdgPICSARainfallGraph
         '
         'ucrSdgPICSARainfalbuttons
         '
-        resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
+        Me.ucrSdgPICSARainfalbuttons.AutoSize = True
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(217, 338)
+        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgPICSARainfalbuttons.TabIndex = 0
         '
         'sdgPICSARainfallGraph
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(597, 367)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.Controls.Add(Me.tbPICSA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgPICSARainfallGraph"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "PICSA Rainfall Graph"
         Me.tbPICSA.ResumeLayout(False)
         Me.tpTitles.ResumeLayout(False)
         Me.grpGraphTitles.ResumeLayout(False)
@@ -1388,12 +2016,15 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMinorGridLine.ResumeLayout(False)
         Me.grpMinorGridLine.PerformLayout()
         Me.grpPnlBorder.ResumeLayout(False)
+        Me.grpPnlBorder.PerformLayout()
         Me.grpMajorGridLines.ResumeLayout(False)
         Me.grpMajorGridLines.PerformLayout()
         Me.grpPnlBackground.ResumeLayout(False)
+        Me.grpPnlBackground.PerformLayout()
         Me.tpRug.ResumeLayout(False)
         Me.tpRug.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

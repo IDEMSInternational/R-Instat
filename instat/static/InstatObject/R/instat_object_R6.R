@@ -219,9 +219,11 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
   else new_objects <- list()
-  if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
-  else new_filters <- list()
-  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- lapply(curr_data_object$get_column_selection(), function(x) x$data_clone())
+  if(include_filters && "get_filter" %in% curr_names) {
+    new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
+    new_filters <- lapply(new_filters, function(x) check_filter(x))
+  } else new_filters <- list()
+  if(include_column_selections && "get_column_selection" %in% curr_names) new_column_selections <- curr_data_object$get_column_selection()
   else new_column_selections <- list()
   if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
   else new_calculations <- list()
@@ -326,17 +328,17 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
 }
 )
 
-DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
+DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
@@ -988,7 +990,7 @@ DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_bo
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
-    data_objects_changed <- TRUE
+    self$data_objects_changed <- TRUE
     link_names <- c()
     for(i in seq_along(private$.links)) {
       if(private$.links[[i]]$from_data_frame == name || private$.links[[i]]$to_data_frame == name) {
@@ -2628,8 +2630,8 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   }
 })
 
-DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, time_interval = "month", column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, time_interval = time_interval, column_name = column_name, station_col_name = station_col_name)
 })
 
 DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
@@ -2661,7 +2663,8 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   all_dates <- seq(start_date, end_date, by = 1)
   all_periods <- unique(paste(lubridate::year(all_dates), sprintf("%02d", lubridate::month(all_dates)), sep = "-"))
   area <- c(lat[2], lon[1], lat[1], lon[2])
-  pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
   nc_files <- vector(mode = "character", length = length(all_periods))
   for (i in seq_along(all_periods)) {
     y <- substr(all_periods[i], 1, 4)
@@ -2681,7 +2684,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       target = paste0(dataset, "-", paste(elements, collapse = "_"), "-", all_periods[i], ".nc")
     )
     info <- paste0("Requesting data for ", all_periods[i], " - ", round(100 * i / length(all_periods)), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
     ncfile <- ecmwfr::wf_request(user = user, request = request,
                                  transfer = TRUE, path = path,
                                  time_out = 3 * 3600)
@@ -2691,7 +2694,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       ncdf4::nc_close(nc = nc)
     }
   }
-  close(pb)
+  if (is_win) close(pb)
 })
 
 DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
