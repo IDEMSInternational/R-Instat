@@ -38,7 +38,6 @@ Partial Class dlgCombineforGraphics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCombineforGraphics))
         Me.lblGraphsToCombine = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSave = New instat.ucrSave()
@@ -49,46 +48,71 @@ Partial Class dlgCombineforGraphics
         '
         'lblGraphsToCombine
         '
-        resources.ApplyResources(Me.lblGraphsToCombine, "lblGraphsToCombine")
+        Me.lblGraphsToCombine.AutoSize = True
+        Me.lblGraphsToCombine.Location = New System.Drawing.Point(255, 45)
         Me.lblGraphsToCombine.Name = "lblGraphsToCombine"
+        Me.lblGraphsToCombine.Size = New System.Drawing.Size(104, 13)
+        Me.lblGraphsToCombine.TabIndex = 1
+        Me.lblGraphsToCombine.Text = "Graphs To Combine:"
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 23)
+        Me.cmdOptions.TabIndex = 3
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSave
         '
-        resources.ApplyResources(Me.ucrSave, "ucrSave")
+        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSave.Location = New System.Drawing.Point(10, 231)
+        Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
+        Me.ucrSave.Size = New System.Drawing.Size(289, 24)
+        Me.ucrSave.TabIndex = 4
         '
         'ucrCombineGraphReceiver
         '
+        Me.ucrCombineGraphReceiver.AutoSize = True
         Me.ucrCombineGraphReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrCombineGraphReceiver, "ucrCombineGraphReceiver")
+        Me.ucrCombineGraphReceiver.Location = New System.Drawing.Point(255, 60)
+        Me.ucrCombineGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphReceiver.Name = "ucrCombineGraphReceiver"
         Me.ucrCombineGraphReceiver.Selector = Nothing
+        Me.ucrCombineGraphReceiver.Size = New System.Drawing.Size(120, 100)
         Me.ucrCombineGraphReceiver.strNcFilePath = ""
+        Me.ucrCombineGraphReceiver.TabIndex = 2
         Me.ucrCombineGraphReceiver.ucrSelector = Nothing
         '
         'ucrCombineGraphSelector
         '
+        Me.ucrCombineGraphSelector.AutoSize = True
         Me.ucrCombineGraphSelector.bDropUnusedFilterLevels = False
         Me.ucrCombineGraphSelector.bShowHiddenColumns = False
         Me.ucrCombineGraphSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrCombineGraphSelector, "ucrCombineGraphSelector")
+        Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
+        Me.ucrCombineGraphSelector.Size = New System.Drawing.Size(213, 195)
+        Me.ucrCombineGraphSelector.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 258)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'dlgCombineforGraphics
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(414, 314)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblGraphsToCombine)
@@ -99,7 +123,9 @@ Partial Class dlgCombineforGraphics
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCombineforGraphics"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Graphs"
+        Me.Text = "Combine Graphs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -22,7 +22,6 @@ Partial Class dlgExportToCMSAF
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToCMSAF))
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
@@ -42,110 +41,174 @@ Partial Class dlgExportToCMSAF
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(287, 50)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverLongitude
         '
+        Me.ucrReceiverLongitude.AutoSize = True
         Me.ucrReceiverLongitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(287, 156)
+        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
         Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.TabIndex = 6
         Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
         'ucrReceiverLatitude
         '
+        Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(287, 209)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 8
         Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
         'ucrReceiverElement
         '
+        Me.ucrReceiverElement.AutoSize = True
         Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(287, 262)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElement.Name = "ucrReceiverElement"
         Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.TabIndex = 10
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(287, 103)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 4
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrSelectorImportToCMSAF
         '
+        Me.ucrSelectorImportToCMSAF.AutoSize = True
         Me.ucrSelectorImportToCMSAF.bDropUnusedFilterLevels = False
         Me.ucrSelectorImportToCMSAF.bShowHiddenColumns = False
         Me.ucrSelectorImportToCMSAF.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorImportToCMSAF, "ucrSelectorImportToCMSAF")
+        Me.ucrSelectorImportToCMSAF.Location = New System.Drawing.Point(10, 31)
+        Me.ucrSelectorImportToCMSAF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorImportToCMSAF.Name = "ucrSelectorImportToCMSAF"
+        Me.ucrSelectorImportToCMSAF.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorImportToCMSAF.TabIndex = 0
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(284, 34)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 1
+        Me.lblStation.Text = "Station:"
         '
         'lblDate
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(284, 87)
         Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 3
+        Me.lblDate.Text = "Date:"
         '
         'lblLongitude
         '
-        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
+        Me.lblLongitude.AutoSize = True
+        Me.lblLongitude.Location = New System.Drawing.Point(284, 140)
         Me.lblLongitude.Name = "lblLongitude"
+        Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
+        Me.lblLongitude.TabIndex = 5
+        Me.lblLongitude.Text = "Longitude:"
         '
         'lblLatitude
         '
-        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
+        Me.lblLatitude.AutoSize = True
+        Me.lblLatitude.Location = New System.Drawing.Point(284, 193)
         Me.lblLatitude.Name = "lblLatitude"
+        Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
+        Me.lblLatitude.TabIndex = 7
+        Me.lblLatitude.Text = "Latitude:"
         '
         'lblElement
         '
-        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(283, 246)
         Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(48, 13)
+        Me.lblElement.TabIndex = 9
+        Me.lblElement.Text = "Element:"
         '
         'lblExport
         '
-        resources.ApplyResources(Me.lblExport, "lblExport")
+        Me.lblExport.AutoSize = True
+        Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExport.Location = New System.Drawing.Point(10, 304)
         Me.lblExport.Name = "lblExport"
+        Me.lblExport.Size = New System.Drawing.Size(59, 13)
+        Me.lblExport.TabIndex = 11
+        Me.lblExport.Text = "Export File:"
         '
         'cmdBrowse
         '
-        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
+        Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBrowse.Location = New System.Drawing.Point(326, 300)
         Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(80, 23)
+        Me.cmdBrowse.TabIndex = 13
+        Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'ucrInputExportFile
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputExportFile.AutoSize = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(142, 301)
+        Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(182, 21)
+        Me.ucrInputExportFile.TabIndex = 12
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 339)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 14
         '
         'dlgExportToCMSAF
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(418, 393)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
@@ -165,6 +228,8 @@ Partial Class dlgExportToCMSAF
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportToCMSAF"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export to CMSAF R ToolBox"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

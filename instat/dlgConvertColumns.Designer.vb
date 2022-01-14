@@ -38,7 +38,6 @@ Partial Class dlgConvertColumns
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgConvertColumns))
         Me.lblColumnsToConvert = New System.Windows.Forms.Label()
         Me.grpConvertTo = New System.Windows.Forms.GroupBox()
         Me.rdoLogical = New System.Windows.Forms.RadioButton()
@@ -67,9 +66,14 @@ Partial Class dlgConvertColumns
         '
         'lblColumnsToConvert
         '
-        resources.ApplyResources(Me.lblColumnsToConvert, "lblColumnsToConvert")
+        Me.lblColumnsToConvert.AutoSize = True
+        Me.lblColumnsToConvert.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(247, 45)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
+        Me.lblColumnsToConvert.Size = New System.Drawing.Size(102, 13)
+        Me.lblColumnsToConvert.TabIndex = 1
         Me.lblColumnsToConvert.Tag = "Columns_to_Convert:"
+        Me.lblColumnsToConvert.Text = "Columns to Convert:"
         '
         'grpConvertTo
         '
@@ -80,62 +84,102 @@ Partial Class dlgConvertColumns
         Me.grpConvertTo.Controls.Add(Me.rdoOrderedFactor)
         Me.grpConvertTo.Controls.Add(Me.rdoFactor)
         Me.grpConvertTo.Controls.Add(Me.ucrPnlConvertTo)
-        resources.ApplyResources(Me.grpConvertTo, "grpConvertTo")
+        Me.grpConvertTo.Location = New System.Drawing.Point(10, 196)
         Me.grpConvertTo.Name = "grpConvertTo"
+        Me.grpConvertTo.Size = New System.Drawing.Size(357, 88)
+        Me.grpConvertTo.TabIndex = 3
         Me.grpConvertTo.TabStop = False
+        Me.grpConvertTo.Text = "Convert To"
         '
         'rdoLogical
         '
-        resources.ApplyResources(Me.rdoLogical, "rdoLogical")
+        Me.rdoLogical.AutoSize = True
+        Me.rdoLogical.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLogical.Location = New System.Drawing.Point(237, 66)
         Me.rdoLogical.Name = "rdoLogical"
+        Me.rdoLogical.Size = New System.Drawing.Size(59, 17)
+        Me.rdoLogical.TabIndex = 6
         Me.rdoLogical.TabStop = True
+        Me.rdoLogical.Text = "Logical"
         Me.rdoLogical.UseVisualStyleBackColor = True
         '
         'rdoCharacter
         '
-        resources.ApplyResources(Me.rdoCharacter, "rdoCharacter")
+        Me.rdoCharacter.AutoSize = True
+        Me.rdoCharacter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCharacter.Location = New System.Drawing.Point(10, 66)
         Me.rdoCharacter.Name = "rdoCharacter"
+        Me.rdoCharacter.Size = New System.Drawing.Size(71, 17)
+        Me.rdoCharacter.TabIndex = 3
         Me.rdoCharacter.TabStop = True
+        Me.rdoCharacter.Text = "Character"
         Me.rdoCharacter.UseVisualStyleBackColor = True
         '
         'rdoInteger
         '
-        resources.ApplyResources(Me.rdoInteger, "rdoInteger")
+        Me.rdoInteger.AutoSize = True
+        Me.rdoInteger.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoInteger.Location = New System.Drawing.Point(237, 43)
         Me.rdoInteger.Name = "rdoInteger"
+        Me.rdoInteger.Size = New System.Drawing.Size(58, 17)
+        Me.rdoInteger.TabIndex = 5
         Me.rdoInteger.TabStop = True
+        Me.rdoInteger.Text = "Integer"
         Me.rdoInteger.UseVisualStyleBackColor = True
         '
         'rdoNumeric
         '
-        resources.ApplyResources(Me.rdoNumeric, "rdoNumeric")
+        Me.rdoNumeric.AutoSize = True
+        Me.rdoNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNumeric.Location = New System.Drawing.Point(237, 21)
         Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.Size = New System.Drawing.Size(64, 17)
+        Me.rdoNumeric.TabIndex = 4
         Me.rdoNumeric.TabStop = True
+        Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
         '
         'rdoOrderedFactor
         '
-        resources.ApplyResources(Me.rdoOrderedFactor, "rdoOrderedFactor")
+        Me.rdoOrderedFactor.AutoSize = True
+        Me.rdoOrderedFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoOrderedFactor.Location = New System.Drawing.Point(10, 43)
         Me.rdoOrderedFactor.Name = "rdoOrderedFactor"
+        Me.rdoOrderedFactor.Size = New System.Drawing.Size(96, 17)
+        Me.rdoOrderedFactor.TabIndex = 2
         Me.rdoOrderedFactor.TabStop = True
+        Me.rdoOrderedFactor.Text = "Ordered Factor"
         Me.rdoOrderedFactor.UseVisualStyleBackColor = True
         '
         'rdoFactor
         '
-        resources.ApplyResources(Me.rdoFactor, "rdoFactor")
+        Me.rdoFactor.AutoSize = True
+        Me.rdoFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoFactor.Location = New System.Drawing.Point(10, 21)
         Me.rdoFactor.Name = "rdoFactor"
+        Me.rdoFactor.Size = New System.Drawing.Size(55, 17)
+        Me.rdoFactor.TabIndex = 1
         Me.rdoFactor.TabStop = True
+        Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
         'ucrPnlConvertTo
         '
-        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
+        Me.ucrPnlConvertTo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(348, 67)
+        Me.ucrPnlConvertTo.TabIndex = 0
         '
         'rdoConvertOrdinals
         '
-        resources.ApplyResources(Me.rdoConvertOrdinals, "rdoConvertOrdinals")
+        Me.rdoConvertOrdinals.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertOrdinals.Location = New System.Drawing.Point(11, 66)
         Me.rdoConvertOrdinals.Name = "rdoConvertOrdinals"
+        Me.rdoConvertOrdinals.Size = New System.Drawing.Size(195, 17)
+        Me.rdoConvertOrdinals.TabIndex = 3
         Me.rdoConvertOrdinals.TabStop = True
+        Me.rdoConvertOrdinals.Text = "Always Use Values"
         Me.rdoConvertOrdinals.UseVisualStyleBackColor = True
         '
         'grpFactorToNumericOptions
@@ -144,89 +188,133 @@ Partial Class dlgConvertColumns
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
         Me.grpFactorToNumericOptions.Controls.Add(Me.ucrPnlFactorToNumericOptions)
-        resources.ApplyResources(Me.grpFactorToNumericOptions, "grpFactorToNumericOptions")
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(10, 316)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
+        Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(213, 92)
+        Me.grpFactorToNumericOptions.TabIndex = 7
         Me.grpFactorToNumericOptions.TabStop = False
+        Me.grpFactorToNumericOptions.Text = "Factor Options"
         '
         'rdoDefault
         '
-        resources.ApplyResources(Me.rdoDefault, "rdoDefault")
+        Me.rdoDefault.AutoSize = True
+        Me.rdoDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDefault.Location = New System.Drawing.Point(11, 22)
         Me.rdoDefault.Name = "rdoDefault"
+        Me.rdoDefault.Size = New System.Drawing.Size(59, 17)
+        Me.rdoDefault.TabIndex = 1
         Me.rdoDefault.TabStop = True
+        Me.rdoDefault.Text = "Default"
         Me.rdoDefault.UseVisualStyleBackColor = True
         '
         'rdoConvertLevels
         '
-        resources.ApplyResources(Me.rdoConvertLevels, "rdoConvertLevels")
+        Me.rdoConvertLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoConvertLevels.Location = New System.Drawing.Point(11, 44)
         Me.rdoConvertLevels.Name = "rdoConvertLevels"
+        Me.rdoConvertLevels.Size = New System.Drawing.Size(195, 17)
+        Me.rdoConvertLevels.TabIndex = 2
         Me.rdoConvertLevels.TabStop = True
+        Me.rdoConvertLevels.Text = "Always Use Levels"
         Me.rdoConvertLevels.UseVisualStyleBackColor = True
         '
         'ucrPnlFactorToNumericOptions
         '
-        resources.ApplyResources(Me.ucrPnlFactorToNumericOptions, "ucrPnlFactorToNumericOptions")
+        Me.ucrPnlFactorToNumericOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlFactorToNumericOptions.Location = New System.Drawing.Point(3, 21)
         Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
+        Me.ucrPnlFactorToNumericOptions.Size = New System.Drawing.Size(203, 65)
+        Me.ucrPnlFactorToNumericOptions.TabIndex = 0
         '
         'ucrChkIgnoreLabels
         '
+        Me.ucrChkIgnoreLabels.AutoSize = True
         Me.ucrChkIgnoreLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreLabels, "ucrChkIgnoreLabels")
+        Me.ucrChkIgnoreLabels.Location = New System.Drawing.Point(307, 290)
         Me.ucrChkIgnoreLabels.Name = "ucrChkIgnoreLabels"
+        Me.ucrChkIgnoreLabels.Size = New System.Drawing.Size(138, 23)
+        Me.ucrChkIgnoreLabels.TabIndex = 10
         '
         'ucrChkCreateLabels
         '
+        Me.ucrChkCreateLabels.AutoSize = True
         Me.ucrChkCreateLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkCreateLabels, "ucrChkCreateLabels")
+        Me.ucrChkCreateLabels.Location = New System.Drawing.Point(307, 317)
         Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
+        Me.ucrChkCreateLabels.Size = New System.Drawing.Size(138, 23)
+        Me.ucrChkCreateLabels.TabIndex = 9
         '
         'ucrChkKeepAttributes
         '
+        Me.ucrChkKeepAttributes.AutoSize = True
         Me.ucrChkKeepAttributes.Checked = False
-        resources.ApplyResources(Me.ucrChkKeepAttributes, "ucrChkKeepAttributes")
+        Me.ucrChkKeepAttributes.Location = New System.Drawing.Point(10, 290)
         Me.ucrChkKeepAttributes.Name = "ucrChkKeepAttributes"
+        Me.ucrChkKeepAttributes.Size = New System.Drawing.Size(222, 23)
+        Me.ucrChkKeepAttributes.TabIndex = 4
         '
         'ucrNudDisplayDecimals
         '
+        Me.ucrNudDisplayDecimals.AutoSize = True
         Me.ucrNudDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDisplayDecimals, "ucrNudDisplayDecimals")
+        Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(242, 316)
         Me.ucrNudDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Name = "ucrNudDisplayDecimals"
+        Me.ucrNudDisplayDecimals.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDisplayDecimals.TabIndex = 6
         Me.ucrNudDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkSpecifyDecimalsToDisplay
         '
+        Me.ucrChkSpecifyDecimalsToDisplay.AutoSize = True
         Me.ucrChkSpecifyDecimalsToDisplay.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyDecimalsToDisplay, "ucrChkSpecifyDecimalsToDisplay")
+        Me.ucrChkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(10, 316)
         Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
+        Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(226, 23)
+        Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 5
         '
         'ucrSelectorDataFrameColumns
         '
+        Me.ucrSelectorDataFrameColumns.AutoSize = True
         Me.ucrSelectorDataFrameColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorDataFrameColumns.bShowHiddenColumns = False
         Me.ucrSelectorDataFrameColumns.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorDataFrameColumns, "ucrSelectorDataFrameColumns")
+        Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDataFrameColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameColumns.Name = "ucrSelectorDataFrameColumns"
+        Me.ucrSelectorDataFrameColumns.Size = New System.Drawing.Size(229, 183)
+        Me.ucrSelectorDataFrameColumns.TabIndex = 0
         '
         'ucrReceiverColumnsToConvert
         '
+        Me.ucrReceiverColumnsToConvert.AutoSize = True
         Me.ucrReceiverColumnsToConvert.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumnsToConvert, "ucrReceiverColumnsToConvert")
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 60)
+        Me.ucrReceiverColumnsToConvert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
+        Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverColumnsToConvert.strNcFilePath = ""
+        Me.ucrReceiverColumnsToConvert.TabIndex = 2
         Me.ucrReceiverColumnsToConvert.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 410)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgConvertColumns
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(449, 463)
         Me.Controls.Add(Me.ucrChkIgnoreLabels)
         Me.Controls.Add(Me.ucrChkCreateLabels)
         Me.Controls.Add(Me.ucrChkKeepAttributes)
@@ -242,7 +330,9 @@ Partial Class dlgConvertColumns
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgConvertColumns"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Convert_columns"
+        Me.Text = "Convert Columns"
         Me.grpConvertTo.ResumeLayout(False)
         Me.grpConvertTo.PerformLayout()
         Me.grpFactorToNumericOptions.ResumeLayout(False)

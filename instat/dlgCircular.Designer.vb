@@ -33,12 +33,19 @@ Partial Class dlgCircular
         Me.rdoAsis = New System.Windows.Forms.RadioButton()
         Me.grpModulo = New System.Windows.Forms.GroupBox()
         Me.ucrPnlModulo = New instat.UcrPanel()
+        Me.grpTemplate = New System.Windows.Forms.GroupBox()
+        Me.rdoClock24 = New System.Windows.Forms.RadioButton()
+        Me.rdoClock12 = New System.Windows.Forms.RadioButton()
+        Me.rdoGeographics = New System.Windows.Forms.RadioButton()
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlTemplate = New instat.UcrPanel()
         Me.ucrSaveCircularColumn = New instat.ucrSave()
         Me.ucrReceiverCircular = New instat.ucrReceiverSingle()
         Me.ucrSelectorCircular = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpUnits.SuspendLayout()
         Me.grpModulo.SuspendLayout()
+        Me.grpTemplate.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblToCircular
@@ -102,6 +109,7 @@ Partial Class dlgCircular
         '
         'ucrPnlUnits
         '
+        Me.ucrPnlUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlUnits.Name = "ucrPnlUnits"
@@ -150,7 +158,7 @@ Partial Class dlgCircular
         Me.grpModulo.Controls.Add(Me.rdoPi)
         Me.grpModulo.Controls.Add(Me.rdoAsis)
         Me.grpModulo.Controls.Add(Me.ucrPnlModulo)
-        Me.grpModulo.Location = New System.Drawing.Point(161, 212)
+        Me.grpModulo.Location = New System.Drawing.Point(144, 212)
         Me.grpModulo.Name = "grpModulo"
         Me.grpModulo.Size = New System.Drawing.Size(105, 88)
         Me.grpModulo.TabIndex = 5
@@ -159,14 +167,87 @@ Partial Class dlgCircular
         '
         'ucrPnlModulo
         '
+        Me.ucrPnlModulo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
         Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlModulo.Name = "ucrPnlModulo"
         Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
         Me.ucrPnlModulo.TabIndex = 3
         '
+        'grpTemplate
+        '
+        Me.grpTemplate.Controls.Add(Me.rdoClock24)
+        Me.grpTemplate.Controls.Add(Me.rdoClock12)
+        Me.grpTemplate.Controls.Add(Me.rdoGeographics)
+        Me.grpTemplate.Controls.Add(Me.rdoNone)
+        Me.grpTemplate.Controls.Add(Me.ucrPnlTemplate)
+        Me.grpTemplate.Location = New System.Drawing.Point(277, 212)
+        Me.grpTemplate.Name = "grpTemplate"
+        Me.grpTemplate.Size = New System.Drawing.Size(105, 109)
+        Me.grpTemplate.TabIndex = 7
+        Me.grpTemplate.TabStop = False
+        Me.grpTemplate.Text = "Template"
+        '
+        'rdoClock24
+        '
+        Me.rdoClock24.AutoSize = True
+        Me.rdoClock24.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoClock24.Location = New System.Drawing.Point(15, 85)
+        Me.rdoClock24.Name = "rdoClock24"
+        Me.rdoClock24.Size = New System.Drawing.Size(63, 17)
+        Me.rdoClock24.TabIndex = 4
+        Me.rdoClock24.TabStop = True
+        Me.rdoClock24.Text = "clock24"
+        Me.rdoClock24.UseVisualStyleBackColor = True
+        '
+        'rdoClock12
+        '
+        Me.rdoClock12.AutoSize = True
+        Me.rdoClock12.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoClock12.Location = New System.Drawing.Point(15, 62)
+        Me.rdoClock12.Name = "rdoClock12"
+        Me.rdoClock12.Size = New System.Drawing.Size(63, 17)
+        Me.rdoClock12.TabIndex = 3
+        Me.rdoClock12.TabStop = True
+        Me.rdoClock12.Text = "clock12"
+        Me.rdoClock12.UseVisualStyleBackColor = True
+        '
+        'rdoGeographics
+        '
+        Me.rdoGeographics.AutoSize = True
+        Me.rdoGeographics.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGeographics.Location = New System.Drawing.Point(15, 39)
+        Me.rdoGeographics.Name = "rdoGeographics"
+        Me.rdoGeographics.Size = New System.Drawing.Size(83, 17)
+        Me.rdoGeographics.TabIndex = 2
+        Me.rdoGeographics.TabStop = True
+        Me.rdoGeographics.Text = "geographics"
+        Me.rdoGeographics.UseVisualStyleBackColor = True
+        '
+        'rdoNone
+        '
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNone.Location = New System.Drawing.Point(15, 17)
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(49, 17)
+        Me.rdoNone.TabIndex = 1
+        Me.rdoNone.TabStop = True
+        Me.rdoNone.Text = "none"
+        Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrPnlTemplate
+        '
+        Me.ucrPnlTemplate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTemplate.Location = New System.Drawing.Point(10, 15)
+        Me.ucrPnlTemplate.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlTemplate.Name = "ucrPnlTemplate"
+        Me.ucrPnlTemplate.Size = New System.Drawing.Size(93, 90)
+        Me.ucrPnlTemplate.TabIndex = 3
+        '
         'ucrSaveCircularColumn
         '
+        Me.ucrSaveCircularColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveCircularColumn.Location = New System.Drawing.Point(10, 314)
         Me.ucrSaveCircularColumn.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveCircularColumn.Name = "ucrSaveCircularColumn"
@@ -175,6 +256,7 @@ Partial Class dlgCircular
         '
         'ucrReceiverCircular
         '
+        Me.ucrReceiverCircular.AutoSize = True
         Me.ucrReceiverCircular.frmParent = Me
         Me.ucrReceiverCircular.Location = New System.Drawing.Point(262, 66)
         Me.ucrReceiverCircular.Margin = New System.Windows.Forms.Padding(0)
@@ -187,28 +269,33 @@ Partial Class dlgCircular
         '
         'ucrSelectorCircular
         '
+        Me.ucrSelectorCircular.AutoSize = True
         Me.ucrSelectorCircular.bDropUnusedFilterLevels = False
         Me.ucrSelectorCircular.bShowHiddenColumns = False
         Me.ucrSelectorCircular.bUseCurrentFilter = True
         Me.ucrSelectorCircular.Location = New System.Drawing.Point(10, 27)
         Me.ucrSelectorCircular.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCircular.Name = "ucrSelectorCircular"
-        Me.ucrSelectorCircular.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorCircular.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCircular.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 341)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCircular
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 399)
+        Me.Controls.Add(Me.grpTemplate)
         Me.Controls.Add(Me.ucrSaveCircularColumn)
         Me.Controls.Add(Me.grpModulo)
         Me.Controls.Add(Me.grpUnits)
@@ -222,11 +309,13 @@ Partial Class dlgCircular
         Me.MinimizeBox = False
         Me.Name = "dlgCircular"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "histogram"
+        Me.Text = "Convert to Circular"
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
         Me.grpModulo.ResumeLayout(False)
         Me.grpModulo.PerformLayout()
+        Me.grpTemplate.ResumeLayout(False)
+        Me.grpTemplate.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -247,4 +336,10 @@ Partial Class dlgCircular
     Friend WithEvents ucrPnlModulo As UcrPanel
     Friend WithEvents grpModulo As GroupBox
     Friend WithEvents ucrSaveCircularColumn As ucrSave
+    Friend WithEvents grpTemplate As GroupBox
+    Friend WithEvents rdoClock12 As RadioButton
+    Friend WithEvents rdoGeographics As RadioButton
+    Friend WithEvents rdoNone As RadioButton
+    Friend WithEvents ucrPnlTemplate As UcrPanel
+    Friend WithEvents rdoClock24 As RadioButton
 End Class

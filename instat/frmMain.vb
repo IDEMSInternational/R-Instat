@@ -23,7 +23,7 @@ Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
 
 Public Class frmMain
-    Public clsRLink As New RLink
+    Public clsRLink As RLink
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String = "Help\R-Instat.chm"
@@ -34,6 +34,7 @@ Public Class frmMain
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
     Public strSaveFilePath As String = ""
+    Public clsOutputLogger As clsOutputLogger
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
@@ -74,14 +75,13 @@ Public Class frmMain
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        clsOutputLogger = New clsOutputLogger
+        clsRLink = New RLink(clsOutputLogger)
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
-
-        ' Note: this must change when R version changes
-        Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
@@ -96,7 +96,6 @@ Public Class frmMain
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
         ucrDataViewer.StartupMenuItemsVisibility(False)
-        InitialiseOutputWindow()
         clsDataBook = New clsDataBook(clsRLink)
 
         ucrDataViewer.DataBook = clsDataBook
@@ -104,6 +103,8 @@ Public Class frmMain
         ucrDataFrameMeta.DataBook = clsDataBook
 
         clsRLink.SetLog(ucrLogWindow.txtLog)
+
+        ucrOutput.SetLogger(clsOutputLogger)
 
         SetToDefaultLayout()
 
@@ -116,18 +117,6 @@ Public Class frmMain
         strStaticPath = String.Concat(Application.StartupPath, "\static")
 
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        ' We need to create the likely R package installation directory before R.NET connection is initialised
-        ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
-        ' This assumes that R packages will be installed in "Documents" folder and also that 
-        ' this is detected by "SpecialDirectories.MyDocuments".
-        ' If either of these fail then R packages will need to be installed from R/RStudio first.
-        Try
-            If Not Directory.Exists(strRPackagesPath) Then
-                System.IO.Directory.CreateDirectory(strRPackagesPath)
-            End If
-        Catch ex As Exception
-            ' This may fail for many reasons. We may want to inform users this may lead to packages not installing.
-        End Try
 
         bClose = AutoRecoverAndStartREngine()
         If bClose Then
@@ -179,6 +168,7 @@ Public Class frmMain
             strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
         End If
 
+        ucrOutput.SetInstatOptions(clsInstatOptions)
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -306,12 +296,6 @@ Public Class frmMain
         End If
         Return bClose
     End Function
-
-    Private Sub InitialiseOutputWindow()
-        clsRLink.SetOutput(ucrOutput.ucrRichTextBox)
-        'TEST temporary : creating the temporary graphs 
-        clsRLink.rtbOutput.CreateTempDirectory()
-    End Sub
 
     Private Sub LoadInstatOptions()
         If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
@@ -486,7 +470,7 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub UpdateLayout()
+    Public Sub UpdateLayout()
         If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
@@ -761,8 +745,6 @@ Public Class frmMain
         If ctrActive IsNot Nothing Then
             If ctrActive.Equals(ucrDataViewer) Then
                 ucrDataViewer.SelectAllText()
-            ElseIf ctrActive.Equals(ucrOutput) Then
-                ucrOutput.SelectAllText()
             ElseIf ctrActive.Equals(ucrColumnMeta) Then
                 ucrColumnMeta.SelectAllText()
             ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
@@ -836,7 +818,7 @@ Public Class frmMain
         Dim rstResponse As DialogResult
         rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
         If rstResponse = DialogResult.Yes Then
-            ucrOutput.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
+            ucrOutput.UcrOutputPages.ClearOutputWindow()
         End If
     End Sub
 
@@ -1003,26 +985,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
-        'Saves the content of the output window in RichTextFormat.
-        Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Output Window"
-            dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
-            If Not String.IsNullOrEmpty(strCurrentOutputFileName) Then
-                dlgSaveFile.FileName = Path.GetFileName(strCurrentOutputFileName)
-                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentOutputFileName)
-            Else
-                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            End If
-            If DialogResult.OK = dlgSaveFile.ShowDialog() Then
-                Try
-                    'Send file name string specifying the location to save the rtf in.
-                    ucrOutput.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
-                    strCurrentOutputFileName = dlgSaveFile.FileName
-                Catch
-                    MsgBox("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-                End Try
-            End If
-        End Using
+        ucrOutput.UcrOutputPages.SaveTab()
     End Sub
 
     Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
@@ -1537,11 +1500,10 @@ Public Class frmMain
     End Sub
 
     Public Function GetDataFrameCount() As Integer
-        If ucrDataViewer IsNot Nothing AndAlso ucrDataViewer.grdData IsNot Nothing Then
-            Return ucrDataViewer.grdData.Worksheets.Count
-        Else
-            Return 0
+        If clsDataBook IsNot Nothing Then
+            Return clsDataBook.DataFrames.Count
         End If
+        Return 0
     End Function
 
     Public Sub SetCurrentDataFrame(strDataName As String)
@@ -2408,8 +2370,6 @@ Public Class frmMain
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
-        ElseIf ctrActive.Equals(ucrOutput) Then
-            ucrOutput.CopyContent()
         ElseIf ctrActive.Equals(ucrColumnMeta) Then
             ucrColumnMeta.CopyRange()
         ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
@@ -2467,5 +2427,9 @@ Public Class frmMain
 
     Private Sub mnuModelFitModelMachineLearning_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelMachineLearning.Click
         dlgMachineLearning.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeMultivariateClusterAnalysis_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateClusterAnalysis.Click
+        dlgClusterAnalysis.ShowDialog()
     End Sub
 End Class

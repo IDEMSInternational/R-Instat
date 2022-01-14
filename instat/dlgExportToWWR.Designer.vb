@@ -206,6 +206,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanRelativeHumidity
         '
+        Me.ucrReceiverMeanRelativeHumidity.AutoSize = True
         Me.ucrReceiverMeanRelativeHumidity.frmParent = Me
         Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(228, 114)
         Me.ucrReceiverMeanRelativeHumidity.Margin = New System.Windows.Forms.Padding(0)
@@ -218,6 +219,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverPrecipitation
         '
+        Me.ucrReceiverPrecipitation.AutoSize = True
         Me.ucrReceiverPrecipitation.frmParent = Me
         Me.ucrReceiverPrecipitation.Location = New System.Drawing.Point(9, 155)
         Me.ucrReceiverPrecipitation.Margin = New System.Windows.Forms.Padding(0)
@@ -230,6 +232,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanMonthlyAirTemperature
         '
+        Me.ucrReceiverMeanMonthlyAirTemperature.AutoSize = True
         Me.ucrReceiverMeanMonthlyAirTemperature.frmParent = Me
         Me.ucrReceiverMeanMonthlyAirTemperature.Location = New System.Drawing.Point(9, 114)
         Me.ucrReceiverMeanMonthlyAirTemperature.Margin = New System.Windows.Forms.Padding(0)
@@ -242,6 +245,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanSeaLevelPressure
         '
+        Me.ucrReceiverMeanSeaLevelPressure.AutoSize = True
         Me.ucrReceiverMeanSeaLevelPressure.frmParent = Me
         Me.ucrReceiverMeanSeaLevelPressure.Location = New System.Drawing.Point(9, 73)
         Me.ucrReceiverMeanSeaLevelPressure.Margin = New System.Windows.Forms.Padding(0)
@@ -254,6 +258,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanDailyMinAirTemperature
         '
+        Me.ucrReceiverMeanDailyMinAirTemperature.AutoSize = True
         Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Me
         Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(228, 73)
         Me.ucrReceiverMeanDailyMinAirTemperature.Margin = New System.Windows.Forms.Padding(0)
@@ -266,6 +271,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanDailyMaxAirTemperature
         '
+        Me.ucrReceiverMeanDailyMaxAirTemperature.AutoSize = True
         Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Me
         Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(228, 32)
         Me.ucrReceiverMeanDailyMaxAirTemperature.Margin = New System.Windows.Forms.Padding(0)
@@ -278,6 +284,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanStationPressure
         '
+        Me.ucrReceiverMeanStationPressure.AutoSize = True
         Me.ucrReceiverMeanStationPressure.frmParent = Me
         Me.ucrReceiverMeanStationPressure.Location = New System.Drawing.Point(9, 32)
         Me.ucrReceiverMeanStationPressure.Margin = New System.Windows.Forms.Padding(0)
@@ -290,6 +297,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverStationIdentifier
         '
+        Me.ucrReceiverStationIdentifier.AutoSize = True
         Me.ucrReceiverStationIdentifier.frmParent = Me
         Me.ucrReceiverStationIdentifier.Location = New System.Drawing.Point(242, 42)
         Me.ucrReceiverStationIdentifier.Margin = New System.Windows.Forms.Padding(0)
@@ -303,6 +311,7 @@ Partial Class dlgExportToWWR
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(176, 378)
@@ -314,6 +323,7 @@ Partial Class dlgExportToWWR
         'ucrInputLinkby
         '
         Me.ucrInputLinkby.AddQuotesIfUnrecognised = True
+        Me.ucrInputLinkby.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLinkby.GetSetSelectedIndex = -1
         Me.ucrInputLinkby.IsReadOnly = False
         Me.ucrInputLinkby.Location = New System.Drawing.Point(370, 41)
@@ -323,6 +333,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMonth
         '
+        Me.ucrReceiverMonth.AutoSize = True
         Me.ucrReceiverMonth.frmParent = Me
         Me.ucrReceiverMonth.Location = New System.Drawing.Point(242, 159)
         Me.ucrReceiverMonth.Margin = New System.Windows.Forms.Padding(0)
@@ -335,6 +346,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(242, 119)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -347,26 +359,30 @@ Partial Class dlgExportToWWR
         '
         'ucrSelectorExportToWWR
         '
+        Me.ucrSelectorExportToWWR.AutoSize = True
         Me.ucrSelectorExportToWWR.bDropUnusedFilterLevels = False
         Me.ucrSelectorExportToWWR.bShowHiddenColumns = False
         Me.ucrSelectorExportToWWR.bUseCurrentFilter = True
         Me.ucrSelectorExportToWWR.Location = New System.Drawing.Point(3, 3)
         Me.ucrSelectorExportToWWR.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorExportToWWR.Name = "ucrSelectorExportToWWR"
-        Me.ucrSelectorExportToWWR.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorExportToWWR.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorExportToWWR.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 409)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 27
         '
         'dlgExportToWWR
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(502, 465)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.lblType)

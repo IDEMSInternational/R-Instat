@@ -121,6 +121,10 @@
   <data name="lblNumberOfDecimals.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblNumberOfDecimals.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblNumberOfDecimals.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 101</value>
@@ -146,6 +150,9 @@
   <data name="&gt;&gt;lblNumberOfDecimals.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrNudDecimalPlaces.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrNudDecimalPlaces.Location" type="System.Drawing.Point, System.Drawing">
     <value>176, 100</value>
   </data>
@@ -169,6 +176,9 @@
   </data>
   <data name="lblGraphTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblGraphTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 157</value>
@@ -194,6 +204,9 @@
   <data name="&gt;&gt;lblGraphTitle.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrInputTableTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrInputTableTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 153</value>
   </data>
@@ -215,11 +228,14 @@
   <data name="&gt;&gt;ucrInputTableTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrChkTotalColumnName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkTotalColumnName.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 126</value>
   </data>
   <data name="ucrChkTotalColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 20</value>
+    <value>160, 23</value>
   </data>
   <data name="ucrChkTotalColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -235,6 +251,9 @@
   </data>
   <data name="&gt;&gt;ucrChkTotalColumnName.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="ucrInputTotalsName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrInputTotalsName.Location" type="System.Drawing.Point, System.Drawing">
     <value>176, 126</value>
@@ -257,11 +276,14 @@
   <data name="&gt;&gt;ucrInputTotalsName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrChkMissingValues.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkMissingValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 45</value>
   </data>
   <data name="ucrChkMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>233, 23</value>
   </data>
   <data name="ucrChkMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -278,11 +300,14 @@
   <data name="&gt;&gt;ucrChkMissingValues.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrChkBackgroundColour.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkBackgroundColour.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 71</value>
   </data>
   <data name="ucrChkBackgroundColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>290, 23</value>
   </data>
   <data name="ucrChkBackgroundColour.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -299,11 +324,14 @@
   <data name="&gt;&gt;ucrChkBackgroundColour.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="ucrChkShowSummary.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkShowSummary.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 19</value>
   </data>
   <data name="ucrChkShowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>233, 23</value>
   </data>
   <data name="ucrChkShowSummary.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -347,12 +375,11 @@
   <data name="tbpTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbpTable.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 257</value>
+    <value>404, 257</value>
   </data>
   <data name="tbpTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -372,77 +399,17 @@
   <data name="&gt;&gt;tbpTable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;grpGraphOptions.Name" xml:space="preserve">
-    <value>grpGraphOptions</value>
+  <data name="ucrChkStack.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;grpGraphOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ucrChkStack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 92</value>
   </data>
-  <data name="&gt;&gt;grpGraphOptions.Parent" xml:space="preserve">
-    <value>tbpGraph</value>
+  <data name="ucrChkStack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 23</value>
   </data>
-  <data name="&gt;&gt;grpGraphOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Name" xml:space="preserve">
-    <value>grpGraphType</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Parent" xml:space="preserve">
-    <value>tbpGraph</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbpGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbpGraph.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 257</value>
-  </data>
-  <data name="tbpGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tbpGraph.Text" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="&gt;&gt;tbpGraph.Name" xml:space="preserve">
-    <value>tbpGraph</value>
-  </data>
-  <data name="&gt;&gt;tbpGraph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpGraph.Parent" xml:space="preserve">
-    <value>tbpTwoWayFrequencies</value>
-  </data>
-  <data name="&gt;&gt;tbpGraph.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbpTwoWayFrequencies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="tbpTwoWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 283</value>
-  </data>
-  <data name="tbpTwoWayFrequencies.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbpTwoWayFrequencies.Name" xml:space="preserve">
-    <value>tbpTwoWayFrequencies</value>
-  </data>
-  <data name="&gt;&gt;tbpTwoWayFrequencies.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpTwoWayFrequencies.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbpTwoWayFrequencies.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="ucrChkStack.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkStack.Name" xml:space="preserve">
     <value>ucrChkStack</value>
@@ -456,6 +423,24 @@
   <data name="&gt;&gt;ucrChkStack.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 169</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Graph Title:</value>
+  </data>
   <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
     <value>lblTitle</value>
   </data>
@@ -467,6 +452,24 @@
   </data>
   <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lblHjust.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHjust.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblHjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 143</value>
+  </data>
+  <data name="lblHjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="lblHjust.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblHjust.Text" xml:space="preserve">
+    <value>Horizontal Label Position:</value>
   </data>
   <data name="&gt;&gt;lblHjust.Name" xml:space="preserve">
     <value>lblHjust</value>
@@ -480,6 +483,24 @@
   <data name="&gt;&gt;lblHjust.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="lblVjust.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVjust.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVjust.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 117</value>
+  </data>
+  <data name="lblVjust.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="lblVjust.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblVjust.Text" xml:space="preserve">
+    <value>Vertical Label Position:</value>
+  </data>
   <data name="&gt;&gt;lblVjust.Name" xml:space="preserve">
     <value>lblVjust</value>
   </data>
@@ -491,6 +512,18 @@
   </data>
   <data name="&gt;&gt;lblVjust.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="ucrInputGraphTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 168</value>
+  </data>
+  <data name="ucrInputGraphTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 21</value>
+  </data>
+  <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
     <value>ucrInputGraphTitle</value>
@@ -504,6 +537,21 @@
   <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputHorizontalLabels.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="ucrInputHorizontalLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 143</value>
+  </data>
+  <data name="ucrInputHorizontalLabels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputHorizontalLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="ucrInputHorizontalLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
   <data name="&gt;&gt;ucrInputHorizontalLabels.Name" xml:space="preserve">
     <value>ucrInputHorizontalLabels</value>
   </data>
@@ -515,6 +563,21 @@
   </data>
   <data name="&gt;&gt;ucrInputHorizontalLabels.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrInputVerticalLabels.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="ucrInputVerticalLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 117</value>
+  </data>
+  <data name="ucrInputVerticalLabels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>21, 17, 21, 17</value>
+  </data>
+  <data name="ucrInputVerticalLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="ucrInputVerticalLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrInputVerticalLabels.Name" xml:space="preserve">
     <value>ucrInputVerticalLabels</value>
@@ -528,6 +591,18 @@
   <data name="&gt;&gt;ucrInputVerticalLabels.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrChkShowModelSummary.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrChkShowModelSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 68</value>
+  </data>
+  <data name="ucrChkShowModelSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 23</value>
+  </data>
+  <data name="ucrChkShowModelSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;ucrChkShowModelSummary.Name" xml:space="preserve">
     <value>ucrChkShowModelSummary</value>
   </data>
@@ -540,6 +615,18 @@
   <data name="&gt;&gt;ucrChkShowModelSummary.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="ucrChkShowPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrChkShowPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 20</value>
+  </data>
+  <data name="ucrChkShowPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 23</value>
+  </data>
+  <data name="ucrChkShowPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;ucrChkShowPercentage.Name" xml:space="preserve">
     <value>ucrChkShowPercentage</value>
   </data>
@@ -551,6 +638,18 @@
   </data>
   <data name="&gt;&gt;ucrChkShowPercentage.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="ucrChkShowCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrChkShowCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 44</value>
+  </data>
+  <data name="ucrChkShowCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 23</value>
+  </data>
+  <data name="ucrChkShowCount.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrChkShowCount.Name" xml:space="preserve">
     <value>ucrChkShowCount</value>
@@ -588,329 +687,131 @@
   <data name="&gt;&gt;grpGraphOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 92</value>
-  </data>
-  <data name="ucrChkStack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 20</value>
-  </data>
-  <data name="ucrChkStack.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStack.Name" xml:space="preserve">
-    <value>ucrChkStack</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStack.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStack.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStack.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoViolinPlot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 169</value>
+  <data name="rdoViolinPlot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
+  <data name="rdoViolinPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 19</value>
   </data>
-  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="rdoViolinPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 17</value>
   </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>Graph Title:</value>
-  </data>
-  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
-    <value>lblTitle</value>
-  </data>
-  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblHjust.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblHjust.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 143</value>
-  </data>
-  <data name="lblHjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 13</value>
-  </data>
-  <data name="lblHjust.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="lblHjust.Text" xml:space="preserve">
-    <value>Horizontal Label Position:</value>
-  </data>
-  <data name="&gt;&gt;lblHjust.Name" xml:space="preserve">
-    <value>lblHjust</value>
-  </data>
-  <data name="&gt;&gt;lblHjust.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblHjust.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;lblHjust.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblVjust.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVjust.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 117</value>
-  </data>
-  <data name="lblVjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
-  </data>
-  <data name="lblVjust.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoViolinPlot.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="lblVjust.Text" xml:space="preserve">
-    <value>Vertical Label Position:</value>
+  <data name="rdoViolinPlot.Text" xml:space="preserve">
+    <value>Violin Plot</value>
   </data>
-  <data name="&gt;&gt;lblVjust.Name" xml:space="preserve">
-    <value>lblVjust</value>
+  <data name="&gt;&gt;rdoViolinPlot.Name" xml:space="preserve">
+    <value>rdoViolinPlot</value>
   </data>
-  <data name="&gt;&gt;lblVjust.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVjust.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;lblVjust.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 168</value>
-  </data>
-  <data name="ucrInputGraphTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
-  </data>
-  <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
-    <value>ucrInputGraphTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputHorizontalLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 143</value>
-  </data>
-  <data name="ucrInputHorizontalLabels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>21, 17, 21, 17</value>
-  </data>
-  <data name="ucrInputHorizontalLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 21</value>
-  </data>
-  <data name="ucrInputHorizontalLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHorizontalLabels.Name" xml:space="preserve">
-    <value>ucrInputHorizontalLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHorizontalLabels.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHorizontalLabels.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHorizontalLabels.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrInputVerticalLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 117</value>
-  </data>
-  <data name="ucrInputVerticalLabels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>21, 17, 21, 17</value>
-  </data>
-  <data name="ucrInputVerticalLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 21</value>
-  </data>
-  <data name="ucrInputVerticalLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrInputVerticalLabels.Name" xml:space="preserve">
-    <value>ucrInputVerticalLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputVerticalLabels.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputVerticalLabels.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputVerticalLabels.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrChkShowModelSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 68</value>
-  </data>
-  <data name="ucrChkShowModelSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 20</value>
-  </data>
-  <data name="ucrChkShowModelSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowModelSummary.Name" xml:space="preserve">
-    <value>ucrChkShowModelSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowModelSummary.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowModelSummary.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowModelSummary.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrChkShowPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 20</value>
-  </data>
-  <data name="ucrChkShowPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 20</value>
-  </data>
-  <data name="ucrChkShowPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowPercentage.Name" xml:space="preserve">
-    <value>ucrChkShowPercentage</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowPercentage.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowPercentage.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowPercentage.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrChkShowCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 44</value>
-  </data>
-  <data name="ucrChkShowCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 20</value>
-  </data>
-  <data name="ucrChkShowCount.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowCount.Name" xml:space="preserve">
-    <value>ucrChkShowCount</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowCount.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowCount.Parent" xml:space="preserve">
-    <value>grpGraphOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowCount.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;rdoLine.Name" xml:space="preserve">
-    <value>rdoLine</value>
-  </data>
-  <data name="&gt;&gt;rdoLine.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoViolinPlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Parent" xml:space="preserve">
-    <value>grpGraphType</value>
-  </data>
-  <data name="&gt;&gt;rdoLine.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoBar.Name" xml:space="preserve">
-    <value>rdoBar</value>
-  </data>
-  <data name="&gt;&gt;rdoBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoBar.Parent" xml:space="preserve">
-    <value>grpGraphType</value>
-  </data>
-  <data name="&gt;&gt;rdoBar.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Name" xml:space="preserve">
-    <value>ucrPnlGraphType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Parent" xml:space="preserve">
-    <value>grpGraphType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpGraphType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="grpGraphType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 48</value>
-  </data>
-  <data name="grpGraphType.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="grpGraphType.Text" xml:space="preserve">
-    <value>Type of Graph</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Name" xml:space="preserve">
-    <value>grpGraphType</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpGraphType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoViolinPlot.Parent" xml:space="preserve">
     <value>tbpGraph</value>
   </data>
-  <data name="&gt;&gt;grpGraphType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoViolinPlot.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoLine.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoLineGraph.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 19</value>
+  <data name="rdoLineGraph.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="rdoLine.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoLineGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="rdoLineGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 17</value>
   </data>
-  <data name="rdoLine.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="rdoLineGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="rdoLine.Text" xml:space="preserve">
+  <data name="rdoLineGraph.Text" xml:space="preserve">
     <value>Line Graph</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Name" xml:space="preserve">
-    <value>rdoLine</value>
+  <data name="&gt;&gt;rdoLineGraph.Name" xml:space="preserve">
+    <value>rdoLineGraph</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoLineGraph.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoLine.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoLineGraph.Parent" xml:space="preserve">
     <value>grpGraphType</value>
   </data>
-  <data name="&gt;&gt;rdoLine.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoLineGraph.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="rdoBoxPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBoxPlot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoBoxPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 19</value>
+  </data>
+  <data name="rdoBoxPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="rdoBoxPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoBoxPlot.Text" xml:space="preserve">
+    <value>Box Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Name" xml:space="preserve">
+    <value>rdoBoxPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.Parent" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;rdoBoxPlot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoDot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 19</value>
+  </data>
+  <data name="rdoDot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 17</value>
+  </data>
+  <data name="rdoDot.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoDot.Text" xml:space="preserve">
+    <value>Dot Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoDot.Name" xml:space="preserve">
+    <value>rdoDot</value>
+  </data>
+  <data name="&gt;&gt;rdoDot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDot.Parent" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;rdoDot.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="rdoBar.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 19</value>
@@ -934,13 +835,16 @@
     <value>grpGraphType</value>
   </data>
   <data name="&gt;&gt;rdoBar.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
+  </data>
+  <data name="ucrPnlGraphType.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 7</value>
   </data>
   <data name="ucrPnlGraphType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 35</value>
+    <value>386, 35</value>
   </data>
   <data name="ucrPnlGraphType.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -955,7 +859,82 @@
     <value>grpGraphType</value>
   </data>
   <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpGraphType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpGraphType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 48</value>
+  </data>
+  <data name="grpGraphType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpGraphType.Text" xml:space="preserve">
+    <value>Type of Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Name" xml:space="preserve">
+    <value>grpGraphType</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.Parent" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphType.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="tbpGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpGraph.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 257</value>
+  </data>
+  <data name="tbpGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpGraph.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Name" xml:space="preserve">
+    <value>tbpGraph</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.Parent" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpGraph.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>412, 283</value>
+  </data>
+  <data name="tbpTwoWayFrequencies.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Name" xml:space="preserve">
+    <value>tbpTwoWayFrequencies</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbpTwoWayFrequencies.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrBaseSubDialogue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrBaseSubDialogue.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 297</value>
@@ -964,7 +943,7 @@
     <value>No</value>
   </data>
   <data name="ucrBaseSubDialogue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 30</value>
+    <value>224, 30</value>
   </data>
   <data name="ucrBaseSubDialogue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -985,10 +964,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>339, 328</value>
+    <value>430, 328</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
