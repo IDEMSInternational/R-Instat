@@ -67,7 +67,6 @@ Public Class dlgStringHandling
         ucrPnlDetectOptions.AddParameterValuesCondition(rdoStarts, "checked", "str_starts")
         ucrPnlDetectOptions.AddParameterValuesCondition(rdoEnds, "checked", "str_ends")
 
-
         ucrPnlFindOptions.AddRadioButton(rdoCount)
         ucrPnlFindOptions.AddRadioButton(rdoExtract)
         ucrPnlFindOptions.AddRadioButton(rdoLocate)
@@ -82,7 +81,6 @@ Public Class dlgStringHandling
         ucrChkAll.SetText("All")
         ucrChkAll.SetParameter(New RParameter("checked", 0))
         ucrChkAll.SetValuesCheckedAndUnchecked(True, False)
-
 
         ucrChkReplaceAll.SetText("Replace All")
         ucrChkReplaceAll.SetParameter(New RParameter("checked", 0))
@@ -101,7 +99,6 @@ Public Class dlgStringHandling
         ucrChkReplaceBy.SetText("Replace By:")
         ucrChkReplaceBy.SetParameter(New RParameter("replacement", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputReplaceNaBy.SetParameter(New RParameter("replacement", 1))
-
 
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
 
@@ -218,8 +215,6 @@ Public Class dlgStringHandling
         clsStringCollFunction.SetPackageName("stringr")
         clsStringCollFunction.SetRCommand("coll")
         clsStringCollFunction.AddParameter("ignore_case", "FALSE", bIncludeArgumentName:=False, iPosition:=3)
-
-        AddRemoveParameters()
 
         clsStartsFunction.SetPackageName("stringr")
         clsStartsFunction.SetRCommand("str_starts")
@@ -437,30 +432,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ChangePrefixName()
-        If Not ucrSaveStringHandling.bUserTyped Then
-            If rdoDetect.Checked Then
-                If rdoDetects.Checked OrElse rdoStarts.Checked OrElse rdoEnds.Checked Then
-                    ucrSaveStringHandling.SetPrefix("detect")
-                End If
-            ElseIf rdoFind.Checked Then
-                If rdoCount.Checked Then
-                    ucrSaveStringHandling.SetPrefix("count")
-                ElseIf rdoExtract.Checked Then
-                    ucrSaveStringHandling.SetPrefix("extract")
-                ElseIf rdoMatch.Checked Then
-                    ucrSaveStringHandling.SetPrefix("match")
-                ElseIf rdoLocate.Checked Then
-                    ucrSaveStringHandling.SetPrefix("locate")
-                End If
-            ElseIf rdoReplace.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace")
-            ElseIf rdoReplaceNA.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace_na")
-            ElseIf rdoRemove.Checked Then
-                ucrSaveStringHandling.SetPrefix("remove")
-            End If
-        End If
-        If rdoReplaceNA.Checked Then
+        If rdoLocate.Checked Then
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         Else
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
