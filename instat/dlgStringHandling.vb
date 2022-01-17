@@ -53,11 +53,11 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoReplaceNA)
         ucrPnlStringHandling.AddRadioButton(rdoRemove)
 
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, "str_detect")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoFind, "str_find")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, {"str_detect", "str_starts", "str_ends"})
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, {"str_replace", "str_replace_all"})
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoFind, {"str_find", "str_count", "str_extract", "extract_all", "str_locate", "str_locate", "str_match", "str_match_all"})
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceNA, "str_replace_na")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoRemove, "str_remove")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoRemove, {"str_remove", "str_remove_all"})
 
         ucrPnlDetectOptions.AddRadioButton(rdoDetects)
         ucrPnlDetectOptions.AddRadioButton(rdoStarts)
@@ -100,22 +100,6 @@ Public Class dlgStringHandling
         ucrChkReplaceBy.SetParameter(New RParameter("replacement", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputReplaceNaBy.SetParameter(New RParameter("replacement", 1))
 
-        ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
-
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrChkReplaceAll}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrPnlFindOptions, {rdoFind}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrChkReplaceBy, {rdoReplaceNA}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrChkRemoveAll, {rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFindOptions.AddToLinkedControls(ucrChkAll, {rdoExtract, rdoLocate, rdoMatch}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
-        ucrPnlFindOptions.SetLinkedDisplayControl(grpFindOptions)
-        ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
-        ucrInputPattern.SetLinkedDisplayControl(lblPattern)
-        ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
@@ -153,6 +137,21 @@ Public Class dlgStringHandling
         ucrChkComments.SetText("Comments")
         ucrChkComments.SetParameter(New RParameter("comments", 5))
         ucrChkComments.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrChkReplaceAll}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrPnlFindOptions, {rdoFind}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkReplaceBy, {rdoReplaceNA}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkRemoveAll, {rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFindOptions.AddToLinkedControls(ucrChkAll, {rdoExtract, rdoLocate, rdoMatch}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
+        ucrPnlFindOptions.SetLinkedDisplayControl(grpFindOptions)
+        ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
+        ucrInputPattern.SetLinkedDisplayControl(lblPattern)
+        ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -183,8 +182,6 @@ Public Class dlgStringHandling
         clsRemoveAllDummyFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
-
-        rdoDetect.Checked = True
 
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
@@ -257,6 +254,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsCountFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("string", 0), iAdditionalPairNo:=3)
@@ -271,12 +269,11 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsMatchAllFunction, New RParameter("string", 0), iAdditionalPairNo:=12)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateAllFunction, New RParameter("string", 0), iAdditionalPairNo:=13)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsRemoveAllFunction, New RParameter("string", 0), iAdditionalPairNo:=14)
+        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsStartsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsEndsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=2)
-
-        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
         ucrSaveStringHandling.AddAdditionalRCode(clsCountFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -374,8 +371,8 @@ Public Class dlgStringHandling
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkReplaceAll.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrInputReplaceNaBy.ControlValueChanged
         If rdoDetect.Checked Then
             If rdoDetects.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
                 clsDetectDummyFunction.AddParameter("checked", "str_detect", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
             ElseIf rdoStarts.Checked Then
                 clsDetectDummyFunction.AddParameter("checked", "str_starts", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsStartsFunction)
