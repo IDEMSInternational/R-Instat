@@ -55,7 +55,7 @@ Public Class dlgStringHandling
 
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, {"str_detect", "str_starts", "str_ends"})
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, {"str_replace", "str_replace_all"})
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoFind, {"str_find", "str_count", "str_extract", "extract_all", "str_locate", "str_locate", "str_match", "str_match_all"})
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoFind, {"str_find", "str_count", "str_extract", "extract_all", "str_locate", "str_locate_all", "str_match", "str_match_all"})
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceNA, "str_replace_na")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoRemove, {"str_remove", "str_remove_all"})
 
@@ -76,7 +76,6 @@ Public Class dlgStringHandling
         ucrPnlFindOptions.AddParameterValuesCondition(rdoExtract, "checked", "str_extract")
         ucrPnlFindOptions.AddParameterValuesCondition(rdoLocate, "checked", "str_locate")
         ucrPnlFindOptions.AddParameterValuesCondition(rdoMatch, "checked", "str_match")
-        rdoLocate.Enabled = False 'not yet implementated
 
         ucrChkAll.SetText("All")
         ucrChkAll.SetParameter(New RParameter("checked", 0))
@@ -392,6 +391,14 @@ Public Class dlgStringHandling
                     ucrBase.clsRsyntax.SetBaseRFunction(clsExtractAllFunction)
                     ucrSaveStringHandling.SetPrefix("extract_all")
                 End If
+            ElseIf rdoLocate.Checked Then
+                clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+                ucrSaveStringHandling.SetPrefix("locate")
+                If ucrChkAll.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLocateAllFunction)
+                    ucrSaveStringHandling.SetPrefix("locate_all")
+                End If
             ElseIf rdoMatch.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_match", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMatchFunction)
@@ -423,6 +430,7 @@ Public Class dlgStringHandling
         End If
 
         NewColumnName()
+        ChangePrefixName()
         AddRemoveParameters()
     End Sub
 
