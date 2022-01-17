@@ -47,33 +47,6 @@ Partial Class dlgStringHandling
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
         Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
-        Me.grpRegex = New System.Windows.Forms.GroupBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdBackSlash = New System.Windows.Forms.Button()
-        Me.cmdWBackSlash = New System.Windows.Forms.Button()
-        Me.cmdDollarSign = New System.Windows.Forms.Button()
-        Me.cmdOpenCloseParenthesis = New System.Windows.Forms.Button()
-        Me.cmdBackSlashd = New System.Windows.Forms.Button()
-        Me.cmdBackSlashs = New System.Windows.Forms.Button()
-        Me.cmdPower = New System.Windows.Forms.Button()
-        Me.cmdOpenBracketCaretClosedBracket = New System.Windows.Forms.Button()
-        Me.cmdPlus = New System.Windows.Forms.Button()
-        Me.cmdBackSlashw = New System.Windows.Forms.Button()
-        Me.cmdMultiply = New System.Windows.Forms.Button()
-        Me.cmdOpenCloseBrace = New System.Windows.Forms.Button()
-        Me.cmdOpenClosedBracket = New System.Windows.Forms.Button()
-        Me.cmdSingleQuote = New System.Windows.Forms.Button()
-        Me.cmdQuote = New System.Windows.Forms.Button()
-        Me.cmdQuestionMark = New System.Windows.Forms.Button()
-        Me.cmdDBackSlah = New System.Windows.Forms.Button()
-        Me.cmdStar = New System.Windows.Forms.Button()
-        Me.cmdBbackSlash = New System.Windows.Forms.Button()
-        Me.cmdBackSlashb = New System.Windows.Forms.Button()
-        Me.cmdSbackSlash = New System.Windows.Forms.Button()
-        Me.cmdOr = New System.Windows.Forms.Button()
-        Me.rdoRegex = New System.Windows.Forms.RadioButton()
-        Me.rdoFixed = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
@@ -90,7 +63,6 @@ Partial Class dlgStringHandling
         Me.ucrChkComments = New instat.ucrCheck()
         Me.ucrChkMultiline = New instat.ucrCheck()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
-        Me.grpRegex.SuspendLayout()
         Me.grpModifiers.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -225,328 +197,6 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.Text = "Replace All"
         Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceAll.UseVisualStyleBackColor = True
-        '
-        'grpRegex
-        '
-        Me.grpRegex.Controls.Add(Me.cmdClear)
-        Me.grpRegex.Controls.Add(Me.cmdBackSlash)
-        Me.grpRegex.Controls.Add(Me.cmdWBackSlash)
-        Me.grpRegex.Controls.Add(Me.cmdDollarSign)
-        Me.grpRegex.Controls.Add(Me.cmdOpenCloseParenthesis)
-        Me.grpRegex.Controls.Add(Me.cmdBackSlashd)
-        Me.grpRegex.Controls.Add(Me.cmdBackSlashs)
-        Me.grpRegex.Controls.Add(Me.cmdPower)
-        Me.grpRegex.Controls.Add(Me.cmdOpenBracketCaretClosedBracket)
-        Me.grpRegex.Controls.Add(Me.cmdPlus)
-        Me.grpRegex.Controls.Add(Me.cmdBackSlashw)
-        Me.grpRegex.Controls.Add(Me.cmdMultiply)
-        Me.grpRegex.Controls.Add(Me.cmdOpenCloseBrace)
-        Me.grpRegex.Controls.Add(Me.cmdOpenClosedBracket)
-        Me.grpRegex.Controls.Add(Me.cmdSingleQuote)
-        Me.grpRegex.Controls.Add(Me.cmdQuote)
-        Me.grpRegex.Controls.Add(Me.cmdQuestionMark)
-        Me.grpRegex.Controls.Add(Me.cmdDBackSlah)
-        Me.grpRegex.Controls.Add(Me.cmdStar)
-        Me.grpRegex.Controls.Add(Me.cmdBbackSlash)
-        Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
-        Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
-        Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(423, 81)
-        Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpRegex.Name = "grpRegex"
-        Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpRegex.Size = New System.Drawing.Size(239, 141)
-        Me.grpRegex.TabIndex = 18
-        Me.grpRegex.TabStop = False
-        Me.grpRegex.Text = "Regex Keyboard"
-        '
-        'cmdClear
-        '
-        Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(198, 75)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(37, 60)
-        Me.cmdClear.TabIndex = 17
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlash
-        '
-        Me.cmdBackSlash.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBackSlash.Location = New System.Drawing.Point(159, 105)
-        Me.cmdBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlash.Name = "cmdBackSlash"
-        Me.cmdBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlash.TabIndex = 22
-        Me.cmdBackSlash.Text = "\ "
-        Me.cmdBackSlash.UseVisualStyleBackColor = True
-        '
-        'cmdWBackSlash
-        '
-        Me.cmdWBackSlash.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWBackSlash.Location = New System.Drawing.Point(159, 75)
-        Me.cmdWBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdWBackSlash.Name = "cmdWBackSlash"
-        Me.cmdWBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdWBackSlash.TabIndex = 16
-        Me.cmdWBackSlash.Text = "\ W"
-        Me.cmdWBackSlash.UseVisualStyleBackColor = True
-        '
-        'cmdDollarSign
-        '
-        Me.cmdDollarSign.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDollarSign.Location = New System.Drawing.Point(198, 45)
-        Me.cmdDollarSign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDollarSign.Name = "cmdDollarSign"
-        Me.cmdDollarSign.Size = New System.Drawing.Size(38, 30)
-        Me.cmdDollarSign.TabIndex = 11
-        Me.cmdDollarSign.Text = "$"
-        Me.cmdDollarSign.UseVisualStyleBackColor = True
-        '
-        'cmdOpenCloseParenthesis
-        '
-        Me.cmdOpenCloseParenthesis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 15)
-        Me.cmdOpenCloseParenthesis.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
-        Me.cmdOpenCloseParenthesis.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenCloseParenthesis.TabIndex = 5
-        Me.cmdOpenCloseParenthesis.Text = "(  )"
-        Me.cmdOpenCloseParenthesis.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlashd
-        '
-        Me.cmdBackSlashd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBackSlashd.Location = New System.Drawing.Point(81, 105)
-        Me.cmdBackSlashd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlashd.Name = "cmdBackSlashd"
-        Me.cmdBackSlashd.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashd.TabIndex = 20
-        Me.cmdBackSlashd.Text = "\ d"
-        Me.cmdBackSlashd.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlashs
-        '
-        Me.cmdBackSlashs.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
-        Me.cmdBackSlashs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBackSlashs.Location = New System.Drawing.Point(3, 105)
-        Me.cmdBackSlashs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlashs.Name = "cmdBackSlashs"
-        Me.cmdBackSlashs.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashs.TabIndex = 18
-        Me.cmdBackSlashs.Tag = "Del"
-        Me.cmdBackSlashs.Text = "\ s"
-        Me.cmdBackSlashs.UseVisualStyleBackColor = True
-        '
-        'cmdPower
-        '
-        Me.cmdPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPower.Location = New System.Drawing.Point(159, 45)
-        Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdPower.Name = "cmdPower"
-        Me.cmdPower.Size = New System.Drawing.Size(38, 30)
-        Me.cmdPower.TabIndex = 10
-        Me.cmdPower.Text = "^"
-        Me.cmdPower.UseVisualStyleBackColor = True
-        '
-        'cmdOpenBracketCaretClosedBracket
-        '
-        Me.cmdOpenBracketCaretClosedBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpenBracketCaretClosedBracket.Location = New System.Drawing.Point(120, 15)
-        Me.cmdOpenBracketCaretClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOpenBracketCaretClosedBracket.Name = "cmdOpenBracketCaretClosedBracket"
-        Me.cmdOpenBracketCaretClosedBracket.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenBracketCaretClosedBracket.TabIndex = 3
-        Me.cmdOpenBracketCaretClosedBracket.Text = "[ ^ ]"
-        Me.cmdOpenBracketCaretClosedBracket.UseVisualStyleBackColor = True
-        '
-        'cmdPlus
-        '
-        Me.cmdPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlus.Location = New System.Drawing.Point(42, 45)
-        Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
-        Me.cmdPlus.TabIndex = 7
-        Me.cmdPlus.Text = "+"
-        Me.cmdPlus.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlashw
-        '
-        Me.cmdBackSlashw.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBackSlashw.Location = New System.Drawing.Point(120, 75)
-        Me.cmdBackSlashw.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlashw.Name = "cmdBackSlashw"
-        Me.cmdBackSlashw.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashw.TabIndex = 15
-        Me.cmdBackSlashw.Text = "\ w"
-        Me.cmdBackSlashw.UseVisualStyleBackColor = True
-        '
-        'cmdMultiply
-        '
-        Me.cmdMultiply.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMultiply.Location = New System.Drawing.Point(120, 45)
-        Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdMultiply.Name = "cmdMultiply"
-        Me.cmdMultiply.Size = New System.Drawing.Size(38, 30)
-        Me.cmdMultiply.TabIndex = 9
-        Me.cmdMultiply.Text = "."
-        Me.cmdMultiply.UseVisualStyleBackColor = True
-        '
-        'cmdOpenCloseBrace
-        '
-        Me.cmdOpenCloseBrace.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpenCloseBrace.Location = New System.Drawing.Point(159, 15)
-        Me.cmdOpenCloseBrace.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOpenCloseBrace.Name = "cmdOpenCloseBrace"
-        Me.cmdOpenCloseBrace.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenCloseBrace.TabIndex = 4
-        Me.cmdOpenCloseBrace.Text = "{  }"
-        Me.cmdOpenCloseBrace.UseVisualStyleBackColor = True
-        '
-        'cmdOpenClosedBracket
-        '
-        Me.cmdOpenClosedBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpenClosedBracket.Location = New System.Drawing.Point(81, 15)
-        Me.cmdOpenClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOpenClosedBracket.Name = "cmdOpenClosedBracket"
-        Me.cmdOpenClosedBracket.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenClosedBracket.TabIndex = 2
-        Me.cmdOpenClosedBracket.Text = "[  ]"
-        Me.cmdOpenClosedBracket.UseVisualStyleBackColor = True
-        '
-        'cmdSingleQuote
-        '
-        Me.cmdSingleQuote.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSingleQuote.Location = New System.Drawing.Point(42, 15)
-        Me.cmdSingleQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSingleQuote.Name = "cmdSingleQuote"
-        Me.cmdSingleQuote.Size = New System.Drawing.Size(38, 30)
-        Me.cmdSingleQuote.TabIndex = 1
-        Me.cmdSingleQuote.Text = "' '"
-        Me.cmdSingleQuote.UseVisualStyleBackColor = True
-        '
-        'cmdQuote
-        '
-        Me.cmdQuote.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuote.Location = New System.Drawing.Point(3, 15)
-        Me.cmdQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdQuote.Name = "cmdQuote"
-        Me.cmdQuote.Size = New System.Drawing.Size(38, 30)
-        Me.cmdQuote.TabIndex = 0
-        Me.cmdQuote.Text = """ """
-        Me.cmdQuote.UseVisualStyleBackColor = True
-        '
-        'cmdQuestionMark
-        '
-        Me.cmdQuestionMark.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuestionMark.Location = New System.Drawing.Point(81, 45)
-        Me.cmdQuestionMark.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdQuestionMark.Name = "cmdQuestionMark"
-        Me.cmdQuestionMark.Size = New System.Drawing.Size(38, 30)
-        Me.cmdQuestionMark.TabIndex = 8
-        Me.cmdQuestionMark.Text = "?"
-        Me.cmdQuestionMark.UseVisualStyleBackColor = True
-        '
-        'cmdDBackSlah
-        '
-        Me.cmdDBackSlah.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDBackSlah.Location = New System.Drawing.Point(120, 105)
-        Me.cmdDBackSlah.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDBackSlah.Name = "cmdDBackSlah"
-        Me.cmdDBackSlah.Size = New System.Drawing.Size(38, 30)
-        Me.cmdDBackSlah.TabIndex = 21
-        Me.cmdDBackSlah.Text = "\ D"
-        Me.cmdDBackSlah.UseVisualStyleBackColor = True
-        '
-        'cmdStar
-        '
-        Me.cmdStar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStar.Location = New System.Drawing.Point(3, 45)
-        Me.cmdStar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdStar.Name = "cmdStar"
-        Me.cmdStar.Size = New System.Drawing.Size(38, 30)
-        Me.cmdStar.TabIndex = 6
-        Me.cmdStar.Text = "*"
-        Me.cmdStar.UseVisualStyleBackColor = True
-        '
-        'cmdBbackSlash
-        '
-        Me.cmdBbackSlash.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBbackSlash.Location = New System.Drawing.Point(81, 75)
-        Me.cmdBbackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBbackSlash.Name = "cmdBbackSlash"
-        Me.cmdBbackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBbackSlash.TabIndex = 14
-        Me.cmdBbackSlash.Text = "\ B"
-        Me.cmdBbackSlash.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlashb
-        '
-        Me.cmdBackSlashb.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBackSlashb.Location = New System.Drawing.Point(42, 75)
-        Me.cmdBackSlashb.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlashb.Name = "cmdBackSlashb"
-        Me.cmdBackSlashb.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlashb.TabIndex = 13
-        Me.cmdBackSlashb.Text = "\ b"
-        Me.cmdBackSlashb.UseVisualStyleBackColor = True
-        '
-        'cmdSbackSlash
-        '
-        Me.cmdSbackSlash.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSbackSlash.Location = New System.Drawing.Point(42, 105)
-        Me.cmdSbackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSbackSlash.Name = "cmdSbackSlash"
-        Me.cmdSbackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdSbackSlash.TabIndex = 19
-        Me.cmdSbackSlash.Text = "\ S"
-        Me.cmdSbackSlash.UseVisualStyleBackColor = True
-        '
-        'cmdOr
-        '
-        Me.cmdOr.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOr.Location = New System.Drawing.Point(3, 75)
-        Me.cmdOr.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOr.Name = "cmdOr"
-        Me.cmdOr.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOr.TabIndex = 12
-        Me.cmdOr.Text = "|,"
-        Me.cmdOr.UseVisualStyleBackColor = True
-        '
-        'rdoRegex
-        '
-        Me.rdoRegex.AutoSize = True
-        Me.rdoRegex.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRegex.Location = New System.Drawing.Point(535, 232)
-        Me.rdoRegex.Name = "rdoRegex"
-        Me.rdoRegex.Size = New System.Drawing.Size(56, 17)
-        Me.rdoRegex.TabIndex = 17
-        Me.rdoRegex.TabStop = True
-        Me.rdoRegex.Text = "Regex"
-        Me.rdoRegex.UseVisualStyleBackColor = True
-        '
-        'rdoFixed
-        '
-        Me.rdoFixed.AutoSize = True
-        Me.rdoFixed.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFixed.Location = New System.Drawing.Point(465, 232)
-        Me.rdoFixed.Name = "rdoFixed"
-        Me.rdoFixed.Size = New System.Drawing.Size(50, 17)
-        Me.rdoFixed.TabIndex = 16
-        Me.rdoFixed.TabStop = True
-        Me.rdoFixed.Text = "Fixed"
-        Me.rdoFixed.UseVisualStyleBackColor = True
-        '
-        'ucrPnlFixedRegex
-        '
-        Me.ucrPnlFixedRegex.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(457, 227)
-        Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
-        Me.ucrPnlFixedRegex.Size = New System.Drawing.Size(150, 28)
-        Me.ucrPnlFixedRegex.TabIndex = 15
         '
         'ucrSaveStringHandling
         '
@@ -721,12 +371,8 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.ucrChkIgnoreCase)
         Me.Controls.Add(Me.grpModifiers)
         Me.Controls.Add(Me.cmdAddkeyboard)
-        Me.Controls.Add(Me.rdoRegex)
-        Me.Controls.Add(Me.rdoFixed)
-        Me.Controls.Add(Me.ucrPnlFixedRegex)
         Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
-        Me.Controls.Add(Me.grpRegex)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
@@ -749,7 +395,6 @@ Partial Class dlgStringHandling
         Me.Name = "dlgStringHandling"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "String Handling"
-        Me.grpRegex.ResumeLayout(False)
         Me.grpModifiers.ResumeLayout(False)
         Me.grpModifiers.PerformLayout()
         Me.ResumeLayout(False)
@@ -773,35 +418,8 @@ Partial Class dlgStringHandling
     Friend WithEvents ucrPnlStringHandling As UcrPanel
     Friend WithEvents rdoReplaceAll As RadioButton
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
-    Friend WithEvents grpRegex As GroupBox
-    Friend WithEvents cmdOpenCloseParenthesis As Button
-    Friend WithEvents cmdBackSlashd As Button
-    Friend WithEvents cmdBackSlashs As Button
-    Friend WithEvents cmdPower As Button
-    Friend WithEvents cmdOpenBracketCaretClosedBracket As Button
-    Friend WithEvents cmdPlus As Button
-    Friend WithEvents cmdBackSlashw As Button
-    Friend WithEvents cmdMultiply As Button
-    Friend WithEvents cmdOpenCloseBrace As Button
-    Friend WithEvents cmdOpenClosedBracket As Button
-    Friend WithEvents cmdSingleQuote As Button
-    Friend WithEvents cmdQuote As Button
-    Friend WithEvents cmdQuestionMark As Button
-    Friend WithEvents cmdDBackSlah As Button
-    Friend WithEvents cmdStar As Button
-    Friend WithEvents cmdBbackSlash As Button
-    Friend WithEvents cmdBackSlashb As Button
-    Friend WithEvents cmdSbackSlash As Button
-    Friend WithEvents cmdOr As Button
-    Friend WithEvents cmdDollarSign As Button
-    Friend WithEvents cmdWBackSlash As Button
-    Friend WithEvents cmdBackSlash As Button
     Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
-    Friend WithEvents cmdClear As Button
     Friend WithEvents ucrSaveStringHandling As ucrSave
-    Friend WithEvents rdoRegex As RadioButton
-    Friend WithEvents rdoFixed As RadioButton
-    Friend WithEvents ucrPnlFixedRegex As UcrPanel
     Friend WithEvents ucrInputBoundary As ucrInputTextBox
     Friend WithEvents ucrChkBoundary As ucrCheck
     Friend WithEvents ucrChkIgnoreCase As ucrCheck

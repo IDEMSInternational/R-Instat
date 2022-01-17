@@ -20,13 +20,11 @@ Public Class dlgStringHandling
     Private bReset As Boolean = True
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private iFullWidth As Integer
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
-            iFullWidth = Me.Width
         End If
         If bReset Then
             SetDefaults()
@@ -41,24 +39,18 @@ Public Class dlgStringHandling
         Dim dctBoundaryPairs As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 406
 
-        'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.bUseFilteredData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
-        'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
         ucrPnlStringHandling.AddRadioButton(rdoExtract)
         ucrPnlStringHandling.AddRadioButton(rdoDetect)
         ucrPnlStringHandling.AddRadioButton(rdoLocate)
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
         ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
-
-        'ucrRdofixedRegex
-        ucrPnlFixedRegex.AddRadioButton(rdoFixed)
-        ucrPnlFixedRegex.AddRadioButton(rdoRegex)
 
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoCount, "str_count")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoExtract, "str_extract")
@@ -72,7 +64,6 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoCount, rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
-        ucrPnlFixedRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {rdoRegex}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveStringHandling.SetPrefix("count")
@@ -112,15 +103,6 @@ Public Class dlgStringHandling
         ucrChkComments.SetText("Comments")
         ucrChkComments.SetParameter(New RParameter("comments", 5))
         ucrChkComments.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
-        ucrPnlFixedRegex.AddFunctionNamesCondition(rdoFixed, "fixed")
-        ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
-        ucrPnlFixedRegex.Visible = False
-
-        'temporary disabling
-        grpRegex.Enabled = False
-        'hiding the Regex group box 
-        grpRegex.Hide()
     End Sub
 
     Private Sub SetDefaults()
@@ -138,9 +120,7 @@ Public Class dlgStringHandling
 
         ucrSelectorStringHandling.Reset()
 
-        rdoFixed.Checked = True
         rdoCount.Checked = True
-        VisibleRdo()
 
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
@@ -190,17 +170,6 @@ Public Class dlgStringHandling
         NewColumnName()
     End Sub
 
-    'temporary fix.
-    Private Sub VisibleRdo()
-        If ucrChkIncludeRegularExpressions.Checked Then
-            rdoRegex.Visible = True
-            rdoFixed.Visible = True
-        Else
-            rdoRegex.Visible = False
-            rdoFixed.Visible = False
-        End If
-    End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsDetectFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
@@ -232,9 +201,9 @@ Public Class dlgStringHandling
             ucrBase.OKEnabled(True)
         ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso rdoRegex.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
+        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso rdoFixed.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputReplaceBy.IsEmpty Then
+        ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputReplaceBy.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -295,16 +264,6 @@ Public Class dlgStringHandling
         AddRemoveParameters()
     End Sub
 
-    Private Sub ChangeSize()
-        If rdoRegex.Checked Then
-            grpRegex.Visible = True
-            Me.Size = New Size(iFullWidth, Me.Height)
-        Else
-            grpRegex.Visible = False
-            Me.Size = New Size(iFullWidth / 1.29, Me.Height)
-        End If
-    End Sub
-
     Private Sub ChangePrefixName()
         If Not ucrSaveStringHandling.bUserTyped Then
             If rdoCount.Checked Then
@@ -334,23 +293,17 @@ Public Class dlgStringHandling
         ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs)
         ucrReceiverForRegexExpression.Clear()
     End Sub
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrInputBoundary.ControlValueChanged, ucrChkBoundary.ControlValueChanged, ucrInputPattern.ControlValueChanged
-        VisibleRdo()
         AddRemoveParameters()
         cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
         grpModifiers.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
     End Sub
 
-    Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged
-        VisibleRdo()
-        ChangeSize()
-    End Sub
-
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
