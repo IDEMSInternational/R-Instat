@@ -167,8 +167,8 @@ Partial Class dlgPermuteColumn
         Me.MinimizeBox = False
         Me.Name = "dlgPermuteColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Permute_Column"
-        Me.Text = "Permute Column"
+        Me.Tag = "Permute_Sample_Rows"
+        Me.Text = "Permute/Sample Rows"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
