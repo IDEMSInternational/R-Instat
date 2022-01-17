@@ -312,7 +312,7 @@ Public Class dlgStringHandling
     Private Sub TestOkEnabled()
         If (rdoDetect.Checked OrElse rdoFind.Checked OrElse rdoReplace.Checked OrElse rdoRemove.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoReplaceNA.Checked AndAlso ucrSaveStringHandling.IsComplete() AndAlso ucrChkReplaceBy.Checked Then
+        ElseIf rdoReplaceNA.Checked AndAlso ucrSaveStringHandling.IsComplete() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
