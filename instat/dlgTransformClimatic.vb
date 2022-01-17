@@ -265,16 +265,19 @@ Public Class dlgTransformClimatic
         ucrNudHDD.SetParameter(New RParameter("baseline", 0, bNewIncludeArgumentName:=False))
         ucrNudHDD.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudHDD.Increment = 0.1
+        ucrNudHDD.DecimalPlaces = 1
         ucrNudHDD.SetLinkedDisplayControl(lblBaselineHDD)
 
         ucrNudGDD.SetParameter(New RParameter("baseline", 1, bNewIncludeArgumentName:=False))
         ucrNudGDD.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudGDD.Increment = 0.1
+        ucrNudGDD.DecimalPlaces = 1
         ucrNudGDD.SetLinkedDisplayControl(lblBaselineGDD)
 
         ucrNudMgdd.SetParameter(New RParameter("baseline", 1, bNewIncludeArgumentName:=False))
         ucrNudMgdd.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudMgdd.Increment = 0.1
+        ucrNudMgdd.DecimalPlaces = 1
         ucrNudMgdd.SetLinkedDisplayControl(lblBaselineMgdd)
 
         ucrInputLimit.SetParameter(New RParameter("limit", 0, bNewIncludeArgumentName:=False))
@@ -294,9 +297,9 @@ Public Class dlgTransformClimatic
         ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
 
-        ucrPnlDegree.AddToLinkedControls(ucrNudGDD, {rdoGrowingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15)
-        ucrPnlDegree.AddToLinkedControls(ucrNudMgdd, {rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15)
-        ucrPnlDegree.AddToLinkedControls(ucrNudHDD, {rdoHeatingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15)
+        ucrPnlDegree.AddToLinkedControls(ucrNudGDD, {rdoGrowingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15.0)
+        ucrPnlDegree.AddToLinkedControls(ucrNudMgdd, {rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15.0)
+        ucrPnlDegree.AddToLinkedControls(ucrNudHDD, {rdoHeatingDegreeDays}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=15.0)
         ucrPnlDegree.AddToLinkedControls(ucrInputLimit, {rdoModifiedGDD}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
 
         ucrPnlTransform.AddToLinkedControls({ucrInputCumulative}, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
@@ -600,8 +603,8 @@ Public Class dlgTransformClimatic
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("max", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("min", 1), iAdditionalPairNo:=1)
-        ucrReceiverTMin.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=1)
-        ucrReceiverTMax.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=1)
+        ucrReceiverTMin.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=1)
+        ucrReceiverTMax.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=1)
         ucrReceiverTMean.AddAdditionalCodeParameterPair(clsGrowingDegreDiffOperator, New RParameter("tmean", 0), iAdditionalPairNo:=1)
         ucrReceiverTMean.AddAdditionalCodeParameterPair(clsHeatingDegreeLogicOperator, New RParameter("tmean", 0), iAdditionalPairNo:=2)
         ucrReceiverTMean.AddAdditionalCodeParameterPair(clsGrowingDegreeLogicOperator, New RParameter("tmean", 0), iAdditionalPairNo:=3)
