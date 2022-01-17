@@ -70,7 +70,7 @@ Public Class dlgOneVariableSummarise
 
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls(ucrChkOmitMissing, {rdoCustomised}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummaries.AddToLinkedControls(ucrChkTreatColumnsAsFactors, {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddToLinkedControls({ucrChkDisplaySummariesAsRow, ucrChkDisplayVariablesAsRows}, {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -82,14 +82,9 @@ Public Class dlgOneVariableSummarise
         ucrChkDisplayVariablesAsRows.AddParameterValuesCondition(True, "variable", "TRUE")
         ucrChkDisplayVariablesAsRows.AddParameterValuesCondition(False, "variable", "FALSE")
 
-        ucrChkDisplaySummaryAsRow.SetText("Display Summary As Rows")
-        ucrChkDisplaySummaryAsRow.AddParameterValuesCondition(True, "summary", "TRUE")
-        ucrChkDisplaySummaryAsRow.AddParameterValuesCondition(False, "summary", "FALSE")
-
-        ucrChkTreatColumnsAsFactors.SetParameter(New RParameter("treat_columns_as_factor", iNewPosition:=3))
-        ucrChkTreatColumnsAsFactors.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkTreatColumnsAsFactors.SetText("Treat Columns As Factor")
-        ucrChkTreatColumnsAsFactors.AddToLinkedControls({ucrChkDisplaySummaryAsRow, ucrChkDisplayVariablesAsRows}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDisplaySummariesAsRow.SetText("Display Summaries As Rows")
+        ucrChkDisplaySummariesAsRow.AddParameterValuesCondition(True, "summary", "TRUE")
+        ucrChkDisplaySummariesAsRow.AddParameterValuesCondition(False, "summary", "FALSE")
     End Sub
 
     Private Sub SetDefaults()
@@ -168,9 +163,8 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
-        ucrChkTreatColumnsAsFactors.SetRCode(clsSummaryTableFunction, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplaySummaryAsRow.SetRCode(clsDummyFunction, bReset)
+        ucrChkDisplaySummariesAsRow.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
@@ -237,10 +231,6 @@ Public Class dlgOneVariableSummarise
         AddRemoveHeaders()
     End Sub
 
-    Private Sub TreatColumnsAsFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTreatColumnsAsFactors.ControlValueChanged
-        AddRemoveHeaders()
-    End Sub
-
     Private Sub AddRemoveHeaders()
         clsMmtableOperator.RemoveParameterByName("left_top_variable")
         clsMmtableOperator.RemoveParameterByName("left_top_summary")
@@ -248,28 +238,27 @@ Public Class dlgOneVariableSummarise
         clsMmtableOperator.RemoveParameterByName("top_left_variable")
         clsMmtableOperator.RemoveParameterByName("summary-variable")
         If rdoCustomised.Checked Then
-            If ucrChkTreatColumnsAsFactors.Checked Then
-                If ucrChkDisplayVariablesAsRows.Checked AndAlso ucrChkDisplaySummaryAsRow.Checked Then
+            If ucrChkDisplaySummariesAsRow.Checked OrElse ucrChkDisplayVariablesAsRows.Checked Then
+                clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=3)
+                If ucrChkDisplayVariablesAsRows.Checked AndAlso ucrChkDisplaySummariesAsRow.Checked Then
                     clsMmtableOperator.AddParameter("left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
                     clsMmtableOperator.AddParameter("left_top_summary", clsRFunctionParameter:=clsHeaderLeftTopSummaryFunction, iPosition:=2)
                 ElseIf ucrChkDisplayVariablesAsRows.Checked Then
                     clsMmtableOperator.AddParameter("left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
                     clsMmtableOperator.AddParameter("top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
-                ElseIf ucrChkDisplaySummaryAsRow.Checked Then
+                ElseIf ucrChkDisplaySummariesAsRow.Checked Then
                     clsMmtableOperator.AddParameter("top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=1)
                     clsMmtableOperator.AddParameter("left_top_summary", clsRFunctionParameter:=clsHeaderLeftTopSummaryFunction, iPosition:=2)
-                Else
-                    clsMmtableOperator.AddParameter("top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=1)
-                    clsMmtableOperator.AddParameter("top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=2)
                 End If
             Else
+                clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
                 clsMmtableOperator.AddParameter("summary-variable", clsRFunctionParameter:=clsHeaderTopLeftSummaryVariableFunction, iPosition:=1)
             End If
         End If
     End Sub
 
-    Private Sub ucrChkDisplaySummaryAsRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplaySummaryAsRow.ControlValueChanged
-        If ucrChkDisplaySummaryAsRow.Checked Then
+    Private Sub ucrChkDisplaySummaryAsRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplaySummariesAsRow.ControlValueChanged
+        If ucrChkDisplaySummariesAsRow.Checked Then
             clsDummyFunction.AddParameter("summary", "TRUE", iPosition:=0)
         Else
             clsDummyFunction.AddParameter("summary", "FALSE", iPosition:=0)
