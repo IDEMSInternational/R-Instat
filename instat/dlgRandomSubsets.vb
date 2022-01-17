@@ -90,8 +90,9 @@ Public Class dlgRandomSubsets
         clsSetSeed.AddParameter("seed", 1)
 
         'replicate func setting
+        clsReplicate.SetPackageName("purrr")
         clsReplicate.SetRCommand("replicate")
-        clsReplicate.AddParameter("n", 1)
+        clsReplicate.AddParameter(".n", 1)
         clsReplicate.AddParameter("expr", clsRFunctionParameter:=clsSample)
 
         'setting the main fuction
