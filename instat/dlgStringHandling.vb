@@ -18,7 +18,9 @@ Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction As New RFunction
+    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction,
+            clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction,
+            clsFindFunction, clsStartsFunction, clsEndsFunction, clsMatchFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -45,24 +47,36 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.bUseFilteredData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
-        ucrPnlStringHandling.AddRadioButton(rdoCount)
-        ucrPnlStringHandling.AddRadioButton(rdoExtract)
         ucrPnlStringHandling.AddRadioButton(rdoDetect)
-        ucrPnlStringHandling.AddRadioButton(rdoLocate)
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
-        ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
+        ucrPnlStringHandling.AddRadioButton(rdoFind)
+        ucrPnlStringHandling.AddRadioButton(rdoReplaceNA)
+        ucrPnlStringHandling.AddRadioButton(rdoRemove)
 
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoCount, "str_count")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoExtract, "str_extract")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, "str_detect")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoLocate, "str_locate")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, "")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoFind, "str_find")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceNA, "str_replace_na")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoRemove, "str_remove")
+
+        ucrPnlDetectOptions.AddRadioButton(rdoDetects)
+        ucrPnlDetectOptions.AddRadioButton(rdoStarts)
+        ucrPnlDetectOptions.AddRadioButton(rdoEnds)
+
+        ucrPnlDetectOptions.AddFunctionNamesCondition(rdoDetects, "str_detect")
+        ucrPnlDetectOptions.AddFunctionNamesCondition(rdoStarts, "str_starts")
+        ucrPnlDetectOptions.AddFunctionNamesCondition(rdoEnds, "str_ends")
+
+        ucrChkNegate.SetText("Negate")
+        ucrChkNegate.SetParameter(New RParameter("negate", 2))
+        ucrChkNegate.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoCount, rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -117,10 +131,13 @@ Public Class dlgStringHandling
         clsStringCollFunction = New RFunction
         clsBoundaryFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsStartsFunction = New RFunction
+        clsEndsFunction = New RFunction
+        clsMatchFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
-        rdoCount.Checked = True
+        rdoDetect.Checked = True
 
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
@@ -152,6 +169,14 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.SetText("")
         AddRemoveParameters()
 
+        clsStartsFunction.SetPackageName("stringr")
+        clsStartsFunction.SetRCommand("str_starts")
+        clsStartsFunction.AddParameter("negate", "FALSE", iPosition:=2)
+
+        clsEndsFunction.SetPackageName("stringr")
+        clsEndsFunction.SetRCommand("str_ends")
+        clsEndsFunction.AddParameter("negate", "FALSE", iPosition:=2)
+
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
         clsExtractFunction.SetPackageName("stringr")
@@ -166,7 +191,7 @@ Public Class dlgStringHandling
         clsReplaceAllFunction.SetRCommand("str_replace_all")
         ChangePrefixName()
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
         NewColumnName()
     End Sub
 
@@ -177,6 +202,8 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("string", 0), iAdditionalPairNo:=4)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("string", 0), iAdditionalPairNo:=5)
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkNegate.AddAdditionalCodeParameterPair(clsStartsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkNegate.AddAdditionalCodeParameterPair(clsEndsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=2)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
@@ -194,20 +221,21 @@ Public Class dlgStringHandling
         ucrChkComments.SetRCode(clsRegexFunction, bReset)
         ucrChkMultiline.SetRCode(clsRegexFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrChkNegate.SetRCode(clsDetectFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
-            ucrBase.OKEnabled(True)
-        ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
-            ucrBase.OKEnabled(True)
-        ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputReplaceBy.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If (rdoDetect.Checked OrElse rdoFind.Checked OrElse rdoReplace.Checked OrElse rdoReplaceNA.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
+        '    ucrBase.OKEnabled(True)
+        'ElseIf (rdoRemove.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'ElseIf (rdoDetect.Checked OrElse rdoFind.Checked OrElse rdoReplace.Checked OrElse rdoReplaceNA.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
+        '    ucrBase.OKEnabled(True)
+        'ElseIf (rdoRemove.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrChkIncludeRegularExpressions.Checked AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputReplaceBy.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -217,7 +245,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub NewColumnName()
-        If rdoLocate.Checked Then
+        If rdoReplaceNA.Checked Then
             ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
         Else
             ucrSaveStringHandling.SetLabelText("New Column Name:")
@@ -230,6 +258,8 @@ Public Class dlgStringHandling
         If ucrChkIncludeRegularExpressions.Checked Then
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStartsFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsEndsFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
@@ -237,6 +267,8 @@ Public Class dlgStringHandling
         Else
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStartsFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsEndsFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, bIncludeArgumentName:=False, iPosition:=1)
@@ -244,19 +276,23 @@ Public Class dlgStringHandling
         End If
     End Sub
 
-    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
-        If rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-        ElseIf rdoDetect.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-        ElseIf rdoExtract.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
-        ElseIf rdoLocate.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged
+        If rdoDetect.Checked Then
+            If rdoDetects.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
+            ElseIf rdoStarts.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsStartsFunction)
+            ElseIf rdoEnds.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
+            End If
+        ElseIf rdoFind.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsFindFunction)
         ElseIf rdoReplace.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
-        ElseIf rdoReplaceAll.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
+        ElseIf rdoReplaceNA.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
+        ElseIf rdoRemove.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFunction)
         End If
 
         NewColumnName()
@@ -266,22 +302,20 @@ Public Class dlgStringHandling
 
     Private Sub ChangePrefixName()
         If Not ucrSaveStringHandling.bUserTyped Then
-            If rdoCount.Checked Then
+            If rdoDetect.Checked Then
                 ucrSaveStringHandling.SetPrefix("count")
-            ElseIf rdoDetect.Checked Then
+            ElseIf rdoFind.Checked Then
                 ucrSaveStringHandling.SetPrefix("detect")
-            ElseIf rdoExtract.Checked Then
+            ElseIf rdoReplace.Checked Then
                 ucrSaveStringHandling.SetPrefix("extract")
-            ElseIf rdoLocate.Checked Then
+            ElseIf rdoReplaceNA.Checked Then
                 ucrSaveStringHandling.SetPrefix("")
                 ucrSaveStringHandling.SetName("locate")
-            ElseIf rdoReplace.Checked Then
+            ElseIf rdoRemove.Checked Then
                 ucrSaveStringHandling.SetPrefix("replace")
-            ElseIf rdoReplaceAll.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace_all")
             End If
         End If
-        If rdoLocate.Checked Then
+        If rdoReplaceNA.Checked Then
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         Else
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
