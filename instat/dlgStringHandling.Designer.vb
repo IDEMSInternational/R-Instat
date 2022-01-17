@@ -57,6 +57,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate = New System.Windows.Forms.RadioButton()
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.ucrChkRemoveAll = New instat.ucrCheck()
         Me.ucrInputReplaceNaBy = New instat.ucrInputTextBox()
         Me.ucrChkReplaceBy = New instat.ucrCheck()
         Me.ucrChkReplaceAll = New instat.ucrCheck()
@@ -77,7 +78,6 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
-        Me.ucrChkRemoveAll = New instat.ucrCheck()
         Me.grpModifiers.SuspendLayout()
         Me.grpDetectOptions.SuspendLayout()
         Me.grpFindOptions.SuspendLayout()
@@ -324,6 +324,15 @@ Partial Class dlgStringHandling
         Me.rdoCount.Text = "Count"
         Me.rdoCount.UseVisualStyleBackColor = True
         '
+        'ucrChkRemoveAll
+        '
+        Me.ucrChkRemoveAll.AutoSize = True
+        Me.ucrChkRemoveAll.Checked = False
+        Me.ucrChkRemoveAll.Location = New System.Drawing.Point(244, 151)
+        Me.ucrChkRemoveAll.Name = "ucrChkRemoveAll"
+        Me.ucrChkRemoveAll.Size = New System.Drawing.Size(123, 23)
+        Me.ucrChkRemoveAll.TabIndex = 43
+        '
         'ucrInputReplaceNaBy
         '
         Me.ucrInputReplaceNaBy.AddQuotesIfUnrecognised = True
@@ -515,15 +524,6 @@ Partial Class dlgStringHandling
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(409, 46)
         Me.ucrPnlStringHandling.TabIndex = 0
-        '
-        'ucrChkRemoveAll
-        '
-        Me.ucrChkRemoveAll.AutoSize = True
-        Me.ucrChkRemoveAll.Checked = False
-        Me.ucrChkRemoveAll.Location = New System.Drawing.Point(244, 151)
-        Me.ucrChkRemoveAll.Name = "ucrChkRemoveAll"
-        Me.ucrChkRemoveAll.Size = New System.Drawing.Size(123, 23)
-        Me.ucrChkRemoveAll.TabIndex = 43
         '
         'dlgStringHandling
         '

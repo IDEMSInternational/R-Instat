@@ -147,8 +147,8 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddToLinkedControls(ucrChkReplaceBy, {rdoReplaceNA}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkRemoveAll, {rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFindOptions.AddToLinkedControls(ucrChkAll, {rdoExtract, rdoLocate, rdoMatch}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
         ucrPnlFindOptions.SetLinkedDisplayControl(grpFindOptions)
+        ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -255,6 +255,7 @@ Public Class dlgStringHandling
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsCountFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("string", 0), iAdditionalPairNo:=3)
@@ -304,8 +305,8 @@ Public Class dlgStringHandling
         ucrChkNegate.SetRCode(clsDetectFunction, bReset)
         ucrChkReplaceBy.SetRCode(clsReplaceNaFunction, bReset)
         ucrInputReplaceNaBy.SetRCode(clsReplaceNaFunction, bReset)
-        ucrPnlDetectOptions.SetRCode(clsDetectDummyFunction, bReset)
         ucrPnlFindOptions.SetRCode(clsFindDummyFunction, bReset)
+        ucrPnlDetectOptions.SetRCode(clsDetectDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -371,13 +372,10 @@ Public Class dlgStringHandling
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkReplaceAll.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrInputReplaceNaBy.ControlValueChanged
         If rdoDetect.Checked Then
             If rdoDetects.Checked Then
-                clsDetectDummyFunction.AddParameter("checked", "str_detect", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
             ElseIf rdoStarts.Checked Then
-                clsDetectDummyFunction.AddParameter("checked", "str_starts", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsStartsFunction)
             ElseIf rdoEnds.Checked Then
-                clsDetectDummyFunction.AddParameter("checked", "str_ends", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
             End If
             ucrSaveStringHandling.SetPrefix("detect")
@@ -439,6 +437,16 @@ Public Class dlgStringHandling
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
         ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
+    End Sub
+
+    Private Sub ucrPnlDetectOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlDetectOptions.ControlContentsChanged
+        If rdoDetects.Checked Then
+            clsDetectDummyFunction.AddParameter("checked", "str_detect", iPosition:=0)
+        ElseIf rdoStarts.Checked Then
+            clsDetectDummyFunction.AddParameter("checked", "str_starts", iPosition:=0)
+        ElseIf rdoEnds.Checked Then
+            clsDetectDummyFunction.AddParameter("checked", "str_ends", iPosition:=0)
+        End If
     End Sub
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrInputBoundary.ControlValueChanged, ucrChkBoundary.ControlValueChanged, ucrInputPattern.ControlValueChanged
