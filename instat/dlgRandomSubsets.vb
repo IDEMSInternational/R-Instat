@@ -75,15 +75,18 @@ Public Class dlgRandomSubsets
         clsReplicate = New RFunction
         clsDataFrame = New RFunction
 
+
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataFrame.Reset()
         NewDefaultName()
         ReplaceParameters()
 
         'sample function
-        clsSample.SetRCommand("sample")
+        clsSample.SetPackageName("dplyr")
+        clsSample.SetRCommand("sample_n")
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
         clsSample.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
+
 
         'setseed fuction
         clsSetSeed.SetRCommand("set.seed")
@@ -91,7 +94,7 @@ Public Class dlgRandomSubsets
 
         'replicate func setting
         clsReplicate.SetPackageName("purrr")
-        clsReplicate.SetRCommand("replicate")
+        clsReplicate.SetRCommand("rerun")
         clsReplicate.AddParameter(".n", 1)
         clsReplicate.AddParameter("expr", clsRFunctionParameter:=clsSample)
 
