@@ -38,6 +38,7 @@ Partial Class dlgTransformClimatic
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTransformClimatic))
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -77,9 +78,9 @@ Partial Class dlgTransformClimatic
         Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.lblTMin = New System.Windows.Forms.Label()
         Me.grpDegree = New System.Windows.Forms.GroupBox()
+        Me.ucrNudLimit = New instat.ucrNud()
         Me.ucrNudMgdd = New instat.ucrNud()
         Me.lblBaselineMgdd = New System.Windows.Forms.Label()
-        Me.ucrInputLimit = New instat.ucrInputTextBox()
         Me.lblLimit = New System.Windows.Forms.Label()
         Me.rdoModifiedGDD = New System.Windows.Forms.RadioButton()
         Me.lblBaselineGDD = New System.Windows.Forms.Label()
@@ -108,6 +109,11 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrChkUseMaxMin = New instat.ucrCheck()
+        Me.ttRdoRange = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttRdoTMean = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttRdoHdd = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttRdoGdd = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ttRdoMgdd = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -410,9 +416,9 @@ Partial Class dlgTransformClimatic
         '
         'grpDegree
         '
+        Me.grpDegree.Controls.Add(Me.ucrNudLimit)
         Me.grpDegree.Controls.Add(Me.ucrNudMgdd)
         Me.grpDegree.Controls.Add(Me.lblBaselineMgdd)
-        Me.grpDegree.Controls.Add(Me.ucrInputLimit)
         Me.grpDegree.Controls.Add(Me.lblLimit)
         Me.grpDegree.Controls.Add(Me.rdoModifiedGDD)
         Me.grpDegree.Controls.Add(Me.lblBaselineGDD)
@@ -427,6 +433,16 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.grpDegree, "grpDegree")
         Me.grpDegree.Name = "grpDegree"
         Me.grpDegree.TabStop = False
+        '
+        'ucrNudLimit
+        '
+        resources.ApplyResources(Me.ucrNudLimit, "ucrNudLimit")
+        Me.ucrNudLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLimit.Name = "ucrNudLimit"
+        Me.ucrNudLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMgdd
         '
@@ -443,14 +459,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.lblBaselineMgdd, "lblBaselineMgdd")
         Me.lblBaselineMgdd.Name = "lblBaselineMgdd"
         Me.lblBaselineMgdd.Tag = "Over"
-        '
-        'ucrInputLimit
-        '
-        Me.ucrInputLimit.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputLimit, "ucrInputLimit")
-        Me.ucrInputLimit.IsMultiline = False
-        Me.ucrInputLimit.IsReadOnly = False
-        Me.ucrInputLimit.Name = "ucrInputLimit"
         '
         'lblLimit
         '
@@ -770,10 +778,15 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblBaselineHDD As Label
     Friend WithEvents ucrNudGDD As ucrNud
     Friend WithEvents ucrNudHDD As ucrNud
-    Friend WithEvents ucrInputLimit As ucrInputTextBox
     Friend WithEvents lblLimit As Label
     Friend WithEvents ucrChkOptions As ucrCheck
     Friend WithEvents ucrInputSpellLower As ucrInputComboBox
     Friend WithEvents ucrNudMgdd As ucrNud
     Friend WithEvents lblBaselineMgdd As Label
+    Friend WithEvents ucrNudLimit As ucrNud
+    Friend WithEvents ttRdoRange As ToolTip
+    Friend WithEvents ttRdoTMean As ToolTip
+    Friend WithEvents ttRdoHdd As ToolTip
+    Friend WithEvents ttRdoGdd As ToolTip
+    Friend WithEvents ttRdoMgdd As ToolTip
 End Class

@@ -873,6 +873,30 @@
   <data name="&gt;&gt;ucrReceiverTMin.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="ucrNudLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrNudLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>177, 122</value>
+  </data>
+  <data name="ucrNudLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLimit.Name" xml:space="preserve">
+    <value>ucrNudLimit</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLimit.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLimit.Parent" xml:space="preserve">
+    <value>grpDegree</value>
+  </data>
+  <data name="&gt;&gt;ucrNudLimit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrNudMgdd.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -895,7 +919,7 @@
     <value>grpDegree</value>
   </data>
   <data name="&gt;&gt;ucrNudMgdd.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblBaselineMgdd.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -925,30 +949,6 @@
     <value>grpDegree</value>
   </data>
   <data name="&gt;&gt;lblBaselineMgdd.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputLimit.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrInputLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 121</value>
-  </data>
-  <data name="ucrInputLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 21</value>
-  </data>
-  <data name="ucrInputLimit.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLimit.Name" xml:space="preserve">
-    <value>ucrInputLimit</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLimit.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLimit.Parent" xml:space="preserve">
-    <value>grpDegree</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLimit.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="lblLimit.AutoSize" type="System.Boolean, mscorlib">
@@ -1514,6 +1514,36 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Transform</value>
+  </data>
+  <data name="&gt;&gt;ttRdoRange.Name" xml:space="preserve">
+    <value>ttRdoRange</value>
+  </data>
+  <data name="&gt;&gt;ttRdoRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttRdoTMean.Name" xml:space="preserve">
+    <value>ttRdoTMean</value>
+  </data>
+  <data name="&gt;&gt;ttRdoTMean.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttRdoHdd.Name" xml:space="preserve">
+    <value>ttRdoHdd</value>
+  </data>
+  <data name="&gt;&gt;ttRdoHdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttRdoGdd.Name" xml:space="preserve">
+    <value>ttRdoGdd</value>
+  </data>
+  <data name="&gt;&gt;ttRdoGdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttRdoMgdd.Name" xml:space="preserve">
+    <value>ttRdoMgdd</value>
+  </data>
+  <data name="&gt;&gt;ttRdoMgdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgTransformClimatic</value>
@@ -2115,4 +2145,19 @@
   <data name="&gt;&gt;grpTransform.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
+  <metadata name="ttRdoRange.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ttRdoTMean.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>133, 17</value>
+  </metadata>
+  <metadata name="ttRdoHdd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>252, 17</value>
+  </metadata>
+  <metadata name="ttRdoGdd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>357, 17</value>
+  </metadata>
+  <metadata name="ttRdoMgdd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>462, 17</value>
+  </metadata>
 </root>
