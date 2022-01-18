@@ -122,7 +122,7 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
-    Private Sub ucrMultipleNumericRecode_NameChanged() Handles ucrMultipleNumericRecode.NameChanged
+    Private Sub ucrMultipleNumericRecode_NameChanged()
         'Warning: Apparently the event is raised twice, such that the message is sent twice...
         'This sub is sending validation errors to the user for him/her to fill in the settingsof the dialogue in an appropriate way.
         'In case he/she enters only one number in ucrMultipleNumericRecode, this number has to be greater than one, as it is the number of intervals for cut.
@@ -135,11 +135,11 @@ Public Class dlgRecodeNumeric
         ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList)
     End Sub
 
-    Private Sub ucrMultipleLabels_NameChanged() Handles ucrInputMultipleLabels.NameChanged
+    Private Sub ucrMultipleLabels_NameChanged()
         AddLabelsParameter()
     End Sub
 
-    Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Validated, ucrInputMultipleLabels.Validated
+    Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs)
         ValidateBreakPointLabelCount()
     End Sub
 
@@ -163,22 +163,24 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrInputMultipleLabels.ControlContentsChanged, ucrReceiverRecode.ControlContentsChanged,
-            ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkAddLabels.Checked Then
             AddLabelsParameter()
         Else
             clsCutFunction.RemoveParameterByName("labels")
         End If
+    End Sub
+
+    Private Sub grpClosedOn_Enter(sender As Object, e As EventArgs)
     End Sub
 End Class
