@@ -748,7 +748,7 @@ Partial Class dlgStringHandling
         Me.MinimizeBox = False
         Me.Name = "dlgStringHandling"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "String Handling"
+        Me.Text = "Find/Replace"
         Me.grpRegex.ResumeLayout(False)
         Me.grpModifiers.ResumeLayout(False)
         Me.grpModifiers.PerformLayout()
