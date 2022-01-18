@@ -47,7 +47,6 @@ Partial Class ucrFilePath
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = True
         Me.ucrInputFilePath.Location = New System.Drawing.Point(136, 3)
@@ -69,7 +68,6 @@ Partial Class ucrFilePath
         '
         'lblName
         '
-        Me.lblName.AutoSize = True
         Me.lblName.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblName.Location = New System.Drawing.Point(2, 6)
         Me.lblName.Name = "lblName"
@@ -81,14 +79,12 @@ Partial Class ucrFilePath
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblName)
         Me.Name = "ucrFilePath"
         Me.Size = New System.Drawing.Size(392, 34)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

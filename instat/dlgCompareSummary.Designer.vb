@@ -129,6 +129,7 @@ Partial Class dlgCompareSummary
         '
         'ucrReceiverSatellite
         '
+        Me.ucrReceiverSatellite.AutoSize = True
         Me.ucrReceiverSatellite.frmParent = Me
         Me.ucrReceiverSatellite.Location = New System.Drawing.Point(290, 132)
         Me.ucrReceiverSatellite.Margin = New System.Windows.Forms.Padding(0)
@@ -141,30 +142,34 @@ Partial Class dlgCompareSummary
         '
         'ucrChkStoreResults
         '
+        Me.ucrChkStoreResults.AutoSize = True
         Me.ucrChkStoreResults.Checked = False
         Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(273, 20)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(273, 23)
         Me.ucrChkStoreResults.TabIndex = 11
         '
         'ucrChkPrintOutput
         '
+        Me.ucrChkPrintOutput.AutoSize = True
         Me.ucrChkPrintOutput.Checked = False
         Me.ucrChkPrintOutput.Location = New System.Drawing.Point(10, 281)
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(273, 20)
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(273, 23)
         Me.ucrChkPrintOutput.TabIndex = 12
         '
         'ucrChkIgnoreMissing
         '
+        Me.ucrChkIgnoreMissing.AutoSize = True
         Me.ucrChkIgnoreMissing.Checked = False
         Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 307)
         Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
-        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(274, 20)
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(274, 23)
         Me.ucrChkIgnoreMissing.TabIndex = 13
         '
         'ucrPnlObservationType
         '
+        Me.ucrPnlObservationType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlObservationType.Location = New System.Drawing.Point(63, 4)
         Me.ucrPnlObservationType.Name = "ucrPnlObservationType"
         Me.ucrPnlObservationType.Size = New System.Drawing.Size(300, 50)
@@ -172,6 +177,7 @@ Partial Class dlgCompareSummary
         '
         'ucrReceiverMultipleFactors
         '
+        Me.ucrReceiverMultipleFactors.AutoSize = True
         Me.ucrReceiverMultipleFactors.frmParent = Me
         Me.ucrReceiverMultipleFactors.Location = New System.Drawing.Point(290, 253)
         Me.ucrReceiverMultipleFactors.Margin = New System.Windows.Forms.Padding(0)
@@ -184,6 +190,7 @@ Partial Class dlgCompareSummary
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(290, 87)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -196,27 +203,29 @@ Partial Class dlgCompareSummary
         '
         'ucrSelectorVerificationSummary
         '
+        Me.ucrSelectorVerificationSummary.AutoSize = True
         Me.ucrSelectorVerificationSummary.bDropUnusedFilterLevels = False
         Me.ucrSelectorVerificationSummary.bShowHiddenColumns = False
         Me.ucrSelectorVerificationSummary.bUseCurrentFilter = True
         Me.ucrSelectorVerificationSummary.Location = New System.Drawing.Point(10, 57)
         Me.ucrSelectorVerificationSummary.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVerificationSummary.Name = "ucrSelectorVerificationSummary"
-        Me.ucrSelectorVerificationSummary.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVerificationSummary.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorVerificationSummary.TabIndex = 4
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 385)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
         '
         'dlgCompareSummary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 441)
         Me.Controls.Add(Me.ucrReceiverSatellite)

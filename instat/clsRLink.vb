@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
@@ -1296,16 +1297,22 @@ Public Class RLink
                     thrDelay.IsBackground = True
                     thrWaitDisplay = New Threading.Thread(Sub()
                                                               If bCurrentShowWaiting Then
-                                                                  frmSetupLoading.Show()
+                                                                  If Not RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                                                                      frmSetupLoading.Show()
+                                                                  End If
                                                               End If
-                                                              While thrRScript.IsAlive
+                                                                  While thrRScript.IsAlive
                                                                   If bErrorMessageOpen Then
-                                                                      frmSetupLoading.Close()
+                                                                      If Not RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                                                                          frmSetupLoading.Close()
+                                                                      End If
                                                                   End If
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
-                                                              frmSetupLoading.Close()
+                                                              If Not RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                                                                  frmSetupLoading.Close()
+                                                              End If
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
                     thrWaitDisplay.IsBackground = True
