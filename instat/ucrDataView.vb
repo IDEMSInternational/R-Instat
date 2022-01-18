@@ -217,8 +217,12 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Function GetWorkSheetCount() As Integer
+        Return _grid.GetWorksheetCount
+    End Function
+
     Private Sub RefreshDisplayInformation()
-        If _grid.GetWorksheetCount <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = _grid.CurrentWorksheet.Name
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
             SetDisplayLabels()
@@ -279,7 +283,7 @@ Public Class ucrDataView
     Private Sub SetDisplayLabels()
         lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
-        If GetCurrentDataFrameFocus().clsFilter.bApplied Then
+        If GetCurrentDataFrameFocus().clsFilter.bFilterApplied Then
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilter.iFilteredRowCount &
                                  " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilter.strName
         Else
@@ -506,7 +510,8 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
@@ -520,7 +525,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
-        HideSheet.Enabled = (_grid.GetWorksheetCount > 1)
+        HideSheet.Enabled = (GetWorkSheetCount() > 1)
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
@@ -702,12 +707,14 @@ Public Class ucrDataView
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
-        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bApplied
+        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
+        mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected()
-        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilter.bApplied
+        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
+        mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
@@ -793,6 +800,41 @@ Public Class ucrDataView
         RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
+    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextColumnSelection.Click
+        LoadColumnSelectionDialog()
+    End Sub
+
+    Private Sub mnuColumnContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextRemoveCurrentColumnSelection.Click
+        RemoveCurrentColumnSelection()
+    End Sub
+
+    Private Sub mnuRowContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuRowContextColumnSelection.Click
+        LoadColumnSelectionDialog()
+    End Sub
+
+    Private Sub mnuRowContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuRowContextRemoveCurrentColumnSelection.Click
+        RemoveCurrentColumnSelection()
+    End Sub
+
+    Private Sub mnuCellContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuCellContextColumnSelection.Click
+        LoadColumnSelectionDialog()
+    End Sub
+
+    Private Sub mnuCellContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuCellContextRemoveCurrentColumnSelection.Click
+        RemoveCurrentColumnSelection()
+    End Sub
+
+    Private Sub LoadColumnSelectionDialog()
+        dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub RemoveCurrentColumnSelection()
+        StartWait()
+        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
+        EndWait()
+    End Sub                      
+                          
     Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
     End Sub

@@ -137,7 +137,7 @@ Partial Class dlgStringHandling
         Me.rdoCount.Size = New System.Drawing.Size(86, 41)
         Me.rdoCount.TabIndex = 1
         Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = " Word Count"
+        Me.rdoCount.Text = "Count"
         Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCount.UseVisualStyleBackColor = True
         '
@@ -748,7 +748,7 @@ Partial Class dlgStringHandling
         Me.MinimizeBox = False
         Me.Name = "dlgStringHandling"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "String Handling"
+        Me.Text = "Find/Replace"
         Me.grpRegex.ResumeLayout(False)
         Me.grpModifiers.ResumeLayout(False)
         Me.grpModifiers.PerformLayout()
