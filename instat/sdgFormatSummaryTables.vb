@@ -65,6 +65,7 @@ Public Class sdgFormatSummaryTables
 
         ucrNudTitleSize.SetParameter(New RParameter("size", iNewPosition:=0, bNewIncludeArgumentName:=False))
         ucrNudTitleSize.Increment = 1
+        ucrNudTitleSize.SetMinMax(1)
         ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
 
         ucrChkAddTitleSubtitle.SetText("Add title/subtitle")

@@ -414,9 +414,9 @@ Partial Class sdgFormatSummaryTables
         Me.lblTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTitleSize.Location = New System.Drawing.Point(218, 89)
         Me.lblTitleSize.Name = "lblTitleSize"
-        Me.lblTitleSize.Size = New System.Drawing.Size(50, 13)
+        Me.lblTitleSize.Size = New System.Drawing.Size(53, 13)
         Me.lblTitleSize.TabIndex = 9
-        Me.lblTitleSize.Text = "Title Size"
+        Me.lblTitleSize.Text = "Title Size:"
         '
         'lblTitleFont
         '
@@ -424,9 +424,9 @@ Partial Class sdgFormatSummaryTables
         Me.lblTitleFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTitleFont.Location = New System.Drawing.Point(14, 85)
         Me.lblTitleFont.Name = "lblTitleFont"
-        Me.lblTitleFont.Size = New System.Drawing.Size(51, 13)
+        Me.lblTitleFont.Size = New System.Drawing.Size(54, 13)
         Me.lblTitleFont.TabIndex = 8
-        Me.lblTitleFont.Text = "Title Font"
+        Me.lblTitleFont.Text = "Title Font:"
         '
         'ucrInputSubtitleFootnote
         '
