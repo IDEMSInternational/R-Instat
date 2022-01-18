@@ -41,6 +41,9 @@ Partial Class dlgRandomSample
         Me.components = New System.ComponentModel.Container()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
+        Me.ttRngKind = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrInputRngKind = New instat.ucrInputComboBox()
+        Me.ucrChkRngKind = New instat.ucrCheck()
         Me.ucrSaveRandomSample = New instat.ucrSave()
         Me.ucrNudNumberOfSamples = New instat.ucrNud()
         Me.ucrNudSeed = New instat.ucrNud()
@@ -49,15 +52,12 @@ Partial Class dlgRandomSample
         Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ttRngKind = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkRngKind = New instat.ucrCheck()
-        Me.ucrInputRngKind = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSampleSize
         '
         Me.lblSampleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSampleSize.Location = New System.Drawing.Point(276, 155)
+        Me.lblSampleSize.Location = New System.Drawing.Point(259, 155)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(118, 13)
         Me.lblSampleSize.TabIndex = 6
@@ -67,12 +67,32 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(276, 128)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(259, 128)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(118, 13)
         Me.lblNumberofSamples.TabIndex = 4
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
         Me.lblNumberofSamples.Text = "Number of Samples:"
+        '
+        'ucrInputRngKind
+        '
+        Me.ucrInputRngKind.AddQuotesIfUnrecognised = True
+        Me.ucrInputRngKind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRngKind.GetSetSelectedIndex = -1
+        Me.ucrInputRngKind.IsReadOnly = False
+        Me.ucrInputRngKind.Location = New System.Drawing.Point(359, 74)
+        Me.ucrInputRngKind.Name = "ucrInputRngKind"
+        Me.ucrInputRngKind.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputRngKind.TabIndex = 11
+        '
+        'ucrChkRngKind
+        '
+        Me.ucrChkRngKind.AutoSize = True
+        Me.ucrChkRngKind.Checked = False
+        Me.ucrChkRngKind.Location = New System.Drawing.Point(262, 75)
+        Me.ucrChkRngKind.Name = "ucrChkRngKind"
+        Me.ucrChkRngKind.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRngKind.TabIndex = 10
         '
         'ucrSaveRandomSample
         '
@@ -88,7 +108,7 @@ Partial Class dlgRandomSample
         Me.ucrNudNumberOfSamples.AutoSize = True
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(400, 126)
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
@@ -101,7 +121,7 @@ Partial Class dlgRandomSample
         Me.ucrNudSeed.AutoSize = True
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(400, 100)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(359, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
@@ -113,7 +133,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrChkSetSeed.AutoSize = True
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(276, 101)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(262, 101)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(118, 23)
         Me.ucrChkSetSeed.TabIndex = 2
@@ -121,7 +141,7 @@ Partial Class dlgRandomSample
         'ucrSampleSize
         '
         Me.ucrSampleSize.AutoSize = True
-        Me.ucrSampleSize.Location = New System.Drawing.Point(400, 152)
+        Me.ucrSampleSize.Location = New System.Drawing.Point(359, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
@@ -140,6 +160,7 @@ Partial Class dlgRandomSample
         '
         'ucrDistWithParameters
         '
+        Me.ucrDistWithParameters.AutoSize = True
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
         Me.ucrDistWithParameters.Size = New System.Drawing.Size(1037, 172)
@@ -153,25 +174,6 @@ Partial Class dlgRandomSample
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
-        '
-        'ucrChkRngKind
-        '
-        Me.ucrChkRngKind.Checked = False
-        Me.ucrChkRngKind.Location = New System.Drawing.Point(276, 77)
-        Me.ucrChkRngKind.Name = "ucrChkRngKind"
-        Me.ucrChkRngKind.Size = New System.Drawing.Size(118, 23)
-        Me.ucrChkRngKind.TabIndex = 10
-        '
-        'ucrInputRngKind
-        '
-        Me.ucrInputRngKind.AddQuotesIfUnrecognised = True
-        Me.ucrInputRngKind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputRngKind.GetSetSelectedIndex = -1
-        Me.ucrInputRngKind.IsReadOnly = False
-        Me.ucrInputRngKind.Location = New System.Drawing.Point(355, 73)
-        Me.ucrInputRngKind.Name = "ucrInputRngKind"
-        Me.ucrInputRngKind.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputRngKind.TabIndex = 11
         '
         'dlgRandomSample
         '

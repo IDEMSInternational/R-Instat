@@ -58,12 +58,13 @@ Public Class dlgRandomSample
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrChkRngKind.SetText("RNGKind")
+        ucrChkRngKind.SetText("RNG Kind")
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
         ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
 
         ucrInputRngKind.SetParameter(New RParameter("kind", 0))
+        dctRNGKind.Add("default", Chr(34) & "default" & Chr(34))
         dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
         dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
         dctRNGKind.Add("Marsaglia-Multicarry", Chr(34) & "Marsaglia-Multicarry" & Chr(34))
@@ -72,6 +73,7 @@ Public Class dlgRandomSample
         dctRNGKind.Add("Knuth-TAOCP", Chr(34) & "Knuth-TAOCP" & Chr(34))
         dctRNGKind.Add("L'Ecuyer-CMRG", Chr(34) & "L'Ecuyer-CMRG" & Chr(34))
         ucrInputRngKind.SetItems(dctRNGKind)
+        ucrInputRngKind.SetDropDownStyleAsNonEditable()
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
@@ -116,7 +118,6 @@ Public Class dlgRandomSample
         ucrSaveRandomSample.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrInputRngKind.SetRCode(clsRNGKindFunction, bReset)
-        ucrChkRngKind.SetRCode(clsRNGKindFunction, bReset)
         ucrChkRngKind.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
@@ -186,7 +187,7 @@ Public Class dlgRandomSample
 
     Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
         If ucrChkSetSeed.Checked Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeed, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeed, iPosition:=1)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeed)
         End If
