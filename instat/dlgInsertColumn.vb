@@ -76,7 +76,7 @@ Public Class dlgInsertColumn
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
         ucrInputDefaultValue.SetItems({"NA", 0, "Kisumu", "New Zealand", True, False})
-        ucrInputDefaultValue.AddQuotesIfUnrecognised = False
+        ucrInputDefaultValue.AddQuotesIfUnrecognised = True
         ucrInputDefaultValue.bAllowNonConditionValues = True
 
         ucrPnlInsertColumns.SetParameter(New RParameter("before", 3))
