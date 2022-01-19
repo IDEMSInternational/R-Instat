@@ -197,7 +197,7 @@ Partial Class dlgShowModel
         Me.ucrDistributionAndParameters.AutoSize = True
         Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(241, 101)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
-        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(1037, 147)
+        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(1037, 172)
         Me.ucrDistributionAndParameters.TabIndex = 6
         '
         'ucrSelectorShowModel
@@ -238,7 +238,6 @@ Partial Class dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(500, 372)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.rdoValues)

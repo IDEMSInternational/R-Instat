@@ -38,7 +38,6 @@ Partial Class dlgExportRWorkspace
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRWorkspace))
         Me.lblDataFrames = New System.Windows.Forms.Label()
         Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
         Me.ucrSelectorForDataFrames = New instat.ucrSelectorAddRemove()
@@ -135,22 +134,21 @@ Partial Class dlgExportRWorkspace
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = "Saved R Objects (*.RData)|*.RData"
         Me.ucrFilePath.FilePathDialogTitle = "Export R Workspace"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
         Me.ucrFilePath.Location = New System.Drawing.Point(14, 245)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
-        Me.ucrFilePath.Size = New System.Drawing.Size(2384, 58)
+        Me.ucrFilePath.Size = New System.Drawing.Size(400, 34)
         Me.ucrFilePath.TabIndex = 11
         '
         'dlgExportRWorkspace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 335)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblSelectedDataFrames)
