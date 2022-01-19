@@ -61,10 +61,10 @@ Public Class dlgRandomSample
         ucrChkRngKind.SetText("RNG Kind")
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
         ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
-        ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
+        ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Default")
 
         ucrInputRngKind.SetParameter(New RParameter("kind", 0))
-        dctRNGKind.Add("default", Chr(34) & "default" & Chr(34))
+        dctRNGKind.Add("Default", Chr(34) & "default" & Chr(34))
         dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
         dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
         dctRNGKind.Add("Marsaglia-Multicarry", Chr(34) & "Marsaglia-Multicarry" & Chr(34))
