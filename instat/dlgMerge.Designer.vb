@@ -174,7 +174,7 @@ Partial Class dlgMerge
         Me.Name = "dlgMerge"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Merge"
-        Me.Text = "Merge"
+        Me.Text = "Merge (Join)"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
