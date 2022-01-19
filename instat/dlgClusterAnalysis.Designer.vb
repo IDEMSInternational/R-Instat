@@ -99,14 +99,16 @@ Partial Class dlgClusterAnalysis
         '
         'ucrChkHierarcPlot
         '
+        Me.ucrChkHierarcPlot.AutoSize = True
         Me.ucrChkHierarcPlot.Checked = False
         Me.ucrChkHierarcPlot.Location = New System.Drawing.Point(7, 295)
         Me.ucrChkHierarcPlot.Name = "ucrChkHierarcPlot"
-        Me.ucrChkHierarcPlot.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkHierarcPlot.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkHierarcPlot.TabIndex = 29
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveGraph.Location = New System.Drawing.Point(8, 324)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
@@ -115,14 +117,16 @@ Partial Class dlgClusterAnalysis
         '
         'ucrChkPartitionPlot
         '
+        Me.ucrChkPartitionPlot.AutoSize = True
         Me.ucrChkPartitionPlot.Checked = False
         Me.ucrChkPartitionPlot.Location = New System.Drawing.Point(7, 269)
         Me.ucrChkPartitionPlot.Name = "ucrChkPartitionPlot"
-        Me.ucrChkPartitionPlot.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkPartitionPlot.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkPartitionPlot.TabIndex = 26
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(4, 358)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -131,6 +135,7 @@ Partial Class dlgClusterAnalysis
         'ucrInputMetric
         '
         Me.ucrInputMetric.AddQuotesIfUnrecognised = True
+        Me.ucrInputMetric.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMetric.GetSetSelectedIndex = -1
         Me.ucrInputMetric.IsReadOnly = False
         Me.ucrInputMetric.Location = New System.Drawing.Point(127, 224)
@@ -141,6 +146,7 @@ Partial Class dlgClusterAnalysis
         'ucrInputMethod
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
         Me.ucrInputMethod.Location = New System.Drawing.Point(127, 269)
@@ -150,6 +156,7 @@ Partial Class dlgClusterAnalysis
         '
         'ucrNudPamCluster
         '
+        Me.ucrNudPamCluster.AutoSize = True
         Me.ucrNudPamCluster.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPamCluster.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudPamCluster.Location = New System.Drawing.Point(127, 294)
@@ -162,30 +169,34 @@ Partial Class dlgClusterAnalysis
         '
         'ucrChkMethod
         '
+        Me.ucrChkMethod.AutoSize = True
         Me.ucrChkMethod.Checked = False
         Me.ucrChkMethod.Location = New System.Drawing.Point(7, 269)
         Me.ucrChkMethod.Name = "ucrChkMethod"
-        Me.ucrChkMethod.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkMethod.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkMethod.TabIndex = 20
         '
         'ucrChkStand
         '
+        Me.ucrChkStand.AutoSize = True
         Me.ucrChkStand.Checked = False
         Me.ucrChkStand.Location = New System.Drawing.Point(7, 246)
         Me.ucrChkStand.Name = "ucrChkStand"
-        Me.ucrChkStand.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkStand.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkStand.TabIndex = 19
         '
         'ucrChkMetric
         '
+        Me.ucrChkMetric.AutoSize = True
         Me.ucrChkMetric.Checked = False
         Me.ucrChkMetric.Location = New System.Drawing.Point(7, 223)
         Me.ucrChkMetric.Name = "ucrChkMetric"
-        Me.ucrChkMetric.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkMetric.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkMetric.TabIndex = 18
         '
         'ucrReceiverClusterData
         '
+        Me.ucrReceiverClusterData.AutoSize = True
         Me.ucrReceiverClusterData.frmParent = Me
         Me.ucrReceiverClusterData.Location = New System.Drawing.Point(298, 111)
         Me.ucrReceiverClusterData.Margin = New System.Windows.Forms.Padding(0)
@@ -198,17 +209,19 @@ Partial Class dlgClusterAnalysis
         '
         'ucrSelectorClusterData
         '
+        Me.ucrSelectorClusterData.AutoSize = True
         Me.ucrSelectorClusterData.bDropUnusedFilterLevels = False
         Me.ucrSelectorClusterData.bShowHiddenColumns = False
         Me.ucrSelectorClusterData.bUseCurrentFilter = True
         Me.ucrSelectorClusterData.Location = New System.Drawing.Point(7, 41)
         Me.ucrSelectorClusterData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClusterData.Name = "ucrSelectorClusterData"
-        Me.ucrSelectorClusterData.Size = New System.Drawing.Size(212, 182)
+        Me.ucrSelectorClusterData.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClusterData.TabIndex = 0
         '
         'ucrPnlClusterData
         '
+        Me.ucrPnlClusterData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlClusterData.Location = New System.Drawing.Point(127, -2)
         Me.ucrPnlClusterData.Name = "ucrPnlClusterData"
         Me.ucrPnlClusterData.Size = New System.Drawing.Size(236, 40)
@@ -216,6 +229,7 @@ Partial Class dlgClusterAnalysis
         '
         'ucrPnlSelectData
         '
+        Me.ucrPnlSelectData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSelectData.Location = New System.Drawing.Point(243, 55)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(183, 49)
@@ -223,18 +237,19 @@ Partial Class dlgClusterAnalysis
         '
         'ucrChkCluster
         '
+        Me.ucrChkCluster.AutoSize = True
         Me.ucrChkCluster.Checked = False
         Me.ucrChkCluster.Location = New System.Drawing.Point(8, 295)
         Me.ucrChkCluster.Name = "ucrChkCluster"
-        Me.ucrChkCluster.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkCluster.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkCluster.TabIndex = 21
         '
         'dlgClusterAnalysis
         '
-
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(455, 426)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(424, 417)
         Me.Controls.Add(Me.ucrChkHierarcPlot)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkPartitionPlot)
@@ -254,11 +269,6 @@ Partial Class dlgClusterAnalysis
         Me.Controls.Add(Me.ucrPnlClusterData)
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrChkCluster)
-
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(613, 450)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
