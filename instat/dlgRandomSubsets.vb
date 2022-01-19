@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsSampleNFunctionDataframeFunction, clsSetSeed, clsSampleFunction, clsRerunFunction As New RFunction
+    Private clsDataFrameFunction, clsSampleNFunctionDataframeFunction, clsSetSeedFunction, clsSampleFunction, clsRerunFunction As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -71,7 +71,7 @@ Public Class dlgRandomSubsets
 
     Private Sub SetDefaults()
         clsSampleFunction = New RFunction
-        clsSetSeed = New RFunction
+        clsSetSeedFunction = New RFunction
         clsRerunFunction = New RFunction
         clsDataFrameFunction = New RFunction
         clsSampleNFunctionDataframeFunction = New RFunction
@@ -91,8 +91,8 @@ Public Class dlgRandomSubsets
 
 
         'setseed fuction
-        clsSetSeed.SetRCommand("set.seed")
-        clsSetSeed.AddParameter("seed", 1)
+        clsSetSeedFunction.SetRCommand("set.seed")
+        clsSetSeedFunction.AddParameter("seed", 1)
 
         'rerun func setting
         clsRerunFunction.SetPackageName("purrr")
@@ -118,8 +118,8 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetRCode(clsRerunFunction, bReset)
         ucrNewDataFrame.SetRCode(clsDataFrameFunction, bReset)
         ucrNudSampleSize.SetRCode(clsSampleFunction, bReset)
-        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeedFunction, bReset)
+        ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -140,7 +140,7 @@ Public Class dlgRandomSubsets
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
+            frmMain.clsRLink.RunScript(clsSetSeedFunction.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
         End If
     End Sub
 
