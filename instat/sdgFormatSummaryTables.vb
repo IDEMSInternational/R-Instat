@@ -22,8 +22,8 @@ Public Class sdgFormatSummaryTables
         clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
         clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
-    'The dummy Function is used by input controls that add parameter manually,
-    'when openning the subdialogue from multiple dialogues
+    'The dummy Function is used by input controls that add the parameter manually,
+    'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsJoiningOperator, clsTabFootnoteOperator As New ROperator
     Private bControlsInitialised As Boolean = False
