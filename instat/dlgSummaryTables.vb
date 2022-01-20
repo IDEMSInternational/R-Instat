@@ -434,7 +434,7 @@ Public Class dlgSummaryTables
 
         If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
             iNumberOfColumns = ucrNudColumnFactors.GetText()
-            For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
+            For Each strColumn As String In ucrReceiverFactors.GetVariableNamesAsList
                 Dim clsHeaderFunction As New RFunction
                 clsHeaderFunction.SetPackageName("mmtable2")
                 clsHeaderFunction.SetRCommand(If(iColumn < iNumberOfColumns, "header_top_left", "header_left_top"))
