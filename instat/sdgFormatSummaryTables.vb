@@ -117,7 +117,7 @@ Public Class sdgFormatSummaryTables
         ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
         ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
         'Header
-        ucrChkAddHeader.SetText("Add Header")
+        ucrChkAddHeader.SetText("Add header")
         ucrChkAddHeader.AddToLinkedControls({ucrChkStyleText, ucrPnlHeader}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
         ucrChkAddHeader.AddParameterPresentCondition(True, "header")
