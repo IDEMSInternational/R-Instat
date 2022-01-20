@@ -715,8 +715,7 @@ Public Class dlgTransformClimatic
         End Select
     End Sub
 
-    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlDegree.ControlValueChanged, ucrReceiverTMax.ControlValueChanged,
-        ucrReceiverTMin.ControlValueChanged, ucrReceiverTMean.ControlValueChanged
+    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlDegree.ControlValueChanged
         If rdoCumulative.Checked Then
             CumulativeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
@@ -1046,5 +1045,11 @@ Public Class dlgTransformClimatic
         AddRemoveMeanOperator()
         SetAsReceiver()
         ChangeFunctions()
+    End Sub
+
+    Private Sub ucrReceiverTMax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTMax.ControlValueChanged, ucrReceiverTMean.ControlValueChanged, ucrReceiverTMin.ControlValueChanged
+        ChangeFunctions()
+        AddRemoveMeanOperator()
+        AddCalculate()
     End Sub
 End Class
