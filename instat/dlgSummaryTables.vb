@@ -435,20 +435,12 @@ Public Class dlgSummaryTables
         If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
             iNumberOfColumns = ucrNudColumnFactors.GetText()
             For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
-                If (iColumn + 1) <= iNumberOfColumns Then
-                    Dim clsHeaderLeftFunction As New RFunction
-                    clsHeaderLeftFunction.SetPackageName("mmtable2")
-                    clsHeaderLeftFunction.SetRCommand("header_top_left")
-                    clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
-                    clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
-                Else
-                    Dim clsHeaderTopFunction As New RFunction
-                    clsHeaderTopFunction.SetPackageName("mmtable2")
-                    clsHeaderTopFunction.SetRCommand("header_left_top")
-                    clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
-                    clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
-                End If
-                iColumn = iColumn + 1
+                Dim clsHeaderFunction As New RFunction
+                clsHeaderFunction.SetPackageName("mmtable2")
+                clsHeaderFunction.SetRCommand(If(iColumn < iNumberOfColumns, "header_top_left", "header_left_top"))
+                clsHeaderFunction.AddParameter("variable", strColumn, iPosition:=0)
+                clsColumnOperator.AddParameter(strColumn, clsRFunctionParameter:=clsHeaderFunction, iPosition:=iColumn)
+                iColumn += 1
             Next
             clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
         End If
