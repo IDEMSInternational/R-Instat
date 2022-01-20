@@ -123,7 +123,7 @@ Public Class sdgFormatSummaryTables
         ucrChkAddHeader.AddParameterPresentCondition(True, "header")
         ucrChkAddHeader.AddParameterPresentCondition(False, "header", False)
 
-        ucrChkAddTableFormat.SetText("Add Table format")
+        ucrChkAddTableFormat.SetText("Add table format")
         ucrChkAddTableFormat.AddToLinkedControls({ucrInputTableLayout, ucrInputTableAlign, ucrInputTableBackgroundColor, ucrInputTableFontWeight, ucrInputTableFontColor,
                                                   ucrNudTableWidth, ucrNudTableFontSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTableFormat.AddParameterPresentCondition(True, "table_format")
