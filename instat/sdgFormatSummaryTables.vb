@@ -31,6 +31,7 @@ Public Class sdgFormatSummaryTables
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
     Public Sub InitialiseControls()
         bControlsInitialised = False
         Dim dctTextSize, dctTextAlign, dctTextValign, dctTextStyle, dctTextWeight, dctTextDecorate, dctTextTransform,
