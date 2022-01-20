@@ -135,7 +135,7 @@ Public Class sdgFormatSummaryTables
         ucrPnlHeader.AddRadioButton(rdoAllRows, Chr(34) & "all_rows" & Chr(34))
         ucrPnlHeader.SetLinkedDisplayControl(lblHeader)
 
-        ucrChkStyleText.SetText("Add Text style")
+        ucrChkStyleText.SetText("Add text style")
         ucrChkStyleText.AddToLinkedControls({ucrInputStyleTextColor, ucrInputStyleTextFont, ucrInputStyleTextSize, ucrInputStyleTextAlign,
                                              ucrInputStyleTextValign, ucrInputStyleTextStyle, ucrInputStyleTextWeight, ucrInputStyleTextStretch,
                                              ucrInputStyleTextDecorate, ucrInputStyleTextTransform, ucrInputStyleTextWhitespace, ucrNudStyleTextIndent},
