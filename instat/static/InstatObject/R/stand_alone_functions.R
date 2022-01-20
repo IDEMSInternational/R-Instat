@@ -2516,7 +2516,7 @@ get_quarter_label <-   function(quarter, start_month){
   if (start_month == 1) {
     mabb <- substr(month.abb, 1, 1)
   } else {
-    mabb <- rep(substr(month.abb, 1, 1), times = 2)[start_month:(12 + start_month)]
+    mabb <- rep(substr(month.abb, 1, 1), times = 2)[start_month:(11 + start_month)]
   }
   qtr <- ifelse(quarter == 1, paste(mabb[1:3], collapse = ""), ifelse(quarter == 2, paste(mabb[4:6], collapse = ""), ifelse(quarter == 3, paste(mabb[7:9], collapse = ""), paste(mabb[10:12], collapse = ""))))
   return(factor(x = qtr, levels = unique(qtr)))
