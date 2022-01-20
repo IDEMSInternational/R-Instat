@@ -83,14 +83,14 @@ Public Class sdgFormatSummaryTables
         ucrInputFootnoteRowLocation.SetValidationTypeAsNumericList()
         ucrInputFootnoteRowLocation.SetLinkedDisplayControl(grpLocation)
 
-        ucrInputCellFootnote.SetParameter(New RParameter("cellFootnote", iNewPosition:=4))
+        ucrInputCellFootnote.SetParameter(New RParameter("cell_footnote", iNewPosition:=4))
         ucrInputCellFootnote.SetLinkedDisplayControl(lblFootnote)
 
         ucrChkAddFootnote.SetText("Add footnote")
         ucrChkAddFootnote.AddToLinkedControls({ucrInputCellFootnote, ucrInputFootnoteColumnLocation, ucrInputFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddFootnote.AddParameterPresentCondition(True, "cellfootnote")
-        ucrChkAddFootnote.AddParameterPresentCondition(False, "cellfootnote", False)
+        ucrChkAddFootnote.AddParameterPresentCondition(True, "cell_footnote")
+        ucrChkAddFootnote.AddParameterPresentCondition(False, "cell_footnote", False)
 
         ucrChKAddSecondFootnote.SetText("Add Second footnote")
         ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -260,8 +260,8 @@ Public Class sdgFormatSummaryTables
         ucrChkStyleBoarder.AddToLinkedControls({ucrInputStyleBorderSides, ucrInputStyleBorderColor, ucrInputStyleBorderStyle, ucrNudStyleBorderWeight}, {True},
                                                 bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkStyleBoarder.AddParameterPresentCondition(True, "boarderStyle")
-        ucrChkStyleBoarder.AddParameterPresentCondition(False, "boarderStyle", False)
+        ucrChkStyleBoarder.AddParameterPresentCondition(True, "border_style")
+        ucrChkStyleBoarder.AddParameterPresentCondition(False, "border_style", False)
 
         ucrInputStyleBorderSides.SetParameter(New RParameter("sides", iNewPosition:=0))
         ucrInputStyleBorderSides.SetItems({"all", "left", "right", "top", "bottom"}, bAddConditions:=True)
@@ -542,9 +542,9 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrChkStyleBoarder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleBoarder.ControlValueChanged
         If ucrChkStyleBoarder.Checked Then
-            clsStyleListFunction.AddParameter("boarderStyle", clsRFunctionParameter:=clsCellBorderFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStyleListFunction.AddParameter("border_style", clsRFunctionParameter:=clsCellBorderFunction, bIncludeArgumentName:=False, iPosition:=1)
         Else
-            clsStyleListFunction.RemoveParameterByName("boarderStyle")
+            clsStyleListFunction.RemoveParameterByName("border_style")
         End If
     End Sub
 
@@ -590,9 +590,9 @@ Public Class sdgFormatSummaryTables
             Exit Sub
         End If
         If ucrChkAddFootnote.Checked AndAlso Not ucrInputCellFootnote.IsEmpty Then
-            clsPipeOperator.AddParameter("cellfootnote", clsRFunctionParameter:=clsFootnoteCellFunction, iPosition:=3)
+            clsPipeOperator.AddParameter("cell_footnote", clsRFunctionParameter:=clsFootnoteCellFunction, iPosition:=3)
         Else
-            clsPipeOperator.RemoveParameterByName("cellfootnote")
+            clsPipeOperator.RemoveParameterByName("cell_footnote")
         End If
 
         If ucrChKAddSecondFootnote.Checked AndAlso Not ucrInputSecondCellFootnote.IsEmpty Then
