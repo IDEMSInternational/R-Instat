@@ -2511,8 +2511,8 @@ slopegraph <- function(data, x, y, colour, data_label = NULL,
 
 # Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
 get_quarter_label <-   function(quarter, start_month){
-  if (!start_month %in% 1:12) stop(start_month, " is an invalid start month")
-  if (!all(quarter %in% 1:4)) stop("All values must be in range of 1:4")
+  if (!start_month %in% 1:12) stop(start_month, " is an invalid start month, must be in range of 1:12")
+  if (!all(quarter %in% 1:4)) stop(quarter, " is an invalid quarter, must be in range of 1:4")
   if (start_month == 1) {
     mabb <- substr(month.abb, 1, 1)
   } else {
