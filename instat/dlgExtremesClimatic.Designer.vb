@@ -170,26 +170,29 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkLastDate
         '
+        Me.ucrChkLastDate.AutoSize = True
         Me.ucrChkLastDate.Checked = False
         Me.ucrChkLastDate.Location = New System.Drawing.Point(9, 121)
         Me.ucrChkLastDate.Name = "ucrChkLastDate"
-        Me.ucrChkLastDate.Size = New System.Drawing.Size(195, 20)
+        Me.ucrChkLastDate.Size = New System.Drawing.Size(195, 23)
         Me.ucrChkLastDate.TabIndex = 13
         '
         'ucrChkNDates
         '
+        Me.ucrChkNDates.AutoSize = True
         Me.ucrChkNDates.Checked = False
         Me.ucrChkNDates.Location = New System.Drawing.Point(10, 97)
         Me.ucrChkNDates.Name = "ucrChkNDates"
-        Me.ucrChkNDates.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkNDates.Size = New System.Drawing.Size(194, 23)
         Me.ucrChkNDates.TabIndex = 12
         '
         'ucrChkMissingValues
         '
+        Me.ucrChkMissingValues.AutoSize = True
         Me.ucrChkMissingValues.Checked = False
         Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 147)
         Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
-        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 23)
         Me.ucrChkMissingValues.TabIndex = 11
         '
         'rdoMin
@@ -216,6 +219,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrPnlMaxMin
         '
+        Me.ucrPnlMaxMin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 18)
         Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
         Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
@@ -223,10 +227,11 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkFirstDate
         '
+        Me.ucrChkFirstDate.AutoSize = True
         Me.ucrChkFirstDate.Checked = False
         Me.ucrChkFirstDate.Location = New System.Drawing.Point(10, 73)
         Me.ucrChkFirstDate.Name = "ucrChkFirstDate"
-        Me.ucrChkFirstDate.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkFirstDate.Size = New System.Drawing.Size(194, 23)
         Me.ucrChkFirstDate.TabIndex = 0
         '
         'lblValues
@@ -322,6 +327,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputThresholdValue
         '
         Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.AutoSize = True
         Me.ucrInputThresholdValue.IsMultiline = False
         Me.ucrInputThresholdValue.IsReadOnly = False
         Me.ucrInputThresholdValue.Location = New System.Drawing.Point(113, 19)
@@ -332,6 +338,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputThresholdOperator
         '
         Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdOperator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputThresholdOperator.GetSetSelectedIndex = -1
         Me.ucrInputThresholdOperator.IsReadOnly = False
         Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(44, 18)
@@ -461,6 +468,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrNudThresholdColumns
         '
+        Me.ucrNudThresholdColumns.AutoSize = True
         Me.ucrNudThresholdColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThresholdColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudThresholdColumns.Location = New System.Drawing.Point(70, 106)
@@ -473,6 +481,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrNudAlpha
         '
+        Me.ucrNudAlpha.AutoSize = True
         Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAlpha.Location = New System.Drawing.Point(72, 54)
@@ -485,6 +494,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrNudThresholds
         '
+        Me.ucrNudThresholds.AutoSize = True
         Me.ucrNudThresholds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudThresholds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudThresholds.Location = New System.Drawing.Point(124, 81)
@@ -498,6 +508,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputDistribution
         '
         Me.ucrInputDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDistribution.GetSetSelectedIndex = -1
         Me.ucrInputDistribution.IsReadOnly = False
         Me.ucrInputDistribution.Location = New System.Drawing.Point(71, 25)
@@ -527,6 +538,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrNudColumns
         '
+        Me.ucrNudColumns.AutoSize = True
         Me.ucrNudColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudColumns.Location = New System.Drawing.Point(75, 111)
@@ -540,6 +552,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputMin
         '
         Me.ucrInputMin.AddQuotesIfUnrecognised = True
+        Me.ucrInputMin.AutoSize = True
         Me.ucrInputMin.IsMultiline = False
         Me.ucrInputMin.IsReadOnly = False
         Me.ucrInputMin.Location = New System.Drawing.Point(75, 16)
@@ -549,15 +562,17 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkRugPlot
         '
+        Me.ucrChkRugPlot.AutoSize = True
         Me.ucrChkRugPlot.Checked = False
         Me.ucrChkRugPlot.Location = New System.Drawing.Point(9, 88)
         Me.ucrChkRugPlot.Name = "ucrChkRugPlot"
-        Me.ucrChkRugPlot.Size = New System.Drawing.Size(144, 20)
+        Me.ucrChkRugPlot.Size = New System.Drawing.Size(144, 23)
         Me.ucrChkRugPlot.TabIndex = 38
         '
         'ucrInputMax
         '
         Me.ucrInputMax.AddQuotesIfUnrecognised = True
+        Me.ucrInputMax.AutoSize = True
         Me.ucrInputMax.IsMultiline = False
         Me.ucrInputMax.IsReadOnly = False
         Me.ucrInputMax.Location = New System.Drawing.Point(152, 16)
@@ -568,6 +583,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputColours
         '
         Me.ucrInputColours.AddQuotesIfUnrecognised = True
+        Me.ucrInputColours.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColours.GetSetSelectedIndex = -1
         Me.ucrInputColours.IsReadOnly = False
         Me.ucrInputColours.Location = New System.Drawing.Point(152, 40)
@@ -578,6 +594,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputFill
         '
         Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFill.GetSetSelectedIndex = -1
         Me.ucrInputFill.IsReadOnly = False
         Me.ucrInputFill.Location = New System.Drawing.Point(152, 64)
@@ -599,6 +616,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrPnlPlots
         '
+        Me.ucrPnlPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlPlots.Location = New System.Drawing.Point(12, 13)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         Me.ucrPnlPlots.Size = New System.Drawing.Size(111, 44)
@@ -645,14 +663,16 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkRunLength
         '
+        Me.ucrChkRunLength.AutoSize = True
         Me.ucrChkRunLength.Checked = False
         Me.ucrChkRunLength.Location = New System.Drawing.Point(7, 20)
         Me.ucrChkRunLength.Name = "ucrChkRunLength"
-        Me.ucrChkRunLength.Size = New System.Drawing.Size(117, 20)
+        Me.ucrChkRunLength.Size = New System.Drawing.Size(117, 23)
         Me.ucrChkRunLength.TabIndex = 52
         '
         'ucrNudRunLength
         '
+        Me.ucrNudRunLength.AutoSize = True
         Me.ucrNudRunLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRunLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRunLength.Location = New System.Drawing.Point(145, 20)
@@ -665,14 +685,16 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkPrintSummary
         '
+        Me.ucrChkPrintSummary.AutoSize = True
         Me.ucrChkPrintSummary.Checked = False
         Me.ucrChkPrintSummary.Location = New System.Drawing.Point(7, 47)
         Me.ucrChkPrintSummary.Name = "ucrChkPrintSummary"
-        Me.ucrChkPrintSummary.Size = New System.Drawing.Size(149, 20)
+        Me.ucrChkPrintSummary.Size = New System.Drawing.Size(149, 23)
         Me.ucrChkPrintSummary.TabIndex = 45
         '
         'ucrNudDeclusterColumns
         '
+        Me.ucrNudDeclusterColumns.AutoSize = True
         Me.ucrNudDeclusterColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDeclusterColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDeclusterColumns.Location = New System.Drawing.Point(145, 70)
@@ -685,14 +707,16 @@ Partial Class dlgExtremesClimatic
         '
         'ucrChkDeclustering
         '
+        Me.ucrChkDeclustering.AutoSize = True
         Me.ucrChkDeclustering.Checked = False
         Me.ucrChkDeclustering.Location = New System.Drawing.Point(251, 282)
         Me.ucrChkDeclustering.Name = "ucrChkDeclustering"
-        Me.ucrChkDeclustering.Size = New System.Drawing.Size(93, 20)
+        Me.ucrChkDeclustering.Size = New System.Drawing.Size(93, 23)
         Me.ucrChkDeclustering.TabIndex = 53
         '
         'ucrSaveDeclusteredPlot
         '
+        Me.ucrSaveDeclusteredPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveDeclusteredPlot.Location = New System.Drawing.Point(8, 411)
         Me.ucrSaveDeclusteredPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDeclusteredPlot.Name = "ucrSaveDeclusteredPlot"
@@ -701,6 +725,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrSaveThresholdPlot
         '
+        Me.ucrSaveThresholdPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveThresholdPlot.Location = New System.Drawing.Point(8, 468)
         Me.ucrSaveThresholdPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveThresholdPlot.Name = "ucrSaveThresholdPlot"
@@ -709,6 +734,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrSaveMrlPlot
         '
+        Me.ucrSaveMrlPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveMrlPlot.Location = New System.Drawing.Point(8, 468)
         Me.ucrSaveMrlPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveMrlPlot.Name = "ucrSaveMrlPlot"
@@ -718,6 +744,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(115, 442)
@@ -728,6 +755,7 @@ Partial Class dlgExtremesClimatic
         'ucrInputSave
         '
         Me.ucrInputSave.AddQuotesIfUnrecognised = True
+        Me.ucrInputSave.AutoSize = True
         Me.ucrInputSave.IsMultiline = False
         Me.ucrInputSave.IsReadOnly = False
         Me.ucrInputSave.Location = New System.Drawing.Point(203, 469)
@@ -737,6 +765,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrReceiverDOY
         '
+        Me.ucrReceiverDOY.AutoSize = True
         Me.ucrReceiverDOY.frmParent = Me
         Me.ucrReceiverDOY.Location = New System.Drawing.Point(251, 204)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
@@ -749,6 +778,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
         Me.ucrReceiverYear.Location = New System.Drawing.Point(251, 161)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
@@ -761,6 +791,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(251, 119)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -773,6 +804,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(251, 77)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -785,6 +817,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrReceiverElement
         '
+        Me.ucrReceiverElement.AutoSize = True
         Me.ucrReceiverElement.frmParent = Me
         Me.ucrReceiverElement.Location = New System.Drawing.Point(251, 247)
         Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
@@ -797,24 +830,28 @@ Partial Class dlgExtremesClimatic
         '
         'ucrSelectorClimaticExtremes
         '
+        Me.ucrSelectorClimaticExtremes.AutoSize = True
         Me.ucrSelectorClimaticExtremes.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticExtremes.bShowHiddenColumns = False
         Me.ucrSelectorClimaticExtremes.bUseCurrentFilter = True
         Me.ucrSelectorClimaticExtremes.Location = New System.Drawing.Point(10, 36)
         Me.ucrSelectorClimaticExtremes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimaticExtremes.Name = "ucrSelectorClimaticExtremes"
-        Me.ucrSelectorClimaticExtremes.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorClimaticExtremes.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimaticExtremes.TabIndex = 4
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 494)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 21
         '
         'ucrPnlExtremesType
         '
+        Me.ucrPnlExtremesType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlExtremesType.Location = New System.Drawing.Point(72, 2)
         Me.ucrPnlExtremesType.Name = "ucrPnlExtremesType"
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(280, 37)
@@ -822,8 +859,9 @@ Partial Class dlgExtremesClimatic
         '
         'dlgExtremesClimatic
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 549)
         Me.Controls.Add(Me.ucrChkDeclustering)
         Me.Controls.Add(Me.grpDeclusteringOptions)

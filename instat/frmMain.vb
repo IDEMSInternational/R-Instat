@@ -83,9 +83,6 @@ Public Class frmMain
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
 
-        ' Note: this must change when R version changes
-        Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
-
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
         SetMainMenusEnabled(False)
@@ -120,18 +117,6 @@ Public Class frmMain
         strStaticPath = String.Concat(Application.StartupPath, "\static")
 
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        ' We need to create the likely R package installation directory before R.NET connection is initialised
-        ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
-        ' This assumes that R packages will be installed in "Documents" folder and also that 
-        ' this is detected by "SpecialDirectories.MyDocuments".
-        ' If either of these fail then R packages will need to be installed from R/RStudio first.
-        Try
-            If Not Directory.Exists(strRPackagesPath) Then
-                System.IO.Directory.CreateDirectory(strRPackagesPath)
-            End If
-        Catch ex As Exception
-            ' This may fail for many reasons. We may want to inform users this may lead to packages not installing.
-        End Try
 
         bClose = AutoRecoverAndStartREngine()
         If bClose Then
@@ -485,7 +470,7 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub UpdateLayout()
+    Public Sub UpdateLayout()
         If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
@@ -1593,14 +1578,13 @@ Public Class frmMain
 
     Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
         If Not bDataSaved Then
-            If DialogResult.No = MsgBox("Are you sure you want to close you data?" &
+            If ucrDataViewer.GetWorkSheetCount() = 0 OrElse DialogResult.Yes = MsgBox("Are you sure you want to close your data?" &
                                          Environment.NewLine & "Any unsaved changes will be lost.",
                                          MessageBoxButtons.YesNo, "Close Data") Then
-                Exit Sub
+                clsRLink.CloseData()
+                strSaveFilePath = ""
             End If
         End If
-        clsRLink.CloseData()
-        strSaveFilePath = ""
     End Sub
 
     Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click

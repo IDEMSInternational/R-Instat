@@ -38,7 +38,6 @@ Partial Class ucrVariablesAsFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrVariablesAsFactor))
         Me.ucrMultipleVariables = New instat.ucrReceiverMultiple()
         Me.ucrSingleVariable = New instat.ucrReceiverSingle()
         Me.cmdVariables = New System.Windows.Forms.Button()
@@ -46,38 +45,56 @@ Partial Class ucrVariablesAsFactor
         '
         'ucrMultipleVariables
         '
-        resources.ApplyResources(Me.ucrMultipleVariables, "ucrMultipleVariables")
+        Me.ucrMultipleVariables.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrMultipleVariables.AutoSize = True
         Me.ucrMultipleVariables.frmParent = Nothing
+        Me.ucrMultipleVariables.Location = New System.Drawing.Point(0, 30)
+        Me.ucrMultipleVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultipleVariables.Name = "ucrMultipleVariables"
         Me.ucrMultipleVariables.Selector = Nothing
+        Me.ucrMultipleVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrMultipleVariables.strNcFilePath = ""
+        Me.ucrMultipleVariables.TabIndex = 1
         Me.ucrMultipleVariables.ucrSelector = Nothing
         '
         'ucrSingleVariable
         '
-        resources.ApplyResources(Me.ucrSingleVariable, "ucrSingleVariable")
+        Me.ucrSingleVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrSingleVariable.AutoSize = True
         Me.ucrSingleVariable.frmParent = Nothing
+        Me.ucrSingleVariable.Location = New System.Drawing.Point(0, 30)
+        Me.ucrSingleVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSingleVariable.Name = "ucrSingleVariable"
         Me.ucrSingleVariable.Selector = Nothing
+        Me.ucrSingleVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrSingleVariable.strNcFilePath = ""
+        Me.ucrSingleVariable.TabIndex = 1
         Me.ucrSingleVariable.ucrSelector = Nothing
         '
         'cmdVariables
         '
-        resources.ApplyResources(Me.cmdVariables, "cmdVariables")
+        Me.cmdVariables.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdVariables.Location = New System.Drawing.Point(0, 0)
         Me.cmdVariables.Name = "cmdVariables"
+        Me.cmdVariables.Size = New System.Drawing.Size(120, 27)
+        Me.cmdVariables.TabIndex = 0
         Me.cmdVariables.Tag = ""
         Me.cmdVariables.UseVisualStyleBackColor = True
         '
         'ucrVariablesAsFactor
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.cmdVariables)
         Me.Controls.Add(Me.ucrSingleVariable)
         Me.Controls.Add(Me.ucrMultipleVariables)
         Me.Name = "ucrVariablesAsFactor"
+        Me.Size = New System.Drawing.Size(120, 130)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrMultipleVariables As ucrReceiverMultiple

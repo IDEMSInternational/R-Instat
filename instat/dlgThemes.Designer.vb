@@ -38,7 +38,6 @@ Partial Class dlgThemes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgThemes))
         Me.lblThemetoEdit = New System.Windows.Forms.Label()
         Me.cmdThemeOptions = New System.Windows.Forms.Button()
         Me.ucrChkDeleteTheme = New instat.ucrCheck()
@@ -50,50 +49,81 @@ Partial Class dlgThemes
         '
         'lblThemetoEdit
         '
-        resources.ApplyResources(Me.lblThemetoEdit, "lblThemetoEdit")
+        Me.lblThemetoEdit.AutoSize = True
+        Me.lblThemetoEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblThemetoEdit.Location = New System.Drawing.Point(240, 58)
         Me.lblThemetoEdit.Name = "lblThemetoEdit"
+        Me.lblThemetoEdit.Size = New System.Drawing.Size(76, 13)
+        Me.lblThemetoEdit.TabIndex = 3
+        Me.lblThemetoEdit.Text = "Theme to Edit:"
         '
         'cmdThemeOptions
         '
-        resources.ApplyResources(Me.cmdThemeOptions, "cmdThemeOptions")
+        Me.cmdThemeOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdThemeOptions.Location = New System.Drawing.Point(243, 131)
         Me.cmdThemeOptions.Name = "cmdThemeOptions"
+        Me.cmdThemeOptions.Size = New System.Drawing.Size(120, 23)
+        Me.cmdThemeOptions.TabIndex = 4
+        Me.cmdThemeOptions.Text = "Theme Options"
         Me.cmdThemeOptions.UseVisualStyleBackColor = True
         '
         'ucrChkDeleteTheme
         '
+        Me.ucrChkDeleteTheme.AutoSize = True
         Me.ucrChkDeleteTheme.Checked = False
-        resources.ApplyResources(Me.ucrChkDeleteTheme, "ucrChkDeleteTheme")
+        Me.ucrChkDeleteTheme.Enabled = False
+        Me.ucrChkDeleteTheme.Location = New System.Drawing.Point(243, 107)
         Me.ucrChkDeleteTheme.Name = "ucrChkDeleteTheme"
+        Me.ucrChkDeleteTheme.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkDeleteTheme.TabIndex = 6
         '
         'ucrSaveTheme
         '
-        resources.ApplyResources(Me.ucrSaveTheme, "ucrSaveTheme")
+        Me.ucrSaveTheme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTheme.Location = New System.Drawing.Point(9, 182)
+        Me.ucrSaveTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTheme.Name = "ucrSaveTheme"
+        Me.ucrSaveTheme.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveTheme.TabIndex = 5
         '
         'ucrReceiverThemetoEdit
         '
+        Me.ucrReceiverThemetoEdit.AutoSize = True
         Me.ucrReceiverThemetoEdit.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverThemetoEdit, "ucrReceiverThemetoEdit")
+        Me.ucrReceiverThemetoEdit.Location = New System.Drawing.Point(243, 73)
+        Me.ucrReceiverThemetoEdit.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverThemetoEdit.Name = "ucrReceiverThemetoEdit"
         Me.ucrReceiverThemetoEdit.Selector = Nothing
+        Me.ucrReceiverThemetoEdit.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverThemetoEdit.strNcFilePath = ""
+        Me.ucrReceiverThemetoEdit.TabIndex = 2
         Me.ucrReceiverThemetoEdit.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 212)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'ucrSelectorThemes
         '
+        Me.ucrSelectorThemes.AutoSize = True
         Me.ucrSelectorThemes.bShowHiddenColumns = False
-        resources.ApplyResources(Me.ucrSelectorThemes, "ucrSelectorThemes")
+        Me.ucrSelectorThemes.Location = New System.Drawing.Point(9, 32)
+        Me.ucrSelectorThemes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorThemes.Name = "ucrSelectorThemes"
+        Me.ucrSelectorThemes.Size = New System.Drawing.Size(213, 147)
+        Me.ucrSelectorThemes.TabIndex = 7
         '
         'dlgThemes
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(423, 279)
         Me.Controls.Add(Me.ucrSelectorThemes)
         Me.Controls.Add(Me.ucrChkDeleteTheme)
         Me.Controls.Add(Me.ucrSaveTheme)
@@ -105,7 +135,9 @@ Partial Class dlgThemes
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgThemes"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Themes"
+        Me.Text = "Themes"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

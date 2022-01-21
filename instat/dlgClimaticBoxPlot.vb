@@ -269,6 +269,7 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
 
         clsAsFactorFunction.SetRCommand("make_factor")
+        clsAsFactorFunction.AddParameter("x", Chr(34) & Chr(34), bIncludeArgumentName:=False)
 
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")

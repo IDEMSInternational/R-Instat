@@ -22,8 +22,16 @@ Partial Class ucrReceiverSingleNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.SuspendLayout()
+        '
+        'ucrReceiverSingleNew
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.Name = "ucrReceiverSingleNew"
+        Me.ResumeLayout(False)
+
     End Sub
 
 End Class

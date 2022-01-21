@@ -134,6 +134,7 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputJitter
         '
         Me.ucrInputJitter.AddQuotesIfUnrecognised = True
+        Me.ucrInputJitter.AutoSize = True
         Me.ucrInputJitter.IsMultiline = False
         Me.ucrInputJitter.IsReadOnly = False
         Me.ucrInputJitter.Location = New System.Drawing.Point(115, 83)
@@ -153,39 +154,44 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrChkVerticalXTickMarkers
         '
+        Me.ucrChkVerticalXTickMarkers.AutoSize = True
         Me.ucrChkVerticalXTickMarkers.Checked = False
         Me.ucrChkVerticalXTickMarkers.Location = New System.Drawing.Point(283, 109)
         Me.ucrChkVerticalXTickMarkers.Name = "ucrChkVerticalXTickMarkers"
-        Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 20)
+        Me.ucrChkVerticalXTickMarkers.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkVerticalXTickMarkers.TabIndex = 0
         '
         'ucrChkHorizontalBoxplot
         '
+        Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(283, 83)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 20)
+        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 15
         '
         'ucrChkVarWidth
         '
+        Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(283, 57)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 20)
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkVarWidth.TabIndex = 14
         '
         'ucrChkIncludePoints
         '
+        Me.ucrChkIncludePoints.AutoSize = True
         Me.ucrChkIncludePoints.Checked = False
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(6, 57)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(178, 20)
+        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(178, 23)
         Me.ucrChkIncludePoints.TabIndex = 4
         '
         'ucrInputHlineValue
         '
         Me.ucrInputHlineValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputHlineValue.AutoSize = True
         Me.ucrInputHlineValue.IsMultiline = False
         Me.ucrInputHlineValue.IsReadOnly = False
         Me.ucrInputHlineValue.Location = New System.Drawing.Point(76, 165)
@@ -205,10 +211,11 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrChkIncludeHline
         '
+        Me.ucrChkIncludeHline.AutoSize = True
         Me.ucrChkIncludeHline.Checked = False
         Me.ucrChkIncludeHline.Location = New System.Drawing.Point(6, 137)
         Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
-        Me.ucrChkIncludeHline.Size = New System.Drawing.Size(159, 20)
+        Me.ucrChkIncludeHline.Size = New System.Drawing.Size(159, 23)
         Me.ucrChkIncludeHline.TabIndex = 10
         '
         'lblTransparency
@@ -223,6 +230,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrNudTransparency
         '
+        Me.ucrNudTransparency.AutoSize = True
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudTransparency.Location = New System.Drawing.Point(115, 110)
@@ -235,6 +243,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrPnlPlotType
         '
+        Me.ucrPnlPlotType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlPlotType.Location = New System.Drawing.Point(4, 19)
         Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
         Me.ucrPnlPlotType.Size = New System.Drawing.Size(170, 26)
@@ -271,6 +280,8 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext3
         '
         Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputContext3.GetSetSelectedIndex = -1
         Me.ucrInputContext3.IsReadOnly = False
         Me.ucrInputContext3.Location = New System.Drawing.Point(141, 130)
         Me.ucrInputContext3.Name = "ucrInputContext3"
@@ -279,6 +290,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrReceiverContext3
         '
+        Me.ucrReceiverContext3.AutoSize = True
         Me.ucrReceiverContext3.frmParent = Me
         Me.ucrReceiverContext3.Location = New System.Drawing.Point(8, 130)
         Me.ucrReceiverContext3.Margin = New System.Windows.Forms.Padding(0)
@@ -312,6 +324,8 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext2
         '
         Me.ucrInputContext2.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputContext2.GetSetSelectedIndex = -1
         Me.ucrInputContext2.IsReadOnly = False
         Me.ucrInputContext2.Location = New System.Drawing.Point(141, 84)
         Me.ucrInputContext2.Name = "ucrInputContext2"
@@ -320,6 +334,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrReceiverContext2
         '
+        Me.ucrReceiverContext2.AutoSize = True
         Me.ucrReceiverContext2.frmParent = Me
         Me.ucrReceiverContext2.Location = New System.Drawing.Point(8, 84)
         Me.ucrReceiverContext2.Margin = New System.Windows.Forms.Padding(0)
@@ -333,6 +348,8 @@ Partial Class dlgOptionsByContextBoxplot
         'ucrInputContext1
         '
         Me.ucrInputContext1.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputContext1.GetSetSelectedIndex = -1
         Me.ucrInputContext1.IsReadOnly = False
         Me.ucrInputContext1.Location = New System.Drawing.Point(141, 38)
         Me.ucrInputContext1.Name = "ucrInputContext1"
@@ -341,6 +358,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrReceiverContext1
         '
+        Me.ucrReceiverContext1.AutoSize = True
         Me.ucrReceiverContext1.frmParent = Me
         Me.ucrReceiverContext1.Location = New System.Drawing.Point(8, 38)
         Me.ucrReceiverContext1.Margin = New System.Windows.Forms.Padding(0)
@@ -395,20 +413,25 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrSavePlot
         '
+        Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 497)
+        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(255, 24)
         Me.ucrSavePlot.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 526)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 1
         '
         'ucrReceiverX
         '
+        Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
         Me.ucrReceiverX.Location = New System.Drawing.Point(270, 82)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
@@ -421,6 +444,7 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrReceiverMeasurement
         '
+        Me.ucrReceiverMeasurement.AutoSize = True
         Me.ucrReceiverMeasurement.frmParent = Me
         Me.ucrReceiverMeasurement.Location = New System.Drawing.Point(270, 41)
         Me.ucrReceiverMeasurement.Margin = New System.Windows.Forms.Padding(0)
@@ -433,19 +457,21 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'ucrSelectorPlot
         '
+        Me.ucrSelectorPlot.AutoSize = True
         Me.ucrSelectorPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorPlot.bShowHiddenColumns = False
         Me.ucrSelectorPlot.bUseCurrentFilter = True
         Me.ucrSelectorPlot.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPlot.Name = "ucrSelectorPlot"
-        Me.ucrSelectorPlot.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorPlot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorPlot.TabIndex = 0
         '
         'dlgOptionsByContextBoxplot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 582)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)

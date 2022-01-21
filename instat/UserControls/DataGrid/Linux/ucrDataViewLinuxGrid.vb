@@ -33,6 +33,7 @@ Public Class ucrDataViewLinuxGrid
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
+        dataGrid.ClearSelection()
         dataGrid.Columns.Clear()
         For i = 0 To visiblePage.lstColumns.Count - 1
             Dim dataGridColumn As DataGridViewColumn = New DataGridViewColumn
@@ -45,7 +46,7 @@ Public Class ucrDataViewLinuxGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
 
-        If dataFrame.clsFilter.bApplied Then
+        If dataFrame.clsFilter.bFilterApplied Then
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.Red
         Else
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.DarkBlue

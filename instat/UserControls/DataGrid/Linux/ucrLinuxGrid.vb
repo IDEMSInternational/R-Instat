@@ -20,7 +20,6 @@ Public MustInherit Class ucrLinuxGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
-    Private _InstatOptions As InstatOptions
     Private _cellContextMenuStrip As ContextMenuStrip
     Private _columnContextMenuStrip As ContextMenuStrip
     Private _rowContextMenuStrip As ContextMenuStrip
@@ -61,12 +60,6 @@ Public MustInherit Class ucrLinuxGrid
         End Get
         Set(value As Boolean)
             Me.Visible = value
-        End Set
-    End Property
-
-    Public WriteOnly Property InstatOptions As InstatOptions Implements IGrid.InstatOptions
-        Set(value As InstatOptions)
-            _InstatOptions = value
         End Set
     End Property
 
@@ -181,10 +174,11 @@ Public MustInherit Class ucrLinuxGrid
     End Sub
 
     Public Sub UpdateWorksheetStyle(dataGrid As DataGridView)
-        If _InstatOptions IsNot Nothing Then
-            Dim newFont As New Font(_InstatOptions.fntEditor, _InstatOptions.fntEditor.Size)
-            dataGrid.Font = newFont
-            dataGrid.BackColor = _InstatOptions.clrEditor
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            Dim newFont As New Font(frmMain.clsInstatOptions.fntEditor.FontFamily, frmMain.clsInstatOptions.fntEditor.Size,
+                                    frmMain.clsInstatOptions.fntEditor.Style, frmMain.clsInstatOptions.fntEditor.Unit)
+            dataGrid.DefaultCellStyle.Font = newFont
+            dataGrid.DefaultCellStyle.ForeColor = frmMain.clsInstatOptions.clrEditor
             dataGrid.ColumnHeadersDefaultCellStyle.Font = New Font(FontFamily.GenericSansSerif, 8.25)
             dataGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.DarkBlue
             dataGrid.RowHeadersDefaultCellStyle.Font = New Font(FontFamily.GenericSansSerif, 8.25)

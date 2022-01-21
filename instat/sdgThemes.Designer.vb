@@ -38,7 +38,6 @@ Partial Class sdgThemes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgThemes))
         Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.tbThemeFacets = New System.Windows.Forms.TabPage()
         Me.grpSpaceBetweenStripsAxes = New System.Windows.Forms.GroupBox()
@@ -172,79 +171,115 @@ Partial Class sdgThemes
         '
         'ucrBaseSubdialogue
         '
-        resources.ApplyResources(Me.ucrBaseSubdialogue, "ucrBaseSubdialogue")
+        Me.ucrBaseSubdialogue.AutoSize = True
+        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(344, 621)
         Me.ucrBaseSubdialogue.Name = "ucrBaseSubdialogue"
+        Me.ucrBaseSubdialogue.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSubdialogue.TabIndex = 1
         '
         'tbThemeFacets
         '
         Me.tbThemeFacets.Controls.Add(Me.grpSpaceBetweenStripsAxes)
         Me.tbThemeFacets.Controls.Add(Me.grpFacetBackground)
         Me.tbThemeFacets.Controls.Add(Me.grpFacetLabels)
-        resources.ApplyResources(Me.tbThemeFacets, "tbThemeFacets")
+        Me.tbThemeFacets.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeFacets.Name = "tbThemeFacets"
+        Me.tbThemeFacets.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemeFacets.TabIndex = 4
+        Me.tbThemeFacets.Text = "Facets"
         Me.tbThemeFacets.UseVisualStyleBackColor = True
         '
         'grpSpaceBetweenStripsAxes
         '
         Me.grpSpaceBetweenStripsAxes.Controls.Add(Me.ucrStripsSpaceWrap)
         Me.grpSpaceBetweenStripsAxes.Controls.Add(Me.ucrStripsSpaceGrid)
-        resources.ApplyResources(Me.grpSpaceBetweenStripsAxes, "grpSpaceBetweenStripsAxes")
+        Me.grpSpaceBetweenStripsAxes.Location = New System.Drawing.Point(5, 268)
         Me.grpSpaceBetweenStripsAxes.Name = "grpSpaceBetweenStripsAxes"
+        Me.grpSpaceBetweenStripsAxes.Size = New System.Drawing.Size(531, 150)
+        Me.grpSpaceBetweenStripsAxes.TabIndex = 1
         Me.grpSpaceBetweenStripsAxes.TabStop = False
+        Me.grpSpaceBetweenStripsAxes.Text = "Space between Strips and Axes"
         '
         'ucrStripsSpaceWrap
         '
-        resources.ApplyResources(Me.ucrStripsSpaceWrap, "ucrStripsSpaceWrap")
+        Me.ucrStripsSpaceWrap.AutoSize = True
+        Me.ucrStripsSpaceWrap.Location = New System.Drawing.Point(265, 21)
         Me.ucrStripsSpaceWrap.Name = "ucrStripsSpaceWrap"
+        Me.ucrStripsSpaceWrap.Size = New System.Drawing.Size(261, 125)
+        Me.ucrStripsSpaceWrap.TabIndex = 1
         '
         'ucrStripsSpaceGrid
         '
-        resources.ApplyResources(Me.ucrStripsSpaceGrid, "ucrStripsSpaceGrid")
+        Me.ucrStripsSpaceGrid.AutoSize = True
+        Me.ucrStripsSpaceGrid.Location = New System.Drawing.Point(6, 21)
         Me.ucrStripsSpaceGrid.Name = "ucrStripsSpaceGrid"
+        Me.ucrStripsSpaceGrid.Size = New System.Drawing.Size(260, 122)
+        Me.ucrStripsSpaceGrid.TabIndex = 0
         '
         'grpFacetBackground
         '
         Me.grpFacetBackground.Controls.Add(Me.ucrStripBackGround)
-        resources.ApplyResources(Me.grpFacetBackground, "grpFacetBackground")
+        Me.grpFacetBackground.Location = New System.Drawing.Point(541, 268)
         Me.grpFacetBackground.Name = "grpFacetBackground"
+        Me.grpFacetBackground.Size = New System.Drawing.Size(263, 148)
+        Me.grpFacetBackground.TabIndex = 2
         Me.grpFacetBackground.TabStop = False
+        Me.grpFacetBackground.Text = "Facet Label Background "
         '
         'ucrStripBackGround
         '
-        resources.ApplyResources(Me.ucrStripBackGround, "ucrStripBackGround")
+        Me.ucrStripBackGround.AutoSize = True
+        Me.ucrStripBackGround.Location = New System.Drawing.Point(2, 21)
         Me.ucrStripBackGround.Name = "ucrStripBackGround"
+        Me.ucrStripBackGround.Size = New System.Drawing.Size(253, 128)
+        Me.ucrStripBackGround.TabIndex = 0
         '
         'grpFacetLabels
         '
         Me.grpFacetLabels.Controls.Add(Me.ucrStripTextYAxis)
         Me.grpFacetLabels.Controls.Add(Me.ucrStripTextXAxis)
         Me.grpFacetLabels.Controls.Add(Me.ucrStripText)
-        resources.ApplyResources(Me.grpFacetLabels, "grpFacetLabels")
+        Me.grpFacetLabels.Location = New System.Drawing.Point(6, 6)
         Me.grpFacetLabels.Name = "grpFacetLabels"
+        Me.grpFacetLabels.Size = New System.Drawing.Size(798, 255)
+        Me.grpFacetLabels.TabIndex = 0
         Me.grpFacetLabels.TabStop = False
+        Me.grpFacetLabels.Text = "Facet Labels"
         '
         'ucrStripTextYAxis
         '
-        resources.ApplyResources(Me.ucrStripTextYAxis, "ucrStripTextYAxis")
+        Me.ucrStripTextYAxis.AutoSize = True
+        Me.ucrStripTextYAxis.Location = New System.Drawing.Point(536, 21)
         Me.ucrStripTextYAxis.Name = "ucrStripTextYAxis"
+        Me.ucrStripTextYAxis.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripTextYAxis.TabIndex = 2
         '
         'ucrStripTextXAxis
         '
-        resources.ApplyResources(Me.ucrStripTextXAxis, "ucrStripTextXAxis")
+        Me.ucrStripTextXAxis.AutoSize = True
+        Me.ucrStripTextXAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrStripTextXAxis.Name = "ucrStripTextXAxis"
+        Me.ucrStripTextXAxis.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripTextXAxis.TabIndex = 1
         '
         'ucrStripText
         '
-        resources.ApplyResources(Me.ucrStripText, "ucrStripText")
+        Me.ucrStripText.AutoSize = True
+        Me.ucrStripText.Location = New System.Drawing.Point(14, 21)
         Me.ucrStripText.Name = "ucrStripText"
+        Me.ucrStripText.Size = New System.Drawing.Size(255, 226)
+        Me.ucrStripText.TabIndex = 0
         '
         'tbThemePanelAndBackground
         '
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpPanelSpacing)
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpBorderAndBackground)
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpPanelGrid)
-        resources.ApplyResources(Me.tbThemePanelAndBackground, "tbThemePanelAndBackground")
+        Me.tbThemePanelAndBackground.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelAndBackground.Name = "tbThemePanelAndBackground"
+        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemePanelAndBackground.TabIndex = 3
+        Me.tbThemePanelAndBackground.Text = "Panel and Background  "
         Me.tbThemePanelAndBackground.UseVisualStyleBackColor = True
         '
         'grpPanelSpacing
@@ -252,66 +287,99 @@ Partial Class sdgThemes
         Me.grpPanelSpacing.Controls.Add(Me.ucrPanelSpacingYAxis)
         Me.grpPanelSpacing.Controls.Add(Me.ucrPanelSpacingXAxis)
         Me.grpPanelSpacing.Controls.Add(Me.ucrPanelSpacing)
-        resources.ApplyResources(Me.grpPanelSpacing, "grpPanelSpacing")
+        Me.grpPanelSpacing.Location = New System.Drawing.Point(4, 315)
         Me.grpPanelSpacing.Name = "grpPanelSpacing"
+        Me.grpPanelSpacing.Size = New System.Drawing.Size(800, 150)
+        Me.grpPanelSpacing.TabIndex = 2
         Me.grpPanelSpacing.TabStop = False
+        Me.grpPanelSpacing.Text = "Panel Spacing"
         '
         'ucrPanelSpacingYAxis
         '
-        resources.ApplyResources(Me.ucrPanelSpacingYAxis, "ucrPanelSpacingYAxis")
+        Me.ucrPanelSpacingYAxis.AutoSize = True
+        Me.ucrPanelSpacingYAxis.Location = New System.Drawing.Point(530, 21)
         Me.ucrPanelSpacingYAxis.Name = "ucrPanelSpacingYAxis"
+        Me.ucrPanelSpacingYAxis.Size = New System.Drawing.Size(261, 122)
+        Me.ucrPanelSpacingYAxis.TabIndex = 2
         '
         'ucrPanelSpacingXAxis
         '
-        resources.ApplyResources(Me.ucrPanelSpacingXAxis, "ucrPanelSpacingXAxis")
+        Me.ucrPanelSpacingXAxis.AutoSize = True
+        Me.ucrPanelSpacingXAxis.Location = New System.Drawing.Point(268, 21)
         Me.ucrPanelSpacingXAxis.Name = "ucrPanelSpacingXAxis"
+        Me.ucrPanelSpacingXAxis.Size = New System.Drawing.Size(262, 122)
+        Me.ucrPanelSpacingXAxis.TabIndex = 1
         '
         'ucrPanelSpacing
         '
-        resources.ApplyResources(Me.ucrPanelSpacing, "ucrPanelSpacing")
+        Me.ucrPanelSpacing.AutoSize = True
+        Me.ucrPanelSpacing.Location = New System.Drawing.Point(7, 21)
         Me.ucrPanelSpacing.Name = "ucrPanelSpacing"
+        Me.ucrPanelSpacing.Size = New System.Drawing.Size(260, 122)
+        Me.ucrPanelSpacing.TabIndex = 0
         '
         'grpBorderAndBackground
         '
         Me.grpBorderAndBackground.Controls.Add(Me.ucrPanelBackGround)
         Me.grpBorderAndBackground.Controls.Add(Me.ucrPanelBorder)
-        resources.ApplyResources(Me.grpBorderAndBackground, "grpBorderAndBackground")
+        Me.grpBorderAndBackground.Location = New System.Drawing.Point(3, 157)
         Me.grpBorderAndBackground.Name = "grpBorderAndBackground"
+        Me.grpBorderAndBackground.Size = New System.Drawing.Size(532, 151)
+        Me.grpBorderAndBackground.TabIndex = 1
         Me.grpBorderAndBackground.TabStop = False
+        Me.grpBorderAndBackground.Text = "Panel Border and Background "
         '
         'ucrPanelBackGround
         '
-        resources.ApplyResources(Me.ucrPanelBackGround, "ucrPanelBackGround")
+        Me.ucrPanelBackGround.AutoSize = True
+        Me.ucrPanelBackGround.Location = New System.Drawing.Point(275, 21)
         Me.ucrPanelBackGround.Name = "ucrPanelBackGround"
+        Me.ucrPanelBackGround.Size = New System.Drawing.Size(253, 132)
+        Me.ucrPanelBackGround.TabIndex = 1
         '
         'ucrPanelBorder
         '
-        resources.ApplyResources(Me.ucrPanelBorder, "ucrPanelBorder")
+        Me.ucrPanelBorder.AutoSize = True
+        Me.ucrPanelBorder.Location = New System.Drawing.Point(14, 21)
         Me.ucrPanelBorder.Name = "ucrPanelBorder"
+        Me.ucrPanelBorder.Size = New System.Drawing.Size(253, 132)
+        Me.ucrPanelBorder.TabIndex = 0
         '
         'grpPanelGrid
         '
         Me.grpPanelGrid.Controls.Add(Me.ucrPanelGridMinor)
         Me.grpPanelGrid.Controls.Add(Me.ucrPanelGridMajor)
         Me.grpPanelGrid.Controls.Add(Me.ucrPanelGrid)
-        resources.ApplyResources(Me.grpPanelGrid, "grpPanelGrid")
+        Me.grpPanelGrid.Location = New System.Drawing.Point(4, 12)
         Me.grpPanelGrid.Name = "grpPanelGrid"
+        Me.grpPanelGrid.Size = New System.Drawing.Size(786, 139)
+        Me.grpPanelGrid.TabIndex = 0
         Me.grpPanelGrid.TabStop = False
+        Me.grpPanelGrid.Text = "Panel Grid"
         '
         'ucrPanelGridMinor
         '
-        resources.ApplyResources(Me.ucrPanelGridMinor, "ucrPanelGridMinor")
+        Me.ucrPanelGridMinor.AutoSize = True
+        Me.ucrPanelGridMinor.Location = New System.Drawing.Point(527, 15)
         Me.ucrPanelGridMinor.Name = "ucrPanelGridMinor"
+        Me.ucrPanelGridMinor.Size = New System.Drawing.Size(254, 122)
+        Me.ucrPanelGridMinor.TabIndex = 2
         '
         'ucrPanelGridMajor
         '
-        resources.ApplyResources(Me.ucrPanelGridMajor, "ucrPanelGridMajor")
+        Me.ucrPanelGridMajor.AutoSize = True
+        Me.ucrPanelGridMajor.Location = New System.Drawing.Point(269, 15)
         Me.ucrPanelGridMajor.Name = "ucrPanelGridMajor"
+        Me.ucrPanelGridMajor.Size = New System.Drawing.Size(254, 122)
+        Me.ucrPanelGridMajor.TabIndex = 1
         '
         'ucrPanelGrid
         '
-        resources.ApplyResources(Me.ucrPanelGrid, "ucrPanelGrid")
+        Me.ucrPanelGrid.AutoSize = True
+        Me.ucrPanelGrid.Location = New System.Drawing.Point(10, 15)
         Me.ucrPanelGrid.Name = "ucrPanelGrid"
+        Me.ucrPanelGrid.Size = New System.Drawing.Size(254, 122)
+        Me.ucrPanelGrid.TabIndex = 0
         '
         'tbThemeLegend
         '
@@ -319,8 +387,12 @@ Partial Class sdgThemes
         Me.tbThemeLegend.Controls.Add(Me.grpLegendTitleAndText)
         Me.tbThemeLegend.Controls.Add(Me.grpLegendAdjustments)
         Me.tbThemeLegend.Controls.Add(Me.grpLegendBackGroundAndKey)
-        resources.ApplyResources(Me.tbThemeLegend, "tbThemeLegend")
+        Me.tbThemeLegend.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegend.Name = "tbThemeLegend"
+        Me.tbThemeLegend.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeLegend.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemeLegend.TabIndex = 2
+        Me.tbThemeLegend.Text = "Legend"
         Me.tbThemeLegend.UseVisualStyleBackColor = True
         '
         'grpLegendKeyAdjustment
@@ -328,42 +400,63 @@ Partial Class sdgThemes
         Me.grpLegendKeyAdjustment.Controls.Add(Me.ucrLegendKeyWidth)
         Me.grpLegendKeyAdjustment.Controls.Add(Me.ucrLegendKeyHeight)
         Me.grpLegendKeyAdjustment.Controls.Add(Me.ucrLegendKeySize)
-        resources.ApplyResources(Me.grpLegendKeyAdjustment, "grpLegendKeyAdjustment")
+        Me.grpLegendKeyAdjustment.Location = New System.Drawing.Point(7, 426)
         Me.grpLegendKeyAdjustment.Name = "grpLegendKeyAdjustment"
+        Me.grpLegendKeyAdjustment.Size = New System.Drawing.Size(800, 150)
+        Me.grpLegendKeyAdjustment.TabIndex = 3
         Me.grpLegendKeyAdjustment.TabStop = False
+        Me.grpLegendKeyAdjustment.Text = "Legend Key Measurement"
         '
         'ucrLegendKeyWidth
         '
-        resources.ApplyResources(Me.ucrLegendKeyWidth, "ucrLegendKeyWidth")
+        Me.ucrLegendKeyWidth.AutoSize = True
+        Me.ucrLegendKeyWidth.Location = New System.Drawing.Point(531, 21)
         Me.ucrLegendKeyWidth.Name = "ucrLegendKeyWidth"
+        Me.ucrLegendKeyWidth.Size = New System.Drawing.Size(261, 122)
+        Me.ucrLegendKeyWidth.TabIndex = 2
         '
         'ucrLegendKeyHeight
         '
-        resources.ApplyResources(Me.ucrLegendKeyHeight, "ucrLegendKeyHeight")
+        Me.ucrLegendKeyHeight.AutoSize = True
+        Me.ucrLegendKeyHeight.Location = New System.Drawing.Point(269, 21)
         Me.ucrLegendKeyHeight.Name = "ucrLegendKeyHeight"
+        Me.ucrLegendKeyHeight.Size = New System.Drawing.Size(263, 122)
+        Me.ucrLegendKeyHeight.TabIndex = 1
         '
         'ucrLegendKeySize
         '
-        resources.ApplyResources(Me.ucrLegendKeySize, "ucrLegendKeySize")
+        Me.ucrLegendKeySize.AutoSize = True
+        Me.ucrLegendKeySize.Location = New System.Drawing.Point(9, 21)
         Me.ucrLegendKeySize.Name = "ucrLegendKeySize"
+        Me.ucrLegendKeySize.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendKeySize.TabIndex = 0
         '
         'grpLegendTitleAndText
         '
         Me.grpLegendTitleAndText.Controls.Add(Me.ucrLegendText)
         Me.grpLegendTitleAndText.Controls.Add(Me.ucrLegendTitle)
-        resources.ApplyResources(Me.grpLegendTitleAndText, "grpLegendTitleAndText")
+        Me.grpLegendTitleAndText.Location = New System.Drawing.Point(6, 6)
         Me.grpLegendTitleAndText.Name = "grpLegendTitleAndText"
+        Me.grpLegendTitleAndText.Size = New System.Drawing.Size(535, 255)
+        Me.grpLegendTitleAndText.TabIndex = 0
         Me.grpLegendTitleAndText.TabStop = False
+        Me.grpLegendTitleAndText.Text = "Legend Title and Text"
         '
         'ucrLegendText
         '
-        resources.ApplyResources(Me.ucrLegendText, "ucrLegendText")
+        Me.ucrLegendText.AutoSize = True
+        Me.ucrLegendText.Location = New System.Drawing.Point(275, 21)
         Me.ucrLegendText.Name = "ucrLegendText"
+        Me.ucrLegendText.Size = New System.Drawing.Size(255, 226)
+        Me.ucrLegendText.TabIndex = 1
         '
         'ucrLegendTitle
         '
-        resources.ApplyResources(Me.ucrLegendTitle, "ucrLegendTitle")
+        Me.ucrLegendTitle.AutoSize = True
+        Me.ucrLegendTitle.Location = New System.Drawing.Point(14, 21)
         Me.ucrLegendTitle.Name = "ucrLegendTitle"
+        Me.ucrLegendTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrLegendTitle.TabIndex = 0
         '
         'grpLegendAdjustments
         '
@@ -377,229 +470,341 @@ Partial Class sdgThemes
         Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendPosition)
         Me.grpLegendAdjustments.Controls.Add(Me.ucrChkLegendDirection)
         Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendBoxJust)
-        resources.ApplyResources(Me.grpLegendAdjustments, "grpLegendAdjustments")
+        Me.grpLegendAdjustments.Location = New System.Drawing.Point(550, 6)
         Me.grpLegendAdjustments.Name = "grpLegendAdjustments"
+        Me.grpLegendAdjustments.Size = New System.Drawing.Size(260, 164)
+        Me.grpLegendAdjustments.TabIndex = 1
         Me.grpLegendAdjustments.TabStop = False
+        Me.grpLegendAdjustments.Text = "Legend Adjustments"
         '
         'ucrInputLegendJustification
         '
         Me.ucrInputLegendJustification.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendJustification.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendJustification.GetSetSelectedIndex = -1
         Me.ucrInputLegendJustification.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLegendJustification, "ucrInputLegendJustification")
+        Me.ucrInputLegendJustification.Location = New System.Drawing.Point(152, 126)
+        Me.ucrInputLegendJustification.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendJustification.Name = "ucrInputLegendJustification"
+        Me.ucrInputLegendJustification.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendJustification.TabIndex = 9
         '
         'ucrInputLegendBox
         '
         Me.ucrInputLegendBox.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendBox.GetSetSelectedIndex = -1
         Me.ucrInputLegendBox.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLegendBox, "ucrInputLegendBox")
+        Me.ucrInputLegendBox.Location = New System.Drawing.Point(152, 98)
+        Me.ucrInputLegendBox.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendBox.Name = "ucrInputLegendBox"
+        Me.ucrInputLegendBox.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendBox.TabIndex = 7
         '
         'ucrInputLegendPosition
         '
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(152, 19)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendPosition.TabIndex = 1
         '
         'ucrInputLegendDirection
         '
         Me.ucrInputLegendDirection.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendDirection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendDirection.GetSetSelectedIndex = -1
         Me.ucrInputLegendDirection.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLegendDirection, "ucrInputLegendDirection")
+        Me.ucrInputLegendDirection.Location = New System.Drawing.Point(152, 45)
+        Me.ucrInputLegendDirection.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendDirection.Name = "ucrInputLegendDirection"
+        Me.ucrInputLegendDirection.Size = New System.Drawing.Size(105, 21)
+        Me.ucrInputLegendDirection.TabIndex = 3
         '
         'ucrInputLegendBoxJust
         '
         Me.ucrInputLegendBoxJust.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBoxJust.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendBoxJust.GetSetSelectedIndex = -1
         Me.ucrInputLegendBoxJust.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLegendBoxJust, "ucrInputLegendBoxJust")
+        Me.ucrInputLegendBoxJust.Location = New System.Drawing.Point(177, 71)
+        Me.ucrInputLegendBoxJust.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLegendBoxJust.Name = "ucrInputLegendBoxJust"
+        Me.ucrInputLegendBoxJust.Size = New System.Drawing.Size(80, 21)
+        Me.ucrInputLegendBoxJust.TabIndex = 5
         '
         'ucrChkLegendJustification
         '
+        Me.ucrChkLegendJustification.AutoSize = True
         Me.ucrChkLegendJustification.Checked = False
-        resources.ApplyResources(Me.ucrChkLegendJustification, "ucrChkLegendJustification")
+        Me.ucrChkLegendJustification.Location = New System.Drawing.Point(6, 128)
         Me.ucrChkLegendJustification.Name = "ucrChkLegendJustification"
+        Me.ucrChkLegendJustification.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendJustification.TabIndex = 8
         '
         'ucrChkLegendBox
         '
+        Me.ucrChkLegendBox.AutoSize = True
         Me.ucrChkLegendBox.Checked = False
-        resources.ApplyResources(Me.ucrChkLegendBox, "ucrChkLegendBox")
+        Me.ucrChkLegendBox.Location = New System.Drawing.Point(6, 100)
         Me.ucrChkLegendBox.Name = "ucrChkLegendBox"
+        Me.ucrChkLegendBox.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendBox.TabIndex = 6
         '
         'urChkLegendPosition
         '
+        Me.urChkLegendPosition.AutoSize = True
         Me.urChkLegendPosition.Checked = False
-        resources.ApplyResources(Me.urChkLegendPosition, "urChkLegendPosition")
+        Me.urChkLegendPosition.Location = New System.Drawing.Point(6, 21)
         Me.urChkLegendPosition.Name = "urChkLegendPosition"
+        Me.urChkLegendPosition.Size = New System.Drawing.Size(147, 23)
+        Me.urChkLegendPosition.TabIndex = 0
         '
         'ucrChkLegendDirection
         '
+        Me.ucrChkLegendDirection.AutoSize = True
         Me.ucrChkLegendDirection.Checked = False
-        resources.ApplyResources(Me.ucrChkLegendDirection, "ucrChkLegendDirection")
+        Me.ucrChkLegendDirection.Location = New System.Drawing.Point(6, 47)
         Me.ucrChkLegendDirection.Name = "ucrChkLegendDirection"
+        Me.ucrChkLegendDirection.Size = New System.Drawing.Size(147, 23)
+        Me.ucrChkLegendDirection.TabIndex = 2
         '
         'urChkLegendBoxJust
         '
+        Me.urChkLegendBoxJust.AutoSize = True
         Me.urChkLegendBoxJust.Checked = False
-        resources.ApplyResources(Me.urChkLegendBoxJust, "urChkLegendBoxJust")
+        Me.urChkLegendBoxJust.Location = New System.Drawing.Point(6, 73)
         Me.urChkLegendBoxJust.Name = "urChkLegendBoxJust"
+        Me.urChkLegendBoxJust.Size = New System.Drawing.Size(165, 23)
+        Me.urChkLegendBoxJust.TabIndex = 4
         '
         'grpLegendBackGroundAndKey
         '
         Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendBoxBackground)
         Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendBackground)
         Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendKey)
-        resources.ApplyResources(Me.grpLegendBackGroundAndKey, "grpLegendBackGroundAndKey")
+        Me.grpLegendBackGroundAndKey.Location = New System.Drawing.Point(6, 269)
         Me.grpLegendBackGroundAndKey.Name = "grpLegendBackGroundAndKey"
+        Me.grpLegendBackGroundAndKey.Size = New System.Drawing.Size(801, 150)
+        Me.grpLegendBackGroundAndKey.TabIndex = 2
         Me.grpLegendBackGroundAndKey.TabStop = False
+        Me.grpLegendBackGroundAndKey.Text = "Legend Background and Key"
         '
         'ucrLegendBoxBackground
         '
-        resources.ApplyResources(Me.ucrLegendBoxBackground, "ucrLegendBoxBackground")
+        Me.ucrLegendBoxBackground.AutoSize = True
+        Me.ucrLegendBoxBackground.Location = New System.Drawing.Point(275, 21)
         Me.ucrLegendBoxBackground.Name = "ucrLegendBoxBackground"
+        Me.ucrLegendBoxBackground.Size = New System.Drawing.Size(253, 130)
+        Me.ucrLegendBoxBackground.TabIndex = 1
         '
         'ucrLegendBackground
         '
-        resources.ApplyResources(Me.ucrLegendBackground, "ucrLegendBackground")
+        Me.ucrLegendBackground.AutoSize = True
+        Me.ucrLegendBackground.Location = New System.Drawing.Point(14, 21)
         Me.ucrLegendBackground.Name = "ucrLegendBackground"
+        Me.ucrLegendBackground.Size = New System.Drawing.Size(253, 130)
+        Me.ucrLegendBackground.TabIndex = 0
         '
         'ucrLegendKey
         '
-        resources.ApplyResources(Me.ucrLegendKey, "ucrLegendKey")
+        Me.ucrLegendKey.AutoSize = True
+        Me.ucrLegendKey.Location = New System.Drawing.Point(536, 21)
         Me.ucrLegendKey.Name = "ucrLegendKey"
+        Me.ucrLegendKey.Size = New System.Drawing.Size(253, 130)
+        Me.ucrLegendKey.TabIndex = 2
         '
         'tbThemeYaxis
         '
         Me.tbThemeYaxis.Controls.Add(Me.grpYAxisTitle)
         Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkLabelsYAxis)
         Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkers)
-        resources.ApplyResources(Me.tbThemeYaxis, "tbThemeYaxis")
+        Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeYaxis.Name = "tbThemeYaxis"
+        Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeYaxis.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemeYaxis.TabIndex = 1
+        Me.tbThemeYaxis.Text = "Y-Axis"
         Me.tbThemeYaxis.UseVisualStyleBackColor = True
         '
         'grpYAxisTitle
         '
         Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYRightAxis)
         Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYAxis)
-        resources.ApplyResources(Me.grpYAxisTitle, "grpYAxisTitle")
+        Me.grpYAxisTitle.Location = New System.Drawing.Point(6, 6)
         Me.grpYAxisTitle.Name = "grpYAxisTitle"
+        Me.grpYAxisTitle.Size = New System.Drawing.Size(535, 269)
+        Me.grpYAxisTitle.TabIndex = 0
         Me.grpYAxisTitle.TabStop = False
+        Me.grpYAxisTitle.Text = "Y-Lab Title"
         '
         'ucrThemeTitleYRightAxis
         '
-        resources.ApplyResources(Me.ucrThemeTitleYRightAxis, "ucrThemeTitleYRightAxis")
+        Me.ucrThemeTitleYRightAxis.AutoSize = True
+        Me.ucrThemeTitleYRightAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTitleYRightAxis.Name = "ucrThemeTitleYRightAxis"
+        Me.ucrThemeTitleYRightAxis.Size = New System.Drawing.Size(262, 227)
+        Me.ucrThemeTitleYRightAxis.TabIndex = 1
         '
         'ucrThemeTitleYAxis
         '
-        resources.ApplyResources(Me.ucrThemeTitleYAxis, "ucrThemeTitleYAxis")
+        Me.ucrThemeTitleYAxis.AutoSize = True
+        Me.ucrThemeTitleYAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeTitleYAxis.Name = "ucrThemeTitleYAxis"
+        Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 227)
+        Me.ucrThemeTitleYAxis.TabIndex = 0
         '
         'grpTickMarkLabelsYAxis
         '
         Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeYRightAxis)
         Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeLeftYAxis)
-        resources.ApplyResources(Me.grpTickMarkLabelsYAxis, "grpTickMarkLabelsYAxis")
+        Me.grpTickMarkLabelsYAxis.Location = New System.Drawing.Point(6, 277)
         Me.grpTickMarkLabelsYAxis.Name = "grpTickMarkLabelsYAxis"
+        Me.grpTickMarkLabelsYAxis.Size = New System.Drawing.Size(535, 258)
+        Me.grpTickMarkLabelsYAxis.TabIndex = 2
         Me.grpTickMarkLabelsYAxis.TabStop = False
+        Me.grpTickMarkLabelsYAxis.Text = "Tick Mark Labels "
         '
         'ucrThemeYRightAxis
         '
-        resources.ApplyResources(Me.ucrThemeYRightAxis, "ucrThemeYRightAxis")
+        Me.ucrThemeYRightAxis.AutoSize = True
+        Me.ucrThemeYRightAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeYRightAxis.Name = "ucrThemeYRightAxis"
+        Me.ucrThemeYRightAxis.Size = New System.Drawing.Size(262, 226)
+        Me.ucrThemeYRightAxis.TabIndex = 1
         '
         'ucrThemeLeftYAxis
         '
-        resources.ApplyResources(Me.ucrThemeLeftYAxis, "ucrThemeLeftYAxis")
+        Me.ucrThemeLeftYAxis.AutoSize = True
+        Me.ucrThemeLeftYAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeLeftYAxis.Name = "ucrThemeLeftYAxis"
+        Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrThemeLeftYAxis.TabIndex = 0
         '
         'grpTickMarkers
         '
         Me.grpTickMarkers.Controls.Add(Me.ucrTickMarksYAxis)
         Me.grpTickMarkers.Controls.Add(Me.ucrYAxisLines)
-        resources.ApplyResources(Me.grpTickMarkers, "grpTickMarkers")
+        Me.grpTickMarkers.Location = New System.Drawing.Point(550, 6)
         Me.grpTickMarkers.Name = "grpTickMarkers"
+        Me.grpTickMarkers.Size = New System.Drawing.Size(260, 269)
+        Me.grpTickMarkers.TabIndex = 1
         Me.grpTickMarkers.TabStop = False
+        Me.grpTickMarkers.Text = "TickMarkers"
         '
         'ucrTickMarksYAxis
         '
-        resources.ApplyResources(Me.ucrTickMarksYAxis, "ucrTickMarksYAxis")
+        Me.ucrTickMarksYAxis.AutoSize = True
+        Me.ucrTickMarksYAxis.Location = New System.Drawing.Point(4, 21)
         Me.ucrTickMarksYAxis.Name = "ucrTickMarksYAxis"
+        Me.ucrTickMarksYAxis.Size = New System.Drawing.Size(255, 123)
+        Me.ucrTickMarksYAxis.TabIndex = 0
         '
         'ucrYAxisLines
         '
-        resources.ApplyResources(Me.ucrYAxisLines, "ucrYAxisLines")
+        Me.ucrYAxisLines.AutoSize = True
+        Me.ucrYAxisLines.Location = New System.Drawing.Point(4, 142)
         Me.ucrYAxisLines.Name = "ucrYAxisLines"
+        Me.ucrYAxisLines.Size = New System.Drawing.Size(254, 124)
+        Me.ucrYAxisLines.TabIndex = 1
         '
         'tbThemeXAxis
         '
         Me.tbThemeXAxis.Controls.Add(Me.grpTickMarkLabelsXAxis)
         Me.tbThemeXAxis.Controls.Add(Me.grpTickMarks)
         Me.tbThemeXAxis.Controls.Add(Me.grpXAxisTitle)
-        resources.ApplyResources(Me.tbThemeXAxis, "tbThemeXAxis")
+        Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeXAxis.Name = "tbThemeXAxis"
+        Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeXAxis.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemeXAxis.TabIndex = 0
+        Me.tbThemeXAxis.Text = "X-Axis"
         Me.tbThemeXAxis.UseVisualStyleBackColor = True
         '
         'grpTickMarkLabelsXAxis
         '
         Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeTopXAxis)
         Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeBottomXAxis)
-        resources.ApplyResources(Me.grpTickMarkLabelsXAxis, "grpTickMarkLabelsXAxis")
+        Me.grpTickMarkLabelsXAxis.Location = New System.Drawing.Point(6, 277)
         Me.grpTickMarkLabelsXAxis.Name = "grpTickMarkLabelsXAxis"
+        Me.grpTickMarkLabelsXAxis.Size = New System.Drawing.Size(535, 258)
+        Me.grpTickMarkLabelsXAxis.TabIndex = 2
         Me.grpTickMarkLabelsXAxis.TabStop = False
+        Me.grpTickMarkLabelsXAxis.Text = "Tick Mark Labels "
         '
         'ucrThemeTopXAxis
         '
-        resources.ApplyResources(Me.ucrThemeTopXAxis, "ucrThemeTopXAxis")
+        Me.ucrThemeTopXAxis.AutoSize = True
+        Me.ucrThemeTopXAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTopXAxis.Name = "ucrThemeTopXAxis"
+        Me.ucrThemeTopXAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrThemeTopXAxis.TabIndex = 1
         '
         'ucrThemeBottomXAxis
         '
-        resources.ApplyResources(Me.ucrThemeBottomXAxis, "ucrThemeBottomXAxis")
+        Me.ucrThemeBottomXAxis.AutoSize = True
+        Me.ucrThemeBottomXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeBottomXAxis.Name = "ucrThemeBottomXAxis"
+        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrThemeBottomXAxis.TabIndex = 0
         '
         'grpTickMarks
         '
         Me.grpTickMarks.Controls.Add(Me.ucrXAxisLines)
         Me.grpTickMarks.Controls.Add(Me.ucrTickMarksXAxis)
-        resources.ApplyResources(Me.grpTickMarks, "grpTickMarks")
+        Me.grpTickMarks.Location = New System.Drawing.Point(550, 6)
         Me.grpTickMarks.Name = "grpTickMarks"
+        Me.grpTickMarks.Size = New System.Drawing.Size(260, 269)
+        Me.grpTickMarks.TabIndex = 1
         Me.grpTickMarks.TabStop = False
+        Me.grpTickMarks.Text = "TickMarkers"
         '
         'ucrXAxisLines
         '
-        resources.ApplyResources(Me.ucrXAxisLines, "ucrXAxisLines")
+        Me.ucrXAxisLines.AutoSize = True
+        Me.ucrXAxisLines.Location = New System.Drawing.Point(4, 142)
         Me.ucrXAxisLines.Name = "ucrXAxisLines"
+        Me.ucrXAxisLines.Size = New System.Drawing.Size(254, 124)
+        Me.ucrXAxisLines.TabIndex = 1
         '
         'ucrTickMarksXAxis
         '
-        resources.ApplyResources(Me.ucrTickMarksXAxis, "ucrTickMarksXAxis")
+        Me.ucrTickMarksXAxis.AutoSize = True
+        Me.ucrTickMarksXAxis.Location = New System.Drawing.Point(4, 21)
         Me.ucrTickMarksXAxis.Name = "ucrTickMarksXAxis"
+        Me.ucrTickMarksXAxis.Size = New System.Drawing.Size(254, 124)
+        Me.ucrTickMarksXAxis.TabIndex = 0
         '
         'grpXAxisTitle
         '
         Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXTopAxis)
         Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXAxis)
-        resources.ApplyResources(Me.grpXAxisTitle, "grpXAxisTitle")
+        Me.grpXAxisTitle.Location = New System.Drawing.Point(6, 6)
         Me.grpXAxisTitle.Name = "grpXAxisTitle"
+        Me.grpXAxisTitle.Size = New System.Drawing.Size(535, 269)
+        Me.grpXAxisTitle.TabIndex = 0
         Me.grpXAxisTitle.TabStop = False
+        Me.grpXAxisTitle.Text = "X-Lab Title"
         '
         'ucrThemeTitleXTopAxis
         '
-        resources.ApplyResources(Me.ucrThemeTitleXTopAxis, "ucrThemeTitleXTopAxis")
+        Me.ucrThemeTitleXTopAxis.AutoSize = True
+        Me.ucrThemeTitleXTopAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrThemeTitleXTopAxis.Name = "ucrThemeTitleXTopAxis"
+        Me.ucrThemeTitleXTopAxis.Size = New System.Drawing.Size(252, 230)
+        Me.ucrThemeTitleXTopAxis.TabIndex = 1
         '
         'ucrThemeTitleXAxis
         '
-        resources.ApplyResources(Me.ucrThemeTitleXAxis, "ucrThemeTitleXAxis")
+        Me.ucrThemeTitleXAxis.AutoSize = True
+        Me.ucrThemeTitleXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrThemeTitleXAxis.Name = "ucrThemeTitleXAxis"
+        Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 231)
+        Me.ucrThemeTitleXAxis.TabIndex = 0
         '
         'tbXYAxes
         '
@@ -608,98 +813,147 @@ Partial Class sdgThemes
         Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTickLabels)
         Me.tbXYAxes.Controls.Add(Me.ucrTickMarksAxes)
         Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTitle)
-        resources.ApplyResources(Me.tbXYAxes, "tbXYAxes")
+        Me.tbXYAxes.Location = New System.Drawing.Point(4, 22)
         Me.tbXYAxes.Name = "tbXYAxes"
+        Me.tbXYAxes.Size = New System.Drawing.Size(817, 583)
+        Me.tbXYAxes.TabIndex = 6
+        Me.tbXYAxes.Text = "XY-Axes"
         Me.tbXYAxes.UseVisualStyleBackColor = True
         '
         'grpTickLength
         '
         Me.grpTickLength.Controls.Add(Me.ucrTickLength)
-        resources.ApplyResources(Me.grpTickLength, "grpTickLength")
+        Me.grpTickLength.Location = New System.Drawing.Point(541, 27)
         Me.grpTickLength.Name = "grpTickLength"
+        Me.grpTickLength.Size = New System.Drawing.Size(272, 151)
+        Me.grpTickLength.TabIndex = 2
         Me.grpTickLength.TabStop = False
+        Me.grpTickLength.Text = "grpTickLength"
         '
         'ucrTickLength
         '
-        resources.ApplyResources(Me.ucrTickLength, "ucrTickLength")
+        Me.ucrTickLength.AutoSize = True
+        Me.ucrTickLength.Location = New System.Drawing.Point(6, 23)
         Me.ucrTickLength.Name = "ucrTickLength"
+        Me.ucrTickLength.Size = New System.Drawing.Size(260, 122)
+        Me.ucrTickLength.TabIndex = 0
         '
         'ucrThemeAxesLines
         '
-        resources.ApplyResources(Me.ucrThemeAxesLines, "ucrThemeAxesLines")
+        Me.ucrThemeAxesLines.AutoSize = True
+        Me.ucrThemeAxesLines.Location = New System.Drawing.Point(283, 256)
         Me.ucrThemeAxesLines.Name = "ucrThemeAxesLines"
+        Me.ucrThemeAxesLines.Size = New System.Drawing.Size(253, 122)
+        Me.ucrThemeAxesLines.TabIndex = 4
         '
         'ucrThemeAxesTickLabels
         '
-        resources.ApplyResources(Me.ucrThemeAxesTickLabels, "ucrThemeAxesTickLabels")
+        Me.ucrThemeAxesTickLabels.AutoSize = True
+        Me.ucrThemeAxesTickLabels.Location = New System.Drawing.Point(281, 27)
         Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
+        Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTickLabels.TabIndex = 1
         '
         'ucrTickMarksAxes
         '
-        resources.ApplyResources(Me.ucrTickMarksAxes, "ucrTickMarksAxes")
+        Me.ucrTickMarksAxes.AutoSize = True
+        Me.ucrTickMarksAxes.Location = New System.Drawing.Point(21, 256)
         Me.ucrTickMarksAxes.Name = "ucrTickMarksAxes"
+        Me.ucrTickMarksAxes.Size = New System.Drawing.Size(257, 122)
+        Me.ucrTickMarksAxes.TabIndex = 3
         '
         'ucrThemeAxesTitle
         '
-        resources.ApplyResources(Me.ucrThemeAxesTitle, "ucrThemeAxesTitle")
+        Me.ucrThemeAxesTitle.AutoSize = True
+        Me.ucrThemeAxesTitle.Location = New System.Drawing.Point(20, 27)
         Me.ucrThemeAxesTitle.Name = "ucrThemeAxesTitle"
+        Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTitle.TabIndex = 0
         '
         'tbPLot
         '
         Me.tbPLot.Controls.Add(Me.grpPlotMargin)
         Me.tbPLot.Controls.Add(Me.grpPlotBackground)
         Me.tbPLot.Controls.Add(Me.grpPlotTitleAndCaption)
-        resources.ApplyResources(Me.tbPLot, "tbPLot")
+        Me.tbPLot.Location = New System.Drawing.Point(4, 22)
         Me.tbPLot.Name = "tbPLot"
+        Me.tbPLot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbPLot.Size = New System.Drawing.Size(817, 583)
+        Me.tbPLot.TabIndex = 7
+        Me.tbPLot.Text = "Plot"
         Me.tbPLot.UseVisualStyleBackColor = True
         '
         'grpPlotMargin
         '
         Me.grpPlotMargin.Controls.Add(Me.ucrPlotMargin)
-        resources.ApplyResources(Me.grpPlotMargin, "grpPlotMargin")
+        Me.grpPlotMargin.Location = New System.Drawing.Point(285, 269)
         Me.grpPlotMargin.Name = "grpPlotMargin"
+        Me.grpPlotMargin.Size = New System.Drawing.Size(271, 153)
+        Me.grpPlotMargin.TabIndex = 2
         Me.grpPlotMargin.TabStop = False
+        Me.grpPlotMargin.Text = "Margin"
         '
         'ucrPlotMargin
         '
-        resources.ApplyResources(Me.ucrPlotMargin, "ucrPlotMargin")
+        Me.ucrPlotMargin.AutoSize = True
+        Me.ucrPlotMargin.Location = New System.Drawing.Point(5, 23)
         Me.ucrPlotMargin.Name = "ucrPlotMargin"
+        Me.ucrPlotMargin.Size = New System.Drawing.Size(260, 123)
+        Me.ucrPlotMargin.TabIndex = 0
         '
         'grpPlotBackground
         '
         Me.grpPlotBackground.Controls.Add(Me.ucrPlotBackground)
-        resources.ApplyResources(Me.grpPlotBackground, "grpPlotBackground")
+        Me.grpPlotBackground.Location = New System.Drawing.Point(6, 269)
         Me.grpPlotBackground.Name = "grpPlotBackground"
+        Me.grpPlotBackground.Size = New System.Drawing.Size(269, 153)
+        Me.grpPlotBackground.TabIndex = 1
         Me.grpPlotBackground.TabStop = False
+        Me.grpPlotBackground.Text = "Background "
         '
         'ucrPlotBackground
         '
-        resources.ApplyResources(Me.ucrPlotBackground, "ucrPlotBackground")
+        Me.ucrPlotBackground.AutoSize = True
+        Me.ucrPlotBackground.Location = New System.Drawing.Point(14, 21)
         Me.ucrPlotBackground.Name = "ucrPlotBackground"
+        Me.ucrPlotBackground.Size = New System.Drawing.Size(253, 131)
+        Me.ucrPlotBackground.TabIndex = 0
         '
         'grpPlotTitleAndCaption
         '
         Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotCaption)
         Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotSubTitle)
         Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotTitle)
-        resources.ApplyResources(Me.grpPlotTitleAndCaption, "grpPlotTitleAndCaption")
+        Me.grpPlotTitleAndCaption.Location = New System.Drawing.Point(6, 6)
         Me.grpPlotTitleAndCaption.Name = "grpPlotTitleAndCaption"
+        Me.grpPlotTitleAndCaption.Size = New System.Drawing.Size(804, 255)
+        Me.grpPlotTitleAndCaption.TabIndex = 0
         Me.grpPlotTitleAndCaption.TabStop = False
+        Me.grpPlotTitleAndCaption.Text = "Plot Title and Caption"
         '
         'ucrPlotCaption
         '
-        resources.ApplyResources(Me.ucrPlotCaption, "ucrPlotCaption")
+        Me.ucrPlotCaption.AutoSize = True
+        Me.ucrPlotCaption.Location = New System.Drawing.Point(536, 21)
         Me.ucrPlotCaption.Name = "ucrPlotCaption"
+        Me.ucrPlotCaption.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotCaption.TabIndex = 2
         '
         'ucrPlotSubTitle
         '
-        resources.ApplyResources(Me.ucrPlotSubTitle, "ucrPlotSubTitle")
+        Me.ucrPlotSubTitle.AutoSize = True
+        Me.ucrPlotSubTitle.Location = New System.Drawing.Point(275, 21)
         Me.ucrPlotSubTitle.Name = "ucrPlotSubTitle"
+        Me.ucrPlotSubTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotSubTitle.TabIndex = 1
         '
         'ucrPlotTitle
         '
-        resources.ApplyResources(Me.ucrPlotTitle, "ucrPlotTitle")
+        Me.ucrPlotTitle.AutoSize = True
+        Me.ucrPlotTitle.Location = New System.Drawing.Point(14, 21)
         Me.ucrPlotTitle.Name = "ucrPlotTitle"
+        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 226)
+        Me.ucrPlotTitle.TabIndex = 0
         '
         'tbLegend
         '
@@ -712,59 +966,86 @@ Partial Class sdgThemes
         Me.tbLegend.Controls.Add(Me.tbThemePanelAndBackground)
         Me.tbLegend.Controls.Add(Me.tbThemePanelMoreOptions)
         Me.tbLegend.Controls.Add(Me.tbThemeFacets)
-        resources.ApplyResources(Me.tbLegend, "tbLegend")
+        Me.tbLegend.Location = New System.Drawing.Point(4, 8)
         Me.tbLegend.Name = "tbLegend"
         Me.tbLegend.SelectedIndex = 0
+        Me.tbLegend.Size = New System.Drawing.Size(825, 609)
+        Me.tbLegend.TabIndex = 0
         '
         'tbThemeLegendMoreOptions
         '
         Me.tbThemeLegendMoreOptions.Controls.Add(Me.grpLegendBoxSpacing)
         Me.tbThemeLegendMoreOptions.Controls.Add(Me.grpLegendSpacing)
-        resources.ApplyResources(Me.tbThemeLegendMoreOptions, "tbThemeLegendMoreOptions")
+        Me.tbThemeLegendMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegendMoreOptions.Name = "tbThemeLegendMoreOptions"
+        Me.tbThemeLegendMoreOptions.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemeLegendMoreOptions.TabIndex = 10
+        Me.tbThemeLegendMoreOptions.Text = "Legend (More Options)"
         Me.tbThemeLegendMoreOptions.UseVisualStyleBackColor = True
         '
         'grpLegendBoxSpacing
         '
         Me.grpLegendBoxSpacing.Controls.Add(Me.ucrLegendBoxSpacing)
-        resources.ApplyResources(Me.grpLegendBoxSpacing, "grpLegendBoxSpacing")
+        Me.grpLegendBoxSpacing.Location = New System.Drawing.Point(6, 172)
         Me.grpLegendBoxSpacing.Name = "grpLegendBoxSpacing"
+        Me.grpLegendBoxSpacing.Size = New System.Drawing.Size(272, 154)
+        Me.grpLegendBoxSpacing.TabIndex = 1
         Me.grpLegendBoxSpacing.TabStop = False
+        Me.grpLegendBoxSpacing.Text = "Legend Box Spacing"
         '
         'ucrLegendBoxSpacing
         '
-        resources.ApplyResources(Me.ucrLegendBoxSpacing, "ucrLegendBoxSpacing")
+        Me.ucrLegendBoxSpacing.AutoSize = True
+        Me.ucrLegendBoxSpacing.Location = New System.Drawing.Point(4, 21)
         Me.ucrLegendBoxSpacing.Name = "ucrLegendBoxSpacing"
+        Me.ucrLegendBoxSpacing.Size = New System.Drawing.Size(262, 127)
+        Me.ucrLegendBoxSpacing.TabIndex = 0
         '
         'grpLegendSpacing
         '
         Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacingYAxis)
         Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacingXAxis)
         Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacing)
-        resources.ApplyResources(Me.grpLegendSpacing, "grpLegendSpacing")
+        Me.grpLegendSpacing.Location = New System.Drawing.Point(6, 6)
         Me.grpLegendSpacing.Name = "grpLegendSpacing"
+        Me.grpLegendSpacing.Size = New System.Drawing.Size(798, 150)
+        Me.grpLegendSpacing.TabIndex = 0
         Me.grpLegendSpacing.TabStop = False
+        Me.grpLegendSpacing.Text = "Legend Spacing"
         '
         'ucrLegendSpacingYAxis
         '
-        resources.ApplyResources(Me.ucrLegendSpacingYAxis, "ucrLegendSpacingYAxis")
+        Me.ucrLegendSpacingYAxis.AutoSize = True
+        Me.ucrLegendSpacingYAxis.Location = New System.Drawing.Point(532, 21)
         Me.ucrLegendSpacingYAxis.Name = "ucrLegendSpacingYAxis"
+        Me.ucrLegendSpacingYAxis.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendSpacingYAxis.TabIndex = 2
         '
         'ucrLegendSpacingXAxis
         '
-        resources.ApplyResources(Me.ucrLegendSpacingXAxis, "ucrLegendSpacingXAxis")
+        Me.ucrLegendSpacingXAxis.AutoSize = True
+        Me.ucrLegendSpacingXAxis.Location = New System.Drawing.Point(268, 21)
         Me.ucrLegendSpacingXAxis.Name = "ucrLegendSpacingXAxis"
+        Me.ucrLegendSpacingXAxis.Size = New System.Drawing.Size(261, 122)
+        Me.ucrLegendSpacingXAxis.TabIndex = 1
         '
         'ucrLegendSpacing
         '
-        resources.ApplyResources(Me.ucrLegendSpacing, "ucrLegendSpacing")
+        Me.ucrLegendSpacing.AutoSize = True
+        Me.ucrLegendSpacing.Location = New System.Drawing.Point(6, 21)
         Me.ucrLegendSpacing.Name = "ucrLegendSpacing"
+        Me.ucrLegendSpacing.Size = New System.Drawing.Size(260, 122)
+        Me.ucrLegendSpacing.TabIndex = 0
         '
         'tbThemePanelMoreOptions
         '
         Me.tbThemePanelMoreOptions.Controls.Add(Me.grpPanelGridMajorMinor)
-        resources.ApplyResources(Me.tbThemePanelMoreOptions, "tbThemePanelMoreOptions")
+        Me.tbThemePanelMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelMoreOptions.Name = "tbThemePanelMoreOptions"
+        Me.tbThemePanelMoreOptions.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemePanelMoreOptions.Size = New System.Drawing.Size(817, 583)
+        Me.tbThemePanelMoreOptions.TabIndex = 9
+        Me.tbThemePanelMoreOptions.Text = "Panel (More Options)"
         Me.tbThemePanelMoreOptions.UseVisualStyleBackColor = True
         '
         'grpPanelGridMajorMinor
@@ -773,74 +1054,118 @@ Partial Class sdgThemes
         Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMinorXAxis)
         Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMajorYAxis)
         Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMajorXAxis)
-        resources.ApplyResources(Me.grpPanelGridMajorMinor, "grpPanelGridMajorMinor")
+        Me.grpPanelGridMajorMinor.Location = New System.Drawing.Point(6, 6)
         Me.grpPanelGridMajorMinor.Name = "grpPanelGridMajorMinor"
+        Me.grpPanelGridMajorMinor.Size = New System.Drawing.Size(539, 486)
+        Me.grpPanelGridMajorMinor.TabIndex = 0
         Me.grpPanelGridMajorMinor.TabStop = False
+        Me.grpPanelGridMajorMinor.Text = "Panel Grid"
         '
         'ucrPanelGridMinorYAxis
         '
-        resources.ApplyResources(Me.ucrPanelGridMinorYAxis, "ucrPanelGridMinorYAxis")
+        Me.ucrPanelGridMinorYAxis.AutoSize = True
+        Me.ucrPanelGridMinorYAxis.Location = New System.Drawing.Point(275, 251)
         Me.ucrPanelGridMinorYAxis.Name = "ucrPanelGridMinorYAxis"
+        Me.ucrPanelGridMinorYAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrPanelGridMinorYAxis.TabIndex = 3
         '
         'ucrPanelGridMinorXAxis
         '
-        resources.ApplyResources(Me.ucrPanelGridMinorXAxis, "ucrPanelGridMinorXAxis")
+        Me.ucrPanelGridMinorXAxis.AutoSize = True
+        Me.ucrPanelGridMinorXAxis.Location = New System.Drawing.Point(14, 251)
         Me.ucrPanelGridMinorXAxis.Name = "ucrPanelGridMinorXAxis"
+        Me.ucrPanelGridMinorXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrPanelGridMinorXAxis.TabIndex = 2
         '
         'ucrPanelGridMajorYAxis
         '
-        resources.ApplyResources(Me.ucrPanelGridMajorYAxis, "ucrPanelGridMajorYAxis")
+        Me.ucrPanelGridMajorYAxis.AutoSize = True
+        Me.ucrPanelGridMajorYAxis.Location = New System.Drawing.Point(275, 21)
         Me.ucrPanelGridMajorYAxis.Name = "ucrPanelGridMajorYAxis"
+        Me.ucrPanelGridMajorYAxis.Size = New System.Drawing.Size(258, 226)
+        Me.ucrPanelGridMajorYAxis.TabIndex = 1
         '
         'ucrPanelGridMajorXAxis
         '
-        resources.ApplyResources(Me.ucrPanelGridMajorXAxis, "ucrPanelGridMajorXAxis")
+        Me.ucrPanelGridMajorXAxis.AutoSize = True
+        Me.ucrPanelGridMajorXAxis.Location = New System.Drawing.Point(14, 21)
         Me.ucrPanelGridMajorXAxis.Name = "ucrPanelGridMajorXAxis"
+        Me.ucrPanelGridMajorXAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrPanelGridMajorXAxis.TabIndex = 0
         '
         'sdgThemes
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(833, 653)
         Me.Controls.Add(Me.tbLegend)
         Me.Controls.Add(Me.ucrBaseSubdialogue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgThemes"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Themes"
         Me.tbThemeFacets.ResumeLayout(False)
         Me.grpSpaceBetweenStripsAxes.ResumeLayout(False)
+        Me.grpSpaceBetweenStripsAxes.PerformLayout()
         Me.grpFacetBackground.ResumeLayout(False)
+        Me.grpFacetBackground.PerformLayout()
         Me.grpFacetLabels.ResumeLayout(False)
+        Me.grpFacetLabels.PerformLayout()
         Me.tbThemePanelAndBackground.ResumeLayout(False)
         Me.grpPanelSpacing.ResumeLayout(False)
+        Me.grpPanelSpacing.PerformLayout()
         Me.grpBorderAndBackground.ResumeLayout(False)
+        Me.grpBorderAndBackground.PerformLayout()
         Me.grpPanelGrid.ResumeLayout(False)
+        Me.grpPanelGrid.PerformLayout()
         Me.tbThemeLegend.ResumeLayout(False)
         Me.grpLegendKeyAdjustment.ResumeLayout(False)
+        Me.grpLegendKeyAdjustment.PerformLayout()
         Me.grpLegendTitleAndText.ResumeLayout(False)
+        Me.grpLegendTitleAndText.PerformLayout()
         Me.grpLegendAdjustments.ResumeLayout(False)
+        Me.grpLegendAdjustments.PerformLayout()
         Me.grpLegendBackGroundAndKey.ResumeLayout(False)
+        Me.grpLegendBackGroundAndKey.PerformLayout()
         Me.tbThemeYaxis.ResumeLayout(False)
         Me.grpYAxisTitle.ResumeLayout(False)
+        Me.grpYAxisTitle.PerformLayout()
         Me.grpTickMarkLabelsYAxis.ResumeLayout(False)
+        Me.grpTickMarkLabelsYAxis.PerformLayout()
         Me.grpTickMarkers.ResumeLayout(False)
+        Me.grpTickMarkers.PerformLayout()
         Me.tbThemeXAxis.ResumeLayout(False)
         Me.grpTickMarkLabelsXAxis.ResumeLayout(False)
+        Me.grpTickMarkLabelsXAxis.PerformLayout()
         Me.grpTickMarks.ResumeLayout(False)
+        Me.grpTickMarks.PerformLayout()
         Me.grpXAxisTitle.ResumeLayout(False)
+        Me.grpXAxisTitle.PerformLayout()
         Me.tbXYAxes.ResumeLayout(False)
+        Me.tbXYAxes.PerformLayout()
         Me.grpTickLength.ResumeLayout(False)
+        Me.grpTickLength.PerformLayout()
         Me.tbPLot.ResumeLayout(False)
         Me.grpPlotMargin.ResumeLayout(False)
+        Me.grpPlotMargin.PerformLayout()
         Me.grpPlotBackground.ResumeLayout(False)
+        Me.grpPlotBackground.PerformLayout()
         Me.grpPlotTitleAndCaption.ResumeLayout(False)
+        Me.grpPlotTitleAndCaption.PerformLayout()
         Me.tbLegend.ResumeLayout(False)
         Me.tbThemeLegendMoreOptions.ResumeLayout(False)
         Me.grpLegendBoxSpacing.ResumeLayout(False)
+        Me.grpLegendBoxSpacing.PerformLayout()
         Me.grpLegendSpacing.ResumeLayout(False)
+        Me.grpLegendSpacing.PerformLayout()
         Me.tbThemePanelMoreOptions.ResumeLayout(False)
         Me.grpPanelGridMajorMinor.ResumeLayout(False)
+        Me.grpPanelGridMajorMinor.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

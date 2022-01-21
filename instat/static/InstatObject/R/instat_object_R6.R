@@ -2663,7 +2663,8 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   all_dates <- seq(start_date, end_date, by = 1)
   all_periods <- unique(paste(lubridate::year(all_dates), sprintf("%02d", lubridate::month(all_dates)), sep = "-"))
   area <- c(lat[2], lon[1], lat[1], lon[2])
-  pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
   nc_files <- vector(mode = "character", length = length(all_periods))
   for (i in seq_along(all_periods)) {
     y <- substr(all_periods[i], 1, 4)
@@ -2683,7 +2684,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       target = paste0(dataset, "-", paste(elements, collapse = "_"), "-", all_periods[i], ".nc")
     )
     info <- paste0("Requesting data for ", all_periods[i], " - ", round(100 * i / length(all_periods)), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
     ncfile <- ecmwfr::wf_request(user = user, request = request,
                                  transfer = TRUE, path = path,
                                  time_out = 3 * 3600)
@@ -2693,7 +2694,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
       ncdf4::nc_close(nc = nc)
     }
   }
-  close(pb)
+  if (is_win) close(pb)
 })
 
 DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
