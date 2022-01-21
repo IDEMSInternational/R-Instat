@@ -92,7 +92,7 @@ Public Class sdgFormatSummaryTables
         ucrChkAddFootnote.AddParameterPresentCondition(True, "cell_footnote")
         ucrChkAddFootnote.AddParameterPresentCondition(False, "cell_footnote", False)
 
-        ucrChKAddSecondFootnote.SetText("Add Second footnote")
+        ucrChKAddSecondFootnote.SetText("Add second footnote")
         ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputSecondFootnoteRowLocation.SetParameter(New RParameter("second_row_location", iNewPosition:=7))
@@ -111,7 +111,7 @@ Public Class sdgFormatSummaryTables
 
         ucrInputAddSourceNote.SetParameter(New RParameter("source_note", iNewPosition:=8))
 
-        ucrChkAddSourcenote.SetText("Add Source")
+        ucrChkAddSourcenote.SetText("Add source")
         ucrChkAddSourcenote.AddToLinkedControls(ucrInputAddSourceNote, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
