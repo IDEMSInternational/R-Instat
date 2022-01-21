@@ -36,6 +36,9 @@ Public Class sdgCountryColouredMapOptions
     End Sub
 
     Public Sub InitialiseControls()
+
+        ucrBase.iHelpTopicID = 650
+
         ucrPnlRegionChoice.AddRadioButton(rdoOwnCountries)
         ucrPnlRegionChoice.AddRadioButton(rdoChooseRegion)
         ucrPnlRegionChoice.AddFunctionNamesCondition(rdoOwnCountries, "right_join")
