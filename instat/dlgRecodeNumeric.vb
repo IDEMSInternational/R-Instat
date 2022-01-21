@@ -54,6 +54,7 @@ Public Class dlgRecodeNumeric
 
         ucrNudLevels.SetParameter(New RParameter("g", 1))
         ucrNudLevels.SetMinMax(1)
+        ucrNudLevels.Value = 4
 
         ucrNudMinimum.SetParameter(New RParameter("m", 2))
         ucrNudMinimum.SetMinMax(1)
@@ -69,7 +70,7 @@ Public Class dlgRecodeNumeric
         ucrChkAddLabels.SetText("Label Groups with Means")
         ucrChkAddLabels.SetRDefault("FALSE")
 
-        ucrPnlRadioButtons.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRadioButtons.AddToLinkedControls(ucrNudLevels, {rdoLevels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="4")
         ucrPnlRadioButtons.AddToLinkedControls(ucrNudMinimum, {rdoMinimum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="5")
         ucrPnlRadioButtons.AddToLinkedControls(ucrMultipleNumericRecode, {rdoBreakPoints}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -91,7 +92,6 @@ Public Class dlgRecodeNumeric
 
         clsCut2Function.SetPackageName("Hmisc")
         clsCut2Function.SetRCommand("cut2")
-        clsCut2Function.AddParameter("g", "4", iPosition:=1)
         clsDummyRfunction.AddParameter("type", "levels", iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCut2Function)
