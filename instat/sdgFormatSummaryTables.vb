@@ -50,16 +50,16 @@ Public Class sdgFormatSummaryTables
         ucrChkTitleFootnote.AddToLinkedControls(ucrInputTitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTitleFootnote.SetLinkedDisplayControl(grpTitleSubtitle)
 
-        ucrChkTitleFootnote.AddParameterPresentCondition(True, "titlefootnote")
-        ucrChkTitleFootnote.AddParameterPresentCondition(False, "titlefootnote", False)
+        ucrChkTitleFootnote.AddParameterPresentCondition(True, "title_footnote")
+        ucrChkTitleFootnote.AddParameterPresentCondition(False, "title_footnote", False)
 
         ucrInputSubtitleFootnote.SetParameter(New RParameter("subtitle_footnote", iNewPosition:=3))
 
         ucrChkSubtitleFootnote.SetText("Add subtitle footnote")
         ucrChkSubtitleFootnote.AddToLinkedControls(ucrInputSubtitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkSubtitleFootnote.AddParameterPresentCondition(True, "subtitlefootnote")
-        ucrChkSubtitleFootnote.AddParameterPresentCondition(False, "subtitlefootnote", False)
+        ucrChkSubtitleFootnote.AddParameterPresentCondition(True, "subtitle_footnote")
+        ucrChkSubtitleFootnote.AddParameterPresentCondition(False, "subtitle_footnote", False)
 
         ucrInputTitleFont.SetParameter(New RParameter("font", iNewPosition:=0))
         ucrInputTitleFont.SetRDefault("NULL")
@@ -73,8 +73,8 @@ Public Class sdgFormatSummaryTables
         ucrChkAddTitleSubtitle.SetText("Add title/subtitle")
         ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title\subtitle")
-        ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title\subtitle", False)
+        ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title_subtitle")
+        ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title_subtitle", False)
 
         ucrInputFootnoteColumnLocation.SetParameter(New RParameter("col_location", 5))
         ucrInputFootnoteColumnLocation.SetValidationTypeAsNumericList()
@@ -142,8 +142,8 @@ Public Class sdgFormatSummaryTables
                                           {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkStyleText.SetLinkedDisplayControl(grpStyle)
-        ucrChkStyleText.AddParameterPresentCondition(True, "textStyle")
-        ucrChkStyleText.AddParameterPresentCondition(False, "textStyle", False)
+        ucrChkStyleText.AddParameterPresentCondition(True, "text_style")
+        ucrChkStyleText.AddParameterPresentCondition(False, "text_style", False)
 
         ucrInputStyleTextColor.SetParameter(New RParameter("color", iNewPosition:=0))
         ucrInputStyleTextColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
@@ -283,8 +283,8 @@ Public Class sdgFormatSummaryTables
 
         ucrChkStyleFill.SetText("Add fill style")
         ucrChkStyleFill.AddToLinkedControls({ucrNudStyleFillAlpha, ucrInputStyleFillColor}, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStyleFill.AddParameterPresentCondition(True, "fillStyle")
-        ucrChkStyleFill.AddParameterPresentCondition(False, "fillStyle", False)
+        ucrChkStyleFill.AddParameterPresentCondition(True, "fill_style")
+        ucrChkStyleFill.AddParameterPresentCondition(False, "fill_style", False)
 
         ucrNudStyleFillAlpha.Increment = 0.1
         ucrNudStyleFillAlpha.DecimalPlaces = 1
@@ -438,10 +438,10 @@ Public Class sdgFormatSummaryTables
 
     Private Sub AddTableTitle()
         If ucrChkAddTitleSubtitle.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
-            clsPipeOperator.AddParameter("title\subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
+            clsPipeOperator.AddParameter("title_subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
             clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
-            clsPipeOperator.RemoveParameterByName("title\subtitle")
+            clsPipeOperator.RemoveParameterByName("title_subtitle")
             clsPipeOperator.RemoveParameterByName("title_font")
         End If
     End Sub
@@ -469,15 +469,15 @@ Public Class sdgFormatSummaryTables
             Exit Sub
         End If
         If ucrChkTitleFootnote.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
-            clsTabFootnoteOperator.AddParameter("titlefootnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
+            clsTabFootnoteOperator.AddParameter("title_footnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
         Else
-            clsTabFootnoteOperator.RemoveParameterByName("titlefootnote")
+            clsTabFootnoteOperator.RemoveParameterByName("title_footnote")
         End If
 
         If ucrChkSubtitleFootnote.Checked AndAlso Not ucrInputSubtitleFootnote.IsEmpty Then
-            clsTabFootnoteOperator.AddParameter("subtitlefootnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
+            clsTabFootnoteOperator.AddParameter("subtitle_footnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
         Else
-            clsTabFootnoteOperator.RemoveParameterByName("subtitlefootnote")
+            clsTabFootnoteOperator.RemoveParameterByName("subtitle_footnote")
         End If
 
         If (ucrChkSubtitleFootnote.Checked OrElse ucrChkTitleFootnote.Checked) AndAlso clsTabFootnoteOperator.clsParameters.Count >= 1 AndAlso ucrChkAddTitleSubtitle.Checked Then
@@ -534,9 +534,9 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrChkStyleText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleText.ControlValueChanged
         If ucrChkStyleText.Checked Then
-            clsStyleListFunction.AddParameter("textStyle", clsRFunctionParameter:=clsCellTextFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsStyleListFunction.AddParameter("text_style", clsRFunctionParameter:=clsCellTextFunction, bIncludeArgumentName:=False, iPosition:=0)
         Else
-            clsStyleListFunction.RemoveParameterByName("textStyle")
+            clsStyleListFunction.RemoveParameterByName("text_style")
         End If
     End Sub
 
@@ -550,9 +550,9 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrChkStyleFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStyleFill.ControlValueChanged
         If ucrChkStyleFill.Checked Then
-            clsStyleListFunction.AddParameter("fillStyle", clsRFunctionParameter:=clsCellFillFunction, bIncludeArgumentName:=False, iPosition:=2)
+            clsStyleListFunction.AddParameter("fill_style", clsRFunctionParameter:=clsCellFillFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            clsStyleListFunction.RemoveParameterByName("fillStyle")
+            clsStyleListFunction.RemoveParameterByName("fill_style")
         End If
     End Sub
 
