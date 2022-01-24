@@ -34,12 +34,12 @@ Public Class sdgInventoryPlot
         ucrChkFacetXSize.SetText("Size X-Axis Label")
         ucrChkFacetXSize.SetParameter(New RParameter("facet_xsize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudFacetXSize.SetParameter(New RParameter("facet_xsize"))
-        ucrChkFacetXSize.AddToLinkedControls(ucrNudFacetXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=7)
+        ucrChkFacetXSize.AddToLinkedControls(ucrNudFacetXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=9)
 
         ucrChkFacetYSize.SetText("Size Y-Axis Label")
         ucrChkFacetYSize.SetParameter(New RParameter("facet_ysize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudFacetYSize.SetParameter(New RParameter("facet_ysize"))
-        ucrChkFacetYSize.AddToLinkedControls(ucrNudFacetYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=11)
+        ucrChkFacetYSize.AddToLinkedControls(ucrNudFacetYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=9)
 
         ucrChkFacetXAngle.SetText("Angle X-Axis Label")
         ucrChkFacetXAngle.SetParameter(New RParameter("facet_xangle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
