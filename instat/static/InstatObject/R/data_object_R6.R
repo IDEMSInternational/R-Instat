@@ -2814,7 +2814,7 @@ DataSheet$set("public","append_climatic_types", function(types) {
 #Method for creating inventory plot
 
 DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE,
-                                                       year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_xsize = 7, facet_ysize = 11, facet_xangle = 90,
+                                                       year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_xsize = 9, facet_ysize = 9, facet_xangle = 90,
                                                        facet_yangle = 90, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, 
                                                        subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL,
                                                        Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, 
