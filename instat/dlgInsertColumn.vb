@@ -37,6 +37,8 @@ Public Class dlgInsertColumn
 
     Private Sub InitialiseDialog()
         Dim dctBeforeAfter As New Dictionary(Of String, String)
+        Dim dctDefaultValue As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 164
 
         ucrSelectorInsertColumns.SetParameter(New RParameter("data_name", 0))
@@ -75,7 +77,13 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
-        ucrInputDefaultValue.SetItems({"NA", 0, "Kisumu", "New Zealand", True, False})
+        dctDefaultValue.Add("NA", "NA")
+        dctDefaultValue.Add("0", "0")
+        dctDefaultValue.Add("Kisumu", Chr(34) & "Kisumu" & Chr(34))
+        dctDefaultValue.Add("New Zealand", Chr(34) & "New Zealand" & Chr(34))
+        dctDefaultValue.Add("True", Chr(34) & "True" & Chr(34))
+        dctDefaultValue.Add("False", Chr(34) & "False" & Chr(34))
+        ucrInputDefaultValue.SetItems(dctDefaultValue)
         ucrInputDefaultValue.AddQuotesIfUnrecognised = True
         ucrInputDefaultValue.bAllowNonConditionValues = True
 
