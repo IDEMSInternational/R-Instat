@@ -283,12 +283,16 @@ Public Class ucrOutputPage
 
     Private Sub CopySelectedTextToClipBoard(richText As RichTextBox)
         Dim strClip As String = String.Empty
+        Dim dto As New DataObject()
 
         For Each Line As String In richText.Lines
             strClip &= Line & Environment.NewLine
         Next
+
+        dto.SetText(strClip, TextDataFormat.Rtf)
+        dto.SetText(strClip, TextDataFormat.UnicodeText)
         Clipboard.Clear()
-        Clipboard.SetText(strClip, TextDataFormat.Text)
+        Clipboard.SetDataObject(dto)
     End Sub
 
     Private Sub Panel_Resize(sender As Object, e As EventArgs)
