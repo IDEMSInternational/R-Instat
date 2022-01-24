@@ -289,7 +289,7 @@ Public Class ucrOutputPage
             strClip &= Line & Environment.NewLine
         Next
 
-        dto.SetText(strClip, TextDataFormat.Rtf)
+        dto.SetText(richText.Rtf, TextDataFormat.Rtf)
         dto.SetText(strClip, TextDataFormat.UnicodeText)
         Clipboard.Clear()
         Clipboard.SetDataObject(dto)
