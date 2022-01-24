@@ -65,13 +65,7 @@ Public Class clsRecentFiles
         Dim arrStrPaths() As String = File.ReadAllLines(strRecentFilesPath)
         For Each strPath As String In arrStrPaths
             If Not String.IsNullOrEmpty(strPath) Then
-                ' Disabled this so that you can still see files that don't exist in the list
-                ' only add files that still exist...
-                'If File.Exists(sPath) Then
-                '    ' add to the list of recently opened files
-                '    strListMRU.Add(sPath)
-                'End If
-                lstRecentOpenedFiles.Add(strPath)
+                lstRecentOpenedFiles.Add(strPath.Replace("\", "/"))
             End If
         Next
         'display the recently opened files if there are any items to display in the file
@@ -115,6 +109,7 @@ Public Class clsRecentFiles
         'remove file if it exists(helps with making sure displayed file names are rearranged)
         lstRecentOpenedFiles.Remove(strFilePath)
         'add to recent opened files list..
+        strFilePath = strFilePath.Replace("\", "/")
         lstRecentOpenedFiles.Add(strFilePath)
         'make sure there are only ever 30 items...
         'todo. add this to the general options on the number of recently files to show
@@ -192,6 +187,7 @@ Public Class clsRecentFiles
         End If
 
         Dim strFilePathTmp As String = strFilePath.Replace("MRU:", "")
+        strFilePathTmp = strFilePathTmp.Replace("\", "/")
         If File.Exists(strFilePathTmp) Then
             dlgImportDataset.strFileToOpenOn = strFilePathTmp
             dlgImportDataset.ShowDialog()

@@ -38,7 +38,6 @@ Partial Class ucrSaveGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSaveGraph))
         Me.ucrInputGraphName = New instat.ucrInputComboBox()
         Me.chkSaveGraph = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
@@ -46,25 +45,34 @@ Partial Class ucrSaveGraph
         'ucrInputGraphName
         '
         Me.ucrInputGraphName.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputGraphName.GetSetSelectedIndex = -1
         Me.ucrInputGraphName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGraphName, "ucrInputGraphName")
+        Me.ucrInputGraphName.Location = New System.Drawing.Point(146, 3)
         Me.ucrInputGraphName.Name = "ucrInputGraphName"
+        Me.ucrInputGraphName.Size = New System.Drawing.Size(151, 29)
+        Me.ucrInputGraphName.TabIndex = 0
         '
         'chkSaveGraph
         '
-        resources.ApplyResources(Me.chkSaveGraph, "chkSaveGraph")
+        Me.chkSaveGraph.AutoSize = True
+        Me.chkSaveGraph.Location = New System.Drawing.Point(0, 3)
         Me.chkSaveGraph.Name = "chkSaveGraph"
+        Me.chkSaveGraph.Size = New System.Drawing.Size(83, 17)
+        Me.chkSaveGraph.TabIndex = 1
         Me.chkSaveGraph.Tag = "Save_Graph"
+        Me.chkSaveGraph.Text = "Save Graph"
         Me.chkSaveGraph.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.chkSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphName)
         Me.Name = "ucrSaveGraph"
+        Me.Size = New System.Drawing.Size(313, 35)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

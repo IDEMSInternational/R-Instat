@@ -38,7 +38,6 @@ Partial Class dlgCopyDataFrame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCopyDataFrame))
         Me.lblLabel = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
         Me.ucrChkCopyToClipboard = New instat.ucrCheck()
@@ -54,79 +53,126 @@ Partial Class dlgCopyDataFrame
         '
         'lblLabel
         '
-        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLabel.Location = New System.Drawing.Point(251, 76)
         Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(94, 13)
+        Me.lblLabel.TabIndex = 3
+        Me.lblLabel.Text = "Data Frame Label:"
         '
         'lblNewName
         '
-        resources.ApplyResources(Me.lblNewName, "lblNewName")
+        Me.lblNewName.AutoSize = True
+        Me.lblNewName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNewName.Location = New System.Drawing.Point(251, 16)
         Me.lblNewName.Name = "lblNewName"
+        Me.lblNewName.Size = New System.Drawing.Size(63, 13)
+        Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
+        Me.lblNewName.Text = "New Name:"
         '
         'ucrChkCopyToClipboard
         '
+        Me.ucrChkCopyToClipboard.AutoSize = True
         Me.ucrChkCopyToClipboard.Checked = False
-        resources.ApplyResources(Me.ucrChkCopyToClipboard, "ucrChkCopyToClipboard")
+        Me.ucrChkCopyToClipboard.Location = New System.Drawing.Point(10, 76)
         Me.ucrChkCopyToClipboard.Name = "ucrChkCopyToClipboard"
+        Me.ucrChkCopyToClipboard.Size = New System.Drawing.Size(207, 23)
+        Me.ucrChkCopyToClipboard.TabIndex = 6
         '
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel.AutoSize = True
         Me.ucrInputLabel.IsMultiline = False
         Me.ucrInputLabel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
+        Me.ucrInputLabel.Location = New System.Drawing.Point(251, 92)
         Me.ucrInputLabel.Name = "ucrInputLabel"
+        Me.ucrInputLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLabel.TabIndex = 4
         '
         'ucrInputNewDataFrameName
         '
         Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrameName.AutoSize = True
         Me.ucrInputNewDataFrameName.IsMultiline = False
         Me.ucrInputNewDataFrameName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
+        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(251, 32)
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
+        Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNewDataFrameName.TabIndex = 2
         '
         'ucrDataFrameCopySheets
         '
+        Me.ucrDataFrameCopySheets.AutoSize = True
         Me.ucrDataFrameCopySheets.bDropUnusedFilterLevels = False
         Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
+        Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(10, 12)
+        Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
+        Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(151, 50)
+        Me.ucrDataFrameCopySheets.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(11, 192)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrPnlOptions
         '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 98)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(235, 77)
+        Me.ucrPnlOptions.TabIndex = 10
         '
         'rdoDataFrameMetadata
         '
-        resources.ApplyResources(Me.rdoDataFrameMetadata, "rdoDataFrameMetadata")
+        Me.rdoDataFrameMetadata.AutoSize = True
+        Me.rdoDataFrameMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDataFrameMetadata.Location = New System.Drawing.Point(32, 148)
         Me.rdoDataFrameMetadata.Name = "rdoDataFrameMetadata"
+        Me.rdoDataFrameMetadata.Size = New System.Drawing.Size(124, 17)
+        Me.rdoDataFrameMetadata.TabIndex = 15
         Me.rdoDataFrameMetadata.TabStop = True
+        Me.rdoDataFrameMetadata.Text = "Data frame metadata"
         Me.rdoDataFrameMetadata.UseVisualStyleBackColor = True
         '
         'rdoColumnsMetadata
         '
-        resources.ApplyResources(Me.rdoColumnsMetadata, "rdoColumnsMetadata")
+        Me.rdoColumnsMetadata.AutoSize = True
+        Me.rdoColumnsMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoColumnsMetadata.Location = New System.Drawing.Point(32, 125)
         Me.rdoColumnsMetadata.Name = "rdoColumnsMetadata"
+        Me.rdoColumnsMetadata.Size = New System.Drawing.Size(112, 17)
+        Me.rdoColumnsMetadata.TabIndex = 14
         Me.rdoColumnsMetadata.TabStop = True
+        Me.rdoColumnsMetadata.Text = "Columns metadata"
         Me.rdoColumnsMetadata.UseVisualStyleBackColor = True
         '
         'rdoDataFrame
         '
-        resources.ApplyResources(Me.rdoDataFrame, "rdoDataFrame")
+        Me.rdoDataFrame.AutoSize = True
+        Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDataFrame.Location = New System.Drawing.Point(32, 102)
         Me.rdoDataFrame.Name = "rdoDataFrame"
+        Me.rdoDataFrame.Size = New System.Drawing.Size(77, 17)
+        Me.rdoDataFrame.TabIndex = 13
         Me.rdoDataFrame.TabStop = True
+        Me.rdoDataFrame.Text = "Data frame"
         Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
         'dlgCopyDataFrame
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(424, 254)
         Me.Controls.Add(Me.rdoDataFrameMetadata)
         Me.Controls.Add(Me.rdoColumnsMetadata)
         Me.Controls.Add(Me.rdoDataFrame)
@@ -142,6 +188,8 @@ Partial Class dlgCopyDataFrame
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCopyDataFrame"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Copy Data Frame"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

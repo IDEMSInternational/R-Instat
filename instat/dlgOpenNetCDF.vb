@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 Imports instat.Translations
 Imports System.IO
 Imports RDotNet
@@ -34,7 +35,7 @@ Public Class dlgOpenNetCDF
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
     Private iExpandedWidth As Integer
-    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "_Satellite/")
+    Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library" & "\" & "Climatic" & "\" & "_Satellite" & "\"
     Private bFromLibrary As Boolean = False
     Private bSubDialogOKEnabled As Boolean = True
     Private bMultiImport As Boolean = False
@@ -170,11 +171,24 @@ Public Class dlgOpenNetCDF
             dlgOpen.Filter = "All Data files|*.nc|NetCDF files|*.nc"
             dlgOpen.Title = "Open Data from file"
             If bFromLibrary Then
-                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(strLibraryPath, "/", "\"))
+                ' TODO There should be a way of using Path.GetDirectoryName to avoid needing the If but couldn't get this to work
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(strLibraryPath, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(strLibraryPath)
+                End If
             ElseIf Not ucrInputPath.IsEmpty() Then
-                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputPath.GetText(), "/", "\"))
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(Path.GetDirectoryName(ucrInputPath.GetText()), "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputPath.GetText(), "/", "\"))
+                End If
             Else
-                dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(frmMain.clsInstatOptions.strWorkingDirectory, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                End If
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then

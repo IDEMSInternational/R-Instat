@@ -161,7 +161,7 @@ Public Class clsDataFrame
     End Function
 
     ''' <summary>
-    ''' Updates datframe where data has changed 
+    ''' Updates dataframe where data has changed 
     ''' </summary>
     Public Sub RefreshData()
         If HasDataChanged() Then
@@ -169,7 +169,7 @@ Public Class clsDataFrame
                 _iTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
                 _iTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
                 _clsFilter.RefreshData()
-                If _clsFilter.bApplied Then
+                If _clsFilter.bFilterApplied Then
                     _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _clsFilter.iFilteredRowCount)
                 Else
                     _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _iTotalRowCount)
