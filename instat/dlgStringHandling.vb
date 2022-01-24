@@ -376,19 +376,21 @@ Public Class dlgStringHandling
                 ucrSaveStringHandling.SetPrefix("count")
             ElseIf rdoExtract.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
-                ucrSaveStringHandling.SetPrefix("extract")
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsExtractAllFunction)
                     ucrSaveStringHandling.SetPrefix("extract_all")
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
+                    ucrSaveStringHandling.SetPrefix("extract")
                 End If
             ElseIf rdoLocate.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
-                ucrSaveStringHandling.SetPrefix("locate")
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLocateAllFunction)
                     ucrSaveStringHandling.SetPrefix("locate_all")
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+                    ucrSaveStringHandling.SetPrefix("locate")
                 End If
             End If
         ElseIf rdoReplace.Checked Then
