@@ -666,25 +666,23 @@ Public Class dlgTransformClimatic
 
     Private Sub TestOkEnabled()
         If rdoCount.Checked OrElse rdoCumulative.Checked OrElse rdoMoving.Checked _
-                        OrElse rdoMultSpells.Checked OrElse rdoSpell.Checked OrElse
-                        rdoWaterBalance.Checked Then
-            Dim betweenOuterOk As Boolean = (((ucrInputCondition.GetText = "Between" OrElse
-                        ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso
-                        Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso
-                        Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso
-                        Not ucrInputSpellUpper.IsEmpty))
-            If Not ucrReceiverData.IsEmpty AndAlso ucrSaveColumn.IsComplete AndAlso
-                ((rdoCount.Checked AndAlso
-                ucrNudCountOver.GetText <> "" AndAlso betweenOuterOk) OrElse
-                (rdoCumulative.Checked AndAlso
-                Not ucrInputCumulative.IsEmpty) OrElse (rdoMoving.Checked AndAlso
-                Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse
-                (rdoSpell.Checked AndAlso betweenOuterOk) OrElse (rdoMultSpells.Checked AndAlso
-                ucrNudMultSpells.GetText <> "" AndAlso betweenOuterOk) OrElse
-                (rdoWaterBalance.Checked AndAlso
-                ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso
-                Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso
-                Not ucrReceiverEvap.IsEmpty)))) Then
+                OrElse rdoMultSpells.Checked OrElse rdoSpell.Checked _
+                OrElse rdoWaterBalance.Checked Then
+            Dim betweenOuterOk As Boolean = Not ucrInputSpellUpper.IsEmpty _
+                    AndAlso (
+                        ((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") _
+                            AndAlso Not ucrInputSpellLower.IsEmpty) _
+                        OrElse (ucrInputCondition.GetText = "<=") _
+                        OrElse (ucrInputCondition.GetText = ">="))
+            If Not ucrReceiverData.IsEmpty AndAlso ucrSaveColumn.IsComplete _
+                    AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso betweenOuterOk) _
+                        OrElse (rdoCumulative.Checked AndAlso Not ucrInputCumulative.IsEmpty) _
+                        OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") _
+                        OrElse (rdoSpell.Checked AndAlso betweenOuterOk) _
+                        OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso betweenOuterOk) _
+                        OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" _
+                            AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) _
+                                OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
