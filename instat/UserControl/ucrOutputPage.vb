@@ -137,7 +137,7 @@ Public Class ucrOutputPage
         For Each element In SelectedElements
             AddElementToRichTextBox(element, richText)
         Next
-        CopySelectedTextToClipBoard(richText)
+        CopySelectedTextToClipBoard(richText, richText.Rtf)
     End Sub
 
     ''' <summary>
@@ -274,14 +274,14 @@ Public Class ucrOutputPage
                 Dim richText As RichTextBox = CType(sender, RichTextBox)
                 Dim richSelectedText As New RichTextBox
                 richSelectedText.AppendText(richText.SelectedText)
-                CopySelectedTextToClipBoard(richSelectedText)
+                CopySelectedTextToClipBoard(richSelectedText, richText.SelectedRtf)
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
         End If
     End Sub
 
-    Private Sub CopySelectedTextToClipBoard(richText As RichTextBox)
+    Private Sub CopySelectedTextToClipBoard(richText As RichTextBox, richTextFormat As String)
         Dim strClip As String = String.Empty
         Dim dto As New DataObject()
 
@@ -289,7 +289,7 @@ Public Class ucrOutputPage
             strClip &= Line & Environment.NewLine
         Next
 
-        dto.SetText(richText.Rtf, TextDataFormat.Rtf)
+        dto.SetText(richTextFormat, TextDataFormat.Rtf)
         dto.SetText(strClip, TextDataFormat.UnicodeText)
         Clipboard.Clear()
         Clipboard.SetDataObject(dto)
