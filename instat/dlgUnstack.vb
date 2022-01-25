@@ -274,18 +274,22 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetFormula()
-        Dim i As Integer = 0
-
+        Dim i As Integer = 1
+        Dim strcoll As String = ucrReceiverFactorToUnstackby.GetVariableNames(False)
         If Not ucrReceiverFactorToUnstackby.IsEmpty Then
             clsCarryColumnsOperator.ClearParameters()
             If ucrChkCarryColumns.Checked Then
+                clsCarryColumnsOperator.AddParameter("factor", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                 For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
                     clsCarryColumnsOperator.AddParameter(i, strIndicatorVar, iPosition:=i)
                     i = i + 1
                 Next
+                If ucrReceiverCarryColumns.GetVariableNamesAsList.Contains(strcoll) Then
+                    clsCarryColumnsOperator.RemoveParameterByName("factor")
+                End If
                 clsformulaOperator.AddParameter("left", clsROperatorParameter:=clsCarryColumnsOperator, iPosition:=0)
-            Else
-                clsformulaOperator.RemoveParameterByName("left")
+                Else
+                    clsformulaOperator.RemoveParameterByName("left")
                 clsformulaOperator.AddParameter("left", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
             End If
         End If
