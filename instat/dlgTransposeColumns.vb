@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOverallFunction, clsTransposeFunction As New RFunction
+    Private clsOverallFunction, clsTFunction As New RFunction
 
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -28,7 +28,7 @@ Public Class dlgTransposeColumns
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -43,9 +43,6 @@ Public Class dlgTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
         ucrReceiverColumsToTranspose.bForceAsDataFrame = True
 
-        ' ucrReceiverMakeNames
-
-
         'The checkbox is not yet implemented in the updated code as it was not implemented in pre-updated code
         ucrChkNameNewColumns.SetText("Name New Columns")
         ucrChkNameNewColumns.Enabled = False ' temporary
@@ -58,7 +55,7 @@ Public Class dlgTransposeColumns
     End Sub
 
     Private Sub SetDefaults()
-        clsTransposeFunction = New RFunction
+        clsTFunction = New RFunction
         clsOverallFunction = New RFunction
 
         ucrSelectorTransposeColumns.Reset()
@@ -67,14 +64,14 @@ Public Class dlgTransposeColumns
 
         clsOverallFunction.SetRCommand("as.data.frame")
         clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
-        clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTransposeFunction)
-        clsTransposeFunction.SetRCommand("t")
+        clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
+        clsTFunction.SetRCommand("t")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverColumsToTranspose.SetRCode(clsTransposeFunction, bReset)
+        ucrReceiverColumsToTranspose.SetRCode(clsTFunction, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
     End Sub
 
