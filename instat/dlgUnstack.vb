@@ -106,17 +106,10 @@ Public Class dlgUnstack
         ucrPnlUnstackCol.AddParameterValuesCondition(rdoMultiple, "checked", "multiple")
         ucrPnlUnstackCol.AddParameterValuesCondition(rdoRestoreHierarchy, "checked", "hierarchy")
 
-        ucrSaveHierachy.SetSaveTypeAsDataFrame()
-        ucrSaveHierachy.SetDataFrameSelector(ucrSelectorForUnstack.ucrAvailableDataFrames)
-        ucrSaveHierachy.SetLabelText("New Data Frame Name:")
-        ucrSaveHierachy.SetIsTextBox()
-
         ucrPnlUnstackCol.AddToLinkedControls(ucrReceiverColumnToUnstack, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrMultipleColumnsReceiver, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrChkAddPrefix, {rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlUnstackCol.AddToLinkedControls(ucrChkValuesFill, {rdoMultiple, rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlUnstackCol.AddToLinkedControls(ucrSaveHierachy, {rdoRestoreHierarchy}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlUnstackCol.AddToLinkedControls(ucrNewDFName, {rdoMultiple, rdoSingle}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverColumnToUnstack.SetLinkedDisplayControl(lblColumnToUnstack)
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
     End Sub
@@ -139,7 +132,6 @@ Public Class dlgUnstack
 
         ucrSelectorForUnstack.Reset()
         ucrNewDFName.Reset()
-        ucrSaveHierachy.Reset()
 
         ' Operations
         clsformulaOperator.SetOperation("~")
@@ -160,6 +152,7 @@ Public Class dlgUnstack
 
         clsHierachyFunction.SetPackageName("data.table")
         clsHierachyFunction.SetRCommand("dcast")
+        clsHierachyFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsHierachyFunction.AddParameter("formula", clsROperatorParameter:=clsformulaOperator, iPosition:=1)
 
         clsSelectFunction.SetPackageName("dplyr")
@@ -168,28 +161,28 @@ Public Class dlgUnstack
 
         clsCommaOperator.SetOperation(",")
         clsUnstackedOperator.SetOperation("%>%")
-        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=clsHierachyFunction, iPosition:=0)
         clsUnstackedOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
 
         AddRemoveDataOrPipeOperator()
         ValuesfillParameter()
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
         clsBaseRCode = clsDcastFunction
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsformulaOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsUnstackedOperator, iAdditionalPairNo:=1)
 
         ucrPnlUnstackCol.SetRCode(clsDummyFunction, bReset)
         ucrReceiverFactorToUnstackby.SetRCode(clsDcastFunction, bReset)
         ucrChkAddPrefix.SetRCode(clsDcastFunction, bReset)
         ucrChkValuesFill.SetRCode(clsDcastFunction, bReset)
         ucrChkCarryColumns.SetRCode(clsDummyCarryFunction, bReset)
-        ucrNewDFName.SetRCode(clsDcastFunction, bReset)
-        ucrSaveHierachy.SetRCode(clsHierachyFunction, bReset)
+        ucrNewDFName.SetRCode(clsBaseRCode, bReset)
     End Sub
 
     Private Sub ucrMultipleColumnsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleColumnsReceiver.ControlValueChanged
@@ -225,10 +218,8 @@ Public Class dlgUnstack
 
     Private Sub AddRemoveDataOrPipeOperator()
         If Not ucrChkCarryColumns.Checked Then
-            clsHierachyFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             clsDcastFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         Else
-            clsHierachyFunction.AddParameter("data", clsROperatorParameter:=clsUnstackedOperator, iPosition:=0)
             clsDcastFunction.AddParameter("data", clsROperatorParameter:=clspipeOperator, iPosition:=0)
         End If
     End Sub
@@ -247,7 +238,7 @@ Public Class dlgUnstack
                 ucrBase.OKEnabled(True)
             End If
         ElseIf rdoRestoreHierarchy.Checked Then
-            If ucrReceiverFactorToUnstackby.IsEmpty OrElse Not ucrSaveHierachy.IsComplete OrElse (ucrReceiverCarryColumns.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
+            If ucrReceiverFactorToUnstackby.IsEmpty OrElse Not ucrNewDFName.IsComplete OrElse (ucrReceiverCarryColumns.IsEmpty AndAlso ucrChkCarryColumns.Checked) Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -264,7 +255,6 @@ Public Class dlgUnstack
     Private Sub NewDefaultName()
         If (Not ucrNewDFName.bUserTyped) AndAlso ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDFName.SetName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
-            ucrSaveHierachy.SetName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         End If
     End Sub
 
@@ -336,6 +326,7 @@ Public Class dlgUnstack
 
     Private Sub ucrPnlUnstackCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlUnstackCol.ControlValueChanged
         If rdoSingle.Checked OrElse rdoMultiple.Checked Then
+            clsBaseRCode = clsDcastFunction
             ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
             If rdoSingle.Checked Then
                 clsDummyFunction.AddParameter("checked", "single", iPosition:=0)
@@ -343,9 +334,12 @@ Public Class dlgUnstack
                 clsDummyFunction.AddParameter("checked", "multiple", iPosition:=0)
             End If
         ElseIf rdoRestoreHierarchy.Checked Then
+            clsBaseRCode = clsUnstackedOperator
             clsDummyFunction.AddParameter("checked", "hierarchy", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsHierachyFunction)
+            ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
+            clsDcastFunction.RemoveAssignTo()
         End If
+        ucrNewDFName.SetRCode(clsBaseRCode)
         CarryColumnsLabelReceiverLocation()
         SetFormula()
         ValuesfillParameter()
@@ -366,7 +360,7 @@ Public Class dlgUnstack
 
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrSaveHierachy.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
