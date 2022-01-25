@@ -52,9 +52,10 @@ Partial Class dlgSplitText
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlTextComponents = New instat.UcrPanel()
-        Me.ucrChkAddKeyboard = New instat.ucrCheck()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.ucrInputRegexPattern = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -219,15 +220,6 @@ Partial Class dlgSplitText
         Me.ucrPnlTextComponents.Size = New System.Drawing.Size(205, 63)
         Me.ucrPnlTextComponents.TabIndex = 8
         '
-        'ucrChkAddKeyboard
-        '
-        Me.ucrChkAddKeyboard.AutoSize = True
-        Me.ucrChkAddKeyboard.Checked = False
-        Me.ucrChkAddKeyboard.Location = New System.Drawing.Point(249, 273)
-        Me.ucrChkAddKeyboard.Name = "ucrChkAddKeyboard"
-        Me.ucrChkAddKeyboard.Size = New System.Drawing.Size(158, 23)
-        Me.ucrChkAddKeyboard.TabIndex = 23
-        '
         'ucrChkIncludeRegularExpressions
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
@@ -249,14 +241,35 @@ Partial Class dlgSplitText
         Me.ucrSelectorSplitTextColumn.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSplitTextColumn.TabIndex = 24
         '
+        'cmdAddkeyboard
+        '
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(272, 273)
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.Size = New System.Drawing.Size(105, 23)
+        Me.cmdAddkeyboard.TabIndex = 25
+        Me.cmdAddkeyboard.Text = "Add Keyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
+        'ucrInputRegexPattern
+        '
+        Me.ucrInputRegexPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputRegexPattern.AutoSize = True
+        Me.ucrInputRegexPattern.IsMultiline = False
+        Me.ucrInputRegexPattern.IsReadOnly = False
+        Me.ucrInputRegexPattern.Location = New System.Drawing.Point(257, 124)
+        Me.ucrInputRegexPattern.Name = "ucrInputRegexPattern"
+        Me.ucrInputRegexPattern.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRegexPattern.TabIndex = 26
+        '
         'dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 392)
+        Me.Controls.Add(Me.ucrInputRegexPattern)
+        Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
-        Me.Controls.Add(Me.ucrChkAddKeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoFixedNumberOfComponents)
         Me.Controls.Add(Me.rdoMaximumNumberOfComponents)
@@ -298,7 +311,8 @@ Partial Class dlgSplitText
     Friend WithEvents rdoFixedNumberOfComponents As RadioButton
     Friend WithEvents rdoMaximumNumberOfComponents As RadioButton
     Friend WithEvents ucrPnlTextComponents As UcrPanel
-    Friend WithEvents ucrChkAddKeyboard As ucrCheck
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents ucrInputRegexPattern As ucrInputTextBox
 End Class

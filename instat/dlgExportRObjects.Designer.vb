@@ -38,7 +38,6 @@ Partial Class dlgExportRObjects
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRObjects))
         Me.lblObjects = New System.Windows.Forms.Label()
         Me.ucrFilePath = New instat.ucrFilePath()
         Me.ucrReceiverMultipleObjects = New instat.ucrReceiverMultiple()
@@ -61,15 +60,15 @@ Partial Class dlgExportRObjects
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = "Saved R objects (*.RData)|*.RData|Serialized R Objects (*.rds)|*.rds"
         Me.ucrFilePath.FilePathDialogTitle = "Export R Objects"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
-        Me.ucrFilePath.Location = New System.Drawing.Point(14, 199)
+        Me.ucrFilePath.Location = New System.Drawing.Point(12, 196)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
-        Me.ucrFilePath.Size = New System.Drawing.Size(2384, 58)
+        Me.ucrFilePath.Size = New System.Drawing.Size(399, 34)
         Me.ucrFilePath.TabIndex = 7
         '
         'ucrReceiverMultipleObjects
@@ -111,7 +110,6 @@ Partial Class dlgExportRObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(423, 288)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblObjects)
