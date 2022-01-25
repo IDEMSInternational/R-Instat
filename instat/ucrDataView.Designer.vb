@@ -59,6 +59,8 @@ Partial Class ucrDataView
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnContextColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -78,6 +80,8 @@ Partial Class ucrDataView
         Me.mnuSorts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilters = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellContextColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilters = New System.Windows.Forms.ToolStripMenuItem()
         Me.rowContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuInsertRowsBefore = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +91,8 @@ Partial Class ucrDataView
         Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRowContextColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRowContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -142,290 +148,326 @@ Partial Class ucrDataView
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.mnuPaste, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.mnuPaste, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilter, Me.mnuColumnContextColumnSelection, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 396)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 440)
         '
         'mnuColumnRename
         '
         Me.mnuColumnRename.Name = "mnuColumnRename"
-        Me.mnuColumnRename.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnRename.Size = New System.Drawing.Size(214, 22)
         Me.mnuColumnRename.Text = "Rename Column..."
         '
         'mnuDuplicateColumn
         '
         Me.mnuDuplicateColumn.Name = "mnuDuplicateColumn"
-        Me.mnuDuplicateColumn.Size = New System.Drawing.Size(212, 22)
+        Me.mnuDuplicateColumn.Size = New System.Drawing.Size(214, 22)
         Me.mnuDuplicateColumn.Text = "Duplicate Column..."
         '
         'mnuReorderColumns
         '
         Me.mnuReorderColumns.Name = "mnuReorderColumns"
-        Me.mnuReorderColumns.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumns.Size = New System.Drawing.Size(214, 22)
         Me.mnuReorderColumns.Text = "Reorder Column(s)..."
         '
         'mnuInsertColsBefore
         '
         Me.mnuInsertColsBefore.Name = "mnuInsertColsBefore"
-        Me.mnuInsertColsBefore.Size = New System.Drawing.Size(212, 22)
+        Me.mnuInsertColsBefore.Size = New System.Drawing.Size(214, 22)
         Me.mnuInsertColsBefore.Text = "Insert Column(s) Before"
         '
         'mnuInsertColsAfter
         '
         Me.mnuInsertColsAfter.Name = "mnuInsertColsAfter"
-        Me.mnuInsertColsAfter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuInsertColsAfter.Size = New System.Drawing.Size(214, 22)
         Me.mnuInsertColsAfter.Text = "Insert Column(s) After"
         '
         'mnuDeleteCol
         '
         Me.mnuDeleteCol.Name = "mnuDeleteCol"
-        Me.mnuDeleteCol.Size = New System.Drawing.Size(212, 22)
+        Me.mnuDeleteCol.Size = New System.Drawing.Size(214, 22)
         Me.mnuDeleteCol.Text = "Delete Column(s)"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
-        Me.mnuPaste.Size = New System.Drawing.Size(212, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(214, 22)
         Me.mnuPaste.Text = "Paste"
         '
         'toolStripMenuItem2
         '
         Me.toolStripMenuItem2.Name = "toolStripMenuItem2"
-        Me.toolStripMenuItem2.Size = New System.Drawing.Size(209, 6)
+        Me.toolStripMenuItem2.Size = New System.Drawing.Size(211, 6)
         '
         'mnuConvertToFactor
         '
         Me.mnuConvertToFactor.Name = "mnuConvertToFactor"
-        Me.mnuConvertToFactor.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToFactor.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToFactor.Text = "Convert to Factor"
         '
         'mnuCovertToOrderedFactors
         '
         Me.mnuCovertToOrderedFactors.Name = "mnuCovertToOrderedFactors"
-        Me.mnuCovertToOrderedFactors.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCovertToOrderedFactors.Size = New System.Drawing.Size(214, 22)
         Me.mnuCovertToOrderedFactors.Text = "Convert to Ordered Factor"
         '
         'mnuConvertText
         '
         Me.mnuConvertText.Name = "mnuConvertText"
-        Me.mnuConvertText.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertText.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertText.Text = "Convert to Character"
         '
         'mnuConvertToLogical
         '
         Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
-        Me.mnuConvertToLogical.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogical.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToLogical.Text = "Convert to Logical"
         '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
-        Me.mnuConvertVariate.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertVariate.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(211, 6)
         '
         'mnuLevelsLabels
         '
         Me.mnuLevelsLabels.Name = "mnuLevelsLabels"
-        Me.mnuLevelsLabels.Size = New System.Drawing.Size(212, 22)
+        Me.mnuLevelsLabels.Size = New System.Drawing.Size(214, 22)
         Me.mnuLevelsLabels.Text = "Levels/Labels..."
         '
         'toolStripMenuItem21
         '
         Me.toolStripMenuItem21.Name = "toolStripMenuItem21"
-        Me.toolStripMenuItem21.Size = New System.Drawing.Size(209, 6)
+        Me.toolStripMenuItem21.Size = New System.Drawing.Size(211, 6)
         '
         'mnuSort
         '
         Me.mnuSort.Name = "mnuSort"
-        Me.mnuSort.Size = New System.Drawing.Size(212, 22)
+        Me.mnuSort.Size = New System.Drawing.Size(214, 22)
         Me.mnuSort.Text = "Sort..."
         '
         'mnuColumnAddComment
         '
         Me.mnuColumnAddComment.Name = "mnuColumnAddComment"
-        Me.mnuColumnAddComment.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnAddComment.Size = New System.Drawing.Size(214, 22)
         Me.mnuColumnAddComment.Text = "Add Comment..."
         '
         'mnuColumnFilter
         '
         Me.mnuColumnFilter.Name = "mnuColumnFilter"
-        Me.mnuColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnFilter.Size = New System.Drawing.Size(214, 22)
         Me.mnuColumnFilter.Text = "Filter..."
+        '
+        'mnuColumnContextColumnSelection
+        '
+        Me.mnuColumnContextColumnSelection.Name = "mnuColumnContextColumnSelection"
+        Me.mnuColumnContextColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuColumnContextColumnSelection.Text = "Column Selection..."
+        '
+        'mnuColumnContextRemoveCurrentColumnSelection
+        '
+        Me.mnuColumnContextRemoveCurrentColumnSelection.Name = "mnuColumnContextRemoveCurrentColumnSelection"
+        Me.mnuColumnContextRemoveCurrentColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuColumnContextRemoveCurrentColumnSelection.Text = "Remove Column Selection"
         '
         'mnuClearColumnFilter
         '
         Me.mnuClearColumnFilter.Name = "mnuClearColumnFilter"
-        Me.mnuClearColumnFilter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuClearColumnFilter.Size = New System.Drawing.Size(214, 22)
         Me.mnuClearColumnFilter.Text = "Remove Current Filter"
         '
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuCellContextColumnSelection, Me.mnuCellContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(215, 380)
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(211, 6)
         '
         'mnuRenameColumn
         '
         Me.mnuRenameColumn.Name = "mnuRenameColumn"
-        Me.mnuRenameColumn.Size = New System.Drawing.Size(212, 22)
+        Me.mnuRenameColumn.Size = New System.Drawing.Size(214, 22)
         Me.mnuRenameColumn.Text = "Rename Column..."
         '
         'mnuDuplColumn
         '
         Me.mnuDuplColumn.Name = "mnuDuplColumn"
-        Me.mnuDuplColumn.Size = New System.Drawing.Size(212, 22)
+        Me.mnuDuplColumn.Size = New System.Drawing.Size(214, 22)
         Me.mnuDuplColumn.Text = "Duplicate Column..."
         '
         'mnuReorderColumn
         '
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
-        Me.mnuReorderColumn.Size = New System.Drawing.Size(212, 22)
+        Me.mnuReorderColumn.Size = New System.Drawing.Size(214, 22)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
         '
         'mnuCellPasteRange
         '
         Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
-        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(214, 22)
         Me.mnuCellPasteRange.Text = "Paste"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(211, 6)
         '
         'mnuConvertToFact
         '
         Me.mnuConvertToFact.Name = "mnuConvertToFact"
-        Me.mnuConvertToFact.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToFact.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToFact.Text = "Convert to Factor"
         '
         'mnuConvertToOrderedFactor
         '
         Me.mnuConvertToOrderedFactor.Name = "mnuConvertToOrderedFactor"
-        Me.mnuConvertToOrderedFactor.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToOrderedFactor.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToOrderedFactor.Text = "Convert to Ordered Factor"
         '
         'mnuConvertToCharacter
         '
         Me.mnuConvertToCharacter.Name = "mnuConvertToCharacter"
-        Me.mnuConvertToCharacter.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToCharacter.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToCharacter.Text = "Convert to Character"
         '
         'mnuConvertToLogic
         '
         Me.mnuConvertToLogic.Name = "mnuConvertToLogic"
-        Me.mnuConvertToLogic.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToLogic.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToLogic.Text = "Convert to Logical"
         '
         'mnuConvertToNumeric
         '
         Me.mnuConvertToNumeric.Name = "mnuConvertToNumeric"
-        Me.mnuConvertToNumeric.Size = New System.Drawing.Size(212, 22)
+        Me.mnuConvertToNumeric.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertToNumeric.Text = "Convert to Numeric"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(211, 6)
         '
         'mnuLabelsLevel
         '
         Me.mnuLabelsLevel.Name = "mnuLabelsLevel"
-        Me.mnuLabelsLevel.Size = New System.Drawing.Size(212, 22)
+        Me.mnuLabelsLevel.Size = New System.Drawing.Size(214, 22)
         Me.mnuLabelsLevel.Text = "Levels/Labels..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(209, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(211, 6)
         '
         'mnuSorts
         '
         Me.mnuSorts.Name = "mnuSorts"
-        Me.mnuSorts.Size = New System.Drawing.Size(212, 22)
+        Me.mnuSorts.Size = New System.Drawing.Size(214, 22)
         Me.mnuSorts.Text = "Sort..."
         '
         'mnuComment
         '
         Me.mnuComment.Name = "mnuComment"
-        Me.mnuComment.Size = New System.Drawing.Size(212, 22)
+        Me.mnuComment.Size = New System.Drawing.Size(214, 22)
         Me.mnuComment.Text = "Add Comment..."
         '
         'mnuFilters
         '
         Me.mnuFilters.Name = "mnuFilters"
-        Me.mnuFilters.Size = New System.Drawing.Size(212, 22)
+        Me.mnuFilters.Size = New System.Drawing.Size(214, 22)
         Me.mnuFilters.Text = "Filter..."
+        '
+        'mnuCellContextColumnSelection
+        '
+        Me.mnuCellContextColumnSelection.Name = "mnuCellContextColumnSelection"
+        Me.mnuCellContextColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuCellContextColumnSelection.Text = "Column Selection..."
+        '
+        'mnuCellContextRemoveCurrentColumnSelection
+        '
+        Me.mnuCellContextRemoveCurrentColumnSelection.Name = "mnuCellContextRemoveCurrentColumnSelection"
+        Me.mnuCellContextRemoveCurrentColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuCellContextRemoveCurrentColumnSelection.Text = "Remove Column Selection"
         '
         'mnuRemoveCurrentFilters
         '
         Me.mnuRemoveCurrentFilters.Name = "mnuRemoveCurrentFilters"
-        Me.mnuRemoveCurrentFilters.Size = New System.Drawing.Size(212, 22)
+        Me.mnuRemoveCurrentFilters.Size = New System.Drawing.Size(214, 22)
         Me.mnuRemoveCurrentFilters.Text = "Remove Current Filter"
         '
         'rowContextMenuStrip
         '
         Me.rowContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuAddComment, Me.ToolStripSeparator4, Me.mnuFilter, Me.mnuRemoveCurrentFilter})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuAddComment, Me.ToolStripSeparator4, Me.mnuFilter, Me.mnuRowContextColumnSelection, Me.mnuRowContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilter})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 148)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(215, 214)
         '
         'mnuInsertRowsBefore
         '
         Me.mnuInsertRowsBefore.Name = "mnuInsertRowsBefore"
-        Me.mnuInsertRowsBefore.Size = New System.Drawing.Size(189, 22)
+        Me.mnuInsertRowsBefore.Size = New System.Drawing.Size(214, 22)
         Me.mnuInsertRowsBefore.Text = "Insert Row(s) Before"
         '
         'mnuInsertRowsAfter
         '
         Me.mnuInsertRowsAfter.Name = "mnuInsertRowsAfter"
-        Me.mnuInsertRowsAfter.Size = New System.Drawing.Size(189, 22)
+        Me.mnuInsertRowsAfter.Size = New System.Drawing.Size(214, 22)
         Me.mnuInsertRowsAfter.Text = "Insert Row(s) After"
         '
         'mnuDeleteRows
         '
         Me.mnuDeleteRows.Name = "mnuDeleteRows"
-        Me.mnuDeleteRows.Size = New System.Drawing.Size(189, 22)
+        Me.mnuDeleteRows.Size = New System.Drawing.Size(214, 22)
         Me.mnuDeleteRows.Text = "Delete Row(s)"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(186, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(211, 6)
         '
         'mnuAddComment
         '
         Me.mnuAddComment.Name = "mnuAddComment"
-        Me.mnuAddComment.Size = New System.Drawing.Size(189, 22)
+        Me.mnuAddComment.Size = New System.Drawing.Size(214, 22)
         Me.mnuAddComment.Text = "Add Comment..."
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(186, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(211, 6)
         '
         'mnuFilter
         '
         Me.mnuFilter.Name = "mnuFilter"
-        Me.mnuFilter.Size = New System.Drawing.Size(189, 22)
+        Me.mnuFilter.Size = New System.Drawing.Size(214, 22)
         Me.mnuFilter.Tag = "Filter..."
         Me.mnuFilter.Text = "Filter..."
+        '
+        'mnuRowContextColumnSelection
+        '
+        Me.mnuRowContextColumnSelection.Name = "mnuRowContextColumnSelection"
+        Me.mnuRowContextColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuRowContextColumnSelection.Text = "Column Selection..."
+        '
+        'mnuRowContextRemoveCurrentColumnSelection
+        '
+        Me.mnuRowContextRemoveCurrentColumnSelection.Name = "mnuRowContextRemoveCurrentColumnSelection"
+        Me.mnuRowContextRemoveCurrentColumnSelection.Size = New System.Drawing.Size(214, 22)
+        Me.mnuRowContextRemoveCurrentColumnSelection.Text = "Remove Column Selection"
         '
         'mnuRemoveCurrentFilter
         '
         Me.mnuRemoveCurrentFilter.Name = "mnuRemoveCurrentFilter"
-        Me.mnuRemoveCurrentFilter.Size = New System.Drawing.Size(189, 22)
+        Me.mnuRemoveCurrentFilter.Size = New System.Drawing.Size(214, 22)
         Me.mnuRemoveCurrentFilter.Tag = "Remove_Current_Filter"
         Me.mnuRemoveCurrentFilter.Text = "Remove Current Filter"
         '
@@ -871,8 +913,8 @@ Partial Class ucrDataView
         '
         'ucrDataView
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataView"
@@ -984,4 +1026,10 @@ Partial Class ucrDataView
     Friend WithEvents linkStartOpenLibrary As LinkLabel
     Friend WithEvents ucrReoGrid As ucrDataViewReoGrid
     Friend WithEvents ucrLinuxGrid As ucrDataViewLinuxGrid
+    Friend WithEvents mnuColumnContextColumnSelection As ToolStripMenuItem
+    Friend WithEvents mnuColumnContextRemoveCurrentColumnSelection As ToolStripMenuItem
+    Friend WithEvents mnuCellContextColumnSelection As ToolStripMenuItem
+    Friend WithEvents mnuCellContextRemoveCurrentColumnSelection As ToolStripMenuItem
+    Friend WithEvents mnuRowContextColumnSelection As ToolStripMenuItem
+    Friend WithEvents mnuRowContextRemoveCurrentColumnSelection As ToolStripMenuItem
 End Class

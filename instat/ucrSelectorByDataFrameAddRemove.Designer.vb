@@ -38,45 +38,54 @@ Partial Class ucrSelectorByDataFrameAddRemove
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorByDataFrameAddRemove))
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnDataOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrAvailableDataFrames
         '
-        resources.ApplyResources(Me.ucrAvailableDataFrames, "ucrAvailableDataFrames")
+        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(151, 50)
+        Me.ucrAvailableDataFrames.TabIndex = 0
         '
         'lstAvailableVariable
         '
-        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
+        Me.lstAvailableVariable.TabIndex = 2
         '
         'btnAdd
         '
-        resources.ApplyResources(Me.btnAdd, "btnAdd")
+        Me.btnAdd.Location = New System.Drawing.Point(153, 85)
         Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(57, 34)
+        Me.btnAdd.TabIndex = 3
         Me.btnAdd.Tag = "add"
+        Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'btnDataOptions
         '
-        resources.ApplyResources(Me.btnDataOptions, "btnDataOptions")
+        Me.btnDataOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.btnDataOptions.Location = New System.Drawing.Point(153, 146)
         Me.btnDataOptions.Name = "btnDataOptions"
+        Me.btnDataOptions.Size = New System.Drawing.Size(57, 34)
+        Me.btnDataOptions.TabIndex = 4
         Me.btnDataOptions.Tag = "Data_Options"
+        Me.btnDataOptions.Text = "Data Options"
         Me.btnDataOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorByDataFrameAddRemove
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.btnDataOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
+        Me.Size = New System.Drawing.Size(213, 183)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.btnDataOptions, 0)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

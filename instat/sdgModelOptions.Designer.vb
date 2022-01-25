@@ -38,7 +38,6 @@ Partial Class sdgModelOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgModelOptions))
         Me.rdoCloglog = New System.Windows.Forms.RadioButton()
         Me.rdoSqrt = New System.Windows.Forms.RadioButton()
         Me.rdoMuSquaredInverse = New System.Windows.Forms.RadioButton()
@@ -57,50 +56,74 @@ Partial Class sdgModelOptions
         '
         'rdoCloglog
         '
-        resources.ApplyResources(Me.rdoCloglog, "rdoCloglog")
+        Me.rdoCloglog.AutoSize = True
         Me.rdoCloglog.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoCloglog.Location = New System.Drawing.Point(85, 23)
         Me.rdoCloglog.Name = "rdoCloglog"
+        Me.rdoCloglog.Size = New System.Drawing.Size(59, 17)
+        Me.rdoCloglog.TabIndex = 1
         Me.rdoCloglog.Tag = "cloglog"
+        Me.rdoCloglog.Text = "cloglog"
         Me.rdoCloglog.UseVisualStyleBackColor = True
         '
         'rdoSqrt
         '
-        resources.ApplyResources(Me.rdoSqrt, "rdoSqrt")
+        Me.rdoSqrt.AutoSize = True
         Me.rdoSqrt.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoSqrt.Location = New System.Drawing.Point(85, 47)
         Me.rdoSqrt.Name = "rdoSqrt"
+        Me.rdoSqrt.Size = New System.Drawing.Size(44, 17)
+        Me.rdoSqrt.TabIndex = 4
         Me.rdoSqrt.Tag = "Sqrt"
+        Me.rdoSqrt.Text = "Sqrt"
         Me.rdoSqrt.UseVisualStyleBackColor = True
         '
         'rdoMuSquaredInverse
         '
-        resources.ApplyResources(Me.rdoMuSquaredInverse, "rdoMuSquaredInverse")
+        Me.rdoMuSquaredInverse.AutoSize = True
         Me.rdoMuSquaredInverse.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(85, 73)
         Me.rdoMuSquaredInverse.Name = "rdoMuSquaredInverse"
+        Me.rdoMuSquaredInverse.Size = New System.Drawing.Size(62, 17)
+        Me.rdoMuSquaredInverse.TabIndex = 7
         Me.rdoMuSquaredInverse.Tag = "1/mu^2"
+        Me.rdoMuSquaredInverse.Text = "1/mu^2"
         Me.rdoMuSquaredInverse.UseVisualStyleBackColor = True
         '
         'rdoInverse
         '
-        resources.ApplyResources(Me.rdoInverse, "rdoInverse")
+        Me.rdoInverse.AutoSize = True
         Me.rdoInverse.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoInverse.Location = New System.Drawing.Point(155, 71)
         Me.rdoInverse.Name = "rdoInverse"
+        Me.rdoInverse.Size = New System.Drawing.Size(60, 17)
+        Me.rdoInverse.TabIndex = 8
         Me.rdoInverse.Tag = "Inverse"
+        Me.rdoInverse.Text = "Inverse"
         Me.rdoInverse.UseVisualStyleBackColor = True
         '
         'rdoCauchit
         '
-        resources.ApplyResources(Me.rdoCauchit, "rdoCauchit")
+        Me.rdoCauchit.AutoSize = True
         Me.rdoCauchit.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoCauchit.Location = New System.Drawing.Point(155, 22)
         Me.rdoCauchit.Name = "rdoCauchit"
+        Me.rdoCauchit.Size = New System.Drawing.Size(61, 17)
+        Me.rdoCauchit.TabIndex = 2
         Me.rdoCauchit.Tag = "Cauchit"
+        Me.rdoCauchit.Text = "Cauchit"
         Me.rdoCauchit.UseVisualStyleBackColor = True
         '
         'rdoProbit
         '
-        resources.ApplyResources(Me.rdoProbit, "rdoProbit")
+        Me.rdoProbit.AutoSize = True
         Me.rdoProbit.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoProbit.Location = New System.Drawing.Point(155, 47)
         Me.rdoProbit.Name = "rdoProbit"
+        Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
+        Me.rdoProbit.TabIndex = 5
         Me.rdoProbit.Tag = "Probit"
+        Me.rdoProbit.Text = "Probit"
         Me.rdoProbit.UseVisualStyleBackColor = True
         '
         'grpLinkFunctions
@@ -115,47 +138,73 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.Controls.Add(Me.rdoCauchit)
         Me.grpLinkFunctions.Controls.Add(Me.rdoProbit)
         Me.grpLinkFunctions.Controls.Add(Me.ucrPnlLinkFunctions)
-        resources.ApplyResources(Me.grpLinkFunctions, "grpLinkFunctions")
+        Me.grpLinkFunctions.Location = New System.Drawing.Point(12, 57)
         Me.grpLinkFunctions.Name = "grpLinkFunctions"
+        Me.grpLinkFunctions.Size = New System.Drawing.Size(239, 104)
+        Me.grpLinkFunctions.TabIndex = 11
         Me.grpLinkFunctions.TabStop = False
+        Me.grpLinkFunctions.Text = "Link Function"
         '
         'rdoIdentity
         '
-        resources.ApplyResources(Me.rdoIdentity, "rdoIdentity")
+        Me.rdoIdentity.AutoSize = True
+        Me.rdoIdentity.Location = New System.Drawing.Point(15, 22)
         Me.rdoIdentity.Name = "rdoIdentity"
+        Me.rdoIdentity.Size = New System.Drawing.Size(59, 17)
+        Me.rdoIdentity.TabIndex = 12
+        Me.rdoIdentity.Text = "Identity"
         Me.rdoIdentity.UseVisualStyleBackColor = True
         '
         'rdoLog
         '
-        resources.ApplyResources(Me.rdoLog, "rdoLog")
+        Me.rdoLog.AutoSize = True
+        Me.rdoLog.Location = New System.Drawing.Point(15, 47)
         Me.rdoLog.Name = "rdoLog"
+        Me.rdoLog.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLog.TabIndex = 11
+        Me.rdoLog.Text = "Log"
         Me.rdoLog.UseVisualStyleBackColor = True
         '
         'rdoLogit
         '
-        resources.ApplyResources(Me.rdoLogit, "rdoLogit")
+        Me.rdoLogit.AutoSize = True
+        Me.rdoLogit.Location = New System.Drawing.Point(15, 71)
         Me.rdoLogit.Name = "rdoLogit"
+        Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
+        Me.rdoLogit.TabIndex = 10
+        Me.rdoLogit.Text = "Logit"
         Me.rdoLogit.UseVisualStyleBackColor = True
         '
         'ucrPnlLinkFunctions
         '
-        resources.ApplyResources(Me.ucrPnlLinkFunctions, "ucrPnlLinkFunctions")
+        Me.ucrPnlLinkFunctions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlLinkFunctions.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlLinkFunctions.Name = "ucrPnlLinkFunctions"
+        Me.ucrPnlLinkFunctions.Size = New System.Drawing.Size(225, 79)
+        Me.ucrPnlLinkFunctions.TabIndex = 9
         '
         'ucrDistributionChoice
         '
-        resources.ApplyResources(Me.ucrDistributionChoice, "ucrDistributionChoice")
+        Me.ucrDistributionChoice.AutoSize = True
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(12, 12)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 10
         '
         'ucrButtonsSDGModelOptions
         '
-        resources.ApplyResources(Me.ucrButtonsSDGModelOptions, "ucrButtonsSDGModelOptions")
+        Me.ucrButtonsSDGModelOptions.AutoSize = True
+        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(45, 167)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
+        Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(224, 30)
+        Me.ucrButtonsSDGModelOptions.TabIndex = 2
         '
         'sdgModelOptions
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(263, 204)
         Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
@@ -163,10 +212,13 @@ Partial Class sdgModelOptions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgModelOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Model_Options"
+        Me.Text = "Model Options"
         Me.grpLinkFunctions.ResumeLayout(False)
         Me.grpLinkFunctions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

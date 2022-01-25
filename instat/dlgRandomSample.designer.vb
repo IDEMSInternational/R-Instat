@@ -38,9 +38,12 @@ Partial Class dlgRandomSample
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRandomSample))
+        Me.components = New System.ComponentModel.Container()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
+        Me.ttRngKind = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrInputRngKind = New instat.ucrInputComboBox()
+        Me.ucrChkRngKind = New instat.ucrCheck()
         Me.ucrSaveRandomSample = New instat.ucrSave()
         Me.ucrNudNumberOfSamples = New instat.ucrNud()
         Me.ucrNudSeed = New instat.ucrNud()
@@ -53,74 +56,132 @@ Partial Class dlgRandomSample
         '
         'lblSampleSize
         '
-        resources.ApplyResources(Me.lblSampleSize, "lblSampleSize")
+        Me.lblSampleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSampleSize.Location = New System.Drawing.Point(259, 155)
         Me.lblSampleSize.Name = "lblSampleSize"
+        Me.lblSampleSize.Size = New System.Drawing.Size(118, 13)
+        Me.lblSampleSize.TabIndex = 6
         Me.lblSampleSize.Tag = "Sample_Size:"
+        Me.lblSampleSize.Text = "Sample Size:"
         '
         'lblNumberofSamples
         '
-        resources.ApplyResources(Me.lblNumberofSamples, "lblNumberofSamples")
+        Me.lblNumberofSamples.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(259, 128)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
+        Me.lblNumberofSamples.Size = New System.Drawing.Size(118, 13)
+        Me.lblNumberofSamples.TabIndex = 4
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
+        Me.lblNumberofSamples.Text = "Number of Samples:"
+        '
+        'ucrInputRngKind
+        '
+        Me.ucrInputRngKind.AddQuotesIfUnrecognised = True
+        Me.ucrInputRngKind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRngKind.GetSetSelectedIndex = -1
+        Me.ucrInputRngKind.IsReadOnly = False
+        Me.ucrInputRngKind.Location = New System.Drawing.Point(359, 74)
+        Me.ucrInputRngKind.Name = "ucrInputRngKind"
+        Me.ucrInputRngKind.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputRngKind.TabIndex = 11
+        '
+        'ucrChkRngKind
+        '
+        Me.ucrChkRngKind.AutoSize = True
+        Me.ucrChkRngKind.Checked = False
+        Me.ucrChkRngKind.Location = New System.Drawing.Point(262, 75)
+        Me.ucrChkRngKind.Name = "ucrChkRngKind"
+        Me.ucrChkRngKind.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRngKind.TabIndex = 10
         '
         'ucrSaveRandomSample
         '
-        resources.ApplyResources(Me.ucrSaveRandomSample, "ucrSaveRandomSample")
+        Me.ucrSaveRandomSample.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveRandomSample.Location = New System.Drawing.Point(10, 219)
+        Me.ucrSaveRandomSample.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
+        Me.ucrSaveRandomSample.Size = New System.Drawing.Size(365, 22)
+        Me.ucrSaveRandomSample.TabIndex = 8
         '
         'ucrNudNumberOfSamples
         '
+        Me.ucrNudNumberOfSamples.AutoSize = True
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberOfSamples, "ucrNudNumberOfSamples")
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
+        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfSamples.TabIndex = 5
         Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSeed
         '
+        Me.ucrNudSeed.AutoSize = True
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSeed, "ucrNudSeed")
+        Me.ucrNudSeed.Location = New System.Drawing.Point(359, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
+        Me.ucrNudSeed.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSeed.TabIndex = 3
         Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkSetSeed
         '
+        Me.ucrChkSetSeed.AutoSize = True
         Me.ucrChkSetSeed.Checked = False
-        resources.ApplyResources(Me.ucrChkSetSeed, "ucrChkSetSeed")
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(262, 101)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        Me.ucrChkSetSeed.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkSetSeed.TabIndex = 2
         '
         'ucrSampleSize
         '
-        resources.ApplyResources(Me.ucrSampleSize, "ucrSampleSize")
+        Me.ucrSampleSize.AutoSize = True
+        Me.ucrSampleSize.Location = New System.Drawing.Point(359, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
+        Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
+        Me.ucrSampleSize.TabIndex = 7
         Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         '
         'ucrSelectorRandomSamples
         '
+        Me.ucrSelectorRandomSamples.AutoSize = True
         Me.ucrSelectorRandomSamples.bDropUnusedFilterLevels = False
         Me.ucrSelectorRandomSamples.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorRandomSamples, "ucrSelectorRandomSamples")
+        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRandomSamples.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
+        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(153, 43)
+        Me.ucrSelectorRandomSamples.TabIndex = 0
         '
         'ucrDistWithParameters
         '
-        resources.ApplyResources(Me.ucrDistWithParameters, "ucrDistWithParameters")
+        Me.ucrDistWithParameters.AutoSize = True
+        Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(1037, 172)
+        Me.ucrDistWithParameters.TabIndex = 1
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'dlgRandomSample
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(479, 300)
+        Me.Controls.Add(Me.ucrInputRngKind)
+        Me.Controls.Add(Me.ucrChkRngKind)
         Me.Controls.Add(Me.ucrSaveRandomSample)
         Me.Controls.Add(Me.ucrNudNumberOfSamples)
         Me.Controls.Add(Me.ucrNudSeed)
@@ -135,6 +196,8 @@ Partial Class dlgRandomSample
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRandomSample"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Random Samples"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -150,4 +213,7 @@ Partial Class dlgRandomSample
     Friend WithEvents ucrNudSeed As ucrNud
     Friend WithEvents ucrNudNumberOfSamples As ucrNud
     Friend WithEvents ucrSaveRandomSample As ucrSave
+    Friend WithEvents ttRngKind As ToolTip
+    Friend WithEvents ucrChkRngKind As ucrCheck
+    Friend WithEvents ucrInputRngKind As ucrInputComboBox
 End Class
