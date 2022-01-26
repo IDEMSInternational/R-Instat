@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsSampleNFunctionDataframeFunction, clsSetSeedFunction, clsSampleFunction, clsRerunFunction, clsDummyFunction As New RFunction
+    Private clsDataFrameFunction, clsSampleNFunctionDataframeFunction, clsSetSeedFunction, clsSampleFunction, clsRerunFunction As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,6 +37,7 @@ Public Class dlgRandomSubsets
         ucrBase.iHelpTopicID = 65
 
         'ucrReceiver
+        ucrReceiverSubsets.bForceAsDataFrame = True
         ucrReceiverSubsets.SetParameter(New RParameter("x", 2, bNewIncludeArgumentName:=False))
         ucrReceiverSubsets.SetParameterIsRFunction()
         ucrReceiverSubsets.Selector = ucrSelectorRandomSubsets
@@ -57,8 +58,8 @@ Public Class dlgRandomSubsets
 
         'Set Seed
         ucrChkSetSeed.SetText("Set Seed")
-        ucrChkSetSeed.AddParameterValuesCondition(True, "checked", "true")
-        ucrChkSetSeed.AddParameterValuesCondition(False, "checked", "false")
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)
         ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
@@ -76,15 +77,12 @@ Public Class dlgRandomSubsets
         clsRerunFunction = New RFunction
         clsDataFrameFunction = New RFunction
         clsSampleNFunctionDataframeFunction = New RFunction
-        clsDummyFunction = New RFunction
 
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataFrame.Reset()
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
         NewDefaultName()
         ReplaceParameters()
-
-        'clsdummy function
-        clsDummyFunction.AddParameter("checked", "false", iPosition:=0)
 
         'sample_n function
         clsSampleFunction.SetPackageName("dplyr")
@@ -120,7 +118,7 @@ Public Class dlgRandomSubsets
         ucrNudNumberOfColumns.SetRCode(clsRerunFunction, bReset)
         ucrNewDataFrame.SetRCode(clsDataFrameFunction, bReset)
         ucrNudSampleSize.SetRCode(clsSampleFunction, bReset)
-        ucrChkSetSeed.SetRCode(clsDummyFunction, bReset)
+        ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
     End Sub
 
@@ -140,11 +138,6 @@ Public Class dlgRandomSubsets
         End If
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If ucrChkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeedFunction.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
-        End If
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -184,9 +177,15 @@ Public Class dlgRandomSubsets
 
     Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
         If ucrChkSetSeed.Checked Then
-            clsDummyFunction.AddParameter("checked", "true", iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction)
         Else
-            clsDummyFunction.AddParameter("checked", "false", iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+        End If
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If ucrChkSetSeed.Checked Then
+            frmMain.clsRLink.RunScript(clsSetSeedFunction.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
         End If
     End Sub
 End Class
