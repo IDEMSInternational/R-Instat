@@ -246,22 +246,22 @@ DataSheet$set("public", "set_comments", function(new_comments) {
 }
 )
 
- DataSheet$set("public", "update_variables_metadata", function(new_d) {
-   #Not needed now using attributes
-   if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
-    if(all(colnames(private$data) %in% rownames(private$variables_metadata))) {
-       self$set_variables_metadata(private$variables_metadata[colnames(private$data),])
-     }
-     else {
-     }
-   }
-   for(col in colnames(self$get_data_frame())) {
-     if(!self$is_variables_metadata(signif_figures_label, col)) self$append_to_variables_metadata(col, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(col, use_current_filter = FALSE)))
-     self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
-     self$append_to_variables_metadata(col, name_label, col)
-   }
- }
- )
+# DataSheet$set("public", "update_variables_metadata", function() {
+#   #Not needed now using attributes
+#   #if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
+#   #  if(all(colnames(private$data) %in% rownames(private$variables_metadata))) {
+#       #self$set_variables_metadata(private$variables_metadata[colnames(private$data),])
+#    # }
+#    # else {
+#    # }
+#   #}
+#   for(col in colnames(self$get_data_frame())) {
+#     if(!self$is_variables_metadata(signif_figures_label, col)) self$append_to_variables_metadata(col, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(col, use_current_filter = FALSE)))
+#     #self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+#     self$append_to_variables_metadata(col, name_label, col)
+#   }
+# }
+# )
 
 DataSheet$set("public", "set_data_changed", function(new_val) {
   self$data_changed <- new_val
@@ -301,23 +301,6 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
-    }
-    
-    if(use_column_selection && self$column_selection_applied()) {
-      old_metadata <- attributes(private$data)
-      out <- out[,self$get_column_names()]
-     # browser()
-      for(name in names(old_metadata)) {
-        if(!name %in% c("names", "class", "row.names")) {
-          #self$append_to_metadata(name, old_metadata[[name]])
-          attr(out, name) <- old_metadata[[name]]
-          }
-      }
-      browser()
-      #dd <- self$get_variables_metadata()[[1]][,"Name"] %in% self$get_column_names()
-      #self$get_variables_metadata()[[1]][dd,]
-      self$update_variables_metadata
-      private$.variables_metadata_changed <- TRUE
     }
     if(!is.data.frame(out)) {
       out <- data.frame(out)
