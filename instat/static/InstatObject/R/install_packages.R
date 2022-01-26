@@ -117,6 +117,7 @@ pkgs <-
     "ggwordcloud",
     # For producing periodic and natural splines in Climatic > Compare > Seasonal Plot
     "splines2"
+    # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Danny/Documents/RPackages"
