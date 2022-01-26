@@ -264,7 +264,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblPreview.AutoSize = True
         Me.lblPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPreview.Location = New System.Drawing.Point(258, 80)
+        Me.lblPreview.Location = New System.Drawing.Point(258, 59)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(100, 13)
         Me.lblPreview.TabIndex = 5
@@ -273,7 +273,7 @@ Partial Class dlgRegularSequence
         '
         'txtGetPreview
         '
-        Me.txtGetPreview.Location = New System.Drawing.Point(256, 96)
+        Me.txtGetPreview.Location = New System.Drawing.Point(256, 75)
         Me.txtGetPreview.Name = "txtGetPreview"
         Me.txtGetPreview.ReadOnly = True
         Me.txtGetPreview.Size = New System.Drawing.Size(185, 140)
@@ -285,7 +285,7 @@ Partial Class dlgRegularSequence
         Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.lblMessage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMessage.Location = New System.Drawing.Point(256, 243)
+        Me.lblMessage.Location = New System.Drawing.Point(255, 218)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(185, 52)
         Me.lblMessage.TabIndex = 7

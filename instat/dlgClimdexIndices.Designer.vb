@@ -181,10 +181,10 @@ Partial Class dlgClimdexIndices
         Me.lblIndicesSelectedOutOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblIndicesSelectedOutOf.Location = New System.Drawing.Point(100, 361)
         Me.lblIndicesSelectedOutOf.Name = "lblIndicesSelectedOutOf"
-        Me.lblIndicesSelectedOutOf.Size = New System.Drawing.Size(113, 13)
+        Me.lblIndicesSelectedOutOf.Size = New System.Drawing.Size(140, 13)
         Me.lblIndicesSelectedOutOf.TabIndex = 17
         Me.lblIndicesSelectedOutOf.Tag = "Month:"
-        Me.lblIndicesSelectedOutOf.Text = "indices selected out of"
+        Me.lblIndicesSelectedOutOf.Text = "indices          selected out of"
         '
         'lblSelectedIndices
         '
