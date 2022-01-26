@@ -185,6 +185,14 @@ Public Class dlgUnstack
         ucrNewDFName.SetRCode(clsBaseRCode, bReset)
     End Sub
 
+    Private Sub ucrReceiverFactorToUnstackby_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorToUnstackby.ControlValueChanged
+        SetFormula()
+    End Sub
+
+    Private Sub ucrReceiverColumnToUnstack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnToUnstack.ControlValueChanged
+        ValuesfillParameter()
+    End Sub
+
     Private Sub ucrMultipleColumnsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMultipleColumnsReceiver.ControlValueChanged
         ValuesfillParameter()
     End Sub
@@ -278,8 +286,8 @@ Public Class dlgUnstack
                     clsCarryColumnsOperator.RemoveParameterByName("factor")
                 End If
                 clsformulaOperator.AddParameter("left", clsROperatorParameter:=clsCarryColumnsOperator, iPosition:=0)
-                Else
-                    clsformulaOperator.RemoveParameterByName("left")
+            Else
+                clsformulaOperator.RemoveParameterByName("left")
                 clsformulaOperator.AddParameter("left", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
             End If
         End If
@@ -360,10 +368,6 @@ Public Class dlgUnstack
 
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrChkValuesFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkValuesFill.ControlValueChanged, ucrNudValuesFill.ControlValueChanged
         If ucrChkValuesFill.Checked Then
             clsDcastFunction.AddParameter(New RParameter("values_fill", ucrNudValuesFill.GetText, iNewPosition:=7))
@@ -372,11 +376,7 @@ Public Class dlgUnstack
         End If
     End Sub
 
-    Private Sub ucrReceiverColumnToUnstack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnToUnstack.ControlValueChanged
-        ValuesfillParameter()
-    End Sub
-
-    Private Sub ucrReceiverFactorToUnstackby_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorToUnstackby.ControlValueChanged
-        SetFormula()
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged, ucrNudValuesFill.ControlContentsChanged, ucrInputTextPrefix.ControlContentsChanged, ucrChkAddPrefix.ControlContentsChanged, ucrChkValuesFill.ControlContentsChanged, ucrMultipleColumnsReceiver.ControlContentsChanged, ucrReceiverColumnToUnstack.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
