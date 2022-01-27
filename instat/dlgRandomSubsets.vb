@@ -56,7 +56,7 @@ Public Class dlgRandomSubsets
         ucrNudSampleSize.SetParameter(New RParameter("size", 2))
 
         'Set Seed
-        ucrChkSetSeed.SetText("Seed")
+        ucrChkSetSeed.SetText("Set Seed")
         ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSetSeed.SetMinMax(1, Integer.MaxValue)

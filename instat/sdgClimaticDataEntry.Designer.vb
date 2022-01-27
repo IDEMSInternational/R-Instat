@@ -127,15 +127,15 @@ Partial Class sdgClimaticDataEntry
         '
         Me.ucrChkAddFlagFieldData.AutoSize = True
         Me.ucrChkAddFlagFieldData.Checked = False
-        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(185, 10)
+        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(231, 9)
         Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
-        Me.ucrChkAddFlagFieldData.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkAddFlagFieldData.Size = New System.Drawing.Size(130, 23)
         Me.ucrChkAddFlagFieldData.TabIndex = 91
         '
         'cmdComment
         '
         Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComment.Location = New System.Drawing.Point(337, 7)
+        Me.cmdComment.Location = New System.Drawing.Point(364, 7)
         Me.cmdComment.Name = "cmdComment"
         Me.cmdComment.Size = New System.Drawing.Size(90, 24)
         Me.cmdComment.TabIndex = 90
@@ -146,7 +146,7 @@ Partial Class sdgClimaticDataEntry
         '
         Me.cmdTransform.Enabled = False
         Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTransform.Location = New System.Drawing.Point(431, 7)
+        Me.cmdTransform.Location = New System.Drawing.Point(457, 7)
         Me.cmdTransform.Name = "cmdTransform"
         Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
         Me.cmdTransform.TabIndex = 89
@@ -157,7 +157,7 @@ Partial Class sdgClimaticDataEntry
         'cmdReset
         '
         Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdReset.Location = New System.Drawing.Point(541, 7)
+        Me.cmdReset.Location = New System.Drawing.Point(564, 7)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(72, 24)
         Me.cmdReset.TabIndex = 88
@@ -168,7 +168,7 @@ Partial Class sdgClimaticDataEntry
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
-        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(13, 6)
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(5, 6)
         Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)

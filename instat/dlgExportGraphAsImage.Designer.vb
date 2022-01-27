@@ -38,7 +38,6 @@ Partial Class dlgExportGraphAsImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportGraphAsImage))
         Me.lblSelectedGraph = New System.Windows.Forms.Label()
         Me.ucrSelectedGraphReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorGraphAsImage = New instat.ucrSelectorByDataFrameAddRemove()
@@ -83,7 +82,7 @@ Partial Class dlgExportGraphAsImage
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 224)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 52)
@@ -94,24 +93,23 @@ Partial Class dlgExportGraphAsImage
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostSc" &
     "ript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
         Me.ucrFilePath.FilePathDialogTitle = "Save Graph As Image"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
-        Me.ucrFilePath.Location = New System.Drawing.Point(14, 195)
+        Me.ucrFilePath.Location = New System.Drawing.Point(7, 194)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
-        Me.ucrFilePath.Size = New System.Drawing.Size(990, 34)
+        Me.ucrFilePath.Size = New System.Drawing.Size(400, 34)
         Me.ucrFilePath.TabIndex = 7
         '
         'dlgExportGraphAsImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(418, 280)
+        Me.ClientSize = New System.Drawing.Size(418, 285)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblSelectedGraph)
         Me.Controls.Add(Me.ucrSelectedGraphReceiver)

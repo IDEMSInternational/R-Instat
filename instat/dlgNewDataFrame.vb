@@ -63,13 +63,13 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddRadioButton(rdoEmpty)
 
         'TODO:Providing conditions here may not be easy, find a way to do this properly!
-        ucrPnlDataFrame.AddFunctionNamesCondition(rdoConstruct, "data.frame")
+        'ucrPnlDataFrame.AddFunctionNamesCondition(rdoConstruct, "data.frame")
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoCommand, ucrInputCommand.GetText())
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoRandom, "")
-        'ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "")
+        ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "data.frame")
 
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
@@ -106,7 +106,7 @@ Public Class dlgNewDataFrame
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
     End Sub
 
     Private Sub TestOKEnabled()

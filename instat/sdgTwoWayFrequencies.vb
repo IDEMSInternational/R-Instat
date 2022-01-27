@@ -100,7 +100,12 @@ Public Class sdgTwoWayFrequencies
         'Setting Plot parameter
         ucrPnlGraphType.SetParameter(New RParameter("type", 8))
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
-        ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoLineGraph, Chr(34) & "line" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoBoxPlot, Chr(34) & "boxplot" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoViolinPlot, Chr(34) & "violin" & Chr(34))
+        ucrPnlGraphType.AddToLinkedControls(ucrChkShowPercentage, {rdoBar, rdoDot, rdoLineGraph, rdoViolinPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
         'Setting Plot parameter
@@ -116,7 +121,7 @@ Public Class sdgTwoWayFrequencies
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         InitialiseTabs()
         'TODO: Investigate why when some variables are used for line graph this error is given "Breaks and labels are of different lengths"
-        rdoLine.Enabled = False
+        rdoDot.Enabled = True
         bControlsInitialised = True
     End Sub
     'Linking the subdialog to the functions main dialogue
@@ -128,6 +133,23 @@ Public Class sdgTwoWayFrequencies
         clsTwoWayGraphFreq = clsNewSjpFrq
         clsGraphOperator = clsNewGraphOperator
         bUseTitle = bNewUseTitle
+
+        If clsTwoWayGraphFreq.ContainsParameter("fun") Then
+            If clsTwoWayGraphFreq.GetParameter("fun").strArgumentValue = Chr(34) & "xtab" & Chr(34) Then
+                rdoViolinPlot.Enabled = False
+                rdoDot.Enabled = False
+                rdoBoxPlot.Enabled = False
+                rdoLineGraph.Enabled = True
+                rdoBar.Enabled = True
+                clsTwoWayGraphFreq.RemoveParameterByName("facet.grid")
+            ElseIf clsTwoWayGraphFreq.GetParameter("fun").strArgumentValue = Chr(34) & "grpfrq" & Chr(34) Then
+                rdoViolinPlot.Enabled = True
+                rdoDot.Enabled = True
+                rdoBoxPlot.Enabled = True
+                rdoLineGraph.Enabled = False
+                rdoBar.Enabled = True
+            End If
+        End If
 
         'Setting Rcode for the sub dialogue
         ucrChkShowSummary.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
@@ -170,6 +192,7 @@ Public Class sdgTwoWayFrequencies
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
     End Sub
+
     Private Sub InitialiseTabs()
         For i = 0 To tbpTwoWayFrequencies.TabCount - 1
             tbpTwoWayFrequencies.SelectedIndex = i

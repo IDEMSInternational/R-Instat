@@ -67,15 +67,14 @@ Partial Class ucrSave
         'ucrInputComboSave
         '
         Me.ucrInputComboSave.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboSave.AutoSize = True
         Me.ucrInputComboSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.ucrInputComboSave.GetSetSelectedIndex = -1
         Me.ucrInputComboSave.IsReadOnly = False
-        Me.ucrInputComboSave.Location = New System.Drawing.Point(349, 0)
+        Me.ucrInputComboSave.Location = New System.Drawing.Point(194, 0)
         Me.ucrInputComboSave.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputComboSave.Name = "ucrInputComboSave"
-        Me.ucrInputComboSave.Size = New System.Drawing.Size(0, 34)
+        Me.ucrInputComboSave.Size = New System.Drawing.Size(155, 34)
         Me.ucrInputComboSave.TabIndex = 4
         '
         'ucrInputTextSave
