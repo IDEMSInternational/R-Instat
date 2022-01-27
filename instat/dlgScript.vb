@@ -381,6 +381,6 @@ Public Class dlgScript
     End Sub
 
     Private Function RunText(strText As String) As String
-        Return If(strText <> "", frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment), "")
+        Return If(String.IsNullOrEmpty(strText), "", frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment))
     End Function
 End Class
