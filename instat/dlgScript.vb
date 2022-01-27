@@ -192,7 +192,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        RunText(txtScript.Text)
+        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=txtScript.Text, strNewComment:=strComment)
     End Sub
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
@@ -379,8 +379,4 @@ Public Class dlgScript
             lstAssignToStrings.Add(strObjectName)
         End If
     End Sub
-
-    Private Function RunText(strText As String) As String
-        Return If(String.IsNullOrEmpty(strText), "", frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment))
-    End Function
 End Class
