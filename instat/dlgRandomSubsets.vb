@@ -182,10 +182,4 @@ Public Class dlgRandomSubsets
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
         End If
     End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If ucrChkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeedFunction.ToScript(), strComment:="dlgRandomSubset: Setting the seed for random number generator")
-        End If
-    End Sub
 End Class
