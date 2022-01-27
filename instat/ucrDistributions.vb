@@ -221,7 +221,7 @@ Public Class ucrDistributions
         Dim clsCauchyDist As New Distribution
         Dim clsChiSqDist As New Distribution
         Dim clsFDist As New Distribution
-        'Dim clsHyperGeoDist As New Distribution
+        Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
         Dim clsExtremeValueDist As New Distribution
         Dim clsGeneralizedParetoDist As New Distribution
@@ -368,6 +368,7 @@ Public Class ucrDistributions
         clsStudentsTDist.strQFunctionName = "qt"
         clsStudentsTDist.strDFunctionName = "dt"
         clsStudentsTDist.AddParameter("df", "DF", 1)
+        clsStudentsTDist.AddParameter("ncp", "Non-Centrality", 0)
         lstAllDistributions.Add(clsStudentsTDist)
 
         ' von mises distribution
@@ -404,6 +405,7 @@ Public Class ucrDistributions
         clsChiSqDist.strDFunctionName = "dchisq"
         clsChiSqDist.bIsContinuous = True
         clsChiSqDist.AddParameter("df", "DF", 1)
+        clsChiSqDist.AddParameter("ncp", "Non-Centrality", 0)
         lstAllDistributions.Add(clsChiSqDist)
 
         ' F Distribution
@@ -419,17 +421,17 @@ Public Class ucrDistributions
 
         'Hypergeometric Distribution
         ' For rhyper, the parameters are nn = size, whereas for the other parameters this is n.
-        'clsHyperGeoDist.strNameTag = "Hypergeometric"
-        'clsHyperGeoDist.strRName = "hyper"
-        'clsHyperGeoDist.strRFunctionName = "rhyper"
-        'clsHyperGeoDist.strPFunctionName = "phyper"
-        'clsHyperGeoDist.strQFunctionName = "qhyper"
-        'clsHyperGeoDist.strDFunctionName = "dhyper"
-        'clsHyperGeoDist.bIsContinuous = False
-        'clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
-        'clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
-        'clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
-        'lstAllDistributions.Add(clsHyperGeoDist)
+        clsHyperGeoDist.strNameTag = "Hypergeometric"
+        clsHyperGeoDist.strRName = "hyper"
+        clsHyperGeoDist.strRFunctionName = "rhyper"
+        clsHyperGeoDist.strPFunctionName = "phyper"
+        clsHyperGeoDist.strQFunctionName = "qhyper"
+        clsHyperGeoDist.strDFunctionName = "dhyper"
+        clsHyperGeoDist.bIsContinuous = False
+        clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
+        clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
+        clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
+        lstAllDistributions.Add(clsHyperGeoDist)
 
         ' Lognormal Distribution
         clsLogNormDist.strNameTag = "Lognormal"
