@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction,
+    Private clsSummaryFunction, clsSummariesList,
         clsConcFunction, clsCalculateSummaryFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
@@ -59,7 +59,7 @@ Public Class dlgOneVariableSummarise
 
         ucrPnlSummaries.AddRadioButton(rdoDefault)
         ucrPnlSummaries.AddRadioButton(rdoCustomised)
-        ucrPnlSummaries.AddFunctionNamesCondition(rdoCustomised, frmMain.clsRLink.strInstatDataObject & "$summary")
+        ucrPnlSummaries.AddFunctionNamesCondition(rdoCustomised, frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         ucrPnlSummaries.AddFunctionNamesCondition(rdoDefault, "summary")
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls(ucrChkOmitMissing, {rdoCustomised}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -74,7 +74,6 @@ Public Class dlgOneVariableSummarise
     Private Sub SetDefaults()
         clsSummariesList = New RFunction
         clsSummaryFunction = New RFunction
-        clsInstatSummaryFunction = New RFunction
         clsConcFunction = New RFunction
         clsCalculateSummaryFunction = New RFunction
 
@@ -92,26 +91,21 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
 
         clsCalculateSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        clsCalculateSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         clsCalculateSummaryFunction.AddParameter("silent", "TRUE", iPosition:=0)
         clsCalculateSummaryFunction.AddParameter("store_result", "FALSE", iPosition:=1)
         clsCalculateSummaryFunction.AddParameter("return_output", "TRUE", iPosition:=2)
-
-        clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
-        clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
-        clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        clsCalculateSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=3)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrPnlSummaries.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSelectorOneVarSummarise.SetRCode(clsInstatSummaryFunction, bReset)
+        ucrSelectorOneVarSummarise.SetRCode(clsCalculateSummaryFunction, bReset)
         ChangeBaseFunction()
     End Sub
 
@@ -131,7 +125,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsCalculateSummaryFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
@@ -141,7 +135,7 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ChangeBaseFunction()
         If rdoCustomised.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCalculateSummaryFunction)
             cmdSummaries.Visible = True
         ElseIf rdoDefault.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
@@ -151,9 +145,9 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlValueChanged
         If Not ucrReceiverOneVarSummarise.IsEmpty Then
-            clsInstatSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames())
+            clsCalculateSummaryFunction.AddParameter("columns_to_summarise", ucrReceiverOneVarSummarise.GetVariableNames(), iPosition:=4)
         Else
-            clsInstatSummaryFunction.RemoveParameterByName("columns_to_summarise")
+            clsCalculateSummaryFunction.RemoveParameterByName("columns_to_summarise")
         End If
     End Sub
 
@@ -176,5 +170,18 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
         ChangeBaseFunction()
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If clsSummariesList.ContainsParameter("summary_cor") OrElse clsSummariesList.ContainsParameter("summary_cov") Then
+            clsCalculateSummaryFunction.AddParameter("use", Chr(34) & "'na.or.complete'" & Chr(34))
+        Else
+            clsCalculateSummaryFunction.RemoveParameterByName("use")
+        End If
+        If Not ucrChkOmitMissing.Checked Then
+            clsCalculateSummaryFunction.RemoveParameterByName("na_type")
+        Else
+            clsCalculateSummaryFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
+        End If
     End Sub
 End Class
