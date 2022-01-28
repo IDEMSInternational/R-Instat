@@ -1032,7 +1032,6 @@ Public Class dlgImportDataset
         If (Not Me.Visible) AndAlso bFromLibrary Then
             bFromLibrary = False
             If String.IsNullOrEmpty(strFilePathSystemTemp) Then
-                strCurrentDirectory = ""
                 strFileName = ""
                 strFileExtension = ""
                 strFilePathSystem = ""
@@ -1067,7 +1066,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
-        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, "\") - 1), strFileExtension)
+        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, If(strCurrentDirectory.Contains("/"), "/", "\")) - 1), strFileExtension)
     End Sub
 
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
