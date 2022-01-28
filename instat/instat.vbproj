@@ -5167,6 +5167,8 @@
     </Content>
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <None Include="Resources\up_to.png" />
+    <None Include="Resources\up_to_btn.png" />
+    <None Include="Resources\upward-arrow.png" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">

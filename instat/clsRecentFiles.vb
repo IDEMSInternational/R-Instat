@@ -189,6 +189,7 @@ Public Class clsRecentFiles
         Dim strFilePathTmp As String = strFilePath.Replace("MRU:", "")
         strFilePathTmp = strFilePathTmp.Replace("\", "/")
         If File.Exists(strFilePathTmp) Then
+            dlgImportDataset.SetDialogStateFromFile("")
             dlgImportDataset.strFileToOpenOn = strFilePathTmp
             dlgImportDataset.ShowDialog()
         ElseIf DialogResult.Yes = MessageBox.Show(    'else allow the user to remove file from list

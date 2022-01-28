@@ -446,9 +446,9 @@ Public Class dlgImportDataset
                 Else
                     dctSelectedExcelSheets.Clear()
                     clbSheets.Items.Clear()
-                    Dim FileName As String = dlgOpen.FileName
-                    SetDialogStateFromFile(FileName)
-                    strCurrDirectory = FileName
+                    Dim strFileName As String = dlgOpen.FileName
+                    SetDialogStateFromFile(strFileName)
+                    strCurrDirectory = strFileName
                 End If
             End If
         End Using
@@ -581,7 +581,7 @@ Public Class dlgImportDataset
                 strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -1032,6 +1032,7 @@ Public Class dlgImportDataset
         If (Not Me.Visible) AndAlso bFromLibrary Then
             bFromLibrary = False
             If String.IsNullOrEmpty(strFilePathSystemTemp) Then
+                strCurrentDirectory = ""
                 strFileName = ""
                 strFileExtension = ""
                 strFilePathSystem = ""
@@ -1074,7 +1075,7 @@ Public Class dlgImportDataset
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
             cmdStepBack.Visible = True
         Else
-            SetDialogStateFromFile(Path.GetDirectoryName(strCurrDirectory) & "\" & strlastFileName & strFileExtension)
+            SetDialogStateFromFile(strCurrDirectory)
             cmdStepBack.Visible = False
         End If
         TestOkEnabled()
