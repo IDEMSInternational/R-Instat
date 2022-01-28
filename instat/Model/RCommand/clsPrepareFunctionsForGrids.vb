@@ -293,24 +293,19 @@ Public Class clsPrepareFunctionsForGrids
     ''' <summary>
     ''' Replace value in given cell
     ''' </summary>
-    ''' <param name="strNewValue"></param>
-    ''' <param name="strColumnName"></param>
-    ''' <param name="strRowText"></param>
-    ''' <param name="bWithQuotes"></param>
-    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean)
-        Dim clsReplaceValue As New RFunction
+    ''' <param name="lstColumnNames"></param>
+    ''' <param name="lstRowNames"></param>
+
+    Public Sub DeleteCells(lstColumnNames As List(Of String), lstRowNames As List(Of String))
+        Dim clsDeleteCells As New RFunction
         'trim white space from ends of value
-        strNewValue = strNewValue.Trim()
-        clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
-        clsReplaceValue.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
-        clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
-        If bWithQuotes Then
-            clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
-        Else
-            clsReplaceValue.AddParameter("new_value", strNewValue)
-        End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
+        clsDeleteCells.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_values_with_NA")
+        clsDeleteCells.SetRCommand(_RLink.strInstatDataObject & "$replace_values_with_NA")
+        clsDeleteCells.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsDeleteCells.AddParameter("col_name", _RLink.GetListAsRString(lstColumnNames))
+        clsDeleteCells.AddParameter("rows", _RLink.GetListAsRString(lstRowNames))
+
+        _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Replace Value In Data")
     End Sub
     ''' <summary>
     ''' Get the column type for a given column
@@ -320,6 +315,5 @@ Public Class clsPrepareFunctionsForGrids
     Public Function GetColumnType(strColumnName As String) As String
         Return _RLink.GetColumnType(_strDataFrame, strColumnName)
     End Function
-
 End Class
 
