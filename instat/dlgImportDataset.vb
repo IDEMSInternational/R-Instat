@@ -715,6 +715,7 @@ Public Class dlgImportDataset
 
         autoTranslate(Me)
         RemoveMissingValues()
+        SetUpButtonEnable("\")
     End Sub
 
     Private Sub TryTextPreview()
@@ -1066,6 +1067,10 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub SetUpButtonEnable(strCharacter As String)
+        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = strCharacter) <= 1, False, True)
+    End Sub
+
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
         SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, If(strCurrentDirectory.Contains("/"), "/", "\")) - 1), strFileExtension)
     End Sub
@@ -1078,6 +1083,7 @@ Public Class dlgImportDataset
             SetDialogStateFromFile(strCurrDirectory)
             cmdStepBack.Visible = False
         End If
+
         TestOkEnabled()
     End Sub
 

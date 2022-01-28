@@ -540,10 +540,10 @@ Partial Class dlgImportDataset
         '
         Me.cmdStepBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.cmdStepBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmdStepBack.Image = Global.instat.My.Resources.Resources.upward_arrow
-        Me.cmdStepBack.Location = New System.Drawing.Point(598, 15)
+        Me.cmdStepBack.Image = Global.instat.My.Resources.Resources.upward_arrow1
+        Me.cmdStepBack.Location = New System.Drawing.Point(598, 18)
         Me.cmdStepBack.Name = "cmdStepBack"
-        Me.cmdStepBack.Size = New System.Drawing.Size(23, 26)
+        Me.cmdStepBack.Size = New System.Drawing.Size(19, 19)
         Me.cmdStepBack.TabIndex = 32
         Me.cmdStepBack.UseVisualStyleBackColor = True
         '
