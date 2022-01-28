@@ -38,7 +38,6 @@ Partial Class dlgSaveAs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSaveAs))
         Me.lblConfirm = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFilePath = New instat.ucrFilePath()
@@ -48,7 +47,7 @@ Partial Class dlgSaveAs
         '
         Me.lblConfirm.AutoSize = True
         Me.lblConfirm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirm.Location = New System.Drawing.Point(96, 40)
+        Me.lblConfirm.Location = New System.Drawing.Point(96, 44)
         Me.lblConfirm.Name = "lblConfirm"
         Me.lblConfirm.Size = New System.Drawing.Size(140, 13)
         Me.lblConfirm.TabIndex = 3
@@ -69,22 +68,21 @@ Partial Class dlgSaveAs
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
         Me.ucrFilePath.FilePathDialogTitle = "Save Data File"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
         Me.ucrFilePath.Location = New System.Drawing.Point(1, 11)
         Me.ucrFilePath.Name = "ucrFilePath"
         Me.ucrFilePath.SelectedFileFilterIndex = 1
-        Me.ucrFilePath.Size = New System.Drawing.Size(3099, 71)
+        Me.ucrFilePath.Size = New System.Drawing.Size(429, 34)
         Me.ucrFilePath.TabIndex = 7
         '
         'dlgSaveAs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(434, 124)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblConfirm)

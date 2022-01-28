@@ -23,7 +23,8 @@ Public Class clsDataFrameFilter
     Protected _strDataFrameName As String
     Protected _RLink As RLink
 
-    Protected _bApplied As Boolean
+    Protected _bFilterApplied As Boolean
+    Protected _bColumnSelectionApplied As Boolean
     Protected _iFilteredRowCount As Integer
     Protected _strFilterName As String
 
@@ -39,9 +40,15 @@ Public Class clsDataFrameFilter
         End Get
     End Property
 
-    Public ReadOnly Property bApplied() As Boolean
+    Public ReadOnly Property bFilterApplied() As Boolean
         Get
-            Return _bApplied
+            Return _bFilterApplied
+        End Get
+    End Property
+
+    Public ReadOnly Property bColumnSelectionApplied() As Boolean
+        Get
+            Return _bColumnSelectionApplied
         End Get
     End Property
 
@@ -64,9 +71,17 @@ Public Class clsDataFrameFilter
         Return _RLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0)
     End Function
 
+    Private Function GetColumnSelectionAppliedFromRCommand() As Boolean
+        Dim clsColumnSelectionApplied As New RFunction
+        clsColumnSelectionApplied.SetRCommand(_RLink.strInstatDataObject & "$column_selection_applied")
+        clsColumnSelectionApplied.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        Return _RLink.RunInternalScriptGetValue(clsColumnSelectionApplied.ToScript()).AsLogical(0)
+    End Function
+
     Public Sub RefreshData()
         _iFilteredRowCount = _RLink.GetDataFrameLength(_strDataFrameName, True)
-        _bApplied = GetFilterAppliedFromRCommand()
+        _bFilterApplied = GetFilterAppliedFromRCommand()
+        _bColumnSelectionApplied = GetColumnSelectionAppliedFromRCommand()
         _strFilterName = GetFilterNameFromRCommand()
     End Sub
 

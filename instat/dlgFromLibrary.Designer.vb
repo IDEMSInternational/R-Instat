@@ -144,14 +144,13 @@ Partial Class dlgFromLibrary
         'ucrInputPackages
         '
         Me.ucrInputPackages.AddQuotesIfUnrecognised = True
-        Me.ucrInputPackages.AutoSize = True
         Me.ucrInputPackages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPackages.GetSetSelectedIndex = -1
         Me.ucrInputPackages.IsReadOnly = False
         Me.ucrInputPackages.Location = New System.Drawing.Point(108, 51)
         Me.ucrInputPackages.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputPackages.Name = "ucrInputPackages"
-        Me.ucrInputPackages.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputPackages.Size = New System.Drawing.Size(144, 23)
         Me.ucrInputPackages.TabIndex = 4
         '
         'ucrBase
