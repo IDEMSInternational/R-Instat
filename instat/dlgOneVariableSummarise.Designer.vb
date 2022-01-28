@@ -50,6 +50,8 @@ Partial Class dlgOneVariableSummarise
         Me.ucrReceiverOneVarSummarise = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlSummaries = New instat.UcrPanel()
+        Me.ucrChkDisplaySummariesAsRows = New instat.ucrCheck()
+        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -168,7 +170,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 316)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 11
@@ -181,12 +183,32 @@ Partial Class dlgOneVariableSummarise
         Me.ucrPnlSummaries.Size = New System.Drawing.Size(226, 37)
         Me.ucrPnlSummaries.TabIndex = 12
         '
+        'ucrChkDisplaySummariesAsRows
+        '
+        Me.ucrChkDisplaySummariesAsRows.AutoSize = True
+        Me.ucrChkDisplaySummariesAsRows.Checked = False
+        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(13, 258)
+        Me.ucrChkDisplaySummariesAsRows.Name = "ucrChkDisplaySummariesAsRows"
+        Me.ucrChkDisplaySummariesAsRows.Size = New System.Drawing.Size(241, 23)
+        Me.ucrChkDisplaySummariesAsRows.TabIndex = 19
+        '
+        'ucrChkDisplayVariablesAsRows
+        '
+        Me.ucrChkDisplayVariablesAsRows.AutoSize = True
+        Me.ucrChkDisplayVariablesAsRows.Checked = False
+        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(13, 282)
+        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
+        Me.ucrChkDisplayVariablesAsRows.Size = New System.Drawing.Size(227, 23)
+        Me.ucrChkDisplayVariablesAsRows.TabIndex = 18
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(421, 319)
+        Me.ClientSize = New System.Drawing.Size(421, 383)
+        Me.Controls.Add(Me.ucrChkDisplaySummariesAsRows)
+        Me.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
         Me.Controls.Add(Me.rdoCustomised)
         Me.Controls.Add(Me.rdoDefault)
         Me.Controls.Add(Me.lblSummaries)
@@ -223,4 +245,6 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents rdoDefault As RadioButton
     Friend WithEvents lblSummaries As Label
     Friend WithEvents ucrPnlSummaries As UcrPanel
+    Friend WithEvents ucrChkDisplaySummariesAsRows As ucrCheck
+    Friend WithEvents ucrChkDisplayVariablesAsRows As ucrCheck
 End Class

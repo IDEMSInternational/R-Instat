@@ -20,8 +20,10 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList,
-        clsConcFunction, clsCalculateSummaryFunction As New RFunction
+    Private clsSummaryFunction, clsSummariesList, clsDataFrameFunction,
+        clsColNamesFunction, clsConcFunction, clsCalculateSummaryFunction,
+        clsPivotLongerStackFunction, clsMmtableFunction As New RFunction
+    Private clsMmtableOperator As ROperator
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -69,6 +71,9 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.SetRDefault("FALSE")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
+
+        ucrChkDisplaySummariesAsRows.SetText("Display Summaries As Rows")
+        ucrChkDisplayVariablesAsRows.SetText("Display Variables As Rows")
     End Sub
 
     Private Sub SetDefaults()
@@ -76,10 +81,32 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction = New RFunction
         clsConcFunction = New RFunction
         clsCalculateSummaryFunction = New RFunction
+        clsDataFrameFunction = New RFunction
+        clsPivotLongerStackFunction = New RFunction
+        clsColNamesFunction = New RFunction
+        clsMmtableOperator = New ROperator
+        clsMmtableFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
 
         clsConcFunction.SetRCommand("c")
+
+        clsMmtableOperator.SetOperation("+")
+
+        clsMmtableFunction.SetPackageName("mmtable2")
+        clsMmtableFunction.SetRCommand("mmtable")
+
+        clsDataFrameFunction.SetRCommand("data.frame")
+        clsDataFrameFunction.AddParameter("x", "summary", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsColNamesFunction.SetRCommand("colnames")
+        clsColNamesFunction.AddParameter("columns", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsPivotLongerStackFunction.SetPackageName("tidyr")
+        clsPivotLongerStackFunction.SetRCommand("pivot_longer")
+        clsPivotLongerStackFunction.AddParameter("data", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0)
+        clsPivotLongerStackFunction.AddParameter("col", clsRFunctionParameter:=clsColNamesFunction, iPosition:=1)
+        clsPivotLongerStackFunction.SetAssignTo("stacked_cols")
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -95,6 +122,7 @@ Public Class dlgOneVariableSummarise
         clsCalculateSummaryFunction.AddParameter("store_result", "FALSE", iPosition:=1)
         clsCalculateSummaryFunction.AddParameter("return_output", "TRUE", iPosition:=2)
         clsCalculateSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=3)
+        clsCalculateSummaryFunction.SetAssignTo("summary")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
@@ -106,7 +134,6 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrPnlSummaries.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsCalculateSummaryFunction, bReset)
-        ChangeBaseFunction()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -169,6 +196,11 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
+        If rdoCustomised.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsPivotLongerStackFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPivotLongerStackFunction)
+        End If
         ChangeBaseFunction()
     End Sub
 
