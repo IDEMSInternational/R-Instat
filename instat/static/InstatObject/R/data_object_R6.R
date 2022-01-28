@@ -4231,3 +4231,12 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
 })
+
+DataSheet$set("Public", "replace_values_with_NA", function(row_index, column_index) {
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  if(!all(row_index %in% seq_along(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
+  if(!all(collumn_index %in% seq_along(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
+  curr_data[row_index, column_index] <- NA
+  self$set_data(curr_data)
+}
+)
