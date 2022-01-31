@@ -293,17 +293,16 @@ Public Class clsPrepareFunctionsForGrids
     ''' <summary>
     ''' Replace value in given cell
     ''' </summary>
-    ''' <param name="lstColumnNames"></param>
-    ''' <param name="lstRowNames"></param>
+    ''' <param name="lstColumnIndexes"></param>
+    ''' <param name="lstRowIndexes"></param>
 
-    Public Sub DeleteCells(lstColumnNames As List(Of String), lstRowNames As List(Of String))
+    Public Sub DeleteCells(lstRowIndexes As List(Of String), lstColumnIndexes As List(Of String))
         Dim clsDeleteCells As New RFunction
         'trim white space from ends of value
         clsDeleteCells.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_values_with_NA")
-        clsDeleteCells.SetRCommand(_RLink.strInstatDataObject & "$replace_values_with_NA")
         clsDeleteCells.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
-        clsDeleteCells.AddParameter("col_name", _RLink.GetListAsRString(lstColumnNames))
-        clsDeleteCells.AddParameter("rows", _RLink.GetListAsRString(lstRowNames))
+        clsDeleteCells.AddParameter("row_index", _RLink.GetListAsRString(lstRowIndexes))
+        clsDeleteCells.AddParameter("column_index", _RLink.GetListAsRString(lstColumnIndexes))
 
         _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Replace Value In Data")
     End Sub
