@@ -62,6 +62,7 @@ Public Class dlgImportDataset
                 strFileExtension = "" 'reset
             End If
             SetDialogStateFromFile(strFileToOpenOn, strFileExtension)
+            strDirectoryPathTemp = strFileToOpenOn
             strFileToOpenOn = ""
             bStartOpenDialog = False
         ElseIf bStartOpenDialog Then
@@ -708,7 +709,7 @@ Public Class dlgImportDataset
             End If
         End If
 
-        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = GetCorrectSeparatorInPath()) <= 1, False, True)
+        'cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = GetCorrectSeparatorInPath()) <= 1, False, True) 'Disable the button to avoid getting the path not needed e.g D:
 
         TryTextPreview()
         TryGridPreview()
@@ -1072,11 +1073,7 @@ Public Class dlgImportDataset
     End Function
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
-        If Not strCurrentDirectory.Contains("/") OrElse Not strCurrentDirectory.Contains("\") Then
-            Exit Sub
-        End If
-
-        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
+        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, If(strCurrentDirectory.Contains("/"), "/", "\")) - 1), strFileExtension)
     End Sub
 
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
@@ -1138,7 +1135,7 @@ Public Class dlgImportDataset
         Dim lstFileNames As New List(Of String)
         Dim arrFilePathsAndNames() As String
         If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
-            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension, SearchOption.AllDirectories)
+            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension)
             If bOnlyCleanedFileNames Then
                 For Each strFilePathName As String In arrFilePathsAndNames
                     lstFileNames.Add(GetCleanFileName(strFilePathName))
