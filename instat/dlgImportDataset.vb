@@ -29,7 +29,7 @@ Public Class dlgImportDataset
     Private strFilePathSystemTemp As String = ""
     Private strFilePathR As String = ""
     Private strCurrentDirectory As String = ""
-    Private strCurrDirectory As String = ""
+    Private strDirectoryPathTemp As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
     Private strlastFileName As String = ""
@@ -446,8 +446,8 @@ Public Class dlgImportDataset
                 Else
                     dctSelectedExcelSheets.Clear()
                     clbSheets.Items.Clear()
-                    strCurrDirectory  = dlgOpen.FileName
-                    SetDialogStateFromFile(strCurrDirectory)
+                    strDirectoryPathTemp = dlgOpen.FileName
+                    SetDialogStateFromFile(strDirectoryPathTemp)
                 End If
             End If
         End Using
@@ -708,13 +708,14 @@ Public Class dlgImportDataset
             End If
         End If
 
+        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = GetCorrectSeparatorInPath()) <= 1, False, True)
+
         TryTextPreview()
         TryGridPreview()
         TestOkEnabled()
 
         autoTranslate(Me)
         RemoveMissingValues()
-        SetUpButtonEnable("\")
     End Sub
 
     Private Sub TryTextPreview()
@@ -1066,12 +1067,16 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
-    Private Sub SetUpButtonEnable(strCharacter As String)
-        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = strCharacter) <= 1, False, True)
-    End Sub
+    Private Function GetCorrectSeparatorInPath() As String
+        Return If(strCurrentDirectory.Contains("/"), "/", "\")
+    End Function
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
-        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, If(strCurrentDirectory.Contains("/"), "/", "\")) - 1), strFileExtension)
+        If Not strCurrentDirectory.Contains("/") OrElse Not strCurrentDirectory.Contains("\") Then
+            Exit Sub
+        End If
+
+        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
     End Sub
 
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
@@ -1079,7 +1084,7 @@ Public Class dlgImportDataset
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
             cmdStepBack.Visible = True
         Else
-            SetDialogStateFromFile(strCurrDirectory)
+            SetDialogStateFromFile(strDirectoryPathTemp)
             cmdStepBack.Visible = False
         End If
 
@@ -1109,10 +1114,6 @@ Public Class dlgImportDataset
         End If
         Return frmMain.clsRLink.MakeValidText(strCleanFileName)
     End Function
-
-    Private Sub ucrChkMultipleFiles_Load(sender As Object, e As EventArgs)
-
-    End Sub
 
     ''' <summary>
     ''' Creates an R string to be used as the parameter value for na.strings and na parameters 
