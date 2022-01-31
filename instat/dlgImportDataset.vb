@@ -446,9 +446,8 @@ Public Class dlgImportDataset
                 Else
                     dctSelectedExcelSheets.Clear()
                     clbSheets.Items.Clear()
-                    Dim strFileName As String = dlgOpen.FileName
-                    SetDialogStateFromFile(strFileName)
-                    strCurrDirectory = strFileName
+                    strCurrDirectory  = dlgOpen.FileName
+                    SetDialogStateFromFile(strCurrDirectory)
                 End If
             End If
         End Using
