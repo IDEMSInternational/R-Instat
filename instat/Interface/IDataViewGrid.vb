@@ -19,6 +19,8 @@ Public Interface IDataViewGrid
 
     Event CellDataChanged()
 
+    Event DeleteValuesToDataframe()
+
     Event PasteValuesToDataframe()
 
     Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
