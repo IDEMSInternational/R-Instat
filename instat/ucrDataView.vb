@@ -90,6 +90,7 @@ Public Class ucrDataView
         AddHandler _grid.ReplaceValueInData, AddressOf ReplaceValueInData
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
+        AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -333,7 +334,7 @@ Public Class ucrDataView
             End Select
         End If
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes)
+        GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnNames())
         EndWait()
     End Sub
 
@@ -833,9 +834,26 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
-    End Sub                      
-                          
+    End Sub
+
     Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
+    End Sub
+
+    Private Sub DeleteCell_Click()
+        If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
+            MsgBox("Cannot delete all visible cells." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
+        Else
+            Dim deleteCell = MsgBox("Are you sure you want to delete these cell(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Cells")
+            If deleteCell = DialogResult.Yes Then
+                StartWait()
+                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnNames())
+                EndWait()
+            End If
+        End If
+    End Sub
+
+    Private Sub mnuDeleteCell_Click(sender As Object, e As EventArgs) Handles mnuDeleteCell.Click
+        DeleteCell_Click()
     End Sub
 End Class

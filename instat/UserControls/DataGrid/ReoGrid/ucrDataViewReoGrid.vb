@@ -28,6 +28,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
+    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
+
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
@@ -132,6 +134,11 @@ Public Class ucrDataViewReoGrid
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
     End Sub
 
+    Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            RaiseEvent DeleteValueToDataframe()
+        End If
+    End Sub
 
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         e.IsCancelled = True 'prevents pasted data from being added directly into the data view
