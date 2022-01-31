@@ -29,8 +29,6 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
-    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
-
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
@@ -106,12 +104,6 @@ Public Class ucrDataViewLinuxGrid
     'ToDo allow editing
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
         RaiseEvent CellDataChanged()
-    End Sub
-
-    Private Sub DataGridView_BeforeCellKeyDown(sender As Object, e As KeyEventArgs)
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            RaiseEvent DeleteValueToDataframe()
-        End If
     End Sub
 
     Private Sub DataGridView_KeyDown(sender As Object, e As KeyEventArgs)
