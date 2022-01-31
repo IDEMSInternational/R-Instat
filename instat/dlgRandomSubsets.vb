@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsSampleNFunctionDataframeFunction, clsSetSeedFunction, clsSampleFunction, clsRerunFunction As New RFunction
+    Private clsDataFrameFunction, clsSetSeedFunction, clsSampleFunction, clsRerunFunction As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,7 +38,7 @@ Public Class dlgRandomSubsets
 
         'ucrReceiver
         ucrReceiverSubsets.bForceAsDataFrame = True
-        ucrReceiverSubsets.SetParameter(New RParameter("x", 2, bNewIncludeArgumentName:=False))
+        ucrReceiverSubsets.SetParameter(New RParameter("tbl", 0))
         ucrReceiverSubsets.SetParameterIsRFunction()
         ucrReceiverSubsets.Selector = ucrSelectorRandomSubsets
         ucrReceiverSubsets.SetMeAsReceiver()
@@ -50,11 +50,11 @@ Public Class dlgRandomSubsets
         ucrChkWithReplacement.SetRDefault("FALSE")
 
         'Number of columns
-        ucrNudNumberOfColumns.SetParameter(New RParameter(".n", 1))
+        ucrNudNumberOfColumns.SetParameter(New RParameter(".n", 0))
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ' Sample Size
-        ucrNudSampleSize.SetParameter(New RParameter("size", 2))
+        ucrNudSampleSize.SetParameter(New RParameter("size", 1))
 
         'Set Seed
         ucrChkSetSeed.SetText("Set Seed")
@@ -76,7 +76,7 @@ Public Class dlgRandomSubsets
         clsSetSeedFunction = New RFunction
         clsRerunFunction = New RFunction
         clsDataFrameFunction = New RFunction
-        clsSampleNFunctionDataframeFunction = New RFunction
+
 
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataFrame.Reset()
@@ -87,33 +87,30 @@ Public Class dlgRandomSubsets
         'sample_n function
         clsSampleFunction.SetPackageName("dplyr")
         clsSampleFunction.SetRCommand("sample_n")
-        clsSampleFunction.AddParameter("tbl", clsRFunctionParameter:=clsSampleNFunctionDataframeFunction, iPosition:=0)
         ucrNudSampleSize.SetMinMax(1, ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
-        clsSampleFunction.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength)
+        clsSampleFunction.AddParameter("size", ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength, iPosition:=1)
 
         'setseed fuction
         clsSetSeedFunction.SetRCommand("set.seed")
-        clsSetSeedFunction.AddParameter("seed", 1)
+        clsSetSeedFunction.AddParameter("seed", 1, iPosition:=0)
 
         'rerun func setting
         clsRerunFunction.SetPackageName("purrr")
         clsRerunFunction.SetRCommand("rerun")
-        clsRerunFunction.AddParameter(".n", 1)
-        clsRerunFunction.AddParameter("expr", clsRFunctionParameter:=clsSampleFunction)
+        clsRerunFunction.AddParameter(".n", 1, iPosition:=0)
+        clsRerunFunction.AddParameter("expr", clsRFunctionParameter:=clsSampleFunction, iPosition:=1)
 
-        'sample_n dataframe func setting
-        clsSampleNFunctionDataframeFunction.SetRCommand("data.frame")
 
         'setting the main fuction
         clsDataFrameFunction.SetRCommand("data.frame")
-        clsDataFrameFunction.AddParameter("X", clsRFunctionParameter:=clsRerunFunction)
+        clsDataFrameFunction.AddParameter("X", clsRFunctionParameter:=clsRerunFunction, iPosition:=0)
         clsDataFrameFunction.SetAssignTo(ucrNewDataFrame.GetText(), strTempDataframe:=ucrNewDataFrame.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
     End Sub
 
     'updating rcode of the controls
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSubsets.SetRCode(clsSampleNFunctionDataframeFunction, bReset)
+        ucrReceiverSubsets.SetRCode(clsSampleFunction, bReset)
         ucrChkWithReplacement.SetRCode(clsSampleFunction, bReset)
         ucrNudNumberOfColumns.SetRCode(clsRerunFunction, bReset)
         ucrNewDataFrame.SetRCode(clsDataFrameFunction, bReset)
@@ -171,15 +168,15 @@ Public Class dlgRandomSubsets
         ReplaceParameters()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataFrame.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrReceiverSubsets.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
         If ucrChkSetSeed.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
         End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfColumns.ControlContentsChanged, ucrNudSampleSize.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrNewDataFrame.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrReceiverSubsets.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
