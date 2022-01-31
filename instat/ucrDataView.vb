@@ -847,7 +847,7 @@ Public Class ucrDataView
             Dim deleteCell = MsgBox("Are you sure you want to delete these cell(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Cells")
             If deleteCell = DialogResult.Yes Then
                 StartWait()
-                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumns())
+                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnNames())
                 EndWait()
             End If
         End If
