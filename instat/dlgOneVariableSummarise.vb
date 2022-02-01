@@ -178,6 +178,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsCalculateSummaryFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
