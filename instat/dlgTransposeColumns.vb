@@ -99,6 +99,14 @@ Public Class dlgTransposeColumns
         NewDefaultName()
     End Sub
 
+    Private Sub UcrCheck1_Load(sender As Object, e As EventArgs) Handles ucrChkDisplayVariableNames.Load
+
+    End Sub
+
+    Private Sub ucrChkNameNewColumns_Load(sender As Object, e As EventArgs) Handles ucrChkNameNewColumns.Load
+
+    End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumsToTranspose.ControlContentsChanged, ucrNewDataframe.ControlContentsChanged
         TestOkEnabled()
     End Sub
