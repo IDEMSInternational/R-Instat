@@ -139,19 +139,30 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub SetNewColumName()
-        If ucrNudNumberOfSamples.Value = 1 Then
-            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
-            ucrSaveRandomSample.SetLabelText("New Column Name:")
-            If Not ucrSaveRandomSample.bUserTyped Then
-                ucrSaveRandomSample.SetPrefix("random_sample")
+        If Not ucrDistWithParameters.clsCurrDistribution.strNameTag = "Multinomial" Then
+            If ucrNudNumberOfSamples.Value = 1 Then
+                ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+                ucrSaveRandomSample.SetLabelText("New Column Name:")
+                If Not ucrSaveRandomSample.bUserTyped Then
+                    ucrSaveRandomSample.SetPrefix("random_sample")
+                End If
+            Else
+                ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+                ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
+                If Not ucrSaveRandomSample.bUserTyped Then
+                    ucrSaveRandomSample.SetPrefix("")
+                    ucrSaveRandomSample.SetName("random_sample")
+                End If
             End If
+        End If
+    End Sub
+
+    Private Sub ucrDistributions()
+        If ucrDistWithParameters.clsCurrDistribution.strNameTag = "Multinomial" Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
         Else
-            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-            ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
-            If Not ucrSaveRandomSample.bUserTyped Then
-                ucrSaveRandomSample.SetPrefix("")
-                ucrSaveRandomSample.SetName("random_sample")
-            End If
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
@@ -199,5 +210,9 @@ Public Class dlgRandomSample
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRNGKindFunction)
         End If
+    End Sub
+
+    Private Sub ucrDistWithParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDistWithParameters.ControlValueChanged
+        ucrDistributions()
     End Sub
 End Class

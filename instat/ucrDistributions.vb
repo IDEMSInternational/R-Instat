@@ -227,6 +227,7 @@ Public Class ucrDistributions
         Dim clsGeneralizedParetoDist As New Distribution
         Dim clsGumbelDist As New Distribution
         Dim clsNoDist As New Distribution
+        Dim clsMultinomDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -433,6 +434,15 @@ Public Class ucrDistributions
         clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
         lstAllDistributions.Add(clsHyperGeoDist)
 
+        'multinomial distribution
+        clsMultinomDist.strNameTag = "Multinomial"
+        clsMultinomDist.strRName = "multinom"
+        clsMultinomDist.strDFunctionName = "dmultinom"
+        clsMultinomDist.strRFunctionName = "rmultinom"
+        clsMultinomDist.AddParameter("size", "Size", 10)
+        clsMultinomDist.AddParameter("prob", "probability", "c(0.2,0.3,0.5)")
+        lstAllDistributions.Add(clsMultinomDist)
+
         ' Lognormal Distribution
         clsLogNormDist.strNameTag = "Lognormal"
         clsLogNormDist.strRName = "lnorm"
@@ -441,7 +451,6 @@ Public Class ucrDistributions
         clsLogNormDist.strQFunctionName = "qlnorm"
         clsLogNormDist.strDFunctionName = "dlnorm"
         clsLogNormDist.AddParameter("meanlog", "Meanlog", 0)
-        clsLogNormDist.AddParameter("sdlog", "SDlog", 1)
         lstAllDistributions.Add(clsLogNormDist)
 
         'TODO Categorical distribution
