@@ -6,12 +6,10 @@ To generate the installer for R-Instat with R bundled inside and all the R packa
 1. Update your master branch with the latest changes for the installation. Pull this to your local repo.
 
 ## 2. Update frmMain Title Bar
-1. Open `frmMain.resx` in a text editor mode
-2. Add the version number for the new version of R-Instat to `$this.Text` i.e.
-```
-<data name="$this.Text" xml:space="preserve">
-    <value>R-Instat 0.7.3</value>
-</data>
+1. Open `frmMain.Designer` in a text editor mode
+2. Add the version number for the new version of R-Instat to `Me.Text` i.e.
+```vb
+        Me.Text = "R-Instat x.y.z"
 ```
 3. Do **not** commit this change to the repo or your local repo. The text in the development version should remain as `R-Instat`.
 
@@ -34,7 +32,7 @@ You will have to repeat this step for generating 32 bit and 64 bit binaries.
 
 1. Download the R-Instat Library datasets from https://github.com/africanmathsinitiative/R-Instat-Data
 2. Copy the contents of the `data` folder into `static/Library` in the Release folders for the 64 and 32 bit versions.
-3. The `Library` folder should have the same subfolders and the `data` folder on GitHub https://github.com/africanmathsinitiative/R-Instat-Data/tree/main/data
+3. The `Library` folder should have the same subfolders as the `data` folder on GitHub https://github.com/africanmathsinitiative/R-Instat-Data/tree/main/data
 
 ## 6. Generate Bundled R Install
 
@@ -75,7 +73,7 @@ if (length(.libPaths()) == 2) .libPaths(.libPaths()[2])
 14. Install the `mmtable2` package from CRAN if it was in `packs` list. Run `devtools::install_github("ianmoran11/mmtable2")`. If prompted about updating other packages, choose "None". Confirm that it installed `packageVersion("mmtable2")`.
 15. Close cmd.
 
-## 8. Check R-Instat runs with package messages or errors.
+## 8. Check R-Instat runs without package messages or errors.
 
 1. Run `instat.exe` from the top level e.g. `C:\Users\[your name]\source\repos\R-Instat\instat\bin\x64\Release`
 2. Confirm the version number in the title bar is correct and that there are no warnings/errors on opening.
@@ -89,8 +87,8 @@ if (length(.libPaths()) == 2) .libPaths(.libPaths()[2])
 4. From the file menu choose open
 5. Then navigate to the inno_install_script_32bit.iss script (or 64 bit version) in the same folder as this readme.
 6. Change the AppId. Delete the current AppId between `{` and `}`. Leave one `{` remaining and place the cursor after it. From the top menu choose Tools > Generate GUID. Use the same AppId for the 64 and 32 bit versions so only do this once and copy from the other script the second time.
-6. Update the version numbers in 4 places. 
-7. Change `OnlyBelowVersions` to +.1 from the new version.
+6. Update the version numbers in the script. There are 4 places to do this.
+7. Change `OnlyBelowVersions` to +0.1 from the new version.
 8. From the top menu choose Build > Compile.
 9. The installer will be in installer/Output folder
 
@@ -115,8 +113,7 @@ Successfully signed: C:\Users\Danny\Downloads\R-Instat_0.7.3_Installer_32.exe
 2. Modify the notes as necessary.
 3. Publish the (pre)-release.
 
-## 12. Upload the installer to the website
-1. Upload the installer to the central storage location (currently https://drive.google.com/drive/folders/1h5bjyRj1eEIQmWlMiactO6t2YHTs9DQb?usp=sharing)
-2. Get the public link to the files
-3. Create a bit.ly short link for the installer in the format https://bit.ly/r-instat_072_installer_64bit
-4. Update the R-Instat website to link to the short link
+## 12. Upload the installers to the website
+1. Upload the installers to the central storage location (currently https://console.cloud.google.com/storage/browser/r-instat-downloads;tab=objects?forceOnBucketsSortingFiltering=false&project=glossy-attic-237012&prefix=&forceOnObjectsSortingFiltering=false)
+2. Get the link to the files e.g. https://downloads.r-instat.org/R-Instat_0.7.3.1_Installer_32.exe
+3. Update the R-Instat website download page to the new version and new links
