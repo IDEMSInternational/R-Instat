@@ -217,8 +217,12 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Function GetWorkSheetCount() As Integer
+        Return _grid.GetWorksheetCount
+    End Function
+
     Private Sub RefreshDisplayInformation()
-        If _grid.GetWorksheetCount <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = _grid.CurrentWorksheet.Name
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
             SetDisplayLabels()
@@ -251,6 +255,15 @@ Public Class ucrDataView
                 tlpTableContainer.ColumnStyles(1).Width = 0
                 tlpTableContainer.ColumnStyles(2).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(2).Width = 100
+                'when the TableLayoutPanel column for the reogrid gets set to 0,
+                'the SheetTabWidth gets set to 60 pixels
+                'this makes the sheet names invisible when data is loaded into the grid.
+                'this check is meant to be a quick fix to this.
+                'Other possible solutions can implemented later
+                If ucrReoGrid.grdData.SheetTabWidth < 450 Then
+                    '450 pixels is the ideal width for displaying mutliple sheet names loaded to the grid
+                    ucrReoGrid.grdData.SheetTabWidth = 450
+                End If
             Else
                 tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
                 tlpTableContainer.ColumnStyles(1).Width = 100
@@ -512,7 +525,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
-        HideSheet.Enabled = (_grid.GetWorksheetCount > 1)
+        HideSheet.Enabled = (GetWorkSheetCount() > 1)
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
