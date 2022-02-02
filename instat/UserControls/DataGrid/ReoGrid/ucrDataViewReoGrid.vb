@@ -53,7 +53,7 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.Rows = dataFrame.iDisplayedRowCount
         UpdateWorksheetSettings(grdData.CurrentWorksheet)
 
-        If dataFrame.clsFilter.bApplied Then
+        If dataFrame.clsFilter.bFilterApplied Then
             textColour = Color.Red
         Else
             textColour = Color.DarkBlue

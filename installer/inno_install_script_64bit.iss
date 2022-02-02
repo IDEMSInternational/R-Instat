@@ -5,9 +5,9 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{176720C6-F30C-4691-A688-CAF108E41AE2}
+AppId={{979E51D8-9BC4-418F-8D4D-9B44FEA869A6}
 AppName=R-Instat
-#define AppVerName "0.7.3.1"
+#define AppVerName "0.7.4"
 AppVersion={#AppVerName}
 AppPublisher=African Maths Initiative
 AppPublisherURL=http://r-instat.org/
@@ -32,10 +32,10 @@ Source: "..\instat\bin\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion re
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\R-Instat 0.7.3.1"; Filename: "{app}\instat.exe"
+Name: "{group}\R-Instat 0.7.4"; Filename: "{app}\instat.exe"
 Name: "{group}\{cm:UninstallProgram,R-Instat}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\R-Instat 0.7.3.1"; Filename: "{app}\instat.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat 0.7.3.1"; Filename: "{app}\instat.exe"; Tasks: quicklaunchicon
+Name: "{commondesktop}\R-Instat 0.7.4"; Filename: "{app}\instat.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat 0.7.4"; Filename: "{app}\instat.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags: nowait postinstall skipifsilent

@@ -94,7 +94,7 @@ Partial Class dlgNewDataFrame
         Me.rdoCommand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCommand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCommand.Location = New System.Drawing.Point(125, 15)
+        Me.rdoCommand.Location = New System.Drawing.Point(218, 15)
         Me.rdoCommand.Name = "rdoCommand"
         Me.rdoCommand.Size = New System.Drawing.Size(95, 27)
         Me.rdoCommand.TabIndex = 2
@@ -111,7 +111,7 @@ Partial Class dlgNewDataFrame
         Me.rdoRandom.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRandom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRandom.Location = New System.Drawing.Point(218, 15)
+        Me.rdoRandom.Location = New System.Drawing.Point(312, 15)
         Me.rdoRandom.Name = "rdoRandom"
         Me.rdoRandom.Size = New System.Drawing.Size(95, 27)
         Me.rdoRandom.TabIndex = 3
@@ -128,7 +128,7 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoEmpty.Location = New System.Drawing.Point(311, 15)
+        Me.rdoEmpty.Location = New System.Drawing.Point(31, 15)
         Me.rdoEmpty.Name = "rdoEmpty"
         Me.rdoEmpty.Size = New System.Drawing.Size(95, 27)
         Me.rdoEmpty.TabIndex = 4
@@ -145,7 +145,7 @@ Partial Class dlgNewDataFrame
         Me.rdoConstruct.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoConstruct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoConstruct.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoConstruct.Location = New System.Drawing.Point(32, 15)
+        Me.rdoConstruct.Location = New System.Drawing.Point(124, 15)
         Me.rdoConstruct.Name = "rdoConstruct"
         Me.rdoConstruct.Size = New System.Drawing.Size(95, 27)
         Me.rdoConstruct.TabIndex = 1

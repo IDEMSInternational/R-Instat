@@ -127,7 +127,7 @@ Public Class ucrOutputPage
     End Sub
 
     ''' <summary>
-    ''' Copies selected elenments to clipboard
+    ''' Copies selected elements to clipboard
     ''' </summary>
     Public Sub CopySelectedElementsToClipboard()
         If CopyOneImageOnly() Then
@@ -138,11 +138,7 @@ Public Class ucrOutputPage
         For Each element In SelectedElements
             AddElementToRichTextBox(element, richText)
         Next
-        Dim dto As New DataObject()
-        dto.SetText(richText.Rtf, TextDataFormat.Rtf)
-        dto.SetText(richText.Text, TextDataFormat.UnicodeText)
-        Clipboard.Clear()
-        Clipboard.SetDataObject(dto)
+        CopySelectedTextToClipBoard(richText, richText.Rtf)
     End Sub
 
     ''' <summary>
@@ -159,6 +155,10 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
+        If outputElement Is Nothing OrElse outputElement.FormatedRScript Is Nothing Then
+            Return Nothing
+        End If
+
         Dim panel As New Panel With {
             .Height = 10, ' = 10 'small height as panel will grow
             .AutoSize = True,
@@ -194,6 +194,7 @@ Public Class ucrOutputPage
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
+        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
     End Sub
 
     Private Function CopyOneImageOnly() As Boolean
@@ -254,6 +255,7 @@ Public Class ucrOutputPage
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
+        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)
@@ -277,6 +279,33 @@ Public Class ucrOutputPage
 
     Private Sub checkButton_Click(sender As Object, e As EventArgs)
         RaiseEvent RefreshContextButtons()
+    End Sub
+
+    Private Sub richTextBox_CopySelectedText(sender As Object, e As KeyEventArgs)
+        If e.KeyData = Keys.Control + Keys.C Then
+            Try
+                Dim richText As RichTextBox = CType(sender, RichTextBox)
+                Dim richSelectedText As New RichTextBox
+                richSelectedText.AppendText(richText.SelectedText)
+                CopySelectedTextToClipBoard(richSelectedText, richText.SelectedRtf)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub CopySelectedTextToClipBoard(richText As RichTextBox, richTextFormat As String)
+        Dim strClip As String = String.Empty
+        Dim dto As New DataObject()
+
+        For Each Line As String In richText.Lines
+            strClip &= Line & Environment.NewLine
+        Next
+
+        dto.SetText(richTextFormat, TextDataFormat.Rtf)
+        dto.SetText(strClip, TextDataFormat.UnicodeText)
+        Clipboard.Clear()
+        Clipboard.SetDataObject(dto)
     End Sub
 
     Private Sub Panel_Resize(sender As Object, e As EventArgs)

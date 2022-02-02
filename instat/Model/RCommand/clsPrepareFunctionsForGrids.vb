@@ -208,6 +208,15 @@ Public Class clsPrepareFunctionsForGrids
         _RLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
     ''' <summary>
+    ''' Removes current column selection
+    ''' </summary>
+    Public Sub RemoveCurrentColumnSelection()
+        Dim clsRemoveCurrentColumnSelection As New RFunction
+        clsRemoveCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
+        clsRemoveCurrentColumnSelection.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        _RLink.RunScript(clsRemoveCurrentColumnSelection.ToScript(), strComment:="Right click menu: Remove Current Column Selection")
+    End Sub
+    ''' <summary>
     ''' Freeze selected columns
     ''' </summary>
     ''' <param name="strLastSelectedColumn"></param>

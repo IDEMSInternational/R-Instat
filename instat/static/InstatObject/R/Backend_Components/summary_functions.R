@@ -95,7 +95,7 @@ DataBook$set("public", "append_summaries_to_data_object", function(out, data_nam
 } 
 )
 
-DataBook$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+DataBook$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, sep = "_", ...) {
   if(original_level) type <- "calculation"
   else type <- "summary"
   include_columns_to_summarise <- TRUE
@@ -173,7 +173,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
-        if(include_columns_to_summarise) result_name = paste0(result_name, "_", column_names)
+        if(include_columns_to_summarise) result_name = paste0(result_name, sep, column_names)
       }
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
@@ -189,7 +189,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
-          totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
+          totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], sep, perc_total_columns, "_totals"),
                                                        function_exp = paste0(summary_type, "(x = ", perc_col_name, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
@@ -1356,7 +1356,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     save <- 2
   }
 
-  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
+  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "-", ...)
   for (i in seq_along(factors)) {
     levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
     cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
@@ -1364,8 +1364,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   grps <- nrow(cell_values)
   cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "summary-variable", value.name = "value")
   if (treat_columns_as_factor) {
-    cell_values[["variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values) / length(columns_to_summarise))
-    cell_values[["summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
+    cell_values[["variable"]] <- rep(columns_to_summarise, each = nrow(cell_values) / length(columns_to_summarise))
+    cell_values[["summary"]] <- rep(summaries_display, each = grps, length.out = nrow(cell_values))
     cell_values[["summary-variable"]] <- NULL
   }
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
@@ -1379,13 +1379,13 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     # We could need last set if only have row or column factors
     power_sets_outer <- power_sets[-(c(length(power_sets)))]
     if (treat_columns_as_factor) {
-      order_names <- unique(paste(shaped_cell_values$summary, shaped_cell_values$variable, sep = "_"))
+      order_names <- unique(paste(shaped_cell_values$summary, shaped_cell_values$variable, sep = "-"))
     } else {
       order_names <- unique(shaped_cell_values$summary)
     }
     for (facts in power_sets_outer) {
       if (length(facts) == 0) facts <- c()
-      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
+      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "-", ...)
       margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
     }
     # for outer margins
@@ -1403,7 +1403,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       }
       if (treat_columns_as_factor) {
         outer_margins <- outer_margins %>%
-          tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "_")
+          tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "-")
       }
     } else {
       outer_margins <- NULL
@@ -1456,7 +1456,12 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     }
   }
   shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
-  if (store_table) {
+if (treat_columns_as_factor){
+  shaped_cell_values <- shaped_cell_values %>%
+      dplyr::mutate(summary = as.factor(summary)) %>% dplyr::mutate(summary = forcats::fct_relevel(summary, summaries_display)) %>%
+      dplyr::mutate(variable = as.factor(variable)) %>% dplyr::mutate(variable= forcats::fct_relevel(variable, columns_to_summarise))
+}
+if (store_table) {
     data_book$import_data(data_tables = list(shaped_cell_values = shaped_cell_values))
   }
   return(shaped_cell_values)
