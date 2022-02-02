@@ -78,6 +78,14 @@ Public MustInherit Class ucrReoGrid
         Return lstSelectedRows
     End Function
 
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
+            lstSelectedColumnIndexes.Add(grdData.CurrentWorksheet.ColumnHeaders.Item(i).Index + 1)
+        Next
+        Return lstSelectedColumnIndexes
+    End Function
+
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet
         Dim worksheet = grdData.Worksheets.Where(Function(x) x.Name = name).FirstOrDefault
         If worksheet IsNot Nothing Then
@@ -150,10 +158,10 @@ Public MustInherit Class ucrReoGrid
     Protected MustOverride Sub AttachEventsToWorksheet(Worksheet As Worksheet)
 
     Protected Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
-            e.IsCancelled = True
-        End If
+        'If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+        '    MsgBox("This will replace the selected cells with missing values (NA)." & Environment.NewLine & "Continue?", MsgBoxStyle.Question, "Replace values with NA")
+        '    e.IsCancelled = True
+        'End If
     End Sub
 
     Protected Sub Worksheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs)

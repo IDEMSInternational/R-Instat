@@ -90,6 +90,7 @@ Public Class ucrDataView
         AddHandler _grid.ReplaceValueInData, AddressOf ReplaceValueInData
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
+        AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -343,6 +344,10 @@ Public Class ucrDataView
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
+    End Function
+
+    Private Function GetSelectedColumnIndexes() As List(Of String)
+        Return _grid.GetSelectedColumnIndexes()
     End Function
 
     Private Function GetSelectedColumnNames() As List(Of String)
@@ -786,5 +791,21 @@ Public Class ucrDataView
 
     Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
+    End Sub
+
+    Private Sub DeleteCell_Click()
+        'If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
+        '    MsgBox("Cannot delete all visible cells." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
+        'Else
+        Dim deleteCell = MsgBox("Are you sure you want to delete these cell(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Cells")
+        If deleteCell = DialogResult.Yes Then
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
+            EndWait()
+        End If
+    End Sub
+
+    Private Sub mnuDeleteCells_Click(sender As Object, e As EventArgs) Handles mnuDeleteCells.Click
+        DeleteCell_Click()
     End Sub
 End Class

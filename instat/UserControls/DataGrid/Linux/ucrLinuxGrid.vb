@@ -118,6 +118,16 @@ Public MustInherit Class ucrLinuxGrid
         Return lstSelectedRows
     End Function
 
+
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim dataGrid = GetGrid(tcTabs.SelectedTab)
+        For Each Column As DataGridViewRow In dataGrid.SelectedColumns
+            lstSelectedColumnIndexes.Add(Column.HeaderCell.Value)
+        Next
+        Return lstSelectedColumnIndexes
+    End Function
+
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet
         For Each tabPage As TabPage In tcTabs.TabPages
             If tabPage.Text = name Then
