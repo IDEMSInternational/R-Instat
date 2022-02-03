@@ -296,18 +296,28 @@ Public Class dlgNewDataFrame
         dataTypeGridView.Rows.Clear()
         dataTypeGridView.Rows.Add(col)
 
-            If ucrChkVariable.Checked Then
-            For i As Integer = 0 To dataTypeGridView.Rows.Count - 1
-                dataTypeGridView.Rows.Item(i).Cells(0).Value = i + 1
-                dataTypeGridView.Rows.Item(i).Cells(1).Value = "data." & (i + 1)
-                dataTypeGridView.Rows.Item(i).Cells(2).Value = "Character"
-                dataTypeGridView.Rows.Item(i).Cells(3).Value = ""
-                dataTypeGridView.Rows.Item(i).Cells(4).Value = "NA"
-            Next
+        If ucrChkVariable.Checked Then
+            UpdateGrid(0, dataTypeGridView)
         End If
 
         dataTypeGridView.Visible = If(ucrChkVariable.Checked, True, False)
         ucrChkIncludeLabel.Visible = If(ucrChkVariable.Checked, True, False)
+    End Sub
+
+    Private Sub UpdateGrid(iStart As Integer, dgrView As DataGridView)
+        Try
+            For i As Integer = iStart To dgrView.Rows.Count - 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = i + 1
+                    .Item(i).Cells(1).Value = "x." & (i + 1)
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = ""
+                    .Item(i).Cells(4).Value = "NA"
+                End With
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
@@ -315,6 +325,7 @@ Public Class dlgNewDataFrame
         colLabel.HeaderText = "Label"
         colLabel.Name = "grdLabel"
         colLabel.FillWeight = 100
+        colLabel.Width = 50
         If ucrChkIncludeLabel.Checked Then
             dataTypeGridView.Columns.Insert(5, colLabel)
         Else

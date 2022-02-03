@@ -62,6 +62,11 @@ Partial Class dlgNewDataFrame
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.dataTypeGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbGridType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrChkIncludeLabel = New instat.ucrCheck()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrTryNewDataFrame = New instat.ucrTry()
@@ -71,11 +76,6 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbGridType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +84,7 @@ Partial Class dlgNewDataFrame
         'lblRows
         '
         Me.lblRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRows.Location = New System.Drawing.Point(24, 90)
+        Me.lblRows.Location = New System.Drawing.Point(24, 81)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(37, 13)
         Me.lblRows.TabIndex = 8
@@ -93,7 +93,7 @@ Partial Class dlgNewDataFrame
         'lblColumns
         '
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(156, 89)
+        Me.lblColumns.Location = New System.Drawing.Point(156, 80)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(50, 13)
         Me.lblColumns.TabIndex = 10
@@ -300,19 +300,53 @@ Partial Class dlgNewDataFrame
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dataTypeGridView.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dataTypeGridView.Location = New System.Drawing.Point(13, 136)
+        Me.dataTypeGridView.Location = New System.Drawing.Point(18, 136)
         Me.dataTypeGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.dataTypeGridView.Name = "dataTypeGridView"
         Me.dataTypeGridView.RowHeadersVisible = False
         Me.dataTypeGridView.RowTemplate.Height = 28
-        Me.dataTypeGridView.Size = New System.Drawing.Size(417, 115)
+        Me.dataTypeGridView.Size = New System.Drawing.Size(295, 115)
         Me.dataTypeGridView.TabIndex = 163
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.FillWeight = 90.0!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "No."
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 25
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 60
+        '
+        'cbGridType
+        '
+        Me.cbGridType.HeaderText = "Type"
+        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Logical"})
+        Me.cbGridType.MaxDropDownItems = 4
+        Me.cbGridType.Name = "cbGridType"
+        Me.cbGridType.Width = 60
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Levels"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 40
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Default"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 50
         '
         'ucrChkIncludeLabel
         '
         Me.ucrChkIncludeLabel.AutoSize = True
         Me.ucrChkIncludeLabel.Checked = False
-        Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(282, 109)
+        Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(184, 104)
         Me.ucrChkIncludeLabel.Name = "ucrChkIncludeLabel"
         Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkIncludeLabel.TabIndex = 164
@@ -321,7 +355,7 @@ Partial Class dlgNewDataFrame
         '
         Me.ucrChkVariable.AutoSize = True
         Me.ucrChkVariable.Checked = False
-        Me.ucrChkVariable.Location = New System.Drawing.Point(13, 111)
+        Me.ucrChkVariable.Location = New System.Drawing.Point(13, 104)
         Me.ucrChkVariable.Name = "ucrChkVariable"
         Me.ucrChkVariable.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkVariable.TabIndex = 162
@@ -369,7 +403,7 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols.AutoSize = True
         Me.ucrNudCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCols.Location = New System.Drawing.Point(215, 85)
+        Me.ucrNudCols.Location = New System.Drawing.Point(215, 76)
         Me.ucrNudCols.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -383,7 +417,7 @@ Partial Class dlgNewDataFrame
         Me.ucrNudRows.AutoSize = True
         Me.ucrNudRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRows.Location = New System.Drawing.Point(69, 86)
+        Me.ucrNudRows.Location = New System.Drawing.Point(69, 77)
         Me.ucrNudRows.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -402,44 +436,12 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
         '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "No."
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 40
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 91
-        '
-        'cbGridType
-        '
-        Me.cbGridType.HeaderText = "Type"
-        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Logical"})
-        Me.cbGridType.MaxDropDownItems = 4
-        Me.cbGridType.Name = "cbGridType"
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Levels"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 92
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Default"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 91
-        '
         'dlgNewDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(444, 378)
+        Me.ClientSize = New System.Drawing.Size(443, 378)
         Me.Controls.Add(Me.ucrChkIncludeLabel)
         Me.Controls.Add(Me.dataTypeGridView)
         Me.Controls.Add(Me.ucrChkVariable)
