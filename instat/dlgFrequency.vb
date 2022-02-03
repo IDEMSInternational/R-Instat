@@ -1,4 +1,5 @@
-﻿' R- Instat
+﻿
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -21,8 +22,14 @@ Public Class dlgFrequency
     Private clsDefaultFunction As New RFunction
     Private clsMmtableFunction As New RFunction
     Private clsFrequencyOperator As New ROperator
-    Private clsMmtableOperator As New ROperator
+    Private clsMmtableOperator, clsJoiningPipeOperator, clsPipeOperator, clsTabFootnoteOperator As New ROperator
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction As New RFunction
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
+        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
+        clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+        clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
+        clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
+        clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsStubHeadFunction As New RFunction
 
     Private Sub dlgFrequency_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,13 +44,11 @@ Public Class dlgFrequency
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 425
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        cmdOptions.Enabled = False ' Temporarily disabled
 
         ucrSelectorFrequency.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFrequency.SetParameterIsString()
@@ -96,7 +101,6 @@ Public Class dlgFrequency
         ucrChkDisplaySummariesAsRow.SetText("Display Summaries As Rows")
         ucrChkDisplaySummariesAsRow.Enabled = False
 
-
         ucrSaveTable.SetPrefix("frequency_table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorFrequency.ucrAvailableDataFrames)
@@ -112,12 +116,120 @@ Public Class dlgFrequency
         clsMmtableOperator = New ROperator
         clsSummariesHeaderTopLeftFunction = New RFunction
         clsSummariesHeaderLeftTopFunction = New RFunction
+        clsTableTitleFunction = New RFunction
+        clsTabFootnoteTitleFunction = New RFunction
+        clsTableSourcenoteFunction = New RFunction
+        clsCellTextFunction = New RFunction
+        clsCellBorderFunction = New RFunction
+        clsCellFillFunction = New RFunction
+        clsHeaderFormatFunction = New RFunction
+        clsTabOptionsFunction = New RFunction
+        clsBorderWeightPxFunction = New RFunction
+        clsFootnoteTitleLocationFunction = New RFunction
+        clsFootnoteSubtitleLocationFunction = New RFunction
+        clsTabFootnoteSubtitleFunction = New RFunction
+        clsStyleListFunction = New RFunction
+        clsFootnoteCellFunction = New RFunction
+        clsFootnoteCellBodyFunction = New RFunction
+        clsSecondFootnoteCellFunction = New RFunction
+        clsSecondFootnoteCellBodyFunction = New RFunction
+        clsTabStyleFunction = New RFunction
+        clsTabStyleCellTextFunction = New RFunction
+        clsTabStylePxFunction = New RFunction
+        clsTabStyleCellTitleFunction = New RFunction
+        clsJoiningPipeOperator = New ROperator
+        clsPipeOperator = New ROperator
+        clsTabFootnoteOperator = New ROperator
+        clsDummyFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
         ucrNudColumnFactors.SetText(1)
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
+
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
+
+        clsTableTitleFunction.SetPackageName("gt")
+        clsTableTitleFunction.SetRCommand("tab_header")
+
+        clsTabFootnoteTitleFunction.SetPackageName("gt")
+        clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
+
+        clsTabFootnoteSubtitleFunction.SetPackageName("gt")
+        clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
+
+        clsFootnoteCellFunction.SetPackageName("gt")
+        clsFootnoteCellFunction.SetRCommand("tab_footnote")
+
+        clsSecondFootnoteCellFunction.SetPackageName("gt")
+        clsSecondFootnoteCellFunction.SetRCommand("tab_footnote")
+
+        clsFootnoteTitleLocationFunction.SetPackageName("gt")
+        clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
+
+        clsFootnoteSubtitleLocationFunction.SetPackageName("gt")
+        clsFootnoteSubtitleLocationFunction.SetRCommand("cells_title")
+
+        clsTableSourcenoteFunction.SetPackageName("gt")
+        clsTableSourcenoteFunction.SetRCommand("tab_source_note")
+
+        clsFootnoteCellBodyFunction.SetPackageName("gt")
+        clsFootnoteCellBodyFunction.SetRCommand("cells_body")
+
+        clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
+        clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
+
+        clsCellTextFunction.SetPackageName("gt")
+        clsCellTextFunction.SetRCommand("cell_text")
+
+        clsCellBorderFunction.SetPackageName("gt")
+        clsCellBorderFunction.SetRCommand("cell_borders")
+        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
+
+        clsCellFillFunction.SetPackageName("gt")
+        clsCellFillFunction.SetRCommand("cell_fill")
+
+        clsHeaderFormatFunction.SetPackageName("mmtable2")
+        clsHeaderFormatFunction.SetRCommand("header_format")
+        clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
+        clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
+
+        clsTabOptionsFunction.SetPackageName("gt")
+        clsTabOptionsFunction.SetRCommand("tab_options")
+
+        clsBorderWeightPxFunction.SetPackageName("gt")
+        clsBorderWeightPxFunction.SetRCommand("px")
+        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsStyleListFunction.SetRCommand("list")
+
+        clsStubHeadFunction.SetPackageName("gt")
+        clsStubHeadFunction.SetRCommand("tab_stubhead")
+
+        clsTabStyleFunction.SetRCommand("tab_style")
+        clsTabStyleFunction.SetPackageName("gt")
+        clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
+        clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
+
+        clsTabStyleCellTitleFunction.SetPackageName("gt")
+        clsTabStyleCellTitleFunction.SetRCommand("cells_title")
+        clsTabStyleCellTitleFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
+
+        clsTabStyleCellTextFunction.SetPackageName("gt")
+        clsTabStyleCellTextFunction.SetRCommand("cell_text")
+        clsTabStyleCellTextFunction.AddParameter("size", clsRFunctionParameter:=clsTabStylePxFunction, iPosition:=0)
+
+        clsTabStylePxFunction.SetPackageName("gt")
+        clsTabStylePxFunction.SetRCommand("px")
+        clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
@@ -144,9 +256,8 @@ Public Class dlgFrequency
         clsDefaultFunction.SetAssignTo("frequency_table")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, 0)
-        ucrBase.clsRsyntax.SetBaseROperator(clsFrequencyOperator)
+        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputMarginName.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
@@ -157,7 +268,7 @@ Public Class dlgFrequency
         ucrChkDisplayAsPercentage.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverMultiplePercentages.SetRCode(clsDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
-        ucrSaveTable.SetRCode(clsFrequencyOperator, bReset)
+        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -189,6 +300,17 @@ Public Class dlgFrequency
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged,
         ucrSaveTable.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
+        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+                                       clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
+                                       clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                      clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
+                                      clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                      clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+        sdgFormatSummaryTables.ShowDialog()
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
