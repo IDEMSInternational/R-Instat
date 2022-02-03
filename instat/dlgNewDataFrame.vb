@@ -70,9 +70,14 @@ Public Class dlgNewDataFrame
 
         ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
+
+        ucrChkVariable.SetText("Variable Name")
+        ucrChkIncludeLabel.SetText("Include Label")
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
@@ -88,6 +93,10 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+
+        dataTypeGridView.Visible = False
+        ucrChkVariable.Checked = False
+        ucrChkIncludeLabel.Visible = False
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -279,6 +288,38 @@ Public Class dlgNewDataFrame
         For i As Integer = 0 To dataGridView.Rows.Count - 1
             dataGridView.Rows.Item(i).Cells(0).Value = i + 1
         Next
+    End Sub
+
+    Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged, ucrChkVariable.ControlValueChanged
+        Dim col As Integer = ucrNudCols.GetText
+
+        dataTypeGridView.Rows.Clear()
+        dataTypeGridView.Rows.Add(col)
+
+            If ucrChkVariable.Checked Then
+            For i As Integer = 0 To dataTypeGridView.Rows.Count - 1
+                dataTypeGridView.Rows.Item(i).Cells(0).Value = i + 1
+                dataTypeGridView.Rows.Item(i).Cells(1).Value = "data." & (i + 1)
+                dataTypeGridView.Rows.Item(i).Cells(2).Value = "Character"
+                dataTypeGridView.Rows.Item(i).Cells(3).Value = ""
+                dataTypeGridView.Rows.Item(i).Cells(4).Value = "NA"
+            Next
+        End If
+
+        dataTypeGridView.Visible = If(ucrChkVariable.Checked, True, False)
+        ucrChkIncludeLabel.Visible = If(ucrChkVariable.Checked, True, False)
+    End Sub
+
+    Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
+        Dim colLabel As New DataGridViewTextBoxColumn
+        colLabel.HeaderText = "Label"
+        colLabel.Name = "grdLabel"
+        colLabel.FillWeight = 100
+        If ucrChkIncludeLabel.Checked Then
+            dataTypeGridView.Columns.Insert(5, colLabel)
+        Else
+            dataTypeGridView.Columns.RemoveAt(5)
+        End If
     End Sub
 
     Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
