@@ -549,7 +549,8 @@ Public Class ucrSave
             'when the dataframe is changed then reset position variables to correspond to 'end'
             bInsertColumnBefore = False
             strAdjacentColumn = ""
-            'reset the super selected option, because the control has reset the position variables
+            'reset the user selected option, because the control has reset the position variables
+
             sdgSaveColumnPosition.bUserSelected = False
         End If
         OnControlValueChanged()
