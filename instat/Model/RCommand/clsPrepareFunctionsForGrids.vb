@@ -335,6 +335,5 @@ Public Class clsPrepareFunctionsForGrids
         clsDeleteCells.AddParameter("row_index", _RLink.GetListAsRString(lstRowNames, bWithQuotes:=False))
         _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Delete Cell(s)")
     End Sub
-
 End Class
 

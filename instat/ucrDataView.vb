@@ -845,10 +845,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub DeleteCell_Click()
-        'If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
-        '    MsgBox("Cannot delete all visible cells." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
-        'Else
-        Dim deleteCell = MsgBox("Are you sure you want to delete these cell(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Cells")
+        Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." & Environment.NewLine & "Continue?", MessageBoxButtons.YesNo, "Delete Cells")
         If deleteCell = DialogResult.Yes Then
             StartWait()
             GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())

@@ -158,10 +158,10 @@ Public MustInherit Class ucrReoGrid
     Protected MustOverride Sub AttachEventsToWorksheet(Worksheet As Worksheet)
 
     Protected Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
-        'If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-        '    MsgBox("This will replace the selected cells with missing values (NA)." & Environment.NewLine & "Continue?", MsgBoxStyle.Question, "Replace values with NA")
-        '    e.IsCancelled = True
-        'End If
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            e.IsCancelled = True
+        End If
     End Sub
 
     Protected Sub Worksheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs)
