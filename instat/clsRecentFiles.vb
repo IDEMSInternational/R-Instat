@@ -64,7 +64,7 @@ Public Class clsRecentFiles
         'read file contents
         Dim arrStrPaths() As String = File.ReadAllLines(strRecentFilesPath)
         For Each strPath As String In arrStrPaths
-            If Not String.IsNullOrEmpty(strPath) Then
+            If Not String.IsNullOrEmpty(strPath) AndAlso Not lstRecentOpenedFiles.Contains(strPath.Replace("\", "/")) Then
                 lstRecentOpenedFiles.Add(strPath.Replace("\", "/"))
             End If
         Next
@@ -106,10 +106,10 @@ Public Class clsRecentFiles
     ''' </summary>
     ''' <param name="strFilePath">file path to add to menu items</param>
     Public Sub addToMenu(strFilePath As String)
+        strFilePath = strFilePath.Replace("\", "/")
         'remove file if it exists(helps with making sure displayed file names are rearranged)
         lstRecentOpenedFiles.Remove(strFilePath)
         'add to recent opened files list..
-        strFilePath = strFilePath.Replace("\", "/")
         lstRecentOpenedFiles.Add(strFilePath)
         'make sure there are only ever 30 items...
         'todo. add this to the general options on the number of recently files to show
