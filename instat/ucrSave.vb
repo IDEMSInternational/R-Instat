@@ -550,7 +550,6 @@ Public Class ucrSave
             bInsertColumnBefore = False
             strAdjacentColumn = ""
             'reset the user selected option, because the control has reset the position variables
-
             sdgSaveColumnPosition.bUserSelected = False
         End If
         OnControlValueChanged()
