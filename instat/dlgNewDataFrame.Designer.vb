@@ -62,11 +62,6 @@ Partial Class dlgNewDataFrame
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.dataTypeGridView = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbGridType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrChkIncludeLabel = New instat.ucrCheck()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrTryNewDataFrame = New instat.ucrTry()
@@ -76,6 +71,11 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbGridType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,40 +308,6 @@ Partial Class dlgNewDataFrame
         Me.dataTypeGridView.Size = New System.Drawing.Size(295, 115)
         Me.dataTypeGridView.TabIndex = 163
         '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.FillWeight = 90.0!
-        Me.DataGridViewTextBoxColumn1.HeaderText = "No."
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 25
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 60
-        '
-        'cbGridType
-        '
-        Me.cbGridType.HeaderText = "Type"
-        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Logical"})
-        Me.cbGridType.MaxDropDownItems = 4
-        Me.cbGridType.Name = "cbGridType"
-        Me.cbGridType.Width = 60
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Levels"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 40
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Default"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 50
-        '
         'ucrChkIncludeLabel
         '
         Me.ucrChkIncludeLabel.AutoSize = True
@@ -435,6 +401,41 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.FillWeight = 90.0!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "No."
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 25
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 60
+        '
+        'cbGridType
+        '
+        Me.cbGridType.HeaderText = "Type"
+        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Logical"})
+        Me.cbGridType.MaxDropDownItems = 4
+        Me.cbGridType.Name = "cbGridType"
+        Me.cbGridType.Width = 60
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Levels"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 40
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Default"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 50
         '
         'dlgNewDataFrame
         '
