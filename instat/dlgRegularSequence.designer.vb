@@ -345,7 +345,7 @@ Partial Class dlgRegularSequence
         Me.ucrSelectDataFrameRegularSequence.AutoSize = True
         Me.ucrSelectDataFrameRegularSequence.bDropUnusedFilterLevels = False
         Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = True
-        Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(10, 59)
+        Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(39, 59)
         Me.ucrSelectDataFrameRegularSequence.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectDataFrameRegularSequence.Name = "ucrSelectDataFrameRegularSequence"
         Me.ucrSelectDataFrameRegularSequence.Size = New System.Drawing.Size(152, 43)
