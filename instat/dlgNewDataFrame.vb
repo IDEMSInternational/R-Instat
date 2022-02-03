@@ -304,6 +304,10 @@ Public Class dlgNewDataFrame
         ucrChkIncludeLabel.Visible = If(ucrChkVariable.Checked, True, False)
     End Sub
 
+    Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
+
+    End Sub
+
     Private Sub UpdateGrid(iStart As Integer, dgrView As DataGridView)
         Try
             For i As Integer = iStart To dgrView.Rows.Count - 1
@@ -330,6 +334,24 @@ Public Class dlgNewDataFrame
             dataTypeGridView.Columns.Insert(5, colLabel)
         Else
             dataTypeGridView.Columns.RemoveAt(5)
+        End If
+    End Sub
+
+    Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
+        If dataTypeGridView.CurrentCell.ColumnIndex <> 0 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
+            Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
+            RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+            AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+        End If
+    End Sub
+
+    Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
+        Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
+        If selectedCombobox.SelectedItem = "Factor" Then
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+        Else
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""
         End If
     End Sub
 
