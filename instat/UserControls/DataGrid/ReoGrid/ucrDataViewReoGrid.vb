@@ -157,7 +157,6 @@ Public Class ucrDataViewReoGrid
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
             RaiseEvent DeleteValueToDataframe()
         End If
-
     End Sub
 
 End Class
