@@ -116,7 +116,8 @@ Public Class ucrSave
     Private bInsertColumnBefore As Boolean = False
     Private strAdjacentColumn As String = ""
     'todo. not used yet.
-    'In future this could be used to determine whether to change the position of existing coulmns or not.
+    'In future, this could be used to determine whether to change the position of the existing column or not.
+
     Private bKeepExistingPosition As Boolean = True
     Private bSetPositionParamsDirectly As String = True
     Private strReadNameFromParameterName As String = ""
