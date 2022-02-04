@@ -227,7 +227,8 @@ Public Class ucrDistributions
         Dim clsGeneralizedParetoDist As New Distribution
         Dim clsGumbelDist As New Distribution
         Dim clsNoDist As New Distribution
-        Dim clsMultinomDist As New Distribution
+        Dim clsEmpiricalDist As New Distribution
+        Dim clsTriangularDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -305,6 +306,7 @@ Public Class ucrDistributions
         clsBernouliDist.strExactName = "binom"
         clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
+        clsBernouliDist.AddParameter("size", "Number", 1)
         lstAllDistributions.Add(clsBernouliDist)
 
         'Binomial Distribution
@@ -434,14 +436,30 @@ Public Class ucrDistributions
         clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
         lstAllDistributions.Add(clsHyperGeoDist)
 
-        'multinomial distribution
-        clsMultinomDist.strNameTag = "Multinomial"
-        clsMultinomDist.strRName = "multinom"
-        clsMultinomDist.strDFunctionName = "dmultinom"
-        clsMultinomDist.strRFunctionName = "rmultinom"
-        clsMultinomDist.AddParameter("size", "Size", 10)
-        clsMultinomDist.AddParameter("prob", "probability", "c(0.2,0.3,0.5)")
-        lstAllDistributions.Add(clsMultinomDist)
+        'Discrete Empirical distribution
+        clsEmpiricalDist.strNameTag = "Discrete_Emprical"
+        clsEmpiricalDist.strRName = "empiricalD"
+        clsEmpiricalDist.strDFunctionName = "dempiricalD"
+        clsEmpiricalDist.strPFunctionName = "pempiricalD"
+        clsEmpiricalDist.strQFunctionName = "qempiricalD"
+        clsEmpiricalDist.strRFunctionName = "rempiricalD"
+        clsEmpiricalDist.SetPackageName("mc2d")
+        clsEmpiricalDist.AddParameter("values", "Values", "1:5")
+        clsEmpiricalDist.AddParameter("prob", "Probability", "c(10, 10, 10, 0, 10)")
+        lstAllDistributions.Add(clsEmpiricalDist)
+
+        'Triangular distribution
+        clsTriangularDist.strNameTag = "Triangular"
+        clsTriangularDist.strRName = "triang"
+        clsTriangularDist.strRFunctionName = "rtriang"
+        clsTriangularDist.strPFunctionName = "ptriang"
+        clsTriangularDist.strQFunctionName = "qtriang"
+        clsTriangularDist.strDFunctionName = "dtriang"
+        clsTriangularDist.strPackagName = "mc2d"
+        clsTriangularDist.AddParameter("min ", "Minimum", -1)
+        clsTriangularDist.AddParameter("mode ", "Mode", 0)
+        clsTriangularDist.AddParameter("max ", "Maximum", 1)
+        lstAllDistributions.Add(clsTriangularDist)
 
         ' Lognormal Distribution
         clsLogNormDist.strNameTag = "Lognormal"
