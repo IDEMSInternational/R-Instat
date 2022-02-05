@@ -313,7 +313,7 @@ Public Class dlgNewDataFrame
             For i As Integer = iStart To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
-                    .Item(i).Cells(1).Value = "x." & (i + 1)
+                    .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Character"
                     .Item(i).Cells(3).Value = ""
                     .Item(i).Cells(4).Value = "NA"

@@ -300,12 +300,12 @@ Partial Class dlgNewDataFrame
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dataTypeGridView.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dataTypeGridView.Location = New System.Drawing.Point(18, 136)
+        Me.dataTypeGridView.Location = New System.Drawing.Point(10, 136)
         Me.dataTypeGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.dataTypeGridView.Name = "dataTypeGridView"
         Me.dataTypeGridView.RowHeadersVisible = False
         Me.dataTypeGridView.RowTemplate.Height = 28
-        Me.dataTypeGridView.Size = New System.Drawing.Size(295, 115)
+        Me.dataTypeGridView.Size = New System.Drawing.Size(416, 115)
         Me.dataTypeGridView.TabIndex = 163
         '
         'ucrChkIncludeLabel
@@ -419,7 +419,7 @@ Partial Class dlgNewDataFrame
         'cbGridType
         '
         Me.cbGridType.HeaderText = "Type"
-        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Logical"})
+        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
         Me.cbGridType.MaxDropDownItems = 4
         Me.cbGridType.Name = "cbGridType"
         Me.cbGridType.Width = 60
