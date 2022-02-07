@@ -347,8 +347,14 @@ Public Class dlgNewDataFrame
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
+        'Dim iVaalue As Integer
         If selectedCombobox.SelectedItem = "Factor" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+        ElseIf selectedCombobox.SelectedItem = "Integer" Then
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+            'If Not Integer.TryParse(dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value, iVaalue) Then
+            '    MsgBox("Only integer required when the selected type is Integer")
+            'End If
         Else
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""

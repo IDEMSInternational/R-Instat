@@ -429,7 +429,7 @@ Partial Class dlgNewDataFrame
         Me.Column1.HeaderText = "Levels"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.Width = 40
+        Me.Column1.Width = 80
         '
         'Column2
         '
