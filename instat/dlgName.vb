@@ -16,6 +16,8 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
 
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
@@ -24,6 +26,12 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDefaultRFunction As New RFunction
+    Private clsRenameColumns As New RFunction
+    Private WithEvents grdCurrentWorkSheet As Worksheet
+    Private bIncludeCopyOfLevels As Boolean
+    Private strCurrentName As List(Of String)
+    Private dctRowsChanged As New Dictionary(Of Integer, String)
+    Private dctNameRowsValues As New Dictionary(Of Integer, String)
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -61,17 +69,15 @@ Public Class dlgName
 
         ucrChkIncludeVariable.SetText("Include Variable Labels")
 
-        ucrFactorLevels.SetVisible(False)
-
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
-        rdoMultiple.Enabled = False
+        'rdoMultiple.Enabled = False
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -84,6 +90,8 @@ Public Class dlgName
         ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
         ucrInputCase.SetLinkedDisplayControl(lblCase)
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
+        ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
+        ucrChkIncludeVariable.Enabled = False
 
         ucrPnlCase.SetParameter(New RParameter(".fn", 5))
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
@@ -142,7 +150,81 @@ Public Class dlgName
             Else
                 ucrBase.OKEnabled(False)
             End If
+        Else
+            ucrBase.OKEnabled(grdCurrentWorkSheet IsNot Nothing)
         End If
+    End Sub
+
+    Private Sub AddChangedRow(iRow As Integer, strNewData As String)
+        If Not dctRowsChanged.ContainsKey(iRow) Then
+            dctRowsChanged.Add(iRow, strNewData)
+        End If
+    End Sub
+
+    Private Sub AddRowNameValue(iRow As Integer, strNewData As String)
+        If Not dctNameRowsValues.ContainsKey(iRow) Then
+            dctNameRowsValues.Add(iRow, strNewData)
+        End If
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        AddChangedRow(e.Cell.Row, e.NewData)
+
+        If grdCurrentWorkSheet IsNot Nothing Then
+            For Each i As Integer In dctNameRowsValues.Keys
+                If dctRowsChanged.ContainsKey(i) Then
+                    clsRenameColumns.AddParameter(dctRowsChanged(i), strCurrentName(i), iPosition:=i + 1)
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub UpdateGrid()
+        grdRenameColumns.Worksheets.Clear()
+
+        grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
+        grdCurrentWorkSheet.ColumnCount = 2
+        grdCurrentWorkSheet.RowCount = ucrSelectVariables.lstAvailableVariable.Items.Count
+
+        grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
+        grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+
+        If rdoMultiple.Checked Then
+            If Not ucrSelectVariables.IsEmpty Then
+                For i As Integer = 0 To ucrSelectVariables.lstAvailableVariable.Items.Count - 1
+                    For j = 0 To grdCurrentWorkSheet.Columns - 1
+                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
+                            grdCurrentWorkSheet.Item(row:=i, col:=j) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                            grdCurrentWorkSheet.GetCell(row:=i, col:=j).IsReadOnly = True
+                        ElseIf grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Name" Then
+                            grdCurrentWorkSheet.Item(row:=i, col:=j) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                        End If
+                    Next
+                Next
+
+                For i As Integer = 0 To grdCurrentWorkSheet.Rows - 1
+                    For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
+                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
+                            AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=j))
+                        End If
+                    Next
+                Next
+            End If
+        End If
+
+        If bIncludeCopyOfLevels Then
+            grdCurrentWorkSheet.AppendColumns(1)
+            grdCurrentWorkSheet.ColumnHeaders(grdCurrentWorkSheet.ColumnCount - 1).Text = "New Label"
+        End If
+
+        grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+        grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
+
+        grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
+        grdRenameColumns.SheetTabNewButtonVisible = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -213,9 +295,20 @@ Public Class dlgName
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
-        Else
+        ElseIf rdoRenameWith.Checked Then
             ucrReceiverColumns.SetMeAsReceiver()
+        Else
         End If
+        UpdateGrid()
+    End Sub
+
+    Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
+        bIncludeCopyOfLevels = If(ucrChkIncludeVariable.Checked, True, False)
+        UpdateGrid()
+    End Sub
+
+    Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
+        UpdateGrid()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -226,13 +319,5 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
-
     End Sub
 End Class

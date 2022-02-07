@@ -58,8 +58,8 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
+        Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -294,36 +294,41 @@ Partial Class dlgName
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'ucrFactorLevels
-        '
-        Me.ucrFactorLevels.AutoSize = True
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
-        Me.ucrFactorLevels.Location = New System.Drawing.Point(229, 74)
-        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
-        Me.ucrFactorLevels.Size = New System.Drawing.Size(295, 210)
-        Me.ucrFactorLevels.TabIndex = 16
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
-        '
         'ucrChkIncludeVariable
         '
         Me.ucrChkIncludeVariable.AutoSize = True
         Me.ucrChkIncludeVariable.Checked = False
         Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(229, 46)
         Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
-        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
         Me.ucrChkIncludeVariable.TabIndex = 17
+        '
+        'grdRenameColumns
+        '
+        Me.grdRenameColumns.BackColor = System.Drawing.Color.White
+        Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Location = New System.Drawing.Point(229, 66)
+        Me.grdRenameColumns.Name = "grdRenameColumns"
+        Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Script = Nothing
+        Me.grdRenameColumns.SheetTabContextMenuStrip = Nothing
+        Me.grdRenameColumns.SheetTabNewButtonVisible = True
+        Me.grdRenameColumns.SheetTabVisible = True
+        Me.grdRenameColumns.SheetTabWidth = 154
+        Me.grdRenameColumns.ShowScrollEndSpacing = True
+        Me.grdRenameColumns.Size = New System.Drawing.Size(260, 210)
+        Me.grdRenameColumns.TabIndex = 18
+        Me.grdRenameColumns.Text = "Variables"
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(538, 346)
+        Me.ClientSize = New System.Drawing.Size(524, 346)
+        Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
-        Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.rdoRenameWith)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrReceiverColumns)
@@ -372,6 +377,6 @@ Partial Class dlgName
     Friend WithEvents lblCase As Label
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents rdoRenameWith As RadioButton
-    Friend WithEvents ucrFactorLevels As ucrFactor
     Friend WithEvents ucrChkIncludeVariable As ucrCheck
+    Friend WithEvents grdRenameColumns As unvell.ReoGrid.ReoGridControl
 End Class
