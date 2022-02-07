@@ -59,17 +59,24 @@ Public Class dlgName
         'set validation of ucrInputNewName as an RVariable.(input should not have any R reserved words like 'if','while')
         ucrInputNewName.SetValidationTypeAsRVariable()
 
+        ucrChkIncludeVariable.SetText("Include Variable Labels")
+
+        ucrFactorLevels.SetVisible(False)
+
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
+        rdoMultiple.Enabled = False
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
@@ -129,8 +136,12 @@ Public Class dlgName
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(True)
+        ElseIf rdoRenameWith.Checked Then
+            If Not ucrReceiverColumns.IsEmpty() Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -213,7 +224,15 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
+
     End Sub
 End Class

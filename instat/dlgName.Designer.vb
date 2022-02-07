@@ -47,7 +47,10 @@ Partial Class dlgName
         Me.rdoToLower = New System.Windows.Forms.RadioButton()
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrInputCase = New instat.ucrInputComboBox()
+        Me.ucrPnlCase = New instat.UcrPanel()
+        Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
         Me.ucrReceiverName = New instat.ucrReceiverSingle()
@@ -55,8 +58,8 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrPnlCase = New instat.UcrPanel()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrFactorLevels = New instat.ucrFactor()
+        Me.ucrChkIncludeVariable = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -95,7 +98,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(269, 12)
+        Me.rdoMultiple.Location = New System.Drawing.Point(213, 12)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -114,7 +117,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(159, 12)
+        Me.rdoSingle.Location = New System.Drawing.Point(103, 12)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -162,16 +165,57 @@ Partial Class dlgName
         Me.lblCase.TabIndex = 21
         Me.lblCase.Text = "Case:"
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrInputCase)
+        Me.grpOptions.Controls.Add(Me.lblCase)
+        Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
+        Me.grpOptions.Controls.Add(Me.rdoToLower)
+        Me.grpOptions.Controls.Add(Me.ucrPnlCase)
+        Me.grpOptions.Location = New System.Drawing.Point(257, 199)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(259, 77)
+        Me.grpOptions.TabIndex = 11
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
+        '
         'ucrInputCase
         '
         Me.ucrInputCase.AddQuotesIfUnrecognised = True
         Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCase.GetSetSelectedIndex = -1
         Me.ucrInputCase.IsReadOnly = False
-        Me.ucrInputCase.Location = New System.Drawing.Point(148, 41)
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
         Me.ucrInputCase.Name = "ucrInputCase"
         Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputCase.TabIndex = 20
+        '
+        'ucrPnlCase
+        '
+        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
+        Me.ucrPnlCase.Name = "ucrPnlCase"
+        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
+        Me.ucrPnlCase.TabIndex = 17
+        '
+        'rdoRenameWith
+        '
+        Me.rdoRenameWith.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRenameWith.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRenameWith.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRenameWith.FlatAppearance.BorderSize = 2
+        Me.rdoRenameWith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRenameWith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRenameWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRenameWith.Location = New System.Drawing.Point(323, 12)
+        Me.rdoRenameWith.Name = "rdoRenameWith"
+        Me.rdoRenameWith.Size = New System.Drawing.Size(110, 28)
+        Me.rdoRenameWith.TabIndex = 13
+        Me.rdoRenameWith.TabStop = True
+        Me.rdoRenameWith.Tag = ""
+        Me.rdoRenameWith.Text = "Rename With"
+        Me.rdoRenameWith.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRenameWith.UseVisualStyleBackColor = False
         '
         'ucrReceiverColumns
         '
@@ -245,32 +289,32 @@ Partial Class dlgName
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(134, 4)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(92, 4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(303, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'ucrPnlCase
+        'ucrFactorLevels
         '
-        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
-        Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
-        Me.ucrPnlCase.TabIndex = 17
+        Me.ucrFactorLevels.AutoSize = True
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(229, 74)
+        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(295, 210)
+        Me.ucrFactorLevels.TabIndex = 16
+        Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
-        'grpOptions
+        'ucrChkIncludeVariable
         '
-        Me.grpOptions.Controls.Add(Me.ucrInputCase)
-        Me.grpOptions.Controls.Add(Me.lblCase)
-        Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
-        Me.grpOptions.Controls.Add(Me.rdoToLower)
-        Me.grpOptions.Controls.Add(Me.ucrPnlCase)
-        Me.grpOptions.Location = New System.Drawing.Point(257, 199)
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(259, 77)
-        Me.grpOptions.TabIndex = 11
-        Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
+        Me.ucrChkIncludeVariable.AutoSize = True
+        Me.ucrChkIncludeVariable.Checked = False
+        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(229, 46)
+        Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
+        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIncludeVariable.TabIndex = 17
         '
         'dlgName
         '
@@ -278,6 +322,9 @@ Partial Class dlgName
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(538, 346)
+        Me.Controls.Add(Me.ucrChkIncludeVariable)
+        Me.Controls.Add(Me.ucrFactorLevels)
+        Me.Controls.Add(Me.rdoRenameWith)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrReceiverColumns)
         Me.Controls.Add(Me.rdoSingle)
@@ -324,4 +371,7 @@ Partial Class dlgName
     Friend WithEvents ucrInputCase As ucrInputComboBox
     Friend WithEvents lblCase As Label
     Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents rdoRenameWith As RadioButton
+    Friend WithEvents ucrFactorLevels As ucrFactor
+    Friend WithEvents ucrChkIncludeVariable As ucrCheck
 End Class
