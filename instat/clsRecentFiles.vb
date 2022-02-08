@@ -64,8 +64,12 @@ Public Class clsRecentFiles
         'read file contents
         Dim arrStrPaths() As String = File.ReadAllLines(strRecentFilesPath)
         For Each strPath As String In arrStrPaths
-            If Not String.IsNullOrEmpty(strPath) AndAlso Not lstRecentOpenedFiles.Contains(strPath.Replace("\", "/")) Then
-                lstRecentOpenedFiles.Add(strPath.Replace("\", "/"))
+            If String.IsNullOrEmpty(strPath) Then
+                Continue For
+            End If
+            Dim strNewPath As String = strPath.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+            If Not lstRecentOpenedFiles.Contains(strNewPath) Then
+                lstRecentOpenedFiles.Add(strNewPath)
             End If
         Next
         'display the recently opened files if there are any items to display in the file
@@ -106,8 +110,8 @@ Public Class clsRecentFiles
     ''' </summary>
     ''' <param name="strFilePath">file path to add to menu items</param>
     Public Sub addToMenu(strFilePath As String)
-        strFilePath = strFilePath.Replace("\", "/")
-        'remove file if it exists(helps with making sure displayed file names are rearranged)
+        strFilePath = strFilePath.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+        'remove file if already in lists(helps with making sure displayed file names are rearranged)
         lstRecentOpenedFiles.Remove(strFilePath)
         'add to recent opened files list..
         lstRecentOpenedFiles.Add(strFilePath)
@@ -187,7 +191,6 @@ Public Class clsRecentFiles
         End If
 
         Dim strFilePathTmp As String = strFilePath.Replace("MRU:", "")
-        strFilePathTmp = strFilePathTmp.Replace("\", "/")
         If File.Exists(strFilePathTmp) Then
             dlgImportDataset.strFileToOpenOn = strFilePathTmp
             dlgImportDataset.ShowDialog()
