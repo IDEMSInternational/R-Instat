@@ -29,7 +29,6 @@ Public Class dlgName
     Private clsRenameColumns As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private bIncludeCopyOfLevels As Boolean
-    Private strCurrentName As List(Of String)
     Private dctRowsChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
 
@@ -74,10 +73,8 @@ Public Class dlgName
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "multiple" & Chr(34))
-        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
-        'rdoMultiple.Enabled = False
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -91,7 +88,6 @@ Public Class dlgName
         ucrInputCase.SetLinkedDisplayControl(lblCase)
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
         ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
-        ucrChkIncludeVariable.Enabled = False
 
         ucrPnlCase.SetParameter(New RParameter(".fn", 5))
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
@@ -171,9 +167,9 @@ Public Class dlgName
         AddChangedRow(e.Cell.Row, e.NewData)
 
         If grdCurrentWorkSheet IsNot Nothing Then
-            For Each i As Integer In dctNameRowsValues.Keys
+            For i As Integer = 0 To dctNameRowsValues.Keys.Count - 1
                 If dctRowsChanged.ContainsKey(i) Then
-                    clsRenameColumns.AddParameter(dctRowsChanged(i), strCurrentName(i), iPosition:=i + 1)
+                    clsRenameColumns.AddParameter(dctRowsChanged(i), dctNameRowsValues(i), iPosition:=i + 1)
                 End If
             Next
         End If
@@ -215,6 +211,13 @@ Public Class dlgName
         If bIncludeCopyOfLevels Then
             grdCurrentWorkSheet.AppendColumns(1)
             grdCurrentWorkSheet.ColumnHeaders(grdCurrentWorkSheet.ColumnCount - 1).Text = "New Label"
+            For i As Integer = 0 To GetListColsLabel().Count - 1
+                For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
+                    If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
+                        grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
+                    End If
+                Next
+            Next
         End If
 
         grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
@@ -290,6 +293,32 @@ Public Class dlgName
             End If
         End If
         Return strColLabel
+    End Function
+
+    Private Function GetListColsLabel() As List(Of String)
+        Dim lstColLabel As New List(Of String)
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim expItems As SymbolicExpression
+
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+        For i As Integer = 0 To dctNameRowsValues.Keys.Count - 1
+            clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & dctNameRowsValues(i) & Chr(34), iPosition:=1)
+            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+                Dim strArr As String() = expItems.AsCharacter.ToArray
+                If strArr IsNot Nothing Then
+                    'the number of labels for a column expected is 1
+                    If strArr.Length = 1 Then
+                        lstColLabel.Add(strArr(0))
+                    ElseIf strArr.Length > 1 Then
+                        MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        lstColLabel.Add(strArr(strArr.Length - 1))
+                    End If
+                End If
+            End If
+        Next
+        Return lstColLabel
     End Function
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged

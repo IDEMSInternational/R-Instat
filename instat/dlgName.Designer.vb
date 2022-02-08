@@ -48,9 +48,9 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputCase = New instat.ucrInputComboBox()
-        Me.ucrPnlCase = New instat.UcrPanel()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
+        Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrChkIncludeVariable = New instat.ucrCheck()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
         Me.ucrReceiverName = New instat.ucrReceiverSingle()
@@ -58,8 +58,8 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrChkIncludeVariable = New instat.ucrCheck()
-        Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrInputCase = New instat.ucrInputComboBox()
+        Me.ucrPnlCase = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -85,9 +85,9 @@ Partial Class dlgName
         Me.lblVariableLabel.AutoSize = True
         Me.lblVariableLabel.Location = New System.Drawing.Point(317, 160)
         Me.lblVariableLabel.Name = "lblVariableLabel"
-        Me.lblVariableLabel.Size = New System.Drawing.Size(74, 13)
+        Me.lblVariableLabel.Size = New System.Drawing.Size(121, 13)
         Me.lblVariableLabel.TabIndex = 10
-        Me.lblVariableLabel.Text = "Column Label:"
+        Me.lblVariableLabel.Text = "Column (Variable Label):"
         '
         'rdoMultiple
         '
@@ -179,25 +179,6 @@ Partial Class dlgName
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'ucrInputCase
-        '
-        Me.ucrInputCase.AddQuotesIfUnrecognised = True
-        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputCase.GetSetSelectedIndex = -1
-        Me.ucrInputCase.IsReadOnly = False
-        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
-        Me.ucrInputCase.Name = "ucrInputCase"
-        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
-        Me.ucrInputCase.TabIndex = 20
-        '
-        'ucrPnlCase
-        '
-        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
-        Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
-        Me.ucrPnlCase.TabIndex = 17
-        '
         'rdoRenameWith
         '
         Me.rdoRenameWith.Appearance = System.Windows.Forms.Appearance.Button
@@ -216,6 +197,33 @@ Partial Class dlgName
         Me.rdoRenameWith.Text = "Rename With"
         Me.rdoRenameWith.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRenameWith.UseVisualStyleBackColor = False
+        '
+        'grdRenameColumns
+        '
+        Me.grdRenameColumns.BackColor = System.Drawing.Color.White
+        Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Location = New System.Drawing.Point(239, 66)
+        Me.grdRenameColumns.Name = "grdRenameColumns"
+        Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Script = Nothing
+        Me.grdRenameColumns.SheetTabContextMenuStrip = Nothing
+        Me.grdRenameColumns.SheetTabNewButtonVisible = True
+        Me.grdRenameColumns.SheetTabVisible = True
+        Me.grdRenameColumns.SheetTabWidth = 154
+        Me.grdRenameColumns.ShowScrollEndSpacing = True
+        Me.grdRenameColumns.Size = New System.Drawing.Size(271, 210)
+        Me.grdRenameColumns.TabIndex = 18
+        Me.grdRenameColumns.Text = "Variables"
+        '
+        'ucrChkIncludeVariable
+        '
+        Me.ucrChkIncludeVariable.AutoSize = True
+        Me.ucrChkIncludeVariable.Checked = False
+        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(240, 46)
+        Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
+        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
+        Me.ucrChkIncludeVariable.TabIndex = 17
         '
         'ucrReceiverColumns
         '
@@ -238,7 +246,7 @@ Partial Class dlgName
         Me.ucrInputVariableLabel.IsReadOnly = False
         Me.ucrInputVariableLabel.Location = New System.Drawing.Point(317, 175)
         Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
-        Me.ucrInputVariableLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputVariableLabel.Size = New System.Drawing.Size(194, 21)
         Me.ucrInputVariableLabel.TabIndex = 7
         '
         'ucrReceiverName
@@ -249,7 +257,7 @@ Partial Class dlgName
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrReceiverName.Size = New System.Drawing.Size(148, 21)
         Me.ucrReceiverName.strNcFilePath = ""
         Me.ucrReceiverName.TabIndex = 5
         Me.ucrReceiverName.ucrSelector = Nothing
@@ -262,7 +270,7 @@ Partial Class dlgName
         Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(317, 128)
         Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNewName.Size = New System.Drawing.Size(148, 21)
         Me.ucrInputNewName.TabIndex = 6
         '
         'ucrSelectVariables
@@ -294,32 +302,24 @@ Partial Class dlgName
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'ucrChkIncludeVariable
+        'ucrInputCase
         '
-        Me.ucrChkIncludeVariable.AutoSize = True
-        Me.ucrChkIncludeVariable.Checked = False
-        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(229, 46)
-        Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
-        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
-        Me.ucrChkIncludeVariable.TabIndex = 17
+        Me.ucrInputCase.AddQuotesIfUnrecognised = True
+        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCase.GetSetSelectedIndex = -1
+        Me.ucrInputCase.IsReadOnly = False
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
+        Me.ucrInputCase.Name = "ucrInputCase"
+        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputCase.TabIndex = 20
         '
-        'grdRenameColumns
+        'ucrPnlCase
         '
-        Me.grdRenameColumns.BackColor = System.Drawing.Color.White
-        Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.Location = New System.Drawing.Point(229, 66)
-        Me.grdRenameColumns.Name = "grdRenameColumns"
-        Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.Script = Nothing
-        Me.grdRenameColumns.SheetTabContextMenuStrip = Nothing
-        Me.grdRenameColumns.SheetTabNewButtonVisible = True
-        Me.grdRenameColumns.SheetTabVisible = True
-        Me.grdRenameColumns.SheetTabWidth = 154
-        Me.grdRenameColumns.ShowScrollEndSpacing = True
-        Me.grdRenameColumns.Size = New System.Drawing.Size(260, 210)
-        Me.grdRenameColumns.TabIndex = 18
-        Me.grdRenameColumns.Text = "Variables"
+        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
+        Me.ucrPnlCase.Name = "ucrPnlCase"
+        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
+        Me.ucrPnlCase.TabIndex = 17
         '
         'dlgName
         '
