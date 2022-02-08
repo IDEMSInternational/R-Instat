@@ -308,7 +308,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       selected_columns <- self$get_column_names()
       out <- out[ ,selected_columns, drop = FALSE]
       for(name in names(old_metadata)) {
-        if(!name %in% c("names", "class", "row.names")) {
+        if(!(name %in% c("names", "class", "row.names"))) {
           attr(out, name) <- old_metadata[[name]]
         }
       }
