@@ -303,7 +303,7 @@ Public Class dlgName
         clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
         clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
         For i As Integer = 0 To dctNameRowsValues.Keys.Count - 1
-            clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & dctNameRowsValues(i) & Chr(34), iPosition:=1)
+            clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & dctNameRowsValues(i) & Chr(34), iPosition:=i)
             expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
                 Dim strArr As String() = expItems.AsCharacter.ToArray
