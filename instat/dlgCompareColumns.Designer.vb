@@ -202,7 +202,7 @@ Partial Class dlgCompareColumns
         '
         Me.ucrChkSort.AutoSize = True
         Me.ucrChkSort.Checked = False
-        Me.ucrChkSort.Location = New System.Drawing.Point(276, 240)
+        Me.ucrChkSort.Location = New System.Drawing.Point(21, 241)
         Me.ucrChkSort.Name = "ucrChkSort"
         Me.ucrChkSort.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkSort.TabIndex = 6
