@@ -82,7 +82,7 @@ Public Class ucrDistributionsWithParameters
                 End If
                 OnControlValueChanged()
             Next
-            If clsCurrDistribution.strNameTag = "Bernouli" Then
+            If clsCurrDistribution.strNameTag = "Bernoulli" Then
                 AddParameter("size", 1)
             End If
             bParametersFilled = False
@@ -116,6 +116,16 @@ Public Class ucrDistributionsWithParameters
             CheckParametersFilled()
         End If
         OnControlValueChanged()
+    End Sub
+
+    Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
+        If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+            ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
+            ucrInputParameter1.IsReadOnly = True
+        Else
+            ucrInputParameter1.IsReadOnly = False
+        End If
+        OnControlContentsChanged()
     End Sub
 
     Private Sub ucrInputParameter3_ControlValueChanged() Handles ucrInputParameter3.ControlValueChanged

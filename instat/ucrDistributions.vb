@@ -29,6 +29,7 @@ Public Class ucrDistributions
     Private bParameterIsDistFunction As Boolean = False
     Private bFunctionIsDistFunction As Boolean = False
     Private bParameterIsDistName As Boolean = False
+    Private intNumber As Integer
 
     Public Sub New()
 
@@ -89,7 +90,6 @@ Public Class ucrDistributions
         Else
             clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
         End If
-
     End Sub
 
     Public Sub SetRDistributions()
@@ -229,6 +229,7 @@ Public Class ucrDistributions
         Dim clsNoDist As New Distribution
         Dim clsEmpiricalDist As New Distribution
         Dim clsTriangularDist As New Distribution
+        Dim clsBirthDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -294,7 +295,7 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsUniformDist)
 
         'Bernouli Distribution
-        clsBernouliDist.strNameTag = "Bernouli"
+        clsBernouliDist.strNameTag = "Bernoulli"
         clsBernouliDist.strRName = "binom"
         clsBernouliDist.strRFunctionName = "rbinom"
         clsBernouliDist.strPFunctionName = "pbinom"
@@ -437,7 +438,7 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsHyperGeoDist)
 
         'Discrete Empirical distribution
-        clsEmpiricalDist.strNameTag = "Discrete_Emprical"
+        clsEmpiricalDist.strNameTag = "Discrete_Empirical"
         clsEmpiricalDist.strRName = "empiricalD"
         clsEmpiricalDist.strDFunctionName = "dempiricalD"
         clsEmpiricalDist.strPFunctionName = "pempiricalD"
