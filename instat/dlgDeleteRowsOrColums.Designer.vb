@@ -19,7 +19,7 @@ Partial Class dlgDeleteRowsOrColums
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class dlgDeleteRowsOrColums
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.lblColumnsToDelete = New System.Windows.Forms.Label()
@@ -44,6 +44,9 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoRows = New System.Windows.Forms.RadioButton()
         Me.lblTo = New System.Windows.Forms.Label()
+        Me.rdoEmpty = New System.Windows.Forms.RadioButton()
+        Me.ucrChkEmptyRows = New instat.ucrCheck()
+        Me.ucrChkEmptyColumns = New instat.ucrCheck()
         Me.ucrNudTo = New instat.ucrNud()
         Me.ucrPnlColumnsOrRows = New instat.UcrPanel()
         Me.ucrDataFrameLengthForDeleteRows = New instat.ucrDataFrameLength()
@@ -51,6 +54,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrSelectorForDeleteColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForColumnsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNewDataFrame = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblNumberofRows
@@ -95,7 +99,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoColumns.ForeColor = System.Drawing.SystemColors.ControlText
         Me.rdoColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoColumns.Location = New System.Drawing.Point(105, 12)
+        Me.rdoColumns.Location = New System.Drawing.Point(53, 12)
         Me.rdoColumns.Name = "rdoColumns"
         Me.rdoColumns.Size = New System.Drawing.Size(100, 28)
         Me.rdoColumns.TabIndex = 1
@@ -114,7 +118,7 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRows.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRows.Location = New System.Drawing.Point(203, 12)
+        Me.rdoRows.Location = New System.Drawing.Point(151, 12)
         Me.rdoRows.Name = "rdoRows"
         Me.rdoRows.Size = New System.Drawing.Size(100, 28)
         Me.rdoRows.TabIndex = 2
@@ -133,6 +137,41 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblTo.Tag = ""
         Me.lblTo.Text = "To:"
         '
+        'rdoEmpty
+        '
+        Me.rdoEmpty.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoEmpty.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEmpty.FlatAppearance.BorderSize = 2
+        Me.rdoEmpty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoEmpty.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoEmpty.Location = New System.Drawing.Point(249, 12)
+        Me.rdoEmpty.Name = "rdoEmpty"
+        Me.rdoEmpty.Size = New System.Drawing.Size(100, 28)
+        Me.rdoEmpty.TabIndex = 13
+        Me.rdoEmpty.Text = "Empty"
+        Me.rdoEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoEmpty.UseVisualStyleBackColor = True
+        '
+        'ucrChkEmptyRows
+        '
+        Me.ucrChkEmptyRows.AutoSize = True
+        Me.ucrChkEmptyRows.Checked = False
+        Me.ucrChkEmptyRows.Location = New System.Drawing.Point(11, 141)
+        Me.ucrChkEmptyRows.Name = "ucrChkEmptyRows"
+        Me.ucrChkEmptyRows.Size = New System.Drawing.Size(109, 23)
+        Me.ucrChkEmptyRows.TabIndex = 16
+        '
+        'ucrChkEmptyColumns
+        '
+        Me.ucrChkEmptyColumns.AutoSize = True
+        Me.ucrChkEmptyColumns.Checked = False
+        Me.ucrChkEmptyColumns.Location = New System.Drawing.Point(11, 106)
+        Me.ucrChkEmptyColumns.Name = "ucrChkEmptyColumns"
+        Me.ucrChkEmptyColumns.Size = New System.Drawing.Size(108, 23)
+        Me.ucrChkEmptyColumns.TabIndex = 15
+        '
         'ucrNudTo
         '
         Me.ucrNudTo.AutoSize = True
@@ -149,9 +188,9 @@ Partial Class dlgDeleteRowsOrColums
         'ucrPnlColumnsOrRows
         '
         Me.ucrPnlColumnsOrRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnsOrRows.Location = New System.Drawing.Point(97, 11)
+        Me.ucrPnlColumnsOrRows.Location = New System.Drawing.Point(53, 11)
         Me.ucrPnlColumnsOrRows.Name = "ucrPnlColumnsOrRows"
-        Me.ucrPnlColumnsOrRows.Size = New System.Drawing.Size(214, 29)
+        Me.ucrPnlColumnsOrRows.Size = New System.Drawing.Size(303, 29)
         Me.ucrPnlColumnsOrRows.TabIndex = 0
         '
         'ucrDataFrameLengthForDeleteRows
@@ -205,17 +244,30 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 243)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 273)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
+        '
+        'ucrNewDataFrame
+        '
+        Me.ucrNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewDataFrame.Location = New System.Drawing.Point(7, 236)
+        Me.ucrNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNewDataFrame.Name = "ucrNewDataFrame"
+        Me.ucrNewDataFrame.Size = New System.Drawing.Size(405, 34)
+        Me.ucrNewDataFrame.TabIndex = 17
         '
         'dlgDeleteRowsOrColums
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 299)
+        Me.ClientSize = New System.Drawing.Size(416, 330)
+        Me.Controls.Add(Me.ucrNewDataFrame)
+        Me.Controls.Add(Me.ucrChkEmptyRows)
+        Me.Controls.Add(Me.ucrChkEmptyColumns)
+        Me.Controls.Add(Me.rdoEmpty)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.ucrNudTo)
         Me.Controls.Add(Me.rdoColumns)
@@ -254,4 +306,8 @@ Partial Class dlgDeleteRowsOrColums
     Friend WithEvents ucrPnlColumnsOrRows As UcrPanel
     Friend WithEvents lblTo As Label
     Friend WithEvents ucrNudTo As ucrNud
+    Friend WithEvents rdoEmpty As RadioButton
+    Friend WithEvents ucrChkEmptyRows As ucrCheck
+    Friend WithEvents ucrChkEmptyColumns As ucrCheck
+    Friend WithEvents ucrNewDataFrame As ucrSave
 End Class
