@@ -48,6 +48,8 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCase = New instat.ucrInputComboBox()
+        Me.ucrPnlCase = New instat.UcrPanel()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
@@ -58,8 +60,6 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputCase = New instat.ucrInputComboBox()
-        Me.ucrPnlCase = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -179,6 +179,25 @@ Partial Class dlgName
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
+        'ucrInputCase
+        '
+        Me.ucrInputCase.AddQuotesIfUnrecognised = True
+        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCase.GetSetSelectedIndex = -1
+        Me.ucrInputCase.IsReadOnly = False
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
+        Me.ucrInputCase.Name = "ucrInputCase"
+        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputCase.TabIndex = 20
+        '
+        'ucrPnlCase
+        '
+        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
+        Me.ucrPnlCase.Name = "ucrPnlCase"
+        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
+        Me.ucrPnlCase.TabIndex = 17
+        '
         'rdoRenameWith
         '
         Me.rdoRenameWith.Appearance = System.Windows.Forms.Appearance.Button
@@ -203,7 +222,7 @@ Partial Class dlgName
         Me.grdRenameColumns.BackColor = System.Drawing.Color.White
         Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.Location = New System.Drawing.Point(239, 66)
+        Me.grdRenameColumns.Location = New System.Drawing.Point(235, 66)
         Me.grdRenameColumns.Name = "grdRenameColumns"
         Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.Script = Nothing
@@ -212,7 +231,7 @@ Partial Class dlgName
         Me.grdRenameColumns.SheetTabVisible = True
         Me.grdRenameColumns.SheetTabWidth = 154
         Me.grdRenameColumns.ShowScrollEndSpacing = True
-        Me.grdRenameColumns.Size = New System.Drawing.Size(271, 210)
+        Me.grdRenameColumns.Size = New System.Drawing.Size(283, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
         '
@@ -220,7 +239,7 @@ Partial Class dlgName
         '
         Me.ucrChkIncludeVariable.AutoSize = True
         Me.ucrChkIncludeVariable.Checked = False
-        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(240, 46)
+        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(235, 46)
         Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
         Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
         Me.ucrChkIncludeVariable.TabIndex = 17
@@ -301,25 +320,6 @@ Partial Class dlgName
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'ucrInputCase
-        '
-        Me.ucrInputCase.AddQuotesIfUnrecognised = True
-        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputCase.GetSetSelectedIndex = -1
-        Me.ucrInputCase.IsReadOnly = False
-        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
-        Me.ucrInputCase.Name = "ucrInputCase"
-        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
-        Me.ucrInputCase.TabIndex = 20
-        '
-        'ucrPnlCase
-        '
-        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
-        Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
-        Me.ucrPnlCase.TabIndex = 17
         '
         'dlgName
         '

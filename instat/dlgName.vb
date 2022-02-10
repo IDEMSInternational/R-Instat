@@ -45,6 +45,7 @@ Public Class dlgName
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
+        UpdateGrid()
         autoTranslate(Me)
     End Sub
 
@@ -164,6 +165,7 @@ Public Class dlgName
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        dctRowsChanged.Clear()
         AddChangedRow(e.Cell.Row, e.NewData)
 
         If grdCurrentWorkSheet IsNot Nothing Then
@@ -177,6 +179,8 @@ Public Class dlgName
 
     Private Sub UpdateGrid()
         grdRenameColumns.Worksheets.Clear()
+        dctRowsChanged.Clear()
+        dctNameRowsValues.Clear()
 
         grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
         grdCurrentWorkSheet.ColumnCount = 2
@@ -304,7 +308,7 @@ Public Class dlgName
         clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
 
         'This is to be done in R to avoid the app to slow down when getting the list of label
-        For i As Integer = 0 To dctNameRowsValues.Keys.Count - 1
+        For i As Integer = 0 To dctNameRowsValues.Count - 1
             clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & dctNameRowsValues(i) & Chr(34), iPosition:=i)
             expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
@@ -350,5 +354,17 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
