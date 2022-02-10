@@ -75,14 +75,10 @@ Public Class dlgDeleteRowsOrColums
         ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         ucrChkEmptyColumns.SetText("Columns")
-        ' ucrChkEmptyColumns.SetParameter(New RParameter("x", 0))
         ucrChkEmptyColumns.AddParameterPresentCondition(True, "x", True)
         ucrChkEmptyColumns.AddParameterPresentCondition(False, "x", False)
-        'ucrChkEmptyColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkEmptyRows.SetText("Rows")
-        'ucrChkEmptyRows.SetParameter(New RParameter("y", 1))
-        'ucrChkEmptyRows.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkEmptyRows.AddParameterPresentCondition(True, "y", True)
         ucrChkEmptyRows.AddParameterPresentCondition(False, "y", False)
 
@@ -134,8 +130,8 @@ Public Class dlgDeleteRowsOrColums
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
         ucrNudTo.SetRCode(clsOperatorRowNames, bReset)
         ucrNudFrom.SetRCode(clsOperatorRowNames, bReset)
-        ucrChkEmptyColumns.SetRCode(clsColsPipeOperator, bReset)
-        ucrChkEmptyRows.SetRCode(clsColsPipeOperator, bReset)
+        ucrChkEmptyColumns.SetRCode(clsConcFunction, bReset)
+        ucrChkEmptyRows.SetRCode(clsConcFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
