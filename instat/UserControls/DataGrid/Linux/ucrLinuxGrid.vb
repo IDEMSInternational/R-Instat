@@ -122,7 +122,7 @@ Public MustInherit Class ucrLinuxGrid
     Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
         Dim lstSelectedColumnIndexes As New List(Of String)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
-        For Each Column As DataGridViewColumn In dataGrid.SelectedColumns
+        For Each column As DataGridViewColumn In dataGrid.SelectedColumns
             lstSelectedColumnIndexes.Add(Column.HeaderCell.Value)
         Next
         Return lstSelectedColumnIndexes
