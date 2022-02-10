@@ -137,7 +137,7 @@ Public Class dlgRegularSequence
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
-        clsRepFunction.AddParameter("each", 1, iPosition:=2)
+        'clsRepFunction.AddParameter("each", 1, iPosition:=2)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
 
         clsByDateOperator.SetOperation(" ")
