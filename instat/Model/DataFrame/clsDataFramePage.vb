@@ -191,19 +191,19 @@ Public Class clsDataFramePage
     End Function
 
     Private Function GetDataFrameFromRCommand() As DataFrame
-        Dim clsRFunction As New RFunction
+        Dim clsGetDataFrameRFunction As New RFunction
         Dim expTemp As SymbolicExpression
         _hasChanged = True
-        clsRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_data_frame")
-        clsRFunction.AddParameter("convert_to_character", "TRUE")
-        clsRFunction.AddParameter("include_hidden_columns", "FALSE")
-        clsRFunction.AddParameter("use_current_filter", "TRUE")
-        clsRFunction.AddParameter("max_cols", iColumnIncrements)
-        clsRFunction.AddParameter("max_rows", intRowIncrements)
-        clsRFunction.AddParameter("start_row", _iRowStart)
-        clsRFunction.AddParameter("start_col", _iColumnStart)
-        clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-        expTemp = _clsRLink.RunInternalScriptGetValue(clsRFunction.ToScript(), bSilent:=True)
+        clsGetDataFrameRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameRFunction.AddParameter("convert_to_character", "TRUE")
+        clsGetDataFrameRFunction.AddParameter("use_current_filter", "TRUE")
+        clsGetDataFrameRFunction.AddParameter("use_column_selection", "TRUE")
+        clsGetDataFrameRFunction.AddParameter("max_cols", iColumnIncrements)
+        clsGetDataFrameRFunction.AddParameter("max_rows", intRowIncrements)
+        clsGetDataFrameRFunction.AddParameter("start_row", _iRowStart)
+        clsGetDataFrameRFunction.AddParameter("start_col", _iColumnStart)
+        clsGetDataFrameRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        expTemp = _clsRLink.RunInternalScriptGetValue(clsGetDataFrameRFunction.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsDataFrame
         Else
