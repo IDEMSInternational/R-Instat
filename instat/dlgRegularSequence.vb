@@ -179,7 +179,7 @@ Public Class dlgRegularSequence
         Dim dcmBy As Decimal
 
         bUpdateBy = False
-        ucrNudRepeatValues.AddAdditionalCodeParameterPair(clsSeqDateFunction, ucrNudRepeatValues.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudRepeatValues.AddAdditionalCodeParameterPair(clsSeqDateFunction, New RParameter("each", 1), iAdditionalPairNo:=1)
 
         ucrDateTimePickerFrom.SetRCode(clsSeqDateFunction, bReset)
         ucrDateTimePickerTo.SetRCode(clsSeqDateFunction, bReset)
