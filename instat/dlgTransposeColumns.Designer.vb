@@ -40,14 +40,14 @@ Partial Class dlgTransposeColumns
     Private Sub InitializeComponent()
         Me.lblColumnsToTranspose = New System.Windows.Forms.Label()
         Me.lblVariableNames = New System.Windows.Forms.Label()
+        Me.ucrInputDisplayVariableNames = New instat.ucrInputTextBox()
+        Me.ucrChkDisplayVariableNames = New instat.ucrCheck()
         Me.ucrReceiverVariableNames = New instat.ucrReceiverSingle()
         Me.ucrChkNameNewColumns = New instat.ucrCheck()
         Me.ucrNewDataframe = New instat.ucrSave()
         Me.ucrReceiverColumsToTranspose = New instat.ucrReceiverMultiple()
         Me.ucrSelectorTransposeColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkDisplayVariableNames = New instat.ucrCheck()
-        Me.ucrInputDisplayVariableNames = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblColumnsToTranspose
@@ -62,42 +62,62 @@ Partial Class dlgTransposeColumns
         'lblVariableNames
         '
         Me.lblVariableNames.AutoSize = True
-        Me.lblVariableNames.Location = New System.Drawing.Point(266, 175)
+        Me.lblVariableNames.Location = New System.Drawing.Point(261, 174)
         Me.lblVariableNames.Name = "lblVariableNames"
-        Me.lblVariableNames.Size = New System.Drawing.Size(79, 13)
-        Me.lblVariableNames.TabIndex = 7
-        Me.lblVariableNames.Text = "Variable Name:"
+        Me.lblVariableNames.Size = New System.Drawing.Size(127, 13)
+        Me.lblVariableNames.TabIndex = 3
+        Me.lblVariableNames.Text = "Variable Name (Optional):"
+        '
+        'ucrInputDisplayVariableNames
+        '
+        Me.ucrInputDisplayVariableNames.AddQuotesIfUnrecognised = True
+        Me.ucrInputDisplayVariableNames.AutoSize = True
+        Me.ucrInputDisplayVariableNames.IsMultiline = False
+        Me.ucrInputDisplayVariableNames.IsReadOnly = False
+        Me.ucrInputDisplayVariableNames.Location = New System.Drawing.Point(157, 235)
+        Me.ucrInputDisplayVariableNames.Name = "ucrInputDisplayVariableNames"
+        Me.ucrInputDisplayVariableNames.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputDisplayVariableNames.TabIndex = 7
+        '
+        'ucrChkDisplayVariableNames
+        '
+        Me.ucrChkDisplayVariableNames.AutoSize = True
+        Me.ucrChkDisplayVariableNames.Checked = False
+        Me.ucrChkDisplayVariableNames.Location = New System.Drawing.Point(10, 233)
+        Me.ucrChkDisplayVariableNames.Name = "ucrChkDisplayVariableNames"
+        Me.ucrChkDisplayVariableNames.Size = New System.Drawing.Size(141, 23)
+        Me.ucrChkDisplayVariableNames.TabIndex = 6
         '
         'ucrReceiverVariableNames
         '
         Me.ucrReceiverVariableNames.AutoSize = True
         Me.ucrReceiverVariableNames.frmParent = Me
-        Me.ucrReceiverVariableNames.Location = New System.Drawing.Point(263, 191)
+        Me.ucrReceiverVariableNames.Location = New System.Drawing.Point(263, 190)
         Me.ucrReceiverVariableNames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariableNames.Name = "ucrReceiverVariableNames"
         Me.ucrReceiverVariableNames.Selector = Nothing
         Me.ucrReceiverVariableNames.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverVariableNames.strNcFilePath = ""
-        Me.ucrReceiverVariableNames.TabIndex = 6
+        Me.ucrReceiverVariableNames.TabIndex = 4
         Me.ucrReceiverVariableNames.ucrSelector = Nothing
         '
         'ucrChkNameNewColumns
         '
         Me.ucrChkNameNewColumns.AutoSize = True
         Me.ucrChkNameNewColumns.Checked = False
-        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(10, 197)
+        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(10, 210)
         Me.ucrChkNameNewColumns.Name = "ucrChkNameNewColumns"
         Me.ucrChkNameNewColumns.Size = New System.Drawing.Size(210, 23)
-        Me.ucrChkNameNewColumns.TabIndex = 3
+        Me.ucrChkNameNewColumns.TabIndex = 5
         '
         'ucrNewDataframe
         '
         Me.ucrNewDataframe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 250)
+        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 263)
         Me.ucrNewDataframe.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataframe.Name = "ucrNewDataframe"
         Me.ucrNewDataframe.Size = New System.Drawing.Size(360, 24)
-        Me.ucrNewDataframe.TabIndex = 4
+        Me.ucrNewDataframe.TabIndex = 8
         '
         'ucrReceiverColumsToTranspose
         '
@@ -128,37 +148,17 @@ Partial Class dlgTransposeColumns
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 276)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 5
-        '
-        'ucrChkDisplayVariableNames
-        '
-        Me.ucrChkDisplayVariableNames.AutoSize = True
-        Me.ucrChkDisplayVariableNames.Checked = False
-        Me.ucrChkDisplayVariableNames.Location = New System.Drawing.Point(10, 220)
-        Me.ucrChkDisplayVariableNames.Name = "ucrChkDisplayVariableNames"
-        Me.ucrChkDisplayVariableNames.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkDisplayVariableNames.TabIndex = 8
-        '
-        'ucrInputDisplayVariableNames
-        '
-        Me.ucrInputDisplayVariableNames.AddQuotesIfUnrecognised = True
-        Me.ucrInputDisplayVariableNames.AutoSize = True
-        Me.ucrInputDisplayVariableNames.IsMultiline = False
-        Me.ucrInputDisplayVariableNames.IsReadOnly = False
-        Me.ucrInputDisplayVariableNames.Location = New System.Drawing.Point(100, 219)
-        Me.ucrInputDisplayVariableNames.Name = "ucrInputDisplayVariableNames"
-        Me.ucrInputDisplayVariableNames.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputDisplayVariableNames.TabIndex = 9
+        Me.ucrBase.TabIndex = 9
         '
         'dlgTransposeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 331)
+        Me.ClientSize = New System.Drawing.Size(417, 343)
         Me.Controls.Add(Me.ucrInputDisplayVariableNames)
         Me.Controls.Add(Me.ucrChkDisplayVariableNames)
         Me.Controls.Add(Me.lblVariableNames)
