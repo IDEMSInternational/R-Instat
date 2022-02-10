@@ -39,7 +39,7 @@ Partial Class dlgFrequency
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
@@ -75,15 +75,15 @@ Partial Class dlgFrequency
         Me.lblFactors.Tag = "Factors:"
         Me.lblFactors.Text = "Factors:"
         '
-        'cmdOptions
+        'cmdFormatTable
         '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(323, 410)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(86, 23)
-        Me.cmdOptions.TabIndex = 10
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatTable.Location = New System.Drawing.Point(323, 410)
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.Size = New System.Drawing.Size(86, 23)
+        Me.cmdFormatTable.TabIndex = 10
+        Me.cmdFormatTable.Text = "Format Table..."
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -314,7 +314,7 @@ Partial Class dlgFrequency
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.ucrChkStoreResults)
-        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactors)
@@ -340,7 +340,7 @@ Partial Class dlgFrequency
     Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdFormatTable As Button
     Friend WithEvents UcrCheck1 As ucrCheck
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrNudSigFigs As ucrNud
