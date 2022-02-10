@@ -74,8 +74,8 @@ Public Class dlgName
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
