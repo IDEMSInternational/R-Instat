@@ -51,7 +51,7 @@ Public Class dlgCompareColumns
         ucrPnlOptions.AddRadioButton(rdoByRow)
         ucrPnlOptions.AddRadioButton(rdoByValue)
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkUnique, ucrChkSort, ucrChkFirstNotSecond}, {rdoByValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkSort, ucrChkFirstNotSecond}, {rdoByValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFirstNotSecond.SetLinkedDisplayControl(grpComparisions)
 
         ucrReceiverFirst.SetParameter(New RParameter("x", 0))
@@ -77,10 +77,6 @@ Public Class dlgCompareColumns
         ucrInputTolerance.AddQuotesIfUnrecognised = False
         ucrInputTolerance.SetLinkedDisplayControl(lblTolerance)
         ucrInputTolerance.bAllowNonConditionValues = True
-
-        ucrChkUnique.SetParameter(New RParameter("use_unique", 2), bNewChangeParameterValue:=True)
-        ucrChkUnique.SetText("Use unique values for comparison")
-        ucrChkUnique.SetRDefault("TRUE")
 
         ucrChkSort.SetParameter(New RParameter("sort_values", 3), bNewChangeParameterValue:=True)
         ucrChkSort.SetText("Sort values")
@@ -171,7 +167,6 @@ Public Class dlgCompareColumns
 
         ucrReceiverFirst.SetRCode(clsCompareColumnsFunction, bReset)
         ucrReceiverSecond.SetRCode(clsCompareColumnsFunction, bReset)
-        ucrChkUnique.SetRCode(clsCompareColumnsFunction, bReset)
         ucrChkSort.SetRCode(clsCompareColumnsFunction, bReset)
         ucrChkFirstNotSecond.SetRCode(clsCompareColumnsFunction, bReset)
         ucrChkSecondNotFirst.SetRCode(clsCompareColumnsFunction, bReset)
