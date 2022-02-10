@@ -394,11 +394,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
+        ActiveControl = Nothing 'this can be done in a general way
         dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareColumnNumericRegularSequence_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRegularSequence.Click
         dlgRegularSequence.bNumericIsDefault = True
+        ActiveControl = Nothing 'this can be done in a general way
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -588,6 +590,7 @@ Public Class frmMain
 
     Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
+            ActiveControl = Nothing 'this can be done in a general way
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub

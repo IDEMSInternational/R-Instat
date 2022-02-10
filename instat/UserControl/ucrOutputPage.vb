@@ -166,6 +166,7 @@ Public Class ucrOutputPage
         }
         pnlMain.Controls.Add(panel)
         pnlMain.Controls.SetChildIndex(panel, 0)
+        panel.Focus()
         AddCheckBoxToElementPanel(panel, outputElement)
         AddHandler panel.Resize, AddressOf Panel_Resize
         Return panel
