@@ -126,7 +126,7 @@ Public Class dlgPasteNewDataFrame
         'However this has been added to achieve reproducibility in future
         Try
             Dim clipBoardText As String = My.Computer.Clipboard.GetText
-            'I added this code 11/02/2022. But it has a bug
+            'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
             clipBoardText = clipBoardText.Replace("""", "\""")
             Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             If arrStrTemp.Length > 1000 Then
