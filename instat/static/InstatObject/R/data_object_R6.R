@@ -1931,11 +1931,21 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
                  "tidyselect::last_col" =  tidyselect::last_col,
+                 "tidyselect::where" = NULL,
                  NULL
                  )
-    if (op == "base::match") args$table <- all_column_names
-    else args$vars <- all_column_names
-    res[[i]] <- do.call(fn, args)
+    if (op == "base::match") {
+      args$table <- all_column_names
+      res[[i]] <- do.call(fn, args)
+      }else if (op == "tidyselect::where"){
+        selected_columns <- private$data |> 
+          dplyr::select(where(args$fn)) |> 
+          colnames()
+      res[[i]] <- which(all_column_names %in% selected_columns)
+      }else{
+        args$vars <- all_column_names
+        res[[i]] <- do.call(fn, args)
+        }
     if (neg) res[[i]] <- setdiff(1:length(all_column_names), res[[i]])
     i <- i + 1
   }

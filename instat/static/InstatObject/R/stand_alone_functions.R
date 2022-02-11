@@ -2518,3 +2518,8 @@ get_quarter_label <-   function(quarter, start_month){
   paste(mabb[start_pos:(start_pos+2)], collapse = "")})
   return(factor(x = qtr, levels = unique(qtr)))
 }
+
+
+is.labelled <- function(x){
+  return(isTRUE(sjlabelled::get_label(x) != ""))
+}
