@@ -217,7 +217,10 @@ Public Class dlgName
     End Function
 
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
-
+        Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=e.Range.Col).ToString()
+        Dim iRowIndex As Integer = e.Range.Row + 1
+        Dim iColIndex As Integer = e.Range.Col
+        GetVariables(strNewData, iRowIndex, iColIndex)
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
@@ -233,7 +236,10 @@ Public Class dlgName
             e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             Exit Sub
         End If
+        GetVariables(strNewData, iRowIndex, iColIndex)
+    End Sub
 
+    Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
         If iColIndex = 1 Then
             If strNewData <> "" Then
                 AddChangedNewNameRows(iRowIndex, strNewData)
