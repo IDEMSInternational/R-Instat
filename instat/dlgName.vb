@@ -34,6 +34,7 @@ Public Class dlgName
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
+    Private strPreviousCellText As String
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -71,8 +72,8 @@ Public Class dlgName
         ucrInputNewName.SetValidationTypeAsRVariable()
 
         ucrChkIncludeVariable.SetText("Include Variable Labels")
-        ucrChkIncludeVariable.SetParameter(New RParameter("new_labels_df", 5), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        'ucrChkIncludeVariable.SetValuesCheckedAndUnchecked(True, False)
+        ucrChkIncludeVariable.SetParameter(New RParameter("checked", 0))
+        ucrChkIncludeVariable.SetValuesCheckedAndUnchecked(True, False)
 
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
@@ -130,10 +131,13 @@ Public Class dlgName
         clsDefaultRFunction = New RFunction
         clsNewColNameDataframeFunction = New RFunction
         clsNewLabelDataframeFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
+
+        clsDummyFunction.AddParameter("checked", False, iPosition:=0)
 
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
@@ -149,7 +153,15 @@ Public Class dlgName
 
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectVariables.SetRCode(clsDefaultRFunction, bReset)
+        ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
+        ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
+        ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
+        ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
+        ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
+        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -204,17 +216,23 @@ Public Class dlgName
         Return strValue
     End Function
 
+    Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
+
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
+        strPreviousCellText = e.Cell.Data.ToString()
+    End Sub
+
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        Dim strNewData As String = e.NewData
+        Dim strNewData As String = e.NewData.ToString()
         Dim iRowIndex As Integer = e.Cell.Row + 1
         Dim iColIndex As Integer = e.Cell.Column
 
-        clsNewColNameDataframeFunction.RemoveParameterByName("cols")
-        clsNewColNameDataframeFunction.RemoveParameterByName("index")
-        clsNewLabelDataframeFunction.RemoveParameterByName("cols")
-        clsNewLabelDataframeFunction.RemoveParameterByName("index")
-        clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
-        clsDefaultRFunction.RemoveParameterByName("new_labels_df")
+        If strNewData = strPreviousCellText Then
+            e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+            Exit Sub
+        End If
 
         If iColIndex = 1 Then
             If strNewData <> "" Then
@@ -224,7 +242,8 @@ Public Class dlgName
                 clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
                 clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=5)
             End If
-        ElseIf iColIndex = 2 Then
+        End If
+        If iColIndex = 2 Then
             If strNewData <> "" Then
                 AddChangedNewLabelRows(iRowIndex, strNewData)
 
@@ -233,7 +252,6 @@ Public Class dlgName
                 clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=6)
             End If
         End If
-
     End Sub
 
     Private Sub UpdateGrid()
@@ -259,18 +277,18 @@ Public Class dlgName
                     grdCurrentWorkSheet.Item(row:=i, col:=1) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
                 Next
 
-                For i As Integer = 0 To GetListColsLabel().Count - 1
-                    For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
-                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
-                            grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
+                For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+                    For j As Integer = 0 To grdCurrentWorkSheet.ColumnCount - 1
+                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
+                            AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=j))
                         End If
                     Next
                 Next
 
-                For i As Integer = 0 To grdCurrentWorkSheet.Rows - 1
-                    For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
-                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
-                            AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=j))
+                For i As Integer = 0 To GetListColsLabel().Count - 1
+                    For j As Integer = 0 To grdCurrentWorkSheet.ColumnCount - 1
+                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
+                            grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
                         End If
                     Next
                 Next
