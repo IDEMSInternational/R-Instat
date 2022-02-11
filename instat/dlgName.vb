@@ -206,7 +206,7 @@ Public Class dlgName
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         Dim strNewData As String = e.NewData
-        Dim iRowIndex As Integer = e.Cell.Row
+        Dim iRowIndex As Integer = e.Cell.Row + 1
         Dim iColIndex As Integer = e.Cell.Column
 
         clsNewColNameDataframeFunction.RemoveParameterByName("cols")
@@ -218,7 +218,7 @@ Public Class dlgName
 
         If iColIndex = 1 Then
             If strNewData <> "" Then
-                AddChangedNewNameRows(e.Cell.Row + 1, e.NewData)
+                AddChangedNewNameRows(iRowIndex, strNewData)
 
                 clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
                 clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
@@ -226,7 +226,7 @@ Public Class dlgName
             End If
         ElseIf iColIndex = 2 Then
             If strNewData <> "" Then
-                AddChangedNewLabelRows(e.Cell.Row + 1, e.NewData)
+                AddChangedNewLabelRows(iRowIndex, strNewData)
 
                 clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
                 clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
@@ -243,21 +243,26 @@ Public Class dlgName
         dctRowsNewLabelChanged.Clear()
 
         grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
-        grdCurrentWorkSheet.ColumnCount = 2
+        grdCurrentWorkSheet.ColumnCount = 3
         grdCurrentWorkSheet.RowCount = ucrSelectVariables.lstAvailableVariable.Items.Count
 
         grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
         grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+        grdCurrentWorkSheet.ColumnHeaders(2).Text = "New Label"
+        grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
 
         If rdoMultiple.Checked Then
             If Not ucrSelectVariables.IsEmpty Then
                 For i As Integer = 0 To ucrSelectVariables.lstAvailableVariable.Items.Count - 1
-                    For j = 0 To grdCurrentWorkSheet.Columns - 1
-                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
-                            grdCurrentWorkSheet.Item(row:=i, col:=j) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
-                            grdCurrentWorkSheet.GetCell(row:=i, col:=j).IsReadOnly = True
-                        ElseIf grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Name" Then
-                            grdCurrentWorkSheet.Item(row:=i, col:=j) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                    grdCurrentWorkSheet.Item(row:=i, col:=0) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                    grdCurrentWorkSheet.GetCell(row:=i, col:=0).IsReadOnly = True
+                    grdCurrentWorkSheet.Item(row:=i, col:=1) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                Next
+
+                For i As Integer = 0 To GetListColsLabel().Count - 1
+                    For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
+                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
+                            grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
                         End If
                     Next
                 Next
@@ -272,19 +277,6 @@ Public Class dlgName
             End If
         End If
 
-        If bIncludeCopyOfLevels Then
-            grdCurrentWorkSheet.AppendColumns(1)
-            grdCurrentWorkSheet.ColumnHeaders(grdCurrentWorkSheet.ColumnCount - 1).Text = "New Label"
-            For i As Integer = 0 To GetListColsLabel().Count - 1
-                For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
-                    If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
-                        grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
-                        grdCurrentWorkSheet.SetColumnsWidth(3, j, 250)
-                    End If
-                Next
-            Next
-        End If
-
         grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
         grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -293,6 +285,8 @@ Public Class dlgName
 
         grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
         grdRenameColumns.SheetTabNewButtonVisible = False
+
+        MakeLabelColumnVisible()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -390,13 +384,16 @@ Public Class dlgName
         ElseIf rdoRenameWith.Checked Then
             ucrReceiverColumns.SetMeAsReceiver()
         Else
+            UpdateGrid()
         End If
-        UpdateGrid()
+    End Sub
+
+    Private Sub MakeLabelColumnVisible()
+        grdCurrentWorkSheet.ColumnHeaders(2).IsVisible = If(ucrChkIncludeVariable.Checked, True, False)
     End Sub
 
     Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
-        bIncludeCopyOfLevels = If(ucrChkIncludeVariable.Checked, True, False)
-        UpdateGrid()
+        MakeLabelColumnVisible()
     End Sub
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
