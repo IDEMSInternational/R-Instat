@@ -46,17 +46,17 @@ Public Class dlgSelectColumns
         ucrReceiverMultipleVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverMultipleVariables.SetParameterIsString()
 
-        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column"})
+        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Labelled"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrReceiverMultipleVariables, {"Columns"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrInputText, {"Numeric range", "Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)' TODO: uncomment once selection using where is added
+        ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleVariables.SetLinkedDisplayControl(lblSeclectedColumns)
         ucrInputText.SetLinkedDisplayControl(lblString)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
@@ -196,16 +196,20 @@ Public Class dlgSelectColumns
                 clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
                 clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
                 strValue = clsFromToOperation.ToScript
-                'TODO: this will be needed when selection depending of variable type e.g factors,characters etc is added!
-                'Case "Where"
-                'clsCurrentConditionList.AddParameter("operation", Chr(34) & "where" & Chr(34), iPosition:=0)
-                'If ucrInputColumnType.GetText = "Numeric" Then
-                'clsParametersList.AddParameter("fn", "is.numeric", iPosition:=0)
-                'ElseIf ucrInputColumnType.GetText = "Factor" Then
-                'clsParametersList.AddParameter("fn", "is.factor", iPosition:=0)
-                'ElseIf ucrInputColumnType.GetText = "Character" Then
-                'clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
-                'End If
+            Case "Where"
+                strValue = ucrInputColumnType.GetText
+                clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::where" & Chr(34), iPosition:=0)
+                If strValue = "Numeric" Then
+                    clsParametersList.AddParameter("fn", "is.numeric", iPosition:=0)
+                ElseIf strValue = "Factor" Then
+                    clsParametersList.AddParameter("fn", "is.factor", iPosition:=0)
+                ElseIf strValue = "Character" Then
+                    clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
+                ElseIf strValue = "Logical" Then
+                    clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
+                ElseIf strValue = "Labelled" Then
+                    clsParametersList.AddParameter("fn", "is.labelled", iPosition:=0)
+                End If
             Case "Last column"
                 strValue = "Last column"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::last_col" & Chr(34), iPosition:=0)
@@ -245,12 +249,12 @@ Public Class dlgSelectColumns
                     bEnableOrDisable = False
                 End If
             Case "Where"
-                'add where instance when enabled
+                bEnableOrDisable = Not ucrInputColumnType.IsEmpty
         End Select
         cmdAddCondition.Enabled = bEnableOrDisable
     End Sub
 
-    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrInputText.ControlContentsChanged
+    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrInputText.ControlContentsChanged, ucrInputColumnType.ControlContentsChanged
         EnableDisableAddConditionButton()
     End Sub
 
@@ -268,13 +272,11 @@ Public Class dlgSelectColumns
         If Not cmdAddCondition.Enabled Then
             Exit Sub
         End If
-
         Dim result As MsgBoxResult = MessageBox.Show(
             text:="Are you sure you want to return to the main dialog?" & Environment.NewLine &
                   "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine &
                   "Click the ""Add Condition"" button if you want to add it.",
             caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
         e.Cancel = result = MsgBoxResult.No
-
     End Sub
 End Class
