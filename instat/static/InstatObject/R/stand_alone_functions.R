@@ -2530,3 +2530,7 @@ is.emptyvariable <- function(x){
 is.NAvariable <- function(x){
   return(isTRUE(length(x) == sum(is.na(x))))
 }
+
+is.levelscount <- function(x, n){
+ return(isTRUE(sum(levels(x)) == n))
+}
