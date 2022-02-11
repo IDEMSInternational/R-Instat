@@ -32,7 +32,6 @@ pkgs <-
     "rio",
     "readxl",
     "lme4",
-    "dummies",
     "ggthemes",
     "lazyeval",
     "stringr",
