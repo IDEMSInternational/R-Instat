@@ -49,7 +49,7 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Labelled"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Labelled", "Empty columns", "NA columns"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
@@ -209,6 +209,10 @@ Public Class dlgSelectColumns
                     clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
                 ElseIf strValue = "Labelled" Then
                     clsParametersList.AddParameter("fn", "is.labelled", iPosition:=0)
+                ElseIf strValue = "Empty columns" Then
+                    clsParametersList.AddParameter("fn", "is.emptyvariable", iPosition:=0)
+                ElseIf strValue = "NA columns" Then
+                    clsParametersList.AddParameter("fn", "is.NAvariable", iPosition:=0)
                 End If
             Case "Last column"
                 strValue = "Last column"

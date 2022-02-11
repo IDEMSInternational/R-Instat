@@ -2519,7 +2519,14 @@ get_quarter_label <-   function(quarter, start_month){
   return(factor(x = qtr, levels = unique(qtr)))
 }
 
-
 is.labelled <- function(x){
   return(isTRUE(sjlabelled::get_label(x) != ""))
+}
+
+is.emptyvariable <- function(x){
+ return(isTRUE(length(x) == sum(x == "")))
+}
+
+is.NAvariable <- function(x){
+  return(isTRUE(length(x) == sum(is.na(x))))
 }
