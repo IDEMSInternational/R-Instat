@@ -191,14 +191,14 @@ Public Class dlgName
 
     Private Function GetValuesAsVector(dctValues As Dictionary(Of Integer, String)) As String
         Dim strValue As String = ""
+        Dim i As Integer
         strValue = strValue & "c("
-        For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount
-            If dctValues.ContainsKey(iRow) Then
-                If iRow > 1 Then
-                    strValue = strValue & ","
-                End If
-                strValue = strValue & Chr(34) & dctValues(iRow) & Chr(34)
+        For Each iRow As Integer In dctValues.Keys
+            If i > 0 Then
+                strValue = strValue & ","
             End If
+            strValue = strValue & Chr(34) & dctValues(iRow) & Chr(34)
+            i = i + 1
         Next
         strValue = strValue & ")"
         Return strValue
