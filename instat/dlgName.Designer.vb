@@ -98,7 +98,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(213, 12)
+        Me.rdoMultiple.Location = New System.Drawing.Point(220, 12)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -117,7 +117,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(103, 12)
+        Me.rdoSingle.Location = New System.Drawing.Point(110, 12)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -207,7 +207,7 @@ Partial Class dlgName
         Me.rdoRenameWith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRenameWith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRenameWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRenameWith.Location = New System.Drawing.Point(323, 12)
+        Me.rdoRenameWith.Location = New System.Drawing.Point(330, 12)
         Me.rdoRenameWith.Name = "rdoRenameWith"
         Me.rdoRenameWith.Size = New System.Drawing.Size(110, 28)
         Me.rdoRenameWith.TabIndex = 13
@@ -231,7 +231,7 @@ Partial Class dlgName
         Me.grdRenameColumns.SheetTabVisible = True
         Me.grdRenameColumns.SheetTabWidth = 154
         Me.grdRenameColumns.ShowScrollEndSpacing = True
-        Me.grdRenameColumns.Size = New System.Drawing.Size(283, 210)
+        Me.grdRenameColumns.Size = New System.Drawing.Size(304, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
         '
@@ -316,7 +316,7 @@ Partial Class dlgName
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(92, 4)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(99, 4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
@@ -326,7 +326,7 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(524, 346)
+        Me.ClientSize = New System.Drawing.Size(545, 346)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)

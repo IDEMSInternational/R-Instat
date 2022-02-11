@@ -26,10 +26,13 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDefaultRFunction As New RFunction
-    Private clsRenameColumns As New RFunction
+    Private clsNewColNameDataframeFunction As New RFunction
+    Private clsNewLabelDataframeFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private bIncludeCopyOfLevels As Boolean
-    Private dctRowsChanged As New Dictionary(Of Integer, String)
+    Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
+    Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -68,6 +71,8 @@ Public Class dlgName
         ucrInputNewName.SetValidationTypeAsRVariable()
 
         ucrChkIncludeVariable.SetText("Include Variable Labels")
+        ucrChkIncludeVariable.SetParameter(New RParameter("new_labels_df", 5), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'ucrChkIncludeVariable.SetValuesCheckedAndUnchecked(True, False)
 
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
@@ -123,8 +128,16 @@ Public Class dlgName
 
     Public Sub SetDefaults()
         clsDefaultRFunction = New RFunction
+        clsNewColNameDataframeFunction = New RFunction
+        clsNewLabelDataframeFunction = New RFunction
 
         ucrSelectVariables.Reset()
+        dctRowsNewNameChanged.Clear()
+        dctRowsNewLabelChanged.Clear()
+
+        clsNewColNameDataframeFunction.SetRCommand("data.frame")
+
+        clsNewLabelDataframeFunction.SetRCommand("data.frame")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
@@ -132,6 +145,11 @@ Public Class dlgName
         clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+    End Sub
+
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -142,19 +160,26 @@ Public Class dlgName
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoRenameWith.Checked Then
-            If Not ucrReceiverColumns.IsEmpty() Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(grdCurrentWorkSheet IsNot Nothing)
         End If
     End Sub
 
-    Private Sub AddChangedRow(iRow As Integer, strNewData As String)
-        If Not dctRowsChanged.ContainsKey(iRow) Then
-            dctRowsChanged.Add(iRow, strNewData)
+    Private Sub AddChangedNewNameRows(iRow As Integer, strNewData As String)
+        If Not dctRowsNewNameChanged.ContainsKey(iRow) Then
+            dctRowsNewNameChanged.Add(iRow, strNewData)
+        Else
+            dctRowsNewNameChanged(iRow) = strNewData
+        End If
+    End Sub
+
+
+    Private Sub AddChangedNewLabelRows(iRow As Integer, strNewData As String)
+        If Not dctRowsNewLabelChanged.ContainsKey(iRow) Then
+            dctRowsNewLabelChanged.Add(iRow, strNewData)
+        Else
+            dctRowsNewLabelChanged(iRow) = strNewData
         End If
     End Sub
 
@@ -164,23 +189,58 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        dctRowsChanged.Clear()
-        AddChangedRow(e.Cell.Row, e.NewData)
-
-        If grdCurrentWorkSheet IsNot Nothing Then
-            For i As Integer = 0 To dctNameRowsValues.Keys.Count - 1
-                If dctRowsChanged.ContainsKey(i) Then
-                    clsRenameColumns.AddParameter(dctRowsChanged(i), dctNameRowsValues(i), iPosition:=i + 1)
+    Private Function GetValuesAsVector(dctValues As Dictionary(Of Integer, String)) As String
+        Dim strValue As String = ""
+        strValue = strValue & "c("
+        For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount
+            If dctValues.ContainsKey(iRow) Then
+                If iRow > 1 Then
+                    strValue = strValue & ","
                 End If
-            Next
+                strValue = strValue & Chr(34) & dctValues(iRow) & Chr(34)
+            End If
+        Next
+        strValue = strValue & ")"
+        Return strValue
+    End Function
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        Dim strNewData As String = e.NewData
+        Dim iRowIndex As Integer = e.Cell.Row
+        Dim iColIndex As Integer = e.Cell.Column
+
+        clsNewColNameDataframeFunction.RemoveParameterByName("cols")
+        clsNewColNameDataframeFunction.RemoveParameterByName("index")
+        clsNewLabelDataframeFunction.RemoveParameterByName("cols")
+        clsNewLabelDataframeFunction.RemoveParameterByName("index")
+        clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
+        clsDefaultRFunction.RemoveParameterByName("new_labels_df")
+
+        If iColIndex = 1 Then
+            If strNewData <> "" Then
+                AddChangedNewNameRows(e.Cell.Row + 1, e.NewData)
+
+                clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
+                clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
+                clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=5)
+            End If
+        ElseIf iColIndex = 2 Then
+            If strNewData <> "" Then
+                AddChangedNewLabelRows(e.Cell.Row + 1, e.NewData)
+
+                clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+                clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+                clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=6)
+            End If
         End If
+
     End Sub
 
     Private Sub UpdateGrid()
         grdRenameColumns.Worksheets.Clear()
-        dctRowsChanged.Clear()
+        dctRowsNewNameChanged.Clear()
         dctNameRowsValues.Clear()
+        dctRowsNewLabelChanged.Clear()
 
         grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
         grdCurrentWorkSheet.ColumnCount = 2
@@ -219,6 +279,7 @@ Public Class dlgName
                 For j As Integer = 0 To grdCurrentWorkSheet.Columns - 1
                     If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
                         grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
+                        grdCurrentWorkSheet.SetColumnsWidth(3, j, 250)
                     End If
                 Next
             Next
@@ -232,10 +293,6 @@ Public Class dlgName
 
         grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
         grdRenameColumns.SheetTabNewButtonVisible = False
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -354,17 +411,5 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore)
-
     End Sub
 End Class
