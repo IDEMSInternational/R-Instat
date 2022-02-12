@@ -220,6 +220,7 @@ Public Class dlgName
         Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=e.Range.Col).ToString()
         Dim iRowIndex As Integer = e.Range.Row + 1
         Dim iColIndex As Integer = e.Range.Col
+
         GetVariables(strNewData, iRowIndex, iColIndex)
     End Sub
 
@@ -240,6 +241,8 @@ Public Class dlgName
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+        clsDefaultRFunction.RemoveParameterByPosition(5)
+        clsDefaultRFunction.RemoveParameterByPosition(6)
         If iColIndex = 1 Then
             If strNewData <> "" Then
                 AddChangedNewNameRows(iRowIndex, strNewData)
@@ -247,6 +250,8 @@ Public Class dlgName
                 clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
                 clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
                 clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=5)
+            Else
+
             End If
         End If
         If iColIndex = 2 Then
@@ -284,11 +289,9 @@ Public Class dlgName
                 Next
 
                 For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
-                    For j As Integer = 0 To grdCurrentWorkSheet.ColumnCount - 1
-                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "Name" Then
-                            AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=j))
-                        End If
-                    Next
+                    If grdCurrentWorkSheet.ColumnHeaders(1).Text = "Name" Then
+                        AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=1))
+                    End If
                 Next
 
                 For i As Integer = 0 To GetListColsLabel().Count - 1
