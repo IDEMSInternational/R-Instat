@@ -21,8 +21,7 @@ Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
-    Private clsDefaultStartDate, clsDefaultEndDate As New RFunction
-    Private clsByDateOperator As New ROperator
+    Private clsByOperator As New ROperator
     Private strDefaultSequenceOption As String
     Private bDefaultOptionChanged As Boolean
     'used to determine if the preview script has changed and whether to reresh preview or not
@@ -96,11 +95,12 @@ Public Class dlgRegularSequence
         ucrDateTimePickerTo.SetParameter(New RParameter("to", 1))
         ucrDateTimePickerTo.SetParameterIsRDate()
 
-        Dim dctDatesBy As New Dictionary(Of String, String)
-        dctDatesBy.Add("Days", "days")
-        dctDatesBy.Add("Weeks", "weeks")
-        dctDatesBy.Add("Months", "months")
-        dctDatesBy.Add("Years", "years")
+        Dim dctDatesBy As New Dictionary(Of String, String) From {
+            {"Days", "days"},
+            {"Weeks", "weeks"},
+            {"Months", "months"},
+            {"Years", "years"}
+        }
         ucrInputComboDatesBy.SetParameter(New RParameter("period", 1, bNewIncludeArgumentName:=False))
         ucrInputComboDatesBy.SetItems(dctDatesBy)
         ucrInputComboDatesBy.SetDropDownStyleAsNonEditable()
@@ -121,7 +121,6 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
 
-        'links 'rep' function to always have correct sequence function as its 'x' argument
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoNumeric, "x", "seq")
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoDates, "x", "seq.Date")
 
@@ -146,11 +145,11 @@ Public Class dlgRegularSequence
         clsRepFunction = New RFunction
         clsSeqFunction = New RFunction
         clsSeqDateFunction = New RFunction
-        clsDefaultStartDate = New RFunction
-        clsDefaultEndDate = New RFunction
-        clsByDateOperator = New ROperator
+        clsByOperator = New ROperator
 
         ucrSelectDataFrameRegularSequence.Reset()
+        ucrDateTimePickerFrom.DateValue = DateAndTime.Now()
+        ucrDateTimePickerTo.DateValue = DateAndTime.Now()
         ucrNewColumnName.Reset()
 
         clsSeqFunction.SetRCommand("seq")
@@ -158,22 +157,16 @@ Public Class dlgRegularSequence
         clsSeqFunction.AddParameter("to", ucrDataFrameLength.GetDataFrameLength, iPosition:=1)
         clsSeqFunction.AddParameter("by", 1, iPosition:=2)
 
-        clsDefaultStartDate.SetRCommand("as.Date")
-        clsDefaultStartDate.AddParameter("x", Chr(34) & "2018/1/1" & Chr(34))
-
-        clsDefaultEndDate.SetRCommand("as.Date")
-        clsDefaultEndDate.AddParameter("x", Chr(34) & "2018/12/31" & Chr(34))
-
-        clsByDateOperator.SetOperation(" ")
-        clsByDateOperator.AddParameter("number", 1, iPosition:=0)
-        clsByDateOperator.AddParameter("period", "days", iPosition:=1)
-        clsByDateOperator.bToScriptAsRString = True
-        clsByDateOperator.bSpaceAroundOperation = False
+        clsByOperator.SetOperation(" ")
+        clsByOperator.AddParameter("number", 1, iPosition:=0)
+        clsByOperator.AddParameter("period", "days", iPosition:=1)
+        clsByOperator.bToScriptAsRString = True
+        clsByOperator.bSpaceAroundOperation = False
 
         clsSeqDateFunction.SetRCommand("seq.Date")
-        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=0)
-        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=1)
-        clsSeqDateFunction.AddParameter("by", clsROperatorParameter:=clsByDateOperator, iPosition:=2)
+        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=ucrDateTimePickerFrom.ValueAsRDate, iPosition:=0)
+        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=ucrDateTimePickerTo.ValueAsRDate, iPosition:=1)
+        clsSeqDateFunction.AddParameter("by", clsROperatorParameter:=clsByOperator, iPosition:=2)
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
@@ -187,7 +180,7 @@ Public Class dlgRegularSequence
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         'command 'seq.Date' and 'seq' controls
-        ucrInputInStepsOf.AddAdditionalCodeParameterPair(clsByDateOperator, New RParameter("number", 0), iAdditionalPairNo:=1)
+        ucrInputInStepsOf.AddAdditionalCodeParameterPair(clsByOperator, New RParameter("number", 0), iAdditionalPairNo:=1)
         ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
 
         'command 'seq' controls
@@ -197,7 +190,7 @@ Public Class dlgRegularSequence
         'command 'seq.Date'  controls
         ucrDateTimePickerFrom.SetRCode(clsSeqDateFunction, bReset)
         ucrDateTimePickerTo.SetRCode(clsSeqDateFunction, bReset)
-        ucrInputComboDatesBy.SetRCode(clsByDateOperator, bReset)
+        ucrInputComboDatesBy.SetRCode(clsByOperator, bReset)
 
         'base command 'rep' controls
         ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
@@ -283,10 +276,10 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub ucrPnlSequenceType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
-        If rdoDates.Checked Then
-            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqDateFunction, iPosition:=0)
-        ElseIf rdoNumeric.Checked Then
+        If rdoNumeric.Checked Then
             clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
+        ElseIf rdoDates.Checked Then
+            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqDateFunction, iPosition:=0)
         End If
     End Sub
 
