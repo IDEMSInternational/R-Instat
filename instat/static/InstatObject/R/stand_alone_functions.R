@@ -2519,7 +2519,7 @@ get_quarter_label <-   function(quarter, start_month){
   return(factor(x = qtr, levels = unique(qtr)))
 }
 
-is.labelled <- function(x){
+is.containlabel <- function(x){
   return(isTRUE(sjlabelled::get_label(x) != ""))
 }
 

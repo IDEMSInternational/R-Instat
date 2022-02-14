@@ -31,6 +31,7 @@ Public Class dlgSelectColumns
             SetDefaults()
         End If
         SetRcodeForControls(bReset)
+        EnableDisableAddConditionButton()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -49,7 +50,7 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Labelled", "Empty columns", "NA columns"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Empty columns", "NA columns"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
@@ -82,6 +83,8 @@ Public Class dlgSelectColumns
 
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudTo.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkNot.SetText("Add not")
     End Sub
 
     Private Sub SetDefaults()
@@ -89,7 +92,6 @@ Public Class dlgSelectColumns
         clsConditionsList = New RFunction
         clsFromToOperation = New ROperator
 
-        ucrSelectorForColumnSelection.Reset()
         ucrInputSelectOperation.SetText("Columns")
         ucrInputColumnType.SetText("Numeric")
 
@@ -106,14 +108,14 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset)
-        ucrNudFrom.SetRCode(clsFromToOperation, bReset)
-        ucrNudTo.SetRCode(clsFromToOperation, bReset)
+        ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset, bCloneIfNeeded:=True)
+        ucrNudFrom.SetRCode(clsFromToOperation, bReset, bCloneIfNeeded:=True)
+        ucrNudTo.SetRCode(clsFromToOperation, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "", Optional bEnableDataframe As Boolean = False)
         If strDefaultDataframe <> "" Then
-            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=False)
+            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=bEnableDataframe)
             ucrSelectorForColumnSelection.ucrAvailableDataFrames.Enabled = False 'Note: This is potentially a duplication because for some reason setting  bEnableDataframe:=False in line 117 changes internally
         End If
     End Sub
@@ -208,7 +210,7 @@ Public Class dlgSelectColumns
                 ElseIf strValue = "Logical" Then
                     clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
                 ElseIf strValue = "Labelled" Then
-                    clsParametersList.AddParameter("fn", "is.labelled", iPosition:=0)
+                    clsParametersList.AddParameter("fn", "is.containlabel", iPosition:=0)
                 ElseIf strValue = "Empty columns" Then
                     clsParametersList.AddParameter("fn", "is.emptyvariable", iPosition:=0)
                 ElseIf strValue = "NA columns" Then
@@ -219,7 +221,11 @@ Public Class dlgSelectColumns
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::last_col" & Chr(34), iPosition:=0)
         End Select
         clsCurrentConditionList.AddParameter("parameters", clsRFunctionParameter:=clsParametersList, iPosition:=1)
-
+        If ucrChkNot.Checked Then
+            clsCurrentConditionList.AddParameter("negation", "TRUE", iPosition:=2)
+        Else
+            clsCurrentConditionList.RemoveParameterByName("negation")
+        End If
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrInputSelectOperation.GetText, strValue})
         lstColumnSelections.Items.Add(lviCondition)
@@ -267,6 +273,7 @@ Public Class dlgSelectColumns
         If lstColumnSelections.Items.Count > 0 Then
             frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
             dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
+            sdgDataOptions.ucrReceiverSelect.Add(ucrInputSelectName.GetText)
             lstColumnSelections.Items.Clear()
             clsConditionsList.ClearParameters()
         End If
