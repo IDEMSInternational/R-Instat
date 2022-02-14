@@ -161,7 +161,6 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrDataFrameLengthForDeleteRows.Name = "ucrDataFrameLengthForDeleteRows"
         Me.ucrDataFrameLengthForDeleteRows.Size = New System.Drawing.Size(62, 24)
         Me.ucrDataFrameLengthForDeleteRows.TabIndex = 7
-        Me.ucrDataFrameLengthForDeleteRows.ucrDataFrameSelector = Nothing
         '
         'ucrNudFrom
         '

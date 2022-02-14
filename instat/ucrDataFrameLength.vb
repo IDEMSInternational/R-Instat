@@ -15,24 +15,34 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrDataFrameLength
-    Public WithEvents ucrDataFrameSelector As ucrDataFrame
 
-    Public Sub SetDataFrameSelector(clsSelector As ucrDataFrame)
-        ucrDataFrameSelector = clsSelector
-        SetLength()
+    Public Overrides Sub SetDataFrameSelector(clsSelector As ucrDataFrame)
+        MyBase.SetDataFrameSelector(clsSelector)
+        SetDataFrameLength()
     End Sub
 
-    Public Sub SetLength()
+    ''' <summary>
+    ''' sets the textbox to show the length of the data frame set
+    ''' </summary>
+    Private Sub SetDataFrameLength()
         If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
-            txtLength.Text = frmMain.clsRLink.GetDataFrameLength(ucrDataFrameSelector.cboAvailableDataFrames.Text)
+            txtInput.Text = frmMain.clsRLink.GetDataFrameLength(ucrDataFrameSelector.cboAvailableDataFrames.Text)
         End If
     End Sub
 
-    Private Sub clsDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
-        SetLength()
+    ''' <summary>
+    ''' Gets the length(no. of rows) of the data frame, if data frame is not set, returns 0
+    ''' </summary>
+    ''' <returns>length of the set data frame</returns>
+    Public Function GetDataFrameLength() As Integer
+        Dim iLength As Integer
+        Integer.TryParse(txtInput.Text, iLength)
+        Return iLength
+    End Function
+
+
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+        SetDataFrameLength()
     End Sub
 
-    Private Sub ucrDataFrameLength_Load(sender As Object, e As EventArgs) Handles Me.Load
-        SetLength()
-    End Sub
 End Class

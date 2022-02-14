@@ -45,7 +45,7 @@ Partial Class dlgRegularSequence
         Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
-        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
+        Me.ucrDataFrameLength = New instat.ucrDataFrameLength()
         Me.lblLength = New System.Windows.Forms.Label()
         Me.lblTimes = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
@@ -55,7 +55,6 @@ Partial Class dlgRegularSequence
         Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
         Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
         Me.lblPreview = New System.Windows.Forms.Label()
-        Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.rdoDates = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
@@ -63,6 +62,7 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.txtPreview = New System.Windows.Forms.TextBox()
         Me.grpSequenceDefinition.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,7 +74,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputFrom)
-        Me.grpSequenceDefinition.Controls.Add(Me.ucrDataFrameLengthForRegularSequence)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDataFrameLength)
         Me.grpSequenceDefinition.Controls.Add(Me.lblLength)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
@@ -159,14 +159,16 @@ Partial Class dlgRegularSequence
         Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
         Me.ucrInputFrom.TabIndex = 1
         '
-        'ucrDataFrameLengthForRegularSequence
+        'ucrDataFrameLength
         '
-        Me.ucrDataFrameLengthForRegularSequence.AutoSize = True
-        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(111, 128)
-        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
-        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(54, 23)
-        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 12
-        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
+        Me.ucrDataFrameLength.AddQuotesIfUnrecognised = True
+        Me.ucrDataFrameLength.AutoSize = True
+        Me.ucrDataFrameLength.IsMultiline = False
+        Me.ucrDataFrameLength.IsReadOnly = True
+        Me.ucrDataFrameLength.Location = New System.Drawing.Point(111, 128)
+        Me.ucrDataFrameLength.Name = "ucrDataFrameLength"
+        Me.ucrDataFrameLength.Size = New System.Drawing.Size(54, 23)
+        Me.ucrDataFrameLength.TabIndex = 12
         '
         'lblLength
         '
@@ -271,15 +273,6 @@ Partial Class dlgRegularSequence
         Me.lblPreview.Tag = "Preview"
         Me.lblPreview.Text = "Sequence Preview:"
         '
-        'txtGetPreview
-        '
-        Me.txtGetPreview.Location = New System.Drawing.Point(256, 75)
-        Me.txtGetPreview.Name = "txtGetPreview"
-        Me.txtGetPreview.ReadOnly = True
-        Me.txtGetPreview.Size = New System.Drawing.Size(185, 140)
-        Me.txtGetPreview.TabIndex = 6
-        Me.txtGetPreview.Text = ""
-        '
         'lblMessage
         '
         Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -360,18 +353,28 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'txtPreview
+        '
+        Me.txtPreview.Location = New System.Drawing.Point(255, 75)
+        Me.txtPreview.Multiline = True
+        Me.txtPreview.Name = "txtPreview"
+        Me.txtPreview.ReadOnly = True
+        Me.txtPreview.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtPreview.Size = New System.Drawing.Size(185, 140)
+        Me.txtPreview.TabIndex = 10
+        '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 387)
+        Me.Controls.Add(Me.txtPreview)
         Me.Controls.Add(Me.rdoNumeric)
         Me.Controls.Add(Me.rdoDates)
         Me.Controls.Add(Me.ucrPnlSequenceType)
         Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.ucrNewColumnName)
-        Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.ucrSelectDataFrameRegularSequence)
@@ -400,8 +403,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblLength As Label
     Friend WithEvents lblTimes As Label
     Friend WithEvents lblRepeatValues As Label
-    Friend WithEvents txtGetPreview As RichTextBox
-    Friend WithEvents ucrDataFrameLengthForRegularSequence As ucrDataFrameLength
+    Friend WithEvents ucrDataFrameLength As ucrDataFrameLength
     Friend WithEvents ucrNewColumnName As ucrSave
     Friend WithEvents ucrInputInStepsOf As ucrInputTextBox
     Friend WithEvents ucrInputTo As ucrInputTextBox
@@ -415,4 +417,5 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrDateTimePickerTo As ucrDateTimePicker
     Friend WithEvents ucrDateTimePickerFrom As ucrDateTimePicker
     Friend WithEvents ucrInputComboDatesBy As ucrInputComboBox
+    Friend WithEvents txtPreview As TextBox
 End Class
