@@ -22,8 +22,8 @@ Public Class dlgRegularSequence
     Private bReset As Boolean = True
     Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
     Private clsByOperator As New ROperator
-    Private strDefaultSequenceOption As String
-    Private bDefaultOptionChanged As Boolean
+    Private strDefaultSequenceOption As String = ""
+    Private bDefaultOptionChanged As Boolean = False
     'used to determine if the preview script has changed and whether to reresh preview or not
     Private strPreviewScript As String = ""
 
