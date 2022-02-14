@@ -300,11 +300,7 @@ Public Class dlgName
                 Next
 
                 For i As Integer = 0 To GetListColsLabel().Count - 1
-                    For j As Integer = 0 To grdCurrentWorkSheet.ColumnCount - 1
-                        If grdCurrentWorkSheet.ColumnHeaders(j).Text = "New Label" Then
-                            grdCurrentWorkSheet.Item(row:=i, col:=j) = GetListColsLabel().Item(i)
-                        End If
-                    Next
+                    grdCurrentWorkSheet.Item(row:=i, col:=2) = GetListColsLabel().Item(i)
                 Next
             End If
         End If
