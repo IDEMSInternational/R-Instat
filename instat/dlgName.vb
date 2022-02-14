@@ -157,6 +157,7 @@ Public Class dlgName
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
+        ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
@@ -241,27 +242,33 @@ Public Class dlgName
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
-        clsDefaultRFunction.RemoveParameterByPosition(5)
-        clsDefaultRFunction.RemoveParameterByPosition(6)
-        If iColIndex = 1 Then
-            If strNewData <> "" Then
-                AddChangedNewNameRows(iRowIndex, strNewData)
+        If rdoMultiple.Checked Then
+            If iColIndex = 1 Then
+                If strNewData <> "" Then
+                    AddChangedNewNameRows(iRowIndex, strNewData)
 
-                clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
-                clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
-                clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=5)
-            Else
+                    clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
+                    clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
+                    clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=8)
+                Else
 
+                End If
+            ElseIf iColIndex = 2 Then
+                If strNewData <> "" Then
+                    AddChangedNewLabelRows(iRowIndex, strNewData)
+
+                    clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+                    clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+                    clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+                End If
             End If
         End If
-        If iColIndex = 2 Then
-            If strNewData <> "" Then
-                AddChangedNewLabelRows(iRowIndex, strNewData)
+    End Sub
 
-                clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
-                clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
-                clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=6)
-            End If
+    Private Sub RemoveDataframeParameters()
+        If Not rdoMultiple.Checked Then
+            clsDefaultRFunction.RemoveParameterByPosition(8)
+            clsDefaultRFunction.RemoveParameterByPosition(9)
         End If
     End Sub
 
@@ -288,10 +295,8 @@ Public Class dlgName
                     grdCurrentWorkSheet.Item(row:=i, col:=1) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
                 Next
 
-                For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
-                    If grdCurrentWorkSheet.ColumnHeaders(1).Text = "Name" Then
-                        AddRowNameValue(i, grdCurrentWorkSheet.Item(row:=i, col:=1))
-                    End If
+                For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+                    AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
                 Next
 
                 For i As Integer = 0 To GetListColsLabel().Count - 1
@@ -410,9 +415,10 @@ Public Class dlgName
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
             ucrReceiverColumns.SetMeAsReceiver()
-        Else
-            UpdateGrid()
         End If
+
+        UpdateGrid()
+        RemoveDataframeParameters()
     End Sub
 
     Private Sub MakeLabelColumnVisible()
