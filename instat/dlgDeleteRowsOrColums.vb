@@ -21,7 +21,6 @@ Public Class dlgDeleteRowsOrColums
     Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
     Private clsRemoveEmptyColumns, clsConcFunction As New RFunction
-    Private clsColsPipeOperator As New ROperator
     Private clsDummyFunction As New RFunction
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -40,6 +39,8 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 165
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrPnlColumnsOrRows.AddRadioButton(rdoColumns)
         ucrPnlColumnsOrRows.AddRadioButton(rdoRows)
@@ -52,15 +53,10 @@ Public Class dlgDeleteRowsOrColums
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls({ucrChkEmptyRows, ucrChkEmptyColumns, ucrNewDataFrame}, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls({ucrChkEmptyRows, ucrChkEmptyColumns}, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForDeleteColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForDeleteColumns.SetParameterIsString()
-
-        ucrNewDataFrame.SetIsTextBox()
-        ucrNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrNewDataFrame.SetDataFrameSelector(ucrSelectorForDeleteColumns.ucrAvailableDataFrames)
-        ucrNewDataFrame.SetLabelText("New Data Frame Name:")
 
         ucrReceiverForColumnsToDelete.SetParameter(New RParameter("cols", 1))
         ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
@@ -75,11 +71,11 @@ Public Class dlgDeleteRowsOrColums
         ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         ucrChkEmptyColumns.SetText("Columns")
-        ucrChkEmptyColumns.AddParameterPresentCondition(True, "x", True)
+        ucrChkEmptyColumns.AddParameterPresentCondition(True, "x")
         ucrChkEmptyColumns.AddParameterPresentCondition(False, "x", False)
 
         ucrChkEmptyRows.SetText("Rows")
-        ucrChkEmptyRows.AddParameterPresentCondition(True, "y", True)
+        ucrChkEmptyRows.AddParameterPresentCondition(True, "y")
         ucrChkEmptyRows.AddParameterPresentCondition(False, "y", False)
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
@@ -91,13 +87,10 @@ Public Class dlgDeleteRowsOrColums
         clsDeleteRows = New RFunction
         clsOperatorRowNames = New ROperator
         clsRemoveEmptyColumns = New RFunction
-        clsColsPipeOperator = New ROperator
         clsConcFunction = New RFunction
         clsDummyFunction = New RFunction
 
         ucrSelectorForDeleteColumns.Reset()
-        ucrNewDataFrame.Reset()
-        NewDefaultName()
 
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
@@ -109,13 +102,11 @@ Public Class dlgDeleteRowsOrColums
         clsDeleteRows.AddParameter("row_names", clsROperatorParameter:=clsOperatorRowNames)
 
         clsConcFunction.SetRCommand("c")
+        clsConcFunction.AddParameter("x", Chr(34) & "cols" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
-        clsRemoveEmptyColumns.SetPackageName("janitor")
-        clsRemoveEmptyColumns.SetRCommand("remove_empty")
+        clsRemoveEmptyColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_empty")
         clsRemoveEmptyColumns.AddParameter("which", clsRFunctionParameter:=clsConcFunction, iPosition:=0)
-
-        clsColsPipeOperator.SetOperation("%>%")
-        clsColsPipeOperator.AddParameter("x", clsRFunctionParameter:=clsRemoveEmptyColumns, iPosition:=1, bIncludeArgumentName:=False)
 
         clsDummyFunction.AddParameter("checked", "columns", iPosition:=0)
 
@@ -125,7 +116,6 @@ Public Class dlgDeleteRowsOrColums
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorForDeleteColumns.AddAdditionalCodeParameterPair(clsDeleteColumns, ucrSelectorForDeleteColumns.GetParameter, iAdditionalPairNo:=1)
         ucrPnlColumnsOrRows.SetRCode(clsDummyFunction, bReset)
-        ucrNewDataFrame.SetRCode(clsColsPipeOperator, bReset)
         ucrReceiverForColumnsToDelete.SetRCode(clsDeleteColumns)
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
         ucrNudTo.SetRCode(clsOperatorRowNames, bReset)
@@ -148,7 +138,7 @@ Public Class dlgDeleteRowsOrColums
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoEmpty.Checked Then
-            If ucrChkEmptyColumns.Checked OrElse ucrChkEmptyRows.Checked AndAlso ucrNewDataFrame.IsComplete Then
+            If ucrChkEmptyColumns.Checked OrElse ucrChkEmptyRows.Checked Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -170,13 +160,7 @@ Public Class dlgDeleteRowsOrColums
         TestOKEnabled()
     End Sub
 
-    Private Sub NewDefaultName()
-        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataFrame.bUserTyped) Then
-            ucrNewDataFrame.SetPrefix(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        End If
-    End Sub
-
-    Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged, ucrChkEmptyColumns.ControlValueChanged, ucrChkEmptyRows.ControlValueChanged
+    Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged
         If rdoColumns.Checked Then
             clsDummyFunction.AddParameter("checked", "columns", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteColumns)
@@ -187,22 +171,14 @@ Public Class dlgDeleteRowsOrColums
             ucrSelectorForDeleteColumns.SetVariablesVisible(False)
         ElseIf rdoEmpty.Checked Then
             clsDummyFunction.AddParameter("checked", "empty", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseROperator(clsColsPipeOperator)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveEmptyColumns)
             ucrSelectorForDeleteColumns.SetVariablesVisible(False)
         End If
-        DeletingEmptyColsAndRows()
     End Sub
 
     Private Sub ucrSelectorForDeleteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteColumns.ControlValueChanged
         SetMaxMin()
-        NewDefaultName()
-        clsColsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorForDeleteColumns.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged,
-        ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudTo.ControlContentsChanged,
-        ucrChkEmptyColumns.ControlContentsChanged, ucrChkEmptyRows.ControlContentsChanged, ucrNewDataFrame.ControlContentsChanged
-        TestOKEnabled()
+        clsRemoveEmptyColumns.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteColumns.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub SetMaxMin()
@@ -216,18 +192,22 @@ Public Class dlgDeleteRowsOrColums
         End If
     End Sub
 
-    Private Sub DeletingEmptyColsAndRows()
-        If rdoEmpty.Checked Then
-            If ucrChkEmptyRows.Checked Then
-                clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-            Else
-                clsConcFunction.RemoveParameterByName("y")
-            End If
-            If ucrChkEmptyColumns.Checked Then
-                clsConcFunction.AddParameter("x", Chr(34) & "cols" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-            Else
-                clsConcFunction.RemoveParameterByName("x")
-            End If
+    Private Sub ucrChkEmptyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEmptyColumns.ControlValueChanged, ucrChkEmptyRows.ControlValueChanged
+        If ucrChkEmptyRows.Checked Then
+            clsConcFunction.AddParameter("y", Chr(34) & "rows" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("y")
         End If
+        If ucrChkEmptyColumns.Checked Then
+            clsConcFunction.AddParameter("x", Chr(34) & "cols" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged,
+    ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudTo.ControlContentsChanged,
+    ucrChkEmptyColumns.ControlContentsChanged, ucrChkEmptyRows.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
