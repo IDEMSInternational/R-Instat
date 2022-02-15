@@ -1030,7 +1030,6 @@ Public Class dlgImportDataset
                 strFileExtension = ""
                 strFilePathSystem = ""
                 strFilePathR = ""
-                ucrInputFilePath.SetName("")
             Else
                 If File.Exists(strFilePathSystemTemp) Then
                     strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)

@@ -85,7 +85,7 @@ Partial Class dlgSelect
         Me.rdoApplyAsSelect.Size = New System.Drawing.Size(154, 17)
         Me.rdoApplyAsSelect.TabIndex = 0
         Me.rdoApplyAsSelect.TabStop = True
-        Me.rdoApplyAsSelect.Text = "Selector Only"
+        Me.rdoApplyAsSelect.Text = "Apply As Selected Columns"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
         '
         'ucrPnlApplyOptions
