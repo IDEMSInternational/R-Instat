@@ -218,16 +218,31 @@ Public Class dlgName
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
         Dim iRowIndex As Integer = e.Range.Row + 1
         Dim iColIndex As Integer = e.Range.Col
+
+
         If e.Range.Rows > 1 Then
             For iRow As Integer = 0 To e.Range.Rows - 1
                 Dim strData As String = grdCurrentWorkSheet.Item(row:=iRow, col:=iColIndex).ToString()
+                If CheckCellValueData(strData) Then
+                    bCurrentCell = False
+                    Exit For
+                Else
+                    bCurrentCell = True
+                End If
+
                 GetVariables(strData, iRow + 1, iColIndex)
             Next
         Else
             Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
-            GetVariables(strNewData, iRowIndex, iColIndex)
-        End If
 
+            If CheckCellValueData(strNewData) Then
+                bCurrentCell = True
+            Else
+                bCurrentCell = False
+            End If
+            GetVariables(strNewData, iRowIndex, iColIndex)
+            TestOKEnabled()
+        End If
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
@@ -238,14 +253,29 @@ Public Class dlgName
         strPreviousCellText = e.Cell.Data.ToString()
     End Sub
 
-    Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
-        If e.Cell.Data IsNot Nothing Then
-
-            bCurrentCell = True
-            GetVariables(e.Text, e.Cell.Row + 1, e.Cell.Column)
-        Else
-            bCurrentCell = False
+    Private Function CheckCellValueData(strNewData As String) As Boolean
+        Dim iTemp As Integer
+        If strNewData <> "" Then
+            For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+                If grdCurrentWorkSheet.Item(i, 1) = strNewData OrElse Integer.TryParse(strNewData, iTemp) Then
+                    MsgBox("A column with this name " & strNewData & " may exists already or must be string e.g village, field. Please change the name", MsgBoxStyle.Exclamation)
+                    Return True
+                End If
+            Next
         End If
+        Return False
+    End Function
+
+    Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+        Dim strNewData As String = e.Text
+
+        If CheckCellValueData(strNewData) OrElse e.Cell.Data Is Nothing Then
+            bCurrentCell = False
+        Else
+            bCurrentCell = True
+        End If
+
+        GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
 
         TestOKEnabled()
     End Sub
