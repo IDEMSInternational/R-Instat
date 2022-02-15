@@ -323,7 +323,9 @@ Public Class clsPrepareFunctionsForGrids
     End Function
 
     '' <summary>
-    ''' Delete one or many columns
+    '''  Description: To Delete one or many cells 
+    ''' the delete cell function is to be used to Replace selected values with NA 
+    ''' in the dataframe.
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
     ''' <param name="lstRowNames"></param>
