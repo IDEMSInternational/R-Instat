@@ -269,6 +269,12 @@ Public Class dlgName
         If Not rdoMultiple.Checked Then
             clsDefaultRFunction.RemoveParameterByPosition(8)
             clsDefaultRFunction.RemoveParameterByPosition(9)
+        ElseIf rdoRenameWith.Checked Then
+            If rdoToLower.Checked Then
+                clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
+            Else
+                clsDefaultRFunction.RemoveParameterByPosition(5)
+            End If
         End If
     End Sub
 
