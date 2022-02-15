@@ -62,6 +62,7 @@ Public MustInherit Class ucrReoGrid
         fillWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
         AttachEventsToWorksheet(fillWorkSheet)
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
