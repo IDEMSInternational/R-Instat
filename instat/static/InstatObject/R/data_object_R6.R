@@ -4231,3 +4231,33 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
 })
+
+DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
+  curr_data <- self$get_data_frame()
+  old_metadata <- attributes(curr_data)
+  new_df <- curr_data |>
+    janitor::remove_empty(which = which)
+  row_message <- paste(nrow(curr_data) - nrow(new_df), "empty rows deleted")
+  cols_message <- paste(ncol(curr_data) - ncol(new_df), "empty variables deleted")
+  if (all(which %in% "rows")) cat(row_message, "\n")
+  if (all(which %in% "cols")) cat(cols_message)
+  if (all(c("rows", "cols") %in% which)) {
+    cat(row_message, "\n")
+    cat(cols_message)
+  }
+  for (name in names(old_metadata)) {
+    if (!(name %in% c("names", "class", "row.names"))) {
+      attr(new_df, name) <- old_metadata[[name]]
+    }
+  }
+  for (col_name in names(new_df)) {
+    for (attr_name in names(attributes(private$data[[col_name]]))) {
+      if (!attr_name %in% c("class", "levels")) {
+        attr(new_df[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+      }
+    }
+  }
+  self$set_data(new_df)
+  self$data_changed <- TRUE
+  private$.variables_metadata_changed <- TRUE
+})

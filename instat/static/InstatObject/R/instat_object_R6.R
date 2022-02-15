@@ -2714,3 +2714,8 @@ DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_col
   self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
 }
 )
+
+
+DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","cols")) {
+  self$get_data_objects(data_name)$remove_empty(which = which)
+})
