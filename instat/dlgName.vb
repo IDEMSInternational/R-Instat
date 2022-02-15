@@ -273,9 +273,8 @@ Public Class dlgName
             bCurrentCell = False
         Else
             bCurrentCell = True
+            GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
         End If
-
-        GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
 
         TestOKEnabled()
     End Sub
