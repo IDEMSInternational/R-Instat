@@ -48,8 +48,6 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputCase = New instat.ucrInputComboBox()
-        Me.ucrPnlCase = New instat.UcrPanel()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
@@ -60,6 +58,8 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputCase = New instat.ucrInputComboBox()
+        Me.ucrPnlCase = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -178,25 +178,6 @@ Partial Class dlgName
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrInputCase
-        '
-        Me.ucrInputCase.AddQuotesIfUnrecognised = True
-        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputCase.GetSetSelectedIndex = -1
-        Me.ucrInputCase.IsReadOnly = False
-        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
-        Me.ucrInputCase.Name = "ucrInputCase"
-        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
-        Me.ucrInputCase.TabIndex = 20
-        '
-        'ucrPnlCase
-        '
-        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
-        Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
-        Me.ucrPnlCase.TabIndex = 17
         '
         'rdoRenameWith
         '
@@ -320,6 +301,25 @@ Partial Class dlgName
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrInputCase
+        '
+        Me.ucrInputCase.AddQuotesIfUnrecognised = True
+        Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCase.GetSetSelectedIndex = -1
+        Me.ucrInputCase.IsReadOnly = False
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
+        Me.ucrInputCase.Name = "ucrInputCase"
+        Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
+        Me.ucrInputCase.TabIndex = 20
+        '
+        'ucrPnlCase
+        '
+        Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
+        Me.ucrPnlCase.Name = "ucrPnlCase"
+        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
+        Me.ucrPnlCase.TabIndex = 17
         '
         'dlgName
         '
