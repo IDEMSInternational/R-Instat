@@ -37,6 +37,7 @@ Public Class dlgName
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
     Private dctCaseOptions As New Dictionary(Of String, String)
     Private strPreviousCellText As String
+    Private bCurrentCell As Boolean = False
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -173,7 +174,7 @@ Public Class dlgName
         ElseIf rdoRenameWith.Checked Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(grdCurrentWorkSheet IsNot Nothing)
+            ucrBase.OKEnabled(bCurrentCell)
         End If
     End Sub
 
@@ -237,16 +238,16 @@ Public Class dlgName
         strPreviousCellText = e.Cell.Data.ToString()
     End Sub
 
-    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        Dim strNewData As String = e.NewData.ToString()
-        Dim iRowIndex As Integer = e.Cell.Row + 1
-        Dim iColIndex As Integer = e.Cell.Column
+    Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+        If e.Cell.Data IsNot Nothing Then
 
-        If strNewData = strPreviousCellText Then
-            e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-            Exit Sub
+            bCurrentCell = True
+            GetVariables(e.Text, e.Cell.Row + 1, e.Cell.Column)
+        Else
+            bCurrentCell = False
         End If
-        GetVariables(strNewData, iRowIndex, iColIndex)
+
+        TestOKEnabled()
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
@@ -273,8 +274,6 @@ Public Class dlgName
 
     Private Sub RemoveDataframeParameters()
         If rdoMultiple.Checked OrElse rdoSingle.Checked Then
-            'clsDefaultRFunction.RemoveParameterByPosition(8)
-            'clsDefaultRFunction.RemoveParameterByPosition(9)
             clsDefaultRFunction.RemoveParameterByPosition(5)
         ElseIf rdoRenameWith.Checked Then
             If rdoToLower.Checked Then
