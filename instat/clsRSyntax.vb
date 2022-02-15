@@ -69,7 +69,7 @@ Public Class RSyntax
     ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
     Public lstBeforeCodes As New List(Of RCodeStructure)
 
-    ''' <summary>   TThe R functions/operators/commands that should be run before the base R code. </summary>
+    ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
     Public lstAfterCodes As New List(Of RCodeStructure)
 
 

@@ -41,7 +41,6 @@ Partial Class dlgCompareColumns
         Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
         Me.ucrSelectorCompareColumns = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkUnique = New instat.ucrCheck()
         Me.grpComparisions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -203,7 +202,7 @@ Partial Class dlgCompareColumns
         '
         Me.ucrChkSort.AutoSize = True
         Me.ucrChkSort.Checked = False
-        Me.ucrChkSort.Location = New System.Drawing.Point(276, 240)
+        Me.ucrChkSort.Location = New System.Drawing.Point(21, 241)
         Me.ucrChkSort.Name = "ucrChkSort"
         Me.ucrChkSort.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkSort.TabIndex = 6
@@ -255,20 +254,10 @@ Partial Class dlgCompareColumns
         Me.ucrSelectorCompareColumns.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCompareColumns.TabIndex = 0
         '
-        'ucrChkUnique
-        '
-        Me.ucrChkUnique.AutoSize = True
-        Me.ucrChkUnique.Checked = False
-        Me.ucrChkUnique.Location = New System.Drawing.Point(13, 240)
-        Me.ucrChkUnique.Name = "ucrChkUnique"
-        Me.ucrChkUnique.Size = New System.Drawing.Size(257, 24)
-        Me.ucrChkUnique.TabIndex = 5
-        '
         'dlgCompareColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(420, 522)
         Me.Controls.Add(Me.grpComparisions)
         Me.Controls.Add(Me.lblTolerance)
@@ -284,7 +273,6 @@ Partial Class dlgCompareColumns
         Me.Controls.Add(Me.ucrReceiverSecond)
         Me.Controls.Add(Me.ucrReceiverFirst)
         Me.Controls.Add(Me.ucrSelectorCompareColumns)
-        Me.Controls.Add(Me.ucrChkUnique)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -305,7 +293,6 @@ Partial Class dlgCompareColumns
     Friend WithEvents lblFirstColumn As Label
     Friend WithEvents ucrReceiverSecond As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrChkUnique As ucrCheck
     Friend WithEvents grpComparisions As GroupBox
     Friend WithEvents ucrChkSort As ucrCheck
     Friend WithEvents ucrChkFirstNotSecond As ucrCheck

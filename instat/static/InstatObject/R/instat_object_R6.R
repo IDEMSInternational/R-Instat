@@ -328,22 +328,22 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
 }
 )
 
-DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_sheets)) stop(paste(data_name, "not found."))
-    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
+    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
@@ -1457,8 +1457,18 @@ DataBook$set("public", "import_SST", function(dataset, data_from = 5, data_names
 }
 )
 
-DataBook$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number, nrow = NULL, ncol = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, facet_xsize = 7, facet_ysize = 11, scale_ydate = FALSE, date_ybreaks, step = 1, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, display_rain_days = display_rain_days, rain_cats = rain_cats, graph_subtitle = graph_subtitle, graph_caption = graph_caption, title_size = title_size, subtitle_size = subtitle_size, caption_size = caption_size, labelXAxis = labelXAxis, labelYAxis = labelYAxis, xSize = xSize, ySize = ySize, Xangle = Xangle, Yangle = Yangle, scale_xdate = scale_xdate, fromXAxis = fromXAxis, toXAxis = toXAxis, byXaxis = byXaxis, xlabelsize = xlabelsize, scale_ydate = scale_ydate, date_ybreaks = date_ybreaks, step = step, ylabelsize = ylabelsize, date_ylabels = date_ylabels, legend_position = legend_position, dir = dir, row_col_number = row_col_number, nrow = nrow, ncol = ncol, scale = scale, facet_xsize = facet_xsize, facet_ysize = facet_ysize)
+DataBook$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number, nrow = NULL, ncol = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, facet_xsize = 9, facet_ysize = 9, facet_xangle = 90, facet_yangle = 90, scale_ydate = FALSE, date_ybreaks, step = 1, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col,
+                                                       element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, 
+                                                       coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, 
+                                                       display_rain_days = display_rain_days, rain_cats = rain_cats, graph_subtitle = graph_subtitle, 
+                                                       graph_caption = graph_caption, title_size = title_size, subtitle_size = subtitle_size, 
+                                                       caption_size = caption_size, labelXAxis = labelXAxis, labelYAxis = labelYAxis, xSize = xSize, 
+                                                       ySize = ySize, Xangle = Xangle, Yangle = Yangle, scale_xdate = scale_xdate, fromXAxis = fromXAxis, 
+                                                       toXAxis = toXAxis, byXaxis = byXaxis, xlabelsize = xlabelsize, scale_ydate = scale_ydate, date_ybreaks = date_ybreaks,
+                                                       step = step, ylabelsize = ylabelsize, date_ylabels = date_ylabels, legend_position = legend_position, 
+                                                       dir = dir, row_col_number = row_col_number, nrow = nrow, ncol = ncol, scale = scale, facet_xsize = facet_xsize,
+                                                       facet_ysize = facet_ysize, facet_xangle = facet_xangle, facet_yangle = facet_yangle)
 }
 )
 

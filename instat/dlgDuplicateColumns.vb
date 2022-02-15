@@ -84,8 +84,8 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertTo.AddRadioButton(rdoConvertToCharacter, Chr(34) & "character" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoConvertToInteger, Chr(34) & "integer" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoConvertToLogical, Chr(34) & "logical" & Chr(34))
-        ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertSpecifyDecimalsToDisplay, {rdoConvertToFactor, rdoConvertToOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConvertTo.AddToLinkedControls(ucrPnlConvertFactorToNumericOptions, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoConvertDefault)
+        ucrPnlConvertTo.AddToLinkedControls(ucrPnlConvertFactorToNumericOptions, {rdoConvertToFactor, rdoConvertToOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertSpecifyDecimalsToDisplay, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
         ucrPnlConvertFactorToNumericOptions.SetParameter(New RParameter("factor_values", 3))
         ucrPnlConvertFactorToNumericOptions.AddRadioButton(rdoConvertDefault, "NULL")
