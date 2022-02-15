@@ -114,6 +114,8 @@ pkgs <-
     "tidytext",
     "janitor",
     "ggwordcloud",
+    "rcorpora",
+    "mlbench",
     # For producing periodic and natural splines in Climatic > Compare > Seasonal Plot
     "splines2",
     # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
