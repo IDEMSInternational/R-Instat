@@ -19,7 +19,7 @@ Partial Class dlgRandomSample
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,12 +36,15 @@ Partial Class dlgRandomSample
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.ttRngKind = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblAutoregressive = New System.Windows.Forms.Label()
+        Me.ucrNudAr = New instat.ucrNud()
+        Me.ucrChkArima = New instat.ucrCheck()
         Me.ucrInputRngKind = New instat.ucrInputComboBox()
         Me.ucrChkRngKind = New instat.ucrCheck()
         Me.ucrSaveRandomSample = New instat.ucrSave()
@@ -74,6 +77,38 @@ Partial Class dlgRandomSample
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
         Me.lblNumberofSamples.Text = "Number of Samples:"
         '
+        'lblAutoregressive
+        '
+        Me.lblAutoregressive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAutoregressive.Location = New System.Drawing.Point(23, 207)
+        Me.lblAutoregressive.Name = "lblAutoregressive"
+        Me.lblAutoregressive.Size = New System.Drawing.Size(118, 13)
+        Me.lblAutoregressive.TabIndex = 14
+        Me.lblAutoregressive.Tag = "Number_of_Samples:"
+        Me.lblAutoregressive.Text = "Autoregressive:"
+        '
+        'ucrNudAr
+        '
+        Me.ucrNudAr.AutoSize = True
+        Me.ucrNudAr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAr.Location = New System.Drawing.Point(151, 203)
+        Me.ucrNudAr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAr.Name = "ucrNudAr"
+        Me.ucrNudAr.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAr.TabIndex = 15
+        Me.ucrNudAr.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkArima
+        '
+        Me.ucrChkArima.AutoSize = True
+        Me.ucrChkArima.Checked = False
+        Me.ucrChkArima.Location = New System.Drawing.Point(25, 180)
+        Me.ucrChkArima.Name = "ucrChkArima"
+        Me.ucrChkArima.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkArima.TabIndex = 13
+        '
         'ucrInputRngKind
         '
         Me.ucrInputRngKind.AddQuotesIfUnrecognised = True
@@ -97,7 +132,7 @@ Partial Class dlgRandomSample
         'ucrSaveRandomSample
         '
         Me.ucrSaveRandomSample.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveRandomSample.Location = New System.Drawing.Point(10, 219)
+        Me.ucrSaveRandomSample.Location = New System.Drawing.Point(10, 232)
         Me.ucrSaveRandomSample.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
         Me.ucrSaveRandomSample.Size = New System.Drawing.Size(365, 22)
@@ -170,7 +205,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 262)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
@@ -179,7 +214,10 @@ Partial Class dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(479, 300)
+        Me.ClientSize = New System.Drawing.Size(479, 336)
+        Me.Controls.Add(Me.ucrNudAr)
+        Me.Controls.Add(Me.lblAutoregressive)
+        Me.Controls.Add(Me.ucrChkArima)
         Me.Controls.Add(Me.ucrInputRngKind)
         Me.Controls.Add(Me.ucrChkRngKind)
         Me.Controls.Add(Me.ucrSaveRandomSample)
@@ -216,4 +254,7 @@ Partial Class dlgRandomSample
     Friend WithEvents ttRngKind As ToolTip
     Friend WithEvents ucrChkRngKind As ucrCheck
     Friend WithEvents ucrInputRngKind As ucrInputComboBox
+    Friend WithEvents ucrChkArima As ucrCheck
+    Friend WithEvents lblAutoregressive As Label
+    Friend WithEvents ucrNudAr As ucrNud
 End Class
