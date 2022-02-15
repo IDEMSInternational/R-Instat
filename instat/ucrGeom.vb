@@ -123,6 +123,7 @@ Public Class ucrGeom
         Dim clsgeom_bin2d As New Geoms
         Dim clsgeom_blank As New Geoms
         Dim clsgeom_boxplot As New Geoms
+        Dim clsgeom_categorical_model As New Geoms
         Dim clsgeom_contour As New Geoms
         Dim clsgeom_count As New Geoms
         Dim clsgeom_col As New Geoms
@@ -149,6 +150,7 @@ Public Class ucrGeom
         Dim clsgeom_lollipop As New Geoms
         Dim clsgeom_map As New Geoms
         Dim clsgeom_mosaic As New Geoms
+        Dim clsgeom_parallel_slopes As New Geoms
         Dim clsgeom_path As New Geoms
         Dim clsgeom_point As New Geoms
         Dim clsgeom_pointrange As New Geoms
@@ -510,6 +512,27 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_boxplot)
+
+        clsgeom_categorical_model.SetGeomPackage("moderndive")
+        clsgeom_categorical_model.SetGeomName("geom_categorical_model")
+        'Mandatory Aesthetics 
+        clsgeom_categorical_model.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_categorical_model.AddAesParameter("y", bIsMandatory:=True)
+
+        'Optional Aesthetics 
+        clsgeom_categorical_model.AddAesParameter("colour")
+        clsgeom_categorical_model.AddAesParameter("size")
+
+        'Add  layer parameters
+        clsgeom_categorical_model.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
+        clsgeom_categorical_model.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
+        clsgeom_categorical_model.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+        clsgeom_categorical_model.AddLayerParameter("size", "numeric", "3", lstParameterStrings:={0, 0})
+        clsgeom_categorical_model.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_categorical_model.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_categorical_model.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_categorical_model)
 
         clsgeom_col.SetGeomName("geom_col")
         'Mandatory Aesthetics
@@ -1371,26 +1394,6 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_lollipop)
 
-        clsgeom_path.strGeomName = "geom_path"
-        'mandatory
-        clsgeom_path.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_path.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_path.AddAesParameter("alpha")
-        clsgeom_path.AddAesParameter("colour")
-        clsgeom_path.AddAesParameter("linetype")
-        clsgeom_path.AddAesParameter("size")
-        'add layer parameters 
-
-        clsgeom_path.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_path.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_path.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
-        'linemitre should 1 or a number >1
-        clsgeom_path.AddLayerParameter("linemitre", "numeric", "1", lstParameterStrings:={0, 1})
-        clsgeom_path.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
-        lstAllGeoms.Add(clsgeom_path)
-
         clsgeom_mosaic.SetGeomPackage("ggmosaic")
         clsgeom_mosaic.strGeomName = "geom_mosaic"
         'mandatory
@@ -1410,6 +1413,49 @@ Public Class ucrGeom
         clsgeom_mosaic.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_mosaic)
 
+        clsgeom_parallel_slopes.SetGeomPackage("moderndive")
+        clsgeom_parallel_slopes.SetGeomName("geom_parallel_slopes")
+        'Mandatory Aesthetics 
+        clsgeom_parallel_slopes.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_parallel_slopes.AddAesParameter("y", bIsMandatory:=True)
+
+        'Optional Aesthetics 
+        clsgeom_parallel_slopes.AddAesParameter("colour")
+        clsgeom_parallel_slopes.AddAesParameter("size")
+
+        'Add  layer parameters
+        clsgeom_parallel_slopes.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
+        clsgeom_parallel_slopes.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
+        clsgeom_parallel_slopes.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)"})
+        clsgeom_parallel_slopes.AddLayerParameter("n", "numeric", "0")
+        clsgeom_parallel_slopes.AddLayerParameter("fullrange", "boolean", "FALSE")
+        clsgeom_parallel_slopes.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+        clsgeom_parallel_slopes.AddLayerParameter("size", "numeric", "3", lstParameterStrings:={0, 0})
+        clsgeom_parallel_slopes.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_parallel_slopes.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_parallel_slopes.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_parallel_slopes)
+
+        clsgeom_path.strGeomName = "geom_path"
+        'mandatory
+        clsgeom_path.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_path.AddAesParameter("y", bIsMandatory:=True)
+        'optional
+        clsgeom_path.AddAesParameter("alpha")
+        clsgeom_path.AddAesParameter("colour")
+        clsgeom_path.AddAesParameter("linetype")
+        clsgeom_path.AddAesParameter("size")
+        'add layer parameters 
+
+        clsgeom_path.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_path.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_path.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        'linemitre should 1 or a number >1
+        clsgeom_path.AddLayerParameter("linemitre", "numeric", "1", lstParameterStrings:={0, 1})
+        clsgeom_path.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.SetGeomName("geom_point")
         'Mandatory aesthetics : here x and y are mandatory, however, when not filled, default values "" are given. Alternatively, if we want to have at least on filled, could add bIsDependentlyMandatory:=TRUE in both. Planning on refining the mandatory aes methods to include the "" cases systematically.
