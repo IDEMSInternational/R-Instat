@@ -38,12 +38,12 @@ Partial Class dlgPasteNewColumns
         '
         'lblConfirmText
         '
-        Me.lblConfirmText.AutoSize = True
+        Me.lblConfirmText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblConfirmText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirmText.Location = New System.Drawing.Point(7, 157)
+        Me.lblConfirmText.Location = New System.Drawing.Point(7, 95)
         Me.lblConfirmText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirmText.Name = "lblConfirmText"
-        Me.lblConfirmText.Size = New System.Drawing.Size(189, 13)
+        Me.lblConfirmText.Size = New System.Drawing.Size(201, 108)
         Me.lblConfirmText.TabIndex = 5
         Me.lblConfirmText.Text = "Click Ok to paste data to new columns"
         '
@@ -68,7 +68,7 @@ Partial Class dlgPasteNewColumns
         'btnRefreshPreview
         '
         Me.btnRefreshPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnRefreshPreview.Location = New System.Drawing.Point(530, 11)
+        Me.btnRefreshPreview.Location = New System.Drawing.Point(531, 11)
         Me.btnRefreshPreview.Name = "btnRefreshPreview"
         Me.btnRefreshPreview.Size = New System.Drawing.Size(100, 23)
         Me.btnRefreshPreview.TabIndex = 17
@@ -105,7 +105,7 @@ Partial Class dlgPasteNewColumns
         '
         Me.ucrChkRowHeader.AutoSize = True
         Me.ucrChkRowHeader.Checked = False
-        Me.ucrChkRowHeader.Location = New System.Drawing.Point(10, 73)
+        Me.ucrChkRowHeader.Location = New System.Drawing.Point(10, 65)
         Me.ucrChkRowHeader.Name = "ucrChkRowHeader"
         Me.ucrChkRowHeader.Size = New System.Drawing.Size(198, 23)
         Me.ucrChkRowHeader.TabIndex = 1
@@ -125,7 +125,7 @@ Partial Class dlgPasteNewColumns
         '
         Me.lblLinesToPreview.AutoSize = True
         Me.lblLinesToPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinesToPreview.Location = New System.Drawing.Point(379, 17)
+        Me.lblLinesToPreview.Location = New System.Drawing.Point(374, 17)
         Me.lblLinesToPreview.Name = "lblLinesToPreview"
         Me.lblLinesToPreview.Size = New System.Drawing.Size(88, 13)
         Me.lblLinesToPreview.TabIndex = 19

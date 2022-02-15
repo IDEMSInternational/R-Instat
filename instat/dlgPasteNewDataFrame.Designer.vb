@@ -66,7 +66,7 @@ Partial Class dlgPasteNewDataFrame
         'btnRefreshPreview
         '
         Me.btnRefreshPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnRefreshPreview.Location = New System.Drawing.Point(470, 10)
+        Me.btnRefreshPreview.Location = New System.Drawing.Point(482, 10)
         Me.btnRefreshPreview.Name = "btnRefreshPreview"
         Me.btnRefreshPreview.Size = New System.Drawing.Size(100, 23)
         Me.btnRefreshPreview.TabIndex = 3
@@ -97,7 +97,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrNudPreviewLines.AutoSize = True
         Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(413, 10)
+        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(425, 10)
         Me.ucrNudPreviewLines.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
@@ -122,9 +122,9 @@ Partial Class dlgPasteNewDataFrame
         Me.lblConfirmText.Location = New System.Drawing.Point(10, 215)
         Me.lblConfirmText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirmText.Name = "lblConfirmText"
-        Me.lblConfirmText.Size = New System.Drawing.Size(189, 13)
+        Me.lblConfirmText.Size = New System.Drawing.Size(200, 13)
         Me.lblConfirmText.TabIndex = 24
-        Me.lblConfirmText.Text = "Click Ok to paste data to new columns"
+        Me.lblConfirmText.Text = "Click Ok to paste data to new data frame"
         '
         'ucrSaveNewDFName
         '

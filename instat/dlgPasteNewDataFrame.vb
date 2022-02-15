@@ -125,9 +125,9 @@ Public Class dlgPasteNewDataFrame
         'compared to letting R read from the clipboard.
         'However this has been added to achieve reproducibility in future
         Try
-            Dim clipBoardText As String = My.Computer.Clipboard.GetText
+            'clipboard data may have an empty line which is ignored by clipr so just trim it here to get accurate length
             'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
-            clipBoardText = clipBoardText.Replace("""", "\""")
+            Dim clipBoardText As String = My.Computer.Clipboard.GetText.Trim().Replace("""", "\""")
             Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             If arrStrTemp.Length > 1000 Then
                 MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
@@ -146,40 +146,34 @@ Public Class dlgPasteNewDataFrame
     ''' </summary>
     ''' <returns>returns true if copied data can be pasted to the selected data frame or false if not</returns>
     Private Function ValidateAndPreviewCopiedData() As Boolean
-        Dim bValid As Boolean = False
-        Dim dfTemp As DataFrame
-        Dim expTemp As SymbolicExpression
-        Dim clsTempImport As RFunction
+        Try
+            'set feedback controls default states
+            panelNoDataPreview.Visible = True
+            lblConfirmText.Text = ""
+            lblConfirmText.ForeColor = Color.Red
 
-        'set feedback controls default states
-        panelNoDataPreview.Visible = True
-        lblConfirmText.Text = ""
-        lblConfirmText.ForeColor = Color.Red
+            'use clipr::read_clip_tbl command to check if structure of data can be pasted to a data frame 
+            Dim clsTempImport As RFunction = clsPasteFunction.Clone()
+            'limit the rows to those set in the ucrNudPreviewLines control
+            clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value)
 
-        'use clipr::read_clip_tbl command to check if structure of data can be pasted to a data frame 
-        clsTempImport = clsPasteFunction.Clone()
-        'limit the rows to those set in the ucrNudPreviewLines control
-        clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value)
+            'get the data frame produced by clipr data frame 
+            Dim dfTemp As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)?.AsDataFrame
+            If dfTemp Is Nothing Then
+                Return False
+            End If
+            'try to show preview the data only
+            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
+            lblConfirmText.Text = "Click Ok to paste data to new data frame."
+            lblConfirmText.ForeColor = Color.Green
+            panelNoDataPreview.Visible = False
+            Return True
+        Catch ex As Exception
+            lblConfirmText.Text = "Could not preview data. Cannot be pasted."
+            panelNoDataPreview.Visible = True
+            Return False
+        End Try
 
-        'get the data frame produced by clipr data frame
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)
-        dfTemp = expTemp?.AsDataFrame
-        If dfTemp IsNot Nothing Then
-            Try
-                'try to preview the data
-                frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-                bValid = True
-                lblConfirmText.Text = GetTranslation("Click Ok to paste data to new data frames.")
-                lblConfirmText.ForeColor = Color.Green
-            Catch
-                lblConfirmText.Text = GetTranslation("Could not preview data. Cannot be pasted.")
-            End Try
-        Else
-            lblConfirmText.Text = GetTranslation("Could not preview data. Cannot be pasted.")
-        End If
-
-        panelNoDataPreview.Visible = Not bValid
-        Return bValid
     End Function
 
 End Class

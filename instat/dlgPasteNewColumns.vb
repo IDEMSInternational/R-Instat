@@ -97,8 +97,8 @@ Public Class dlgPasteNewColumns
         'compared to letting R read from the clipboard dierectly.
         'However this has been added to achieve reproducibility in future
         Try
-            'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
             'clipboard data may have an empty line which is ignored by clipr so just trim it here to get accurate length
+            'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
             Dim clipBoardText As String = My.Computer.Clipboard.GetText().Replace("""", "\""").Trim()
             Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             If arrStrTemp.Length > 1000 Then
@@ -139,8 +139,19 @@ Public Class dlgPasteNewColumns
                 Return False
             End If
 
+            'parameter 'nrows' commented out for future reference.
+            'not added here because we are already limiting data pasting to 1000 rows
+            'the lines preview is enforced at the sheet levet
+            'clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value, iPosition:=2)
+
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)?.AsDataFrame
+            'show the data preview only. Limit the rows to those set in the ucrNudPreviewLines control
+            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False,
+                                       iColMax:=frmMain.clsGrids.iMaxCols, iRowMax:=ucrNudPreviewLines.Value)
+
+            panelNoDataPreview.Visible = False
             lblConfirmText.Text = "Number of columns: " & dfTemp.ColumnCount & Environment.NewLine &
-                                  "Number of rows: " & dfTemp.RowCount & Environment.NewLine
+                                  "Number of rows: " & dfTemp.RowCount & Environment.NewLine & Environment.NewLine
 
             'validate allowed number of rows
             If dfTemp.RowCount = 0 Then
@@ -161,12 +172,7 @@ Public Class dlgPasteNewColumns
                 lblConfirmText.Text = lblConfirmText.Text & "Correct length."
             End If
 
-            'show the data preview only
-            clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value, iPosition:=2)
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)?.AsDataFrame
-            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
 
-            panelNoDataPreview.Visible = False
             lblConfirmText.ForeColor = Color.Green
 
             Return True
