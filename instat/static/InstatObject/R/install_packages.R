@@ -114,7 +114,9 @@ pkgs <-
     "tidytext",
     "janitor",
     "ggwordcloud",
+    # Has many useful datasets, described in the R-Instat help.They include prime numbers, Fibonacci numbers, names of dinosaurs, and the chemical elements. 
     "rcorpora",
+    # Includes a set of interesting data sets, designed particularly for machine learning.
     "mlbench",
     # For producing periodic and natural splines in Climatic > Compare > Seasonal Plot
     "splines2",
