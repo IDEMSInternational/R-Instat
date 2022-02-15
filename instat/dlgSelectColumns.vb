@@ -209,7 +209,7 @@ Public Class dlgSelectColumns
                     clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
                 ElseIf strValue = "Logical" Then
                     clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
-                ElseIf strValue = "Labelled" Then
+                ElseIf strValue = "Variable label" Then
                     clsParametersList.AddParameter("fn", "is.containlabel", iPosition:=0)
                 ElseIf strValue = "Empty columns" Then
                     clsParametersList.AddParameter("fn", "is.emptyvariable", iPosition:=0)
