@@ -166,7 +166,6 @@ Public Class ucrOutputPage
         }
         pnlMain.Controls.Add(panel)
         pnlMain.Controls.SetChildIndex(panel, 0)
-        panel.Focus()
         AddCheckBoxToElementPanel(panel, outputElement)
         AddHandler panel.Resize, AddressOf Panel_Resize
         Return panel
@@ -183,6 +182,7 @@ Public Class ucrOutputPage
         panel.Controls.Add(checkBox)
         _checkBoxes.Add(checkBox)
         AddHandler checkBox.Click, AddressOf checkButton_Click
+        AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
 
     Private Sub AddNewScript(outputElement As clsOutputElement)
@@ -196,6 +196,7 @@ Public Class ucrOutputPage
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
         AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+        AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
 
     Private Function CopyOneImageOnly() As Boolean
@@ -257,6 +258,7 @@ Public Class ucrOutputPage
         panel.Controls.SetChildIndex(richTextBox, 0)
         SetRichTextBoxHeight(richTextBox)
         AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+        AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)
@@ -293,6 +295,10 @@ Public Class ucrOutputPage
                 MsgBox(ex.Message)
             End Try
         End If
+    End Sub
+
+    Private Sub panelContents_MouseLeave(sender As Object, e As EventArgs)
+        pnlMain.Focus()
     End Sub
 
     Private Sub CopySelectedTextToClipBoard(richText As RichTextBox, richTextFormat As String)
