@@ -287,7 +287,7 @@ Public Class dlgRegularSequence
         'ucrInputInStepsOf will be empty when dialog loads for the first time
         'no need to st value for ucrInputInStepsOf if its empty
         If ucrInputInStepsOf.IsEmpty Then
-            Return
+            Exit Sub
         End If
 
         If rdoNumeric.Checked Then
