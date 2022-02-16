@@ -33,8 +33,9 @@ Public Class dlgContrasts
 
         ' Add any initialization after the InitializeComponent() call.
         grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
-        grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
+        'grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayoutForContrasts.SheetTabNewButtonVisible = False
+        'grdLayoutForContrasts.Text = "Define Contrasts"
         grdCurrSheet = grdLayoutForContrasts.CurrentWorksheet
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
@@ -91,7 +92,6 @@ Public Class dlgContrasts
 
         ucrReceiverForContrasts.SetParameter(New RParameter("col_name", 1))
         ucrReceiverForContrasts.SetParameterIsString()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -151,6 +151,8 @@ Public Class dlgContrasts
 
     Private Sub SetGridDimensions()
         If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrastName.GetText = "User Defined" Then
+            lblDefineContrast.Visible = True
+            grdLayoutForContrasts.Visible = True
             Me.Size = New Size(iFullWidth, Me.Height)
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
             clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
@@ -164,7 +166,8 @@ Public Class dlgContrasts
             Me.Size = New Size(iFullWidth / 1.86, Me.Height)
             clsFactorColumn.RemoveParameterByName("col_name")
             clsNlevels.RemoveParameterByName("x")
-            grdLayoutForContrasts.Enabled = False
+            grdLayoutForContrasts.Visible = False
+            lblDefineContrast.Visible = False
         End If
         SetMatrixFunction()
     End Sub
@@ -211,11 +214,11 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub ucrReceiverForContrasts_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForContrasts.ControlContentsChanged
-        If Not ucrReceiverForContrasts.IsEmpty Then
-            grdLayoutForContrasts.Enabled = True
-        Else
-            grdLayoutForContrasts.Enabled = False
-        End If
+        ' If Not ucrReceiverForContrasts.IsEmpty Then
+        'grdLayoutForContrasts.Enabled = True
+        'Else
+        'grdLayoutForContrasts.Enabled = False
+        'End If
         SetGridDimensions()
         TestOKEnabled()
     End Sub
