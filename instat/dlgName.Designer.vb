@@ -48,8 +48,19 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblMax = New System.Windows.Forms.Label()
+        Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
+        Me.rdoPattern = New System.Windows.Forms.RadioButton()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
+        Me.grpPatternOption = New System.Windows.Forms.GroupBox()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.lblReplaceBy = New System.Windows.Forms.Label()
+        Me.lblPattern = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
+        Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
+        Me.ucrInputPattern = New instat.ucrInputTextBox()
+        Me.ucrChkIgnoreCase = New instat.ucrCheck()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
@@ -58,9 +69,12 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrChkWithDot = New instat.ucrCheck()
+        Me.ucrNudMax = New instat.ucrNud()
         Me.ucrInputCase = New instat.ucrInputComboBox()
         Me.ucrPnlCase = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
+        Me.grpPatternOption.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblName
@@ -98,7 +112,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(220, 12)
+        Me.rdoMultiple.Location = New System.Drawing.Point(255, 12)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -117,7 +131,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(110, 12)
+        Me.rdoSingle.Location = New System.Drawing.Point(145, 12)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -138,7 +152,7 @@ Partial Class dlgName
         'rdoToLower
         '
         Me.rdoToLower.AutoSize = True
-        Me.rdoToLower.Location = New System.Drawing.Point(10, 18)
+        Me.rdoToLower.Location = New System.Drawing.Point(10, 40)
         Me.rdoToLower.Name = "rdoToLower"
         Me.rdoToLower.Size = New System.Drawing.Size(70, 17)
         Me.rdoToLower.TabIndex = 12
@@ -149,7 +163,7 @@ Partial Class dlgName
         'rdoMakeCleanNames
         '
         Me.rdoMakeCleanNames.AutoSize = True
-        Me.rdoMakeCleanNames.Location = New System.Drawing.Point(10, 42)
+        Me.rdoMakeCleanNames.Location = New System.Drawing.Point(10, 17)
         Me.rdoMakeCleanNames.Name = "rdoMakeCleanNames"
         Me.rdoMakeCleanNames.Size = New System.Drawing.Size(88, 17)
         Me.rdoMakeCleanNames.TabIndex = 19
@@ -159,7 +173,7 @@ Partial Class dlgName
         '
         'lblCase
         '
-        Me.lblCase.Location = New System.Drawing.Point(109, 43)
+        Me.lblCase.Location = New System.Drawing.Point(109, 18)
         Me.lblCase.Name = "lblCase"
         Me.lblCase.Size = New System.Drawing.Size(37, 16)
         Me.lblCase.TabIndex = 21
@@ -167,17 +181,53 @@ Partial Class dlgName
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkWithDot)
+        Me.grpOptions.Controls.Add(Me.ucrNudMax)
+        Me.grpOptions.Controls.Add(Me.lblMax)
+        Me.grpOptions.Controls.Add(Me.rdoAbbreviate)
+        Me.grpOptions.Controls.Add(Me.rdoPattern)
         Me.grpOptions.Controls.Add(Me.ucrInputCase)
         Me.grpOptions.Controls.Add(Me.lblCase)
         Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
         Me.grpOptions.Controls.Add(Me.rdoToLower)
         Me.grpOptions.Controls.Add(Me.ucrPnlCase)
-        Me.grpOptions.Location = New System.Drawing.Point(257, 199)
+        Me.grpOptions.Location = New System.Drawing.Point(12, 236)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(259, 77)
+        Me.grpOptions.Size = New System.Drawing.Size(275, 114)
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
+        Me.grpOptions.Text = "Rename Options"
+        '
+        'lblMax
+        '
+        Me.lblMax.AutoSize = True
+        Me.lblMax.Location = New System.Drawing.Point(90, 65)
+        Me.lblMax.Name = "lblMax"
+        Me.lblMax.Size = New System.Drawing.Size(30, 13)
+        Me.lblMax.TabIndex = 24
+        Me.lblMax.Text = "Max."
+        '
+        'rdoAbbreviate
+        '
+        Me.rdoAbbreviate.AutoSize = True
+        Me.rdoAbbreviate.Location = New System.Drawing.Point(10, 63)
+        Me.rdoAbbreviate.Name = "rdoAbbreviate"
+        Me.rdoAbbreviate.Size = New System.Drawing.Size(76, 17)
+        Me.rdoAbbreviate.TabIndex = 23
+        Me.rdoAbbreviate.TabStop = True
+        Me.rdoAbbreviate.Text = "Abbreviate"
+        Me.rdoAbbreviate.UseVisualStyleBackColor = True
+        '
+        'rdoPattern
+        '
+        Me.rdoPattern.AutoSize = True
+        Me.rdoPattern.Location = New System.Drawing.Point(10, 86)
+        Me.rdoPattern.Name = "rdoPattern"
+        Me.rdoPattern.Size = New System.Drawing.Size(59, 17)
+        Me.rdoPattern.TabIndex = 22
+        Me.rdoPattern.TabStop = True
+        Me.rdoPattern.Text = "Pattern"
+        Me.rdoPattern.UseVisualStyleBackColor = True
         '
         'rdoRenameWith
         '
@@ -188,7 +238,7 @@ Partial Class dlgName
         Me.rdoRenameWith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRenameWith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRenameWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRenameWith.Location = New System.Drawing.Point(330, 12)
+        Me.rdoRenameWith.Location = New System.Drawing.Point(365, 12)
         Me.rdoRenameWith.Name = "rdoRenameWith"
         Me.rdoRenameWith.Size = New System.Drawing.Size(110, 28)
         Me.rdoRenameWith.TabIndex = 13
@@ -203,7 +253,7 @@ Partial Class dlgName
         Me.grdRenameColumns.BackColor = System.Drawing.Color.White
         Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.Location = New System.Drawing.Point(235, 66)
+        Me.grdRenameColumns.Location = New System.Drawing.Point(240, 69)
         Me.grdRenameColumns.Name = "grdRenameColumns"
         Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.Script = Nothing
@@ -212,15 +262,98 @@ Partial Class dlgName
         Me.grdRenameColumns.SheetTabVisible = True
         Me.grdRenameColumns.SheetTabWidth = 154
         Me.grdRenameColumns.ShowScrollEndSpacing = True
-        Me.grdRenameColumns.Size = New System.Drawing.Size(304, 210)
+        Me.grdRenameColumns.Size = New System.Drawing.Size(347, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
+        '
+        'grpPatternOption
+        '
+        Me.grpPatternOption.Controls.Add(Me.cmdAddkeyboard)
+        Me.grpPatternOption.Controls.Add(Me.ucrChkIncludeRegularExpressions)
+        Me.grpPatternOption.Controls.Add(Me.ucrInputReplaceBy)
+        Me.grpPatternOption.Controls.Add(Me.ucrInputPattern)
+        Me.grpPatternOption.Controls.Add(Me.ucrChkIgnoreCase)
+        Me.grpPatternOption.Controls.Add(Me.lblReplaceBy)
+        Me.grpPatternOption.Controls.Add(Me.lblPattern)
+        Me.grpPatternOption.Location = New System.Drawing.Point(293, 236)
+        Me.grpPatternOption.Name = "grpPatternOption"
+        Me.grpPatternOption.Size = New System.Drawing.Size(286, 121)
+        Me.grpPatternOption.TabIndex = 19
+        Me.grpPatternOption.TabStop = False
+        Me.grpPatternOption.Text = "Pattern Options"
+        '
+        'cmdAddkeyboard
+        '
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(182, 89)
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.Size = New System.Drawing.Size(100, 23)
+        Me.cmdAddkeyboard.TabIndex = 34
+        Me.cmdAddkeyboard.Text = "Add Keyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
+        'lblReplaceBy
+        '
+        Me.lblReplaceBy.AutoSize = True
+        Me.lblReplaceBy.Location = New System.Drawing.Point(7, 46)
+        Me.lblReplaceBy.Name = "lblReplaceBy"
+        Me.lblReplaceBy.Size = New System.Drawing.Size(62, 13)
+        Me.lblReplaceBy.TabIndex = 1
+        Me.lblReplaceBy.Text = "Replace By"
+        '
+        'lblPattern
+        '
+        Me.lblPattern.AutoSize = True
+        Me.lblPattern.Location = New System.Drawing.Point(7, 20)
+        Me.lblPattern.Name = "lblPattern"
+        Me.lblPattern.Size = New System.Drawing.Size(41, 13)
+        Me.lblPattern.TabIndex = 0
+        Me.lblPattern.Text = "Pattern"
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.AutoSize = True
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(10, 92)
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(169, 23)
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 30
+        '
+        'ucrInputReplaceBy
+        '
+        Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputReplaceBy.AutoSize = True
+        Me.ucrInputReplaceBy.IsMultiline = False
+        Me.ucrInputReplaceBy.IsReadOnly = False
+        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(78, 43)
+        Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
+        Me.ucrInputReplaceBy.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputReplaceBy.TabIndex = 29
+        '
+        'ucrInputPattern
+        '
+        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputPattern.AutoSize = True
+        Me.ucrInputPattern.IsMultiline = False
+        Me.ucrInputPattern.IsReadOnly = False
+        Me.ucrInputPattern.Location = New System.Drawing.Point(78, 16)
+        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPattern.TabIndex = 28
+        '
+        'ucrChkIgnoreCase
+        '
+        Me.ucrChkIgnoreCase.AutoSize = True
+        Me.ucrChkIgnoreCase.Checked = False
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(10, 69)
+        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(169, 23)
+        Me.ucrChkIgnoreCase.TabIndex = 27
         '
         'ucrChkIncludeVariable
         '
         Me.ucrChkIncludeVariable.AutoSize = True
         Me.ucrChkIncludeVariable.Checked = False
-        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(235, 46)
+        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(251, 46)
         Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
         Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
         Me.ucrChkIncludeVariable.TabIndex = 17
@@ -289,7 +422,7 @@ Partial Class dlgName
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 291)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
@@ -297,10 +430,32 @@ Partial Class dlgName
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(99, 4)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(134, 4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrChkWithDot
+        '
+        Me.ucrChkWithDot.AutoSize = True
+        Me.ucrChkWithDot.Checked = False
+        Me.ucrChkWithDot.Location = New System.Drawing.Point(184, 62)
+        Me.ucrChkWithDot.Name = "ucrChkWithDot"
+        Me.ucrChkWithDot.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkWithDot.TabIndex = 26
+        '
+        'ucrNudMax
+        '
+        Me.ucrNudMax.AutoSize = True
+        Me.ucrNudMax.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMax.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMax.Location = New System.Drawing.Point(127, 62)
+        Me.ucrNudMax.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMax.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMax.Name = "ucrNudMax"
+        Me.ucrNudMax.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMax.TabIndex = 25
+        Me.ucrNudMax.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputCase
         '
@@ -308,7 +463,7 @@ Partial Class dlgName
         Me.ucrInputCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCase.GetSetSelectedIndex = -1
         Me.ucrInputCase.IsReadOnly = False
-        Me.ucrInputCase.Location = New System.Drawing.Point(148, 40)
+        Me.ucrInputCase.Location = New System.Drawing.Point(148, 15)
         Me.ucrInputCase.Name = "ucrInputCase"
         Me.ucrInputCase.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputCase.TabIndex = 20
@@ -316,9 +471,9 @@ Partial Class dlgName
         'ucrPnlCase
         '
         Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
+        Me.ucrPnlCase.Location = New System.Drawing.Point(4, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(251, 58)
+        Me.ucrPnlCase.Size = New System.Drawing.Size(265, 95)
         Me.ucrPnlCase.TabIndex = 17
         '
         'dlgName
@@ -326,7 +481,8 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 346)
+        Me.ClientSize = New System.Drawing.Size(598, 420)
+        Me.Controls.Add(Me.grpPatternOption)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)
@@ -353,6 +509,8 @@ Partial Class dlgName
         Me.Text = "Rename Columns"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
+        Me.grpPatternOption.ResumeLayout(False)
+        Me.grpPatternOption.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -379,4 +537,17 @@ Partial Class dlgName
     Friend WithEvents rdoRenameWith As RadioButton
     Friend WithEvents ucrChkIncludeVariable As ucrCheck
     Friend WithEvents grdRenameColumns As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents rdoAbbreviate As RadioButton
+    Friend WithEvents rdoPattern As RadioButton
+    Friend WithEvents lblMax As Label
+    Friend WithEvents ucrChkWithDot As ucrCheck
+    Friend WithEvents ucrNudMax As ucrNud
+    Friend WithEvents grpPatternOption As GroupBox
+    Friend WithEvents ucrChkIgnoreCase As ucrCheck
+    Friend WithEvents lblReplaceBy As Label
+    Friend WithEvents lblPattern As Label
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
+    Friend WithEvents ucrInputReplaceBy As ucrInputTextBox
+    Friend WithEvents ucrInputPattern As ucrInputTextBox
+    Friend WithEvents cmdAddkeyboard As Button
 End Class

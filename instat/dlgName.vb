@@ -30,6 +30,7 @@ Public Class dlgName
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsDummyRenameWithFunction As New RFunction
+    Private clsDummyRegexFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private bIncludeCopyOfLevels As Boolean
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
@@ -75,6 +76,14 @@ Public Class dlgName
 
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
+        ucrChkIgnoreCase.SetText("Ignore Case")
+
+        ucrChkWithDot.SetText("With Dot")
+
+        ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
+        ucrChkIncludeRegularExpressions.SetParameter(New RParameter("checked", 0))
+        ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked(True, False)
+
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
@@ -83,19 +92,25 @@ Public Class dlgName
         ucrPnlCase.SetParameter(New RParameter("checked", 0))
         ucrPnlCase.AddRadioButton(rdoToLower, "lower")
         ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "make_clean_names")
+        ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbr")
+        ucrPnlCase.AddRadioButton(rdoPattern, "pattern")
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoPattern}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlCase.AddToLinkedControls({ucrNudMax, ucrChkWithDot}, {rdoAbbreviate}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
         ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
         ucrInputCase.SetLinkedDisplayControl(lblCase)
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
+        ucrChkIncludeRegularExpressions.SetLinkedDisplayControl(grpPatternOption)
         ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
+        ucrNudMax.SetLinkedDisplayControl(lblMax)
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -130,15 +145,17 @@ Public Class dlgName
         clsNewLabelDataframeFunction = New RFunction
         clsDummyFunction = New RFunction
         clsDummyRenameWithFunction = New RFunction
+        clsDummyRegexFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
+        cmdAddkeyboard.Visible = False
         UpdateGrid()
 
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
 
-        clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)
+        clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
         clsDummyRenameWithFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=1)
 
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
@@ -147,7 +164,7 @@ Public Class dlgName
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
-        clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
+        clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
@@ -162,6 +179,7 @@ Public Class dlgName
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
+        ucrChkIncludeRegularExpressions.SetRCode(clsDummyRegexFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -174,7 +192,7 @@ Public Class dlgName
         ElseIf rdoRenameWith.Checked Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(bCurrentCell)
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -223,25 +241,26 @@ Public Class dlgName
         If e.Range.Rows > 1 Then
             For iRow As Integer = 0 To e.Range.Rows - 1
                 Dim strData As String = grdCurrentWorkSheet.Item(row:=iRow, col:=iColIndex).ToString()
-                If CheckCellValueData(strData) Then
-                    bCurrentCell = False
-                    Exit For
-                Else
-                    bCurrentCell = True
-                End If
-
                 GetVariables(strData, iRow + 1, iColIndex)
+                '    If CheckCellValueData(strData) Then
+                '        bCurrentCell = False
+                '        Exit For
+                '    Else
+                '        bCurrentCell = True
+                '    End If
+
+                '    GetVariables(strData, iRow + 1, 1)
             Next
         Else
             Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
-
-            If CheckCellValueData(strNewData) Then
-                bCurrentCell = True
-            Else
-                bCurrentCell = False
-            End If
             GetVariables(strNewData, iRowIndex, iColIndex)
-            TestOKEnabled()
+
+            'If CheckCellValueData(strNewData) Then
+            '    bCurrentCell = True
+            'Else
+            '    bCurrentCell = False
+            'End If
+            'TestOKEnabled()
         End If
     End Sub
 
@@ -258,7 +277,7 @@ Public Class dlgName
         If strNewData <> "" Then
             For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
                 If grdCurrentWorkSheet.Item(i, 1) = strNewData OrElse Integer.TryParse(strNewData, iTemp) Then
-                    MsgBox("A column with this name " & strNewData & " may exists already or must be string e.g village, field. Please change the name", MsgBoxStyle.Exclamation)
+                    'MsgBox("A column with this name " & strNewData & " may exists already or must be string e.g village, field. Please change the name", MsgBoxStyle.Exclamation)
                     Return True
                 End If
             Next
@@ -269,14 +288,15 @@ Public Class dlgName
     Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
         Dim strNewData As String = e.Text
 
-        If CheckCellValueData(strNewData) OrElse e.Cell.Data Is Nothing Then
-            bCurrentCell = False
-        Else
-            bCurrentCell = True
-            GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
-        End If
+        'If CheckCellValueData(strNewData) OrElse e.Cell.Data Is Nothing Then
+        '    bCurrentCell = False
+        'Else
+        '    bCurrentCell = True
+        '    GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
+        'End If
+        GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
 
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
@@ -309,10 +329,14 @@ Public Class dlgName
                 clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
                 clsDefaultRFunction.RemoveParameterByPosition(7)
                 clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)
-            Else
+            ElseIf rdoMakeCleanNames.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
                 clsDefaultRFunction.AddParameter("case", dctCaseOptions(ucrInputCase.GetText()), iPosition:=7)
                 clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
+            ElseIf rdoAbbreviate.Checked Then
+                clsDummyRenameWithFunction.AddParameter("checked", "abbr", iPosition:=0)
+            Else
+                clsDummyRenameWithFunction.AddParameter("checked", "pattern", iPosition:=0)
             End If
         End If
     End Sub
@@ -329,7 +353,7 @@ Public Class dlgName
 
         grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
         grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
-        grdCurrentWorkSheet.ColumnHeaders(2).Text = "New Label"
+        grdCurrentWorkSheet.ColumnHeaders(2).Text = "Label"
         grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
 
         If rdoMultiple.Checked Then
@@ -340,9 +364,9 @@ Public Class dlgName
                     grdCurrentWorkSheet.Item(row:=i, col:=1) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
                 Next
 
-                'For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
-                '    AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
-                'Next
+                For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+                    AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
+                Next
 
                 For i As Integer = 0 To GetListColsLabel().Count - 1
                     grdCurrentWorkSheet.Item(row:=i, col:=2) = GetListColsLabel().Item(i)
@@ -458,6 +482,8 @@ Public Class dlgName
             ucrReceiverColumns.SetMeAsReceiver()
         End If
         ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
 
         UpdateGrid()
         RemoveDataframeParameters()
@@ -469,6 +495,14 @@ Public Class dlgName
 
     Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
         MakeLabelColumnVisible()
+    End Sub
+
+    Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged
+        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
+    End Sub
+
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+        sdgConstructRegexExpression.ShowDialog()
     End Sub
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
@@ -483,5 +517,13 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+
     End Sub
 End Class
