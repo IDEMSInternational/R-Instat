@@ -76,7 +76,11 @@ Public Class ucrDistributionsWithParameters
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterInputTextBoxes(i).SetName(clsCurrDistribution.clsParameters(i).strDefaultValue)
-                    AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                        AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, "c(" & clsCurrDistribution.clsParameters(i).strDefaultValue & ")")
+                    Else
+                        AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    End If
                 Else
                     lstParameterInputTextBoxes(i).Reset()
                 End If
@@ -110,20 +114,18 @@ Public Class ucrDistributionsWithParameters
         OnControlValueChanged()
     End Sub
 
-    Private Sub ucrInputParameter2_ControlValueChanged() Handles ucrInputParameter2.ControlValueChanged
-        If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
-            AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
-            CheckParametersFilled()
-        End If
-        OnControlValueChanged()
-    End Sub
-
     Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
-        If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
-            ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
-            ucrInputParameter1.IsReadOnly = True
-        Else
-            ucrInputParameter1.IsReadOnly = False
+        If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
+            If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                ttEmpirical.SetToolTip(ucrInputParameter2.txtInput, "Input relative values separated by commas, For example 3,2,1.")
+                AddParameter(lstCurrArguments(1), "c(" & ucrInputParameter2.GetText & ")")
+                ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
+                ucrInputParameter1.IsReadOnly = True
+            Else
+                AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
+                ucrInputParameter1.IsReadOnly = False
+            End If
+            CheckParametersFilled()
         End If
         OnControlContentsChanged()
     End Sub

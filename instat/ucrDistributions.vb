@@ -446,7 +446,7 @@ Public Class ucrDistributions
         clsEmpiricalDist.strRFunctionName = "rempiricalD"
         clsEmpiricalDist.SetPackageName("mc2d")
         clsEmpiricalDist.AddParameter("values", "Values", "1:5")
-        clsEmpiricalDist.AddParameter("prob", "Probability", "c(10, 10, 10, 0, 10)")
+        clsEmpiricalDist.AddParameter("prob", "Probability", "10, 10, 10, 0, 10")
         lstAllDistributions.Add(clsEmpiricalDist)
 
         'Triangular distribution

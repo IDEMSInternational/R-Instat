@@ -22,9 +22,6 @@ Public Class dlgRandomSample
     Private clsDistributionFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private clsRNGKindFunction As New RFunction
-    Private clsArimaSimFunction As New RFunction
-    Private clsListFunction As New RFunction
-    Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -80,18 +77,6 @@ Public Class dlgRandomSample
 
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
-        ucrChkArima.SetText("Arima")
-        ucrChkArima.SetParameter(New RParameter("check"))
-        ucrChkArima.SetValuesCheckedAndUnchecked(True, False)
-        ucrChkArima.AddToLinkedControls(ucrNudAr, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrNudAr.SetParameter(New RParameter("ar", 1))
-        ucrNudAr.SetMinMax(0.5, Integer.MaxValue)
-        ucrNudAr.Increment = 0.1
-        ucrNudAr.DecimalPlaces = 1
-
-        ucrNudAr.SetLinkedDisplayControl(lblAutoregressive)
-
         ucrSaveRandomSample.SetSaveTypeAsColumn()
         ucrSaveRandomSample.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrSaveRandomSample.SetIsComboBox()
@@ -102,9 +87,6 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
         clsRNGKindFunction = New RFunction
-        clsArimaSimFunction = New RFunction
-        clsListFunction = New RFunction
-        clsDummyFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrSelectorRandomSamples.Reset()
@@ -125,13 +107,6 @@ Public Class dlgRandomSample
 
         clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
 
-        clsArimaSimFunction.SetRCommand("arima.sim")
-        clsArimaSimFunction.AddParameter("model", clsRFunctionParameter:=clsListFunction, iPosition:=0)
-        clsArimaSimFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
-
-        clsListFunction.SetRCommand("list")
-        clsListFunction.AddParameter("ar", "0.5", iPosition:=0)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText, bAssignToIsPrefix:=True)
         SetDataFrameAndDistributionParameters()
@@ -144,8 +119,6 @@ Public Class dlgRandomSample
         ucrSaveRandomSample.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrInputRngKind.SetRCode(clsRNGKindFunction, bReset)
-        ucrChkArima.SetRCode(clsDummyFunction, bReset)
-        ucrNudAr.SetRCode(clsListFunction, bReset)
         ucrChkRngKind.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
@@ -203,7 +176,7 @@ Public Class dlgRandomSample
 
     Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged,
         ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
-        ucrChkRngKind.ControlContentsChanged, ucrChkArima.ControlContentsChanged, ucrNudAr.ControlContentsChanged
+        ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -228,14 +201,6 @@ Public Class dlgRandomSample
             ucrBase.clsRsyntax.AddToBeforeCodes(clsRNGKindFunction, iPosition:=0)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRNGKindFunction)
-        End If
-    End Sub
-
-    Private Sub ucrChkArima_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkArima.ControlValueChanged
-        If ucrChkArima.Checked Then
-            clsMultipleSamplesFunction.AddParameter("x", clsRFunctionParameter:=clsArimaSimFunction, bIncludeArgumentName:=False, iPosition:=3)
-        Else
-            clsMultipleSamplesFunction.RemoveParameterByName("x")
         End If
     End Sub
 End Class
