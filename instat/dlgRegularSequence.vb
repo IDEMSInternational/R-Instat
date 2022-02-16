@@ -250,7 +250,7 @@ Public Class dlgRegularSequence
             'this check is useful for large data frames.
             strNewPreviewScript = clsAsCharacter.ToScript()
             If strNewPreviewScript = strPreviewScript Then
-                Return
+                Exit Sub
             End If
             strPreviewScript = strNewPreviewScript
 
