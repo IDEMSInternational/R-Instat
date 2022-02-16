@@ -209,7 +209,7 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" AndAlso
+        If Not String.IsNullOrEmpty(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text) AndAlso
             ucrNewColumnName.IsComplete AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso
             Not ucrNudRepeatValues.IsEmpty Then
 
