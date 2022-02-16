@@ -57,6 +57,7 @@ Public Class dlgName
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim lstControls As New List(Of Control)
         ucrBase.iHelpTopicID = 33
 
         ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
@@ -84,6 +85,9 @@ Public Class dlgName
         ucrChkIncludeRegularExpressions.SetParameter(New RParameter("checked", 0))
         ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked(True, False)
 
+        ucrNudMax.SetParameter(New RParameter(""))
+        ucrNudMax.SetMinMax(1, 9)
+
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
@@ -101,7 +105,8 @@ Public Class dlgName
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoPattern}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlCase.AddToLinkedControls({ucrNudMax, ucrChkWithDot}, {rdoAbbreviate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrChkWithDot, {rdoAbbreviate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrNudMax, {rdoAbbreviate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=8)
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
@@ -110,7 +115,9 @@ Public Class dlgName
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
         ucrChkIncludeRegularExpressions.SetLinkedDisplayControl(grpPatternOption)
         ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
-        ucrNudMax.SetLinkedDisplayControl(lblMax)
+        lstControls.Add(lblMax)
+        lstControls.Add(lblCharacters)
+        ucrNudMax.SetLinkedDisplayControl(lstControls)
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -382,6 +389,7 @@ Public Class dlgName
 
         grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
         grdRenameColumns.SheetTabNewButtonVisible = False
+        grdRenameColumns.SheetTabWidth = 450
 
         MakeLabelColumnVisible()
     End Sub

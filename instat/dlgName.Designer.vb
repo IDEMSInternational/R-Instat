@@ -73,6 +73,7 @@ Partial Class dlgName
         Me.ucrNudMax = New instat.ucrNud()
         Me.ucrInputCase = New instat.ucrInputComboBox()
         Me.ucrPnlCase = New instat.UcrPanel()
+        Me.lblCharacters = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.grpPatternOption.SuspendLayout()
         Me.SuspendLayout()
@@ -152,7 +153,7 @@ Partial Class dlgName
         'rdoToLower
         '
         Me.rdoToLower.AutoSize = True
-        Me.rdoToLower.Location = New System.Drawing.Point(10, 40)
+        Me.rdoToLower.Location = New System.Drawing.Point(7, 40)
         Me.rdoToLower.Name = "rdoToLower"
         Me.rdoToLower.Size = New System.Drawing.Size(70, 17)
         Me.rdoToLower.TabIndex = 12
@@ -163,7 +164,7 @@ Partial Class dlgName
         'rdoMakeCleanNames
         '
         Me.rdoMakeCleanNames.AutoSize = True
-        Me.rdoMakeCleanNames.Location = New System.Drawing.Point(10, 17)
+        Me.rdoMakeCleanNames.Location = New System.Drawing.Point(7, 17)
         Me.rdoMakeCleanNames.Name = "rdoMakeCleanNames"
         Me.rdoMakeCleanNames.Size = New System.Drawing.Size(88, 17)
         Me.rdoMakeCleanNames.TabIndex = 19
@@ -181,6 +182,7 @@ Partial Class dlgName
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.lblCharacters)
         Me.grpOptions.Controls.Add(Me.ucrChkWithDot)
         Me.grpOptions.Controls.Add(Me.ucrNudMax)
         Me.grpOptions.Controls.Add(Me.lblMax)
@@ -191,9 +193,9 @@ Partial Class dlgName
         Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
         Me.grpOptions.Controls.Add(Me.rdoToLower)
         Me.grpOptions.Controls.Add(Me.ucrPnlCase)
-        Me.grpOptions.Location = New System.Drawing.Point(12, 236)
+        Me.grpOptions.Location = New System.Drawing.Point(9, 236)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(275, 114)
+        Me.grpOptions.Size = New System.Drawing.Size(315, 114)
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Rename Options"
@@ -201,16 +203,16 @@ Partial Class dlgName
         'lblMax
         '
         Me.lblMax.AutoSize = True
-        Me.lblMax.Location = New System.Drawing.Point(90, 65)
+        Me.lblMax.Location = New System.Drawing.Point(87, 65)
         Me.lblMax.Name = "lblMax"
         Me.lblMax.Size = New System.Drawing.Size(30, 13)
         Me.lblMax.TabIndex = 24
-        Me.lblMax.Text = "Max."
+        Me.lblMax.Text = "Max:"
         '
         'rdoAbbreviate
         '
         Me.rdoAbbreviate.AutoSize = True
-        Me.rdoAbbreviate.Location = New System.Drawing.Point(10, 63)
+        Me.rdoAbbreviate.Location = New System.Drawing.Point(7, 63)
         Me.rdoAbbreviate.Name = "rdoAbbreviate"
         Me.rdoAbbreviate.Size = New System.Drawing.Size(76, 17)
         Me.rdoAbbreviate.TabIndex = 23
@@ -221,7 +223,7 @@ Partial Class dlgName
         'rdoPattern
         '
         Me.rdoPattern.AutoSize = True
-        Me.rdoPattern.Location = New System.Drawing.Point(10, 86)
+        Me.rdoPattern.Location = New System.Drawing.Point(7, 86)
         Me.rdoPattern.Name = "rdoPattern"
         Me.rdoPattern.Size = New System.Drawing.Size(59, 17)
         Me.rdoPattern.TabIndex = 22
@@ -253,7 +255,7 @@ Partial Class dlgName
         Me.grdRenameColumns.BackColor = System.Drawing.Color.White
         Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
-        Me.grdRenameColumns.Location = New System.Drawing.Point(240, 69)
+        Me.grdRenameColumns.Location = New System.Drawing.Point(251, 69)
         Me.grdRenameColumns.Name = "grdRenameColumns"
         Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
         Me.grdRenameColumns.Script = Nothing
@@ -262,7 +264,7 @@ Partial Class dlgName
         Me.grdRenameColumns.SheetTabVisible = True
         Me.grdRenameColumns.SheetTabWidth = 154
         Me.grdRenameColumns.ShowScrollEndSpacing = True
-        Me.grdRenameColumns.Size = New System.Drawing.Size(347, 210)
+        Me.grdRenameColumns.Size = New System.Drawing.Size(349, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
         '
@@ -275,7 +277,7 @@ Partial Class dlgName
         Me.grpPatternOption.Controls.Add(Me.ucrChkIgnoreCase)
         Me.grpPatternOption.Controls.Add(Me.lblReplaceBy)
         Me.grpPatternOption.Controls.Add(Me.lblPattern)
-        Me.grpPatternOption.Location = New System.Drawing.Point(293, 236)
+        Me.grpPatternOption.Location = New System.Drawing.Point(325, 236)
         Me.grpPatternOption.Name = "grpPatternOption"
         Me.grpPatternOption.Size = New System.Drawing.Size(286, 121)
         Me.grpPatternOption.TabIndex = 19
@@ -412,7 +414,7 @@ Partial Class dlgName
         Me.ucrSelectVariables.bDropUnusedFilterLevels = False
         Me.ucrSelectVariables.bShowHiddenColumns = False
         Me.ucrSelectVariables.bUseCurrentFilter = True
-        Me.ucrSelectVariables.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectVariables.Location = New System.Drawing.Point(9, 50)
         Me.ucrSelectVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectVariables.Name = "ucrSelectVariables"
         Me.ucrSelectVariables.Size = New System.Drawing.Size(213, 183)
@@ -422,7 +424,7 @@ Partial Class dlgName
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 364)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
@@ -439,9 +441,9 @@ Partial Class dlgName
         '
         Me.ucrChkWithDot.AutoSize = True
         Me.ucrChkWithDot.Checked = False
-        Me.ucrChkWithDot.Location = New System.Drawing.Point(184, 62)
+        Me.ucrChkWithDot.Location = New System.Drawing.Point(231, 63)
         Me.ucrChkWithDot.Name = "ucrChkWithDot"
-        Me.ucrChkWithDot.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkWithDot.Size = New System.Drawing.Size(75, 23)
         Me.ucrChkWithDot.TabIndex = 26
         '
         'ucrNudMax
@@ -449,11 +451,11 @@ Partial Class dlgName
         Me.ucrNudMax.AutoSize = True
         Me.ucrNudMax.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMax.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMax.Location = New System.Drawing.Point(127, 62)
+        Me.ucrNudMax.Location = New System.Drawing.Point(120, 62)
         Me.ucrNudMax.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMax.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMax.Name = "ucrNudMax"
-        Me.ucrNudMax.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMax.Size = New System.Drawing.Size(38, 20)
         Me.ucrNudMax.TabIndex = 25
         Me.ucrNudMax.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -473,15 +475,24 @@ Partial Class dlgName
         Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCase.Location = New System.Drawing.Point(4, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(265, 95)
+        Me.ucrPnlCase.Size = New System.Drawing.Size(305, 95)
         Me.ucrPnlCase.TabIndex = 17
+        '
+        'lblCharacters
+        '
+        Me.lblCharacters.AutoSize = True
+        Me.lblCharacters.Location = New System.Drawing.Point(162, 65)
+        Me.lblCharacters.Name = "lblCharacters"
+        Me.lblCharacters.Size = New System.Drawing.Size(57, 13)
+        Me.lblCharacters.TabIndex = 27
+        Me.lblCharacters.Text = "characters"
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(598, 420)
+        Me.ClientSize = New System.Drawing.Size(616, 420)
         Me.Controls.Add(Me.grpPatternOption)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
@@ -550,4 +561,5 @@ Partial Class dlgName
     Friend WithEvents ucrInputReplaceBy As ucrInputTextBox
     Friend WithEvents ucrInputPattern As ucrInputTextBox
     Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents lblCharacters As Label
 End Class
