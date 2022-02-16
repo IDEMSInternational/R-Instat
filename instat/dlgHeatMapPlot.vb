@@ -37,7 +37,7 @@ Public Class dlgHeatMapPlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
-    Private clsLabelAesFuction As New RFunction
+    Private clsLabelAesFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
     Private clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction As New RFunction
     Private clsGeomPointShapeHeatMapFunction, clsGeomPointShapeChoroplethFunction As New RFunction
@@ -170,7 +170,6 @@ Public Class dlgHeatMapPlot
 
 
         ucrNudShapeChoropleth.SetParameter(New RParameter("size", 2))
-        ucrNudShapeChoropleth.Visible = False
         ucrNudShapeChoropleth.SetLinkedDisplayControl(lblSizeChoropleth)
 
         ucrSaveGraph.SetPrefix("heatmap")
@@ -245,7 +244,7 @@ Public Class dlgHeatMapPlot
         clsRgeomTileFunction = New RFunction
         clsBaseOperator = New ROperator
         clsGeomTextFunction = New RFunction
-        clsLabelAesFuction = New RFunction
+        clsLabelAesFunction = New RFunction
         clsColourPaletteFunction = New RFunction
         clsGeomPointSizeHeatMapFunction = New RFunction
         clsGeomPointSizeChoroplethFunction = New RFunction
@@ -300,14 +299,14 @@ Public Class dlgHeatMapPlot
 
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
-        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
+        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
         clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
         clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
         clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
 
-        clsLabelAesFuction.SetPackageName("ggplot2")
-        clsLabelAesFuction.SetRCommand("aes")
-        clsLabelAesFuction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+        clsLabelAesFunction.SetPackageName("ggplot2")
+        clsLabelAesFunction.SetRCommand("aes")
+        clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
 
         clsRoundFunction.SetRCommand("round")
         clsRoundFunction.AddParameter("digits", 2, iPosition:=0)
@@ -403,7 +402,6 @@ Public Class dlgHeatMapPlot
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=1)
 
-
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
 
@@ -445,10 +443,6 @@ Public Class dlgHeatMapPlot
                 ucrBase.OKEnabled(False)
             End If
         End If
-    End Sub
-
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -571,15 +565,15 @@ Public Class dlgHeatMapPlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverFill.ControlValueChanged, ucrInputReorderVariableX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
         If rdoHeatMap.Checked Then
-            clsLabelAesFuction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
-            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
+            clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
             cmdTileOptions.Text = "Tile Options"
             clsBaseOperator.AddParameter("geom_tile", clsRFunctionParameter:=clsRgeomTileFunction, iPosition:=1)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHeatmapAesFunction, iPosition:=1)
             clsBaseOperator.RemoveParameterByName("geom_polygon")
         Else
-            clsLabelAesFuction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction1, iPosition:=0)
-            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFuction, iPosition:=1)
+            clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction1, iPosition:=0)
+            clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
             cmdTileOptions.Text = "Polygon Options"
             clsBaseOperator.RemoveParameterByName("geom_tile")
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsChoroplethAesFunction, iPosition:=1)
@@ -629,10 +623,8 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub UpdateParameter()
-        Dim strChangeTextReorder As String = ucrInputReorderVariableX.GetText()
-        Dim strChangedReorderValue As String = ucrInputReorderValue.GetText()
         If rdoHeatMap.Checked Then
-            Select Case strChangedReorderValue
+            Select Case ucrInputReorderValue.GetText()
                 Case strAscending
                     clsReorderFunctionValue.AddParameter("X", ucrReceiverX.GetVariableNames(False), iPosition:=1)
                     clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=0)
@@ -643,7 +635,7 @@ Public Class dlgHeatMapPlot
                     clsForecatsReverseValue.AddParameter("f", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
                     clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=0)
             End Select
-            Select Case strChangeTextReorder
+            Select Case ucrInputReorderVariableX.GetText()
                 Case strAscending
                     clsReorderFunction.AddParameter("X", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=1)
                     clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
@@ -682,5 +674,9 @@ Public Class dlgHeatMapPlot
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
