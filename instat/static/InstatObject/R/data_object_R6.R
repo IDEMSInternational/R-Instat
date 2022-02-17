@@ -1883,11 +1883,13 @@ DataSheet$set("public", "get_current_column_selection", function() {
 )
 
 DataSheet$set("public", "set_current_column_selection", function(name = "") {
-  if(!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
-  if(length(self$get_column_selection_column_names(name))==0) stop(name, " has no columns selected.")
-  self$current_column_selection <- private$column_selections[[name]]
-}
-)
+  if (!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
+  if (length(self$get_column_selection_column_names(name)) == 0) {
+    cat(name, " has no columns selected.")
+  } else {
+    self$current_column_selection <- private$column_selections[[name]]
+  }
+})
 
 DataSheet$set("public", "get_column_selection_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   out <- names(private$column_selections)

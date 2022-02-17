@@ -108,7 +108,7 @@ Public Class sdgDataOptions
                 clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
                 clsSetCurrentColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
                 clsSetCurrentColumnSelection.AddParameter("name", ucrReceiverSelect.GetVariableNames())
-                frmMain.clsRLink.RunScript(clsSetCurrentColumnSelection.ToScript(), strComment:="Data Options subdialog: Set the current column selection")
+                frmMain.clsRLink.RunScript(clsSetCurrentColumnSelection.ToScript(), strComment:="Data Options subdialog: Set the current column selection", iCallType:=2)
             Else
                 'TODO: Set Local column selection
             End If
