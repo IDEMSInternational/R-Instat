@@ -400,24 +400,17 @@ Public Class dlgName
 
         clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
         clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("columns", GetValuesAsVector(dctNameRowsValues))
 
-        'This is to be done in R to avoid the app to slow down when getting the list of label
-        For i As Integer = 0 To dctNameRowsValues.Count - 1
-            clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & dctNameRowsValues(i) & Chr(34), iPosition:=i)
-            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
-            If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
-                Dim strArr As String() = expItems.AsCharacter.ToArray
-                If strArr IsNot Nothing Then
-                    'the number of labels for a column expected is 1
-                    If strArr.Length = 1 Then
-                        lstColLabel.Add(strArr(0))
-                    ElseIf strArr.Length > 1 Then
-                        MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        lstColLabel.Add(strArr(strArr.Length - 1))
-                    End If
-                End If
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            Dim strArr As String() = expItems.AsCharacter.ToArray
+            If strArr IsNot Nothing Then
+                For Each strValue In strArr
+                    lstColLabel.Add(strValue)
+                Next
             End If
-        Next
+        End If
         Return lstColLabel
     End Function
 
