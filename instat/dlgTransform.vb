@@ -486,72 +486,69 @@ Public Class dlgTransform
         ucrChkEditPreview.Checked = False
     End Sub
 
-    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged,
-        ucrPnlNonNegative.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrNudLagPosition.ControlValueChanged,
-        ucrNudLagLeadPosition.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkMissingLast.ControlValueChanged,
-        ucrChkAddConstant.ControlValueChanged, ucrChkMissingLast.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputConstant.ControlValueChanged,
-        ucrInputAdd.ControlValueChanged, ucrInputDivide.ControlValueChanged, ucrInputMultiply.ControlValueChanged, ucrInputSubtract.ControlValueChanged, ucrChkAdd.ControlValueChanged,
-        ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrChkPreview.ControlValueChanged
-        ucrBase.clsRsyntax.ClearCodes()
-        If rdoRank.Checked Then
-            clsPreviewTextFunction = clsRankFunction.Clone
-            clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
-        ElseIf rdoSort.Checked Then
-            clsPreviewTextFunction = clsSortFunction.Clone
-            clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
-        ElseIf rdoNumeric.Checked Then
-            clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
-            If rdoRoundOf.Checked Then
-                clsPreviewTextFunction = clsRoundFunction.Clone
-                clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
-            ElseIf rdoSignificantDigits.Checked Then
-                clsPreviewTextFunction = clsSignifFunction.Clone
-                clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
-            ElseIf rdoLag.Checked Then
-                clsPreviewTextFunction = clsLagFunction.Clone
-                clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
-            ElseIf rdoLead.Checked Then
-                clsPreviewTextFunction = clsLeadFunction.Clone
-                clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
-            ElseIf rdoDifference.Checked Then
-                clsPreviewTextFunction = clsConcDiffFunction.Clone
-                clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
-            ElseIf rdoStandardize.Checked Then
-                clsPreviewTextFunction = clsDivisionOperator.Clone
-                clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
+    Private Sub BaseFunctions()
+        If bResetRCode Then
+            ucrBase.clsRsyntax.ClearCodes()
+            If rdoRank.Checked Then
+                clsPreviewTextFunction = clsRankFunction.Clone
+                clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
+            ElseIf rdoSort.Checked Then
+                clsPreviewTextFunction = clsSortFunction.Clone
+                clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+            ElseIf rdoNumeric.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
+                If rdoRoundOf.Checked Then
+                    clsPreviewTextFunction = clsRoundFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
+                ElseIf rdoSignificantDigits.Checked Then
+                    clsPreviewTextFunction = clsSignifFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
+                ElseIf rdoLag.Checked Then
+                    clsPreviewTextFunction = clsLagFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
+                ElseIf rdoLead.Checked Then
+                    clsPreviewTextFunction = clsLeadFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
+                ElseIf rdoDifference.Checked Then
+                    clsPreviewTextFunction = clsConcDiffFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
+                ElseIf rdoStandardize.Checked Then
+                    clsPreviewTextFunction = clsDivisionOperator.Clone
+                    clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
+                End If
+            ElseIf rdoNonNegative.Checked Then
+                UpdateConstantParameter()
+                clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
+                If rdoSquareRoot.Checked Then
+                    clsPreviewTextFunction = clsSquarerootFunction.Clone
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSquarerootFunction)
+                    clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
+                ElseIf rdoPower.Checked Then
+                    clsPreviewTextFunction = clsPowerOperator.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsPowerOperator)
+                ElseIf rdoLogToBase10.Checked Then
+                    clsPreviewTextFunction = clsLogBase10Function.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLogBase10Function)
+                ElseIf rdoNaturalLog.Checked Then
+                    clsPreviewTextFunction = clsNaturalLogFunction.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
+                End If
+            ElseIf rdoScale.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
+                clsPreviewTextFunction = clsScaleAddOperator.Clone
+                ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
             End If
-        ElseIf rdoNonNegative.Checked Then
-            UpdateConstantParameter()
-            clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
-            If rdoSquareRoot.Checked Then
-                clsPreviewTextFunction = clsSquarerootFunction.Clone
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSquarerootFunction)
-                clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
-            ElseIf rdoPower.Checked Then
-                clsPreviewTextFunction = clsPowerOperator.Clone
-                clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseROperator(clsPowerOperator)
-            ElseIf rdoLogToBase10.Checked Then
-                clsPreviewTextFunction = clsLogBase10Function.Clone
-                clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLogBase10Function)
-            ElseIf rdoNaturalLog.Checked Then
-                clsPreviewTextFunction = clsNaturalLogFunction.Clone
-                clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
-            End If
-        ElseIf rdoScale.Checked Then
-            clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
-            clsPreviewTextFunction = clsScaleAddOperator.Clone
-            ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
         End If
         clsPreviewTextFunction.RemoveAssignTo()
         If Not ucrReceiverRank.IsEmpty Then
@@ -559,8 +556,12 @@ Public Class dlgTransform
         Else
             ucrInputPreview.SetText("")
         End If
+    End Sub
+    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged,
+        ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged
         NewDefaultName()
         ResetPreview()
+        BaseFunctions()
     End Sub
 
     Private Sub ucrReceiverRank_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlValueChanged
@@ -575,6 +576,7 @@ Public Class dlgTransform
             clsLogBase10Function.RemoveParameterByName("x")
             clsPowerOperator.RemoveParameterByName("x")
         End If
+        NewDefaultName()
     End Sub
 
     Private Sub UpdateConstantParameter()
@@ -593,12 +595,15 @@ Public Class dlgTransform
         End If
     End Sub
 
-    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrPnlNonNegative.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputPreview.ControlValueChanged
+    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputPreview.ControlValueChanged
         UpdateConstantParameter()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
-    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged, ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged,
+        ucrSaveNew.ControlContentsChanged, ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged,
+        ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged, ucrChkMultiply.ControlContentsChanged,
+    ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
+    ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
