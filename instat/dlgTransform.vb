@@ -124,6 +124,7 @@ Public Class dlgTransform
         ucrPnlNumericOptions.AddRadioButton(rdoLag)
         ucrPnlNumericOptions.AddRadioButton(rdoLead)
         ucrPnlNumericOptions.AddRadioButton(rdoDifference)
+        ucrPnlNumericOptions.AddRadioButton(rdoLogical)
 
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoRoundOf, "check", "round")
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoSignificantDigits, "check", "signif")
@@ -131,6 +132,7 @@ Public Class dlgTransform
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoLag, "check", "lag")
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoLead, "check", "lead")
         ucrPnlNumericOptions.AddParameterValuesCondition(rdoDifference, "check", "diff")
+        'ucrPnlNumericOptions.AddParameterValuesCondition(rdoLogical, "check", "logic")
 
         ucrPnlNonNegative.AddRadioButton(rdoSquareRoot)
         ucrPnlNonNegative.AddRadioButton(rdoLogToBase10)
@@ -148,6 +150,7 @@ Public Class dlgTransform
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudDiffLag, {rdoDifference}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagPosition, {rdoLag}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrChkOmitNA, {rdoStandardize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlNumericOptions.AddToLinkedControls({ucrInputLogicalValues, ucrInputLogicOperations}, {rdoLogical}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNonNegative.AddToLinkedControls(ucrInputPower, {rdoPower}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlMissingValues, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransformOptions.AddToLinkedControls(ucrPnlTies, {rdoRank}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -193,6 +196,12 @@ Public Class dlgTransform
 
         ucrNudLagPosition.SetParameter(New RParameter("lag", 1))
         ucrNudLagPosition.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+
+        ucrInputLogicalValues.SetParameter(New RParameter("x", 1))
+        ucrInputLogicalValues.AddQuotesIfUnrecognised = False
+
+        ucrInputLogicOperations.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "!is.na"})
+        ucrInputLogicOperations.SetDropDownStyleAsNonEditable()
 
         ucrInputPower.SetParameter(New RParameter("y", 1))
         dctPowerValues.Add("1", "1")
