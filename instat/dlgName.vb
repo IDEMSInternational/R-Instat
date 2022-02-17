@@ -241,6 +241,9 @@ Public Class dlgName
 
     Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
         Dim strNewData As String = e.Text
+        If strNewData Is Nothing OrElse e.Cell Is Nothing Then
+            Exit Sub
+        End If
         GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
     End Sub
 
@@ -429,7 +432,11 @@ Public Class dlgName
     End Sub
 
     Private Sub MakeLabelColumnVisible()
-        grdCurrentWorkSheet.ColumnHeaders(2).IsVisible = If(ucrChkIncludeVariable.Checked, True, False)
+        If ucrChkIncludeVariable.Checked Then
+            grdCurrentWorkSheet.ShowColumns(2, 1)
+        Else
+            grdCurrentWorkSheet.HideColumns(2, 1)
+        End If
     End Sub
 
     Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
