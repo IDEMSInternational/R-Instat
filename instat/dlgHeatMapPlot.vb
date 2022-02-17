@@ -117,6 +117,7 @@ Public Class dlgHeatMapPlot
         ucrReceiverX.Selector = ucrHeatMapSelector
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
+        ucrReceiverX.bChangeParameterValue = False
         ucrReceiverX.bWithQuotes = False
 
         ucrReceiverLongitude.Selector = ucrHeatMapSelector
@@ -143,6 +144,7 @@ Public Class dlgHeatMapPlot
         ucrVariableAsFactorForHeatMap.SetFactorReceiver(ucrReceiverX)
         ucrVariableAsFactorForHeatMap.SetParameter(New RParameter("y", 1))
         ucrVariableAsFactorForHeatMap.SetParameterIsString()
+        ucrVariableAsFactorForHeatMap.bChangeParameterValue = False
         ucrVariableAsFactorForHeatMap.bWithQuotes = False
         ucrVariableAsFactorForHeatMap.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariableAsFactorForHeatMap.bAddParameterIfEmpty = True
@@ -634,6 +636,8 @@ Public Class dlgHeatMapPlot
                 Case strReverse
                     clsForecatsReverseValue.AddParameter("f", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
                     clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=0)
+                Case strNone
+                    clsHeatmapAesFunction.AddParameter("y", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
             End Select
             Select Case ucrInputReorderVariableX.GetText()
                 Case strAscending
@@ -645,6 +649,8 @@ Public Class dlgHeatMapPlot
                 Case strReverse
                     clsForecatsReverse.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                     clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                Case strNone
+                    clsHeatmapAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             End Select
         End If
     End Sub

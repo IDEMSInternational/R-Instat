@@ -205,14 +205,14 @@ Partial Class dlgHeatMapPlot
         '
         'ucrChkFlipCoordinates
         '
-        Me.ucrChkFlipCoordinates.Checked = False
         resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
+        Me.ucrChkFlipCoordinates.Checked = False
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         '
         'ucrReceiverPointsHeatMap
         '
-        Me.ucrReceiverPointsHeatMap.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverPointsHeatMap, "ucrReceiverPointsHeatMap")
+        Me.ucrReceiverPointsHeatMap.frmParent = Me
         Me.ucrReceiverPointsHeatMap.Name = "ucrReceiverPointsHeatMap"
         Me.ucrReceiverPointsHeatMap.Selector = Nothing
         Me.ucrReceiverPointsHeatMap.strNcFilePath = ""
@@ -220,9 +220,9 @@ Partial Class dlgHeatMapPlot
         '
         'ucrNudShapeHeatMap
         '
+        resources.ApplyResources(Me.ucrNudShapeHeatMap, "ucrNudShapeHeatMap")
         Me.ucrNudShapeHeatMap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShapeHeatMap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudShapeHeatMap, "ucrNudShapeHeatMap")
         Me.ucrNudShapeHeatMap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudShapeHeatMap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShapeHeatMap.Name = "ucrNudShapeHeatMap"
@@ -230,22 +230,22 @@ Partial Class dlgHeatMapPlot
         '
         'ucrChkColourPalette
         '
-        Me.ucrChkColourPalette.Checked = False
         resources.ApplyResources(Me.ucrChkColourPalette, "ucrChkColourPalette")
+        Me.ucrChkColourPalette.Checked = False
         Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
         '
         'ucrInputColourPalette
         '
         Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
         Me.ucrInputColourPalette.GetSetSelectedIndex = -1
         Me.ucrInputColourPalette.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourPalette, "ucrInputColourPalette")
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         '
         'ucrReceiverFill
         '
-        Me.ucrReceiverFill.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.frmParent = Me
         Me.ucrReceiverFill.Name = "ucrReceiverFill"
         Me.ucrReceiverFill.Selector = Nothing
         Me.ucrReceiverFill.strNcFilePath = ""
@@ -269,23 +269,23 @@ Partial Class dlgHeatMapPlot
         'ucrInputReorderValue
         '
         Me.ucrInputReorderValue.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
         Me.ucrInputReorderValue.GetSetSelectedIndex = -1
         Me.ucrInputReorderValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputReorderValue, "ucrInputReorderValue")
         Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
         '
         'ucrHeatMapSelector
         '
+        resources.ApplyResources(Me.ucrHeatMapSelector, "ucrHeatMapSelector")
         Me.ucrHeatMapSelector.bDropUnusedFilterLevels = False
         Me.ucrHeatMapSelector.bShowHiddenColumns = False
         Me.ucrHeatMapSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrHeatMapSelector, "ucrHeatMapSelector")
         Me.ucrHeatMapSelector.Name = "ucrHeatMapSelector"
         '
         'ucrReceiverLongitude
         '
-        Me.ucrReceiverLongitude.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
+        Me.ucrReceiverLongitude.frmParent = Me
         Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
         Me.ucrReceiverLongitude.Selector = Nothing
         Me.ucrReceiverLongitude.strNcFilePath = ""
@@ -293,8 +293,8 @@ Partial Class dlgHeatMapPlot
         '
         'ucrReceiverLatitude
         '
-        Me.ucrReceiverLatitude.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.frmParent = Me
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
         Me.ucrReceiverLatitude.strNcFilePath = ""
@@ -302,8 +302,8 @@ Partial Class dlgHeatMapPlot
         '
         'ucrReceiverFillChoropleth
         '
-        Me.ucrReceiverFillChoropleth.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverFillChoropleth, "ucrReceiverFillChoropleth")
+        Me.ucrReceiverFillChoropleth.frmParent = Me
         Me.ucrReceiverFillChoropleth.Name = "ucrReceiverFillChoropleth"
         Me.ucrReceiverFillChoropleth.Selector = Nothing
         Me.ucrReceiverFillChoropleth.strNcFilePath = ""
@@ -311,8 +311,8 @@ Partial Class dlgHeatMapPlot
         '
         'ucrVariableAsFactorForHeatMap
         '
-        Me.ucrVariableAsFactorForHeatMap.frmParent = Me
         resources.ApplyResources(Me.ucrVariableAsFactorForHeatMap, "ucrVariableAsFactorForHeatMap")
+        Me.ucrVariableAsFactorForHeatMap.frmParent = Me
         Me.ucrVariableAsFactorForHeatMap.Name = "ucrVariableAsFactorForHeatMap"
         Me.ucrVariableAsFactorForHeatMap.Selector = Nothing
         Me.ucrVariableAsFactorForHeatMap.strNcFilePath = ""
@@ -322,16 +322,16 @@ Partial Class dlgHeatMapPlot
         'ucrInputReorderVariableX
         '
         Me.ucrInputReorderVariableX.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputReorderVariableX, "ucrInputReorderVariableX")
         Me.ucrInputReorderVariableX.GetSetSelectedIndex = -1
         Me.ucrInputReorderVariableX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputReorderVariableX, "ucrInputReorderVariableX")
         Me.ucrInputReorderVariableX.Name = "ucrInputReorderVariableX"
         '
         'ucrNudShapeChoropleth
         '
+        resources.ApplyResources(Me.ucrNudShapeChoropleth, "ucrNudShapeChoropleth")
         Me.ucrNudShapeChoropleth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShapeChoropleth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudShapeChoropleth, "ucrNudShapeChoropleth")
         Me.ucrNudShapeChoropleth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudShapeChoropleth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShapeChoropleth.Name = "ucrNudShapeChoropleth"
@@ -340,37 +340,37 @@ Partial Class dlgHeatMapPlot
         'ucrInputSize
         '
         Me.ucrInputSize.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSize, "ucrInputSize")
         Me.ucrInputSize.GetSetSelectedIndex = -1
         Me.ucrInputSize.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSize, "ucrInputSize")
         Me.ucrInputSize.Name = "ucrInputSize"
         '
         'ucrChkAddLabels
         '
-        Me.ucrChkAddLabels.Checked = False
         resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Checked = False
         Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
         '
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.Name = "ucrInputPosition"
         '
         'ucrInputColour
         '
         Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
         Me.ucrInputColour.GetSetSelectedIndex = -1
         Me.ucrInputColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
         Me.ucrInputColour.Name = "ucrInputColour"
         '
         'ucrReceiverPointsChoropleth
         '
-        Me.ucrReceiverPointsChoropleth.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverPointsChoropleth, "ucrReceiverPointsChoropleth")
+        Me.ucrReceiverPointsChoropleth.frmParent = Me
         Me.ucrReceiverPointsChoropleth.Name = "ucrReceiverPointsChoropleth"
         Me.ucrReceiverPointsChoropleth.Selector = Nothing
         Me.ucrReceiverPointsChoropleth.strNcFilePath = ""
@@ -378,8 +378,8 @@ Partial Class dlgHeatMapPlot
         '
         'ucrReceiverGroup
         '
-        Me.ucrReceiverGroup.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
+        Me.ucrReceiverGroup.frmParent = Me
         Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
         Me.ucrReceiverGroup.Selector = Nothing
         Me.ucrReceiverGroup.strNcFilePath = ""
@@ -387,8 +387,8 @@ Partial Class dlgHeatMapPlot
         '
         'ucrReceiverX
         '
-        Me.ucrReceiverX.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
+        Me.ucrReceiverX.frmParent = Me
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.strNcFilePath = ""

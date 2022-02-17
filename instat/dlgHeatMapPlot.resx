@@ -454,7 +454,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoChoroplethMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 12</value>
+    <value>206, 12</value>
   </data>
   <data name="rdoChoroplethMap.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 28</value>
@@ -490,7 +490,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHeatMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 12</value>
+    <value>99, 12</value>
   </data>
   <data name="rdoHeatMap.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 28</value>
@@ -696,11 +696,14 @@
   <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkFlipCoordinates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkFlipCoordinates.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 379</value>
   </data>
   <data name="ucrChkFlipCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
+    <value>166, 23</value>
   </data>
   <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -717,6 +720,9 @@
   <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrReceiverPointsHeatMap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -725,6 +731,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>420, 562</value>
+  </data>
+  <data name="ucrNudShapeHeatMap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrNudShapeHeatMap.Location" type="System.Drawing.Point, System.Drawing">
     <value>308, 366</value>
@@ -747,11 +756,14 @@
   <data name="&gt;&gt;ucrNudShapeHeatMap.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="ucrChkColourPalette.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 439</value>
   </data>
   <data name="ucrChkColourPalette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
+    <value>128, 23</value>
   </data>
   <data name="ucrChkColourPalette.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -767,6 +779,9 @@
   </data>
   <data name="&gt;&gt;ucrChkColourPalette.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="ucrInputColourPalette.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 439</value>
@@ -788,6 +803,9 @@
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="ucrReceiverFill.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrReceiverFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 300</value>
@@ -813,6 +831,9 @@
   <data name="&gt;&gt;ucrReceiverFill.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="ucrSaveGraph.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 470</value>
   </data>
@@ -837,6 +858,9 @@
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="ucrBase.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 510</value>
   </data>
@@ -858,8 +882,11 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="ucrPnlOptions.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 5</value>
+    <value>99, 5</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 43</value>
@@ -878,6 +905,9 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>17</value>
+  </data>
+  <data name="ucrInputReorderValue.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputReorderValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 127</value>
@@ -899,6 +929,9 @@
   </data>
   <data name="&gt;&gt;ucrInputReorderValue.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="ucrHeatMapSelector.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrHeatMapSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 60</value>
@@ -924,6 +957,9 @@
   <data name="&gt;&gt;ucrHeatMapSelector.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="ucrReceiverLongitude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrReceiverLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 84</value>
   </data>
@@ -947,6 +983,9 @@
   </data>
   <data name="&gt;&gt;ucrReceiverLongitude.ZOrder" xml:space="preserve">
     <value>21</value>
+  </data>
+  <data name="ucrReceiverLatitude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 127</value>
@@ -972,6 +1011,9 @@
   <data name="&gt;&gt;ucrReceiverLatitude.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="ucrReceiverFillChoropleth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrReceiverFillChoropleth.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 170</value>
   </data>
@@ -996,6 +1038,9 @@
   <data name="&gt;&gt;ucrReceiverFillChoropleth.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
+  <data name="ucrVariableAsFactorForHeatMap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrVariableAsFactorForHeatMap.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 54</value>
   </data>
@@ -1016,6 +1061,9 @@
   </data>
   <data name="&gt;&gt;ucrVariableAsFactorForHeatMap.ZOrder" xml:space="preserve">
     <value>27</value>
+  </data>
+  <data name="ucrInputReorderVariableX.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputReorderVariableX.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 256</value>
@@ -1038,6 +1086,9 @@
   <data name="&gt;&gt;ucrInputReorderVariableX.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
+  <data name="ucrNudShapeChoropleth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrNudShapeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 279</value>
   </data>
@@ -1058,6 +1109,9 @@
   </data>
   <data name="&gt;&gt;ucrNudShapeChoropleth.ZOrder" xml:space="preserve">
     <value>29</value>
+  </data>
+  <data name="ucrInputSize.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>347, 409</value>
@@ -1080,11 +1134,14 @@
   <data name="&gt;&gt;ucrInputSize.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
+  <data name="ucrChkAddLabels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 409</value>
   </data>
   <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
+    <value>82, 23</value>
   </data>
   <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1100,6 +1157,9 @@
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
     <value>32</value>
+  </data>
+  <data name="ucrInputPosition.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 409</value>
@@ -1122,6 +1182,9 @@
   <data name="&gt;&gt;ucrInputPosition.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
+  <data name="ucrInputColour.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="ucrInputColour.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 409</value>
   </data>
@@ -1142,6 +1205,9 @@
   </data>
   <data name="&gt;&gt;ucrInputColour.ZOrder" xml:space="preserve">
     <value>36</value>
+  </data>
+  <data name="ucrReceiverPointsChoropleth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrReceiverPointsChoropleth.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 256</value>
@@ -1167,6 +1233,9 @@
   <data name="&gt;&gt;ucrReceiverPointsChoropleth.ZOrder" xml:space="preserve">
     <value>38</value>
   </data>
+  <data name="ucrReceiverGroup.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="ucrReceiverGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 213</value>
   </data>
@@ -1190,6 +1259,9 @@
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
     <value>39</value>
+  </data>
+  <data name="ucrReceiverX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 213</value>
