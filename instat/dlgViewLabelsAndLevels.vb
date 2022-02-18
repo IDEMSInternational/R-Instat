@@ -20,6 +20,7 @@ Public Class dlgViewFactorLabels
     Private bReset As Boolean = True
     Private clsViewFunction, clsSelect As RFunction
     Private clsDummyFunction, clsDummyDataFunction As New RFunction
+    Private iXReceiverLocation, iYReceiverLoaction, iXLabelLocation, iYLabelLoaction As Integer
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,6 +39,11 @@ Public Class dlgViewFactorLabels
 
     Private Sub InitialiseDialog()
         Dim lstOfControls As New List(Of Control)
+
+        iXReceiverLocation = ucrReceiverVariables.Location.X
+        iYReceiverLoaction = ucrReceiverVariables.Location.Y
+        iXLabelLocation = lblFactorColumns.Location.X
+        iYLabelLoaction = lblFactorColumns.Location.Y
 
         ucrBase.iHelpTopicID = 517
         ucrBase.clsRsyntax.iCallType = 2
@@ -169,6 +175,25 @@ Public Class dlgViewFactorLabels
 
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         SetReceiverVariableVisible()
+        If rdoViewLabels.Checked Then
+            lblFactorColumns.Location = New System.Drawing.Point(iXLabelLocation, iYLabelLoaction)
+            ucrReceiverVariables.Location = New System.Drawing.Point(iXReceiverLocation, iYReceiverLoaction)
+            ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = True
+            ucrSelectorViewLabelsAndLevels.btnAdd.Visible = True
+            ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = True
+        Else
+            lblFactorColumns.Location = New System.Drawing.Point(300, 114)
+            ucrReceiverVariables.Location = New System.Drawing.Point(300, 131)
+            If rdoWholeDataFrame.Checked Then
+                ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = False
+                ucrSelectorViewLabelsAndLevels.btnAdd.Visible = False
+                ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = False
+            ElseIf rdoSelectedColumn.Checked Then
+                ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = True
+                ucrSelectorViewLabelsAndLevels.btnAdd.Visible = True
+                ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = True
+            End If
+        End If
     End Sub
 
     Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
