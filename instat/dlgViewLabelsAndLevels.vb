@@ -19,6 +19,7 @@ Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewFunction, clsSelect As RFunction
+    Private clsDummyFunction, clsDummyDataFunction As New RFunction
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -30,11 +31,14 @@ Public Class dlgViewFactorLabels
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        SetReceiverVariableVisible()
         TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim lstOfControls As New List(Of Control)
+
         ucrBase.iHelpTopicID = 517
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverVariables.SetParameter(New RParameter("x", 1))
@@ -83,17 +87,40 @@ Public Class dlgViewFactorLabels
         ucrChkSortByName.SetParameter(New RParameter("sort.by.name", 9))
         ucrChkSortByName.SetText("Sort by Name")
         ucrChkSortByName.SetRDefault("FALSE")
+
+        ucrPnlSelectData.SetParameter(New RParameter("checked", 0))
+        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "data")
+        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "column")
+
+        ucrPnlOptions.SetParameter(New RParameter("checked", 0))
+        ucrPnlOptions.AddRadioButton(rdoViewLabels, "labels")
+        ucrPnlOptions.AddRadioButton(rdoDeleteValueLabels, "delete")
+        ucrPnlOptions.AddToLinkedControls(ucrChkShowValues, {rdoViewLabels}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverVariables, {rdoViewLabels, rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlSelectData, {rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
+        lstOfControls.Add(grpDisplayOptions)
+        lstOfControls.Add(grpLabels)
+        lstOfControls.Add(grpSummaryStatistics)
+        ucrChkShowValues.SetLinkedDisplayControl(lstOfControls)
+        ucrReceiverVariables.SetLinkedDisplayControl(lblFactorColumns)
+
     End Sub
 
     Private Sub SetDefaults()
         clsViewFunction = New RFunction
         clsSelect = New RFunction
+        clsDummyFunction = New RFunction
+        clsDummyDataFunction = New RFunction
 
         'Reset
         ucrSelectorViewLabelsAndLevels.Reset()
         'Defining the function
         clsViewFunction.SetPackageName("sjPlot")
         clsViewFunction.SetRCommand("view_df")
+
+        clsDummyFunction.AddParameter("checked", "labels", iPosition:=0)
+
+        clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
@@ -116,6 +143,8 @@ Public Class dlgViewFactorLabels
         ucrChkShowValues.SetRCode(clsViewFunction, bReset)
         ucrReceiverVariables.SetRCode(clsSelect, bReset)
         ucrSelectorViewLabelsAndLevels.SetRCode(clsSelect, bReset)
+        ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -130,6 +159,16 @@ Public Class dlgViewFactorLabels
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetReceiverVariableVisible()
+        If rdoDeleteValueLabels.Checked Then
+            ucrReceiverVariables.Visible = If(rdoSelectedColumn.Checked, True, False)
+        End If
+    End Sub
+
+    Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        SetReceiverVariableVisible()
     End Sub
 
     Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged

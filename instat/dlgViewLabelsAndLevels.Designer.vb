@@ -40,17 +40,23 @@ Partial Class dlgViewFactorLabels
     Private Sub InitializeComponent()
         Me.lblFactorColumns = New System.Windows.Forms.Label()
         Me.grpSummaryStatistics = New System.Windows.Forms.GroupBox()
-        Me.ucrChkShowPercentage = New instat.ucrCheck()
-        Me.ucrChkShowFrequencies = New instat.ucrCheck()
-        Me.ucrChkShowMissingValues = New instat.ucrCheck()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkSortByName = New instat.ucrCheck()
-        Me.ucrChkAlternateColour = New instat.ucrCheck()
-        Me.ucrChkShowId = New instat.ucrCheck()
         Me.grpLabels = New System.Windows.Forms.GroupBox()
+        Me.rdoDeleteValueLabels = New System.Windows.Forms.RadioButton()
+        Me.rdoViewLabels = New System.Windows.Forms.RadioButton()
+        Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkShowType = New instat.ucrCheck()
         Me.ucrChkShowValues = New instat.ucrCheck()
         Me.ucrChkShowLabels = New instat.ucrCheck()
+        Me.ucrChkSortByName = New instat.ucrCheck()
+        Me.ucrChkAlternateColour = New instat.ucrCheck()
+        Me.ucrChkShowId = New instat.ucrCheck()
+        Me.ucrChkShowPercentage = New instat.ucrCheck()
+        Me.ucrChkShowFrequencies = New instat.ucrCheck()
+        Me.ucrChkShowMissingValues = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorViewLabelsAndLevels = New instat.ucrSelectorByDataFrameAddRemove()
@@ -63,7 +69,7 @@ Partial Class dlgViewFactorLabels
         '
         Me.lblFactorColumns.AutoSize = True
         Me.lblFactorColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorColumns.Location = New System.Drawing.Point(303, 45)
+        Me.lblFactorColumns.Location = New System.Drawing.Point(299, 115)
         Me.lblFactorColumns.Name = "lblFactorColumns"
         Me.lblFactorColumns.Size = New System.Drawing.Size(97, 13)
         Me.lblFactorColumns.TabIndex = 1
@@ -74,90 +80,105 @@ Partial Class dlgViewFactorLabels
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowPercentage)
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowFrequencies)
         Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowMissingValues)
-        Me.grpSummaryStatistics.Location = New System.Drawing.Point(202, 199)
+        Me.grpSummaryStatistics.Location = New System.Drawing.Point(202, 242)
         Me.grpSummaryStatistics.Name = "grpSummaryStatistics"
-        Me.grpSummaryStatistics.Size = New System.Drawing.Size(166, 90)
+        Me.grpSummaryStatistics.Size = New System.Drawing.Size(166, 95)
         Me.grpSummaryStatistics.TabIndex = 4
         Me.grpSummaryStatistics.TabStop = False
         Me.grpSummaryStatistics.Text = "Summary Statistics"
-        '
-        'ucrChkShowPercentage
-        '
-        Me.ucrChkShowPercentage.AutoSize = True
-        Me.ucrChkShowPercentage.Checked = False
-        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(7, 41)
-        Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
-        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(154, 23)
-        Me.ucrChkShowPercentage.TabIndex = 1
-        '
-        'ucrChkShowFrequencies
-        '
-        Me.ucrChkShowFrequencies.AutoSize = True
-        Me.ucrChkShowFrequencies.Checked = False
-        Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(7, 17)
-        Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
-        Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkShowFrequencies.TabIndex = 0
-        '
-        'ucrChkShowMissingValues
-        '
-        Me.ucrChkShowMissingValues.AutoSize = True
-        Me.ucrChkShowMissingValues.Checked = False
-        Me.ucrChkShowMissingValues.Location = New System.Drawing.Point(7, 65)
-        Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
-        Me.ucrChkShowMissingValues.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkShowMissingValues.TabIndex = 2
         '
         'grpDisplayOptions
         '
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkSortByName)
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkAlternateColour)
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkShowId)
-        Me.grpDisplayOptions.Location = New System.Drawing.Point(374, 199)
+        Me.grpDisplayOptions.Location = New System.Drawing.Point(374, 242)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
-        Me.grpDisplayOptions.Size = New System.Drawing.Size(152, 90)
+        Me.grpDisplayOptions.Size = New System.Drawing.Size(152, 95)
         Me.grpDisplayOptions.TabIndex = 5
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Text = "Display Options"
-        '
-        'ucrChkSortByName
-        '
-        Me.ucrChkSortByName.AutoSize = True
-        Me.ucrChkSortByName.Checked = False
-        Me.ucrChkSortByName.Location = New System.Drawing.Point(4, 42)
-        Me.ucrChkSortByName.Name = "ucrChkSortByName"
-        Me.ucrChkSortByName.Size = New System.Drawing.Size(133, 23)
-        Me.ucrChkSortByName.TabIndex = 1
-        '
-        'ucrChkAlternateColour
-        '
-        Me.ucrChkAlternateColour.AutoSize = True
-        Me.ucrChkAlternateColour.Checked = False
-        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(4, 66)
-        Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
-        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(142, 23)
-        Me.ucrChkAlternateColour.TabIndex = 2
-        '
-        'ucrChkShowId
-        '
-        Me.ucrChkShowId.AutoSize = True
-        Me.ucrChkShowId.Checked = False
-        Me.ucrChkShowId.Location = New System.Drawing.Point(4, 18)
-        Me.ucrChkShowId.Name = "ucrChkShowId"
-        Me.ucrChkShowId.Size = New System.Drawing.Size(133, 23)
-        Me.ucrChkShowId.TabIndex = 0
         '
         'grpLabels
         '
         Me.grpLabels.Controls.Add(Me.ucrChkShowType)
         Me.grpLabels.Controls.Add(Me.ucrChkShowValues)
         Me.grpLabels.Controls.Add(Me.ucrChkShowLabels)
-        Me.grpLabels.Location = New System.Drawing.Point(2, 199)
+        Me.grpLabels.Location = New System.Drawing.Point(2, 242)
         Me.grpLabels.Name = "grpLabels"
-        Me.grpLabels.Size = New System.Drawing.Size(194, 90)
+        Me.grpLabels.Size = New System.Drawing.Size(194, 95)
         Me.grpLabels.TabIndex = 3
         Me.grpLabels.TabStop = False
         Me.grpLabels.Text = "Variable Options"
+        '
+        'rdoDeleteValueLabels
+        '
+        Me.rdoDeleteValueLabels.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoDeleteValueLabels.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDeleteValueLabels.FlatAppearance.BorderSize = 2
+        Me.rdoDeleteValueLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDeleteValueLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoDeleteValueLabels.Location = New System.Drawing.Point(275, 12)
+        Me.rdoDeleteValueLabels.Name = "rdoDeleteValueLabels"
+        Me.rdoDeleteValueLabels.Size = New System.Drawing.Size(121, 28)
+        Me.rdoDeleteValueLabels.TabIndex = 9
+        Me.rdoDeleteValueLabels.TabStop = True
+        Me.rdoDeleteValueLabels.Text = "Delete Value Labels"
+        Me.rdoDeleteValueLabels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoDeleteValueLabels.UseVisualStyleBackColor = True
+        '
+        'rdoViewLabels
+        '
+        Me.rdoViewLabels.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoViewLabels.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewLabels.FlatAppearance.BorderSize = 2
+        Me.rdoViewLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViewLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViewLabels.Location = New System.Drawing.Point(159, 12)
+        Me.rdoViewLabels.Name = "rdoViewLabels"
+        Me.rdoViewLabels.Size = New System.Drawing.Size(121, 28)
+        Me.rdoViewLabels.TabIndex = 8
+        Me.rdoViewLabels.TabStop = True
+        Me.rdoViewLabels.Text = "View Labels/Levels"
+        Me.rdoViewLabels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoViewLabels.UseVisualStyleBackColor = True
+        '
+        'rdoSelectedColumn
+        '
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(302, 82)
+        Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
+        Me.rdoSelectedColumn.Size = New System.Drawing.Size(174, 24)
+        Me.rdoSelectedColumn.TabIndex = 12
+        Me.rdoSelectedColumn.TabStop = True
+        Me.rdoSelectedColumn.Text = "Selected Variables"
+        Me.rdoSelectedColumn.UseVisualStyleBackColor = True
+        '
+        'rdoWholeDataFrame
+        '
+        Me.rdoWholeDataFrame.AutoSize = True
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(302, 59)
+        Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
+        Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
+        Me.rdoWholeDataFrame.TabIndex = 11
+        Me.rdoWholeDataFrame.TabStop = True
+        Me.rdoWholeDataFrame.Text = "Data Frame"
+        Me.rdoWholeDataFrame.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSelectData
+        '
+        Me.ucrPnlSelectData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(300, 59)
+        Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(142, 49)
+        Me.ucrPnlSelectData.TabIndex = 10
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(153, 2)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(250, 46)
+        Me.ucrPnlOptions.TabIndex = 7
         '
         'ucrChkShowType
         '
@@ -186,11 +207,65 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowLabels.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkShowLabels.TabIndex = 1
         '
+        'ucrChkSortByName
+        '
+        Me.ucrChkSortByName.AutoSize = True
+        Me.ucrChkSortByName.Checked = False
+        Me.ucrChkSortByName.Location = New System.Drawing.Point(4, 42)
+        Me.ucrChkSortByName.Name = "ucrChkSortByName"
+        Me.ucrChkSortByName.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkSortByName.TabIndex = 1
+        '
+        'ucrChkAlternateColour
+        '
+        Me.ucrChkAlternateColour.AutoSize = True
+        Me.ucrChkAlternateColour.Checked = False
+        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(4, 66)
+        Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
+        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkAlternateColour.TabIndex = 2
+        '
+        'ucrChkShowId
+        '
+        Me.ucrChkShowId.AutoSize = True
+        Me.ucrChkShowId.Checked = False
+        Me.ucrChkShowId.Location = New System.Drawing.Point(4, 18)
+        Me.ucrChkShowId.Name = "ucrChkShowId"
+        Me.ucrChkShowId.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkShowId.TabIndex = 0
+        '
+        'ucrChkShowPercentage
+        '
+        Me.ucrChkShowPercentage.AutoSize = True
+        Me.ucrChkShowPercentage.Checked = False
+        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(7, 41)
+        Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
+        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(154, 23)
+        Me.ucrChkShowPercentage.TabIndex = 1
+        '
+        'ucrChkShowFrequencies
+        '
+        Me.ucrChkShowFrequencies.AutoSize = True
+        Me.ucrChkShowFrequencies.Checked = False
+        Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(7, 17)
+        Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
+        Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkShowFrequencies.TabIndex = 0
+        '
+        'ucrChkShowMissingValues
+        '
+        Me.ucrChkShowMissingValues.AutoSize = True
+        Me.ucrChkShowMissingValues.Checked = False
+        Me.ucrChkShowMissingValues.Location = New System.Drawing.Point(7, 65)
+        Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
+        Me.ucrChkShowMissingValues.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkShowMissingValues.TabIndex = 2
+        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 295)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 345)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 6
@@ -199,7 +274,7 @@ Partial Class dlgViewFactorLabels
         '
         Me.ucrReceiverVariables.AutoSize = True
         Me.ucrReceiverVariables.frmParent = Me
-        Me.ucrReceiverVariables.Location = New System.Drawing.Point(300, 60)
+        Me.ucrReceiverVariables.Location = New System.Drawing.Point(300, 133)
         Me.ucrReceiverVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariables.Name = "ucrReceiverVariables"
         Me.ucrReceiverVariables.Selector = Nothing
@@ -214,7 +289,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrSelectorViewLabelsAndLevels.bDropUnusedFilterLevels = False
         Me.ucrSelectorViewLabelsAndLevels.bShowHiddenColumns = False
         Me.ucrSelectorViewLabelsAndLevels.bUseCurrentFilter = True
-        Me.ucrSelectorViewLabelsAndLevels.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorViewLabelsAndLevels.Location = New System.Drawing.Point(10, 52)
         Me.ucrSelectorViewLabelsAndLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorViewLabelsAndLevels.Name = "ucrSelectorViewLabelsAndLevels"
         Me.ucrSelectorViewLabelsAndLevels.Size = New System.Drawing.Size(213, 183)
@@ -225,7 +300,13 @@ Partial Class dlgViewFactorLabels
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(528, 351)
+        Me.ClientSize = New System.Drawing.Size(528, 401)
+        Me.Controls.Add(Me.rdoSelectedColumn)
+        Me.Controls.Add(Me.rdoWholeDataFrame)
+        Me.Controls.Add(Me.ucrPnlSelectData)
+        Me.Controls.Add(Me.rdoDeleteValueLabels)
+        Me.Controls.Add(Me.rdoViewLabels)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.grpLabels)
         Me.Controls.Add(Me.grpDisplayOptions)
         Me.Controls.Add(Me.grpSummaryStatistics)
@@ -266,4 +347,10 @@ Partial Class dlgViewFactorLabels
     Friend WithEvents ucrChkAlternateColour As ucrCheck
     Friend WithEvents grpLabels As GroupBox
     Friend WithEvents grpDisplayOptions As GroupBox
+    Friend WithEvents rdoDeleteValueLabels As RadioButton
+    Friend WithEvents rdoViewLabels As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents rdoSelectedColumn As RadioButton
+    Friend WithEvents rdoWholeDataFrame As RadioButton
+    Friend WithEvents ucrPnlSelectData As UcrPanel
 End Class
