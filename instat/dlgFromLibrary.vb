@@ -326,4 +326,11 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
+    Private Sub ucrInputPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPackages.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+
+    End Sub
 End Class
