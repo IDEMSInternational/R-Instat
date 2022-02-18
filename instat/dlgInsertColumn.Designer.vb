@@ -98,7 +98,7 @@ Partial Class dlgInsertColumn
         Me.grpInsert.Controls.Add(Me.ucrPnlInsertColumns)
         Me.grpInsert.Location = New System.Drawing.Point(235, 85)
         Me.grpInsert.Name = "grpInsert"
-        Me.grpInsert.Size = New System.Drawing.Size(286, 122)
+        Me.grpInsert.Size = New System.Drawing.Size(271, 122)
         Me.grpInsert.TabIndex = 6
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
@@ -172,9 +172,9 @@ Partial Class dlgInsertColumn
         'ucrPnlInsertColumns
         '
         Me.ucrPnlInsertColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlInsertColumns.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlInsertColumns.Location = New System.Drawing.Point(2, 17)
         Me.ucrPnlInsertColumns.Name = "ucrPnlInsertColumns"
-        Me.ucrPnlInsertColumns.Size = New System.Drawing.Size(277, 101)
+        Me.ucrPnlInsertColumns.Size = New System.Drawing.Size(265, 99)
         Me.ucrPnlInsertColumns.TabIndex = 5
         '
         'grpOptions
@@ -370,7 +370,7 @@ Partial Class dlgInsertColumn
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(526, 369)
+        Me.ClientSize = New System.Drawing.Size(510, 369)
         Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblInputColumnPrefix)
         Me.Controls.Add(Me.ucrInputPrefixForNewColumn)
