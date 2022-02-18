@@ -81,7 +81,7 @@ Public Class ucrButtons
         ParentForm.Cursor = Cursors.Default
     End Sub
 
-    Private Sub Scripts(bRun As Boolean)
+    Public Sub Scripts(bRun As Boolean)
         Dim strComments As String
         Dim lstBeforeScripts As List(Of String)
         Dim lstAfterScripts As List(Of String)

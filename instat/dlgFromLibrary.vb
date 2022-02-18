@@ -326,4 +326,8 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
+    Private Sub lstCollection_DoubleClick(sender As Object, e As EventArgs) Handles lstCollection.DoubleClick
+        ucrBase.Scripts(True)
+        Me.Close()
+    End Sub
 End Class
