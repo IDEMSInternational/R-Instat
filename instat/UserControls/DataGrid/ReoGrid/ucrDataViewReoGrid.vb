@@ -26,6 +26,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String) Implements IDataViewGrid.ReplaceValueInData
 
+    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -84,7 +86,7 @@ Public Class ucrDataViewReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellsKeyDown
         AddHandler worksheet.CellDataChanged, AddressOf Worksheet_CellDataChanged
     End Sub
 
@@ -149,4 +151,12 @@ Public Class ucrDataViewReoGrid
     Private Sub Worksheet_CellDataChanged(sender As Object, e As CellEventArgs)
         RaiseEvent CellDataChanged()
     End Sub
+
+    Private Sub Worksheet_BeforeCellsKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
+        e.IsCancelled = True
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            RaiseEvent DeleteValueToDataframe()
+        End If
+    End Sub
+
 End Class

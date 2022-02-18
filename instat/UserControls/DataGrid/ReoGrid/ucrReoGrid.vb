@@ -79,6 +79,15 @@ Public MustInherit Class ucrReoGrid
         Return lstSelectedRows
     End Function
 
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim clsRange As RangePosition = grdData.CurrentWorksheet.SelectionRange
+        For i As Integer = clsRange.Col To clsRange.Col + clsRange.Cols - 1
+            lstSelectedColumnIndexes.Add(grdData.CurrentWorksheet.ColumnHeaders.Item(i).Index + 1)
+        Next
+        Return lstSelectedColumnIndexes
+    End Function
+
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet
         Dim worksheet = grdData.Worksheets.Where(Function(x) x.Name = name).FirstOrDefault
         If worksheet IsNot Nothing Then
