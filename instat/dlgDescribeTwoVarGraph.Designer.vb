@@ -65,6 +65,9 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
+        Me.UcrPanel1 = New instat.UcrPanel()
+        Me.rdoPairs = New System.Windows.Forms.RadioButton()
+        Me.rdoBy = New System.Windows.Forms.RadioButton()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -72,7 +75,7 @@ Partial Class dlgDescribeTwoVarGraph
         'cmdOptions
         '
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 197)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 243)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdOptions.TabIndex = 5
@@ -84,7 +87,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblSecondVariable.AutoSize = True
         Me.lblSecondVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondVariable.Location = New System.Drawing.Point(268, 165)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(268, 201)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 3
@@ -94,7 +97,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblFirstVariables.AutoSize = True
         Me.lblFirstVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstVariables.Location = New System.Drawing.Point(268, 45)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(268, 65)
         Me.lblFirstVariables.Name = "lblFirstVariables"
         Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 2
@@ -112,7 +115,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpSummaries.Controls.Add(Me.lblGraph)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
-        Me.grpSummaries.Location = New System.Drawing.Point(10, 221)
+        Me.grpSummaries.Location = New System.Drawing.Point(10, 271)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 15
@@ -220,7 +223,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpOptions.Controls.Add(Me.lblPointJitter)
         Me.grpOptions.Controls.Add(Me.ucrChkFreeScaleYAxis)
         Me.grpOptions.Controls.Add(Me.ucrFlipCoordinates)
-        Me.grpOptions.Location = New System.Drawing.Point(236, 203)
+        Me.grpOptions.Location = New System.Drawing.Point(226, 252)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(171, 111)
         Me.grpOptions.TabIndex = 16
@@ -314,7 +317,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 351)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(339, 24)
@@ -324,7 +327,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrReceiverSecondVar.AutoSize = True
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(270, 180)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(270, 216)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
@@ -339,7 +342,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph.bDropUnusedFilterLevels = False
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorTwoVarGraph.bUseCurrentFilter = True
-        Me.ucrSelectorTwoVarGraph.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorTwoVarGraph.Location = New System.Drawing.Point(10, 41)
         Me.ucrSelectorTwoVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTwoVarGraph.Name = "ucrSelectorTwoVarGraph"
         Me.ucrSelectorTwoVarGraph.Size = New System.Drawing.Size(213, 183)
@@ -349,7 +352,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 347)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 380)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
@@ -358,7 +361,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrReceiverFirstVars.AutoSize = True
         Me.ucrReceiverFirstVars.frmParent = Me
-        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(268, 30)
+        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(268, 50)
         Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
         Me.ucrReceiverFirstVars.Selector = Nothing
         Me.ucrReceiverFirstVars.Size = New System.Drawing.Size(120, 138)
@@ -367,12 +370,57 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
         '
+        'UcrPanel1
+        '
+        Me.UcrPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.UcrPanel1.Location = New System.Drawing.Point(73, 5)
+        Me.UcrPanel1.Name = "UcrPanel1"
+        Me.UcrPanel1.Size = New System.Drawing.Size(270, 31)
+        Me.UcrPanel1.TabIndex = 17
+        '
+        'rdoPairs
+        '
+        Me.rdoPairs.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPairs.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPairs.FlatAppearance.BorderSize = 2
+        Me.rdoPairs.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPairs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPairs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPairs.Location = New System.Drawing.Point(207, 9)
+        Me.rdoPairs.Name = "rdoPairs"
+        Me.rdoPairs.Size = New System.Drawing.Size(129, 27)
+        Me.rdoPairs.TabIndex = 19
+        Me.rdoPairs.TabStop = True
+        Me.rdoPairs.Text = "Pairs"
+        Me.rdoPairs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPairs.UseVisualStyleBackColor = True
+        '
+        'rdoBy
+        '
+        Me.rdoBy.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoBy.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBy.FlatAppearance.BorderSize = 2
+        Me.rdoBy.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoBy.Location = New System.Drawing.Point(76, 9)
+        Me.rdoBy.Name = "rdoBy"
+        Me.rdoBy.Size = New System.Drawing.Size(133, 27)
+        Me.rdoBy.TabIndex = 18
+        Me.rdoBy.TabStop = True
+        Me.rdoBy.Text = "By"
+        Me.rdoBy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoBy.UseVisualStyleBackColor = True
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 401)
+        Me.ClientSize = New System.Drawing.Size(425, 453)
+        Me.Controls.Add(Me.rdoPairs)
+        Me.Controls.Add(Me.rdoBy)
+        Me.Controls.Add(Me.UcrPanel1)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -425,4 +473,7 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrNudJitter As ucrNud
     Friend WithEvents lblPointTransparency As Label
     Friend WithEvents lblPointJitter As Label
+    Friend WithEvents UcrPanel1 As UcrPanel
+    Friend WithEvents rdoPairs As RadioButton
+    Friend WithEvents rdoBy As RadioButton
 End Class
