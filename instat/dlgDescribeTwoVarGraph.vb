@@ -100,17 +100,27 @@ Public Class dlgDescribeTwoVarGraph
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
+        ucrPnlByPairs.AddRadioButton(rdoBy)
+        ucrPnlByPairs.AddRadioButton(rdoPairs)
+        ucrPnlByPairs.AddRSyntaxContainsFunctionNamesCondition(rdoBy, {"ggpairs"}, False)
+        ucrPnlByPairs.AddRSyntaxContainsFunctionNamesCondition(rdoPairs, {"ggpairs"})
+
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverFirstVars, ucrReceiverSecondVar, ucrInputCategoricalByCategorical,
+                                          ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
 
         ucrReceiverFirstVars.Selector = ucrSelectorTwoVarGraph
         ucrReceiverFirstVars.SetMultipleOnlyStatus(True)
         ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        ucrReceiverFirstVars.SetLinkedDisplayControl(lblFirstVariables)
 
         ucrReceiverSecondVar.SetParameter(New RParameter("fill", 0))
         ucrReceiverSecondVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverSecondVar.SetParameterIsString()
         ucrReceiverSecondVar.bWithQuotes = False
+        ucrReceiverSecondVar.SetLinkedDisplayControl(lblSecondVariable)
 
         ucrInputNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Line plot + points"})
         ucrInputNumericByNumeric.SetName("Scatter plot")
@@ -125,6 +135,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByNumeric.SetItems(strNumericCategoricalPlots)
         ucrInputCategoricalByNumeric.SetName("Summary Plot + Points")
         ucrInputCategoricalByNumeric.SetDropDownStyleAsNonEditable()
+        ucrInputCategoricalByCategorical.SetLinkedDisplayControl(grpSummaries)
 
         ucrInputCategoricalByCategorical.SetItems({"Bar Chart", "Mosaic Plot"})
         ucrInputCategoricalByCategorical.SetName("Bar Chart")
@@ -134,8 +145,9 @@ Public Class dlgDescribeTwoVarGraph
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrFlipCoordinates.SetText("Flip Coordinates")
-        ucrFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkFlipCoordinates.SetLinkedDisplayControl(grpOptions)
 
         ucrChkFreeScaleYAxis.SetText("Free Scale Y Axis")
         ucrChkFreeScaleYAxis.SetParameter(New RParameter("scales", iNewPosition:=3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
@@ -356,11 +368,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkFreeScaleYAxis.SetRCode(clsRFacet, bReset)
         ucrInputPosition.SetRCode(clsGeomBar, bReset)
         ucrNudJitter.SetRCode(clsGeomJitter, bReset)
         ucrNudTransparency.SetRCode(clsGeomJitter, bReset)
+        ucrPnlByPairs.SetRSyntax(ucrBase.clsRsyntax, bReset)
 
         bRCodeSet = True
         Results()
@@ -741,7 +754,7 @@ Public Class dlgDescribeTwoVarGraph
         Return clsBaseOperator.ContainsParameter("coord_flip")
     End Function
 
-    Private Sub ucrFlipCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFlipCoordinates.ControlValueChanged
+    Private Sub ucrFlipCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlipCoordinates.ControlValueChanged
         Dim clsScaleParam As RParameter
 
         If bRCodeSet Then
@@ -755,7 +768,7 @@ Public Class dlgDescribeTwoVarGraph
             End If
             ucrChkFreeScaleYAxis.ClearConditions()
             ucrChkFreeScaleYAxis.AddParameterPresentCondition(True, "scales")
-            If ucrFlipCoordinates.Checked Then
+            If ucrChkFlipCoordinates.Checked Then
                 ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
             Else
                 ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
