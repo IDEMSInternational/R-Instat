@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -301,6 +301,21 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    #TODO: consider removing include_hidden_columns argument from this function
+    if(use_column_selection && self$column_selection_applied()) {
+      old_metadata <- attributes(private$data)
+      selected_columns <- self$get_column_names()
+      out <- out[ ,selected_columns, drop = FALSE]
+      for(name in names(old_metadata)) {
+        if(!(name %in% c("names", "class", "row.names"))) {
+          attr(out, name) <- old_metadata[[name]]
+        }
+      }
+      all_columns <- self$get_column_names(use_current_column_selection = FALSE)
+      hidden_cols <- all_columns[!(all_columns %in% selected_columns)]
+      self$append_to_variables_metadata(hidden_cols, is_hidden_label, TRUE)
+      private$.variables_metadata_changed <- TRUE
     }
     if(!is.data.frame(out)) {
       out <- data.frame(out)
@@ -1944,6 +1959,8 @@ DataSheet$set("public", "column_selection_applied", function() {
 
 DataSheet$set("public", "remove_current_column_selection", function() {
   self$set_current_column_selection(".everything")
+  self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
+  private$.variables_metadata_changed <- TRUE
 }
 )
 
@@ -4231,3 +4248,12 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
 })
+
+DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  if(!all(row_index %in% seq_len(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
+  if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
+  curr_data[row_index, column_index] <- NA
+  self$set_data(curr_data)
+}
+)

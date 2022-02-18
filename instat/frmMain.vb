@@ -2389,7 +2389,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
-        dlgPasteSpecial.ShowDialog()
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
