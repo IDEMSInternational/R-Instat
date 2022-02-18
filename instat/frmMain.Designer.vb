@@ -2891,7 +2891,7 @@ Partial Class frmMain
         Me.mnuEditFind.Enabled = False
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuEditFind.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditFind.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
         '
@@ -2899,14 +2899,14 @@ Partial Class frmMain
         '
         Me.mnuEditFindNext.Enabled = False
         Me.mnuEditFindNext.Name = "mnuEditFindNext"
-        Me.mnuEditFindNext.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditFindNext.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditFindNext.Text = "Find Next"
         '
         'mnuEditReplace
         '
         Me.mnuEditReplace.Enabled = False
         Me.mnuEditReplace.Name = "mnuEditReplace"
-        Me.mnuEditReplace.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditReplace.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditReplace.Tag = "Replace"
         Me.mnuEditReplace.Text = "Replace"
         '
@@ -2915,7 +2915,7 @@ Partial Class frmMain
         Me.mnuEditCut.Enabled = False
         Me.mnuEditCut.Name = "mnuEditCut"
         Me.mnuEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuEditCut.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditCut.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCut.Tag = "Cut"
         Me.mnuEditCut.Text = "Cut"
         '
@@ -2923,7 +2923,7 @@ Partial Class frmMain
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuEditCopy.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditCopy.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy"
         '
@@ -2932,7 +2932,7 @@ Partial Class frmMain
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuEditCopySpecial.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditCopySpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
         Me.mnuEditCopySpecial.Text = "Copy Special"
         '
@@ -2940,7 +2940,7 @@ Partial Class frmMain
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuEditPaste.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditPaste.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
@@ -2949,14 +2949,14 @@ Partial Class frmMain
         Me.mnuPasteSpecial.Name = "mnuPasteSpecial"
         Me.mnuPasteSpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPasteSpecial.Size = New System.Drawing.Size(207, 22)
+        Me.mnuPasteSpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuPasteSpecial.Tag = "Paste"
-        Me.mnuPasteSpecial.Text = "Paste Special"
+        Me.mnuPasteSpecial.Text = "Paste New Columns"
         '
         'mnuEditPasteNewDataFrame
         '
         Me.mnuEditPasteNewDataFrame.Name = "mnuEditPasteNewDataFrame"
-        Me.mnuEditPasteNewDataFrame.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditPasteNewDataFrame.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditPasteNewDataFrame.Tag = "Paste"
         Me.mnuEditPasteNewDataFrame.Text = "Paste New Data Frame"
         '
@@ -2964,19 +2964,19 @@ Partial Class frmMain
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuEditSelectAll.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
         'ToolStripSeparator71
         '
         Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
-        Me.ToolStripSeparator71.Size = New System.Drawing.Size(204, 6)
+        Me.ToolStripSeparator71.Size = New System.Drawing.Size(241, 6)
         '
         'mnuEditScript
         '
         Me.mnuEditScript.Name = "mnuEditScript"
-        Me.mnuEditScript.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditScript.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditScript.Text = "Script"
         '
         'stsStrip
