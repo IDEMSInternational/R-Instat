@@ -133,7 +133,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoCount.AutoSize = True
         Me.rdoCount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCount.Location = New System.Drawing.Point(197, 20)
+        Me.rdoCount.Location = New System.Drawing.Point(77, 43)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 5
@@ -159,7 +159,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoStandardDeviation.AutoSize = True
         Me.rdoStandardDeviation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(77, 42)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(196, 21)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
         Me.rdoStandardDeviation.TabIndex = 4
