@@ -17,25 +17,15 @@
 Imports instat.Translations
 
 Public Class dlgDescribeTwoVarGraph
-    Public strFirstVariablesType, strSecondVariableType As String
-
-    Private clsBaseOperator As New ROperator
-    Private clsRGGplotFunction, clsRFacet As New RFunction
-    Private clsThemeFunction As New RFunction
-    Private dctThemeFunctions As Dictionary(Of String, RFunction)
-    Private clsGlobalAes As RFunction
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
-    Private clsXScaleContinuousFunction As New RFunction
-    Private clsYScaleContinuousFunction As New RFunction
-    Private clsCoordPolarFunction As New RFunction
-    Private clsCoordPolarStartOperator As New ROperator
-    Private clsXScaleDateFunction As New RFunction
-    Private clsYScaleDateFunction As New RFunction
-    Private clsScaleFillViridisFunction As New RFunction
-    Private clsScaleColourViridisFunction As New RFunction
-
+    Private clsBaseOperator, clsCoordPolarStartOperator As New ROperator
+    Private clsRGGplotFunction, clsRFacet, clsThemeFunction, clsGlobalAes, clsLabsFunction, clsXlabsFunction,
+            clsYlabFunction, clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
+            clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction, clsScaleColourViridisFunction As New RFunction
+    'Geoms
+    Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
+            clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
+            clsGeomFreqPoly, clsGeomHistogram, clsGeomDensity, clsAnnotateFunction, clsGGpairsFunction,
+            clsDummyFunction, clsGGpairAesFunction As New RFunction
     ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
     Private clsAesNumericByNumeric As RFunction
     ' Use this aes for categorical by categorical bar graphs
@@ -54,24 +44,10 @@ Public Class dlgDescribeTwoVarGraph
     Private clsAesStatSummaryHlineNumericByCategorical As RFunction
     ' Use this aes for categorical by numeric when the x axis is the numeric variable(s) e.g. boxplot, violin, point
     Private clsAesCategoricalByNumericXNumeric As RFunction
-
-    'Geoms
-    Private clsGeomJitter As New RFunction
-    Private clsGeomViolin As New RFunction
-    Private clsGeomBar As New RFunction
-    Private clsGeomMosaic As New RFunction
-    Private clsGeomBoxplot As New RFunction
-    Private clsGeomPoint As New RFunction
-    Private clsGeomLine As New RFunction
-    Private clsStatSummaryHline As New RFunction
-    Private clsStatSummaryCrossbar As New RFunction
-    Private clsGeomFreqPoly As New RFunction
-    Private clsGeomHistogram As New RFunction
-    Private clsGeomDensity As New RFunction
-    Private clsAnnotateFunction As New RFunction
-    Private clsGGpairsFunction As New RFunction
-    Private clsDummyFunction As New RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
+
+    Public strFirstVariablesType, strSecondVariableType As String
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
@@ -108,13 +84,29 @@ Public Class dlgDescribeTwoVarGraph
 
         ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrInputCategoricalByCategorical,
                                           ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkLower.SetText("Lower")
+        ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
+
+        ucrChkDiagonal.SetText("Diagnol")
+
+        ucrChkUpper.SetText("Upper")
 
         ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
 
         ucrReceiverFirstVars.Selector = ucrSelectorTwoVarGraph
         ucrReceiverFirstVars.SetMultipleOnlyStatus(True)
-        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
+
+        ucrReceiverColour.SetParameter(New RParameter("colour", iNewPosition:=0))
+        ucrReceiverColour.SetParameterIsString()
+        ucrReceiverColour.SetDataType("factor")
+        ucrReceiverColour.strSelectorHeading = "Factors"
+        ucrReceiverColour.Selector = ucrSelectorTwoVarGraph
+        ucrReceiverColour.SetLinkedDisplayControl(lblColour)
+        ucrReceiverColour.bWithQuotes = False
 
         ucrReceiverSecondVar.SetParameter(New RParameter("fill", 0))
         ucrReceiverSecondVar.Selector = ucrSelectorTwoVarGraph
@@ -230,6 +222,7 @@ Public Class dlgDescribeTwoVarGraph
         clsAesCategoricalByNumericXNumeric = New RFunction
         clsAesStatSummaryHlineCategoricalByNumeric = New RFunction
         clsAesStatSummaryHlineNumericByCategorical = New RFunction
+        clsGGpairAesFunction = New RFunction
 
         clsBaseOperator = New ROperator
 
@@ -239,9 +232,13 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
+        cmdOptions.Enabled = False
         ucrReceiverFirstVars.SetMeAsReceiver()
 
-        clsDummyFunction.AddParameter("checked", "by", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+
+        clsGGpairAesFunction.SetPackageName("ggplot2")
+        clsGGpairAesFunction.SetRCommand("aes")
 
         clsGGpairsFunction.SetPackageName("GGally")
         clsGGpairsFunction.SetRCommand("ggpairs")
@@ -357,14 +354,13 @@ Public Class dlgDescribeTwoVarGraph
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGGpairsFunction)
         AddDataFrame()
         ' bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByCategoricalYNumeric, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByCategoricalXNumeric, New RParameter("colour", 2), iAdditionalPairNo:=2)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericYNumeric, New RParameter("y", 1), iAdditionalPairNo:=3)
@@ -383,7 +379,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrNudJitter.SetRCode(clsGeomJitter, bReset)
         ucrNudTransparency.SetRCode(clsGeomJitter, bReset)
         ucrPnlByPairs.SetRCode(clsDummyFunction, bReset)
-
+        ucrReceiverColour.SetRCode(clsGGpairAesFunction, bReset)
         bRCodeSet = True
         Results()
         SetFreeYAxis()
@@ -788,6 +784,14 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrPnlByPairs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlByPairs.ControlValueChanged
+        ucrReceiverFirstVars.ucrMultipleVariables.Clear()
+        If rdoBy.Checked Then
+            cmdOptions.Enabled = True
+            ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        Else
+            cmdOptions.Enabled = False
+            ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
+        End If
         If bRCodeSet Then
             If rdoBy.Checked Then
                 ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -811,5 +815,13 @@ Public Class dlgDescribeTwoVarGraph
         Dim clsGetDataFrameFunction As RFunction = ucrSelectorTwoVarGraph.ucrAvailableDataFrames.clsCurrDataFrame.Clone
         clsGetDataFrameFunction.RemoveParameterByName("stack_data")
         clsGGpairsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColour.ControlValueChanged
+        If Not ucrReceiverColour.IsEmpty And rdoPairs.Checked Then
+            clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGpairsFunction.RemoveParameterByName("colour")
+        End If
     End Sub
 End Class
