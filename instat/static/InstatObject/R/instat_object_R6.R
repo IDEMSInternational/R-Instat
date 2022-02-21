@@ -2714,3 +2714,7 @@ DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_col
   self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
 }
 )
+
+DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
+  self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
+})
