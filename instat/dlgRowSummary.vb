@@ -52,17 +52,20 @@ Public Class dlgRowSummary
         ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
 
         'linking controls
-        ucrPanelStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRowSummaries.AddRadioButton(rdoSingle)
+        ucrPnlRowSummaries.AddRadioButton(rdoMultiple)
 
-        ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
-        ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
-        ucrPanelStatistics.AddRadioButton(rdoMinimum, "min")
-        ucrPanelStatistics.AddRadioButton(rdoSum, "sum")
-        ucrPanelStatistics.AddRadioButton(rdoMedian, "median")
-        ucrPanelStatistics.AddRadioButton(rdoNumberofMissing, "function(z) sum(is.na(z))")
-        ucrPanelStatistics.AddRadioButton(rdoStandardDeviation, "sd")
-        ucrPanelStatistics.AddRadioButton(rdoMaximum, "max")
-        ucrPanelStatistics.AddRadioButton(rdoCount, "function(z) sum(!is.na(z))")
+        ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlStatistics.SetParameter(New RParameter("FUN", 2))
+        ucrPnlStatistics.AddRadioButton(rdoMean, "mean")
+        ucrPnlStatistics.AddRadioButton(rdoMinimum, "min")
+        ucrPnlStatistics.AddRadioButton(rdoSum, "sum")
+        ucrPnlStatistics.AddRadioButton(rdoMedian, "median")
+        ucrPnlStatistics.AddRadioButton(rdoNumberofMissing, "function(z) sum(is.na(z))")
+        ucrPnlStatistics.AddRadioButton(rdoStandardDeviation, "sd")
+        ucrPnlStatistics.AddRadioButton(rdoMaximum, "max")
+        ucrPnlStatistics.AddRadioButton(rdoCount, "function(z) sum(!is.na(z))")
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
@@ -110,7 +113,7 @@ Public Class dlgRowSummary
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkIgnoreMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissingValues.ControlValueChanged, ucrPanelStatistics.ControlValueChanged
+    Private Sub ucrChkIgnoreMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissingValues.ControlValueChanged, ucrPnlStatistics.ControlValueChanged
         If ucrChkIgnoreMissingValues.Checked Then
             If rdoMean.Checked OrElse rdoMedian.Checked OrElse rdoSum.Checked OrElse rdoStandardDeviation.Checked OrElse rdoMinimum.Checked OrElse rdoMaximum.Checked Then
                 clsApplyFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
