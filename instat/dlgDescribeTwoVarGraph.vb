@@ -25,7 +25,8 @@ Public Class dlgDescribeTwoVarGraph
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
             clsGeomFreqPoly, clsGeomHistogram, clsGeomDensity, clsAnnotateFunction, clsGGpairsFunction,
-            clsDummyFunction, clsGGpairAesFunction As New RFunction
+            clsDummyFunction, clsGGpairAesFunction, clsUpperListFunction, clsLowerListFunction,
+            clsDiagonalListFunction As New RFunction
     ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
     Private clsAesNumericByNumeric As RFunction
     ' Use this aes for categorical by categorical bar graphs
@@ -171,6 +172,70 @@ Public Class dlgDescribeTwoVarGraph
         ucrNudTransparency.SetLinkedDisplayControl(lblPointTransparency)
         ucrNudTransparency.SetRDefault(1)
 
+        ucrChkDiagonal.SetText("Diagonal")
+        ucrChkDiagonal.AddParameterPresentCondition(True, "diag")
+        ucrChkDiagonal.AddParameterPresentCondition(False, "diag", False)
+        ucrChkDiagonal.AddToLinkedControls({ucrInputDiagonalContinous, ucrInputDiagonalDiscrete,
+                                           ucrInputDiagonalNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkLower.SetText("Lower")
+        ucrChkLower.AddParameterPresentCondition(True, "lower")
+        ucrChkLower.AddParameterPresentCondition(False, "lower", False)
+        ucrChkLower.AddToLinkedControls({ucrInputLowerContinous, ucrInputLowerDiscrete, ucrInputLowerCombo,
+                                           ucrInputLowerNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkUpper.SetText("Upper")
+        ucrChkUpper.AddParameterPresentCondition(True, "upper")
+        ucrChkUpper.AddParameterPresentCondition(False, "upper", False)
+        ucrChkUpper.AddToLinkedControls({ucrInputUpperContinous, ucrInputUpperDiscrete, ucrInputUpperCombo,
+                                           ucrInputUpperNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLowerContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputLowerContinous.SetItems({"point", "smooth", "smooth_loess", "density", "cor", "blank"}, bAddConditions:=True)
+        ucrInputLowerContinous.SetLinkedDisplayControl(lblLowerContinous)
+
+        ucrInputLowerCombo.SetParameter(New RParameter("combo", iNewPosition:=1))
+        ucrInputLowerCombo.SetItems({"box", "box_no_facet", "dot", "dot_no_facet", "facethist", "facetdensity",
+                                    "denstrip", "blank"}, bAddConditions:=True)
+        ucrInputLowerCombo.SetLinkedDisplayControl(lblLowerCombo)
+
+        ucrInputLowerDiscrete.SetParameter(New RParameter("discrete ", iNewPosition:=2))
+        ucrInputLowerDiscrete.SetItems({"facetbar", "ratio", "blank"}, bAddConditions:=True)
+        ucrInputLowerDiscrete.SetLinkedDisplayControl(lblLowerDiscrete)
+
+        ucrInputLowerNA.SetParameter(New RParameter("na ", iNewPosition:=3))
+        ucrInputLowerNA.SetItems({"na", "blank"}, bAddConditions:=True)
+        ucrInputLowerNA.SetLinkedDisplayControl(lblLowerNA)
+
+        ucrInputUpperContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputUpperContinous.SetItems({"point", "smooth", "smooth_loess", "density", "cor", "blank"}, bAddConditions:=True)
+        ucrInputUpperContinous.SetLinkedDisplayControl(lblUpperContinous)
+
+        ucrInputUpperCombo.SetParameter(New RParameter("combo", iNewPosition:=1))
+        ucrInputUpperCombo.SetItems({"box", "box_no_facet", "dot", "dot_no_facet", "facethist", "facetdensity",
+                                    "denstrip", "blank"}, bAddConditions:=True)
+        ucrInputUpperCombo.SetLinkedDisplayControl(lblUpperCombo)
+
+        ucrInputUpperDiscrete.SetParameter(New RParameter("discrete ", iNewPosition:=2))
+        ucrInputUpperDiscrete.SetItems({"facetbar", "count", "ratio", "blank"}, bAddConditions:=True)
+        ucrInputUpperDiscrete.SetLinkedDisplayControl(lblUpperDiscrete)
+
+        ucrInputUpperNA.SetParameter(New RParameter("na ", iNewPosition:=3))
+        ucrInputUpperNA.SetItems({"na", "blank"}, bAddConditions:=True)
+        ucrInputUpperNA.SetLinkedDisplayControl(lblUpperNA)
+
+        ucrInputDiagonalContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputDiagonalContinous.SetItems({"densityDiag", "barDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalContinous.SetLinkedDisplayControl(lblDiagonalContinuous)
+
+        ucrInputDiagonalDiscrete.SetParameter(New RParameter("discrete ", iNewPosition:=1))
+        ucrInputDiagonalDiscrete.SetItems({"barDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalDiscrete.SetLinkedDisplayControl(lblDiagonalDiscrete)
+
+        ucrInputDiagonalNA.SetParameter(New RParameter("na  ", iNewPosition:=2))
+        ucrInputDiagonalNA.SetItems({"naDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalNA.SetLinkedDisplayControl(lblDiagonalNA)
+
         ucrSaveGraph.SetPrefix("two_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
@@ -223,7 +288,9 @@ Public Class dlgDescribeTwoVarGraph
         clsAesStatSummaryHlineCategoricalByNumeric = New RFunction
         clsAesStatSummaryHlineNumericByCategorical = New RFunction
         clsGGpairAesFunction = New RFunction
-
+        clsUpperListFunction = New RFunction
+        clsLowerListFunction = New RFunction
+        clsDiagonalListFunction = New RFunction
         clsBaseOperator = New ROperator
 
         bResetSubdialog = True
@@ -236,6 +303,20 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+
+        clsUpperListFunction.AddParameter("continuous", Chr(34) & "cor" & Chr(34), iPosition:=0)
+        clsUpperListFunction.AddParameter("combo", Chr(34) & "box_no_facet" & Chr(34), iPosition:=1)
+        clsUpperListFunction.AddParameter("discrete", Chr(34) & "count" & Chr(34), iPosition:=2)
+        clsUpperListFunction.AddParameter("na", Chr(34) & "na" & Chr(34), iPosition:=3)
+
+        clsLowerListFunction.AddParameter("continuous", Chr(34) & "points" & Chr(34), iPosition:=0)
+        clsLowerListFunction.AddParameter("combo", Chr(34) & "facethist" & Chr(34), iPosition:=1)
+        clsLowerListFunction.AddParameter("discrete", Chr(34) & "facetbar" & Chr(34), iPosition:=2)
+        clsLowerListFunction.AddParameter("na", Chr(34) & "na" & Chr(34), iPosition:=3)
+
+        clsDiagonalListFunction.AddParameter("continuous", Chr(34) & "densityDiag" & Chr(34), iPosition:=0)
+        clsDiagonalListFunction.AddParameter("discrete", Chr(34) & "barDiag" & Chr(34), iPosition:=1)
+        clsDiagonalListFunction.AddParameter("na", Chr(34) & "naDiag" & Chr(34), iPosition:=2)
 
         clsGGpairAesFunction.SetPackageName("ggplot2")
         clsGGpairAesFunction.SetRCommand("aes")
@@ -380,6 +461,21 @@ Public Class dlgDescribeTwoVarGraph
         ucrNudTransparency.SetRCode(clsGeomJitter, bReset)
         ucrPnlByPairs.SetRCode(clsDummyFunction, bReset)
         ucrReceiverColour.SetRCode(clsGGpairAesFunction, bReset)
+        ucrInputLowerContinous.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerDiscrete.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerCombo.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerNA.SetRCode(clsLowerListFunction, bReset)
+        ucrInputUpperContinous.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperDiscrete.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperCombo.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperNA.SetRCode(clsUpperListFunction, bReset)
+        ucrInputDiagonalContinous.SetRCode(clsDiagonalListFunction, bReset)
+        ucrInputDiagonalDiscrete.SetRCode(clsDiagonalListFunction, bReset)
+        ucrInputDiagonalNA.SetRCode(clsDiagonalListFunction, bReset)
+        ucrChkLower.SetRCode(clsGGpairsFunction, bReset)
+        ucrChkUpper.SetRCode(clsGGpairsFunction, bReset)
+        ucrChkDiagonal.SetRCode(clsGGpairsFunction, bReset)
+
         bRCodeSet = True
         Results()
         SetFreeYAxis()
@@ -822,6 +918,26 @@ Public Class dlgDescribeTwoVarGraph
             clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsGGpairsFunction.RemoveParameterByName("colour")
+        End If
+    End Sub
+
+    Private Sub LowerUpperDiagonal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLower.ControlValueChanged, ucrChkUpper.ControlValueChanged, ucrChkDiagonal.ControlValueChanged
+        If bRCodeSet Then
+            If ucrChkDiagonal.Checked Then
+                clsGGpairsFunction.AddParameter("diag", clsRFunctionParameter:=clsDiagonalListFunction, iPosition:=3)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("diag")
+            End If
+            If ucrChkLower.Checked Then
+                clsGGpairsFunction.AddParameter("lower", clsRFunctionParameter:=clsLowerListFunction, iPosition:=4)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("lower")
+            End If
+            If ucrChkUpper.Checked Then
+                clsGGpairsFunction.AddParameter("upper", clsRFunctionParameter:=clsUpperListFunction, iPosition:=5)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("upper")
+            End If
         End If
     End Sub
 End Class
