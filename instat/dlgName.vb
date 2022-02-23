@@ -174,7 +174,7 @@ Public Class dlgName
         ElseIf rdoRenameWith.Checked Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(bCurrentCell)
         End If
     End Sub
 
@@ -216,18 +216,17 @@ Public Class dlgName
     End Function
 
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
-        Dim iRowIndex As Integer = e.Range.Row + 1
+        Dim iRowIndex As Integer = e.Range.Row
         Dim iColIndex As Integer = e.Range.Col
-
 
         If e.Range.Rows > 1 Then
             For iRow As Integer = 0 To e.Range.Rows - 1
                 Dim strData As String = grdCurrentWorkSheet.Item(row:=iRow, col:=iColIndex).ToString()
-                GetVariables(strData, iRow + 1, iColIndex)
+                RenameColumns(strData, iRow, e.Range.Col)
             Next
         Else
             Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
-            GetVariables(strNewData, iRowIndex, iColIndex)
+            RenameColumns(strNewData, iRowIndex, iColIndex)
         End If
     End Sub
 
@@ -239,12 +238,27 @@ Public Class dlgName
         strPreviousCellText = e.Cell.Data.ToString()
     End Sub
 
-    Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
-        Dim strNewData As String = e.Text
-        If strNewData Is Nothing OrElse e.Cell Is Nothing Then
-            Exit Sub
+    Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+        If ({"", " ", "TRUE", "FALSE", "T", "F"}.Contains(strNewData) OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
+            bCurrentCell = False
+            MsgBox("The column name must not be a numeric or contains space or be a boolean e.g TRUE, FALSE, T, F.")
+        Else
+            bCurrentCell = True
+            GetVariables(strNewData, iRowIndex + 1, iColIndex)
         End If
-        GetVariables(strNewData, e.Cell.Row + 1, e.Cell.Column)
+        TestOKEnabled()
+    End Sub
+
+    'Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+    '    'Dim iColIndex As Nullable(Of Integer) = e.Cell.Column
+    '    'If e.Cell.Column = Nothing Then
+    '    '    Exit Sub
+    '    'End If
+    '    RenameColumns(e.Text, e.Cell.Row, e.Cell.Column)
+    'End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        RenameColumns(e.NewData, e.Cell.Row, e.Cell.Column)
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
@@ -256,15 +270,28 @@ Public Class dlgName
                     clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
                     clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
                     clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=8)
+                Else
+                    clsNewColNameDataframeFunction.RemoveParameterByName("cols")
+                    clsNewColNameDataframeFunction.RemoveParameterByName("index")
+                    clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
                 End If
-            ElseIf iColIndex = 2 Then
-                If strNewData <> "" Then
-                    AddChangedNewLabelRows(iRowIndex, strNewData)
+            End If
 
-                    clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
-                    clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
-                    clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+            If ucrChkIncludeVariable.Checked Then
+                If iColIndex = 2 Then
+                    If strNewData <> "" Then
+                        AddChangedNewLabelRows(iRowIndex, strNewData)
+
+                        clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+                        clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+                        clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+                    Else
+                        clsNewLabelDataframeFunction.RemoveParameterByName("cols")
+                        clsNewLabelDataframeFunction.RemoveParameterByName("index")
+                    End If
                 End If
+            Else
+                clsDefaultRFunction.RemoveParameterByName("new_labels_df")
             End If
         End If
     End Sub
