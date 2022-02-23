@@ -21,6 +21,7 @@ Public Class dlgRowSummary
     Private clsApplyFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
+    Private clsGetColumnsFunction As RFunction
 
 
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,13 +42,13 @@ Public Class dlgRowSummary
 
         ucrBase.iHelpTopicID = 45
         'Setting receiver data types and parameters
-        ucrReceiverForRowSummaries.SetParameter(New RParameter("X", 0))
+        'ucrReceiverForRowSummaries.SetParameter(New RParameter("X", 0))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
-        ucrReceiverForRowSummaries.bUseFilteredData = False
-        ucrReceiverForRowSummaries.bForceAsDataFrame = True
+        'ucrReceiverForRowSummaries.bUseFilteredData = False
+        'ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
@@ -100,6 +101,7 @@ Public Class dlgRowSummary
         clsApplyFunction = New RFunction
         clsDummyFunction = New RFunction
         clsOtherDummyFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
@@ -108,6 +110,7 @@ Public Class dlgRowSummary
         clsDummyFunction.AddParameter("FUN", "mean", iPosition:=0)
 
         clsOtherDummyFunction.AddParameter("checked", "mean", iPosition:=0)
+
 
         'Defining the default RFunction
         clsApplyFunction.SetPackageName("base")
@@ -120,7 +123,7 @@ Public Class dlgRowSummary
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverForRowSummaries.SetRCode(clsApplyFunction, bReset)
+        'ucrReceiverForRowSummaries.SetRCode(clsApplyFunction, bReset)
         ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
         ucrPnlStatistics.SetRCode(clsOtherDummyFunction, bReset)
         ucrSaveResults.SetRCode(clsApplyFunction, bReset)
@@ -186,5 +189,13 @@ Public Class dlgRowSummary
         Else
             clsApplyFunction.RemoveParameterByName("FUN")
         End If
+    End Sub
+
+    Private Sub ucrReceiverForRowSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlValueChanged
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        clsGetColumnsFunction = ucrReceiverForRowSummaries.GetVariables(True).Clone
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsApplyFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnsFunction)
     End Sub
 End Class
