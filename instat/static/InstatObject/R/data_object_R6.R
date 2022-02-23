@@ -762,8 +762,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     if (!missing(new_column_names_df)) {
       new_col_names <- new_column_names_df[, 1]
       cols_changed_index <- new_column_names_df[, 2]
+      curr_col_names <- names(private$data)
+      curr_col_names[cols_changed_index] <- new_col_names
+      if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
+      names(private$data)[cols_changed_index] <- new_col_names
       for (i in seq_along(cols_changed_index)) {
-        if (names(private$data)[cols_changed_index[i]] != new_col_names[i]) names(private$data)[cols_changed_index[i]] <- new_col_names[i]
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
     }
