@@ -634,6 +634,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckDataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDefineOptionsByContextData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator48 = New System.Windows.Forms.ToolStripSeparator()
@@ -675,9 +676,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDefineOptionsByContextData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDefineOptionsByContextDataDefineOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextDefineOptionsByContextDataColumnStructure = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextDefineOptionsByContextDataOnStation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsByContextDefineOptionsByContextDataOnFarm = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -4702,6 +4702,13 @@ Partial Class frmMain
         Me.mnuOptionsByContextCheckDataOneVariableFrequencies.Size = New System.Drawing.Size(215, 22)
         Me.mnuOptionsByContextCheckDataOneVariableFrequencies.Text = "One Variable Frequencies..."
         '
+        'mnuOptionsByContextDefineOptionsByContextData
+        '
+        Me.mnuOptionsByContextDefineOptionsByContextData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOptionsByContextDataOnStation, Me.OptionsByContextDefineOptionsByContextDataOnFarm})
+        Me.mnuOptionsByContextDefineOptionsByContextData.Name = "mnuOptionsByContextDefineOptionsByContextData"
+        Me.mnuOptionsByContextDefineOptionsByContextData.Size = New System.Drawing.Size(241, 22)
+        Me.mnuOptionsByContextDefineOptionsByContextData.Text = "Define Options By Context Data"
+        '
         'mnuOptionsByContextPrepare
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
@@ -5079,24 +5086,17 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuOptionsByContextDefineOptionsByContextData
+        'mnuOptionsByContextDefineOptionsByContextDataOnStation
         '
-        Me.mnuOptionsByContextDefineOptionsByContextData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDefineOptionsByContextDataDefineOptionsByContext, Me.mnuOptionsByContextDefineOptionsByContextDataColumnStructure})
-        Me.mnuOptionsByContextDefineOptionsByContextData.Name = "mnuOptionsByContextDefineOptionsByContextData"
-        Me.mnuOptionsByContextDefineOptionsByContextData.Size = New System.Drawing.Size(241, 22)
-        Me.mnuOptionsByContextDefineOptionsByContextData.Text = "Define Options By Context Data"
+        Me.mnuOptionsByContextDefineOptionsByContextDataOnStation.Name = "mnuOptionsByContextDefineOptionsByContextDataOnStation"
+        Me.mnuOptionsByContextDefineOptionsByContextDataOnStation.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextDefineOptionsByContextDataOnStation.Text = "On - Station..."
         '
-        'mnuDefineOptionsByContextDataDefineOptionsByContext
+        'OptionsByContextDefineOptionsByContextDataOnFarm
         '
-        Me.mnuDefineOptionsByContextDataDefineOptionsByContext.Name = "mnuDefineOptionsByContextDataDefineOptionsByContext"
-        Me.mnuDefineOptionsByContextDataDefineOptionsByContext.Size = New System.Drawing.Size(220, 22)
-        Me.mnuDefineOptionsByContextDataDefineOptionsByContext.Text = "Define Options By Context.."
-        '
-        'mnuOptionsByContextDefineOptionsByContextDataColumnStructure
-        '
-        Me.mnuOptionsByContextDefineOptionsByContextDataColumnStructure.Name = "mnuOptionsByContextDefineOptionsByContextDataColumnStructure"
-        Me.mnuOptionsByContextDefineOptionsByContextDataColumnStructure.Size = New System.Drawing.Size(220, 22)
-        Me.mnuOptionsByContextDefineOptionsByContextDataColumnStructure.Text = "Column Structure..."
+        Me.OptionsByContextDefineOptionsByContextDataOnFarm.Name = "OptionsByContextDefineOptionsByContextDataOnFarm"
+        Me.OptionsByContextDefineOptionsByContextDataOnFarm.Size = New System.Drawing.Size(180, 22)
+        Me.OptionsByContextDefineOptionsByContextDataOnFarm.Text = "On - Farm..."
         '
         'frmMain
         '
@@ -5789,6 +5789,6 @@ Partial Class frmMain
     Friend WithEvents mnuModelFitModelMachineLearning As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateClusterAnalysis As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDefineOptionsByContextData As ToolStripMenuItem
-    Friend WithEvents mnuDefineOptionsByContextDataDefineOptionsByContext As ToolStripMenuItem
-    Friend WithEvents mnuOptionsByContextDefineOptionsByContextDataColumnStructure As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextDefineOptionsByContextDataOnStation As ToolStripMenuItem
+    Friend WithEvents OptionsByContextDefineOptionsByContextDataOnFarm As ToolStripMenuItem
 End Class
