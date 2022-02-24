@@ -2424,11 +2424,11 @@ Public Class frmMain
         dlgClusterAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextDefineOptionsByContextDataOnStation_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOptionsByContextDataOnStation.Click
+    Private Sub mnuOptionsByContextDefineOnStation_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnStation.Click
         dlgColumnStructure.ShowDialog()
     End Sub
 
-    Private Sub OptionsByContextDefineOptionsByContextDataOnFarm_Click(sender As Object, e As EventArgs) Handles OptionsByContextDefineOptionsByContextDataOnFarm.Click
+    Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
         dlgDefineOptionsByContext.ShowDialog()
     End Sub
 End Class
