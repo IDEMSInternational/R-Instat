@@ -25,6 +25,7 @@ Public Class dlgName
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+    Dim strEmpty As String = " "
     Private clsDefaultRFunction As New RFunction
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
@@ -216,26 +217,24 @@ Public Class dlgName
     End Function
 
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
-        Dim iRowIndex As Integer = e.Range.Row
+        Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
         Dim iColIndex As Integer = e.Range.Col
 
         If e.Range.Rows > 1 Then
-            For iRow As Integer = 0 To e.Range.Rows - 1
+            For iRow As Integer = iStartRowIndex To e.Range.EndRow
                 Dim strData As String = grdCurrentWorkSheet.Item(row:=iRow, col:=iColIndex).ToString()
                 RenameColumns(strData, iRow, e.Range.Col)
             Next
         Else
             Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
-            RenameColumns(strNewData, iRowIndex, iColIndex)
+            RenameColumns(strNewData, iStartRowIndex, iColIndex)
         End If
     End Sub
 
-    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
-        If e.Cell.Data Is Nothing Then
-            Exit Sub
+    Protected Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
+        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) Then
+            GetVariables(e.Cell.Data, e.Cell.Row, e.Cell.Column)
         End If
-
-        strPreviousCellText = e.Cell.Data.ToString()
     End Sub
 
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
@@ -281,16 +280,19 @@ Public Class dlgName
                 If iColIndex = 2 Then
                     If strNewData <> "" Then
                         AddChangedNewLabelRows(iRowIndex, strNewData)
+                    Else
+                        AddChangedNewLabelRows(iRowIndex, strEmpty)
+                    End If
 
-                        clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+                    clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
                         clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
                         clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
-                    Else
-                        clsNewLabelDataframeFunction.RemoveParameterByName("cols")
-                        clsNewLabelDataframeFunction.RemoveParameterByName("index")
+                        'Else
+                        '    clsNewLabelDataframeFunction.RemoveParameterByName("cols")
+                        '    clsNewLabelDataframeFunction.RemoveParameterByName("index")
+                        'End If
                     End If
-                End If
-            Else
+                Else
                 clsDefaultRFunction.RemoveParameterByName("new_labels_df")
             End If
         End If
