@@ -26,6 +26,7 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Dim strEmpty As String = " "
+    Dim lstAvailableVariables As New ListView
     Private clsDefaultRFunction As New RFunction
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
@@ -135,7 +136,6 @@ Public Class dlgName
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
-        UpdateGrid()
 
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
 
@@ -233,7 +233,7 @@ Public Class dlgName
 
     Protected Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) Then
-            GetVariables(e.Cell.Data, e.Cell.Row, e.Cell.Column)
+            RenameColumns(e.Cell.Data, e.Cell.Row, e.Cell.Column)
         End If
     End Sub
 
@@ -248,13 +248,12 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    'Private Sub grdCurrSheet_CellEdit(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
-    '    'Dim iColIndex As Nullable(Of Integer) = e.Cell.Column
-    '    'If e.Cell.Column = Nothing Then
-    '    '    Exit Sub
-    '    'End If
-    '    RenameColumns(e.Text, e.Cell.Row, e.Cell.Column)
-    'End Sub
+    Protected Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
+        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
+            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
+            e.IsCancelled = True
+        End If
+    End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         RenameColumns(e.NewData, e.Cell.Row, e.Cell.Column)
@@ -285,13 +284,9 @@ Public Class dlgName
                     End If
 
                     clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
-                        clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
-                        clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
-                        'Else
-                        '    clsNewLabelDataframeFunction.RemoveParameterByName("cols")
-                        '    clsNewLabelDataframeFunction.RemoveParameterByName("index")
-                        'End If
-                    End If
+                    clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+                    clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+                End If
                 Else
                 clsDefaultRFunction.RemoveParameterByName("new_labels_df")
             End If
@@ -324,9 +319,11 @@ Public Class dlgName
         dctNameRowsValues.Clear()
         dctRowsNewLabelChanged.Clear()
 
+        GetColumnsNames()
+
         grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
         grdCurrentWorkSheet.ColumnCount = 3
-        grdCurrentWorkSheet.RowCount = ucrSelectVariables.lstAvailableVariable.Items.Count
+        grdCurrentWorkSheet.RowCount = lstAvailableVariables.Items.Count
 
         grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
         grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
@@ -334,11 +331,11 @@ Public Class dlgName
         grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
 
         If rdoMultiple.Checked Then
-            If Not ucrSelectVariables.IsEmpty Then
-                For i As Integer = 0 To ucrSelectVariables.lstAvailableVariable.Items.Count - 1
-                    grdCurrentWorkSheet.Item(row:=i, col:=0) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+            If lstAvailableVariables.Items.Count > 0 Then
+                For i As Integer = 0 To lstAvailableVariables.Items.Count - 1
+                    grdCurrentWorkSheet.Item(row:=i, col:=0) = lstAvailableVariables.Items(i).Text
                     grdCurrentWorkSheet.GetCell(row:=i, col:=0).IsReadOnly = True
-                    grdCurrentWorkSheet.Item(row:=i, col:=1) = ucrSelectVariables.lstAvailableVariable.Items(i).Text
+                    grdCurrentWorkSheet.Item(row:=i, col:=1) = lstAvailableVariables.Items(i).Text
                 Next
 
                 For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
@@ -476,7 +473,35 @@ Public Class dlgName
         sdgConstructRegexExpression.ShowDialog()
     End Sub
 
+    Private Sub GetColumnsNames()
+        Dim vecColumns As GenericVector = Nothing
+        Dim chrCurrColumns As CharacterVector
+        Dim clsGetItems As New RFunction
+        Dim expItems As SymbolicExpression
+
+        lstAvailableVariables.Items.Clear()
+
+        If ucrSelectVariables IsNot Nothing Then
+            clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsGetItems.AddParameter("as_list", "TRUE")
+            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+                For i As Integer = 0 To vecColumns.Count - 1
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    If chrCurrColumns IsNot Nothing Then
+                        For j As Integer = 0 To chrCurrColumns.Count - 1
+                            lstAvailableVariables.Items.Add(chrCurrColumns(j))
+                        Next
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
+        GetColumnsNames()
         UpdateGrid()
     End Sub
 
