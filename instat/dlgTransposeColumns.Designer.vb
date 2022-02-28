@@ -64,9 +64,9 @@ Partial Class dlgTransposeColumns
         Me.lblVariableNames.AutoSize = True
         Me.lblVariableNames.Location = New System.Drawing.Point(261, 174)
         Me.lblVariableNames.Name = "lblVariableNames"
-        Me.lblVariableNames.Size = New System.Drawing.Size(127, 13)
+        Me.lblVariableNames.Size = New System.Drawing.Size(116, 13)
         Me.lblVariableNames.TabIndex = 3
-        Me.lblVariableNames.Text = "Variable Name (Optional):"
+        Me.lblVariableNames.Text = "New Names (Optional):"
         '
         'ucrInputDisplayVariableNames
         '
@@ -74,7 +74,7 @@ Partial Class dlgTransposeColumns
         Me.ucrInputDisplayVariableNames.AutoSize = True
         Me.ucrInputDisplayVariableNames.IsMultiline = False
         Me.ucrInputDisplayVariableNames.IsReadOnly = False
-        Me.ucrInputDisplayVariableNames.Location = New System.Drawing.Point(157, 235)
+        Me.ucrInputDisplayVariableNames.Location = New System.Drawing.Point(138, 235)
         Me.ucrInputDisplayVariableNames.Name = "ucrInputDisplayVariableNames"
         Me.ucrInputDisplayVariableNames.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputDisplayVariableNames.TabIndex = 7
@@ -85,7 +85,7 @@ Partial Class dlgTransposeColumns
         Me.ucrChkDisplayVariableNames.Checked = False
         Me.ucrChkDisplayVariableNames.Location = New System.Drawing.Point(10, 233)
         Me.ucrChkDisplayVariableNames.Name = "ucrChkDisplayVariableNames"
-        Me.ucrChkDisplayVariableNames.Size = New System.Drawing.Size(141, 23)
+        Me.ucrChkDisplayVariableNames.Size = New System.Drawing.Size(125, 23)
         Me.ucrChkDisplayVariableNames.TabIndex = 6
         '
         'ucrReceiverVariableNames
@@ -105,7 +105,7 @@ Partial Class dlgTransposeColumns
         '
         Me.ucrChkNameNewColumns.AutoSize = True
         Me.ucrChkNameNewColumns.Checked = False
-        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(10, 210)
+        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(10, 208)
         Me.ucrChkNameNewColumns.Name = "ucrChkNameNewColumns"
         Me.ucrChkNameNewColumns.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkNameNewColumns.TabIndex = 5

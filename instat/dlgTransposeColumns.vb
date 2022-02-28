@@ -48,7 +48,7 @@ Public Class dlgTransposeColumns
         ucrChkNameNewColumns.SetText("Name New Columns")
         ucrChkNameNewColumns.Enabled = False ' temporary
 
-        ucrChkDisplayVariableNames.SetText("Display Variable Names")
+        ucrChkDisplayVariableNames.SetText("Include Old Names")
         ucrChkDisplayVariableNames.AddParameterPresentCondition(True, "keep.names")
         ucrChkDisplayVariableNames.AddParameterPresentCondition(False, "keep.names", False)
 
