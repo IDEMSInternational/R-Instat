@@ -1073,7 +1073,7 @@ Public Class dlgImportDataset
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
         If GetCorrectSeparatorInPath() <> "" Then
-            SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, "\") - 1), strFileExtension)
+            SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
         Else
             SetDialogStateFromFile("")
         End If
