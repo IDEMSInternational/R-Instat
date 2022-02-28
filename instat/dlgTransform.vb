@@ -19,35 +19,35 @@ Imports instat.Translations
 Public Class dlgTransform
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRankFunction As RFunction
-    Private clsSortFunction As RFunction
-    Private clsRoundFunction As RFunction
-    Private clsSignifFunction As RFunction
-    Private clsLagFunction As RFunction
-    Private clsLeadFunction As RFunction
-    Private clsDiffFunction As RFunction
-    Private clsConcDiffFunction As RFunction
-    Private clsReplicateFunction As RFunction
-    Private clsMeanFunction As RFunction
-    Private clsStandardDevFunction As RFunction
-    Private clsSubtractOperator As ROperator
-    Private clsDivisionOperator As ROperator
-    Private clsSquarerootFunction As RFunction
-    Private clsAddConstantOperator As ROperator
-    Private clsNaturalLogFunction As RFunction
-    Private clsLogBase10Function As RFunction
-    Private clsPowerOperator As ROperator
-    Private clsScaleSubtractOperator As ROperator
-    Private clsScaleMultiplyOperator As ROperator
-    Private clsScaleDivideOperator As ROperator
-    Private clsScaleAddOperator As ROperator
-    Private clsScaleMeanFunction As RFunction
-    Private clsScaleMinFunction As RFunction
-    Private clsPreviewOperator As ROperator
-    Private clsDummyTransformFunction As RFunction
+    Private clsRankFunction As New RFunction
+    Private clsSortFunction As New RFunction
+    Private clsRoundFunction As New RFunction
+    Private clsSignifFunction As New RFunction
+    Private clsLagFunction As New RFunction
+    Private clsLeadFunction As New RFunction
+    Private clsDiffFunction As New RFunction
+    Private clsConcDiffFunction As New RFunction
+    Private clsReplicateFunction As New RFunction
+    Private clsMeanFunction As New RFunction
+    Private clsStandardDevFunction As New RFunction
+    Private clsSubtractOperator As New ROperator
+    Private clsDivisionOperator As New ROperator
+    Private clsSquarerootFunction As New RFunction
+    Private clsAddConstantOperator As New ROperator
+    Private clsNaturalLogFunction As New RFunction
+    Private clsLogBase10Function As New RFunction
+    Private clsPowerOperator As New ROperator
+    Private clsScaleSubtractOperator As New ROperator
+    Private clsScaleMultiplyOperator As New ROperator
+    Private clsScaleDivideOperator As New ROperator
+    Private clsScaleAddOperator As New ROperator
+    Private clsScaleMeanFunction As New RFunction
+    Private clsScaleMinFunction As New RFunction
+    Private clsPreviewOperator As New ROperator
+    Private clsDummyTransformFunction As New RFunction
     Private clsConstantDummyFunction As New RFunction
-    Private clsNumericDummyFunction As RFunction
-    Private clsNonNegativeDummyFunction As RFunction
+    Private clsNumericDummyFunction As New RFunction
+    Private clsNonNegativeDummyFunction As New RFunction
     Private clsPreviewTextFunction As New RCodeStructure
     Private clsBooleanOperator As New ROperator
     Private clsIsNAFunction As New RFunction
@@ -489,6 +489,7 @@ Public Class dlgTransform
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
+        ucrInputPreview.SetRCode(clsPreviewOperator, bReset)
         bResetRCode = True
     End Sub
 
@@ -517,8 +518,11 @@ Public Class dlgTransform
         ucrChkEditPreview.Checked = False
     End Sub
 
-    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged,
-        ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged
+    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
+        ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
+        ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged,
+        ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrInputPreview.ControlValueChanged,
+        ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
         If bResetRCode Then
             ucrBase.clsRsyntax.ClearCodes()
             If rdoRank.Checked Then
@@ -610,15 +614,20 @@ Public Class dlgTransform
                 ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
             End If
         End If
-        clsPreviewTextFunction.RemoveAssignTo()
-        If Not ucrReceiverRank.IsEmpty Then
-            ucrInputPreview.SetText(clsPreviewTextFunction.ToScript)
-        Else
-            ucrInputPreview.SetText("")
-        End If
+        SetPreviewText()
         UpdateNonNegativeParameters()
         NewDefaultName()
         ResetPreview()
+        EditPreviewText()
+    End Sub
+
+    Private Sub SetPreviewText()
+        clsPreviewTextFunction.RemoveAssignTo()
+        If Not ucrReceiverRank.IsEmpty Then
+            ucrInputPreview.SetText(clsPreviewTextFunction.ToScript())
+        Else
+            ucrInputPreview.SetText("")
+        End If
     End Sub
 
     Private Sub UpdateNonNegativeParameters()
@@ -669,9 +678,10 @@ Public Class dlgTransform
 
     Private Sub ucrChkEditPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditPreview.ControlValueChanged
         ResetPreview()
+        EditPreviewText()
     End Sub
 
-    Private Sub ucrInputPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreview.ControlValueChanged
+    Private Sub EditPreviewText()
         Dim clsGetVariablesFunc As RFunction = ucrReceiverRank.GetVariables
         If ucrChkEditPreview.Checked Then
             clsPreviewOperator.AddParameter("left", ucrInputPreview.GetValue, iPosition:=0)
@@ -684,6 +694,10 @@ Public Class dlgTransform
         End If
     End Sub
 
+    Private Sub ucrInputLogicalValues_TextChanged(sender As Object, e As EventArgs) Handles ucrInputLogicalValues.TextChanged
+        SetPreviewText()
+    End Sub
+
     Private Sub ucrInputLogicalValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLogicalValues.ControlValueChanged
         If Not ucrInputLogicalValues.IsEmpty Then
             clsBooleanOperator.AddParameter("right", ucrInputLogicalValues.GetText, iPosition:=1)
@@ -694,8 +708,8 @@ Public Class dlgTransform
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged,
         ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
-    ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
-    ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged, ucrInputLogicalValues.ControlContentsChanged, ucrInputLogicOperations.ControlContentsChanged
+        ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
+        ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged, ucrInputLogicalValues.ControlContentsChanged, ucrInputLogicOperations.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
