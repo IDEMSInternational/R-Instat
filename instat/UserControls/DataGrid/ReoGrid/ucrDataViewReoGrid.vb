@@ -33,11 +33,18 @@ Public Class ucrDataViewReoGrid
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
+        Dim textColour As Color
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
+
+        If GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied Then
+            textColour = Color.Red
+        Else
+            textColour = Color.DarkBlue
+        End If
         For i = 0 To visiblePage.lstColumns.Count - 1
             workSheetColumnHeader = grdData.CurrentWorksheet.ColumnHeaders(i)
             workSheetColumnHeader.Text = visiblePage.lstColumns(i).strDisplayName
-            workSheetColumnHeader.TextColor = visiblePage.lstColumns(i).clsColour
+            workSheetColumnHeader.TextColor = textColour
             workSheetColumnHeader.Style.BackColor = visiblePage.lstColumns(i).clsBackGroundColour
         Next
     End Sub
