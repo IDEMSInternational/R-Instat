@@ -60,7 +60,7 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorTransposeColumns.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
-        ucrChkDisplayVariableNames.AddToLinkedControls({ucrInputDisplayVariableNames}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDisplayVariableNames.AddToLinkedControls({ucrInputDisplayVariableNames}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, objNewDefaultState:="old name", bNewLinkedChangeToDefaultState:=True)
     End Sub
 
     Private Sub SetDefaults()
