@@ -47,7 +47,7 @@ Public Class dlgDescribeTwoVarGraph
     Private clsAesCategoricalByNumericXNumeric As RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
-    Public strFirstVariablesType, strSecondVariableType As String
+    Private strFirstVariablesType, strSecondVariableType As String
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -87,12 +87,7 @@ Public Class dlgDescribeTwoVarGraph
                                           ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkLower.SetText("Lower")
         ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
-
-        ucrChkDiagonal.SetText("Diagnol")
-
-        ucrChkUpper.SetText("Upper")
 
         ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
@@ -738,7 +733,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
         Results()
-        AddColumnParameter()
+        clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
@@ -905,10 +900,6 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrSelectorTwoVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoVarGraph.ControlValueChanged
         AddDataFrame()
-    End Sub
-
-    Private Sub AddColumnParameter()
-        clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
     End Sub
 
     Private Sub AddDataFrame()
