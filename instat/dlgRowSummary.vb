@@ -38,17 +38,11 @@ Public Class dlgRowSummary
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctInputUserDefined As New Dictionary(Of String, String)
-
         ucrBase.iHelpTopicID = 45
-        'Setting receiver data types and parameters
-        'ucrReceiverForRowSummaries.SetParameter(New RParameter("X", 0))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
-        'ucrReceiverForRowSummaries.bUseFilteredData = False
-        'ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
@@ -62,7 +56,7 @@ Public Class dlgRowSummary
         ucrPnlRowSummaries.AddFunctionNamesCondition(rdoSingle, {"apply"})
 
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoUserDefined}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlStatistics.SetParameter(New RParameter("checked", 0))
         ucrPnlStatistics.AddRadioButton(rdoMean, "mean")
@@ -73,21 +67,10 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddRadioButton(rdoStandardDeviation, "sd")
         ucrPnlStatistics.AddRadioButton(rdoMaximum, "max")
         ucrPnlStatistics.AddRadioButton(rdoCount, "count")
-        ucrPnlStatistics.AddRadioButton(rdoUserDefined, "user_defined")
+        ucrPnlStatistics.AddRadioButton(rdoMore, "user_defined")
 
         'ucrInputUserDefined
-        ucrInputUserDefined.SetParameter(New RParameter("FUN", 0))
-        dctInputUserDefined.Add("sum", "sum")
-        dctInputUserDefined.Add("mean", "mean")
-        dctInputUserDefined.Add("median", "median")
-        dctInputUserDefined.Add("sd", "sd")
-        dctInputUserDefined.Add("min", "min")
-        dctInputUserDefined.Add("max", "max")
-        dctInputUserDefined.Add("count", "function(z) sum(!is.na(z))")
-        dctInputUserDefined.Add("number missing", "function(z) sum(is.na(z))")
-        ucrInputUserDefined.SetItems(dctInputUserDefined)
-        ucrInputUserDefined.bAllowNonConditionValues = False
-
+        ucrInputUserDefined.SetItems({"sum", "mean", "median", "sd", "min", "max", "count", "number missing"})
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
@@ -106,11 +89,9 @@ Public Class dlgRowSummary
         'reset
         ucrSelectorForRowSummaries.Reset()
         ucrSaveResults.Reset()
-
-        clsDummyFunction.AddParameter("FUN", "mean", iPosition:=0)
+        ucrInputUserDefined.cboInput.SelectedIndex = 1
 
         clsOtherDummyFunction.AddParameter("checked", "mean", iPosition:=0)
-
 
         'Defining the default RFunction
         clsApplyFunction.SetPackageName("base")
@@ -122,12 +103,9 @@ Public Class dlgRowSummary
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrReceiverForRowSummaries.SetRCode(clsApplyFunction, bReset)
         ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
         ucrPnlStatistics.SetRCode(clsOtherDummyFunction, bReset)
         ucrSaveResults.SetRCode(clsApplyFunction, bReset)
-        ucrInputUserDefined.SetRCode(clsDummyFunction, bReset)
 
     End Sub
 
@@ -159,7 +137,7 @@ Public Class dlgRowSummary
         Else
             clsApplyFunction.RemoveParameterByName("na.rm")
         End If
-        If rdoUserDefined.Checked Then
+        If rdoMore.Checked Then
             clsOtherDummyFunction.AddParameter("checked", "user_defined", iPosition:=0)
             clsApplyFunction.AddParameter("FUN", ucrInputUserDefined.GetText, iPosition:=2)
         ElseIf rdoMean.Checked Then

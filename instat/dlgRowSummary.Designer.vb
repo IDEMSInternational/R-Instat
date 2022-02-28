@@ -38,9 +38,10 @@ Partial Class dlgRowSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
-        Me.rdoUserDefined = New System.Windows.Forms.RadioButton()
+        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
+        Me.rdoMore = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
@@ -49,6 +50,7 @@ Partial Class dlgRowSummary
         Me.rdoNumberMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStatistics = New instat.UcrPanel()
         Me.lblSummaries = New System.Windows.Forms.Label()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
@@ -57,27 +59,25 @@ Partial Class dlgRowSummary
         Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveResults = New instat.ucrSave()
-        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
-        Me.ucrPnlStatistics = New instat.UcrPanel()
         Me.ucrPnlRowSummaries = New instat.UcrPanel()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblSelected
+        'lblSelectedVariables
         '
-        Me.lblSelected.AutoSize = True
-        Me.lblSelected.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelected.Location = New System.Drawing.Point(250, 79)
-        Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(53, 13)
-        Me.lblSelected.TabIndex = 5
-        Me.lblSelected.Tag = "Rows_to_Summarise:"
-        Me.lblSelected.Text = "Variables:"
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(250, 79)
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
+        Me.lblSelectedVariables.TabIndex = 5
+        Me.lblSelectedVariables.Tag = "Selected_Variables"
+        Me.lblSelectedVariables.Text = "Selected Variables:"
         '
         'grpStatistic
         '
         Me.grpStatistic.Controls.Add(Me.ucrInputUserDefined)
-        Me.grpStatistic.Controls.Add(Me.rdoUserDefined)
+        Me.grpStatistic.Controls.Add(Me.rdoMore)
         Me.grpStatistic.Controls.Add(Me.rdoMinimum)
         Me.grpStatistic.Controls.Add(Me.rdoMaximum)
         Me.grpStatistic.Controls.Add(Me.rdoCount)
@@ -95,18 +95,29 @@ Partial Class dlgRowSummary
         Me.grpStatistic.Tag = "Statistic"
         Me.grpStatistic.Text = "Row Statistic"
         '
-        'rdoUserDefined
+        'ucrInputUserDefined
         '
-        Me.rdoUserDefined.AutoSize = True
-        Me.rdoUserDefined.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUserDefined.Location = New System.Drawing.Point(262, 44)
-        Me.rdoUserDefined.Name = "rdoUserDefined"
-        Me.rdoUserDefined.Size = New System.Drawing.Size(87, 17)
-        Me.rdoUserDefined.TabIndex = 9
-        Me.rdoUserDefined.TabStop = True
-        Me.rdoUserDefined.Tag = "User_Defined"
-        Me.rdoUserDefined.Text = "User Defined"
-        Me.rdoUserDefined.UseVisualStyleBackColor = True
+        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
+        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
+        Me.ucrInputUserDefined.IsReadOnly = False
+        Me.ucrInputUserDefined.Location = New System.Drawing.Point(317, 40)
+        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
+        Me.ucrInputUserDefined.Size = New System.Drawing.Size(125, 25)
+        Me.ucrInputUserDefined.TabIndex = 10
+        '
+        'rdoMore
+        '
+        Me.rdoMore.AutoSize = True
+        Me.rdoMore.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMore.Location = New System.Drawing.Point(262, 44)
+        Me.rdoMore.Name = "rdoMore"
+        Me.rdoMore.Size = New System.Drawing.Size(49, 17)
+        Me.rdoMore.TabIndex = 9
+        Me.rdoMore.TabStop = True
+        Me.rdoMore.Tag = "More"
+        Me.rdoMore.Text = "More"
+        Me.rdoMore.UseVisualStyleBackColor = True
         '
         'rdoMinimum
         '
@@ -212,6 +223,14 @@ Partial Class dlgRowSummary
         Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
+        'ucrPnlStatistics
+        '
+        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 13)
+        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
+        Me.ucrPnlStatistics.Size = New System.Drawing.Size(444, 52)
+        Me.ucrPnlStatistics.TabIndex = 0
+        '
         'lblSummaries
         '
         Me.lblSummaries.AutoSize = True
@@ -311,25 +330,6 @@ Partial Class dlgRowSummary
         Me.ucrSaveResults.Size = New System.Drawing.Size(269, 22)
         Me.ucrSaveResults.TabIndex = 9
         '
-        'ucrInputUserDefined
-        '
-        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
-        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
-        Me.ucrInputUserDefined.IsReadOnly = False
-        Me.ucrInputUserDefined.Location = New System.Drawing.Point(351, 40)
-        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
-        Me.ucrInputUserDefined.Size = New System.Drawing.Size(91, 25)
-        Me.ucrInputUserDefined.TabIndex = 10
-        '
-        'ucrPnlStatistics
-        '
-        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 13)
-        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
-        Me.ucrPnlStatistics.Size = New System.Drawing.Size(444, 52)
-        Me.ucrPnlStatistics.TabIndex = 0
-        '
         'ucrPnlRowSummaries
         '
         Me.ucrPnlRowSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -349,7 +349,7 @@ Partial Class dlgRowSummary
         Me.Controls.Add(Me.lblSummaries)
         Me.Controls.Add(Me.ucrChkIgnoreMissingValues)
         Me.Controls.Add(Me.ucrSelectorForRowSummaries)
-        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrReceiverForRowSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveResults)
@@ -371,7 +371,7 @@ Partial Class dlgRowSummary
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverForRowSummaries As ucrReceiverMultiple
-    Friend WithEvents lblSelected As Label
+    Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrSelectorForRowSummaries As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpStatistic As GroupBox
     Friend WithEvents rdoMinimum As RadioButton
@@ -389,6 +389,6 @@ Partial Class dlgRowSummary
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlRowSummaries As UcrPanel
-    Friend WithEvents rdoUserDefined As RadioButton
+    Friend WithEvents rdoMore As RadioButton
     Friend WithEvents ucrInputUserDefined As ucrInputComboBox
 End Class
