@@ -35,9 +35,9 @@ Public Class dlgContrasts
         grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
         'grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayoutForContrasts.SheetTabNewButtonVisible = False
-        'grdLayoutForContrasts.Text = "Define Contrasts"
         grdCurrSheet = grdLayoutForContrasts.CurrentWorksheet
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
         iFullWidth = Me.Width
     End Sub
@@ -214,11 +214,6 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub ucrReceiverForContrasts_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForContrasts.ControlContentsChanged
-        ' If Not ucrReceiverForContrasts.IsEmpty Then
-        'grdLayoutForContrasts.Enabled = True
-        'Else
-        'grdLayoutForContrasts.Enabled = False
-        'End If
         SetGridDimensions()
         TestOKEnabled()
     End Sub
