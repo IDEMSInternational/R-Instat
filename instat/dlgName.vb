@@ -229,9 +229,19 @@ Public Class dlgName
         End If
     End Sub
 
+    Private Sub GetSelectedRows()
+        For i As Integer = grdCurrentWorkSheet.SelectionRange.Row To grdCurrentWorkSheet.SelectionRange.Row + grdCurrentWorkSheet.SelectionRange.Rows - 1
+            Dim iRow As Integer = grdCurrentWorkSheet.RowHeaders.Item(i).Index + 1
+            AddChangedNewLabelRows(iRow, strEmpty)
+        Next
+    End Sub
+
     Private Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) Then
-            RenameColumns(e.Cell.Data, e.Cell.Row, e.Cell.Column)
+            GetSelectedRows()
+            clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+            clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+            clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
         End If
     End Sub
 
@@ -285,7 +295,7 @@ Public Class dlgName
                     clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
                     clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
                 End If
-                Else
+            Else
                 clsDefaultRFunction.RemoveParameterByName("new_labels_df")
             End If
         End If
