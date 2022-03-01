@@ -26,7 +26,6 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Dim strEmpty As String = " "
-    Dim lstAvailableVariables As New ListView
     Private clsDefaultRFunction As New RFunction
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
@@ -38,7 +37,6 @@ Public Class dlgName
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
     Private dctCaseOptions As New Dictionary(Of String, String)
-    Private strPreviousCellText As String
     Private bCurrentCell As Boolean = False
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -314,16 +312,20 @@ Public Class dlgName
     End Sub
 
     Private Sub UpdateGrid()
+        Dim vecColumns As GenericVector = Nothing
+        Dim chrCurrColumns As CharacterVector
+        Dim clsGetItems As New RFunction
+        Dim clsGetColumnLabels As New RFunction
+        Dim strCurrColumnLables() As String
+        Dim expItems As SymbolicExpression
+
         grdRenameColumns.Worksheets.Clear()
         dctRowsNewNameChanged.Clear()
         dctNameRowsValues.Clear()
         dctRowsNewLabelChanged.Clear()
 
-        GetColumnsNames()
-
         grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
         grdCurrentWorkSheet.ColumnCount = 3
-        grdCurrentWorkSheet.RowCount = lstAvailableVariables.Items.Count
 
         grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
         grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
@@ -331,19 +333,42 @@ Public Class dlgName
         grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
 
         If rdoMultiple.Checked Then
-            If lstAvailableVariables.Items.Count > 0 Then
-                For i As Integer = 0 To lstAvailableVariables.Items.Count - 1
-                    grdCurrentWorkSheet.Item(row:=i, col:=0) = lstAvailableVariables.Items(i).Text
-                    grdCurrentWorkSheet.GetCell(row:=i, col:=0).IsReadOnly = True
-                    grdCurrentWorkSheet.Item(row:=i, col:=1) = lstAvailableVariables.Items(i).Text
-                Next
+            If ucrSelectVariables IsNot Nothing Then
+                clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+                clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+                clsGetItems.AddParameter("as_list", "TRUE")
+                expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+                If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                    vecColumns = expItems.AsList
+                    For i As Integer = 0 To vecColumns.Count - 1
+                        chrCurrColumns = vecColumns(i).AsCharacter
+                        Dim strText As String = vecColumns.Names(i)
+
+                        If chrCurrColumns IsNot Nothing Then
+                            grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
+                            For j As Integer = 0 To chrCurrColumns.Count - 1
+                                grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
+                                grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
+                                grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
+                            Next
+                            clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+                            clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+                            clsGetColumnLabels.AddParameter("columns", frmMain.clsRLink.GetListAsRString(chrCurrColumns.ToList))
+                            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
+                            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                                strCurrColumnLables = expItems.AsCharacter.ToArray
+                            Else
+                                strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
+                            End If
+                            For j = 0 To chrCurrColumns.Count - 1
+                                grdCurrentWorkSheet.Item(row:=j, col:=2) = strCurrColumnLables(j)
+                            Next
+                        End If
+                    Next
+                End If
 
                 For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
                     AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
-                Next
-
-                For i As Integer = 0 To GetListColsLabel().Count - 1
-                    grdCurrentWorkSheet.Item(row:=i, col:=2) = GetListColsLabel().Item(i)
                 Next
             End If
         End If
@@ -422,27 +447,6 @@ Public Class dlgName
         Return strColLabel
     End Function
 
-    Private Function GetListColsLabel() As List(Of String)
-        Dim lstColLabel As New List(Of String)
-        Dim clsColmnLabelsRFunction = New RFunction
-        Dim expItems As SymbolicExpression
-
-        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
-        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
-        clsColmnLabelsRFunction.AddParameter("columns", GetValuesAsVector(dctNameRowsValues))
-
-        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
-        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
-            Dim strArr As String() = expItems.AsCharacter.ToArray
-            If strArr IsNot Nothing Then
-                For Each strValue In strArr
-                    lstColLabel.Add(strValue)
-                Next
-            End If
-        End If
-        Return lstColLabel
-    End Function
-
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrInputCase.ControlValueChanged
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
@@ -473,35 +477,7 @@ Public Class dlgName
         sdgConstructRegexExpression.ShowDialog()
     End Sub
 
-    Private Sub GetColumnsNames()
-        Dim vecColumns As GenericVector = Nothing
-        Dim chrCurrColumns As CharacterVector
-        Dim clsGetItems As New RFunction
-        Dim expItems As SymbolicExpression
-
-        lstAvailableVariables.Items.Clear()
-
-        If ucrSelectVariables IsNot Nothing Then
-            clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-            clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
-            clsGetItems.AddParameter("as_list", "TRUE")
-            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
-            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
-                vecColumns = expItems.AsList
-                For i As Integer = 0 To vecColumns.Count - 1
-                    chrCurrColumns = vecColumns(i).AsCharacter
-                    If chrCurrColumns IsNot Nothing Then
-                        For j As Integer = 0 To chrCurrColumns.Count - 1
-                            lstAvailableVariables.Items.Add(chrCurrColumns(j))
-                        Next
-                    End If
-                Next
-            End If
-        End If
-    End Sub
-
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
-        GetColumnsNames()
         UpdateGrid()
     End Sub
 
