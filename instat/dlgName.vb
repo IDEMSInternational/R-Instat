@@ -301,9 +301,15 @@ Public Class dlgName
         End If
     End Sub
 
+    Private Sub RemoveLabelsParams()
+        clsDefaultRFunction.RemoveParameterByPosition(8)
+        clsDefaultRFunction.RemoveParameterByPosition(9)
+    End Sub
+
     Private Sub RemoveParameters()
         If rdoMultiple.Checked OrElse rdoSingle.Checked Then
             clsDefaultRFunction.RemoveParameterByPosition(5)
+            RemoveLabelsParams()
         ElseIf rdoRenameWith.Checked Then
             If rdoToLower.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
@@ -314,10 +320,6 @@ Public Class dlgName
                 clsDefaultRFunction.AddParameter("case", dctCaseOptions(ucrInputCase.GetText()), iPosition:=7)
                 clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
             End If
-        End If
-        If rdoSingle.Checked OrElse rdoRenameWith.Checked Then
-            clsDefaultRFunction.RemoveParameterByPosition(8)
-            clsDefaultRFunction.RemoveParameterByPosition(9)
         End If
     End Sub
 
@@ -488,6 +490,7 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
+        RemoveLabelsParams()
         UpdateGrid()
     End Sub
 
