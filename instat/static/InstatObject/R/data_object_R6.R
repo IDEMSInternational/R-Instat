@@ -1883,10 +1883,13 @@ DataSheet$set("public", "get_current_column_selection", function() {
 )
 
 DataSheet$set("public", "set_current_column_selection", function(name = "") {
-  if(!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
-  self$current_column_selection <- private$column_selections[[name]]
-}
-)
+  if (!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
+  if (length(self$get_column_selection_column_names(name)) == 0) {
+    cat(name, " has no columns selected.")
+  } else {
+    self$current_column_selection <- private$column_selections[[name]]
+  }
+})
 
 DataSheet$set("public", "get_column_selection_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   out <- names(private$column_selections)
@@ -1931,11 +1934,21 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
                  "tidyselect::last_col" =  tidyselect::last_col,
+                 "tidyselect::where" = NULL,
                  NULL
                  )
-    if (op == "base::match") args$table <- all_column_names
-    else args$vars <- all_column_names
-    res[[i]] <- do.call(fn, args)
+    if (op == "base::match") {
+      args$table <- all_column_names
+      res[[i]] <- do.call(fn, args)
+      }else if (op == "tidyselect::where"){
+        selected_columns <- private$data |> 
+          dplyr::select(where(args$fn)) |> 
+          colnames()
+      res[[i]] <- which(all_column_names %in% selected_columns)
+      }else{
+        args$vars <- all_column_names
+        res[[i]] <- do.call(fn, args)
+        }
     if (neg) res[[i]] <- setdiff(1:length(all_column_names), res[[i]])
     i <- i + 1
   }

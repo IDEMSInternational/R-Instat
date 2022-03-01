@@ -1030,10 +1030,6 @@ Public Class frmMain
         End Using
     End Sub
 
-    Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColumnStructure.Click
-        dlgColumnStructure.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
@@ -1838,10 +1834,6 @@ Public Class frmMain
         dlgCompareColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuDefineOptionsByContexts_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOptionsByContexts.Click
-        dlgDefineOptionsByContext.ShowDialog()
-    End Sub
-
     Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextMergeAdditionalData.Click
         dlgMergeAdditionalData.ShowDialog()
     End Sub
@@ -2430,5 +2422,13 @@ Public Class frmMain
 
     Private Sub mnuDescribeMultivariateClusterAnalysis_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateClusterAnalysis.Click
         dlgClusterAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextDefineOnStation_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnStation.Click
+        dlgColumnStructure.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
+        dlgDefineOptionsByContext.ShowDialog()
     End Sub
 End Class
