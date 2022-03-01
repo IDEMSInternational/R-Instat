@@ -124,7 +124,7 @@ Public Class dlgName
         ucrInputCase.SetItems(dctCaseOptions)
     End Sub
 
-    Public Sub SetDefaults()
+    Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
         clsNewColNameDataframeFunction = New RFunction
         clsNewLabelDataframeFunction = New RFunction
@@ -229,7 +229,7 @@ Public Class dlgName
         End If
     End Sub
 
-    Protected Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
+    Private Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) Then
             RenameColumns(e.Cell.Data, e.Cell.Row, e.Cell.Column)
         End If
@@ -246,7 +246,7 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Protected Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
+    Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
         If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
             MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
             e.IsCancelled = True
