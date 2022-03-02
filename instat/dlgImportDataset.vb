@@ -1068,11 +1068,21 @@ Public Class dlgImportDataset
     End Sub
 
     Private Function GetCorrectSeparatorInPath() As String
-        Return If(strCurrentDirectory.Contains("/"), "/", "\")
+        Dim strSepearator As String = ""
+        If strCurrentDirectory.Contains("/") Then
+            strSepearator = "/"
+        ElseIf strCurrentDirectory.Contains("\") Then
+            strSepearator = "\"
+        End If
+        Return strSepearator
     End Function
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
-        SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
+        If GetCorrectSeparatorInPath() <> "" Then
+            SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
+        Else
+            SetDialogStateFromFile("")
+        End If
     End Sub
 
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
