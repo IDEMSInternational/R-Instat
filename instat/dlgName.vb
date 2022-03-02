@@ -214,19 +214,34 @@ Public Class dlgName
         Return strValue
     End Function
 
+    Private Sub ValidateNamesFromDictionary(iColIndex As Integer)
+        If iColIndex = 1 Then
+            For Each value In dctRowsNewNameChanged.Values
+                If Not CheckNames(value, iColIndex) Then
+                    MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
+                    bCurrentCell = False
+                Else
+                    bCurrentCell = True
+                End If
+            Next
+        End If
+        TestOKEnabled()
+    End Sub
+
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
         Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
-        Dim iColIndex As Integer = e.Range.Col
+        Dim iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
 
         If e.Range.Rows > 1 Then
-            For iRow As Integer = iStartRowIndex To e.Range.EndRow
-                Dim strData As String = grdCurrentWorkSheet.Item(row:=iRow, col:=iColIndex).ToString()
-                RenameColumns(strData, iRow, e.Range.Col)
+            For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
+                Dim strData As String = grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex)
+                RenameColumns(strData, iRow, iColIndex)
             Next
         Else
             Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
             RenameColumns(strNewData, iStartRowIndex, iColIndex)
         End If
+        ValidateNamesFromDictionary(iColIndex)
     End Sub
 
     Private Sub GetSelectedRows()
@@ -258,16 +273,20 @@ Public Class dlgName
         Return bFind
     End Function
 
-    Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+    Private Function CheckNames(strNewData As String, iColIndex As Integer) As Boolean
+        Dim bCheck As Boolean
         Dim parsedValue As Boolean
         If (strNewData.Contains(" ") OrElse containsFrench(strNewData) OrElse strNewData = "" OrElse Boolean.TryParse(strNewData, parsedValue) _
              OrElse strNewData.Equals("t") OrElse strNewData.Equals("T") OrElse strNewData.Equals("f") OrElse strNewData.Equals("F") OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
-            bCurrentCell = False
-            MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
+            bCheck = False
         Else
-            bCurrentCell = True
-            GetVariables(strNewData, iRowIndex + 1, iColIndex)
+            bCheck = True
         End If
+        Return bCheck
+    End Function
+
+    Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+        GetVariables(strNewData, iRowIndex + 1, iColIndex)
         TestOKEnabled()
     End Sub
 
@@ -280,6 +299,8 @@ Public Class dlgName
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         RenameColumns(e.NewData, e.Cell.Row, e.Cell.Column)
+        ValidateNamesFromDictionary(e.Cell.Column)
+        TestOKEnabled()
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
