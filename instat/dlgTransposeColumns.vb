@@ -36,9 +36,9 @@ Public Class dlgTransposeColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 277
 
-        ucrReceiverColumsToTranspose.SetParameterIsRFunction()
-        ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
-        ucrReceiverColumsToTranspose.SetMeAsReceiver()
+        ucrReceiverColumnsToTranspose.SetParameterIsRFunction()
+        ucrReceiverColumnsToTranspose.Selector = ucrSelectorTransposeColumns
+        ucrReceiverColumnsToTranspose.SetMeAsReceiver()
 
         ucrReceiverVariableNames.SetParameter(New RParameter("make.names", 1))
         ucrReceiverVariableNames.SetParameterIsRFunction()
@@ -91,7 +91,7 @@ Public Class dlgTransposeColumns
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverColumsToTranspose.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
+        If Not ucrReceiverColumnsToTranspose.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
             If ucrChkDisplayVariableNames.Checked AndAlso (Not ucrInputDisplayVariableNames.IsEmpty) Then
                 ucrBase.OKEnabled(True)
             ElseIf ucrChkDisplayVariableNames.Checked AndAlso ucrInputDisplayVariableNames.IsEmpty Then
@@ -120,14 +120,14 @@ Public Class dlgTransposeColumns
         NewDefaultName()
     End Sub
 
-    Private Sub ucrReceiverColumsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumsToTranspose.ControlValueChanged
+    Private Sub ucrReceiverColumsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetColumnNames = ucrReceiverColumsToTranspose.GetVariables(True).Clone
+        clsGetColumnNames = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
         clsGetColumnNames.SetAssignTo("columns")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNames)
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumsToTranspose.ControlContentsChanged,
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlContentsChanged,
         ucrNewDataframe.ControlContentsChanged, ucrReceiverVariableNames.ControlContentsChanged, ucrChkDisplayVariableNames.ControlContentsChanged,
         ucrInputDisplayVariableNames.ControlContentsChanged
         TestOkEnabled()

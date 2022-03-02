@@ -45,7 +45,7 @@ Partial Class dlgTransposeColumns
         Me.ucrReceiverVariableNames = New instat.ucrReceiverSingle()
         Me.ucrChkNameNewColumns = New instat.ucrCheck()
         Me.ucrNewDataframe = New instat.ucrSave()
-        Me.ucrReceiverColumsToTranspose = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverColumnsToTranspose = New instat.ucrReceiverMultiple()
         Me.ucrSelectorTransposeColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -119,18 +119,18 @@ Partial Class dlgTransposeColumns
         Me.ucrNewDataframe.Size = New System.Drawing.Size(360, 24)
         Me.ucrNewDataframe.TabIndex = 8
         '
-        'ucrReceiverColumsToTranspose
+        'ucrReceiverColumnsToTranspose
         '
-        Me.ucrReceiverColumsToTranspose.AutoSize = True
-        Me.ucrReceiverColumsToTranspose.frmParent = Me
-        Me.ucrReceiverColumsToTranspose.Location = New System.Drawing.Point(263, 60)
-        Me.ucrReceiverColumsToTranspose.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumsToTranspose.Name = "ucrReceiverColumsToTranspose"
-        Me.ucrReceiverColumsToTranspose.Selector = Nothing
-        Me.ucrReceiverColumsToTranspose.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverColumsToTranspose.strNcFilePath = ""
-        Me.ucrReceiverColumsToTranspose.TabIndex = 2
-        Me.ucrReceiverColumsToTranspose.ucrSelector = Nothing
+        Me.ucrReceiverColumnsToTranspose.AutoSize = True
+        Me.ucrReceiverColumnsToTranspose.frmParent = Me
+        Me.ucrReceiverColumnsToTranspose.Location = New System.Drawing.Point(263, 60)
+        Me.ucrReceiverColumnsToTranspose.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumnsToTranspose.Name = "ucrReceiverColumnsToTranspose"
+        Me.ucrReceiverColumnsToTranspose.Selector = Nothing
+        Me.ucrReceiverColumnsToTranspose.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverColumnsToTranspose.strNcFilePath = ""
+        Me.ucrReceiverColumnsToTranspose.TabIndex = 2
+        Me.ucrReceiverColumnsToTranspose.ucrSelector = Nothing
         '
         'ucrSelectorTransposeColumns
         '
@@ -165,7 +165,7 @@ Partial Class dlgTransposeColumns
         Me.Controls.Add(Me.ucrReceiverVariableNames)
         Me.Controls.Add(Me.ucrChkNameNewColumns)
         Me.Controls.Add(Me.ucrNewDataframe)
-        Me.Controls.Add(Me.ucrReceiverColumsToTranspose)
+        Me.Controls.Add(Me.ucrReceiverColumnsToTranspose)
         Me.Controls.Add(Me.ucrSelectorTransposeColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblColumnsToTranspose)
@@ -183,7 +183,7 @@ Partial Class dlgTransposeColumns
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorTransposeColumns As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverColumsToTranspose As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverColumnsToTranspose As ucrReceiverMultiple
     Friend WithEvents lblColumnsToTranspose As Label
     Friend WithEvents ucrNewDataframe As ucrSave
     Friend WithEvents ucrChkNameNewColumns As ucrCheck
