@@ -489,7 +489,6 @@ Public Class dlgTransform
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
-        ucrInputPreview.SetRCode(clsPreviewOperator, bReset)
         bResetRCode = True
     End Sub
 
@@ -521,7 +520,7 @@ Public Class dlgTransform
     Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
         ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
         ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged,
-        ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrInputPreview.ControlValueChanged,
+        ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrChkAddConstant.ControlValueChanged,
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
         If bResetRCode Then
             ucrBase.clsRsyntax.ClearCodes()
@@ -618,7 +617,6 @@ Public Class dlgTransform
         UpdateNonNegativeParameters()
         NewDefaultName()
         ResetPreview()
-        EditPreviewText()
     End Sub
 
     Private Sub SetPreviewText()
@@ -660,10 +658,6 @@ Public Class dlgTransform
         End If
     End Sub
 
-    Private Sub ucrChkAddConstant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddConstant.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputPreview.ControlValueChanged
-        UpdateConstantParameter()
-    End Sub
-
     Private Sub ResetPreview()
         If Not bResetRCode Then
             Exit Sub
@@ -678,10 +672,9 @@ Public Class dlgTransform
 
     Private Sub ucrChkEditPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditPreview.ControlValueChanged
         ResetPreview()
-        EditPreviewText()
     End Sub
 
-    Private Sub EditPreviewText()
+    Private Sub ucrInputPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreview.ControlValueChanged
         Dim clsGetVariablesFunc As RFunction = ucrReceiverRank.GetVariables
         If ucrChkEditPreview.Checked Then
             clsPreviewOperator.AddParameter("left", ucrInputPreview.GetValue, iPosition:=0)
