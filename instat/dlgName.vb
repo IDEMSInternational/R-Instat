@@ -245,11 +245,25 @@ Public Class dlgName
         End If
     End Sub
 
+    Private Function containsFrench(ByVal strData As String) As Boolean
+        Dim bFind As Boolean = False
+        Dim lstFrench As String = "ç,é,ê,î,ô,œ,û"
+        Dim words As String() = lstFrench.Split(New Char() {","c})
+        For Each word In words
+            If strData.Contains(word) Then
+                bFind = True
+                Exit For
+            End If
+        Next
+        Return bFind
+    End Function
+
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
-        If (strNewData.Contains(" ") OrElse strNewData = "" OrElse strNewData = "TRUE" OrElse
+
+        If (strNewData.Contains(" ") OrElse containsFrench(strNewData) OrElse strNewData = "" OrElse strNewData = "TRUE" OrElse
            strNewData = "T" OrElse strNewData = "FALSE" OrElse strNewData = "F" OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
             bCurrentCell = False
-            MsgBox("The column name must not be a numeric or contains space or be a boolean e.g TRUE, FALSE, T, F.")
+            MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
         Else
             bCurrentCell = True
             GetVariables(strNewData, iRowIndex + 1, iColIndex)
