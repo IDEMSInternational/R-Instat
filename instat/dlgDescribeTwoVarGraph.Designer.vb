@@ -64,6 +64,24 @@ Partial Class dlgDescribeTwoVarGraph
         Me.rdoBy = New System.Windows.Forms.RadioButton()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.grpTypeOfDispaly = New System.Windows.Forms.GroupBox()
+        Me.lblDiagonalNA = New System.Windows.Forms.Label()
+        Me.ucrInputDiagonalNA = New instat.ucrInputComboBox()
+        Me.lblDiagonalDiscrete = New System.Windows.Forms.Label()
+        Me.ucrInputDiagonalDiscrete = New instat.ucrInputComboBox()
+        Me.lblDiagonalContinuous = New System.Windows.Forms.Label()
+        Me.ucrInputDiagonalContinous = New instat.ucrInputComboBox()
+        Me.lblUpperNA = New System.Windows.Forms.Label()
+        Me.lblUpperDiscrete = New System.Windows.Forms.Label()
+        Me.lblUpperCombo = New System.Windows.Forms.Label()
+        Me.lblUpperContinous = New System.Windows.Forms.Label()
+        Me.ucrInputUpperNA = New instat.ucrInputComboBox()
+        Me.ucrInputUpperDiscrete = New instat.ucrInputComboBox()
+        Me.ucrInputUpperCombo = New instat.ucrInputComboBox()
+        Me.ucrInputUpperContinous = New instat.ucrInputComboBox()
+        Me.lblLowerNA = New System.Windows.Forms.Label()
+        Me.lblLowerDiscrete = New System.Windows.Forms.Label()
+        Me.lblLowerCombo = New System.Windows.Forms.Label()
+        Me.lblLowerContinous = New System.Windows.Forms.Label()
         Me.ucrInputLowerNA = New instat.ucrInputComboBox()
         Me.ucrInputLowerDiscrete = New instat.ucrInputComboBox()
         Me.ucrInputLowerCombo = New instat.ucrInputComboBox()
@@ -78,24 +96,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
-        Me.lblLowerContinous = New System.Windows.Forms.Label()
-        Me.lblLowerCombo = New System.Windows.Forms.Label()
-        Me.lblLowerDiscrete = New System.Windows.Forms.Label()
-        Me.lblLowerNA = New System.Windows.Forms.Label()
-        Me.lblUpperNA = New System.Windows.Forms.Label()
-        Me.lblUpperDiscrete = New System.Windows.Forms.Label()
-        Me.lblUpperCombo = New System.Windows.Forms.Label()
-        Me.lblUpperContinous = New System.Windows.Forms.Label()
-        Me.ucrInputUpperNA = New instat.ucrInputComboBox()
-        Me.ucrInputUpperDiscrete = New instat.ucrInputComboBox()
-        Me.ucrInputUpperCombo = New instat.ucrInputComboBox()
-        Me.ucrInputUpperContinous = New instat.ucrInputComboBox()
-        Me.lblDiagonalContinuous = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalContinous = New instat.ucrInputComboBox()
-        Me.lblDiagonalDiscrete = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalDiscrete = New instat.ucrInputComboBox()
-        Me.lblDiagonalNA = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalNA = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -421,6 +421,193 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.TabStop = False
         Me.grpTypeOfDispaly.Text = "Type Of Dispaly"
         '
+        'lblDiagonalNA
+        '
+        Me.lblDiagonalNA.AutoSize = True
+        Me.lblDiagonalNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDiagonalNA.Location = New System.Drawing.Point(152, 105)
+        Me.lblDiagonalNA.Name = "lblDiagonalNA"
+        Me.lblDiagonalNA.Size = New System.Drawing.Size(25, 13)
+        Me.lblDiagonalNA.TabIndex = 40
+        Me.lblDiagonalNA.Text = "NA:"
+        '
+        'ucrInputDiagonalNA
+        '
+        Me.ucrInputDiagonalNA.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalNA.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalNA.IsReadOnly = False
+        Me.ucrInputDiagonalNA.Location = New System.Drawing.Point(216, 100)
+        Me.ucrInputDiagonalNA.Name = "ucrInputDiagonalNA"
+        Me.ucrInputDiagonalNA.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalNA.TabIndex = 39
+        '
+        'lblDiagonalDiscrete
+        '
+        Me.lblDiagonalDiscrete.AutoSize = True
+        Me.lblDiagonalDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDiagonalDiscrete.Location = New System.Drawing.Point(150, 77)
+        Me.lblDiagonalDiscrete.Name = "lblDiagonalDiscrete"
+        Me.lblDiagonalDiscrete.Size = New System.Drawing.Size(49, 13)
+        Me.lblDiagonalDiscrete.TabIndex = 38
+        Me.lblDiagonalDiscrete.Text = "Discrete:"
+        '
+        'ucrInputDiagonalDiscrete
+        '
+        Me.ucrInputDiagonalDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalDiscrete.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalDiscrete.IsReadOnly = False
+        Me.ucrInputDiagonalDiscrete.Location = New System.Drawing.Point(216, 73)
+        Me.ucrInputDiagonalDiscrete.Name = "ucrInputDiagonalDiscrete"
+        Me.ucrInputDiagonalDiscrete.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalDiscrete.TabIndex = 37
+        '
+        'lblDiagonalContinuous
+        '
+        Me.lblDiagonalContinuous.AutoSize = True
+        Me.lblDiagonalContinuous.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDiagonalContinuous.Location = New System.Drawing.Point(149, 50)
+        Me.lblDiagonalContinuous.Name = "lblDiagonalContinuous"
+        Me.lblDiagonalContinuous.Size = New System.Drawing.Size(63, 13)
+        Me.lblDiagonalContinuous.TabIndex = 36
+        Me.lblDiagonalContinuous.Text = "Continuous:"
+        '
+        'ucrInputDiagonalContinous
+        '
+        Me.ucrInputDiagonalContinous.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalContinous.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalContinous.IsReadOnly = False
+        Me.ucrInputDiagonalContinous.Location = New System.Drawing.Point(216, 46)
+        Me.ucrInputDiagonalContinous.Name = "ucrInputDiagonalContinous"
+        Me.ucrInputDiagonalContinous.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalContinous.TabIndex = 35
+        '
+        'lblUpperNA
+        '
+        Me.lblUpperNA.AutoSize = True
+        Me.lblUpperNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblUpperNA.Location = New System.Drawing.Point(292, 131)
+        Me.lblUpperNA.Name = "lblUpperNA"
+        Me.lblUpperNA.Size = New System.Drawing.Size(25, 13)
+        Me.lblUpperNA.TabIndex = 34
+        Me.lblUpperNA.Text = "NA:"
+        '
+        'lblUpperDiscrete
+        '
+        Me.lblUpperDiscrete.AutoSize = True
+        Me.lblUpperDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblUpperDiscrete.Location = New System.Drawing.Point(290, 104)
+        Me.lblUpperDiscrete.Name = "lblUpperDiscrete"
+        Me.lblUpperDiscrete.Size = New System.Drawing.Size(49, 13)
+        Me.lblUpperDiscrete.TabIndex = 33
+        Me.lblUpperDiscrete.Text = "Discrete:"
+        '
+        'lblUpperCombo
+        '
+        Me.lblUpperCombo.AutoSize = True
+        Me.lblUpperCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblUpperCombo.Location = New System.Drawing.Point(290, 77)
+        Me.lblUpperCombo.Name = "lblUpperCombo"
+        Me.lblUpperCombo.Size = New System.Drawing.Size(43, 13)
+        Me.lblUpperCombo.TabIndex = 32
+        Me.lblUpperCombo.Text = "Combo:"
+        '
+        'lblUpperContinous
+        '
+        Me.lblUpperContinous.AutoSize = True
+        Me.lblUpperContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblUpperContinous.Location = New System.Drawing.Point(290, 50)
+        Me.lblUpperContinous.Name = "lblUpperContinous"
+        Me.lblUpperContinous.Size = New System.Drawing.Size(63, 13)
+        Me.lblUpperContinous.TabIndex = 31
+        Me.lblUpperContinous.Text = "Continuous:"
+        '
+        'ucrInputUpperNA
+        '
+        Me.ucrInputUpperNA.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUpperNA.GetSetSelectedIndex = -1
+        Me.ucrInputUpperNA.IsReadOnly = False
+        Me.ucrInputUpperNA.Location = New System.Drawing.Point(357, 127)
+        Me.ucrInputUpperNA.Name = "ucrInputUpperNA"
+        Me.ucrInputUpperNA.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputUpperNA.TabIndex = 30
+        '
+        'ucrInputUpperDiscrete
+        '
+        Me.ucrInputUpperDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUpperDiscrete.GetSetSelectedIndex = -1
+        Me.ucrInputUpperDiscrete.IsReadOnly = False
+        Me.ucrInputUpperDiscrete.Location = New System.Drawing.Point(357, 100)
+        Me.ucrInputUpperDiscrete.Name = "ucrInputUpperDiscrete"
+        Me.ucrInputUpperDiscrete.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputUpperDiscrete.TabIndex = 29
+        '
+        'ucrInputUpperCombo
+        '
+        Me.ucrInputUpperCombo.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperCombo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUpperCombo.GetSetSelectedIndex = -1
+        Me.ucrInputUpperCombo.IsReadOnly = False
+        Me.ucrInputUpperCombo.Location = New System.Drawing.Point(357, 73)
+        Me.ucrInputUpperCombo.Name = "ucrInputUpperCombo"
+        Me.ucrInputUpperCombo.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputUpperCombo.TabIndex = 28
+        '
+        'ucrInputUpperContinous
+        '
+        Me.ucrInputUpperContinous.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUpperContinous.GetSetSelectedIndex = -1
+        Me.ucrInputUpperContinous.IsReadOnly = False
+        Me.ucrInputUpperContinous.Location = New System.Drawing.Point(357, 46)
+        Me.ucrInputUpperContinous.Name = "ucrInputUpperContinous"
+        Me.ucrInputUpperContinous.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputUpperContinous.TabIndex = 27
+        '
+        'lblLowerNA
+        '
+        Me.lblLowerNA.AutoSize = True
+        Me.lblLowerNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerNA.Location = New System.Drawing.Point(3, 130)
+        Me.lblLowerNA.Name = "lblLowerNA"
+        Me.lblLowerNA.Size = New System.Drawing.Size(25, 13)
+        Me.lblLowerNA.TabIndex = 26
+        Me.lblLowerNA.Text = "NA:"
+        '
+        'lblLowerDiscrete
+        '
+        Me.lblLowerDiscrete.AutoSize = True
+        Me.lblLowerDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerDiscrete.Location = New System.Drawing.Point(1, 105)
+        Me.lblLowerDiscrete.Name = "lblLowerDiscrete"
+        Me.lblLowerDiscrete.Size = New System.Drawing.Size(49, 13)
+        Me.lblLowerDiscrete.TabIndex = 25
+        Me.lblLowerDiscrete.Text = "Discrete:"
+        '
+        'lblLowerCombo
+        '
+        Me.lblLowerCombo.AutoSize = True
+        Me.lblLowerCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerCombo.Location = New System.Drawing.Point(1, 78)
+        Me.lblLowerCombo.Name = "lblLowerCombo"
+        Me.lblLowerCombo.Size = New System.Drawing.Size(43, 13)
+        Me.lblLowerCombo.TabIndex = 24
+        Me.lblLowerCombo.Text = "Combo:"
+        '
+        'lblLowerContinous
+        '
+        Me.lblLowerContinous.AutoSize = True
+        Me.lblLowerContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerContinous.Location = New System.Drawing.Point(1, 50)
+        Me.lblLowerContinous.Name = "lblLowerContinous"
+        Me.lblLowerContinous.Size = New System.Drawing.Size(63, 13)
+        Me.lblLowerContinous.TabIndex = 23
+        Me.lblLowerContinous.Text = "Continuous:"
+        '
         'ucrInputLowerNA
         '
         Me.ucrInputLowerNA.AddQuotesIfUnrecognised = True
@@ -569,193 +756,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
         '
-        'lblLowerContinous
-        '
-        Me.lblLowerContinous.AutoSize = True
-        Me.lblLowerContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerContinous.Location = New System.Drawing.Point(1, 50)
-        Me.lblLowerContinous.Name = "lblLowerContinous"
-        Me.lblLowerContinous.Size = New System.Drawing.Size(63, 13)
-        Me.lblLowerContinous.TabIndex = 23
-        Me.lblLowerContinous.Text = "Continuous:"
-        '
-        'lblLowerCombo
-        '
-        Me.lblLowerCombo.AutoSize = True
-        Me.lblLowerCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerCombo.Location = New System.Drawing.Point(1, 78)
-        Me.lblLowerCombo.Name = "lblLowerCombo"
-        Me.lblLowerCombo.Size = New System.Drawing.Size(43, 13)
-        Me.lblLowerCombo.TabIndex = 24
-        Me.lblLowerCombo.Text = "Combo:"
-        '
-        'lblLowerDiscrete
-        '
-        Me.lblLowerDiscrete.AutoSize = True
-        Me.lblLowerDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerDiscrete.Location = New System.Drawing.Point(1, 105)
-        Me.lblLowerDiscrete.Name = "lblLowerDiscrete"
-        Me.lblLowerDiscrete.Size = New System.Drawing.Size(49, 13)
-        Me.lblLowerDiscrete.TabIndex = 25
-        Me.lblLowerDiscrete.Text = "Discrete:"
-        '
-        'lblLowerNA
-        '
-        Me.lblLowerNA.AutoSize = True
-        Me.lblLowerNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerNA.Location = New System.Drawing.Point(3, 130)
-        Me.lblLowerNA.Name = "lblLowerNA"
-        Me.lblLowerNA.Size = New System.Drawing.Size(25, 13)
-        Me.lblLowerNA.TabIndex = 26
-        Me.lblLowerNA.Text = "NA:"
-        '
-        'lblUpperNA
-        '
-        Me.lblUpperNA.AutoSize = True
-        Me.lblUpperNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUpperNA.Location = New System.Drawing.Point(292, 131)
-        Me.lblUpperNA.Name = "lblUpperNA"
-        Me.lblUpperNA.Size = New System.Drawing.Size(25, 13)
-        Me.lblUpperNA.TabIndex = 34
-        Me.lblUpperNA.Text = "NA:"
-        '
-        'lblUpperDiscrete
-        '
-        Me.lblUpperDiscrete.AutoSize = True
-        Me.lblUpperDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUpperDiscrete.Location = New System.Drawing.Point(290, 104)
-        Me.lblUpperDiscrete.Name = "lblUpperDiscrete"
-        Me.lblUpperDiscrete.Size = New System.Drawing.Size(49, 13)
-        Me.lblUpperDiscrete.TabIndex = 33
-        Me.lblUpperDiscrete.Text = "Discrete:"
-        '
-        'lblUpperCombo
-        '
-        Me.lblUpperCombo.AutoSize = True
-        Me.lblUpperCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUpperCombo.Location = New System.Drawing.Point(290, 77)
-        Me.lblUpperCombo.Name = "lblUpperCombo"
-        Me.lblUpperCombo.Size = New System.Drawing.Size(43, 13)
-        Me.lblUpperCombo.TabIndex = 32
-        Me.lblUpperCombo.Text = "Combo:"
-        '
-        'lblUpperContinous
-        '
-        Me.lblUpperContinous.AutoSize = True
-        Me.lblUpperContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUpperContinous.Location = New System.Drawing.Point(290, 50)
-        Me.lblUpperContinous.Name = "lblUpperContinous"
-        Me.lblUpperContinous.Size = New System.Drawing.Size(63, 13)
-        Me.lblUpperContinous.TabIndex = 31
-        Me.lblUpperContinous.Text = "Continuous:"
-        '
-        'ucrInputUpperNA
-        '
-        Me.ucrInputUpperNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUpperNA.GetSetSelectedIndex = -1
-        Me.ucrInputUpperNA.IsReadOnly = False
-        Me.ucrInputUpperNA.Location = New System.Drawing.Point(357, 127)
-        Me.ucrInputUpperNA.Name = "ucrInputUpperNA"
-        Me.ucrInputUpperNA.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputUpperNA.TabIndex = 30
-        '
-        'ucrInputUpperDiscrete
-        '
-        Me.ucrInputUpperDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUpperDiscrete.GetSetSelectedIndex = -1
-        Me.ucrInputUpperDiscrete.IsReadOnly = False
-        Me.ucrInputUpperDiscrete.Location = New System.Drawing.Point(357, 100)
-        Me.ucrInputUpperDiscrete.Name = "ucrInputUpperDiscrete"
-        Me.ucrInputUpperDiscrete.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputUpperDiscrete.TabIndex = 29
-        '
-        'ucrInputUpperCombo
-        '
-        Me.ucrInputUpperCombo.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperCombo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUpperCombo.GetSetSelectedIndex = -1
-        Me.ucrInputUpperCombo.IsReadOnly = False
-        Me.ucrInputUpperCombo.Location = New System.Drawing.Point(357, 73)
-        Me.ucrInputUpperCombo.Name = "ucrInputUpperCombo"
-        Me.ucrInputUpperCombo.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputUpperCombo.TabIndex = 28
-        '
-        'ucrInputUpperContinous
-        '
-        Me.ucrInputUpperContinous.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUpperContinous.GetSetSelectedIndex = -1
-        Me.ucrInputUpperContinous.IsReadOnly = False
-        Me.ucrInputUpperContinous.Location = New System.Drawing.Point(357, 46)
-        Me.ucrInputUpperContinous.Name = "ucrInputUpperContinous"
-        Me.ucrInputUpperContinous.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputUpperContinous.TabIndex = 27
-        '
-        'lblDiagonalContinuous
-        '
-        Me.lblDiagonalContinuous.AutoSize = True
-        Me.lblDiagonalContinuous.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDiagonalContinuous.Location = New System.Drawing.Point(149, 50)
-        Me.lblDiagonalContinuous.Name = "lblDiagonalContinuous"
-        Me.lblDiagonalContinuous.Size = New System.Drawing.Size(63, 13)
-        Me.lblDiagonalContinuous.TabIndex = 36
-        Me.lblDiagonalContinuous.Text = "Continuous:"
-        '
-        'ucrInputDiagonalContinous
-        '
-        Me.ucrInputDiagonalContinous.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalContinous.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalContinous.IsReadOnly = False
-        Me.ucrInputDiagonalContinous.Location = New System.Drawing.Point(216, 46)
-        Me.ucrInputDiagonalContinous.Name = "ucrInputDiagonalContinous"
-        Me.ucrInputDiagonalContinous.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalContinous.TabIndex = 35
-        '
-        'lblDiagonalDiscrete
-        '
-        Me.lblDiagonalDiscrete.AutoSize = True
-        Me.lblDiagonalDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDiagonalDiscrete.Location = New System.Drawing.Point(150, 77)
-        Me.lblDiagonalDiscrete.Name = "lblDiagonalDiscrete"
-        Me.lblDiagonalDiscrete.Size = New System.Drawing.Size(49, 13)
-        Me.lblDiagonalDiscrete.TabIndex = 38
-        Me.lblDiagonalDiscrete.Text = "Discrete:"
-        '
-        'ucrInputDiagonalDiscrete
-        '
-        Me.ucrInputDiagonalDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalDiscrete.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalDiscrete.IsReadOnly = False
-        Me.ucrInputDiagonalDiscrete.Location = New System.Drawing.Point(216, 73)
-        Me.ucrInputDiagonalDiscrete.Name = "ucrInputDiagonalDiscrete"
-        Me.ucrInputDiagonalDiscrete.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalDiscrete.TabIndex = 37
-        '
-        'lblDiagonalNA
-        '
-        Me.lblDiagonalNA.AutoSize = True
-        Me.lblDiagonalNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDiagonalNA.Location = New System.Drawing.Point(152, 105)
-        Me.lblDiagonalNA.Name = "lblDiagonalNA"
-        Me.lblDiagonalNA.Size = New System.Drawing.Size(25, 13)
-        Me.lblDiagonalNA.TabIndex = 40
-        Me.lblDiagonalNA.Text = "NA:"
-        '
-        'ucrInputDiagonalNA
-        '
-        Me.ucrInputDiagonalNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalNA.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalNA.IsReadOnly = False
-        Me.ucrInputDiagonalNA.Location = New System.Drawing.Point(216, 100)
-        Me.ucrInputDiagonalNA.Name = "ucrInputDiagonalNA"
-        Me.ucrInputDiagonalNA.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalNA.TabIndex = 39
-        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -783,7 +783,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Variable Graph"
+        Me.Text = "Two Plus Variable Graph"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
