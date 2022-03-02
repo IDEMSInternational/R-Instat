@@ -325,4 +325,5 @@ Public Class dlgFromLibrary
             clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction)
         End If
     End Sub
+
 End Class
