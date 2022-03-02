@@ -259,8 +259,9 @@ Public Class dlgName
     End Function
 
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
-        If (strNewData.Contains(" ") OrElse containsFrench(strNewData) OrElse strNewData = "" OrElse strNewData = "TRUE" OrElse
-           strNewData = "T" OrElse strNewData = "FALSE" OrElse strNewData = "F" OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
+        Dim parsedValue As Boolean
+        If (strNewData.Contains(" ") OrElse containsFrench(strNewData) OrElse strNewData = "" OrElse Boolean.TryParse(strNewData, parsedValue) _
+             OrElse strNewData.Equals("t") OrElse strNewData.Equals("T") OrElse strNewData.Equals("f") OrElse strNewData.Equals("F") OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
             bCurrentCell = False
             MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
         Else
