@@ -34,6 +34,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
         Dim textColour As Color
+
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
 
         If GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied Then
