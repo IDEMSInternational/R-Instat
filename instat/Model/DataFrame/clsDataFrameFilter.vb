@@ -19,7 +19,7 @@ Imports RDotNet
 ''' <summary>
 ''' Holds filter information for the dataframe
 ''' </summary>
-Public Class clsDataFrameFilter
+Public Class clsDataFrameFilterOrColumnSelection
     Protected _strDataFrameName As String
     Protected _RLink As RLink
 

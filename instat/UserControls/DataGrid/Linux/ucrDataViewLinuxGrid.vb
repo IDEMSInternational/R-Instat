@@ -48,7 +48,7 @@ Public Class ucrDataViewLinuxGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
 
-        If dataFrame.clsFilter.bFilterApplied Then
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.Red
         Else
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.DarkBlue

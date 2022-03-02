@@ -31,21 +31,22 @@ Public Class ucrDataViewReoGrid
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
+
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
-        Dim textColour As Color
+        Dim variableTextColour As Color
 
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
 
-        If GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied Then
-            textColour = Color.Red
+        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            variableTextColour = Color.Red
         Else
-            textColour = Color.DarkBlue
+            variableTextColour = Color.DarkBlue
         End If
         For i = 0 To visiblePage.lstColumns.Count - 1
             workSheetColumnHeader = grdData.CurrentWorksheet.ColumnHeaders(i)
             workSheetColumnHeader.Text = visiblePage.lstColumns(i).strDisplayName
-            workSheetColumnHeader.TextColor = textColour
+            workSheetColumnHeader.TextColor = variableTextColour
             workSheetColumnHeader.Style.BackColor = visiblePage.lstColumns(i).clsBackGroundColour
         Next
     End Sub
@@ -61,7 +62,7 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.Rows = dataFrame.iDisplayedRowCount
         UpdateWorksheetSettings(grdData.CurrentWorksheet)
 
-        If dataFrame.clsFilter.bFilterApplied Then
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             textColour = Color.Red
         Else
             textColour = Color.DarkBlue
