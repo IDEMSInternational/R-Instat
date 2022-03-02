@@ -29,7 +29,6 @@ Public Class ucrDistributions
     Private bParameterIsDistFunction As Boolean = False
     Private bFunctionIsDistFunction As Boolean = False
     Private bParameterIsDistName As Boolean = False
-    Private intNumber As Integer
 
     Public Sub New()
 
@@ -229,7 +228,6 @@ Public Class ucrDistributions
         Dim clsNoDist As New Distribution
         Dim clsEmpiricalDist As New Distribution
         Dim clsTriangularDist As New Distribution
-        Dim clsBirthDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"

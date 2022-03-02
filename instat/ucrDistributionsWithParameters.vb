@@ -78,6 +78,7 @@ Public Class ucrDistributionsWithParameters
                     lstParameterInputTextBoxes(i).SetName(clsCurrDistribution.clsParameters(i).strDefaultValue)
                     If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
                         AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, "c(" & clsCurrDistribution.clsParameters(i).strDefaultValue & ")")
+                        ttEmpirical.SetToolTip(ucrInputParameter2.txtInput, "Input relative values separated by commas, For example 3,2,1.")
                     Else
                         AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
                     End If
@@ -117,7 +118,6 @@ Public Class ucrDistributionsWithParameters
     Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
             If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
-                ttEmpirical.SetToolTip(ucrInputParameter2.txtInput, "Input relative values separated by commas, For example 3,2,1.")
                 AddParameter(lstCurrArguments(1), "c(" & ucrInputParameter2.GetText & ")")
                 ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
                 ucrInputParameter1.IsReadOnly = True
