@@ -2717,6 +2717,7 @@ DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_col
 
 DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","cols")) {
   self$get_data_objects(data_name)$remove_empty(which = which)
+})
 
 DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
   self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
