@@ -1068,13 +1068,13 @@ Public Class dlgImportDataset
     End Sub
 
     Private Function GetCorrectSeparatorInPath() As String
-        Dim strSepearator As String = ""
+        Dim strSeparator As String = ""
         If strCurrentDirectory.Contains("/") Then
-            strSepearator = "/"
+            strSeparator = "/"
         ElseIf strCurrentDirectory.Contains("\") Then
-            strSepearator = "\"
+            strSeparator = "\"
         End If
-        Return strSepearator
+        Return strSeparator
     End Function
 
     Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
