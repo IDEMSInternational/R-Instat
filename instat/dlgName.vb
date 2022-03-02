@@ -246,7 +246,8 @@ Public Class dlgName
     End Sub
 
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
-        If ({"", " ", "TRUE", "FALSE", "T", "F"}.Contains(strNewData) OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
+        If (strNewData.Contains(" ") OrElse strNewData = "" OrElse strNewData = "TRUE" OrElse
+           strNewData = "T" OrElse strNewData = "FALSE" OrElse strNewData = "F" OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
             bCurrentCell = False
             MsgBox("The column name must not be a numeric or contains space or be a boolean e.g TRUE, FALSE, T, F.")
         Else
