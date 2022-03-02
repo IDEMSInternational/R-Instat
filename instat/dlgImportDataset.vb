@@ -80,7 +80,7 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
-
+        HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -577,7 +577,7 @@ Public Class dlgImportDataset
                 strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -902,6 +902,7 @@ Public Class dlgImportDataset
 
     Private Sub HideDropEmptyCheckBox()
         ucrChkDropEmptyCols.Visible = If(Not ucrInputFilePath.IsEmpty, True, False)
+        ucrChkMultipleFiles.Visible = If(Not ucrInputFilePath.IsEmpty, True, False)
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,

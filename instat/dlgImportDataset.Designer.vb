@@ -387,9 +387,9 @@ Partial Class dlgImportDataset
         Me.lblNoPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNoPreview.Location = New System.Drawing.Point(286, 290)
         Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(302, 18)
+        Me.lblNoPreview.Size = New System.Drawing.Size(113, 18)
         Me.lblNoPreview.TabIndex = 14
-        Me.lblNoPreview.Text = "Preview not yet implemented for this file type."
+        Me.lblNoPreview.Text = "No file selected."
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblNoPreview.Visible = False
         '
