@@ -284,9 +284,9 @@ Public Class ucrDataView
     Private Sub SetDisplayLabels()
         lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
-        If GetCurrentDataFrameFocus().clsFilter.bFilterApplied Then
-            lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilter.iFilteredRowCount &
-                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilter.strName
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
+            lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
+                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
         Else
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
         End If
@@ -515,8 +515,8 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
@@ -712,14 +712,14 @@ Public Class ucrDataView
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
-        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected()
-        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click

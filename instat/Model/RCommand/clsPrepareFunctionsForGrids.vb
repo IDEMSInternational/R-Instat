@@ -322,11 +322,11 @@ Public Class clsPrepareFunctionsForGrids
         Return _RLink.GetColumnType(_strDataFrame, strColumnName)
     End Function
 
-    '' <summary>
+    ''' <summary>
     '''  Description: To Delete one or many cells 
     ''' the delete cell function is to be used to Replace selected values with NA 
     ''' in the dataframe.
-    ''' </summary>
+    '''</summary>
     ''' <param name="lstColumnNames"></param>
     ''' <param name="lstRowNames"></param>
     Public Sub DeleteCells(lstRowNames As List(Of String), lstColumnNames As List(Of String))
