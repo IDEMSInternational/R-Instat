@@ -42,10 +42,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
-        Me.ucrInputCategoricalByCategorical = New instat.ucrInputComboBox()
-        Me.ucrInputCategoricalByNumeric = New instat.ucrInputComboBox()
-        Me.ucrInputNumericByCategorical = New instat.ucrInputComboBox()
-        Me.ucrInputNumericByNumeric = New instat.ucrInputComboBox()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblGraphName = New System.Windows.Forms.Label()
         Me.lblGraph = New System.Windows.Forms.Label()
@@ -53,35 +49,30 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblSecondType = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.lblPosition = New System.Windows.Forms.Label()
-        Me.ucrNudTransparency = New instat.ucrNud()
-        Me.ucrNudJitter = New instat.ucrNud()
         Me.lblPointTransparency = New System.Windows.Forms.Label()
         Me.lblPointJitter = New System.Windows.Forms.Label()
-        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.ucrChkFreeScaleYAxis = New instat.ucrCheck()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.rdoPairs = New System.Windows.Forms.RadioButton()
         Me.rdoBy = New System.Windows.Forms.RadioButton()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.grpTypeOfDispaly = New System.Windows.Forms.GroupBox()
         Me.lblDiagonalNA = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalNA = New instat.ucrInputComboBox()
         Me.lblDiagonalDiscrete = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalDiscrete = New instat.ucrInputComboBox()
         Me.lblDiagonalContinuous = New System.Windows.Forms.Label()
-        Me.ucrInputDiagonalContinous = New instat.ucrInputComboBox()
         Me.lblUpperNA = New System.Windows.Forms.Label()
         Me.lblUpperDiscrete = New System.Windows.Forms.Label()
         Me.lblUpperCombo = New System.Windows.Forms.Label()
         Me.lblUpperContinous = New System.Windows.Forms.Label()
-        Me.ucrInputUpperNA = New instat.ucrInputComboBox()
-        Me.ucrInputUpperDiscrete = New instat.ucrInputComboBox()
-        Me.ucrInputUpperCombo = New instat.ucrInputComboBox()
-        Me.ucrInputUpperContinous = New instat.ucrInputComboBox()
         Me.lblLowerNA = New System.Windows.Forms.Label()
         Me.lblLowerDiscrete = New System.Windows.Forms.Label()
         Me.lblLowerCombo = New System.Windows.Forms.Label()
         Me.lblLowerContinous = New System.Windows.Forms.Label()
+        Me.ucrInputDiagonalNA = New instat.ucrInputComboBox()
+        Me.ucrInputDiagonalDiscrete = New instat.ucrInputComboBox()
+        Me.ucrInputDiagonalContinous = New instat.ucrInputComboBox()
+        Me.ucrInputUpperNA = New instat.ucrInputComboBox()
+        Me.ucrInputUpperDiscrete = New instat.ucrInputComboBox()
+        Me.ucrInputUpperCombo = New instat.ucrInputComboBox()
+        Me.ucrInputUpperContinous = New instat.ucrInputComboBox()
         Me.ucrInputLowerNA = New instat.ucrInputComboBox()
         Me.ucrInputLowerDiscrete = New instat.ucrInputComboBox()
         Me.ucrInputLowerCombo = New instat.ucrInputComboBox()
@@ -91,11 +82,20 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrChkUpper = New instat.ucrCheck()
         Me.ucrReceiverColour = New instat.ucrReceiverSingle()
         Me.ucrPnlByPairs = New instat.UcrPanel()
+        Me.ucrInputCategoricalByCategorical = New instat.ucrInputComboBox()
+        Me.ucrInputCategoricalByNumeric = New instat.ucrInputComboBox()
+        Me.ucrInputNumericByCategorical = New instat.ucrInputComboBox()
+        Me.ucrInputNumericByNumeric = New instat.ucrInputComboBox()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
+        Me.ucrChkFreeScaleYAxis = New instat.ucrCheck()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -116,7 +116,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblSecondVariable.AutoSize = True
         Me.lblSecondVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondVariable.Location = New System.Drawing.Point(285, 201)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(290, 201)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 3
@@ -149,50 +149,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 15
         Me.grpSummaries.TabStop = False
-        '
-        'ucrInputCategoricalByCategorical
-        '
-        Me.ucrInputCategoricalByCategorical.AddQuotesIfUnrecognised = True
-        Me.ucrInputCategoricalByCategorical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputCategoricalByCategorical.GetSetSelectedIndex = -1
-        Me.ucrInputCategoricalByCategorical.IsReadOnly = False
-        Me.ucrInputCategoricalByCategorical.Location = New System.Drawing.Point(60, 40)
-        Me.ucrInputCategoricalByCategorical.Name = "ucrInputCategoricalByCategorical"
-        Me.ucrInputCategoricalByCategorical.Size = New System.Drawing.Size(144, 21)
-        Me.ucrInputCategoricalByCategorical.TabIndex = 17
-        '
-        'ucrInputCategoricalByNumeric
-        '
-        Me.ucrInputCategoricalByNumeric.AddQuotesIfUnrecognised = True
-        Me.ucrInputCategoricalByNumeric.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputCategoricalByNumeric.GetSetSelectedIndex = -1
-        Me.ucrInputCategoricalByNumeric.IsReadOnly = False
-        Me.ucrInputCategoricalByNumeric.Location = New System.Drawing.Point(60, 40)
-        Me.ucrInputCategoricalByNumeric.Name = "ucrInputCategoricalByNumeric"
-        Me.ucrInputCategoricalByNumeric.Size = New System.Drawing.Size(144, 21)
-        Me.ucrInputCategoricalByNumeric.TabIndex = 16
-        '
-        'ucrInputNumericByCategorical
-        '
-        Me.ucrInputNumericByCategorical.AddQuotesIfUnrecognised = True
-        Me.ucrInputNumericByCategorical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputNumericByCategorical.GetSetSelectedIndex = -1
-        Me.ucrInputNumericByCategorical.IsReadOnly = False
-        Me.ucrInputNumericByCategorical.Location = New System.Drawing.Point(60, 40)
-        Me.ucrInputNumericByCategorical.Name = "ucrInputNumericByCategorical"
-        Me.ucrInputNumericByCategorical.Size = New System.Drawing.Size(144, 21)
-        Me.ucrInputNumericByCategorical.TabIndex = 15
-        '
-        'ucrInputNumericByNumeric
-        '
-        Me.ucrInputNumericByNumeric.AddQuotesIfUnrecognised = True
-        Me.ucrInputNumericByNumeric.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputNumericByNumeric.GetSetSelectedIndex = -1
-        Me.ucrInputNumericByNumeric.IsReadOnly = False
-        Me.ucrInputNumericByNumeric.Location = New System.Drawing.Point(60, 40)
-        Me.ucrInputNumericByNumeric.Name = "ucrInputNumericByNumeric"
-        Me.ucrInputNumericByNumeric.Size = New System.Drawing.Size(144, 21)
-        Me.ucrInputNumericByNumeric.TabIndex = 14
         '
         'lblFirstType
         '
@@ -269,32 +225,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblPosition.TabIndex = 12
         Me.lblPosition.Text = "Position:"
         '
-        'ucrNudTransparency
-        '
-        Me.ucrNudTransparency.AutoSize = True
-        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTransparency.Location = New System.Drawing.Point(112, 87)
-        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Name = "ucrNudTransparency"
-        Me.ucrNudTransparency.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTransparency.TabIndex = 11
-        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudJitter
-        '
-        Me.ucrNudJitter.AutoSize = True
-        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudJitter.Location = New System.Drawing.Point(112, 62)
-        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Name = "ucrNudJitter"
-        Me.ucrNudJitter.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudJitter.TabIndex = 10
-        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblPointTransparency
         '
         Me.lblPointTransparency.AutoSize = True
@@ -313,35 +243,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblPointJitter.Size = New System.Drawing.Size(59, 13)
         Me.lblPointJitter.TabIndex = 8
         Me.lblPointJitter.Text = "Point Jitter:"
-        '
-        'ucrChkFlipCoordinates
-        '
-        Me.ucrChkFlipCoordinates.AutoSize = True
-        Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(6, 19)
-        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(159, 23)
-        Me.ucrChkFlipCoordinates.TabIndex = 6
-        '
-        'ucrChkFreeScaleYAxis
-        '
-        Me.ucrChkFreeScaleYAxis.AutoSize = True
-        Me.ucrChkFreeScaleYAxis.Checked = False
-        Me.ucrChkFreeScaleYAxis.Location = New System.Drawing.Point(6, 41)
-        Me.ucrChkFreeScaleYAxis.Name = "ucrChkFreeScaleYAxis"
-        Me.ucrChkFreeScaleYAxis.Size = New System.Drawing.Size(159, 23)
-        Me.ucrChkFreeScaleYAxis.TabIndex = 7
-        '
-        'ucrInputPosition
-        '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPosition.GetSetSelectedIndex = -1
-        Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(54, 63)
-        Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(111, 21)
-        Me.ucrInputPosition.TabIndex = 13
         '
         'rdoPairs
         '
@@ -381,7 +282,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblColour.AutoSize = True
         Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(283, 201)
+        Me.lblColour.Location = New System.Drawing.Point(290, 201)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(88, 13)
         Me.lblColour.TabIndex = 20
@@ -431,17 +332,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblDiagonalNA.TabIndex = 40
         Me.lblDiagonalNA.Text = "NA:"
         '
-        'ucrInputDiagonalNA
-        '
-        Me.ucrInputDiagonalNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalNA.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalNA.IsReadOnly = False
-        Me.ucrInputDiagonalNA.Location = New System.Drawing.Point(216, 100)
-        Me.ucrInputDiagonalNA.Name = "ucrInputDiagonalNA"
-        Me.ucrInputDiagonalNA.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalNA.TabIndex = 39
-        '
         'lblDiagonalDiscrete
         '
         Me.lblDiagonalDiscrete.AutoSize = True
@@ -452,17 +342,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblDiagonalDiscrete.TabIndex = 38
         Me.lblDiagonalDiscrete.Text = "Discrete:"
         '
-        'ucrInputDiagonalDiscrete
-        '
-        Me.ucrInputDiagonalDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalDiscrete.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalDiscrete.IsReadOnly = False
-        Me.ucrInputDiagonalDiscrete.Location = New System.Drawing.Point(216, 73)
-        Me.ucrInputDiagonalDiscrete.Name = "ucrInputDiagonalDiscrete"
-        Me.ucrInputDiagonalDiscrete.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalDiscrete.TabIndex = 37
-        '
         'lblDiagonalContinuous
         '
         Me.lblDiagonalContinuous.AutoSize = True
@@ -472,17 +351,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblDiagonalContinuous.Size = New System.Drawing.Size(63, 13)
         Me.lblDiagonalContinuous.TabIndex = 36
         Me.lblDiagonalContinuous.Text = "Continuous:"
-        '
-        'ucrInputDiagonalContinous
-        '
-        Me.ucrInputDiagonalContinous.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonalContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonalContinous.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonalContinous.IsReadOnly = False
-        Me.ucrInputDiagonalContinous.Location = New System.Drawing.Point(216, 46)
-        Me.ucrInputDiagonalContinous.Name = "ucrInputDiagonalContinous"
-        Me.ucrInputDiagonalContinous.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDiagonalContinous.TabIndex = 35
         '
         'lblUpperNA
         '
@@ -523,6 +391,79 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblUpperContinous.Size = New System.Drawing.Size(63, 13)
         Me.lblUpperContinous.TabIndex = 31
         Me.lblUpperContinous.Text = "Continuous:"
+        '
+        'lblLowerNA
+        '
+        Me.lblLowerNA.AutoSize = True
+        Me.lblLowerNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerNA.Location = New System.Drawing.Point(3, 130)
+        Me.lblLowerNA.Name = "lblLowerNA"
+        Me.lblLowerNA.Size = New System.Drawing.Size(25, 13)
+        Me.lblLowerNA.TabIndex = 26
+        Me.lblLowerNA.Text = "NA:"
+        '
+        'lblLowerDiscrete
+        '
+        Me.lblLowerDiscrete.AutoSize = True
+        Me.lblLowerDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerDiscrete.Location = New System.Drawing.Point(1, 105)
+        Me.lblLowerDiscrete.Name = "lblLowerDiscrete"
+        Me.lblLowerDiscrete.Size = New System.Drawing.Size(49, 13)
+        Me.lblLowerDiscrete.TabIndex = 25
+        Me.lblLowerDiscrete.Text = "Discrete:"
+        '
+        'lblLowerCombo
+        '
+        Me.lblLowerCombo.AutoSize = True
+        Me.lblLowerCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerCombo.Location = New System.Drawing.Point(1, 78)
+        Me.lblLowerCombo.Name = "lblLowerCombo"
+        Me.lblLowerCombo.Size = New System.Drawing.Size(43, 13)
+        Me.lblLowerCombo.TabIndex = 24
+        Me.lblLowerCombo.Text = "Combo:"
+        '
+        'lblLowerContinous
+        '
+        Me.lblLowerContinous.AutoSize = True
+        Me.lblLowerContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLowerContinous.Location = New System.Drawing.Point(1, 50)
+        Me.lblLowerContinous.Name = "lblLowerContinous"
+        Me.lblLowerContinous.Size = New System.Drawing.Size(63, 13)
+        Me.lblLowerContinous.TabIndex = 23
+        Me.lblLowerContinous.Text = "Continuous:"
+        '
+        'ucrInputDiagonalNA
+        '
+        Me.ucrInputDiagonalNA.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalNA.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalNA.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalNA.IsReadOnly = False
+        Me.ucrInputDiagonalNA.Location = New System.Drawing.Point(216, 100)
+        Me.ucrInputDiagonalNA.Name = "ucrInputDiagonalNA"
+        Me.ucrInputDiagonalNA.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalNA.TabIndex = 39
+        '
+        'ucrInputDiagonalDiscrete
+        '
+        Me.ucrInputDiagonalDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalDiscrete.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalDiscrete.IsReadOnly = False
+        Me.ucrInputDiagonalDiscrete.Location = New System.Drawing.Point(216, 73)
+        Me.ucrInputDiagonalDiscrete.Name = "ucrInputDiagonalDiscrete"
+        Me.ucrInputDiagonalDiscrete.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalDiscrete.TabIndex = 37
+        '
+        'ucrInputDiagonalContinous
+        '
+        Me.ucrInputDiagonalContinous.AddQuotesIfUnrecognised = True
+        Me.ucrInputDiagonalContinous.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDiagonalContinous.GetSetSelectedIndex = -1
+        Me.ucrInputDiagonalContinous.IsReadOnly = False
+        Me.ucrInputDiagonalContinous.Location = New System.Drawing.Point(216, 46)
+        Me.ucrInputDiagonalContinous.Name = "ucrInputDiagonalContinous"
+        Me.ucrInputDiagonalContinous.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputDiagonalContinous.TabIndex = 35
         '
         'ucrInputUpperNA
         '
@@ -567,46 +508,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputUpperContinous.Name = "ucrInputUpperContinous"
         Me.ucrInputUpperContinous.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputUpperContinous.TabIndex = 27
-        '
-        'lblLowerNA
-        '
-        Me.lblLowerNA.AutoSize = True
-        Me.lblLowerNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerNA.Location = New System.Drawing.Point(3, 130)
-        Me.lblLowerNA.Name = "lblLowerNA"
-        Me.lblLowerNA.Size = New System.Drawing.Size(25, 13)
-        Me.lblLowerNA.TabIndex = 26
-        Me.lblLowerNA.Text = "NA:"
-        '
-        'lblLowerDiscrete
-        '
-        Me.lblLowerDiscrete.AutoSize = True
-        Me.lblLowerDiscrete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerDiscrete.Location = New System.Drawing.Point(1, 105)
-        Me.lblLowerDiscrete.Name = "lblLowerDiscrete"
-        Me.lblLowerDiscrete.Size = New System.Drawing.Size(49, 13)
-        Me.lblLowerDiscrete.TabIndex = 25
-        Me.lblLowerDiscrete.Text = "Discrete:"
-        '
-        'lblLowerCombo
-        '
-        Me.lblLowerCombo.AutoSize = True
-        Me.lblLowerCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerCombo.Location = New System.Drawing.Point(1, 78)
-        Me.lblLowerCombo.Name = "lblLowerCombo"
-        Me.lblLowerCombo.Size = New System.Drawing.Size(43, 13)
-        Me.lblLowerCombo.TabIndex = 24
-        Me.lblLowerCombo.Text = "Combo:"
-        '
-        'lblLowerContinous
-        '
-        Me.lblLowerContinous.AutoSize = True
-        Me.lblLowerContinous.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLowerContinous.Location = New System.Drawing.Point(1, 50)
-        Me.lblLowerContinous.Name = "lblLowerContinous"
-        Me.lblLowerContinous.Size = New System.Drawing.Size(63, 13)
-        Me.lblLowerContinous.TabIndex = 23
-        Me.lblLowerContinous.Text = "Continuous:"
         '
         'ucrInputLowerNA
         '
@@ -683,7 +584,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrReceiverColour.AutoSize = True
         Me.ucrReceiverColour.frmParent = Me
-        Me.ucrReceiverColour.Location = New System.Drawing.Point(287, 216)
+        Me.ucrReceiverColour.Location = New System.Drawing.Point(290, 216)
         Me.ucrReceiverColour.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColour.Name = "ucrReceiverColour"
         Me.ucrReceiverColour.Selector = Nothing
@@ -700,6 +601,50 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrPnlByPairs.Size = New System.Drawing.Size(276, 31)
         Me.ucrPnlByPairs.TabIndex = 17
         '
+        'ucrInputCategoricalByCategorical
+        '
+        Me.ucrInputCategoricalByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByCategorical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCategoricalByCategorical.GetSetSelectedIndex = -1
+        Me.ucrInputCategoricalByCategorical.IsReadOnly = False
+        Me.ucrInputCategoricalByCategorical.Location = New System.Drawing.Point(60, 40)
+        Me.ucrInputCategoricalByCategorical.Name = "ucrInputCategoricalByCategorical"
+        Me.ucrInputCategoricalByCategorical.Size = New System.Drawing.Size(144, 21)
+        Me.ucrInputCategoricalByCategorical.TabIndex = 17
+        '
+        'ucrInputCategoricalByNumeric
+        '
+        Me.ucrInputCategoricalByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByNumeric.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCategoricalByNumeric.GetSetSelectedIndex = -1
+        Me.ucrInputCategoricalByNumeric.IsReadOnly = False
+        Me.ucrInputCategoricalByNumeric.Location = New System.Drawing.Point(60, 40)
+        Me.ucrInputCategoricalByNumeric.Name = "ucrInputCategoricalByNumeric"
+        Me.ucrInputCategoricalByNumeric.Size = New System.Drawing.Size(144, 21)
+        Me.ucrInputCategoricalByNumeric.TabIndex = 16
+        '
+        'ucrInputNumericByCategorical
+        '
+        Me.ucrInputNumericByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByCategorical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNumericByCategorical.GetSetSelectedIndex = -1
+        Me.ucrInputNumericByCategorical.IsReadOnly = False
+        Me.ucrInputNumericByCategorical.Location = New System.Drawing.Point(60, 40)
+        Me.ucrInputNumericByCategorical.Name = "ucrInputNumericByCategorical"
+        Me.ucrInputNumericByCategorical.Size = New System.Drawing.Size(144, 21)
+        Me.ucrInputNumericByCategorical.TabIndex = 15
+        '
+        'ucrInputNumericByNumeric
+        '
+        Me.ucrInputNumericByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByNumeric.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNumericByNumeric.GetSetSelectedIndex = -1
+        Me.ucrInputNumericByNumeric.IsReadOnly = False
+        Me.ucrInputNumericByNumeric.Location = New System.Drawing.Point(60, 40)
+        Me.ucrInputNumericByNumeric.Name = "ucrInputNumericByNumeric"
+        Me.ucrInputNumericByNumeric.Size = New System.Drawing.Size(144, 21)
+        Me.ucrInputNumericByNumeric.TabIndex = 14
+        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -713,7 +658,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrReceiverSecondVar.AutoSize = True
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(287, 216)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(290, 216)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
@@ -755,6 +700,61 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.TabIndex = 1
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.AutoSize = True
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTransparency.Location = New System.Drawing.Point(112, 87)
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTransparency.TabIndex = 11
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.AutoSize = True
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudJitter.Location = New System.Drawing.Point(112, 62)
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudJitter.TabIndex = 10
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkFlipCoordinates
+        '
+        Me.ucrChkFlipCoordinates.AutoSize = True
+        Me.ucrChkFlipCoordinates.Checked = False
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(159, 23)
+        Me.ucrChkFlipCoordinates.TabIndex = 6
+        '
+        'ucrChkFreeScaleYAxis
+        '
+        Me.ucrChkFreeScaleYAxis.AutoSize = True
+        Me.ucrChkFreeScaleYAxis.Checked = False
+        Me.ucrChkFreeScaleYAxis.Location = New System.Drawing.Point(6, 41)
+        Me.ucrChkFreeScaleYAxis.Name = "ucrChkFreeScaleYAxis"
+        Me.ucrChkFreeScaleYAxis.Size = New System.Drawing.Size(159, 23)
+        Me.ucrChkFreeScaleYAxis.TabIndex = 7
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(54, 63)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputPosition.TabIndex = 13
         '
         'dlgDescribeTwoVarGraph
         '

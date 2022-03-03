@@ -83,8 +83,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrPnlByPairs.AddParameterValuesCondition(rdoBy, "checked", "by")
         ucrPnlByPairs.AddParameterValuesCondition(rdoPairs, "checked", "pair")
 
-        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrInputCategoricalByCategorical,
-                                          ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
@@ -123,7 +122,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByNumeric.SetItems(strNumericCategoricalPlots)
         ucrInputCategoricalByNumeric.SetName("Summary Plot + Points")
         ucrInputCategoricalByNumeric.SetDropDownStyleAsNonEditable()
-        ucrInputCategoricalByCategorical.SetLinkedDisplayControl(grpSummaries)
 
         ucrInputCategoricalByCategorical.SetItems({"Bar Chart", "Mosaic Plot"})
         ucrInputCategoricalByCategorical.SetName("Bar Chart")
@@ -135,7 +133,7 @@ Public Class dlgDescribeTwoVarGraph
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkFlipCoordinates.SetLinkedDisplayControl(grpOptions)
+        ucrChkFlipCoordinates.SetLinkedDisplayControl(New List(Of Control)({grpSummaries, grpOptions}))
 
         ucrChkFreeScaleYAxis.SetText("Free Scale Y Axis")
         ucrChkFreeScaleYAxis.SetParameter(New RParameter("scales", iNewPosition:=3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
