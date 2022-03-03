@@ -503,7 +503,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrInputRangeElement1Max.AutoSize = True
         Me.ucrInputRangeElement1Max.IsMultiline = False
         Me.ucrInputRangeElement1Max.IsReadOnly = False
-        Me.ucrInputRangeElement1Max.Location = New System.Drawing.Point(296, 265)
+        Me.ucrInputRangeElement1Max.Location = New System.Drawing.Point(297, 265)
         Me.ucrInputRangeElement1Max.Name = "ucrInputRangeElement1Max"
         Me.ucrInputRangeElement1Max.Size = New System.Drawing.Size(44, 21)
         Me.ucrInputRangeElement1Max.TabIndex = 49
