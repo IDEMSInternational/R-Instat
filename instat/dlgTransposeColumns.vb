@@ -41,7 +41,7 @@ Public Class dlgTransposeColumns
         ucrReceiverColumnsToTranspose.SetMeAsReceiver()
 
         ucrReceiverVariableNames.SetParameter(New RParameter("make.names", 1))
-        ucrReceiverVariableNames.SetParameterIsRFunction()
+        ucrReceiverVariableNames.SetParameterIsString()
         ucrReceiverVariableNames.Selector = ucrSelectorTransposeColumns
 
         'The checkbox is not yet implemented in the updated code as it was not implemented in pre-updated code
