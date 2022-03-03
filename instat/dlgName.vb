@@ -26,6 +26,7 @@ Public Class dlgName
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Dim strEmpty As String = " "
+    Dim strNewText As String = Nothing
     Private clsDefaultRFunction As New RFunction
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
@@ -229,17 +230,29 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
+    Private Function ValidateRVariable(strText As String, iCol As Integer) As String
+        Dim strNewDataText As String = strText
+        If iCol = 1 Then
+            For Each chrCurr In strNewDataText
+                If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
+                    strNewDataText = strNewDataText.Replace(chrCurr, ".")
+                End If
+            Next
+        End If
+        Return strNewDataText
+    End Function
+
     Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
         Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
         Dim iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
 
         If e.Range.Rows > 1 Then
             For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
-                Dim strData As String = grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex)
-                RenameColumns(strData, iRow, iColIndex)
+                Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex), iColIndex)
+                RenameColumns(strNewData, iRow, iColIndex)
             Next
         Else
-            Dim strNewData As String = grdCurrentWorkSheet.Item(row:=e.Range.Row, col:=iColIndex).ToString()
+            Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=iColIndex), iColIndex)
             RenameColumns(strNewData, iStartRowIndex, iColIndex)
         End If
         ValidateNamesFromDictionary(iColIndex)
@@ -277,7 +290,7 @@ Public Class dlgName
     Private Function CheckNames(strNewData As String, iColIndex As Integer) As Boolean
         Dim bCheck As Boolean
         Dim parsedValue As Boolean
-        If (strNewData.Contains(" ") OrElse containsFrench(strNewData) OrElse strNewData = "" OrElse Boolean.TryParse(strNewData, parsedValue) _
+        If (containsFrench(strNewData) OrElse strNewData.Equals("") OrElse Boolean.TryParse(strNewData, parsedValue) _
              OrElse strNewData.Equals("t") OrElse strNewData.Equals("T") OrElse strNewData.Equals("f") OrElse strNewData.Equals("F") OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
             bCheck = False
         Else
@@ -299,9 +312,10 @@ Public Class dlgName
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        RenameColumns(e.NewData, e.Cell.Row, e.Cell.Column)
-        ValidateNamesFromDictionary(e.Cell.Column)
-        TestOKEnabled()
+        Dim iCol As Integer = e.Cell.Column
+        Dim strNewData As String = ValidateRVariable(e.NewData, iCol)
+        RenameColumns(strNewData, e.Cell.Row, iCol)
+        ValidateNamesFromDictionary(iCol)
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
