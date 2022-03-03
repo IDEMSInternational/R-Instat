@@ -1456,6 +1456,13 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       margin_tables_all <- margin_tables_all %>%
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name))
 
+      for (i in factors){
+        shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
+        margin_tables_all <- margin_tables_all %>%
+          dplyr::mutate_at(i, ~ forcats::fct_expand(., shaped_cell_values_levels),
+                           i, ~ forcats::fct_relevel(., shaped_cell_values_levels))
+      }
+      
       shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name)) %>%
         dplyr::mutate_at(vars(-value), ~ forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
