@@ -63,10 +63,10 @@ Public Class dlgClimaticCheckDataTemperature
         rdoIndividual.Checked = True
 
         Dim lstLabels As New List(Of Control)
-        lstLabels.AddRange({lblRangeElement1to})
+        lstLabels.AddRange({lblRangeElement1to, lblRangeElement1From})
 
         Dim lstLabels2 As New List(Of Control)
-        lstLabels2.AddRange({lblRangeElement2to})
+        lstLabels2.AddRange({lblRangeElement2to, lblRangeElement2From})
 
         'Station Receiver
         ucrReceiverStation.Selector = ucrSelectorTemperature
@@ -119,10 +119,10 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Checkboxes for options
         ucrChkRangeElement1.SetParameter(New RParameter("range1", clsRangeOrOp, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement1.SetText("Acceptable Range Element1: From:")
+        ucrChkRangeElement1.SetText("Acceptable Range Element1:")
 
         ucrChkRangeElement2.SetParameter(New RParameter("range2", clsRange2OrOp, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement2.SetText("Acceptable Range Element2: From:")
+        ucrChkRangeElement2.SetText("Acceptable Range Element2:")
 
         'Linking controls
         ucrChkRangeElement1.AddToLinkedControls(ucrInputRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
@@ -133,7 +133,6 @@ Public Class dlgClimaticCheckDataTemperature
         ucrInputRangeElement2Min.SetLinkedDisplayControl(lstLabels2)
         ucrInputRangeElement1Min.SetLinkedDisplayControl(lstLabels)
         ucrNudSame.SetLinkedDisplayControl(lblNudSame)
-        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
         ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
 
