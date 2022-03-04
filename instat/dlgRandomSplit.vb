@@ -36,6 +36,22 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {"scale", "na.omit"})
         ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {"dist", "as.matrix"})
 
+        ucrReceiverRandomSplit.SetParameterIsRFunction()
+        'ucrReceiverRandomSplit.Selector = ucrSelectorRandomSplit
+        ucrReceiverRandomSplit.SetMeAsReceiver()
+        ucrReceiverRandomSplit.SetDataType("numeric")
+
+        ucrChkStratifyingFactor.SetText("Set Seed")
+
+        ucrChkLog.SetText("Log")
+
+        ucrChkTestingData.SetText("Save Testing Data")
+
+        ucrChkTrainingData.SetText("Save Training Data")
+    End Sub
+
+    Private Sub SetDefaults()
+
     End Sub
 
 End Class
