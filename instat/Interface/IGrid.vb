@@ -28,6 +28,8 @@ Public Interface IGrid
 
     Function GetSelectedRows() As List(Of String)
 
+    Function GetSelectedColumnIndexes() As List(Of String)
+
     Function GetWorksheet(strName As String) As clsWorksheetAdapter
 
     Sub RemoveOldWorksheets()
