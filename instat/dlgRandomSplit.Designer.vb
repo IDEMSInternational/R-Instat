@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrInputFactorLevels
-    Inherits instat.ucrInputComboBox
+Partial Class dlgRandomSplit
+    Inherits System.Windows.Forms.Form
 
-    'UserControl overrides dispose to clean up the component list.
+    'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -24,14 +24,18 @@ Partial Class ucrInputFactorLevels
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'ucrInputFactorLevels
+        'dlgRandomSplit
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Name = "ucrInputFactorLevels"
-        Me.Size = New System.Drawing.Size(164, 21)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(386, 319)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "dlgRandomSplit"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Random Split"
         Me.ResumeLayout(False)
 
     End Sub
-
 End Class
