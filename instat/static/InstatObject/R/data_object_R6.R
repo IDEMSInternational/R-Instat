@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", column_selection_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -304,6 +304,10 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     }
     #TODO: consider removing include_hidden_columns argument from this function
     if(use_column_selection && self$column_selection_applied()) {
+      if(column_selection_name != "") {
+        selected_columns <- self$get_column_names()
+        out <- out[ ,selected_columns, drop = FALSE]
+      }else{
       old_metadata <- attributes(private$data)
       selected_columns <- self$get_column_names()
       out <- out[ ,selected_columns, drop = FALSE]
@@ -316,6 +320,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       hidden_cols <- all_columns[!(all_columns %in% selected_columns)]
       self$append_to_variables_metadata(hidden_cols, is_hidden_label, TRUE)
       private$.variables_metadata_changed <- TRUE
+      }
     }
     if(!is.data.frame(out)) {
       out <- data.frame(out)
