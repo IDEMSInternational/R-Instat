@@ -302,12 +302,12 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
     }
+    if(column_selection_name != "") {
+      selected_columns <- self$get_column_selection_column_names(column_selection_name)
+      out <- out[ ,selected_columns, drop = FALSE]
+    }
     #TODO: consider removing include_hidden_columns argument from this function
     if(use_column_selection && self$column_selection_applied()) {
-      if(column_selection_name != "") {
-        selected_columns <- self$get_column_names()
-        out <- out[ ,selected_columns, drop = FALSE]
-      }else{
       old_metadata <- attributes(private$data)
       selected_columns <- self$get_column_names()
       out <- out[ ,selected_columns, drop = FALSE]
@@ -320,7 +320,6 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       hidden_cols <- all_columns[!(all_columns %in% selected_columns)]
       self$append_to_variables_metadata(hidden_cols, is_hidden_label, TRUE)
       private$.variables_metadata_changed <- TRUE
-      }
     }
     if(!is.data.frame(out)) {
       out <- data.frame(out)
