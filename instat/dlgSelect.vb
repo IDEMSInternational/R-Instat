@@ -87,7 +87,11 @@ Public Class dlgSelect
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
+        If rdoApplyAsSubset.Checked Then
+            ucrBase.OKEnabled(Not ucrInputNewDataFrameName.IsEmpty AndAlso Not ucrReceiverSelect.IsEmpty)
+        Else
+            ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -132,7 +136,7 @@ Public Class dlgSelect
         End If
     End Sub
 
-    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged
+    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlApplyOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
