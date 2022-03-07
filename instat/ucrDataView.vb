@@ -239,7 +239,7 @@ Public Class ucrDataView
         Const iMinSize As Single = 5
         TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
 
-        While lblRowDisplay.Width + lblColDisplay.Width + 50 +
+        While lblRowDisplay.Width + lblColDisplay.Width + 200 +
                     lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width +
                     lblRowBack.Width + lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso
                     TblPanPageDisplay.Font.Size > iMinSize
@@ -290,8 +290,15 @@ Public Class ucrDataView
         Else
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
         End If
-        lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
-                            " of " & GetCurrentDataFrameFocus().iTotalColumnCount
+        lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
+                              GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn & " of "
+
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
+                                " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Active selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
+        Else
+            lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount
+        End If
         ResizeLabels()
     End Sub
 
