@@ -14,13 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
 Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim strCurrDataFrame As String
     Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As RFunction
-    Private clsDummyFunction, clsDummyDataFunction As New RFunction
+    Private clsDummyDataFunction As New RFunction
     Private iXReceiverLocation, iYReceiverLoaction, iXLabelLocation, iYLabelLoaction As Integer
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -98,9 +99,10 @@ Public Class dlgViewFactorLabels
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "data")
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "column")
 
-        ucrPnlOptions.SetParameter(New RParameter("checked", 0))
-        ucrPnlOptions.AddRadioButton(rdoViewLabels, "labels")
-        ucrPnlOptions.AddRadioButton(rdoDeleteValueLabels, "delete")
+        ucrPnlOptions.AddRadioButton(rdoViewLabels)
+        ucrPnlOptions.AddRadioButton(rdoDeleteValueLabels)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoViewLabels, "view_df")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDeleteValueLabels, frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         ucrPnlOptions.AddToLinkedControls(ucrChkShowValues, {rdoViewLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverVariables, {rdoViewLabels, rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlSelectData, {rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
@@ -109,14 +111,12 @@ Public Class dlgViewFactorLabels
         lstOfControls.Add(grpSummaryStatistics)
         ucrChkShowValues.SetLinkedDisplayControl(lstOfControls)
         ucrReceiverVariables.SetLinkedDisplayControl(lblFactorColumns)
-
     End Sub
 
     Private Sub SetDefaults()
         clsViewFunction = New RFunction
         clsSelectFunction = New RFunction
         clsDeleteLabelsFunction = New RFunction
-        clsDummyFunction = New RFunction
         clsDummyDataFunction = New RFunction
 
         'Reset
@@ -124,8 +124,6 @@ Public Class dlgViewFactorLabels
         'Defining the function
         clsViewFunction.SetPackageName("sjPlot")
         clsViewFunction.SetRCommand("view_df")
-
-        clsDummyFunction.AddParameter("checked", "labels", iPosition:=0)
 
         clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
 
@@ -142,14 +140,8 @@ Public Class dlgViewFactorLabels
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
     End Sub
 
-    Private Sub ucrReceiverVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlValueChanged
-        If rdoDeleteValueLabels.Checked Then
-            strCurrDataFrame = ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame
-            clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
-        End If
-    End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariables.AddAdditionalCodeParameterPair(clsDeleteLabelsFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
 
         ucrChkAlternateColour.SetRCode(clsViewFunction, bReset)
@@ -164,7 +156,6 @@ Public Class dlgViewFactorLabels
         ucrReceiverVariables.SetRCode(clsSelectFunction, bReset)
         ucrSelectorViewLabelsAndLevels.SetRCode(clsSelectFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -185,32 +176,6 @@ Public Class dlgViewFactorLabels
         End If
     End Sub
 
-    Private Function GetColumns() As List(Of String)
-        Dim lstColumns As List(Of String)
-        Dim chrCurrColumns As 
-            Dim expItems As
-        Dim clsGetColumns As New RFunction
-
-        If rdoWholeDataFrame IsNot Nothing Then
-            clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-            clsGetColumns.AddParameter("data_name", Chr(34) & strCurrDataFrame& Chr(34), iPosition:=0)
-            clsGetColumns.AddParameter("as_list", "TRUE")
-            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumns.ToScript(), bSilent:=True)
-            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
-                vecColumns = expItems.AsList
-                For i As Integer = 0 To vecColumns.Count - 1
-                    chrCurrColumns = vecColumns(i).AsCharacter
-                    Dim strText As String = vecColumns.Names(i)
-
-                    If chrCurrColumns IsNot Nothing Then
-                        grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
-                        For j As Integer = 0 To chrCurrColumns.Count - 1
-                            grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
-                            grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
-                            grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
-                        Next
-    End Function
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -223,7 +188,7 @@ Public Class dlgViewFactorLabels
         End If
     End Sub
 
-    Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverVariables.ControlValueChanged
         SetReceiverVariableVisible()
         If rdoViewLabels.Checked Then
             lblFactorColumns.Location = New System.Drawing.Point(iXLabelLocation, iYLabelLoaction)
@@ -237,15 +202,19 @@ Public Class dlgViewFactorLabels
             lblFactorColumns.Location = New System.Drawing.Point(300, 114)
             ucrReceiverVariables.Location = New System.Drawing.Point(300, 131)
             ucrReceiverVariables.bWithQuotes = True
+            strCurrDataFrame = ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame
+            clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteLabelsFunction)
             If rdoWholeDataFrame.Checked Then
                 ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = False
                 ucrSelectorViewLabelsAndLevels.btnAdd.Visible = False
                 ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = False
+                clsDeleteLabelsFunction.RemoveParameterByName("col_names")
             ElseIf rdoSelectedColumn.Checked Then
                 ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = True
                 ucrSelectorViewLabelsAndLevels.btnAdd.Visible = True
                 ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = True
+                clsDeleteLabelsFunction.AddParameter("col_names", ucrReceiverVariables.GetVariableNames(bWithQuotes:=True), iPosition:=1)
             End If
         End If
     End Sub
