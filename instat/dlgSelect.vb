@@ -45,7 +45,7 @@ Public Class dlgSelect
 
         ucrSelectorForSelectColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSelectColumns.SetParameterIsString()
-        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()

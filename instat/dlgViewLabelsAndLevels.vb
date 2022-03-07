@@ -106,9 +106,7 @@ Public Class dlgViewFactorLabels
         ucrPnlOptions.AddToLinkedControls(ucrChkShowValues, {rdoViewLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverVariables, {rdoViewLabels, rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlSelectData, {rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
-        lstOfControls.Add(grpDisplayOptions)
-        lstOfControls.Add(grpLabels)
-        lstOfControls.Add(grpSummaryStatistics)
+        lstOfControls.AddRange({grpDisplayOptions, grpLabels, grpSummaryStatistics})
         ucrChkShowValues.SetLinkedDisplayControl(lstOfControls)
         ucrReceiverVariables.SetLinkedDisplayControl(lblFactorColumns)
     End Sub
@@ -193,9 +191,7 @@ Public Class dlgViewFactorLabels
         If rdoViewLabels.Checked Then
             lblFactorColumns.Location = New System.Drawing.Point(iXLabelLocation, iYLabelLoaction)
             ucrReceiverVariables.Location = New System.Drawing.Point(iXReceiverLocation, iYReceiverLoaction)
-            ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = True
-            ucrSelectorViewLabelsAndLevels.btnAdd.Visible = True
-            ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = True
+            ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
         Else
@@ -206,14 +202,10 @@ Public Class dlgViewFactorLabels
             clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteLabelsFunction)
             If rdoWholeDataFrame.Checked Then
-                ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = False
-                ucrSelectorViewLabelsAndLevels.btnAdd.Visible = False
-                ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = False
+                ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(False, False, False)
                 clsDeleteLabelsFunction.RemoveParameterByName("col_names")
             ElseIf rdoSelectedColumn.Checked Then
-                ucrSelectorViewLabelsAndLevels.lstAvailableVariable.Visible = True
-                ucrSelectorViewLabelsAndLevels.btnAdd.Visible = True
-                ucrSelectorViewLabelsAndLevels.btnDataOptions.Visible = True
+                ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
                 clsDeleteLabelsFunction.AddParameter("col_names", ucrReceiverVariables.GetVariableNames(bWithQuotes:=True), iPosition:=1)
             End If
         End If

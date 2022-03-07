@@ -39,7 +39,7 @@ Public Class dlgSelectColumns
     Private Sub InitialiseDialog()
         ucrSelectorForColumnSelection.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnSelection.SetParameterIsString()
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverMultipleVariables.Selector = ucrSelectorForColumnSelection
         ucrReceiverMultipleVariables.SetMeAsReceiver()
@@ -244,7 +244,7 @@ Public Class dlgSelectColumns
         Dim bEnableOrDisable As Boolean = True
         Dim strOperation As String
         strOperation = ucrInputSelectOperation.GetText
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(strOperation = "Columns", False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(strOperation = "Columns", False)
         Select Case strOperation
             Case "Columns"
                 If ucrReceiverMultipleVariables.IsEmpty Then
