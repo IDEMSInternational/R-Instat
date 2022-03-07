@@ -369,8 +369,8 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
