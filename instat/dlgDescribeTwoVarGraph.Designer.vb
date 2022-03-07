@@ -421,7 +421,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkDiagonal)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkLower)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
-        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(10, 37)
+        Me.grpTypeOfDispaly.Location = New System.Drawing.Point(11, 255)
         Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
         Me.grpTypeOfDispaly.Size = New System.Drawing.Size(422, 151)
         Me.grpTypeOfDispaly.TabIndex = 22
@@ -710,7 +710,7 @@ Partial Class dlgDescribeTwoVarGraph
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 405)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 433)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(339, 24)
@@ -745,7 +745,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 431)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 460)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
@@ -769,7 +769,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLabelSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelSize.GetSetSelectedIndex = -1
         Me.ucrInputLabelSize.IsReadOnly = False
-        Me.ucrInputLabelSize.Location = New System.Drawing.Point(343, 370)
+        Me.ucrInputLabelSize.Location = New System.Drawing.Point(346, 409)
         Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
         Me.ucrInputLabelSize.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelSize.TabIndex = 65
@@ -778,7 +778,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblLabelColour.AutoSize = True
         Me.lblLabelColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelColour.Location = New System.Drawing.Point(207, 373)
+        Me.lblLabelColour.Location = New System.Drawing.Point(210, 412)
         Me.lblLabelColour.Name = "lblLabelColour"
         Me.lblLabelColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLabelColour.TabIndex = 61
@@ -788,7 +788,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblLabelSize.AutoSize = True
         Me.lblLabelSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelSize.Location = New System.Drawing.Point(310, 373)
+        Me.lblLabelSize.Location = New System.Drawing.Point(313, 412)
         Me.lblLabelSize.Name = "lblLabelSize"
         Me.lblLabelSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLabelSize.TabIndex = 64
@@ -800,7 +800,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLabelPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
         Me.ucrInputLabelPosition.IsReadOnly = False
-        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(148, 370)
+        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(151, 409)
         Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
         Me.ucrInputLabelPosition.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelPosition.TabIndex = 60
@@ -809,7 +809,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrChkAddLabelsText.AutoSize = True
         Me.ucrChkAddLabelsText.Checked = False
-        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(7, 370)
+        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(10, 409)
         Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
         Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(88, 23)
         Me.ucrChkAddLabelsText.TabIndex = 62
@@ -818,7 +818,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblLabelPosition.AutoSize = True
         Me.lblLabelPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelPosition.Location = New System.Drawing.Point(98, 373)
+        Me.lblLabelPosition.Location = New System.Drawing.Point(101, 412)
         Me.lblLabelPosition.Name = "lblLabelPosition"
         Me.lblLabelPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblLabelPosition.TabIndex = 59
@@ -830,7 +830,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLabelColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelColour.GetSetSelectedIndex = -1
         Me.ucrInputLabelColour.IsReadOnly = False
-        Me.ucrInputLabelColour.Location = New System.Drawing.Point(249, 370)
+        Me.ucrInputLabelColour.Location = New System.Drawing.Point(252, 409)
         Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
         Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelColour.TabIndex = 63
@@ -840,7 +840,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(438, 491)
+        Me.ClientSize = New System.Drawing.Size(438, 516)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.lblLabelSize)

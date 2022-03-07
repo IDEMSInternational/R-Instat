@@ -518,7 +518,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
-        ucrChkAddLabelsText.SetRCode()
 
         bRCodeSet = True
         Results()
@@ -779,6 +778,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
         Results()
+        EnableVisibleLabelControls()
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
     End Sub
 
@@ -786,6 +786,7 @@ Public Class dlgDescribeTwoVarGraph
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         Results()
+        EnableVisibleLabelControls()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged
@@ -794,6 +795,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrInputCategoricalByCategorical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumericByCategorical.ControlValueChanged, ucrInputCategoricalByNumeric.ControlValueChanged, ucrInputCategoricalByCategorical.ControlValueChanged
         Results()
+        EnableVisibleLabelControls()
     End Sub
 
     Private Sub RemoveAllGeomsStats()
@@ -941,6 +943,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
             End If
         End If
+        EnableVisibleLabelControls()
         AddRemoveColourParameter()
     End Sub
 
@@ -963,6 +966,27 @@ Public Class dlgDescribeTwoVarGraph
             clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsGGpairsFunction.RemoveParameterByName("colour")
+        End If
+    End Sub
+
+    Private Sub EnableVisibleLabelControls()
+        ucrChkAddLabelsText.Visible = False
+        ucrInputLabelPosition.Visible = False
+        ucrInputLabelColour.Visible = False
+        ucrInputLabelSize.Visible = False
+        If rdoBy.Checked AndAlso strFirstVariablesType = "categorical" AndAlso
+            strSecondVariableType = "categorical" AndAlso bRCodeSet AndAlso
+           ucrInputCategoricalByCategorical.GetText = "Bar Chart" Then
+            ucrChkAddLabelsText.Visible = True
+            ucrChkAddLabelsText.SetRCode(clsBaseOperator)
+        End If
+    End Sub
+
+    Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
+        If ucrChkAddLabelsText.Checked AndAlso ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso rdoBy.Checked Then
+            clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_text")
         End If
     End Sub
 
