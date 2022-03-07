@@ -185,6 +185,32 @@ Public Class dlgViewFactorLabels
         End If
     End Sub
 
+    Private Function GetColumns() As List(Of String)
+        Dim lstColumns As List(Of String)
+        Dim chrCurrColumns As 
+            Dim expItems As
+        Dim clsGetColumns As New RFunction
+
+        If rdoWholeDataFrame IsNot Nothing Then
+            clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsGetColumns.AddParameter("data_name", Chr(34) & strCurrDataFrame& Chr(34), iPosition:=0)
+            clsGetColumns.AddParameter("as_list", "TRUE")
+            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumns.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+                For i As Integer = 0 To vecColumns.Count - 1
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    Dim strText As String = vecColumns.Names(i)
+
+                    If chrCurrColumns IsNot Nothing Then
+                        grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
+                        For j As Integer = 0 To chrCurrColumns.Count - 1
+                            grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
+                            grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
+                            grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
+                        Next
+    End Function
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
