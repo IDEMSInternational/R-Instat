@@ -24,19 +24,19 @@ Public Class clsDataFrame
     Private _clsPrepareFunctions As clsPrepareFunctionsForGrids
     Private _clsVisiblePage As clsDataFramePage
     Private _clsColumnMetaData As clsColumnMetaData
-    Private _clsFilter As clsDataFrameFilter
+    Private _clsFilterOrColumnSelection As clsDataFrameFilterOrColumnSelection
     Private _strName As String
     Private _RLink As RLink
     Private _iTotalRowCount As Integer
     Private _iTotalColumnCount As Integer
 
     ''' <summary>
-    ''' Filter information
+    ''' Filter or column selection information
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property clsFilter() As clsDataFrameFilter
+    Public ReadOnly Property clsFilterOrColumnSelection() As clsDataFrameFilterOrColumnSelection
         Get
-            Return _clsFilter
+            Return _clsFilterOrColumnSelection
         End Get
     End Property
 
@@ -51,7 +51,7 @@ Public Class clsDataFrame
     End Property
 
     ''' <summary>
-    ''' Column meta data for the dataframe
+    ''' Column metadata for the dataframe
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property clsColumnMetaData As clsColumnMetaData
@@ -142,7 +142,7 @@ Public Class clsDataFrame
         _strName = strName
         _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, strName)
         _clsVisiblePage = New clsDataFramePage(rLink, strName)
-        _clsFilter = New clsDataFrameFilter(rLink, strName)
+        _clsFilterOrColumnSelection = New clsDataFrameFilterOrColumnSelection(rLink, strName)
         _clsColumnMetaData = New clsColumnMetaData(rLink, strName)
     End Sub
 
@@ -168,9 +168,9 @@ Public Class clsDataFrame
             If _clsVisiblePage.RefreshData() Then
                 _iTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
                 _iTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
-                _clsFilter.RefreshData()
-                If _clsFilter.bFilterApplied Then
-                    _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _clsFilter.iFilteredRowCount)
+                _clsFilterOrColumnSelection.RefreshData()
+                If _clsFilterOrColumnSelection.bFilterApplied Then
+                    _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _clsFilterOrColumnSelection.iFilteredRowCount)
                 Else
                     _clsVisiblePage.SetTotalRowAndColumnCounts(_iTotalColumnCount, _iTotalRowCount)
                 End If

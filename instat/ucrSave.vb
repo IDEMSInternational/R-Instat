@@ -111,9 +111,7 @@ Public Class ucrSave
     '''             Only used when this control is saving a column. </summary>
     Private ucrLinkedReceiver As ucrReceiver
     ''' <summary>   If true then set the R "before" parameter to TRUE, else set it to FALSE.
-
-    '''             Only used when this control is saving a column.
-    '''             </summary>
+    ''' Only used when this control is saving a column. </summary>
     Private bInsertColumnBefore As Boolean = False
     Private strAdjacentColumn As String = ""
     'todo. not used yet.
