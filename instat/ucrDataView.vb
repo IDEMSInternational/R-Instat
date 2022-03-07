@@ -239,11 +239,11 @@ Public Class ucrDataView
         Const iMinSize As Single = 5
         TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
 
-        While lblRowDisplay.Width + lblColDisplay.Width + 200 +
+        While lblRowDisplay.Width + lblColDisplay.Width + 250 +
                     lblColBack.Width + lblColFirst.Width + lblColLast.Width + lblColNext.Width +
                     lblRowBack.Width + lblRowFirst.Width + lblRowNext.Width + lblRowLast.Width > TblPanPageDisplay.Width AndAlso
                     TblPanPageDisplay.Font.Size > iMinSize
-            TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.5F, TblPanPageDisplay.Font.Style)
+            TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, TblPanPageDisplay.Font.Size - 0.9F, TblPanPageDisplay.Font.Style)
         End While
     End Sub
 
