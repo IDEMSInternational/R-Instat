@@ -435,4 +435,12 @@ Public Class ucrColumnMetadata
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
     End Sub
+
+    Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+    End Sub
+
+    Private Sub mnuHelp2_Click(sender As Object, e As EventArgs) Handles mnuHelp2.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+    End Sub
 End Class
