@@ -199,7 +199,7 @@ Partial Class dlgViewFactorLabels
         Me.rdoDeleteValueLabels.FlatAppearance.BorderSize = 2
         Me.rdoDeleteValueLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDeleteValueLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDeleteValueLabels.Location = New System.Drawing.Point(270, 12)
+        Me.rdoDeleteValueLabels.Location = New System.Drawing.Point(267, 12)
         Me.rdoDeleteValueLabels.Name = "rdoDeleteValueLabels"
         Me.rdoDeleteValueLabels.Size = New System.Drawing.Size(121, 28)
         Me.rdoDeleteValueLabels.TabIndex = 9
@@ -215,7 +215,7 @@ Partial Class dlgViewFactorLabels
         Me.rdoViewLabels.FlatAppearance.BorderSize = 2
         Me.rdoViewLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoViewLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewLabels.Location = New System.Drawing.Point(154, 12)
+        Me.rdoViewLabels.Location = New System.Drawing.Point(151, 12)
         Me.rdoViewLabels.Name = "rdoViewLabels"
         Me.rdoViewLabels.Size = New System.Drawing.Size(121, 28)
         Me.rdoViewLabels.TabIndex = 8
@@ -256,7 +256,7 @@ Partial Class dlgViewFactorLabels
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(148, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(145, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(250, 46)
         Me.ucrPnlOptions.TabIndex = 7
