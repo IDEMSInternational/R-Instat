@@ -310,7 +310,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(7, 466)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
         Me.ucrBase.TabIndex = 22
         '
         'ucrPnlOptions
@@ -352,13 +352,12 @@ Partial Class dlgClimaticDataEntry
         'ucrInputSelectStation
         '
         Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectStation.AutoSize = True
         Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSelectStation.GetSetSelectedIndex = -1
         Me.ucrInputSelectStation.IsReadOnly = False
         Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
         Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
-        Me.ucrInputSelectStation.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputSelectStation.TabIndex = 91
         '
         'lblNbCommentEntered
