@@ -125,7 +125,6 @@ Public Class ucrColumnMetadata
 
     Private Sub DeleteLables(strColumnName As String)
         Dim clsDeleteLabelsFunction As New RFunction
-        Dim strCurrDataFrame As String = _grid.CurrentWorksheet.Name
 
         If strColumnName = strLabelsLabel Then
             If MsgBox("This will delete the selected label(s) and replace with (NA)." &
@@ -133,7 +132,7 @@ Public Class ucrColumnMetadata
                                 MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
 
                 clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
-                clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
+                clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & _grid.CurrentWorksheet.Name & Chr(34), iPosition:=0)
                 clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns, bWithQuotes:=True), iPosition:=1)
                 clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
                 clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & "NA" & Chr(34), iPosition:=3)
