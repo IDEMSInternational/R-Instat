@@ -111,6 +111,7 @@ Public Class ucrColumnMetadata
         _grid.SetNonEditableColumns(lstNonEditableColumns)
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
+        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
         autoTranslate(Me)
     End Sub
 
@@ -120,6 +121,22 @@ Public Class ucrColumnMetadata
 
     Public Sub SetCurrentDataFrame(iIndex As Integer)
         _grid.SetCurrentDataFrame(iIndex)
+    End Sub
+
+    Private Sub DeleteLables(strColumnName As String)
+        Dim clsDeleteLabelsFunction As New RFunction
+        Dim strCurrDataFrame As String = _grid.CurrentWorksheet.Name
+
+        If strColumnName = strLabelsLabel Then
+            clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+            clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
+            clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns, bWithQuotes:=True), iPosition:=1)
+            clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+            clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & "NA" & Chr(34), iPosition:=3)
+            frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript(), iCallType:=0)
+        Else
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+        End If
     End Sub
 
     Private Sub EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)

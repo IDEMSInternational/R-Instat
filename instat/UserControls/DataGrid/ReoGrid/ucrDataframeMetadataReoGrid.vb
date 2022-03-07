@@ -22,6 +22,7 @@ Public Class ucrDataframeMetadataReoGrid
     Private lstNonEditableColumns As New List(Of String)
     Private strPreviousCellText As String
 
+    Event DeleteLabels(strColumnName As String) Implements IDataframeMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IDataframeMetaDataGrid.EditValue
 
     Public Sub AddColumns() Implements IDataframeMetaDataGrid.AddColumns
