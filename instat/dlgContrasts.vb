@@ -56,19 +56,6 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
-        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
-        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-    End Sub
 
     Private Sub InitialiseDialog()
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
@@ -113,6 +100,20 @@ Public Class dlgContrasts
         clsSetContrast.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetContrast)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
+        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
+        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -162,6 +163,7 @@ Public Class dlgContrasts
                 grdCurrSheet.Columns = grdCurrSheet.Rows - 1
                 grdLayoutForContrasts.Enabled = True
             End If
+            GetContrast()
         Else
             Me.Size = New Size(iFullWidth / 1.86, Me.Height)
             clsFactorColumn.RemoveParameterByName("col_name")
@@ -197,9 +199,44 @@ Public Class dlgContrasts
         Return False
     End Function
 
-    Private Sub grdLayoutForContrasts_AfterCellKeyDown(sender As Object, e As EventArgs) Handles grdCurrSheet.AfterCellKeyDown
-        SetMatrixFunction()
-        TestOKEnabled()
+    Private Sub grdLayoutForContrasts_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrSheet.AfterCellKeyDown
+        If e.KeyCode = Keys.Control + Keys.C Then
+            SetMatrixFunction()
+            TestOKEnabled()
+        End If
+    End Sub
+
+    Private Sub GetContrast()
+        Dim clsGetColumnFunction As RFunction = ucrReceiverForContrasts.GetVariables()
+        clsGetColumnFunction.RemoveAssignTo()
+        Dim clsGetContrastFunction As New RFunction
+        Dim expContrasts As SymbolicExpression
+        ' Dim strColumnHeaders() As String
+        Dim vecColums As NumericMatrix
+        ' Dim strRowHeaders() As String
+        Dim strTopItemText As String = ""
+
+        clsGetContrastFunction.SetRCommand("contrasts")
+        clsGetContrastFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
+        expContrasts = frmMain.clsRLink.RunInternalScriptGetValue(clsGetContrastFunction.ToScript(), bSilent:=True)
+        If expContrasts IsNot Nothing AndAlso Not expContrasts.Type = Internals.SymbolicExpressionType.Null Then
+            vecColums = expContrasts.AsNumericMatrix()
+            'strColumnHeaders = vecColums.ColumnNames
+            'strRowHeaders = vecColums.RowNames
+            'For col = 0 To strColumnHeaders.Count - 1
+            '    grdCurrSheet.ColumnHeaders(col).Text = strColumnHeaders(col)
+            'Next
+
+            'For row = 0 To strRowHeaders.Count - 1
+            '    grdCurrSheet.RowHeaders(row).Text = strRowHeaders(row)
+            'Next
+
+            For j = 0 To vecColums.ColumnCount - 1
+                For i = 0 To vecColums.RowCount - 1
+                    grdCurrSheet.Item(row:=i, col:=j) = vecColums(i, j)
+                Next
+            Next
+        End If
     End Sub
 
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
