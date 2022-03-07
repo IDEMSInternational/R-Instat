@@ -39,11 +39,11 @@ Partial Class dlgDeleteObjects
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblObjectsToDelete = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrInputComboType = New instat.ucrInputComboBox()
         Me.ucrReceiverObjectsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDeleteObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputComboType = New instat.ucrInputComboBox()
-        Me.lblType = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblObjectsToDelete
@@ -55,6 +55,26 @@ Partial Class dlgDeleteObjects
         Me.lblObjectsToDelete.TabIndex = 1
         Me.lblObjectsToDelete.Tag = "Objects_to_Delete"
         Me.lblObjectsToDelete.Text = "Objects to Delete:"
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(251, 149)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(34, 13)
+        Me.lblType.TabIndex = 3
+        Me.lblType.Text = "Type:"
+        '
+        'ucrInputComboType
+        '
+        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
+        Me.ucrInputComboType.IsReadOnly = False
+        Me.ucrInputComboType.Location = New System.Drawing.Point(254, 165)
+        Me.ucrInputComboType.Name = "ucrInputComboType"
+        Me.ucrInputComboType.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputComboType.TabIndex = 4
         '
         'ucrReceiverObjectsToDelete
         '
@@ -89,26 +109,6 @@ Partial Class dlgDeleteObjects
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 5
-        '
-        'ucrInputComboType
-        '
-        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboType.GetSetSelectedIndex = -1
-        Me.ucrInputComboType.IsReadOnly = False
-        Me.ucrInputComboType.Location = New System.Drawing.Point(254, 165)
-        Me.ucrInputComboType.Name = "ucrInputComboType"
-        Me.ucrInputComboType.Size = New System.Drawing.Size(92, 21)
-        Me.ucrInputComboType.TabIndex = 4
-        '
-        'lblType
-        '
-        Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(251, 149)
-        Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(34, 13)
-        Me.lblType.TabIndex = 3
-        Me.lblType.Text = "Type:"
         '
         'dlgDeleteObjects
         '
