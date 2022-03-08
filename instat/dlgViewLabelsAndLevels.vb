@@ -166,7 +166,7 @@ Public Class dlgViewFactorLabels
         Else
             If rdoWholeDataFrame.Checked Then
                 ucrBase.OKEnabled(True)
-            ElseIf rdoSelectedColumn.Checked AndAlso Not (ucrReceiverVariables.IsEmpty) Then
+            ElseIf rdoSelectedColumn.Checked AndAlso Not ucrReceiverVariables.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)

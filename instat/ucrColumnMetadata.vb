@@ -139,7 +139,8 @@ Public Class ucrColumnMetadata
                 frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
             End If
         Else
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
+                   "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
         End If
     End Sub
 
