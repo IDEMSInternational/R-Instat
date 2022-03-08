@@ -67,7 +67,7 @@ Public Class ucrColumnMetadataReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellsKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDownColumnMetadata
     End Sub
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)
@@ -92,7 +92,7 @@ Public Class ucrColumnMetadataReoGrid
         e.IsCancelled = True
     End Sub
 
-    Protected Sub Worksheet_BeforeCellsKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
+    Protected Sub Worksheet_BeforeCellKeyDownColumnMetadata(sender As Object, e As BeforeCellKeyDownEventArgs)
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
             RaiseEvent DeleteLabels(grdData.CurrentWorksheet.ColumnHeaders(e.Cell.Column).Text)
             e.IsCancelled = True
