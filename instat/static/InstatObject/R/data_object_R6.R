@@ -1034,13 +1034,23 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for(curr_col in col_names) {
-      attr(private$data[[curr_col]], property) <- new_val
-      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+       if(property == "labels" && new_val == "" ){
+          attr(private$data[[curr_col]], property) <- NULL
+       }
+       else{
+          attr(private$data[[curr_col]], property) <- new_val
+       }
+       self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
   }
   else {
     for(col_name in self$get_column_names()) {
-      attr(private$data[[col_name]], property) <- new_val
+       if(property == "labels" && new_val == "" ){
+         attr(private$data[[col_name]], property) <- NULL
+       }
+       else{
+         attr(private$data[[col_name]], property) <- new_val
+       }
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }

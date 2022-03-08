@@ -130,7 +130,7 @@ Public Class dlgViewFactorLabels
 
         clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
-        clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & "NA" & Chr(34), iPosition:=3)
+        clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
         clsViewFunction.AddParameter("x", clsRFunctionParameter:=clsSelectFunction)
         clsViewFunction.AddParameter("show.frq", "TRUE")
