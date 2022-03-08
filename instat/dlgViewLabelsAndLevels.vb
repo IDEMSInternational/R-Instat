@@ -19,10 +19,9 @@ Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim strCurrDataFrame As String
+    Private strCurrDataFrame As String
     Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As RFunction
     Private clsDummyDataFunction As New RFunction
-    Private iXReceiverLocation, iYReceiverLoaction, iXLabelLocation, iYLabelLoaction As Integer
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -41,11 +40,6 @@ Public Class dlgViewFactorLabels
 
     Private Sub InitialiseDialog()
         Dim lstOfControls As New List(Of Control)
-
-        iXReceiverLocation = ucrReceiverVariables.Location.X
-        iYReceiverLoaction = ucrReceiverVariables.Location.Y
-        iXLabelLocation = lblFactorColumns.Location.X
-        iYLabelLoaction = lblFactorColumns.Location.Y
 
         ucrBase.iHelpTopicID = 517
         ucrBase.clsRsyntax.iCallType = 2
@@ -189,8 +183,8 @@ Public Class dlgViewFactorLabels
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverVariables.ControlValueChanged
         SetReceiverVariableVisible()
         If rdoViewLabels.Checked Then
-            lblFactorColumns.Location = New System.Drawing.Point(iXLabelLocation, iYLabelLoaction)
-            ucrReceiverVariables.Location = New System.Drawing.Point(iXReceiverLocation, iYReceiverLoaction)
+            lblFactorColumns.Location = New System.Drawing.Point(lblFactorColumns.Location.X, lblFactorColumns.Location.Y)
+            ucrReceiverVariables.Location = New System.Drawing.Point(ucrReceiverVariables.Location.X, ucrReceiverVariables.Location.Y)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
