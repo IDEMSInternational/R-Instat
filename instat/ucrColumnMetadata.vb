@@ -133,10 +133,10 @@ Public Class ucrColumnMetadata
 
                 clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
                 clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & _grid.CurrentWorksheet.Name & Chr(34), iPosition:=0)
-                clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns, bWithQuotes:=True), iPosition:=1)
+                clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns), iPosition:=1)
                 clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
                 clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & "NA" & Chr(34), iPosition:=3)
-                frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript(), iCallType:=0)
+                frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
             End If
         Else
             MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
