@@ -151,7 +151,7 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoSelectedColumn.Checked Then
+        If rdoViewLabels.Checked Then
             If Not ucrReceiverVariables.IsEmpty AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
