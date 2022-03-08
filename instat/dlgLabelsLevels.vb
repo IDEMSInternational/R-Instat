@@ -19,7 +19,6 @@ Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
-    Private clsGetColumnFunction As RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
@@ -118,6 +117,8 @@ Public Class dlgLabelsLevels
 
     Private Sub CountLevels()
         Static iMissingValue As Integer
+        Dim clsGetColumnFunction As RFunction
+
         clsGetColumnFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
 
