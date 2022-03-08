@@ -24,20 +24,20 @@ Partial Class dlgRandomSplit
     Private Sub InitializeComponent()
         Me.rdoSample = New System.Windows.Forms.RadioButton()
         Me.rdoTimeSeries = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverRandomSplit = New instat.ucrReceiverMultiple()
-        Me.ucrChkStratifyingFactor = New instat.ucrCheck()
-        Me.ucrSelectorRandomSplit = New instat.ucrDataFrame()
-        Me.ucrChkTestingData = New instat.ucrCheck()
-        Me.ucrChkTrainingData = New instat.ucrCheck()
-        Me.ucrChkLog = New instat.ucrCheck()
-        Me.ucrPnlRandomSplit = New instat.UcrPanel()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveRandomSplit = New instat.ucrSave()
-        Me.ucrNudLog = New instat.ucrNud()
-        Me.ucrNudFraction = New instat.ucrNud()
-        Me.ucrNudPool = New instat.ucrNud()
         Me.lblFraction = New System.Windows.Forms.Label()
         Me.lblPool = New System.Windows.Forms.Label()
+        Me.ucrNudPool = New instat.ucrNud()
+        Me.ucrNudFraction = New instat.ucrNud()
+        Me.ucrNudLag = New instat.ucrNud()
+        Me.ucrSaveRandomSplit = New instat.ucrSave()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkLag = New instat.ucrCheck()
+        Me.ucrChkTrainingData = New instat.ucrCheck()
+        Me.ucrChkTestingData = New instat.ucrCheck()
+        Me.ucrSelectorRandomSplit = New instat.ucrDataFrame()
+        Me.ucrReceiverRandomSplit = New instat.ucrReceiverMultiple()
+        Me.ucrChkStratifyingFactor = New instat.ucrCheck()
+        Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -72,6 +72,118 @@ Partial Class dlgRandomSplit
         Me.rdoTimeSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTimeSeries.UseVisualStyleBackColor = True
         '
+        'lblFraction
+        '
+        Me.lblFraction.AutoSize = True
+        Me.lblFraction.Location = New System.Drawing.Point(278, 223)
+        Me.lblFraction.Name = "lblFraction"
+        Me.lblFraction.Size = New System.Drawing.Size(51, 13)
+        Me.lblFraction.TabIndex = 32
+        Me.lblFraction.Text = "Fraction :"
+        '
+        'lblPool
+        '
+        Me.lblPool.AutoSize = True
+        Me.lblPool.Location = New System.Drawing.Point(278, 261)
+        Me.lblPool.Name = "lblPool"
+        Me.lblPool.Size = New System.Drawing.Size(34, 13)
+        Me.lblPool.TabIndex = 33
+        Me.lblPool.Text = "Pool :"
+        '
+        'ucrNudPool
+        '
+        Me.ucrNudPool.AutoSize = True
+        Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPool.Location = New System.Drawing.Point(351, 261)
+        Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPool.Name = "ucrNudPool"
+        Me.ucrNudPool.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPool.TabIndex = 31
+        Me.ucrNudPool.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFraction
+        '
+        Me.ucrNudFraction.AutoSize = True
+        Me.ucrNudFraction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFraction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFraction.Location = New System.Drawing.Point(351, 223)
+        Me.ucrNudFraction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFraction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFraction.Name = "ucrNudFraction"
+        Me.ucrNudFraction.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFraction.TabIndex = 30
+        Me.ucrNudFraction.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLag
+        '
+        Me.ucrNudLag.AutoSize = True
+        Me.ucrNudLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLag.Location = New System.Drawing.Point(92, 146)
+        Me.ucrNudLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLag.Name = "ucrNudLag"
+        Me.ucrNudLag.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLag.TabIndex = 29
+        Me.ucrNudLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSaveRandomSplit
+        '
+        Me.ucrSaveRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveRandomSplit.Location = New System.Drawing.Point(9, 299)
+        Me.ucrSaveRandomSplit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveRandomSplit.Name = "ucrSaveRandomSplit"
+        Me.ucrSaveRandomSplit.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveRandomSplit.TabIndex = 28
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 341)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 27
+        '
+        'ucrChkLag
+        '
+        Me.ucrChkLag.AutoSize = True
+        Me.ucrChkLag.Checked = False
+        Me.ucrChkLag.Location = New System.Drawing.Point(9, 146)
+        Me.ucrChkLag.Name = "ucrChkLag"
+        Me.ucrChkLag.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkLag.TabIndex = 25
+        '
+        'ucrChkTrainingData
+        '
+        Me.ucrChkTrainingData.AutoSize = True
+        Me.ucrChkTrainingData.Checked = False
+        Me.ucrChkTrainingData.Location = New System.Drawing.Point(9, 175)
+        Me.ucrChkTrainingData.Name = "ucrChkTrainingData"
+        Me.ucrChkTrainingData.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkTrainingData.TabIndex = 24
+        '
+        'ucrChkTestingData
+        '
+        Me.ucrChkTestingData.AutoSize = True
+        Me.ucrChkTestingData.Checked = False
+        Me.ucrChkTestingData.Location = New System.Drawing.Point(9, 204)
+        Me.ucrChkTestingData.Name = "ucrChkTestingData"
+        Me.ucrChkTestingData.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkTestingData.TabIndex = 23
+        '
+        'ucrSelectorRandomSplit
+        '
+        Me.ucrSelectorRandomSplit.AutoSize = True
+        Me.ucrSelectorRandomSplit.bDropUnusedFilterLevels = False
+        Me.ucrSelectorRandomSplit.bUseCurrentFilter = True
+        Me.ucrSelectorRandomSplit.Location = New System.Drawing.Point(9, 81)
+        Me.ucrSelectorRandomSplit.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRandomSplit.Name = "ucrSelectorRandomSplit"
+        Me.ucrSelectorRandomSplit.Size = New System.Drawing.Size(153, 43)
+        Me.ucrSelectorRandomSplit.TabIndex = 22
+        '
         'ucrReceiverRandomSplit
         '
         Me.ucrReceiverRandomSplit.AutoSize = True
@@ -94,44 +206,6 @@ Partial Class dlgRandomSplit
         Me.ucrChkStratifyingFactor.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkStratifyingFactor.TabIndex = 19
         '
-        'ucrSelectorRandomSplit
-        '
-        Me.ucrSelectorRandomSplit.AutoSize = True
-        Me.ucrSelectorRandomSplit.bDropUnusedFilterLevels = False
-        Me.ucrSelectorRandomSplit.bUseCurrentFilter = True
-        Me.ucrSelectorRandomSplit.Location = New System.Drawing.Point(9, 81)
-        Me.ucrSelectorRandomSplit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorRandomSplit.Name = "ucrSelectorRandomSplit"
-        Me.ucrSelectorRandomSplit.Size = New System.Drawing.Size(153, 43)
-        Me.ucrSelectorRandomSplit.TabIndex = 22
-        '
-        'ucrChkTestingData
-        '
-        Me.ucrChkTestingData.AutoSize = True
-        Me.ucrChkTestingData.Checked = False
-        Me.ucrChkTestingData.Location = New System.Drawing.Point(9, 204)
-        Me.ucrChkTestingData.Name = "ucrChkTestingData"
-        Me.ucrChkTestingData.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkTestingData.TabIndex = 23
-        '
-        'ucrChkTrainingData
-        '
-        Me.ucrChkTrainingData.AutoSize = True
-        Me.ucrChkTrainingData.Checked = False
-        Me.ucrChkTrainingData.Location = New System.Drawing.Point(9, 175)
-        Me.ucrChkTrainingData.Name = "ucrChkTrainingData"
-        Me.ucrChkTrainingData.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkTrainingData.TabIndex = 24
-        '
-        'ucrChkLog
-        '
-        Me.ucrChkLog.AutoSize = True
-        Me.ucrChkLog.Checked = False
-        Me.ucrChkLog.Location = New System.Drawing.Point(9, 146)
-        Me.ucrChkLog.Name = "ucrChkLog"
-        Me.ucrChkLog.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkLog.TabIndex = 25
-        '
         'ucrPnlRandomSplit
         '
         Me.ucrPnlRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -139,80 +213,6 @@ Partial Class dlgRandomSplit
         Me.ucrPnlRandomSplit.Name = "ucrPnlRandomSplit"
         Me.ucrPnlRandomSplit.Size = New System.Drawing.Size(212, 44)
         Me.ucrPnlRandomSplit.TabIndex = 26
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 341)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 27
-        '
-        'ucrSaveRandomSplit
-        '
-        Me.ucrSaveRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveRandomSplit.Location = New System.Drawing.Point(9, 299)
-        Me.ucrSaveRandomSplit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveRandomSplit.Name = "ucrSaveRandomSplit"
-        Me.ucrSaveRandomSplit.Size = New System.Drawing.Size(403, 34)
-        Me.ucrSaveRandomSplit.TabIndex = 28
-        '
-        'ucrNudLog
-        '
-        Me.ucrNudLog.AutoSize = True
-        Me.ucrNudLog.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLog.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLog.Location = New System.Drawing.Point(92, 146)
-        Me.ucrNudLog.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLog.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLog.Name = "ucrNudLog"
-        Me.ucrNudLog.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLog.TabIndex = 29
-        Me.ucrNudLog.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudFraction
-        '
-        Me.ucrNudFraction.AutoSize = True
-        Me.ucrNudFraction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFraction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFraction.Location = New System.Drawing.Point(351, 223)
-        Me.ucrNudFraction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFraction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFraction.Name = "ucrNudFraction"
-        Me.ucrNudFraction.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFraction.TabIndex = 30
-        Me.ucrNudFraction.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudPool
-        '
-        Me.ucrNudPool.AutoSize = True
-        Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPool.Location = New System.Drawing.Point(351, 261)
-        Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPool.Name = "ucrNudPool"
-        Me.ucrNudPool.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPool.TabIndex = 31
-        Me.ucrNudPool.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblFraction
-        '
-        Me.lblFraction.AutoSize = True
-        Me.lblFraction.Location = New System.Drawing.Point(278, 223)
-        Me.lblFraction.Name = "lblFraction"
-        Me.lblFraction.Size = New System.Drawing.Size(51, 13)
-        Me.lblFraction.TabIndex = 32
-        Me.lblFraction.Text = "Fraction :"
-        '
-        'lblPool
-        '
-        Me.lblPool.AutoSize = True
-        Me.lblPool.Location = New System.Drawing.Point(278, 261)
-        Me.lblPool.Name = "lblPool"
-        Me.lblPool.Size = New System.Drawing.Size(34, 13)
-        Me.lblPool.TabIndex = 33
-        Me.lblPool.Text = "Pool :"
         '
         'dlgRandomSplit
         '
@@ -223,10 +223,10 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.lblFraction)
         Me.Controls.Add(Me.ucrNudPool)
         Me.Controls.Add(Me.ucrNudFraction)
-        Me.Controls.Add(Me.ucrNudLog)
+        Me.Controls.Add(Me.ucrNudLag)
         Me.Controls.Add(Me.ucrSaveRandomSplit)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrChkLog)
+        Me.Controls.Add(Me.ucrChkLag)
         Me.Controls.Add(Me.ucrChkTrainingData)
         Me.Controls.Add(Me.ucrChkTestingData)
         Me.Controls.Add(Me.ucrSelectorRandomSplit)
@@ -251,12 +251,12 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrReceiverRandomSplit As ucrReceiverMultiple
     Friend WithEvents ucrChkStratifyingFactor As ucrCheck
     Friend WithEvents ucrSelectorRandomSplit As ucrDataFrame
-    Friend WithEvents ucrChkLog As ucrCheck
+    Friend WithEvents ucrChkLag As ucrCheck
     Friend WithEvents ucrChkTrainingData As ucrCheck
     Friend WithEvents ucrChkTestingData As ucrCheck
     Friend WithEvents ucrNudPool As ucrNud
     Friend WithEvents ucrNudFraction As ucrNud
-    Friend WithEvents ucrNudLog As ucrNud
+    Friend WithEvents ucrNudLag As ucrNud
     Friend WithEvents ucrSaveRandomSplit As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPnlRandomSplit As UcrPanel

@@ -37,8 +37,12 @@ Public Class dlgRandomSplit
     Private Sub InitialiseDialog()
         ucrPnlRandomSplit.AddRadioButton(rdoSample)
         ucrPnlRandomSplit.AddRadioButton(rdoTimeSeries)
-        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {"scale", "na.omit"})
-        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {"dist", "as.matrix"})
+        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {})
+        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {})
+
+        ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrReceiverRandomSplit.SetParameterIsRFunction()
         'ucrReceiverRandomSplit.Selector = ucrSelectorRandomSplit
@@ -48,17 +52,29 @@ Public Class dlgRandomSplit
         ucrSelectorRandomSplit.SetParameterIsRFunction()
 
         ucrChkStratifyingFactor.SetText("Set Seed")
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRandomSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStratifyingFactor.SetParameter(New RParameter("strata", 2))
 
-        ucrChkLog.SetText("Log")
-        ucrChkLog.AddToLinkedControls(ucrNudLog, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Default")
+
+        ucrChkLag.SetText("Lag")
+        ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrChkTestingData.SetText("Save Testing Data")
 
         ucrChkTrainingData.SetText("Save Training Data")
 
+        'ucrSaveRandomSplit.set
+
+        ucrNudLag.SetParameter(New RParameter("lag", 3))
+        ucrNudLag.SetRDefault("0")
+
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
+        ucrNudFraction.SetParameter(New RParameter("prop", 1))
+        ucrNudFraction.SetRDefault("3/4")
 
         ucrNudPool.SetLinkedDisplayControl(lblPool)
+        ucrNudPool.SetParameter(New RParameter("pool", 4))
+        ucrNudPool.SetRDefault("0.1")
     End Sub
 
     Private Sub SetDefaults()
