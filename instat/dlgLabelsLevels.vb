@@ -19,7 +19,6 @@ Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
-    Private Shared iMissingValue As Integer
     Private clsGetColumnFunction As RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
