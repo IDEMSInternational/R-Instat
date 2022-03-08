@@ -91,7 +91,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub loadForm()
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
 
         'DEBUG
         ' If True Then

@@ -56,7 +56,9 @@ Public Class ucrSelectorByDataFrameAddRemove
         End If
     End Sub
 
-    Public Sub HideShowAddOrDataOptionsOrListView(Optional bAddVisible As Boolean = True, Optional bDataOptionsVisible As Boolean = True, Optional bListVariables As Boolean = True)
+    Public Sub HideShowAddOrDataOptionsOrListView(Optional bAddVisible As Boolean = True,
+                                                  Optional bDataOptionsVisible As Boolean = True,
+                                                  Optional bListVariables As Boolean = True)
         btnDataOptions.Visible = bDataOptionsVisible
         btnAdd.Visible = bAddVisible
         lstAvailableVariable.Visible = bListVariables
