@@ -16,6 +16,10 @@
 
 Imports instat.Translations
 Public Class dlgRandomSplit
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
+
     Private Sub dlgRandomSplit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,17 +45,37 @@ Public Class dlgRandomSplit
         ucrReceiverRandomSplit.SetMeAsReceiver()
         ucrReceiverRandomSplit.SetDataType("numeric")
 
+        ucrSelectorRandomSplit.SetParameterIsRFunction()
+
         ucrChkStratifyingFactor.SetText("Set Seed")
 
         ucrChkLog.SetText("Log")
+        ucrChkLog.AddToLinkedControls(ucrNudLog, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Default")
 
         ucrChkTestingData.SetText("Save Testing Data")
 
         ucrChkTrainingData.SetText("Save Training Data")
+
+        ucrNudFraction.SetLinkedDisplayControl(lblFraction)
+
+        ucrNudPool.SetLinkedDisplayControl(lblPool)
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Private Sub TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 End Class
