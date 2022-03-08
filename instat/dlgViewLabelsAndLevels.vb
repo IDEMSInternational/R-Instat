@@ -182,7 +182,7 @@ Public Class dlgViewFactorLabels
 
     Private Sub SetReceiverVariableVisible()
         If rdoDeleteValueLabels.Checked Then
-            ucrReceiverVariables.Visible = If(rdoSelectedColumn.Checked, True, False)
+            ucrReceiverVariables.Visible = rdoSelectedColumn.Checked
         End If
     End Sub
 

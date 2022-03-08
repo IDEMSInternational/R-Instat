@@ -118,6 +118,7 @@ Public Class dlgLabelsLevels
     End Sub
 
     Private Sub CountLevels()
+        Static iMissingValue As Integer
         clsGetColumnFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
 
