@@ -67,7 +67,7 @@ Public Class ucrColumnMetadataReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellsKeyDown
     End Sub
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)
