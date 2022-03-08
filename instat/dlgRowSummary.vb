@@ -22,8 +22,6 @@ Public Class dlgRowSummary
     Private clsDummyFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
     Private clsGetColumnsFunction As RFunction
-
-
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -39,15 +37,26 @@ Public Class dlgRowSummary
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
+        cmdMissingOptions.Enabled = False
+
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
+        ucrReceiverForRowSummaries.bUseFilteredData = False
+        ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
         ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
+
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.AddParameterPresentCondition(True, "na_type")
+        ucrChkOmitMissing.AddParameterPresentCondition(False, "na_type", False)
 
         'linking controls
         ucrPnlRowSummaries.AddRadioButton(rdoSingle)
@@ -70,7 +79,7 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddRadioButton(rdoMore, "user_defined")
 
         'ucrInputUserDefined
-        ucrInputUserDefined.SetItems({"sum", "mean", "median", "sd", "min", "max", "count", "number missing"})
+        ucrInputUserDefined.SetItems({"sum", "mean", "median", "sd", "min", "max", "count"})
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
@@ -127,6 +136,14 @@ Public Class dlgRowSummary
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrReceiverForRowSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlValueChanged
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        clsGetColumnsFunction = ucrReceiverForRowSummaries.GetVariables(True).Clone
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsApplyFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnsFunction)
+    End Sub
+
     Private Sub ucrChkIgnoreMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissingValues.ControlValueChanged, ucrPnlStatistics.ControlValueChanged, ucrInputUserDefined.ControlValueChanged
         If ucrChkIgnoreMissingValues.Checked Then
             If rdoMean.Checked OrElse rdoMedian.Checked OrElse rdoSum.Checked OrElse rdoStandardDeviation.Checked OrElse rdoMinimum.Checked OrElse rdoMaximum.Checked Then
@@ -161,19 +178,8 @@ Public Class dlgRowSummary
         ElseIf rdoCount.Checked Then
             clsOtherDummyFunction.AddParameter("checked", "count", iPosition:=0)
             clsApplyFunction.AddParameter("FUN", "function(z) sum(!is.na(z))", iPosition:=2)
-        ElseIf rdoNumberMissing.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "number missing", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "function(z) sum(is.na(z))", iPosition:=2)
         Else
             clsApplyFunction.RemoveParameterByName("FUN")
         End If
-    End Sub
-
-    Private Sub ucrReceiverForRowSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlValueChanged
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetColumnsFunction = ucrReceiverForRowSummaries.GetVariables(True).Clone
-        clsGetColumnsFunction.SetAssignTo("columns")
-        clsApplyFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnsFunction)
     End Sub
 End Class
