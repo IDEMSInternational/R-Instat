@@ -22,7 +22,7 @@ Public Class dlgViewFactorLabels
     Dim strCurrDataFrame As String
     Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As RFunction
     Private clsDummyDataFunction As New RFunction
-    Private iXReceiverLocation, iYReceiverLoaction, iXLabelLocation, iYLabelLoaction As Integer
+    Private iXReceiverLocation, iYReceiverLocation, iXLabelLocation, iYLabelLocation As Integer
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
