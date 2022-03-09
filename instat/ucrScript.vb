@@ -271,11 +271,7 @@ Public Class ucrScript
         bUserTextChanged = False 'reset flag
     End Sub
 
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
-    End Sub
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 End Class
