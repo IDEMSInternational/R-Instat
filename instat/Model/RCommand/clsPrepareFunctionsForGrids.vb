@@ -145,7 +145,6 @@ Public Class clsPrepareFunctionsForGrids
         clsConvertToNumeric.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
         clsConvertToNumeric.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsConvertToNumeric.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        clsConvertToNumeric.AddParameter("keep_attr", "FALSE", iPosition:=4)
         If bIgnoreLabels Then
             clsConvertToNumeric.AddParameter("ignore_labels", "TRUE", iPosition:=3)
         End If
