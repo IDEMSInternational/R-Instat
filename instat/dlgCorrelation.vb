@@ -20,7 +20,7 @@ Public Class dlgCorrelation
     Private bReset As Boolean = True
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction,
         clsRGGscatMatrixFunction, clsCorrelationFunction, clsCurrentDataFrameFunction,
-        clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction As New RFunction
+        clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction, clsFashionFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
@@ -76,6 +76,14 @@ Public Class dlgCorrelation
         ucrNudConfidenceInterval.Increment = 0.05
         ucrNudConfidenceInterval.SetRDefault(0.95)
 
+        ucrNudDecimalPlaces.SetParameter(New RParameter("decimals", 1))
+        ucrNudDecimalPlaces.SetMinMax(0, 5)
+        ucrNudDecimalPlaces.Increment = 1
+        ucrNudDecimalPlaces.SetRDefault(2)
+
+        ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
+        ucrInputDiagonal.AddQuotesIfUnrecognised = False
+
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
         ucrPnlColumns.AddFunctionNamesCondition(rdoTwoColumns, "cor.test")
@@ -102,7 +110,11 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls({ucrReceiverMultipleColumns}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleColumns.SetLinkedDisplayControl(lblSelectedVariables)
         ucrNudConfidenceInterval.SetLinkedDisplayControl(lblConfInterval)
+        ucrInputDiagonal.SetLinkedDisplayControl(lblDisplayOnDiagonal)
+        ucrNudDecimalPlaces.SetLinkedDisplayControl(lblDecimalPlaces)
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
+        ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
 
         ucrSaveModel.SetPrefix("cor")
@@ -127,6 +139,7 @@ Public Class dlgCorrelation
         clsGuideLegendFunction = New RFunction
         clsDummyFunction = New RFunction
         clsCurrentDataFrameFunction = New RFunction
+        clsFashionFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
@@ -175,9 +188,14 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
 
-        clsCorrelationFunction.SetRCommand("cor")
+        clsCorrelationFunction.SetRCommand("correlate ")
+        clsCorrelationFunction.SetPackageName("corrr")
         clsCorrelationFunction.iCallType = 2
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
+
+        'clsFashionFunction.SetRCommand("fashion")
+        'clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+        'clsFashionFunction.AddParameter("decimals", "2", iPosition:=1)
 
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
@@ -200,9 +218,12 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
+        ucrInputDiagonal.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
+        'ucrNudDecimalPlaces.SetRCode(clsCorrelationFunction, bReset)
+        'ucrNudDecimalPlaces.AddAdditionalCodeParameterPair(clsFashionFunction, New RParameter("decimals", 1), iAdditionalPairNo:=1)
         If bReset Then
             ucrPnlColumns.SetRCode(clsCorrelationTestFunction, bReset)
         End If
