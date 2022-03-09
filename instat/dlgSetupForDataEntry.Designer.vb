@@ -94,7 +94,7 @@ Partial Class dlgSetupForDataEntry
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(262, 55)
+        Me.lblStation.Location = New System.Drawing.Point(262, 56)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 4
@@ -351,13 +351,12 @@ Partial Class dlgSetupForDataEntry
         'ucrInputSelectStation
         '
         Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectStation.AutoSize = True
         Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSelectStation.GetSetSelectedIndex = -1
         Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(261, 112)
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(261, 111)
         Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
-        Me.ucrInputSelectStation.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputSelectStation.TabIndex = 5
         '
         'ucrReceiverStation
