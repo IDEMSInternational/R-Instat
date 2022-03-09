@@ -22,18 +22,16 @@ Imports unvell.ReoGrid.Events
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
-    Dim strEmpty As String = " "
-    Dim strNewText As String = Nothing
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
+    Private strSelectedDataFrame As String = ""
+    Private strEmpty As String = " "
     Private clsDefaultRFunction As New RFunction
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsDummyRenameWithFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
-    Private bIncludeCopyOfLevels As Boolean
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
@@ -551,7 +549,7 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
