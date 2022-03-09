@@ -1028,36 +1028,32 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
 )
 
 DataSheet$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  if(missing(property)) stop("property must be specified.")
-  if(!is.character(property)) stop("property must be a character")
-  if(!missing(col_names)) {
-    #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    for(curr_col in col_names) {
-       if(property == "labels" && new_val == "" ){
-          attr(private$data[[curr_col]], property) <- NULL
-       }
-       else{
-          attr(private$data[[curr_col]], property) <- new_val
-       }
-       self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  if (missing(property)) stop("property must be specified.")
+  if (!is.character(property)) stop("property must be a character")
+  if (!missing(col_names)) {
+    # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for (curr_col in col_names) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[curr_col]], property) <- NULL
+      } else {
+        attr(private$data[[curr_col]], property) <- new_val
+      }
     }
-  }
-  else {
-    for(col_name in self$get_column_names()) {
-       if(property == "labels" && new_val == "" ){
-         attr(private$data[[col_name]], property) <- NULL
-       }
-       else{
-         attr(private$data[[col_name]], property) <- new_val
-       }
+    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  } else {
+    for (col_name in self$get_column_names()) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[col_name]], property) <- NULL
+      } else {
+        attr(private$data[[col_name]], property) <- new_val
+      }
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
-}
-)
+})
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
@@ -1362,12 +1358,9 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        if (is.factor(curr_col)) {
-          new_col <- as.numeric(levels(curr_col))[curr_col]
-          self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = "")
-          tmp_attr[[labels_label]] <- NULL
-        }else {new_col <- as.numeric(curr_col)
-      }}
+        if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
+          else new_col <- as.numeric(curr_col)
+      }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
           #TODO WARNING: need to test this on columns of different types to check for strange behaviour
