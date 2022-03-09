@@ -310,7 +310,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(7, 466)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(401, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 22
         '
         'ucrPnlOptions
@@ -405,7 +405,7 @@ Partial Class dlgClimaticDataEntry
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Daily Data Entry"
+        Me.Text = "Daily Data Editing/Entry"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
