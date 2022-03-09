@@ -1397,7 +1397,7 @@ DataBook$set("public","set_contrasts_of_factor", function(data_name, col_name, n
 }
 )
 
-DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = TRUE, replace = FALSE) {
+DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = FALSE, replace = FALSE, summary_count = TRUE) {
   curr_data_obj <- self$get_data_objects(data_name)
   if(!factor %in% names(curr_data_obj$get_data_frame())) stop(factor, " not found in the data")
   if(!is.factor(curr_data_obj$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
@@ -1410,7 +1410,7 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
       # TODO what if there is more than 1?
-      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
+      if(length(curr_factor_df_name) > 0) self$delete_dataframes(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
@@ -1426,11 +1426,12 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     factor_column <- curr_data_obj$get_columns_from_data(factor)
     factor_data_frame <- data.frame(levels(factor_column))
     names(factor_data_frame) <- factor
-    if(include_contrasts) {
-      factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
-    }
+    if(include_contrasts) factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
+    if(summary_count) factor_data_frame <- cbind(factor_data_frame, summary(factor_column))
+
     row.names(factor_data_frame) <- 1:nrow(factor_data_frame)
     names(factor_data_frame)[2:ncol(factor_data_frame)] <- paste0("C", 1:(ncol(factor_data_frame)-1))
+    if(summary_count) colnames(factor_data_frame)[ncol(factor_data_frame)] <- "Frequencies"
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
