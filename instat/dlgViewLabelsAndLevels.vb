@@ -100,9 +100,8 @@ Public Class dlgViewFactorLabels
         ucrPnlOptions.AddToLinkedControls(ucrChkShowValues, {rdoViewLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverVariables, {rdoViewLabels, rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlSelectData, {rdoDeleteValueLabels}, bNewLinkedHideIfParameterMissing:=True)
-        lstOfControls.AddRange({grpDisplayOptions, grpLabels, grpSummaryStatistics})
+        lstOfControls.AddRange({grpDisplayOptions, grpLabels, grpSummaryStatistics, lblFactorColumns})
         ucrChkShowValues.SetLinkedDisplayControl(lstOfControls)
-        ucrReceiverVariables.SetLinkedDisplayControl(lblFactorColumns)
     End Sub
 
     Private Sub SetDefaults()
@@ -183,14 +182,12 @@ Public Class dlgViewFactorLabels
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverVariables.ControlValueChanged
         SetReceiverVariableVisible()
         If rdoViewLabels.Checked Then
-            lblFactorColumns.Location = New System.Drawing.Point(lblFactorColumns.Location.X, lblFactorColumns.Location.Y)
-            ucrReceiverVariables.Location = New System.Drawing.Point(ucrReceiverVariables.Location.X, ucrReceiverVariables.Location.Y)
+            ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
         Else
-            lblFactorColumns.Location = New System.Drawing.Point(300, 114)
-            ucrReceiverVariables.Location = New System.Drawing.Point(300, 131)
+            ucrReceiverVariables.Location = New System.Drawing.Point(302, 109)
             ucrReceiverVariables.bWithQuotes = True
             strCurrDataFrame = ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame
             clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), iPosition:=0)
@@ -205,7 +202,7 @@ Public Class dlgViewFactorLabels
         End If
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
