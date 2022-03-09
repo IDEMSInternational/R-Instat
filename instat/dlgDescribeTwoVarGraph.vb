@@ -133,8 +133,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByCategorical.SetDropDownStyleAsNonEditable()
 
         ucrChkAddLabelsText.SetText("Add Labels")
-        ucrChkAddLabelsText.AddParameterPresentCondition(True, "geom_text")
-        ucrChkAddLabelsText.AddParameterPresentCondition(False, "geom_text", False)
+        ucrChkAddLabelsText.AddParameterPresentCondition(True, "text")
+        ucrChkAddLabelsText.AddParameterPresentCondition(False, "text", False)
         ucrChkAddLabelsText.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
@@ -522,6 +522,7 @@ Public Class dlgDescribeTwoVarGraph
         bRCodeSet = True
         Results()
         SetFreeYAxis()
+        EnableVisibleLabelControls()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -782,11 +783,16 @@ Public Class dlgDescribeTwoVarGraph
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
     End Sub
 
+    Private Sub AddRemoveAesParameter()
+        clsLabelAesFunction.AddParameter("label", ucrReceiverFirstVars.GetVariableNames(False), iPosition:=0)
+    End Sub
+
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         Results()
         EnableVisibleLabelControls()
+        AddRemoveAesParameter()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged
@@ -796,6 +802,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrInputCategoricalByCategorical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumericByCategorical.ControlValueChanged, ucrInputCategoricalByNumeric.ControlValueChanged, ucrInputCategoricalByCategorical.ControlValueChanged
         Results()
         EnableVisibleLabelControls()
+        AddRemoveAesParameter()
     End Sub
 
     Private Sub RemoveAllGeomsStats()
@@ -983,10 +990,10 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
-        If ucrChkAddLabelsText.Checked AndAlso ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso rdoBy.Checked Then
-            clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=3)
+        If ucrChkAddLabelsText.Checked AndAlso ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso rdoBy.Checked AndAlso bRCodeSet Then
+            clsBaseOperator.AddParameter("text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=3)
         Else
-            clsBaseOperator.RemoveParameterByName("geom_text")
+            clsBaseOperator.RemoveParameterByName("text")
         End If
     End Sub
 
