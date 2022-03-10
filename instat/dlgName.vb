@@ -367,8 +367,7 @@ Public Class dlgName
             clsDefaultRFunction.RemoveParameterByPosition(5)
             RemoveLabelsParams()
         ElseIf rdoRenameWith.Checked Then
-            clsDefaultRFunction.RemoveParameterByName("case")
-            clsDefaultRFunction.RemoveParameterByName("minlength")
+            clsDefaultRFunction.RemoveParameterByPosition(7)
             If rdoToLower.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
                 clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)

@@ -784,20 +784,20 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-    if(.fn == "abbreviate"){
+    if(deparse(substitute(.fn)) == "abbreviate"){
       private$data <- curr_data |>
-        dplyr::rename_with(
-           .fn = .fn,
-           .cols = {{ .cols }},
-           minlength = minlength, ...
-        )
+      dplyr::rename_with(
+         .fn = .fn,
+         .cols = {{ .cols }},
+         minlength = minlength, ...
+      )
     }
     else{
       private$data <- curr_data |>
-        dplyr::rename_with(
-           .fn = .fn,
-           .cols = {{ .cols }}, ...
-        )
+      dplyr::rename_with(
+         .fn = .fn,
+         .cols = {{ .cols }}, ...
+      )
     }
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
