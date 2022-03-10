@@ -20,9 +20,9 @@ Public Class dlgDescribeTwoVariable
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public strFirstVariablesType, strSecondVariableType As String
-    Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary, clsConcFunction, clsRAnova, clsRFreqTables As New RFunction
+    Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary,
+        clsConcFunction, clsRAnova, clsRFreqTables, clsSkimrFunction As New RFunction
     Private clsSummariesList As New RFunction
-    Public bCustomizeIsDefault As Boolean
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,18 +33,9 @@ Public Class dlgDescribeTwoVariable
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        SetDefaultRdo()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetDefaultRdo()
-        If bCustomizeIsDefault Then
-            rdoCustomize.Checked = True
-        Else
-            rdoSkim.Checked = True
-        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -64,10 +55,11 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondVar.SetLinkedDisplayControl(lbSecondVariable)
 
-        ucrReceiverSecondOpt.SetParameter(New RParameter("factors", 2))
+        ucrReceiverSecondOpt.SetParameter(New RParameter("factors", 2, bNewIncludeArgumentName:=False))
         ucrReceiverSecondOpt.SetParameterIsString()
         ucrReceiverSecondOpt.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondOpt.SetLinkedDisplayControl(lbSecondOpt)
+        ucrReceiverSecondOpt.SetDataType("factor")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -76,6 +68,8 @@ Public Class dlgDescribeTwoVariable
 
         ucrPnlDescribe.AddRadioButton(rdoCustomize)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
+        ucrPnlDescribe.AddFunctionNamesCondition(rdoCustomize, frmMain.clsRLink.strInstatDataObject & "$summary")
+        ucrPnlDescribe.AddFunctionNamesCondition(rdoSkim, "skim")
 
         ucrPnlDescribe.AddToLinkedControls(ucrReceiverSecondOpt, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing, ucrChkSummary, ucrChkSum}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -97,9 +91,13 @@ Public Class dlgDescribeTwoVariable
         clsSummariesList = New RFunction
         clsRCustomSummary = New RFunction
         clsConcFunction = New RFunction
+        clsSkimrFunction = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
+
+        clsSkimrFunction.SetPackageName("skimr")
+        clsSkimrFunction.SetRCommand("skim")
 
         clsConcFunction.SetRCommand("c")
 
@@ -132,7 +130,7 @@ Public Class dlgDescribeTwoVariable
 
         clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
         bResetSubdialog = True
     End Sub
 
@@ -144,6 +142,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("x_col_names", 1), iAdditionalPairNo:=2)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelation, New RParameter("x_col_names", 1), iAdditionalPairNo:=3)
+        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsSkimrFunction, New RParameter("col_names", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnova, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummary, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
@@ -153,6 +152,8 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.SetRCode(clsRCustomSummary, bReset)
         ucrReceiverSecondVar.SetRCode(clsRCustomSummary, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelation, bReset)
+        ucrReceiverSecondOpt.SetRCode(clsSkimrFunction, bReset)
+        ucrPnlDescribe.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         Results()
     End Sub
@@ -169,7 +170,12 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(False)
+            If ucrReceiverFirstVars.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+
         End If
     End Sub
 
@@ -277,5 +283,21 @@ Public Class dlgDescribeTwoVariable
         Else
             clsRCorrelation.RemoveParameterByName("use")
         End If
+    End Sub
+
+    Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
+        ucrReceiverFirstVars.Clear()
+        ucrReceiverFirstVars.SetMeAsReceiver()
+        If rdoSkim.Checked Then
+            ucrReceiverFirstVars.SetSingleTypeStatus(False)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
+            ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
+        clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 End Class
