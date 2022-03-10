@@ -26,16 +26,27 @@ Public Class ucrDataViewReoGrid
 
     Public Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String) Implements IDataViewGrid.ReplaceValueInData
 
+    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
+
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
+        Dim variableTextColour As Color
+
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
+
+        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            variableTextColour = Color.Red
+        Else
+            variableTextColour = Color.DarkBlue
+        End If
         For i = 0 To visiblePage.lstColumns.Count - 1
             workSheetColumnHeader = grdData.CurrentWorksheet.ColumnHeaders(i)
             workSheetColumnHeader.Text = visiblePage.lstColumns(i).strDisplayName
-            workSheetColumnHeader.TextColor = visiblePage.lstColumns(i).clsColour
+            workSheetColumnHeader.TextColor = variableTextColour
             workSheetColumnHeader.Style.BackColor = visiblePage.lstColumns(i).clsBackGroundColour
         Next
     End Sub
@@ -51,7 +62,7 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.Rows = dataFrame.iDisplayedRowCount
         UpdateWorksheetSettings(grdData.CurrentWorksheet)
 
-        If dataFrame.clsFilter.bFilterApplied Then
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             textColour = Color.Red
         Else
             textColour = Color.DarkBlue
@@ -84,7 +95,7 @@ Public Class ucrDataViewReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellsKeyDown
         AddHandler worksheet.CellDataChanged, AddressOf Worksheet_CellDataChanged
     End Sub
 
@@ -149,4 +160,12 @@ Public Class ucrDataViewReoGrid
     Private Sub Worksheet_CellDataChanged(sender As Object, e As CellEventArgs)
         RaiseEvent CellDataChanged()
     End Sub
+
+    Private Sub Worksheet_BeforeCellsKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
+        e.IsCancelled = True
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            RaiseEvent DeleteValueToDataframe()
+        End If
+    End Sub
+
 End Class

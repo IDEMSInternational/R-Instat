@@ -312,6 +312,7 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
+
     ''' <summary>
     ''' Get the column type for a given column
     ''' </summary>
@@ -321,5 +322,20 @@ Public Class clsPrepareFunctionsForGrids
         Return _RLink.GetColumnType(_strDataFrame, strColumnName)
     End Function
 
+    ''' <summary>
+    '''  Description: To Delete one or many cells 
+    ''' the delete cell function is to be used to Replace selected values with NA 
+    ''' in the dataframe.
+    '''</summary>
+    ''' <param name="lstColumnNames"></param>
+    ''' <param name="lstRowNames"></param>
+    Public Sub DeleteCells(lstRowNames As List(Of String), lstColumnNames As List(Of String))
+        Dim clsDeleteCells As New RFunction
+        clsDeleteCells.SetRCommand(_RLink.strInstatDataObject & "$replace_values_with_NA")
+        clsDeleteCells.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsDeleteCells.AddParameter("column_index", _RLink.GetListAsRString(lstColumnNames, bWithQuotes:=False))
+        clsDeleteCells.AddParameter("row_index", _RLink.GetListAsRString(lstRowNames, bWithQuotes:=False))
+        _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Delete Cell(s)")
+    End Sub
 End Class
 
