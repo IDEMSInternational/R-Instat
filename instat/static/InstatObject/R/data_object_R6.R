@@ -726,7 +726,7 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 }
 )
 
-DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, minlength = 4, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (type == "single") {
@@ -784,11 +784,21 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-    private$data <- curr_data |>
-      dplyr::rename_with(
-        .fn = .fn,
-        .cols = {{ .cols }}, ...
-      )
+    if(.fn == "abbreviate"){
+      private$data <- curr_data |>
+        dplyr::rename_with(
+           .fn = .fn,
+           .cols = {{ .cols }},
+           minlength = minlength, ...
+        )
+    }
+    else{
+      private$data <- curr_data |>
+        dplyr::rename_with(
+           .fn = .fn,
+           .cols = {{ .cols }}, ...
+        )
+    }
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
       new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]

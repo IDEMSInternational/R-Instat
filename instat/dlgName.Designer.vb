@@ -50,6 +50,7 @@ Partial Class dlgName
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
+        Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
@@ -58,6 +59,7 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrNudAbbreviate = New instat.ucrNud()
         Me.ucrInputCase = New instat.ucrInputComboBox()
         Me.ucrPnlCase = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
@@ -138,7 +140,7 @@ Partial Class dlgName
         'rdoToLower
         '
         Me.rdoToLower.AutoSize = True
-        Me.rdoToLower.Location = New System.Drawing.Point(7, 43)
+        Me.rdoToLower.Location = New System.Drawing.Point(7, 41)
         Me.rdoToLower.Name = "rdoToLower"
         Me.rdoToLower.Size = New System.Drawing.Size(70, 17)
         Me.rdoToLower.TabIndex = 12
@@ -167,6 +169,8 @@ Partial Class dlgName
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrNudAbbreviate)
+        Me.grpOptions.Controls.Add(Me.rdoAbbreviate)
         Me.grpOptions.Controls.Add(Me.ucrInputCase)
         Me.grpOptions.Controls.Add(Me.lblCase)
         Me.grpOptions.Controls.Add(Me.rdoMakeCleanNames)
@@ -174,7 +178,7 @@ Partial Class dlgName
         Me.grpOptions.Controls.Add(Me.ucrPnlCase)
         Me.grpOptions.Location = New System.Drawing.Point(251, 206)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(269, 70)
+        Me.grpOptions.Size = New System.Drawing.Size(269, 88)
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Rename Options"
@@ -215,6 +219,17 @@ Partial Class dlgName
         Me.grdRenameColumns.Size = New System.Drawing.Size(349, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
+        '
+        'rdoAbbreviate
+        '
+        Me.rdoAbbreviate.AutoSize = True
+        Me.rdoAbbreviate.Location = New System.Drawing.Point(7, 65)
+        Me.rdoAbbreviate.Name = "rdoAbbreviate"
+        Me.rdoAbbreviate.Size = New System.Drawing.Size(76, 17)
+        Me.rdoAbbreviate.TabIndex = 22
+        Me.rdoAbbreviate.TabStop = True
+        Me.rdoAbbreviate.Text = "Abbreviate"
+        Me.rdoAbbreviate.UseVisualStyleBackColor = True
         '
         'ucrChkIncludeVariable
         '
@@ -289,7 +304,7 @@ Partial Class dlgName
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
@@ -301,6 +316,19 @@ Partial Class dlgName
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrNudAbbreviate
+        '
+        Me.ucrNudAbbreviate.AutoSize = True
+        Me.ucrNudAbbreviate.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAbbreviate.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAbbreviate.Location = New System.Drawing.Point(112, 61)
+        Me.ucrNudAbbreviate.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAbbreviate.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAbbreviate.Name = "ucrNudAbbreviate"
+        Me.ucrNudAbbreviate.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAbbreviate.TabIndex = 23
+        Me.ucrNudAbbreviate.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputCase
         '
@@ -318,7 +346,7 @@ Partial Class dlgName
         Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCase.Location = New System.Drawing.Point(4, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(259, 50)
+        Me.ucrPnlCase.Size = New System.Drawing.Size(259, 69)
         Me.ucrPnlCase.TabIndex = 17
         '
         'dlgName
@@ -326,7 +354,7 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 349)
+        Me.ClientSize = New System.Drawing.Size(545, 364)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)
@@ -379,4 +407,6 @@ Partial Class dlgName
     Friend WithEvents rdoRenameWith As RadioButton
     Friend WithEvents ucrChkIncludeVariable As ucrCheck
     Friend WithEvents grdRenameColumns As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents rdoAbbreviate As RadioButton
+    Friend WithEvents ucrNudAbbreviate As ucrNud
 End Class
