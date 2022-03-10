@@ -290,11 +290,11 @@ Public Class ucrDataView
         Else
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
         End If
-        lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
+        lblColDisplay.Text = "Showing columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
                               GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn & " of "
 
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
-            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
+            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                                 " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Active selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
             lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount
