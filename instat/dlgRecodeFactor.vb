@@ -156,8 +156,8 @@ Public Class dlgRecodeFactor
         clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
         clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
-        clsAddLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsAddLabelsFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+        'clsAddLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        'clsAddLabelsFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
 
         clsFctLumpMinFunction.SetPackageName("forcats")
         clsFctLumpMinFunction.SetRCommand("fct_lump_min")
@@ -188,10 +188,8 @@ Public Class dlgRecodeFactor
 
         clsReplaceFunction.SetRCommand("c")
 
-        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsPlyrRevalueFunction, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAddLabelsFunction, 2)
     End Sub
 
     Private Sub ucrSelectorForRecode_DataFrameChanged() Handles ucrSelectorForRecode.DataFrameChanged
@@ -199,8 +197,14 @@ Public Class dlgRecodeFactor
         clsAddLabelsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRecode.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
+    Private Sub ucrSaveNewColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewColumn.ControlValueChanged
+        If ucrSaveNewColumn.GetText <> "" Then
+            clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNewColumn.GetText & Chr(34), iPosition:=1)
+        End If
+    End Sub
+
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctOtherFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpPropFunction, New RParameter("f", 0), iAdditionalPairNo:=2)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLowFreqFunction, New RParameter("f", 0), iAdditionalPairNo:=3)
@@ -262,13 +266,10 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAddLabelsFunction, 2)
         If rdoRecode.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsPlyrRevalueFunction, 1)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
         ElseIf rdoAddNa.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsFctExplicitNaFunction, 1)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsFctExplicitNaFunction)
         ElseIf rdoOther.Checked OrElse rdoLump.Checked Then
             If ucrInputOther.IsEmpty OrElse ucrInputOther.GetText = "Other" Then
                 clsFctOtherFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)
@@ -293,20 +294,20 @@ Public Class dlgRecodeFactor
                     clsFctOtherFunction.AddParameter("drop", ucrFactorLevels.GetSelectedLevels(), iPosition:=1)
                     clsOtherDummyFunction.AddParameter("checked", "drop", iPosition:=0)
                 End If
-                ucrBase.clsRsyntax.AddToAfterCodes(clsFctOtherFunction, 1)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsFctOtherFunction)
             ElseIf rdoLump.Checked Then
                 If rdoFrequentValues.Checked Then
                     clsDummyFunction.AddParameter("checked", "prop", iPosition:=0)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsFctLumpPropFunction, 1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpPropFunction)
                 ElseIf rdoMore.Checked Then
                     clsDummyFunction.AddParameter("checked", "low", iPosition:=0)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsFctLowFreqFunction, 1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFctLowFreqFunction)
                 ElseIf rdoLevels.Checked Then
                     clsDummyFunction.AddParameter("checked", "levels", iPosition:=0)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsFctLumpMinFunction, 1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpMinFunction)
                 ElseIf rdoCommonValues.Checked Then
                     clsDummyFunction.AddParameter("checked", "lumpn", iPosition:=0)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsFctLumpNFunction, 1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFctLumpNFunction)
                 End If
             End If
         End If
@@ -316,8 +317,6 @@ Public Class dlgRecodeFactor
         If (Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty) Then
             ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
         End If
-        clsRemoveLabelsFunction.AddParameter("col_names", ucrReceiverFactor.GetVariableNames, iPosition:=1)
-        clsAddLabelsFunction.AddParameter("col_names", ucrReceiverFactor.GetVariableNames, iPosition:=1)
     End Sub
 
     Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrFactorLevels.ControlContentsChanged, ucrPnlKeep.ControlContentsChanged
