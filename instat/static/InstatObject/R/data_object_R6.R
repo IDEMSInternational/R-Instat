@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", column_selection_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -301,6 +301,10 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(column_selection_name != "") {
+      selected_columns <- self$get_column_selection_column_names(column_selection_name)
+      out <- out[ ,selected_columns, drop = FALSE]
     }
     #TODO: consider removing include_hidden_columns argument from this function
     if(use_column_selection && self$column_selection_applied()) {
@@ -1028,26 +1032,32 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
 )
 
 DataSheet$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  if(missing(property)) stop("property must be specified.")
-  if(!is.character(property)) stop("property must be a character")
-  if(!missing(col_names)) {
-    #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    for(curr_col in col_names) {
-      attr(private$data[[curr_col]], property) <- new_val
-      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  if (missing(property)) stop("property must be specified.")
+  if (!is.character(property)) stop("property must be a character")
+  if (!missing(col_names)) {
+    # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for (curr_col in col_names) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[curr_col]], property) <- NULL
+      } else {
+        attr(private$data[[curr_col]], property) <- new_val
+      }
     }
-  }
-  else {
-    for(col_name in self$get_column_names()) {
-      attr(private$data[[col_name]], property) <- new_val
+    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  } else {
+    for (col_name in self$get_column_names()) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[col_name]], property) <- NULL
+      } else {
+        attr(private$data[[col_name]], property) <- new_val
+      }
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
-}
-)
+})
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
