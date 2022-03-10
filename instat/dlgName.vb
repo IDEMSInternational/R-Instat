@@ -30,7 +30,6 @@ Public Class dlgName
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsDummyRenameWithFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
@@ -70,7 +69,7 @@ Public Class dlgName
 
         ucrChkIncludeVariable.SetText("Include Variable Labels")
         ucrChkIncludeVariable.SetParameter(New RParameter("checked", 0))
-        ucrChkIncludeVariable.SetValuesCheckedAndUnchecked(True, False)
+        ucrChkIncludeVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
@@ -79,19 +78,20 @@ Public Class dlgName
         ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
 
+        ucrNudAbbreviate.SetParameter(New RParameter("minlength"))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrPnlCase.SetParameter(New RParameter("checked", 0))
-        ucrPnlCase.AddRadioButton(rdoToLower, "lower")
-        ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "make_clean_names")
+        ucrPnlCase.SetParameter(New RParameter(".fn", 5))
+        ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
+        ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
@@ -104,7 +104,7 @@ Public Class dlgName
         ucrReceiverColumns.Selector = ucrSelectVariables
         ucrReceiverColumns.SetParameterIsString()
 
-        ucrInputCase.SetParameter(New RParameter("case", 1))
+        ucrInputCase.SetParameter(New RParameter("case", 7))
         dctCaseOptions.Add("Snake", Chr(34) & "snake" & Chr(34))
         dctCaseOptions.Add("Small camel", Chr(34) & "small_camel" & Chr(34))
         dctCaseOptions.Add("Big camel", Chr(34) & "big_camel" & Chr(34))
@@ -132,18 +132,12 @@ Public Class dlgName
         clsNewColNameDataframeFunction = New RFunction
         clsNewLabelDataframeFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsDummyRenameWithFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
 
         ucrNudAbbreviate.SetText(4)
-
-        clsDummyFunction.AddParameter("checked", False, iPosition:=0)
-
-        clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
-        clsDummyRenameWithFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=1)
 
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
@@ -152,19 +146,22 @@ Public Class dlgName
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
         clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
+        clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
+        clsDefaultRFunction.AddParameter("minlength", "8")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
         ucrSelectVariables.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlCase.SetRCode(clsDummyRenameWithFunction, bReset)
-        ucrInputCase.SetRCode(clsDummyRenameWithFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
+        ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
+        ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
     End Sub
 
@@ -191,6 +188,7 @@ Public Class dlgName
     End Sub
 
     Private Sub AddChangedNewLabelRows(iRow As Integer, strNewData As String)
+        'TODO this need to be implemented in the appropriare ucrControl
         If Not dctRowsNewLabelChanged.ContainsKey(iRow) Then
             dctRowsNewLabelChanged.Add(iRow, strNewData)
         Else
@@ -199,12 +197,14 @@ Public Class dlgName
     End Sub
 
     Private Sub AddRowNameValue(iRow As Integer, strNewData As String)
+        'TODO this need to be implemented in the appropriare ucrControl
         If Not dctNameRowsValues.ContainsKey(iRow) Then
             dctNameRowsValues.Add(iRow, strNewData)
         End If
     End Sub
 
     Private Function GetValuesAsVector(dctValues As Dictionary(Of Integer, String)) As String
+        'TODO this need to be implemented in the appropriare ucrControl
         Dim strValue As String = ""
         Dim i As Integer
         strValue = strValue & "c("
@@ -220,6 +220,7 @@ Public Class dlgName
     End Function
 
     Private Sub ValidateNamesFromDictionary(iColIndex As Integer)
+        'TODO this need to be implemented in the appropriare ucrControl
         If iColIndex = 1 Then
             For Each value In dctRowsNewNameChanged.Values
                 If Not CheckNames(value, iColIndex) Then
@@ -235,6 +236,7 @@ Public Class dlgName
     End Sub
 
     Private Function ValidateRVariable(strText As String, iCol As Integer) As String
+        'TODO this need to be implemented in the appropriare ucrControl
         Dim strNewDataText As String = strText
         If iCol = 1 Then
             For Each chrCurr In strNewDataText
@@ -357,29 +359,14 @@ Public Class dlgName
     End Sub
 
     Private Sub RemoveLabelsParams()
-        clsDefaultRFunction.RemoveParameterByPosition(8)
-        clsDefaultRFunction.RemoveParameterByPosition(9)
+        clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
+        clsDefaultRFunction.RemoveParameterByName("new_labels_df")
     End Sub
 
     Private Sub RemoveParameters()
         If rdoMultiple.Checked OrElse rdoSingle.Checked Then
             clsDefaultRFunction.RemoveParameterByPosition(5)
             RemoveLabelsParams()
-        ElseIf rdoRenameWith.Checked Then
-            clsDefaultRFunction.RemoveParameterByPosition(7)
-            clsDefaultRFunction.RemoveParameterByName("minlength")
-            If rdoToLower.Checked Then
-                clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
-                clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)
-            ElseIf rdoMakeCleanNames.Checked Then
-                clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
-                clsDefaultRFunction.AddParameter("case", dctCaseOptions(ucrInputCase.GetText()), iPosition:=7)
-                clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
-            Else
-                clsDefaultRFunction.AddParameter(".fn", "abbreviate", iPosition:=5)
-                clsDefaultRFunction.AddParameter("minlength", ucrNudAbbreviate.GetText())
-                clsDummyRenameWithFunction.AddParameter("checked", "abbreviate", iPosition:=0)
-            End If
         End If
     End Sub
 
