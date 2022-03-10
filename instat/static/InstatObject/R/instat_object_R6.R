@@ -1401,7 +1401,6 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
   curr_data_obj <- self$get_data_objects(data_name)
   if(!factor %in% names(curr_data_obj$get_data_frame())) stop(factor, " not found in the data")
   if(!is.factor(curr_data_obj$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
-  create <- TRUE
   if(self$link_exists_from(data_name, factor)) {
     message("Factor data frame already exists.")
     if(replace) {
@@ -1414,10 +1413,9 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     }
     else {
       warning("replace = FALSE so no action will be taken.")
-      create <- FALSE
     }
   }
-  if(create) {
+
     data_frame_list <- list()
     if(missing(factor_data_frame_name)) factor_data_frame_name <- paste0(data_name, "_", factor)
     factor_data_frame_name <- make.names(factor_data_frame_name)
@@ -1440,7 +1438,6 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
   }
-}
 )
 
 DataBook$set("public","split_date", function(data_name, col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {

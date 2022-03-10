@@ -88,7 +88,7 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty Then
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty AndAlso (ucrChkAddCurrentContrasts.Checked OrElse ucrChkFrequencies.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -107,7 +107,8 @@ Public Class dlgFactorDataFrame
         End If
     End Sub
 
-    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
+    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged,
+        ucrSelectorFactorDataFrame.ControlContentsChanged, ucrChkFrequencies.ControlContentsChanged, ucrChkAddCurrentContrasts.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
