@@ -136,7 +136,6 @@ Public Class dlgRecodeFactor
         clsDummyFunction = New RFunction
         clsOtherDummyFunction = New RFunction
         clsRemoveLabelsFunction = New RFunction
-        clsAddLabelsFunction = New RFunction
 
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
@@ -155,9 +154,6 @@ Public Class dlgRecodeFactor
         clsRemoveLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
         clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
-
-        'clsAddLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        'clsAddLabelsFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
 
         clsFctLumpMinFunction.SetPackageName("forcats")
         clsFctLumpMinFunction.SetRCommand("fct_lump_min")
@@ -194,11 +190,10 @@ Public Class dlgRecodeFactor
 
     Private Sub ucrSelectorForRecode_DataFrameChanged() Handles ucrSelectorForRecode.DataFrameChanged
         clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRecode.strCurrentDataFrame & Chr(34), iPosition:=0)
-        clsAddLabelsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRecode.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub ucrSaveNewColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewColumn.ControlValueChanged
-        If ucrSaveNewColumn.GetText <> "" Then
+        If ucrSaveNewColumn.GetText <> "" AndAlso ucrSaveNewColumn.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNewColumn.GetText & Chr(34), iPosition:=1)
         End If
     End Sub
