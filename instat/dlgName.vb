@@ -77,28 +77,15 @@ Public Class dlgName
         ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
+        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
 
-        ucrNudAbbreviate.SetParameter(New RParameter("minlength"))
+        ucrNudAbbreviate.SetParameter(New RParameter("minlength", 10))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
         ucrPnlCase.SetParameter(New RParameter(".fn", 5))
         ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
-
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
-        ucrInputNewName.SetLinkedDisplayControl(lblName)
-        ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
-        ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
-        ucrInputCase.SetLinkedDisplayControl(lblCase)
-        ucrPnlCase.SetLinkedDisplayControl(grpOptions)
-        ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -125,6 +112,20 @@ Public Class dlgName
         dctCaseOptions.Add("Title", Chr(34) & "title" & Chr(34))
         ucrInputCase.SetDropDownStyleAsNonEditable()
         ucrInputCase.SetItems(dctCaseOptions)
+
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
+        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
+        ucrInputNewName.SetLinkedDisplayControl(lblName)
+        ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
+        ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
+        ucrInputCase.SetLinkedDisplayControl(lblCase)
+        ucrPnlCase.SetLinkedDisplayControl(grpOptions)
+        ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
     End Sub
 
     Private Sub SetDefaults()
@@ -147,14 +148,12 @@ Public Class dlgName
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
         clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
         clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
-        clsDefaultRFunction.AddParameter("minlength", "8")
+        clsDefaultRFunction.AddParameter("minlength", "8", iPosition:=10)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
         ucrSelectVariables.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
@@ -162,6 +161,8 @@ Public Class dlgName
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
     End Sub
 
