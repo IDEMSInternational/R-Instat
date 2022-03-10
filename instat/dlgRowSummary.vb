@@ -20,7 +20,6 @@ Public Class dlgRowSummary
     Private bReset As Boolean = True
     Private clsApplyFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsOtherDummyFunction As New RFunction
     Private clsGetColumnsFunction As RFunction
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,7 +36,6 @@ Public Class dlgRowSummary
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
-        cmdMissingOptions.Enabled = False
 
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
@@ -51,13 +49,6 @@ Public Class dlgRowSummary
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
         ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
 
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
-        ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissing.SetRDefault("FALSE")
-        ucrChkOmitMissing.AddParameterPresentCondition(True, "na_type")
-        ucrChkOmitMissing.AddParameterPresentCondition(False, "na_type", False)
-
         'linking controls
         ucrPnlRowSummaries.AddRadioButton(rdoSingle)
         ucrPnlRowSummaries.AddRadioButton(rdoMultiple)
@@ -67,19 +58,33 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlStatistics.SetParameter(New RParameter("checked", 0))
-        ucrPnlStatistics.AddRadioButton(rdoMean, "mean")
-        ucrPnlStatistics.AddRadioButton(rdoMinimum, "min")
-        ucrPnlStatistics.AddRadioButton(rdoSum, "sum")
-        ucrPnlStatistics.AddRadioButton(rdoMedian, "median")
-        ucrPnlStatistics.AddRadioButton(rdoNumberMissing, "number missing")
-        ucrPnlStatistics.AddRadioButton(rdoStandardDeviation, "sd")
-        ucrPnlStatistics.AddRadioButton(rdoMaximum, "max")
-        ucrPnlStatistics.AddRadioButton(rdoCount, "count")
-        ucrPnlStatistics.AddRadioButton(rdoMore, "user_defined")
+        'ucrPnlStatistics.SetParameter(New RParameter("FUN", 2))
+        ucrPnlStatistics.AddRadioButton(rdoMean)
+        ucrPnlStatistics.AddRadioButton(rdoMinimum)
+        ucrPnlStatistics.AddRadioButton(rdoSum)
+        ucrPnlStatistics.AddRadioButton(rdoMedian)
+        ucrPnlStatistics.AddRadioButton(rdoNumberMissing)
+        ucrPnlStatistics.AddRadioButton(rdoStandardDeviation)
+        ucrPnlStatistics.AddRadioButton(rdoMaximum)
+        ucrPnlStatistics.AddRadioButton(rdoCount)
+        ucrPnlStatistics.AddRadioButton(rdoMore)
+
+        ucrPnlStatistics.AddParameterValuesCondition(rdoMean, "checked", "mean")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoMinimum, "checked", "min")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoSum, "checked", "sum")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoMedian, "checked", "median")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoNumberMissing, "checked", "number missing")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoStandardDeviation, "checked", "sd")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoMaximum, "checked", "max")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoCount, "checked", "count")
+        ucrPnlStatistics.AddParameterValuesCondition(rdoMore, "checked", "user_defined")
 
         'ucrInputUserDefined
-        ucrInputUserDefined.SetItems({"sum", "mean", "median", "sd", "min", "max", "count"})
+        ucrInputUserDefined.SetParameter(New RParameter("user_defined", 1))
+        ucrInputUserDefined.SetItems({"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean, trim=0.2",
+                                     "mfv", "mfv1", "quantile, probs=0.5", "skewness"}, bAddConditions:=True)
+        ucrInputUserDefined.AddQuotesIfUnrecognised = False
+        ucrInputUserDefined.bAllowNonConditionValues = True
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
@@ -92,15 +97,14 @@ Public Class dlgRowSummary
     Private Sub SetDefaults()
         clsApplyFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsOtherDummyFunction = New RFunction
         clsGetColumnsFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
         ucrSaveResults.Reset()
-        ucrInputUserDefined.cboInput.SelectedIndex = 1
 
-        clsOtherDummyFunction.AddParameter("checked", "mean", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "mean", iPosition:=0)
+        clsDummyFunction.AddParameter("user_defined", "anyDuplicated", iPosition:=1)
 
         'Defining the default RFunction
         clsApplyFunction.SetPackageName("base")
@@ -113,9 +117,10 @@ Public Class dlgRowSummary
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
-        ucrPnlStatistics.SetRCode(clsOtherDummyFunction, bReset)
+        ucrPnlRowSummaries.SetRCode(clsApplyFunction, bReset)
+        ucrPnlStatistics.SetRCode(clsDummyFunction, bReset)
         ucrSaveResults.SetRCode(clsApplyFunction, bReset)
-
+        ucrInputUserDefined.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -155,31 +160,67 @@ Public Class dlgRowSummary
             clsApplyFunction.RemoveParameterByName("na.rm")
         End If
         If rdoMore.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "user_defined", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", ucrInputUserDefined.GetText, iPosition:=2)
-        ElseIf rdoMean.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "mean", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "mean", iPosition:=2)
-        ElseIf rdoMaximum.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "max", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "max", iPosition:=2)
-        ElseIf rdoMinimum.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "min", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "min", iPosition:=2)
-        ElseIf rdoStandardDeviation.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "sd", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "sd", iPosition:=2)
-        ElseIf rdoSum.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "sum", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "sum", iPosition:=2)
-        ElseIf rdoMedian.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "median", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "median", iPosition:=2)
-        ElseIf rdoCount.Checked Then
-            clsOtherDummyFunction.AddParameter("checked", "count", iPosition:=0)
-            clsApplyFunction.AddParameter("FUN", "function(z) sum(!is.na(z))", iPosition:=2)
+            clsDummyFunction.AddParameter("checked", "user_defined", iPosition:=0)
+            Select Case ucrInputUserDefined.GetText
+                Case "anyNA"
+                    clsApplyFunction.AddParameter("FUN", "anyNA", iPosition:=2)
+                Case "anyDuplicated"
+                    clsApplyFunction.AddParameter("FUN", "anyDuplicated", iPosition:=2)
+                Case "cv"
+                    clsApplyFunction.AddParameter("FUN", "raster::cv", iPosition:=2)
+                Case "Gmean"
+                    clsApplyFunction.AddParameter("FUN", "DescTools::Gmean", iPosition:=2)
+                Case "Hmean"
+                    clsApplyFunction.AddParameter("FUN", "DescTools::Hmean", iPosition:=2)
+                Case "IQR"
+                    clsApplyFunction.AddParameter("FUN", "IQR", iPosition:=2)
+                Case "kurtosis"
+                    clsApplyFunction.AddParameter("FUN", "e1071::kurtosis", iPosition:=2)
+                Case "mad"
+                    clsApplyFunction.AddParameter("FUN", "mad", iPosition:=2)
+                Case "mc"
+                    clsApplyFunction.AddParameter("FUN", "robustbase::mc", iPosition:=2)
+                Case "mean, trim=0.2"
+                    clsApplyFunction.AddParameter("FUN", "mean, trim=0.2", iPosition:=2)
+                Case "mfv"
+                    clsApplyFunction.AddParameter("FUN", "statip::mfv", iPosition:=2)
+                Case "mfv1"
+                    clsApplyFunction.AddParameter("FUN", "statip::mfv1", iPosition:=2)
+                Case "quantile, probs=0.5"
+                    clsApplyFunction.AddParameter("FUN", "quantile, probs=0.5", iPosition:=2)
+                Case "skewness"
+                    clsApplyFunction.AddParameter("FUN", "e1071::skewness", iPosition:=2)
+                Case Else
+                    clsApplyFunction.AddParameter("FUN", ucrInputUserDefined.GetText, iPosition:=2)
+            End Select
         Else
-            clsApplyFunction.RemoveParameterByName("FUN")
+            If rdoMean.Checked Then
+                clsDummyFunction.AddParameter("checked", "mean", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "mean", iPosition:=2)
+            ElseIf rdoMaximum.Checked Then
+                clsDummyFunction.AddParameter("checked", "max", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "max", iPosition:=2)
+            ElseIf rdoMinimum.Checked Then
+                clsDummyFunction.AddParameter("checked", "min", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "min", iPosition:=2)
+            ElseIf rdoStandardDeviation.Checked Then
+                clsDummyFunction.AddParameter("checked", "sd", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "sd", iPosition:=2)
+            ElseIf rdoSum.Checked Then
+                clsDummyFunction.AddParameter("checked", "sum", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "sum", iPosition:=2)
+            ElseIf rdoMedian.Checked Then
+                clsDummyFunction.AddParameter("checked", "median", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "median", iPosition:=2)
+            ElseIf rdoCount.Checked Then
+                clsDummyFunction.AddParameter("checked", "count", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "function(z) sum(!is.na(z))", iPosition:=2)
+            ElseIf rdoNumberMissing.Checked Then
+                clsDummyFunction.AddParameter("checked", "number missing", iPosition:=0)
+                clsApplyFunction.AddParameter("FUN", "function(z) sum(is.na(z))", iPosition:=2)
+            Else
+                clsApplyFunction.RemoveParameterByName("FUN")
+            End If
         End If
     End Sub
 End Class

@@ -60,8 +60,6 @@ Partial Class dlgRowSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveResults = New instat.ucrSave()
         Me.ucrPnlRowSummaries = New instat.UcrPanel()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
-        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -89,7 +87,7 @@ Partial Class dlgRowSummary
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
         Me.grpStatistic.Controls.Add(Me.ucrPnlStatistics)
-        Me.grpStatistic.Location = New System.Drawing.Point(10, 256)
+        Me.grpStatistic.Location = New System.Drawing.Point(10, 238)
         Me.grpStatistic.Name = "grpStatistic"
         Me.grpStatistic.Size = New System.Drawing.Size(454, 71)
         Me.grpStatistic.TabIndex = 8
@@ -103,7 +101,7 @@ Partial Class dlgRowSummary
         Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputUserDefined.GetSetSelectedIndex = -1
         Me.ucrInputUserDefined.IsReadOnly = False
-        Me.ucrInputUserDefined.Location = New System.Drawing.Point(317, 39)
+        Me.ucrInputUserDefined.Location = New System.Drawing.Point(317, 41)
         Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
         Me.ucrInputUserDefined.Size = New System.Drawing.Size(125, 25)
         Me.ucrInputUserDefined.TabIndex = 10
@@ -112,7 +110,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMore.AutoSize = True
         Me.rdoMore.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMore.Location = New System.Drawing.Point(262, 43)
+        Me.rdoMore.Location = New System.Drawing.Point(262, 45)
         Me.rdoMore.Name = "rdoMore"
         Me.rdoMore.Size = New System.Drawing.Size(49, 17)
         Me.rdoMore.TabIndex = 9
@@ -125,7 +123,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMinimum.AutoSize = True
         Me.rdoMinimum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMinimum.Location = New System.Drawing.Point(262, 19)
+        Me.rdoMinimum.Location = New System.Drawing.Point(262, 21)
         Me.rdoMinimum.Name = "rdoMinimum"
         Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
         Me.rdoMinimum.TabIndex = 7
@@ -138,7 +136,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMaximum.AutoSize = True
         Me.rdoMaximum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMaximum.Location = New System.Drawing.Point(351, 20)
+        Me.rdoMaximum.Location = New System.Drawing.Point(351, 22)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
         Me.rdoMaximum.TabIndex = 8
@@ -151,7 +149,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoCount.AutoSize = True
         Me.rdoCount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCount.Location = New System.Drawing.Point(73, 42)
+        Me.rdoCount.Location = New System.Drawing.Point(73, 44)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 4
@@ -164,7 +162,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMean.AutoSize = True
         Me.rdoMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
+        Me.rdoMean.Location = New System.Drawing.Point(6, 21)
         Me.rdoMean.Name = "rdoMean"
         Me.rdoMean.Size = New System.Drawing.Size(52, 17)
         Me.rdoMean.TabIndex = 1
@@ -177,7 +175,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoStandardDeviation.AutoSize = True
         Me.rdoStandardDeviation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(138, 20)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(138, 22)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
         Me.rdoStandardDeviation.TabIndex = 5
@@ -190,7 +188,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoNumberMissing.AutoSize = True
         Me.rdoNumberMissing.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNumberMissing.Location = New System.Drawing.Point(139, 41)
+        Me.rdoNumberMissing.Location = New System.Drawing.Point(139, 43)
         Me.rdoNumberMissing.Name = "rdoNumberMissing"
         Me.rdoNumberMissing.Size = New System.Drawing.Size(100, 17)
         Me.rdoNumberMissing.TabIndex = 6
@@ -203,7 +201,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoMedian.AutoSize = True
         Me.rdoMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMedian.Location = New System.Drawing.Point(6, 41)
+        Me.rdoMedian.Location = New System.Drawing.Point(6, 43)
         Me.rdoMedian.Name = "rdoMedian"
         Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
         Me.rdoMedian.TabIndex = 2
@@ -216,7 +214,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoSum.AutoSize = True
         Me.rdoSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSum.Location = New System.Drawing.Point(72, 19)
+        Me.rdoSum.Location = New System.Drawing.Point(72, 21)
         Me.rdoSum.Name = "rdoSum"
         Me.rdoSum.Size = New System.Drawing.Size(46, 17)
         Me.rdoSum.TabIndex = 3
@@ -228,7 +226,7 @@ Partial Class dlgRowSummary
         'ucrPnlStatistics
         '
         Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 12)
+        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
         Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
         Me.ucrPnlStatistics.Size = New System.Drawing.Size(444, 52)
         Me.ucrPnlStatistics.TabIndex = 0
@@ -319,7 +317,7 @@ Partial Class dlgRowSummary
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 10
@@ -327,7 +325,7 @@ Partial Class dlgRowSummary
         'ucrSaveResults
         '
         Me.ucrSaveResults.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResults.Location = New System.Drawing.Point(13, 334)
+        Me.ucrSaveResults.Location = New System.Drawing.Point(13, 317)
         Me.ucrSaveResults.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResults.Name = "ucrSaveResults"
         Me.ucrSaveResults.Size = New System.Drawing.Size(269, 22)
@@ -341,34 +339,12 @@ Partial Class dlgRowSummary
         Me.ucrPnlRowSummaries.Size = New System.Drawing.Size(265, 39)
         Me.ucrPnlRowSummaries.TabIndex = 1
         '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.AutoSize = True
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(250, 231)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkOmitMissing.TabIndex = 11
-        '
-        'cmdMissingOptions
-        '
-        Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(376, 228)
-        Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
-        Me.cmdMissingOptions.TabIndex = 21
-        Me.cmdMissingOptions.Tag = "MissingOptions"
-        Me.cmdMissingOptions.Text = "Options"
-        Me.cmdMissingOptions.UseVisualStyleBackColor = True
-        '
         'dlgRowSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(470, 421)
-        Me.Controls.Add(Me.cmdMissingOptions)
-        Me.Controls.Add(Me.ucrChkOmitMissing)
+        Me.ClientSize = New System.Drawing.Size(470, 405)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.lblSummaries)
@@ -416,6 +392,4 @@ Partial Class dlgRowSummary
     Friend WithEvents ucrPnlRowSummaries As UcrPanel
     Friend WithEvents rdoMore As RadioButton
     Friend WithEvents ucrInputUserDefined As ucrInputComboBox
-    Friend WithEvents ucrChkOmitMissing As ucrCheck
-    Friend WithEvents cmdMissingOptions As Button
 End Class
