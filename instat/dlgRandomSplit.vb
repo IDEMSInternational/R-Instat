@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgRandomSplit
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsInitialTimeSplit As RFunction
+    Private clsInitialSplit As RFunction
 
     Private Sub dlgRandomSplit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -70,19 +71,45 @@ Public Class dlgRandomSplit
 
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
         ucrNudFraction.SetParameter(New RParameter("prop", 1))
-        ucrNudFraction.SetRDefault("3/4")
+        ucrNudFraction.DecimalPlaces = 2
+        ucrNudFraction.Increment = 0.01
+        ucrNudFraction.SetRDefault("0.75")
 
         ucrNudPool.SetLinkedDisplayControl(lblPool)
         ucrNudPool.SetParameter(New RParameter("pool", 4))
+        ucrNudPool.DecimalPlaces = 2
+        ucrNudPool.SetMinMax(0, 1)
+        ucrNudPool.Increment = 0.1
         ucrNudPool.SetRDefault("0.1")
     End Sub
 
     Private Sub SetDefaults()
+        clsInitialTimeSplit = New RFunction
+        clsInitialSplit = New RFunction
+
+        clsInitialTimeSplit.SetRCommand("initial_time_split")
+        clsInitialTimeSplit.SetPackageName("rsample")
+
+        clsInitialSplit.SetRCommand("initial_split")
+        clsInitialSplit.SetPackageName("rsample")
+
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
+        'ucrChkTrainingData.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter(), iAdditionalPairNo:=1)
+        'ucrChkTestingData.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter(), iAdditionalPairNo:=1)
 
+        ucrSelectorRandomSplit.SetRCode(clsInitialTimeSplit, bReset)
+        ucrChkTestingData.SetRCode(clsInitialTimeSplit, bReset)
+        ucrChkTrainingData.SetRCode(clsInitialTimeSplit, bReset)
+        ucrChkStratifyingFactor.SetRCode(clsInitialTimeSplit, bReset)
+        ucrNudFraction.SetRCode(clsInitialTimeSplit, bReset)
+        ucrNudPool.SetRCode(clsInitialTimeSplit, bReset)
+        ucrSaveRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNudLag.SetRCode(clsInitialSplit, bReset)
+        ucrReceiverRandomSplit.SetRCode(clsInitialSplit, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
