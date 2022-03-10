@@ -161,7 +161,7 @@ Public Class dlgName
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
+        'ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlCase.SetRCode(clsDummyRenameWithFunction, bReset)
         ucrInputCase.SetRCode(clsDummyRenameWithFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
@@ -368,6 +368,7 @@ Public Class dlgName
             RemoveLabelsParams()
         ElseIf rdoRenameWith.Checked Then
             clsDefaultRFunction.RemoveParameterByPosition(7)
+            clsDefaultRFunction.RemoveParameterByPosition(10)
             If rdoToLower.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
                 clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)
