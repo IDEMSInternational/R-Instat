@@ -115,10 +115,10 @@ Public Class dlgName
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
-        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="8")
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
@@ -158,10 +158,12 @@ Public Class dlgName
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
+        If bReset Then
+            ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
+        End If
+        ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
     End Sub
