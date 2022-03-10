@@ -22,6 +22,7 @@ Public Class dlgCorrelation
         clsRGGscatMatrixFunction, clsCorrelationFunction, clsCurrentDataFrameFunction,
         clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction, clsFashionFunction, clsShaveFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
+    Private clsDummyShave As New RFunction
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
     Private bResetSubdialog As Boolean = False
@@ -45,6 +46,7 @@ Public Class dlgCorrelation
 
     Private Sub InitialiseDialog()
         Dim dctNaPrint As New Dictionary(Of String, String)
+        Dim dctDiagonal As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 421
         ucrBase.clsRsyntax.iCallType = 2
 
@@ -83,23 +85,23 @@ Public Class dlgCorrelation
 
         ucrChkLeadingZeros.SetParameter(New RParameter("leading_zeros", 2))
         ucrChkLeadingZeros.SetText("Leading Zeros")
-        'ucrChkLeadingZeros.AddParameterValueFunctionNamesCondition(True, "leading", "False")
-        'ucrChkLeadingZeros.AddParameterValueFunctionNamesCondition(False, "leading", "True")
         ucrChkLeadingZeros.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkShave.SetParameter(New RParameter("x", 0))
         ucrChkShave.SetText("Shave")
-        'ucrChkShave.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkShave.SetParameter(New RParameter("checked", 0))
+        ucrChkShave.SetValuesCheckedAndUnchecked(True, False)
 
         ucrInputDisplayNas.SetParameter(New RParameter("na_print", 3))
         dctNaPrint.Add("blank", Chr(34) & " " & Chr(34))
-        dctNaPrint.Add("Default", Chr(34) & "default" & Chr(34))
         dctNaPrint.Add("1", Chr(34) & 1 & Chr(34))
         ucrInputDisplayNas.SetItems(dctNaPrint)
 
         ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
+        dctDiagonal.Add("NA", "NA")
+        dctDiagonal.Add("1", 1)
+        ucrInputDiagonal.SetItems(dctDiagonal)
         ucrInputDiagonal.AddQuotesIfUnrecognised = False
-        ttDisplayOnDiagonal.SetToolTip(ucrInputDiagonal.txtInput, "Value to set the diagonal to is typically numeric or NA")
+
 
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
@@ -133,24 +135,23 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
         ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlColumns.AddToLinkedControls({ucrChkLeadingZeros, ucrChkShave, ucrSaveDataFrame}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumns.AddToLinkedControls(ucrInputDisplayNas, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
+        ucrPnlColumns.AddToLinkedControls(ucrInputDisplayNas, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="blank")
         ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
 
-        ucrSaveModel.SetPrefix("cor")
+        ucrSaveModel.SetPrefix("model")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name")
         ucrSaveModel.SetIsComboBox()
-        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        'ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrSaveDataFrame.SetPrefix("cor")
+        ucrSaveDataFrame.SetPrefix("corr")
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Result Name")
         ucrSaveDataFrame.SetIsComboBox()
-        ' ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
-
+        'ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
     End Sub
 
     Private Sub SetDefaults()
@@ -168,6 +169,7 @@ Public Class dlgCorrelation
         clsCurrentDataFrameFunction = New RFunction
         clsFashionFunction = New RFunction
         clsShaveFunction = New RFunction
+        clsDummyShave = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
@@ -175,8 +177,7 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
-        'clsDummyFunction.AddParameter("leading", "False", iPosition:=1)
-
+        'cls
         clsRGGscatMatricReverseOperator.SetOperation("+")
         clsRGGscatMatricReverseOperator.AddParameter("matrix", clsRFunctionParameter:=clsRGGscatMatrixFunction, iPosition:=0)
         clsRGGscatMatricReverseOperator.iCallType = 3
@@ -224,7 +225,7 @@ Public Class dlgCorrelation
 
         clsFashionFunction.SetPackageName("corrr")
         clsFashionFunction.SetRCommand("fashion")
-        clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+        clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
         clsFashionFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionFunction.AddParameter("na_print", "default", iPosition:=3)
@@ -232,7 +233,7 @@ Public Class dlgCorrelation
 
         clsShaveFunction.SetPackageName("corrr")
         clsShaveFunction.SetRCommand("shave")
-        clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsFashionFunction, iPosition:=0)
+        clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
 
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
@@ -262,8 +263,7 @@ Public Class dlgCorrelation
         ucrNudDecimalPlaces.SetRCode(clsFashionFunction, bReset)
         ucrChkLeadingZeros.SetRCode(clsFashionFunction, bReset)
         ucrInputDisplayNas.SetRCode(clsFashionFunction, bReset)
-        'ucrChkShave.SetRCode(clsShaveFunction, bReset)
-        'ucrChkLeadingZeros.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("leading_zeros", 2), iAdditionalPairNo:=1)
+        ucrChkShave.SetRCode(clsDummyShave, bReset)
         If bReset Then
             ucrPnlColumns.SetRCode(clsCorrelationTestFunction, bReset)
         End If
@@ -316,14 +316,6 @@ Public Class dlgCorrelation
         bResetSubdialog = False
     End Sub
 
-    'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-    '    If rdoTwoColumns.Checked Then
-    '        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
-    '    ElseIf rdoMultipleColumns.Checked Then
-    '        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
-    '    End If
-    'End Sub
-
     ' This is here because otherwise the panel cannot be set up correctly if you reopen the dialog when on the 2-variable rdo button
     Private Sub ucrPnlCompletePairwise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompletePairwise.ControlValueChanged
         If rdoPairwise.Checked Then
@@ -333,22 +325,20 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkShave.ControlValueChanged
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
-        ElseIf rdoMultipleColumns.Checked AndAlso ucrChkShave.Checked Then
+        ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsShaveFunction)
-        Else
+            If ucrChkShave.Checked Then
+                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
+            Else
+                clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+            End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
         End If
-        'If ucrChkShave.Checked Then
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsShaveFunction)
-        'Else
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
-        'End If
         ReceiverColumns()
     End Sub
 
@@ -356,7 +346,7 @@ Public Class dlgCorrelation
         ReceiverColumns()
     End Sub
 
-    Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
+    Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
