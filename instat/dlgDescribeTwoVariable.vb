@@ -21,8 +21,9 @@ Public Class dlgDescribeTwoVariable
     Private bResetSubdialog As Boolean = False
     Public strFirstVariablesType, strSecondVariableType As String
     Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary,
-        clsConcFunction, clsRAnova, clsRFreqTables, clsSkimrFunction As New RFunction
-    Private clsSummariesList As New RFunction
+        clsConcFunction, clsRAnova, clsRFreqTables, clsSkimrFunction, clsSummariesList,
+        clsGroupByFunction, clsDummyFunction As New RFunction
+    Private clsGroupByPipeOperator As New ROperator
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -68,8 +69,8 @@ Public Class dlgDescribeTwoVariable
 
         ucrPnlDescribe.AddRadioButton(rdoCustomize)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
-        ucrPnlDescribe.AddFunctionNamesCondition(rdoCustomize, frmMain.clsRLink.strInstatDataObject & "$summary")
-        ucrPnlDescribe.AddFunctionNamesCondition(rdoSkim, "skim")
+        ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
+        ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
 
         ucrPnlDescribe.AddToLinkedControls(ucrReceiverSecondOpt, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing, ucrChkSummary, ucrChkSum}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -92,9 +93,20 @@ Public Class dlgDescribeTwoVariable
         clsRCustomSummary = New RFunction
         clsConcFunction = New RFunction
         clsSkimrFunction = New RFunction
+        clsGroupByPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
+
+        clsGroupByPipeOperator.SetOperation("%>%")
+        clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
 
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim")
@@ -130,7 +142,7 @@ Public Class dlgDescribeTwoVariable
 
         clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
+        ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
         bResetSubdialog = True
     End Sub
 
@@ -152,8 +164,8 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.SetRCode(clsRCustomSummary, bReset)
         ucrReceiverSecondVar.SetRCode(clsRCustomSummary, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelation, bReset)
-        ucrReceiverSecondOpt.SetRCode(clsSkimrFunction, bReset)
-        ucrPnlDescribe.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverSecondOpt.SetRCode(clsGroupByFunction, bReset)
+        ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
 
         Results()
     End Sub
@@ -289,15 +301,25 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoSkim.Checked Then
+            clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
+            ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
         Else
+            clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         End If
     End Sub
 
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
-        clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverSecondOpt_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondOpt.ControlValueChanged
+        If ucrReceiverSecondOpt.IsEmpty Then
+            clsGroupByPipeOperator.RemoveParameterByName("group")
+        Else
+            clsGroupByPipeOperator.AddParameter("group", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1, bIncludeArgumentName:=False)
+        End If
     End Sub
 End Class
