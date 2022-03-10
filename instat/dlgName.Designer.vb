@@ -48,9 +48,9 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
-        Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
         Me.ucrChkIncludeVariable = New instat.ucrCheck()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
@@ -183,6 +183,17 @@ Partial Class dlgName
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Rename Options"
         '
+        'rdoAbbreviate
+        '
+        Me.rdoAbbreviate.AutoSize = True
+        Me.rdoAbbreviate.Location = New System.Drawing.Point(7, 65)
+        Me.rdoAbbreviate.Name = "rdoAbbreviate"
+        Me.rdoAbbreviate.Size = New System.Drawing.Size(76, 17)
+        Me.rdoAbbreviate.TabIndex = 22
+        Me.rdoAbbreviate.TabStop = True
+        Me.rdoAbbreviate.Text = "Abbreviate"
+        Me.rdoAbbreviate.UseVisualStyleBackColor = True
+        '
         'rdoRenameWith
         '
         Me.rdoRenameWith.Appearance = System.Windows.Forms.Appearance.Button
@@ -219,17 +230,6 @@ Partial Class dlgName
         Me.grdRenameColumns.Size = New System.Drawing.Size(349, 210)
         Me.grdRenameColumns.TabIndex = 18
         Me.grdRenameColumns.Text = "Variables"
-        '
-        'rdoAbbreviate
-        '
-        Me.rdoAbbreviate.AutoSize = True
-        Me.rdoAbbreviate.Location = New System.Drawing.Point(7, 65)
-        Me.rdoAbbreviate.Name = "rdoAbbreviate"
-        Me.rdoAbbreviate.Size = New System.Drawing.Size(76, 17)
-        Me.rdoAbbreviate.TabIndex = 22
-        Me.rdoAbbreviate.TabStop = True
-        Me.rdoAbbreviate.Text = "Abbreviate"
-        Me.rdoAbbreviate.UseVisualStyleBackColor = True
         '
         'ucrChkIncludeVariable
         '
@@ -322,7 +322,7 @@ Partial Class dlgName
         Me.ucrNudAbbreviate.AutoSize = True
         Me.ucrNudAbbreviate.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAbbreviate.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAbbreviate.Location = New System.Drawing.Point(112, 61)
+        Me.ucrNudAbbreviate.Location = New System.Drawing.Point(112, 62)
         Me.ucrNudAbbreviate.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAbbreviate.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAbbreviate.Name = "ucrNudAbbreviate"

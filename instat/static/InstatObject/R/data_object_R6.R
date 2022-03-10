@@ -784,15 +784,19 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-    private$data <- curr_data |>
-    dplyr::rename_with(
+      private$data <- curr_data |>
+      dplyr::rename_with(
          .fn = .fn,
          .cols = {{ .cols }}, ...
-    )
-    }
+      )
     new_col_names <- names(private$data)
-    self$data_changed <- TRUE
-    self$variables_metadata_changed <- TRUE
+    if (!all(new_col_names %in% curr_col_names)) {
+      new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
+      for (i in seq_along(new_col_names)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
     }
   }
 })

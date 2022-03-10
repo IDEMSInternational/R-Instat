@@ -79,7 +79,6 @@ Public Class dlgName
         ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
         ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
 
-        ucrNudAbbreviate.SetParameter(New RParameter("minlength", 10))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
         ucrPnlCase.SetParameter(New RParameter("checked", 0))
@@ -139,6 +138,8 @@ Public Class dlgName
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
 
+        ucrNudAbbreviate.SetText(4)
+
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
 
         clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
@@ -151,7 +152,6 @@ Public Class dlgName
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
         clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
-        clsDefaultRFunction.AddParameter("minlength", 4, iPosition:=10)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
@@ -161,7 +161,6 @@ Public Class dlgName
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        'ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlCase.SetRCode(clsDummyRenameWithFunction, bReset)
         ucrInputCase.SetRCode(clsDummyRenameWithFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
@@ -368,7 +367,7 @@ Public Class dlgName
             RemoveLabelsParams()
         ElseIf rdoRenameWith.Checked Then
             clsDefaultRFunction.RemoveParameterByPosition(7)
-            clsDefaultRFunction.RemoveParameterByPosition(10)
+            clsDefaultRFunction.RemoveParameterByName("minlength")
             If rdoToLower.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "tolower", iPosition:=5)
                 clsDummyRenameWithFunction.AddParameter("checked", "lower", iPosition:=0)
@@ -378,7 +377,7 @@ Public Class dlgName
                 clsDummyRenameWithFunction.AddParameter("checked", "make_clean_names", iPosition:=0)
             Else
                 clsDefaultRFunction.AddParameter(".fn", "abbreviate", iPosition:=5)
-                clsDefaultRFunction.AddParameter("minlength", ucrNudAbbreviate.GetText(), iPosition:=10)
+                clsDefaultRFunction.AddParameter("minlength", ucrNudAbbreviate.GetText())
                 clsDummyRenameWithFunction.AddParameter("checked", "abbreviate", iPosition:=0)
             End If
         End If
@@ -520,7 +519,7 @@ Public Class dlgName
         Return strColLabel
     End Function
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrInputCase.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrInputCase.ControlValueChanged, ucrNudAbbreviate.ControlValueChanged
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
