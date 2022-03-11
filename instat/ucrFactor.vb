@@ -600,6 +600,18 @@ Public Class ucrFactor
         End If
     End Sub
 
+    Public Function GetColumnText(iColumn As String) As String
+        Dim strColumn As String = Nothing
+        If shtCurrSheet IsNot Nothing Then
+            For i As Integer = 0 To shtCurrSheet.ColumnCount - 1
+                If shtCurrSheet.ColumnHeaders(i).Index = iColumn Then
+                    strColumn = shtCurrSheet.ColumnHeaders(i).Text
+                End If
+            Next
+        End If
+        Return strColumn
+    End Function
+
     Public Function GetColumnIndex(strColumn As String) As Integer
         If shtCurrSheet IsNot Nothing Then
             For i As Integer = 0 To shtCurrSheet.ColumnCount - 1
@@ -624,6 +636,16 @@ Public Class ucrFactor
     Private Sub shtCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.AfterPaste
         'This is needed because pasting carries cell properties e.g. overrides readonly properties
         ApplyColumnSettings()
+        Dim strColumn As String = GetColumnText(e.Range.Col)
+
+        If strColumn = "New Label" Then
+            If e.Range.Rows > 1 Then
+                For iRow As Integer = shtCurrSheet.SelectionRange.Row To shtCurrSheet.SelectionRange.EndRow
+                    GetColumnAsList(strColumn, False)
+                Next
+            Else
+            End If
+        End If
     End Sub
 
     Public Sub SetLevelsCheckbox(ucrChkAddLevels As ucrCheck)
