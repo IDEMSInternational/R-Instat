@@ -18,9 +18,11 @@ Imports instat.Translations
 
 Public Class dlgDescribeTwoVarGraph
     Private clsBaseOperator, clsCoordPolarStartOperator As New ROperator
-    Private clsRGGplotFunction, clsRFacet, clsThemeFunction, clsGlobalAes, clsLabsFunction, clsXlabsFunction,
-            clsYlabFunction, clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
-            clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction, clsScaleColourViridisFunction As New RFunction
+    Private clsRGGplotFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
+            clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
+            clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
+            clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
+            clsScaleColourViridisFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -28,23 +30,23 @@ Public Class dlgDescribeTwoVarGraph
             clsDummyFunction, clsGGpairAesFunction, clsUpperListFunction, clsLowerListFunction,
             clsDiagonalListFunction As New RFunction
     ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
-    Private clsAesNumericByNumeric As RFunction
+    Private clsAesNumericByNumeric As New RFunction
     ' Use this aes for categorical by categorical bar graphs
-    Private clsAesCategoricalByCategoricalBarChart As RFunction
-    Private clsGgmosaicProduct As RFunction
+    Private clsAesCategoricalByCategoricalBarChart As New RFunction
+    Private clsGgmosaicProduct As New RFunction
     ' Use this aes for categorical by categorical mosiac plots
-    Private clsAesCategoricalByCategoricalMosaicPlot As RFunction
+    Private clsAesCategoricalByCategoricalMosaicPlot As New RFunction
     ' Use this aes for numeric by categorical when the y axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesNumericByCategoricalYNumeric As RFunction
+    Private clsAesNumericByCategoricalYNumeric As New RFunction
     ' Use this aes for numeric by categorical when the x axis is the numeric variable(s)  e.g. histogram, density
-    Private clsAesNumericByCategoricalXNumeric As RFunction
+    Private clsAesNumericByCategoricalXNumeric As New RFunction
     ' Use this aes for categorical by numeric when the y axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesCategoricalByNumericYNumeric As RFunction
-    ' Aes for stat_summary hline
-    Private clsAesStatSummaryHlineCategoricalByNumeric As RFunction
-    Private clsAesStatSummaryHlineNumericByCategorical As RFunction
+    Private clsAesCategoricalByNumericYNumeric As New RFunction
+    ' Aes for stat_summary hlineclsBaseOperator
+    Private clsAesStatSummaryHlineCategoricalByNumeric As New RFunction
+    Private clsAesStatSummaryHlineNumericByCategorical As New RFunction
     ' Use this aes for categorical by numeric when the x axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesCategoricalByNumericXNumeric As RFunction
+    Private clsAesCategoricalByNumericXNumeric As New RFunction
     Private clsLabelAesFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
@@ -272,6 +274,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetDefaults()
         clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
+        clsMosaicGgplotFunction = New RFunction
         clsDummyFunction = New RFunction
         clsRFacet = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
@@ -333,6 +336,7 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
+        clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
         clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
         clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
         clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
@@ -340,6 +344,7 @@ Public Class dlgDescribeTwoVarGraph
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
+        clsLabelAesFunction.AddParameter("label", "..count..", iPosition:=0)
 
         clsUpperListFunction.SetRCommand("list")
         clsUpperListFunction.AddParameter("continuous", Chr(34) & "cor" & Chr(34), iPosition:=0)
@@ -369,9 +374,11 @@ Public Class dlgDescribeTwoVarGraph
         clsRGGplotFunction.SetPackageName("ggplot2")
         clsRGGplotFunction.SetRCommand("ggplot")
 
+        clsMosaicGgplotFunction.SetPackageName("ggplot2")
+        clsMosaicGgplotFunction.SetRCommand("ggplot")
+
         clsRFacet.SetPackageName("ggplot2")
         clsRFacet.SetRCommand("facet_wrap")
-        clsRFacet.AddParameter("facets", "~variable", iPosition:=0)
 
         clsGeomViolin.SetPackageName("ggplot2")
         clsGeomViolin.SetRCommand("geom_violin")
@@ -434,7 +441,6 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGgmosaicProduct.SetPackageName("ggmosaic")
         clsGgmosaicProduct.SetRCommand("product")
-        clsGgmosaicProduct.AddParameter("0", "value", bIncludeArgumentName:=False, iPosition:=0)
 
         clsGeomPoint.SetPackageName("ggplot2")
         clsGeomPoint.SetRCommand("geom_point")
@@ -444,7 +450,8 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGeomBar.SetPackageName("ggplot2")
         clsGeomBar.SetRCommand("geom_bar")
-        clsGeomBar.AddParameter("position", Chr(34) & "dodge" & Chr(34))
+        clsGeomBar.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsGeomBar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsGeomFreqPoly.SetPackageName("ggplot2")
         clsGeomFreqPoly.SetRCommand("geom_freqpoly")
@@ -487,8 +494,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericYNumeric, New RParameter("y", 1), iAdditionalPairNo:=3)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericXNumeric, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByNumeric, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsGgmosaicProduct, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=7)
+        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=6)
         ucrSaveGraph.AddAdditionalRCode(clsGGpairsFunction, bReset)
 
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
@@ -778,13 +784,20 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
+        Dim iPosition As Integer = 0
         Results()
         EnableVisibleLabelControls()
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
-    End Sub
+        clsGgmosaicProduct.ClearParameters()
+        For Each strVariables In ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)
+            clsGgmosaicProduct.AddParameter("columns" & iPosition, ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(bWithQuotes:=False), iPosition:=iPosition, bIncludeArgumentName:=False)
+            iPosition = iPosition + 1
+        Next
+        ChangeGeomToMosaicAndFacet()
 
-    Private Sub AddRemoveAesParameter()
-        clsLabelAesFunction.AddParameter("label", ucrReceiverFirstVars.GetVariableNames(False), iPosition:=0)
+        If ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count > 0 Then
+            clsAesCategoricalByCategoricalMosaicPlot.AddParameter("fill", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)(0), iPosition:=1)
+        End If
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
@@ -792,7 +805,7 @@ Public Class dlgDescribeTwoVarGraph
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         Results()
         EnableVisibleLabelControls()
-        AddRemoveAesParameter()
+        ChangeGeomToMosaicAndFacet()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged
@@ -802,7 +815,8 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub ucrInputCategoricalByCategorical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumericByCategorical.ControlValueChanged, ucrInputCategoricalByNumeric.ControlValueChanged, ucrInputCategoricalByCategorical.ControlValueChanged
         Results()
         EnableVisibleLabelControls()
-        AddRemoveAesParameter()
+        AddRemoveTextParameter()
+        ChangeGeomToMosaicAndFacet()
     End Sub
 
     Private Sub RemoveAllGeomsStats()
@@ -934,6 +948,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrPnlByPairs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlByPairs.ControlValueChanged
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
+        ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
             cmdOptions.Enabled = True
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
@@ -952,6 +967,7 @@ Public Class dlgDescribeTwoVarGraph
         End If
         EnableVisibleLabelControls()
         AddRemoveColourParameter()
+        ChangeGeomToMosaicAndFacet()
     End Sub
 
     Private Sub ucrSelectorTwoVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoVarGraph.ControlValueChanged
@@ -962,6 +978,7 @@ Public Class dlgDescribeTwoVarGraph
         Dim clsGetDataFrameFunction As RFunction = ucrSelectorTwoVarGraph.ucrAvailableDataFrames.clsCurrDataFrame.Clone
         clsGetDataFrameFunction.RemoveParameterByName("stack_data")
         clsGGpairsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsMosaicGgplotFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
     End Sub
 
     Private Sub ucrReceiverColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColour.ControlValueChanged
@@ -990,7 +1007,26 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
-        If ucrChkAddLabelsText.Checked AndAlso ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso rdoBy.Checked AndAlso bRCodeSet Then
+        AddRemoveTextParameter()
+    End Sub
+
+    Private Sub ChangeGeomToMosaicAndFacet()
+        If rdoBy.Checked AndAlso strFirstVariablesType = "categorical" AndAlso
+            strSecondVariableType = "categorical" AndAlso
+           ucrInputCategoricalByCategorical.GetText = "Mosaic Plot" Then
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsMosaicGgplotFunction, iPosition:=0)
+            clsRFacet.AddParameter("facets", "~ " & ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
+        Else
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
+            clsRFacet.AddParameter("facets", "~variable", iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub AddRemoveTextParameter()
+        If ucrChkAddLabelsText.Checked AndAlso
+            ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso
+            strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso
+            bRCodeSet Then
             clsBaseOperator.AddParameter("text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=3)
         Else
             clsBaseOperator.RemoveParameterByName("text")
