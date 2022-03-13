@@ -858,4 +858,8 @@ Public Class ucrDataView
     Private Sub mnuDeleteCells_Click(sender As Object, e As EventArgs) Handles mnuDeleteCells.Click
         DeleteCell_Click()
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, mnuHelp1.Click, mnuHelp2.Click, mnuHelp3.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "146")
+    End Sub
 End Class

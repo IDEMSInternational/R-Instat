@@ -91,7 +91,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub loadForm()
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
 
         'DEBUG
         ' If True Then
@@ -111,6 +111,7 @@ Public Class ucrColumnMetadata
         _grid.SetNonEditableColumns(lstNonEditableColumns)
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
+        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
         autoTranslate(Me)
     End Sub
 
@@ -120,6 +121,27 @@ Public Class ucrColumnMetadata
 
     Public Sub SetCurrentDataFrame(iIndex As Integer)
         _grid.SetCurrentDataFrame(iIndex)
+    End Sub
+
+    Private Sub DeleteLables(strColumnName As String)
+        Dim clsDeleteLabelsFunction As New RFunction
+
+        If strColumnName = strLabelsLabel Then
+            If MsgBox("This will delete the selected label(s) and replace with (NA)." &
+                                Environment.NewLine & "Continue?",
+                                MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
+
+                clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+                clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & _grid.CurrentWorksheet.Name & Chr(34), iPosition:=0)
+                clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns), iPosition:=1)
+                clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+                clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
+                frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
+            End If
+        Else
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
+                   "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+        End If
     End Sub
 
     Private Sub EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
@@ -434,5 +456,9 @@ Public Class ucrColumnMetadata
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
+    End Sub
+
+    Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub
 End Class
