@@ -24,19 +24,19 @@ Partial Class dlgMergeAdditionalData
     Private Sub InitializeComponent()
         Me.lblVariablesToIncludeSecond = New System.Windows.Forms.Label()
         Me.cmdModify = New System.Windows.Forms.Button()
+        Me.lblMergeBy = New System.Windows.Forms.Label()
         Me.ucrInputMergingBy = New instat.ucrInputTextBox()
         Me.ucrFirstDataFrame = New instat.ucrDataFrame()
         Me.ucrReceiverSecond = New instat.ucrReceiverMultiple()
         Me.ucrSecondSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblMergeBy = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblVariablesToIncludeSecond
         '
         Me.lblVariablesToIncludeSecond.AutoSize = True
         Me.lblVariablesToIncludeSecond.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariablesToIncludeSecond.Location = New System.Drawing.Point(248, 121)
+        Me.lblVariablesToIncludeSecond.Location = New System.Drawing.Point(249, 88)
         Me.lblVariablesToIncludeSecond.Name = "lblVariablesToIncludeSecond"
         Me.lblVariablesToIncludeSecond.Size = New System.Drawing.Size(103, 13)
         Me.lblVariablesToIncludeSecond.TabIndex = 2
@@ -45,12 +45,21 @@ Partial Class dlgMergeAdditionalData
         'cmdModify
         '
         Me.cmdModify.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModify.Location = New System.Drawing.Point(282, 332)
+        Me.cmdModify.Location = New System.Drawing.Point(273, 300)
         Me.cmdModify.Name = "cmdModify"
         Me.cmdModify.Size = New System.Drawing.Size(90, 23)
         Me.cmdModify.TabIndex = 6
         Me.cmdModify.Text = "Join Options"
         Me.cmdModify.UseVisualStyleBackColor = True
+        '
+        'lblMergeBy
+        '
+        Me.lblMergeBy.AutoSize = True
+        Me.lblMergeBy.Location = New System.Drawing.Point(9, 257)
+        Me.lblMergeBy.Name = "lblMergeBy"
+        Me.lblMergeBy.Size = New System.Drawing.Size(44, 13)
+        Me.lblMergeBy.TabIndex = 4
+        Me.lblMergeBy.Text = "Join By:"
         '
         'ucrInputMergingBy
         '
@@ -58,7 +67,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrInputMergingBy.AutoSize = True
         Me.ucrInputMergingBy.IsMultiline = False
         Me.ucrInputMergingBy.IsReadOnly = False
-        Me.ucrInputMergingBy.Location = New System.Drawing.Point(72, 286)
+        Me.ucrInputMergingBy.Location = New System.Drawing.Point(63, 254)
         Me.ucrInputMergingBy.Name = "ucrInputMergingBy"
         Me.ucrInputMergingBy.Size = New System.Drawing.Size(300, 40)
         Me.ucrInputMergingBy.TabIndex = 5
@@ -68,7 +77,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrFirstDataFrame.AutoSize = True
         Me.ucrFirstDataFrame.bDropUnusedFilterLevels = False
         Me.ucrFirstDataFrame.bUseCurrentFilter = True
-        Me.ucrFirstDataFrame.Location = New System.Drawing.Point(10, 10)
+        Me.ucrFirstDataFrame.Location = New System.Drawing.Point(9, 13)
         Me.ucrFirstDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstDataFrame.Name = "ucrFirstDataFrame"
         Me.ucrFirstDataFrame.Size = New System.Drawing.Size(151, 50)
@@ -78,11 +87,11 @@ Partial Class dlgMergeAdditionalData
         '
         Me.ucrReceiverSecond.AutoSize = True
         Me.ucrReceiverSecond.frmParent = Me
-        Me.ucrReceiverSecond.Location = New System.Drawing.Point(248, 136)
+        Me.ucrReceiverSecond.Location = New System.Drawing.Point(249, 106)
         Me.ucrReceiverSecond.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecond.Name = "ucrReceiverSecond"
         Me.ucrReceiverSecond.Selector = Nothing
-        Me.ucrReceiverSecond.Size = New System.Drawing.Size(120, 119)
+        Me.ucrReceiverSecond.Size = New System.Drawing.Size(120, 88)
         Me.ucrReceiverSecond.strNcFilePath = ""
         Me.ucrReceiverSecond.TabIndex = 3
         Me.ucrReceiverSecond.ucrSelector = Nothing
@@ -93,7 +102,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrSecondSelector.bDropUnusedFilterLevels = False
         Me.ucrSecondSelector.bShowHiddenColumns = False
         Me.ucrSecondSelector.bUseCurrentFilter = True
-        Me.ucrSecondSelector.Location = New System.Drawing.Point(10, 86)
+        Me.ucrSecondSelector.Location = New System.Drawing.Point(9, 64)
         Me.ucrSecondSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondSelector.Name = "ucrSecondSelector"
         Me.ucrSecondSelector.Size = New System.Drawing.Size(213, 183)
@@ -103,26 +112,17 @@ Partial Class dlgMergeAdditionalData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 329)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 7
-        '
-        'lblMergeBy
-        '
-        Me.lblMergeBy.AutoSize = True
-        Me.lblMergeBy.Location = New System.Drawing.Point(12, 289)
-        Me.lblMergeBy.Name = "lblMergeBy"
-        Me.lblMergeBy.Size = New System.Drawing.Size(44, 13)
-        Me.lblMergeBy.TabIndex = 4
-        Me.lblMergeBy.Text = "Join By:"
         '
         'dlgMergeAdditionalData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(420, 424)
+        Me.ClientSize = New System.Drawing.Size(425, 386)
         Me.Controls.Add(Me.lblMergeBy)
         Me.Controls.Add(Me.cmdModify)
         Me.Controls.Add(Me.ucrInputMergingBy)
