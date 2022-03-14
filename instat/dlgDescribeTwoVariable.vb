@@ -57,6 +57,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondVar.SetLinkedDisplayControl(lbSecondVariable)
 
         ucrReceiverSecondOpt.SetParameter(New RParameter("factors", 2, bNewIncludeArgumentName:=False))
+        ucrReceiverSecondOpt.bWithQuotes = False
         ucrReceiverSecondOpt.SetParameterIsString()
         ucrReceiverSecondOpt.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondOpt.SetLinkedDisplayControl(lbSecondOpt)
