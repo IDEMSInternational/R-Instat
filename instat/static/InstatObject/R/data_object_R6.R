@@ -4322,3 +4322,9 @@ DataSheet$set("public", "replace_values_with_NA", function(row_index, column_ind
   self$set_data(curr_data)
 }
 )
+
+DataSheet$set("public", "has_labels", function(col_names) {
+  if(missing(col_names)) stop("Column name must be specified.")
+  return(!is.null(attr(col_names, "labels")))
+}
+)

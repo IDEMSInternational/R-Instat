@@ -581,8 +581,7 @@ Public Class ucrDataView
             If iNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
             Else
-                Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnLabels(strColumn)
-                GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnLabels(strColumn)
+                Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                 frmConvertToNumeric.SetColumnName(strColumn)
                 frmConvertToNumeric.CheckLabels(bCheckLabels)

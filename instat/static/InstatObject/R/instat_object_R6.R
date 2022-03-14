@@ -2725,3 +2725,8 @@ DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","co
 DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
   self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
 })
+
+DataBook$set("public","has_labels", function(data_name, col_names) {
+  self$get_data_objects(data_name)$has_labels(col_names)
+}
+)
