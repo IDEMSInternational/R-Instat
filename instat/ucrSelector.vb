@@ -508,4 +508,7 @@ Public Class ucrSelector
         Next
     End Sub
 
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "334")
+    End Sub
 End Class
