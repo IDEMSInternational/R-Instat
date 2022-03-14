@@ -2431,4 +2431,8 @@ Public Class frmMain
     Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
         dlgDefineOptionsByContext.ShowDialog()
     End Sub
+
+    Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RandomSplitToolStripMenuItem.Click
+        dlgRandomSplit.ShowDialog()
+    End Sub
 End Class

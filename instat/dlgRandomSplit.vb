@@ -45,15 +45,15 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
-        ucrReceiverRandomSplit.SetParameterIsRFunction()
+        'ucrReceiverRandomSplit.SetParameterIsRFunction()
         'ucrReceiverRandomSplit.Selector = ucrSelectorRandomSplit
-        ucrReceiverRandomSplit.SetMeAsReceiver()
-        ucrReceiverRandomSplit.SetDataType("numeric")
+        'ucrReceiverRandomSplit.SetMeAsReceiver()
+        'ucrReceiverRandomSplit.SetDataType("numeric")
 
         ucrSelectorRandomSplit.SetParameterIsRFunction()
 
         ucrChkStratifyingFactor.SetText("Set Seed")
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRandomSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRandomSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStratifyingFactor.SetParameter(New RParameter("strata", 2))
 
 
@@ -71,6 +71,8 @@ Public Class dlgRandomSplit
 
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
         ucrNudFraction.SetParameter(New RParameter("prop", 1))
+        ucrNudFraction.Minimum = 0.01
+        ucrNudFraction.Maximum = 0.99
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
         ucrNudFraction.SetRDefault("0.75")
@@ -78,14 +80,19 @@ Public Class dlgRandomSplit
         ucrNudPool.SetLinkedDisplayControl(lblPool)
         ucrNudPool.SetParameter(New RParameter("pool", 4))
         ucrNudPool.DecimalPlaces = 2
-        ucrNudPool.SetMinMax(0, 1)
-        ucrNudPool.Increment = 0.1
-        ucrNudPool.SetRDefault("0.1")
+        ucrNudPool.Minimum = 0.00
+        ucrNudPool.Maximum = 0.15
+        ucrNudPool.Increment = 0.01
+        ucrNudPool.SetRDefault("0.10")
     End Sub
 
     Private Sub SetDefaults()
         clsInitialTimeSplit = New RFunction
         clsInitialSplit = New RFunction
+
+        ucrSelectorRandomSplit.Reset()
+        ucrSelectorRandomSplit.Focus()
+        ucrSaveRandomSplit.Reset()
 
         clsInitialTimeSplit.SetRCommand("initial_time_split")
         clsInitialTimeSplit.SetPackageName("rsample")
@@ -109,7 +116,7 @@ Public Class dlgRandomSplit
         ucrNudPool.SetRCode(clsInitialTimeSplit, bReset)
         ucrSaveRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudLag.SetRCode(clsInitialSplit, bReset)
-        ucrReceiverRandomSplit.SetRCode(clsInitialSplit, bReset)
+        'ucrReceiverRandomSplit.SetRCode(clsInitialSplit, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

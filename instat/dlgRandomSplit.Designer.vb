@@ -35,7 +35,6 @@ Partial Class dlgRandomSplit
         Me.ucrChkTrainingData = New instat.ucrCheck()
         Me.ucrChkTestingData = New instat.ucrCheck()
         Me.ucrSelectorRandomSplit = New instat.ucrDataFrame()
-        Me.ucrReceiverRandomSplit = New instat.ucrReceiverMultiple()
         Me.ucrChkStratifyingFactor = New instat.ucrCheck()
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.SuspendLayout()
@@ -184,19 +183,6 @@ Partial Class dlgRandomSplit
         Me.ucrSelectorRandomSplit.Size = New System.Drawing.Size(153, 43)
         Me.ucrSelectorRandomSplit.TabIndex = 22
         '
-        'ucrReceiverRandomSplit
-        '
-        Me.ucrReceiverRandomSplit.AutoSize = True
-        Me.ucrReceiverRandomSplit.frmParent = Me
-        Me.ucrReceiverRandomSplit.Location = New System.Drawing.Point(281, 98)
-        Me.ucrReceiverRandomSplit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRandomSplit.Name = "ucrReceiverRandomSplit"
-        Me.ucrReceiverRandomSplit.Selector = Nothing
-        Me.ucrReceiverRandomSplit.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverRandomSplit.strNcFilePath = ""
-        Me.ucrReceiverRandomSplit.TabIndex = 18
-        Me.ucrReceiverRandomSplit.ucrSelector = Nothing
-        '
         'ucrChkStratifyingFactor
         '
         Me.ucrChkStratifyingFactor.AutoSize = True
@@ -232,7 +218,6 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.ucrSelectorRandomSplit)
         Me.Controls.Add(Me.rdoSample)
         Me.Controls.Add(Me.rdoTimeSeries)
-        Me.Controls.Add(Me.ucrReceiverRandomSplit)
         Me.Controls.Add(Me.ucrChkStratifyingFactor)
         Me.Controls.Add(Me.ucrPnlRandomSplit)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -248,7 +233,6 @@ Partial Class dlgRandomSplit
 
     Friend WithEvents rdoSample As RadioButton
     Friend WithEvents rdoTimeSeries As RadioButton
-    Friend WithEvents ucrReceiverRandomSplit As ucrReceiverMultiple
     Friend WithEvents ucrChkStratifyingFactor As ucrCheck
     Friend WithEvents ucrSelectorRandomSplit As ucrDataFrame
     Friend WithEvents ucrChkLag As ucrCheck
