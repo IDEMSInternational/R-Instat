@@ -909,8 +909,15 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub HideDropEmptyCheckBox()
-        ucrChkDropEmptyCols.Visible = If(Not ucrInputFilePath.IsEmpty, True, False)
-        ucrChkMultipleFiles.Visible = If(Not ucrInputFilePath.IsEmpty, True, False)
+        If ucrInputFilePath.IsEmpty Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrChkMultipleFiles.Visible = False
+            lblNoPreview.Text = "No file selected."
+        Else
+            ucrChkDropEmptyCols.Visible = True
+            ucrChkMultipleFiles.Visible = True
+            lblNoPreview.Text = "Preview not yet implemented for this file type"
+        End If
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
