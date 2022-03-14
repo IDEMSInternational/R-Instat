@@ -122,6 +122,6 @@
 
 - Choose "Inspect Values" to investigate these values.
 - Choose "Normal Convert" to convert anyway. Non-numeric values will be lost. They will be set to NA.
-- Choose "              Convert" to retain all values. All values will be labelled with integers and can be recovered by converting back to Factor or Character.</value>
+- Choose "Labelled Convert" to retain all values. All values will be labelled with integers and can be recovered by converting back to Factor or Character.</value>
   </data>
 </root>

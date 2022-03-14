@@ -30,6 +30,16 @@
         strDataFrameName = strDataFrame
     End Sub
 
+    Public Sub CheckLabels(bCheck As Boolean)
+        If bCheck Then
+            cmdLabelledConvert.Text = "Lebelled Convert"
+            lblOrdinal.Visible = False
+        Else
+            cmdLabelledConvert.Text = "Ordinal Convert"
+            lblOrdinal.Visible = True
+        End If
+    End Sub
+
     Private Sub frmConvertToNumeric_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If e.CloseReason = CloseReason.UserClosing Then
             Me.DialogResult = DialogResult.Cancel

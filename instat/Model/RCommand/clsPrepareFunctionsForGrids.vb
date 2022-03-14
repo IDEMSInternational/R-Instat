@@ -150,6 +150,46 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
+
+    ''' <summary>
+    '''  
+    ''' </summary>
+
+    Public Function GetColumnLabels(strColumnName As String) As Boolean
+        Dim bLabels As Boolean
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim expItems As SymbolicExpression
+        Dim clsGetColumnsFromData As New RFunction
+
+
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
+        clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+        clsColmnLabelsRFunction.SetRCommand("get_column_attributes")
+        clsColmnLabelsRFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
+
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            Dim strArr As String() = expItems.AsCharacter.ToArray
+            If strArr IsNot Nothing Then
+                Dim strLabels = strArr(strArr.Length - 2)
+                If strLabels <> "NA" Then
+                    If IsNumeric(strLabels) Then
+                        bLabels = False
+                        'Else
+                        '    bLabels = True
+                    End If
+                Else
+                    bLabels = False
+                End If
+            End If
+        End If
+        Return bLabels
+    End Function
+
     ''' <summary>
     ''' View dataframe the whole dataframe within a pop up
     ''' </summary>
