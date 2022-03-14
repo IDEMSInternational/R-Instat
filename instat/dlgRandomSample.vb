@@ -87,6 +87,7 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
         clsRNGKindFunction = New RFunction
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrSelectorRandomSamples.Reset()
         ucrSaveRandomSample.Reset()
@@ -100,11 +101,11 @@ Public Class dlgRandomSample
         ucrDistWithParameters.SetParameters()
 
         clsMultipleSamplesFunction.SetRCommand("replicate")
-        clsMultipleSamplesFunction.AddParameter("n", 1)
+        clsMultipleSamplesFunction.AddParameter("n", 1, iPosition:=0)
 
         clsDistributionFunction = ucrDistWithParameters.clsCurrRFunction
 
-        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction)
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText, bAssignToIsPrefix:=True)
@@ -173,7 +174,9 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged, ucrChkRngKind.ControlContentsChanged
+    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged,
+        ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
+        ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

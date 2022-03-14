@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", column_selection_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -301,6 +301,10 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(column_selection_name != "") {
+      selected_columns <- self$get_column_selection_column_names(column_selection_name)
+      out <- out[ ,selected_columns, drop = FALSE]
     }
     #TODO: consider removing include_hidden_columns argument from this function
     if(use_column_selection && self$column_selection_applied()) {
@@ -1028,26 +1032,32 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
 )
 
 DataSheet$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  if(missing(property)) stop("property must be specified.")
-  if(!is.character(property)) stop("property must be a character")
-  if(!missing(col_names)) {
-    #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    for(curr_col in col_names) {
-      attr(private$data[[curr_col]], property) <- new_val
-      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  if (missing(property)) stop("property must be specified.")
+  if (!is.character(property)) stop("property must be a character")
+  if (!missing(col_names)) {
+    # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for (curr_col in col_names) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[curr_col]], property) <- NULL
+      } else {
+        attr(private$data[[curr_col]], property) <- new_val
+      }
     }
-  }
-  else {
-    for(col_name in self$get_column_names()) {
-      attr(private$data[[col_name]], property) <- new_val
+    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  } else {
+    for (col_name in self$get_column_names()) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[col_name]], property) <- NULL
+      } else {
+        attr(private$data[[col_name]], property) <- new_val
+      }
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
-}
-)
+})
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
@@ -1353,7 +1363,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     else if(to_type == "numeric") {
       if(ignore_labels) {
         if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
-        else new_col <- as.numeric(curr_col)
+          else new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1883,10 +1893,13 @@ DataSheet$set("public", "get_current_column_selection", function() {
 )
 
 DataSheet$set("public", "set_current_column_selection", function(name = "") {
-  if(!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
-  self$current_column_selection <- private$column_selections[[name]]
-}
-)
+  if (!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
+  if (length(self$get_column_selection_column_names(name)) == 0) {
+    cat(name, " has no columns selected.")
+  } else {
+    self$current_column_selection <- private$column_selections[[name]]
+  }
+})
 
 DataSheet$set("public", "get_column_selection_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   out <- names(private$column_selections)
@@ -1931,11 +1944,21 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
                  "tidyselect::last_col" =  tidyselect::last_col,
+                 "tidyselect::where" = NULL,
                  NULL
                  )
-    if (op == "base::match") args$table <- all_column_names
-    else args$vars <- all_column_names
-    res[[i]] <- do.call(fn, args)
+    if (op == "base::match") {
+      args$table <- all_column_names
+      res[[i]] <- do.call(fn, args)
+      }else if (op == "tidyselect::where"){
+        selected_columns <- private$data |> 
+          dplyr::select(where(args$fn)) |> 
+          colnames()
+      res[[i]] <- which(all_column_names %in% selected_columns)
+      }else{
+        args$vars <- all_column_names
+        res[[i]] <- do.call(fn, args)
+        }
     if (neg) res[[i]] <- setdiff(1:length(all_column_names), res[[i]])
     i <- i + 1
   }
@@ -2044,7 +2067,7 @@ DataSheet$set("public", "get_last_graph", function() {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model")){
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
@@ -2063,12 +2086,19 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(new_name %in% names(private$calculations)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
     names(private$calculations)[names(private$calculations) == object_name] <- new_name
   }
+  else if (object_type == "column_selection"){
+    if(!object_name %in% names(private$column_selections)) stop(object_name, " not found in column selections list")
+    if(new_name %in% names(private$column_selections)) stop(new_name, " is already a column selection name. Cannot rename ", object_name, " to ", new_name)
+    if(".everything" == object_name) stop("Renaming .everything is not allowed.")
+    names(private$column_selections)[names(private$column_selections) == object_name] <- new_name
+    if(private$.current_column_selection$name == object_name){private$.current_column_selection$name <- new_name}
+  } 
 }
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
-  if(any(object_type == c("object", "graph", "table","model"))){
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+  if(any(object_type %in% c("object", "graph", "table","model"))){
       if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
       private$objects[names(private$objects) %in% object_names] <- NULL
     }else if(object_type == "filter"){
@@ -2079,6 +2109,11 @@ DataSheet$set("public", "delete_objects", function(data_name, object_names, obje
     }else if(object_type == "calculation"){
       if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
       private$calculations[names(private$calculations) %in% object_names] <- NULL
+    }else if(object_type == "column_selection"){
+      if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
+      if(".everything" %in% object_names) stop(".everything cannot be deleted.")
+      if(any(private$.current_column_selection$name %in% object_names))stop(private$.current_column_selection$name, " is currently in use and cannot be deleted.")
+      private$column_selections[names(private$column_selections) %in% object_names] <- NULL
     }
   if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
     private$.last_graph <- NULL
@@ -4247,6 +4282,36 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
     col_data <- factor(ifelse(is.na(curr_data[, i]), NA_real_, "data"), levels = c("data", "edit", "add"))
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
+})
+
+DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
+  curr_data <- self$get_data_frame()
+  old_metadata <- attributes(curr_data)
+  new_df <- curr_data |>
+    janitor::remove_empty(which = which)
+  row_message <- paste(nrow(curr_data) - nrow(new_df), "empty rows deleted")
+  cols_message <- paste(ncol(curr_data) - ncol(new_df), "empty variables deleted")
+  if (all(which %in% "rows")) cat(row_message, "\n")
+  if (all(which %in% "cols")) cat(cols_message)
+  if (all(c("rows", "cols") %in% which)) {
+    cat(row_message, "\n")
+    cat(cols_message)
+  }
+  for (name in names(old_metadata)) {
+    if (!(name %in% c("names", "class", "row.names"))) {
+      attr(new_df, name) <- old_metadata[[name]]
+    }
+  }
+  for (col_name in names(new_df)) {
+    for (attr_name in names(attributes(private$data[[col_name]]))) {
+      if (!attr_name %in% c("class", "levels")) {
+        attr(new_df[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+      }
+    }
+  }
+  self$set_data(new_df)
+  self$data_changed <- TRUE
+  private$.variables_metadata_changed <- TRUE
 })
 
 DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
