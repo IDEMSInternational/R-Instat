@@ -20,8 +20,8 @@ Imports RDotNet
 Public Class dlgMergeAdditionalData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsLeftJoin As RFunction
-    Private clsByList As RFunction
+    Private clsLeftJoinFunction As New RFunction
+    Private clsByListFunction, clsInsertColumnFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bBySpecified As Boolean
 
@@ -51,44 +51,45 @@ Public Class dlgMergeAdditionalData
         ucrReceiverSecond.Selector = ucrFromDataFrame
         ucrReceiverSecond.bForceAsDataFrame = True
 
-        ucrSaveDataFrame.SetPrefix("data_frame")
-        ucrSaveDataFrame.SetIsComboBox()
-        ucrSaveDataFrame.SetCheckBoxText("New Data Frame:")
-        ucrSaveDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveDataFrame.SetDataFrameSelector(ucrToDataFrame)
-        'ucrSaveDataFrame.SetAssignToIfUncheckedValue("")
+        ucrChkSaveDataFrame.SetText("New Data Frame:")
+        ucrChkSaveDataFrame.AddFunctionNamesCondition(True, "left_join")
+        ucrChkSaveDataFrame.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 
         ucrInputMergingBy.IsReadOnly = True
         ucrInputMergingBy.IsMultiline = True
     End Sub
 
     Private Sub SetDefaults()
-        clsLeftJoin = New RFunction
-        clsByList = New RFunction
+        clsLeftJoinFunction = New RFunction
+        clsByListFunction = New RFunction
+        clsInsertColumnFunction = New RFunction
 
         ucrToDataFrame.Reset()
         ucrFromDataFrame.Reset()
         ucrReceiverSecond.SetMeAsReceiver()
         ucrInputMergingBy.SetName("")
+        ucrInputSaveDataFrame.SetName("new_data_frame")
 
-        clsLeftJoin.SetPackageName("dplyr")
-        clsLeftJoin.SetRCommand("left_join")
+        clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 
-        clsByList.SetRCommand("c")
+        clsLeftJoinFunction.SetPackageName("dplyr")
+        clsLeftJoinFunction.SetRCommand("left_join")
+
+        clsByListFunction.SetRCommand("c")
 
         SetDataFrameAssign()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoin)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
-        ucrToDataFrame.SetRCode(clsLeftJoin, bResetControls)
-        ucrReceiverSecond.SetRCode(clsLeftJoin, bResetControls)
-        ucrSaveDataFrame.SetRCode(clsLeftJoin, bResetControls)
+        ucrToDataFrame.SetRCode(clsLeftJoinFunction, bResetControls)
+        ucrReceiverSecond.SetRCode(clsLeftJoinFunction, bResetControls)
+        ucrChkSaveDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrToDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso Not ucrReceiverSecond.IsEmpty() AndAlso ucrSaveDataFrame.IsComplete() AndAlso bBySpecified Then
+        If ucrToDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso Not ucrReceiverSecond.IsEmpty() AndAlso bBySpecified Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -106,12 +107,27 @@ Public Class dlgMergeAdditionalData
         GetLinkInformation()
     End Sub
 
+    Private Sub ucrChkSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSaveDataFrame.ControlValueChanged, ucrInputSaveDataFrame.ControlValueChanged
+        SetDataFrameAssign()
+    End Sub
+
     Private Sub SetDataFrameAssign()
-        If clsLeftJoin IsNot Nothing Then
+        If clsLeftJoinFunction IsNot Nothing Then
             If ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
-                clsLeftJoin.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text, strTempDataframe:=ucrToDataFrame.cboAvailableDataFrames.Text)
+                clsLeftJoinFunction.RemoveAssignTo()
+                If ucrChkSaveDataFrame.Checked Then
+                    clsLeftJoinFunction.SetAssignTo(ucrInputSaveDataFrame.GetText, strTempDataframe:=ucrInputSaveDataFrame.GetText)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoinFunction)
+                    ucrInputSaveDataFrame.Visible = True
+                Else
+                    clsLeftJoinFunction.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text)
+                    clsInsertColumnFunction.AddParameter("data_name", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+                    clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=1)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+                    ucrInputSaveDataFrame.Visible = False
+                End If
             Else
-                clsLeftJoin.RemoveAssignTo()
+                clsLeftJoinFunction.RemoveAssignTo()
             End If
         End If
     End Sub
@@ -122,7 +138,7 @@ Public Class dlgMergeAdditionalData
         Dim clsItemOperator As New ROperator
         Dim chrColumns As CharacterVector
 
-        clsByList.ClearParameters()
+        clsByListFunction.ClearParameters()
         If ucrToDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             clsGetLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_link_between")
             clsGetLink.AddParameter("from_data_frame", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
@@ -135,25 +151,25 @@ Public Class dlgMergeAdditionalData
             If expTemp IsNot Nothing AndAlso expTemp.Type = Internals.SymbolicExpressionType.List AndAlso expTemp.AsList.Count > 0 Then
                 chrColumns = expTemp.AsList(0).AsCharacter
                 For i As Integer = 0 To chrColumns.Count - 1
-                    clsByList.AddParameter(Chr(34) & chrColumns.Names(i) & Chr(34), Chr(34) & chrColumns(i) & Chr(34))
+                    clsByListFunction.AddParameter(Chr(34) & chrColumns.Names(i) & Chr(34), Chr(34) & chrColumns(i) & Chr(34))
                     ucrReceiverSecond.Add(chrColumns(i), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 Next
-                clsLeftJoin.AddParameter("by", clsRFunctionParameter:=clsByList, iPosition:=2)
+                clsLeftJoinFunction.AddParameter("by", clsRFunctionParameter:=clsByListFunction, iPosition:=2)
                 PopulateMergeByText()
                 bBySpecified = True
             Else
                 ucrInputMergingBy.SetName("No link between these data frames. Click 'Join Options' to specify merging columns.")
-                clsLeftJoin.RemoveParameterByName("by")
+                clsLeftJoinFunction.RemoveParameterByName("by")
                 bBySpecified = False
             End If
         Else
             ucrInputMergingBy.SetName("")
-            clsLeftJoin.RemoveParameterByName("by")
+            clsLeftJoinFunction.RemoveParameterByName("by")
             bBySpecified = False
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged, ucrSaveDataFrame.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -162,7 +178,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub cmdModify_Click(sender As Object, e As EventArgs) Handles cmdModify.Click
-        sdgMerge.Setup(ucrToDataFrame.cboAvailableDataFrames.Text, ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog)
+        sdgMerge.Setup(ucrToDataFrame.cboAvailableDataFrames.Text, ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoinFunction, clsByListFunction, bResetSubdialog)
         sdgMerge.ShowDialog()
         PopulateMergeByText()
         bResetSubdialog = False
@@ -179,11 +195,11 @@ Public Class dlgMergeAdditionalData
         Dim strTemp As String = ""
         Dim strScript As String = ""
 
-        If clsLeftJoin.ContainsParameter("by") AndAlso clsByList.clsParameters.Count > 0 Then
-            strMergeBy = clsByList.ToScript()
+        If clsLeftJoinFunction.ContainsParameter("by") AndAlso clsByListFunction.clsParameters.Count > 0 Then
+            strMergeBy = clsByListFunction.ToScript()
             ucrInputMergingBy.SetName(strMergeBy.Substring(2, strMergeBy.Length - 3).Replace(Chr(34), ""))
-            For i As Integer = 0 To clsByList.clsParameters.Count - 1
-                ucrReceiverSecond.Add(clsByList.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            For i As Integer = 0 To clsByListFunction.clsParameters.Count - 1
+                ucrReceiverSecond.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             Next
         Else
             strMergeBy = ""
