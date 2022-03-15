@@ -138,8 +138,6 @@ Public Class dlgName
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
 
-        ucrNudAbbreviate.SetText(4)
-
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
