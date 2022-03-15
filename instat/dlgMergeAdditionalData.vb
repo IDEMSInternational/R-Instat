@@ -42,9 +42,9 @@ Public Class dlgMergeAdditionalData
     Private Sub InitialiseDialog()
         ucrFirstDataFrame.SetParameter(New RParameter("x", 0))
         ucrFirstDataFrame.SetParameterIsRFunction()
-        'ucrFirstDataFrame.SetLabelText("Main Data Frame:")
+        ucrFirstDataFrame.SetLabelText("To Data Frame:")
 
-        'ucrSecondSelector.SetLabelText("Additional Data Frame:")
+        ucrSecondSelector.SetLabelText("From Data Frame:")
 
         ucrReceiverSecond.SetParameter(New RParameter("y", 1))
         ucrReceiverSecond.SetParameterIsRFunction()
