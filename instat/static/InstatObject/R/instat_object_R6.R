@@ -132,12 +132,17 @@ DataBook$set("public", "set_data_objects", function(new_data_objects) {
 }
 )
 
-DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", reset_row_names = TRUE) {
+DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", column_selection_name = "", reset_row_names = TRUE) {
   new_obj <- self$get_data_objects(data_name)$data_clone()
   if(filter_name != "") {
     subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, retain_attr = TRUE)
     if(reset_row_names) rownames(subset_data) <- 1:nrow(subset_data)
     new_obj$remove_current_filter()
+    new_obj$set_data(subset_data)
+  }
+  if(column_selection_name != "") {
+    subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, column_selection_name = column_selection_name, use_column_selection = FALSE, retain_attr = TRUE)
+    new_obj$remove_current_column_selection()
     new_obj$set_data(subset_data)
   }
   self$append_data_object(new_name, new_obj)
@@ -328,17 +333,17 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
 }
 )
 
-DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", use_column_selection = TRUE, column_selection_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, column_selection_name = column_selection_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, column_selection_name = column_selection_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
@@ -1397,11 +1402,10 @@ DataBook$set("public","set_contrasts_of_factor", function(data_name, col_name, n
 }
 )
 
-DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = TRUE, replace = FALSE) {
+DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = FALSE, replace = FALSE, summary_count = TRUE) {
   curr_data_obj <- self$get_data_objects(data_name)
   if(!factor %in% names(curr_data_obj$get_data_frame())) stop(factor, " not found in the data")
   if(!is.factor(curr_data_obj$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
-  create <- TRUE
   if(self$link_exists_from(data_name, factor)) {
     message("Factor data frame already exists.")
     if(replace) {
@@ -1410,14 +1414,13 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
       # TODO what if there is more than 1?
-      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
+      if(length(curr_factor_df_name) > 0) self$delete_dataframes(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
-      create <- FALSE
     }
   }
-  if(create) {
+
     data_frame_list <- list()
     if(missing(factor_data_frame_name)) factor_data_frame_name <- paste0(data_name, "_", factor)
     factor_data_frame_name <- make.names(factor_data_frame_name)
@@ -1426,11 +1429,12 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     factor_column <- curr_data_obj$get_columns_from_data(factor)
     factor_data_frame <- data.frame(levels(factor_column))
     names(factor_data_frame) <- factor
-    if(include_contrasts) {
-      factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
-    }
+    if(include_contrasts) factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
+    if(summary_count) factor_data_frame <- cbind(factor_data_frame, summary(factor_column))
+
     row.names(factor_data_frame) <- 1:nrow(factor_data_frame)
     names(factor_data_frame)[2:ncol(factor_data_frame)] <- paste0("C", 1:(ncol(factor_data_frame)-1))
+    if(summary_count) colnames(factor_data_frame)[ncol(factor_data_frame)] <- "Frequencies"
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
@@ -1439,7 +1443,6 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
   }
-}
 )
 
 DataBook$set("public","split_date", function(data_name, col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {

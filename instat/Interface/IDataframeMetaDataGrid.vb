@@ -19,6 +19,8 @@ Public Interface IDataframeMetaDataGrid
 
     Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
 
+    Event DeleteLabels(strColumnName As String)
+
     Sub AddColumns()
 
     Sub AddRowData()
