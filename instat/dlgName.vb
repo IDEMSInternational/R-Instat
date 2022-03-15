@@ -366,7 +366,7 @@ Public Class dlgName
 
     Private Sub RemoveParameters()
         If rdoMultiple.Checked OrElse rdoSingle.Checked Then
-            clsDefaultRFunction.RemoveParameterByPosition(5)
+            clsDefaultRFunction.RemoveParameterByName(".fn")
             RemoveLabelsParams()
         End If
     End Sub
