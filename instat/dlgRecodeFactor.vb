@@ -21,7 +21,7 @@ Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
     Private clsPlyrRevalueFunction, clsReplaceFunction, clsFctOtherFunction, clsFctExplicitNaFunction As New RFunction
     Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpNFunction As New RFunction
-    Private clsRemoveLabelsFunction, clsAddLabelsFunction As New RFunction
+    Private clsRemoveLabelsFunction As New RFunction
     Private clsCFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
