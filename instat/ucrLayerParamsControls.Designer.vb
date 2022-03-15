@@ -44,7 +44,6 @@ Partial Class ucrLayerParamsControls
         '
         'ucrReceiverMetadataProperty
         '
-        Me.ucrReceiverMetadataProperty.AutoSize = True
         Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(101, 2)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
         Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(161, 23)
@@ -52,7 +51,6 @@ Partial Class ucrLayerParamsControls
         '
         'ucrChkParamName
         '
-        Me.ucrChkParamName.AutoSize = True
         Me.ucrChkParamName.Checked = False
         Me.ucrChkParamName.Dock = System.Windows.Forms.DockStyle.Left
         Me.ucrChkParamName.Location = New System.Drawing.Point(0, 0)
@@ -69,7 +67,6 @@ Partial Class ucrLayerParamsControls
         Me.Name = "ucrLayerParamsControls"
         Me.Size = New System.Drawing.Size(265, 28)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrReceiverMetadataProperty As ucrReceiverMetadataProperty
