@@ -3554,7 +3554,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareCheckDataDuplicates.Name = "mnuPrepareCheckDataDuplicates"
         Me.mnuPrepareCheckDataDuplicates.Size = New System.Drawing.Size(245, 22)
-        Me.mnuPrepareCheckDataDuplicates.Text = "Duplicates..."
+        Me.mnuPrepareCheckDataDuplicates.Text = "Duplicate Rows..."
         '
         'mnuPrepareCheckDataCompareColumns
         '
@@ -3613,6 +3613,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataImportOpenRefine.Name = "mnuPrepareCheckDataImportOpenRefine"
         Me.mnuPrepareCheckDataImportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataImportOpenRefine.Text = "Import From OpenRefine..."
+        Me.mnuPrepareCheckDataImportOpenRefine.Visible = False
         '
         'ToolStripSeparator40
         '
