@@ -63,6 +63,7 @@ Public Class dlgContrasts
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverForContrasts.strSelectorHeading = "Factors"
         ucrBase.iHelpTopicID = 353
+        ucrBase.clsRsyntax.iCallType = 2
 
         Dim dctContrastTypes As New Dictionary(Of String, String)
         ucrInputContrastName.SetParameter(New RParameter("new_contrasts", 2))
