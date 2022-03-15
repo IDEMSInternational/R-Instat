@@ -1456,9 +1456,9 @@ Public Class frmMain
         dlgStringDistance.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
-        dlgThreeVariableFrequencies.ShowDialog()
-    End Sub
+    'Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
+    '    dlgThreeVariableFrequencies.ShowDialog()
+    'End Sub
 
     Private Sub mnuDescribeViewGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeViewGraph.Click
         dlgViewGraph.ShowDialog()
@@ -2396,9 +2396,9 @@ Public Class frmMain
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
-        dlgThreeVariablePivotTable.ShowDialog()
-    End Sub
+    'Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
+    '    dlgThreeVariablePivotTable.ShowDialog()
+    'End Sub
 
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
         dlgExportToClimsoft.ShowDialog()
@@ -2430,5 +2430,9 @@ Public Class frmMain
 
     Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
         dlgDefineOptionsByContext.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesCorrelations.Click
+        dlgCorrelation.ShowDialog()
     End Sub
 End Class
