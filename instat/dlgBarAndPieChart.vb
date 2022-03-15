@@ -119,7 +119,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoWordCloud)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, {"coordpolar", "geom_bar", "geom_text"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text", "geom_lollipop"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
@@ -673,6 +673,9 @@ Public Class dlgBarAndPieChart
             Else
                 ucrReceiverByFactor.Clear()
             End If
+            If ucrChkLollipop.Checked Then
+                sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLollipopFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
+            End If
             'Allows for sync with the layer parameters
             ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
             TestOkEnabled()
@@ -694,7 +697,7 @@ Public Class dlgBarAndPieChart
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            cmdBarChartOptions.Visible = True
+            'cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
@@ -710,7 +713,7 @@ Public Class dlgBarAndPieChart
 
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
-            ucrChkLollipop.Checked = False
+            'ucrChkLollipop.Checked = False
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
                 ucrInputReorderX.Visible = True
                 ucrInputAddReorder.Visible = True
@@ -836,6 +839,7 @@ Public Class dlgBarAndPieChart
             End If
             If ucrChkLollipop.Checked Then
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
+                clsBaseOperator.RemoveParameterByName("geom_bar")
             Else
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
@@ -878,7 +882,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged,
-    ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged
+    ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
@@ -887,7 +891,6 @@ Public Class dlgBarAndPieChart
         If rdoWordCloud.Checked Then
             ucrReceiverWordcloudLabel.SetMeAsReceiver()
         End If
-        ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
     End Sub
 
     Private Sub ucrReceiverByFactor_ControlContentsChanged() Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
@@ -900,7 +903,7 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar1")
             clsBaseOperator.RemoveParameterByName("geom_bar2")
