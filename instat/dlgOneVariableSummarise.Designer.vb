@@ -130,7 +130,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkDisplaySummariesAsRows.AutoSize = True
         Me.ucrChkDisplaySummariesAsRows.Checked = False
-        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(13, 270)
+        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(13, 247)
         Me.ucrChkDisplaySummariesAsRows.Name = "ucrChkDisplaySummariesAsRows"
         Me.ucrChkDisplaySummariesAsRows.Size = New System.Drawing.Size(241, 23)
         Me.ucrChkDisplaySummariesAsRows.TabIndex = 19
@@ -139,7 +139,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkDisplayVariablesAsRows.AutoSize = True
         Me.ucrChkDisplayVariablesAsRows.Checked = False
-        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(13, 294)
+        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(13, 270)
         Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
         Me.ucrChkDisplayVariablesAsRows.Size = New System.Drawing.Size(227, 23)
         Me.ucrChkDisplayVariablesAsRows.TabIndex = 18
@@ -161,7 +161,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 247)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 294)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(241, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
