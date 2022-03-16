@@ -68,7 +68,7 @@ Public Class dlgMergeAdditionalData
         ucrFromDataFrame.Reset()
         ucrReceiverSecond.SetMeAsReceiver()
         ucrInputMergingBy.SetName("")
-        ucrInputSaveDataFrame.SetName("new_data_frame")
+        ucrInputSaveDataFrame.SetName("merge")
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 

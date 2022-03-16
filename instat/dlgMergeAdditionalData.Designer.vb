@@ -125,7 +125,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrChkSaveDataFrame.Checked = False
         Me.ucrChkSaveDataFrame.Location = New System.Drawing.Point(9, 262)
         Me.ucrChkSaveDataFrame.Name = "ucrChkSaveDataFrame"
-        Me.ucrChkSaveDataFrame.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSaveDataFrame.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkSaveDataFrame.TabIndex = 8
         '
         'ucrInputSaveDataFrame
@@ -134,7 +134,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrInputSaveDataFrame.AutoSize = True
         Me.ucrInputSaveDataFrame.IsMultiline = False
         Me.ucrInputSaveDataFrame.IsReadOnly = False
-        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(116, 262)
+        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(158, 263)
         Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
         Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSaveDataFrame.TabIndex = 9
