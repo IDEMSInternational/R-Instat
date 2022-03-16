@@ -56,8 +56,8 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
         ucrReceiverColumn.SetParameterIsString()
         ucrReceiverColumn.bWithQuotes = False
-        ucrReceiverColumn.SetIncludedDataTypes({"character, factor"})
-        ucrReceiverColumn.strSelectorHeading = "characters & factors"
+        ucrReceiverColumn.SetIncludedDataTypes({"factor", "character"}, bStrict:=True)
+        ucrReceiverColumn.strSelectorHeading = "Factors and Characters"
 
         'save control
         ucrSaveColumn.SetPrefix("nonum")
