@@ -33,7 +33,6 @@ Public Class dlgContrasts
 
         ' Add any initialization after the InitializeComponent() call.
         grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
-        'grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayoutForContrasts.SheetTabNewButtonVisible = False
         grdCurrSheet = grdLayoutForContrasts.CurrentWorksheet
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -104,9 +103,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
-        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
-        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -212,9 +209,7 @@ Public Class dlgContrasts
         clsGetColumnFunction.RemoveAssignTo()
         Dim clsGetContrastFunction As New RFunction
         Dim expContrasts As SymbolicExpression
-        ' Dim strColumnHeaders() As String
         Dim vecColums As NumericMatrix
-        ' Dim strRowHeaders() As String
         Dim strTopItemText As String = ""
 
         clsGetContrastFunction.SetRCommand("contrasts")
@@ -222,16 +217,6 @@ Public Class dlgContrasts
         expContrasts = frmMain.clsRLink.RunInternalScriptGetValue(clsGetContrastFunction.ToScript(), bSilent:=True)
         If expContrasts IsNot Nothing AndAlso Not expContrasts.Type = Internals.SymbolicExpressionType.Null Then
             vecColums = expContrasts.AsNumericMatrix()
-            'strColumnHeaders = vecColums.ColumnNames
-            'strRowHeaders = vecColums.RowNames
-            'For col = 0 To strColumnHeaders.Count - 1
-            '    grdCurrSheet.ColumnHeaders(col).Text = strColumnHeaders(col)
-            'Next
-
-            'For row = 0 To strRowHeaders.Count - 1
-            '    grdCurrSheet.RowHeaders(row).Text = strRowHeaders(row)
-            'Next
-
             For j = 0 To vecColums.ColumnCount - 1
                 For i = 0 To vecColums.RowCount - 1
                     grdCurrSheet.Item(row:=i, col:=j) = vecColums(i, j)
