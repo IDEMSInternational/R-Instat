@@ -790,7 +790,8 @@ Public Class dlgDescribeTwoVarGraph
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
         clsGgmosaicProduct.ClearParameters()
         For Each strVariables In ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)
-            clsGgmosaicProduct.AddParameter("columns" & iPosition, ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(bWithQuotes:=False), iPosition:=iPosition, bIncludeArgumentName:=False)
+            clsGgmosaicProduct.AddParameter("columns" & iPosition, strVariables,
+                                            iPosition:=iPosition, bIncludeArgumentName:=False)
             iPosition = iPosition + 1
         Next
         ChangeGeomToMosaicAndFacet()
