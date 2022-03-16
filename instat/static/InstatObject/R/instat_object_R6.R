@@ -911,8 +911,8 @@ DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, st
 }
 )
 
-DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), ...) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, ...)
+DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, new_column_names_df, new_labels_df, ...)
   self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 })
 
