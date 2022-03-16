@@ -785,6 +785,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
         Dim iPosition As Integer = 0
+        Dim iNumVariables As Integer = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count
         Results()
         EnableVisibleLabelControls()
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
@@ -796,7 +797,7 @@ Public Class dlgDescribeTwoVarGraph
         Next
         ChangeGeomToMosaicAndFacet()
 
-        If ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count > 0 Then
+        If iNumVariables > 0 Then
             clsAesCategoricalByCategoricalMosaicPlot.AddParameter("fill", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)(0), iPosition:=1)
         End If
     End Sub
