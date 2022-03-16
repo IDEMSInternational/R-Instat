@@ -52,6 +52,7 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator34 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuDescribeTwoThreeVariablesCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
@@ -202,7 +203,7 @@ Partial Class frmMain
         Me.mnuClimaticTidyandExamineTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineDuplicates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyandExamineDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator54 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineStack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineUnstack = New System.Windows.Forms.ToolStripMenuItem()
@@ -622,7 +623,7 @@ Partial Class frmMain
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCheckDataDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator47 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOptionsByContextCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
@@ -672,7 +673,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoThreeVariablesCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -768,33 +768,39 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesSummarise.DoubleClickEnabled = True
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(147, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(147, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
         'ToolStripSeparator34
         '
         Me.ToolStripSeparator34.Name = "ToolStripSeparator34"
-        Me.ToolStripSeparator34.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator34.Size = New System.Drawing.Size(144, 6)
+        '
+        'mnuDescribeTwoThreeVariablesCorrelations
+        '
+        Me.mnuDescribeTwoThreeVariablesCorrelations.Name = "mnuDescribeTwoThreeVariablesCorrelations"
+        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(147, 22)
+        Me.mnuDescribeTwoThreeVariablesCorrelations.Text = "Correlations..."
         '
         'mnuDescribeTwoVariablesFrequencies
         '
         Me.mnuDescribeTwoVariablesFrequencies.DoubleClickEnabled = True
         Me.mnuDescribeTwoVariablesFrequencies.Name = "mnuDescribeTwoVariablesFrequencies"
-        Me.mnuDescribeTwoVariablesFrequencies.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesFrequencies.Size = New System.Drawing.Size(147, 22)
         Me.mnuDescribeTwoVariablesFrequencies.Text = "Frequencies..."
         '
         'mnuDescribeTwoVariablesPivotTable
         '
         Me.mnuDescribeTwoVariablesPivotTable.Name = "mnuDescribeTwoVariablesPivotTable"
-        Me.mnuDescribeTwoVariablesPivotTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesPivotTable.Size = New System.Drawing.Size(147, 22)
         Me.mnuDescribeTwoVariablesPivotTable.Text = "Pivot Table..."
         '
         'mnuDescribeSpecificTablesGraphs
@@ -1749,7 +1755,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuSetupForDataEntry, Me.mnuTidyandExamineClimaticDataEntry, Me.mnuClimaticTidyandExamineCompareColumns, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicateRows, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuSetupForDataEntry, Me.mnuTidyandExamineClimaticDataEntry, Me.mnuClimaticTidyandExamineCompareColumns, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         Me.mnuClimaticTidyandExamine.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticTidyandExamine.Text = "Tidy and Examine"
@@ -1778,11 +1784,11 @@ Partial Class frmMain
         Me.mnuClimaticTidyandExamineReplaceValues.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimaticTidyandExamineReplaceValues.Text = "Replace Values..."
         '
-        'mnuClimaticTidyandExamineDuplicates
+        'mnuClimaticTidyandExamineDuplicateRows
         '
-        Me.mnuClimaticTidyandExamineDuplicates.Name = "mnuClimaticTidyandExamineDuplicates"
-        Me.mnuClimaticTidyandExamineDuplicates.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineDuplicates.Text = "Duplicates..."
+        Me.mnuClimaticTidyandExamineDuplicateRows.Name = "mnuClimaticTidyandExamineDuplicateRows"
+        Me.mnuClimaticTidyandExamineDuplicateRows.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticTidyandExamineDuplicateRows.Text = "Duplicate Rows..."
         '
         'ToolStripSeparator54
         '
@@ -1869,32 +1875,32 @@ Partial Class frmMain
         'mnuClimaticDatesGenerateDates
         '
         Me.mnuClimaticDatesGenerateDates.Name = "mnuClimaticDatesGenerateDates"
-        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesGenerateDates.Text = "Generate Dates..."
         '
         'mnuClimaticDatesMakeDate
         '
         Me.mnuClimaticDatesMakeDate.Name = "mnuClimaticDatesMakeDate"
-        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesMakeDate.Text = "Make Date..."
         '
         'mnuClimaticDatesInfillMissingDates
         '
         Me.mnuClimaticDatesInfillMissingDates.Name = "mnuClimaticDatesInfillMissingDates"
-        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesInfillMissingDates.Text = "Fill Date Gaps..."
         '
         'mnuClimaticDatesUseDate
         '
         Me.mnuClimaticDatesUseDate.Name = "mnuClimaticDatesUseDate"
-        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesUseDate.Text = "Use Date..."
         '
         'mnuClimaticDatesMakeTime
         '
         Me.mnuClimaticDatesMakeTime.Enabled = False
         Me.mnuClimaticDatesMakeTime.Name = "mnuClimaticDatesMakeTime"
-        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesMakeTime.Text = "Make Time..."
         Me.mnuClimaticDatesMakeTime.Visible = False
         '
@@ -1902,7 +1908,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticDatesUseTime.Enabled = False
         Me.mnuClimaticDatesUseTime.Name = "mnuClimaticDatesUseTime"
-        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesUseTime.Text = "Use Time..."
         Me.mnuClimaticDatesUseTime.Visible = False
         '
@@ -4620,16 +4626,16 @@ Partial Class frmMain
         '
         'mnuOptionsByContextCheckData
         '
-        Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicates, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
+        Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
-        'mnuOptionsByContextCheckDataDuplicates
+        'mnuOptionsByContextCheckDataDuplicateRows
         '
-        Me.mnuOptionsByContextCheckDataDuplicates.Name = "mnuOptionsByContextCheckDataDuplicates"
-        Me.mnuOptionsByContextCheckDataDuplicates.Size = New System.Drawing.Size(215, 22)
-        Me.mnuOptionsByContextCheckDataDuplicates.Text = "Duplicates..."
+        Me.mnuOptionsByContextCheckDataDuplicateRows.Name = "mnuOptionsByContextCheckDataDuplicateRows"
+        Me.mnuOptionsByContextCheckDataDuplicateRows.Size = New System.Drawing.Size(215, 22)
+        Me.mnuOptionsByContextCheckDataDuplicateRows.Text = "Duplicate Rows..."
         '
         'mnuOptionsByContextCheckDataCompareColumns
         '
@@ -4664,7 +4670,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -4683,7 +4689,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -4719,7 +4725,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -4745,7 +4751,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -5055,12 +5061,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuDescribeTwoThreeVariablesCorrelations
-        '
-        Me.mnuDescribeTwoThreeVariablesCorrelations.Name = "mnuDescribeTwoThreeVariablesCorrelations"
-        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(180, 22)
-        Me.mnuDescribeTwoThreeVariablesCorrelations.Text = "Correlations..."
         '
         'frmMain
         '
@@ -5546,7 +5546,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextDescribe As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDescribeCompareTwoTreatments As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDescribeCompareMultipleTreatments As ToolStripMenuItem
-    Friend WithEvents mnuOptionsByContextCheckDataDuplicates As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextCheckDataDuplicateRows As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextCheckDataCompareColumns As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextModel As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextModelFitModel As ToolStripMenuItem
@@ -5598,7 +5598,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticMapping As ToolStripMenuItem
     Friend WithEvents mnuHelpWindows As ToolStripMenuItem
     Friend WithEvents mnuHelpDataViewSpreadsheet As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineDuplicates As ToolStripMenuItem
+    Friend WithEvents mnuClimaticTidyandExamineDuplicateRows As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
