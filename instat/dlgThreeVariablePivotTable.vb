@@ -70,7 +70,7 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
-        ucrChkNumericVariable.SetText("Numeric Variable(Optional):")
+        ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
         ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
         ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", False)
         ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,

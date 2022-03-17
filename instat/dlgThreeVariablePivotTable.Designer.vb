@@ -27,6 +27,9 @@ Partial Class dlgThreeVariablePivotTable
         Me.lblInitialRowFactor = New System.Windows.Forms.Label()
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTableChart = New System.Windows.Forms.Label()
+        Me.lblSummary = New System.Windows.Forms.Label()
+        Me.ucrChkNumericVariable = New instat.ucrCheck()
+        Me.ucrInputSummary = New instat.ucrInputComboBox()
         Me.ucrInputTableChart = New instat.ucrInputComboBox()
         Me.ucrReceiverInitialRowFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverAdditionalRowFactor = New instat.ucrReceiverSingle()
@@ -37,9 +40,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputSummary = New instat.ucrInputComboBox()
-        Me.lblSummary = New System.Windows.Forms.Label()
-        Me.ucrChkNumericVariable = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblInitialColumnFactor
@@ -57,7 +57,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.lblInitialRowFactor.AutoSize = True
         Me.lblInitialRowFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInitialRowFactor.Location = New System.Drawing.Point(260, 42)
+        Me.lblInitialRowFactor.Location = New System.Drawing.Point(244, 31)
         Me.lblInitialRowFactor.Name = "lblInitialRowFactor"
         Me.lblInitialRowFactor.Size = New System.Drawing.Size(106, 13)
         Me.lblInitialRowFactor.TabIndex = 52
@@ -74,6 +74,36 @@ Partial Class dlgThreeVariablePivotTable
         Me.lblTableChart.TabIndex = 63
         Me.lblTableChart.Text = "Table/Chart  :"
         '
+        'lblSummary
+        '
+        Me.lblSummary.AutoSize = True
+        Me.lblSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSummary.Location = New System.Drawing.Point(6, 265)
+        Me.lblSummary.Name = "lblSummary"
+        Me.lblSummary.Size = New System.Drawing.Size(59, 13)
+        Me.lblSummary.TabIndex = 65
+        Me.lblSummary.Text = "Summary : "
+        '
+        'ucrChkNumericVariable
+        '
+        Me.ucrChkNumericVariable.AutoSize = True
+        Me.ucrChkNumericVariable.Checked = False
+        Me.ucrChkNumericVariable.Location = New System.Drawing.Point(244, 179)
+        Me.ucrChkNumericVariable.Name = "ucrChkNumericVariable"
+        Me.ucrChkNumericVariable.Size = New System.Drawing.Size(170, 23)
+        Me.ucrChkNumericVariable.TabIndex = 67
+        '
+        'ucrInputSummary
+        '
+        Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSummary.GetSetSelectedIndex = -1
+        Me.ucrInputSummary.IsReadOnly = False
+        Me.ucrInputSummary.Location = New System.Drawing.Point(82, 265)
+        Me.ucrInputSummary.Name = "ucrInputSummary"
+        Me.ucrInputSummary.Size = New System.Drawing.Size(104, 21)
+        Me.ucrInputSummary.TabIndex = 66
+        '
         'ucrInputTableChart
         '
         Me.ucrInputTableChart.AddQuotesIfUnrecognised = True
@@ -89,7 +119,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrReceiverInitialRowFactors.AutoSize = True
         Me.ucrReceiverInitialRowFactors.frmParent = Me
-        Me.ucrReceiverInitialRowFactors.Location = New System.Drawing.Point(244, 47)
+        Me.ucrReceiverInitialRowFactors.Location = New System.Drawing.Point(244, 46)
         Me.ucrReceiverInitialRowFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverInitialRowFactors.Name = "ucrReceiverInitialRowFactors"
         Me.ucrReceiverInitialRowFactors.Selector = Nothing
@@ -184,36 +214,6 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrSelectorPivot.Name = "ucrSelectorPivot"
         Me.ucrSelectorPivot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorPivot.TabIndex = 50
-        '
-        'ucrInputSummary
-        '
-        Me.ucrInputSummary.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSummary.GetSetSelectedIndex = -1
-        Me.ucrInputSummary.IsReadOnly = False
-        Me.ucrInputSummary.Location = New System.Drawing.Point(82, 265)
-        Me.ucrInputSummary.Name = "ucrInputSummary"
-        Me.ucrInputSummary.Size = New System.Drawing.Size(104, 21)
-        Me.ucrInputSummary.TabIndex = 66
-        '
-        'lblSummary
-        '
-        Me.lblSummary.AutoSize = True
-        Me.lblSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummary.Location = New System.Drawing.Point(6, 265)
-        Me.lblSummary.Name = "lblSummary"
-        Me.lblSummary.Size = New System.Drawing.Size(59, 13)
-        Me.lblSummary.TabIndex = 65
-        Me.lblSummary.Text = "Summary : "
-        '
-        'ucrChkNumericVariable
-        '
-        Me.ucrChkNumericVariable.AutoSize = True
-        Me.ucrChkNumericVariable.Checked = False
-        Me.ucrChkNumericVariable.Location = New System.Drawing.Point(244, 179)
-        Me.ucrChkNumericVariable.Name = "ucrChkNumericVariable"
-        Me.ucrChkNumericVariable.Size = New System.Drawing.Size(170, 23)
-        Me.ucrChkNumericVariable.TabIndex = 67
         '
         'dlgThreeVariablePivotTable
         '
