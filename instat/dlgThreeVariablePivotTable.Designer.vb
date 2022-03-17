@@ -46,7 +46,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.lblInitialColumnFactor.AutoSize = True
         Me.lblInitialColumnFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInitialColumnFactor.Location = New System.Drawing.Point(260, 142)
+        Me.lblInitialColumnFactor.Location = New System.Drawing.Point(244, 134)
         Me.lblInitialColumnFactor.Name = "lblInitialColumnFactor"
         Me.lblInitialColumnFactor.Size = New System.Drawing.Size(105, 13)
         Me.lblInitialColumnFactor.TabIndex = 54
@@ -89,7 +89,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrReceiverInitialRowFactors.AutoSize = True
         Me.ucrReceiverInitialRowFactors.frmParent = Me
-        Me.ucrReceiverInitialRowFactors.Location = New System.Drawing.Point(260, 55)
+        Me.ucrReceiverInitialRowFactors.Location = New System.Drawing.Point(244, 47)
         Me.ucrReceiverInitialRowFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverInitialRowFactors.Name = "ucrReceiverInitialRowFactors"
         Me.ucrReceiverInitialRowFactors.Selector = Nothing
@@ -102,7 +102,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrReceiverAdditionalRowFactor.AutoSize = True
         Me.ucrReceiverAdditionalRowFactor.frmParent = Me
-        Me.ucrReceiverAdditionalRowFactor.Location = New System.Drawing.Point(260, 216)
+        Me.ucrReceiverAdditionalRowFactor.Location = New System.Drawing.Point(244, 208)
         Me.ucrReceiverAdditionalRowFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAdditionalRowFactor.Name = "ucrReceiverAdditionalRowFactor"
         Me.ucrReceiverAdditionalRowFactor.Selector = Nothing
@@ -133,7 +133,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrReceiverSelectedVariable.AutoSize = True
         Me.ucrReceiverSelectedVariable.frmParent = Me
-        Me.ucrReceiverSelectedVariable.Location = New System.Drawing.Point(260, 265)
+        Me.ucrReceiverSelectedVariable.Location = New System.Drawing.Point(244, 257)
         Me.ucrReceiverSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariable.Name = "ucrReceiverSelectedVariable"
         Me.ucrReceiverSelectedVariable.Selector = Nothing
@@ -146,7 +146,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrChkSelectedVariable.AutoSize = True
         Me.ucrChkSelectedVariable.Checked = False
-        Me.ucrChkSelectedVariable.Location = New System.Drawing.Point(260, 245)
+        Me.ucrChkSelectedVariable.Location = New System.Drawing.Point(244, 237)
         Me.ucrChkSelectedVariable.Name = "ucrChkSelectedVariable"
         Me.ucrChkSelectedVariable.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkSelectedVariable.TabIndex = 56
@@ -155,7 +155,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrReceiverInitialColumnFactor.AutoSize = True
         Me.ucrReceiverInitialColumnFactor.frmParent = Me
-        Me.ucrReceiverInitialColumnFactor.Location = New System.Drawing.Point(260, 157)
+        Me.ucrReceiverInitialColumnFactor.Location = New System.Drawing.Point(244, 149)
         Me.ucrReceiverInitialColumnFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverInitialColumnFactor.Name = "ucrReceiverInitialColumnFactor"
         Me.ucrReceiverInitialColumnFactor.Selector = Nothing
@@ -210,9 +210,9 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrChkNumericVariable.AutoSize = True
         Me.ucrChkNumericVariable.Checked = False
-        Me.ucrChkNumericVariable.Location = New System.Drawing.Point(260, 187)
+        Me.ucrChkNumericVariable.Location = New System.Drawing.Point(244, 179)
         Me.ucrChkNumericVariable.Name = "ucrChkNumericVariable"
-        Me.ucrChkNumericVariable.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkNumericVariable.Size = New System.Drawing.Size(170, 23)
         Me.ucrChkNumericVariable.TabIndex = 67
         '
         'dlgThreeVariablePivotTable
