@@ -400,13 +400,11 @@ Public Class dlgBarAndPieChart
         bResetBarLayerSubdialog = True
 
         ucrInputAddReorder.SetText(strNone)
-        'ucrInputAddReorder.bUpdateRCodeFromControl = True
 
         ucrInputReorderX.SetText(strNone)
         ucrInputReorderX.bUpdateRCodeFromControl = True
 
         ucrInputReorderValue.SetText(strNone)
-        'ucrInputReorderValue.bUpdateRCodeFromControl = True
         'Temp fix: Set panel conditions properly!
         rdoPie.Checked = True
         rdoFrequency.Checked = True
@@ -459,10 +457,8 @@ Public Class dlgBarAndPieChart
         clsForecatsInfreqValue.SetRCommand("fct_infreq")
 
         clsReorderFunctionValue.SetRCommand("reorder")
-        'clsReorderFunctionValue.SetRCommand("reorder")
 
         clsReorderFunction.SetRCommand("reorder")
-        'clsReorderFunction.SetRCommand("reorder")
 
         clsAesFunction1.SetRCommand("aes")
 
@@ -703,7 +699,6 @@ Public Class dlgBarAndPieChart
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            'cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
@@ -712,12 +707,9 @@ Public Class dlgBarAndPieChart
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
             If Not ucrReceiverByFactor.IsEmpty() Then
-                'ucrInputAddReorder.Visible = True
                 ucrInputBarChartPositions.Visible = True
             Else
-                'ucrInputAddReorder.Visible = False
                 ucrInputBarChartPositions.Visible = False
-                'ucrInputAddReorder.SetText(strNone)
             End If
         ElseIf rdoTreeMap.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
@@ -727,7 +719,6 @@ Public Class dlgBarAndPieChart
 
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
-            'ucrChkLollipop.Checked = False
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
                 ucrInputReorderX.Visible = True
                 If Not ucrReceiverByFactor.IsEmpty() Then
@@ -751,7 +742,6 @@ Public Class dlgBarAndPieChart
                 End If
             Else
                 ucrChkReorderValue.Visible = False
-                'ucrInputReorderValue.SetText(strNone)
             End If
         End If
     End Sub
