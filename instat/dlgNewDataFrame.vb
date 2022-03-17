@@ -416,7 +416,7 @@ Public Class dlgNewDataFrame
         End Try
     End Sub
 
-    Private Sub ucrNudCols_ControlClicked() Handles ucrNudCols.ControlValueChanged
+    Private Sub ucrNudCols_TextChanged() Handles ucrNudCols.ControlValueChanged
         Dim iValue As Integer = ucrNudCols.Value
         If iOldValue > 0 Then
             UpdateGrid(iValue, dataTypeGridView)
@@ -599,5 +599,4 @@ Public Class dlgNewDataFrame
         frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
         frm.Show()
     End Sub
-
 End Class
