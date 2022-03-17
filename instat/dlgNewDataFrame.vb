@@ -18,10 +18,11 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgNewDataFrame
-    Private clsEmptyOverallFunction, clsEmptyMatrixFunction As New RFunction
+    Private clsEmptyOverallFunction, clsEmptyRepFunction, clsEmptyMatrixFunction, clsNewDataFrame As New RFunction
     Private clsConstructFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bFilled As Boolean = False
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me) this subroutine was causing a bug in the button examples
@@ -89,6 +90,7 @@ Public Class dlgNewDataFrame
         'Empty option functions
         clsEmptyOverallFunction = New RFunction
         clsEmptyMatrixFunction = New RFunction
+        clsNewDataFrame = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
@@ -101,6 +103,9 @@ Public Class dlgNewDataFrame
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
         clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
+
+        clsNewDataFrame.SetRCommand("data.frame")
+        clsEmptyRepFunction.SetRCommand("rep")
 
         'matrix(data = NA,nrow = 10, ncol = 2)
         clsEmptyMatrixFunction.SetRCommand("matrix")
@@ -115,7 +120,7 @@ Public Class dlgNewDataFrame
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -194,10 +199,12 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrNudCols.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
         ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=1)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
 
         If bReset Then
@@ -215,7 +222,7 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -249,7 +256,12 @@ Public Class dlgNewDataFrame
             btnExample.Visible = False
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+            'If ucrChkVariable.Checked Then
+            '    ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+            'Else
+            '    ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+            'End If
+            ' ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
         autoTranslate(Me)
     End Sub
@@ -283,6 +295,67 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
+    Private Sub SampleEmpty()
+
+        clsNewDataFrame.ClearParameters()
+        Dim iColPosition As Integer = 0
+        For Each row As DataGridViewRow In dataTypeGridView.Rows
+            'all cells must be filled for a valid column R expression. So check for empty cells 
+            'If String.IsNullOrEmpty(row.Cells("colNames").Value) OrElse String.IsNullOrEmpty(row.Cells("cbType").Value) OrElse String.IsNullOrEmpty(row.Cells("colLevels").Value) OrElse String.IsNullOrEmpty(row.Cells("colDefault").Value) Then
+            '    Continue For
+            'End If
+            Dim strColumnName As String = row.Cells("colNames").Value
+            Dim strType As String = row.Cells("colDefault").Value
+
+            'labels column is optional, so check for empty if it exists
+            Dim clsColExpRFunction As New RFunction
+            Select Case row.Cells("cbType").Value
+                Case "Character"
+                    clsColExpRFunction.SetRCommand("as.character")
+                Case "Numeric"
+                    clsColExpRFunction.SetRCommand("as.numeric")
+                Case "Factor"
+                    clsColExpRFunction.SetRCommand("factor")
+                    clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
+                    If row.Cells("colLabel").Visible Then
+                        clsColExpRFunction.AddParameter("labels", GetLevelsAsRString(row.Cells("colLabel").Value), iPosition:=2)
+                    End If
+                Case "Logic"
+                    clsColExpRFunction.SetRCommand("as.logic")
+                Case Else
+                    'developer error?
+                    Continue For
+            End Select
+
+            If strType = "NA" OrElse IsNumeric(strType) Then
+                clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            Else
+                clsEmptyRepFunction.AddParameter("x", Chr(34) & strType & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            End If
+
+            'check for NA and strings. strings must have double quotes, numeric should not have double quotes, logic??
+            'clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, iPosition:=1)
+
+            clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+            'clsColExpRFunction.AddParameter("x", strParameterValue:=clsEmptyRepFunction.ToScript)
+            clsNewDataFrame.AddParameter(Chr(34) & strColumnName & Chr(34), clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
+            iColPosition += 1
+        Next
+    End Sub
+
+    Private Function GetLevelsAsRString(strLevel As String) As String
+        Dim i As Integer
+        Dim strLevels As String() = strLevel.Split(New Char() {","c})
+        Dim strTemp As String
+
+        strTemp = "c" & "("
+        For Each strCh As String In strLevels
+            strTemp = strTemp & Chr(34) & strCh & Chr(34)
+        Next
+        strTemp = strTemp & ")"
+        Return strTemp
+    End Function
+
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
         'used column index instead of column name because of argument exception
         For i As Integer = 0 To dataGridView.Rows.Count - 1
@@ -298,6 +371,7 @@ Public Class dlgNewDataFrame
 
         If ucrChkVariable.Checked Then
             UpdateGrid(0, dataTypeGridView)
+            bFilled = True
         End If
 
         dataTypeGridView.Visible = If(ucrChkVariable.Checked, True, False)
@@ -305,7 +379,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
-
+        SampleEmpty()
     End Sub
 
     Private Sub UpdateGrid(iStart As Integer, dgrView As DataGridView)
@@ -316,7 +390,8 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Character"
                     .Item(i).Cells(3).Value = ""
-                    .Item(i).Cells(4).Value = "NA"
+                    .Item(i).Cells(4).Value = ""
+                    .Item(i).Cells(5).Value = "NA"
                 End With
             Next
         Catch ex As Exception
@@ -325,16 +400,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
-        Dim colLabel As New DataGridViewTextBoxColumn
-        colLabel.HeaderText = "Label"
-        colLabel.Name = "grdLabel"
-        colLabel.FillWeight = 100
-        colLabel.Width = 50
-        If ucrChkIncludeLabel.Checked Then
-            dataTypeGridView.Columns.Insert(5, colLabel)
-        Else
-            dataTypeGridView.Columns.RemoveAt(5)
-        End If
+        dataTypeGridView.Columns("colLabel").Visible = ucrChkIncludeLabel.Checked
     End Sub
 
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing

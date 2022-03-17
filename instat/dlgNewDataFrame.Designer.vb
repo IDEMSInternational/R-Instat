@@ -71,11 +71,12 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbGridType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLevels = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDefault = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -291,7 +292,7 @@ Partial Class dlgNewDataFrame
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dataTypeGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dataTypeGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataTypeGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.cbGridType, Me.Column1, Me.Column2})
+        Me.dataTypeGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no, Me.colNames, Me.cbType, Me.colLevels, Me.colLabel, Me.colDefault})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -402,40 +403,46 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 15
         '
-        'DataGridViewTextBoxColumn1
+        'no
         '
-        Me.DataGridViewTextBoxColumn1.FillWeight = 90.0!
-        Me.DataGridViewTextBoxColumn1.HeaderText = "No."
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 25
+        Me.no.FillWeight = 90.0!
+        Me.no.HeaderText = "No."
+        Me.no.Name = "no"
+        Me.no.ReadOnly = True
+        Me.no.Width = 25
         '
-        'DataGridViewTextBoxColumn2
+        'colNames
         '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 60
+        Me.colNames.HeaderText = "Name"
+        Me.colNames.Name = "colNames"
+        Me.colNames.Width = 60
         '
-        'cbGridType
+        'cbType
         '
-        Me.cbGridType.HeaderText = "Type"
-        Me.cbGridType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
-        Me.cbGridType.MaxDropDownItems = 4
-        Me.cbGridType.Name = "cbGridType"
-        Me.cbGridType.Width = 60
+        Me.cbType.HeaderText = "Type"
+        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
+        Me.cbType.MaxDropDownItems = 4
+        Me.cbType.Name = "cbType"
+        Me.cbType.Width = 60
         '
-        'Column1
+        'colLevels
         '
-        Me.Column1.HeaderText = "Levels"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 80
+        Me.colLevels.HeaderText = "Levels"
+        Me.colLevels.Name = "colLevels"
+        Me.colLevels.ReadOnly = True
+        Me.colLevels.Width = 80
         '
-        'Column2
+        'colLabel
         '
-        Me.Column2.HeaderText = "Default"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 50
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.Visible = False
+        '
+        'colDefault
+        '
+        Me.colDefault.HeaderText = "Default"
+        Me.colDefault.Name = "colDefault"
+        Me.colDefault.Width = 50
         '
         'dlgNewDataFrame
         '
@@ -504,9 +511,10 @@ Partial Class dlgNewDataFrame
     Friend WithEvents ucrChkVariable As ucrCheck
     Friend WithEvents dataTypeGridView As DataGridView
     Friend WithEvents ucrChkIncludeLabel As ucrCheck
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents cbGridType As DataGridViewComboBoxColumn
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents no As DataGridViewTextBoxColumn
+    Friend WithEvents colNames As DataGridViewTextBoxColumn
+    Friend WithEvents cbType As DataGridViewComboBoxColumn
+    Friend WithEvents colLevels As DataGridViewTextBoxColumn
+    Friend WithEvents colLabel As DataGridViewTextBoxColumn
+    Friend WithEvents colDefault As DataGridViewTextBoxColumn
 End Class
