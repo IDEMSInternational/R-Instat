@@ -158,7 +158,6 @@ Public Class clsPrepareFunctionsForGrids
         Dim clsColmnLabelsRFunction = New RFunction
         Dim clsGetColumnsFromData As New RFunction
 
-
         clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
         clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
