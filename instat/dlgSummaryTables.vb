@@ -31,6 +31,7 @@ Public Class dlgSummaryTables
             clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
             clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
+
     Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator,
             clsTabFootnoteOperator As New ROperator
 
@@ -61,6 +62,7 @@ Public Class dlgSummaryTables
         ucrReceiverSummaryCols.Selector = ucrSelectorSummaryTables
         ucrReceiverSummaryCols.SetDataType("numeric")
         ucrReceiverSummaryCols.SetParameterIsString()
+        ucrReceiverSummaryCols.SetLinkedDisplayControl(lblVariables)
 
         ucrChkStoreResults.SetText("Store Output")
         ucrChkStoreResults.SetParameter(New RParameter("store_table", 13))
@@ -124,6 +126,28 @@ Public Class dlgSummaryTables
         ucrChkWeight.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'Not yet implemented
         ucrChkWeight.Enabled = False
+
+        ucrPnlSummaryFrequencyTables.AddRadioButton(rdoSummaryTable)
+        ucrPnlSummaryFrequencyTables.AddRadioButton(rdoFrequencyTable)
+
+        ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrReceiverSummaryCols, ucrReorderSummary}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkDisplayAsPercentage}, {rdoFrequencyTable}, bNewLinkedHideIfParameterMissing:=True)
+
+
+        ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 7))
+        ucrChkDisplayAsPercentage.SetText("As Percentages")
+        ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
+        ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
+
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 9))
+        ucrChkPercentageProportion.SetText("Display as Decimal")
+        ucrChkPercentageProportion.SetRDefault("FALSE")
+
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
@@ -334,7 +358,9 @@ Public Class dlgSummaryTables
         ucrChkSummaries.SetRCode(clsDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverWeights.SetRCode(clsDefaultFunction, bReset)
+        ucrChkPercentageProportion.SetRCode(clsDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsDefaultFunction, bReset)
+        ucrChkDisplayAsPercentage.SetRCode(clsDefaultFunction, bReset)
         ucrChkDisplaySummariesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
@@ -474,5 +500,21 @@ Public Class dlgSummaryTables
             clsSummariesList.AddParameter(clsParameter)
             iPosition += 1
         Next
+    End Sub
+
+    Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
+        If rdoSummaryTable.Checked Then
+            cmdSummaries.Visible = True
+        Else
+            cmdSummaries.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
+        If ucrChkDisplayAsPercentage.Checked Then
+            ucrReceiverMultiplePercentages.SetMeAsReceiver()
+        Else
+            ucrReceiverFactors.SetMeAsReceiver()
+        End If
     End Sub
 End Class
