@@ -62,6 +62,12 @@ Partial Class dlgNewDataFrame
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.dataTypeGridView = New System.Windows.Forms.DataGridView()
+        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLevels = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDefault = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrChkIncludeLabel = New instat.ucrCheck()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrTryNewDataFrame = New instat.ucrTry()
@@ -71,12 +77,6 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colLevels = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDefault = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +84,7 @@ Partial Class dlgNewDataFrame
         '
         'lblRows
         '
+        Me.lblRows.AutoSize = True
         Me.lblRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblRows.Location = New System.Drawing.Point(24, 81)
         Me.lblRows.Name = "lblRows"
@@ -93,8 +94,9 @@ Partial Class dlgNewDataFrame
         '
         'lblColumns
         '
+        Me.lblColumns.AutoSize = True
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(156, 80)
+        Me.lblColumns.Location = New System.Drawing.Point(24, 59)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(50, 13)
         Me.lblColumns.TabIndex = 10
@@ -189,7 +191,7 @@ Partial Class dlgNewDataFrame
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dataGridView.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dataGridView.Location = New System.Drawing.Point(9, 84)
+        Me.dataGridView.Location = New System.Drawing.Point(10, 87)
         Me.dataGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.dataGridView.Name = "dataGridView"
         Me.dataGridView.RowHeadersVisible = False
@@ -301,107 +303,13 @@ Partial Class dlgNewDataFrame
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dataTypeGridView.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dataTypeGridView.Location = New System.Drawing.Point(10, 136)
+        Me.dataTypeGridView.Location = New System.Drawing.Point(11, 139)
         Me.dataTypeGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.dataTypeGridView.Name = "dataTypeGridView"
         Me.dataTypeGridView.RowHeadersVisible = False
         Me.dataTypeGridView.RowTemplate.Height = 28
         Me.dataTypeGridView.Size = New System.Drawing.Size(416, 115)
         Me.dataTypeGridView.TabIndex = 163
-        '
-        'ucrChkIncludeLabel
-        '
-        Me.ucrChkIncludeLabel.AutoSize = True
-        Me.ucrChkIncludeLabel.Checked = False
-        Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(184, 104)
-        Me.ucrChkIncludeLabel.Name = "ucrChkIncludeLabel"
-        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkIncludeLabel.TabIndex = 164
-        '
-        'ucrChkVariable
-        '
-        Me.ucrChkVariable.AutoSize = True
-        Me.ucrChkVariable.Checked = False
-        Me.ucrChkVariable.Location = New System.Drawing.Point(13, 104)
-        Me.ucrChkVariable.Name = "ucrChkVariable"
-        Me.ucrChkVariable.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkVariable.TabIndex = 162
-        '
-        'ucrTryNewDataFrame
-        '
-        Me.ucrTryNewDataFrame.AutoSize = True
-        Me.ucrTryNewDataFrame.Location = New System.Drawing.Point(12, 253)
-        Me.ucrTryNewDataFrame.Name = "ucrTryNewDataFrame"
-        Me.ucrTryNewDataFrame.RunCommandAsMultipleLines = False
-        Me.ucrTryNewDataFrame.Size = New System.Drawing.Size(413, 33)
-        Me.ucrTryNewDataFrame.TabIndex = 161
-        '
-        'ucrInputCommand
-        '
-        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
-        Me.ucrInputCommand.AutoSize = True
-        Me.ucrInputCommand.IsMultiline = True
-        Me.ucrInputCommand.IsReadOnly = False
-        Me.ucrInputCommand.Location = New System.Drawing.Point(9, 84)
-        Me.ucrInputCommand.Name = "ucrInputCommand"
-        Me.ucrInputCommand.Size = New System.Drawing.Size(417, 159)
-        Me.ucrInputCommand.TabIndex = 7
-        '
-        'ucrPnlDataFrame
-        '
-        Me.ucrPnlDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDataFrame.Location = New System.Drawing.Point(17, 10)
-        Me.ucrPnlDataFrame.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrPnlDataFrame.Name = "ucrPnlDataFrame"
-        Me.ucrPnlDataFrame.Size = New System.Drawing.Size(405, 43)
-        Me.ucrPnlDataFrame.TabIndex = 0
-        '
-        'ucrNewDFName
-        '
-        Me.ucrNewDFName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 290)
-        Me.ucrNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNewDFName.Name = "ucrNewDFName"
-        Me.ucrNewDFName.Size = New System.Drawing.Size(416, 24)
-        Me.ucrNewDFName.TabIndex = 14
-        '
-        'ucrNudCols
-        '
-        Me.ucrNudCols.AutoSize = True
-        Me.ucrNudCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCols.Location = New System.Drawing.Point(215, 76)
-        Me.ucrNudCols.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNudCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCols.Name = "ucrNudCols"
-        Me.ucrNudCols.Size = New System.Drawing.Size(60, 20)
-        Me.ucrNudCols.TabIndex = 11
-        Me.ucrNudCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudRows
-        '
-        Me.ucrNudRows.AutoSize = True
-        Me.ucrNudRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRows.Location = New System.Drawing.Point(69, 77)
-        Me.ucrNudRows.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRows.Name = "ucrNudRows"
-        Me.ucrNudRows.Size = New System.Drawing.Size(77, 20)
-        Me.ucrNudRows.TabIndex = 9
-        Me.ucrNudRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(20, 318)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 15
         '
         'no
         '
@@ -444,12 +352,106 @@ Partial Class dlgNewDataFrame
         Me.colDefault.Name = "colDefault"
         Me.colDefault.Width = 50
         '
+        'ucrChkIncludeLabel
+        '
+        Me.ucrChkIncludeLabel.AutoSize = True
+        Me.ucrChkIncludeLabel.Checked = False
+        Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(185, 107)
+        Me.ucrChkIncludeLabel.Name = "ucrChkIncludeLabel"
+        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIncludeLabel.TabIndex = 164
+        '
+        'ucrChkVariable
+        '
+        Me.ucrChkVariable.AutoSize = True
+        Me.ucrChkVariable.Checked = False
+        Me.ucrChkVariable.Location = New System.Drawing.Point(28, 107)
+        Me.ucrChkVariable.Name = "ucrChkVariable"
+        Me.ucrChkVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkVariable.TabIndex = 162
+        '
+        'ucrTryNewDataFrame
+        '
+        Me.ucrTryNewDataFrame.AutoSize = True
+        Me.ucrTryNewDataFrame.Location = New System.Drawing.Point(12, 253)
+        Me.ucrTryNewDataFrame.Name = "ucrTryNewDataFrame"
+        Me.ucrTryNewDataFrame.RunCommandAsMultipleLines = False
+        Me.ucrTryNewDataFrame.Size = New System.Drawing.Size(413, 33)
+        Me.ucrTryNewDataFrame.TabIndex = 161
+        '
+        'ucrInputCommand
+        '
+        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
+        Me.ucrInputCommand.AutoSize = True
+        Me.ucrInputCommand.IsMultiline = True
+        Me.ucrInputCommand.IsReadOnly = False
+        Me.ucrInputCommand.Location = New System.Drawing.Point(10, 87)
+        Me.ucrInputCommand.Name = "ucrInputCommand"
+        Me.ucrInputCommand.Size = New System.Drawing.Size(417, 159)
+        Me.ucrInputCommand.TabIndex = 7
+        '
+        'ucrPnlDataFrame
+        '
+        Me.ucrPnlDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDataFrame.Location = New System.Drawing.Point(17, 10)
+        Me.ucrPnlDataFrame.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrPnlDataFrame.Name = "ucrPnlDataFrame"
+        Me.ucrPnlDataFrame.Size = New System.Drawing.Size(405, 43)
+        Me.ucrPnlDataFrame.TabIndex = 0
+        '
+        'ucrNewDFName
+        '
+        Me.ucrNewDFName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 290)
+        Me.ucrNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        Me.ucrNewDFName.Size = New System.Drawing.Size(416, 24)
+        Me.ucrNewDFName.TabIndex = 14
+        '
+        'ucrNudCols
+        '
+        Me.ucrNudCols.AutoSize = True
+        Me.ucrNudCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCols.Location = New System.Drawing.Point(79, 54)
+        Me.ucrNudCols.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCols.Name = "ucrNudCols"
+        Me.ucrNudCols.Size = New System.Drawing.Size(57, 20)
+        Me.ucrNudCols.TabIndex = 11
+        Me.ucrNudCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudRows
+        '
+        Me.ucrNudRows.AutoSize = True
+        Me.ucrNudRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRows.Location = New System.Drawing.Point(79, 78)
+        Me.ucrNudRows.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRows.Name = "ucrNudRows"
+        Me.ucrNudRows.Size = New System.Drawing.Size(57, 20)
+        Me.ucrNudRows.TabIndex = 9
+        Me.ucrNudRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 318)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
+        '
         'dlgNewDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(443, 378)
+        Me.ClientSize = New System.Drawing.Size(449, 378)
         Me.Controls.Add(Me.ucrChkIncludeLabel)
         Me.Controls.Add(Me.dataTypeGridView)
         Me.Controls.Add(Me.ucrChkVariable)

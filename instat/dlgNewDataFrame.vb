@@ -19,7 +19,7 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyRepFunction, clsEmptyMatrixFunction, clsNewDataFrame As New RFunction
-    Private clsConstructFunction As New RFunction
+    Private clsConstructFunction, clsDummyLabelFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bFilled As Boolean = False
@@ -70,15 +70,22 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "data.frame")
 
         ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedUpdateFunction:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVariable.AddToLinkedControls(ucrNudRows, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
+        ucrChkIncludeLabel.SetLinkedDisplayControl(dataTypeGridView)
 
         ucrChkVariable.SetText("Variable Name")
+        ucrChkVariable.AddFunctionNamesCondition(True, "data.frame")
+        ucrChkVariable.AddFunctionNamesCondition(False, "data.frame", False)
+
         ucrChkIncludeLabel.SetText("Include Label")
+        ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
+        ucrChkIncludeLabel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
@@ -91,14 +98,11 @@ Public Class dlgNewDataFrame
         clsEmptyOverallFunction = New RFunction
         clsEmptyMatrixFunction = New RFunction
         clsNewDataFrame = New RFunction
+        clsDummyLabelFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
-
-        dataTypeGridView.Visible = False
-        ucrChkVariable.Checked = False
-        ucrChkIncludeLabel.Visible = False
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -120,7 +124,9 @@ Public Class dlgNewDataFrame
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+        UpdateGrid(2, dataTypeGridView)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -204,8 +210,10 @@ Public Class dlgNewDataFrame
         ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=1)
+        ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=2)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
+        ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
+        ucrChkVariable.SetRCode(clsNewDataFrame, bReset)
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -256,12 +264,11 @@ Public Class dlgNewDataFrame
             btnExample.Visible = False
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
-            'If ucrChkVariable.Checked Then
-            '    ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-            'Else
-            '    ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
-            'End If
-            ' ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+            If ucrChkVariable.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+            End If
         End If
         autoTranslate(Me)
     End Sub
@@ -333,11 +340,7 @@ Public Class dlgNewDataFrame
                 clsEmptyRepFunction.AddParameter("x", Chr(34) & strType & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
             End If
 
-            'check for NA and strings. strings must have double quotes, numeric should not have double quotes, logic??
-            'clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, iPosition:=1)
-
             clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
-            'clsColExpRFunction.AddParameter("x", strParameterValue:=clsEmptyRepFunction.ToScript)
             clsNewDataFrame.AddParameter(Chr(34) & strColumnName & Chr(34), clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
             iColPosition += 1
         Next
@@ -350,9 +353,14 @@ Public Class dlgNewDataFrame
 
         strTemp = "c" & "("
         For Each strCh As String In strLevels
+            If i > 0 Then
+                strTemp = strTemp & ","
+            End If
             strTemp = strTemp & Chr(34) & strCh & Chr(34)
+            i = i + 1
         Next
         strTemp = strTemp & ")"
+
         Return strTemp
     End Function
 
@@ -364,27 +372,23 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged, ucrChkVariable.ControlValueChanged
-        Dim col As Integer = ucrNudCols.GetText
-
-        dataTypeGridView.Rows.Clear()
-        dataTypeGridView.Rows.Add(col)
+        Dim row As Integer = ucrNudCols.GetText
 
         If ucrChkVariable.Checked Then
-            UpdateGrid(0, dataTypeGridView)
-            bFilled = True
+            UpdateGrid(row, dataTypeGridView)
         End If
-
-        dataTypeGridView.Visible = If(ucrChkVariable.Checked, True, False)
-        ucrChkIncludeLabel.Visible = If(ucrChkVariable.Checked, True, False)
     End Sub
 
     Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
         SampleEmpty()
     End Sub
 
-    Private Sub UpdateGrid(iStart As Integer, dgrView As DataGridView)
+    Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
         Try
-            For i As Integer = iStart To dgrView.Rows.Count - 1
+            dgrView.Rows.Clear()
+            dgrView.Rows.Add(iRow)
+
+            For i As Integer = 0 To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
@@ -397,6 +401,13 @@ Public Class dlgNewDataFrame
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
+        If e.ColumnIndex = dataTypeGridView.Columns("colLabel").Index OrElse
+            e.ColumnIndex = dataTypeGridView.Columns("colLevels").Index Then
+            dataTypeGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).ToolTipText = "The Levels or Labels should be separated by a comma e.g A,B,C"
+        End If
     End Sub
 
     Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
