@@ -32,7 +32,7 @@
 
     Public Sub CheckLabels(bCheck As Boolean)
         If bCheck Then
-            cmdLabelledConvert.Text = "Lebelled Convert"
+            cmdLabelledConvert.Text = "Labelled Convert"
             lblOrdinal.Visible = False
         Else
             cmdLabelledConvert.Text = "Ordinal Convert"
