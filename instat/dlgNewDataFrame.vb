@@ -19,10 +19,10 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyRepFunction, clsEmptyMatrixFunction, clsNewDataFrame As New RFunction
-    Private clsConstructFunction, clsDummyLabelFunction As New RFunction
+    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bFilled As Boolean = False
+    Private iOldValue As Integer
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me) this subroutine was causing a bug in the button examples
@@ -42,7 +42,6 @@ Public Class dlgNewDataFrame
 
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
-
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
@@ -70,8 +69,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "data.frame")
 
         ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedUpdateFunction:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrNudRows, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -80,8 +78,9 @@ Public Class dlgNewDataFrame
         ucrChkIncludeLabel.SetLinkedDisplayControl(dataTypeGridView)
 
         ucrChkVariable.SetText("Variable Name")
-        ucrChkVariable.AddFunctionNamesCondition(True, "data.frame")
-        ucrChkVariable.AddFunctionNamesCondition(False, "data.frame", False)
+        ucrChkVariable.SetParameter(New RParameter("var", 0))
+        ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkVariable.SetRDefault("FALSE")
 
         ucrChkIncludeLabel.SetText("Include Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
@@ -89,7 +88,6 @@ Public Class dlgNewDataFrame
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
-
     End Sub
 
     Private Sub SetDefaults()
@@ -99,10 +97,12 @@ Public Class dlgNewDataFrame
         clsEmptyMatrixFunction = New RFunction
         clsNewDataFrame = New RFunction
         clsDummyLabelFunction = New RFunction
+        clsDummyVarFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+        iOldValue = 0
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -123,9 +123,8 @@ Public Class dlgNewDataFrame
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
-
-        UpdateGrid(2, dataTypeGridView)
-
+        dataTypeGridView.Rows.Clear()
+        UpdateGrid(iOldValue, dataTypeGridView)
         ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
     End Sub
 
@@ -213,7 +212,7 @@ Public Class dlgNewDataFrame
         ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=2)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
-        ucrChkVariable.SetRCode(clsNewDataFrame, bReset)
+        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -323,8 +322,10 @@ Public Class dlgNewDataFrame
                     clsColExpRFunction.SetRCommand("as.numeric")
                 Case "Factor"
                     clsColExpRFunction.SetRCommand("factor")
-                    clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
-                    If row.Cells("colLabel").Visible Then
+                    If row.Cells("colLevels").Value <> "" Then
+                        clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
+                    End If
+                    If row.Cells("colLabel").Visible AndAlso row.Cells("colLabel").Value <> "" Then
                         clsColExpRFunction.AddParameter("labels", GetLevelsAsRString(row.Cells("colLabel").Value), iPosition:=2)
                     End If
                 Case "Logic"
@@ -371,24 +372,13 @@ Public Class dlgNewDataFrame
         Next
     End Sub
 
-    Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged, ucrChkVariable.ControlValueChanged
-        Dim row As Integer = ucrNudCols.GetText
-
-        If ucrChkVariable.Checked Then
-            UpdateGrid(row, dataTypeGridView)
-        End If
-    End Sub
-
     Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
         SampleEmpty()
     End Sub
 
-    Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
-        Try
-            dgrView.Rows.Clear()
-            dgrView.Rows.Add(iRow)
-
-            For i As Integer = 0 To dgrView.Rows.Count - 1
+    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView)
+        If iRow = 0 Then
+            For i As Integer = iRow To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
@@ -398,9 +388,40 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(5).Value = "NA"
                 End With
             Next
+        Else
+            For i As Integer = iRow - 1 To dgrView.Rows.Count - 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = i + 1
+                    .Item(i).Cells(1).Value = "x" & (i + 1)
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = ""
+                    .Item(i).Cells(4).Value = ""
+                    .Item(i).Cells(5).Value = "NA"
+                End With
+            Next
+        End If
+
+    End Sub
+
+    Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
+        Try
+            If iRow = 0 Then
+                dgrView.Rows.Add(2)
+            Else
+                dgrView.Rows.Insert(dgrView.Rows.Count, iRow)
+            End If
+            FillGrid(iRow, dgrView)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub ucrNudCols_ControlClicked() Handles ucrNudCols.ControlValueChanged
+        Dim iValue As Integer = ucrNudCols.Value
+        If iOldValue > 0 Then
+            UpdateGrid(iValue, dataTypeGridView)
+        End If
+        iOldValue = iValue
     End Sub
 
     Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
@@ -424,17 +445,20 @@ Public Class dlgNewDataFrame
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
-        'Dim iVaalue As Integer
         If selectedCombobox.SelectedItem = "Factor" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
         ElseIf selectedCombobox.SelectedItem = "Integer" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
             'If Not Integer.TryParse(dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value, iVaalue) Then
             '    MsgBox("Only integer required when the selected type is Integer")
             'End If
         Else
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
+            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).Value = ""
         End If
     End Sub
 
