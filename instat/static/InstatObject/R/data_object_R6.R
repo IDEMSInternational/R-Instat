@@ -745,7 +745,7 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 }
 )
 
-DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), ...) {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (type == "single") {
@@ -755,17 +755,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       }
       if (!is.character(curr_col_name)) {
         stop("Current column name must be of type: character")
-      }
-
-      else if (!(curr_col_name %in% names(curr_data))) {
+      } else if (!(curr_col_name %in% names(curr_data))) {
         stop(paste0("Cannot rename column: ", curr_col_name, ". Column was not found in the data."))
-      }
-
-      else if (!is.character(new_col_name)) {
+      } else if (!is.character(new_col_name)) {
         stop("New column name must be of type: character")
-      }
-
-      else {
+      } else {
         if (sum(names(curr_data) == curr_col_name) > 1) {
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
@@ -783,14 +777,46 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
       self$variables_metadata_changed <- TRUE
     }
-  } else {
-    private$data <- curr_data |>
-    dplyr::rename_with(
-      .fn = .fn,
-      .cols = {{ .cols }}, ...
-    )
+  } else if (type == "multiple") {
+    if (!missing(new_column_names_df)) {
+      new_col_names <- new_column_names_df[, 1]
+      cols_changed_index <- new_column_names_df[, 2]
+      curr_col_names <- names(private$data)
+      curr_col_names[cols_changed_index] <- new_col_names
+      if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
+      names(private$data)[cols_changed_index] <- new_col_names
+      for (i in seq_along(cols_changed_index)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+    }
+    if (!missing(new_labels_df)) {
+      new_labels <- new_labels_df[, 1]
+      new_labels_index <- new_labels_df[, 2]
+      for (i in seq_along(new_labels)) {
+        if (isTRUE(new_labels[i] != "")) {
+          self$append_to_variables_metadata(col_name = names(private$data)[new_labels_index[i]], property = "label", new_val = new_labels[i])
+        }
+      }
+    }
     self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
+  } else if (type == "rename_with") {
+    if (missing(.fn)) stop(.fn, "is missing with no default.")
+    curr_col_names <- names(curr_data)
+      private$data <- curr_data |>
+      dplyr::rename_with(
+         .fn = .fn,
+         .cols = {{ .cols }}, ...
+      )
+    new_col_names <- names(private$data)
+    if (!all(new_col_names %in% curr_col_names)) {
+      new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
+      for (i in seq_along(new_col_names)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
+    }
   }
 })
 

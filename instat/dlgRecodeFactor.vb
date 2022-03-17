@@ -21,7 +21,7 @@ Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
     Private clsPlyrRevalueFunction, clsReplaceFunction, clsFctOtherFunction, clsFctExplicitNaFunction As New RFunction
     Private clsFctLowFreqFunction, clsFctLumpPropFunction, clsFctLumpMinFunction, clsFctLumpNFunction As New RFunction
-
+    Private clsRemoveLabelsFunction As New RFunction
     Private clsCFunction As New RFunction
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
@@ -135,6 +135,7 @@ Public Class dlgRecodeFactor
         clsCFunction = New RFunction
         clsDummyFunction = New RFunction
         clsOtherDummyFunction = New RFunction
+        clsRemoveLabelsFunction = New RFunction
 
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
@@ -149,6 +150,10 @@ Public Class dlgRecodeFactor
         clsOtherDummyFunction.AddParameter("checked", "keep", iPosition:=0)
 
         clsCFunction.SetRCommand("c")
+
+        clsRemoveLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+        clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+        clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
         clsFctLumpMinFunction.SetPackageName("forcats")
         clsFctLumpMinFunction.SetRCommand("fct_lump_min")
@@ -180,6 +185,17 @@ Public Class dlgRecodeFactor
         clsReplaceFunction.SetRCommand("c")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 0)
+    End Sub
+
+    Private Sub ucrSelectorForRecode_DataFrameChanged() Handles ucrSelectorForRecode.DataFrameChanged
+        clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRecode.strCurrentDataFrame & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrSaveNewColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewColumn.ControlValueChanged
+        If ucrSaveNewColumn.GetText <> "" AndAlso ucrSaveNewColumn.IsComplete() Then
+            clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNewColumn.GetText & Chr(34), iPosition:=1)
+        End If
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -190,12 +206,14 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpNFunction, New RParameter("f", 0), iAdditionalPairNo:=4)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctLumpMinFunction, New RParameter("f", 0), iAdditionalPairNo:=5)
         ucrReceiverFactor.AddAdditionalCodeParameterPair(clsFctExplicitNaFunction, New RParameter("f", 0), iAdditionalPairNo:=6)
+
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpPropFunction, iAdditionalPairNo:=1)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLowFreqFunction, iAdditionalPairNo:=2)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpMinFunction, iAdditionalPairNo:=3)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctLumpNFunction, iAdditionalPairNo:=4)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctExplicitNaFunction, iAdditionalPairNo:=5)
         ucrSaveNewColumn.AddAdditionalRCode(clsFctOtherFunction, bReset)
+
         ucrReceiverFactor.SetRCode(clsPlyrRevalueFunction, bReset)
         ucrSaveNewColumn.SetRCode(clsPlyrRevalueFunction, bReset)
         ucrNudFrequentValues.SetRCode(clsFctLumpPropFunction, bReset)
