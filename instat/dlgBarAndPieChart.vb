@@ -721,10 +721,8 @@ Public Class dlgBarAndPieChart
         If rdoFrequency.Checked Then
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
                 ucrInputReorderX.Visible = True
-                If Not ucrReceiverByFactor.IsEmpty() Then
-                    ucrInputAddReorder.Visible = True
-                Else
-                    ucrInputAddReorder.Visible = False
+                ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
+                If Not ucrInputAddReorder.Visible Then
                     ucrInputAddReorder.SetText(strNone)
                 End If
             Else
