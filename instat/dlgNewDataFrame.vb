@@ -19,7 +19,7 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyRepFunction, clsEmptyMatrixFunction, clsNewDataFrame As New RFunction
-    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction As New RFunction
+    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsLogicalFunction, clsRepFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iOldValue As Integer
@@ -43,7 +43,7 @@ Public Class dlgNewDataFrame
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
         'nudRows
-        ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
+        ucrNudRows.SetParameter(New RParameter("times", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
 
         'nudCols
@@ -68,7 +68,7 @@ Public Class dlgNewDataFrame
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoRandom, "")
         ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "data.frame")
 
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrNudRows, {False}, bNewLinkedHideIfParameterMissing:=True)
@@ -80,9 +80,8 @@ Public Class dlgNewDataFrame
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
         ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkVariable.SetRDefault("FALSE")
 
-        ucrChkIncludeLabel.SetText("Include Label")
+        ucrChkIncludeLabel.SetText("Variable Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
         ucrChkIncludeLabel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
@@ -98,18 +97,28 @@ Public Class dlgNewDataFrame
         clsNewDataFrame = New RFunction
         clsDummyLabelFunction = New RFunction
         clsDummyVarFunction = New RFunction
+        clsAsLogicalFunction = New RFunction
+        clsRepFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
         iOldValue = 0
 
+        ucrNudCols.SetText(2)
+
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
-        clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
+        'clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
 
         clsNewDataFrame.SetRCommand("data.frame")
         clsEmptyRepFunction.SetRCommand("rep")
+
+        clsRepFunction.SetRCommand("rep")
+        clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
+        clsRepFunction.AddParameter("times", "10", bIncludeArgumentName:=False, iPosition:=1)
+        clsAsLogicalFunction.SetRCommand("as.logical")
+        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         'matrix(data = NA,nrow = 10, ncol = 2)
         clsEmptyMatrixFunction.SetRCommand("matrix")
@@ -205,8 +214,7 @@ Public Class dlgNewDataFrame
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrNudCols.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
-        ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
+        ucrNudRows.SetRCode(clsRepFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=2)
@@ -263,6 +271,7 @@ Public Class dlgNewDataFrame
             btnExample.Visible = False
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
+            CreateEmptyDataFrame()
             If ucrChkVariable.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
             Else
@@ -347,6 +356,14 @@ Public Class dlgNewDataFrame
         Next
     End Sub
 
+    Private Sub CreateEmptyDataFrame()
+        If rdoEmpty.Checked AndAlso Not ucrChkVariable.Checked Then
+            For i = 1 To ucrNudCols.Value
+                clsEmptyOverallFunction.AddParameter("x" & i, clsRFunctionParameter:=clsAsLogicalFunction, iPosition:=i)
+            Next
+        End If
+    End Sub
+
     Private Function GetLevelsAsRString(strLevel As String) As String
         Dim i As Integer
         Dim strLevels As String() = strLevel.Split(New Char() {","c})
@@ -416,12 +433,13 @@ Public Class dlgNewDataFrame
         End Try
     End Sub
 
-    Private Sub ucrNudCols_TextChanged() Handles ucrNudCols.ControlValueChanged
+    Private Sub ucrNudCols_TextChanged() Handles ucrNudCols.ControlValueChanged, ucrNudRows.ControlValueChanged
         Dim iValue As Integer = ucrNudCols.Value
         If iOldValue > 0 Then
             UpdateGrid(iValue, dataTypeGridView)
         End If
         iOldValue = iValue
+        CreateEmptyDataFrame()
     End Sub
 
     Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
