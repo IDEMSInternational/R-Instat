@@ -68,10 +68,9 @@ Public Class dlgNewDataFrame
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoRandom, "")
         ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "data.frame")
 
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls({ucrNudCols, ucrNudRows}, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkVariable.AddToLinkedControls(ucrNudRows, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
@@ -132,8 +131,6 @@ Public Class dlgNewDataFrame
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
-        dataTypeGridView.Rows.Clear()
-        UpdateGrid(iOldValue, dataTypeGridView)
         ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
     End Sub
 
@@ -213,7 +210,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudCols.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudRows.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudRows.SetRCode(clsRepFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
@@ -274,8 +271,13 @@ Public Class dlgNewDataFrame
             CreateEmptyDataFrame()
             If ucrChkVariable.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+                lblColumns.Text = "Add Column(s):"
+                cmdAddColumns.Visible = True
+                UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+                lblColumns.Text = "Columns:"
+                cmdAddColumns.Visible = False
             End If
         End If
         autoTranslate(Me)
@@ -393,9 +395,9 @@ Public Class dlgNewDataFrame
         SampleEmpty()
     End Sub
 
-    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView)
-        If iRow = 0 Then
-            For i As Integer = iRow To dgrView.Rows.Count - 1
+    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bAdd As Boolean)
+        If bAdd Then
+            For i As Integer = 0 To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
@@ -406,7 +408,7 @@ Public Class dlgNewDataFrame
                 End With
             Next
         Else
-            For i As Integer = iRow - 1 To dgrView.Rows.Count - 1
+            For i As Integer = iRow To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
@@ -417,29 +419,33 @@ Public Class dlgNewDataFrame
                 End With
             Next
         End If
+    End Sub
 
+    Private Sub ucrNudCols_TextChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged
+        UpdateGrid(ucrNudCols.Value, dataTypeGridView)
+        CreateEmptyDataFrame()
+    End Sub
+
+    Private Sub AddColumns()
+        If ucrChkVariable.Checked Then
+            Dim iRow As Integer = ucrNudCols.Value
+            dataTypeGridView.Rows.Insert(dataTypeGridView.Rows.Count, iRow)
+            FillGrid(iRow, dataTypeGridView, False)
+        End If
+    End Sub
+
+    Private Sub cmdAddColumns_Click(sender As Object, e As EventArgs) Handles cmdAddColumns.Click
+        AddColumns()
     End Sub
 
     Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
         Try
-            If iRow = 0 Then
-                dgrView.Rows.Add(2)
-            Else
-                dgrView.Rows.Insert(dgrView.Rows.Count, iRow)
-            End If
-            FillGrid(iRow, dgrView)
+            dgrView.Rows.Clear()
+            dgrView.Rows.Add(iRow)
+            FillGrid(iRow, dgrView, True)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-    End Sub
-
-    Private Sub ucrNudCols_TextChanged() Handles ucrNudCols.ControlValueChanged, ucrNudRows.ControlValueChanged
-        Dim iValue As Integer = ucrNudCols.Value
-        If iOldValue > 0 Then
-            UpdateGrid(iValue, dataTypeGridView)
-        End If
-        iOldValue = iValue
-        CreateEmptyDataFrame()
     End Sub
 
     Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
@@ -616,5 +622,23 @@ Public Class dlgNewDataFrame
         frm.StartPosition = FormStartPosition.Manual 'set it to manual
         frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
         frm.Show()
+    End Sub
+
+    Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
+        Dim i As Integer
+        'If e.Control AndAlso e.KeyCode = Keys.V Then
+        '    Try
+        '        For Each line As String In Clipboard.GetText.Split(vbNewLine)
+        '            If Not line.Trim.ToString = "" Then
+        '                Dim item() As String = line.Split(vbTab(0))
+        '                dataTypeGridView.Rows.Item(i).Cells(1).Value = item
+        '                i = i + 1
+        '            End If
+        '        Next
+
+        '    Catch ex As Exception
+        '        MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    End Try
+        'End If
     End Sub
 End Class
