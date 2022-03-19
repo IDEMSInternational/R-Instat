@@ -272,12 +272,10 @@ Public Class dlgNewDataFrame
             If ucrChkVariable.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
                 lblColumns.Text = "Add Column(s):"
-                cmdAddColumns.Visible = True
                 UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
                 lblColumns.Text = "Columns:"
-                cmdAddColumns.Visible = False
             End If
         End If
         autoTranslate(Me)
@@ -353,7 +351,7 @@ Public Class dlgNewDataFrame
             End If
 
             clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
-            clsNewDataFrame.AddParameter(Chr(34) & strColumnName & Chr(34), clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
+            clsNewDataFrame.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
             iColPosition += 1
         Next
     End Sub
@@ -432,10 +430,6 @@ Public Class dlgNewDataFrame
             dataTypeGridView.Rows.Insert(dataTypeGridView.Rows.Count, iRow)
             FillGrid(iRow, dataTypeGridView, False)
         End If
-    End Sub
-
-    Private Sub cmdAddColumns_Click(sender As Object, e As EventArgs) Handles cmdAddColumns.Click
-        AddColumns()
     End Sub
 
     Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
@@ -626,19 +620,25 @@ Public Class dlgNewDataFrame
 
     Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
         Dim i As Integer
-        'If e.Control AndAlso e.KeyCode = Keys.V Then
-        '    Try
-        '        For Each line As String In Clipboard.GetText.Split(vbNewLine)
-        '            If Not line.Trim.ToString = "" Then
-        '                Dim item() As String = line.Split(vbTab(0))
-        '                dataTypeGridView.Rows.Item(i).Cells(1).Value = item
-        '                i = i + 1
-        '            End If
-        '        Next
+        If e.Control AndAlso e.KeyCode = Keys.V Then
+            Try
+                For Each line As String In Clipboard.GetText.Split(vbNewLine)
+                    If Not line.Trim.ToString = "" Then
+                        Dim item() As String = line.Split(vbTab(0))
+                        If dataTypeGridView.CurrentCell.ColumnIndex = 1 Then
+                            dataTypeGridView.Rows.Item(i).Cells(1).Value = item(0).ToString
+                        ElseIf dataTypeGridView.CurrentCell.ColumnIndex = 3 Then
+                            dataTypeGridView.Rows.Item(i).Cells(3).Value = item(0).ToString
+                        ElseIf dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
+                            dataTypeGridView.Rows.Item(i).Cells(4).Value = item(0).ToString
+                        End If
+                        i = i + 1
+                    End If
+                Next
 
-        '    Catch ex As Exception
-        '        MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    End Try
-        'End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
     End Sub
 End Class
