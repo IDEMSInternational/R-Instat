@@ -21,7 +21,9 @@ Public Class dlgMergeAdditionalData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsLeftJoinFunction As New RFunction
-    Private clsByListFunction, clsInsertColumnFunction As New RFunction
+    Private clsByListFunction, clsInsertColumnFunction, clsGetColumnsFromData As New RFunction
+    Private lstVariables As New List(Of String)
+    Private lstJoinColumns As New List(Of String)
     Private bResetSubdialog As Boolean = True
     Private bBySpecified As Boolean
 
@@ -46,8 +48,8 @@ Public Class dlgMergeAdditionalData
 
         ucrFromDataFrame.SetLabelText("From Data Frame:")
 
-        ucrReceiverSecond.SetParameter(New RParameter("y", 1))
-        ucrReceiverSecond.SetParameterIsRFunction()
+        ' ucrReceiverSecond.SetParameter(New RParameter("y", 1))
+        'ucrReceiverSecond.SetParameterIsRFunction()
         ucrReceiverSecond.Selector = ucrFromDataFrame
         ucrReceiverSecond.bForceAsDataFrame = True
 
@@ -63,6 +65,7 @@ Public Class dlgMergeAdditionalData
         clsLeftJoinFunction = New RFunction
         clsByListFunction = New RFunction
         clsInsertColumnFunction = New RFunction
+        clsGetColumnsFromData = New RFunction
 
         ucrToDataFrame.Reset()
         ucrFromDataFrame.Reset()
@@ -70,10 +73,15 @@ Public Class dlgMergeAdditionalData
         ucrInputMergingBy.SetName("")
         ucrInputSaveDataFrame.SetName("merge")
 
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 
         clsLeftJoinFunction.SetPackageName("dplyr")
         clsLeftJoinFunction.SetRCommand("left_join")
+
+        clsLeftJoinFunction.AddParameter("y", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
 
         clsByListFunction.SetRCommand("c")
 
@@ -84,7 +92,7 @@ Public Class dlgMergeAdditionalData
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
         ucrToDataFrame.SetRCode(clsLeftJoinFunction, bResetControls)
-        ucrReceiverSecond.SetRCode(clsLeftJoinFunction, bResetControls)
+        'ucrReceiverSecond.SetRCode(clsLeftJoinFunction, bResetControls)
         ucrChkSaveDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -152,7 +160,7 @@ Public Class dlgMergeAdditionalData
                 chrColumns = expTemp.AsList(0).AsCharacter
                 For i As Integer = 0 To chrColumns.Count - 1
                     clsByListFunction.AddParameter(Chr(34) & chrColumns.Names(i) & Chr(34), Chr(34) & chrColumns(i) & Chr(34))
-                    ucrReceiverSecond.Add(chrColumns(i), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    'ucrReceiverSecond.Add(chrColumns(i), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text) 'This may probably be needed in case we want to add the join columns
                 Next
                 clsLeftJoinFunction.AddParameter("by", clsRFunctionParameter:=clsByListFunction, iPosition:=2)
                 PopulateMergeByText()
@@ -169,10 +177,6 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFromDataFrame.ControlValueChanged
         GetLinkInformation()
     End Sub
@@ -185,6 +189,26 @@ Public Class dlgMergeAdditionalData
         TestOkEnabled()
     End Sub
 
+    Private Sub AddColumns()
+        If ucrReceiverSecond.lstSelectedVariables.Items.Count > 0 Then
+            lstVariables.Clear()
+            lstVariables = ucrReceiverSecond.GetVariableNamesAsList()
+            For Each var In lstJoinColumns
+                lstVariables.Add(var)
+            Next
+            clsGetColumnsFromData.AddParameter("data_name", Chr(34) & ucrFromDataFrame.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+            clsGetColumnsFromData.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
+        AddColumns()
+    End Sub
+
+    Private Sub ucrInputMergingBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMergingBy.ControlValueChanged
+        AddColumns()
+    End Sub
+
     Private Sub PopulateMergeByText()
         Dim strMergeBy As String
         Dim clsNames1 As New RFunction
@@ -195,11 +219,13 @@ Public Class dlgMergeAdditionalData
         Dim strTemp As String = ""
         Dim strScript As String = ""
 
+        lstJoinColumns.Clear()
         If clsLeftJoinFunction.ContainsParameter("by") AndAlso clsByListFunction.clsParameters.Count > 0 Then
             strMergeBy = clsByListFunction.ToScript()
             ucrInputMergingBy.SetName(strMergeBy.Substring(2, strMergeBy.Length - 3).Replace(Chr(34), ""))
             For i As Integer = 0 To clsByListFunction.clsParameters.Count - 1
-                ucrReceiverSecond.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                'ucrReceiverSecond.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text) 'This may probably be needed in case we want to add the join columns
+                lstJoinColumns.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""))
             Next
         Else
             strMergeBy = ""
@@ -222,7 +248,8 @@ Public Class dlgMergeAdditionalData
                             strMergeBy = strMergeBy & ", "
                         End If
                         strMergeBy = strMergeBy & chrColumns(i) & "=" & chrColumns(i)
-                        ucrReceiverSecond.Add(chrColumns(i), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                        lstJoinColumns.Add(chrColumns(i))
+                        'ucrReceiverSecond.Add(chrColumns(i), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text) 'This may probably be needed in case we want to add the join columns
                     Next
                     bBySpecified = True
                 Else
@@ -232,5 +259,10 @@ Public Class dlgMergeAdditionalData
             End If
             ucrInputMergingBy.SetName(strMergeBy)
         End If
+        AddColumns()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
