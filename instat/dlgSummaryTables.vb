@@ -396,7 +396,7 @@ Public Class dlgSummaryTables
         ucrChkFrequencyDisplayMargins.SetRCode(clsFrequencyDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrReceiverWeights.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrChkSummaries.SetRCode(clsFrequencyDefaultFunction, bReset)
+        ucrChkSummaries.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrPnlSummaryFrequencyTables.SetRCode(clsDummyFunction, bReset)
         ucrChkDisplaySummariesAsRow.SetRCode(clsMutableOperator, bReset)
