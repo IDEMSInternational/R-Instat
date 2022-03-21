@@ -310,8 +310,8 @@ Public Class dlgBarAndPieChart
         ucrInputReorderValue.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputReorderValue.SetDropDownStyleAsNonEditable()
         ucrChkReorderValue.SetText("Reorder")
-        ucrChkReorderValue.AddFunctionNamesCondition(True, "reoder", True)
-        ucrChkReorderValue.AddFunctionNamesCondition(False, "reoder", False)
+        ucrChkReorderValue.AddFunctionNamesCondition(True, "reorder", True)
+        ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
         ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputLayout.SetParameter(New RParameter("layout", 2))
@@ -706,11 +706,9 @@ Public Class dlgBarAndPieChart
             End If
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
-            If Not ucrReceiverByFactor.IsEmpty() Then
-                ucrInputBarChartPositions.Visible = True
-            Else
-                ucrInputBarChartPositions.Visible = False
-            End If
+
+            ucrInputBarChartPositions.Visible = Not ucrReceiverByFactor.IsEmpty()
+
         ElseIf rdoTreeMap.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
         Else
@@ -732,10 +730,8 @@ Public Class dlgBarAndPieChart
         ElseIf rdoValue.Checked Then
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
                 ucrChkReorderValue.Visible = True
-                If Not ucrReceiverByFactor.IsEmpty() Then
-                    ucrInputAddReorder.Visible = True
-                Else
-                    ucrInputAddReorder.Visible = False
+                ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
+                If Not ucrInputAddReorder.Visible Then
                     ucrInputAddReorder.SetText(strNone)
                 End If
             Else
@@ -889,9 +885,11 @@ Public Class dlgBarAndPieChart
         ChangeButtonsText()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged,
-        ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged,
-    ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged,
+        ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged,
+        ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
+        ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
+        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
@@ -912,7 +910,8 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged,
+        ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar1")
             clsBaseOperator.RemoveParameterByName("geom_bar2")
@@ -1003,8 +1002,13 @@ Public Class dlgBarAndPieChart
         SetGeomTextOptions()
     End Sub
 
-    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged, ucrReceiverArea.ControlContentsChanged,
-        ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged, ucrChkIncreaseSize.ControlContentsChanged
+    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged,
+        ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged,
+        ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged,
+        ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged,
+        ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged,
+        ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged,
+        ucrChkIncreaseSize.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
