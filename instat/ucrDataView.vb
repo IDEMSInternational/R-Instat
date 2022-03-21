@@ -282,22 +282,23 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SetDisplayLabels()
-        lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
+        Dim strRowLabel As String = GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
-        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
-            lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
-                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
-        Else
-            lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
-        End If
-        lblColDisplay.Text = "Showing columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
+        Dim strColLabel As String = GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
                               GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn & " of "
 
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
+            lblRowDisplay.Text = "Rows " & strRowLabel & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
+                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
+        Else
+            lblRowDisplay.Text = "Showing rows " & strRowLabel & GetCurrentDataFrameFocus().iTotalRowCount
+        End If
+
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
-            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
+            lblColDisplay.Text = "Columns " & strColLabel & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
                                 " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
-            lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount
+            lblColDisplay.Text = "Showing columns " & strColLabel & GetCurrentDataFrameFocus().iTotalColumnCount
         End If
         ResizeLabels()
     End Sub
