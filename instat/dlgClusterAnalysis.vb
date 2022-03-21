@@ -72,10 +72,12 @@ Public Class dlgClusterAnalysis
         ucrChkPartitionPlot.SetText("Partition Plot")
         ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(True, "dend", "False")
         ucrChkPartitionPlot.AddParameterValueFunctionNamesCondition(False, "dend", "True")
+        ucrChkPartitionPlot.AddToLinkedControls(ucrSaveGraph, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkHierarcPlot.SetText("Hierarch Plot")
         ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(True, "fviz", "False")
         ucrChkHierarcPlot.AddParameterValueFunctionNamesCondition(False, "fviz", "True")
+        ucrChkHierarcPlot.AddToLinkedControls(ucrSaveGraph, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlSelectData.AddRadioButton(rdoNumericVariables)
         ucrPnlSelectData.AddRadioButton(rdoDataFrame)
@@ -114,12 +116,18 @@ Public Class dlgClusterAnalysis
         ucrPnlClusterData.AddToLinkedControls(ucrChkCluster, {rdoPartitioningData}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlClusterData.AddToLinkedControls(ucrChkPartitionPlot, {rdoPartitioningData}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
-        ucrSaveGraph.SetPrefix("Clusters")
+        ucrSaveGraph.SetPrefix("Cluster_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorClusterData.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrSaveCluster.SetSaveTypeAsModel()
+        ucrSaveCluster.SetDataFrameSelector(ucrSelectorClusterData.ucrAvailableDataFrames)
+        ucrSaveCluster.SetLabelText("Clusters:")
+        ucrSaveCluster.SetPrefix("cluster")
+        ucrSaveCluster.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
@@ -133,6 +141,7 @@ Public Class dlgClusterAnalysis
 
         ucrSelectorClusterData.Reset()
         ucrSaveGraph.Reset()
+        ucrSaveCluster.Reset()
 
         clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
         clsDummyFunction.AddParameter("fvizdend", "False", iPosition:=1)
@@ -164,6 +173,8 @@ Public Class dlgClusterAnalysis
         clsFvizDendFunction.AddParameter("cex", "0.6", iPosition:=3)
 
         clsFvizDendFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClusterData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
+        clsPamFunction.SetAssignTo("last_cluster", strTempDataframe:=ucrSelectorClusterData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_cluster")
+        clsAgnesFunction.SetAssignTo("last_cluster", strTempDataframe:=ucrSelectorClusterData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_cluster")
         ucrBase.clsRsyntax.SetBaseRFunction(clsPamFunction)
     End Sub
 
@@ -189,6 +200,10 @@ Public Class dlgClusterAnalysis
         ucrSaveGraph.SetRCode(clsFvizDendFunction, bReset)
         ucrPnlClusterData.SetRCode(clsDummyFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
+        ucrSaveCluster.SetRCode(clsPamFunction, bReset)
+        ucrSaveCluster.AddAdditionalRCode(clsFvizPamFunction, bReset)
+        ucrSaveCluster.AddAdditionalRCode(clsFvizAgnesFunction, bReset)
+        ucrSaveCluster.SetRCode(clsAgnesFunction, bReset)
         bResetRCode = True
     End Sub
 
@@ -219,7 +234,6 @@ Public Class dlgClusterAnalysis
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPamFunction)
                     ucrBase.clsRsyntax.iCallType = 2
-                    ucrBase.clsRsyntax.RemoveAssignTo()
                 End If
             ElseIf rdoHierarchicalData.Checked Then
                 clsDummyFunction.AddParameter("fvizdend", "True", iPosition:=1)
@@ -229,7 +243,6 @@ Public Class dlgClusterAnalysis
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsAgnesFunction)
                     ucrBase.clsRsyntax.iCallType = 2
-                    ucrBase.clsRsyntax.RemoveAssignTo()
                 End If
             End If
         End If
