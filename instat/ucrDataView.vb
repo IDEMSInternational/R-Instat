@@ -286,7 +286,7 @@ Public Class ucrDataView
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
-                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
+                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
         Else
             lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
         End If
@@ -295,7 +295,7 @@ Public Class ucrDataView
 
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
             lblColDisplay.Text &= GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
-                                " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Active selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
+                                " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
             lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount
         End If
