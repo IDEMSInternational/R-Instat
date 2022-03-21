@@ -56,6 +56,7 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
+        ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
         ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -80,7 +81,7 @@ Public Class dlgThreeVariablePivotTable
                                                   objNewDefaultState:="Table", bNewLinkedChangeToDefaultState:=True)
         ucrChkNumericVariable.AddToLinkedControls({ucrInputSummary}, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                   bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
-                                                  objNewDefaultState:="Count", bNewLinkedChangeToDefaultState:=True)
+                                                  objNewDefaultState:="Average", bNewLinkedChangeToDefaultState:=True)
 
         ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
         ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
@@ -89,8 +90,8 @@ Public Class dlgThreeVariablePivotTable
         ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
 
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
-        ucrInputSummary.SetItems({"Count", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
-                                    "Average", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
+        ucrInputSummary.SetItems({"Average", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
+                                    "Count", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
                                     "Maximum", "First", "Last", "Sum over Sum", "80% Upper Bound", "80% Lower Bound",
                                     "Sum as Fraction of Totals", "Sum as Fraction of Rows", "Sum as Fraction of Columns",
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
@@ -169,6 +170,11 @@ Public Class dlgThreeVariablePivotTable
             ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            If ucrChkNumericVariable.Checked Then
+                ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+            Else
+                ucrReceiverInitialRowFactors.SetMeAsReceiver()
+            End If
         End If
         ChangeDataParameterValue()
     End Sub
@@ -242,5 +248,15 @@ Public Class dlgThreeVariablePivotTable
             clsGetObjectFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
         End If
 
+    End Sub
+
+    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
+        If ucrChkNumericVariable.Checked Then
+            ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+        ElseIf Not ucrChkNumericVariable.Checked AndAlso ucrChkSelectedVariable.Checked Then
+            ucrReceiverSelectedVariable.SetMeAsReceiver()
+        Else
+            ucrReceiverInitialRowFactors.SetMeAsReceiver()
+        End If
     End Sub
 End Class
