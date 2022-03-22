@@ -23,6 +23,7 @@ Public Class ucrColumnMetadataReoGrid
     Private _lstNonEditableColumns As New List(Of String)
     Private strPreviousCellText As String
 
+    Public Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
@@ -66,7 +67,7 @@ Public Class ucrColumnMetadataReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDownColumnMetadata
     End Sub
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)
@@ -89,6 +90,13 @@ Public Class ucrColumnMetadataReoGrid
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
         e.IsCancelled = True
+    End Sub
+
+    Protected Sub Worksheet_BeforeCellKeyDownColumnMetadata(sender As Object, e As BeforeCellKeyDownEventArgs)
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            RaiseEvent DeleteLabels(grdData.CurrentWorksheet.ColumnHeaders(e.Cell.Column).Text)
+            e.IsCancelled = True
+        End If
     End Sub
 
 End Class

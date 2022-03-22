@@ -150,6 +150,26 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
+
+    ''' <summary>
+    '''  Check if the column factor contains labels.
+    ''' </summary>
+    Public Function CheckHasLabels(strColumnName As String) As Boolean
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim clsGetColumnsFromData As New RFunction
+
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
+        clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("col_names", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
+
+        Return frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True).AsLogical(0)
+    End Function
+
     ''' <summary>
     ''' View dataframe the whole dataframe within a pop up
     ''' </summary>
