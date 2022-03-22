@@ -105,7 +105,6 @@ Public Class dlgCorrelation
         ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
         dctDiagonal.Add("NA", "NA")
         dctDiagonal.Add("1", "1")
-        dctDiagonal.Add("blank", Chr(34) & " " & Chr(34))
         ucrInputDiagonal.SetItems(dctDiagonal)
         ucrInputDiagonal.AddQuotesIfUnrecognised = False
 
@@ -124,10 +123,6 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddParameterValuesCondition(rdoCompleteRowsOnly, "use", Chr(34) & "complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddParameterValuesCondition(rdoPairwise, "use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-
-        'ucrChk
-        ucrChkCorrelationMatrix.SetText("Correlation Matrix")
-        ucrChkCorrelationMatrix.Enabled = False
 
         ucrChkRearrange.SetText("Rearrange")
         ucrChkRearrange.SetParameter(New RParameter("check", 0))
@@ -172,12 +167,14 @@ Public Class dlgCorrelation
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name")
         ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveDataFrame.SetPrefix("corr")
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Result Name")
         ucrSaveDataFrame.SetIsComboBox()
+        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
     End Sub
 
     Private Sub SetDefaults()
@@ -367,8 +364,10 @@ Public Class dlgCorrelation
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
+            grpDisplayOptions.Hide()
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
+            grpDisplayOptions.Show()
             AddShaveOrRearrange()
         End If
         ReceiverColumns()
@@ -379,7 +378,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged,
-        ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged,
+        ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrSaveDataFrame.ControlContentsChanged,
         ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged, ucrInputDiagonal.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -416,7 +415,7 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
     End Sub
 
-    Private Sub ucrChkShave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShave.ControlValueChanged, ucrChkRearrange.ControlValueChanged
+    Private Sub ucrChkShave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShave.ControlValueChanged, ucrChkRearrange.ControlValueChanged ' ucrChkDisplayOptions.ControlValueChanged
         AddShaveOrRearrange()
     End Sub
 End Class
