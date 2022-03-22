@@ -31,6 +31,7 @@ Public Class dlgSelectColumns
             SetDefaults()
         End If
         SetRcodeForControls(bReset)
+        EnableDisableAddConditionButton()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -38,7 +39,7 @@ Public Class dlgSelectColumns
     Private Sub InitialiseDialog()
         ucrSelectorForColumnSelection.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnSelection.SetParameterIsString()
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverMultipleVariables.Selector = ucrSelectorForColumnSelection
         ucrReceiverMultipleVariables.SetMeAsReceiver()
@@ -46,17 +47,17 @@ Public Class dlgSelectColumns
         ucrReceiverMultipleVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverMultipleVariables.SetParameterIsString()
 
-        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column"})
+        ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Empty columns", "NA columns"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrReceiverMultipleVariables, {"Columns"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls({ucrNudFrom, ucrNudTo}, {"Numeric range"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectOperation.AddToLinkedControls(ucrInputText, {"Numeric range", "Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)' TODO: uncomment once selection using where is added
+        ucrInputSelectOperation.AddToLinkedControls(ucrInputColumnType, {"Where"}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleVariables.SetLinkedDisplayControl(lblSeclectedColumns)
         ucrInputText.SetLinkedDisplayControl(lblString)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
@@ -82,6 +83,8 @@ Public Class dlgSelectColumns
 
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudTo.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkNot.SetText("Add not")
     End Sub
 
     Private Sub SetDefaults()
@@ -89,7 +92,6 @@ Public Class dlgSelectColumns
         clsConditionsList = New RFunction
         clsFromToOperation = New ROperator
 
-        ucrSelectorForColumnSelection.Reset()
         ucrInputSelectOperation.SetText("Columns")
         ucrInputColumnType.SetText("Numeric")
 
@@ -106,14 +108,14 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset)
-        ucrNudFrom.SetRCode(clsFromToOperation, bReset)
-        ucrNudTo.SetRCode(clsFromToOperation, bReset)
+        ucrSelectorForColumnSelection.SetRCode(clsAddColumnSelection, bReset, bCloneIfNeeded:=True)
+        ucrNudFrom.SetRCode(clsFromToOperation, bReset, bCloneIfNeeded:=True)
+        ucrNudTo.SetRCode(clsFromToOperation, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "")
+    Public Sub SetDefaultDataFrame(Optional strDefaultDataframe As String = "", Optional bEnableDataframe As Boolean = False)
         If strDefaultDataframe <> "" Then
-            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=False)
+            ucrSelectorForColumnSelection.SetDataframe(strDefaultDataframe, bEnableDataframe:=bEnableDataframe)
             ucrSelectorForColumnSelection.ucrAvailableDataFrames.Enabled = False 'Note: This is potentially a duplication because for some reason setting  bEnableDataframe:=False in line 117 changes internally
         End If
     End Sub
@@ -196,22 +198,34 @@ Public Class dlgSelectColumns
                 clsParametersList.AddParameter("prefix", Chr(34) & ucrInputText.GetText & Chr(34), iPosition:=0)
                 clsParametersList.AddParameter("range", clsROperatorParameter:=clsFromToOperation, iPosition:=1)
                 strValue = clsFromToOperation.ToScript
-                'TODO: this will be needed when selection depending of variable type e.g factors,characters etc is added!
-                'Case "Where"
-                'clsCurrentConditionList.AddParameter("operation", Chr(34) & "where" & Chr(34), iPosition:=0)
-                'If ucrInputColumnType.GetText = "Numeric" Then
-                'clsParametersList.AddParameter("fn", "is.numeric", iPosition:=0)
-                'ElseIf ucrInputColumnType.GetText = "Factor" Then
-                'clsParametersList.AddParameter("fn", "is.factor", iPosition:=0)
-                'ElseIf ucrInputColumnType.GetText = "Character" Then
-                'clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
-                'End If
+            Case "Where"
+                strValue = ucrInputColumnType.GetText
+                clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::where" & Chr(34), iPosition:=0)
+                If strValue = "Numeric" Then
+                    clsParametersList.AddParameter("fn", "is.numeric", iPosition:=0)
+                ElseIf strValue = "Factor" Then
+                    clsParametersList.AddParameter("fn", "is.factor", iPosition:=0)
+                ElseIf strValue = "Character" Then
+                    clsParametersList.AddParameter("fn", "is.character", iPosition:=0)
+                ElseIf strValue = "Logical" Then
+                    clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
+                ElseIf strValue = "Variable label" Then
+                    clsParametersList.AddParameter("fn", "is.containlabel", iPosition:=0)
+                ElseIf strValue = "Empty columns" Then
+                    clsParametersList.AddParameter("fn", "is.emptyvariable", iPosition:=0)
+                ElseIf strValue = "NA columns" Then
+                    clsParametersList.AddParameter("fn", "is.NAvariable", iPosition:=0)
+                End If
             Case "Last column"
                 strValue = "Last column"
                 clsCurrentConditionList.AddParameter("operation", Chr(34) & "tidyselect::last_col" & Chr(34), iPosition:=0)
         End Select
         clsCurrentConditionList.AddParameter("parameters", clsRFunctionParameter:=clsParametersList, iPosition:=1)
-
+        If ucrChkNot.Checked Then
+            clsCurrentConditionList.AddParameter("negation", "TRUE", iPosition:=2)
+        Else
+            clsCurrentConditionList.RemoveParameterByName("negation")
+        End If
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrInputSelectOperation.GetText, strValue})
         lstColumnSelections.Items.Add(lviCondition)
@@ -230,7 +244,7 @@ Public Class dlgSelectColumns
         Dim bEnableOrDisable As Boolean = True
         Dim strOperation As String
         strOperation = ucrInputSelectOperation.GetText
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(strOperation = "Columns", False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(strOperation = "Columns", False)
         Select Case strOperation
             Case "Columns"
                 If ucrReceiverMultipleVariables.IsEmpty Then
@@ -245,12 +259,12 @@ Public Class dlgSelectColumns
                     bEnableOrDisable = False
                 End If
             Case "Where"
-                'add where instance when enabled
+                bEnableOrDisable = Not ucrInputColumnType.IsEmpty
         End Select
         cmdAddCondition.Enabled = bEnableOrDisable
     End Sub
 
-    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrInputText.ControlContentsChanged
+    Private Sub ucrReceiverMultipleVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVariables.ControlValueChanged, ucrInputSelectOperation.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged, ucrInputText.ControlContentsChanged, ucrInputColumnType.ControlContentsChanged
         EnableDisableAddConditionButton()
     End Sub
 
@@ -259,6 +273,7 @@ Public Class dlgSelectColumns
         If lstColumnSelections.Items.Count > 0 Then
             frmMain.clsRLink.RunScript(clsAddColumnSelection.ToScript, strComment:="Column selection subdialog: Created new column selection", bSilent:=True)
             dlgSelect.ucrReceiverSelect.Add(ucrInputSelectName.GetText())
+            sdgDataOptions.ucrReceiverSelect.Add(ucrInputSelectName.GetText)
             lstColumnSelections.Items.Clear()
             clsConditionsList.ClearParameters()
         End If
@@ -268,13 +283,11 @@ Public Class dlgSelectColumns
         If Not cmdAddCondition.Enabled Then
             Exit Sub
         End If
-
         Dim result As MsgBoxResult = MessageBox.Show(
             text:="Are you sure you want to return to the main dialog?" & Environment.NewLine &
                   "The condition for " & ucrInputSelectOperation.GetText & " has not been added." & Environment.NewLine &
                   "Click the ""Add Condition"" button if you want to add it.",
             caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
         e.Cancel = result = MsgBoxResult.No
-
     End Sub
 End Class
