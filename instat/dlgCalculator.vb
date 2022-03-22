@@ -122,7 +122,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.iCallType = 0
         Else
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & "calc" & Chr(34), iPosition:=1)
-            ucrBase.clsRsyntax.RemoveAssignTo()
+            'ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 1
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
