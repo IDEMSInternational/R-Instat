@@ -33,8 +33,8 @@ Public Class dlgSummaryTables
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
             clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
 
-    Private clsMutableOperator, clsColumnOperator, clsPipeOperator, clsJoiningPipeOperator,
-            clsTabFootnoteOperator As New ROperator
+    Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
+            clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
     Private iCmdFormatYPosition As Integer
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -215,7 +215,7 @@ Public Class dlgSummaryTables
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
         clsStyleListFunction = New RFunction
-        clsMutableOperator = New ROperator
+        clsSummaryOperator = New ROperator
         clsColumnOperator = New ROperator
         clsPipeOperator = New ROperator
         clsTabFootnoteSubtitleFunction = New RFunction
@@ -230,6 +230,8 @@ Public Class dlgSummaryTables
         clsTabStyleCellTitleFunction = New RFunction
         clsJoiningPipeOperator = New ROperator
         clsTabFootnoteOperator = New ROperator
+        clsFrequencyOperator = New ROperator
+        clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
@@ -241,9 +243,13 @@ Public Class dlgSummaryTables
 
         clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
 
-        clsMutableOperator.SetOperation("+")
+        clsSummaryOperator.SetOperation("+")
+
+        clsFrequencyOperator.SetOperation("+")
 
         clsColumnOperator.SetOperation("+")
+
+        clsMmtableOperator.SetOperation("+")
 
         clsConcFunction.SetRCommand("c")
 
@@ -254,7 +260,7 @@ Public Class dlgSummaryTables
         clsTabFootnoteOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsMutableOperator, iPosition:=0)
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
 
         clsStubHeadFunction.SetPackageName("gt")
         clsStubHeadFunction.SetRCommand("tab_stubhead")
@@ -302,11 +308,14 @@ Public Class dlgSummaryTables
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
-        clsMutableFunction.AddParameter("data", "summary_table", iPosition:=0)
+        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
         clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
 
-        clsMutableOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
-        clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
+        clsSummaryOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
+
+        clsFrequencyOperator.SetOperation("+")
+        clsFrequencyOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
@@ -387,6 +396,7 @@ Public Class dlgSummaryTables
         ucrChkStoreResults.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrChkStoreResults.GetParameter, iAdditionalPairNo:=1)
         ucrNudSigFigs.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudSigFigs.GetParameter, iAdditionalPairNo:=1)
         ucrNudColumnFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudColumnFactors.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrReceiverFactors.GetParameter, iAdditionalPairNo:=1)
 
         ucrSelectorSummaryTables.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
@@ -399,9 +409,9 @@ Public Class dlgSummaryTables
         ucrChkSummaries.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrPnlSummaryFrequencyTables.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplaySummariesAsRow.SetRCode(clsMutableOperator, bReset)
-        ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
-        ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
+        ucrChkDisplaySummariesAsRow.SetRCode(clsSummaryOperator, bReset)
+        ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsSummaryOperator, bReset)
+        ucrChkDisplayVariablesAsRows.SetRCode(clsSummaryOperator, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
@@ -449,7 +459,7 @@ Public Class dlgSummaryTables
                                          clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMutableOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
@@ -475,53 +485,83 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplaySummariesAsRow.ControlValueChanged, ucrChkDisplayVariablesAsRows.ControlValueChanged, ucrChkDisplaySummaryVariablesAsRow.ControlValueChanged, ucrChkSummaries.ControlValueChanged
-        clsMutableOperator.RemoveParameterByName("summariesTopLeft")
-        clsMutableOperator.RemoveParameterByName("summariesLeftTop")
-        clsMutableOperator.RemoveParameterByName("variablesTopLeft")
-        clsMutableOperator.RemoveParameterByName("variablesLeftTop")
-        clsMutableOperator.RemoveParameterByName("summariesVariableTopLeft")
-        clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
+        clsSummaryOperator.RemoveParameterByName("summariesTopLeft")
+        clsSummaryOperator.RemoveParameterByName("summariesLeftTop")
+        clsSummaryOperator.RemoveParameterByName("variablesTopLeft")
+        clsSummaryOperator.RemoveParameterByName("variablesLeftTop")
+        clsSummaryOperator.RemoveParameterByName("summariesVariableTopLeft")
+        clsSummaryOperator.RemoveParameterByName("summariesVariableLeftTop")
 
         If ucrChkSummaries.Checked Then
             If ucrChkDisplaySummariesAsRow.Checked Then
-                clsMutableOperator.AddParameter("summariesLeftTop", clsRFunctionParameter:=clsSummariesHeaderLeftTopFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("summariesLeftTop", clsRFunctionParameter:=clsSummariesHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.AddParameter("summariesTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("summariesTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=1)
             End If
 
             If ucrChkDisplayVariablesAsRows.Checked Then
-                clsMutableOperator.AddParameter("variablesLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("variablesLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.AddParameter("variablesTopLeft", clsRFunctionParameter:=clsVariableHeaderTopLeftFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("variablesTopLeft", clsRFunctionParameter:=clsVariableHeaderTopLeftFunction, iPosition:=1)
             End If
         Else
             If ucrChkDisplaySummaryVariablesAsRow.Checked Then
-                clsMutableOperator.AddParameter("summariesVariableLeftTop", clsRFunctionParameter:=clsummaryVariableHeaderLeftTopFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("summariesVariableLeftTop", clsRFunctionParameter:=clsummaryVariableHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
+                clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
             End If
         End If
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
-        Dim iColumn As Integer = 0
-        Dim iNumberOfColumns As Integer
+        If ucrReceiverFactors.IsEmpty OrElse String.IsNullOrEmpty(ucrNudColumnFactors.GetText()) Then
+            Exit Sub
+        End If
 
-        clsColumnOperator.ClearParameters()
-        clsMutableOperator.RemoveParameterByName("columnOp")
+        If rdoSummaryTable.Checked Then
+            Dim iColumn As Integer = 0
+            Dim iNumberOfColumns As Integer
 
-        If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
+            clsColumnOperator.ClearParameters()
+            clsSummaryOperator.RemoveParameterByName("columnOp")
+
+            If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
+                iNumberOfColumns = ucrNudColumnFactors.GetText()
+                For Each strColumn As String In ucrReceiverFactors.GetVariableNamesAsList
+                    Dim clsHeaderFunction As New RFunction
+                    clsHeaderFunction.SetPackageName("mmtable2")
+                    clsHeaderFunction.SetRCommand(If(iColumn < iNumberOfColumns, "header_top_left", "header_left_top"))
+                    clsHeaderFunction.AddParameter("variable", strColumn, iPosition:=0)
+                    clsColumnOperator.AddParameter(strColumn, clsRFunctionParameter:=clsHeaderFunction, iPosition:=iColumn)
+                    iColumn += 1
+                Next
+                clsSummaryOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
+            End If
+        Else
+            Dim iColumn As Integer = 1
+            Dim iNumberOfColumns As Integer
+            clsMmtableOperator.ClearParameters()
+
             iNumberOfColumns = ucrNudColumnFactors.GetText()
-            For Each strColumn As String In ucrReceiverFactors.GetVariableNamesAsList
-                Dim clsHeaderFunction As New RFunction
-                clsHeaderFunction.SetPackageName("mmtable2")
-                clsHeaderFunction.SetRCommand(If(iColumn < iNumberOfColumns, "header_top_left", "header_left_top"))
-                clsHeaderFunction.AddParameter("variable", strColumn, iPosition:=0)
-                clsColumnOperator.AddParameter(strColumn, clsRFunctionParameter:=clsHeaderFunction, iPosition:=iColumn)
+            For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
+                If iColumn <= iNumberOfColumns Then
+                    Dim clsHeaderLeftFunction As New RFunction
+                    clsHeaderLeftFunction.SetPackageName("mmtable2")
+                    clsHeaderLeftFunction.SetRCommand("header_top_left")
+                    clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
+                    clsMmtableOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
+                Else
+                    Dim clsHeaderTopFunction As New RFunction
+                    clsHeaderTopFunction.SetPackageName("mmtable2")
+                    clsHeaderTopFunction.SetRCommand("header_left_top")
+                    clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
+                    clsMmtableOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
+                End If
                 iColumn += 1
             Next
-            clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
+            clsFrequencyOperator.AddParameter("columnOp", clsROperatorParameter:=clsMmtableOperator, iPosition:=1)
         End If
+
     End Sub
 
     Private Sub FillListView()
@@ -557,6 +597,8 @@ Public Class dlgSummaryTables
     Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
         If rdoSummaryTable.Checked Then
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
+            clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+            clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
@@ -564,11 +606,13 @@ Public Class dlgSummaryTables
             cmdSummaries.Visible = True
         Else
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
-            cmdSummaries.Visible = False
-            cmdFormatTable.Location = New Point(286, 379)
-            ucrSaveTable.SetPrefix("frequency_table")
+            clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
+            clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
+            ucrSaveTable.SetPrefix("frequency_table")
+            cmdSummaries.Visible = False
+            cmdFormatTable.Location = New Point(286, 379)
         End If
     End Sub
 
