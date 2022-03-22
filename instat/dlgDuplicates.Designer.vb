@@ -31,15 +31,15 @@ Partial Class dlgDuplicates
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.ucrInputOmitValues = New instat.ucrInputTextBox()
         Me.ucrInputTolerance = New instat.ucrInputTextBox()
         Me.ucrChkTolerance = New instat.ucrCheck()
         Me.ucrChkOmitValues = New instat.ucrCheck()
         Me.ucrInputConditions = New instat.ucrInputComboBox()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
-        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.ucrInputComboType = New instat.ucrInputComboBox()
         Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
@@ -59,7 +59,7 @@ Partial Class dlgDuplicates
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDataFrame.Location = New System.Drawing.Point(11, 12)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(142, 12)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(135, 27)
         Me.rdoDataFrame.TabIndex = 1
@@ -76,7 +76,7 @@ Partial Class dlgDuplicates
         Me.rdoSelectedVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSelectedVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSelectedVariables.Location = New System.Drawing.Point(144, 12)
+        Me.rdoSelectedVariables.Location = New System.Drawing.Point(13, 12)
         Me.rdoSelectedVariables.Name = "rdoSelectedVariables"
         Me.rdoSelectedVariables.Size = New System.Drawing.Size(135, 27)
         Me.rdoSelectedVariables.TabIndex = 2
@@ -152,6 +152,47 @@ Partial Class dlgDuplicates
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
+        'lblSelectedVariable
+        '
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(277, 82)
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(94, 13)
+        Me.lblSelectedVariable.TabIndex = 5
+        Me.lblSelectedVariable.Tag = ""
+        Me.lblSelectedVariable.Text = "Variable to Check:"
+        '
+        'lblVariablesToDuplicate
+        '
+        Me.lblVariablesToDuplicate.AutoSize = True
+        Me.lblVariablesToDuplicate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVariablesToDuplicate.Location = New System.Drawing.Point(277, 82)
+        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
+        Me.lblVariablesToDuplicate.Size = New System.Drawing.Size(99, 13)
+        Me.lblVariablesToDuplicate.TabIndex = 7
+        Me.lblVariablesToDuplicate.Tag = ""
+        Me.lblVariablesToDuplicate.Text = "Variables to Check:"
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblType.Location = New System.Drawing.Point(178, 297)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(34, 13)
+        Me.lblType.TabIndex = 17
+        Me.lblType.Text = "Type:"
+        '
+        'ucrChkIncludeSummary
+        '
+        Me.ucrChkIncludeSummary.AutoSize = True
+        Me.ucrChkIncludeSummary.Checked = False
+        Me.ucrChkIncludeSummary.Location = New System.Drawing.Point(10, 360)
+        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
+        Me.ucrChkIncludeSummary.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkIncludeSummary.TabIndex = 14
+        '
         'ucrInputOmitValues
         '
         Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
@@ -202,47 +243,6 @@ Partial Class dlgDuplicates
         Me.ucrInputConditions.Name = "ucrInputConditions"
         Me.ucrInputConditions.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputConditions.TabIndex = 1
-        '
-        'lblSelectedVariable
-        '
-        Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(277, 82)
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(94, 13)
-        Me.lblSelectedVariable.TabIndex = 5
-        Me.lblSelectedVariable.Tag = ""
-        Me.lblSelectedVariable.Text = "Variable to Check:"
-        '
-        'lblVariablesToDuplicate
-        '
-        Me.lblVariablesToDuplicate.AutoSize = True
-        Me.lblVariablesToDuplicate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariablesToDuplicate.Location = New System.Drawing.Point(277, 82)
-        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
-        Me.lblVariablesToDuplicate.Size = New System.Drawing.Size(99, 13)
-        Me.lblVariablesToDuplicate.TabIndex = 7
-        Me.lblVariablesToDuplicate.Tag = ""
-        Me.lblVariablesToDuplicate.Text = "Variables to Check:"
-        '
-        'lblType
-        '
-        Me.lblType.AutoSize = True
-        Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblType.Location = New System.Drawing.Point(178, 297)
-        Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(34, 13)
-        Me.lblType.TabIndex = 17
-        Me.lblType.Text = "Type:"
-        '
-        'ucrChkIncludeSummary
-        '
-        Me.ucrChkIncludeSummary.AutoSize = True
-        Me.ucrChkIncludeSummary.Checked = False
-        Me.ucrChkIncludeSummary.Location = New System.Drawing.Point(10, 360)
-        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
-        Me.ucrChkIncludeSummary.Size = New System.Drawing.Size(135, 23)
-        Me.ucrChkIncludeSummary.TabIndex = 14
         '
         'ucrInputComboType
         '
@@ -357,7 +357,7 @@ Partial Class dlgDuplicates
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicates"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Duplicates"
+        Me.Text = "Duplicate Rows"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
