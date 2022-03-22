@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgSummaryTables
+Partial Class dlgSummaryFrequencyTables
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -55,7 +55,6 @@ Partial Class dlgSummaryTables
         Me.grpPercentages = New System.Windows.Forms.GroupBox()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
         Me.lblFrequencyMarginName = New System.Windows.Forms.Label()
-        Me.ucrInputFrequencyMarginName = New instat.ucrInputTextBox()
         Me.ucrChkFrequencyDisplayMargins = New instat.ucrCheck()
         Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
         Me.ucrChkPercentageProportion = New instat.ucrCheck()
@@ -80,6 +79,7 @@ Partial Class dlgSummaryTables
         Me.ucrChkWeight = New instat.ucrCheck()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlMargin = New instat.UcrPanel()
+        Me.ucrInputFrequencyMarginName = New instat.ucrInputTextBox()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -290,17 +290,6 @@ Partial Class dlgSummaryTables
         Me.lblFrequencyMarginName.Size = New System.Drawing.Size(76, 13)
         Me.lblFrequencyMarginName.TabIndex = 25
         Me.lblFrequencyMarginName.Text = "Margin Name :"
-        '
-        'ucrInputFrequencyMarginName
-        '
-        Me.ucrInputFrequencyMarginName.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrequencyMarginName.AutoSize = True
-        Me.ucrInputFrequencyMarginName.IsMultiline = False
-        Me.ucrInputFrequencyMarginName.IsReadOnly = False
-        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(92, 271)
-        Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
-        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
-        Me.ucrInputFrequencyMarginName.TabIndex = 26
         '
         'ucrChkFrequencyDisplayMargins
         '
@@ -547,7 +536,18 @@ Partial Class dlgSummaryTables
         Me.ucrPnlMargin.Size = New System.Drawing.Size(0, 0)
         Me.ucrPnlMargin.TabIndex = 13
         '
-        'dlgSummaryTables
+        'ucrInputFrequencyMarginName
+        '
+        Me.ucrInputFrequencyMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrequencyMarginName.AutoSize = True
+        Me.ucrInputFrequencyMarginName.IsMultiline = False
+        Me.ucrInputFrequencyMarginName.IsReadOnly = False
+        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(92, 271)
+        Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
+        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
+        Me.ucrInputFrequencyMarginName.TabIndex = 26
+        '
+        'dlgSummaryFrequencyTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -583,9 +583,9 @@ Partial Class dlgSummaryTables
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgSummaryTables"
+        Me.Name = "dlgSummaryFrequencyTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary Tables"
+        Me.Text = "Summary\Frequency Tables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
         Me.grpMargin.ResumeLayout(False)
