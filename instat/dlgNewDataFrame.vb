@@ -337,7 +337,14 @@ Public Class dlgNewDataFrame
                     clsColExpRFunction.SetRCommand("as.numeric")
                 Case "Factor"
                     clsColExpRFunction.SetRCommand("factor")
-                    clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
+                    Dim strLevels As String = row.Cells("colLevels").Value
+                    If strLevels.Count(Function(x) x = ":") = 1 Then
+                        'If IsNumeric(Left(strLevels, InStr(strLevels, ":"))) Then
+                        '    clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
+                        'End If
+                    Else
+                        clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
+                    End If
                 Case "Logic"
                     clsColExpRFunction.SetRCommand("as.logic")
                 Case Else
