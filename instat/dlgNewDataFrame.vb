@@ -18,8 +18,9 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgNewDataFrame
-    Private clsEmptyOverallFunction, clsEmptyRepFunction, clsEmptyMatrixFunction, clsNewDataFrame As New RFunction
-    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsLogicalFunction, clsRepFunction As New RFunction
+    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrame, clsSjLabelledFuntion As New RFunction
+    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction As New RFunction
+    Private lstLabels As New List(Of String)
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iOldValue As Integer
@@ -96,8 +97,9 @@ Public Class dlgNewDataFrame
         clsNewDataFrame = New RFunction
         clsDummyLabelFunction = New RFunction
         clsDummyVarFunction = New RFunction
-        clsAsLogicalFunction = New RFunction
+        clsAsCharacterFunction = New RFunction
         clsRepFunction = New RFunction
+        clsSjLabelledFuntion = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
@@ -110,14 +112,18 @@ Public Class dlgNewDataFrame
         clsEmptyOverallFunction.SetRCommand("data.frame")
         'clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
 
+        clsSjLabelledFuntion.SetPackageName("sjlabelled")
+        clsSjLabelledFuntion.SetRCommand("set_label")
+        clsSjLabelledFuntion.AddParameter("x", clsRFunctionParameter:=clsNewDataFrame, iPosition:=0)
+
         clsNewDataFrame.SetRCommand("data.frame")
-        clsEmptyRepFunction.SetRCommand("rep")
+        '  clsEmptyRepFunction.SetRCommand("rep")
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
         clsRepFunction.AddParameter("times", "10", bIncludeArgumentName:=False, iPosition:=1)
-        clsAsLogicalFunction.SetRCommand("as.logical")
-        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsAsCharacterFunction.SetRCommand("as.character")
+        clsAsCharacterFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         'matrix(data = NA,nrow = 10, ncol = 2)
         clsEmptyMatrixFunction.SetRCommand("matrix")
@@ -210,11 +216,12 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudRows.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        'ucrNudRows.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudRows.SetRCode(clsRepFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=2)
+        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFuntion, iAdditionalPairNo:=3)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
@@ -268,14 +275,11 @@ Public Class dlgNewDataFrame
             btnExample.Visible = False
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
-            CreateEmptyDataFrame()
             If ucrChkVariable.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-                lblColumns.Text = "Add Column(s):"
                 UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
-                lblColumns.Text = "Columns:"
             End If
         End If
         autoTranslate(Me)
@@ -313,6 +317,7 @@ Public Class dlgNewDataFrame
     Private Sub SampleEmpty()
 
         clsNewDataFrame.ClearParameters()
+        lstLabels.Clear()
         Dim iColPosition As Integer = 0
         For Each row As DataGridViewRow In dataTypeGridView.Rows
             'all cells must be filled for a valid column R expression. So check for empty cells 
@@ -324,6 +329,7 @@ Public Class dlgNewDataFrame
 
             'labels column is optional, so check for empty if it exists
             Dim clsColExpRFunction As New RFunction
+            Dim clsEmptyRepFunction As New RFunction
             Select Case row.Cells("cbType").Value
                 Case "Character"
                     clsColExpRFunction.SetRCommand("as.character")
@@ -331,12 +337,7 @@ Public Class dlgNewDataFrame
                     clsColExpRFunction.SetRCommand("as.numeric")
                 Case "Factor"
                     clsColExpRFunction.SetRCommand("factor")
-                    If row.Cells("colLevels").Value <> "" Then
-                        clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
-                    End If
-                    If row.Cells("colLabel").Visible AndAlso row.Cells("colLabel").Value <> "" Then
-                        clsColExpRFunction.AddParameter("labels", GetLevelsAsRString(row.Cells("colLabel").Value), iPosition:=2)
-                    End If
+                    clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(row.Cells("colLevels").Value), iPosition:=1)
                 Case "Logic"
                     clsColExpRFunction.SetRCommand("as.logic")
                 Case Else
@@ -344,6 +345,11 @@ Public Class dlgNewDataFrame
                     Continue For
             End Select
 
+            lstLabels.Add(row.Cells("colLabel").Value)
+            clsSjLabelledFuntion.AddParameter("label", GetLabelAsRString(lstLabels), iPosition:=1)
+
+            clsEmptyRepFunction.SetRCommand("rep")
+            clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, bIncludeArgumentName:=False, iPosition:=1)
             If strType = "NA" OrElse IsNumeric(strType) Then
                 clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
             Else
@@ -356,12 +362,11 @@ Public Class dlgNewDataFrame
         Next
     End Sub
 
-    Private Sub CreateEmptyDataFrame()
-        If rdoEmpty.Checked AndAlso Not ucrChkVariable.Checked Then
-            For i = 1 To ucrNudCols.Value
-                clsEmptyOverallFunction.AddParameter("x" & i, clsRFunctionParameter:=clsAsLogicalFunction, iPosition:=i)
-            Next
-        End If
+    Private Sub CreateEmptyDataFrame(iCol As Integer)
+        clsEmptyOverallFunction.ClearParameters()
+        For i = 1 To iCol
+            clsEmptyOverallFunction.AddParameter("x" & i, clsRFunctionParameter:=clsAsCharacterFunction, iPosition:=i)
+        Next
     End Sub
 
     Private Function GetLevelsAsRString(strLevel As String) As String
@@ -371,6 +376,23 @@ Public Class dlgNewDataFrame
 
         strTemp = "c" & "("
         For Each strCh As String In strLevels
+            If i > 0 Then
+                strTemp = strTemp & ","
+            End If
+            strTemp = strTemp & Chr(34) & strCh & Chr(34)
+            i = i + 1
+        Next
+        strTemp = strTemp & ")"
+
+        Return strTemp
+    End Function
+
+    Private Function GetLabelAsRString(lstLabels As List(Of String)) As String
+        Dim i As Integer
+        Dim strTemp As String
+
+        strTemp = "c" & "("
+        For Each strCh As String In lstLabels
             If i > 0 Then
                 strTemp = strTemp & ","
             End If
@@ -400,9 +422,9 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = ""
-                    .Item(i).Cells(4).Value = ""
-                    .Item(i).Cells(5).Value = "NA"
+                    .Item(i).Cells(3).Value = "NA"
+                    .Item(i).Cells(4).Value = "No, Yes"
+                    .Item(i).Cells(5).Value = ""
                 End With
             Next
         Else
@@ -411,17 +433,21 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = ""
-                    .Item(i).Cells(4).Value = ""
-                    .Item(i).Cells(5).Value = "NA"
+                    .Item(i).Cells(3).Value = "NA"
+                    .Item(i).Cells(4).Value = "No, Yes"
+                    .Item(i).Cells(5).Value = ""
                 End With
             Next
         End If
     End Sub
 
-    Private Sub ucrNudCols_TextChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged
+    Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged
         UpdateGrid(ucrNudCols.Value, dataTypeGridView)
-        CreateEmptyDataFrame()
+        CreateEmptyDataFrame(ucrNudCols.Value)
+    End Sub
+
+    Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
+        SampleEmpty()
     End Sub
 
     Private Sub AddColumns()
@@ -451,6 +477,11 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
         dataTypeGridView.Columns("colLabel").Visible = ucrChkIncludeLabel.Checked
+        If ucrChkIncludeLabel.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFuntion)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+        End If
     End Sub
 
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
@@ -465,18 +496,14 @@ Public Class dlgNewDataFrame
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
         If selectedCombobox.SelectedItem = "Factor" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
         ElseIf selectedCombobox.SelectedItem = "Integer" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
             'If Not Integer.TryParse(dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value, iVaalue) Then
             '    MsgBox("Only integer required when the selected type is Integer")
             'End If
         Else
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 2, dataTypeGridView.CurrentCell.RowIndex).Value = ""
         End If
     End Sub
 
@@ -620,17 +647,18 @@ Public Class dlgNewDataFrame
 
     Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
         Dim i As Integer
-        If e.Control AndAlso e.KeyCode = Keys.V Then
+        Dim strColName As String = dataTypeGridView.Columns(dataTypeGridView.CurrentCell.ColumnIndex).HeaderText
+        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "Name" OrElse strColName = "Label" OrElse strColName = "Levels") Then
             Try
                 For Each line As String In Clipboard.GetText.Split(vbNewLine)
                     If Not line.Trim.ToString = "" Then
                         Dim item() As String = line.Split(vbTab(0))
-                        If dataTypeGridView.CurrentCell.ColumnIndex = 1 Then
+                        If strColName = "Name" Then
                             dataTypeGridView.Rows.Item(i).Cells(1).Value = item(0).ToString
-                        ElseIf dataTypeGridView.CurrentCell.ColumnIndex = 3 Then
-                            dataTypeGridView.Rows.Item(i).Cells(3).Value = item(0).ToString
-                        ElseIf dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
+                        ElseIf strColName = "Levels" AndAlso dataTypeGridView.Rows.Item(i).Cells(2).Value = "Factor" Then
                             dataTypeGridView.Rows.Item(i).Cells(4).Value = item(0).ToString
+                        ElseIf strColName = "Label" Then
+                            dataTypeGridView.Rows.Item(i).Cells(5).Value = item(0).ToString
                         End If
                         i = i + 1
                     End If
