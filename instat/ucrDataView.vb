@@ -423,7 +423,7 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
-    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -612,7 +612,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilters.Click
+    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
