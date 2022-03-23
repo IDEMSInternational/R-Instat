@@ -435,7 +435,6 @@ Partial Class dlgNewDataFrame
         '
         'colLevels
         '
-        Me.colLevels.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.colLevels.HeaderText = "Levels"
         Me.colLevels.Items.AddRange(New Object() {"No, Yes", "Bad, Poor, Average, Good, Great", "0-4,5-9,10-14,15-19, 20-64, 65+", "1:5"})
         Me.colLevels.Name = "colLevels"

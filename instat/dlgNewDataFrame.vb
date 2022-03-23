@@ -23,7 +23,6 @@ Public Class dlgNewDataFrame
     Private lstLabels As New List(Of String)
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iOldValue As Integer
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me) this subroutine was causing a bug in the button examples
@@ -104,7 +103,6 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
-        iOldValue = 0
 
         ucrNudCols.SetText(2)
 
@@ -241,7 +239,7 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -276,12 +274,17 @@ Public Class dlgNewDataFrame
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
             If ucrChkVariable.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+                If ucrChkIncludeLabel.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFuntion)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+                End If
                 UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
             End If
         End If
+        dataTypeGridView.Columns("colLabel").Visible = ucrChkIncludeLabel.Checked
         autoTranslate(Me)
     End Sub
 
@@ -342,8 +345,6 @@ Public Class dlgNewDataFrame
                         If IsNumeric(strLevels.Substring(0, strLevels.IndexOf(":"))) _
                             AndAlso IsNumeric(strLevels.Substring(2, strLevels.IndexOf(":"))) Then
                             clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
-                            'Else
-                            '    clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
                         End If
                     Else
                         clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
@@ -389,7 +390,11 @@ Public Class dlgNewDataFrame
             If i > 0 Then
                 strTemp = strTemp & ","
             End If
-            strTemp = strTemp & Chr(34) & strCh & Chr(34)
+            If strCh <> "" Then
+                strTemp = strTemp & Chr(34) & strCh.Replace(" ", "") & Chr(34)
+            Else
+                strTemp = strTemp & Chr(34) & strCh & Chr(34)
+            End If
             i = i + 1
         Next
         strTemp = strTemp & ")"
@@ -485,21 +490,12 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub ucrChkIncludeLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeLabel.ControlValueChanged
-        dataTypeGridView.Columns("colLabel").Visible = ucrChkIncludeLabel.Checked
-        If ucrChkIncludeLabel.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFuntion)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-        End If
-    End Sub
-
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
-        If dataTypeGridView.CurrentCell.ColumnIndex <> 0 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
-            Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
-            RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-            AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-        End If
+        'If dataTypeGridView.CurrentCell.ColumnIndex = 2 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
+        '    Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
+        '    RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+        '    AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+        'End If
     End Sub
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
@@ -508,9 +504,6 @@ Public Class dlgNewDataFrame
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
         ElseIf selectedCombobox.SelectedItem = "Integer" Then
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
-            'If Not Integer.TryParse(dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value, iVaalue) Then
-            '    MsgBox("Only integer required when the selected type is Integer")
-            'End If
         Else
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
             dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""
@@ -658,17 +651,16 @@ Public Class dlgNewDataFrame
     Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
         Dim i As Integer
         Dim strColName As String = dataTypeGridView.Columns(dataTypeGridView.CurrentCell.ColumnIndex).HeaderText
-        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "Name" OrElse strColName = "Label" OrElse strColName = "Levels") Then
+        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "Name" OrElse strColName = "Label") Then
             Try
-                For Each line As String In Clipboard.GetText.Split(vbNewLine)
-                    If Not line.Trim.ToString = "" Then
-                        Dim item() As String = line.Split(vbTab(0))
+                For Each element As String In Clipboard.GetText.Split(vbNewLine)
+                    If Not element.Trim.ToString = "" Then
+                        Dim strLabel() As String = element.Split(vbTab(0))
+                        Dim strValue As String = strLabel(0).Replace(vbLf, "")
                         If strColName = "Name" Then
-                            dataTypeGridView.Rows.Item(i).Cells(1).Value = item(0).ToString
-                        ElseIf strColName = "Levels" AndAlso dataTypeGridView.Rows.Item(i).Cells(2).Value = "Factor" Then
-                            dataTypeGridView.Rows.Item(i).Cells(4).Value = item(0).ToString
+                            dataTypeGridView.Rows.Item(i).Cells(1).Value = strValue
                         ElseIf strColName = "Label" Then
-                            dataTypeGridView.Rows.Item(i).Cells(5).Value = item(0).ToString
+                            dataTypeGridView.Rows.Item(i).Cells(5).Value = strValue
                         End If
                         i = i + 1
                     End If
