@@ -239,7 +239,7 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -275,8 +275,10 @@ Public Class dlgNewDataFrame
             dataGridView.Visible = False
             If ucrChkVariable.Checked Then
                 If ucrChkIncludeLabel.Checked Then
+                    clsNewDataFrame.RemoveAssignTo()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFuntion)
                 Else
+                    clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
                     ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
                 End If
                 UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
@@ -284,15 +286,19 @@ Public Class dlgNewDataFrame
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
             End If
         End If
+        If rdoCommand.Checked OrElse rdoRandom.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+        End If
+
         dataTypeGridView.Columns("colLabel").Visible = ucrChkIncludeLabel.Checked
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-        If rdoCommand.Checked OrElse rdoRandom.Checked Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-        End If
-    End Sub
+    'Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
+    '    If rdoCommand.Checked OrElse rdoRandom.Checked Then
+    '        ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+    '    End If
+    'End Sub
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
         ucrTryNewDataFrame.ClearTryText()
