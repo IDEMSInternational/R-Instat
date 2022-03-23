@@ -1332,7 +1332,7 @@ Public Class frmMain
         dlgDefineRedFlags.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
+    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesTwoWayFrequencies.Click
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
@@ -2380,7 +2380,7 @@ Public Class frmMain
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
+    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTableFrequencies.Click
         dlgPivotTable.ShowDialog()
     End Sub
 
@@ -2426,5 +2426,13 @@ Public Class frmMain
 
     Private Sub mnuDescribeTwoThreeVariablesCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesCorrelations.Click
         dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesThreeWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesThreeWayFrequencies.Click
+        dlgThreeVariableFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesPivotTableSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTableSummaries.Click
+        dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 End Class

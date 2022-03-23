@@ -53,8 +53,8 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator34 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeTwoThreeVariablesCorrelations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoVariablesFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -673,6 +673,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -758,7 +760,7 @@ Partial Class frmMain
         '
         'mnuDescribeTwoThreeVariables
         '
-        Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoVariablesFrequencies, Me.mnuDescribeTwoVariablesPivotTable})
+        Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies, Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies, Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies, Me.mnuDescribeTwoThreeVariablesPivotTableSummaries})
         Me.mnuDescribeTwoThreeVariables.Name = "mnuDescribeTwoThreeVariables"
         Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(192, 22)
         Me.mnuDescribeTwoThreeVariables.Tag = "Two_Variables"
@@ -768,40 +770,40 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesSummarise.DoubleClickEnabled = True
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(213, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(213, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
         'ToolStripSeparator34
         '
         Me.ToolStripSeparator34.Name = "ToolStripSeparator34"
-        Me.ToolStripSeparator34.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator34.Size = New System.Drawing.Size(210, 6)
         '
         'mnuDescribeTwoThreeVariablesCorrelations
         '
         Me.mnuDescribeTwoThreeVariablesCorrelations.Name = "mnuDescribeTwoThreeVariablesCorrelations"
-        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(213, 22)
         Me.mnuDescribeTwoThreeVariablesCorrelations.Text = "Correlations..."
         '
-        'mnuDescribeTwoVariablesFrequencies
+        'mnuDescribeTwoThreeVariablesTwoWayFrequencies
         '
-        Me.mnuDescribeTwoVariablesFrequencies.DoubleClickEnabled = True
-        Me.mnuDescribeTwoVariablesFrequencies.Name = "mnuDescribeTwoVariablesFrequencies"
-        Me.mnuDescribeTwoVariablesFrequencies.Size = New System.Drawing.Size(180, 22)
-        Me.mnuDescribeTwoVariablesFrequencies.Text = "Frequencies..."
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.DoubleClickEnabled = True
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Name = "mnuDescribeTwoThreeVariablesTwoWayFrequencies"
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Text = "Two-Way Frequencies..."
         '
-        'mnuDescribeTwoVariablesPivotTable
+        'mnuDescribeTwoThreeVariablesPivotTableFrequencies
         '
-        Me.mnuDescribeTwoVariablesPivotTable.Name = "mnuDescribeTwoVariablesPivotTable"
-        Me.mnuDescribeTwoVariablesPivotTable.Size = New System.Drawing.Size(180, 22)
-        Me.mnuDescribeTwoVariablesPivotTable.Text = "Pivot Table..."
+        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Name = "mnuDescribeTwoThreeVariablesPivotTableFrequencies"
+        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Text = "Pivot-Table(Frequencies)..."
         '
         'mnuDescribeSpecificTablesGraphs
         '
@@ -5062,6 +5064,18 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuDescribeTwoThreeVariablesThreeWayFrequencies
+        '
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Name = "mnuDescribeTwoThreeVariablesThreeWayFrequencies"
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Text = "Three-Way Frequencies..."
+        '
+        'mnuDescribeTwoThreeVariablesPivotTableSummaries
+        '
+        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Name = "mnuDescribeTwoThreeVariablesPivotTableSummaries"
+        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Text = "Pivot-Table(Summaries)..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5457,7 +5471,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator34 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoVariablesFrequencies As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoThreeVariablesTwoWayFrequencies As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromCSPRO As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromDatabases As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportandTidyNetCDF As ToolStripMenuItem
@@ -5733,7 +5747,7 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoVariablesPivotTable As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoThreeVariablesPivotTableFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
     Friend WithEvents mnuEditScript As ToolStripMenuItem
@@ -5750,4 +5764,6 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextDefineOnStation As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDefineOnFarm As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoThreeVariablesThreeWayFrequencies As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoThreeVariablesPivotTableSummaries As ToolStripMenuItem
 End Class
