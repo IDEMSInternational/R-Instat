@@ -1,4 +1,20 @@
 ﻿
+' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System
 Imports System.ComponentModel
 Imports System.Drawing
@@ -17,7 +33,7 @@ Public Class ucrSplitButton
     Private _showSplit As Boolean
     Private _isSplitMenuVisible As Boolean
     Private _contextSplitMenuStrip As ContextMenuStrip
-    Private _textFormatFlags As TextFormatFlags = TextFormatFlags.[Default]
+    Private _textFormatFlags As TextFormatFlags = TextFormatFlags.Default
     Private _skipNextOpen As Boolean
     Private _isMouseEntered As Boolean
 
@@ -99,7 +115,7 @@ Public Class ucrSplitButton
         End If
 
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
-            State = PushButtonState.[Default]
+            State = PushButtonState.Default
         End If
     End Sub
 
@@ -170,7 +186,7 @@ Public Class ucrSplitButton
         _isMouseEntered = False
 
         If Not State.Equals(PushButtonState.Pressed) AndAlso Not State.Equals(PushButtonState.Disabled) Then
-            State = If(Focused, PushButtonState.[Default], PushButtonState.Normal)
+            State = If(Focused, PushButtonState.Default, PushButtonState.Normal)
         End If
     End Sub
 
@@ -557,20 +573,11 @@ Public Class ucrSplitButton
         _isSplitMenuVisible = True
     End Sub
 
-    Protected Overrides Sub WndProc(ByRef m As Message)
-        If m.Msg = &H212 Then
-            _isSplitMenuVisible = False
-            SetButtonDrawState()
-        End If
-
-        MyBase.WndProc(m)
-    End Sub
-
     Private Sub SetButtonDrawState()
         If Bounds.Contains(Parent.PointToClient(Cursor.Position)) Then
             State = PushButtonState.Hot
         ElseIf Focused Then
-            State = PushButtonState.[Default]
+            State = PushButtonState.Default
         ElseIf Not Enabled Then
             State = PushButtonState.Disabled
         Else
