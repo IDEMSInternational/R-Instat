@@ -108,7 +108,6 @@ Public Class dlgNewDataFrame
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
-        'clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
 
         clsSjLabelledFuntion.SetPackageName("sjlabelled")
         clsSjLabelledFuntion.SetRCommand("set_label")
@@ -132,6 +131,7 @@ Public Class dlgNewDataFrame
         'Construct option function
         clsConstructFunction.SetRCommand("data.frame")
 
+        CreateEmptyDataFrame(2)
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
@@ -214,7 +214,6 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        'ucrNudRows.AddAdditionalCodeParameterPair(clsEmptyRepFunction, New RParameter("times", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudRows.SetRCode(clsRepFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
@@ -469,6 +468,10 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
         SampleEmpty()
+    End Sub
+
+    Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 
     Private Sub AddColumns()
