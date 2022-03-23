@@ -151,7 +151,11 @@ Public Class dlgRandomSplit
     Private Sub SetBaseFunction()
         If rdoSample.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
-
+            If ucrChkTrainingData.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
+            End If
         End If
         If rdoTimeSeries.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
