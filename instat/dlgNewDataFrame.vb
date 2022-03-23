@@ -114,7 +114,6 @@ Public Class dlgNewDataFrame
         clsSjLabelledFuntion.AddParameter("x", clsRFunctionParameter:=clsNewDataFrame, iPosition:=0)
 
         clsNewDataFrame.SetRCommand("data.frame")
-        '  clsEmptyRepFunction.SetRCommand("rep")
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
@@ -293,12 +292,6 @@ Public Class dlgNewDataFrame
         autoTranslate(Me)
     End Sub
 
-    'Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-    '    If rdoCommand.Checked OrElse rdoRandom.Checked Then
-    '        ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-    '    End If
-    'End Sub
-
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
         ucrTryNewDataFrame.ClearTryText()
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
@@ -435,30 +428,17 @@ Public Class dlgNewDataFrame
         SampleEmpty()
     End Sub
 
-    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bAdd As Boolean)
-        If bAdd Then
-            For i As Integer = 0 To dgrView.Rows.Count - 1
-                With dgrView.Rows
-                    .Item(i).Cells(0).Value = i + 1
-                    .Item(i).Cells(1).Value = "x" & (i + 1)
-                    .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = "NA"
-                    .Item(i).Cells(4).Value = "No, Yes"
-                    .Item(i).Cells(5).Value = ""
-                End With
-            Next
-        Else
-            For i As Integer = iRow To dgrView.Rows.Count - 1
-                With dgrView.Rows
-                    .Item(i).Cells(0).Value = i + 1
-                    .Item(i).Cells(1).Value = "x" & (i + 1)
-                    .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = "NA"
-                    .Item(i).Cells(4).Value = "No, Yes"
-                    .Item(i).Cells(5).Value = ""
-                End With
-            Next
-        End If
+    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView)
+        For i As Integer = 0 To dgrView.Rows.Count - 1
+            With dgrView.Rows
+                .Item(i).Cells(0).Value = i + 1
+                .Item(i).Cells(1).Value = "x" & (i + 1)
+                .Item(i).Cells(2).Value = "Character"
+                .Item(i).Cells(3).Value = "NA"
+                .Item(i).Cells(4).Value = "No, Yes"
+                .Item(i).Cells(5).Value = ""
+            End With
+        Next
     End Sub
 
     Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged
@@ -470,23 +450,11 @@ Public Class dlgNewDataFrame
         SampleEmpty()
     End Sub
 
-    Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub AddColumns()
-        If ucrChkVariable.Checked Then
-            Dim iRow As Integer = ucrNudCols.Value
-            dataTypeGridView.Rows.Insert(dataTypeGridView.Rows.Count, iRow)
-            FillGrid(iRow, dataTypeGridView, False)
-        End If
-    End Sub
-
     Private Sub UpdateGrid(iRow As Integer, dgrView As DataGridView)
         Try
             dgrView.Rows.Clear()
             dgrView.Rows.Add(iRow)
-            FillGrid(iRow, dgrView, True)
+            FillGrid(iRow, dgrView)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -500,22 +468,22 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
-        'If dataTypeGridView.CurrentCell.ColumnIndex = 2 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
-        '    Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
-        '    RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-        '    AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-        'End If
+        If dataTypeGridView.CurrentCell.ColumnIndex = 2 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
+            Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
+            RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+            AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+        End If
     End Sub
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
         If selectedCombobox.SelectedItem = "Factor" Then
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
         ElseIf selectedCombobox.SelectedItem = "Integer" Then
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
+            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
         Else
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
-            dataTypeGridView(dataTypeGridView.CurrentCell.ColumnIndex + 1, dataTypeGridView.CurrentCell.RowIndex).Value = ""
+            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
+            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).Value = ""
         End If
     End Sub
 
@@ -674,7 +642,6 @@ Public Class dlgNewDataFrame
                         i = i + 1
                     End If
                 Next
-
             Catch ex As Exception
                 MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
