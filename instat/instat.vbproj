@@ -2809,6 +2809,9 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSplitButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ucrTry.Designer.vb">
       <DependentUpon>ucrTry.vb</DependentUpon>
     </Compile>
