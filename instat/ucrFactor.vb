@@ -624,6 +624,7 @@ Public Class ucrFactor
     Private Sub shtCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.AfterPaste
         'This is needed because pasting carries cell properties e.g. overrides readonly properties
         ApplyColumnSettings()
+        RaiseEvent GridContentChanged()
     End Sub
 
     Public Sub SetLevelsCheckbox(ucrChkAddLevels As ucrCheck)

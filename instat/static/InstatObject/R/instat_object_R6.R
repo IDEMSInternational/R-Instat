@@ -911,8 +911,8 @@ DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, st
 }
 )
 
-DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), ...) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, ...)
+DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, new_column_names_df, new_labels_df, ...)
   self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 })
 
@@ -2725,3 +2725,8 @@ DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","co
 DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
   self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
 })
+
+DataBook$set("public","has_labels", function(data_name, col_names) {
+  self$get_data_objects(data_name)$has_labels(col_names)
+}
+)
