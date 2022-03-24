@@ -92,16 +92,13 @@ Public Class dlgExportDataset
     Private Sub ucrReceiverMultipleDataFrames_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleDataFrames.ControlContentsChanged
         chkSaveAsSingleFile.Visible = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length > 1
         ChangeFileControlsValues()
-        ucrFilePath.Clear() 'will raise event FilePathChanged
     End Sub
 
     Private Sub chkSaveAsSingleFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveAsSingleFile.CheckedChanged
         ChangeFileControlsValues()
-        ucrFilePath.Clear() 'will raise event FilePathChanged
     End Sub
 
     Private Sub cboFileExtension_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedIndexChanged
-        ucrFilePath.Clear() 'will raise event FilePathChanged
         ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
     End Sub
 
@@ -113,7 +110,7 @@ Public Class dlgExportDataset
         'if no or single data frame selected or save as single checked then just set the base function to the default
         If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 OrElse chkSaveAsSingleFile.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-            lblConfirm.Text = GetTranslation("Click Ok to Confirm the Export.")
+            lblConfirm.Text = GetTranslation("File with the same name will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export.")
         Else
             'else, create a string command for exporting separate files to a directory.
             'note, as of 09/09/2020 rio didn't support exporting separate files in 1 command see issue #5590
@@ -137,14 +134,9 @@ Public Class dlgExportDataset
     Private Sub ChangeFileControlsValues()
         Dim strPrevSelectedFileType As String = cboFileType.SelectedItem
         Dim iSelectedDataFrames As Integer = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length
-        ucrFilePath.FolderBrowse = False 'set file path control to open default SaveFileDialog prompt
-        ucrFilePath.DefaultFileSuggestionName = ""
-        ucrFilePath.FilePathDialogFilter = ""
+        Dim bSaveAsMultipleFiles As Boolean = iSelectedDataFrames > 1 AndAlso Not chkSaveAsSingleFile.Checked
+
         cboFileType.Items.Clear()
-
-
-        ucrFilePath.FolderBrowse = iSelectedDataFrames > 1 AndAlso Not chkSaveAsSingleFile.Checked
-
         If iSelectedDataFrames > 1 AndAlso chkSaveAsSingleFile.Checked Then
             'file types currently supported insaving of multiple files into a single file
             cboFileType.Items.Add("Excel files (*.xlsx)")
@@ -175,16 +167,39 @@ Public Class dlgExportDataset
             cboFileType.Items.Add("SAS XPORT (*.xpt)")
 
             'set the default suggested name
-            ucrFilePath.DefaultFileSuggestionName = ucrReceiverMultipleDataFrames.GetVariableNames(bWithQuotes:=False)
+            If Not ucrReceiverMultipleDataFrames.IsEmpty Then
+                ucrFilePath.DefaultFileSuggestionName = ucrReceiverMultipleDataFrames.GetVariableNamesList(bWithQuotes:=False)(0)
+            End If
         End If
 
         'previous selected file type may not be there in the current combobox items
-        cboFileType.SelectedItem = strPrevSelectedFileType
-        If String.IsNullOrEmpty(cboFileType.SelectedItem) Then
+        'cboFileType.SelectedItem = strPrevSelectedFileType
+        'If String.IsNullOrEmpty(cboFileType.SelectedItem) Then
+        '    cboFileType.SelectedIndex = 0
+        'End If
+
+        If Not String.IsNullOrEmpty(strPrevSelectedFileType) AndAlso cboFileType.Items.Contains(strPrevSelectedFileType) Then
+            cboFileType.SelectedItem = strPrevSelectedFileType
+        Else
             cboFileType.SelectedIndex = 0
         End If
 
+        'if file save state has changed then make path changes to the file path control
+        If bSaveAsMultipleFiles <> ucrFilePath.FolderBrowse Then
+            ucrFilePath.FolderBrowse = bSaveAsMultipleFiles
+            If Not ucrFilePath.IsEmpty Then
+                If ucrFilePath.FolderBrowse Then
+                    ucrFilePath.FilePath = ucrFilePath.FilePathDirectory
+                Else
+                    ucrFilePath.FilePath = ucrFilePath.FilePathDirectory & "\" &
+                       ucrFilePath.SuggestionNameWithoutExtension &
+                        GetSelectedExtension(cboFileType.SelectedItem)
+                End If
+            End If
+        End If
+
         ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+
     End Sub
 
     ''' <summary>
@@ -196,10 +211,10 @@ Public Class dlgExportDataset
         If String.IsNullOrEmpty(strText) Then
             Return ""
         End If
-        'example of required format; Excel files (*.xlsx)|*.xlsx
-        Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
-        Return arrStr(0) & "(" & arrStr(1) & ")|" & arrStr(1)
 
+        'example of filter string format returned; Excel files|*.xlsx
+        Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
+        Return arrStr(0) & "|" & arrStr(1)
     End Function
 
     ''' <summary>
@@ -211,7 +226,7 @@ Public Class dlgExportDataset
         If String.IsNullOrEmpty(strText) Then
             Return ""
         End If
-        'example of required format;.xlsx
+        'example of string format returned;.xlsx
         Return strText.Split({"(", "*", ")"}, StringSplitOptions.RemoveEmptyEntries)(1)
     End Function
 
