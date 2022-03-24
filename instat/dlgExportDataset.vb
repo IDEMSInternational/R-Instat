@@ -173,11 +173,6 @@ Public Class dlgExportDataset
         End If
 
         'previous selected file type may not be there in the current combobox items
-        'cboFileType.SelectedItem = strPrevSelectedFileType
-        'If String.IsNullOrEmpty(cboFileType.SelectedItem) Then
-        '    cboFileType.SelectedIndex = 0
-        'End If
-
         If Not String.IsNullOrEmpty(strPrevSelectedFileType) AndAlso cboFileType.Items.Contains(strPrevSelectedFileType) Then
             cboFileType.SelectedItem = strPrevSelectedFileType
         Else
@@ -203,7 +198,7 @@ Public Class dlgExportDataset
     End Sub
 
     ''' <summary>
-    ''' expected string format  "filetype (*.ext)" 
+    ''' expected string format: "filetype (*.ext)" 
     ''' </summary>
     ''' <param name="strText"></param>
     ''' <returns></returns>
@@ -212,13 +207,13 @@ Public Class dlgExportDataset
             Return ""
         End If
 
-        'example of filter string format returned; Excel files|*.xlsx
+        'example of filter string format returned: Excel files|*.xlsx
         Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
         Return arrStr(0) & "|" & arrStr(1)
     End Function
 
     ''' <summary>
-    ''' expected string format  "filetype (*.ext)" 
+    ''' expected string format: "filetype (*.ext)" 
     ''' </summary>
     ''' <param name="strText"></param>
     ''' <returns></returns>
@@ -226,7 +221,7 @@ Public Class dlgExportDataset
         If String.IsNullOrEmpty(strText) Then
             Return ""
         End If
-        'example of string format returned;.xlsx
+        'example of string format returned:  .xlsx
         Return strText.Split({"(", "*", ")"}, StringSplitOptions.RemoveEmptyEntries)(1)
     End Function
 
