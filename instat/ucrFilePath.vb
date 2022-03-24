@@ -41,8 +41,6 @@ Imports instat.Translations
 Public Class ucrFilePath
     Private bFirstLoad As Boolean = True
     Private strFilePathDialogFilter As String = "All Files *.*"
-    'hold last set user file name, without the path and extension
-    Private strUserFileName As String = ""
 
     ''' <summary>
     ''' event raised when the file path contents has changed
@@ -56,8 +54,8 @@ Public Class ucrFilePath
         Get
             Return btnBrowse.Text
         End Get
-        Set(ByVal value As String)
-            btnBrowse.Text = GetTranslation(value)
+        Set(value As String)
+            btnBrowse.Text = If(DesignMode, value, GetTranslation(value))
         End Set
     End Property
 
@@ -74,8 +72,8 @@ Public Class ucrFilePath
         Get
             Return lblName.Text
         End Get
-        Set(ByVal value As String)
-            lblName.Text = GetTranslation(value)
+        Set(value As String)
+            lblName.Text = If(DesignMode, value, GetTranslation(value))
         End Set
     End Property
 
@@ -115,8 +113,6 @@ Public Class ucrFilePath
                 arrStr = arrStr(1).Split({";"}, StringSplitOptions.RemoveEmptyEntries)
                 FilePath = Path.GetDirectoryName(FilePath) & "\" &
                     Path.GetFileNameWithoutExtension(FilePath) & arrStr(0).Substring(1)
-
-
             End If
 
         End Set
@@ -131,13 +127,14 @@ Public Class ucrFilePath
 
     ''' <summary>
     ''' used to set the suggested name if no file name was set before by the user
+    ''' Note. The name should not have a file extension
     ''' </summary>
     ''' <returns></returns>
     Public Property DefaultFileSuggestionName As String = ""
 
     ''' <summary>
-    ''' contains the last set file name by the user.
-    ''' set when the user browses
+    ''' holds last user set file name, without the path and extension
+    ''' value is set when the user browses the file system
     ''' </summary>
     ''' <returns></returns>
     <Browsable(False)>
@@ -186,6 +183,7 @@ Public Class ucrFilePath
         End Get
     End Property
 
+    <Browsable(False)>
     Public ReadOnly Property SuggestionNameWithoutExtension() As String
         Get
             If Not String.IsNullOrEmpty(UserSetFilePathName) Then
@@ -197,13 +195,6 @@ Public Class ucrFilePath
             End If
         End Get
     End Property
-
-    '''' <summary>
-    '''' gets or sets the previously set path. This is never cleared when sub clear() is called.
-    '''' its used internally to set initial directories of the folder or save dialogs prompts even when path was extenally cleared
-    '''' the path will always be in windows backslash convention format i.e uses "\" instead of "/"
-    '''' </summary> 
-    ''Private Property PreviousSelectedWindowsFilePath As String = ""
 
     ''' <summary>
     ''' gets the control that contains the input file path and name
@@ -265,12 +256,10 @@ Public Class ucrFilePath
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
         If FolderBrowse Then
             Using dlgFolderBrowse As New FolderBrowserDialog
-
                 If IsEmpty() Then
                     dlgFolderBrowse.SelectedPath = frmMain.clsInstatOptions.strWorkingDirectory
                 Else
-                    'use the file path in windows backslash convention format 
-                    dlgFolderBrowse.SelectedPath = Path.GetDirectoryName(FilePath)
+                    dlgFolderBrowse.SelectedPath = FilePathDirectory 'Path.GetDirectoryName(FilePath)
                 End If
                 If DialogResult.OK = dlgFolderBrowse.ShowDialog() Then
                     FilePath = dlgFolderBrowse.SelectedPath

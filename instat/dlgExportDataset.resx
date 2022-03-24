@@ -117,15 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ucrFilePath.FilePathBrowseText" xml:space="preserve">
-    <value>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
-A problem occured attempting to translate string 'Browse' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE/translations\rInstatTranslations.db.</value>
-  </data>
   <data name="ucrFilePath.FilePathDialogFilter" xml:space="preserve">
     <value>Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html</value>
-  </data>
-  <data name="ucrFilePath.FilePathLabel" xml:space="preserve">
-    <value>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
-A problem occured attempting to translate string 'Save As:' to language en using database C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE/translations\rInstatTranslations.db.</value>
   </data>
 </root>

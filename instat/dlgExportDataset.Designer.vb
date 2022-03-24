@@ -119,10 +119,10 @@ Partial Class dlgExportDataset
         Me.ucrFilePath.AutoSize = True
         Me.ucrFilePath.DefaultFileSuggestionName = ""
         Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = resources.GetString("ucrFilePath.FilePathBrowseText")
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
         Me.ucrFilePath.FilePathDialogFilter = resources.GetString("ucrFilePath.FilePathDialogFilter")
         Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
-        Me.ucrFilePath.FilePathLabel = resources.GetString("ucrFilePath.FilePathLabel")
+        Me.ucrFilePath.FilePathLabel = "Save As:"
         Me.ucrFilePath.FolderBrowse = False
         Me.ucrFilePath.Location = New System.Drawing.Point(8, 209)
         Me.ucrFilePath.Name = "ucrFilePath"
