@@ -320,7 +320,7 @@ Public Class ucrColumnMetadata
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -447,7 +447,7 @@ Public Class ucrColumnMetadata
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextColumnSelection.Click
+    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextSelectColumns.Click
         dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
         dlgSelect.ShowDialog()
     End Sub

@@ -423,7 +423,7 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
-    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -580,14 +580,14 @@ Public Class ucrDataView
             Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
             If iNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-            ElseIf iNonNumericValues = GetCurrentDataFrameFocus().iTotalRowCount Then
-                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
             Else
+                Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                 frmConvertToNumeric.SetColumnName(strColumn)
+                frmConvertToNumeric.CheckLabels(bCheckLabels)
                 frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                 frmConvertToNumeric.ShowDialog()
-                ' Yes for "normal" convert and No for "labelled" convert
+                ' Yes for "normal" convert and No for "ordinal" convert
                 If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
@@ -612,7 +612,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilters.Click
+    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
