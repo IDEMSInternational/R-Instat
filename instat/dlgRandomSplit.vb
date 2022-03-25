@@ -126,6 +126,7 @@ Public Class dlgRandomSplit
         clsTesting.SetRCommand("testing")
         clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit, iPosition:=0)
         clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit, iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -151,11 +152,6 @@ Public Class dlgRandomSplit
     Private Sub SetBaseFunction()
         If rdoSample.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
-            If ucrChkTrainingData.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
-            Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
-            End If
         End If
         If rdoTimeSeries.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
@@ -170,8 +166,12 @@ Public Class dlgRandomSplit
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSplit.ControlContentsChanged,
         ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged,
         ucrSaveRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrChkStratifyingFactor.ControlContentsChanged,
-        ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged,
-        ucrSelector.ControlContentsChanged
+        ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged
+        SetBaseFunction()
+
     End Sub
 End Class

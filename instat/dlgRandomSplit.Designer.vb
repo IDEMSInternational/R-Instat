@@ -41,7 +41,7 @@ Partial Class dlgRandomSplit
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.ucrNudBreaks = New instat.ucrNud()
         Me.lblBreaks = New System.Windows.Forms.Label()
-        Me.ucrSelector = New instat.ucrSelectorByDataFrame()
+        Me.ucrSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -255,10 +255,10 @@ Partial Class dlgRandomSplit
         Me.ucrSelector.bDropUnusedFilterLevels = False
         Me.ucrSelector.bShowHiddenColumns = False
         Me.ucrSelector.bUseCurrentFilter = True
-        Me.ucrSelector.Location = New System.Drawing.Point(9, 73)
+        Me.ucrSelector.Location = New System.Drawing.Point(9, 75)
         Me.ucrSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelector.Name = "ucrSelector"
-        Me.ucrSelector.Size = New System.Drawing.Size(151, 180)
+        Me.ucrSelector.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelector.TabIndex = 38
         '
         'dlgRandomSplit
@@ -316,5 +316,5 @@ Partial Class dlgRandomSplit
     Friend WithEvents lblReceiverRandomSplit As Label
     Friend WithEvents lblBreaks As Label
     Friend WithEvents ucrNudBreaks As ucrNud
-    Friend WithEvents ucrSelector As ucrSelectorByDataFrame
+    Friend WithEvents ucrSelector As ucrSelectorByDataFrameAddRemove
 End Class
