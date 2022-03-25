@@ -68,6 +68,7 @@ Partial Class dlgConversions
         Me.ucrInputDirection = New instat.ucrInputComboBox()
         Me.lblDirection = New System.Windows.Forms.Label()
         Me.ucrSaveColumn = New instat.ucrSave()
+        Me.ucrChkYear = New instat.ucrCheck()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
@@ -636,6 +637,15 @@ Partial Class dlgConversions
         Me.ucrSaveColumn.Size = New System.Drawing.Size(320, 22)
         Me.ucrSaveColumn.TabIndex = 25
         '
+        'ucrChkYear
+        '
+        Me.ucrChkYear.AutoSize = True
+        Me.ucrChkYear.Checked = False
+        Me.ucrChkYear.Location = New System.Drawing.Point(265, 152)
+        Me.ucrChkYear.Name = "ucrChkYear"
+        Me.ucrChkYear.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkYear.TabIndex = 26
+        '
         'dlgConversions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -646,7 +656,6 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.ucrInputDirection)
         Me.Controls.Add(Me.ucrChkVariable)
         Me.Controls.Add(Me.ucrInputSecond)
-        Me.Controls.Add(Me.ucrInputMinute)
         Me.Controls.Add(Me.ucrInputDegree)
         Me.Controls.Add(Me.ucrReceiverLetters)
         Me.Controls.Add(Me.ucrSaveConversions)
@@ -654,10 +663,8 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.lblSeconds)
         Me.Controls.Add(Me.lblMinutes)
         Me.Controls.Add(Me.ucrReceiverDegrees)
-        Me.Controls.Add(Me.ucrReceiverMinutes)
         Me.Controls.Add(Me.ucrReceiverSeconds)
         Me.Controls.Add(Me.rdoCoordinates)
-        Me.Controls.Add(Me.grpLatitude)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblElement)
@@ -668,6 +675,10 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.ucrSelectorConversions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpElements)
+        Me.Controls.Add(Me.ucrChkYear)
+        Me.Controls.Add(Me.ucrInputMinute)
+        Me.Controls.Add(Me.ucrReceiverMinutes)
+        Me.Controls.Add(Me.grpLatitude)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -729,4 +740,5 @@ Partial Class dlgConversions
     Friend WithEvents lblDirection As Label
     Friend WithEvents ucrInputDirection As ucrInputComboBox
     Friend WithEvents ucrSaveColumn As ucrSave
+    Friend WithEvents ucrChkYear As ucrCheck
 End Class

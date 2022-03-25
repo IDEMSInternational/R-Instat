@@ -1235,6 +1235,10 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   return(decdeg)
 }
 
+yy_to_yyyy <- function (x, base=2030) {
+    dplyr::if_else(x+2000 <= base, x+2000, x+1900)
+}
+
 create_av_packs <- function() {
   av_packs <<- available.packages(repos = "https://cran.rstudio.com/")
   av_packs <<- data.frame(av_packs)
