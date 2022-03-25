@@ -63,6 +63,13 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondOpt.SetLinkedDisplayControl(lbSecondOpt)
         ucrReceiverSecondOpt.SetDataType("factor")
 
+        ucrReceiverSecondFactor.SetParameter(New RParameter("second_factor", 3, bNewIncludeArgumentName:=False))
+        ucrReceiverSecondFactor.bWithQuotes = False
+        ucrReceiverSecondFactor.SetParameterIsString()
+        ucrReceiverSecondFactor.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverSecondFactor.SetLinkedDisplayControl(lblSecondFactor)
+        ucrReceiverSecondFactor.SetDataType("factor")
+
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -73,7 +80,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
 
-        ucrPnlDescribe.AddToLinkedControls(ucrReceiverSecondOpt, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing, ucrChkSummary, ucrChkSum}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSummary.SetLinkedDisplayControl(grpSummaries)
         ucrChkSum.SetLinkedDisplayControl(grpOptions)
@@ -166,6 +173,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondVar.SetRCode(clsRCustomSummary, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelation, bReset)
         ucrReceiverSecondOpt.SetRCode(clsGroupByFunction, bReset)
+        ucrReceiverSecondFactor.SetRCode(clsGroupByFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
 
         Results()

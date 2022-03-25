@@ -90,6 +90,7 @@ Public Class ucrDataView
         AddHandler _grid.ReplaceValueInData, AddressOf ReplaceValueInData
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
+        AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -356,6 +357,10 @@ Public Class ucrDataView
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
+    End Function
+
+    Private Function GetSelectedColumnIndexes() As List(Of String)
+        Return _grid.GetSelectedColumnIndexes()
     End Function
 
     Private Function GetSelectedColumnNames() As List(Of String)
@@ -833,9 +838,24 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
-    End Sub                      
-                          
+    End Sub
+
     Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
+    End Sub
+
+    Private Sub DeleteCell_Click()
+        Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." &
+                                Environment.NewLine & "Continue?",
+                                MessageBoxButtons.YesNo, "Delete Cells")
+        If deleteCell = DialogResult.Yes Then
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
+            EndWait()
+        End If
+    End Sub
+
+    Private Sub mnuDeleteCells_Click(sender As Object, e As EventArgs) Handles mnuDeleteCells.Click
+        DeleteCell_Click()
     End Sub
 End Class

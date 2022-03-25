@@ -44,6 +44,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrChkSum = New instat.ucrCheck()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblBy = New System.Windows.Forms.Label()
@@ -59,7 +60,8 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSecondOpt = New instat.ucrReceiverSingle()
         Me.lbSecondOpt = New System.Windows.Forms.Label()
-        Me.ucrChkSum = New instat.ucrCheck()
+        Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -102,7 +104,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
         Me.grpOptions.Controls.Add(Me.ucrChkSummary)
         Me.grpOptions.Controls.Add(Me.ucrChkSum)
-        Me.grpOptions.Location = New System.Drawing.Point(236, 224)
+        Me.grpOptions.Location = New System.Drawing.Point(236, 267)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(155, 76)
         Me.grpOptions.TabIndex = 10
@@ -126,6 +128,15 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkSummary.Name = "ucrChkSummary"
         Me.ucrChkSummary.Size = New System.Drawing.Size(10, 23)
         Me.ucrChkSummary.TabIndex = 8
+        '
+        'ucrChkSum
+        '
+        Me.ucrChkSum.AutoSize = True
+        Me.ucrChkSum.Checked = False
+        Me.ucrChkSum.Location = New System.Drawing.Point(84, 45)
+        Me.ucrChkSum.Name = "ucrChkSum"
+        Me.ucrChkSum.Size = New System.Drawing.Size(10, 23)
+        Me.ucrChkSum.TabIndex = 9
         '
         'lblSummary
         '
@@ -182,7 +193,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Controls.Add(Me.lblSummary)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
-        Me.grpSummaries.Location = New System.Drawing.Point(10, 228)
+        Me.grpSummaries.Location = New System.Drawing.Point(10, 271)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 14
@@ -230,7 +241,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 309)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 347)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
@@ -298,21 +309,37 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondOpt.Tag = ""
         Me.lbSecondOpt.Text = "Factor (Optional) :"
         '
-        'ucrChkSum
+        'lblSecondFactor
         '
-        Me.ucrChkSum.AutoSize = True
-        Me.ucrChkSum.Checked = False
-        Me.ucrChkSum.Location = New System.Drawing.Point(84, 45)
-        Me.ucrChkSum.Name = "ucrChkSum"
-        Me.ucrChkSum.Size = New System.Drawing.Size(10, 23)
-        Me.ucrChkSum.TabIndex = 9
+        Me.lblSecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondFactor.Location = New System.Drawing.Point(270, 224)
+        Me.lblSecondFactor.Name = "lblSecondFactor"
+        Me.lblSecondFactor.Size = New System.Drawing.Size(137, 15)
+        Me.lblSecondFactor.TabIndex = 21
+        Me.lblSecondFactor.Tag = ""
+        Me.lblSecondFactor.Text = "Second Factor (Optional) :"
+        '
+        'ucrReceiverSecondFactor
+        '
+        Me.ucrReceiverSecondFactor.AutoSize = True
+        Me.ucrReceiverSecondFactor.frmParent = Me
+        Me.ucrReceiverSecondFactor.Location = New System.Drawing.Point(272, 240)
+        Me.ucrReceiverSecondFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondFactor.Name = "ucrReceiverSecondFactor"
+        Me.ucrReceiverSecondFactor.Selector = Nothing
+        Me.ucrReceiverSecondFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondFactor.TabIndex = 20
+        Me.ucrReceiverSecondFactor.ucrSelector = Nothing
         '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 368)
+        Me.ClientSize = New System.Drawing.Size(419, 407)
+        Me.Controls.Add(Me.lblSecondFactor)
+        Me.Controls.Add(Me.ucrReceiverSecondFactor)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lbSecondOpt)
         Me.Controls.Add(Me.ucrReceiverSecondOpt)
@@ -364,4 +391,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents lbSecondOpt As Label
     Friend WithEvents ucrChkSummary As ucrCheck
     Friend WithEvents ucrChkSum As ucrCheck
+    Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents ucrReceiverSecondFactor As ucrReceiverSingle
 End Class
