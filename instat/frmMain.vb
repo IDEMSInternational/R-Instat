@@ -702,7 +702,7 @@ Public Class frmMain
         dlgCombineText.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareDataFilter_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameFilter.Click
+    Private Sub mnuPrepareDataFilter_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = ""
         dlgRestrict.ShowDialog()
@@ -1456,10 +1456,6 @@ Public Class frmMain
         dlgStringDistance.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
-        dlgThreeVariableFrequencies.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeViewGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeViewGraph.Click
         dlgViewGraph.ShowDialog()
     End Sub
@@ -1838,7 +1834,7 @@ Public Class frmMain
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextsCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataDuplicates.Click
+    Private Sub mnuOptionsByContextsCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataDuplicateRows.Click
         dlgDuplicates.ShowDialog()
     End Sub
 
@@ -2001,7 +1997,7 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
+    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
         dlgDuplicates.ShowDialog()
     End Sub
 
@@ -2396,10 +2392,6 @@ Public Class frmMain
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
-        dlgThreeVariablePivotTable.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
         dlgExportToClimsoft.ShowDialog()
     End Sub
@@ -2430,5 +2422,9 @@ Public Class frmMain
 
     Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
         dlgDefineOptionsByContext.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesCorrelations.Click
+        dlgCorrelation.ShowDialog()
     End Sub
 End Class

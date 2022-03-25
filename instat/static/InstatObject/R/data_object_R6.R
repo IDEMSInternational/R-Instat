@@ -2539,6 +2539,7 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
   factor_col <- self$get_columns_from_data(col_name)
   contr_col <- nlevels(factor_col) - 1
   contr_row <- nlevels(factor_col)
+  cat("Factor",col_name,"has",new_contrasts,"contrasts")
   if(new_contrasts == "user_defined") {
     if(any(is.na(defined_contr_matrix)) ||!is.numeric(defined_contr_matrix) ||nrow(defined_contr_matrix) != contr_row || ncol(defined_contr_matrix) != contr_col) stop("The contrast matrix should have ", contr_col, " column(s) and ",  contr_row, " row(s) ")
   }
@@ -4346,5 +4347,11 @@ DataSheet$set("public", "replace_values_with_NA", function(row_index, column_ind
   if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
   curr_data[row_index, column_index] <- NA
   self$set_data(curr_data)
+}
+)
+
+DataSheet$set("public", "has_labels", function(col_names) {
+  if(missing(col_names)) stop("Column name must be specified.")
+  return(!is.null(attr(col_names, "labels")))
 }
 )
