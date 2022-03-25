@@ -20,6 +20,8 @@ Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRowNamesFunction As New RFunction
+    Private clsAddKeyFunction As New RFunction
+    Private clsAddKeyParam As New RParameter
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -88,6 +90,14 @@ Public Class dlgRowNamesOrNumbers
         ucrChkAsNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAsNumeric.SetRDefault("TRUE")
 
+        'ucrChkMakeColumnIntoKey
+        ucrChkMakeColumnIntoKey.SetText("Make the Column into a Key for the data Frame")
+        clsAddKeyParam.SetArgument(clsAddKeyFunction)
+        clsAddKeyParam.SetArgumentName("add_key")
+        ucrChkMakeColumnIntoKey.SetParameter(clsAddKeyParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'ucrChkMakeColumnIntoKey.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkMakeColumnIntoKey.SetRDefault("TRUE")
+
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetPrefix("row")
@@ -99,17 +109,22 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub SetDefaults()
         clsRowNamesFunction = New RFunction
+        clsAddKeyFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
 
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+
         clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+        clsRowNamesFunction.AddParameter("Add Key", clsRFunctionParameter:=clsAddKeyFunction, iPosition:=3)
         clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrChkMakeColumnIntoKey.SetRCode(clsAddKeyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -144,5 +159,13 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged, ucrPnlOverallOptions.ControlContentsChanged, ucrReceiverRowNames.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
+        If ucrChkMakeColumnIntoKey.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+        End If
     End Sub
 End Class
