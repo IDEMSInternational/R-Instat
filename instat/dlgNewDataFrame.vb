@@ -279,7 +279,6 @@ Public Class dlgNewDataFrame
                     clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
                     ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
                 End If
-                UpdateGrid(ucrNudCols.GetText(), dataTypeGridView)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
             End If
