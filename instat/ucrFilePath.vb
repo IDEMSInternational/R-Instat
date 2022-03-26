@@ -152,10 +152,6 @@ Public Class ucrFilePath
         Set(value As String)
             'first replace backward slashed with forward slashes cause of R path formats
             PathControl().SetName(value.Replace("\", "/"))
-            'If value <> "" Then
-            '    'to be safe, always replace the forward slashes with back slashes. values will be used by vb.net sialog prompts
-            '    PreviousSelectedWindowsFilePath = value.Replace("/", "\")
-            'End If
             RaiseEvent FilePathChanged()
         End Set
     End Property
