@@ -115,6 +115,7 @@ Public Class dlgDuplicates
 
         ucrInputComboType.SetParameter(New RParameter("type"))
         dctType.Add("Index", Chr(34) & "index" & Chr(34))
+        ucrInputComboType.SetRDefault(Chr(34) & "index" & Chr(34))
         dctType.Add("Count", Chr(34) & "count" & Chr(34))
         ucrInputComboType.SetDropDownStyleAsNonEditable()
         ucrInputComboType.SetItems(dctType)
