@@ -21,7 +21,6 @@ Public Class dlgRowNamesOrNumbers
     Private bReset As Boolean = True
     Private clsRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
-    Private clsAddKeyParam As New RParameter
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -68,7 +67,7 @@ Public Class dlgRowNamesOrNumbers
 
         ucrPnlOverallOptions.AddFunctionNamesCondition(rdoSortbyRowNames, frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
-        ucrPnlOverallOptions.AddToLinkedControls(ucrNewColumnName, {rdoCopyRowNamesIntoFirstColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOverallOptions.AddToLinkedControls({ucrNewColumnName, ucrChkMakeColumnIntoKey}, {rdoCopyRowNamesIntoFirstColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrReceiverRowNames, {rdoSetRowNamesFromColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -92,11 +91,8 @@ Public Class dlgRowNamesOrNumbers
 
         'ucrChkMakeColumnIntoKey
         ucrChkMakeColumnIntoKey.SetText("Make the Column into a Key for the data Frame")
-        clsAddKeyParam.SetArgument(clsAddKeyFunction)
-        clsAddKeyParam.SetArgumentName("add_key")
-        ucrChkMakeColumnIntoKey.SetParameter(clsAddKeyParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        'ucrChkMakeColumnIntoKey.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkMakeColumnIntoKey.SetRDefault("TRUE")
+        ucrChkMakeColumnIntoKey.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$add_key")
+        ucrChkMakeColumnIntoKey.AddFunctionNamesCondition(False,frmMain.clsRLink.strInstatDataObject & "$get_row_names")
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
@@ -117,14 +113,13 @@ Public Class dlgRowNamesOrNumbers
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
 
         clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        clsRowNamesFunction.AddParameter("Add Key", clsRFunctionParameter:=clsAddKeyFunction, iPosition:=3)
         clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrChkMakeColumnIntoKey.SetRCode(clsAddKeyFunction, bReset)
+        ucrChkMakeColumnIntoKey.SetRCode(clsAddKeyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -161,11 +156,16 @@ Public Class dlgRowNamesOrNumbers
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
-        If ucrChkMakeColumnIntoKey.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
-        Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+    Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged, ucrNewColumnName.ControlValueChanged, ucrSelectorRowNames.ControlValueChanged
+        If rdoCopyRowNamesIntoFirstColumn.Checked Then
+            If ucrChkMakeColumnIntoKey.Checked Then
+                clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSelectorRowNames.strCurrentDataFrame & Chr(34), iPosition:=0)
+                clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
+            Else
+                clsAddKeyFunction.RemoveParameterByName("col_names")
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+            End If
         End If
     End Sub
 End Class
