@@ -35,7 +35,6 @@ Public Class dlgSummaryTables
 
     Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
             clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
-    Private iCmdFormatYPosition As Integer
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -55,8 +54,6 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
-        iCmdFormatYPosition = cmdFormatTable.Location.Y
 
         'summary_name = NA - 8
         ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
@@ -613,7 +610,7 @@ Public Class dlgSummaryTables
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
-            cmdFormatTable.Location = New Point(286, iCmdFormatYPosition)
+            cmdFormatTable.Location = New Point(286, 464)
             cmdSummaries.Visible = True
         Else
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
