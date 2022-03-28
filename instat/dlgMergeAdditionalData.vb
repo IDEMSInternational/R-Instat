@@ -87,13 +87,13 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) 
         SetDefaults()
         SetRCodeforControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFirstDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFirstDataFrame.ControlValueChanged
+    Private Sub ucrFirstDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetDataFrameAssign()
         GetLinkInformation()
     End Sub
@@ -145,15 +145,15 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFirstDataFrame.ControlContentsChanged, ucrSecondSelector.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) 
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondSelector.ControlValueChanged
+    Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore) 
         GetLinkInformation()
     End Sub
 
-    Private Sub cmdModify_Click(sender As Object, e As EventArgs) Handles cmdModify.Click
+    Private Sub cmdModify_Click(sender As Object, e As EventArgs) 
         sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog)
         sdgMerge.ShowDialog()
         PopulateMergeByText()
@@ -208,5 +208,17 @@ Public Class dlgMergeAdditionalData
             End If
             ucrInputMergingBy.SetName(strMergeBy)
         End If
+    End Sub
+
+    Private Sub ucrChkSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputMergingBy_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
