@@ -52,7 +52,7 @@ Public Class dlgConversions
         ucrPnlConversions.AddRadioButton(rdoDayLength)
         ucrPnlConversions.AddRadioButton(rdoCoordinates)
 
-        ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"yy_to_yyyy", "convert_precip", "convert_temperature", "convert_wind_speed"})
+        ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_yy_to_yyyy", "convert_precip", "convert_temperature", "convert_wind_speed"})
         ucrPnlConversions.AddFunctionNamesCondition(rdoDayLength, "daylength")
         ucrPnlConversions.AddFunctionNamesCondition(rdoCoordinates, "convert_to_dec_deg")
 
@@ -79,7 +79,7 @@ Public Class dlgConversions
         ucrReceiverElement.bUseFilteredData = False
 
         ucrChkYear.SetText("To 4 Digit Year")
-        ucrChkYear.AddFunctionNamesCondition(True, "yy_to_yyyy")
+        ucrChkYear.AddFunctionNamesCondition(True, "convert_yy_to_yyyy")
         ucrChkYear.AddFunctionNamesCondition(False, {"convert_precip", "convert_temperature", "convert_wind_speed"})
 
         ucrReceiverDate.SetParameter(New RParameter("doy", 2))
@@ -244,7 +244,7 @@ Public Class dlgConversions
         clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsConvertToDegreeFunction, iPosition:=0)
         clsRoundFunction.AddParameter("digits", 3, iPosition:=1)
 
-        clsYearConversionFunction.SetRCommand("yy_to_yyyy")
+        clsYearConversionFunction.SetRCommand("convert_yy_to_yyyy")
 
         clsPrecipitationFunction.SetAssignTo(ucrSaveConversions.GetText, strTempDataframe:=ucrSelectorConversions.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveConversions.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
