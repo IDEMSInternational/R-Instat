@@ -38,31 +38,21 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrPnlRandomSplit.AddRadioButton(rdoSample)
-        ucrPnlRandomSplit.AddRadioButton(rdoTimeSeries)
-        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {})
-        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {})
 
-        ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool, ucrNudBreaks, ucrSelector}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrReceiverRandomSplit.SetParameterIsRFunction()
-        ucrReceiverRandomSplit.Selector = ucrSelector
+        ucrReceiverRandomSplit.Selector = ucrSelectorRandomSplit
         ucrReceiverRandomSplit.SetMeAsReceiver()
         ucrReceiverRandomSplit.SetDataType("numeric")
         ucrReceiverRandomSplit.SetLinkedDisplayControl(lblReceiverRandomSplit)
 
-        ucrSelectorRandomSplit.SetParameterIsRFunction()
-        ucrSelector.SetParameterIsrfunction()
+        ucrSelectorRandomSplit.SetParameter(New RParameter("data", 0))
+        ucrSelectorRandomSplit.SetParameterIsString()
 
         ucrChkStratifyingFactor.SetText("Set Seed")
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRandomSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrSelector, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStratifyingFactor.SetParameter(New RParameter("strata", 2))
-
+        ucrChkStratifyingFactor.SetValueIfUnchecked("NULL")
 
         ucrChkLag.SetText("Lag")
-        ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkLag.SetParameter(New RParameter("lag"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkTestingData.SetText("Save Testing Data")
         ucrChkTestingData.SetParameter(New RParameter("x", 0))
@@ -71,17 +61,14 @@ Public Class dlgRandomSplit
         ucrChkTrainingData.SetText("Save Training Data")
         ucrChkTrainingData.SetParameter(New RParameter("x", 0))
 
-        'ucrSaveRandomSplit.set
         ucrSaveRandomSplit.SetLabelText("Save sample to:")
         ucrSaveRandomSplit.SetSaveTypeAsDataFrame()
-        ucrSaveRandomSplit.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
+        ucrSaveRandomSplit.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
 
         ucrNudLag.SetParameter(New RParameter("lag", 3))
-        ucrNudLag.SetRDefault("0")
 
         ucrNudBreaks.SetLinkedDisplayControl(lblBreaks)
         ucrNudBreaks.SetParameter(New RParameter("breaks", 4))
-        ucrNudBreaks.SetRDefault("4")
 
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
         ucrNudFraction.SetParameter(New RParameter("prop", 1))
@@ -89,15 +76,22 @@ Public Class dlgRandomSplit
         ucrNudFraction.Maximum = 0.99
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
-        ucrNudFraction.SetRDefault("0.75")
 
         ucrNudPool.SetLinkedDisplayControl(lblPool)
-        ucrNudPool.SetParameter(New RParameter("pool", 4))
+        ucrNudPool.SetParameter(New RParameter("pool", 5))
         ucrNudPool.DecimalPlaces = 2
         ucrNudPool.Minimum = 0.00
         ucrNudPool.Maximum = 0.15
         ucrNudPool.Increment = 0.01
-        ucrNudPool.SetRDefault("0.10")
+
+        ucrPnlRandomSplit.AddRadioButton(rdoSample)
+        ucrPnlRandomSplit.AddRadioButton(rdoTimeSeries)
+        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {"initial_split", "training", "testing"})
+        ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {"initial_time_split", "training", "testing"})
+        ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool, ucrNudBreaks}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -111,39 +105,45 @@ Public Class dlgRandomSplit
         ucrSelectorRandomSplit.Focus()
         ucrSaveRandomSplit.Reset()
 
-        clsInitialTimeSplit.SetRCommand("initial_time_split")
         clsInitialTimeSplit.SetPackageName("rsample")
+        clsInitialTimeSplit.SetRCommand("initial_time_split")
+        clsInitialTimeSplit.AddParameter("prop", "0.75", iPosition:=1)
+        clsInitialTimeSplit.AddParameter("lag", "0", iPosition:=2)
 
-        clsInitialSplit.SetRCommand("initial_split")
         clsInitialSplit.SetPackageName("rsample")
+        clsInitialSplit.SetRCommand("initial_split")
+        clsInitialSplit.AddParameter("prop", "0.75", iPosition:=1)
+        clsInitialSplit.AddParameter("strata", "NULL", iPosition:=2)
+        clsInitialSplit.AddParameter("lag", "0", iPosition:=3)
+        clsInitialSplit.AddParameter("breaks", "4", iPosition:=4)
+        clsInitialSplit.AddParameter("pool", "0.1", iPosition:=5)
+
 
         clsTraining.SetPackageName("rsample")
         clsTraining.SetRCommand("training")
-        clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit, iPosition:=0)
-        clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit, iPosition:=0)
 
         clsTesting.SetPackageName("rsample")
         clsTesting.SetRCommand("testing")
-        clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit, iPosition:=0)
-        clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
-        ucrChkTrainingData.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter(), iAdditionalPairNo:=1)
-        ucrChkTestingData.AddAdditionalCodeParameterPair(clsInitialSplit, New RParameter(), iAdditionalPairNo:=1)
+        ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
+        ucrNudLag.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("lag", 3), iAdditionalPairNo:=1)
+        ucrSaveRandomSplit.AddAdditionalRCode(clsTesting, iAdditionalPairNo:=1)
 
-        ucrSelectorRandomSplit.SetRCode(clsInitialTimeSplit, bReset)
-        ucrChkTestingData.SetRCode(clsInitialTimeSplit, bReset)
-        ucrChkTrainingData.SetRCode(clsInitialTimeSplit, bReset)
-        ucrChkStratifyingFactor.SetRCode(clsInitialTimeSplit, bReset)
+        ucrSelectorRandomSplit.SetRCode(clsInitialSplit, bReset)
+        ucrChkTestingData.SetRCode(clsTesting, bReset)
+        ucrChkTrainingData.SetRCode(clsTraining, bReset)
+        ucrChkStratifyingFactor.SetRCode(clsInitialSplit, bReset)
         ucrNudBreaks.SetRCode(clsInitialSplit, bReset)
-        ucrNudFraction.SetRCode(clsInitialTimeSplit, bReset)
-        ucrNudPool.SetRCode(clsInitialTimeSplit, bReset)
-        ucrSaveRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNudFraction.SetRCode(clsInitialSplit, bReset)
+        ucrNudPool.SetRCode(clsInitialSplit, bReset)
+        ucrSaveRandomSplit.SetRCode(clsTraining, bReset)
         ucrNudLag.SetRCode(clsInitialSplit, bReset)
         ucrReceiverRandomSplit.SetRCode(clsInitialSplit, bReset)
+        ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -151,10 +151,25 @@ Public Class dlgRandomSplit
     End Sub
     Private Sub SetBaseFunction()
         If rdoSample.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
+            If ucrChkTestingData.Checked Then
+                clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
+            ElseIf ucrChkTrainingData.Checked Then
+                clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
         End If
-        If rdoTimeSeries.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
+        Else
+            If ucrChkTrainingData.Checked Then
+                clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
+            ElseIf ucrChkTrainingData.Checked Then
+                clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
+            End If
         End If
     End Sub
 
@@ -163,15 +178,13 @@ Public Class dlgRandomSplit
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSplit.ControlContentsChanged,
-        ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged,
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged,
         ucrSaveRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrChkStratifyingFactor.ControlContentsChanged,
         ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged
+    Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged, ucrChkTestingData.ControlValueChanged, ucrChkTrainingData.ControlValueChanged
         SetBaseFunction()
-
     End Sub
 End Class
