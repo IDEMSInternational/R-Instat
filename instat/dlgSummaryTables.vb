@@ -238,7 +238,7 @@ Public Class dlgSummaryTables
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
-        clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
+        clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
 
         clsSummaryOperator.SetOperation("+")
 
@@ -382,7 +382,7 @@ Public Class dlgSummaryTables
 
         clsStyleListFunction.SetRCommand("list")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
         clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         bResetSubdialog = True

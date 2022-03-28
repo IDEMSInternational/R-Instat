@@ -231,7 +231,7 @@ Partial Class dlgSummaryTables
         Me.rdoFrequencyTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFrequencyTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFrequencyTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFrequencyTable.Location = New System.Drawing.Point(238, 7)
+        Me.rdoFrequencyTable.Location = New System.Drawing.Point(107, 7)
         Me.rdoFrequencyTable.Name = "rdoFrequencyTable"
         Me.rdoFrequencyTable.Size = New System.Drawing.Size(129, 27)
         Me.rdoFrequencyTable.TabIndex = 22
@@ -248,7 +248,7 @@ Partial Class dlgSummaryTables
         Me.rdoSummaryTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSummaryTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSummaryTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummaryTable.Location = New System.Drawing.Point(107, 7)
+        Me.rdoSummaryTable.Location = New System.Drawing.Point(235, 7)
         Me.rdoSummaryTable.Name = "rdoSummaryTable"
         Me.rdoSummaryTable.Size = New System.Drawing.Size(133, 27)
         Me.rdoSummaryTable.TabIndex = 21
@@ -547,7 +547,7 @@ Partial Class dlgSummaryTables
         Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
         Me.ucrInputFrequencyMarginName.TabIndex = 26
         '
-        'dlgSummaryFrequencyTables
+        'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -583,7 +583,7 @@ Partial Class dlgSummaryTables
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgSummaryFrequencyTables"
+        Me.Name = "dlgSummaryTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary\Frequency Tables"
         Me.grpDisplay.ResumeLayout(False)
