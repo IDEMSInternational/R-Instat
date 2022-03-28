@@ -56,6 +56,7 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
+        ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
         ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -70,17 +71,31 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
+        ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
+        ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
+        ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", False)
+        ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
+                                                  bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkNumericVariable.AddToLinkedControls({ucrInputTableChart}, {True}, bNewLinkedHideIfParameterMissing:=True,
+                                                  bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
+                                                  objNewDefaultState:="Table", bNewLinkedChangeToDefaultState:=True)
+        ucrChkNumericVariable.AddToLinkedControls({ucrInputSummary}, {True}, bNewLinkedHideIfParameterMissing:=True,
+                                                  bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
+                                                  objNewDefaultState:="Average", bNewLinkedChangeToDefaultState:=True)
+
         ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
         ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
          "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
          "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
+        ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
 
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
-        ucrInputSummary.SetItems({"Count", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
-                                    "Average", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
+        ucrInputSummary.SetItems({"Average", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
+                                    "Count", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
                                     "Maximum", "First", "Last", "Sum over Sum", "80% Upper Bound", "80% Lower Bound",
                                     "Sum as Fraction of Totals", "Sum as Fraction of Rows", "Sum as Fraction of Columns",
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
+        ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
         ucrSavePivot.SetPrefix("pivot_table")
         ucrSavePivot.SetSaveTypeAsTable()
@@ -112,8 +127,6 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.SetPackageName("rpivotTable")
         clsRPivotTableFunction.SetRCommand("rpivotTable")
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & "Table" & Chr(34), iPosition:=5)
-        clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & "Count" & Chr(34), iPosition:=6)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
@@ -129,9 +142,7 @@ Public Class dlgThreeVariablePivotTable
         bRcodeSet = False
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
-        ucrReceiverAdditionalRowFactor.SetRCode(clsRPivotTableFunction, bReset)
-        ucrInputTableChart.SetRCode(clsRPivotTableFunction, bReset)
-        ucrInputSummary.SetRCode(clsRPivotTableFunction, bReset)
+        ucrChkNumericVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
@@ -159,6 +170,11 @@ Public Class dlgThreeVariablePivotTable
             ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            If ucrChkNumericVariable.Checked Then
+                ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+            Else
+                ucrReceiverInitialRowFactors.SetMeAsReceiver()
+            End If
         End If
         ChangeDataParameterValue()
     End Sub
@@ -202,7 +218,8 @@ Public Class dlgThreeVariablePivotTable
             iPosition = iPosition + 1
         End If
 
-        If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso Not lstColumns.Contains(strRowVariableName) Then
+        If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso
+            Not lstColumns.Contains(strRowVariableName) AndAlso ucrChkNumericVariable.Checked Then
             clsConcatenateFunction.AddParameter("col" & iPosition, strRowVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
             iPosition = iPosition + 1
         End If
@@ -225,6 +242,21 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub ucrSavePivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSavePivot.ControlValueChanged
-        clsGetObjectFunction.AddParameter("object_name", Chr(34) & ucrSavePivot.ucrInputComboSave.GetText & Chr(34), iPosition:=1)
+        If ucrSavePivot.ucrChkSave.Checked Then
+            clsGetObjectFunction.AddParameter("object_name", Chr(34) & ucrSavePivot.ucrInputComboSave.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
+        End If
+
+    End Sub
+
+    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
+        If ucrChkNumericVariable.Checked Then
+            ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+        ElseIf Not ucrChkNumericVariable.Checked AndAlso ucrChkSelectedVariable.Checked Then
+            ucrReceiverSelectedVariable.SetMeAsReceiver()
+        Else
+            ucrReceiverInitialRowFactors.SetMeAsReceiver()
+        End If
     End Sub
 End Class
