@@ -87,13 +87,13 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
         SetDefaults()
         SetRCodeforControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFirstDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrFirstDataFrame_ControlValueChanged(ucrChangedControl As ucrCore)
         SetDataFrameAssign()
         GetLinkInformation()
     End Sub
@@ -145,15 +145,15 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) 
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrSecondSelector_ControlValueChanged(ucrChangedControl As ucrCore)
         GetLinkInformation()
     End Sub
 
-    Private Sub cmdModify_Click(sender As Object, e As EventArgs) 
+    Private Sub cmdModify_Click(sender As Object, e As EventArgs)
         sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog)
         sdgMerge.ShowDialog()
         PopulateMergeByText()
