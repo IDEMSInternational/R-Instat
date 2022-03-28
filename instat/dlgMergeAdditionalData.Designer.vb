@@ -161,7 +161,7 @@ Partial Class dlgMergeAdditionalData
         Me.Name = "dlgMergeAdditionalData"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Merge Additional Data"
+        Me.Text = "Add (Merge) Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
