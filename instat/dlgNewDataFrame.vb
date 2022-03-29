@@ -316,7 +316,6 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SampleEmpty()
-
         clsNewDataFrame.ClearParameters()
         lstLabels.Clear()
         Dim iColPosition As Integer = 0
@@ -439,14 +438,13 @@ Public Class dlgNewDataFrame
 
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
         If bInsert Then
-            Dim i As Integer = iRow + 1
             With dgrView.Rows
-                .Item(i).Cells(0).Value = i + 1
-                .Item(i).Cells(1).Value = "x" & (i + 1)
-                .Item(i).Cells(2).Value = "Character"
-                .Item(i).Cells(3).Value = "NA"
-                .Item(i).Cells(4).Value = "No, Yes"
-                .Item(i).Cells(5).Value = ""
+                .Item(iRow).Cells(0).Value = iRow + 1
+                .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
+                .Item(iRow).Cells(2).Value = "Character"
+                .Item(iRow).Cells(3).Value = "NA"
+                .Item(iRow).Cells(4).Value = ""
+                .Item(iRow).Cells(5).Value = ""
             End With
         Else
             For i As Integer = 0 To dgrView.Rows.Count - 1
@@ -455,7 +453,7 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Character"
                     .Item(i).Cells(3).Value = "NA"
-                    .Item(i).Cells(4).Value = "No, Yes"
+                    .Item(i).Cells(4).Value = ""
                     .Item(i).Cells(5).Value = ""
                 End With
             Next
@@ -469,12 +467,13 @@ Public Class dlgNewDataFrame
             If iValue > iRow Then
                 Dim iAddRow As Integer = iValue - iRow
                 dataTypeGridView.Rows.Insert(iRow, iAddRow)
-                FillGrid(iAddRow, dataTypeGridView, True)
+                FillGrid(iValue - 1, dataTypeGridView, True)
             ElseIf iValue < iRow Then
                 dataTypeGridView.Rows.RemoveAt(iRow - 1)
             End If
         End If
         CreateEmptyDataFrame(ucrNudCols.Value)
+        SampleEmpty()
     End Sub
 
     Private Sub dataTypeGridView_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dataTypeGridView.CellValidating
@@ -504,7 +503,7 @@ Public Class dlgNewDataFrame
 
     Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
         If e.ColumnIndex = dataTypeGridView.Columns("colLevels").Index Then
-            dataTypeGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).ToolTipText = "The Levels should be separated by a comma e.g A,B,C"
+            dataTypeGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).ToolTipText = "Type Levels by separating them with comma e.g A,B,C"
         End If
     End Sub
 
@@ -526,7 +525,7 @@ Public Class dlgNewDataFrame
                 dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = False
             Else
                 dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = True
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = "No, Yes"
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = ""
             End If
         End If
     End Sub
