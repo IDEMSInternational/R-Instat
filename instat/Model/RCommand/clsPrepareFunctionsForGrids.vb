@@ -150,6 +150,26 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
+
+    ''' <summary>
+    '''  Check if the column factor contains labels.
+    ''' </summary>
+    Public Function CheckHasLabels(strColumnName As String) As Boolean
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim clsGetColumnsFromData As New RFunction
+
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
+        clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("col_names", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
+
+        Return frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True).AsLogical(0)
+    End Function
+
     ''' <summary>
     ''' View dataframe the whole dataframe within a pop up
     ''' </summary>
@@ -322,11 +342,11 @@ Public Class clsPrepareFunctionsForGrids
         Return _RLink.GetColumnType(_strDataFrame, strColumnName)
     End Function
 
-    '' <summary>
+    ''' <summary>
     '''  Description: To Delete one or many cells 
     ''' the delete cell function is to be used to Replace selected values with NA 
     ''' in the dataframe.
-    ''' </summary>
+    '''</summary>
     ''' <param name="lstColumnNames"></param>
     ''' <param name="lstRowNames"></param>
     Public Sub DeleteCells(lstRowNames As List(Of String), lstColumnNames As List(Of String))

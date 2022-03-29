@@ -38,6 +38,8 @@ Partial Class dlgImportDataset
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportDataset))
         Me.lblTextFilePreview = New System.Windows.Forms.Label()
         Me.lblDataFrame = New System.Windows.Forms.Label()
         Me.lblEncodingCSV = New System.Windows.Forms.Label()
@@ -71,6 +73,8 @@ Partial Class dlgImportDataset
         Me.clbSheets = New System.Windows.Forms.CheckedListBox()
         Me.lblSelectSheets = New System.Windows.Forms.Label()
         Me.lblImportingSheets = New System.Windows.Forms.Label()
+        Me.cmdStepBack = New System.Windows.Forms.Button()
+        Me.ttCmdStepBack = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkDropEmptyCols = New instat.ucrCheck()
         Me.ucrChkMultipleFiles = New instat.ucrCheck()
         Me.ucrSaveFile = New instat.ucrSave()
@@ -212,7 +216,7 @@ Partial Class dlgImportDataset
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(10, 20)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(8, 20)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
         Me.lblFileOpenPath.Size = New System.Drawing.Size(38, 13)
         Me.lblFileOpenPath.TabIndex = 0
@@ -231,7 +235,7 @@ Partial Class dlgImportDataset
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(408, 18)
+        Me.cmdBrowse.Location = New System.Drawing.Point(401, 18)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(66, 23)
         Me.cmdBrowse.TabIndex = 2
@@ -387,9 +391,9 @@ Partial Class dlgImportDataset
         Me.lblNoPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNoPreview.Location = New System.Drawing.Point(286, 290)
         Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(302, 18)
+        Me.lblNoPreview.Size = New System.Drawing.Size(298, 18)
         Me.lblNoPreview.TabIndex = 14
-        Me.lblNoPreview.Text = "Preview not yet implemented for this file type."
+        Me.lblNoPreview.Text = "Preview not yet implemented for this file type"
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblNoPreview.Visible = False
         '
@@ -533,6 +537,17 @@ Partial Class dlgImportDataset
         Me.lblImportingSheets.Text = "Importing the following sheets:"
         Me.lblImportingSheets.Visible = False
         '
+        'cmdStepBack
+        '
+        Me.cmdStepBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmdStepBack.ForeColor = System.Drawing.SystemColors.Control
+        Me.cmdStepBack.Image = CType(resources.GetObject("cmdStepBack.Image"), System.Drawing.Image)
+        Me.cmdStepBack.Location = New System.Drawing.Point(603, 18)
+        Me.cmdStepBack.Name = "cmdStepBack"
+        Me.cmdStepBack.Size = New System.Drawing.Size(23, 24)
+        Me.cmdStepBack.TabIndex = 32
+        Me.cmdStepBack.UseVisualStyleBackColor = True
+        '
         'ucrChkDropEmptyCols
         '
         Me.ucrChkDropEmptyCols.AutoSize = True
@@ -547,9 +562,9 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkMultipleFiles.AutoSize = True
         Me.ucrChkMultipleFiles.Checked = False
-        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(480, 20)
+        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(470, 20)
         Me.ucrChkMultipleFiles.Name = "ucrChkMultipleFiles"
-        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(189, 23)
+        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(132, 23)
         Me.ucrChkMultipleFiles.TabIndex = 30
         '
         'ucrSaveFile
@@ -941,7 +956,7 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(47, 17)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(45, 17)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -973,6 +988,7 @@ Partial Class dlgImportDataset
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(629, 502)
+        Me.Controls.Add(Me.cmdStepBack)
         Me.Controls.Add(Me.ucrChkDropEmptyCols)
         Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.ucrSaveFile)
@@ -1093,4 +1109,6 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrSaveFile As ucrSave
     Friend WithEvents ucrChkMultipleFiles As ucrCheck
     Friend WithEvents ucrChkDropEmptyCols As ucrCheck
+    Friend WithEvents cmdStepBack As Button
+    Friend WithEvents ttCmdStepBack As ToolTip
 End Class

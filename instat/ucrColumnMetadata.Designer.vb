@@ -50,6 +50,8 @@ Partial Class ucrColumnMetadata
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelp2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderColumnMetadata = New System.Windows.Forms.Label()
@@ -73,11 +75,13 @@ Partial Class ucrColumnMetadata
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAddComment = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuColumnContextColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnFilterRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnContextSelectColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelp1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
         Me.propertiesContextMenuStrip.SuspendLayout()
@@ -101,9 +105,9 @@ Partial Class ucrColumnMetadata
         'statusColumnMenu
         '
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet, Me.ToolStripSeparator4, Me.mnuHelp2})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 208)
         '
         'deleteDataFrame
         '
@@ -153,6 +157,17 @@ Partial Class ucrColumnMetadata
         Me.viewSheet.Name = "viewSheet"
         Me.viewSheet.Size = New System.Drawing.Size(162, 22)
         Me.viewSheet.Text = "View Data Frame"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(159, 6)
+        '
+        'mnuHelp2
+        '
+        Me.mnuHelp2.Name = "mnuHelp2"
+        Me.mnuHelp2.Size = New System.Drawing.Size(162, 22)
+        Me.mnuHelp2.Text = "Help"
         '
         'propertiesContextMenuStrip
         '
@@ -317,17 +332,17 @@ Partial Class ucrColumnMetadata
         Me.mnuAddComment.Size = New System.Drawing.Size(214, 22)
         Me.mnuAddComment.Text = "Add Comment..."
         '
-        'mnuColumnFilter
+        'mnuColumnFilterRows
         '
-        Me.mnuColumnFilter.Name = "mnuColumnFilter"
-        Me.mnuColumnFilter.Size = New System.Drawing.Size(214, 22)
-        Me.mnuColumnFilter.Text = "Filter..."
+        Me.mnuColumnFilterRows.Name = "mnuColumnFilterRows"
+        Me.mnuColumnFilterRows.Size = New System.Drawing.Size(214, 22)
+        Me.mnuColumnFilterRows.Text = "Filter Rows..."
         '
-        'mnuColumnContextColumnSelection
+        'mnuColumnContextSelectColumns
         '
-        Me.mnuColumnContextColumnSelection.Name = "mnuColumnContextColumnSelection"
-        Me.mnuColumnContextColumnSelection.Size = New System.Drawing.Size(214, 22)
-        Me.mnuColumnContextColumnSelection.Text = "Column Selection..."
+        Me.mnuColumnContextSelectColumns.Name = "mnuColumnContextSelectColumns"
+        Me.mnuColumnContextSelectColumns.Size = New System.Drawing.Size(214, 22)
+        Me.mnuColumnContextSelectColumns.Text = "Select Columns..."
         '
         'mnuColumnContextRemoveCurrentColumnSelection
         '
@@ -344,9 +359,20 @@ Partial Class ucrColumnMetadata
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilter, Me.mnuColumnContextColumnSelection, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextSelectColumns, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator3, Me.mnuHelp1})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 440)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 468)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(211, 6)
+        '
+        'mnuHelp1
+        '
+        Me.mnuHelp1.Name = "mnuHelp1"
+        Me.mnuHelp1.Size = New System.Drawing.Size(214, 22)
+        Me.mnuHelp1.Text = "Help"
         '
         'ucrColumnMetadata
         '
@@ -399,9 +425,13 @@ Partial Class ucrColumnMetadata
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuSort As ToolStripMenuItem
     Friend WithEvents mnuAddComment As ToolStripMenuItem
-    Private WithEvents mnuColumnFilter As ToolStripMenuItem
-    Friend WithEvents mnuColumnContextColumnSelection As ToolStripMenuItem
+    Private WithEvents mnuColumnFilterRows As ToolStripMenuItem
+    Friend WithEvents mnuColumnContextSelectColumns As ToolStripMenuItem
     Friend WithEvents mnuColumnContextRemoveCurrentColumnSelection As ToolStripMenuItem
     Private WithEvents mnuClearColumnFilter As ToolStripMenuItem
     Friend WithEvents columnContextMenuStrip As ContextMenuStrip
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents mnuHelp1 As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents mnuHelp2 As ToolStripMenuItem
 End Class

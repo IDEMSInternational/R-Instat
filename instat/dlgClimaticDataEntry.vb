@@ -31,7 +31,7 @@ Public Class dlgClimaticDataEntry
     Private ReadOnly strMonth As String = "Month"
     Private ReadOnly strRange As String = "Range"
     Private bChange As Boolean = False
-    Private bSubdialogFirstLoad As Boolean = True
+    Private bSubdialogFirstLoad As Boolean
     Private bState As Boolean = False
     Private bResetSubdialogs As Boolean
 
@@ -321,7 +321,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
-        bSubdialogFirstLoad = True
+        bSubdialogFirstLoad = Not lblNbRowsChanged1.Visible
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
@@ -352,5 +352,9 @@ Public Class dlgClimaticDataEntry
         sdgClimaticDataEntryOptions.ShowDialog()
         SetDateOptions()
         bChange = True
+    End Sub
+
+    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose, Me.Closed
+        bSubdialogFirstLoad = Not lblNbRowsChanged1.Visible
     End Sub
 End Class
