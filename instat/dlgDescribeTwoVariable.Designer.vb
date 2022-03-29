@@ -43,6 +43,8 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrChkSum = New instat.ucrCheck()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblBy = New System.Windows.Forms.Label()
@@ -53,6 +55,13 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlDescribe = New instat.UcrPanel()
+        Me.rdoCustomize = New System.Windows.Forms.RadioButton()
+        Me.rdoSkim = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverSecondOpt = New instat.ucrReceiverSingle()
+        Me.lbSecondOpt = New System.Windows.Forms.Label()
+        Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -72,7 +81,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblFirstVariable.AutoSize = True
         Me.lblFirstVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstVariable.Location = New System.Drawing.Point(268, 45)
+        Me.lblFirstVariable.Location = New System.Drawing.Point(268, 74)
         Me.lblFirstVariable.Name = "lblFirstVariable"
         Me.lblFirstVariable.Size = New System.Drawing.Size(75, 13)
         Me.lblFirstVariable.TabIndex = 1
@@ -82,7 +91,7 @@ Partial Class dlgDescribeTwoVariable
         'lbSecondVariable
         '
         Me.lbSecondVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbSecondVariable.Location = New System.Drawing.Point(268, 155)
+        Me.lbSecondVariable.Location = New System.Drawing.Point(268, 184)
         Me.lbSecondVariable.Name = "lbSecondVariable"
         Me.lbSecondVariable.Size = New System.Drawing.Size(100, 15)
         Me.lbSecondVariable.TabIndex = 3
@@ -93,7 +102,9 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
-        Me.grpOptions.Location = New System.Drawing.Point(236, 202)
+        Me.grpOptions.Controls.Add(Me.ucrChkSummary)
+        Me.grpOptions.Controls.Add(Me.ucrChkSum)
+        Me.grpOptions.Location = New System.Drawing.Point(236, 267)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(155, 76)
         Me.grpOptions.TabIndex = 10
@@ -108,6 +119,24 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkOmitMissing.TabIndex = 6
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.AutoSize = True
+        Me.ucrChkSummary.Checked = False
+        Me.ucrChkSummary.Location = New System.Drawing.Point(100, 45)
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        Me.ucrChkSummary.Size = New System.Drawing.Size(10, 23)
+        Me.ucrChkSummary.TabIndex = 8
+        '
+        'ucrChkSum
+        '
+        Me.ucrChkSum.AutoSize = True
+        Me.ucrChkSum.Checked = False
+        Me.ucrChkSum.Location = New System.Drawing.Point(84, 45)
+        Me.ucrChkSum.Name = "ucrChkSum"
+        Me.ucrChkSum.Size = New System.Drawing.Size(10, 23)
+        Me.ucrChkSum.TabIndex = 9
         '
         'lblSummary
         '
@@ -164,7 +193,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Controls.Add(Me.lblSummary)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
-        Me.grpSummaries.Location = New System.Drawing.Point(10, 202)
+        Me.grpSummaries.Location = New System.Drawing.Point(10, 271)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 14
@@ -174,7 +203,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrReceiverSecondVar.AutoSize = True
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(271, 170)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(271, 199)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
@@ -187,7 +216,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrReceiverFirstVars.AutoSize = True
         Me.ucrReceiverFirstVars.frmParent = Me
-        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(271, 63)
+        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(271, 92)
         Me.ucrReceiverFirstVars.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
         Me.ucrReceiverFirstVars.Selector = Nothing
@@ -202,7 +231,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.bDropUnusedFilterLevels = False
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
         Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
-        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(10, 39)
         Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
@@ -212,19 +241,112 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 347)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 9
+        '
+        'ucrPnlDescribe
+        '
+        Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDescribe.Location = New System.Drawing.Point(95, 9)
+        Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
+        Me.ucrPnlDescribe.Size = New System.Drawing.Size(211, 34)
+        Me.ucrPnlDescribe.TabIndex = 15
+        '
+        'rdoCustomize
+        '
+        Me.rdoCustomize.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCustomize.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCustomize.FlatAppearance.BorderSize = 2
+        Me.rdoCustomize.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCustomize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCustomize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCustomize.Location = New System.Drawing.Point(201, 12)
+        Me.rdoCustomize.Name = "rdoCustomize"
+        Me.rdoCustomize.Size = New System.Drawing.Size(100, 28)
+        Me.rdoCustomize.TabIndex = 16
+        Me.rdoCustomize.Text = "Customize"
+        Me.rdoCustomize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoCustomize.UseVisualStyleBackColor = True
+        '
+        'rdoSkim
+        '
+        Me.rdoSkim.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSkim.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatAppearance.BorderSize = 2
+        Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSkim.Location = New System.Drawing.Point(106, 12)
+        Me.rdoSkim.Name = "rdoSkim"
+        Me.rdoSkim.Size = New System.Drawing.Size(100, 28)
+        Me.rdoSkim.TabIndex = 17
+        Me.rdoSkim.Text = "Skim"
+        Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSkim.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverSecondOpt
+        '
+        Me.ucrReceiverSecondOpt.AutoSize = True
+        Me.ucrReceiverSecondOpt.frmParent = Me
+        Me.ucrReceiverSecondOpt.Location = New System.Drawing.Point(271, 199)
+        Me.ucrReceiverSecondOpt.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondOpt.Name = "ucrReceiverSecondOpt"
+        Me.ucrReceiverSecondOpt.Selector = Nothing
+        Me.ucrReceiverSecondOpt.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondOpt.strNcFilePath = ""
+        Me.ucrReceiverSecondOpt.TabIndex = 18
+        Me.ucrReceiverSecondOpt.ucrSelector = Nothing
+        '
+        'lbSecondOpt
+        '
+        Me.lbSecondOpt.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lbSecondOpt.Location = New System.Drawing.Point(269, 183)
+        Me.lbSecondOpt.Name = "lbSecondOpt"
+        Me.lbSecondOpt.Size = New System.Drawing.Size(100, 15)
+        Me.lbSecondOpt.TabIndex = 19
+        Me.lbSecondOpt.Tag = ""
+        Me.lbSecondOpt.Text = "Factor (Optional) :"
+        '
+        'lblSecondFactor
+        '
+        Me.lblSecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondFactor.Location = New System.Drawing.Point(270, 224)
+        Me.lblSecondFactor.Name = "lblSecondFactor"
+        Me.lblSecondFactor.Size = New System.Drawing.Size(137, 15)
+        Me.lblSecondFactor.TabIndex = 21
+        Me.lblSecondFactor.Tag = ""
+        Me.lblSecondFactor.Text = "Second Factor (Optional) :"
+        '
+        'ucrReceiverSecondFactor
+        '
+        Me.ucrReceiverSecondFactor.AutoSize = True
+        Me.ucrReceiverSecondFactor.frmParent = Me
+        Me.ucrReceiverSecondFactor.Location = New System.Drawing.Point(272, 240)
+        Me.ucrReceiverSecondFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondFactor.Name = "ucrReceiverSecondFactor"
+        Me.ucrReceiverSecondFactor.Selector = Nothing
+        Me.ucrReceiverSecondFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondFactor.TabIndex = 20
+        Me.ucrReceiverSecondFactor.ucrSelector = Nothing
         '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 341)
-        Me.Controls.Add(Me.grpSummaries)
+        Me.ClientSize = New System.Drawing.Size(419, 407)
+        Me.Controls.Add(Me.lblSecondFactor)
+        Me.Controls.Add(Me.ucrReceiverSecondFactor)
         Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.lbSecondOpt)
+        Me.Controls.Add(Me.ucrReceiverSecondOpt)
+        Me.Controls.Add(Me.rdoSkim)
+        Me.Controls.Add(Me.rdoCustomize)
+        Me.Controls.Add(Me.ucrPnlDescribe)
+        Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariable)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
@@ -262,4 +384,13 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents lblSummary As Label
     Friend WithEvents lblSummaryName As Label
     Friend WithEvents grpSummaries As GroupBox
+    Friend WithEvents ucrPnlDescribe As UcrPanel
+    Friend WithEvents ucrReceiverSecondOpt As ucrReceiverSingle
+    Friend WithEvents rdoSkim As RadioButton
+    Friend WithEvents rdoCustomize As RadioButton
+    Friend WithEvents lbSecondOpt As Label
+    Friend WithEvents ucrChkSummary As ucrCheck
+    Friend WithEvents ucrChkSum As ucrCheck
+    Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents ucrReceiverSecondFactor As ucrReceiverSingle
 End Class
