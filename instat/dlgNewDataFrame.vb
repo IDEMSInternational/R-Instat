@@ -339,13 +339,15 @@ Public Class dlgNewDataFrame
                 Case "Factor"
                     clsColExpRFunction.SetRCommand("factor")
                     Dim strLevels As String = row.Cells("colLevels").Value
-                    If strLevels.Count(Function(x) x = ":") = 1 Then
-                        If IsNumeric(strLevels.Substring(0, strLevels.IndexOf(":"))) _
+                    If strLevels <> "" Then
+                        If strLevels.Count(Function(x) x = ":") = 1 Then
+                            If IsNumeric(strLevels.Substring(0, strLevels.IndexOf(":"))) _
                             AndAlso IsNumeric(strLevels.Substring(2, strLevels.IndexOf(":"))) Then
-                            clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
+                                clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
+                            End If
+                        Else
+                            clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
                         End If
-                    Else
-                        clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
                     End If
                 Case "Logic"
                     clsColExpRFunction.SetRCommand("as.logic")
@@ -428,6 +430,13 @@ Public Class dlgNewDataFrame
         SampleEmpty()
     End Sub
 
+    Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles dataTypeGridView.DataError
+        If (e.Context _
+                    = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize)) Then
+            e.ThrowException = False
+        End If
+    End Sub
+
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView)
         For i As Integer = 0 To dgrView.Rows.Count - 1
             With dgrView.Rows
@@ -446,6 +455,16 @@ Public Class dlgNewDataFrame
         CreateEmptyDataFrame(ucrNudCols.Value)
     End Sub
 
+    Private Sub dataTypeGridView_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dataTypeGridView.CellValidating
+        If e.ColumnIndex = 4 Then
+            Dim cbLevels = CType(dataTypeGridView.Columns(4), DataGridViewComboBoxColumn)
+            If Not cbLevels.Items.Contains(e.FormattedValue) Then
+                cbLevels.Items.Add(e.FormattedValue)
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = e.FormattedValue
+            End If
+        End If
+    End Sub
+
     Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
         SampleEmpty()
     End Sub
@@ -454,6 +473,7 @@ Public Class dlgNewDataFrame
         Try
             dgrView.Rows.Clear()
             dgrView.Rows.Add(iRow)
+            dgrView.Columns("colLevels").ReadOnly = True
             FillGrid(iRow, dgrView)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -481,9 +501,10 @@ Public Class dlgNewDataFrame
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
         If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
             If selectedCombobox.SelectedItem = "Factor" Then
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLabel").RowIndex).ReadOnly = False
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = False
             Else
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLabel").RowIndex).ReadOnly = True
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = True
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = "No, Yes"
             End If
         End If
     End Sub
