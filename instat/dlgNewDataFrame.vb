@@ -131,6 +131,7 @@ Public Class dlgNewDataFrame
         clsConstructFunction.SetRCommand("data.frame")
 
         CreateEmptyDataFrame(2)
+        UpdateGrid(2, dataTypeGridView)
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
@@ -460,29 +461,30 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dataTypeGridView.CellFormatting
-        If e.ColumnIndex = dataTypeGridView.Columns("colLabel").Index OrElse
-            e.ColumnIndex = dataTypeGridView.Columns("colLevels").Index Then
-            dataTypeGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).ToolTipText = "The Levels or Labels should be separated by a comma e.g A,B,C"
+        If e.ColumnIndex = dataTypeGridView.Columns("colLevels").Index Then
+            dataTypeGridView.Rows(e.RowIndex).Cells(e.ColumnIndex).ToolTipText = "The Levels should be separated by a comma e.g A,B,C"
         End If
     End Sub
 
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
-        If dataTypeGridView.CurrentCell.ColumnIndex = 2 AndAlso dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
+        If dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
             Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
             RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
             AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
+            If dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
+                selectedComboBox.DropDownStyle = ComboBoxStyle.DropDown
+            End If
         End If
     End Sub
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
         Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
-        If selectedCombobox.SelectedItem = "Factor" Then
-            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
-        ElseIf selectedCombobox.SelectedItem = "Integer" Then
-            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = False
-        Else
-            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).ReadOnly = True
-            dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentCell.RowIndex).Value = ""
+        If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
+            If selectedCombobox.SelectedItem = "Factor" Then
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLabel").RowIndex).ReadOnly = False
+            Else
+                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLabel").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLabel").RowIndex).ReadOnly = True
+            End If
         End If
     End Sub
 
@@ -638,7 +640,7 @@ Public Class dlgNewDataFrame
                         ElseIf strColName = "Label" Then
                             dataTypeGridView.Rows.Item(i).Cells(5).Value = strValue
                         End If
-                        i = i + 1
+                        i += 1
                     End If
                 Next
             Catch ex As Exception

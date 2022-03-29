@@ -410,6 +410,7 @@ Partial Class dlgNewDataFrame
         Me.no.FillWeight = 90.0!
         Me.no.HeaderText = "No."
         Me.no.Name = "no"
+        Me.no.ReadOnly = True
         Me.no.Width = 30
         '
         'colNames
