@@ -189,7 +189,6 @@ Public Class dlgConversions
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrPnlLatitude.SetLinkedDisplayControl(grpLatitude)
-        'ucrPnlElements.SetLinkedDisplayControl(grpElements)
 
         ucrSaveConversions.SetSaveTypeAsColumn()
         ucrSaveConversions.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
@@ -442,10 +441,6 @@ Public Class dlgConversions
 
     Private Sub ucrReceiverDegrees_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDegrees.ControlValueChanged, ucrReceiverMinutes.ControlValueChanged, ucrReceiverSeconds.ControlValueChanged
         ChangeParameter()
-    End Sub
-
-    Private Sub ucrInputMinute_Load(sender As Object, e As EventArgs) Handles ucrInputMinute.Load
-
     End Sub
 
     Private Sub ChangeLatParameter()
