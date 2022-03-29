@@ -54,7 +54,8 @@ Partial Class frmMain
         Me.ToolStripSeparator34 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeTwoThreeVariablesCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwoThreeVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -673,8 +674,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareDataFrameAddMergeColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -760,7 +761,7 @@ Partial Class frmMain
         '
         'mnuDescribeTwoThreeVariables
         '
-        Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies, Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies, Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies, Me.mnuDescribeTwoThreeVariablesPivotTableSummaries})
+        Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies, Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies, Me.ToolStripSeparator36, Me.mnuDescribeTwoThreeVariablesPivotTable})
         Me.mnuDescribeTwoThreeVariables.Name = "mnuDescribeTwoThreeVariables"
         Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(192, 22)
         Me.mnuDescribeTwoThreeVariables.Tag = "Two_Variables"
@@ -770,40 +771,46 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesSummarise.DoubleClickEnabled = True
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(206, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
         'mnuDescribeTwoVariablesGraph
         '
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(206, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
         'ToolStripSeparator34
         '
         Me.ToolStripSeparator34.Name = "ToolStripSeparator34"
-        Me.ToolStripSeparator34.Size = New System.Drawing.Size(210, 6)
+        Me.ToolStripSeparator34.Size = New System.Drawing.Size(203, 6)
         '
         'mnuDescribeTwoThreeVariablesCorrelations
         '
         Me.mnuDescribeTwoThreeVariablesCorrelations.Name = "mnuDescribeTwoThreeVariablesCorrelations"
-        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesCorrelations.Size = New System.Drawing.Size(206, 22)
         Me.mnuDescribeTwoThreeVariablesCorrelations.Text = "Correlations..."
         '
         'mnuDescribeTwoThreeVariablesTwoWayFrequencies
         '
         Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.DoubleClickEnabled = True
         Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Name = "mnuDescribeTwoThreeVariablesTwoWayFrequencies"
-        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Size = New System.Drawing.Size(213, 22)
+        Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Size = New System.Drawing.Size(206, 22)
         Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies.Text = "Two-Way Frequencies..."
         '
-        'mnuDescribeTwoThreeVariablesPivotTableFrequencies
+        'mnuDescribeTwoThreeVariablesThreeWayFrequencies
         '
-        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Name = "mnuDescribeTwoThreeVariablesPivotTableFrequencies"
-        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Size = New System.Drawing.Size(213, 22)
-        Me.mnuDescribeTwoThreeVariablesPivotTableFrequencies.Text = "Pivot-Table(Frequencies)..."
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Name = "mnuDescribeTwoThreeVariablesThreeWayFrequencies"
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Size = New System.Drawing.Size(206, 22)
+        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Text = "Three-Way Frequencies..."
+        '
+        'mnuDescribeTwoThreeVariablesPivotTable
+        '
+        Me.mnuDescribeTwoThreeVariablesPivotTable.Name = "mnuDescribeTwoThreeVariablesPivotTable"
+        Me.mnuDescribeTwoThreeVariablesPivotTable.Size = New System.Drawing.Size(206, 22)
+        Me.mnuDescribeTwoThreeVariablesPivotTable.Text = "Pivot Table..."
         '
         'mnuDescribeSpecificTablesGraphs
         '
@@ -3372,7 +3379,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataFrame
         '
-        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameDuplicateColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilterRows, Me.mnuPrepareDataFrameSelectColumns, Me.mnuPrepareDataFrameReplaceValues, Me.mnuPrepareDataFrameConvertColumns, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.mnuPrepareDataframeColourByProperty})
+        Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameDuplicateColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilterRows, Me.mnuPrepareDataFrameSelectColumns, Me.mnuPrepareDataFrameReplaceValues, Me.mnuPrepareDataFrameConvertColumns, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameAddMergeColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameHideColumns, Me.mnuPrepareDataFrameFreezeColumns, Me.mnuPrepareDataframeColourByProperty})
         Me.mnuPrepareDataFrame.Name = "mnuPrepareDataFrame"
         Me.mnuPrepareDataFrame.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareDataFrame.Tag = "Data_Frame"
@@ -3381,92 +3388,92 @@ Partial Class frmMain
         'mnuPrepareDataFrameViewData
         '
         Me.mnuPrepareDataFrameViewData.Name = "mnuPrepareDataFrameViewData"
-        Me.mnuPrepareDataFrameViewData.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameViewData.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameViewData.Tag = "View_Data..."
         Me.mnuPrepareDataFrameViewData.Text = "View Data..."
         '
         'mnuPrepareDataFrameRenameColumn
         '
         Me.mnuPrepareDataFrameRenameColumn.Name = "mnuPrepareDataFrameRenameColumn"
-        Me.mnuPrepareDataFrameRenameColumn.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameRenameColumn.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameRenameColumn.Tag = "Rename_Column..."
         Me.mnuPrepareDataFrameRenameColumn.Text = "Rename Columns..."
         '
         'mnuPrepareDataFrameDuplicateColumn
         '
         Me.mnuPrepareDataFrameDuplicateColumn.Name = "mnuPrepareDataFrameDuplicateColumn"
-        Me.mnuPrepareDataFrameDuplicateColumn.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameDuplicateColumn.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameDuplicateColumn.Text = "Duplicate Column..."
         '
         'mnuPrepareDataFrameRowNumbersNames
         '
         Me.mnuPrepareDataFrameRowNumbersNames.Name = "mnuPrepareDataFrameRowNumbersNames"
-        Me.mnuPrepareDataFrameRowNumbersNames.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameRowNumbersNames.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameRowNumbersNames.Tag = "Row_Numbers/Names..."
         Me.mnuPrepareDataFrameRowNumbersNames.Text = "Row Numbers/Names..."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(198, 6)
         '
         'mnuPrepareDataFrameSort
         '
         Me.mnuPrepareDataFrameSort.Name = "mnuPrepareDataFrameSort"
-        Me.mnuPrepareDataFrameSort.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameSort.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameSort.Tag = "Sort..."
         Me.mnuPrepareDataFrameSort.Text = "Sort..."
         '
         'mnuPrepareDataFrameFilterRows
         '
         Me.mnuPrepareDataFrameFilterRows.Name = "mnuPrepareDataFrameFilterRows"
-        Me.mnuPrepareDataFrameFilterRows.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameFilterRows.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameFilterRows.Tag = "Filter..."
         Me.mnuPrepareDataFrameFilterRows.Text = "Filter Rows..."
         '
         'mnuPrepareDataFrameSelectColumns
         '
         Me.mnuPrepareDataFrameSelectColumns.Name = "mnuPrepareDataFrameSelectColumns"
-        Me.mnuPrepareDataFrameSelectColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameSelectColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameSelectColumns.Text = "Select Columns..."
         '
         'mnuPrepareDataFrameReplaceValues
         '
         Me.mnuPrepareDataFrameReplaceValues.Name = "mnuPrepareDataFrameReplaceValues"
-        Me.mnuPrepareDataFrameReplaceValues.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameReplaceValues.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameReplaceValues.Tag = "Replace_Values..."
         Me.mnuPrepareDataFrameReplaceValues.Text = "Replace Values..."
         '
         'mnuPrepareDataFrameConvertColumns
         '
         Me.mnuPrepareDataFrameConvertColumns.Name = "mnuPrepareDataFrameConvertColumns"
-        Me.mnuPrepareDataFrameConvertColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameConvertColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameConvertColumns.Tag = "Convert_Columns..."
         Me.mnuPrepareDataFrameConvertColumns.Text = "Convert Columns..."
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(198, 6)
         '
         'mnuPrepareDataFrameReorderColumns
         '
         Me.mnuPrepareDataFrameReorderColumns.Name = "mnuPrepareDataFrameReorderColumns"
-        Me.mnuPrepareDataFrameReorderColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameReorderColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameReorderColumns.Tag = "Reorder_Columns..."
         Me.mnuPrepareDataFrameReorderColumns.Text = "Reorder Columns..."
         '
         'mnuPrepareDataFrameInsertColumnsRows
         '
         Me.mnuPrepareDataFrameInsertColumnsRows.Name = "mnuPrepareDataFrameInsertColumnsRows"
-        Me.mnuPrepareDataFrameInsertColumnsRows.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameInsertColumnsRows.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameInsertColumnsRows.Tag = "Insert_Columns/Rows..."
         Me.mnuPrepareDataFrameInsertColumnsRows.Text = "Insert Columns/Rows..."
         '
         'mnuPrepareDataFrameDeleteColumnsRows
         '
         Me.mnuPrepareDataFrameDeleteColumnsRows.Name = "mnuPrepareDataFrameDeleteColumnsRows"
-        Me.mnuPrepareDataFrameDeleteColumnsRows.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameDeleteColumnsRows.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameDeleteColumnsRows.Tag = "Delete_Columns/Rows..."
         Me.mnuPrepareDataFrameDeleteColumnsRows.Text = "Delete Columns/Rows..."
         '
@@ -3474,7 +3481,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareDataFrameProtectColumn.Enabled = False
         Me.mnuPrepareDataFrameProtectColumn.Name = "mnuPrepareDataFrameProtectColumn"
-        Me.mnuPrepareDataFrameProtectColumn.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameProtectColumn.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameProtectColumn.Tag = "..."
         Me.mnuPrepareDataFrameProtectColumn.Text = "Protect Column..."
         Me.mnuPrepareDataFrameProtectColumn.Visible = False
@@ -3482,7 +3489,7 @@ Partial Class frmMain
         'mnuPrepareDataFrameHideColumns
         '
         Me.mnuPrepareDataFrameHideColumns.Name = "mnuPrepareDataFrameHideColumns"
-        Me.mnuPrepareDataFrameHideColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameHideColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameHideColumns.Tag = "Hide_Columns..."
         Me.mnuPrepareDataFrameHideColumns.Text = "Hide/Show Columns..."
         '
@@ -3490,7 +3497,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareDataFrameFreezeColumns.Enabled = False
         Me.mnuPrepareDataFrameFreezeColumns.Name = "mnuPrepareDataFrameFreezeColumns"
-        Me.mnuPrepareDataFrameFreezeColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataFrameFreezeColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameFreezeColumns.Tag = "Freeze_Columns..."
         Me.mnuPrepareDataFrameFreezeColumns.Text = "Freeze Columns..."
         Me.mnuPrepareDataFrameFreezeColumns.Visible = False
@@ -3498,7 +3505,7 @@ Partial Class frmMain
         'mnuPrepareDataframeColourByProperty
         '
         Me.mnuPrepareDataframeColourByProperty.Name = "mnuPrepareDataframeColourByProperty"
-        Me.mnuPrepareDataframeColourByProperty.Size = New System.Drawing.Size(200, 22)
+        Me.mnuPrepareDataframeColourByProperty.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataframeColourByProperty.Text = "Colour by Property..."
         '
         'mnuPrepareCheckData
@@ -5064,17 +5071,16 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuDescribeTwoThreeVariablesThreeWayFrequencies
+        'ToolStripSeparator36
         '
-        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Name = "mnuDescribeTwoThreeVariablesThreeWayFrequencies"
-        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Size = New System.Drawing.Size(213, 22)
-        Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Text = "Three-Way Frequencies..."
+        Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(203, 6)
         '
-        'mnuDescribeTwoThreeVariablesPivotTableSummaries
+        'mnuPrepareDataFrameAddMergeColumns
         '
-        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Name = "mnuDescribeTwoThreeVariablesPivotTableSummaries"
-        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Size = New System.Drawing.Size(213, 22)
-        Me.mnuDescribeTwoThreeVariablesPivotTableSummaries.Text = "Pivot-Table(Summaries)..."
+        Me.mnuPrepareDataFrameAddMergeColumns.Name = "mnuPrepareDataFrameAddMergeColumns"
+        Me.mnuPrepareDataFrameAddMergeColumns.Size = New System.Drawing.Size(201, 22)
+        Me.mnuPrepareDataFrameAddMergeColumns.Text = "Add (Merge) Columns..."
         '
         'frmMain
         '
@@ -5747,7 +5753,6 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoThreeVariablesPivotTableFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
     Friend WithEvents mnuEditScript As ToolStripMenuItem
@@ -5765,5 +5770,7 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextDefineOnFarm As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesCorrelations As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoThreeVariablesThreeWayFrequencies As ToolStripMenuItem
-    Friend WithEvents mnuDescribeTwoThreeVariablesPivotTableSummaries As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwoThreeVariablesPivotTable As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
+    Friend WithEvents mnuPrepareDataFrameAddMergeColumns As ToolStripMenuItem
 End Class

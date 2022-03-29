@@ -2380,10 +2380,6 @@ Public Class frmMain
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTableFrequencies.Click
-        dlgPivotTable.ShowDialog()
-    End Sub
-
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
         dlgScript.ShowDialog()
     End Sub
@@ -2432,7 +2428,11 @@ Public Class frmMain
         dlgThreeVariableFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoThreeVariablesPivotTableSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTableSummaries.Click
+    Private Sub mnuDescribeTwoThreeVariablesPivotTableSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTable.Click
         dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
+        dlgMergeAdditionalData.ShowDialog()
     End Sub
 End Class
