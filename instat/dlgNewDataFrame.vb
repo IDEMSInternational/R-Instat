@@ -349,8 +349,8 @@ Public Class dlgNewDataFrame
                             clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
                         End If
                     End If
-                Case "Logic"
-                    clsColExpRFunction.SetRCommand("as.logic")
+                Case "Integer"
+                    clsColExpRFunction.SetRCommand("as.integer")
                 Case Else
                     'developer error?
                     Continue For
