@@ -130,6 +130,11 @@ Public Class dlgCorrelation
         ucrChkRearrange.AddToLinkedControls(ucrInputRearrange, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="PCA")
         ucrChkRearrange.AddToLinkedControls(ucrChkAbsolute, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkDisplayOptions.SetText("Display Options")
+        ucrChkDisplayOptions.SetParameter(New RParameter("display", 0))
+        ucrChkDisplayOptions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+
         ucrInputRearrange.SetParameter(New RParameter("method", 1))
         dctMethod.Add("PCA", Chr(34) & "PCA" & Chr(34))
         dctMethod.Add("HC", Chr(34) & "HC" & Chr(34))
@@ -158,8 +163,9 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls(ucrSaveDataFrame, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumns.AddToLinkedControls({ucrChkShave, ucrChkRearrange}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumns.AddToLinkedControls({ucrChkShave, ucrChkDisplayOptions, ucrChkRearrange}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrInputDisplayNas, ucrChkLeadingZeros}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
 
         ucrSaveModel.SetPrefix("model")
@@ -274,7 +280,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsFashionFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
+        clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.ClearCodes()
@@ -409,13 +415,20 @@ Public Class dlgCorrelation
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
         ElseIf ucrChkRearrange.Checked Then
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
-        Else
+        ElseIf ucrChkDisplayOptions.Checked Then
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
         End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
+        'If ucrChkDisplayOptions.Checked Then
+        '    clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
+        'Else
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+        'End If
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
 
-    Private Sub ucrChkShave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShave.ControlValueChanged, ucrChkRearrange.ControlValueChanged ' ucrChkDisplayOptions.ControlValueChanged
+    Private Sub ucrChkShave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShave.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged
         AddShaveOrRearrange()
     End Sub
 End Class

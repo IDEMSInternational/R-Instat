@@ -76,6 +76,7 @@ Partial Class dlgCorrelation
         Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrInputDiagonal = New instat.ucrInputComboBox()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
+        Me.ucrChkDisplayOptions = New instat.ucrCheck()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -157,7 +158,7 @@ Partial Class dlgCorrelation
         'cmdOptions
         '
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(299, 426)
+        Me.cmdOptions.Location = New System.Drawing.Point(299, 467)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(114, 25)
         Me.cmdOptions.TabIndex = 16
@@ -273,7 +274,7 @@ Partial Class dlgCorrelation
         '
         Me.lblDecimalPlaces.AutoSize = True
         Me.lblDecimalPlaces.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDecimalPlaces.Location = New System.Drawing.Point(10, 315)
+        Me.lblDecimalPlaces.Location = New System.Drawing.Point(15, 354)
         Me.lblDecimalPlaces.Name = "lblDecimalPlaces"
         Me.lblDecimalPlaces.Size = New System.Drawing.Size(83, 13)
         Me.lblDecimalPlaces.TabIndex = 21
@@ -283,7 +284,7 @@ Partial Class dlgCorrelation
         '
         Me.lblDisplayNas.AutoSize = True
         Me.lblDisplayNas.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDisplayNas.Location = New System.Drawing.Point(10, 347)
+        Me.lblDisplayNas.Location = New System.Drawing.Point(16, 380)
         Me.lblDisplayNas.Name = "lblDisplayNas"
         Me.lblDisplayNas.Size = New System.Drawing.Size(67, 13)
         Me.lblDisplayNas.TabIndex = 24
@@ -293,7 +294,7 @@ Partial Class dlgCorrelation
         '
         Me.lblMethod.AutoSize = True
         Me.lblMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMethod.Location = New System.Drawing.Point(349, 325)
+        Me.lblMethod.Location = New System.Drawing.Point(94, 437)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 30
@@ -301,9 +302,9 @@ Partial Class dlgCorrelation
         '
         'grpDisplayOptions
         '
-        Me.grpDisplayOptions.Location = New System.Drawing.Point(261, 308)
+        Me.grpDisplayOptions.Location = New System.Drawing.Point(9, 337)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
-        Me.grpDisplayOptions.Size = New System.Drawing.Size(171, 88)
+        Me.grpDisplayOptions.Size = New System.Drawing.Size(410, 124)
         Me.grpDisplayOptions.TabIndex = 32
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Tag = "Display Options"
@@ -313,7 +314,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkAbsolute.AutoSize = True
         Me.ucrChkAbsolute.Checked = False
-        Me.ucrChkAbsolute.Location = New System.Drawing.Point(350, 369)
+        Me.ucrChkAbsolute.Location = New System.Drawing.Point(235, 435)
         Me.ucrChkAbsolute.Name = "ucrChkAbsolute"
         Me.ucrChkAbsolute.Size = New System.Drawing.Size(81, 23)
         Me.ucrChkAbsolute.TabIndex = 31
@@ -324,7 +325,7 @@ Partial Class dlgCorrelation
         Me.ucrInputRearrange.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRearrange.GetSetSelectedIndex = -1
         Me.ucrInputRearrange.IsReadOnly = False
-        Me.ucrInputRearrange.Location = New System.Drawing.Point(350, 341)
+        Me.ucrInputRearrange.Location = New System.Drawing.Point(144, 434)
         Me.ucrInputRearrange.Name = "ucrInputRearrange"
         Me.ucrInputRearrange.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputRearrange.TabIndex = 29
@@ -333,7 +334,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkRearrange.AutoSize = True
         Me.ucrChkRearrange.Checked = False
-        Me.ucrChkRearrange.Location = New System.Drawing.Point(267, 321)
+        Me.ucrChkRearrange.Location = New System.Drawing.Point(16, 436)
         Me.ucrChkRearrange.Name = "ucrChkRearrange"
         Me.ucrChkRearrange.Size = New System.Drawing.Size(96, 23)
         Me.ucrChkRearrange.TabIndex = 28
@@ -342,7 +343,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkShave.AutoSize = True
         Me.ucrChkShave.Checked = False
-        Me.ucrChkShave.Location = New System.Drawing.Point(13, 396)
+        Me.ucrChkShave.Location = New System.Drawing.Point(185, 352)
         Me.ucrChkShave.Name = "ucrChkShave"
         Me.ucrChkShave.Size = New System.Drawing.Size(192, 23)
         Me.ucrChkShave.TabIndex = 26
@@ -353,7 +354,7 @@ Partial Class dlgCorrelation
         Me.ucrInputDisplayNas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDisplayNas.GetSetSelectedIndex = -1
         Me.ucrInputDisplayNas.IsReadOnly = False
-        Me.ucrInputDisplayNas.Location = New System.Drawing.Point(127, 343)
+        Me.ucrInputDisplayNas.Location = New System.Drawing.Point(125, 377)
         Me.ucrInputDisplayNas.Name = "ucrInputDisplayNas"
         Me.ucrInputDisplayNas.Size = New System.Drawing.Size(51, 21)
         Me.ucrInputDisplayNas.TabIndex = 25
@@ -362,7 +363,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkLeadingZeros.AutoSize = True
         Me.ucrChkLeadingZeros.Checked = False
-        Me.ucrChkLeadingZeros.Location = New System.Drawing.Point(13, 373)
+        Me.ucrChkLeadingZeros.Location = New System.Drawing.Point(17, 408)
         Me.ucrChkLeadingZeros.Name = "ucrChkLeadingZeros"
         Me.ucrChkLeadingZeros.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkLeadingZeros.TabIndex = 23
@@ -372,7 +373,7 @@ Partial Class dlgCorrelation
         Me.ucrNudDecimalPlaces.AutoSize = True
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(127, 312)
+        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(126, 350)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
@@ -459,7 +460,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 451)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 491)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 17
@@ -467,7 +468,7 @@ Partial Class dlgCorrelation
         'ucrSaveDataFrame
         '
         Me.ucrSaveDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDataFrame.Location = New System.Drawing.Point(13, 419)
+        Me.ucrSaveDataFrame.Location = New System.Drawing.Point(13, 466)
         Me.ucrSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
         Me.ucrSaveDataFrame.Size = New System.Drawing.Size(266, 24)
@@ -476,7 +477,7 @@ Partial Class dlgCorrelation
         'ucrSaveModel
         '
         Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveModel.Location = New System.Drawing.Point(13, 419)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(13, 465)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(266, 24)
@@ -506,12 +507,22 @@ Partial Class dlgCorrelation
         Me.ucrNudConfidenceInterval.TabIndex = 13
         Me.ucrNudConfidenceInterval.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrChkDisplayOptions
+        '
+        Me.ucrChkDisplayOptions.AutoSize = True
+        Me.ucrChkDisplayOptions.Checked = False
+        Me.ucrChkDisplayOptions.Location = New System.Drawing.Point(11, 308)
+        Me.ucrChkDisplayOptions.Name = "ucrChkDisplayOptions"
+        Me.ucrChkDisplayOptions.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkDisplayOptions.TabIndex = 33
+        '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(436, 502)
+        Me.ClientSize = New System.Drawing.Size(479, 539)
+        Me.Controls.Add(Me.ucrChkDisplayOptions)
         Me.Controls.Add(Me.ucrChkAbsolute)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputRearrange)
@@ -596,4 +607,5 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrInputRearrange As ucrInputComboBox
     Friend WithEvents ucrChkRearrange As ucrCheck
     Friend WithEvents grpDisplayOptions As GroupBox
+    Friend WithEvents ucrChkDisplayOptions As ucrCheck
 End Class
