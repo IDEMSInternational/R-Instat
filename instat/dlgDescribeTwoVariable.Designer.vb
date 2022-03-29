@@ -43,8 +43,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
-        Me.ucrChkSum = New instat.ucrCheck()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblBy = New System.Windows.Forms.Label()
@@ -69,10 +67,10 @@ Partial Class dlgDescribeTwoVariable
         'cmdSummaries
         '
         Me.cmdSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSummaries.Location = New System.Drawing.Point(9, 45)
+        Me.cmdSummaries.Location = New System.Drawing.Point(6, 45)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(105, 23)
-        Me.cmdSummaries.TabIndex = 7
+        Me.cmdSummaries.TabIndex = 1
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries"
         Me.cmdSummaries.UseVisualStyleBackColor = True
@@ -84,7 +82,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFirstVariable.Location = New System.Drawing.Point(268, 74)
         Me.lblFirstVariable.Name = "lblFirstVariable"
         Me.lblFirstVariable.Size = New System.Drawing.Size(75, 13)
-        Me.lblFirstVariable.TabIndex = 1
+        Me.lblFirstVariable.TabIndex = 4
         Me.lblFirstVariable.Tag = ""
         Me.lblFirstVariable.Text = "First Variables:"
         '
@@ -102,12 +100,10 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
-        Me.grpOptions.Controls.Add(Me.ucrChkSummary)
-        Me.grpOptions.Controls.Add(Me.ucrChkSum)
-        Me.grpOptions.Location = New System.Drawing.Point(236, 267)
+        Me.grpOptions.Location = New System.Drawing.Point(252, 265)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(155, 76)
-        Me.grpOptions.TabIndex = 10
+        Me.grpOptions.TabIndex = 12
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
@@ -118,25 +114,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 19)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkOmitMissing.TabIndex = 6
-        '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.AutoSize = True
-        Me.ucrChkSummary.Checked = False
-        Me.ucrChkSummary.Location = New System.Drawing.Point(100, 45)
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        Me.ucrChkSummary.Size = New System.Drawing.Size(10, 23)
-        Me.ucrChkSummary.TabIndex = 8
-        '
-        'ucrChkSum
-        '
-        Me.ucrChkSum.AutoSize = True
-        Me.ucrChkSum.Checked = False
-        Me.ucrChkSum.Location = New System.Drawing.Point(84, 45)
-        Me.ucrChkSum.Name = "ucrChkSum"
-        Me.ucrChkSum.Size = New System.Drawing.Size(10, 23)
-        Me.ucrChkSum.TabIndex = 9
+        Me.ucrChkOmitMissing.TabIndex = 0
         '
         'lblSummary
         '
@@ -145,7 +123,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSummary.Location = New System.Drawing.Point(6, 43)
         Me.lblSummary.Name = "lblSummary"
         Me.lblSummary.Size = New System.Drawing.Size(53, 13)
-        Me.lblSummary.TabIndex = 9
+        Me.lblSummary.TabIndex = 3
         Me.lblSummary.Text = "Summary:"
         '
         'lblFirstType
@@ -155,7 +133,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFirstType.Location = New System.Drawing.Point(6, 16)
         Me.lblFirstType.Name = "lblFirstType"
         Me.lblFirstType.Size = New System.Drawing.Size(55, 13)
-        Me.lblFirstType.TabIndex = 10
+        Me.lblFirstType.TabIndex = 0
         Me.lblFirstType.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblBy
@@ -165,7 +143,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblBy.Location = New System.Drawing.Point(64, 16)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(18, 13)
-        Me.lblBy.TabIndex = 11
+        Me.lblBy.TabIndex = 1
         Me.lblBy.Text = "by"
         '
         'lblSecondType
@@ -175,7 +153,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSecondType.Location = New System.Drawing.Point(82, 16)
         Me.lblSecondType.Name = "lblSecondType"
         Me.lblSecondType.Size = New System.Drawing.Size(0, 13)
-        Me.lblSecondType.TabIndex = 12
+        Me.lblSecondType.TabIndex = 2
         '
         'lblSummaryName
         '
@@ -184,7 +162,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSummaryName.Location = New System.Drawing.Point(60, 43)
         Me.lblSummaryName.Name = "lblSummaryName"
         Me.lblSummaryName.Size = New System.Drawing.Size(0, 13)
-        Me.lblSummaryName.TabIndex = 13
+        Me.lblSummaryName.TabIndex = 4
         '
         'grpSummaries
         '
@@ -196,7 +174,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Location = New System.Drawing.Point(10, 271)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
-        Me.grpSummaries.TabIndex = 14
+        Me.grpSummaries.TabIndex = 11
         Me.grpSummaries.TabStop = False
         '
         'ucrReceiverSecondVar
@@ -222,7 +200,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVars.Selector = Nothing
         Me.ucrReceiverFirstVars.Size = New System.Drawing.Size(120, 87)
         Me.ucrReceiverFirstVars.strNcFilePath = ""
-        Me.ucrReceiverFirstVars.TabIndex = 4
+        Me.ucrReceiverFirstVars.TabIndex = 5
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         '
         'ucrSelectorDescribeTwoVar
@@ -235,7 +213,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorDescribeTwoVar.TabIndex = 0
+        Me.ucrSelectorDescribeTwoVar.TabIndex = 3
         '
         'ucrBase
         '
@@ -244,7 +222,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrBase.Location = New System.Drawing.Point(10, 347)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 13
         '
         'ucrPnlDescribe
         '
@@ -252,7 +230,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrPnlDescribe.Location = New System.Drawing.Point(95, 9)
         Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
         Me.ucrPnlDescribe.Size = New System.Drawing.Size(211, 34)
-        Me.ucrPnlDescribe.TabIndex = 15
+        Me.ucrPnlDescribe.TabIndex = 0
         '
         'rdoCustomize
         '
@@ -265,7 +243,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoCustomize.Location = New System.Drawing.Point(201, 12)
         Me.rdoCustomize.Name = "rdoCustomize"
         Me.rdoCustomize.Size = New System.Drawing.Size(100, 28)
-        Me.rdoCustomize.TabIndex = 16
+        Me.rdoCustomize.TabIndex = 2
         Me.rdoCustomize.Text = "Customize"
         Me.rdoCustomize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCustomize.UseVisualStyleBackColor = True
@@ -281,7 +259,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim.Location = New System.Drawing.Point(106, 12)
         Me.rdoSkim.Name = "rdoSkim"
         Me.rdoSkim.Size = New System.Drawing.Size(100, 28)
-        Me.rdoSkim.TabIndex = 17
+        Me.rdoSkim.TabIndex = 1
         Me.rdoSkim.Text = "Skim"
         Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSkim.UseVisualStyleBackColor = True
@@ -296,7 +274,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondOpt.Selector = Nothing
         Me.ucrReceiverSecondOpt.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSecondOpt.strNcFilePath = ""
-        Me.ucrReceiverSecondOpt.TabIndex = 18
+        Me.ucrReceiverSecondOpt.TabIndex = 7
         Me.ucrReceiverSecondOpt.ucrSelector = Nothing
         '
         'lbSecondOpt
@@ -305,7 +283,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondOpt.Location = New System.Drawing.Point(269, 183)
         Me.lbSecondOpt.Name = "lbSecondOpt"
         Me.lbSecondOpt.Size = New System.Drawing.Size(100, 15)
-        Me.lbSecondOpt.TabIndex = 19
+        Me.lbSecondOpt.TabIndex = 6
         Me.lbSecondOpt.Tag = ""
         Me.lbSecondOpt.Text = "Factor (Optional) :"
         '
@@ -315,7 +293,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSecondFactor.Location = New System.Drawing.Point(270, 224)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(137, 15)
-        Me.lblSecondFactor.TabIndex = 21
+        Me.lblSecondFactor.TabIndex = 8
         Me.lblSecondFactor.Tag = ""
         Me.lblSecondFactor.Text = "Second Factor (Optional) :"
         '
@@ -329,7 +307,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondFactor.Selector = Nothing
         Me.ucrReceiverSecondFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSecondFactor.strNcFilePath = ""
-        Me.ucrReceiverSecondFactor.TabIndex = 20
+        Me.ucrReceiverSecondFactor.TabIndex = 9
         Me.ucrReceiverSecondFactor.ucrSelector = Nothing
         '
         'dlgDescribeTwoVariable
@@ -389,8 +367,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents rdoCustomize As RadioButton
     Friend WithEvents lbSecondOpt As Label
-    Friend WithEvents ucrChkSummary As ucrCheck
-    Friend WithEvents ucrChkSum As ucrCheck
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents ucrReceiverSecondFactor As ucrReceiverSingle
 End Class
