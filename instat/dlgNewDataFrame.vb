@@ -391,7 +391,7 @@ Public Class dlgNewDataFrame
                 strTemp = strTemp & ","
             End If
             If strCh <> "" Then
-                strTemp = strTemp & Chr(34) & strCh.Replace(" ", "") & Chr(34)
+                strTemp = strTemp & Chr(34) & strCh.Trim() & Chr(34)
             Else
                 strTemp = strTemp & Chr(34) & strCh & Chr(34)
             End If
@@ -437,8 +437,9 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView)
-        For i As Integer = 0 To dgrView.Rows.Count - 1
+    Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
+        If bInsert Then
+            Dim i As Integer = iRow + 1
             With dgrView.Rows
                 .Item(i).Cells(0).Value = i + 1
                 .Item(i).Cells(1).Value = "x" & (i + 1)
@@ -447,11 +448,32 @@ Public Class dlgNewDataFrame
                 .Item(i).Cells(4).Value = "No, Yes"
                 .Item(i).Cells(5).Value = ""
             End With
-        Next
+        Else
+            For i As Integer = 0 To dgrView.Rows.Count - 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = i + 1
+                    .Item(i).Cells(1).Value = "x" & (i + 1)
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = "NA"
+                    .Item(i).Cells(4).Value = "No, Yes"
+                    .Item(i).Cells(5).Value = ""
+                End With
+            Next
+        End If
     End Sub
 
     Private Sub ucrNudCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCols.ControlValueChanged
-        UpdateGrid(ucrNudCols.Value, dataTypeGridView)
+        Dim iValue As Integer = ucrNudCols.Value
+        Dim iRow As Integer = dataTypeGridView.RowCount
+        If iRow <> 0 Then
+            If iValue > iRow Then
+                Dim iAddRow As Integer = iValue - iRow
+                dataTypeGridView.Rows.Insert(iRow, iAddRow)
+                FillGrid(iAddRow, dataTypeGridView, True)
+            ElseIf iValue < iRow Then
+                dataTypeGridView.Rows.RemoveAt(iRow - 1)
+            End If
+        End If
         CreateEmptyDataFrame(ucrNudCols.Value)
     End Sub
 
@@ -474,7 +496,7 @@ Public Class dlgNewDataFrame
             dgrView.Rows.Clear()
             dgrView.Rows.Add(iRow)
             dgrView.Columns("colLevels").ReadOnly = True
-            FillGrid(iRow, dgrView)
+            FillGrid(iRow, dgrView, False)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
