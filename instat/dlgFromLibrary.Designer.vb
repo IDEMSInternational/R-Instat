@@ -46,10 +46,10 @@ Partial Class dlgFromLibrary
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.rdoDefaultDatasets = New System.Windows.Forms.RadioButton()
         Me.rdoInstatCollection = New System.Windows.Forms.RadioButton()
+        Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.ucrInputPackages = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdLibraryCollection
@@ -141,6 +141,15 @@ Partial Class dlgFromLibrary
         Me.rdoInstatCollection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInstatCollection.UseVisualStyleBackColor = False
         '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 259)
+        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(315, 22)
+        Me.ucrNewDataFrameName.TabIndex = 7
+        '
         'ucrInputPackages
         '
         Me.ucrInputPackages.AddQuotesIfUnrecognised = True
@@ -172,15 +181,6 @@ Partial Class dlgFromLibrary
         Me.ucrPnlOptions.Size = New System.Drawing.Size(316, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 259)
-        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(315, 22)
-        Me.ucrNewDataFrameName.TabIndex = 7
-        '
         'dlgFromLibrary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -202,6 +202,8 @@ Partial Class dlgFromLibrary
         Me.Name = "dlgFromLibrary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import from Library"
+        Me.Text = "Import From Library"
+
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

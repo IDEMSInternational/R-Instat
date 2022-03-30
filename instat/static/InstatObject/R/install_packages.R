@@ -32,7 +32,6 @@ pkgs <-
     "rio",
     "readxl",
     "lme4",
-    "dummies",
     "ggthemes",
     "lazyeval",
     "stringr",
@@ -115,8 +114,18 @@ pkgs <-
     "tidytext",
     "janitor",
     "ggwordcloud",
+    # Has many useful datasets, described in the R-Instat help.They include prime numbers, Fibonacci numbers, names of dinosaurs, and the chemical elements. 
+    "rcorpora",
+    # Includes a set of interesting data sets, designed particularly for machine learning.
+    "mlbench",
     # For producing periodic and natural splines in Climatic > Compare > Seasonal Plot
-    "splines2"
+    "splines2",
+    # For density, distribution function and random generation for triangular and continuous empirical distributions 
+    # Model > Probability Distributions > Show Model
+    # Model > Probability Distributions > Random Samples
+    "mc2d"
+    # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
+    "fastDummies"
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)

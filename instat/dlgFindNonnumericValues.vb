@@ -22,7 +22,7 @@ Public Class dlgFindNonnumericValues
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsSummaryFunction As New RFunction
+    Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsAsCharacterFunction, clsSummaryFunction As New RFunction
     Private clsNonNumericCalcFunc, clsNonNumericFilterFunc, clsRunCalcFunction, clslSubCalcListFunc, clsGetColumnsFunction As New RFunction
     Private clsCurrRunCalc As RFunction
     Private clsNotEqualToOperator As New ROperator
@@ -56,8 +56,8 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
         ucrReceiverColumn.SetParameterIsString()
         ucrReceiverColumn.bWithQuotes = False
-        ucrReceiverColumn.SetIncludedDataTypes({"character"})
-        ucrReceiverColumn.strSelectorHeading = "characters"
+        ucrReceiverColumn.SetIncludedDataTypes({"factor", "character"}, bStrict:=True)
+        ucrReceiverColumn.strSelectorHeading = "Factors and Characters"
 
         'save control
         ucrSaveColumn.SetPrefix("nonum")
@@ -84,6 +84,7 @@ Public Class dlgFindNonnumericValues
         clsIsNaNumericFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsNotEqualToOperator = New ROperator
+        clsAsCharacterFunction = New RFunction
 
         clsNonNumericCalcFunc.Clear()
         clsNonNumericFilterFunc.Clear()
@@ -105,7 +106,9 @@ Public Class dlgFindNonnumericValues
         clsIsNaNumericFunction.SetRCommand("is.na")
         clsIsNaNumericFunction.AddParameter("numeric", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumericFunction)
 
+        clsAsCharacterFunction.SetRCommand("as.character")
         clsAsNumericFunction.SetRCommand("as.numeric")
+        clsAsNumericFunction.AddParameter("x", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsNonNumericCalcFunc.SetRCommand("instat_calculation$new")
         clsNonNumericCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -140,7 +143,7 @@ Public Class dlgFindNonnumericValues
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsCharacterFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         ucrSaveColumn.SetRCode(clsNonNumericCalcFunc, bReset)
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
