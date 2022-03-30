@@ -17,6 +17,8 @@
 Public Class ucrDataframeMetadataLinuxGrid
     Implements IDataframeMetaDataGrid
 
+    Event DeleteLabels(strColumnName As String) Implements IDataframeMetaDataGrid.DeleteLabels
+
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IDataframeMetaDataGrid.EditValue
 
     Public Sub AddColumns() Implements IDataframeMetaDataGrid.AddColumns

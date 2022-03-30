@@ -17,60 +17,42 @@
 Imports instat.Translations
 
 Public Class dlgDescribeTwoVarGraph
-    Public strFirstVariablesType, strSecondVariableType As String
-
-    Private clsBaseOperator As New ROperator
-    Private clsRGGplotFunction, clsRFacet As New RFunction
-    Private clsThemeFunction As New RFunction
-    Private dctThemeFunctions As Dictionary(Of String, RFunction)
-    Private clsGlobalAes As RFunction
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
-    Private clsXScaleContinuousFunction As New RFunction
-    Private clsYScaleContinuousFunction As New RFunction
-    Private clsCoordPolarFunction As New RFunction
-    Private clsCoordPolarStartOperator As New ROperator
-    Private clsXScaleDateFunction As New RFunction
-    Private clsYScaleDateFunction As New RFunction
-    Private clsScaleFillViridisFunction As New RFunction
-    Private clsScaleColourViridisFunction As New RFunction
-
-    ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
-    Private clsAesNumericByNumeric As RFunction
-    ' Use this aes for categorical by categorical bar graphs
-    Private clsAesCategoricalByCategoricalBarChart As RFunction
-    Private clsGgmosaicProduct As RFunction
-    ' Use this aes for categorical by categorical mosiac plots
-    Private clsAesCategoricalByCategoricalMosaicPlot As RFunction
-    ' Use this aes for numeric by categorical when the y axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesNumericByCategoricalYNumeric As RFunction
-    ' Use this aes for numeric by categorical when the x axis is the numeric variable(s)  e.g. histogram, density
-    Private clsAesNumericByCategoricalXNumeric As RFunction
-    ' Use this aes for categorical by numeric when the y axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesCategoricalByNumericYNumeric As RFunction
-    ' Aes for stat_summary hline
-    Private clsAesStatSummaryHlineCategoricalByNumeric As RFunction
-    Private clsAesStatSummaryHlineNumericByCategorical As RFunction
-    ' Use this aes for categorical by numeric when the x axis is the numeric variable(s) e.g. boxplot, violin, point
-    Private clsAesCategoricalByNumericXNumeric As RFunction
-
+    Private clsBaseOperator, clsCoordPolarStartOperator As New ROperator
+    Private clsRGGplotFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
+            clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
+            clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
+            clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
+            clsScaleColourViridisFunction As New RFunction
     'Geoms
-    Private clsGeomJitter As New RFunction
-    Private clsGeomViolin As New RFunction
-    Private clsGeomBar As New RFunction
-    Private clsGeomMosaic As New RFunction
-    Private clsGeomBoxplot As New RFunction
-    Private clsGeomPoint As New RFunction
-    Private clsGeomLine As New RFunction
-    Private clsStatSummaryHline As New RFunction
-    Private clsStatSummaryCrossbar As New RFunction
-    Private clsGeomFreqPoly As New RFunction
-    Private clsGeomHistogram As New RFunction
-    Private clsGeomDensity As New RFunction
-    Private clsAnnotateFunction As New RFunction
+    Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
+            clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
+            clsGeomFreqPoly, clsGeomHistogram, clsGeomDensity, clsAnnotateFunction, clsGGpairsFunction,
+            clsDummyFunction, clsGGpairAesFunction, clsUpperListFunction, clsLowerListFunction,
+            clsDiagonalListFunction As New RFunction
+    ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
+    Private clsAesNumericByNumeric As New RFunction
+    ' Use this aes for categorical by categorical bar graphs
+    Private clsAesCategoricalByCategoricalBarChart As New RFunction
+    Private clsGgmosaicProduct As New RFunction
+    ' Use this aes for categorical by categorical mosiac plots
+    Private clsAesCategoricalByCategoricalMosaicPlot As New RFunction
+    ' Use this aes for numeric by categorical when the y axis is the numeric variable(s) e.g. boxplot, violin, point
+    Private clsAesNumericByCategoricalYNumeric As New RFunction
+    ' Use this aes for numeric by categorical when the x axis is the numeric variable(s)  e.g. histogram, density
+    Private clsAesNumericByCategoricalXNumeric As New RFunction
+    ' Use this aes for categorical by numeric when the y axis is the numeric variable(s) e.g. boxplot, violin, point
+    Private clsAesCategoricalByNumericYNumeric As New RFunction
+    ' Aes for stat_summary hlineclsBaseOperator
+    Private clsAesStatSummaryHlineCategoricalByNumeric As New RFunction
+    Private clsAesStatSummaryHlineNumericByCategorical As New RFunction
+    ' Use this aes for categorical by numeric when the x axis is the numeric variable(s) e.g. boxplot, violin, point
+    Private clsAesCategoricalByNumericXNumeric As New RFunction
+    Private clsLabelAesFunction As New RFunction
+    Private clsGeomTextFunction As New RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
+    Private strFirstVariablesType, strSecondVariableType As String
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
@@ -95,22 +77,44 @@ Public Class dlgDescribeTwoVarGraph
         Dim clsCoordFlipParam As New RParameter
         Dim strNumericCategoricalPlots() As String
         Dim dctPositionPairs As New Dictionary(Of String, String)
+        Dim dctLabelColours As New Dictionary(Of String, String)
+        Dim dctLabelPositions As New Dictionary(Of String, String)
+        Dim dctLabelSizes As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 416
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrPnlByPairs.AddRadioButton(rdoBy)
+        ucrPnlByPairs.AddRadioButton(rdoPairs)
+        ucrPnlByPairs.AddParameterValuesCondition(rdoBy, "checked", "by")
+        ucrPnlByPairs.AddParameterValuesCondition(rdoPairs, "checked", "pair")
+
+        ucrPnlByPairs.AddToLinkedControls({ucrReceiverSecondVar, ucrChkFlipCoordinates}, {rdoBy}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlByPairs.AddToLinkedControls({ucrChkLower, ucrReceiverColour}, {rdoPairs}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkLower.SetLinkedDisplayControl(grpTypeOfDispaly)
 
         ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
 
         ucrReceiverFirstVars.Selector = ucrSelectorTwoVarGraph
         ucrReceiverFirstVars.SetMultipleOnlyStatus(True)
-        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
+
+        ucrReceiverColour.SetParameter(New RParameter("colour", iNewPosition:=0))
+        ucrReceiverColour.SetParameterIsString()
+        ucrReceiverColour.SetDataType("factor")
+        ucrReceiverColour.strSelectorHeading = "Factors"
+        ucrReceiverColour.Selector = ucrSelectorTwoVarGraph
+        ucrReceiverColour.SetLinkedDisplayControl(lblColour)
+        ucrReceiverColour.bWithQuotes = False
 
         ucrReceiverSecondVar.SetParameter(New RParameter("fill", 0))
         ucrReceiverSecondVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverSecondVar.SetParameterIsString()
         ucrReceiverSecondVar.bWithQuotes = False
+        ucrReceiverSecondVar.SetLinkedDisplayControl(lblSecondVariable)
 
         ucrInputNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Line plot + points"})
         ucrInputNumericByNumeric.SetName("Scatter plot")
@@ -130,12 +134,40 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputCategoricalByCategorical.SetName("Bar Chart")
         ucrInputCategoricalByCategorical.SetDropDownStyleAsNonEditable()
 
+        ucrChkAddLabelsText.SetText("Add Labels")
+        ucrChkAddLabelsText.AddParameterPresentCondition(True, "text")
+        ucrChkAddLabelsText.AddParameterPresentCondition(False, "text", False)
+        ucrChkAddLabelsText.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
+        ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
+        ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
+
+        ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
+        dctLabelPositions.Add("Out", "-0.25")
+        dctLabelPositions.Add("In", "5")
+        ucrInputLabelPosition.SetItems(dctLabelPositions)
+        ucrInputLabelPosition.SetDropDownStyleAsNonEditable()
+
+        ucrInputLabelColour.SetParameter(New RParameter("colour", 4))
+        dctLabelColours.Add("Black", Chr(34) & "black" & Chr(34))
+        dctLabelColours.Add("White", Chr(34) & "white" & Chr(34))
+        ucrInputLabelColour.SetItems(dctLabelColours)
+        ucrInputLabelColour.bAllowNonConditionValues = True
+
+        ucrInputLabelSize.SetParameter(New RParameter("size", 5))
+        dctLabelSizes.Add("Default", "4")
+        dctLabelSizes.Add("Small", "3")
+        dctLabelSizes.Add("Big", "7")
+        ucrInputLabelSize.SetItems(dctLabelSizes)
+        ucrInputLabelSize.SetDropDownStyleAsNonEditable()
+
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrFlipCoordinates.SetText("Flip Coordinates")
-        ucrFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkFlipCoordinates.SetLinkedDisplayControl(New List(Of Control)({grpSummaries, grpOptions}))
 
         ucrChkFreeScaleYAxis.SetText("Free Scale Y Axis")
         ucrChkFreeScaleYAxis.SetParameter(New RParameter("scales", iNewPosition:=3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
@@ -167,6 +199,70 @@ Public Class dlgDescribeTwoVarGraph
         ucrNudTransparency.SetLinkedDisplayControl(lblPointTransparency)
         ucrNudTransparency.SetRDefault(1)
 
+        ucrChkDiagonal.SetText("Diagonal")
+        ucrChkDiagonal.AddParameterPresentCondition(True, "diag")
+        ucrChkDiagonal.AddParameterPresentCondition(False, "diag", False)
+        ucrChkDiagonal.AddToLinkedControls({ucrInputDiagonalContinous, ucrInputDiagonalDiscrete,
+                                           ucrInputDiagonalNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkLower.SetText("Lower")
+        ucrChkLower.AddParameterPresentCondition(True, "lower")
+        ucrChkLower.AddParameterPresentCondition(False, "lower", False)
+        ucrChkLower.AddToLinkedControls({ucrInputLowerContinous, ucrInputLowerDiscrete, ucrInputLowerCombo,
+                                           ucrInputLowerNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkUpper.SetText("Upper")
+        ucrChkUpper.AddParameterPresentCondition(True, "upper")
+        ucrChkUpper.AddParameterPresentCondition(False, "upper", False)
+        ucrChkUpper.AddToLinkedControls({ucrInputUpperContinous, ucrInputUpperDiscrete, ucrInputUpperCombo,
+                                           ucrInputUpperNA}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLowerContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputLowerContinous.SetItems({"points", "smooth", "smooth_loess", "density", "cor", "blank"}, bAddConditions:=True)
+        ucrInputLowerContinous.SetLinkedDisplayControl(lblLowerContinous)
+
+        ucrInputLowerCombo.SetParameter(New RParameter("combo", iNewPosition:=1))
+        ucrInputLowerCombo.SetItems({"box", "box_no_facet", "dot", "dot_no_facet", "facethist", "facetdensity",
+                                    "denstrip", "blank"}, bAddConditions:=True)
+        ucrInputLowerCombo.SetLinkedDisplayControl(lblLowerCombo)
+
+        ucrInputLowerDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=2))
+        ucrInputLowerDiscrete.SetItems({"facetbar", "ratio", "blank"}, bAddConditions:=True)
+        ucrInputLowerDiscrete.SetLinkedDisplayControl(lblLowerDiscrete)
+
+        ucrInputLowerNA.SetParameter(New RParameter("na", iNewPosition:=3))
+        ucrInputLowerNA.SetItems({"na", "blank"}, bAddConditions:=True)
+        ucrInputLowerNA.SetLinkedDisplayControl(lblLowerNA)
+
+        ucrInputUpperContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputUpperContinous.SetItems({"point", "smooth", "smooth_loess", "density", "cor", "blank"}, bAddConditions:=True)
+        ucrInputUpperContinous.SetLinkedDisplayControl(lblUpperContinous)
+
+        ucrInputUpperCombo.SetParameter(New RParameter("combo", iNewPosition:=1))
+        ucrInputUpperCombo.SetItems({"box", "box_no_facet", "dot", "dot_no_facet", "facethist", "facetdensity",
+                                    "denstrip", "blank"}, bAddConditions:=True)
+        ucrInputUpperCombo.SetLinkedDisplayControl(lblUpperCombo)
+
+        ucrInputUpperDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=2))
+        ucrInputUpperDiscrete.SetItems({"facetbar", "count", "ratio", "blank"}, bAddConditions:=True)
+        ucrInputUpperDiscrete.SetLinkedDisplayControl(lblUpperDiscrete)
+
+        ucrInputUpperNA.SetParameter(New RParameter("na", iNewPosition:=3))
+        ucrInputUpperNA.SetItems({"na", "blank"}, bAddConditions:=True)
+        ucrInputUpperNA.SetLinkedDisplayControl(lblUpperNA)
+
+        ucrInputDiagonalContinous.SetParameter(New RParameter("continuous", iNewPosition:=0))
+        ucrInputDiagonalContinous.SetItems({"densityDiag", "barDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalContinous.SetLinkedDisplayControl(lblDiagonalContinuous)
+
+        ucrInputDiagonalDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=1))
+        ucrInputDiagonalDiscrete.SetItems({"barDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalDiscrete.SetLinkedDisplayControl(lblDiagonalDiscrete)
+
+        ucrInputDiagonalNA.SetParameter(New RParameter("na", iNewPosition:=2))
+        ucrInputDiagonalNA.SetItems({"naDiag", "blankDiag"}, bAddConditions:=True)
+        ucrInputDiagonalNA.SetLinkedDisplayControl(lblDiagonalNA)
+
         ucrSaveGraph.SetPrefix("two_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
@@ -176,7 +272,10 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub SetDefaults()
+        clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
+        clsMosaicGgplotFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsRFacet = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
@@ -216,7 +315,12 @@ Public Class dlgDescribeTwoVarGraph
         clsAesCategoricalByNumericXNumeric = New RFunction
         clsAesStatSummaryHlineCategoricalByNumeric = New RFunction
         clsAesStatSummaryHlineNumericByCategorical = New RFunction
-
+        clsGGpairAesFunction = New RFunction
+        clsUpperListFunction = New RFunction
+        clsLowerListFunction = New RFunction
+        clsDiagonalListFunction = New RFunction
+        clsGeomTextFunction = New RFunction
+        clsLabelAesFunction = New RFunction
         clsBaseOperator = New ROperator
 
         bResetSubdialog = True
@@ -225,16 +329,56 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
+        cmdOptions.Enabled = False
         ucrReceiverFirstVars.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+
+        clsGeomTextFunction.SetPackageName("ggplot2")
+        clsGeomTextFunction.SetRCommand("geom_text")
+        clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+        clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
+        clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
+        clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
+
+        clsLabelAesFunction.SetPackageName("ggplot2")
+        clsLabelAesFunction.SetRCommand("aes")
+        clsLabelAesFunction.AddParameter("label", "..count..", iPosition:=0)
+
+        clsUpperListFunction.SetRCommand("list")
+        clsUpperListFunction.AddParameter("continuous", Chr(34) & "cor" & Chr(34), iPosition:=0)
+        clsUpperListFunction.AddParameter("combo", Chr(34) & "box_no_facet" & Chr(34), iPosition:=1)
+        clsUpperListFunction.AddParameter("discrete", Chr(34) & "count" & Chr(34), iPosition:=2)
+        clsUpperListFunction.AddParameter("na", Chr(34) & "na" & Chr(34), iPosition:=3)
+
+        clsLowerListFunction.SetRCommand("list")
+        clsLowerListFunction.AddParameter("continuous", Chr(34) & "points" & Chr(34), iPosition:=0)
+        clsLowerListFunction.AddParameter("combo", Chr(34) & "facethist" & Chr(34), iPosition:=1)
+        clsLowerListFunction.AddParameter("discrete", Chr(34) & "facetbar" & Chr(34), iPosition:=2)
+        clsLowerListFunction.AddParameter("na", Chr(34) & "na" & Chr(34), iPosition:=3)
+
+        clsDiagonalListFunction.SetRCommand("list")
+        clsDiagonalListFunction.AddParameter("continuous", Chr(34) & "densityDiag" & Chr(34), iPosition:=0)
+        clsDiagonalListFunction.AddParameter("discrete", Chr(34) & "barDiag" & Chr(34), iPosition:=1)
+        clsDiagonalListFunction.AddParameter("na", Chr(34) & "naDiag" & Chr(34), iPosition:=2)
+
+        clsGGpairAesFunction.SetPackageName("ggplot2")
+        clsGGpairAesFunction.SetRCommand("aes")
+
+        clsGGpairsFunction.SetPackageName("GGally")
+        clsGGpairsFunction.SetRCommand("ggpairs")
 
         clsBaseOperator.SetOperation("+")
 
         clsRGGplotFunction.SetPackageName("ggplot2")
         clsRGGplotFunction.SetRCommand("ggplot")
 
+        clsMosaicGgplotFunction.SetPackageName("ggplot2")
+        clsMosaicGgplotFunction.SetRCommand("ggplot")
+
         clsRFacet.SetPackageName("ggplot2")
         clsRFacet.SetRCommand("facet_wrap")
-        clsRFacet.AddParameter("facets", "~variable", iPosition:=0)
 
         clsGeomViolin.SetPackageName("ggplot2")
         clsGeomViolin.SetRCommand("geom_violin")
@@ -297,7 +441,6 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGgmosaicProduct.SetPackageName("ggmosaic")
         clsGgmosaicProduct.SetRCommand("product")
-        clsGgmosaicProduct.AddParameter("0", "value", bIncludeArgumentName:=False, iPosition:=0)
 
         clsGeomPoint.SetPackageName("ggplot2")
         clsGeomPoint.SetRCommand("geom_point")
@@ -307,7 +450,8 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGeomBar.SetPackageName("ggplot2")
         clsGeomBar.SetRCommand("geom_bar")
-        clsGeomBar.AddParameter("position", Chr(34) & "dodge" & Chr(34))
+        clsGeomBar.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsGeomBar.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsGeomFreqPoly.SetPackageName("ggplot2")
         clsGeomFreqPoly.SetRCommand("geom_freqpoly")
@@ -338,37 +482,59 @@ Public Class dlgDescribeTwoVarGraph
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGGpairsFunction)
+        AddDataFrame()
         ' bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByCategoricalYNumeric, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByCategoricalXNumeric, New RParameter("colour", 2), iAdditionalPairNo:=2)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericYNumeric, New RParameter("y", 1), iAdditionalPairNo:=3)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericXNumeric, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByNumeric, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsGgmosaicProduct, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=7)
+        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=6)
+        ucrSaveGraph.AddAdditionalRCode(clsGGpairsFunction, bReset)
 
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkFreeScaleYAxis.SetRCode(clsRFacet, bReset)
         ucrInputPosition.SetRCode(clsGeomBar, bReset)
         ucrNudJitter.SetRCode(clsGeomJitter, bReset)
         ucrNudTransparency.SetRCode(clsGeomJitter, bReset)
+        ucrPnlByPairs.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverColour.SetRCode(clsGGpairAesFunction, bReset)
+        ucrInputLowerContinous.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerDiscrete.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerCombo.SetRCode(clsLowerListFunction, bReset)
+        ucrInputLowerNA.SetRCode(clsLowerListFunction, bReset)
+        ucrInputUpperContinous.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperDiscrete.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperCombo.SetRCode(clsUpperListFunction, bReset)
+        ucrInputUpperNA.SetRCode(clsUpperListFunction, bReset)
+        ucrInputDiagonalContinous.SetRCode(clsDiagonalListFunction, bReset)
+        ucrInputDiagonalDiscrete.SetRCode(clsDiagonalListFunction, bReset)
+        ucrInputDiagonalNA.SetRCode(clsDiagonalListFunction, bReset)
+        ucrChkLower.SetRCode(clsGGpairsFunction, bReset)
+        ucrChkUpper.SetRCode(clsGGpairsFunction, bReset)
+        ucrChkDiagonal.SetRCode(clsGGpairsFunction, bReset)
+        ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
+        ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
+        ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
 
         bRCodeSet = True
         Results()
         SetFreeYAxis()
+        EnableVisibleLabelControls()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
+        If rdoBy.Checked AndAlso Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
+            ucrBase.OKEnabled(True)
+        ElseIf rdoPairs.Checked AndAlso Not ucrReceiverFirstVars.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -618,22 +784,41 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
+        Dim iPosition As Integer = 0
+        Dim iNumVariables As Integer = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count
         Results()
+        EnableVisibleLabelControls()
+        clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
+        clsGgmosaicProduct.ClearParameters()
+        For Each strVariables In ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)
+            clsGgmosaicProduct.AddParameter("columns" & iPosition, strVariables,
+                                            iPosition:=iPosition, bIncludeArgumentName:=False)
+            iPosition = iPosition + 1
+        Next
+        ChangeGeomToMosaicAndFacet()
+
+        If iNumVariables > 0 Then
+            clsAesCategoricalByCategoricalMosaicPlot.AddParameter("fill", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False)(0), iPosition:=1)
+        End If
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         Results()
+        EnableVisibleLabelControls()
+        ChangeGeomToMosaicAndFacet()
     End Sub
 
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrInputCategoricalByCategorical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumericByCategorical.ControlValueChanged, ucrInputCategoricalByNumeric.ControlValueChanged, ucrInputCategoricalByCategorical.ControlValueChanged
         Results()
+        EnableVisibleLabelControls()
+        AddRemoveTextParameter()
+        ChangeGeomToMosaicAndFacet()
     End Sub
 
     Private Sub RemoveAllGeomsStats()
@@ -741,7 +926,7 @@ Public Class dlgDescribeTwoVarGraph
         Return clsBaseOperator.ContainsParameter("coord_flip")
     End Function
 
-    Private Sub ucrFlipCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFlipCoordinates.ControlValueChanged
+    Private Sub ucrFlipCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlipCoordinates.ControlValueChanged
         Dim clsScaleParam As RParameter
 
         If bRCodeSet Then
@@ -755,10 +940,117 @@ Public Class dlgDescribeTwoVarGraph
             End If
             ucrChkFreeScaleYAxis.ClearConditions()
             ucrChkFreeScaleYAxis.AddParameterPresentCondition(True, "scales")
-            If ucrFlipCoordinates.Checked Then
+            If ucrChkFlipCoordinates.Checked Then
                 ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
             Else
                 ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrPnlByPairs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlByPairs.ControlValueChanged
+        ucrReceiverFirstVars.ucrMultipleVariables.Clear()
+        ucrReceiverFirstVars.SetMeAsReceiver()
+        If rdoBy.Checked Then
+            cmdOptions.Enabled = True
+            ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        Else
+            cmdOptions.Enabled = False
+            ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
+        End If
+        If bRCodeSet Then
+            If rdoBy.Checked Then
+                ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+                clsDummyFunction.AddParameter("checked", "by", iPosition:=0)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsGGpairsFunction)
+                clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+            End If
+        End If
+        EnableVisibleLabelControls()
+        AddRemoveColourParameter()
+        ChangeGeomToMosaicAndFacet()
+    End Sub
+
+    Private Sub ucrSelectorTwoVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoVarGraph.ControlValueChanged
+        AddDataFrame()
+    End Sub
+
+    Private Sub AddDataFrame()
+        Dim clsGetDataFrameFunction As RFunction = ucrSelectorTwoVarGraph.ucrAvailableDataFrames.clsCurrDataFrame.Clone
+        clsGetDataFrameFunction.RemoveParameterByName("stack_data")
+        clsGGpairsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsMosaicGgplotFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColour.ControlValueChanged
+        AddRemoveColourParameter()
+    End Sub
+
+    Private Sub AddRemoveColourParameter()
+        If Not ucrReceiverColour.IsEmpty And rdoPairs.Checked Then
+            clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGpairsFunction.RemoveParameterByName("colour")
+        End If
+    End Sub
+
+    Private Sub EnableVisibleLabelControls()
+        ucrChkAddLabelsText.Visible = False
+        ucrInputLabelPosition.Visible = False
+        ucrInputLabelColour.Visible = False
+        ucrInputLabelSize.Visible = False
+        If rdoBy.Checked AndAlso strFirstVariablesType = "categorical" AndAlso
+            strSecondVariableType = "categorical" AndAlso bRCodeSet AndAlso
+           ucrInputCategoricalByCategorical.GetText = "Bar Chart" Then
+            ucrChkAddLabelsText.Visible = True
+            ucrChkAddLabelsText.SetRCode(clsBaseOperator)
+        End If
+    End Sub
+
+    Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
+        AddRemoveTextParameter()
+    End Sub
+
+    Private Sub ChangeGeomToMosaicAndFacet()
+        If rdoBy.Checked AndAlso strFirstVariablesType = "categorical" AndAlso
+            strSecondVariableType = "categorical" AndAlso
+           ucrInputCategoricalByCategorical.GetText = "Mosaic Plot" Then
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsMosaicGgplotFunction, iPosition:=0)
+            clsRFacet.AddParameter("facets", "~ " & ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
+        Else
+            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
+            clsRFacet.AddParameter("facets", "~variable", iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub AddRemoveTextParameter()
+        If ucrChkAddLabelsText.Checked AndAlso
+            ucrInputCategoricalByCategorical.GetText = "Bar Chart" AndAlso
+            strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso
+            bRCodeSet Then
+            clsBaseOperator.AddParameter("text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("text")
+        End If
+    End Sub
+
+    Private Sub LowerUpperDiagonal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLower.ControlValueChanged, ucrChkUpper.ControlValueChanged, ucrChkDiagonal.ControlValueChanged
+        If bRCodeSet Then
+            If ucrChkDiagonal.Checked Then
+                clsGGpairsFunction.AddParameter("diag", clsRFunctionParameter:=clsDiagonalListFunction, iPosition:=3)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("diag")
+            End If
+            If ucrChkLower.Checked Then
+                clsGGpairsFunction.AddParameter("lower", clsRFunctionParameter:=clsLowerListFunction, iPosition:=4)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("lower")
+            End If
+            If ucrChkUpper.Checked Then
+                clsGGpairsFunction.AddParameter("upper", clsRFunctionParameter:=clsUpperListFunction, iPosition:=5)
+            Else
+                clsGGpairsFunction.RemoveParameterByName("upper")
             End If
         End If
     End Sub
