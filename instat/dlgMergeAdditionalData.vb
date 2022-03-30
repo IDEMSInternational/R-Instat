@@ -227,6 +227,7 @@ Public Class dlgMergeAdditionalData
                 'ucrReceiverSecond.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""), ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text) 'This may probably be needed in case we want to add the join columns
                 lstJoinColumns.Add(clsByListFunction.clsParameters(i).strArgumentValue.Replace(Chr(34), ""))
             Next
+            bBySpecified = True
         Else
             strMergeBy = ""
             clsNames1.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
