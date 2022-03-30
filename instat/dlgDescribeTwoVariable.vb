@@ -122,13 +122,15 @@ Public Class dlgDescribeTwoVariable
 
         clsMmtableFunction.SetPackageName("mmtable2")
         clsMmtableFunction.SetRCommand("mmtable")
-        clsMmtableFunction.AddParameter("data", "frequency_table", iPosition:=0)
+        clsMmtableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyTables, iPosition:=0)
         clsMmtableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
 
         clsMmtableOperator.SetOperation("+")
         clsMmtableOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
+        clsMmtableOperator.AddParameter("header_left", clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=1)
+        clsMmtableOperator.AddParameter("header_top", clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=2)
 
         clsGroupByPipeOperator.SetOperation("%>%")
         clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction, iPosition:=2, bIncludeArgumentName:=False)
@@ -305,7 +307,7 @@ Public Class dlgDescribeTwoVariable
                 lblSummaryName.ForeColor = SystemColors.Highlight
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                 grpOptions.Visible = False
-                ucrBase.clsRsyntax.SetBaseRFunction(clsFrequencyTables)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMmtableOperator)
                 lblSummaryName.Text = "Frequency tables"
                 lblSummaryName.ForeColor = SystemColors.Highlight
             Else
