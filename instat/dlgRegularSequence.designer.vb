@@ -160,11 +160,8 @@ Partial Class dlgRegularSequence
         Me.ucrInputFrom.TabIndex = 1
         '
         'ucrDataFrameLength
-        '
-        Me.ucrDataFrameLength.AddQuotesIfUnrecognised = True
+        ' 
         Me.ucrDataFrameLength.AutoSize = True
-        Me.ucrDataFrameLength.IsMultiline = False
-        Me.ucrDataFrameLength.IsReadOnly = True
         Me.ucrDataFrameLength.Location = New System.Drawing.Point(111, 128)
         Me.ucrDataFrameLength.Name = "ucrDataFrameLength"
         Me.ucrDataFrameLength.Size = New System.Drawing.Size(54, 23)

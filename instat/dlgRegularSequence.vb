@@ -22,7 +22,7 @@ Public Class dlgRegularSequence
     Private bReset As Boolean = True
     Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
     Private clsByOperator As New ROperator
-    Private strDefaultSequenceOption As String = ""
+    Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.NumericOption
     Private bDefaultOptionChanged As Boolean = False
     'used to determine if the preview script has changed and whether to reresh preview or not
     Private strPreviewScript As String = ""
@@ -32,6 +32,11 @@ Public Class dlgRegularSequence
     'was used by frMain menu to set the default option to be displayed by the dialog.
     'this flag was not correctly used in setting the state of dialog
     Public bNumericIsDefault As Boolean
+
+    Private Enum DefaultSequenceOption
+        NumericOption
+        DateOption
+    End Enum
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -53,18 +58,19 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetSelectedDefaultSequenceOption()
-        If strDefaultSequenceOption = "numeric" Then
-            rdoNumeric.Checked = True
-        ElseIf strDefaultSequenceOption = "date" Then
-            rdoDates.Checked = True
-        End If
+        Select Case enumDefaultSequenceOption
+            Case DefaultSequenceOption.NumericOption
+                rdoNumeric.Checked = True
+            Case DefaultSequenceOption.DateOption
+                rdoDates.Checked = True
+        End Select
     End Sub
 
     ''' <summary>
     ''' sets the dialog to be shown with 'numeric' option as the default option
     ''' </summary>
     Public Sub SetNumericSequenceAsDefaultOption()
-        strDefaultSequenceOption = "numeric"
+        enumDefaultSequenceOption = DefaultSequenceOption.NumericOption
         bDefaultOptionChanged = True
     End Sub
 
@@ -72,7 +78,7 @@ Public Class dlgRegularSequence
     ''' sets the dialog to be shown with 'numeric' option as the default option
     ''' </summary>
     Public Sub SetDateSequenceAsDefaultOption()
-        strDefaultSequenceOption = "date"
+        enumDefaultSequenceOption = DefaultSequenceOption.DateOption
         bDefaultOptionChanged = True
     End Sub
 
