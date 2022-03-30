@@ -23,7 +23,8 @@ Public Class dlgDescribeTwoVariable
     Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary,
            clsConcFunction, clsRAnova, clsFrequencyTables, clsSkimrFunction, clsSummariesList,
            clsGroupByFunction, clsDummyFunction, clsFactorsList, clsMmtableFunction,
-           clsHeaderLeftFunction, clsHeaderTopFunction As New RFunction
+           clsHeaderLeftFunction, clsHeaderTopFunction, clsHeaderTopLeftSummaryVariableFunction,
+           clsHeaderLeftTopFuncion As New RFunction
     Private clsGroupByPipeOperator, clsMmtableOperator As New ROperator
     Private lstSelectedColumns As New List(Of String)
 
@@ -72,6 +73,12 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondFactor.SetLinkedDisplayControl(lblSecondFactor)
         ucrReceiverSecondFactor.SetDataType("factor")
 
+        ucrReceiverNumericVariable.SetParameter(New RParameter("columns_to_summarise", 4))
+        ucrReceiverNumericVariable.SetDataType("numeric")
+        ucrReceiverNumericVariable.SetParameterIsString()
+        ucrReceiverNumericVariable.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverNumericVariable.SetLinkedDisplayControl(lblNumericVariable)
+
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -83,7 +90,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing, ucrReceiverNumericVariable}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
@@ -106,6 +113,8 @@ Public Class dlgDescribeTwoVariable
         clsMmtableFunction = New RFunction
         clsHeaderLeftFunction = New RFunction
         clsHeaderTopFunction = New RFunction
+        clsHeaderTopLeftSummaryVariableFunction = New RFunction
+        clsHeaderLeftTopFuncion = New RFunction
         clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
 
@@ -120,6 +129,10 @@ Public Class dlgDescribeTwoVariable
         clsHeaderTopFunction.SetPackageName("mmtable2")
         clsHeaderTopFunction.SetRCommand("header_left_top")
 
+        clsHeaderTopLeftSummaryVariableFunction.SetPackageName("mmtable2")
+        clsHeaderTopLeftSummaryVariableFunction.SetRCommand("header_top_left")
+        clsHeaderTopLeftSummaryVariableFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+
         clsMmtableFunction.SetPackageName("mmtable2")
         clsMmtableFunction.SetRCommand("mmtable")
         clsMmtableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyTables, iPosition:=0)
@@ -129,8 +142,8 @@ Public Class dlgDescribeTwoVariable
 
         clsMmtableOperator.SetOperation("+")
         clsMmtableOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
-        clsMmtableOperator.AddParameter("header_left", clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=1)
-        clsMmtableOperator.AddParameter("header_top", clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=2)
+        clsMmtableOperator.AddParameter("header_left", clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=2)
+        clsMmtableOperator.AddParameter("header_top", clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=3)
 
         clsGroupByPipeOperator.SetOperation("%>%")
         clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction, iPosition:=2, bIncludeArgumentName:=False)
@@ -199,6 +212,7 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelation, bReset)
         ucrReceiverSecondOpt.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverSecondFactor.SetRCode(clsGroupByFunction, bReset)
+        ucrReceiverNumericVariable.SetRCode(clsFrequencyTables, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
 
         Results()
@@ -382,5 +396,19 @@ Public Class dlgDescribeTwoVariable
             clsFactorsList.AddParameter("first" & iColumnNumber, Chr(34) & strColumnName & Chr(34), iPosition:=iColumnNumber, bIncludeArgumentName:=False)
             iColumnNumber = iColumnNumber + 1
         Next
+    End Sub
+
+    Private Sub ucrReceiverNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumericVariable.ControlValueChanged
+        If Not ucrReceiverNumericVariable.IsEmpty Then
+            clsMmtableOperator.AddParameter("summary_variable", clsRFunctionParameter:=clsHeaderTopLeftSummaryVariableFunction, iPosition:=1)
+        Else
+            clsMmtableOperator.RemoveParameterByName("summary_variable")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
+        If rdoCustomize.Checked AndAlso Not ucrReceiverSecondVar.IsEmpty Then
+            ucrReceiverNumericVariable.SetMeAsReceiver()
+        End If
     End Sub
 End Class
