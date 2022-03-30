@@ -66,6 +66,7 @@ Public Class dlgRandomSplit
         ucrSaveRandomSplit.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
 
         ucrNudLag.SetParameter(New RParameter("lag", 3))
+        ucrNudLag.SetMinMax(-100, 100)
 
         ucrNudBreaks.SetLinkedDisplayControl(lblBreaks)
         ucrNudBreaks.SetParameter(New RParameter("breaks", 4))
@@ -158,9 +159,6 @@ Public Class dlgRandomSplit
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
             Else
-                If ucrChkStratifyingFactor.Checked Then
-
-                End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
         End If
         Else
