@@ -41,7 +41,7 @@ Public Class dlgRandomSplit
 
         ucrReceiverRandomSplit.Selector = ucrSelectorRandomSplit
         ucrReceiverRandomSplit.SetMeAsReceiver()
-        ucrReceiverRandomSplit.SetDataType("numeric")
+        'ucrReceiverRandomSplit.SetDataType("factor")
         ucrReceiverRandomSplit.SetLinkedDisplayControl(lblReceiverRandomSplit)
 
         ucrSelectorRandomSplit.SetParameter(New RParameter("data", 0))
@@ -158,6 +158,9 @@ Public Class dlgRandomSplit
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
             Else
+                If ucrChkStratifyingFactor.Checked Then
+
+                End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
         End If
         Else
