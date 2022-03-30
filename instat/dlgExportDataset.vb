@@ -179,7 +179,10 @@ Public Class dlgExportDataset
             cboFileType.SelectedIndex = 0
         End If
 
-        'if file save state has changed then make path changes to the file path control
+        'If we are saving to multiple files, then path should be set to a folder.
+        'If we are saving to a single file, then path should be set to a file.
+        'Therefore `bSaveAsMultipleFiles` and `ucrFilePath.FolderBrowse` should always be equal.
+        'If not, then we need to make the `ucrFilePath` control consistent with the state of `bSaveAsMultipleFiles`.
         If bSaveAsMultipleFiles <> ucrFilePath.FolderBrowse Then
             ucrFilePath.FolderBrowse = bSaveAsMultipleFiles
             If Not ucrFilePath.IsEmpty Then

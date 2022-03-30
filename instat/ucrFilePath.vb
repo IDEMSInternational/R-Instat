@@ -98,22 +98,20 @@ Public Class ucrFilePath
             'its safer To, just incase number of filters set are different from previously set
             SelectedFileFilterIndex = 1
 
-            If String.IsNullOrEmpty(strFilePathDialogFilter) Then
+            If String.IsNullOrEmpty(strFilePathDialogFilter) OrElse FolderBrowse OrElse String.IsNullOrEmpty(FilePath) Then
                 Exit Property
             End If
 
             'for file browse, if file path name was already set,
             'change the extension set to use the new one.
-            If Not FolderBrowse AndAlso Not String.IsNullOrEmpty(FilePath) Then
-                'get the new file extension from the list of filter names in strFilePathDialogFilter
-                'for instance if strFilePathDialogFilter is
-                'Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS
-                'the new file path will have .xls as its extension
-                Dim arrStr() As String = strFilePathDialogFilter.Split({"|"}, StringSplitOptions.RemoveEmptyEntries)
+            'get the new file extension from the list of filter names in strFilePathDialogFilter
+            'for instance if strFilePathDialogFilter is
+            'Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS
+            'the new file path will have .xls as its extension
+            Dim arrStr() As String = strFilePathDialogFilter.Split({"|"}, StringSplitOptions.RemoveEmptyEntries)
                 arrStr = arrStr(1).Split({";"}, StringSplitOptions.RemoveEmptyEntries)
                 FilePath = Path.GetDirectoryName(FilePath) & "\" &
                     Path.GetFileNameWithoutExtension(FilePath) & arrStr(0).Substring(1)
-            End If
 
         End Set
     End Property
