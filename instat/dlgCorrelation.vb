@@ -135,6 +135,7 @@ Public Class dlgCorrelation
         ucrChkDisplayOptions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
 
+
         ucrInputRearrange.SetParameter(New RParameter("method", 1))
         dctMethod.Add("PCA", Chr(34) & "PCA" & Chr(34))
         dctMethod.Add("HC", Chr(34) & "HC" & Chr(34))
@@ -262,7 +263,7 @@ Public Class dlgCorrelation
 
         clsFashionFunction.SetPackageName("corrr")
         clsFashionFunction.SetRCommand("fashion")
-        clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
+        clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
         clsFashionFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionFunction.AddParameter("na_print", Chr(34) & " " & Chr(34), iPosition:=3)
@@ -280,6 +281,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsFashionFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
         clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -311,6 +313,7 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.SetRCode(clsCorrelationTestFunction, bReset)
         ucrSaveDataFrame.SetRCode(clsFashionFunction, bReset)
+        ucrSaveDataFrame.AddAdditionalRCode(clsCorrelationFunction, bReset)
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -365,16 +368,22 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
             grpDisplayOptions.Hide()
         ElseIf rdoMultipleColumns.Checked Then
-            ucrReceiverMultipleColumns.SetMeAsReceiver()
-            grpDisplayOptions.Show()
-            AddShaveOrRearrange()
+            If ucrChkDisplayOptions.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+
+                ucrReceiverMultipleColumns.SetMeAsReceiver()
+                grpDisplayOptions.Show()
+                AddShaveOrRearrange()
+            End If
         End If
         ReceiverColumns()
     End Sub
@@ -392,7 +401,15 @@ Public Class dlgCorrelation
     Private Sub ucrSelectorCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCorrelation.ControlContentsChanged
         clsCurrentDataFrameFunction = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
     End Sub
-
+    'Private Sub SetBaseFunction()
+    '    If rdoMultipleColumns.Checked Then
+    '        If ucrChkDisplayOptions.Checked Then
+    '            ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
+    '        Else
+    '            ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+    '        End If
+    '    End If
+    'End Sub
     Private Sub ReceiverColumns()
         Dim strTwoColumns As String
         If rdoTwoColumns.Checked Then
@@ -415,20 +432,18 @@ Public Class dlgCorrelation
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
         ElseIf ucrChkRearrange.Checked Then
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
-        ElseIf ucrChkDisplayOptions.Checked Then
+        Else
             clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
-        End If
-        'If ucrChkDisplayOptions.Checked Then
-        '    clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
-        'Else
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
-        'End If
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+        End If
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
     End Sub
 
     Private Sub ucrChkShave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShave.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged
         AddShaveOrRearrange()
     End Sub
+
+    'Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged
+    '    SetBaseFunction()
+    'End Sub
 End Class
