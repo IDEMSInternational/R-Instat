@@ -102,7 +102,7 @@ Partial Class dlgFromLibrary
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 8
-        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.Text = "R Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'rdoDefaultDatasets
@@ -201,7 +201,7 @@ Partial Class dlgFromLibrary
         Me.MinimizeBox = False
         Me.Name = "dlgFromLibrary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Open Dataset from Library"
+        Me.Text = "Import from Library"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
