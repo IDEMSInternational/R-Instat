@@ -27,12 +27,6 @@ Public Class dlgRegularSequence
     'used to determine if the preview script has changed and whether to reresh preview or not
     Private strPreviewScript As String = ""
 
-
-    'todo. delete this flag in a separate PR after PR #7231 has been merged.
-    'was used by frMain menu to set the default option to be displayed by the dialog.
-    'this flag was not correctly used in setting the state of dialog
-    Public bNumericIsDefault As Boolean
-
     Private Enum DefaultSequenceOption
         NumericOption
         DateOption
