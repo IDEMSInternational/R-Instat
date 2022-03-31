@@ -88,15 +88,34 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayMargins.SetText("Display Outer Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
-        ucrChkDisplayMargins.AddToLinkedControls({ucrInputMarginName}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, bNewLinkedUpdateFunction:=True, objNewDefaultState:="All")
-
-        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=6))
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
         ucrPnlDescribe.AddRadioButton(rdoCustomize)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
+
+        ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 7))
+        ucrChkDisplayAsPercentage.SetText("As Percentages")
+        ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
+        ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
+
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
+                                                      bNewLinkedUpdateFunction:=True)
+
+        ucrReceiverMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 8))
+        ucrReceiverMultiplePercentages.SetParameterIsString()
+        ucrReceiverMultiplePercentages.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverMultiplePercentages.SetDataType("factor")
+        ucrReceiverMultiplePercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
+
+        ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 9))
+        ucrChkPercentageProportion.SetText("Display as Decimal")
+
+        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 6))
+        ucrNudSigFigs.SetMinMax(0, 22)
+        ucrNudSigFigs.SetRDefault(2)
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrChkOmitMissing, ucrReceiverNumericVariable}, {rdoCustomize}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -129,6 +148,8 @@ Public Class dlgDescribeTwoVariable
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
+        ucrInputMarginName.SetText("All")
+        ucrInputMarginName.Visible = False
 
         clsFactorsList.SetRCommand("c")
 
@@ -171,6 +192,7 @@ Public Class dlgDescribeTwoVariable
         clsFrequencyTables.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=1)
         clsFrequencyTables.AddParameter("summaries", "count_label", iPosition:=2)
         clsFrequencyTables.AddParameter("factors", clsRFunctionParameter:=clsFactorsList, iPosition:=3)
+        clsFrequencyTables.AddParameter("perc_decimal", "FALSE", iPosition:=9)
         clsFrequencyTables.SetAssignTo("frequency_table")
 
         clsRAnova.AddParameter("signif.stars", "FALSE", iPosition:=2)
@@ -223,7 +245,9 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondFactor.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverNumericVariable.SetRCode(clsFrequencyTables, bReset)
         ucrChkDisplayMargins.SetRCode(clsFrequencyTables, bReset)
+        ucrChkDisplayAsPercentage.SetRCode(clsFrequencyTables, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
+        ucrNudSigFigs.SetRCode(clsFrequencyTables, bReset)
         Results()
     End Sub
 
@@ -351,6 +375,7 @@ Public Class dlgDescribeTwoVariable
         If ucrChangedControl Is ucrReceiverSecondVar Then
             clsHeaderTopFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
         End If
+        EnableDisableFrequencyControls()
     End Sub
 
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
@@ -387,6 +412,30 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
+    Private Sub EnableDisableFrequencyControls()
+        If rdoCustomize.Checked Then
+            If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+                If ucrReceiverNumericVariable.IsEmpty Then
+                    grpDisplay.Visible = True
+                    grpFrequency.Visible = True
+                    ucrChkDisplayMargins.Visible = True
+                Else
+                    grpDisplay.Visible = False
+                    grpFrequency.Visible = False
+                    ucrChkDisplayMargins.Visible = False
+                End If
+            Else
+                grpDisplay.Visible = False
+                grpFrequency.Visible = False
+                ucrChkDisplayMargins.Visible = False
+            End If
+        Else
+            grpDisplay.Visible = False
+            grpFrequency.Visible = False
+            ucrChkDisplayMargins.Visible = False
+        End If
+    End Sub
+
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
         If ucrReceiverFirstVars.IsEmpty Then
             Exit Sub
@@ -413,11 +462,26 @@ Public Class dlgDescribeTwoVariable
         Else
             clsMmtableOperator.RemoveParameterByName("summary_variable")
         End If
+        EnableDisableFrequencyControls()
     End Sub
 
     Private Sub ucrReceiverSecondVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlValueChanged
         If rdoCustomize.Checked AndAlso Not ucrReceiverSecondVar.IsEmpty Then
             ucrReceiverNumericVariable.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrChkDisplayMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayMargins.ControlValueChanged
+        If ucrChkDisplayMargins.Checked Then
+            ucrInputMarginName.Visible = True
+            clsFrequencyTables.AddParameter("margin_name", Chr(34) & ucrInputMarginName.GetText & Chr(34), iPosition:=6)
+        Else
+            ucrInputMarginName.Visible = False
+            clsFrequencyTables.RemoveParameterByName("margin_name")
+        End If
+    End Sub
+
+    Private Sub ucrInputMarginName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMarginName.ControlValueChanged
+        clsFrequencyTables.AddParameter("margin_name", ucrInputMarginName.GetText, iPosition:=6)
     End Sub
 End Class
