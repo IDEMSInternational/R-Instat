@@ -473,7 +473,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
                                                    column = col_name,
                                                    property = "class")
       # note: important that there *is* a space between | for str_detect function
-      if (any(stringr::str_detect("factor | Date", col_data_type))){
+      if (any(stringr::str_detect("factor | character | Date", col_data_type))){
         curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
           dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
       } else {
