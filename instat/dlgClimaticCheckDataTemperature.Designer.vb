@@ -35,12 +35,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.rdoIndividual = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.lblNudSame = New System.Windows.Forms.Label()
-        Me.lblNudJump = New System.Windows.Forms.Label()
-        Me.lblNudDiff = New System.Windows.Forms.Label()
-        Me.lblNudRangeElement1Min = New System.Windows.Forms.Label()
-        Me.lblNudRangeElement2Min = New System.Windows.Forms.Label()
-        Me.lblNudRangeElement1Max = New System.Windows.Forms.Label()
-        Me.lblNudRangeElement2Max = New System.Windows.Forms.Label()
         Me.ttOutliers = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblCoeff = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
@@ -54,12 +48,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkRangeElement1 = New instat.ucrCheck()
         Me.ucrNudSame = New instat.ucrNud()
         Me.ucrNudDifference = New instat.ucrNud()
-        Me.ucrNudRangeElement2Max = New instat.ucrNud()
         Me.ucrChkOutlier = New instat.ucrCheck()
-        Me.ucrNudRangeElement2Min = New instat.ucrNud()
-        Me.ucrNudRangeElement1Max = New instat.ucrNud()
         Me.ucrChkSame = New instat.ucrCheck()
-        Me.ucrNudRangeElement1Min = New instat.ucrNud()
         Me.ucrChkJump = New instat.ucrCheck()
         Me.ucrChkDifference = New instat.ucrCheck()
         Me.ucrReceiverElement1 = New instat.ucrReceiverSingle()
@@ -71,6 +61,12 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrSelectorTemperature = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
+        Me.ucrInputRangeElement1Min = New instat.ucrInputTextBox()
+        Me.ucrInputRangeElement1Max = New instat.ucrInputTextBox()
+        Me.ucrInputRangeElement2Min = New instat.ucrInputTextBox()
+        Me.ucrInputRangeElement2Max = New instat.ucrInputTextBox()
+        Me.lblRangeElement1From = New System.Windows.Forms.Label()
+        Me.lblRangeElement2From = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -138,21 +134,21 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         Me.lblRangeElement1to.AutoSize = True
         Me.lblRangeElement1to.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRangeElement1to.Location = New System.Drawing.Point(254, 268)
+        Me.lblRangeElement1to.Location = New System.Drawing.Point(272, 268)
         Me.lblRangeElement1to.Name = "lblRangeElement1to"
-        Me.lblRangeElement1to.Size = New System.Drawing.Size(16, 13)
+        Me.lblRangeElement1to.Size = New System.Drawing.Size(23, 13)
         Me.lblRangeElement1to.TabIndex = 23
-        Me.lblRangeElement1to.Text = "to"
+        Me.lblRangeElement1to.Text = "To:"
         '
         'lblRangeElement2to
         '
         Me.lblRangeElement2to.AutoSize = True
         Me.lblRangeElement2to.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRangeElement2to.Location = New System.Drawing.Point(254, 297)
+        Me.lblRangeElement2to.Location = New System.Drawing.Point(273, 297)
         Me.lblRangeElement2to.Name = "lblRangeElement2to"
-        Me.lblRangeElement2to.Size = New System.Drawing.Size(16, 13)
+        Me.lblRangeElement2to.Size = New System.Drawing.Size(23, 13)
         Me.lblRangeElement2to.TabIndex = 29
-        Me.lblRangeElement2to.Text = "to"
+        Me.lblRangeElement2to.Text = "To:"
         '
         'lblElement2
         '
@@ -211,66 +207,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblNudSame.TabIndex = 34
         Me.lblNudSame.Text = "days"
         '
-        'lblNudJump
-        '
-        Me.lblNudJump.AutoSize = True
-        Me.lblNudJump.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudJump.Location = New System.Drawing.Point(236, 360)
-        Me.lblNudJump.Name = "lblNudJump"
-        Me.lblNudJump.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudJump.TabIndex = 37
-        Me.lblNudJump.Text = "°C"
-        '
-        'lblNudDiff
-        '
-        Me.lblNudDiff.AutoSize = True
-        Me.lblNudDiff.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudDiff.Location = New System.Drawing.Point(236, 393)
-        Me.lblNudDiff.Name = "lblNudDiff"
-        Me.lblNudDiff.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudDiff.TabIndex = 40
-        Me.lblNudDiff.Text = "°C"
-        '
-        'lblNudRangeElement1Min
-        '
-        Me.lblNudRangeElement1Min.AutoSize = True
-        Me.lblNudRangeElement1Min.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudRangeElement1Min.Location = New System.Drawing.Point(236, 268)
-        Me.lblNudRangeElement1Min.Name = "lblNudRangeElement1Min"
-        Me.lblNudRangeElement1Min.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudRangeElement1Min.TabIndex = 22
-        Me.lblNudRangeElement1Min.Text = "°C"
-        '
-        'lblNudRangeElement2Min
-        '
-        Me.lblNudRangeElement2Min.AutoSize = True
-        Me.lblNudRangeElement2Min.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudRangeElement2Min.Location = New System.Drawing.Point(236, 297)
-        Me.lblNudRangeElement2Min.Name = "lblNudRangeElement2Min"
-        Me.lblNudRangeElement2Min.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudRangeElement2Min.TabIndex = 28
-        Me.lblNudRangeElement2Min.Text = "°C"
-        '
-        'lblNudRangeElement1Max
-        '
-        Me.lblNudRangeElement1Max.AutoSize = True
-        Me.lblNudRangeElement1Max.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudRangeElement1Max.Location = New System.Drawing.Point(324, 268)
-        Me.lblNudRangeElement1Max.Name = "lblNudRangeElement1Max"
-        Me.lblNudRangeElement1Max.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudRangeElement1Max.TabIndex = 25
-        Me.lblNudRangeElement1Max.Text = "°C"
-        '
-        'lblNudRangeElement2Max
-        '
-        Me.lblNudRangeElement2Max.AutoSize = True
-        Me.lblNudRangeElement2Max.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNudRangeElement2Max.Location = New System.Drawing.Point(325, 297)
-        Me.lblNudRangeElement2Max.Name = "lblNudRangeElement2Max"
-        Me.lblNudRangeElement2Max.Size = New System.Drawing.Size(18, 13)
-        Me.lblNudRangeElement2Max.TabIndex = 31
-        Me.lblNudRangeElement2Max.Text = "°C"
-        '
         'lblCoeff
         '
         Me.lblCoeff.AutoSize = True
@@ -279,7 +215,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.lblCoeff.Name = "lblCoeff"
         Me.lblCoeff.Size = New System.Drawing.Size(32, 13)
         Me.lblCoeff.TabIndex = 42
-        Me.lblCoeff.Text = "Coeff"
+        Me.lblCoeff.Text = "Coef:"
         '
         'grpLogicalCalculatedColumns
         '
@@ -334,7 +270,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkRangeElement2.Checked = False
         Me.ucrChkRangeElement2.Location = New System.Drawing.Point(10, 293)
         Me.ucrChkRangeElement2.Name = "ucrChkRangeElement2"
-        Me.ucrChkRangeElement2.Size = New System.Drawing.Size(172, 23)
+        Me.ucrChkRangeElement2.Size = New System.Drawing.Size(165, 23)
         Me.ucrChkRangeElement2.TabIndex = 26
         '
         'ucrReceiverElement2
@@ -369,7 +305,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkRangeElement1.Checked = False
         Me.ucrChkRangeElement1.Location = New System.Drawing.Point(10, 264)
         Me.ucrChkRangeElement1.Name = "ucrChkRangeElement1"
-        Me.ucrChkRangeElement1.Size = New System.Drawing.Size(172, 23)
+        Me.ucrChkRangeElement1.Size = New System.Drawing.Size(165, 23)
         Me.ucrChkRangeElement1.TabIndex = 20
         '
         'ucrNudSame
@@ -398,19 +334,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrNudDifference.TabIndex = 39
         Me.ucrNudDifference.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudRangeElement2Max
-        '
-        Me.ucrNudRangeElement2Max.AutoSize = True
-        Me.ucrNudRangeElement2Max.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Max.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRangeElement2Max.Location = New System.Drawing.Point(274, 293)
-        Me.ucrNudRangeElement2Max.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRangeElement2Max.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Max.Name = "ucrNudRangeElement2Max"
-        Me.ucrNudRangeElement2Max.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRangeElement2Max.TabIndex = 30
-        Me.ucrNudRangeElement2Max.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkOutlier
         '
         Me.ucrChkOutlier.AutoSize = True
@@ -420,32 +343,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkOutlier.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkOutlier.TabIndex = 41
         '
-        'ucrNudRangeElement2Min
-        '
-        Me.ucrNudRangeElement2Min.AutoSize = True
-        Me.ucrNudRangeElement2Min.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Min.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRangeElement2Min.Location = New System.Drawing.Point(184, 293)
-        Me.ucrNudRangeElement2Min.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRangeElement2Min.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement2Min.Name = "ucrNudRangeElement2Min"
-        Me.ucrNudRangeElement2Min.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRangeElement2Min.TabIndex = 27
-        Me.ucrNudRangeElement2Min.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudRangeElement1Max
-        '
-        Me.ucrNudRangeElement1Max.AutoSize = True
-        Me.ucrNudRangeElement1Max.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement1Max.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRangeElement1Max.Location = New System.Drawing.Point(274, 264)
-        Me.ucrNudRangeElement1Max.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRangeElement1Max.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement1Max.Name = "ucrNudRangeElement1Max"
-        Me.ucrNudRangeElement1Max.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRangeElement1Max.TabIndex = 24
-        Me.ucrNudRangeElement1Max.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkSame
         '
         Me.ucrChkSame.AutoSize = True
@@ -454,19 +351,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrChkSame.Name = "ucrChkSame"
         Me.ucrChkSame.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkSame.TabIndex = 32
-        '
-        'ucrNudRangeElement1Min
-        '
-        Me.ucrNudRangeElement1Min.AutoSize = True
-        Me.ucrNudRangeElement1Min.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement1Min.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRangeElement1Min.Location = New System.Drawing.Point(184, 264)
-        Me.ucrNudRangeElement1Min.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRangeElement1Min.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRangeElement1Min.Name = "ucrNudRangeElement1Min"
-        Me.ucrNudRangeElement1Min.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRangeElement1Min.TabIndex = 21
-        Me.ucrNudRangeElement1Min.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkJump
         '
@@ -593,22 +477,86 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrPnlType.Size = New System.Drawing.Size(212, 60)
         Me.ucrPnlType.TabIndex = 0
         '
+        'ucrInputRangeElement1Min
+        '
+        Me.ucrInputRangeElement1Min.AddQuotesIfUnrecognised = True
+        Me.ucrInputRangeElement1Min.AutoSize = True
+        Me.ucrInputRangeElement1Min.IsMultiline = False
+        Me.ucrInputRangeElement1Min.IsReadOnly = False
+        Me.ucrInputRangeElement1Min.Location = New System.Drawing.Point(221, 264)
+        Me.ucrInputRangeElement1Min.Name = "ucrInputRangeElement1Min"
+        Me.ucrInputRangeElement1Min.Size = New System.Drawing.Size(44, 21)
+        Me.ucrInputRangeElement1Min.TabIndex = 48
+        '
+        'ucrInputRangeElement1Max
+        '
+        Me.ucrInputRangeElement1Max.AddQuotesIfUnrecognised = True
+        Me.ucrInputRangeElement1Max.AutoSize = True
+        Me.ucrInputRangeElement1Max.IsMultiline = False
+        Me.ucrInputRangeElement1Max.IsReadOnly = False
+        Me.ucrInputRangeElement1Max.Location = New System.Drawing.Point(297, 264)
+        Me.ucrInputRangeElement1Max.Name = "ucrInputRangeElement1Max"
+        Me.ucrInputRangeElement1Max.Size = New System.Drawing.Size(44, 21)
+        Me.ucrInputRangeElement1Max.TabIndex = 49
+        '
+        'ucrInputRangeElement2Min
+        '
+        Me.ucrInputRangeElement2Min.AddQuotesIfUnrecognised = True
+        Me.ucrInputRangeElement2Min.AutoSize = True
+        Me.ucrInputRangeElement2Min.IsMultiline = False
+        Me.ucrInputRangeElement2Min.IsReadOnly = False
+        Me.ucrInputRangeElement2Min.Location = New System.Drawing.Point(221, 293)
+        Me.ucrInputRangeElement2Min.Name = "ucrInputRangeElement2Min"
+        Me.ucrInputRangeElement2Min.Size = New System.Drawing.Size(44, 21)
+        Me.ucrInputRangeElement2Min.TabIndex = 50
+        '
+        'ucrInputRangeElement2Max
+        '
+        Me.ucrInputRangeElement2Max.AddQuotesIfUnrecognised = True
+        Me.ucrInputRangeElement2Max.AutoSize = True
+        Me.ucrInputRangeElement2Max.IsMultiline = False
+        Me.ucrInputRangeElement2Max.IsReadOnly = False
+        Me.ucrInputRangeElement2Max.Location = New System.Drawing.Point(297, 293)
+        Me.ucrInputRangeElement2Max.Name = "ucrInputRangeElement2Max"
+        Me.ucrInputRangeElement2Max.Size = New System.Drawing.Size(44, 21)
+        Me.ucrInputRangeElement2Max.TabIndex = 51
+        '
+        'lblRangeElement1From
+        '
+        Me.lblRangeElement1From.AutoSize = True
+        Me.lblRangeElement1From.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRangeElement1From.Location = New System.Drawing.Point(185, 268)
+        Me.lblRangeElement1From.Name = "lblRangeElement1From"
+        Me.lblRangeElement1From.Size = New System.Drawing.Size(33, 13)
+        Me.lblRangeElement1From.TabIndex = 52
+        Me.lblRangeElement1From.Text = "From:"
+        '
+        'lblRangeElement2From
+        '
+        Me.lblRangeElement2From.AutoSize = True
+        Me.lblRangeElement2From.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRangeElement2From.Location = New System.Drawing.Point(185, 297)
+        Me.lblRangeElement2From.Name = "lblRangeElement2From"
+        Me.lblRangeElement2From.Size = New System.Drawing.Size(33, 13)
+        Me.lblRangeElement2From.TabIndex = 53
+        Me.lblRangeElement2From.Text = "From:"
+        '
         'dlgClimaticCheckDataTemperature
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(478, 561)
+        Me.Controls.Add(Me.lblRangeElement2From)
+        Me.Controls.Add(Me.lblRangeElement1From)
+        Me.Controls.Add(Me.ucrInputRangeElement2Max)
+        Me.Controls.Add(Me.ucrInputRangeElement2Min)
+        Me.Controls.Add(Me.ucrInputRangeElement1Max)
+        Me.Controls.Add(Me.ucrInputRangeElement1Min)
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
         Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
         Me.Controls.Add(Me.ucrChkRangeElement2)
-        Me.Controls.Add(Me.lblNudRangeElement2Max)
-        Me.Controls.Add(Me.lblNudRangeElement1Max)
-        Me.Controls.Add(Me.lblNudRangeElement2Min)
-        Me.Controls.Add(Me.lblNudRangeElement1Min)
-        Me.Controls.Add(Me.lblNudDiff)
-        Me.Controls.Add(Me.lblNudJump)
         Me.Controls.Add(Me.lblNudSame)
         Me.Controls.Add(Me.rdoIndividual)
         Me.Controls.Add(Me.rdoMultiple)
@@ -620,12 +568,8 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.ucrNudSame)
         Me.Controls.Add(Me.lblRangeElement2to)
         Me.Controls.Add(Me.ucrNudDifference)
-        Me.Controls.Add(Me.ucrNudRangeElement2Max)
         Me.Controls.Add(Me.ucrChkOutlier)
-        Me.Controls.Add(Me.ucrNudRangeElement2Min)
-        Me.Controls.Add(Me.ucrNudRangeElement1Max)
         Me.Controls.Add(Me.ucrChkSame)
-        Me.Controls.Add(Me.ucrNudRangeElement1Min)
         Me.Controls.Add(Me.ucrChkJump)
         Me.Controls.Add(Me.ucrChkDifference)
         Me.Controls.Add(Me.lblElement1)
@@ -677,10 +621,6 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents ucrChkDifference As ucrCheck
     Friend WithEvents ucrNudSame As ucrNud
     Friend WithEvents ucrNudDifference As ucrNud
-    Friend WithEvents ucrNudRangeElement1Max As ucrNud
-    Friend WithEvents ucrNudRangeElement1Min As ucrNud
-    Friend WithEvents ucrNudRangeElement2Max As ucrNud
-    Friend WithEvents ucrNudRangeElement2Min As ucrNud
     Friend WithEvents lblRangeElement1to As Label
     Friend WithEvents lblRangeElement2to As Label
     Friend WithEvents ucrChkRangeElement1 As ucrCheck
@@ -690,13 +630,7 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents rdoIndividual As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
-    Friend WithEvents lblNudDiff As Label
-    Friend WithEvents lblNudJump As Label
     Friend WithEvents lblNudSame As Label
-    Friend WithEvents lblNudRangeElement2Max As Label
-    Friend WithEvents lblNudRangeElement1Max As Label
-    Friend WithEvents lblNudRangeElement2Min As Label
-    Friend WithEvents lblNudRangeElement1Min As Label
     Friend WithEvents ucrChkRangeElement2 As ucrCheck
     Friend WithEvents ttOutliers As ToolTip
     Friend WithEvents ucrChkIncludeCalculatedColumns As ucrCheck
@@ -705,4 +639,10 @@ Partial Class dlgClimaticCheckDataTemperature
     Friend WithEvents lblCoeff As Label
     Friend WithEvents grpLogicalCalculatedColumns As GroupBox
     Friend WithEvents ttMultiple As ToolTip
+    Friend WithEvents ucrInputRangeElement1Min As ucrInputTextBox
+    Friend WithEvents ucrInputRangeElement1Max As ucrInputTextBox
+    Friend WithEvents ucrInputRangeElement2Max As ucrInputTextBox
+    Friend WithEvents ucrInputRangeElement2Min As ucrInputTextBox
+    Friend WithEvents lblRangeElement2From As Label
+    Friend WithEvents lblRangeElement1From As Label
 End Class

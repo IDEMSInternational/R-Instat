@@ -90,6 +90,7 @@ Public Class ucrDataView
         AddHandler _grid.ReplaceValueInData, AddressOf ReplaceValueInData
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
+        AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -235,7 +236,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub ResizeLabels()
-        Const iMinSize As Single = 5
+        Const iMinSize As Single = 4.5
         TblPanPageDisplay.Font = New Font(TblPanPageDisplay.Font.FontFamily, 12, TblPanPageDisplay.Font.Style)
 
         While lblRowDisplay.Width + lblColDisplay.Width + 50 +
@@ -281,16 +282,24 @@ Public Class ucrDataView
     End Sub
 
     Private Sub SetDisplayLabels()
-        lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
+        Dim strRowLabel As String = GetCurrentDataFrameFocus().clsVisiblePage.intStartRow & " to " &
                              GetCurrentDataFrameFocus().clsVisiblePage.intEndRow & " of "
-        If GetCurrentDataFrameFocus().clsFilter.bFilterApplied Then
-            lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilter.iFilteredRowCount &
-                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().clsFilter.strName
+        Dim strColLabel As String = GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " &
+                              GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn & " of "
+
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
+            lblRowDisplay.Text = "Rows " & strRowLabel & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
+                                 " (" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | Filter: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
         Else
-            lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount
+            lblRowDisplay.Text = "Showing rows " & strRowLabel & GetCurrentDataFrameFocus().iTotalRowCount
         End If
-        lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().clsVisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
-                            " of " & GetCurrentDataFrameFocus().iTotalColumnCount
+
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            lblColDisplay.Text = "Columns " & strColLabel & GetCurrentDataFrameFocus().clsVisiblePage.intEndColumn &
+                                " (" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | Selection: " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
+        Else
+            lblColDisplay.Text = "Showing columns " & strColLabel & GetCurrentDataFrameFocus().iTotalColumnCount
+        End If
         ResizeLabels()
     End Sub
 
@@ -358,6 +367,10 @@ Public Class ucrDataView
         Return _grid.GetSelectedColumns()
     End Function
 
+    Private Function GetSelectedColumnIndexes() As List(Of String)
+        Return _grid.GetSelectedColumnIndexes()
+    End Function
+
     Private Function GetSelectedColumnNames() As List(Of String)
         Return GetSelectedColumns().Select(Function(x) x.strName).ToList()
     End Function
@@ -418,7 +431,7 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
-    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -510,8 +523,8 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
@@ -575,14 +588,14 @@ Public Class ucrDataView
             Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
             If iNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-            ElseIf iNonNumericValues = GetCurrentDataFrameFocus().iTotalRowCount Then
-                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
             Else
+                Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                 frmConvertToNumeric.SetColumnName(strColumn)
+                frmConvertToNumeric.CheckLabels(bCheckLabels)
                 frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                 frmConvertToNumeric.ShowDialog()
-                ' Yes for "normal" convert and No for "labelled" convert
+                ' Yes for "normal" convert and No for "ordinal" convert
                 If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
@@ -607,7 +620,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilters.Click
+    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -707,14 +720,14 @@ Public Class ucrDataView
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
-        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuRemoveCurrentFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuRowContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected()
-        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
@@ -833,9 +846,28 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
-    End Sub                      
-                          
+    End Sub
+
     Private Sub ucrDataView_Resize(sender As Object, e As EventArgs) Handles TblPanPageDisplay.Resize
         ResizeLabels()
+    End Sub
+
+    Private Sub DeleteCell_Click()
+        Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." &
+                                Environment.NewLine & "Continue?",
+                                MessageBoxButtons.YesNo, "Delete Cells")
+        If deleteCell = DialogResult.Yes Then
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
+            EndWait()
+        End If
+    End Sub
+
+    Private Sub mnuDeleteCells_Click(sender As Object, e As EventArgs) Handles mnuDeleteCells.Click
+        DeleteCell_Click()
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, mnuHelp1.Click, mnuHelp2.Click, mnuHelp3.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "146")
     End Sub
 End Class

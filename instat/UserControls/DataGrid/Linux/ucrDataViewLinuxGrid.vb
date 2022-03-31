@@ -27,6 +27,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event PasteValuesToDataframe() Implements IDataViewGrid.PasteValuesToDataframe
 
+    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -46,7 +48,7 @@ Public Class ucrDataViewLinuxGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
 
-        If dataFrame.clsFilter.bFilterApplied Then
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.Red
         Else
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.DarkBlue
@@ -112,6 +114,9 @@ Public Class ucrDataViewLinuxGrid
         If ctrlV Or shiftIns Then
             RaiseEvent PasteValuesToDataframe()
         End If
+        If e.KeyCode = Keys.Delete OrElse e.KeyCode = Keys.Back Then
+            RaiseEvent DeleteValueToDataframe()
+        End If
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -141,5 +146,4 @@ Public Class ucrDataViewLinuxGrid
     Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
         RaiseEvent WorksheetChanged()
     End Sub
-
 End Class
