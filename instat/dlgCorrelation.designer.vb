@@ -59,10 +59,10 @@ Partial Class dlgCorrelation
         Me.lblDisplayNas = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShave = New instat.ucrCheck()
         Me.ucrChkAbsolute = New instat.ucrCheck()
         Me.ucrInputRearrange = New instat.ucrInputComboBox()
         Me.ucrChkRearrange = New instat.ucrCheck()
-        Me.ucrChkShave = New instat.ucrCheck()
         Me.ucrInputDisplayNas = New instat.ucrInputComboBox()
         Me.ucrChkLeadingZeros = New instat.ucrCheck()
         Me.ucrNudDecimalPlaces = New instat.ucrNud()
@@ -88,10 +88,10 @@ Partial Class dlgCorrelation
         Me.lblFirstColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFirstColumn.Location = New System.Drawing.Point(263, 73)
         Me.lblFirstColumn.Name = "lblFirstColumn"
-        Me.lblFirstColumn.Size = New System.Drawing.Size(67, 13)
+        Me.lblFirstColumn.Size = New System.Drawing.Size(70, 13)
         Me.lblFirstColumn.TabIndex = 5
         Me.lblFirstColumn.Tag = "First_column"
-        Me.lblFirstColumn.Text = "First Column:"
+        Me.lblFirstColumn.Text = "First Variable:"
         '
         'lblSecondColumn
         '
@@ -99,10 +99,10 @@ Partial Class dlgCorrelation
         Me.lblSecondColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSecondColumn.Location = New System.Drawing.Point(258, 127)
         Me.lblSecondColumn.Name = "lblSecondColumn"
-        Me.lblSecondColumn.Size = New System.Drawing.Size(85, 13)
+        Me.lblSecondColumn.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondColumn.TabIndex = 8
         Me.lblSecondColumn.Tag = "Second_column"
-        Me.lblSecondColumn.Text = "Second Column:"
+        Me.lblSecondColumn.Text = "Second Variable:"
         '
         'grpMethod
         '
@@ -328,6 +328,15 @@ Partial Class dlgCorrelation
         Me.grpDisplayOptions.Tag = "Display Options"
         Me.grpDisplayOptions.Text = "Display Options"
         '
+        'ucrChkShave
+        '
+        Me.ucrChkShave.AutoSize = True
+        Me.ucrChkShave.Checked = False
+        Me.ucrChkShave.Location = New System.Drawing.Point(8, 127)
+        Me.ucrChkShave.Name = "ucrChkShave"
+        Me.ucrChkShave.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkShave.TabIndex = 26
+        '
         'ucrChkAbsolute
         '
         Me.ucrChkAbsolute.AutoSize = True
@@ -356,15 +365,6 @@ Partial Class dlgCorrelation
         Me.ucrChkRearrange.Name = "ucrChkRearrange"
         Me.ucrChkRearrange.Size = New System.Drawing.Size(96, 23)
         Me.ucrChkRearrange.TabIndex = 28
-        '
-        'ucrChkShave
-        '
-        Me.ucrChkShave.AutoSize = True
-        Me.ucrChkShave.Checked = False
-        Me.ucrChkShave.Location = New System.Drawing.Point(8, 127)
-        Me.ucrChkShave.Name = "ucrChkShave"
-        Me.ucrChkShave.Size = New System.Drawing.Size(192, 23)
-        Me.ucrChkShave.TabIndex = 26
         '
         'ucrInputDisplayNas
         '
@@ -534,18 +534,12 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrChkLeadingZeros)
         Me.Controls.Add(Me.lblDecimalPlaces)
         Me.Controls.Add(Me.ucrNudDecimalPlaces)
-        Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.rdoTwoColumns)
         Me.Controls.Add(Me.rdoMultipleColumns)
         Me.Controls.Add(Me.ucrPnlColumns)
         Me.Controls.Add(Me.grpMethod)
-        Me.Controls.Add(Me.ucrReceiverMultipleColumns)
         Me.Controls.Add(Me.grpMissing)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblSecondColumn)
-        Me.Controls.Add(Me.lblFirstColumn)
-        Me.Controls.Add(Me.ucrReceiverSecondColumn)
-        Me.Controls.Add(Me.ucrReceiverFirstColumn)
         Me.Controls.Add(Me.ucrSelectorCorrelation)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpDisplayOptions)
@@ -555,6 +549,12 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.lblDisplayOnDiagonal)
         Me.Controls.Add(Me.lblConfInterval)
+        Me.Controls.Add(Me.ucrReceiverMultipleColumns)
+        Me.Controls.Add(Me.ucrReceiverSecondColumn)
+        Me.Controls.Add(Me.lblSecondColumn)
+        Me.Controls.Add(Me.lblSelectedVariables)
+        Me.Controls.Add(Me.ucrReceiverFirstColumn)
+        Me.Controls.Add(Me.lblFirstColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

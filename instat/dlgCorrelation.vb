@@ -50,7 +50,6 @@ Public Class dlgCorrelation
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 421
-        ucrBase.clsRsyntax.iCallType = 2
 
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
@@ -243,7 +242,6 @@ Public Class dlgCorrelation
         clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsCurrentDataFrameFunction, iPosition:=0)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
-        clsCorrelationTestFunction.iCallType = 2
         clsCorrelationTestFunction.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
@@ -252,7 +250,6 @@ Public Class dlgCorrelation
         clsCorrelationFunction.SetPackageName("corrr")
         clsCorrelationFunction.SetRCommand("correlate ")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
-        clsCorrelationFunction.iCallType = 2
 
         clsRearrangeFunction.SetPackageName("corrr")
         clsRearrangeFunction.SetRCommand("rearrange")
@@ -266,7 +263,6 @@ Public Class dlgCorrelation
         clsFashionFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionFunction.AddParameter("na_print", Chr(34) & " " & Chr(34), iPosition:=3)
-        clsFashionFunction.iCallType = 2
 
         clsShaveFunction.SetPackageName("corrr")
         clsShaveFunction.SetRCommand("shave")
@@ -374,6 +370,7 @@ Public Class dlgCorrelation
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
             grpDisplayOptions.Hide()
+            ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
                 If ucrChkShave.Checked Then
@@ -399,6 +396,7 @@ Public Class dlgCorrelation
                 ucrReceiverMultipleColumns.SetMeAsReceiver()
                 grpDisplayOptions.Hide()
             End If
+            ucrBase.clsRsyntax.iCallType = 0
         End If
         ReceiverColumns()
     End Sub
