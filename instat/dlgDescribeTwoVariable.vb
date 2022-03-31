@@ -84,6 +84,15 @@ Public Class dlgDescribeTwoVariable
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
+        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 5))
+        ucrChkDisplayMargins.SetText("Display Outer Margins")
+        ucrChkDisplayMargins.SetRDefault("FALSE")
+
+        ucrChkDisplayMargins.AddToLinkedControls({ucrInputMarginName}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, bNewLinkedUpdateFunction:=True, objNewDefaultState:="All")
+
+        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=6))
+        ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
+
         ucrPnlDescribe.AddRadioButton(rdoCustomize)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
@@ -213,8 +222,8 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondOpt.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverSecondFactor.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverNumericVariable.SetRCode(clsFrequencyTables, bReset)
+        ucrChkDisplayMargins.SetRCode(clsFrequencyTables, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
-
         Results()
     End Sub
 

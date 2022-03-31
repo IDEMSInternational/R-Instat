@@ -42,7 +42,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblBy = New System.Windows.Forms.Label()
@@ -53,15 +52,19 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.lbSecondOpt = New System.Windows.Forms.Label()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.lblNumericVariable = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.ucrReceiverNumericVariable = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrReceiverSecondOpt = New instat.ucrReceiverSingle()
         Me.ucrPnlDescribe = New instat.UcrPanel()
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverNumericVariable = New instat.ucrReceiverSingle()
-        Me.lblNumericVariable = New System.Windows.Forms.Label()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.lblMarginName = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -102,21 +105,12 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
-        Me.grpOptions.Location = New System.Drawing.Point(252, 281)
+        Me.grpOptions.Location = New System.Drawing.Point(252, 326)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(155, 76)
         Me.grpOptions.TabIndex = 12
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.AutoSize = True
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 19)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkOmitMissing.TabIndex = 0
         '
         'lblSummary
         '
@@ -173,7 +167,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Controls.Add(Me.lblSummary)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
-        Me.grpSummaries.Location = New System.Drawing.Point(10, 287)
+        Me.grpSummaries.Location = New System.Drawing.Point(10, 329)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 11
@@ -231,6 +225,38 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSecondFactor.Tag = ""
         Me.lblSecondFactor.Text = "Second Factor (Optional) :"
         '
+        'lblNumericVariable
+        '
+        Me.lblNumericVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNumericVariable.Location = New System.Drawing.Point(269, 222)
+        Me.lblNumericVariable.Name = "lblNumericVariable"
+        Me.lblNumericVariable.Size = New System.Drawing.Size(154, 15)
+        Me.lblNumericVariable.TabIndex = 10
+        Me.lblNumericVariable.Tag = ""
+        Me.lblNumericVariable.Text = "Numeric Variable (Optional):)"
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 240)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(129, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 17
+        '
+        'ucrReceiverNumericVariable
+        '
+        Me.ucrReceiverNumericVariable.AutoSize = True
+        Me.ucrReceiverNumericVariable.frmParent = Me
+        Me.ucrReceiverNumericVariable.Location = New System.Drawing.Point(272, 240)
+        Me.ucrReceiverNumericVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverNumericVariable.Name = "ucrReceiverNumericVariable"
+        Me.ucrReceiverNumericVariable.Selector = Nothing
+        Me.ucrReceiverNumericVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNumericVariable.strNcFilePath = ""
+        Me.ucrReceiverNumericVariable.TabIndex = 11
+        Me.ucrReceiverNumericVariable.ucrSelector = Nothing
+        '
         'ucrReceiverSecondFactor
         '
         Me.ucrReceiverSecondFactor.AutoSize = True
@@ -243,6 +269,15 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondFactor.strNcFilePath = ""
         Me.ucrReceiverSecondFactor.TabIndex = 9
         Me.ucrReceiverSecondFactor.ucrSelector = Nothing
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.AutoSize = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 19)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkOmitMissing.TabIndex = 0
         '
         'ucrReceiverSecondOpt
         '
@@ -307,40 +342,41 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 408)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 13
         '
-        'ucrReceiverNumericVariable
+        'ucrInputMarginName
         '
-        Me.ucrReceiverNumericVariable.AutoSize = True
-        Me.ucrReceiverNumericVariable.frmParent = Me
-        Me.ucrReceiverNumericVariable.Location = New System.Drawing.Point(272, 240)
-        Me.ucrReceiverNumericVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverNumericVariable.Name = "ucrReceiverNumericVariable"
-        Me.ucrReceiverNumericVariable.Selector = Nothing
-        Me.ucrReceiverNumericVariable.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNumericVariable.strNcFilePath = ""
-        Me.ucrReceiverNumericVariable.TabIndex = 11
-        Me.ucrReceiverNumericVariable.ucrSelector = Nothing
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(192, 239)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputMarginName.TabIndex = 20
         '
-        'lblNumericVariable
+        'lblMarginName
         '
-        Me.lblNumericVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumericVariable.Location = New System.Drawing.Point(269, 222)
-        Me.lblNumericVariable.Name = "lblNumericVariable"
-        Me.lblNumericVariable.Size = New System.Drawing.Size(154, 15)
-        Me.lblNumericVariable.TabIndex = 10
-        Me.lblNumericVariable.Tag = ""
-        Me.lblNumericVariable.Text = "Numeric Variable (Optional):)"
+        Me.lblMarginName.AutoSize = True
+        Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMarginName.Location = New System.Drawing.Point(145, 242)
+        Me.lblMarginName.Name = "lblMarginName"
+        Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
+        Me.lblMarginName.TabIndex = 19
+        Me.lblMarginName.Text = "Name :"
         '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 421)
+        Me.ClientSize = New System.Drawing.Size(419, 465)
+        Me.Controls.Add(Me.ucrInputMarginName)
+        Me.Controls.Add(Me.lblMarginName)
+        Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.lblNumericVariable)
         Me.Controls.Add(Me.ucrReceiverNumericVariable)
         Me.Controls.Add(Me.lblSecondFactor)
@@ -398,4 +434,7 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrReceiverSecondFactor As ucrReceiverSingle
     Friend WithEvents lblNumericVariable As Label
     Friend WithEvents ucrReceiverNumericVariable As ucrReceiverSingle
+    Friend WithEvents ucrChkDisplayMargins As ucrCheck
+    Friend WithEvents ucrInputMarginName As ucrInputTextBox
+    Friend WithEvents lblMarginName As Label
 End Class
