@@ -87,9 +87,10 @@ Public Class dlgRowNamesOrNumbers
         ucrChkAsNumeric.SetRDefault("TRUE")
 
         'ucrChkMakeColumnIntoKey
-        ucrChkMakeColumnIntoKey.SetText("Make the Column into a Key for the data Frame")
+        ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
         ucrChkMakeColumnIntoKey.SetParameter(New RParameter("check", 0))
         ucrChkMakeColumnIntoKey.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMakeColumnIntoKey.SetRDefault("TRUE")
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
@@ -97,7 +98,6 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
-        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -114,7 +114,7 @@ Public Class dlgRowNamesOrNumbers
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
 
         clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
+        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
     End Sub
 
@@ -142,6 +142,7 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged, ucrChkMakeColumnIntoKey.ControlValueChanged, ucrNewColumnName.ControlValueChanged
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
         If rdoSetRowNamesFromColumn.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
             clsDummyFunction.AddParameter("checked_rdo", "set_row", iPosition:=1)
