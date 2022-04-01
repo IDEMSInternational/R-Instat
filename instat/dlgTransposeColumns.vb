@@ -132,4 +132,14 @@ Public Class dlgTransposeColumns
         ucrInputDisplayVariableNames.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrReceiverVariableNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariableNames.ControlValueChanged
+        If Not ucrReceiverColumnsToTranspose.IsEmpty Then
+            ucrSelectorTransposeColumns.lstAvailableVariable.Clear()
+            ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Clear()
+            ucrSelectorTransposeColumns.lstAvailableVariable.Columns.Add("Variables")
+        Else
+
+        End If
+    End Sub
 End Class
