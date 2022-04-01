@@ -117,7 +117,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
-        Me.grpOptions.Location = New System.Drawing.Point(256, 267)
+        Me.grpOptions.Location = New System.Drawing.Point(256, 250)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(155, 76)
         Me.grpOptions.TabIndex = 12
@@ -179,7 +179,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Controls.Add(Me.lblSummary)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
-        Me.grpSummaries.Location = New System.Drawing.Point(10, 266)
+        Me.grpSummaries.Location = New System.Drawing.Point(10, 227)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 11
@@ -251,7 +251,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblMarginName.AutoSize = True
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(143, 242)
+        Me.lblMarginName.Location = New System.Drawing.Point(295, 338)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
         Me.lblMarginName.TabIndex = 19
@@ -263,9 +263,9 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplay.Controls.Add(Me.ucrReceiverMultiplePercentages)
         Me.grpDisplay.Controls.Add(Me.ucrChkPercentageProportion)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
-        Me.grpDisplay.Location = New System.Drawing.Point(7, 346)
+        Me.grpDisplay.Location = New System.Drawing.Point(7, 307)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(174, 144)
+        Me.grpDisplay.Size = New System.Drawing.Size(174, 147)
         Me.grpDisplay.TabIndex = 21
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Percentages"
@@ -287,7 +287,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpFrequency.Controls.Add(Me.lblColumnFactors)
         Me.grpFrequency.Controls.Add(Me.ucrNudSigFigs)
         Me.grpFrequency.Controls.Add(Me.lblSigFigs)
-        Me.grpFrequency.Location = New System.Drawing.Point(229, 267)
+        Me.grpFrequency.Location = New System.Drawing.Point(229, 250)
         Me.grpFrequency.Name = "grpFrequency"
         Me.grpFrequency.Size = New System.Drawing.Size(186, 79)
         Me.grpFrequency.TabIndex = 22
@@ -379,7 +379,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(185, 239)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(337, 335)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
         Me.ucrInputMarginName.TabIndex = 20
@@ -388,9 +388,9 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkDisplayMargins.AutoSize = True
         Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(12, 239)
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(194, 336)
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(129, 23)
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(95, 23)
         Me.ucrChkDisplayMargins.TabIndex = 17
         '
         'ucrReceiverNumericVariable
@@ -491,7 +491,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 499)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 458)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 13
@@ -501,7 +501,8 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 558)
+        Me.ClientSize = New System.Drawing.Size(419, 520)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpFrequency)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -522,7 +523,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrReceiverSecondVar)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
