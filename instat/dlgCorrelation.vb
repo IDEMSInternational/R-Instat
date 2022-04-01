@@ -100,11 +100,11 @@ Public Class dlgCorrelation
         ucrInputDisplayNas.SetItems(dctNaPrint)
         ucrInputDisplayNas.AddQuotesIfUnrecognised = False
 
-        ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
-        dctDiagonal.Add("NA", "NA")
-        dctDiagonal.Add("1", "1")
-        ucrInputDiagonal.SetItems(dctDiagonal)
-        ucrInputDiagonal.AddQuotesIfUnrecognised = False
+        'ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
+        'dctDiagonal.Add("NA", "NA")
+        'dctDiagonal.Add("1", "1")
+        'ucrInputDiagonal.SetItems(dctDiagonal)
+        'ucrInputDiagonal.AddQuotesIfUnrecognised = False
 
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
@@ -154,12 +154,12 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls({ucrReceiverMultipleColumns}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleColumns.SetLinkedDisplayControl(lblSelectedVariables)
         ucrNudConfidenceInterval.SetLinkedDisplayControl(lblConfInterval)
-        ucrInputDiagonal.SetLinkedDisplayControl(lblDisplayOnDiagonal)
+        'ucrInputDiagonal.SetLinkedDisplayControl(lblDisplayOnDiagonal)
         ucrInputDisplayNas.SetLinkedDisplayControl(lblDisplayNas)
         ucrInputRearrange.SetLinkedDisplayControl(lblMethod)
         ucrNudDecimalPlaces.SetLinkedDisplayControl(lblDecimalPlaces)
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
-        ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        'ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls(ucrSaveDataFrame, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrChkDisplayOptions}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
@@ -290,7 +290,7 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
-        ucrInputDiagonal.SetRCode(clsCorrelationFunction, bReset)
+        'ucrInputDiagonal.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
@@ -407,7 +407,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged,
         ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrSaveDataFrame.ControlContentsChanged,
-        ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged, ucrInputDiagonal.ControlContentsChanged
+        ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
