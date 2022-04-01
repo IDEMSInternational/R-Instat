@@ -103,7 +103,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetItems({"R (1970/01/01)", "Excel (1899/12/30)", "Gregorian (1600/03/01)", "Julian Day Number (-4713/11/24)", "Specify"})
+        ucrInputOrigin.SetItems({"Excel (1899/12/30)", "R (1970/01/01)", "Gregorian (1600/03/01)", "Julian Day Number (-4713/11/24)", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
         ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -138,7 +138,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoOrigin)
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel(1899/12/30)")
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel (1899/12/30)")
 
         ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
 
@@ -152,10 +152,11 @@ Public Class dlgMakeDate
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrSaveDate.SetLabelText("Save Date:")
         ucrSaveDate.SetIsComboBox()
+        ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
         ucrChkTwoDigitYear.SetText("2-digit years")
-        ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
 
         'rdoSingle
@@ -489,6 +490,10 @@ Public Class dlgMakeDate
         ElseIf rdoTwoColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearDay)
             ucrReceiverYearTwo.SetMeAsReceiver()
+            ucrReceiverYearTwo.SetIncludedDataTypes({"numeric"})
+            ucrReceiverDayTwo.SetIncludedDataTypes({"numeric"})
+            ucrReceiverYearTwo.strSelectorHeading = "Numerics"
+            ucrReceiverDayTwo.strSelectorHeading = "Numerics"
             grpSingleColumn.Hide()
             grpTwoColumns.Show()
             grpThreeColumns.Hide()
