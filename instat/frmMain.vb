@@ -1580,7 +1580,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
-        dlgDuplicates.ShowDialog()
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
@@ -1835,7 +1835,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOptionsByContextsCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataDuplicateRows.Click
-        dlgDuplicates.ShowDialog()
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuOptionsByContextsCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataCompareColumns.Click
@@ -1998,7 +1998,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
-        dlgDuplicates.ShowDialog()
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumExeedenceGraph.Click
