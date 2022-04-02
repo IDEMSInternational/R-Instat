@@ -50,7 +50,7 @@ Public Class dlgCorrelation
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 421
-        ucrBase.clsRsyntax.iCallType = 2
+        'ucrBase.clsRsyntax.iCallType = 2
 
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
@@ -149,6 +149,8 @@ Public Class dlgCorrelation
         ucrChkAbsolute.SetParameter(New RParameter("absolute", 2))
         ucrChkAbsolute.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrChkDisplay.SetText("Display")
+
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrSaveModel, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFirstColumn.SetLinkedDisplayControl(lblFirstColumn)
         ucrReceiverSecondColumn.SetLinkedDisplayControl(lblSecondColumn)
@@ -179,7 +181,7 @@ Public Class dlgCorrelation
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Result Name")
         ucrSaveDataFrame.SetIsComboBox()
-        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
+        ' ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
     End Sub
 
     Private Sub SetDefaults()
@@ -279,11 +281,12 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsFashionFunction.SetAssignTo("last_fashion", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_fashion")
-        clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
+        'clsFashionFunction.SetAssignTo("last_fashion", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_fashion")
+        'clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.ClearCodes()
+
+        'ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
     End Sub
 
@@ -373,7 +376,7 @@ Public Class dlgCorrelation
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
             grpDisplayOptions.Hide()
-            ucrBase.clsRsyntax.iCallType = 2
+            'ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
                 If ucrChkShave.Checked Then
@@ -388,18 +391,18 @@ Public Class dlgCorrelation
                     clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsRearrangeFunction, iPosition:=0)
                     clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
                 Else
-                    clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+                    clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
                 End If
                 clsCorrelationFunction.RemoveAssignTo()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
                 grpDisplayOptions.Show()
             Else
-                clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
+                'clsCorrelationFunction.SetAssignTo(ucrSaveDataFrame.GetText, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:=ucrSaveDataFrame.GetText)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
                 ucrReceiverMultipleColumns.SetMeAsReceiver()
                 grpDisplayOptions.Hide()
             End If
-            ucrBase.clsRsyntax.iCallType = 0
+            'ucrBase.clsRsyntax.iCallType = 0
         End If
         ReceiverColumns()
     End Sub
@@ -427,6 +430,18 @@ Public Class dlgCorrelation
         ElseIf rdoMultipleColumns.Checked Then
             clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
             clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrChkDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
+        If ucrSaveDataFrame.ucrChkSave.Checked Then
+            clsFashionFunction.SetAssignTo(ucrSaveDataFrame.GetText, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:=ucrSaveDataFrame.GetText)
+            clsCorrelationFunction.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 0
+            'clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
+        Else
+            ucrBase.clsRsyntax.iCallType = 2
+            clsFashionFunction.RemoveAssignTo()
         End If
     End Sub
 End Class
