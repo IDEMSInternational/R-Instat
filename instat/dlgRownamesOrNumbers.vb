@@ -22,7 +22,6 @@ Public Class dlgRowNamesOrNumbers
     Private clsRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private ResetRCode As Boolean = True
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
