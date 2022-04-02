@@ -55,6 +55,7 @@ Partial Class frmMain
         Me.mnuDescribeTwoThreeVariablesCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeTwoThreeVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
@@ -441,6 +442,7 @@ Partial Class frmMain
         Me.mnuPrepareDataFrameConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareDataFrameReorderColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataFrameAddMergeColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameInsertColumnsRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameDeleteColumnsRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataFrameProtectColumn = New System.Windows.Forms.ToolStripMenuItem()
@@ -532,7 +534,7 @@ Partial Class frmMain
         Me.mnuPrepareKeysAndLinksAddLink = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksViewAndRemoveKeys = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksAddComment = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareDataObject = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataBook = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataObjectDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataObjectRenameDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataObjectReorderDataFrames = New System.Windows.Forms.ToolStripMenuItem()
@@ -674,8 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareDataFrameAddMergeColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -805,6 +805,11 @@ Partial Class frmMain
         Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Name = "mnuDescribeTwoThreeVariablesThreeWayFrequencies"
         Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Size = New System.Drawing.Size(206, 22)
         Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies.Text = "Three-Way Frequencies..."
+        '
+        'ToolStripSeparator36
+        '
+        Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(203, 6)
         '
         'mnuDescribeTwoThreeVariablesPivotTable
         '
@@ -3371,7 +3376,7 @@ Partial Class frmMain
         '
         'mnuPrepare
         '
-        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareCalculator, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.ToolStripSeparator4, Me.mnuPrepareDataReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareCalculator, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.ToolStripSeparator4, Me.mnuPrepareDataReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataBook, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
         Me.mnuPrepare.Size = New System.Drawing.Size(59, 20)
         Me.mnuPrepare.Tag = "Prepare"
@@ -3462,6 +3467,12 @@ Partial Class frmMain
         Me.mnuPrepareDataFrameReorderColumns.Size = New System.Drawing.Size(201, 22)
         Me.mnuPrepareDataFrameReorderColumns.Tag = "Reorder_Columns..."
         Me.mnuPrepareDataFrameReorderColumns.Text = "Reorder Columns..."
+        '
+        'mnuPrepareDataFrameAddMergeColumns
+        '
+        Me.mnuPrepareDataFrameAddMergeColumns.Name = "mnuPrepareDataFrameAddMergeColumns"
+        Me.mnuPrepareDataFrameAddMergeColumns.Size = New System.Drawing.Size(201, 22)
+        Me.mnuPrepareDataFrameAddMergeColumns.Text = "Add (Merge) Columns..."
         '
         'mnuPrepareDataFrameInsertColumnsRows
         '
@@ -4058,13 +4069,13 @@ Partial Class frmMain
         Me.mnuPrepareKeysAndLinksAddComment.Size = New System.Drawing.Size(207, 22)
         Me.mnuPrepareKeysAndLinksAddComment.Text = "Add Comment..."
         '
-        'mnuPrepareDataObject
+        'mnuPrepareDataBook
         '
-        Me.mnuPrepareDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataObjectDataFrameMetadata, Me.mnuPrepareDataObjectRenameDataFrame, Me.mnuPrepareDataObjectReorderDataFrames, Me.mnuPrepareDataObjectCopyDataFrame, Me.mnuPrepareDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuPrepareDataObjectHideDataframes, Me.mnuPrepareDataObjectMetadata, Me.mnuPrepareDataObjectRenameMetadata, Me.mnuPrepareDataObjectReorderMetadata, Me.mnuPrepareDataObjectDeleteMetadata})
-        Me.mnuPrepareDataObject.Name = "mnuPrepareDataObject"
-        Me.mnuPrepareDataObject.Size = New System.Drawing.Size(186, 22)
-        Me.mnuPrepareDataObject.Tag = "Data_Object"
-        Me.mnuPrepareDataObject.Text = "Data Object"
+        Me.mnuPrepareDataBook.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataObjectDataFrameMetadata, Me.mnuPrepareDataObjectRenameDataFrame, Me.mnuPrepareDataObjectReorderDataFrames, Me.mnuPrepareDataObjectCopyDataFrame, Me.mnuPrepareDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuPrepareDataObjectHideDataframes, Me.mnuPrepareDataObjectMetadata, Me.mnuPrepareDataObjectRenameMetadata, Me.mnuPrepareDataObjectReorderMetadata, Me.mnuPrepareDataObjectDeleteMetadata})
+        Me.mnuPrepareDataBook.Name = "mnuPrepareDataBook"
+        Me.mnuPrepareDataBook.Size = New System.Drawing.Size(186, 22)
+        Me.mnuPrepareDataBook.Tag = "Data_Object"
+        Me.mnuPrepareDataBook.Text = "Data Book"
         '
         'mnuPrepareDataObjectDataFrameMetadata
         '
@@ -5071,17 +5082,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'ToolStripSeparator36
-        '
-        Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
-        Me.ToolStripSeparator36.Size = New System.Drawing.Size(203, 6)
-        '
-        'mnuPrepareDataFrameAddMergeColumns
-        '
-        Me.mnuPrepareDataFrameAddMergeColumns.Name = "mnuPrepareDataFrameAddMergeColumns"
-        Me.mnuPrepareDataFrameAddMergeColumns.Size = New System.Drawing.Size(201, 22)
-        Me.mnuPrepareDataFrameAddMergeColumns.Text = "Add (Merge) Columns..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5200,7 +5200,7 @@ Partial Class frmMain
     Friend WithEvents mnuViewDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewLog As ToolStripMenuItem
     Friend WithEvents mnuViewScriptWindow As ToolStripMenuItem
-    Friend WithEvents mnuPrepareDataObject As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataBook As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDeleteDataFrame As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectRenameDataFrame As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectReorderDataFrames As ToolStripMenuItem
