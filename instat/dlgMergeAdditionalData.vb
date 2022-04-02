@@ -21,14 +21,13 @@ Public Class dlgMergeAdditionalData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsInsertColumnFunction, clsGetColumnsFromData As New RFunction
-    Private lstVariables As New List(Of String)
     Private lstJoinColumns As New List(Of String)
     Private clsLeftJoinFunction As New RFunction
     Private clsByListFunction As New RFunction
     Private clsGetVariablesFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bBySpecified As Boolean
-    Private bUniqueChecked As Boolean = False
+    Private bJoinColsAreUnique As Boolean = False
 
     Private Sub dlgMergeAdditionalData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -101,7 +100,7 @@ Public Class dlgMergeAdditionalData
 
     Private Sub TestOkEnabled()
         If ucrToDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso
-                  Not ucrReceiverSecond.IsEmpty() AndAlso bBySpecified AndAlso bUniqueChecked Then
+                  Not ucrReceiverSecond.IsEmpty() AndAlso bBySpecified AndAlso bJoinColsAreUnique Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -135,7 +134,7 @@ Public Class dlgMergeAdditionalData
                     clsLeftJoinFunction.SetAssignTo(ucrInputSaveDataFrame.GetText, strTempDataframe:=ucrInputSaveDataFrame.GetText)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoinFunction)
                     ucrInputSaveDataFrame.Visible = True
-                    bUniqueChecked = True
+                    bJoinColsAreUnique = True
                 Else
                     clsLeftJoinFunction.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text)
                     clsInsertColumnFunction.AddParameter("data_name", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
@@ -153,10 +152,6 @@ Public Class dlgMergeAdditionalData
 
     Private Sub SetMergingBy()
         Dim dctJoinColumns As New Dictionary(Of String, String)
-        Dim lstJoinPairs As New List(Of String)
-        Dim lstFirstColumns As List(Of String)
-        Dim lstSecondColumns As List(Of String)
-
         lstJoinColumns.Clear()
         If ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
             If clsLeftJoinFunction.ContainsParameter("by") Then
@@ -164,6 +159,8 @@ Public Class dlgMergeAdditionalData
                     dctJoinColumns.Add(clsTempParam.strArgumentName.Trim(Chr(34)), clsTempParam.strArgumentValue.Trim(Chr(34)))
                 Next
             Else
+                Dim lstFirstColumns As List(Of String)
+                Dim lstSecondColumns As List(Of String)
                 lstFirstColumns = frmMain.clsRLink.GetColumnNames(ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 lstSecondColumns = frmMain.clsRLink.GetColumnNames(ucrToDataFrame.cboAvailableDataFrames.Text)
                 Dim i As Integer = 0
@@ -179,6 +176,7 @@ Public Class dlgMergeAdditionalData
                 End If
             End If
             If dctJoinColumns.Count > 0 Then
+                Dim lstJoinPairs As New List(Of String)
                 For Each kvpTemp As KeyValuePair(Of String, String) In dctJoinColumns
                     lstJoinPairs.Add(kvpTemp.Key & " = " & kvpTemp.Value)
                     lstJoinColumns.Add(kvpTemp.Value)
@@ -216,10 +214,10 @@ Public Class dlgMergeAdditionalData
             Catch ex As Exception
                 iAnyDuplicated = -1
             End Try
-            bUniqueChecked = True
-            If iAnyDuplicated > 0 Then
+            bJoinColsAreUnique = True
+            If iAnyDuplicated > 0 AndAlso Not ucrChkSaveDataFrame.Checked Then
                 MsgBox("Join column(s) is/are not unique. Check new dataframe to create a new dataframe.", MsgBoxStyle.Information)
-                bUniqueChecked = False
+                bJoinColsAreUnique = False
             ElseIf iAnyDuplicated = -1 Then
                 MsgBox("Developer error! Could not check uniqueness.")
             End If
@@ -236,6 +234,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub AddColumns()
+        Dim lstVariables As New List(Of String)
         If ucrReceiverSecond.lstSelectedVariables.Items.Count > 0 Then
             lstVariables.Clear()
             lstVariables = ucrReceiverSecond.GetVariableNamesAsList()
@@ -249,6 +248,7 @@ Public Class dlgMergeAdditionalData
 
     Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
         AddColumns()
+        CheckUnique()
     End Sub
 
     Private Sub ucrInputMergingBy_TextChanged(sender As Object, e As EventArgs) Handles ucrInputMergingBy.TextChanged
