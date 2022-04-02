@@ -402,10 +402,6 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFrequency.ShowDialog()
-    End Sub
-
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
         dlgSummaryTables.ShowDialog()
     End Sub

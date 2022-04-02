@@ -56,7 +56,6 @@ Partial Class frmMain
         Me.mnuDescribeTwoVariablesFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeTwoVariablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTablesGraphs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificFrequency = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
@@ -805,18 +804,11 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificTablesGraphs
         '
-        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
+        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
         Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
         Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(192, 22)
         Me.mnuDescribeSpecificTablesGraphs.Tag = "Table_Dialogs"
         Me.mnuDescribeSpecificTablesGraphs.Text = "Specific Tables/Graphs"
-        '
-        'mnuDescribeSpecificFrequency
-        '
-        Me.mnuDescribeSpecificFrequency.Name = "mnuDescribeSpecificFrequency"
-        Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(299, 22)
-        Me.mnuDescribeSpecificFrequency.Tag = "Frequency..."
-        Me.mnuDescribeSpecificFrequency.Text = "Frequency Tables..."
         '
         'mnuDescribeSpecificSummary
         '
@@ -5260,7 +5252,6 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeGeneralTabulation As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralGraphics As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificTablesGraphs As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificFrequency As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMultipleResponse As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributions As ToolStripMenuItem
