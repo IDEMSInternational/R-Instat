@@ -156,7 +156,6 @@ Public Class dlgMergeAdditionalData
         Dim lstJoinPairs As New List(Of String)
         Dim lstFirstColumns As List(Of String)
         Dim lstSecondColumns As List(Of String)
-        Dim i As Integer = 0
 
         lstJoinColumns.Clear()
         If ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
