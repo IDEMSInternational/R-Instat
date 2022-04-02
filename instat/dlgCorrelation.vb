@@ -50,6 +50,7 @@ Public Class dlgCorrelation
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 421
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
@@ -246,10 +247,12 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+        clsCorrelationTestFunction.iCallType = 2
 
         clsCorrelationFunction.SetPackageName("corrr")
         clsCorrelationFunction.SetRCommand("correlate ")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
+        clsCorrelationFunction.iCallType = 2
 
         clsRearrangeFunction.SetPackageName("corrr")
         clsRearrangeFunction.SetRCommand("rearrange")
