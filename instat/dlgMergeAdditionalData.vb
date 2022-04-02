@@ -167,7 +167,7 @@ Public Class dlgMergeAdditionalData
             Else
                 lstFirstColumns = frmMain.clsRLink.GetColumnNames(ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 lstSecondColumns = frmMain.clsRLink.GetColumnNames(ucrToDataFrame.cboAvailableDataFrames.Text)
-                i = 0
+                Dim i As Integer = 0
                 For Each strFirst As String In lstFirstColumns
                     If lstSecondColumns.Contains(strFirst) Then
                         dctJoinColumns.Add(strFirst, strFirst)
