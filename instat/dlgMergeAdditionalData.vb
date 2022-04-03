@@ -50,6 +50,8 @@ Public Class dlgMergeAdditionalData
         ucrToDataFrame.SetLabelText("To Data Frame:")
 
         ucrFromDataFrame.SetLabelText("From Data Frame:")
+        ucrFromDataFrame.SetParameter(New RParameter("data_name", 0))
+        ucrFromDataFrame.SetParameterIsString()
 
         ucrReceiverSecond.Selector = ucrFromDataFrame
         ucrReceiverSecond.bForceAsDataFrame = True
@@ -97,6 +99,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub SetRCodeforControls(bResetControls As Boolean)
+        ucrFromDataFrame.SetRCode(clsGetVariablesFunction, bResetControls)
         ucrToDataFrame.SetRCode(clsLeftJoinFunction, bResetControls)
         ucrChkSaveDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
@@ -122,7 +125,7 @@ Public Class dlgMergeAdditionalData
         clsByListFunction.ClearParameters()
         SetDataFrameAssign()
         SetMergingBy()
-        clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrFromDataFrame.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        SetInputCheckVisibility(False)
     End Sub
 
     Private Sub ucrChkSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSaveDataFrame.ControlValueChanged, ucrInputSaveDataFrame.ControlValueChanged
@@ -138,12 +141,15 @@ Public Class dlgMergeAdditionalData
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoinFunction)
                     ucrInputSaveDataFrame.Visible = True
                     bJoinColsAreUnique = True
+                    cmdCheckUnique.Visible = False
+                    SetInputCheckVisibility(False)
                 Else
                     clsLeftJoinFunction.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text)
                     clsInsertColumnFunction.AddParameter("data_name", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
                     clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
                     ucrInputSaveDataFrame.Visible = False
+                    cmdCheckUnique.Visible = True
                 End If
             Else
                 clsLeftJoinFunction.RemoveAssignTo()
@@ -252,7 +258,7 @@ Public Class dlgMergeAdditionalData
                 ucrInputCheckInput.SetName("Entries not unique. Check New Data Frame to create new dataframe.")
                 ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
             Else
-                ucrInputCheckInput.SetName("Column(s) key unique.")
+                ucrInputCheckInput.SetName("Column(s) key unique in From Data Frame.")
                 ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
                 bJoinColsAreUnique = True
             End If
@@ -262,15 +268,23 @@ Public Class dlgMergeAdditionalData
 
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         CheckUnique()
+        SetInputCheckVisibility(True)
+    End Sub
+
+    Private Sub SetInputCheckVisibility(bCheck As Boolean)
+        ucrInputCheckInput.Visible = bCheck
     End Sub
 
     Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
         AddColumns()
         EnableDisableCmdCheckUnique()
+        SetInputCheckVisibility(False)
     End Sub
 
     Private Sub ucrInputMergingBy_TextChanged(sender As Object, e As EventArgs) Handles ucrInputMergingBy.TextChanged
         AddColumns()
+        CheckUnique()
+        SetInputCheckVisibility(False)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
