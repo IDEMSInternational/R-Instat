@@ -22,42 +22,24 @@ Partial Class dlgMergeAdditionalData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
-        Me.ucrChkSaveDataFrame = New instat.ucrCheck()
         Me.lblMergeBy = New System.Windows.Forms.Label()
         Me.cmdModify = New System.Windows.Forms.Button()
+        Me.lblVariablesToIncludeSecond = New System.Windows.Forms.Label()
+        Me.cmdCheckUnique = New System.Windows.Forms.Button()
+        Me.ucrInputCheckInput = New instat.ucrInputTextBox()
+        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
+        Me.ucrChkSaveDataFrame = New instat.ucrCheck()
         Me.ucrInputMergingBy = New instat.ucrInputTextBox()
         Me.ucrToDataFrame = New instat.ucrDataFrame()
-        Me.lblVariablesToIncludeSecond = New System.Windows.Forms.Label()
         Me.ucrReceiverSecond = New instat.ucrReceiverMultiple()
         Me.ucrFromDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrInputSaveDataFrame
-        '
-        Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveDataFrame.AutoSize = True
-        Me.ucrInputSaveDataFrame.IsMultiline = False
-        Me.ucrInputSaveDataFrame.IsReadOnly = False
-        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(157, 254)
-        Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
-        Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSaveDataFrame.TabIndex = 19
-        '
-        'ucrChkSaveDataFrame
-        '
-        Me.ucrChkSaveDataFrame.AutoSize = True
-        Me.ucrChkSaveDataFrame.Checked = False
-        Me.ucrChkSaveDataFrame.Location = New System.Drawing.Point(8, 253)
-        Me.ucrChkSaveDataFrame.Name = "ucrChkSaveDataFrame"
-        Me.ucrChkSaveDataFrame.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkSaveDataFrame.TabIndex = 18
-        '
         'lblMergeBy
         '
         Me.lblMergeBy.AutoSize = True
-        Me.lblMergeBy.Location = New System.Drawing.Point(7, 215)
+        Me.lblMergeBy.Location = New System.Drawing.Point(7, 212)
         Me.lblMergeBy.Name = "lblMergeBy"
         Me.lblMergeBy.Size = New System.Drawing.Size(44, 13)
         Me.lblMergeBy.TabIndex = 14
@@ -66,12 +48,63 @@ Partial Class dlgMergeAdditionalData
         'cmdModify
         '
         Me.cmdModify.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModify.Location = New System.Drawing.Point(328, 210)
+        Me.cmdModify.Location = New System.Drawing.Point(328, 207)
         Me.cmdModify.Name = "cmdModify"
         Me.cmdModify.Size = New System.Drawing.Size(90, 23)
         Me.cmdModify.TabIndex = 16
         Me.cmdModify.Text = "Join Options"
         Me.cmdModify.UseVisualStyleBackColor = True
+        '
+        'lblVariablesToIncludeSecond
+        '
+        Me.lblVariablesToIncludeSecond.AutoSize = True
+        Me.lblVariablesToIncludeSecond.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVariablesToIncludeSecond.Location = New System.Drawing.Point(248, 69)
+        Me.lblVariablesToIncludeSecond.Name = "lblVariablesToIncludeSecond"
+        Me.lblVariablesToIncludeSecond.Size = New System.Drawing.Size(103, 13)
+        Me.lblVariablesToIncludeSecond.TabIndex = 12
+        Me.lblVariablesToIncludeSecond.Text = "Variables to Include:"
+        '
+        'cmdCheckUnique
+        '
+        Me.cmdCheckUnique.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCheckUnique.Location = New System.Drawing.Point(7, 245)
+        Me.cmdCheckUnique.Name = "cmdCheckUnique"
+        Me.cmdCheckUnique.Size = New System.Drawing.Size(98, 23)
+        Me.cmdCheckUnique.TabIndex = 20
+        Me.cmdCheckUnique.Text = "Check Unique"
+        Me.cmdCheckUnique.UseVisualStyleBackColor = True
+        '
+        'ucrInputCheckInput
+        '
+        Me.ucrInputCheckInput.AddQuotesIfUnrecognised = True
+        Me.ucrInputCheckInput.AutoSize = True
+        Me.ucrInputCheckInput.IsMultiline = False
+        Me.ucrInputCheckInput.IsReadOnly = False
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(112, 247)
+        Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
+        Me.ucrInputCheckInput.Size = New System.Drawing.Size(294, 21)
+        Me.ucrInputCheckInput.TabIndex = 21
+        '
+        'ucrInputSaveDataFrame
+        '
+        Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveDataFrame.AutoSize = True
+        Me.ucrInputSaveDataFrame.IsMultiline = False
+        Me.ucrInputSaveDataFrame.IsReadOnly = False
+        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(157, 275)
+        Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
+        Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSaveDataFrame.TabIndex = 19
+        '
+        'ucrChkSaveDataFrame
+        '
+        Me.ucrChkSaveDataFrame.AutoSize = True
+        Me.ucrChkSaveDataFrame.Checked = False
+        Me.ucrChkSaveDataFrame.Location = New System.Drawing.Point(7, 275)
+        Me.ucrChkSaveDataFrame.Name = "ucrChkSaveDataFrame"
+        Me.ucrChkSaveDataFrame.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkSaveDataFrame.TabIndex = 18
         '
         'ucrInputMergingBy
         '
@@ -79,7 +112,7 @@ Partial Class dlgMergeAdditionalData
         Me.ucrInputMergingBy.AutoSize = True
         Me.ucrInputMergingBy.IsMultiline = False
         Me.ucrInputMergingBy.IsReadOnly = False
-        Me.ucrInputMergingBy.Location = New System.Drawing.Point(56, 212)
+        Me.ucrInputMergingBy.Location = New System.Drawing.Point(56, 209)
         Me.ucrInputMergingBy.Name = "ucrInputMergingBy"
         Me.ucrInputMergingBy.Size = New System.Drawing.Size(266, 32)
         Me.ucrInputMergingBy.TabIndex = 15
@@ -94,16 +127,6 @@ Partial Class dlgMergeAdditionalData
         Me.ucrToDataFrame.Name = "ucrToDataFrame"
         Me.ucrToDataFrame.Size = New System.Drawing.Size(151, 50)
         Me.ucrToDataFrame.TabIndex = 10
-        '
-        'lblVariablesToIncludeSecond
-        '
-        Me.lblVariablesToIncludeSecond.AutoSize = True
-        Me.lblVariablesToIncludeSecond.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariablesToIncludeSecond.Location = New System.Drawing.Point(248, 69)
-        Me.lblVariablesToIncludeSecond.Name = "lblVariablesToIncludeSecond"
-        Me.lblVariablesToIncludeSecond.Size = New System.Drawing.Size(103, 13)
-        Me.lblVariablesToIncludeSecond.TabIndex = 12
-        Me.lblVariablesToIncludeSecond.Text = "Variables to Include:"
         '
         'ucrReceiverSecond
         '
@@ -134,7 +157,7 @@ Partial Class dlgMergeAdditionalData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 280)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 301)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 17
@@ -144,7 +167,9 @@ Partial Class dlgMergeAdditionalData
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(420, 335)
+        Me.ClientSize = New System.Drawing.Size(420, 356)
+        Me.Controls.Add(Me.ucrInputCheckInput)
+        Me.Controls.Add(Me.cmdCheckUnique)
         Me.Controls.Add(Me.ucrInputSaveDataFrame)
         Me.Controls.Add(Me.ucrChkSaveDataFrame)
         Me.Controls.Add(Me.lblMergeBy)
@@ -177,4 +202,6 @@ Partial Class dlgMergeAdditionalData
     Friend WithEvents ucrReceiverSecond As ucrReceiverMultiple
     Friend WithEvents ucrFromDataFrame As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrInputCheckInput As ucrInputTextBox
+    Friend WithEvents cmdCheckUnique As Button
 End Class

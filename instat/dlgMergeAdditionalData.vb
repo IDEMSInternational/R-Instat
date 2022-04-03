@@ -60,6 +60,8 @@ Public Class dlgMergeAdditionalData
 
         ucrInputMergingBy.IsReadOnly = True
         ucrInputMergingBy.IsMultiline = True
+        ucrInputCheckInput.IsReadOnly = True
+        EnableDisableCmdCheckUnique()
     End Sub
 
     Private Sub SetDefaults()
@@ -73,6 +75,7 @@ Public Class dlgMergeAdditionalData
         ucrFromDataFrame.Reset()
         ucrReceiverSecond.SetMeAsReceiver()
         ucrInputSaveDataFrame.SetName("merge")
+        ucrInputCheckInput.Reset()
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
 
@@ -141,7 +144,6 @@ Public Class dlgMergeAdditionalData
                     clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
                     ucrInputSaveDataFrame.Visible = False
-                    CheckUnique()
                 End If
             Else
                 clsLeftJoinFunction.RemoveAssignTo()
@@ -200,31 +202,6 @@ Public Class dlgMergeAdditionalData
         TestOkEnabled()
     End Sub
 
-    Private Sub CheckUnique()
-        Dim clsAnyDuplicatesFunction As New RFunction
-        Dim iAnyDuplicated As Integer
-        If ucrInputMergingBy.GetText <> "" AndAlso ucrReceiverSecond.lstSelectedVariables.Items.Count > 0 Then
-
-            clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstJoinColumns, bWithQuotes:=True), iPosition:=1)
-
-            clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
-            clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunction)
-            Try
-                iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
-            Catch ex As Exception
-                iAnyDuplicated = -1
-            End Try
-            bJoinColsAreUnique = True
-            If iAnyDuplicated > 0 AndAlso Not ucrChkSaveDataFrame.Checked Then
-                MsgBox("Join column(s) is/are not unique. Check new dataframe to create a new dataframe.", MsgBoxStyle.Information)
-                bJoinColsAreUnique = False
-            ElseIf iAnyDuplicated = -1 Then
-                MsgBox("Developer error! Could not check uniqueness.")
-            End If
-        End If
-        TestOkEnabled()
-    End Sub
-
     Private Sub cmdModify_Click(sender As Object, e As EventArgs) Handles cmdModify.Click
         sdgMerge.Setup(ucrToDataFrame.cboAvailableDataFrames.Text, ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoinFunction, clsByListFunction, bResetSubdialog)
         sdgMerge.ShowDialog()
@@ -246,14 +223,54 @@ Public Class dlgMergeAdditionalData
         End If
     End Sub
 
+    Private Sub EnableDisableCmdCheckUnique()
+        If ucrReceiverSecond.IsEmpty AndAlso ucrInputMergingBy.IsEmpty Then
+            cmdCheckUnique.Enabled = False
+        Else
+            cmdCheckUnique.Enabled = True
+        End If
+    End Sub
+
+    Private Sub CheckUnique()
+        Dim clsAnyDuplicatesFunction As New RFunction
+        Dim iAnyDuplicated As Integer
+
+        If ucrInputMergingBy.GetText <> "" Then
+            clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstJoinColumns, bWithQuotes:=True), iPosition:=1)
+            clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+            clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunction)
+            Try
+                iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+            Catch ex As Exception
+                iAnyDuplicated = -1
+            End Try
+            bJoinColsAreUnique = False
+            If iAnyDuplicated = -1 Then
+                ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
+                ucrInputCheckInput.txtInput.BackColor = Color.Yellow
+            ElseIf iAnyDuplicated > 0 Then
+                ucrInputCheckInput.SetName("Entries not unique. Check New Data Frame to create new dataframe.")
+                ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
+            Else
+                ucrInputCheckInput.SetName("Column(s) key unique.")
+                ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
+                bJoinColsAreUnique = True
+            End If
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
+        CheckUnique()
+    End Sub
+
     Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
         AddColumns()
-        CheckUnique()
+        EnableDisableCmdCheckUnique()
     End Sub
 
     Private Sub ucrInputMergingBy_TextChanged(sender As Object, e As EventArgs) Handles ucrInputMergingBy.TextChanged
         AddColumns()
-        CheckUnique()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrToDataFrame.ControlContentsChanged, ucrFromDataFrame.ControlContentsChanged, ucrReceiverSecond.ControlContentsChanged
