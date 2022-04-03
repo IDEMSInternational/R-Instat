@@ -160,11 +160,12 @@ Public Class dlgMergeAdditionalData
 
     Private Sub SetMergingBy()
         Dim dctJoinColumns As New Dictionary(Of String, String)
+        Dim lstJoiningColumns As New List(Of String)
         lstJoinColumns.Clear()
         If ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
             If clsLeftJoinFunction.ContainsParameter("by") Then
                 For Each clsTempParam As RParameter In clsByListFunction.clsParameters
-                    dctJoinColumns.Add(clsTempParam.strArgumentName.Trim(Chr(34)), clsTempParam.strArgumentValue.Trim(Chr(34)))
+                    lstJoiningColumns.Add(clsTempParam.strArgumentName.Trim(Chr(34)))
                 Next
             Else
                 Dim lstFirstColumns As List(Of String)
@@ -174,7 +175,7 @@ Public Class dlgMergeAdditionalData
                 Dim i As Integer = 0
                 For Each strFirst As String In lstFirstColumns
                     If lstSecondColumns.Contains(strFirst) Then
-                        dctJoinColumns.Add(strFirst, strFirst)
+                        lstJoiningColumns.Add(strFirst)
                         clsByListFunction.AddParameter(Chr(34) & strFirst & Chr(34), Chr(34) & strFirst & Chr(34), iPosition:=i)
                         i += 1
                     End If
@@ -183,11 +184,11 @@ Public Class dlgMergeAdditionalData
                     clsLeftJoinFunction.AddParameter("by", clsRFunctionParameter:=clsByListFunction, iPosition:=2)
                 End If
             End If
-            If dctJoinColumns.Count > 0 Then
+            If lstJoiningColumns.Count > 0 Then
                 Dim lstJoinPairs As New List(Of String)
-                For Each kvpTemp As KeyValuePair(Of String, String) In dctJoinColumns
-                    lstJoinPairs.Add(kvpTemp.Key & " = " & kvpTemp.Value)
-                    lstJoinColumns.Add(kvpTemp.Value)
+                For Each kvpTemp As String In lstJoiningColumns
+                    lstJoinPairs.Add(kvpTemp & " = " & kvpTemp)
+                    lstJoinColumns.Add(kvpTemp)
                 Next
                 ucrInputMergingBy.SetName(String.Join(", ", lstJoinPairs))
                 ucrInputMergingBy.txtInput.BackColor = SystemColors.Control
@@ -204,7 +205,7 @@ Public Class dlgMergeAdditionalData
             clsLeftJoinFunction.RemoveParameterByName("by")
             clsByListFunction.ClearParameters()
         End If
-        bBySpecified = (dctJoinColumns.Count > 0)
+        bBySpecified = (lstJoiningColumns.Count > 0)
         TestOkEnabled()
     End Sub
 
