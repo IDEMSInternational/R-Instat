@@ -678,7 +678,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RandomSplitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3940,18 +3939,18 @@ Partial Class frmMain
         'mnuPrepareColumnDefineConvertColumns
         '
         Me.mnuPrepareColumnDefineConvertColumns.Name = "mnuPrepareColumnDefineConvertColumns"
-        Me.mnuPrepareColumnDefineConvertColumns.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnDefineConvertColumns.Size = New System.Drawing.Size(176, 22)
         Me.mnuPrepareColumnDefineConvertColumns.Text = "Convert Columns..."
         '
         'ToolStripSeparator55
         '
         Me.ToolStripSeparator55.Name = "ToolStripSeparator55"
-        Me.ToolStripSeparator55.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator55.Size = New System.Drawing.Size(173, 6)
         '
         'mnuPrepareColumnDefineCircular
         '
         Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
-        Me.mnuPrepareColumnDefineCircular.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnDefineCircular.Size = New System.Drawing.Size(176, 22)
         Me.mnuPrepareColumnDefineCircular.Text = "Circular..."
         '
         'ToolStripSeparator4
@@ -3961,7 +3960,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshape
         '
-        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance, Me.RandomSplitToolStripMenuItem})
+        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
         Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareDataReshape.Tag = ""
@@ -5099,12 +5098,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'RandomSplitToolStripMenuItem
-        '
-        Me.RandomSplitToolStripMenuItem.Name = "RandomSplitToolStripMenuItem"
-        Me.RandomSplitToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.RandomSplitToolStripMenuItem.Text = "Random split..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5798,5 +5791,4 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextDefine As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDefineOnStation As ToolStripMenuItem
     Friend WithEvents mnuOptionsByContextDefineOnFarm As ToolStripMenuItem
-    Friend WithEvents RandomSplitToolStripMenuItem As ToolStripMenuItem
 End Class
