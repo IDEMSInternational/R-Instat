@@ -46,6 +46,7 @@ Partial Class dlgFactorDataFrame
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactorDataFrame = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkFrequencies = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -129,12 +130,22 @@ Partial Class dlgFactorDataFrame
         Me.ucrSelectorFactorDataFrame.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorFactorDataFrame.TabIndex = 0
         '
+        'ucrChkFrequencies
+        '
+        Me.ucrChkFrequencies.AutoSize = True
+        Me.ucrChkFrequencies.Checked = False
+        Me.ucrChkFrequencies.Location = New System.Drawing.Point(238, 176)
+        Me.ucrChkFrequencies.Name = "ucrChkFrequencies"
+        Me.ucrChkFrequencies.Size = New System.Drawing.Size(165, 23)
+        Me.ucrChkFrequencies.TabIndex = 8
+        '
         'dlgFactorDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 264)
+        Me.Controls.Add(Me.ucrChkFrequencies)
         Me.Controls.Add(Me.ucrChkAddCurrentContrasts)
         Me.Controls.Add(Me.ucrChkReplaceIfAlreadyExists)
         Me.Controls.Add(Me.ucrInputFactorNames)
@@ -162,4 +173,5 @@ Partial Class dlgFactorDataFrame
     Friend WithEvents ucrInputFactorNames As ucrInputTextBox
     Friend WithEvents ucrChkAddCurrentContrasts As ucrCheck
     Friend WithEvents ucrChkReplaceIfAlreadyExists As ucrCheck
+    Friend WithEvents ucrChkFrequencies As ucrCheck
 End Class

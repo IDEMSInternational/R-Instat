@@ -278,7 +278,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, use_column_selection = TRUE, filter_name = "", column_selection_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -301,6 +301,25 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       if(filter_name != "") {
         out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
       }
+    }
+    if(column_selection_name != "") {
+      selected_columns <- self$get_column_selection_column_names(column_selection_name)
+      out <- out[ ,selected_columns, drop = FALSE]
+    }
+    #TODO: consider removing include_hidden_columns argument from this function
+    if(use_column_selection && self$column_selection_applied()) {
+      old_metadata <- attributes(private$data)
+      selected_columns <- self$get_column_names()
+      out <- out[ ,selected_columns, drop = FALSE]
+      for(name in names(old_metadata)) {
+        if(!(name %in% c("names", "class", "row.names"))) {
+          attr(out, name) <- old_metadata[[name]]
+        }
+      }
+      all_columns <- self$get_column_names(use_current_column_selection = FALSE)
+      hidden_cols <- all_columns[!(all_columns %in% selected_columns)]
+      self$append_to_variables_metadata(hidden_cols, is_hidden_label, TRUE)
+      private$.variables_metadata_changed <- TRUE
     }
     if(!is.data.frame(out)) {
       out <- data.frame(out)
@@ -726,7 +745,7 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 }
 )
 
-DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), ...) {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (type == "single") {
@@ -736,17 +755,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       }
       if (!is.character(curr_col_name)) {
         stop("Current column name must be of type: character")
-      }
-
-      else if (!(curr_col_name %in% names(curr_data))) {
+      } else if (!(curr_col_name %in% names(curr_data))) {
         stop(paste0("Cannot rename column: ", curr_col_name, ". Column was not found in the data."))
-      }
-
-      else if (!is.character(new_col_name)) {
+      } else if (!is.character(new_col_name)) {
         stop("New column name must be of type: character")
-      }
-
-      else {
+      } else {
         if (sum(names(curr_data) == curr_col_name) > 1) {
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
@@ -764,14 +777,46 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
       self$variables_metadata_changed <- TRUE
     }
-  } else {
-    private$data <- curr_data |>
-    dplyr::rename_with(
-      .fn = .fn,
-      .cols = {{ .cols }}, ...
-    )
+  } else if (type == "multiple") {
+    if (!missing(new_column_names_df)) {
+      new_col_names <- new_column_names_df[, 1]
+      cols_changed_index <- new_column_names_df[, 2]
+      curr_col_names <- names(private$data)
+      curr_col_names[cols_changed_index] <- new_col_names
+      if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
+      names(private$data)[cols_changed_index] <- new_col_names
+      for (i in seq_along(cols_changed_index)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+    }
+    if (!missing(new_labels_df)) {
+      new_labels <- new_labels_df[, 1]
+      new_labels_index <- new_labels_df[, 2]
+      for (i in seq_along(new_labels)) {
+        if (isTRUE(new_labels[i] != "")) {
+          self$append_to_variables_metadata(col_name = names(private$data)[new_labels_index[i]], property = "label", new_val = new_labels[i])
+        }
+      }
+    }
     self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
+  } else if (type == "rename_with") {
+    if (missing(.fn)) stop(.fn, "is missing with no default.")
+    curr_col_names <- names(curr_data)
+      private$data <- curr_data |>
+      dplyr::rename_with(
+         .fn = .fn,
+         .cols = {{ .cols }}, ...
+      )
+    new_col_names <- names(private$data)
+    if (!all(new_col_names %in% curr_col_names)) {
+      new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
+      for (i in seq_along(new_col_names)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
+    }
   }
 })
 
@@ -1013,26 +1058,32 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
 )
 
 DataSheet$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
-  if(missing(property)) stop("property must be specified.")
-  if(!is.character(property)) stop("property must be a character")
-  if(!missing(col_names)) {
-    #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
-    for(curr_col in col_names) {
-      attr(private$data[[curr_col]], property) <- new_val
-      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  if (missing(property)) stop("property must be specified.")
+  if (!is.character(property)) stop("property must be a character")
+  if (!missing(col_names)) {
+    # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for (curr_col in col_names) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[curr_col]], property) <- NULL
+      } else {
+        attr(private$data[[curr_col]], property) <- new_val
+      }
     }
-  }
-  else {
-    for(col_name in self$get_column_names()) {
-      attr(private$data[[col_name]], property) <- new_val
+    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+  } else {
+    for (col_name in self$get_column_names()) {
+      if (property == labels_label && new_val == "") {
+        attr(private$data[[col_name]], property) <- NULL
+      } else {
+        attr(private$data[[col_name]], property) <- new_val
+      }
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
-}
-)
+})
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
@@ -1338,7 +1389,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     else if(to_type == "numeric") {
       if(ignore_labels) {
         if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
-        else new_col <- as.numeric(curr_col)
+          else new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1868,10 +1919,13 @@ DataSheet$set("public", "get_current_column_selection", function() {
 )
 
 DataSheet$set("public", "set_current_column_selection", function(name = "") {
-  if(!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
-  self$current_column_selection <- private$column_selections[[name]]
-}
-)
+  if (!name %in% names(private$column_selections)) stop(name, " not found as a column selection.")
+  if (length(self$get_column_selection_column_names(name)) == 0) {
+    cat(name, " has no columns selected.")
+  } else {
+    self$current_column_selection <- private$column_selections[[name]]
+  }
+})
 
 DataSheet$set("public", "get_column_selection_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   out <- names(private$column_selections)
@@ -1916,11 +1970,21 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
                  "tidyselect::matches" = tidyselect::matches,
                  "tidyselect::num_range" = tidyselect::num_range,
                  "tidyselect::last_col" =  tidyselect::last_col,
+                 "tidyselect::where" = NULL,
                  NULL
                  )
-    if (op == "base::match") args$table <- all_column_names
-    else args$vars <- all_column_names
-    res[[i]] <- do.call(fn, args)
+    if (op == "base::match") {
+      args$table <- all_column_names
+      res[[i]] <- do.call(fn, args)
+      }else if (op == "tidyselect::where"){
+        selected_columns <- private$data |> 
+          dplyr::select(where(args$fn)) |> 
+          colnames()
+      res[[i]] <- which(all_column_names %in% selected_columns)
+      }else{
+        args$vars <- all_column_names
+        res[[i]] <- do.call(fn, args)
+        }
     if (neg) res[[i]] <- setdiff(1:length(all_column_names), res[[i]])
     i <- i + 1
   }
@@ -1944,6 +2008,8 @@ DataSheet$set("public", "column_selection_applied", function() {
 
 DataSheet$set("public", "remove_current_column_selection", function() {
   self$set_current_column_selection(".everything")
+  self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
+  private$.variables_metadata_changed <- TRUE
 }
 )
 
@@ -2027,7 +2093,7 @@ DataSheet$set("public", "get_last_graph", function() {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model")){
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
@@ -2046,12 +2112,19 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(new_name %in% names(private$calculations)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
     names(private$calculations)[names(private$calculations) == object_name] <- new_name
   }
+  else if (object_type == "column_selection"){
+    if(!object_name %in% names(private$column_selections)) stop(object_name, " not found in column selections list")
+    if(new_name %in% names(private$column_selections)) stop(new_name, " is already a column selection name. Cannot rename ", object_name, " to ", new_name)
+    if(".everything" == object_name) stop("Renaming .everything is not allowed.")
+    names(private$column_selections)[names(private$column_selections) == object_name] <- new_name
+    if(private$.current_column_selection$name == object_name){private$.current_column_selection$name <- new_name}
+  } 
 }
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
-  if(any(object_type == c("object", "graph", "table","model"))){
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+  if(any(object_type %in% c("object", "graph", "table","model"))){
       if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
       private$objects[names(private$objects) %in% object_names] <- NULL
     }else if(object_type == "filter"){
@@ -2062,6 +2135,11 @@ DataSheet$set("public", "delete_objects", function(data_name, object_names, obje
     }else if(object_type == "calculation"){
       if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
       private$calculations[names(private$calculations) %in% object_names] <- NULL
+    }else if(object_type == "column_selection"){
+      if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
+      if(".everything" %in% object_names) stop(".everything cannot be deleted.")
+      if(any(private$.current_column_selection$name %in% object_names))stop(private$.current_column_selection$name, " is currently in use and cannot be deleted.")
+      private$column_selections[names(private$column_selections) %in% object_names] <- NULL
     }
   if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
     private$.last_graph <- NULL
@@ -2461,6 +2539,7 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
   factor_col <- self$get_columns_from_data(col_name)
   contr_col <- nlevels(factor_col) - 1
   contr_row <- nlevels(factor_col)
+  cat("Factor",col_name,"has",new_contrasts,"contrasts")
   if(new_contrasts == "user_defined") {
     if(any(is.na(defined_contr_matrix)) ||!is.numeric(defined_contr_matrix) ||nrow(defined_contr_matrix) != contr_row || ncol(defined_contr_matrix) != contr_col) stop("The contrast matrix should have ", contr_col, " column(s) and ",  contr_row, " row(s) ")
   }
@@ -2475,35 +2554,6 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
-
-# Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
-#
-# Parameters:
-#   quarter - The quarter of the year (first, second etc.), must be an integer between 1 and 4 inclusive.
-#   start_month - The month when the year is considered to start (January, February etc.), must be 
-#                 an integer between 1 and 12 inclusive.
-#
-# Examples (quarter, start_month, returned value)
-#   1, 1, "JFM"
-#   1, 2, "FMA"
-#   1, 12, "DJF"
-#   2, 1, "AMJ"
-#   2, 6, "SON"
-DataSheet$set("public", "get_quarter_label",  function(quarter, start_month){
-  mabb <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
-  quarters <- seq(1,4)
-  s_month <- seq(1,12)
-  if (quarter %in% quarters && start_month %in% s_month){
-    switch(quarter,
-      "1"={ qtr <- paste(mabb[start_month:(start_month+2)],collapse="")},
-      "2"={ qtr <- paste(mabb[(start_month+3):(start_month+5)],collapse="")},
-      "3"={ qtr <- paste(mabb[(start_month+6):(start_month+8)],collapse="")},
-      "4"={ qtr <- paste(mabb[(start_month+9):(start_month+11)],collapse="")}
-    )
-    return(qtr)
-  }
-  else stop("The quarter or starting month is not valid")
-})
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
@@ -2591,23 +2641,16 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = dekad_val_vector, adjacent_column = adjacent_column, before = FALSE)
   }
   if(quarter_abbr){
-    quarter_labels <- c()
     if(s_shift) {
       s_quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year, fiscal_start = s_start_month)
-      for(num in s_quarter_val_vector){
-        s_quarter_label_vector <- self$get_quarter_label(num, s_start_month)
-        quarter_labels <- c(quarter_labels, s_quarter_label_vector)
-      }
+      quarter_labels <- get_quarter_label(s_quarter_val_vector, s_start_month)
       col_name <- next_default_item(prefix = "s_quarter", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
       self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted quarter starting on day", s_start_day))
     } 
     else {
       quarter_val_vector <- lubridate::quarter(col_data, with_year = with_year)
-      for(num in quarter_val_vector){
-        quarter_label_vector <- self$get_quarter_label(num, s_start_month)
-        quarter_labels <- c(quarter_labels, quarter_label_vector)
-      }
+      quarter_labels <- get_quarter_label(quarter_val_vector, s_start_month)
       col_name <- next_default_item(prefix = "quarter_abbr", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = quarter_labels, adjacent_column = adjacent_column, before = FALSE)
     }
@@ -2850,8 +2893,8 @@ DataSheet$set("public","append_climatic_types", function(types) {
 #Method for creating inventory plot
 
 DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE,
-                                                       year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_xsize = 7, facet_ysize = 11, 
-                                                       graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, 
+                                                       year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_xsize = 9, facet_ysize = 9, facet_xangle = 90,
+                                                       facet_yangle = 90, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, 
                                                        subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL,
                                                        Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, 
                                                        legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number,
@@ -3050,7 +3093,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
   }
   if(!missing(labelXAxis)){g <- g + ggplot2::xlab(labelXAxis)}else{g <- g + ggplot2::xlab(NULL)}
   if(!missing(labelYAxis)){g <- g + ggplot2::ylab(labelYAxis)}else{g <- g + ggplot2::ylab(NULL)}
-  return(g + ggplot2::labs(title = graph_title, subtitle = graph_subtitle, caption = graph_caption) + ggplot2::theme(strip.text.x = element_text(margin = margin(1, 0, 1, 0), size = facet_xsize), strip.text.y = element_text(margin = margin(1, 0, 1, 0), size = facet_ysize), legend.position=legend_position, plot.title = ggplot2::element_text(hjust = 0.5, size = title_size), plot.subtitle = ggplot2::element_text(size = subtitle_size), plot.caption = ggplot2::element_text(size = caption_size), axis.text.x = ggplot2::element_text(size=xSize, angle = Xangle, vjust = 0.6), axis.title.x = ggplot2::element_text(size=xlabelsize), axis.title.y = ggplot2::element_text(size=ylabelsize), axis.text.y = ggplot2::element_text(size = ySize, angle = Yangle, hjust = 0.6)))
+  return(g + ggplot2::labs(title = graph_title, subtitle = graph_subtitle, caption = graph_caption) + ggplot2::theme(strip.text.x = element_text(margin = margin(1, 0, 1, 0), size = facet_xsize, angle = facet_xangle), strip.text.y = element_text(margin = margin(1, 0, 1, 0), size = facet_ysize, angle = facet_yangle), legend.position=legend_position, plot.title = ggplot2::element_text(hjust = 0.5, size = title_size), plot.subtitle = ggplot2::element_text(size = subtitle_size), plot.caption = ggplot2::element_text(size = caption_size), axis.text.x = ggplot2::element_text(size=xSize, angle = Xangle, vjust = 0.6), axis.title.x = ggplot2::element_text(size=xlabelsize), axis.title.y = ggplot2::element_text(size=ylabelsize), axis.text.y = ggplot2::element_text(size = ySize, angle = Yangle, hjust = 0.6)))
 }
 )
 
@@ -4267,3 +4310,48 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
 })
+
+DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
+  curr_data <- self$get_data_frame()
+  old_metadata <- attributes(curr_data)
+  new_df <- curr_data |>
+    janitor::remove_empty(which = which)
+  row_message <- paste(nrow(curr_data) - nrow(new_df), "empty rows deleted")
+  cols_message <- paste(ncol(curr_data) - ncol(new_df), "empty variables deleted")
+  if (all(which %in% "rows")) cat(row_message, "\n")
+  if (all(which %in% "cols")) cat(cols_message)
+  if (all(c("rows", "cols") %in% which)) {
+    cat(row_message, "\n")
+    cat(cols_message)
+  }
+  for (name in names(old_metadata)) {
+    if (!(name %in% c("names", "class", "row.names"))) {
+      attr(new_df, name) <- old_metadata[[name]]
+    }
+  }
+  for (col_name in names(new_df)) {
+    for (attr_name in names(attributes(private$data[[col_name]]))) {
+      if (!attr_name %in% c("class", "levels")) {
+        attr(new_df[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+      }
+    }
+  }
+  self$set_data(new_df)
+  self$data_changed <- TRUE
+  private$.variables_metadata_changed <- TRUE
+})
+
+DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  if(!all(row_index %in% seq_len(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
+  if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
+  curr_data[row_index, column_index] <- NA
+  self$set_data(curr_data)
+}
+)
+
+DataSheet$set("public", "has_labels", function(col_names) {
+  if(missing(col_names)) stop("Column name must be specified.")
+  return(!is.null(attr(col_names, "labels")))
+}
+)

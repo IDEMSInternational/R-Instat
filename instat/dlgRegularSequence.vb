@@ -373,7 +373,9 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub ucrInputComboDatesBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboDatesBy.ControlValueChanged
-        ResetNumberFromToByParameters()
+        If bUpdateBy Then
+            ResetNumberFromToByParameters()
+        End If
     End Sub
     Private Sub lblPreview_Click(sender As Object, e As EventArgs) Handles lblPreview.Click
 

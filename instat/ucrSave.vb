@@ -88,10 +88,6 @@ Public Class ucrSave
     '''             a named column (i.e. the R "col_name" parameter needs to be set). 
     '''             </summary>
     Private bAssignToColumnWithoutNames As Boolean = False
-    ''' <summary>   If true then set the R "before" parameter to true, else set it to false.
-    '''             Only used when this control is saving a column.
-    '''             </summary>
-    Private bInsertColumnBefore As Boolean = False
     ''' <summary>   If true then a list of data frames is assigned (i.e. the R "data_names" 
     '''             parameter needs to be set).
     '''             Only used when this control is saving a data frame.
@@ -114,8 +110,14 @@ Public Class ucrSave
     '''             the column name.
     '''             Only used when this control is saving a column. </summary>
     Private ucrLinkedReceiver As ucrReceiver
+    ''' <summary>   If true then set the R "before" parameter to TRUE, else set it to FALSE.
+    ''' Only used when this control is saving a column. </summary>
+    Private bInsertColumnBefore As Boolean = False
     Private strAdjacentColumn As String = ""
-    Private bKeepExistingPosition As Boolean = True 'todo. not used yet
+    'todo. not used yet.
+    'In future, this could be used to determine whether to change the position of the existing column or not.
+
+    Private bKeepExistingPosition As Boolean = True
     Private bSetPositionParamsDirectly As String = True
     Private strReadNameFromParameterName As String = ""
 
@@ -543,6 +545,13 @@ Public Class ucrSave
     ''' <param name="ucrChangedControl">    The ucr changed control. </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub ucrInputControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlValueChanged, ucrInputTextSave.ControlValueChanged, ucrDataFrameSelector.ControlValueChanged
+        If ucrChangedControl Is ucrDataFrameSelector Then
+            'when the dataframe is changed then reset position variables to correspond to 'end'
+            bInsertColumnBefore = False
+            strAdjacentColumn = ""
+            'reset the user selected option, because the control has reset the position variables
+            sdgSaveColumnPosition.bUserSelected = False
+        End If
         OnControlValueChanged()
     End Sub
     '''--------------------------------------------------------------------------------------------
