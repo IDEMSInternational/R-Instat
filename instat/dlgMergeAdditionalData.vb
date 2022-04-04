@@ -256,10 +256,10 @@ Public Class dlgMergeAdditionalData
                 ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
                 ucrInputCheckInput.txtInput.BackColor = Color.Yellow
             ElseIf iAnyDuplicated > 0 Then
-                ucrInputCheckInput.SetName("Entries not unique. Check New Data Frame to create new dataframe.")
+                ucrInputCheckInput.SetName("From Data Frame entries not unique.")
                 ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
             Else
-                ucrInputCheckInput.SetName("Column(s) key unique in From Data Frame.")
+                ucrInputCheckInput.SetName("Join column(s) unique in From Data Frame.")
                 ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
                 bJoinColsAreUnique = True
             End If
