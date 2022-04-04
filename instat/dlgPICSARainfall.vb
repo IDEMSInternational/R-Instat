@@ -852,18 +852,30 @@ Public Class dlgPICSARainfall
         SetPipeAssignTo()
     End Sub
 
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
     Private Sub AddRemoveGroupBy()
         Dim i As Integer = 0
 
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
-                For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
-                    If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
-                        clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
-                        i = i + 1
-                    End If
-                Next
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        GetParameterValue(clsFacetOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
+                End Select
             End If
 
             If clsRaesFunction.ContainsParameter("colour") Then

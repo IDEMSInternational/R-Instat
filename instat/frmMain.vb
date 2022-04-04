@@ -398,12 +398,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnNumericRegularSequence_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRegularSequence.Click
-        dlgRegularSequence.bNumericIsDefault = True
+        dlgRegularSequence.SetNumericSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
-    End Sub
-
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFrequency.ShowDialog()
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
@@ -1813,12 +1809,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
-        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
-        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
