@@ -232,8 +232,6 @@ Public Class dlgMergeAdditionalData
 
     Private Sub EnableDisableCmdCheckUnique()
         cmdCheckUnique.Enabled = Not ucrReceiverSecond.IsEmpty OrElse Not ucrInputMergingBy.IsEmpty
-            cmdCheckUnique.Enabled = True
-        End If
     End Sub
 
     Private Sub CheckUnique()
