@@ -31,11 +31,22 @@ Partial Class dlgConversions
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLatitude = New instat.ucrInputTextBox()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.lblDecimal = New System.Windows.Forms.Label()
+        Me.ucrNudDecimal = New instat.ucrNud()
         Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
+        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
+        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
         Me.rdoTemperature = New System.Windows.Forms.RadioButton()
+        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
+        Me.ucrPnlElements = New instat.UcrPanel()
+        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
+        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
+        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.rdoCoordinates = New System.Windows.Forms.RadioButton()
         Me.lblMinutes = New System.Windows.Forms.Label()
         Me.lblSeconds = New System.Windows.Forms.Label()
@@ -55,20 +66,13 @@ Partial Class dlgConversions
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudDecimal = New instat.ucrNud()
-        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
-        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
-        Me.ucrPnlElements = New instat.UcrPanel()
-        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrChkYear = New instat.ucrCheck()
         Me.ucrInputMinute = New instat.ucrInputTextBox()
         Me.ucrReceiverMinutes = New instat.ucrReceiverSingle()
-        Me.ucrInputLatitude = New instat.ucrInputTextBox()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrPnlLatitude = New instat.UcrPanel()
+        Me.rdoYear = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.ucrNudBaseYear = New instat.ucrNud()
+        Me.lblBaseYear = New System.Windows.Forms.Label()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
@@ -84,9 +88,9 @@ Partial Class dlgConversions
         Me.rdoDayLength.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDayLength.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoDayLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDayLength.Location = New System.Drawing.Point(166, 21)
+        Me.rdoDayLength.Location = New System.Drawing.Point(127, 21)
         Me.rdoDayLength.Name = "rdoDayLength"
-        Me.rdoDayLength.Size = New System.Drawing.Size(99, 28)
+        Me.rdoDayLength.Size = New System.Drawing.Size(90, 28)
         Me.rdoDayLength.TabIndex = 2
         Me.rdoDayLength.Text = "Day Length"
         Me.rdoDayLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -102,9 +106,9 @@ Partial Class dlgConversions
         Me.rdoUnits.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoUnits.ForeColor = System.Drawing.SystemColors.ControlText
         Me.rdoUnits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnits.Location = New System.Drawing.Point(67, 21)
+        Me.rdoUnits.Location = New System.Drawing.Point(39, 21)
         Me.rdoUnits.Name = "rdoUnits"
-        Me.rdoUnits.Size = New System.Drawing.Size(99, 28)
+        Me.rdoUnits.Size = New System.Drawing.Size(90, 28)
         Me.rdoUnits.TabIndex = 1
         Me.rdoUnits.Text = "Units"
         Me.rdoUnits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -188,6 +192,38 @@ Partial Class dlgConversions
         Me.grpLatitude.TabStop = False
         Me.grpLatitude.Text = "Latitude"
         '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.AutoSize = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        Me.ucrInputLatitude.Location = New System.Drawing.Point(100, 34)
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        Me.ucrInputLatitude.Size = New System.Drawing.Size(67, 21)
+        Me.ucrInputLatitude.TabIndex = 27
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.AutoSize = True
+        Me.ucrReceiverLatitude.frmParent = Me
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(100, 61)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(138, 20)
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 29
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrPnlLatitude
+        '
+        Me.ucrPnlLatitude.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlLatitude.Location = New System.Drawing.Point(7, 34)
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
+        Me.ucrPnlLatitude.Size = New System.Drawing.Size(87, 48)
+        Me.ucrPnlLatitude.TabIndex = 26
+        '
         'grpElements
         '
         Me.grpElements.Controls.Add(Me.lblDecimal)
@@ -221,6 +257,19 @@ Partial Class dlgConversions
         Me.lblDecimal.TabIndex = 1
         Me.lblDecimal.Text = "Decimal"
         '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.AutoSize = True
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDecimal.Location = New System.Drawing.Point(345, 75)
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Size = New System.Drawing.Size(39, 20)
+        Me.ucrNudDecimal.TabIndex = 2
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'rdoWindSpeed
         '
         Me.rdoWindSpeed.Appearance = System.Windows.Forms.Appearance.Button
@@ -240,6 +289,17 @@ Partial Class dlgConversions
         Me.rdoWindSpeed.Text = "Wind Speed"
         Me.rdoWindSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWindSpeed.UseVisualStyleBackColor = True
+        '
+        'ucrInputFromTemperature
+        '
+        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromTemperature.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFromTemperature.GetSetSelectedIndex = -1
+        Me.ucrInputFromTemperature.IsReadOnly = False
+        Me.ucrInputFromTemperature.Location = New System.Drawing.Point(9, 75)
+        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
+        Me.ucrInputFromTemperature.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputFromTemperature.TabIndex = 19
         '
         'rdoRain
         '
@@ -261,6 +321,17 @@ Partial Class dlgConversions
         Me.rdoRain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRain.UseVisualStyleBackColor = True
         '
+        'ucrInputToWindSpeed
+        '
+        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputToWindSpeed.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputToWindSpeed.GetSetSelectedIndex = -1
+        Me.ucrInputToWindSpeed.IsReadOnly = False
+        Me.ucrInputToWindSpeed.Location = New System.Drawing.Point(153, 75)
+        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
+        Me.ucrInputToWindSpeed.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputToWindSpeed.TabIndex = 22
+        '
         'rdoTemperature
         '
         Me.rdoTemperature.Appearance = System.Windows.Forms.Appearance.Button
@@ -281,6 +352,58 @@ Partial Class dlgConversions
         Me.rdoTemperature.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTemperature.UseVisualStyleBackColor = True
         '
+        'ucrInputToTemperature
+        '
+        Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputToTemperature.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputToTemperature.GetSetSelectedIndex = -1
+        Me.ucrInputToTemperature.IsReadOnly = False
+        Me.ucrInputToTemperature.Location = New System.Drawing.Point(153, 75)
+        Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
+        Me.ucrInputToTemperature.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputToTemperature.TabIndex = 20
+        '
+        'ucrPnlElements
+        '
+        Me.ucrPnlElements.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlElements.Location = New System.Drawing.Point(72, 12)
+        Me.ucrPnlElements.Name = "ucrPnlElements"
+        Me.ucrPnlElements.Size = New System.Drawing.Size(269, 40)
+        Me.ucrPnlElements.TabIndex = 11
+        '
+        'ucrInputFromWindSpeed
+        '
+        Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromWindSpeed.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFromWindSpeed.GetSetSelectedIndex = -1
+        Me.ucrInputFromWindSpeed.IsReadOnly = False
+        Me.ucrInputFromWindSpeed.Location = New System.Drawing.Point(9, 75)
+        Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
+        Me.ucrInputFromWindSpeed.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputFromWindSpeed.TabIndex = 21
+        '
+        'ucrInputFromPrecipitation
+        '
+        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromPrecipitation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFromPrecipitation.GetSetSelectedIndex = -1
+        Me.ucrInputFromPrecipitation.IsReadOnly = False
+        Me.ucrInputFromPrecipitation.Location = New System.Drawing.Point(9, 75)
+        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
+        Me.ucrInputFromPrecipitation.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputFromPrecipitation.TabIndex = 16
+        '
+        'ucrInputToPrecipitation
+        '
+        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputToPrecipitation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputToPrecipitation.GetSetSelectedIndex = -1
+        Me.ucrInputToPrecipitation.IsReadOnly = False
+        Me.ucrInputToPrecipitation.Location = New System.Drawing.Point(153, 75)
+        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
+        Me.ucrInputToPrecipitation.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputToPrecipitation.TabIndex = 18
+        '
         'rdoCoordinates
         '
         Me.rdoCoordinates.Appearance = System.Windows.Forms.Appearance.Button
@@ -292,9 +415,9 @@ Partial Class dlgConversions
         Me.rdoCoordinates.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCoordinates.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoCoordinates.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCoordinates.Location = New System.Drawing.Point(264, 21)
+        Me.rdoCoordinates.Location = New System.Drawing.Point(215, 21)
         Me.rdoCoordinates.Name = "rdoCoordinates"
-        Me.rdoCoordinates.Size = New System.Drawing.Size(99, 28)
+        Me.rdoCoordinates.Size = New System.Drawing.Size(90, 28)
         Me.rdoCoordinates.TabIndex = 3
         Me.rdoCoordinates.Text = "Coordinates"
         Me.rdoCoordinates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -468,9 +591,9 @@ Partial Class dlgConversions
         'ucrPnlConversions
         '
         Me.ucrPnlConversions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlConversions.Location = New System.Drawing.Point(62, 21)
+        Me.ucrPnlConversions.Location = New System.Drawing.Point(30, 21)
         Me.ucrPnlConversions.Name = "ucrPnlConversions"
-        Me.ucrPnlConversions.Size = New System.Drawing.Size(310, 28)
+        Me.ucrPnlConversions.Size = New System.Drawing.Size(376, 28)
         Me.ucrPnlConversions.TabIndex = 0
         '
         'ucrSelectorConversions
@@ -493,102 +616,6 @@ Partial Class dlgConversions
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 17
-        '
-        'ucrNudDecimal
-        '
-        Me.ucrNudDecimal.AutoSize = True
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimal.Location = New System.Drawing.Point(345, 75)
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Size = New System.Drawing.Size(39, 20)
-        Me.ucrNudDecimal.TabIndex = 2
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFromTemperature
-        '
-        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromTemperature.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFromTemperature.GetSetSelectedIndex = -1
-        Me.ucrInputFromTemperature.IsReadOnly = False
-        Me.ucrInputFromTemperature.Location = New System.Drawing.Point(9, 75)
-        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
-        Me.ucrInputFromTemperature.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputFromTemperature.TabIndex = 19
-        '
-        'ucrInputToWindSpeed
-        '
-        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputToWindSpeed.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputToWindSpeed.GetSetSelectedIndex = -1
-        Me.ucrInputToWindSpeed.IsReadOnly = False
-        Me.ucrInputToWindSpeed.Location = New System.Drawing.Point(153, 75)
-        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
-        Me.ucrInputToWindSpeed.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputToWindSpeed.TabIndex = 22
-        '
-        'ucrInputToTemperature
-        '
-        Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputToTemperature.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputToTemperature.GetSetSelectedIndex = -1
-        Me.ucrInputToTemperature.IsReadOnly = False
-        Me.ucrInputToTemperature.Location = New System.Drawing.Point(153, 75)
-        Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
-        Me.ucrInputToTemperature.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputToTemperature.TabIndex = 20
-        '
-        'ucrPnlElements
-        '
-        Me.ucrPnlElements.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlElements.Location = New System.Drawing.Point(72, 12)
-        Me.ucrPnlElements.Name = "ucrPnlElements"
-        Me.ucrPnlElements.Size = New System.Drawing.Size(269, 40)
-        Me.ucrPnlElements.TabIndex = 11
-        '
-        'ucrInputFromWindSpeed
-        '
-        Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromWindSpeed.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFromWindSpeed.GetSetSelectedIndex = -1
-        Me.ucrInputFromWindSpeed.IsReadOnly = False
-        Me.ucrInputFromWindSpeed.Location = New System.Drawing.Point(9, 75)
-        Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
-        Me.ucrInputFromWindSpeed.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputFromWindSpeed.TabIndex = 21
-        '
-        'ucrInputFromPrecipitation
-        '
-        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromPrecipitation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFromPrecipitation.GetSetSelectedIndex = -1
-        Me.ucrInputFromPrecipitation.IsReadOnly = False
-        Me.ucrInputFromPrecipitation.Location = New System.Drawing.Point(9, 75)
-        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
-        Me.ucrInputFromPrecipitation.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputFromPrecipitation.TabIndex = 16
-        '
-        'ucrInputToPrecipitation
-        '
-        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputToPrecipitation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputToPrecipitation.GetSetSelectedIndex = -1
-        Me.ucrInputToPrecipitation.IsReadOnly = False
-        Me.ucrInputToPrecipitation.Location = New System.Drawing.Point(153, 75)
-        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
-        Me.ucrInputToPrecipitation.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputToPrecipitation.TabIndex = 18
-        '
-        'ucrChkYear
-        '
-        Me.ucrChkYear.AutoSize = True
-        Me.ucrChkYear.Checked = False
-        Me.ucrChkYear.Location = New System.Drawing.Point(265, 152)
-        Me.ucrChkYear.Name = "ucrChkYear"
-        Me.ucrChkYear.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkYear.TabIndex = 26
         '
         'ucrInputMinute
         '
@@ -614,49 +641,86 @@ Partial Class dlgConversions
         Me.ucrReceiverMinutes.TabIndex = 10
         Me.ucrReceiverMinutes.ucrSelector = Nothing
         '
-        'ucrInputLatitude
+        'rdoYear
         '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.AutoSize = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        Me.ucrInputLatitude.Location = New System.Drawing.Point(100, 34)
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        Me.ucrInputLatitude.Size = New System.Drawing.Size(67, 21)
-        Me.ucrInputLatitude.TabIndex = 27
+        Me.rdoYear.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoYear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoYear.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYear.FlatAppearance.BorderSize = 2
+        Me.rdoYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoYear.Location = New System.Drawing.Point(303, 21)
+        Me.rdoYear.Name = "rdoYear"
+        Me.rdoYear.Size = New System.Drawing.Size(90, 28)
+        Me.rdoYear.TabIndex = 27
+        Me.rdoYear.Text = "Year"
+        Me.rdoYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoYear.UseVisualStyleBackColor = True
         '
-        'ucrReceiverLatitude
+        'ucrReceiverYear
         '
-        Me.ucrReceiverLatitude.AutoSize = True
-        Me.ucrReceiverLatitude.frmParent = Nothing
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(100, 61)
-        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 29
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        Me.ucrReceiverYear.AutoSize = True
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(265, 109)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
+        Me.ucrReceiverYear.TabIndex = 28
+        Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'ucrPnlLatitude
+        'lblYear
         '
-        Me.ucrPnlLatitude.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlLatitude.Location = New System.Drawing.Point(7, 34)
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
-        Me.ucrPnlLatitude.Size = New System.Drawing.Size(87, 48)
-        Me.ucrPnlLatitude.TabIndex = 26
+        Me.lblYear.AutoSize = True
+        Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYear.Location = New System.Drawing.Point(265, 93)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 29
+        Me.lblYear.Text = "Year:"
+        '
+        'ucrNudBaseYear
+        '
+        Me.ucrNudBaseYear.AutoSize = True
+        Me.ucrNudBaseYear.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBaseYear.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudBaseYear.Location = New System.Drawing.Point(264, 152)
+        Me.ucrNudBaseYear.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBaseYear.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBaseYear.Name = "ucrNudBaseYear"
+        Me.ucrNudBaseYear.Size = New System.Drawing.Size(81, 20)
+        Me.ucrNudBaseYear.TabIndex = 30
+        Me.ucrNudBaseYear.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblBaseYear
+        '
+        Me.lblBaseYear.AutoSize = True
+        Me.lblBaseYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblBaseYear.Location = New System.Drawing.Point(265, 136)
+        Me.lblBaseYear.Name = "lblBaseYear"
+        Me.lblBaseYear.Size = New System.Drawing.Size(59, 13)
+        Me.lblBaseYear.TabIndex = 31
+        Me.lblBaseYear.Text = "Base Year:"
         '
         'dlgConversions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(436, 503)
+        Me.Controls.Add(Me.lblBaseYear)
+        Me.Controls.Add(Me.ucrNudBaseYear)
+        Me.Controls.Add(Me.lblYear)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.rdoYear)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.lblDirection)
         Me.Controls.Add(Me.ucrInputDirection)
         Me.Controls.Add(Me.ucrChkVariable)
         Me.Controls.Add(Me.ucrInputSecond)
-        Me.Controls.Add(Me.ucrInputDegree)
         Me.Controls.Add(Me.ucrReceiverLetters)
         Me.Controls.Add(Me.ucrSaveConversions)
         Me.Controls.Add(Me.lblDegrees)
@@ -675,10 +739,10 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.ucrSelectorConversions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpElements)
-        Me.Controls.Add(Me.ucrChkYear)
         Me.Controls.Add(Me.ucrInputMinute)
         Me.Controls.Add(Me.ucrReceiverMinutes)
         Me.Controls.Add(Me.grpLatitude)
+        Me.Controls.Add(Me.ucrInputDegree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -740,5 +804,9 @@ Partial Class dlgConversions
     Friend WithEvents lblDirection As Label
     Friend WithEvents ucrInputDirection As ucrInputComboBox
     Friend WithEvents ucrSaveColumn As ucrSave
-    Friend WithEvents ucrChkYear As ucrCheck
+    Friend WithEvents lblBaseYear As Label
+    Friend WithEvents ucrNudBaseYear As ucrNud
+    Friend WithEvents lblYear As Label
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents rdoYear As RadioButton
 End Class

@@ -1235,7 +1235,8 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   return(decdeg)
 }
 
-convert_yy_to_yyyy <- function (x, base=2030) {
+convert_yy_to_yyyy <- function (x, base) {
+    if(missing(base))  stop("base year must be supplied")
     dplyr::if_else(x+2000 <= base, x+2000, x+1900)
 }
 

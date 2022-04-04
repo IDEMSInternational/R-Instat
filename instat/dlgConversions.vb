@@ -51,10 +51,12 @@ Public Class dlgConversions
         ucrPnlConversions.AddRadioButton(rdoUnits)
         ucrPnlConversions.AddRadioButton(rdoDayLength)
         ucrPnlConversions.AddRadioButton(rdoCoordinates)
+        ucrPnlConversions.AddRadioButton(rdoYear)
 
-        ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_yy_to_yyyy", "convert_precip", "convert_temperature", "convert_wind_speed"})
+        ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_precip", "convert_temperature", "convert_wind_speed"})
         ucrPnlConversions.AddFunctionNamesCondition(rdoDayLength, "daylength")
         ucrPnlConversions.AddFunctionNamesCondition(rdoCoordinates, "convert_to_dec_deg")
+        ucrPnlConversions.AddFunctionNamesCondition(rdoYear, "convert_yy_to_yyyy")
 
         ucrPnlLatitude.AddRadioButton(rdoSingleValue)
         ucrPnlLatitude.AddRadioButton(rdoColumn)
@@ -78,10 +80,6 @@ Public Class dlgConversions
         ucrReceiverElement.Selector = ucrSelectorConversions
         ucrReceiverElement.bUseFilteredData = False
 
-        ucrChkYear.SetText("To 4 Digit Year")
-        ucrChkYear.AddFunctionNamesCondition(True, "convert_yy_to_yyyy")
-        ucrChkYear.AddFunctionNamesCondition(False, {"convert_precip", "convert_temperature", "convert_wind_speed"})
-
         ucrReceiverDate.SetParameter(New RParameter("doy", 2))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
@@ -104,6 +102,18 @@ Public Class dlgConversions
 
         ucrReceiverLetters.Selector = ucrSelectorConversions
         ucrReceiverLetters.bUseFilteredData = False
+
+        ucrReceiverYear.SetParameter(New RParameter("x", 0))
+        ucrReceiverYear.Selector = ucrSelectorConversions
+        ucrReceiverYear.SetParameterIsRFunction()
+        ucrReceiverYear.bUseFilteredData = False
+        ucrReceiverYear.SetIncludedDataTypes({"numeric"})
+        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
+
+        ucrNudBaseYear.SetParameter(New RParameter("base", 1))
+        ucrNudBaseYear.SetMinMax(iNewMin:=2000, iNewMax:=2100)
+        ucrNudBaseYear.Increment = 1
+        ucrNudBaseYear.SetLinkedDisplayControl(lblBaseYear)
 
         ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
@@ -148,7 +158,8 @@ Public Class dlgConversions
         ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlElements, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
-        ucrPnlConversions.AddToLinkedControls(ucrChkYear, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverYear, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrNudBaseYear, {rdoYear}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="2030")
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlLatitude, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoSingleValue)
@@ -184,6 +195,7 @@ Public Class dlgConversions
         ucrReceiverMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrReceiverSeconds.SetLinkedDisplayControl(lblSeconds)
         ucrInputDirection.SetLinkedDisplayControl(lblDirection)
+        ucrPnlElements.SetLinkedDisplayControl(grpElements)
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
@@ -252,7 +264,6 @@ Public Class dlgConversions
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsTemperatureFunction, (New RParameter("temperature", 0)), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsWindSpeedFunction, (New RParameter("wind_speed", 0)), iAdditionalPairNo:=2)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsYearConversionFunction, (New RParameter("x", 0)), iAdditionalPairNo:=3)
         ucrNudDecimal.AddAdditionalCodeParameterPair(clsTemperatureFunction, (New RParameter("round", 3)), iAdditionalPairNo:=1)
         ucrNudDecimal.AddAdditionalCodeParameterPair(clsWindSpeedFunction, (New RParameter("round", 3)), iAdditionalPairNo:=2)
         ucrSaveConversions.AddAdditionalRCode(clsTemperatureFunction, iAdditionalPairNo:=1)
@@ -272,7 +283,8 @@ Public Class dlgConversions
         ucrSaveConversions.SetRCode(clsPrecipitationFunction, bReset)
         ucrSaveColumn.SetRCode(clsRoundFunction, bReset)
         ucrInputDirection.SetRCode(clsConvertToDegreeFunction, bReset)
-        ucrChkYear.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverYear.SetRCode(clsYearConversionFunction, bReset)
+        ucrNudBaseYear.SetRCode(clsYearConversionFunction, bReset)
 
         If bReset Then
             ucrPnlConversions.SetRCode(clsPrecipitationFunction, bReset)
@@ -289,8 +301,6 @@ Public Class dlgConversions
                 ucrBase.OKEnabled(True)
             ElseIf rdoWindSpeed.Checked AndAlso ucrNudDecimal.GetText <> "" AndAlso ucrInputFromWindSpeed.GetText <> ucrInputToWindSpeed.GetText Then
                 ucrBase.OKEnabled(True)
-            ElseIf ucrChkYear.Checked Then
-                ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
@@ -304,6 +314,8 @@ Public Class dlgConversions
             Else
                 ucrBase.OKEnabled(False)
             End If
+        ElseIf rdoYear.Checked AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudBaseYear.GetText <> "" AndAlso ucrSaveConversions.IsComplete Then
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -316,18 +328,13 @@ Public Class dlgConversions
     End Sub
 
     Private Sub SetBaseFunction()
-        If ucrChkYear.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsYearConversionFunction)
-        Else
-            If rdoRain.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
-            ElseIf rdoTemperature.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTemperatureFunction)
-            ElseIf rdoWindSpeed.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWindSpeedFunction)
-            End If
+        If rdoRain.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
+        ElseIf rdoTemperature.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTemperatureFunction)
+        ElseIf rdoWindSpeed.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWindSpeedFunction)
         End If
-        grpElements.Visible = Not ucrChkYear.Checked
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
@@ -342,7 +349,7 @@ Public Class dlgConversions
         ChangeLatParameter()
     End Sub
 
-    Private Sub ucrPnlConversions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlValueChanged, ucrChkYear.ControlValueChanged
+    Private Sub ucrPnlConversions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrNudBaseYear.ControlValueChanged
         If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrBase.clsRsyntax.iCallType = 0
@@ -358,13 +365,18 @@ Public Class dlgConversions
             ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
             ucrReceiverDegrees.SetMeAsReceiver()
             ChangeParameter()
+        ElseIf rdoYear.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsYearConversionFunction)
+            ucrReceiverYear.SetMeAsReceiver()
+            ucrSaveConversions.SetPrefix("conversion")
+            ucrSaveConversions.setLinkedReceiver(ucrReceiverYear)
+            ucrReceiverYear.strSelectorHeading = "Numerics"
         End If
         ChangeLatParameter()
     End Sub
 
     Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
         SetBaseFunction()
-        ucrPnlElements.Enabled = Not ucrChkYear.Checked
     End Sub
 
     Private Sub ucrInputDirection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDirection.ControlValueChanged, ucrReceiverLetters.ControlValueChanged
@@ -463,7 +475,8 @@ Public Class dlgConversions
         ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged,
         ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged,
         ucrPnlElements.ControlContentsChanged, ucrReceiverDegrees.ControlContentsChanged, ucrChkVariable.ControlContentsChanged,
-        ucrInputDegree.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrChkYear.ControlContentsChanged
+        ucrInputDegree.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged,
+        ucrNudBaseYear.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
