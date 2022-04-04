@@ -268,6 +268,7 @@ Public Class dlgCorrelation
         clsFashionFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionFunction.AddParameter("na_print", Chr(34) & " " & Chr(34), iPosition:=3)
+        clsFashionFunction.iCallType = 2
 
         clsShaveFunction.SetPackageName("corrr")
         clsShaveFunction.SetRCommand("shave")
@@ -281,8 +282,8 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        'clsFashionFunction.SetAssignTo("last_fashion", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_fashion")
-        'clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
+        clsFashionFunction.SetAssignTo("last_fashion", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_fashion")
+        clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -393,7 +394,7 @@ Public Class dlgCorrelation
                 Else
                     clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
                 End If
-                clsCorrelationFunction.RemoveAssignTo()
+                'clsCorrelationFunction.RemoveAssignTo()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
                 grpDisplayOptions.Show()
             Else
@@ -434,14 +435,10 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrChkDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
-        If ucrSaveDataFrame.ucrChkSave.Checked Then
-            clsFashionFunction.SetAssignTo(ucrSaveDataFrame.GetText, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:=ucrSaveDataFrame.GetText)
-            clsCorrelationFunction.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 0
-            'clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
-        Else
+        If ucrChkDisplay.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
-            clsFashionFunction.RemoveAssignTo()
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 End Class
