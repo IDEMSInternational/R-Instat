@@ -56,7 +56,6 @@ Partial Class dlgCorrelation
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkDisplay = New instat.ucrCheck()
         Me.ucrChkShave = New instat.ucrCheck()
-        Me.lblDisplayOnDiagonal = New System.Windows.Forms.Label()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
@@ -73,7 +72,6 @@ Partial Class dlgCorrelation
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.ucrSaveModel = New instat.ucrSave()
-        Me.ucrInputDiagonal = New instat.ucrInputComboBox()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
@@ -126,9 +124,9 @@ Partial Class dlgCorrelation
         Me.lblDisplayNas.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDisplayNas.Location = New System.Drawing.Point(17, 393)
         Me.lblDisplayNas.Name = "lblDisplayNas"
-        Me.lblDisplayNas.Size = New System.Drawing.Size(67, 13)
+        Me.lblDisplayNas.Size = New System.Drawing.Size(106, 13)
         Me.lblDisplayNas.TabIndex = 56
-        Me.lblDisplayNas.Text = "Display NAs:"
+        Me.lblDisplayNas.Text = "Display On Diagonal:"
         '
         'lblDecimalPlaces
         '
@@ -282,9 +280,9 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkDisplay.AutoSize = True
         Me.ucrChkDisplay.Checked = False
-        Me.ucrChkDisplay.Location = New System.Drawing.Point(258, 128)
+        Me.ucrChkDisplay.Location = New System.Drawing.Point(166, 128)
         Me.ucrChkDisplay.Name = "ucrChkDisplay"
-        Me.ucrChkDisplay.Size = New System.Drawing.Size(117, 23)
+        Me.ucrChkDisplay.Size = New System.Drawing.Size(173, 23)
         Me.ucrChkDisplay.TabIndex = 65
         '
         'ucrChkShave
@@ -293,18 +291,8 @@ Partial Class dlgCorrelation
         Me.ucrChkShave.Checked = False
         Me.ucrChkShave.Location = New System.Drawing.Point(8, 128)
         Me.ucrChkShave.Name = "ucrChkShave"
-        Me.ucrChkShave.Size = New System.Drawing.Size(192, 23)
+        Me.ucrChkShave.Size = New System.Drawing.Size(154, 23)
         Me.ucrChkShave.TabIndex = 26
-        '
-        'lblDisplayOnDiagonal
-        '
-        Me.lblDisplayOnDiagonal.AutoSize = True
-        Me.lblDisplayOnDiagonal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDisplayOnDiagonal.Location = New System.Drawing.Point(9, 294)
-        Me.lblDisplayOnDiagonal.Name = "lblDisplayOnDiagonal"
-        Me.lblDisplayOnDiagonal.Size = New System.Drawing.Size(106, 13)
-        Me.lblDisplayOnDiagonal.TabIndex = 51
-        Me.lblDisplayOnDiagonal.Text = "Display On Diagonal:"
         '
         'lblConfInterval
         '
@@ -467,17 +455,6 @@ Partial Class dlgCorrelation
         Me.ucrSaveModel.Size = New System.Drawing.Size(266, 24)
         Me.ucrSaveModel.TabIndex = 48
         '
-        'ucrInputDiagonal
-        '
-        Me.ucrInputDiagonal.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiagonal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDiagonal.GetSetSelectedIndex = -1
-        Me.ucrInputDiagonal.IsReadOnly = False
-        Me.ucrInputDiagonal.Location = New System.Drawing.Point(127, 292)
-        Me.ucrInputDiagonal.Name = "ucrInputDiagonal"
-        Me.ucrInputDiagonal.Size = New System.Drawing.Size(51, 21)
-        Me.ucrInputDiagonal.TabIndex = 58
-        '
         'ucrNudConfidenceInterval
         '
         Me.ucrNudConfidenceInterval.AutoSize = True
@@ -567,7 +544,6 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.grpDisplayOptions)
         Me.Controls.Add(Me.ucrSaveDataFrame)
         Me.Controls.Add(Me.ucrSaveModel)
-        Me.Controls.Add(Me.lblDisplayOnDiagonal)
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.lblFirstColumn)
@@ -575,7 +551,6 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrReceiverSecondColumn)
         Me.Controls.Add(Me.ucrReceiverFirstColumn)
         Me.Controls.Add(Me.lblSecondColumn)
-        Me.Controls.Add(Me.ucrInputDiagonal)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -624,9 +599,7 @@ Partial Class dlgCorrelation
     Friend WithEvents grpDisplayOptions As GroupBox
     Friend WithEvents ucrSaveDataFrame As ucrSave
     Friend WithEvents ucrSaveModel As ucrSave
-    Friend WithEvents ucrInputDiagonal As ucrInputComboBox
     Friend WithEvents ucrNudConfidenceInterval As ucrNud
-    Friend WithEvents lblDisplayOnDiagonal As Label
     Friend WithEvents lblConfInterval As Label
     Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
     Friend WithEvents ucrReceiverSecondColumn As ucrReceiverSingle
