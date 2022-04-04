@@ -159,7 +159,6 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub SetMergingBy()
-        Dim dctJoinColumns As New Dictionary(Of String, String)
         Dim lstJoiningColumns As New List(Of String)
         lstJoinColumns.Clear()
         If ucrFromDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
