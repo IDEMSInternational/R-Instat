@@ -164,7 +164,7 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
         ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumns.AddToLinkedControls(ucrSaveDataFrame, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumns.AddToLinkedControls({ucrSaveDataFrame, ucrSaveFashion}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrChkDisplayOptions}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
@@ -174,14 +174,21 @@ Public Class dlgCorrelation
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name")
         ucrSaveModel.SetIsComboBox()
-        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        'ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrSaveDataFrame.SetPrefix("corr")
+        ucrSaveDataFrame.SetPrefix("my_corr")
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Result Name")
         ucrSaveDataFrame.SetIsComboBox()
-        ' ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
+        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_corrr")
+
+        ucrSaveFashion.SetPrefix("my_corr")
+        ucrSaveFashion.SetSaveTypeAsDataFrame()
+        ucrSaveFashion.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
+        ucrSaveFashion.SetCheckBoxText("Result Name")
+        ucrSaveFashion.SetIsComboBox()
+        ucrSaveFashion.SetAssignToIfUncheckedValue("last_corrr")
     End Sub
 
     Private Sub SetDefaults()
@@ -315,8 +322,8 @@ Public Class dlgCorrelation
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrSaveDataFrame.SetRCode(clsFashionFunction, bReset)
-        ucrSaveDataFrame.AddAdditionalRCode(clsCorrelationFunction, bReset)
+        ucrSaveDataFrame.SetRCode(clsCorrelationFunction, bReset)
+        ucrSaveFashion.SetRCode(clsFashionFunction, bReset)
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -371,14 +378,32 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
+        ucrBase.clsRsyntax.iCallType = 2
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
             grpDisplayOptions.Hide()
-            'ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoMultipleColumns.Checked Then
+            'If ucrSaveDataFrame.ucrChkSave.Checked AndAlso ucrSaveDataFrame.GetText <> "" Then
+            '    If ucrChkDisplayOptions.Checked Then
+            '        clsFashionFunction.SetAssignTo(strTemp:=ucrSaveFashion.GetText, strDataFrameNames:=ucrSaveFashion.GetText)
+            '        clsCorrelationFunction.RemoveAssignTo()
+            '    Else
+            '        clsCorrelationFunction.SetAssignTo(strTemp:=ucrSaveDataFrame.GetText, strDataFrameNames:=ucrSaveDataFrame.GetText)
+            '        clsFashionFunction.RemoveAssignTo()
+            '    End If
+            'Else
+            '    If ucrChkDisplayOptions.Checked Then
+            '        clsFashionFunction.SetAssignTo(strTemp:="last_fashion", strDataFrameNames:="last_fashion")
+            '        clsCorrelationFunction.RemoveAssignTo()
+            '    Else
+            '        clsCorrelationFunction.SetAssignTo(strTemp:="last_corr", strDataFrameNames:="last_corr")
+            '        clsFashionFunction.RemoveAssignTo()
+            '    End If
+            'End If
+
             If ucrChkDisplayOptions.Checked Then
                 If ucrChkShave.Checked Then
                     clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsShaveFunction, iPosition:=0)
@@ -394,16 +419,24 @@ Public Class dlgCorrelation
                 Else
                     clsFashionFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
                 End If
-                'clsCorrelationFunction.RemoveAssignTo()
+                ucrSaveFashion.Visible = True
+                clsCorrelationFunction.RemoveAssignTo()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
                 grpDisplayOptions.Show()
             Else
-                'clsCorrelationFunction.SetAssignTo(ucrSaveDataFrame.GetText, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:=ucrSaveDataFrame.GetText)
+                ucrSaveFashion.Visible = False
+                If ucrSaveDataFrame.GetText <> "" Then
+                    clsCorrelationFunction.SetAssignTo(strTemp:=ucrSaveDataFrame.GetText, strDataFrameNames:=ucrSaveDataFrame.GetText)
+                End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
                 ucrReceiverMultipleColumns.SetMeAsReceiver()
                 grpDisplayOptions.Hide()
             End If
-            'ucrBase.clsRsyntax.iCallType = 0
+            If ucrChkDisplay.Checked Then
+                ucrBase.clsRsyntax.iCallType = 2
+            Else
+                ucrBase.clsRsyntax.iCallType = 0
+            End If
         End If
         ReceiverColumns()
     End Sub
@@ -431,14 +464,6 @@ Public Class dlgCorrelation
         ElseIf rdoMultipleColumns.Checked Then
             clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
             clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
-        End If
-    End Sub
-
-    Private Sub ucrChkDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
-        If ucrChkDisplay.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
-        Else
-            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 End Class

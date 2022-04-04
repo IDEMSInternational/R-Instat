@@ -54,6 +54,7 @@ Partial Class dlgCorrelation
         Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDisplay = New instat.ucrCheck()
         Me.ucrChkShave = New instat.ucrCheck()
         Me.lblDisplayOnDiagonal = New System.Windows.Forms.Label()
         Me.lblConfInterval = New System.Windows.Forms.Label()
@@ -77,7 +78,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
-        Me.ucrChkDisplay = New instat.ucrCheck()
+        Me.ucrSaveFashion = New instat.ucrSave()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.grpDisplayOptions.SuspendLayout()
@@ -276,6 +277,15 @@ Partial Class dlgCorrelation
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Tag = "Display Options"
         Me.grpDisplayOptions.Text = "Display Options"
+        '
+        'ucrChkDisplay
+        '
+        Me.ucrChkDisplay.AutoSize = True
+        Me.ucrChkDisplay.Checked = False
+        Me.ucrChkDisplay.Location = New System.Drawing.Point(258, 128)
+        Me.ucrChkDisplay.Name = "ucrChkDisplay"
+        Me.ucrChkDisplay.Size = New System.Drawing.Size(117, 23)
+        Me.ucrChkDisplay.TabIndex = 65
         '
         'ucrChkShave
         '
@@ -520,14 +530,14 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn.TabIndex = 40
         Me.ucrReceiverFirstColumn.ucrSelector = Nothing
         '
-        'ucrChkDisplay
+        'ucrSaveFashion
         '
-        Me.ucrChkDisplay.AutoSize = True
-        Me.ucrChkDisplay.Checked = False
-        Me.ucrChkDisplay.Location = New System.Drawing.Point(258, 128)
-        Me.ucrChkDisplay.Name = "ucrChkDisplay"
-        Me.ucrChkDisplay.Size = New System.Drawing.Size(117, 23)
-        Me.ucrChkDisplay.TabIndex = 65
+        Me.ucrSaveFashion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveFashion.Location = New System.Drawing.Point(10, 510)
+        Me.ucrSaveFashion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFashion.Name = "ucrSaveFashion"
+        Me.ucrSaveFashion.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveFashion.TabIndex = 65
         '
         'dlgCorrelation
         '
@@ -535,6 +545,7 @@ Partial Class dlgCorrelation
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 596)
+        Me.Controls.Add(Me.ucrSaveFashion)
         Me.Controls.Add(Me.ucrChkDisplayOptions)
         Me.Controls.Add(Me.ucrChkAbsolute)
         Me.Controls.Add(Me.lblMethod)
@@ -624,4 +635,5 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrReceiverFirstColumn As ucrReceiverSingle
     Friend WithEvents lblFirstColumn As Label
     Friend WithEvents ucrChkDisplay As ucrCheck
+    Friend WithEvents ucrSaveFashion As ucrSave
 End Class
