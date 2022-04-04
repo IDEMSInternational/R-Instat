@@ -152,7 +152,7 @@ Public Class dlgMakeDate
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrSaveDate.SetLabelText("Save Date:")
         ucrSaveDate.SetIsComboBox()
-        ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+        'ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
         ucrChkTwoDigitYear.SetText("2-digit years")
