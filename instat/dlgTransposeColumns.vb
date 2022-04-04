@@ -133,11 +133,24 @@ Public Class dlgTransposeColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverVariableNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariableNames.ControlValueChanged
+    Private Sub ucrReceiverVariableNames_ControlValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverVariableNames.Enter
+        Dim grps As New ListViewGroup
         If Not ucrReceiverColumnsToTranspose.IsEmpty Then
             ucrSelectorTransposeColumns.lstAvailableVariable.Clear()
             ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Clear()
             ucrSelectorTransposeColumns.lstAvailableVariable.Columns.Add("Variables")
+
+            If ucrReceiverColumnsToTranspose.GetVariableNamesList(False).Count > 1 Then
+                grps = New ListViewGroup(key:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                         headerText:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Add(grps)
+            End If
+
+            For j = 0 To ucrReceiverColumnsToTranspose.GetVariableNamesList(False).Count - 1
+                ucrSelectorTransposeColumns.lstAvailableVariable.Items.Add(ucrReceiverColumnsToTranspose.GetVariableNamesList(False)(j))
+                ucrSelectorTransposeColumns.lstAvailableVariable.Items(j).Tag = ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                ucrSelectorTransposeColumns.lstAvailableVariable.Items(j).ToolTipText = ucrReceiverColumnsToTranspose.GetVariableNamesList(False)(0)
+            Next
         Else
 
         End If
