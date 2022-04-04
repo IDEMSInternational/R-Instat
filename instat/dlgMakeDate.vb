@@ -151,8 +151,8 @@ Public Class dlgMakeDate
         ucrSaveDate.SetSaveTypeAsColumn()
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrSaveDate.SetLabelText("Save Date:")
+
         ucrSaveDate.SetIsComboBox()
-        'ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
 
         ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
         ucrChkTwoDigitYear.SetText("2-digit years")
@@ -482,6 +482,7 @@ Public Class dlgMakeDate
         If rdoSingleColumn.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
             ucrReceiverForDate.SetMeAsReceiver()
+            ucrSaveDate.setLinkedReceiver(ucrReceiverForDate)
             grpSingleColumn.Show()
             grpTwoColumns.Hide()
             grpThreeColumns.Hide()
@@ -489,6 +490,7 @@ Public Class dlgMakeDate
             grpFormats.Visible = (rdoSpecifyFormat.Checked)
         ElseIf rdoTwoColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearDay)
+            ucrSaveDate.setLinkedReceiver(ucrReceiverYearTwo)
             ucrReceiverYearTwo.SetMeAsReceiver()
             ucrReceiverYearTwo.SetIncludedDataTypes({"numeric"})
             ucrReceiverDayTwo.SetIncludedDataTypes({"numeric"})
@@ -503,10 +505,13 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearMonthDay)
             If rdoYearColumn.Checked Then
                 ucrReceiverYearThree.SetMeAsReceiver()
+                ucrSaveDate.setLinkedReceiver(ucrReceiverYearThree)
             ElseIf rdoMonthColumn.Checked Then
                 ucrReceiverMonthThree.SetMeAsReceiver()
+                ucrSaveDate.setLinkedReceiver(ucrReceiverMonthThree)
             ElseIf rdoDayColumn.Checked Then
                 ucrReceiverDayThree.SetMeAsReceiver()
+                ucrSaveDate.setLinkedReceiver(ucrReceiverDayThree)
             End If
             grpSingleColumn.Hide()
             grpTwoColumns.Hide()
