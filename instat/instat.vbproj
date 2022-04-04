@@ -1022,12 +1022,6 @@
     <Compile Include="dlgFlatFrequencyTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFrequency.Designer.vb">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
     </Compile>
@@ -3411,9 +3405,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.sw-KE.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgHelpVignettes.resx">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3686,9 +3677,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
