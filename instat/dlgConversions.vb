@@ -185,7 +185,7 @@ Public Class dlgConversions
         ucrPnlConversions.AddToLinkedControls(ucrReceiverMinutes, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverSeconds, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrInputDirection, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrSaveConversions, {rdoUnits, rdoDayLength}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrSaveConversions, {rdoUnits, rdoDayLength, rdoYear}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls({ucrChkVariable}, {rdoCoordinates}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputDirection.AddToLinkedControls(ucrReceiverLetters, {"Variable"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls({ucrInputDegree, ucrInputMinute, ucrInputSecond}, {False}, bNewLinkedHideIfParameterMissing:=True)

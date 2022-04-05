@@ -688,11 +688,11 @@ Partial Class dlgConversions
         Me.ucrNudBaseYear.AutoSize = True
         Me.ucrNudBaseYear.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBaseYear.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBaseYear.Location = New System.Drawing.Point(264, 152)
+        Me.ucrNudBaseYear.Location = New System.Drawing.Point(265, 152)
         Me.ucrNudBaseYear.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBaseYear.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBaseYear.Name = "ucrNudBaseYear"
-        Me.ucrNudBaseYear.Size = New System.Drawing.Size(81, 20)
+        Me.ucrNudBaseYear.Size = New System.Drawing.Size(64, 20)
         Me.ucrNudBaseYear.TabIndex = 30
         Me.ucrNudBaseYear.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
