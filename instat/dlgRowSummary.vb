@@ -20,7 +20,11 @@ Public Class dlgRowSummary
     Private bReset As Boolean = True
     Private clsApplyFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsGetColumnsFunction As RFunction
+    Private clsGetColumnsFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsRowWisePipeOperator As New ROperator
+    Private clsRowWiseFunction, clsMutateFunction As New RFunction
+    Private clsMeanFunction As New RFunction
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,13 +41,15 @@ Public Class dlgRowSummary
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
 
+        ucrReceiverForRowSummaries.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
         ucrReceiverForRowSummaries.bUseFilteredData = False
-        ucrReceiverForRowSummaries.bForceAsDataFrame = True
-        ucrReceiverForRowSummaries.SetParameterIsRFunction()
+        'ucrReceiverForRowSummaries.bForceAsDataFrame = True
+        ucrReceiverForRowSummaries.SetParameterIsString()
+        ucrReceiverForRowSummaries.bWithQuotes = False
 
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
         ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
@@ -53,7 +59,7 @@ Public Class dlgRowSummary
         ucrPnlRowSummaries.AddRadioButton(rdoSingle)
         ucrPnlRowSummaries.AddRadioButton(rdoMultiple)
 
-        ucrPnlRowSummaries.AddFunctionNamesCondition(rdoSingle, {"apply"})
+        ucrPnlRowSummaries.AddFunctionNamesCondition(rdoSingle, {"rowwise"})
 
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
@@ -98,6 +104,11 @@ Public Class dlgRowSummary
         clsApplyFunction = New RFunction
         clsDummyFunction = New RFunction
         clsGetColumnsFunction = New RFunction
+        clsPipeOperator = New ROperator
+        clsRowWisePipeOperator = New ROperator
+        clsRowWiseFunction = New RFunction
+        clsMutateFunction = New RFunction
+        clsMeanFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
@@ -105,21 +116,38 @@ Public Class dlgRowSummary
 
         clsDummyFunction.AddParameter("checked", "mean", iPosition:=0)
         clsDummyFunction.AddParameter("user_defined", "anyDuplicated", iPosition:=1)
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsPipeOperator.AddParameter("right", clsROperatorParameter:=clsRowWisePipeOperator, iPosition:=1)
+
+        clsRowWisePipeOperator.SetOperation("%>%")
+        clsRowWisePipeOperator.AddParameter("left", clsRFunctionParameter:=clsRowWiseFunction, iPosition:=0)
+        clsRowWisePipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+
+        clsRowWiseFunction.SetPackageName("dplyr")
+        clsRowWiseFunction.SetRCommand("rowwise")
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+        clsMutateFunction.AddParameter("Mean", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+
+        clsMeanFunction.SetRCommand("mean")
 
         'Defining the default RFunction
         clsApplyFunction.SetPackageName("base")
         clsApplyFunction.SetRCommand("apply")
         clsApplyFunction.AddParameter("FUN", "mean", iPosition:=2)
         clsApplyFunction.AddParameter("MARGIN", 1)
-        clsApplyFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsApplyFunction)
+        clsPipeOperator.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
-        ucrPnlRowSummaries.SetRCode(clsApplyFunction, bReset)
+        'ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
+        ucrPnlRowSummaries.SetRCode(clsPipeOperator, bReset)
+        ucrReceiverForRowSummaries.SetRCode(clsMeanFunction, bReset)
         ucrPnlStatistics.SetRCode(clsDummyFunction, bReset)
-        ucrSaveResults.SetRCode(clsApplyFunction, bReset)
+        ucrSaveResults.SetRCode(clsPipeOperator, bReset)
         ucrInputUserDefined.SetRCode(clsDummyFunction, bReset)
     End Sub
 
