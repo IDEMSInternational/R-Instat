@@ -50,17 +50,15 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.SetText("Set Seed")
         ucrChkStratifyingFactor.SetParameter(New RParameter("strata", 2))
         ucrChkStratifyingFactor.SetValueIfUnchecked("NULL")
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRandomSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLag.SetText("Lag")
-        ucrChkLag.SetParameter(New RParameter("lag", 2))
-
+        ucrNudLag.SetParameter(New RParameter("lag", 3))
+        ucrNudLag.SetMinMax(-100, 100)
+        ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkTestingData.SetText("Save Testing Data")
-        'ucrChkTestingData.SetParameter(New RParameter("x", 0))
-        'ucrChkTestingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkTrainingData.SetText("Save Training Data")
-        'ucrChkTrainingData.SetParameter(New RParameter("x", 0))
-        'ucrChkTrainingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrSaveRandomSplit.SetLabelText("Save sample to:")
         ucrSaveRandomSplit.SetSaveTypeAsDataFrame()
@@ -68,8 +66,6 @@ Public Class dlgRandomSplit
         ucrSaveRandomSplit.SetPrefix("training")
         ucrSaveRandomSplit.SetIsComboBox()
 
-        ucrNudLag.SetParameter(New RParameter("lag", 3))
-        ucrNudLag.SetMinMax(-100, 100)
 
         ucrNudBreaks.SetLinkedDisplayControl(lblBreaks)
         ucrNudBreaks.SetParameter(New RParameter("breaks", 4))
@@ -94,7 +90,7 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {"initial_time_split", "training", "testing"})
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool, ucrNudBreaks}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        'ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
     End Sub
 
@@ -196,10 +192,6 @@ Public Class dlgRandomSplit
     End Sub
 
     'Private Sub ucrChkStratifyingFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlValueChanged
-    '    If ucrChkStratifyingFactor.Checked Then
-    '        ucrNudPool.Visible = True
-    '    Else
-    '        ucrNudPool.Visible = False
-    '    End If
+
     'End Sub
 End Class
