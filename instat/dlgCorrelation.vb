@@ -101,12 +101,6 @@ Public Class dlgCorrelation
         ucrInputDisplayNas.SetItems(dctNaPrint)
         ucrInputDisplayNas.AddQuotesIfUnrecognised = False
 
-        'ucrInputDiagonal.SetParameter(New RParameter("diagonal", 6))
-        'dctDiagonal.Add("NA", "NA")
-        'dctDiagonal.Add("1", "1")
-        'ucrInputDiagonal.SetItems(dctDiagonal)
-        'ucrInputDiagonal.AddQuotesIfUnrecognised = False
-
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
         ucrPnlColumns.AddFunctionNamesCondition(rdoTwoColumns, "cor.test")
@@ -157,12 +151,10 @@ Public Class dlgCorrelation
         ucrPnlColumns.AddToLinkedControls({ucrReceiverMultipleColumns}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMultipleColumns.SetLinkedDisplayControl(lblSelectedVariables)
         ucrNudConfidenceInterval.SetLinkedDisplayControl(lblConfInterval)
-        'ucrInputDiagonal.SetLinkedDisplayControl(lblDisplayOnDiagonal)
         ucrInputDisplayNas.SetLinkedDisplayControl(lblDisplayNas)
         ucrInputRearrange.SetLinkedDisplayControl(lblMethod)
         ucrNudDecimalPlaces.SetLinkedDisplayControl(lblDecimalPlaces)
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCompleteRowsOnly)
-        'ucrPnlColumns.AddToLinkedControls(ucrInputDiagonal, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlColumns.AddToLinkedControls(ucrNudDecimalPlaces, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrSaveDataFrame, ucrSaveFashion}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrChkDisplayOptions}, {rdoMultipleColumns}, bNewLinkedHideIfParameterMissing:=True)
@@ -174,21 +166,21 @@ Public Class dlgCorrelation
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name")
         ucrSaveModel.SetIsComboBox()
-        'ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveDataFrame.SetPrefix("my_corr")
         ucrSaveDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveDataFrame.SetCheckBoxText("Result Name")
         ucrSaveDataFrame.SetIsComboBox()
-        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_corrr")
+        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_correlation")
 
         ucrSaveFashion.SetPrefix("my_corr")
         ucrSaveFashion.SetSaveTypeAsDataFrame()
         ucrSaveFashion.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveFashion.SetCheckBoxText("Result Name")
         ucrSaveFashion.SetIsComboBox()
-        ucrSaveFashion.SetAssignToIfUncheckedValue("last_corrr")
+        ucrSaveFashion.SetAssignToIfUncheckedValue("last_fashion")
     End Sub
 
     Private Sub SetDefaults()
@@ -304,7 +296,6 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
-        'ucrInputDiagonal.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
@@ -378,7 +369,7 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged, ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrChkDisplay.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged, ucrSaveFashion.ControlValueChanged, ucrSaveModel.ControlValueChanged
         ucrBase.clsRsyntax.iCallType = 2
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
@@ -424,10 +415,13 @@ Public Class dlgCorrelation
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
                 grpDisplayOptions.Show()
             Else
+                clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_correlation")
                 ucrSaveFashion.Visible = False
-                If ucrSaveDataFrame.GetText <> "" Then
-                    clsCorrelationFunction.SetAssignTo(strTemp:=ucrSaveDataFrame.GetText, strDataFrameNames:=ucrSaveDataFrame.GetText)
-                End If
+                'If ucrSaveDataFrame.GetText <> "" Then
+                'clsCorrelationFunction.SetAssignTo(strTemp:=ucrSaveDataFrame.GetText, strDataFrameNames:=ucrSaveDataFrame.GetText)
+                'End If
+                'clsCorrelationFunction.SetAssignTo(strTemp:="last_corr", strDataFrameNames:="last_corr")
+
                 ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
                 ucrReceiverMultipleColumns.SetMeAsReceiver()
                 grpDisplayOptions.Hide()
