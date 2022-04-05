@@ -291,7 +291,7 @@ Public Class clsDataFramePage
 
         For i = 0 To _clsDataFrame.ColumnNames.ToList.Count - 1
             columnHeader = GetColumnDispayDetails(_clsDataFrame.ColumnNames.ToList(i), vecColumnDataTypes(i))
-            If bApplyBackGroundColumnColours AndAlso vecColumnColours IsNot Nothing Then
+            If bApplyBackGroundColumnColours AndAlso vecColumnColours(i) > 0 Then
                 columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, vecColumnColours(i).ToString())
             End If
             _lstColumns.Add(columnHeader)
