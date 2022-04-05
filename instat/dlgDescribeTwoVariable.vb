@@ -24,8 +24,9 @@ Public Class dlgDescribeTwoVariable
            clsConcFunction, clsRAnova, clsFrequencyTables, clsSkimrFunction, clsSummariesList,
            clsGroupByFunction, clsDummyFunction, clsFactorsList, clsMmtableFunction,
            clsHeaderLeftFunction, clsHeaderTopFunction, clsHeaderTopLeftSummaryVariableFunction,
-           clsHeaderLeftTopFuncion, clsFrequencyParameters As New RFunction
-    Private clsGroupByPipeOperator, clsMmtableOperator As New ROperator
+           clsHeaderLeftTopFuncion, clsFrequencyParameters, clsMapFunction, clsFactorVectorFunction As New RFunction
+    Private clsGroupByPipeOperator, clsMmtableOperator, clsFrequencyPipeOperator,
+            clsDataSummaryOperator As New ROperator
     Private lstSelectedColumns As New List(Of String)
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
@@ -107,14 +108,14 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 2))
-        ucrReceiverMultiplePercentages.SetParameterIsString()
-        ucrReceiverMultiplePercentages.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverMultiplePercentages.SetDataType("factor")
-        ucrReceiverMultiplePercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
+        ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 2))
+        ucrReceiverPercentages.SetParameterIsString()
+        ucrReceiverPercentages.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverPercentages.SetDataType("factor")
+        ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
         ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
         ucrChkPercentageProportion.SetText("Display as Decimal")
@@ -153,17 +154,36 @@ Public Class dlgDescribeTwoVariable
         clsHeaderLeftTopFuncion = New RFunction
         clsDummyFunction = New RFunction
         clsFrequencyParameters = New RFunction
+        clsMapFunction = New RFunction
+        clsFactorVectorFunction = New RFunction
+        clsDataSummaryOperator = New ROperator
+        clsFrequencyPipeOperator = New ROperator
         clsMmtableOperator = New ROperator
 
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
         ucrInputMarginName.SetText("All")
+        ucrNudColumnFactors.SetText("2")
         ucrInputMarginName.Visible = False
 
         clsFactorsList.SetRCommand("c")
 
         clsFrequencyParameters.SetRCommand("c")
+
+        clsDataSummaryOperator.SetOperation("~")
+        clsDataSummaryOperator.AddParameter("summary", clsRFunctionParameter:=clsFrequencyTables, iPosition:=1)
+
+        clsFactorVectorFunction.SetRCommand("c")
+        clsFactorVectorFunction.SetAssignTo("multiple_receiver_cols")
+
+        clsMapFunction.SetPackageName("purrr")
+        clsMapFunction.SetRCommand("map")
+        clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsFactorVectorFunction, iPosition:=0)
+
+        clsFrequencyPipeOperator.SetOperation("%>%")
+        clsFrequencyPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsFrequencyParameters.AddParameter("map", clsRFunctionParameter:=clsMapFunction, iPosition:=1)
 
         clsHeaderLeftFunction.SetPackageName("mmtable2")
         clsHeaderLeftFunction.SetRCommand("header_top_left")
@@ -258,7 +278,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverNumericVariable.SetRCode(clsFrequencyTables, bReset)
         ucrChkDisplayMargins.SetRCode(clsFrequencyParameters, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyParameters, bReset)
-        ucrReceiverMultiplePercentages.SetRCode(clsFrequencyParameters, bReset)
+        ucrReceiverPercentages.SetRCode(clsFrequencyParameters, bReset)
         ucrChkPercentageProportion.SetRCode(clsFrequencyParameters, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrNudSigFigs.SetRCode(clsFrequencyParameters, bReset)
@@ -387,7 +407,7 @@ Public Class dlgDescribeTwoVariable
         Results()
         TestOKEnabled()
         If ucrChangedControl Is ucrReceiverSecondVar Then
-            clsHeaderTopFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
+
         End If
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
@@ -435,6 +455,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
         clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsFrequencyPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 
     Private Sub ucrReceiverSecondOpt_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondOpt.ControlValueChanged
@@ -480,6 +501,19 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
+        If Not ucrReceiverFirstVars.IsEmpty Then
+            Dim iPosition As Integer = 0
+            clsFactorVectorFunction.ClearParameters()
+            For Each strColumn In ucrReceiverFirstVars.GetVariableNamesList()
+                clsFactorVectorFunction.AddParameter(strColumn, strColumn, bIncludeArgumentName:=False, iPosition:=iPosition)
+            Next
+        End If
+        SwapHeaderFunctions()
+        ChangeLocations()
+        AddFactorVariable()
+    End Sub
+
+    Private Sub AddFactorVariable()
         If ucrReceiverFirstVars.IsEmpty Then
             Exit Sub
         End If
@@ -490,21 +524,23 @@ Public Class dlgDescribeTwoVariable
 
         Dim iColumnNumber As Integer = 1
         For Each strColumnName In ucrReceiverFirstVars.GetVariableNamesAsList
-            If iColumnNumber = 1 Then
-                clsHeaderLeftFunction.AddParameter("variable", strColumnName, iPosition:=0)
-            End If
             lstSelectedColumns.Add("first" & iColumnNumber)
-            clsFactorsList.AddParameter("first" & iColumnNumber, Chr(34) & strColumnName & Chr(34), iPosition:=iColumnNumber, bIncludeArgumentName:=False)
-            iColumnNumber = iColumnNumber + 1
+            If strColumnName <> ucrReceiverSecondVar.GetVariableNames(bWithQuotes:=False) Then
+                clsFactorsList.AddParameter("first" & iColumnNumber, Chr(34) & strColumnName & Chr(34), iPosition:=iColumnNumber, bIncludeArgumentName:=False)
+                iColumnNumber = iColumnNumber + 1
+            End If
         Next
-        ChangeLocations()
     End Sub
 
     Private Sub SwapHeaderFunctions()
-        If ucrNudColumnFactors.GetText = 1 Then
-
-        ElseIf ucrNudColumnFactors.GetText = 2 Then
-
+        If Not ucrReceiverFirstVars.IsEmpty Then
+            If ucrNudColumnFactors.GetText = 1 Then
+                clsHeaderLeftFunction.AddParameter("variable", ucrReceiverFirstVars.GetVariableNamesList()(0), iPosition:=0)
+                clsHeaderTopFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
+            ElseIf ucrNudColumnFactors.GetText = 2 Then
+                clsHeaderLeftFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(False), iPosition:=0)
+                clsHeaderTopFunction.AddParameter("variable", ucrReceiverFirstVars.GetVariableNamesList()(0), iPosition:=0)
+            End If
         End If
     End Sub
 
@@ -538,7 +574,9 @@ Public Class dlgDescribeTwoVariable
                 ucrReceiverNumericVariable.SetMeAsReceiver()
             End If
         End If
+        SwapHeaderFunctions()
         ChangeLocations()
+        AddFactorVariable()
     End Sub
 
     Private Sub ucrChkDisplayMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayMargins.ControlValueChanged
@@ -557,14 +595,19 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
         If ucrChkDisplayAsPercentage.Checked Then
-            ucrReceiverMultiplePercentages.SetMeAsReceiver()
+            ucrReceiverPercentages.SetMeAsReceiver()
         Else
             ucrReceiverFirstVars.SetMeAsReceiver()
         End If
     End Sub
 
-    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged, ucrChkDisplayAsPercentage.ControlValueChanged, ucrNudSigFigs.ControlValueChanged,
-        ucrReceiverMultiplePercentages.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged
+    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
+        ucrChkDisplayAsPercentage.ControlValueChanged, ucrNudSigFigs.ControlValueChanged,
+        ucrChkDisplayMargins.ControlValueChanged, ucrReceiverPercentages.ControlValueChanged
         AddRemoveFrequencyParameters()
+    End Sub
+
+    Private Sub ucrNudColumnFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumnFactors.ControlValueChanged
+        SwapHeaderFunctions()
     End Sub
 End Class
