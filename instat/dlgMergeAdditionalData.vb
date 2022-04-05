@@ -280,6 +280,7 @@ Public Class dlgMergeAdditionalData
     Private Sub ucrInputMergingBy_TextChanged(sender As Object, e As EventArgs) Handles ucrInputMergingBy.TextChanged
         AddColumns()
         CheckUnique()
+        SetDataFrameAssign()
         SetInputCheckVisibility(False)
     End Sub
 
