@@ -56,7 +56,7 @@ Partial Class dlgExportDataset
         Me.lblConfirm.AutoSize = True
         Me.lblConfirm.ForeColor = System.Drawing.Color.Green
         Me.lblConfirm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirm.Location = New System.Drawing.Point(85, 245)
+        Me.lblConfirm.Location = New System.Drawing.Point(145, 246)
         Me.lblConfirm.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirm.Name = "lblConfirm"
         Me.lblConfirm.Size = New System.Drawing.Size(148, 13)
@@ -108,7 +108,7 @@ Partial Class dlgExportDataset
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 285)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 53)
@@ -169,7 +169,7 @@ Partial Class dlgExportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(441, 331)
+        Me.ClientSize = New System.Drawing.Size(441, 347)
         Me.Controls.Add(Me.chkSaveAsSingleFile)
         Me.Controls.Add(Me.cboFileType)
         Me.Controls.Add(Me.lblFileExtension)

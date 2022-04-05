@@ -2519,7 +2519,7 @@ get_quarter_label <-   function(quarter, start_month){
   return(factor(x = qtr, levels = unique(qtr)))
 }
 
-is.containlabel <- function(x){
+is.containVariableLabel <- function(x){
   return(isTRUE(sjlabelled::get_label(x) != ""))
 }
 
@@ -2533,4 +2533,8 @@ is.NAvariable <- function(x){
 
 is.levelscount <- function(x, n){
  return(isTRUE(sum(levels(x)) == n))
+}
+
+is.containValueLabel <- function(x){
+  return(labels_label %in% names(attributes(x)))
 }
