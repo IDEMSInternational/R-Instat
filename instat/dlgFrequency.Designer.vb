@@ -355,6 +355,6 @@ Partial Class dlgFrequency
     Friend WithEvents ucrInputMarginName As ucrInputTextBox
     Friend WithEvents lblMarginName As Label
     Friend WithEvents ucrChkDisplaySummariesAsRow As ucrCheck
-    Friend WithEvents ucrNudColumnFactors As ucrNud
     Friend WithEvents lblColumnFactors As Label
+    Friend WithEvents ucrNudColumnFactors As ucrNud
 End Class

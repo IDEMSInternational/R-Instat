@@ -51,7 +51,7 @@ Public Class dlgDescribeTwoVariable
         ucrBase.clsRsyntax.iCallType = 2
 
         iUcrBaseXLocation = ucrBase.Location.X
-        iDialogueXsize = Me.Location.X
+        iDialogueXsize = Me.Size.Width
 
         ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDescribeTwoVar.SetParameterIsString()
@@ -92,7 +92,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 5))
-        ucrChkDisplayMargins.SetText("Display Outer Margins")
+        ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
@@ -123,6 +123,8 @@ Public Class dlgDescribeTwoVariable
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 6))
         ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
+
+        ucrNudColumnFactors.SetMinMax(1, 2)
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -416,17 +418,17 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ChangeLocations()
         If rdoSkim.Checked Then
-            ucrBase.Location = New Point(iUcrBaseXLocation, 326)
-            Me.Size = New Point(iDialogueXsize, 419)
+            ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+            Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
         Else
             If strFirstVariablesType = "categorical" AndAlso
                 strSecondVariableType = "categorical" AndAlso
                 ucrReceiverNumericVariable.IsEmpty Then
-                ucrBase.Location = New Point(iUcrBaseXLocation, 463)
-                Me.Size = New Point(iDialogueXsize, 565)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 435)
+                Me.Size = New System.Drawing.Point(iDialogueXsize, 530)
             Else
-                ucrBase.Location = New Point(iUcrBaseXLocation, 326)
-                Me.Size = New Point(iDialogueXsize, 419)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+                Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
             End If
         End If
     End Sub
@@ -496,6 +498,14 @@ Public Class dlgDescribeTwoVariable
             iColumnNumber = iColumnNumber + 1
         Next
         ChangeLocations()
+    End Sub
+
+    Private Sub SwapHeaderFunctions()
+        If ucrNudColumnFactors.GetText = 1 Then
+
+        ElseIf ucrNudColumnFactors.GetText = 2 Then
+
+        End If
     End Sub
 
     Private Sub AddRemoveFrequencyParameters()

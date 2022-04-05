@@ -59,13 +59,14 @@ Partial Class dlgDescribeTwoVariable
         Me.grpFrequency = New System.Windows.Forms.GroupBox()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.lblSigFigs = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.ucrNudSigFigs = New instat.ucrNud()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
         Me.ucrChkPercentageProportion = New instat.ucrCheck()
         Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
-        Me.ucrInputMarginName = New instat.ucrInputTextBox()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.ucrReceiverNumericVariable = New instat.ucrReceiverSingle()
         Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -74,7 +75,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
@@ -251,7 +251,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblMarginName.AutoSize = True
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(295, 338)
+        Me.lblMarginName.Location = New System.Drawing.Point(11, 101)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
         Me.lblMarginName.TabIndex = 19
@@ -263,7 +263,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplay.Controls.Add(Me.ucrReceiverMultiplePercentages)
         Me.grpDisplay.Controls.Add(Me.ucrChkPercentageProportion)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
-        Me.grpDisplay.Location = New System.Drawing.Point(7, 307)
+        Me.grpDisplay.Location = New System.Drawing.Point(239, 250)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Size = New System.Drawing.Size(174, 147)
         Me.grpDisplay.TabIndex = 21
@@ -286,10 +286,13 @@ Partial Class dlgDescribeTwoVariable
         Me.grpFrequency.Controls.Add(Me.ucrNudColumnFactors)
         Me.grpFrequency.Controls.Add(Me.lblColumnFactors)
         Me.grpFrequency.Controls.Add(Me.ucrNudSigFigs)
+        Me.grpFrequency.Controls.Add(Me.ucrInputMarginName)
+        Me.grpFrequency.Controls.Add(Me.lblMarginName)
         Me.grpFrequency.Controls.Add(Me.lblSigFigs)
-        Me.grpFrequency.Location = New System.Drawing.Point(229, 250)
+        Me.grpFrequency.Controls.Add(Me.ucrChkDisplayMargins)
+        Me.grpFrequency.Location = New System.Drawing.Point(10, 302)
         Me.grpFrequency.Name = "grpFrequency"
-        Me.grpFrequency.Size = New System.Drawing.Size(186, 79)
+        Me.grpFrequency.Size = New System.Drawing.Size(223, 127)
         Me.grpFrequency.TabIndex = 22
         Me.grpFrequency.TabStop = False
         Me.grpFrequency.Text = "Display"
@@ -316,6 +319,15 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSigFigs.Tag = "Significant_Figures:"
         Me.lblSigFigs.Text = "Significant Figures:"
         '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(8, 435)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 13
+        '
         'ucrNudColumnFactors
         '
         Me.ucrNudColumnFactors.AutoSize = True
@@ -341,6 +353,26 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSigFigs.TabIndex = 5
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(53, 98)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputMarginName.TabIndex = 20
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(9, 74)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(149, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 17
         '
         'ucrReceiverMultiplePercentages
         '
@@ -372,26 +404,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
         Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkDisplayAsPercentage.TabIndex = 0
-        '
-        'ucrInputMarginName
-        '
-        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
-        Me.ucrInputMarginName.AutoSize = True
-        Me.ucrInputMarginName.IsMultiline = False
-        Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(337, 335)
-        Me.ucrInputMarginName.Name = "ucrInputMarginName"
-        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputMarginName.TabIndex = 20
-        '
-        'ucrChkDisplayMargins
-        '
-        Me.ucrChkDisplayMargins.AutoSize = True
-        Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(194, 336)
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(95, 23)
-        Me.ucrChkDisplayMargins.TabIndex = 17
         '
         'ucrReceiverNumericVariable
         '
@@ -487,27 +499,15 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDescribeTwoVar.TabIndex = 3
         '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 458)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 13
-        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(419, 520)
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(419, 491)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpFrequency)
         Me.Controls.Add(Me.grpDisplay)
-        Me.Controls.Add(Me.ucrInputMarginName)
-        Me.Controls.Add(Me.lblMarginName)
-        Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.lblNumericVariable)
         Me.Controls.Add(Me.ucrReceiverNumericVariable)
         Me.Controls.Add(Me.lblSecondFactor)
