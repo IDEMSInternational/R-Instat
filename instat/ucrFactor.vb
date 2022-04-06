@@ -694,6 +694,13 @@ Public Class ucrFactor
     ''' </summary>
     ''' <param name="clsTempParam"></param>
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+
+        'todo. delete later
+        If shtCurrSheet IsNot Nothing Then
+            UpdateParameterOLD(clsTempParam)
+            Exit Sub
+        End If
+
         If clsTempParam Is Nothing OrElse _grdSheet Is Nothing Then
             Exit Sub
         End If
@@ -731,6 +738,12 @@ Public Class ucrFactor
     ''' called when a dialog calls SetRCode for this control
     ''' </summary>
     Protected Overrides Sub SetControlValue()
+        'todo. delete later
+        If shtCurrSheet IsNot Nothing Then
+            SetControlValueOLD()
+            Exit Sub
+        End If
+
         Dim clsTempParam As RParameter = GetParameter()
         If clsTempParam Is Nothing OrElse Not clsTempParam.bIsString OrElse _grdSheet Is Nothing Then
             Exit Sub
