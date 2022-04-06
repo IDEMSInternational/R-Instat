@@ -36,7 +36,7 @@ Public Class ucrFactor
 
     Public Event SelectedLevelChanged()
     Public Event GridContentChanged()
-    Public Event GridVisibleChanged()
+    'Public Event GridVisibleChanged()
     Public bIsSelector As Boolean
     Public bIsMultipleSelector As Boolean
     Public bIsGridColumn As Boolean
@@ -92,7 +92,7 @@ Public Class ucrFactor
     ''' holds parameter names and column names associated with them
     ''' used in writing the contents of the columns in to the parameters
     ''' </summary>
-    Private _dctParamAndColNames As Dictionary(Of String, String)
+    Private _dctParamAndColNames As New Dictionary(Of String, String)
 
     ''' <summary>
     ''' holds the state of the control
@@ -134,9 +134,10 @@ Public Class ucrFactor
     '----------------------
     'events
 
-    Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        grdFactorData.Visible = True
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
@@ -197,18 +198,21 @@ Public Class ucrFactor
 
     Private Sub SetupControl(enumControlState As ControlStates,
                              ucrLinkedReceiver As ucrReceiverSingle,
-                             dctParamAndColNames As Dictionary(Of String, String),
+                            Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
                              Optional hiddenColumnNames As IEnumerable(Of String) = Nothing,
                              Optional extraColumnsNames As IEnumerable(Of String) = Nothing,
-                             Optional editableColumnNames As IEnumerable(Of String) = Nothing)
+                             Optional editableColumnNames As IEnumerable(Of String) = Nothing,
+                                 Optional bIncludeNALevel As Boolean = False)
 
         _enumControlState = enumControlState
         _ucrLinkedReceiver = ucrLinkedReceiver
 
-        _dctParamAndColNames = dctParamAndColNames
+        'if nothing then just initialise with empty collections
+        _dctParamAndColNames = If(dctParamAndColNames Is Nothing, New Dictionary(Of String, String), dctParamAndColNames)
+        _hiddenColumnNames = If(hiddenColumnNames Is Nothing, {}, hiddenColumnNames)
         _extraColumnNames = If(extraColumnsNames Is Nothing, {}, extraColumnsNames)
         _editableColumnNames = If(editableColumnNames Is Nothing, {}, editableColumnNames)
-        _hiddenColumnNames = If(hiddenColumnNames Is Nothing, {}, hiddenColumnNames)
+        _bIncludeNALevel = bIncludeNALevel
 
         'by default the sheet will always be filled have the 3 columns form the data frame;
         'level, label and freq. So remove any column names that are contained in the sheet by default
@@ -225,37 +229,36 @@ Public Class ucrFactor
         'todo. do further a developer check??
         'for instance  parameter column names must be in overall paremeter list
         'else throw a develper error
-
+        grdFactorData.Visible = True
         FillGridWithNewDataSheet()
         OnControlValueChanged()
     End Sub
 
     Public Sub SetAsNormalGridColumn(ucrLinkedReceiver As ucrReceiverSingle,
-                                     dctParamAndColNames As Dictionary(Of String, String),
+                                    Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
                                      Optional hiddenColumnNames As IEnumerable(Of String) = Nothing,
                                      Optional extraColumnsNames As IEnumerable(Of String) = Nothing,
                                      Optional editableColumnNames As IEnumerable(Of String) = Nothing)
 
-        SetupControl(ControlStates.NormalGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames, extraColumnsNames, editableColumnNames)
+        SetupControl(ControlStates.NormalGrid, ucrLinkedReceiver, dctParamAndColNames,
+                     hiddenColumnNames, extraColumnsNames, editableColumnNames)
 
     End Sub
 
     Public Sub SetAsSingleSelectorGrid(ucrLinkedReceiver As ucrReceiverSingle,
-                                       dctParamAndColNames As Dictionary(Of String, String),
-                                       Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing)
-        SetupControl(ControlStates.SingleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
+                                      Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
+                                       Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing,
+                                       Optional bIncludeNALevel As Boolean = False)
+        SetupControl(ControlStates.SingleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames,
+                     hiddenColumnNames:=hiddenColumnsNames, bIncludeNALevel:=bIncludeNALevel)
     End Sub
 
     Public Sub SetAsMultipleSelectorGrid(ucrLinkedReceiver As ucrReceiverSingle,
-                                         dctParamAndColNames As Dictionary(Of String, String),
-                                         Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing)
-        SetupControl(ControlStates.MultipleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
-    End Sub
-
-    Public Sub SetIncludeLevel(bIncludeNALevel As Boolean)
-        _bIncludeNALevel = bIncludeNALevel
-        FillGridWithNewDataSheet()
-        OnControlValueChanged()
+                                        Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
+                                         Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing,
+                                             Optional bIncludeNALevel As Boolean = False)
+        SetupControl(ControlStates.MultipleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames,
+                     hiddenColumnNames:=hiddenColumnsNames, bIncludeNALevel:=bIncludeNALevel)
     End Sub
 
     Public Sub HideColumns(hiddenColumnsNames As IEnumerable(Of String))
@@ -496,7 +499,7 @@ Public Class ucrFactor
     ''' <para>Note. Should be used in 'MultipleSelector' state only</para>
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsAllGridRowsChecked() As Boolean
+    Public Function IsAllGridRowsSelected() As Boolean
         'only multiple select state supports this
         If _grdSheet Is Nothing OrElse Not _enumControlState = ControlStates.MultipleSelectorGrid Then
             Return False
@@ -516,7 +519,7 @@ Public Class ucrFactor
     ''' <para>Note. Should be used in 'MultipleSelector or SingleSelector' state only</para>
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsAnyGridRowChecked() As Boolean
+    Public Function IsAnyGridRowSelected() As Boolean
         'only multiple select state supports this
         If _grdSheet Is Nothing OrElse _enumControlState = ControlStates.NormalGrid Then
             Return False
@@ -536,7 +539,7 @@ Public Class ucrFactor
     ''' <para>Note. Should be used in 'MultipleSelector' or 'SingleSelctor' state only</para>
     ''' </summary>
     ''' <param name="bChecked"></param>
-    Public Sub CheckAllGridRows(bChecked As Boolean)
+    Public Sub SelectAllGridRows(bChecked As Boolean)
         'only multiple select state supports this
         If _grdSheet Is Nothing OrElse Not _enumControlState = ControlStates.MultipleSelectorGrid Then
             Exit Sub
@@ -585,7 +588,7 @@ Public Class ucrFactor
 
     End Function
 
-    Public Function GetLevelsCount() As Integer
+    Public Function GetRowsCount() As Integer
         Return If(_grdSheet Is Nothing, 0, _grdSheet.Rows)
     End Function
 
@@ -605,23 +608,24 @@ Public Class ucrFactor
         Return -1
     End Function
 
-
     'used externally
-    Public Function GetCheckedCellValues(iOrdinalColIndex As Integer,
-                                           iCheckedColIndex As Integer,
-                                           iValueColIndex As Integer,
+    Public Function GetSelectedCellValues(strValueColName As String,
                                            bWithQuotes As Boolean) As List(Of String)
         'todo. validation of grid and columns. used externally
 
-        Return GetCheckedCellValues(_grdSheet,
-                                           iOrdinalColIndex,
-                                           iCheckedColIndex,
-                                           iValueColIndex,
+        If _grdSheet Is Nothing Then
+            Return New List(Of String)
+        End If
+
+        Return GetSelectedCellValues(_grdSheet,
+                                           GetColumnIndex(_grdSheet, DefaultColumnNames.Ordinal),
+                                           GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level),
+                                           GetColumnIndex(_grdSheet, strValueColName),
                                            bWithQuotes)
     End Function
 
     'used internally
-    Private Function GetCheckedCellValues(grdSheet As unvell.ReoGrid.Worksheet,
+    Private Function GetSelectedCellValues(grdSheet As unvell.ReoGrid.Worksheet,
                                            iOrdinalColIndex As Integer,
                                            iCheckedColIndex As Integer,
                                            iValueColIndex As Integer,
@@ -654,19 +658,13 @@ Public Class ucrFactor
         Return lstCellValues
     End Function
 
-    'used externally
-    Public Function GetCellValuesAsRList(strColName As String, bWithQuotes As Boolean) As String
-        Dim strRValue As String = ""
-        Dim lstCellValues As List(Of String) = GetCellValues(strColName, bWithQuotes)
-        If lstCellValues.Count > 0 Then
-            strRValue = "c(" & String.Join(",", lstCellValues.ToArray()) & ")"
-        End If
-        Return strRValue
-    End Function
+
     'used externaly
     Public Function GetCellValues(strColName As String, bWithQuotes As Boolean) As List(Of String)
         'todo. validation of grid and columns. used externally
-
+        If _grdSheet Is Nothing Then
+            Return New List(Of String)
+        End If
 
         Return GetCellValues(_grdSheet, GetColumnIndex(_grdSheet, strColName), bWithQuotes)
     End Function
@@ -713,22 +711,14 @@ Public Class ucrFactor
             Case ControlStates.MultipleSelectorGrid
                 Dim iOrdinalColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Ordinal)
                 Dim iSelectorColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
-                Dim lstCellValues As List(Of String) = GetCheckedCellValues(_grdSheet,
+                strRValue = mdlCoreControl.GetRVector(GetSelectedCellValues(_grdSheet,
                                                                             iOrdinalColIndex,
                                                                             iSelectorColIndex,
-                                                                            iValueColIndex, True)
-
-                If lstCellValues.Count = 1 AndAlso _enumControlState = ControlStates.SingleSelectorGrid Then
-                    strRValue = lstCellValues(0)
-                ElseIf lstCellValues.Count > 0 Then
-                    strRValue = "c(" & String.Join(",", lstCellValues.ToArray()) & ")"
-                End If
+                                                                            iValueColIndex, True),
+                                                      bOnlyIfMultipleElement:=(_enumControlState = ControlStates.SingleSelectorGrid))
 
             Case ControlStates.NormalGrid
-                Dim lstCellValues As List(Of String) = GetCellValues(_grdSheet, iValueColIndex, True)
-                If lstCellValues.Count > 0 Then
-                    strRValue = "c(" & String.Join(",", lstCellValues.ToArray()) & ")"
-                End If
+                strRValue = mdlCoreControl.GetRVector(GetCellValues(_grdSheet, iValueColIndex, True))
         End Select
 
         clsTempParam.SetArgumentValue(strRValue)
@@ -1320,9 +1310,9 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
-        RaiseEvent GridVisibleChanged()
-    End Sub
+    'Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
+    '    RaiseEvent GridVisibleChanged()
+    'End Sub
 
     Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
         If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then

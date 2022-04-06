@@ -113,4 +113,28 @@ Module mdlCoreControl
         Next
         Return lstVariables
     End Function
+
+
+    ''' <summary>
+    ''' returns an R vector string command in a string object. 
+    ''' <para>for instance, an enumerable that contains "1","2" will be returned as string c("1","2") </para> 
+    ''' </summary>
+    ''' <param name="enumerable">list of items to be returned as R vector command</param>
+    ''' <param name="bOnlyIfMultipleElement">Default is False. 
+    ''' If set as true and enumerable has only 1 element 
+    ''' then the element will be returned without the c() command.
+    ''' <para>for instance, an enumerable that contains "1" will be returned as string "1"</para> </param>
+    ''' <returns>R vector string command</returns>
+    Public Function GetRVector(enumerable As IEnumerable(Of String), Optional bOnlyIfMultipleElement As Boolean = False) As String
+        Dim strRValue As String = ""
+        If enumerable IsNot Nothing AndAlso enumerable.Count > 0 Then
+            If bOnlyIfMultipleElement AndAlso enumerable.Count = 1 Then
+                strRValue = enumerable(0)
+            Else
+                strRValue = "c(" & String.Join(",", enumerable.ToArray()) & ")"
+            End If
+        End If
+        Return strRValue
+    End Function
+
 End Module

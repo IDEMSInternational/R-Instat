@@ -152,8 +152,8 @@ Public Class dlgLabelsLevels
 
         lblNaValue.Text = "Missing Values: " & iMissingValue
         lblNaValue.Visible = iMissingValue > 0
-        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.GetLevelsCount
-        lblLevelNumber.Visible = ucrFactorLabels.GetLevelsCount > 0
+        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.GetRowsCount
+        lblLevelNumber.Visible = ucrFactorLabels.GetRowsCount > 0
     End Sub
 
     Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
@@ -188,8 +188,8 @@ Public Class dlgLabelsLevels
         'so we do it manually here
         If bAddParam Then
             clsViewLabelsFunction.AddParameter("new_levels",
-                                           strParameterValue:=ucrFactorLabels.GetCellValuesAsRList(
-                                           ucrFactor.DefaultColumnNames.Level, bWithQuotes:=False),
+                                           strParameterValue:=mdlCoreControl.GetRVector(
+                                           ucrFactorLabels.GetCellValues(ucrFactor.DefaultColumnNames.Level, bWithQuotes:=False)),
                                            iPosition:=3)
 
         Else
