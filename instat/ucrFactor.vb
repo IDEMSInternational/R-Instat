@@ -179,10 +179,13 @@ Public Class ucrFactor
         End If
 
         If bValid Then
-            e.Cell.Style.BackColor = Color.Gold
+            'set the new data before calling OnControlValueChanged
+            'very important especially when writing to the parameter value
+            _grdSheet(e.Cell.Row, e.Cell.Column) = e.NewData
             'this will raise ControlContentsChanged event
             'and also update parameter and R code with the values
             OnControlValueChanged()
+            e.Cell.Style.BackColor = Color.Gold
         Else
             e.EndReason = EndEditReason.Cancel
         End If
@@ -192,19 +195,16 @@ Public Class ucrFactor
     'end events
     '---------------------------------------------
 
-
     Private Sub SetupControl(enumControlState As ControlStates,
                              ucrLinkedReceiver As ucrReceiverSingle,
-                             bIncludeNALevel As Boolean,
                              dctParamAndColNames As Dictionary(Of String, String),
                              Optional hiddenColumnNames As IEnumerable(Of String) = Nothing,
                              Optional extraColumnsNames As IEnumerable(Of String) = Nothing,
-                             Optional editableColumnNames As IEnumerable(Of String) = Nothing
-                              )
+                             Optional editableColumnNames As IEnumerable(Of String) = Nothing)
 
         _enumControlState = enumControlState
         _ucrLinkedReceiver = ucrLinkedReceiver
-        _bIncludeNALevel = bIncludeNALevel
+
         _dctParamAndColNames = dctParamAndColNames
         _extraColumnNames = If(extraColumnsNames Is Nothing, {}, extraColumnsNames)
         _editableColumnNames = If(editableColumnNames Is Nothing, {}, editableColumnNames)
@@ -224,34 +224,71 @@ Public Class ucrFactor
 
         'todo. do further a developer check??
         'for instance  parameter column names must be in overall paremeter list
-        'esle throw a develper error
+        'else throw a develper error
 
         FillGridWithNewDataSheet()
+        OnControlValueChanged()
     End Sub
 
     Public Sub SetAsNormalGridColumn(ucrLinkedReceiver As ucrReceiverSingle,
-                                      bIncludeNALevel As Boolean,
                                      dctParamAndColNames As Dictionary(Of String, String),
                                      Optional hiddenColumnNames As IEnumerable(Of String) = Nothing,
                                      Optional extraColumnsNames As IEnumerable(Of String) = Nothing,
                                      Optional editableColumnNames As IEnumerable(Of String) = Nothing)
 
-        SetupControl(ControlStates.NormalGrid, ucrLinkedReceiver, bIncludeNALevel, dctParamAndColNames, hiddenColumnNames, extraColumnsNames, editableColumnNames)
+        SetupControl(ControlStates.NormalGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames, extraColumnsNames, editableColumnNames)
 
     End Sub
 
     Public Sub SetAsSingleSelectorGrid(ucrLinkedReceiver As ucrReceiverSingle,
-                                        bIncludeNALevel As Boolean,
                                        dctParamAndColNames As Dictionary(Of String, String),
                                        Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing)
-        SetupControl(ControlStates.SingleSelectorGrid, ucrLinkedReceiver, bIncludeNALevel, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
+        SetupControl(ControlStates.SingleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
     End Sub
 
     Public Sub SetAsMultipleSelectorGrid(ucrLinkedReceiver As ucrReceiverSingle,
-                                          bIncludeNALevel As Boolean,
                                          dctParamAndColNames As Dictionary(Of String, String),
                                          Optional hiddenColumnsNames As IEnumerable(Of String) = Nothing)
-        SetupControl(ControlStates.MultipleSelectorGrid, ucrLinkedReceiver, bIncludeNALevel, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
+        SetupControl(ControlStates.MultipleSelectorGrid, ucrLinkedReceiver, dctParamAndColNames, hiddenColumnNames:=hiddenColumnsNames)
+    End Sub
+
+    Public Sub SetIncludeLevel(bIncludeNALevel As Boolean)
+        _bIncludeNALevel = bIncludeNALevel
+        FillGridWithNewDataSheet()
+        OnControlValueChanged()
+    End Sub
+
+    Public Sub HideColumns(hiddenColumnsNames As IEnumerable(Of String))
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim lstHiddenColumnsNames As List(Of String) = _hiddenColumnNames.ToList
+        lstHiddenColumnsNames.AddRange(hiddenColumnsNames)
+        _hiddenColumnNames = lstHiddenColumnsNames.Distinct()
+
+        For Each strColName As String In _hiddenColumnNames
+            _grdSheet.HideColumns(GetColumnIndex(_grdSheet, strColName), 1)
+        Next
+    End Sub
+
+    Public Sub ShowColumns(showColumnsNames As IEnumerable(Of String))
+
+        If _grdSheet Is Nothing Then
+            Exit Sub
+        End If
+
+        'update the list of hidden column names first
+        Dim lstHiddenColumnsNames As List(Of String) = _hiddenColumnNames.ToList
+        lstHiddenColumnsNames.RemoveAll(Function(i) showColumnsNames.Contains(i))
+        _hiddenColumnNames = lstHiddenColumnsNames
+
+
+        'then show the column names
+        For Each strColName As String In showColumnsNames
+            _grdSheet.ShowColumns(GetColumnIndex(_grdSheet, strColName), 1)
+        Next
+
     End Sub
 
     Private Sub FillGridWithNewDataSheet()
@@ -266,8 +303,11 @@ Public Class ucrFactor
         'todo. this check should be done through the receiver
         'the receiver should be able to return the type of the column selected.
         'so once the single receiver is enhanced to do so. update this line accordingly
-        Dim strColType As String = frmMain.clsRLink.GetColumnType(clsReceiver.GetDataName(),
-                                                    clsReceiver.GetVariableNames(bWithQuotes:=False))
+        Dim strColType As String = frmMain.clsRLink.GetColumnType(_ucrLinkedReceiver.GetDataName(),
+                                                    _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=False))
+        'todo test this variable
+        Dim kk = _ucrLinkedReceiver.strCurrDataType
+
         ' check if the column type is a factor.
         ' contains allows ordered factors to be included
         If String.IsNullOrEmpty(strColType) OrElse Not strColType.Contains("factor") Then
@@ -411,7 +451,8 @@ Public Class ucrFactor
         Next
 
         ApplyUneditibleCellSettings(_grdSheet, _editableColumnNames)
-        'todo. call add parameter? Not really ? Because of shtCurrSheet(iNewRow, i) = new_val ??
+        'to update parameters and call parent dialog validations
+        OnControlValueChanged()
     End Sub
 
     Private Sub ApplyUneditibleCellSettings(grdSheet As unvell.ReoGrid.Worksheet,
@@ -508,11 +549,11 @@ Public Class ucrFactor
     End Sub
 
     ''' <summary>
-    ''' checks if all values in a column are not empty.
+    ''' checks if all values in the list of columns are not empty.
     ''' </summary>
-    ''' <param name="strColName"></param>
+    ''' <param name="colNames"></param>
     ''' <returns>true if all values are not empty and false otherwise</returns>
-    Public Function IsColumnComplete(strColName As String) As Boolean
+    Public Function IsColumnComplete(colNames As IEnumerable(Of String)) As Boolean
 
         Dim _grdSheet As unvell.ReoGrid.Worksheet = Me._grdSheet
 
@@ -525,20 +566,27 @@ Public Class ucrFactor
             Return False
         End If
 
-
-        Dim iColIndex As Integer = GetColumnIndex(_grdSheet, strColName)
-        If iColIndex = -1 Then
-            MsgBox("No column called " & strColName & " to select in grid.", MsgBoxStyle.Critical, "Cannot select column.")
-            Return False
-        End If
-
-        For iRowIndex As Integer = 0 To _grdSheet.Rows - 1
-            If _grdSheet(iRowIndex, iColIndex) Is Nothing OrElse _grdSheet(iRowIndex, iColIndex).ToString() = "" Then
+        For Each strColName As String In colNames
+            Dim iColIndex As Integer = GetColumnIndex(_grdSheet, strColName)
+            If iColIndex = -1 Then
+                MsgBox("No column called " & strColName & " to select in grid.", MsgBoxStyle.Critical, "Cannot select column.")
                 Return False
             End If
+
+            For iRowIndex As Integer = 0 To _grdSheet.Rows - 1
+                If _grdSheet(iRowIndex, iColIndex).ToString() = "" Then
+                    Return False
+                End If
+            Next
         Next
+
+
         Return True
 
+    End Function
+
+    Public Function GetLevelsCount() As Integer
+        Return If(_grdSheet Is Nothing, 0, _grdSheet.Rows)
     End Function
 
 
@@ -556,8 +604,6 @@ Public Class ucrFactor
         Next
         Return -1
     End Function
-
-
 
 
     'used externally
@@ -608,12 +654,24 @@ Public Class ucrFactor
         Return lstCellValues
     End Function
 
+    'used externally
+    Public Function GetCellValuesAsRList(strColName As String, bWithQuotes As Boolean) As String
+        Dim strRValue As String = ""
+        Dim lstCellValues As List(Of String) = GetCellValues(strColName, bWithQuotes)
+        If lstCellValues.Count > 0 Then
+            strRValue = "c(" & String.Join(",", lstCellValues.ToArray()) & ")"
+        End If
+        Return strRValue
+    End Function
     'used externaly
-    Public Function GetCellValues(iValueColIndex As Integer, bWithQuotes As Boolean) As List(Of String)
+    Public Function GetCellValues(strColName As String, bWithQuotes As Boolean) As List(Of String)
         'todo. validation of grid and columns. used externally
 
-        Return GetCellValues(_grdSheet, iValueColIndex, bWithQuotes)
+
+        Return GetCellValues(_grdSheet, GetColumnIndex(_grdSheet, strColName), bWithQuotes)
     End Function
+
+
 
     'used internally
     Private Function GetCellValues(grdSheet As unvell.ReoGrid.Worksheet,
@@ -635,7 +693,7 @@ Public Class ucrFactor
     ''' of this control is called
     ''' </summary>
     ''' <param name="clsTempParam"></param>
-    Public Sub UpdateParameterNew(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam Is Nothing OrElse _grdSheet Is Nothing Then
             Exit Sub
         End If
@@ -672,7 +730,7 @@ Public Class ucrFactor
     ''' <summary>
     ''' called when a dialog calls SetRCode for this control
     ''' </summary>
-    Protected Sub SetControlValueNew()
+    Protected Overrides Sub SetControlValue()
         Dim clsTempParam As RParameter = GetParameter()
         If clsTempParam Is Nothing OrElse Not clsTempParam.bIsString OrElse _grdSheet Is Nothing Then
             Exit Sub
@@ -768,7 +826,7 @@ Public Class ucrFactor
         strFreqName = "Freq"
     End Sub
 
-    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Sub UpdateParameterOLD(clsTempParam As RParameter)
         If clsTempParam IsNot Nothing Then
             If bIsSelector Then
                 clsTempParam.SetArgumentValue(GetSelectedLevels())
@@ -780,7 +838,7 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Protected Overrides Sub SetControlValue()
+    Protected Sub SetControlValueOLD()
         Dim lstCurrentValues As String() = Nothing
         Dim clsTempParameter As RParameter
 
@@ -1259,7 +1317,7 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Function IsColumnCompleteOLD(strColumn As String) As Boolean
+    Public Function IsColumnComplete(strColumn As String) As Boolean
         Dim iColumn As Integer = -1
 
         If shtCurrSheet IsNot Nothing Then
