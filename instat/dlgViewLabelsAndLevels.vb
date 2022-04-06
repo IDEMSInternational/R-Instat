@@ -89,6 +89,15 @@ Public Class dlgViewFactorLabels
         ucrChkSortByName.SetText("Sort by Name")
         ucrChkSortByName.SetRDefault("FALSE")
 
+        ucrChkMaxLabels.SetText("Max Labels")
+        ucrChkMaxLabels.SetParameter(New RParameter("check", 1))
+        ucrChkMaxLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMaxLabels.AddToLinkedControls({ucrNudMaxLength}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="15")
+
+        ucrNudMaxLength.SetParameter(New RParameter("max.len", 10))
+        ucrNudMaxLength.Increment = 1
+        ucrNudMaxLength.Minimum = 1
+
         ucrPnlSelectData.SetParameter(New RParameter("checked", 0))
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "data")
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "column")
@@ -117,6 +126,7 @@ Public Class dlgViewFactorLabels
         clsViewFunction.SetRCommand("view_df")
 
         clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
+        clsDummyDataFunction.AddParameter("check", "FALSE", iPosition:=1)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
@@ -144,6 +154,8 @@ Public Class dlgViewFactorLabels
         ucrChkShowPercentage.SetRCode(clsViewFunction, bReset)
         ucrChkShowType.SetRCode(clsViewFunction, bReset)
         ucrChkShowValues.SetRCode(clsViewFunction, bReset)
+        ucrChkMaxLabels.SetRCode(clsDummyDataFunction, bReset)
+        ucrNudMaxLength.SetRCode(clsViewFunction, bReset)
         ucrReceiverVariables.SetRCode(clsSelectFunction, bReset)
         ucrSelectorViewLabelsAndLevels.SetRCode(clsSelectFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
@@ -151,7 +163,8 @@ Public Class dlgViewFactorLabels
 
     Private Sub TestOkEnabled()
         If rdoViewLabels.Checked Then
-            If Not ucrReceiverVariables.IsEmpty AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked) Then
+            If Not ucrReceiverVariables.IsEmpty AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse
+                ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -202,7 +215,9 @@ Public Class dlgViewFactorLabels
         End If
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged,
+        ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged,
+        ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
