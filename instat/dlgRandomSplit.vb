@@ -130,7 +130,7 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", ucrSelectorRandomSplit.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
         ucrNudLag.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("lag", 3), iAdditionalPairNo:=1)
         ucrSaveRandomSplit.AddAdditionalRCode(clsTesting, iAdditionalPairNo:=1)
@@ -153,7 +153,6 @@ Public Class dlgRandomSplit
     End Sub
     Private Sub SetBaseFunction()
         If rdoSample.Checked Then
-            ' ucrBase.clsRsyntax.iCallType = 2
             If ucrChkTestingData.Checked Then
                 clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
@@ -163,8 +162,8 @@ Public Class dlgRandomSplit
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
             End If
-        Else
-            If ucrChkTrainingData.Checked Then
+        ElseIf rdoTimeSeries.Checked Then
+            If ucrChkTestingData.Checked Then
                 clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
             ElseIf ucrChkTrainingData.Checked Then
@@ -190,8 +189,4 @@ Public Class dlgRandomSplit
     Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged, ucrChkTestingData.ControlValueChanged, ucrChkTrainingData.ControlValueChanged
         SetBaseFunction()
     End Sub
-
-    'Private Sub ucrChkStratifyingFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlValueChanged
-
-    'End Sub
 End Class
