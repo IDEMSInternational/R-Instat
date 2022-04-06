@@ -325,7 +325,7 @@ Public Class dlgNewDataFrame
             '    Continue For
             'End If
             Dim strColumnName As String = row.Cells("colNames").Value
-            Dim strType As String = row.Cells("colDefault").Value
+            Dim strDefault As String = row.Cells("colDefault").Value
 
             'labels column is optional, so check for empty if it exists
             Dim clsColExpRFunction As New RFunction
@@ -360,10 +360,12 @@ Public Class dlgNewDataFrame
 
             clsEmptyRepFunction.SetRCommand("rep")
             clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, bIncludeArgumentName:=False, iPosition:=1)
-            If strType = "NA" OrElse IsNumeric(strType) Then
+            If strDefault = "NA" Then
                 clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            ElseIf IsNumeric(strDefault) Then
+                clsEmptyRepFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
             Else
-                clsEmptyRepFunction.AddParameter("x", Chr(34) & strType & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
             End If
 
             clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
