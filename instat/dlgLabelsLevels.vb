@@ -65,12 +65,7 @@ Public Class dlgLabelsLevels
                                               ucrFactor.DefaultColumnNames.Level},
                                               hiddenColumnNames:={ucrFactor.DefaultColumnNames.Level})
 
-
-
-
-
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
-
 
         lblNaValue.ForeColor = Color.Red
         lblLevelNumber.ForeColor = Color.Red
@@ -161,10 +156,24 @@ Public Class dlgLabelsLevels
         lblLevelNumber.Visible = ucrFactorLabels.GetLevelsCount > 0
     End Sub
 
+    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
 
+        'check if the variable selected has value labels.
+        'If it has then disable ucrChkIncludeLevelNumbers and set it as checked
+        'because it already has level number, so just show avail them to user
+        Dim bHasLevels As Boolean = frmMain.clsRLink.IsVariablesMetadata(ucrReceiverLabels.GetDataName(), "labels", ucrReceiverLabels.GetVariableNames(False))
+        If bHasLevels Then
+            ucrChkIncludeLevelNumbers.Enabled = False
+            ucrChkIncludeLevelNumbers.Checked = True
+        Else
+            ucrChkIncludeLevelNumbers.Enabled = True
+            ucrChkIncludeLevelNumbers.Checked = False
+        End If
+    End Sub
 
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
 
+        'only add levels if indicated by the user
         Dim bAddParam As Boolean
         If ucrChkIncludeLevelNumbers.Checked Then
             ucrFactorLabels.ShowColumns({ucrFactor.DefaultColumnNames.Level})
