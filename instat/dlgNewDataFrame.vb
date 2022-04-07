@@ -21,7 +21,6 @@ Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
 
     Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction As New RFunction
-    Private lstLabels As New List(Of String)
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
