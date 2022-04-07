@@ -472,7 +472,9 @@ Public Class dlgNewDataFrame
             Dim cbLevels = CType(dataTypeGridView.Columns(4), DataGridViewComboBoxColumn)
             If Not cbLevels.Items.Contains(e.FormattedValue) Then
                 cbLevels.Items.Add(e.FormattedValue)
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = e.FormattedValue
+                Dim iColumnIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
+                Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
+                dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
             End If
         End If
     End Sub
@@ -501,7 +503,6 @@ Public Class dlgNewDataFrame
     Private Sub dataTypeGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataTypeGridView.EditingControlShowing
         If dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
             Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
-            RemoveHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
             AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
             If dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
                 selectedComboBox.DropDownStyle = ComboBoxStyle.DropDown
@@ -510,13 +511,15 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
-        Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
         If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
+            Dim iColumnIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
+            Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
+            Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
             If selectedCombobox.SelectedItem = "Factor" Then
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = False
+                dataTypeGridView(iColumnIndex, iRowIndex).ReadOnly = False
             Else
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).ReadOnly = True
-                dataTypeGridView(dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex, dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex).Value = ""
+                dataTypeGridView(iColumnIndex, iRowIndex).ReadOnly = True
+                dataTypeGridView(iColumnIndex, iRowIndex).Value = ""
             End If
         End If
     End Sub
