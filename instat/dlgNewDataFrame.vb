@@ -428,8 +428,9 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles dataTypeGridView.DataError
-        If (e.Context _
-                    = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize)) Then
+        If e.Context _
+                    = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize) Then
+
             e.ThrowException = False
         End If
     End Sub
