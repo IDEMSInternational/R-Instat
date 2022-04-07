@@ -389,14 +389,10 @@ Public Class dlgNewDataFrame
 
         strTemp = "c" & "("
         For Each strCh As String In strLevels
-            If i > 0 Then
-                strTemp = strTemp & ","
-            End If
-            If strCh <> "" Then
-                strTemp = strTemp & Chr(34) & strCh.Trim() & Chr(34)
-            Else
-                strTemp = strTemp & Chr(34) & strCh & Chr(34)
-            End If
+            strTemp &= If(i > 0, ",", "") _
+                    & Chr(34) _
+                    & If(String.IsNullOrEmpty(strCh), "", strCh.Trim()) _
+                    & Chr(34)
             i += 1
 
         Next
