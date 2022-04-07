@@ -397,7 +397,8 @@ Public Class dlgNewDataFrame
             Else
                 strTemp = strTemp & Chr(34) & strCh & Chr(34)
             End If
-            i = i + 1
+            i += 1
+
         Next
         strTemp = strTemp & ")"
 
