@@ -18,7 +18,8 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgNewDataFrame
-    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrame, clsSjLabelledFuntion As New RFunction
+    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
+
     Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction As New RFunction
     Private lstLabels As New List(Of String)
     Public bFirstLoad As Boolean = True
