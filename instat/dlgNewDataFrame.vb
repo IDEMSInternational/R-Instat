@@ -19,7 +19,6 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
-
     Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -93,12 +92,12 @@ Public Class dlgNewDataFrame
         'Empty option functions
         clsEmptyOverallFunction = New RFunction
         clsEmptyMatrixFunction = New RFunction
-        clsNewDataFrame = New RFunction
+        clsNewDataFrameFunction = New RFunction
         clsDummyLabelFunction = New RFunction
         clsDummyVarFunction = New RFunction
         clsAsCharacterFunction = New RFunction
         clsRepFunction = New RFunction
-        clsSjLabelledFuntion = New RFunction
+        clsSjLabelledFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
@@ -109,11 +108,11 @@ Public Class dlgNewDataFrame
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
 
-        clsSjLabelledFuntion.SetPackageName("sjlabelled")
-        clsSjLabelledFuntion.SetRCommand("set_label")
-        clsSjLabelledFuntion.AddParameter("x", clsRFunctionParameter:=clsNewDataFrame, iPosition:=0)
+        clsSjLabelledFunction.SetPackageName("sjlabelled")
+        clsSjLabelledFunction.SetRCommand("set_label")
+        clsSjLabelledFunction.AddParameter("x", clsRFunctionParameter:=clsNewDataFrameFunction, iPosition:=0)
 
-        clsNewDataFrame.SetRCommand("data.frame")
+        clsNewDataFrameFunction.SetRCommand("data.frame")
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
@@ -217,8 +216,8 @@ Public Class dlgNewDataFrame
         ucrNudRows.SetRCode(clsRepFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.AddAdditionalRCode(clsNewDataFrame, iAdditionalPairNo:=2)
-        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFuntion, iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
+        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
@@ -274,11 +273,11 @@ Public Class dlgNewDataFrame
             dataGridView.Visible = False
             If ucrChkVariable.Checked Then
                 If ucrChkIncludeLabel.Checked Then
-                    clsNewDataFrame.RemoveAssignTo()
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFuntion)
+                    clsNewDataFrameFunction.RemoveAssignTo()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSjLabelledFunction)
                 Else
-                    clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+                    clsNewDataFrameFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrameFunction)
                 End If
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
@@ -316,17 +315,10 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SampleEmpty()
-        clsNewDataFrame.ClearParameters()
-        lstLabels.Clear()
+        Dim lstLabels As New List(Of String)
         Dim iColPosition As Integer = 0
+        clsNewDataFrameFunction.ClearParameters()
         For Each row As DataGridViewRow In dataTypeGridView.Rows
-            'all cells must be filled for a valid column R expression. So check for empty cells 
-            'If String.IsNullOrEmpty(row.Cells("colNames").Value) OrElse String.IsNullOrEmpty(row.Cells("cbType").Value) OrElse String.IsNullOrEmpty(row.Cells("colLevels").Value) OrElse String.IsNullOrEmpty(row.Cells("colDefault").Value) Then
-            '    Continue For
-            'End If
-            Dim strColumnName As String = row.Cells("colNames").Value
-            Dim strDefault As String = row.Cells("colDefault").Value
-
             'labels column is optional, so check for empty if it exists
             Dim clsColExpRFunction As New RFunction
             Dim clsEmptyRepFunction As New RFunction
@@ -350,16 +342,15 @@ Public Class dlgNewDataFrame
                     End If
                 Case "Integer"
                     clsColExpRFunction.SetRCommand("as.integer")
-                Case Else
-                    'developer error?
-                    Continue For
             End Select
 
             lstLabels.Add(row.Cells("colLabel").Value)
-            clsSjLabelledFuntion.AddParameter("label", GetLabelAsRString(lstLabels), iPosition:=1)
+            clsSjLabelledFunction.AddParameter("label", GetLabelAsRString(lstLabels), iPosition:=1)
 
             clsEmptyRepFunction.SetRCommand("rep")
             clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, bIncludeArgumentName:=False, iPosition:=1)
+
+            Dim strDefault As String = row.Cells("colDefault").Value
             If strDefault = "NA" Then
                 clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
             ElseIf IsNumeric(strDefault) Then
@@ -368,8 +359,9 @@ Public Class dlgNewDataFrame
                 clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
             End If
 
+            Dim strColumnName As String = row.Cells("colNames").Value
             clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
-            clsNewDataFrame.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
+            clsNewDataFrameFunction.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
             iColPosition += 1
         Next
     End Sub
@@ -383,7 +375,6 @@ Public Class dlgNewDataFrame
 
     Private Function GetLevelsAsRString(strLevel As String) As String
         Dim i As Integer = 0
-
         Dim strLevels As String() = strLevel.Split(New Char() {","c})
         Dim strTemp As String = "c" & "("
         For Each strCh As String In strLevels
@@ -392,7 +383,6 @@ Public Class dlgNewDataFrame
                     & If(String.IsNullOrEmpty(strCh), "", strCh.Trim()) _
                     & Chr(34)
             i += 1
-
         Next
         strTemp &= ")"
 
@@ -405,13 +395,13 @@ Public Class dlgNewDataFrame
 
         strTemp = "c" & "("
         For Each strCh As String In lstLabels
-            If i > 0 Then
-                strTemp = strTemp & ","
-            End If
-            strTemp = strTemp & Chr(34) & strCh & Chr(34)
-            i = i + 1
+            strTemp &= If(i > 0, ",", "") _
+               & Chr(34) _
+               & If(String.IsNullOrEmpty(strCh), "", strCh.Trim()) _
+               & Chr(34)
+            i += 1
         Next
-        strTemp = strTemp & ")"
+        strTemp &= ")"
 
         Return strTemp
     End Function
@@ -464,8 +454,8 @@ Public Class dlgNewDataFrame
         Dim iRow As Integer = dataTypeGridView.RowCount
         If iRow <> 0 Then
             If iValue > iRow Then
-                Dim iAddRow As Integer = iValue - iRow
-                dataTypeGridView.Rows.Insert(iRow, iAddRow)
+                Dim iNumRowsToInsert As Integer = iValue - iRow
+                dataTypeGridView.Rows.Insert(iRow, iNumRowsToInsert)
                 FillGrid(iValue - 1, dataTypeGridView, True)
             ElseIf iValue < iRow Then
                 dataTypeGridView.Rows.RemoveAt(iRow - 1)
