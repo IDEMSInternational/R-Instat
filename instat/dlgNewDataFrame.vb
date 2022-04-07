@@ -342,6 +342,8 @@ Public Class dlgNewDataFrame
                     End If
                 Case "Integer"
                     clsColExpRFunction.SetRCommand("as.integer")
+                Case Else
+                    MsgBox("Developer error: Only expected one predefined item to set the column type.")
             End Select
 
             lstLabels.Add(row.Cells("colLabel").Value)
