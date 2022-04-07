@@ -161,6 +161,7 @@ Public Class dlgRandomSplit
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
+                ucrBase.clsRsyntax.iCallType = 2
             End If
         ElseIf rdoTimeSeries.Checked Then
             If ucrChkTestingData.Checked Then
@@ -171,6 +172,7 @@ Public Class dlgRandomSplit
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
+                ucrBase.clsRsyntax.iCallType = 2
             End If
         End If
     End Sub
