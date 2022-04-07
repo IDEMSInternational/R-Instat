@@ -137,7 +137,6 @@ Public Class ucrFactor
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        grdFactorData.Visible = True
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
@@ -225,11 +224,9 @@ Public Class ucrFactor
                                            DefaultColumnNames.Select_Level}.Contains(i))
         _extraColumnNames = lstExtraColumnNames
 
-
         'todo. do further a developer check??
         'for instance  parameter column names must be in overall paremeter list
-        'else throw a develper error
-        grdFactorData.Visible = True
+        'else throw a develper error 
         FillGridWithNewDataSheet()
         OnControlValueChanged()
     End Sub
@@ -296,7 +293,9 @@ Public Class ucrFactor
 
     Private Sub FillGridWithNewDataSheet()
         'clear any worksheets from the grid
+        _grdSheet = Nothing
         grdFactorData.Worksheets.Clear()
+
 
         If _ucrLinkedReceiver Is Nothing OrElse _ucrLinkedReceiver.IsEmpty() Then
             Exit Sub
@@ -384,7 +383,7 @@ Public Class ucrFactor
         For Each strExtraColName As String In extraColumnNames
             grdControl.CurrentWorksheet.AppendColumns(1)
             grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.ColumnCount - 1).Text = strExtraColName
-            'todo. check if cell type will be text
+            'todo. check if cell body type will be text by default
         Next
 
         Select Case enumControlState
@@ -393,21 +392,13 @@ Public Class ucrFactor
                 grdControl.CurrentWorksheet.AppendColumns(1)
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.Select_Level
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).DefaultCellBody = GetType(unvell.ReoGrid.CellTypes.RadioButtonCell)
-                'set radio button group for all the added radio buttons.
-                'radio button group ensures that only 1 radio button is selectable 
-                Dim rgpselectcolumn As New RadioButtonGroup
-                For i = 0 To grdControl.CurrentWorksheet.RowCount - 1
-                    Dim rdotemp As New RadioButtonCell
-                    rdotemp.RadioGroup = rgpselectcolumn
-                    grdControl.CurrentWorksheet(i, iSelectorColumnIndex) = rdotemp
-                Next
-                AddCheckBoxOrRadioButtonCellsClickEvent(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1)
+                AddSelectorButtonCells(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1, True)
             Case ControlStates.MultipleSelectorGrid
                 'add select level column with checkbox as the cell body values
                 grdControl.CurrentWorksheet.AppendColumns(1)
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.Select_Level
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).DefaultCellBody = GetType(unvell.ReoGrid.CellTypes.CheckBoxCell)
-                AddCheckBoxOrRadioButtonCellsClickEvent(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1)
+                AddSelectorButtonCells(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1, False)
             Case ControlStates.NormalGrid
                 'do nothing
         End Select
@@ -478,20 +469,39 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Private Sub AddCheckBoxOrRadioButtonCellsClickEvent(grdSheet As unvell.ReoGrid.Worksheet,
-                                                        iCheckedColIndex As Integer)
-        For iRowIndex As Integer = 0 To grdSheet.Rows - 1
-            'RadioButtonCell inherits CheckBoxCell so just cast to CheckBoxCell
-            Dim checkBoxCell As unvell.ReoGrid.CellTypes.CheckBoxCell = DirectCast(
-                grdSheet.GetCell(iRowIndex, iCheckedColIndex).Body,
-                unvell.ReoGrid.CellTypes.CheckBoxCell)
+    Private Sub AddSelectorButtonCells(grdSheet As unvell.ReoGrid.Worksheet,
+                                              iSelectorColIndex As Integer,
+                                              bSingleSelection As Boolean)
 
-            AddHandler checkBoxCell.CheckChanged, Sub()
-                                                      'this will raise ControlContentsChanged event
-                                                      'and also update parameter and R code with the values
-                                                      OnControlValueChanged()
-                                                  End Sub
-        Next
+        If bSingleSelection Then
+            Dim radioButtonGroup As New unvell.ReoGrid.CellTypes.RadioButtonGroup
+            For iRowIndex As Integer = 0 To grdSheet.Rows - 1
+                Dim radioButtonCell As New unvell.ReoGrid.CellTypes.RadioButtonCell
+                'setting radio button group ensures that only 1 radio button is selectable 
+                radioButtonCell.RadioGroup = radioButtonGroup
+                AddHandler radioButtonCell.CheckChanged, Sub()
+                                                             'this will raise ControlContentsChanged event
+                                                             'and also update parameter and R code with the values
+                                                             OnControlValueChanged()
+                                                         End Sub
+                grdSheet(iRowIndex, iSelectorColIndex) = radioButtonCell
+            Next
+        Else
+            For iRowIndex As Integer = 0 To grdSheet.Rows - 1
+                Dim checkBoxCell As New unvell.ReoGrid.CellTypes.CheckBoxCell
+                'grdSheet(iRowIndex, iSelectorColIndex) = checkBoxCell
+                grdSheet(iRowIndex, iSelectorColIndex) = False
+                grdSheet.GetCell(iRowIndex, iSelectorColIndex).Body = checkBoxCell
+                AddHandler checkBoxCell.CheckChanged, Sub()
+                                                          'this will raise ControlContentsChanged event
+                                                          'and also update parameter and R code with the values
+                                                          OnControlValueChanged()
+                                                      End Sub
+            Next
+        End If
+
+
+
     End Sub
 
     ''' <summary>
@@ -506,8 +516,8 @@ Public Class ucrFactor
         End If
 
         Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
-        For i = 0 To _grdSheet.Rows - 1
-            If Not DirectCast(_grdSheet(i, iSelectorColumnIndex), Boolean) Then
+        For iRowIndex = 0 To _grdSheet.Rows - 1
+            If Not DirectCast(_grdSheet(iRowIndex, iSelectorColumnIndex), Boolean) Then
                 Return False
             End If
         Next

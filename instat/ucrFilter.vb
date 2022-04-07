@@ -31,7 +31,6 @@ Public Class ucrFilter
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bFirstLoad = True
         bFilterDefined = False
         clsFilterOperator = New ROperator
         clsFilterOperator.strOperation = "&"
@@ -46,8 +45,9 @@ Public Class ucrFilter
     Private Sub ucrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
-            SetDefaults()
             bFirstLoad = False
+            SetDefaults()
+
         End If
         ClearConditions()
         If strDefaultDataFrame <> "" Then
@@ -64,10 +64,9 @@ Public Class ucrFilter
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
         ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
-        ucrFactorLevels.SetAsMultipleSelector()
-        ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
-        ucrFactorLevels.SetIncludeLevels(False)
-        ucrFactorLevels.bIncludeNA = True
+
+        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrFilterByReceiver, bIncludeNALevel:=True)
+
         clsFilterOperator.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
@@ -128,7 +127,7 @@ Public Class ucrFilter
             cmdAddCondition.Enabled = False
         Else
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
-                cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
+                cmdAddCondition.Enabled = ucrFactorLevels.IsAnyGridRowSelected
             Else
                 Select Case ucrFilterOperation.GetText()
                     Case "is.na", "! is.na"
@@ -148,7 +147,7 @@ Public Class ucrFilter
     End Sub
 
     Private Sub SetToggleButtonSettings()
-        If ucrFactorLevels.IsAllSelected() Then
+        If ucrFactorLevels.IsAllGridRowsSelected Then
             cmdToggleSelectAll.Text = "Deselect All Levels"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
@@ -175,6 +174,9 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
+        If bFirstLoad Then
+            Exit Sub
+        End If
         VariableTypeProperties()
         CheckAddEnabled()
     End Sub
@@ -196,7 +198,7 @@ Public Class ucrFilter
         If ucrFilterByReceiver.strCurrDataType.Contains("factor") Then
             clsCurrentOperator.SetOperation("%in%")
             clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
-            strCondition = ucrFactorLevels.GetSelectedLevels()
+            strCondition = mdlCoreControl.GetRVector(ucrFactorLevels.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True), bOnlyIfMultipleElement:=True)
         Else
             clsCurrentOperator.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
@@ -236,10 +238,10 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
-        ucrFactorLevels.SetSelectionAllLevels(Not ucrFactorLevels.IsAllSelected())
+        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
     End Sub
 
-    Private Sub ucrFactorLevels_SelectedLevelChanged() Handles ucrFactorLevels.SelectedLevelChanged
+    Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
         SetToggleButtonSettings()
         CheckAddEnabled()
     End Sub
