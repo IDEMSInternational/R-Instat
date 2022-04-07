@@ -382,7 +382,8 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Function GetLevelsAsRString(strLevel As String) As String
-        Dim i As Integer
+        Dim i As Integer = 0
+
         Dim strLevels As String() = strLevel.Split(New Char() {","c})
         Dim strTemp As String
 
