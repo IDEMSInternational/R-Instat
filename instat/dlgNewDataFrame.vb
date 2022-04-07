@@ -660,7 +660,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_KeyUp(sender As Object, e As KeyEventArgs) Handles dataTypeGridView.KeyUp
-        Dim i As Integer
+        Dim i As Integer = 0
         Dim strColName As String = dataTypeGridView.Columns(dataTypeGridView.CurrentCell.ColumnIndex).HeaderText
         If e.Control AndAlso e.KeyCode = Keys.V AndAlso (strColName = "Name" OrElse strColName = "Label") Then
             Try
