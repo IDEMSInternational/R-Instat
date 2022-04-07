@@ -400,7 +400,7 @@ Public Class dlgNewDataFrame
             i += 1
 
         Next
-        strTemp = strTemp & ")"
+        strTemp &= ")"
 
         Return strTemp
     End Function
