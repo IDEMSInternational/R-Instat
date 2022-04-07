@@ -332,8 +332,8 @@ Public Class dlgNewDataFrame
                     Dim strLevels As String = row.Cells("colLevels").Value
                     If strLevels <> "" Then
                         If strLevels.Count(Function(x) x = ":") = 1 Then
-                            If IsNumeric(strLevels.Substring(0, strLevels.IndexOf(":"))) _
-                            AndAlso IsNumeric(strLevels.Substring(2, strLevels.IndexOf(":"))) Then
+                            If IsNumeric(strLevels.Split(":")(0)) _
+                                AndAlso IsNumeric(strLevels.Split(":")(1)) Then
                                 clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
                             End If
                         Else
