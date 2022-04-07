@@ -385,9 +385,7 @@ Public Class dlgNewDataFrame
         Dim i As Integer = 0
 
         Dim strLevels As String() = strLevel.Split(New Char() {","c})
-        Dim strTemp As String
-
-        strTemp = "c" & "("
+        Dim strTemp As String = "c" & "("
         For Each strCh As String In strLevels
             strTemp &= If(i > 0, ",", "") _
                     & Chr(34) _
