@@ -170,8 +170,12 @@ Public Class ucrFactor
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
+        'Calling this subroutine here is necessary.
+        'However when reloading a dialog, the receiver always clears it's contents first before
+        'restoring the previous selected variable.
+        'This forces this control to never retain what was previously selected despite it's inbuilt ability to do so
+        'Once the receiver is refactored this comment can be removed.
         FillGridWithNewDataSheet()
-        'OnControlValueChanged()
     End Sub
 
     Private Sub _grdSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles _grdSheet.BeforeCut
