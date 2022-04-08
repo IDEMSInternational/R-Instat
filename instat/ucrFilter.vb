@@ -65,7 +65,9 @@ Public Class ucrFilter
         ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
 
-        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrFilterByReceiver, bIncludeNALevel:=True)
+        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrFilterByReceiver,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=True)
 
         clsFilterOperator.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
@@ -89,6 +91,11 @@ Public Class ucrFilter
         VariableTypeProperties()
     End Sub
 
+    'todo. currently, this subroutine is called even before load event of this control is called
+    'the visibility setting it's toggling affects how load events of controls it contains are called
+    'this may cause unintended 'load' bugs to some controls like reogrids
+    'when refactoring the sequence of events that call this,
+    'making sure that this is only called during this control's loading event should be prioritised
     Private Sub VariableTypeProperties()
         ucrReceiverExpression.Visible = False
         lblSelectLevels.Visible = False

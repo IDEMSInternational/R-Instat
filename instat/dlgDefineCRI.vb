@@ -342,7 +342,7 @@ Public Class dlgCorruptionDefineCRI
         ucrInputCRIPreview.SetName("")
     End Sub
 
-    Private Sub ucrGridWeights_GridContentChanged() Handles ucrGridWeights.GridContentChanged
+    Private Sub ucrGridWeights_ControlValueChanged() Handles ucrGridWeights.ControlValueChanged
         EnableAddButton()
     End Sub
 

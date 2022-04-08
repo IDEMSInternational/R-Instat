@@ -61,9 +61,9 @@ Public Class dlgLabelsLevels
 
         ucrFactorLabels.SetParameter(New RParameter("new_labels", 2))
         ucrFactorLabels.SetAsNormalGridColumn(ucrReceiverLabels, dctParamAndColNames,
-                                              editableColumnNames:={ucrFactor.DefaultColumnNames.Label,
+                                              editableColNames:={ucrFactor.DefaultColumnNames.Label,
                                               ucrFactor.DefaultColumnNames.Level},
-                                              hiddenColumnNames:={ucrFactor.DefaultColumnNames.Level})
+                                              hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
 
@@ -152,8 +152,8 @@ Public Class dlgLabelsLevels
 
         lblNaValue.Text = "Missing Values: " & iMissingValue
         lblNaValue.Visible = iMissingValue > 0
-        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.GetRowsCount
-        lblLevelNumber.Visible = ucrFactorLabels.GetRowsCount > 0
+        lblLevelNumber.Text = "Levels: " & ucrFactorLabels.RowCount
+        lblLevelNumber.Visible = ucrFactorLabels.RowCount > 0
     End Sub
 
     Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
