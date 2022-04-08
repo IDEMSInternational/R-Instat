@@ -322,29 +322,32 @@ Public Class dlgNewDataFrame
             'labels column is optional, so check for empty if it exists
             Dim clsColExpRFunction As New RFunction
             Dim clsEmptyRepFunction As New RFunction
-            Select Case row.Cells("cbType").Value
-                Case "Character"
-                    clsColExpRFunction.SetRCommand("as.character")
-                Case "Numeric"
-                    clsColExpRFunction.SetRCommand("as.numeric")
-                Case "Factor"
-                    clsColExpRFunction.SetRCommand("factor")
-                    Dim strLevels As String = row.Cells("colLevels").Value
-                    If strLevels <> "" Then
-                        If strLevels.Count(Function(x) x = ":") = 1 Then
-                            If IsNumeric(strLevels.Split(":")(0)) _
-                                AndAlso IsNumeric(strLevels.Split(":")(1)) Then
-                                clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
+            Dim strType As String = row.Cells("cbType").Value
+            If strType IsNot Nothing Then
+                Select Case strType
+                    Case "Character"
+                        clsColExpRFunction.SetRCommand("as.character")
+                    Case "Numeric"
+                        clsColExpRFunction.SetRCommand("as.numeric")
+                    Case "Factor"
+                        clsColExpRFunction.SetRCommand("factor")
+                        Dim strLevels As String = row.Cells("colLevels").Value
+                        If strLevels <> "" Then
+                            If strLevels.Count(Function(x) x = ":") = 1 Then
+                                If IsNumeric(strLevels.Split(":")(0)) _
+                                        AndAlso IsNumeric(strLevels.Split(":")(1)) Then
+                                    clsColExpRFunction.AddParameter("levels", strLevels, iPosition:=1)
+                                End If
+                            Else
+                                clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
                             End If
-                        Else
-                            clsColExpRFunction.AddParameter("levels", GetLevelsAsRString(strLevels), iPosition:=1)
                         End If
-                    End If
-                Case "Integer"
-                    clsColExpRFunction.SetRCommand("as.integer")
-                Case Else
-                    MsgBox("Developer error: Only expected one predefined item to set the column type.")
-            End Select
+                    Case "Integer"
+                        clsColExpRFunction.SetRCommand("as.integer")
+                    Case Else
+                        MsgBox("Developer error: Only expected one predefined item to set the column type.")
+                End Select
+            End If
 
             lstLabels.Add(row.Cells("colLabel").Value)
             clsSjLabelledFunction.AddParameter("label", GetLabelAsRString(lstLabels), iPosition:=1)
