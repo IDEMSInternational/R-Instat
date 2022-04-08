@@ -75,11 +75,7 @@ Public Class dlgReferenceLevel
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverReferenceLevels.IsEmpty AndAlso ucrFactorReferenceLevels.IsAnyGridRowSelected Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverReferenceLevels.IsEmpty AndAlso ucrFactorReferenceLevels.IsAnyGridRowSelected)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
