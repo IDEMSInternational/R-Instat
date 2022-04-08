@@ -69,11 +69,16 @@ Public Class dlgCorruptionDefineCRI
         ucrChkScaleNumeric.Enabled = False
 
         'grd
-        ucrGridWeights.SetReceiver(ucrReceiverRedFlag)
-        ucrGridWeights.SetAsViewerOnly()
-        ucrGridWeights.bIncludeLevels = False
-        ucrGridWeights.strExtraColumn = strWeightColumn
-        ucrGridWeights.AddEditableColumns({strWeightColumn})
+        'ucrGridWeights.SetReceiver(ucrReceiverRedFlag)
+        'ucrGridWeights.SetAsViewerOnly()
+        'ucrGridWeights.bIncludeLevels = False
+        'ucrGridWeights.strExtraColumn = strWeightColumn
+        'ucrGridWeights.AddEditableColumns({strWeightColumn})
+
+        ucrGridWeights.SetAsNormalGridColumn(ucrReceiverRedFlag,
+                                            extraColNames:={strWeightColumn},
+                                            editableColNames:={strWeightColumn},
+                                            hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
 
         'lstbox
         lstIndexComponents.Columns.Add("Component")
@@ -152,18 +157,10 @@ Public Class dlgCorruptionDefineCRI
 
     Private Sub EnableAddButton()
         If Not ucrReceiverRedFlag.IsEmpty() Then
-            If (ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" OrElse ucrReceiverRedFlag.strCurrDataType = "integer") Then
-                If ucrNudWeights.GetText <> "" Then
-                    cmdAddComponent.Enabled = True
-                Else
-                    cmdAddComponent.Enabled = False
-                End If
+            If ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" OrElse ucrReceiverRedFlag.strCurrDataType = "integer" Then
+                cmdAddComponent.Enabled = ucrNudWeights.GetText <> ""
             Else
-                If ucrGridWeights.IsColumnComplete(strWeightColumn) Then
-                    cmdAddComponent.Enabled = True
-                Else
-                    cmdAddComponent.Enabled = False
-                End If
+                cmdAddComponent.Enabled = ucrGridWeights.IsColumnComplete({strWeightColumn})
             End If
         Else
             cmdAddComponent.Enabled = False
@@ -202,7 +199,7 @@ Public Class dlgCorruptionDefineCRI
         Dim clsTempOp As ROperator
         Dim clsTempFactorOp As ROperator
         Dim strList As String = ""
-        Dim iWeightColumn As Integer = -1
+        Dim iWeightColumn As Integer
         Dim bFound As Boolean = False
 
         clsTempOp = New ROperator
@@ -223,7 +220,11 @@ Public Class dlgCorruptionDefineCRI
             clsTempOp.AddParameter("column", ucrReceiverRedFlag.GetVariableNames(False), iPosition:=0)
             clsTempOp.AddParameter("weight", ucrNudWeights.Value, iPosition:=1)
         ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" AndAlso iWeightColumn <> -1 Then
-            lviCondition.SubItems(1).Text = ucrGridWeights.GetColumnInFactorSheet(strWeightColumn, False)
+            'lviCondition.SubItems(1).Text = ucrGridWeights.GetColumnInFactorSheet(strWeightColumn, False)
+            lviCondition.SubItems(1).Text = mdlCoreControl.GetRVector(
+                ucrGridWeights.GetCellValues(strWeightColumn, False),
+                bOnlyIfMultipleElement:=True)
+
             clsTempOp.SetOperation("+")
             For j As Integer = 0 To ucrGridWeights.grdFactorData.CurrentWorksheet.RowCount - 1
                 clsTempFactorOp = New ROperator
@@ -299,7 +300,8 @@ Public Class dlgCorruptionDefineCRI
                 ucrNudWeights.Value = lviCondition.SubItems(1).Text
             ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" AndAlso iWeightColumn <> -1 Then
                 strIndexValues = ExtractItemsFromRList(lviCondition.SubItems(1).Text)
-                ucrGridWeights.SetColumn(strIndexValues, iWeightColumn, bSilent:=False)
+                'ucrGridWeights.SetColumn(strIndexValues, iWeightColumn, bSilent:=False)
+                ucrGridWeights.SetCellValues(strWeightColumn, strIndexValues, bRaisedControlValueChangedEvent:=True)
             Else
                 MsgBox("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
             End If

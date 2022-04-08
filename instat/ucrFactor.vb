@@ -1494,7 +1494,12 @@ Public Class ucrFactor
         End If
     End Sub
 
+    'todo. temporary function
     Public Function GetColumnIndex(strColumn As String) As Integer
+        If _grdSheet IsNot Nothing Then
+            Return GetColumnIndex(_grdSheet, strColumn)
+        End If
+        'todo. temporary
         If shtCurrSheet IsNot Nothing Then
             For i As Integer = 0 To shtCurrSheet.ColumnCount - 1
                 If shtCurrSheet.ColumnHeaders(i).Text = strColumn Then

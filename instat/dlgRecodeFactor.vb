@@ -92,21 +92,11 @@ Public Class dlgRecodeFactor
 
         ucrInputAddNa.SetParameter(New RParameter("na_level", 1))
 
-        'ucrFactorGrid.SetReceiver(ucrReceiverFactor)
-        'ucrFactorGrid.SetAsViewerOnly()
-        'ucrFactorGrid.bIncludeCopyOfLevels = True
-        'ucrFactorGrid.AddEditableColumns({"New Label"})
-
-        'ucrFactorLevels.SetAsMultipleSelector()
-        'ucrFactorLevels.SetReceiver(ucrReceiverFactor)
-        'ucrFactorLevels.SetIncludeLevels(False)
-        'ucrFactorLevels.bIncludeNA = True
-
-
         ucrFactorGrid.SetAsNormalGridColumn(ucrReceiverFactor,
                                             extraColNames:={"New Label"},
                                             editableColNames:={"New Label"},
                                             hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
+
         ucrFactorLevels.SetAsMultipleSelectorGrid(ucrReceiverFactor,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=True)
