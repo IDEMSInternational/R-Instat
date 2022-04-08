@@ -31,6 +31,7 @@ Public Class ucrFilter
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        bFirstLoad = True
         bFilterDefined = False
         clsFilterOperator = New ROperator
         clsFilterOperator.strOperation = "&"
@@ -45,9 +46,8 @@ Public Class ucrFilter
     Private Sub ucrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
-            bFirstLoad = False
             SetDefaults()
-
+            bFirstLoad = False
         End If
         ClearConditions()
         If strDefaultDataFrame <> "" Then
@@ -174,9 +174,6 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
-        If bFirstLoad Then
-            Exit Sub
-        End If
         VariableTypeProperties()
         CheckAddEnabled()
     End Sub
@@ -428,4 +425,6 @@ Public Class ucrFilter
         End If
         ucrFilterPreview.SetName(strFilter)
     End Sub
+
+
 End Class

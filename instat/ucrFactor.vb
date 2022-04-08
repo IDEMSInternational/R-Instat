@@ -67,6 +67,14 @@ Public Class ucrFactor
     ''' </summary>
     Private WithEvents _ucrLinkedReceiver As ucrReceiverSingle
 
+    'Note. This will be initialised once in this object scope.
+
+    ''' <summary>
+    ''' used as a cache of the receiver's contents
+    ''' </summary>
+    Private strCurrFactorVariableName As String = ""
+
+
     ''' <summary>
     ''' used to determine whether to include NA factor level, if available, 
     ''' as part of the metadata filled in the grid sheet
@@ -141,7 +149,6 @@ Public Class ucrFactor
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
         'todo.check if the contents of the receiver really changed before doing below
-
         FillGridWithNewDataSheet()
         OnControlValueChanged()
     End Sub
@@ -292,42 +299,61 @@ Public Class ucrFactor
     End Sub
 
     Private Sub FillGridWithNewDataSheet()
-        'clear any worksheets from the grid
-        _grdSheet = Nothing
-        grdFactorData.Worksheets.Clear()
 
-
-        If _ucrLinkedReceiver Is Nothing OrElse _ucrLinkedReceiver.IsEmpty() Then
+        'check for linked receiver and empty receiver contents
+        'also check column type of the receiver if it is a factor.
+        'the alternative way of getting the column type is by calling (left here for later reference)
+        'frmMain.clsRLink.GetColumnType(_ucrLinkedReceiver.GetDataName(), _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=False))
+        'Note contains() check allows ordered factors to be included
+        If _ucrLinkedReceiver Is Nothing OrElse _ucrLinkedReceiver.IsEmpty() OrElse
+            String.IsNullOrEmpty(_ucrLinkedReceiver.strCurrDataType) OrElse
+            Not _ucrLinkedReceiver.strCurrDataType.ToLower.Contains("factor") Then
+            ClearWorkSheetAndVariableName()
             Exit Sub
         End If
 
 
-        'todo. this check should be done through the receiver
-        'the receiver should be able to return the type of the column selected.
-        'so once the single receiver is enhanced to do so. update this line accordingly
-        Dim strColType As String = frmMain.clsRLink.GetColumnType(_ucrLinkedReceiver.GetDataName(),
-                                                    _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=False))
-        'todo test this variable
-        Dim kk = _ucrLinkedReceiver.strCurrDataType
 
-        ' check if the column type is a factor.
-        ' contains allows ordered factors to be included
-        If String.IsNullOrEmpty(strColType) OrElse Not strColType.Contains("factor") Then
+        'Get the R factor variable name
+        Dim strNewFactorVariableName As String = _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=True)
+
+        'check if the receiver contents really changed. Some dialogs and controls implementations
+        'may indirectly call this function multiple times unnecessary.
+        'adding this checks helps with performance efficiency.  
+        If strCurrFactorVariableName = strNewFactorVariableName Then
             Exit Sub
         End If
-
-        If CreateAndFilleNewDataSheet(grdFactorData,
+        'set the new factor varible as the current cached variable
+        strCurrFactorVariableName = strNewFactorVariableName
+        If CreateAndFillNewDataSheet(grdFactorData,
                                       Chr(34) & _ucrLinkedReceiver.GetDataName() & Chr(34),
-                                       _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=True),
+                                      strNewFactorVariableName,
                                      _enumControlState, _bIncludeNALevel,
                                      _hiddenColumnNames, _extraColumnNames,
                                      _editableColumnNames) Then
             _grdSheet = grdFactorData.CurrentWorksheet
-        Else
-            'todo. developer error???
+            'show the reogrid
+            grdFactorData.Visible = True
         End If
+    End Sub
 
-
+    ''' <summary>
+    ''' clears all grid worksheets and resets the cached factor variable name
+    ''' also hides the grid
+    ''' </summary>
+    Private Sub ClearWorkSheetAndVariableName()
+        'clear any worksheets from the grid
+        _grdSheet = Nothing
+        grdFactorData.Worksheets.Clear()
+        'clear the cached varible name too.
+        'An important step to do incase variable data type has been changed 
+        strCurrFactorVariableName = ""
+        'important
+        'ucrFilter control implemntation forced this line addition
+        'for some reason when ucrFactor.Visible = True is called when 
+        '_grdSheet = Nothing, then the reogrid throws a visbility error.
+        'removal of this Visibility setting can removed once ucrFilter has been fully refactored
+        grdFactorData.Visible = False
     End Sub
 
     ''' <summary>
@@ -344,7 +370,7 @@ Public Class ucrFactor
     ''' <param name="extraColumnNames"></param>
     ''' <param name="editableColumnNames"></param>
     ''' <returns></returns>
-    Private Function CreateAndFilleNewDataSheet(grdControl As unvell.ReoGrid.ReoGridControl,
+    Private Function CreateAndFillNewDataSheet(grdControl As unvell.ReoGrid.ReoGridControl,
                                                 strDataFrameName As String,
                                                 strFactorVariableName As String,
                                                 enumControlState As ControlStates,
@@ -1324,11 +1350,11 @@ Public Class ucrFactor
     '    RaiseEvent GridVisibleChanged()
     'End Sub
 
-    Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
-        If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then
-            shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
-        End If
-    End Sub
+    'Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
+    '    If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then
+    '        shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
+    '    End If
+    'End Sub
 
     Public Function IsColumnComplete(strColumn As String) As Boolean
         Dim iColumn As Integer = -1
