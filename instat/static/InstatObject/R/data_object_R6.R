@@ -1067,8 +1067,8 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (curr_col in col_names) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (property == labels_label && !is.null(new_val) && new_val == "") {
-        #reset the column labels property 
+      if (((property == labels_label && new_val == "") ||(property == colour_label && new_val == -1)) && !is.null(new_val)) {
+        #reset the column labels or colour property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
         attr(private$data[[curr_col]], property) <- new_val
@@ -1079,8 +1079,8 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (col_name in self$get_column_names()) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (property == labels_label && !is.null(new_val) && new_val == "") {
-        #reset the column labels property 
+      if (((property == labels_label && new_val == "") ||(property == colour_label && new_val == -1)) && !is.null(new_val)) {
+        #reset the column labels or colour property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
         attr(private$data[[col_name]], property) <- new_val

@@ -73,7 +73,7 @@ Public Class dlgColourbyProperty
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverMetadataProperty.IsEmpty Then
+        If Not ucrReceiverMetadataProperty.IsEmpty AndAlso (ucrChkRemoveColours.Checked OrElse Not ucrChkRemoveColours.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
