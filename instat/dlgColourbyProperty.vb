@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgColourbyProperty
     Public bFirstLoad As Boolean = True
     Private clsColourByMetadata As New RFunction
@@ -32,6 +33,7 @@ Public Class dlgColourbyProperty
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        AutoFill()
         autoTranslate(Me)
     End Sub
 
@@ -64,7 +66,6 @@ Public Class dlgColourbyProperty
 
         clsColourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsRemoveColour.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
     End Sub
 
@@ -95,6 +96,28 @@ Public Class dlgColourbyProperty
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
         End If
+    End Sub
+
+    Private Sub AutoFill()
+        If ucrSelectorColourByMetadata.lstAvailableVariable.Items.Count > 0 Then
+            Dim clsHasColoursFunc As New RFunction
+            Dim bApplyColumnColours As Boolean
+            clsHasColoursFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_colours")
+            clsHasColoursFunc.AddParameter("data_name", Chr(34) & ucrSelectorColourByMetadata.ucrAvailableDataFrames.strCurrDataFrame & Chr(34))
+            bApplyColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsHasColoursFunc.ToScript()).AsLogical(0)
+            If Not bApplyColumnColours Then
+                For Each lviItem As ListViewItem In ucrSelectorColourByMetadata.lstAvailableVariable.Items
+                    If lviItem.Text = "class" Then
+                        ucrReceiverMetadataProperty.Add(lviItem.Text, ucrSelectorColourByMetadata.ucrAvailableDataFrames.strCurrDataFrame)
+                        Exit For
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrSelectorColourByMetadata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlValueChanged
+        AutoFill()
     End Sub
 
     Private Sub Controls_ControContententsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlContentsChanged, ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkRemoveColours.ControlContentsChanged
