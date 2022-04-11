@@ -59,7 +59,6 @@ Public Class dlgPopulationPyramids
 
         clsRggplotFunction = New RFunction
         clsRgeom_bar = New RFunction
-        clsRgeom_bar2 = New RFunction
         clsRaesFunction = New RFunction
         clsRgeom_CoordFlip = New RFunction
 
