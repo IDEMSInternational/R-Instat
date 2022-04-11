@@ -50,6 +50,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 414
         ucrBase.clsRsyntax.iCallType = 2
+        rdoThreeVariable.Enabled = False
 
         iUcrBaseXLocation = ucrBase.Location.X
         iDialogueXsize = Me.Size.Width

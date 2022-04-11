@@ -56,6 +56,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblNumericVariable = New System.Windows.Forms.Label()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
         Me.ucrChkPercentageProportion = New instat.ucrCheck()
         Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
@@ -74,7 +75,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
+        Me.rdoThreeVariable = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
@@ -202,7 +203,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoCustomize.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCustomize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCustomize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCustomize.Location = New System.Drawing.Point(201, 12)
+        Me.rdoCustomize.Location = New System.Drawing.Point(144, 12)
         Me.rdoCustomize.Name = "rdoCustomize"
         Me.rdoCustomize.Size = New System.Drawing.Size(100, 28)
         Me.rdoCustomize.TabIndex = 2
@@ -218,7 +219,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(106, 12)
+        Me.rdoSkim.Location = New System.Drawing.Point(49, 12)
         Me.rdoSkim.Name = "rdoSkim"
         Me.rdoSkim.Size = New System.Drawing.Size(100, 28)
         Me.rdoSkim.TabIndex = 1
@@ -278,6 +279,19 @@ Partial Class dlgDescribeTwoVariable
         Me.grpDisplay.TabIndex = 21
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Percentages"
+        '
+        'ucrReceiverPercentages
+        '
+        Me.ucrReceiverPercentages.AutoSize = True
+        Me.ucrReceiverPercentages.frmParent = Me
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(21, 63)
+        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
+        Me.ucrReceiverPercentages.Selector = Nothing
+        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPercentages.strNcFilePath = ""
+        Me.ucrReceiverPercentages.TabIndex = 8
+        Me.ucrReceiverPercentages.ucrSelector = Nothing
         '
         'lblFactorsAsPercentage
         '
@@ -443,9 +457,9 @@ Partial Class dlgDescribeTwoVariable
         'ucrPnlDescribe
         '
         Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDescribe.Location = New System.Drawing.Point(95, 9)
+        Me.ucrPnlDescribe.Location = New System.Drawing.Point(39, 9)
         Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
-        Me.ucrPnlDescribe.Size = New System.Drawing.Size(211, 34)
+        Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
         Me.ucrPnlDescribe.TabIndex = 0
         '
         'ucrReceiverSecondVar
@@ -486,18 +500,21 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDescribeTwoVar.TabIndex = 3
         '
-        'ucrReceiverPercentages
+        'rdoThreeVariable
         '
-        Me.ucrReceiverPercentages.AutoSize = True
-        Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(21, 63)
-        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
-        Me.ucrReceiverPercentages.Selector = Nothing
-        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPercentages.strNcFilePath = ""
-        Me.ucrReceiverPercentages.TabIndex = 8
-        Me.ucrReceiverPercentages.ucrSelector = Nothing
+        Me.rdoThreeVariable.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoThreeVariable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoThreeVariable.FlatAppearance.BorderSize = 2
+        Me.rdoThreeVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoThreeVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoThreeVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoThreeVariable.Location = New System.Drawing.Point(242, 12)
+        Me.rdoThreeVariable.Name = "rdoThreeVariable"
+        Me.rdoThreeVariable.Size = New System.Drawing.Size(100, 28)
+        Me.rdoThreeVariable.TabIndex = 23
+        Me.rdoThreeVariable.Text = "Three Variable"
+        Me.rdoThreeVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoThreeVariable.UseVisualStyleBackColor = True
         '
         'dlgDescribeTwoVariable
         '
@@ -505,6 +522,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(419, 491)
+        Me.Controls.Add(Me.rdoThreeVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpFrequency)
         Me.Controls.Add(Me.grpDisplay)
@@ -581,4 +599,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrNudSigFigs As ucrNud
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
+    Friend WithEvents rdoThreeVariable As RadioButton
 End Class
