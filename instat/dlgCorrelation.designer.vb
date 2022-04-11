@@ -54,7 +54,7 @@ Partial Class dlgCorrelation
         Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkDisplay = New instat.ucrCheck()
+        Me.ucrChkDisplayAsDataFrame = New instat.ucrCheck()
         Me.ucrChkShave = New instat.ucrCheck()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
@@ -70,11 +70,14 @@ Partial Class dlgCorrelation
         Me.ucrPnlColumns = New instat.UcrPanel()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrSaveCorrelationTest = New instat.ucrSave()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
+        Me.ucrSaveCorrelation = New instat.ucrSave()
+        Me.ucrSaveFashionModel = New instat.ucrSave()
+        Me.ucrSaveFashionDataFrame = New instat.ucrSave()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.grpDisplayOptions.SuspendLayout()
@@ -264,7 +267,7 @@ Partial Class dlgCorrelation
         '
         'grpDisplayOptions
         '
-        Me.grpDisplayOptions.Controls.Add(Me.ucrChkDisplay)
+        Me.grpDisplayOptions.Controls.Add(Me.ucrChkDisplayAsDataFrame)
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkShave)
         Me.grpDisplayOptions.Location = New System.Drawing.Point(9, 346)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
@@ -274,14 +277,14 @@ Partial Class dlgCorrelation
         Me.grpDisplayOptions.Tag = "Display Options"
         Me.grpDisplayOptions.Text = "Display Options"
         '
-        'ucrChkDisplay
+        'ucrChkDisplayAsDataFrame
         '
-        Me.ucrChkDisplay.AutoSize = True
-        Me.ucrChkDisplay.Checked = False
-        Me.ucrChkDisplay.Location = New System.Drawing.Point(111, 126)
-        Me.ucrChkDisplay.Name = "ucrChkDisplay"
-        Me.ucrChkDisplay.Size = New System.Drawing.Size(117, 23)
-        Me.ucrChkDisplay.TabIndex = 63
+        Me.ucrChkDisplayAsDataFrame.AutoSize = True
+        Me.ucrChkDisplayAsDataFrame.Checked = False
+        Me.ucrChkDisplayAsDataFrame.Location = New System.Drawing.Point(242, 18)
+        Me.ucrChkDisplayAsDataFrame.Name = "ucrChkDisplayAsDataFrame"
+        Me.ucrChkDisplayAsDataFrame.Size = New System.Drawing.Size(162, 23)
+        Me.ucrChkDisplayAsDataFrame.TabIndex = 63
         '
         'ucrChkShave
         '
@@ -435,14 +438,14 @@ Partial Class dlgCorrelation
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 50
         '
-        'ucrSaveModel
+        'ucrSaveCorrelationTest
         '
-        Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 510)
-        Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(266, 24)
-        Me.ucrSaveModel.TabIndex = 48
+        Me.ucrSaveCorrelationTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveCorrelationTest.Location = New System.Drawing.Point(10, 510)
+        Me.ucrSaveCorrelationTest.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveCorrelationTest.Name = "ucrSaveCorrelationTest"
+        Me.ucrSaveCorrelationTest.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveCorrelationTest.TabIndex = 48
         '
         'ucrReceiverMultipleColumns
         '
@@ -496,12 +499,41 @@ Partial Class dlgCorrelation
         Me.ucrNudConfidenceInterval.TabIndex = 47
         Me.ucrNudConfidenceInterval.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrSaveCorrelation
+        '
+        Me.ucrSaveCorrelation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveCorrelation.Location = New System.Drawing.Point(8, 511)
+        Me.ucrSaveCorrelation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveCorrelation.Name = "ucrSaveCorrelation"
+        Me.ucrSaveCorrelation.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveCorrelation.TabIndex = 65
+        '
+        'ucrSaveFashionModel
+        '
+        Me.ucrSaveFashionModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveFashionModel.Location = New System.Drawing.Point(9, 512)
+        Me.ucrSaveFashionModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFashionModel.Name = "ucrSaveFashionModel"
+        Me.ucrSaveFashionModel.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveFashionModel.TabIndex = 66
+        '
+        'ucrSaveFashionDataFrame
+        '
+        Me.ucrSaveFashionDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveFashionDataFrame.Location = New System.Drawing.Point(9, 512)
+        Me.ucrSaveFashionDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFashionDataFrame.Name = "ucrSaveFashionDataFrame"
+        Me.ucrSaveFashionDataFrame.Size = New System.Drawing.Size(266, 24)
+        Me.ucrSaveFashionDataFrame.TabIndex = 67
+        '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 596)
+        Me.Controls.Add(Me.ucrSaveFashionModel)
+        Me.Controls.Add(Me.ucrSaveCorrelation)
         Me.Controls.Add(Me.ucrChkDisplayOptions)
         Me.Controls.Add(Me.ucrChkAbsolute)
         Me.Controls.Add(Me.lblMethod)
@@ -521,7 +553,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrSelectorCorrelation)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpDisplayOptions)
-        Me.Controls.Add(Me.ucrSaveModel)
+        Me.Controls.Add(Me.ucrSaveCorrelationTest)
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.lblFirstColumn)
@@ -530,6 +562,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrReceiverFirstColumn)
         Me.Controls.Add(Me.lblSecondColumn)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
+        Me.Controls.Add(Me.ucrSaveFashionDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -575,7 +608,7 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrSelectorCorrelation As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpDisplayOptions As GroupBox
-    Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents ucrSaveCorrelationTest As ucrSave
     Friend WithEvents ucrNudConfidenceInterval As ucrNud
     Friend WithEvents lblConfInterval As Label
     Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
@@ -584,5 +617,8 @@ Partial Class dlgCorrelation
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrReceiverFirstColumn As ucrReceiverSingle
     Friend WithEvents lblFirstColumn As Label
-    Friend WithEvents ucrChkDisplay As ucrCheck
+    Friend WithEvents ucrChkDisplayAsDataFrame As ucrCheck
+    Friend WithEvents ucrSaveCorrelation As ucrSave
+    Friend WithEvents ucrSaveFashionDataFrame As ucrSave
+    Friend WithEvents ucrSaveFashionModel As ucrSave
 End Class
