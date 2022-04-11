@@ -20,15 +20,15 @@ Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
 
 ''' <summary>
-''' <para>this control only accepts string parameter types</para> 
-''' <para>this control does not yet support entry of comma separated values</para>
-''' 
-''' <para>in normal grid mode, if set to internally write to parameters, 
+''' <para>This control only accepts string parameter types</para> 
+''' <para>It does not yet support entry of comma separated values</para>
+''' <para>It can only be used in either of the following states; NormalGrid, SingleSelectorGrid, MultipleSelectorGrid </para>
+''' <para>In  NormalGrid normal state, if set to internally write to parameters, 
 ''' the parameters will have a list of the entire values of the column regardless of whether
-''' the values were edit or not</para>
-''' <para>Reading R parameters will fail if new level created was no submitted to R</para>
-''' 
-''' 
+''' the values were edit or not.
+''' Reading R parameters will fail if new level created was no submitted to R</para>
+''' <para>In Selector satet mode, if set to internally write to parameters, 
+''' the parameters will have a list of the selected values</para>
 ''' </summary>
 Public Class ucrFactor
 
@@ -54,7 +54,6 @@ Public Class ucrFactor
     ''' used as a cache of the receiver's contents
     ''' </summary>
     Private strCurrFactorVariableName As String = ""
-
 
     ''' <summary>
     ''' used to determine whether to include NA factor level, if available, 
@@ -134,9 +133,6 @@ Public Class ucrFactor
     End Structure
 
 
-    '----------------------
-    'events
-
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
@@ -197,16 +193,15 @@ Public Class ucrFactor
 
     End Sub
 
-    'end events
-    '---------------------------------------------
 
+    'sets the state of the control, linked receiver and grid properties
     Private Sub SetupControl(enumControlState As ControlStates,
                              ucrLinkedReceiver As ucrReceiverSingle,
-                            Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
+                             Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
                              Optional hiddenColNames As IEnumerable(Of String) = Nothing,
                              Optional extraColNames As IEnumerable(Of String) = Nothing,
                              Optional editableColNames As IEnumerable(Of String) = Nothing,
-                                 Optional bIncludeNALevel As Boolean = False)
+                             Optional bIncludeNALevel As Boolean = False)
 
         _enumControlState = enumControlState
         _ucrLinkedReceiver = ucrLinkedReceiver
@@ -264,6 +259,10 @@ Public Class ucrFactor
                      hiddenColNames:=hiddenColNames, bIncludeNALevel:=bIncludeNALevel)
     End Sub
 
+    ''' <summary>
+    ''' hides the columns
+    ''' </summary>
+    ''' <param name="hiddenColNames"></param>
     Public Sub HideColumns(hiddenColNames As IEnumerable(Of String))
         If _grdSheet Is Nothing Then
             Exit Sub
@@ -278,6 +277,10 @@ Public Class ucrFactor
         Next
     End Sub
 
+    ''' <summary>
+    ''' shows the columns if they exist
+    ''' </summary>
+    ''' <param name="showColNames"></param>
     Public Sub ShowColumns(showColNames As IEnumerable(Of String))
 
         If _grdSheet Is Nothing Then
@@ -311,7 +314,6 @@ Public Class ucrFactor
             OnControlValueChanged()
             Exit Sub
         End If
-
 
 
         'Get the R factor variable name
@@ -354,7 +356,7 @@ Public Class ucrFactor
 
 
         'important
-        'ucrFilter control implemntation forced this line addition
+        'ucrFilter control implementation forced this line addition
         'for some reason when ucrFactor.Visible = True is called when 
         '_grdSheet = Nothing, then the reogrid throws a visbility error.
         'removal of this Visibility setting can removed once ucrFilter has been fully refactored
@@ -441,12 +443,6 @@ Public Class ucrFactor
 
         'hide columns not needed. The data frame had all default factor metadata columns
         For iColIndex As Integer = 0 To grdControl.CurrentWorksheet.ColumnCount - 1
-
-            'todo set width of level and freq??
-            ' _grdSheet.ColumnHeaders(iLevelsCol).Width = 40
-            '_grdSheet.ColumnHeaders(iFreqCol).Width = 40
-
-            'hide columns set as hidden
             If hiddenColumnNames.Contains(grdControl.CurrentWorksheet.ColumnHeaders(iColIndex).Text) Then
                 grdControl.CurrentWorksheet.HideColumns(iColIndex, 1)
             End If
@@ -542,30 +538,7 @@ Public Class ucrFactor
                                                End Sub
             Next
         End If
-
-
-
     End Sub
-
-    ''' <summary>
-    ''' Checks if all rows are 'selected or checked'
-    ''' <para>Note. Should be used in 'MultipleSelector' state only</para>
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function IsAllGridRowsSelected() As Boolean
-        'only multiple select state supports this
-        If _grdSheet Is Nothing OrElse Not _enumControlState = ControlStates.MultipleSelectorGrid Then
-            Return False
-        End If
-
-        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
-        For iRowIndex = 0 To _grdSheet.Rows - 1
-            If Not DirectCast(_grdSheet(iRowIndex, iSelectorColumnIndex), Boolean) Then
-                Return False
-            End If
-        Next
-        Return True
-    End Function
 
 
     ''' <summary>
@@ -701,7 +674,6 @@ Public Class ucrFactor
         Return GetCellValues(_grdSheet, GetColumnIndex(_grdSheet, strValueColName), bWithQuotes)
     End Function
 
-    'used internally
     Private Function GetCellValues(grdSheet As unvell.ReoGrid.Worksheet,
                                    iValueColIndex As Integer, bWithQuotes As Boolean) As List(Of String)
         Dim lstCellValues As New List(Of String)
@@ -719,7 +691,7 @@ Public Class ucrFactor
     ''' Checks if all rows are 'selected or checked'
     ''' <para>Note. Should be used in 'MultipleSelector or SingleSelector' state only</para>
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>true if any row is 'selected', false otherwise</returns>
     Public Function IsAnyGridRowSelected() As Boolean
         'only multiple select state supports this
         If _grdSheet Is Nothing OrElse _enumControlState = ControlStates.NormalGrid Then
@@ -733,6 +705,26 @@ Public Class ucrFactor
             End If
         Next
         Return False
+    End Function
+
+    ''' <summary>
+    ''' Checks if all rows are 'selected or checked'
+    ''' <para>Note. Should be used in 'MultipleSelector' state only</para>
+    ''' </summary>
+    ''' <returns>true if all rows are 'selected', false otherwise</returns>
+    Public Function IsAllGridRowsSelected() As Boolean
+        'only multiple select state supports this
+        If _grdSheet Is Nothing OrElse Not _enumControlState = ControlStates.MultipleSelectorGrid Then
+            Return False
+        End If
+
+        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
+        For iRowIndex = 0 To _grdSheet.Rows - 1
+            If Not DirectCast(_grdSheet(iRowIndex, iSelectorColumnIndex), Boolean) Then
+                Return False
+            End If
+        Next
+        Return True
     End Function
 
     ''' <summary>
@@ -833,8 +825,6 @@ Public Class ucrFactor
             OnControlValueChanged()
         End If
     End Sub
-
-
 
     ''' <summary>
     ''' by default this is always called when subroutine OnControlValueChanged 
