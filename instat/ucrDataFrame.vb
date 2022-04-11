@@ -234,7 +234,7 @@ Public Class ucrDataFrame
         If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrDataFrame Then
             'Substring used to removed quotes on either side
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
-            SetDataframe(strDataFrameName)
+            'SetDataframe(strDataFrameName)
         End If
     End Sub
 
