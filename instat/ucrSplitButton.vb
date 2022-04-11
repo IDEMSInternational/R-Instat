@@ -27,7 +27,7 @@ Public Class ucrSplitButton
 
     Private _pushButtonState As PushButtonState
     Private ReadOnly _iSplitSectionWidth As Integer = 18
-    Private ReadOnly _borderSize As Integer = SystemInformation.Border3DSize.Width * 2
+    Private ReadOnly _iBorderSize As Integer = SystemInformation.Border3DSize.Width * 2
     Private _dropDownRectangle As Rectangle
     Private _bSplitMenuVisible As Boolean
 
@@ -260,13 +260,13 @@ Public Class ucrSplitButton
         End If
 
         _dropDownRectangle = New Rectangle(bounds.Right - _iSplitSectionWidth, 0, _iSplitSectionWidth, bounds.Height)
-        Dim iInternalBorder As Integer = _borderSize
+        Dim iInternalBorder As Integer = _iBorderSize
         Dim focusRect As Rectangle = New Rectangle(iInternalBorder - 1, iInternalBorder - 1, bounds.Width - _dropDownRectangle.Width - iInternalBorder, bounds.Height - (iInternalBorder * 2) + 2)
         Dim bDrawSplitLine As Boolean = (State = PushButtonState.Hot OrElse State = PushButtonState.Pressed OrElse Not Application.RenderWithVisualStyles)
 
         If bDrawSplitLine Then
-            g.DrawLine(SystemPens.ButtonShadow, bounds.Right - _iSplitSectionWidth, _borderSize, bounds.Right - _iSplitSectionWidth, bounds.Bottom - _borderSize)
-            g.DrawLine(SystemPens.ButtonFace, bounds.Right - _iSplitSectionWidth - 1, _borderSize, bounds.Right - _iSplitSectionWidth - 1, bounds.Bottom - _borderSize)
+            g.DrawLine(SystemPens.ButtonShadow, bounds.Right - _iSplitSectionWidth, _iBorderSize, bounds.Right - _iSplitSectionWidth, bounds.Bottom - _iBorderSize)
+            g.DrawLine(SystemPens.ButtonFace, bounds.Right - _iSplitSectionWidth - 1, _iBorderSize, bounds.Right - _iSplitSectionWidth - 1, bounds.Bottom - _iBorderSize)
         End If
 
         'below commented code is meant to support Right To Left language locales,
@@ -308,16 +308,16 @@ Public Class ucrSplitButton
     End Sub
 
     Private Sub PaintTextandImage(g As Graphics, bounds As Rectangle)
-        Dim text_rectangle As Rectangle
-        Dim image_rectangle As Rectangle
-        CalculateAndSetButtonTextAndImageLayout(bounds, text_rectangle, image_rectangle)
+        Dim textRectangle As Rectangle
+        Dim imageRectangle As Rectangle
+        CalculateAndSetButtonTextAndImageLayout(bounds, textRectangle, imageRectangle)
 
         If Image IsNot Nothing Then
 
             If Enabled Then
-                g.DrawImage(Image, image_rectangle.X, image_rectangle.Y, Image.Width, Image.Height)
+                g.DrawImage(Image, imageRectangle.X, imageRectangle.Y, Image.Width, Image.Height)
             Else
-                ControlPaint.DrawImageDisabled(g, Image, image_rectangle.X, image_rectangle.Y, BackColor)
+                ControlPaint.DrawImageDisabled(g, Image, imageRectangle.X, imageRectangle.Y, BackColor)
             End If
         End If
 
@@ -330,9 +330,9 @@ Public Class ucrSplitButton
         If Not String.IsNullOrEmpty(Text) Then
 
             If Enabled Then
-                TextRenderer.DrawText(g, Text, Font, text_rectangle, ForeColor, _textFormatFlags)
+                TextRenderer.DrawText(g, Text, Font, textRectangle, ForeColor, _textFormatFlags)
             Else
-                ControlPaint.DrawStringDisabled(g, Text, Font, BackColor, text_rectangle, _textFormatFlags)
+                ControlPaint.DrawStringDisabled(g, Text, Font, BackColor, textRectangle, _textFormatFlags)
             End If
         End If
     End Sub
@@ -346,7 +346,7 @@ Public Class ucrSplitButton
                 Return CalculateButtonAutoSize()
             End If
             If Not String.IsNullOrEmpty(Text) AndAlso TextRenderer.MeasureText(Text, Font).Width + _iSplitSectionWidth > preferredSize.Width Then
-                Return preferredSize + New Size(_iSplitSectionWidth + _borderSize * 2, 0)
+                Return preferredSize + New Size(_iSplitSectionWidth + _iBorderSize * 2, 0)
             End If
         End If
 
@@ -449,38 +449,38 @@ Public Class ucrSplitButton
     End Function
 
     Private Sub SetLayoutTextBeforeOrAfterImage(ByVal totalArea As Rectangle, ByVal textFirst As Boolean, ByVal textSize As Size, ByVal imageSize As Size, <Out> ByRef textRect As Rectangle, <Out> ByRef imageRect As Rectangle)
-        Dim elementSpacing As Integer = 0
-        Dim totalWidth As Integer = textSize.Width + elementSpacing + imageSize.Width
-        If Not textFirst Then elementSpacing += 2
+        Dim iElementSpacing As Integer = 0
+        Dim iTotalWidth As Integer = textSize.Width + iElementSpacing + imageSize.Width
+        If Not textFirst Then iElementSpacing += 2
 
-        If totalWidth > totalArea.Width Then
-            textSize.Width = totalArea.Width - elementSpacing - imageSize.Width
-            totalWidth = totalArea.Width
+        If iTotalWidth > totalArea.Width Then
+            textSize.Width = totalArea.Width - iElementSpacing - imageSize.Width
+            iTotalWidth = totalArea.Width
         End If
 
-        Dim excessWidth As Integer = totalArea.Width - totalWidth
-        Dim offset As Integer = 0
+        Dim iExcessWidth As Integer = totalArea.Width - iTotalWidth
+        Dim iOffset As Integer = 0
         Dim finalTextRect As Rectangle
         Dim finalImageRect As Rectangle
         Dim hText As HorizontalAlignment = GetHorizontalAlignment(TextAlign)
         Dim hImage As HorizontalAlignment = GetHorizontalAlignment(ImageAlign)
 
         If hImage = HorizontalAlignment.Left Then
-            offset = 0
+            iOffset = 0
         ElseIf hImage = HorizontalAlignment.Right AndAlso hText = HorizontalAlignment.Right Then
-            offset = excessWidth
+            iOffset = iExcessWidth
         ElseIf hImage = HorizontalAlignment.Center AndAlso (hText = HorizontalAlignment.Left OrElse hText = HorizontalAlignment.Center) Then
-            offset += excessWidth / 3
+            iOffset += iExcessWidth / 3
         Else
-            offset += 2 * (excessWidth / 3)
+            iOffset += 2 * (iExcessWidth / 3)
         End If
 
         If textFirst Then
-            finalTextRect = New Rectangle(totalArea.Left + offset, GetAlignInRectangle(totalArea, textSize, TextAlign).Top, textSize.Width, textSize.Height)
-            finalImageRect = New Rectangle(finalTextRect.Right + elementSpacing, GetAlignInRectangle(totalArea, imageSize, ImageAlign).Top, imageSize.Width, imageSize.Height)
+            finalTextRect = New Rectangle(totalArea.Left + iOffset, GetAlignInRectangle(totalArea, textSize, TextAlign).Top, textSize.Width, textSize.Height)
+            finalImageRect = New Rectangle(finalTextRect.Right + iElementSpacing, GetAlignInRectangle(totalArea, imageSize, ImageAlign).Top, imageSize.Width, imageSize.Height)
         Else
-            finalImageRect = New Rectangle(totalArea.Left + offset, GetAlignInRectangle(totalArea, imageSize, ImageAlign).Top, imageSize.Width, imageSize.Height)
-            finalTextRect = New Rectangle(finalImageRect.Right + elementSpacing, GetAlignInRectangle(totalArea, textSize, TextAlign).Top, textSize.Width, textSize.Height)
+            finalImageRect = New Rectangle(totalArea.Left + iOffset, GetAlignInRectangle(totalArea, imageSize, ImageAlign).Top, imageSize.Width, imageSize.Height)
+            finalTextRect = New Rectangle(finalImageRect.Right + iElementSpacing, GetAlignInRectangle(totalArea, textSize, TextAlign).Top, textSize.Width, textSize.Height)
         End If
 
         textRect = finalTextRect
