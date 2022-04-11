@@ -348,14 +348,11 @@ Partial Class dlgRecodeFactor
         '
         Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
         Me.ucrFactorLevels.Location = New System.Drawing.Point(248, 99)
         Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
         Me.ucrFactorLevels.Size = New System.Drawing.Size(295, 210)
         Me.ucrFactorLevels.TabIndex = 15
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
         'ucrPnlOptions
         '
@@ -389,13 +386,10 @@ Partial Class dlgRecodeFactor
         '
         Me.ucrFactorGrid.AutoSize = True
         Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorGrid.clsReceiver = Nothing
         Me.ucrFactorGrid.Location = New System.Drawing.Point(248, 99)
         Me.ucrFactorGrid.Name = "ucrFactorGrid"
-        Me.ucrFactorGrid.shtCurrSheet = Nothing
         Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 210)
         Me.ucrFactorGrid.TabIndex = 10
-        Me.ucrFactorGrid.ucrChkLevels = Nothing
         '
         'ucrReceiverFactor
         '

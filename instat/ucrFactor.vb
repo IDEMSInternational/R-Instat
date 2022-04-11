@@ -31,33 +31,6 @@ Imports unvell.ReoGrid.Events
 ''' 
 ''' </summary>
 Public Class ucrFactor
-    Public WithEvents clsReceiver As ucrReceiverSingle
-    Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
-
-    Public Event SelectedLevelChanged()
-    'Public Event GridContentChanged()
-    'Public Event GridVisibleChanged()
-    Public bIsSelector As Boolean
-    Public bIsMultipleSelector As Boolean
-    Public bIsGridColumn As Boolean
-    Public strColumnToGet As String
-    Public iSelectorColumnIndex As Integer
-    Public strSelectorColumnName As String
-    Private bIsEditable As Boolean
-    Private lstEditableColumns As List(Of String)
-    Public bIncludeCopyOfLevels As Boolean
-    Public strExtraColumn As String = ""
-    Public strSelectedLevels As String()
-    Public WithEvents ucrChkLevels As ucrCheck
-    Public bForceShowLevels As Boolean
-    Public bIncludeLevels As Boolean
-    Public bIncludeNA As Boolean
-    Public strLevelsName As String
-    Public strLabelsName As String
-    Public strFreqName As String
-    Private bDoNotUpdateCells As Boolean = False
-
-    '-------------------------
 
     'this reogrid worksheet will eventually be replaced with the custom grid sheet 
     Private WithEvents _grdSheet As unvell.ReoGrid.Worksheet
@@ -138,26 +111,26 @@ Public Class ucrFactor
         ''' <summary>
         ''' used to represent the ordinal column from R
         ''' </summary>
-        Public Const Ordinal = "Ord."
+        Public Const Ordinal As String = "Ord."
         ''' <summary>
         ''' used to represent "Level" column name from R
         ''' </summary>
-        Public Const Level = "Level"
+        Public Const Level As String = "Level"
         ''' <summary>
         ''' used to represent "Label" column name from R
         ''' </summary>
-        Public Const Label = "Label"
+        Public Const Label As String = "Label"
         ''' <summary>
         ''' used to represent "Freq" column name from R
         ''' </summary>
-        Public Const Freq = "Freq"
+        Public Const Freq As String = "Freq"
 
         ''' <summary>
-        ''' used to represent "Select_Level" column name 
+        ''' used to represent "Selector" column name 
         ''' this column is added internally when the control is used as a 'selector' 
-        ''' it never comes from R
+        ''' it does not come from R. 
         ''' </summary>
-        Public Const Select_Level = "Select Level"
+        Public Const SelectorColumn As String = "Select"
     End Structure
 
 
@@ -254,7 +227,7 @@ Public Class ucrFactor
                                           DefaultColumnNames.Level,
                                            DefaultColumnNames.Label,
                                            DefaultColumnNames.Freq,
-                                           DefaultColumnNames.Select_Level}.Contains(i))
+                                           DefaultColumnNames.SelectorColumn}.Contains(i))
         _extraColNames = lstExtraColNames
 
         'todo. do further a developer check??
@@ -453,13 +426,13 @@ Public Class ucrFactor
             Case ControlStates.SingleSelectorGrid
                 'add select level column with radiobutton as the cell body values
                 grdControl.CurrentWorksheet.AppendColumns(1)
-                grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.Select_Level
+                grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.SelectorColumn
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).DefaultCellBody = GetType(unvell.ReoGrid.CellTypes.RadioButtonCell)
                 AddSelectorButtonCells(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1, True)
             Case ControlStates.MultipleSelectorGrid
                 'add select level column with checkbox as the cell body values
                 grdControl.CurrentWorksheet.AppendColumns(1)
-                grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.Select_Level
+                grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = DefaultColumnNames.SelectorColumn
                 grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).DefaultCellBody = GetType(unvell.ReoGrid.CellTypes.CheckBoxCell)
                 AddSelectorButtonCells(grdControl.CurrentWorksheet, grdControl.CurrentWorksheet.Columns - 1, False)
             Case ControlStates.NormalGrid
@@ -585,7 +558,7 @@ Public Class ucrFactor
             Return False
         End If
 
-        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
+        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
         For iRowIndex = 0 To _grdSheet.Rows - 1
             If Not DirectCast(_grdSheet(iRowIndex, iSelectorColumnIndex), Boolean) Then
                 Return False
@@ -602,13 +575,6 @@ Public Class ucrFactor
     ''' <param name="colNames"></param>
     ''' <returns>true if all values are not empty and false otherwise</returns>
     Public Function IsColumnComplete(colNames As IEnumerable(Of String)) As Boolean
-
-        Dim _grdSheet As unvell.ReoGrid.Worksheet = Me._grdSheet
-
-        'todo. temporary. delete this after complete testing
-        If _grdSheet Is Nothing Then
-            _grdSheet = shtCurrSheet
-        End If
 
         If _grdSheet Is Nothing Then
             Return False
@@ -636,14 +602,27 @@ Public Class ucrFactor
     End Property
 
     ''' <summary>
-    ''' returns the column index of the column name passed from the sheet passed
+    ''' gets the grid sheet
     ''' </summary>
-    ''' <param name="grdSheet"></param>
-    ''' <param name="strColumnName"></param>
+    ''' <returns></returns>
+    Public ReadOnly Property GridSheet() As unvell.ReoGrid.Worksheet
+        Get
+            Return _grdSheet
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' returns the column index of the column name passed from the grid sheet 
+    ''' </summary> 
+    ''' <param name="strColName"></param>
     ''' <returns>return -1 if column index not found</returns>
-    Private Function GetColumnIndex(grdSheet As unvell.ReoGrid.Worksheet, strColumnName As String) As Integer
+    Public Function GetColumnIndex(strColName As String) As Integer
+        Return If(_grdSheet Is Nothing, -1, GetColumnIndex(_grdSheet, strColName))
+    End Function
+
+    Private Function GetColumnIndex(grdSheet As unvell.ReoGrid.Worksheet, strColName As String) As Integer
         For i As Integer = 0 To grdSheet.Columns - 1
-            If grdSheet.ColumnHeaders(i).Text = strColumnName Then
+            If grdSheet.ColumnHeaders(i).Text = strColName Then
                 Return i
             End If
         Next
@@ -667,7 +646,7 @@ Public Class ucrFactor
 
         Return GetSelectedCellValues(_grdSheet,
                                            GetColumnIndex(_grdSheet, DefaultColumnNames.Ordinal),
-                                           GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level),
+                                           GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn),
                                            GetColumnIndex(_grdSheet, strValueColName),
                                            bWithQuotes)
     End Function
@@ -747,7 +726,7 @@ Public Class ucrFactor
             Return False
         End If
 
-        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
+        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
         For i = 0 To _grdSheet.Rows - 1
             If DirectCast(_grdSheet(i, iSelectorColumnIndex), Boolean) Then
                 Return True
@@ -768,7 +747,7 @@ Public Class ucrFactor
             Exit Sub
         End If
 
-        Dim iCheckedColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
+        Dim iCheckedColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
         Dim bChangeDetected As Boolean = False
         For iRowIndex As Integer = 0 To _grdSheet.Rows - 1
             If _grdSheet(iRowIndex, iCheckedColIndex) <> bChecked Then
@@ -864,12 +843,6 @@ Public Class ucrFactor
     ''' <param name="clsTempParam"></param>
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
 
-        'todo. delete later
-        If shtCurrSheet IsNot Nothing Then
-            UpdateParameterOLD(clsTempParam)
-            Exit Sub
-        End If
-
         If clsTempParam Is Nothing OrElse _grdSheet Is Nothing Then
             Exit Sub
         End If
@@ -880,7 +853,7 @@ Public Class ucrFactor
         Select Case _enumControlState
             Case ControlStates.SingleSelectorGrid, ControlStates.MultipleSelectorGrid
                 Dim iOrdinalColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Ordinal)
-                Dim iSelectorColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
+                Dim iSelectorColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
                 strRValue = mdlCoreControl.GetRVector(GetSelectedCellValues(_grdSheet,
                                                                             iOrdinalColIndex, iSelectorColIndex, iValueColIndex, True),
                                                       bOnlyIfMultipleElement:=(_enumControlState = ControlStates.SingleSelectorGrid))
@@ -897,12 +870,6 @@ Public Class ucrFactor
     ''' this sets the control values from it's parameter objects 
     ''' </summary>
     Protected Overrides Sub SetControlValue()
-        'todo. delete later
-        If shtCurrSheet IsNot Nothing Then
-            SetControlValueOLD()
-            Exit Sub
-        End If
-
         Dim clsTempParam As RParameter = GetParameter()
         If clsTempParam Is Nothing OrElse Not clsTempParam.bIsString OrElse _grdSheet Is Nothing Then
             Exit Sub
@@ -914,7 +881,7 @@ Public Class ucrFactor
 
         Select Case _enumControlState
             Case ControlStates.SingleSelectorGrid, ControlStates.MultipleSelectorGrid
-                Dim iSelectorColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.Select_Level)
+                Dim iSelectorColIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
                 SetSelectedRows(_grdSheet, iSelectorColIndex, iValueColIndex, arrCellValues, False)
             Case ControlStates.NormalGrid
                 If arrCellValues.Count <> _grdSheet.Rows Then
@@ -924,640 +891,5 @@ Public Class ucrFactor
                 SetCellValues(_grdSheet, iValueColIndex, arrCellValues, False)
         End Select
     End Sub
-
-
-
-    '-----------------------------------------------
-
-    'REMOVE ALL FUNCTIONS FROM HERE DOWNWARDS
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        bIsSelector = False
-        bIsMultipleSelector = False
-        bIsGridColumn = False
-        strColumnToGet = ""
-        iSelectorColumnIndex = -1
-        strSelectorColumnName = "Select Level"
-        bIsEditable = False
-        lstEditableColumns = New List(Of String)
-        bIncludeCopyOfLevels = False
-        bForceShowLevels = False
-        bIncludeLevels = True
-        bIncludeNA = False
-        strLevelsName = "Level"
-        strLabelsName = "Label"
-        strFreqName = "Freq"
-    End Sub
-
-    Public Sub UpdateParameterOLD(clsTempParam As RParameter)
-        If clsTempParam IsNot Nothing Then
-            If bIsSelector Then
-                clsTempParam.SetArgumentValue(GetSelectedLevels())
-            ElseIf bIsGridColumn Then
-                If IsColumnComplete(strColumnToGet) Then
-                    clsTempParam.SetArgumentValue(GetColumnInFactorSheet(strColumn:=strColumnToGet))
-                End If
-            End If
-        End If
-    End Sub
-
-    Protected Sub SetControlValueOLD()
-        Dim lstCurrentValues As String() = Nothing
-        Dim clsTempParameter As RParameter
-
-        clsTempParameter = GetParameter()
-        If clsTempParameter IsNot Nothing AndAlso clsTempParameter.bIsString Then
-            lstCurrentValues = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
-            If bIsSelector Then
-                strSelectedLevels = lstCurrentValues
-                RefreshFactorData()
-            ElseIf bIsGridColumn Then
-                RefreshFactorData()
-                SetColumn(lstCurrentValues, GetColumnIndex(strColumnToGet))
-            End If
-        End If
-    End Sub
-
-
-    'todo. remove
-    Public Sub SetReceiver(clsNewReceiver As ucrReceiverSingle)
-        clsReceiver = clsNewReceiver
-        If ucrChkLevels IsNot Nothing Then
-            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
-        End If
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Public Sub AddEditableColumns(strColumns As String())
-        lstEditableColumns.AddRange(strColumns)
-        ApplyColumnSettings()
-    End Sub
-
-    'todo. remove
-    Public Sub SetAsSingleSelector()
-        bIsSelector = True
-        bIsMultipleSelector = False
-        bIsGridColumn = False
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Public Sub SetAsMultipleSelector()
-        bIsSelector = True
-        bIsMultipleSelector = True
-        bIsGridColumn = False
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Public Sub SetIsGridColumn(strColumnName As String)
-        bIsSelector = False
-        bIsMultipleSelector = False
-        bIsGridColumn = True
-        strColumnToGet = strColumnName
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Public Sub SetAsViewerOnly()
-        bIsSelector = False
-        bIsMultipleSelector = False
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Private Sub SetEditableStatus(bEditable As Boolean)
-        bIsEditable = bEditable
-        If shtCurrSheet IsNot Nothing Then
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bEditable)
-        End If
-    End Sub
-
-    'todo. remove
-    Private Sub SetSelectorColumnName(strNewColumnName As String)
-        strSelectorColumnName = strNewColumnName
-        If iSelectorColumnIndex <> -1 Then
-            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-        Else
-            RefreshFactorData()
-        End If
-    End Sub
-
-    'todo. remove
-    Private Sub RefreshFactorData()
-        Dim dfTemp As DataFrame
-        Dim bShowGrid As Boolean = False
-        Dim clsGetFactorData As New RFunction
-        Dim clsConvertToCharacter As New RFunction
-        Dim bHasLevels As Boolean
-        Dim iLevelsCol As Integer
-        Dim iLabelsCol As Integer
-        Dim iFreqCol As Integer
-        Dim strColType As String
-        Dim expDataFrame As SymbolicExpression
-
-        grdFactorData.Worksheets.Clear()
-        ' Contains allows ordered factors to be included
-        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() Then
-            strColType = frmMain.clsRLink.GetColumnType(clsReceiver.GetDataName(), clsReceiver.GetVariableNames(False))
-            If strColType = "" Then
-                clsReceiver.Clear()
-            ElseIf strColType.Contains("factor") Then
-                clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
-                clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
-                clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
-                If bIncludeLevels Then
-                    clsGetFactorData.AddParameter("include_levels", "TRUE")
-                Else
-                    clsGetFactorData.AddParameter("include_levels", "FALSE")
-                End If
-                If bIncludeNA Then
-                    clsGetFactorData.AddParameter("include_NA_level", "TRUE")
-                Else
-                    clsGetFactorData.AddParameter("include_NA_level", "FALSE")
-                End If
-                clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
-                clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
-                expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript(), bSilent:=True)
-                If expDataFrame IsNot Nothing AndAlso expDataFrame.Type <> Internals.SymbolicExpressionType.Null Then
-                    dfTemp = expDataFrame.AsDataFrame
-                    frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
-                    shtCurrSheet = grdFactorData.CurrentWorksheet
-                    shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-                    bShowGrid = True
-                    shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-                    iLevelsCol = GetColumnIndex(strLevelsName)
-                    iLabelsCol = GetColumnIndex(strLabelsName)
-                    iFreqCol = GetColumnIndex(strFreqName)
-                    If bIncludeCopyOfLevels Then
-                        shtCurrSheet.AppendColumns(1)
-                        shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Label"
-                        For i = 0 To shtCurrSheet.RowCount - 1
-                            shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, iLabelsCol)
-                        Next
-                    End If
-                    If strExtraColumn <> "" Then
-                        shtCurrSheet.AppendColumns(1)
-                        shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
-                    End If
-                    If bIsSelector Then
-                        iSelectorColumnIndex = shtCurrSheet.ColumnCount
-                        shtCurrSheet.AppendColumns(1)
-                        If bIsMultipleSelector Then
-                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(CheckBoxCell)
-                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                            InitialiseSelected()
-                        Else
-                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
-                            InitialiseSelected()
-                            Dim rgpselectcolumn As New RadioButtonGroup
-                            For i = 0 To shtCurrSheet.RowCount - 1
-                                Dim rdotemp As New RadioButtonCell
-                                rdotemp.RadioGroup = rgpselectcolumn
-                                shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
-                            Next
-                        End If
-                    End If
-                End If
-            End If
-        Else
-            shtCurrSheet = Nothing
-            iSelectorColumnIndex = -1
-        End If
-        grdFactorData.Visible = bShowGrid
-        If shtCurrSheet IsNot Nothing Then
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_ShowRowHeader, False)
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-            shtCurrSheet.ColumnHeaders(0).Width = 30
-            If iLevelsCol <> -1 Then
-                shtCurrSheet.ColumnHeaders(iLevelsCol).Width = 40
-            End If
-            If iFreqCol <> -1 Then
-                shtCurrSheet.ColumnHeaders(iFreqCol).Width = 40
-            End If
-            ApplyColumnSettings()
-            'RaiseEvent GridContentChanged()
-            If ucrChkLevels IsNot Nothing Then
-                ucrChkLevels.Enabled = True
-                ucrChkLevels.Checked = False
-            End If
-            If Not bForceShowLevels Then
-                If iLevelsCol <> -1 Then
-                    bHasLevels = frmMain.clsRLink.IsVariablesMetadata(clsReceiver.GetDataName(), "labels", clsReceiver.GetVariableNames(False))
-                    If bHasLevels Then
-                        If ucrChkLevels IsNot Nothing Then
-                            ucrChkLevels.Enabled = False
-                            ucrChkLevels.Checked = True
-                        End If
-                    Else
-                        shtCurrSheet.HideColumns(iLevelsCol, 1)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
-    'todo. remove
-    Private Sub ApplyColumnSettings()
-        Dim lstColNumber As New List(Of Integer)
-        Dim bIsReadOnly As Boolean
-
-        If shtCurrSheet IsNot Nothing AndAlso lstEditableColumns IsNot Nothing AndAlso lstEditableColumns.Count > 0 Then
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, False)
-            For i = 0 To shtCurrSheet.ColumnCount - 1
-                bIsReadOnly = Not lstEditableColumns.Contains(shtCurrSheet.ColumnHeaders(i).Text)
-                For j = 0 To shtCurrSheet.RowCount - 1
-                    shtCurrSheet.Cells(j, i).IsReadOnly = bIsReadOnly
-                Next
-            Next
-        End If
-    End Sub
-
-    'todo. remove
-    Private Sub clsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles clsReceiver.SelectionChanged
-        RefreshFactorData()
-    End Sub
-
-    'todo. remove
-    Private Sub InitialiseSelected()
-        'sets the default as the reference level (always first level)
-        'TODO are there other initial selections needed?
-        Dim i As Integer
-        Dim bSelect As Boolean
-
-        If iSelectorColumnIndex <> -1 Then
-            For i = 0 To shtCurrSheet.RowCount - 1
-                If strSelectedLevels IsNot Nothing AndAlso strSelectedLevels.Count > 0 Then
-                    bSelect = strSelectedLevels.Contains(shtCurrSheet(i, 0))
-                Else
-                    bSelect = False
-                End If
-                shtCurrSheet(i, iSelectorColumnIndex) = bSelect
-            Next
-        End If
-        strSelectedLevels = Nothing
-    End Sub
-
-    Public Sub AddLevel()
-        Dim i As Integer
-        Dim iNewRow As Integer
-
-        If grdFactorData.CurrentWorksheet IsNot Nothing AndAlso shtCurrSheet IsNot Nothing Then
-            shtCurrSheet.AppendRows(1)
-            iNewRow = shtCurrSheet.RowCount - 1
-            For i = 0 To shtCurrSheet.ColumnCount - 1
-                If shtCurrSheet.ColumnHeaders(i).Text = "Ord." Then
-                    shtCurrSheet(iNewRow, i) = shtCurrSheet.RowCount
-                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLabelsName Then
-                    shtCurrSheet(iNewRow, i) = ""
-                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLevelsName Then
-                    shtCurrSheet(iNewRow, i) = ""
-                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strFreqName Then
-                    'TODO Fix this formatting issue with a grid user control
-                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                    shtCurrSheet(iNewRow, i) = 0
-                End If
-            Next
-        End If
-        ApplyColumnSettings()
-    End Sub
-
-    Public Function GetSelectedLevels() As String
-        Dim strTemp As String = ""
-        Dim i As Integer
-        Dim checked As Boolean
-        Dim iCount As Integer = 0
-        Dim iLabelsCol As Integer
-
-        If grdFactorData.CurrentWorksheet IsNot Nothing Then
-            iLabelsCol = GetColumnIndex(strLabelsName)
-            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                    checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
-                    If checked Then
-                        If iCount = 1 Then
-                            strTemp = "c(" & strTemp & ","
-                        ElseIf iCount > 1 Then
-                            strTemp = strTemp & ","
-                        End If
-                        'This checks if the value in the ordinal column is "-" which means it's the NA row
-                        'so no quotes should be added.
-                        'There could be a real factor level with the same label as (NA) so safer to check
-                        'the Ordinal column which will only have "-" for the (NA) row.
-                        If shtCurrSheet(i, 0) = "-" Then
-                            strTemp = strTemp & shtCurrSheet(i, iLabelsCol)
-                        Else
-                            strTemp = strTemp & Chr(34) & shtCurrSheet(i, iLabelsCol) & Chr(34)
-                        End If
-                        iCount = iCount + 1
-                    End If
-                End If
-            Next
-            If iCount > 1 Then
-                strTemp = strTemp & ")"
-            End If
-        End If
-        Return strTemp
-    End Function
-
-    Public Function IsAllSelected() As Boolean
-        If grdFactorData.CurrentWorksheet IsNot Nothing Then
-            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                    If Not DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean) Then
-                        Return False
-                    End If
-                Else
-                    Return False
-                End If
-            Next
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
-        Dim i As Integer
-        Dim iChecked As Boolean
-
-        If Not bDoNotUpdateCells Then
-            If e.Cell.Column = iSelectorColumnIndex AndAlso grdFactorData.Worksheets(0).SelectionRange.ContainsColumn(iSelectorColumnIndex) AndAlso grdFactorData.Worksheets(0).SelectionRange.Rows > 1 Then
-                iChecked = DirectCast(e.Cell.Data, Boolean)
-                bDoNotUpdateCells = True
-                For i = grdFactorData.Worksheets(0).SelectionRange.Row To grdFactorData.Worksheets(0).SelectionRange.Row + grdFactorData.Worksheets(0).SelectionRange.Rows - 1
-                    shtCurrSheet(i, iSelectorColumnIndex) = iChecked
-                Next
-                bDoNotUpdateCells = False
-            End If
-            UpdateCells(e.Cell.Column)
-        End If
-    End Sub
-
-    Private Sub UpdateCells(Optional iColumn As Integer = -2)
-        Dim i As Integer
-        Dim iSelected As Boolean
-        If iColumn = iSelectorColumnIndex Then
-            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                    iSelected = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
-                    If iSelected Then
-                        shtCurrSheet.RowHeaders(i).Style.BackColor = Color.Gold
-                    Else
-                        shtCurrSheet.RowHeaders(i).Style.BackColor = Color.White
-                    End If
-                End If
-            Next
-            RaiseEvent SelectedLevelChanged()
-        Else
-            'RaiseEvent GridContentChanged()
-        End If
-    End Sub
-
-    Public Function GetColumnInFactorSheet(iColumn As Integer, Optional bWithQuotes As Boolean = True) As String
-        Dim strTemp As String = ""
-
-        If shtCurrSheet IsNot Nothing Then
-            If shtCurrSheet.RowCount = 1 Then
-                If bWithQuotes Then
-                    strTemp = Chr(34) & shtCurrSheet(0, iColumn).ToString & Chr(34)
-                Else
-                    strTemp = shtCurrSheet(0, iColumn).ToString
-                End If
-            ElseIf shtCurrSheet.RowCount > 1 Then
-                strTemp = "c("
-                For i = 0 To shtCurrSheet.RowCount - 1
-                    If i > 0 Then
-                        strTemp = strTemp & ","
-                    End If
-                    If shtCurrSheet(i, iColumn) IsNot Nothing Then
-                        If bWithQuotes Then
-                            strTemp = strTemp & Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34)
-                        Else
-                            strTemp = strTemp & shtCurrSheet(i, iColumn).ToString
-                        End If
-                    End If
-                Next
-                strTemp = strTemp & ")"
-            End If
-        End If
-
-        Return strTemp
-    End Function
-
-    Public Function GetColumnInFactorSheet(strColumn As String, Optional bWithQuotes As Boolean = True) As String
-        Dim i As Integer
-        Dim iCol As Integer = -1
-        Dim strTemp As String = ""
-
-        If shtCurrSheet IsNot Nothing Then
-            For i = 0 To shtCurrSheet.ColumnCount - 1
-                If shtCurrSheet.ColumnHeaders(i).Text = strColumn Then
-                    iCol = i
-                    Exit For
-                End If
-            Next
-            If iCol <> -1 Then strTemp = GetColumnInFactorSheet(iCol, bWithQuotes)
-        End If
-        Return strTemp
-    End Function
-
-    Public Function GetColumnAsList(iColumn As Integer, Optional bWithQuotes As Boolean = True) As List(Of String)
-        Dim strTemp As New List(Of String)
-
-        If shtCurrSheet IsNot Nothing Then
-            If iColumn >= shtCurrSheet.ColumnCount OrElse iColumn < 0 Then
-                MsgBox("Developer error: Cannot get column at index: " & iColumn & " index out of bounds")
-            Else
-                For i = 0 To shtCurrSheet.RowCount - 1
-                    If shtCurrSheet(i, iColumn) IsNot Nothing Then
-                        If bWithQuotes Then
-                            strTemp.Add(Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34))
-                        Else
-                            strTemp.Add(shtCurrSheet(i, iColumn).ToString)
-                        End If
-                    Else
-                        strTemp.Add(Nothing)
-                    End If
-                Next
-            End If
-        End If
-        Return strTemp
-    End Function
-
-    Public Function GetColumnAsList(strColumn As String, Optional bWithQuotes As Boolean = True) As List(Of String)
-        Dim iColumn As Integer
-
-        iColumn = GetColumnIndex(strColumn)
-        Return GetColumnAsList(iColumn, bWithQuotes)
-    End Function
-
-    Public Sub SetSelectionAllLevels(bSelect As Boolean)
-        Dim i As Integer
-        If iSelectorColumnIndex <> -1 AndAlso bIsMultipleSelector = True Then
-            For i = 0 To shtCurrSheet.RowCount - 1
-                shtCurrSheet(i, iSelectorColumnIndex) = bSelect
-            Next
-        End If
-    End Sub
-
-    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer, Optional bSilent As Boolean = True)
-        Dim i As Integer
-        If shtCurrSheet IsNot Nothing Then
-            If strValues.Count <> shtCurrSheet.RowCount Then
-                If Not bSilent Then
-                    MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
-                End If
-            ElseIf iColumnIndex < 0 OrElse iColumnIndex >= shtCurrSheet.ColumnCount Then
-                If Not bSilent Then
-                    MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
-                End If
-            Else
-                For i = 0 To shtCurrSheet.RowCount - 1
-                    bDoNotUpdateCells = True 'my code. delete
-                    shtCurrSheet(i, iColumnIndex) = strValues(i)
-                    bDoNotUpdateCells = False ' my code. delete
-                Next
-            End If
-        End If
-    End Sub
-
-    'Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
-    '    RaiseEvent GridVisibleChanged()
-    'End Sub
-
-    'Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
-    '    If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then
-    '        shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
-    '    End If
-    'End Sub
-
-    Public Function IsColumnComplete(strColumn As String) As Boolean
-        Dim iColumn As Integer = -1
-
-        If shtCurrSheet IsNot Nothing Then
-            iColumn = GetColumnIndex(strColumn)
-            If iColumn = -1 Then
-                MsgBox("No column called " & strColumn & " to select in grid.", MsgBoxStyle.Critical, "Cannot select column.")
-                Return False
-            Else
-                For i As Integer = 0 To shtCurrSheet.RowCount - 1
-                    If shtCurrSheet(i, iColumn) Is Nothing OrElse shtCurrSheet(i, iColumn).ToString() = "" Then
-                        Return False
-                    End If
-                Next
-                Return True
-            End If
-        Else
-            Return False
-        End If
-    End Function
-
-    Private Sub shtCurrSheet_RangeDataChanged(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.RangeDataChanged
-        UpdateCells(e.Range.Col)
-    End Sub
-
-    Private Sub shtCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles shtCurrSheet.BeforeCellKeyDown
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
-            e.IsCancelled = True
-        End If
-    End Sub
-
-    Private Sub shtCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles shtCurrSheet.BeforeCut
-        e.IsCancelled = True
-    End Sub
-
-
-    Private Sub ucrFactor_GridContentChanged() Handles Me.SelectedLevelChanged
-        OnControlValueChanged()
-    End Sub
-
-    Private Sub shtCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles shtCurrSheet.AfterCellEdit
-        If shtCurrSheet.ColumnHeaders(e.Cell.Column).Text = strLevelsName AndAlso e.NewData.ToString() <> "" Then
-            If Not IsNumeric(e.NewData) Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "Levels must be numeric values.", MsgBoxStyle.Exclamation, "Invalid Value")
-                e.EndReason = EndEditReason.Cancel
-            End If
-        End If
-    End Sub
-
-    'todo. temporary function
-    Public Function GetColumnIndex(strColumn As String) As Integer
-        If _grdSheet IsNot Nothing Then
-            Return GetColumnIndex(_grdSheet, strColumn)
-        End If
-        'todo. temporary
-        If shtCurrSheet IsNot Nothing Then
-            For i As Integer = 0 To shtCurrSheet.ColumnCount - 1
-                If shtCurrSheet.ColumnHeaders(i).Text = strColumn Then
-                    Return i
-                End If
-            Next
-        End If
-        Return -1
-    End Function
-
-    'These checks should be done by reogrid control: https://reogrid.net/document/cell-edit/
-    '"paste operation will also be aborted if target range including any read-only cells"
-    Private Sub shtCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles shtCurrSheet.BeforePaste
-        For i As Integer = e.Range.Col To e.Range.EndCol
-            If shtCurrSheet.Cells(0, i).IsReadOnly Then
-                e.IsCancelled = True
-            End If
-        Next
-    End Sub
-
-    Private Sub shtCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.AfterPaste
-        'This is needed because pasting carries cell properties e.g. overrides readonly properties
-        ApplyColumnSettings()
-        'RaiseEvent GridContentChanged()
-    End Sub
-
-    Public Sub SetLevelsCheckbox(ucrChkAddLevels As ucrCheck)
-        ucrChkLevels = ucrChkAddLevels
-        If clsReceiver IsNot Nothing Then
-            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
-        End If
-    End Sub
-
-    Private Sub ucrChkLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLevels.ControlValueChanged
-        Dim iLevelsCol As Integer
-
-        If shtCurrSheet IsNot Nothing Then
-            iLevelsCol = GetColumnIndex(strLevelsName)
-            If iLevelsCol <> -1 Then
-                If ucrChkLevels.Checked Then
-                    shtCurrSheet.ShowColumns(iLevelsCol, 1)
-                Else
-                    shtCurrSheet.HideColumns(iLevelsCol, 1)
-                End If
-            End If
-        End If
-    End Sub
-
-    Private Sub clsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles clsReceiver.ControlValueChanged
-        If ucrChkLevels IsNot Nothing AndAlso clsReceiver.IsEmpty Then
-            ucrChkLevels.Enabled = False
-        End If
-    End Sub
-
-    Public Sub SetIncludeLevels(bInclude As Boolean)
-        bIncludeLevels = bInclude
-        RefreshFactorData()
-    End Sub
-
 
 End Class

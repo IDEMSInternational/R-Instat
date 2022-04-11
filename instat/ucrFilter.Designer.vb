@@ -513,14 +513,11 @@ Partial Class ucrFilter
         '
         Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
         Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
         Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
         Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
         Me.ucrFactorLevels.TabIndex = 2
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
         'ucrFilterByReceiver
         '
