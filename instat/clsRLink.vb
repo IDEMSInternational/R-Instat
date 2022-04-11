@@ -673,7 +673,7 @@ Public Class RLink
             End If
             AdjustComboBoxWidth(cboDataFrames)
             'TODO Legacy - Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
-            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso strCurrentDataFrame <> "" AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
+            If (Not bSetDefault AndAlso cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso grdDataView IsNot Nothing AndAlso grdDataView.CurrentWorksheet IsNot Nothing Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(grdDataView.CurrentWorksheet.Name)
             ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
