@@ -251,7 +251,7 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
+    Private Sub ucrInputCommand_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputCommand.ControlContentsChanged
         ucrTryNewDataFrame.ClearTryText()
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()

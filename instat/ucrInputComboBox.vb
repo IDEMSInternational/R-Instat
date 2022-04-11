@@ -290,7 +290,8 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub cboInput_TextChanged(sender As Object, e As EventArgs) Handles cboInput.TextChanged
-        OnContentsChanged()
+        'shouldn't we be raising OnControlValueChanged instead? see issue #7367
+        OnControlContentsChanged()
     End Sub
     Private Sub cboInput_Click(sender As Object, e As EventArgs) Handles cboInput.Click
         OnControlClicked()

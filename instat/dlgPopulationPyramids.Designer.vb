@@ -46,7 +46,7 @@ Partial Class dlgPopulationPyramids
         Me.ucrYVariableReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSavePopulationPyramid = New instat.ucrSaveGraph()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -136,13 +136,14 @@ Partial Class dlgPopulationPyramids
         Me.ucrSecondFactorReceiver.TabIndex = 3
         Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
-        'ucrSavePopulationPyramid
+        'ucrSaveGraph
         '
-        Me.ucrSavePopulationPyramid.AutoSize = True
-        Me.ucrSavePopulationPyramid.Location = New System.Drawing.Point(10, 209)
-        Me.ucrSavePopulationPyramid.Name = "ucrSavePopulationPyramid"
-        Me.ucrSavePopulationPyramid.Size = New System.Drawing.Size(265, 23)
-        Me.ucrSavePopulationPyramid.TabIndex = 4
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 212)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 60
         '
         'dlgPopulationPyramids
         '
@@ -150,7 +151,7 @@ Partial Class dlgPopulationPyramids
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 298)
-        Me.Controls.Add(Me.ucrSavePopulationPyramid)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.ucrYVariableReceiver)
@@ -179,5 +180,5 @@ Partial Class dlgPopulationPyramids
     Friend WithEvents ucrYVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
-    Friend WithEvents ucrSavePopulationPyramid As ucrSaveGraph
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

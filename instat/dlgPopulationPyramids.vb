@@ -15,10 +15,18 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
+''' <summary>
+''' Note. As of 11/04/2022 this dialog is not being used anywhere in R-Instat
+''' code changes were made because it was using a deprecated control
+''' see issue # for more information
+''' todo. The graph that this dialog was meant to produce can be done in 
+''' the bar chart dialog as a back to back chart. 
+''' So possibly this dialog can be deleted all together
+''' </summary>
 Public Class dlgPopulationPyramids
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_bar As New RFunction
-    Private clsRgeom_bar2 As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsRgeom_CoordFlip As New RFunction
     Private bFirstLoad As Boolean = True
@@ -27,9 +35,6 @@ Public Class dlgPopulationPyramids
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
-
         End If
         autoTranslate(Me)
         TestOkEnabled()
@@ -37,6 +42,30 @@ Public Class dlgPopulationPyramids
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 455
+
+        ucrXVariableReceiver.Selector = ucrPopulationPyramidselector
+        ucrYVariableReceiver.Selector = ucrPopulationPyramidselector
+        ucrSecondFactorReceiver.Selector = ucrPopulationPyramidselector
+
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetDataFrameSelector(ucrPopulationPyramidselector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetPrefix("pyramid_plot")
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+    End Sub
+
+    Private Sub SetDefaults()
+
+        clsRggplotFunction = New RFunction
+        clsRgeom_bar = New RFunction
+        clsRgeom_bar2 = New RFunction
+        clsRaesFunction = New RFunction
+        clsRgeom_CoordFlip = New RFunction
+
+        ucrPopulationPyramidselector.Reset()
+        ucrXVariableReceiver.SetMeAsReceiver()
+
         ucrBase.clsRsyntax.SetOperation("+")
 
         clsRggplotFunction.SetPackageName("ggplot")
@@ -45,16 +74,11 @@ Public Class dlgPopulationPyramids
         clsRaesFunction.SetPackageName("ggplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsRggplotFunction)
 
         clsRgeom_bar.SetPackageName("ggplot")
         clsRgeom_bar.SetRCommand("geom_bar")
         clsRgeom_bar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_bar)
-
-        clsRgeom_bar2.SetPackageName("ggplot")
-        clsRgeom_bar2.SetRCommand("geom_bar")
-        clsRgeom_bar2.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         ucrBase.clsRsyntax.AddOperatorParameter("geom_bar", clsRFunc:=clsRgeom_bar)
 
         clsRgeom_CoordFlip.SetPackageName("ggplot")
@@ -63,29 +87,12 @@ Public Class dlgPopulationPyramids
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ucrXVariableReceiver.Selector = ucrPopulationPyramidselector
-        ucrYVariableReceiver.Selector = ucrPopulationPyramidselector
-        ucrSecondFactorReceiver.Selector = ucrPopulationPyramidselector
         ucrBase.clsRsyntax.iCallType = 3
-
     End Sub
 
-    Private Sub SetDefaults()
-        ucrPopulationPyramidselector.Reset()
-        ucrXVariableReceiver.SetMeAsReceiver()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
-    End Sub
     Private Sub TestOkEnabled()
-        If (ucrXVariableReceiver.IsEmpty AndAlso ucrYVariableReceiver.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-
+        ucrBase.OKEnabled(Not ucrXVariableReceiver.IsEmpty AndAlso Not ucrYVariableReceiver.IsEmpty AndAlso
+            ucrSaveGraph.IsComplete)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -121,16 +128,9 @@ Public Class dlgPopulationPyramids
         End If
     End Sub
 
-    Private Sub ucrSavePopulationPyramid_ContentsChanged() Handles ucrSavePopulationPyramid.ContentsChanged
+    Private Sub ucrSavePopulationPyramid_ControlContentsChanged() Handles ucrXVariableReceiver.ControlContentsChanged, ucrYVariableReceiver.ControlContentsChanged, ucrSecondFactorReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSavePopulationPyramid_GraphNameChanged() Handles ucrSavePopulationPyramid.GraphNameChanged, ucrSavePopulationPyramid.SaveGraphCheckedChanged
-        If ucrSavePopulationPyramid.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSavePopulationPyramid.strGraphName, strTempDataframe:=ucrPopulationPyramidselector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSavePopulationPyramid.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrPopulationPyramidselector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
-        TestOkEnabled()
-    End Sub
+
 End Class
