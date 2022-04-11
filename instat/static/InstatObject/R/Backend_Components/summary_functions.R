@@ -249,7 +249,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   summaries_max <- length(summaries)
   
   summary_names <- ifelse(startsWith(summaries, "summary_"), substr(summaries, 9, nchar(summaries)), summaries)
-  summary_names <- gsub("_", "-", summary_names)
+  summary_names <- gsub("_", "__", summary_names)
   summary_names <- make.unique(summary_names)
   summary_count_names <- summary_names[1:count_summaries_max]
   summary_other_names <- summary_names[(count_summaries_max + 1):summaries_max]
@@ -1355,8 +1355,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   } else {
     save <- 2
   }
-
-  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "-", ...)
+  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "__", ...)
   for (i in seq_along(factors)) {
     levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
     cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
@@ -1379,13 +1378,13 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     # We could need last set if only have row or column factors
     power_sets_outer <- power_sets[-(c(length(power_sets)))]
     if (treat_columns_as_factor) {
-      order_names <- unique(paste(shaped_cell_values$summary, shaped_cell_values$variable, sep = "-"))
+      order_names <- unique(paste(shaped_cell_values$summary, shaped_cell_values$variable, sep = "__"))
     } else {
       order_names <- unique(shaped_cell_values$summary)
     }
     for (facts in power_sets_outer) {
       if (length(facts) == 0) facts <- c()
-      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "-", ...)
+      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "__", ...)
       margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
     }
     # for outer margins
@@ -1403,7 +1402,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       }
       if (treat_columns_as_factor) {
         outer_margins <- outer_margins %>%
-          tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "-")
+          tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "__")
       }
     } else {
       outer_margins <- NULL
