@@ -199,5 +199,6 @@ Public MustInherit Class ucrReoGrid
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.SheetTabWidth = 450
+        frmMain.clsRLink.SetDataViewGrid(grdData)
     End Sub
 End Class
