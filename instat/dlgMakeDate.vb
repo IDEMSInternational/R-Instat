@@ -71,7 +71,7 @@ Public Class dlgMakeDate
         dctMonthTwoItems.Add("365/366", Chr(34) & "365/366" & Chr(34))
         dctMonthTwoItems.Add("366", Chr(34) & "366" & Chr(34))
 
-        ucrInputComboBoxMonthTwo.SetParameter(New RParameter("doy_typical_length", 3))
+        ucrInputComboBoxMonthTwo.SetParameter(New RParameter("doy_typical_length", 5))
         ucrInputComboBoxMonthTwo.SetItems(dctMonthTwoItems)
         ucrInputComboBoxMonthTwo.SetDropDownStyleAsNonEditable()
 
@@ -154,9 +154,10 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetIsComboBox()
 
-        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
+        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
         ucrChkTwoDigitYear.SetText("2-digit years")
-        ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="30")
+        ucrNudCutoff.SetParameter(New RParameter("base", 3))
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
 
         'rdoSingle
@@ -342,6 +343,7 @@ Public Class dlgMakeDate
 
         ucrInputComboBoxMonthTwo.SetRCode(clsMakeYearDay, bReset)
         ucrChkTwoDigitYear.SetRCode(clsMakeYearDay, bReset)
+        ucrNudCutoff.SetRCode(clsMakeYearDay, bReset)
 
         ucrPnlFormat.SetRCode(clsDateFunction, bReset)
 
@@ -580,7 +582,12 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged, ucrPnlDate.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged,
+        ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged,
+        ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged,
+        ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged,
+        ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged,
+        ucrPnlDate.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
