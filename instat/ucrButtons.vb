@@ -121,7 +121,11 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i),
+                                           iCallType:=lstBeforeCodes(i).iCallType,
+                                           strComment:=strComment,
+                                           bSeparateThread:=clsRsyntax.bSeparateThread,
+                                           scriptType:=ScriptType.PostScript)
             Else
                 frmMain.AddToScriptWindow(lstBeforeScripts(i))
             End If
@@ -155,7 +159,12 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i),
+                                           iCallType:=lstAfterCodes(i).iCallType,
+                                           strComment:=strComment,
+                                           bSeparateThread:=clsRsyntax.bSeparateThread,
+                                           bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride,
+                                           scriptType:=ScriptType.PostScript)
             Else
                 frmMain.AddToScriptWindow(lstAfterScripts(i))
             End If
@@ -177,7 +186,7 @@ Public Class ucrButtons
         End If
         If bRun Then
             If clsRemoveFunc.clsParameters.Count > 0 Then
-                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0, scriptType:=ScriptType.CleanUpScript)
             End If
         Else
             frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())

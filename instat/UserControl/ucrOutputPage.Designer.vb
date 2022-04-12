@@ -32,19 +32,19 @@ Partial Class ucrOutputPage
         Me.pnlMain.BackColor = System.Drawing.Color.White
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMain.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pnlMain.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(598, 362)
+        Me.pnlMain.Size = New System.Drawing.Size(448, 294)
         Me.pnlMain.TabIndex = 5
         '
         'ucrOutputPage
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.pnlMain)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "ucrOutputPage"
-        Me.Size = New System.Drawing.Size(598, 362)
+        Me.Size = New System.Drawing.Size(448, 294)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

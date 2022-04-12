@@ -154,6 +154,9 @@
       <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon, Version=2.0.0.0, Culture=neutral, PublicKeyToken=928736e248aa81f9, processorArchitecture=MSIL">
+      <HintPath>..\packages\RibbonWinForms.5.0.1.1\lib\net461\System.Windows.Forms.Ribbon.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -195,6 +198,8 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Enum\PageSelectionMode.vb" />
+    <Compile Include="Enum\R_ReturnType.vb" />
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
     <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
     <Compile Include="Interface\IDataViewGrid.vb" />
@@ -451,12 +456,23 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\Output\clsPage.vb" />
+    <Compile Include="Model\Output\clsPageElementDisplay.vb" />
+    <Compile Include="Model\Output\clsPages.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputDisplay.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputElementViewModel.vb" />
+    <Compile Include="Model\Output\clsOutputGroup.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputImage.vb" />
+    <Compile Include="Model\Output\clsOutputElement.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputText.vb" />
+    <Compile Include="Model\Output\clsPageElement.vb" />
+    <Compile Include="Model\Output\clsPageGroup.vb" />
     <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="Model\Options\OutputFont.vb" />
-    <Compile Include="Model\Output\clsOutputElement.vb" />
-    <Compile Include="Model\Output\clsOutputList.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputElement.vb" />
+    <Compile Include="Model\Output\Delete\clsOutputList.vb" />
     <Compile Include="Model\Output\clsOutputLogger.vb" />
-    <Compile Include="Model\Output\clsRScriptElement.vb" />
+    <Compile Include="Model\Output\Delete\clsRScriptElement.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2876,6 +2892,39 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\BaseControl\SizeablePictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputGroup.Designer.vb">
+      <DependentUpon>ucrOutputGroup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputGroup.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputImageItem.Designer.vb">
+      <DependentUpon>ucrOutputImageItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputImageItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPagess.Designer.vb">
+      <DependentUpon>ucrOutputPagess.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPagess.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputScript.Designer.vb">
+      <DependentUpon>ucrOutputScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputScript.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputTextItem.Designer.vb">
+      <DependentUpon>ucrOutputTextItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputTextItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -5154,6 +5203,21 @@
     <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
       <DependentUpon>ucrReoGrid.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputGroup.resx">
+      <DependentUpon>ucrOutputGroup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputImageItem.resx">
+      <DependentUpon>ucrOutputImageItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPagess.resx">
+      <DependentUpon>ucrOutputPagess.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputScript.resx">
+      <DependentUpon>ucrOutputScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputTextItem.resx">
+      <DependentUpon>ucrOutputTextItem.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </EmbeddedResource>
@@ -5172,6 +5236,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\clsOutputGroupViewModel.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -5565,6 +5630,7 @@
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Model\Project\" />
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

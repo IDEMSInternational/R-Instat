@@ -36,11 +36,9 @@ Partial Class ucrOutputPages
         Me.tbSave = New System.Windows.Forms.ToolStripButton()
         Me.tabControl = New System.Windows.Forms.TabControl()
         Me.tpMain = New System.Windows.Forms.TabPage()
-        Me.ucrMainOutputPage = New instat.ucrOutputPage()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tsButtons.SuspendLayout()
         Me.tabControl.SuspendLayout()
-        Me.tpMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -53,13 +51,13 @@ Partial Class ucrOutputPages
         Me.TableLayoutPanel1.Controls.Add(Me.tabControl, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(628, 352)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(471, 286)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'tsButtons
@@ -70,7 +68,7 @@ Partial Class ucrOutputPages
         Me.tsButtons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tdbAddToExisting, Me.tbAddToNew, Me.tbCopy, Me.tbMoveUp, Me.tbMoveDown, Me.tbDelete, Me.ToolStripSeparator1, Me.tbRename, Me.tbSave})
         Me.tsButtons.Location = New System.Drawing.Point(0, 0)
         Me.tsButtons.Name = "tsButtons"
-        Me.tsButtons.Size = New System.Drawing.Size(628, 25)
+        Me.tsButtons.Size = New System.Drawing.Size(471, 25)
         Me.tsButtons.TabIndex = 11
         Me.tsButtons.Text = "ToolStrip1"
         '
@@ -155,54 +153,38 @@ Partial Class ucrOutputPages
         '
         Me.tabControl.Controls.Add(Me.tpMain)
         Me.tabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tabControl.Location = New System.Drawing.Point(3, 34)
-        Me.tabControl.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tabControl.Location = New System.Drawing.Point(2, 28)
+        Me.tabControl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tabControl.Name = "tabControl"
         Me.tabControl.SelectedIndex = 0
-        Me.tabControl.Size = New System.Drawing.Size(622, 316)
+        Me.tabControl.Size = New System.Drawing.Size(467, 256)
         Me.tabControl.TabIndex = 1
         '
         'tpMain
         '
-        Me.tpMain.Controls.Add(Me.ucrMainOutputPage)
-        Me.tpMain.Location = New System.Drawing.Point(4, 25)
-        Me.tpMain.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tpMain.Location = New System.Drawing.Point(4, 22)
+        Me.tpMain.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tpMain.Name = "tpMain"
-        Me.tpMain.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpMain.Size = New System.Drawing.Size(614, 287)
+        Me.tpMain.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tpMain.Size = New System.Drawing.Size(459, 230)
         Me.tpMain.TabIndex = 0
         Me.tpMain.Text = "Main"
         Me.tpMain.UseVisualStyleBackColor = True
         '
-        'ucrMainOutputPage
-        '
-        Me.ucrMainOutputPage.AutoSize = True
-        Me.ucrMainOutputPage.BCanDelete = True
-        Me.ucrMainOutputPage.BCanRename = False
-        Me.ucrMainOutputPage.BCanReOrder = False
-        Me.ucrMainOutputPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrMainOutputPage.Location = New System.Drawing.Point(3, 2)
-        Me.ucrMainOutputPage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.ucrMainOutputPage.Name = "ucrMainOutputPage"
-        Me.ucrMainOutputPage.Size = New System.Drawing.Size(608, 283)
-        Me.ucrMainOutputPage.TabIndex = 0
-        '
         'ucrOutputPages
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "ucrOutputPages"
-        Me.Size = New System.Drawing.Size(628, 352)
+        Me.Size = New System.Drawing.Size(471, 286)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.tsButtons.ResumeLayout(False)
         Me.tsButtons.PerformLayout()
         Me.tabControl.ResumeLayout(False)
-        Me.tpMain.ResumeLayout(False)
-        Me.tpMain.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -210,7 +192,6 @@ Partial Class ucrOutputPages
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents tabControl As TabControl
     Friend WithEvents tpMain As TabPage
-    Friend WithEvents ucrMainOutputPage As ucrOutputPage
     Friend WithEvents tdbAddToExisting As ToolStripDropDownButton
     Friend WithEvents tbAddToNew As ToolStripButton
     Friend WithEvents tbCopy As ToolStripButton

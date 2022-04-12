@@ -40,7 +40,7 @@ Partial Class ucrOutputWindow
     Private Sub InitializeComponent()
         Me.lblHeaderOutputWindow = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.UcrOutputPages = New instat.ucrOutputPages()
+        Me.ucrOutputPages = New instat.ucrOutputPagess()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,10 +59,11 @@ Partial Class ucrOutputWindow
         '
         'tlpTableContainer
         '
+        Me.tlpTableContainer.BackColor = System.Drawing.Color.White
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderOutputWindow, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.UcrOutputPages, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.ucrOutputPages, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -72,15 +73,13 @@ Partial Class ucrOutputWindow
         Me.tlpTableContainer.Size = New System.Drawing.Size(722, 262)
         Me.tlpTableContainer.TabIndex = 7
         '
-        'UcrOutputPages
+        'ucrOutputPages
         '
-        Me.UcrOutputPages.BackColor = System.Drawing.Color.White
-        Me.UcrOutputPages.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.UcrOutputPages.Location = New System.Drawing.Point(2, 22)
-        Me.UcrOutputPages.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.UcrOutputPages.Name = "UcrOutputPages"
-        Me.UcrOutputPages.Size = New System.Drawing.Size(718, 238)
-        Me.UcrOutputPages.TabIndex = 7
+        Me.ucrOutputPages.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrOutputPages.Location = New System.Drawing.Point(3, 23)
+        Me.ucrOutputPages.Name = "ucrOutputPages"
+        Me.ucrOutputPages.Size = New System.Drawing.Size(716, 236)
+        Me.ucrOutputPages.TabIndex = 7
         '
         'ucrOutputWindow
         '
@@ -96,5 +95,5 @@ Partial Class ucrOutputWindow
     End Sub
     Friend WithEvents lblHeaderOutputWindow As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
-    Friend WithEvents UcrOutputPages As ucrOutputPages
+    Friend WithEvents ucrOutputPages As ucrOutputPagess
 End Class

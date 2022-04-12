@@ -22,6 +22,20 @@ Public Class clsOutputLogger
     Private _filteredOutputs As List(Of clsOutputList)
     Private _lastScriptElement As clsOutputElement
     Private _output As List(Of clsOutputElement)
+
+    '' this will need to be changed to outputs - list of list of clsPageGroup
+    '  Private _outputs As List(Of clsPageGroup)
+    Private _pages As clsPages
+    Private _outputLog As List(Of clsOutputGroup)
+    Private _lastOutputGroup As clsOutputGroup
+
+
+    Public ReadOnly Property Pages As clsPages
+        Get
+            Return _pages
+        End Get
+    End Property
+
     ''Output not used externally at the moment but will this will need to
     ''change if we are to remove from the output list.
     Public ReadOnly Property Output As List(Of clsOutputElement)
@@ -36,7 +50,17 @@ Public Class clsOutputLogger
     Public Sub New()
         _output = New List(Of clsOutputElement)
         _filteredOutputs = New List(Of clsOutputList)
+
+        '  _outputs = New List(Of clsPageGroup)
+        _pages = New clsPages()
+
+        _outputLog = New List(Of clsOutputGroup)
     End Sub
+
+
+    Public Event NewGroupAdded(outputGroup As clsPageGroup)
+    '   Public Event NewItemAdded(outputitem As clsPageGroup)
+    '  Public Event New
 
     ''' <summary>
     ''' Event to show a new filtered list has been added
@@ -69,6 +93,22 @@ Public Class clsOutputLogger
             _filteredOutputs = value
         End Set
     End Property
+
+    Private Sub CreateNewOutputGroup()
+        _lastOutputGroup = New clsOutputGroup
+        _outputLog.Add(_lastOutputGroup)
+        _pages.NewGroupAdded(_lastOutputGroup)
+    End Sub
+
+
+    Public Sub Add(script As String, output As String, retunType As R_ReturnType, scriptType As ScriptType)
+        If _lastOutputGroup Is Nothing OrElse
+            ((scriptType = ScriptType.PreScript Or scriptType = ScriptType.Script) AndAlso _lastOutputGroup.ContainsScript) Then
+            CreateNewOutputGroup()
+        End If
+        _pages.NewElementAdded(_lastOutputGroup.Add(script, output, retunType, scriptType))
+    End Sub
+
     ''' <summary>
     ''' Adds image to be displayed within the output
     ''' </summary>
@@ -107,7 +147,7 @@ Public Class clsOutputLogger
     ''' Adds script to be displayed within the output
     ''' </summary>
     ''' <param name="strScript"></param>
-    Public Sub AddRScript(strScript As String)
+    Public Sub AddRScript(strScript As String, scriptType As ScriptType)
         'Always add new element to last element for each script
         'This will allow the output to atatch to the script later
         _lastScriptElement = New clsOutputElement

@@ -24,13 +24,18 @@ Public Class ucrOutputPages
     Private _clsInstatOptions As InstatOptions
     Private _outputLogger As clsOutputLogger
     Private _selectedOutputPage As ucrOutputPage
+
+    Public Sub SetPagesViewModel(pages As clsPages)
+        Throw New NotImplementedException()
+    End Sub
+
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        _selectedOutputPage = ucrMainOutputPage
+        '  _selectedOutputPage = ucrMainOutputPage
         _allOutputPages = New List(Of ucrOutputPage)
         EnableDisableTopButtons()
     End Sub
@@ -74,11 +79,11 @@ Public Class ucrOutputPages
         AddHandler _outputLogger.NewOutputAdded, AddressOf AddNewOutput
         AddHandler _outputLogger.NewOutputAddedToFilteredList, AddressOf AddNewOutputToTab
         AddHandler _outputLogger.NewFilteredListAdded, AddressOf AddNewTab
-        AddHandler ucrMainOutputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
+        '   AddHandler ucrMainOutputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
     End Sub
 
     Private Sub AddNewOutput(outputElement As clsOutputElement)
-        ucrMainOutputPage.AddNewOutput(outputElement)
+        '   ucrMainOutputPage.AddNewOutput(outputElement)
     End Sub
 
     Private Sub AddNewOutputToTab(outputElement As clsOutputElement, tabName As String)
@@ -94,18 +99,12 @@ Public Class ucrOutputPages
         Dim tabPage As New TabPage With {
             .Text = tabName
         }
-        Dim outputPage As New ucrOutputPage With {
-            .Dock = DockStyle.Fill,
-            .Tag = tabName,
-            .BCanReOrder = True,
-            .BCanDelete = True,
-            .BCanRename = True
-        }
-        tabPage.Controls.Add(outputPage)
-        tabControl.TabPages.Add(tabPage)
-        _allOutputPages.Add(outputPage)
-        UpdateTabsInDropDown()
-        AddHandler outputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
+
+        'tabPage.Controls.Add(outputPage)
+        'tabControl.TabPages.Add(tabPage)
+        '_allOutputPages.Add(outputPage)
+        'UpdateTabsInDropDown()
+        'AddHandler outputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
     End Sub
 
     Private Sub AddToExistingTab_Click(sender As Object, e As EventArgs)
@@ -131,22 +130,22 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub EnableDisableTopButtons()
-        If _selectedOutputPage.SelectedElements.Count > 0 Then
-            tdbAddToExisting.Enabled = (tdbAddToExisting.DropDownItems.Count > 0)
-            tbAddToNew.Enabled = True
-            tbCopy.Enabled = True
-            tbDelete.Enabled = _selectedOutputPage.BCanDelete
-            tbMoveDown.Enabled = _selectedOutputPage.BCanReOrder
-            tbMoveUp.Enabled = _selectedOutputPage.BCanReOrder
-        Else
-            tdbAddToExisting.Enabled = False
-            tbAddToNew.Enabled = False
-            tbCopy.Enabled = False
-            tbDelete.Enabled = False
-            tbMoveDown.Enabled = False
-            tbMoveUp.Enabled = False
-        End If
-        tbRename.Enabled = _selectedOutputPage.BCanRename
+        'If _selectedOutputPage.SelectedElements.Count > 0 Then
+        '    tdbAddToExisting.Enabled = (tdbAddToExisting.DropDownItems.Count > 0)
+        '    tbAddToNew.Enabled = True
+        '    tbCopy.Enabled = True
+        '    tbDelete.Enabled = _selectedOutputPage.BCanDelete
+        '    tbMoveDown.Enabled = _selectedOutputPage.BCanReOrder
+        '    tbMoveUp.Enabled = _selectedOutputPage.BCanReOrder
+        'Else
+        '    tdbAddToExisting.Enabled = False
+        '    tbAddToNew.Enabled = False
+        '    tbCopy.Enabled = False
+        '    tbDelete.Enabled = False
+        '    tbMoveDown.Enabled = False
+        '    tbMoveUp.Enabled = False
+        'End If
+        'tbRename.Enabled = _selectedOutputPage.BCanRename
     End Sub
 
     Private Sub RefreshPage()

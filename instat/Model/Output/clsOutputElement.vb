@@ -1,138 +1,135 @@
-﻿' R- Instat
-' Copyright (C) 2015-2017
-'
-' This program is free software: you can redistribute it and/or modify
-' it under the terms of the GNU General Public License as published by
-' the Free Software Foundation, either version 3 of the License, or
-' (at your option) any later version.
-'
-' This program is distributed in the hope that it will be useful,
-' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿Imports RScript
 
-Imports RScript
+Public Class clsOutputScript
+    Private _comment As String
+    Private _script As String
+    Private _formatedRScript As List(Of clsRScriptElement)
+    Private _outputComment As String
+    Private _scriptType As ScriptType
 
-''' <summary>
-''' Output element for a r command, the output element could be just the script or the script with
-''' an image or output text
-''' </summary>
-Public Class clsOutputElement
-    Private _formattedRScript As List(Of clsRScriptElement)
-    Private _id As Integer
-    Private _lstBmpImage As List(Of Bitmap)
-    Private _lstStringOutput As List(Of String)
-    Private _outputType As OutputType
+    Private _outputCommentExists As Boolean
+    Private _outputTextExists As Boolean
+    Private _outputImageExists As Boolean
 
-    ''' <summary>
-    ''' Constructor
-    ''' </summary>
-    Public Sub New()
-        _formattedRScript = New List(Of clsRScriptElement)
-        _lstStringOutput = New List(Of String)
-        _lstBmpImage = New List(Of Bitmap)
+    Public ReadOnly Property OutputCommentExists() As String
+        Get
+            Return _outputCommentExists
+        End Get
+    End Property
+
+    Public ReadOnly Property OutputTextExists() As String
+        Get
+            Return _outputTextExists
+        End Get
+    End Property
+
+    Public ReadOnly Property OutputImageExists() As String
+        Get
+            Return _outputImageExists
+        End Get
+    End Property
+
+    Public ReadOnly Property ScriptType() As ScriptType
+        Get
+            Return _scriptType
+        End Get
+    End Property
+
+    Public ReadOnly Property OutputComment() As String
+        Get
+            Return _outputComment
+        End Get
+    End Property
+
+    Private _outputImage As Image
+    Public ReadOnly Property OutputImage() As Image
+        Get
+            Return _outputImage
+        End Get
+    End Property
+
+    Private _outputText As String
+    Public ReadOnly Property OutputText() As String
+        Get
+            Return _outputText
+        End Get
+    End Property
+
+    Public ReadOnly Property Comment() As String
+        Get
+            Return _comment
+        End Get
+    End Property
+
+    Public ReadOnly Property Script() As String
+        Get
+            Return _script
+        End Get
+    End Property
+
+    Public Sub New(scriptType As ScriptType, strScript As String)
+        _comment = ""
+        _script = ""
+        _outputComment = ""
+        _outputCommentExists = False
+        _outputTextExists = False
+        _outputImageExists = False
+        _formatedRScript = New List(Of clsRScriptElement)
+        _scriptType = scriptType
+        SetFormatedRScript(strScript)
     End Sub
 
-    ''' <summary>
-    ''' Holds formated R Script, split into R Script Elements
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property FormatedRScript As List(Of clsRScriptElement)
-        Get
-            Return _formattedRScript
-        End Get
-    End Property
+    Public Sub New(scriptType As ScriptType, strScript As String, outputText As String)
+        Me.New(scriptType, strScript)
+        _outputText = outputText
 
-    ''' <summary>
-    ''' ID used for ordering elements
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property Id() As Integer
-        Get
-            Return _id
-        End Get
-        Set(ByVal value As Integer)
-            _id = value
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' Holds image if outputType is image
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property ImageOutput As Bitmap
-        Get
-            Return _lstBmpImage.FirstOrDefault()
-        End Get
-    End Property
-
-    ''' <summary>
-    ''' Defines the type of output
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property OutputType() As OutputType
-        Get
-            Return _outputType
-        End Get
-    End Property
-
-    ''' <summary>
-    ''' Holds the string output. Not the R Script
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property StringOutput As String
-        Get
-            Return _lstStringOutput.FirstOrDefault()
-        End Get
-    End Property
-
-    Public Function Clone() As clsOutputElement
-        Return Me.MemberwiseClone
-    End Function
-
-    ''' <summary>
-    ''' When adding Output the script must always be added too
-    ''' </summary>
-    ''' <param name="image"></param>
-    Public Sub AddImageOutputFromR(image As Bitmap, script As List(Of clsRScriptElement))
-        _lstBmpImage.Add(image)
-        _formattedRScript = script
-        _outputType = OutputType.ImageOutput
+        _outputCommentExists = True
+        _outputTextExists = True
     End Sub
 
-    ''' <summary>
-    ''' Adds script and passes through RScript to split into elements
-    ''' </summary>
-    ''' <param name="strScript"></param>
-    Public Sub AddScript(strScript As String)
+    Public Sub New(scriptType As ScriptType, strScript As String, outputImage As Image)
+        Me.New(scriptType, strScript)
+        _outputImage = outputImage
+
+        _outputCommentExists = True
+        _outputImageExists = True
+
+        '   _outputImage.Save("C:\Users\Christopher Marsh\AppData\Local\Temp\R_Instat_Temp_Graphs\test2.png")
+    End Sub
+
+
+
+    Private Sub SetFormatedRScript(strScript As String)
         Dim rScript As New clsRScript(strScript)
-        Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
-
-        If lstTokens Is Nothing Then
-            Exit Sub
-        End If
-
-        For Each rToken In lstTokens
-            _formattedRScript.Add(New clsRScriptElement With
+        Try
+            Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(strScript))
+            If lstTokens Is Nothing Then
+                Exit Sub
+            End If
+            For Each rToken In lstTokens
+                _formatedRScript.Add(New clsRScriptElement With
                 {
                     .Text = rToken.strTxt,
                     .Type = rToken.enuToken
                 })
-        Next
-        _outputType = OutputType.Script
+            Next
+            SetScriptAndCommentFromFormatedRScript()
+        Catch
+            _script = strScript
+        End Try
     End Sub
-
-    ''' <summary>
-    ''' When adding Output the script must always be added too
-    ''' </summary>
-    ''' <param name="strOutput"></param>
-    Public Sub AddStringOutputFromR(strOutput As String, script As List(Of clsRScriptElement))
-        _lstStringOutput.Add(strOutput)
-        _formattedRScript = script
-        _outputType = OutputType.TextOutput
+    Private Sub SetScriptAndCommentFromFormatedRScript()
+        Dim fillingInComment = True
+        For Each line In _formatedRScript
+            If fillingInComment And Not (line.Type = clsRToken.typToken.RComment Or line.Type = clsRToken.typToken.RNewLine) Then
+                fillingInComment = False
+            End If
+            If fillingInComment Then
+                _comment &= line.Text
+            Else
+                _script &= line.Text
+            End If
+        Next
     End Sub
 
 End Class

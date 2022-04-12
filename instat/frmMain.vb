@@ -105,6 +105,7 @@ Public Class frmMain
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
         ucrOutput.SetLogger(clsOutputLogger)
+        ucrOutput.SetPagesViewModel(clsOutputLogger.pages)
 
         SetToDefaultLayout()
 
@@ -818,7 +819,7 @@ Public Class frmMain
         Dim rstResponse As DialogResult
         rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
         If rstResponse = DialogResult.Yes Then
-            ucrOutput.UcrOutputPages.ClearOutputWindow()
+            '    ucrOutput.UcrOutputPages.ClearOutputWindow()
         End If
     End Sub
 
@@ -985,7 +986,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
-        ucrOutput.UcrOutputPages.SaveTab()
+        '   ucrOutput.UcrOutputPages.SaveTab()
     End Sub
 
     Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click

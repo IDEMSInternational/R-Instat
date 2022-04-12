@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrOutputGroup
+Partial Class ucrOutputImageItem
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,32 +22,30 @@ Partial Class ucrOutputGroup
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.scriptPanel = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'scriptPanel
+        'PictureBox1
         '
-        Me.scriptPanel.AutoSize = True
-        Me.scriptPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.scriptPanel.Location = New System.Drawing.Point(0, 0)
-        Me.scriptPanel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.scriptPanel.Name = "scriptPanel"
-        Me.scriptPanel.Size = New System.Drawing.Size(67, 25)
-        Me.scriptPanel.TabIndex = 1
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(879, 392)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
-        'ucrOutputGroup
+        'ucrOutputImageItem
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoSize = True
-        Me.Controls.Add(Me.scriptPanel)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.MinimumSize = New System.Drawing.Size(67, 25)
-        Me.Name = "ucrOutputGroup"
-        Me.Size = New System.Drawing.Size(67, 25)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Name = "ucrOutputImageItem"
+        Me.Size = New System.Drawing.Size(879, 392)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents scriptPanel As Panel
+
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

@@ -20,11 +20,15 @@ Imports instat.Translations
 Public Class ucrOutputWindow
 
     Public Sub SetLogger(outputLogger As clsOutputLogger)
-        UcrOutputPages.SetLogger(outputLogger)
+        '    UcrOutputPages.SetLogger(outputLogger)
+    End Sub
+
+    Public Sub SetPagesViewModel(pages As clsPages)
+        ucrOutputPages.SetPagesViewModel(pages)
     End Sub
 
     Public Sub SetInstatOptions(clsInstatOptions As InstatOptions)
-        UcrOutputPages.clsInstatOptions = clsInstatOptions
+        '   instat.ucrOutputPages.clsInstatOptions = clsInstatOptions
     End Sub
 
     Private Sub ucrOutputWindow_Load(sender As Object, e As EventArgs) Handles Me.Load

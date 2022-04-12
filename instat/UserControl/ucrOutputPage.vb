@@ -24,6 +24,15 @@ Public Class ucrOutputPage
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
 
+    Private _page As clsPage
+
+    Public ReadOnly Property Page As clsPage
+        Get
+            Return _page
+        End Get
+    End Property
+
+
     ''' <summary>
     ''' Returns all the selected elements
     ''' </summary>
@@ -81,12 +90,16 @@ Public Class ucrOutputPage
 
     Public Event RefreshContextButtons()
 
-    Public Sub New()
+    Public Sub New(pageViewModel As clsPage)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+        _page = pageViewModel
+        AddHandler _page.PageGroupAdded, AddressOf AddNewGroup
+
         _checkBoxes = New List(Of CheckBox)
     End Sub
 
@@ -108,6 +121,28 @@ Public Class ucrOutputPage
             pnlMain.Controls(0).Dispose()
         End While
     End Sub
+
+    Public Sub AddNewGroup(outputGroup As clsPageGroup)
+
+        Dim group As New ucrOutputGroup(outputGroup) With {
+    .Height = 10, ' = 10 'small height as panel will grow
+    .AutoSize = True,
+    .Dock = DockStyle.Top
+}
+        pnlMain.Controls.Add(group)
+        pnlMain.Controls.SetChildIndex(group, 0)
+        '  AddHandler panel.Resize, AddressOf Panel_Resize
+
+        Dim panel As New Panel
+        pnlMain.Controls.Add(panel)
+        panel.Height = 1
+        panel.BackColor = Color.Black
+        panel.Dock = DockStyle.Top
+        pnlMain.Controls.SetChildIndex(panel, 0)
+    End Sub
+
+
+
 
     ''' <summary>
     ''' Add output to page
@@ -325,5 +360,8 @@ Public Class ucrOutputPage
             End If
         Next
     End Sub
+
+
+
 
 End Class
