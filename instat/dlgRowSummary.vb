@@ -64,7 +64,6 @@ Public Class dlgRowSummary
         ucrReceiverForMultipleRowSummaries.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverForMultipleRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForMultipleRowSummaries.SetMeAsReceiver()
-        ucrReceiverForMultipleRowSummaries.bUseFilteredData = False
         ucrReceiverForMultipleRowSummaries.bForceAsDataFrame = True
         ucrReceiverForMultipleRowSummaries.SetParameterIsRFunction()
         ucrReceiverForMultipleRowSummaries.SetIncludedDataTypes({"numeric"})
@@ -90,7 +89,7 @@ Public Class dlgRowSummary
         ucrInputProbability.AddQuotesIfUnrecognised = False
         ucrInputProbability.SetValidationTypeAsNumericList()
 
-        ucrInputRowRange.SetParameter(New RParameter("z", 2))
+        ucrInputRowRange.SetParameter(New RParameter("x", 2))
         dctRangeValues.Add("min", "min")
         dctRangeValues.Add("max", "max")
         ucrInputRowRange.SetItems(dctRangeValues)
@@ -293,16 +292,19 @@ Public Class dlgRowSummary
 
         clsRowRanksFunction.SetPackageName("matixStats")
         clsRowRanksFunction.SetRCommand("rowRanks")
-        clsRowRanksFunction.AddParameter("ties.method", "average", iPosition:=2)
+        clsRowRanksFunction.AddParameter("x", clsRFunctionParameter:=clsAsMatrixFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsRowRanksFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+        clsRowRanksFunction.AddParameter("ties.method", "average", iPosition:=2)
 
         clsRowRangesFunction.SetPackageName("matrixStats")
         clsRowRangesFunction.SetRCommand("rowRanges")
-        clsRowRangesFunction.AddParameter("x", "min", iPosition:=2)
         clsRowRangesFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+        clsRowRangesFunction.AddParameter("x", "min", iPosition:=2)
+        clsRowRangesFunction.AddParameter("x", clsRFunctionParameter:=clsAsMatrixFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsRowQuantilesFunction.SetPackageName("matrixStats")
         clsRowQuantilesFunction.SetRCommand("rowQuantiles")
+        clsRowQuantilesFunction.AddParameter("x", clsRFunctionParameter:=clsAsMatrixFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsAsMatrixFunction.SetRCommand("as.matrix")
 
@@ -335,7 +337,7 @@ Public Class dlgRowSummary
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMinimumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=2)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMaximumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=3)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMedianFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=4)
-        ucrReceiverForMultipleRowSummaries.SetRCode(clsAsMatrixFunction, bReset)
+        ' ucrReceiverForMultipleRowSummaries.SetRCode(clsAsMatrixFunction, bReset)
         ucrChkRowRanks.SetRCode(clsRowRanksFunction, bReset)
         ucrInputRowRanks.SetRCode(clsRowRanksFunction, bReset)
         ucrChkType.SetRCode(clsRowQuantilesFunction, bReset)
@@ -470,16 +472,27 @@ Public Class dlgRowSummary
             clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         Else
             If rdoRowRanks.Checked Then
+                clsRowRanksFunction.SetAssignTo(ucrNewDataFrameName.GetText)
                 clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsRowRanksFunction, iPosition:=0)
             ElseIf rdoRowQuantile.Checked Then
+                clsRowQuantilesFunction.SetAssignTo(ucrNewDataFrameName.GetText)
                 clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsQuantileFunction, iPosition:=0)
             Else
+                clsRowRangesFunction.SetAssignTo(ucrNewDataFrameName.GetText)
                 clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsRowRangesFunction, iPosition:=0)
             End If
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged
+    Private Sub ucrReceiverForMultipleRowSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForMultipleRowSummaries.ControlValueChanged
+        Dim clsGetColumnsFunction As New RFunction
+        clsGetColumnsFunction = ucrReceiverForMultipleRowSummaries.GetVariables()
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsAsMatrixFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0, bIncludeArgumentName:=False)
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged,
+        ucrReceiverForMultipleRowSummaries.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
