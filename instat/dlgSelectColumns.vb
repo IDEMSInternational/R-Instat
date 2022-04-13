@@ -39,7 +39,7 @@ Public Class dlgSelectColumns
     Private Sub InitialiseDialog()
         ucrSelectorForColumnSelection.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnSelection.SetParameterIsString()
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverMultipleVariables.Selector = ucrSelectorForColumnSelection
         ucrReceiverMultipleVariables.SetMeAsReceiver()
@@ -50,7 +50,7 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Empty columns", "NA columns"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Value label", "Empty columns", "NA columns"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
@@ -210,7 +210,9 @@ Public Class dlgSelectColumns
                 ElseIf strValue = "Logical" Then
                     clsParametersList.AddParameter("fn", "is.logical", iPosition:=0)
                 ElseIf strValue = "Variable label" Then
-                    clsParametersList.AddParameter("fn", "is.containlabel", iPosition:=0)
+                    clsParametersList.AddParameter("fn", "is.containVariableLabel", iPosition:=0)
+                ElseIf strValue = "Value label" Then
+                    clsParametersList.AddParameter("fn", "is.containValueLabel", iPosition:=0)
                 ElseIf strValue = "Empty columns" Then
                     clsParametersList.AddParameter("fn", "is.emptyvariable", iPosition:=0)
                 ElseIf strValue = "NA columns" Then
@@ -244,7 +246,7 @@ Public Class dlgSelectColumns
         Dim bEnableOrDisable As Boolean = True
         Dim strOperation As String
         strOperation = ucrInputSelectOperation.GetText
-        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsButton(strOperation = "Columns", False)
+        ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(strOperation = "Columns", False)
         Select Case strOperation
             Case "Columns"
                 If ucrReceiverMultipleVariables.IsEmpty Then

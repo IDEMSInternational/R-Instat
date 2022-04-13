@@ -33,10 +33,10 @@ Public Class dlgContrasts
 
         ' Add any initialization after the InitializeComponent() call.
         grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
-        grdLayoutForContrasts.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
         grdLayoutForContrasts.SheetTabNewButtonVisible = False
         grdCurrSheet = grdLayoutForContrasts.CurrentWorksheet
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = SelectionForwardDirection.Down
         iFullWidth = Me.Width
     End Sub
@@ -55,19 +55,6 @@ Public Class dlgContrasts
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
-        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
-        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-    End Sub
 
     Private Sub InitialiseDialog()
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
@@ -75,6 +62,7 @@ Public Class dlgContrasts
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverForContrasts.strSelectorHeading = "Factors"
         ucrBase.iHelpTopicID = 353
+        ucrBase.clsRsyntax.iCallType = 2
 
         Dim dctContrastTypes As New Dictionary(Of String, String)
         ucrInputContrastName.SetParameter(New RParameter("new_contrasts", 2))
@@ -91,7 +79,6 @@ Public Class dlgContrasts
 
         ucrReceiverForContrasts.SetParameter(New RParameter("col_name", 1))
         ucrReceiverForContrasts.SetParameterIsString()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -113,6 +100,18 @@ Public Class dlgContrasts
         clsSetContrast.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetContrast)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -151,6 +150,8 @@ Public Class dlgContrasts
 
     Private Sub SetGridDimensions()
         If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrastName.GetText = "User Defined" Then
+            lblDefineContrast.Visible = True
+            grdLayoutForContrasts.Visible = True
             Me.Size = New Size(iFullWidth, Me.Height)
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
             clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
@@ -160,11 +161,13 @@ Public Class dlgContrasts
                 grdCurrSheet.Columns = grdCurrSheet.Rows - 1
                 grdLayoutForContrasts.Enabled = True
             End If
+            GetContrast()
         Else
             Me.Size = New Size(iFullWidth / 1.86, Me.Height)
             clsFactorColumn.RemoveParameterByName("col_name")
             clsNlevels.RemoveParameterByName("x")
-            grdLayoutForContrasts.Enabled = False
+            grdLayoutForContrasts.Visible = False
+            lblDefineContrast.Visible = False
         End If
         SetMatrixFunction()
     End Sub
@@ -194,9 +197,32 @@ Public Class dlgContrasts
         Return False
     End Function
 
-    Private Sub grdLayoutForContrasts_AfterCellKeyDown(sender As Object, e As EventArgs) Handles grdCurrSheet.AfterCellKeyDown
-        SetMatrixFunction()
-        TestOKEnabled()
+    Private Sub grdLayoutForContrasts_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrSheet.AfterCellKeyDown
+        If e.KeyCode = Keys.Control + Keys.C Then
+            SetMatrixFunction()
+            TestOKEnabled()
+        End If
+    End Sub
+
+    Private Sub GetContrast()
+        Dim clsGetColumnFunction As RFunction = ucrReceiverForContrasts.GetVariables()
+        clsGetColumnFunction.RemoveAssignTo()
+        Dim clsGetContrastFunction As New RFunction
+        Dim expContrasts As SymbolicExpression
+        Dim vecColums As NumericMatrix
+        Dim strTopItemText As String = ""
+
+        clsGetContrastFunction.SetRCommand("contrasts")
+        clsGetContrastFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
+        expContrasts = frmMain.clsRLink.RunInternalScriptGetValue(clsGetContrastFunction.ToScript(), bSilent:=True)
+        If expContrasts IsNot Nothing AndAlso Not expContrasts.Type = Internals.SymbolicExpressionType.Null Then
+            vecColums = expContrasts.AsNumericMatrix()
+            For j = 0 To vecColums.ColumnCount - 1
+                For i = 0 To vecColums.RowCount - 1
+                    grdCurrSheet.Item(row:=i, col:=j) = vecColums(i, j)
+                Next
+            Next
+        End If
     End Sub
 
     Private Sub grdLayoutForContrasts_Leave(sender As Object, e As EventArgs) Handles grdLayoutForContrasts.Leave
@@ -211,11 +237,6 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub ucrReceiverForContrasts_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForContrasts.ControlContentsChanged
-        If Not ucrReceiverForContrasts.IsEmpty Then
-            grdLayoutForContrasts.Enabled = True
-        Else
-            grdLayoutForContrasts.Enabled = False
-        End If
         SetGridDimensions()
         TestOKEnabled()
     End Sub
