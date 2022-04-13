@@ -69,7 +69,6 @@ Partial Class dlgRowSummary
         Me.ucrInputType = New instat.ucrInputComboBox()
         Me.ucrChkType = New instat.ucrCheck()
         Me.ucrChkRowRanks = New instat.ucrCheck()
-        Me.ucrInputRowRange = New instat.ucrInputComboBox()
         Me.ucrInputProbability = New instat.ucrInputComboBox()
         Me.ucrPnlMultipleRowSummary = New instat.UcrPanel()
         Me.ucrInputUserDefined = New instat.ucrInputComboBox()
@@ -233,7 +232,6 @@ Partial Class dlgRowSummary
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrInputType)
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrChkType)
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrChkRowRanks)
-        Me.grpMultipleRowSummary.Controls.Add(Me.ucrInputRowRange)
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrInputProbability)
         Me.grpMultipleRowSummary.Controls.Add(Me.rdoRowRanks)
         Me.grpMultipleRowSummary.Controls.Add(Me.rdoRowQuantile)
@@ -241,7 +239,7 @@ Partial Class dlgRowSummary
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrPnlMultipleRowSummary)
         Me.grpMultipleRowSummary.Location = New System.Drawing.Point(10, 236)
         Me.grpMultipleRowSummary.Name = "grpMultipleRowSummary"
-        Me.grpMultipleRowSummary.Size = New System.Drawing.Size(454, 84)
+        Me.grpMultipleRowSummary.Size = New System.Drawing.Size(328, 84)
         Me.grpMultipleRowSummary.TabIndex = 11
         Me.grpMultipleRowSummary.TabStop = False
         Me.grpMultipleRowSummary.Tag = "Statistic"
@@ -264,7 +262,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoRowQuantile.AutoSize = True
         Me.rdoRowQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowQuantile.Location = New System.Drawing.Point(238, 23)
+        Me.rdoRowQuantile.Location = New System.Drawing.Point(6, 48)
         Me.rdoRowQuantile.Name = "rdoRowQuantile"
         Me.rdoRowQuantile.Size = New System.Drawing.Size(64, 17)
         Me.rdoRowQuantile.TabIndex = 5
@@ -277,7 +275,7 @@ Partial Class dlgRowSummary
         '
         Me.rdoRowRange.AutoSize = True
         Me.rdoRowRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowRange.Location = New System.Drawing.Point(6, 48)
+        Me.rdoRowRange.Location = New System.Drawing.Point(199, 21)
         Me.rdoRowRange.Name = "rdoRowRange"
         Me.rdoRowRange.Size = New System.Drawing.Size(57, 17)
         Me.rdoRowRange.TabIndex = 3
@@ -432,7 +430,7 @@ Partial Class dlgRowSummary
         Me.ucrInputRowRanks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRowRanks.GetSetSelectedIndex = -1
         Me.ucrInputRowRanks.IsReadOnly = False
-        Me.ucrInputRowRanks.Location = New System.Drawing.Point(124, 19)
+        Me.ucrInputRowRanks.Location = New System.Drawing.Point(109, 19)
         Me.ucrInputRowRanks.Name = "ucrInputRowRanks"
         Me.ucrInputRowRanks.Size = New System.Drawing.Size(66, 21)
         Me.ucrInputRowRanks.TabIndex = 15
@@ -443,7 +441,7 @@ Partial Class dlgRowSummary
         Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(325, 48)
+        Me.ucrInputType.Location = New System.Drawing.Point(212, 47)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputType.TabIndex = 14
@@ -452,7 +450,7 @@ Partial Class dlgRowSummary
         '
         Me.ucrChkType.AutoSize = True
         Me.ucrChkType.Checked = False
-        Me.ucrChkType.Location = New System.Drawing.Point(238, 47)
+        Me.ucrChkType.Location = New System.Drawing.Point(157, 48)
         Me.ucrChkType.Name = "ucrChkType"
         Me.ucrChkType.Size = New System.Drawing.Size(82, 23)
         Me.ucrChkType.TabIndex = 13
@@ -466,26 +464,15 @@ Partial Class dlgRowSummary
         Me.ucrChkRowRanks.Size = New System.Drawing.Size(75, 23)
         Me.ucrChkRowRanks.TabIndex = 12
         '
-        'ucrInputRowRange
-        '
-        Me.ucrInputRowRange.AddQuotesIfUnrecognised = True
-        Me.ucrInputRowRange.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputRowRange.GetSetSelectedIndex = -1
-        Me.ucrInputRowRange.IsReadOnly = False
-        Me.ucrInputRowRange.Location = New System.Drawing.Point(64, 47)
-        Me.ucrInputRowRange.Name = "ucrInputRowRange"
-        Me.ucrInputRowRange.Size = New System.Drawing.Size(78, 23)
-        Me.ucrInputRowRange.TabIndex = 11
-        '
         'ucrInputProbability
         '
         Me.ucrInputProbability.AddQuotesIfUnrecognised = True
         Me.ucrInputProbability.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputProbability.GetSetSelectedIndex = -1
         Me.ucrInputProbability.IsReadOnly = False
-        Me.ucrInputProbability.Location = New System.Drawing.Point(303, 19)
+        Me.ucrInputProbability.Location = New System.Drawing.Point(73, 47)
         Me.ucrInputProbability.Name = "ucrInputProbability"
-        Me.ucrInputProbability.Size = New System.Drawing.Size(77, 28)
+        Me.ucrInputProbability.Size = New System.Drawing.Size(77, 21)
         Me.ucrInputProbability.TabIndex = 10
         '
         'ucrPnlMultipleRowSummary
@@ -493,7 +480,7 @@ Partial Class dlgRowSummary
         Me.ucrPnlMultipleRowSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlMultipleRowSummary.Location = New System.Drawing.Point(4, 14)
         Me.ucrPnlMultipleRowSummary.Name = "ucrPnlMultipleRowSummary"
-        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(444, 57)
+        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(307, 57)
         Me.ucrPnlMultipleRowSummary.TabIndex = 0
         '
         'ucrInputUserDefined
@@ -575,7 +562,6 @@ Partial Class dlgRowSummary
     Friend WithEvents ucrInputUserDefined As ucrInputComboBox
     Friend WithEvents ucrNewDataFrameName As ucrSave
     Friend WithEvents grpMultipleRowSummary As GroupBox
-    Friend WithEvents ucrInputRowRange As ucrInputComboBox
     Friend WithEvents ucrInputProbability As ucrInputComboBox
     Friend WithEvents rdoRowRanks As RadioButton
     Friend WithEvents rdoRowQuantile As RadioButton
