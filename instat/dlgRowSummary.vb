@@ -26,8 +26,10 @@ Public Class dlgRowSummary
     Private clsMeanFunction, clsSumFunction, clsStandardDeviationFunction, clsMinimumFunction, clsMaximumFunction,
     clsMedianFunction, clsCountFunction, clsNumberMissingFunction, clsIsNaFunction, clsIsNotNaFunction, clsAnyDuplicatedFunction,
     clsAnyNaFuction, clsCvFunction, clsGmeanFunction, clsHmeanFunction, clsIQRFunction, clsKurtosisFunction, clsMadFunction, clsMcFunction,
-    clsTrimmedMeanFunction, clsMfvFunction, clsMfv1Function, clsQuantileFunction, clsSkewnessFunction As New RFunction
+    clsTrimmedMeanFunction, clsMfvFunction, clsMfv1Function, clsQuantileFunction, clsSkewnessFunction, clsRowRanksFunction, clsRowRangesFunction,
+    clsRowQuantilesFunction, clsAsMatrixFunction As New RFunction
     Private clsBaseFunction, clsListFunction As New RFunction
+
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -44,6 +46,11 @@ Public Class dlgRowSummary
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
 
+        Dim dctTiesValues As New Dictionary(Of String, String)
+        Dim dctProbabilityValues As New Dictionary(Of String, String)
+        Dim dctRangeValues As New Dictionary(Of String, String)
+        Dim dctTypeValues As New Dictionary(Of String, String)
+
         ucrReceiverForRowSummaries.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
@@ -54,8 +61,70 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.SetParameterIsString()
         ucrReceiverForRowSummaries.bWithQuotes = False
 
-        ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
-        ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
+        ucrReceiverForMultipleRowSummaries.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverForMultipleRowSummaries.Selector = ucrSelectorForRowSummaries
+        ucrReceiverForMultipleRowSummaries.SetMeAsReceiver()
+        ucrReceiverForMultipleRowSummaries.bUseFilteredData = False
+        ucrReceiverForMultipleRowSummaries.bForceAsDataFrame = True
+        ucrReceiverForMultipleRowSummaries.SetParameterIsRFunction()
+        ucrReceiverForMultipleRowSummaries.SetIncludedDataTypes({"numeric"})
+        ucrReceiverForMultipleRowSummaries.strSelectorHeading = "Numerics"
+
+        ucrChkRowRanks.SetText("Ties")
+        ucrChkRowRanks.SetLinkedDisplayControl(ucrInputRowRanks)
+        ucrChkRowRanks.AddParameterPresentCondition(True, "ties.method", True)
+        ucrChkRowRanks.AddParameterPresentCondition(False, "ties.method", False)
+
+        ucrInputRowRanks.SetParameter(New RParameter("ties.method", 2))
+        dctTiesValues.Add("average", "average")
+        dctTiesValues.Add("first", "first")
+        dctTiesValues.Add("last", "last")
+        dctTiesValues.Add("max", "max")
+        dctTiesValues.Add("min", "min")
+        ucrInputRowRanks.SetItems(dctTiesValues)
+        ucrInputRowRanks.SetDefaultState("average")
+        ucrInputRowRanks.AddQuotesIfUnrecognised = False
+        ucrInputRowRanks.bAllowNonConditionValues = True
+
+        'function ran here is probs = c(VALUES)
+        ucrInputProbability.SetParameter(New RParameter("p", 1, bNewIncludeArgumentName:=False))
+        ucrInputProbability.AddQuotesIfUnrecognised = False
+        ucrInputProbability.SetValidationTypeAsNumericList()
+
+        ucrInputRowRange.SetParameter(New RParameter("z", 2))
+        dctRangeValues.Add("min", "min")
+        dctRangeValues.Add("max", "max")
+        ucrInputRowRange.SetItems(dctRangeValues)
+        ucrInputRowRange.SetDefaultState("min")
+        ucrInputRowRange.AddQuotesIfUnrecognised = False
+        ucrInputRowRange.bAllowNonConditionValues = True
+
+        ucrChkType.SetText("Type")
+        ucrChkType.SetLinkedDisplayControl(ucrInputRowRanks)
+        ucrChkType.AddParameterPresentCondition(True, "type", True)
+        ucrChkType.AddParameterPresentCondition(False, "type", False)
+
+        ucrInputType.SetParameter(New RParameter("type", 2))
+        dctTypeValues.Add("1", "1")
+        dctTypeValues.Add("2", "2")
+        dctTypeValues.Add("3", "3")
+        dctTypeValues.Add("4", "4")
+        dctTypeValues.Add("5", "5")
+        dctTypeValues.Add("6", "6")
+        dctTypeValues.Add("7", "7")
+        dctTypeValues.Add("8", "8")
+        dctTypeValues.Add("9", "9")
+        ucrInputType.SetItems(dctTypeValues)
+        ucrInputType.SetDefaultState("7")
+        ucrInputType.AddQuotesIfUnrecognised = False
+        ucrInputRowRange.bAllowNonConditionValues = True
+
+        'ucrChkIgnoreMissingValues.AddParameterPresentCondition(True, "na.rm")
+        'ucrChkIgnoreMissingValues.AddParameterPresentCondition(False, "na.rm", False)
+        ucrChkIgnoreMissingValues.SetParameter(New RParameter("na.rm", 2))
+        ucrChkIgnoreMissingValues.SetRDefault("TRUE")
+        ucrChkIgnoreMissingValues.bAddRemoveParameter = True
+        ucrChkIgnoreMissingValues.bChangeParameterValue = False
         ucrChkIgnoreMissingValues.SetText("Ignore Missing Values")
 
         'linking controls
@@ -63,6 +132,7 @@ Public Class dlgRowSummary
         ucrPnlRowSummaries.AddRadioButton(rdoMultiple)
 
         ucrPnlRowSummaries.AddFunctionNamesCondition(rdoSingle, {"rowwise"})
+        ucrPnlRowSummaries.AddFunctionNamesCondition(rdoMultiple, {"matrixStats"})
 
         ucrPnlStatistics.AddRadioButton(rdoMean)
         ucrPnlStatistics.AddRadioButton(rdoMinimum)
@@ -74,6 +144,10 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddRadioButton(rdoCount)
         ucrPnlStatistics.AddRadioButton(rdoMore)
 
+        ucrPnlMultipleRowSummary.AddRadioButton(rdoRowRanks)
+        ucrPnlMultipleRowSummary.AddRadioButton(rdoRowRange)
+        ucrPnlMultipleRowSummary.AddRadioButton(rdoRowQuantile)
+
         ucrPnlStatistics.AddParameterPresentCondition(rdoMean, "Mean")
         ucrPnlStatistics.AddParameterPresentCondition(rdoMinimum, "Minimum")
         ucrPnlStatistics.AddParameterPresentCondition(rdoSum, "Sum")
@@ -84,23 +158,41 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddParameterPresentCondition(rdoCount, "Count")
         ucrPnlStatistics.AddParameterPresentCondition(rdoMore, {"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean",
                                      "mfv", "mfv1", "quantile", "skewness"})
+        ucrPnlMultipleRowSummary.AddParameterPresentCondition(rdoRowRanks, "rowRanks")
+        ucrPnlMultipleRowSummary.AddParameterPresentCondition(rdoRowQuantile, "rowQuantiles")
+        ucrPnlMultipleRowSummary.AddParameterPresentCondition(rdoRowRange, "rowRange")
 
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMultipleRowSummary.AddToLinkedControls(ucrChkRowRanks, {rdoRowRanks}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMultipleRowSummary.AddToLinkedControls({ucrInputProbability, ucrChkType}, {rdoRowQuantile}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMultipleRowSummary.AddToLinkedControls(ucrInputRowRange, {rdoRowRange}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRowSummaries.AddToLinkedControls(ucrPnlStatistics, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlRowSummaries.AddToLinkedControls(ucrPnlMultipleRowSummary, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlRowSummaries.AddToLinkedControls(ucrReceiverForMultipleRowSummaries, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrPnlStatistics.SetLinkedDisplayControl(grpStatistic)
+        ucrPnlMultipleRowSummary.SetLinkedDisplayControl(grpMultipleRowSummary)
+        ucrReceiverForMultipleRowSummaries.SetLinkedDisplayControl(lblSelectedVariablesMultiple)
+
+        ucrChkRowRanks.AddToLinkedControls({ucrInputRowRanks}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterValue:=False)
+        ucrChkType.AddToLinkedControls({ucrInputType}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeParameterValue:=False)
 
         'ucrInputUserDefined
         ucrInputUserDefined.SetParameter(New RParameter("user_defined", 1))
         ucrInputUserDefined.SetItems({"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean, trim=0.2",
                                      "mfv", "mfv1", "quantile, probs=0.5", "skewness"}, bAddConditions:=True)
-        'ucrInputUserDefined.AddQuotesIfUnrecognised = False
-        'ucrInputUserDefined.bAllowNonConditionValues = True
 
         ucrNewDataFrameName.SetPrefix("row_summary")
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
-        'ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorForRowSummaries.ucrAvailableDataFrames)
         ucrNewDataFrameName.SetLabelText("New Dataframe Name:")
         ucrNewDataFrameName.SetIsTextBox()
-        'ucrNewDataFrameName.setLinkedReceiver(ucrReceiverForRowSummaries)
+
+        ucrSaveNewDataFrame.SetLabelText("New column name:")
+        ucrSaveNewDataFrame.SetSaveTypeAsColumn()
+        ucrSaveNewDataFrame.SetIsComboBox()
+        ucrSaveNewDataFrame.SetPrefix("row_summary")
+        ucrSaveNewDataFrame.SetDataFrameSelector(ucrSelectorForRowSummaries.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDefaults()
@@ -136,13 +228,18 @@ Public Class dlgRowSummary
         clsMfvFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSkewnessFunction = New RFunction
+        clsRowRanksFunction = New RFunction
+        clsRowRangesFunction = New RFunction
+        clsRowQuantilesFunction = New RFunction
+        clsAsMatrixFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
         ucrNewDataFrameName.Reset()
+        ucrInputProbability.Reset()
 
         clsDummyFunction.AddParameter("checked", "mean", iPosition:=0)
-        clsDummyFunction.AddParameter("user_defined", "anyDuplicated", iPosition:=1)
+        clsDummyFunction.AddParameter("user_defined", Chr(34) & "anyDuplicated" & Chr(34), iPosition:=1)
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsPipeOperator.AddParameter("right", clsROperatorParameter:=clsRowWisePipeOperator, iPosition:=1)
@@ -189,9 +286,6 @@ Public Class dlgRowSummary
         clsSkewnessFunction.SetPackageName("e1071")
         clsSkewnessFunction.SetRCommand("skewness")
 
-        'clsCountFunction.SetRCommand("sum(!is.na(z))")
-        'clsNumberMissingFunction.SetRCommand("sum(is.na(z))")
-
         clsIsNaFunction.SetRCommand("is.na")
         clsIsNotNaFunction.SetRCommand("!is.na")
 
@@ -200,13 +294,19 @@ Public Class dlgRowSummary
 
         clsListFunction.SetRCommand("list")
 
-        'Defining the default RFunction
-        'clsApplyFunction.SetPackageName("base")
-        'clsApplyFunction.SetRCommand("apply")
-        'clsApplyFunction.AddParameter("FUN", "mean", iPosition:=2)
-        'clsApplyFunction.AddParameter("MARGIN", 1)
-        'clsPipeOperator.SetAssignTo(ucrNewDataFrameName.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        'clsPipeOperator.SetAssignTo("row_summary")
+        clsRowRanksFunction.SetPackageName("matixStats")
+        clsRowRanksFunction.SetRCommand("rowRanks")
+        clsRowRanksFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+
+        clsRowRangesFunction.SetPackageName("matrixStats")
+        clsRowRangesFunction.SetRCommand("rowRanges")
+        clsRowRangesFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+
+        clsRowQuantilesFunction.SetPackageName("matrixStats")
+        clsRowQuantilesFunction.SetRCommand("rowQuantiles")
+
+        clsAsMatrixFunction.SetRCommand("as.matrix")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
@@ -232,19 +332,31 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfv1Function, New RParameter("mfv1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsSkewnessFunction, New RParameter("skewness", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=21)
-        'ucrChkIgnoreMissingValues.SetRCode(clsApplyFunction, bReset)
+        ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsStandardDeviationFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMinimumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMaximumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=3)
+        ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMedianFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=4)
+        ucrReceiverForMultipleRowSummaries.SetRCode(clsAsMatrixFunction, bReset)
+        ucrChkRowRanks.SetRCode(clsRowRanksFunction, bReset)
+        ucrInputRowRanks.SetRCode(clsRowRanksFunction, bReset)
+        'ucrInputProbability.SetRCode(clsRowQuantilesFunction, bReset)
+        ucrChkType.SetRCode(clsRowQuantilesFunction, bReset)
+        'ucrInputType.SetRCode(clsRowQuantilesFunction, bReset)
+        ucrInputRowRange.SetRCode(clsRowRangesFunction)
+        ucrChkIgnoreMissingValues.SetRCode(clsMeanFunction, bReset)
         ucrReceiverForRowSummaries.SetRCode(clsMeanFunction, bReset)
         ucrPnlStatistics.SetRCode(clsMutateFunction, bReset)
         ucrPnlRowSummaries.SetRCode(clsRowWiseFunction, bReset)
-        'ucrNewDataFrameName.SetRCode(clsPipeOperator, bReset)
         ucrInputUserDefined.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrNewDataFrameName.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        If rdoSingle.Checked Then
+            If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrNewDataFrameName.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -253,6 +365,24 @@ Public Class dlgRowSummary
         SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
+
+    'Private Sub ucrChkIgnoreMissingValues_controlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissingValues.ControlValueChanged
+    '    If ucrChkIgnoreMissingValues.Checked Then
+    '        clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '        clsSumFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '        clsMinimumFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '        clsMaximumFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '        clsMedianFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '        clsStandardDeviationFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+    '    Else
+    '        clsMeanFunction.RemoveParameterByName("na.rm")
+    '        clsSumFunction.RemoveParameterByName("na.rm")
+    '        clsMinimumFunction.RemoveParameterByName("na.rm")
+    '        clsMaximumFunction.RemoveParameterByName("na.rm")
+    '        clsMedianFunction.RemoveParameterByName("na.rm")
+    '        clsStandardDeviationFunction.RemoveParameterByName("na.rm")
+    '    End If
+    'End Sub
 
     Private Sub ucrPnlRowSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRowSummaries.ControlValueChanged, ucrPnlStatistics.ControlValueChanged, ucrInputUserDefined.ControlValueChanged
         If rdoSingle.Checked Then
@@ -329,9 +459,9 @@ Public Class dlgRowSummary
                         clsMutateFunction.AddParameter("quantile", clsRFunctionParameter:=clsQuantileFunction, bIncludeArgumentName:=False, iPosition:=0)
                     Case "skewness"
                         clsMutateFunction.AddParameter("skewness", clsRFunctionParameter:=clsSkewnessFunction, iPosition:=0)
-            End Select
-        End If
-        clsPipeOperator.SetAssignTo(ucrNewDataFrameName.GetText)
+                End Select
+            End If
+            clsPipeOperator.SetAssignTo(ucrNewDataFrameName.GetText)
             clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         End If
     End Sub
