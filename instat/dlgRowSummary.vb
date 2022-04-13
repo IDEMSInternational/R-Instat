@@ -339,9 +339,7 @@ Public Class dlgRowSummary
         ucrReceiverForMultipleRowSummaries.SetRCode(clsAsMatrixFunction, bReset)
         ucrChkRowRanks.SetRCode(clsRowRanksFunction, bReset)
         ucrInputRowRanks.SetRCode(clsRowRanksFunction, bReset)
-        'ucrInputProbability.SetRCode(clsRowQuantilesFunction, bReset)
         ucrChkType.SetRCode(clsRowQuantilesFunction, bReset)
-        'ucrInputType.SetRCode(clsRowQuantilesFunction, bReset)
         ucrInputRowRange.SetRCode(clsRowRangesFunction)
         ucrChkIgnoreMissingValues.SetRCode(clsMeanFunction, bReset)
         ucrReceiverForRowSummaries.SetRCode(clsMeanFunction, bReset)
@@ -356,6 +354,14 @@ Public Class dlgRowSummary
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
+            End If
+        Else
+            If rdoMultiple.Checked Then
+                If Not ucrReceiverForMultipleRowSummaries.IsEmpty AndAlso ucrSaveNewDataFrame.IsComplete Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
         End If
     End Sub
@@ -463,6 +469,14 @@ Public Class dlgRowSummary
             End If
             clsPipeOperator.SetAssignTo(ucrNewDataFrameName.GetText)
             clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoSingle.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
+        ElseIf rdoMultiple.Checked Then
+
         End If
     End Sub
 
