@@ -103,6 +103,7 @@ Partial Class dlgMakeDate
         Me.ucrSaveDate = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblTypicalLength = New System.Windows.Forms.Label()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormats.SuspendLayout()
@@ -112,6 +113,7 @@ Partial Class dlgMakeDate
         '
         'grpTwoColumns
         '
+        Me.grpTwoColumns.Controls.Add(Me.lblTypicalLength)
         Me.grpTwoColumns.Controls.Add(Me.ucrChkTwoDigitYear)
         Me.grpTwoColumns.Controls.Add(Me.ucrNudCutoff)
         Me.grpTwoColumns.Controls.Add(Me.lblCutOffTwo)
@@ -141,7 +143,7 @@ Partial Class dlgMakeDate
         Me.ucrNudCutoff.AutoSize = True
         Me.ucrNudCutoff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCutoff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCutoff.Location = New System.Drawing.Point(130, 68)
+        Me.ucrNudCutoff.Location = New System.Drawing.Point(130, 66)
         Me.ucrNudCutoff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCutoff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCutoff.Name = "ucrNudCutoff"
@@ -165,7 +167,7 @@ Partial Class dlgMakeDate
         Me.ucrInputComboBoxMonthTwo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboBoxMonthTwo.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxMonthTwo.IsReadOnly = False
-        Me.ucrInputComboBoxMonthTwo.Location = New System.Drawing.Point(133, 100)
+        Me.ucrInputComboBoxMonthTwo.Location = New System.Drawing.Point(133, 110)
         Me.ucrInputComboBoxMonthTwo.Name = "ucrInputComboBoxMonthTwo"
         Me.ucrInputComboBoxMonthTwo.Size = New System.Drawing.Size(105, 21)
         Me.ucrInputComboBoxMonthTwo.TabIndex = 7
@@ -865,6 +867,16 @@ Partial Class dlgMakeDate
         Me.ucrSelectorMakeDate.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorMakeDate.TabIndex = 4
         '
+        'lblTypicalLength
+        '
+        Me.lblTypicalLength.AutoSize = True
+        Me.lblTypicalLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTypicalLength.Location = New System.Drawing.Point(130, 95)
+        Me.lblTypicalLength.Name = "lblTypicalLength"
+        Me.lblTypicalLength.Size = New System.Drawing.Size(111, 13)
+        Me.lblTypicalLength.TabIndex = 12
+        Me.lblTypicalLength.Text = "No. of Days in a Year:"
+        '
         'dlgMakeDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -965,4 +977,5 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrInputUnits As ucrInputComboBox
     Friend WithEvents grpFormats As GroupBox
     Friend WithEvents txtTextDateFormats As RichTextBox
+    Friend WithEvents lblTypicalLength As Label
 End Class
