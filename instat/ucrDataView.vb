@@ -725,7 +725,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
-        mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected()
+        mnuLabelsLevel.Enabled = IsOnlyOneColumnSelected() AndAlso IsOnlyOneColumnSelected() AndAlso IsFirstSelectedColumnAFactor()
         mnuRemoveCurrentFilters.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
         mnuCellContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
