@@ -2431,4 +2431,8 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
         dlgMergeAdditionalData.ShowDialog()
     End Sub
+
+    Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeRandomSplit.Click
+        dlgRandomSplit.ShowDialog()
+    End Sub
 End Class

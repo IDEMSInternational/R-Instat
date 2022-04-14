@@ -675,6 +675,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeRandomSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3936,7 +3937,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshape
         '
-        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
+        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareDataReshapeRandomSplit, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
         Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareDataReshape.Tag = ""
@@ -5074,6 +5075,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuPrepareDataReshapeRandomSplit
+        '
+        Me.mnuPrepareDataReshapeRandomSplit.Name = "mnuPrepareDataReshapeRandomSplit"
+        Me.mnuPrepareDataReshapeRandomSplit.Size = New System.Drawing.Size(197, 22)
+        Me.mnuPrepareDataReshapeRandomSplit.Text = "Random Split..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5764,4 +5771,5 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeTwoThreeVariablesPivotTable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameAddMergeColumns As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataReshapeRandomSplit As ToolStripMenuItem
 End Class
