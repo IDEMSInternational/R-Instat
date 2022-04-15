@@ -36,6 +36,7 @@ Public Class dlgLabelsLevels
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
+        CountLevels()
         autoTranslate(Me)
     End Sub
 
@@ -114,21 +115,33 @@ Public Class dlgLabelsLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
-        Dim iMissingValue As Integer
-        Dim clsGetColumnFunction As RFunction = ucrReceiverLabels.GetVariables()
+    Private Sub CountLevels()
+        Static iMissingValue As Integer
+        Dim clsGetColumnFunction As RFunction
+
+        clsGetColumnFunction = ucrReceiverLabels.GetVariables()
         clsGetColumnFunction.RemoveAssignTo()
 
         If Not ucrReceiverLabels.IsEmpty AndAlso {"factor"}.Contains(ucrReceiverLabels.strCurrDataType) Then
             clsSumCountMissingFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
             iMissingValue = frmMain.clsRLink.RunInternalScriptGetValue(clsSumCountMissingFunction.ToScript(), bSilent:=False).AsNumeric(0)
         Else
+            iMissingValue = 0
             clsSumCountMissingFunction.RemoveParameterByName("x")
         End If
 
         lblNaValue.Text = "Missing Values: " & iMissingValue
         lblNaValue.Visible = iMissingValue > 0
-        lblLevelNumber.Visible = If(Not ucrReceiverLabels.IsEmpty, True, False)
+        If ucrFactorLabels.grdFactorData.CurrentWorksheet IsNot Nothing Then
+            lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
+            lblLevelNumber.Visible = True
+        Else
+            lblLevelNumber.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
+        CountLevels()
     End Sub
 
     Private Sub AddLevelButtonEnabled()
@@ -142,9 +155,7 @@ Public Class dlgLabelsLevels
         Else
             clsViewLabelsFunction.RemoveParameterByName("new_levels")
         End If
-        If ucrFactorLabels.grdFactorData.CurrentWorksheet IsNot Nothing Then
-            lblLevelNumber.Text = "Levels: " & ucrFactorLabels.grdFactorData.CurrentWorksheet.RowCount
-        End If
+        CountLevels()
     End Sub
 
     Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged

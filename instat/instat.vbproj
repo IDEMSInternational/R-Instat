@@ -195,6 +195,12 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRandomSplit.Designer.vb">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
     <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
     <Compile Include="Interface\IDataViewGrid.vb" />
@@ -1014,12 +1020,6 @@
       <DependentUpon>dlgFlatFrequencyTable.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFlatFrequencyTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgFrequency.Designer.vb">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFrequency.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
@@ -2985,6 +2985,9 @@
     <EmbeddedResource Include="dlgPivotTable.resx">
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSplit.resx">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -3402,9 +3405,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.sw-KE.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgHelpVignettes.resx">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3677,9 +3677,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -5166,6 +5163,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
+    <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">

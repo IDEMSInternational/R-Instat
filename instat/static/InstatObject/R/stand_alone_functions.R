@@ -2518,3 +2518,23 @@ get_quarter_label <-   function(quarter, start_month){
   paste(mabb[start_pos:(start_pos+2)], collapse = "")})
   return(factor(x = qtr, levels = unique(qtr)))
 }
+
+is.containVariableLabel <- function(x){
+  return(isTRUE(sjlabelled::get_label(x) != ""))
+}
+
+is.emptyvariable <- function(x){
+ return(isTRUE(length(x) == sum(x == "")))
+}
+
+is.NAvariable <- function(x){
+  return(isTRUE(length(x) == sum(is.na(x))))
+}
+
+is.levelscount <- function(x, n){
+ return(isTRUE(sum(levels(x)) == n))
+}
+
+is.containValueLabel <- function(x){
+  return(labels_label %in% names(attributes(x)))
+}
