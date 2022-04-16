@@ -27,7 +27,7 @@ Public Class dlgRowSummary
     clsMedianFunction, clsCountFunction, clsNumberMissingFunction, clsIsNaFunction, clsIsNotNaFunction, clsAnyDuplicatedFunction,
     clsAnyNaFuction, clsCvFunction, clsGmeanFunction, clsHmeanFunction, clsIQRFunction, clsKurtosisFunction, clsMadFunction, clsMcFunction,
     clsTrimmedMeanFunction, clsMfvFunction, clsMfv1Function, clsQuantileFunction, clsSkewnessFunction, clsRowRanksFunction, clsRowRangesFunction,
-    clsRowQuantilesFunction, clsAsMatrixFunction As New RFunction
+    clsRowQuantilesFunction, clsAsMatrixFunction, clsDimensionFunction As New RFunction
     Private clsBaseFunction, clsListFunction As New RFunction
 
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -75,13 +75,12 @@ Public Class dlgRowSummary
         ucrChkRowRanks.AddParameterPresentCondition(False, "ties.method", False)
 
         ucrInputRowRanks.SetParameter(New RParameter("ties.method", 2))
-        dctTiesValues.Add("average", "average")
-        dctTiesValues.Add("first", "first")
-        dctTiesValues.Add("last", "last")
-        dctTiesValues.Add("max", "max")
-        dctTiesValues.Add("min", "min")
+        dctTiesValues.Add("average", Chr(34) & "average" & Chr(34))
+        dctTiesValues.Add("first", Chr(34) & "first" & Chr(34))
+        dctTiesValues.Add("last", Chr(34) & "last" & Chr(34))
+        dctTiesValues.Add("max", Chr(34) & "max" & Chr(34))
+        dctTiesValues.Add("min", Chr(34) & "min" & Chr(34))
         ucrInputRowRanks.SetItems(dctTiesValues)
-        ucrInputRowRanks.AddQuotesIfUnrecognised = False
         ucrInputRowRanks.bAllowNonConditionValues = True
 
         'function ran here is probs = c(VALUES)
@@ -90,7 +89,7 @@ Public Class dlgRowSummary
         ucrInputProbability.SetValidationTypeAsNumericList()
 
         ucrChkType.SetText("Type")
-        ucrChkType.SetLinkedDisplayControl(ucrInputRowRanks)
+        ucrChkType.SetLinkedDisplayControl(ucrInputType)
         ucrChkType.AddParameterPresentCondition(True, "type", True)
         ucrChkType.AddParameterPresentCondition(False, "type", False)
 
@@ -121,7 +120,7 @@ Public Class dlgRowSummary
         ucrPnlRowSummaries.AddRadioButton(rdoMultiple)
 
         ucrPnlRowSummaries.AddFunctionNamesCondition(rdoSingle, {"rowwise"})
-        ucrPnlRowSummaries.AddFunctionNamesCondition(rdoMultiple, {"matrixStats"})
+        ucrPnlRowSummaries.AddFunctionNamesCondition(rdoMultiple, {"rowRanks", "rowRanges", "rowQuantiles"})
 
         ucrPnlStatistics.AddRadioButton(rdoMean)
         ucrPnlStatistics.AddRadioButton(rdoMinimum)
@@ -222,6 +221,7 @@ Public Class dlgRowSummary
         clsRowRangesFunction = New RFunction
         clsRowQuantilesFunction = New RFunction
         clsAsMatrixFunction = New RFunction
+        clsDimensionFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
@@ -288,15 +288,17 @@ Public Class dlgRowSummary
 
         clsListFunction.SetRCommand("list")
 
-        clsRowRanksFunction.SetPackageName("matixStats")
+        clsRowRanksFunction.SetPackageName("matrixStats")
         clsRowRanksFunction.SetRCommand("rowRanks")
         clsRowRanksFunction.AddParameter("x", clsRFunctionParameter:=clsAsMatrixFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRowRanksFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+        clsRowRanksFunction.AddParameter("dim.", clsRFunctionParameter:=clsDimensionFunction, iPosition:=1)
 
         clsRowRangesFunction.SetPackageName("matrixStats")
         clsRowRangesFunction.SetRCommand("rowRanges")
-        clsRowRangesFunction.AddParameter("dim.", "c(18,9)", iPosition:=1)
+        clsRowRangesFunction.AddParameter("dim.", clsRFunctionParameter:=clsDimensionFunction, iPosition:=1)
         clsRowRangesFunction.AddParameter("x", clsRFunctionParameter:=clsAsMatrixFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsDimensionFunction.SetRCommand("dim")
 
         clsRowQuantilesFunction.SetPackageName("matrixStats")
         clsRowQuantilesFunction.SetRCommand("rowQuantiles")
@@ -472,16 +474,22 @@ Public Class dlgRowSummary
             clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         Else
             ucrReceiverForMultipleRowSummaries.SetMeAsReceiver()
-            If rdoRowRanks.Checked Then
-                clsDummyRowFunction.AddParameter("check", "rowRanks", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRanksFunction)
+            If rdoRowRange.Checked Then
+                clsDummyRowFunction.AddParameter("check", "rowRange", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRangesFunction)
             ElseIf rdoRowQuantile.Checked Then
                 clsDummyRowFunction.AddParameter("check", "rowQuantiles", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRowQuantilesFunction)
             Else
-                clsDummyRowFunction.AddParameter("check", "rowRange", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRangesFunction)
+                clsDummyRowFunction.AddParameter("check", "rowRanks", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRanksFunction)
             End If
+        End If
+
+        If rdoMultiple.Checked AndAlso rdoRowQuantile.Checked Then
+            clsDummyRowFunction.AddParameter("0", clsRFunctionParameter:=clsRowQuantilesFunction, iPosition:=0)
+            ucrInputProbability.SetName("0.25,0.5,0.75")
+            ucrInputProbability.SetItems({"0.25,0.5,0.75", "0, 0.2, 0.4, 0.6, 0.8, 1 ", "0.5, 0.8, 1"})
         End If
     End Sub
 
@@ -490,10 +498,16 @@ Public Class dlgRowSummary
         clsGetColumnsFunction = ucrReceiverForMultipleRowSummaries.GetVariables()
         clsGetColumnsFunction.SetAssignTo("columns")
         clsAsMatrixFunction.AddParameter("columns", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsDimensionFunction.AddParameter("columns", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0, bIncludeArgumentName:=False)
+    End Sub
+
+    Private Sub ucrInputProbability_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputProbability.ControlValueChanged
+        clsRowQuantilesFunction.AddParameter("probs", "c(" & ucrInputProbability.GetText & ")", iPosition:=1)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged,
-        ucrReceiverForMultipleRowSummaries.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged
+        ucrReceiverForMultipleRowSummaries.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged, ucrChkRowRanks.ControlContentsChanged,
+        ucrChkType.ControlContentsChanged, ucrInputProbability.ControlContentsChanged, ucrInputRowRanks.ControlContentsChanged, ucrInputType.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
