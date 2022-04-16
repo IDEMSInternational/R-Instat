@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgMergeAdditionalData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsInsertColumnFunction, clsGetColumnsFromData As New RFunction
+    Private clsInsertColumnFunction, clsGetColumnsFromData, clsImportDataFunction, clsListFunction As New RFunction
     Private lstJoinColumns As New List(Of String)
     Private clsLeftJoinFunction As New RFunction
     Private clsByListFunction As New RFunction
@@ -72,12 +72,19 @@ Public Class dlgMergeAdditionalData
         clsInsertColumnFunction = New RFunction
         clsGetColumnsFromData = New RFunction
         clsGetVariablesFunction = New RFunction
+        clsImportDataFunction = New RFunction
+        clsListFunction = New RFunction
 
         ucrToDataFrame.Reset()
         ucrFromDataFrame.Reset()
         ucrReceiverSecond.SetMeAsReceiver()
         ucrInputSaveDataFrame.SetName("merge")
         ucrInputCheckInput.Reset()
+
+        clsImportDataFunction.SetRCommand("data_book$import_data")
+        clsImportDataFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction)
+
+        clsListFunction.SetRCommand("list")
 
         clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
 
@@ -92,9 +99,8 @@ Public Class dlgMergeAdditionalData
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
 
-
         SetDataFrameAssign()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImportDataFunction)
         bResetSubdialog = True
     End Sub
 
@@ -144,10 +150,10 @@ Public Class dlgMergeAdditionalData
                     cmdCheckUnique.Visible = False
                     SetInputCheckVisibility(False)
                 Else
+                    clsListFunction.ClearParameters()
                     clsLeftJoinFunction.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text)
-                    clsInsertColumnFunction.AddParameter("data_name", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-                    clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=1)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+                    clsListFunction.AddParameter(ucrToDataFrame.cboAvailableDataFrames.Text, clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportDataFunction)
                     ucrInputSaveDataFrame.Visible = False
                     cmdCheckUnique.Visible = True
                 End If
