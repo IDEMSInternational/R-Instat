@@ -125,7 +125,7 @@ Public Class clsDataBook
     End Sub
 
     ''' <summary>
-    ''' refreshes data book with recent R data frames and the data frames with recent R data
+    ''' refreshes data book with recent R data frames and the data frames with their recent R data
     ''' </summary>
     Private Sub RefreshDataFrames()
         'get the recent list of data frame names from R Instant
