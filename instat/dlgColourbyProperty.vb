@@ -50,9 +50,6 @@ Public Class dlgColourbyProperty
         ucrReceiverMetadataProperty.SetItemType("metadata")
         ucrReceiverMetadataProperty.strSelectorHeading = "Metadata Property"
 
-        ucrChkRemoveColours.AddToLinkedControls(ucrReceiverMetadataProperty, {Not True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiverMetadataProperty.SetLinkedDisplayControl(lblMetadataProp)
-
         ucrChkRemoveColours.SetText("Remove Colour")
         ucrChkRemoveColours.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
         ucrChkRemoveColours.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
@@ -113,6 +110,7 @@ Public Class dlgColourbyProperty
                     End If
                 Next
             End If
+            ucrChkRemoveColours.Visible = bApplyColumnColours
         End If
     End Sub
 
