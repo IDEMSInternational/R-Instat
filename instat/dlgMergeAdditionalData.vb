@@ -45,7 +45,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrToDataFrame.SetParameter(New RParameter("y", 1))
+        ucrToDataFrame.SetParameter(New RParameter("x", 0))
         ucrToDataFrame.SetParameterIsRFunction()
         ucrToDataFrame.SetLabelText("To Data Frame:")
 
@@ -90,7 +90,7 @@ Public Class dlgMergeAdditionalData
 
         clsLeftJoinFunction.SetPackageName("dplyr")
         clsLeftJoinFunction.SetRCommand("left_join")
-        clsLeftJoinFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
+        clsLeftJoinFunction.AddParameter("y", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
 
         clsByListFunction.SetRCommand("c")
 
