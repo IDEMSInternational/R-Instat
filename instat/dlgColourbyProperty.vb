@@ -21,6 +21,7 @@ Public Class dlgColourbyProperty
     Private clsColourByMetadata As New RFunction
     Private clsRemoveColour As New RFunction
     Private bReset As Boolean = True
+    Private bApplyColumnColours As Boolean
 
     Private Sub dlgColourbyProperty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -34,6 +35,7 @@ Public Class dlgColourbyProperty
         bReset = False
         TestOKEnabled()
         AutoFill()
+        SetBaseFunction()
         autoTranslate(Me)
     End Sub
 
@@ -87,18 +89,10 @@ Public Class dlgColourbyProperty
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkRemoveColours_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveColours.ControlValueChanged
-        If ucrChkRemoveColours.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColour)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
-        End If
-    End Sub
 
     Private Sub AutoFill()
         If ucrSelectorColourByMetadata.lstAvailableVariable.Items.Count > 0 Then
             Dim clsHasColoursFunc As New RFunction
-            Dim bApplyColumnColours As Boolean
             clsHasColoursFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_colours")
             clsHasColoursFunc.AddParameter("data_name", Chr(34) & ucrSelectorColourByMetadata.ucrAvailableDataFrames.strCurrDataFrame & Chr(34))
             bApplyColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsHasColoursFunc.ToScript()).AsLogical(0)
@@ -112,6 +106,18 @@ Public Class dlgColourbyProperty
             End If
             ucrChkRemoveColours.Visible = bApplyColumnColours
         End If
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If ucrChkRemoveColours.Checked AndAlso bApplyColumnColours Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColour)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
+        End If
+    End Sub
+
+    Private Sub ucrChkRemoveColours_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveColours.ControlValueChanged
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrSelectorColourByMetadata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlValueChanged
