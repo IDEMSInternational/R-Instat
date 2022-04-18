@@ -40,6 +40,7 @@ Partial Class dlgRowSummary
     Private Sub InitializeComponent()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
+        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
         Me.rdoMore = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoMaximum = New System.Windows.Forms.RadioButton()
@@ -49,15 +50,20 @@ Partial Class dlgRowSummary
         Me.rdoNumberMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStatistics = New instat.UcrPanel()
         Me.grpMultipleRowSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRowRanks = New instat.ucrInputComboBox()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.ucrChkType = New instat.ucrCheck()
+        Me.ucrChkRowRanks = New instat.ucrCheck()
+        Me.ucrInputProbability = New instat.ucrInputComboBox()
         Me.rdoRowRanks = New System.Windows.Forms.RadioButton()
         Me.rdoRowQuantile = New System.Windows.Forms.RadioButton()
         Me.rdoRowRange = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMultipleRowSummary = New instat.UcrPanel()
         Me.lblSummaries = New System.Windows.Forms.Label()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.lblSelectedVariablesMultiple = New System.Windows.Forms.Label()
-        Me.ucrReceiverForMultipleRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
@@ -65,14 +71,6 @@ Partial Class dlgRowSummary
         Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlRowSummaries = New instat.UcrPanel()
-        Me.ucrInputRowRanks = New instat.ucrInputComboBox()
-        Me.ucrInputType = New instat.ucrInputComboBox()
-        Me.ucrChkType = New instat.ucrCheck()
-        Me.ucrChkRowRanks = New instat.ucrCheck()
-        Me.ucrInputProbability = New instat.ucrInputComboBox()
-        Me.ucrPnlMultipleRowSummary = New instat.UcrPanel()
-        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
-        Me.ucrPnlStatistics = New instat.UcrPanel()
         Me.grpStatistic.SuspendLayout()
         Me.grpMultipleRowSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -81,7 +79,7 @@ Partial Class dlgRowSummary
         '
         Me.lblSelectedVariables.AutoSize = True
         Me.lblSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(250, 79)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(275, 73)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectedVariables.TabIndex = 5
@@ -108,6 +106,17 @@ Partial Class dlgRowSummary
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
         Me.grpStatistic.Text = "Row Statistic"
+        '
+        'ucrInputUserDefined
+        '
+        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
+        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
+        Me.ucrInputUserDefined.IsReadOnly = False
+        Me.ucrInputUserDefined.Location = New System.Drawing.Point(317, 41)
+        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
+        Me.ucrInputUserDefined.Size = New System.Drawing.Size(125, 25)
+        Me.ucrInputUserDefined.TabIndex = 10
         '
         'rdoMore
         '
@@ -226,6 +235,14 @@ Partial Class dlgRowSummary
         Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
+        'ucrPnlStatistics
+        '
+        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
+        Me.ucrPnlStatistics.Size = New System.Drawing.Size(444, 52)
+        Me.ucrPnlStatistics.TabIndex = 0
+        '
         'grpMultipleRowSummary
         '
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrInputRowRanks)
@@ -244,6 +261,57 @@ Partial Class dlgRowSummary
         Me.grpMultipleRowSummary.TabStop = False
         Me.grpMultipleRowSummary.Tag = "Statistic"
         Me.grpMultipleRowSummary.Text = "Row Statistic"
+        '
+        'ucrInputRowRanks
+        '
+        Me.ucrInputRowRanks.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowRanks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowRanks.GetSetSelectedIndex = -1
+        Me.ucrInputRowRanks.IsReadOnly = False
+        Me.ucrInputRowRanks.Location = New System.Drawing.Point(109, 19)
+        Me.ucrInputRowRanks.Name = "ucrInputRowRanks"
+        Me.ucrInputRowRanks.Size = New System.Drawing.Size(66, 21)
+        Me.ucrInputRowRanks.TabIndex = 15
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(215, 47)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputType.TabIndex = 14
+        '
+        'ucrChkType
+        '
+        Me.ucrChkType.AutoSize = True
+        Me.ucrChkType.Checked = False
+        Me.ucrChkType.Location = New System.Drawing.Point(157, 48)
+        Me.ucrChkType.Name = "ucrChkType"
+        Me.ucrChkType.Size = New System.Drawing.Size(56, 23)
+        Me.ucrChkType.TabIndex = 13
+        '
+        'ucrChkRowRanks
+        '
+        Me.ucrChkRowRanks.AutoSize = True
+        Me.ucrChkRowRanks.Checked = False
+        Me.ucrChkRowRanks.Location = New System.Drawing.Point(66, 21)
+        Me.ucrChkRowRanks.Name = "ucrChkRowRanks"
+        Me.ucrChkRowRanks.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkRowRanks.TabIndex = 12
+        '
+        'ucrInputProbability
+        '
+        Me.ucrInputProbability.AddQuotesIfUnrecognised = True
+        Me.ucrInputProbability.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputProbability.GetSetSelectedIndex = -1
+        Me.ucrInputProbability.IsReadOnly = False
+        Me.ucrInputProbability.Location = New System.Drawing.Point(73, 47)
+        Me.ucrInputProbability.Name = "ucrInputProbability"
+        Me.ucrInputProbability.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputProbability.TabIndex = 10
         '
         'rdoRowRanks
         '
@@ -283,6 +351,14 @@ Partial Class dlgRowSummary
         Me.rdoRowRange.Tag = "Range"
         Me.rdoRowRange.Text = "Range"
         Me.rdoRowRange.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMultipleRowSummary
+        '
+        Me.ucrPnlMultipleRowSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMultipleRowSummary.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlMultipleRowSummary.Name = "ucrPnlMultipleRowSummary"
+        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(307, 57)
+        Me.ucrPnlMultipleRowSummary.TabIndex = 0
         '
         'lblSummaries
         '
@@ -331,30 +407,6 @@ Partial Class dlgRowSummary
         Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMultiple.UseVisualStyleBackColor = False
         '
-        'lblSelectedVariablesMultiple
-        '
-        Me.lblSelectedVariablesMultiple.AutoSize = True
-        Me.lblSelectedVariablesMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedVariablesMultiple.Location = New System.Drawing.Point(250, 79)
-        Me.lblSelectedVariablesMultiple.Name = "lblSelectedVariablesMultiple"
-        Me.lblSelectedVariablesMultiple.Size = New System.Drawing.Size(98, 13)
-        Me.lblSelectedVariablesMultiple.TabIndex = 14
-        Me.lblSelectedVariablesMultiple.Tag = "Selected_Variables"
-        Me.lblSelectedVariablesMultiple.Text = "Selected Variables:"
-        '
-        'ucrReceiverForMultipleRowSummaries
-        '
-        Me.ucrReceiverForMultipleRowSummaries.AutoSize = True
-        Me.ucrReceiverForMultipleRowSummaries.frmParent = Me
-        Me.ucrReceiverForMultipleRowSummaries.Location = New System.Drawing.Point(250, 95)
-        Me.ucrReceiverForMultipleRowSummaries.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForMultipleRowSummaries.Name = "ucrReceiverForMultipleRowSummaries"
-        Me.ucrReceiverForMultipleRowSummaries.Selector = Nothing
-        Me.ucrReceiverForMultipleRowSummaries.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverForMultipleRowSummaries.strNcFilePath = ""
-        Me.ucrReceiverForMultipleRowSummaries.TabIndex = 13
-        Me.ucrReceiverForMultipleRowSummaries.ucrSelector = Nothing
-        '
         'ucrSaveNewDataFrame
         '
         Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -377,7 +429,7 @@ Partial Class dlgRowSummary
         '
         Me.ucrChkIgnoreMissingValues.AutoSize = True
         Me.ucrChkIgnoreMissingValues.Checked = False
-        Me.ucrChkIgnoreMissingValues.Location = New System.Drawing.Point(250, 205)
+        Me.ucrChkIgnoreMissingValues.Location = New System.Drawing.Point(275, 202)
         Me.ucrChkIgnoreMissingValues.Name = "ucrChkIgnoreMissingValues"
         Me.ucrChkIgnoreMissingValues.Size = New System.Drawing.Size(140, 23)
         Me.ucrChkIgnoreMissingValues.TabIndex = 7
@@ -398,7 +450,7 @@ Partial Class dlgRowSummary
         '
         Me.ucrReceiverForRowSummaries.AutoSize = True
         Me.ucrReceiverForRowSummaries.frmParent = Me
-        Me.ucrReceiverForRowSummaries.Location = New System.Drawing.Point(250, 95)
+        Me.ucrReceiverForRowSummaries.Location = New System.Drawing.Point(275, 89)
         Me.ucrReceiverForRowSummaries.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForRowSummaries.Name = "ucrReceiverForRowSummaries"
         Me.ucrReceiverForRowSummaries.Selector = Nothing
@@ -424,92 +476,12 @@ Partial Class dlgRowSummary
         Me.ucrPnlRowSummaries.Size = New System.Drawing.Size(265, 39)
         Me.ucrPnlRowSummaries.TabIndex = 1
         '
-        'ucrInputRowRanks
-        '
-        Me.ucrInputRowRanks.AddQuotesIfUnrecognised = True
-        Me.ucrInputRowRanks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputRowRanks.GetSetSelectedIndex = -1
-        Me.ucrInputRowRanks.IsReadOnly = False
-        Me.ucrInputRowRanks.Location = New System.Drawing.Point(109, 19)
-        Me.ucrInputRowRanks.Name = "ucrInputRowRanks"
-        Me.ucrInputRowRanks.Size = New System.Drawing.Size(66, 21)
-        Me.ucrInputRowRanks.TabIndex = 15
-        '
-        'ucrInputType
-        '
-        Me.ucrInputType.AddQuotesIfUnrecognised = True
-        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputType.GetSetSelectedIndex = -1
-        Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(212, 47)
-        Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(79, 21)
-        Me.ucrInputType.TabIndex = 14
-        '
-        'ucrChkType
-        '
-        Me.ucrChkType.AutoSize = True
-        Me.ucrChkType.Checked = False
-        Me.ucrChkType.Location = New System.Drawing.Point(157, 48)
-        Me.ucrChkType.Name = "ucrChkType"
-        Me.ucrChkType.Size = New System.Drawing.Size(82, 23)
-        Me.ucrChkType.TabIndex = 13
-        '
-        'ucrChkRowRanks
-        '
-        Me.ucrChkRowRanks.AutoSize = True
-        Me.ucrChkRowRanks.Checked = False
-        Me.ucrChkRowRanks.Location = New System.Drawing.Point(66, 21)
-        Me.ucrChkRowRanks.Name = "ucrChkRowRanks"
-        Me.ucrChkRowRanks.Size = New System.Drawing.Size(75, 23)
-        Me.ucrChkRowRanks.TabIndex = 12
-        '
-        'ucrInputProbability
-        '
-        Me.ucrInputProbability.AddQuotesIfUnrecognised = True
-        Me.ucrInputProbability.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputProbability.GetSetSelectedIndex = -1
-        Me.ucrInputProbability.IsReadOnly = False
-        Me.ucrInputProbability.Location = New System.Drawing.Point(73, 47)
-        Me.ucrInputProbability.Name = "ucrInputProbability"
-        Me.ucrInputProbability.Size = New System.Drawing.Size(77, 21)
-        Me.ucrInputProbability.TabIndex = 10
-        '
-        'ucrPnlMultipleRowSummary
-        '
-        Me.ucrPnlMultipleRowSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMultipleRowSummary.Location = New System.Drawing.Point(4, 14)
-        Me.ucrPnlMultipleRowSummary.Name = "ucrPnlMultipleRowSummary"
-        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(307, 57)
-        Me.ucrPnlMultipleRowSummary.TabIndex = 0
-        '
-        'ucrInputUserDefined
-        '
-        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
-        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
-        Me.ucrInputUserDefined.IsReadOnly = False
-        Me.ucrInputUserDefined.Location = New System.Drawing.Point(317, 41)
-        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
-        Me.ucrInputUserDefined.Size = New System.Drawing.Size(125, 25)
-        Me.ucrInputUserDefined.TabIndex = 10
-        '
-        'ucrPnlStatistics
-        '
-        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
-        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
-        Me.ucrPnlStatistics.Size = New System.Drawing.Size(444, 52)
-        Me.ucrPnlStatistics.TabIndex = 0
-        '
         'dlgRowSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(470, 433)
-        Me.Controls.Add(Me.lblSelectedVariablesMultiple)
-        Me.Controls.Add(Me.ucrReceiverForMultipleRowSummaries)
+        Me.ClientSize = New System.Drawing.Size(470, 414)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.rdoMultiple)
@@ -568,8 +540,6 @@ Partial Class dlgRowSummary
     Friend WithEvents rdoRowRange As RadioButton
     Friend WithEvents ucrPnlMultipleRowSummary As UcrPanel
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
-    Friend WithEvents ucrReceiverForMultipleRowSummaries As ucrReceiverMultiple
-    Friend WithEvents lblSelectedVariablesMultiple As Label
     Friend WithEvents ucrInputRowRanks As ucrInputComboBox
     Friend WithEvents ucrInputType As ucrInputComboBox
     Friend WithEvents ucrChkType As ucrCheck
