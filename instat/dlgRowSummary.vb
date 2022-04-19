@@ -128,8 +128,8 @@ Public Class dlgRowSummary
         ucrPnlStatistics.AddFunctionNamesCondition(rdoStandardDeviation, "Standard_deviation")
         ucrPnlStatistics.AddFunctionNamesCondition(rdoMaximum, "Maximum")
         ucrPnlStatistics.AddFunctionNamesCondition(rdoCount, "Count")
-        ucrPnlStatistics.AddFunctionNamesCondition(rdoMore, {"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean, trim=0.2",
-                                     "mfv", "mfv1", "quantile, probs=0.5", "skewness"})
+        ucrPnlStatistics.AddFunctionNamesCondition(rdoMore, {"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis",
+                                                   "mad", "mc", "mean, trim=0.2", "mfv1", "quantile, probs=0.5", "skewness"})
 
         ucrPnlMultipleRowSummary.AddRadioButton(rdoRowRanks)
         ucrPnlMultipleRowSummary.AddRadioButton(rdoRowRange)
@@ -154,7 +154,7 @@ Public Class dlgRowSummary
                                         bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="7")
         'ucrInputUserDefined
         ucrInputUserDefined.SetItems({"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean, trim=0.2",
-                                     "mfv", "mfv1", "quantile, probs=0.5", "skewness"})
+                                     "mfv1", "quantile, probs=0.5", "skewness"})
 
         ucrNewDataFrameName.SetPrefix("row_summary")
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
@@ -253,8 +253,6 @@ Public Class dlgRowSummary
         clsMcFunction.SetRCommand("mc")
         clsTrimmedMeanFunction.SetRCommand("mean")
         clsTrimmedMeanFunction.AddParameter("trim", "0.2", iPosition:=1)
-        clsMfvFunction.SetPackageName("statip")
-        clsMfvFunction.SetRCommand("mfv")
         clsMfv1Function.SetPackageName("statip")
         clsMfv1Function.SetRCommand("mfv1")
         clsQuantileFunction.SetRCommand("quantile")
@@ -309,10 +307,9 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMadFunction, New RParameter("mad", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMcFunction, New RParameter("mc", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsTrimmedMeanFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfvFunction, New RParameter("mfv", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfv1Function, New RParameter("mfv1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsSkewnessFunction, New RParameter("skewness", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=21)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfv1Function, New RParameter("mfv1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsSkewnessFunction, New RParameter("skewness", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsSumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsStandardDeviationFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=2)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMinimumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=3)
@@ -367,7 +364,6 @@ Public Class dlgRowSummary
             clsMutateFunction.RemoveParameterByName("mad")
             clsMutateFunction.RemoveParameterByName("mc")
             clsMutateFunction.RemoveParameterByName("mean")
-            clsMutateFunction.RemoveParameterByName("mfv")
             clsMutateFunction.RemoveParameterByName("mfv1")
             clsMutateFunction.RemoveParameterByName("quantile")
             clsMutateFunction.RemoveParameterByName("skewness")
@@ -414,8 +410,6 @@ Public Class dlgRowSummary
                         clsMutateFunction.AddParameter("mc", clsRFunctionParameter:=clsMcFunction, iPosition:=0)
                     Case "mean, trim=0.2"
                         clsMutateFunction.AddParameter("mean", clsRFunctionParameter:=clsTrimmedMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
-                    Case "mfv"
-                        clsMutateFunction.AddParameter("mfv", clsRFunctionParameter:=clsMfvFunction, iPosition:=0)
                     Case "mfv1"
                         clsMutateFunction.AddParameter("mfv1", clsRFunctionParameter:=clsMfv1Function, iPosition:=0)
                     Case "quantile, probs=0.5"
