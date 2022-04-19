@@ -22,7 +22,8 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate As New RFunction
+    Private clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction, clsDummyFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -154,8 +155,10 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetIsComboBox()
 
-        ucrChkTwoDigitYear.SetParameter(New RParameter("year_format", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "%y" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "%Y" & Chr(34))
         ucrChkTwoDigitYear.SetText("2-digit years")
+        ucrChkTwoDigitYear.SetParameter(New RParameter("check", 0))
+        ucrChkTwoDigitYear.AddParameterValuesCondition(True, "check", "TRUE")
+        ucrChkTwoDigitYear.AddParameterValuesCondition(False, "check", "FALSE")
         ucrChkTwoDigitYear.AddToLinkedControls(ucrNudCutoff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="30")
         ucrNudCutoff.SetParameter(New RParameter("base", 3))
         ucrNudCutoff.SetLinkedDisplayControl(lblCutOffTwo)
@@ -291,6 +294,7 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay = New RFunction
         clsDivisionOperator = New ROperator
         clsMultiplicationOperator = New ROperator
+        clsDummyFunction = New RFunction
 
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
@@ -298,7 +302,8 @@ Public Class dlgMakeDate
         ucrInputOrigin.Reset()
 
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
-        clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
+
+        clsDummyFunction.AddParameter("check", "FALSE", iPosition:=0)
 
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
         clsMakeYearMonthDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
@@ -342,7 +347,7 @@ Public Class dlgMakeDate
         ucrInputYearOption.SetRCode(clsMakeYearMonthDay, bReset)
 
         ucrInputComboBoxMonthTwo.SetRCode(clsMakeYearDay, bReset)
-        ucrChkTwoDigitYear.SetRCode(clsMakeYearDay, bReset)
+        ucrChkTwoDigitYear.SetRCode(clsDummyFunction, bReset)
         ucrNudCutoff.SetRCode(clsMakeYearDay, bReset)
 
         ucrPnlFormat.SetRCode(clsDateFunction, bReset)
