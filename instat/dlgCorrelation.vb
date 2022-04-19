@@ -151,7 +151,7 @@ Public Class dlgCorrelation
         ucrChkDisplayAsDataFrame.AddParameterValuesCondition(False, "display_as_dataframe", "False")
         ucrChkDisplayAsDataFrame.AddParameterValuesCondition(True, "display_as_dataframe", "True")
         ucrChkDisplayAsDataFrame.AddToLinkedControls(ucrSaveFashionDataFrame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDisplayAsDataFrame.AddToLinkedControls(ucrSaveFashionModel, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDisplayAsDataFrame.AddToLinkedControls(ucrSaveFashionModel, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrSaveCorrelationTest, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFirstColumn.SetLinkedDisplayControl(lblFirstColumn)
@@ -176,12 +176,12 @@ Public Class dlgCorrelation
         ucrSaveCorrelationTest.SetIsComboBox()
         ucrSaveCorrelationTest.SetAssignToIfUncheckedValue("last_correlation")
 
-        ucrSaveCorrelation.SetPrefix("my_corr")
+        'ucrSaveCorrelation.SetPrefix("my_corr")
         ucrSaveCorrelation.SetSaveTypeAsModel()
         ucrSaveCorrelation.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveCorrelation.SetCheckBoxText("Result Name")
         ucrSaveCorrelation.SetIsComboBox()
-        ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_correlation")
+        'ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_correlation")
 
         ucrSaveFashionModel.SetPrefix("my_corr")
         ucrSaveFashionModel.SetSaveTypeAsModel()
@@ -302,8 +302,8 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
-        clsFashionFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
-        clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
+        'clsFashionFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
+        clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -479,7 +479,7 @@ Public Class dlgCorrelation
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
             grpDisplayOptions.Hide()
-            clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
+            clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
         End If
         'If ucrChkDisplayAsDataFrame.Checked Then
         '    clsDummyFunction.AddParameter("display_as_dataframe", "True", iPosition:=1)
