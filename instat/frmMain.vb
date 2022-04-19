@@ -646,10 +646,6 @@ Public Class frmMain
         dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
-        dlgViewFactorLabels.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
@@ -2430,5 +2426,9 @@ Public Class frmMain
 
     Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
         dlgMergeAdditionalData.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataViewDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataViewDeleteLabels.Click
+        dlgViewFactorLabels.ShowDialog()
     End Sub
 End Class
