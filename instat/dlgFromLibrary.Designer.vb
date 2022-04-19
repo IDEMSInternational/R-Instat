@@ -201,7 +201,9 @@ Partial Class dlgFromLibrary
         Me.MinimizeBox = False
         Me.Name = "dlgFromLibrary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Import from Library"
         Me.Text = "Import From Library"
+
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

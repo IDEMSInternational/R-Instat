@@ -158,15 +158,19 @@ Public Class dlgClimaticCheckDataTemperature
         'Range Option
         ucrInputRangeElement1Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrInputRangeElement1Min.SetValidationTypeAsNumeric(dcmMin:=-35.0, dcmMax:=65.0)
+        ucrInputRangeElement1Min.AddQuotesIfUnrecognised = False
 
         ucrInputRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrInputRangeElement1Max.SetValidationTypeAsNumeric(dcmMin:=-35.0, dcmMax:=65.0)
+        ucrInputRangeElement1Max.AddQuotesIfUnrecognised = False
 
         ucrInputRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
         ucrInputRangeElement2Min.SetValidationTypeAsNumeric(dcmMin:=-50.0, dcmMax:=40.0)
+        ucrInputRangeElement2Min.AddQuotesIfUnrecognised = False
 
         ucrInputRangeElement2Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
         ucrInputRangeElement2Max.SetValidationTypeAsNumeric(dcmMin:=-50.0, dcmMax:=40.0)
+        ucrInputRangeElement2Max.AddQuotesIfUnrecognised = False
 
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))

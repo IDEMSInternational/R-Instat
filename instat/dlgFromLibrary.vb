@@ -326,4 +326,9 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
+    Private Sub lstCollection_DoubleClick(sender As Object, e As EventArgs) Handles lstCollection.DoubleClick
+        If ucrBase.cmdOk.Enabled Then
+            ucrBase.cmdOk.PerformClick()
+        End If
+    End Sub
 End Class

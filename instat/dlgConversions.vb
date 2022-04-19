@@ -356,9 +356,9 @@ Public Class dlgConversions
                 ucrReceiverLetters.SetMeAsReceiver()
             End If
             If Not ucrReceiverLetters.IsEmpty Then
-                    clsConvertToDegreeFunction.AddParameter("dir", clsRFunctionParameter:=clsGetDirVariable, iPosition:=3)
-                End If
+                clsConvertToDegreeFunction.AddParameter("dir", clsRFunctionParameter:=clsGetDirVariable, iPosition:=3)
             End If
+        End If
         ChangeParameter()
     End Sub
 
