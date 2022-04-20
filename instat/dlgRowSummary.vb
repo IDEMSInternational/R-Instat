@@ -56,23 +56,23 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.SetMeAsReceiver()
         ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
         ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
-        ucrReceiverForRowSummaries.bUseFilteredData = False
+        ucrReceiverForRowSummaries.bUseFilteredData = True
         ucrReceiverForRowSummaries.bForceAsDataFrame = False
         ucrReceiverForRowSummaries.SetParameterIsString()
         ucrReceiverForRowSummaries.bWithQuotes = False
 
-        ucrChkRowRanks.SetText("Ties")
-        ucrChkRowRanks.AddParameterPresentCondition(True, "ties.method", True)
-        ucrChkRowRanks.AddParameterPresentCondition(False, "ties.method", False)
+        ucrChkTiesMethod.AddParameterPresentCondition(True, "ties.method", True)
+        ucrChkTiesMethod.AddParameterPresentCondition(False, "ties.method", False)
+        ucrChkTiesMethod.SetText("Ties method")
 
-        ucrInputRowRanks.SetParameter(New RParameter("ties.method", 2))
+        ucrInputTiesMethod.SetParameter(New RParameter("ties.method", 2))
         dctTiesValues.Add("average", Chr(34) & "average" & Chr(34))
         dctTiesValues.Add("first", Chr(34) & "first" & Chr(34))
         dctTiesValues.Add("last", Chr(34) & "last" & Chr(34))
         dctTiesValues.Add("max", Chr(34) & "max" & Chr(34))
         dctTiesValues.Add("min", Chr(34) & "min" & Chr(34))
-        ucrInputRowRanks.SetItems(dctTiesValues)
-        ucrInputRowRanks.bAllowNonConditionValues = True
+        ucrInputTiesMethod.SetItems(dctTiesValues)
+        ucrInputTiesMethod.bAllowNonConditionValues = True
 
         'function ran here is probs = c(VALUES)
         ucrInputProbability.SetParameter(New RParameter("p", 1, bNewIncludeArgumentName:=False))
@@ -140,7 +140,7 @@ Public Class dlgRowSummary
 
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMultipleRowSummary.AddToLinkedControls(ucrChkRowRanks, {rdoRowRanks}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMultipleRowSummary.AddToLinkedControls(ucrChkTiesMethod, {rdoRowRanks}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMultipleRowSummary.AddToLinkedControls({ucrInputProbability, ucrChkType}, {rdoRowQuantile}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRowSummaries.AddToLinkedControls(ucrPnlStatistics, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlRowSummaries.AddToLinkedControls(ucrPnlMultipleRowSummary, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
@@ -148,7 +148,7 @@ Public Class dlgRowSummary
         ucrPnlStatistics.SetLinkedDisplayControl(grpStatistic)
         ucrPnlMultipleRowSummary.SetLinkedDisplayControl(grpMultipleRowSummary)
 
-        ucrChkRowRanks.AddToLinkedControls({ucrInputRowRanks}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True,
+        ucrChkTiesMethod.AddToLinkedControls({ucrInputTiesMethod}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True,
                            bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="average")
         ucrChkType.AddToLinkedControls({ucrInputType}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True,
                                         bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="7")
@@ -317,7 +317,7 @@ Public Class dlgRowSummary
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMedianFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=5)
         ucrSaveNewDataFrame.AddAdditionalRCode(clsRowRangesFunction, iAdditionalPairNo:=1)
         ucrSaveNewDataFrame.AddAdditionalRCode(clsRowQuantilesFunction, iAdditionalPairNo:=2)
-        ucrChkRowRanks.SetRCode(clsRowRanksFunction, bReset)
+        ucrChkTiesMethod.SetRCode(clsRowRanksFunction, bReset)
         ucrChkType.SetRCode(clsRowQuantilesFunction, bReset)
         ucrChkIgnoreMissingValues.SetRCode(clsMeanFunction, bReset)
         ucrReceiverForRowSummaries.SetRCode(clsMeanFunction, bReset)
@@ -453,8 +453,8 @@ Public Class dlgRowSummary
         clsRowQuantilesFunction.AddParameter("probs", "c(" & ucrInputProbability.GetText & ")", iPosition:=1)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged, ucrChkRowRanks.ControlContentsChanged,
-        ucrChkType.ControlContentsChanged, ucrInputProbability.ControlContentsChanged, ucrInputRowRanks.ControlContentsChanged, ucrInputType.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged, ucrChkTiesMethod.ControlContentsChanged,
+        ucrChkType.ControlContentsChanged, ucrInputProbability.ControlContentsChanged, ucrInputTiesMethod.ControlContentsChanged, ucrInputType.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
