@@ -67,7 +67,6 @@ Public Class ucrSelector
         If bFirstLoad Then
             bFirstLoad = False
         End If
-        LoadList()
     End Sub
 
     Protected Sub OnResetAll()
@@ -107,27 +106,81 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
-        Dim strExclud As String() = Nothing
+        Dim arrStrExclud As String() = Nothing
         Dim strCurrentType As String
-        If CurrentReceiver IsNot Nothing Then
-            lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
-            If CurrentReceiver.bExcludeFromSelector Then
-                strExclud = GetVariablesInReceiver().ToArray
-            End If
-            If CurrentReceiver.bTypeSet Then
-                strCurrentType = CurrentReceiver.GetItemType()
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
-            Else
-                strCurrentType = strType
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
-            End If
-            EnableDataOptions(strCurrentType)
-            'Removed as probably don't need to load when no current receiver
-            'Else
-            'frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
+        Dim strNewSelectorFillCondition As String
+
+        'no need to load elements if receiver is nothing
+        If CurrentReceiver Is Nothing Then
+            Exit Sub
         End If
+
+        lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
+        If CurrentReceiver.bExcludeFromSelector Then
+            arrStrExclud = GetVariablesInReceiver().ToArray
+        End If
+
+        'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
+        strCurrentType = If(CurrentReceiver.bTypeSet, CurrentReceiver.GetItemType(), strType)
+
+        'holds the selector's list view 'fill conditions'
+        'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
+        Static _strCurrentSelectorFillCondition As String = ""
+
+        'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
+        'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
+        'this makes refilling of the listview unnecessarily slow, especially for wide data sets (see comments in issue #7162)
+        'long term fix is to find out how the repeated calls to LoadList() can be omitted
+        strNewSelectorFillCondition = GetSelectorFillCondition(lstAvailableVariable.Items.Count, strElementType:=strCurrentType, lstCombinedMetadataLists:=lstCombinedMetadataLists, strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, arrStrExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+        If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
+            Exit Sub
+        End If
+        _strCurrentSelectorFillCondition = strNewSelectorFillCondition
+        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+        EnableDataOptions(strCurrentType)
+
     End Sub
 
+    Private Function GetSelectorFillCondition(iCurrentElementNum As Integer, strElementType As String, lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))), strHeading As String, strDataFrameName As String, arrStrExcludedItems As String(), strDatabaseQuery As String, strNcFilePath As String)
+        Dim strSelectorFillCondition As String
+
+        strSelectorFillCondition = iCurrentElementNum
+
+        If Not String.IsNullOrEmpty(strElementType) Then
+            strSelectorFillCondition &= strElementType
+        End If
+
+        If Not String.IsNullOrEmpty(strHeading) Then
+            strSelectorFillCondition &= strHeading
+        End If
+
+        If Not String.IsNullOrEmpty(strDataFrameName) Then
+            strSelectorFillCondition &= strDataFrameName
+        End If
+
+        If Not String.IsNullOrEmpty(strDatabaseQuery) Then
+            strSelectorFillCondition &= strDatabaseQuery
+        End If
+
+        If Not String.IsNullOrEmpty(strNcFilePath) Then
+            strSelectorFillCondition &= strNcFilePath
+        End If
+
+        If arrStrExcludedItems IsNot Nothing Then
+            strSelectorFillCondition &= String.Join("", arrStrExcludedItems)
+        End If
+
+        If lstCombinedMetadataLists IsNot Nothing Then
+            For i As Integer = 0 To i < lstCombinedMetadataLists.Count - 1
+                For i2 As Integer = 0 To lstCombinedMetadataLists(i).Count
+                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(i).Item(i2).Key
+                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(i).Item(i2).Value)
+                Next
+            Next
+        End If
+
+        Return strSelectorFillCondition
+    End Function
     Private Function GetVariablesInReceiver() As List(Of String)
         Dim lstVars As New List(Of String)
 
