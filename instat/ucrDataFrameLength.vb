@@ -26,7 +26,12 @@ Public Class ucrDataFrameLength
     ''' </summary>
     Private Sub SetDataFrameLength()
         If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
-            txtInput.Text = frmMain.clsRLink.GetDataFrameLength(ucrDataFrameSelector.cboAvailableDataFrames.Text)
+            'txtInput.Text = frmMain.clsRLink.GetDataFrameLength(ucrDataFrameSelector.cboAvailableDataFrames.Text)
+            'was not preferred. Setting txtInput.Text property raises TextChanged event of the ucrInputTextBox (this control's parent)
+            'However that event doesn't raise ControlValueChanged which is required for the parameter values to be updated
+            'see issue #7367 for more information
+            'so use SetName(). Also raises ControlValueChanged needed to update the paramete values
+            SetName(frmMain.clsRLink.GetDataFrameLength(ucrDataFrameSelector.cboAvailableDataFrames.Text))
         End If
     End Sub
 
