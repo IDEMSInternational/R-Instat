@@ -178,10 +178,12 @@ Public Class dlgCorrelation
         ucrSaveCorrelationTest.SetIsComboBox()
         ucrSaveCorrelationTest.SetAssignToIfUncheckedValue("last_correlation")
 
+        ucrSaveCorrelation.SetPrefix("my_corr")
         ucrSaveCorrelation.SetSaveTypeAsModel()
         ucrSaveCorrelation.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveCorrelation.SetCheckBoxText("Result Name")
         ucrSaveCorrelation.SetIsComboBox()
+        ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_correlation")
 
         ucrSaveFashionModel.SetPrefix("my_corr")
         ucrSaveFashionModel.SetSaveTypeAsModel()
@@ -307,7 +309,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
-        clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
+        'clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -459,10 +461,10 @@ Public Class dlgCorrelation
             Else
                 clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
             End If
-            clsCorrelationFunction.RemoveAssignTo()
+            'clsCorrelationFunction.RemoveAssignTo()
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
-            clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
+            'clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
         End If
     End Sub
 
