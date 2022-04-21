@@ -212,10 +212,10 @@ Public Class ucrFactor
         _ucrLinkedReceiver = ucrLinkedReceiver
 
         'if nothing then just initialise with empty collections
-        _dctParamAndColNames = If(dctParamAndColNames Is Nothing, New Dictionary(Of String, String), dctParamAndColNames)
-        _hiddenColNames = New HashSet(Of String)(If(hiddenColNames Is Nothing, {}, hiddenColNames))
-        _extraColNames = New HashSet(Of String)(If(extraColNames Is Nothing, {}, extraColNames))
-        _editableColNames = New HashSet(Of String)(If(editableColNames Is Nothing, {}, editableColNames))
+        _dctParamAndColNames = If(dctParamAndColNames, New Dictionary(Of String, String))
+        _hiddenColNames = New HashSet(Of String)(If(hiddenColNames, {}))
+        _extraColNames = New HashSet(Of String)(If(extraColNames, {}))
+        _editableColNames = New HashSet(Of String)(If(editableColNames, {}))
         _bIncludeNALevel = bIncludeNALevel
         FillGridWithNewDataSheet()
     End Sub
