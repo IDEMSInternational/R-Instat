@@ -27,7 +27,7 @@ Imports unvell.ReoGrid.Events
 ''' the parameters will have a list of the entire values of the column regardless of whether
 ''' the values were edit or not.
 ''' Reading R parameters will fail if new level created was no submitted to R</para>
-''' <para>In Selector satet mode, if set to internally write to parameters, 
+''' <para>In Selector state mode, if set to internally write to parameters, 
 ''' the parameters will have a list of the selected values</para>
 ''' </summary>
 Public Class ucrFactor
@@ -64,17 +64,17 @@ Public Class ucrFactor
     ''' <summary>
     ''' holds all column names to be set as editable in the grid sheet after filling the metadata
     ''' </summary>
-    Private _editableColNames As IEnumerable(Of String) = {}
+    Private _editableColNames As New HashSet(Of String)
 
     ''' <summary>
     ''' holds column names to be hidden in the grid sheet after filling the metadata
     ''' </summary>
-    Private _hiddenColNames As IEnumerable(Of String) = {}
+    Private _hiddenColNames As New HashSet(Of String)
 
     ''' <summary>
     ''' holds extra column names that will be added to the sheet after filling the metadata
     ''' </summary>
-    Private _extraColNames As IEnumerable(Of String) = {}
+    Private _extraColNames As New HashSet(Of String)
 
     ''' <summary>
     ''' holds parameter names and column names associated with them
@@ -108,19 +108,23 @@ Public Class ucrFactor
         '------------------
 
         ''' <summary>
-        ''' used to represent the ordinal column from R
+        ''' <par>Used to represent the ordinal column from R.</par>
+        ''' <par>It's always added in the grid</par> 
         ''' </summary>
         Public Const Ordinal As String = "Ord."
         ''' <summary>
         ''' used to represent "Level" column name from R
+        ''' <par>It's always added in the grid</par>
         ''' </summary>
         Public Const Level As String = "Level"
         ''' <summary>
         ''' used to represent "Label" column name from R
+        ''' <par>It's always added in the grid</par>
         ''' </summary>
         Public Const Label As String = "Label"
         ''' <summary>
         ''' used to represent "Freq" column name from R
+        ''' <par>It's always added in the grid</par>
         ''' </summary>
         Public Const Freq As String = "Freq"
 
@@ -128,6 +132,7 @@ Public Class ucrFactor
         ''' used to represent "Selector" column name 
         ''' this column is added internally when the control is used as a 'selector' 
         ''' it does not come from R. 
+        ''' <par>It's added in the grid if the control is used as a selector</par>
         ''' </summary>
         Public Const SelectorColumn As String = "Select"
     End Structure
@@ -208,22 +213,22 @@ Public Class ucrFactor
 
         'if nothing then just initialise with empty collections
         _dctParamAndColNames = If(dctParamAndColNames Is Nothing, New Dictionary(Of String, String), dctParamAndColNames)
-        _hiddenColNames = If(hiddenColNames Is Nothing, {}, hiddenColNames)
-        _extraColNames = If(extraColNames Is Nothing, {}, extraColNames)
-        _editableColNames = If(editableColNames Is Nothing, {}, editableColNames)
+        _hiddenColNames = New HashSet(Of String)(If(hiddenColNames Is Nothing, {}, hiddenColNames.Distinct))
+        _extraColNames = New HashSet(Of String)(If(extraColNames Is Nothing, {}, extraColNames.Distinct))
+        _editableColNames = New HashSet(Of String)(If(editableColNames Is Nothing, {}, editableColNames.Distinct))
         _bIncludeNALevel = bIncludeNALevel
 
         'this check is meant to enforce developers use the control correctly
         'remove any column names that may be contained in the sheet by default.
         'column names should be unique
-        Dim lstExtraColNames As List(Of String) = _extraColNames.ToList()
-        lstExtraColNames.RemoveAll(Function(i) {
-                                          DefaultColumnNames.Ordinal,
-                                          DefaultColumnNames.Level,
-                                           DefaultColumnNames.Label,
-                                           DefaultColumnNames.Freq,
-                                           DefaultColumnNames.SelectorColumn}.Contains(i))
-        _extraColNames = lstExtraColNames
+        'Dim lstExtraColNames As List(Of String) = _extraColNames.ToList()
+        'lstExtraColNames.RemoveAll(Function(i) {
+        '                                  DefaultColumnNames.Ordinal,
+        '                                  DefaultColumnNames.Level,
+        '                                   DefaultColumnNames.Label,
+        '                                   DefaultColumnNames.Freq,
+        '                                   DefaultColumnNames.SelectorColumn}.Contains(i))
+        '_extraColNames = lstExtraColNames
 
         FillGridWithNewDataSheet()
     End Sub
@@ -266,7 +271,7 @@ Public Class ucrFactor
 
         Dim lstHiddenColumnsNames As List(Of String) = _hiddenColNames.ToList
         lstHiddenColumnsNames.AddRange(hiddenColNames)
-        _hiddenColNames = lstHiddenColumnsNames.Distinct()
+        _hiddenColNames = New HashSet(Of String)(lstHiddenColumnsNames.Distinct())
 
         For Each strColName As String In _hiddenColNames
             _grdSheet.HideColumns(GetColumnIndex(_grdSheet, strColName), 1)
@@ -286,14 +291,12 @@ Public Class ucrFactor
         'update the list of hidden column names first
         Dim lstHiddenColumnsNames As List(Of String) = _hiddenColNames.ToList
         lstHiddenColumnsNames.RemoveAll(Function(i) showColNames.Contains(i))
-        _hiddenColNames = lstHiddenColumnsNames
-
+        _hiddenColNames = New HashSet(Of String)(lstHiddenColumnsNames)
 
         'then show the column names
         For Each strColName As String In showColNames
             _grdSheet.ShowColumns(GetColumnIndex(_grdSheet, strColName), 1)
         Next
-
     End Sub
 
     Private Sub FillGridWithNewDataSheet()
@@ -413,7 +416,7 @@ Public Class ucrFactor
             grdControl.CurrentWorksheet.AppendColumns(1)
             grdControl.CurrentWorksheet.ColumnHeaders(grdControl.CurrentWorksheet.Columns - 1).Text = strExtraColName
             'create the cells by setting its value.
-            'Very important, without setting the value GetCell and cell value will be nothing
+            'very important, without setting the value GetCell and cell value will be nothing
             For iRowIndex As Integer = 0 To grdControl.CurrentWorksheet.Rows - 1
                 grdControl.CurrentWorksheet(iRowIndex, grdControl.CurrentWorksheet.Columns - 1) = ""
             Next
