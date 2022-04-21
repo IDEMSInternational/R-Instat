@@ -55,7 +55,7 @@ Public Class dlgLabelsLevels
 
         Dim dctParamAndColNames As New Dictionary(Of String, String)
         dctParamAndColNames.Add("new_labels", ucrFactor.DefaultColumnNames.Label)
-        'todo. commented out temporariry
+        'todo. commented out temporarily
         'until when full support of adding or removing specific parameters will be implemented
         'dctParamAndColNames.Add("new_levels", ucrFactor.DefaultColumnNames.Level)
 
