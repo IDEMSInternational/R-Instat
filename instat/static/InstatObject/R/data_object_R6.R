@@ -2324,7 +2324,8 @@ DataSheet$set("public", "has_colours", function(columns) {
 }
 )
 
-DataSheet$set("public", "set_column_colours_by_metadata", function(columns, property) {
+DataSheet$set("public", "set_column_colours_by_metadata", function(data_name, columns, property) {
+if(!missing(data_name) && missing(columns)) columns <- names(self$get_data_frame(data_name = data_name))
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   
