@@ -510,7 +510,7 @@ Public Class ucrFactor
             For iRowIndex As Integer = 0 To grdSheet.Rows - 1
                 'create the cell first by setting its value
                 grdSheet(iRowIndex, iSelectorColIndex) = False
-                'then cet the body to be a radio button 
+                'then set the body to be a radio button 
                 Dim radioButtonCell As New unvell.ReoGrid.CellTypes.RadioButtonCell
                 'setting radio button group ensures that only 1 radio button is selectable 
                 radioButtonCell.RadioGroup = radioButtonGroup
