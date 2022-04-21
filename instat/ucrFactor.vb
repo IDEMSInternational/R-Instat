@@ -304,7 +304,7 @@ Public Class ucrFactor
 
         'check for linked receiver and empty receiver contents
         'also check column type of the receiver if it is a factor.
-        'the alternative way of getting the column type is by calling (left here for later reference)
+        'the alternative way of getting the column type is by calling (todo left here for later reference)
         'frmMain.clsRLink.GetColumnType(_ucrLinkedReceiver.GetDataName(), _ucrLinkedReceiver.GetVariableNames(bWithQuotes:=False))
         'Note contains() check allows ordered factors to be included
         If _ucrLinkedReceiver Is Nothing OrElse _ucrLinkedReceiver.IsEmpty() OrElse
