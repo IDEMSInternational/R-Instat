@@ -236,6 +236,9 @@ Public Class dlgRegularSequence
     ''' Also gives feedback on whether the sequence will be truncated or extended
     ''' </summary>
     Private Sub PreviewSequence()
+        If ucrChkPreview.Checked = False Then
+            Exit Sub
+        End If
         Try
             Dim clsNewRepClone As RFunction
             Dim clsAsCharacter As New RFunction
@@ -331,5 +334,6 @@ Public Class dlgRegularSequence
             lblPreview.Visible = False
             lblMessage.Visible = False
         End If
+        PreviewSequence()
     End Sub
 End Class
