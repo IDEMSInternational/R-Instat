@@ -103,7 +103,7 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.SetRCode(clsViewLabelsFunction, bReset)
         ucrReceiverLabels.SetRCode(clsViewLabelsFunction, bReset)
 
-        'todo. commented out temporariry
+        'todo. commented out temporarily
         'until when full support of adding or removing specific parameters will be implemented
         'ucrFactorLabels.AddAdditionalCodeParameterPair(clsViewLabelsFunction, New RParameter("new_levels", 1), iAdditionalPairNo:=1)
         ucrFactorLabels.SetRCode(clsViewLabelsFunction, bReset)
