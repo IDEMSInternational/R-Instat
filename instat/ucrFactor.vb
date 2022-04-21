@@ -359,7 +359,7 @@ Public Class ucrFactor
         'ucrFilter control implementation forced this line addition
         'for some reason when ucrFactor.Visible = True is called when 
         '_grdSheet = Nothing, then the reogrid throws a visbility error.
-        'removal of this Visibility setting can removed once ucrFilter has been fully refactored
+        'todo removal of this Visibility setting can removed once ucrFilter has been fully refactored
         grdFactorData.Visible = False
     End Sub
 
