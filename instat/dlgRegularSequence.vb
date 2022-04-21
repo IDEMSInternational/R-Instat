@@ -325,15 +325,9 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub ucrChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreview.ControlValueChanged
-        If ucrChkPreview.Checked Then
-            txtPreview.Visible = True
-            lblPreview.Visible = True
-            lblMessage.Visible = True
-        Else
-            txtPreview.Visible = False
-            lblPreview.Visible = False
-            lblMessage.Visible = False
-        End If
+        txtPreview.Visible = ucrChkPreview.Checked
+        lblPreview.Visible = ucrChkPreview.Checked
+        lblMessage.Visible = ucrChkPreview.Checked
         PreviewSequence()
     End Sub
 End Class
