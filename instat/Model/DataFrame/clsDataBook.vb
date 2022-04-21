@@ -108,7 +108,7 @@ Public Class clsDataBook
     ''' Updates all the dataframes and metadata where the data has changed
     ''' </summary>
     Public Sub RefreshData()
-        'if no R Instant object exists then just clear all data frames in the databook
+        'if no R Instat object exists then just clear all data frames in the databook
         'and refresh the data frame metadata from R
         If Not _RLink.bInstatObjectExists Then
             _lstDataFrames.Clear()
