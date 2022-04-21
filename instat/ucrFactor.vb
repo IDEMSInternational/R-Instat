@@ -225,11 +225,7 @@ Public Class ucrFactor
                                            DefaultColumnNames.SelectorColumn}.Contains(i))
         _extraColNames = lstExtraColNames
 
-        'todo. do further a developer check??
-        'for instance  parameter column names must be in overall paremeter list
-        'else throw a develper error 
         FillGridWithNewDataSheet()
-        'OnControlValueChanged()
     End Sub
 
     Public Sub SetAsNormalGridColumn(ucrLinkedReceiver As ucrReceiverSingle,
@@ -301,7 +297,6 @@ Public Class ucrFactor
     End Sub
 
     Private Sub FillGridWithNewDataSheet()
-
         'check for linked receiver and empty receiver contents
         'also check column type of the receiver if it is a factor.
         'the alternative way of getting the column type is by calling (todo left here for later reference)
@@ -364,9 +359,9 @@ Public Class ucrFactor
     End Sub
 
     ''' <summary>
-    ''' creates a new worksheet add adds it to the grid control
-    ''' fills the new worksheet with the factor variable metadata 
-    ''' applies the appropriate settings to the worksheet
+    ''' <para>Creates a new worksheet add adds it to the grid control</para>
+    ''' <para>Fills the new worksheet with the factor variable metadata</para> 
+    ''' <para>Applies the appropriate settings to the worksheet</para>
     ''' </summary>
     ''' <param name="grdControl"></param>
     ''' <param name="strDataFrameName"></param>
@@ -389,16 +384,16 @@ Public Class ucrFactor
 
         'get the factor metadata from R
         Dim expDataFrame As SymbolicExpression
-        Dim clsConvertToCharacter As New RFunction
-        Dim clsRFunctionGetFactorData As New RFunction
+        Dim clsConvertToCharFunction As New RFunction
+        Dim clsGetFactorDataFunction As New RFunction
 
-        clsRFunctionGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
-        clsRFunctionGetFactorData.AddParameter("data_name", strDataFrameName)
-        clsRFunctionGetFactorData.AddParameter("col_name", strFactorVariableName)
-        clsRFunctionGetFactorData.AddParameter("include_NA_level", If(bIncludeNALevel, "TRUE", "FALSE"))
-        clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
-        clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsRFunctionGetFactorData)
-        expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript(), bSilent:=True)
+        clsGetFactorDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
+        clsGetFactorDataFunction.AddParameter("data_name", strDataFrameName)
+        clsGetFactorDataFunction.AddParameter("col_name", strFactorVariableName)
+        clsGetFactorDataFunction.AddParameter("include_NA_level", If(bIncludeNALevel, "TRUE", "FALSE"))
+        clsConvertToCharFunction.SetRCommand("convert_to_character_matrix")
+        clsConvertToCharFunction.AddParameter("data", clsRFunctionParameter:=clsGetFactorDataFunction)
+        expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharFunction.ToScript(), bSilent:=True)
 
         If expDataFrame Is Nothing OrElse expDataFrame.Type = Internals.SymbolicExpressionType.Null Then
             Return False

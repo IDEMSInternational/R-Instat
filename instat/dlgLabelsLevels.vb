@@ -149,13 +149,12 @@ Public Class dlgLabelsLevels
     End Sub
 
     Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
-
         'check if the variable selected has value labels.
         'If it has then disable ucrChkIncludeLevelNumbers and set it as checked
-        'because it already has level number, so just show avail them to user
+        'because it already has level number, so just show them to user
         ucrChkIncludeLevelNumbers.Checked = frmMain.clsRLink.IsVariablesMetadata(
                 ucrReceiverLabels.GetDataName(), "labels", ucrReceiverLabels.GetVariableNames(False))
-        ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked        
+        ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked
     End Sub
 
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
