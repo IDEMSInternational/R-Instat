@@ -213,23 +213,10 @@ Public Class ucrFactor
 
         'if nothing then just initialise with empty collections
         _dctParamAndColNames = If(dctParamAndColNames Is Nothing, New Dictionary(Of String, String), dctParamAndColNames)
-        _hiddenColNames = New HashSet(Of String)(If(hiddenColNames Is Nothing, {}, hiddenColNames.Distinct))
-        _extraColNames = New HashSet(Of String)(If(extraColNames Is Nothing, {}, extraColNames.Distinct))
-        _editableColNames = New HashSet(Of String)(If(editableColNames Is Nothing, {}, editableColNames.Distinct))
+        _hiddenColNames = New HashSet(Of String)(If(hiddenColNames Is Nothing, {}, hiddenColNames))
+        _extraColNames = New HashSet(Of String)(If(extraColNames Is Nothing, {}, extraColNames))
+        _editableColNames = New HashSet(Of String)(If(editableColNames Is Nothing, {}, editableColNames))
         _bIncludeNALevel = bIncludeNALevel
-
-        'this check is meant to enforce developers use the control correctly
-        'remove any column names that may be contained in the sheet by default.
-        'column names should be unique
-        'Dim lstExtraColNames As List(Of String) = _extraColNames.ToList()
-        'lstExtraColNames.RemoveAll(Function(i) {
-        '                                  DefaultColumnNames.Ordinal,
-        '                                  DefaultColumnNames.Level,
-        '                                   DefaultColumnNames.Label,
-        '                                   DefaultColumnNames.Freq,
-        '                                   DefaultColumnNames.SelectorColumn}.Contains(i))
-        '_extraColNames = lstExtraColNames
-
         FillGridWithNewDataSheet()
     End Sub
 
@@ -271,7 +258,7 @@ Public Class ucrFactor
 
         Dim lstHiddenColumnsNames As List(Of String) = _hiddenColNames.ToList
         lstHiddenColumnsNames.AddRange(hiddenColNames)
-        _hiddenColNames = New HashSet(Of String)(lstHiddenColumnsNames.Distinct())
+        _hiddenColNames = New HashSet(Of String)(lstHiddenColumnsNames)
 
         For Each strColName As String In _hiddenColNames
             _grdSheet.HideColumns(GetColumnIndex(_grdSheet, strColName), 1)
