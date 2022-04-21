@@ -111,18 +111,10 @@ Public Class dlgLabelsLevels
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso
-            ucrFactorLabels.IsColumnComplete({ucrFactor.DefaultColumnNames.Label}) Then
-
-            If ucrChkIncludeLevelNumbers.Checked AndAlso
-                Not ucrFactorLabels.IsColumnComplete({ucrFactor.DefaultColumnNames.Level}) Then
-                ucrBase.OKEnabled(False)
-            Else
-                ucrBase.OKEnabled(True)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverLabels.IsEmpty() _
+                          AndAlso ucrFactorLabels.IsColumnComplete({ucrFactor.DefaultColumnNames.Label}) _
+                          AndAlso (ucrFactorLabels.IsColumnComplete({ucrFactor.DefaultColumnNames.Level}) _
+                                   OrElse Not ucrChkIncludeLevelNumbers.Checked))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
