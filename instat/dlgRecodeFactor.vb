@@ -249,7 +249,9 @@ Public Class dlgRecodeFactor
                                     ucrFactorGrid.GetCellValues(ucrFactor.DefaultColumnNames.Label, False),
                                     bRaisedControlValueChangedEvent:=False)
     End Sub
+
     Private Sub ucrFactorGrid_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorGrid.ControlValueChanged
+
 
         'remove all the labels parameters
         clsReplaceFunction.ClearParameters()
