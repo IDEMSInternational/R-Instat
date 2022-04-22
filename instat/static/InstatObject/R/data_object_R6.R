@@ -2309,7 +2309,7 @@ DataSheet$set("public", "add_dependent_columns", function(columns, dependent_col
 
 DataSheet$set("public", "set_column_colours", function(columns, colours) {
   if(missing(columns)) columns <- self$get_column_names()
-  #if(length(columns) != length(colours)) stop("columns must be the same length as colours")
+  if(length(columns) != length(colours)) stop("columns must be the same length as colours")
   
   for(i in 1:length(columns)) {
     self$append_to_variables_metadata(columns[i], colour_label, colours[i])
