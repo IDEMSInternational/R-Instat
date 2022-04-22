@@ -29,6 +29,9 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Public Sub InitialiseControls()
+
+        ucrBase.iHelpTopicID = 113
+
         'TODO needs a probs argument
         rdoQme.Enabled = False
         rdoMge.Enabled = bRdoMgeEnabled
