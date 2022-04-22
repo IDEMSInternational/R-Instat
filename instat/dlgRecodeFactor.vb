@@ -26,6 +26,7 @@ Public Class dlgRecodeFactor
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
+    Private Const strNewLabelColName As String = "New Label"
 
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -93,8 +94,8 @@ Public Class dlgRecodeFactor
         ucrInputAddNa.SetParameter(New RParameter("na_level", 1))
 
         ucrFactorGrid.SetAsNormalGridColumn(ucrReceiverFactor,
-                                            extraColNames:={"New Label"},
-                                            editableColNames:={"New Label"},
+                                            extraColNames:={strNewLabelColName},
+                                            editableColNames:={strNewLabelColName},
                                             hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
 
         ucrFactorLevels.SetAsMultipleSelectorGrid(ucrReceiverFactor,
@@ -228,7 +229,7 @@ Public Class dlgRecodeFactor
         ElseIf rdoAddNa.Checked AndAlso Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
             ucrBase.OKEnabled(True)
         ElseIf rdoRecode.Checked Then
-            ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete({"New Label"}))
+            ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete({strNewLabelColName}))
         ElseIf rdoOther.Checked Then
             ucrBase.OKEnabled(ucrFactorLevels.IsAnyGridRowSelected)
         ElseIf rdoLump.Checked Then
@@ -245,7 +246,7 @@ Public Class dlgRecodeFactor
     Private Sub ucrFactorGrid_GridContentReFilledFromR() Handles ucrFactorGrid.GridContentReFilledFromR
         'copy all cell values of the 'Label' column into the 'New Label' column everytime the grid is refilled from R
         'GridContentReFilledFromR event is always followed by ControlValueChanged so no need to raise ControlValueChanged event
-        ucrFactorGrid.SetCellValues("New Label",
+        ucrFactorGrid.SetCellValues(strNewLabelColName,
                                     ucrFactorGrid.GetCellValues(ucrFactor.DefaultColumnNames.Label, False),
                                     bRaisedControlValueChangedEvent:=False)
     End Sub
@@ -256,14 +257,14 @@ Public Class dlgRecodeFactor
         'remove all the labels parameters
         clsReplaceFunction.ClearParameters()
         'if no empty new label. Then add them.
-        If ucrFactorGrid.IsColumnComplete({"New Label"}) Then
+        If ucrFactorGrid.IsColumnComplete({strNewLabelColName}) Then
             Dim lstCurrentLabels As List(Of String)
             Dim lstNewLabels As List(Of String)
 
             'get the current labels without the quotes
             lstCurrentLabels = ucrFactorGrid.GetCellValues(ucrFactor.DefaultColumnNames.Label, False)
             'get the new labels with the quotes
-            lstNewLabels = ucrFactorGrid.GetCellValues("New Label", True)
+            lstNewLabels = ucrFactorGrid.GetCellValues(strNewLabelColName, True)
 
             'add the parameters
             For i = 0 To lstCurrentLabels.Count - 1
