@@ -31,6 +31,9 @@ Public Class sdgWindrose
     End Sub
 
     Public Sub InitialiseControls()
+
+        ucrButtonsSdgWindrose.iHelpTopicID = 116
+
         ucrPnlColourPalette.AddRadioButton(rdoDiverging)
         ucrPnlColourPalette.AddRadioButton(rdoSequential)
         ucrPnlColourPalette.AddRadioButton(rdoQualitative)
