@@ -45,6 +45,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoSortDescending = New System.Windows.Forms.RadioButton()
         Me.rdoSortAscending = New System.Windows.Forms.RadioButton()
         Me.grpboxOptionsforRowNamesorNumbercols = New System.Windows.Forms.GroupBox()
+        Me.ucrChkMakeColumnIntoKey = New instat.ucrCheck()
         Me.ucrChkAsNumeric = New instat.ucrCheck()
         Me.ucrPnlSortOptions = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
@@ -63,13 +64,13 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoCopyRowNamesIntoFirstColumn.Size = New System.Drawing.Size(267, 17)
         Me.rdoCopyRowNamesIntoFirstColumn.TabIndex = 1
         Me.rdoCopyRowNamesIntoFirstColumn.TabStop = True
-        Me.rdoCopyRowNamesIntoFirstColumn.Text = "Copy Row Names into Column"
+        Me.rdoCopyRowNamesIntoFirstColumn.Text = "Copy Row Numbers or Names into a Colum"
         Me.rdoCopyRowNamesIntoFirstColumn.UseVisualStyleBackColor = True
         '
         'rdoSetRowNamesFromColumn
         '
         Me.rdoSetRowNamesFromColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSetRowNamesFromColumn.Location = New System.Drawing.Point(9, 72)
+        Me.rdoSetRowNamesFromColumn.Location = New System.Drawing.Point(9, 88)
         Me.rdoSetRowNamesFromColumn.Name = "rdoSetRowNamesFromColumn"
         Me.rdoSetRowNamesFromColumn.Size = New System.Drawing.Size(267, 17)
         Me.rdoSetRowNamesFromColumn.TabIndex = 3
@@ -80,7 +81,7 @@ Partial Class dlgRowNamesOrNumbers
         'rdoResetintoPositiveIntegers
         '
         Me.rdoResetintoPositiveIntegers.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(9, 127)
+        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(9, 136)
         Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
         Me.rdoResetintoPositiveIntegers.Size = New System.Drawing.Size(267, 17)
         Me.rdoResetintoPositiveIntegers.TabIndex = 5
@@ -91,7 +92,7 @@ Partial Class dlgRowNamesOrNumbers
         'rdoSortbyRowNames
         '
         Me.rdoSortbyRowNames.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSortbyRowNames.Location = New System.Drawing.Point(9, 156)
+        Me.rdoSortbyRowNames.Location = New System.Drawing.Point(9, 158)
         Me.rdoSortbyRowNames.Name = "rdoSortbyRowNames"
         Me.rdoSortbyRowNames.Size = New System.Drawing.Size(267, 17)
         Me.rdoSortbyRowNames.TabIndex = 6
@@ -125,6 +126,7 @@ Partial Class dlgRowNamesOrNumbers
         '
         'grpboxOptionsforRowNamesorNumbercols
         '
+        Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrChkMakeColumnIntoKey)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.ucrChkAsNumeric)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortDescending)
         Me.grpboxOptionsforRowNamesorNumbercols.Controls.Add(Me.rdoSortAscending)
@@ -143,6 +145,15 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
         Me.grpboxOptionsforRowNamesorNumbercols.Text = "Options"
         '
+        'ucrChkMakeColumnIntoKey
+        '
+        Me.ucrChkMakeColumnIntoKey.AutoSize = True
+        Me.ucrChkMakeColumnIntoKey.Checked = False
+        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(8, 64)
+        Me.ucrChkMakeColumnIntoKey.Name = "ucrChkMakeColumnIntoKey"
+        Me.ucrChkMakeColumnIntoKey.Size = New System.Drawing.Size(297, 23)
+        Me.ucrChkMakeColumnIntoKey.TabIndex = 10
+        '
         'ucrChkAsNumeric
         '
         Me.ucrChkAsNumeric.AutoSize = True
@@ -155,15 +166,15 @@ Partial Class dlgRowNamesOrNumbers
         'ucrPnlSortOptions
         '
         Me.ucrPnlSortOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSortOptions.Location = New System.Drawing.Point(7, 171)
+        Me.ucrPnlSortOptions.Location = New System.Drawing.Point(7, 185)
         Me.ucrPnlSortOptions.Name = "ucrPnlSortOptions"
-        Me.ucrPnlSortOptions.Size = New System.Drawing.Size(206, 36)
+        Me.ucrPnlSortOptions.Size = New System.Drawing.Size(206, 22)
         Me.ucrPnlSortOptions.TabIndex = 7
         '
         'ucrNewColumnName
         '
         Me.ucrNewColumnName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(9, 44)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(9, 39)
         Me.ucrNewColumnName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(343, 21)
@@ -173,7 +184,7 @@ Partial Class dlgRowNamesOrNumbers
         '
         Me.ucrReceiverRowNames.AutoSize = True
         Me.ucrReceiverRowNames.frmParent = Me
-        Me.ucrReceiverRowNames.Location = New System.Drawing.Point(24, 92)
+        Me.ucrReceiverRowNames.Location = New System.Drawing.Point(24, 109)
         Me.ucrReceiverRowNames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRowNames.Name = "ucrReceiverRowNames"
         Me.ucrReceiverRowNames.Selector = Nothing
@@ -247,4 +258,5 @@ Partial Class dlgRowNamesOrNumbers
     Friend WithEvents rdoSetRowNamesFromColumn As RadioButton
     Friend WithEvents rdoCopyRowNamesIntoFirstColumn As RadioButton
     Friend WithEvents ucrPnlSortOptions As UcrPanel
+    Friend WithEvents ucrChkMakeColumnIntoKey As ucrCheck
 End Class
