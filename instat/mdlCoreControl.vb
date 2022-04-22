@@ -127,15 +127,13 @@ Module mdlCoreControl
     ''' <returns>If <paramref name="enumerable"/> contains at least one element, then returns an 
     '''          R vector string command, else returns "".</returns>
     Public Function GetRVector(enumerable As IEnumerable(Of String), Optional bOnlyIfMultipleElement As Boolean = False) As String
-        Dim strRValue As String = ""
-        If enumerable IsNot Nothing AndAlso enumerable.Count > 0 Then
-            If bOnlyIfMultipleElement AndAlso enumerable.Count = 1 Then
-                strRValue = enumerable(0)
-            Else
-                strRValue = "c(" & String.Join(",", enumerable.ToArray()) & ")"
-            End If
+        If enumerable Is Nothing OrElse enumerable.Count < 1 Then
+            Return ""
+        ElseIf bOnlyIfMultipleElement AndAlso enumerable.Count = 1 Then
+            Return enumerable(0)
+        Else
+            Return "c(" & String.Join(",", enumerable.ToArray()) & ")"
         End If
-        Return strRValue
     End Function
 
 End Module
