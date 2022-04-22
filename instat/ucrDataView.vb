@@ -150,7 +150,11 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Function GetCurrentDataFrameFocus() As clsDataFrame
+    ''' <summary>
+    ''' Gets current selected data frame
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetCurrentDataFrameFocus() As clsDataFrame
         Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
     End Function
 
@@ -224,7 +228,6 @@ Public Class ucrDataView
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
-            frmMain.strCurrentDataFrame = _grid.CurrentWorksheet.Name
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
             SetDisplayLabels()
             UpdateNavigationButtons()

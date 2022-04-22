@@ -44,6 +44,7 @@ Partial Class ucrDataFrame
         Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRightClickSetData = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDataFrame = New System.Windows.Forms.Label()
+        Me.lblDataViewerSheet = New System.Windows.Forms.Label()
         Me.mnuRightClick.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,10 +84,21 @@ Partial Class ucrDataFrame
         Me.lblDataFrame.Tag = "Data_Frame:"
         Me.lblDataFrame.Text = "Data Frame:"
         '
+        'lblDataViewerSheet
+        '
+        Me.lblDataViewerSheet.ForeColor = System.Drawing.Color.Red
+        Me.lblDataViewerSheet.Location = New System.Drawing.Point(83, 3)
+        Me.lblDataViewerSheet.Name = "lblDataViewerSheet"
+        Me.lblDataViewerSheet.Size = New System.Drawing.Size(65, 13)
+        Me.lblDataViewerSheet.TabIndex = 2
+        Me.lblDataViewerSheet.Tag = ""
+        Me.lblDataViewerSheet.Text = "data viewer sheet"
+        '
         'ucrDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.lblDataViewerSheet)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
         Me.Margin = New System.Windows.Forms.Padding(0)
@@ -102,4 +114,5 @@ Partial Class ucrDataFrame
     Friend WithEvents mnuRightClick As ContextMenuStrip
     Friend WithEvents mnuRightClickCopy As ToolStripMenuItem
     Friend WithEvents mnuRightClickSetData As ToolStripMenuItem
+    Friend WithEvents lblDataViewerSheet As Label
 End Class

@@ -18,8 +18,27 @@ Imports instat
 Imports instat.Translations
 
 Public Class ucrDataFrame
-    Public iDataFrameLength As Integer
-    Public iColumnCount As Integer
+    Public ReadOnly Property iDataFrameLength As Integer
+        Get
+            If cboAvailableDataFrames.Text = "" Then
+                Return 0
+            Else
+                Return frmMain.DataBook.GetDataFrame(cboAvailableDataFrames.Text).iTotalRowCount
+            End If
+
+        End Get
+    End Property
+
+    Public ReadOnly Property iColumnCount As Integer
+        Get
+            If cboAvailableDataFrames.Text = "" Then
+                Return 0
+            Else
+                Return frmMain.DataBook.GetDataFrame(cboAvailableDataFrames.Text).iTotalColumnCount
+            End If
+        End Get
+    End Property
+
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Private bIncludeOverall As Boolean = False
@@ -45,12 +64,11 @@ Public Class ucrDataFrame
     Private bSuppressRefresh As Boolean = False
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        FillComboBox()
         If bFirstLoad Then
             InitialiseControl()
             bFirstLoad = False
         End If
-        SetDataFrameProperties()
+        FillComboBox()
     End Sub
 
     Private Sub InitialiseControl()
@@ -61,19 +79,18 @@ Public Class ucrDataFrame
         cboAvailableDataFrames.DropDownStyle = ComboBoxStyle.DropDownList
         cboAvailableDataFrames.AutoCompleteMode = AutoCompleteMode.None
         cboAvailableDataFrames.AutoCompleteSource = AutoCompleteSource.None
+        lblDataViewerSheet.Text = ""
     End Sub
 
     Public Sub Reset()
+        cboAvailableDataFrames.Items.Clear()
         FillComboBox()
         If frmMain.strDefaultDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
-        ElseIf frmMain.strCurrentDataFrame <> "" Then
-            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
         End If
-        SetDataFrameProperties()
     End Sub
 
-    Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
+    Private Sub FillComboBoxOLDDELETE(Optional bSetFixed As Boolean = True)
         Dim iOldText As String
         'TODO DO change DataFrameChanged event to not need these
         Dim sender As New Object
@@ -87,26 +104,82 @@ Public Class ucrDataFrame
             SetDataframe(strFixedDataFrame, False)
         End If
         If cboAvailableDataFrames.Text <> iOldText Then
-            SelectedDataFrameChanged(sender, e)
+            'SelectedDataFrameChanged(sender, e)
         End If
+    End Sub
+
+    Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
+        bSuppressRefresh = True
+        Dim strSelectedDataFrameName As String
+
+        strSelectedDataFrameName = cboAvailableDataFrames.Text
+        cboAvailableDataFrames.Items.Clear()
+
+        If bOnlyLinkedToPrimaryDataFrames Then
+            'todo. GetLinkedToDataFrameNames should also be done through the data book
+            cboAvailableDataFrames.Items.AddRange(frmMain.clsRLink.GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
+        Else
+            For Each dataFrame As clsDataFrame In frmMain.DataBook.DataFrames
+                cboAvailableDataFrames.Items.Add(dataFrame.strName)
+            Next
+        End If
+
+        'AdjustComboBoxWidth(cboDataFrames)
+
+        If cboAvailableDataFrames.Items.Count > 0 Then
+            Dim dataViewerSelectedDataFrame As clsDataFrame = frmMain.ucrDataViewer.GetCurrentDataFrameFocus()
+            If cboAvailableDataFrames.Items.Contains(strSelectedDataFrameName) Then
+                'try to restore the data frame name that was previously selected
+                cboAvailableDataFrames.SelectedItem = strSelectedDataFrameName
+                lblDataViewerSheet.Text = If(cboAvailableDataFrames.SelectedItem <> dataViewerSelectedDataFrame.strName, dataViewerSelectedDataFrame.strName, "")
+            Else
+                'if this control did not have any any data frame previously selected
+                'then set one from data viewer focused data frame
+                cboAvailableDataFrames.SelectedItem = dataViewerSelectedDataFrame.strName
+            End If
+
+            bSuppressRefresh = False
+            SetPropertiesAndRaiseEvents()
+        End If
+
+        If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
+            SetDataframe(strFixedDataFrame, False)
+        End If
+
+    End Sub
+
+    Private Sub SetPropertiesAndRaiseEvents()
+        If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+
+            If Not bIncludeOverall Then
+                'set parameter properties
+                clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                clsCurrDataFrame.AddParameter(strParameterName:="data_name",
+                                              strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+                clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text)
+            End If
+
+            'set the current data frame after getting the previous one
+            Dim previousDataFrameName As String = strCurrDataFrame
+            strCurrDataFrame = cboAvailableDataFrames.Text
+
+            'raise data frame changed event
+            'this prevents circular refreshing with receivers linked to primary data frame
+            bSuppressRefresh = True
+            RaiseEvent DataFrameChanged(Me, New EventArgs, previousDataFrameName)
+            bSuppressRefresh = False
+
+            'raise control value changed event
+            OnControlValueChanged()
+        End If
+
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
         If Not bSuppressRefresh Then
-            If cboAvailableDataFrames.SelectedIndex = -1 Then
-                cboAvailableDataFrames.Text = ""
-            End If
-            If strCurrDataFrame <> cboAvailableDataFrames.Text Then
-                ' This prevents circular refreshing with receivers linked to primary data frame
-                bSuppressRefresh = True
-                RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
-                bSuppressRefresh = False
-                strCurrDataFrame = cboAvailableDataFrames.Text
-                SetDataFrameProperties()
-                OnControlValueChanged()
-            End If
+            SetPropertiesAndRaiseEvents()
         End If
     End Sub
 
@@ -120,25 +193,7 @@ Public Class ucrDataFrame
         End If
     End Sub
 
-    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
-    End Sub
 
-    Public Sub SetDataFrameProperties()
-        Dim clsParam As New RParameter
-        If cboAvailableDataFrames.Text <> "" AndAlso Not bIncludeOverall Then
-            If Not frmMain.clsRLink.DataFrameExists(cboAvailableDataFrames.Text) Then
-                Reset()
-                Exit Sub
-            End If
-            iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
-            iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
-            clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            clsParam.SetArgumentName("data_name")
-            clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
-            clsCurrDataFrame.AddParameter(clsParam)
-            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text)
-        End If
-    End Sub
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
         Dim Index As Integer = -1
