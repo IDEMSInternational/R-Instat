@@ -210,7 +210,11 @@ Public Class dlgSurvivalObject
             ucrBase.OKEnabled(False)
         Else
             If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked) Then
-                If ucrReceiverEvent.IsEmpty() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.IsAnyGridRowSelected) Then
+                If ucrReceiverEvent.IsEmpty() _
+                        OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") _
+                                AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") _
+                        OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked _
+                                AndAlso ucrModifyEventFactor.IsAnyGridRowSelected) Then
                     ucrBase.OKEnabled(False)
                 Else
                     If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoMstate.Checked) Then
