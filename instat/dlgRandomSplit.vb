@@ -39,7 +39,6 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrReceiverRanSplit.SetParameter(New RParameter("strata", 2))
         ucrReceiverRanSplit.Selector = ucrSelectorRandomSplit
         ucrReceiverRanSplit.SetMeAsReceiver()
@@ -64,18 +63,15 @@ Public Class dlgRandomSplit
         ucrChkTestingData.SetParameter(New RParameter("testing", 0))
         ucrChkTestingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-
         ucrChkTrainingData.SetText("Save Training Data")
         ucrChkTrainingData.SetParameter(New RParameter("training", 0))
         ucrChkTrainingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
 
         ucrSaveRandomSplit.SetLabelText("Save sample to:")
         ucrSaveRandomSplit.SetSaveTypeAsDataFrame()
         ucrSaveRandomSplit.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
         ucrSaveRandomSplit.SetPrefix("training")
         ucrSaveRandomSplit.SetIsComboBox()
-
 
         ucrNudBreaks.SetLinkedDisplayControl(lblBreaks)
         ucrNudBreaks.SetParameter(New RParameter("breaks", 4))
@@ -101,8 +97,6 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.AddToLinkedControls(ucrChkStratifyingFactor, {rdoSample}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool, ucrNudBreaks}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -111,7 +105,6 @@ Public Class dlgRandomSplit
         clsTesting = New RFunction
         clsTraining = New RFunction
         clsDummyFunction = New RFunction
-
 
         ucrSelectorRandomSplit.Reset()
         ucrSelectorRandomSplit.Focus()
@@ -129,7 +122,6 @@ Public Class dlgRandomSplit
         clsInitialSplit.AddParameter("lag", "0", iPosition:=3)
         clsInitialSplit.AddParameter("breaks", "4", iPosition:=4)
         clsInitialSplit.AddParameter("pool", "0.1", iPosition:=5)
-
 
         clsTraining.SetPackageName("rsample")
         clsTraining.SetRCommand("training")
@@ -157,7 +149,9 @@ Public Class dlgRandomSplit
         ucrSaveRandomSplit.SetRCode(clsTraining, bReset)
         ucrNudLag.SetRCode(clsInitialSplit, bReset)
         ucrReceiverRanSplit.SetRCode(clsInitialSplit, bReset)
-        ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -169,12 +163,16 @@ Public Class dlgRandomSplit
                 clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
                 ucrBase.clsRsyntax.iCallType = 0
+                ucrChkTrainingData.Checked = False
             ElseIf ucrChkTrainingData.Checked Then
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
+                ucrChkTestingData.Checked = False
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
                 ucrBase.clsRsyntax.iCallType = 2
+                ucrChkTestingData.Checked = False
+                ucrChkTrainingData.Checked = False
             End If
         ElseIf rdoTimeSeries.Checked Then
             If ucrChkTestingData.Checked Then
@@ -205,11 +203,6 @@ Public Class dlgRandomSplit
         SetBaseFunction()
     End Sub
 
-    'Private Sub ucrChkStratifyingFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlValueChanged
-    '    If ucrChkStratifyingFactor.Checked Then
-    '        ucrReceiverRanSplit.SetDataType("factor")
-    '    End If
-    'End Sub
     Private Sub SetDataFramePrefix()
         If ucrChkTestingData.Checked Then
             ucrSaveRandomSplit.SetPrefix("testing")
