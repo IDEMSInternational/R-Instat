@@ -328,7 +328,7 @@ Partial Class dlgNewDataFrame
         'cbType
         '
         Me.cbType.HeaderText = "Type"
-        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
+        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer", "Sequence"})
         Me.cbType.MaxDropDownItems = 4
         Me.cbType.Name = "cbType"
         Me.cbType.Width = 60
@@ -443,7 +443,7 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Location = New System.Drawing.Point(20, 318)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
         'dlgNewDataFrame
