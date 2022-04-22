@@ -145,9 +145,9 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
     if(check_names) {
       # "T" should be avoided as a column name but is not checked by make.names()
       if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
-      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."), unique = TRUE)
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid or unique. make.names() and iconv() will be used to force them to be valid and unique.")
         names(new_data) <- valid_names
       }
     }
@@ -804,6 +804,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
       private$data <- curr_data |>
+
       dplyr::rename_with(
          .fn = .fn,
          .cols = {{ .cols }}, ...
@@ -1064,16 +1065,22 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for (curr_col in col_names) {
-      if (property == labels_label && new_val == "") {
+      #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
+      #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
+      if (property == labels_label && !is.null(new_val) && new_val == "") {
+        #reset the column labels property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
         attr(private$data[[curr_col]], property) <- new_val
       }
+      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
-    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
   } else {
     for (col_name in self$get_column_names()) {
-      if (property == labels_label && new_val == "") {
+      #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
+      #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
+      if (property == labels_label && !is.null(new_val) && new_val == "") {
+        #reset the column labels property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
         attr(private$data[[col_name]], property) <- new_val
