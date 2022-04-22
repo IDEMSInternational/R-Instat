@@ -153,9 +153,12 @@ Public Class ucrDataView
     ''' <summary>
     ''' Gets current selected data frame
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>
+    ''' <para>Nothing if no data frame is currently focused.</para>
+    ''' <para>This can happen when all data frames have been deleted</para>
+    ''' </returns>
     Public Function GetCurrentDataFrameFocus() As clsDataFrame
-        Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
+        Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name))
     End Function
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click

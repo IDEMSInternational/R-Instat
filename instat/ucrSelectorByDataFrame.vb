@@ -26,15 +26,13 @@ Public Class ucrSelectorByDataFrame
         End If
     End Sub
 
-    Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
+    Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object) Handles ucrAvailableDataFrames.DataFrameChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         If CurrentReceiver Is Nothing OrElse CurrentReceiver.bAttachedToPrimaryDataFrame Then
             strPrimaryDataFrame = strCurrentDataFrame
         End If
         LoadList()
-        If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
-            OnDataFrameChanged()
-        End If
+        OnDataFrameChanged()
     End Sub
 
     Public Overrides Sub Reset()
@@ -43,12 +41,6 @@ Public Class ucrSelectorByDataFrame
     End Sub
 
     Private Sub ucrSelectorByDataFrame_DataFrameChanged() Handles Me.DataFrameChanged
-        LoadList()
-    End Sub
-
-    Public Overrides Sub SetIncludeOverall(bInclude As Boolean)
-        MyBase.SetIncludeOverall(bInclude)
-        ucrAvailableDataFrames.SetIncludeOverall(bIncludeOverall)
         LoadList()
     End Sub
 

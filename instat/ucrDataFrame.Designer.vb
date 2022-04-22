@@ -51,6 +51,7 @@ Partial Class ucrDataFrame
         'cboAvailableDataFrames
         '
         Me.cboAvailableDataFrames.ContextMenuStrip = Me.mnuRightClick
+        Me.cboAvailableDataFrames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAvailableDataFrames.FormattingEnabled = True
         Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 19)
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"

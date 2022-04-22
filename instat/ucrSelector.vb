@@ -24,7 +24,6 @@ Public Class ucrSelector
     Public Event DataFrameChanged()
     Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
     Public bFirstLoad As Boolean
-    Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
     ' If a dialog has receivers which can have columns from multiple data frames
     ' there may be a primary data frame which some receivers must be from.
@@ -56,7 +55,7 @@ Public Class ucrSelector
         ' Add any initialization after the InitializeComponent() call.
         lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
-        bIncludeOverall = False
+        'bIncludeOverall = False
         strCurrentDataFrame = ""
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
@@ -207,11 +206,6 @@ Public Class ucrSelector
         lstVariablesInReceivers.Clear()
         LoadList()
         'lstItemsInReceivers.Clear()
-    End Sub
-
-    Public Overridable Sub SetIncludeOverall(bInclude As Boolean)
-        bIncludeOverall = bInclude
-        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
