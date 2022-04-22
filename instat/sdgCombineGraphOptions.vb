@@ -29,6 +29,8 @@ Public Class sdgCombineGraphOptions
         ' This call is required by the designer.
         InitializeComponent()
 
+        ucrsdgLayoutBase.iHelpTopicID = 431
+
         ' Add any initialization after the InitializeComponent() call.
         grdLayout.SetSettings(WorkbookSettings.View_ShowSheetTabControl, False)
         grdLayout.SetSettings(WorkbookSettings.View_ShowHorScroll, False)
