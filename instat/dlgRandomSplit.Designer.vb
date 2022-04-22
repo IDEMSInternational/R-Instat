@@ -29,7 +29,6 @@ Partial Class dlgRandomSplit
         Me.lblReceiverRandomSplit = New System.Windows.Forms.Label()
         Me.lblBreaks = New System.Windows.Forms.Label()
         Me.ucrNudBreaks = New instat.ucrNud()
-        Me.ucrReceiverRandomSplit = New instat.ucrReceiverMultiple()
         Me.ucrNudPool = New instat.ucrNud()
         Me.ucrNudFraction = New instat.ucrNud()
         Me.ucrNudLag = New instat.ucrNud()
@@ -41,6 +40,7 @@ Partial Class dlgRandomSplit
         Me.ucrChkStratifyingFactor = New instat.ucrCheck()
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.ucrSelectorRandomSplit = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverRanSplit = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -78,7 +78,7 @@ Partial Class dlgRandomSplit
         'lblFraction
         '
         Me.lblFraction.AutoSize = True
-        Me.lblFraction.Location = New System.Drawing.Point(281, 223)
+        Me.lblFraction.Location = New System.Drawing.Point(281, 152)
         Me.lblFraction.Name = "lblFraction"
         Me.lblFraction.Size = New System.Drawing.Size(51, 13)
         Me.lblFraction.TabIndex = 32
@@ -87,7 +87,7 @@ Partial Class dlgRandomSplit
         'lblPool
         '
         Me.lblPool.AutoSize = True
-        Me.lblPool.Location = New System.Drawing.Point(281, 254)
+        Me.lblPool.Location = New System.Drawing.Point(281, 183)
         Me.lblPool.Name = "lblPool"
         Me.lblPool.Size = New System.Drawing.Size(34, 13)
         Me.lblPool.TabIndex = 33
@@ -105,7 +105,7 @@ Partial Class dlgRandomSplit
         'lblBreaks
         '
         Me.lblBreaks.AutoSize = True
-        Me.lblBreaks.Location = New System.Drawing.Point(281, 287)
+        Me.lblBreaks.Location = New System.Drawing.Point(281, 216)
         Me.lblBreaks.Name = "lblBreaks"
         Me.lblBreaks.Size = New System.Drawing.Size(46, 13)
         Me.lblBreaks.TabIndex = 37
@@ -116,7 +116,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudBreaks.AutoSize = True
         Me.ucrNudBreaks.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 287)
+        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 216)
         Me.ucrNudBreaks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBreaks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Name = "ucrNudBreaks"
@@ -124,25 +124,12 @@ Partial Class dlgRandomSplit
         Me.ucrNudBreaks.TabIndex = 36
         Me.ucrNudBreaks.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrReceiverRandomSplit
-        '
-        Me.ucrReceiverRandomSplit.AutoSize = True
-        Me.ucrReceiverRandomSplit.frmParent = Me
-        Me.ucrReceiverRandomSplit.Location = New System.Drawing.Point(281, 112)
-        Me.ucrReceiverRandomSplit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRandomSplit.Name = "ucrReceiverRandomSplit"
-        Me.ucrReceiverRandomSplit.Selector = Nothing
-        Me.ucrReceiverRandomSplit.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverRandomSplit.strNcFilePath = ""
-        Me.ucrReceiverRandomSplit.TabIndex = 34
-        Me.ucrReceiverRandomSplit.ucrSelector = Nothing
-        '
         'ucrNudPool
         '
         Me.ucrNudPool.AutoSize = True
         Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPool.Location = New System.Drawing.Point(351, 254)
+        Me.ucrNudPool.Location = New System.Drawing.Point(351, 183)
         Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Name = "ucrNudPool"
@@ -155,7 +142,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudFraction.AutoSize = True
         Me.ucrNudFraction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFraction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFraction.Location = New System.Drawing.Point(351, 223)
+        Me.ucrNudFraction.Location = New System.Drawing.Point(351, 152)
         Me.ucrNudFraction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFraction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFraction.Name = "ucrNudFraction"
@@ -249,15 +236,28 @@ Partial Class dlgRandomSplit
         Me.ucrSelectorRandomSplit.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorRandomSplit.TabIndex = 38
         '
+        'ucrReceiverRanSplit
+        '
+        Me.ucrReceiverRanSplit.AutoSize = True
+        Me.ucrReceiverRanSplit.frmParent = Me
+        Me.ucrReceiverRanSplit.Location = New System.Drawing.Point(281, 108)
+        Me.ucrReceiverRanSplit.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRanSplit.Name = "ucrReceiverRanSplit"
+        Me.ucrReceiverRanSplit.Selector = Nothing
+        Me.ucrReceiverRanSplit.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverRanSplit.strNcFilePath = ""
+        Me.ucrReceiverRanSplit.TabIndex = 39
+        Me.ucrReceiverRanSplit.ucrSelector = Nothing
+        '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 418)
+        Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.lblBreaks)
         Me.Controls.Add(Me.ucrNudBreaks)
         Me.Controls.Add(Me.lblReceiverRandomSplit)
-        Me.Controls.Add(Me.ucrReceiverRandomSplit)
         Me.Controls.Add(Me.lblPool)
         Me.Controls.Add(Me.lblFraction)
         Me.Controls.Add(Me.ucrNudPool)
@@ -298,9 +298,9 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrPnlRandomSplit As UcrPanel
     Friend WithEvents lblPool As Label
     Friend WithEvents lblFraction As Label
-    Friend WithEvents ucrReceiverRandomSplit As ucrReceiverMultiple
     Friend WithEvents lblReceiverRandomSplit As Label
     Friend WithEvents lblBreaks As Label
     Friend WithEvents ucrNudBreaks As ucrNud
     Friend WithEvents ucrSelectorRandomSplit As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
 End Class
