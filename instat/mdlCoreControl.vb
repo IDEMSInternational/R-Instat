@@ -124,7 +124,8 @@ Module mdlCoreControl
     ''' If set as true and enumerable has only 1 element 
     ''' then the element will be returned without the c() command.
     ''' <para>for instance, an enumerable that contains "1" will be returned as string "1"</para> </param>
-    ''' <returns>R vector string command</returns>
+    ''' <returns>If <paramref name="enumerable"/> contains at least one element, then returns an 
+    '''          R vector string command, else returns "".</returns>
     Public Function GetRVector(enumerable As IEnumerable(Of String), Optional bOnlyIfMultipleElement As Boolean = False) As String
         Dim strRValue As String = ""
         If enumerable IsNot Nothing AndAlso enumerable.Count > 0 Then
