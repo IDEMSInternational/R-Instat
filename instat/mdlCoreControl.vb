@@ -127,7 +127,7 @@ Module mdlCoreControl
     ''' <returns>If <paramref name="enumerable"/> contains at least one element, then returns an 
     '''          R vector string command, else returns "".</returns>
     Public Function GetRVector(enumerable As IEnumerable(Of String), Optional bOnlyIfMultipleElement As Boolean = False) As String
-        If enumerable Is Nothing OrElse enumerable.Count < 1 Then
+        If enumerable Is Nothing OrElse enumerable.Count = 0 Then
             Return ""
         ElseIf bOnlyIfMultipleElement AndAlso enumerable.Count = 1 Then
             Return enumerable(0)
