@@ -37,6 +37,9 @@ Public Class dlgSelectColumns
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrBase.iHelpTopicID = 104
+
         ucrSelectorForColumnSelection.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnSelection.SetParameterIsString()
         ucrSelectorForColumnSelection.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
