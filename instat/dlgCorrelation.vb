@@ -342,6 +342,7 @@ Public Class dlgCorrelation
         ucrChkDisplayAsDataFrame.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             ucrPnlColumns.SetRCode(clsFashionModelFunction, bReset)
+            'ucrSaveCorrelation.SetRCode(clsCorrelationFunction, bReset)
         End If
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
@@ -407,13 +408,32 @@ Public Class dlgCorrelation
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
-            ucrBase.clsRsyntax.iCallType = 2
+            'ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsFashionModelFunction)
         End If
         ReceiverColumns()
+        ChangeBaseFunction()
+    End Sub
+
+    Private Sub ChangeBaseFunction()
+        If rdoMultipleColumns.Checked Then
+            If ucrChkDisplayOptions.Checked Then
+                If ucrChkDisplayAsDataFrame.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionDataFrameFunction)
+                    ucrBase.clsRsyntax.iCallType = 0
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionModelFunction)
+                    ucrBase.clsRsyntax.iCallType = 2
+                End If
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
+        End If
+
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
@@ -461,15 +481,13 @@ Public Class dlgCorrelation
             Else
                 clsShaveFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
             End If
-            'clsCorrelationFunction.RemoveAssignTo()
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
-            'clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
         End If
     End Sub
 
     Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrSaveFashionModel.ControlValueChanged, ucrSaveCorrelation.ControlValueChanged, ucrInputRearrange.ControlValueChanged ', ucrChkDisplayAsDataFrame.ControlValueChanged, ucrSaveFashionDataFrame.ControlValueChanged
         DisplayOptions()
+        ChangeBaseFunction()
+
         If ucrChangedControl Is ucrChkDisplayOptions Then
             ChangeBaseAsModelOrDataframe()
         End If
@@ -479,15 +497,14 @@ Public Class dlgCorrelation
         If ucrChkDisplayAsDataFrame.Checked Then
             clsDummyFunction.AddParameter("display_as_dataframe", "True", iPosition:=1)
             ucrBase.clsRsyntax.iCallType = 0
-            ucrBase.clsRsyntax.SetBaseRFunction(clsFashionDataFrameFunction)
         Else
             clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
             ucrBase.clsRsyntax.iCallType = 2
-            ucrBase.clsRsyntax.SetBaseRFunction(clsFashionModelFunction)
         End If
     End Sub
 
     Private Sub ucrChkDisplayAsDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsDataFrame.ControlValueChanged, ucrSaveFashionDataFrame.ControlValueChanged
         ChangeBaseAsModelOrDataframe()
+        ChangeBaseFunction()
     End Sub
 End Class
