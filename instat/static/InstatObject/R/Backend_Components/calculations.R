@@ -1,41 +1,41 @@
 calculation <- R6::R6Class("calculation",
-                         public = list(
-                           initialize = function(function_name = "", parameters = list(), 
-                                                 calculated_from = c(), is_recalculable = TRUE,
-                                                 sub_calculations = list(), type = "", filter_conditions = list(),
-                                                 filters = list(), name = "") {
-                             self$function_name = function_name
-                             self$parameters = parameters
-                             self$calculated_from = c()
-                             self$is_recalculable = is_recalculable
-                             self$sub_calculations = sub_calculations
-                             self$type = type
-                             self$name = name
-                             self$filter_conditions = filter_conditions
-                             self$filters = filters
-                           },
-                           function_name = "",
-                           parameters = list(), 
-                           calculated_from = c(),
-                           is_recalculable = TRUE,
-                           sub_calculations = list(),
-                           filter_conditions = list(),
-                           filters = list(),
-                           name = "",
-                           type = ""
-                         )
-                       # ,
-                       # Removed because filter_conditions can be public
-                       # private = list(
-                       #   .filter_conditions = list()
-                       # )
-                       # ,
-                       # active = list(
-                       #   filter_conditions = function(new_filter_conditions) {
-                       #     if(missing(new_filter_conditions)) return(private$.filter_conditions)
-                       #     else private$.filter_conditions <- new_filter_conditions
-                       #   }
-                       # )
+                           public = list(
+                             initialize = function(function_name = "", parameters = list(), 
+                                                   calculated_from = c(), is_recalculable = TRUE,
+                                                   sub_calculations = list(), type = "", filter_conditions = list(),
+                                                   filters = list(), name = "") {
+                               self$function_name = function_name
+                               self$parameters = parameters
+                               self$calculated_from = c()
+                               self$is_recalculable = is_recalculable
+                               self$sub_calculations = sub_calculations
+                               self$type = type
+                               self$name = name
+                               self$filter_conditions = filter_conditions
+                               self$filters = filters
+                             },
+                             function_name = "",
+                             parameters = list(), 
+                             calculated_from = c(),
+                             is_recalculable = TRUE,
+                             sub_calculations = list(),
+                             filter_conditions = list(),
+                             filters = list(),
+                             name = "",
+                             type = ""
+                           )
+                           # ,
+                           # Removed because filter_conditions can be public
+                           # private = list(
+                           #   .filter_conditions = list()
+                           # )
+                           # ,
+                           # active = list(
+                           #   filter_conditions = function(new_filter_conditions) {
+                           #     if(missing(new_filter_conditions)) return(private$.filter_conditions)
+                           #     else private$.filter_conditions <- new_filter_conditions
+                           #   }
+                           # )
 )
 
 calculation$set("public", "add_sub_calculation", function(sub_calculation, name) {
@@ -122,47 +122,47 @@ DataSheet$set("public", "save_calculation", function(calc) {
 #                              saving calculation only is useful to reproduce results in output window without needing to save in a data frame e.g. single value summaries)  
 
 instat_calculation <- R6::R6Class("instat_calculation",
-                       public = list(
-                         initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
-                                               sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "") {
-                           if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
-                           if(type == "combination" && save > 0) {
-                             warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
-                             save <- 0
-                             #TODO Should this do something else like set save_output = TRUE for all sub_calculations?
-                           }
-                           self$function_exp <- function_exp
-                           self$type <- type
-                           self$name <- name
-                           self$result_name <- result_name
-                           self$result_data_frame <- result_data_frame
-						               self$manipulations <- manipulations
-                           self$sub_calculations <- sub_calculations
-                           self$calculated_from <- calculated_from
-                           self$save <- save
-                           self$before <- before
-                           self$adjacent_column <- adjacent_column
-                         },
-						               name = "",
-						               result_name = "",
-						               result_data_frame = "",
-						               type = "",
-						               manipulations = list(),
-						               sub_calculations = list(),
-						               function_exp = "",
-						               calculated_from = list(),
-						               save = 0,
-						               before = FALSE,
-						               adjacent_column = ""
-                       )
+                                  public = list(
+                                    initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
+                                                          sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "") {
+                                      if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
+                                      if(type == "combination" && save > 0) {
+                                        warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
+                                        save <- 0
+                                        #TODO Should this do something else like set save_output = TRUE for all sub_calculations?
+                                      }
+                                      self$function_exp <- function_exp
+                                      self$type <- type
+                                      self$name <- name
+                                      self$result_name <- result_name
+                                      self$result_data_frame <- result_data_frame
+                                      self$manipulations <- manipulations
+                                      self$sub_calculations <- sub_calculations
+                                      self$calculated_from <- calculated_from
+                                      self$save <- save
+                                      self$before <- before
+                                      self$adjacent_column <- adjacent_column
+                                    },
+                                    name = "",
+                                    result_name = "",
+                                    result_data_frame = "",
+                                    type = "",
+                                    manipulations = list(),
+                                    sub_calculations = list(),
+                                    function_exp = "",
+                                    calculated_from = list(),
+                                    save = 0,
+                                    before = FALSE,
+                                    adjacent_column = ""
+                                  )
 )
 
 instat_calculation$set("public", "data_clone", function(...) {
   ret <- instat_calculation$new(function_exp = self$function_exp, type = self$type,
-                         name = self$name, result_name = self$result_name, 
-                         manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
-                         sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
-                         calculated_from = self$calculated_from, save = self$save)
+                                name = self$name, result_name = self$result_name, 
+                                manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
+                                sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
+                                calculated_from = self$calculated_from, save = self$save)
   return(ret)
 }
 )
@@ -184,7 +184,7 @@ c_has_filter_label <- "has_filter"
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
 DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
-
+  
   # apply each manipulation first, and recursively store the output and pass to the next manipulation
   # because of this, manipulations are dependant on each other
   for(manipulation in calc$manipulations) {
@@ -220,7 +220,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
       # A merge is required if a merge was already required, or if the current sub_calculation requires a merge
       #sub_calc_results[[c_require_merge_label]] <- overall_merge_required || current_calc_merge_required
       # TODO how to set new values for has summary/filter
-
+      
       #### Set the data and link
       # Defined as variables as these are used throughout 
       curr_calc_link_cols <- curr_sub_calc[[c_link_label]][["link_cols"]]
@@ -355,7 +355,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
       }
     }
   }
-
+  
   # If there were any sub_calculations then the input for the main calculation should be the output from the last sub_calculation
   # Otherwise it is the output from the mainipulations
   if(!first_sub_calc) curr_data_list <- sub_calc_results
@@ -366,7 +366,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
   }
   
-
+  
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
   # If argument was missing and there were no manipulations or sub_calculations then it should be created.
@@ -471,7 +471,45 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # A merge is now required because the data is at a different "level"
   else if(calc$type == "summary") {
     curr_data_list[[c_link_label]][["link_cols"]] <- as.character(dplyr::groups(curr_data_list[[c_data_label]]))
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    calc_from_data_name <- curr_data_list[[c_link_label]][["from_data_frame"]]
+    formula_fn_exp <- as.formula(paste0("~", calc$function_exp))
+    # note: important that there is *no* space between | for grepl function
+    # and important there IS a psace in str_detect..!
+    
+    # get the data type of the column
+    col_data_type <- self$get_variables_metadata(data_name = calc_from_data_name, column = col_name, property = "class")
+    # if it is a ordered factor...
+    if (any(stringr::str_detect("ordered", col_data_type))){
+      # put in here the ones that DO work for ordered factor
+      if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range", formula_fn_exp))){
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+      } else {
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+      }
+      # if it is a factor or character, do not work for anything except...
+    } else if (any(stringr::str_detect("factor | character", col_data_type))){
+      # put in here the ones that DO work for factor or character
+      if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count", formula_fn_exp))){
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+      } else {
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+      }
+    } else if (any(stringr::str_detect("Date", col_data_type))){
+      # put in here the ones that DO NOT work for date
+      if (any(grepl("summary_sum", formula_fn_exp))){
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+      } else {
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+      }
+    } else {
+      curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    }
     curr_data_list[[c_has_summary_label]] <- TRUE
   }
   # This type is grouping the data
@@ -584,7 +622,7 @@ DataBook$set("public", "get_link_columns_from_data_frames", function(first_data_
 
 # Called from apply_instat_calculation if calc$save_calc == TRUE
 DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previous_manipulations) {
-
+  
   # Add previous manipulations to calc so that it can be rerun on its own (it may have been a sub calculation)
   calc$manipulations <- c(previous_manipulations, calc$manipulations)
   calc_dependencies <- calc$get_dependencies()
@@ -727,10 +765,10 @@ DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previo
   # Add metadata to calculated_from columns
   # for example, calculated_from may include sub_calculation columns which were not saved and so don't appear in the instat object data
   for(i in seq_along(calc_dependencies)) {
-      # This adds metadata: has_dependants = TRUE which indicates that the calculated_from columns have columns that depend on them 
-      self$append_to_variables_metadata(names(calc_dependencies[i]), calc_dependencies[[i]], has_dependants_label, TRUE)
-      # This adds the output_column to the calculated_from columns' list of dependent columns
-      self$add_dependent_columns(names(calc_dependencies[i]), calc_dependencies[[i]], output_column)
+    # This adds metadata: has_dependants = TRUE which indicates that the calculated_from columns have columns that depend on them 
+    self$append_to_variables_metadata(names(calc_dependencies[i]), calc_dependencies[[i]], has_dependants_label, TRUE)
+    # This adds the output_column to the calculated_from columns' list of dependent columns
+    self$add_dependent_columns(names(calc_dependencies[i]), calc_dependencies[[i]], output_column)
   }
   # This adds metadata: is_calculated = TRUE to the output column, which indicates that the column has been created by a calculation
   if(calc$result_name != "") {
