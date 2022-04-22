@@ -404,11 +404,10 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged ', ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrInputDisplayNas.ControlValueChanged, ucrInputRearrange.ControlValueChanged
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-            'ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
