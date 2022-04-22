@@ -40,6 +40,11 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Public ReadOnly Property DataBook As clsDataBook
+        Get
+            Return clsDataBook
+        End Get
+    End Property
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -398,12 +403,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnNumericRegularSequence_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRegularSequence.Click
-        dlgRegularSequence.bNumericIsDefault = True
+        dlgRegularSequence.SetNumericSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
-    End Sub
-
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFrequency.ShowDialog()
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
@@ -702,7 +703,7 @@ Public Class frmMain
         dlgCombineText.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareDataFilter_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameFilter.Click
+    Private Sub mnuPrepareDataFilter_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = ""
         dlgRestrict.ShowDialog()
@@ -1030,10 +1031,6 @@ Public Class frmMain
         End Using
     End Sub
 
-    Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColumnStructure.Click
-        dlgColumnStructure.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
@@ -1336,7 +1333,7 @@ Public Class frmMain
         dlgDefineRedFlags.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesFrequencies.Click
+    Private Sub mnuDescribeTwoVariablesFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesTwoWayFrequencies.Click
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
@@ -1458,10 +1455,6 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnTextDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextDistance.Click
         dlgStringDistance.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
-        dlgThreeVariableFrequencies.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeViewGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeViewGraph.Click
@@ -1588,7 +1581,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
-        dlgDuplicates.ShowDialog()
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
@@ -1821,12 +1814,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
-        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
-        dlgRegularSequence.bNumericIsDefault = False
+        dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -1838,16 +1831,12 @@ Public Class frmMain
         dlgCompareColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuDefineOptionsByContexts_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOptionsByContexts.Click
-        dlgDefineOptionsByContext.ShowDialog()
-    End Sub
-
     Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextMergeAdditionalData.Click
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextsCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataDuplicates.Click
-        dlgDuplicates.ShowDialog()
+    Private Sub mnuOptionsByContextsCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataDuplicateRows.Click
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuOptionsByContextsCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCheckDataCompareColumns.Click
@@ -2009,8 +1998,8 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
-        dlgDuplicates.ShowDialog()
+    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
+        dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumExeedenceGraph.Click
@@ -2389,11 +2378,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
-        dlgPasteSpecial.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
-        dlgPivotTable.ShowDialog()
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
@@ -2402,10 +2387,6 @@ Public Class frmMain
 
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
         dlgSelect.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariablePivotTable.Click
-        dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
@@ -2430,5 +2411,29 @@ Public Class frmMain
 
     Private Sub mnuDescribeMultivariateClusterAnalysis_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateClusterAnalysis.Click
         dlgClusterAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextDefineOnStation_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnStation.Click
+        dlgColumnStructure.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextDefineOnFarm_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextDefineOnFarm.Click
+        dlgDefineOptionsByContext.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesThreeWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesThreeWayFrequencies.Click
+        dlgThreeVariableFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoThreeVariablesPivotTableSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTable.Click
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
+        dlgMergeAdditionalData.ShowDialog()
     End Sub
 End Class

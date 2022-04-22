@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As RFunction
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
@@ -55,29 +56,31 @@ Public Class dlgFactorDataFrame
         ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
         ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 3))
         ucrChkAddCurrentContrasts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddCurrentContrasts.SetRDefault("TRUE")
+        ucrChkAddCurrentContrasts.SetRDefault("FALSE")
 
         ucrChkReplaceIfAlreadyExists.SetText("Replace if Already Exists")
         ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 4))
         ucrChkReplaceIfAlreadyExists.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkReplaceIfAlreadyExists.SetRDefault("TRUE")
+        ucrChkReplaceIfAlreadyExists.SetRDefault("FALSE")
+
+        ucrChkFrequencies.SetText("Frequencies")
+        ucrChkFrequencies.SetParameter(New RParameter("summary_count", 5))
+        ucrChkFrequencies.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFrequencies.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
+        clsDefaultFunction.AddParameter("replace", "TRUE", iPosition:=4)
+        clsDefaultFunction.AddParameter("summary_count", "TRUE", iPosition:=5)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
-        CheckAutoName()
-    End Sub
-
-    Private Sub ReopenDialog()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -85,7 +88,7 @@ Public Class dlgFactorDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty Then
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.IsEmpty AndAlso (ucrChkAddCurrentContrasts.Checked OrElse ucrChkFrequencies.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -98,17 +101,14 @@ Public Class dlgFactorDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorDataFrame.ControlValueChanged
-        CheckAutoName()
-    End Sub
-
-    Private Sub CheckAutoName()
         If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.bUserTyped Then
             ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
         End If
+    End Sub
+
+    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged,
+        ucrSelectorFactorDataFrame.ControlContentsChanged, ucrChkFrequencies.ControlContentsChanged, ucrChkAddCurrentContrasts.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

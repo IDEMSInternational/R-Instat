@@ -29,6 +29,7 @@ Public Class dlgImportDataset
     Private strFilePathSystemTemp As String = ""
     Private strFilePathR As String = ""
     Private strCurrentDirectory As String = ""
+    Private strDirectoryPathTemp As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
     Private strlastFileName As String = ""
@@ -61,6 +62,7 @@ Public Class dlgImportDataset
                 strFileExtension = "" 'reset
             End If
             SetDialogStateFromFile(strFileToOpenOn, strFileExtension)
+            strDirectoryPathTemp = strFileToOpenOn
             strFileToOpenOn = ""
             bStartOpenDialog = False
         ElseIf bStartOpenDialog Then
@@ -80,7 +82,7 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
-
+        HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -279,6 +281,8 @@ Public Class dlgImportDataset
         ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
         ucrChkDropEmptyCols.SetParameter(New RParameter("isRFunction", 0))
         ucrChkDropEmptyCols.SetValuesCheckedAndUnchecked("True", "False")
+
+        ttCmdStepBack.SetToolTip(cmdStepBack, "Up to previous folder step 1.")
     End Sub
 
     Private Sub SetDefaults()
@@ -303,6 +307,7 @@ Public Class dlgImportDataset
         clsEmptyDummyFunction = New RFunction
 
         ucrChkDropEmptyCols.Visible = False
+        cmdStepBack.Visible = False
 
         clsImportTextFileFormats.SetPackageName("readr")
         clsImportTextFileFormats.SetRCommand("read_table")
@@ -343,8 +348,9 @@ Public Class dlgImportDataset
 
         'commands for multiple files
         clsGetFilesList.SetRCommand("list.files")
-        clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
-        clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
+        clsGetFilesList.AddParameter("recursive", "TRUE", iPosition:=2)
+        clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=3)
+        clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=4)
 
         clsImportMultipleFiles.SetPackageName("rio")
         clsImportMultipleFiles.SetRCommand("import_list")
@@ -381,7 +387,6 @@ Public Class dlgImportDataset
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
-
         dctSelectedExcelSheets.Clear()
         clbSheets.Items.Clear() 'reset this here. Not set by R code
         ucrInputMissingValueStringExcel.SetName("") 'reset this here. Not set by R code 
@@ -398,11 +403,14 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        HideDropEmptyCheckBox()
     End Sub
 
     Private Sub TestOkEnabled()
         If bImportFromFolder Then
             ucrBase.OKEnabled(GetDirectoryFiles(False).Count > 0)
+        ElseIf ucrInputFilePath.IsEmpty Then
+            ucrBase.OKEnabled(False)
         Else
             If IsExcelFileFormat() Then
                 ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0 AndAlso bCanImport)
@@ -441,7 +449,8 @@ Public Class dlgImportDataset
                 Else
                     dctSelectedExcelSheets.Clear()
                     clbSheets.Items.Clear()
-                    SetDialogStateFromFile(dlgOpen.FileName)
+                    strDirectoryPathTemp = dlgOpen.FileName
+                    SetDialogStateFromFile(strDirectoryPathTemp)
                 End If
             End If
         End Using
@@ -574,7 +583,7 @@ Public Class dlgImportDataset
                 strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -701,6 +710,8 @@ Public Class dlgImportDataset
                 Me.Close()
             End If
         End If
+
+        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = GetCorrectSeparatorInPath()) <= 1, False, True) 'Disable the button to avoid getting the path not needed e.g D:
 
         TryTextPreview()
         TryGridPreview()
@@ -897,11 +908,24 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub HideDropEmptyCheckBox()
+        If ucrInputFilePath.IsEmpty Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrChkMultipleFiles.Visible = False
+            lblNoPreview.Text = "No file selected."
+        Else
+            ucrChkDropEmptyCols.Visible = True
+            ucrChkMultipleFiles.Visible = True
+            lblNoPreview.Text = "Preview not yet implemented for this file type"
+        End If
+    End Sub
+
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
-        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged,
+        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
         ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
+        HideDropEmptyCheckBox()
     End Sub
 
     Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
@@ -1030,7 +1054,6 @@ Public Class dlgImportDataset
                 strFileExtension = ""
                 strFilePathSystem = ""
                 strFilePathR = ""
-                ucrInputFilePath.SetName("")
             Else
                 If File.Exists(strFilePathSystemTemp) Then
                     strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
@@ -1060,12 +1083,33 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Function GetCorrectSeparatorInPath() As String
+        Dim strSeparator As String = ""
+        If strCurrentDirectory.Contains("/") Then
+            strSeparator = "/"
+        ElseIf strCurrentDirectory.Contains("\") Then
+            strSeparator = "\"
+        End If
+        Return strSeparator
+    End Function
+
+    Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
+        If GetCorrectSeparatorInPath() <> "" Then
+            SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
+        Else
+            SetDialogStateFromFile("")
+        End If
+    End Sub
+
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
         If ucrChkMultipleFiles.Checked Then
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
+            cmdStepBack.Visible = True
         Else
-            SetDialogStateFromFile(strCurrentDirectory & "\" & strlastFileName & strFileExtension)
+            SetDialogStateFromFile(strDirectoryPathTemp)
+            cmdStepBack.Visible = False
         End If
+
         TestOkEnabled()
     End Sub
 
@@ -1116,7 +1160,7 @@ Public Class dlgImportDataset
         Dim lstFileNames As New List(Of String)
         Dim arrFilePathsAndNames() As String
         If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
-            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension)
+            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension, SearchOption.AllDirectories)
             If bOnlyCleanedFileNames Then
                 For Each strFilePathName As String In arrFilePathsAndNames
                     lstFileNames.Add(GetCleanFileName(strFilePathName))

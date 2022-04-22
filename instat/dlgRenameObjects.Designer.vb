@@ -119,7 +119,7 @@ Partial Class dlgRenameObjects
         Me.ucrInputType.IsReadOnly = False
         Me.ucrInputType.Location = New System.Drawing.Point(262, 153)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputType.TabIndex = 6
         '
         'lblType

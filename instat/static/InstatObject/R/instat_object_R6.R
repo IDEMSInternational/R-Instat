@@ -132,12 +132,17 @@ DataBook$set("public", "set_data_objects", function(new_data_objects) {
 }
 )
 
-DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", reset_row_names = TRUE) {
+DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_name = "", column_selection_name = "", reset_row_names = TRUE) {
   new_obj <- self$get_data_objects(data_name)$data_clone()
   if(filter_name != "") {
     subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, retain_attr = TRUE)
     if(reset_row_names) rownames(subset_data) <- 1:nrow(subset_data)
     new_obj$remove_current_filter()
+    new_obj$set_data(subset_data)
+  }
+  if(column_selection_name != "") {
+    subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, column_selection_name = column_selection_name, use_column_selection = FALSE, retain_attr = TRUE)
+    new_obj$remove_current_column_selection()
     new_obj$set_data(subset_data)
   }
   self$append_data_object(new_name, new_obj)
@@ -165,8 +170,9 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
         data_obj_clone <- self$clone_data_object(data_RDS$get_data_objects(data_obj_name), include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_column_selections = include_column_selections, include_calculations = include_calculations, include_comments = include_comments)
-        if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
-          new_name <- next_default_item(data_obj_name, self$get_data_names())
+        if(tolower(data_obj_name) %in% tolower(self$get_data_names()) && !overwrite_existing) {
+          warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
+          new_name <- next_default_item(tolower(data_obj_name), tolower(self$get_data_names()))
           data_obj_clone$append_to_metadata(data_name_label, new_name)
           if(new_name != data_obj_name) {
             for(i in seq_along(new_links_list)) {
@@ -328,22 +334,22 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
 }
 )
 
-DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
+DataBook$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", use_column_selection = TRUE, column_selection_name = "", remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row, start_col, ...) {
   if(!stack_data) {
     if(missing(data_name)) data_name <- self$get_data_names()
     if(length(data_name) > 1) {
       retlist <- list()
       for (curr_name in data_name) {
-        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, column_selection_name = column_selection_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, column_selection_name = column_selection_name, remove_attr = remove_attr, retain_attr = retain_attr, max_cols = max_cols, max_rows = max_rows, drop_unused_filter_levels = drop_unused_filter_levels, start_row = start_row, start_col = start_col))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_sheets)) stop(paste(data_name, "not found."))
-    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
+    return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, use_column_selection = use_column_selection, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
 )
@@ -906,8 +912,8 @@ DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, st
 }
 )
 
-DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), ...) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, ...)
+DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, new_column_names_df, new_labels_df, ...)
   self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 })
 
@@ -1397,11 +1403,10 @@ DataBook$set("public","set_contrasts_of_factor", function(data_name, col_name, n
 }
 )
 
-DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = TRUE, replace = FALSE) {
+DataBook$set("public","create_factor_data_frame", function(data_name, factor, factor_data_frame_name, include_contrasts = FALSE, replace = FALSE, summary_count = TRUE) {
   curr_data_obj <- self$get_data_objects(data_name)
   if(!factor %in% names(curr_data_obj$get_data_frame())) stop(factor, " not found in the data")
   if(!is.factor(curr_data_obj$get_columns_from_data(factor))) stop(factor, " is not a factor column.")
-  create <- TRUE
   if(self$link_exists_from(data_name, factor)) {
     message("Factor data frame already exists.")
     if(replace) {
@@ -1410,14 +1415,13 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
       names(factor_named) <- factor
       curr_factor_df_name <- self$get_linked_to_data_name(data_name, factor_named)
       # TODO what if there is more than 1?
-      if(length(curr_factor_df_name) > 0) self$delete_dataframe(curr_factor_df_name[1])
+      if(length(curr_factor_df_name) > 0) self$delete_dataframes(curr_factor_df_name[1])
     }
     else {
       warning("replace = FALSE so no action will be taken.")
-      create <- FALSE
     }
   }
-  if(create) {
+
     data_frame_list <- list()
     if(missing(factor_data_frame_name)) factor_data_frame_name <- paste0(data_name, "_", factor)
     factor_data_frame_name <- make.names(factor_data_frame_name)
@@ -1426,11 +1430,12 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     factor_column <- curr_data_obj$get_columns_from_data(factor)
     factor_data_frame <- data.frame(levels(factor_column))
     names(factor_data_frame) <- factor
-    if(include_contrasts) {
-      factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
-    }
+    if(include_contrasts) factor_data_frame <- cbind(factor_data_frame, contrasts(factor_column))
+    if(summary_count) factor_data_frame <- cbind(factor_data_frame, summary(factor_column))
+
     row.names(factor_data_frame) <- 1:nrow(factor_data_frame)
     names(factor_data_frame)[2:ncol(factor_data_frame)] <- paste0("C", 1:(ncol(factor_data_frame)-1))
+    if(summary_count) colnames(factor_data_frame)[ncol(factor_data_frame)] <- "Frequencies"
     data_frame_list[[factor_data_frame_name]] <- factor_data_frame
     self$import_data(data_frame_list)
     factor_data_obj <- self$get_data_objects(factor_data_frame_name)
@@ -1439,7 +1444,6 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
     names(factor) <- factor
     self$add_link(from_data_frame = data_name, to_data_frame = factor_data_frame_name, link_pairs = factor, type = keyed_link_label)
   }
-}
 )
 
 DataBook$set("public","split_date", function(data_name, col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
@@ -1457,8 +1461,18 @@ DataBook$set("public", "import_SST", function(dataset, data_from = 5, data_names
 }
 )
 
-DataBook$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number, nrow = NULL, ncol = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, facet_xsize = 7, facet_ysize = 11, scale_ydate = FALSE, date_ybreaks, step = 1, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, display_rain_days = display_rain_days, rain_cats = rain_cats, graph_subtitle = graph_subtitle, graph_caption = graph_caption, title_size = title_size, subtitle_size = subtitle_size, caption_size = caption_size, labelXAxis = labelXAxis, labelYAxis = labelYAxis, xSize = xSize, ySize = ySize, Xangle = Xangle, Yangle = Yangle, scale_xdate = scale_xdate, fromXAxis = fromXAxis, toXAxis = toXAxis, byXaxis = byXaxis, xlabelsize = xlabelsize, scale_ydate = scale_ydate, date_ybreaks = date_ybreaks, step = step, ylabelsize = ylabelsize, date_ylabels = date_ylabels, legend_position = legend_position, dir = dir, row_col_number = row_col_number, nrow = nrow, ncol = ncol, scale = scale, facet_xsize = facet_xsize, facet_ysize = facet_ysize)
+DataBook$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number, nrow = NULL, ncol = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, facet_xsize = 9, facet_ysize = 9, facet_xangle = 90, facet_yangle = 90, scale_ydate = FALSE, date_ybreaks, step = 1, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col,
+                                                       element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, 
+                                                       coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title, key_colours = key_colours, 
+                                                       display_rain_days = display_rain_days, rain_cats = rain_cats, graph_subtitle = graph_subtitle, 
+                                                       graph_caption = graph_caption, title_size = title_size, subtitle_size = subtitle_size, 
+                                                       caption_size = caption_size, labelXAxis = labelXAxis, labelYAxis = labelYAxis, xSize = xSize, 
+                                                       ySize = ySize, Xangle = Xangle, Yangle = Yangle, scale_xdate = scale_xdate, fromXAxis = fromXAxis, 
+                                                       toXAxis = toXAxis, byXaxis = byXaxis, xlabelsize = xlabelsize, scale_ydate = scale_ydate, date_ybreaks = date_ybreaks,
+                                                       step = step, ylabelsize = ylabelsize, date_ylabels = date_ylabels, legend_position = legend_position, 
+                                                       dir = dir, row_col_number = row_col_number, nrow = nrow, ncol = ncol, scale = scale, facet_xsize = facet_xsize,
+                                                       facet_ysize = facet_ysize, facet_xangle = facet_xangle, facet_yangle = facet_yangle)
 }
 )
 
@@ -2702,5 +2716,18 @@ DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_col
     self$add_key(data_name, key_column_names)
     }
   self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
+}
+)
+
+DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","cols")) {
+  self$get_data_objects(data_name)$remove_empty(which = which)
+})
+
+DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
+  self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
+})
+
+DataBook$set("public","has_labels", function(data_name, col_names) {
+  self$get_data_objects(data_name)$has_labels(col_names)
 }
 )
