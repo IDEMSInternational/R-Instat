@@ -96,6 +96,8 @@ Public Class ucrFilter
     'this may cause unintended 'load' bugs to some controls like reogrids
     'when refactoring the sequence of events that call this,
     'making sure that this is only called during this control's loading event should be prioritised
+    'See issue #7408 comments
+
     Private Sub VariableTypeProperties()
         ucrReceiverExpression.Visible = False
         lblSelectLevels.Visible = False
