@@ -370,14 +370,9 @@ Public Class dlgNewDataFrame
             Dim strColumnName As String = row.Cells("colNames").Value
             clsColExpRFunction.ClearParameters()
             If strType = "Sequence" Then
-                If strDefault = "NA" Then
-                    clsColExpRFunction.AddParameter("from", 1, bIncludeArgumentName:=False, iPosition:=0)
-                    clsColExpRFunction.AddParameter("to", iRows, bIncludeArgumentName:=False, iPosition:=1)
-                Else
-                    Dim iTemp As Integer = iRows + CInt(strDefault) - 1
-                    clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
-                    clsColExpRFunction.AddParameter("to", iTemp, bIncludeArgumentName:=False, iPosition:=1)
-                End If
+                Dim iTemp As Integer = iRows + CInt(strDefault) - 1
+                clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                clsColExpRFunction.AddParameter("to", iTemp, bIncludeArgumentName:=False, iPosition:=1)
             Else
                 clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
             End If
