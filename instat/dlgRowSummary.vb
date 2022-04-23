@@ -24,11 +24,11 @@ Public Class dlgRowSummary
     Private clsRowWisePipeOperator As New ROperator
     Private clsRowWiseFunction, clsMutateFunction As New RFunction
     Private clsMeanFunction, clsSumFunction, clsStandardDeviationFunction, clsMinimumFunction, clsMaximumFunction,
-    clsMedianFunction, clsCountFunction, clsNumberMissingFunction, clsIsNaFunction, clsIsNotNaFunction, clsAnyDuplicatedFunction,
+    clsMedianFunction, clsIsNaFunction, clsIsNotNaFunction, clsAnyDuplicatedFunction, clsTrimmedMeanFunction,
     clsAnyNaFuction, clsCvFunction, clsGmeanFunction, clsHmeanFunction, clsIQRFunction, clsKurtosisFunction, clsMadFunction, clsMcFunction,
-    clsTrimmedMeanFunction, clsMfvFunction, clsMfv1Function, clsQuantileFunction, clsSkewnessFunction, clsRowRanksFunction, clsRowRangesFunction,
+    clsMfv1Function, clsQuantileFunction, clsSkewnessFunction, clsRowRanksFunction, clsRowRangesFunction, clsSelectFunction,
     clsRowQuantilesFunction, clsAsMatrixFunction, clsDimensionFunction As New RFunction
-    Private clsBaseFunction, clsListFunction As New RFunction
+    Private clsListFunction As New RFunction
 
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -140,10 +140,12 @@ Public Class dlgRowSummary
 
         ucrPnlStatistics.AddToLinkedControls(ucrChkIgnoreMissingValues, {rdoMean, rdoMinimum, rdoSum, rdoMedian, rdoStandardDeviation, rdoMaximum}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStatistics.AddToLinkedControls(ucrInputUserDefined, {rdoMore}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlMultipleRowSummary.AddToLinkedControls(ucrChkTiesMethod, {rdoRowRanks}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMultipleRowSummary.AddToLinkedControls({ucrInputProbability, ucrChkType}, {rdoRowQuantile}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlRowSummaries.AddToLinkedControls(ucrPnlStatistics, {rdoSingle}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlRowSummaries.AddToLinkedControls(ucrPnlMultipleRowSummary, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRowSummaries.AddToLinkedControls(ucrPnlMultipleRowSummary, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrPnlStatistics.SetLinkedDisplayControl(grpStatistic)
         ucrPnlMultipleRowSummary.SetLinkedDisplayControl(grpMultipleRowSummary)
@@ -153,13 +155,26 @@ Public Class dlgRowSummary
         ucrChkType.AddToLinkedControls({ucrInputType}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True,
                                         bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="7")
         'ucrInputUserDefined
-        ucrInputUserDefined.SetItems({"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean, trim=0.2",
-                                     "mfv1", "quantile, probs=0.5", "skewness"})
+        ucrInputUserDefined.SetItems({"anyDuplicated", "anyNA", "cv", "Gmean", "Hmean", "IQR", "kurtosis", "mad", "mc", "mean",
+                                     "mfv1", "quantile", "skewness"})
+        ucrInputUserDefined.AddToLinkedControls(ucrNudProp, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputUserDefined.AddToLinkedControls(ucrNudTrim, {"mean"}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNewDataFrameName.SetPrefix("row_summary")
-        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
-        ucrNewDataFrameName.SetLabelText("New Dataframe Name:")
-        ucrNewDataFrameName.SetIsTextBox()
+        ucrNudProp.SetParameter(New RParameter("probs", 1))
+        ucrNudProp.SetMinMax(0, 1)
+        ucrNudProp.Increment = 0.1
+        ucrNudProp.DecimalPlaces = 1
+        ucrNudProp.SetLinkedDisplayControl(lblProp)
+
+        ucrNudTrim.SetParameter(New RParameter("trim", 1))
+        ucrNudTrim.SetMinMax(0, 1)
+        ucrNudTrim.DecimalPlaces = 1
+        ucrNudTrim.Increment = 0.1
+        ucrNudTrim.SetLinkedDisplayControl(lblTrim)
+        ''ucrNewDataFrameName.SetPrefix("row_summary")
+        ''ucrNewDataFrameName.SetSaveTypeAsColumn()
+        ''ucrNewDataFrameName.SetLabelText("New column name:")
+        ''ucrNewDataFrameName.SetIsTextBox()
 
         ucrSaveNewDataFrame.SetLabelText("New column name:")
         ucrSaveNewDataFrame.SetSaveTypeAsColumn()
@@ -175,7 +190,6 @@ Public Class dlgRowSummary
         clsGetColumnsFunction = New RFunction
         clsRowWiseFunction = New RFunction
         clsMutateFunction = New RFunction
-        clsBaseFunction = New RFunction
         clsListFunction = New RFunction
         clsMeanFunction = New RFunction
         clsSumFunction = New RFunction
@@ -183,10 +197,8 @@ Public Class dlgRowSummary
         clsMinimumFunction = New RFunction
         clsMaximumFunction = New RFunction
         clsMedianFunction = New RFunction
-        clsCountFunction = New RFunction
         clsIsNaFunction = New RFunction
         clsIsNotNaFunction = New RFunction
-        clsNumberMissingFunction = New RFunction
         clsAnyDuplicatedFunction = New RFunction
         clsAnyNaFuction = New RFunction
         clsCvFunction = New RFunction
@@ -196,9 +208,7 @@ Public Class dlgRowSummary
         clsKurtosisFunction = New RFunction
         clsMadFunction = New RFunction
         clsMcFunction = New RFunction
-        clsTrimmedMeanFunction = New RFunction
         clsMfv1Function = New RFunction
-        clsMfvFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSkewnessFunction = New RFunction
         clsRowRanksFunction = New RFunction
@@ -206,11 +216,13 @@ Public Class dlgRowSummary
         clsRowQuantilesFunction = New RFunction
         clsAsMatrixFunction = New RFunction
         clsDimensionFunction = New RFunction
+        clsTrimmedMeanFunction = New RFunction
+        clsSelectFunction = New RFunction
 
         'reset
         ucrSelectorForRowSummaries.Reset()
         ucrReceiverForRowSummaries.SetMeAsReceiver()
-        ucrNewDataFrameName.Reset()
+        ucrSaveNewDataFrame.Reset()
         ucrInputProbability.Reset()
         ucrInputUserDefined.SetName("anyDuplicated")
 
@@ -227,44 +239,64 @@ Public Class dlgRowSummary
         clsMutateFunction.SetRCommand("mutate")
         clsMutateFunction.AddParameter("Mean", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
 
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+
         clsRowWisePipeOperator.SetOperation("%>%")
         clsRowWisePipeOperator.AddParameter("left", clsRFunctionParameter:=clsRowWiseFunction, iPosition:=0)
         clsRowWisePipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+        clsRowWisePipeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
+
 
         clsMeanFunction.SetRCommand("mean")
-        clsSumFunction.SetRCommand("sum")
-        clsStandardDeviationFunction.SetRCommand("sd")
-        clsMinimumFunction.SetRCommand("min")
-        clsMaximumFunction.SetRCommand("max")
-        clsMedianFunction.SetRCommand("median")
-        clsAnyDuplicatedFunction.SetRCommand("anyDuplicated")
-        clsAnyNaFuction.SetRCommand("anyNA")
-        clsCvFunction.SetPackageName("raster")
-        clsCvFunction.SetRCommand("cv")
-        clsGmeanFunction.SetPackageName("DescTools")
-        clsGmeanFunction.SetRCommand("Gmean")
-        clsHmeanFunction.SetPackageName("DescTools")
-        clsHmeanFunction.SetRCommand("Hmean")
-        clsIQRFunction.SetRCommand("IQR")
-        clsKurtosisFunction.SetPackageName("e1071")
-        clsKurtosisFunction.SetRCommand("kurtosis")
-        clsMadFunction.SetRCommand("mad")
-        clsMcFunction.SetPackageName("robustbase")
-        clsMcFunction.SetRCommand("mc")
+
         clsTrimmedMeanFunction.SetRCommand("mean")
         clsTrimmedMeanFunction.AddParameter("trim", "0.2", iPosition:=1)
+
+        clsSumFunction.SetRCommand("sum")
+
+        clsStandardDeviationFunction.SetRCommand("sd")
+
+        clsMinimumFunction.SetRCommand("min")
+
+        clsMaximumFunction.SetRCommand("max")
+
+        clsMedianFunction.SetRCommand("median")
+
+        clsAnyDuplicatedFunction.SetRCommand("anyDuplicated")
+
+        clsAnyNaFuction.SetRCommand("anyNA")
+
+        clsCvFunction.SetPackageName("raster")
+        clsCvFunction.SetRCommand("cv")
+
+        clsGmeanFunction.SetPackageName("DescTools")
+        clsGmeanFunction.SetRCommand("Gmean"
+                                     )
+        clsHmeanFunction.SetPackageName("DescTools")
+        clsHmeanFunction.SetRCommand("Hmean")
+
+        clsIQRFunction.SetRCommand("IQR")
+
+        clsKurtosisFunction.SetPackageName("e1071")
+        clsKurtosisFunction.SetRCommand("kurtosis")
+
+        clsMadFunction.SetRCommand("mad")
+
+        clsMcFunction.SetPackageName("robustbase")
+        clsMcFunction.SetRCommand("mc")
+
         clsMfv1Function.SetPackageName("statip")
         clsMfv1Function.SetRCommand("mfv1")
+
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", "0.5", iPosition:=1)
+
         clsSkewnessFunction.SetPackageName("e1071")
         clsSkewnessFunction.SetRCommand("skewness")
 
         clsIsNaFunction.SetRCommand("is.na")
         clsIsNotNaFunction.SetRCommand("!is.na")
-
-        clsBaseFunction.SetRCommand("data_book$import_data")
-        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction)
 
         clsListFunction.SetRCommand("list")
 
@@ -286,7 +318,7 @@ Public Class dlgRowSummary
 
         clsAsMatrixFunction.SetRCommand("as.matrix")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
+        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -306,31 +338,37 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsKurtosisFunction, New RParameter("kurtosis", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=14)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMadFunction, New RParameter("mad", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
         ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMcFunction, New RParameter("mc", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsTrimmedMeanFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfv1Function, New RParameter("mfv1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
-        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsSkewnessFunction, New RParameter("skewness", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsMfv1Function, New RParameter("mfv1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsSkewnessFunction, New RParameter("skewness", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
+        ucrReceiverForRowSummaries.AddAdditionalCodeParameterPair(clsTrimmedMeanFunction, New RParameter("mean", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
+
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsSumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsStandardDeviationFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=2)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMinimumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=3)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMaximumFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=4)
         ucrChkIgnoreMissingValues.AddAdditionalCodeParameterPair(clsMedianFunction, ucrChkIgnoreMissingValues.GetParameter(), iAdditionalPairNo:=5)
+
         ucrSaveNewDataFrame.AddAdditionalRCode(clsRowRangesFunction, iAdditionalPairNo:=1)
         ucrSaveNewDataFrame.AddAdditionalRCode(clsRowQuantilesFunction, iAdditionalPairNo:=2)
+        ucrSaveNewDataFrame.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=2)
+
         ucrChkTiesMethod.SetRCode(clsRowRanksFunction, bReset)
         ucrChkType.SetRCode(clsRowQuantilesFunction, bReset)
         ucrChkIgnoreMissingValues.SetRCode(clsMeanFunction, bReset)
         ucrReceiverForRowSummaries.SetRCode(clsMeanFunction, bReset)
         ucrPnlMultipleRowSummary.SetRCode(clsDummyRowFunction, bReset)
+        ucrNudProp.SetRCode(clsQuantileFunction, bReset)
+        ucrNudTrim.SetRCode(clsTrimmedMeanFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsRowRanksFunction, bReset)
         If bReset Then
             ucrPnlStatistics.SetRCode(clsMeanFunction, bReset)
-            ucrPnlRowSummaries.SetRCode(clsBaseFunction, bReset)
+            'ucrPnlRowSummaries.SetRCode(clsBaseFunction, bReset)
         End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrNewDataFrameName.IsComplete Then
+        If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrSaveNewDataFrame.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -371,66 +409,96 @@ Public Class dlgRowSummary
             clsListFunction.ClearParameters()
             If rdoMean.Checked Then
                 clsMutateFunction.AddParameter("Mean", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Mean", iPosition:=0)
             ElseIf rdoSum.Checked Then
                 clsSumFunction.AddParameter("x", ucrReceiverForRowSummaries.GetVariableNames("False"), bIncludeArgumentName:=False, iPosition:=0)
                 clsMutateFunction.AddParameter("Sum", clsRFunctionParameter:=clsSumFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Sum", "Sum", iPosition:=0)
             ElseIf rdoStandardDeviation.Checked Then
                 clsMutateFunction.AddParameter("Standard_deviation", clsRFunctionParameter:=clsStandardDeviationFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Standard_deviation", "Standard_deviation", iPosition:=0)
             ElseIf rdoMinimum.Checked Then
                 clsMutateFunction.AddParameter("Minimum", clsRFunctionParameter:=clsMinimumFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Minimum", "Minimum", iPosition:=0)
+
             ElseIf rdoMaximum.Checked Then
                 clsMutateFunction.AddParameter("Maximum", clsRFunctionParameter:=clsMaximumFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Maximum", "Maximum", iPosition:=0)
+
             ElseIf rdoMedian.Checked Then
                 clsMutateFunction.AddParameter("Median", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Median", "Median", iPosition:=0)
+
             ElseIf rdoCount.Checked Then
                 clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNotNaFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsMutateFunction.AddParameter("Count", clsRFunctionParameter:=clsSumFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Count", "Count", iPosition:=0)
+
             ElseIf rdoNumberMissing.Checked Then
                 clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsIsNaFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsMutateFunction.AddParameter("Number_missing", clsRFunctionParameter:=clsSumFunction, iPosition:=0)
+                clsSelectFunction.AddParameter("Number_missing", iPosition:=0)
             ElseIf rdoMore.Checked Then
                 Select Case ucrInputUserDefined.GetText()
                     Case "anyDuplicated"
                         clsMutateFunction.AddParameter("anyDuplicated", clsRFunctionParameter:=clsAnyDuplicatedFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("anyDuplicated", "anyDuplicated", iPosition:=0)
                     Case "anyNA"
                         clsMutateFunction.AddParameter("anyNA", clsRFunctionParameter:=clsAnyNaFuction, iPosition:=0)
+                        clsSelectFunction.AddParameter("anyNA", "anyNA", iPosition:=0)
                     Case "cv"
                         clsMutateFunction.AddParameter("cv", clsRFunctionParameter:=clsCvFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("cv", "cv", iPosition:=0)
                     Case "Gmean"
                         clsMutateFunction.AddParameter("Gmean", clsRFunctionParameter:=clsGmeanFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("Gmean", "Gmean", iPosition:=0)
                     Case "Hmean"
                         clsMutateFunction.AddParameter("Hmean", clsRFunctionParameter:=clsHmeanFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("Hmean", "Hmean", iPosition:=0)
                     Case "IQR"
                         clsMutateFunction.AddParameter("IQR", clsRFunctionParameter:=clsIQRFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("IQR", clsRFunctionParameter:=clsAnyDuplicatedFunction, iPosition:=0)
                     Case "kurtosis"
                         clsMutateFunction.AddParameter("kurtosis", clsRFunctionParameter:=clsKurtosisFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("kurtosis", "kurtosis", iPosition:=0)
                     Case "mad"
                         clsMutateFunction.AddParameter("mad", clsRFunctionParameter:=clsMadFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("mad", "mad", iPosition:=0)
                     Case "mc"
                         clsMutateFunction.AddParameter("mc", clsRFunctionParameter:=clsMcFunction, iPosition:=0)
-                    Case "mean, trim=0.2"
-                        clsMutateFunction.AddParameter("mean", clsRFunctionParameter:=clsTrimmedMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
+                        clsSelectFunction.AddParameter("mc", "mc", iPosition:=0)
+                    Case "mean"
+                        clsMutateFunction.AddParameter("mean", clsRFunctionParameter:=clsTrimmedMeanFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("mean", "mean", iPosition:=0)
                     Case "mfv1"
                         clsMutateFunction.AddParameter("mfv1", clsRFunctionParameter:=clsMfv1Function, iPosition:=0)
-                    Case "quantile, probs=0.5"
+                        clsSelectFunction.AddParameter("mfv1", "mfv1", iPosition:=0)
+                    Case "quantile"
                         clsMutateFunction.AddParameter("quantile", clsRFunctionParameter:=clsQuantileFunction, bIncludeArgumentName:=False, iPosition:=0)
+                        clsSelectFunction.AddParameter("quantile", "quantile", iPosition:=0)
                     Case "skewness"
                         clsMutateFunction.AddParameter("skewness", clsRFunctionParameter:=clsSkewnessFunction, iPosition:=0)
+                        clsSelectFunction.AddParameter("skewness", "skewness", iPosition:=0)
                 End Select
             End If
-            clsPipeOperator.SetAssignTo(ucrNewDataFrameName.GetText)
-            clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
+            'clsPipeOperator.SetAssignTo(ucrSaveNewDataFrame.GetText)
+            'clsListFunction.AddParameter(ucrSaveNewDataFrame.GetText, clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
         Else
-            If rdoRowRange.Checked Then
-                clsDummyRowFunction.AddParameter("check", "rowRange", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRangesFunction)
-            ElseIf rdoRowQuantile.Checked Then
-                clsDummyRowFunction.AddParameter("check", "rowQuantiles", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRowQuantilesFunction)
-            Else
-                clsDummyRowFunction.AddParameter("check", "rowRanks", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRowRanksFunction)
+            If rdoMultiple.Checked Then
+                If rdoRowRange.Checked Then
+                    clsDummyRowFunction.AddParameter("check", "rowRange", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRowRangesFunction)
+                    ucrSaveNewDataFrame.SetPrefix("r_min")
+                ElseIf rdoRowQuantile.Checked Then
+                    clsDummyRowFunction.AddParameter("check", "rowQuantiles", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRowQuantilesFunction)
+                    ucrSaveNewDataFrame.SetPrefix("q0.2")
+                Else
+                    clsDummyRowFunction.AddParameter("check", "rowRanks", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRowRanksFunction)
+                    ucrSaveNewDataFrame.SetPrefix("r")
+                End If
             End If
         End If
 
