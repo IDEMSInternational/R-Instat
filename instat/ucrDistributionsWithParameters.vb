@@ -117,7 +117,7 @@ Public Class ucrDistributionsWithParameters
                 ucrInputParameter1.IsReadOnly = False
             End If
         End If
-            OnControlValueChanged()
+        OnControlValueChanged()
     End Sub
 
     Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
