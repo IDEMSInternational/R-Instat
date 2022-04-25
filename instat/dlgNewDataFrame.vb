@@ -345,8 +345,6 @@ Public Class dlgNewDataFrame
                         End If
                     Case "Integer"
                         clsColExpRFunction.SetRCommand("as.integer")
-                    Case "Sequence"
-                        clsColExpRFunction.SetRCommand("seq")
                     Case Else
                         MsgBox("Developer error: Only expected one predefined item to set the column type.")
                 End Select
@@ -359,25 +357,30 @@ Public Class dlgNewDataFrame
             clsEmptyRepFunction.AddParameter("times", iRows, bIncludeArgumentName:=False, iPosition:=1)
 
             Dim strDefault As String = row.Cells("colDefault").Value
-            If strDefault = "NA" Then
-                clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
-            ElseIf IsNumeric(strDefault) Then
-                clsEmptyRepFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-            End If
+            If strDefault IsNot Nothing Then
+                If strDefault = "NA" Then
+                    clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf IsNumeric(strDefault) Then
+                    clsEmptyRepFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                Else
+                    clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                End If
 
-            Dim strColumnName As String = row.Cells("colNames").Value
-            clsColExpRFunction.ClearParameters()
-            If strType = "Sequence" Then
-                Dim iTemp As Integer = iRows + CInt(strDefault) - 1
-                clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
-                clsColExpRFunction.AddParameter("to", iTemp, bIncludeArgumentName:=False, iPosition:=1)
-            Else
-                clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+                Dim strColumnName As String = row.Cells("colNames").Value
+                clsColExpRFunction.ClearParameters()
+                If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
+                                        AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
+                    Dim iTemp As Integer = iRows + CInt(strDefault) - 1
+                    clsColExpRFunction.SetRCommand("seq")
+                    clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
+                    clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                Else
+                    clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+                End If
+                clsNewDataFrameFunction.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
+                iColPosition += 1
             End If
-            clsNewDataFrameFunction.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
-            iColPosition += 1
         Next
     End Sub
 
@@ -435,7 +438,6 @@ Public Class dlgNewDataFrame
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles dataTypeGridView.DataError
         If e.Context _
                     = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize) Then
-
             e.ThrowException = False
         End If
     End Sub
@@ -490,22 +492,31 @@ Public Class dlgNewDataFrame
                 dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
             End If
         End If
-    End Sub
-
-    Private Sub dataTypeGridView_CellParsing(sender As Object, e As DataGridViewCellParsingEventArgs) Handles dataTypeGridView.CellParsing
-        If e.DesiredType IsNot GetType(Integer) OrElse String.IsNullOrEmpty(e.Value?.ToString()) Then Return
-        Dim dgv = DirectCast(sender, DataGridView)
-        Dim cell = dgv(e.ColumnIndex, e.RowIndex)
-
-        If Not Integer.TryParse(e.Value.ToString(), Nothing) Then
-            cell.ErrorText = $"Invalid Value: {e.Value}"
-            e.Value = cell.Value
-            e.ParsingApplied = True
-
-        Else
-            cell.ErrorText = String.Empty
+        If e.ColumnIndex = 3 Then
+            Dim cbDefault = CType(dataTypeGridView.Columns(3), DataGridViewComboBoxColumn)
+            If Not cbDefault.Items.Contains(e.FormattedValue) Then
+                cbDefault.Items.Add(e.FormattedValue)
+                Dim iColumnIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
+                Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
+                dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
+            End If
         End If
     End Sub
+
+    'Private Sub dataTypeGridView_CellParsing(sender As Object, e As DataGridViewCellParsingEventArgs) Handles dataTypeGridView.CellParsing
+    'If e.DesiredType IsNot GetType(Integer) OrElse String.IsNullOrEmpty(e.Value?.ToString()) Then Return
+    'Dim dgv = DirectCast(sender, DataGridView)
+    'Dim cell = dgv(e.ColumnIndex, e.RowIndex)
+
+    'If Not Integer.TryParse(e.Value.ToString(), Nothing) Then
+    '    cell.ErrorText = $"Invalid Value: {e.Value}"
+    '    e.Value = cell.Value
+    '    e.ParsingApplied = True
+
+    'Else
+    '    cell.ErrorText = String.Empty
+    'End If
+    'End Sub
 
     Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
         SampleEmpty()
@@ -532,7 +543,8 @@ Public Class dlgNewDataFrame
         If dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
             Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
             AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-            If dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
+            If dataTypeGridView.CurrentCell.ColumnIndex = 4 _
+                                OrElse dataTypeGridView.CurrentCell.ColumnIndex = 3 Then
                 selectedComboBox.DropDownStyle = ComboBoxStyle.DropDown
             End If
         End If
@@ -552,12 +564,12 @@ Public Class dlgNewDataFrame
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
 
             End If
-            If selectedCombobox.SelectedItem = "Sequence" Then
-                dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(Integer)
-                dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).Value = 1
-            Else
-                dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(String)
-            End If
+            'If selectedCombobox.SelectedItem = "Integer" Then
+            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(Integer)
+            '    dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).Value = 1
+            'Else
+            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(String)
+            'End If
         End If
     End Sub
 
