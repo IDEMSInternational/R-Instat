@@ -26,7 +26,7 @@ Imports unvell.ReoGrid.Events
 ''' <para>In  NormalGrid normal state, if set to internally write to parameters, 
 ''' the parameters will have a list of the entire values of the column regardless of whether
 ''' the values were edit or not.
-''' Reading R parameters will fail if new level created was no submitted to R</para>
+''' Reading R parameters will fail if any new levels created were not submitted to R</para>
 ''' <para>In Selector state mode, if set to internally write to parameters, 
 ''' the parameters will have a list of the selected values</para>
 ''' </summary>
