@@ -162,7 +162,10 @@ Public Class ucrFactor
 
     Private Sub _grdSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles _grdSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            MsgBox("Deleting cells is currently disabled. " &
+                   "This feature will be included in future versions." &
+                   Environment.NewLine & "To remove a cell's value, replace the value with NA.",
+                   MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
     End Sub
