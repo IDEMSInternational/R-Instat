@@ -390,7 +390,13 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
     }
-    if(all(c(data_name_label, label_label, row_count_label, column_count_label, data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label, row_count_label, column_count_label, data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label), sort(setdiff(names(retlist), c(data_name_label, label_label, row_count_label, column_count_label, data_type_label, is_calculated_label,is_hidden_label,is_linkable, key_label))))]
+    if(all(c(data_name_label, label_label, row_count_label, column_count_label,
+             data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label) %in% names(retlist))){
+      retlist <- retlist[ ,c(c(data_name_label, label_label, row_count_label, column_count_label, data_type_label,
+                           is_calculated_label, is_hidden_label, is_linkable, key_label),
+                           sort(setdiff(names(retlist), c(data_name_label,label_label, row_count_label, column_count_label,
+                           data_type_label, is_calculated_label,is_hidden_label,is_linkable, key_label))))]
+    }
     else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, sort(setdiff(names(retlist), data_name_label)))]
     i = i + 1
   }
