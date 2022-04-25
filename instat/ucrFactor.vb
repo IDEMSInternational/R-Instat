@@ -182,7 +182,8 @@ Public Class ucrFactor
                 MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
                 bValid = False
             ElseIf e.NewData.Contains(".") Then
-                MsgBox("Levels must not be decimal .", MsgBoxStyle.Information, "Invalid Value")
+                MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
+
                 bValid = False
             End If
         End If
