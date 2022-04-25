@@ -88,7 +88,7 @@ Public Class ucrFactor
     Private _enumControlState As ControlStates = ControlStates.NormalGrid
 
     ''' <summary>
-    ''' states that the control can be used in dialogs
+    ''' the control's valid states
     ''' </summary>
     Private Enum ControlStates
         'can contain editable columns. no row selection is internally supported 
