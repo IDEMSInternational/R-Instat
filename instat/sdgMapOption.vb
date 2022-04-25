@@ -29,6 +29,9 @@ Public Class sdgMapOption
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrBase.iHelpTopicID = 645
+
         ucrInputLongMin.SetParameter(New RParameter("longmin", bNewIncludeArgumentName:=False))
         ucrInputLongMin.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
         ucrInputLongMin.AddQuotesIfUnrecognised = False
