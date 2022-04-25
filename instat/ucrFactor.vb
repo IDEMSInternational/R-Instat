@@ -148,7 +148,8 @@ Public Class ucrFactor
         'However when reloading a dialog, the receiver always clears it's contents first before
         'restoring the previous selected variable.
         'This forces this control to never retain what was previously selected despite it's inbuilt ability to do so
-        'Once the receiver is refactored this comment can be removed.
+        'todo Once the receiver is refactored this comment can be removed.
+
         FillGridWithNewDataSheet()
     End Sub
 
