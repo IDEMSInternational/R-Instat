@@ -21,7 +21,7 @@ Public Class ucrInput
     Public bUserTyped As Boolean = False
     Public Event NameChanged()
     Protected strValidationType As String = "None"
-    Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
+    Protected ReadOnly strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
     Public clsRList As New RFunction
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
