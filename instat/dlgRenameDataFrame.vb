@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgRenameDataFrame
     Public bFirstLoad As Boolean = True
     Dim strSelectedDataFrame As String = ""
@@ -91,6 +92,23 @@ Public Class dlgRenameDataFrame
 
     Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToRename.ControlValueChanged
         CheckAutoName()
+    End Sub
+
+    Private Function GetDataLabel()
+        Dim clsDataFrameLabelsRFunction = New RFunction
+        Dim expItems As SymbolicExpression
+
+        clsDataFrameLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame_label")
+        clsDataFrameLabelsRFunction.AddParameter("data_name", Chr(34) & ucrDataFrameToRename.strCurrDataFrame & Chr(34), iPosition:=0)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsDataFrameLabelsRFunction.ToScript(), bSilent:=True)
+        Return expItems.AsCharacter(0)
+    End Function
+
+    Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlValueChanged
+        If ucrInputNewName.GetText <> "" Then
+            ucrInputLabel.SetName(GetDataLabel())
+        End If
     End Sub
 
     Private Sub ucrInputNewName_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
