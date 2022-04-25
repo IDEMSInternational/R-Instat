@@ -369,7 +369,7 @@ Public Class dlgTransformText
             grpParameters.Size = New Size(grpParameters.Width, igrpParameterFullHeight / 3.04)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.39)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.36)
-            Me.Size = New Size(482, iFullHeight / 1.27)
+            Me.Size = New Size(Me.Width, iFullHeight / 1.27)
         ElseIf rdoLength.Checked Then
             grpParameters.Visible = False
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iNewColMaxY / 1.76)
