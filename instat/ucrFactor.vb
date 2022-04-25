@@ -206,7 +206,16 @@ Public Class ucrFactor
     End Sub
 
 
-    'sets the state of the control, linked receiver and grid properties
+    ''' <summary>
+    ''' sets the state of the control, linked receiver and grid properties
+    ''' </summary>
+    ''' <param name="enumControlState"></param>
+    ''' <param name="ucrLinkedReceiver"></param>
+    ''' <param name="dctParamAndColNames"></param>
+    ''' <param name="hiddenColNames"></param>
+    ''' <param name="extraColNames"></param>
+    ''' <param name="editableColNames"></param>
+    ''' <param name="bIncludeNALevel"></param>
     Private Sub SetupControl(enumControlState As ControlStates,
                              ucrLinkedReceiver As ucrReceiverSingle,
                              Optional dctParamAndColNames As Dictionary(Of String, String) = Nothing,
