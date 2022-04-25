@@ -154,7 +154,9 @@ Public Class ucrFactor
     End Sub
 
     Private Sub _grdSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles _grdSheet.BeforeCut
-        MsgBox("Cutting is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try copying and deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot cut from cells")
+        MsgBox("Cutting is currently disabled. This feature will be included in future versions." &
+               Environment.NewLine & "Try copying and deleting from one column cells at a time.",
+               MsgBoxStyle.Information, "Cannot cut from cells")
         e.IsCancelled = True
     End Sub
 
