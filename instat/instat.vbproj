@@ -11,7 +11,7 @@
     <AssemblyName>instat</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
@@ -3137,6 +3137,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAdvanceOptions.resx">
       <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAdvanceOptions.sw-KE.resx">
       <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
