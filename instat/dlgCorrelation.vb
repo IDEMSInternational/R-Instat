@@ -51,7 +51,6 @@ Public Class dlgCorrelation
         Dim dctMethod As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 421
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
@@ -72,7 +71,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
-        ' cor accepts numeric and logical columns
         ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric", "logical"})
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -231,7 +229,7 @@ Public Class dlgCorrelation
 
         clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
         clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
-        'cls
+
         clsRGGscatMatricReverseOperator.SetOperation("+")
         clsRGGscatMatricReverseOperator.AddParameter("matrix", clsRFunctionParameter:=clsRGGscatMatrixFunction, iPosition:=0)
         clsRGGscatMatricReverseOperator.iCallType = 3
@@ -270,12 +268,10 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-        clsCorrelationTestFunction.iCallType = 2
 
         clsCorrelationFunction.SetPackageName("corrr")
         clsCorrelationFunction.SetRCommand("correlate ")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
-        clsCorrelationFunction.iCallType = 2
 
         clsRearrangeFunction.SetPackageName("corrr")
         clsRearrangeFunction.SetRCommand("rearrange")
@@ -309,7 +305,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
-        'clsCorrelationFunction.SetAssignTo("my_corr", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="my_corr")
+        clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
         clsRGGcorrGraphicsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -342,7 +338,6 @@ Public Class dlgCorrelation
         ucrChkDisplayAsDataFrame.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             ucrPnlColumns.SetRCode(clsFashionModelFunction, bReset)
-            'ucrSaveCorrelation.SetRCode(clsCorrelationFunction, bReset)
         End If
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
@@ -431,8 +426,8 @@ Public Class dlgCorrelation
             End If
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
+            ucrBase.clsRsyntax.iCallType = 2
         End If
-
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
@@ -460,6 +455,7 @@ Public Class dlgCorrelation
             clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
         End If
     End Sub
+
     Private Sub DisplayOptions()
         If ucrChkDisplayOptions.Checked Then
             If ucrChkShave.Checked Then
@@ -495,10 +491,8 @@ Public Class dlgCorrelation
     Private Sub ChangeBaseAsModelOrDataframe()
         If ucrChkDisplayAsDataFrame.Checked Then
             clsDummyFunction.AddParameter("display_as_dataframe", "True", iPosition:=1)
-            ucrBase.clsRsyntax.iCallType = 0
         Else
             clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
-            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
