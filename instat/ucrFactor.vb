@@ -108,7 +108,7 @@ Public Class ucrFactor
         '------------------
 
         ''' <summary>
-        ''' <par>Used to represent the ordinal column from R.</par>
+        ''' <par>Used to represent the ordinal column name from R.</par>
         ''' <par>It's always added in the grid</par> 
         ''' </summary>
         Public Const Ordinal As String = "Ord."
