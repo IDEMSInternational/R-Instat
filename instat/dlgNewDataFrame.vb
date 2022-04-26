@@ -553,8 +553,6 @@ Public Class dlgNewDataFrame
         If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
             Dim iColumnLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
             Dim iRowLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
-            Dim iColumnDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
-            Dim iRowDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
             Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
             If selectedCombobox.SelectedItem = "Factor" Then
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = False
