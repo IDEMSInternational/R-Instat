@@ -491,8 +491,7 @@ Public Class dlgNewDataFrame
                 Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
                 dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
             End If
-        End If
-        If e.ColumnIndex = 3 Then
+        ElseIf e.ColumnIndex = 3 Then
             Dim cbDefault = CType(dataTypeGridView.Columns(3), DataGridViewComboBoxColumn)
             If Not cbDefault.Items.Contains(e.FormattedValue) Then
                 cbDefault.Items.Add(e.FormattedValue)
