@@ -51,6 +51,9 @@ Partial Class dlgOneVariableSummarise
         Me.ucrSelectorOneVarSummarise = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneVarSummarise = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.lblMarginName = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -130,7 +133,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkDisplaySummariesAsRows.AutoSize = True
         Me.ucrChkDisplaySummariesAsRows.Checked = False
-        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(13, 247)
+        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(10, 267)
         Me.ucrChkDisplaySummariesAsRows.Name = "ucrChkDisplaySummariesAsRows"
         Me.ucrChkDisplaySummariesAsRows.Size = New System.Drawing.Size(241, 23)
         Me.ucrChkDisplaySummariesAsRows.TabIndex = 19
@@ -139,7 +142,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkDisplayVariablesAsRows.AutoSize = True
         Me.ucrChkDisplayVariablesAsRows.Checked = False
-        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(13, 270)
+        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(10, 290)
         Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
         Me.ucrChkDisplayVariablesAsRows.Size = New System.Drawing.Size(227, 23)
         Me.ucrChkDisplayVariablesAsRows.TabIndex = 18
@@ -161,7 +164,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 294)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 314)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(241, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
@@ -195,17 +198,50 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 319)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 336)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 243)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputMarginName.TabIndex = 25
+        '
+        'lblMarginName
+        '
+        Me.lblMarginName.AutoSize = True
+        Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMarginName.Location = New System.Drawing.Point(159, 246)
+        Me.lblMarginName.Name = "lblMarginName"
+        Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
+        Me.lblMarginName.TabIndex = 24
+        Me.lblMarginName.Text = "Name :"
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 246)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 23
         '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(421, 383)
+        Me.ClientSize = New System.Drawing.Size(421, 395)
+        Me.Controls.Add(Me.ucrInputMarginName)
+        Me.Controls.Add(Me.lblMarginName)
+        Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.rdoCustomised)
         Me.Controls.Add(Me.rdoDefault)
         Me.Controls.Add(Me.ucrPnlSummaries)
@@ -244,4 +280,7 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents ucrPnlSummaries As UcrPanel
     Friend WithEvents rdoCustomised As RadioButton
     Friend WithEvents rdoDefault As RadioButton
+    Friend WithEvents ucrInputMarginName As ucrInputTextBox
+    Friend WithEvents lblMarginName As Label
+    Friend WithEvents ucrChkDisplayMargins As ucrCheck
 End Class

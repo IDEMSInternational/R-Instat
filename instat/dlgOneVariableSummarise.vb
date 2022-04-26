@@ -20,6 +20,7 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeSet As Boolean = True
     Private clsSummaryFunction, clsSummariesList, clsMmtableFunction,
         clsConcFunction, clsSummaryTableFunction, clsHeaderLeftTopVariableFunction,
                 clsHeaderLeftTopSummaryFunction, clsHeaderTopLeftVariableFunction,
@@ -68,13 +69,23 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddParameterValuesCondition(rdoCustomised, "checked_radio", "customised")
         ucrPnlSummaries.AddParameterValuesCondition(rdoDefault, "checked_radio", "defaults")
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrChkDisplaySummariesAsRows, ucrChkDisplayVariablesAsRows}, {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrChkDisplaySummariesAsRows, ucrChkDisplayVariablesAsRows, ucrChkDisplayMargins},
+                                            {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
+
+        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 3))
+        ucrChkDisplayMargins.SetText("Display Outer Margins")
+        ucrChkDisplayMargins.SetRDefault("FALSE")
+        ucrChkDisplayMargins.AddToLinkedControls({ucrInputMarginName}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
+                                                 bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="All")
+
+        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=4))
+        ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
         ucrChkDisplaySummariesAsRows.SetText("Display Summaries As Rows")
         ucrChkDisplaySummariesAsRows.AddParameterValuesCondition(True, "summary_by_row", "TRUE")
@@ -110,8 +121,8 @@ Public Class dlgOneVariableSummarise
 
         clsMmtableOperator.SetOperation("+")
         clsMmtableOperator.AddParameter("mmtable_function", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
-        clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=3)
-        clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=4)
+        clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
+        clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
 
         clsHeaderLeftTopVariableFunction.SetPackageName("mmtable2")
         clsHeaderLeftTopVariableFunction.SetRCommand("header_left_top")
@@ -145,9 +156,8 @@ Public Class dlgOneVariableSummarise
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=0)
-        clsSummaryTableFunction.AddParameter("include_margins", "TRUE", iPosition:=1)
-        clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=2)
-        clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=3)
+        clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=1)
+        clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsSummaryTableFunction.SetAssignTo("summary_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
@@ -155,14 +165,17 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
+        ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsDummyFunction, bReset)
         ucrChkDisplaySummariesAsRows.SetRCode(clsDummyFunction, bReset)
+        bRCodeSet = True
     End Sub
 
     Public Sub TestOKEnabled()
@@ -227,31 +240,38 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub ucrChkDisplayVariablesAsRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayVariablesAsRows.ControlValueChanged, ucrChkDisplaySummariesAsRows.ControlValueChanged
-        clsMmtableOperator.RemoveParameterByName("header_left_top_variable")
-        clsMmtableOperator.RemoveParameterByName("header_top_left_summary")
-        clsMmtableOperator.RemoveParameterByName("header_left_top_summaries")
-        clsMmtableOperator.RemoveParameterByName("header_top_left_variable")
-        If ucrChkDisplaySummariesAsRows.Checked AndAlso ucrChkDisplayVariablesAsRows.Checked Then
-            clsMmtableOperator.AddParameter("header_top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=5)
-            clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=6)
-        ElseIf ucrChkDisplayVariablesAsRows.Checked Then
-            clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=3)
-            clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=4)
-        ElseIf ucrChkDisplaySummariesAsRows.Checked Then
-            clsMmtableOperator.AddParameter("header_left_top_summaries", clsRFunctionParameter:=clsHeaderLeftTopSummaryFunction, iPosition:=1)
-            clsMmtableOperator.AddParameter("header_top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=2)
-        End If
+        If bRCodeSet Then
+            clsMmtableOperator.RemoveParameterByName("header_left_top_variable")
+            clsMmtableOperator.RemoveParameterByName("header_top_left_summary")
+            clsMmtableOperator.RemoveParameterByName("header_left_top_summaries")
+            clsMmtableOperator.RemoveParameterByName("header_top_left_variable")
+            clsMmtableOperator.RemoveParameterByName("header_left_top_summary")
+            clsMmtableOperator.RemoveParameterByName("header_top__left_summary")
+            If ucrChkDisplaySummariesAsRows.Checked AndAlso ucrChkDisplayVariablesAsRows.Checked Then
+                clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
+                clsMmtableOperator.AddParameter("header_left_top_summary", clsRFunctionParameter:=clsHeaderLeftTopSummaryFunction, iPosition:=2)
+            ElseIf ucrChkDisplayVariablesAsRows.Checked Then
+                clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
+                clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
+            ElseIf ucrChkDisplaySummariesAsRows.Checked Then
+                clsMmtableOperator.AddParameter("header_left_top_summaries", clsRFunctionParameter:=clsHeaderLeftTopSummaryFunction, iPosition:=1)
+                clsMmtableOperator.AddParameter("header_top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=2)
+            Else
+                clsMmtableOperator.AddParameter("header_top_left_variable", clsRFunctionParameter:=clsHeaderTopLeftVariableFunction, iPosition:=1)
+                clsMmtableOperator.AddParameter("header_top__left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
+            End If
 
-        If ucrChkDisplayVariablesAsRows.Checked Then
-            clsDummyFunction.AddParameter("variable_by_row", "TRUE", iPosition:=0)
-        Else
-            clsDummyFunction.AddParameter("variable_by_row", "FALSE", iPosition:=0)
-        End If
+            If ucrChkDisplayVariablesAsRows.Checked Then
+                clsDummyFunction.AddParameter("variable_by_row", "TRUE", iPosition:=0)
+            Else
+                clsDummyFunction.AddParameter("variable_by_row", "FALSE", iPosition:=0)
+            End If
 
-        If ucrChkDisplaySummariesAsRows.Checked Then
-            clsDummyFunction.AddParameter("summary_by_row", "TRUE", iPosition:=1)
-        Else
-            clsDummyFunction.AddParameter("summary_by_row", "FALSE", iPosition:=1)
+            If ucrChkDisplaySummariesAsRows.Checked Then
+                clsDummyFunction.AddParameter("summary_by_row", "TRUE", iPosition:=1)
+            Else
+                clsDummyFunction.AddParameter("summary_by_row", "FALSE", iPosition:=1)
+            End If
         End If
     End Sub
 End Class
