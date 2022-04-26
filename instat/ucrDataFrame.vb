@@ -28,17 +28,12 @@ Public Class ucrDataFrame
     'todo. rename this property to SelectedDataFrameName. 
     Public ReadOnly Property strCurrDataFrame As String
         Get
-            'return cboAvailableDataFrames.Text because cboAvailableDataFrames.SelectedItem could be Nothing
+            'return cboAvailableDataFrames.Text because cboAvailableDataFrames.SelectedItem
+            'could be Nothing
             Return cboAvailableDataFrames.Text
         End Get
     End Property
 
-    ''' <summary>
-    ''' <par>Data frame name that this control should always display as the selected one</par>
-    ''' <para>The control will only display the data frame name if the data frame actually exists</para>
-    ''' <para>todo. Technically, this property is not really needed. Delete? </para>
-    ''' </summary>
-    Private strFixedDataFrame As String = ""
     'If the control is used to set a parameter that is a string i.e. data_name = "survey"
     Private bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_data_frame(data_name = "survey")
@@ -57,7 +52,7 @@ Public Class ucrDataFrame
     ''' </summary>    
     Private bSuppressRefresh As Boolean = False
 
-    'todo. this event can be just be replaced with control value changed event.
+    'todo. this event just be replaced with control value changed event.
     'the ControlValueChanged is sufficent enough. So delete?
     Public Event DataFrameChanged(sender As Object)
 
@@ -173,6 +168,7 @@ Public Class ucrDataFrame
         End If
     End Sub
 
+    'displays the data frame name slected in red if it differs with the selected sheet in the data frame
     Private Sub cboAvailableDataFrames_DrawItem(sender As Object, e As DrawItemEventArgs) Handles cboAvailableDataFrames.DrawItem
 
         If e.Index < 0 Then
