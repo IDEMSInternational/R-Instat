@@ -18,18 +18,13 @@ Imports System.ComponentModel
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports instat.Translations
-Imports unvell.ReoGrid
-Imports unvell.ReoGrid.Events
 
 Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
 
-
-    Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
-
     Public WriteOnly Property DataBook() As clsDataBook
-        Set(ByVal value As clsDataBook)
+        Set(value As clsDataBook)
             _clsDataBook = value
             _grid.DataBook = value
         End Set
@@ -159,6 +154,17 @@ Public Class ucrDataView
     ''' </returns>
     Public Function GetCurrentDataFrameFocus() As clsDataFrame
         Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name))
+    End Function
+
+    ''' <summary>
+    ''' Gets current selected data frame name
+    ''' </summary>
+    ''' <returns>
+    ''' <para>Nothing if no data frame is currently focused.</para>
+    ''' <para>This can happen when all data frames have been deleted</para>
+    ''' </returns>
+    Public Function GetCurrentDataFrameNameFocus() As String
+        Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
     End Function
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click

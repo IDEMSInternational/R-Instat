@@ -85,7 +85,6 @@ Public Class ucrDataFrame
         bUseCurrentFilter = True
         lblDataFrame.AutoSize = True
         bUpdateRCodeFromControl = True
-        lblDataViewerSheet.Text = ""
     End Sub
 
     Public Sub Reset()
@@ -142,12 +141,6 @@ Public Class ucrDataFrame
     ''' </summary>
     Private Sub UpdateValuesAndRaiseEvents()
 
-        'display the data viewer selected data frame if it's different from
-        'this control's selected data frame
-        Dim dataViewerSelectedDataFrame As clsDataFrame = frmMain.ucrDataViewer.GetCurrentDataFrameFocus()
-        lblDataViewerSheet.Text = If(dataViewerSelectedDataFrame IsNot Nothing AndAlso cboAvailableDataFrames.Text <> dataViewerSelectedDataFrame.strName,
-                                       dataViewerSelectedDataFrame.strName, "")
-
         'only set the other values and raise events if the data frame truly changed
         If strCachedDataFrameName = cboAvailableDataFrames.Text Then
             Exit Sub
@@ -157,7 +150,7 @@ Public Class ucrDataFrame
         'of how it's being used by other dialogs
         clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsCurrDataFrame.AddParameter(strParameterName:="data_name",
-                                              strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+                                      strParameterValue:=Chr(34) & cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text)
 
         'set cached data frame name
@@ -178,6 +171,26 @@ Public Class ucrDataFrame
         If Not bSuppressRefresh Then
             UpdateValuesAndRaiseEvents()
         End If
+    End Sub
+
+    Private Sub cboAvailableDataFrames_DrawItem(sender As Object, e As DrawItemEventArgs) Handles cboAvailableDataFrames.DrawItem
+
+        If e.Index < 0 Then
+            Exit Sub
+        End If
+
+        e.DrawBackground()
+
+        'get the item text of the combobox item being draw    
+        Dim strItemtext As String = DirectCast(sender, ComboBox).Items(e.Index).ToString()
+
+        'determine the forecolor of the combo box item  
+        'display data frame name in red if it's different from the data viewer selected sheet name
+        Dim strSelectedSheetName As String = frmMain.ucrDataViewer.GetCurrentDataFrameNameFocus()
+        Dim brush As Brush = If(strItemtext <> strSelectedSheetName, Brushes.Red, Brushes.Black)
+
+        'draw the item text 
+        e.Graphics.DrawString(strItemtext, DirectCast(sender, ComboBox).Font, brush, e.Bounds.X, e.Bounds.Y)
     End Sub
 
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
@@ -204,9 +217,6 @@ Public Class ucrDataFrame
     Public Sub SetDataframe(strDataFrameName As String, Optional bEnableUserSelection As Boolean = True)
         'set if data frame name should be selectable
         cboAvailableDataFrames.Enabled = bEnableUserSelection
-
-        'set the fixed data frame name that should always be displayed
-        'strFixedDataFrame = If(Not bEnableDataFrameNameSelection, strDataFrameName, "")
 
         'load and fill all the data frame names
         LoadDataFrameNamesAndFillComboBox()
@@ -335,4 +345,5 @@ Public Class ucrDataFrame
             LoadDataFrameNamesAndFillComboBox()
         End If
     End Sub
+
 End Class
