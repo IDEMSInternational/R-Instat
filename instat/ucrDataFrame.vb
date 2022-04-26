@@ -188,7 +188,13 @@ Public Class ucrDataFrame
         'determine the forecolor of the combo box item  
         'display data frame name in red if it's different from the data viewer selected sheet name
         Dim strSelectedSheetName As String = frmMain.ucrDataViewer.GetCurrentDataFrameNameFocus()
-        Dim brush As Brush = If(strItemtext <> strSelectedSheetName, Brushes.Red, Brushes.Black)
+
+        Dim brush As Brush = If(Not cboAvailableDataFrames.DroppedDown AndAlso
+            strItemtext <> strSelectedSheetName AndAlso
+            strItemtext = cboAvailableDataFrames.Text,
+            Brushes.Red,
+            Brushes.Black)
+
 
         'draw the item text 
         e.Graphics.DrawString(strItemtext, DirectCast(sender, ComboBox).Font, brush, e.Bounds.X, e.Bounds.Y)
