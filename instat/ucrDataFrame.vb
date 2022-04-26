@@ -105,8 +105,9 @@ Public Class ucrDataFrame
 
         'get current selected data frame name first before deleting
         Dim strSelectedDataFrameName As String = cboAvailableDataFrames.Text
+        'then clear items
         cboAvailableDataFrames.Items.Clear()
-
+        'add new items 
         If bOnlyLinkedToPrimaryDataFrames Then
             'todo. GetLinkedToDataFrameNames should also be done through the data book
             'As of 22/04/022 the data book did not have this feature
@@ -125,7 +126,7 @@ Public Class ucrDataFrame
                 'if this control did not have any any data frame previously selected
                 'then set one from data viewer focused data frame
                 'get data viewer selected data frame 
-                cboAvailableDataFrames.SelectedItem = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().strName
+                cboAvailableDataFrames.SelectedItem = frmMain.ucrDataViewer.GetCurrentDataFrameNameFocus()
             End If
 
         End If

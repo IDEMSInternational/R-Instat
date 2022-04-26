@@ -146,7 +146,8 @@ Public Class ucrDataView
     End Sub
 
     ''' <summary>
-    ''' Gets current selected data frame
+    ''' <para>Gets current selected data frame</para>
+    ''' todo. rename this to GetSelectedDataFrame?
     ''' </summary>
     ''' <returns>
     ''' <para>Nothing if no data frame is currently focused.</para>
@@ -157,7 +158,8 @@ Public Class ucrDataView
     End Function
 
     ''' <summary>
-    ''' Gets current selected data frame name
+    ''' <para>Gets current selected data frame name</para> 
+    ''' todo. rename this to GetSelectedDataFrameName?
     ''' </summary>
     ''' <returns>
     ''' <para>Nothing if no data frame is currently focused.</para>
