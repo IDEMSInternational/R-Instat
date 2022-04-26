@@ -563,12 +563,6 @@ Public Class dlgNewDataFrame
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
 
             End If
-            'If selectedCombobox.SelectedItem = "Integer" Then
-            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(Integer)
-            '    dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).Value = 1
-            'Else
-            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(String)
-            'End If
         End If
     End Sub
 
