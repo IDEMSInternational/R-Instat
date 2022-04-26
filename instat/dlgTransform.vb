@@ -36,6 +36,7 @@ Public Class dlgTransform
     Private clsAddConstantOperator As New ROperator
     Private clsNaturalLogFunction As New RFunction
     Private clsLogBase10Function As New RFunction
+    Private clsRemoveLabelsFunction As New RFunction
     Private clsPowerOperator As New ROperator
     Private clsScaleSubtractOperator As New ROperator
     Private clsScaleMultiplyOperator As New ROperator
@@ -331,6 +332,7 @@ Public Class dlgTransform
         clsPreviewTextFunction = New RCodeStructure
         clsBooleanOperator = New ROperator
         clsIsNAFunction = New RFunction
+        clsRemoveLabelsFunction = New RFunction
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
@@ -422,6 +424,11 @@ Public Class dlgTransform
 
         clsBooleanOperator.SetOperation("==")
         clsIsNAFunction.SetRCommand("is.na")
+
+
+        clsRemoveLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+        clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+        clsRemoveLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
         clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
         clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
@@ -528,10 +535,12 @@ Public Class dlgTransform
                 clsPreviewTextFunction = clsRankFunction.Clone
                 clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoSort.Checked Then
                 clsPreviewTextFunction = clsSortFunction.Clone
                 clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoNumeric.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
                 If rdoRoundOf.Checked Then
@@ -587,6 +596,7 @@ Public Class dlgTransform
                             ucrBase.clsRsyntax.SetBaseRFunction(clsIsNAFunction)
                     End Select
                 End If
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoNonNegative.Checked Then
                 UpdateConstantParameter()
                 clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
@@ -607,10 +617,12 @@ Public Class dlgTransform
                     clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
                 End If
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
             ElseIf rdoScale.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
                 clsPreviewTextFunction = clsScaleAddOperator.Clone
                 ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
             End If
         End If
         SetPreviewText()
@@ -696,6 +708,16 @@ Public Class dlgTransform
             clsBooleanOperator.AddParameter("right", ucrInputLogicalValues.GetText, iPosition:=1)
         Else
             clsBooleanOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucrSelectorForRank_DataFrameChanged() Handles ucrSelectorForRank.DataFrameChanged
+        clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.strCurrentDataFrame & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrSaveNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNew.ControlValueChanged
+        If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
+            clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
         End If
     End Sub
 

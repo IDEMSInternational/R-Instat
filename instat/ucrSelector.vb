@@ -151,7 +151,10 @@ Public Class ucrSelector
 
     End Sub
 
-    Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String, lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))), strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String, strNcFilePath As String)
+    Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
+            lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))),
+            strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String,
+            strNcFilePath As String)
         Dim strSelectorFillCondition As String = ""
 
         If dataFrame IsNot Nothing Then

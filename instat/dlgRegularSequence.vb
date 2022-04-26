@@ -128,6 +128,8 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddToLinkedControls({ucrDateTimePickerFrom, ucrDateTimePickerTo}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSequenceType.AddToLinkedControls({ucrInputComboDatesBy}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkPreview.SetText("Preview")
+
         ucrNewColumnName.SetPrefix("regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         ucrNewColumnName.SetIsComboBox()
@@ -151,6 +153,10 @@ Public Class dlgRegularSequence
         ucrDateTimePickerFrom.DateValue = DateAndTime.Now()
         ucrDateTimePickerTo.DateValue = DateAndTime.Now()
         ucrNewColumnName.Reset()
+
+        txtPreview.Visible = False
+        lblPreview.Visible = False
+        lblMessage.Visible = False
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1, iPosition:=0)
@@ -230,6 +236,9 @@ Public Class dlgRegularSequence
     ''' Also gives feedback on whether the sequence will be truncated or extended
     ''' </summary>
     Private Sub PreviewSequence()
+        If ucrChkPreview.Checked = False Then
+            Exit Sub
+        End If
         Try
             Dim clsNewRepClone As RFunction
             Dim clsAsCharacter As New RFunction
@@ -315,4 +324,10 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreview.ControlValueChanged
+        txtPreview.Visible = ucrChkPreview.Checked
+        lblPreview.Visible = ucrChkPreview.Checked
+        lblMessage.Visible = ucrChkPreview.Checked
+        PreviewSequence()
+    End Sub
 End Class
