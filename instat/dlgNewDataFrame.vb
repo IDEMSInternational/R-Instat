@@ -501,21 +501,6 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    'Private Sub dataTypeGridView_CellParsing(sender As Object, e As DataGridViewCellParsingEventArgs) Handles dataTypeGridView.CellParsing
-    'If e.DesiredType IsNot GetType(Integer) OrElse String.IsNullOrEmpty(e.Value?.ToString()) Then Return
-    'Dim dgv = DirectCast(sender, DataGridView)
-    'Dim cell = dgv(e.ColumnIndex, e.RowIndex)
-
-    'If Not Integer.TryParse(e.Value.ToString(), Nothing) Then
-    '    cell.ErrorText = $"Invalid Value: {e.Value}"
-    '    e.Value = cell.Value
-    '    e.ParsingApplied = True
-
-    'Else
-    '    cell.ErrorText = String.Empty
-    'End If
-    'End Sub
-
     Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
         SampleEmpty()
     End Sub
