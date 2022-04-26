@@ -209,13 +209,10 @@ Partial Class dlgSurvivalObject
         '
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrModifyEventFactor.clsReceiver = Nothing
         Me.ucrModifyEventFactor.Location = New System.Drawing.Point(425, 194)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
-        Me.ucrModifyEventFactor.shtCurrSheet = Nothing
         Me.ucrModifyEventFactor.Size = New System.Drawing.Size(211, 135)
         Me.ucrModifyEventFactor.TabIndex = 18
-        Me.ucrModifyEventFactor.ucrChkLevels = Nothing
         '
         'ucrInputOrigin
         '

@@ -27,11 +27,9 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub InitialiseControls()
-        ucrMonthAsFactor.strSelectorColumnName = "Omit Level"
-        ucrMonthAsFactor.SetAsMultipleSelector()
-        ucrMonthAsFactor.SetReceiver(ucrReceiverMonth)
-        ucrMonthAsFactor.SetIncludeLevels(False)
-        ucrMonthAsFactor.bIncludeNA = False
+        ucrMonthAsFactor.SetAsMultipleSelectorGrid(ucrReceiverMonth,
+                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                   bIncludeNALevel:=False)
     End Sub
 
     Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional clsNewListCalcFunction As RFunction = Nothing, Optional clsNewFilterMonthFunction As RFunction = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
@@ -42,8 +40,10 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
-        clsInOperator.AddParameter("months", ucrMonthAsFactor.GetSelectedLevels(), iPosition:=1)
-        If ucrMonthAsFactor.GetSelectedLevels.Count > 0 Then
+        clsInOperator.AddParameter("months",
+                                   mdlCoreControl.GetRVector(ucrMonthAsFactor.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)),
+                                   iPosition:=1)
+        If ucrMonthAsFactor.IsAnyGridRowSelected Then
             clsListCalcFunction.AddParameter("month_filter", clsRFunctionParameter:=clsFilterMonthFunction, bIncludeArgumentName:=False, iPosition:=0)
         Else
             clsListCalcFunction.RemoveParameterByName("month_filter")

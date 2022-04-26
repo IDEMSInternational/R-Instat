@@ -60,13 +60,10 @@ Partial Class dlgRemoveUnusedLevels
         '
         Me.ucrRemoveUnusedFactorLevels.AutoSize = True
         Me.ucrRemoveUnusedFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrRemoveUnusedFactorLevels.clsReceiver = Nothing
         Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(239, 57)
         Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
-        Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
         Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(255, 175)
         Me.ucrRemoveUnusedFactorLevels.TabIndex = 3
-        Me.ucrRemoveUnusedFactorLevels.ucrChkLevels = Nothing
         '
         'ucrReceiverFactorColumn
         '
