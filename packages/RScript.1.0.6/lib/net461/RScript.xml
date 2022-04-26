@@ -538,7 +538,8 @@ RScript
 </member>
 <member name="M:RScript.clsRToken.IsValidLexeme(System.String)">
 --------------------------------------------------------------------------------------------
- <summary>   Returns true if <paramref name="strTxt"/> is a valid lexeme, else returns false.
+ <summary>   Returns true if <paramref name="strTxt"/> is a valid lexeme (either partial or 
+             complete), else returns false.
              </summary>
 
  <param name="strTxt">   A sequence of characters from a syntactically correct R script </param>
@@ -564,9 +565,10 @@ RScript
 --------------------------------------------------------------------------------------------
  <summary>   Returns true if <paramref name="strTxt"/> is a complete or partial string 
              constant, else returns false.<para>
-             String constants are delimited by a pair of single (‘'’) or double (‘"’) quotes 
-             and can contain all other printable characters. Quotes and other special 
-             characters within strings are specified using escape sequences. </para></summary>
+             String constants are delimited by a pair of single (‘'’), double (‘"’)
+             or backtick ('`') quotes and can contain all other printable characters. 
+             Quotes and other special characters within strings are specified using escape 
+             sequences. </para></summary>
 
  <param name="strTxt">   The text to check. </param>
 
