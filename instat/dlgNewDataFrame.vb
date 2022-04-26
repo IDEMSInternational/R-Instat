@@ -559,7 +559,6 @@ Public Class dlgNewDataFrame
             Else
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = True
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
-
             End If
         End If
     End Sub
