@@ -123,28 +123,45 @@ Public Class ucrSelector
         'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
         strCurrentType = If(CurrentReceiver.bTypeSet, CurrentReceiver.GetItemType(), strType)
 
-        'holds the selector's list view 'fill conditions'
-        'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
-        Static _strCurrentSelectorFillCondition As String = ""
+        'if selector contains columns check if fill conditions are just the same
+        If strCurrentType = "column" Then
+            'holds the selector's list view 'fill conditions'
+            'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
+            Static _strCurrentSelectorFillCondition As String = ""
 
-        'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
-        'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
-        'this makes refilling of the listview unnecessarily slow, especially for wide data sets (see comments in issue #7162)
-        'long term fix is to find out how the repeated calls to LoadList() can be omitted
-        strNewSelectorFillCondition = GetSelectorFillCondition(lstAvailableVariable.Items.Count, strElementType:=strCurrentType, lstCombinedMetadataLists:=lstCombinedMetadataLists, strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, arrStrExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
-        If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
-            Exit Sub
+            'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
+            'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
+            'this makes refilling of the listview unnecessarily slow, especially for wide data sets (see comments in issue #7162)
+            'long term fix is to find out how the repeated calls to LoadList() can be omitted
+            strNewSelectorFillCondition = GetSelectorFillCondition(frmMain.DataBook.GetDataFrame(strCurrentDataFrame),
+                                                               strElementType:=strCurrentType,
+                                                               lstCombinedMetadataLists:=lstCombinedMetadataLists,
+                                                               strHeading:=CurrentReceiver.strSelectorHeading,
+                                                               arrStrExcludedItems:=arrStrExclud,
+                                                               strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
+                                                               strNcFilePath:=CurrentReceiver.strNcFilePath)
+            If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
+                Exit Sub
+            End If
+
+            _strCurrentSelectorFillCondition = strNewSelectorFillCondition
         End If
-        _strCurrentSelectorFillCondition = strNewSelectorFillCondition
+
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         EnableDataOptions(strCurrentType)
 
     End Sub
 
-    Private Function GetSelectorFillCondition(iCurrentElementNum As Integer, strElementType As String, lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))), strHeading As String, strDataFrameName As String, arrStrExcludedItems As String(), strDatabaseQuery As String, strNcFilePath As String)
-        Dim strSelectorFillCondition As String
+    Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
+            lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))),
+            strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String,
+            strNcFilePath As String)
+        Dim strSelectorFillCondition As String = ""
 
-        strSelectorFillCondition = iCurrentElementNum
+        If dataFrame IsNot Nothing Then
+            strSelectorFillCondition &= dataFrame.strName
+            strSelectorFillCondition &= dataFrame.iTotalColumnCount
+        End If
 
         If Not String.IsNullOrEmpty(strElementType) Then
             strSelectorFillCondition &= strElementType
@@ -154,9 +171,7 @@ Public Class ucrSelector
             strSelectorFillCondition &= strHeading
         End If
 
-        If Not String.IsNullOrEmpty(strDataFrameName) Then
-            strSelectorFillCondition &= strDataFrameName
-        End If
+
 
         If Not String.IsNullOrEmpty(strDatabaseQuery) Then
             strSelectorFillCondition &= strDatabaseQuery

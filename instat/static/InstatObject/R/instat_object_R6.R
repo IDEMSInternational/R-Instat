@@ -376,6 +376,11 @@ DataBook$set("public", "get_column_labels", function(data_name, columns) {
 }
 )
 
+DataBook$set("public", "get_data_frame_label", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_label(use_current_filter)
+}
+)
+
 DataBook$set("public", "get_data_frame_metadata", function(data_name, label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
   return(self$get_data_objects(data_name)$get_metadata(label = label, include_calculated = include_calculated, excluded_not_for_display = excluded_not_for_display))
 }
