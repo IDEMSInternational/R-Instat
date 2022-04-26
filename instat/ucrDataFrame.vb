@@ -134,7 +134,6 @@ Public Class ucrDataFrame
         bSuppressRefresh = False
 
         UpdateValuesAndRaiseEvents()
-
     End Sub
 
     ''' <summary>
@@ -194,7 +193,6 @@ Public Class ucrDataFrame
             strItemtext = cboAvailableDataFrames.Text,
             Brushes.Red,
             Brushes.Black)
-
 
         'draw the item text 
         e.Graphics.DrawString(strItemtext, DirectCast(sender, ComboBox).Font, brush, e.Bounds.X, e.Bounds.Y)
