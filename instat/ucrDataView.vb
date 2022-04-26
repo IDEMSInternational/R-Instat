@@ -100,13 +100,8 @@ Public Class ucrDataView
         _grid.CurrentWorksheet = fillWorkSheet
         _grid.AddColumns(dataFrame.clsVisibleDataFramePage)
         _grid.AddRowData(dataFrame)
-
-        _grid.UpdateAllWorksheetStyles()
-        dataFrame.clsVisiblePage.HasChanged = False
-
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
-
         RefreshDisplayInformation()
     End Sub
 
