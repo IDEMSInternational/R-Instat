@@ -219,7 +219,7 @@ Public Class dlgContrasts
             vecColums = expContrasts.AsNumericMatrix()
             For j = 0 To vecColums.ColumnCount - 1
                 For i = 0 To vecColums.RowCount - 1
-                    grdCurrSheet.Item(row:=i, col:=j) = vecColums(i, j)
+                    grdCurrSheet.Item(row:=i, col:=j) = vecColums(i, j).ToString("0.###")
                 Next
             Next
         End If
