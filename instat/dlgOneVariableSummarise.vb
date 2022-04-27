@@ -28,9 +28,6 @@ Public Class dlgOneVariableSummarise
     Private clsMmtableOperator As ROperator
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
-
-
-
     Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgOneVariableSummarise_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -232,7 +229,7 @@ Public Class dlgOneVariableSummarise
             clsDummyFunction.AddParameter("checked_radio", "customised", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseROperator(clsMmtableOperator)
             cmdSummaries.Visible = True
-        ElseIf rdoDefault.Checked Then
+        Else
             clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             cmdSummaries.Visible = False
