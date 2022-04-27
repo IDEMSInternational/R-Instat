@@ -68,10 +68,10 @@ Public Class ucrDataViewReoGrid
             textColour = Color.DarkBlue
         End If
 
-        strRowNames = dataFrame.strRowNames()
+        strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
-                grdData.CurrentWorksheet(row:=i, col:=j) = dataFrame.Data(i, j)
+                grdData.CurrentWorksheet(row:=i, col:=j) = dataFrame.DisplayedData(i, j)
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
@@ -81,7 +81,7 @@ Public Class ucrDataViewReoGrid
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
-            lstColumns.Add(GetCurrentDataFrameFocus().clsVisiblePage.lstColumns(i))
+            lstColumns.Add(GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(i))
         Next
         Return lstColumns
     End Function
@@ -138,8 +138,8 @@ Public Class ucrDataViewReoGrid
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)
         RaiseEvent ReplaceValueInData(e.NewData.ToString(),
-                           GetCurrentDataFrameFocus().clsVisiblePage.lstColumns(e.Cell.Column).strName,
-                           GetCurrentDataFrameFocus().clsVisiblePage.RowNames()(e.Cell.Row))
+                           GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(e.Cell.Column).strName,
+                           GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
     End Sub
 
@@ -147,7 +147,7 @@ Public Class ucrDataViewReoGrid
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         e.IsCancelled = True 'prevents pasted data from being added directly into the data view
         'validate columns
-        If e.Range.EndCol >= GetCurrentDataFrameFocus().clsVisiblePage.lstColumns.Count Then
+        If e.Range.EndCol >= GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns.Count Then
             'this happens when Ctrl + V is pressed and the data to be pasted has more columns
             'than columns between start and end column
             MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")

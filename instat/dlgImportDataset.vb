@@ -82,7 +82,7 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
-
+        HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -403,11 +403,14 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        HideDropEmptyCheckBox()
     End Sub
 
     Private Sub TestOkEnabled()
         If bImportFromFolder Then
             ucrBase.OKEnabled(GetDirectoryFiles(False).Count > 0)
+        ElseIf ucrInputFilePath.IsEmpty Then
+            ucrBase.OKEnabled(False)
         Else
             If IsExcelFileFormat() Then
                 ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0 AndAlso bCanImport)
@@ -905,11 +908,24 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub HideDropEmptyCheckBox()
+        If ucrInputFilePath.IsEmpty Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrChkMultipleFiles.Visible = False
+            lblNoPreview.Text = "No file selected."
+        Else
+            ucrChkDropEmptyCols.Visible = True
+            ucrChkMultipleFiles.Visible = True
+            lblNoPreview.Text = "Preview not yet implemented for this file type"
+        End If
+    End Sub
+
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
-        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged,
+        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
         ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
+        HideDropEmptyCheckBox()
     End Sub
 
     Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged

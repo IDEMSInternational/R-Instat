@@ -145,9 +145,9 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
     if(check_names) {
       # "T" should be avoided as a column name but is not checked by make.names()
       if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
-      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."), unique = TRUE)
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid or unique. make.names() and iconv() will be used to force them to be valid and unique.")
         names(new_data) <- valid_names
       }
     }
@@ -535,6 +535,11 @@ DataSheet$set("public", "get_column_labels", function(columns) {
 }
 )
 
+DataSheet$set("public", "get_data_frame_label", function(use_current_filter = FALSE) {
+  return(attr(self$get_data_frame(use_current_filter = use_current_filter), "label"))
+}
+)
+
 DataSheet$set("public", "clear_variables_metadata", function() {
   for(column in self$get_data_frame(use_current_filter = FALSE)) {
     for(name in names(attributes(column))) {
@@ -745,7 +750,7 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 }
 )
 
-DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), ...) {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if (type == "single") {
@@ -755,17 +760,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       }
       if (!is.character(curr_col_name)) {
         stop("Current column name must be of type: character")
-      }
-
-      else if (!(curr_col_name %in% names(curr_data))) {
+      } else if (!(curr_col_name %in% names(curr_data))) {
         stop(paste0("Cannot rename column: ", curr_col_name, ". Column was not found in the data."))
-      }
-
-      else if (!is.character(new_col_name)) {
+      } else if (!is.character(new_col_name)) {
         stop("New column name must be of type: character")
-      }
-
-      else {
+      } else {
         if (sum(names(curr_data) == curr_col_name) > 1) {
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
@@ -783,14 +782,47 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
       self$variables_metadata_changed <- TRUE
     }
-  } else {
-    private$data <- curr_data |>
-    dplyr::rename_with(
-      .fn = .fn,
-      .cols = {{ .cols }}, ...
-    )
+  } else if (type == "multiple") {
+    if (!missing(new_column_names_df)) {
+      new_col_names <- new_column_names_df[, 1]
+      cols_changed_index <- new_column_names_df[, 2]
+      curr_col_names <- names(private$data)
+      curr_col_names[cols_changed_index] <- new_col_names
+      if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
+      names(private$data)[cols_changed_index] <- new_col_names
+      for (i in seq_along(cols_changed_index)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+    }
+    if (!missing(new_labels_df)) {
+      new_labels <- new_labels_df[, 1]
+      new_labels_index <- new_labels_df[, 2]
+      for (i in seq_along(new_labels)) {
+        if (isTRUE(new_labels[i] != "")) {
+          self$append_to_variables_metadata(col_name = names(private$data)[new_labels_index[i]], property = "label", new_val = new_labels[i])
+        }
+      }
+    }
     self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
+  } else if (type == "rename_with") {
+    if (missing(.fn)) stop(.fn, "is missing with no default.")
+    curr_col_names <- names(curr_data)
+      private$data <- curr_data |>
+
+      dplyr::rename_with(
+         .fn = .fn,
+         .cols = {{ .cols }}, ...
+      )
+    new_col_names <- names(private$data)
+    if (!all(new_col_names %in% curr_col_names)) {
+      new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
+      for (i in seq_along(new_col_names)) {
+        self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
+      }
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
+    }
   }
 })
 
@@ -1038,16 +1070,22 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     # if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     if (!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for (curr_col in col_names) {
-      if (property == labels_label && new_val == "") {
+      #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
+      #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
+      if (property == labels_label && !is.null(new_val) && new_val == "") {
+        #reset the column labels property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
         attr(private$data[[curr_col]], property) <- new_val
       }
+      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
-    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
   } else {
     for (col_name in self$get_column_names()) {
-      if (property == labels_label && new_val == "") {
+      #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
+      #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
+      if (property == labels_label && !is.null(new_val) && new_val == "") {
+        #reset the column labels property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
         attr(private$data[[col_name]], property) <- new_val
@@ -2513,6 +2551,7 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
   factor_col <- self$get_columns_from_data(col_name)
   contr_col <- nlevels(factor_col) - 1
   contr_row <- nlevels(factor_col)
+  cat("Factor",col_name,"has",new_contrasts,"contrasts")
   if(new_contrasts == "user_defined") {
     if(any(is.na(defined_contr_matrix)) ||!is.numeric(defined_contr_matrix) ||nrow(defined_contr_matrix) != contr_row || ncol(defined_contr_matrix) != contr_col) stop("The contrast matrix should have ", contr_col, " column(s) and ",  contr_row, " row(s) ")
   }
@@ -4320,5 +4359,11 @@ DataSheet$set("public", "replace_values_with_NA", function(row_index, column_ind
   if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
   curr_data[row_index, column_index] <- NA
   self$set_data(curr_data)
+}
+)
+
+DataSheet$set("public", "has_labels", function(col_names) {
+  if(missing(col_names)) stop("Column name must be specified.")
+  return(!is.null(attr(col_names, "labels")))
 }
 )

@@ -170,8 +170,9 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
       new_links_list <- data_RDS$get_links()
       for(data_obj_name in data_RDS$get_data_names()) {
         data_obj_clone <- self$clone_data_object(data_RDS$get_data_objects(data_obj_name), include_objects = include_objects, include_metadata = include_metadata, include_logs = include_logs, include_filters = include_filters, include_column_selections = include_column_selections, include_calculations = include_calculations, include_comments = include_comments)
-        if(data_obj_name %in% self$get_data_names() && !overwrite_existing) {
-          new_name <- next_default_item(data_obj_name, self$get_data_names())
+        if(tolower(data_obj_name) %in% tolower(self$get_data_names()) && !overwrite_existing) {
+          warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
+          new_name <- next_default_item(tolower(data_obj_name), tolower(self$get_data_names()))
           data_obj_clone$append_to_metadata(data_name_label, new_name)
           if(new_name != data_obj_name) {
             for(i in seq_along(new_links_list)) {
@@ -372,6 +373,11 @@ DataBook$set("public", "get_column_data_types", function(data_name, columns) {
 
 DataBook$set("public", "get_column_labels", function(data_name, columns) {
   return(self$get_data_objects(data_name)$get_column_labels(columns = columns))
+}
+)
+
+DataBook$set("public", "get_data_frame_label", function(data_name, use_current_filter = FALSE) {
+  self$get_data_objects(data_name)$get_data_frame_label(use_current_filter)
 }
 )
 
@@ -911,8 +917,8 @@ DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, st
 }
 )
 
-DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), ...) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, ...)
+DataBook$set("public", "rename_column_in_data", function(data_name, column_name = NULL, new_val = NULL, label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label, type, .fn, .cols, new_column_names_df, new_labels_df, ...)
   self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
 })
 
@@ -2725,3 +2731,8 @@ DataBook$set("public", "remove_empty", function(data_name,  which = c("rows","co
 DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, column_index) {
   self$get_data_objects(data_name)$replace_values_with_NA(row_index = row_index, column_index = column_index)
 })
+
+DataBook$set("public","has_labels", function(data_name, col_names) {
+  self$get_data_objects(data_name)$has_labels(col_names)
+}
+)
