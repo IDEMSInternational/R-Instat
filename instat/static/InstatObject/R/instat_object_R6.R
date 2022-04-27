@@ -1020,7 +1020,7 @@ DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_bo
 
 DataBook$set("public", "remove_link", function(link_name) {
   if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
-  private$.links[[link_name]] <- NULL
+  #private$.links[[link_name]] <- NULL
   cat("Link removed:", link_name)
 }
 )
@@ -1559,7 +1559,7 @@ DataBook$set("public", "get_key_names", function(data_name, include_overall = TR
 )
 
 DataBook$set("public", "remove_key", function(data_name, key_name) {
-  self$get_data_objects(data_name)$remove_key(key_name)
+  self$get_data_objects(data_name)$remove_key(key_name = key_name)
 }
 )
 

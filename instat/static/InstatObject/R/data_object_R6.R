@@ -2259,7 +2259,11 @@ DataSheet$set("public", "get_keys", function(key_name) {
 
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  self$append_to_variables_metadata(private$keys[[key_name]], is_key_label, FALSE)
   private$keys[[key_name]] <- NULL
+  self$append_to_metadata(key_label, NULL)
+  self$append_to_metadata(is_linkable, FALSE)
+  self$append_to_metadata(is_key_label, FALSE)
   cat("Key removed:", key_name)
 }
 )
