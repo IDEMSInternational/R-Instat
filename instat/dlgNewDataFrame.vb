@@ -370,16 +370,15 @@ Public Class dlgNewDataFrame
                 clsColExpRFunction.ClearParameters()
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
-<<<<<<< HEAD
+
                     Dim iTemp As Integer = iRows + CInt(strDefault) - 1
                     Dim clsSeqFunction As New RFunction
                     clsSeqFunction.SetRCommand("seq")
                     clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                     clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
-=======
+
                     clsColExpRFunction.SetRCommand("seq")
                     clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
->>>>>>> 98b45716c9eb166b4b374e8428811f0fd0af71fd
                 ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
                     clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                 Else
