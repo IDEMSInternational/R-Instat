@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bRcodeSet As Boolean = True
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction,
         clsRGGscatMatrixFunction, clsCorrelationFunction, clsCurrentDataFrameFunction,
         clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction, clsFashionModelFunction,
@@ -142,6 +143,7 @@ Public Class dlgCorrelation
         dctMethod.Add("R2E", Chr(34) & "R2E" & Chr(34))
         dctMethod.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         ucrInputRearrange.SetItems(dctMethod)
+        ucrInputRearrange.SetDropDownStyleAsNonEditable()
 
         ucrChkAbsolute.SetText("Absolute")
         ucrChkAbsolute.SetParameter(New RParameter("absolute", 2))
@@ -270,7 +272,7 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
 
         clsCorrelationFunction.SetPackageName("corrr")
-        clsCorrelationFunction.SetRCommand("correlate ")
+        clsCorrelationFunction.SetRCommand("correlate")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
 
         clsRearrangeFunction.SetPackageName("corrr")
@@ -314,6 +316,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRcodeSet = False
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrapFunction, New RParameter("method", 2), iAdditionalPairNo:=2)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
@@ -345,6 +348,7 @@ Public Class dlgCorrelation
         ucrSaveFashionDataFrame.SetRCode(clsFashionDataFrameFunction, bReset)
         ucrSaveCorrelationTest.SetRCode(clsCorrelationTestFunction, bReset)
         ucrSaveCorrelation.SetRCode(clsCorrelationFunction, bReset)
+        bRcodeSet = True
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -363,15 +367,42 @@ Public Class dlgCorrelation
 
     Public Sub TestOKEnabled()
         If rdoTwoColumns.Checked Then
-            If (Not ucrReceiverFirstColumn.IsEmpty()) AndAlso (Not ucrReceiverSecondColumn.IsEmpty()) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
+            If Not ucrReceiverFirstColumn.IsEmpty AndAlso Not ucrReceiverSecondColumn.IsEmpty AndAlso
+            ucrSaveCorrelationTest.IsComplete Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
-        ElseIf rdoMultipleColumns.Checked AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
-            ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(False)
+            If ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 Then
+                If ucrChkDisplayOptions.Checked Then
+                    If ucrNudDecimalPlaces.GetText <> "" Then
+                        If ucrChkDisplayAsDataFrame.Checked Then
+                            If ucrSaveFashionDataFrame.IsComplete() Then
+                                ucrBase.OKEnabled(True)
+                            Else
+                                ucrBase.OKEnabled(False)
+                            End If
+                        Else
+                            If ucrSaveFashionModel.IsComplete Then
+                                ucrBase.OKEnabled(True)
+                            Else
+                                ucrBase.OKEnabled(False)
+                            End If
+                        End If
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    If ucrSaveCorrelation.IsComplete Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                End If
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -436,7 +467,8 @@ Public Class dlgCorrelation
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged,
         ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged,
-        ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged, ucrSaveFashionModel.ControlContentsChanged
+        ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged, ucrSaveFashionModel.ControlContentsChanged,
+        ucrSaveCorrelation.ControlContentsChanged, ucrSaveFashionDataFrame.ControlContentsChanged, ucrSaveCorrelationTest.ControlContentsChanged, ucrNudDecimalPlaces.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -489,10 +521,12 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ChangeBaseAsModelOrDataframe()
-        If ucrChkDisplayAsDataFrame.Checked Then
-            clsDummyFunction.AddParameter("display_as_dataframe", "True", iPosition:=1)
-        Else
-            clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
+        If bRcodeSet Then
+            If ucrChkDisplayAsDataFrame.Checked Then
+                clsDummyFunction.AddParameter("display_as_dataframe", "True", iPosition:=1)
+            Else
+                clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
+            End If
         End If
     End Sub
 
