@@ -54,7 +54,6 @@ Public Class dlgSplitText
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split_fixed")
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
-        'ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoTextComponents}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrPnlTextComponents, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFixedNumberOfComponents)
         ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrInputRegexPattern, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -168,30 +167,12 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub ucrPnlSplitText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlValueChanged
-        'If rdoBinaryColumns.Checked Then
-        '    cmdAddkeyboard.Visible = False
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-
-        'Else
-        '    If rdoFixedNumberOfComponents.Checked Then
-        '        If rdoFixedNumberOfComponents.Checked Then
-        '            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-        '        ElseIf rdoMaximumNumberOfComponents.Checked Then
-        '            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
-        '        End If
-        '    End If
-        'End If
         SetVisibleAddKeyboardButton()
         ChangeParametersValues()
         SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
-        'If rdoFixedNumberOfComponents.Checked Then
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-        'ElseIf rdoMaximumNumberOfComponents.Checked Then
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
-        'End If
         ChangeParametersValues()
         SetBaseFunction()
     End Sub
