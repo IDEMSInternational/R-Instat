@@ -535,6 +535,11 @@ DataSheet$set("public", "get_column_labels", function(columns) {
 }
 )
 
+DataSheet$set("public", "get_data_frame_label", function(use_current_filter = FALSE) {
+  return(attr(self$get_data_frame(use_current_filter = use_current_filter), "label"))
+}
+)
+
 DataSheet$set("public", "clear_variables_metadata", function() {
   for(column in self$get_data_frame(use_current_filter = FALSE)) {
     for(name in names(attributes(column))) {
