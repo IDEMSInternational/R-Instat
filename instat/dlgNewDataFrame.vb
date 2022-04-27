@@ -370,11 +370,16 @@ Public Class dlgNewDataFrame
                 clsColExpRFunction.ClearParameters()
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
+<<<<<<< HEAD
                     Dim iTemp As Integer = iRows + CInt(strDefault) - 1
                     Dim clsSeqFunction As New RFunction
                     clsSeqFunction.SetRCommand("seq")
                     clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                     clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
+=======
+                    clsColExpRFunction.SetRCommand("seq")
+                    clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+>>>>>>> 98b45716c9eb166b4b374e8428811f0fd0af71fd
                 ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
                     clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                 Else
@@ -493,8 +498,7 @@ Public Class dlgNewDataFrame
                 Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
                 dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
             End If
-        End If
-        If e.ColumnIndex = 3 Then
+        ElseIf e.ColumnIndex = 3 Then
             Dim cbDefault = CType(dataTypeGridView.Columns(3), DataGridViewComboBoxColumn)
             If Not cbDefault.Items.Contains(e.FormattedValue) Then
                 cbDefault.Items.Add(e.FormattedValue)
@@ -504,21 +508,6 @@ Public Class dlgNewDataFrame
             End If
         End If
     End Sub
-
-    'Private Sub dataTypeGridView_CellParsing(sender As Object, e As DataGridViewCellParsingEventArgs) Handles dataTypeGridView.CellParsing
-    'If e.DesiredType IsNot GetType(Integer) OrElse String.IsNullOrEmpty(e.Value?.ToString()) Then Return
-    'Dim dgv = DirectCast(sender, DataGridView)
-    'Dim cell = dgv(e.ColumnIndex, e.RowIndex)
-
-    'If Not Integer.TryParse(e.Value.ToString(), Nothing) Then
-    '    cell.ErrorText = $"Invalid Value: {e.Value}"
-    '    e.Value = cell.Value
-    '    e.ParsingApplied = True
-
-    'Else
-    '    cell.ErrorText = String.Empty
-    'End If
-    'End Sub
 
     Private Sub ucrNudRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged
         SampleEmpty()
@@ -556,22 +545,13 @@ Public Class dlgNewDataFrame
         If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
             Dim iColumnLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
             Dim iRowLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
-            Dim iColumnDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
-            Dim iRowDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
             Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
             If selectedCombobox.SelectedItem = "Factor" Then
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = False
             Else
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = True
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
-
             End If
-            'If selectedCombobox.SelectedItem = "Integer" Then
-            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(Integer)
-            '    dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).Value = 1
-            'Else
-            '    'dataTypeGridView(iColumnDefaultIndex, iRowDefaultIndex).ValueType = GetType(String)
-            'End If
         End If
     End Sub
 
