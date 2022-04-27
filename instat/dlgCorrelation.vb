@@ -468,7 +468,8 @@ Public Class dlgCorrelation
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged,
         ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged,
         ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrChkShave.ControlContentsChanged, ucrSaveFashionModel.ControlContentsChanged,
-        ucrSaveCorrelation.ControlContentsChanged, ucrSaveFashionDataFrame.ControlContentsChanged, ucrSaveCorrelationTest.ControlContentsChanged, ucrNudDecimalPlaces.ControlContentsChanged
+        ucrSaveCorrelation.ControlContentsChanged, ucrSaveFashionDataFrame.ControlContentsChanged, ucrSaveCorrelationTest.ControlContentsChanged,
+        ucrNudDecimalPlaces.ControlContentsChanged, ucrChkDisplayAsDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
