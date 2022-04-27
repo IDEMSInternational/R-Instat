@@ -16,13 +16,13 @@
 
 Imports instat.Translations
 Public Class dlgHeatMapPlot
+    Private clsBaseOperator As New ROperator
+    Private clsAssignOperator As New ROperator
+    Private clsTildeOperator As New ROperator
     Private clsRggplotFunction As New RFunction
     Private clsRgeomTileFunction As New RFunction
-    Private clsHeatmapAesFunction, clsChoroplethAesFunction, clsXlabsFunction, clsYlabFunction, clsXScalecontinuousFunction,
-        clsYScalecontinuousFunction, clsRFacetFunction, clsThemeFunction, clsRoundFunction, clsRoundFunction1 As New RFunction
     Private bFirstLoad As Boolean = True
     Private bRCodeSet As Boolean = True
-    Private clsBaseOperator As New ROperator
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsLabsFunction As New RFunction
@@ -39,10 +39,6 @@ Public Class dlgHeatMapPlot
     Private clsGeomTextFunction As New RFunction
     Private clsLabelAesFunction As New RFunction
     Private clsColourPaletteFunction As New RFunction
-    Private clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction As New RFunction
-    Private clsGeomPointShapeHeatMapFunction, clsGeomPointShapeChoroplethFunction As New RFunction
-    Private clsShapeHeatMapAesFunction, clsShapeChoroplethAesFunction, clsGroupFunction As New RFunction
-    Private clsSizeHeatMapAesFunction, clsSizeChoroplethAesFunction As New RFunction
     Private clsForecatsInfreq As New RFunction
     Private clsForecatsReverse As New RFunction
     Private clsForecatsInfreqValue As New RFunction
@@ -50,6 +46,10 @@ Public Class dlgHeatMapPlot
     Private clsReorderFunction As New RFunction
     Private clsReorderFunctionValue As New RFunction
     Private clsGeomPolygonAesFunction As New RFunction
+    Private clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction, clsGeomPointShapeHeatMapFunction, clsGeomPointShapeChoroplethFunction,
+   clsShapeHeatMapAesFunction, clsShapeChoroplethAesFunction, clsGroupFunction, clsSizeHeatMapAesFunction, clsSizeChoroplethAesFunction, clsHeatmapAesFunction,
+   clsChoroplethAesFunction, clsXlabsFunction, clsYlabFunction, clsXScalecontinuousFunction, clsYScalecontinuousFunction, clsRFacetFunction, clsThemeFunction,
+   clsRoundFunction, clsRoundFunction1, clsAggregateFunction, clsCBindFunction, clsFunFunction, clsRangeFunction, clsMeanFunction As New RFunction
 
 
     'Parameter names for geoms
@@ -87,7 +87,6 @@ Public Class dlgHeatMapPlot
         Dim dctLabelSizesChoropleth As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
         Dim dctColourPalletteChoropleth As New Dictionary(Of String, String)
-
 
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -242,9 +241,11 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
+        clsAssignOperator = New ROperator
+        clsTildeOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomTileFunction = New RFunction
-        clsBaseOperator = New ROperator
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsColourPaletteFunction = New RFunction
@@ -268,6 +269,11 @@ Public Class dlgHeatMapPlot
         clsChoroplethAesFunction = New RFunction
         clsRoundFunction = New RFunction
         clsRoundFunction1 = New RFunction
+        clsAggregateFunction = New RFunction
+        clsCBindFunction = New RFunction
+        clsFunFunction = New RFunction
+        clsRangeFunction = New RFunction
+        clsMeanFunction = New RFunction
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -370,6 +376,8 @@ Public Class dlgHeatMapPlot
 
         clsReorderFunction.SetRCommand("reorder")
         clsReorderFunction.SetRCommand("reorder")
+
+        cls
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
