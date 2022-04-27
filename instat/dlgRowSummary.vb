@@ -82,7 +82,6 @@ Public Class dlgRowSummary
         ucrInputProbability.SetParameter(New RParameter("p", 1, bNewIncludeArgumentName:=False))
         ucrInputProbability.AddQuotesIfUnrecognised = False
         ucrInputProbability.SetValidationTypeAsNumericList()
-        ucrInputProbability.SetDropDownStyleAsNonEditable()
 
         ucrChkType.SetText("Type")
         ucrChkType.AddParameterPresentCondition(True, "type", True)
@@ -165,7 +164,6 @@ Public Class dlgRowSummary
         ucrInputUserDefined.AddToLinkedControls(ucrNudProp, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputUserDefined.AddToLinkedControls(ucrNudTrim, {"mean"}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputProbability.SetItems({"0.25,0.5,0.75", "0, 0.2, 0.4, 0.6, 0.8, 1", "0.5, 0.8, 1"})
 
         ucrNudProp.SetParameter(New RParameter("probs", 1))
         ucrNudProp.SetMinMax(0, 1)
@@ -232,7 +230,6 @@ Public Class dlgRowSummary
         ucrSaveNewDataFrame.Reset()
         ucrInputProbability.Reset()
         ucrInputUserDefined.SetName("anyDuplicated")
-        ucrInputProbability.SetName("0.25,0.5,0.75")
 
         clsDummyRowFunction.AddParameter("check", "rowRanks", iPosition:=0)
 
@@ -394,7 +391,7 @@ Public Class dlgRowSummary
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If Not ucrReceiverForRowSummaries.IsEmpty Then
+            If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrInputProbability.GetText <> "" Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -548,6 +545,8 @@ Public Class dlgRowSummary
 
         If rdoMultiple.Checked AndAlso rdoRowQuantile.Checked Then
             clsDummyRowFunction.AddParameter("0", clsRFunctionParameter:=clsRowQuantilesFunction, iPosition:=0)
+            ucrInputProbability.SetName("0.25,0.5,0.75")
+            ucrInputProbability.SetItems({"0.25,0.5,0.75", "0, 0.2, 0.4, 0.6, 0.8, 1", "0.5, 0.8, 1"})
         End If
 
         If ucrChangedControl Is ucrPnlRowSummaries Then
@@ -589,6 +588,13 @@ Public Class dlgRowSummary
                     clsConcatenateFunction.AddParameter("q0.5", Chr(34) & "q0.5" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
                     clsConcatenateFunction.AddParameter("q0.8", Chr(34) & "q0.8" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
                     clsConcatenateFunction.AddParameter("q1", Chr(34) & "q1" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
+                Case Else
+                    Dim iposition As Integer = 0
+                    For Each clsParameter In ucrInputProbability.clsRList.clsParameters
+                        clsConcatenateFunction.AddParameter("q" & clsParameter.strArgumentValue,
+                                                            Chr(34) & "q" & clsParameter.strArgumentValue & Chr(34), bIncludeArgumentName:=False, iPosition:=iposition)
+                        iposition = iposition + 1
+                    Next
             End Select
         End If
     End Sub
@@ -612,7 +618,7 @@ Public Class dlgRowSummary
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrPnlStatistics.ControlContentsChanged,
-        ucrSaveNewDataFrame.ControlContentsChanged, ucrInputUserDefined.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged
+        ucrSaveNewDataFrame.ControlContentsChanged, ucrInputProbability.ControlContentsChanged, ucrInputUserDefined.ControlContentsChanged, ucrPnlMultipleRowSummary.ControlContentsChanged, ucrPnlRowSummaries.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
