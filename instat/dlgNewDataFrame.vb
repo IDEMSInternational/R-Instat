@@ -376,9 +376,6 @@ Public Class dlgNewDataFrame
                     clsSeqFunction.SetRCommand("seq")
                     clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                     clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
-
-                    clsColExpRFunction.SetRCommand("seq")
-                    clsColExpRFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                 ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
                     clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                 Else
