@@ -178,7 +178,7 @@ Public Class ucrDataFrame
         e.DrawBackground()
 
         'get the item text of the combobox item being draw    
-        Dim strItemtext As String = DirectCast(sender, ComboBox).Items(e.Index).ToString()
+        Dim strItemtext As String = cboAvailableDataFrames.Items(e.Index).ToString()
 
         'determine the forecolor of the combo box item  
         'display data frame name in red if it's different from the data viewer selected sheet name
