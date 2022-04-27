@@ -2228,7 +2228,8 @@ DataSheet$set("public", "add_key", function(col_names, key_name) {
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
-    self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+    #self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+    self$append_to_metadata(key_label, paste(private$keys[[key_name]], collapse = ","))
     cat(paste("Key name:", key_name),
         paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
         sep = "\n")
