@@ -85,7 +85,7 @@ Partial Class frmMain
         Me.mnuDescribeMultivariateCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeMultivariateClusterAnalysis = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeUseGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeRenameGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeViewGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -702,7 +702,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeRenameGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 20)
         Me.mnuDescribe.Tag = "Describe"
@@ -1002,11 +1002,11 @@ Partial Class frmMain
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         Me.ToolStripSeparator13.Size = New System.Drawing.Size(189, 6)
         '
-        'mnuDescribeUseGraph
+        'mnuDescribeRenameGraph
         '
-        Me.mnuDescribeUseGraph.Name = "mnuDescribeUseGraph"
-        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(192, 22)
-        Me.mnuDescribeUseGraph.Text = "Use Graph..."
+        Me.mnuDescribeRenameGraph.Name = "mnuDescribeRenameGraph"
+        Me.mnuDescribeRenameGraph.Size = New System.Drawing.Size(192, 22)
+        Me.mnuDescribeRenameGraph.Text = "Rename Graph..."
         '
         'mnuDescribeCombineGraph
         '
@@ -5376,7 +5376,7 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeMultivariateCorrelations As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateprincipalComponents As ToolStripMenuItem
     Friend WithEvents mnuDescribeMultivariateCanonicalCorrelations As ToolStripMenuItem
-    Friend WithEvents mnuDescribeUseGraph As ToolStripMenuItem
+    Friend WithEvents mnuDescribeRenameGraph As ToolStripMenuItem
     Friend WithEvents mnuDescribeCombineGraph As ToolStripMenuItem
     Friend WithEvents mnuDescribeThemes As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribe As ToolStripMenuItem

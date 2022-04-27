@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgUseGraph
+Public Class dlgRenameGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsUseGraphFunction As New RFunction

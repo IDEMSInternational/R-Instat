@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgUseGraph
+Partial Class dlgRenameGraph
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -51,9 +51,9 @@ Partial Class dlgUseGraph
         Me.lblGraphtoUse.AutoSize = True
         Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 45)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(94, 13)
         Me.lblGraphtoUse.TabIndex = 1
-        Me.lblGraphtoUse.Text = "Graph to Use:"
+        Me.lblGraphtoUse.Text = "Graph to Rename:"
         '
         'cmdPlotOptions
         '
@@ -104,10 +104,10 @@ Partial Class dlgUseGraph
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 254)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 5
         '
-        'dlgUseGraph
+        'dlgRenameGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -122,10 +122,10 @@ Partial Class dlgUseGraph
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgUseGraph"
+        Me.Name = "dlgRenameGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"
-        Me.Text = "Use Graph"
+        Me.Text = "Rename Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
