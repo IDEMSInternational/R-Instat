@@ -355,6 +355,8 @@ Public Class dlgNewDataFrame
 
             clsEmptyRepFunction.SetRCommand("rep")
             clsEmptyRepFunction.AddParameter("times", iRows, bIncludeArgumentName:=False, iPosition:=1)
+            clsEmptyRepFunction.RemoveParameterByName("each")
+            clsEmptyRepFunction.RemoveParameterByName("length.out")
 
             Dim strDefault As String = row.Cells("colDefault").Value
             If strDefault IsNot Nothing Then
@@ -375,7 +377,11 @@ Public Class dlgNewDataFrame
                     Dim clsSeqFunction As New RFunction
                     clsSeqFunction.SetRCommand("seq")
                     clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
-                    clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    clsEmptyRepFunction.RemoveParameterByName("times")
+                    clsEmptyRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    clsEmptyRepFunction.AddParameter("each", "1", iPosition:=1)
+                    clsEmptyRepFunction.AddParameter("length.out", iRows, iPosition:=2)
+                    clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
                 ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
                     clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
                 Else
