@@ -31,7 +31,7 @@ Public Class frmMain
     Public strInstatOptionsFile As String = "Options.bin"
     Public clsInstatOptions As InstatOptions
     Public clsRecentItems As clsRecentFiles
-    Public strCurrentDataFrame As String
+    'Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
     Public strSaveFilePath As String = ""
     Public clsOutputLogger As clsOutputLogger
