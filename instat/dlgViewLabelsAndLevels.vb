@@ -130,12 +130,13 @@ Public Class dlgViewFactorLabels
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.SetAssignTo("selected_variables")
 
         clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
         clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
-        clsViewFunction.AddParameter("x", clsRFunctionParameter:=clsSelectFunction)
+        clsViewFunction.AddParameter("x", "selected_variables", iPosition:=0)
         clsViewFunction.AddParameter("show.frq", "TRUE")
         clsViewFunction.AddParameter("show.id", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
@@ -198,8 +199,10 @@ Public Class dlgViewFactorLabels
             ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSelectFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
         Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSelectFunction)
             ucrReceiverVariables.Location = New System.Drawing.Point(302, 109)
             ucrReceiverVariables.bWithQuotes = True
             strCurrDataFrame = ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame
