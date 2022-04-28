@@ -145,7 +145,6 @@ Partial Class dlgRandomSample
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
-        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         '
         'ucrSelectorRandomSamples
         '

@@ -134,8 +134,8 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.4\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1020,12 +1020,6 @@
       <DependentUpon>dlgFlatFrequencyTable.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFlatFrequencyTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgFrequency.Designer.vb">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFrequency.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
@@ -2809,6 +2803,9 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSplitButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ucrTry.Designer.vb">
       <DependentUpon>ucrTry.vb</DependentUpon>
     </Compile>
@@ -3411,9 +3408,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.sw-KE.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgHelpVignettes.resx">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3686,9 +3680,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
