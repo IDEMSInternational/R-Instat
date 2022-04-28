@@ -226,9 +226,8 @@ Public Class dlgName
                 MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
                 bCurrentCell = False
                 Exit For
-            Else
-                bCurrentCell = True
             End If
+            bCurrentCell = True
         Next
     End Sub
 
