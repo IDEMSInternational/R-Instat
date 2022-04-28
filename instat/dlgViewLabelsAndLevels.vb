@@ -43,14 +43,14 @@ Public Class dlgViewFactorLabels
 
         ucrBase.iHelpTopicID = 517
         ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverVariables.SetParameter(New RParameter("x", 1))
+        ucrReceiverVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverVariables.SetParameterIsString()
         ucrReceiverVariables.SetParameterIncludeArgumentName(False)
         ucrReceiverVariables.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverVariables.Selector = ucrSelectorViewLabelsAndLevels
         ucrReceiverVariables.SetMeAsReceiver()
 
-        ucrSelectorViewLabelsAndLevels.SetParameter(New RParameter(".data", 0))
+        ucrSelectorViewLabelsAndLevels.SetParameter(New RParameter("data_name", 0))
         ucrSelectorViewLabelsAndLevels.SetParameterIsrfunction()
 
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
@@ -128,8 +128,6 @@ Public Class dlgViewFactorLabels
         clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
         clsDummyDataFunction.AddParameter("check", "FALSE", iPosition:=1)
 
-        clsSelectFunction.SetPackageName("dplyr")
-        clsSelectFunction.SetRCommand("select")
         clsSelectFunction.SetAssignTo("selected_variables")
 
         clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
@@ -158,7 +156,6 @@ Public Class dlgViewFactorLabels
         ucrChkMaxLabels.SetRCode(clsDummyDataFunction, bReset)
         ucrNudMaxLength.SetRCode(clsViewFunction, bReset)
         ucrReceiverVariables.SetRCode(clsSelectFunction, bReset)
-        ucrSelectorViewLabelsAndLevels.SetRCode(clsSelectFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
     End Sub
 
@@ -196,6 +193,7 @@ Public Class dlgViewFactorLabels
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverVariables.ControlValueChanged
         SetReceiverVariableVisible()
         If rdoViewLabels.Checked Then
+            ucrReceiverVariables.SetParameterIsRFunction()
             ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
