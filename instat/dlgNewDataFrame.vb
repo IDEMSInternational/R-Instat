@@ -369,7 +369,6 @@ Public Class dlgNewDataFrame
                 End If
 
                 Dim strColumnName As String = row.Cells("colNames").Value
-                clsColExpRFunction.ClearParameters()
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
 
