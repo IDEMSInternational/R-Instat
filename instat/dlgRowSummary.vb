@@ -166,15 +166,16 @@ Public Class dlgRowSummary
 
 
         ucrNudProp.SetParameter(New RParameter("probs", 1))
-        ucrNudProp.SetMinMax(0, 1)
-        ucrNudProp.Increment = 0.1
-        ucrNudProp.DecimalPlaces = 1
+        ucrNudProp.SetMinMax(0.00, 1.0)
+        ucrNudProp.Increment = 0.01
+        ucrNudProp.DecimalPlaces = 2
         ucrNudProp.SetLinkedDisplayControl(lblProp)
 
         ucrNudTrim.SetParameter(New RParameter("trim", 1))
-        ucrNudTrim.SetMinMax(0, 1)
-        ucrNudTrim.DecimalPlaces = 1
-        ucrNudTrim.Increment = 0.1
+        ucrNudTrim.Minimum = 0.0
+        ucrNudTrim.Maximum = 0.5
+        ucrNudTrim.DecimalPlaces = 2
+        ucrNudTrim.Increment = 0.01
         ucrNudTrim.SetLinkedDisplayControl(lblTrim)
 
         ucrSaveNewDataFrame.SetLabelText("New Column Name:")
@@ -391,8 +392,16 @@ Public Class dlgRowSummary
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrInputProbability.GetText <> "" Then
-                ucrBase.OKEnabled(True)
+            If Not ucrReceiverForRowSummaries.IsEmpty Then
+                If rdoRowQuantile.Checked Then
+                    If ucrInputProbability.GetText <> "" Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
             Else
                 ucrBase.OKEnabled(False)
             End If

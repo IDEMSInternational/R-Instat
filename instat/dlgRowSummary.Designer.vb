@@ -91,7 +91,6 @@ Partial Class dlgRowSummary
         'grpStatistic
         '
         Me.grpStatistic.Controls.Add(Me.lblTrim)
-        Me.grpStatistic.Controls.Add(Me.ucrNudProp)
         Me.grpStatistic.Controls.Add(Me.rdoMore)
         Me.grpStatistic.Controls.Add(Me.rdoMinimum)
         Me.grpStatistic.Controls.Add(Me.rdoMaximum)
@@ -102,12 +101,13 @@ Partial Class dlgRowSummary
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
         Me.grpStatistic.Controls.Add(Me.lblProp)
-        Me.grpStatistic.Controls.Add(Me.ucrNudTrim)
         Me.grpStatistic.Controls.Add(Me.ucrInputUserDefined)
+        Me.grpStatistic.Controls.Add(Me.ucrNudProp)
+        Me.grpStatistic.Controls.Add(Me.ucrNudTrim)
         Me.grpStatistic.Controls.Add(Me.ucrPnlStatistics)
         Me.grpStatistic.Location = New System.Drawing.Point(10, 238)
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(428, 88)
+        Me.grpStatistic.Size = New System.Drawing.Size(435, 88)
         Me.grpStatistic.TabIndex = 8
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
@@ -409,11 +409,11 @@ Partial Class dlgRowSummary
         Me.ucrNudProp.AutoSize = True
         Me.ucrNudProp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudProp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudProp.Location = New System.Drawing.Point(387, 62)
+        Me.ucrNudProp.Location = New System.Drawing.Point(385, 62)
         Me.ucrNudProp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudProp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudProp.Name = "ucrNudProp"
-        Me.ucrNudProp.Size = New System.Drawing.Size(35, 20)
+        Me.ucrNudProp.Size = New System.Drawing.Size(42, 20)
         Me.ucrNudProp.TabIndex = 14
         Me.ucrNudProp.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -426,7 +426,7 @@ Partial Class dlgRowSummary
         Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTrim.Name = "ucrNudTrim"
-        Me.ucrNudTrim.Size = New System.Drawing.Size(35, 20)
+        Me.ucrNudTrim.Size = New System.Drawing.Size(42, 20)
         Me.ucrNudTrim.TabIndex = 13
         Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -446,7 +446,7 @@ Partial Class dlgRowSummary
         Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
         Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
-        Me.ucrPnlStatistics.Size = New System.Drawing.Size(418, 68)
+        Me.ucrPnlStatistics.Size = New System.Drawing.Size(425, 68)
         Me.ucrPnlStatistics.TabIndex = 0
         '
         'ucrInputTiesMethod
@@ -513,7 +513,7 @@ Partial Class dlgRowSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(450, 426)
+        Me.ClientSize = New System.Drawing.Size(453, 426)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrChkIgnoreMissingValues)
