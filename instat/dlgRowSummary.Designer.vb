@@ -51,10 +51,20 @@ Partial Class dlgRowSummary
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
         Me.lblProp = New System.Windows.Forms.Label()
+        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
+        Me.ucrNudProp = New instat.ucrNud()
+        Me.ucrNudTrim = New instat.ucrNud()
+        Me.ucrPnlStatistics = New instat.UcrPanel()
         Me.grpMultipleRowSummary = New System.Windows.Forms.GroupBox()
+        Me.ucrInputTiesMethod = New instat.ucrInputComboBox()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.ucrChkType = New instat.ucrCheck()
+        Me.ucrChkTiesMethod = New instat.ucrCheck()
+        Me.ucrInputProbability = New instat.ucrInputComboBox()
         Me.rdoRowRanks = New System.Windows.Forms.RadioButton()
         Me.rdoRowQuantile = New System.Windows.Forms.RadioButton()
         Me.rdoRowRange = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMultipleRowSummary = New instat.UcrPanel()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.ucrChkIgnoreMissingValues = New instat.ucrCheck()
@@ -63,16 +73,6 @@ Partial Class dlgRowSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlRowSummaries = New instat.UcrPanel()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
-        Me.ucrNudProp = New instat.ucrNud()
-        Me.ucrNudTrim = New instat.ucrNud()
-        Me.ucrInputUserDefined = New instat.ucrInputComboBox()
-        Me.ucrPnlStatistics = New instat.UcrPanel()
-        Me.ucrInputTiesMethod = New instat.ucrInputComboBox()
-        Me.ucrInputType = New instat.ucrInputComboBox()
-        Me.ucrChkType = New instat.ucrCheck()
-        Me.ucrChkTiesMethod = New instat.ucrCheck()
-        Me.ucrInputProbability = New instat.ucrInputComboBox()
-        Me.ucrPnlMultipleRowSummary = New instat.UcrPanel()
         Me.grpStatistic.SuspendLayout()
         Me.grpMultipleRowSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -248,6 +248,51 @@ Partial Class dlgRowSummary
         Me.lblProp.TabIndex = 13
         Me.lblProp.Text = "Prop:"
         '
+        'ucrInputUserDefined
+        '
+        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
+        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
+        Me.ucrInputUserDefined.IsReadOnly = False
+        Me.ucrInputUserDefined.Location = New System.Drawing.Point(247, 61)
+        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
+        Me.ucrInputUserDefined.Size = New System.Drawing.Size(104, 25)
+        Me.ucrInputUserDefined.TabIndex = 10
+        '
+        'ucrNudProp
+        '
+        Me.ucrNudProp.AutoSize = True
+        Me.ucrNudProp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudProp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudProp.Location = New System.Drawing.Point(385, 62)
+        Me.ucrNudProp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudProp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudProp.Name = "ucrNudProp"
+        Me.ucrNudProp.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudProp.TabIndex = 14
+        Me.ucrNudProp.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTrim
+        '
+        Me.ucrNudTrim.AutoSize = True
+        Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTrim.Location = New System.Drawing.Point(387, 62)
+        Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrim.Name = "ucrNudTrim"
+        Me.ucrNudTrim.Size = New System.Drawing.Size(42, 20)
+        Me.ucrNudTrim.TabIndex = 13
+        Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlStatistics
+        '
+        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
+        Me.ucrPnlStatistics.Size = New System.Drawing.Size(425, 68)
+        Me.ucrPnlStatistics.TabIndex = 0
+        '
         'grpMultipleRowSummary
         '
         Me.grpMultipleRowSummary.Controls.Add(Me.ucrInputTiesMethod)
@@ -266,6 +311,57 @@ Partial Class dlgRowSummary
         Me.grpMultipleRowSummary.TabStop = False
         Me.grpMultipleRowSummary.Tag = "Statistic"
         Me.grpMultipleRowSummary.Text = "Row Statistic"
+        '
+        'ucrInputTiesMethod
+        '
+        Me.ucrInputTiesMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputTiesMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputTiesMethod.GetSetSelectedIndex = -1
+        Me.ucrInputTiesMethod.IsReadOnly = False
+        Me.ucrInputTiesMethod.Location = New System.Drawing.Point(163, 21)
+        Me.ucrInputTiesMethod.Name = "ucrInputTiesMethod"
+        Me.ucrInputTiesMethod.Size = New System.Drawing.Size(98, 21)
+        Me.ucrInputTiesMethod.TabIndex = 15
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(277, 48)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(35, 24)
+        Me.ucrInputType.TabIndex = 14
+        '
+        'ucrChkType
+        '
+        Me.ucrChkType.AutoSize = True
+        Me.ucrChkType.Checked = False
+        Me.ucrChkType.Location = New System.Drawing.Point(222, 49)
+        Me.ucrChkType.Name = "ucrChkType"
+        Me.ucrChkType.Size = New System.Drawing.Size(53, 23)
+        Me.ucrChkType.TabIndex = 13
+        '
+        'ucrChkTiesMethod
+        '
+        Me.ucrChkTiesMethod.AutoSize = True
+        Me.ucrChkTiesMethod.Checked = False
+        Me.ucrChkTiesMethod.Location = New System.Drawing.Point(73, 22)
+        Me.ucrChkTiesMethod.Name = "ucrChkTiesMethod"
+        Me.ucrChkTiesMethod.Size = New System.Drawing.Size(86, 23)
+        Me.ucrChkTiesMethod.TabIndex = 12
+        '
+        'ucrInputProbability
+        '
+        Me.ucrInputProbability.AddQuotesIfUnrecognised = True
+        Me.ucrInputProbability.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputProbability.GetSetSelectedIndex = -1
+        Me.ucrInputProbability.IsReadOnly = False
+        Me.ucrInputProbability.Location = New System.Drawing.Point(73, 47)
+        Me.ucrInputProbability.Name = "ucrInputProbability"
+        Me.ucrInputProbability.Size = New System.Drawing.Size(140, 21)
+        Me.ucrInputProbability.TabIndex = 10
         '
         'rdoRowRanks
         '
@@ -286,11 +382,11 @@ Partial Class dlgRowSummary
         Me.rdoRowQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRowQuantile.Location = New System.Drawing.Point(6, 49)
         Me.rdoRowQuantile.Name = "rdoRowQuantile"
-        Me.rdoRowQuantile.Size = New System.Drawing.Size(64, 17)
+        Me.rdoRowQuantile.Size = New System.Drawing.Size(69, 17)
         Me.rdoRowQuantile.TabIndex = 5
         Me.rdoRowQuantile.TabStop = True
         Me.rdoRowQuantile.Tag = "Quantile"
-        Me.rdoRowQuantile.Text = "Quantile"
+        Me.rdoRowQuantile.Text = "Quantiles"
         Me.rdoRowQuantile.UseVisualStyleBackColor = True
         '
         'rdoRowRange
@@ -305,6 +401,14 @@ Partial Class dlgRowSummary
         Me.rdoRowRange.Tag = "Range"
         Me.rdoRowRange.Text = "Range"
         Me.rdoRowRange.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMultipleRowSummary
+        '
+        Me.ucrPnlMultipleRowSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMultipleRowSummary.Location = New System.Drawing.Point(4, 14)
+        Me.ucrPnlMultipleRowSummary.Name = "ucrPnlMultipleRowSummary"
+        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(365, 64)
+        Me.ucrPnlMultipleRowSummary.TabIndex = 0
         '
         'rdoSingle
         '
@@ -404,110 +508,6 @@ Partial Class dlgRowSummary
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(391, 22)
         Me.ucrSaveNewDataFrame.TabIndex = 12
         '
-        'ucrNudProp
-        '
-        Me.ucrNudProp.AutoSize = True
-        Me.ucrNudProp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudProp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudProp.Location = New System.Drawing.Point(385, 62)
-        Me.ucrNudProp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudProp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudProp.Name = "ucrNudProp"
-        Me.ucrNudProp.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudProp.TabIndex = 14
-        Me.ucrNudProp.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTrim
-        '
-        Me.ucrNudTrim.AutoSize = True
-        Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTrim.Location = New System.Drawing.Point(387, 62)
-        Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTrim.Name = "ucrNudTrim"
-        Me.ucrNudTrim.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudTrim.TabIndex = 13
-        Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputUserDefined
-        '
-        Me.ucrInputUserDefined.AddQuotesIfUnrecognised = True
-        Me.ucrInputUserDefined.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputUserDefined.GetSetSelectedIndex = -1
-        Me.ucrInputUserDefined.IsReadOnly = False
-        Me.ucrInputUserDefined.Location = New System.Drawing.Point(247, 61)
-        Me.ucrInputUserDefined.Name = "ucrInputUserDefined"
-        Me.ucrInputUserDefined.Size = New System.Drawing.Size(104, 25)
-        Me.ucrInputUserDefined.TabIndex = 10
-        '
-        'ucrPnlStatistics
-        '
-        Me.ucrPnlStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStatistics.Location = New System.Drawing.Point(4, 14)
-        Me.ucrPnlStatistics.Name = "ucrPnlStatistics"
-        Me.ucrPnlStatistics.Size = New System.Drawing.Size(425, 68)
-        Me.ucrPnlStatistics.TabIndex = 0
-        '
-        'ucrInputTiesMethod
-        '
-        Me.ucrInputTiesMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputTiesMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTiesMethod.GetSetSelectedIndex = -1
-        Me.ucrInputTiesMethod.IsReadOnly = False
-        Me.ucrInputTiesMethod.Location = New System.Drawing.Point(163, 21)
-        Me.ucrInputTiesMethod.Name = "ucrInputTiesMethod"
-        Me.ucrInputTiesMethod.Size = New System.Drawing.Size(98, 21)
-        Me.ucrInputTiesMethod.TabIndex = 15
-        '
-        'ucrInputType
-        '
-        Me.ucrInputType.AddQuotesIfUnrecognised = True
-        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputType.GetSetSelectedIndex = -1
-        Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(277, 48)
-        Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(35, 24)
-        Me.ucrInputType.TabIndex = 14
-        '
-        'ucrChkType
-        '
-        Me.ucrChkType.AutoSize = True
-        Me.ucrChkType.Checked = False
-        Me.ucrChkType.Location = New System.Drawing.Point(222, 49)
-        Me.ucrChkType.Name = "ucrChkType"
-        Me.ucrChkType.Size = New System.Drawing.Size(53, 23)
-        Me.ucrChkType.TabIndex = 13
-        '
-        'ucrChkTiesMethod
-        '
-        Me.ucrChkTiesMethod.AutoSize = True
-        Me.ucrChkTiesMethod.Checked = False
-        Me.ucrChkTiesMethod.Location = New System.Drawing.Point(73, 22)
-        Me.ucrChkTiesMethod.Name = "ucrChkTiesMethod"
-        Me.ucrChkTiesMethod.Size = New System.Drawing.Size(86, 23)
-        Me.ucrChkTiesMethod.TabIndex = 12
-        '
-        'ucrInputProbability
-        '
-        Me.ucrInputProbability.AddQuotesIfUnrecognised = True
-        Me.ucrInputProbability.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputProbability.GetSetSelectedIndex = -1
-        Me.ucrInputProbability.IsReadOnly = False
-        Me.ucrInputProbability.Location = New System.Drawing.Point(73, 47)
-        Me.ucrInputProbability.Name = "ucrInputProbability"
-        Me.ucrInputProbability.Size = New System.Drawing.Size(140, 21)
-        Me.ucrInputProbability.TabIndex = 10
-        '
-        'ucrPnlMultipleRowSummary
-        '
-        Me.ucrPnlMultipleRowSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMultipleRowSummary.Location = New System.Drawing.Point(4, 14)
-        Me.ucrPnlMultipleRowSummary.Name = "ucrPnlMultipleRowSummary"
-        Me.ucrPnlMultipleRowSummary.Size = New System.Drawing.Size(365, 64)
-        Me.ucrPnlMultipleRowSummary.TabIndex = 0
-        '
         'dlgRowSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -523,8 +523,8 @@ Partial Class dlgRowSummary
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlRowSummaries)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.grpMultipleRowSummary)
+        Me.Controls.Add(Me.grpStatistic)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
