@@ -430,7 +430,7 @@ Partial Class dlgNewDataFrame
         'colDefault
         '
         Me.colDefault.HeaderText = "Default"
-        Me.colDefault.Items.AddRange(New Object() {"NA", "1,10", "letters[1:10]", "LETTERS[1:10]"})
+        Me.colDefault.Items.AddRange(New Object() {"NA", "0", "1", "1,10", "letters[1:10]", "LETTERS[1:10]"})
         Me.colDefault.Name = "colDefault"
         '
         'colLevels
