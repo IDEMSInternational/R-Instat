@@ -1474,7 +1474,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         dplyr::mutate_at(vars(-value), ~ forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
     }
   }
-  shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
+  shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = as.numeric(as.character(value)),
+                                                             value = round(value, signif_fig))
   if (treat_columns_as_factor && !is.null(columns_to_summarise)){
     shaped_cell_values <- shaped_cell_values %>%
       dplyr::mutate(summary = as.factor(summary)) %>% dplyr::mutate(summary = forcats::fct_relevel(summary, summaries_display)) %>%
