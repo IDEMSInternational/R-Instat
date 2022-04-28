@@ -53,7 +53,6 @@ Public Class dlgDescribeTwoVariable
         ucrBase.clsRsyntax.iCallType = 2
         rdoThreeVariable.Enabled = False
         lblNumericVariable.Visible = False
-        ucrReceiverNumericVariable.Visible = False
 
         iUcrBaseXLocation = ucrBase.Location.X
         iDialogueXsize = Me.Size.Width
@@ -85,6 +84,11 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondFactor.SetLinkedDisplayControl(lblSecondFactor)
         ucrReceiverSecondFactor.SetDataType("factor")
 
+        ucrReceiverNumericVariable.SetParameter(New RParameter("factor_two", 2, bNewIncludeArgumentName:=False))
+        ucrReceiverNumericVariable.SetParameterIsString()
+        ucrReceiverNumericVariable.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverNumericVariable.SetLinkedDisplayControl(lblNumericVariable)
+
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -98,8 +102,10 @@ Public Class dlgDescribeTwoVariable
 
         ucrPnlDescribe.AddRadioButton(rdoCustomize)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
+        ucrPnlDescribe.AddRadioButton(rdoThreeVariable)
         ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
+        ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -125,7 +131,8 @@ Public Class dlgDescribeTwoVariable
 
         ucrNudColumnFactors.SetMinMax(1, 2)
 
-        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim, rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverNumericVariable}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
@@ -300,7 +307,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("y_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRCorrelation, New RParameter("y_col_name", 2), iAdditionalPairNo:=2)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsCombineFrequencyFactorParameterFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsCombineFrequencyFactorParameterFunction, New RParameter("factor_one", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelation, New RParameter("x_col_names", 1), iAdditionalPairNo:=2)
@@ -483,10 +490,12 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
             ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
-        Else
+        ElseIf rdoCustomize.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+        Else
+            clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
         End If
         ChangeLocations()
     End Sub
