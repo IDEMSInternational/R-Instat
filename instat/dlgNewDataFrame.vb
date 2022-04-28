@@ -372,7 +372,6 @@ Public Class dlgNewDataFrame
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
 
-                    Dim iTemp As Integer = iRows + CInt(strDefault) - 1
                     Dim clsSeqFunction As New RFunction
                     clsSeqFunction.SetRCommand("seq")
                     clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
