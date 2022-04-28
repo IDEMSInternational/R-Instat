@@ -145,9 +145,9 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
     if(check_names) {
       # "T" should be avoided as a column name but is not checked by make.names()
       if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
-      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."), unique = TRUE)
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid or unique. make.names() and iconv() will be used to force them to be valid and unique.")
         names(new_data) <- valid_names
       }
     }
@@ -532,6 +532,11 @@ DataSheet$set("public", "get_column_data_types", function(columns) {
 DataSheet$set("public", "get_column_labels", function(columns) {
   if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(attr(x, "label"), collapse = ","))))
   else return(as.vector(sapply(private$data[columns], function(x) paste(attr(x, "label"), collapse = ","), USE.NAMES = FALSE)))
+}
+)
+
+DataSheet$set("public", "get_data_frame_label", function(use_current_filter = FALSE) {
+  return(attr(self$get_data_frame(use_current_filter = use_current_filter), "label"))
 }
 )
 
