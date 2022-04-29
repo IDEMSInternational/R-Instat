@@ -240,7 +240,6 @@ Public Class dlgName
             Case 2
                 bCurrentCell = True
         End Select
-        End Select
         TestOKEnabled()
     End Sub
 
