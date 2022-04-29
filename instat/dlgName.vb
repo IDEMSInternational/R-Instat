@@ -220,25 +220,26 @@ Public Class dlgName
         Return strValue
     End Function
 
-    Private Sub CheckChange(dctName As Dictionary(Of Integer, String), iCol As Integer)
-        For Each value In dctName.Values
-            If Not CheckNames(value, iCol) Then
-                MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
-                bCurrentCell = False
-                Exit For
-            Else
-                bCurrentCell = True
-            End If
-        Next
-    End Sub
-
     Private Sub ValidateNamesFromDictionary(iColIndex As Integer)
-        'TODO this need to be implemented in the appropriare ucrControl
-        If iColIndex = 1 Then
-            CheckChange(dctRowsNewNameChanged, iColIndex)
-        ElseIf iColIndex = 2 Then
-            CheckChange(dctRowsNewLabelChanged, iColIndex)
-        End If
+        'TODO this needs to be implemented in the appropriate ucrControl
+        Select Case iColIndex
+            Case 1
+                For Each strValue In dctRowsNewNameChanged.Values
+                    Dim parsedValue As Boolean
+                    If String.IsNullOrEmpty(strValue) _
+                            OrElse containsFrench(strValue) _
+                            OrElse Boolean.TryParse(strValue, parsedValue) _
+                            OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
+                            OrElse IsNumeric(strValue) Then
+                        MsgBox("The column name must not be a numeric or contain space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        bCurrentCell = False
+                        Exit For
+                    End If
+                    bCurrentCell = True
+                Next
+            Case 2
+                bCurrentCell = True
+        End Select
         TestOKEnabled()
     End Sub
 
