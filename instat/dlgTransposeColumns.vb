@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOverallFunction, clsTransposeFunction, clsGetColumnNames As New RFunction
+    Private clsOverallFunction, clsTransposeFunction, clsGetColumnNamesFunction As New RFunction
     Private lstVariables As New List(Of String)
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,7 +56,7 @@ Public Class dlgTransposeColumns
     Private Sub SetDefaults()
         clsTransposeFunction = New RFunction
         clsOverallFunction = New RFunction
-        clsGetColumnNames = New RFunction
+        clsGetColumnNamesFunction = New RFunction
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
         'ucrReceiverColumnsToTranspose.SetMeAsReceiver()
@@ -101,16 +101,17 @@ Public Class dlgTransposeColumns
     Private Sub CoreName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTransposeColumns.ControlValueChanged
         NewDefaultName()
     End Sub
-    Private Sub ucrReceiverColumsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
+    Private Sub ucrReceiverColumnsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetColumnNames = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
-        clsGetColumnNames.SetAssignTo("columns")
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNames)
+        clsGetColumnNamesFunction = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
+        clsGetColumnNamesFunction.SetAssignTo("columns")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNamesFunction)
         If ucrReceiverColumnsToTranspose.IsEmpty AndAlso lstVariables.Count > 0 Then
             UpdateSelector()
             ucrReceiverColumnsToTranspose.SetMeAsReceiver()
         End If
     End Sub
+
     Private Sub UpdateSelector()
         ClearSelector()
         For i = 0 To lstVariables.Count - 1
@@ -118,16 +119,19 @@ Public Class dlgTransposeColumns
             ucrSelectorTransposeColumns.lstAvailableVariable.Items(i).Tag = ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         Next
     End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlContentsChanged,
         ucrNewDataframe.ControlContentsChanged, ucrReceiverVariableNames.ControlContentsChanged, ucrChkDisplayVariableNames.ControlContentsChanged,
         ucrInputDisplayVariableNames.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
     Private Sub ClearSelector()
         ucrSelectorTransposeColumns.lstAvailableVariable.Clear()
         ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Clear()
         ucrSelectorTransposeColumns.lstAvailableVariable.Columns.Add("Variables")
     End Sub
+
     Private Sub ucrReceiverVariableNames_Enter(sender As Object, e As EventArgs) Handles ucrReceiverVariableNames.Enter
         Dim grps As New ListViewGroup
         If Not ucrReceiverColumnsToTranspose.IsEmpty Then
@@ -144,6 +148,7 @@ Public Class dlgTransposeColumns
             Next
         End If
     End Sub
+
     Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged
         If ucrSelectorTransposeColumns.lstAvailableVariable.Items.Count > 0 Then
             lstVariables.Clear()
@@ -152,15 +157,18 @@ Public Class dlgTransposeColumns
             Next
         End If
     End Sub
+
     Private Sub ucrReceiverVariableNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariableNames.ControlValueChanged
         ResetSelector()
     End Sub
+
     Private Sub ResetSelector()
         If ucrReceiverVariableNames.IsEmpty AndAlso Not ucrReceiverColumnsToTranspose.IsEmpty _
                    AndAlso ucrSelectorTransposeColumns.lstAvailableVariable.Items.Count > 0 Then
             UpdateSelector()
         End If
     End Sub
+
     Private Sub ucrReceiverColumnsToTranspose_Enter(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToTranspose.Enter
         ResetSelector()
     End Sub
