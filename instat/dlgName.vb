@@ -301,18 +301,6 @@ Public Class dlgName
         Return bFind
     End Function
 
-    Private Function CheckNames(strNewData As String, iColIndex As Integer) As Boolean
-        Dim bCheck As Boolean
-        Dim parsedValue As Boolean
-        If (containsFrench(strNewData) OrElse strNewData.Equals("") OrElse Boolean.TryParse(strNewData, parsedValue) _
-             OrElse strNewData.Equals("t") OrElse strNewData.Equals("T") OrElse strNewData.Equals("f") OrElse strNewData.Equals("F") OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
-            bCheck = False
-        Else
-            bCheck = True
-        End If
-        Return bCheck
-    End Function
-
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
         GetVariables(strNewData, iRowIndex + 1, iColIndex)
         TestOKEnabled()
