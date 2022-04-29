@@ -13,9 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports RDotNet
-Imports instat.Translations
 Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
@@ -124,6 +121,7 @@ Public Class ucrSelector
 
         'if selector contains columns check if fill conditions are just the same
         If strCurrentType = "column" Then
+
             'holds the selector's list view 'fill conditions'
             'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
             Static _strCurrentSelectorFillCondition As String = ""
@@ -146,6 +144,7 @@ Public Class ucrSelector
             _strCurrentSelectorFillCondition = strNewSelectorFillCondition
         End If
 
+        'todo, for columns, the list view should be field with variables from the .Net metadata object
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         EnableDataOptions(strCurrentType)
 
@@ -159,7 +158,7 @@ Public Class ucrSelector
 
         If dataFrame IsNot Nothing Then
             strSelectorFillCondition &= dataFrame.strName
-            strSelectorFillCondition &= dataFrame.iTotalColumnCount
+            strSelectorFillCondition &= dataFrame.clsColumnMetaData.MetadataChangeAuditId
         End If
 
         If Not String.IsNullOrEmpty(strElementType) Then
@@ -169,8 +168,6 @@ Public Class ucrSelector
         If Not String.IsNullOrEmpty(strHeading) Then
             strSelectorFillCondition &= strHeading
         End If
-
-
 
         If Not String.IsNullOrEmpty(strDatabaseQuery) Then
             strSelectorFillCondition &= strDatabaseQuery
@@ -195,6 +192,7 @@ Public Class ucrSelector
 
         Return strSelectorFillCondition
     End Function
+
     Private Function GetVariablesInReceiver() As List(Of String)
         Dim lstVars As New List(Of String)
 
