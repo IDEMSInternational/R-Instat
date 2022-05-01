@@ -22,9 +22,13 @@ Public MustInherit Class ucrReoGrid
 
     Protected _clsDataBook As clsDataBook
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a worksheet is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(grdData.CurrentWorksheet)
+            Return If(grdData.CurrentWorksheet Is Nothing, Nothing, New clsWorksheetAdapter(grdData.CurrentWorksheet))
         End Get
         Set(value As clsWorksheetAdapter)
             grdData.CurrentWorksheet = grdData.Worksheets.Where(Function(x) x.Name = value.Name).FirstOrDefault

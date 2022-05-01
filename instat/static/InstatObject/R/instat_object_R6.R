@@ -1559,7 +1559,7 @@ DataBook$set("public", "get_key_names", function(data_name, include_overall = TR
 )
 
 DataBook$set("public", "remove_key", function(data_name, key_name) {
-  self$get_data_objects(data_name)$remove_key(key_name)
+  self$get_data_objects(data_name)$remove_key(key_name = key_name)
 }
 )
 

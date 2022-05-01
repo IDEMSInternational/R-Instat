@@ -488,7 +488,7 @@ Public Class ucrInput
         Return 0
     End Function
 
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object) Handles ucrDataFrameSelector.DataFrameChanged
         If Not bUserTyped Then
             SetDefaultName()
         End If
