@@ -126,7 +126,9 @@ pkgs <-
     "mc2d",
     "skimr",
     # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
-    "fastDummies"
+    "fastDummies",
+    # For most frequent values in Prepare > Column:Numeric > Row Summaries
+    "statip"
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
