@@ -539,7 +539,6 @@ Public Class dlgRowSummary
                     clsDummyRowFunction.AddParameter("check", "rowRange", iPosition:=0)
                     clsColumnNamesFunction.AddParameter("x", clsRFunctionParameter:=clsRowRangesFunction, iPosition:=0, bIncludeArgumentName:=False)
                     ucrBase.clsRsyntax.SetBaseROperator(clsAssignOperator)
-
                 ElseIf rdoRowQuantile.Checked Then
                     clsDummyRowFunction.AddParameter("check", "rowQuantiles", iPosition:=0)
                     clsColumnNamesFunction.AddParameter("x", clsRFunctionParameter:=clsRowQuantilesFunction, iPosition:=0, bIncludeArgumentName:=False)
