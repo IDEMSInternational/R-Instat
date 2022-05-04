@@ -27,7 +27,7 @@ Public Class sdgDistributionOptions
         Dim dctThemes As New Dictionary(Of String, String)
         Dim strThemes As String()
 
-        ucrBase.iHelpTopicID = 157
+        ucrBase.iHelpTopicID = 262
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 0))
 
