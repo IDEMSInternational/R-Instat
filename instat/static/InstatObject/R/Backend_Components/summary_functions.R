@@ -1458,12 +1458,12 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
               names(summary_margins) <- c("value", "summary-variable", factors)
           }else {
               for (col in 1:ncol(summary_margins)) {
-          # TODO: if the colname is the same as a factor, then do nothing
-          colnames(summary_margins)[col] <- sub("_value", "_all", colnames(summary_margins)[col])
+                # TODO: if the colname is the same as a factor, then do nothing
+                colnames(summary_margins)[col] <- sub("_value", "_all", colnames(summary_margins)[col])
               }
-         summary_margins <- summary_margins %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
-        summary_margins <- summary_margins %>%
-          tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
+              summary_margins <- summary_margins %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
+              summary_margins <- summary_margins %>%
+              tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
           }
       }
     } else {
