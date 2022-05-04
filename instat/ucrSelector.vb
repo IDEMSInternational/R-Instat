@@ -26,8 +26,11 @@ Public Class ucrSelector
     ' there may be a primary data frame which some receivers must be from.
     ' Other receivers may only allow columns from data frames linked to the primary data frame
     Public strPrimaryDataFrame As String
-    Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
-    Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+
+    'todo. these 2 lists should probably be deleted. they should only come from the receiver
+    Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+
     Private strType As String
     Private bShowHiddenCols As Boolean = False
     Private WithEvents ucrLinkedSelector As ucrSelector
@@ -44,6 +47,12 @@ Public Class ucrSelector
     '''          focus to the next receiver whenever this selector changes selection.
     '''</summary>
     Private lstOrderedReceivers As New List(Of ucrReceiver)
+
+    ''' <summary>
+    ''' holds the selector's list view 'fill conditions'
+    ''' used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
+    ''' </summary>
+    Private _strCurrentSelectorFillCondition As String = ""
 
     Public Sub New()
         ' This call is required by the designer.
@@ -102,15 +111,17 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
-        Dim arrStrExclud As String() = Nothing
+        Dim arrStrExclud() As String = {}
         Dim strCurrentType As String
-        Dim strNewSelectorFillCondition As String
 
         'no need to load elements if receiver is nothing
         If CurrentReceiver Is Nothing Then
             Exit Sub
         End If
 
+        'get the combined metadata of the selector and its current receiver.
+        'todo. the selector and the receiver need to be refactored in a way that they can't accept include and excluded metadata
+        'they should only have either; include or exclude list of metadata properties
         lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
         If CurrentReceiver.bExcludeFromSelector Then
             arrStrExclud = GetVariablesInReceiver().ToArray
@@ -119,33 +130,57 @@ Public Class ucrSelector
         'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
         strCurrentType = If(CurrentReceiver.bTypeSet, CurrentReceiver.GetItemType(), strType)
 
-        'if selector contains columns check if fill conditions are just the same
-        If strCurrentType = "column" Then
+        'for columns, only fill column name if the fill conditions have actually changed
+        'todo. this should also be done for the other 'types'
+        If strCurrentType = "column" AndAlso Not String.IsNullOrEmpty(strCurrentDataFrame) Then
 
-            'holds the selector's list view 'fill conditions'
-            'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
-            Static _strCurrentSelectorFillCondition As String = ""
+            Dim strNewSelectorFillCondition As String
 
             'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
             'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
             'this makes refilling of the listview unnecessarily slow, especially for wide data sets (see comments in issue #7162)
             'long term fix is to find out how the repeated calls to LoadList() can be omitted
-            strNewSelectorFillCondition = GetSelectorFillCondition(frmMain.DataBook.GetDataFrame(strCurrentDataFrame),
-                                                               strElementType:=strCurrentType,
-                                                               lstCombinedMetadataLists:=lstCombinedMetadataLists,
-                                                               strHeading:=CurrentReceiver.strSelectorHeading,
-                                                               arrStrExcludedItems:=arrStrExclud,
-                                                               strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
-                                                               strNcFilePath:=CurrentReceiver.strNcFilePath)
+            Dim dataFrame As clsDataFrame = frmMain.DataBook.GetDataFrame(strCurrentDataFrame)
+            strNewSelectorFillCondition = GetSelectorFillCondition(dataFrame,
+                                                           strElementType:=strCurrentType,
+                                                           lstCombinedMetadataLists:=lstCombinedMetadataLists,
+                                                           strHeading:=CurrentReceiver.strSelectorHeading,
+                                                           arrStrExcludedItems:=arrStrExclud,
+                                                           strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
+                                                           strNcFilePath:=CurrentReceiver.strNcFilePath)
             If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
                 Exit Sub
             End If
 
             _strCurrentSelectorFillCondition = strNewSelectorFillCondition
+
+            lstAvailableVariable.Clear()
+            If dataFrame Is Nothing Then
+                Exit Sub
+            End If
+
+            FillListViewWithColNames(lstAvailableVariable,
+                                     dataFrame.clsColumnMetaData,
+                                     lstCombinedMetadataLists(0),
+                                     lstCombinedMetadataLists(1),
+                                     arrStrExclud)
+
+            'frmMain.clsRLink.FillListView(lstAvailableVariable,
+            '                              strType:=strCurrentType,
+            '                              lstIncludedDataTypes:=lstCombinedMetadataLists(0),
+            '                              lstExcludedDataTypes:=lstCombinedMetadataLists(1),
+            '                              strHeading:=CurrentReceiver.strSelectorHeading,
+            '                              strDataFrameName:=strCurrentDataFrame,
+            '                              strExcludedItems:=arrStrExclud,
+            '                              strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
+            '                              strNcFilePath:=CurrentReceiver.strNcFilePath)
+
+            'OnControlValueChanged()
+        Else
+            'todo. refactor other R object names displayed by the selector to be read from the data book structures too.
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         End If
 
-        'todo, for columns, the list view should be field with variables from the .Net metadata object
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         EnableDataOptions(strCurrentType)
 
     End Sub
@@ -193,6 +228,42 @@ Public Class ucrSelector
         Return strSelectorFillCondition
     End Function
 
+    Private Sub FillListViewWithColNames(lstView As ListView,
+                                         clsColsMetaData As clsColumnMetaData,
+                                         includeMetadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String())),
+                                         excludeMetadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String())),
+                                         arrItemsToExclude() As String)
+
+        'get filtered metadata
+        Dim dataTable As DataTable = clsColsMetaData.GetFilteredMetaDataAsDatatable(
+                                           includeMetadataPropertiesToFilter,
+                                           excludeMetadataPropertiesToFilter)
+
+
+        lstView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+
+        'add the column headers to myListView.
+        Dim lstViewColHeader As New ColumnHeader With {
+            .Text = CurrentReceiver.strSelectorHeading
+        }
+
+        lstView.Columns.Add(lstViewColHeader)
+
+        'add column names from the filtered metadata to list view
+        For Each row As DataRow In dataTable.Rows
+
+            If arrItemsToExclude.Contains(row.Item(clsColumnMetaData.MetadataColumnNames.Name)) Then
+                Continue For
+            End If
+
+            Dim lstViewRowItem As New ListViewItem With {
+                .Text = row.Item(clsColumnMetaData.MetadataColumnNames.Name),
+                .ToolTipText = row.Item(clsColumnMetaData.MetadataColumnNames.Label)
+            }
+            lstView.Items.Add(lstViewRowItem)
+        Next
+    End Sub
+
     Private Function GetVariablesInReceiver() As List(Of String)
         Dim lstVars As New List(Of String)
 
@@ -205,8 +276,8 @@ Public Class ucrSelector
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         lstVariablesInReceivers.Clear()
+        _strCurrentSelectorFillCondition = ""
         LoadList()
-        'lstItemsInReceivers.Clear()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
@@ -342,7 +413,8 @@ Public Class ucrSelector
         RaiseEvent VariablesInReceiversChanged()
     End Sub
 
-    Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
+    'todo. this is not used by any other class.Should probably be deleted.
+    Private Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
         'Dim iExcludeIndex As Integer
         Dim kvpIncludeProperty As KeyValuePair(Of String, String())
@@ -365,7 +437,8 @@ Public Class ucrSelector
 
     End Sub
 
-    Public Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
+    'todo. this is not used by any other class. Should probably be deleted
+    Private Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
         'Dim iIncludeIndex As Integer
         Dim iExcludeIndex As Integer
 
@@ -420,6 +493,7 @@ Public Class ucrSelector
         Return strType
     End Function
 
+    'todo. this should probably be deleted. Can be set at the receiver level
     Public Property bShowHiddenColumns As Boolean
         Get
             Return bShowHiddenCols

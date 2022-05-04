@@ -17,18 +17,211 @@
 Imports RDotNet
 
 ''' <summary>
-''' Holds Column Meta Data for a single dataframe
+''' Holds Column Meta Data for a single data frame
 ''' </summary>
 Public Class clsColumnMetaData
     Private _strDataFrameName As String
     Private _RLink As RLink
+
+    'todo. all data in this data frame is also dataTableMetadataData
+    'so delete this global data frame?
     Private Property _clsColsMetadataDataFrame As DataFrame
     Private _hasChanged As Boolean
+
+    ''' <summary>
+    ''' stores the columns metadata from R
+    ''' </summary>
+    Private dataTableMetadataData As New DataTable
 
     ''' <summary>
     ''' holds the metadata change audit id
     ''' </summary> 
     Public Property MetadataChangeAuditId As Integer
+
+    ''' <summary>
+    ''' represents column names of the column metadata data frame
+    ''' </summary>
+    Public Structure MetadataColumnNames
+        '-------------------
+        'note an Enum would have been ideal, but VB.Net does not support String Enums
+        '------------------
+
+        ''' <summary>
+        ''' <par>Used to represent the "row name" column name.</par>
+        ''' </summary>
+        Public Const RowName As String = "RowName"
+
+        ''' <summary>
+        ''' <par>Used to represent the "name" column name.</par>
+        ''' </summary>
+        Public Const Name As String = "Name"
+
+        ''' <summary>
+        ''' used to represent "label" column name. 
+        ''' </summary>
+        Public Const Label As String = "label"
+
+        ''' <summary>
+        ''' used to represent "class" column name. 
+        ''' </summary>
+        Public Const ClassCol As String = "class"
+
+        ''' <summary>
+        ''' used to represent "Colour" column name. 
+        ''' </summary>
+        Public Const Colour As String = "Colour"
+
+        ''' <summary>
+        ''' used to represent "Display_Decimal" column name. 
+        ''' </summary>
+        Public Const DisplayDecimal As String = "Display_Decimal"
+
+        ''' <summary>
+        ''' used to represent "Is_Hidden" column name. 
+        ''' </summary>
+        Public Const IsHidden As String = "Is_Hidden"
+
+        ''' <summary>
+        ''' used to represent "Scientific" column name. 
+        ''' </summary>
+        Public Const Scientific As String = "Scientific"
+
+        ''' <summary>
+        ''' used to represent "Signif_Figures" column name. 
+        ''' </summary>
+        Public Const SignificantFigures As String = "Signif_Figures"
+
+    End Structure
+
+
+    ''' <summary>
+    ''' Gets filtered metadata as a data table
+    ''' </summary>
+    ''' <param name="metadataPropertiesToFilter">
+    ''' <para>List of columns and their metadata to use as the filter condition</para>
+    ''' <para>Expected structure; 
+    ''' [Key = column_name] and [Value = (Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) ] </para>
+    ''' </param>
+    ''' <param name="bConditionOperator">
+    ''' <para>Operator to use in the filter</para>
+    ''' <para>If False, then filter condition will equate to NOT</para> 
+    ''' </param>
+    ''' <returns>data table with rows that the satisfy the <paramref name="metadataPropertiesToFilter"/> filter condition</returns>
+    Private Function GetFilteredMetaDataAsDatatable1(metadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String())),
+                                                   bConditionOperator As Boolean) As DataTable
+
+        If metadataPropertiesToFilter.Count = 0 Then
+            Return dataTableMetadataData.Copy
+        End If
+
+        Dim dtNewMetadataData As New DataTable
+        Dim strFilterExpression As String = ""
+        Dim strConditionOperator As String = If(bConditionOperator, "", " NOT ")
+
+        'set the data table filter expression to be used for getting the rows
+        For Each kvpInclude As KeyValuePair(Of String, String()) In metadataPropertiesToFilter
+            Dim strConditionValues As String = ""
+            For Each strPropertValues As String In kvpInclude.Value
+                If strConditionValues = "" Then
+                    strConditionValues = "'" & strPropertValues.Trim("""") & "'"
+                Else
+                    strConditionValues = strConditionValues & "," & "'" & strPropertValues.Trim("""") & "'"
+                End If
+            Next
+
+            If strFilterExpression = "" Then
+                strFilterExpression = kvpInclude.Key.Trim("""") & strConditionOperator & " IN (" & strConditionValues & ")"
+            Else
+                strFilterExpression = strFilterExpression & " AND " & strConditionOperator & kvpInclude.Key & " IN (" & strConditionValues & ")"
+            End If
+        Next
+
+        'add columns
+        For Each column As DataColumn In dataTableMetadataData.Columns
+            dtNewMetadataData.Columns.Add(column.ColumnName)
+        Next
+
+        'add rows found
+        Dim rowsFound() As DataRow = dataTableMetadataData.Select(strFilterExpression)
+        For Each row As DataRow In rowsFound
+            dtNewMetadataData.Rows.Add(row.ItemArray)
+        Next
+
+        Return dtNewMetadataData
+    End Function
+
+    ''' <summary>
+    ''' Gets filtered metadata as a data table
+    ''' </summary>
+    ''' <param name="includeMetadataPropertiesToFilter">
+    ''' List of columns and their metadata to use as the include filter condition.
+    ''' Expected structure; 
+    ''' [Key = column_name] and [Value = (Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) ] 
+    '''</param>
+    ''' <param name="excludeMetadataPropertiesToFilter">
+    ''' List of columns and their metadata to use as the exclude filter condition
+    ''' Expected structure; 
+    ''' [Key = column_name] and [Value = (Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) ]
+    ''' </param> 
+    ''' <returns>data table with rows that the satisfy the <paramref name="includeMetadataPropertiesToFilter"/> and <paramref name="excludeMetadataPropertiesToFilter"/> filter condition.
+    ''' </returns>
+    Public Function GetFilteredMetaDataAsDatatable(includeMetadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String())),
+                                                   excludeMetadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String()))) As DataTable
+
+        If includeMetadataPropertiesToFilter.Count = 0 AndAlso excludeMetadataPropertiesToFilter.Count = 0 Then
+            Return dataTableMetadataData.Copy
+        End If
+
+        Dim dtNewMetadataData As New DataTable
+        Dim strFilterExpression As String
+
+        'get and set include filter expression
+        strFilterExpression = GetFilterExpression(includeMetadataPropertiesToFilter, True)
+        'get and set exclude filter expression
+        If strFilterExpression = "" Then
+            strFilterExpression = GetFilterExpression(excludeMetadataPropertiesToFilter, False)
+        Else
+            strFilterExpression = "( " & strFilterExpression & " ) AND ( " & GetFilterExpression(excludeMetadataPropertiesToFilter, False) & ")"
+        End If
+
+        'add columns
+        For Each column As DataColumn In dataTableMetadataData.Columns
+            dtNewMetadataData.Columns.Add(column.ColumnName)
+        Next
+
+        'Get rows that satisfy table filter expression
+        Dim rowsFound() As DataRow = dataTableMetadataData.Select(strFilterExpression)
+        For Each row As DataRow In rowsFound
+            dtNewMetadataData.Rows.Add(row.ItemArray)
+        Next
+
+        Return dtNewMetadataData
+    End Function
+
+    Private Function GetFilterExpression(metadataPropertiesToFilter As IEnumerable(Of KeyValuePair(Of String, String())),
+                                         bConditionOperator As Boolean) As String
+        Dim strFilterExpression As String = ""
+        Dim strConditionOperator As String = If(bConditionOperator, "", " NOT ")
+
+        'set the data table filter expression to be used for getting the rows
+        For Each kvpInclude As KeyValuePair(Of String, String()) In metadataPropertiesToFilter
+            Dim strConditionValues As String = ""
+            For Each strPropertValues As String In kvpInclude.Value
+                If strConditionValues = "" Then
+                    strConditionValues = "'" & strPropertValues.Trim("""") & "'"
+                Else
+                    strConditionValues = strConditionValues & "," & "'" & strPropertValues.Trim("""") & "'"
+                End If
+            Next
+
+            If strFilterExpression = "" Then
+                strFilterExpression = kvpInclude.Key.Trim("""") & strConditionOperator & " IN (" & strConditionValues & ")"
+            Else
+                strFilterExpression = strFilterExpression & " AND " & strConditionOperator & kvpInclude.Key & " IN (" & strConditionValues & ")"
+            End If
+        Next
+        Return strFilterExpression
+    End Function
 
     ''' <summary>
     ''' Returns data for a given cell within the Column Meta data table
@@ -130,6 +323,33 @@ Public Class clsColumnMetaData
         If _clsColsMetadataDataFrame Is Nothing OrElse HasDataChanged() Then
             _clsColsMetadataDataFrame = GetColsMetadataFromRCommand()
             SetColsMetadataToNotChangedInR()
+
+            'get all the from the R.net data frame into the data table
+            'please note, the choice of using VB.NET data table is because it easily supports sql like queries in selectong rows
+            'this is very useful because controls could want to get metadata based on specific conditions
+
+            'clear the data table contents
+            dataTableMetadataData.Rows.Clear()
+            dataTableMetadataData.Columns.Clear()
+
+
+            'set up data table column names from the data frame
+            'add column used to represent the data frame row name first
+            dataTableMetadataData.Columns.Add(MetadataColumnNames.RowName)
+            'then add data frame columns
+            For iColIndex As Integer = 0 To _clsColsMetadataDataFrame.ColumnCount - 1
+                dataTableMetadataData.Columns.Add(_clsColsMetadataDataFrame.ColumnNames(iColIndex))
+            Next
+
+            For iRowIndex As Integer = 0 To _clsColsMetadataDataFrame.RowCount - 1
+                Dim row As DataRow = dataTableMetadataData.NewRow
+                'first column is row name
+                row.Item(0) = _clsColsMetadataDataFrame.RowNames(iRowIndex)
+                For iColIndex As Integer = 0 To _clsColsMetadataDataFrame.ColumnCount - 1
+                    row.Item(iColIndex + 1) = _clsColsMetadataDataFrame.Item(iRowIndex, iColIndex)
+                Next
+                dataTableMetadataData.Rows.Add(row)
+            Next
 
             'this change number should eventually come from R
             'once that is done;
