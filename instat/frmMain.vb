@@ -588,7 +588,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
-        If clsRecentItems.lstRecentDialogs.Count > 0 Then
+        If clsRecentItems.lstRecentDialogs.Count > 1 Then
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub
