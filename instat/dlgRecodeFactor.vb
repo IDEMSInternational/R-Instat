@@ -26,6 +26,7 @@ Public Class dlgRecodeFactor
     Private clsOtherDummyFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
+    Private Const strNewLabelColName As String = "New Label"
 
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -92,15 +93,14 @@ Public Class dlgRecodeFactor
 
         ucrInputAddNa.SetParameter(New RParameter("na_level", 1))
 
-        ucrFactorGrid.SetReceiver(ucrReceiverFactor)
-        ucrFactorGrid.SetAsViewerOnly()
-        ucrFactorGrid.bIncludeCopyOfLevels = True
-        ucrFactorGrid.AddEditableColumns({"New Label"})
+        ucrFactorGrid.SetAsNormalGridColumn(ucrReceiverFactor,
+                                            extraColNames:={strNewLabelColName},
+                                            editableColNames:={strNewLabelColName},
+                                            hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
 
-        ucrFactorLevels.SetAsMultipleSelector()
-        ucrFactorLevels.SetReceiver(ucrReceiverFactor)
-        ucrFactorLevels.SetIncludeLevels(False)
-        ucrFactorLevels.bIncludeNA = True
+        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrReceiverFactor,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=True)
 
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
@@ -229,9 +229,9 @@ Public Class dlgRecodeFactor
         ElseIf rdoAddNa.Checked AndAlso Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
             ucrBase.OKEnabled(True)
         ElseIf rdoRecode.Checked Then
-            ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete("New Label"))
+            ucrBase.OKEnabled(ucrFactorGrid.IsColumnComplete({strNewLabelColName}))
         ElseIf rdoOther.Checked Then
-            ucrBase.OKEnabled(Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels()))
+            ucrBase.OKEnabled(ucrFactorLevels.IsAnyGridRowSelected)
         ElseIf rdoLump.Checked Then
             ucrBase.OKEnabled(rdoLevels.Checked OrElse rdoCommonValues.Checked OrElse rdoFrequentValues.Checked OrElse rdoMore.Checked)
         End If
@@ -243,20 +243,37 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
-        Dim strCurrentLabels As List(Of String)
-        Dim strNewLabels As List(Of String)
+    Private Sub ucrFactorGrid_GridContentReFilledFromR() Handles ucrFactorGrid.GridContentReFilledFromR
+        'copy all cell values of the 'Label' column into the 'New Label' column everytime the grid is refilled from R
+        'GridContentReFilledFromR event is always followed by ControlValueChanged so no need to raise ControlValueChanged event
+        ucrFactorGrid.SetCellValues(strNewLabelColName,
+                                    ucrFactorGrid.GetCellValues(ucrFactor.DefaultColumnNames.Label, False),
+                                    bRaisedControlValueChangedEvent:=False)
+    End Sub
 
-        strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
-        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", False)
+    Private Sub ucrFactorGrid_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorGrid.ControlValueChanged
 
+
+        'remove all the labels parameters
         clsReplaceFunction.ClearParameters()
-        If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
-            For i = 0 To strCurrentLabels.Count - 1
-                'Backtick needed for names of the vector incase the levels are not valid R names
-                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), Chr(34) & strNewLabels(i) & Chr(34), iPosition:=i + 1)
+        'if no empty new label. Then add them.
+        If ucrFactorGrid.IsColumnComplete({strNewLabelColName}) Then
+            Dim lstCurrentLabels As List(Of String)
+            Dim lstNewLabels As List(Of String)
+
+            'get the current labels without the quotes
+            lstCurrentLabels = ucrFactorGrid.GetCellValues(ucrFactor.DefaultColumnNames.Label, False)
+            'get the new labels with the quotes
+            lstNewLabels = ucrFactorGrid.GetCellValues(strNewLabelColName, True)
+
+            'add the parameters
+            For i = 0 To lstCurrentLabels.Count - 1
+                'todo. why not use the double quotes here??
+                'Backtick(') needed for names of the vector incase the levels are not valid R names
+                clsReplaceFunction.AddParameter(Chr(96) & lstCurrentLabels(i) & Chr(96), lstNewLabels(i), iPosition:=i + 1)
             Next
         End If
+
         TestOKEnabled()
     End Sub
 
@@ -283,10 +300,16 @@ Public Class dlgRecodeFactor
                 clsFctOtherFunction.RemoveParameterByName("keep")
                 clsFctOtherFunction.RemoveParameterByName("drop")
                 If rdoKeep.Checked Then
-                    clsFctOtherFunction.AddParameter("keep", ucrFactorLevels.GetSelectedLevels(), iPosition:=1)
+                    clsFctOtherFunction.AddParameter("keep", mdlCoreControl.GetRVector(
+                                                    ucrFactorLevels.GetSelectedCellValues(
+                                                          ucrFactor.DefaultColumnNames.Label, True)),
+                                                    iPosition:=1)
                     clsOtherDummyFunction.AddParameter("checked", "keep", iPosition:=0)
                 ElseIf rdoDrop.Checked Then
-                    clsFctOtherFunction.AddParameter("drop", ucrFactorLevels.GetSelectedLevels(), iPosition:=1)
+                    clsFctOtherFunction.AddParameter("drop", mdlCoreControl.GetRVector(
+                                                    ucrFactorLevels.GetSelectedCellValues(
+                                                          ucrFactor.DefaultColumnNames.Label, True)),
+                                                     iPosition:=1)
                     clsOtherDummyFunction.AddParameter("checked", "drop", iPosition:=0)
                 End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsFctOtherFunction)

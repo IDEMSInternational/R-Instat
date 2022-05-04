@@ -46,7 +46,7 @@ Public Class ucrDataFrameLength
     End Function
 
 
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object) Handles ucrDataFrameSelector.DataFrameChanged
         SetDataFrameLength()
     End Sub
 
