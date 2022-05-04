@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class clsRecentFiles
     Public lstRecentDialogs As New List(Of Form)
     Private strRecentFilesPath As String
-    Private mnuTbShowLast10 As ToolStripDropDownItem
+    Private mnuTbShowLast10 As ToolStripSplitButton
     Private mnuFile As ToolStripMenuItem
     Private mnuFileIcon As ToolStripSplitButton
     Private sepStart As ToolStripSeparator
@@ -38,10 +38,14 @@ Public Class clsRecentFiles
         strRecentFilesPath = Path.Combine(strAppDataPath, "recent.mru")
     End Sub
 
-    Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuFileIcon As ToolStripSplitButton, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
+    Public Sub SetToolStripItems(dfMnuFile As ToolStripMenuItem,
+                                 dfMnuFileIcon As ToolStripSplitButton,
+                                 dfMnuShowLast10Dialogs As ToolStripSplitButton,
+                                 dfSepStart As ToolStripSeparator,
+                                 dfSepEnd As ToolStripSeparator)
         mnuFile = dfMnuFile
         mnuFileIcon = dfMnuFileIcon
-        mnuTbShowLast10 = dfMnuToolStripDropdown
+        mnuTbShowLast10 = dfMnuShowLast10Dialogs
         sepStart = dfSepStart
         sepEnd = dfSepEnd
         sepStart.Visible = False
