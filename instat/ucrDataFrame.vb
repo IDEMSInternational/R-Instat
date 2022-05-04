@@ -89,6 +89,13 @@ Public Class ucrDataFrame
         If Not String.IsNullOrEmpty(frmMain.strDefaultDataFrame) AndAlso cboAvailableDataFrames.Items.Contains(frmMain.strDefaultDataFrame) Then
             cboAvailableDataFrames.SelectedItem = frmMain.strDefaultDataFrame
         End If
+
+        'todo. temporary and can be changed once some dialogs are correctly set up. 
+        'Note. This is necessary because of the way some dialogs are set up
+        'for instance, dialogs that manually add parameters to their R Functions
+        'need these events raised even though the data frame has not changed.
+        RaiseEvent DataFrameChanged(Me)
+        OnControlValueChanged()
     End Sub
 
     ''' <summary>
