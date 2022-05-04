@@ -23,8 +23,6 @@ Public Class clsRecentFiles
     Private mnuTbShowLast10 As ToolStripSplitButton
     Private mnuFile As ToolStripMenuItem
     Private mnuFileIcon As ToolStripSplitButton
-    Private sepStart As ToolStripSeparator
-    Private sepEnd As ToolStripSeparator
     ' declare a variable to contain the most recent opened items
     Private lstRecentOpenedFiles As New List(Of String)
 
@@ -40,16 +38,10 @@ Public Class clsRecentFiles
 
     Public Sub SetToolStripItems(dfMnuFile As ToolStripMenuItem,
                                  dfMnuFileIcon As ToolStripSplitButton,
-                                 dfMnuShowLast10Dialogs As ToolStripSplitButton,
-                                 dfSepStart As ToolStripSeparator,
-                                 dfSepEnd As ToolStripSeparator)
+                                 dfMnuShowLast10Dialogs As ToolStripSplitButton)
         mnuFile = dfMnuFile
         mnuFileIcon = dfMnuFileIcon
         mnuTbShowLast10 = dfMnuShowLast10Dialogs
-        sepStart = dfSepStart
-        sepEnd = dfSepEnd
-        sepStart.Visible = False
-        sepEnd.Visible = False
     End Sub
 
     Public Sub SetDataViewWindow(ucrDataViewWindow As ucrDataView)
@@ -337,16 +329,6 @@ Public Class clsRecentFiles
                 'TODO it would be good to remove the invalid line from the file in this case
             End Try
         Next
-
-        'show separator
-        If lstRecentOpenedFiles.Count > 0 Then
-            sepStart.Visible = True
-            sepEnd.Visible = True
-        Else
-            sepStart.Visible = False
-            sepEnd.Visible = False
-        End If
-
     End Sub
 
     ''' <summary>

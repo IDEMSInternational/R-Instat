@@ -141,7 +141,7 @@ Public Class frmMain
 
             'Sets up the Recent items
             clsRecentItems = New clsRecentFiles(strAppDataPath)
-            clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
