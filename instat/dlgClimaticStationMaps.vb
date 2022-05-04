@@ -225,7 +225,7 @@ Public Class dlgClimaticStationMaps
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsRFacetFunction.RemoveParameterByName("facets")
-        clsRFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
+        clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
 
         clsXlimFunction.SetRCommand("xlim")
         clsYlimFunction.SetRCommand("ylim")
