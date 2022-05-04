@@ -215,7 +215,7 @@ Public Class ucrReorder
         End If
     End Sub
 
-    Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
+    Private Sub ucrDataFrameList_DataFrameChanged(sender As Object) Handles ucrDataFrameList.DataFrameChanged
         LoadList()
     End Sub
 
