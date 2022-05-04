@@ -182,10 +182,12 @@ Public Class ucrSelector
         End If
 
         If lstCombinedMetadataLists IsNot Nothing Then
-            For i As Integer = 0 To i < lstCombinedMetadataLists.Count - 1
-                For i2 As Integer = 0 To lstCombinedMetadataLists(i).Count
-                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(i).Item(i2).Key
-                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(i).Item(i2).Value)
+            For iLstIndex As Integer = 0 To lstCombinedMetadataLists.Count - 1
+                'Note, in the dictionary
+                'Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) 
+                For iDctIndex As Integer = 0 To lstCombinedMetadataLists(iLstIndex).Count - 1
+                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Key
+                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Value)
                 Next
             Next
         End If
