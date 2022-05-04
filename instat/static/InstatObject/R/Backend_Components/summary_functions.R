@@ -1410,15 +1410,15 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     if ("summary" %in% margins || ("outer" %in% margins && length(factors) == 0)) {
       summary_margins <- NULL
       if (is.null(columns_to_summarise)){
-          power_sets_summary <- power_sets[-(length(power_sets))]
+        power_sets_summary <- power_sets[-(length(power_sets))]
       } 
       else {
-          if ("outer" %in% margins) {
-              power_sets_summary <- power_sets
-          }
-          else {
-              power_sets_summary <- power_sets[(c(length(power_sets)))]
-          }
+        if ("outer" %in% margins) {
+          power_sets_summary <- power_sets
+        }
+        else {
+          power_sets_summary <- power_sets[(c(length(power_sets)))]
+        }
       }
 
       if (is.null(columns_to_summarise)){
