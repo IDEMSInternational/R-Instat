@@ -33,6 +33,8 @@ Public Class sdgCorrPlot
     Public Sub InitialiseControls()
         Dim dctGeom As New Dictionary(Of String, String)
 
+        ucrBaseSdgCorrPlot.iHelpTopicID = 266
+
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
         ucrNudMaximumSize.SetRDefault("6")
