@@ -21,7 +21,7 @@ Imports RDotNet
 ''' </summary>
 Public Class clsDataBook
     Private _RLink As RLink
-    Private _dataFrames As List(Of clsDataFrame)
+    Private _lstDataFrames As List(Of clsDataFrame)
     Private _clsDataFrameMetaData As clsDataFrameMetaData
 
     ''' <summary>
@@ -30,10 +30,10 @@ Public Class clsDataBook
     ''' <returns></returns>
     Public Property DataFrames() As List(Of clsDataFrame)
         Get
-            Return _dataFrames
+            Return _lstDataFrames
         End Get
         Set(value As List(Of clsDataFrame))
-            _dataFrames = value
+            _lstDataFrames = value
         End Set
     End Property
     ''' <summary>
@@ -53,7 +53,7 @@ Public Class clsDataBook
     ''' <param name="rLink"></param>
     Public Sub New(rLink As RLink)
         _RLink = rLink
-        _dataFrames = New List(Of clsDataFrame)
+        _lstDataFrames = New List(Of clsDataFrame)
         _clsDataFrameMetaData = New clsDataFrameMetaData(rLink)
     End Sub
 
@@ -86,74 +86,80 @@ Public Class clsDataBook
         _RLink.RunScript(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
     End Sub
 
-    Private Function CreateNewGridTab(strDataFrameName As String) As clsDataFrame
-        Dim dataframe As New clsDataFrame(_RLink, strDataFrameName)
-        _dataFrames.Add(dataframe)
-        Return dataframe
-    End Function
-
     ''' <summary>
     ''' Gets the dataframe within the databook corresponding to the given name
     ''' </summary>
     ''' <param name="strName"></param>
     ''' <returns></returns>
     Public Function GetDataFrame(strName As String) As clsDataFrame
-        Return _dataFrames.Where(Function(x) x.strName = strName).FirstOrDefault
+        Return _lstDataFrames.Where(Function(x) x.strName = strName).FirstOrDefault
     End Function
+
     ''' <summary>
     ''' Gets the Column Metadata for the dataframe name given
     ''' </summary>
     ''' <param name="strName"></param>
     ''' <returns></returns>
     Public Function GetColumnMetaData(strName As String) As clsColumnMetaData
-        Return _dataFrames.Where(Function(x) x.strName = strName).FirstOrDefault().clsColumnMetaData
+        Return _lstDataFrames.Where(Function(x) x.strName = strName).FirstOrDefault().clsColumnMetaData
     End Function
 
     ''' <summary>
     ''' Updates all the dataframes and metadata where the data has changed
     ''' </summary>
     Public Sub RefreshData()
+        'if no R Instat object exists then just clear all data frames in the databook
+        'and refresh the data frame metadata from R
         If Not _RLink.bInstatObjectExists Then
-            DeleteAllDataFrames()
+            _lstDataFrames.Clear()
             _clsDataFrameMetaData = New clsDataFrameMetaData(_RLink)
             Exit Sub
         End If
+
+        'else if the R Instat object data has changed
+        'refresh data frames data and metadata 
         If HasDataChanged() Then
-            Dim listOfDataFrames As List(Of String) = GetDataFrameNames()
-            DeleteOldDataFrames(listOfDataFrames)
-            For Each strDataFrameName In listOfDataFrames
-                Dim dataFrame As clsDataFrame = GetOrCreateDataFrame(strDataFrameName)
-                dataFrame.RefreshData()
-            Next
+            RefreshDataFrames()
             _clsDataFrameMetaData.RefreshData()
         End If
     End Sub
 
-    Private Sub DeleteAllDataFrames()
-        Dim listOfDataFrames As New List(Of String)
-        DeleteOldDataFrames(listOfDataFrames)
-    End Sub
+    ''' <summary>
+    ''' refreshes data book with recent R data frames and the data frames with their recent R data
+    ''' </summary>
+    Private Sub RefreshDataFrames()
+        'get the recent list of data frame names from R Instant
+        Dim lstOfCurrentRDataFrameNames As List(Of String) = GetDataFrameNamesFromR()
 
-    Private Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
+        'remove any data frames from this data book that are not in the R Instat object
+        _lstDataFrames.RemoveAll(Function(x) Not lstOfCurrentRDataFrameNames.Contains(x.strName))
+
+        'add any R Instat object data frames missing in the data book
+        'and also refresh data of the data book data frames 
         Dim dataFrame As clsDataFrame
-        dataFrame = _dataFrames.Where(Function(x) x.strName = strDataFrameName).SingleOrDefault
-        If dataFrame Is Nothing Then
-            dataFrame = CreateNewGridTab(strDataFrameName)
-        End If
-        Return dataFrame
-    End Function
-
-    Private Sub DeleteOldDataFrames(currentDataFrames As List(Of String))
-        Dim gridTab As clsDataFrame
-        For i = _dataFrames.Count - 1 To 0 Step -1
-            gridTab = _dataFrames(i)
-            If Not currentDataFrames.Contains(gridTab.strName) Then
-                _dataFrames.RemoveAt(i)
+        For Each strDataFrameName In lstOfCurrentRDataFrameNames
+            dataFrame = _lstDataFrames.Where(Function(x) x.strName = strDataFrameName).SingleOrDefault
+            If dataFrame Is Nothing Then
+                dataFrame = New clsDataFrame(_RLink, strDataFrameName)
+                _lstDataFrames.Add(dataFrame)
+            End If
+            'if data not refreshed successfully, remove the data frame from the data book
+            If Not dataFrame.RefreshData() Then
+                MessageBox.Show("Error: Could not retrieve data frame:" & strDataFrameName & " from R" &
+                                Environment.NewLine & "Data displayed in spreadsheet may not be up to date." &
+                                Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.",
+                                "Cannot retrieve data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                _lstDataFrames.Remove(dataFrame)
             End If
         Next
     End Sub
 
-    Private Function GetDataFrameNames() As List(Of String)
+
+    ''' <summary>
+    ''' Gets current data frame names from R (the R Instant object).
+    ''' </summary>
+    ''' <returns>list of data frame names. If no data frame names found, an empty list is returned</returns>
+    Private Function GetDataFrameNamesFromR() As List(Of String)
         Dim clsGetDataFrameNames As New RFunction
         Dim expTemp As SymbolicExpression
         Dim listOfDataFrames As New List(Of String)
