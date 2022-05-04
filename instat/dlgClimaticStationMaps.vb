@@ -36,14 +36,14 @@ Public Class dlgClimaticStationMaps
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
     Private clsLabelRepelAesFunction As New RFunction
-    Private clsCoordPolarFunction As RFunction
-    Private clsCoordPolarStartOperator As ROperator
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-    Private clsGetDataFrame As RFunction
+    Private clsGetDataFrame As New RFunction
     Private clsRemoveFunc As New RFunction
     Private clsParamOperator As New ROperator
 
@@ -224,6 +224,7 @@ Public Class dlgClimaticStationMaps
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsRFacetFunction.RemoveParameterByName("facets")
         clsRFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
 
         clsXlimFunction.SetRCommand("xlim")
