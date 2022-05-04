@@ -395,7 +395,13 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
     }
-    if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), sort(setdiff(names(retlist), c(data_name_label, label_label))))]
+    if(all(c(data_name_label, label_label, row_count_label, column_count_label,
+             data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label) %in% names(retlist))){
+      retlist <- retlist[ ,c(c(data_name_label, label_label, row_count_label, column_count_label, data_type_label,
+                           is_calculated_label, is_hidden_label, is_linkable, key_label),
+                           sort(setdiff(names(retlist), c(data_name_label,label_label, row_count_label, column_count_label,
+                           data_type_label, is_calculated_label,is_hidden_label,is_linkable, key_label))))]
+    }
     else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, sort(setdiff(names(retlist), data_name_label)))]
     i = i + 1
   }
@@ -1384,7 +1390,7 @@ DataBook$set("public", "remove_column_colours", function(data_name) {
 )
 
 DataBook$set("public","set_column_colours_by_metadata", function(data_name, columns, property) {
-  self$get_data_objects(data_name)$set_column_colours_by_metadata(columns, property)
+  self$get_data_objects(data_name)$set_column_colours_by_metadata(data_name, columns, property)
 }
 )
 

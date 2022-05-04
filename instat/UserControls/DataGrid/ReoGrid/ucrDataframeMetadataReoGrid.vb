@@ -54,6 +54,7 @@ Public Class ucrDataframeMetadataReoGrid
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
         grdData.Worksheets(0).SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         grdData.SheetTabNewButtonVisible = False
         AttachEventsToWorksheet(grdData.Worksheets(0))
