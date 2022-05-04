@@ -1411,10 +1411,12 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       summary_margins <- NULL
       if (is.null(columns_to_summarise)){
           power_sets_summary <- power_sets[-(length(power_sets))]
-      } else {
+      } 
+      else {
           if ("outer" %in% margins) {
               power_sets_summary <- power_sets
-          } else {
+          }
+          else {
               power_sets_summary <- power_sets[(c(length(power_sets)))]
           }
       }
@@ -1453,8 +1455,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
               names(summary_margins) <- c("value", "summary-variable", factors)
           }else {
               for (col in 1:ncol(summary_margins)) {
-          # TODO: if the colname is the same as a factor, then do nothing
-          colnames(summary_margins)[col] <- sub("_value", "_all", colnames(summary_margins)[col])
+                # TODO: if the colname is the same as a factor, then do nothing
+                colnames(summary_margins)[col] <- sub("_value", "_all", colnames(summary_margins)[col])
               }
               summary_margins <- summary_margins %>%
               tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value")

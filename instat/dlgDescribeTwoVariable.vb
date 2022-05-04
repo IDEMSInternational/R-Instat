@@ -387,8 +387,6 @@ Public Class dlgDescribeTwoVariable
                     strFirstVariablesType = lstFirstItemTypes(0)
                 Else
                     strFirstVariablesType = ""
-                    lblFirstType.Text = "________"
-                    lblFirstType.ForeColor = SystemColors.ControlText
                 End If
                 lblFirstType.Text = strFirstVariablesType
                 lblFirstType.ForeColor = SystemColors.Highlight
@@ -462,9 +460,10 @@ Public Class dlgDescribeTwoVariable
                 If ucrReceiverSecondVar.GetVariableNames <> strColumn Then
                     clsCombineFactorsFunction.AddParameter(strColumn, strColumn, bIncludeArgumentName:=False, iPosition:=iPosition)
                 End If
-                iPosition = iPosition + 1
+                iPosition += 1
             Next
-            clsCombineFactorsFunction.AddParameter(ucrReceiverSecondVar.GetVariableNames, ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=iPosition + 1)
+            clsCombineFactorsFunction.AddParameter(ucrReceiverSecondVar.GetVariableNames, ucrReceiverSecondVar.GetVariableNames,
+                                                   bIncludeArgumentName:=False, iPosition:=iPosition)
         End If
         SwapMmtableHeaderFunctions()
         Results()
