@@ -463,6 +463,7 @@ Public Class dlgDescribeTwoVariable
                 If ucrReceiverSecondVar.GetVariableNames <> strColumn Then
                     clsCombineFactorsFunction.AddParameter(strColumn, strColumn, bIncludeArgumentName:=False, iPosition:=iPosition)
                 End If
+                iPosition = iPosition + 1
             Next
             clsCombineFactorsFunction.AddParameter(ucrReceiverSecondVar.GetVariableNames, ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=iPosition + 1)
         End If
@@ -530,11 +531,7 @@ Public Class dlgDescribeTwoVariable
                 grpDisplay.Visible = True
                 grpFrequency.Visible = True
                 ucrChkDisplayMargins.Visible = True
-                If ucrChkDisplayMargins.Checked Then
-                    ucrInputMarginName.Visible = True
-                Else
-                    ucrInputMarginName.Visible = False
-                End If
+                ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
             Else
                 ucrReceiverFirstVars.SetMeAsReceiver()
                 DisableFrequencyControls()
