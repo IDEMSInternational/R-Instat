@@ -228,7 +228,6 @@ Public Class dlgDescribeTwoVariable
         clsMmtableMapFunction.AddParameter(".x", ".", iPosition:=0)
         clsMmtableMapFunction.AddParameter(".f", clsROperatorParameter:=clsMmtablePlusOperator, iPosition:=1)
 
-
         clsMapFrequencyPipeOperator.SetOperation("%>%")
         clsMapFrequencyPipeOperator.AddParameter("map_summary_table", clsRFunctionParameter:=clsSummaryMapFunction, iPosition:=1)
         clsMapFrequencyPipeOperator.AddParameter("map_mmtable", clsRFunctionParameter:=clsMmtableMapFunction, iPosition:=2)
@@ -467,7 +466,6 @@ Public Class dlgDescribeTwoVariable
             Next
             clsCombineFactorsFunction.AddParameter(ucrReceiverSecondVar.GetVariableNames, ucrReceiverSecondVar.GetVariableNames, bIncludeArgumentName:=False, iPosition:=iPosition + 1)
         End If
-
         SwapMmtableHeaderFunctions()
         Results()
         EnableDisableFrequencyControls()
