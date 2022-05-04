@@ -145,9 +145,9 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
     if(check_names) {
       # "T" should be avoided as a column name but is not checked by make.names()
       if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
-      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
+      valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."), unique = TRUE)
       if(!all(names(new_data) == valid_names)) {
-        warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
+        warning("Not all column names are syntactically valid or unique. make.names() and iconv() will be used to force them to be valid and unique.")
         names(new_data) <- valid_names
       }
     }
@@ -532,6 +532,11 @@ DataSheet$set("public", "get_column_data_types", function(columns) {
 DataSheet$set("public", "get_column_labels", function(columns) {
   if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(attr(x, "label"), collapse = ","))))
   else return(as.vector(sapply(private$data[columns], function(x) paste(attr(x, "label"), collapse = ","), USE.NAMES = FALSE)))
+}
+)
+
+DataSheet$set("public", "get_data_frame_label", function(use_current_filter = FALSE) {
+  return(attr(self$get_data_frame(use_current_filter = use_current_filter), "label"))
 }
 )
 
@@ -1067,8 +1072,8 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (curr_col in col_names) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (property == labels_label && !is.null(new_val) && new_val == "") {
-        #reset the column labels property 
+      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+        #reset the column labels or colour property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
         attr(private$data[[curr_col]], property) <- new_val
@@ -1079,8 +1084,8 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (col_name in self$get_column_names()) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (property == labels_label && !is.null(new_val) && new_val == "") {
-        #reset the column labels property 
+      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+        #reset the column labels or colour property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
         attr(private$data[[col_name]], property) <- new_val
@@ -2223,7 +2228,7 @@ DataSheet$set("public", "add_key", function(col_names, key_name) {
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
-    self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+    self$append_to_metadata(key_label, paste(private$keys[[key_name]], collapse = ","))
     cat(paste("Key name:", key_name),
         paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
         sep = "\n")
@@ -2254,7 +2259,9 @@ DataSheet$set("public", "get_keys", function(key_name) {
 
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
+  self$append_to_variables_metadata(private$keys[[key_name]], is_key_label, FALSE)
   private$keys[[key_name]] <- NULL
+  self$append_to_metadata(key_label, NULL)
   cat("Key removed:", key_name)
 }
 )
@@ -2324,7 +2331,8 @@ DataSheet$set("public", "has_colours", function(columns) {
 }
 )
 
-DataSheet$set("public", "set_column_colours_by_metadata", function(columns, property) {
+DataSheet$set("public", "set_column_colours_by_metadata", function(data_name, columns, property) {
+if(!missing(data_name) && missing(columns)) columns <- names(self$get_data_frame(data_name = data_name))
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   

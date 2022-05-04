@@ -15,11 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgColourbyProperty
     Public bFirstLoad As Boolean = True
     Private clsColourByMetadata As New RFunction
     Private clsRemoveColour As New RFunction
     Private bReset As Boolean = True
+    Private bApplyColumnColours As Boolean
 
     Private Sub dlgColourbyProperty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -32,6 +34,8 @@ Public Class dlgColourbyProperty
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        AutoFill()
+        SetBaseFunction()
         autoTranslate(Me)
     End Sub
 
@@ -61,7 +65,6 @@ Public Class dlgColourbyProperty
 
         clsColourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsRemoveColour.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
     End Sub
 
@@ -73,7 +76,7 @@ Public Class dlgColourbyProperty
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverMetadataProperty.IsEmpty Then
+        If Not ucrReceiverMetadataProperty.IsEmpty OrElse ucrChkRemoveColours.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -86,12 +89,39 @@ Public Class dlgColourbyProperty
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkRemoveColours_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveColours.ControlValueChanged
-        If ucrChkRemoveColours.Checked Then
+
+    Private Sub AutoFill()
+        If ucrSelectorColourByMetadata.lstAvailableVariable.Items.Count > 0 Then
+            Dim clsHasColoursFunc As New RFunction
+            clsHasColoursFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_colours")
+            clsHasColoursFunc.AddParameter("data_name", Chr(34) & ucrSelectorColourByMetadata.ucrAvailableDataFrames.strCurrDataFrame & Chr(34))
+            bApplyColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsHasColoursFunc.ToScript()).AsLogical(0)
+            If Not bApplyColumnColours Then
+                For Each lviItem As ListViewItem In ucrSelectorColourByMetadata.lstAvailableVariable.Items
+                    If lviItem.Text = "class" Then
+                        ucrReceiverMetadataProperty.Add(lviItem.Text, ucrSelectorColourByMetadata.ucrAvailableDataFrames.strCurrDataFrame)
+                        Exit For
+                    End If
+                Next
+            End If
+            ucrChkRemoveColours.Visible = bApplyColumnColours
+        End If
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If ucrChkRemoveColours.Checked AndAlso bApplyColumnColours Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColour)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
         End If
+    End Sub
+
+    Private Sub ucrChkRemoveColours_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveColours.ControlValueChanged
+        SetBaseFunction()
+    End Sub
+
+    Private Sub ucrSelectorColourByMetadata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlValueChanged
+        AutoFill()
     End Sub
 
     Private Sub Controls_ControContententsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlContentsChanged, ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkRemoveColours.ControlContentsChanged

@@ -31,7 +31,7 @@ Public Class frmMain
     Public strInstatOptionsFile As String = "Options.bin"
     Public clsInstatOptions As InstatOptions
     Public clsRecentItems As clsRecentFiles
-    Public strCurrentDataFrame As String
+    'Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
     Public strSaveFilePath As String = ""
     Public clsOutputLogger As clsOutputLogger
@@ -40,6 +40,11 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Public ReadOnly Property DataBook As clsDataBook
+        Get
+            Return clsDataBook
+        End Get
+    End Property
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -136,7 +141,7 @@ Public Class frmMain
 
             'Sets up the Recent items
             clsRecentItems = New clsRecentFiles(strAppDataPath)
-            clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
@@ -582,7 +587,7 @@ Public Class frmMain
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
-    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
+    Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
@@ -644,10 +649,6 @@ Public Class frmMain
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
         dlgLabelsLevels.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
-        dlgViewFactorLabels.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
@@ -2431,4 +2432,9 @@ Public Class frmMain
     Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
         dlgMergeAdditionalData.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareCheckDataViewDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataViewDeleteLabels.Click
+        dlgViewFactorLabels.ShowDialog()
+    End Sub
+
 End Class

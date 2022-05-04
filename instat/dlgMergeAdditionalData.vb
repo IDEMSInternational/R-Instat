@@ -45,7 +45,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrToDataFrame.SetParameter(New RParameter("y", 1))
+        ucrToDataFrame.SetParameter(New RParameter("x", 0))
         ucrToDataFrame.SetParameterIsRFunction()
         ucrToDataFrame.SetLabelText("To Data Frame:")
 
@@ -83,7 +83,7 @@ Public Class dlgMergeAdditionalData
 
         clsLeftJoinFunction.SetPackageName("dplyr")
         clsLeftJoinFunction.SetRCommand("left_join")
-        clsLeftJoinFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
+        clsLeftJoinFunction.AddParameter("y", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
 
         clsByListFunction.SetRCommand("c")
 
@@ -91,7 +91,6 @@ Public Class dlgMergeAdditionalData
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-
 
         SetDataFrameAssign()
         ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
@@ -280,6 +279,7 @@ Public Class dlgMergeAdditionalData
     Private Sub ucrInputMergingBy_TextChanged(sender As Object, e As EventArgs) Handles ucrInputMergingBy.TextChanged
         AddColumns()
         CheckUnique()
+        SetDataFrameAssign()
         SetInputCheckVisibility(False)
     End Sub
 

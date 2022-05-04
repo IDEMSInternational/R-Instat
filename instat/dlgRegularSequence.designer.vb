@@ -39,6 +39,19 @@ Partial Class dlgRegularSequence
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
+        Me.lblLength = New System.Windows.Forms.Label()
+        Me.lblTimes = New System.Windows.Forms.Label()
+        Me.lblRepeatValues = New System.Windows.Forms.Label()
+        Me.lblInStepsOf = New System.Windows.Forms.Label()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.lblPreview = New System.Windows.Forms.Label()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.rdoDates = New System.Windows.Forms.RadioButton()
+        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
+        Me.txtPreview = New System.Windows.Forms.TextBox()
+        Me.ucrPnlSequenceType = New instat.UcrPanel()
+        Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrInputComboDatesBy = New instat.ucrInputComboBox()
         Me.ucrChkDefineAsFactor = New instat.ucrCheck()
         Me.ucrNudRepeatValues = New instat.ucrNud()
@@ -46,23 +59,11 @@ Partial Class dlgRegularSequence
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrDataFrameLength = New instat.ucrDataFrameLength()
-        Me.lblLength = New System.Windows.Forms.Label()
-        Me.lblTimes = New System.Windows.Forms.Label()
-        Me.lblRepeatValues = New System.Windows.Forms.Label()
-        Me.lblInStepsOf = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblFrom = New System.Windows.Forms.Label()
         Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
         Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
-        Me.lblPreview = New System.Windows.Forms.Label()
-        Me.lblMessage = New System.Windows.Forms.Label()
-        Me.rdoDates = New System.Windows.Forms.RadioButton()
-        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSequenceType = New instat.UcrPanel()
-        Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.txtPreview = New System.Windows.Forms.TextBox()
+        Me.ucrChkPreview = New instat.ucrCheck()
         Me.grpSequenceDefinition.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -92,80 +93,6 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.Text = "Sequence Definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
-        '
-        'ucrInputComboDatesBy
-        '
-        Me.ucrInputComboDatesBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboDatesBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboDatesBy.GetSetSelectedIndex = -1
-        Me.ucrInputComboDatesBy.IsReadOnly = False
-        Me.ucrInputComboDatesBy.Location = New System.Drawing.Point(173, 76)
-        Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
-        Me.ucrInputComboDatesBy.Size = New System.Drawing.Size(62, 23)
-        Me.ucrInputComboDatesBy.TabIndex = 17
-        '
-        'ucrChkDefineAsFactor
-        '
-        Me.ucrChkDefineAsFactor.AutoSize = True
-        Me.ucrChkDefineAsFactor.Checked = False
-        Me.ucrChkDefineAsFactor.Location = New System.Drawing.Point(5, 158)
-        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
-        Me.ucrChkDefineAsFactor.Size = New System.Drawing.Size(176, 23)
-        Me.ucrChkDefineAsFactor.TabIndex = 13
-        '
-        'ucrNudRepeatValues
-        '
-        Me.ucrNudRepeatValues.AutoSize = True
-        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(111, 101)
-        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudRepeatValues.TabIndex = 9
-        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputInStepsOf
-        '
-        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
-        Me.ucrInputInStepsOf.AutoSize = True
-        Me.ucrInputInStepsOf.IsMultiline = False
-        Me.ucrInputInStepsOf.IsReadOnly = False
-        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(111, 76)
-        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
-        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputInStepsOf.TabIndex = 7
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputTo.AutoSize = True
-        Me.ucrInputTo.IsMultiline = False
-        Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(111, 50)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputTo.TabIndex = 4
-        '
-        'ucrInputFrom
-        '
-        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrom.AutoSize = True
-        Me.ucrInputFrom.IsMultiline = False
-        Me.ucrInputFrom.IsReadOnly = False
-        Me.ucrInputFrom.Location = New System.Drawing.Point(111, 24)
-        Me.ucrInputFrom.Name = "ucrInputFrom"
-        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputFrom.TabIndex = 1
-        '
-        'ucrDataFrameLength
-        ' 
-        Me.ucrDataFrameLength.AutoSize = True
-        Me.ucrDataFrameLength.Location = New System.Drawing.Point(111, 128)
-        Me.ucrDataFrameLength.Name = "ucrDataFrameLength"
-        Me.ucrDataFrameLength.Size = New System.Drawing.Size(54, 23)
-        Me.ucrDataFrameLength.TabIndex = 12
         '
         'lblLength
         '
@@ -235,35 +162,11 @@ Partial Class dlgRegularSequence
         Me.lblFrom.Tag = "From:"
         Me.lblFrom.Text = "From:"
         '
-        'ucrDateTimePickerTo
-        '
-        Me.ucrDateTimePickerTo.AutoSize = True
-        Me.ucrDateTimePickerTo.DateValue = New Date(2021, 5, 19, 13, 55, 53, 370)
-        Me.ucrDateTimePickerTo.Format = "dd MMM yyyy"
-        Me.ucrDateTimePickerTo.Location = New System.Drawing.Point(78, 50)
-        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
-        Me.ucrDateTimePickerTo.Size = New System.Drawing.Size(157, 20)
-        Me.ucrDateTimePickerTo.TabIndex = 15
-        '
-        'ucrDateTimePickerFrom
-        '
-        Me.ucrDateTimePickerFrom.AutoSize = True
-        Me.ucrDateTimePickerFrom.DateValue = New Date(2021, 5, 19, 13, 55, 53, 410)
-        Me.ucrDateTimePickerFrom.Format = "dd MMM yyyy"
-        Me.ucrDateTimePickerFrom.Location = New System.Drawing.Point(78, 24)
-        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
-        Me.ucrDateTimePickerFrom.Size = New System.Drawing.Size(157, 20)
-        Me.ucrDateTimePickerFrom.TabIndex = 14
-        '
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
         Me.lblPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPreview.Location = New System.Drawing.Point(258, 59)
+        Me.lblPreview.Location = New System.Drawing.Point(258, 84)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(100, 13)
         Me.lblPreview.TabIndex = 5
@@ -275,7 +178,7 @@ Partial Class dlgRegularSequence
         Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.lblMessage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMessage.Location = New System.Drawing.Point(255, 218)
+        Me.lblMessage.Location = New System.Drawing.Point(255, 241)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(185, 52)
         Me.lblMessage.TabIndex = 7
@@ -312,6 +215,16 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoNumeric.UseVisualStyleBackColor = True
         '
+        'txtPreview
+        '
+        Me.txtPreview.Location = New System.Drawing.Point(255, 99)
+        Me.txtPreview.Multiline = True
+        Me.txtPreview.Name = "txtPreview"
+        Me.txtPreview.ReadOnly = True
+        Me.txtPreview.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtPreview.Size = New System.Drawing.Size(185, 140)
+        Me.txtPreview.TabIndex = 10
+        '
         'ucrPnlSequenceType
         '
         Me.ucrPnlSequenceType.AccessibleRole = System.Windows.Forms.AccessibleRole.None
@@ -330,6 +243,107 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnName.Size = New System.Drawing.Size(325, 24)
         Me.ucrNewColumnName.TabIndex = 8
         '
+        'ucrInputComboDatesBy
+        '
+        Me.ucrInputComboDatesBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDatesBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboDatesBy.GetSetSelectedIndex = -1
+        Me.ucrInputComboDatesBy.IsReadOnly = False
+        Me.ucrInputComboDatesBy.Location = New System.Drawing.Point(173, 76)
+        Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
+        Me.ucrInputComboDatesBy.Size = New System.Drawing.Size(62, 23)
+        Me.ucrInputComboDatesBy.TabIndex = 17
+        '
+        'ucrChkDefineAsFactor
+        '
+        Me.ucrChkDefineAsFactor.AutoSize = True
+        Me.ucrChkDefineAsFactor.Checked = False
+        Me.ucrChkDefineAsFactor.Location = New System.Drawing.Point(5, 158)
+        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
+        Me.ucrChkDefineAsFactor.Size = New System.Drawing.Size(176, 23)
+        Me.ucrChkDefineAsFactor.TabIndex = 13
+        '
+        'ucrNudRepeatValues
+        '
+        Me.ucrNudRepeatValues.AutoSize = True
+        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(111, 101)
+        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
+        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudRepeatValues.TabIndex = 9
+        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputInStepsOf
+        '
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.AutoSize = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(111, 76)
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputInStepsOf.TabIndex = 7
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.AutoSize = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(111, 50)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputTo.TabIndex = 4
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.AutoSize = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        Me.ucrInputFrom.Location = New System.Drawing.Point(111, 24)
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputFrom.TabIndex = 1
+        '
+        'ucrDataFrameLength
+        '
+        Me.ucrDataFrameLength.AddQuotesIfUnrecognised = True
+        Me.ucrDataFrameLength.AutoSize = True
+        Me.ucrDataFrameLength.IsMultiline = False
+        Me.ucrDataFrameLength.IsReadOnly = True
+        Me.ucrDataFrameLength.Location = New System.Drawing.Point(111, 128)
+        Me.ucrDataFrameLength.Name = "ucrDataFrameLength"
+        Me.ucrDataFrameLength.Size = New System.Drawing.Size(54, 23)
+        Me.ucrDataFrameLength.TabIndex = 12
+        '
+        'ucrDateTimePickerTo
+        '
+        Me.ucrDateTimePickerTo.AutoSize = True
+        Me.ucrDateTimePickerTo.DateValue = New Date(2021, 5, 19, 13, 55, 53, 370)
+        Me.ucrDateTimePickerTo.Format = "dd MMM yyyy"
+        Me.ucrDateTimePickerTo.Location = New System.Drawing.Point(78, 50)
+        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
+        Me.ucrDateTimePickerTo.Size = New System.Drawing.Size(157, 20)
+        Me.ucrDateTimePickerTo.TabIndex = 15
+        '
+        'ucrDateTimePickerFrom
+        '
+        Me.ucrDateTimePickerFrom.AutoSize = True
+        Me.ucrDateTimePickerFrom.DateValue = New Date(2021, 5, 19, 13, 55, 53, 410)
+        Me.ucrDateTimePickerFrom.Format = "dd MMM yyyy"
+        Me.ucrDateTimePickerFrom.Location = New System.Drawing.Point(78, 24)
+        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
+        Me.ucrDateTimePickerFrom.Size = New System.Drawing.Size(157, 20)
+        Me.ucrDateTimePickerFrom.TabIndex = 14
+        '
         'ucrSelectDataFrameRegularSequence
         '
         Me.ucrSelectDataFrameRegularSequence.AutoSize = True
@@ -347,18 +361,17 @@ Partial Class dlgRegularSequence
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 330)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
-        'txtPreview
+        'ucrChkPreview
         '
-        Me.txtPreview.Location = New System.Drawing.Point(255, 75)
-        Me.txtPreview.Multiline = True
-        Me.txtPreview.Name = "txtPreview"
-        Me.txtPreview.ReadOnly = True
-        Me.txtPreview.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtPreview.Size = New System.Drawing.Size(185, 140)
-        Me.txtPreview.TabIndex = 10
+        Me.ucrChkPreview.AutoSize = True
+        Me.ucrChkPreview.Checked = False
+        Me.ucrChkPreview.Location = New System.Drawing.Point(261, 60)
+        Me.ucrChkPreview.Name = "ucrChkPreview"
+        Me.ucrChkPreview.Size = New System.Drawing.Size(122, 23)
+        Me.ucrChkPreview.TabIndex = 11
         '
         'dlgRegularSequence
         '
@@ -366,6 +379,7 @@ Partial Class dlgRegularSequence
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 387)
+        Me.Controls.Add(Me.ucrChkPreview)
         Me.Controls.Add(Me.txtPreview)
         Me.Controls.Add(Me.rdoNumeric)
         Me.Controls.Add(Me.rdoDates)
@@ -415,4 +429,5 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrDateTimePickerFrom As ucrDateTimePicker
     Friend WithEvents ucrInputComboDatesBy As ucrInputComboBox
     Friend WithEvents txtPreview As TextBox
+    Friend WithEvents ucrChkPreview As ucrCheck
 End Class
