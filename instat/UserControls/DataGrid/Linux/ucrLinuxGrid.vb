@@ -25,9 +25,13 @@ Public MustInherit Class ucrLinuxGrid
     Private _rowContextMenuStrip As ContextMenuStrip
     Private _tabContextMenuStrip As ContextMenuStrip
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a tab is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(tcTabs.SelectedTab)
+            Return If(tcTabs.SelectedTab Is Nothing, Nothing, New clsWorksheetAdapter(tcTabs.SelectedTab))
         End Get
         Set(value As clsWorksheetAdapter)
             For Each tabPage As TabPage In tcTabs.TabPages

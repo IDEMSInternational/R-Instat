@@ -59,7 +59,7 @@ Partial Class dlgDuplicateRows
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDataFrame.Location = New System.Drawing.Point(11, 12)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(142, 12)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(135, 27)
         Me.rdoDataFrame.TabIndex = 1
@@ -76,7 +76,7 @@ Partial Class dlgDuplicateRows
         Me.rdoSelectedVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSelectedVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSelectedVariables.Location = New System.Drawing.Point(144, 12)
+        Me.rdoSelectedVariables.Location = New System.Drawing.Point(11, 12)
         Me.rdoSelectedVariables.Name = "rdoSelectedVariables"
         Me.rdoSelectedVariables.Size = New System.Drawing.Size(135, 27)
         Me.rdoSelectedVariables.TabIndex = 2

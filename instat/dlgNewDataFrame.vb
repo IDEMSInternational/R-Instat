@@ -291,7 +291,7 @@ Public Class dlgNewDataFrame
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
+    Private Sub ucrInputCommand_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputCommand.ControlContentsChanged
         ucrTryNewDataFrame.ClearTryText()
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
@@ -306,7 +306,7 @@ Public Class dlgNewDataFrame
             'used column index instead of column name because of argument exception
             If Not String.IsNullOrEmpty(row.Cells(1).Value) OrElse Not String.IsNullOrEmpty(row.Cells(2).Value) Then
                 clsConstructFunction.AddParameter(row.Cells(1).Value, row.Cells(2).Value, iPosition:=iPosition)
-                iPosition = iPosition + 1
+                iPosition += 1
             End If
         Next
 
@@ -322,6 +322,7 @@ Public Class dlgNewDataFrame
             'labels column is optional, so check for empty if it exists
             Dim clsColExpRFunction As New RFunction
             Dim clsEmptyRepFunction As New RFunction
+            Dim iRows As Integer = ucrNudRows.Value
             Dim strType As String = row.Cells("cbType").Value
             If strType IsNot Nothing Then
                 Select Case strType
@@ -353,21 +354,40 @@ Public Class dlgNewDataFrame
             clsSjLabelledFunction.AddParameter("label", GetLabelAsRString(lstLabels), iPosition:=1)
 
             clsEmptyRepFunction.SetRCommand("rep")
-            clsEmptyRepFunction.AddParameter("times", ucrNudRows.Value, bIncludeArgumentName:=False, iPosition:=1)
+            clsEmptyRepFunction.AddParameter("times", iRows, bIncludeArgumentName:=False, iPosition:=1)
+            clsEmptyRepFunction.RemoveParameterByName("each")
+            clsEmptyRepFunction.RemoveParameterByName("length.out")
 
             Dim strDefault As String = row.Cells("colDefault").Value
-            If strDefault = "NA" Then
-                clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
-            ElseIf IsNumeric(strDefault) Then
-                clsEmptyRepFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-            End If
+            If strDefault IsNot Nothing Then
+                If strDefault = "NA" Then
+                    clsEmptyRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf IsNumeric(strDefault) Then
+                    clsEmptyRepFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                Else
+                    clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                End If
 
-            Dim strColumnName As String = row.Cells("colNames").Value
-            clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
-            clsNewDataFrameFunction.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
-            iColPosition += 1
+                Dim strColumnName As String = row.Cells("colNames").Value
+                If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
+                                        AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
+
+                    Dim clsSeqFunction As New RFunction
+                    clsSeqFunction.SetRCommand("seq")
+                    clsSeqFunction.AddParameter("from", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                    clsEmptyRepFunction.RemoveParameterByName("times")
+                    clsEmptyRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    clsEmptyRepFunction.AddParameter("each", "1", iPosition:=1)
+                    clsEmptyRepFunction.AddParameter("length.out", iRows, iPosition:=2)
+                    clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf strDefault.Contains("LETTERS") OrElse strDefault.Contains("letters") Then
+                    clsColExpRFunction.AddParameter("x", strDefault, bIncludeArgumentName:=False, iPosition:=0)
+                Else
+                    clsColExpRFunction.AddParameter("x", clsRFunctionParameter:=clsEmptyRepFunction, bIncludeArgumentName:=False, iPosition:=0)
+                End If
+                clsNewDataFrameFunction.AddParameter(strColumnName, clsRFunctionParameter:=clsColExpRFunction, iPosition:=iColPosition)
+                iColPosition += 1
+            End If
         Next
     End Sub
 
@@ -425,7 +445,6 @@ Public Class dlgNewDataFrame
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles dataTypeGridView.DataError
         If e.Context _
                     = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize) Then
-
             e.ThrowException = False
         End If
     End Sub
@@ -479,6 +498,14 @@ Public Class dlgNewDataFrame
                 Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
                 dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
             End If
+        ElseIf e.ColumnIndex = 3 Then
+            Dim cbDefault = CType(dataTypeGridView.Columns(3), DataGridViewComboBoxColumn)
+            If Not cbDefault.Items.Contains(e.FormattedValue) Then
+                cbDefault.Items.Add(e.FormattedValue)
+                Dim iColumnIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
+                Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
+                dataTypeGridView(iColumnIndex, iRowIndex).Value = e.FormattedValue
+            End If
         End If
     End Sub
 
@@ -507,7 +534,8 @@ Public Class dlgNewDataFrame
         If dataTypeGridView.CurrentCell.GetType Is GetType(DataGridViewComboBoxCell) Then
             Dim selectedComboBox As ComboBox = DirectCast(e.Control, ComboBox)
             AddHandler selectedComboBox.SelectionChangeCommitted, AddressOf selectedComboBox_SelectionChangeCommitted
-            If dataTypeGridView.CurrentCell.ColumnIndex = 4 Then
+            If dataTypeGridView.CurrentCell.ColumnIndex = 4 _
+                                OrElse dataTypeGridView.CurrentCell.ColumnIndex = 3 Then
                 selectedComboBox.DropDownStyle = ComboBoxStyle.DropDown
             End If
         End If
@@ -515,14 +543,14 @@ Public Class dlgNewDataFrame
 
     Private Sub selectedComboBox_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
         If dataTypeGridView.CurrentCell.ColumnIndex = 2 Then
-            Dim iColumnIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
-            Dim iRowIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
+            Dim iColumnLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").ColumnIndex
+            Dim iRowLevelIndex As Integer = dataTypeGridView.CurrentRow.Cells("colLevels").RowIndex
             Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
             If selectedCombobox.SelectedItem = "Factor" Then
-                dataTypeGridView(iColumnIndex, iRowIndex).ReadOnly = False
+                dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = False
             Else
-                dataTypeGridView(iColumnIndex, iRowIndex).ReadOnly = True
-                dataTypeGridView(iColumnIndex, iRowIndex).Value = ""
+                dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = True
+                dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
             End If
         End If
     End Sub

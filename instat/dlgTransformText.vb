@@ -270,7 +270,7 @@ Public Class dlgTransformText
         clsSubstringFunction.AddParameter("start", 1, iPosition:=1)
         clsSubstringFunction.AddParameter("end", 2, iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

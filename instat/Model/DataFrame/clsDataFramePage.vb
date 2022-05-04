@@ -293,9 +293,10 @@ Public Class clsDataFramePage
         End If
         _lstColumns.Clear()
 
+
         For i = 0 To _clsRDotNetDataFrame.ColumnNames.ToList.Count - 1
             columnHeader = GetColumnDispayDetails(_clsRDotNetDataFrame.ColumnNames.ToList(i), vecColumnDataTypes(i))
-            If bApplyBackGroundColumnColours AndAlso vecColumnColours IsNot Nothing Then
+            If bApplyBackGroundColumnColours AndAlso Not Double.IsNaN(vecColumnColours(i)) Then
                 columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, vecColumnColours(i).ToString())
             End If
             _lstColumns.Add(columnHeader)
