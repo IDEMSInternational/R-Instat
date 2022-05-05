@@ -123,7 +123,7 @@ Public Class clsOutputElement
                 _outputType = OutputType.Script
             End If
         Catch ex As Exception
-            MessageBox.Show("Could not get formatted scripts for the output window" &
+            MessageBox.Show("Unable to parse the following R Script: '" & strScript & "'." &
                             Environment.NewLine & ex.Message,
                             "Developer Error",
                             MessageBoxButtons.OK,
