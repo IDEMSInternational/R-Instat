@@ -29,6 +29,8 @@ Public Class sdgTwoWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
 
+        ucrBaseSubDialogue.iHelpTopicID = 415
+
         'Setting Table parameter
         ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 13))
         dctHorizontalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
