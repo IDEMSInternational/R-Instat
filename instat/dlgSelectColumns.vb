@@ -20,8 +20,8 @@ Public Class dlgSelectColumns
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Public clsAddColumnSelection As New RFunction
-    Private clsConditionsList As RFunction
-    Private clsFromToOperation As ROperator
+    Private clsConditionsList As New RFunction
+    Private clsFromToOperation As New ROperator
     Private Sub dlgSelectColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()

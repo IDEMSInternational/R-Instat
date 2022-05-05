@@ -20,8 +20,8 @@ Imports RDotNet
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetObjectsFunction As RFunction
-    Private clsShowObjectStructureFunction As RFunction
+    Private clsGetObjectsFunction As New RFunction
+    Private clsShowObjectStructureFunction As New RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
