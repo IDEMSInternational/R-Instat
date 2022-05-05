@@ -1060,6 +1060,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeMultivariateCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeMultivariateCorrelations.Click
+        dlgCorrelation.SetMultipleSequenceAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -1285,6 +1286,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticSCFSupportCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCorrelations.Click
+        dlgCorrelation.SetMultipleSequenceAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -2200,6 +2202,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticCompareCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCorrelations.Click
+        dlgCorrelation.SetMultipleSequenceAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -2418,6 +2421,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeTwoThreeVariablesCorrelations_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesCorrelations.Click
+        dlgCorrelation.SetTwoVariableSequenceAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 

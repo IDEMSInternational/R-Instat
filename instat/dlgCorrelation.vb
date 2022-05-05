@@ -27,10 +27,16 @@ Public Class dlgCorrelation
     Private clsDummyShave As New RFunction
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
+    Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.MultipleOption
+    Private bDefaultOptionChanged As Boolean = False
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
+    Private Enum DefaultSequenceOption
+        MultipleOption
+        TwoVariableOption
+    End Enum
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -39,6 +45,11 @@ Public Class dlgCorrelation
         If bReset Then
             SetDefaults()
         End If
+
+        If bDefaultOptionChanged Then
+            SetSelectedDefaultSequenceOption()
+            bDefaultOptionChanged = False
+        End If
         SetRCodeForControls(bReset)
         bReset = False
         SetDefaultColumn()
@@ -46,6 +57,30 @@ Public Class dlgCorrelation
         autoTranslate(Me)
     End Sub
 
+    Private Sub SetSelectedDefaultSequenceOption()
+        Select Case enumDefaultSequenceOption
+            Case DefaultSequenceOption.MultipleOption
+                rdoMultipleColumns.Checked = True
+            Case DefaultSequenceOption.TwoVariableOption
+                rdoTwoColumns.Checked = True
+        End Select
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'numeric' option as the default option
+    ''' </summary>
+    Public Sub SetMultipleSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.MultipleOption
+        bDefaultOptionChanged = True
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'numeric' option as the default option
+    ''' </summary>
+    Public Sub SetTwoVariableSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.TwoVariableOption
+        bDefaultOptionChanged = True
+    End Sub
     Private Sub InitialiseDialog()
         Dim dctNaPrint As New Dictionary(Of String, String)
         Dim dctDiagonal As New Dictionary(Of String, String)
@@ -410,6 +445,7 @@ Public Class dlgCorrelation
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+        SetSelectedDefaultSequenceOption()
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
