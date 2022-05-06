@@ -151,7 +151,7 @@ Public Class ucrInputComboBox
         End Select
     End Sub
 
-    Public Sub ucrDataFrameSelector_DataFrameChanged() Handles ucrDataFrameSelector.DataFrameChanged
+    Public Sub ucrDataFrameSelector_ControlValueChanged() Handles ucrDataFrameSelector.ControlValueChanged
         FillItemTypes()
     End Sub
 

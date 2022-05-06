@@ -20,7 +20,7 @@ Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataFrame As String
-    Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As RFunction
+    Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
     Private clsDummyDataFunction As New RFunction
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load

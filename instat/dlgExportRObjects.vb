@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsExport As RFunction
+    Private clsExport As New RFunction
 
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

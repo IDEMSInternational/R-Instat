@@ -19,8 +19,8 @@ Imports instat.Translations
 Public Class dlgDefineOptionsByContext
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefineOptionsByContext As RFunction
-    Private clsTypes As RFunction
+    Private clsDefineOptionsByContext As New RFunction
+    Private clsTypes As New RFunction
     Private bDefaultsSet As Boolean = True
 
     Private Sub dlgDefineOptionsByContext_Load(sender As Object, e As EventArgs) Handles MyBase.Load
