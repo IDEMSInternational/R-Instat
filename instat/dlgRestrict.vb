@@ -18,10 +18,10 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgRestrict
     Public bFirstLoad As Boolean
-    Private clsRemoveFilter As RFunction
-    Private clsSetCurrentFilter As RFunction
-    Private clsSubset As RFunction
-    Private clsFilterView As RFunction
+    Private clsRemoveFilter As New RFunction
+    Private clsSetCurrentFilter As New RFunction
+    Private clsSubset As New RFunction
+    Private clsFilterView As New RFunction
     Public bIsSubsetDialog As Boolean
     Public strDefaultDataframe As String = ""
     Public strDefaultColumn As String = ""
