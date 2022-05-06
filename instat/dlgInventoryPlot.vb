@@ -18,9 +18,9 @@ Imports instat.Translations
 Public Class dlgInventoryPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsInventoryPlot As RFunction
-    Private clsClimaticMissing As RFunction
-    Private clsClimaticDetails As RFunction
+    Private clsInventoryPlot As New RFunction
+    Private clsClimaticMissing As New RFunction
+    Private clsClimaticDetails As New RFunction
     Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load

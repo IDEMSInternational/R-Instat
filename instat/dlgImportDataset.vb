@@ -5,17 +5,17 @@ Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
-    Private clsGetExcelSheetNames As RFunction
-    Private clsRangeOperator As ROperator
+    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As New RFunction
+    Private clsGetExcelSheetNames As New RFunction
+    Private clsRangeOperator As New ROperator
     ''' <summary>   
     ''' Ensures that any file paths containing special characters (e.g. accents) are 
     ''' correctly encoded.
     ''' </summary>
-    Private clsEnc2Native As RFunction
+    Private clsEnc2Native As New RFunction
     'functions for multi Excel sheet impoty
-    Private clsImportExcelMulti As RFunction
-    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As RFunction
+    Private clsImportExcelMulti As New RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As New RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean = True
     Public bFromLibrary As Boolean = False
