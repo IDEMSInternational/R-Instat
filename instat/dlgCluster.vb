@@ -20,7 +20,8 @@ Public Class dlgCluster
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
     Private clsScaleFunction, clsStatsNAOmitFunction, clsDummyFunction,
-        clsStatsScaleFunction, clsMatrixDistFunction, clsDistFunction, clsMatrixFunction As New RFunction
+        clsStatsScaleFunction, clsMatrixDistFunction, clsDistFunction,
+        clsMatrixFunction, clsCurrentNewColumnFunction As New RFunction
 
     Private Sub dlgCluster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -106,6 +107,7 @@ Public Class dlgCluster
         clsMatrixFunction = New RFunction
         clsDummyFunction = New RFunction
         clsDistFunction = New RFunction
+        clsCurrentNewColumnFunction = New RFunction
 
         ucrSaveNewDataFrame.SetPrefix("scale")
         ucrSelectorPrepareData.Reset()
@@ -205,16 +207,16 @@ Public Class dlgCluster
                     clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                 Else
                     clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
-                    clsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
-                    clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                    clsScaleFunction.AddParameter("x", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                    clsStatsScaleFunction.AddParameter("x", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
                 End If
             ElseIf rdoDistanceData.Checked Then
                 If rdoWholeDataFrame.Checked Then
                     clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                     clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorPrepareData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
                 Else
-                    clsDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
-                    clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverPrepareData.GetVariables, iPosition:=0)
+                    clsDistFunction.AddParameter("x", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                    clsMatrixDistFunction.AddParameter("x", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
                 End If
             End If
         End If
@@ -254,6 +256,8 @@ Public Class dlgCluster
     End Sub
 
     Private Sub ucrReceiverPrepareData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlValueChanged
+        clsCurrentNewColumnFunction = ucrReceiverPrepareData.GetVariables()
+        clsCurrentNewColumnFunction.SetAssignTo("columns")
         ChangeDataParameter()
     End Sub
 End Class
