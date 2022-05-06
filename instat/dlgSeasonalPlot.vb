@@ -21,66 +21,66 @@ Public Class dlgSeasonalPlot
     Private bReset As Boolean = True
 
     'summary functions + operators
-    Private clsPipeOperator As ROperator
-    Private clsAndOperator As ROperator
-    Private clsRefGreaterOperator As ROperator
-    Private clsEst1GreaterOperator As ROperator
-    Private clsRefLessOperator As ROperator
-    Private clsEst1LessOperator As ROperator
-    Private clsDivideOperator As ROperator
-    Private clsLessOperator As ROperator
-    Private clsGreaterOperator As ROperator
-    Private clsEst2GreaterOperator As ROperator
-    Private clsEst2LessOperator As ROperator
+    Private clsPipeOperator As New ROperator
+    Private clsAndOperator As New ROperator
+    Private clsRefGreaterOperator As New ROperator
+    Private clsEst1GreaterOperator As New ROperator
+    Private clsRefLessOperator As New ROperator
+    Private clsEst1LessOperator As New ROperator
+    Private clsDivideOperator As New ROperator
+    Private clsLessOperator As New ROperator
+    Private clsGreaterOperator As New ROperator
+    Private clsEst2GreaterOperator As New ROperator
+    Private clsEst2LessOperator As New ROperator
     ''' <summary> 
     ''' Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on 
     ''' summary option. This is used in SetRCode for ucrInputReferenceSummary. 
     ''' </summary>
-    Private clsRefGreaterOrLessOperator As ROperator
+    Private clsRefGreaterOrLessOperator As New ROperator
 
-    Private clsMissingFilterFunction As RFunction
-    Private clsRefIsNotNaFunction As RFunction
-    Private clsEstIsNotNaFunction As RFunction
-    Private clsMutateFunction As RFunction
-    Private clsPivotLongerFunction As RFunction
-    Private clsPivotCFunction As RFunction
-    Private clsPivotListFunction As RFunction
-    Private clsPivotFactorFunction As RFunction
+    Private clsMissingFilterFunction As New RFunction
+    Private clsRefIsNotNaFunction As New RFunction
+    Private clsEstIsNotNaFunction As New RFunction
+    Private clsMutateFunction As New RFunction
+    Private clsPivotLongerFunction As New RFunction
+    Private clsPivotCFunction As New RFunction
+    Private clsPivotListFunction As New RFunction
+    Private clsPivotFactorFunction As New RFunction
     Private clsPivotFactorLevelsCFunction As New RFunction
-    Private clsGroupByFunction As RFunction
-    Private clsSummariseFunction As RFunction
-    Private clsMovingMutateFunction As RFunction
-    Private clsMovingFunction As RFunction
-    Private clsNSumFunction As RFunction
-    Private clsPropSumFunction As RFunction
-    Private clsNotIsNaThreshFunction As RFunction
-    Private clsMeanFunction As RFunction
-    Private clsMeanFilterFunction As RFunction
-    Private clsStdFunction As RFunction
+    Private clsGroupByFunction As New RFunction
+    Private clsSummariseFunction As New RFunction
+    Private clsMovingMutateFunction As New RFunction
+    Private clsMovingFunction As New RFunction
+    Private clsNSumFunction As New RFunction
+    Private clsPropSumFunction As New RFunction
+    Private clsNotIsNaThreshFunction As New RFunction
+    Private clsMeanFunction As New RFunction
+    Private clsMeanFilterFunction As New RFunction
+    Private clsStdFunction As New RFunction
 
     'ggplot functions + operators
-    Private clsPlusOperator As ROperator
-    Private clsFacetWrapTildeOperator As ROperator
-    Private clsTildeOperator As ROperator
+    Private clsPlusOperator As New ROperator
+    Private clsFacetWrapTildeOperator As New ROperator
+    Private clsTildeOperator As New ROperator
 
     ''' <summary> Dummy RCodeStructure set to either clsAsFormulaFunction or clsTildeOperator depending on smoothing option. This is used in SetRCode for ucrInputSmoothing. </summary>
     Private clsFormulaRCode As RCodeStructure
 
-    Private clsGgplotFunction As RFunction
-    Private clsGeomPointFunction As RFunction
-    Private clsGeomLineFunction As RFunction
-    Private clsGeomSmoothFunction As RFunction
-    Private clsGgPlotAesFunction As RFunction
-    Private clsGeomLineAesFunction As RFunction
-    Private clsFacetWrapFunction As RFunction
-    Private clsAsFormulaFunction As RFunction
-    Private clsPasteFunction As RFunction
-    Private clsFourierSeriesFunction As RFunction
-    Private clsListFunction As RFunction
-    Private clsBinomialFunction As RFunction
-    Private clsPbsFunction As RFunction
-    Private clsNsFunction As RFunction
-    Private clsYlabFunction As RFunction
+    Private clsGgplotFunction As New RFunction
+    Private clsGeomPointFunction As New RFunction
+    Private clsGeomLineFunction As New RFunction
+    Private clsGeomSmoothFunction As New RFunction
+    Private clsGgPlotAesFunction As New RFunction
+    Private clsGeomLineAesFunction As New RFunction
+    Private clsFacetWrapFunction As New RFunction
+    Private clsAsFormulaFunction As New RFunction
+    Private clsPasteFunction As New RFunction
+    Private clsFourierSeriesFunction As New RFunction
+    Private clsListFunction As New RFunction
+    Private clsBinomialFunction As New RFunction
+    Private clsPbsFunction As New RFunction
+    Private clsNsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
 
     Private Sub dlgSeasonalPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -515,7 +515,7 @@ Public Class dlgSeasonalPlot
     ''' <param name="bReset">True if the dialog is being reset.</param>
     Private Sub ReferenceSummarySetRCode(bReset As Boolean)
         Dim clsTempParam As RParameter
-        Dim clsTempRFunc As RFunction
+        Dim clsTempRFunc As New RFunction
         Dim strReferenceName As String = ""
         Dim strEstimatesName As String = ""
 

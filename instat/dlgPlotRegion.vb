@@ -19,9 +19,9 @@ Public Class dlgPlotRegion
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
-    Private clsPlotRegionFunction As RFunction
-    Private clsAsDateTimeFunction As RFunction
-    Private clsSequenceFunction As RFunction
+    Private clsPlotRegionFunction As New RFunction
+    Private clsAsDateTimeFunction As New RFunction
+    Private clsSequenceFunction As New RFunction
 
     Private Sub dlgPlotRegion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

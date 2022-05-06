@@ -25,18 +25,18 @@ Public Class dlgThreeVariableModelling
     Public bResetSecondFunction As Boolean = False
     Public bRCodeSet As Boolean = False
     Public clsFamilyFunction, clsVisReg As New RFunction
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
-    Public clsFormulaOperator As ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsFormulaOperator As New ROperator
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     Private clsExplanatoryOperator As New ROperator
-    Private clsFirstTransformFunction As RFunction
-    Private clsFirstPowerOperator As ROperator
-    Private clsSecondTransformFunction As RFunction
-    Private clsSecondPowerOperator As ROperator
+    Private clsFirstTransformFunction As New RFunction
+    Private clsFirstPowerOperator As New ROperator
+    Private clsSecondTransformFunction As New RFunction
+    Private clsSecondPowerOperator As New ROperator
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load

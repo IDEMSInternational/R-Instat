@@ -21,6 +21,10 @@ Imports System.Threading
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
+''' <summary>
+''' todo. As of 22/04/2022 this form is not used anywhere in R-instat
+''' Should it be deleted?
+''' </summary>
 Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
@@ -326,7 +330,6 @@ Public Class frmEditor
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
             UpdateRFunctionDataFrameParameters()
-            frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)

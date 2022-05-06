@@ -38,25 +38,24 @@ Partial Class ucrButtons
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdOk = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.cmdPaste = New System.Windows.Forms.Button()
         Me.chkComment = New System.Windows.Forms.CheckBox()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.cmdLanguage = New System.Windows.Forms.Button()
+        Me.cmdOk = New instat.ucrSplitButton()
+        Me.contextMenuStripOk = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemOkClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdPaste = New instat.ucrSplitButton()
+        Me.contextMenuStripToScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemToScriptClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemToScriptKeep = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemOkKeep = New System.Windows.Forms.ToolStripMenuItem()
+        Me.contextMenuStripOk.SuspendLayout()
+        Me.contextMenuStripToScript.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOk
-        '
-        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
-        Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 2
-        Me.cmdOk.Tag = "Ok "
-        Me.cmdOk.Text = "Ok"
-        Me.cmdOk.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
@@ -89,16 +88,6 @@ Partial Class ucrButtons
         Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'cmdPaste
-        '
-        Me.cmdPaste.Location = New System.Drawing.Point(327, 26)
-        Me.cmdPaste.Name = "cmdPaste"
-        Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPaste.TabIndex = 6
-        Me.cmdPaste.Tag = "To_Script"
-        Me.cmdPaste.Text = "To Script"
-        Me.cmdPaste.UseVisualStyleBackColor = True
-        '
         'chkComment
         '
         Me.chkComment.AutoSize = True
@@ -128,32 +117,101 @@ Partial Class ucrButtons
         Me.cmdLanguage.Text = "Lang"
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
+        'cmdOk
+        '
+        Me.cmdOk.AutoSize = True
+        Me.cmdOk.ContextMenuStrip = Me.contextMenuStripOk
+        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
+        Me.cmdOk.Name = "cmdOk"
+        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOk.SplitMenuStrip = Me.contextMenuStripOk
+        Me.cmdOk.TabIndex = 8
+        Me.cmdOk.Tag = "Ok"
+        Me.cmdOk.Text = "Ok"
+        Me.cmdOk.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripOk
+        '
+        Me.contextMenuStripOk.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemOkClose, Me.toolStripMenuItemOkKeep})
+        Me.contextMenuStripOk.Name = "contextMenuStripOk"
+        Me.contextMenuStripOk.Size = New System.Drawing.Size(135, 48)
+        '
+        'toolStripMenuItemOkClose
+        '
+        Me.toolStripMenuItemOkClose.Name = "toolStripMenuItemOkClose"
+        Me.toolStripMenuItemOkClose.Size = New System.Drawing.Size(134, 22)
+        Me.toolStripMenuItemOkClose.Text = "Ok && Close"
+        '
+        'cmdPaste
+        '
+        Me.cmdPaste.AutoSize = True
+        Me.cmdPaste.ContextMenuStrip = Me.contextMenuStripToScript
+        Me.cmdPaste.Location = New System.Drawing.Point(327, 26)
+        Me.cmdPaste.Name = "cmdPaste"
+        Me.cmdPaste.Size = New System.Drawing.Size(78, 23)
+        Me.cmdPaste.SplitMenuStrip = Me.contextMenuStripToScript
+        Me.cmdPaste.TabIndex = 10
+        Me.cmdPaste.Tag = "To_Script"
+        Me.cmdPaste.Text = "To Script"
+        Me.cmdPaste.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripToScript
+        '
+        Me.contextMenuStripToScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemToScriptClose, Me.toolStripMenuItemToScriptKeep})
+        Me.contextMenuStripToScript.Name = "contextMenuStripToScript"
+        Me.contextMenuStripToScript.Size = New System.Drawing.Size(181, 70)
+        '
+        'toolStripMenuItemToScriptClose
+        '
+        Me.toolStripMenuItemToScriptClose.Name = "toolStripMenuItemToScriptClose"
+        Me.toolStripMenuItemToScriptClose.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemToScriptClose.Text = "To Script && Close"
+        '
+        'toolStripMenuItemToScriptKeep
+        '
+        Me.toolStripMenuItemToScriptKeep.Name = "toolStripMenuItemToScriptKeep"
+        Me.toolStripMenuItemToScriptKeep.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemToScriptKeep.Text = "To Script && Keep"
+        '
+        'toolStripMenuItemOkKeep
+        '
+        Me.toolStripMenuItemOkKeep.Name = "toolStripMenuItemOkKeep"
+        Me.toolStripMenuItemOkKeep.Size = New System.Drawing.Size(134, 22)
+        Me.toolStripMenuItemOkKeep.Text = "Ok && Keep"
+        '
         'ucrButtons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Controls.Add(Me.cmdPaste)
+        Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.chkComment)
-        Me.Controls.Add(Me.cmdPaste)
-        Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
         Me.Size = New System.Drawing.Size(410, 52)
+        Me.contextMenuStripOk.ResumeLayout(False)
+        Me.contextMenuStripToScript.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cmdOk As Button
     Friend WithEvents cmdCancel As Button
     Friend WithEvents cmdReset As Button
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents cmdPaste As Button
     Friend WithEvents chkComment As CheckBox
     Friend WithEvents txtComment As TextBox
     Friend WithEvents cmdLanguage As Button
+    Friend WithEvents cmdOk As ucrSplitButton
+    Friend WithEvents contextMenuStripOk As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemOkClose As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemOkKeep As ToolStripMenuItem
+    Friend WithEvents cmdPaste As ucrSplitButton
+    Friend WithEvents contextMenuStripToScript As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemToScriptClose As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemToScriptKeep As ToolStripMenuItem
 End Class

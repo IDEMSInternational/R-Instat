@@ -70,13 +70,13 @@ Partial Class ucrFilter
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
         Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
-        Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkNotForAllConditions = New instat.ucrCheck()
@@ -513,14 +513,11 @@ Partial Class ucrFilter
         '
         Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
         Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
         Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
         Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
         Me.ucrFactorLevels.TabIndex = 2
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
         '
         'ucrFilterByReceiver
         '
@@ -571,6 +568,7 @@ Partial Class ucrFilter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.cmdCombineWithAndOr)
         Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.ucrLogicalCombobox)
@@ -587,7 +585,6 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrFilterOperation)
         Me.Controls.Add(Me.cmdAddCondition)
         Me.Controls.Add(Me.lblSelectLevels)
-        Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Controls.Add(Me.ucrChkNotForAllConditions)

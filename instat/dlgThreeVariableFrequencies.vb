@@ -21,7 +21,7 @@ Public Class dlgThreeVariableFrequencies
     Private bResetSubdialog As Boolean = False
     Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGridArrange As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
-    Private clsCurrBaseCode As RCodeStructure
+    Private clsCurrBaseCode As New RCodeStructure
     Private iMaxGraphGroupX As Integer
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load

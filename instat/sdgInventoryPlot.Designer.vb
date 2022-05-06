@@ -25,6 +25,10 @@ Partial Class sdgInventoryPlot
         Me.components = New System.ComponentModel.Container()
         Me.tbInventory = New System.Windows.Forms.TabControl()
         Me.tpFacets = New System.Windows.Forms.TabPage()
+        Me.ucrNudFacetXAngle = New instat.ucrNud()
+        Me.ucrChkFacetXAngle = New instat.ucrCheck()
+        Me.ucrNudFacetYAngle = New instat.ucrNud()
+        Me.ucrChkFacetYAngle = New instat.ucrCheck()
         Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
@@ -124,6 +128,10 @@ Partial Class sdgInventoryPlot
         '
         'tpFacets
         '
+        Me.tpFacets.Controls.Add(Me.ucrNudFacetXAngle)
+        Me.tpFacets.Controls.Add(Me.ucrChkFacetXAngle)
+        Me.tpFacets.Controls.Add(Me.ucrNudFacetYAngle)
+        Me.tpFacets.Controls.Add(Me.ucrChkFacetYAngle)
         Me.tpFacets.Controls.Add(Me.ucrNudNumberofRows)
         Me.tpFacets.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
         Me.tpFacets.Controls.Add(Me.rdoHorizontal)
@@ -142,6 +150,50 @@ Partial Class sdgInventoryPlot
         Me.tpFacets.TabIndex = 4
         Me.tpFacets.Text = "Facets"
         Me.tpFacets.UseVisualStyleBackColor = True
+        '
+        'ucrNudFacetXAngle
+        '
+        Me.ucrNudFacetXAngle.AutoSize = True
+        Me.ucrNudFacetXAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetXAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFacetXAngle.Location = New System.Drawing.Point(392, 18)
+        Me.ucrNudFacetXAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetXAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetXAngle.Name = "ucrNudFacetXAngle"
+        Me.ucrNudFacetXAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFacetXAngle.TabIndex = 64
+        Me.ucrNudFacetXAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkFacetXAngle
+        '
+        Me.ucrChkFacetXAngle.AutoSize = True
+        Me.ucrChkFacetXAngle.Checked = False
+        Me.ucrChkFacetXAngle.Location = New System.Drawing.Point(245, 18)
+        Me.ucrChkFacetXAngle.Name = "ucrChkFacetXAngle"
+        Me.ucrChkFacetXAngle.Size = New System.Drawing.Size(128, 23)
+        Me.ucrChkFacetXAngle.TabIndex = 63
+        '
+        'ucrNudFacetYAngle
+        '
+        Me.ucrNudFacetYAngle.AutoSize = True
+        Me.ucrNudFacetYAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetYAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFacetYAngle.Location = New System.Drawing.Point(392, 44)
+        Me.ucrNudFacetYAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetYAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetYAngle.Name = "ucrNudFacetYAngle"
+        Me.ucrNudFacetYAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFacetYAngle.TabIndex = 62
+        Me.ucrNudFacetYAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkFacetYAngle
+        '
+        Me.ucrChkFacetYAngle.AutoSize = True
+        Me.ucrChkFacetYAngle.Checked = False
+        Me.ucrChkFacetYAngle.Location = New System.Drawing.Point(246, 44)
+        Me.ucrChkFacetYAngle.Name = "ucrChkFacetYAngle"
+        Me.ucrChkFacetYAngle.Size = New System.Drawing.Size(128, 23)
+        Me.ucrChkFacetYAngle.TabIndex = 61
         '
         'ucrNudNumberofRows
         '
@@ -1084,4 +1136,8 @@ Partial Class sdgInventoryPlot
     Friend WithEvents lblYAxisSize As Label
     Friend WithEvents ucrChkSpecifyXAxisTickMarks As ucrCheck
     Friend WithEvents grpYAxis As GroupBox
+    Friend WithEvents ucrNudFacetYAngle As ucrNud
+    Friend WithEvents ucrChkFacetYAngle As ucrCheck
+    Friend WithEvents ucrNudFacetXAngle As ucrNud
+    Friend WithEvents ucrChkFacetXAngle As ucrCheck
 End Class

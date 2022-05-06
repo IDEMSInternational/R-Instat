@@ -108,21 +108,27 @@ Public Class clsOutputElement
     ''' </summary>
     ''' <param name="strScript"></param>
     Public Sub AddScript(strScript As String)
-        Dim rScript As New clsRScript(strScript)
-        Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
+        Try
+            Dim rScript As New clsRScript(strScript)
+            Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
 
-        If lstTokens Is Nothing Then
-            Exit Sub
-        End If
-
-        For Each rToken In lstTokens
-            _formattedRScript.Add(New clsRScriptElement With
-                {
-                    .Text = rToken.strTxt,
-                    .Type = rToken.enuToken
-                })
-        Next
-        _outputType = OutputType.Script
+            If lstTokens IsNot Nothing Then
+                For Each rToken In lstTokens
+                    _formattedRScript.Add(New clsRScriptElement With
+                    {
+                        .Text = rToken.strTxt,
+                        .Type = rToken.enuToken
+                    })
+                Next
+                _outputType = OutputType.Script
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Unable to parse the following R Script: '" & strScript & "'." &
+                            Environment.NewLine & ex.Message,
+                            "Developer Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ''' <summary>

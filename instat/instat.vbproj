@@ -134,8 +134,8 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.4\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -193,6 +193,12 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRandomSplit.Designer.vb">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -1016,12 +1022,6 @@
     <Compile Include="dlgFlatFrequencyTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFrequency.Designer.vb">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
     </Compile>
@@ -1699,12 +1699,6 @@
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPermuteColumn.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPopulationPyramids.Designer.vb">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPopulationPyramids.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
@@ -2749,12 +2743,6 @@
     <Compile Include="ucrSave.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSaveGraph.Designer.vb">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveGraph.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrSaveModel.Designer.vb">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </Compile>
@@ -2802,6 +2790,9 @@
     </Compile>
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSplitButton.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ucrTry.Designer.vb">
       <DependentUpon>ucrTry.vb</DependentUpon>
@@ -2984,6 +2975,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPivotTable.resx">
       <DependentUpon>dlgPivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSplit.resx">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
@@ -3402,9 +3396,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.sw-KE.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgHelpVignettes.resx">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3678,9 +3669,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -3810,12 +3798,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPICSATemperature.resx">
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -5082,12 +5064,6 @@
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.sw-KE.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveModel.resx">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -5166,6 +5142,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
+    <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">

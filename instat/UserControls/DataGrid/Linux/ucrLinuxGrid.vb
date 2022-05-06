@@ -25,9 +25,13 @@ Public MustInherit Class ucrLinuxGrid
     Private _rowContextMenuStrip As ContextMenuStrip
     Private _tabContextMenuStrip As ContextMenuStrip
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a tab is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(tcTabs.SelectedTab)
+            Return If(tcTabs.SelectedTab Is Nothing, Nothing, New clsWorksheetAdapter(tcTabs.SelectedTab))
         End Get
         Set(value As clsWorksheetAdapter)
             For Each tabPage As TabPage In tcTabs.TabPages
@@ -112,10 +116,28 @@ Public MustInherit Class ucrLinuxGrid
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows
         Dim lstSelectedRows As New List(Of String)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
-        For Each row As DataGridViewRow In dataGrid.SelectedRows
-            lstSelectedRows.Add(row.HeaderCell.Value)
+        'For Each row As DataGridViewRow In dataGrid.SelectedRows
+        '    lstSelectedRows.Add(row.HeaderCell.Value)
+        'Next
+        For i As Integer = 0 To dataGrid.GetCellCount(DataGridViewElementStates.Selected) - 1
+            lstSelectedRows.Add(dataGrid.SelectedCells(i).RowIndex.ToString + 1)
         Next
+        lstSelectedRows = lstSelectedRows.Distinct.ToList
         Return lstSelectedRows
+    End Function
+
+
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim dataGrid = GetGrid(tcTabs.SelectedTab)
+        'For Each column As DataGridViewColumn In dataGrid.SelectedColumns
+        '    lstSelectedColumnIndexes.Add(column.HeaderCell.Value)
+        'Next
+        For i As Integer = 0 To dataGrid.GetCellCount(DataGridViewElementStates.Selected) - 1
+            lstSelectedColumnIndexes.Add(dataGrid.SelectedCells(i).ColumnIndex.ToString + 1)
+        Next
+        lstSelectedColumnIndexes = lstSelectedColumnIndexes.Distinct.ToList
+        Return lstSelectedColumnIndexes
     End Function
 
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet

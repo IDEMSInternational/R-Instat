@@ -34,6 +34,7 @@ Partial Class dlgSelectColumns
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblColumnType = New System.Windows.Forms.Label()
+        Me.ucrChkNot = New instat.ucrCheck()
         Me.ucrInputColumnType = New instat.ucrInputComboBox()
         Me.ucrNudTo = New instat.ucrNud()
         Me.ucrNudFrom = New instat.ucrNud()
@@ -103,7 +104,7 @@ Partial Class dlgSelectColumns
         '
         Me.cmdAddCondition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAddCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAddCondition.Location = New System.Drawing.Point(275, 85)
+        Me.cmdAddCondition.Location = New System.Drawing.Point(276, 107)
         Me.cmdAddCondition.Name = "cmdAddCondition"
         Me.cmdAddCondition.Size = New System.Drawing.Size(112, 30)
         Me.cmdAddCondition.TabIndex = 12
@@ -171,6 +172,15 @@ Partial Class dlgSelectColumns
         Me.lblColumnType.TabIndex = 22
         Me.lblColumnType.Text = "Column Type:"
         Me.lblColumnType.Visible = False
+        '
+        'ucrChkNot
+        '
+        Me.ucrChkNot.AutoSize = True
+        Me.ucrChkNot.Checked = False
+        Me.ucrChkNot.Location = New System.Drawing.Point(276, 81)
+        Me.ucrChkNot.Name = "ucrChkNot"
+        Me.ucrChkNot.Size = New System.Drawing.Size(110, 23)
+        Me.ucrChkNot.TabIndex = 23
         '
         'ucrInputColumnType
         '
@@ -305,6 +315,7 @@ Partial Class dlgSelectColumns
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(518, 464)
+        Me.Controls.Add(Me.ucrChkNot)
         Me.Controls.Add(Me.lblColumnType)
         Me.Controls.Add(Me.ucrInputColumnType)
         Me.Controls.Add(Me.lblFrom)
@@ -362,4 +373,5 @@ Partial Class dlgSelectColumns
     Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents ucrInputColumnType As ucrInputComboBox
     Friend WithEvents lblColumnType As Label
+    Friend WithEvents ucrChkNot As ucrCheck
 End Class
