@@ -69,6 +69,8 @@ Public Class ucrDataFrame
             InitialiseControl()
             bFirstLoad = False
         End If
+        'always load data frame names on load event because a data frame may have been deleted
+        'and the control needs to refresh the data frame names.
         LoadDataFrameNamesAndFillComboBox()
     End Sub
 
