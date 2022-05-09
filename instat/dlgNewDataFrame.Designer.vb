@@ -62,6 +62,12 @@ Partial Class dlgNewDataFrame
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.dataTypeGridView = New System.Windows.Forms.DataGridView()
+        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colDefault = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLevels = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrChkIncludeLabel = New instat.ucrCheck()
         Me.ucrChkVariable = New instat.ucrCheck()
         Me.ucrTryNewDataFrame = New instat.ucrTry()
@@ -71,12 +77,12 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colDefault = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colLevels = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rdoLists = New System.Windows.Forms.RadioButton()
+        Me.lblCategories = New System.Windows.Forms.Label()
+        Me.ucrInputLists = New instat.ucrInputTextBox()
+        Me.ucrInputCategory = New instat.ucrInputComboBox()
+        Me.ucrInputListInCategory = New instat.ucrInputComboBox()
+        Me.lblLists = New System.Windows.Forms.Label()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,9 +116,9 @@ Partial Class dlgNewDataFrame
         Me.rdoCommand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCommand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCommand.Location = New System.Drawing.Point(218, 15)
+        Me.rdoCommand.Location = New System.Drawing.Point(186, 15)
         Me.rdoCommand.Name = "rdoCommand"
-        Me.rdoCommand.Size = New System.Drawing.Size(95, 27)
+        Me.rdoCommand.Size = New System.Drawing.Size(85, 27)
         Me.rdoCommand.TabIndex = 2
         Me.rdoCommand.TabStop = True
         Me.rdoCommand.Text = "Command"
@@ -127,9 +133,9 @@ Partial Class dlgNewDataFrame
         Me.rdoRandom.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRandom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRandom.Location = New System.Drawing.Point(312, 15)
+        Me.rdoRandom.Location = New System.Drawing.Point(269, 15)
         Me.rdoRandom.Name = "rdoRandom"
-        Me.rdoRandom.Size = New System.Drawing.Size(95, 27)
+        Me.rdoRandom.Size = New System.Drawing.Size(85, 27)
         Me.rdoRandom.TabIndex = 3
         Me.rdoRandom.TabStop = True
         Me.rdoRandom.Text = "Random"
@@ -144,9 +150,9 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoEmpty.Location = New System.Drawing.Point(31, 15)
+        Me.rdoEmpty.Location = New System.Drawing.Point(20, 15)
         Me.rdoEmpty.Name = "rdoEmpty"
-        Me.rdoEmpty.Size = New System.Drawing.Size(95, 27)
+        Me.rdoEmpty.Size = New System.Drawing.Size(85, 27)
         Me.rdoEmpty.TabIndex = 4
         Me.rdoEmpty.TabStop = True
         Me.rdoEmpty.Text = "Empty"
@@ -161,9 +167,9 @@ Partial Class dlgNewDataFrame
         Me.rdoConstruct.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoConstruct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoConstruct.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoConstruct.Location = New System.Drawing.Point(124, 15)
+        Me.rdoConstruct.Location = New System.Drawing.Point(103, 15)
         Me.rdoConstruct.Name = "rdoConstruct"
-        Me.rdoConstruct.Size = New System.Drawing.Size(95, 27)
+        Me.rdoConstruct.Size = New System.Drawing.Size(85, 27)
         Me.rdoConstruct.TabIndex = 1
         Me.rdoConstruct.TabStop = True
         Me.rdoConstruct.Text = "Construct"
@@ -311,6 +317,47 @@ Partial Class dlgNewDataFrame
         Me.dataTypeGridView.Size = New System.Drawing.Size(416, 115)
         Me.dataTypeGridView.TabIndex = 163
         '
+        'no
+        '
+        Me.no.FillWeight = 90.0!
+        Me.no.HeaderText = "No."
+        Me.no.Name = "no"
+        Me.no.ReadOnly = True
+        Me.no.Width = 30
+        '
+        'colNames
+        '
+        Me.colNames.HeaderText = "Name"
+        Me.colNames.Name = "colNames"
+        Me.colNames.Width = 60
+        '
+        'cbType
+        '
+        Me.cbType.HeaderText = "Type"
+        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
+        Me.cbType.MaxDropDownItems = 4
+        Me.cbType.Name = "cbType"
+        Me.cbType.Width = 60
+        '
+        'colDefault
+        '
+        Me.colDefault.HeaderText = "Default"
+        Me.colDefault.Items.AddRange(New Object() {"NA", "0", "1", "1,10", "letters[1:10]", "LETTERS[1:10]"})
+        Me.colDefault.Name = "colDefault"
+        '
+        'colLevels
+        '
+        Me.colLevels.HeaderText = "Levels"
+        Me.colLevels.Items.AddRange(New Object() {"No, Yes", "Bad, Poor, Average, Good, Great", "0-4,5-9,10-14,15-19, 20-64, 65+", "1:5"})
+        Me.colLevels.Name = "colLevels"
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.Visible = False
+        Me.colLabel.Width = 80
+        '
         'ucrChkIncludeLabel
         '
         Me.ucrChkIncludeLabel.AutoSize = True
@@ -355,7 +402,7 @@ Partial Class dlgNewDataFrame
         Me.ucrPnlDataFrame.Location = New System.Drawing.Point(17, 10)
         Me.ucrPnlDataFrame.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlDataFrame.Name = "ucrPnlDataFrame"
-        Me.ucrPnlDataFrame.Size = New System.Drawing.Size(405, 43)
+        Me.ucrPnlDataFrame.Size = New System.Drawing.Size(433, 43)
         Me.ucrPnlDataFrame.TabIndex = 0
         '
         'ucrNewDFName
@@ -377,7 +424,7 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCols.Name = "ucrNudCols"
-        Me.ucrNudCols.Size = New System.Drawing.Size(57, 20)
+        Me.ucrNudCols.Size = New System.Drawing.Size(95, 20)
         Me.ucrNudCols.TabIndex = 11
         Me.ucrNudCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -391,7 +438,7 @@ Partial Class dlgNewDataFrame
         Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRows.Name = "ucrNudRows"
-        Me.ucrNudRows.Size = New System.Drawing.Size(57, 20)
+        Me.ucrNudRows.Size = New System.Drawing.Size(95, 20)
         Me.ucrNudRows.TabIndex = 9
         Me.ucrNudRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -405,46 +452,75 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
-        'no
+        'rdoLists
         '
-        Me.no.FillWeight = 90.0!
-        Me.no.HeaderText = "No."
-        Me.no.Name = "no"
-        Me.no.ReadOnly = True
-        Me.no.Width = 30
+        Me.rdoLists.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoLists.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLists.FlatAppearance.BorderSize = 2
+        Me.rdoLists.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLists.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoLists.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLists.Location = New System.Drawing.Point(352, 15)
+        Me.rdoLists.Name = "rdoLists"
+        Me.rdoLists.Size = New System.Drawing.Size(85, 27)
+        Me.rdoLists.TabIndex = 165
+        Me.rdoLists.TabStop = True
+        Me.rdoLists.Text = "Lists"
+        Me.rdoLists.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoLists.UseVisualStyleBackColor = True
         '
-        'colNames
+        'lblCategories
         '
-        Me.colNames.HeaderText = "Name"
-        Me.colNames.Name = "colNames"
-        Me.colNames.Width = 60
+        Me.lblCategories.AutoSize = True
+        Me.lblCategories.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCategories.Location = New System.Drawing.Point(34, 61)
+        Me.lblCategories.Name = "lblCategories"
+        Me.lblCategories.Size = New System.Drawing.Size(52, 13)
+        Me.lblCategories.TabIndex = 169
+        Me.lblCategories.Text = "Category:"
         '
-        'cbType
+        'ucrInputLists
         '
-        Me.cbType.HeaderText = "Type"
-        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
-        Me.cbType.MaxDropDownItems = 4
-        Me.cbType.Name = "cbType"
-        Me.cbType.Width = 60
+        Me.ucrInputLists.AddQuotesIfUnrecognised = True
+        Me.ucrInputLists.AutoSize = True
+        Me.ucrInputLists.IsMultiline = True
+        Me.ucrInputLists.IsReadOnly = False
+        Me.ucrInputLists.Location = New System.Drawing.Point(21, 123)
+        Me.ucrInputLists.Name = "ucrInputLists"
+        Me.ucrInputLists.Size = New System.Drawing.Size(415, 124)
+        Me.ucrInputLists.TabIndex = 171
         '
-        'colDefault
+        'ucrInputCategory
         '
-        Me.colDefault.HeaderText = "Default"
-        Me.colDefault.Items.AddRange(New Object() {"NA", "0", "1", "1,10", "letters[1:10]", "LETTERS[1:10]"})
-        Me.colDefault.Name = "colDefault"
+        Me.ucrInputCategory.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCategory.GetSetSelectedIndex = -1
+        Me.ucrInputCategory.IsReadOnly = False
+        Me.ucrInputCategory.Location = New System.Drawing.Point(94, 55)
+        Me.ucrInputCategory.Name = "ucrInputCategory"
+        Me.ucrInputCategory.Size = New System.Drawing.Size(166, 26)
+        Me.ucrInputCategory.TabIndex = 172
         '
-        'colLevels
+        'ucrInputListInCategory
         '
-        Me.colLevels.HeaderText = "Levels"
-        Me.colLevels.Items.AddRange(New Object() {"No, Yes", "Bad, Poor, Average, Good, Great", "0-4,5-9,10-14,15-19, 20-64, 65+", "1:5"})
-        Me.colLevels.Name = "colLevels"
+        Me.ucrInputListInCategory.AddQuotesIfUnrecognised = True
+        Me.ucrInputListInCategory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputListInCategory.GetSetSelectedIndex = -1
+        Me.ucrInputListInCategory.IsReadOnly = False
+        Me.ucrInputListInCategory.Location = New System.Drawing.Point(94, 87)
+        Me.ucrInputListInCategory.Name = "ucrInputListInCategory"
+        Me.ucrInputListInCategory.Size = New System.Drawing.Size(166, 26)
+        Me.ucrInputListInCategory.TabIndex = 173
         '
-        'colLabel
+        'lblLists
         '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.Visible = False
-        Me.colLabel.Width = 80
+        Me.lblLists.AutoSize = True
+        Me.lblLists.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLists.Location = New System.Drawing.Point(55, 87)
+        Me.lblLists.Name = "lblLists"
+        Me.lblLists.Size = New System.Drawing.Size(31, 13)
+        Me.lblLists.TabIndex = 174
+        Me.lblLists.Text = "Lists:"
         '
         'dlgNewDataFrame
         '
@@ -452,6 +528,12 @@ Partial Class dlgNewDataFrame
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(458, 378)
+        Me.Controls.Add(Me.lblLists)
+        Me.Controls.Add(Me.ucrInputListInCategory)
+        Me.Controls.Add(Me.ucrInputCategory)
+        Me.Controls.Add(Me.ucrInputLists)
+        Me.Controls.Add(Me.lblCategories)
+        Me.Controls.Add(Me.rdoLists)
         Me.Controls.Add(Me.ucrChkIncludeLabel)
         Me.Controls.Add(Me.dataTypeGridView)
         Me.Controls.Add(Me.ucrChkVariable)
@@ -519,4 +601,10 @@ Partial Class dlgNewDataFrame
     Friend WithEvents colDefault As DataGridViewComboBoxColumn
     Friend WithEvents colLevels As DataGridViewComboBoxColumn
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
+    Friend WithEvents rdoLists As RadioButton
+    Friend WithEvents lblCategories As Label
+    Friend WithEvents ucrInputLists As ucrInputTextBox
+    Friend WithEvents ucrInputCategory As ucrInputComboBox
+    Friend WithEvents ucrInputListInCategory As ucrInputComboBox
+    Friend WithEvents lblLists As Label
 End Class
