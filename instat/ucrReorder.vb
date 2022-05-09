@@ -215,7 +215,7 @@ Public Class ucrReorder
         End If
     End Sub
 
-    Private Sub ucrDataFrameList_DataFrameChanged(sender As Object) Handles ucrDataFrameList.DataFrameChanged
+    Private Sub ucrDataFrameList_ControlValueChanged(sender As Object) Handles ucrDataFrameList.ControlValueChanged
         LoadList()
     End Sub
 

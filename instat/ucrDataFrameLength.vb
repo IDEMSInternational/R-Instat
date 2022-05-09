@@ -45,8 +45,7 @@ Public Class ucrDataFrameLength
         Return iLength
     End Function
 
-
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object) Handles ucrDataFrameSelector.DataFrameChanged
+    Private Sub ucrDataFrameSelector_ControlValueChanged(sender As Object) Handles ucrDataFrameSelector.ControlValueChanged
         SetDataFrameLength()
     End Sub
 
