@@ -5,17 +5,17 @@ Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
-    Private clsGetExcelSheetNames As RFunction
-    Private clsRangeOperator As ROperator
+    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As New RFunction
+    Private clsGetExcelSheetNames As New RFunction
+    Private clsRangeOperator As New ROperator
     ''' <summary>   
     ''' Ensures that any file paths containing special characters (e.g. accents) are 
     ''' correctly encoded.
     ''' </summary>
-    Private clsEnc2Native As RFunction
+    Private clsEnc2Native As New RFunction
     'functions for multi Excel sheet impoty
-    Private clsImportExcelMulti As RFunction
-    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As RFunction
+    Private clsImportExcelMulti As New RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As New RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean = True
     Public bFromLibrary As Boolean = False
@@ -928,7 +928,10 @@ Public Class dlgImportDataset
         HideDropEmptyCheckBox()
     End Sub
 
-    Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
+    Private Sub MissingValuesInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMissingValueStringText.ControlContentsChanged, ucrInputMissingValueStringCSV.ControlContentsChanged, ucrInputMissingValueStringExcel.ControlContentsChanged
+        'todo. as of 11/04/2022, control rasing the event is passed in as the event  parameter.
+        'Refactor code to use control checks for updating the below R parameter?
+
         'currently we have no way of knowing which control has raised this event and therefore can't do that check
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If IsExcelFileFormat() Then

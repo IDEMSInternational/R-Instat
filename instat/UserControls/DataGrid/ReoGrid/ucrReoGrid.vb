@@ -190,15 +190,24 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
+        'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
+        'changes. This would then override the back color set in R
         If frmMain.clsInstatOptions IsNot Nothing Then
-            workSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+            'Set enitre range apart from top row
+            workSheet.SetRangeStyles(New RangePosition(1, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
+            'Set top row
+            workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name
                                 })
         End If
-
     End Sub
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
