@@ -51,8 +51,6 @@ Public Class dlgDescribeTwoVariable
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 414
         ucrBase.clsRsyntax.iCallType = 2
-        rdoThreeVariable.Enabled = False
-        lblNumericVariable.Visible = False
 
         iUcrBaseXLocation = ucrBase.Location.X
         iDialogueXsize = Me.Size.Width
@@ -100,12 +98,17 @@ Public Class dlgDescribeTwoVariable
 
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
-        ucrPnlDescribe.AddRadioButton(rdoCustomize)
+        ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddRadioButton(rdoThreeVariable)
-        ucrPnlDescribe.AddParameterValuesCondition(rdoCustomize, "checked", "customize")
+        ucrPnlDescribe.AddParameterValuesCondition(rdoTwoVariable, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
+
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverFirstVars}, {rdoTwoVariable, rdoSkim}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableFirstFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondOpt, ucrReceiverSecondFactor}, {rdoSkim, rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverNumericVariable}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -114,6 +117,11 @@ Public Class dlgDescribeTwoVariable
 
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverThreeVariableFirstFactor.SetParameter(New RParameter("first_column", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverThreeVariableFirstFactor.SetParameterIsString()
+        ucrReceiverThreeVariableFirstFactor.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverThreeVariableFirstFactor.SetIncludedDataTypes({"factor"})
 
         ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 2))
         ucrReceiverPercentages.SetParameterIsString()
@@ -331,7 +339,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Public Sub TestOKEnabled()
-        If rdoCustomize.Checked Then
+        If rdoTwoVariable.Checked Then
             If ((Not ucrReceiverSecondVar.IsEmpty()) AndAlso (Not ucrReceiverFirstVars.IsEmpty())) Then
                 If ((strFirstVariablesType = "numeric" OrElse strFirstVariablesType = "integer") AndAlso (strSecondVariableType = "factor")) AndAlso clsSummariesListFunction.clsParameters.Count = 0 Then
                     ucrBase.OKEnabled(False)
@@ -374,7 +382,7 @@ Public Class dlgDescribeTwoVariable
         Dim lstFirstItemTypes As List(Of String)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEmptyOperator)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSecondEmptyOperator)
-        If rdoCustomize.Checked Then
+        If rdoTwoVariable.Checked Then
             grpSummaries.Visible = True
             If Not ucrReceiverFirstVars.IsEmpty() Then
                 lstFirstItemTypes = ucrReceiverFirstVars.GetCurrentItemTypes(True, bIsCategoricalNumeric:=True)
@@ -488,11 +496,12 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
             ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
-        ElseIf rdoCustomize.Checked Then
+        ElseIf rdoTwoVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummaryFunction)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
+            ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
         End If
         ChangeLocations()
@@ -502,7 +511,7 @@ Public Class dlgDescribeTwoVariable
         If rdoSkim.Checked Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
             Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
-        Else
+        ElseIf rdoTwoVariable.Checked Then
             If strFirstVariablesType = "categorical" AndAlso
                 strSecondVariableType = "categorical" Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
@@ -511,6 +520,8 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
             End If
+        ElseIf rdoThreeVariable.Checked Then
+
         End If
     End Sub
 
@@ -523,7 +534,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub EnableDisableFrequencyControls()
-        If rdoCustomize.Checked Then
+        If rdoTwoVariable.Checked Then
             If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                 grpDisplay.Visible = True
                 grpFrequency.Visible = True
@@ -546,7 +557,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SwapMmtableHeaderFunctions()
-        If rdoCustomize.Checked Then
+        If rdoTwoVariable.Checked Then
             clsMmtablePlusOperator.RemoveParameterByName("summary_variable")
             clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
             If Not ucrReceiverSecondVar.IsEmpty Then
@@ -575,7 +586,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
         ucrChkDisplayAsPercentage.ControlValueChanged, ucrNudSigFigs.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged,
         ucrReceiverPercentages.ControlValueChanged, ucrInputMarginName.ControlValueChanged
-        If rdoCustomize.Checked Then
+        If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then
                 ucrReceiverPercentages.SetMeAsReceiver()
             Else
