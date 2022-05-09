@@ -117,13 +117,26 @@ Public Class dlgNewDataFrame
 
         clsGetLists.SetPackageName("rcorpora")
         clsGetLists.SetRCommand("corpora")
-        expListNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetLists.ToScript(), bSilent:=True)
-        If expListNames IsNot Nothing AndAlso expListNames.Type <> Internals.SymbolicExpressionType.Null Then
-            chrListNames = expListNames.AsCharacter
-            arrAvailableLists = chrListNames.ToArray
-            Array.Sort(arrAvailableLists)
-            ucrInputListInCategory.SetParameter(New RParameter("list"))
-            ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+        If strSelectedCategory <> ucrInputCategory.GetText() Then
+            strSelectedCategory = ucrInputCategory.GetText()
+            clsGetLists.AddParameter("category", strParameterValue:=strSelectedCategory)
+            expListNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetLists.ToScript(), bSilent:=True)
+            If expListNames IsNot Nothing AndAlso expListNames.Type <> Internals.SymbolicExpressionType.Null Then
+                chrListNames = expListNames.AsCharacter
+                arrAvailableLists = chrListNames.ToArray
+                Array.Sort(arrAvailableLists)
+                ucrInputListInCategory.SetParameter(New RParameter("list"))
+                ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+            End If
+        Else
+            expListNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetLists.ToScript(), bSilent:=True)
+            If expListNames IsNot Nothing AndAlso expListNames.Type <> Internals.SymbolicExpressionType.Null Then
+                chrListNames = expListNames.AsCharacter
+                arrAvailableLists = chrListNames.ToArray
+                Array.Sort(arrAvailableLists)
+                ucrInputListInCategory.SetParameter(New RParameter("list"))
+                ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+            End If
         End If
         ucrInputListInCategory.SetDropDownStyleAsNonEditable()
     End Sub
@@ -252,7 +265,7 @@ Public Class dlgNewDataFrame
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoLists.Checked Then
-            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputLists.IsEmpty)
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputListInCategory.IsEmpty)
         End If
     End Sub
 
@@ -763,22 +776,7 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    'Private Sub LoadDatasets(strCategory As String)
-    '    Dim expTemp As SymbolicExpression
-    '    Dim dfPackage As DataFrame = Nothing
+    Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged, ucrInputListInCategory.ControlValueChanged
 
-    '    If strPackage IsNot Nothing Then
-    '        expTemp = frmMain.clsRLink.RunInternalScriptGetValue("data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results)[ ,3:4]", bSilent:=True)
-    '        If expTemp IsNot Nothing Then
-    '            dfPackage = expTemp.AsDataFrame
-    '        End If
-    '    End If
-
-    'Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged
-    '    If strSelectedCategory <> ucrInputCategory.GetText() Then
-    '        strSelectedCategory = ucrInputCategory.GetText()
-    '        LoadDatasets(strSelectedCategory)
-    '        TestOKEnabled()
-    '    End If
-    'End Sub
+    End Sub
 End Class

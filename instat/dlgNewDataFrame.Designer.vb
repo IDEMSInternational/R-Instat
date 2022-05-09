@@ -473,7 +473,7 @@ Partial Class dlgNewDataFrame
         '
         Me.lblCategories.AutoSize = True
         Me.lblCategories.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCategories.Location = New System.Drawing.Point(34, 61)
+        Me.lblCategories.Location = New System.Drawing.Point(34, 59)
         Me.lblCategories.Name = "lblCategories"
         Me.lblCategories.Size = New System.Drawing.Size(52, 13)
         Me.lblCategories.TabIndex = 169
@@ -516,7 +516,7 @@ Partial Class dlgNewDataFrame
         '
         Me.lblLists.AutoSize = True
         Me.lblLists.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLists.Location = New System.Drawing.Point(55, 87)
+        Me.lblLists.Location = New System.Drawing.Point(55, 89)
         Me.lblLists.Name = "lblLists"
         Me.lblLists.Size = New System.Drawing.Size(31, 13)
         Me.lblLists.TabIndex = 174
