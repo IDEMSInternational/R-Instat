@@ -70,13 +70,14 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoThreeVariable = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverNumericVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondOpt = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecondSkimrGroupByFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSkimrGroupByFactor = New instat.ucrReceiverSingle()
         Me.ucrPnlDescribe = New instat.UcrPanel()
-        Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverThreeVariableFirstFactor = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
@@ -445,31 +446,31 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverNumericVariable.TabIndex = 11
         Me.ucrReceiverNumericVariable.ucrSelector = Nothing
         '
-        'ucrReceiverSecondFactor
+        'ucrReceiverSecondSkimrGroupByFactor
         '
-        Me.ucrReceiverSecondFactor.AutoSize = True
-        Me.ucrReceiverSecondFactor.frmParent = Me
-        Me.ucrReceiverSecondFactor.Location = New System.Drawing.Point(272, 222)
-        Me.ucrReceiverSecondFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondFactor.Name = "ucrReceiverSecondFactor"
-        Me.ucrReceiverSecondFactor.Selector = Nothing
-        Me.ucrReceiverSecondFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondFactor.strNcFilePath = ""
-        Me.ucrReceiverSecondFactor.TabIndex = 9
-        Me.ucrReceiverSecondFactor.ucrSelector = Nothing
+        Me.ucrReceiverSecondSkimrGroupByFactor.AutoSize = True
+        Me.ucrReceiverSecondSkimrGroupByFactor.frmParent = Me
+        Me.ucrReceiverSecondSkimrGroupByFactor.Location = New System.Drawing.Point(272, 222)
+        Me.ucrReceiverSecondSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondSkimrGroupByFactor.Name = "ucrReceiverSecondSkimrGroupByFactor"
+        Me.ucrReceiverSecondSkimrGroupByFactor.Selector = Nothing
+        Me.ucrReceiverSecondSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondSkimrGroupByFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondSkimrGroupByFactor.TabIndex = 9
+        Me.ucrReceiverSecondSkimrGroupByFactor.ucrSelector = Nothing
         '
-        'ucrReceiverSecondOpt
+        'ucrReceiverSkimrGroupByFactor
         '
-        Me.ucrReceiverSecondOpt.AutoSize = True
-        Me.ucrReceiverSecondOpt.frmParent = Me
-        Me.ucrReceiverSecondOpt.Location = New System.Drawing.Point(271, 179)
-        Me.ucrReceiverSecondOpt.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondOpt.Name = "ucrReceiverSecondOpt"
-        Me.ucrReceiverSecondOpt.Selector = Nothing
-        Me.ucrReceiverSecondOpt.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondOpt.strNcFilePath = ""
-        Me.ucrReceiverSecondOpt.TabIndex = 7
-        Me.ucrReceiverSecondOpt.ucrSelector = Nothing
+        Me.ucrReceiverSkimrGroupByFactor.AutoSize = True
+        Me.ucrReceiverSkimrGroupByFactor.frmParent = Me
+        Me.ucrReceiverSkimrGroupByFactor.Location = New System.Drawing.Point(271, 179)
+        Me.ucrReceiverSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSkimrGroupByFactor.Name = "ucrReceiverSkimrGroupByFactor"
+        Me.ucrReceiverSkimrGroupByFactor.Selector = Nothing
+        Me.ucrReceiverSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSkimrGroupByFactor.strNcFilePath = ""
+        Me.ucrReceiverSkimrGroupByFactor.TabIndex = 7
+        Me.ucrReceiverSkimrGroupByFactor.ucrSelector = Nothing
         '
         'ucrPnlDescribe
         '
@@ -479,18 +480,18 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
         Me.ucrPnlDescribe.TabIndex = 0
         '
-        'ucrReceiverSecondVar
+        'ucrReceiverSecondTwoVariableFactor
         '
-        Me.ucrReceiverSecondVar.AutoSize = True
-        Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(271, 179)
-        Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
-        Me.ucrReceiverSecondVar.Selector = Nothing
-        Me.ucrReceiverSecondVar.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondVar.strNcFilePath = ""
-        Me.ucrReceiverSecondVar.TabIndex = 2
-        Me.ucrReceiverSecondVar.ucrSelector = Nothing
+        Me.ucrReceiverSecondTwoVariableFactor.AutoSize = True
+        Me.ucrReceiverSecondTwoVariableFactor.frmParent = Me
+        Me.ucrReceiverSecondTwoVariableFactor.Location = New System.Drawing.Point(271, 179)
+        Me.ucrReceiverSecondTwoVariableFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondTwoVariableFactor.Name = "ucrReceiverSecondTwoVariableFactor"
+        Me.ucrReceiverSecondTwoVariableFactor.Selector = Nothing
+        Me.ucrReceiverSecondTwoVariableFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondTwoVariableFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondTwoVariableFactor.TabIndex = 2
+        Me.ucrReceiverSecondTwoVariableFactor.ucrSelector = Nothing
         '
         'ucrReceiverFirstVars
         '
@@ -530,12 +531,26 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableFirstFactor.TabIndex = 24
         Me.ucrReceiverThreeVariableFirstFactor.ucrSelector = Nothing
         '
+        'ucrReceiverThreeVariableSecondFactor
+        '
+        Me.ucrReceiverThreeVariableSecondFactor.AutoSize = True
+        Me.ucrReceiverThreeVariableSecondFactor.frmParent = Me
+        Me.ucrReceiverThreeVariableSecondFactor.Location = New System.Drawing.Point(271, 179)
+        Me.ucrReceiverThreeVariableSecondFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThreeVariableSecondFactor.Name = "ucrReceiverThreeVariableSecondFactor"
+        Me.ucrReceiverThreeVariableSecondFactor.Selector = Nothing
+        Me.ucrReceiverThreeVariableSecondFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverThreeVariableSecondFactor.strNcFilePath = ""
+        Me.ucrReceiverThreeVariableSecondFactor.TabIndex = 25
+        Me.ucrReceiverThreeVariableSecondFactor.ucrSelector = Nothing
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(419, 491)
+        Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverThreeVariableFirstFactor)
         Me.Controls.Add(Me.rdoThreeVariable)
         Me.Controls.Add(Me.ucrBase)
@@ -544,16 +559,16 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.lblNumericVariable)
         Me.Controls.Add(Me.ucrReceiverNumericVariable)
         Me.Controls.Add(Me.lblSecondFactor)
-        Me.Controls.Add(Me.ucrReceiverSecondFactor)
+        Me.Controls.Add(Me.ucrReceiverSecondSkimrGroupByFactor)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lbSecondOpt)
-        Me.Controls.Add(Me.ucrReceiverSecondOpt)
+        Me.Controls.Add(Me.ucrReceiverSkimrGroupByFactor)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.rdoTwoVariable)
         Me.Controls.Add(Me.ucrPnlDescribe)
         Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariable)
-        Me.Controls.Add(Me.ucrReceiverSecondVar)
+        Me.Controls.Add(Me.ucrReceiverSecondTwoVariableFactor)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
         Me.Controls.Add(Me.grpSummaries)
@@ -581,7 +596,7 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrSelectorDescribeTwoVar As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverFirstVars As ucrReceiverMultiple
     Friend WithEvents cmdSummaries As Button
-    Friend WithEvents ucrReceiverSecondVar As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecondTwoVariableFactor As ucrReceiverSingle
     Friend WithEvents lblFirstVariable As Label
     Friend WithEvents lbSecondVariable As Label
     Friend WithEvents ucrChkOmitMissing As ucrCheck
@@ -593,12 +608,12 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents lblSummaryName As Label
     Friend WithEvents grpSummaries As GroupBox
     Friend WithEvents ucrPnlDescribe As UcrPanel
-    Friend WithEvents ucrReceiverSecondOpt As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSkimrGroupByFactor As ucrReceiverSingle
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents rdoTwoVariable As RadioButton
     Friend WithEvents lbSecondOpt As Label
     Friend WithEvents lblSecondFactor As Label
-    Friend WithEvents ucrReceiverSecondFactor As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecondSkimrGroupByFactor As ucrReceiverSingle
     Friend WithEvents lblNumericVariable As Label
     Friend WithEvents ucrReceiverNumericVariable As ucrReceiverSingle
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
@@ -616,4 +631,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
     Friend WithEvents rdoThreeVariable As RadioButton
     Friend WithEvents ucrReceiverThreeVariableFirstFactor As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverThreeVariableSecondFactor As ucrReceiverSingle
 End Class
