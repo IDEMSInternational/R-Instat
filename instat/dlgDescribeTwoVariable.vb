@@ -25,8 +25,9 @@ Public Class dlgDescribeTwoVariable
            clsGroupByFunction, clsDummyFunction, clsMmtableFunction, clsHeaderTopLeftFunction,
            clsHeaderLeftTopFunction, clsHeaderLeftTopFuncion, clsCombineFrequencyParametersFunction,
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsCombineFactorsFunction,
-           clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction,
-           clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction As New RFunction
+           clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction, clsSecondHeaderTopLeftFunction,
+           clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction,
+           clsSecondHeaderLeftTopFunction As New RFunction
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
              clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
@@ -173,6 +174,8 @@ Public Class dlgDescribeTwoVariable
         clsCombineFrequencyFactorParameterFunction = New RFunction
         clsSelectFunction = New RFunction
         clsRenameCombineFunction = New RFunction
+        clsSecondHeaderTopLeftFunction = New RFunction
+        clsSecondHeaderLeftTopFunction = New RFunction
         clsDataSelectTildeOperator = New ROperator
         clsMmtableTildeOperator = New ROperator
         clsMapFrequencyPipeOperator = New ROperator
@@ -247,6 +250,12 @@ Public Class dlgDescribeTwoVariable
 
         clsHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsHeaderLeftTopFunction.SetRCommand("header_left_top")
+
+        clsSecondHeaderTopLeftFunction.SetPackageName("mmtable2")
+        clsSecondHeaderTopLeftFunction.SetRCommand("header_top_left")
+
+        clsSecondHeaderLeftTopFunction.SetPackageName("mmtable2")
+        clsSecondHeaderLeftTopFunction.SetRCommand("header_left_top")
 
         clsHeaderTopLeftSummaryVariableFunction.SetPackageName("mmtable2")
         clsHeaderTopLeftSummaryVariableFunction.SetRCommand("header_top_left")
@@ -557,9 +566,11 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SwapMmtableHeaderFunctions()
+        clsMmtablePlusOperator.RemoveParameterByName("second_header_top_left")
+        clsMmtablePlusOperator.RemoveParameterByName("second_header_left_top")
         If rdoTwoVariable.Checked Then
-            clsMmtablePlusOperator.RemoveParameterByName("summary_variable")
             clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
+            clsMmtablePlusOperator.AddParameter("header_left_top", clsRFunctionParameter:=clsHeaderLeftTopFunction, iPosition:=2)
             If Not ucrReceiverSecondVar.IsEmpty Then
                 If ucrNudColumnFactors.GetText = 1 Then
                     clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
@@ -567,6 +578,25 @@ Public Class dlgDescribeTwoVariable
                 ElseIf ucrNudColumnFactors.GetText = 2 Then
                     clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
                     clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(), iPosition:=0)
+                End If
+            End If
+        ElseIf rdoThreeVariable.Checked Then
+            If Not ucrReceiverSecondVar.IsEmpty Then
+                If ucrNudColumnFactors.GetText = 1 Then
+                    clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
+                    clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(), iPosition:=0)
+                ElseIf ucrNudColumnFactors.GetText = 2 Then
+                    clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
+                    clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondVar.GetVariableNames(), iPosition:=0)
+                End If
+            End If
+            If Not ucrReceiverNumericVariable.IsEmpty Then
+                If ucrNudColumnFactors.GetText = 1 Then
+                    clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                    clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
+                ElseIf ucrNudColumnFactors.GetText = 2 Then
+                    clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                    clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
                 End If
             End If
         End If
