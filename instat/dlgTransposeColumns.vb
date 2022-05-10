@@ -31,21 +31,27 @@ Public Class dlgTransposeColumns
         bReset = False
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 277
+
         ucrReceiverColumnsToTranspose.SetParameterIsRFunction()
         ucrReceiverColumnsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumnsToTranspose.SetMeAsReceiver()
+
         ucrReceiverVariableNames.SetParameter(New RParameter("make.names", 1))
         ucrReceiverVariableNames.SetParameterIsString()
         ucrReceiverVariableNames.Selector = ucrSelectorTransposeColumns
+
         'The checkbox is not yet implemented in the updated code as it was not implemented in pre-updated code
         ucrChkNameNewColumns.SetText("Name New Columns")
         ucrChkNameNewColumns.Enabled = False ' temporary
+
         ucrChkDisplayVariableNames.SetText("Include Old Names")
         ucrChkDisplayVariableNames.AddParameterPresentCondition(True, "keep.names")
         ucrChkDisplayVariableNames.AddParameterPresentCondition(False, "keep.names", False)
         ucrInputDisplayVariableNames.SetParameter(New RParameter("keep.names", 2))
+
         'ucrNewDF
         ucrNewDataframe.SetIsTextBox()
         ucrNewDataframe.SetSaveTypeAsDataFrame()
@@ -53,6 +59,7 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
         ucrChkDisplayVariableNames.AddToLinkedControls({ucrInputDisplayVariableNames}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, objNewDefaultState:="old name", bNewLinkedChangeToDefaultState:=True)
     End Sub
+
     Private Sub SetDefaults()
         clsTransposeFunction = New RFunction
         clsOverallFunction = New RFunction
@@ -64,17 +71,20 @@ Public Class dlgTransposeColumns
         clsOverallFunction.SetRCommand("as.data.frame")
         clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
         clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTransposeFunction)
+
         clsTransposeFunction.SetPackageName("data.table")
         clsTransposeFunction.SetRCommand("transpose")
         clsTransposeFunction.AddParameter("l", "columns", iPosition:=0)
-        clsTransposeFunction.AddParameter("make.names", "NULL", iPosition:=1)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
     End Sub
+
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverVariableNames.SetRCode(clsTransposeFunction, bReset)
         ucrChkDisplayVariableNames.SetRCode(clsTransposeFunction, bReset)
         ucrNewDataframe.SetRCode(clsOverallFunction, bReset)
     End Sub
+
     Private Sub TestOkEnabled()
         If Not ucrReceiverColumnsToTranspose.IsEmpty AndAlso ucrNewDataframe.IsComplete() Then
             If ucrChkDisplayVariableNames.Checked AndAlso (Not ucrInputDisplayVariableNames.IsEmpty) Then
@@ -88,19 +98,23 @@ Public Class dlgTransposeColumns
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
         TestOkEnabled()
     End Sub
+
     Private Sub NewDefaultName()
         If (Not ucrNewDataframe.bUserTyped) AndAlso ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataframe.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
         End If
     End Sub
+
     Private Sub CoreName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTransposeColumns.ControlValueChanged
         NewDefaultName()
     End Sub
+
     Private Sub ucrReceiverColumnsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
         clsGetColumnNamesFunction = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
@@ -118,12 +132,6 @@ Public Class dlgTransposeColumns
             ucrSelectorTransposeColumns.lstAvailableVariable.Items.Add(lstVariables.Item(i))
             ucrSelectorTransposeColumns.lstAvailableVariable.Items(i).Tag = ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         Next
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlContentsChanged,
-        ucrNewDataframe.ControlContentsChanged, ucrReceiverVariableNames.ControlContentsChanged, ucrChkDisplayVariableNames.ControlContentsChanged,
-        ucrInputDisplayVariableNames.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub ClearSelector()
@@ -158,10 +166,6 @@ Public Class dlgTransposeColumns
         End If
     End Sub
 
-    Private Sub ucrReceiverVariableNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariableNames.ControlValueChanged
-        ResetSelector()
-    End Sub
-
     Private Sub ResetSelector()
         If ucrReceiverVariableNames.IsEmpty AndAlso Not ucrReceiverColumnsToTranspose.IsEmpty _
                    AndAlso ucrSelectorTransposeColumns.lstAvailableVariable.Items.Count > 0 Then
@@ -171,5 +175,11 @@ Public Class dlgTransposeColumns
 
     Private Sub ucrReceiverColumnsToTranspose_Enter(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToTranspose.Enter
         ResetSelector()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlContentsChanged,
+        ucrNewDataframe.ControlContentsChanged, ucrReceiverVariableNames.ControlContentsChanged, ucrChkDisplayVariableNames.ControlContentsChanged,
+        ucrInputDisplayVariableNames.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
