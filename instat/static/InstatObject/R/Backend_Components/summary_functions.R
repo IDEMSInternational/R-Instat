@@ -1473,6 +1473,11 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name)) %>%
         dplyr::mutate(value = as.character(value))
       
+      # if there is one factor, then we do not yet have the factor name in the df
+      # (this will be added in by dplyr::bind_rows(s_c_v, m_t_a))
+      # by introducing it in the outer_margins bit, we have to add it in "manually"
+      # this then loses the class of it, creating issues for ordered vs non-ordered factors
+      # so we do these changes here.
       if (length(factors) > 1){
         for (i in factors){
           shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
