@@ -1473,7 +1473,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       margin_tables_all <- margin_tables_all %>%
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name)) %>%
         dplyr::mutate(value = as.character(value))
-      #for (i in factors){
+      # potentially useful for ordered factor variables bug, eg, diamonds data set in ggplot2 package.
+      # for (i in factors){
       #  shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
       #  margin_tables_all <- margin_tables_all %>%
       #    dplyr::mutate_at(i, ~ forcats::fct_expand(., shaped_cell_values_levels),
