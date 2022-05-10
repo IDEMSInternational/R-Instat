@@ -1469,18 +1469,18 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     }
     if (!is.null(summary_margins) || !is.null(outer_margins)) {
       margin_tables_all <- (dplyr::bind_rows(summary_margins, outer_margins))
-      
       margin_tables_all <- margin_tables_all %>%
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name)) %>%
         dplyr::mutate(value = as.character(value))
-      # potentially useful for ordered factor variables bug, eg, diamonds data set in ggplot2 package.
-      # for (i in factors){
-      #  shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
-      #  margin_tables_all <- margin_tables_all %>%
-      #    dplyr::mutate_at(i, ~ forcats::fct_expand(., shaped_cell_values_levels),
-      #                     i, ~ forcats::fct_relevel(., shaped_cell_values_levels))
-      #}     
       
+      if (length(factors) > 1){
+        for (i in factors){
+          shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
+          margin_tables_all <- margin_tables_all %>%
+            dplyr::mutate_at(i, ~ forcats::fct_expand(., shaped_cell_values_levels),
+                             i, ~ forcats::fct_relevel(., shaped_cell_values_levels))
+        }     
+      }
       shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
         dplyr::mutate_at(vars(-c(value)), tidyr::replace_na, margin_name) %>%
         dplyr::mutate_at(vars(-c(value)), ~forcats::as_factor(forcats::fct_relevel(.x, margin_name, after = Inf)))
