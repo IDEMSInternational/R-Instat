@@ -19,8 +19,8 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
-        clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction,
-        clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction, clsCorporaFunction As New RFunction
+        clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction,
+         clsAsCharacterFunction, clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -89,6 +89,7 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
         ucrChkIncludeLabel.SetLinkedDisplayControl(dataTypeGridView)
         ucrInputCategory.SetLinkedDisplayControl(lblCategories)
+        ucrInputListInCategory.SetLinkedDisplayControl(lblLists)
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
@@ -129,6 +130,7 @@ Public Class dlgNewDataFrame
         clsRepFunction = New RFunction
         clsSjLabelledFunction = New RFunction
         clsCorporaFunction = New RFunction
+        clsListDfFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
@@ -138,6 +140,8 @@ Public Class dlgNewDataFrame
 
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
+
+        clsListDfFunction.SetRCommand("data.frame")
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -254,6 +258,7 @@ Public Class dlgNewDataFrame
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
         ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
@@ -321,6 +326,10 @@ Public Class dlgNewDataFrame
         ElseIf rdoLists.Checked Then
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
+            lblCommand.Visible = False
+            btnExample.Visible = False
+            ucrBase.clsRsyntax.SetCommandString(ucrInputLists.GetText())
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         End If
         If rdoCommand.Checked OrElse rdoRandom.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
@@ -802,7 +811,8 @@ Public Class dlgNewDataFrame
                                                  bIncludeArgumentName:=False, iPosition:=0)
             End If
         End If
-        ucrInputLists.SetText(clsCorporaFunction.ToScript)
+        clsListDfFunction.AddParameter("data", clsRFunctionParameter:=clsCorporaFunction, iPosition:=0)
+        ucrInputLists.SetText(clsListDfFunction.ToScript)
     End Sub
 
     Private Sub ucrInputLists_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLists.ControlContentsChanged
