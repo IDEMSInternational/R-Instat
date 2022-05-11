@@ -633,13 +633,13 @@ Public Class dlgDescribeTwoVariable
                 End If
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+            If Not ucrReceiverThreeVariableSecondFactor.IsEmpty Then
                 If ucrNudColumnFactors.GetText = 1 Then
                     clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
-                    clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                    clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=0)
                 ElseIf ucrNudColumnFactors.GetText = 2 Then
                     clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
-                    clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                    clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=0)
                 End If
             End If
             If Not ucrReceiverNumericVariable.IsEmpty Then
