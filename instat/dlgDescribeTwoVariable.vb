@@ -27,7 +27,7 @@ Public Class dlgDescribeTwoVariable
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsCombineFactorsFunction,
            clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction, clsSecondHeaderTopLeftFunction,
            clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction,
-           clsSecondHeaderLeftTopFunction As New RFunction
+           clsSecondHeaderLeftTopFunction, clsThreeVariableCombineFrequencyParametersFunction As New RFunction
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
              clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
@@ -136,6 +136,26 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.SetDataType("factor")
         ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
+        ucrChkThreeVariableDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
+        ucrChkThreeVariableDisplayAsPercentage.SetText("As Percentages")
+        ucrChkThreeVariableDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
+        ucrChkThreeVariableDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
+
+        ucrChkThreeVariableDisplayAsPercentage.AddToLinkedControls(ucrReceiverThreeVariableMultiplePercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
+                                                      bNewLinkedAddRemoveParameter:=True)
+        ucrChkThreeVariableDisplayAsPercentage.AddToLinkedControls(ucrChkThreeVariablePercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True,
+                                                      bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverThreeVariableMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 2))
+        ucrReceiverThreeVariableMultiplePercentages.SetParameterIsString()
+        ucrReceiverThreeVariableMultiplePercentages.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverThreeVariableMultiplePercentages.SetDataType("factor")
+        ucrReceiverThreeVariableMultiplePercentages.SetLinkedDisplayControl(lblThreeVariableFactorAsPercentages)
+
+        ucrChkThreeVariablePercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
+        ucrChkThreeVariablePercentageProportion.SetText("Display as Decimal")
+        ucrChkThreeVariablePercentageProportion.SetRDefault("FALSE")
+
         ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
         ucrChkPercentageProportion.SetText("Display as Decimal")
         ucrChkPercentageProportion.SetRDefault("FALSE")
@@ -179,6 +199,7 @@ Public Class dlgDescribeTwoVariable
         clsRenameCombineFunction = New RFunction
         clsSecondHeaderTopLeftFunction = New RFunction
         clsSecondHeaderLeftTopFunction = New RFunction
+        clsThreeVariableCombineFrequencyParametersFunction = New RFunction
         clsDataSelectTildeOperator = New ROperator
         clsMmtableTildeOperator = New ROperator
         clsMapFrequencyPipeOperator = New ROperator
@@ -191,17 +212,18 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.SetText("All")
         ucrNudColumnFactors.SetText("2")
         ucrInputMarginName.Visible = False
+        grpThreeVariablePercentages.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
 
         clsCombineFrequencyParametersFunction.SetRCommand("c")
 
+        clsThreeVariableCombineFrequencyParametersFunction.SetRCommand("c")
+
         clsCombineFactorsFunction.SetRCommand("c")
 
         clsRenameCombineFunction.SetRCommand("c")
         clsRenameCombineFunction.AddParameter("first", "1", iPosition:=0, bIncludeArgumentName:=False)
-        clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
-        clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
         clsRenameCombineFunction.AddParameter("fourth", "4", iPosition:=3, bIncludeArgumentName:=False)
 
         clsSelectFunction.SetPackageName("dplyr")
@@ -335,6 +357,10 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnovaFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummaryFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
 
+        ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsThreeVariableCombineFrequencyParametersFunction, ucrChkDisplayMargins.GetParameter, iAdditionalPairNo:=1)
+
+        ucrNudSigFigs.AddAdditionalCodeParameterPair(clsThreeVariableCombineFrequencyParametersFunction, ucrNudSigFigs.GetParameter, iAdditionalPairNo:=1)
+
         ucrChkOmitMissing.SetRCode(clsRCustomSummaryFunction, bReset)
         ucrReceiverFirstVars.SetRCode(clsRCustomSummaryFunction, bReset)
         ucrReceiverSecondTwoVariableFactor.SetRCode(clsRCustomSummaryFunction, bReset)
@@ -345,6 +371,12 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayAsPercentage.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
+
+        ucrChkThreeVariableDisplayAsPercentage.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
+        ucrReceiverThreeVariableMultiplePercentages.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
+        ucrChkThreeVariablePercentageProportion.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
+
+
         ucrReceiverNumericVariable.SetRCode(clsCombineFrequencyFactorParameterFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsCombineFrequencyFactorParameterFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
@@ -535,6 +567,9 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
         ucrReceiverFirstVars.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
+        clsRenameCombineFunction.RemoveParameterByName("by_var")
+        clsRenameCombineFunction.RemoveParameterByName("second")
+        clsRenameCombineFunction.RemoveParameterByName("third")
         clsRenameCombineFunction.RemoveParameterByName("fifth")
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -544,7 +579,11 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummaryFunction)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+            clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
+            clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
         Else
+            clsRenameCombineFunction.AddParameter("second", "2", iPosition:=1)
+            clsRenameCombineFunction.AddParameter("by_var", "3", iPosition:=2, bIncludeArgumentName:=False)
             clsRenameCombineFunction.AddParameter("fifth", "5", iPosition:=4, bIncludeArgumentName:=False)
             ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
@@ -553,25 +592,29 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ChangeLocations()
+        grpFrequency.Location = New Point(10, 302)
         If rdoSkim.Checked Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
-            Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
+            Me.Size = New Point(iDialogueXsize, 425)
         ElseIf rdoTwoVariable.Checked Then
             If strFirstVariablesType = "categorical" AndAlso
                 strSecondVariableType = "categorical" Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
-                Me.Size = New System.Drawing.Point(iDialogueXsize, 530)
+                Me.Size = New Point(iDialogueXsize, 530)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
-                Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
+                Me.Size = New Point(iDialogueXsize, 425)
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
+                Not ucrReceiverNumericVariable.IsEmpty Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
-                Me.Size = New System.Drawing.Point(iDialogueXsize, 530)
+                Me.Size = New Point(iDialogueXsize, 530)
+                grpFrequency.Location = New Point(10, 250)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
-                Me.Size = New System.Drawing.Point(iDialogueXsize, 425)
+                Me.Size = New Point(iDialogueXsize, 425)
+                grpFrequency.Location = New Point(10, 302)
             End If
         End If
     End Sub
@@ -585,9 +628,10 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub EnableDisableFrequencyControls()
+        grpThreeVariablePercentages.Visible = False
         If rdoTwoVariable.Checked Then
             If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-                grpDisplay.Visible = True
+                grpTwoVariablePercentages.Visible = True
                 grpFrequency.Visible = True
                 ucrChkDisplayMargins.Visible = True
                 ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
@@ -598,8 +642,10 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoSkim.Checked Then
             DisableFrequencyControls()
         Else
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
-                grpDisplay.Visible = True
+            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
+                Not ucrReceiverNumericVariable.IsEmpty Then
+                grpThreeVariablePercentages.Visible = True
+                grpTwoVariablePercentages.Visible = False
                 grpFrequency.Visible = True
                 ucrChkDisplayMargins.Visible = True
                 ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
@@ -607,11 +653,12 @@ Public Class dlgDescribeTwoVariable
                 ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
                 DisableFrequencyControls()
             End If
+            ChangeLocations()
         End If
     End Sub
 
     Private Sub DisableFrequencyControls()
-        grpDisplay.Visible = False
+        grpTwoVariablePercentages.Visible = False
         grpFrequency.Visible = False
         ucrChkDisplayMargins.Visible = False
         ucrInputMarginName.Visible = False
@@ -655,32 +702,53 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub AddRemoveFrequencyParameters()
-        If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+        If rdoTwoVariable.Checked Then
+            If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+                For Each strParameter In lstFrequencyParameters
+                    clsFrequencyTablesFunction.RemoveParameterByName(strParameter)
+                Next
+                For Each clsParameter In clsCombineFrequencyParametersFunction.clsParameters
+                    clsFrequencyTablesFunction.AddParameter(clsParameter)
+                Next
+            End If
+        ElseIf rdoThreeVariable.Checked Then
             For Each strParameter In lstFrequencyParameters
                 clsFrequencyTablesFunction.RemoveParameterByName(strParameter)
             Next
-            For Each clsParameter In clsCombineFrequencyParametersFunction.clsParameters
-                clsFrequencyTablesFunction.AddParameter(clsParameter)
-            Next
+            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+                For Each clsParameter In clsThreeVariableCombineFrequencyParametersFunction.clsParameters
+                    clsFrequencyTablesFunction.AddParameter(clsParameter)
+                Next
+            End If
         End If
+
     End Sub
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
         ucrChkDisplayAsPercentage.ControlValueChanged, ucrNudSigFigs.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged,
-        ucrReceiverPercentages.ControlValueChanged, ucrInputMarginName.ControlValueChanged
+        ucrReceiverPercentages.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrChkThreeVariablePercentageProportion.ControlValueChanged,
+        ucrReceiverThreeVariableMultiplePercentages.ControlValueChanged, ucrChkThreeVariableDisplayAsPercentage.ControlValueChanged
         If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then
                 ucrReceiverPercentages.SetMeAsReceiver()
             Else
                 ucrReceiverFirstVars.SetMeAsReceiver()
             End If
+        ElseIf rdoThreeVariable.checked Then
+            If ucrChkThreeVariableDisplayAsPercentage.Checked Then
+                ucrReceiverThreeVariableMultiplePercentages.SetMeAsReceiver()
+            Else
+                ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
+            End If
         End If
         If ucrChkDisplayMargins.Checked Then
             ucrInputMarginName.Visible = True
             clsCombineFrequencyParametersFunction.AddParameter("margin_name", Chr(34) & ucrInputMarginName.GetText & Chr(34), iPosition:=6)
+            clsThreeVariableCombineFrequencyParametersFunction.AddParameter("margin_name", Chr(34) & ucrInputMarginName.GetText & Chr(34), iPosition:=6)
         Else
             ucrInputMarginName.Visible = False
             clsCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
+            clsThreeVariableCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
         End If
         AddRemoveFrequencyParameters()
     End Sub
@@ -697,5 +765,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrReceiverNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumericVariable.ControlValueChanged
         SwapMmtableHeaderFunctions()
+        EnableDisableFrequencyControls()
+        AddRemoveFrequencyParameters()
     End Sub
 End Class
