@@ -38,6 +38,8 @@ Public Class sdgOneVarFitModel
         ucrPnlFitMethod.AddRadioButton(rdoQme, Chr(34) & "qme" & Chr(34))
         ucrPnlFitMethod.AddRadioButton(rdoMge, Chr(34) & "mge" & Chr(34))
 
+        ucrBase.iHelpTopicID = 113
+
         ucrPnlOptimisation.SetParameter(New RParameter("optim.method"))
         ucrPnlOptimisation.AddRadioButton(rdoDefault, Chr(34) & "default" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoNelderMead, Chr(34) & "Nelder-Mead" & Chr(34))

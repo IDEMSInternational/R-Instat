@@ -20,7 +20,7 @@ Public Class dlgWindPollutionRose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     'Functions 
-    Private clsPollutionRoseFunction As RFunction
+    Private clsPollutionRoseFunction As New RFunction
 
     Private Sub dlgPollutionRose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

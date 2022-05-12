@@ -1701,12 +1701,6 @@
     <Compile Include="dlgPermuteColumn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPopulationPyramids.Designer.vb">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPopulationPyramids.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
@@ -2747,12 +2741,6 @@
       <DependentUpon>ucrSave.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSave.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrSaveGraph.Designer.vb">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveGraph.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrSaveModel.Designer.vb">
@@ -3810,12 +3798,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPICSATemperature.resx">
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -5081,12 +5063,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.sw-KE.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveModel.resx">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>

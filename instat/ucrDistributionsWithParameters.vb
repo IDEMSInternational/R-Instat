@@ -120,7 +120,7 @@ Public Class ucrDistributionsWithParameters
         OnControlValueChanged()
     End Sub
 
-    Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
+    Private Sub ucrInputParameter2_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputParameter2.ControlContentsChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
             If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
                 AddParameter(lstCurrArguments(1), "c(" & ucrInputParameter2.GetText & ")")

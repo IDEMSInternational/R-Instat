@@ -13,9 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports RDotNet
-Imports instat.Translations
 Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
@@ -24,8 +21,7 @@ Public Class ucrSelector
     Public Event DataFrameChanged()
     Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
     Public bFirstLoad As Boolean
-    Public bIncludeOverall As Boolean
-    Public strCurrentDataFrame As String
+    Public strCurrentDataFrame As String = ""
     ' If a dialog has receivers which can have columns from multiple data frames
     ' there may be a primary data frame which some receivers must be from.
     ' Other receivers may only allow columns from data frames linked to the primary data frame
@@ -56,8 +52,7 @@ Public Class ucrSelector
         ' Add any initialization after the InitializeComponent() call.
         lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
-        bIncludeOverall = False
-        strCurrentDataFrame = ""
+        'bIncludeOverall = False 
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         strType = "column"
@@ -125,6 +120,7 @@ Public Class ucrSelector
 
         'if selector contains columns check if fill conditions are just the same
         If strCurrentType = "column" Then
+
             'holds the selector's list view 'fill conditions'
             'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
             Static _strCurrentSelectorFillCondition As String = ""
@@ -147,6 +143,7 @@ Public Class ucrSelector
             _strCurrentSelectorFillCondition = strNewSelectorFillCondition
         End If
 
+        'todo, for columns, the list view should be field with variables from the .Net metadata object
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         EnableDataOptions(strCurrentType)
 
@@ -160,7 +157,7 @@ Public Class ucrSelector
 
         If dataFrame IsNot Nothing Then
             strSelectorFillCondition &= dataFrame.strName
-            strSelectorFillCondition &= dataFrame.iTotalColumnCount
+            strSelectorFillCondition &= dataFrame.clsColumnMetaData.MetadataChangeAuditId
         End If
 
         If Not String.IsNullOrEmpty(strElementType) Then
@@ -170,8 +167,6 @@ Public Class ucrSelector
         If Not String.IsNullOrEmpty(strHeading) Then
             strSelectorFillCondition &= strHeading
         End If
-
-
 
         If Not String.IsNullOrEmpty(strDatabaseQuery) Then
             strSelectorFillCondition &= strDatabaseQuery
@@ -186,16 +181,19 @@ Public Class ucrSelector
         End If
 
         If lstCombinedMetadataLists IsNot Nothing Then
-            For i As Integer = 0 To i < lstCombinedMetadataLists.Count - 1
-                For i2 As Integer = 0 To lstCombinedMetadataLists(i).Count
-                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(i).Item(i2).Key
-                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(i).Item(i2).Value)
+            For iLstIndex As Integer = 0 To lstCombinedMetadataLists.Count - 1
+                'Note, in the dictionary
+                'Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) 
+                For iDctIndex As Integer = 0 To lstCombinedMetadataLists(iLstIndex).Count - 1
+                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Key
+                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Value)
                 Next
             Next
         End If
 
         Return strSelectorFillCondition
     End Function
+
     Private Function GetVariablesInReceiver() As List(Of String)
         Dim lstVars As New List(Of String)
 
@@ -210,11 +208,6 @@ Public Class ucrSelector
         lstVariablesInReceivers.Clear()
         LoadList()
         'lstItemsInReceivers.Clear()
-    End Sub
-
-    Public Overridable Sub SetIncludeOverall(bInclude As Boolean)
-        bIncludeOverall = bInclude
-        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)

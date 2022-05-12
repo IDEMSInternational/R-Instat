@@ -24,7 +24,7 @@ Public Class dlgFindNonnumericValues
     Private strSelectedDataFrame As String = ""
     Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsAsCharacterFunction, clsSummaryFunction As New RFunction
     Private clsNonNumericCalcFunc, clsNonNumericFilterFunc, clsRunCalcFunction, clslSubCalcListFunc, clsGetColumnsFunction As New RFunction
-    Private clsCurrRunCalc As RFunction
+    Private clsCurrRunCalc As New RFunction
     Private clsNotEqualToOperator As New ROperator
     Private strCurrDataName As String
 
