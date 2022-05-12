@@ -1488,8 +1488,6 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
         dplyr::mutate_at(vars(-c(value)), tidyr::replace_na, margin_name) %>%
         dplyr::mutate_at(vars(-c(value)), ~forcats::as_factor(forcats::fct_relevel(.x, margin_name, after = Inf)))
-      
-      
     }
   }
   shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = as.numeric(as.character(value)),
