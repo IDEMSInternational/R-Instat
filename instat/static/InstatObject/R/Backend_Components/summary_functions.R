@@ -1460,7 +1460,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
           }
           summary_margins <- summary_margins %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
           summary_margins <- summary_margins %>%
-            tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
+          tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
         }
       }
     } else {
