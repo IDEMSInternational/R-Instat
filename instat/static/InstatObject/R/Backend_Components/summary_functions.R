@@ -1363,7 +1363,6 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   cell_values <- cell_values %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
   cell_values <- cell_values %>%
     tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
-  #cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "summary-variable", value.name = "value")
   if (treat_columns_as_factor && !is.null(columns_to_summarise)) {
     cell_values <- cell_values %>%
       tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "__")
