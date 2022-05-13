@@ -786,20 +786,13 @@ Public Class dlgNewDataFrame
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
         End If
     End Sub
-    'Private Sub SelectCategory()
-    '    If strSelectedCategory <> ucrInputCategory.GetText() Then
-    '        strSelectedCategory = ucrInputCategory.GetText()
-    '        LoadLists(strSelectedCategory)
-    '        TestOKEnabled()
-    '    End If
-    'End Sub
+
     Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged, ucrInputListInCategory.ControlValueChanged
         clsCorporaFunction.ClearParameters()
         If ucrChangedControl Is ucrInputCategory Then
             LoadLists()
         End If
         If ucrInputCategory.GetText = "" Then
-            'TODO restrict ucrInputListInCategory.GetText<>"" in TESTOK
             clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputListInCategory.GetText & Chr(34),
                                             bIncludeArgumentName:=False, iPosition:=0)
         Else
