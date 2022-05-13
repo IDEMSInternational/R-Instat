@@ -51,8 +51,8 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.rdoTwoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
-        Me.lbSecondOpt = New System.Windows.Forms.Label()
-        Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.lblFirstGroupByFactor = New System.Windows.Forms.Label()
+        Me.lblSecondGroupByFactor = New System.Windows.Forms.Label()
         Me.lblNumericVariable = New System.Windows.Forms.Label()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.grpTwoVariablePercentages = New System.Windows.Forms.GroupBox()
@@ -83,6 +83,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableMultiplePercentages = New instat.ucrReceiverMultiple()
         Me.ucrChkThreeVariablePercentageProportion = New instat.ucrCheck()
         Me.ucrChkThreeVariableDisplayAsPercentage = New instat.ucrCheck()
+        Me.lblThreeVariableSecondFactor = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpTwoVariablePercentages.SuspendLayout()
@@ -235,25 +236,25 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSkim.UseVisualStyleBackColor = True
         '
-        'lbSecondOpt
+        'lblFirstGroupByFactor
         '
-        Me.lbSecondOpt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbSecondOpt.Location = New System.Drawing.Point(271, 163)
-        Me.lbSecondOpt.Name = "lbSecondOpt"
-        Me.lbSecondOpt.Size = New System.Drawing.Size(100, 15)
-        Me.lbSecondOpt.TabIndex = 6
-        Me.lbSecondOpt.Tag = ""
-        Me.lbSecondOpt.Text = "Factor (Optional) :"
+        Me.lblFirstGroupByFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstGroupByFactor.Location = New System.Drawing.Point(268, 164)
+        Me.lblFirstGroupByFactor.Name = "lblFirstGroupByFactor"
+        Me.lblFirstGroupByFactor.Size = New System.Drawing.Size(100, 15)
+        Me.lblFirstGroupByFactor.TabIndex = 6
+        Me.lblFirstGroupByFactor.Tag = ""
+        Me.lblFirstGroupByFactor.Text = "Factor (Optional) :"
         '
-        'lblSecondFactor
+        'lblSecondGroupByFactor
         '
-        Me.lblSecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondFactor.Location = New System.Drawing.Point(270, 206)
-        Me.lblSecondFactor.Name = "lblSecondFactor"
-        Me.lblSecondFactor.Size = New System.Drawing.Size(137, 15)
-        Me.lblSecondFactor.TabIndex = 8
-        Me.lblSecondFactor.Tag = ""
-        Me.lblSecondFactor.Text = "Second Factor (Optional) :"
+        Me.lblSecondGroupByFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondGroupByFactor.Location = New System.Drawing.Point(270, 206)
+        Me.lblSecondGroupByFactor.Name = "lblSecondGroupByFactor"
+        Me.lblSecondGroupByFactor.Size = New System.Drawing.Size(137, 15)
+        Me.lblSecondGroupByFactor.TabIndex = 8
+        Me.lblSecondGroupByFactor.Tag = ""
+        Me.lblSecondGroupByFactor.Text = "Second Factor (Optional) :"
         '
         'lblNumericVariable
         '
@@ -605,12 +606,23 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkThreeVariableDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkThreeVariableDisplayAsPercentage.TabIndex = 0
         '
+        'lblThreeVariableSecondFactor
+        '
+        Me.lblThreeVariableSecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblThreeVariableSecondFactor.Location = New System.Drawing.Point(268, 164)
+        Me.lblThreeVariableSecondFactor.Name = "lblThreeVariableSecondFactor"
+        Me.lblThreeVariableSecondFactor.Size = New System.Drawing.Size(100, 15)
+        Me.lblThreeVariableSecondFactor.TabIndex = 27
+        Me.lblThreeVariableSecondFactor.Tag = ""
+        Me.lblThreeVariableSecondFactor.Text = "Second Variable :"
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(419, 491)
+        Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.Controls.Add(Me.grpThreeVariablePercentages)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverThreeVariableFirstFactor)
@@ -620,10 +632,10 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.grpTwoVariablePercentages)
         Me.Controls.Add(Me.lblNumericVariable)
         Me.Controls.Add(Me.ucrReceiverNumericVariable)
-        Me.Controls.Add(Me.lblSecondFactor)
+        Me.Controls.Add(Me.lblSecondGroupByFactor)
         Me.Controls.Add(Me.ucrReceiverSecondSkimrGroupByFactor)
         Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.lbSecondOpt)
+        Me.Controls.Add(Me.lblFirstGroupByFactor)
         Me.Controls.Add(Me.ucrReceiverSkimrGroupByFactor)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.rdoTwoVariable)
@@ -675,8 +687,8 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrReceiverSkimrGroupByFactor As ucrReceiverSingle
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents rdoTwoVariable As RadioButton
-    Friend WithEvents lbSecondOpt As Label
-    Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents lblFirstGroupByFactor As Label
+    Friend WithEvents lblSecondGroupByFactor As Label
     Friend WithEvents ucrReceiverSecondSkimrGroupByFactor As ucrReceiverSingle
     Friend WithEvents lblNumericVariable As Label
     Friend WithEvents ucrReceiverNumericVariable As ucrReceiverSingle
@@ -701,4 +713,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrReceiverThreeVariableMultiplePercentages As ucrReceiverMultiple
     Friend WithEvents ucrChkThreeVariablePercentageProportion As ucrCheck
     Friend WithEvents ucrChkThreeVariableDisplayAsPercentage As ucrCheck
+    Friend WithEvents lblThreeVariableSecondFactor As Label
 End Class

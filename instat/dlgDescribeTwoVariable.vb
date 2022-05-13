@@ -73,17 +73,16 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSkimrGroupByFactor.bWithQuotes = False
         ucrReceiverSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverSkimrGroupByFactor.SetLinkedDisplayControl(lbSecondOpt)
+        ucrReceiverSkimrGroupByFactor.SetLinkedDisplayControl(lblFirstGroupByFactor)
         ucrReceiverSkimrGroupByFactor.SetDataType("factor")
 
         ucrReceiverSecondSkimrGroupByFactor.SetParameter(New RParameter("second_factor", 3, bNewIncludeArgumentName:=False))
         ucrReceiverSecondSkimrGroupByFactor.bWithQuotes = False
         ucrReceiverSecondSkimrGroupByFactor.SetParameterIsString()
         ucrReceiverSecondSkimrGroupByFactor.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondFactor)
+        ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondGroupByFactor)
         ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor")
 
-        ucrReceiverNumericVariable.SetParameter(New RParameter("factor_two", 2, bNewIncludeArgumentName:=False))
         ucrReceiverNumericVariable.SetParameterIsString()
         ucrReceiverNumericVariable.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverNumericVariable.SetLinkedDisplayControl(lblNumericVariable)
@@ -108,8 +107,8 @@ Public Class dlgDescribeTwoVariable
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverFirstVars}, {rdoTwoVariable, rdoSkim}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableFirstFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim, rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDescribe.AddToLinkedControls({ucrReceiverNumericVariable}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverNumericVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondTwoVariableFactor}, {rdoTwoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableSecondFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -125,10 +124,11 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableFirstFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverThreeVariableFirstFactor.SetIncludedDataTypes({"factor"})
 
-        ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 4, bNewIncludeArgumentName:=False))
+        ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
         ucrReceiverThreeVariableSecondFactor.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverThreeVariableSecondFactor.SetLinkedDisplayControl(lblThreeVariableSecondFactor)
 
         ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 2))
         ucrReceiverPercentages.SetParameterIsString()
@@ -233,7 +233,7 @@ Public Class dlgDescribeTwoVariable
 
         clsCombineFrequencyFactorParameterFunction.SetRCommand("c")
         clsCombineFrequencyFactorParameterFunction.AddParameter("factor_by", ".x",
-                                                                iPosition:=1, bIncludeArgumentName:=False)
+                                                                iPosition:=3, bIncludeArgumentName:=False)
 
         clsEmptyOperator.SetOperation("")
         clsEmptyOperator.AddParameter("multiple_receiver_cols", "multiple_receiver_cols", iPosition:=0)
@@ -348,7 +348,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsRAnovaFunction, New RParameter("y_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsRCorrelationFunction, New RParameter("y_col_name", 2), iAdditionalPairNo:=2)
-        ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsCombineFrequencyFactorParameterFunction, New RParameter("factor_one", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsCombineFrequencyFactorParameterFunction, New RParameter("factor_one", 2, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRAnovaFunction, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelationFunction, New RParameter("x_col_names", 1), iAdditionalPairNo:=2)
@@ -371,13 +371,9 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayAsPercentage.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
-
         ucrChkThreeVariableDisplayAsPercentage.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
         ucrReceiverThreeVariableMultiplePercentages.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
         ucrChkThreeVariablePercentageProportion.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
-
-
-        ucrReceiverNumericVariable.SetRCode(clsCombineFrequencyFactorParameterFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsCombineFrequencyFactorParameterFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrNudSigFigs.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -513,7 +509,6 @@ Public Class dlgDescribeTwoVariable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
                 ucrReceiverSecondTwoVariableFactor.ControlContentsChanged, ucrPnlDescribe.ControlContentsChanged,
                 ucrReceiverThreeVariableFirstFactor.ControlValueChanged, ucrReceiverThreeVariableSecondFactor.ControlValueChanged
-
         If rdoTwoVariable.Checked Then
             If Not ucrReceiverFirstVars.IsEmpty AndAlso (ucrChangedControl Is ucrReceiverFirstVars OrElse ucrChangedControl Is ucrReceiverSecondTwoVariableFactor) Then
                 Dim iPosition As Integer = 0
@@ -547,7 +542,6 @@ Public Class dlgDescribeTwoVariable
                                                        bIncludeArgumentName:=False, iPosition:=iPosition)
             End If
         End If
-
         SwapMmtableHeaderFunctions()
         Results()
         EnableDisableFrequencyControls()
@@ -567,10 +561,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
         ucrReceiverFirstVars.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
-        clsRenameCombineFunction.RemoveParameterByName("by_var")
-        clsRenameCombineFunction.RemoveParameterByName("second")
-        clsRenameCombineFunction.RemoveParameterByName("third")
-        clsRenameCombineFunction.RemoveParameterByName("fifth")
+
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
@@ -579,16 +570,33 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummaryFunction)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
-            clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
-            clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
         Else
-            clsRenameCombineFunction.AddParameter("second", "2", iPosition:=1)
-            clsRenameCombineFunction.AddParameter("by_var", "3", iPosition:=2, bIncludeArgumentName:=False)
-            clsRenameCombineFunction.AddParameter("fifth", "5", iPosition:=4, bIncludeArgumentName:=False)
             ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
         End If
+        UpdateClsRenameCombineFunction()
         ChangeLocations()
+        UpdateClsCombineFrequencyFactorParameterFunction()
+    End Sub
+
+    Private Sub UpdateClsRenameCombineFunction()
+        clsRenameCombineFunction.RemoveParameterByName("by_var")
+        clsRenameCombineFunction.RemoveParameterByName("second")
+        clsRenameCombineFunction.RemoveParameterByName("third")
+        clsRenameCombineFunction.RemoveParameterByName("fifth")
+        If rdoThreeVariable.Checked Then
+            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+                clsRenameCombineFunction.AddParameter("second", "2", iPosition:=1, bIncludeArgumentName:=False)
+                clsRenameCombineFunction.AddParameter("by_var", "3", iPosition:=2)
+                clsRenameCombineFunction.AddParameter("fifth", "5", iPosition:=4, bIncludeArgumentName:=False)
+            ElseIf ucrReceiverNumericVariable.strCurrDataType = "numeric" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+                clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
+                clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
+            End If
+        ElseIf rdoThreeVariable.Checked Then
+            clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
+            clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
+        End If
     End Sub
 
     Private Sub ChangeLocations()
@@ -721,7 +729,6 @@ Public Class dlgDescribeTwoVariable
                 Next
             End If
         End If
-
     End Sub
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
@@ -763,7 +770,22 @@ Public Class dlgDescribeTwoVariable
         clsFrequencyTablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
+    Private Sub UpdateClsCombineFrequencyFactorParameterFunction()
+        clsCombineFrequencyFactorParameterFunction.RemoveParameterByName("factor_two")
+        clsFrequencyTablesFunction.RemoveParameterByName("columns_to_summarise")
+        If rdoThreeVariable.Checked Then
+            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+                clsCombineFrequencyFactorParameterFunction.AddParameter("factor_two", ucrReceiverNumericVariable.GetVariableNames(),
+                                                                       iPosition:=1, bIncludeArgumentName:=False)
+            ElseIf ucrReceiverNumericVariable.strCurrDataType = "numeric" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+                clsFrequencyTablesFunction.AddParameter("columns_to_summarise", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=3)
+            End If
+        End If
+    End Sub
+
     Private Sub ucrReceiverNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumericVariable.ControlValueChanged
+        UpdateClsRenameCombineFunction()
+        UpdateClsCombineFrequencyFactorParameterFunction()
         SwapMmtableHeaderFunctions()
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
