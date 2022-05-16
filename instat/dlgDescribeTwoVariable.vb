@@ -593,7 +593,7 @@ Public Class dlgDescribeTwoVariable
                 clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
                 clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
             End If
-        ElseIf rdoThreeVariable.Checked Then
+        ElseIf rdoTwoVariable.Checked Then
             clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
             clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
         End If
@@ -614,7 +614,8 @@ Public Class dlgDescribeTwoVariable
                 Me.Size = New Point(iDialogueXsize, 425)
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
+            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
+                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
                 Not ucrReceiverNumericVariable.IsEmpty Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
                 Me.Size = New Point(iDialogueXsize, 530)
@@ -650,13 +651,17 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoSkim.Checked Then
             DisableFrequencyControls()
         Else
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
+            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
+                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
                 Not ucrReceiverNumericVariable.IsEmpty Then
-                grpThreeVariablePercentages.Visible = True
-                grpTwoVariablePercentages.Visible = False
                 grpFrequency.Visible = True
-                ucrChkDisplayMargins.Visible = True
-                ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
+                If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+                    grpThreeVariablePercentages.Visible = True
+                    grpTwoVariablePercentages.Visible = False
+                    ucrChkDisplayMargins.Visible = True
+                    ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
+                End If
+
             Else
                 ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
                 DisableFrequencyControls()
@@ -698,12 +703,14 @@ Public Class dlgDescribeTwoVariable
                 End If
             End If
             If Not ucrReceiverNumericVariable.IsEmpty Then
-                If ucrNudColumnFactors.GetText = 1 Then
-                    clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
-                    clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
-                ElseIf ucrNudColumnFactors.GetText = 2 Then
-                    clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
-                    clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
+                If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+                    If ucrNudColumnFactors.GetText = 1 Then
+                        clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                        clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
+                    ElseIf ucrNudColumnFactors.GetText = 2 Then
+                        clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                        clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
+                    End If
                 End If
             End If
         End If
@@ -723,9 +730,17 @@ Public Class dlgDescribeTwoVariable
             For Each strParameter In lstFrequencyParameters
                 clsFrequencyTablesFunction.RemoveParameterByName(strParameter)
             Next
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
+                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
+                Not ucrReceiverNumericVariable.IsEmpty Then
                 For Each clsParameter In clsThreeVariableCombineFrequencyParametersFunction.clsParameters
-                    clsFrequencyTablesFunction.AddParameter(clsParameter)
+                    If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+                        clsFrequencyTablesFunction.AddParameter(clsParameter)
+                    ElseIf clsParameter.strArgumentName = "signif_fig" OrElse
+                        clsParameter.strArgumentName = "include_margins" OrElse
+                          clsParameter.strArgumentName = "margin_name" Then
+                        clsFrequencyTablesFunction.AddParameter(clsParameter)
+                    End If
                 Next
             End If
         End If
