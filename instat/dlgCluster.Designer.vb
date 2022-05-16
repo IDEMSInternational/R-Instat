@@ -38,6 +38,8 @@ Partial Class dlgCluster
         Me.ucrPnlSelectData = New instat.UcrPanel()
         Me.ucrPnlPrepareData = New instat.UcrPanel()
         Me.ucrChkMatrix = New instat.ucrCheck()
+        Me.ucrNudPowerOption = New instat.ucrNud()
+        Me.lblPowerOption = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoWholeDataFrame
@@ -100,11 +102,11 @@ Partial Class dlgCluster
         '
         Me.lblMethod.AutoSize = True
         Me.lblMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMethod.Location = New System.Drawing.Point(280, 262)
+        Me.lblMethod.Location = New System.Drawing.Point(267, 239)
         Me.lblMethod.Name = "lblMethod"
-        Me.lblMethod.Size = New System.Drawing.Size(43, 13)
+        Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 21
-        Me.lblMethod.Text = "Method"
+        Me.lblMethod.Text = "Method:"
         '
         'ucrInputMethod
         '
@@ -112,7 +114,7 @@ Partial Class dlgCluster
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(280, 279)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(267, 257)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMethod.TabIndex = 22
@@ -211,12 +213,36 @@ Partial Class dlgCluster
         Me.ucrChkMatrix.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkMatrix.TabIndex = 20
         '
+        'ucrNudPowerOption
+        '
+        Me.ucrNudPowerOption.AutoSize = True
+        Me.ucrNudPowerOption.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPowerOption.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPowerOption.Location = New System.Drawing.Point(347, 295)
+        Me.ucrNudPowerOption.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPowerOption.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPowerOption.Name = "ucrNudPowerOption"
+        Me.ucrNudPowerOption.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPowerOption.TabIndex = 23
+        Me.ucrNudPowerOption.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblPowerOption
+        '
+        Me.lblPowerOption.AutoSize = True
+        Me.lblPowerOption.Location = New System.Drawing.Point(267, 297)
+        Me.lblPowerOption.Name = "lblPowerOption"
+        Me.lblPowerOption.Size = New System.Drawing.Size(74, 13)
+        Me.lblPowerOption.TabIndex = 24
+        Me.lblPowerOption.Text = "Power Option:"
+        '
         'dlgCluster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 425)
+        Me.Controls.Add(Me.lblPowerOption)
+        Me.Controls.Add(Me.ucrNudPowerOption)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrBase)
@@ -260,4 +286,6 @@ Partial Class dlgCluster
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrChkMatrix As ucrCheck
+    Friend WithEvents lblPowerOption As Label
+    Friend WithEvents ucrNudPowerOption As ucrNud
 End Class
