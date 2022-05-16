@@ -315,11 +315,37 @@ Public Class dlgClimaticStationMaps
         End If
     End Sub
 
+    Private Sub toolStripMenuItemSFOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemSFOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsSfAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorOutline, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+        For Each clsParam In clsSfAesFunction.clsParameters
+            If clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
+            End If
+        Next
+    End Sub
+
+    Private Sub toolStripMenuItemMapping_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemMapping.Click
+        sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
+        sdgMapOption.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsGGplotOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction,
+                  dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
+                  clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction,
+                  clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                  clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
     Private Sub ucrReceiverFill_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-
 
     Private Sub ucrReceiverFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
         If Not ucrReceiverFacet.IsEmpty AndAlso ucrChkAddPoints.Checked Then
@@ -332,10 +358,10 @@ Public Class dlgClimaticStationMaps
     Private Sub ChangeSize()
         If ucrChkAddPoints.Checked Then
             grpPoints.Visible = True
-            Me.Size = New Size(772, 480)
+            Me.Size = New Size(772, 401)
         Else
             grpPoints.Visible = False
-            Me.Size = New Size(428, 480)
+            Me.Size = New Size(439, 401)
         End If
     End Sub
 

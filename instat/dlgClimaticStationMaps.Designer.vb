@@ -22,6 +22,7 @@ Partial Class dlgClimaticStationMaps
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.cmdMapOptions = New System.Windows.Forms.Button()
         Me.cmdSFOptions = New System.Windows.Forms.Button()
@@ -48,13 +49,18 @@ Partial Class dlgClimaticStationMaps
         Me.lblFill = New System.Windows.Forms.Label()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrSelectorOutline = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemSFOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemMapping = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.grpPoints.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 263)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(526, 328)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdPlotOptions.TabIndex = 12
@@ -63,7 +69,7 @@ Partial Class dlgClimaticStationMaps
         '
         'cmdMapOptions
         '
-        Me.cmdMapOptions.Location = New System.Drawing.Point(10, 322)
+        Me.cmdMapOptions.Location = New System.Drawing.Point(526, 387)
         Me.cmdMapOptions.Name = "cmdMapOptions"
         Me.cmdMapOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdMapOptions.TabIndex = 14
@@ -72,7 +78,7 @@ Partial Class dlgClimaticStationMaps
         '
         'cmdSFOptions
         '
-        Me.cmdSFOptions.Location = New System.Drawing.Point(10, 293)
+        Me.cmdSFOptions.Location = New System.Drawing.Point(526, 358)
         Me.cmdSFOptions.Name = "cmdSFOptions"
         Me.cmdSFOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdSFOptions.TabIndex = 13
@@ -82,7 +88,7 @@ Partial Class dlgClimaticStationMaps
         'ucrSaveMap
         '
         Me.ucrSaveMap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveMap.Location = New System.Drawing.Point(8, 356)
+        Me.ucrSaveMap.Location = New System.Drawing.Point(10, 273)
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
         Me.ucrSaveMap.Size = New System.Drawing.Size(320, 22)
@@ -92,10 +98,10 @@ Partial Class dlgClimaticStationMaps
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 387)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 306)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
         'grpPoints
@@ -279,7 +285,7 @@ Partial Class dlgClimaticStationMaps
         Me.grpMapOutline.Controls.Add(Me.ucrSelectorOutline)
         Me.grpMapOutline.Location = New System.Drawing.Point(10, 12)
         Me.grpMapOutline.Name = "grpMapOutline"
-        Me.grpMapOutline.Size = New System.Drawing.Size(357, 245)
+        Me.grpMapOutline.Size = New System.Drawing.Size(357, 213)
         Me.grpMapOutline.TabIndex = 22
         Me.grpMapOutline.TabStop = False
         Me.grpMapOutline.Text = "Map Outline"
@@ -349,11 +355,43 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSelectorOutline.Size = New System.Drawing.Size(220, 189)
         Me.ucrSelectorOutline.TabIndex = 3
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(128, 48)
+        '
+        'toolStripMenuItemSFOptions
+        '
+        Me.toolStripMenuItemSFOptions.Name = "toolStripMenuItemSFOptions"
+        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(127, 22)
+        Me.toolStripMenuItemSFOptions.Text = "Shape File"
+        '
+        'toolStripMenuItemMapping
+        '
+        Me.toolStripMenuItemMapping.Name = "toolStripMenuItemMapping"
+        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(127, 22)
+        Me.toolStripMenuItemMapping.Text = "Mapping"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 232)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 24
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(756, 441)
+        Me.ClientSize = New System.Drawing.Size(756, 362)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
         Me.Controls.Add(Me.cmdSFOptions)
@@ -371,6 +409,7 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.PerformLayout()
         Me.grpMapOutline.ResumeLayout(False)
         Me.grpMapOutline.PerformLayout()
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -401,4 +440,8 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents ucrReceiverGeometry As ucrReceiverSingle
     Friend WithEvents ucrChkAddPoints As ucrCheck
     Friend WithEvents Label1 As Label
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemSFOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemMapping As ToolStripMenuItem
 End Class
