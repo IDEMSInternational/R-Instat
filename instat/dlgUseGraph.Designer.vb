@@ -51,9 +51,9 @@ Partial Class dlgRenameGraph
         Me.lblGraphtoUse.AutoSize = True
         Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 45)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(94, 13)
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
         Me.lblGraphtoUse.TabIndex = 1
-        Me.lblGraphtoUse.Text = "Graph to Rename:"
+        Me.lblGraphtoUse.Text = "Graph to Use:"
         '
         'cmdPlotOptions
         '
@@ -61,7 +61,7 @@ Partial Class dlgRenameGraph
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(147, 23)
         Me.cmdPlotOptions.TabIndex = 3
-        Me.cmdPlotOptions.Text = "Options"
+        Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
@@ -125,7 +125,7 @@ Partial Class dlgRenameGraph
         Me.Name = "dlgRenameGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"
-        Me.Text = "Rename Graph"
+        Me.Text = "Use Graph"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
