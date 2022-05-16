@@ -678,15 +678,14 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       if(adjacent_column == "") adjacent_position <- self$get_column_count()
       else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
-
   # Replace existing names with empty placeholders. Maintains the indices
-  temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "")
+  temp_all_col_names <- replace(self$get_column_names(use_current_column_selection = FALSE), self$get_column_names(use_current_column_selection = FALSE) %in% new_col_names, "")
   # Append the newly added column names after the set position
   new_col_names_order <- append(temp_all_col_names, new_col_names, adjacent_position)
   # Remove all empty characters placeholders to get final reordered column names
   new_col_names_order <- new_col_names_order[! new_col_names_order == ""]
   # Only do reordering if the column names order differ
-  if(!all(self$get_column_names() == new_col_names_order)) self$reorder_columns_in_data(col_order=new_col_names_order)
+if(!all(self$get_column_names(use_current_column_selection = FALSE) == new_col_names_order)) self$reorder_columns_in_data(col_order=new_col_names_order)
 }
 )
 
@@ -1192,7 +1191,7 @@ DataSheet$set("public", "get_next_default_column_name", function(prefix) {
 )
 
 DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
-  if (ncol(self$get_data_frame(use_current_filter = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
+  if (ncol(self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
   if(is.numeric(col_order)) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
