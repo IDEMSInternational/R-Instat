@@ -236,7 +236,7 @@ Public Class dlgMergeAdditionalData
         Dim clsAnyDuplicatesFunction As New RFunction
         Dim iAnyDuplicated As Integer
 
-        If ucrInputMergingBy.GetText <> "" Then
+        If ucrInputMergingBy.GetText <> "" AndAlso lstJoinColumns.Count > 0 Then
             clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstJoinColumns, bWithQuotes:=True), iPosition:=1)
             clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
             clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunction)
