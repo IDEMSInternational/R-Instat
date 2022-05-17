@@ -81,7 +81,7 @@ Public Class dlgHeatMapPlot
         ucrPnlOptions.AddParameterPresentCondition(rdoChoroplethMap, "geom_tile", False)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLabels, ucrChkColourPalette}, {rdoHeatMap, rdoChoroplethMap})
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverPointsChoropleth, ucrReceiverFillChoropleth, ucrReceiverLongitude, ucrReceiverLatitude}, {rdoChoroplethMap}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverPointsChoropleth, ucrReceiverFillChoropleth, ucrReceiverLongitude, ucrReceiverLatitude, ucrReceiverGroup}, {rdoChoroplethMap}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkColourPalette, ucrChkFlipCoordinates, ucrInputReorderValue, ucrReceiverPointsHeatMap, ucrReceiverFill, ucrInputReorderVariableX, ucrReceiverX, ucrVariableAsFactorForHeatMap}, {rdoHeatMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverX.SetLinkedDisplayControl(lblXVariable)
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
@@ -90,6 +90,7 @@ Public Class dlgHeatMapPlot
         ucrReceiverFillChoropleth.SetLinkedDisplayControl(lblFillChoropleth)
         ucrReceiverPointsHeatMap.SetLinkedDisplayControl(lblPointsOptional)
         ucrReceiverPointsChoropleth.SetLinkedDisplayControl(lblPointsChoropleth)
+        ucrReceiverGroup.SetLinkedDisplayControl(lblGroup)
 
         ucrHeatMapSelector.SetParameter(New RParameter("data", 0))
         ucrHeatMapSelector.SetParameterIsrfunction()
@@ -114,6 +115,12 @@ Public Class dlgHeatMapPlot
         ucrReceiverFillChoropleth.SetParameter(New RParameter("fill", 2))
         ucrReceiverFillChoropleth.SetParameterIsString()
         ucrReceiverFillChoropleth.bWithQuotes = False
+
+        ucrReceiverGroup.Selector = ucrHeatMapSelector
+        ucrReceiverGroup.SetParameter(New RParameter("group", 0))
+        ucrReceiverGroup.SetParameterIsString()
+        ucrReceiverGroup.bWithQuotes = False
+
 
         ucrVariableAsFactorForHeatMap.Selector = ucrHeatMapSelector
         ucrVariableAsFactorForHeatMap.SetFactorReceiver(ucrReceiverX)
@@ -292,8 +299,8 @@ Public Class dlgHeatMapPlot
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
-        clsLabelAesFunction.AddParameter("long", "long", iPosition:=0)
-        clsLabelAesFunction.AddParameter("lat", "lat", iPosition:=1)
+        clsLabelAesFunction.AddParameter("x", "long", iPosition:=0)
+        clsLabelAesFunction.AddParameter("y", "lat", iPosition:=1)
         clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=2)
 
         clsRoundFunction.SetRCommand("round")
@@ -311,10 +318,13 @@ Public Class dlgHeatMapPlot
 
         clsGeomPointSizeChoroplethFunction.SetPackageName("ggplot2")
         clsGeomPointSizeChoroplethFunction.SetRCommand("geom_point")
-        clsGeomPointSizeChoroplethFunction.AddParameter("mapping", clsRFunctionParameter:=clsSizeChoroplethAesFunction, iPosition:=0)
+        clsGeomPointSizeChoroplethFunction.AddParameter("data", clsRFunctionParameter:=clsAggregateFunction, iPosition:=0)
+        clsGeomPointSizeChoroplethFunction.AddParameter("mapping", clsRFunctionParameter:=clsSizeChoroplethAesFunction, iPosition:=1)
 
         clsSizeChoroplethAesFunction.SetPackageName("ggplot2")
         clsSizeChoroplethAesFunction.SetRCommand("aes")
+        clsSizeChoroplethAesFunction.AddParameter("x", "long", iPosition:=0)
+        clsSizeChoroplethAesFunction.AddParameter("y", "lat", iPosition:=1)
 
         clsGeomPointShapeHeatMapFunction.SetPackageName("ggplot2")
         clsGeomPointShapeHeatMapFunction.SetRCommand("geom_point")
@@ -341,7 +351,6 @@ Public Class dlgHeatMapPlot
 
         clsGroupFunction.SetPackageName("ggplot2")
         clsGroupFunction.SetRCommand("aes")
-        clsGroupFunction.AddParameter("group", "group", iPosition:=0)
 
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
@@ -376,6 +385,7 @@ Public Class dlgHeatMapPlot
         clsCBindFunction.SetRCommand("cbind")
         clsCBindFunction.AddParameter("long", "long", iPosition:=0)
         clsCBindFunction.AddParameter("lat", "lat", iPosition:=1)
+
 
         clsTildeOperator.SetOperation("~")
         clsTildeOperator.AddParameter("left", clsRFunctionParameter:=clsCBindFunction, iPosition:=0)
@@ -433,6 +443,7 @@ Public Class dlgHeatMapPlot
         ucrVariableAsFactorForHeatMap.SetRCode(clsHeatmapAesFunction, bReset)
         ucrReceiverFill.SetRCode(clsHeatmapAesFunction, bReset)
         ucrReceiverFillChoropleth.SetRCode(clsChoroplethAesFunction, bReset)
+        ucrReceiverGroup.SetRCode(clsGroupFunction, bReset)
         ucrChkAddLabels.SetRCode(clsBaseOperator, bReset)
         ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
@@ -440,7 +451,7 @@ Public Class dlgHeatMapPlot
         ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrReceiverPointsHeatMap.SetRCode(clsSizeHeatMapAesFunction, bReset)
-        ucrReceiverPointsChoropleth.SetRCode(clsGeomPointSizeChoroplethFunction, bReset)
+        ucrReceiverPointsChoropleth.SetRCode(clsSizeChoroplethAesFunction, bReset)
         ucrNudShapeHeatMap.SetRCode(clsGeomPointShapeHeatMapFunction, bReset)
         ucrNudShapeChoropleth.SetRCode(clsGeomPointShapeChoroplethFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
