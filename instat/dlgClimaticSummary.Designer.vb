@@ -79,7 +79,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnual.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnual.Location = New System.Drawing.Point(71, 14)
+        Me.rdoAnnual.Location = New System.Drawing.Point(12, 14)
         Me.rdoAnnual.Name = "rdoAnnual"
         Me.rdoAnnual.Size = New System.Drawing.Size(67, 27)
         Me.rdoAnnual.TabIndex = 1
@@ -96,7 +96,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWithinYear.Location = New System.Drawing.Point(222, 14)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(151, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoWithinYear.TabIndex = 3
@@ -113,7 +113,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnualWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(136, 14)
+        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(72, 14)
         Me.rdoAnnualWithinYear.Name = "rdoAnnualWithinYear"
         Me.rdoAnnualWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoAnnualWithinYear.TabIndex = 2
@@ -283,7 +283,7 @@ Partial Class dlgClimaticSummary
         Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(12, 14)
+        Me.rdoStation.Location = New System.Drawing.Point(308, 14)
         Me.rdoStation.Name = "rdoStation"
         Me.rdoStation.Size = New System.Drawing.Size(61, 27)
         Me.rdoStation.TabIndex = 22
@@ -300,7 +300,7 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDaily.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDaily.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDaily.Location = New System.Drawing.Point(308, 14)
+        Me.rdoDaily.Location = New System.Drawing.Point(224, 14)
         Me.rdoDaily.Name = "rdoDaily"
         Me.rdoDaily.Size = New System.Drawing.Size(88, 27)
         Me.rdoDaily.TabIndex = 23
@@ -416,7 +416,7 @@ Partial Class dlgClimaticSummary
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 422)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 21
         '
         'ucrPnlAnnualWithin
