@@ -68,22 +68,6 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddRadioButton(rdoStation)
         ucrPnlAnnualWithin.AddRadioButton(rdoDaily)
 
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "year", True)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "date", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "date", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "date", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "within_variable", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "year", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "date", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "within_variable", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "year", False)
-        'ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "date", True)
-
         ucrPnlAnnualWithin.AddParameterValuesCondition(rdoAnnual, "checked", "annual")
         ucrPnlAnnualWithin.AddParameterValuesCondition(rdoAnnualWithinYear, "checked", "annual_within_year")
         ucrPnlAnnualWithin.AddParameterValuesCondition(rdoWithinYear, "checked", "within_year")
@@ -252,7 +236,6 @@ Public Class dlgClimaticSummary
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
-        'ucrPnlAnnualWithin.SetRCode(clsDefaultFunction, bReset)
     End Sub
 
     'TODO: run these things at the correct times

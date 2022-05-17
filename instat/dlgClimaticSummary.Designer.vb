@@ -96,7 +96,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWithinYear.Location = New System.Drawing.Point(151, 14)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(163, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoWithinYear.TabIndex = 3
@@ -113,7 +113,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnualWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(72, 14)
+        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(77, 14)
         Me.rdoAnnualWithinYear.Name = "rdoAnnualWithinYear"
         Me.rdoAnnualWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoAnnualWithinYear.TabIndex = 2
@@ -300,9 +300,9 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDaily.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDaily.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDaily.Location = New System.Drawing.Point(224, 14)
+        Me.rdoDaily.Location = New System.Drawing.Point(249, 14)
         Me.rdoDaily.Name = "rdoDaily"
-        Me.rdoDaily.Size = New System.Drawing.Size(88, 27)
+        Me.rdoDaily.Size = New System.Drawing.Size(63, 27)
         Me.rdoDaily.TabIndex = 23
         Me.rdoDaily.TabStop = True
         Me.rdoDaily.Text = "Daily"
