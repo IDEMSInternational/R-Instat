@@ -35,6 +35,9 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlLikelihood.AddRadioButton(rdoLik, "FALSE")
         ucrPnlLikelihood.SetRDefault("TRUE")
 
+        ucrBase.iHelpTopicID = 114
+
+
         ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkPLotLogLik.AddToLinkedControls(ucrSaveLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkPLotLogLik.AddRSyntaxContainsFunctionNamesCondition(True, {"llplot"})

@@ -26,8 +26,8 @@ decimal_places_label="Decimal_Places"
 columns_label="columns"
 summarised_from_label="summarised_from"
 key_label="key"
-row_count_label="Row_Count"
-column_count_label="Column_Count"
+row_count_label="Rows"
+column_count_label="Columns"
 is_linkable="Is_Linkable"
 
 #variables_metadata labels

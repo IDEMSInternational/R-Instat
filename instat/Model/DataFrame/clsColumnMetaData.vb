@@ -15,24 +15,30 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+
 ''' <summary>
 ''' Holds Column Meta Data for a single dataframe
 ''' </summary>
 Public Class clsColumnMetaData
-    Private _strName As String
+    Private _strDataFrameName As String
     Private _RLink As RLink
-    Private _clsDataFrame As DataFrame
+    Private Property _clsColsMetadataDataFrame As DataFrame
     Private _hasChanged As Boolean
+
+    ''' <summary>
+    ''' holds the metadata change audit id
+    ''' </summary> 
+    Public Property MetadataChangeAuditId As Integer
 
     ''' <summary>
     ''' Returns data for a given cell within the Column Meta data table
     ''' </summary>
-    ''' <param name="row"></param>
-    ''' <param name="column"></param>
+    ''' <param name="iRowIndex"></param>
+    ''' <param name="iColumnIndex"></param>
     ''' <returns></returns>
-    Public ReadOnly Property Data(row As Integer, column As Integer) As Object
+    Public ReadOnly Property Data(iRowIndex As Integer, iColumnIndex As Integer) As Object
         Get
-            Return _clsDataFrame(row, column)
+            Return _clsColsMetadataDataFrame.Item(iRowIndex, iColumnIndex)
         End Get
     End Property
 
@@ -43,7 +49,7 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property strRowName(row As Integer) As String
         Get
-            Return _clsDataFrame.RowNames(row)
+            Return _clsColsMetadataDataFrame.RowNames(row)
         End Get
     End Property
 
@@ -53,7 +59,7 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property iRowCount As Integer
         Get
-            Return _clsDataFrame.RowCount
+            Return _clsColsMetadataDataFrame.RowCount
         End Get
     End Property
 
@@ -64,7 +70,7 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property strColumnName(column As Integer) As String
         Get
-            Return _clsDataFrame.ColumnNames(column)
+            Return _clsColsMetadataDataFrame.ColumnNames(column)
         End Get
     End Property
 
@@ -74,7 +80,7 @@ Public Class clsColumnMetaData
     ''' <returns></returns>
     Public ReadOnly Property iColumnCount As Integer
         Get
-            Return _clsDataFrame.ColumnCount
+            Return _clsColsMetadataDataFrame.ColumnCount
         End Get
     End Property
 
@@ -87,7 +93,7 @@ Public Class clsColumnMetaData
         Get
             Return _hasChanged
         End Get
-        Set(ByVal value As Boolean)
+        Set(value As Boolean)
             _hasChanged = value
         End Set
     End Property
@@ -99,7 +105,7 @@ Public Class clsColumnMetaData
     ''' <param name="strName"></param>
     Public Sub New(rLink As RLink, strName As String)
         _RLink = rLink
-        _strName = strName
+        _strDataFrameName = strName
         _hasChanged = True
     End Sub
 
@@ -107,7 +113,7 @@ Public Class clsColumnMetaData
         Dim clsVariablesMetadataChanged As New RFunction
         Dim expTemp As SymbolicExpression
         clsVariablesMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed")
-        clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & _strName & Chr(34))
+        clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         expTemp = _RLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsLogical(0)
@@ -121,19 +127,26 @@ Public Class clsColumnMetaData
     ''' </summary>
     Public Sub RefreshData()
         'Need to check to see if dataframe exists due to the column meta data not changing when sheets are un-hidden 
-        If _clsDataFrame Is Nothing Or HasDataChanged() Then
-            _clsDataFrame = GetDataFrameFromRCommand()
-            ResetDataFramesChanged()
+        If _clsColsMetadataDataFrame Is Nothing OrElse HasDataChanged() Then
+            _clsColsMetadataDataFrame = GetColsMetadataFromRCommand()
+            SetColsMetadataToNotChangedInR()
+
+            'this change number should eventually come from R
+            'once that is done;
+            'HasDataChanged() should be re-implemeted
+            'HasChanged property can be deleted
+            'SetColsMetadataToNotChangedInR() can be deleted
+            MetadataChangeAuditId += 1
         End If
     End Sub
 
-    Private Function GetDataFrameFromRCommand() As DataFrame
+    Private Function GetColsMetadataFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
         _hasChanged = True
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
-        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strName & Chr(34))
+        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         expTemp = _RLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsDataFrame
@@ -142,10 +155,10 @@ Public Class clsColumnMetaData
         End If
     End Function
 
-    Private Sub ResetDataFramesChanged()
+    Private Sub SetColsMetadataToNotChangedInR()
         Dim clsSetVariablesMetadataChanged As New RFunction
         clsSetVariablesMetadataChanged.SetRCommand(_RLink.strInstatDataObject & "$set_variables_metadata_changed")
-        clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & _strName & Chr(34))
+        clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         clsSetVariablesMetadataChanged.AddParameter("new_val", "FALSE")
         _RLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript(), bSilent:=True)
     End Sub

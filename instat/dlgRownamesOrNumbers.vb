@@ -20,6 +20,8 @@ Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRowNamesFunction As New RFunction
+    Private clsAddKeyFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,17 +58,12 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddRadioButton(rdoResetintoPositiveIntegers)
         ucrPnlOverallOptions.AddRadioButton(rdoSortbyRowNames)
 
-        ucrPnlOverallOptions.AddFunctionNamesCondition(rdoCopyRowNamesIntoFirstColumn, frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+        ucrPnlOverallOptions.AddParameterValuesCondition(rdoCopyRowNamesIntoFirstColumn, "checked_rdo", "copy_row")
+        ucrPnlOverallOptions.AddParameterValuesCondition(rdoSetRowNamesFromColumn, "checked_rdo", "set_row")
+        ucrPnlOverallOptions.AddParameterValuesCondition(rdoResetintoPositiveIntegers, "checked_rdo", "reset_row")
+        ucrPnlOverallOptions.AddParameterValuesCondition(rdoSortbyRowNames, "checked_rdo", "sort_row")
 
-        ucrPnlOverallOptions.AddFunctionNamesCondition(rdoSetRowNamesFromColumn, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-        ucrPnlOverallOptions.AddParameterPresentCondition(rdoSetRowNamesFromColumn, "row_names")
-
-        ucrPnlOverallOptions.AddFunctionNamesCondition(rdoResetintoPositiveIntegers, frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-        ucrPnlOverallOptions.AddParameterPresentCondition(rdoResetintoPositiveIntegers, "row_names", bNewIsPositive:=False)
-
-        ucrPnlOverallOptions.AddFunctionNamesCondition(rdoSortbyRowNames, frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
-
-        ucrPnlOverallOptions.AddToLinkedControls(ucrNewColumnName, {rdoCopyRowNamesIntoFirstColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOverallOptions.AddToLinkedControls({ucrNewColumnName, ucrChkMakeColumnIntoKey}, {rdoCopyRowNamesIntoFirstColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrReceiverRowNames, {rdoSetRowNamesFromColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrPnlSortOptions, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -88,28 +85,46 @@ Public Class dlgRowNamesOrNumbers
         ucrChkAsNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAsNumeric.SetRDefault("TRUE")
 
+        'ucrChkMakeColumnIntoKey
+        ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
+        ucrChkMakeColumnIntoKey.SetParameter(New RParameter("check", 0))
+        ucrChkMakeColumnIntoKey.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMakeColumnIntoKey.SetRDefault("TRUE")
+
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetPrefix("row")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
-        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
     End Sub
 
     Private Sub SetDefaults()
         clsRowNamesFunction = New RFunction
+        clsAddKeyFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
+        ucrBase.clsRsyntax.lstAfterCodes.Clear()
+
+        clsDummyFunction.AddParameter("check", "TRUE", iPosition:=0)
+        clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
+
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
 
         clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
+        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkAsNumeric.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorRowNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverRowNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOverallOptions.SetRCode(clsDummyFunction, bReset)
+        ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkMakeColumnIntoKey.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -126,20 +141,39 @@ Public Class dlgRowNamesOrNumbers
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged, ucrChkMakeColumnIntoKey.ControlValueChanged, ucrNewColumnName.ControlValueChanged
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
         If rdoSetRowNamesFromColumn.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+            clsDummyFunction.AddParameter("checked_rdo", "set_row", iPosition:=1)
             ucrSelectorRowNames.SetVariablesVisible(True)
         Else
             ucrSelectorRowNames.SetVariablesVisible(False)
             If rdoCopyRowNamesIntoFirstColumn.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+                clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
+                If ucrChkMakeColumnIntoKey.Checked Then
+                    clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
+                    ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
+                Else
+                    clsAddKeyFunction.RemoveParameterByName("col_names")
+                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+                End If
             ElseIf rdoResetintoPositiveIntegers.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+                clsDummyFunction.AddParameter("checked_rdo", "reset_row", iPosition:=1)
             ElseIf rdoSortbyRowNames.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+                clsDummyFunction.AddParameter("checked_rdo", "sort_row", iPosition:=1)
             End If
         End If
+        If Not rdoCopyRowNamesIntoFirstColumn.Checked Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorRowNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlValueChanged
+        clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSelectorRowNames.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged, ucrPnlOverallOptions.ControlContentsChanged, ucrReceiverRowNames.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged

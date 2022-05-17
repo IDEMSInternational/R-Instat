@@ -20,13 +20,17 @@ Imports RDotNet
 Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSeqFunction, clsRepFunction As New RFunction
-    Private clsSeqDateFunction As New RFunction
-    Private bUpdateBy As Boolean = False
-    Private clsByDateOperator As New ROperator
-    Private clsDefaultStartDate As RFunction
-    Private clsDefaultEndDate As RFunction
-    Public bNumericIsDefault As Boolean
+    Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
+    Private clsByOperator As New ROperator
+    Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.NumericOption
+    Private bDefaultOptionChanged As Boolean = False
+    'used to determine if the preview script has changed and whether to reresh preview or not
+    Private strPreviewScript As String = ""
+
+    Private Enum DefaultSequenceOption
+        NumericOption
+        DateOption
+    End Enum
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,25 +40,46 @@ Public Class dlgRegularSequence
         If bReset Then
             SetDefaults()
         End If
-        SetDefaultRdo()
         SetRCodeForControls(bReset)
+
+        If bDefaultOptionChanged Then
+            SetSelectedDefaultSequenceOption()
+            bDefaultOptionChanged = False
+        End If
+
         bReset = False
         autoTranslate(Me)
     End Sub
-    'This sub is meant to set the default radiobutton on diffrent places on the Menu.
-    Private Sub SetDefaultRdo()
-        If bNumericIsDefault Then
-            rdoNumeric.Checked = True
-        Else
-            rdoDates.Checked = True
-        End If
+
+    Private Sub SetSelectedDefaultSequenceOption()
+        Select Case enumDefaultSequenceOption
+            Case DefaultSequenceOption.NumericOption
+                rdoNumeric.Checked = True
+            Case DefaultSequenceOption.DateOption
+                rdoDates.Checked = True
+        End Select
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'numeric' option as the default option
+    ''' </summary>
+    Public Sub SetNumericSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.NumericOption
+        bDefaultOptionChanged = True
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'numeric' option as the default option
+    ''' </summary>
+    Public Sub SetDateSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.DateOption
+        bDefaultOptionChanged = True
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctDatesBy As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 30
-
+        '-------------- seq controls -----------------------
         ucrInputFrom.SetParameter(New RParameter("from", 0))
         ucrInputFrom.AddQuotesIfUnrecognised = False
         ucrInputFrom.SetValidationTypeAsNumeric()
@@ -63,170 +88,141 @@ Public Class dlgRegularSequence
         ucrInputTo.AddQuotesIfUnrecognised = False
         ucrInputTo.SetValidationTypeAsNumeric()
 
-        ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
-        ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False)
-
-        ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
-        ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
-
+        '--------------- seq.Date controls ---------------
         ucrDateTimePickerFrom.SetParameter(New RParameter("from", 0))
         ucrDateTimePickerFrom.SetParameterIsRDate()
 
         ucrDateTimePickerTo.SetParameter(New RParameter("to", 1))
         ucrDateTimePickerTo.SetParameterIsRDate()
 
+        Dim dctDatesBy As New Dictionary(Of String, String) From {
+            {"Days", "days"},
+            {"Weeks", "weeks"},
+            {"Months", "months"},
+            {"Years", "years"}
+        }
         ucrInputComboDatesBy.SetParameter(New RParameter("period", 1, bNewIncludeArgumentName:=False))
-
-        dctDatesBy.Add("Days", "days")
-        dctDatesBy.Add("Weeks", "weeks")
-        dctDatesBy.Add("Months", "months")
-        dctDatesBy.Add("Years", "years")
         ucrInputComboDatesBy.SetItems(dctDatesBy)
         ucrInputComboDatesBy.SetDropDownStyleAsNonEditable()
 
-        ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+        '---------------- seq and seq.Date controls-----------
+        ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
+        ucrInputInStepsOf.AddQuotesIfUnrecognised = False
+        ucrInputInStepsOf.SetValidationTypeAsNumeric()
+
+        '--------------- repeat controls --------------------
+        ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
+        ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
+
+        ucrDataFrameLength.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+        ucrDataFrameLength.SetParameter(New RParameter("length.out", 3))
+        ucrDataFrameLength.AddQuotesIfUnrecognised = False
 
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
 
-        'This will be linked to the rep function which will always have the correct sequence function as its x argument
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoNumeric, "x", "seq")
         ucrPnlSequenceType.AddParameterValueFunctionNamesCondition(rdoDates, "x", "seq.Date")
 
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerFrom, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSequenceType.AddToLinkedControls(ucrDateTimePickerTo, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputComboDatesBy, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls({ucrInputFrom, ucrInputTo}, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls({ucrDateTimePickerFrom, ucrDateTimePickerTo}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSequenceType.AddToLinkedControls({ucrInputComboDatesBy}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPreview.SetText("Preview")
 
         ucrNewColumnName.SetPrefix("regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetLabelText("New Column Name:")
-
-        ucrChkDefineAsFactor.SetText("Define As Factor")
-        CheckSequenceLength()
-
-        clsDefaultStartDate = New RFunction
-        clsDefaultStartDate.SetRCommand("as.Date")
-        clsDefaultStartDate.AddParameter("x", Chr(34) & "2018/1/1" & Chr(34))
-
-        clsDefaultEndDate = New RFunction
-        clsDefaultEndDate.SetRCommand("as.Date")
-        clsDefaultEndDate.AddParameter("x", Chr(34) & "2018/12/31" & Chr(34))
+        '---------------------------------------------------
 
         'Temporarily disabled
+        ucrChkDefineAsFactor.SetText("Define As Factor")
         ucrChkDefineAsFactor.Enabled = False
+        '---------------------------------------------------
     End Sub
 
     Private Sub SetDefaults()
         clsRepFunction = New RFunction
         clsSeqFunction = New RFunction
-        clsByDateOperator = New ROperator
         clsSeqDateFunction = New RFunction
+        clsByOperator = New ROperator
 
         ucrSelectDataFrameRegularSequence.Reset()
+        ucrDateTimePickerFrom.DateValue = DateAndTime.Now()
+        ucrDateTimePickerTo.DateValue = DateAndTime.Now()
         ucrNewColumnName.Reset()
+
+        txtPreview.Visible = False
+        lblPreview.Visible = False
+        lblMessage.Visible = False
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1, iPosition:=0)
-        clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=1)
+        clsSeqFunction.AddParameter("to", ucrDataFrameLength.GetDataFrameLength, iPosition:=1)
         clsSeqFunction.AddParameter("by", 1, iPosition:=2)
+
+        clsByOperator.SetOperation(" ")
+        clsByOperator.AddParameter("number", 1, iPosition:=0)
+        clsByOperator.AddParameter("period", "days", iPosition:=1)
+        clsByOperator.bToScriptAsRString = True
+        clsByOperator.bSpaceAroundOperation = False
+
+        clsSeqDateFunction.SetRCommand("seq.Date")
+        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=ucrDateTimePickerFrom.ValueAsRDate, iPosition:=0)
+        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=ucrDateTimePickerTo.ValueAsRDate, iPosition:=1)
+        clsSeqDateFunction.AddParameter("by", clsROperatorParameter:=clsByOperator, iPosition:=2)
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
         clsRepFunction.AddParameter("each", 1, iPosition:=2)
-        clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
+        clsRepFunction.AddParameter("length.out", ucrDataFrameLength.GetDataFrameLength, iPosition:=3)
 
-        clsByDateOperator.SetOperation(" ")
-        clsByDateOperator.AddParameter("number", 1, iPosition:=0)
-        clsByDateOperator.AddParameter("period", "days", iPosition:=1)
-        clsByDateOperator.bToScriptAsRString = True
-        clsByDateOperator.bSpaceAroundOperation = False
+        clsRepFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
 
-        clsSeqDateFunction.SetRCommand("seq.Date")
-        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=0)
-        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=1)
-        clsSeqDateFunction.AddParameter("by", clsROperatorParameter:=clsByDateOperator, iPosition:=2)
-
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
-        ResetNumberFromToByParameters()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
-    End Sub
-
-    Private Sub ResetNumberFromToByParameters()
-        If rdoNumeric.Checked Then
-            clsSeqFunction.AddParameter("from", 1, iPosition:=0)
-            clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=1)
-            clsSeqFunction.AddParameter("by", 1, iPosition:=2)
-        End If
-    End Sub
-
-    Private Sub ucrPnlSequenceType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
-        If rdoDates.Checked Then
-            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqDateFunction, iPosition:=0)
-        ElseIf rdoNumeric.Checked Then
-            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
-        End If
-        SetBaseFunction()
-        CheckSequenceLength()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        Dim strBy As String
-        Dim dcmBy As Decimal
+        'command 'seq.Date' and 'seq' controls
+        ucrInputInStepsOf.AddAdditionalCodeParameterPair(clsByOperator, New RParameter("number", 0), iAdditionalPairNo:=1)
+        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
 
-        bUpdateBy = False
-        ucrNudRepeatValues.AddAdditionalCodeParameterPair(clsSeqDateFunction, ucrNudRepeatValues.GetParameter(), iAdditionalPairNo:=1)
-
-        ucrDateTimePickerFrom.SetRCode(clsSeqDateFunction, bReset)
-        ucrDateTimePickerTo.SetRCode(clsSeqDateFunction, bReset)
-        ucrInputComboDatesBy.SetRCode(clsByDateOperator, bReset)
-
-        'Set to base function so that control is set correctly
-        ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
-        ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
+        'command 'seq' controls
         ucrInputFrom.SetRCode(clsSeqFunction, bReset)
         ucrInputTo.SetRCode(clsSeqFunction, bReset)
+
+        'command 'seq.Date'  controls
+        ucrDateTimePickerFrom.SetRCode(clsSeqDateFunction, bReset)
+        ucrDateTimePickerTo.SetRCode(clsSeqDateFunction, bReset)
+        ucrInputComboDatesBy.SetRCode(clsByOperator, bReset)
+
+        'base command 'rep' controls
+        ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        If clsSeqFunction.ContainsParameter("by") Then
-            strBy = clsSeqFunction.GetParameter("by").strArgumentValue
-            If strBy IsNot Nothing Then
-                If Decimal.TryParse(strBy, dcmBy) Then
-                    ucrInputInStepsOf.SetName(Math.Abs(dcmBy))
-                Else
-                    ucrInputInStepsOf.SetName("")
-                End If
-            Else
-                ucrInputInStepsOf.SetName("")
-            End If
-        Else
-            ucrInputInStepsOf.SetName("")
-        End If
-        bUpdateBy = True
-        CheckSequenceLength()
+        ucrDataFrameLength.SetRCode(clsRepFunction, bReset)
+        ucrNewColumnName.SetRCode(clsRepFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bReset = True
         SetDefaults()
-        SetRCodeForControls(True)
-        SetDefaultRdo()
+        SetRCodeForControls(bReset)
+        SetSelectedDefaultSequenceOption()
         TestOKEnabled()
+        bReset = False
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrNewColumnName.IsComplete Then
+        If Not String.IsNullOrEmpty(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text) AndAlso
+            ucrNewColumnName.IsComplete AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso
+            Not ucrNudRepeatValues.IsEmpty Then
+
             If rdoNumeric.Checked Then
-                If ucrInputFrom.GetText <> "" AndAlso ucrInputTo.GetText <> "" AndAlso ucrInputInStepsOf.GetText <> "" AndAlso ucrNudRepeatValues.GetText <> "" AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            ElseIf rdoDates.Checked AndAlso Not ucrInputInStepsOf.IsEmpty AndAlso Not ucrInputComboDatesBy.IsEmpty AndAlso ucrNudRepeatValues.GetText <> "" Then
-                ucrBase.OKEnabled(True)
+                ucrBase.OKEnabled(Not ucrInputFrom.IsEmpty AndAlso Not ucrInputTo.IsEmpty)
+            ElseIf rdoDates.Checked Then
+                ucrBase.OKEnabled(Not ucrInputComboDatesBy.IsEmpty)
             Else
                 ucrBase.OKEnabled(False)
             End If
@@ -235,157 +231,103 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-    Private Sub SetInStepsOfDateParameter()
-        If ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue Then
-            clsByDateOperator.AddParameter("number", ucrInputInStepsOf.GetText(), iPosition:=0)
-        Else
-            clsByDateOperator.AddParameter("number", "-" & ucrInputInStepsOf.GetText(), iPosition:=0)
+    ''' <summary>
+    ''' displays the sequence that would be added when the R script is executed.
+    ''' Also gives feedback on whether the sequence will be truncated or extended
+    ''' </summary>
+    Private Sub PreviewSequence()
+        If ucrChkPreview.Checked = False Then
+            Exit Sub
         End If
-        CheckSequenceLength()
-    End Sub
-
-    Private Sub SetInStepsOfNumberParameter()
-        Dim dcmTo As Decimal
-        Dim dcmFrom As Decimal
-
-        If Not ucrInputTo.IsEmpty AndAlso Not ucrInputFrom.IsEmpty Then
-            If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
-                If dcmTo >= dcmFrom Then
-                    clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText())
-                Else
-                    clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText())
-                End If
-            Else
-                clsSeqFunction.RemoveParameterByName("by")
-            End If
-        Else
-            clsSeqFunction.RemoveParameterByName("by")
-        End If
-        CheckSequenceLength()
-    End Sub
-
-
-    Private Sub SetBaseFunction()
-        If ucrNudRepeatValues.Value = 1 Then
-            If rdoDates.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSeqDateFunction)
-            Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
-            End If
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-        End If
-        SetAssignTo()
-    End Sub
-
-    Private Sub CheckSequenceLength()
-        Dim iLength As Integer
-        Dim vecSequence As CharacterVector
-        Dim expTemp As SymbolicExpression
-        Dim strRCommand As String
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim clsAsCharacter As New RFunction
-        Dim clsRepClone As New RFunction
-
-        lblMessage.Text = ""
         Try
-            bIsAssigned = ucrBase.clsRsyntax.clsBaseFunction.bIsAssigned
-            bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
-            ucrBase.clsRsyntax.clsBaseFunction.bIsAssigned = False
-            ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
-            ucrBase.clsRsyntax.RemoveParameter("length.out")
+            Dim clsNewRepClone As RFunction
+            Dim clsAsCharacter As New RFunction
+            Dim vecSequence As CharacterVector
+            Dim strNewPreviewScript As String
+            Dim iLength As Integer
+
+            'clone the "rep" command base function
+            clsNewRepClone = clsRepFunction.Clone()
+            clsNewRepClone.bToBeAssigned = False
+            clsNewRepClone.bIsAssigned = False
+
+            'set up "as.character" command to be usde for testing
             clsAsCharacter.SetRCommand("as.character")
-            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
-            strRCommand = clsAsCharacter.ToScript()
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True)
-            vecSequence = expTemp.AsCharacter
-            iLength = vecSequence.Length
-            If iLength <> ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-                clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
-                clsRepClone = clsRepFunction.Clone()
-                clsRepClone.bToBeAssigned = False
-                clsRepClone.bIsAssigned = False
-                clsAsCharacter.SetRCommand("as.character")
-                clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsRepClone)
-                strRCommand = clsAsCharacter.ToScript()
-                bIsAssigned = False
-                vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsCharacter
-                ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
-                If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    lblMessage.Text = "Sequence extended to match" & Environment.NewLine & "the length of the data frame."
-                ElseIf iLength > ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    lblMessage.Text = "Sequence truncated to match" & Environment.NewLine & "the length of the data frame."
-                End If
-            Else
-                clsRepFunction.RemoveParameterByName("length.out")
-                lblMessage.Text = "Sequence matches the length of the data frame."
+            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsNewRepClone)
+
+            'if the new peview script is the same as the previous one then no need to refresh preview
+            'this check is useful for large data frames.
+            strNewPreviewScript = clsAsCharacter.ToScript()
+            If strNewPreviewScript = strPreviewScript Then
+                Exit Sub
             End If
-            txtGetPreview.Text = ""
-            txtGetPreview.Text = String.Join(", ", vecSequence)
-            ucrBase.clsRsyntax.clsBaseFunction.bIsAssigned = bIsAssigned
-            ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
+            strPreviewScript = strNewPreviewScript
+
+            'get the sequence from the R command as it is, and dispay it
+            vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strPreviewScript, bSilent:=True).AsCharacter
+            txtPreview.Text = String.Join(", ", vecSequence)
+
+            'remove the "length.out", then check if sequence is truncated or extended
+            clsNewRepClone.RemoveParameterByName("length.out")
+            vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacter.ToScript(), bSilent:=True).AsCharacter
+            iLength = vecSequence.Length
+            If iLength = ucrDataFrameLength.GetDataFrameLength Then
+                lblMessage.Text = GetTranslation("Sequence matches the length of the data frame.")
+            ElseIf iLength < ucrDataFrameLength.GetDataFrameLength Then
+                lblMessage.Text = GetTranslation("Sequence extended to match the length of the data frame.")
+            ElseIf iLength > ucrDataFrameLength.GetDataFrameLength Then
+                lblMessage.Text = GetTranslation("Sequence truncated to match the length of the data frame.")
+            End If
         Catch ex As Exception
-            txtGetPreview.Text = ""
+            txtPreview.Text = ""
             lblMessage.Text = "No preview available."
         End Try
     End Sub
 
-    Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged
-        If ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
-            Try
-                ucrInputTo.SetName(frmMain.clsRLink.GetDataFrameLength(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text))
-            Catch ex As Exception
-                ucrInputTo.SetName("")
-            End Try
-        End If
-        SetAssignTo()
-    End Sub
-
-    Private Sub ucrNudRepeatValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
-        SetBaseFunction()
-        CheckSequenceLength()
-    End Sub
-
-    Private Sub ucrInputNumberControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
-        If bUpdateBy Then
-            SetInStepsOfNumberParameter()
+    Private Sub ucrPnlSequenceType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
+        If rdoNumeric.Checked Then
+            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
+        ElseIf rdoDates.Checked Then
+            clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqDateFunction, iPosition:=0)
         End If
     End Sub
 
-    Private Sub ucrInputDateControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged
-        If bUpdateBy Then
-            SetInStepsOfDateParameter()
+    Private Sub ucrInputStepsOfControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged
+        'ucrInputInStepsOf will be empty when dialog loads for the first time
+        'no need to st value for ucrInputInStepsOf if its empty
+        If ucrInputInStepsOf.IsEmpty Then
+            Exit Sub
         End If
-    End Sub
 
-    Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
-        SetAssignTo()
-    End Sub
-
-    Private Sub SetAssignTo()
-        If ucrNewColumnName.IsComplete AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
-        Else
-            ucrBase.clsRsyntax.RemoveAssignTo()
+        If rdoNumeric.Checked Then
+            Dim dcmTo As Decimal
+            Dim dcmFrom As Decimal
+            If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
+                ucrInputInStepsOf.SetName(If(dcmTo >= dcmFrom, "", "-") & ucrInputInStepsOf.GetText().Replace("-", ""))
+            End If
+        ElseIf rdoDates.Checked Then
+            ucrInputInStepsOf.SetName(If(ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue,
+                                          "", "-") & ucrInputInStepsOf.GetText().Replace("-", ""))
         End If
-    End Sub
-
-    Private Sub ucrInputComboDatesBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboDatesBy.ControlValueChanged
-        If bUpdateBy Then
-            ResetNumberFromToByParameters()
-        End If
-    End Sub
-    Private Sub lblPreview_Click(sender As Object, e As EventArgs) Handles lblPreview.Click
 
     End Sub
 
-    Private Sub lblMessage_Click(sender As Object, e As EventArgs) Handles lblMessage.Click
-
+    Private Sub ucrInputInStepsOf_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlValueChanged
+        PreviewSequence()
     End Sub
 
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrInputComboDatesBy.ControlContentsChanged
+    Private Sub ucrRepeatControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged, ucrDataFrameLength.ControlValueChanged
+        PreviewSequence()
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrInputComboDatesBy.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreview.ControlValueChanged
+        txtPreview.Visible = ucrChkPreview.Checked
+        lblPreview.Visible = ucrChkPreview.Checked
+        lblMessage.Visible = ucrChkPreview.Checked
+        PreviewSequence()
     End Sub
 End Class

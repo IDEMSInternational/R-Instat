@@ -19,9 +19,9 @@ Imports instat.Translations
 Public Class dlgCircularDensityPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDensityFunction As RFunction
-    Private clsRecordGraphFunction As RFunction
-    Private clsDensityPlotFunction, clsRosePlotFunction, clsScatterPlotFunction As RFunction
+    Private clsDensityFunction As New RFunction
+    Private clsRecordGraphFunction As New RFunction
+    Private clsDensityPlotFunction, clsRosePlotFunction, clsScatterPlotFunction As New RFunction
     Private Sub dlgCircularDensityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()

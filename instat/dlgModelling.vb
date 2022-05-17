@@ -22,16 +22,16 @@ Public Class dlgModelling
     Private bReset As Boolean = True
     Private clsAttach, clsDetach As New RFunction
 
-    Public clsRModelFunction As RFunction
+    Public clsRModelFunction As New RFunction
     Public clsRYVariable, clsRXVariable As String
     Private ucrAvailableDataframe As ucrDataFrame
     Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
-    Public clsWhichFunction As RFunction
+    Public clsWhichFunction As New RFunction
     Public bUpdating As Boolean = False
 
     'Display tab functions
-    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
     Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction As New RFunction
 
     Private bResetDisplayOptions = False

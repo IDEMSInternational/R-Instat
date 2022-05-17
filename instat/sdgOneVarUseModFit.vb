@@ -28,6 +28,8 @@ Public Class sdgOneVarUseModFit
     Public Sub InitialiseControls()
         Dim dctQuantileValues As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 115
+
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
         ucrNudIterations.SetRDefault(1001)

@@ -49,7 +49,7 @@ Partial Class dlgColourbyProperty
         '
         Me.lblMetadataProp.AutoSize = True
         Me.lblMetadataProp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMetadataProp.Location = New System.Drawing.Point(263, 45)
+        Me.lblMetadataProp.Location = New System.Drawing.Point(263, 36)
         Me.lblMetadataProp.Name = "lblMetadataProp"
         Me.lblMetadataProp.Size = New System.Drawing.Size(97, 13)
         Me.lblMetadataProp.TabIndex = 3
@@ -59,7 +59,7 @@ Partial Class dlgColourbyProperty
         '
         Me.ucrChkRemoveColours.AutoSize = True
         Me.ucrChkRemoveColours.Checked = False
-        Me.ucrChkRemoveColours.Location = New System.Drawing.Point(263, 84)
+        Me.ucrChkRemoveColours.Location = New System.Drawing.Point(263, 82)
         Me.ucrChkRemoveColours.Name = "ucrChkRemoveColours"
         Me.ucrChkRemoveColours.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkRemoveColours.TabIndex = 4
@@ -68,7 +68,7 @@ Partial Class dlgColourbyProperty
         '
         Me.ucrReceiverMetadataProperty.AutoSize = True
         Me.ucrReceiverMetadataProperty.frmParent = Me
-        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(263, 60)
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(263, 51)
         Me.ucrReceiverMetadataProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
         Me.ucrReceiverMetadataProperty.Selector = Nothing

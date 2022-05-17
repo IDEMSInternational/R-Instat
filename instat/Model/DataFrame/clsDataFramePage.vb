@@ -17,7 +17,8 @@
 Imports RDotNet
 
 ''' <summary>
-''' Holds a subset dataset for the dataframe
+''' Holds a subset dataset of an R dataframe.
+''' The subset is determined by the rows and columns indexes and count
 ''' </summary>
 Public Class clsDataFramePage
     Private _iRowStart As Integer
@@ -26,7 +27,7 @@ Public Class clsDataFramePage
     Private _iTotalColumnCount As Integer
     Private _strDataFrameName As String
     Private _clsRLink As RLink
-    Private _clsDataFrame As DataFrame
+    Private _clsRDotNetDataFrame As DataFrame
     Private _lstColumns As List(Of clsColumnHeaderDisplay)
     Private _hasChanged As Boolean
 
@@ -58,7 +59,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property RowNames() As String()
         Get
-            Return _clsDataFrame.RowNames()
+            Return _clsRDotNetDataFrame.RowNames()
         End Get
     End Property
 
@@ -78,7 +79,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property intEndRow As Integer
         Get
-            Return _iRowStart + _clsDataFrame.RowCount - 1
+            Return _iRowStart + _clsRDotNetDataFrame.RowCount - 1
         End Get
     End Property
 
@@ -98,7 +99,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property intEndColumn As Integer
         Get
-            Return _iColumnStart + _clsDataFrame.ColumnCount - 1
+            Return _iColumnStart + _clsRDotNetDataFrame.ColumnCount - 1
         End Get
     End Property
 
@@ -110,7 +111,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property Data(iRow As Integer, iColumn As Integer) As Object
         Get
-            Return _clsDataFrame(iRow, iColumn)
+            Return _clsRDotNetDataFrame(iRow, iColumn)
             'ToDo Need better error handling if out of range
         End Get
     End Property
@@ -121,7 +122,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property DisplayedRowCount As Integer
         Get
-            Return _clsDataFrame.RowCount
+            Return _clsRDotNetDataFrame.RowCount
         End Get
     End Property
 
@@ -153,15 +154,18 @@ Public Class clsDataFramePage
     End Sub
 
     ''' <summary>
-    ''' Refreshes data. Note: always refreshes regardless whether dataset has changed.
+    ''' Refreshes data. 
+    ''' When called, a new R.Net data frame will be set. 
+    ''' If data frame set is not successful, a null object will be set.
+    ''' <para>Note: always refreshes regardless whether dataset has changed.</para>
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>Returns true if R.Net data frame is set, false if not set</returns>
     Public Function RefreshData()
-        _clsDataFrame = GetDataFrameFromRCommand()
-        If _clsDataFrame IsNot Nothing Then
+        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        If _clsRDotNetDataFrame IsNot Nothing Then
             SetHeaders()
         End If
-        Return _clsDataFrame IsNot Nothing 'Returns a success value
+        Return _clsRDotNetDataFrame IsNot Nothing 'Returns a success value
     End Function
 
     ''' <summary>
@@ -215,7 +219,7 @@ Public Class clsDataFramePage
         Dim clsRFunction As New RFunction
         clsRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_column_data_types")
         clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-        clsRFunction.AddParameter("columns", _clsRLink.GetListAsRString(_clsDataFrame.ColumnNames.ToList))
+        clsRFunction.AddParameter("columns", _clsRLink.GetListAsRString(_clsRDotNetDataFrame.ColumnNames.ToList))
         Return _clsRLink.RunInternalScriptGetValue(clsRFunction.ToScript()).AsCharacter
     End Function
 
@@ -224,7 +228,7 @@ Public Class clsDataFramePage
         clsRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         clsRFunction.AddParameter("property", "colour_label")
-        clsRFunction.AddParameter("column", _clsRLink.GetListAsRString(_clsDataFrame.ColumnNames.ToList))
+        clsRFunction.AddParameter("column", _clsRLink.GetListAsRString(_clsRDotNetDataFrame.ColumnNames.ToList))
         Return _clsRLink.RunInternalScriptGetValue(clsRFunction.ToScript()).AsNumeric
     End Function
 
@@ -233,7 +237,7 @@ Public Class clsDataFramePage
         clsRFunction.ClearParameters()
         clsRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$has_colours")
         clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-        clsRFunction.AddParameter("columns", _clsRLink.GetListAsRString(_clsDataFrame.ColumnNames.ToList))
+        clsRFunction.AddParameter("columns", _clsRLink.GetListAsRString(_clsRDotNetDataFrame.ColumnNames.ToList))
         Return _clsRLink.RunInternalScriptGetValue(clsRFunction.ToScript()).AsLogical(0)
     End Function
 
@@ -289,9 +293,10 @@ Public Class clsDataFramePage
         End If
         _lstColumns.Clear()
 
-        For i = 0 To _clsDataFrame.ColumnNames.ToList.Count - 1
-            columnHeader = GetColumnDispayDetails(_clsDataFrame.ColumnNames.ToList(i), vecColumnDataTypes(i))
-            If bApplyBackGroundColumnColours AndAlso vecColumnColours IsNot Nothing Then
+
+        For i = 0 To _clsRDotNetDataFrame.ColumnNames.ToList.Count - 1
+            columnHeader = GetColumnDispayDetails(_clsRDotNetDataFrame.ColumnNames.ToList(i), vecColumnDataTypes(i))
+            If bApplyBackGroundColumnColours AndAlso Not Double.IsNaN(vecColumnColours(i)) Then
                 columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, vecColumnColours(i).ToString())
             End If
             _lstColumns.Add(columnHeader)
@@ -320,7 +325,7 @@ Public Class clsDataFramePage
     Public Sub LoadNextRowPage()
         If CanLoadNextRowPage() Then
             _iRowStart += intRowIncrements
-            _clsDataFrame = GetDataFrameFromRCommand()
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         End If
     End Sub
 
@@ -338,7 +343,7 @@ Public Class clsDataFramePage
     Public Sub LoadPreviousRowPage()
         If CanLoadPreviousRowPage() Then
             _iRowStart -= intRowIncrements
-            _clsDataFrame = GetDataFrameFromRCommand()
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         End If
     End Sub
 
@@ -347,7 +352,7 @@ Public Class clsDataFramePage
     ''' </summary>
     Public Sub LoadLastRowPage()
         _iRowStart = (intRowIncrements * (GetNoOfRowPages() - 1)) + 1
-        _clsDataFrame = GetDataFrameFromRCommand()
+        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
     End Sub
 
     ''' <summary>
@@ -355,7 +360,7 @@ Public Class clsDataFramePage
     ''' </summary>
     Public Sub LoadFirstRowPage()
         _iRowStart = 1
-        _clsDataFrame = GetDataFrameFromRCommand()
+        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
     End Sub
 
     ''' <summary>
@@ -372,7 +377,7 @@ Public Class clsDataFramePage
     Public Sub LoadNextColumnPage()
         If CanLoadNextColumnPage() Then
             _iColumnStart += iColumnIncrements
-            _clsDataFrame = GetDataFrameFromRCommand()
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If
     End Sub
@@ -391,7 +396,7 @@ Public Class clsDataFramePage
     Public Sub LoadPreviousColumnPage()
         If _iColumnStart - iColumnIncrements >= 0 Then
             _iColumnStart -= iColumnIncrements
-            _clsDataFrame = GetDataFrameFromRCommand()
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If
     End Sub
@@ -401,7 +406,7 @@ Public Class clsDataFramePage
     ''' </summary>
     Public Sub LoadLastColumnPage()
         _iColumnStart = (iColumnIncrements * (GetNoOfColumnPages() - 1)) + 1
-        _clsDataFrame = GetDataFrameFromRCommand()
+        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         SetHeaders()
     End Sub
 
@@ -410,7 +415,7 @@ Public Class clsDataFramePage
     ''' </summary>
     Public Sub LoadFirstColumnPage()
         _iColumnStart = 1
-        _clsDataFrame = GetDataFrameFromRCommand()
+        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         SetHeaders()
     End Sub
 

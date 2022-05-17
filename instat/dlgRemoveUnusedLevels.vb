@@ -46,8 +46,8 @@ Public Class dlgRemoveUnusedLevels
         ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverFactorColumn.strSelectorHeading = "Factors"
 
-        ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
-        ucrRemoveUnusedFactorLevels.SetIncludeLevels(False)
+        ucrRemoveUnusedFactorLevels.SetAsNormalGridColumn(ucrReceiverFactorColumn,
+                                                          hiddenColNames:={ucrFactor.DefaultColumnNames.Level})
 
         'Set selector data frame
         ucrSelectorFactorColumn.SetParameter(New RParameter("data_name", 0))

@@ -26,7 +26,9 @@ Public Class clsDataFrameFilterOrColumnSelection
     Protected _bFilterApplied As Boolean
     Protected _bColumnSelectionApplied As Boolean
     Protected _iFilteredRowCount As Integer
+    Protected _iSelectedColumnCount As Integer
     Protected _strFilterName As String
+    Protected _strSelectionName As String
 
     Public ReadOnly Property iFilteredRowCount As Integer
         Get
@@ -34,9 +36,21 @@ Public Class clsDataFrameFilterOrColumnSelection
         End Get
     End Property
 
+    Public ReadOnly Property iSelectedColumnCount As Integer
+        Get
+            Return _iSelectedColumnCount
+        End Get
+    End Property
+
     Public ReadOnly Property strName As String
         Get
             Return _strFilterName
+        End Get
+    End Property
+
+    Public ReadOnly Property strSelectionName As String
+        Get
+            Return _strSelectionName
         End Get
     End Property
 
@@ -64,6 +78,13 @@ Public Class clsDataFrameFilterOrColumnSelection
         Return _RLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
     End Function
 
+    Private Function GetSelectionNameFromRCommand() As String
+        Dim clsGetCurrentFilterName As New RFunction
+        clsGetCurrentFilterName.SetRCommand(_RLink.strInstatDataObject & "$get_current_column_selection")
+        clsGetCurrentFilterName.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34), iPosition:=0)
+        Return _RLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
+    End Function
+
     Private Function GetFilterAppliedFromRCommand() As Boolean
         Dim clsFilterApplied As New RFunction
         clsFilterApplied.SetRCommand(_RLink.strInstatDataObject & "$filter_applied")
@@ -80,9 +101,11 @@ Public Class clsDataFrameFilterOrColumnSelection
 
     Public Sub RefreshData()
         _iFilteredRowCount = _RLink.GetDataFrameLength(_strDataFrameName, True)
+        _iSelectedColumnCount = _RLink.GetDataFrameColumnCount(_strDataFrameName)
         _bFilterApplied = GetFilterAppliedFromRCommand()
         _bColumnSelectionApplied = GetColumnSelectionAppliedFromRCommand()
         _strFilterName = GetFilterNameFromRCommand()
+        _strSelectionName = GetSelectionNameFromRCommand()
     End Sub
 
 End Class

@@ -41,18 +41,20 @@ Public Class sdgFiltersFromFactor
     Private Sub InitialiseControls()
         ucrSelectorFiltersFromFactors.SetParameterIsString()
 
-        ucrFactorLevels.SetParameter(New RParameter("filter_levels", 1))
-        ucrFactorLevels.strSelectorColumnName = "Select Level"
-        ucrFactorLevels.SetAsMultipleSelector()
-        ucrFactorLevels.SetReceiver(ucrReceiverFactor)
-        ucrFactorLevels.SetIncludeLevels(False)
-
         ucrReceiverFactor.SetParameter(New RParameter("column", 2))
         ucrReceiverFactor.Selector = ucrSelectorFiltersFromFactors
         ucrReceiverFactor.SetParameterIsString()
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetDataType("factor", bStrict:=True)
 
+        Dim dctParamAndColNames As New Dictionary(Of String, String)
+        dctParamAndColNames.Add("filter_levels", ucrFactor.DefaultColumnNames.Label)
+
+        ucrFactorLevels.SetParameter(New RParameter("filter_levels", 1))
+        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrReceiverFactor,
+                                                  dctParamAndColNames:=dctParamAndColNames,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=False)
         cmdSelectAll.Enabled = False
     End Sub
 
@@ -69,18 +71,18 @@ Public Class sdgFiltersFromFactor
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
-        'TODO: check how to get count of selected items from reogrid, then remove bSilent:=False to avoid errors when no level is selected.
-        If Not ucrReceiverFactor.IsEmpty Then
-            frmMain.clsRLink.RunScript(clsAddFilterFromFactors.ToScript, strComment:="Filter From Factors subdialog: Created new filter", bSilent:=True)
+        If ucrFactorLevels.IsAnyGridRowSelected Then
+            frmMain.clsRLink.RunScript(clsAddFilterFromFactors.ToScript, strComment:="Filter From Factors subdialog: Created new filter", bSilent:=False)
         End If
     End Sub
 
     Private Sub cmdSelectAll_Click(sender As Object, e As EventArgs) Handles cmdSelectAll.Click
-        ucrFactorLevels.SetSelectionAllLevels(Not ucrFactorLevels.IsAllSelected())
+        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
     End Sub
 
-    Private Sub ucrFactorLevels_SelectedLevelChanged() Handles ucrFactorLevels.SelectedLevelChanged
-        If ucrFactorLevels.IsAllSelected() Then
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        cmdSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
+        If ucrFactorLevels.IsAllGridRowsSelected() Then
             cmdSelectAll.Text = "Deselect All Levels"
             cmdSelectAll.FlatStyle = FlatStyle.Flat
         Else
@@ -88,10 +90,6 @@ Public Class sdgFiltersFromFactor
             cmdSelectAll.FlatStyle = FlatStyle.Popup
         End If
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        cmdSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
     End Sub
 
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged

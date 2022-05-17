@@ -20,9 +20,8 @@ Imports RDotNet
 Public Class ucrInput
     Public bUserTyped As Boolean = False
     Public Event NameChanged()
-    Public Event ContentsChanged()
     Protected strValidationType As String = "None"
-    Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
+    Protected ReadOnly strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
     Public clsRList As New RFunction
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
@@ -84,11 +83,6 @@ Public Class ucrInput
                 End If
             End If
         End If
-    End Sub
-
-    Public Sub OnContentsChanged()
-        RaiseEvent ContentsChanged()
-        OnControlContentsChanged()
     End Sub
 
     Public Function UserTyped() As Boolean
@@ -488,7 +482,7 @@ Public Class ucrInput
         Return 0
     End Function
 
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+    Private Sub ucrDataFrameSelector_ControlValueChanged(sender As Object) Handles ucrDataFrameSelector.ControlValueChanged
         If Not bUserTyped Then
             SetDefaultName()
         End If

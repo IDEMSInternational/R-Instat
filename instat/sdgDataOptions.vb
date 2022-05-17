@@ -58,9 +58,9 @@ Public Class sdgDataOptions
         ucrReceiverFilter.SetMeAsReceiver()
         ucrReceiverFilter.strSelectorHeading = "Filters"
 
-        ucrSelectorFilters.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorFilters.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
-        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverSelect.Selector = ucrSelectorForSelectColumns
         ucrReceiverSelect.SetMeAsReceiver()

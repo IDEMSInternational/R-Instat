@@ -110,20 +110,23 @@ Public Class ucrDistributionsWithParameters
     Private Sub ucrInputParameter1_ControlValueChanged() Handles ucrInputParameter1.ControlValueChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 0 Then
             AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
-            CheckParametersFilled()
+            If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                ucrInputParameter1.IsReadOnly = True
+                CheckParametersFilled()
+            Else
+                ucrInputParameter1.IsReadOnly = False
+            End If
         End If
         OnControlValueChanged()
     End Sub
 
-    Private Sub ucrInputParameter2_ContentsChanged() Handles ucrInputParameter2.ContentsChanged
+    Private Sub ucrInputParameter2_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputParameter2.ControlContentsChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
             If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
                 AddParameter(lstCurrArguments(1), "c(" & ucrInputParameter2.GetText & ")")
                 ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
-                ucrInputParameter1.IsReadOnly = True
             Else
                 AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
-                ucrInputParameter1.IsReadOnly = False
             End If
             CheckParametersFilled()
         End If
