@@ -299,8 +299,6 @@ Public Class dlgHeatMapPlot
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
-        clsLabelAesFunction.AddParameter("x", "long", iPosition:=0)
-        clsLabelAesFunction.AddParameter("y", "lat", iPosition:=1)
         clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=2)
 
         clsRoundFunction.SetRCommand("round")
@@ -323,8 +321,6 @@ Public Class dlgHeatMapPlot
 
         clsSizeChoroplethAesFunction.SetPackageName("ggplot2")
         clsSizeChoroplethAesFunction.SetRCommand("aes")
-        clsSizeChoroplethAesFunction.AddParameter("x", "long", iPosition:=0)
-        clsSizeChoroplethAesFunction.AddParameter("y", "lat", iPosition:=1)
 
         clsGeomPointShapeHeatMapFunction.SetPackageName("ggplot2")
         clsGeomPointShapeHeatMapFunction.SetRCommand("geom_point")
@@ -383,9 +379,6 @@ Public Class dlgHeatMapPlot
         clsAggregateFunction.SetAssignTo("cnames")
 
         clsCBindFunction.SetRCommand("cbind")
-        clsCBindFunction.AddParameter("long", "long", iPosition:=0)
-        clsCBindFunction.AddParameter("lat", "lat", iPosition:=1)
-
 
         clsTildeOperator.SetOperation("~")
         clsTildeOperator.AddParameter("left", clsRFunctionParameter:=clsCBindFunction, iPosition:=0)
@@ -432,6 +425,14 @@ Public Class dlgHeatMapPlot
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
 
         ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=1)
+
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsSizeChoroplethAesFunction, ucrReceiverLongitude.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsCBindFunction, ucrReceiverLongitude.GetParameter, iAdditionalPairNo:=2)
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelAesFunction, ucrReceiverLongitude.GetParameter, iAdditionalPairNo:=3)
+
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsSizeChoroplethAesFunction, ucrReceiverLatitude.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsCBindFunction, ucrReceiverLatitude.GetParameter, iAdditionalPairNo:=2)
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelAesFunction, ucrReceiverLatitude.GetParameter, iAdditionalPairNo:=3)
 
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
