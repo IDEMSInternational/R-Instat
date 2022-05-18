@@ -44,12 +44,16 @@ Partial Class dlgRenameGraph
         Me.ucrGraphReceiver = New instat.ucrReceiverSingle()
         Me.ucrGraphsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegendPosition = New instat.ucrCheck()
+        Me.grpLegend = New System.Windows.Forms.GroupBox()
+        Me.grpLegend.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblGraphtoUse
         '
         Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 45)
+        Me.lblGraphtoUse.Location = New System.Drawing.Point(250, 32)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
         Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
         Me.lblGraphtoUse.TabIndex = 1
@@ -77,7 +81,7 @@ Partial Class dlgRenameGraph
         '
         Me.ucrGraphReceiver.AutoSize = True
         Me.ucrGraphReceiver.frmParent = Me
-        Me.ucrGraphReceiver.Location = New System.Drawing.Point(252, 60)
+        Me.ucrGraphReceiver.Location = New System.Drawing.Point(250, 48)
         Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
         Me.ucrGraphReceiver.Selector = Nothing
@@ -107,6 +111,37 @@ Partial Class dlgRenameGraph
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 5
         '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(8, 49)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputLegendPosition.TabIndex = 8
+        '
+        'ucrChkLegendPosition
+        '
+        Me.ucrChkLegendPosition.AutoSize = True
+        Me.ucrChkLegendPosition.Checked = False
+        Me.ucrChkLegendPosition.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(139, 23)
+        Me.ucrChkLegendPosition.TabIndex = 7
+        '
+        'grpLegend
+        '
+        Me.grpLegend.Controls.Add(Me.ucrChkLegendPosition)
+        Me.grpLegend.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpLegend.Location = New System.Drawing.Point(250, 74)
+        Me.grpLegend.Name = "grpLegend"
+        Me.grpLegend.Size = New System.Drawing.Size(159, 85)
+        Me.grpLegend.TabIndex = 9
+        Me.grpLegend.TabStop = False
+        Me.grpLegend.Text = "Legend"
+        '
         'dlgRenameGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -119,6 +154,7 @@ Partial Class dlgRenameGraph
         Me.Controls.Add(Me.ucrGraphReceiver)
         Me.Controls.Add(Me.ucrGraphsSelector)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpLegend)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -126,6 +162,8 @@ Partial Class dlgRenameGraph
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"
         Me.Text = "Use Graph"
+        Me.grpLegend.ResumeLayout(False)
+        Me.grpLegend.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -137,4 +175,7 @@ Partial Class dlgRenameGraph
     Friend WithEvents lblGraphtoUse As Label
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
+    Friend WithEvents grpLegend As GroupBox
 End Class

@@ -1051,7 +1051,7 @@ Public Class frmMain
         dlgShowModel.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeRenameGraph.Click
+    Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
         dlgRenameGraph.ShowDialog()
     End Sub
 
