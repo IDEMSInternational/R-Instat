@@ -235,17 +235,6 @@ Public Class dlgClimaticStationMaps
         AutoFillGeometry()
     End Sub
 
-    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs)
-        sdgPlots.SetRCode(clsGGplotOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction,
-                          dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
-                          clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction,
-                          clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLongitude.GetParameter())
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLatitude.GetParameter())
