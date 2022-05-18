@@ -235,7 +235,7 @@ Public Class dlgClimaticStationMaps
         AutoFillGeometry()
     End Sub
 
-    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs)
         sdgPlots.SetRCode(clsGGplotOperator, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction,
                           dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
@@ -265,7 +265,7 @@ Public Class dlgClimaticStationMaps
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
     End Sub
 
-    Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
+    Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsSfAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorOutline, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetSFLayerSubdialog = False
@@ -277,7 +277,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
 
-    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
+    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs)
         sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
         sdgMapOption.ShowDialog()
         bResetSubdialog = False
@@ -369,10 +369,10 @@ Public Class dlgClimaticStationMaps
     Private Sub ChangeSize()
         If ucrChkAddPoints.Checked Then
             grpPoints.Visible = True
-            Me.Size = New Size(772, 401)
+            Me.Size = New Size(772, 384)
         Else
             grpPoints.Visible = False
-            Me.Size = New Size(439, 401)
+            Me.Size = New Size(439, 384)
         End If
     End Sub
 
