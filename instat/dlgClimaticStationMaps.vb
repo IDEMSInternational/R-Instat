@@ -265,25 +265,6 @@ Public Class dlgClimaticStationMaps
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
     End Sub
 
-    Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsSfAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorOutline, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetSFLayerSubdialog = False
-        For Each clsParam In clsSfAesFunction.clsParameters
-            If clsParam.strArgumentName = "fill" Then
-                ucrReceiverFill.Add(clsParam.strArgumentValue)
-            End If
-        Next
-    End Sub
-
-
-    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs)
-        sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
-        sdgMapOption.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
-
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
         If ucrSaveMap.IsComplete Then
