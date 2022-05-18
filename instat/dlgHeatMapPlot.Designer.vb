@@ -398,7 +398,6 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblGroup)
-        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.lblFillChoropleth)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoChoroplethMap)
@@ -440,6 +439,7 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblPointsChoropleth)
         Me.Controls.Add(Me.lblReorderVariableX)
+        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
