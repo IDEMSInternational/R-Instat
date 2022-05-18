@@ -71,7 +71,7 @@ Public Class frmMain
     ''' it's set to false by ucrDataView control when state of data has been changed
     ''' it's set to true by dlgSaveAs dialog and save menu when data has been successfully saved 
     ''' </summary>
-    Public Property bDataSaved As Boolean = False
+    Public Property bDataSaved As Boolean
 
     Private strCurrLang As String
     Public Sub New()
@@ -1566,13 +1566,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
-        If Not bDataSaved Then
-            If ucrDataViewer.GetWorkSheetCount() = 0 OrElse DialogResult.Yes = MsgBox("Are you sure you want to close your data?" &
-                                         Environment.NewLine & "Any unsaved changes will be lost.",
-                                         MessageBoxButtons.YesNo, "Close Data") Then
-                clsRLink.CloseData()
-                strSaveFilePath = ""
-            End If
+        If (Not bDataSaved AndAlso ucrDataViewer.GetWorkSheetCount() > 0 _
+                            AndAlso DialogResult.Yes = MsgBox("Are you sure you want to close your data?" &
+                                    Environment.NewLine & "Any unsaved changes will be lost.",
+                                    MessageBoxButtons.YesNo, "Close Data")) _
+                            OrElse bDataSaved Then
+            clsRLink.CloseData()
+            strSaveFilePath = ""
         End If
     End Sub
 
