@@ -56,7 +56,6 @@ Partial Class dlgHeatMapPlot
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblFillChoropleth = New System.Windows.Forms.Label()
         Me.lblPointsChoropleth = New System.Windows.Forms.Label()
-        Me.lblSizeChoropleth = New System.Windows.Forms.Label()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverPointsHeatMap = New instat.ucrReceiverSingle()
         Me.ucrNudShapeHeatMap = New instat.ucrNud()
@@ -73,7 +72,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrReceiverFillChoropleth = New instat.ucrReceiverSingle()
         Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
         Me.ucrInputReorderVariableX = New instat.ucrInputComboBox()
-        Me.ucrNudShapeChoropleth = New instat.ucrNud()
         Me.ucrInputSize = New instat.ucrInputComboBox()
         Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
@@ -191,11 +189,6 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.lblPointsChoropleth, "lblPointsChoropleth")
         Me.lblPointsChoropleth.Name = "lblPointsChoropleth"
         Me.lblPointsChoropleth.Tag = "Points_Optional"
-        '
-        'lblSizeChoropleth
-        '
-        resources.ApplyResources(Me.lblSizeChoropleth, "lblSizeChoropleth")
-        Me.lblSizeChoropleth.Name = "lblSizeChoropleth"
         '
         'ucrChkFlipCoordinates
         '
@@ -321,16 +314,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputReorderVariableX.IsReadOnly = False
         Me.ucrInputReorderVariableX.Name = "ucrInputReorderVariableX"
         '
-        'ucrNudShapeChoropleth
-        '
-        resources.ApplyResources(Me.ucrNudShapeChoropleth, "ucrNudShapeChoropleth")
-        Me.ucrNudShapeChoropleth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShapeChoropleth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShapeChoropleth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShapeChoropleth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShapeChoropleth.Name = "ucrNudShapeChoropleth"
-        Me.ucrNudShapeChoropleth.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrInputSize
         '
         Me.ucrInputSize.AddQuotesIfUnrecognised = True
@@ -426,8 +409,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrReceiverFillChoropleth)
         Me.Controls.Add(Me.ucrVariableAsFactorForHeatMap)
         Me.Controls.Add(Me.ucrInputReorderVariableX)
-        Me.Controls.Add(Me.ucrNudShapeChoropleth)
-        Me.Controls.Add(Me.lblSizeChoropleth)
         Me.Controls.Add(Me.ucrInputSize)
         Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.lblLabelPosition)
@@ -485,9 +466,7 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents lblFillChoropleth As Label
     Friend WithEvents ucrReceiverFillChoropleth As ucrReceiverSingle
-    Friend WithEvents ucrNudShapeChoropleth As ucrNud
     Friend WithEvents lblPointsChoropleth As Label
-    Friend WithEvents lblSizeChoropleth As Label
     Friend WithEvents ucrReceiverPointsChoropleth As ucrReceiverSingle
     Friend WithEvents lblGroup As Label
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle

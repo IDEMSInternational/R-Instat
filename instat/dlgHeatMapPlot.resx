@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelPosition.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>31</value>
   </data>
   <data name="lblLabelColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelColour.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>33</value>
   </data>
   <data name="lblLabelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelSize.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>35</value>
   </data>
   <data name="lblPointsOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -412,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorderVariableX.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>39</value>
   </data>
   <data name="lblReorderValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -634,37 +634,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsChoropleth.ZOrder" xml:space="preserve">
-    <value>40</value>
-  </data>
-  <data name="lblSizeChoropleth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSizeChoropleth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSizeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 283</value>
-  </data>
-  <data name="lblSizeChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="lblSizeChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="lblSizeChoropleth.Text" xml:space="preserve">
-    <value>Size:</value>
-  </data>
-  <data name="&gt;&gt;lblSizeChoropleth.Name" xml:space="preserve">
-    <value>lblSizeChoropleth</value>
-  </data>
-  <data name="&gt;&gt;lblSizeChoropleth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSizeChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSizeChoropleth.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>38</value>
   </data>
   <data name="ucrChkFlipCoordinates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1083,30 +1053,6 @@
   <data name="&gt;&gt;ucrInputReorderVariableX.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
-  <data name="ucrNudShapeChoropleth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrNudShapeChoropleth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 279</value>
-  </data>
-  <data name="ucrNudShapeChoropleth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
-  </data>
-  <data name="ucrNudShapeChoropleth.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShapeChoropleth.Name" xml:space="preserve">
-    <value>ucrNudShapeChoropleth</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShapeChoropleth.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShapeChoropleth.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudShapeChoropleth.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
   <data name="ucrInputSize.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -1129,7 +1075,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputSize.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>29</value>
   </data>
   <data name="ucrChkAddLabels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1153,7 +1099,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>30</value>
   </data>
   <data name="ucrInputPosition.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -1177,7 +1123,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputPosition.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>32</value>
   </data>
   <data name="ucrInputColour.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -1201,7 +1147,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputColour.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>34</value>
   </data>
   <data name="ucrReceiverPointsChoropleth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1228,7 +1174,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsChoropleth.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>36</value>
   </data>
   <data name="ucrReceiverX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,7 +1201,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>37</value>
   </data>
   <data name="ucrReceiverGroup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1282,7 +1228,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>40</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

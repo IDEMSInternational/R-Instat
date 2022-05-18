@@ -37,7 +37,7 @@ Public Class dlgHeatMapPlot
     clsLabelAesFunction, clsColourPaletteFunction, clsForecatsInfreq, clsForecatsReverse, clsForecatsInfreqValue,
     clsForecatsReverseValue, clsReorderFunction, clsReorderFunctionValue, clsGeomPolygonAesFunction, clsRggplotFunction,
     clsRgeomTileFunction, clsLabsFunction, clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction,
-    clsGeomPointShapeHeatMapFunction, clsGeomPointShapeChoroplethFunction, clsShapeHeatMapAesFunction,
+    clsGeomPointShapeHeatMapFunction, clsShapeHeatMapAesFunction,
     clsShapeChoroplethAesFunction, clsGroupFunction, clsSizeHeatMapAesFunction, clsSizeChoroplethAesFunction, clsHeatmapAesFunction,
    clsChoroplethAesFunction, clsXlabsFunction, clsYlabFunction, clsXScalecontinuousFunction, clsYScalecontinuousFunction,
    clsRFacetFunction, clsThemeFunction, clsRoundFunction, clsRoundFunction1, clsAggregateFunction, clsCBindFunction,
@@ -148,12 +148,8 @@ Public Class dlgHeatMapPlot
         ucrReceiverPointsChoropleth.Selector = ucrHeatMapSelector
         ucrReceiverPointsChoropleth.SetParameter(New RParameter("size", 0))
         ucrReceiverPointsChoropleth.SetParameterIsString()
+        ucrReceiverPointsChoropleth.SetDataType("numeric")
         ucrReceiverPointsChoropleth.bWithQuotes = False
-        ucrReceiverPointsChoropleth.AddToLinkedControls(ucrNudShapeChoropleth, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-
-        ucrNudShapeChoropleth.SetParameter(New RParameter("size", 2))
-        ucrNudShapeChoropleth.SetLinkedDisplayControl(lblSizeChoropleth)
 
         ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -237,7 +233,6 @@ Public Class dlgHeatMapPlot
         clsSizeHeatMapAesFunction = New RFunction
         clsSizeChoroplethAesFunction = New RFunction
         clsGeomPointShapeHeatMapFunction = New RFunction
-        clsGeomPointShapeChoroplethFunction = New RFunction
         clsShapeHeatMapAesFunction = New RFunction
         clsGroupFunction = New RFunction
         clsShapeChoroplethAesFunction = New RFunction
@@ -331,11 +326,6 @@ Public Class dlgHeatMapPlot
         clsShapeHeatMapAesFunction.SetPackageName("ggplot2")
         clsShapeHeatMapAesFunction.SetRCommand("aes")
 
-        clsGeomPointShapeChoroplethFunction.SetPackageName("ggplot2")
-        clsGeomPointShapeChoroplethFunction.SetRCommand("geom_point")
-        clsGeomPointShapeChoroplethFunction.AddParameter("mapping", clsRFunctionParameter:=clsShapeChoroplethAesFunction, iPosition:=0)
-        clsGeomPointShapeChoroplethFunction.AddParameter("size", 5, iPosition:=1)
-
         clsShapeChoroplethAesFunction.SetPackageName("ggplot2")
         clsShapeChoroplethAesFunction.SetRCommand("aes")
 
@@ -421,8 +411,6 @@ Public Class dlgHeatMapPlot
 
         ucrReceiverPointsHeatMap.AddAdditionalCodeParameterPair(clsShapeHeatMapAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
 
-        ucrReceiverPointsChoropleth.AddAdditionalCodeParameterPair(clsShapeChoroplethAesFunction, New RParameter("shape", 0), iAdditionalPairNo:=1)
-
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
 
         ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=1)
@@ -451,7 +439,6 @@ Public Class dlgHeatMapPlot
         ucrReceiverPointsHeatMap.SetRCode(clsSizeHeatMapAesFunction, bReset)
         ucrReceiverPointsChoropleth.SetRCode(clsSizeChoroplethAesFunction, bReset)
         ucrNudShapeHeatMap.SetRCode(clsGeomPointShapeHeatMapFunction, bReset)
-        ucrNudShapeChoropleth.SetRCode(clsGeomPointShapeChoroplethFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         bRCodeSet = True
 
@@ -581,9 +568,6 @@ Public Class dlgHeatMapPlot
                 Else
                     If {"integer", "numeric"}.Contains(ucrReceiverPointsChoropleth.strCurrDataType) Then
                         clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointSizeChoroplethFunction, iPosition:=7)
-                    ElseIf ucrReceiverPointsChoropleth.strCurrDataType = "factor" Then
-                        ucrNudShapeChoropleth.Visible = True
-                        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointShapeChoroplethFunction, iPosition:=7)
                     Else
                         clsBaseOperator.RemoveParameterByName("geom_point")
                     End If
@@ -648,11 +632,6 @@ Public Class dlgHeatMapPlot
             ucrNudShapeHeatMap.Visible = False
             If Not ucrReceiverPointsHeatMap.IsEmpty AndAlso ucrReceiverPointsHeatMap.strCurrDataType = "factor" Then
                 ucrNudShapeHeatMap.Visible = True
-            End If
-        Else
-            ucrNudShapeChoropleth.Visible = False
-            If Not ucrReceiverPointsChoropleth.IsEmpty AndAlso ucrReceiverPointsChoropleth.strCurrDataType = "factor" Then
-                ucrNudShapeChoropleth.Visible = True
             End If
         End If
     End Sub
