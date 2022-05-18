@@ -26,7 +26,7 @@ Public Class dlgCorruptionFitModel
     Private clsCorruptionModel, clsBinomialModel As New RFunction
     Private clsFormula, clsExplanatoryVariables As New ROperator
     'Function for display sub dialog
-    Public clsVisReg, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsVisReg, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction

@@ -32,8 +32,8 @@ Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDuplicateFunction As RFunction
-    Private clsConvertFunction As RFunction
+    Private clsDuplicateFunction As New RFunction
+    Private clsConvertFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""

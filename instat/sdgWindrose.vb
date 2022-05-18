@@ -36,6 +36,8 @@ Public Class sdgWindrose
         ucrPnlColourPalette.AddRadioButton(rdoQualitative)
         ucrPnlColourPalette.SetParameter(New RParameter("col_pal"))
 
+        ucrButtonsSdgWindrose.iHelpTopicID = 116
+
         ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
 

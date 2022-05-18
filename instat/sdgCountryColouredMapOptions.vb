@@ -51,6 +51,8 @@ Public Class sdgCountryColouredMapOptions
         ucrInputLatMin.SetLinkedDisplayControl(lblLatMin)
         ucrInputLatMax.SetLinkedDisplayControl(lblLatMax)
 
+        ucrBase.iHelpTopicID = 650
+
         lstRegionInputControls = New List(Of ucrInputTextBox)
         lstRegionInputControls.AddRange({ucrInputLatMin, ucrInputLatMax, ucrInputLongMin, ucrInputLongMax})
         For Each ucrInputTemp As ucrInputTextBox In lstRegionInputControls

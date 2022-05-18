@@ -523,6 +523,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataReshapeScaleOrDistance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeRandomSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
@@ -1213,7 +1214,7 @@ Partial Class frmMain
         'mnuModelOtherOneVariableExactResults
         '
         Me.mnuModelOtherOneVariableExactResults.Name = "mnuModelOtherOneVariableExactResults"
-        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableExactResults.Tag = "Exact_Results..."
         Me.mnuModelOtherOneVariableExactResults.Text = "Exact Results..."
         '
@@ -1221,7 +1222,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableSampleSummaryData.Enabled = False
         Me.mnuModelOtherOneVariableSampleSummaryData.Name = "mnuModelOtherOneVariableSampleSummaryData"
-        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableSampleSummaryData.Tag = "Summary_Data..."
         Me.mnuModelOtherOneVariableSampleSummaryData.Text = "Summary Data..."
         '
@@ -1229,7 +1230,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableNonParametric.Enabled = False
         Me.mnuModelOtherOneVariableNonParametric.Name = "mnuModelOtherOneVariableNonParametric"
-        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableNonParametric.Tag = "Non_Parametric..."
         Me.mnuModelOtherOneVariableNonParametric.Text = "Non Parametric..."
         '
@@ -1237,7 +1238,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableGoodnessofFit.Enabled = False
         Me.mnuModelOtherOneVariableGoodnessofFit.Name = "mnuModelOtherOneVariableGoodnessofFit"
-        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableGoodnessofFit.Tag = "Goodness_of_Fit"
         Me.mnuModelOtherOneVariableGoodnessofFit.Text = "Goodness of Fit..."
         '
@@ -3910,7 +3911,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshape
         '
-        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
+        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance, Me.mnuPrepareDataReshapeRandomSplit})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
         Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareDataReshape.Tag = ""
@@ -3992,6 +3993,13 @@ Partial Class frmMain
         Me.mnuPrepareDataReshapeScaleOrDistance.Name = "mnuPrepareDataReshapeScaleOrDistance"
         Me.mnuPrepareDataReshapeScaleOrDistance.Size = New System.Drawing.Size(197, 22)
         Me.mnuPrepareDataReshapeScaleOrDistance.Text = "Scale/Distance..."
+        '
+        'mnuPrepareDataReshapeRandomSplit
+        '
+        Me.mnuPrepareDataReshapeRandomSplit.Enabled = False
+        Me.mnuPrepareDataReshapeRandomSplit.Name = "mnuPrepareDataReshapeRandomSplit"
+        Me.mnuPrepareDataReshapeRandomSplit.Size = New System.Drawing.Size(197, 22)
+        Me.mnuPrepareDataReshapeRandomSplit.Text = "Random Split..."
         '
         'ToolStripSeparator7
         '
@@ -5734,4 +5742,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareDataFrameAddMergeColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataViewDeleteLabels As ToolStripMenuItem
     Friend WithEvents mnuTbLast10Dialogs As ToolStripSplitButton
+    Friend WithEvents mnuPrepareDataReshapeRandomSplit As ToolStripMenuItem
+
 End Class
