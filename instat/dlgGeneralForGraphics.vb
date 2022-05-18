@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgGeneralForGraphics
-    Public clsGgplotFunction As RFunction
+    Public clsGgplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private lstLayerComplete As New List(Of Boolean)

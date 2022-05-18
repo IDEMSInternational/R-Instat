@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSelect
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSetCurrentColumnSelection As RFunction
+    Private clsSetCurrentColumnSelection As New RFunction
     Private clsApplyAsSubset As New RFunction
 
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load

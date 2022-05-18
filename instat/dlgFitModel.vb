@@ -27,8 +27,8 @@ Public Class dlgFitModel
 
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction

@@ -21,7 +21,7 @@ Public Class ucrSelector
     Public Event DataFrameChanged()
     Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
     Public bFirstLoad As Boolean
-    Public strCurrentDataFrame As String
+    Public strCurrentDataFrame As String = ""
     ' If a dialog has receivers which can have columns from multiple data frames
     ' there may be a primary data frame which some receivers must be from.
     ' Other receivers may only allow columns from data frames linked to the primary data frame
@@ -52,8 +52,7 @@ Public Class ucrSelector
         ' Add any initialization after the InitializeComponent() call.
         lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
-        'bIncludeOverall = False
-        strCurrentDataFrame = ""
+        'bIncludeOverall = False 
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         strType = "column"
@@ -182,10 +181,12 @@ Public Class ucrSelector
         End If
 
         If lstCombinedMetadataLists IsNot Nothing Then
-            For i As Integer = 0 To i < lstCombinedMetadataLists.Count - 1
-                For i2 As Integer = 0 To lstCombinedMetadataLists(i).Count
-                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(i).Item(i2).Key
-                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(i).Item(i2).Value)
+            For iLstIndex As Integer = 0 To lstCombinedMetadataLists.Count - 1
+                'Note, in the dictionary
+                'Key = Metadata property (e.g class) and Value = array of metadata values(e.g numeric, factor, character) 
+                For iDctIndex As Integer = 0 To lstCombinedMetadataLists(iLstIndex).Count - 1
+                    strSelectorFillCondition &= lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Key
+                    strSelectorFillCondition &= String.Join("", lstCombinedMetadataLists.Item(iLstIndex).Item(iDctIndex).Value)
                 Next
             Next
         End If

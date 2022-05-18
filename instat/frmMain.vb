@@ -2436,4 +2436,8 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataViewDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataViewDeleteLabels.Click
         dlgViewFactorLabels.ShowDialog()
     End Sub
+
+    Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeRandomSplit.Click
+        dlgRandomSplit.ShowDialog()
+    End Sub
 End Class
