@@ -3022,7 +3022,7 @@ Partial Class frmMain
         Me.mnuTbCopy.Name = "mnuTbCopy"
         Me.mnuTbCopy.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbCopy.Text = "ToolStripSplitButton3"
-        Me.mnuTbCopy.ToolTipText = "View Last Graph"
+        Me.mnuTbCopy.ToolTipText = "Copy"
         '
         'mnuSubTbCopy
         '
@@ -3045,7 +3045,7 @@ Partial Class frmMain
         Me.mnuTbPaste.Name = "mnuTbPaste"
         Me.mnuTbPaste.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbPaste.Text = "ToolStripSplitButton3"
-        Me.mnuTbPaste.ToolTipText = "View Last Graph"
+        Me.mnuTbPaste.ToolTipText = "Paste"
         '
         'mnuSubTbPaste
         '
@@ -3072,7 +3072,7 @@ Partial Class frmMain
         Me.mnuTbLast10Dialogs.Name = "mnuTbLast10Dialogs"
         Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbLast10Dialogs.Text = "ToolStripSplitButton3"
-        Me.mnuTbLast10Dialogs.ToolTipText = "View Last Graph"
+        Me.mnuTbLast10Dialogs.ToolTipText = "View/Edit Last Dialogue"
         '
         'mnuLastGraph
         '
