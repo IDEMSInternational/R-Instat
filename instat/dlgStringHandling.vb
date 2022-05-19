@@ -21,7 +21,8 @@ Public Class dlgStringHandling
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction,
             clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction As New RFunction
-    Private clsDummyFunction, clsDetectDummyFunction, clsFindDummyFunction, clsAllDummyFunction, clsReplaceAllDummyFunction, clsRemoveAllDummyFunction As New RFunction
+
+    Private clsDummyFunction, clsDetectDummyFunction, clsFindDummyFunction, clsAllDummyFunction, clsReplaceAllDummyFunction, clsReplaceDummyFunction, clsRemoveAllDummyFunction As New RFunction
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -75,13 +76,16 @@ Public Class dlgStringHandling
         ucrPnlFindOptions.AddParameterValuesCondition(rdoExtract, "checked", "str_extract")
         ucrPnlFindOptions.AddParameterValuesCondition(rdoLocate, "checked", "str_locate")
 
+        ucrPnlReplaceOptions.AddRadioButton(rdoReplaceFirst)
+        ucrPnlReplaceOptions.AddRadioButton(rdoReplaceAll)
+        ucrPnlReplaceOptions.AddRadioButton(rdoReplaceCell)
+
+        ucrPnlReplaceOptions.AddParameterValuesCondition(rdoReplaceFirst, "checked", "str_replace")
+        ucrPnlReplaceOptions.AddParameterValuesCondition(rdoReplaceAll, "checked", "str_replace_all")
+
         ucrChkAll.SetText("All")
         ucrChkAll.SetParameter(New RParameter("checked", 0))
         ucrChkAll.SetValuesCheckedAndUnchecked(True, False)
-
-        ucrChkReplaceAll.SetText("Replace All")
-        ucrChkReplaceAll.SetParameter(New RParameter("checked", 0))
-        ucrChkReplaceAll.SetValuesCheckedAndUnchecked(True, False)
 
         ucrChkRemoveAll.SetText("Remove All")
         ucrChkRemoveAll.SetParameter(New RParameter("checked", 0))
@@ -136,7 +140,7 @@ Public Class dlgStringHandling
         ucrChkComments.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrChkReplaceAll}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
@@ -146,6 +150,7 @@ Public Class dlgStringHandling
         ucrPnlFindOptions.AddToLinkedControls(ucrChkAll, {rdoExtract, rdoLocate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFindOptions.SetLinkedDisplayControl(grpFindOptions)
         ucrPnlDetectOptions.SetLinkedDisplayControl(grpDetectOptions)
+        ucrPnlReplaceOptions.SetLinkedDisplayControl(grpReplaceOptions)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -176,6 +181,7 @@ Public Class dlgStringHandling
         clsAllDummyFunction = New RFunction
         clsReplaceAllDummyFunction = New RFunction
         clsRemoveAllDummyFunction = New RFunction
+        clsReplaceDummyFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
@@ -190,6 +196,7 @@ Public Class dlgStringHandling
         clsRemoveAllDummyFunction.AddParameter("checked", False, iPosition:=0)
         clsDetectDummyFunction.AddParameter("checked", "str_detect", iPosition:=0)
         clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
+        clsReplaceDummyFunction.AddParameter("checked", "str_replace", iPosition:=0)
 
         clsBoundaryFunction.SetPackageName("stringr")
         clsBoundaryFunction.SetRCommand("boundary")
@@ -286,7 +293,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
-        ucrChkReplaceAll.SetRCode(clsReplaceAllDummyFunction, bReset)
+        'ucrChkReplaceAll.SetRCode(clsReplaceAllDummyFunction, bReset)
         ucrChkRemoveAll.SetRCode(clsRemoveAllDummyFunction, bReset)
         ucrChkAll.SetRCode(clsAllDummyFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsStringCollFunction, bReset)
@@ -299,6 +306,7 @@ Public Class dlgStringHandling
         ucrInputReplaceNaBy.SetRCode(clsReplaceNaFunction, bReset)
         ucrPnlFindOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrPnlDetectOptions.SetRCode(clsDetectDummyFunction, bReset)
+        ucrPnlReplaceOptions.SetRCode(clsReplaceDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -359,7 +367,9 @@ Public Class dlgStringHandling
         End If
     End Sub
 
-    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged, ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkReplaceAll.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrInputReplaceNaBy.ControlValueChanged
+    Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged,
+        ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged,
+        ucrInputReplaceNaBy.ControlValueChanged, ucrPnlReplaceOptions.ControlValueChanged
         If rdoDetect.Checked Then
             If rdoDetects.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
@@ -394,12 +404,12 @@ Public Class dlgStringHandling
                 End If
             End If
         ElseIf rdoReplace.Checked Then
-            If ucrChkReplaceAll.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
-                ucrSaveStringHandling.SetPrefix("replace_all")
-            Else
+            If rdoReplaceFirst.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
                 ucrSaveStringHandling.SetPrefix("replace")
+            ElseIf rdoReplaceAll.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
+                ucrSaveStringHandling.SetPrefix("replace_all")
             End If
         ElseIf rdoReplaceNa.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
@@ -450,5 +460,13 @@ Public Class dlgStringHandling
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlReplaceOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlReplaceOptions.ControlContentsChanged
+        If rdoReplaceFirst.Checked Then
+            clsReplaceDummyFunction.AddParameter("checked", "str_replace", iPosition:=0)
+        ElseIf rdoReplaceAll.Checked Then
+            clsReplaceDummyFunction.AddParameter("checked", "str_replace_all", iPosition:=0)
+        End If
     End Sub
 End Class
