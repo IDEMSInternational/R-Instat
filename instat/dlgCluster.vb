@@ -114,7 +114,6 @@ Public Class dlgCluster
         clsMatrixFunction = New RFunction
         clsDummyFunction = New RFunction
         clsDistFunction = New RFunction
-        clsCurrentNewColumnFunction = New RFunction
         clsTransposeFunction = New RFunction
 
         ucrSaveNewDataFrame.SetPrefix("scale")
