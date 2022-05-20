@@ -188,7 +188,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.27
                 ucrBase.iHelpTopicID = 598
             Case "Arithmetic"
-                Me.Width = iBasicWidth * 1.32
+                Me.Width = iBasicWidth * 1.18
             Case Else
                 Me.Width = iBasicWidth
         End Select
