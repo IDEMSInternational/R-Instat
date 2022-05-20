@@ -2944,9 +2944,9 @@ Public Class ucrCalculator
 
     Private Sub cmdPrime_Click(sender As Object, e As EventArgs) Handles cmdPrime.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::gmp::is_prime(n = , reps = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::gmp::isprime(n = , reps = )", 9)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::is_prime()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime()", 1)
         End If
     End Sub
 
