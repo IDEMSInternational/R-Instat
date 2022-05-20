@@ -63,6 +63,11 @@ Partial Class ucrCalculator
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpDates = New System.Windows.Forms.GroupBox()
+        Me.grpArithmetic = New System.Windows.Forms.GroupBox()
+        Me.cmdArithmeticHelp = New System.Windows.Forms.Button()
+        Me.cmdFactorial = New System.Windows.Forms.Button()
+        Me.cmdPrime = New System.Windows.Forms.Button()
+        Me.cmdBigq = New System.Windows.Forms.Button()
         Me.cmdPm = New System.Windows.Forms.Button()
         Me.cmdTime = New System.Windows.Forms.Button()
         Me.cmdDateTime = New System.Windows.Forms.Button()
@@ -406,6 +411,7 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
+        Me.grpArithmetic.SuspendLayout()
         Me.grpFactor.SuspendLayout()
         Me.grpHydroGOF.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
@@ -728,6 +734,55 @@ Partial Class ucrCalculator
         Me.grpDates.TabIndex = 188
         Me.grpDates.TabStop = False
         Me.grpDates.Text = "Dates/Times"
+        '
+        'grpArithmetic
+        '
+        Me.grpArithmetic.Controls.Add(Me.cmdArithmeticHelp)
+        Me.grpArithmetic.Controls.Add(Me.cmdFactorial)
+        Me.grpArithmetic.Controls.Add(Me.cmdPrime)
+        Me.grpArithmetic.Controls.Add(Me.cmdBigq)
+        Me.grpArithmetic.Location = New System.Drawing.Point(432, 61)
+        Me.grpArithmetic.Name = "grpArithmetic"
+        Me.grpArithmetic.Size = New System.Drawing.Size(159, 97)
+        Me.grpArithmetic.TabIndex = 183
+        Me.grpArithmetic.TabStop = False
+        Me.grpArithmetic.Text = "Arithmetic"
+        '
+        'cmdArithmeticHelp
+        '
+        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(95, 39)
+        Me.cmdArithmeticHelp.Name = "cmdArithmeticHelp"
+        Me.cmdArithmeticHelp.Size = New System.Drawing.Size(57, 23)
+        Me.cmdArithmeticHelp.TabIndex = 3
+        Me.cmdArithmeticHelp.Text = "R Help"
+        Me.cmdArithmeticHelp.UseVisualStyleBackColor = True
+        '
+        'cmdFactorial
+        '
+        Me.cmdFactorial.Location = New System.Drawing.Point(3, 39)
+        Me.cmdFactorial.Name = "cmdFactorial"
+        Me.cmdFactorial.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorial.TabIndex = 2
+        Me.cmdFactorial.Text = "Factorial"
+        Me.cmdFactorial.UseVisualStyleBackColor = True
+        '
+        'cmdPrime
+        '
+        Me.cmdPrime.Location = New System.Drawing.Point(77, 17)
+        Me.cmdPrime.Name = "cmdPrime"
+        Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPrime.TabIndex = 1
+        Me.cmdPrime.Text = "Prime"
+        Me.cmdPrime.UseVisualStyleBackColor = True
+        '
+        'cmdBigq
+        '
+        Me.cmdBigq.Location = New System.Drawing.Point(3, 17)
+        Me.cmdBigq.Name = "cmdBigq"
+        Me.cmdBigq.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigq.TabIndex = 0
+        Me.cmdBigq.Text = "bigq"
+        Me.cmdBigq.UseVisualStyleBackColor = True
         '
         'cmdPm
         '
@@ -4812,6 +4867,7 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpArithmetic)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpFactor)
@@ -4839,6 +4895,7 @@ Partial Class ucrCalculator
         Me.Size = New System.Drawing.Size(878, 457)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
+        Me.grpArithmetic.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
@@ -5224,4 +5281,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdHelpDplyr As Button
     Friend WithEvents cmdStringRHelp As Button
     Friend WithEvents cmdProbRHelp As Button
+    Friend WithEvents grpArithmetic As GroupBox
+    Friend WithEvents cmdArithmeticHelp As Button
+    Friend WithEvents cmdFactorial As Button
+    Friend WithEvents cmdPrime As Button
+    Friend WithEvents cmdBigq As Button
 End Class
