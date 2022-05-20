@@ -573,8 +573,10 @@ Public Class dlgRowSummary
     Private Sub AddConcatenateParameters()
         clsConcatenateFunction.ClearParameters()
         If rdoRowRanks.Checked Then
+            Dim iPosition As Integer = 0
             For Each strVariable In ucrReceiverForRowSummaries.GetVariableNamesAsList
-                clsConcatenateFunction.AddParameter(strVariable, Chr(34) & strVariable & "_r" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsConcatenateFunction.AddParameter(strVariable, Chr(34) & strVariable & "_r" & Chr(34), bIncludeArgumentName:=False, iPosition:=iPosition)
+                iPosition += 1
             Next
         ElseIf rdoRowRange.Checked Then
             clsConcatenateFunction.AddParameter("r_min", Chr(34) & "r_min" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
