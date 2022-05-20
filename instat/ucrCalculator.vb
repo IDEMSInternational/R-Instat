@@ -61,6 +61,7 @@ Public Class ucrCalculator
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
+
         'Temp disabled::Needs discussions to see if they are needed
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
@@ -2935,9 +2936,25 @@ Public Class ucrCalculator
 
     Private Sub cmdBigq_Click(sender As Object, e As EventArgs) Handles cmdBigq.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(n = , d = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 1)
         End If
+    End Sub
+
+    Private Sub cmdPrime_Click(sender As Object, e As EventArgs) Handles cmdPrime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::gmp::is_prime(n = , reps = )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::is_prime()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdArithmeticHelp_Click(sender As Object, e As EventArgs) Handles cmdArithmeticHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Arithmetic" Then
+            strPackageName = "gmp"
+        End If
+        OpenHelpPage()
     End Sub
 End Class

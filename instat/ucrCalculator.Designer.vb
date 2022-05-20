@@ -63,11 +63,6 @@ Partial Class ucrCalculator
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpDates = New System.Windows.Forms.GroupBox()
-        Me.grpArithmetic = New System.Windows.Forms.GroupBox()
-        Me.cmdArithmeticHelp = New System.Windows.Forms.Button()
-        Me.cmdFactorial = New System.Windows.Forms.Button()
-        Me.cmdPrime = New System.Windows.Forms.Button()
-        Me.cmdBigq = New System.Windows.Forms.Button()
         Me.cmdPm = New System.Windows.Forms.Button()
         Me.cmdTime = New System.Windows.Forms.Button()
         Me.cmdDateTime = New System.Windows.Forms.Button()
@@ -87,6 +82,11 @@ Partial Class ucrCalculator
         Me.cmdMdy = New System.Windows.Forms.Button()
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
+        Me.grpArithmetic = New System.Windows.Forms.GroupBox()
+        Me.cmdArithmeticHelp = New System.Windows.Forms.Button()
+        Me.cmdFactorial = New System.Windows.Forms.Button()
+        Me.cmdPrime = New System.Windows.Forms.Button()
+        Me.cmdBigq = New System.Windows.Forms.Button()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdTransformHelp = New System.Windows.Forms.Button()
         Me.cmdShuffle = New System.Windows.Forms.Button()
@@ -735,55 +735,6 @@ Partial Class ucrCalculator
         Me.grpDates.TabStop = False
         Me.grpDates.Text = "Dates/Times"
         '
-        'grpArithmetic
-        '
-        Me.grpArithmetic.Controls.Add(Me.cmdArithmeticHelp)
-        Me.grpArithmetic.Controls.Add(Me.cmdFactorial)
-        Me.grpArithmetic.Controls.Add(Me.cmdPrime)
-        Me.grpArithmetic.Controls.Add(Me.cmdBigq)
-        Me.grpArithmetic.Location = New System.Drawing.Point(432, 61)
-        Me.grpArithmetic.Name = "grpArithmetic"
-        Me.grpArithmetic.Size = New System.Drawing.Size(159, 97)
-        Me.grpArithmetic.TabIndex = 183
-        Me.grpArithmetic.TabStop = False
-        Me.grpArithmetic.Text = "Arithmetic"
-        '
-        'cmdArithmeticHelp
-        '
-        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(95, 39)
-        Me.cmdArithmeticHelp.Name = "cmdArithmeticHelp"
-        Me.cmdArithmeticHelp.Size = New System.Drawing.Size(57, 23)
-        Me.cmdArithmeticHelp.TabIndex = 3
-        Me.cmdArithmeticHelp.Text = "R Help"
-        Me.cmdArithmeticHelp.UseVisualStyleBackColor = True
-        '
-        'cmdFactorial
-        '
-        Me.cmdFactorial.Location = New System.Drawing.Point(3, 39)
-        Me.cmdFactorial.Name = "cmdFactorial"
-        Me.cmdFactorial.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFactorial.TabIndex = 2
-        Me.cmdFactorial.Text = "Factorial"
-        Me.cmdFactorial.UseVisualStyleBackColor = True
-        '
-        'cmdPrime
-        '
-        Me.cmdPrime.Location = New System.Drawing.Point(77, 17)
-        Me.cmdPrime.Name = "cmdPrime"
-        Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPrime.TabIndex = 1
-        Me.cmdPrime.Text = "Prime"
-        Me.cmdPrime.UseVisualStyleBackColor = True
-        '
-        'cmdBigq
-        '
-        Me.cmdBigq.Location = New System.Drawing.Point(3, 17)
-        Me.cmdBigq.Name = "cmdBigq"
-        Me.cmdBigq.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBigq.TabIndex = 0
-        Me.cmdBigq.Text = "bigq"
-        Me.cmdBigq.UseVisualStyleBackColor = True
-        '
         'cmdPm
         '
         Me.cmdPm.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -987,6 +938,56 @@ Partial Class ucrCalculator
         Me.cmdLeap.TabIndex = 136
         Me.cmdLeap.Text = "leap"
         Me.cmdLeap.UseVisualStyleBackColor = True
+        '
+        'grpArithmetic
+        '
+        Me.grpArithmetic.Controls.Add(Me.cmdArithmeticHelp)
+        Me.grpArithmetic.Controls.Add(Me.cmdFactorial)
+        Me.grpArithmetic.Controls.Add(Me.cmdPrime)
+        Me.grpArithmetic.Controls.Add(Me.cmdBigq)
+        Me.grpArithmetic.Location = New System.Drawing.Point(432, 61)
+        Me.grpArithmetic.Name = "grpArithmetic"
+        Me.grpArithmetic.Size = New System.Drawing.Size(152, 66)
+        Me.grpArithmetic.TabIndex = 183
+        Me.grpArithmetic.TabStop = False
+        Me.grpArithmetic.Text = "Arithmetic"
+        '
+        'cmdArithmeticHelp
+        '
+        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(93, 39)
+        Me.cmdArithmeticHelp.Name = "cmdArithmeticHelp"
+        Me.cmdArithmeticHelp.Size = New System.Drawing.Size(57, 23)
+        Me.cmdArithmeticHelp.TabIndex = 3
+        Me.cmdArithmeticHelp.Text = "R Help"
+        Me.cmdArithmeticHelp.UseVisualStyleBackColor = True
+        '
+        'cmdFactorial
+        '
+        Me.cmdFactorial.Enabled = False
+        Me.cmdFactorial.Location = New System.Drawing.Point(1, 39)
+        Me.cmdFactorial.Name = "cmdFactorial"
+        Me.cmdFactorial.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorial.TabIndex = 2
+        Me.cmdFactorial.Text = "Factorial"
+        Me.cmdFactorial.UseVisualStyleBackColor = True
+        '
+        'cmdPrime
+        '
+        Me.cmdPrime.Location = New System.Drawing.Point(75, 17)
+        Me.cmdPrime.Name = "cmdPrime"
+        Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPrime.TabIndex = 1
+        Me.cmdPrime.Text = "Prime"
+        Me.cmdPrime.UseVisualStyleBackColor = True
+        '
+        'cmdBigq
+        '
+        Me.cmdBigq.Location = New System.Drawing.Point(1, 17)
+        Me.cmdBigq.Name = "cmdBigq"
+        Me.cmdBigq.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigq.TabIndex = 0
+        Me.cmdBigq.Text = "bigq"
+        Me.cmdBigq.UseVisualStyleBackColor = True
         '
         'grpFactor
         '
