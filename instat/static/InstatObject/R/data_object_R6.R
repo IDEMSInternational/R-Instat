@@ -673,10 +673,10 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   # Get the adjacent position to be used in appending the new column names
   if(before) {
     if(adjacent_column == "") adjacent_position <- 0
-    else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
+    else adjacent_position <- which(self$get_column_names(use_current_column_selection =FALSE) == adjacent_column) - 1
   } else {
       if(adjacent_column == "") adjacent_position <- self$get_column_count()
-      else adjacent_position <- which(self$get_column_names() == adjacent_column)
+      else adjacent_position <- which(self$get_column_names(use_current_column_selection =FALSE) == adjacent_column)
   }
   # Replace existing names with empty placeholders. Maintains the indices
   temp_all_col_names <- replace(self$get_column_names(use_current_column_selection = FALSE), self$get_column_names(use_current_column_selection = FALSE) %in% new_col_names, "")
@@ -1186,7 +1186,7 @@ DataSheet$set("public", "remove_rows_in_data", function(row_names) {
 )
 
 DataSheet$set("public", "get_next_default_column_name", function(prefix) {
-  return(next_default_item(prefix = prefix, existing_names = self$get_column_names()))
+  return(next_default_item(prefix = prefix, existing_names = self$get_column_names(use_current_column_selection = FALSE)))
 }
 )
 
