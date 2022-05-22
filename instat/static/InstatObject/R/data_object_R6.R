@@ -690,14 +690,14 @@ if(!all(self$get_column_names(use_current_column_selection = FALSE) == new_col_n
 )
 
 #A bug in sjPlot requires removing labels when a factor column already has labels, using remove_labels for this if needed.
-DataSheet$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
+DataSheet$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, use_column_selection = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   #if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) {
-      dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
+      dat <- self$get_data_frame(use_current_filter = use_current_filter, use_column_selection = use_column_selection, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
       if(remove_labels) {
         for(i in seq_along(dat)) {
           if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
@@ -706,13 +706,13 @@ DataSheet$set("public", "get_columns_from_data", function(col_names, force_as_da
       return(dat)
     }
     else {
-      dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[[col_names]]
+      dat <- self$get_data_frame(use_current_filter = use_current_filter, use_column_selection = use_column_selection, drop_unused_filter_levels = drop_unused_filter_levels)[[col_names]]
       if(remove_labels && !is.numeric(dat)) attr(dat, "labels") <- NULL
       return(dat)
     }
   }
   else {
-    dat <- self$get_data_frame(use_current_filter = use_current_filter, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
+    dat <- self$get_data_frame(use_current_filter = use_current_filter, use_column_selection = use_column_selection, drop_unused_filter_levels = drop_unused_filter_levels)[col_names]
     if(remove_labels) {
       for(i in seq_along(dat)) {
         if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
@@ -1146,7 +1146,7 @@ DataSheet$set("public", "add_defaults_variables_metadata", function(column_names
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
     if(!self$is_variables_metadata(signif_figures_label, column) || is.na(self$get_variables_metadata(property = signif_figures_label, column = column))) {
-      self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
+      self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE, use_column_selection = FALSE)))
     }
     if(self$is_variables_metadata(labels_label, column)) {
       curr_labels <- self$get_variables_metadata(property = labels_label, column = column, direct_from_attributes = TRUE)
