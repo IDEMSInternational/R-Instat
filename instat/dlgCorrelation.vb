@@ -22,9 +22,12 @@ Public Class dlgCorrelation
     Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction,
         clsRGGscatMatrixFunction, clsCorrelationFunction, clsCurrentDataFrameFunction,
         clsGuidesFunction, clsGuideLegendFunction, clsDummyFunction, clsFashionModelFunction,
-        clsFashionDataFrameFunction, clsShaveFunction, clsRearrangeFunction As New RFunction
+        clsFashionDataFrameFunction, clsShaveFunction, clsRearrangeFunction,
+    clsMutateFunction, clsAcrossFunction, clsDataFrameFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsDummyShave As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
     Private bResetSubdialog As Boolean = False
@@ -219,6 +222,11 @@ Public Class dlgCorrelation
         clsShaveFunction = New RFunction
         clsDummyShave = New RFunction
         clsRearrangeFunction = New RFunction
+        clsPipeOperator = New ROperator
+        clsNotOperator = New ROperator
+        clsMutateFunction = New RFunction
+        clsAcrossFunction = New RFunction
+        clsDataFrameFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
@@ -305,6 +313,21 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.bExcludeAssignedFunctionOutput = False
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
+
+        clsDataFrameFunction.SetRCommand("data.frame")
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=0)
+
+        clsNotOperator.SetOperation("!")
+        clsNotOperator.AddParameter("term", iPosition:=0)
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+        clsMutateFunction.AddParameter("x", clsRFunctionParameter:=clsAcrossFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsAcrossFunction.SetPackageName("dplyr")
+        clsAcrossFunction.SetRCommand("across")
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
         clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
