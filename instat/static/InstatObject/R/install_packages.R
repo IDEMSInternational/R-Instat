@@ -124,6 +124,7 @@ pkgs <-
     # Model > Probability Distributions > Show Model
     # Model > Probability Distributions > Random Samples
     "mc2d",
+    # For creating extra summary statistics in Describe > Two/Three Variables > Summarise
     "skimr",
     # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
     "fastDummies",

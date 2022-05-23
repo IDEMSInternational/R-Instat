@@ -458,6 +458,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataOneWayFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataViewDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator41 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareCheckDataExportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataImportOpenRefine = New System.Windows.Forms.ToolStripMenuItem()
@@ -525,6 +526,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnReshapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeTranspose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareDataReshapeScaleOrDistance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareDataReshapeRandomSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareKeysAndLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareKeysAndLinksAddKey = New System.Windows.Forms.ToolStripMenuItem()
@@ -674,7 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareCheckDataViewDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1216,7 +1217,7 @@ Partial Class frmMain
         'mnuModelOtherOneVariableExactResults
         '
         Me.mnuModelOtherOneVariableExactResults.Name = "mnuModelOtherOneVariableExactResults"
-        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableExactResults.Tag = "Exact_Results..."
         Me.mnuModelOtherOneVariableExactResults.Text = "Exact Results..."
         '
@@ -1224,7 +1225,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableSampleSummaryData.Enabled = False
         Me.mnuModelOtherOneVariableSampleSummaryData.Name = "mnuModelOtherOneVariableSampleSummaryData"
-        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableSampleSummaryData.Tag = "Summary_Data..."
         Me.mnuModelOtherOneVariableSampleSummaryData.Text = "Summary Data..."
         '
@@ -1232,7 +1233,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableNonParametric.Enabled = False
         Me.mnuModelOtherOneVariableNonParametric.Name = "mnuModelOtherOneVariableNonParametric"
-        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableNonParametric.Tag = "Non_Parametric..."
         Me.mnuModelOtherOneVariableNonParametric.Text = "Non Parametric..."
         '
@@ -1240,7 +1241,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableGoodnessofFit.Enabled = False
         Me.mnuModelOtherOneVariableGoodnessofFit.Name = "mnuModelOtherOneVariableGoodnessofFit"
-        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(166, 22)
+        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(180, 22)
         Me.mnuModelOtherOneVariableGoodnessofFit.Tag = "Goodness_of_Fit"
         Me.mnuModelOtherOneVariableGoodnessofFit.Text = "Goodness of Fit..."
         '
@@ -3572,6 +3573,12 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataOneWayFrequencies.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataOneWayFrequencies.Text = "One Variable Frequencies..."
         '
+        'mnuPrepareCheckDataViewDeleteLabels
+        '
+        Me.mnuPrepareCheckDataViewDeleteLabels.Name = "mnuPrepareCheckDataViewDeleteLabels"
+        Me.mnuPrepareCheckDataViewDeleteLabels.Size = New System.Drawing.Size(245, 22)
+        Me.mnuPrepareCheckDataViewDeleteLabels.Text = "View/Delete Labels..."
+        '
         'ToolStripSeparator41
         '
         Me.ToolStripSeparator41.Name = "ToolStripSeparator41"
@@ -3705,98 +3712,98 @@ Partial Class frmMain
         'mnuPrepareColumnFactorConvertToFactor
         '
         Me.mnuPrepareColumnFactorConvertToFactor.Name = "mnuPrepareColumnFactorConvertToFactor"
-        Me.mnuPrepareColumnFactorConvertToFactor.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorConvertToFactor.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorConvertToFactor.Tag = "Convert_To_Factor"
         Me.mnuPrepareColumnFactorConvertToFactor.Text = "Convert To Factor..."
         '
         'mnuPrepareColumnFactorRecodeNumeric
         '
         Me.mnuPrepareColumnFactorRecodeNumeric.Name = "mnuPrepareColumnFactorRecodeNumeric"
-        Me.mnuPrepareColumnFactorRecodeNumeric.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorRecodeNumeric.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorRecodeNumeric.Tag = "Recode_Numeric..."
         Me.mnuPrepareColumnFactorRecodeNumeric.Text = "Recode Numeric..."
         '
         'mnuPrepareColumnFactorCountInFactor
         '
         Me.mnuPrepareColumnFactorCountInFactor.Name = "mnuPrepareColumnFactorCountInFactor"
-        Me.mnuPrepareColumnFactorCountInFactor.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorCountInFactor.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorCountInFactor.Text = "Count in Factor..."
         '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
         '
         'mnuPrepareColumnFactorRecodeFactor
         '
         Me.mnuPrepareColumnFactorRecodeFactor.Name = "mnuPrepareColumnFactorRecodeFactor"
-        Me.mnuPrepareColumnFactorRecodeFactor.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorRecodeFactor.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorRecodeFactor.Tag = "Recode_Factor..."
         Me.mnuPrepareColumnFactorRecodeFactor.Text = "Recode Factor..."
         '
         'mnuPrepareColumnFactorCombineFactors
         '
         Me.mnuPrepareColumnFactorCombineFactors.Name = "mnuPrepareColumnFactorCombineFactors"
-        Me.mnuPrepareColumnFactorCombineFactors.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorCombineFactors.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorCombineFactors.Tag = "Combine_Factors..."
         Me.mnuPrepareColumnFactorCombineFactors.Text = "Combine Factors..."
         '
         'mnuPrepareColumnFactorDummyVariables
         '
         Me.mnuPrepareColumnFactorDummyVariables.Name = "mnuPrepareColumnFactorDummyVariables"
-        Me.mnuPrepareColumnFactorDummyVariables.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorDummyVariables.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorDummyVariables.Tag = "Dummy_Variables..."
         Me.mnuPrepareColumnFactorDummyVariables.Text = "Dummy Variables..."
         '
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
         '
         'mnuPrepareColumnFactorLevelsLabels
         '
         Me.mnuPrepareColumnFactorLevelsLabels.Name = "mnuPrepareColumnFactorLevelsLabels"
-        Me.mnuPrepareColumnFactorLevelsLabels.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorLevelsLabels.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorLevelsLabels.Tag = "Levels/Labels..."
         Me.mnuPrepareColumnFactorLevelsLabels.Text = "Levels/Labels..."
         '
         'mnuPrepareColumnFactorReorderLevels
         '
         Me.mnuPrepareColumnFactorReorderLevels.Name = "mnuPrepareColumnFactorReorderLevels"
-        Me.mnuPrepareColumnFactorReorderLevels.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorReorderLevels.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorReorderLevels.Tag = "Reorder_Levels..."
         Me.mnuPrepareColumnFactorReorderLevels.Text = "Reorder Levels..."
         '
         'mnuPrepareColumnFactorReferenceLevel
         '
         Me.mnuPrepareColumnFactorReferenceLevel.Name = "mnuPrepareColumnFactorReferenceLevel"
-        Me.mnuPrepareColumnFactorReferenceLevel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorReferenceLevel.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorReferenceLevel.Tag = "Reference_Level..."
         Me.mnuPrepareColumnFactorReferenceLevel.Text = "Reference Level..."
         '
         'mnuPrepareColumnFactorUnusedLevels
         '
         Me.mnuPrepareColumnFactorUnusedLevels.Name = "mnuPrepareColumnFactorUnusedLevels"
-        Me.mnuPrepareColumnFactorUnusedLevels.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorUnusedLevels.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorUnusedLevels.Tag = "Unused_Levels..."
         Me.mnuPrepareColumnFactorUnusedLevels.Text = "Unused Levels..."
         '
         'mnuPrepareColumnFactorContrasts
         '
         Me.mnuPrepareColumnFactorContrasts.Name = "mnuPrepareColumnFactorContrasts"
-        Me.mnuPrepareColumnFactorContrasts.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorContrasts.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorContrasts.Tag = "Contrasts..."
         Me.mnuPrepareColumnFactorContrasts.Text = "Contrasts..."
         '
         'ToolStripSeparator19
         '
         Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
-        Me.ToolStripSeparator19.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator19.Size = New System.Drawing.Size(176, 6)
         '
         'mnuPrepareColumnFactorFactorDataFrame
         '
         Me.mnuPrepareColumnFactorFactorDataFrame.Name = "mnuPrepareColumnFactorFactorDataFrame"
-        Me.mnuPrepareColumnFactorFactorDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnFactorFactorDataFrame.Size = New System.Drawing.Size(179, 22)
         Me.mnuPrepareColumnFactorFactorDataFrame.Tag = "Factor_Data_Frame"
         Me.mnuPrepareColumnFactorFactorDataFrame.Text = "Factor Data Frame..."
         '
@@ -3930,7 +3937,7 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshape
         '
-        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance})
+        Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance, Me.mnuPrepareDataReshapeRandomSplit})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
         Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareDataReshape.Tag = ""
@@ -4012,6 +4019,13 @@ Partial Class frmMain
         Me.mnuPrepareDataReshapeScaleOrDistance.Name = "mnuPrepareDataReshapeScaleOrDistance"
         Me.mnuPrepareDataReshapeScaleOrDistance.Size = New System.Drawing.Size(197, 22)
         Me.mnuPrepareDataReshapeScaleOrDistance.Text = "Scale/Distance..."
+        '
+        'mnuPrepareDataReshapeRandomSplit
+        '
+        Me.mnuPrepareDataReshapeRandomSplit.Enabled = False
+        Me.mnuPrepareDataReshapeRandomSplit.Name = "mnuPrepareDataReshapeRandomSplit"
+        Me.mnuPrepareDataReshapeRandomSplit.Size = New System.Drawing.Size(197, 22)
+        Me.mnuPrepareDataReshapeRandomSplit.Text = "Random Split..."
         '
         'ToolStripSeparator7
         '
@@ -5067,12 +5081,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuPrepareCheckDataViewDeleteLabels
-        '
-        Me.mnuPrepareCheckDataViewDeleteLabels.Name = "mnuPrepareCheckDataViewDeleteLabels"
-        Me.mnuPrepareCheckDataViewDeleteLabels.Size = New System.Drawing.Size(245, 22)
-        Me.mnuPrepareCheckDataViewDeleteLabels.Text = "View/Delete Labels..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5763,4 +5771,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameAddMergeColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataViewDeleteLabels As ToolStripMenuItem
+    Friend WithEvents mnuPrepareDataReshapeRandomSplit As ToolStripMenuItem
 End Class
