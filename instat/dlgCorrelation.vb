@@ -320,7 +320,8 @@ Public Class dlgCorrelation
         clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=0)
 
         clsNotOperator.SetOperation("!")
-        clsNotOperator.AddParameter("term", iPosition:=0)
+        clsNotOperator.AddParameter("empty_string", "", iPosition:=0)
+        clsNotOperator.AddParameter("term", "term", iPosition:=1)
 
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
@@ -328,6 +329,9 @@ Public Class dlgCorrelation
 
         clsAcrossFunction.SetPackageName("dplyr")
         clsAcrossFunction.SetRCommand("across")
+        clsAcrossFunction.AddParameter("x", clsROperatorParameter:=clsNotOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAcrossFunction.AddParameter("as_numeric", "as.numeric", iPosition:=1, bIncludeArgumentName:=False)
+        clsAcrossFunction.AddParameter("as_character", "as.character", iPosition:=1, bIncludeArgumentName:=False)
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
         clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
@@ -468,10 +472,12 @@ Public Class dlgCorrelation
         If rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
                 If ucrChkDisplayAsDataFrame.Checked Then
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionDataFrameFunction)
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFashionDataFrameFunction, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
                     ucrBase.clsRsyntax.iCallType = 0
                 Else
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsFashionModelFunction)
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFashionModelFunction, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
                     ucrBase.clsRsyntax.iCallType = 2
                 End If
             Else
@@ -535,13 +541,16 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged, ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged, ucrSaveFashionModel.ControlValueChanged, ucrSaveCorrelation.ControlValueChanged, ucrInputRearrange.ControlValueChanged ', ucrChkDisplayAsDataFrame.ControlValueChanged, ucrSaveFashionDataFrame.ControlValueChanged
+    Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged,
+        ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged,
+        ucrSaveFashionModel.ControlValueChanged, ucrSaveCorrelation.ControlValueChanged, ucrInputRearrange.ControlValueChanged
         DisplayOptions()
         ChangeBaseFunction()
 
         If ucrChangedControl Is ucrChkDisplayOptions Then
             ChangeBaseAsModelOrDataframe()
         End If
+
     End Sub
 
     Private Sub ChangeBaseAsModelOrDataframe()
@@ -557,5 +566,13 @@ Public Class dlgCorrelation
     Private Sub ucrChkDisplayAsDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsDataFrame.ControlValueChanged, ucrSaveFashionDataFrame.ControlValueChanged
         ChangeBaseAsModelOrDataframe()
         ChangeBaseFunction()
+    End Sub
+
+    Private Sub ucrInputDisplayNas_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDisplayNas.ControlValueChanged
+        If rdoMultipleColumns.Checked AndAlso ucrChkDisplayOptions.Checked Then
+            If IsNumeric(ucrInputDisplayNas.GetText()) Then
+
+            End If
+        End If
     End Sub
 End Class
