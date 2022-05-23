@@ -40,6 +40,7 @@ Partial Class dlgCluster
         Me.ucrChkMatrix = New instat.ucrCheck()
         Me.ucrNudPowerOption = New instat.ucrNud()
         Me.lblPowerOption = New System.Windows.Forms.Label()
+        Me.ucrSaveDistance = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'rdoWholeDataFrame
@@ -208,7 +209,7 @@ Partial Class dlgCluster
         '
         Me.ucrChkMatrix.AutoSize = True
         Me.ucrChkMatrix.Checked = False
-        Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 259)
+        Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 312)
         Me.ucrChkMatrix.Name = "ucrChkMatrix"
         Me.ucrChkMatrix.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkMatrix.TabIndex = 20
@@ -235,6 +236,15 @@ Partial Class dlgCluster
         Me.lblPowerOption.TabIndex = 24
         Me.lblPowerOption.Text = "Power Option:"
         '
+        'ucrSaveDistance
+        '
+        Me.ucrSaveDistance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDistance.Location = New System.Drawing.Point(8, 338)
+        Me.ucrSaveDistance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDistance.Name = "ucrSaveDistance"
+        Me.ucrSaveDistance.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveDistance.TabIndex = 25
+        '
         'dlgCluster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -250,7 +260,6 @@ Partial Class dlgCluster
         Me.Controls.Add(Me.rdoDistanceData)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrChkCenterEachVariable)
-        Me.Controls.Add(Me.ucrChkScaleEachVariable)
         Me.Controls.Add(Me.ucrReceiverPrepareData)
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
@@ -258,7 +267,9 @@ Partial Class dlgCluster
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrPnlPrepareData)
         Me.Controls.Add(Me.ucrChkOmitMissingRows)
+        Me.Controls.Add(Me.ucrChkScaleEachVariable)
         Me.Controls.Add(Me.ucrChkMatrix)
+        Me.Controls.Add(Me.ucrSaveDistance)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -288,4 +299,5 @@ Partial Class dlgCluster
     Friend WithEvents ucrChkMatrix As ucrCheck
     Friend WithEvents lblPowerOption As Label
     Friend WithEvents ucrNudPowerOption As ucrNud
+    Friend WithEvents ucrSaveDistance As ucrSave
 End Class
