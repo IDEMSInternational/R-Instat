@@ -80,7 +80,7 @@ Public Class dlgCluster
         ucrChkScaleEachVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkScaleEachVariable.SetRDefault("TRUE")
 
-        ucrChkMatrix.SetText("Matrix")
+        ucrChkMatrix.SetText("Save Result:")
         ucrChkMatrix.AddParameterValuesCondition(True, "matrix", "True")
         ucrChkMatrix.AddParameterValuesCondition(False, "matrix", "False")
 
@@ -95,9 +95,12 @@ Public Class dlgCluster
         ucrInputMethod.SetItems(dctMethod)
         ucrInputMethod.SetRDefault(Chr(34) & "euclidean" & Chr(34))
 
+        ucrInputMethod.AddToLinkedControls(ucrNudPowerOption, {"minkowski"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverPrepareData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPrepareData.AddToLinkedControls({ucrChkCenterEachVariable, ucrChkOmitMissingRows, ucrChkScaleEachVariable}, {rdoScaleData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPrepareData.AddToLinkedControls({ucrInputMethod, ucrChkMatrix, ucrNudPowerOption}, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPrepareData.AddToLinkedControls({ucrChkMatrix}, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPrepareData.AddToLinkedControls(ucrInputMethod, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
@@ -157,8 +160,8 @@ Public Class dlgCluster
         ucrNudPowerOption.AddAdditionalCodeParameterPair(clsMatrixDistFunction, New RParameter("p", 2), iAdditionalPairNo:=1)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsMatrixDistFunction, New RParameter("method", 1), iAdditionalPairNo:=1)
 
-        ucrInputMethod.SetRCode(clsDistFunction, bReset)
         ucrNudPowerOption.SetRCode(clsDistFunction, bReset)
+        ucrInputMethod.SetRCode(clsDistFunction, bReset)
         ucrChkCenterEachVariable.SetRCode(clsScaleFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsScaleFunction, bReset)
         ucrChkScaleEachVariable.SetRCode(clsScaleFunction, bReset)
