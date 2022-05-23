@@ -476,38 +476,42 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     # note: important that there is *no* space between | for grepl function
     # and important there IS a psace in str_detect..!
     
-    # get the data type of the column
-    col_data_type <- self$get_variables_metadata(data_name = calc_from_data_name, column = col_name, property = "class")
-    # if it is a ordered factor...
-    if (any(stringr::str_detect("ordered", col_data_type))){
-      # put in here the ones that DO work for ordered factor
-      if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range", formula_fn_exp))){
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    if (exists(deparse(substitute(col_name)), parent.frame())){
+      # get the data type of the column
+      col_data_type <- self$get_variables_metadata(data_name = calc_from_data_name, column = col_name, property = "class")
+      # if it is a ordered factor...
+      if (any(stringr::str_detect("ordered", col_data_type))){
+        # put in here the ones that DO work for ordered factor
+        if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range", formula_fn_exp))){
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+        } else {
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+        }
+        # if it is a factor or character, do not work for anything except...
+      } else if (any(stringr::str_detect("factor | character", col_data_type))){
+        # put in here the ones that DO work for factor or character
+        if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count", formula_fn_exp))){
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+        } else {
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+        }
+      } else if (any(stringr::str_detect("Date", col_data_type))){
+        # put in here the ones that DO NOT work for date
+        if (any(grepl("summary_sum", formula_fn_exp))){
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+        } else {
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
+            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+        }
       } else {
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
       }
-      # if it is a factor or character, do not work for anything except...
-    } else if (any(stringr::str_detect("factor | character", col_data_type))){
-      # put in here the ones that DO work for factor or character
-      if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count", formula_fn_exp))){
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
-      } else {
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
-      }
-    } else if (any(stringr::str_detect("Date", col_data_type))){
-      # put in here the ones that DO NOT work for date
-      if (any(grepl("summary_sum", formula_fn_exp))){
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
-      } else {
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-          dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
-      }
-    } else {
+    } else{
       curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
     }
     curr_data_list[[c_has_summary_label]] <- TRUE
