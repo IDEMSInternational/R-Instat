@@ -26,7 +26,7 @@ Public Class dlgCorrelation
     clsMutateFunction, clsAcrossFunction, clsDataFrameFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsDummyShave As New RFunction
-    Private clsPipeOperator As New ROperator
+    Private clsModelPipeOperator, clsDataFramePipeOperator As New ROperator
     Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
@@ -99,11 +99,10 @@ Public Class dlgCorrelation
         ucrChkShave.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputDisplayNas.SetParameter(New RParameter("na_print", 3))
-        dctNaPrint.Add("blank", Chr(34) & " " & Chr(34))
+        dctNaPrint.Add("blank", Chr(34) & "" & Chr(34))
         dctNaPrint.Add("NA", "NA")
         dctNaPrint.Add("1", Chr(34) & 1 & Chr(34))
         ucrInputDisplayNas.SetItems(dctNaPrint)
-        ucrInputDisplayNas.AddQuotesIfUnrecognised = False
 
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
@@ -201,7 +200,6 @@ Public Class dlgCorrelation
         ucrSaveFashionDataFrame.SetCheckBoxText("Data Name")
         ucrSaveFashionDataFrame.SetIsComboBox()
         ucrSaveFashionDataFrame.SetAssignToIfUncheckedValue("last_correlation")
-
     End Sub
 
     Private Sub SetDefaults()
@@ -222,7 +220,8 @@ Public Class dlgCorrelation
         clsShaveFunction = New RFunction
         clsDummyShave = New RFunction
         clsRearrangeFunction = New RFunction
-        clsPipeOperator = New ROperator
+        clsModelPipeOperator = New ROperator
+        clsDataFramePipeOperator = New ROperator
         clsNotOperator = New ROperator
         clsMutateFunction = New RFunction
         clsAcrossFunction = New RFunction
@@ -292,6 +291,7 @@ Public Class dlgCorrelation
         clsFashionModelFunction.SetPackageName("corrr")
         clsFashionModelFunction.SetRCommand("fashion")
         clsFashionModelFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+        clsFashionModelFunction.SetAssignTo("last_correlation")
         clsFashionModelFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionModelFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionModelFunction.AddParameter("na_print", Chr(34) & " " & Chr(34), iPosition:=3)
@@ -299,6 +299,7 @@ Public Class dlgCorrelation
         clsFashionDataFrameFunction.SetPackageName("corrr")
         clsFashionDataFrameFunction.SetRCommand("fashion")
         clsFashionDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
+        clsFashionDataFrameFunction.SetAssignTo("last_correlation")
         clsFashionDataFrameFunction.AddParameter("decimals", "2", iPosition:=1)
         clsFashionDataFrameFunction.AddParameter("leading_zeros", "FALSE", iPosition:=2)
         clsFashionDataFrameFunction.AddParameter("na_print", Chr(34) & " " & Chr(34), iPosition:=3)
@@ -316,8 +317,13 @@ Public Class dlgCorrelation
 
         clsDataFrameFunction.SetRCommand("data.frame")
 
-        clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=0)
+        clsModelPipeOperator.SetOperation("%>%")
+        clsModelPipeOperator.AddParameter("left", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0)
+        clsModelPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+
+        clsDataFramePipeOperator.SetOperation("%>%")
+        clsDataFramePipeOperator.AddParameter("left", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0)
+        clsDataFramePipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
 
         clsNotOperator.SetOperation("!")
         clsNotOperator.AddParameter("empty_string", "", iPosition:=0)
@@ -330,8 +336,6 @@ Public Class dlgCorrelation
         clsAcrossFunction.SetPackageName("dplyr")
         clsAcrossFunction.SetRCommand("across")
         clsAcrossFunction.AddParameter("x", clsROperatorParameter:=clsNotOperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsAcrossFunction.AddParameter("as_numeric", "as.numeric", iPosition:=1, bIncludeArgumentName:=False)
-        clsAcrossFunction.AddParameter("as_character", "as.character", iPosition:=1, bIncludeArgumentName:=False)
 
         clsCorrelationTestFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
         clsCorrelationFunction.SetAssignTo("last_correlation", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_correlation")
@@ -371,8 +375,8 @@ Public Class dlgCorrelation
         End If
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
-        ucrSaveFashionModel.SetRCode(clsFashionModelFunction, bReset)
-        ucrSaveFashionDataFrame.SetRCode(clsFashionDataFrameFunction, bReset)
+        ucrSaveFashionModel.SetRCode(clsModelPipeOperator, bReset)
+        ucrSaveFashionDataFrame.SetRCode(clsDataFramePipeOperator, bReset)
         ucrSaveCorrelationTest.SetRCode(clsCorrelationTestFunction, bReset)
         ucrSaveCorrelation.SetRCode(clsCorrelationFunction, bReset)
         bRcodeSet = True
@@ -466,18 +470,18 @@ Public Class dlgCorrelation
         End If
         ReceiverColumns()
         ChangeBaseFunction()
+        ChangeClsCrossParameter()
     End Sub
 
     Private Sub ChangeBaseFunction()
         If rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
                 If ucrChkDisplayAsDataFrame.Checked Then
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFashionDataFrameFunction, iPosition:=0)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
-                    ucrBase.clsRsyntax.iCallType = 0
+                    clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsFashionDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsDataFramePipeOperator)
                 Else
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsFashionModelFunction, iPosition:=0)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
+                    clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsFashionModelFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsModelPipeOperator)
                     ucrBase.clsRsyntax.iCallType = 2
                 End If
             Else
@@ -550,7 +554,7 @@ Public Class dlgCorrelation
         If ucrChangedControl Is ucrChkDisplayOptions Then
             ChangeBaseAsModelOrDataframe()
         End If
-
+        ChangeClsCrossParameter()
     End Sub
 
     Private Sub ChangeBaseAsModelOrDataframe()
@@ -568,11 +572,17 @@ Public Class dlgCorrelation
         ChangeBaseFunction()
     End Sub
 
-    Private Sub ucrInputDisplayNas_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDisplayNas.ControlValueChanged
+    Private Sub ChangeClsCrossParameter()
         If rdoMultipleColumns.Checked AndAlso ucrChkDisplayOptions.Checked Then
-            If IsNumeric(ucrInputDisplayNas.GetText()) Then
-
+            If IsNumeric(ucrInputDisplayNas.GetText()) OrElse ucrInputDisplayNas.GetText() = "NA" Then
+                clsAcrossFunction.AddParameter("type", "as.numeric", iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsAcrossFunction.AddParameter("type", "as.character", iPosition:=1, bIncludeArgumentName:=False)
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputDisplayNas_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDisplayNas.ControlValueChanged
+        ChangeClsCrossParameter()
     End Sub
 End Class
