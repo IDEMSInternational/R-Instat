@@ -3144,7 +3144,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     else if(!missing(start_month)) {
       if(start_month <= lubridate::month(min_date)) min_date <- as.Date(paste(lubridate::year(min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d")
       else min_date <- as.Date(paste(lubridate::year(min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d")
-      if(end_month >= lubridate::month(max_date)) as.Date(paste(lubridate::year(max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date), end_month, 1, sep = "-", format = "%Y-%m-%d"))), sep = "-"), format = "%Y-%m-%d")
+      if(end_month >= lubridate::month(max_date)) max_date <- as.Date(paste(lubridate::year(max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date), end_month, 1, sep = "-", format = "%Y-%m-%d"))), sep = "-"), format = "%Y-%m-%d")
       else max_date <- as.Date(paste(lubridate::year(max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date) + 1, end_month, 1, sep = "-"))), sep = "-", format = "%Y-%m-%d"), format = "%Y-%m-%d")
     }
     full_dates <- seq(min_date, max_date, by = "day")
