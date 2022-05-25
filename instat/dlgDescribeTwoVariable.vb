@@ -324,6 +324,7 @@ Public Class dlgDescribeTwoVariable
         clSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clSummaryTableFunction.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34), iPosition:=1)
         clSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsSummaryTableFactorParameterCombineFunction, iPosition:=2)
+        clSummaryTableFunction.AddParameter("columns_to_summaries", ".x", iPosition:=3)
 
         clsRAnovaFunction.AddParameter("signif.stars", "FALSE", iPosition:=2)
         clsRAnovaFunction.AddParameter("sign_level", "FALSE", iPosition:=3)
@@ -488,12 +489,16 @@ Public Class dlgDescribeTwoVariable
                 grpOptions.Visible = True
                 cmdSummaries.Visible = True
                 ucrChkOmitMissing.Visible = True
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummaryFunction)
+                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
+                ucrBase.clsRsyntax.SetBaseROperator(clsMapFrequencyPipeOperator)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
                 ucrReceiverFirstVars.SetParameterIsString()
                 lblSummaryName.Text = "Numerical summaries"
                 lblSummaryName.ForeColor = SystemColors.Highlight
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                 grpOptions.Visible = False
+                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsMapFrequencyPipeOperator)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
@@ -700,12 +705,19 @@ Public Class dlgDescribeTwoVariable
             clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
             clsMmtablePlusOperator.AddParameter("header_left_top", clsRFunctionParameter:=clsHeaderLeftTopFunction, iPosition:=2)
             If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                If ucrNudColumnFactors.GetText = 1 Then
-                    clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
-                    clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
-                ElseIf ucrNudColumnFactors.GetText = 2 Then
-                    clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
-                    clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                If ucrReceiverSecondTwoVariableFactor.strCurrDataType = "factor" Then
+                    If strFirstVariablesType = "numeric" Then
+                        clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+                        clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                    Else
+                        If ucrNudColumnFactors.GetText = 1 Then
+                            clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
+                            clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                        ElseIf ucrNudColumnFactors.GetText = 2 Then
+                            clsHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "by_var" & Chr(39), iPosition:=0)
+                            clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
+                        End If
+                    End If
                 End If
             End If
         ElseIf rdoThreeVariable.Checked Then
