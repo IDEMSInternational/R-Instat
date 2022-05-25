@@ -99,7 +99,7 @@ Public Class dlgCorrelation
         ucrChkShave.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputDisplayNas.SetParameter(New RParameter("na_print", 3))
-        dctNaPrint.Add("blank", Chr(34) & "" & Chr(34))
+        dctNaPrint.Add("blank", Chr(34) & Chr(34))
         dctNaPrint.Add("NA", "NA")
         dctNaPrint.Add("1", Chr(34) & 1 & Chr(34))
         ucrInputDisplayNas.SetItems(dctNaPrint)
