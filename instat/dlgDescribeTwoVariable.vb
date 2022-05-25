@@ -22,12 +22,13 @@ Public Class dlgDescribeTwoVariable
     Public strFirstVariablesType, strSecondVariableType As String
     Public clsGetDataTypeFunction, clsGetSecondDataTypeFunction, clsRCorrelationFunction, clsRCustomSummaryFunction,
            clsCombineFunction, clsRAnovaFunction, clsFrequencyTablesFunction, clsSkimrFunction, clsSummariesListFunction,
-           clsGroupByFunction, clsDummyFunction, clsMmtableFunction, clsHeaderTopLeftFunction,
+           clsGroupByFunction, clsDummyFunction, clsMmtableFunction, clsHeaderTopLeftFunction, clSummaryTableFunction,
            clsHeaderLeftTopFunction, clsHeaderLeftTopFuncion, clsCombineFrequencyParametersFunction,
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsCombineFactorsFunction,
            clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction, clsSecondHeaderTopLeftFunction,
            clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction,
-           clsSecondHeaderLeftTopFunction, clsThreeVariableCombineFrequencyParametersFunction As New RFunction
+           clsSecondHeaderLeftTopFunction, clsThreeVariableCombineFrequencyParametersFunction,
+           clsSummaryTableFactorParameterCombineFunction As New RFunction
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
              clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
@@ -200,6 +201,8 @@ Public Class dlgDescribeTwoVariable
         clsSecondHeaderTopLeftFunction = New RFunction
         clsSecondHeaderLeftTopFunction = New RFunction
         clsThreeVariableCombineFrequencyParametersFunction = New RFunction
+        clsSummaryTableFactorParameterCombineFunction = New RFunction
+        clSummaryTableFunction = New RFunction
         clsDataSelectTildeOperator = New ROperator
         clsMmtableTildeOperator = New ROperator
         clsMapFrequencyPipeOperator = New ROperator
@@ -221,6 +224,8 @@ Public Class dlgDescribeTwoVariable
         clsThreeVariableCombineFrequencyParametersFunction.SetRCommand("c")
 
         clsCombineFactorsFunction.SetRCommand("c")
+
+        clsSummaryTableFactorParameterCombineFunction.SetRCommand("c")
 
         clsRenameCombineFunction.SetRCommand("c")
         clsRenameCombineFunction.AddParameter("first", "1", iPosition:=0, bIncludeArgumentName:=False)
@@ -316,6 +321,10 @@ Public Class dlgDescribeTwoVariable
         clsFrequencyTablesFunction.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34), iPosition:=1)
         clsFrequencyTablesFunction.AddParameter("factors", clsRFunctionParameter:=clsCombineFrequencyFactorParameterFunction, iPosition:=2)
 
+        clSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clSummaryTableFunction.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34), iPosition:=1)
+        clSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsSummaryTableFactorParameterCombineFunction, iPosition:=2)
+
         clsRAnovaFunction.AddParameter("signif.stars", "FALSE", iPosition:=2)
         clsRAnovaFunction.AddParameter("sign_level", "FALSE", iPosition:=3)
         clsRAnovaFunction.AddParameter("means", "FALSE", iPosition:=4)
@@ -356,6 +365,7 @@ Public Class dlgDescribeTwoVariable
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnovaFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummaryFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
+        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clSummaryTableFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=3)
 
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsThreeVariableCombineFrequencyParametersFunction, ucrChkDisplayMargins.GetParameter, iAdditionalPairNo:=1)
 
@@ -508,7 +518,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
                 ucrReceiverSecondTwoVariableFactor.ControlContentsChanged, ucrPnlDescribe.ControlContentsChanged,
-                ucrReceiverThreeVariableFirstFactor.ControlValueChanged, ucrReceiverThreeVariableSecondFactor.ControlValueChanged
+                ucrReceiverThreeVariableFirstFactor.ControlContentsChanged, ucrReceiverThreeVariableSecondFactor.ControlContentsChanged
         If rdoTwoVariable.Checked Then
             If Not ucrReceiverFirstVars.IsEmpty AndAlso (ucrChangedControl Is ucrReceiverFirstVars OrElse ucrChangedControl Is ucrReceiverSecondTwoVariableFactor) Then
                 Dim iPosition As Integer = 0
@@ -523,7 +533,13 @@ Public Class dlgDescribeTwoVariable
                     iPosition += 1
                 Next
                 clsCombineFactorsFunction.AddParameter(ucrReceiverSecondTwoVariableFactor.GetVariableNames, ucrReceiverSecondTwoVariableFactor.GetVariableNames,
-                                                       bIncludeArgumentName:=False, iPosition:=iPosition)
+                                                      bIncludeArgumentName:=False, iPosition:=iPosition)
+            End If
+
+            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+                clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_one",
+                                                                ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0,
+                                                                bIncludeArgumentName:=False)
             End If
         ElseIf rdoThreeVariable.Checked Then
             If Not ucrReceiverThreeVariableFirstFactor.IsEmpty AndAlso (ucrChangedControl Is ucrReceiverThreeVariableFirstFactor OrElse ucrChangedControl Is ucrReceiverThreeVariableSecondFactor) Then
@@ -805,4 +821,5 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
     End Sub
+
 End Class
