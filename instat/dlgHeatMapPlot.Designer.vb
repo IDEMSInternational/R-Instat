@@ -55,7 +55,6 @@ Partial Class dlgHeatMapPlot
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblFillChoropleth = New System.Windows.Forms.Label()
-        Me.lblPointsChoropleth = New System.Windows.Forms.Label()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverPointsHeatMap = New instat.ucrReceiverSingle()
         Me.ucrNudShapeHeatMap = New instat.ucrNud()
@@ -76,10 +75,10 @@ Partial Class dlgHeatMapPlot
         Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrInputColour = New instat.ucrInputComboBox()
-        Me.ucrReceiverPointsChoropleth = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.lblGroup = New System.Windows.Forms.Label()
+        Me.ucrChkPoints = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -183,12 +182,6 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.lblFillChoropleth, "lblFillChoropleth")
         Me.lblFillChoropleth.Name = "lblFillChoropleth"
         Me.lblFillChoropleth.Tag = "fill"
-        '
-        'lblPointsChoropleth
-        '
-        resources.ApplyResources(Me.lblPointsChoropleth, "lblPointsChoropleth")
-        Me.lblPointsChoropleth.Name = "lblPointsChoropleth"
-        Me.lblPointsChoropleth.Tag = "Points_Optional"
         '
         'ucrChkFlipCoordinates
         '
@@ -344,15 +337,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputColour.IsReadOnly = False
         Me.ucrInputColour.Name = "ucrInputColour"
         '
-        'ucrReceiverPointsChoropleth
-        '
-        resources.ApplyResources(Me.ucrReceiverPointsChoropleth, "ucrReceiverPointsChoropleth")
-        Me.ucrReceiverPointsChoropleth.frmParent = Me
-        Me.ucrReceiverPointsChoropleth.Name = "ucrReceiverPointsChoropleth"
-        Me.ucrReceiverPointsChoropleth.Selector = Nothing
-        Me.ucrReceiverPointsChoropleth.strNcFilePath = ""
-        Me.ucrReceiverPointsChoropleth.ucrSelector = Nothing
-        '
         'ucrReceiverX
         '
         resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
@@ -376,10 +360,17 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.lblGroup, "lblGroup")
         Me.lblGroup.Name = "lblGroup"
         '
+        'ucrChkPoints
+        '
+        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
+        Me.ucrChkPoints.Checked = False
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        '
         'dlgHeatMapPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.lblFillChoropleth)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
@@ -416,9 +407,7 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.ucrInputColour)
         Me.Controls.Add(Me.lblLabelSize)
-        Me.Controls.Add(Me.ucrReceiverPointsChoropleth)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.lblPointsChoropleth)
         Me.Controls.Add(Me.lblReorderVariableX)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -466,8 +455,7 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents lblFillChoropleth As Label
     Friend WithEvents ucrReceiverFillChoropleth As ucrReceiverSingle
-    Friend WithEvents lblPointsChoropleth As Label
-    Friend WithEvents ucrReceiverPointsChoropleth As ucrReceiverSingle
     Friend WithEvents lblGroup As Label
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
+    Friend WithEvents ucrChkPoints As ucrCheck
 End Class
