@@ -95,6 +95,7 @@ Public Class dlgCluster
         dctMethod.Add("minkowski", Chr(34) & "minkowski" & Chr(34))
         ucrInputMethod.SetItems(dctMethod)
         ucrInputMethod.SetRDefault(Chr(34) & "euclidean" & Chr(34))
+        ucrInputMethod.SetDropDownStyleAsNonEditable()
 
         ucrInputMethod.AddToLinkedControls(ucrNudPowerOption, {"minkowski"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 

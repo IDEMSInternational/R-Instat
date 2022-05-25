@@ -62,7 +62,7 @@ Partial Class dlgCluster
         Me.rdoSelectedColumn.Location = New System.Drawing.Point(265, 73)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
-        Me.rdoSelectedColumn.TabIndex = 7
+        Me.rdoSelectedColumn.TabIndex = 5
         Me.rdoSelectedColumn.TabStop = True
         Me.rdoSelectedColumn.Text = "Selected Variables"
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
@@ -75,10 +75,10 @@ Partial Class dlgCluster
         Me.rdoDistanceData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDistanceData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDistanceData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDistanceData.Location = New System.Drawing.Point(200, 10)
+        Me.rdoDistanceData.Location = New System.Drawing.Point(206, 10)
         Me.rdoDistanceData.Name = "rdoDistanceData"
         Me.rdoDistanceData.Size = New System.Drawing.Size(100, 28)
-        Me.rdoDistanceData.TabIndex = 16
+        Me.rdoDistanceData.TabIndex = 2
         Me.rdoDistanceData.Text = "Distance"
         Me.rdoDistanceData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDistanceData.UseVisualStyleBackColor = True
@@ -91,10 +91,10 @@ Partial Class dlgCluster
         Me.rdoScaleData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoScaleData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoScaleData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoScaleData.Location = New System.Drawing.Point(102, 10)
+        Me.rdoScaleData.Location = New System.Drawing.Point(108, 10)
         Me.rdoScaleData.Name = "rdoScaleData"
         Me.rdoScaleData.Size = New System.Drawing.Size(100, 28)
-        Me.rdoScaleData.TabIndex = 17
+        Me.rdoScaleData.TabIndex = 0
         Me.rdoScaleData.Text = "Scale"
         Me.rdoScaleData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoScaleData.UseVisualStyleBackColor = True
@@ -103,10 +103,10 @@ Partial Class dlgCluster
         '
         Me.lblMethod.AutoSize = True
         Me.lblMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMethod.Location = New System.Drawing.Point(267, 239)
+        Me.lblMethod.Location = New System.Drawing.Point(267, 230)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
-        Me.lblMethod.TabIndex = 21
+        Me.lblMethod.TabIndex = 10
         Me.lblMethod.Text = "Method:"
         '
         'ucrInputMethod
@@ -115,10 +115,10 @@ Partial Class dlgCluster
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(267, 257)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(267, 246)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMethod.TabIndex = 22
+        Me.ucrInputMethod.TabIndex = 11
         '
         'ucrBase
         '
@@ -126,7 +126,7 @@ Partial Class dlgCluster
         Me.ucrBase.Location = New System.Drawing.Point(5, 371)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 19
+        Me.ucrBase.TabIndex = 17
         '
         'ucrSaveNewDataFrame
         '
@@ -135,7 +135,7 @@ Partial Class dlgCluster
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(403, 34)
-        Me.ucrSaveNewDataFrame.TabIndex = 13
+        Me.ucrSaveNewDataFrame.TabIndex = 16
         '
         'ucrChkCenterEachVariable
         '
@@ -144,7 +144,7 @@ Partial Class dlgCluster
         Me.ucrChkCenterEachVariable.Location = New System.Drawing.Point(7, 286)
         Me.ucrChkCenterEachVariable.Name = "ucrChkCenterEachVariable"
         Me.ucrChkCenterEachVariable.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkCenterEachVariable.TabIndex = 12
+        Me.ucrChkCenterEachVariable.TabIndex = 9
         '
         'ucrChkScaleEachVariable
         '
@@ -153,7 +153,7 @@ Partial Class dlgCluster
         Me.ucrChkScaleEachVariable.Location = New System.Drawing.Point(7, 312)
         Me.ucrChkScaleEachVariable.Name = "ucrChkScaleEachVariable"
         Me.ucrChkScaleEachVariable.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkScaleEachVariable.TabIndex = 11
+        Me.ucrChkScaleEachVariable.TabIndex = 14
         '
         'ucrChkOmitMissingRows
         '
@@ -162,7 +162,7 @@ Partial Class dlgCluster
         Me.ucrChkOmitMissingRows.Location = New System.Drawing.Point(7, 259)
         Me.ucrChkOmitMissingRows.Name = "ucrChkOmitMissingRows"
         Me.ucrChkOmitMissingRows.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkOmitMissingRows.TabIndex = 10
+        Me.ucrChkOmitMissingRows.TabIndex = 8
         '
         'ucrReceiverPrepareData
         '
@@ -174,7 +174,7 @@ Partial Class dlgCluster
         Me.ucrReceiverPrepareData.Selector = Nothing
         Me.ucrReceiverPrepareData.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverPrepareData.strNcFilePath = ""
-        Me.ucrReceiverPrepareData.TabIndex = 9
+        Me.ucrReceiverPrepareData.TabIndex = 7
         Me.ucrReceiverPrepareData.ucrSelector = Nothing
         '
         'ucrSelectorPrepareData
@@ -187,7 +187,7 @@ Partial Class dlgCluster
         Me.ucrSelectorPrepareData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPrepareData.Name = "ucrSelectorPrepareData"
         Me.ucrSelectorPrepareData.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorPrepareData.TabIndex = 5
+        Me.ucrSelectorPrepareData.TabIndex = 3
         '
         'ucrPnlSelectData
         '
@@ -195,15 +195,15 @@ Partial Class dlgCluster
         Me.ucrPnlSelectData.Location = New System.Drawing.Point(255, 65)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(135, 48)
-        Me.ucrPnlSelectData.TabIndex = 8
+        Me.ucrPnlSelectData.TabIndex = 4
         '
         'ucrPnlPrepareData
         '
         Me.ucrPnlPrepareData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlPrepareData.Location = New System.Drawing.Point(102, 10)
+        Me.ucrPnlPrepareData.Location = New System.Drawing.Point(108, 10)
         Me.ucrPnlPrepareData.Name = "ucrPnlPrepareData"
         Me.ucrPnlPrepareData.Size = New System.Drawing.Size(199, 30)
-        Me.ucrPnlPrepareData.TabIndex = 18
+        Me.ucrPnlPrepareData.TabIndex = 1
         '
         'ucrChkMatrix
         '
@@ -212,28 +212,28 @@ Partial Class dlgCluster
         Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 312)
         Me.ucrChkMatrix.Name = "ucrChkMatrix"
         Me.ucrChkMatrix.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkMatrix.TabIndex = 20
+        Me.ucrChkMatrix.TabIndex = 15
         '
         'ucrNudPowerOption
         '
         Me.ucrNudPowerOption.AutoSize = True
         Me.ucrNudPowerOption.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPowerOption.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPowerOption.Location = New System.Drawing.Point(347, 295)
+        Me.ucrNudPowerOption.Location = New System.Drawing.Point(347, 283)
         Me.ucrNudPowerOption.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPowerOption.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPowerOption.Name = "ucrNudPowerOption"
         Me.ucrNudPowerOption.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPowerOption.TabIndex = 23
+        Me.ucrNudPowerOption.TabIndex = 13
         Me.ucrNudPowerOption.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblPowerOption
         '
         Me.lblPowerOption.AutoSize = True
-        Me.lblPowerOption.Location = New System.Drawing.Point(267, 297)
+        Me.lblPowerOption.Location = New System.Drawing.Point(267, 285)
         Me.lblPowerOption.Name = "lblPowerOption"
         Me.lblPowerOption.Size = New System.Drawing.Size(74, 13)
-        Me.lblPowerOption.TabIndex = 24
+        Me.lblPowerOption.TabIndex = 12
         Me.lblPowerOption.Text = "Power Option:"
         '
         'ucrSaveDistance
@@ -267,9 +267,9 @@ Partial Class dlgCluster
         Me.Controls.Add(Me.ucrPnlSelectData)
         Me.Controls.Add(Me.ucrPnlPrepareData)
         Me.Controls.Add(Me.ucrChkOmitMissingRows)
+        Me.Controls.Add(Me.ucrSaveDistance)
         Me.Controls.Add(Me.ucrChkScaleEachVariable)
         Me.Controls.Add(Me.ucrChkMatrix)
-        Me.Controls.Add(Me.ucrSaveDistance)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
