@@ -476,7 +476,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     # note: important that there is *no* space between | for grepl function
     # and important there IS a psace in str_detect..!
     
-    if (exists(deparse(substitute(col_name)), parent.frame())){
+    if (exists("col_name")){
       # get the data type of the column
       col_data_type <- self$get_variables_metadata(data_name = calc_from_data_name, column = col_name, property = "class")
       # if it is a ordered factor...
