@@ -123,7 +123,7 @@ Public Class dlgDescribeTwoVariable
 
         ucrReceiverThreeVariableFirstFactor.SetParameterIsString()
         ucrReceiverThreeVariableFirstFactor.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverThreeVariableFirstFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverThreeVariableFirstFactor.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
 
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
@@ -518,6 +518,7 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
             End If
         End If
+
         autoTranslate(Me)
     End Sub
 
@@ -540,12 +541,6 @@ Public Class dlgDescribeTwoVariable
                 clsCombineFactorsFunction.AddParameter(ucrReceiverSecondTwoVariableFactor.GetVariableNames, ucrReceiverSecondTwoVariableFactor.GetVariableNames,
                                                       bIncludeArgumentName:=False, iPosition:=iPosition)
             End If
-
-            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_one",
-                                                                ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0,
-                                                                bIncludeArgumentName:=False)
-            End If
         ElseIf rdoThreeVariable.Checked Then
             If Not ucrReceiverThreeVariableFirstFactor.IsEmpty AndAlso (ucrChangedControl Is ucrReceiverThreeVariableFirstFactor OrElse ucrChangedControl Is ucrReceiverThreeVariableSecondFactor) Then
                 Dim iPosition As Integer = 0
@@ -567,10 +562,34 @@ Public Class dlgDescribeTwoVariable
         Results()
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
+        UpdateCombineFactorParameterFunction()
         ChangeLocations()
         TestOKEnabled()
     End Sub
-
+    Private Sub UpdateCombineFactorParameterFunction()
+        clsSummaryTableFactorParameterCombineFunction.RemoveParameterByName("factor_one")
+        clsSummaryTableFactorParameterCombineFunction.RemoveParameterByName("factor_two")
+        clsSummaryTableFactorParameterCombineFunction.RemoveParameterByName("factor_three")
+        If rdoTwoVariable.Checked Then
+            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+                clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_one",
+                                                                ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0,
+                                                                bIncludeArgumentName:=False)
+            End If
+        ElseIf rdoThreeVariable.Checked Then
+            If Not ucrReceiverThreeVariableSecondFactor.IsEmpty Then
+                clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_two",
+                                                             ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=1,
+                                                             bIncludeArgumentName:=False)
+            End If
+            If Not ucrReceiverNumericVariable.IsEmpty AndAlso
+               ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+                clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_three",
+                                                             ucrReceiverNumericVariable.GetVariableNames(), iPosition:=2,
+                                                             bIncludeArgumentName:=False)
+            End If
+        End If
+    End Sub
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
         If ucrChkOmitMissing.Checked Then
             clsRCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
@@ -704,9 +723,9 @@ Public Class dlgDescribeTwoVariable
         If rdoTwoVariable.Checked Then
             clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
             clsMmtablePlusOperator.AddParameter("header_left_top", clsRFunctionParameter:=clsHeaderLeftTopFunction, iPosition:=2)
-            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty AndAlso Not ucrReceiverFirstVars.IsEmpty Then
                 If ucrReceiverSecondTwoVariableFactor.strCurrDataType = "factor" Then
-                    If strFirstVariablesType = "numeric" Then
+                    If ucrReceiverFirstVars.GetCurrentItemTypes(True, bIsCategoricalNumeric:=True)(0) = "numeric" Then
                         clsHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                         clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverSecondTwoVariableFactor.GetVariableNames(), iPosition:=0)
                     Else
@@ -832,6 +851,7 @@ Public Class dlgDescribeTwoVariable
         SwapMmtableHeaderFunctions()
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
+        UpdateCombineFactorParameterFunction()
     End Sub
 
 End Class
