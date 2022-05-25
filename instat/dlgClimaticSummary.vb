@@ -62,17 +62,12 @@ Public Class dlgClimaticSummary
         ucrSelectorVariable.SetParameterIsString()
 
         'panel setting
-        ucrPnlAnnualWithin.AddRadioButton(rdoAnnual)
-        ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear)
-        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
-        ucrPnlAnnualWithin.AddRadioButton(rdoStation)
-        ucrPnlAnnualWithin.AddRadioButton(rdoDaily)
-
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoAnnual, "checked", "annual")
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoAnnualWithinYear, "checked", "annual_within_year")
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoWithinYear, "checked", "within_year")
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoStation, "checked", "station")
-        ucrPnlAnnualWithin.AddParameterValuesCondition(rdoDaily, "checked", "daily")
+        ucrPnlAnnualWithin.SetParameter(New RParameter("checked", 0))
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnual, "annual")
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear, "annual_within_year")
+        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear, "within_year")
+        ucrPnlAnnualWithin.AddRadioButton(rdoStation, "station")
+        ucrPnlAnnualWithin.AddRadioButton(rdoDaily, "daily")
 
         'receivers:
         ' by receivers
@@ -381,27 +376,22 @@ Public Class dlgClimaticSummary
             End If
 
             If rdoAnnual.Checked Then
-                clsDummyFunction.AddParameter("checked", "annual", iPosition:=0)
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("date")
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
             ElseIf rdoAnnualWithinYear.Checked Then
-                clsDummyFunction.AddParameter("checked", "annual_within_year", iPosition:=0)
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
                 clsDefaultFactors.RemoveParameterByName("date")
             ElseIf rdoWithinYear.Checked Then
-                clsDummyFunction.AddParameter("checked", "within_year", iPosition:=0)
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
                 clsDefaultFactors.RemoveParameterByName("date")
             ElseIf rdoStation.Checked Then
-                clsDummyFunction.AddParameter("checked", "station", iPosition:=0)
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.RemoveParameterByName("date")
             ElseIf rdoDaily.Checked Then
-                clsDummyFunction.AddParameter("checked", "daily", iPosition:=0)
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter("date", ucrReceiverDate.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
