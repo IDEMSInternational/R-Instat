@@ -1264,12 +1264,12 @@ Public Class frmMain
         dlgSunshine.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfall.Click
+    Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfallGraph.Click
         dlgPICSARainfall.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
-        dlgPICSATemperature.ShowDialog()
+    Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperatureGraph.Click
+        dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSACrops_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACrops.Click
@@ -2439,5 +2439,9 @@ Public Class frmMain
 
     Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeRandomSplit.Click
         dlgRandomSplit.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
+        dlgPICSARainfall.ShowDialog()
     End Sub
 End Class
