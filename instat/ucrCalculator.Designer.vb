@@ -82,11 +82,13 @@ Partial Class ucrCalculator
         Me.cmdMdy = New System.Windows.Forms.Button()
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
-        Me.grpArithmetic = New System.Windows.Forms.GroupBox()
+        Me.grpInteger = New System.Windows.Forms.GroupBox()
+        Me.cmdNextPrime = New System.Windows.Forms.Button()
+        Me.cmdChoosez = New System.Windows.Forms.Button()
         Me.cmdArithmeticHelp = New System.Windows.Forms.Button()
         Me.cmdFactorial = New System.Windows.Forms.Button()
         Me.cmdPrime = New System.Windows.Forms.Button()
-        Me.cmdBigq = New System.Windows.Forms.Button()
+        Me.cmdBigz = New System.Windows.Forms.Button()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdTransformHelp = New System.Windows.Forms.Button()
         Me.cmdShuffle = New System.Windows.Forms.Button()
@@ -409,9 +411,10 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
-        Me.grpArithmetic.SuspendLayout()
+        Me.grpInteger.SuspendLayout()
         Me.grpFactor.SuspendLayout()
         Me.grpHydroGOF.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
@@ -939,22 +942,43 @@ Partial Class ucrCalculator
         Me.cmdLeap.Text = "leap"
         Me.cmdLeap.UseVisualStyleBackColor = True
         '
-        'grpArithmetic
+        'grpInteger
         '
-        Me.grpArithmetic.Controls.Add(Me.cmdArithmeticHelp)
-        Me.grpArithmetic.Controls.Add(Me.cmdFactorial)
-        Me.grpArithmetic.Controls.Add(Me.cmdPrime)
-        Me.grpArithmetic.Controls.Add(Me.cmdBigq)
-        Me.grpArithmetic.Location = New System.Drawing.Point(432, 61)
-        Me.grpArithmetic.Name = "grpArithmetic"
-        Me.grpArithmetic.Size = New System.Drawing.Size(152, 66)
-        Me.grpArithmetic.TabIndex = 183
-        Me.grpArithmetic.TabStop = False
-        Me.grpArithmetic.Text = "Arithmetic"
+        Me.grpInteger.Controls.Add(Me.cmdFactorize)
+        Me.grpInteger.Controls.Add(Me.cmdNextPrime)
+        Me.grpInteger.Controls.Add(Me.cmdChoosez)
+        Me.grpInteger.Controls.Add(Me.cmdArithmeticHelp)
+        Me.grpInteger.Controls.Add(Me.cmdFactorial)
+        Me.grpInteger.Controls.Add(Me.cmdPrime)
+        Me.grpInteger.Controls.Add(Me.cmdBigz)
+        Me.grpInteger.Location = New System.Drawing.Point(432, 61)
+        Me.grpInteger.Name = "grpInteger"
+        Me.grpInteger.Size = New System.Drawing.Size(152, 127)
+        Me.grpInteger.TabIndex = 183
+        Me.grpInteger.TabStop = False
+        Me.grpInteger.Text = "Integer"
+        '
+        'cmdNextPrime
+        '
+        Me.cmdNextPrime.Location = New System.Drawing.Point(1, 61)
+        Me.cmdNextPrime.Name = "cmdNextPrime"
+        Me.cmdNextPrime.Size = New System.Drawing.Size(75, 23)
+        Me.cmdNextPrime.TabIndex = 5
+        Me.cmdNextPrime.Text = "next prime"
+        Me.cmdNextPrime.UseVisualStyleBackColor = True
+        '
+        'cmdChoosez
+        '
+        Me.cmdChoosez.Location = New System.Drawing.Point(75, 39)
+        Me.cmdChoosez.Name = "cmdChoosez"
+        Me.cmdChoosez.Size = New System.Drawing.Size(75, 23)
+        Me.cmdChoosez.TabIndex = 4
+        Me.cmdChoosez.Text = "choose"
+        Me.cmdChoosez.UseVisualStyleBackColor = True
         '
         'cmdArithmeticHelp
         '
-        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(93, 39)
+        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(93, 99)
         Me.cmdArithmeticHelp.Name = "cmdArithmeticHelp"
         Me.cmdArithmeticHelp.Size = New System.Drawing.Size(57, 23)
         Me.cmdArithmeticHelp.TabIndex = 3
@@ -963,12 +987,11 @@ Partial Class ucrCalculator
         '
         'cmdFactorial
         '
-        Me.cmdFactorial.Enabled = False
         Me.cmdFactorial.Location = New System.Drawing.Point(1, 39)
         Me.cmdFactorial.Name = "cmdFactorial"
         Me.cmdFactorial.Size = New System.Drawing.Size(75, 23)
         Me.cmdFactorial.TabIndex = 2
-        Me.cmdFactorial.Text = "Factorial"
+        Me.cmdFactorial.Text = "factorial"
         Me.cmdFactorial.UseVisualStyleBackColor = True
         '
         'cmdPrime
@@ -977,17 +1000,17 @@ Partial Class ucrCalculator
         Me.cmdPrime.Name = "cmdPrime"
         Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
         Me.cmdPrime.TabIndex = 1
-        Me.cmdPrime.Text = "Prime"
+        Me.cmdPrime.Text = "prime"
         Me.cmdPrime.UseVisualStyleBackColor = True
         '
-        'cmdBigq
+        'cmdBigz
         '
-        Me.cmdBigq.Location = New System.Drawing.Point(1, 17)
-        Me.cmdBigq.Name = "cmdBigq"
-        Me.cmdBigq.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBigq.TabIndex = 0
-        Me.cmdBigq.Text = "bigq"
-        Me.cmdBigq.UseVisualStyleBackColor = True
+        Me.cmdBigz.Location = New System.Drawing.Point(1, 17)
+        Me.cmdBigz.Name = "cmdBigz"
+        Me.cmdBigz.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigz.TabIndex = 0
+        Me.cmdBigz.Text = "bigz"
+        Me.cmdBigz.UseVisualStyleBackColor = True
         '
         'grpFactor
         '
@@ -4863,12 +4886,21 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdFactorize
+        '
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 61)
+        Me.cmdFactorize.Name = "cmdFactorize"
+        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorize.TabIndex = 6
+        Me.cmdFactorize.Text = "factorize"
+        Me.cmdFactorize.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpArithmetic)
+        Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpFactor)
@@ -4896,7 +4928,7 @@ Partial Class ucrCalculator
         Me.Size = New System.Drawing.Size(878, 457)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpArithmetic.ResumeLayout(False)
+        Me.grpInteger.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
@@ -5282,9 +5314,12 @@ Partial Class ucrCalculator
     Friend WithEvents cmdHelpDplyr As Button
     Friend WithEvents cmdStringRHelp As Button
     Friend WithEvents cmdProbRHelp As Button
-    Friend WithEvents grpArithmetic As GroupBox
+    Friend WithEvents grpInteger As GroupBox
     Friend WithEvents cmdArithmeticHelp As Button
     Friend WithEvents cmdFactorial As Button
     Friend WithEvents cmdPrime As Button
-    Friend WithEvents cmdBigq As Button
+    Friend WithEvents cmdBigz As Button
+    Friend WithEvents cmdNextPrime As Button
+    Friend WithEvents cmdChoosez As Button
+    Friend WithEvents cmdFactorize As Button
 End Class
