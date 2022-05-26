@@ -563,6 +563,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
         UpdateCombineFactorParameterFunction()
+        ChangeSummaryFunctionForThreeVariable()
         ChangeLocations()
         TestOKEnabled()
     End Sub
@@ -582,8 +583,7 @@ Public Class dlgDescribeTwoVariable
                                                              ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=1,
                                                              bIncludeArgumentName:=False)
             End If
-            If Not ucrReceiverNumericVariable.IsEmpty AndAlso
-               ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+            If NumericVariableDataType() = "factor" Then
                 clsSummaryTableFactorParameterCombineFunction.AddParameter("factor_three",
                                                              ucrReceiverNumericVariable.GetVariableNames(), iPosition:=2,
                                                              bIncludeArgumentName:=False)
@@ -617,6 +617,7 @@ Public Class dlgDescribeTwoVariable
         UpdateClsRenameCombineFunction()
         ChangeLocations()
         UpdateClsCombineFrequencyFactorParameterFunction()
+        ChangeSummaryFunctionForThreeVariable()
     End Sub
 
     Private Sub UpdateClsRenameCombineFunction()
@@ -625,11 +626,11 @@ Public Class dlgDescribeTwoVariable
         clsRenameCombineFunction.RemoveParameterByName("third")
         clsRenameCombineFunction.RemoveParameterByName("fifth")
         If rdoThreeVariable.Checked Then
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+            If NumericVariableDataType() = "factor" Then
                 clsRenameCombineFunction.AddParameter("second", "2", iPosition:=1, bIncludeArgumentName:=False)
                 clsRenameCombineFunction.AddParameter("by_var", "3", iPosition:=2)
                 clsRenameCombineFunction.AddParameter("fifth", "5", iPosition:=4, bIncludeArgumentName:=False)
-            ElseIf ucrReceiverNumericVariable.strCurrDataType = "numeric" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+            ElseIf NumericVariableDataType = "numeric" Then
                 clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
                 clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
             End If
@@ -654,9 +655,8 @@ Public Class dlgDescribeTwoVariable
                 Me.Size = New Point(iDialogueXsize, 425)
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
-                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
-                Not ucrReceiverNumericVariable.IsEmpty Then
+            If NumericVariableDataType() = "factor" OrElse
+               NumericVariableDataType() = "numeric" Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
                 Me.Size = New Point(iDialogueXsize, 530)
                 grpFrequency.Location = New Point(10, 250)
@@ -691,9 +691,8 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoSkim.Checked Then
             DisableFrequencyControls()
         Else
-            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
-                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
-                Not ucrReceiverNumericVariable.IsEmpty Then
+            If NumericVariableDataType() = "factor" OrElse
+                NumericVariableDataType() = "numeric" Then
                 grpFrequency.Visible = True
                 If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
                     grpThreeVariablePercentages.Visible = True
@@ -749,19 +748,51 @@ Public Class dlgDescribeTwoVariable
                     clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=0)
                 End If
             End If
-            If Not ucrReceiverNumericVariable.IsEmpty Then
-                If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
-                    If ucrNudColumnFactors.GetText = 1 Then
-                        clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
-                        clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
-                    ElseIf ucrNudColumnFactors.GetText = 2 Then
-                        clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
-                        clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
-                    End If
+
+            If NumericVariableDataType() = "factor" Then
+                If ucrNudColumnFactors.GetText = 1 Then
+                    clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                    clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
+                ElseIf ucrNudColumnFactors.GetText = 2 Then
+                    clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                    clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
                 End If
             End If
         End If
     End Sub
+
+
+
+    Private Function NumericVariableDataType()
+        Dim strCurrentDatatype As String
+        If Not ucrReceiverNumericVariable.IsEmpty Then
+            strCurrentDatatype = ucrReceiverNumericVariable.strCurrDataType
+        Else
+            strCurrentDatatype = ""
+        End If
+        Return strCurrentDatatype
+    End Function
+
+    Private Sub ChangeSummaryFunctionForThreeVariable()
+        If rdoThreeVariable.Checked Then
+            If ThreeVariableFirstFactorDataType() = "numeric" AndAlso
+                  NumericVariableDataType() = "factor" Then
+                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
+            Else
+                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+            End If
+        End If
+    End Sub
+
+    Private Function ThreeVariableFirstFactorDataType()
+        Dim strCurrentDataType As String
+        If Not ucrReceiverThreeVariableFirstFactor.IsEmpty Then
+            strCurrentDataType = ucrReceiverThreeVariableFirstFactor.GetCurrentItemTypes()(0)
+        Else
+            strCurrentDataType = ""
+        End If
+        Return strCurrentDataType
+    End Function
 
     Private Sub AddRemoveFrequencyParameters()
         If rdoTwoVariable.Checked Then
@@ -777,9 +808,8 @@ Public Class dlgDescribeTwoVariable
             For Each strParameter In lstFrequencyParameters
                 clsFrequencyTablesFunction.RemoveParameterByName(strParameter)
             Next
-            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
-                ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
-                Not ucrReceiverNumericVariable.IsEmpty Then
+            If NumericVariableDataType() = "factor" OrElse
+               NumericVariableDataType() = "numeric" Then
                 For Each clsParameter In clsThreeVariableCombineFrequencyParametersFunction.clsParameters
                     If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
                         clsFrequencyTablesFunction.AddParameter(clsParameter)
@@ -836,10 +866,10 @@ Public Class dlgDescribeTwoVariable
         clsCombineFrequencyFactorParameterFunction.RemoveParameterByName("factor_two")
         clsFrequencyTablesFunction.RemoveParameterByName("columns_to_summarise")
         If rdoThreeVariable.Checked Then
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+            If NumericVariableDataType() = "factor" Then
                 clsCombineFrequencyFactorParameterFunction.AddParameter("factor_two", ucrReceiverNumericVariable.GetVariableNames(),
                                                                        iPosition:=1, bIncludeArgumentName:=False)
-            ElseIf ucrReceiverNumericVariable.strCurrDataType = "numeric" AndAlso Not ucrReceiverNumericVariable.IsEmpty Then
+            ElseIf NumericVariableDataType = "numeric" Then
                 clsFrequencyTablesFunction.AddParameter("columns_to_summarise", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=3)
             End If
         End If
@@ -852,6 +882,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
         UpdateCombineFactorParameterFunction()
+        ChangeSummaryFunctionForThreeVariable()
     End Sub
 
 End Class
