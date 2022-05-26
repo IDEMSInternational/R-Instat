@@ -2981,4 +2981,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime()", 1)
         End If
     End Sub
+
+    Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorize(n = )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorize()", 1)
+        End If
+    End Sub
 End Class

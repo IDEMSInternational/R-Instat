@@ -411,6 +411,7 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -943,6 +944,7 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
+        Me.grpInteger.Controls.Add(Me.cmdFactorize)
         Me.grpInteger.Controls.Add(Me.cmdNextPrime)
         Me.grpInteger.Controls.Add(Me.cmdChoosez)
         Me.grpInteger.Controls.Add(Me.cmdArithmeticHelp)
@@ -4884,6 +4886,15 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdFactorize
+        '
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 61)
+        Me.cmdFactorize.Name = "cmdFactorize"
+        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorize.TabIndex = 6
+        Me.cmdFactorize.Text = "factorize"
+        Me.cmdFactorize.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5310,4 +5321,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdBigz As Button
     Friend WithEvents cmdNextPrime As Button
     Friend WithEvents cmdChoosez As Button
+    Friend WithEvents cmdFactorize As Button
 End Class
