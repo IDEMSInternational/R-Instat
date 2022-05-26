@@ -278,8 +278,10 @@ Partial Class frmMain
         Me.mnuClimaticNCMPSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfallGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSACumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperatureGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSAGeneralGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator73 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticPICSACumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFPlotRegion = New System.Windows.Forms.ToolStripMenuItem()
@@ -676,8 +678,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSAGeneralGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator73 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2262,17 +2262,30 @@ Partial Class frmMain
         Me.mnuClimaticPICSARainfallGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSARainfallGraph.Text = "Rainfall Graph..."
         '
+        'mnuClimaticPICSATemperatureGraph
+        '
+        Me.mnuClimaticPICSATemperatureGraph.Enabled = False
+        Me.mnuClimaticPICSATemperatureGraph.Name = "mnuClimaticPICSATemperatureGraph"
+        Me.mnuClimaticPICSATemperatureGraph.Size = New System.Drawing.Size(246, 22)
+        Me.mnuClimaticPICSATemperatureGraph.Text = "Temperature Graph..."
+        '
+        'mnuClimaticPICSAGeneralGraph
+        '
+        Me.mnuClimaticPICSAGeneralGraph.Enabled = False
+        Me.mnuClimaticPICSAGeneralGraph.Name = "mnuClimaticPICSAGeneralGraph"
+        Me.mnuClimaticPICSAGeneralGraph.Size = New System.Drawing.Size(246, 22)
+        Me.mnuClimaticPICSAGeneralGraph.Text = "General Graph..."
+        '
+        'ToolStripSeparator73
+        '
+        Me.ToolStripSeparator73.Name = "ToolStripSeparator73"
+        Me.ToolStripSeparator73.Size = New System.Drawing.Size(243, 6)
+        '
         'mnuClimaticPICSACumExeedenceGraph
         '
         Me.mnuClimaticPICSACumExeedenceGraph.Name = "mnuClimaticPICSACumExeedenceGraph"
         Me.mnuClimaticPICSACumExeedenceGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSACumExeedenceGraph.Text = "Cumulative/Exceedance Graph..."
-        '
-        'mnuClimaticPICSATemperatureGraph
-        '
-        Me.mnuClimaticPICSATemperatureGraph.Name = "mnuClimaticPICSATemperatureGraph"
-        Me.mnuClimaticPICSATemperatureGraph.Size = New System.Drawing.Size(246, 22)
-        Me.mnuClimaticPICSATemperatureGraph.Text = "Temperature Graph..."
         '
         'mnuClimaticPICSACrops
         '
@@ -5081,17 +5094,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuClimaticPICSAGeneralGraph
-        '
-        Me.mnuClimaticPICSAGeneralGraph.Name = "mnuClimaticPICSAGeneralGraph"
-        Me.mnuClimaticPICSAGeneralGraph.Size = New System.Drawing.Size(246, 22)
-        Me.mnuClimaticPICSAGeneralGraph.Text = "General Graph..."
-        '
-        'ToolStripSeparator73
-        '
-        Me.ToolStripSeparator73.Name = "ToolStripSeparator73"
-        Me.ToolStripSeparator73.Size = New System.Drawing.Size(243, 6)
         '
         'frmMain
         '
