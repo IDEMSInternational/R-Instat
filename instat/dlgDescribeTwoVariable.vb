@@ -748,8 +748,9 @@ Public Class dlgDescribeTwoVariable
                     clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=0)
                 End If
             End If
-
-            If NumericVariableDataType() = "factor" Then
+            clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
+            If NumericVariableDataType() = "factor" AndAlso
+               ThreeVariableFirstFactorDataType() = "factor" Then
                 If ucrNudColumnFactors.GetText = 1 Then
                     clsSecondHeaderTopLeftFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
                     clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
@@ -757,11 +758,20 @@ Public Class dlgDescribeTwoVariable
                     clsSecondHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
                     clsMmtablePlusOperator.AddParameter("second_header_left_top", clsRFunctionParameter:=clsSecondHeaderLeftTopFunction, iPosition:=3)
                 End If
+            ElseIf NumericVariableDataType() = "factor" AndAlso
+               ThreeVariableFirstFactorDataType() = "numeric" Then
+                clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverNumericVariable.GetVariableNames(), iPosition:=0)
+                If ucrReceiverNumericVariable.GetVariableNames() <> ucrReceiverThreeVariableSecondFactor.GetVariableNames() Then
+                    clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverThreeVariableSecondFactor.GetVariableNames(), iPosition:=0)
+                    clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
+                Else
+                    clsMmtablePlusOperator.RemoveParameterByName("header_top_left")
+                End If
+                clsSecondHeaderTopLeftFunction.AddParameter("variable", Chr(34) & "summary-variable" & Chr(34), iPosition:=0)
+                clsMmtablePlusOperator.AddParameter("second_header_top_left", clsRFunctionParameter:=clsSecondHeaderTopLeftFunction, iPosition:=3)
             End If
         End If
     End Sub
-
-
 
     Private Function NumericVariableDataType()
         Dim strCurrentDatatype As String
@@ -884,5 +894,4 @@ Public Class dlgDescribeTwoVariable
         UpdateCombineFactorParameterFunction()
         ChangeSummaryFunctionForThreeVariable()
     End Sub
-
 End Class
