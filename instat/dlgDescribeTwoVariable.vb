@@ -20,6 +20,8 @@ Public Class dlgDescribeTwoVariable
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public strFirstVariablesType, strSecondVariableType As String
+    Private strFirstThreeVaribaleType As String = ""
+    Private strSecondThreeVariableType As String = ""
     Public clsGetDataTypeFunction, clsGetSecondDataTypeFunction, clsRCorrelationFunction, clsRCustomSummaryFunction,
            clsCombineFunction, clsRAnovaFunction, clsFrequencyTablesFunction, clsSkimrFunction, clsSummariesListFunction,
            clsGroupByFunction, clsDummyFunction, clsMmtableFunction, clsHeaderTopLeftFunction, clSummaryTableFunction,
@@ -410,11 +412,19 @@ Public Class dlgDescribeTwoVariable
             End If
         Else
             If ucrReceiverThreeVariableFirstFactor.IsEmpty OrElse
-                ucrReceiverSecondTwoVariableFactor.IsEmpty OrElse
+                ucrReceiverThreeVariableSecondFactor.IsEmpty OrElse
                 ucrReceiverNumericVariable.IsEmpty Then
                 ucrBase.OKEnabled(False)
             Else
-                ucrBase.OKEnabled(True)
+                If ucrChkThreeVariableDisplayAsPercentage.Checked Then
+                    If Not ucrReceiverThreeVariableMultiplePercentages.IsEmpty Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
             End If
         End If
     End Sub
@@ -522,40 +532,41 @@ Public Class dlgDescribeTwoVariable
             ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
             If Not ucrReceiverThreeVariableFirstFactor.IsEmpty AndAlso
                 ThreeVariableFirstFactorDataType() <> "" Then
-                lblFirstType.Text = If({"factor", "character", "logical"}.Contains(ThreeVariableFirstFactorDataType),
-                    "categorical(2)", "numerical(2)")
+                strFIrstThreeVaribaleType = If({"factor", "character", "logical"}.Contains(ThreeVariableFirstFactorDataType),
+                    "categorical", "numerical")
+                lblFirstType.Text = strFIrstThreeVaribaleType
                 lblFirstType.ForeColor = SystemColors.Highlight
             Else
                 lblFirstType.Text = "________"
                 lblFirstType.ForeColor = SystemColors.ControlText
             End If
-            If Not ucrReceiverThreeVariableSecondFactor.IsEmpty Then
-                lblSecondType.Text = If({"factor", "character", "logical"}.Contains(ucrReceiverThreeVariableSecondFactor.strCurrDataType),
+            If Not ucrReceiverNumericVariable.IsEmpty Then
+                strSecondThreeVariableType = If({"factor", "character", "logical"}.Contains(ucrReceiverNumericVariable.strCurrDataType),
                     "categorical", "numerical")
+                lblSecondType.Text = strSecondThreeVariableType
                 lblSecondType.ForeColor = SystemColors.Highlight
             Else
                 lblSecondType.Text = "________"
                 lblSecondType.ForeColor = SystemColors.ControlText
             End If
 
-            If Not ucrReceiverThreeVariableFirstFactor.IsEmpty AndAlso
-                    Not ucrReceiverThreeVariableSecondFactor.IsEmpty Then
-                If lblSecondType.Text = "categorical" AndAlso lblFirstType.Text = "categorical" Then
-                    lblSummaryName.Text = "Frequency tables"
-                    lblSummaryName.ForeColor = SystemColors.Highlight
-                ElseIf lblSecondType.Text = "numeric" AndAlso lblFirstType.Text = "categorical" Then
+            If ucrReceiverThreeVariableFirstFactor.IsEmpty OrElse
+                ucrReceiverNumericVariable.IsEmpty Then
+                lblSummaryName.Text = "__________"
+                lblSummaryName.ForeColor = SystemColors.ControlText
+            Else
+                If (strFirstThreeVaribaleType = "numerical" AndAlso strSecondThreeVariableType = "categorical") OrElse
+                    (strFirstThreeVaribaleType = "categorical" AndAlso strSecondThreeVariableType = "numerical") Then
                     lblSummaryName.Text = "Summary tables"
+                    lblSummaryName.ForeColor = SystemColors.Highlight
+                ElseIf strFirstThreeVaribaleType = "categorical" AndAlso strSecondThreeVariableType = "categorical" Then
+                    lblSummaryName.Text = "Frequency tables"
                     lblSummaryName.ForeColor = SystemColors.Highlight
                 Else
                     lblSummaryName.Text = "__________"
                     lblSummaryName.ForeColor = SystemColors.ControlText
                 End If
-            Else
-                lblSummaryName.Text = "__________"
-                lblSummaryName.ForeColor = SystemColors.ControlText
             End If
-        Else
-            grpSummaries.Visible = False
         End If
         autoTranslate(Me)
     End Sub
@@ -678,7 +689,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ChangeLocations()
-        grpFrequency.Location = New Point(10, 302)
         If rdoSkim.Checked Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
             Me.Size = New Point(iDialogueXsize, 425)
@@ -692,16 +702,13 @@ Public Class dlgDescribeTwoVariable
                 Me.Size = New Point(iDialogueXsize, 425)
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If (ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
-               ucrReceiverNumericVariable.strCurrDataType = "numeric") AndAlso
-               Not ucrReceiverNumericVariable.IsEmpty Then
+            If strFirstThreeVaribaleType = "categorical" AndAlso
+                strSecondThreeVariableType = "categorical" Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
                 Me.Size = New Point(iDialogueXsize, 530)
-                grpFrequency.Location = New Point(10, 250)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
-                grpFrequency.Location = New Point(10, 302)
             End If
         End If
     End Sub
@@ -729,20 +736,18 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoSkim.Checked Then
             DisableFrequencyControls()
         Else
-            If ucrReceiverNumericVariable.strCurrDataType = "factor" OrElse
-                ucrReceiverNumericVariable.strCurrDataType = "numeric" Then
-                grpFrequency.Visible = True
-                If ucrReceiverNumericVariable.strCurrDataType = "factor" Then
-                    grpThreeVariablePercentages.Visible = True
-                    grpTwoVariablePercentages.Visible = False
-                    ucrChkDisplayMargins.Visible = True
-                    ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
-                End If
-
-            Else
-                ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
+            If (ThreeVariableFirstFactorDataType() = "numeric" AndAlso ucrReceiverNumericVariable.strCurrDataType = "factor") OrElse
+               (ThreeVariableFirstFactorDataType() = "factor" AndAlso ucrReceiverNumericVariable.strCurrDataType = "numeric") Then
                 DisableFrequencyControls()
+            ElseIf ThreeVariableFirstFactorDataType() = "factor" AndAlso
+                ucrReceiverNumericVariable.strCurrDataType = "factor" Then
+                grpFrequency.Visible = True
+                grpThreeVariablePercentages.Visible = True
+                grpTwoVariablePercentages.Visible = False
+                ucrChkDisplayMargins.Visible = True
+                ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
             End If
+            ucrReceiverThreeVariableFirstFactor.SetMeAsReceiver()
             ChangeLocations()
         End If
     End Sub
@@ -888,6 +893,7 @@ Public Class dlgDescribeTwoVariable
             clsThreeVariableCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
         End If
         AddRemoveFrequencyParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrNudColumnFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumnFactors.ControlValueChanged
@@ -914,6 +920,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumericVariable.ControlValueChanged
+        Results()
         UpdateClsRenameCombineFunction()
         UpdateClsCombineFrequencyFactorParameterFunction()
         SwapMmtableHeaderFunctions()
@@ -921,5 +928,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFrequencyParameters()
         UpdateCombineFactorParameterFunction()
         ChangeSummaryFunctionForThreeVariable()
+        TestOKEnabled()
     End Sub
 End Class

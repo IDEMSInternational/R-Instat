@@ -147,7 +147,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblSummary.AutoSize = True
         Me.lblSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummary.Location = New System.Drawing.Point(6, 43)
+        Me.lblSummary.Location = New System.Drawing.Point(10, 43)
         Me.lblSummary.Name = "lblSummary"
         Me.lblSummary.Size = New System.Drawing.Size(53, 13)
         Me.lblSummary.TabIndex = 4
@@ -157,7 +157,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblFirstType.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lblFirstType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstType.Location = New System.Drawing.Point(-20, 16)
+        Me.lblFirstType.Location = New System.Drawing.Point(-3, 16)
         Me.lblFirstType.Name = "lblFirstType"
         Me.lblFirstType.Size = New System.Drawing.Size(83, 13)
         Me.lblFirstType.TabIndex = 0
@@ -167,7 +167,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblBy.AutoSize = True
         Me.lblBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBy.Location = New System.Drawing.Point(66, 16)
+        Me.lblBy.Location = New System.Drawing.Point(82, 16)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(18, 13)
         Me.lblBy.TabIndex = 1
@@ -177,7 +177,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblSecondType.AutoSize = True
         Me.lblSecondType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondType.Location = New System.Drawing.Point(85, 18)
+        Me.lblSecondType.Location = New System.Drawing.Point(106, 18)
         Me.lblSecondType.Name = "lblSecondType"
         Me.lblSecondType.Size = New System.Drawing.Size(0, 13)
         Me.lblSecondType.TabIndex = 2
@@ -186,7 +186,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblSummaryName.AutoSize = True
         Me.lblSummaryName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryName.Location = New System.Drawing.Point(60, 43)
+        Me.lblSummaryName.Location = New System.Drawing.Point(70, 43)
         Me.lblSummaryName.Name = "lblSummaryName"
         Me.lblSummaryName.Size = New System.Drawing.Size(0, 13)
         Me.lblSummaryName.TabIndex = 3
