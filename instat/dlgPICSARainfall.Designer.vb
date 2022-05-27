@@ -68,7 +68,7 @@ Partial Class dlgPICSARainfall
         Me.lblFactorOptional.Location = New System.Drawing.Point(248, 245)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(103, 13)
-        Me.lblFactorOptional.TabIndex = 18
+        Me.lblFactorOptional.TabIndex = 6
         Me.lblFactorOptional.Tag = "Factor_Optional:"
         Me.lblFactorOptional.Text = "Colour By (Optional):"
         '
@@ -79,7 +79,7 @@ Partial Class dlgPICSARainfall
         Me.lblXVariable.Location = New System.Drawing.Point(248, 201)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 16
+        Me.lblXVariable.TabIndex = 4
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
@@ -90,7 +90,7 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable.Location = New System.Drawing.Point(26, 14)
         Me.lblAvailable.Name = "lblAvailable"
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
-        Me.lblAvailable.TabIndex = 15
+        Me.lblAvailable.TabIndex = 2
         '
         'cmdPICSAOptions
         '
@@ -99,7 +99,7 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
-        Me.cmdPICSAOptions.TabIndex = 21
+        Me.cmdPICSAOptions.TabIndex = 11
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
         Me.cmdPICSAOptions.UseVisualStyleBackColor = True
@@ -111,7 +111,7 @@ Partial Class dlgPICSARainfall
         Me.lblFacetBy.Location = New System.Drawing.Point(248, 291)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
-        Me.lblFacetBy.TabIndex = 31
+        Me.lblFacetBy.TabIndex = 8
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By (Optional):"
         '
@@ -125,7 +125,7 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverFacetBy.Selector = Nothing
         Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
         Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 32
+        Me.ucrReceiverFacetBy.TabIndex = 9
         Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrReceiverX
@@ -138,7 +138,7 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 17
+        Me.ucrReceiverX.TabIndex = 5
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrChkPoints
@@ -148,7 +148,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(151, 24)
-        Me.ucrChkPoints.TabIndex = 22
+        Me.ucrChkPoints.TabIndex = 13
         '
         'ucrSave
         '
@@ -157,7 +157,7 @@ Partial Class dlgPICSARainfall
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(320, 24)
-        Me.ucrSave.TabIndex = 25
+        Me.ucrSave.TabIndex = 14
         '
         'ucrSelectorPICSARainfall
         '
@@ -169,7 +169,7 @@ Partial Class dlgPICSARainfall
         Me.ucrSelectorPICSARainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPICSARainfall.Name = "ucrSelectorPICSARainfall"
         Me.ucrSelectorPICSARainfall.Size = New System.Drawing.Size(221, 189)
-        Me.ucrSelectorPICSARainfall.TabIndex = 13
+        Me.ucrSelectorPICSARainfall.TabIndex = 1
         '
         'ucrBase
         '
@@ -178,7 +178,7 @@ Partial Class dlgPICSARainfall
         Me.ucrBase.Location = New System.Drawing.Point(9, 366)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 26
+        Me.ucrBase.TabIndex = 0
         '
         'ucrReceiverColourBy
         '
@@ -190,7 +190,7 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverColourBy.Selector = Nothing
         Me.ucrReceiverColourBy.Size = New System.Drawing.Size(125, 26)
         Me.ucrReceiverColourBy.strNcFilePath = ""
-        Me.ucrReceiverColourBy.TabIndex = 19
+        Me.ucrReceiverColourBy.TabIndex = 7
         Me.ucrReceiverColourBy.ucrSelector = Nothing
         '
         'ucrVariablesAsFactorForPicsa
@@ -202,7 +202,7 @@ Partial Class dlgPICSARainfall
         Me.ucrVariablesAsFactorForPicsa.Selector = Nothing
         Me.ucrVariablesAsFactorForPicsa.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForPicsa.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForPicsa.TabIndex = 30
+        Me.ucrVariablesAsFactorForPicsa.TabIndex = 3
         Me.ucrVariablesAsFactorForPicsa.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForPicsa.ucrVariableSelector = Nothing
         '
@@ -215,7 +215,7 @@ Partial Class dlgPICSARainfall
         Me.ucrInputStation.Location = New System.Drawing.Point(375, 306)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
-        Me.ucrInputStation.TabIndex = 33
+        Me.ucrInputStation.TabIndex = 10
         '
         'cmdOptions
         '
@@ -225,7 +225,7 @@ Partial Class dlgPICSARainfall
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.TabIndex = 34
+        Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -234,24 +234,24 @@ Partial Class dlgPICSARainfall
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(151, 70)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(150, 22)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
         Me.toolStripMenuItemPointOption.Text = "Point Options "
         '
         'dlgPICSARainfall
