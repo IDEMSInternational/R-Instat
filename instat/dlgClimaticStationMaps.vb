@@ -355,7 +355,13 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub ucrChkAddPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoints.ControlValueChanged
-
+        If ucrChkAddPoints.Checked Then
+            clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, iPosition:=1)
+            clsGGplotOperator.AddParameter("geom_label_repel", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=1)
+        Else
+            clsGGplotOperator.RemoveParameterByName("geom_point")
+            clsGGplotOperator.RemoveParameterByName("geom_label_repel")
+        End If
         ChangeSize()
     End Sub
 
