@@ -38,10 +38,10 @@ Partial Class dlgPICSARainfall
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
@@ -53,6 +53,12 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
         Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFactorOptional
@@ -85,17 +91,6 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable.Name = "lblAvailable"
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 15
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 231)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
-        Me.cmdOptions.TabIndex = 28
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdPICSAOptions
         '
@@ -182,7 +177,7 @@ Partial Class dlgPICSARainfall
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 366)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 26
         '
         'ucrReceiverColourBy
@@ -222,17 +217,54 @@ Partial Class dlgPICSARainfall
         Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
         Me.ucrInputStation.TabIndex = 33
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 233)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 34
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
+        '
+        'PlotOptionsToolStripMenuItem
+        '
+        Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
+        '
+        'toolStripMenuItemLineOptions
+        '
+        Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLineOptions.Text = "Line Options"
+        '
+        'toolStripMenuItemPointOption
+        '
+        Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOption.Text = "Point Options "
+        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(463, 420)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.cmdPICSAOptions)
@@ -249,6 +281,7 @@ Partial Class dlgPICSARainfall
         Me.Name = "dlgPICSARainfall"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PICSA Rainfall Graphs"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,10 +296,14 @@ Partial Class dlgPICSARainfall
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
     Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
 End Class
