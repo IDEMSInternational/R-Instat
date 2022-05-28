@@ -993,7 +993,6 @@ Partial Class frmMain
         '
         'mnuDescribeMultivariateClusterAnalysis
         '
-        Me.mnuDescribeMultivariateClusterAnalysis.Enabled = False
         Me.mnuDescribeMultivariateClusterAnalysis.Name = "mnuDescribeMultivariateClusterAnalysis"
         Me.mnuDescribeMultivariateClusterAnalysis.Size = New System.Drawing.Size(203, 22)
         Me.mnuDescribeMultivariateClusterAnalysis.Text = "Cluster Analysis..."
