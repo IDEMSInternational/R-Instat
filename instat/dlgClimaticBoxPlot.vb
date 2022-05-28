@@ -54,6 +54,7 @@ Public Class dlgClimaticBoxPlot
     Private strNone As String = "None"
 
     Private bUpdateComboOptions As Boolean = True
+    Private bContainsFacet As Boolean = False
     Private bUpdatingParameters As Boolean = False
     Private dctComboReceiver As New Dictionary(Of ucrInputComboBox, ucrReceiverSingle)
 
@@ -336,6 +337,9 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        If Not IsNothing(clsBaseOperator.GetParameter("facets")) Then
+            bContainsFacet = True
+        End If
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                          clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
@@ -349,6 +353,11 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.tbpFacet.Enabled = True
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
+
+        If bContainsFacet Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            bContainsFacet = False
+        End If
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
