@@ -231,7 +231,7 @@ Public Class dlgName
                             OrElse Boolean.TryParse(strValue, parsedValue) _
                             OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
                             OrElse IsNumeric(strValue) Then
-                        MsgBox("The column name must not be a numeric or contain space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        MsgBox("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
                         bCurrentCell = False
                         Exit For
                     End If
