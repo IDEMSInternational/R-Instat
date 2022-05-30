@@ -1500,5 +1500,5 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   if (store_table) {
     data_book$import_data(data_tables = list(shaped_cell_values = shaped_cell_values))
   }
-  return(shaped_cell_values)
+  return(tibble::as_tibble(shaped_cell_values))
 })
