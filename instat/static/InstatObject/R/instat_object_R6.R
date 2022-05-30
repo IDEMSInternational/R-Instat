@@ -125,7 +125,8 @@ DataBook$set("public", "replace_instat_object", function(new_instat_object) {
 )
 
 DataBook$set("public", "set_data_objects", function(new_data_objects) {
-  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !all("DataSheet" %in% sapply(new_data_objects, class)))) {
+  # new_data_objects could be of old class type 'data_object'
+  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !any(c("DataSheet", "data_object") %in% sapply(new_data_objects, class)))) {
     stop("new_data_objects must be a list of data_objects")
   }
   else private$.data_sheets <- new_data_objects
