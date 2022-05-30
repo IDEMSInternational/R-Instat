@@ -26,6 +26,8 @@ Public Class dlgCorrelation
     clsMutateFunction, clsAcrossFunction, clsDataFrameFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsDummyShave As New RFunction
+    Private iBasicHeight As Integer
+    Private iBaseMaxY As Integer
     Private clsModelPipeOperator, clsDataFramePipeOperator As New ROperator
     Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
@@ -36,6 +38,8 @@ Public Class dlgCorrelation
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
+            iBasicHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -476,6 +480,8 @@ Public Class dlgCorrelation
     Private Sub ChangeBaseFunction()
         If rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
+                Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
                 If ucrChkDisplayAsDataFrame.Checked Then
                     clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsFashionDataFrameFunction, bIncludeArgumentName:=False, iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseROperator(clsDataFramePipeOperator)
@@ -485,10 +491,14 @@ Public Class dlgCorrelation
                     ucrBase.clsRsyntax.iCallType = 2
                 End If
             Else
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+                Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight / 2.3)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
                 ucrBase.clsRsyntax.iCallType = 2
             End If
         Else
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight / 2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
             ucrBase.clsRsyntax.iCallType = 2
         End If
