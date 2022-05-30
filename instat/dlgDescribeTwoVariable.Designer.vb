@@ -76,7 +76,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverThreeVariableFirstFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.grpThreeVariablePercentages = New System.Windows.Forms.GroupBox()
         Me.lblThreeVariableFactorAsPercentages = New System.Windows.Forms.Label()
@@ -525,19 +524,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDescribeTwoVar.TabIndex = 3
         '
-        'ucrReceiverThreeVariableFirstFactor
-        '
-        Me.ucrReceiverThreeVariableFirstFactor.AutoSize = True
-        Me.ucrReceiverThreeVariableFirstFactor.frmParent = Me
-        Me.ucrReceiverThreeVariableFirstFactor.Location = New System.Drawing.Point(271, 76)
-        Me.ucrReceiverThreeVariableFirstFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverThreeVariableFirstFactor.Name = "ucrReceiverThreeVariableFirstFactor"
-        Me.ucrReceiverThreeVariableFirstFactor.Selector = Nothing
-        Me.ucrReceiverThreeVariableFirstFactor.Size = New System.Drawing.Size(120, 79)
-        Me.ucrReceiverThreeVariableFirstFactor.strNcFilePath = ""
-        Me.ucrReceiverThreeVariableFirstFactor.TabIndex = 24
-        Me.ucrReceiverThreeVariableFirstFactor.ucrSelector = Nothing
-        '
         'ucrReceiverThreeVariableSecondFactor
         '
         Me.ucrReceiverThreeVariableSecondFactor.AutoSize = True
@@ -625,7 +611,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.Controls.Add(Me.grpThreeVariablePercentages)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
-        Me.Controls.Add(Me.ucrReceiverThreeVariableFirstFactor)
         Me.Controls.Add(Me.rdoThreeVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpFrequency)
@@ -706,7 +691,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
     Friend WithEvents rdoThreeVariable As RadioButton
-    Friend WithEvents ucrReceiverThreeVariableFirstFactor As ucrReceiverMultiple
     Friend WithEvents ucrReceiverThreeVariableSecondFactor As ucrReceiverSingle
     Friend WithEvents grpThreeVariablePercentages As GroupBox
     Friend WithEvents lblThreeVariableFactorAsPercentages As Label
