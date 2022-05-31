@@ -69,9 +69,14 @@ Public Class ucrDataFrame
             InitialiseControl()
             bFirstLoad = False
         End If
-        'always load data frame names on load event because a data frame may have been deleted
-        'and the control needs to refresh the data frame names.
-        LoadDataFrameNamesAndFillComboBox()
+
+        'this design mode check is necessary because of issue #7489
+        'todo. can be disabled [production mode
+        If Not mdlCoreControl.IsInDesignMode Then
+            'always load data frame names on load event because a data frame may have been deleted
+            'and the control needs to refresh the data frame names.
+            LoadDataFrameNamesAndFillComboBox()
+        End If
     End Sub
 
     Private Sub InitialiseControl()
