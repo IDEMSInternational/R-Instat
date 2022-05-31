@@ -84,13 +84,14 @@ Public Class dlgReorderDataFrame
         TestOkEnabled()
     End Sub
 
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    If ucrDataFrameToReorder.lstAvailableData.Items.Count > 0 Then
-    '        For i As Integer = 0 To ucrDataFrameToReorder.lstAvailableData.Items.Count - 1
-    '            Dim strName As String = ucrDataFrameToReorder.lstAvailableData.Items(i).Text
-    '            Dim iNewPosition As Integer = ucrDataFrameToReorder.lstAvailableData.Items(i).Index
-    '            frmMain.ucrDataViewer.ReorderSheets(strName, iNewPosition)
-    '        Next
-    '    End If
-    'End Sub
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If ucrDataFrameToReorder.lstAvailableData.Items.Count > 0 Then
+            For i As Integer = 0 To ucrDataFrameToReorder.lstAvailableData.Items.Count - 1
+                Dim strName As String = ucrDataFrameToReorder.lstAvailableData.Items(i).Text
+                Dim iNewPosition As Integer = ucrDataFrameToReorder.lstAvailableData.Items(i).Index
+                frmMain.ucrDataViewer.ReorderSheets(strName, iNewPosition)
+                frmMain.ucrColumnMeta.ReorderSheets(strName, iNewPosition)
+            Next
+        End If
+    End Sub
 End Class

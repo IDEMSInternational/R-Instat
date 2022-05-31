@@ -82,6 +82,10 @@ Public Class ucrColumnMetadata
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
+    Public Sub ReorderSheets(strSheet As String, iNewPosition As Integer)
+        _grid.ReorderSheets(strSheet, iNewPosition)
+    End Sub
+
     Public Sub RefreshGridData()
         If _clsDataBook IsNot Nothing Then
             _grid.RemoveOldWorksheets()
