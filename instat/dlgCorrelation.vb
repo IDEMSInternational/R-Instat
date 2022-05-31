@@ -26,8 +26,6 @@ Public Class dlgCorrelation
     clsMutateFunction, clsAcrossFunction, clsDataFrameFunction As New RFunction
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsDummyShave As New RFunction
-    Private iBasicHeight As Integer
-    Private iBaseMaxY As Integer
     Private clsPipeOperator As New ROperator
     Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
@@ -38,8 +36,6 @@ Public Class dlgCorrelation
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
-            'BasicHeight = Me.Height
-            'BaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -52,10 +48,6 @@ Public Class dlgCorrelation
         TestOKEnabled()
         autoTranslate(Me)
         DialogSize()
-        'Me.Size = New Size(454, 470)
-        'Me.ucrBase.Location = New Point(11, 368)
-        'Me.ucrSaveCorrelation.Location = New Point(9, 342)
-        'Me.cmdOptions.Location = New Point(301, 343)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -281,7 +273,6 @@ Public Class dlgCorrelation
         clsCorrelationFunction.SetRCommand("correlate")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
 
-
         clsRearrangeFunction.SetPackageName("corrr")
         clsRearrangeFunction.SetRCommand("rearrange")
         clsRearrangeFunction.AddParameter("x", clsRFunctionParameter:=clsCorrelationFunction, iPosition:=0)
@@ -332,7 +323,7 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -438,7 +429,6 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
-        DialogSize()
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
@@ -448,6 +438,7 @@ Public Class dlgCorrelation
         ReceiverColumns()
         ChangeBaseFunction()
         ChangeClsCrossParameter()
+        DialogSize()
     End Sub
 
     Private Sub ChangeBaseFunction()
@@ -490,6 +481,7 @@ Public Class dlgCorrelation
     Private Sub ucrSelectorCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCorrelation.ControlContentsChanged
         clsCurrentDataFrameFunction = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
     End Sub
+
     Private Sub DialogSize()
         If rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
@@ -510,6 +502,7 @@ Public Class dlgCorrelation
             Me.cmdOptions.Location = New Point(301, 343)
         End If
     End Sub
+
     Private Sub ReceiverColumns()
         Dim strTwoColumns As String
         If rdoTwoColumns.Checked Then
