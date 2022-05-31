@@ -390,10 +390,7 @@ Partial Class frmMain
         Me.mnuSubTbPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSubTbPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbEditLastDialog = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.sepStart = New System.Windows.Forms.ToolStripSeparator()
-        Me.sepEnd = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuploty = New System.Windows.Forms.ToolStripMenuItem()
@@ -2985,7 +2982,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -3039,7 +3036,7 @@ Partial Class frmMain
         Me.mnuTbCopy.Name = "mnuTbCopy"
         Me.mnuTbCopy.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbCopy.Text = "ToolStripSplitButton3"
-        Me.mnuTbCopy.ToolTipText = "View Last Graph"
+        Me.mnuTbCopy.ToolTipText = "Copy"
         '
         'mnuSubTbCopy
         '
@@ -3062,7 +3059,7 @@ Partial Class frmMain
         Me.mnuTbPaste.Name = "mnuTbPaste"
         Me.mnuTbPaste.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbPaste.Text = "ToolStripSplitButton3"
-        Me.mnuTbPaste.ToolTipText = "View Last Graph"
+        Me.mnuTbPaste.ToolTipText = "Paste"
         '
         'mnuSubTbPaste
         '
@@ -3081,38 +3078,15 @@ Partial Class frmMain
         Me.separator1.Name = "separator1"
         Me.separator1.Size = New System.Drawing.Size(6, 37)
         '
-        'mnuTbEditLastDialog
-        '
-        Me.mnuTbEditLastDialog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbEditLastDialog.Image = Global.instat.My.Resources.Resources.dialog2
-        Me.mnuTbEditLastDialog.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbEditLastDialog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
-        Me.mnuTbEditLastDialog.Name = "mnuTbEditLastDialog"
-        Me.mnuTbEditLastDialog.Size = New System.Drawing.Size(34, 34)
-        Me.mnuTbEditLastDialog.ToolTipText = "Edit Last Dialog"
-        '
         'mnuTbLast10Dialogs
         '
         Me.mnuTbLast10Dialogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLast10Dialogs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sepStart, Me.sepEnd})
         Me.mnuTbLast10Dialogs.Image = Global.instat.My.Resources.Resources.last10dialogs
         Me.mnuTbLast10Dialogs.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbLast10Dialogs.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbLast10Dialogs.Name = "mnuTbLast10Dialogs"
-        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(43, 34)
-        Me.mnuTbLast10Dialogs.ToolTipText = "Last 10 Dialogs"
-        '
-        'sepStart
-        '
-        Me.sepStart.Name = "sepStart"
-        Me.sepStart.Size = New System.Drawing.Size(57, 6)
-        Me.sepStart.Visible = False
-        '
-        'sepEnd
-        '
-        Me.sepEnd.Name = "sepEnd"
-        Me.sepEnd.Size = New System.Drawing.Size(57, 6)
-        Me.sepEnd.Visible = False
+        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbLast10Dialogs.Text = "ToolStripSplitButton3"
+        Me.mnuTbLast10Dialogs.ToolTipText = "View/Edit Last Dialogue"
         '
         'mnuLastGraph
         '
@@ -5189,7 +5163,6 @@ Partial Class frmMain
     Friend WithEvents mnuTbSave As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
     Friend WithEvents separator1 As ToolStripSeparator
-    Friend WithEvents mnuTbEditLastDialog As ToolStripButton
     Friend WithEvents separator2 As ToolStripSeparator
     Friend WithEvents mnuTbHelp As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
@@ -5231,9 +5204,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileExport As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectCopyDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuTbLast10Dialogs As ToolStripDropDownButton
-    Friend WithEvents sepEnd As ToolStripSeparator
-    Friend WithEvents sepStart As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameSort As ToolStripMenuItem
     Friend WithEvents mnuPrepareRObjects As ToolStripMenuItem
     Friend WithEvents mnuPrepareRObjectsView As ToolStripMenuItem
@@ -5784,7 +5754,12 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameAddMergeColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataViewDeleteLabels As ToolStripMenuItem
+    Friend WithEvents mnuTbLast10Dialogs As ToolStripSplitButton
     Friend WithEvents mnuPrepareDataReshapeRandomSplit As ToolStripMenuItem
+
+
+
     Friend WithEvents mnuClimaticPICSAGeneralGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator73 As ToolStripSeparator
+
 End Class

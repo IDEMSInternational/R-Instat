@@ -2521,19 +2521,15 @@ DataSheet$set("public","make_date_yearmonthday", function(year, month, day, f_ye
 )
 
 # Not sure if doy_format should be a parameter? There seems to only be one format for it.
-DataSheet$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
-  doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
+DataSheet$set("public","make_date_yeardoy", function(year, doy, base, doy_typical_length = "366") {
+  if(!missing(year)) year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
+  if(!missing(doy)) doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
   
-  if(missing(year_format)) {
-    year_counts <- str_count(year)
-    if(anyDuplicated(year_counts) != 0) stop("Year column has inconsistent year formats")
-    else {
-      year_length <- year_counts[1]
-      if(year_length == 2) year_format = "%y"
-      else if(year_length == 4) year_format = "%Y"
-      else stop("Cannot detect year format with ", year_length, " digits.")
-    }
+  year_counts <- stringr::str_count(year_col)
+  year_length <- year_counts[1]
+  if(year_length == 2){
+    if(missing(base)) stop("Base must be specified.")
+    year_col <- dplyr::if_else(year_col <= base, year_col + 2000, year_col + 1900)
   }
   if(doy_typical_length == "366") {
     if(is.factor(year_col)) {
@@ -2543,7 +2539,7 @@ DataSheet$set("public","make_date_yeardoy", function(year, doy, year_format = "%
     doy_col[(!lubridate::leap_year(year_col)) & doy_col == 60] <- 0
     doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] <- doy_col[(!lubridate::leap_year(year_col)) & doy_col > 60] - 1
   }
-  return(temp_date <- as.Date(paste(year_col, doy_col), format = paste(year_format, doy_format)))
+  return(temp_date <- as.Date(paste(as.character(year_col), "-", doy_col), format = "%Y - %j"))
 }
 )
 
