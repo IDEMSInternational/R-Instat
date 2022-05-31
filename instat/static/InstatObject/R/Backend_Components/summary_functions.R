@@ -1385,7 +1385,6 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     for (facts in power_sets_outer) {
       if (length(facts) == 0) facts <- c()
       margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "__", ...)
-      margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] #%>% dplyr::select(c(tidyselect::all_of(facts), tidyselect::all_of(order_names)))
     }
     # for outer margins
     margin_item <- length(summaries) * length(columns_to_summarise)
