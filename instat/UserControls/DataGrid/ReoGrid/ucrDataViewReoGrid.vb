@@ -86,6 +86,7 @@ Public Class ucrDataViewReoGrid
         'see issue #7221 for more information.
         'get pixel size equivalent of the longest row header text
         'and use it as the row header width.
+        'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
