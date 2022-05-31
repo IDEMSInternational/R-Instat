@@ -91,6 +91,8 @@ Public Class dlgReorderDataFrame
                 Dim iNewPosition As Integer = ucrDataFrameToReorder.lstAvailableData.Items(i).Index
                 frmMain.ucrDataViewer.ReorderSheets(strName, iNewPosition)
                 frmMain.ucrColumnMeta.ReorderSheets(strName, iNewPosition)
+                frmMain.ucrDataViewer.SetCurrentDataFrame(strName)
+                frmMain.ucrColumnMeta.SetCurrentDataFrame(strName)
             Next
         End If
     End Sub
