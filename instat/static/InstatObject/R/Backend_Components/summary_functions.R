@@ -1360,12 +1360,12 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
     cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
   }
-  grps <- nrow(cell_values)
-  cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "summary-variable", value.name = "value")
+  cell_values <- cell_values %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
+  cell_values <- cell_values %>%
+    tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
   if (treat_columns_as_factor && !is.null(columns_to_summarise)) {
-    cell_values[["variable"]] <- rep(columns_to_summarise, each = nrow(cell_values) / length(columns_to_summarise))
-    cell_values[["summary"]] <- rep(summaries_display, each = grps, length.out = nrow(cell_values))
-    cell_values[["summary-variable"]] <- NULL
+    cell_values <- cell_values %>%
+      tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "__")
   }
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
   
@@ -1385,12 +1385,16 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     for (facts in power_sets_outer) {
       if (length(facts) == 0) facts <- c()
       margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, sep = "__", ...)
-      margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
     }
     # for outer margins
     margin_item <- length(summaries) * length(columns_to_summarise)
     
     if (("outer" %in% margins) && (length(factors) > 0)) {
+      # to prevent changing all variables to dates/converting dates to numeric
+      for (i in 1:length(margin_tables)){
+        margin_tables[[i]] <- margin_tables[[i]] %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
+        margin_tables[[i]] <- margin_tables[[i]] %>% purrr::modify_if(lubridate::is.Date, as.character)
+      }
       outer_margins <- plyr::ldply(margin_tables)
       # Change shape
       if (length(margin_tables) == 1) {
@@ -1398,7 +1402,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         names(outer_margins) <- c("summary-variable", "value")
       } else {
         outer_margins <- outer_margins %>%
-          tidyr::pivot_longer(cols = 1:margin_item, values_to = "value", names_to = "summary-variable")
+          tidyr::pivot_longer(cols = 1:margin_item, values_to = "value", names_to = "summary-variable", values_transform = list(value = as.character))
       }
       if (treat_columns_as_factor && !is.null(columns_to_summarise)) {
         outer_margins <- outer_margins %>%
@@ -1411,35 +1415,30 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       summary_margins <- NULL
       if (is.null(columns_to_summarise)){
         power_sets_summary <- power_sets[-(length(power_sets))]
-      } 
-      else {
+      } else {
         if ("outer" %in% margins) {
           power_sets_summary <- power_sets
-        }
-        else {
+        } else {
           power_sets_summary <- power_sets[(c(length(power_sets)))]
         }
       }
-
-      if (is.null(columns_to_summarise)){
-        for (facts in power_sets_summary) {
-          if (length(facts) == 0) facts <- c()
+      
+      for (facts in power_sets_summary) {
+        if (length(facts) == 0) facts <- c()
+        if (is.null(columns_to_summarise)){
           summary_margins_df <- data_book$get_data_frame(data_name = data_name) %>%
-            dplyr::select(c(factors))
+            dplyr::select(c(tidyselect::all_of(factors)))
           data_book$import_data(data_tables = list(summary_margins_df = summary_margins_df))
           summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = NULL, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
-          data_book$delete_dataframes(data_names = "summary_margins_df")
-        }
-      } else {
-        for (facts in power_sets_summary) {
-          if (length(facts) == 0) facts <- c()
+        } else {
           summary_margins_df <- data_book$get_data_frame(data_name = data_name) %>%
-            dplyr::select(c(factors, columns_to_summarise)) %>%
-            tidyr::pivot_longer(cols = columns_to_summarise)
+            dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(columns_to_summarise))) %>%
+            tidyr::pivot_longer(cols = columns_to_summarise, values_transform = list(value = as.character))
           data_book$import_data(data_tables = list(summary_margins_df = summary_margins_df))
           summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = "value", summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
-          data_book$delete_dataframes(data_names = "summary_margins_df")
+          
         }
+        data_book$delete_dataframes(data_names = "summary_margins_df")
       }
       summary_margins <- plyr::ldply(summary_margins)
       if (treat_columns_as_factor && !is.null(columns_to_summarise)) {
@@ -1448,7 +1447,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
           colnames(summary_margins)[col] <- sub("_value", "", colnames(summary_margins)[col])
         }
         summary_margins <- summary_margins %>%
-          tidyr::pivot_longer(cols = !factors, names_to = "summary", values_to = "value")
+          tidyr::pivot_longer(cols = !factors, names_to = "summary", values_to = "value", values_transform = list(value = as.character))
       } else {
         if (length(summary_margins) == 1) {
           summary_margins <- data.frame(summary_margins, `summary-variable` = "count", factors = NA)
@@ -1458,8 +1457,9 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
             # TODO: if the colname is the same as a factor, then do nothing
             colnames(summary_margins)[col] <- sub("_value", "_all", colnames(summary_margins)[col])
           }
+          summary_margins <- summary_margins %>% dplyr::mutate(dplyr::across(where(is.numeric), round, signif_fig))
           summary_margins <- summary_margins %>%
-          tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value")
+          tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value", values_transform = list(value = as.character))
         }
       }
     } else {
@@ -1467,13 +1467,26 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     }
     if (!is.null(summary_margins) || !is.null(outer_margins)) {
       margin_tables_all <- (dplyr::bind_rows(summary_margins, outer_margins))
-      
       margin_tables_all <- margin_tables_all %>%
-        dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name))
-      
-      shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
         dplyr::mutate_at(vars(-value), ~ replace(., is.na(.), margin_name)) %>%
-        dplyr::mutate_at(vars(-value), ~ forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
+        dplyr::mutate(value = as.character(value))
+      
+      # if there is one factor, then we do not yet have the factor name in the df
+      # (this will be added in by dplyr::bind_rows(s_c_v, m_t_a))
+      # by introducing it in the outer_margins bit, we have to add it in "manually"
+      # this then loses the class of it, creating issues for ordered vs non-ordered factors
+      # so we do these changes here.
+      if (length(factors) > 1){
+        for (i in factors){
+          shaped_cell_values_levels <- levels(shaped_cell_values[[i]])
+          margin_tables_all <- margin_tables_all %>%
+            dplyr::mutate_at(i, ~ forcats::fct_expand(., shaped_cell_values_levels),
+                             i, ~ forcats::fct_relevel(., shaped_cell_values_levels))
+        }     
+      }
+      shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
+        dplyr::mutate_at(vars(-c(value)), tidyr::replace_na, margin_name) %>%
+        dplyr::mutate_at(vars(-c(value)), ~forcats::as_factor(forcats::fct_relevel(.x, margin_name, after = Inf)))
     }
   }
   shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = as.numeric(as.character(value)),
@@ -1486,5 +1499,5 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   if (store_table) {
     data_book$import_data(data_tables = list(shaped_cell_values = shaped_cell_values))
   }
-  return(shaped_cell_values)
+  return(tibble::as_tibble(shaped_cell_values))
 })
