@@ -49,12 +49,37 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        RunFormScripts(sender, e, True)
+    End Sub
+
+    Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
+        Scripts(bRun:=False)
+        ParentForm.Close()
+    End Sub
+
+    Private Sub toolStripMenuItemOkClose_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOkClose.Click
+        RunFormScripts(sender, e, True)
+    End Sub
+
+    Private Sub toolStripMenuItemOkKeep_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOkKeep.Click
+        RunFormScripts(sender, e, False)
+    End Sub
+
+    Private Sub toolStripMenuItemToScriptClose_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemToScriptClose.Click
+        Scripts(bRun:=False)
+        ParentForm.Close()
+    End Sub
+
+    Private Sub toolStripMenuItemToScriptKeep_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemToScriptKeep.Click
+        Scripts(bRun:=False)
+    End Sub
+
+    Private Sub RunFormScripts(sender As Object, e As EventArgs, bCloseForm As Boolean)
         Dim lstCurrentEnabled As New List(Of Boolean)
         Dim ctrTempControl As Control
         Dim j As Integer
 
         'this is getting the current controls on the form and disables then to prevent user to interract with form when its running
-
         For Each ctrTempControl In ParentForm.Controls
             lstCurrentEnabled.Add(ctrTempControl.Enabled)
             ctrTempControl.Enabled = False
@@ -72,7 +97,11 @@ Public Class ucrButtons
         'Indeed, the events BeforeClickOk and ClickOk enables for the moment to insert R-commands before and after the Base R-command handle. 
         'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
         'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
-        ParentForm.Close()
+
+        If bCloseForm Then
+            ParentForm.Close()
+        End If
+
         j = 0
         For Each ctrTempControl In ParentForm.Controls
             ctrTempControl.Enabled = lstCurrentEnabled(j)
@@ -232,10 +261,6 @@ Public Class ucrButtons
         Else
             txtComment.Text = ParentForm.Text
         End If
-    End Sub
-
-    Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
-        Scripts(bRun:=False)
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged

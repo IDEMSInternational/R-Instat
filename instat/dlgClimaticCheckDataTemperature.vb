@@ -21,7 +21,7 @@ Public Class dlgClimaticCheckDataTemperature
     Private strCurrDataFrame As String
     Private clsGroupByFunc, clsGroupingListFunc, clsCalcFilterFunc, clsRunCalcFunc As New RFunction
     'logical columns
-    Private clsFilterListFunc, clsFilterFunc As New RFunction
+    Private clsFilterListFunc As New RFunction
     'Jump
     Private clsJumpCodeElement1, clsJumpCodeElement2 As New clsQCJumpRCode
     Private clsJumpOp, clsJumpListSubCalc As New ROperator
@@ -63,10 +63,10 @@ Public Class dlgClimaticCheckDataTemperature
         rdoIndividual.Checked = True
 
         Dim lstLabels As New List(Of Control)
-        lstLabels.AddRange({lblRangeElement1to, lblNudRangeElement1Min, lblNudRangeElement1Max})
+        lstLabels.AddRange({lblRangeElement1to, lblRangeElement1From})
 
         Dim lstLabels2 As New List(Of Control)
-        lstLabels2.AddRange({lblNudRangeElement2Min, lblRangeElement2to, lblNudRangeElement2Max})
+        lstLabels2.AddRange({lblRangeElement2to, lblRangeElement2From})
 
         'Station Receiver
         ucrReceiverStation.Selector = ucrSelectorTemperature
@@ -119,38 +119,36 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Checkboxes for options
         ucrChkRangeElement1.SetParameter(New RParameter("range1", clsRangeOrOp, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement1.SetText("Acceptable Range (Element1)")
+        ucrChkRangeElement1.SetText("Acceptable Range Element1:")
 
         ucrChkRangeElement2.SetParameter(New RParameter("range2", clsRange2OrOp, 1), bNewChangeParameterValue:=False)
-        ucrChkRangeElement2.SetText("Acceptable Range (Element2)")
+        ucrChkRangeElement2.SetText("Acceptable Range Element2:")
 
         'Linking controls
-        ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkRangeElement1.AddToLinkedControls(ucrNudRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
-        ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrChkRangeElement2.AddToLinkedControls(ucrNudRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
+        ucrChkRangeElement1.AddToLinkedControls(ucrInputRangeElement1Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkRangeElement1.AddToLinkedControls(ucrInputRangeElement1Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=50)
+        ucrChkRangeElement2.AddToLinkedControls(ucrInputRangeElement2Min, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkRangeElement2.AddToLinkedControls(ucrInputRangeElement2Max, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
         ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
-        ucrNudRangeElement2Min.SetLinkedDisplayControl(lstLabels2)
-        ucrNudRangeElement1Min.SetLinkedDisplayControl(lstLabels)
-        ucrNudJump.SetLinkedDisplayControl(lblNudJump)
+        ucrInputRangeElement2Min.SetLinkedDisplayControl(lstLabels2)
+        ucrInputRangeElement1Min.SetLinkedDisplayControl(lstLabels)
         ucrNudSame.SetLinkedDisplayControl(lblNudSame)
-        ucrNudDifference.SetLinkedDisplayControl(lblNudDiff)
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
         ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameOp, 1), bNewChangeParameterValue:=False)
-        ucrChkSame.SetText("Same (Element1)")
+        ucrChkSame.SetText("Days: (Element1)")
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
         ucrChkJump.SetParameter(New RParameter("jump", clsJumpOp, 1), bNewChangeParameterValue:=False)
-        ucrChkJump.SetText("Jump (Element1)")
+        ucrChkJump.SetText("Jump: (Element1)")
         ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsDiffOp, 1), bNewChangeParameterValue:=False)
-        ucrChkDifference.SetText("Difference")
+        ucrChkDifference.SetText("Difference:")
 
         ucrChkOutlier.SetParameter(New RParameter("Combined_outlier", clsOutlierCombinedOperator, 1), bNewChangeParameterValue:=False)
-        ucrChkOutlier.SetText("Outlier")
+        ucrChkOutlier.SetText("Outlier:")
 
         ucrNudCoeff.SetParameter(New RParameter("coef"))
         ucrNudCoeff.DecimalPlaces = 1
@@ -158,25 +156,21 @@ Public Class dlgClimaticCheckDataTemperature
 
         'Nuds for the respective options
         'Range Option
-        ucrNudRangeElement1Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement1Min.SetMinMax(-35, 65)
-        ucrNudRangeElement1Min.DecimalPlaces = 1
-        ucrNudRangeElement1Min.Increment = 0.1
+        ucrInputRangeElement1Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
+        ucrInputRangeElement1Min.SetValidationTypeAsNumeric(dcmMin:=-35.0, dcmMax:=65.0)
+        ucrInputRangeElement1Min.AddQuotesIfUnrecognised = False
 
-        ucrNudRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement1Max.SetMinMax(-35, 65)
-        ucrNudRangeElement1Max.DecimalPlaces = 1
-        ucrNudRangeElement1Max.Increment = 0.1
+        ucrInputRangeElement1Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
+        ucrInputRangeElement1Max.SetValidationTypeAsNumeric(dcmMin:=-35.0, dcmMax:=65.0)
+        ucrInputRangeElement1Max.AddQuotesIfUnrecognised = False
 
-        ucrNudRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement2Min.SetMinMax(-50, 40)
-        ucrNudRangeElement2Min.DecimalPlaces = 1
-        ucrNudRangeElement2Min.Increment = 0.1
+        ucrInputRangeElement2Min.SetParameter(New RParameter("from", 1, bNewIncludeArgumentName:=False))
+        ucrInputRangeElement2Min.SetValidationTypeAsNumeric(dcmMin:=-50.0, dcmMax:=40.0)
+        ucrInputRangeElement2Min.AddQuotesIfUnrecognised = False
 
-        ucrNudRangeElement2Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
-        ucrNudRangeElement2Max.SetMinMax(-50, 40)
-        ucrNudRangeElement2Max.DecimalPlaces = 1
-        ucrNudRangeElement2Max.Increment = 0.1
+        ucrInputRangeElement2Max.SetParameter(New RParameter("To", 1, bNewIncludeArgumentName:=False))
+        ucrInputRangeElement2Max.SetValidationTypeAsNumeric(dcmMin:=-50.0, dcmMax:=40.0)
+        ucrInputRangeElement2Max.AddQuotesIfUnrecognised = False
 
         'Same Option
         ucrNudSame.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False))
@@ -203,7 +197,6 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkIncludeLogicalColumns.SetParameter(New RParameter("save", 4))
         ucrChkIncludeLogicalColumns.SetValuesCheckedAndUnchecked("2", "0")
 
-
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
         ttMultiple.Show("Not yet implemented.", rdoMultiple)
     End Sub
@@ -212,10 +205,8 @@ Public Class dlgClimaticCheckDataTemperature
         clsGroupByFunc = New RFunction
         clsGroupingListFunc = New RFunction
         clsCalcFilterFunc = New RFunction
-        clsFilterFunc = New RFunction
         clsFilterListFunc = New RFunction
         clsRunCalcFunc = New RFunction
-
         clsOrOperator = New ROperator
 
         ucrSelectorTemperature.Reset()
@@ -229,21 +220,21 @@ Public Class dlgClimaticCheckDataTemperature
         clsGroupingListFunc.AddParameter("list", bIncludeArgumentName:=False, clsRFunctionParameter:=clsGroupByFunc, iPosition:=0)
 
         'Range
-        clsQCAcceptableRangeElement1.SetDefaults("_tmax")
-        clsQCAcceptableRangeElement2.SetDefaults("_tmin")
+        clsQCAcceptableRangeElement1.SetDefaults("_e1")
+        clsQCAcceptableRangeElement2.SetDefaults("_e2")
 
         clsRangeOrOp.SetOperation("|")
         clsRange2OrOp.SetOperation("|")
 
         'Same
-        clsSameCodeElement1.SetDefaults("_tmax")
-        clsSameCodeElement2.SetDefaults("_tmin")
+        clsSameCodeElement1.SetDefaults("_e1")
+        clsSameCodeElement2.SetDefaults("_e2")
 
         clsSameOp.SetOperation("|")
 
         'Jump
-        clsJumpCodeElement1.SetDefaults("_tmax")
-        clsJumpCodeElement2.SetDefaults("_tmin")
+        clsJumpCodeElement1.SetDefaults("_e1")
+        clsJumpCodeElement2.SetDefaults("_e2")
 
         clsJumpOp.SetOperation("|")
 
@@ -261,8 +252,8 @@ Public Class dlgClimaticCheckDataTemperature
         clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
 
         'Outliers
-        clsOutliersElement1.SetDefaults("_tmax")
-        clsOutliersElement2.SetDefaults("_tmin")
+        clsOutliersElement1.SetDefaults("_e1")
+        clsOutliersElement2.SetDefaults("_e2")
 
         clsOutlierCombinedOperator.SetOperation("|")
         clsOutlierCombinedOperator.bBrackets = False
@@ -275,23 +266,15 @@ Public Class dlgClimaticCheckDataTemperature
         clsSameListSubCalc.SetOperation(",")
         clsDiffListSubCalc.SetOperation(",")
 
-
         'Main calculation filter
         clsCalcFilterFunc.SetRCommand("instat_calculation$new")
-        clsCalcFilterFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsCalcFilterFunc.AddParameter("result_name", Chr(34) & "QC" & Chr(34))
+        clsCalcFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsCalcFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
-        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=3)
+        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)
+        clsCalcFilterFunc.AddParameter("save", "2", iPosition:=3)
+        clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=4)
+        clsCalcFilterFunc.AddParameter("result_data_frame", Chr(34) & "qcTemp" & Chr(34), iPosition:=5)
         clsCalcFilterFunc.SetAssignTo("filter_calculation")
-
-        'Logical columns 
-        clsFilterFunc.SetRCommand("instat_calculation$new")
-        clsFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsFilterFunc.AddParameter("function_exp", strParameterValue:=Chr(34) & "QC" & Chr(34), iPosition:=1)
-        clsFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)
-        clsFilterFunc.AddParameter("save", "2", iPosition:=3)
-        clsFilterFunc.AddParameter("result_data_frame", Chr(34) & "qcTemp" & Chr(34), iPosition:=4)
-        clsFilterFunc.SetAssignTo("filtered_data")
 
         clsFilterListFunc.SetRCommand("list")
         clsFilterListFunc.AddParameter("sub", clsRFunctionParameter:=clsCalcFilterFunc, bIncludeArgumentName:=False)
@@ -302,7 +285,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOrOperator.bToScriptAsRString = True
 
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsFilterFunc, iPosition:=0)
+        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsCalcFilterFunc, iPosition:=0)
         clsRunCalcFunc.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
     End Sub
@@ -336,22 +319,21 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitFunc, New RParameter("coef"), iAdditionalPairNo:=3)
         ucrNudCoeff.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitFunc, New RParameter("coef"), iAdditionalPairNo:=3)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement1.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=1)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=2)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpTestFunction, New RParameter("save"), iAdditionalPairNo:=1)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsSameCodeElement1.clsSameTestFunction, New RParameter("save"), iAdditionalPairNo:=3)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameTestFunction, New RParameter("save"), iAdditionalPairNo:=4)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsSameCodeElement1.clsSameTestFunction, New RParameter("save"), iAdditionalPairNo:=2)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameTestFunction, New RParameter("save"), iAdditionalPairNo:=3)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCDifferenceRCode.clsDiffTestFunction, New RParameter("save"), iAdditionalPairNo:=5)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCDifferenceRCode.clsDiffTestFunction, New RParameter("save"), iAdditionalPairNo:=4)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement1.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=6)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement2.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=7)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement1.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=5)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsQCAcceptableRangeElement2.clsAcceptableRangeTestFunc, New RParameter("save"), iAdditionalPairNo:=6)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=8)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=9)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=7)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement1.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=8)
 
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=10)
-        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=11)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierUpperLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=9)
+        ucrChkIncludeLogicalColumns.AddAdditionalCodeParameterPair(clsOutliersElement2.clsOutlierLowerLimitTestCalc, New RParameter("save"), iAdditionalPairNo:=10)
 
         ucrChkIncludeCalculatedColumns.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsJumpCalcFunction, New RParameter("save"), iAdditionalPairNo:=1)
 
@@ -369,11 +351,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudJump.AddAdditionalCodeParameterPair(clsJumpCodeElement2.clsGreaterJumpOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
         ucrNudSame.AddAdditionalCodeParameterPair(clsSameCodeElement2.clsSameGreaterOperator, (New RParameter("n", 1, bNewIncludeArgumentName:=False)))
 
-        ucrNudRangeElement2Max.SetRCode(clsQCAcceptableRangeElement2.clsGreaterEqualToOperator, bReset)
-        ucrNudRangeElement2Min.SetRCode(clsQCAcceptableRangeElement2.clsLessEqualToOperator, bReset)
+        ucrInputRangeElement2Max.SetRCode(clsQCAcceptableRangeElement2.clsGreaterEqualToOperator, bReset)
+        ucrInputRangeElement2Min.SetRCode(clsQCAcceptableRangeElement2.clsLessEqualToOperator, bReset)
         ucrReceiverElement1.SetRCode(clsQCAcceptableRangeElement1.clsLessEqualToOperator, bReset)
-        ucrNudRangeElement1Min.SetRCode(clsQCAcceptableRangeElement1.clsLessEqualToOperator, bReset)
-        ucrNudRangeElement1Max.SetRCode(clsQCAcceptableRangeElement1.clsGreaterEqualToOperator, bReset)
+        ucrInputRangeElement1Min.SetRCode(clsQCAcceptableRangeElement1.clsLessEqualToOperator, bReset)
+        ucrInputRangeElement1Max.SetRCode(clsQCAcceptableRangeElement1.clsGreaterEqualToOperator, bReset)
         ucrNudJump.SetRCode(clsJumpCodeElement1.clsGreaterJumpOperator, bReset)
         ucrReceiverElement2.SetRCode(clsQCDifferenceRCode.clsDiffOperator, bReset)
         ucrNudDifference.SetRCode(clsQCDifferenceRCode.clsLessDiffOperator, bReset)
@@ -383,7 +365,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrChkRangeElement2.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkJump.SetRCode(clsOrOperator, bReset)
-        ucrChkIncludeLogicalColumns.SetRCode(clsCalcFilterFunc, bReset)
+        ucrChkIncludeLogicalColumns.SetRCode(clsJumpCodeElement1.clsJumpTestFunction, bReset)
         ucrChkIncludeCalculatedColumns.SetRCode(clsJumpCodeElement1.clsJumpCalcFunction, bReset)
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
         ucrNudCoeff.SetRCode(clsOutliersElement1.clsOutlierUpperLimitFunc)
@@ -408,7 +390,7 @@ Public Class dlgClimaticCheckDataTemperature
         End If
 
         If ucrChkRangeElement1.Checked Then
-            If ucrNudRangeElement1Min.GetText <> "" AndAlso ucrNudRangeElement1Max.GetText <> "" Then
+            If ucrInputRangeElement1Min.GetText <> "" AndAlso ucrInputRangeElement1Max.GetText <> "" Then
                 bEnable = True
             Else
                 ucrBase.OKEnabled(False)
@@ -416,7 +398,7 @@ Public Class dlgClimaticCheckDataTemperature
             End If
         End If
         If ucrChkRangeElement2.Checked Then
-            If ucrNudRangeElement2Min.GetText <> "" AndAlso ucrNudRangeElement2Max.GetText <> "" Then
+            If ucrInputRangeElement2Min.GetText <> "" AndAlso ucrInputRangeElement2Max.GetText <> "" Then
                 bEnable = True
             Else
                 ucrBase.OKEnabled(False)
@@ -456,7 +438,6 @@ Public Class dlgClimaticCheckDataTemperature
                 Exit Sub
             End If
         End If
-
         ucrBase.OKEnabled(bEnable)
 
     End Sub
@@ -471,10 +452,8 @@ Public Class dlgClimaticCheckDataTemperature
         If Not ucrReceiverStation.IsEmpty Then
             clsGroupByFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=1)
             clsCalcFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsGroupingListFunc, iPosition:=2)
-            clsFilterFunc.AddParameter("manipulations", clsRFunctionParameter:=clsGroupingListFunc, iPosition:=3)
         Else
             clsCalcFilterFunc.RemoveParameterByName("manipulations")
-            clsFilterFunc.RemoveParameterByName("manipulations")
         End If
     End Sub
 
@@ -583,7 +562,6 @@ Public Class dlgClimaticCheckDataTemperature
 
         If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsQCDifferenceRCode.clsDiffCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsDiffOp.AddParameter("diff", strParameterValue:=clsQCDifferenceRCode.strTestName, bIncludeArgumentName:=False)
             clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
@@ -594,7 +572,6 @@ Public Class dlgClimaticCheckDataTemperature
             clsQCAcceptableRangeElement2.clsAcceptableRangeTestFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & "," & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
         ElseIf Not ucrReceiverElement1.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
-            clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsJumpCodeElement2.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
             clsSameCodeElement1.clsSameCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
@@ -605,7 +582,6 @@ Public Class dlgClimaticCheckDataTemperature
             clsOutliersElement1.clsOutlierLowerLimitCalc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement1.GetVariableNames & ")", iPosition:=2)
         ElseIf Not ucrReceiverElement2.IsEmpty Then
             clsCalcFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
-            clsFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsJumpCodeElement1.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsJumpCodeElement2.clsJumpCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
             clsSameCodeElement1.clsSameCalcFunction.AddParameter("calculated_from", "list(" & strCurrDataFrame & "=" & ucrReceiverElement2.GetVariableNames & ")", iPosition:=2)
@@ -647,7 +623,7 @@ Public Class dlgClimaticCheckDataTemperature
         EnableOrDisableDifferenceControls()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrInputRangeElement2Min.ControlContentsChanged, ucrInputRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

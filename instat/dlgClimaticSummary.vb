@@ -22,7 +22,10 @@ Public Class dlgClimaticSummary
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction, clsConcFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList, clsAddDateFunction As New RFunction
+    Private clsDefaultFunction, clsConcFunction, clsSummariesList,
+        clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert,
+        clsDayFilterCalcFromList, clsAddDateFunction,
+        clsDummyFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -59,27 +62,12 @@ Public Class dlgClimaticSummary
         ucrSelectorVariable.SetParameterIsString()
 
         'panel setting
-        ucrPnlAnnualWithin.AddRadioButton(rdoAnnual)
-        ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear)
-        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
-        ucrPnlAnnualWithin.AddRadioButton(rdoStation)
-        ucrPnlAnnualWithin.AddRadioButton(rdoDaily)
-
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "year", True)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "date", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "date", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "date", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "within_variable", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "year", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "date", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "within_variable", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "year", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoDaily, "date", True)
+        ucrPnlAnnualWithin.SetParameter(New RParameter("checked", 0))
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnual, "annual")
+        ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear, "annual_within_year")
+        ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear, "within_year")
+        ucrPnlAnnualWithin.AddRadioButton(rdoStation, "station")
+        ucrPnlAnnualWithin.AddRadioButton(rdoDaily, "daily")
 
         'receivers:
         ' by receivers
@@ -167,6 +155,7 @@ Public Class dlgClimaticSummary
         clsDefaultFactors = New RFunction
         clsConcFunction = New RFunction
         clsAddDateFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsFromAndToConditionOperator = New ROperator
         clsDayFilterCalc = New RFunction
@@ -182,6 +171,8 @@ Public Class dlgClimaticSummary
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("checked", "annual", iPosition:=0)
 
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
@@ -239,7 +230,7 @@ Public Class dlgClimaticSummary
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
 
-        ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
+        ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     'TODO: run these things at the correct times

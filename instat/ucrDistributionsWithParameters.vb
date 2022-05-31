@@ -76,13 +76,18 @@ Public Class ucrDistributionsWithParameters
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterInputTextBoxes(i).SetName(clsCurrDistribution.clsParameters(i).strDefaultValue)
-                    AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                        AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, "c(" & clsCurrDistribution.clsParameters(i).strDefaultValue & ")")
+                        ttEmpirical.SetToolTip(ucrInputParameter2.txtInput, "Input relative values separated by commas, For example 3,2,1.")
+                    Else
+                        AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    End If
                 Else
                     lstParameterInputTextBoxes(i).Reset()
                 End If
                 OnControlValueChanged()
             Next
-            If clsCurrDistribution.strNameTag = "Bernouli" Then
+            If clsCurrDistribution.strNameTag = "Bernoulli" Then
                 AddParameter("size", 1)
             End If
             bParametersFilled = False
@@ -105,17 +110,27 @@ Public Class ucrDistributionsWithParameters
     Private Sub ucrInputParameter1_ControlValueChanged() Handles ucrInputParameter1.ControlValueChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 0 Then
             AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
-            CheckParametersFilled()
+            If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                ucrInputParameter1.IsReadOnly = True
+                CheckParametersFilled()
+            Else
+                ucrInputParameter1.IsReadOnly = False
+            End If
         End If
         OnControlValueChanged()
     End Sub
 
-    Private Sub ucrInputParameter2_ControlValueChanged() Handles ucrInputParameter2.ControlValueChanged
+    Private Sub ucrInputParameter2_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputParameter2.ControlContentsChanged
         If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
-            AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
+            If clsCurrDistribution.strNameTag = "Discrete_Empirical" Then
+                AddParameter(lstCurrArguments(1), "c(" & ucrInputParameter2.GetText & ")")
+                ucrInputParameter1.SetName("1:" & ucrInputParameter2.GetText.Split(",").Length)
+            Else
+                AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
+            End If
             CheckParametersFilled()
         End If
-        OnControlValueChanged()
+        OnControlContentsChanged()
     End Sub
 
     Private Sub ucrInputParameter3_ControlValueChanged() Handles ucrInputParameter3.ControlValueChanged

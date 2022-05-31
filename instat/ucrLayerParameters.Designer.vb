@@ -35,7 +35,6 @@ Partial Class ucrLayerParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrLayerParameters))
         Me.UcrLayerParamsControls1 = New instat.ucrLayerParamsControls()
         Me.UcrLayerParamsControls2 = New instat.ucrLayerParamsControls()
         Me.UcrLayerParamsControls3 = New instat.ucrLayerParamsControls()
@@ -57,92 +56,127 @@ Partial Class ucrLayerParameters
         '
         'UcrLayerParamsControls1
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls1, "UcrLayerParamsControls1")
+        Me.UcrLayerParamsControls1.Location = New System.Drawing.Point(6, 49)
         Me.UcrLayerParamsControls1.Name = "UcrLayerParamsControls1"
+        Me.UcrLayerParamsControls1.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls1.TabIndex = 2
         '
         'UcrLayerParamsControls2
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls2, "UcrLayerParamsControls2")
+        Me.UcrLayerParamsControls2.Location = New System.Drawing.Point(6, 73)
         Me.UcrLayerParamsControls2.Name = "UcrLayerParamsControls2"
+        Me.UcrLayerParamsControls2.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls2.TabIndex = 3
         '
         'UcrLayerParamsControls3
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls3, "UcrLayerParamsControls3")
+        Me.UcrLayerParamsControls3.Location = New System.Drawing.Point(6, 97)
         Me.UcrLayerParamsControls3.Name = "UcrLayerParamsControls3"
+        Me.UcrLayerParamsControls3.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls3.TabIndex = 4
         '
         'UcrLayerParamsControls4
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls4, "UcrLayerParamsControls4")
+        Me.UcrLayerParamsControls4.Location = New System.Drawing.Point(6, 121)
         Me.UcrLayerParamsControls4.Name = "UcrLayerParamsControls4"
+        Me.UcrLayerParamsControls4.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls4.TabIndex = 5
         '
         'UcrLayerParamsControls5
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls5, "UcrLayerParamsControls5")
+        Me.UcrLayerParamsControls5.Location = New System.Drawing.Point(6, 145)
         Me.UcrLayerParamsControls5.Name = "UcrLayerParamsControls5"
+        Me.UcrLayerParamsControls5.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls5.TabIndex = 6
         '
         'UcrLayerParamsControls6
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls6, "UcrLayerParamsControls6")
+        Me.UcrLayerParamsControls6.Location = New System.Drawing.Point(6, 171)
         Me.UcrLayerParamsControls6.Name = "UcrLayerParamsControls6"
+        Me.UcrLayerParamsControls6.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls6.TabIndex = 7
         '
         'UcrLayerParamsControls7
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls7, "UcrLayerParamsControls7")
+        Me.UcrLayerParamsControls7.Location = New System.Drawing.Point(6, 197)
         Me.UcrLayerParamsControls7.Name = "UcrLayerParamsControls7"
+        Me.UcrLayerParamsControls7.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls7.TabIndex = 8
         '
         'UcrLayerParamsControls8
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls8, "UcrLayerParamsControls8")
+        Me.UcrLayerParamsControls8.Location = New System.Drawing.Point(6, 225)
         Me.UcrLayerParamsControls8.Name = "UcrLayerParamsControls8"
+        Me.UcrLayerParamsControls8.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls8.TabIndex = 9
         '
         'UcrLayerParamsControls9
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls9, "UcrLayerParamsControls9")
+        Me.UcrLayerParamsControls9.Location = New System.Drawing.Point(6, 253)
         Me.UcrLayerParamsControls9.Name = "UcrLayerParamsControls9"
+        Me.UcrLayerParamsControls9.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls9.TabIndex = 10
         '
         'UcrLayerParamsControls10
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls10, "UcrLayerParamsControls10")
+        Me.UcrLayerParamsControls10.Location = New System.Drawing.Point(6, 279)
         Me.UcrLayerParamsControls10.Name = "UcrLayerParamsControls10"
+        Me.UcrLayerParamsControls10.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls10.TabIndex = 11
         '
         'UcrLayerParamsControls11
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls11, "UcrLayerParamsControls11")
+        Me.UcrLayerParamsControls11.Location = New System.Drawing.Point(6, 305)
         Me.UcrLayerParamsControls11.Name = "UcrLayerParamsControls11"
+        Me.UcrLayerParamsControls11.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls11.TabIndex = 12
         '
         'UcrLayerParamsControls12
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls12, "UcrLayerParamsControls12")
+        Me.UcrLayerParamsControls12.Location = New System.Drawing.Point(6, 329)
         Me.UcrLayerParamsControls12.Name = "UcrLayerParamsControls12"
+        Me.UcrLayerParamsControls12.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls12.TabIndex = 13
         '
         'UcrLayerParamsControls13
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls13, "UcrLayerParamsControls13")
+        Me.UcrLayerParamsControls13.Location = New System.Drawing.Point(6, 353)
         Me.UcrLayerParamsControls13.Name = "UcrLayerParamsControls13"
+        Me.UcrLayerParamsControls13.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls13.TabIndex = 14
         '
         'UcrLayerParamsControls17
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls17, "UcrLayerParamsControls17")
+        Me.UcrLayerParamsControls17.Location = New System.Drawing.Point(6, 455)
         Me.UcrLayerParamsControls17.Name = "UcrLayerParamsControls17"
+        Me.UcrLayerParamsControls17.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls17.TabIndex = 18
         '
         'UcrLayerParamsControls16
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls16, "UcrLayerParamsControls16")
+        Me.UcrLayerParamsControls16.Location = New System.Drawing.Point(6, 429)
         Me.UcrLayerParamsControls16.Name = "UcrLayerParamsControls16"
+        Me.UcrLayerParamsControls16.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls16.TabIndex = 17
         '
         'UcrLayerParamsControls15
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls15, "UcrLayerParamsControls15")
+        Me.UcrLayerParamsControls15.Location = New System.Drawing.Point(6, 403)
         Me.UcrLayerParamsControls15.Name = "UcrLayerParamsControls15"
+        Me.UcrLayerParamsControls15.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls15.TabIndex = 16
         '
         'UcrLayerParamsControls14
         '
-        resources.ApplyResources(Me.UcrLayerParamsControls14, "UcrLayerParamsControls14")
+        Me.UcrLayerParamsControls14.Location = New System.Drawing.Point(6, 377)
         Me.UcrLayerParamsControls14.Name = "UcrLayerParamsControls14"
+        Me.UcrLayerParamsControls14.Size = New System.Drawing.Size(290, 28)
+        Me.UcrLayerParamsControls14.TabIndex = 15
         '
         'ucrLayerParameters
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.UcrLayerParamsControls17)
         Me.Controls.Add(Me.UcrLayerParamsControls16)
         Me.Controls.Add(Me.UcrLayerParamsControls15)
@@ -161,6 +195,7 @@ Partial Class ucrLayerParameters
         Me.Controls.Add(Me.UcrLayerParamsControls2)
         Me.Controls.Add(Me.UcrLayerParamsControls1)
         Me.Name = "ucrLayerParameters"
+        Me.Size = New System.Drawing.Size(347, 528)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls1, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls2, 0)
         Me.Controls.SetChildIndex(Me.UcrLayerParamsControls3, 0)

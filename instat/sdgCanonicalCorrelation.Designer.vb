@@ -38,7 +38,6 @@ Partial Class sdgCanonicalCorrelation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCanonicalCorrelation))
         Me.ucrChkCoefficients = New instat.ucrCheck()
         Me.ucrChkCanonicalCorrelations = New instat.ucrCheck()
         Me.ucrChkPairwisePlot = New instat.ucrCheck()
@@ -54,53 +53,79 @@ Partial Class sdgCanonicalCorrelation
         '
         'ucrChkCoefficients
         '
+        Me.ucrChkCoefficients.AutoSize = True
         Me.ucrChkCoefficients.Checked = False
-        resources.ApplyResources(Me.ucrChkCoefficients, "ucrChkCoefficients")
+        Me.ucrChkCoefficients.Location = New System.Drawing.Point(10, 46)
         Me.ucrChkCoefficients.Name = "ucrChkCoefficients"
+        Me.ucrChkCoefficients.Size = New System.Drawing.Size(184, 23)
+        Me.ucrChkCoefficients.TabIndex = 1
         '
         'ucrChkCanonicalCorrelations
         '
+        Me.ucrChkCanonicalCorrelations.AutoSize = True
         Me.ucrChkCanonicalCorrelations.Checked = False
-        resources.ApplyResources(Me.ucrChkCanonicalCorrelations, "ucrChkCanonicalCorrelations")
+        Me.ucrChkCanonicalCorrelations.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkCanonicalCorrelations.Name = "ucrChkCanonicalCorrelations"
+        Me.ucrChkCanonicalCorrelations.Size = New System.Drawing.Size(184, 23)
+        Me.ucrChkCanonicalCorrelations.TabIndex = 0
         '
         'ucrChkPairwisePlot
         '
+        Me.ucrChkPairwisePlot.AutoSize = True
         Me.ucrChkPairwisePlot.Checked = False
-        resources.ApplyResources(Me.ucrChkPairwisePlot, "ucrChkPairwisePlot")
+        Me.ucrChkPairwisePlot.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkPairwisePlot.Name = "ucrChkPairwisePlot"
+        Me.ucrChkPairwisePlot.Size = New System.Drawing.Size(184, 23)
+        Me.ucrChkPairwisePlot.TabIndex = 0
         '
         'rdoYVariables
         '
-        resources.ApplyResources(Me.rdoYVariables, "rdoYVariables")
+        Me.rdoYVariables.AutoSize = True
+        Me.rdoYVariables.Location = New System.Drawing.Point(46, 67)
         Me.rdoYVariables.Name = "rdoYVariables"
+        Me.rdoYVariables.Size = New System.Drawing.Size(78, 17)
+        Me.rdoYVariables.TabIndex = 3
         Me.rdoYVariables.Tag = "Y_Variables"
+        Me.rdoYVariables.Text = "Y Variables"
         Me.rdoYVariables.UseVisualStyleBackColor = True
         '
         'rdoXVariables
         '
-        resources.ApplyResources(Me.rdoXVariables, "rdoXVariables")
+        Me.rdoXVariables.AutoSize = True
+        Me.rdoXVariables.Location = New System.Drawing.Point(46, 44)
         Me.rdoXVariables.Name = "rdoXVariables"
+        Me.rdoXVariables.Size = New System.Drawing.Size(78, 17)
+        Me.rdoXVariables.TabIndex = 2
         Me.rdoXVariables.Tag = "X_Variables"
+        Me.rdoXVariables.Text = "X Variables"
         Me.rdoXVariables.UseVisualStyleBackColor = True
         '
         'ucrPnlVariables
         '
-        resources.ApplyResources(Me.ucrPnlVariables, "ucrPnlVariables")
+        Me.ucrPnlVariables.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlVariables.Location = New System.Drawing.Point(36, 36)
         Me.ucrPnlVariables.Name = "ucrPnlVariables"
+        Me.ucrPnlVariables.Size = New System.Drawing.Size(127, 58)
+        Me.ucrPnlVariables.TabIndex = 1
         '
         'ucrSdgButtons
         '
-        resources.ApplyResources(Me.ucrSdgButtons, "ucrSdgButtons")
+        Me.ucrSdgButtons.AutoSize = True
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(29, 191)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
+        Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgButtons.TabIndex = 2
         '
         'grpDisplay
         '
         Me.grpDisplay.Controls.Add(Me.ucrChkCoefficients)
         Me.grpDisplay.Controls.Add(Me.ucrChkCanonicalCorrelations)
-        resources.ApplyResources(Me.grpDisplay, "grpDisplay")
+        Me.grpDisplay.Location = New System.Drawing.Point(7, 7)
         Me.grpDisplay.Name = "grpDisplay"
+        Me.grpDisplay.Size = New System.Drawing.Size(200, 72)
+        Me.grpDisplay.TabIndex = 0
         Me.grpDisplay.TabStop = False
+        Me.grpDisplay.Text = "Display"
         '
         'grpGraphics
         '
@@ -108,14 +133,19 @@ Partial Class sdgCanonicalCorrelation
         Me.grpGraphics.Controls.Add(Me.ucrChkPairwisePlot)
         Me.grpGraphics.Controls.Add(Me.rdoXVariables)
         Me.grpGraphics.Controls.Add(Me.ucrPnlVariables)
-        resources.ApplyResources(Me.grpGraphics, "grpGraphics")
+        Me.grpGraphics.Location = New System.Drawing.Point(7, 85)
         Me.grpGraphics.Name = "grpGraphics"
+        Me.grpGraphics.Size = New System.Drawing.Size(200, 100)
+        Me.grpGraphics.TabIndex = 1
         Me.grpGraphics.TabStop = False
+        Me.grpGraphics.Text = "Graphics"
         '
         'sdgCanonicalCorrelation
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(214, 224)
         Me.Controls.Add(Me.grpGraphics)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrSdgButtons)
@@ -123,11 +153,15 @@ Partial Class sdgCanonicalCorrelation
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCanonicalCorrelation"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "CCA_Options"
+        Me.Text = "CCA Options"
         Me.grpDisplay.ResumeLayout(False)
+        Me.grpDisplay.PerformLayout()
         Me.grpGraphics.ResumeLayout(False)
         Me.grpGraphics.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -22,9 +22,13 @@ Public MustInherit Class ucrReoGrid
 
     Protected _clsDataBook As clsDataBook
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a worksheet is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(grdData.CurrentWorksheet)
+            Return If(grdData.CurrentWorksheet Is Nothing, Nothing, New clsWorksheetAdapter(grdData.CurrentWorksheet))
         End Get
         Set(value As clsWorksheetAdapter)
             grdData.CurrentWorksheet = grdData.Worksheets.Where(Function(x) x.Name = value.Name).FirstOrDefault
@@ -62,6 +66,7 @@ Public MustInherit Class ucrReoGrid
         fillWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
         AttachEventsToWorksheet(fillWorkSheet)
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
@@ -76,6 +81,15 @@ Public MustInherit Class ucrReoGrid
             lstSelectedRows.Add(grdData.CurrentWorksheet.RowHeaders.Item(i).Text)
         Next
         Return lstSelectedRows
+    End Function
+
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim clsRange As RangePosition = grdData.CurrentWorksheet.SelectionRange
+        For i As Integer = clsRange.Col To clsRange.Col + clsRange.Cols - 1
+            lstSelectedColumnIndexes.Add(grdData.CurrentWorksheet.ColumnHeaders.Item(i).Index + 1)
+        Next
+        Return lstSelectedColumnIndexes
     End Function
 
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet
@@ -176,15 +190,24 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
+        'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
+        'changes. This would then override the back color set in R
         If frmMain.clsInstatOptions IsNot Nothing Then
-            workSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+            'Set enitre range apart from top row
+            workSheet.SetRangeStyles(New RangePosition(1, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
+            'Set top row
+            workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name
                                 })
         End If
-
     End Sub
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load

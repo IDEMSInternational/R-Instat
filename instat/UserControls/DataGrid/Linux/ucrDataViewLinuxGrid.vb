@@ -27,6 +27,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event PasteValuesToDataframe() Implements IDataViewGrid.PasteValuesToDataframe
 
+    Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -46,19 +48,19 @@ Public Class ucrDataViewLinuxGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
 
-        If dataFrame.clsFilter.bApplied Then
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.Red
         Else
             dataGrid.RowHeadersDefaultCellStyle.ForeColor = Color.DarkBlue
         End If
 
-        Dim strRowNames = dataFrame.strRowNames()
+        Dim strRowNames = dataFrame.DisplayedRowNames()
         dataGrid.Rows.Clear()
         For i = 0 To dataFrame.iDisplayedRowCount - 1
             dataGrid.Rows.Add()
             dataGrid.Rows(i).HeaderCell.Value = strRowNames(i)
             For j = 0 To dataGrid.ColumnCount - 1
-                dataGrid.Rows(i).Cells(j).Value = dataFrame.Data(i, j)
+                dataGrid.Rows(i).Cells(j).Value = dataFrame.DisplayedData(i, j)
             Next
         Next
     End Sub
@@ -97,8 +99,8 @@ Public Class ucrDataViewLinuxGrid
     Private Sub DataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
         Dim dataGrid = GetDataGridFromSelectedTab()
         RaiseEvent IDataViewGrid_ReplaceValueInData(dataGrid.CurrentCell.Value.ToString(),
-                        GetCurrentDataFrameFocus().clsVisiblePage.lstColumns(dataGrid.CurrentCell.ColumnIndex).strName,
-                        GetCurrentDataFrameFocus().clsVisiblePage.RowNames()(dataGrid.CurrentCell.RowIndex))
+                        GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(dataGrid.CurrentCell.ColumnIndex).strName,
+                        GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(dataGrid.CurrentCell.RowIndex))
     End Sub
 
     'ToDo allow editing
@@ -111,6 +113,9 @@ Public Class ucrDataViewLinuxGrid
         Dim shiftIns As Boolean = e.Modifiers = Keys.Shift And e.KeyCode = Keys.Insert
         If ctrlV Or shiftIns Then
             RaiseEvent PasteValuesToDataframe()
+        End If
+        If e.KeyCode = Keys.Delete OrElse e.KeyCode = Keys.Back Then
+            RaiseEvent DeleteValueToDataframe()
         End If
     End Sub
 
@@ -133,7 +138,7 @@ Public Class ucrDataViewLinuxGrid
             End If
         Next
         For Each columnIndex In selectedColumns
-            lstColumns.Add(GetCurrentDataFrameFocus().clsVisiblePage.lstColumns(columnIndex))
+            lstColumns.Add(GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(columnIndex))
         Next
         Return lstColumns
     End Function
@@ -141,5 +146,4 @@ Public Class ucrDataViewLinuxGrid
     Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
         RaiseEvent WorksheetChanged()
     End Sub
-
 End Class

@@ -37,6 +37,11 @@ Partial Class dlgClimaticDataEntry
         Me.cmdCheckData = New System.Windows.Forms.Button()
         Me.ttCmdCheckData = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblNbRowsChanged = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
+        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
+        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
         Me.ucrEndDate = New instat.ucrDateTimePicker()
         Me.ucrStartDate = New instat.ucrDateTimePicker()
         Me.ucrInputType = New instat.ucrInputComboBox()
@@ -47,11 +52,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblNbRowsChanged = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
-        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
-        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -205,112 +205,6 @@ Partial Class dlgClimaticDataEntry
         Me.ttucrChkDefaultValue.InitialDelay = 500
         Me.ttucrChkDefaultValue.ReshowDelay = 100
         '
-        'ucrEndDate
-        '
-        Me.ucrEndDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
-        Me.ucrEndDate.Format = "dd MMM yyyy"
-        Me.ucrEndDate.Location = New System.Drawing.Point(92, 305)
-        Me.ucrEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrEndDate.Name = "ucrEndDate"
-        Me.ucrEndDate.Size = New System.Drawing.Size(132, 21)
-        Me.ucrEndDate.TabIndex = 28
-        '
-        'ucrStartDate
-        '
-        Me.ucrStartDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 567)
-        Me.ucrStartDate.Format = "dd MMM yyyy"
-        Me.ucrStartDate.Location = New System.Drawing.Point(92, 276)
-        Me.ucrStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrStartDate.Name = "ucrStartDate"
-        Me.ucrStartDate.Size = New System.Drawing.Size(132, 21)
-        Me.ucrStartDate.TabIndex = 27
-        '
-        'ucrInputType
-        '
-        Me.ucrInputType.AddQuotesIfUnrecognised = True
-        Me.ucrInputType.GetSetSelectedIndex = -1
-        Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(92, 244)
-        Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(132, 21)
-        Me.ucrInputType.TabIndex = 5
-        '
-        'ucrReceiverViewVariables
-        '
-        Me.ucrReceiverViewVariables.frmParent = Me
-        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 337)
-        Me.ucrReceiverViewVariables.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverViewVariables.Name = "ucrReceiverViewVariables"
-        Me.ucrReceiverViewVariables.Selector = Nothing
-        Me.ucrReceiverViewVariables.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverViewVariables.strNcFilePath = ""
-        Me.ucrReceiverViewVariables.TabIndex = 15
-        Me.ucrReceiverViewVariables.ucrSelector = Nothing
-        '
-        'ucrSelectorClimaticDataEntry
-        '
-        Me.ucrSelectorClimaticDataEntry.bDropUnusedFilterLevels = False
-        Me.ucrSelectorClimaticDataEntry.bShowHiddenColumns = False
-        Me.ucrSelectorClimaticDataEntry.bUseCurrentFilter = True
-        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 48)
-        Me.ucrSelectorClimaticDataEntry.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorClimaticDataEntry.Name = "ucrSelectorClimaticDataEntry"
-        Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorClimaticDataEntry.TabIndex = 3
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 84)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 7
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 169)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 11
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrReceiverElements
-        '
-        Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 212)
-        Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElements.Name = "ucrReceiverElements"
-        Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 13
-        Me.ucrReceiverElements.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(7, 466)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 22
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(66, 8)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
-        Me.ucrPnlOptions.TabIndex = 26
-        '
         'lblNbRowsChanged
         '
         Me.lblNbRowsChanged.AutoSize = True
@@ -339,16 +233,6 @@ Partial Class dlgClimaticDataEntry
         Me.lblNbRowsChanged1.TabIndex = 90
         Me.lblNbRowsChanged1.Text = "Label3"
         '
-        'ucrInputSelectStation
-        '
-        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
-        Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
-        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
-        Me.ucrInputSelectStation.Size = New System.Drawing.Size(126, 21)
-        Me.ucrInputSelectStation.TabIndex = 91
-        '
         'lblNbCommentEntered
         '
         Me.lblNbCommentEntered.AutoSize = True
@@ -358,10 +242,137 @@ Partial Class dlgClimaticDataEntry
         Me.lblNbCommentEntered.TabIndex = 92
         Me.lblNbCommentEntered.Text = "Label4"
         '
+        'ucrInputSelectStation
+        '
+        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
+        Me.ucrInputSelectStation.IsReadOnly = False
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
+        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 23)
+        Me.ucrInputSelectStation.TabIndex = 91
+        '
+        'ucrEndDate
+        '
+        Me.ucrEndDate.AutoSize = True
+        Me.ucrEndDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
+        Me.ucrEndDate.Format = "dd MMM yyyy"
+        Me.ucrEndDate.Location = New System.Drawing.Point(92, 305)
+        Me.ucrEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrEndDate.Name = "ucrEndDate"
+        Me.ucrEndDate.Size = New System.Drawing.Size(132, 21)
+        Me.ucrEndDate.TabIndex = 28
+        '
+        'ucrStartDate
+        '
+        Me.ucrStartDate.AutoSize = True
+        Me.ucrStartDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 567)
+        Me.ucrStartDate.Format = "dd MMM yyyy"
+        Me.ucrStartDate.Location = New System.Drawing.Point(92, 276)
+        Me.ucrStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrStartDate.Name = "ucrStartDate"
+        Me.ucrStartDate.Size = New System.Drawing.Size(132, 21)
+        Me.ucrStartDate.TabIndex = 27
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(92, 244)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(132, 21)
+        Me.ucrInputType.TabIndex = 5
+        '
+        'ucrReceiverViewVariables
+        '
+        Me.ucrReceiverViewVariables.AutoSize = True
+        Me.ucrReceiverViewVariables.frmParent = Me
+        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 337)
+        Me.ucrReceiverViewVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverViewVariables.Name = "ucrReceiverViewVariables"
+        Me.ucrReceiverViewVariables.Selector = Nothing
+        Me.ucrReceiverViewVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverViewVariables.strNcFilePath = ""
+        Me.ucrReceiverViewVariables.TabIndex = 15
+        Me.ucrReceiverViewVariables.ucrSelector = Nothing
+        '
+        'ucrSelectorClimaticDataEntry
+        '
+        Me.ucrSelectorClimaticDataEntry.AutoSize = True
+        Me.ucrSelectorClimaticDataEntry.bDropUnusedFilterLevels = False
+        Me.ucrSelectorClimaticDataEntry.bShowHiddenColumns = False
+        Me.ucrSelectorClimaticDataEntry.bUseCurrentFilter = True
+        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 48)
+        Me.ucrSelectorClimaticDataEntry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorClimaticDataEntry.Name = "ucrSelectorClimaticDataEntry"
+        Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorClimaticDataEntry.TabIndex = 3
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.AutoSize = True
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 84)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 7
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.AutoSize = True
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 169)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.TabIndex = 11
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverElements
+        '
+        Me.ucrReceiverElements.AutoSize = True
+        Me.ucrReceiverElements.frmParent = Me
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 212)
+        Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElements.Name = "ucrReceiverElements"
+        Me.ucrReceiverElements.Selector = Nothing
+        Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverElements.strNcFilePath = ""
+        Me.ucrReceiverElements.TabIndex = 13
+        Me.ucrReceiverElements.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(7, 466)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 22
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(66, 8)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
+        Me.ucrPnlOptions.TabIndex = 26
+        '
         'dlgClimaticDataEntry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(411, 520)
         Me.Controls.Add(Me.lblNbCommentEntered)
@@ -394,7 +405,7 @@ Partial Class dlgClimaticDataEntry
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Daily Data Entry"
+        Me.Text = "Daily Data Editing/Entry"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

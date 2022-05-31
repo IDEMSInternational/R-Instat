@@ -38,7 +38,6 @@ Partial Class dlgTransformText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTransformText))
         Me.lblColumnToTransform = New System.Windows.Forms.Label()
         Me.lblToSubstring = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
@@ -98,33 +97,63 @@ Partial Class dlgTransformText
         '
         'lblColumnToTransform
         '
-        resources.ApplyResources(Me.lblColumnToTransform, "lblColumnToTransform")
+        Me.lblColumnToTransform.AutoSize = True
+        Me.lblColumnToTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColumnToTransform.Location = New System.Drawing.Point(267, 85)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
+        Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
+        Me.lblColumnToTransform.TabIndex = 10
+        Me.lblColumnToTransform.Text = "Column to Transform:"
         '
         'lblToSubstring
         '
-        resources.ApplyResources(Me.lblToSubstring, "lblToSubstring")
+        Me.lblToSubstring.AutoSize = True
+        Me.lblToSubstring.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblToSubstring.Location = New System.Drawing.Point(11, 54)
         Me.lblToSubstring.Name = "lblToSubstring"
+        Me.lblToSubstring.Size = New System.Drawing.Size(59, 13)
+        Me.lblToSubstring.TabIndex = 10
+        Me.lblToSubstring.Text = "End Value:"
         '
         'lblFrom
         '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFrom.Location = New System.Drawing.Point(10, 26)
         Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(62, 13)
+        Me.lblFrom.TabIndex = 22
+        Me.lblFrom.Text = "Start Value:"
         '
         'lblSeparator
         '
-        resources.ApplyResources(Me.lblSeparator, "lblSeparator")
+        Me.lblSeparator.AutoSize = True
+        Me.lblSeparator.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSeparator.Location = New System.Drawing.Point(21, 383)
         Me.lblSeparator.Name = "lblSeparator"
+        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
+        Me.lblSeparator.TabIndex = 13
+        Me.lblSeparator.Text = "Separator:"
         '
         'lblLastWord
         '
-        resources.ApplyResources(Me.lblLastWord, "lblLastWord")
+        Me.lblLastWord.AutoSize = True
+        Me.lblLastWord.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLastWord.Location = New System.Drawing.Point(11, 89)
         Me.lblLastWord.Name = "lblLastWord"
+        Me.lblLastWord.Size = New System.Drawing.Size(59, 13)
+        Me.lblLastWord.TabIndex = 19
+        Me.lblLastWord.Text = "Last Word:"
         '
         'lblFirstWord
         '
-        resources.ApplyResources(Me.lblFirstWord, "lblFirstWord")
+        Me.lblFirstWord.AutoSize = True
+        Me.lblFirstWord.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstWord.Location = New System.Drawing.Point(11, 26)
         Me.lblFirstWord.Name = "lblFirstWord"
+        Me.lblFirstWord.Size = New System.Drawing.Size(58, 13)
+        Me.lblFirstWord.TabIndex = 14
+        Me.lblFirstWord.Text = "First Word:"
         '
         'grpParameters
         '
@@ -166,370 +195,587 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.lblToSubstring)
         Me.grpParameters.Controls.Add(Me.ucrPnlSide)
         Me.grpParameters.Controls.Add(Me.ucrPnlSideTrunc)
-        resources.ApplyResources(Me.grpParameters, "grpParameters")
+        Me.grpParameters.Location = New System.Drawing.Point(10, 238)
         Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.Size = New System.Drawing.Size(397, 173)
+        Me.grpParameters.TabIndex = 12
         Me.grpParameters.TabStop = False
+        Me.grpParameters.Text = "Options"
         '
         'lblSideTrunc
         '
-        resources.ApplyResources(Me.lblSideTrunc, "lblSideTrunc")
+        Me.lblSideTrunc.AutoSize = True
+        Me.lblSideTrunc.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSideTrunc.Location = New System.Drawing.Point(11, 57)
         Me.lblSideTrunc.Name = "lblSideTrunc"
+        Me.lblSideTrunc.Size = New System.Drawing.Size(31, 13)
+        Me.lblSideTrunc.TabIndex = 12
+        Me.lblSideTrunc.Text = "Side:"
         '
         'lblSide
         '
-        resources.ApplyResources(Me.lblSide, "lblSide")
+        Me.lblSide.AutoSize = True
+        Me.lblSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSide.Location = New System.Drawing.Point(10, 57)
         Me.lblSide.Name = "lblSide"
+        Me.lblSide.Size = New System.Drawing.Size(31, 13)
+        Me.lblSide.TabIndex = 53
+        Me.lblSide.Text = "Side:"
         '
         'ucrNudWidthWrap
         '
+        Me.ucrNudWidthWrap.AutoSize = True
         Me.ucrNudWidthWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidthWrap, "ucrNudWidthWrap")
+        Me.ucrNudWidthWrap.Location = New System.Drawing.Point(70, 22)
         Me.ucrNudWidthWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidthWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthWrap.Name = "ucrNudWidthWrap"
+        Me.ucrNudWidthWrap.Size = New System.Drawing.Size(50, 21)
+        Me.ucrNudWidthWrap.TabIndex = 6
         Me.ucrNudWidthWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudWidthTrunc
         '
+        Me.ucrNudWidthTrunc.AutoSize = True
         Me.ucrNudWidthTrunc.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthTrunc.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidthTrunc, "ucrNudWidthTrunc")
+        Me.ucrNudWidthTrunc.Location = New System.Drawing.Point(70, 22)
         Me.ucrNudWidthTrunc.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidthTrunc.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthTrunc.Name = "ucrNudWidthTrunc"
+        Me.ucrNudWidthTrunc.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWidthTrunc.TabIndex = 5
         Me.ucrNudWidthTrunc.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblWidthWrap
         '
-        resources.ApplyResources(Me.lblWidthWrap, "lblWidthWrap")
+        Me.lblWidthWrap.AutoSize = True
+        Me.lblWidthWrap.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWidthWrap.Location = New System.Drawing.Point(10, 24)
         Me.lblWidthWrap.Name = "lblWidthWrap"
+        Me.lblWidthWrap.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidthWrap.TabIndex = 3
+        Me.lblWidthWrap.Text = "Width:"
         '
         'lblWidthTrunc
         '
-        resources.ApplyResources(Me.lblWidthTrunc, "lblWidthTrunc")
+        Me.lblWidthTrunc.AutoSize = True
+        Me.lblWidthTrunc.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWidthTrunc.Location = New System.Drawing.Point(10, 24)
         Me.lblWidthTrunc.Name = "lblWidthTrunc"
+        Me.lblWidthTrunc.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidthTrunc.TabIndex = 3
+        Me.lblWidthTrunc.Text = "Width:"
         '
         'rdoSquish
         '
-        resources.ApplyResources(Me.rdoSquish, "rdoSquish")
+        Me.rdoSquish.AutoSize = True
+        Me.rdoSquish.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSquish.Location = New System.Drawing.Point(298, 24)
         Me.rdoSquish.Name = "rdoSquish"
+        Me.rdoSquish.Size = New System.Drawing.Size(57, 17)
+        Me.rdoSquish.TabIndex = 9
         Me.rdoSquish.TabStop = True
+        Me.rdoSquish.Text = "Squish"
         Me.rdoSquish.UseVisualStyleBackColor = True
         '
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(73, 139)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(136, 23)
+        Me.ucrInputSeparator.TabIndex = 25
         '
         'ucrChkLastOr
         '
+        Me.ucrChkLastOr.AutoSize = True
         Me.ucrChkLastOr.Checked = False
-        resources.ApplyResources(Me.ucrChkLastOr, "ucrChkLastOr")
+        Me.ucrChkLastOr.Location = New System.Drawing.Point(19, 110)
         Me.ucrChkLastOr.Name = "ucrChkLastOr"
+        Me.ucrChkLastOr.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkLastOr.TabIndex = 23
         '
         'ucrReceiverLastWord
         '
+        Me.ucrReceiverLastWord.AutoSize = True
         Me.ucrReceiverLastWord.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLastWord, "ucrReceiverLastWord")
+        Me.ucrReceiverLastWord.Location = New System.Drawing.Point(106, 110)
+        Me.ucrReceiverLastWord.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
         Me.ucrReceiverLastWord.Selector = Nothing
+        Me.ucrReceiverLastWord.Size = New System.Drawing.Size(136, 26)
         Me.ucrReceiverLastWord.strNcFilePath = ""
+        Me.ucrReceiverLastWord.TabIndex = 24
         Me.ucrReceiverLastWord.ucrSelector = Nothing
         '
         'ucrNudLastWord
         '
+        Me.ucrNudLastWord.AutoSize = True
         Me.ucrNudLastWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLastWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLastWord, "ucrNudLastWord")
+        Me.ucrNudLastWord.Location = New System.Drawing.Point(98, 84)
         Me.ucrNudLastWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLastWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLastWord.Name = "ucrNudLastWord"
+        Me.ucrNudLastWord.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLastWord.TabIndex = 21
         Me.ucrNudLastWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputPad
         '
         Me.ucrInputPad.AddQuotesIfUnrecognised = True
+        Me.ucrInputPad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPad.GetSetSelectedIndex = -1
         Me.ucrInputPad.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPad, "ucrInputPad")
+        Me.ucrInputPad.Location = New System.Drawing.Point(69, 89)
         Me.ucrInputPad.Name = "ucrInputPad"
+        Me.ucrInputPad.Size = New System.Drawing.Size(136, 23)
+        Me.ucrInputPad.TabIndex = 22
         '
         'lblPad
         '
-        resources.ApplyResources(Me.lblPad, "lblPad")
+        Me.lblPad.AutoSize = True
+        Me.lblPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPad.Location = New System.Drawing.Point(11, 89)
         Me.lblPad.Name = "lblPad"
+        Me.lblPad.Size = New System.Drawing.Size(29, 13)
+        Me.lblPad.TabIndex = 14
+        Me.lblPad.Text = "Pad:"
         '
         'rdoBothPad
         '
-        resources.ApplyResources(Me.rdoBothPad, "rdoBothPad")
+        Me.rdoBothPad.AutoSize = True
+        Me.rdoBothPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoBothPad.Location = New System.Drawing.Point(205, 24)
         Me.rdoBothPad.Name = "rdoBothPad"
+        Me.rdoBothPad.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothPad.TabIndex = 8
         Me.rdoBothPad.TabStop = True
+        Me.rdoBothPad.Text = "Both"
         Me.rdoBothPad.UseVisualStyleBackColor = True
         '
         'ucrNudFrom
         '
+        Me.ucrNudFrom.AutoSize = True
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
+        Me.ucrNudFrom.Location = New System.Drawing.Point(97, 23)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 5
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoRightPad
         '
-        resources.ApplyResources(Me.rdoRightPad, "rdoRightPad")
+        Me.rdoRightPad.AutoSize = True
+        Me.rdoRightPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRightPad.Location = New System.Drawing.Point(112, 24)
         Me.rdoRightPad.Name = "rdoRightPad"
+        Me.rdoRightPad.Size = New System.Drawing.Size(50, 17)
+        Me.rdoRightPad.TabIndex = 7
         Me.rdoRightPad.TabStop = True
+        Me.rdoRightPad.Text = "Right"
         Me.rdoRightPad.UseVisualStyleBackColor = True
         '
         'rdoLeftPad
         '
-        resources.ApplyResources(Me.rdoLeftPad, "rdoLeftPad")
+        Me.rdoLeftPad.AutoSize = True
+        Me.rdoLeftPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLeftPad.Location = New System.Drawing.Point(19, 24)
         Me.rdoLeftPad.Name = "rdoLeftPad"
+        Me.rdoLeftPad.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLeftPad.TabIndex = 2
         Me.rdoLeftPad.TabStop = True
+        Me.rdoLeftPad.Text = "Left"
         Me.rdoLeftPad.UseVisualStyleBackColor = True
         '
         'ucrNudWidth
         '
+        Me.ucrNudWidth.AutoSize = True
         Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudWidth, "ucrNudWidth")
+        Me.ucrNudWidth.Location = New System.Drawing.Point(70, 22)
         Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWidth.TabIndex = 47
         Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlPad
         '
-        resources.ApplyResources(Me.ucrPnlPad, "ucrPnlPad")
+        Me.ucrPnlPad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPad.Location = New System.Drawing.Point(6, 14)
         Me.ucrPnlPad.Name = "ucrPnlPad"
+        Me.ucrPnlPad.Size = New System.Drawing.Size(358, 30)
+        Me.ucrPnlPad.TabIndex = 0
         '
         'ucrInputTo
         '
         Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTo.GetSetSelectedIndex = -1
         Me.ucrInputTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
+        Me.ucrInputTo.Location = New System.Drawing.Point(75, 22)
         Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(136, 25)
+        Me.ucrInputTo.TabIndex = 8
         '
         'lblWidth
         '
-        resources.ApplyResources(Me.lblWidth, "lblWidth")
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWidth.Location = New System.Drawing.Point(10, 24)
         Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidth.TabIndex = 11
+        Me.lblWidth.Text = "Width:"
         '
         'lblTo
         '
-        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.AutoSize = True
+        Me.lblTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTo.Location = New System.Drawing.Point(7, 26)
         Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(59, 13)
+        Me.lblTo.TabIndex = 1
+        Me.lblTo.Text = "Convert to:"
         '
         'ucrNudFirstWord
         '
+        Me.ucrNudFirstWord.AutoSize = True
         Me.ucrNudFirstWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFirstWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFirstWord, "ucrNudFirstWord")
+        Me.ucrNudFirstWord.Location = New System.Drawing.Point(97, 23)
         Me.ucrNudFirstWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFirstWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFirstWord.Name = "ucrNudFirstWord"
+        Me.ucrNudFirstWord.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFirstWord.TabIndex = 44
         Me.ucrNudFirstWord.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoMiddle
         '
-        resources.ApplyResources(Me.rdoMiddle, "rdoMiddle")
+        Me.rdoMiddle.AutoSize = True
+        Me.rdoMiddle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMiddle.Location = New System.Drawing.Point(255, 55)
         Me.rdoMiddle.Name = "rdoMiddle"
+        Me.rdoMiddle.Size = New System.Drawing.Size(56, 17)
+        Me.rdoMiddle.TabIndex = 18
         Me.rdoMiddle.TabStop = True
+        Me.rdoMiddle.Text = "Middle"
         Me.rdoMiddle.UseVisualStyleBackColor = True
         '
         'rdoRight
         '
-        resources.ApplyResources(Me.rdoRight, "rdoRight")
+        Me.rdoRight.AutoSize = True
+        Me.rdoRight.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRight.Location = New System.Drawing.Point(162, 55)
         Me.rdoRight.Name = "rdoRight"
+        Me.rdoRight.Size = New System.Drawing.Size(50, 17)
+        Me.rdoRight.TabIndex = 17
         Me.rdoRight.TabStop = True
+        Me.rdoRight.Text = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
         'rdoLeft
         '
-        resources.ApplyResources(Me.rdoLeft, "rdoLeft")
+        Me.rdoLeft.AutoSize = True
+        Me.rdoLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLeft.Location = New System.Drawing.Point(69, 55)
         Me.rdoLeft.Name = "rdoLeft"
+        Me.rdoLeft.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLeft.TabIndex = 16
         Me.rdoLeft.TabStop = True
+        Me.rdoLeft.Text = "Left"
         Me.rdoLeft.UseVisualStyleBackColor = True
         '
         'rdoBothSide
         '
-        resources.ApplyResources(Me.rdoBothSide, "rdoBothSide")
+        Me.rdoBothSide.AutoSize = True
+        Me.rdoBothSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoBothSide.Location = New System.Drawing.Point(256, 55)
         Me.rdoBothSide.Name = "rdoBothSide"
+        Me.rdoBothSide.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothSide.TabIndex = 51
         Me.rdoBothSide.TabStop = True
+        Me.rdoBothSide.Text = "Both"
         Me.rdoBothSide.UseVisualStyleBackColor = True
         '
         'rdoRightSide
         '
-        resources.ApplyResources(Me.rdoRightSide, "rdoRightSide")
+        Me.rdoRightSide.AutoSize = True
+        Me.rdoRightSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRightSide.Location = New System.Drawing.Point(163, 55)
         Me.rdoRightSide.Name = "rdoRightSide"
+        Me.rdoRightSide.Size = New System.Drawing.Size(50, 17)
+        Me.rdoRightSide.TabIndex = 50
         Me.rdoRightSide.TabStop = True
+        Me.rdoRightSide.Text = "Right"
         Me.rdoRightSide.UseVisualStyleBackColor = True
         '
         'rdoLeftSide
         '
-        resources.ApplyResources(Me.rdoLeftSide, "rdoLeftSide")
+        Me.rdoLeftSide.AutoSize = True
+        Me.rdoLeftSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLeftSide.Location = New System.Drawing.Point(70, 55)
         Me.rdoLeftSide.Name = "rdoLeftSide"
+        Me.rdoLeftSide.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLeftSide.TabIndex = 49
         Me.rdoLeftSide.TabStop = True
+        Me.rdoLeftSide.Text = "Left"
         Me.rdoLeftSide.UseVisualStyleBackColor = True
         '
         'ucrReceiverFirstWord
         '
+        Me.ucrReceiverFirstWord.AutoSize = True
         Me.ucrReceiverFirstWord.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFirstWord, "ucrReceiverFirstWord")
+        Me.ucrReceiverFirstWord.Location = New System.Drawing.Point(106, 50)
+        Me.ucrReceiverFirstWord.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstWord.Name = "ucrReceiverFirstWord"
         Me.ucrReceiverFirstWord.Selector = Nothing
+        Me.ucrReceiverFirstWord.Size = New System.Drawing.Size(136, 26)
         Me.ucrReceiverFirstWord.strNcFilePath = ""
+        Me.ucrReceiverFirstWord.TabIndex = 15
         Me.ucrReceiverFirstWord.ucrSelector = Nothing
         '
         'ucrNudTo
         '
+        Me.ucrNudTo.AutoSize = True
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
+        Me.ucrNudTo.Location = New System.Drawing.Point(97, 50)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 14
         Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkFirstOr
         '
+        Me.ucrChkFirstOr.AutoSize = True
         Me.ucrChkFirstOr.Checked = False
-        resources.ApplyResources(Me.ucrChkFirstOr, "ucrChkFirstOr")
+        Me.ucrChkFirstOr.Location = New System.Drawing.Point(19, 50)
         Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
+        Me.ucrChkFirstOr.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkFirstOr.TabIndex = 11
         '
         'ucrPnlSide
         '
-        resources.ApplyResources(Me.ucrPnlSide, "ucrPnlSide")
+        Me.ucrPnlSide.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSide.Location = New System.Drawing.Point(66, 48)
         Me.ucrPnlSide.Name = "ucrPnlSide"
+        Me.ucrPnlSide.Size = New System.Drawing.Size(251, 30)
+        Me.ucrPnlSide.TabIndex = 13
         '
         'ucrPnlSideTrunc
         '
-        resources.ApplyResources(Me.ucrPnlSideTrunc, "ucrPnlSideTrunc")
+        Me.ucrPnlSideTrunc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSideTrunc.Location = New System.Drawing.Point(66, 47)
         Me.ucrPnlSideTrunc.Name = "ucrPnlSideTrunc"
+        Me.ucrPnlSideTrunc.Size = New System.Drawing.Size(251, 31)
+        Me.ucrPnlSideTrunc.TabIndex = 21
         '
         'rdoCase
         '
-        resources.ApplyResources(Me.rdoCase, "rdoCase")
+        Me.rdoCase.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCase.FlatAppearance.BorderSize = 2
         Me.rdoCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCase.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCase.Location = New System.Drawing.Point(71, 8)
         Me.rdoCase.Name = "rdoCase"
+        Me.rdoCase.Size = New System.Drawing.Size(65, 34)
+        Me.rdoCase.TabIndex = 1
         Me.rdoCase.TabStop = True
+        Me.rdoCase.Text = "Case"
+        Me.rdoCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCase.UseVisualStyleBackColor = True
         '
         'rdoLength
         '
-        resources.ApplyResources(Me.rdoLength, "rdoLength")
+        Me.rdoLength.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoLength.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLength.FlatAppearance.BorderSize = 2
         Me.rdoLength.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLength.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLength.Location = New System.Drawing.Point(135, 8)
         Me.rdoLength.Name = "rdoLength"
+        Me.rdoLength.Size = New System.Drawing.Size(54, 34)
+        Me.rdoLength.TabIndex = 2
         Me.rdoLength.TabStop = True
+        Me.rdoLength.Text = "Length"
+        Me.rdoLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoLength.UseVisualStyleBackColor = True
         '
         'rdoPad
         '
-        resources.ApplyResources(Me.rdoPad, "rdoPad")
+        Me.rdoPad.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoPad.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPad.FlatAppearance.BorderSize = 2
         Me.rdoPad.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPad.Location = New System.Drawing.Point(188, 8)
         Me.rdoPad.Name = "rdoPad"
+        Me.rdoPad.Size = New System.Drawing.Size(44, 34)
+        Me.rdoPad.TabIndex = 3
         Me.rdoPad.TabStop = True
+        Me.rdoPad.Text = "Pad"
+        Me.rdoPad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPad.UseVisualStyleBackColor = True
         '
         'rdoSubstring
         '
-        resources.ApplyResources(Me.rdoSubstring, "rdoSubstring")
+        Me.rdoSubstring.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoSubstring.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSubstring.FlatAppearance.BorderSize = 2
         Me.rdoSubstring.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSubstring.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSubstring.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSubstring.Location = New System.Drawing.Point(7, 8)
         Me.rdoSubstring.Name = "rdoSubstring"
+        Me.rdoSubstring.Size = New System.Drawing.Size(65, 34)
+        Me.rdoSubstring.TabIndex = 8
         Me.rdoSubstring.TabStop = True
+        Me.rdoSubstring.Text = "Substring"
+        Me.rdoSubstring.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSubstring.UseVisualStyleBackColor = True
         '
         'rdoWords
         '
-        resources.ApplyResources(Me.rdoWords, "rdoWords")
+        Me.rdoWords.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoWords.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWords.FlatAppearance.BorderSize = 2
         Me.rdoWords.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoWords.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoWords.Location = New System.Drawing.Point(395, 8)
         Me.rdoWords.Name = "rdoWords"
+        Me.rdoWords.Size = New System.Drawing.Size(57, 34)
+        Me.rdoWords.TabIndex = 7
         Me.rdoWords.TabStop = True
+        Me.rdoWords.Text = "Words"
+        Me.rdoWords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWords.UseVisualStyleBackColor = True
         '
         'rdoTrim
         '
-        resources.ApplyResources(Me.rdoTrim, "rdoTrim")
+        Me.rdoTrim.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoTrim.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTrim.FlatAppearance.BorderSize = 2
         Me.rdoTrim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTrim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoTrim.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoTrim.Location = New System.Drawing.Point(292, 8)
         Me.rdoTrim.Name = "rdoTrim"
+        Me.rdoTrim.Size = New System.Drawing.Size(57, 34)
+        Me.rdoTrim.TabIndex = 5
         Me.rdoTrim.TabStop = True
+        Me.rdoTrim.Text = "Trim"
+        Me.rdoTrim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTrim.UseVisualStyleBackColor = True
         '
         'rdoWrap
         '
-        resources.ApplyResources(Me.rdoWrap, "rdoWrap")
+        Me.rdoWrap.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoWrap.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWrap.FlatAppearance.BorderSize = 2
         Me.rdoWrap.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWrap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoWrap.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoWrap.Location = New System.Drawing.Point(348, 8)
         Me.rdoWrap.Name = "rdoWrap"
+        Me.rdoWrap.Size = New System.Drawing.Size(48, 34)
+        Me.rdoWrap.TabIndex = 6
         Me.rdoWrap.TabStop = True
+        Me.rdoWrap.Text = "Wrap"
+        Me.rdoWrap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWrap.UseVisualStyleBackColor = True
         '
         'rdoTruncate
         '
-        resources.ApplyResources(Me.rdoTruncate, "rdoTruncate")
+        Me.rdoTruncate.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoTruncate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTruncate.FlatAppearance.BorderSize = 2
         Me.rdoTruncate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTruncate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoTruncate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoTruncate.Location = New System.Drawing.Point(230, 8)
         Me.rdoTruncate.Name = "rdoTruncate"
+        Me.rdoTruncate.Size = New System.Drawing.Size(63, 34)
+        Me.rdoTruncate.TabIndex = 4
         Me.rdoTruncate.TabStop = True
+        Me.rdoTruncate.Text = "Truncate"
+        Me.rdoTruncate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTruncate.UseVisualStyleBackColor = True
         '
         'ucrNewColName
         '
-        resources.ApplyResources(Me.ucrNewColName, "ucrNewColName")
+        Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewColName.Location = New System.Drawing.Point(10, 417)
+        Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
+        Me.ucrNewColName.Size = New System.Drawing.Size(331, 22)
+        Me.ucrNewColName.TabIndex = 14
         '
         'ucrReceiverTransformText
         '
+        Me.ucrReceiverTransformText.AutoSize = True
         Me.ucrReceiverTransformText.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverTransformText, "ucrReceiverTransformText")
+        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(267, 100)
+        Me.ucrReceiverTransformText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
         Me.ucrReceiverTransformText.Selector = Nothing
+        Me.ucrReceiverTransformText.Size = New System.Drawing.Size(135, 26)
         Me.ucrReceiverTransformText.strNcFilePath = ""
+        Me.ucrReceiverTransformText.TabIndex = 11
         Me.ucrReceiverTransformText.ucrSelector = Nothing
         '
         'ucrSelectorForTransformText
         '
+        Me.ucrSelectorForTransformText.AutoSize = True
         Me.ucrSelectorForTransformText.bDropUnusedFilterLevels = False
         Me.ucrSelectorForTransformText.bShowHiddenColumns = False
         Me.ucrSelectorForTransformText.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForTransformText, "ucrSelectorForTransformText")
+        Me.ucrSelectorForTransformText.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorForTransformText.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForTransformText.Name = "ucrSelectorForTransformText"
+        Me.ucrSelectorForTransformText.Size = New System.Drawing.Size(242, 185)
+        Me.ucrSelectorForTransformText.TabIndex = 9
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 442)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
         '
         'ucrPnlOperation
         '
-        resources.ApplyResources(Me.ucrPnlOperation, "ucrPnlOperation")
+        Me.ucrPnlOperation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOperation.Location = New System.Drawing.Point(3, 4)
         Me.ucrPnlOperation.Name = "ucrPnlOperation"
+        Me.ucrPnlOperation.Size = New System.Drawing.Size(523, 43)
+        Me.ucrPnlOperation.TabIndex = 0
         '
         'dlgTransformText
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(466, 498)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.rdoTruncate)
         Me.Controls.Add(Me.rdoWrap)
@@ -550,6 +796,8 @@ Partial Class dlgTransformText
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTransformText"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Transform Text Column"
         Me.grpParameters.ResumeLayout(False)
         Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)

@@ -17,12 +17,12 @@
 Imports instat.Translations
 
 Public Class dlgStack
-    Private clsUnnestTokensFunction As RFunction
-    Private clsPivotLongerFunction As RFunction
-    Private clsSelectFunction As RFunction
-    Private clsReshapeFunction As RFunction
-    Private clsSplitColumnsFunction As RFunction
-    Private clsPipeOperator As ROperator
+    Private clsUnnestTokensFunction As New RFunction
+    Private clsPivotLongerFunction As New RFunction
+    Private clsSelectFunction As New RFunction
+    Private clsReshapeFunction As New RFunction
+    Private clsSplitColumnsFunction As New RFunction
+    Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 

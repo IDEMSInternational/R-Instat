@@ -22,6 +22,7 @@ Public Class ucrDataframeMetadataReoGrid
     Private lstNonEditableColumns As New List(Of String)
     Private strPreviousCellText As String
 
+    Event DeleteLabels(strColumnName As String) Implements IDataframeMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IDataframeMetaDataGrid.EditValue
 
     Public Sub AddColumns() Implements IDataframeMetaDataGrid.AddColumns
@@ -53,6 +54,7 @@ Public Class ucrDataframeMetadataReoGrid
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdData.Worksheets(0).SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
         grdData.Worksheets(0).SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         grdData.SheetTabNewButtonVisible = False
         AttachEventsToWorksheet(grdData.Worksheets(0))

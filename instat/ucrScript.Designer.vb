@@ -63,6 +63,7 @@ Partial Class ucrScript
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -221,6 +222,7 @@ Partial Class ucrScript
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.cmdHelp)
         Me.Panel2.Controls.Add(Me.cmdClear)
         Me.Panel2.Controls.Add(Me.cmdRunAll)
         Me.Panel2.Controls.Add(Me.cmdRunLineSelection)
@@ -260,10 +262,19 @@ Partial Class ucrScript
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(165, 1)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(51, 23)
+        Me.cmdHelp.TabIndex = 5
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'ucrScript
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrScript"
@@ -301,4 +312,5 @@ Partial Class ucrScript
     Friend WithEvents cmdRunLineSelection As Button
     Friend WithEvents tooltiptScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdHelp As Button
 End Class

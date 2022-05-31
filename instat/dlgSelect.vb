@@ -18,7 +18,9 @@ Imports instat.Translations
 Public Class dlgSelect
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSetCurrentColumnSelection As RFunction
+    Private clsSetCurrentColumnSelection As New RFunction
+    Private clsApplyAsSubset As New RFunction
+
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -35,6 +37,8 @@ Public Class dlgSelect
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 597
+        ucrBase.clsRsyntax.iCallType = 2
+
         ucrInputSelectPreview.txtInput.ReadOnly = True
         ucrReceiverSelect.SetItemType("column_selection")
         ucrReceiverSelect.strSelectorHeading = "Column selections"
@@ -43,40 +47,51 @@ Public Class dlgSelect
 
         ucrSelectorForSelectColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSelectColumns.SetParameterIsString()
-        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()
 
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
-        rdoApplyAsSubset.Enabled = False
+        ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplyAsSelect, frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
+        ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplyAsSubset, frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
 
-        ucrPnlApplyOptions.AddToLinkedControls({ucrNewDataFrameName}, {rdoApplyAsSubset}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 1))
+        ucrInputNewDataFrameName.SetDataFrameSelector(ucrSelectorForSelectColumns.ucrAvailableDataFrames)
+        ucrInputNewDataFrameName.bAllowNonConditionValues = True
 
-        ucrNewDataFrameName.SetIsTextBox()
-        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
-        ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorForSelectColumns.ucrAvailableDataFrames)
-        ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
+        ucrPnlApplyOptions.AddToLinkedControls({ucrInputNewDataFrameName}, {rdoApplyAsSubset}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewDataFrameName)
     End Sub
 
     Private Sub SetDefaults()
         clsSetCurrentColumnSelection = New RFunction
+        clsApplyAsSubset = New RFunction
         ucrSelectorForSelectColumns.Reset()
-        rdoApplyAsSelect.Checked = True
 
         clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
+
+        clsApplyAsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
+        clsApplyAsSubset.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34), iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
+        ucrReceiverSelect.AddAdditionalCodeParameterPair(clsApplyAsSubset, New RParameter("column_selection_name", 2), iAdditionalPairNo:=1)
         ucrSelectorForSelectColumns.SetRCode(clsSetCurrentColumnSelection, bReset)
         ucrReceiverSelect.SetRCode(clsSetCurrentColumnSelection, bReset)
+        ucrInputNewDataFrameName.SetRCode(clsApplyAsSubset, bReset)
+        ucrPnlApplyOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
+        If rdoApplyAsSubset.Checked Then
+            ucrBase.OKEnabled(Not ucrInputNewDataFrameName.IsEmpty AndAlso Not ucrReceiverSelect.IsEmpty)
+        Else
+            ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -97,7 +112,31 @@ Public Class dlgSelect
         ucrSelectorForSelectColumns.LoadList()
     End Sub
 
-    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged
+    Private Sub ucrPnlApplyOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlApplyOptions.ControlValueChanged
+        If rdoApplyAsSelect.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsApplyAsSubset)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorForSelectColumns_DataFrameChanged() Handles ucrSelectorForSelectColumns.DataFrameChanged
+        If Not ucrSelectorForSelectColumns.IsEmpty() Then
+            clsApplyAsSubset.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        Else
+            clsApplyAsSubset.RemoveParameterByName("data_name")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSelect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlValueChanged
+        If Not ucrReceiverSelect.IsEmpty Then
+            ucrInputNewDataFrameName.SetName(ucrReceiverSelect.GetVariableNames.Trim(Chr(34)))
+        Else
+            ucrInputNewDataFrameName.SetName("")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlApplyOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

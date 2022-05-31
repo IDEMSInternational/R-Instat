@@ -613,16 +613,17 @@ multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_
   nc_list <- list()
   
   n_files <- length(filepaths)
-  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
   for(i in seq_along(filepaths)) {
     nc <- ncdf4::nc_open(filename = filepaths[i])
     dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     nc_list[[length(nc_list) + 1]] <- dat
     ncdf4::nc_close(nc)
     info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
   }
-  close(pb)
+  if (is_win) close(pb)
   names(nc_list) <- tools::file_path_sans_ext(filenames)
   merged_data <- dplyr::bind_rows(nc_list, .id = id)
   return(merged_data)
@@ -1232,6 +1233,11 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   sgn <- ifelse(is.na(dir), NA, ifelse(dir %in% c("S", "W"), -1, 1))
   decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
   return(decdeg)
+}
+
+convert_yy_to_yyyy <- function (x, base) {
+    if(missing(base))  stop("base year must be supplied")
+    dplyr::if_else(x+2000 <= base, x+2000, x+1900)
 }
 
 create_av_packs <- function() {
@@ -2506,4 +2512,34 @@ slopegraph <- function(data, x, y, colour, data_label = NULL,
                     force = 0.5, max.iter = 3000) +
     ggplot2::geom_label(ggplot2::aes_string(label = Ndata_label), size = data_text_size, label.padding = unit(data_label_padding, "lines"),
                label.size = data_label_line_size, colour = data_text_colour, fill = data_label_fill_colour)
+}
+
+# Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
+get_quarter_label <-   function(quarter, start_month){
+  if (!start_month %in% 1:12) stop(start_month, " is an invalid start month, must be in range of 1:12")
+  if (!all(quarter %in% 1:4)) stop(quarter, " is an invalid quarter, must be in range of 1:4")
+  mabb <- rep(substr(month.abb, 1, 1), times = 2)[start_month:(11 + start_month)]
+  qtr <- sapply(quarter, function(x){start_pos <- 1 + ((x-1) * 3)
+  paste(mabb[start_pos:(start_pos+2)], collapse = "")})
+  return(factor(x = qtr, levels = unique(qtr)))
+}
+
+is.containVariableLabel <- function(x){
+  return(isTRUE(sjlabelled::get_label(x) != ""))
+}
+
+is.emptyvariable <- function(x){
+ return(isTRUE(length(x) == sum(x == "")))
+}
+
+is.NAvariable <- function(x){
+  return(isTRUE(length(x) == sum(is.na(x))))
+}
+
+is.levelscount <- function(x, n){
+ return(isTRUE(sum(levels(x)) == n))
+}
+
+is.containValueLabel <- function(x){
+  return(labels_label %in% names(attributes(x)))
 }

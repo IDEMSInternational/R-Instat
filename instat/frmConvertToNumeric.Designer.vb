@@ -33,6 +33,7 @@ Partial Class frmConvertToNumeric
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.cmdInspectValues = New System.Windows.Forms.Button()
+        Me.lblOrdinal = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblPossibleSolutions
@@ -58,7 +59,7 @@ Partial Class frmConvertToNumeric
         Me.cmdLabelledConvert.Name = "cmdLabelledConvert"
         Me.cmdLabelledConvert.Size = New System.Drawing.Size(96, 23)
         Me.cmdLabelledConvert.TabIndex = 7
-        Me.cmdLabelledConvert.Text = "Labelled Convert"
+        Me.cmdLabelledConvert.Text = "Lebelled Convert"
         Me.cmdLabelledConvert.UseVisualStyleBackColor = True
         '
         'cmdHelp
@@ -124,11 +125,22 @@ Partial Class frmConvertToNumeric
         Me.cmdInspectValues.Text = "Inspect Values"
         Me.cmdInspectValues.UseVisualStyleBackColor = True
         '
+        'lblOrdinal
+        '
+        Me.lblOrdinal.AutoSize = True
+        Me.lblOrdinal.ForeColor = System.Drawing.Color.Red
+        Me.lblOrdinal.Location = New System.Drawing.Point(65, 95)
+        Me.lblOrdinal.Name = "lblOrdinal"
+        Me.lblOrdinal.Size = New System.Drawing.Size(43, 13)
+        Me.lblOrdinal.TabIndex = 10
+        Me.lblOrdinal.Text = "Ordinal "
+        '
         'frmConvertToNumeric
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(440, 171)
+        Me.Controls.Add(Me.lblOrdinal)
         Me.Controls.Add(Me.cmdInspectValues)
         Me.Controls.Add(Me.lblNumber)
         Me.Controls.Add(Me.lblColumnName)
@@ -159,4 +171,5 @@ Partial Class frmConvertToNumeric
     Friend WithEvents lblColumnName As Label
     Friend WithEvents lblNumber As Label
     Friend WithEvents cmdInspectValues As Button
+    Friend WithEvents lblOrdinal As Label
 End Class

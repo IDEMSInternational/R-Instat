@@ -22,6 +22,7 @@ Public Class dlgRenameObjects
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDefaultFunction As New RFunction
+    Private dctTypes As New Dictionary(Of String, String)
 
     Private Sub dlgRenameObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -49,7 +50,6 @@ Public Class dlgRenameObjects
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctType As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 350
 
         'ucrSelector
@@ -67,13 +67,14 @@ Public Class dlgRenameObjects
         ucrInputNewName.SetValidationTypeAsRVariable()
 
         ucrInputType.SetParameter(New RParameter("object_type", 3))
-        dctType.Add("Objects", Chr(34) & "object" & Chr(34))
-        dctType.Add("Filters", Chr(34) & "filter" & Chr(34))
-        dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34))
-        dctType.Add("Tables", Chr(34) & "table" & Chr(34))
-        dctType.Add("Graphs", Chr(34) & "graph" & Chr(34))
-        dctType.Add("Models", Chr(34) & "model" & Chr(34))
-        ucrInputType.SetItems(dctType)
+        dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
+        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
+        dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
+        dctTypes.Add("Models", Chr(34) & "model" & Chr(34))
+        ucrInputType.SetItems(dctTypes)
         ucrInputType.SetDropDownStyleAsNonEditable()
     End Sub
 
@@ -124,26 +125,13 @@ Public Class dlgRenameObjects
     End Sub
 
     Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
-        Select Case ucrInputType.GetValue()
-            Case "Objects"
-                ucrReceiverCurrentName.SetItemType("object")
-                ucrReceiverCurrentName.strSelectorHeading = "Objects"
-            Case "Filters"
-                ucrReceiverCurrentName.SetItemType("filter")
-                ucrReceiverCurrentName.strSelectorHeading = "Filters"
-            Case "Calculations"
-                ucrReceiverCurrentName.SetItemType("calculation")
-                ucrReceiverCurrentName.strSelectorHeading = "Calculations"
-            Case "Tables"
-                ucrReceiverCurrentName.SetItemType("table")
-                ucrReceiverCurrentName.strSelectorHeading = "Tables"
-            Case "Graphs"
-                ucrReceiverCurrentName.SetItemType("graph")
-                ucrReceiverCurrentName.strSelectorHeading = "Graphs"
-            Case "Models"
-                ucrReceiverCurrentName.SetItemType("model")
-                ucrReceiverCurrentName.strSelectorHeading = "Models"
-        End Select
+        Dim key As String = dctTypes.Keys(ucrInputType.cboInput.SelectedIndex)
+        Dim value As String = ""
+
+        If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
+            ucrReceiverCurrentName.strSelectorHeading = key
+            ucrReceiverCurrentName.SetItemType(value.Replace(Chr(34), ""))
+        End If
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged

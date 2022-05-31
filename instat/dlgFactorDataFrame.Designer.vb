@@ -46,6 +46,7 @@ Partial Class dlgFactorDataFrame
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactorDataFrame = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkFrequencies = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -68,23 +69,26 @@ Partial Class dlgFactorDataFrame
         '
         'ucrChkAddCurrentContrasts
         '
+        Me.ucrChkAddCurrentContrasts.AutoSize = True
         Me.ucrChkAddCurrentContrasts.Checked = False
         Me.ucrChkAddCurrentContrasts.Location = New System.Drawing.Point(238, 149)
         Me.ucrChkAddCurrentContrasts.Name = "ucrChkAddCurrentContrasts"
-        Me.ucrChkAddCurrentContrasts.Size = New System.Drawing.Size(165, 20)
+        Me.ucrChkAddCurrentContrasts.Size = New System.Drawing.Size(165, 23)
         Me.ucrChkAddCurrentContrasts.TabIndex = 6
         '
         'ucrChkReplaceIfAlreadyExists
         '
+        Me.ucrChkReplaceIfAlreadyExists.AutoSize = True
         Me.ucrChkReplaceIfAlreadyExists.Checked = False
         Me.ucrChkReplaceIfAlreadyExists.Location = New System.Drawing.Point(238, 123)
         Me.ucrChkReplaceIfAlreadyExists.Name = "ucrChkReplaceIfAlreadyExists"
-        Me.ucrChkReplaceIfAlreadyExists.Size = New System.Drawing.Size(165, 20)
+        Me.ucrChkReplaceIfAlreadyExists.Size = New System.Drawing.Size(165, 23)
         Me.ucrChkReplaceIfAlreadyExists.TabIndex = 5
         '
         'ucrInputFactorNames
         '
         Me.ucrInputFactorNames.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorNames.AutoSize = True
         Me.ucrInputFactorNames.IsMultiline = False
         Me.ucrInputFactorNames.IsReadOnly = False
         Me.ucrInputFactorNames.Location = New System.Drawing.Point(238, 96)
@@ -95,13 +99,15 @@ Partial Class dlgFactorDataFrame
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 205)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 7
         '
         'ucrReceiverFactorDataFrame
         '
+        Me.ucrReceiverFactorDataFrame.AutoSize = True
         Me.ucrReceiverFactorDataFrame.frmParent = Me
         Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(238, 49)
         Me.ucrReceiverFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
@@ -114,21 +120,32 @@ Partial Class dlgFactorDataFrame
         '
         'ucrSelectorFactorDataFrame
         '
+        Me.ucrSelectorFactorDataFrame.AutoSize = True
         Me.ucrSelectorFactorDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactorDataFrame.bShowHiddenColumns = False
         Me.ucrSelectorFactorDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorFactorDataFrame.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorDataFrame.Name = "ucrSelectorFactorDataFrame"
-        Me.ucrSelectorFactorDataFrame.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFactorDataFrame.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorFactorDataFrame.TabIndex = 0
+        '
+        'ucrChkFrequencies
+        '
+        Me.ucrChkFrequencies.AutoSize = True
+        Me.ucrChkFrequencies.Checked = False
+        Me.ucrChkFrequencies.Location = New System.Drawing.Point(238, 176)
+        Me.ucrChkFrequencies.Name = "ucrChkFrequencies"
+        Me.ucrChkFrequencies.Size = New System.Drawing.Size(165, 23)
+        Me.ucrChkFrequencies.TabIndex = 8
         '
         'dlgFactorDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 264)
+        Me.Controls.Add(Me.ucrChkFrequencies)
         Me.Controls.Add(Me.ucrChkAddCurrentContrasts)
         Me.Controls.Add(Me.ucrChkReplaceIfAlreadyExists)
         Me.Controls.Add(Me.ucrInputFactorNames)
@@ -156,4 +173,5 @@ Partial Class dlgFactorDataFrame
     Friend WithEvents ucrInputFactorNames As ucrInputTextBox
     Friend WithEvents ucrChkAddCurrentContrasts As ucrCheck
     Friend WithEvents ucrChkReplaceIfAlreadyExists As ucrCheck
+    Friend WithEvents ucrChkFrequencies As ucrCheck
 End Class
