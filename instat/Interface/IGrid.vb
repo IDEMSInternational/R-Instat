@@ -44,5 +44,7 @@ Public Interface IGrid
 
     Sub UpdateAllWorksheetStyles()
 
+    Sub ReorderSheets(strSheet As String, iNewPosition As Integer)
+
     Sub UpdateWorksheetStyle(worksheet As clsWorksheetAdapter)
 End Interface

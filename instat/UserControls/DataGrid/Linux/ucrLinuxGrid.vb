@@ -195,6 +195,10 @@ Public MustInherit Class ucrLinuxGrid
         Next
     End Sub
 
+    Private Sub ReorderSheets(strSheet As String, iNewPosition As Integer) Implements IGrid.ReorderSheets
+
+    End Sub
+
     Public Sub UpdateWorksheetStyle(dataGrid As DataGridView)
         If frmMain.clsInstatOptions IsNot Nothing Then
             Dim newFont As New Font(frmMain.clsInstatOptions.fntEditor.FontFamily, frmMain.clsInstatOptions.fntEditor.Size,

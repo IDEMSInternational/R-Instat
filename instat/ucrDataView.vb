@@ -100,6 +100,10 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Sub ReorderSheets(strSheet As String, iNewPosition As Integer)
+        _grid.ReorderSheets(strSheet, iNewPosition)
+    End Sub
+
     Public Sub UpdateAllWorksheetStyles()
         _grid.UpdateAllWorksheetStyles()
     End Sub
