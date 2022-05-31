@@ -50,7 +50,7 @@ Public Class dlgReorderDataFrame
         ucrBase.iHelpTopicID = 62
 
         ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
-        ucrDataFrameToReorder.setDataType("data frame")
+        ucrDataFrameToReorder.setDataType("dataframe")
     End Sub
 
     Private Sub SetDefaults()

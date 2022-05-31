@@ -44,7 +44,7 @@ Public Class ucrReorder
                 lstAvailableData.Columns.Add("Variables")
             Case "factor"
                 lstAvailableData.Columns.Add("Levels")
-            Case "data frame"
+            Case "dataframe"
                 lstAvailableData.Columns.Add("Data Frame")
             Case "metadata"
                 lstAvailableData.Columns.Add("Metadata")
