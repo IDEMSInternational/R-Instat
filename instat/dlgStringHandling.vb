@@ -21,8 +21,8 @@ Public Class dlgStringHandling
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction,
             clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction,
-            clsReplaceCellFunction, clsAsDataFrameFunction, clsMutateFunction As New RFunction
-    Private clsPipeOpertor, clsReplaceEqualOperator As New ROperator
+            clsReplaceCellFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplacegrepFunction As New RFunction
+    Private clsPipeOperator As New ROperator
     Private clsDummyFunction, clsFindDummyFunction As New RFunction
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -182,8 +182,8 @@ Public Class dlgStringHandling
         clsReplaceCellFunction = New RFunction
         clsAsDataFrameFunction = New RFunction
         clsMutateFunction = New RFunction
-        clsPipeOpertor = New ROperator
-        clsReplaceEqualOperator = New ROperator
+        clsPipeOperator = New ROperator
+        clsReplacegrepFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
@@ -255,18 +255,17 @@ Public Class dlgStringHandling
         clsAsDataFrameFunction.SetRCommand("data.frame")
         clsAsDataFrameFunction.SetAssignTo("df")
 
-        clsReplaceEqualOperator.SetOperation("==")
+        clsReplacegrepFunction.SetRCommand("grepl")
 
         clsReplaceCellFunction.SetRCommand("replace")
-        clsReplaceCellFunction.AddParameter("z", clsROperatorParameter:=clsReplaceEqualOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
         clsMutateFunction.AddParameter("x", clsRFunctionParameter:=clsReplaceCellFunction, iPosition:=0)
 
-        clsPipeOpertor.SetOperation("%>%")
-        clsPipeOpertor.AddParameter("x", "df", iPosition:=0, bIncludeArgumentName:=False)
-        clsPipeOpertor.AddParameter("y", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("x", "df", iPosition:=0, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
 
         clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
@@ -291,11 +290,12 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsRemoveAllFunction, New RParameter("string", 0), iAdditionalPairNo:=13)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsAsDataFrameFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
-        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceEqualOperator, New RParameter("x", 0), iAdditionalPairNo:=16)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplacegrepFunction, New RParameter("x", 1), iAdditionalPairNo:=16)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("values", 2), iAdditionalPairNo:=2)
 
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsReplacegrepFunction, New RParameter("ignore.case", 2), iAdditionalPairNo:=2)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsStartsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsEndsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=2)
 
@@ -312,7 +312,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsLocateAllFunction, iAdditionalPairNo:=11)
         ucrSaveStringHandling.AddAdditionalRCode(clsMatchAllFunction, iAdditionalPairNo:=12)
         ucrSaveStringHandling.AddAdditionalRCode(clsRemoveAllFunction, iAdditionalPairNo:=13)
-        ucrSaveStringHandling.AddAdditionalRCode(clsPipeOpertor, iAdditionalPairNo:=14)
+        ucrSaveStringHandling.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=14)
 
         ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
@@ -438,7 +438,7 @@ Public Class dlgStringHandling
                 ucrSaveStringHandling.SetPrefix("replace_all")
             ElseIf rdoReplaceCell.Checked Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsAsDataFrameFunction)
-                ucrBase.clsRsyntax.SetBaseROperator(clsPipeOpertor)
+                ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
                 ucrSaveStringHandling.SetPrefix("replace_cell")
             End If
             clsFindDummyFunction.AddParameter("string_handling", "replace", iPosition:=3)
@@ -460,6 +460,7 @@ Public Class dlgStringHandling
         ChangePrefixName()
         AddRemoveParameters()
         CellParameters()
+        RegularExpressionControl()
     End Sub
 
     Private Sub ChangePrefixName()
@@ -488,20 +489,32 @@ Public Class dlgStringHandling
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrInputBoundary.ControlValueChanged, ucrChkBoundary.ControlValueChanged, ucrInputPattern.ControlValueChanged
         AddRemoveParameters()
         CellParameters()
+        RegularExpressionControl()
         cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
-        grpModifiers.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
     End Sub
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub CellParameters()
-        If rdoReplaceCell.Checked AndAlso ucrChkIncludeRegularExpressions.Checked Then
-            clsReplaceEqualOperator.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
+    Private Sub RegularExpressionControl()
+        If ucrChkIncludeRegularExpressions.Checked Then
+            If rdoReplace.Checked AndAlso rdoReplaceCell.Checked Then
+                grpModifiers.Visible = False
+            Else
+                grpModifiers.Visible = True
+            End If
         Else
-            clsReplaceEqualOperator.AddParameter("pattern", ucrInputPattern.GetText, bIncludeArgumentName:=False, iPosition:=1)
+            grpModifiers.Visible = False
         End If
+    End Sub
+
+    Private Sub CellParameters()
+        If Not rdoReplace.Checked AndAlso Not rdoReplaceCell.Checked Then
+            Exit Sub
+        End If
+        clsReplacegrepFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsReplaceCellFunction.AddParameter("pattern", clsRFunctionParameter:=clsReplacegrepFunction, bIncludeArgumentName:=False, iPosition:=1)
     End Sub
 
     Private Sub ucrPnlReplaceOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlReplaceOptions.ControlContentsChanged
