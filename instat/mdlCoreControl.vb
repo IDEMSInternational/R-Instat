@@ -135,4 +135,5 @@ Module mdlCoreControl
             Return "c(" & String.Join(",", enumerable.ToArray()) & ")"
         End If
     End Function
+
 End Module
