@@ -70,13 +70,9 @@ Public Class ucrDataFrame
             bFirstLoad = False
         End If
 
-        'this design mode check is necessary because of issue #7489
-        'todo. can be disabled [production mode
-        If Not mdlCoreControl.IsInDesignMode Then
-            'always load data frame names on load event because a data frame may have been deleted
-            'and the control needs to refresh the data frame names.
-            LoadDataFrameNamesAndFillComboBox()
-        End If
+        'always load data frame names on load event because a data frame may have been deleted
+        'and the control needs to refresh the data frame names.
+        LoadDataFrameNamesAndFillComboBox()
     End Sub
 
     Private Sub InitialiseControl()
@@ -116,7 +112,9 @@ Public Class ucrDataFrame
             'todo. GetLinkedToDataFrameNames should also be done through the data book
             'As of 22/04/022 the data book did not have this feature
             cboAvailableDataFrames.Items.AddRange(frmMain.clsRLink.GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
-        Else
+        ElseIf frmMain.DataBook IsNot Nothing Then
+            'Above check was added because of issue #4557.
+            'todo. Once the DataBook is moved to a global class, then it can be removed
             For Each dataFrame As clsDataFrame In frmMain.DataBook.DataFrames
                 cboAvailableDataFrames.Items.Add(dataFrame.strName)
             Next

@@ -135,23 +135,4 @@ Module mdlCoreControl
             Return "c(" & String.Join(",", enumerable.ToArray()) & ")"
         End If
     End Function
-
-    'temporary code for visual studio design time
-
-    ''' <summary>
-    ''' Checks if current system process is in design mode.
-    ''' <para>To be used by developers to prevent visual studio from executing code during design mode. 
-    ''' Especially code that can be source of design errors.</para>
-    ''' </summary>
-    ''' <returns>True, if current process is in design mode. False otherwise.</returns>
-    Public Function IsInDesignMode() As Boolean
-        'temporary for developers to prevent visual studio from executing code during design mode
-        Dim process As System.Diagnostics.Process = System.Diagnostics.Process.GetCurrentProcess()
-        If process.ProcessName = "devenv" Then
-            process.Dispose()
-            Return True
-        End If
-        Return False
-    End Function
-
 End Module
