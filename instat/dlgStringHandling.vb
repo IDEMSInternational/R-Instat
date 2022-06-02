@@ -21,7 +21,7 @@ Public Class dlgStringHandling
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction,
             clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction,
-            clsReplaceCellFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplacegrepFunction As New RFunction
+            clsReplaceCellFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsDummyFunction, clsFindDummyFunction As New RFunction
 
@@ -183,7 +183,7 @@ Public Class dlgStringHandling
         clsAsDataFrameFunction = New RFunction
         clsMutateFunction = New RFunction
         clsPipeOperator = New ROperator
-        clsReplacegrepFunction = New RFunction
+        clsReplaceGrepFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
 
@@ -255,7 +255,7 @@ Public Class dlgStringHandling
         clsAsDataFrameFunction.SetRCommand("data.frame")
         clsAsDataFrameFunction.SetAssignTo("df")
 
-        clsReplacegrepFunction.SetRCommand("grepl")
+        clsReplaceGrepFunction.SetRCommand("grepl")
 
         clsReplaceCellFunction.SetRCommand("replace")
 
@@ -290,12 +290,12 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsRemoveAllFunction, New RParameter("string", 0), iAdditionalPairNo:=13)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsAsDataFrameFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
-        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplacegrepFunction, New RParameter("x", 1), iAdditionalPairNo:=16)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceGrepFunction, New RParameter("x", 1), iAdditionalPairNo:=16)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("values", 2), iAdditionalPairNo:=2)
 
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
-        ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsReplacegrepFunction, New RParameter("ignore.case", 2), iAdditionalPairNo:=2)
+        ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsReplaceGrepFunction, New RParameter("ignore.case", 2), iAdditionalPairNo:=2)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsStartsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkNegate.AddAdditionalCodeParameterPair(clsEndsFunction, ucrChkNegate.GetParameter(), iAdditionalPairNo:=2)
 
@@ -513,8 +513,8 @@ Public Class dlgStringHandling
         If Not rdoReplace.Checked AndAlso Not rdoReplaceCell.Checked Then
             Exit Sub
         End If
-        clsReplacegrepFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-        clsReplaceCellFunction.AddParameter("pattern", clsRFunctionParameter:=clsReplacegrepFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsReplaceGrepFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsReplaceCellFunction.AddParameter("pattern", clsRFunctionParameter:=clsReplaceGrepFunction, bIncludeArgumentName:=False, iPosition:=1)
     End Sub
 
     Private Sub ucrPnlReplaceOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlReplaceOptions.ControlContentsChanged
