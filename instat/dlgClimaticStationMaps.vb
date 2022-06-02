@@ -235,12 +235,11 @@ Public Class dlgClimaticStationMaps
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=1)
-        ucrSelectorStation.AddAdditionalCodeParameterPair(clsLabelRepelFunction, ucrSelectorStation.GetParameter(), iAdditionalPairNo:=1)
 
         ucrSelectorOutline.SetRCode(clsGeomSfFunction, bReset)
         ucrReceiverFill.SetRCode(clsSfAesFunction, bReset)
         ucrSaveMap.SetRCode(clsGGplotOperator, bReset)
-        ucrSelectorStation.SetRCode(clsGeomPointFunction, bReset)
+        ucrSelectorStation.SetRCode(clsGgplotFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
@@ -303,16 +302,6 @@ Public Class dlgClimaticStationMaps
                   clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                   clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        'TEMPORARY FIX
-        For Each clsParameter In clsGGplotOperator.clsParameters
-            If clsParameter.bIsFunction Then
-                If TryCast(clsParameter.clsArgumentCodeStructure, RFunction).strRCommand = "geom_point" Then
-                    TryCast(clsParameter.clsArgumentCodeStructure, RFunction).AddParameter("data", clsRFunctionParameter:=ucrSelectorStation.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                ElseIf TryCast(clsParameter.clsArgumentCodeStructure, RFunction).strRCommand = "geom_label_repel" Then
-                    TryCast(clsParameter.clsArgumentCodeStructure, RFunction).AddParameter("data", clsRFunctionParameter:=ucrSelectorStation.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                End If
-            End If
-        Next
         bResetSubdialog = False
     End Sub
 
