@@ -189,7 +189,7 @@ Public Class dlgCorrelation
         ucrSaveFashionDataFrame.SetPrefix("my_corr")
         ucrSaveFashionDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveFashionDataFrame.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
-        ucrSaveFashionDataFrame.SetCheckBoxText("Data Name")
+        ucrSaveFashionDataFrame.SetCheckBoxText("Data Frame Name")
         ucrSaveFashionDataFrame.SetIsComboBox()
         ucrSaveFashionDataFrame.SetAssignToIfUncheckedValue("last_correlation")
         DialogSize()
@@ -485,21 +485,21 @@ Public Class dlgCorrelation
     Private Sub DialogSize()
         If rdoMultipleColumns.Checked Then
             If ucrChkDisplayOptions.Checked Then
-                Me.Size = New Size(454, 639)
-                Me.ucrBase.Location = New Point(11, 540)
-                Me.ucrSaveFashionDataFrame.Location = New Point(9, 512)
-                Me.cmdOptions.Location = New Point(301, 514)
+                Me.Size = New Size(454, 604)
+                Me.ucrBase.Location = New Point(11, 510)
+                Me.ucrSaveFashionDataFrame.Location = New Point(9, 480)
+                Me.cmdOptions.Location = New Point(301, 485)
             Else
-                Me.Size = New Size(454, 470)
-                Me.ucrBase.Location = New Point(11, 368)
-                Me.ucrSaveCorrelation.Location = New Point(9, 342)
-                Me.cmdOptions.Location = New Point(301, 343)
+                Me.Size = New Size(454, 464)
+                Me.ucrBase.Location = New Point(11, 362)
+                Me.ucrSaveCorrelation.Location = New Point(9, 326)
+                Me.cmdOptions.Location = New Point(301, 337)
             End If
         Else
-            Me.Size = New Size(454, 470)
-            Me.ucrBase.Location = New Point(11, 368)
-            Me.ucrSaveCorrelationTest.Location = New Point(9, 343)
-            Me.cmdOptions.Location = New Point(301, 343)
+            Me.Size = New Size(454, 464)
+            Me.ucrBase.Location = New Point(11, 362)
+            Me.ucrSaveCorrelationTest.Location = New Point(9, 326)
+            Me.cmdOptions.Location = New Point(301, 337)
         End If
     End Sub
 
