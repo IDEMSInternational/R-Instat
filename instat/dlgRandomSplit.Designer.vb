@@ -32,7 +32,6 @@ Partial Class dlgRandomSplit
         Me.ucrNudPool = New instat.ucrNud()
         Me.ucrNudFraction = New instat.ucrNud()
         Me.ucrNudLag = New instat.ucrNud()
-        Me.ucrSaveRandomSplit = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLag = New instat.ucrCheck()
         Me.ucrChkTrainingData = New instat.ucrCheck()
@@ -41,6 +40,7 @@ Partial Class dlgRandomSplit
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.ucrSelectorRandomSplit = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRanSplit = New instat.ucrReceiverSingle()
+        Me.ucrSaveRandomSplit = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -80,27 +80,27 @@ Partial Class dlgRandomSplit
         Me.lblFraction.AutoSize = True
         Me.lblFraction.Location = New System.Drawing.Point(281, 152)
         Me.lblFraction.Name = "lblFraction"
-        Me.lblFraction.Size = New System.Drawing.Size(51, 13)
+        Me.lblFraction.Size = New System.Drawing.Size(48, 13)
         Me.lblFraction.TabIndex = 32
-        Me.lblFraction.Text = "Fraction :"
+        Me.lblFraction.Text = "Fraction:"
         '
         'lblPool
         '
         Me.lblPool.AutoSize = True
         Me.lblPool.Location = New System.Drawing.Point(281, 183)
         Me.lblPool.Name = "lblPool"
-        Me.lblPool.Size = New System.Drawing.Size(34, 13)
+        Me.lblPool.Size = New System.Drawing.Size(31, 13)
         Me.lblPool.TabIndex = 33
-        Me.lblPool.Text = "Pool :"
+        Me.lblPool.Text = "Pool:"
         '
         'lblReceiverRandomSplit
         '
         Me.lblReceiverRandomSplit.AutoSize = True
         Me.lblReceiverRandomSplit.Location = New System.Drawing.Point(279, 95)
         Me.lblReceiverRandomSplit.Name = "lblReceiverRandomSplit"
-        Me.lblReceiverRandomSplit.Size = New System.Drawing.Size(56, 13)
+        Me.lblReceiverRandomSplit.Size = New System.Drawing.Size(53, 13)
         Me.lblReceiverRandomSplit.TabIndex = 35
-        Me.lblReceiverRandomSplit.Text = "Variables :"
+        Me.lblReceiverRandomSplit.Text = "Variables:"
         '
         'lblBreaks
         '
@@ -162,15 +162,6 @@ Partial Class dlgRandomSplit
         Me.ucrNudLag.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudLag.TabIndex = 29
         Me.ucrNudLag.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSaveRandomSplit
-        '
-        Me.ucrSaveRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveRandomSplit.Location = New System.Drawing.Point(9, 331)
-        Me.ucrSaveRandomSplit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveRandomSplit.Name = "ucrSaveRandomSplit"
-        Me.ucrSaveRandomSplit.Size = New System.Drawing.Size(403, 23)
-        Me.ucrSaveRandomSplit.TabIndex = 28
         '
         'ucrBase
         '
@@ -249,6 +240,15 @@ Partial Class dlgRandomSplit
         Me.ucrReceiverRanSplit.TabIndex = 39
         Me.ucrReceiverRanSplit.ucrSelector = Nothing
         '
+        'ucrSaveRandomSplit
+        '
+        Me.ucrSaveRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveRandomSplit.Location = New System.Drawing.Point(9, 331)
+        Me.ucrSaveRandomSplit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveRandomSplit.Name = "ucrSaveRandomSplit"
+        Me.ucrSaveRandomSplit.Size = New System.Drawing.Size(403, 23)
+        Me.ucrSaveRandomSplit.TabIndex = 28
+        '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -293,7 +293,6 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrNudPool As ucrNud
     Friend WithEvents ucrNudFraction As ucrNud
     Friend WithEvents ucrNudLag As ucrNud
-    Friend WithEvents ucrSaveRandomSplit As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPnlRandomSplit As UcrPanel
     Friend WithEvents lblPool As Label
@@ -303,4 +302,5 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrNudBreaks As ucrNud
     Friend WithEvents ucrSelectorRandomSplit As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
+    Friend WithEvents ucrSaveRandomSplit As ucrSave
 End Class

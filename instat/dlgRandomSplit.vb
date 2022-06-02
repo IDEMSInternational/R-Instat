@@ -49,10 +49,12 @@ Public Class dlgRandomSplit
         ucrSelectorRandomSplit.SetParameter(New RParameter("data", 0))
         ucrSelectorRandomSplit.SetParameterIsrfunction()
 
-        ucrChkStratifyingFactor.SetText("Set Seed")
+        ucrChkStratifyingFactor.SetText("Stratifying Factor")
         ucrChkStratifyingFactor.SetParameter(New RParameter("check"))
         ucrChkStratifyingFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrChkLag.SetText("Lag")
         ucrNudLag.SetParameter(New RParameter("lag", 3))
@@ -95,7 +97,7 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.AddFunctionNamesCondition(rdoSample, {"initial_split", "training", "testing"})
         ucrPnlRandomSplit.AddFunctionNamesCondition(rdoTimeSeries, {"initial_time_split", "training", "testing"})
         ucrPnlRandomSplit.AddToLinkedControls(ucrChkStratifyingFactor, {rdoSample}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudPool, ucrNudBreaks}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRandomSplit.AddToLinkedControls({ucrChkStratifyingFactor, ucrNudBreaks}, {rdoSample}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlRandomSplit.AddToLinkedControls({ucrChkLag}, {rdoTimeSeries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
@@ -193,9 +195,8 @@ Public Class dlgRandomSplit
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged,
-        ucrSaveRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrChkStratifyingFactor.ControlContentsChanged,
-        ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrChkStratifyingFactor.ControlContentsChanged,
+        ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged, ucrSaveRandomSplit.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

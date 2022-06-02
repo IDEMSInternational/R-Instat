@@ -1217,7 +1217,7 @@ Partial Class frmMain
         'mnuModelOtherOneVariableExactResults
         '
         Me.mnuModelOtherOneVariableExactResults.Name = "mnuModelOtherOneVariableExactResults"
-        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(180, 22)
+        Me.mnuModelOtherOneVariableExactResults.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableExactResults.Tag = "Exact_Results..."
         Me.mnuModelOtherOneVariableExactResults.Text = "Exact Results..."
         '
@@ -1225,7 +1225,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableSampleSummaryData.Enabled = False
         Me.mnuModelOtherOneVariableSampleSummaryData.Name = "mnuModelOtherOneVariableSampleSummaryData"
-        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(180, 22)
+        Me.mnuModelOtherOneVariableSampleSummaryData.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableSampleSummaryData.Tag = "Summary_Data..."
         Me.mnuModelOtherOneVariableSampleSummaryData.Text = "Summary Data..."
         '
@@ -1233,7 +1233,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableNonParametric.Enabled = False
         Me.mnuModelOtherOneVariableNonParametric.Name = "mnuModelOtherOneVariableNonParametric"
-        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(180, 22)
+        Me.mnuModelOtherOneVariableNonParametric.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableNonParametric.Tag = "Non_Parametric..."
         Me.mnuModelOtherOneVariableNonParametric.Text = "Non Parametric..."
         '
@@ -1241,7 +1241,7 @@ Partial Class frmMain
         '
         Me.mnuModelOtherOneVariableGoodnessofFit.Enabled = False
         Me.mnuModelOtherOneVariableGoodnessofFit.Name = "mnuModelOtherOneVariableGoodnessofFit"
-        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(180, 22)
+        Me.mnuModelOtherOneVariableGoodnessofFit.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherOneVariableGoodnessofFit.Tag = "Goodness_of_Fit"
         Me.mnuModelOtherOneVariableGoodnessofFit.Text = "Goodness of Fit..."
         '
@@ -4022,7 +4022,6 @@ Partial Class frmMain
         '
         'mnuPrepareDataReshapeRandomSplit
         '
-        Me.mnuPrepareDataReshapeRandomSplit.Enabled = False
         Me.mnuPrepareDataReshapeRandomSplit.Name = "mnuPrepareDataReshapeRandomSplit"
         Me.mnuPrepareDataReshapeRandomSplit.Size = New System.Drawing.Size(197, 22)
         Me.mnuPrepareDataReshapeRandomSplit.Text = "Random Split..."
