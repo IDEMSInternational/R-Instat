@@ -51,8 +51,8 @@ Public Class dlgCluster
 
         ucrPnlPrepareData.AddRadioButton(rdoScaleData)
         ucrPnlPrepareData.AddRadioButton(rdoDistanceData)
-        ucrPnlPrepareData.AddParameterValuesCondition(rdoScaleData, "rdo_checked", "scale")
-        ucrPnlPrepareData.AddParameterValuesCondition(rdoDistanceData, "rdo_checked", "distance")
+        ucrPnlPrepareData.AddFunctionNamesCondition(rdoScaleData, {"scale", "na.omit"})
+        ucrPnlPrepareData.AddFunctionNamesCondition(rdoDistanceData, {"dist", "as.matrix"})
 
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
@@ -80,6 +80,10 @@ Public Class dlgCluster
         ucrChkScaleEachVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkScaleEachVariable.SetRDefault("TRUE")
 
+        ucrChkMatrix.SetText("Display As Data Frame")
+        ucrChkMatrix.AddParameterValuesCondition(True, "matrix", "True")
+        ucrChkMatrix.AddParameterValuesCondition(False, "matrix", "False")
+
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrInputMethod.SetParameter(New RParameter("method", 1))
         dctMethod.Add("euclidean", Chr(34) & "euclidean" & Chr(34))
@@ -95,7 +99,8 @@ Public Class dlgCluster
         ucrInputMethod.AddToLinkedControls(ucrNudPowerOption, {"minkowski"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverPrepareData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPrepareData.AddToLinkedControls({ucrChkCenterEachVariable, ucrChkOmitMissingRows, ucrChkScaleEachVariable}, {rdoScaleData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPrepareData.AddToLinkedControls({ucrChkCenterEachVariable, ucrChkOmitMissingRows, ucrSaveNewDataFrame, ucrChkScaleEachVariable}, {rdoScaleData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPrepareData.AddToLinkedControls({ucrChkMatrix, ucrSaveDistance}, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPrepareData.AddToLinkedControls(ucrInputMethod, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
@@ -103,6 +108,12 @@ Public Class dlgCluster
         ucrSaveNewDataFrame.SetLabelText("New Data Frame Name:")
         ucrSaveNewDataFrame.SetPrefix("scale")
         ucrSaveNewDataFrame.SetIsTextBox()
+
+        ucrSaveDistance.SetSaveTypeAsDataFrame()
+        ucrSaveDistance.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
+        ucrSaveDistance.SetLabelText("Result Name:")
+        ucrSaveDistance.SetPrefix("distance")
+        ucrSaveDistance.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
@@ -121,7 +132,7 @@ Public Class dlgCluster
 
         clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
         clsDummyFunction.AddParameter("omit", "True", iPosition:=1)
-        clsDummyFunction.AddParameter("rdo_checked", "scale", iPosition:=2)
+        clsDummyFunction.AddParameter("matrix", "True", iPosition:=2)
 
         clsScaleFunction.SetRCommand("scale")
 
@@ -151,29 +162,75 @@ Public Class dlgCluster
         bResetRCode = False
         ucrChkCenterEachVariable.AddAdditionalCodeParameterPair(clsStatsScaleFunction, New RParameter("center", 1), iAdditionalPairNo:=1)
         ucrChkScaleEachVariable.AddAdditionalCodeParameterPair(clsStatsScaleFunction, New RParameter("scale", 2), iAdditionalPairNo:=1)
-        ucrSaveNewDataFrame.AddAdditionalRCode(clsStatsNAOmitFunction, iAdditionalPairNo:=1)
-        ucrSaveNewDataFrame.AddAdditionalRCode(clsMatrixFunction, iAdditionalPairNo:=2)
+        ucrSaveNewDataFrame.AddAdditionalRCode(clsStatsNAOmitFunction, bReset)
+        ucrSaveDistance.AddAdditionalRCode(clsDistFunction, bReset)
         ucrNudPowerOption.AddAdditionalCodeParameterPair(clsMatrixDistFunction, New RParameter("p", 2), iAdditionalPairNo:=1)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsMatrixDistFunction, New RParameter("method", 1), iAdditionalPairNo:=1)
 
+        ucrSaveDistance.SetRCode(clsMatrixFunction, bReset)
         ucrNudPowerOption.SetRCode(clsDistFunction, bReset)
         ucrInputMethod.SetRCode(clsDistFunction, bReset)
         ucrChkCenterEachVariable.SetRCode(clsScaleFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsScaleFunction, bReset)
         ucrChkScaleEachVariable.SetRCode(clsScaleFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
-        ucrPnlPrepareData.SetRCode(clsDummyFunction, bReset)
+        ucrPnlPrepareData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkOmitMissingRows.SetRCode(clsDummyFunction, bReset)
+        ucrChkMatrix.SetRCode(clsDummyFunction, bReset)
         bResetRCode = True
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" _
-            OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverPrepareData.IsEmpty) _
-            OrElse Not ucrSaveNewDataFrame.IsComplete() Then
-            ucrBase.OKEnabled(False)
+        If rdoScaleData.Checked Then
+            If rdoSelectedColumn.Checked Then
+                If Not ucrReceiverPrepareData.IsEmpty Then
+                    If Not ucrSaveNewDataFrame.IsComplete() Then
+                        ucrBase.OKEnabled(False)
+                    Else
+                        ucrBase.OKEnabled(True)
+                    End If
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                If rdoWholeDataFrame.Checked Then
+                    If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                        If Not ucrSaveNewDataFrame.IsComplete() Then
+                            ucrBase.OKEnabled(False)
+                        Else
+                            ucrBase.OKEnabled(True)
+                        End If
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                End If
+            End If
         Else
-            ucrBase.OKEnabled(True)
+            If rdoDistanceData.Checked Then
+                If rdoSelectedColumn.Checked Then
+                    If Not ucrReceiverPrepareData.IsEmpty Then
+                        If Not ucrSaveDistance.IsComplete() Then
+                            ucrBase.OKEnabled(False)
+                        Else
+                            ucrBase.OKEnabled(True)
+                        End If
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    If rdoWholeDataFrame.Checked Then
+                        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                            If Not ucrSaveDistance.IsComplete() Then
+                                ucrBase.OKEnabled(False)
+                            Else
+                                ucrBase.OKEnabled(True)
+                            End If
+                        Else
+                            ucrBase.OKEnabled(False)
+                        End If
+                    End If
+                End If
+            End If
         End If
     End Sub
 
@@ -195,12 +252,15 @@ Public Class dlgCluster
                     ucrBase.clsRsyntax.SetBaseRFunction(clsScaleFunction)
                 End If
             ElseIf rdoDistanceData.Checked Then
-                If ucrSaveNewDataFrame.ucrChkSave.Checked Then
+                If ucrChkMatrix.Checked Then
+                    ucrSaveDistance.SetSaveTypeAsDataFrame()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMatrixFunction)
                     ucrBase.clsRsyntax.iCallType = 0
+                    clsDummyFunction.AddParameter("matrix", "True", iPosition:=2)
                 Else
+                    ucrSaveDistance.SetSaveTypeAsModel()
+                    clsDummyFunction.AddParameter("matrix", "False", iPosition:=2)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
-                    ucrBase.clsRsyntax.RemoveAssignTo()
                     ucrBase.clsRsyntax.iCallType = 2
                 End If
             End If
@@ -243,26 +303,26 @@ Public Class dlgCluster
     Private Sub ucrPnlPrepareData_ContrlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPrepareData.ControlValueChanged, ucrInputMethod.ControlValueChanged, ucrNudPowerOption.ControlValueChanged
         ChangeDataParameter()
         SetBaseFunction()
-        If bResetRCode Then
-            If rdoScaleData.Checked Then
-                ucrSaveNewDataFrame.SetPrefix("scale")
-                ucrSaveNewDataFrame.SetLabelText("New Data Frame Name:")
-                clsDummyFunction.AddParameter("rdo_checked", "scale", iPosition:=2)
-            ElseIf rdoDistanceData.Checked Then
-                ucrSaveNewDataFrame.SetPrefix("distance")
-                ucrSaveNewDataFrame.SetCheckBoxText("Save Results")
-                clsDummyFunction.AddParameter("rdo_checked", "distance", iPosition:=2)
-            End If
+        If rdoScaleData.Checked Then
+            ucrSaveNewDataFrame.SetPrefix("scale")
+        ElseIf rdoDistanceData.Checked Then
+            ucrSaveNewDataFrame.SetPrefix("distance")
         End If
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlContentsChanged, ucrSelectorPrepareData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrInputMethod.ControlContentsChanged, ucrNudPowerOption.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlContentsChanged,
+        ucrSelectorPrepareData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged,
+        ucrInputMethod.ControlContentsChanged, ucrNudPowerOption.ControlContentsChanged, ucrSaveDistance.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged
         ChangeDataParameter()
         AddRemoveDataHideOptionsButtons()
+    End Sub
+
+    Private Sub ucrChkMatrix_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMatrix.ControlValueChanged
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrChkOmitMissingRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissingRows.ControlValueChanged
@@ -273,9 +333,5 @@ Public Class dlgCluster
         clsCurrentNewColumnFunction = ucrReceiverPrepareData.GetVariables()
         clsCurrentNewColumnFunction.SetAssignTo("columns")
         ChangeDataParameter()
-    End Sub
-
-    Private Sub ucrSaveNewDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewDataFrame.ControlValueChanged
-        SetBaseFunction()
     End Sub
 End Class
