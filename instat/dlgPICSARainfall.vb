@@ -930,6 +930,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub toolStripMenuItemPointOption_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOption.Click
-     openSdgLayerOptions(clsPointsFunc)
+        openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class
