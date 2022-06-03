@@ -864,8 +864,6 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-
-
     Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click
         openSdgLayerOptions(clsGeomLine)
     End Sub
