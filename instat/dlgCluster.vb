@@ -111,9 +111,10 @@ Public Class dlgCluster
 
         ucrSaveDistance.SetSaveTypeAsDataFrame()
         ucrSaveDistance.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
-        ucrSaveDistance.SetLabelText("Result Name:")
+        ucrSaveDistance.SetCheckBoxText("Save Result:")
         ucrSaveDistance.SetPrefix("distance")
-        ucrSaveDistance.SetIsTextBox()
+        ucrSaveDistance.SetIsComboBox()
+        ucrSaveDistance.SetAssignToIfUncheckedValue("last_distance")
     End Sub
 
     Private Sub SetDefaults()
@@ -126,9 +127,9 @@ Public Class dlgCluster
         clsDistFunction = New RFunction
         clsTransposeFunction = New RFunction
 
-        ucrSaveNewDataFrame.SetPrefix("scale")
         ucrSelectorPrepareData.Reset()
         ucrSaveNewDataFrame.Reset()
+        ucrSaveDistance.Reset()
 
         clsDummyFunction.AddParameter("checked", "selected", iPosition:=0)
         clsDummyFunction.AddParameter("omit", "True", iPosition:=1)
@@ -253,12 +254,10 @@ Public Class dlgCluster
                 End If
             ElseIf rdoDistanceData.Checked Then
                 If ucrChkMatrix.Checked Then
-                    ucrSaveDistance.SetSaveTypeAsDataFrame()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMatrixFunction)
                     ucrBase.clsRsyntax.iCallType = 0
                     clsDummyFunction.AddParameter("matrix", "True", iPosition:=2)
                 Else
-                    ucrSaveDistance.SetSaveTypeAsModel()
                     clsDummyFunction.AddParameter("matrix", "False", iPosition:=2)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
                     ucrBase.clsRsyntax.iCallType = 2
@@ -303,11 +302,6 @@ Public Class dlgCluster
     Private Sub ucrPnlPrepareData_ContrlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPrepareData.ControlValueChanged, ucrInputMethod.ControlValueChanged, ucrNudPowerOption.ControlValueChanged
         ChangeDataParameter()
         SetBaseFunction()
-        If rdoScaleData.Checked Then
-            ucrSaveNewDataFrame.SetPrefix("scale")
-        ElseIf rdoDistanceData.Checked Then
-            ucrSaveNewDataFrame.SetPrefix("distance")
-        End If
     End Sub
 
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrepareData.ControlContentsChanged,
@@ -322,6 +316,12 @@ Public Class dlgCluster
     End Sub
 
     Private Sub ucrChkMatrix_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMatrix.ControlValueChanged
+        clsMatrixFunction.RemoveAssignTo()
+        If ucrChkMatrix.Checked Then
+            ucrSaveDistance.SetSaveTypeAsDataFrame()
+        Else
+            ucrSaveDistance.SetSaveTypeAsModel()
+        End If
         SetBaseFunction()
     End Sub
 

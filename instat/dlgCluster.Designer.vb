@@ -230,17 +230,17 @@ Partial Class dlgCluster
         'ucrSaveDistance
         '
         Me.ucrSaveDistance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDistance.Location = New System.Drawing.Point(8, 335)
+        Me.ucrSaveDistance.Location = New System.Drawing.Point(8, 338)
         Me.ucrSaveDistance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDistance.Name = "ucrSaveDistance"
-        Me.ucrSaveDistance.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveDistance.Size = New System.Drawing.Size(342, 34)
         Me.ucrSaveDistance.TabIndex = 18
         '
         'ucrChkMatrix
         '
         Me.ucrChkMatrix.AutoSize = True
         Me.ucrChkMatrix.Checked = False
-        Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 312)
+        Me.ucrChkMatrix.Location = New System.Drawing.Point(7, 308)
         Me.ucrChkMatrix.Name = "ucrChkMatrix"
         Me.ucrChkMatrix.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkMatrix.TabIndex = 19
