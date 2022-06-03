@@ -45,7 +45,7 @@ Public Class ucrReorder
             Case "factor"
                 lstAvailableData.Columns.Add("Levels")
             Case "dataframe"
-                lstAvailableData.Columns.Add("Data Frame")
+                lstAvailableData.Columns.Add("Data Frames")
             Case "metadata"
                 lstAvailableData.Columns.Add("Metadata")
             Case "object"
@@ -235,6 +235,10 @@ Public Class ucrReorder
     Public Sub Reset()
         lstAvailableData.Items.Clear()
     End Sub
+
+    Public Function Count() As Integer
+        Return lstAvailableData.Items.Count
+    End Function
 
     Protected Overrides Sub SetControlValue()
         Dim lstCurrentVariables As String()
