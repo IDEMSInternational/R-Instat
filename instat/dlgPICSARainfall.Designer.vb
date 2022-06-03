@@ -96,7 +96,7 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(10, 201)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdPICSAOptions.TabIndex = 11
@@ -221,7 +221,7 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 233)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 233)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
