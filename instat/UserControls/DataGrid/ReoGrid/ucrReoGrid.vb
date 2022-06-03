@@ -171,6 +171,7 @@ Public MustInherit Class ucrReoGrid
         End If
         If grdData.Worksheets.Count > 0 Then
             grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
+            grdData.CurrentWorksheet = fillWorkSheet
         End If
     End Sub
 
