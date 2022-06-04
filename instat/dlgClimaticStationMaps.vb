@@ -45,7 +45,6 @@ Public Class dlgClimaticStationMaps
     Private clsAnnotateFunction As New RFunction
     Private clsGetDataFrame As New RFunction
     Private clsRemoveFunc As New RFunction
-    Private clsParamOperator As New ROperator
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -329,24 +328,17 @@ Public Class dlgClimaticStationMaps
     Private Sub AddExtraGeoms()
         clsGGplotOperator.RemoveParameterByName("geom_label")
         clsGGplotOperator.RemoveParameterByName("geom_point")
-        clsGGplotOperator.RemoveParameterByName("geom_label_repel")
         clsGGplotOperator.RemoveParameterByName("facets")
         clsGGplotOperator.RemoveParameterByName("scale_shape_manual")
         If ucrChkAddPoints.Checked Then
             If Not ucrReceiverStation.IsEmpty Then
                 clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
-            Else
-                clsGGplotOperator.RemoveParameterByName("geom_label")
             End If
             If Not ucrReceiverFacet.IsEmpty Then
                 clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
-            Else
-                clsGGplotOperator.RemoveParameterByName("facets")
             End If
             If Not ucrReceiverShape.IsEmpty Then
                 clsGGplotOperator.AddParameter("scale_shape_manual", clsRFunctionParameter:=clsScaleShapeFunction, bIncludeArgumentName:=False, iPosition:=2)
-            Else
-                clsGGplotOperator.RemoveParameterByName("scale_shape_manual")
             End If
             clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
         End If
