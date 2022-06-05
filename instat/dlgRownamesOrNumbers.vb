@@ -20,7 +20,7 @@ Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGetRowNamesFunction As New RFunction
-    Private clsSetRowNames As New RFunction
+    Private clsSetRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
