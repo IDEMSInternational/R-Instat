@@ -103,7 +103,7 @@ Public Class dlgRowNamesOrNumbers
         clsGetRowNamesFunction = New RFunction
         clsAddKeyFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsSetRowNames = New RFunction
+        clsSetRowNamesFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
@@ -117,17 +117,17 @@ Public Class dlgRowNamesOrNumbers
         clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
 
-        clsSetRowNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+        clsSetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorRowNames.AddAdditionalCodeParameterPair(clsSetRowNames, ucrSelectorRowNames.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorRowNames.AddAdditionalCodeParameterPair(clsSetRowNamesFunction, ucrSelectorRowNames.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorRowNames.AddAdditionalCodeParameterPair(clsAddKeyFunction, ucrSelectorRowNames.GetParameter, iAdditionalPairNo:=2)
 
         ucrSelectorRowNames.SetRCode(clsGetRowNamesFunction, bReset)
-        ucrReceiverRowNames.SetRCode(clsSetRowNames, bReset)
+        ucrReceiverRowNames.SetRCode(clsSetRowNamesFunction, bReset)
         ucrChkMakeColumnIntoKey.SetRCode(clsDummyFunction, bReset)
         ucrPnlOverallOptions.SetRCode(clsDummyFunction, bReset)
         ucrNewColumnName.SetRCode(clsGetRowNamesFunction, bReset)
@@ -152,7 +152,7 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
         If rdoSetRowNamesFromColumn.Checked Then
             ucrSelectorRowNames.SetVariablesVisible(True)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNames)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNamesFunction)
             clsDummyFunction.AddParameter("checked_rdo", "set_row", iPosition:=1)
         Else
             ucrSelectorRowNames.SetVariablesVisible(False)
@@ -160,7 +160,7 @@ Public Class dlgRowNamesOrNumbers
                 ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
                 clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
             ElseIf rdoResetintoPositiveIntegers.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNames)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNamesFunction)
                 clsDummyFunction.AddParameter("checked_rdo", "reset_row", iPosition:=1)
             ElseIf rdoSortbyRowNames.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
