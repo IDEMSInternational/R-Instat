@@ -34,7 +34,6 @@ Public Class dlgRenameGraph
     Private clsYScaleDateFunction As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
-    Private clsLegendPositionFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
@@ -93,7 +92,6 @@ Public Class dlgRenameGraph
     Private Sub SetDefaults()
         clsUseGraphFunction = New RFunction
         clsBaseOperator = New ROperator
-        clsLegendPositionFunction = New RFunction
 
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
@@ -119,9 +117,6 @@ Public Class dlgRenameGraph
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        clsLegendPositionFunction.SetPackageName("ggplot2")
-        clsLegendPositionFunction.SetRCommand("theme")
-
         clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -130,8 +125,8 @@ Public Class dlgRenameGraph
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkLegendPosition.SetRCode(clsLegendPositionFunction, bReset)
-        ucrInputLegendPosition.SetRCode(clsLegendPositionFunction, bReset)
+        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrGraphsSelector.SetRCode(clsUseGraphFunction, bReset)
         ucrGraphReceiver.SetRCode(clsUseGraphFunction, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
@@ -161,12 +156,16 @@ Public Class dlgRenameGraph
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged
-        If ucrChkLegendPosition.Checked Then
-            clsBaseOperator.AddParameter("legend.position", clsRFunctionParameter:=clsLegendPositionFunction, iPosition:=1)
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
         Else
-            clsBaseOperator.RemoveParameterByName("legend.position")
+            clsBaseOperator.RemoveParameterByName("theme")
         End If
+    End Sub
+
+    Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged
+        AddRemoveTheme()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkLegendPosition.ControlContentsChanged
