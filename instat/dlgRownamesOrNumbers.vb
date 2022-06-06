@@ -19,7 +19,8 @@ Imports instat.Translations
 Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRowNamesFunction As New RFunction
+    Private clsGetRowNamesFunction As New RFunction
+    Private clsSetRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
@@ -87,9 +88,8 @@ Public Class dlgRowNamesOrNumbers
 
         'ucrChkMakeColumnIntoKey
         ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
-        ucrChkMakeColumnIntoKey.SetParameter(New RParameter("check", 0))
-        ucrChkMakeColumnIntoKey.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMakeColumnIntoKey.SetRDefault("TRUE")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "TRUE")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "FALSE")
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
@@ -100,31 +100,38 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub SetDefaults()
-        clsRowNamesFunction = New RFunction
+        clsGetRowNamesFunction = New RFunction
         clsAddKeyFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsSetRowNamesFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
         ucrBase.clsRsyntax.lstAfterCodes.Clear()
 
-        clsDummyFunction.AddParameter("check", "TRUE", iPosition:=0)
         clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
+        clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=2)
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
 
-        clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
+        clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+        clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
+
+        clsSetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkAsNumeric.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSelectorRowNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverRowNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlOverallOptions.SetRCode(clsDummyFunction, bReset)
-        ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorRowNames.AddAdditionalCodeParameterPair(clsSetRowNamesFunction, ucrSelectorRowNames.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorRowNames.AddAdditionalCodeParameterPair(clsAddKeyFunction, ucrSelectorRowNames.GetParameter, iAdditionalPairNo:=2)
+
+        ucrSelectorRowNames.SetRCode(clsGetRowNamesFunction, bReset)
+        ucrReceiverRowNames.SetRCode(clsSetRowNamesFunction, bReset)
         ucrChkMakeColumnIntoKey.SetRCode(clsDummyFunction, bReset)
+        ucrPnlOverallOptions.SetRCode(clsDummyFunction, bReset)
+        ucrNewColumnName.SetRCode(clsGetRowNamesFunction, bReset)
+        ucrChkAsNumeric.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -141,42 +148,51 @@ Public Class dlgRowNamesOrNumbers
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged, ucrChkMakeColumnIntoKey.ControlValueChanged, ucrNewColumnName.ControlValueChanged
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged
         ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
         If rdoSetRowNamesFromColumn.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-            clsDummyFunction.AddParameter("checked_rdo", "set_row", iPosition:=1)
             ucrSelectorRowNames.SetVariablesVisible(True)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNamesFunction)
+            clsDummyFunction.AddParameter("checked_rdo", "set_row", iPosition:=1)
         Else
             ucrSelectorRowNames.SetVariablesVisible(False)
             If rdoCopyRowNamesIntoFirstColumn.Checked Then
-                ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+                ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
                 clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
-                If ucrChkMakeColumnIntoKey.Checked Then
-                    clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
-                Else
-                    clsAddKeyFunction.RemoveParameterByName("col_names")
-                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
-                End If
             ElseIf rdoResetintoPositiveIntegers.Checked Then
-                ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNamesFunction)
                 clsDummyFunction.AddParameter("checked_rdo", "reset_row", iPosition:=1)
             ElseIf rdoSortbyRowNames.Checked Then
                 ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
                 clsDummyFunction.AddParameter("checked_rdo", "sort_row", iPosition:=1)
             End If
         End If
-        If Not rdoCopyRowNamesIntoFirstColumn.Checked Then
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+        AddRemoveKeyFromAfterCodes()
+    End Sub
+
+    Private Sub AddRemoveKeyFromAfterCodes()
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+        If rdoCopyRowNamesIntoFirstColumn.Checked Then
+            If ucrChkMakeColumnIntoKey.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
+                clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)
+            Else
+                clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=2)
+            End If
         End If
     End Sub
 
-    Private Sub ucrSelectorRowNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlValueChanged
-        clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSelectorRowNames.strCurrentDataFrame & Chr(34), iPosition:=0)
+    Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
+        AddRemoveKeyFromAfterCodes()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged, ucrPnlOverallOptions.ControlContentsChanged, ucrReceiverRowNames.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
+    Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
+        clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged,
+        ucrPnlOverallOptions.ControlContentsChanged, ucrReceiverRowNames.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
