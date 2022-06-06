@@ -153,7 +153,7 @@ Public Class clsDataBook
             End If
         Next
         If lstOfCurrentRDataFrameNames.Count = _lstDataFrames.Count Then
-            _lstDataFrames.OrderBy(Function(x) lstOfCurrentRDataFrameNames.IndexOf(x.strName))
+            _lstDataFrames = _lstDataFrames.OrderBy(Function(x) lstOfCurrentRDataFrameNames.IndexOf(x.strName)).ToList()
         End If
     End Sub
 
