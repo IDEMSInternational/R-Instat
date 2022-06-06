@@ -152,6 +152,12 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrReceiverY.SetParameter(New RParameter("y", 2))
+        ucrReceiverY.Selector = ucrSelectorPICSARainfall
+        ucrReceiverY.bWithQuotes = False
+        ucrReceiverY.SetParameterIsString()
+        ucrReceiverY.SetIncludedDataTypes({"numeric"})
+
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
         ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
         ucrReceiverColourBy.SetIncludedDataTypes({"factor"})
@@ -181,6 +187,8 @@ Public Class dlgPICSARainfall
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
+
+        ucrReceiverY.SetLinkedDisplayControl(ucrVariablesAsFactorForPicsa)
 
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
@@ -301,7 +309,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.Reset()
         ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
-        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
+        ucrReceiverY.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -615,8 +623,11 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
+
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
+        ucrReceiverY.SetRCode(clsRaesFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -629,7 +640,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
+        If (ucrReceiverY.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -786,6 +797,15 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
+    Private Sub YAxisDataTypeCheck()
+        If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
+            clsGeomLine.AddParameter("group", 0)
+            clsBaseOperator.RemoveParameterByName("scale_y_continuous")
+        Else
+            clsGeomLine.RemoveParameterByName("group")
+        End If
+    End Sub
+
     Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
@@ -806,6 +826,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
         AddRemoveGroupBy()
+        YAxisDataTypeCheck()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -896,8 +917,7 @@ Public Class dlgPICSARainfall
                 '  independently from the multiple variables method? Here if the receiver is 
                 '  actually in single mode, the variable "value" will still be given back, which 
                 '  throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" _
-                   AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
                 'Still might be in the case of bSingleVariable with mapping y="".
                 If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
                     ucrVariablesAsFactorForPicsa.Clear()
