@@ -1505,6 +1505,10 @@ Public Class frmMain
         ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
+    Public Sub UpCurrentColumnMetaDataFrame(strDataName As String)
+        ucrColumnMeta.SetCurrentDataFrame(strDataName)
+    End Sub
+
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
