@@ -157,25 +157,6 @@ Public MustInherit Class ucrReoGrid
         Next
     End Sub
 
-    Private Sub ReorderSheets(strSheet As String, iNewPosition As Integer) Implements IGrid.ReorderSheets
-        Dim bFoundWorksheet As Boolean = False
-        Dim grdWorksheetToMove As Worksheet = Nothing
-        If strSheet <> "" Then
-            For Each tempWorkSheet In grdData.Worksheets
-                If tempWorkSheet.Name = strSheet Then
-                    bFoundWorksheet = True
-                    Exit For
-                End If
-            Next
-
-            If bFoundWorksheet AndAlso grdData.Worksheets.Count > 0 Then
-                grdWorksheetToMove = grdData.GetWorksheetByName(strSheet)
-                grdData.MoveWorksheet(grdWorksheetToMove, iNewPosition)
-                grdData.CurrentWorksheet = grdWorksheetToMove
-            End If
-        End If
-    End Sub
-
     Public Sub UpdateWorksheetStyle(worksheet As clsWorksheetAdapter) Implements IGrid.UpdateWorksheetStyle
         UpdateWorksheetStyle(grdData.Worksheets.Where(Function(x) x.Name = worksheet.Name).FirstOrDefault)
     End Sub

@@ -1495,11 +1495,6 @@ Public Class frmMain
         Return 0
     End Function
 
-    Public Sub ReorderSheets(strSheet As String, iNewPosition As Integer)
-        ucrDataViewer.ReorderSheets(strSheet, iNewPosition)
-        ucrColumnMeta.ReorderSheets(strSheet, iNewPosition)
-    End Sub
-
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
         ucrColumnMeta.SetCurrentDataFrame(strDataName)
