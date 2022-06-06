@@ -152,6 +152,9 @@ Public Class clsDataBook
                 _lstDataFrames.Remove(dataFrame)
             End If
         Next
+        If lstOfCurrentRDataFrameNames.Count = _lstDataFrames.Count Then
+            _lstDataFrames.OrderBy(Function(x) lstOfCurrentRDataFrameNames.IndexOf(x.strName))
+        End If
     End Sub
 
 
