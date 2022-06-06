@@ -230,7 +230,7 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
-        frmMain.UpCurrentColumnMetaDataFrame(_grid.CurrentWorksheet.Name)
+        frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
         RefreshDisplayInformation()
     End Sub
 
