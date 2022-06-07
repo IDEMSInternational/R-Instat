@@ -21,7 +21,6 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
-    Private fillWorkSheet As Worksheet
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -62,7 +61,7 @@ Public MustInherit Class ucrReoGrid
     End Property
 
     Public Function AddNewWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.AddNewWorksheet
-        fillWorkSheet = grdData.CreateWorksheet(name)
+        Dim fillWorkSheet = grdData.CreateWorksheet(name)
         grdData.AddWorksheet(fillWorkSheet)
         fillWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -72,18 +71,30 @@ Public MustInherit Class ucrReoGrid
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
 
-    Private Sub ReOrderWorksheets(strDataframe As String, iCount As Integer) Implements IGrid.ReOrderWorksheets
+    Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
         Dim iNewPosition As Integer
-        For Each tempWorkSheet In grdData.Worksheets
-            If tempWorkSheet.Name = strDataframe Then
-                iNewPosition = iCount
-                Exit For
+        Dim strName As String = Nothing
+        Dim bFound As Boolean = False
+        Dim iCount As Integer
+        iCount = 0
+        For Each clsDataframe In _clsDataBook.DataFrames
+            For Each tempWorkSheet In grdData.Worksheets
+                If tempWorkSheet.Name = clsDataframe.strName Then
+                    strName = clsDataframe.strName
+                    iNewPosition = iCount
+                    bFound = True
+                    Exit For
+                End If
+            Next
+            If bFound Then
+                Dim fillWorkSheet = grdData.GetWorksheetByName(strName)
+                If fillWorkSheet IsNot Nothing AndAlso iNewPosition < grdData.Worksheets.Count Then
+                    grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
+                    grdData.CurrentWorksheet = fillWorkSheet
+                    iCount += 1
+                End If
             End If
         Next
-        If fillWorkSheet IsNot Nothing AndAlso iNewPosition < grdData.Worksheets.Count Then
-            grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
-        End If
-        'grdData.Worksheets.OrderBy(Function(x) _clsDataBook.DataFrames.IndexOf())
     End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange

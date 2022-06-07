@@ -82,7 +82,7 @@ Public MustInherit Class ucrLinuxGrid
         Return New clsWorksheetAdapter(tab)
     End Function
 
-    Private Sub ReOrderWorksheets(strDataframe As String, iCount As Integer) Implements IGrid.ReOrderWorksheets
+    Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
 
     End Sub
 
