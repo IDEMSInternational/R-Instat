@@ -368,7 +368,7 @@ Public Class dlgNewDataFrame
                     clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
                 End If
 
-                Dim strColumnName As String = row.Cells("colNames").Value
+                Dim strColumnName As String = ValidateRVariable(row.Cells("colNames").Value)
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
 
@@ -412,6 +412,15 @@ Public Class dlgNewDataFrame
         strTemp &= ")"
 
         Return strTemp
+    End Function
+
+    Private Function ValidateRVariable(strNewDataText As String) As String
+        For Each chrCurr In strNewDataText
+            If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
+                strNewDataText = strNewDataText.Replace(chrCurr, ".")
+            End If
+        Next
+        Return strNewDataText
     End Function
 
     Private Function GetLabelAsRString(lstLabels As List(Of String)) As String
