@@ -47,28 +47,27 @@ Partial Class dlgStringHandling
         Me.rdoReplace = New System.Windows.Forms.RadioButton()
         Me.rdoFind = New System.Windows.Forms.RadioButton()
         Me.grpModifiers = New System.Windows.Forms.GroupBox()
+        Me.ucrChkComments = New instat.ucrCheck()
+        Me.ucrChkMultiline = New instat.ucrCheck()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.grpDetectOptions = New System.Windows.Forms.GroupBox()
-        Me.grpFindOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoLocate = New System.Windows.Forms.RadioButton()
-        Me.rdoExtract = New System.Windows.Forms.RadioButton()
-        Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoEnds = New System.Windows.Forms.RadioButton()
         Me.rdoStarts = New System.Windows.Forms.RadioButton()
         Me.rdoDetects = New System.Windows.Forms.RadioButton()
+        Me.ucrChkNegate = New instat.ucrCheck()
+        Me.ucrPnlDetectOptions = New instat.UcrPanel()
+        Me.grpFindOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkAll = New instat.ucrCheck()
+        Me.rdoLocate = New System.Windows.Forms.RadioButton()
+        Me.rdoExtract = New System.Windows.Forms.RadioButton()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFindOptions = New instat.UcrPanel()
-        Me.ucrChkReplaceAll = New instat.ucrCheck()
         Me.ucrChkRemoveAll = New instat.ucrCheck()
         Me.ucrInputReplaceNaBy = New instat.ucrInputTextBox()
         Me.ucrChkReplaceBy = New instat.ucrCheck()
-        Me.ucrChkNegate = New instat.ucrCheck()
-        Me.ucrPnlDetectOptions = New instat.UcrPanel()
         Me.ucrInputBoundary = New instat.ucrInputTextBox()
         Me.ucrChkBoundary = New instat.ucrCheck()
         Me.ucrChkIgnoreCase = New instat.ucrCheck()
-        Me.ucrChkComments = New instat.ucrCheck()
-        Me.ucrChkMultiline = New instat.ucrCheck()
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
@@ -77,9 +76,15 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.grpReplaceOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoReplaceCell = New System.Windows.Forms.RadioButton()
+        Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
+        Me.rdoReplaceFirst = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlReplaceOptions = New instat.UcrPanel()
         Me.grpModifiers.SuspendLayout()
         Me.grpDetectOptions.SuspendLayout()
         Me.grpFindOptions.SuspendLayout()
+        Me.grpReplaceOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -208,6 +213,24 @@ Partial Class dlgStringHandling
         Me.grpModifiers.TabStop = False
         Me.grpModifiers.Text = "Modifiers"
         '
+        'ucrChkComments
+        '
+        Me.ucrChkComments.AutoSize = True
+        Me.ucrChkComments.Checked = False
+        Me.ucrChkComments.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkComments.Name = "ucrChkComments"
+        Me.ucrChkComments.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkComments.TabIndex = 29
+        '
+        'ucrChkMultiline
+        '
+        Me.ucrChkMultiline.AutoSize = True
+        Me.ucrChkMultiline.Checked = False
+        Me.ucrChkMultiline.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkMultiline.Name = "ucrChkMultiline"
+        Me.ucrChkMultiline.Size = New System.Drawing.Size(142, 23)
+        Me.ucrChkMultiline.TabIndex = 28
+        '
         'cmdAddkeyboard
         '
         Me.cmdAddkeyboard.Location = New System.Drawing.Point(267, 373)
@@ -224,59 +247,12 @@ Partial Class dlgStringHandling
         Me.grpDetectOptions.Controls.Add(Me.rdoDetects)
         Me.grpDetectOptions.Controls.Add(Me.ucrChkNegate)
         Me.grpDetectOptions.Controls.Add(Me.ucrPnlDetectOptions)
-        Me.grpDetectOptions.Location = New System.Drawing.Point(261, 193)
+        Me.grpDetectOptions.Location = New System.Drawing.Point(261, 194)
         Me.grpDetectOptions.Name = "grpDetectOptions"
         Me.grpDetectOptions.Size = New System.Drawing.Size(165, 124)
         Me.grpDetectOptions.TabIndex = 38
         Me.grpDetectOptions.TabStop = False
         Me.grpDetectOptions.Text = "Detect Options"
-        '
-        'grpFindOptions
-        '
-        Me.grpFindOptions.Controls.Add(Me.ucrChkAll)
-        Me.grpFindOptions.Controls.Add(Me.rdoLocate)
-        Me.grpFindOptions.Controls.Add(Me.rdoExtract)
-        Me.grpFindOptions.Controls.Add(Me.rdoCount)
-        Me.grpFindOptions.Controls.Add(Me.ucrPnlFindOptions)
-        Me.grpFindOptions.Location = New System.Drawing.Point(260, 209)
-        Me.grpFindOptions.Name = "grpFindOptions"
-        Me.grpFindOptions.Size = New System.Drawing.Size(171, 122)
-        Me.grpFindOptions.TabIndex = 41
-        Me.grpFindOptions.TabStop = False
-        Me.grpFindOptions.Text = "Find Options"
-        '
-        'rdoLocate
-        '
-        Me.rdoLocate.AutoSize = True
-        Me.rdoLocate.Location = New System.Drawing.Point(7, 67)
-        Me.rdoLocate.Name = "rdoLocate"
-        Me.rdoLocate.Size = New System.Drawing.Size(58, 17)
-        Me.rdoLocate.TabIndex = 3
-        Me.rdoLocate.TabStop = True
-        Me.rdoLocate.Text = "Locate"
-        Me.rdoLocate.UseVisualStyleBackColor = True
-        '
-        'rdoExtract
-        '
-        Me.rdoExtract.AutoSize = True
-        Me.rdoExtract.Location = New System.Drawing.Point(7, 42)
-        Me.rdoExtract.Name = "rdoExtract"
-        Me.rdoExtract.Size = New System.Drawing.Size(58, 17)
-        Me.rdoExtract.TabIndex = 2
-        Me.rdoExtract.TabStop = True
-        Me.rdoExtract.Text = "Extract"
-        Me.rdoExtract.UseVisualStyleBackColor = True
-        '
-        'rdoCount
-        '
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(7, 19)
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 1
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = "Count"
-        Me.rdoCount.UseVisualStyleBackColor = True
         '
         'rdoEnds
         '
@@ -311,6 +287,37 @@ Partial Class dlgStringHandling
         Me.rdoDetects.Text = "Detect"
         Me.rdoDetects.UseVisualStyleBackColor = True
         '
+        'ucrChkNegate
+        '
+        Me.ucrChkNegate.AutoSize = True
+        Me.ucrChkNegate.Checked = False
+        Me.ucrChkNegate.Location = New System.Drawing.Point(7, 95)
+        Me.ucrChkNegate.Name = "ucrChkNegate"
+        Me.ucrChkNegate.Size = New System.Drawing.Size(150, 23)
+        Me.ucrChkNegate.TabIndex = 1
+        '
+        'ucrPnlDetectOptions
+        '
+        Me.ucrPnlDetectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDetectOptions.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlDetectOptions.Name = "ucrPnlDetectOptions"
+        Me.ucrPnlDetectOptions.Size = New System.Drawing.Size(156, 75)
+        Me.ucrPnlDetectOptions.TabIndex = 0
+        '
+        'grpFindOptions
+        '
+        Me.grpFindOptions.Controls.Add(Me.ucrChkAll)
+        Me.grpFindOptions.Controls.Add(Me.rdoLocate)
+        Me.grpFindOptions.Controls.Add(Me.rdoExtract)
+        Me.grpFindOptions.Controls.Add(Me.rdoCount)
+        Me.grpFindOptions.Controls.Add(Me.ucrPnlFindOptions)
+        Me.grpFindOptions.Location = New System.Drawing.Point(260, 195)
+        Me.grpFindOptions.Name = "grpFindOptions"
+        Me.grpFindOptions.Size = New System.Drawing.Size(171, 122)
+        Me.grpFindOptions.TabIndex = 41
+        Me.grpFindOptions.TabStop = False
+        Me.grpFindOptions.Text = "Find Options"
+        '
         'ucrChkAll
         '
         Me.ucrChkAll.AutoSize = True
@@ -320,6 +327,39 @@ Partial Class dlgStringHandling
         Me.ucrChkAll.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkAll.TabIndex = 4
         '
+        'rdoLocate
+        '
+        Me.rdoLocate.AutoSize = True
+        Me.rdoLocate.Location = New System.Drawing.Point(7, 67)
+        Me.rdoLocate.Name = "rdoLocate"
+        Me.rdoLocate.Size = New System.Drawing.Size(58, 17)
+        Me.rdoLocate.TabIndex = 3
+        Me.rdoLocate.TabStop = True
+        Me.rdoLocate.Text = "Locate"
+        Me.rdoLocate.UseVisualStyleBackColor = True
+        '
+        'rdoExtract
+        '
+        Me.rdoExtract.AutoSize = True
+        Me.rdoExtract.Location = New System.Drawing.Point(7, 42)
+        Me.rdoExtract.Name = "rdoExtract"
+        Me.rdoExtract.Size = New System.Drawing.Size(58, 17)
+        Me.rdoExtract.TabIndex = 2
+        Me.rdoExtract.TabStop = True
+        Me.rdoExtract.Text = "Extract"
+        Me.rdoExtract.UseVisualStyleBackColor = True
+        '
+        'rdoCount
+        '
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(7, 19)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 1
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
         'ucrPnlFindOptions
         '
         Me.ucrPnlFindOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -327,15 +367,6 @@ Partial Class dlgStringHandling
         Me.ucrPnlFindOptions.Name = "ucrPnlFindOptions"
         Me.ucrPnlFindOptions.Size = New System.Drawing.Size(159, 75)
         Me.ucrPnlFindOptions.TabIndex = 0
-        '
-        'ucrChkReplaceAll
-        '
-        Me.ucrChkReplaceAll.AutoSize = True
-        Me.ucrChkReplaceAll.Checked = False
-        Me.ucrChkReplaceAll.Location = New System.Drawing.Point(261, 186)
-        Me.ucrChkReplaceAll.Name = "ucrChkReplaceAll"
-        Me.ucrChkReplaceAll.Size = New System.Drawing.Size(165, 23)
-        Me.ucrChkReplaceAll.TabIndex = 42
         '
         'ucrChkRemoveAll
         '
@@ -366,23 +397,6 @@ Partial Class dlgStringHandling
         Me.ucrChkReplaceBy.Size = New System.Drawing.Size(84, 23)
         Me.ucrChkReplaceBy.TabIndex = 39
         '
-        'ucrChkNegate
-        '
-        Me.ucrChkNegate.AutoSize = True
-        Me.ucrChkNegate.Checked = False
-        Me.ucrChkNegate.Location = New System.Drawing.Point(7, 95)
-        Me.ucrChkNegate.Name = "ucrChkNegate"
-        Me.ucrChkNegate.Size = New System.Drawing.Size(150, 23)
-        Me.ucrChkNegate.TabIndex = 1
-        '
-        'ucrPnlDetectOptions
-        '
-        Me.ucrPnlDetectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDetectOptions.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlDetectOptions.Name = "ucrPnlDetectOptions"
-        Me.ucrPnlDetectOptions.Size = New System.Drawing.Size(156, 75)
-        Me.ucrPnlDetectOptions.TabIndex = 0
-        '
         'ucrInputBoundary
         '
         Me.ucrInputBoundary.AddQuotesIfUnrecognised = True
@@ -411,24 +425,6 @@ Partial Class dlgStringHandling
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
         Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(229, 23)
         Me.ucrChkIgnoreCase.TabIndex = 35
-        '
-        'ucrChkComments
-        '
-        Me.ucrChkComments.AutoSize = True
-        Me.ucrChkComments.Checked = False
-        Me.ucrChkComments.Location = New System.Drawing.Point(6, 47)
-        Me.ucrChkComments.Name = "ucrChkComments"
-        Me.ucrChkComments.Size = New System.Drawing.Size(142, 23)
-        Me.ucrChkComments.TabIndex = 29
-        '
-        'ucrChkMultiline
-        '
-        Me.ucrChkMultiline.AutoSize = True
-        Me.ucrChkMultiline.Checked = False
-        Me.ucrChkMultiline.Location = New System.Drawing.Point(6, 17)
-        Me.ucrChkMultiline.Name = "ucrChkMultiline"
-        Me.ucrChkMultiline.Size = New System.Drawing.Size(142, 23)
-        Me.ucrChkMultiline.TabIndex = 28
         '
         'ucrSaveStringHandling
         '
@@ -501,7 +497,7 @@ Partial Class dlgStringHandling
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 428)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
         '
         'ucrPnlStringHandling
@@ -512,18 +508,69 @@ Partial Class dlgStringHandling
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(409, 46)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
+        'grpReplaceOptions
+        '
+        Me.grpReplaceOptions.Controls.Add(Me.rdoReplaceCell)
+        Me.grpReplaceOptions.Controls.Add(Me.rdoReplaceAll)
+        Me.grpReplaceOptions.Controls.Add(Me.rdoReplaceFirst)
+        Me.grpReplaceOptions.Controls.Add(Me.ucrPnlReplaceOptions)
+        Me.grpReplaceOptions.Location = New System.Drawing.Point(261, 201)
+        Me.grpReplaceOptions.Name = "grpReplaceOptions"
+        Me.grpReplaceOptions.Size = New System.Drawing.Size(158, 100)
+        Me.grpReplaceOptions.TabIndex = 42
+        Me.grpReplaceOptions.TabStop = False
+        Me.grpReplaceOptions.Text = "Replace Options"
+        '
+        'rdoReplaceCell
+        '
+        Me.rdoReplaceCell.AutoSize = True
+        Me.rdoReplaceCell.Location = New System.Drawing.Point(16, 65)
+        Me.rdoReplaceCell.Name = "rdoReplaceCell"
+        Me.rdoReplaceCell.Size = New System.Drawing.Size(42, 17)
+        Me.rdoReplaceCell.TabIndex = 3
+        Me.rdoReplaceCell.TabStop = True
+        Me.rdoReplaceCell.Text = "Cell"
+        Me.rdoReplaceCell.UseVisualStyleBackColor = True
+        '
+        'rdoReplaceAll
+        '
+        Me.rdoReplaceAll.AutoSize = True
+        Me.rdoReplaceAll.Location = New System.Drawing.Point(16, 42)
+        Me.rdoReplaceAll.Name = "rdoReplaceAll"
+        Me.rdoReplaceAll.Size = New System.Drawing.Size(36, 17)
+        Me.rdoReplaceAll.TabIndex = 2
+        Me.rdoReplaceAll.TabStop = True
+        Me.rdoReplaceAll.Text = "All"
+        Me.rdoReplaceAll.UseVisualStyleBackColor = True
+        '
+        'rdoReplaceFirst
+        '
+        Me.rdoReplaceFirst.AutoSize = True
+        Me.rdoReplaceFirst.Location = New System.Drawing.Point(16, 19)
+        Me.rdoReplaceFirst.Name = "rdoReplaceFirst"
+        Me.rdoReplaceFirst.Size = New System.Drawing.Size(100, 17)
+        Me.rdoReplaceFirst.TabIndex = 1
+        Me.rdoReplaceFirst.TabStop = True
+        Me.rdoReplaceFirst.Text = "First Occurence"
+        Me.rdoReplaceFirst.UseVisualStyleBackColor = True
+        '
+        'ucrPnlReplaceOptions
+        '
+        Me.ucrPnlReplaceOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlReplaceOptions.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlReplaceOptions.Name = "ucrPnlReplaceOptions"
+        Me.ucrPnlReplaceOptions.Size = New System.Drawing.Size(146, 75)
+        Me.ucrPnlReplaceOptions.TabIndex = 0
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 483)
-        Me.Controls.Add(Me.grpFindOptions)
-        Me.Controls.Add(Me.ucrChkReplaceAll)
         Me.Controls.Add(Me.ucrChkRemoveAll)
         Me.Controls.Add(Me.ucrInputReplaceNaBy)
         Me.Controls.Add(Me.ucrChkReplaceBy)
-        Me.Controls.Add(Me.grpDetectOptions)
         Me.Controls.Add(Me.ucrInputBoundary)
         Me.Controls.Add(Me.ucrChkBoundary)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
@@ -545,6 +592,9 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.ucrSelectorStringHandling)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlStringHandling)
+        Me.Controls.Add(Me.grpReplaceOptions)
+        Me.Controls.Add(Me.grpFindOptions)
+        Me.Controls.Add(Me.grpDetectOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -557,6 +607,8 @@ Partial Class dlgStringHandling
         Me.grpDetectOptions.PerformLayout()
         Me.grpFindOptions.ResumeLayout(False)
         Me.grpFindOptions.PerformLayout()
+        Me.grpReplaceOptions.ResumeLayout(False)
+        Me.grpReplaceOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -600,5 +652,9 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoExtract As RadioButton
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrChkRemoveAll As ucrCheck
-    Friend WithEvents ucrChkReplaceAll As ucrCheck
+    Friend WithEvents grpReplaceOptions As GroupBox
+    Friend WithEvents rdoReplaceCell As RadioButton
+    Friend WithEvents rdoReplaceAll As RadioButton
+    Friend WithEvents rdoReplaceFirst As RadioButton
+    Friend WithEvents ucrPnlReplaceOptions As UcrPanel
 End Class
