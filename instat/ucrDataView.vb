@@ -230,6 +230,7 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
+        frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
         RefreshDisplayInformation()
     End Sub
 

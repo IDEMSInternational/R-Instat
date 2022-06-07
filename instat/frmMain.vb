@@ -141,7 +141,7 @@ Public Class frmMain
 
             'Sets up the Recent items
             clsRecentItems = New clsRecentFiles(strAppDataPath)
-            clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
@@ -587,7 +587,7 @@ Public Class frmMain
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
-    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
+    Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
@@ -2442,11 +2442,14 @@ Public Class frmMain
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
+
     Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeRandomSplit.Click
         dlgRandomSplit.ShowDialog()
     End Sub
 
+
     Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
         dlgPICSARainfall.ShowDialog()
     End Sub
+
 End Class
