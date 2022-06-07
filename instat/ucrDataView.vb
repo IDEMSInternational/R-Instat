@@ -118,6 +118,8 @@ Public Class ucrDataView
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim iCount As Integer
+        iCount = 0
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -126,6 +128,8 @@ Public Class ucrDataView
                     firstAddedWorksheet = worksheet
                 End If
             End If
+            'iCount += 1
+            _grid.ReOrderWorksheets(clsDataFrame.strName, iCount)
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
         If firstAddedWorksheet IsNot Nothing Then

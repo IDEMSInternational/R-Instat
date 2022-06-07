@@ -82,6 +82,10 @@ Public MustInherit Class ucrLinuxGrid
         Return New clsWorksheetAdapter(tab)
     End Function
 
+    Private Sub ReOrderWorksheets(strDataframe As String, iCount As Integer) Implements IGrid.ReOrderWorksheets
+
+    End Sub
+
     Public Sub CopyRange() Implements IGrid.CopyRange
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText

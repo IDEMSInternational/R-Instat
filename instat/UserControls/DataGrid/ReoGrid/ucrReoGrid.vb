@@ -21,6 +21,7 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
+    Private fillWorkSheet As Worksheet
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -61,7 +62,7 @@ Public MustInherit Class ucrReoGrid
     End Property
 
     Public Function AddNewWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.AddNewWorksheet
-        Dim fillWorkSheet = grdData.CreateWorksheet(name)
+        fillWorkSheet = grdData.CreateWorksheet(name)
         grdData.AddWorksheet(fillWorkSheet)
         fillWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -70,6 +71,20 @@ Public MustInherit Class ucrReoGrid
         AttachEventsToWorksheet(fillWorkSheet)
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
+
+    Private Sub ReOrderWorksheets(strDataframe As String, iCount As Integer) Implements IGrid.ReOrderWorksheets
+        Dim iNewPosition As Integer
+        For Each tempWorkSheet In grdData.Worksheets
+            If tempWorkSheet.Name = strDataframe Then
+                iNewPosition = iCount
+                Exit For
+            End If
+        Next
+        If fillWorkSheet IsNot Nothing AndAlso iNewPosition < grdData.Worksheets.Count Then
+            grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
+        End If
+        'grdData.Worksheets.OrderBy(Function(x) _clsDataBook.DataFrames.IndexOf())
+    End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange
         grdData.CurrentWorksheet.Copy()
