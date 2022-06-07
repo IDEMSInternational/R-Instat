@@ -2936,7 +2936,7 @@ Public Class ucrCalculator
 
     Private Sub cmdBigz_Click(sender As Object, e As EventArgs) Handles cmdBigz.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz(a = , mod = NA )", 10)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz(a = , mod = NA )", 13)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz()", 1)
         End If
@@ -2944,7 +2944,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPrime_Click(sender As Object, e As EventArgs) Handles cmdPrime.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime(n = , reps = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime(n = , reps = )", 11)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime()", 1)
         End If
@@ -2960,7 +2960,7 @@ Public Class ucrCalculator
 
     Private Sub cmdFactorial_Click(sender As Object, e As EventArgs) Handles cmdFactorial.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ(n = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ(n = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ()", 1)
         End If
@@ -2968,7 +2968,7 @@ Public Class ucrCalculator
 
     Private Sub cmdChoosez_Click(sender As Object, e As EventArgs) Handles cmdChoosez.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::chooseZ(n = , k = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::chooseZ(n = , k = )", 8)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::chooseZ()", 1)
         End If
@@ -2976,7 +2976,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNextPrime_Click(sender As Object, e As EventArgs) Handles cmdNextPrime.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime(n = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime(n = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime()", 1)
         End If
@@ -2984,9 +2984,9 @@ Public Class ucrCalculator
 
     Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorize(n = )", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n = )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorize()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
         End If
     End Sub
 End Class
