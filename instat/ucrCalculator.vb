@@ -2950,7 +2950,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdArithmeticHelp_Click(sender As Object, e As EventArgs) Handles cmdArithmeticHelp.Click
+    Private Sub cmdIntegerHelp1_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp1.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "gmp"
@@ -2988,5 +2988,45 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
         End If
+    End Sub
+
+    Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDivisors_Click(sender As Object, e As EventArgs) Handles cmdDivisors.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Divisors(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Divisors()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRankPercent_Click(sender As Object, e As EventArgs) Handles cmdRankPercent.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::PercentRank(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::PercentRank()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDigitSum_Click(sender As Object, e As EventArgs) Handles cmdDigitSum.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::DigitSum(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::DigitSum()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIntegerHelp2_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp2.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "DescTools"
+        End If
+        OpenHelpPage()
     End Sub
 End Class

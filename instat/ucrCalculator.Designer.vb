@@ -83,9 +83,15 @@ Partial Class ucrCalculator
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
+        Me.cmdIntegerHelp2 = New System.Windows.Forms.Button()
+        Me.cmdDigitSum = New System.Windows.Forms.Button()
+        Me.cmdRankPercent = New System.Windows.Forms.Button()
+        Me.cmdDivisors = New System.Windows.Forms.Button()
+        Me.cmdFibonacci = New System.Windows.Forms.Button()
+        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.cmdNextPrime = New System.Windows.Forms.Button()
         Me.cmdChoosez = New System.Windows.Forms.Button()
-        Me.cmdArithmeticHelp = New System.Windows.Forms.Button()
+        Me.cmdIntegerHelp1 = New System.Windows.Forms.Button()
         Me.cmdFactorial = New System.Windows.Forms.Button()
         Me.cmdPrime = New System.Windows.Forms.Button()
         Me.cmdBigz = New System.Windows.Forms.Button()
@@ -411,7 +417,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -944,19 +949,79 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
+        Me.grpInteger.Controls.Add(Me.cmdIntegerHelp2)
+        Me.grpInteger.Controls.Add(Me.cmdDigitSum)
+        Me.grpInteger.Controls.Add(Me.cmdRankPercent)
+        Me.grpInteger.Controls.Add(Me.cmdDivisors)
+        Me.grpInteger.Controls.Add(Me.cmdFibonacci)
         Me.grpInteger.Controls.Add(Me.cmdFactorize)
         Me.grpInteger.Controls.Add(Me.cmdNextPrime)
         Me.grpInteger.Controls.Add(Me.cmdChoosez)
-        Me.grpInteger.Controls.Add(Me.cmdArithmeticHelp)
+        Me.grpInteger.Controls.Add(Me.cmdIntegerHelp1)
         Me.grpInteger.Controls.Add(Me.cmdFactorial)
         Me.grpInteger.Controls.Add(Me.cmdPrime)
         Me.grpInteger.Controls.Add(Me.cmdBigz)
         Me.grpInteger.Location = New System.Drawing.Point(432, 61)
         Me.grpInteger.Name = "grpInteger"
-        Me.grpInteger.Size = New System.Drawing.Size(152, 127)
+        Me.grpInteger.Size = New System.Drawing.Size(152, 163)
         Me.grpInteger.TabIndex = 183
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
+        '
+        'cmdIntegerHelp2
+        '
+        Me.cmdIntegerHelp2.Location = New System.Drawing.Point(75, 127)
+        Me.cmdIntegerHelp2.Name = "cmdIntegerHelp2"
+        Me.cmdIntegerHelp2.Size = New System.Drawing.Size(75, 23)
+        Me.cmdIntegerHelp2.TabIndex = 11
+        Me.cmdIntegerHelp2.Text = "R Help"
+        Me.cmdIntegerHelp2.UseVisualStyleBackColor = True
+        '
+        'cmdDigitSum
+        '
+        Me.cmdDigitSum.Location = New System.Drawing.Point(75, 105)
+        Me.cmdDigitSum.Name = "cmdDigitSum"
+        Me.cmdDigitSum.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDigitSum.TabIndex = 10
+        Me.cmdDigitSum.Text = "digitsum"
+        Me.cmdDigitSum.UseVisualStyleBackColor = True
+        '
+        'cmdRankPercent
+        '
+        Me.cmdRankPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRankPercent.Location = New System.Drawing.Point(1, 105)
+        Me.cmdRankPercent.Name = "cmdRankPercent"
+        Me.cmdRankPercent.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRankPercent.TabIndex = 9
+        Me.cmdRankPercent.Text = "percentrank"
+        Me.cmdRankPercent.UseVisualStyleBackColor = True
+        '
+        'cmdDivisors
+        '
+        Me.cmdDivisors.Location = New System.Drawing.Point(75, 83)
+        Me.cmdDivisors.Name = "cmdDivisors"
+        Me.cmdDivisors.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDivisors.TabIndex = 8
+        Me.cmdDivisors.Text = "divisors"
+        Me.cmdDivisors.UseVisualStyleBackColor = True
+        '
+        'cmdFibonacci
+        '
+        Me.cmdFibonacci.Location = New System.Drawing.Point(1, 83)
+        Me.cmdFibonacci.Name = "cmdFibonacci"
+        Me.cmdFibonacci.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFibonacci.TabIndex = 7
+        Me.cmdFibonacci.Text = "fibonacci"
+        Me.cmdFibonacci.UseVisualStyleBackColor = True
+        '
+        'cmdFactorize
+        '
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 61)
+        Me.cmdFactorize.Name = "cmdFactorize"
+        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorize.TabIndex = 6
+        Me.cmdFactorize.Text = "factorize"
+        Me.cmdFactorize.UseVisualStyleBackColor = True
         '
         'cmdNextPrime
         '
@@ -976,14 +1041,14 @@ Partial Class ucrCalculator
         Me.cmdChoosez.Text = "choose"
         Me.cmdChoosez.UseVisualStyleBackColor = True
         '
-        'cmdArithmeticHelp
+        'cmdIntegerHelp1
         '
-        Me.cmdArithmeticHelp.Location = New System.Drawing.Point(93, 99)
-        Me.cmdArithmeticHelp.Name = "cmdArithmeticHelp"
-        Me.cmdArithmeticHelp.Size = New System.Drawing.Size(57, 23)
-        Me.cmdArithmeticHelp.TabIndex = 3
-        Me.cmdArithmeticHelp.Text = "R Help"
-        Me.cmdArithmeticHelp.UseVisualStyleBackColor = True
+        Me.cmdIntegerHelp1.Location = New System.Drawing.Point(1, 127)
+        Me.cmdIntegerHelp1.Name = "cmdIntegerHelp1"
+        Me.cmdIntegerHelp1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdIntegerHelp1.TabIndex = 3
+        Me.cmdIntegerHelp1.Text = "R Help(gmp)"
+        Me.cmdIntegerHelp1.UseVisualStyleBackColor = True
         '
         'cmdFactorial
         '
@@ -996,6 +1061,7 @@ Partial Class ucrCalculator
         '
         'cmdPrime
         '
+        Me.cmdPrime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPrime.Location = New System.Drawing.Point(75, 17)
         Me.cmdPrime.Name = "cmdPrime"
         Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
@@ -1005,6 +1071,7 @@ Partial Class ucrCalculator
         '
         'cmdBigz
         '
+        Me.cmdBigz.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdBigz.Location = New System.Drawing.Point(1, 17)
         Me.cmdBigz.Name = "cmdBigz"
         Me.cmdBigz.Size = New System.Drawing.Size(75, 23)
@@ -4886,15 +4953,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdFactorize
-        '
-        Me.cmdFactorize.Location = New System.Drawing.Point(75, 61)
-        Me.cmdFactorize.Name = "cmdFactorize"
-        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFactorize.TabIndex = 6
-        Me.cmdFactorize.Text = "factorize"
-        Me.cmdFactorize.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5315,11 +5373,16 @@ Partial Class ucrCalculator
     Friend WithEvents cmdStringRHelp As Button
     Friend WithEvents cmdProbRHelp As Button
     Friend WithEvents grpInteger As GroupBox
-    Friend WithEvents cmdArithmeticHelp As Button
+    Friend WithEvents cmdIntegerHelp1 As Button
     Friend WithEvents cmdFactorial As Button
     Friend WithEvents cmdPrime As Button
     Friend WithEvents cmdBigz As Button
     Friend WithEvents cmdNextPrime As Button
     Friend WithEvents cmdChoosez As Button
     Friend WithEvents cmdFactorize As Button
+    Friend WithEvents cmdFibonacci As Button
+    Friend WithEvents cmdDigitSum As Button
+    Friend WithEvents cmdRankPercent As Button
+    Friend WithEvents cmdDivisors As Button
+    Friend WithEvents cmdIntegerHelp2 As Button
 End Class
