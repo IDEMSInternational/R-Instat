@@ -210,9 +210,17 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdEscape, "Escape (with +*.? etc). For example, str_detect(c(""b$t"",""bat?"",""3*4""),""[\\?\\$\\*]"") gives TRUE TRUE TRUE")
         ttCalculator.SetToolTip(cmdPlusZero, "range of values. For example, str_count(c(""b$t"",""Bat?""),""[a-zA-Z]"") gives 2 3")
 
-
-
-
+        ttCalculator.SetToolTip(cmdBigZ, "encodes arbitrarily large integers")
+        ttCalculator.SetToolTip(cmdBigQ, "encodes rationals encoded as ratios or arbitrarily large integers")
+        ttCalculator.SetToolTip(cmdFactorial, "factorial n!, as big integer. For example, factorialZ(6)= 720")
+        ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
+        ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
+        ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, Factorize(20)= (2,5,2,1), Factorize(8)= 2:3 for (2,2,2)")
+        ttCalculator.SetToolTip(cmdPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
+        ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
+        ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
+        ttCalculator.SetToolTip(cmdRankPercent, "returns the percentile that the number correspods to. For example, PercentRank(c(1,2,5,11,15)) = 0.2,0.4,0.6,0.8,1.0")
+        ttCalculator.SetToolTip(cmdDigitSum, "calculates digit sum of x. For example, DigitSum(12344)= 14")
 
 
     End Sub
@@ -2934,7 +2942,7 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdBigz_Click(sender As Object, e As EventArgs) Handles cmdBigz.Click
+    Private Sub cmdBigZ_Click(sender As Object, e As EventArgs) Handles cmdBigZ.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz(a = , mod = NA )", 13)
         Else
@@ -3028,5 +3036,13 @@ Public Class ucrCalculator
             strPackageName = "DescTools"
         End If
         OpenHelpPage()
+    End Sub
+
+    Private Sub cmdBigQ_Click(sender As Object, e As EventArgs) Handles cmdBigQ.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(a = , mod = NA )", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 1)
+        End If
     End Sub
 End Class

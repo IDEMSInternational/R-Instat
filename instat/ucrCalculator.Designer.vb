@@ -94,7 +94,7 @@ Partial Class ucrCalculator
         Me.cmdIntegerHelp1 = New System.Windows.Forms.Button()
         Me.cmdFactorial = New System.Windows.Forms.Button()
         Me.cmdPrime = New System.Windows.Forms.Button()
-        Me.cmdBigz = New System.Windows.Forms.Button()
+        Me.cmdBigZ = New System.Windows.Forms.Button()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdTransformHelp = New System.Windows.Forms.Button()
         Me.cmdShuffle = New System.Windows.Forms.Button()
@@ -417,6 +417,7 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdBigQ = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -949,6 +950,7 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
+        Me.grpInteger.Controls.Add(Me.cmdBigQ)
         Me.grpInteger.Controls.Add(Me.cmdIntegerHelp2)
         Me.grpInteger.Controls.Add(Me.cmdDigitSum)
         Me.grpInteger.Controls.Add(Me.cmdRankPercent)
@@ -960,17 +962,17 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdIntegerHelp1)
         Me.grpInteger.Controls.Add(Me.cmdFactorial)
         Me.grpInteger.Controls.Add(Me.cmdPrime)
-        Me.grpInteger.Controls.Add(Me.cmdBigz)
+        Me.grpInteger.Controls.Add(Me.cmdBigZ)
         Me.grpInteger.Location = New System.Drawing.Point(432, 61)
         Me.grpInteger.Name = "grpInteger"
-        Me.grpInteger.Size = New System.Drawing.Size(152, 163)
+        Me.grpInteger.Size = New System.Drawing.Size(152, 185)
         Me.grpInteger.TabIndex = 183
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
         '
         'cmdIntegerHelp2
         '
-        Me.cmdIntegerHelp2.Location = New System.Drawing.Point(75, 127)
+        Me.cmdIntegerHelp2.Location = New System.Drawing.Point(75, 149)
         Me.cmdIntegerHelp2.Name = "cmdIntegerHelp2"
         Me.cmdIntegerHelp2.Size = New System.Drawing.Size(75, 23)
         Me.cmdIntegerHelp2.TabIndex = 11
@@ -989,7 +991,7 @@ Partial Class ucrCalculator
         'cmdRankPercent
         '
         Me.cmdRankPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRankPercent.Location = New System.Drawing.Point(1, 105)
+        Me.cmdRankPercent.Location = New System.Drawing.Point(1, 127)
         Me.cmdRankPercent.Name = "cmdRankPercent"
         Me.cmdRankPercent.Size = New System.Drawing.Size(75, 23)
         Me.cmdRankPercent.TabIndex = 9
@@ -998,7 +1000,7 @@ Partial Class ucrCalculator
         '
         'cmdDivisors
         '
-        Me.cmdDivisors.Location = New System.Drawing.Point(75, 83)
+        Me.cmdDivisors.Location = New System.Drawing.Point(1, 105)
         Me.cmdDivisors.Name = "cmdDivisors"
         Me.cmdDivisors.Size = New System.Drawing.Size(75, 23)
         Me.cmdDivisors.TabIndex = 8
@@ -1016,7 +1018,7 @@ Partial Class ucrCalculator
         '
         'cmdFactorize
         '
-        Me.cmdFactorize.Location = New System.Drawing.Point(75, 61)
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 83)
         Me.cmdFactorize.Name = "cmdFactorize"
         Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
         Me.cmdFactorize.TabIndex = 6
@@ -1034,7 +1036,7 @@ Partial Class ucrCalculator
         '
         'cmdChoosez
         '
-        Me.cmdChoosez.Location = New System.Drawing.Point(75, 39)
+        Me.cmdChoosez.Location = New System.Drawing.Point(75, 61)
         Me.cmdChoosez.Name = "cmdChoosez"
         Me.cmdChoosez.Size = New System.Drawing.Size(75, 23)
         Me.cmdChoosez.TabIndex = 4
@@ -1043,7 +1045,7 @@ Partial Class ucrCalculator
         '
         'cmdIntegerHelp1
         '
-        Me.cmdIntegerHelp1.Location = New System.Drawing.Point(1, 127)
+        Me.cmdIntegerHelp1.Location = New System.Drawing.Point(1, 149)
         Me.cmdIntegerHelp1.Name = "cmdIntegerHelp1"
         Me.cmdIntegerHelp1.Size = New System.Drawing.Size(75, 23)
         Me.cmdIntegerHelp1.TabIndex = 3
@@ -1062,22 +1064,22 @@ Partial Class ucrCalculator
         'cmdPrime
         '
         Me.cmdPrime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPrime.Location = New System.Drawing.Point(75, 17)
+        Me.cmdPrime.Location = New System.Drawing.Point(75, 39)
         Me.cmdPrime.Name = "cmdPrime"
         Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
         Me.cmdPrime.TabIndex = 1
         Me.cmdPrime.Text = "prime"
         Me.cmdPrime.UseVisualStyleBackColor = True
         '
-        'cmdBigz
+        'cmdBigZ
         '
-        Me.cmdBigz.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdBigz.Location = New System.Drawing.Point(1, 17)
-        Me.cmdBigz.Name = "cmdBigz"
-        Me.cmdBigz.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBigz.TabIndex = 0
-        Me.cmdBigz.Text = "bigz"
-        Me.cmdBigz.UseVisualStyleBackColor = True
+        Me.cmdBigZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdBigZ.Location = New System.Drawing.Point(1, 17)
+        Me.cmdBigZ.Name = "cmdBigZ"
+        Me.cmdBigZ.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigZ.TabIndex = 0
+        Me.cmdBigZ.Text = "bigz"
+        Me.cmdBigZ.UseVisualStyleBackColor = True
         '
         'grpFactor
         '
@@ -4953,6 +4955,16 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdBigQ
+        '
+        Me.cmdBigQ.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdBigQ.Location = New System.Drawing.Point(75, 17)
+        Me.cmdBigQ.Name = "cmdBigQ"
+        Me.cmdBigQ.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigQ.TabIndex = 12
+        Me.cmdBigQ.Text = "bigq"
+        Me.cmdBigQ.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5376,7 +5388,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdIntegerHelp1 As Button
     Friend WithEvents cmdFactorial As Button
     Friend WithEvents cmdPrime As Button
-    Friend WithEvents cmdBigz As Button
+    Friend WithEvents cmdBigZ As Button
     Friend WithEvents cmdNextPrime As Button
     Friend WithEvents cmdChoosez As Button
     Friend WithEvents cmdFactorize As Button
@@ -5385,4 +5397,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdRankPercent As Button
     Friend WithEvents cmdDivisors As Button
     Friend WithEvents cmdIntegerHelp2 As Button
+    Friend WithEvents cmdBigQ As Button
 End Class
