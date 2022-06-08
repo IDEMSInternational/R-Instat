@@ -83,7 +83,29 @@ Public MustInherit Class ucrLinuxGrid
     End Function
 
     Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
-
+        Dim iNewPosition As Integer
+        Dim bFound As Boolean = False
+        Dim iCount As Integer
+        Dim strName As String = ""
+        iCount = 0
+        For Each clsDataframe In _clsDataBook.DataFrames
+            For i As Integer = 0 To tcTabs.TabPages.Count - 1
+                If tcTabs.TabPages(i).Text = clsDataframe.strName Then
+                    strName = clsDataframe.strName
+                    iNewPosition = iCount
+                    bFound = True
+                    Exit For
+                End If
+            Next
+            If bFound Then
+                Dim tab As New TabPage(strName)
+                'tcTabs.TabPages.Remove(tab)
+                tcTabs.TabPages.Add(tab)
+                tcTabs.TabPages.Insert(iNewPosition, tab)
+                iCount += 1
+                bFound = False
+            End If
+        Next
     End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange

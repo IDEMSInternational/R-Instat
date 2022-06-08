@@ -92,6 +92,7 @@ Public MustInherit Class ucrReoGrid
                     grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
                     grdData.CurrentWorksheet = fillWorkSheet
                     iCount += 1
+                    bFound = False
                 End If
             End If
         Next
