@@ -137,7 +137,7 @@ Public Class dlgName
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
-
+        bCurrentCell = False
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
@@ -221,18 +221,25 @@ Public Class dlgName
     End Function
 
     Private Sub ValidateNamesFromDictionary(iColIndex As Integer)
-        'TODO this need to be implemented in the appropriare ucrControl
-        If iColIndex = 1 Then
-            For Each value In dctRowsNewNameChanged.Values
-                If Not CheckNames(value, iColIndex) Then
-                    MsgBox("The column name must not be a numeric or contains space or french accent or be a boolean e.g TRUE, FALSE, T, F.")
-                    bCurrentCell = False
-                    Exit For
-                Else
+        'TODO this needs to be implemented in the appropriate ucrControl
+        Select Case iColIndex
+            Case 1
+                For Each strValue In dctRowsNewNameChanged.Values
+                    Dim parsedValue As Boolean
+                    If String.IsNullOrEmpty(strValue) _
+                            OrElse containsFrench(strValue) _
+                            OrElse Boolean.TryParse(strValue, parsedValue) _
+                            OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
+                            OrElse IsNumeric(strValue) Then
+                        MsgBox("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        bCurrentCell = False
+                        Exit For
+                    End If
                     bCurrentCell = True
-                End If
-            Next
-        End If
+                Next
+            Case 2
+                bCurrentCell = True
+        End Select
         TestOKEnabled()
     End Sub
 
@@ -292,18 +299,6 @@ Public Class dlgName
             End If
         Next
         Return bFind
-    End Function
-
-    Private Function CheckNames(strNewData As String, iColIndex As Integer) As Boolean
-        Dim bCheck As Boolean
-        Dim parsedValue As Boolean
-        If (containsFrench(strNewData) OrElse strNewData.Equals("") OrElse Boolean.TryParse(strNewData, parsedValue) _
-             OrElse strNewData.Equals("t") OrElse strNewData.Equals("T") OrElse strNewData.Equals("f") OrElse strNewData.Equals("F") OrElse IsNumeric(strNewData)) AndAlso iColIndex = 1 Then
-            bCheck = False
-        Else
-            bCheck = True
-        End If
-        Return bCheck
     End Function
 
     Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)

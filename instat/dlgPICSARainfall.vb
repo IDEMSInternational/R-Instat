@@ -152,6 +152,12 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrReceiverY.SetParameter(New RParameter("y", 2))
+        ucrReceiverY.Selector = ucrSelectorPICSARainfall
+        ucrReceiverY.bWithQuotes = False
+        ucrReceiverY.SetParameterIsString()
+        ucrReceiverY.SetIncludedDataTypes({"numeric"})
+
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
         ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
         ucrReceiverColourBy.SetIncludedDataTypes({"factor"})
@@ -181,6 +187,8 @@ Public Class dlgPICSARainfall
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
+
+        ucrReceiverY.SetLinkedDisplayControl(ucrVariablesAsFactorForPicsa)
 
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
@@ -301,7 +309,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.Reset()
         ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
-        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
+        ucrReceiverY.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -615,8 +623,11 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrReceiverY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
+
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
+        ucrReceiverY.SetRCode(clsRaesFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -629,7 +640,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
+        If (ucrReceiverY.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -760,45 +771,6 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
-                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-        'AddRemoveGroupByAndHlines()
-    End Sub
-
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLine, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetLineLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
-
-        'The aesthetics parameters on the main dialog are repopulated as required.
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForPicsa.Clear()
-                Else ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrReceiverColourBy.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        TestOkEnabled()
-    End Sub
-
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -825,6 +797,15 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
+    Private Sub YAxisDataTypeCheck()
+        If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
+            clsGeomLine.AddParameter("group", 0)
+            clsBaseOperator.RemoveParameterByName("scale_y_continuous")
+        Else
+            clsGeomLine.RemoveParameterByName("group")
+        End If
+    End Sub
+
     Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
@@ -845,6 +826,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
         AddRemoveGroupBy()
+        YAxisDataTypeCheck()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -901,5 +883,73 @@ Public Class dlgPICSARainfall
         Else
             clsPipeOperator.RemoveAssignTo()
         End If
+    End Sub
+
+    Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click
+        openSdgLayerOptions(clsGeomLine)
+    End Sub
+
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall,
+                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                    ucrVariablesAsFactorForPicsa.Clear()
+                Else
+                    ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrReceiverColourBy.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+        'AddRemoveGroupByAndHlines()
+    End Sub
+
+    Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotOptionsToolStripMenuItem.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+        'AddRemoveGroupByAndHlines()
+    End Sub
+
+    Private Sub toolStripMenuItemPointOption_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOption.Click
+        openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class

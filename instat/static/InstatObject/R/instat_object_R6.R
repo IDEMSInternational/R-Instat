@@ -1404,8 +1404,8 @@ DataBook$set("public","make_date_yearmonthday", function(data_name, year, month,
 }
 )
 
-DataBook$set("public","make_date_yeardoy", function(data_name, year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  self$get_data_objects(data_name)$make_date_yeardoy(year = year, doy = doy, year_format = year_format, doy_format = doy_format, doy_typical_length = doy_typical_length)
+DataBook$set("public","make_date_yeardoy", function(data_name, year, doy, base, doy_typical_length = "366") {
+  self$get_data_objects(data_name)$make_date_yeardoy(year = year, doy = doy, base = base, doy_typical_length = doy_typical_length)
 }
 )
 
