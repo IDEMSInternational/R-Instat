@@ -62,6 +62,9 @@ Public Class ucrSelector
         If bFirstLoad Then
             bFirstLoad = False
         End If
+        'always load selector contents on load event because contents may have been changed at R level 
+        'and the control needs to refresh the data frame names.
+        LoadList()
     End Sub
 
     Protected Sub OnResetAll()
