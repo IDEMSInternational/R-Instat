@@ -98,15 +98,27 @@ Public MustInherit Class ucrLinuxGrid
                 End If
             Next
             If bFound Then
-                Dim tab As New TabPage(strName)
-                'tcTabs.TabPages.Remove(tab)
-                tcTabs.TabPages.Add(tab)
-                tcTabs.TabPages.Insert(iNewPosition, tab)
-                iCount += 1
-                bFound = False
+                Dim newtab = GetTabPage(strName)
+                If newtab IsNot Nothing AndAlso tcTabs.TabPages.Count > 1 Then
+                    tcTabs.TabPages.Remove(newtab)
+                    tcTabs.TabPages.Insert(iNewPosition, newtab)
+                    iCount += 1
+                    bFound = False
+                End If
             End If
         Next
     End Sub
+
+    Private Function GetTabPage(strName As String) As TabPage
+        Dim tab As TabPage = Nothing
+        For i As Integer = 0 To tcTabs.TabPages.Count - 1
+            If tcTabs.TabPages(i).Text = strName Then
+                tab = tcTabs.TabPages(i)
+                Exit For
+            End If
+        Next
+        Return tab
+    End Function
 
     Public Sub CopyRange() Implements IGrid.CopyRange
         Dim dataGrid = GetDataGridFromSelectedTab()

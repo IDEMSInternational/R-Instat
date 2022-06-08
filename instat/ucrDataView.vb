@@ -72,7 +72,7 @@ Public Class ucrDataView
             _grid = ucrReoGrid
         End If
         'Debug 
-        '_grid = ucrLinuxGrid
+        _grid = ucrLinuxGrid
 
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
         AttachEventsToGrid()
