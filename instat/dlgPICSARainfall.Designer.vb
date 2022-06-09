@@ -54,7 +54,9 @@ Partial Class dlgPICSARainfall
         Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
         Me.ucrInputStation = New instat.ucrInputComboBox()
 
+
         Me.cmdOptions = New instat.ucrSplitButton()
+
 
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,7 +65,11 @@ Partial Class dlgPICSARainfall
 
         Me.cmdOptions = New instat.ucrSplitButton()
 
+
+        Me.cmdOptions = New instat.ucrSplitButton()
+
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
+
 
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +106,9 @@ Partial Class dlgPICSARainfall
 
         Me.lblAvailable.TabIndex = 15
 
+
         Me.lblAvailable.TabIndex = 2
+
 
         '
         'cmdPICSAOptions
@@ -319,6 +327,43 @@ Partial Class dlgPICSARainfall
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(151, 70)
+        '
+        'PlotOptionsToolStripMenuItem
+        '
+        Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
+        '
+        'toolStripMenuItemLineOptions
+        '
+        Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(150, 22)
+        Me.toolStripMenuItemLineOptions.Text = "Line Options"
+        '
+        'toolStripMenuItemPointOption
+        '
+        Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
+        Me.toolStripMenuItemPointOption.Text = "Point Options "
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 235)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 35
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -326,8 +371,10 @@ Partial Class dlgPICSARainfall
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(463, 420)
 
+
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
+
 
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
@@ -372,13 +419,19 @@ Partial Class dlgPICSARainfall
 
     Friend WithEvents cmdOptions As ucrSplitButton
 
+
+    Friend WithEvents cmdOptions As ucrSplitButton
+
+
     Friend WithEvents contextMenuStripOptions As ContextMenuStrip
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
 
+
     Friend WithEvents cmdOptions As ucrSplitButton
 
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
+
 
 End Class
