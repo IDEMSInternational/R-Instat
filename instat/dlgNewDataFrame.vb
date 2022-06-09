@@ -368,7 +368,7 @@ Public Class dlgNewDataFrame
                     clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
                 End If
 
-                Dim strColumnName As String = ValidateRVariable(row.Cells("colNames").Value)
+                Dim strColumnName As String = frmMain.clsRLink.MakeValidText(row.Cells("colNames").Value)
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
 
@@ -412,13 +412,6 @@ Public Class dlgNewDataFrame
         strTemp &= ")"
 
         Return strTemp
-    End Function
-
-    Private Function ValidateRVariable(strNewDataText As String) As String
-        Dim clsMakeNameFunction As New RFunction
-        clsMakeNameFunction.SetRCommand("make.names")
-        clsMakeNameFunction.AddParameter("names", Chr(34) & strNewDataText & Chr(34), iPosition:=0)
-        Return frmMain.clsRLink.RunInternalScriptGetValue(clsMakeNameFunction.ToScript()).AsCharacter(0)
     End Function
 
     Private Function GetLabelAsRString(lstLabels As List(Of String)) As String
