@@ -129,11 +129,13 @@ pkgs <-
     # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
     "fastDummies",
     # For most frequent values in Prepare > Column:Numeric > Row Summaries
-    "statip"
+    "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
+    "corrr",
+    "dslabs"
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
-pth <- "C:/Users/Danny/Documents/RPackages"
+pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")
 
 #add extra packages to location
