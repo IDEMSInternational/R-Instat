@@ -83,30 +83,25 @@ Public MustInherit Class ucrLinuxGrid
     End Function
 
     Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
-        Dim iNewPosition As Integer
-        Dim bFound As Boolean = False
-        Dim iCount As Integer
-        Dim strName As String = ""
-        iCount = 0
+        'assuming the databook will always have all the data frames 
+        'and the grid may not have all the data frame worksheets equivalent
+        'and all data frames in the data book have changed their order positions 
+        'get data frames sheets in the grid based on the databook data frames position order
+        'and add it to the list.
+        Dim lstWorkSheetsFound As New List(Of TabPage)
         For Each clsDataframe In _clsDataBook.DataFrames
-            For i As Integer = 0 To tcTabs.TabPages.Count - 1
-                If tcTabs.TabPages(i).Text = clsDataframe.strName Then
-                    strName = clsDataframe.strName
-                    iNewPosition = iCount
-                    bFound = True
-                    Exit For
-                End If
-            Next
-            If bFound Then
-                Dim newtab = GetTabPage(strName)
-                If newtab IsNot Nothing AndAlso tcTabs.TabPages.Count > 1 Then
-                    tcTabs.TabPages.Remove(newtab)
-                    tcTabs.TabPages.Insert(iNewPosition, newtab)
-                    iCount += 1
-                    bFound = False
-                End If
+            Dim fillWorkSheet As TabPage = GetTabPage(clsDataframe.strName)
+            If fillWorkSheet IsNot Nothing Then
+                lstWorkSheetsFound.Add(fillWorkSheet)
             End If
         Next
+        If lstWorkSheetsFound.Count > 1 Then
+            'reorder the worksheets based on the filled list
+            For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+                tcTabs.TabPages.Remove(lstWorkSheetsFound(i))
+                tcTabs.TabPages.Insert(i, lstWorkSheetsFound(i))
+            Next
+        End If
     End Sub
 
     Private Function GetTabPage(strName As String) As TabPage

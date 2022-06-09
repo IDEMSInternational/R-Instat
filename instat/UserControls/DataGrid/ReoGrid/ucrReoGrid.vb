@@ -84,11 +84,13 @@ Public MustInherit Class ucrReoGrid
                 lstWorkSheetsFound.Add(fillWorkSheet)
             End If
         Next
-        'then reorder the worksheets based on the filled list
-        For i As Integer = 0 To lstWorkSheetsFound.Count - 1
-            grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
-            grdData.CurrentWorksheet = lstWorkSheetsFound(i)
-        Next
+        If lstWorkSheetsFound.Count > 1 Then
+            'reorder the worksheets based on the filled list
+            For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+                grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
+                grdData.CurrentWorksheet = lstWorkSheetsFound(i)
+            Next
+        End If
     End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange
