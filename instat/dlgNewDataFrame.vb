@@ -416,17 +416,11 @@ Public Class dlgNewDataFrame
     End Function
 
     Private Function ValidateRVariable(strNewDataText As String) As String
-        For Each chrCurr In strNewDataText
-            If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
-                strNewDataText = strNewDataText.Replace(chrCurr, ".")
-            End If
-        Next
-        Dim chrfirst = strNewDataText.ToCharArray()
-        Dim match As Match = Regex.Match(chrfirst(0), "^[a-zA-Z ]*$")
-        If Not match.Success AndAlso chrfirst <> "." Then
-            strNewDataText = "X" & strNewDataText
-        End If
-        Return strNewDataText
+        Dim clsMakeNameFunction As New RFunction
+        clsMakeNameFunction.SetRCommand("make.names")
+        clsMakeNameFunction.AddParameter("names", Chr(34) & strNewDataText & Chr(34), iPosition:=0)
+        clsMakeNameFunction.AddParameter("unique", "FALSE", iPosition:=1)
+        Return frmMain.clsRLink.RunInternalScriptGetValue(clsMakeNameFunction.ToScript()).AsCharacter(0)
     End Function
 
     Private Function GetLabelAsRString(lstLabels As List(Of String)) As String
