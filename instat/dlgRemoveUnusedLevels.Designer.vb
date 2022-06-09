@@ -44,6 +44,7 @@ Partial Class dlgRemoveUnusedLevels
         Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
+        Me.lblLevelsPreview = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -60,7 +61,7 @@ Partial Class dlgRemoveUnusedLevels
         '
         Me.ucrRemoveUnusedFactorLevels.AutoSize = True
         Me.ucrRemoveUnusedFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(239, 57)
+        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(239, 72)
         Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
         Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(255, 175)
         Me.ucrRemoveUnusedFactorLevels.TabIndex = 3
@@ -94,9 +95,9 @@ Partial Class dlgRemoveUnusedLevels
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 293)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrInputUnusedLevels
@@ -105,17 +106,27 @@ Partial Class dlgRemoveUnusedLevels
         Me.ucrInputUnusedLevels.AutoSize = True
         Me.ucrInputUnusedLevels.IsMultiline = False
         Me.ucrInputUnusedLevels.IsReadOnly = True
-        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(114, 258)
+        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(114, 268)
         Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
         Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(380, 21)
         Me.ucrInputUnusedLevels.TabIndex = 5
+        '
+        'lblLevelsPreview
+        '
+        Me.lblLevelsPreview.AutoSize = True
+        Me.lblLevelsPreview.Location = New System.Drawing.Point(242, 56)
+        Me.lblLevelsPreview.Name = "lblLevelsPreview"
+        Me.lblLevelsPreview.Size = New System.Drawing.Size(81, 13)
+        Me.lblLevelsPreview.TabIndex = 6
+        Me.lblLevelsPreview.Text = "Levels preview:"
         '
         'dlgRemoveUnusedLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(504, 348)
+        Me.ClientSize = New System.Drawing.Size(504, 352)
+        Me.Controls.Add(Me.lblLevelsPreview)
         Me.Controls.Add(Me.ucrInputUnusedLevels)
         Me.Controls.Add(Me.ucrRemoveUnusedFactorLevels)
         Me.Controls.Add(Me.lblFactor)
@@ -140,4 +151,5 @@ Partial Class dlgRemoveUnusedLevels
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrRemoveUnusedFactorLevels As ucrFactor
     Friend WithEvents ucrInputUnusedLevels As ucrInputTextBox
+    Friend WithEvents lblLevelsPreview As Label
 End Class
