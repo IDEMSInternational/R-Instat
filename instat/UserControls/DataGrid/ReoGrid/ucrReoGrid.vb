@@ -72,29 +72,22 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
-        Dim iNewPosition As Integer
-        Dim strName As String = Nothing
-        Dim bFound As Boolean = False
-        Dim iCount As Integer
-        iCount = 0
+        'assuming the databook will always have all the data frames 
+        'and the grid may not have all the data frame worksheets equivalent
+        'and all data frames in the data book have changed their order positions 
+        'get data frames sheets in the grid based on the databook data frames position order
+        'and add it to the list.
+        Dim lstWorkSheetsFound As New List(Of Worksheet)
         For Each clsDataframe In _clsDataBook.DataFrames
-            For Each tempWorkSheet In grdData.Worksheets
-                If tempWorkSheet.Name = clsDataframe.strName Then
-                    strName = clsDataframe.strName
-                    iNewPosition = iCount
-                    bFound = True
-                    Exit For
-                End If
-            Next
-            If bFound Then
-                Dim fillWorkSheet = grdData.GetWorksheetByName(strName)
-                If fillWorkSheet IsNot Nothing AndAlso iNewPosition < grdData.Worksheets.Count Then
-                    grdData.MoveWorksheet(fillWorkSheet, iNewPosition)
-                    grdData.CurrentWorksheet = fillWorkSheet
-                    iCount += 1
-                    bFound = False
-                End If
+            Dim fillWorkSheet As Worksheet = grdData.GetWorksheetByName(clsDataframe.strName)
+            If fillWorkSheet IsNot Nothing Then
+                lstWorkSheetsFound.Add(fillWorkSheet)
             End If
+        Next
+        'then reorder the worksheets based on the filled list
+        For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+            grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
+            grdData.CurrentWorksheet = lstWorkSheetsFound(i)
         Next
     End Sub
 
