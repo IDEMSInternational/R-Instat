@@ -2543,3 +2543,33 @@ is.levelscount <- function(x, n){
 is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
+
+read_corpora <- function(data){
+  data_unlist <- NULL
+  description <- NULL
+  for (i in 1:length(df)){
+    if (names(df[i]) == "description") {
+      description <- df[i][[1]]
+    } else {
+      if (class(df[[i]]) == "character"){
+        data_unlist[[i]] <- data.frame(list = df[[i]])
+      } else if (class(df[[i]]) == "list"){
+        data_unlist_i <- purrr::map(.x = names(df[[i]]), .f = ~data.frame(list = df[[i]][[.x]]))
+        names(data_unlist_i) <- names(df[[i]])
+        data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
+      } else if ("matrix" %in% class(df[[i]])){
+        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(df[[i]]), sep="-")))
+      } else if (class(df[[i]]) == "data.frame"){
+        data_unlist[[i]] <- data.frame(list = df[[i]])
+      }
+    }
+  }
+  names(data_unlist) <- names(df)
+  data_unlist <- plyr::ldply(data_unlist, .id = "variable")
+  if (!is.null(description)){
+    data_full <- data.frame(description = description, data_unlist)
+  } else {
+    data_full <- data.frame(data_unlist)
+  }
+  return(data_full)
+}
