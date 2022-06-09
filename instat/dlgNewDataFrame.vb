@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports System.Text.RegularExpressions
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
@@ -420,6 +421,11 @@ Public Class dlgNewDataFrame
                 strNewDataText = strNewDataText.Replace(chrCurr, ".")
             End If
         Next
+        Dim chrfirst = strNewDataText.ToCharArray()
+        Dim match As Match = Regex.Match(chrfirst(0), "^[a-zA-Z ]*$")
+        If Not match.Success Then
+            strNewDataText = "X" & strNewDataText
+        End If
         Return strNewDataText
     End Function
 
