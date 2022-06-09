@@ -46,7 +46,6 @@ Public Class dlgViewFactorLabels
         ucrReceiverVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverVariables.SetParameterIsString()
         ucrReceiverVariables.SetParameterIncludeArgumentName(False)
-        ucrReceiverVariables.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverVariables.Selector = ucrSelectorViewLabelsAndLevels
         ucrReceiverVariables.SetMeAsReceiver()
 
