@@ -418,7 +418,6 @@ Public Class dlgNewDataFrame
         Dim clsMakeNameFunction As New RFunction
         clsMakeNameFunction.SetRCommand("make.names")
         clsMakeNameFunction.AddParameter("names", Chr(34) & strNewDataText & Chr(34), iPosition:=0)
-        clsMakeNameFunction.AddParameter("unique", "TRUE", iPosition:=1)
         Return frmMain.clsRLink.RunInternalScriptGetValue(clsMakeNameFunction.ToScript()).AsCharacter(0)
     End Function
 
