@@ -746,9 +746,8 @@ Public Class ucrFactor
         For iRowIndex As Integer = 0 To _grdSheet.Rows - 1
             If _grdSheet(iRowIndex, iCheckedColIndex) <> bChecked Then
                 bChangeDetected = True
-            Else
-                _grdSheet(iRowIndex, iCheckedColIndex) = bChecked
             End If
+            _grdSheet(iRowIndex, iCheckedColIndex) = bChecked
         Next
         'only raise control value changed if a change was detected
         If bChangeDetected AndAlso bRaisedControlValueChangedEvent Then
