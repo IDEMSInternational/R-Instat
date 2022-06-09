@@ -16,7 +16,6 @@
 
 Imports instat.Translations
 Imports RDotNet
-Imports System.Text.RegularExpressions
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
