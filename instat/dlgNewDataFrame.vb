@@ -423,7 +423,7 @@ Public Class dlgNewDataFrame
         Next
         Dim chrfirst = strNewDataText.ToCharArray()
         Dim match As Match = Regex.Match(chrfirst(0), "^[a-zA-Z ]*$")
-        If Not match.Success Then
+        If Not match.Success AndAlso chrfirst <> "." Then
             strNewDataText = "X" & strNewDataText
         End If
         Return strNewDataText
