@@ -14,9 +14,18 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
+
 Public Class ucrSelectorByDataFrameAddRemove
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
         Add()
+    End Sub
+
+    Private Sub toolStripAddAll_Click(sender As Object, e As EventArgs) Handles toolStripAddAll.Click
+        AddAll()
+    End Sub
+    Private Sub toolStripHelp_Click(sender As Object, e As EventArgs) Handles toolStripHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "334")
     End Sub
 
     Private Sub btnDataOptions_Click(sender As Object, e As EventArgs) Handles btnDataOptions.Click
@@ -62,5 +71,17 @@ Public Class ucrSelectorByDataFrameAddRemove
         btnDataOptions.Visible = bDataOptionsVisible
         btnAdd.Visible = bAddVisible
         lstAvailableVariable.Visible = bListVariables
+    End Sub
+
+    Private Sub contextMenuStripAdd_Opening(sender As Object, e As CancelEventArgs) Handles contextMenuStripAdd.Opening
+        'todo. this code block should be set under CurrentReceiver change event
+        'once the event is added it can be removed from here.
+        toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
+        toolStripAddAll.Enabled = False
+        If CurrentReceiver Is Nothing Then
+            toolStripAddSelected.Enabled = False
+        ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
+            toolStripAddAll.Enabled = True
+        End If
     End Sub
 End Class
