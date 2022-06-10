@@ -24,6 +24,7 @@ Public Class ucrSelectorByDataFrameAddRemove
     Private Sub toolStripAddAll_Click(sender As Object, e As EventArgs) Handles toolStripAddAll.Click
         AddAll()
     End Sub
+
     Private Sub toolStripHelp_Click(sender As Object, e As EventArgs) Handles toolStripHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "334")
     End Sub
