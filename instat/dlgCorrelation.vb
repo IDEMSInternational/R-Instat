@@ -30,10 +30,17 @@ Public Class dlgCorrelation
     Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
+    Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.MultipleOption
+    Private bDefaultOptionChanged As Boolean = False
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
+    Public mnuCurrent As ToolStripMenuItem
 
+    Private Enum DefaultSequenceOption
+        MultipleOption
+        TwoVariableOption
+    End Enum
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -41,6 +48,10 @@ Public Class dlgCorrelation
         End If
         If bReset Then
             SetDefaults()
+        End If
+        If bDefaultOptionChanged Then
+            SetSelectedDefaultSequenceOption()
+            bDefaultOptionChanged = False
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -50,6 +61,30 @@ Public Class dlgCorrelation
         DialogSize()
     End Sub
 
+    Private Sub SetSelectedDefaultSequenceOption()
+        Select Case enumDefaultSequenceOption
+            Case DefaultSequenceOption.MultipleOption
+                rdoMultipleColumns.Checked = True
+            Case DefaultSequenceOption.TwoVariableOption
+                rdoTwoColumns.Checked = True
+        End Select
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'multipleoption' option as the default option
+    ''' </summary>
+    Public Sub SetMultipleSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.MultipleOption
+        bDefaultOptionChanged = True
+    End Sub
+
+    ''' <summary>
+    ''' sets the dialog to be shown with 'Two variable' option as the default option
+    ''' </summary>
+    Public Sub SetTwoVariableSequenceAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.TwoVariableOption
+        bDefaultOptionChanged = True
+    End Sub
     Private Sub InitialiseDialog()
         Dim dctNaPrint As New Dictionary(Of String, String)
         Dim dctDiagonal As New Dictionary(Of String, String)
@@ -107,8 +142,8 @@ Public Class dlgCorrelation
 
         ucrPnlColumns.AddRadioButton(rdoTwoColumns)
         ucrPnlColumns.AddRadioButton(rdoMultipleColumns)
-        ucrPnlColumns.AddFunctionNamesCondition(rdoTwoColumns, "cor.test")
-        ucrPnlColumns.AddFunctionNamesCondition(rdoMultipleColumns, {"fashion", "shave", "rearrange", "correlate"})
+        ucrPnlColumns.AddParameterValuesCondition(rdoTwoColumns, "columns_checked", "rdoColumn")
+        ucrPnlColumns.AddParameterValuesCondition(rdoMultipleColumns, "columns_checked", "rdoMultiple")
 
         ucrPnlMethod.SetParameter(New RParameter("method", 4))
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
@@ -225,6 +260,12 @@ Public Class dlgCorrelation
         ucrSaveFashionDataFrame.Reset()
         ucrReceiverFirstColumn.SetMeAsReceiver()
         ucrReceiverMultipleColumns.SetMeAsReceiver()
+
+        If mnuCurrent Is frmMain.mnuDescribeTwoThreeVariablesCorrelations Then
+            clsDummyShave.AddParameter("columns_checked", "rdoColumn", iPosition:=0)
+        Else
+            clsDummyShave.AddParameter("columns_checked", "rdoMultiple", iPosition:=0)
+        End If
 
         clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
         clsDummyFunction.AddParameter("display_as_dataframe", "False", iPosition:=1)
@@ -346,9 +387,7 @@ Public Class dlgCorrelation
         ucrChkShave.SetRCode(clsDummyShave, bReset)
         ucrChkDisplayOptions.SetRCode(clsDummyShave, bReset)
         ucrChkDisplayAsDataFrame.SetRCode(clsDummyFunction, bReset)
-        If bReset Then
-            ucrPnlColumns.SetRCode(clsFashionFunction, bReset)
-        End If
+        ucrPnlColumns.SetRCode(clsDummyShave, bReset)
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveFashionDataFrame.SetRCode(clsPipeOperator, bReset)
@@ -408,6 +447,7 @@ Public Class dlgCorrelation
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+        SetSelectedDefaultSequenceOption()
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -430,9 +470,11 @@ Public Class dlgCorrelation
 
     Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
         If rdoTwoColumns.Checked Then
+            clsDummyShave.AddParameter("columns_checked", "rdoColumn", iPosition:=0)
             ucrReceiverFirstColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoMultipleColumns.Checked Then
+            clsDummyShave.AddParameter("columns_checked", "rdoMultiple", iPosition:=0)
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
         ReceiverColumns()
@@ -557,7 +599,7 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrChkDisplayAsDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsDataFrame.ControlValueChanged ' ucrSaveFashionDataFrame.ControlValueChanged
+    Private Sub ucrChkDisplayAsDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsDataFrame.ControlValueChanged
         ChangeBaseAsModelOrDataframe()
         ChangeBaseFunction()
         DialogSize()
