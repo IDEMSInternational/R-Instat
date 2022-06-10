@@ -76,12 +76,12 @@ Public Class ucrSelectorByDataFrameAddRemove
     Private Sub contextMenuStripAdd_Opening(sender As Object, e As CancelEventArgs) Handles contextMenuStripAdd.Opening
         'todo. this code block should be set under CurrentReceiver change event
         'once the event is added it can be removed from here.
-        toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
-        toolStripAddAll.Enabled = False
         If CurrentReceiver Is Nothing Then
             toolStripAddSelected.Enabled = False
-        ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
-            toolStripAddAll.Enabled = True
+            toolStripAddAll.Enabled = False
+        Else
+            toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
+            toolStripAddAll.Enabled = TypeOf CurrentReceiver Is ucrReceiverMultiple
         End If
     End Sub
 End Class
