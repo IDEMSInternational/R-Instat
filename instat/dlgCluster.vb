@@ -184,53 +184,21 @@ Public Class dlgCluster
     Private Sub TestOkEnabled()
         If rdoScaleData.Checked Then
             If rdoSelectedColumn.Checked Then
-                If Not ucrReceiverPrepareData.IsEmpty Then
-                    If Not ucrSaveNewDataFrame.IsComplete() Then
-                        ucrBase.OKEnabled(False)
-                    Else
-                        ucrBase.OKEnabled(True)
-                    End If
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+                ucrBase.OKEnabled(Not ucrReceiverPrepareData.IsEmpty _
+                                  AndAlso ucrSaveNewDataFrame.IsComplete())
             Else
-                If rdoWholeDataFrame.Checked Then
-                    If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-                        If Not ucrSaveNewDataFrame.IsComplete() Then
-                            ucrBase.OKEnabled(False)
-                        Else
-                            ucrBase.OKEnabled(True)
-                        End If
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
-                End If
+                ucrBase.OKEnabled(rdoWholeDataFrame.Checked _
+                                  AndAlso ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" _
+                                  AndAlso ucrSaveNewDataFrame.IsComplete())
             End If
         Else
-            If rdoDistanceData.Checked Then
-                If rdoSelectedColumn.Checked Then
-                    If Not ucrReceiverPrepareData.IsEmpty Then
-                        If Not ucrSaveDistance.IsComplete() Then
-                            ucrBase.OKEnabled(False)
-                        Else
-                            ucrBase.OKEnabled(True)
-                        End If
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
-                Else
-                    If rdoWholeDataFrame.Checked Then
-                        If ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-                            If Not ucrSaveDistance.IsComplete() Then
-                                ucrBase.OKEnabled(False)
-                            Else
-                                ucrBase.OKEnabled(True)
-                            End If
-                        Else
-                            ucrBase.OKEnabled(False)
-                        End If
-                    End If
-                End If
+            If rdoSelectedColumn.Checked Then
+                ucrBase.OKEnabled(Not ucrReceiverPrepareData.IsEmpty _
+                                  AndAlso ucrSaveDistance.IsComplete())
+            Else
+                ucrBase.OKEnabled(rdoWholeDataFrame.Checked _
+                                  AndAlso ucrSelectorPrepareData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" _
+                                  AndAlso ucrSaveDistance.IsComplete())
             End If
         End If
     End Sub
