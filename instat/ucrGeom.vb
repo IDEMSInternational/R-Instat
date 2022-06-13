@@ -316,6 +316,62 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_statvalleys)
 
+        Dim clsgeom_statcor As New Geoms
+
+        clsgeom_statcor.SetGeomPackage("ggpubr")
+        clsgeom_statcor.SetGeomName("stat_cor")
+
+        'add aes parameters
+        clsgeom_statcor.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statcor.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameters
+        clsgeom_statcor.AddLayerParameter("method", "list", Chr(34) & "pearson" & Chr(34), lstParameterStrings:={Chr(34) & "pearson" & Chr(34), Chr(34) & "kendall" & Chr(34), Chr(34) & "spearman" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("alternative", "list", Chr(34) & "two.sided" & Chr(34), lstParameterStrings:={Chr(34) & "two.sided" & Chr(34), Chr(34) & "greater" & Chr(34), Chr(34) & "less" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("cor.coef.name", "list", Chr(34) & "R" & Chr(34), lstParameterStrings:={Chr(34) & "R" & Chr(34), Chr(34) & "rho" & Chr(34), Chr(34) & "tau" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.sep", "editablelist", Chr(34) & ", " & Chr(34), lstParameterStrings:={Chr(34) & ", " & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.x.npc", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.y.npc", "list", Chr(34) & "top" & Chr(34), lstParameterStrings:={Chr(34) & "top" & Chr(34), Chr(34) & "bottom" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("output.type", "list", Chr(34) & "expression" & Chr(34), lstParameterStrings:={Chr(34) & "expression" & Chr(34), Chr(34) & "latex" & Chr(34), Chr(34) & "tex" & Chr(34), Chr(34) & "text" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("digits", "numeric", "2", lstParameterStrings:={0, 1, 5})
+        clsgeom_statcor.AddLayerParameter("r.digits", "numeric", "2", lstParameterStrings:={0, 1, 5})
+        clsgeom_statcor.AddLayerParameter("p.digits", "numeric", "2", lstParameterStrings:={0, 1, 5})
+        clsgeom_statcor.AddLayerParameter("r.accuracy", "numeric", "0.01", lstParameterStrings:={2, 0.00})
+        clsgeom_statcor.AddLayerParameter("p.accuracy", "numeric", "0.0001", lstParameterStrings:={4, 0.0000})
+        clsgeom_statcor.AddLayerParameter("geom", "editablelist", Chr(34) & "text" & Chr(34), lstParameterStrings:={Chr(34) & "text" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statcor.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statcor.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statcor)
+
+        Dim clsgeom_statReglineEquation As New Geoms
+
+        clsgeom_statReglineEquation.SetGeomPackage("ggpubr")
+        clsgeom_statReglineEquation.SetGeomName("stat_regline_equation")
+
+        'Add aes parameters
+        clsgeom_statReglineEquation.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statReglineEquation.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Add layer parameters
+        clsgeom_statReglineEquation.AddLayerParameter("formula", "editablelist", Chr(34) & "y~x" & Chr(34), lstParameterStrings:={Chr(34) & "y~x" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("label.x.npc", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("label.y.npc", "list", Chr(34) & "top" & Chr(34), lstParameterStrings:={Chr(34) & "top" & Chr(34), Chr(34) & "bottom" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("output.type", "list", Chr(34) & "expression" & Chr(34), lstParameterStrings:={Chr(34) & "expression" & Chr(34), Chr(34) & "latex" & Chr(34), Chr(34) & "text" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("geom", "editablelist", Chr(34) & "text" & Chr(34), lstParameterStrings:={Chr(34) & "text" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statReglineEquation.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statReglineEquation.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statReglineEquation)
+
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
         'Warning: cannot use default values like NULL in the specification of our aesthetics as parameters (fill, colour, ...) as running a command like "ggplot(survey, aes(x="",y=Yield)) + geom_boxplot(colour = NULL)" will give an error (Error: Aesthetics must be either length 1 or the same as the data (4): colour). 
