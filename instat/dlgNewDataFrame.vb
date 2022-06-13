@@ -368,7 +368,7 @@ Public Class dlgNewDataFrame
                     clsEmptyRepFunction.AddParameter("x", Chr(34) & strDefault & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
                 End If
 
-                Dim strColumnName As String = row.Cells("colNames").Value
+                Dim strColumnName As String = frmMain.clsRLink.MakeValidText(row.Cells("colNames").Value)
                 If (strType = "Integer" OrElse strType = "Numeric") AndAlso Not strDefault = "NA" _
                                         AndAlso IsNumeric(strDefault) AndAlso strDefault.Contains(",") Then
 

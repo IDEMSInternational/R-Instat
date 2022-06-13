@@ -54,7 +54,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim textColour As Color
         Dim strRowNames As String()
-
+        Dim strLongestRowHeaderText As String = ""
         If dataFrame.iDisplayedRowCount = 0 Then
             AddBlankRow(grdData.CurrentWorksheet)
             Exit Sub
@@ -75,7 +75,19 @@ Public Class ucrDataViewReoGrid
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
+
+            'get longest row header text
+            If strRowNames(i).Length > strLongestRowHeaderText.Length Then
+                strLongestRowHeaderText = strRowNames(i)
+            End If
         Next
+
+        'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
+        'see issue #7221 for more information.
+        'get pixel size equivalent of the longest row header text
+        'and use it as the row header width.
+        'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
+        grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns

@@ -79,7 +79,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnual.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnual.Location = New System.Drawing.Point(71, 14)
+        Me.rdoAnnual.Location = New System.Drawing.Point(12, 14)
         Me.rdoAnnual.Name = "rdoAnnual"
         Me.rdoAnnual.Size = New System.Drawing.Size(67, 27)
         Me.rdoAnnual.TabIndex = 1
@@ -96,7 +96,7 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWithinYear.Location = New System.Drawing.Point(222, 14)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(163, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
         Me.rdoWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoWithinYear.TabIndex = 3
@@ -113,7 +113,7 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnualWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(136, 14)
+        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(77, 14)
         Me.rdoAnnualWithinYear.Name = "rdoAnnualWithinYear"
         Me.rdoAnnualWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoAnnualWithinYear.TabIndex = 2
@@ -129,7 +129,7 @@ Partial Class dlgClimaticSummary
         Me.lblStation.Location = New System.Drawing.Point(288, 68)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 5
+        Me.lblStation.TabIndex = 7
         Me.lblStation.Text = "Station:"
         '
         'lblDate
@@ -139,7 +139,7 @@ Partial Class dlgClimaticSummary
         Me.lblDate.Location = New System.Drawing.Point(288, 109)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 7
+        Me.lblDate.TabIndex = 9
         Me.lblDate.Text = "Date:"
         '
         'lblDay
@@ -149,7 +149,7 @@ Partial Class dlgClimaticSummary
         Me.lblDay.Location = New System.Drawing.Point(288, 245)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(66, 13)
-        Me.lblDay.TabIndex = 11
+        Me.lblDay.TabIndex = 13
         Me.lblDay.Text = "Day of Year:"
         '
         'lblElement
@@ -159,7 +159,7 @@ Partial Class dlgClimaticSummary
         Me.lblElement.Location = New System.Drawing.Point(288, 150)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
-        Me.lblElement.TabIndex = 9
+        Me.lblElement.TabIndex = 11
         Me.lblElement.Text = "Element:"
         '
         'cmdSummary
@@ -168,7 +168,7 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary.Location = New System.Drawing.Point(288, 371)
         Me.cmdSummary.Name = "cmdSummary"
         Me.cmdSummary.Size = New System.Drawing.Size(120, 26)
-        Me.cmdSummary.TabIndex = 17
+        Me.cmdSummary.TabIndex = 20
         Me.cmdSummary.Tag = "Summaries"
         Me.cmdSummary.Text = "Summaries"
         Me.cmdSummary.UseVisualStyleBackColor = True
@@ -180,7 +180,7 @@ Partial Class dlgClimaticSummary
         Me.lblWithinYear.Location = New System.Drawing.Point(288, 327)
         Me.lblWithinYear.Name = "lblWithinYear"
         Me.lblWithinYear.Size = New System.Drawing.Size(65, 13)
-        Me.lblWithinYear.TabIndex = 15
+        Me.lblWithinYear.TabIndex = 17
         Me.lblWithinYear.Text = "Within Year:"
         '
         'grpOptions
@@ -194,7 +194,7 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Location = New System.Drawing.Point(5, 233)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(280, 136)
-        Me.grpOptions.TabIndex = 18
+        Me.grpOptions.TabIndex = 19
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
@@ -260,7 +260,7 @@ Partial Class dlgClimaticSummary
         Me.cmdDoyRange.Location = New System.Drawing.Point(5, 397)
         Me.cmdDoyRange.Name = "cmdDoyRange"
         Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
-        Me.cmdDoyRange.TabIndex = 19
+        Me.cmdDoyRange.TabIndex = 21
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
@@ -272,7 +272,7 @@ Partial Class dlgClimaticSummary
         Me.lblYear.Location = New System.Drawing.Point(288, 286)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 13
+        Me.lblYear.TabIndex = 15
         Me.lblYear.Text = "Year:"
         '
         'rdoStation
@@ -283,10 +283,10 @@ Partial Class dlgClimaticSummary
         Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(12, 14)
+        Me.rdoStation.Location = New System.Drawing.Point(308, 14)
         Me.rdoStation.Name = "rdoStation"
         Me.rdoStation.Size = New System.Drawing.Size(61, 27)
-        Me.rdoStation.TabIndex = 22
+        Me.rdoStation.TabIndex = 5
         Me.rdoStation.TabStop = True
         Me.rdoStation.Text = "Station"
         Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -300,10 +300,10 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDaily.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDaily.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDaily.Location = New System.Drawing.Point(308, 14)
+        Me.rdoDaily.Location = New System.Drawing.Point(249, 14)
         Me.rdoDaily.Name = "rdoDaily"
-        Me.rdoDaily.Size = New System.Drawing.Size(88, 27)
-        Me.rdoDaily.TabIndex = 23
+        Me.rdoDaily.Size = New System.Drawing.Size(63, 27)
+        Me.rdoDaily.TabIndex = 4
         Me.rdoDaily.TabStop = True
         Me.rdoDaily.Text = "Daily"
         Me.rdoDaily.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -319,7 +319,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(123, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 10
+        Me.ucrReceiverElements.TabIndex = 12
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrInputFilterPreview
@@ -331,7 +331,7 @@ Partial Class dlgClimaticSummary
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(115, 400)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 20
+        Me.ucrInputFilterPreview.TabIndex = 22
         '
         'ucrSelectorVariable
         '
@@ -343,7 +343,7 @@ Partial Class dlgClimaticSummary
         Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
         Me.ucrSelectorVariable.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorVariable.TabIndex = 4
+        Me.ucrSelectorVariable.TabIndex = 6
         '
         'ucrReceiverWithinYear
         '
@@ -355,7 +355,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverWithinYear.Selector = Nothing
         Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWithinYear.strNcFilePath = ""
-        Me.ucrReceiverWithinYear.TabIndex = 16
+        Me.ucrReceiverWithinYear.TabIndex = 18
         Me.ucrReceiverWithinYear.ucrSelector = Nothing
         '
         'ucrReceiverDOY
@@ -368,7 +368,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 12
+        Me.ucrReceiverDOY.TabIndex = 14
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -381,7 +381,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 14
+        Me.ucrReceiverYear.TabIndex = 16
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -394,7 +394,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 8
+        Me.ucrReceiverDate.TabIndex = 10
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStation
@@ -407,7 +407,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.TabIndex = 8
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrBase
@@ -416,8 +416,8 @@ Partial Class dlgClimaticSummary
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 422)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 21
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 23
         '
         'ucrPnlAnnualWithin
         '

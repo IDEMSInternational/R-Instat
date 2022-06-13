@@ -131,6 +131,7 @@ Public Class ucrDataView
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
+        _grid.ReOrderWorksheets()
     End Sub
 
     Public Sub RefreshGridData()
@@ -230,6 +231,9 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
+        If GetWorkSheetCount() <> 0 Then
+            frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
+        End If
         RefreshDisplayInformation()
     End Sub
 

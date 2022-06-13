@@ -1,0 +1,9 @@
+--- mono-config.orig	2022-02-19 19:11:00.113680949 +0000
++++ mono-config.edit	2022-02-19 19:14:16.757120045 +0000
+@@ -43,4 +43,6 @@
+ 	<dllmap dll="gdiplus.dll" target="libgdiplus.so.0"  os="!windows"/>
+ 	<dllmap dll="gdi32" target="libgdiplus.so.0" os="!windows"/>
+ 	<dllmap dll="gdi32.dll" target="libgdiplus.so.0" os="!windows"/>
++	<dllmap dll="libdl" target="libdl.so.2" os="!windows"/>
++	<dllmap dll="libdl.dll" target="libdl.so.2" os="!windows"/>
+ </configuration>
