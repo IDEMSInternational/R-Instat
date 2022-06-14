@@ -117,9 +117,9 @@ Partial Class dlgRemoveUnusedLevels
         Me.lblLevelsPreview.AutoSize = True
         Me.lblLevelsPreview.Location = New System.Drawing.Point(239, 56)
         Me.lblLevelsPreview.Name = "lblLevelsPreview"
-        Me.lblLevelsPreview.Size = New System.Drawing.Size(81, 13)
+        Me.lblLevelsPreview.Size = New System.Drawing.Size(82, 13)
         Me.lblLevelsPreview.TabIndex = 3
-        Me.lblLevelsPreview.Text = "Levels preview:"
+        Me.lblLevelsPreview.Text = "Levels Preview:"
         '
         'Label1
         '
