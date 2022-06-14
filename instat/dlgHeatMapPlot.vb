@@ -158,8 +158,8 @@ Public Class dlgHeatMapPlot
 
         ucrInputPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Middle", "0")
-        dctLabelPositions.Add("Out", "-0.25")
-        dctLabelPositions.Add("In", "5")
+        dctLabelPositions.Add("Out", "-1")
+        dctLabelPositions.Add("In", "2")
         ucrInputPosition.SetItems(dctLabelPositions)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
@@ -276,7 +276,7 @@ Public Class dlgHeatMapPlot
         clsGeomTextFunction.SetRCommand("geom_text")
         clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
         clsGeomTextFunction.AddParameter("colour", "black", iPosition:=2)
-        clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=3)
+        clsGeomTextFunction.AddParameter("vjust", "-1", iPosition:=3)
         clsGeomTextFunction.AddParameter("size", "4", iPosition:=4)
 
         clsLabelAesFunction.SetPackageName("ggplot2")

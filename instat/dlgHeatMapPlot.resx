@@ -1201,7 +1201,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Heat Map</value>
+    <value>Heat Map/Choropleth</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgHeatMapPlot</value>
