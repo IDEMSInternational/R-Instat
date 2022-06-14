@@ -2547,24 +2547,24 @@ is.containValueLabel <- function(x){
 read_corpora <- function(data){
   data_unlist <- NULL
   description <- NULL
-  for (i in 1:length(df)){
-    if (names(df[i]) == "description") {
-      description <- df[i][[1]]
+  for (i in 1:length(data)){
+    if (names(data[i]) == "description") {
+      description <- data[i][[1]]
     } else {
-      if (class(df[[i]]) == "character"){
-        data_unlist[[i]] <- data.frame(list = df[[i]])
-      } else if (class(df[[i]]) == "list"){
-        data_unlist_i <- purrr::map(.x = names(df[[i]]), .f = ~data.frame(list = df[[i]][[.x]]))
-        names(data_unlist_i) <- names(df[[i]])
+      if (class(data[[i]]) == "character"){
+        data_unlist[[i]] <- data.frame(list = data[[i]])
+      } else if (class(data[[i]]) == "list"){
+        data_unlist_i <- purrr::map(.x = names(data[[i]]), .f = ~data.frame(list = data[[i]][[.x]]))
+        names(data_unlist_i) <- names(data[[i]])
         data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
-      } else if ("matrix" %in% class(df[[i]])){
-        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(df[[i]]), sep="-")))
-      } else if (class(df[[i]]) == "data.frame"){
-        data_unlist[[i]] <- data.frame(list = df[[i]])
+      } else if ("matrix" %in% class(data[[i]])){
+        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+      } else if (class(data[[i]]) == "data.frame"){
+        data_unlist[[i]] <- data.frame(list = data[[i]])
       }
     }
   }
-  names(data_unlist) <- names(df)
+  names(data_unlist) <- names(data)
   data_unlist <- plyr::ldply(data_unlist, .id = "variable")
   if (!is.null(description)){
     data_full <- data.frame(description = description, data_unlist)
