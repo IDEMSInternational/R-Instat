@@ -1114,11 +1114,9 @@ Partial Class frmMain
         '
         'mnuModelFitModelMachineLearning
         '
-        Me.mnuModelFitModelMachineLearning.Enabled = False
         Me.mnuModelFitModelMachineLearning.Name = "mnuModelFitModelMachineLearning"
         Me.mnuModelFitModelMachineLearning.Size = New System.Drawing.Size(228, 22)
         Me.mnuModelFitModelMachineLearning.Text = "Machine Learning (Caret)..."
-        Me.mnuModelFitModelMachineLearning.Visible = False
         '
         'ToolStripSeparator57
         '
