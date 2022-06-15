@@ -517,10 +517,10 @@ Public Class dlgHeatMapPlot
     Private Sub cmdTileOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
         ''''''' i wonder if all this will be needed for the new system
         If rdoChoroplethMap.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomPolygonAesFunction, clsNewGlobalAesFunc:=clsHeatmapAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomPolygonAesFunction, clsNewGlobalAesFunc:=clsChoroplethAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
                                        bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         Else
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsChoroplethAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsHeatmapAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
                                        bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         End If
 
@@ -534,6 +534,18 @@ Public Class dlgHeatMapPlot
                     ucrReceiverX.Add(clsParam.strArgumentValue)
                 ElseIf clsParam.strArgumentName = "fill" Then
                     ucrReceiverFill.Add(clsParam.strArgumentValue)
+                End If
+            Next
+        Else
+            'We need this here because in the ucrGeom we are removing the mapping
+            clsGeomPolygonAesFunction.AddParameter("mapping", clsRFunctionParameter:=clsGroupFunction, iPosition:=0)
+            For Each clsParam In clsChoroplethAesFunction.clsParameters
+                If clsParam.strArgumentName = "x" Then
+                    ucrReceiverLongitude.Add(clsParam.strArgumentValue)
+                ElseIf clsParam.strArgumentName = "y" Then
+                    ucrReceiverLatitude.Add(clsParam.strArgumentValue)
+                ElseIf clsParam.strArgumentName = "fill" Then
+                    ucrReceiverFillChoropleth.Add(clsParam.strArgumentValue)
                 End If
             Next
         End If
