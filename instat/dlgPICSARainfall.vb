@@ -43,7 +43,6 @@ Public Class dlgPICSARainfall
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private clsPointsFunc As New RFunction
-    Private clsPointsParam As New RParameter
     Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsFactorLevels As New RFunction
 
@@ -66,6 +65,8 @@ Public Class dlgPICSARainfall
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsGeomSmoothFunc As New RFunction
+
 
     Private strMeanName As String = ".mean_y"
     Private strMedianName As String = ".median_y"
@@ -170,14 +171,16 @@ Public Class dlgPICSARainfall
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
         ucrChkPoints.AddParameterPresentCondition(False, "points", False)
-        clsPointsFunc.SetPackageName("ggplot2")
-        clsPointsFunc.SetRCommand("geom_point")
-        clsPointsParam.SetArgumentName("points")
-        clsPointsParam.SetArgument(clsPointsFunc)
-        clsPointsParam.Position = 3
-        clsPointsFunc.AddParameter("size", "3")
-        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
-        ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
+        ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
+        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
+        ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkWithSE.SetRDefault("TRUE")
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -246,6 +249,8 @@ Public Class dlgPICSARainfall
         clsRoundUpperTercileY = New RFunction
         clsAsDateUpperTercileY = New RFunction
 
+        clsGeomSmoothFunc = New RFunction
+        clsPointsFunc = New RFunction
         clsGeomTextLabelMeanLine = New RFunction
         clsPasteMeanY = New RFunction
         clsFormatMeanY = New RFunction
@@ -336,8 +341,16 @@ Public Class dlgPICSARainfall
         clsGeomLine.SetRCommand("geom_line")
         clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLine.AddParameter("size", "0.8")
-        clsBaseOperator.AddParameter(clsPointsParam)
 
+        clsGeomSmoothFunc.SetPackageName("ggplot2")
+        clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
+
+        clsPointsFunc.SetPackageName("ggplot2")
+        clsPointsFunc.SetRCommand("geom_point")
+        clsPointsFunc.AddParameter("size", "3")
+        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetRowOp.SetOperation("+")
@@ -625,7 +638,8 @@ Public Class dlgPICSARainfall
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
-
+        ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
         If bReset Then
             AutoFacetStation()
         End If
@@ -931,9 +945,6 @@ Public Class dlgPICSARainfall
         'AddRemoveGroupByAndHlines()
     End Sub
 
-    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
 
     Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
@@ -943,6 +954,22 @@ Public Class dlgPICSARainfall
         sdgPlots.ShowDialog()
         bResetSubdialog = False
         'AddRemoveGroupByAndHlines()
+    End Sub
+
+    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
+        If ucrChkLineofBestFit.Checked Then
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunc, iPosition:=4)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_smooth")
+        End If
+    End Sub
+
+    Private Sub ucrChkPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPoints.ControlValueChanged
+        If ucrChkPoints.Checked Then
+            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_point")
+        End If
     End Sub
 
     Private Sub toolStripMenuItemPointOption_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOption.Click
