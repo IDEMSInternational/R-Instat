@@ -305,13 +305,13 @@ Public Class dlgDescribeTwoVariable
 
         clsFrequencyTablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsFrequencyTablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsFrequencyTablesFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=1)
+        clsFrequencyTablesFunction.AddParameter("summaries", "count_label", iPosition:=1)
         clsFrequencyTablesFunction.AddParameter("factors", clsRFunctionParameter:=clsCombineFrequencyFactorParameterFunction, iPosition:=2)
 
         clSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=1)
         clSummaryTableFunction.AddParameter("factors", clsRFunctionParameter:=clsSummaryTableFactorParameterCombineFunction, iPosition:=2)
-        clSummaryTableFunction.AddParameter("columns_to_summaries", ".x", iPosition:=3)
+        clSummaryTableFunction.AddParameter("columns_to_summarise", ".x", iPosition:=3)
 
         clsRAnovaFunction.AddParameter("signif.stars", "FALSE", iPosition:=2)
         clsRAnovaFunction.AddParameter("sign_level", "FALSE", iPosition:=3)
@@ -763,11 +763,16 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ChangeSummaryFunctionForThreeVariable()
+        clsFrequencyTablesFunction.AddParameter("summaries", "count_label", iPosition:=1)
         If rdoThreeVariable.Checked Then
             If strFirstVariablesType = "numeric" AndAlso
                   strSecondVariableType = "categorical" Then
                 clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
             Else
+                If strFirstVariablesType = "categorical" AndAlso
+                  strSecondVariableType = "numeric" Then
+                    clsFrequencyTablesFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=1)
+                End If
                 clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
             End If
         End If
