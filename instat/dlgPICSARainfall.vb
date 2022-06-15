@@ -152,12 +152,6 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.bAddParameterIfEmpty = True
 
-        ucrReceiverY.SetParameter(New RParameter("y", 2))
-        ucrReceiverY.Selector = ucrSelectorPICSARainfall
-        ucrReceiverY.bWithQuotes = False
-        ucrReceiverY.SetParameterIsString()
-        ucrReceiverY.SetIncludedDataTypes({"numeric"})
-
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
         ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
         ucrReceiverColourBy.SetIncludedDataTypes({"factor"})
@@ -188,7 +182,7 @@ Public Class dlgPICSARainfall
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrReceiverY.SetLinkedDisplayControl(ucrVariablesAsFactorForPicsa)
+
 
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
@@ -309,7 +303,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.Reset()
         ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
-        ucrReceiverY.SetMeAsReceiver()
+        ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
@@ -623,11 +617,9 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrReceiverY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
 
 
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverY.SetRCode(clsRaesFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -640,7 +632,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverY.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
+        If (ucrVariablesAsFactorForPicsa.IsEmpty OrElse ucrReceiverX.IsEmpty) OrElse Not ucrSave.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
