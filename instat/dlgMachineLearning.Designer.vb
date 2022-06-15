@@ -45,6 +45,7 @@ Partial Class dlgMachineLearning
         Me.ucrReceiverRegressionResponse = New instat.ucrReceiverSingle()
         Me.ucrChkClassificationPerformance = New instat.ucrCheck()
         Me.ucrChkRegressionPerformance = New instat.ucrCheck()
+        Me.ucrReceiverExpressionModel = New instat.ucrReceiverExpression()
         Me.grpExplanatoryVariable.SuspendLayout()
         Me.grpModelType.SuspendLayout()
         Me.SuspendLayout()
@@ -138,7 +139,7 @@ Partial Class dlgMachineLearning
         '
         Me.ucrReceiverMultipleExplanatoryVariable.AutoSize = True
         Me.ucrReceiverMultipleExplanatoryVariable.frmParent = Me
-        Me.ucrReceiverMultipleExplanatoryVariable.Location = New System.Drawing.Point(242, 176)
+        Me.ucrReceiverMultipleExplanatoryVariable.Location = New System.Drawing.Point(242, 175)
         Me.ucrReceiverMultipleExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleExplanatoryVariable.Name = "ucrReceiverMultipleExplanatoryVariable"
         Me.ucrReceiverMultipleExplanatoryVariable.Selector = Nothing
@@ -291,12 +292,25 @@ Partial Class dlgMachineLearning
         Me.ucrChkRegressionPerformance.Size = New System.Drawing.Size(184, 23)
         Me.ucrChkRegressionPerformance.TabIndex = 8
         '
+        'ucrReceiverExpressionModel
+        '
+        Me.ucrReceiverExpressionModel.AutoSize = True
+        Me.ucrReceiverExpressionModel.frmParent = Me
+        Me.ucrReceiverExpressionModel.Location = New System.Drawing.Point(242, 175)
+        Me.ucrReceiverExpressionModel.Name = "ucrReceiverExpressionModel"
+        Me.ucrReceiverExpressionModel.Selector = Nothing
+        Me.ucrReceiverExpressionModel.Size = New System.Drawing.Size(168, 21)
+        Me.ucrReceiverExpressionModel.strNcFilePath = ""
+        Me.ucrReceiverExpressionModel.TabIndex = 23
+        Me.ucrReceiverExpressionModel.ucrSelector = Nothing
+        '
         'dlgMachineLearning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 460)
+        Me.Controls.Add(Me.ucrReceiverExpressionModel)
         Me.Controls.Add(Me.ucrChkRegressionPerformance)
         Me.Controls.Add(Me.ucrChkClassificationPerformance)
         Me.Controls.Add(Me.ucrReceiverRegressionResponse)
@@ -352,4 +366,5 @@ Partial Class dlgMachineLearning
     Friend WithEvents ucrReceiverRegressionResponse As ucrReceiverSingle
     Friend WithEvents ucrChkClassificationPerformance As ucrCheck
     Friend WithEvents ucrChkRegressionPerformance As ucrCheck
+    Friend WithEvents ucrReceiverExpressionModel As ucrReceiverExpression
 End Class

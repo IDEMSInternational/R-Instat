@@ -68,9 +68,9 @@ Public Class dlgMachineLearning
         'ucrPnlRegressionPerformanceMeasure.AddFunctionNamesCondition(rdoRegressionModelSummary, "train")
         'ucrPnlRegressionPerformanceMeasure.AddFunctionNamesCondition(rdoRegressionPerformanceStatistics, "postResample")
 
-        'ucrReceiverExpressionFitModel.SetParameter(New RParameter("x", 1))
-        'ucrReceiverExpressionFitModel.Selector = ucrSelectorMachineLearning
-        'ucrReceiverExpressionFitModel.SetParameterIsString()
+        ucrReceiverExpressionModel.SetParameter(New RParameter("x", 1))
+        ucrReceiverExpressionModel.Selector = ucrSelectorMachineLearning
+        ucrReceiverExpressionModel.SetParameterIsString()
 
         ucrReceiverMultipleExplanatoryVariable.SetParameter(New RParameter("x", 1))
         ucrReceiverMultipleExplanatoryVariable.Selector = ucrSelectorMachineLearning
@@ -121,11 +121,10 @@ Public Class dlgMachineLearning
         ucrNudTrainTestSize.SetParameter(New RParameter("prop", 1))
         ucrNudTrainTestSize.SetMinMax(0.01, 0.99)
         ucrNudTrainTestSize.DecimalPlaces = 2
-        ucrNudTrainTestSize.Increment = 0.05
+        ucrNudTrainTestSize.Increment = 0.01
 
         ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverMultipleExplanatoryVariable, {rdoExplanatoryVariable}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrReceiverMultipleExplanatoryVariable.SetLinkedDisplayControl(lblExplanatoryVariable)
-        'ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverExpressionFitModel, {rdoExplanatoryModel}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlExplanatoryVariable.AddToLinkedControls(ucrReceiverExpressionModel, {rdoExplanatoryModel}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrPnlModelType.AddToLinkedControls({ucrReceiverClassificationResponseVariable, ucrInputClassificationMethod, ucrChkClassificationPerformance}, {rdoClassification}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddToLinkedControls({ucrReceiverRegressionResponse, ucrInputRegressionMethod, ucrChkRegressionPerformance}, {rdoRegression}, bNewLinkedHideIfParameterMissing:=True)
