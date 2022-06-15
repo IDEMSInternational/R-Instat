@@ -51,6 +51,8 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemSFOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemMapping = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
+        Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpPoints.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -328,26 +330,26 @@ Partial Class dlgClimaticStationMaps
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemLabelRepelOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(144, 70)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemSFOptions
         '
         Me.toolStripMenuItemSFOptions.Name = "toolStripMenuItemSFOptions"
-        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(143, 22)
+        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemSFOptions.Text = "SF Options"
         '
         'toolStripMenuItemMapping
         '
         Me.toolStripMenuItemMapping.Name = "toolStripMenuItemMapping"
-        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(143, 22)
+        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemMapping.Text = "Map Options"
         '
         'cmdOptions
@@ -362,6 +364,18 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'toolStripMenuItemPointOptions
+        '
+        Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Text = "Point Options"
+        '
+        'toolStripMenuItemLabelRepelOptions
+        '
+        Me.toolStripMenuItemLabelRepelOptions.Name = "toolStripMenuItemLabelRepelOptions"
+        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLabelRepelOptions.Text = "Label Repel Options"
         '
         'dlgClimaticStationMaps
         '
@@ -416,4 +430,6 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents toolStripMenuItemSFOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemMapping As ToolStripMenuItem
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLabelRepelOptions As ToolStripMenuItem
 End Class
