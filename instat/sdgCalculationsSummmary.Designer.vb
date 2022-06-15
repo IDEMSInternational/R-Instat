@@ -291,7 +291,7 @@ Partial Class sdgCalculationsSummmary
         '
         'cmdManipDuplicate
         '
-        Me.cmdManipDuplicate.Location = New System.Drawing.Point(166, 132)
+        Me.cmdManipDuplicate.Location = New System.Drawing.Point(210, 132)
         Me.cmdManipDuplicate.Name = "cmdManipDuplicate"
         Me.cmdManipDuplicate.Size = New System.Drawing.Size(75, 23)
         Me.cmdManipDuplicate.TabIndex = 20
@@ -300,7 +300,7 @@ Partial Class sdgCalculationsSummmary
         '
         'cmdManipDelete
         '
-        Me.cmdManipDelete.Location = New System.Drawing.Point(166, 103)
+        Me.cmdManipDelete.Location = New System.Drawing.Point(210, 103)
         Me.cmdManipDelete.Name = "cmdManipDelete"
         Me.cmdManipDelete.Size = New System.Drawing.Size(75, 23)
         Me.cmdManipDelete.TabIndex = 17
@@ -318,7 +318,7 @@ Partial Class sdgCalculationsSummmary
         '
         'cmdManipEdit
         '
-        Me.cmdManipEdit.Location = New System.Drawing.Point(166, 74)
+        Me.cmdManipEdit.Location = New System.Drawing.Point(210, 74)
         Me.cmdManipEdit.Name = "cmdManipEdit"
         Me.cmdManipEdit.Size = New System.Drawing.Size(75, 23)
         Me.cmdManipEdit.TabIndex = 18
@@ -327,7 +327,7 @@ Partial Class sdgCalculationsSummmary
         '
         'cmdManipAdd
         '
-        Me.cmdManipAdd.Location = New System.Drawing.Point(166, 45)
+        Me.cmdManipAdd.Location = New System.Drawing.Point(210, 45)
         Me.cmdManipAdd.Name = "cmdManipAdd"
         Me.cmdManipAdd.Size = New System.Drawing.Size(75, 23)
         Me.cmdManipAdd.TabIndex = 19
