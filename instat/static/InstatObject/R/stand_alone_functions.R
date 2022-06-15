@@ -2547,29 +2547,33 @@ is.containValueLabel <- function(x){
 read_corpora <- function(data){
   data_unlist <- NULL
   description <- NULL
-  for (i in 1:length(data)){
-    if (names(data[i]) == "description") {
-      description <- data[i][[1]]
-    } else {
-      if (class(data[[i]]) == "character"){
-        data_unlist[[i]] <- data.frame(list = data[[i]])
-      } else if (class(data[[i]]) == "list"){
-        data_unlist_i <- purrr::map(.x = names(data[[i]]), .f = ~data.frame(list = data[[i]][[.x]]))
-        names(data_unlist_i) <- names(data[[i]])
-        data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
-      } else if ("matrix" %in% class(data[[i]])){
-        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
-      } else if (class(data[[i]]) == "data.frame"){
-        data_unlist[[i]] <- data.frame(list = data[[i]])
+  if (is.data.frame(data)){
+    data_full <- data
+  } else {
+    for (i in 1:length(data)){
+      if (names(data[i]) == "description") {
+        description <- data[i][[1]]
+      } else {
+        if (class(data[[i]]) == "character"){
+          data_unlist[[i]] <- data.frame(list = data[[i]])
+        } else if (class(data[[i]]) == "list"){
+          data_unlist_i <- purrr::map(.x = names(data[[i]]), .f = ~data.frame(list = data[[i]][[.x]]))
+          names(data_unlist_i) <- names(data[[i]])
+          data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
+        } else if ("matrix" %in% class(data[[i]])){
+          data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+        } else if (class(data[[i]]) == "data.frame"){
+          data_unlist[[i]] <- data.frame(list = data[[i]])
+        }
       }
     }
-  }
-  names(data_unlist) <- names(data)
-  data_unlist <- plyr::ldply(data_unlist, .id = "variable")
-  if (!is.null(description)){
-    data_full <- data.frame(description = description, data_unlist)
-  } else {
-    data_full <- data.frame(data_unlist)
+    names(data_unlist) <- names(data)
+    data_unlist <- plyr::ldply(data_unlist, .id = "variable")
+    if (!is.null(description)){
+      data_full <- data.frame(description = description, data_unlist)
+    } else {
+      data_full <- data.frame(data_unlist)
+    }
   }
   return(data_full)
 }
