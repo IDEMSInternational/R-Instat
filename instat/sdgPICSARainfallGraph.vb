@@ -1500,6 +1500,14 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
+    Private Sub ucrChkSignLevel_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkRegEquation_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
     Private Sub ucrChkIncludeMajorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMajorGridLines.ControlValueChanged
         AddRemoveMajorGridLines()
     End Sub
