@@ -125,7 +125,8 @@ DataBook$set("public", "replace_instat_object", function(new_instat_object) {
 )
 
 DataBook$set("public", "set_data_objects", function(new_data_objects) {
-  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !all("data_object" %in% sapply(new_data_objects, class)))) {
+  # new_data_objects could be of old class type 'data_object'
+  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !any(c("DataSheet", "data_object") %in% sapply(new_data_objects, class)))) {
     stop("new_data_objects must be a list of data_objects")
   }
   else private$.data_sheets <- new_data_objects
@@ -1104,7 +1105,7 @@ DataBook$set("public", "add_metadata_field", function(data_name, property, new_v
 DataBook$set("public", "reorder_dataframes", function(data_frames_order) {
   if(length(data_frames_order) != length(names(private$.data_sheets))) stop("number data frames to order should be equal to number of dataframes in the object")
   if(!setequal(data_frames_order,names(private$.data_sheets))) stop("data_frames_order must be a permutation of the dataframe names.")
-  
+
   self$set_data_objects(private$.data_sheets[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
@@ -1404,8 +1405,8 @@ DataBook$set("public","make_date_yearmonthday", function(data_name, year, month,
 }
 )
 
-DataBook$set("public","make_date_yeardoy", function(data_name, year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
-  self$get_data_objects(data_name)$make_date_yeardoy(year = year, doy = doy, year_format = year_format, doy_format = doy_format, doy_typical_length = doy_typical_length)
+DataBook$set("public","make_date_yeardoy", function(data_name, year, doy, base, doy_typical_length = "366") {
+  self$get_data_objects(data_name)$make_date_yeardoy(year = year, doy = doy, base = base, doy_typical_length = doy_typical_length)
 }
 )
 
