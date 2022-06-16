@@ -22,12 +22,14 @@ Partial Class sdgFiltersFromFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorFiltersFromFactors = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.ucrFactorLevels = New instat.ucrFactor()
-        Me.cmdSelectAll = New System.Windows.Forms.Button()
+        Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
+        Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'ucrBase
@@ -80,14 +82,15 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorLevels.Size = New System.Drawing.Size(270, 208)
         Me.ucrFactorLevels.TabIndex = 1
         '
-        'cmdSelectAll
+        'cmdToggleSelectAll
         '
-        Me.cmdSelectAll.Location = New System.Drawing.Point(462, 268)
-        Me.cmdSelectAll.Name = "cmdSelectAll"
-        Me.cmdSelectAll.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSelectAll.TabIndex = 0
-        Me.cmdSelectAll.Text = "Select All"
-        Me.cmdSelectAll.UseVisualStyleBackColor = True
+        Me.cmdToggleSelectAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdToggleSelectAll.Location = New System.Drawing.Point(444, 271)
+        Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
+        Me.cmdToggleSelectAll.Size = New System.Drawing.Size(93, 23)
+        Me.cmdToggleSelectAll.TabIndex = 8
+        Me.cmdToggleSelectAll.Text = "Select All Levels"
+        Me.cmdToggleSelectAll.UseVisualStyleBackColor = True
         '
         'sdgFiltersFromFactor
         '
@@ -95,7 +98,7 @@ Partial Class sdgFiltersFromFactor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(545, 337)
-        Me.Controls.Add(Me.cmdSelectAll)
+        Me.Controls.Add(Me.cmdToggleSelectAll)
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactor)
@@ -117,5 +120,6 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrFactorLevels As ucrFactor
-    Friend WithEvents cmdSelectAll As Button
+    Friend WithEvents cmdToggleSelectAll As Button
+    Friend WithEvents ttpCombineWithAndOr As ToolTip
 End Class

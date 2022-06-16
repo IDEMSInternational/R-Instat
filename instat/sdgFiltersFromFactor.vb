@@ -55,7 +55,7 @@ Public Class sdgFiltersFromFactor
                                                   dctParamAndColNames:=dctParamAndColNames,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=False)
-        cmdSelectAll.Enabled = False
+        cmdToggleSelectAll.Enabled = False
     End Sub
 
     Public Sub SetRcodeAndDefaultDataFrame(ucrNewBaseSelector As ucrSelector, bReset As Boolean)
@@ -70,29 +70,43 @@ Public Class sdgFiltersFromFactor
         End If
     End Sub
 
+    Private Sub SetToggleButtonSettings()
+        If ucrFactorLevels.IsAllGridRowsSelected Then
+            cmdToggleSelectAll.Text = "Deselect All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
+        Else
+            cmdToggleSelectAll.Text = "Select All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         If ucrFactorLevels.IsAnyGridRowSelected Then
             frmMain.clsRLink.RunScript(clsAddFilterFromFactors.ToScript, strComment:="Filter From Factors subdialog: Created new filter", bSilent:=False)
         End If
     End Sub
 
-    Private Sub cmdSelectAll_Click(sender As Object, e As EventArgs) Handles cmdSelectAll.Click
-        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
-    End Sub
-
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        cmdSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
+        cmdToggleSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
         If ucrFactorLevels.IsAllGridRowsSelected() Then
-            cmdSelectAll.Text = "Deselect All Levels"
-            cmdSelectAll.FlatStyle = FlatStyle.Flat
+            cmdToggleSelectAll.Text = "Deselect All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            cmdSelectAll.Text = "Select All Levels"
-            cmdSelectAll.FlatStyle = FlatStyle.Popup
+            cmdToggleSelectAll.Text = "Select All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
         autoTranslate(Me)
     End Sub
 
+    Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
+        SetToggleButtonSettings()
+    End Sub
+
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged
         clsAddFilterFromFactors.AddParameter("data_name", Chr(34) & ucrSelectorFiltersFromFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
+        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
     End Sub
 End Class
