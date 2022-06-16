@@ -130,6 +130,7 @@ Public Class dlgPICSARainfall
         XAxisDataTypeCheck()
         TestOkEnabled()
         OpeningMode()
+        RemoveFunction()
         autoTranslate(Me)
     End Sub
 
@@ -807,6 +808,28 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
 
+    Private Sub RemoveFunction()
+        If strPICSAMode = "rainfall" Then
+            clsBaseOperator.RemoveParameterByName("geom_smooth")
+            clsBaseOperator.RemoveParameterByName("stat_regline")
+            clsBaseOperator.RemoveParameterByName("stat_cor")
+            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        ElseIf strPICSAMode = "temperature" Then
+            clsBaseOperator.RemoveParameterByName("hlinemedian")
+            clsBaseOperator.RemoveParameterByName("annotate_median")
+            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsBaseOperator.RemoveParameterByName("hlinemean")
+            clsBaseOperator.RemoveParameterByName("annotate_mean")
+            clsBaseOperator.RemoveParameterByName("hlinelowertercile")
+            clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+            clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
+            clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+        ElseIf strPICSAMode = "general" Then
+            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        End If
+    End Sub
+
+
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged
         'TODO this should run when levels of factor >1
         If Not ucrReceiverColourBy.IsEmpty Then
@@ -832,10 +855,13 @@ Public Class dlgPICSARainfall
     Private Sub OpeningMode()
         If strPICSAMode = "rainfall" Then
             ucrChkLineofBestFit.Visible = False
+            ucrChkWithSE.Visible = False
         ElseIf strPICSAMode = "temperature" Then
             ucrChkLineofBestFit.Visible = True
+            ucrChkWithSE.Visible = True
         ElseIf strPICSAMode = "general" Then
             ucrChkLineofBestFit.Visible = True
+            ucrChkWithSE.Visible = True
         End If
     End Sub
 
