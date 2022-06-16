@@ -21,6 +21,8 @@ Public Class dlgPICSARainfall
     Private clsBaseOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsMutateFunction As New RFunction
+    Public strPICSAMode As String = "rainfall"
+
 
     Private clsRggplotFunction As New RFunction
     Private clsGeomLine As New RFunction
@@ -127,6 +129,7 @@ Public Class dlgPICSARainfall
         bReset = False
         XAxisDataTypeCheck()
         TestOkEnabled()
+        OpeningMode()
         autoTranslate(Me)
     End Sub
 
@@ -825,6 +828,17 @@ Public Class dlgPICSARainfall
             clsGeomLine.RemoveParameterByName("group")
         End If
     End Sub
+
+    Private Sub OpeningMode()
+        If strPICSAMode = "rainfall" Then
+            ucrChkLineofBestFit.Visible = False
+        ElseIf strPICSAMode = "temperature" Then
+            ucrChkLineofBestFit.Visible = True
+        ElseIf strPICSAMode = "general" Then
+            ucrChkLineofBestFit.Visible = True
+        End If
+    End Sub
+
 
     Private Sub YAxisDataTypeCheck()
         If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
