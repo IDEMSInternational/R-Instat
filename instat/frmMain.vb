@@ -1266,10 +1266,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfallGraph.Click
+        dlgPICSARainfall.strPICSAMode = "rainfall"
         dlgPICSARainfall.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperatureGraph.Click
+        dlgPICSARainfall.strPICSAMode = "temperature"
         dlgPICSARainfall.ShowDialog()
     End Sub
 
@@ -2447,14 +2449,12 @@ Public Class frmMain
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
-
     Private Sub RandomSplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeRandomSplit.Click
         dlgRandomSplit.ShowDialog()
     End Sub
 
-
     Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
+        dlgPICSARainfall.strPICSAMode = "general"
         dlgPICSARainfall.ShowDialog()
     End Sub
-
 End Class
