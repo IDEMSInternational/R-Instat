@@ -225,12 +225,12 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
+  # relocate so that the factors are first still for consistency
+  if (percentage_type != "none"){
+    out$data <- (out$data %>% dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(manip_factors)), tidyselect::everything()))
+  }
   if(return_output) {
     dat <- out$data
-    # relocate so that the factors are first still for consistency
-      if (percentage_type != "none"){
-        out$data <- (out$data %>% dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(manip_factors)), tidyselect::everything()))
-      }
     if(percentage_type == "none" || perc_return_all) return(out$data)
     else {
       #This is a temp fix to only returning final percentage columns.
