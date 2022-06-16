@@ -84,7 +84,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDataFrame.AddToLinkedControls({ucrInputLists, ucrInputCategory, ucrInputListInCategory}, {rdoLists}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls({ucrInputLists, ucrChkRCommand, ucrInputCategory, ucrInputListInCategory}, {rdoLists}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
         ucrChkIncludeLabel.SetLinkedDisplayControl(dataTypeGridView)
@@ -101,6 +101,8 @@ Public Class dlgNewDataFrame
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
+
+        ucrChkRCommand.SetText("Show Command")
 
         clsGetCategories.SetPackageName("rcorpora")
         clsGetCategories.SetRCommand("categories")
@@ -278,7 +280,9 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged,
+        ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged,
+        ucrChkRCommand.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -324,6 +328,7 @@ Public Class dlgNewDataFrame
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
             End If
         ElseIf rdoLists.Checked Then
+            ucrInputLists.Visible = ucrChkRCommand.Checked
             ucrTryNewDataFrame.Visible = False
             dataGridView.Visible = False
             lblCommand.Visible = False
