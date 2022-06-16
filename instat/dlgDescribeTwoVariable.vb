@@ -26,11 +26,11 @@ Public Class dlgDescribeTwoVariable
            clsHeaderLeftTopFunction, clsHeaderLeftTopFuncion, clsCombineFrequencyParametersFunction,
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsThreeVariableCombineFrequencyParametersFunction,
            clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction, clsSecondHeaderFunction,
-           clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction,
-          clsSummaryTableFactorParameterCombineFunction As New RFunction
+           clsCombineFrequencyFactorParameterFunction, clsRenameFunction,
+           clsSummaryTableFactorParameterCombineFunction As New RFunction
 
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
-             clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
+             clsMmtableTildeOperator, clsRenameTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
                                                           "signif_fig", "include_margins"})
@@ -189,13 +189,12 @@ Public Class dlgDescribeTwoVariable
         clsMmtableMapFunction = New RFunction
         clsHeaderTopLeftSummaryVariableFunction = New RFunction
         clsCombineFrequencyFactorParameterFunction = New RFunction
-        clsSelectFunction = New RFunction
-        clsRenameCombineFunction = New RFunction
+        clsRenameFunction = New RFunction
         clsSecondHeaderFunction = New RFunction
         clsThreeVariableCombineFrequencyParametersFunction = New RFunction
         clsSummaryTableFactorParameterCombineFunction = New RFunction
         clSummaryTableFunction = New RFunction
-        clsDataSelectTildeOperator = New ROperator
+        clsRenameTildeOperator = New ROperator
         clsMmtableTildeOperator = New ROperator
         clsMapFrequencyPipeOperator = New ROperator
         clsMmtablePlusOperator = New ROperator
@@ -217,14 +216,10 @@ Public Class dlgDescribeTwoVariable
 
         clsSummaryTableFactorParameterCombineFunction.SetRCommand("c")
 
-        clsRenameCombineFunction.SetRCommand("c")
-        clsRenameCombineFunction.AddParameter("first", "1", iPosition:=0, bIncludeArgumentName:=False)
-        clsRenameCombineFunction.AddParameter("fourth", "4", iPosition:=3, bIncludeArgumentName:=False)
-
-        clsSelectFunction.SetPackageName("dplyr")
-        clsSelectFunction.SetRCommand("select")
-        clsSelectFunction.AddParameter(".data", clsRFunctionParameter:=clsFrequencyTablesFunction, iPosition:=0)
-        clsSelectFunction.AddParameter("rename_function", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRenameCombineFunction, iPosition:=1)
+        clsRenameFunction.SetPackageName("dplyr")
+        clsRenameFunction.SetRCommand("rename")
+        clsRenameFunction.AddParameter(".data", clsRFunctionParameter:=clsFrequencyTablesFunction, iPosition:=0)
+        clsRenameFunction.AddParameter("by_var", ".x", iPosition:=1)
 
         clsCombineFrequencyFactorParameterFunction.SetRCommand("c")
         clsCombineFrequencyFactorParameterFunction.AddParameter("factor_by", ".x",
@@ -238,9 +233,9 @@ Public Class dlgDescribeTwoVariable
         clsSecondEmptyOperator.iCallType = 2
         clsSecondEmptyOperator.AddParameter("list_of_tables", "list_of_tables", iPosition:=0)
 
-        clsDataSelectTildeOperator.SetOperation("~")
-        clsDataSelectTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
-        clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+        clsRenameTildeOperator.SetOperation("~")
+        clsRenameTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
+        clsRenameTildeOperator.AddParameter("rename_function", clsRFunctionParameter:=clsRenameFunction, iPosition:=1)
 
         clsMmtableTildeOperator.SetOperation("~")
         clsMmtableTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
@@ -252,7 +247,7 @@ Public Class dlgDescribeTwoVariable
         clsSummaryMapFunction.SetPackageName("purrr")
         clsSummaryMapFunction.SetRCommand("map")
         clsSummaryMapFunction.AddParameter(".x", clsRFunctionParameter:=clsCombineMultipleColumnsFunction, iPosition:=0)
-        clsSummaryMapFunction.AddParameter(".f", clsROperatorParameter:=clsDataSelectTildeOperator, iPosition:=1)
+        clsSummaryMapFunction.AddParameter(".f", clsROperatorParameter:=clsRenameTildeOperator, iPosition:=1)
 
         clsMmtableMapFunction.SetPackageName("purrr")
         clsMmtableMapFunction.SetRCommand("map")
@@ -392,9 +387,13 @@ Public Class dlgDescribeTwoVariable
             Else
                 If Not ucrReceiverThreeVariableSecondFactor.IsEmpty AndAlso
                 Not ucrReceiverNumericVariable.IsEmpty Then
-                    If ucrChkThreeVariableDisplayAsPercentage.Checked Then
-                        If ucrReceiverThreeVariableMultiplePercentages.IsEmpty Then
-                            ucrBase.OKEnabled(False)
+                    If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
+                        If ucrChkThreeVariableDisplayAsPercentage.Checked Then
+                            If ucrReceiverThreeVariableMultiplePercentages.IsEmpty Then
+                                ucrBase.OKEnabled(False)
+                            Else
+                                ucrBase.OKEnabled(True)
+                            End If
                         Else
                             ucrBase.OKEnabled(True)
                         End If
@@ -481,12 +480,12 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
             ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
                 ucrReceiverFirstVars.SetParameterIsString()
-                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
+                clsRenameTildeOperator.AddParameter("rename_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsMapFrequencyPipeOperator)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
             ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+                clsRenameTildeOperator.AddParameter("rename_function", clsRFunctionParameter:=clsRenameFunction, iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsMapFrequencyPipeOperator)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
@@ -574,33 +573,12 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
         ManageControlsVisibility()
         UpdateCombineFactorParameterFunction()
-        UpdateClsRenameCombineFunction()
         ChangeLocations()
         EnableDisableFrequencyControls()
         SwapMmtableHeaderFunctions()
         ChangeSummaryFunctionForThreeVariable()
         UpdateClsCombineFrequencyFactorParameterFunction()
         AddRemoveNAParameter()
-    End Sub
-
-    Private Sub UpdateClsRenameCombineFunction()
-        clsRenameCombineFunction.RemoveParameterByName("by_var")
-        clsRenameCombineFunction.RemoveParameterByName("second")
-        clsRenameCombineFunction.RemoveParameterByName("third")
-        clsRenameCombineFunction.RemoveParameterByName("fifth")
-        If rdoThreeVariable.Checked Then
-            If strSecondVariableType = "categorical" Then
-                clsRenameCombineFunction.AddParameter("second", "2", iPosition:=1, bIncludeArgumentName:=False)
-                clsRenameCombineFunction.AddParameter("by_var", "3", iPosition:=2)
-                clsRenameCombineFunction.AddParameter("fifth", "5", iPosition:=4, bIncludeArgumentName:=False)
-            ElseIf strSecondVariableType = "numeric" Then
-                clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
-                clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
-            End If
-        ElseIf rdoTwoVariable.Checked Then
-            clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
-            clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
-        End If
     End Sub
 
     Private Sub ChangeLocations()
@@ -767,13 +745,13 @@ Public Class dlgDescribeTwoVariable
         If rdoThreeVariable.Checked Then
             If strFirstVariablesType = "numeric" AndAlso
                   strSecondVariableType = "categorical" Then
-                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
+                clsRenameTildeOperator.AddParameter("rename_function", clsRFunctionParameter:=clSummaryTableFunction, iPosition:=1)
             Else
                 If strFirstVariablesType = "categorical" AndAlso
                   strSecondVariableType = "numeric" Then
                     clsFrequencyTablesFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=1)
                 End If
-                clsDataSelectTildeOperator.AddParameter("select_function", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+                clsRenameTildeOperator.AddParameter("rename_function", clsRFunctionParameter:=clsRenameFunction, iPosition:=1)
             End If
         End If
     End Sub
@@ -881,7 +859,6 @@ Public Class dlgDescribeTwoVariable
         AssignSecondVariableType()
         ManageControlsVisibility()
         UpdateCombineFactorParameterFunction()
-        UpdateClsRenameCombineFunction()
         ChangeLocations()
         EnableDisableFrequencyControls()
         SwapMmtableHeaderFunctions()
