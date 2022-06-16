@@ -837,7 +837,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub AddRemoveGroupBy()
-        Dim i As Integer = 0
 
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
@@ -853,8 +852,7 @@ Public Class dlgPICSARainfall
             End If
 
             If clsRaesFunction.ContainsParameter("colour") Then
-                clsGroupByFunction.AddParameter(i, ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                i = i + 1
+                clsGroupByFunction.AddParameter("colour", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
             End If
 
             If clsGroupByFunction.iParameterCount > 0 Then
