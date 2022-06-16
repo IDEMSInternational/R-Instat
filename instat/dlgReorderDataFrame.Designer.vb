@@ -46,7 +46,7 @@ Partial Class dlgReorderDataFrame
         'lblDataFrameToReorder
         '
         Me.lblDataFrameToReorder.AutoSize = True
-        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(10, 13)
+        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(175, 13)
         Me.lblDataFrameToReorder.Name = "lblDataFrameToReorder"
         Me.lblDataFrameToReorder.Size = New System.Drawing.Size(123, 13)
         Me.lblDataFrameToReorder.TabIndex = 0
@@ -56,14 +56,14 @@ Partial Class dlgReorderDataFrame
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(13, 210)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 210)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 2
         '
         'ucrDataFrameToReorder
         '
-        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(10, 29)
+        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(173, 29)
         Me.ucrDataFrameToReorder.Name = "ucrDataFrameToReorder"
         Me.ucrDataFrameToReorder.Size = New System.Drawing.Size(209, 175)
         Me.ucrDataFrameToReorder.TabIndex = 1
@@ -75,7 +75,7 @@ Partial Class dlgReorderDataFrame
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(422, 269)
+        Me.ClientSize = New System.Drawing.Size(415, 266)
         Me.Controls.Add(Me.lblDataFrameToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFrameToReorder)
