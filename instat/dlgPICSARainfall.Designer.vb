@@ -58,7 +58,6 @@ Partial Class dlgPICSARainfall
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -255,26 +254,12 @@ Partial Class dlgPICSARainfall
         Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
         Me.toolStripMenuItemPointOption.Text = "Point Options "
         '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.AutoSize = True
-        Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(248, 51)
-        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 4
-        Me.ucrReceiverY.ucrSelector = Nothing
-        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(463, 420)
-        Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
@@ -321,5 +306,4 @@ Partial Class dlgPICSARainfall
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
-    Friend WithEvents ucrReceiverY As ucrReceiverSingle
 End Class
