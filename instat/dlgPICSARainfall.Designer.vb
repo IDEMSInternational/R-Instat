@@ -98,7 +98,7 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdPICSAOptions.TabIndex = 12
@@ -223,7 +223,7 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 233)
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 223)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
@@ -260,7 +260,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 282)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkWithSE.TabIndex = 39
@@ -269,7 +269,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 258)
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 256)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(151, 23)
         Me.ucrChkLineofBestFit.TabIndex = 38

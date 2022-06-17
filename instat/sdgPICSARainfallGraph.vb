@@ -96,8 +96,6 @@ Public Class sdgPICSARainfallGraph
     Private clsAsNumeric As New RFunction
 
     Private clsGeomRug As New RFunction
-    Private clsRugParam As New RParameter
-
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OpeningMode()
         autoTranslate(Me)
@@ -106,6 +104,12 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctLegendYPosition As New Dictionary(Of String, String)
+        Dim dctLegendYPositionSig As New Dictionary(Of String, String)
+
+        Dim dctLegendXPosition As New Dictionary(Of String, String)
+        Dim dctLegendXPositionSig As New Dictionary(Of String, String)
+
         clsElementBlank = New RFunction
         clsElementBlank.SetPackageName("ggplot2")
         clsElementBlank.SetRCommand("element_blank")
@@ -452,11 +456,53 @@ Public Class sdgPICSARainfallGraph
         ucrChkRegEquation.SetText("Regression Line Equation")
         ucrChkRegEquation.AddParameterPresentCondition(True, "stat_regline")
         ucrChkRegEquation.AddParameterPresentCondition(False, "stat_regline", False)
+        ucrChkRegEquation.AddToLinkedControls({ucrInputLabelXReg, ucrInputLabelYReg}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'signifacant level
-        ucrChkSignLevel.SetText("Signifacance Level")
+        ucrChkSignLevel.SetText("Correlation (plus p value)")
         ucrChkSignLevel.AddParameterPresentCondition(True, "stat_cor")
         ucrChkSignLevel.AddParameterPresentCondition(False, "stat_cor", False)
+        ucrChkSignLevel.AddToLinkedControls({ucrInputLabelXCor, ucrInputLabelYCor}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLabelXReg.SetDropDownStyleAsNonEditable()
+        ucrInputLabelXReg.SetParameter(New RParameter("label.x.npc"))
+        dctLegendXPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendXPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendXPosition.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendXPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        ucrInputLabelXReg.SetItems(dctLegendXPosition)
+        ucrInputLabelXReg.SetLinkedDisplayControl(lblLabelXReg)
+
+        ucrInputLabelYReg.SetDropDownStyleAsNonEditable()
+        ucrInputLabelYReg.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendYPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendYPosition.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendYPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendYPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLabelYReg.SetItems(dctLegendYPosition)
+        ucrInputLabelYReg.SetLinkedDisplayControl(lblLabelYReg)
+
+        ucrInputLabelXCor.SetDropDownStyleAsNonEditable()
+        ucrInputLabelXCor.SetParameter(New RParameter("label.x.npc"))
+        dctLegendXPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendXPositionSig.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendXPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendXPositionSig.Add("Right", Chr(34) & "right" & Chr(34))
+        ucrInputLabelXCor.SetItems(dctLegendXPositionSig)
+        ucrInputLabelXCor.SetLinkedDisplayControl(lblLabelXCor)
+
+        ucrInputLabelYCor.SetDropDownStyleAsNonEditable()
+        ucrInputLabelYCor.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendYPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendYPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendYPositionSig.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendYPositionSig.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLabelYCor.SetItems(dctLegendYPositionSig)
+        ucrInputLabelYCor.SetLinkedDisplayControl(lblLabelYCor)
 
         ' Median Line
         ucrChkAddMedian.SetText("Add Median Line")
@@ -553,7 +599,6 @@ Public Class sdgPICSARainfallGraph
         ucrNudUpperLimit.Minimum = 1
         ucrNudUpperLimit.Maximum = 31
         ucrNudUpperLimit.Value = 31
-
 
         ' Rug Tab
         clsGeomRug.SetPackageName("ggplot2")
@@ -687,7 +732,6 @@ Public Class sdgPICSARainfallGraph
         dctThemeFunctions.TryGetValue("panel.border", clsPanelBorderElementRect)
 
         'Labels
-
         ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
         ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
         ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
@@ -961,6 +1005,12 @@ Public Class sdgPICSARainfallGraph
 
         ucrChkRegEquation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSignLevel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrInputLabelYReg.SetRCode(clsStatRegEquation, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelXReg.SetRCode(clsStatRegEquation, bReset, bCloneIfNeeded:=True)
+
+        ucrInputLabelYCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelXCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
         ucrInputHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)

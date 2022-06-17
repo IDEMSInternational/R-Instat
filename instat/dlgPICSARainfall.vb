@@ -394,10 +394,14 @@ Public Class dlgPICSARainfall
         clsStatRegEquation.SetPackageName("ggpubr")
         clsStatRegEquation.SetRCommand("stat_regline_equation")
         clsStatRegEquation.AddParameter("label.y", "100", iPosition:=0)
+        clsStatRegEquation.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=1)
+        clsStatRegEquation.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=2)
 
         'Significance level
         clsStatsCorFunction.SetPackageName("ggpubr")
         clsStatsCorFunction.SetRCommand("stat_cor")
+        clsStatsCorFunction.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
+        clsStatsCorFunction.AddParameter("label.y.npc", Chr(34) & "top" & Chr(34), iPosition:=1)
 
         ' Mean Line Label
         clsGeomTextLabelMeanLine.SetPackageName("ggplot2")
@@ -634,6 +638,7 @@ Public Class dlgPICSARainfall
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -856,12 +861,15 @@ Public Class dlgPICSARainfall
         If strPICSAMode = "rainfall" Then
             ucrChkLineofBestFit.Visible = False
             ucrChkWithSE.Visible = False
+            Me.Text = "PICSA Rainfall Graphs"
         ElseIf strPICSAMode = "temperature" Then
             ucrChkLineofBestFit.Visible = True
             ucrChkWithSE.Visible = True
-        ElseIf strPICSAMode = "general" Then
+            Me.Text = "PICSA Temperature Graphs"
+        Else
             ucrChkLineofBestFit.Visible = True
             ucrChkWithSE.Visible = True
+            Me.Text = "PICSA General Graphs"
         End If
     End Sub
 
