@@ -470,7 +470,7 @@ Public Class sdgPICSARainfallGraph
         dctLegendXPosition.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendXPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendXPosition.Add("Center", Chr(34) & "center" & Chr(34))
-        dctLegendXPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendXPosition.Add("Right", 0.7)
         ucrInputLabelXReg.SetItems(dctLegendXPosition)
         ucrInputLabelXReg.SetLinkedDisplayControl(lblLabelXReg)
 
@@ -490,7 +490,7 @@ Public Class sdgPICSARainfallGraph
         dctLegendXPositionSig.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendXPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendXPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
-        dctLegendXPositionSig.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendXPositionSig.Add("Right", 0.7)
         ucrInputLabelXCor.SetItems(dctLegendXPositionSig)
         ucrInputLabelXCor.SetLinkedDisplayControl(lblLabelXCor)
 

@@ -393,9 +393,8 @@ Public Class dlgPICSARainfall
         'Regression Equation line
         clsStatRegEquation.SetPackageName("ggpubr")
         clsStatRegEquation.SetRCommand("stat_regline_equation")
-        clsStatRegEquation.AddParameter("label.y", "100", iPosition:=0)
-        clsStatRegEquation.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=1)
-        clsStatRegEquation.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=2)
+        clsStatRegEquation.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
+        clsStatRegEquation.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=1)
 
         'Significance level
         clsStatsCorFunction.SetPackageName("ggpubr")
