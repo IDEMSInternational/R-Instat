@@ -986,6 +986,42 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
+    Private Sub SingleReceiver_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSecondTwoVariableFactor.Enter,
+        ucrReceiverThreeVariableSecondFactor.Enter, ucrReceiverNumericVariable.Enter
+        If sender Is ucrReceiverSecondTwoVariableFactor Then
+            For Each lstTempListView In ucrSelectorDescribeTwoVar.lstAvailableVariable.Items
+                For Each stVariableName In ucrReceiverFirstVars.GetVariableNamesAsList
+                    If stVariableName = lstTempListView.Text Then
+                        ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
+                    End If
+                Next
+            Next
+        ElseIf sender Is ucrReceiverThreeVariableSecondFactor Then
+            For Each lstTempListView In ucrSelectorDescribeTwoVar.lstAvailableVariable.Items
+                For Each stVariableName In ucrReceiverFirstVars.GetVariableNamesAsList
+                    If stVariableName = lstTempListView.Text Then
+                        ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
+                    End If
+                Next
+                If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
+                      ucrReceiverNumericVariable.GetVariableNames(False) = lstTempListView.Text Then
+                    ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
+                End If
+            Next
+        ElseIf sender Is ucrReceiverNumericVariable Then
+            For Each lstTempListView In ucrSelectorDescribeTwoVar.lstAvailableVariable.Items
+                For Each stVariableName In ucrReceiverFirstVars.GetVariableNamesAsList
+                    If stVariableName = lstTempListView.Text Then
+                        ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
+                    End If
+                Next
+                If ucrReceiverThreeVariableSecondFactor.GetVariableNames(False) = lstTempListView.Text Then
+                    ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
+                End If
+            Next
+        End If
+    End Sub
+
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
         UpdateCombineFactorParameterFunction()
         SwapMmtableHeaderFunctions()
