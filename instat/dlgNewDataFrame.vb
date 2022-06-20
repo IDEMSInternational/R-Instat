@@ -44,7 +44,6 @@ Public Class dlgNewDataFrame
         ucrBase.iHelpTopicID = 6
 
         Dim clsGetCategories As New RFunction
-        Dim expCategoryNames As SymbolicExpression
 
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
@@ -103,7 +102,7 @@ Public Class dlgNewDataFrame
 
         clsGetCategories.SetPackageName("rcorpora")
         clsGetCategories.SetRCommand("categories")
-        expCategoryNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
+        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
         If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
             Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
             arrAvailableCategories = chrCategoryNames.ToArray
@@ -767,18 +766,16 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub LoadLists()
-        Dim expTemp As SymbolicExpression
         Dim clsListFunction As New RFunction
 
         clsListFunction.SetPackageName("rcorpora")
         clsListFunction.SetRCommand("corpora")
 
         clsListFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34), iPosition:=0)
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
+        Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
 
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            Dim chrListNames As CharacterVector = expTemp.AsCharacter
-            arrAvailableLists = chrListNames.ToArray
+            arrAvailableLists = expTemp.AsCharacter.ToArray
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
@@ -790,17 +787,13 @@ Public Class dlgNewDataFrame
         If ucrChangedControl Is ucrInputCategory Then
             LoadLists()
         End If
-        If ucrInputCategory.GetText = "" Then
-            clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputListInCategory.GetText & Chr(34),
-                                            bIncludeArgumentName:=False, iPosition:=0)
+
+        If ucrInputListInCategory.GetText <> "" Then
+            clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & "/" & ucrInputListInCategory.GetText & Chr(34),
+                                                     bIncludeArgumentName:=False, iPosition:=0)
         Else
-            If ucrInputListInCategory.GetText <> "" Then
-                clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & "/" & ucrInputListInCategory.GetText & Chr(34),
+            clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34),
                                                  bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34),
-                                                 bIncludeArgumentName:=False, iPosition:=0)
-            End If
         End If
         clsListDfFunction.AddParameter("data", clsRFunctionParameter:=clsCorporaFunction, iPosition:=0)
         ucrInputLists.SetText(clsListDfFunction.ToScript)
