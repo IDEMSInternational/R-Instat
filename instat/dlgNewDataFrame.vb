@@ -26,8 +26,6 @@ Public Class dlgNewDataFrame
 
     Private arrAvailableCategories() As String
     Private arrAvailableLists() As String
-    Private strSelectedCategory As String = ""
-    'Private strCategory As String = ""
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me) this subroutine was causing a bug in the button examples
@@ -47,7 +45,6 @@ Public Class dlgNewDataFrame
 
         Dim clsGetCategories As New RFunction
         Dim expCategoryNames As SymbolicExpression
-        Dim chrCategoryNames As CharacterVector
 
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
@@ -108,7 +105,7 @@ Public Class dlgNewDataFrame
         clsGetCategories.SetRCommand("categories")
         expCategoryNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
         If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
-            chrCategoryNames = expCategoryNames.AsCharacter
+            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
             arrAvailableCategories = chrCategoryNames.ToArray
             Array.Sort(arrAvailableCategories)
             ucrInputCategory.SetParameter(New RParameter("category"))
@@ -771,20 +768,16 @@ Public Class dlgNewDataFrame
 
     Private Sub LoadLists()
         Dim expTemp As SymbolicExpression
-        Dim chrListNames As CharacterVector
         Dim clsListFunction As New RFunction
 
         clsListFunction.SetPackageName("rcorpora")
         clsListFunction.SetRCommand("corpora")
 
-        If ucrInputCategory.GetText = "" Then
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
-        Else
-            clsListFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34), iPosition:=0)
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
-        End If
+        clsListFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34), iPosition:=0)
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
+
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            chrListNames = expTemp.AsCharacter
+            Dim chrListNames As CharacterVector = expTemp.AsCharacter
             arrAvailableLists = chrListNames.ToArray
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
