@@ -55,7 +55,6 @@ Public Class sdgFiltersFromFactor
                                                   dctParamAndColNames:=dctParamAndColNames,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=False)
-        cmdToggleSelectAll.Enabled = False
     End Sub
 
     Public Sub SetRcodeAndDefaultDataFrame(ucrNewBaseSelector As ucrSelector, bReset As Boolean)
@@ -91,9 +90,6 @@ Public Class sdgFiltersFromFactor
         If ucrFactorLevels.IsAllGridRowsSelected() Then
             cmdToggleSelectAll.Text = "Deselect All Levels"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdToggleSelectAll.Text = "Select All Levels"
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
         autoTranslate(Me)
     End Sub
