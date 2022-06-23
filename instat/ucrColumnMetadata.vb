@@ -76,7 +76,7 @@ Public Class ucrColumnMetadata
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
-        _grid.ReOrderWorksheets()
+        '_grid.ReOrderWorksheets()
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()
@@ -122,6 +122,10 @@ Public Class ucrColumnMetadata
 
     Public Sub SetCurrentDataFrame(iIndex As Integer)
         _grid.SetCurrentDataFrame(iIndex)
+    End Sub
+
+    Public Sub ReOrderWorkSheets()
+        _grid.ReOrderWorksheets()
     End Sub
 
     Private Sub DeleteLables(strColumnName As String)

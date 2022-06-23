@@ -77,4 +77,8 @@ Public Class dlgReorderDataFrame
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.ReOrderWorkSheets()
+    End Sub
 End Class
