@@ -25,7 +25,7 @@ Public Class sdgPICSARainfallGraph
     Private clsMedianFunction As New RFunction
     Private clsLowerTercileFunction As New RFunction
     Private clsUpperTercileFunction As New RFunction
-    Private clsStatRegEquation As New RFunction
+    Private clsStatRegEquationFunction As New RFunction
     Private clsStatsCorFunction As New RFunction
 
     Private strMeanName As String = ".mean_y"
@@ -708,7 +708,7 @@ Public Class sdgPICSARainfallGraph
         clsPasteUpperTercileY = clsNewPasteUpperTercileY
         clsFormatUpperTercileY = clsNewFormatUpperTercileY
 
-        clsStatRegEquation = clsNewStatRegEquation
+        clsStatRegEquationFunction = clsNewStatRegEquation
         clsStatsCorFunction = clsNewStatsCorFunction
 
         ' The position MUST be larger than the position of the theme_* argument
@@ -1006,8 +1006,8 @@ Public Class sdgPICSARainfallGraph
         ucrChkRegEquation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSignLevel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
-        ucrInputLabelYReg.SetRCode(clsStatRegEquation, bReset, bCloneIfNeeded:=True)
-        ucrInputLabelXReg.SetRCode(clsStatRegEquation, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelYReg.SetRCode(clsStatRegEquationFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelXReg.SetRCode(clsStatRegEquationFunction, bReset, bCloneIfNeeded:=True)
 
         ucrInputLabelYCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLabelXCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
@@ -1378,14 +1378,16 @@ Public Class sdgPICSARainfallGraph
         Dim tbPageLines As TabPage = tpLines
         tbPICSA.TabPages.Remove(tbSlope)
         tbPICSA.TabPages.Remove(tpLines)
-        If dlgPICSARainfall.strPICSAMode = "temperature" Then
-            tbPICSA.TabPages.Add(tbPageSlope)
-        ElseIf dlgPICSARainfall.strPICSAMode = "rainfall" Then
-            tbPICSA.TabPages.Add(tbPageLines)
-        ElseIf dlgPICSARainfall.strPICSAMode = "general" Then
-            tbPICSA.TabPages.Add(tbPageLines)
-            tbPICSA.TabPages.Add(tbPageSlope)
-        End If
+
+        Select Case dlgPICSARainfall.enumPICSAMode
+            Case dlgPICSARainfall.PICSAMode.Temperature
+                tbPICSA.TabPages.Add(tbPageSlope)
+            Case dlgPICSARainfall.PICSAMode.Rainfall
+                tbPICSA.TabPages.Add(tbPageLines)
+            Case dlgPICSARainfall.PICSAMode.General
+                tbPICSA.TabPages.Add(tbPageLines)
+                tbPICSA.TabPages.Add(tbPageSlope)
+        End Select
     End Sub
 
     Private Sub XAxisAngleJust()
@@ -1649,7 +1651,7 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub ucrChkRegEquation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRegEquation.ControlValueChanged
         If ucrChkRegEquation.Checked Then
-            clsBaseOperator.AddParameter("stat_regline", clsRFunctionParameter:=clsStatRegEquation, iPosition:=28, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("stat_regline", clsRFunctionParameter:=clsStatRegEquationFunction, iPosition:=28, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("stat_regline")
         End If

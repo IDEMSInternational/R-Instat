@@ -21,8 +21,12 @@ Public Class dlgPICSARainfall
     Private clsBaseOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsMutateFunction As New RFunction
-    Public strPICSAMode As String = "rainfall"
-
+    Public enumPICSAMode As String = PICSAMode.Rainfall
+    Public Enum PICSAMode
+        Rainfall
+        Temperature
+        General
+    End Enum
 
     Private clsRggplotFunction As New RFunction
     Private clsGeomLine As New RFunction
@@ -67,8 +71,8 @@ Public Class dlgPICSARainfall
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-    Private clsGeomSmoothFunc As New RFunction
-    Private clsStatRegEquation As New RFunction
+    Private clsGeomSmoothFunction As New RFunction
+    Private clsStatRegEquationFunction As New RFunction
     Private clsStatsCorFunction As New RFunction
 
     Private strMeanName As String = ".mean_y"
@@ -254,9 +258,9 @@ Public Class dlgPICSARainfall
         clsRoundUpperTercileY = New RFunction
         clsAsDateUpperTercileY = New RFunction
 
-        clsStatRegEquation = New RFunction
+        clsStatRegEquationFunction = New RFunction
         clsStatsCorFunction = New RFunction
-        clsGeomSmoothFunc = New RFunction
+        clsGeomSmoothFunction = New RFunction
         clsPointsFunc = New RFunction
         clsGeomTextLabelMeanLine = New RFunction
         clsPasteMeanY = New RFunction
@@ -349,10 +353,10 @@ Public Class dlgPICSARainfall
         clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLine.AddParameter("size", "0.8")
 
-        clsGeomSmoothFunc.SetPackageName("ggplot2")
-        clsGeomSmoothFunc.SetRCommand("geom_smooth")
-        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
-        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
+        clsGeomSmoothFunction.SetPackageName("ggplot2")
+        clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsPointsFunc.SetPackageName("ggplot2")
         clsPointsFunc.SetRCommand("geom_point")
@@ -391,10 +395,10 @@ Public Class dlgPICSARainfall
         clsAsDateMeanY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
 
         'Regression Equation line
-        clsStatRegEquation.SetPackageName("ggpubr")
-        clsStatRegEquation.SetRCommand("stat_regline_equation")
-        clsStatRegEquation.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
-        clsStatRegEquation.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=1)
+        clsStatRegEquationFunction.SetPackageName("ggpubr")
+        clsStatRegEquationFunction.SetRCommand("stat_regline_equation")
+        clsStatRegEquationFunction.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
+        clsStatRegEquationFunction.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=1)
 
         'Significance level
         clsStatsCorFunction.SetPackageName("ggpubr")
@@ -659,7 +663,7 @@ Public Class dlgPICSARainfall
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
-        ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         If bReset Then
             AutoFacetStation()
         End If
@@ -791,7 +795,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, clsNewStatRegEquation:=clsStatRegEquation, clsNewStatsCorFunction:=clsStatsCorFunction,
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, clsNewStatRegEquation:=clsStatRegEquationFunction, clsNewStatsCorFunction:=clsStatsCorFunction,
                                        dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction,
                                        clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction,
                                        clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile,
@@ -813,24 +817,25 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub RemoveFunction()
-        If strPICSAMode = "rainfall" Then
-            clsBaseOperator.RemoveParameterByName("geom_smooth")
-            clsBaseOperator.RemoveParameterByName("stat_regline")
-            clsBaseOperator.RemoveParameterByName("stat_cor")
-            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
-        ElseIf strPICSAMode = "temperature" Then
-            clsBaseOperator.RemoveParameterByName("hlinemedian")
-            clsBaseOperator.RemoveParameterByName("annotate_median")
-            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-            clsBaseOperator.RemoveParameterByName("hlinemean")
-            clsBaseOperator.RemoveParameterByName("annotate_mean")
-            clsBaseOperator.RemoveParameterByName("hlinelowertercile")
-            clsBaseOperator.RemoveParameterByName("hlineuppertercile")
-            clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
-            clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
-        ElseIf strPICSAMode = "general" Then
-            clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
-        End If
+        Select Case enumPICSAMode
+            Case PICSAMode.General
+                clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            Case PICSAMode.Rainfall
+                clsBaseOperator.RemoveParameterByName("geom_smooth")
+                clsBaseOperator.RemoveParameterByName("stat_regline")
+                clsBaseOperator.RemoveParameterByName("stat_cor")
+                clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            Case PICSAMode.Temperature
+                clsBaseOperator.RemoveParameterByName("hlinemedian")
+                clsBaseOperator.RemoveParameterByName("annotate_median")
+                clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                clsBaseOperator.RemoveParameterByName("hlinemean")
+                clsBaseOperator.RemoveParameterByName("annotate_mean")
+                clsBaseOperator.RemoveParameterByName("hlinelowertercile")
+                clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+                clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
+                clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+        End Select
     End Sub
 
 
@@ -857,19 +862,20 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub OpeningMode()
-        If strPICSAMode = "rainfall" Then
-            ucrChkLineofBestFit.Visible = False
-            ucrChkWithSE.Visible = False
-            Me.Text = "PICSA Rainfall Graphs"
-        ElseIf strPICSAMode = "temperature" Then
-            ucrChkLineofBestFit.Visible = True
-            ucrChkWithSE.Visible = True
-            Me.Text = "PICSA Temperature Graphs"
-        Else
-            ucrChkLineofBestFit.Visible = True
-            ucrChkWithSE.Visible = True
-            Me.Text = "PICSA General Graphs"
-        End If
+        Select Case enumPICSAMode
+            Case PICSAMode.General
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "PICSA General Graphs"
+            Case PICSAMode.Rainfall
+                ucrChkLineofBestFit.Visible = False
+                ucrChkWithSE.Visible = False
+                Me.Text = "PICSA Rainfall Graphs"
+            Case PICSAMode.Temperature
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "PICSA Temperature Graphs"
+        End Select
     End Sub
 
 
@@ -1028,7 +1034,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
         If ucrChkLineofBestFit.Checked Then
-            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunc, iPosition:=4)
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=4)
         Else
             clsBaseOperator.RemoveParameterByName("geom_smooth")
         End If
