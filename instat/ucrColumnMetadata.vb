@@ -76,7 +76,6 @@ Public Class ucrColumnMetadata
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
-        '_grid.ReOrderWorksheets()
     End Sub
 
     Public Sub UpdateAllWorksheetStyles()

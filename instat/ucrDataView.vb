@@ -131,8 +131,6 @@ Public Class ucrDataView
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
-        'disabled for now since we didn't yet find a proper solution
-        '_grid.ReOrderWorksheets()
     End Sub
 
     Public Sub RefreshGridData()
