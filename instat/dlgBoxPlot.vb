@@ -73,6 +73,7 @@ Public Class dlgBoxplot
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        DialogueSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -182,6 +183,7 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
+        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -277,7 +279,6 @@ Public Class dlgBoxplot
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
@@ -317,21 +318,7 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
-                          clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                          clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
-                          clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableDiscrete:=False,
-                           clsNewAnnotateFunction:=clsAnnotateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-
-        'this syncs the coordflip in sdgplots and this main dlg
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-
-    End Sub
-
-    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+    Private Sub BoxPlotOptions()
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsCurrGeomFunc, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -373,25 +360,21 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
         If rdoBoxplotTufte.Checked Then
             If ucrChkTufte.Checked Then
-                cmdBoxPlotOptions.Text = "Tufte Box Options"
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
                 clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
-                cmdBoxPlotOptions.Text = "Box Options"
                 ucrSaveBoxplot.SetPrefix("box_plot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
             End If
 
         ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
         Else
-            cmdBoxPlotOptions.Text = "Violin Options"
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
@@ -403,26 +386,9 @@ Public Class dlgBoxplot
         autoTranslate(Me)
     End Sub
 
-    Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
-            cmdBoxPlotOptions.Enabled = True
-            cmdOptions.Enabled = True
-        Else
-            cmdBoxPlotOptions.Enabled = False
-            cmdOptions.Enabled = False
-        End If
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-        TempOptionsDisabledInMultipleVariablesCase()
-    End Sub
-
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
         SetGeomPrefixFillColourAes()
-    End Sub
-
-    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-        TestOkEnabled()
+        DialogueSize()
     End Sub
 
     Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
@@ -431,6 +397,67 @@ Public Class dlgBoxplot
         Else
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
+    End Sub
+
+    Private Sub cmdOptions_Click_1(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
+                        clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                        clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableDiscrete:=False,
+                         clsNewAnnotateFunction:=clsAnnotateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+
+        'this syncs the coordflip in sdgplots and this main dlg
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
+    Private Sub toolStripMenuItemBoxOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxOptions.Click
+        BoxPlotOptions()
+    End Sub
+
+    Private Sub toolStripMenuItemTufteOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTufteOptions.Click
+        BoxPlotOptions()
+    End Sub
+
+    Private Sub toolStripMenuItemJitterOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemJitterOptions.Click
+        BoxPlotOptions()
+    End Sub
+
+    Private Sub toolStripMenuItemViolinOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemViolinOptions.Click
+        BoxPlotOptions()
+    End Sub
+
+    Private Sub toolStripMenuItemPlotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPlotOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
+                clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableDiscrete:=False,
+                 clsNewAnnotateFunction:=clsAnnotateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+
+        'this syncs the coordflip in sdgplots and this main dlg
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+    End Sub
+    Private Sub DialogueSize()
+        If rdoBoxplotTufte.Checked Then
+            Me.Size = New Size(441, 505)
+            Me.ucrSaveBoxplot.Location = New Point(10, 384)
+            Me.ucrBase.Location = New Point(10, 413)
+        ElseIf rdoViolin.Checked Then
+            Me.Size = New Size(441, 505)
+            Me.ucrSaveBoxplot.Location = New Point(10, 384)
+            Me.ucrBase.Location = New Point(10, 413)
+        Else
+            Me.Size = New Size(441, 479)
+            Me.ucrSaveBoxplot.Location = New Point(10, 356)
+            Me.ucrBase.Location = New Point(10, 384)
+        End If
+    End Sub
+
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
