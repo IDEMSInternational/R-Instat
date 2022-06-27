@@ -170,6 +170,17 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkXaxis = New instat.ucrCheck()
         Me.ucrInputYaxisOptions = New instat.ucrInputComboBox()
         Me.ucrChkYaxis = New instat.ucrCheck()
+        Me.tbSlope = New System.Windows.Forms.TabPage()
+        Me.lblLabelYReg = New System.Windows.Forms.Label()
+        Me.lblLabelXCor = New System.Windows.Forms.Label()
+        Me.lblLabelYCor = New System.Windows.Forms.Label()
+        Me.lblLabelXReg = New System.Windows.Forms.Label()
+        Me.ucrInputLabelXReg = New instat.ucrInputComboBox()
+        Me.ucrInputLabelXCor = New instat.ucrInputComboBox()
+        Me.ucrInputLabelYCor = New instat.ucrInputComboBox()
+        Me.ucrInputLabelYReg = New instat.ucrInputComboBox()
+        Me.ucrChkSignLevel = New instat.ucrCheck()
+        Me.ucrChkRegEquation = New instat.ucrCheck()
         Me.ttPICSARainfallGraph = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.tbPICSA.SuspendLayout()
@@ -188,6 +199,7 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMajorGridLines.SuspendLayout()
         Me.grpPnlBackground.SuspendLayout()
         Me.tpRug.SuspendLayout()
+        Me.tbSlope.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXTo
@@ -228,6 +240,7 @@ Partial Class sdgPICSARainfallGraph
         Me.tbPICSA.Controls.Add(Me.tpLines)
         Me.tbPICSA.Controls.Add(Me.tpPanel)
         Me.tbPICSA.Controls.Add(Me.tpRug)
+        Me.tbPICSA.Controls.Add(Me.tbSlope)
         Me.tbPICSA.Location = New System.Drawing.Point(8, 6)
         Me.tbPICSA.Name = "tbPICSA"
         Me.tbPICSA.SelectedIndex = 0
@@ -1966,6 +1979,124 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkYaxis.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkYaxis.TabIndex = 0
         '
+        'tbSlope
+        '
+        Me.tbSlope.Controls.Add(Me.lblLabelYReg)
+        Me.tbSlope.Controls.Add(Me.lblLabelXCor)
+        Me.tbSlope.Controls.Add(Me.lblLabelYCor)
+        Me.tbSlope.Controls.Add(Me.lblLabelXReg)
+        Me.tbSlope.Controls.Add(Me.ucrInputLabelXReg)
+        Me.tbSlope.Controls.Add(Me.ucrInputLabelXCor)
+        Me.tbSlope.Controls.Add(Me.ucrInputLabelYCor)
+        Me.tbSlope.Controls.Add(Me.ucrInputLabelYReg)
+        Me.tbSlope.Controls.Add(Me.ucrChkSignLevel)
+        Me.tbSlope.Controls.Add(Me.ucrChkRegEquation)
+        Me.tbSlope.Location = New System.Drawing.Point(4, 22)
+        Me.tbSlope.Name = "tbSlope"
+        Me.tbSlope.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbSlope.Size = New System.Drawing.Size(581, 309)
+        Me.tbSlope.TabIndex = 6
+        Me.tbSlope.Text = "Slopes"
+        Me.tbSlope.UseVisualStyleBackColor = True
+        '
+        'lblLabelYReg
+        '
+        Me.lblLabelYReg.AutoSize = True
+        Me.lblLabelYReg.Location = New System.Drawing.Point(388, 17)
+        Me.lblLabelYReg.Name = "lblLabelYReg"
+        Me.lblLabelYReg.Size = New System.Drawing.Size(46, 13)
+        Me.lblLabelYReg.TabIndex = 16
+        Me.lblLabelYReg.Text = "Label Y:"
+        '
+        'lblLabelXCor
+        '
+        Me.lblLabelXCor.AutoSize = True
+        Me.lblLabelXCor.Location = New System.Drawing.Point(192, 51)
+        Me.lblLabelXCor.Name = "lblLabelXCor"
+        Me.lblLabelXCor.Size = New System.Drawing.Size(46, 13)
+        Me.lblLabelXCor.TabIndex = 15
+        Me.lblLabelXCor.Text = "Label X:"
+        '
+        'lblLabelYCor
+        '
+        Me.lblLabelYCor.AutoSize = True
+        Me.lblLabelYCor.Location = New System.Drawing.Point(388, 53)
+        Me.lblLabelYCor.Name = "lblLabelYCor"
+        Me.lblLabelYCor.Size = New System.Drawing.Size(46, 13)
+        Me.lblLabelYCor.TabIndex = 14
+        Me.lblLabelYCor.Text = "Label Y:"
+        '
+        'lblLabelXReg
+        '
+        Me.lblLabelXReg.AutoSize = True
+        Me.lblLabelXReg.Location = New System.Drawing.Point(192, 14)
+        Me.lblLabelXReg.Name = "lblLabelXReg"
+        Me.lblLabelXReg.Size = New System.Drawing.Size(46, 13)
+        Me.lblLabelXReg.TabIndex = 13
+        Me.lblLabelXReg.Text = "Label X:"
+        '
+        'ucrInputLabelXReg
+        '
+        Me.ucrInputLabelXReg.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelXReg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLabelXReg.GetSetSelectedIndex = -1
+        Me.ucrInputLabelXReg.IsReadOnly = False
+        Me.ucrInputLabelXReg.Location = New System.Drawing.Point(246, 12)
+        Me.ucrInputLabelXReg.Name = "ucrInputLabelXReg"
+        Me.ucrInputLabelXReg.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputLabelXReg.TabIndex = 12
+        '
+        'ucrInputLabelXCor
+        '
+        Me.ucrInputLabelXCor.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelXCor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLabelXCor.GetSetSelectedIndex = -1
+        Me.ucrInputLabelXCor.IsReadOnly = False
+        Me.ucrInputLabelXCor.Location = New System.Drawing.Point(246, 46)
+        Me.ucrInputLabelXCor.Name = "ucrInputLabelXCor"
+        Me.ucrInputLabelXCor.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputLabelXCor.TabIndex = 11
+        '
+        'ucrInputLabelYCor
+        '
+        Me.ucrInputLabelYCor.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelYCor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLabelYCor.GetSetSelectedIndex = -1
+        Me.ucrInputLabelYCor.IsReadOnly = False
+        Me.ucrInputLabelYCor.Location = New System.Drawing.Point(453, 46)
+        Me.ucrInputLabelYCor.Name = "ucrInputLabelYCor"
+        Me.ucrInputLabelYCor.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputLabelYCor.TabIndex = 10
+        '
+        'ucrInputLabelYReg
+        '
+        Me.ucrInputLabelYReg.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabelYReg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLabelYReg.GetSetSelectedIndex = -1
+        Me.ucrInputLabelYReg.IsReadOnly = False
+        Me.ucrInputLabelYReg.Location = New System.Drawing.Point(452, 13)
+        Me.ucrInputLabelYReg.Name = "ucrInputLabelYReg"
+        Me.ucrInputLabelYReg.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputLabelYReg.TabIndex = 8
+        '
+        'ucrChkSignLevel
+        '
+        Me.ucrChkSignLevel.AutoSize = True
+        Me.ucrChkSignLevel.Checked = False
+        Me.ucrChkSignLevel.Location = New System.Drawing.Point(9, 48)
+        Me.ucrChkSignLevel.Name = "ucrChkSignLevel"
+        Me.ucrChkSignLevel.Size = New System.Drawing.Size(212, 23)
+        Me.ucrChkSignLevel.TabIndex = 5
+        '
+        'ucrChkRegEquation
+        '
+        Me.ucrChkRegEquation.AutoSize = True
+        Me.ucrChkRegEquation.Checked = False
+        Me.ucrChkRegEquation.Location = New System.Drawing.Point(9, 10)
+        Me.ucrChkRegEquation.Name = "ucrChkRegEquation"
+        Me.ucrChkRegEquation.Size = New System.Drawing.Size(212, 23)
+        Me.ucrChkRegEquation.TabIndex = 4
+        '
         'ttPICSARainfallGraph
         '
         Me.ttPICSARainfallGraph.AutoPopDelay = 10000
@@ -2023,6 +2154,8 @@ Partial Class sdgPICSARainfallGraph
         Me.grpPnlBackground.PerformLayout()
         Me.tpRug.ResumeLayout(False)
         Me.tpRug.PerformLayout()
+        Me.tbSlope.ResumeLayout(False)
+        Me.tbSlope.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2177,4 +2310,15 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblXaxisOptions As Label
     Friend WithEvents ucrChkXaxis As ucrCheck
     Friend WithEvents ttPICSARainfallGraph As ToolTip
+    Friend WithEvents tbSlope As TabPage
+    Friend WithEvents ucrChkSignLevel As ucrCheck
+    Friend WithEvents ucrChkRegEquation As ucrCheck
+    Friend WithEvents ucrInputLabelYCor As ucrInputComboBox
+    Friend WithEvents ucrInputLabelYReg As ucrInputComboBox
+    Friend WithEvents ucrInputLabelXReg As ucrInputComboBox
+    Friend WithEvents ucrInputLabelXCor As ucrInputComboBox
+    Friend WithEvents lblLabelYReg As Label
+    Friend WithEvents lblLabelXCor As Label
+    Friend WithEvents lblLabelYCor As Label
+    Friend WithEvents lblLabelXReg As Label
 End Class
