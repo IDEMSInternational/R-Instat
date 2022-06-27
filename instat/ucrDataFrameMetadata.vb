@@ -24,8 +24,7 @@ Public Class ucrDataFrameMetadata
     Private _grid As IDataframeMetaDataGrid
     Dim _strNameLabel As String = "data_name"
 
-    '  Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
-    Public strPreviousCellText As String
+    '  Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheets
     Private lstNonEditableColumns As New List(Of String)
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
