@@ -25,6 +25,8 @@ Public Class sdgPICSARainfallGraph
     Private clsMedianFunction As New RFunction
     Private clsLowerTercileFunction As New RFunction
     Private clsUpperTercileFunction As New RFunction
+    Private clsStatRegEquationFunction As New RFunction
+    Private clsStatsCorFunction As New RFunction
 
     Private strMeanName As String = ".mean_y"
     Private strMedianName As String = ".median_y"
@@ -94,15 +96,20 @@ Public Class sdgPICSARainfallGraph
     Private clsAsNumeric As New RFunction
 
     Private clsGeomRug As New RFunction
-    Private clsRugParam As New RParameter
-
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        OpeningMode()
         autoTranslate(Me)
         ' Hide the rug tab
         tbPICSA.TabPages.Remove(tpRug)
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctLegendYPosition As New Dictionary(Of String, String)
+        Dim dctLegendYPositionSig As New Dictionary(Of String, String)
+
+        Dim dctLegendXPosition As New Dictionary(Of String, String)
+        Dim dctLegendXPositionSig As New Dictionary(Of String, String)
+
         clsElementBlank = New RFunction
         clsElementBlank.SetPackageName("ggplot2")
         clsElementBlank.SetRCommand("element_blank")
@@ -445,6 +452,58 @@ Public Class sdgPICSARainfallGraph
         ucrChkMeanLineLabelIncludeValue.AddParameterPresentCondition(True, "1", True)
         ucrChkMeanLineLabelIncludeValue.AddParameterPresentCondition(False, "1", False)
 
+        'Line Equation
+        ucrChkRegEquation.SetText("Regression Line Equation")
+        ucrChkRegEquation.AddParameterPresentCondition(True, "stat_regline")
+        ucrChkRegEquation.AddParameterPresentCondition(False, "stat_regline", False)
+        ucrChkRegEquation.AddToLinkedControls({ucrInputLabelXReg, ucrInputLabelYReg}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'signifacant level
+        ucrChkSignLevel.SetText("Correlation (plus p value)")
+        ucrChkSignLevel.AddParameterPresentCondition(True, "stat_cor")
+        ucrChkSignLevel.AddParameterPresentCondition(False, "stat_cor", False)
+        ucrChkSignLevel.AddToLinkedControls({ucrInputLabelXCor, ucrInputLabelYCor}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLabelXReg.SetDropDownStyleAsNonEditable()
+        ucrInputLabelXReg.SetParameter(New RParameter("label.x.npc"))
+        dctLegendXPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendXPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendXPosition.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendXPosition.Add("Right", 0.7)
+        ucrInputLabelXReg.SetItems(dctLegendXPosition)
+        ucrInputLabelXReg.SetLinkedDisplayControl(lblLabelXReg)
+
+        ucrInputLabelYReg.SetDropDownStyleAsNonEditable()
+        ucrInputLabelYReg.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendYPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendYPosition.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendYPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendYPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLabelYReg.SetItems(dctLegendYPosition)
+        ucrInputLabelYReg.SetLinkedDisplayControl(lblLabelYReg)
+
+        ucrInputLabelXCor.SetDropDownStyleAsNonEditable()
+        ucrInputLabelXCor.SetParameter(New RParameter("label.x.npc"))
+        dctLegendXPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendXPositionSig.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendXPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendXPositionSig.Add("Right", 0.7)
+        ucrInputLabelXCor.SetItems(dctLegendXPositionSig)
+        ucrInputLabelXCor.SetLinkedDisplayControl(lblLabelXCor)
+
+        ucrInputLabelYCor.SetDropDownStyleAsNonEditable()
+        ucrInputLabelYCor.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
+        dctLegendYPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
+        dctLegendYPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
+        dctLegendYPositionSig.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendYPositionSig.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLabelYCor.SetItems(dctLegendYPositionSig)
+        ucrInputLabelYCor.SetLinkedDisplayControl(lblLabelYCor)
+
         ' Median Line
         ucrChkAddMedian.SetText("Add Median Line")
         ucrChkAddMedian.AddParameterPresentCondition(True, "hlinemedian", True)
@@ -541,7 +600,6 @@ Public Class sdgPICSARainfallGraph
         ucrNudUpperLimit.Maximum = 31
         ucrNudUpperLimit.Value = 31
 
-
         ' Rug Tab
         clsGeomRug.SetPackageName("ggplot2")
         clsGeomRug.SetRCommand("geom_rug")
@@ -585,7 +643,26 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing,
+                        Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing,
+                        Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing,
+                        Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing,
+                        Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing,
+                        Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing,
+                        Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing,
+                        Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing,
+                        Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing,
+                        Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing,
+                        Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing,
+                        Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing,
+                        Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing,
+                        Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing,
+                        Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "",
+                        Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing,
+                        Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewStatRegEquation As RFunction = Nothing, Optional clsNewStatsCorFunction As RFunction = Nothing,
+                        Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing,
+                        Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing,
+                        Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim clsCLimitsY As RFunction
 
         bRCodeSet = False
@@ -631,6 +708,9 @@ Public Class sdgPICSARainfallGraph
         clsPasteUpperTercileY = clsNewPasteUpperTercileY
         clsFormatUpperTercileY = clsNewFormatUpperTercileY
 
+        clsStatRegEquationFunction = clsNewStatRegEquation
+        clsStatsCorFunction = clsNewStatsCorFunction
+
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
         ' Currently set to large value as no reason this cannot be at the end currently
@@ -652,7 +732,6 @@ Public Class sdgPICSARainfallGraph
         dctThemeFunctions.TryGetValue("panel.border", clsPanelBorderElementRect)
 
         'Labels
-
         ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
         ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
         ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
@@ -923,6 +1002,15 @@ Public Class sdgPICSARainfallGraph
         ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=3)
         ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=3)
         ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=3)
+
+        ucrChkRegEquation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkSignLevel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrInputLabelYReg.SetRCode(clsStatRegEquationFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelXReg.SetRCode(clsStatRegEquationFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrInputLabelYCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabelXCor.SetRCode(clsStatsCorFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
         ucrInputHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
@@ -1285,6 +1373,23 @@ Public Class sdgPICSARainfallGraph
         XAxisAngleJust()
     End Sub
 
+    Private Sub OpeningMode()
+        Dim tbPageSlope As TabPage = tbSlope
+        Dim tbPageLines As TabPage = tpLines
+        tbPICSA.TabPages.Remove(tbSlope)
+        tbPICSA.TabPages.Remove(tpLines)
+
+        Select Case dlgPICSARainfall.enumPICSAMode
+            Case dlgPICSARainfall.PICSAMode.Temperature
+                tbPICSA.TabPages.Add(tbPageSlope)
+            Case dlgPICSARainfall.PICSAMode.Rainfall
+                tbPICSA.TabPages.Add(tbPageLines)
+            Case dlgPICSARainfall.PICSAMode.General
+                tbPICSA.TabPages.Add(tbPageLines)
+                tbPICSA.TabPages.Add(tbPageSlope)
+        End Select
+    End Sub
+
     Private Sub XAxisAngleJust()
         If Not ucrChkXAxisAngle.Checked OrElse ucrNudXAxisAngle.Value = 0 Then
             clsXElementLabels.RemoveParameterByName("vjust")
@@ -1541,6 +1646,22 @@ Public Class sdgPICSARainfallGraph
     Private Sub ucrInputStartMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStartMonth.ControlValueChanged
         If bRCodeSet Then
             AddRemoveDateLimits()
+        End If
+    End Sub
+
+    Private Sub ucrChkRegEquation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRegEquation.ControlValueChanged
+        If ucrChkRegEquation.Checked Then
+            clsBaseOperator.AddParameter("stat_regline", clsRFunctionParameter:=clsStatRegEquationFunction, iPosition:=28, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("stat_regline")
+        End If
+    End Sub
+
+    Private Sub ucrChkSignLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSignLevel.ControlValueChanged
+        If ucrChkSignLevel.Checked Then
+            clsBaseOperator.AddParameter("stat_cor", clsRFunctionParameter:=clsStatsCorFunction, iPosition:=29, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("stat_cor")
         End If
     End Sub
 End Class
