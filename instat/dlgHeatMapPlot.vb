@@ -271,10 +271,6 @@ Public Class dlgHeatMapPlot
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -287,33 +283,6 @@ Public Class dlgHeatMapPlot
         Else
             clsBaseOperator.RemoveParameterByName("geom_text")
         End If
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                          clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
-                          strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                           clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
-    Private Sub cmdTileOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
-        ''''''' i wonder if all this will be needed for the new system
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetRugLayerSubdialog = False
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariableAsFactorForHeatMap.bSingleVariable) Then
-                ucrVariableAsFactorForHeatMap.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "x" Then
-                ucrReceiverX.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrReceiverFill.Add(clsParam.strArgumentValue)
-            End If
-        Next
     End Sub
 
     Private Sub ucrChkColourPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourPalette.ControlValueChanged
@@ -342,5 +311,47 @@ Public Class dlgHeatMapPlot
             End If
         End If
 
+    End Sub
+
+    Private Sub cmdOptions_Click_1(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                        clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
+                        clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                        clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
+                        strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                         clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub toolStripMenuItemPlotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPlotOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                       clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
+                       clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                       clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
+                       strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                        clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub toolStripMenuItemTileOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTileOptions.Click
+        ''''''' i wonder if all this will be needed for the new system
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetRugLayerSubdialog = False
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariableAsFactorForHeatMap.bSingleVariable) Then
+                ucrVariableAsFactorForHeatMap.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "x" Then
+                ucrReceiverX.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
+            End If
+        Next
+    End Sub
+
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
