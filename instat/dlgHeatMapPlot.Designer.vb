@@ -96,7 +96,7 @@ Partial Class dlgHeatMapPlot
         Me.lblPosition.Location = New System.Drawing.Point(91, 313)
         Me.lblPosition.Name = "lblPosition"
         Me.lblPosition.Size = New System.Drawing.Size(47, 13)
-        Me.lblPosition.TabIndex = 13
+        Me.lblPosition.TabIndex = 12
         Me.lblPosition.Text = "Position:"
         '
         'lblColour
@@ -106,7 +106,7 @@ Partial Class dlgHeatMapPlot
         Me.lblColour.Location = New System.Drawing.Point(208, 313)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(40, 13)
-        Me.lblColour.TabIndex = 15
+        Me.lblColour.TabIndex = 14
         Me.lblColour.Text = "Colour:"
         '
         'lblSize
@@ -116,7 +116,7 @@ Partial Class dlgHeatMapPlot
         Me.lblSize.Location = New System.Drawing.Point(314, 313)
         Me.lblSize.Name = "lblSize"
         Me.lblSize.Size = New System.Drawing.Size(30, 13)
-        Me.lblSize.TabIndex = 17
+        Me.lblSize.TabIndex = 16
         Me.lblSize.Text = "Size:"
         '
         'lblPointsOptional
@@ -173,7 +173,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrChkColourPalette.Location = New System.Drawing.Point(10, 339)
         Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
         Me.ucrChkColourPalette.Size = New System.Drawing.Size(128, 23)
-        Me.ucrChkColourPalette.TabIndex = 19
+        Me.ucrChkColourPalette.TabIndex = 18
         '
         'ucrInputColourPalette
         '
@@ -184,7 +184,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputColourPalette.Location = New System.Drawing.Point(141, 339)
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         Me.ucrInputColourPalette.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputColourPalette.TabIndex = 20
+        Me.ucrInputColourPalette.TabIndex = 19
         '
         'ucrInputSize
         '
@@ -195,7 +195,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputSize.Location = New System.Drawing.Point(347, 309)
         Me.ucrInputSize.Name = "ucrInputSize"
         Me.ucrInputSize.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSize.TabIndex = 18
+        Me.ucrInputSize.TabIndex = 17
         '
         'ucrInputColour
         '
@@ -206,7 +206,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputColour.Location = New System.Drawing.Point(251, 309)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputColour.TabIndex = 16
+        Me.ucrInputColour.TabIndex = 15
         '
         'ucrInputPosition
         '
@@ -217,7 +217,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputPosition.Location = New System.Drawing.Point(141, 309)
         Me.ucrInputPosition.Name = "ucrInputPosition"
         Me.ucrInputPosition.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputPosition.TabIndex = 14
+        Me.ucrInputPosition.TabIndex = 13
         '
         'ucrChkAddLabels
         '
@@ -226,7 +226,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrChkAddLabels.Location = New System.Drawing.Point(10, 309)
         Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
         Me.ucrChkAddLabels.Size = New System.Drawing.Size(82, 23)
-        Me.ucrChkAddLabels.TabIndex = 12
+        Me.ucrChkAddLabels.TabIndex = 11
         '
         'ucrVariableAsFactorForHeatMap
         '
@@ -274,7 +274,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(370, 24)
-        Me.ucrSaveGraph.TabIndex = 21
+        Me.ucrSaveGraph.TabIndex = 20
         '
         'ucrHeatMapSelector
         '
@@ -295,7 +295,7 @@ Partial Class dlgHeatMapPlot
         Me.ucrBase.Location = New System.Drawing.Point(8, 398)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 22
+        Me.ucrBase.TabIndex = 21
         '
         'cmdOptions
         '
@@ -305,7 +305,7 @@ Partial Class dlgHeatMapPlot
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.TabIndex = 24
+        Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
