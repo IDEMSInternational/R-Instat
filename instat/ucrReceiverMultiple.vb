@@ -83,7 +83,6 @@ Public Class ucrReceiverMultiple
 
     Public Overrides Sub Remove(strItems() As String)
         MyBase.Remove(strItems)
-        Dim strTempItem As String
 
         If strItems.Count > 0 Then
             For Each strTempItem In strItems
@@ -368,6 +367,16 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
+
+        Dim clsGetItems As New RFunction
+        Dim expColumn As SymbolicExpression
+        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetItems.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsGetItems.AddParameter("col_names", Chr(34) & strItem & Chr(34))
+        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+        If expColumn Is Nothing Then
+            Remove({strItem})
+        End If
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
