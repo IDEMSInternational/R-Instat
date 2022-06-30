@@ -1031,9 +1031,10 @@ Partial Class sdgFormatSummaryTables
         'ucrPnlHeader
         '
         Me.ucrPnlHeader.AutoSize = True
+        Me.ucrPnlHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlHeader.Location = New System.Drawing.Point(60, 26)
         Me.ucrPnlHeader.Name = "ucrPnlHeader"
-        Me.ucrPnlHeader.Size = New System.Drawing.Size(250, 25)
+        Me.ucrPnlHeader.Size = New System.Drawing.Size(0, 0)
         Me.ucrPnlHeader.TabIndex = 1
         '
         'tbpTable
@@ -1246,7 +1247,7 @@ Partial Class sdgFormatSummaryTables
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(169, 455)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(190, 455)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3

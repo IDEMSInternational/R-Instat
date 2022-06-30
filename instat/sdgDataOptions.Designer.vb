@@ -328,7 +328,7 @@ Partial Class sdgDataOptions
         'ucrSubDialogueBase
         '
         Me.ucrSubDialogueBase.AutoSize = True
-        Me.ucrSubDialogueBase.Location = New System.Drawing.Point(116, 323)
+        Me.ucrSubDialogueBase.Location = New System.Drawing.Point(74, 323)
         Me.ucrSubDialogueBase.Name = "ucrSubDialogueBase"
         Me.ucrSubDialogueBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrSubDialogueBase.TabIndex = 1

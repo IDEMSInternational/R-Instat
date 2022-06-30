@@ -181,6 +181,10 @@ Public Class sdgCombineGraphOptions
     Private Sub sdgCombineGraphOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadGraphs()
     End Sub
+
+    Private Sub ucrsdgLayoutBase_Load(sender As Object, e As EventArgs) Handles ucrsdgLayoutBase.Load
+
+    End Sub
 End Class
 
 

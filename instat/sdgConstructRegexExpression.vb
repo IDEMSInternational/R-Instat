@@ -101,4 +101,8 @@ Public Class sdgConstructRegexExpression
     Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
         ucrReceiverForRegex.AddtoCombobox(ucrReceiverForRegex.GetText)
     End Sub
+
+    Private Sub ucrBaseSubdialog_Load(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.Load
+
+    End Sub
 End Class
