@@ -2553,6 +2553,8 @@ read_corpora <- function(data){
     for (i in 1:length(data)){
       if (names(data[i]) == "description") {
         description <- data[i][[1]]
+      } else if (names(data[i]) == "meta"){
+        data_unlist[[i]] <- NULL 
       } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
           data_unlist[[i]] <- data.frame(list = data[[i]])
       } else if (class(data[[i]]) == "list"){
