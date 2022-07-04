@@ -2545,85 +2545,85 @@ is.containValueLabel <- function(x){
 }
 
 read_corpora <- function(data){
-data_unlist <- NULL
-description <- NULL
-if (is.data.frame(data)){
-  data_full <- data
-} else {
-  for (i in 1:length(data)){
-    if (!is.null(names(data[i])) && names(data[i]) == "description") {
-      description <- data[i][[1]]
-    } else if (!is.null(names(data[i])) && names(data[i]) == "meta"){
-      data_unlist[[i]] <- NULL
-    } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-      data_unlist[[i]] <- data.frame(list = data[[i]])
-      
-      # if it is a list
-    } else if (class(data[[i]]) == "list"){
-      data_unlist_2 <- NULL
-      if (length(data[[i]]) == 0) {
-        data_unlist[[i]] <- data.frame(NA)
-      } else {
-        for (j in 1:length(data[[i]])){
-          if (class(data[[i]][[j]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-            data_unlist_2[[j]] <- data.frame(list = data[[i]][[j]])
-            
-          } else if (class(data[[i]][[j]]) == "list"){
-            data_unlist_3 <- NULL
-            if (length(data[[i]][[j]]) == 0) {
-              data_unlist_3[[j]] <- data.frame(list = NA)
-            } else {
-              for (k in 1:length(data[[i]][[j]])){
-                if (class(data[[i]][[j]][[k]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-                  data_unlist_3[[k]] <- data.frame(list = data[[i]][[j]][[k]])
-                } else if (class(data[[i]][[j]][[k]]) == "list"){
-                  data_unlist_4 <- NULL
-                  if (length(data[[i]][[j]][[k]]) == 0){
-                    data_unlist_4[[k]] <- data.frame(list = NA)
-                  } else {
-                    for (l in 1:length(data[[i]][[j]][[k]])){
-                      if (class(data[[i]][[j]][[k]][[l]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-                        data_unlist_4[[l]] <- data.frame(list = data[[i]][[j]][[k]][[l]])
-                      } else if (class(data[[i]][[j]][[k]][[l]]) == "list"){
-                        if (length(data[[i]][[j]][[k]][[l]]) == 0) {
-                          data_unlist_4[[l]] <- data.frame(list = NA)
-                        } else {
-                          if (!is.null(names(data[[i]][[j]][[k]][[l]]))){
-                            data_unlist_2_i <- purrr::map(.x = names(data[[i]][[j]][[k]][[l]]), .f = ~data.frame(list = data[[i]][[j]][[k]][[l]][[.x]]))
-                            names(data_unlist_2_i) <- names(data[[i]][[j]][[k]][[l]])
-                            data_unlist_4[[l]] <- plyr::ldply(data_unlist_2_i, .id = "name")
+  data_unlist <- NULL
+  data_unlist_2 <- NULL
+  data_unlist_3 <- NULL
+  data_unlist_4 <- NULL
+  description <- NULL
+  if (is.data.frame(data)){
+    data_full <- data
+  } else {
+    for (i in 1:length(data)){
+      if (!is.null(names(data[i])) && names(data[i]) == "description") {
+        description <- data[i][[1]]
+      } else if (!is.null(names(data[i])) && names(data[i]) == "meta"){
+        data_unlist[[i]] <- NULL
+      } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+        data_unlist[[i]] <- data.frame(list = data[[i]])
+        
+        # if it is a list
+      } else if (class(data[[i]]) == "list"){
+        if (length(data[[i]]) == 0) {
+          data_unlist[[i]] <- data.frame(NA)
+        } else {
+          for (j in 1:length(data[[i]])){
+            if (class(data[[i]][[j]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+              data_unlist_2[[j]] <- data.frame(list = data[[i]][[j]])
+              
+            } else if (class(data[[i]][[j]]) == "list"){
+              if (length(data[[i]][[j]]) == 0) {
+                data_unlist_3[[j]] <- data.frame(list = NA)
+              } else {
+                for (k in 1:length(data[[i]][[j]])){
+                  if (class(data[[i]][[j]][[k]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+                    data_unlist_3[[k]] <- data.frame(list = data[[i]][[j]][[k]])
+                  } else if (class(data[[i]][[j]][[k]]) == "list"){
+                    if (length(data[[i]][[j]][[k]]) == 0){
+                      data_unlist_4[[k]] <- data.frame(list = NA)
+                    } else {
+                      for (l in 1:length(data[[i]][[j]][[k]])){
+                        if (class(data[[i]][[j]][[k]][[l]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+                          data_unlist_4[[l]] <- data.frame(list = data[[i]][[j]][[k]][[l]])
+                        } else if (class(data[[i]][[j]][[k]][[l]]) == "list"){
+                          if (length(data[[i]][[j]][[k]][[l]]) == 0) {
+                            data_unlist_4[[l]] <- data.frame(list = NA)
                           } else {
-                            data_unlist_4[[l]] <- (plyr::ldply(data[[i]][[j]][[k]][[l]], rbind, .id = "name"))
+                            if (!is.null(names(data[[i]][[j]][[k]][[l]]))){
+                              data_unlist_2_i <- purrr::map(.x = names(data[[i]][[j]][[k]][[l]]), .f = ~data.frame(list = data[[i]][[j]][[k]][[l]][[.x]]))
+                              names(data_unlist_2_i) <- names(data[[i]][[j]][[k]][[l]])
+                              data_unlist_4[[l]] <- plyr::ldply(data_unlist_2_i, .id = "variable4")
+                            } else {
+                              data_unlist_4[[l]] <- (plyr::ldply(data[[i]][[j]][[k]][[l]], rbind, .id = "variable4"))
+                            }
                           }
                         }
                       }
                     }
+                    names(data_unlist_4) <- names(data[[i]][[j]][[k]][1:length(data_unlist_4)])
+                    data_unlist_3[[k]] <- plyr::ldply(data_unlist_4, .id = "variable4")
                   }
                 }
               }
-              names(data_unlist_4) <- names(data[[i]][[j]][[k]][1:length(data_unlist_4)])
-              data_unlist_3[[k]] <- plyr::ldply(data_unlist_4, .id = "variable4")
+              names(data_unlist_3) <- names(data[[i]][[j]][1:length(data_unlist_3)])
+              data_unlist_2[[j]] <- plyr::ldply(data_unlist_3, .id = "variable3")
             }
           }
-          names(data_unlist_3) <- names(data[[i]][[j]][1:length(data_unlist_3)])
-          data_unlist_2[[j]] <- plyr::ldply(data_unlist_3, .id = "variable3")
         }
+        names(data_unlist_2) <- names(data[[i]][1:length(data_unlist_2)])
+        data_unlist[[i]] <- plyr::ldply(data_unlist_2, .id = "variable2")
+      } else if ("matrix" %in% class(data[[i]])){
+        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+      } else if (class(data[[i]]) == "data.frame"){
+        data_unlist[[i]] <- data.frame(list = data[[i]])
       }
-      names(data_unlist_2) <- names(data[[i]][1:length(data_unlist_2)])
-      data_unlist[[i]] <- plyr::ldply(data_unlist_2, .id = "variable2")
-    } else if ("matrix" %in% class(data[[i]])){
-      data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
-    } else if (class(data[[i]]) == "data.frame"){
-      data_unlist[[i]] <- data.frame(list = data[[i]])
+    }
+    names(data_unlist) <- names(data)
+    data_unlist <- plyr::ldply(data_unlist, .id = "variable1")
+    if (!is.null(description)){
+      data_full <- data.frame(description = description, data_unlist)
+    } else {
+      data_full <- data.frame(data_unlist)
     }
   }
-  names(data_unlist) <- names(data)
-  data_unlist <- plyr::ldply(data_unlist, .id = "variable1")
-  if (!is.null(description)){
-    data_full <- data.frame(description = description, data_unlist)
-  } else {
-    data_full <- data.frame(data_unlist)
-  }
-}
-return(data_full)
+  return(data_full %>% dplyr::relocate(list, .after = last_col()))
 }
