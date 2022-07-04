@@ -740,7 +740,8 @@ Public Class dlgImportDataset
             Dim iLinesToPreview As Integer = ucrNudPreviewLines.Value + If(IsCSVFileFormat(), ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
             lblTextFilePreview.Text = "Text File Preview:"
             Try
-                Using sReader As New StreamReader(strFilePathSystem)
+                Using sReader As New StreamReader(
+                        strFilePathSystem.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
                     For k = 0 To iLinesToPreview
                         txtTextFilePreview.Text &= sReader.ReadLine() & Environment.NewLine
                         If sReader.Peek() = -1 Then

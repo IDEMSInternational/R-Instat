@@ -123,6 +123,10 @@ Public Class ucrColumnMetadata
         _grid.SetCurrentDataFrame(iIndex)
     End Sub
 
+    Public Sub ReOrderWorkSheets()
+        _grid.ReOrderWorksheets()
+    End Sub
+
     Private Sub DeleteLables(strColumnName As String)
         Dim clsDeleteLabelsFunction As New RFunction
 

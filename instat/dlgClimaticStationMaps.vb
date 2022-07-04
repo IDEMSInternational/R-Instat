@@ -325,6 +325,22 @@ Public Class dlgClimaticStationMaps
         End If
     End Sub
 
+    Private Sub toolStripMenuItemLabelRepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLabelRepelOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsLabelRepelFunction, clsNewGlobalAesFunc:=clsLabelRepelAesFunction,
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorStation, bApplyAesGlobally:=True,
+                                   bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+    End Sub
+
+    Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomPointFunction, clsNewGlobalAesFunc:=clsGeomPointAesFunction,
+                                  clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorStation, bApplyAesGlobally:=True,
+                                  bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+    End Sub
+
     Private Sub AddExtraGeoms()
         clsGGplotOperator.RemoveParameterByName("geom_label")
         clsGGplotOperator.RemoveParameterByName("geom_point")

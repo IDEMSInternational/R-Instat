@@ -33,11 +33,7 @@ Public Class dlgScatterPlot
     Private clsFacetsFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
-    Dim strReceiverXVarType As String = ""
-    Dim strReceiverYSingleVarType As String = ""
-    Dim strReceiverYMultipleVarType As String = ""
     Private clsGeomSmoothFunc As New RFunction
-    Private clsGeomSmoothParameter As New RParameter
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
@@ -62,7 +58,6 @@ Public Class dlgScatterPlot
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-        CheckIfNumeric()
         autoTranslate(Me)
     End Sub
 
@@ -73,7 +68,6 @@ Public Class dlgScatterPlot
         ucrBase.iHelpTopicID = 433
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
-
 
         ucrSelectorForScatter.SetParameter(New RParameter("data", 0))
         ucrSelectorForScatter.SetParameterIsrfunction()
@@ -107,28 +101,20 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
-        clsGeomSmoothFunc.SetPackageName("ggplot2")
-        clsGeomSmoothFunc.SetRCommand("geom_smooth")
-        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
-        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
-        clsGeomSmoothParameter.SetArgumentName(strGeomSmoothParameterName)
-        clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
+        ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
-        clsGeomRugFunction.SetPackageName("ggplot2")
-        clsGeomRugFunction.SetRCommand("geom_rug")
-        clsGeomRugParameter.SetArgumentName("geom_rug")
-        clsGeomRugParameter.SetArgument(clsGeomRugFunction)
-        clsGeomRugParameter.Position = 3
         ucrChkAddRugPlot.SetText("Add Rug Plot")
-        ucrChkAddRugPlot.SetParameter(clsGeomRugParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkAddRugPlot.AddParameterPresentCondition(True, "geom_rug")
+        ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
+        ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
@@ -160,7 +146,6 @@ Public Class dlgScatterPlot
         ucrInputSides.SetRDefault(Chr(34) & "bl" & Chr(34))
         ucrInputSides.SetDropDownStyleAsNonEditable()
 
-        ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudSize.SetLinkedDisplayControl(lblSize)
         ucrInputSides.SetLinkedDisplayControl(lblSides)
     End Sub
@@ -170,6 +155,8 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsGeomSmoothFunc = New RFunction
+        clsGeomRugFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
@@ -195,6 +182,8 @@ Public Class dlgScatterPlot
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
+        clsGeomRugFunction.SetPackageName("ggplot2")
+        clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("size", 0.5, iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -215,6 +204,9 @@ Public Class dlgScatterPlot
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsGeomSmoothFunc.SetPackageName("ggplot2")
+        clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -237,7 +229,6 @@ Public Class dlgScatterPlot
 
     Private Sub TestOkEnabled()
         ' Either y or x can be empty but not both
-
         If (Not ucrSaveScatterPlot.IsComplete) OrElse (ucrVariablesAsFactorForScatter.IsEmpty AndAlso ucrReceiverX.IsEmpty()) Then
             ucrBase.OKEnabled(False)
         Else
@@ -290,31 +281,23 @@ Public Class dlgScatterPlot
         Next
     End Sub
 
-    Private Sub CheckIfNumeric()
-        'strReceiverXVarType = ucrReceiverX.strCurrDataType
-        'strReceiverYSingleVarType = ucrVariablesAsFactorForScatter.ucrSingleVariable.strCurrDataType
-
-        'If (ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Count > 0) Then
-        '    strReceiverYMultipleVarType = ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Item(0) 'how about the others as this just gets for the first one 
-        'Else
-        '    strReceiverYMultipleVarType = ""
-        'End If
-
-        'If (Not ucrVariablesAsFactorForScatter.IsEmpty() AndAlso Not ucrReceiverX.IsEmpty()) Then
-        '    If ((strReceiverXVarType = "numeric" OrElse strReceiverXVarType = "integer") AndAlso (strReceiverYSingleVarType = "numeric" OrElse strReceiverYSingleVarType = "integer")) OrElse (strReceiverYMultipleVarType = "numeric" OrElse strReceiverYMultipleVarType = "integer") Then
-        '        ucrChkLineofBestFit.Enabled = True
-        '    End If
-        'Else
-        '    ucrChkLineofBestFit.Enabled = False
-        '    clsBaseOperator.RemoveParameterByName("geom_smooth")
-        'End If
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-        ' CheckIfNumeric()
-    End Sub
-
     Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
+        If ucrChkLineofBestFit.Checked Then
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunc, iPosition:=4)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_smooth")
+        End If
+    End Sub
+
+    Private Sub ucrChkAddRugPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddRugPlot.ControlValueChanged
+        If ucrChkAddRugPlot.Checked Then
+            clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_rug")
+        End If
     End Sub
 End Class

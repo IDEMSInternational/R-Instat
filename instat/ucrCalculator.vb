@@ -55,12 +55,13 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
+
         'Temp disabled::Needs discussions to see if they are needed
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
@@ -209,9 +210,17 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdEscape, "Escape (with +*.? etc). For example, str_detect(c(""b$t"",""bat?"",""3*4""),""[\\?\\$\\*]"") gives TRUE TRUE TRUE")
         ttCalculator.SetToolTip(cmdPlusZero, "range of values. For example, str_count(c(""b$t"",""Bat?""),""[a-zA-Z]"") gives 2 3")
 
-
-
-
+        ttCalculator.SetToolTip(cmdBigZ, "encodes arbitrarily large integers")
+        ttCalculator.SetToolTip(cmdBigQ, "encodes rationals encoded as ratios or arbitrarily large integers")
+        ttCalculator.SetToolTip(cmdFactorial, "factorial n!, as big integer. For example, factorialZ(6)= 720")
+        ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
+        ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
+        ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, Factorize(20)= (2,5,2,1), Factorize(8)= 2:3 for (2,2,2)")
+        ttCalculator.SetToolTip(cmdPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
+        ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
+        ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
+        ttCalculator.SetToolTip(cmdRankPercent, "returns the percentile that the number correspods to. For example, PercentRank(c(1,2,5,11,15)) = 0.2,0.4,0.6,0.8,1.0")
+        ttCalculator.SetToolTip(cmdDigitSum, "calculates digit sum of x. For example, DigitSum(12344)= 14")
 
 
     End Sub
@@ -343,6 +352,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
                 strPackageName = "base"
@@ -363,6 +373,7 @@ Public Class ucrCalculator
                 grpWakefield.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                grpInteger.Visible = False
             Case "Summary"
                 strPackageName = "base"
                 grpDates.Visible = False
@@ -382,6 +393,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
             Case "Text/Strings (Character Columns)"
                 strPackageName = "stringr"
                 grpDates.Visible = False
@@ -400,6 +412,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = True
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
                 strPackageName = "base"
@@ -420,6 +433,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
             Case "Probability"
                 strPackageName = "stats"
                 grpDates.Visible = False
@@ -438,6 +452,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
                 strPackageName = "lubridate"
@@ -457,6 +472,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
                 strPackageName = "dplyr"
@@ -476,6 +492,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
             Case "Wakefield"
                 strPackageName = "wakefield"
@@ -495,6 +512,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
@@ -514,6 +532,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
                 strPackageName = "hydroGOF"
@@ -533,7 +552,28 @@ Public Class ucrCalculator
                 grpCircular.Visible = False
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
+                grpInteger.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
+            Case "Integer"
+                strPackageName = "gmp"
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
+                grpInteger.Visible = True
+                Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Basic"
                 grpSummary.Visible = False
                 grpMaths.Visible = False
@@ -552,6 +592,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
@@ -568,6 +609,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
+                grpInteger.Visible = False
                 iHelpCalcID = 14
         End Select
     End Sub
@@ -2898,5 +2940,109 @@ Public Class ucrCalculator
             strPackageName = "dplyr"
         End If
         OpenHelpPage()
+    End Sub
+
+    Private Sub cmdBigZ_Click(sender As Object, e As EventArgs) Handles cmdBigZ.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz(a = , mod = NA )", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPrime_Click(sender As Object, e As EventArgs) Handles cmdPrime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime(n = , reps = )", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIntegerHelp1_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp1.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "gmp"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdFactorial_Click(sender As Object, e As EventArgs) Handles cmdFactorial.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdChoosez_Click(sender As Object, e As EventArgs) Handles cmdChoosez.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::chooseZ(n = , k = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::chooseZ()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNextPrime_Click(sender As Object, e As EventArgs) Handles cmdNextPrime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDivisors_Click(sender As Object, e As EventArgs) Handles cmdDivisors.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Divisors(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Divisors()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRankPercent_Click(sender As Object, e As EventArgs) Handles cmdRankPercent.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::PercentRank(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::PercentRank()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDigitSum_Click(sender As Object, e As EventArgs) Handles cmdDigitSum.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::DigitSum(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::DigitSum()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIntegerHelp2_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp2.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "DescTools"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdBigQ_Click(sender As Object, e As EventArgs) Handles cmdBigQ.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(a = , mod = NA )", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 1)
+        End If
     End Sub
 End Class
