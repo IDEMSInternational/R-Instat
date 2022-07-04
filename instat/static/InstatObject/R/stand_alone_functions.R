@@ -2625,5 +2625,5 @@ read_corpora <- function(data){
       data_full <- data.frame(data_unlist)
     }
   }
-  return(data_full %>% dplyr::relocate(list, .after = last_col()))
+  return(data_full)
 }
