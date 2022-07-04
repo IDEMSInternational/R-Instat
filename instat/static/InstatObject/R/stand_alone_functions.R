@@ -2563,7 +2563,7 @@ read_corpora <- function(data){
           names(data_unlist_i) <- names(data[[i]])
           data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
         } else {
-          data_unlist[[i]] <- t(plyr::ldply(data[[i]], rbind, .id = "name"))
+          data_unlist[[i]] <- plyr::ldply(data[[i]], rbind, .id = "name")
         }
       } else if ("matrix" %in% class(data[[i]])){
         data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
