@@ -2260,14 +2260,12 @@ Partial Class frmMain
         '
         'mnuClimaticPICSATemperatureGraph
         '
-        Me.mnuClimaticPICSATemperatureGraph.Enabled = False
         Me.mnuClimaticPICSATemperatureGraph.Name = "mnuClimaticPICSATemperatureGraph"
         Me.mnuClimaticPICSATemperatureGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSATemperatureGraph.Text = "Temperature Graph..."
         '
         'mnuClimaticPICSAGeneralGraph
         '
-        Me.mnuClimaticPICSAGeneralGraph.Enabled = False
         Me.mnuClimaticPICSAGeneralGraph.Name = "mnuClimaticPICSAGeneralGraph"
         Me.mnuClimaticPICSAGeneralGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSAGeneralGraph.Text = "General Graph..."
