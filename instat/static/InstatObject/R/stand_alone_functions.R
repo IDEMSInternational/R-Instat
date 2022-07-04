@@ -2554,17 +2554,21 @@ read_corpora <- function(data){
       if (names(data[i]) == "description") {
         description <- data[i][[1]]
       } else if (names(data[i]) == "meta"){
-        data_unlist[[i]] <- NULL 
+        data_unlist[[i]] <- NULL
       } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-          data_unlist[[i]] <- data.frame(list = data[[i]])
+        data_unlist[[i]] <- data.frame(list = data[[i]])
       } else if (class(data[[i]]) == "list"){
+        if (!is.null(names(data[[i]]))){
           data_unlist_i <- purrr::map(.x = names(data[[i]]), .f = ~data.frame(list = data[[i]][[.x]]))
           names(data_unlist_i) <- names(data[[i]])
           data_unlist[[i]] <- plyr::ldply(data_unlist_i, .id = "name")
+        } else {
+          data_unlist[[i]] <- t(plyr::ldply(data[[i]], rbind, .id = "name"))
+        }
       } else if ("matrix" %in% class(data[[i]])){
-          data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+        data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
       } else if (class(data[[i]]) == "data.frame"){
-          data_unlist[[i]] <- data.frame(list = data[[i]])
+        data_unlist[[i]] <- data.frame(list = data[[i]])
       }
     }
     names(data_unlist) <- names(data)
