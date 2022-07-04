@@ -83,9 +83,9 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondGroupByFactor)
         ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor")
 
-        ucrReceiverNumericVariable.SetParameterIsString()
-        ucrReceiverNumericVariable.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverNumericVariable.SetLinkedDisplayControl(lblNumericVariable)
+        ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
+        ucrReceiverThreeVariableThirdVariable.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverThreeVariableThirdVariable.SetLinkedDisplayControl(lblThirdVariable)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -106,7 +106,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDescribe.AddToLinkedControls({ucrReceiverNumericVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableThirdVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondTwoVariableFactor}, {rdoTwoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableSecondFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -375,7 +375,7 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.OKEnabled(True)
             Else
                 If Not ucrReceiverThreeVariableSecondFactor.IsEmpty AndAlso
-                Not ucrReceiverNumericVariable.IsEmpty Then
+                Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
                     If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
                         If ucrChkThreeVariableDisplayAsPercentage.Checked Then
                             If ucrReceiverThreeVariableMultiplePercentages.IsEmpty Then
@@ -527,7 +527,7 @@ Public Class dlgDescribeTwoVariable
                                              bIncludeArgumentName:=False)
             If strSecondVariableType = "categorical" Then
                 clsSummaryTableCombineFactorsFunction.AddParameter("factor_two",
-                                                            ucrReceiverNumericVariable.GetVariableNames(), iPosition:=1,
+                                                            ucrReceiverThreeVariableThirdVariable.GetVariableNames(), iPosition:=1,
                                                             bIncludeArgumentName:=False)
                 If strFirstVariablesType = "categorical" Then
                     clsSummaryTableCombineFactorsFunction.AddParameter("factor_three",
@@ -645,8 +645,6 @@ Public Class dlgDescribeTwoVariable
                     grpTwoVariablePercentages.Visible = False
                 End If
                 grpFrequency.Visible = True
-            Else
-                ucrReceiverFirstVars.SetMeAsReceiver()
             End If
         ElseIf rdoThreeVariable.Checked Then
             If (strFirstVariablesType = "numeric" AndAlso
@@ -710,15 +708,15 @@ Public Class dlgDescribeTwoVariable
                             strTopLeft = Chr(39) & "by_var" & Chr(39)
                             clsSecondHeaderFunction.strRCommand = "header_top_left"
                         End If
-                        strSecondHeader = ucrReceiverNumericVariable.GetVariableNames()
+                        strSecondHeader = ucrReceiverThreeVariableThirdVariable.GetVariableNames()
                     Case "numeric"
                         If ucrNudColumnFactors.GetText = 1 Then
                             clsSecondHeaderFunction.strRCommand = "header_top_left"
-                            strLeftTop = ucrReceiverNumericVariable.GetVariableNames()
+                            strLeftTop = ucrReceiverThreeVariableThirdVariable.GetVariableNames()
                             strTopLeft = strFactor
                         ElseIf ucrNudColumnFactors.GetText = 2 Then
                             clsSecondHeaderFunction.strRCommand = "header_left_top"
-                            strTopLeft = ucrReceiverNumericVariable.GetVariableNames()
+                            strTopLeft = ucrReceiverThreeVariableThirdVariable.GetVariableNames()
                             strLeftTop = strFactor
                         End If
                         strSecondHeader = Chr(34) & "summary-variable" & Chr(34)
@@ -847,8 +845,8 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub ucrReceiverNumericVariable_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumericVariable.ControlValueChanged,
-               ucrReceiverNumericVariable.ControlContentsChanged
+    Private Sub ucrReceiverNumericVariable_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableThirdVariable.ControlValueChanged,
+               ucrReceiverThreeVariableThirdVariable.ControlContentsChanged
         AssignSecondVariableType()
         ManageControlsVisibility()
         UpdateCombineFactorParameterFunction()
@@ -912,7 +910,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub AssignSecondVariableType()
         If rdoTwoVariable.Checked OrElse rdoThreeVariable.Checked Then
             Dim ucrCurrentReceiver As ucrReceiverSingle = If(rdoTwoVariable.Checked,
-                ucrReceiverSecondTwoVariableFactor, ucrReceiverNumericVariable)
+                ucrReceiverSecondTwoVariableFactor, ucrReceiverThreeVariableThirdVariable)
             If Not ucrCurrentReceiver.IsEmpty Then
                 strSecondVariableType = If({"factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
@@ -987,7 +985,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SingleReceiver_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSecondTwoVariableFactor.Enter,
-        ucrReceiverThreeVariableSecondFactor.Enter, ucrReceiverNumericVariable.Enter
+        ucrReceiverThreeVariableSecondFactor.Enter, ucrReceiverThreeVariableThirdVariable.Enter
         If sender Is ucrReceiverSecondTwoVariableFactor Then
             For Each lstTempListView In ucrSelectorDescribeTwoVar.lstAvailableVariable.Items
                 For Each stVariableName In ucrReceiverFirstVars.GetVariableNamesAsList
@@ -1003,12 +1001,12 @@ Public Class dlgDescribeTwoVariable
                         ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
                     End If
                 Next
-                If ucrReceiverNumericVariable.strCurrDataType = "factor" AndAlso
-                      ucrReceiverNumericVariable.GetVariableNames(False) = lstTempListView.Text Then
+                If ucrReceiverThreeVariableThirdVariable.strCurrDataType = "factor" AndAlso
+                      ucrReceiverThreeVariableThirdVariable.GetVariableNames(False) = lstTempListView.Text Then
                     ucrSelectorDescribeTwoVar.lstAvailableVariable.Items.Remove(lstTempListView)
                 End If
             Next
-        ElseIf sender Is ucrReceiverNumericVariable Then
+        ElseIf sender Is ucrReceiverThreeVariableThirdVariable Then
             For Each lstTempListView In ucrSelectorDescribeTwoVar.lstAvailableVariable.Items
                 For Each stVariableName In ucrReceiverFirstVars.GetVariableNamesAsList
                     If stVariableName = lstTempListView.Text Then
