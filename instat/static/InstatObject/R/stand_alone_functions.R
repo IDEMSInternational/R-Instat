@@ -2620,10 +2620,7 @@ read_corpora <- function(data){
     names(data_unlist) <- names(data)
     data_unlist <- plyr::ldply(data_unlist, .id = "variable1")
     if (!is.null(description)){
-      data_full <- data.frame(description = description, data_unlist)
-    } else {
-      data_full <- data.frame(data_unlist)
-    }
-  }
-  return(data_full)
+      return (data.frame(description = description, data_unlist))
+    } 
+    return (data.frame(data_unlist))
 }
