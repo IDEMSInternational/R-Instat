@@ -578,6 +578,16 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
+        ElseIf rdoThreeVariable.Checked Then
+            lblThreeVariableCategorical.Visible = True
+            lblThreeVariableCategorical.Location = New Point(106, 18)
+            lblSecondType.Location = New Point(24, 33)
+            lblSecondBy.Visible = True
+        Else
+            lblThreeVariableCategorical.Visible = False
+            lblThreeVariableCategorical.Location = New Point(24, 33)
+            lblSecondType.Location = New Point(106, 18)
+            lblSecondBy.Visible = False
         End If
         ChangeFirstTypeLabel()
         AssignSecondVariableType()

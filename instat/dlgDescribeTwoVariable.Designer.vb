@@ -63,6 +63,8 @@ Partial Class dlgDescribeTwoVariable
         Me.grpThreeVariablePercentages = New System.Windows.Forms.GroupBox()
         Me.lblThreeVariableFactorAsPercentages = New System.Windows.Forms.Label()
         Me.lblThreeVariableSecondFactor = New System.Windows.Forms.Label()
+        Me.lblThreeVariableCategorical = New System.Windows.Forms.Label()
+        Me.lblSecondBy = New System.Windows.Forms.Label()
         Me.ucrReceiverThreeVariableMultiplePercentages = New instat.ucrReceiverMultiple()
         Me.ucrChkThreeVariablePercentageProportion = New instat.ucrCheck()
         Me.ucrChkThreeVariableDisplayAsPercentage = New instat.ucrCheck()
@@ -137,7 +139,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblSummary.AutoSize = True
         Me.lblSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummary.Location = New System.Drawing.Point(10, 43)
+        Me.lblSummary.Location = New System.Drawing.Point(10, 51)
         Me.lblSummary.Name = "lblSummary"
         Me.lblSummary.Size = New System.Drawing.Size(53, 13)
         Me.lblSummary.TabIndex = 4
@@ -176,13 +178,15 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.lblSummaryName.AutoSize = True
         Me.lblSummaryName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryName.Location = New System.Drawing.Point(70, 43)
+        Me.lblSummaryName.Location = New System.Drawing.Point(70, 51)
         Me.lblSummaryName.Name = "lblSummaryName"
         Me.lblSummaryName.Size = New System.Drawing.Size(0, 13)
         Me.lblSummaryName.TabIndex = 3
         '
         'grpSummaries
         '
+        Me.grpSummaries.Controls.Add(Me.lblSecondBy)
+        Me.grpSummaries.Controls.Add(Me.lblThreeVariableCategorical)
         Me.grpSummaries.Controls.Add(Me.lblFirstType)
         Me.grpSummaries.Controls.Add(Me.lblSummaryName)
         Me.grpSummaries.Controls.Add(Me.lblSummary)
@@ -377,6 +381,26 @@ Partial Class dlgDescribeTwoVariable
         Me.lblThreeVariableSecondFactor.TabIndex = 27
         Me.lblThreeVariableSecondFactor.Tag = ""
         Me.lblThreeVariableSecondFactor.Text = "Second Variable :"
+        '
+        'lblThreeVariableCategorical
+        '
+        Me.lblThreeVariableCategorical.AutoSize = True
+        Me.lblThreeVariableCategorical.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.lblThreeVariableCategorical.Location = New System.Drawing.Point(20, 33)
+        Me.lblThreeVariableCategorical.Name = "lblThreeVariableCategorical"
+        Me.lblThreeVariableCategorical.Size = New System.Drawing.Size(59, 13)
+        Me.lblThreeVariableCategorical.TabIndex = 4
+        Me.lblThreeVariableCategorical.Text = "categorical"
+        '
+        'lblSecondBy
+        '
+        Me.lblSecondBy.AutoSize = True
+        Me.lblSecondBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondBy.Location = New System.Drawing.Point(180, 16)
+        Me.lblSecondBy.Name = "lblSecondBy"
+        Me.lblSecondBy.Size = New System.Drawing.Size(18, 13)
+        Me.lblSecondBy.TabIndex = 5
+        Me.lblSecondBy.Text = "by"
         '
         'ucrReceiverThreeVariableMultiplePercentages
         '
@@ -698,4 +722,6 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrChkThreeVariablePercentageProportion As ucrCheck
     Friend WithEvents ucrChkThreeVariableDisplayAsPercentage As ucrCheck
     Friend WithEvents lblThreeVariableSecondFactor As Label
+    Friend WithEvents lblThreeVariableCategorical As Label
+    Friend WithEvents lblSecondBy As Label
 End Class
