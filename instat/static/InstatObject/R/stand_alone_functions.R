@@ -2551,8 +2551,8 @@ read_corpora <- function(data){
   data_unlist_4 <- NULL
   description <- NULL
   if (is.data.frame(data)){
-    data_full <- data
-  } else {
+    return(data)
+  } 
     for (i in 1:length(data)){
       if (!is.null(names(data[i])) && names(data[i]) == "description") {
         description <- data[i][[1]]
