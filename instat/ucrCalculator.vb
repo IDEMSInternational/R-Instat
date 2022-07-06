@@ -2960,14 +2960,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerHelp1_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp1.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Integer" Then
-            strPackageName = "gmp"
-        End If
-        OpenHelpPage()
-    End Sub
-
     Private Sub cmdFactorial_Click(sender As Object, e As EventArgs) Handles cmdFactorial.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ(n = )", 2)
@@ -3032,14 +3024,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerHelp2_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp2.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Integer" Then
-            strPackageName = "DescTools"
-        End If
-        OpenHelpPage()
-    End Sub
-
     Private Sub cmdBigQ_Click(sender As Object, e As EventArgs) Handles cmdBigQ.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(a = , mod = NA )", 13)
@@ -3070,5 +3054,29 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.hexmode(R.utils::intToHex())", 2)
         End If
+    End Sub
+
+    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "gmp"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DescToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescToolsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "DescTools"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub RutilsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RutilsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "R.utils"
+        End If
+        OpenHelpPage()
     End Sub
 End Class
