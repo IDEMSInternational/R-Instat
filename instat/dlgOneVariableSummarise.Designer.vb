@@ -54,6 +54,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -95,9 +96,9 @@ Partial Class dlgOneVariableSummarise
         Me.rdoCustomised.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCustomised.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCustomised.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCustomised.Location = New System.Drawing.Point(200, 12)
+        Me.rdoCustomised.Location = New System.Drawing.Point(254, 13)
         Me.rdoCustomised.Name = "rdoCustomised"
-        Me.rdoCustomised.Size = New System.Drawing.Size(128, 27)
+        Me.rdoCustomised.Size = New System.Drawing.Size(78, 27)
         Me.rdoCustomised.TabIndex = 22
         Me.rdoCustomised.TabStop = True
         Me.rdoCustomised.Text = "Customised"
@@ -112,9 +113,9 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDefault.Location = New System.Drawing.Point(77, 12)
+        Me.rdoDefault.Location = New System.Drawing.Point(103, 13)
         Me.rdoDefault.Name = "rdoDefault"
-        Me.rdoDefault.Size = New System.Drawing.Size(125, 27)
+        Me.rdoDefault.Size = New System.Drawing.Size(78, 27)
         Me.rdoDefault.TabIndex = 21
         Me.rdoDefault.TabStop = True
         Me.rdoDefault.Text = "Defaults"
@@ -124,9 +125,9 @@ Partial Class dlgOneVariableSummarise
         'ucrPnlSummaries
         '
         Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaries.Location = New System.Drawing.Point(75, 11)
+        Me.ucrPnlSummaries.Location = New System.Drawing.Point(101, 11)
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
-        Me.ucrPnlSummaries.Size = New System.Drawing.Size(255, 29)
+        Me.ucrPnlSummaries.Size = New System.Drawing.Size(234, 29)
         Me.ucrPnlSummaries.TabIndex = 20
         '
         'ucrChkDisplaySummariesAsRows
@@ -233,12 +234,30 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 23)
         Me.ucrChkDisplayMargins.TabIndex = 23
         '
+        'rdoSkim
+        '
+        Me.rdoSkim.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSkim.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatAppearance.BorderSize = 2
+        Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSkim.Location = New System.Drawing.Point(178, 13)
+        Me.rdoSkim.Name = "rdoSkim"
+        Me.rdoSkim.Size = New System.Drawing.Size(78, 27)
+        Me.rdoSkim.TabIndex = 26
+        Me.rdoSkim.TabStop = True
+        Me.rdoSkim.Text = "Skim"
+        Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSkim.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 395)
+        Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
@@ -283,4 +302,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents ucrInputMarginName As ucrInputTextBox
     Friend WithEvents lblMarginName As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
+    Friend WithEvents rdoSkim As RadioButton
 End Class
