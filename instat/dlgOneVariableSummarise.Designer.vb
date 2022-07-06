@@ -55,6 +55,7 @@ Partial Class dlgOneVariableSummarise
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -167,7 +168,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 314)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(241, 23)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrSelectorOneVarSummarise
@@ -251,12 +252,24 @@ Partial Class dlgOneVariableSummarise
         Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSkim.UseVisualStyleBackColor = True
         '
+        'cmdMissingOptions
+        '
+        Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(161, 308)
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
+        Me.cmdMissingOptions.TabIndex = 27
+        Me.cmdMissingOptions.Tag = "MissingOptions"
+        Me.cmdMissingOptions.Text = "Options"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 395)
+        Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
@@ -303,4 +316,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents lblMarginName As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents rdoSkim As RadioButton
+    Friend WithEvents cmdMissingOptions As Button
 End Class
