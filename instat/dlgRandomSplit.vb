@@ -53,7 +53,7 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.SetParameter(New RParameter("check"))
         ucrChkStratifyingFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
 
 
         ucrChkLag.SetText("Lag")
@@ -80,16 +80,14 @@ Public Class dlgRandomSplit
 
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
         ucrNudFraction.SetParameter(New RParameter("prop", 1))
-        ucrNudFraction.Minimum = 0.01
-        ucrNudFraction.Maximum = 0.99
+        ucrNudFraction.SetMinMax(0.01, 0.99)
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
 
         ucrNudPool.SetLinkedDisplayControl(lblPool)
         ucrNudPool.SetParameter(New RParameter("pool", 5))
         ucrNudPool.DecimalPlaces = 2
-        ucrNudPool.Minimum = 0.00
-        ucrNudPool.Maximum = 0.15
+        ucrNudPool.SetMinMax(0.00, 0.15)
         ucrNudPool.Increment = 0.01
 
         ucrPnlRandomSplit.AddRadioButton(rdoSample)
@@ -195,6 +193,7 @@ Public Class dlgRandomSplit
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrChkStratifyingFactor.ControlContentsChanged,
         ucrChkTestingData.ControlContentsChanged, ucrChkTrainingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged, ucrSaveRandomSplit.ControlContentsChanged
         TestOkEnabled()
