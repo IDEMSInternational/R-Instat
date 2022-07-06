@@ -67,7 +67,7 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddRadioButton(rdoSkim)
         ucrPnlSummaries.AddParameterValuesCondition(rdoCustomised, "checked_radio", "customised")
         ucrPnlSummaries.AddParameterValuesCondition(rdoDefault, "checked_radio", "defaults")
-        ucrPnlSummaries.AddParameterValuesCondition(rdoDefault, "checked_radio", "skim")
+        ucrPnlSummaries.AddParameterValuesCondition(rdoSkim, "checked_radio", "skim")
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrChkDisplaySummariesAsRows, ucrChkDisplayVariablesAsRows, ucrChkDisplayMargins},
                                             {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)

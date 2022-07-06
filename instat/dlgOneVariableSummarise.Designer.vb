@@ -96,7 +96,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoCustomised.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCustomised.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCustomised.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCustomised.Location = New System.Drawing.Point(254, 13)
+        Me.rdoCustomised.Location = New System.Drawing.Point(247, 13)
         Me.rdoCustomised.Name = "rdoCustomised"
         Me.rdoCustomised.Size = New System.Drawing.Size(78, 27)
         Me.rdoCustomised.TabIndex = 22
@@ -113,7 +113,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDefault.Location = New System.Drawing.Point(103, 13)
+        Me.rdoDefault.Location = New System.Drawing.Point(96, 13)
         Me.rdoDefault.Name = "rdoDefault"
         Me.rdoDefault.Size = New System.Drawing.Size(78, 27)
         Me.rdoDefault.TabIndex = 21
@@ -125,7 +125,7 @@ Partial Class dlgOneVariableSummarise
         'ucrPnlSummaries
         '
         Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaries.Location = New System.Drawing.Point(101, 11)
+        Me.ucrPnlSummaries.Location = New System.Drawing.Point(94, 11)
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
         Me.ucrPnlSummaries.Size = New System.Drawing.Size(234, 29)
         Me.ucrPnlSummaries.TabIndex = 20
@@ -242,7 +242,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(178, 13)
+        Me.rdoSkim.Location = New System.Drawing.Point(171, 13)
         Me.rdoSkim.Name = "rdoSkim"
         Me.rdoSkim.Size = New System.Drawing.Size(78, 27)
         Me.rdoSkim.TabIndex = 26
