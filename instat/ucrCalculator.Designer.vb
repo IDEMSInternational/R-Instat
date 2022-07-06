@@ -83,6 +83,10 @@ Partial Class ucrCalculator
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
+        Me.cmdAsHexmode = New System.Windows.Forms.Button()
+        Me.cmdAsOctmode = New System.Windows.Forms.Button()
+        Me.cmdBinary = New System.Windows.Forms.Button()
+        Me.cmdBigQ = New System.Windows.Forms.Button()
         Me.cmdIntegerHelp2 = New System.Windows.Forms.Button()
         Me.cmdDigitSum = New System.Windows.Forms.Button()
         Me.cmdRankPercent = New System.Windows.Forms.Button()
@@ -417,7 +421,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdBigQ = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -950,6 +953,9 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
+        Me.grpInteger.Controls.Add(Me.cmdAsHexmode)
+        Me.grpInteger.Controls.Add(Me.cmdAsOctmode)
+        Me.grpInteger.Controls.Add(Me.cmdBinary)
         Me.grpInteger.Controls.Add(Me.cmdBigQ)
         Me.grpInteger.Controls.Add(Me.cmdIntegerHelp2)
         Me.grpInteger.Controls.Add(Me.cmdDigitSum)
@@ -965,14 +971,54 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdBigZ)
         Me.grpInteger.Location = New System.Drawing.Point(432, 61)
         Me.grpInteger.Name = "grpInteger"
-        Me.grpInteger.Size = New System.Drawing.Size(152, 185)
+        Me.grpInteger.Size = New System.Drawing.Size(152, 201)
         Me.grpInteger.TabIndex = 183
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
         '
+        'cmdAsHexmode
+        '
+        Me.cmdAsHexmode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAsHexmode.Location = New System.Drawing.Point(75, 149)
+        Me.cmdAsHexmode.Name = "cmdAsHexmode"
+        Me.cmdAsHexmode.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAsHexmode.TabIndex = 15
+        Me.cmdAsHexmode.Text = "hex"
+        Me.cmdAsHexmode.UseVisualStyleBackColor = True
+        '
+        'cmdAsOctmode
+        '
+        Me.cmdAsOctmode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAsOctmode.Location = New System.Drawing.Point(1, 149)
+        Me.cmdAsOctmode.Name = "cmdAsOctmode"
+        Me.cmdAsOctmode.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAsOctmode.TabIndex = 14
+        Me.cmdAsOctmode.Text = "octal"
+        Me.cmdAsOctmode.UseVisualStyleBackColor = True
+        '
+        'cmdBinary
+        '
+        Me.cmdBinary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdBinary.Location = New System.Drawing.Point(75, 127)
+        Me.cmdBinary.Name = "cmdBinary"
+        Me.cmdBinary.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBinary.TabIndex = 13
+        Me.cmdBinary.Text = "binary"
+        Me.cmdBinary.UseVisualStyleBackColor = True
+        '
+        'cmdBigQ
+        '
+        Me.cmdBigQ.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdBigQ.Location = New System.Drawing.Point(75, 17)
+        Me.cmdBigQ.Name = "cmdBigQ"
+        Me.cmdBigQ.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBigQ.TabIndex = 12
+        Me.cmdBigQ.Text = "bigq"
+        Me.cmdBigQ.UseVisualStyleBackColor = True
+        '
         'cmdIntegerHelp2
         '
-        Me.cmdIntegerHelp2.Location = New System.Drawing.Point(75, 149)
+        Me.cmdIntegerHelp2.Location = New System.Drawing.Point(75, 171)
         Me.cmdIntegerHelp2.Name = "cmdIntegerHelp2"
         Me.cmdIntegerHelp2.Size = New System.Drawing.Size(75, 23)
         Me.cmdIntegerHelp2.TabIndex = 11
@@ -1045,7 +1091,7 @@ Partial Class ucrCalculator
         '
         'cmdIntegerHelp1
         '
-        Me.cmdIntegerHelp1.Location = New System.Drawing.Point(1, 149)
+        Me.cmdIntegerHelp1.Location = New System.Drawing.Point(1, 171)
         Me.cmdIntegerHelp1.Name = "cmdIntegerHelp1"
         Me.cmdIntegerHelp1.Size = New System.Drawing.Size(75, 23)
         Me.cmdIntegerHelp1.TabIndex = 3
@@ -4955,16 +5001,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdBigQ
-        '
-        Me.cmdBigQ.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdBigQ.Location = New System.Drawing.Point(75, 17)
-        Me.cmdBigQ.Name = "cmdBigQ"
-        Me.cmdBigQ.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBigQ.TabIndex = 12
-        Me.cmdBigQ.Text = "bigq"
-        Me.cmdBigQ.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5398,4 +5434,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdDivisors As Button
     Friend WithEvents cmdIntegerHelp2 As Button
     Friend WithEvents cmdBigQ As Button
+    Friend WithEvents cmdAsHexmode As Button
+    Friend WithEvents cmdAsOctmode As Button
+    Friend WithEvents cmdBinary As Button
 End Class
