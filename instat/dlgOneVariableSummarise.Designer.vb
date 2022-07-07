@@ -254,6 +254,7 @@ Partial Class dlgOneVariableSummarise
         '
         'cmdMissingOptions
         '
+        Me.cmdMissingOptions.Enabled = False
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdMissingOptions.Location = New System.Drawing.Point(161, 308)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"

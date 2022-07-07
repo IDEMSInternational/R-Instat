@@ -50,8 +50,6 @@ Public Class dlgOneVariableSummarise
         ucrBase.iHelpTopicID = 410
         ucrBase.clsRsyntax.iCallType = 2
 
-        cmdMissingOptions.Enabled = False
-
         'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
         ucrSelectorOneVarSummarise.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarSummarise.SetParameterIsString()
