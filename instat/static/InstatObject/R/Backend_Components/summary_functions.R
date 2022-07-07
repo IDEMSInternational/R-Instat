@@ -762,7 +762,11 @@ summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if(missing(weights) || is.null(weights)) {
-      return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+      if("Date" %in% class(x)){
+          return(quantile(x, na.rm = na.rm, probs = probs, type = 1)[[1]])
+      } else {
+          return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+      }
     }
     else {
       return(Hmisc::wtd.quantile(x, weights = weights, probs = probs, na.rm = na.rm))
