@@ -1880,32 +1880,32 @@ Partial Class frmMain
         'mnuClimaticDatesGenerateDates
         '
         Me.mnuClimaticDatesGenerateDates.Name = "mnuClimaticDatesGenerateDates"
-        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(162, 22)
-        Me.mnuClimaticDatesGenerateDates.Text = "Generate Dates..."
+        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(168, 22)
+        Me.mnuClimaticDatesGenerateDates.Text = "Regular Sequence"
         '
         'mnuClimaticDatesMakeDate
         '
         Me.mnuClimaticDatesMakeDate.Name = "mnuClimaticDatesMakeDate"
-        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(168, 22)
         Me.mnuClimaticDatesMakeDate.Text = "Make Date..."
         '
         'mnuClimaticDatesInfillMissingDates
         '
         Me.mnuClimaticDatesInfillMissingDates.Name = "mnuClimaticDatesInfillMissingDates"
-        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(168, 22)
         Me.mnuClimaticDatesInfillMissingDates.Text = "Fill Date Gaps..."
         '
         'mnuClimaticDatesUseDate
         '
         Me.mnuClimaticDatesUseDate.Name = "mnuClimaticDatesUseDate"
-        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(168, 22)
         Me.mnuClimaticDatesUseDate.Text = "Use Date..."
         '
         'mnuClimaticDatesMakeTime
         '
         Me.mnuClimaticDatesMakeTime.Enabled = False
         Me.mnuClimaticDatesMakeTime.Name = "mnuClimaticDatesMakeTime"
-        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(168, 22)
         Me.mnuClimaticDatesMakeTime.Text = "Make Time..."
         Me.mnuClimaticDatesMakeTime.Visible = False
         '
@@ -1913,7 +1913,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticDatesUseTime.Enabled = False
         Me.mnuClimaticDatesUseTime.Name = "mnuClimaticDatesUseTime"
-        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(168, 22)
         Me.mnuClimaticDatesUseTime.Text = "Use Time..."
         Me.mnuClimaticDatesUseTime.Visible = False
         '
@@ -3856,32 +3856,32 @@ Partial Class frmMain
         'mnuPrepareColumnDateGenerateDate
         '
         Me.mnuPrepareColumnDateGenerateDate.Name = "mnuPrepareColumnDateGenerateDate"
-        Me.mnuPrepareColumnDateGenerateDate.Size = New System.Drawing.Size(162, 22)
-        Me.mnuPrepareColumnDateGenerateDate.Text = "Generate Dates..."
+        Me.mnuPrepareColumnDateGenerateDate.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnDateGenerateDate.Text = "Regular Sequence"
         '
         'mnuPrepareColumnDateMakeDate
         '
         Me.mnuPrepareColumnDateMakeDate.Name = "mnuPrepareColumnDateMakeDate"
-        Me.mnuPrepareColumnDateMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateMakeDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateMakeDate.Text = "Make Date..."
         '
         'mnuPrepareColumnDateInfillMissingDates
         '
         Me.mnuPrepareColumnDateInfillMissingDates.Name = "mnuPrepareColumnDateInfillMissingDates"
-        Me.mnuPrepareColumnDateInfillMissingDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateInfillMissingDates.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateInfillMissingDates.Text = "Fill Date Gaps..."
         '
         'mnuPrepareColumnDateUseDate
         '
         Me.mnuPrepareColumnDateUseDate.Name = "mnuPrepareColumnDateUseDate"
-        Me.mnuPrepareColumnDateUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateUseDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateUseDate.Text = "Use Date..."
         '
         'mnuPrepareColumnDateMakeTime
         '
         Me.mnuPrepareColumnDateMakeTime.Enabled = False
         Me.mnuPrepareColumnDateMakeTime.Name = "mnuPrepareColumnDateMakeTime"
-        Me.mnuPrepareColumnDateMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateMakeTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateMakeTime.Text = "Make Time..."
         Me.mnuPrepareColumnDateMakeTime.Visible = False
         '
@@ -3889,7 +3889,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnDateUseTime.Enabled = False
         Me.mnuPrepareColumnDateUseTime.Name = "mnuPrepareColumnDateUseTime"
-        Me.mnuPrepareColumnDateUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateUseTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateUseTime.Text = "Use Time..."
         Me.mnuPrepareColumnDateUseTime.Visible = False
         '
