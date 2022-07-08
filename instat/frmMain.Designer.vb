@@ -647,6 +647,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -675,7 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1881,32 +1881,32 @@ Partial Class frmMain
         'mnuClimaticDatesGenerateDates
         '
         Me.mnuClimaticDatesGenerateDates.Name = "mnuClimaticDatesGenerateDates"
-        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(162, 22)
-        Me.mnuClimaticDatesGenerateDates.Text = "Generate Dates..."
+        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticDatesGenerateDates.Text = "Regular Sequence..."
         '
         'mnuClimaticDatesMakeDate
         '
         Me.mnuClimaticDatesMakeDate.Name = "mnuClimaticDatesMakeDate"
-        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesMakeDate.Text = "Make Date..."
         '
         'mnuClimaticDatesInfillMissingDates
         '
         Me.mnuClimaticDatesInfillMissingDates.Name = "mnuClimaticDatesInfillMissingDates"
-        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesInfillMissingDates.Text = "Fill Date Gaps..."
         '
         'mnuClimaticDatesUseDate
         '
         Me.mnuClimaticDatesUseDate.Name = "mnuClimaticDatesUseDate"
-        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesUseDate.Text = "Use Date..."
         '
         'mnuClimaticDatesMakeTime
         '
         Me.mnuClimaticDatesMakeTime.Enabled = False
         Me.mnuClimaticDatesMakeTime.Name = "mnuClimaticDatesMakeTime"
-        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesMakeTime.Text = "Make Time..."
         Me.mnuClimaticDatesMakeTime.Visible = False
         '
@@ -1914,7 +1914,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticDatesUseTime.Enabled = False
         Me.mnuClimaticDatesUseTime.Name = "mnuClimaticDatesUseTime"
-        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuClimaticDatesUseTime.Text = "Use Time..."
         Me.mnuClimaticDatesUseTime.Visible = False
         '
@@ -3855,32 +3855,32 @@ Partial Class frmMain
         'mnuPrepareColumnDateGenerateDate
         '
         Me.mnuPrepareColumnDateGenerateDate.Name = "mnuPrepareColumnDateGenerateDate"
-        Me.mnuPrepareColumnDateGenerateDate.Size = New System.Drawing.Size(162, 22)
-        Me.mnuPrepareColumnDateGenerateDate.Text = "Generate Dates..."
+        Me.mnuPrepareColumnDateGenerateDate.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareColumnDateGenerateDate.Text = "Regular Sequence..."
         '
         'mnuPrepareColumnDateMakeDate
         '
         Me.mnuPrepareColumnDateMakeDate.Name = "mnuPrepareColumnDateMakeDate"
-        Me.mnuPrepareColumnDateMakeDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateMakeDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateMakeDate.Text = "Make Date..."
         '
         'mnuPrepareColumnDateInfillMissingDates
         '
         Me.mnuPrepareColumnDateInfillMissingDates.Name = "mnuPrepareColumnDateInfillMissingDates"
-        Me.mnuPrepareColumnDateInfillMissingDates.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateInfillMissingDates.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateInfillMissingDates.Text = "Fill Date Gaps..."
         '
         'mnuPrepareColumnDateUseDate
         '
         Me.mnuPrepareColumnDateUseDate.Name = "mnuPrepareColumnDateUseDate"
-        Me.mnuPrepareColumnDateUseDate.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateUseDate.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateUseDate.Text = "Use Date..."
         '
         'mnuPrepareColumnDateMakeTime
         '
         Me.mnuPrepareColumnDateMakeTime.Enabled = False
         Me.mnuPrepareColumnDateMakeTime.Name = "mnuPrepareColumnDateMakeTime"
-        Me.mnuPrepareColumnDateMakeTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateMakeTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateMakeTime.Text = "Make Time..."
         Me.mnuPrepareColumnDateMakeTime.Visible = False
         '
@@ -3888,7 +3888,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnDateUseTime.Enabled = False
         Me.mnuPrepareColumnDateUseTime.Name = "mnuPrepareColumnDateUseTime"
-        Me.mnuPrepareColumnDateUseTime.Size = New System.Drawing.Size(162, 22)
+        Me.mnuPrepareColumnDateUseTime.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnDateUseTime.Text = "Use Time..."
         Me.mnuPrepareColumnDateUseTime.Visible = False
         '
@@ -4634,7 +4634,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -4676,7 +4676,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -4695,7 +4695,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -4731,7 +4731,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -4757,20 +4757,27 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
         '
         Me.mnuOptionsByContextModelFitModel.Name = "mnuOptionsByContextModelFitModel"
-        Me.mnuOptionsByContextModelFitModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextModelFitModel.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextModelFitModel.Text = "Fit Model..."
         '
         'mnuOptionsByContextGeneralFitModel
         '
         Me.mnuOptionsByContextGeneralFitModel.Name = "mnuOptionsByContextGeneralFitModel"
-        Me.mnuOptionsByContextGeneralFitModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextGeneralFitModel.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextGeneralFitModel.Text = "General Fit Model..."
+        '
+        'mnuOptionsByContextCropModel
+        '
+        Me.mnuOptionsByContextCropModel.Enabled = False
+        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(146, 22)
+        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
         '
         'mnuTools
         '
@@ -5066,13 +5073,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuOptionsByContextCropModel
-        '
-        Me.mnuOptionsByContextCropModel.Enabled = False
-        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
         '
         'frmMain
         '
