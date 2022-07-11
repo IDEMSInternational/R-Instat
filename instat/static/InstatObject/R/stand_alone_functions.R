@@ -2566,46 +2566,15 @@ read_corpora <- function(data){
     } else if (class(data[[i]]) == "list"){
       if (length(data[[i]]) == 0) {
         data_unlist[[i]] <- data.frame(NA)
-      } else {
-        data_unlist_2 <- NULL
-        for (j in 1:length(data[[i]])){
-          if (class(data[[i]][[j]]) %in% c("list", "character")){
-            if (length(data[[i]][[j]]) == 0) {
-              data_unlist_2[[j]] <- data.frame(list = NA)
-            } else {
-              data_unlist_3 <- NULL
-              for (k in 1:length(data[[i]][[j]])){
-                if (class(data[[i]][[j]][[k]]) %in% c("list", "character")){
-                  if (length(data[[i]][[j]][[k]]) == 0) {
-                    data_unlist_3[[k]] <- data.frame(list = NA)
-                  } else {        
-                    data_unlist_4 <- NULL
-                    for (l in 1:length(data[[i]][[j]][[k]])){
-                      if (class(data[[i]][[j]][[k]][[l]]) %in% c("list", "character")){
-                        data_unlist_4[[l]] <- corpora_list_function(data = data[[i]][[j]][[k]][[l]], k = l)
-                      } else {
-                        data_unlist_4[[l]] <- read_corpora(data = data[[i]][[j]][[k]][[l]])
-                      }
-                    } # end of for loop (i, j, k)
-                    names(data_unlist_4) <- names(data[[i]][[j]][[k]][1:length(data_unlist_4)])
-                    data_unlist_3[[k]] <- plyr::ldply(data_unlist_4, .id = "variable4")
-                  }
-                } else {
-                  data_unlist_3[[k]] <- read_corpora(data = data[[i]][[j]][[k]][[l]])
-                }
-              } # end of for loop (i, j)
-              names(data_unlist_3) <- names(data[[i]][[j]][1:length(data_unlist_3)])
-              data_unlist_2[[j]] <- plyr::ldply(data_unlist_3, .id = "variable3")
-            }
-          } else {
-            data_unlist_2[[j]] <- read_corpora(data = data[[i]]) # move this?
-          } # end of i, j if else
-        } # end of for loop (i)
-        names(data_unlist_2) <- names(data[[i]][1:length(data_unlist_2)])
-        data_unlist[[i]] <- plyr::ldply(data_unlist_2, .id = "variable2")
-      } # end of list else
-    } # end of list
-  } # end of big for loop
+        } else {
+          new_data <- as_tibble(unlist(data), rownames = "rowname")
+          split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
+          split <- gsub("[0-9]$|[0-9][0-9]$","",split)
+          data_unlist[[i]] <- cbind(data.frame(split), value = new_data$value)
+          names(data_unlist[[i]]) <- c(paste0("variable", 1:(length(data_unlist[[i]])-1)), "list")
+        } # end of ifelse lists
+      } # end of list
+    } # end of for loop
   names(data_unlist) <- names(data[1:length(data_unlist)])
   data_all <- plyr::ldply(data_unlist, .id = "variable1")
   
@@ -2613,31 +2582,4 @@ read_corpora <- function(data){
     return (data.frame(description = description, data_all))
   } 
   return (data.frame(data_all))
-}
-
-corpora_list_function <- function(data, k){
-  data_unlist_4 <- NULL
-  if (length(data) == 0){
-    data_unlist_4[[k]] <- data.frame(list = NA)
-  } else {
-    for (l in 1:length(data)){
-      if (class(data[[l]]) %in% c("character", "factor", "logical", "numeric", "integer")){
-        data_unlist_4[[l]] <- data.frame(list = data[[l]])
-      } else if (class(data[[l]]) == "list"){
-        if (length(data[[l]]) == 0) {
-          data_unlist_4[[l]] <- data.frame(list = NA)
-        } else {
-          if (!is.null(names(data[[l]]))){
-            data_unlist_2_i <- purrr::map(.x = names(data[[l]]), .f = ~data.frame(list = data[[l]][[.x]]))
-            names(data_unlist_2_i) <- names(data[[l]])
-            data_unlist_4[[l]] <- plyr::ldply(data_unlist_2_i, .id = "variable")
-          } else {
-            data_unlist_4[[l]] <- (plyr::ldply(data[[l]], rbind, .id = "variable5"))
-          }
-        }
-      }
-    }
-  }
-  names(data_unlist_4) <- names(data[1:length(data_unlist_4)])
-  return(plyr::ldply(data_unlist_4, .id = "variable5"))
 }
