@@ -2567,7 +2567,7 @@ read_corpora <- function(data){
       if (length(data[[i]]) == 0) {
         data_unlist[[i]] <- data.frame(NA)
         } else {
-          new_data <- as_tibble(unlist(data), rownames = "rowname")
+          new_data <- tidyr::as_tibble(unlist(data), rownames = "rowname")
           split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
           split <- gsub("[0-9]$|[0-9][0-9]$","",split)
           data_unlist[[i]] <- cbind(data.frame(split), value = new_data$value)
