@@ -882,7 +882,6 @@ Public Class dlgPICSARainfall
     Private Sub YAxisDataTypeCheck()
         If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
             clsGeomLine.AddParameter("group", 0)
-            'clsBaseOperator.RemoveParameterByName("scale_y_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If
