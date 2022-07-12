@@ -2572,9 +2572,9 @@ read_corpora <- function(data){
         data_unlist[[i]] <- data.frame(NA)
         } else {
           # unlist the list, to create a data frame with two elements: list name ("rowname") and value
-	    # if there are nested lists, the "rowname" variable combines the different lists together.
-	    # We want to separate these into separate variables to make the data more usable and readable.
-	    # We do this by `str_split_fixed`, and `gsub`.
+	     # if there are nested lists, the "rowname" variable combines the different lists together.
+	     # We want to separate these into separate variables to make the data more usable and readable.
+	     # We do this by `str_split_fixed`, and `gsub`.
           new_data <- tidyr::as_tibble(unlist(data), rownames = "rowname")
           split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
           split <- gsub("[0-9]$|[0-9][0-9]$","",split)
