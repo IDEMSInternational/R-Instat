@@ -2578,7 +2578,7 @@ read_corpora <- function(data){
           new_data <- tidyr::as_tibble(unlist(data), rownames = "rowname")
           split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
           split <- gsub("[0-9]$|[0-9][0-9]$","",split)
-	  # add in the separated list to the value variable, and rename the variables
+	     # add in the separated list to the value variable, and rename the variables
           data_unlist[[i]] <- cbind(data.frame(split), value = new_data$value)
           names(data_unlist[[i]]) <- c(paste0("variable", 1:(length(data_unlist[[i]])-1)), "list")
         } # end of ifelse lists
