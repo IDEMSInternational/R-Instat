@@ -221,7 +221,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
         ttCalculator.SetToolTip(cmdRankPercent, "returns the percentile that the number correspods to. For example, PercentRank(c(1,2,5,11,15)) = 0.2,0.4,0.6,0.8,1.0")
         ttCalculator.SetToolTip(cmdDigitSum, "calculates digit sum of x. For example, DigitSum(12344)= 14")
-
+        ttCalculator.SetToolTip(cmdBinary, "converts an integer into a binary number. For example, as.integer(intToBin(c(2,5,7,8)))= 10,101,111,1000")
+        ttCalculator.SetToolTip(cmdAsOctmode, "converts an integer into a octal number. For example, as.octmode(intToOct(c(2,5,12,17)))= 02,05,14,21")
+        ttCalculator.SetToolTip(cmdAsHexmode, "converts an integer into a hexadecimal number. For example, as.hexmode(intToHex(c(2,7,10,15)))= 2,7,a,f")
 
     End Sub
 
@@ -2958,14 +2960,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerHelp1_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp1.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Integer" Then
-            strPackageName = "gmp"
-        End If
-        OpenHelpPage()
-    End Sub
-
     Private Sub cmdFactorial_Click(sender As Object, e As EventArgs) Handles cmdFactorial.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::factorialZ(n = )", 2)
@@ -3030,7 +3024,47 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerHelp2_Click(sender As Object, e As EventArgs) Handles cmdIntegerHelp2.Click
+    Private Sub cmdBigQ_Click(sender As Object, e As EventArgs) Handles cmdBigQ.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(a = , mod = NA )", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBinary_Click(sender As Object, e As EventArgs) Handles cmdBinary.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.integer(R.utils::intToBin(x = ))", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.integer(R.utils::intToBin())", 2)
+        End If
+    End Sub
+
+    Private Sub cmdAsOctmode_Click(sender As Object, e As EventArgs) Handles cmdAsOctmode.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.octmode(R.utils::intToOct(x = ))", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.octmode(R.utils::intToOct())", 2)
+        End If
+    End Sub
+
+    Private Sub cmdAsHexmode_Click(sender As Object, e As EventArgs) Handles cmdAsHexmode.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.hexmode(R.utils::intToHex(x = ))", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.hexmode(R.utils::intToHex())", 2)
+        End If
+    End Sub
+
+    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "gmp"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DescToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescToolsToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "DescTools"
@@ -3038,11 +3072,11 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdBigQ_Click(sender As Object, e As EventArgs) Handles cmdBigQ.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq(a = , mod = NA )", 13)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigq()", 1)
+    Private Sub RutilsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RutilsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "R.utils"
         End If
+        OpenHelpPage()
     End Sub
 End Class

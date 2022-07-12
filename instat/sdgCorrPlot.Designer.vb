@@ -275,7 +275,7 @@ Partial Class sdgCorrPlot
         'ucrBaseSdgCorrPlot
         '
         Me.ucrBaseSdgCorrPlot.AutoSize = True
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(111, 363)
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(74, 363)
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
         Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgCorrPlot.TabIndex = 14
