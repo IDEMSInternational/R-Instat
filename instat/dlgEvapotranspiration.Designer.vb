@@ -30,8 +30,6 @@ Partial Class dlgEvapotranspiration
         Me.lblCrop = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.grpMissingDataOpts = New System.Windows.Forms.GroupBox()
-        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
-        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.lblMissingMethod = New System.Windows.Forms.Label()
         Me.lblMaxMissingDays = New System.Windows.Forms.Label()
         Me.lblMaxDurationMissingData = New System.Windows.Forms.Label()
@@ -39,18 +37,20 @@ Partial Class dlgEvapotranspiration
         Me.lblSolar = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
         Me.grpWindSpeed = New System.Windows.Forms.GroupBox()
-        Me.ucrChkWind = New instat.ucrCheck()
-        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
         Me.ucrNudMaxDurationMissingData = New instat.ucrNud()
         Me.ucrNudMaxMissingDays = New instat.ucrNud()
         Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
         Me.ucrNudMaxMissingData = New instat.ucrNud()
+        Me.ucrChkWind = New instat.ucrCheck()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
         Me.ucrInputCrop = New instat.ucrInputComboBox()
         Me.ucrNewColName = New instat.ucrSave()
+        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
+        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrInputTimeStep = New instat.ucrInputComboBox()
@@ -67,7 +67,7 @@ Partial Class dlgEvapotranspiration
         'lblTmax
         '
         Me.lblTmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTmax.Location = New System.Drawing.Point(321, 154)
+        Me.lblTmax.Location = New System.Drawing.Point(276, 138)
         Me.lblTmax.Name = "lblTmax"
         Me.lblTmax.Size = New System.Drawing.Size(44, 13)
         Me.lblTmax.TabIndex = 8
@@ -76,7 +76,7 @@ Partial Class dlgEvapotranspiration
         'lblTmin
         '
         Me.lblTmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTmin.Location = New System.Drawing.Point(321, 107)
+        Me.lblTmin.Location = New System.Drawing.Point(278, 93)
         Me.lblTmin.Name = "lblTmin"
         Me.lblTmin.Size = New System.Drawing.Size(39, 14)
         Me.lblTmin.TabIndex = 6
@@ -85,7 +85,7 @@ Partial Class dlgEvapotranspiration
         'lblHumidityMax
         '
         Me.lblHumidityMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHumidityMax.Location = New System.Drawing.Point(323, 195)
+        Me.lblHumidityMax.Location = New System.Drawing.Point(279, 179)
         Me.lblHumidityMax.Name = "lblHumidityMax"
         Me.lblHumidityMax.Size = New System.Drawing.Size(78, 17)
         Me.lblHumidityMax.TabIndex = 10
@@ -94,7 +94,7 @@ Partial Class dlgEvapotranspiration
         'lblHumidityMin
         '
         Me.lblHumidityMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHumidityMin.Location = New System.Drawing.Point(324, 240)
+        Me.lblHumidityMin.Location = New System.Drawing.Point(279, 216)
         Me.lblHumidityMin.Name = "lblHumidityMin"
         Me.lblHumidityMin.Size = New System.Drawing.Size(77, 17)
         Me.lblHumidityMin.TabIndex = 12
@@ -103,7 +103,7 @@ Partial Class dlgEvapotranspiration
         'lblTimeStep
         '
         Me.lblTimeStep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTimeStep.Location = New System.Drawing.Point(5, 336)
+        Me.lblTimeStep.Location = New System.Drawing.Point(5, 312)
         Me.lblTimeStep.Name = "lblTimeStep"
         Me.lblTimeStep.Size = New System.Drawing.Size(58, 20)
         Me.lblTimeStep.TabIndex = 22
@@ -112,7 +112,7 @@ Partial Class dlgEvapotranspiration
         'lblCrop
         '
         Me.lblCrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrop.Location = New System.Drawing.Point(5, 523)
+        Me.lblCrop.Location = New System.Drawing.Point(5, 461)
         Me.lblCrop.Name = "lblCrop"
         Me.lblCrop.Size = New System.Drawing.Size(31, 20)
         Me.lblCrop.TabIndex = 30
@@ -121,7 +121,7 @@ Partial Class dlgEvapotranspiration
         'lblDate
         '
         Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDate.Location = New System.Drawing.Point(323, 64)
+        Me.lblDate.Location = New System.Drawing.Point(276, 57)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(40, 14)
         Me.lblDate.TabIndex = 4
@@ -131,35 +131,17 @@ Partial Class dlgEvapotranspiration
         '
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingEntries)
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingDays)
-        Me.grpMissingDataOpts.Location = New System.Drawing.Point(5, 362)
+        Me.grpMissingDataOpts.Location = New System.Drawing.Point(5, 338)
         Me.grpMissingDataOpts.Name = "grpMissingDataOpts"
-        Me.grpMissingDataOpts.Size = New System.Drawing.Size(198, 98)
+        Me.grpMissingDataOpts.Size = New System.Drawing.Size(198, 66)
         Me.grpMissingDataOpts.TabIndex = 24
         Me.grpMissingDataOpts.TabStop = False
         Me.grpMissingDataOpts.Text = "Missing Data Options"
         '
-        'ucrChkInterpMissingEntries
-        '
-        Me.ucrChkInterpMissingEntries.AutoSize = True
-        Me.ucrChkInterpMissingEntries.Checked = False
-        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(6, 56)
-        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
-        Me.ucrChkInterpMissingEntries.Size = New System.Drawing.Size(188, 23)
-        Me.ucrChkInterpMissingEntries.TabIndex = 5
-        '
-        'ucrChkInterpMissingDays
-        '
-        Me.ucrChkInterpMissingDays.AutoSize = True
-        Me.ucrChkInterpMissingDays.Checked = False
-        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(6, 31)
-        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
-        Me.ucrChkInterpMissingDays.Size = New System.Drawing.Size(168, 23)
-        Me.ucrChkInterpMissingDays.TabIndex = 6
-        '
         'lblMissingMethod
         '
         Me.lblMissingMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingMethod.Location = New System.Drawing.Point(5, 496)
+        Me.lblMissingMethod.Location = New System.Drawing.Point(5, 435)
         Me.lblMissingMethod.Name = "lblMissingMethod"
         Me.lblMissingMethod.Size = New System.Drawing.Size(107, 20)
         Me.lblMissingMethod.TabIndex = 28
@@ -168,7 +150,7 @@ Partial Class dlgEvapotranspiration
         'lblMaxMissingDays
         '
         Me.lblMaxMissingDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxMissingDays.Location = New System.Drawing.Point(5, 262)
+        Me.lblMaxMissingDays.Location = New System.Drawing.Point(5, 238)
         Me.lblMaxMissingDays.Name = "lblMaxMissingDays"
         Me.lblMaxMissingDays.Size = New System.Drawing.Size(100, 20)
         Me.lblMaxMissingDays.TabIndex = 16
@@ -177,7 +159,7 @@ Partial Class dlgEvapotranspiration
         'lblMaxDurationMissingData
         '
         Me.lblMaxDurationMissingData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxDurationMissingData.Location = New System.Drawing.Point(5, 285)
+        Me.lblMaxDurationMissingData.Location = New System.Drawing.Point(5, 261)
         Me.lblMaxDurationMissingData.Name = "lblMaxDurationMissingData"
         Me.lblMaxDurationMissingData.Size = New System.Drawing.Size(71, 17)
         Me.lblMaxDurationMissingData.TabIndex = 18
@@ -186,7 +168,7 @@ Partial Class dlgEvapotranspiration
         'lblMaxPerctMissindData
         '
         Me.lblMaxPerctMissindData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxPerctMissindData.Location = New System.Drawing.Point(5, 309)
+        Me.lblMaxPerctMissindData.Location = New System.Drawing.Point(5, 285)
         Me.lblMaxPerctMissindData.Name = "lblMaxPerctMissindData"
         Me.lblMaxPerctMissindData.Size = New System.Drawing.Size(100, 19)
         Me.lblMaxPerctMissindData.TabIndex = 20
@@ -195,7 +177,7 @@ Partial Class dlgEvapotranspiration
         'lblSolar
         '
         Me.lblSolar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSolar.Location = New System.Drawing.Point(5, 469)
+        Me.lblSolar.Location = New System.Drawing.Point(5, 413)
         Me.lblSolar.Name = "lblSolar"
         Me.lblSolar.Size = New System.Drawing.Size(38, 18)
         Me.lblSolar.TabIndex = 26
@@ -204,7 +186,7 @@ Partial Class dlgEvapotranspiration
         'lblRadiation
         '
         Me.lblRadiation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRadiation.Location = New System.Drawing.Point(323, 285)
+        Me.lblRadiation.Location = New System.Drawing.Point(278, 255)
         Me.lblRadiation.Name = "lblRadiation"
         Me.lblRadiation.Size = New System.Drawing.Size(117, 17)
         Me.lblRadiation.TabIndex = 14
@@ -214,34 +196,12 @@ Partial Class dlgEvapotranspiration
         '
         Me.grpWindSpeed.Controls.Add(Me.ucrChkWind)
         Me.grpWindSpeed.Controls.Add(Me.ucrReceiverWindSpeed)
-        Me.grpWindSpeed.Location = New System.Drawing.Point(210, 363)
+        Me.grpWindSpeed.Location = New System.Drawing.Point(208, 337)
         Me.grpWindSpeed.Name = "grpWindSpeed"
-        Me.grpWindSpeed.Size = New System.Drawing.Size(235, 97)
+        Me.grpWindSpeed.Size = New System.Drawing.Size(185, 65)
         Me.grpWindSpeed.TabIndex = 25
         Me.grpWindSpeed.TabStop = False
         Me.grpWindSpeed.Text = "Wind Speed"
-        '
-        'ucrChkWind
-        '
-        Me.ucrChkWind.AutoSize = True
-        Me.ucrChkWind.Checked = False
-        Me.ucrChkWind.Location = New System.Drawing.Point(5, 31)
-        Me.ucrChkWind.Name = "ucrChkWind"
-        Me.ucrChkWind.Size = New System.Drawing.Size(103, 23)
-        Me.ucrChkWind.TabIndex = 0
-        '
-        'ucrReceiverWindSpeed
-        '
-        Me.ucrReceiverWindSpeed.AutoSize = True
-        Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(109, 30)
-        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
-        Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.TabIndex = 2
-        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'rdoHargreavesSamani
         '
@@ -282,7 +242,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudMaxDurationMissingData.AutoSize = True
         Me.ucrNudMaxDurationMissingData.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxDurationMissingData.Location = New System.Drawing.Point(180, 309)
+        Me.ucrNudMaxDurationMissingData.Location = New System.Drawing.Point(180, 285)
         Me.ucrNudMaxDurationMissingData.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Name = "ucrNudMaxDurationMissingData"
@@ -295,7 +255,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudMaxMissingDays.AutoSize = True
         Me.ucrNudMaxMissingDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxMissingDays.Location = New System.Drawing.Point(180, 262)
+        Me.ucrNudMaxMissingDays.Location = New System.Drawing.Point(180, 238)
         Me.ucrNudMaxMissingDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Name = "ucrNudMaxMissingDays"
@@ -309,7 +269,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputMissingMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMissingMethod.GetSetSelectedIndex = -1
         Me.ucrInputMissingMethod.IsReadOnly = False
-        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(139, 493)
+        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(139, 435)
         Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
         Me.ucrInputMissingMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMissingMethod.TabIndex = 29
@@ -319,7 +279,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudMaxMissingData.AutoSize = True
         Me.ucrNudMaxMissingData.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingData.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxMissingData.Location = New System.Drawing.Point(180, 285)
+        Me.ucrNudMaxMissingData.Location = New System.Drawing.Point(180, 261)
         Me.ucrNudMaxMissingData.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxMissingData.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingData.Name = "ucrNudMaxMissingData"
@@ -327,13 +287,35 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudMaxMissingData.TabIndex = 19
         Me.ucrNudMaxMissingData.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrChkWind
+        '
+        Me.ucrChkWind.AutoSize = True
+        Me.ucrChkWind.Checked = False
+        Me.ucrChkWind.Location = New System.Drawing.Point(5, 31)
+        Me.ucrChkWind.Name = "ucrChkWind"
+        Me.ucrChkWind.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkWind.TabIndex = 0
+        '
+        'ucrReceiverWindSpeed
+        '
+        Me.ucrReceiverWindSpeed.AutoSize = True
+        Me.ucrReceiverWindSpeed.frmParent = Nothing
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(93, 31)
+        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(84, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.TabIndex = 2
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
+        '
         'ucrInputSolar
         '
         Me.ucrInputSolar.AddQuotesIfUnrecognised = True
         Me.ucrInputSolar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSolar.GetSetSelectedIndex = -1
         Me.ucrInputSolar.IsReadOnly = False
-        Me.ucrInputSolar.Location = New System.Drawing.Point(139, 466)
+        Me.ucrInputSolar.Location = New System.Drawing.Point(139, 410)
         Me.ucrInputSolar.Name = "ucrInputSolar"
         Me.ucrInputSolar.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSolar.TabIndex = 27
@@ -342,7 +324,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverRadiation.AutoSize = True
         Me.ucrReceiverRadiation.frmParent = Me
-        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(324, 304)
+        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(279, 273)
         Me.ucrReceiverRadiation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
@@ -357,7 +339,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputCrop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCrop.GetSetSelectedIndex = -1
         Me.ucrInputCrop.IsReadOnly = False
-        Me.ucrInputCrop.Location = New System.Drawing.Point(139, 520)
+        Me.ucrInputCrop.Location = New System.Drawing.Point(139, 461)
         Me.ucrInputCrop.Name = "ucrInputCrop"
         Me.ucrInputCrop.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCrop.TabIndex = 31
@@ -365,17 +347,35 @@ Partial Class dlgEvapotranspiration
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(5, 555)
+        Me.ucrNewColName.Location = New System.Drawing.Point(5, 486)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(388, 24)
         Me.ucrNewColName.TabIndex = 32
         '
+        'ucrChkInterpMissingEntries
+        '
+        Me.ucrChkInterpMissingEntries.AutoSize = True
+        Me.ucrChkInterpMissingEntries.Checked = False
+        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(6, 38)
+        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
+        Me.ucrChkInterpMissingEntries.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkInterpMissingEntries.TabIndex = 5
+        '
+        'ucrChkInterpMissingDays
+        '
+        Me.ucrChkInterpMissingDays.AutoSize = True
+        Me.ucrChkInterpMissingDays.Checked = False
+        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(6, 16)
+        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
+        Me.ucrChkInterpMissingDays.Size = New System.Drawing.Size(168, 23)
+        Me.ucrChkInterpMissingDays.TabIndex = 6
+        '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(324, 79)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(279, 73)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -398,7 +398,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputTimeStep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTimeStep.GetSetSelectedIndex = -1
         Me.ucrInputTimeStep.IsReadOnly = False
-        Me.ucrInputTimeStep.Location = New System.Drawing.Point(180, 335)
+        Me.ucrInputTimeStep.Location = New System.Drawing.Point(180, 311)
         Me.ucrInputTimeStep.Name = "ucrInputTimeStep"
         Me.ucrInputTimeStep.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputTimeStep.TabIndex = 23
@@ -407,7 +407,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverHumidityMin.AutoSize = True
         Me.ucrReceiverHumidityMin.frmParent = Me
-        Me.ucrReceiverHumidityMin.Location = New System.Drawing.Point(324, 259)
+        Me.ucrReceiverHumidityMin.Location = New System.Drawing.Point(279, 235)
         Me.ucrReceiverHumidityMin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverHumidityMin.Name = "ucrReceiverHumidityMin"
         Me.ucrReceiverHumidityMin.Selector = Nothing
@@ -420,7 +420,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverHumidityMax.AutoSize = True
         Me.ucrReceiverHumidityMax.frmParent = Me
-        Me.ucrReceiverHumidityMax.Location = New System.Drawing.Point(324, 214)
+        Me.ucrReceiverHumidityMax.Location = New System.Drawing.Point(279, 196)
         Me.ucrReceiverHumidityMax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverHumidityMax.Name = "ucrReceiverHumidityMax"
         Me.ucrReceiverHumidityMax.Selector = Nothing
@@ -433,7 +433,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverTmin.AutoSize = True
         Me.ucrReceiverTmin.frmParent = Me
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(324, 124)
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(279, 107)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
@@ -446,7 +446,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverTmax.AutoSize = True
         Me.ucrReceiverTmax.frmParent = Me
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(324, 169)
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(279, 153)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
@@ -461,7 +461,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrSelectorEvapotranspiration.bDropUnusedFilterLevels = False
         Me.ucrSelectorEvapotranspiration.bShowHiddenColumns = False
         Me.ucrSelectorEvapotranspiration.bUseCurrentFilter = True
-        Me.ucrSelectorEvapotranspiration.Location = New System.Drawing.Point(5, 65)
+        Me.ucrSelectorEvapotranspiration.Location = New System.Drawing.Point(5, 50)
         Me.ucrSelectorEvapotranspiration.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorEvapotranspiration.Name = "ucrSelectorEvapotranspiration"
         Me.ucrSelectorEvapotranspiration.Size = New System.Drawing.Size(213, 183)
@@ -471,9 +471,9 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(5, 583)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 514)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
         '
         'dlgEvapotranspiration
@@ -481,7 +481,7 @@ Partial Class dlgEvapotranspiration
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(452, 640)
+        Me.ClientSize = New System.Drawing.Size(410, 563)
         Me.Controls.Add(Me.rdoHargreavesSamani)
         Me.Controls.Add(Me.rdoPenmanMonteith)
         Me.Controls.Add(Me.lblMaxPerctMissindData)
