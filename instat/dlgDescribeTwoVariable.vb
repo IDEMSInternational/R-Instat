@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgDescribeTwoVariable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bRcodeSet As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public strFirstVariablesType, strSecondVariableType As String
     Public clsGetDataTypeFunction, clsGetSecondDataTypeFunction, clsRCorrelationFunction, clsRCustomSummaryFunction,
@@ -318,6 +319,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRcodeSet = False
         ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsRAnovaFunction, New RParameter("y_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverSecondTwoVariableFactor.AddAdditionalCodeParameterPair(clsRCorrelationFunction, New RParameter("y_col_name", 2), iAdditionalPairNo:=2)
 
@@ -348,6 +350,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkThreeVariablePercentageProportion.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrNudSigFigs.SetRCode(clsCombineFrequencyParametersFunction, bReset)
+        bRcodeSet = True
     End Sub
 
     Public Sub TestOKEnabled()
@@ -1006,9 +1009,9 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableSecondFactor.SelectionChanged
-        If rdoThreeVariable.Checked Then
+        If rdoThreeVariable.Checked AndAlso bRcodeSet Then
             If (strFirstVariablesType = "categorical" AndAlso ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                ucrReceiverThreeVariableThirdVariable.GetVariableNames)) OrElse
+                ucrReceiverThreeVariableSecondFactor.GetVariableNames)) OrElse
                 (strSecondVariableType = "categorical" AndAlso
             ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
                 MsgBox("Pick a categorical variable different from those selected in the First Variable and the third Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
@@ -1017,17 +1020,17 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverThreeVariableThirdVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableThirdVariable.SelectionChanged
-        If rdoThreeVariable.Checked Then
+        If rdoThreeVariable.Checked AndAlso bRcodeSet Then
             If strSecondVariableType = "categorical" AndAlso
                 (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames OrElse
-                ucrReceiverFirstVars.GetVariableNamesList.Contains(ucrReceiverThreeVariableSecondFactor.GetVariableNames)) Then
+                ucrReceiverFirstVars.GetVariableNamesList.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames)) Then
                 MsgBox("Pick a categorical variable different from those selected in the First Variable and the Second Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
             End If
         End If
     End Sub
 
     Private Sub ucrReceiverSecondTwoVariableFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondTwoVariableFactor.SelectionChanged
-        If rdoTwoVariable.Checked Then
+        If rdoTwoVariable.Checked AndAlso bRcodeSet Then
             If strSecondVariableType = "categorical" AndAlso
                 (ucrReceiverFirstVars.GetVariableNamesList.Contains(ucrReceiverSecondTwoVariableFactor.GetVariableNames)) Then
                 MsgBox("Pick a categorical variable different from that selected in the First Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
@@ -1036,17 +1039,19 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverFirstVars_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVars.SelectionChanged
-        If rdoTwoVariable.Checked Then
-            If strFirstVariablesType = "categorical" AndAlso ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                ucrReceiverSecondTwoVariableFactor.GetVariableNames) Then
-                MsgBox("Pick a categorical variable different from that selected in the Second Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
-            End If
-        ElseIf rdoThreeVariable.Checked Then
-            If strFirstVariablesType = "categorical" AndAlso
-                    (ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                ucrReceiverThreeVariableThirdVariable.GetVariableNames)) Then
-                MsgBox("Pick a categorical variable different from those selected in the Second and Third Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
+        If bRcodeSet Then
+            If rdoTwoVariable.Checked Then
+                If strFirstVariablesType = "categorical" AndAlso ucrReceiverFirstVars.GetVariableNamesList.Contains(
+                    ucrReceiverSecondTwoVariableFactor.GetVariableNames) Then
+                    MsgBox("Pick a categorical variable different from that selected in the Second Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
+                End If
+            ElseIf rdoThreeVariable.Checked Then
+                If strFirstVariablesType = "categorical" AndAlso
+                        (ucrReceiverFirstVars.GetVariableNamesList.Contains(
+                    ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse ucrReceiverFirstVars.GetVariableNamesList.Contains(
+                    ucrReceiverThreeVariableThirdVariable.GetVariableNames)) Then
+                    MsgBox("Pick a categorical variable different from those selected in the Second and Third Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
+                End If
             End If
         End If
     End Sub
