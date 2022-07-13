@@ -301,9 +301,9 @@ Partial Class dlgHeatMapPlot
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 209)
+        Me.cmdOptions.Location = New System.Drawing.Point(8, 207)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Plot Options"
