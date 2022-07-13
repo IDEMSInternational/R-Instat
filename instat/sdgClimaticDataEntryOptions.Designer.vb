@@ -204,7 +204,7 @@ Partial Class sdgClimaticDataEntryOptions
         'ucrSdgPICSARainfalbuttons
         '
         Me.ucrSdgPICSARainfalbuttons.AutoSize = True
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(71, 210)
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(36, 210)
         Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)

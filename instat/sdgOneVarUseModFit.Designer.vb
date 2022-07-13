@@ -375,7 +375,7 @@ Partial Class sdgOneVarUseModFit
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(49, 216)
+        Me.ucrBase.Location = New System.Drawing.Point(20, 216)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 0
