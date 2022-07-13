@@ -868,7 +868,7 @@ Partial Class sdgClimdexIndices
         'ucrButtonsClimdexIndices
         '
         Me.ucrButtonsClimdexIndices.AutoSize = True
-        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(215, 435)
+        Me.ucrButtonsClimdexIndices.Location = New System.Drawing.Point(212, 435)
         Me.ucrButtonsClimdexIndices.Name = "ucrButtonsClimdexIndices"
         Me.ucrButtonsClimdexIndices.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsClimdexIndices.TabIndex = 2

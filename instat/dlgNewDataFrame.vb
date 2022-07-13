@@ -18,10 +18,14 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgNewDataFrame
-    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsSjLabelledFunction As New RFunction
-    Private clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction As New RFunction
+    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
+        clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction,
+         clsAsCharacterFunction, clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+
+    Private arrAvailableCategories() As String
+    Private arrAvailableLists() As String
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'autoTranslate(Me) this subroutine was causing a bug in the button examples
@@ -39,8 +43,12 @@ Public Class dlgNewDataFrame
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
 
+        Dim clsGetCategories As New RFunction
+
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
+
+        ucrInputLists.txtInput.WordWrap = False
         'nudRows
         ucrNudRows.SetParameter(New RParameter("times", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
@@ -60,6 +68,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddRadioButton(rdoCommand)
         ucrPnlDataFrame.AddRadioButton(rdoRandom)
         ucrPnlDataFrame.AddRadioButton(rdoEmpty)
+        ucrPnlDataFrame.AddRadioButton(rdoLists)
 
         'TODO:Providing conditions here may not be easy, find a way to do this properly!
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoConstruct, "data.frame")
@@ -71,9 +80,12 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrChkVariable, {rdoEmpty}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkVariable.AddToLinkedControls(ucrChkIncludeLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls({ucrInputLists, ucrChkRCommand, ucrInputCategory, ucrInputListInCategory}, {rdoLists}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
         ucrChkIncludeLabel.SetLinkedDisplayControl(dataTypeGridView)
+        ucrInputCategory.SetLinkedDisplayControl(lblCategories)
+        ucrInputListInCategory.SetLinkedDisplayControl(lblLists)
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
@@ -85,6 +97,23 @@ Public Class dlgNewDataFrame
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
+
+        ucrChkRCommand.SetText("Show Command")
+
+        clsGetCategories.SetPackageName("rcorpora")
+        clsGetCategories.SetRCommand("categories")
+        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
+        If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
+            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
+            arrAvailableCategories = chrCategoryNames.ToArray
+            Array.Sort(arrAvailableCategories)
+            ucrInputCategory.SetParameter(New RParameter("category"))
+            ucrInputCategory.SetItems(arrAvailableCategories, bAddConditions:=True)
+        End If
+        ucrInputCategory.SetDropDownStyleAsNonEditable()
+
+        ucrInputListInCategory.SetDropDownStyleAsNonEditable()
+        LoadLists()
     End Sub
 
     Private Sub SetDefaults()
@@ -98,12 +127,19 @@ Public Class dlgNewDataFrame
         clsAsCharacterFunction = New RFunction
         clsRepFunction = New RFunction
         clsSjLabelledFunction = New RFunction
+        clsCorporaFunction = New RFunction
+        clsListDfFunction = New RFunction
 
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrNudCols.SetText(2)
+
+        clsCorporaFunction.SetPackageName("rcorpora")
+        clsCorporaFunction.SetRCommand("corpora")
+
+        clsListDfFunction.SetRCommand("read_corpora")
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
@@ -209,6 +245,8 @@ Public Class dlgNewDataFrame
             Else
                 ucrBase.OKEnabled(False)
             End If
+        ElseIf rdoLists.Checked Then
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputLists.IsEmpty AndAlso ucrInputListInCategory.GetText <> "")
         End If
     End Sub
 
@@ -218,6 +256,7 @@ Public Class dlgNewDataFrame
         ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
         ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
         ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
         ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
@@ -237,7 +276,9 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged, ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged,
+        ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged,
+        ucrChkRCommand.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -282,6 +323,14 @@ Public Class dlgNewDataFrame
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
             End If
+        ElseIf rdoLists.Checked Then
+            ucrInputLists.Visible = ucrChkRCommand.Checked
+            ucrTryNewDataFrame.Visible = False
+            dataGridView.Visible = False
+            lblCommand.Visible = False
+            btnExample.Visible = False
+            ucrBase.clsRsyntax.SetCommandString(ucrInputLists.GetText())
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         End If
         If rdoCommand.Checked OrElse rdoRandom.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
@@ -714,5 +763,44 @@ Public Class dlgNewDataFrame
                 MessageBox.Show(ex.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
+    End Sub
+
+    Private Sub LoadLists()
+        Dim clsListFunction As New RFunction
+
+        clsListFunction.SetPackageName("rcorpora")
+        clsListFunction.SetRCommand("corpora")
+
+        clsListFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34), iPosition:=0)
+        Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsListFunction.ToScript, bSilent:=True)
+
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            arrAvailableLists = expTemp.AsCharacter.ToArray
+            Array.Sort(arrAvailableLists)
+            ucrInputListInCategory.SetParameter(New RParameter("list"))
+            ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+        End If
+    End Sub
+
+    Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged, ucrInputListInCategory.ControlValueChanged
+        clsCorporaFunction.ClearParameters()
+        If ucrChangedControl Is ucrInputCategory Then
+            LoadLists()
+        End If
+
+        If ucrInputListInCategory.GetText <> "" Then
+            clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & "/" & ucrInputListInCategory.GetText & Chr(34),
+                                                     bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsCorporaFunction.AddParameter("category", Chr(34) & ucrInputCategory.GetText & Chr(34),
+                                                 bIncludeArgumentName:=False, iPosition:=0)
+        End If
+        clsListDfFunction.AddParameter("data", clsRFunctionParameter:=clsCorporaFunction, iPosition:=0)
+        ucrInputLists.SetText(clsListDfFunction.ToScript)
+    End Sub
+
+    Private Sub ucrInputLists_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLists.ControlContentsChanged
+        ucrBase.clsRsyntax.SetCommandString(ucrInputLists.GetText())
+        TestOKEnabled()
     End Sub
 End Class
