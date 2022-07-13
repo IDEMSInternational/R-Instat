@@ -76,7 +76,7 @@ Partial Class dlgBoxplot
         '
         Me.lblByFactors.AutoSize = True
         Me.lblByFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblByFactors.Location = New System.Drawing.Point(272, 207)
+        Me.lblByFactors.Location = New System.Drawing.Point(272, 205)
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(88, 13)
         Me.lblByFactors.TabIndex = 6
@@ -218,9 +218,9 @@ Partial Class dlgBoxplot
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 238)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 236)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Plot Options"
