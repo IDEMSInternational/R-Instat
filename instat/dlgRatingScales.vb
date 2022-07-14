@@ -19,7 +19,8 @@ Imports RDotNet
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSjpLikertFunction, clsSjpStackFrqFunction, clsSjtStackFrqFunction, clsLevelofFactorFunction, clsFactorColumnFunction, clsAsLabelsFunction As New RFunction
+    Private clsSjpLikertFunction, clsSjpStackFrqFunction, clsSjtStackFrqFunction,
+        clsLevelofFactorFunction, clsFactorColumnFunction, clsAsLabelsFunction, clsGetColumnsFunction As New RFunction
     Private Sub dlgRatingScales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -75,11 +76,11 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked, rdoLikert}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 0))
+        ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
         ucrReceiverOrderedFactors.strSelectorHeading = "Variables"
-        ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
+        ucrReceiverOrderedFactors.bUseFilteredData = False
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -112,6 +113,7 @@ Public Class dlgRatingScales
         ucrSaveGraph.SetPrefix("rating_scales")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
+        ucrSaveGraph.setLinkedReceiver(ucrReceiverOrderedFactors)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
@@ -124,6 +126,7 @@ Public Class dlgRatingScales
         clsAsLabelsFunction = New RFunction
         clsLevelofFactorFunction = New RFunction
         clsFactorColumnFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
 
         rdoNoneLikert.Checked = True
 
@@ -172,14 +175,11 @@ Public Class dlgRatingScales
         ucrChkFlip.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrChkFlip.GetParameter(), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpLikertFunction, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, New RParameter("weight.by", 1), iAdditionalPairNo:=2)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
         ucrPnlTableOptions.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, New RParameter("sort.frq", iNewPosition:=2), iAdditionalPairNo:=1)
 
         ucrPnlLikertOptions.SetRCode(clsSjpLikertFunction, bReset)
         ucrPnlTableOptions.SetRCode(clsSjtStackFrqFunction, bReset)
-        ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrqFunction)
         ucrChkFlip.SetRCode(clsSjpStackFrqFunction, bReset)
         ucrChkWeights.SetRCode(clsSjtStackFrqFunction, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrqFunction, bReset)
@@ -267,6 +267,11 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrChkNumberOfCategories.ControlValueChanged, ucrSelectorRatingScale.ControlValueChanged, ucrPnlGraphType.ControlValueChanged
+        clsGetColumnsFunction = ucrReceiverOrderedFactors.GetVariables()
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsSjtStackFrqFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        clsSjpStackFrqFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        clsSjpLikertFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
         NumberOfLevels()
     End Sub
 
