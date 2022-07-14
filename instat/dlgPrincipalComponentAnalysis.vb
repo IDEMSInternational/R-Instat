@@ -58,13 +58,13 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverSuppNumeric.SetParameterIsString()
         ucrReceiverSuppNumeric.Selector = ucrSelectorPCA
         ucrReceiverSuppNumeric.SetDataType("numeric")
-        'ucrReceiverSuppNumeric.SetLinkedDisplayControl(lblSupplNumeric)
+        ucrReceiverSuppNumeric.SetLinkedDisplayControl(lblSupplNumeric)
 
         ucrReceiverSupplFactors.SetParameter(New RParameter("right", 1))
         ucrReceiverSupplFactors.SetParameterIsString()
         ucrReceiverSupplFactors.Selector = ucrSelectorPCA
         ucrReceiverSupplFactors.SetDataType("factor")
-        'ucrReceiverSupplFactors.SetLinkedDisplayControl(lblSupplFactors)
+        ucrReceiverSupplFactors.SetLinkedDisplayControl(lblSupplFactors)
         'ucrReceiverSuppNumeric.SetMeAsReceiver()
 
         ucrChkExtraVariables.SetText("Extra Variables")

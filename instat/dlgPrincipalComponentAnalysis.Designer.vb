@@ -50,6 +50,8 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrReceiverSupplFactors = New instat.ucrReceiverMultiple()
         Me.ucrChkExtraVariables = New instat.ucrCheck()
         Me.ucrReceiverSuppNumeric = New instat.ucrReceiverMultiple()
+        Me.lblSupplFactors = New System.Windows.Forms.Label()
+        Me.lblSupplNumeric = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblExplanatoryVariables
@@ -64,7 +66,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(309, 396)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(309, 407)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
         Me.cmdPCAOptions.Size = New System.Drawing.Size(96, 23)
         Me.cmdPCAOptions.TabIndex = 7
@@ -94,7 +96,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrSaveResult
         '
         Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 398)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 409)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(292, 24)
@@ -142,7 +144,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 425)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 436)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
@@ -151,7 +153,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrReceiverSupplFactors.AutoSize = True
         Me.ucrReceiverSupplFactors.frmParent = Me
-        Me.ucrReceiverSupplFactors.Location = New System.Drawing.Point(260, 291)
+        Me.ucrReceiverSupplFactors.Location = New System.Drawing.Point(257, 301)
         Me.ucrReceiverSupplFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSupplFactors.Name = "ucrReceiverSupplFactors"
         Me.ucrReceiverSupplFactors.Selector = Nothing
@@ -173,7 +175,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrReceiverSuppNumeric.AutoSize = True
         Me.ucrReceiverSuppNumeric.frmParent = Me
-        Me.ucrReceiverSuppNumeric.Location = New System.Drawing.Point(255, 169)
+        Me.ucrReceiverSuppNumeric.Location = New System.Drawing.Point(255, 180)
         Me.ucrReceiverSuppNumeric.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSuppNumeric.Name = "ucrReceiverSuppNumeric"
         Me.ucrReceiverSuppNumeric.Selector = Nothing
@@ -182,12 +184,34 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrReceiverSuppNumeric.TabIndex = 13
         Me.ucrReceiverSuppNumeric.ucrSelector = Nothing
         '
+        'lblSupplFactors
+        '
+        Me.lblSupplFactors.AutoSize = True
+        Me.lblSupplFactors.Location = New System.Drawing.Point(260, 285)
+        Me.lblSupplFactors.Name = "lblSupplFactors"
+        Me.lblSupplFactors.Size = New System.Drawing.Size(70, 13)
+        Me.lblSupplFactors.TabIndex = 17
+        Me.lblSupplFactors.Tag = "Explanatory_Variables"
+        Me.lblSupplFactors.Text = "Suppl.Factor:"
+        '
+        'lblSupplNumeric
+        '
+        Me.lblSupplNumeric.AutoSize = True
+        Me.lblSupplNumeric.Location = New System.Drawing.Point(258, 164)
+        Me.lblSupplNumeric.Name = "lblSupplNumeric"
+        Me.lblSupplNumeric.Size = New System.Drawing.Size(79, 13)
+        Me.lblSupplNumeric.TabIndex = 16
+        Me.lblSupplNumeric.Tag = "Explanatory_Variables"
+        Me.lblSupplNumeric.Text = "Suppl.Numeric:"
+        '
         'dlgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 487)
+        Me.ClientSize = New System.Drawing.Size(417, 494)
+        Me.Controls.Add(Me.lblSupplFactors)
+        Me.Controls.Add(Me.lblSupplNumeric)
         Me.Controls.Add(Me.ucrReceiverSupplFactors)
         Me.Controls.Add(Me.ucrChkExtraVariables)
         Me.Controls.Add(Me.ucrReceiverSuppNumeric)
@@ -224,4 +248,6 @@ Partial Class dlgPrincipalComponentAnalysis
     Friend WithEvents ucrReceiverSupplFactors As ucrReceiverMultiple
     Friend WithEvents ucrChkExtraVariables As ucrCheck
     Friend WithEvents ucrReceiverSuppNumeric As ucrReceiverMultiple
+    Friend WithEvents lblSupplFactors As Label
+    Friend WithEvents lblSupplNumeric As Label
 End Class
