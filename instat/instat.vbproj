@@ -188,6 +188,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Apsimx Example.Designer.vb">
+      <DependentUpon>Apsimx Example.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Apsimx Example.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
@@ -2881,6 +2885,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Apsimx Example.resx">
+      <DependentUpon>Apsimx Example.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
     </EmbeddedResource>
