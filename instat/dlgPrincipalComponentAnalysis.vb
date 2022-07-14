@@ -51,7 +51,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultiplePCA.SetParameterIsString()
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
-        ucrReceiverMultiplePCA.SetDataType("numeric")
+        'ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrReceiverMultiplePCA.SetMeAsReceiver()
 
         ucrReceiverSuppNumeric.SetParameter(New RParameter("right", 1))
@@ -173,13 +173,13 @@ Public Class dlgPrincipalComponentAnalysis
         'clsPCAFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
 
-        'clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        'clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+        clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
         'clsREigenValues.iCallType = 2
 
-        'clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        'clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
-        'clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
+        clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
+        clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
         'clsREigenVectors.iCallType = 2
 
         clsRRotationCoord.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
@@ -271,8 +271,8 @@ Public Class dlgPrincipalComponentAnalysis
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
         'ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
         ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
         ModelName()
@@ -322,13 +322,13 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ModelName()
         If ucrSaveResult.ucrChkSave.Checked Then
-            'clsREigenValues.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
-            'clsREigenVectors.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
+            clsREigenValues.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsRRotationCoord.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsRRotationEig.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         Else
-            'clsREigenValues.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
-            'clsREigenVectors.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
+            clsREigenValues.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
             clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
             clsRRotationEig.AddParameter("model_name", Chr(34) & "last_model" & Chr(34))
         End If
@@ -382,7 +382,7 @@ Public Class dlgPrincipalComponentAnalysis
         End If
 
         If ucrChkExtraVariables.Checked AndAlso Not ucrReceiverSupplFactors.IsEmpty Then
-            clsPCAFunction.AddParameter("quali.sup", clsRFunctionParameter:=clsWhichQualiSupFunction, iPosition:=4)
+            clsPCAFunction.AddParameter("quali.sup", clsRFunctionParameter:=clsWhichQualiSupFunction, iPosition:=5)
             'ucrReceiverMultiplePCA.SetIncludedDataTypes({"numeric", "factor"})
         Else
             clsPCAFunction.RemoveParameterByName("quali.sup")

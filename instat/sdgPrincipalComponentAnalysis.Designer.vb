@@ -39,7 +39,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.ucrChkRotation = New instat.ucrCheck()
         Me.ucrChkEigenvectors = New instat.ucrCheck()
         Me.ucrChkEigenvalues = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
@@ -101,7 +100,6 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbDisplay
         '
-        Me.tbDisplay.Controls.Add(Me.ucrChkRotation)
         Me.tbDisplay.Controls.Add(Me.ucrChkEigenvectors)
         Me.tbDisplay.Controls.Add(Me.ucrChkEigenvalues)
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
@@ -112,15 +110,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
-        '
-        'ucrChkRotation
-        '
-        Me.ucrChkRotation.AutoSize = True
-        Me.ucrChkRotation.Checked = False
-        Me.ucrChkRotation.Location = New System.Drawing.Point(10, 66)
-        Me.ucrChkRotation.Name = "ucrChkRotation"
-        Me.ucrChkRotation.Size = New System.Drawing.Size(361, 23)
-        Me.ucrChkRotation.TabIndex = 5
         '
         'ucrChkEigenvectors
         '
@@ -609,7 +598,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
     Friend WithEvents ucrInputLabel1 As ucrInputComboBox
-    Friend WithEvents ucrChkRotation As ucrCheck
     Friend WithEvents ucrChkEigenvectors As ucrCheck
     Friend WithEvents ucrChkEigenvalues As ucrCheck
     Friend WithEvents ucrNudDim2 As ucrNud
