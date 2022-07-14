@@ -50,13 +50,11 @@ Public Class dlgReorderDataFrame
         ucrBase.iHelpTopicID = 62
 
         ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
-        ucrDataFrameToReorder.setDataType("data frame")
+        ucrDataFrameToReorder.setDataType("dataframe")
     End Sub
 
     Private Sub SetDefaults()
         clsReorderDataFrame = New RFunction
-
-        ucrDataFrameToReorder.Reset()
 
         clsReorderDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorderDataFrame)
@@ -67,11 +65,7 @@ Public Class dlgReorderDataFrame
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrDataFrameToReorder.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrDataFrameToReorder.IsEmpty AndAlso ucrDataFrameToReorder.Count > 1)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -82,5 +76,9 @@ Public Class dlgReorderDataFrame
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.ReOrderWorkSheets()
     End Sub
 End Class

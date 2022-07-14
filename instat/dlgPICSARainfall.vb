@@ -21,6 +21,12 @@ Public Class dlgPICSARainfall
     Private clsBaseOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsMutateFunction As New RFunction
+    Public enumPICSAMode As String = PICSAMode.Rainfall
+    Public Enum PICSAMode
+        Rainfall
+        Temperature
+        General
+    End Enum
 
     Private clsRggplotFunction As New RFunction
     Private clsGeomLine As New RFunction
@@ -43,7 +49,6 @@ Public Class dlgPICSARainfall
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private clsPointsFunc As New RFunction
-    Private clsPointsParam As New RParameter
     Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsFactorLevels As New RFunction
 
@@ -66,6 +71,9 @@ Public Class dlgPICSARainfall
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsGeomSmoothFunction As New RFunction
+    Private clsStatRegEquationFunction As New RFunction
+    Private clsStatsCorFunction As New RFunction
 
     Private strMeanName As String = ".mean_y"
     Private strMedianName As String = ".median_y"
@@ -125,6 +133,8 @@ Public Class dlgPICSARainfall
         bReset = False
         XAxisDataTypeCheck()
         TestOkEnabled()
+        OpeningMode()
+        RemoveFunction()
         autoTranslate(Me)
     End Sub
 
@@ -168,19 +178,23 @@ Public Class dlgPICSARainfall
         ucrReceiverFacetBy.SetValuesToIgnore({"."})
 
         ucrChkPoints.SetText("Add Points")
-        ucrChkPoints.AddParameterPresentCondition(True, "points")
-        ucrChkPoints.AddParameterPresentCondition(False, "points", False)
-        clsPointsFunc.SetPackageName("ggplot2")
-        clsPointsFunc.SetRCommand("geom_point")
-        clsPointsParam.SetArgumentName("points")
-        clsPointsParam.SetArgument(clsPointsFunc)
-        clsPointsParam.Position = 3
-        clsPointsFunc.AddParameter("size", "3")
-        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
-        ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkPoints.AddParameterPresentCondition(True, "geom_point")
+        ucrChkPoints.AddParameterPresentCondition(False, "geom_point", False)
+
+        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
+        ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
+        ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.SetParameter(New RParameter("se"), bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
+        ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkWithSE.SetRDefault("TRUE")
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
+
+
 
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
@@ -244,6 +258,10 @@ Public Class dlgPICSARainfall
         clsRoundUpperTercileY = New RFunction
         clsAsDateUpperTercileY = New RFunction
 
+        clsStatRegEquationFunction = New RFunction
+        clsStatsCorFunction = New RFunction
+        clsGeomSmoothFunction = New RFunction
+        clsPointsFunc = New RFunction
         clsGeomTextLabelMeanLine = New RFunction
         clsPasteMeanY = New RFunction
         clsFormatMeanY = New RFunction
@@ -334,8 +352,16 @@ Public Class dlgPICSARainfall
         clsGeomLine.SetRCommand("geom_line")
         clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLine.AddParameter("size", "0.8")
-        clsBaseOperator.AddParameter(clsPointsParam)
 
+        clsGeomSmoothFunction.SetPackageName("ggplot2")
+        clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
+
+        clsPointsFunc.SetPackageName("ggplot2")
+        clsPointsFunc.SetRCommand("geom_point")
+        clsPointsFunc.AddParameter("size", "3")
+        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetRowOp.SetOperation("+")
@@ -367,6 +393,18 @@ Public Class dlgPICSARainfall
         clsAsDateMeanY.SetRCommand("as.Date")
         clsAsDateMeanY.AddParameter("x", clsRFunctionParameter:=clsRoundMeanY, iPosition:=0)
         clsAsDateMeanY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        'Regression Equation line
+        clsStatRegEquationFunction.SetPackageName("ggpubr")
+        clsStatRegEquationFunction.SetRCommand("stat_regline_equation")
+        clsStatRegEquationFunction.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
+        clsStatRegEquationFunction.AddParameter("label.y.npc", Chr(34) & "bottom" & Chr(34), iPosition:=1)
+
+        'Significance level
+        clsStatsCorFunction.SetPackageName("ggpubr")
+        clsStatsCorFunction.SetRCommand("stat_cor")
+        clsStatsCorFunction.AddParameter("label.x.npc", Chr(34) & "left" & Chr(34), iPosition:=0)
+        clsStatsCorFunction.AddParameter("label.y.npc", Chr(34) & "top" & Chr(34), iPosition:=1)
 
         ' Mean Line Label
         clsGeomTextLabelMeanLine.SetPackageName("ggplot2")
@@ -603,6 +641,7 @@ Public Class dlgPICSARainfall
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -616,13 +655,15 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
 
+
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
-
+        ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         If bReset Then
             AutoFacetStation()
         End If
@@ -754,54 +795,49 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction, clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY, clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, clsNewStatRegEquation:=clsStatRegEquationFunction, clsNewStatsCorFunction:=clsStatsCorFunction,
+                                       dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction,
+                                       clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction,
+                                       clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile,
+                                       clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction,
+                                       clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                       clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY,
+                                       clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine,
+                                       clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY,
+                                       clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction,
+                                       clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY,
+                                       clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         AddRemoveGroupBy()
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
-                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-        'AddRemoveGroupByAndHlines()
-    End Sub
-
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLine, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetLineLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
-
-        'The aesthetics parameters on the main dialog are repopulated as required.
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForPicsa.Clear()
-                Else ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrReceiverColourBy.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        TestOkEnabled()
-    End Sub
-
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub RemoveFunction()
+        Select Case enumPICSAMode
+            Case PICSAMode.General
+                clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            Case PICSAMode.Rainfall
+                clsBaseOperator.RemoveParameterByName("geom_smooth")
+                clsBaseOperator.RemoveParameterByName("stat_regline")
+                clsBaseOperator.RemoveParameterByName("stat_cor")
+                clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            Case PICSAMode.Temperature
+                clsBaseOperator.RemoveParameterByName("hlinemedian")
+                clsBaseOperator.RemoveParameterByName("annotate_median")
+                clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                clsBaseOperator.RemoveParameterByName("hlinemean")
+                clsBaseOperator.RemoveParameterByName("annotate_mean")
+                clsBaseOperator.RemoveParameterByName("hlinelowertercile")
+                clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+                clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
+                clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+        End Select
+    End Sub
+
 
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged
         'TODO this should run when levels of factor >1
@@ -820,6 +856,33 @@ Public Class dlgPICSARainfall
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
             clsBaseOperator.RemoveParameterByName("scale_x_continuous")
+        Else
+            clsGeomLine.RemoveParameterByName("group")
+        End If
+    End Sub
+
+    Private Sub OpeningMode()
+        Select Case enumPICSAMode
+            Case PICSAMode.General
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "PICSA General Graphs"
+            Case PICSAMode.Rainfall
+                ucrChkLineofBestFit.Visible = False
+                ucrChkWithSE.Visible = False
+                Me.Text = "PICSA Rainfall Graphs"
+            Case PICSAMode.Temperature
+                ucrChkLineofBestFit.Visible = True
+                ucrChkWithSE.Visible = True
+                Me.Text = "PICSA Temperature Graphs"
+        End Select
+    End Sub
+
+
+    Private Sub YAxisDataTypeCheck()
+        If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
+            clsGeomLine.AddParameter("group", 0)
+            clsBaseOperator.RemoveParameterByName("scale_y_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If
@@ -845,6 +908,7 @@ Public Class dlgPICSARainfall
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
         AddRemoveGroupBy()
+        YAxisDataTypeCheck()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -863,7 +927,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub AddRemoveGroupBy()
-        Dim i As Integer = 0
 
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
@@ -879,8 +942,7 @@ Public Class dlgPICSARainfall
             End If
 
             If clsRaesFunction.ContainsParameter("colour") Then
-                clsGroupByFunction.AddParameter(i, ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                i = i + 1
+                clsGroupByFunction.AddParameter("colour", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
             End If
 
             If clsGroupByFunction.iParameterCount > 0 Then
@@ -901,5 +963,90 @@ Public Class dlgPICSARainfall
         Else
             clsPipeOperator.RemoveAssignTo()
         End If
+    End Sub
+
+    Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click
+        openSdgLayerOptions(clsGeomLine)
+    End Sub
+
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall,
+                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForPicsa.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                    ucrVariablesAsFactorForPicsa.Clear()
+                Else
+                    ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrReceiverColourBy.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+        'AddRemoveGroupByAndHlines()
+    End Sub
+
+
+    Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotOptionsToolStripMenuItem.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+        'AddRemoveGroupByAndHlines()
+    End Sub
+
+    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
+        If ucrChkLineofBestFit.Checked Then
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=4)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_smooth")
+        End If
+    End Sub
+
+    Private Sub ucrChkPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPoints.ControlValueChanged
+        If ucrChkPoints.Checked Then
+            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsPointsFunc, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_point")
+        End If
+    End Sub
+
+    Private Sub toolStripMenuItemPointOption_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOption.Click
+        openSdgLayerOptions(clsPointsFunc)
     End Sub
 End Class

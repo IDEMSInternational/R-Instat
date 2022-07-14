@@ -230,12 +230,19 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
+        If GetWorkSheetCount() <> 0 Then
+            frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
+        End If
         RefreshDisplayInformation()
     End Sub
 
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub ReOrderWorkSheets()
+        _grid.ReOrderWorksheets()
+    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
