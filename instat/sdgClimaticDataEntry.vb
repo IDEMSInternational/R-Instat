@@ -570,9 +570,9 @@ Public Class sdgClimaticDataEntry
                     End If
                 Next
             Else
-            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
-            clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
-        End If
+                clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+                clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
+            End If
         End If
     End Sub
 
