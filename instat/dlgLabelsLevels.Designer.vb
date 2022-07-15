@@ -47,6 +47,8 @@ Partial Class dlgLabelsLevels
         Me.ucrFactorLabels = New instat.ucrFactor()
         Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrRemoveLabels = New instat.ucrCheck()
+        Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -137,17 +139,39 @@ Partial Class dlgLabelsLevels
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 400)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrRemoveLabels
+        '
+        Me.ucrRemoveLabels.AutoSize = True
+        Me.ucrRemoveLabels.Checked = False
+        Me.ucrRemoveLabels.Location = New System.Drawing.Point(12, 371)
+        Me.ucrRemoveLabels.Name = "ucrRemoveLabels"
+        Me.ucrRemoveLabels.Size = New System.Drawing.Size(168, 23)
+        Me.ucrRemoveLabels.TabIndex = 9
+        '
+        'ucrInputUnusedLevels
+        '
+        Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnusedLevels.AutoSize = True
+        Me.ucrInputUnusedLevels.IsMultiline = False
+        Me.ucrInputUnusedLevels.IsReadOnly = True
+        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(186, 371)
+        Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
+        Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(406, 21)
+        Me.ucrInputUnusedLevels.TabIndex = 10
         '
         'dlgLabelsLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(604, 431)
+        Me.ClientSize = New System.Drawing.Size(604, 456)
+        Me.Controls.Add(Me.ucrInputUnusedLevels)
+        Me.Controls.Add(Me.ucrRemoveLabels)
         Me.Controls.Add(Me.lblNaValue)
         Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
@@ -179,4 +203,6 @@ Partial Class dlgLabelsLevels
     Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
     Friend WithEvents lblLevelNumber As Label
     Friend WithEvents lblNaValue As Label
+    Friend WithEvents ucrRemoveLabels As ucrCheck
+    Friend WithEvents ucrInputUnusedLevels As ucrInputTextBox
 End Class

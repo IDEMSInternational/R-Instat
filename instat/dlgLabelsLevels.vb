@@ -18,10 +18,11 @@ Imports RDotNet
 Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
+    Private clsViewLabelsFunction, clsSumCountMissingFunction, clsTableOperation, clsUnusedLevels, clstable, clsFactorColumn, clsSum As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    'Private clsTableOperation As New ROperator
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -67,6 +68,11 @@ Public Class dlgLabelsLevels
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
 
+        ucrRemoveLabels.SetText("Remove Unused Labels")
+        ucrRemoveLabels.SetParameter(New RParameter("check"))
+        ucrRemoveLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrRemoveLabels.AddToLinkedControls(ucrInputUnusedLevels, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         lblNaValue.ForeColor = Color.Red
         lblLevelNumber.ForeColor = Color.Red
     End Sub
@@ -74,11 +80,21 @@ Public Class dlgLabelsLevels
     Private Sub SetDefaults()
         clsViewLabelsFunction = New RFunction
         clsSumCountMissingFunction = New RFunction
+        clsUnusedLevels = New RFunction
+        clstable = New RFunction
+        clsFactorColumn = New RFunction
+        clsSum = New RFunction
 
         cmdAddLevel.Enabled = False
         ucrSelectorForLabels.Reset()
+        ucrInputUnusedLevels.SetName("")
+        ucrInputUnusedLevels.Reset()
         ucrSelectorForLabels.Focus()
 
+        clstable.SetRCommand("table")
+        clsSum.SetRCommand("sum")
+        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
 
         clsSumCountMissingFunction.SetRCommand("summary_count_missing")
 
@@ -149,6 +165,40 @@ Public Class dlgLabelsLevels
     End Sub
 
     Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
+        Dim iNumOutput As Integer
+        Dim expNum As SymbolicExpression
+        Dim bClear As Boolean = False
+
+        If Not ucrReceiverLabels.IsEmpty Then
+            clstable.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+            'clsTableOperation.SetOperation("==")
+            clsTableOperation.AddParameter(clsRFunctionParameter:=clstable, iPosition:=0)
+            clsTableOperation.AddParameter("threshhold", 0, iPosition:=1)
+
+            'clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
+
+            expNum = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript, bSilent:=True)
+            If expNum IsNot Nothing AndAlso expNum.Type <> Internals.SymbolicExpressionType.Null Then
+                iNumOutput = expNum.AsNumeric(0)
+                ucrInputUnusedLevels.txtInput.BackColor = Color.Green
+                If iNumOutput = 0 Then
+                    ucrInputUnusedLevels.SetName("No unused levels to remove")
+                    ucrInputUnusedLevels.txtInput.BackColor = Color.LightCoral
+                Else
+                    ucrInputUnusedLevels.SetName(iNumOutput & " unused level(s) will be removed")
+                    ucrInputUnusedLevels.txtInput.BackColor = Color.LightGreen
+                End If
+            Else
+                bClear = True
+            End If
+        Else
+            bClear = True
+        End If
+        If bClear Then
+            ucrInputUnusedLevels.txtInput.BackColor = Color.White
+            clstable.RemoveParameterByName("x")
+            ucrInputUnusedLevels.ResetText()
+        End If
         'check if the variable selected has value labels.
         'If it has then disable ucrChkIncludeLevelNumbers and set it as checked
         'because it already has level number, so just show them to user
@@ -186,5 +236,4 @@ Public Class dlgLabelsLevels
         CountLevels()
         TestOKEnabled()
     End Sub
-
 End Class
