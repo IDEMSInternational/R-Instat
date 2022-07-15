@@ -647,6 +647,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -675,7 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -4763,14 +4763,22 @@ Partial Class frmMain
         'mnuOptionsByContextModelFitModel
         '
         Me.mnuOptionsByContextModelFitModel.Name = "mnuOptionsByContextModelFitModel"
-        Me.mnuOptionsByContextModelFitModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextModelFitModel.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextModelFitModel.Text = "Fit Model..."
         '
         'mnuOptionsByContextGeneralFitModel
         '
         Me.mnuOptionsByContextGeneralFitModel.Name = "mnuOptionsByContextGeneralFitModel"
-        Me.mnuOptionsByContextGeneralFitModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextGeneralFitModel.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextGeneralFitModel.Text = "General Fit Model..."
+        '
+        'mnuOptionsByContextCropModel
+        '
+        Me.mnuOptionsByContextCropModel.Enabled = False
+        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
+        Me.mnuOptionsByContextCropModel.Visible = False
         '
         'mnuTools
         '
@@ -5066,13 +5074,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuOptionsByContextCropModel
-        '
-        Me.mnuOptionsByContextCropModel.Enabled = False
-        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
         '
         'frmMain
         '
