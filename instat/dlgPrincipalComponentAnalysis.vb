@@ -51,7 +51,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultiplePCA.SetParameterIsString()
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
-        'ucrReceiverMultiplePCA.SetDataType("numeric")
+        ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrReceiverMultiplePCA.SetMeAsReceiver()
 
         ucrReceiverSuppNumeric.SetParameter(New RParameter("right", 1))
@@ -391,7 +391,7 @@ Public Class dlgPrincipalComponentAnalysis
         DataType()
     End Sub
     Private Sub DataType()
-        If ucrChkExtraVariables.Checked AndAlso ucrReceiverSuppNumeric.IsEmpty Then
+        If ucrChkExtraVariables.Checked Then
             ucrReceiverMultiplePCA.SetIncludedDataTypes({"numeric", "factor"})
         Else
             ucrReceiverMultiplePCA.SetDataType("numeric")
