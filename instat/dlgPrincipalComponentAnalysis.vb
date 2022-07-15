@@ -348,7 +348,6 @@ Public Class dlgPrincipalComponentAnalysis
                 ucrNudNumberOfComp.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
             End If
         End If
-        DataType()
     End Sub
 
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
@@ -388,13 +387,11 @@ Public Class dlgPrincipalComponentAnalysis
             clsPCAFunction.RemoveParameterByName("quali.sup")
             'ucrReceiverMultiplePCA.SetDataType("numeric")
         End If
-        DataType()
-    End Sub
-    Private Sub DataType()
         If ucrChkExtraVariables.Checked Then
-            ucrReceiverMultiplePCA.SetIncludedDataTypes({"numeric", "factor"})
+            ucrReceiverMultiplePCA.RemoveExcludedMetadataProperty("class")
         Else
             ucrReceiverMultiplePCA.SetDataType("numeric")
         End If
     End Sub
+
 End Class
