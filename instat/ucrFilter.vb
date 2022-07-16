@@ -62,7 +62,7 @@ Public Class ucrFilter
     Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"})
+        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na", "isEmpty"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
 
         ucrFactorLevels.SetAsMultipleSelectorGrid(ucrFilterByReceiver,
@@ -116,7 +116,7 @@ Public Class ucrFilter
                 SetToggleButtonSettings()
             Else
                 ucrFilterOperation.Visible = True
-                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" Then
+                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "isEmpty" Then
                     Select Case ucrFilterByReceiver.strCurrDataType.ToLower
                         Case "logical"
                             ucrLogicalCombobox.Visible = True
@@ -139,7 +139,7 @@ Public Class ucrFilter
                 cmdAddCondition.Enabled = ucrFactorLevels.IsAnyGridRowSelected
             Else
                 Select Case ucrFilterOperation.GetText()
-                    Case "is.na", "! is.na"
+                    Case "is.na", "! is.na", "isEmpty"
                         cmdAddCondition.Enabled = True
                     Case Else
                         Select Case ucrFilterByReceiver.strCurrDataType.ToLower
@@ -172,7 +172,7 @@ Public Class ucrFilter
     Private Sub ucrFilterReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged
         'for logical columns add {"==", "is.na", "!is.na"} only
         Dim selectedIndex As Integer = ucrFilterOperation.GetSetSelectedIndex
-        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"}))
+        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na", "isEmpty"}))
         If ucrFilterByReceiver.strCurrDataType.ToLower IsNot "logical" AndAlso selectedIndex < ucrFilterOperation.GetItemsCount Then
             ucrFilterOperation.GetSetSelectedIndex = selectedIndex
         Else
@@ -208,7 +208,7 @@ Public Class ucrFilter
         Else
             clsCurrentOperator.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" Then
+            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" OrElse ucrFilterOperation.GetText() = "isEmpty" Then
                 strCondition = ""
             Else
                 If ucrFilterByReceiver.strCurrDataType.ToLower = "character" Then

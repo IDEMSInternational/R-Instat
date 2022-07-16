@@ -435,6 +435,16 @@ Partial Class ucrFilter
         Me.cmdCombineWithAndOr.Text = "All Combined with &&"
         Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
         '
+        'ucrFactorLevels
+        '
+        Me.ucrFactorLevels.AutoSize = True
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
+        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
+        Me.ucrFactorLevels.TabIndex = 2
+        '
         'ucrReceiverExpression
         '
         Me.ucrReceiverExpression.AutoSize = True
@@ -503,21 +513,11 @@ Partial Class ucrFilter
         Me.ucrFilterOperation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrFilterOperation.GetSetSelectedIndex = -1
         Me.ucrFilterOperation.IsReadOnly = False
-        Me.ucrFilterOperation.Location = New System.Drawing.Point(399, 44)
+        Me.ucrFilterOperation.Location = New System.Drawing.Point(398, 44)
         Me.ucrFilterOperation.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrFilterOperation.Name = "ucrFilterOperation"
-        Me.ucrFilterOperation.Size = New System.Drawing.Size(56, 21)
+        Me.ucrFilterOperation.Size = New System.Drawing.Size(59, 21)
         Me.ucrFilterOperation.TabIndex = 5
-        '
-        'ucrFactorLevels
-        '
-        Me.ucrFactorLevels.AutoSize = True
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
-        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
-        Me.ucrFactorLevels.TabIndex = 2
         '
         'ucrFilterByReceiver
         '
