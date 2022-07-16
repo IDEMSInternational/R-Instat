@@ -1788,6 +1788,8 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
           } else {
             result[, i] <- !col_is_na
           }
+         }else if (condition[["operation"]] == "isEmpty"){
+          result[, i] <- self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE)==""
         }
         else {
           func <- match.fun(condition[["operation"]])
