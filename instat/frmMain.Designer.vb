@@ -4774,7 +4774,6 @@ Partial Class frmMain
         '
         'mnuOptionsByContextCropModel
         '
-        Me.mnuOptionsByContextCropModel.Enabled = False
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
         Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
