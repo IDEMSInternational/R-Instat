@@ -46,6 +46,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.SetParameter(New RParameter("data_name", 0))
         ucrSelectorPCA.SetParameterIsString()
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         'ucrReceiver
         ucrReceiverMultiplePCA.SetParameter(New RParameter("col_names", 1))
