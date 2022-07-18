@@ -305,9 +305,13 @@ Public Class dlgRatingScales
                 End If
             Else
                 clsDummyFunction.AddParameter("show_variables", "False", iPosition:=0)
-                clsSjtStackFrqFunction.RemoveParameterByName("var.labels")
-                clsSjpStackFrqFunction.RemoveParameterByName("axis.labels")
-                clsSjpLikertFunction.RemoveParameterByName("axis.lables")
+                If rdoTable.Checked Then
+                    clsSjtStackFrqFunction.RemoveParameterByName("var.labels")
+                ElseIf rdoStacked.Checked Then
+                    clsSjpStackFrqFunction.RemoveParameterByName("axis.labels")
+                Else
+                    clsSjpLikertFunction.RemoveParameterByName("axis.lables")
+                End If
             End If
         End If
     End Sub
