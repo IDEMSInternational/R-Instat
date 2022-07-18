@@ -583,7 +583,7 @@ Public Class dlgDescribeTwoVariable
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
         ElseIf rdoThreeVariable.Checked Then
             lblThreeVariableCategorical.Visible = True
-            lblThreeVariableCategorical.Location = New Point(106, 18)
+            lblThreeVariableCategorical.Location = New Point(106, 16)
             lblSecondType.Location = New Point(24, 33)
             lblSecondBy.Visible = True
         Else
