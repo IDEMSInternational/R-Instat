@@ -154,8 +154,8 @@ Public Class dlgHeatMapPlot
 
         ucrInputPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Middle", "0")
-        dctLabelPositions.Add("Out", "-1")
-        dctLabelPositions.Add("In", "2")
+        dctLabelPositions.Add("Up", "-1")
+        dctLabelPositions.Add("Down", "2")
         ucrInputPosition.SetItems(dctLabelPositions)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
@@ -201,10 +201,10 @@ Public Class dlgHeatMapPlot
         ucrInputReorderVariableX.SetDropDownStyleAsNonEditable()
         ucrInputReorderVariableX.SetLinkedDisplayControl(lblReorderVariableX)
 
-        clsCoordFlipFunc.SetPackageName("ggplot2")
-        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipFunction.SetPackageName("ggplot2")
+        clsCoordFlipFunction.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
-        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunction)
         ucrChkFlipCoordinates.SetText("Swap x and y")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
@@ -226,10 +226,10 @@ Public Class dlgHeatMapPlot
         clsShapeHeatMapAesFunction = New RFunction
         clsGroupFunction = New RFunction
         clsGeomPolygonAesFunction = New RFunction
-        clsForecatsReverse = New RFunction
-        clsForecatsReverseValue = New RFunction
+        clsForecatsReverseFunction = New RFunction
+        clsForecatsReverseValueFunction = New RFunction
         clsReorderFunction = New RFunction
-        clsReorderFunctionValue = New RFunction
+        clsReorderValueFunction = New RFunction
         clsHeatmapAesFunction = New RFunction
         clsChoroplethAesFunction = New RFunction
         clsRoundFunction = New RFunction
@@ -304,14 +304,14 @@ Public Class dlgHeatMapPlot
         clsColourPaletteFunction.SetPackageName("viridis")
         clsColourPaletteFunction.SetRCommand("scale_fill_viridis")
 
-        clsForecatsReverse.SetPackageName("forcats")
-        clsForecatsReverse.SetRCommand("fct_rev")
+        clsForecatsReverseFunction.SetPackageName("forcats")
+        clsForecatsReverseFunction.SetRCommand("fct_rev")
 
-        clsForecatsReverseValue.SetPackageName("forcats")
-        clsForecatsReverseValue.SetRCommand("fct_rev")
+        clsForecatsReverseValueFunction.SetPackageName("forcats")
+        clsForecatsReverseValueFunction.SetRCommand("fct_rev")
 
-        clsReorderFunctionValue.SetRCommand("reorder")
-        clsReorderFunctionValue.SetRCommand("reorder")
+        clsReorderValueFunction.SetRCommand("reorder")
+        clsReorderValueFunction.SetRCommand("reorder")
 
         clsReorderFunction.SetRCommand("reorder")
         clsReorderFunction.SetRCommand("reorder")
@@ -401,7 +401,7 @@ Public Class dlgHeatMapPlot
 
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
 
-        ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrVariableAsFactorForHeatMap.AddAdditionalCodeParameterPair(clsReorderValueFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
 
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsXRangeFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
@@ -599,11 +599,7 @@ Public Class dlgHeatMapPlot
 
     Private Sub MakeVisible()
         If rdoHeatMap.Checked Then
-            If ucrVariableAsFactorForHeatMap.bSingleVariable Then
-                ucrInputReorderValue.Visible = True
-            Else
-                ucrInputReorderValue.Visible = False
-            End If
+            ucrInputReorderValue.Visible = If(ucrVariableAsFactorForHeatMap.bSingleVariable, True, False)
         End If
     End Sub
 
@@ -621,10 +617,7 @@ Public Class dlgHeatMapPlot
 
     Private Sub MakeNudVisible()
         If rdoHeatMap.Checked Then
-            ucrNudShapeHeatMap.Visible = False
-            If Not ucrReceiverPointsHeatMap.IsEmpty AndAlso ucrReceiverPointsHeatMap.strCurrDataType = "factor" Then
-                ucrNudShapeHeatMap.Visible = True
-            End If
+            ucrNudShapeHeatMap.Visible = If(Not ucrReceiverPointsHeatMap.IsEmpty AndAlso ucrReceiverPointsHeatMap.strCurrDataType = "factor", True, False)
         End If
     End Sub
 
@@ -632,14 +625,14 @@ Public Class dlgHeatMapPlot
         If rdoHeatMap.Checked Then
             Select Case ucrInputReorderValue.GetText()
                 Case strAscending
-                    clsReorderFunctionValue.AddParameter("X", ucrReceiverX.GetVariableNames(False), iPosition:=1)
-                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=0)
+                    clsReorderValueFunction.AddParameter("X", ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderValueFunction, iPosition:=0)
                 Case strDescending
-                    clsReorderFunctionValue.AddParameter("X", "-" & ucrReceiverX.GetVariableNames(False), iPosition:=1)
-                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=0)
+                    clsReorderValueFunction.AddParameter("X", "-" & ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsReorderValueFunction, iPosition:=0)
                 Case strReverse
-                    clsForecatsReverseValue.AddParameter("f", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
-                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=0)
+                    clsForecatsReverseValueFunction.AddParameter("f", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
+                    clsHeatmapAesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverseValueFunction, iPosition:=0)
                 Case strNone
                     clsHeatmapAesFunction.AddParameter("y", ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=0)
             End Select
@@ -651,8 +644,8 @@ Public Class dlgHeatMapPlot
                     clsReorderFunction.AddParameter("X", "-" & ucrVariableAsFactorForHeatMap.GetVariableNames(False), iPosition:=1)
                     clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                 Case strReverse
-                    clsForecatsReverse.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-                    clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                    clsForecatsReverseFunction.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+                    clsHeatmapAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverseFunction, iPosition:=0)
                 Case strNone
                     clsHeatmapAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             End Select
@@ -694,19 +687,14 @@ Public Class dlgHeatMapPlot
     Private Sub AddRemoveGeomParameter()
         clsBaseOperator.RemoveParameterByName("choropleth_geom_point")
         If rdoChoroplethMap.Checked AndAlso ucrChkPoints.Checked Then
-                clsBaseOperator.AddParameter("choropleth_geom_point", clsRFunctionParameter:=clsGeomPointSizeChoroplethFunction, iPosition:=2)
-            End If
+            clsBaseOperator.AddParameter("choropleth_geom_point", clsRFunctionParameter:=clsGeomPointSizeChoroplethFunction, iPosition:=2)
         End If
 
     End Sub
 
     Private Sub ucrChkPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPoints.ControlValueChanged
         AddRemoveGeomParameter()
-        If ucrChkPoints.Checked Then
-            clsDummyFunction.AddParameter("choropleth_geom_point", True, iPosition:=0)
-        Else
-            clsDummyFunction.AddParameter("choropleth_geom_point", False, iPosition:=0)
-        End If
+        clsDummyFunction.AddParameter("choropleth_geom_point", If(ucrChkPoints.Checked, True, False), iPosition:=0)
     End Sub
 
     Private Sub AllControlsContentsChanged() Handles ucrInputColour.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
