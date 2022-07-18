@@ -357,20 +357,7 @@ Public Class dlgDescribeTwoVariable
         If Not ucrReceiverFirstVars.IsEmpty Then
             If rdoTwoVariable.Checked Then
                 If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                    If strFirstVariablesType = "categorical" AndAlso
-                        strSecondVariableType = "categorical" Then
-                        If ucrChkDisplayAsPercentage.Checked Then
-                            If ucrReceiverPercentages.IsEmpty Then
-                                ucrBase.OKEnabled(False)
-                            Else
-                                ucrBase.OKEnabled(True)
-                            End If
-                        Else
-                            ucrBase.OKEnabled(True)
-                        End If
-                    Else
-                        ucrBase.OKEnabled(True)
-                    End If
+                    ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
@@ -380,15 +367,7 @@ Public Class dlgDescribeTwoVariable
                 If Not ucrReceiverThreeVariableSecondFactor.IsEmpty AndAlso
                 Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
                     If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-                        If ucrChkThreeVariableDisplayAsPercentage.Checked Then
-                            If ucrReceiverThreeVariableMultiplePercentages.IsEmpty Then
-                                ucrBase.OKEnabled(False)
-                            Else
-                                ucrBase.OKEnabled(True)
-                            End If
-                        Else
-                            ucrBase.OKEnabled(True)
-                        End If
+                        ucrBase.OKEnabled(True)
                     ElseIf (strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical") OrElse
                             (strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric") Then
                         ucrBase.OKEnabled(True)
