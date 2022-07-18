@@ -162,7 +162,7 @@ Partial Class sdgImportFromClimSoft
         'ucrBaseSdgClimSoft
         '
         Me.ucrBaseSdgClimSoft.AutoSize = True
-        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(52, 192)
+        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(22, 192)
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
         Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgClimSoft.TabIndex = 7
