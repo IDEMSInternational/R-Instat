@@ -136,16 +136,16 @@ Public Class dlgDescribeTwoVariable
         ucrChkThreeVariableDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkThreeVariableDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrChkThreeVariableDisplayAsPercentage.AddToLinkedControls(ucrReceiverThreeVariableMultiplePercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
+        ucrChkThreeVariableDisplayAsPercentage.AddToLinkedControls(ucrReceiverThreeVariablePercentage, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                       bNewLinkedAddRemoveParameter:=True)
         ucrChkThreeVariableDisplayAsPercentage.AddToLinkedControls(ucrChkThreeVariablePercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True,
                                                       bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverThreeVariableMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 2))
-        ucrReceiverThreeVariableMultiplePercentages.SetParameterIsString()
-        ucrReceiverThreeVariableMultiplePercentages.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverThreeVariableMultiplePercentages.SetDataType("factor")
-        ucrReceiverThreeVariableMultiplePercentages.SetLinkedDisplayControl(lblThreeVariableFactorAsPercentages)
+        ucrReceiverThreeVariablePercentage.SetParameter(New RParameter("perc_total_factors", 2))
+        ucrReceiverThreeVariablePercentage.SetParameterIsString()
+        ucrReceiverThreeVariablePercentage.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverThreeVariablePercentage.SetDataType("factor")
+        ucrReceiverThreeVariablePercentage.SetLinkedDisplayControl(lblThreeVariableFactorAsPercentages)
 
         ucrChkThreeVariablePercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
         ucrChkThreeVariablePercentageProportion.SetText("Display as Decimal")
@@ -346,7 +346,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkThreeVariableDisplayAsPercentage.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
-        ucrReceiverThreeVariableMultiplePercentages.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
+        ucrReceiverThreeVariablePercentage.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
         ucrChkThreeVariablePercentageProportion.SetRCode(clsThreeVariableCombineFrequencyParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrNudSigFigs.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -773,8 +773,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
         ucrChkDisplayAsPercentage.ControlValueChanged, ucrNudSigFigs.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged,
-        ucrReceiverPercentages.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrChkThreeVariablePercentageProportion.ControlValueChanged,
-        ucrReceiverThreeVariableMultiplePercentages.ControlValueChanged, ucrChkThreeVariableDisplayAsPercentage.ControlValueChanged
+        ucrReceiverPercentages.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrChkThreeVariablePercentageProportion.ControlValueChanged, ucrChkThreeVariableDisplayAsPercentage.ControlValueChanged
         If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then
                 ucrReceiverPercentages.SetMeAsReceiver()
@@ -783,7 +782,7 @@ Public Class dlgDescribeTwoVariable
             End If
         ElseIf rdoThreeVariable.Checked Then
             If ucrChkThreeVariableDisplayAsPercentage.Checked Then
-                ucrReceiverThreeVariableMultiplePercentages.SetMeAsReceiver()
+                ucrReceiverThreeVariablePercentage.SetMeAsReceiver()
             Else
                 ucrReceiverFirstVars.SetMeAsReceiver()
             End If
@@ -982,7 +981,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub controls_contentChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlContentsChanged,
-        ucrReceiverPercentages.ControlContentsChanged, ucrReceiverThreeVariableMultiplePercentages.ControlContentsChanged,
+        ucrReceiverPercentages.ControlContentsChanged,
         ucrChkThreeVariableDisplayAsPercentage.ControlContentsChanged, ucrReceiverThreeVariableSecondFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
