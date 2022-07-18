@@ -442,16 +442,10 @@ Public Class dlgHeatMapPlot
         If rdoHeatMap.Checked Then
             ucrBase.OKEnabled(Not ucrVariableAsFactorForHeatMap.IsEmpty AndAlso Not ucrReceiverX.IsEmpty)
         Else
-            If ucrSaveGraph.IsComplete AndAlso Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
-                If ucrChkAddLabels.Checked Then
-                    If ucrInputColour.GetText <> "" Then
-                        ucrBase.OKEnabled(True)
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
-                Else
-                    ucrBase.OKEnabled(True)
-                End If
+            If Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
+                ucrBase.OKEnabled(Not ucrChkAddLabels.Checked _
+                                  OrElse Not String.IsNullOrEmpty(ucrInputColour.GetText))
+
             Else
                 ucrBase.OKEnabled(False)
             End If
