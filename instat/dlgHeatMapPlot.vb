@@ -59,7 +59,7 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipFunction As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
