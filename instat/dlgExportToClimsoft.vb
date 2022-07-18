@@ -20,5 +20,36 @@ Imports instat.Translations
 Public Class dlgExportToClimsoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private Sub dlgExportToCMSAF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
+        autoTranslate(Me)
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrReceiverDate.SetParameter(New RParameter("date", 1))
+        ucrReceiverDate.SetParameterIsRFunction()
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
 
+        ucrInputHour.SetParameter(New RParameter("hour"))
+
+        ucrInputLevel.SetParameter(New RParameter("level"))
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+    Private Sub TestOkEnabled()
+
+    End Sub
 End Class
