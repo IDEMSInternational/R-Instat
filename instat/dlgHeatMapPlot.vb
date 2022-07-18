@@ -554,16 +554,14 @@ Public Class dlgHeatMapPlot
         If bRCodeSet Then
             clsBaseOperator.RemoveParameterByName("heatmap_geom_point")
             MakeNudVisible()
-            If rdoHeatMap.Checked Then
-                If Not ucrReceiverPointsHeatMap.IsEmpty Then
-                    If ucrReceiverPointsHeatMap.strCurrDataType = "numeric" Then
-                        clsBaseOperator.AddParameter("heatmap_geom_point", clsRFunctionParameter:=clsGeomPointSizeHeatMapFunction, iPosition:=7)
-                    ElseIf ucrReceiverPointsHeatMap.strCurrDataType = "factor" Then
-                        clsBaseOperator.AddParameter("heatmap_geom_point", clsRFunctionParameter:=clsGeomPointShapeHeatMapFunction, iPosition:=7)
-                    Else
-                        clsBaseOperator.RemoveParameterByName("heatmap_geom_point")
-                    End If
-                End If
+            If ucrReceiverPointsHeatMap.IsEmpty OrElse Not rdoHeatMap.Checked Then
+                Exit Sub
+            ElseIf ucrReceiverPointsHeatMap.strCurrDataType = "numeric" Then
+                clsBaseOperator.AddParameter("heatmap_geom_point", clsRFunctionParameter:=clsGeomPointSizeHeatMapFunction, iPosition:=7)
+            ElseIf ucrReceiverPointsHeatMap.strCurrDataType = "factor" Then
+                clsBaseOperator.AddParameter("heatmap_geom_point", clsRFunctionParameter:=clsGeomPointShapeHeatMapFunction, iPosition:=7)
+            Else
+                clsBaseOperator.RemoveParameterByName("heatmap_geom_point")
             End If
         End If
     End Sub
