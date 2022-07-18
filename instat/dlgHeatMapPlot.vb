@@ -693,8 +693,7 @@ Public Class dlgHeatMapPlot
 
     Private Sub AddRemoveGeomParameter()
         clsBaseOperator.RemoveParameterByName("choropleth_geom_point")
-        If rdoChoroplethMap.Checked Then
-            If ucrChkPoints.Checked Then
+        If rdoChoroplethMap.Checked AndAlso ucrChkPoints.Checked Then
                 clsBaseOperator.AddParameter("choropleth_geom_point", clsRFunctionParameter:=clsGeomPointSizeChoroplethFunction, iPosition:=2)
             End If
         End If
