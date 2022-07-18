@@ -34,8 +34,8 @@ Public Class dlgHeatMapPlot
 
     Private clsCoordPolarFunction, clsAnnotateFunction, clsLocalRaesFunction, clsXScaleDateFunction, clsYScaleDateFunction,
     clsScaleFillViridisFunction, clsScaleColourViridisFunction, clsGeomTextFunction,
-    clsLabelAesFunction, clsColourPaletteFunction, clsForecatsReverse,
-    clsForecatsReverseValue, clsReorderFunction, clsReorderFunctionValue, clsGeomPolygonAesFunction, clsRggplotFunction,
+    clsLabelAesFunction, clsColourPaletteFunction, clsForecatsReverseFunction,
+    clsForecatsReverseValueFunction, clsReorderFunction, clsReorderValueFunction, clsGeomPolygonAesFunction, clsRggplotFunction,
     clsRgeomTileFunction, clsLabsFunction, clsGeomPointSizeHeatMapFunction, clsGeomPointSizeChoroplethFunction,
     clsGeomPointShapeHeatMapFunction, clsShapeHeatMapAesFunction, clsGroupFunction, clsSizeHeatMapAesFunction,
     clsSizeChoroplethAesFunction, clsHeatmapAesFunction, clsChoroplethAesFunction, clsXlabsFunction, clsYlabFunction,
