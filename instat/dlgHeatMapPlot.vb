@@ -62,13 +62,9 @@ Public Class dlgHeatMapPlot
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim dctLabelColours As New Dictionary(Of String, String)
-        Dim dctLabelColoursChoropleth As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
-        Dim dctLabelPositionsChoropleth As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
-        Dim dctLabelSizesChoropleth As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
-        Dim dctColourPalletteChoropleth As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
