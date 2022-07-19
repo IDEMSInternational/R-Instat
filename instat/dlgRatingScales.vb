@@ -310,7 +310,7 @@ Public Class dlgRatingScales
                 ElseIf rdoStacked.Checked Then
                     clsSjpStackFrqFunction.RemoveParameterByName("axis.labels")
                 Else
-                    clsSjpLikertFunction.RemoveParameterByName("axis.lables")
+                    clsSjpLikertFunction.RemoveParameterByName("axis.labels")
                 End If
             End If
         End If
