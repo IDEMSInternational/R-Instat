@@ -83,7 +83,6 @@ Partial Class ucrCalculator
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
-        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripInteger = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DescToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RutilsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -99,7 +98,7 @@ Partial Class ucrCalculator
         Me.cmdNextPrime = New System.Windows.Forms.Button()
         Me.cmdChoosez = New System.Windows.Forms.Button()
         Me.cmdFactorial = New System.Windows.Forms.Button()
-        Me.cmdPrime = New System.Windows.Forms.Button()
+        Me.cmdIsPrime = New System.Windows.Forms.Button()
         Me.cmdBigZ = New System.Windows.Forms.Button()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdTransformHelp = New System.Windows.Forms.Button()
@@ -418,6 +417,8 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.cmdStringRHelp = New System.Windows.Forms.Button()
+        Me.cmdNthPrime = New System.Windows.Forms.Button()
+        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
@@ -956,6 +957,7 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
+        Me.grpInteger.Controls.Add(Me.cmdNthPrime)
         Me.grpInteger.Controls.Add(Me.cmdIntegerRHelp)
         Me.grpInteger.Controls.Add(Me.cmdAsHexmode)
         Me.grpInteger.Controls.Add(Me.cmdAsOctmode)
@@ -969,49 +971,37 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdNextPrime)
         Me.grpInteger.Controls.Add(Me.cmdChoosez)
         Me.grpInteger.Controls.Add(Me.cmdFactorial)
-        Me.grpInteger.Controls.Add(Me.cmdPrime)
+        Me.grpInteger.Controls.Add(Me.cmdIsPrime)
         Me.grpInteger.Controls.Add(Me.cmdBigZ)
         Me.grpInteger.Location = New System.Drawing.Point(432, 61)
         Me.grpInteger.Name = "grpInteger"
-        Me.grpInteger.Size = New System.Drawing.Size(152, 209)
+        Me.grpInteger.Size = New System.Drawing.Size(152, 221)
         Me.grpInteger.TabIndex = 183
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
-        '
-        'cmdIntegerRHelp
-        '
-        Me.cmdIntegerRHelp.AutoSize = True
-        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(59, 180)
-        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
-        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
-        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.TabIndex = 16
-        Me.cmdIntegerRHelp.Text = "R Help"
-        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripInteger
         '
         Me.ContextMenuStripInteger.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescToolsToolStripMenuItem, Me.RutilsToolStripMenuItem})
         Me.ContextMenuStripInteger.Name = "ContextMenuStripInteger"
-        Me.ContextMenuStripInteger.Size = New System.Drawing.Size(181, 70)
+        Me.ContextMenuStripInteger.Size = New System.Drawing.Size(127, 48)
         '
         'DescToolsToolStripMenuItem
         '
         Me.DescToolsToolStripMenuItem.Name = "DescToolsToolStripMenuItem"
-        Me.DescToolsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DescToolsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.DescToolsToolStripMenuItem.Text = "DescTools"
         '
         'RutilsToolStripMenuItem
         '
         Me.RutilsToolStripMenuItem.Name = "RutilsToolStripMenuItem"
-        Me.RutilsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RutilsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.RutilsToolStripMenuItem.Text = "R.utils"
         '
         'cmdAsHexmode
         '
         Me.cmdAsHexmode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAsHexmode.Location = New System.Drawing.Point(75, 149)
+        Me.cmdAsHexmode.Location = New System.Drawing.Point(1, 171)
         Me.cmdAsHexmode.Name = "cmdAsHexmode"
         Me.cmdAsHexmode.Size = New System.Drawing.Size(75, 23)
         Me.cmdAsHexmode.TabIndex = 15
@@ -1031,7 +1021,7 @@ Partial Class ucrCalculator
         'cmdBinary
         '
         Me.cmdBinary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdBinary.Location = New System.Drawing.Point(75, 127)
+        Me.cmdBinary.Location = New System.Drawing.Point(75, 149)
         Me.cmdBinary.Name = "cmdBinary"
         Me.cmdBinary.Size = New System.Drawing.Size(75, 23)
         Me.cmdBinary.TabIndex = 13
@@ -1050,7 +1040,7 @@ Partial Class ucrCalculator
         '
         'cmdDigitSum
         '
-        Me.cmdDigitSum.Location = New System.Drawing.Point(75, 105)
+        Me.cmdDigitSum.Location = New System.Drawing.Point(75, 127)
         Me.cmdDigitSum.Name = "cmdDigitSum"
         Me.cmdDigitSum.Size = New System.Drawing.Size(75, 23)
         Me.cmdDigitSum.TabIndex = 10
@@ -1087,7 +1077,7 @@ Partial Class ucrCalculator
         '
         'cmdFactorize
         '
-        Me.cmdFactorize.Location = New System.Drawing.Point(75, 83)
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 105)
         Me.cmdFactorize.Name = "cmdFactorize"
         Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
         Me.cmdFactorize.TabIndex = 6
@@ -1105,7 +1095,7 @@ Partial Class ucrCalculator
         '
         'cmdChoosez
         '
-        Me.cmdChoosez.Location = New System.Drawing.Point(75, 61)
+        Me.cmdChoosez.Location = New System.Drawing.Point(75, 83)
         Me.cmdChoosez.Name = "cmdChoosez"
         Me.cmdChoosez.Size = New System.Drawing.Size(75, 23)
         Me.cmdChoosez.TabIndex = 4
@@ -1121,15 +1111,15 @@ Partial Class ucrCalculator
         Me.cmdFactorial.Text = "factorial"
         Me.cmdFactorial.UseVisualStyleBackColor = True
         '
-        'cmdPrime
+        'cmdIsPrime
         '
-        Me.cmdPrime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPrime.Location = New System.Drawing.Point(75, 39)
-        Me.cmdPrime.Name = "cmdPrime"
-        Me.cmdPrime.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPrime.TabIndex = 1
-        Me.cmdPrime.Text = "prime"
-        Me.cmdPrime.UseVisualStyleBackColor = True
+        Me.cmdIsPrime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdIsPrime.Location = New System.Drawing.Point(75, 39)
+        Me.cmdIsPrime.Name = "cmdIsPrime"
+        Me.cmdIsPrime.Size = New System.Drawing.Size(75, 23)
+        Me.cmdIsPrime.TabIndex = 1
+        Me.cmdIsPrime.Text = "is_prime"
+        Me.cmdIsPrime.UseVisualStyleBackColor = True
         '
         'cmdBigZ
         '
@@ -4959,6 +4949,27 @@ Partial Class ucrCalculator
         Me.cmdStringRHelp.Text = "R Help"
         Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
+        'cmdNthPrime
+        '
+        Me.cmdNthPrime.Location = New System.Drawing.Point(75, 61)
+        Me.cmdNthPrime.Name = "cmdNthPrime"
+        Me.cmdNthPrime.Size = New System.Drawing.Size(75, 23)
+        Me.cmdNthPrime.TabIndex = 17
+        Me.cmdNthPrime.Text = "nth_prime"
+        Me.cmdNthPrime.UseVisualStyleBackColor = True
+        '
+        'cmdIntegerRHelp
+        '
+        Me.cmdIntegerRHelp.AutoSize = True
+        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(59, 194)
+        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
+        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.TabIndex = 16
+        Me.cmdIntegerRHelp.Text = "R Help"
+        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         Me.ucrSaveResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -5438,7 +5449,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdProbRHelp As Button
     Friend WithEvents grpInteger As GroupBox
     Friend WithEvents cmdFactorial As Button
-    Friend WithEvents cmdPrime As Button
+    Friend WithEvents cmdIsPrime As Button
     Friend WithEvents cmdBigZ As Button
     Friend WithEvents cmdNextPrime As Button
     Friend WithEvents cmdChoosez As Button
@@ -5455,4 +5466,5 @@ Partial Class ucrCalculator
     Friend WithEvents ContextMenuStripInteger As ContextMenuStrip
     Friend WithEvents DescToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RutilsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdNthPrime As Button
 End Class
