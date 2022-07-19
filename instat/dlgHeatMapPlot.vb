@@ -83,6 +83,7 @@ Public Class dlgHeatMapPlot
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
         ucrReceiverFill.SetLinkedDisplayControl(lblFill)
+        ucrReceiverFillChoropleth.SetLinkedDisplayControl(lblFillChoropleth)
         ucrReceiverPointsHeatMap.SetLinkedDisplayControl(lblPointsOptional)
         ucrReceiverGroup.SetLinkedDisplayControl(lblGroup)
 
@@ -464,18 +465,12 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        Dim bOptionsEnabled As Boolean = True
         If rdoHeatMap.Checked Then
-            If ucrVariableAsFactorForHeatMap.bSingleVariable Then
-                cmdTileOptions.Enabled = True
-                cmdOptions.Enabled = True
-            Else
-                cmdTileOptions.Enabled = False
-                cmdOptions.Enabled = False
-            End If
-        Else
-            cmdTileOptions.Enabled = True
-            cmdOptions.Enabled = True
+            bOptionsEnabled = If(ucrVariableAsFactorForHeatMap.bSingleVariable, True, False)
         End If
+        cmdTileOptions.Enabled = bOptionsEnabled
+        cmdOptions.Enabled = bOptionsEnabled
     End Sub
 
     Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariableAsFactorForHeatMap.ControlValueChanged, ucrPnlOptions.ControlValueChanged
@@ -483,21 +478,12 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        If rdoHeatMap.Checked Then
-            sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                         clsNewGlobalAesFunction:=clsHeatmapAesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                         clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                         clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
-                         strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
-        Else
-            sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                         clsNewGlobalAesFunction:=clsChoroplethAesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                         clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                         clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
-                         strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
-        End If
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                     clsNewGlobalAesFunction:=If(rdoHeatMap.Checked, clsHeatmapAesFunction, clsChoroplethAesFunction), clsNewXLabsTitleFunction:=clsXlabsFunction,
+                     clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                     clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
+                     strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                      clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
