@@ -364,20 +364,32 @@ Public Class dlgBoxplot
                 clsCurrGeomFunc = clsTufteBoxplotFunc
                 clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
+                toolStripMenuItemTufteOptions.Enabled = True
             Else
                 ucrSaveBoxplot.SetPrefix("box_plot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
+                toolStripMenuItemTufteOptions.Enabled = False
             End If
-
+            toolStripMenuItemJitterOptions.Enabled = False
+            toolStripMenuItemViolinOptions.Enabled = False
+            toolStripMenuItemBoxOptions.Enabled = True
         ElseIf rdoJitter.Checked Then
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
+            toolStripMenuItemJitterOptions.Enabled = True
+            toolStripMenuItemViolinOptions.Enabled = False
+            toolStripMenuItemBoxOptions.Enabled = False
+            toolStripMenuItemTufteOptions.Enabled = False
         Else
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
+            toolStripMenuItemJitterOptions.Enabled = False
+            toolStripMenuItemViolinOptions.Enabled = True
+            toolStripMenuItemBoxOptions.Enabled = False
+            toolStripMenuItemTufteOptions.Enabled = False
         End If
         'TODO Am not sure why the geomfunc parameter which carries clsCurrGeomFunc(current geom function) 
         'does Not Update() properly when readio buttons are changed
