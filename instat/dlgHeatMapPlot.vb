@@ -311,9 +311,7 @@ Public Class dlgHeatMapPlot
         clsForecatsReverseValueFunction.SetRCommand("fct_rev")
 
         clsReorderValueFunction.SetRCommand("reorder")
-        clsReorderValueFunction.SetRCommand("reorder")
 
-        clsReorderFunction.SetRCommand("reorder")
         clsReorderFunction.SetRCommand("reorder")
 
         clsChoroplethAesFunction.SetPackageName("ggplot2")
@@ -445,7 +443,6 @@ Public Class dlgHeatMapPlot
             If Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
                 ucrBase.OKEnabled(Not ucrChkAddLabels.Checked _
                                   OrElse Not String.IsNullOrEmpty(ucrInputColour.GetText))
-
             Else
                 ucrBase.OKEnabled(False)
             End If
@@ -689,12 +686,11 @@ Public Class dlgHeatMapPlot
         If rdoChoroplethMap.Checked AndAlso ucrChkPoints.Checked Then
             clsBaseOperator.AddParameter("choropleth_geom_point", clsRFunctionParameter:=clsGeomPointSizeChoroplethFunction, iPosition:=2)
         End If
-
     End Sub
 
     Private Sub ucrChkPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPoints.ControlValueChanged
         AddRemoveGeomParameter()
-        clsDummyFunction.AddParameter("choropleth_geom_point", If(ucrChkPoints.Checked, True, False), iPosition:=0)
+        clsDummyFunction.AddParameter("choropleth_geom_point", ucrChkPoints.Checked, iPosition:=0)
     End Sub
 
     Private Sub AllControlsContentsChanged() Handles ucrInputColour.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
