@@ -216,9 +216,9 @@ Partial Class dlgImportDataset
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(8, 20)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(7, 20)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
-        Me.lblFileOpenPath.Size = New System.Drawing.Size(38, 13)
+        Me.lblFileOpenPath.Size = New System.Drawing.Size(52, 13)
         Me.lblFileOpenPath.TabIndex = 0
         Me.lblFileOpenPath.Text = "File:"
         '
@@ -235,7 +235,7 @@ Partial Class dlgImportDataset
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(401, 18)
+        Me.cmdBrowse.Location = New System.Drawing.Point(403, 16)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(66, 23)
         Me.cmdBrowse.TabIndex = 2
@@ -904,9 +904,9 @@ Partial Class dlgImportDataset
         '
         Me.ucrChkMultipleFiles.AutoSize = True
         Me.ucrChkMultipleFiles.Checked = False
-        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(470, 20)
+        Me.ucrChkMultipleFiles.Location = New System.Drawing.Point(472, 19)
         Me.ucrChkMultipleFiles.Name = "ucrChkMultipleFiles"
-        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(176, 23)
+        Me.ucrChkMultipleFiles.Size = New System.Drawing.Size(173, 23)
         Me.ucrChkMultipleFiles.TabIndex = 30
         '
         'ucrNudPreviewLines
@@ -937,11 +937,11 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(45, 17)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(63, 17)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(352, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(336, 21)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'ucrBase
