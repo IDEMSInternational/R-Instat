@@ -224,7 +224,17 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
+            toolStripMenuItemHistogramOptions.Enabled = True
+            toolStripMenuItemDotOptions.Enabled = False
+            toolStripMenuItemDensityOptions.Enabled = False
+            toolStripMenuItemDensityRidgesOptions.Enabled = False
+            toolStripMenuItemFrequencyPolygonOptions.Enabled = False
             If ucrChkDisplayAsDotPlot.Checked Then
+                toolStripMenuItemHistogramOptions.Enabled = False
+                toolStripMenuItemDotOptions.Enabled = True
+                toolStripMenuItemDensityOptions.Enabled = False
+                toolStripMenuItemDensityRidgesOptions.Enabled = False
+                toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
             Else
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
@@ -235,7 +245,17 @@ Public Class dlgHistogram
             End If
         Else
             If rdoDensity_ridges.Checked Then
+                toolStripMenuItemHistogramOptions.Enabled = False
+                toolStripMenuItemDotOptions.Enabled = False
+                toolStripMenuItemDensityOptions.Enabled = True
+                toolStripMenuItemDensityRidgesOptions.Enabled = False
+                toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                 If ucrChkRidges.Checked Then
+                    toolStripMenuItemHistogramOptions.Enabled = False
+                    toolStripMenuItemDotOptions.Enabled = False
+                    toolStripMenuItemDensityOptions.Enabled = False
+                    toolStripMenuItemDensityRidgesOptions.Enabled = True
+                    toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                     ucrFactorReceiver.ChangeParameterName("y")
                     clsHistAesFunction.RemoveParameterByName("y")
                     clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
@@ -253,6 +273,11 @@ Public Class dlgHistogram
                     End If
                 End If
             ElseIf rdoFrequencyPolygon.Checked Then
+                toolStripMenuItemHistogramOptions.Enabled = False
+                toolStripMenuItemDotOptions.Enabled = False
+                toolStripMenuItemDensityOptions.Enabled = False
+                toolStripMenuItemDensityRidgesOptions.Enabled = False
+                toolStripMenuItemFrequencyPolygonOptions.Enabled = True
                 ucrFactorReceiver.ChangeParameterName("colour")
                 clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
                 If Not ucrSaveHist.bUserTyped Then
@@ -276,7 +301,6 @@ Public Class dlgHistogram
             clsBaseOperator.RemoveParameterByName("scale")
         End If
     End Sub
-
 
     'TODO remove vbCr not compatible with other code
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
@@ -304,23 +328,13 @@ Public Class dlgHistogram
             clsRaesFunction.RemoveParameterByName("x")
         End If
     End Sub
-    Private Sub cmdOptions_Click_1(sender As Object, e As EventArgs) Handles cmdOptions.Click
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction,
                          clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector,
                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
-        clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage) ' This passes the percent function to the plot options
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
-    Private Sub toolStripMenuItemPlotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPlotOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction,
-                      clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
-                      clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector,
-                      clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
-                      clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage) ' This passes the percent function to the plot options
         sdgPlots.ShowDialog()
         bResetSubdialog = False
