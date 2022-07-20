@@ -1059,51 +1059,62 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverThreeVariableSecondFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableSecondFactor.SelectionChanged
-        If rdoThreeVariable.Checked AndAlso bRcodeSet Then
-            If (strFirstVariablesType = "categorical" AndAlso ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                ucrReceiverThreeVariableSecondFactor.GetVariableNames)) OrElse
-                (strSecondVariableType = "categorical" AndAlso
-            ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
-                MsgBox("Pick a categorical variable different from those selected in the First Variable and the third Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrReceiverThreeVariableThirdVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableThirdVariable.SelectionChanged
-        If rdoThreeVariable.Checked AndAlso bRcodeSet Then
-            If strSecondVariableType = "categorical" AndAlso
-                (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames OrElse
-                ucrReceiverFirstVars.GetVariableNamesList.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames)) Then
-                MsgBox("Pick a categorical variable different from those selected in the First Variable and the Second Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrReceiverSecondTwoVariableFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondTwoVariableFactor.SelectionChanged
-        If rdoTwoVariable.Checked AndAlso bRcodeSet Then
-            If strSecondVariableType = "categorical" AndAlso
-                (ucrReceiverFirstVars.GetVariableNamesList.Contains(ucrReceiverSecondTwoVariableFactor.GetVariableNames)) Then
-                MsgBox("Pick a categorical variable different from that selected in the First Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrReceiverFirstVars_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVars.SelectionChanged
+    Private Sub TwoThreeReceivers_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableThirdVariable.SelectionChanged,
+            ucrReceiverSecondTwoVariableFactor.SelectionChanged, ucrReceiverFirstVars.SelectionChanged, ucrReceiverThreeVariableSecondFactor.SelectionChanged
         If bRcodeSet Then
-            If rdoTwoVariable.Checked Then
-                If strFirstVariablesType = "categorical" AndAlso ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                    ucrReceiverSecondTwoVariableFactor.GetVariableNames) Then
-                    MsgBox("Pick a categorical variable different from that selected in the Second Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
-                End If
-            ElseIf rdoThreeVariable.Checked Then
-                If strFirstVariablesType = "categorical" AndAlso
-                        (ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                    ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse ucrReceiverFirstVars.GetVariableNamesList.Contains(
-                    ucrReceiverThreeVariableThirdVariable.GetVariableNames)) Then
-                    MsgBox("Pick a categorical variable different from those selected in the Second and Third Variable to avoid Errors", vbOKOnly, "Matching Factor Variables")
+            Dim bContainedInMultipleReceiver As Boolean = False
+            Dim strWarningMessage As Boolean = ""
+
+            If TypeOf (sender) Is ucrReceiverSingle Then
+                bContainedInMultipleReceiver = ucrReceiverFirstVars.GetVariableNamesList.Contains(
+                                                TryCast(sender, ucrReceiverSingle).GetVariableNames)
+            ElseIf TypeOf (sender) Is ucrReceiverMultiple Then
+                Dim lstMultipleVariables As String() = TryCast(sender, ucrReceiverMultiple).GetVariableNamesList()
+                If rdoTwoVariable.Checked Then
+                    bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverSecondTwoVariableFactor.GetVariableNames)
+                Else
+                    bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse
+                                                    lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames)
                 End If
             End If
+
+            Select Case sender
+                Case ucrReceiverThreeVariableThirdVariable, ucrReceiverSecondTwoVariableFactor
+                    If bContainedInMultipleReceiver And strSecondVariableType = "categorical" Then
+                        If sender Is ucrReceiverThreeVariableThirdVariable Then
+                            If ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames Then
+                                strWarningMessage = " First Variable and the Second Variable "
+                                DisplayWarning(strWarningMessage)
+                            End If
+                        Else
+                            strWarningMessage = " First Variable "
+                            DisplayWarning(strWarningMessage)
+                        End If
+                    End If
+                Case ucrReceiverThreeVariableSecondFactor
+                    If (strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver) OrElse
+                          (strSecondVariableType = "categorical" AndAlso
+                      ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
+                        strWarningMessage = " First Variable and the third Variable "
+                        DisplayWarning(strWarningMessage)
+                    End If
+                Case ucrReceiverFirstVars
+                    If rdoTwoVariable.Checked Then
+                        If strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver Then
+                            strWarningMessage = " Second Variable "
+                            DisplayWarning(strWarningMessage)
+                        End If
+                    ElseIf rdoThreeVariable.Checked Then
+                        If strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver Then
+                            strWarningMessage = " Second and Third Variable "
+                            DisplayWarning(strWarningMessage)
+                        End If
+                    End If
+            End Select
         End If
+    End Sub
+
+    Private Sub DisplayWarning(strMessage As String)
+        MsgBox("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
     End Sub
 End Class
