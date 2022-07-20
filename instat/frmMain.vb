@@ -2463,7 +2463,7 @@ Public Class frmMain
         dlgPICSARainfall.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    Private Sub mnuOptionsByContextApsimxExamples_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextApsimxExamples.Click
         dlgApsimx.ShowDialog()
     End Sub
 End Class

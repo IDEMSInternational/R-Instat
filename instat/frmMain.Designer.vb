@@ -648,6 +648,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextApsimxExamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -4774,10 +4775,17 @@ Partial Class frmMain
         '
         'mnuOptionsByContextCropModel
         '
+        Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
         Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
-        Me.mnuOptionsByContextCropModel.Visible = False
+        '
+        'mnuOptionsByContextApsimxExamples
+        '
+        Me.mnuOptionsByContextApsimxExamples.Name = "mnuOptionsByContextApsimxExamples"
+        Me.mnuOptionsByContextApsimxExamples.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextApsimxExamples.Text = "Apsimx Examples..."
+        Me.mnuOptionsByContextApsimxExamples.Visible = False
         '
         'mnuTools
         '
@@ -5768,4 +5776,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSAGeneralGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator73 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
+    Friend WithEvents mnuOptionsByContextApsimxExamples As ToolStripMenuItem
 End Class

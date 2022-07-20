@@ -27,7 +27,7 @@ Partial Class dlgApsimx
         Me.ucrChkSilent = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputPath = New instat.ucrInputTextBox()
-        Me.ucrSaveDataframeName = New instat.ucrSave()
+        Me.ucrSaveFile = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblPath
@@ -79,21 +79,21 @@ Partial Class dlgApsimx
         Me.ucrInputPath.Size = New System.Drawing.Size(256, 21)
         Me.ucrInputPath.TabIndex = 6
         '
-        'ucrSaveDataframeName
+        'ucrSaveFile
         '
-        Me.ucrSaveDataframeName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(16, 133)
-        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
-        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(405, 24)
-        Me.ucrSaveDataframeName.TabIndex = 7
+        Me.ucrSaveFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveFile.Location = New System.Drawing.Point(16, 158)
+        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFile.Name = "ucrSaveFile"
+        Me.ucrSaveFile.Size = New System.Drawing.Size(394, 23)
+        Me.ucrSaveFile.TabIndex = 30
         '
         'dlgApsimx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 251)
-        Me.Controls.Add(Me.ucrSaveDataframeName)
+        Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.ucrInputPath)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrChkSilent)
@@ -115,5 +115,5 @@ Partial Class dlgApsimx
     Friend WithEvents ucrChkSilent As ucrCheck
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputPath As ucrInputTextBox
-    Friend WithEvents ucrSaveDataframeName As ucrSave
+    Friend WithEvents ucrSaveFile As ucrSave
 End Class

@@ -20,9 +20,15 @@ Public Class dlgApsimx
     Public bFirstLoad As Boolean = True
     Private bFromLibrary As Boolean = False
     Private strFilePath As String = ""
-    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Shapefiles/")
+    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Apsimxfiles/")
     Private bReset As Boolean = True
-    Private clsApsimxExampleFunction As New RFunction
+    Private clsApsimxExampleFunction, clsApsimExampleFunction As New RFunction
+    'Public Sub New()
+    '    ' This call is required by the designer.
+    '    InitializeComponent()
+    '    bFirstLoad = True
+    '    ucrInputDataName.bAutoChangeOnLeave = True
+    'End Sub
 
     Private Sub dlgApsimx_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,39 +49,55 @@ Public Class dlgApsimx
 
         ucrInputPath.IsReadOnly = True
 
-        ucrSaveDataframeName.SetSaveTypeAsDataFrame()
-        ucrSaveDataframeName.SetIsTextBox()
-        ucrSaveDataframeName.SetLabelText("Dataframe Name:")
-
         ucrChkSilent.SetText("Silent")
         ucrChkSilent.SetParameter(New RParameter("silent", 1))
         ucrChkSilent.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSilent.SetRDefault("FALSE")
-    End Sub
 
+        ucrSaveFile.SetSaveTypeAsDataFrame()
+        ucrSaveFile.SetLabelText("New Data Frame Name:")
+        ucrSaveFile.SetIsTextBox()
+    End Sub
 
     Private Sub SetDefaults()
         clsApsimxExampleFunction = New RFunction
+        clsApsimExampleFunction = New RFunction
 
+
+        'ucrInputDataName.SetName("")
         ucrInputPath.SetName("")
         clsApsimxExampleFunction.SetPackageName("apsimx")
         clsApsimxExampleFunction.SetRCommand("apsimx_example")
 
+        clsApsimExampleFunction.SetPackageName("apsimx")
+        clsApsimExampleFunction.SetRCommand("apsim_example")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("silent", 1), iAdditionalPairNo:=1)
+
         ucrChkSilent.SetRCode(clsApsimxExampleFunction, bReset)
+        ucrSaveFile.AddAdditionalRCode(clsApsimExampleFunction, bReset)
+        ucrSaveFile.SetRCode(clsApsimxExampleFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If ucrSaveFile.IsComplete AndAlso ucrInputPath.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
+
     Public Sub GetFileFromOpenDialog()
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
@@ -84,7 +106,6 @@ Public Class dlgApsimx
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "Apsimxfiles|*.apsimx|All Apsimxfiles|*.apsimx;*.apsim"
             dlgOpen.Title = "Import Shape File"
-
             If bFromLibrary Then
                 dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(strLibraryPath, "/", "\"))
             ElseIf Not ucrInputPath.IsEmpty() Then
@@ -94,14 +115,20 @@ Public Class dlgApsimx
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
-
+                clsApsimxExampleFunction.RemoveParameterByName("path")
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                     strFilePath = dlgOpen.FileName
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputPath.SetName(Replace(strFilePath, "\", "/"))
-                    If strFileExt = ".apsimx" OrElse strFileExt = ".apsim" Then
-                        ucrSaveDataframeName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+                    If strFileExt = ".apsimx" Then
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
+                        ucrSaveFile.SetPrefix(strFileName)
+                        clsApsimxExampleFunction.AddParameter("example", Chr(34) & strFileName & Chr(34), iPosition:=0)
+                    Else
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsApsimExampleFunction)
+                        ucrSaveFile.SetPrefix(strFileName)
+                        clsApsimExampleFunction.AddParameter("example", Chr(34) & strFileName & Chr(34), iPosition:=0)
                     End If
                 End If
             End If
@@ -112,11 +139,7 @@ Public Class dlgApsimx
         GetFileFromOpenDialog()
     End Sub
 
-    Private Sub ucrChkSilent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSilent.ControlValueChanged
-        GetFileFromOpenDialog()
-    End Sub
-
-    Private Sub ucrSaveDataframeName_Load(sender As Object, e As EventArgs) Handles ucrSaveDataframeName.Load
-
+    Private Sub ucrInputPath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged, ucrInputPath.ControlContentsChanged, ucrChkSilent.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
