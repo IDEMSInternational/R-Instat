@@ -389,7 +389,11 @@ Partial Class dlgImportDataset
         Me.lblNoPreview.AutoSize = True
         Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         Me.lblNoPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+<<<<<<< HEAD
         Me.lblNoPreview.Location = New System.Drawing.Point(297, 332)
+=======
+        Me.lblNoPreview.Location = New System.Drawing.Point(276, 329)
+>>>>>>> e93bb269adce9f9905fe39a1d6b561fc4d82b546
         Me.lblNoPreview.Name = "lblNoPreview"
         Me.lblNoPreview.Size = New System.Drawing.Size(298, 18)
         Me.lblNoPreview.TabIndex = 14
