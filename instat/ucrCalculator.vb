@@ -3087,4 +3087,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime()", 1)
         End If
     End Sub
+
+    Private Sub PrimesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrimesToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "primes"
+        End If
+        OpenHelpPage()
+    End Sub
 End Class
