@@ -139,6 +139,13 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudDim1.SetLinkedDisplayControl(lblDim)
 
+        ucrSaveGraph.SetPrefix("pca_graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
         ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
@@ -173,6 +180,11 @@ Public Class sdgPrincipalComponentAnalysis
         ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, ucrNudDim2.GetParameter(), iAdditionalPairNo:=1)
         ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, ucrNudDim2.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
+
+        ucrSaveGraph.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveGraph.AddAdditionalRCode(clsRIndividualsPlotFunction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsRVariablesPlotFunction, iAdditionalPairNo:=2)
+        ucrSaveGraph.AddAdditionalRCode(clsRBiplotFunction, iAdditionalPairNo:=3)
 
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset, bCloneIfNeeded:=True)

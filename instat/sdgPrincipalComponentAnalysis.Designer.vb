@@ -78,6 +78,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -85,6 +86,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpVariablePlot.SuspendLayout()
         Me.GrpIndividualPlot.SuspendLayout()
         Me.grpGeom.SuspendLayout()
+        Me.tbSave.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbRegOptions
@@ -527,6 +529,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbSave
         '
+        Me.tbSave.Controls.Add(Me.ucrSaveGraph)
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
@@ -543,6 +546,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgButtons.TabIndex = 1
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 25)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSaveGraph.TabIndex = 14
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -572,6 +584,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.GrpIndividualPlot.PerformLayout()
         Me.grpGeom.ResumeLayout(False)
         Me.grpGeom.PerformLayout()
+        Me.tbSave.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -618,4 +631,5 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrPnlIndividualPlot As UcrPanel
     Friend WithEvents grpVariablePlot As GroupBox
     Friend WithEvents GrpIndividualPlot As GroupBox
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

@@ -149,9 +149,9 @@ Public Class dlgPrincipalComponentAnalysis
         clsColNamesQuantFunction.SetRCommand("colnames")
         clsColNamesQuantFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
 
-        clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPCAFunction, iPosition:=0)
-        clsSummaryFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        'clsSummaryFunction.SetRCommand("summary")
+        'clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPCAFunction, iPosition:=0)
+        'clsSummaryFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         'clsSummaryFunction.iCallType = 2
 
         clsBinaryQuantiSupOperator.SetOperation("%in%")
@@ -170,18 +170,18 @@ Public Class dlgPrincipalComponentAnalysis
         clsPCAFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=1)
         clsPCAFunction.AddParameter("ncp", 2)
         clsPCAFunction.AddParameter("graph", "FALSE")
-        'clsPCAFunction.iCallType = 2
-        'clsPCAFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsPCAFunction.iCallType = 2
+        clsPCAFunction.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
 
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
-        'clsREigenValues.iCallType = 2
+        clsREigenValues.iCallType = 2
 
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
         clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
-        'clsREigenVectors.iCallType = 2
+        clsREigenVectors.iCallType = 2
 
         clsRRotationCoord.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRRotationCoord.AddParameter("value1", Chr(34) & "var" & Chr(34))
@@ -270,8 +270,13 @@ Public Class dlgPrincipalComponentAnalysis
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeMinimal, iPosition:=1)
         clsBaseOperator.iCallType = 3
 
+        clsRScreePlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsRVariablesPlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsRIndividualsPlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsRBiplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
         'ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
@@ -294,7 +299,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.SetRCode(clsGetColumnsFunction, bReset)
         ucrReceiverSuppNumeric.SetRCode(clsBinaryQuantiSupOperator, bReset)
         ucrReceiverSupplFactors.SetRCode(clsBinaryQualitySupOperator, bReset)
-        ucrSaveResult.SetRCode(clsSummaryFunction, bReset)
+        ucrSaveResult.SetRCode(clsPCAFunction, bReset)
         'ucrSaveResult.AddAdditionalRCode(clsSummaryFunction, bReset)
         ucrChkScaleData.SetRCode(clsPCAFunction, bReset)
         ucrChkExtraVariables.SetRCode(clsDummyFunction, bReset)
