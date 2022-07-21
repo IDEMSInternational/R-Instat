@@ -60,6 +60,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemBoxplotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemViolinplotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.grpOptions.SuspendLayout()
         Me.grpContexts.SuspendLayout()
@@ -451,9 +452,9 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxplotOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxplotOptions, Me.toolStripMenuItemViolinplotOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(161, 48)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(161, 70)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -463,9 +464,17 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'toolStripMenuItemBoxplotOptions
         '
+        Me.toolStripMenuItemBoxplotOptions.Enabled = False
         Me.toolStripMenuItemBoxplotOptions.Name = "toolStripMenuItemBoxplotOptions"
         Me.toolStripMenuItemBoxplotOptions.Size = New System.Drawing.Size(160, 22)
         Me.toolStripMenuItemBoxplotOptions.Text = "Boxplot Options"
+        '
+        'toolStripMenuItemViolinplotOptions
+        '
+        Me.toolStripMenuItemViolinplotOptions.Enabled = False
+        Me.toolStripMenuItemViolinplotOptions.Name = "toolStripMenuItemViolinplotOptions"
+        Me.toolStripMenuItemViolinplotOptions.Size = New System.Drawing.Size(160, 22)
+        Me.toolStripMenuItemViolinplotOptions.Text = "Violin Options"
         '
         'cmdOptions
         '
@@ -550,4 +559,5 @@ Partial Class dlgOptionsByContextBoxplot
     Friend WithEvents contextMenuStripOptions As ContextMenuStrip
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemBoxplotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemViolinplotOptions As ToolStripMenuItem
 End Class

@@ -74,6 +74,7 @@ Public Class dlgOptionsByContextBoxplot
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
@@ -367,6 +368,15 @@ Public Class dlgOptionsByContextBoxplot
         cmdPointOptions.Visible = ucrChkIncludePoints.Checked
     End Sub
 
+    Private Sub ucrPnlPlotType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlotType.ControlValueChanged
+        If rdoBoxplot.Checked Then
+            clsBoxplotViolinGeom.SetRCommand("geom_boxplot")
+        ElseIf rdoViolin.Checked Then
+            clsBoxplotViolinGeom.SetRCommand("geom_violin")
+        End If
+        autoTranslate(Me)
+    End Sub
+
     Private Sub ucrChkIncludeHline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeHline.ControlValueChanged
         If ucrChkIncludeHline.Checked Then
             clsBaseOperator.AddParameter("geom_hline", clsRFunctionParameter:=clsHlineGeom, iPosition:=2)
@@ -496,7 +506,7 @@ Public Class dlgOptionsByContextBoxplot
         bResetSubdialog = False
     End Sub
 
-    Private Sub toolStripMenuItemBoxplotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxplotOptions.Click
+    Private Sub toolStripMenuItemBoxplotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxplotOptions.Click, toolStripMenuItemViolinplotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         SetRCodeForControls(False)
