@@ -208,7 +208,6 @@ Public Class dlgHeatMapPlot
         clsCoordFlipParam.SetArgument(clsCoordFlipFunction)
         ucrChkFlipCoordinates.SetText("Swap x and y")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
     End Sub
 
     Private Sub SetDefaults()
