@@ -282,7 +282,6 @@ Public Class dlgHeatMapPlot
         clsRoundFunction.SetRCommand("round")
         clsRoundFunction.AddParameter("digits", 2, iPosition:=0)
 
-
         clsGeomPointSizeHeatMapFunction.SetPackageName("ggplot2")
         clsGeomPointSizeHeatMapFunction.SetRCommand("geom_point")
         clsGeomPointSizeHeatMapFunction.AddParameter("mapping", clsRFunctionParameter:=clsSizeHeatMapAesFunction, iPosition:=0)
