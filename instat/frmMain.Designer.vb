@@ -3162,12 +3162,14 @@ Partial Class frmMain
         '
         'mnuColumnMetadat
         '
+        Me.mnuColumnMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuColumnMetadat.Name = "mnuColumnMetadat"
         Me.mnuColumnMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuColumnMetadat.Text = "  Column Metadata..."
         '
         'mnuDataFrameMetadat
         '
+        Me.mnuDataFrameMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
         Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
@@ -3185,14 +3187,16 @@ Partial Class frmMain
         '
         'mnuLogWindow
         '
+        Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuLogWindow.Name = "mnuLogWindow"
-        Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
+        Me.mnuLogWindow.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogWindow.Text = "  Log Window..."
         '
         'mnuScriptWindow
         '
+        Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuScriptWindow.Name = "mnuScriptWindow"
-        Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
+        Me.mnuScriptWindow.Size = New System.Drawing.Size(180, 22)
         Me.mnuScriptWindow.Text = "  Script Window..."
         '
         'mnuTbResetLayout
