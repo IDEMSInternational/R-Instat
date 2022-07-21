@@ -24,7 +24,7 @@ Public Class dlgDescribeTwoVariable
 
     'MAPPING AND SUMMARY FUNCTIoNS
     Private clsCombineFrequencyParametersFunction, clsCombineFunction,
-        clsCombineMultipleColumnsFunction, clsDummyFunction,
+        clsCombineMultipleColumnsFunction, clsDummyFunction, clsFormatTableMapFunction,
         clsGroupByFunction, clsHeaderLeftTopFunction, clsHeaderTopLeftFunction,
         clsMmtableFunction, clsMmtableMapFunction, clsRAnovaFunction,
         clsRCorrelationFunction, clsRCustomSummaryFunction, clsRenameFunction,
@@ -44,11 +44,17 @@ Public Class dlgDescribeTwoVariable
         clsTabStylePxFunction As New RFunction
 
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapPipeOperator,
-             clsMmtableTildeOperator, clsSummaryTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
+             clsMmtableTildeOperator, clsSummaryTildeOperator, clsEmptyOperator,
+             clsSecondEmptyOperator As New ROperator
     'Frequency Parameters
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
                                                           "signif_fig", "include_margins"})
+
+    'Format Operators
+    Private clsPipeOperator, clsTabFootnoteOperator,
+            clsJoiningPipeOperator, clsFormatTableTildeOperator,
+            clsFormatTableMappingPipeOperator As ROperator
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -190,6 +196,7 @@ Public Class dlgDescribeTwoVariable
         clsFootnoteCellFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
+        clsFormatTableMapFunction = New RFunction
         clsGroupByFunction = New RFunction
         clsHeaderFormatFunction = New RFunction
         clsHeaderLeftTopFunction = New RFunction
@@ -221,11 +228,17 @@ Public Class dlgDescribeTwoVariable
         clsTabStylePxFunction = New RFunction
         clsThreeVariableCombineFrequencyParametersFunction = New RFunction
         clsEmptyOperator = New ROperator
+        clsFormatTableMappingPipeOperator = New ROperator
+        clsFormatTableTildeOperator = New ROperator
         clsGroupByPipeOperator = New ROperator
+        clsJoiningPipeOperator = New ROperator
         clsMapPipeOperator = New ROperator
         clsMmtablePlusOperator = New ROperator
         clsMmtableTildeOperator = New ROperator
+        clsPipeOperator = New ROperator
         clsSecondEmptyOperator = New ROperator
+        clsTabFootnoteOperator = New ROperator
+
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -233,6 +246,7 @@ Public Class dlgDescribeTwoVariable
         ucrNudColumnFactors.SetText("2")
         ucrInputMarginName.Visible = False
         grpThreeVariablePercentages.Visible = False
+        cmdFormatTable.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -275,6 +289,19 @@ Public Class dlgDescribeTwoVariable
         clsFootnoteTitleLocationFunction.SetPackageName("gt")
         clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
 
+        clsFormatTableMapFunction.SetPackageName("purrr")
+        clsFormatTableMapFunction.SetRCommand("map")
+        clsFormatTableMapFunction.AddParameter(".x", "list_of_tables", iPosition:=0)
+        clsFormatTableMapFunction.AddParameter(".f", clsROperatorParameter:=clsJoiningPipeOperator, iPosition:=1)
+
+        clsFormatTableMappingPipeOperator.SetOperation("%>%")
+        clsFormatTableMappingPipeOperator.AddParameter("map", clsRFunctionParameter:=clsFormatTableMapFunction, iPosition:=1)
+        clsFormatTableMappingPipeOperator.SetAssignTo("list_of_tables")
+
+        clsFormatTableTildeOperator.SetOperation("~")
+        clsFormatTableTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
+        clsFormatTableTildeOperator.AddParameter(".x", ".x", iPosition:=1)
+
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
 
@@ -294,6 +321,10 @@ Public Class dlgDescribeTwoVariable
 
         clsHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsHeaderTopLeftFunction.SetRCommand("header_top_left")
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFormatTableTildeOperator, iPosition:=0)
+        clsJoiningPipeOperator.bBrackets = False
 
         clsMapPipeOperator.SetOperation("%>%")
         clsMapPipeOperator.AddParameter("map_summary_table", clsRFunctionParameter:=clsSummaryMapFunction, iPosition:=1)
@@ -320,6 +351,9 @@ Public Class dlgDescribeTwoVariable
         clsMmtableTildeOperator.SetOperation("~")
         clsMmtableTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
         clsMmtableTildeOperator.AddParameter("mmtable", clsRFunctionParameter:=clsMmtableFunction, iPosition:=1)
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
 
         clsRAnovaFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
         clsRAnovaFunction.AddParameter("signif.stars", "FALSE", iPosition:=2)
@@ -384,6 +418,9 @@ Public Class dlgDescribeTwoVariable
         clsTableTitleFunction.SetPackageName("gt")
         clsTableTitleFunction.SetRCommand("tab_header")
 
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
+
         clsTabFootnoteTitleFunction.SetPackageName("gt")
         clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
 
@@ -428,6 +465,8 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnovaFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummaryFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=3)
+        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsFormatTableMappingPipeOperator, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=4)
+
 
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsThreeVariableCombineFrequencyParametersFunction, ucrChkDisplayMargins.GetParameter, iAdditionalPairNo:=1)
 
@@ -568,6 +607,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub ChangeBaseRCode()
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsEmptyOperator)
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSecondEmptyOperator)
+        AddFormatTableMapToAfterCode()
 
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -578,17 +618,16 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelationFunction)
             ElseIf IsCategoricalByNumeric Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
-            ElseIf IsNumericByCategorical Then
-                ucrReceiverFirstVars.SetParameterIsString()
-                clsSummaryTildeOperator.AddParameter("_function", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=1)
+            ElseIf IsNumericByCategorical OrElse IsCategoricalByCategorical Then
+                If IsNumericByCategorical() Then
+                    ucrReceiverFirstVars.SetParameterIsString()
+                    clsSummaryTildeOperator.AddParameter("_function", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=1)
+                Else
+                    clsSummaryTildeOperator.AddParameter("_function", clsRFunctionParameter:=clsRenameFunction, iPosition:=1)
+                End If
                 ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
-            ElseIf IsCategoricalByCategorical Then
-                clsSummaryTildeOperator.AddParameter("_function", clsRFunctionParameter:=clsRenameFunction, iPosition:=1)
-                ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
-                ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 3)
             End If
         ElseIf rdoThreeVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
@@ -599,7 +638,22 @@ Public Class dlgDescribeTwoVariable
             End If
             ucrBase.clsRsyntax.SetBaseROperator(clsMapPipeOperator)
             ucrBase.clsRsyntax.AddToAfterCodes(clsEmptyOperator, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSecondEmptyOperator, 3)
+        End If
+    End Sub
+
+    Private Sub AddFormatTableMapToAfterCode()
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFormatTableMappingPipeOperator)
+        If rdoSkim.Checked Then
+            Exit Sub
+        End If
+
+        If IsNumericByCategorical() OrElse
+       IsCategoricalByCategorical() OrElse (IsCategoricalByNumeric() AndAlso
+       rdoThreeVariable.Checked) Then
+            If Not IsNothing(clsJoiningPipeOperator.GetParameter("pipe")) Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsFormatTableMappingPipeOperator, 2)
+            End If
         End If
     End Sub
 
@@ -701,6 +755,13 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         SwapMmtableHeaderFunctions()
         AddRemoveNAParameter()
+        HideFormatTableButton()
+    End Sub
+
+    Private Sub HideFormatTableButton()
+        cmdFormatTable.Visible = IsNumericByCategorical() OrElse
+        IsCategoricalByCategorical() OrElse (IsCategoricalByNumeric() AndAlso
+        rdoThreeVariable.Checked)
     End Sub
 
     Private Sub ChangeLocations()
@@ -930,6 +991,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFrequencyParameters()
         EnableDisableFrequencyControls()
         AddRemoveNAParameter()
+        HideFormatTableButton()
         TestOKEnabled()
     End Sub
 
@@ -1001,6 +1063,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         SwapMmtableHeaderFunctions()
         AddRemoveNAParameter()
+        HideFormatTableButton()
         TestOKEnabled()
     End Sub
 
@@ -1045,6 +1108,7 @@ Public Class dlgDescribeTwoVariable
         SwapMmtableHeaderFunctions()
         AddRemoveFrequencyParameters()
         AddRemoveNAParameter()
+        HideFormatTableButton()
         TestOKEnabled()
     End Sub
 
@@ -1128,5 +1192,17 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub DisplayWarning(strMessage As String)
         MsgBox("Pick a categorical variable different from those selected in the" & strMessage & "to avoid Errors", vbOKOnly, "Matching Factor Variables")
+    End Sub
+
+    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
+        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+                                        clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
+                                        clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                       clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                       clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
+                                       clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsMmtablePlusOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+        sdgFormatSummaryTables.ShowDialog()
+        AddFormatTableMapToAfterCode()
     End Sub
 End Class

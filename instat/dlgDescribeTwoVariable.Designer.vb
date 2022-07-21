@@ -65,6 +65,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpThreeVariablePercentages = New System.Windows.Forms.GroupBox()
         Me.lblThreeVariableFactorAsPercentages = New System.Windows.Forms.Label()
         Me.lblThreeVariableSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverThreeVariablePercentage = New instat.ucrReceiverSingle()
         Me.ucrChkThreeVariablePercentageProportion = New instat.ucrCheck()
         Me.ucrChkThreeVariableDisplayAsPercentage = New instat.ucrCheck()
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
@@ -84,7 +85,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverThreeVariablePercentage = New instat.ucrReceiverSingle()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpTwoVariablePercentages.SuspendLayout()
@@ -402,6 +403,19 @@ Partial Class dlgDescribeTwoVariable
         Me.lblThreeVariableSecondFactor.Tag = ""
         Me.lblThreeVariableSecondFactor.Text = "Second Variable :"
         '
+        'ucrReceiverThreeVariablePercentage
+        '
+        Me.ucrReceiverThreeVariablePercentage.AutoSize = True
+        Me.ucrReceiverThreeVariablePercentage.frmParent = Nothing
+        Me.ucrReceiverThreeVariablePercentage.Location = New System.Drawing.Point(21, 63)
+        Me.ucrReceiverThreeVariablePercentage.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThreeVariablePercentage.Name = "ucrReceiverThreeVariablePercentage"
+        Me.ucrReceiverThreeVariablePercentage.Selector = Nothing
+        Me.ucrReceiverThreeVariablePercentage.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverThreeVariablePercentage.strNcFilePath = ""
+        Me.ucrReceiverThreeVariablePercentage.TabIndex = 28
+        Me.ucrReceiverThreeVariablePercentage.ucrSelector = Nothing
+        '
         'ucrChkThreeVariablePercentageProportion
         '
         Me.ucrChkThreeVariablePercentageProportion.AutoSize = True
@@ -613,18 +627,15 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDescribeTwoVar.TabIndex = 3
         '
-        'ucrReceiverThreeVariablePercentage
+        'cmdFormatTable
         '
-        Me.ucrReceiverThreeVariablePercentage.AutoSize = True
-        Me.ucrReceiverThreeVariablePercentage.frmParent = Me
-        Me.ucrReceiverThreeVariablePercentage.Location = New System.Drawing.Point(21, 63)
-        Me.ucrReceiverThreeVariablePercentage.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverThreeVariablePercentage.Name = "ucrReceiverThreeVariablePercentage"
-        Me.ucrReceiverThreeVariablePercentage.Selector = Nothing
-        Me.ucrReceiverThreeVariablePercentage.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverThreeVariablePercentage.strNcFilePath = ""
-        Me.ucrReceiverThreeVariablePercentage.TabIndex = 28
-        Me.ucrReceiverThreeVariablePercentage.ucrSelector = Nothing
+        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatTable.Location = New System.Drawing.Point(272, 407)
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
+        Me.cmdFormatTable.TabIndex = 28
+        Me.cmdFormatTable.Text = "Format Table..."
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'dlgDescribeTwoVariable
         '
@@ -632,6 +643,7 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(419, 491)
+        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.Controls.Add(Me.grpThreeVariablePercentages)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
@@ -724,4 +736,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents lblThreeVariableCategorical As Label
     Friend WithEvents lblSecondBy As Label
     Friend WithEvents ucrReceiverThreeVariablePercentage As ucrReceiverSingle
+    Friend WithEvents cmdFormatTable As Button
 End Class
