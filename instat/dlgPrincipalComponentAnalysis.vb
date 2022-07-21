@@ -163,8 +163,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColumnsFunction.SetAssignTo("col_data")
 
-        'clsBinaryOperator.AddParameter("left", clsRFunctionParameter:=clsWhichFunction, iPosition:=0)
-
         clsPCAFunction.SetPackageName("FactoMineR")
         clsPCAFunction.SetRCommand("PCA")
         clsPCAFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=1)
@@ -291,16 +289,11 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=3)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsGetColumnsFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
 
-
-        'ucrSelectorPCA.AddAdditionalCodeParameterPair(clsNamesFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
-
-        '        ucrSaveResult.AddAdditionalCodeParameterPair(clsRRotationEig, New RParameter("model_name", 0), iAdditionalPairNo:=1)
         ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
         ucrReceiverMultiplePCA.SetRCode(clsGetColumnsFunction, bReset)
         ucrReceiverSuppNumeric.SetRCode(clsBinaryQuantiSupOperator, bReset)
         ucrReceiverSupplFactors.SetRCode(clsBinaryQualitySupOperator, bReset)
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
-        'ucrSaveResult.AddAdditionalRCode(clsSummaryFunction, bReset)
         ucrChkScaleData.SetRCode(clsPCAFunction, bReset)
         ucrChkExtraVariables.SetRCode(clsDummyFunction, bReset)
         ucrNudNumberOfComp.SetRCode(clsPCAFunction, bReset)
@@ -312,6 +305,8 @@ Public Class dlgPrincipalComponentAnalysis
         Else
             ucrBase.OKEnabled(False)
         End If
+
+
     End Sub
 
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -360,8 +355,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         'clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
 
-        'clsColNamesQuantFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
-        'clsColNamesQualiFunction.AddParameter("x", ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
         clsPCAFunction.AddParameter("X", clsRFunctionParameter:=ucrSelectorPCA.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         ModelName()
@@ -377,21 +370,17 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub ucrChkExtraVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtraVariables.ControlValueChanged, ucrReceiverSuppNumeric.ControlValueChanged, ucrReceiverSupplFactors.ControlValueChanged
-        'ucrReceiverSuppNumeric.SetMeAsReceiver()
         If ucrChkExtraVariables.Checked AndAlso Not ucrReceiverSuppNumeric.IsEmpty Then
             clsPCAFunction.AddParameter("quanti.sup", clsRFunctionParameter:=clsWhichQuantiSupFunction, iPosition:=4)
 
         Else
             clsPCAFunction.RemoveParameterByName("quanti.sup")
-            'ucrReceiverMultiplePCA.SetDataType("numeric")
         End If
 
         If ucrChkExtraVariables.Checked AndAlso Not ucrReceiverSupplFactors.IsEmpty Then
             clsPCAFunction.AddParameter("quali.sup", clsRFunctionParameter:=clsWhichQualiSupFunction, iPosition:=5)
-            'ucrReceiverMultiplePCA.SetIncludedDataTypes({"numeric", "factor"})
         Else
             clsPCAFunction.RemoveParameterByName("quali.sup")
-            'ucrReceiverMultiplePCA.SetDataType("numeric")
         End If
         If ucrChkExtraVariables.Checked Then
             ucrReceiverMultiplePCA.RemoveExcludedMetadataProperty("class")

@@ -153,7 +153,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrReceiverSupplFactors.AutoSize = True
         Me.ucrReceiverSupplFactors.frmParent = Me
-        Me.ucrReceiverSupplFactors.Location = New System.Drawing.Point(257, 301)
+        Me.ucrReceiverSupplFactors.Location = New System.Drawing.Point(254, 301)
         Me.ucrReceiverSupplFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSupplFactors.Name = "ucrReceiverSupplFactors"
         Me.ucrReceiverSupplFactors.Selector = Nothing
@@ -166,7 +166,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrChkExtraVariables.AutoSize = True
         Me.ucrChkExtraVariables.Checked = False
-        Me.ucrChkExtraVariables.Location = New System.Drawing.Point(8, 275)
+        Me.ucrChkExtraVariables.Location = New System.Drawing.Point(10, 275)
         Me.ucrChkExtraVariables.Name = "ucrChkExtraVariables"
         Me.ucrChkExtraVariables.Size = New System.Drawing.Size(156, 23)
         Me.ucrChkExtraVariables.TabIndex = 14
@@ -175,7 +175,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrReceiverSuppNumeric.AutoSize = True
         Me.ucrReceiverSuppNumeric.frmParent = Me
-        Me.ucrReceiverSuppNumeric.Location = New System.Drawing.Point(255, 180)
+        Me.ucrReceiverSuppNumeric.Location = New System.Drawing.Point(254, 180)
         Me.ucrReceiverSuppNumeric.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSuppNumeric.Name = "ucrReceiverSuppNumeric"
         Me.ucrReceiverSuppNumeric.Selector = Nothing
@@ -187,7 +187,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblSupplFactors
         '
         Me.lblSupplFactors.AutoSize = True
-        Me.lblSupplFactors.Location = New System.Drawing.Point(260, 285)
+        Me.lblSupplFactors.Location = New System.Drawing.Point(254, 285)
         Me.lblSupplFactors.Name = "lblSupplFactors"
         Me.lblSupplFactors.Size = New System.Drawing.Size(70, 13)
         Me.lblSupplFactors.TabIndex = 17
@@ -197,7 +197,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblSupplNumeric
         '
         Me.lblSupplNumeric.AutoSize = True
-        Me.lblSupplNumeric.Location = New System.Drawing.Point(258, 164)
+        Me.lblSupplNumeric.Location = New System.Drawing.Point(254, 164)
         Me.lblSupplNumeric.Name = "lblSupplNumeric"
         Me.lblSupplNumeric.Size = New System.Drawing.Size(79, 13)
         Me.lblSupplNumeric.TabIndex = 16
