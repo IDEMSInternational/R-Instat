@@ -2462,4 +2462,8 @@ Public Class frmMain
         dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
         dlgPICSARainfall.ShowDialog()
     End Sub
+
+    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+        dlgApsimx.ShowDialog()
+    End Sub
 End Class

@@ -111,7 +111,7 @@ Partial Class sdgCanonicalCorrelation
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(29, 191)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(7, 191)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgButtons.TabIndex = 2
@@ -145,7 +145,7 @@ Partial Class sdgCanonicalCorrelation
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(214, 224)
+        Me.ClientSize = New System.Drawing.Size(230, 227)
         Me.Controls.Add(Me.grpGraphics)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrSdgButtons)

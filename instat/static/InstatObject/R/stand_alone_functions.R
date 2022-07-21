@@ -2547,3 +2547,52 @@ is.levelscount <- function(x, n){
 is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
+
+read_corpora <- function(data){
+  data_all <- NULL
+  description <- NULL
+  # check different data types that are in the rcorpora package
+  # first check if it is a data frame outright. If it is, then we just need to return the data
+  if (is.data.frame(data)){
+    return(data)
+  } 
+  # If it isn't a data frame, we check each element of the `data` argument
+  data_unlist <- NULL
+  for (i in 1:length(data)){
+  # first, check for description and metadata
+    if (!is.null(names(data[i])) && names(data[i]) == "description") {
+      description <- data[i][[1]]
+    } else if (!is.null(names(data[i])) && names(data[i]) == "meta"){
+      data_unlist[[i]] <- NULL
+      # then check if the element is a vector, matrix, data frame, or list.
+    } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+      data_unlist[[i]] <- data.frame(list = data[[i]])
+    } else if ("matrix" %in% class(data[[i]])){
+      data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+    } else if (class(data[[i]]) == "data.frame"){
+      data_unlist[[i]] <- data.frame(list = data[[i]])
+    } else if (class(data[[i]]) == "list"){
+      if (length(data[[i]]) == 0) {
+        data_unlist[[i]] <- data.frame(NA)
+        } else {
+          # unlist the list, to create a data frame with two elements: list name ("rowname") and value
+	     # if there are nested lists, the "rowname" variable combines the different lists together.
+	     # We want to separate these into separate variables to make the data more usable and readable.
+	     # We do this by `str_split_fixed`, and `gsub`.
+          new_data <- tidyr::as_tibble(unlist(data), rownames = "rowname")
+          split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
+          split <- gsub("[0-9]$|[0-9][0-9]$","",split)
+	     # add in the separated list to the value variable, and rename the variables
+          data_unlist[[i]] <- cbind(data.frame(split), value = new_data$value)
+          names(data_unlist[[i]]) <- c(paste0("variable", 1:(length(data_unlist[[i]])-1)), "list")
+        } # end of ifelse lists
+      } # end of list
+    } # end of for loop
+  names(data_unlist) <- names(data[1:length(data_unlist)])
+  data_all <- plyr::ldply(data_unlist, .id = "variable1")
+  
+  if (!is.null(description)){
+    return (data.frame(description = description, data_all))
+  } 
+  return (data.frame(data_all))
+}
