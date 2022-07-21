@@ -1088,40 +1088,37 @@ Public Class dlgDescribeTwoVariable
             If rdoTwoVariable.Checked Then
                 bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverSecondTwoVariableFactor.GetVariableNames)
             Else
-                bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse
-                                                    lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames)
+                bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse (
+                    lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames) AndAlso strSecondVariableType = "categorical")
             End If
         End If
 
 
-        If sender Is ucrReceiverThreeVariableThirdVariable OrElse
-            sender Is ucrReceiverSecondTwoVariableFactor Then
-            If bContainedInMultipleReceiver And strSecondVariableType = "categorical" Then
-                If sender Is ucrReceiverThreeVariableThirdVariable Then
-                    If ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames Then
-                        strWarningMessage = " First Variable and the Second Variable "
-                        DisplayWarning(strWarningMessage)
-                    End If
-                Else
-                    strWarningMessage = " First Variable "
-                    DisplayWarning(strWarningMessage)
-                End If
+        If sender Is ucrReceiverSecondTwoVariableFactor Then
+            If bContainedInMultipleReceiver And strFirstVariablesType = "categorical" Then
+                strWarningMessage = " First Variable "
+                DisplayWarning(strWarningMessage)
+            End If
+        ElseIf sender Is ucrReceiverThreeVariableThirdVariable Then
+            If (bContainedInMultipleReceiver And strFirstVariablesType = "categorical") OrElse
+               (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
+                strWarningMessage = " First Variable and the Second Variable "
+                DisplayWarning(strWarningMessage)
             End If
         ElseIf sender Is ucrReceiverThreeVariableSecondFactor Then
             If (strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver) OrElse
-                              (strSecondVariableType = "categorical" AndAlso
-                          ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
+                              (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
                 strWarningMessage = " First Variable and the third Variable "
                 DisplayWarning(strWarningMessage)
             End If
         ElseIf sender Is ucrReceiverFirstVars Then
             If rdoTwoVariable.Checked Then
-                If strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver Then
+                If strSecondVariableType = "categorical" AndAlso bContainedInMultipleReceiver Then
                     strWarningMessage = " Second Variable "
                     DisplayWarning(strWarningMessage)
                 End If
             ElseIf rdoThreeVariable.Checked Then
-                If strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver Then
+                If bContainedInMultipleReceiver Then
                     strWarningMessage = " Second and Third Variable "
                     DisplayWarning(strWarningMessage)
                 End If
