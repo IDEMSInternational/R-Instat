@@ -49,7 +49,7 @@ Partial Class sdgConstructRegexExpression
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(55, 168)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(62, 171)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)

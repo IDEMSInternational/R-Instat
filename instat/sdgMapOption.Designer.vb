@@ -98,7 +98,7 @@ Partial Class sdgMapOption
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(112, 132)
+        Me.ucrBase.Location = New System.Drawing.Point(81, 140)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 25
