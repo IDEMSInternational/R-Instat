@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports System.IO
+
 Public Class dlgApsimx
     Public bFirstLoad As Boolean = True
     Private bFromLibrary As Boolean = False
@@ -23,12 +24,6 @@ Public Class dlgApsimx
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Apsimxfiles/")
     Private bReset As Boolean = True
     Private clsApsimxExampleFunction, clsApsimExampleFunction As New RFunction
-    'Public Sub New()
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-    '    bFirstLoad = True
-    '    ucrInputDataName.bAutoChangeOnLeave = True
-    'End Sub
 
     Private Sub dlgApsimx_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -63,8 +58,6 @@ Public Class dlgApsimx
         clsApsimxExampleFunction = New RFunction
         clsApsimExampleFunction = New RFunction
 
-
-        'ucrInputDataName.SetName("")
         ucrInputPath.SetName("")
         clsApsimxExampleFunction.SetPackageName("apsimx")
         clsApsimxExampleFunction.SetRCommand("apsimx_example")
@@ -73,12 +66,10 @@ Public Class dlgApsimx
         clsApsimExampleFunction.SetRCommand("apsim_example")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("silent", 1), iAdditionalPairNo:=1)
-
         ucrChkSilent.SetRCode(clsApsimxExampleFunction, bReset)
         ucrSaveFile.AddAdditionalRCode(clsApsimExampleFunction, bReset)
         ucrSaveFile.SetRCode(clsApsimxExampleFunction, bReset)
@@ -101,7 +92,6 @@ Public Class dlgApsimx
     Public Sub GetFileFromOpenDialog()
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
-        Dim strTemp As String = ""
 
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "Apsimxfiles|*.apsimx|All Apsimxfiles|*.apsimx;*.apsim"
