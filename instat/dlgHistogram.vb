@@ -239,7 +239,6 @@ Public Class dlgHistogram
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector,
                           clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                           clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
-        clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage) ' This passes the percent function to the plot options
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -293,7 +292,6 @@ Public Class dlgHistogram
         End If
         autoTranslate(Me)
     End Sub
-
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorforHist.bSingleVariable Then
