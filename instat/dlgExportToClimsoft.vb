@@ -37,11 +37,19 @@ Public Class dlgExportToClimsoft
         ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetLinkedDisplayControl(lblDate)
+
         ucrReceiverDate.bAutoFill = True
 
         ucrInputHour.SetParameter(New RParameter("hour"))
+        ucrInputHour.SetLinkedDisplayControl(lblHour)
 
         ucrInputLevel.SetParameter(New RParameter("level"))
+        ucrInputLevel.SetLinkedDisplayControl(lblLevel)
+
+        ucrReceiverElements.SetParameter(New RParameter("element"))
+        ucrReceiverElements.SetLinkedDisplayControl(lblElement)
+        ucrReceiverElements.SetParameterIsString()
     End Sub
     Private Sub SetDefaults()
 
@@ -52,4 +60,10 @@ Public Class dlgExportToClimsoft
     Private Sub TestOkEnabled()
 
     End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
 End Class

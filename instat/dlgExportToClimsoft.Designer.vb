@@ -152,7 +152,7 @@ Partial Class dlgExportToClimsoft
         Me.ucrInputLevel.AutoSize = True
         Me.ucrInputLevel.IsMultiline = False
         Me.ucrInputLevel.IsReadOnly = False
-        Me.ucrInputLevel.Location = New System.Drawing.Point(331, 141)
+        Me.ucrInputLevel.Location = New System.Drawing.Point(331, 146)
         Me.ucrInputLevel.Name = "ucrInputLevel"
         Me.ucrInputLevel.Size = New System.Drawing.Size(125, 21)
         Me.ucrInputLevel.TabIndex = 19
@@ -169,7 +169,7 @@ Partial Class dlgExportToClimsoft
         'lblLevel
         '
         Me.lblLevel.AutoSize = True
-        Me.lblLevel.Location = New System.Drawing.Point(327, 125)
+        Me.lblLevel.Location = New System.Drawing.Point(327, 130)
         Me.lblLevel.Name = "lblLevel"
         Me.lblLevel.Size = New System.Drawing.Size(36, 13)
         Me.lblLevel.TabIndex = 21
