@@ -33,10 +33,10 @@ Partial Class sdgProportionsPercentages
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrButtonsProportionsPercentiles = New instat.ucrButtonsSubdialogue()
-        Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrSelectorProportionsPercentiles = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlBY = New instat.UcrPanel()
         Me.ucrChkProportionsPercentages = New instat.ucrCheck()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -169,19 +169,6 @@ Partial Class sdgProportionsPercentages
         Me.ucrButtonsProportionsPercentiles.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsProportionsPercentiles.TabIndex = 13
         '
-        'ucrReceiverByFactor
-        '
-        Me.ucrReceiverByFactor.AutoSize = True
-        Me.ucrReceiverByFactor.frmParent = Me
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(239, 130)
-        Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
-        Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverByFactor.strNcFilePath = ""
-        Me.ucrReceiverByFactor.TabIndex = 8
-        Me.ucrReceiverByFactor.ucrSelector = Nothing
-        '
         'ucrSelectorProportionsPercentiles
         '
         Me.ucrSelectorProportionsPercentiles.AutoSize = True
@@ -211,19 +198,32 @@ Partial Class sdgProportionsPercentages
         Me.ucrChkProportionsPercentages.Size = New System.Drawing.Size(343, 23)
         Me.ucrChkProportionsPercentages.TabIndex = 0
         '
+        'ucrReceiverByFactor
+        '
+        Me.ucrReceiverByFactor.AutoSize = True
+        Me.ucrReceiverByFactor.frmParent = Me
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(239, 130)
+        Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverByFactor.strNcFilePath = ""
+        Me.ucrReceiverByFactor.TabIndex = 14
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
+        '
         'sdgProportionsPercentages
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(410, 397)
+        Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.lblFilter)
         Me.Controls.Add(Me.ucrReceiverFilter)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.ucrButtonsProportionsPercentiles)
-        Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.ucrSelectorProportionsPercentiles)
         Me.Controls.Add(Me.rdoByColumn)
@@ -250,7 +250,6 @@ Partial Class sdgProportionsPercentages
     Friend WithEvents ucrPnlBY As UcrPanel
     Friend WithEvents rdoByColumn As RadioButton
     Friend WithEvents ucrSelectorProportionsPercentiles As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrButtonsProportionsPercentiles As ucrButtonsSubdialogue
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
@@ -259,4 +258,5 @@ Partial Class sdgProportionsPercentages
     Friend WithEvents ucrChkDisplayAsDecimal As ucrCheck
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
+    Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
 End Class
