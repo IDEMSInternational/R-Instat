@@ -51,6 +51,8 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemSFOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemMapping = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
+        Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpPoints.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -63,7 +65,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
         Me.ucrSaveMap.Size = New System.Drawing.Size(320, 22)
-        Me.ucrSaveMap.TabIndex = 22
+        Me.ucrSaveMap.TabIndex = 3
         '
         'ucrBase
         '
@@ -73,7 +75,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 23
+        Me.ucrBase.TabIndex = 4
         '
         'grpPoints
         '
@@ -93,7 +95,7 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.Location = New System.Drawing.Point(373, 8)
         Me.grpPoints.Name = "grpPoints"
         Me.grpPoints.Size = New System.Drawing.Size(371, 261)
-        Me.grpPoints.TabIndex = 7
+        Me.grpPoints.TabIndex = 1
         Me.grpPoints.TabStop = False
         Me.grpPoints.Text = "Points"
         '
@@ -103,7 +105,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblLabels.Location = New System.Drawing.Point(240, 96)
         Me.lblLabels.Name = "lblLabels"
         Me.lblLabels.Size = New System.Drawing.Size(89, 13)
-        Me.lblLabels.TabIndex = 13
+        Me.lblLabels.TabIndex = 5
         Me.lblLabels.Text = "Labels (Optional):"
         '
         'ucrReceiverStation
@@ -116,7 +118,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 14
+        Me.ucrReceiverStation.TabIndex = 6
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'lblFacet
@@ -126,7 +128,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblFacet.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFacet.Name = "lblFacet"
         Me.lblFacet.Size = New System.Drawing.Size(42, 13)
-        Me.lblFacet.TabIndex = 19
+        Me.lblFacet.TabIndex = 11
         Me.lblFacet.Text = "Facets:"
         '
         'ucrReceiverFacet
@@ -139,7 +141,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverFacet.Selector = Nothing
         Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFacet.strNcFilePath = ""
-        Me.ucrReceiverFacet.TabIndex = 20
+        Me.ucrReceiverFacet.TabIndex = 12
         Me.ucrReceiverFacet.ucrSelector = Nothing
         '
         'ucrSelectorStation
@@ -152,7 +154,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSelectorStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStation.Name = "ucrSelectorStation"
         Me.ucrSelectorStation.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorStation.TabIndex = 8
+        Me.ucrSelectorStation.TabIndex = 0
         '
         'lblColor
         '
@@ -161,7 +163,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblColor.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(82, 13)
-        Me.lblColor.TabIndex = 17
+        Me.lblColor.TabIndex = 9
         Me.lblColor.Text = "Color (Optional):"
         '
         'lblShape
@@ -171,7 +173,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblShape.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblShape.Name = "lblShape"
         Me.lblShape.Size = New System.Drawing.Size(89, 13)
-        Me.lblShape.TabIndex = 15
+        Me.lblShape.TabIndex = 7
         Me.lblShape.Text = "Shape (Optional):"
         '
         'lbllatitude
@@ -181,7 +183,7 @@ Partial Class dlgClimaticStationMaps
         Me.lbllatitude.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbllatitude.Name = "lbllatitude"
         Me.lbllatitude.Size = New System.Drawing.Size(48, 13)
-        Me.lbllatitude.TabIndex = 11
+        Me.lbllatitude.TabIndex = 3
         Me.lbllatitude.Text = "Latitude:"
         '
         'ucrReceiverColor
@@ -194,7 +196,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverColor.Selector = Nothing
         Me.ucrReceiverColor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverColor.strNcFilePath = ""
-        Me.ucrReceiverColor.TabIndex = 18
+        Me.ucrReceiverColor.TabIndex = 10
         Me.ucrReceiverColor.ucrSelector = Nothing
         '
         'lblLongitude
@@ -204,7 +206,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblLongitude.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
-        Me.lblLongitude.TabIndex = 9
+        Me.lblLongitude.TabIndex = 1
         Me.lblLongitude.Text = "Longitude:"
         '
         'ucrReceiverShape
@@ -217,7 +219,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverShape.Selector = Nothing
         Me.ucrReceiverShape.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverShape.strNcFilePath = ""
-        Me.ucrReceiverShape.TabIndex = 16
+        Me.ucrReceiverShape.TabIndex = 8
         Me.ucrReceiverShape.ucrSelector = Nothing
         '
         'ucrReceiverLatitude
@@ -230,7 +232,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverLatitude.Selector = Nothing
         Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 12
+        Me.ucrReceiverLatitude.TabIndex = 4
         Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
         'ucrReceiverLongitude
@@ -243,7 +245,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverLongitude.Selector = Nothing
         Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.TabIndex = 10
+        Me.ucrReceiverLongitude.TabIndex = 2
         Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
         'grpMapOutline
@@ -268,7 +270,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(231, 104)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkAddPoints.TabIndex = 6
+        Me.ucrChkAddPoints.TabIndex = 5
         '
         'Label1
         '
@@ -276,7 +278,7 @@ Partial Class dlgClimaticStationMaps
         Me.Label1.Location = New System.Drawing.Point(231, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(52, 13)
-        Me.Label1.TabIndex = 2
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "Geometry"
         '
         'ucrReceiverGeometry
@@ -289,7 +291,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverGeometry.Selector = Nothing
         Me.ucrReceiverGeometry.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverGeometry.strNcFilePath = ""
-        Me.ucrReceiverGeometry.TabIndex = 3
+        Me.ucrReceiverGeometry.TabIndex = 2
         Me.ucrReceiverGeometry.ucrSelector = Nothing
         '
         'lblFill
@@ -298,7 +300,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblFill.Location = New System.Drawing.Point(231, 58)
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Size = New System.Drawing.Size(70, 13)
-        Me.lblFill.TabIndex = 4
+        Me.lblFill.TabIndex = 3
         Me.lblFill.Text = "Fill (Optional):"
         '
         'ucrReceiverFill
@@ -311,7 +313,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrReceiverFill.Selector = Nothing
         Me.ucrReceiverFill.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFill.strNcFilePath = ""
-        Me.ucrReceiverFill.TabIndex = 5
+        Me.ucrReceiverFill.TabIndex = 4
         Me.ucrReceiverFill.ucrSelector = Nothing
         '
         'ucrSelectorOutline
@@ -324,30 +326,30 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSelectorOutline.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOutline.Name = "ucrSelectorOutline"
         Me.ucrSelectorOutline.Size = New System.Drawing.Size(220, 189)
-        Me.ucrSelectorOutline.TabIndex = 1
+        Me.ucrSelectorOutline.TabIndex = 0
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemLabelRepelOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(144, 70)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemSFOptions
         '
         Me.toolStripMenuItemSFOptions.Name = "toolStripMenuItemSFOptions"
-        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(143, 22)
+        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemSFOptions.Text = "SF Options"
         '
         'toolStripMenuItemMapping
         '
         Me.toolStripMenuItemMapping.Name = "toolStripMenuItemMapping"
-        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(143, 22)
+        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemMapping.Text = "Map Options"
         '
         'cmdOptions
@@ -358,10 +360,22 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.TabIndex = 21
+        Me.cmdOptions.TabIndex = 2
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'toolStripMenuItemPointOptions
+        '
+        Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Text = "Point Options"
+        '
+        'toolStripMenuItemLabelRepelOptions
+        '
+        Me.toolStripMenuItemLabelRepelOptions.Name = "toolStripMenuItemLabelRepelOptions"
+        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLabelRepelOptions.Text = "Label Repel Options"
         '
         'dlgClimaticStationMaps
         '
@@ -416,4 +430,6 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents toolStripMenuItemSFOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemMapping As ToolStripMenuItem
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLabelRepelOptions As ToolStripMenuItem
 End Class
