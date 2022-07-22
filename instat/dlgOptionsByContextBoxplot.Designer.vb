@@ -454,26 +454,26 @@ Partial Class dlgOptionsByContextBoxplot
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxplotOptions, Me.toolStripMenuItemViolinplotOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(161, 70)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(160, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBoxplotOptions
         '
         Me.toolStripMenuItemBoxplotOptions.Enabled = False
         Me.toolStripMenuItemBoxplotOptions.Name = "toolStripMenuItemBoxplotOptions"
-        Me.toolStripMenuItemBoxplotOptions.Size = New System.Drawing.Size(160, 22)
+        Me.toolStripMenuItemBoxplotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemBoxplotOptions.Text = "Boxplot Options"
         '
         'toolStripMenuItemViolinplotOptions
         '
         Me.toolStripMenuItemViolinplotOptions.Enabled = False
         Me.toolStripMenuItemViolinplotOptions.Name = "toolStripMenuItemViolinplotOptions"
-        Me.toolStripMenuItemViolinplotOptions.Size = New System.Drawing.Size(160, 22)
+        Me.toolStripMenuItemViolinplotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemViolinplotOptions.Text = "Violin Options"
         '
         'cmdOptions
