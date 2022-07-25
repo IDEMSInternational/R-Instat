@@ -484,13 +484,11 @@ Public Class dlgHeatMapPlot
 
     Private Sub cmdTileOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
         ''''''' i wonder if all this will be needed for the new system
-        If rdoChoroplethMap.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomPolygonAesFunction, clsNewGlobalAesFunc:=clsChoroplethAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
-                                       bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
-        Else
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomTileFunction, clsNewGlobalAesFunc:=clsHeatmapAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
-                                       bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
-        End If
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction,
+                                   clsNewGeomFunc:=If(rdoChoroplethMap.Checked, clsGeomPolygonAesFunction, clsRgeomTileFunction),
+                                   clsNewGlobalAesFunc:=If(rdoChoroplethMap.Checked, clsChoroplethAesFunction, clsHeatmapAesFunction),
+                                   clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
 
         sdgLayerOptions.ShowDialog()
         bResetRugLayerSubdialog = False
